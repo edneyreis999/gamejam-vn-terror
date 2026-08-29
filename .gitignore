@@ -1,0 +1,25 @@
+/coverage
+/dist
+/.artifacts/
+/frontend/js/**/*.d.ts
+/tsconfig.domain-dto.tsbuildinfo
+/tsconfig.application.tsbuildinfo
+/.tsbuildinfo
+/node_modules
+/.history
+.DS_Store
+/tasks
+/Maelen
+/frontend/save/*.rmmzsave
+/temp
+/zik-prompts-oneshot
+.claude
+.claude/settings.local.json
+
+# AgentOps session artifacts
+.agents/
+.codex/
+/.env
+
+.compozy/tasks
+.compozy/memory
