@@ -1,12 +1,12 @@
 # GDD — Visual Novel de Expedição, Armadilhas e Sacrifício
 
 **Título provisório:** Projeto sem título\
-**Versão:** 0.5 — catálogo brasileiro consolidado\
-**Data:** 29 de agosto de 2026\
-**Estado:** catálogo temático e matriz de armadilhas aprovados\
+**Versão:** 0.6 — fluxo mecânico e randomização consolidados\
+**Data:** 30 de agosto de 2026\
+**Estado:** fluxo de expedição, randomização e catálogo de armadilhas aprovados\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Duração-alvo:** até 20 minutos por masmorra e aproximadamente 60 minutos por campanha completa, sem contar repetições\
-**Autoridade:** este é o GDD canônico do projeto e substitui as versões 0.1, 0.2, 0.3 e 0.4 como fonte de verdade.
+**Autoridade:** este é o GDD canônico do projeto e substitui as versões 0.1, 0.2, 0.3, 0.4 e 0.5 como fonte de verdade.
 
 ---
 
@@ -28,7 +28,7 @@ Cada definição recebe um dos seguintes estados:
 | **Pendente** | Questão deliberadamente não decidida | Não deve ser presumida nem implementada como regra definitiva |
 | **Fora do escopo** | Elemento excluído da primeira versão representativa | Não deve consumir produção nesta etapa |
 
-Uma decisão pendente não invalida as regras confirmadas que a cercam. Por exemplo: a campanha termina se o bardo morrer, embora as situações exatas em que ele pode morrer ainda estejam pendentes.
+Uma decisão pendente não invalida as regras confirmadas que a cercam. Por exemplo: a natureza do tesouro continua pendente, embora a masmorra final e as condições mecânicas de vitória e derrota já possuam regras confirmadas.
 
 ### 1.1 Decisões que substituem versões anteriores
 
@@ -46,10 +46,14 @@ Uma decisão pendente não invalida as regras confirmadas que a cercam. Por exem
 | Natureza das duas primeiras masmorras | Separação estrita entre ameaça física e sobrenatural | Confirmado | Separação apenas predominante nas versões anteriores |
 | Catálogo de encontros | 8 por pool; 16 encontros aprovados | Confirmado | Divisão entre encontros confirmados e provisórios na v0.4 |
 | Distribuição das competências nos pools | Pool A: 2 corpóreas + 1 liminar por encontro; Pool B: 1 corpórea + 2 liminares | Confirmado | Matriz anterior da v0.4 |
+| Sorteio dos encontros | Preenchimento uniforme, sem repetição e persistente por posição revelada | Confirmado | Embaralhamento integral como baseline de protótipo |
+| Recuo voluntário | Permitido antes da escolha de abordagem quando o elenco total ainda possui ao menos 3 heróis | Confirmado | Comportamento pendente na v0.5 |
+| Formação com elenco reduzido | Todos os sobreviventes quando restarem apenas 1 ou 2 heróis | Confirmado | Comportamento pendente na v0.5 |
+| Masmorra final | 3 encontros restantes do Pool A + 3 do Pool B, em ordem aleatória | Confirmado | Baseline 2 + 2 + 1 com encontro exclusivo na v0.5 |
 
-### 1.2 Regra de mudança das três abordagens
+### 1.2 Regra confirmada das três abordagens
 
-O protótipo principal usa **três abordagens por encontro**.
+O jogo usa definitivamente **três abordagens por encontro**. A variante de duas abordagens não faz parte do plano vigente.
 
 ---
 
@@ -57,7 +61,7 @@ O protótipo principal usa **três abordagens por encontro**.
 
 O jogador acompanha um bardo que reuniu oito heróis para encontrar um tesouro ligado à própria família. O mapa até o tesouro foi dividido entre uma masmorra física e uma masmorra sobrenatural; as duas metades revelam a masmorra final.
 
-Antes de cada expedição, o jogador escolhe três heróis sobreviventes. O bardo acompanha o grupo automaticamente, mas não ocupa vaga selecionável e não possui competências. Cada masmorra contém cinco encontros sorteados. Cada encontro oferece três abordagens plausíveis, associadas internamente a competências diferentes.
+Antes de cada expedição, o jogador escolhe três heróis sobreviventes quando o elenco possui ao menos três. Se restarem somente um ou dois, todos os sobreviventes partem. O bardo acompanha o grupo automaticamente, mas não ocupa vaga selecionável e não possui competências. As duas primeiras masmorras contêm cinco encontros; a final contém os seis encontros ainda não vistos, três de cada pool. Cada encontro oferece três abordagens plausíveis, associadas internamente a competências diferentes.
 
 Se pelo menos um herói sobrevivente possuir a competência da abordagem escolhida, a ação funciona. Se a competência estiver ausente, a falha é letal e o jogador escolhe um herói presente para morrer. A morte é permanente, remove duas competências do elenco disponível e pode tornar os encontros seguintes mais perigosos.
 
@@ -132,14 +136,15 @@ A natureza do tesouro e do horror familiar está pendente. Possibilidades regist
 ### 5.1 Elenco e persistência
 
 - Existem oito heróis recrutáveis.
-- O jogador escolhe três heróis sobreviventes antes de cada expedição.
+- O jogador escolhe exatamente três heróis sobreviventes enquanto o elenco total possui ao menos três.
+- Se restarem somente um ou dois heróis no elenco total, todos partem na expedição seguinte.
 - Cada herói possui exatamente duas competências.
 - Cada par de competências é único.
 - Cada competência aparece em exatamente dois heróis.
 - Os heróis não sobem de nível e não recebem melhorias numéricas.
 - A morte é permanente durante a campanha atual.
 - Heróis mortos não podem participar de expedições posteriores.
-- A campanha termina em derrota se os oito heróis morrerem.
+- A campanha termina em derrota se os oito heróis morrerem; nesse momento, o bardo também morre e ocorre o bad ending.
 
 ### 5.2 Masmorras
 
@@ -149,19 +154,24 @@ A campanha possui três masmorras, com duração-alvo de até 20 minutos cada.
 |---|---|---|---|
 | **Física** | Obter a primeira metade do mapa | Pool A | Material, mecânica, ambiental, arquitetônica, animal ou corporal |
 | **Sobrenatural** | Obter a segunda metade do mapa | Pool B | Psicológica, ilusória, ritual, espiritual ou ligada à distorção da identidade e da realidade |
-| **Final** | Encontrar o tesouro e concluir a campanha | Pools A e B + conteúdo exclusivo | Combinação das duas naturezas e horror familiar |
+| **Final** | Encontrar o tesouro e concluir a campanha | 3 encontros restantes do Pool A + 3 do Pool B | Combinação das duas naturezas e horror familiar |
 
 Cada uma das duas primeiras masmorras usa exclusivamente o próprio pool. A separação estrita diz respeito à **natureza da ameaça**, enquanto a matriz controla a natureza das abordagens: cada encontro físico oferece duas competências corpóreas e uma liminar; cada encontro sobrenatural oferece uma corpórea e duas liminares. Uma ameaça material ainda pode ser superada por Ocultismo, e uma manifestação sobrenatural por Força, desde que a situação sustente essa lógica.
 
 ### 5.3 Quantidade e sorteio
 
 - Cada pool contém oito encontros-base.
-- Cada masmorra inicial sorteia cinco encontros do próprio pool.
-- Um encontro não se repete dentro da mesma expedição.
+- Cada masmorra inicial possui cinco posições de encontro.
+- Uma posição vazia é preenchida imediatamente antes de ser revelada, por sorteio uniforme entre os encontros ainda não atribuídos daquele pool.
+- Depois de revelado, o encontro permanece naquela posição até o fim da campanha, inclusive após recuos.
+- Posições ainda não alcançadas permanecem vazias até a primeira revelação.
+- Um encontro não se repete entre as posições da mesma masmorra.
 - O sorteio não consulta a composição do grupo.
 - O jogo não adiciona nem remove encontros para salvar ou punir uma composição específica.
+- A masmorra final usa os três encontros de cada pool que não apareceram nas duas primeiras masmorras e embaralha uniformemente os seis.
+- Uma nova campanha apaga todas as posições persistentes e realiza novos sorteios.
 
-O algoritmo exato de sorteio sem repetição é uma baseline de protótipo descrita na seção 11.
+O algoritmo completo de preenchimento, persistência e repetição é confirmado na seção 11.
 
 ---
 
@@ -192,15 +202,9 @@ O bardo possui **zero competências**. Consequentemente, ele:
 
 ### 6.3 Morte do bardo
 
-Se o bardo morrer, a campanha termina imediatamente.
+O bardo nunca aparece na seleção de sacrifício e não pode morrer em uma armadilha enquanto existir ao menos um herói vivo no elenco total. Se o último herói da expedição morrer, o bardo recua automaticamente quando ainda houver heróis na cidade.
 
-Permanecem pendentes, sem comportamento presumido:
-
-- se ele aparece na seleção comum de sacrifício;
-- se pode se oferecer para morrer em situações especiais;
-- quais armadilhas podem ameaçá-lo diretamente;
-- se sua morte é reservada ao clímax;
-- o que ocorre se todos os heróis da expedição morrerem e ele sobreviver.
+Quando os oito heróis estiverem mortos, o bardo também morre e a campanha termina imediatamente no bad ending. Esta é a única condição mecânica vigente para a morte do bardo.
 
 ---
 
@@ -209,25 +213,26 @@ Permanecem pendentes, sem comportamento presumido:
 1. O jogador lê a apresentação da próxima masmorra.
 2. Examina os heróis sobreviventes.
 3. Interpreta históricos, profissões, falas, equipamentos e características.
-4. Escolhe três heróis.
+4. Escolhe três heróis, ou todos os sobreviventes quando restarem somente um ou dois.
 5. O bardo acompanha o grupo automaticamente.
-6. O jogo sorteia cinco encontros do pool correspondente.
+6. O jogo prepara cinco posições nas masmorras iniciais ou seis na final, preservando qualquer posição já revelada na campanha.
 7. Cada encontro apresenta três abordagens.
 8. As três abordagens permanecem visíveis.
 9. O jogo não informa quais abordagens são viáveis.
-10. O jogador escolhe uma abordagem, não um executor.
-11. O sistema verifica coletivamente os heróis sobreviventes presentes.
-12. Se a competência correspondente estiver presente, ocorre sucesso.
-13. Se estiver ausente, ocorre falha letal.
-14. Em uma falha, o jogador escolhe um herói presente para ser sacrificado.
-15. O herói morre permanentemente.
-16. Suas competências são removidas da expedição e do elenco disponível.
-17. A cobertura do grupo é recalculada.
-18. O grupo prossegue reduzido, caso uma condição de continuação válida exista.
-19. Após cinco encontros, a expedição alcança seu objetivo.
-20. Depois das duas primeiras masmorras, o grupo acessa a masmorra final.
-
-A continuação com um herói, o destino do último herói e o início de novas expedições com menos de três sobreviventes ainda são decisões pendentes; não devem ser inferidos a partir deste loop.
+10. Antes de escolher uma abordagem, o jogador pode recuar se o elenco total ainda possuir ao menos três heróis; isso continua possível depois que a armadilha foi revelada.
+11. O jogador escolhe uma abordagem, não um executor.
+12. A escolha da abordagem bloqueia o recuo até que toda a consequência seja resolvida.
+13. O sistema verifica coletivamente os heróis sobreviventes presentes.
+14. Se a competência correspondente estiver presente, ocorre sucesso.
+15. Se estiver ausente, ocorre falha letal.
+16. Em uma falha, o jogador escolhe um herói presente para ser sacrificado; o bardo nunca aparece nessa seleção.
+17. O herói morre permanentemente.
+18. Suas competências são removidas da expedição e do elenco disponível.
+19. A cobertura do grupo é recalculada.
+20. O grupo prossegue mesmo quando resta somente um herói.
+21. Se o último herói presente morrer, o bardo recua automaticamente quando houver sobreviventes na cidade; se os oito heróis estiverem mortos, ocorre o bad ending.
+22. Após cinco encontros nas masmorras iniciais ou seis na final, a expedição alcança seu objetivo.
+23. Depois das duas primeiras masmorras, o grupo acessa a masmorra final.
 
 ---
 
@@ -349,10 +354,12 @@ Os quatro estados são válidos. Uma composição não tem garantia universal de
 ### 10.3 Requisitos de escrita
 
 - Todas as opções ficam visíveis, mesmo quando inviáveis.
+- Todas as opções permanecem selecionáveis; nenhuma pode ser bloqueada por personagem, ordem, tentativa anterior ou condição narrativa.
 - Não há “opção obviamente idiota”.
 - O jogador escolhe uma abordagem, não o herói que a executa.
 - Verbos semelhantes apontam para competências semelhantes.
 - Uma competência não muda de significado entre cenas.
+- Abordagens bem-sucedidas podem variar em texto e encenação imediata, mas não alteram competências, opções nem encontros posteriores.
 - O resultado pode variar em texto, mas não em probabilidade.
 - Toda falha deve ser explicável retrospectivamente.
 
@@ -360,20 +367,42 @@ Os quatro estados são válidos. Uma composição não tem garantia universal de
 
 ## 11. Randomização
 
-### 11.1 Baseline do protótipo
+### 11.1 Preenchimento das masmorras iniciais
 
 Para cada uma das duas primeiras masmorras:
 
-1. usar o pool correspondente de oito encontros;
-2. embaralhar os oito com distribuição uniforme;
-3. selecionar os cinco primeiros;
-4. não repetir encontros na mesma expedição;
-5. não consultar as competências do grupo;
-6. registrar a semente ou a sequência para QA.
+1. criar cinco posições inicialmente vazias;
+2. imediatamente antes de revelar uma posição vazia, sortear uniformemente um encontro entre os ainda não atribuídos do pool correspondente;
+3. atribuir o encontro à posição e revelá-lo;
+4. manter essa atribuição até o fim da campanha;
+5. deixar posições ainda não alcançadas vazias;
+6. impedir repetição dentro das cinco posições;
+7. não consultar as competências do grupo;
+8. registrar a semente e as atribuições para QA.
 
-Cada subconjunto possível de cinco encontros deve ter a mesma chance inicial. Esta regra é obrigatória no protótipo, mas sua adoção definitiva depende dos testes de distribuição.
+O preenchimento progressivo é estatisticamente equivalente a embaralhar uniformemente o pool e tomar os cinco primeiros, mas só compromete uma posição quando o jogador está prestes a vê-la. Depois da revelação, recuar nunca rerrola aquela posição.
 
-### 11.2 Proibições
+### 11.2 Preenchimento da masmorra final
+
+Depois que as duas primeiras masmorras forem concluídas, restam exatamente três encontros não utilizados em cada pool. A masmorra final:
+
+1. reúne os três encontros restantes do Pool A e os três do Pool B;
+2. cria seis posições inicialmente vazias;
+3. imediatamente antes de revelar uma posição vazia, sorteia uniformemente um dos seis encontros ainda não atribuídos;
+4. preserva cada atribuição revelada até o fim da campanha;
+5. deixa posições ainda não alcançadas vazias;
+6. não cria encontro nem regra mecânica exclusiva nesta versão.
+
+Uma campanha concluída apresenta, portanto, todos os 16 encontros confirmados do catálogo.
+
+### 11.3 Recuos, campanhas e sementes
+
+- Recuar retorna a tentativa à primeira posição, mas não apaga atribuições já reveladas.
+- Posições ainda não alcançadas continuam vazias e são sorteadas somente na primeira revelação.
+- Uma nova campanha, iniciada depois de vitória ou derrota, apaga todas as atribuições e sorteia novamente.
+- A repetição deliberada de uma semente existe somente para QA e não é uma opção normal do jogador.
+
+### 11.4 Proibições
 
 O sorteio não deve:
 
@@ -381,13 +410,14 @@ O sorteio não deve:
 - criar deliberadamente um encontro impossível;
 - retirar encontros porque o grupo está vulnerável;
 - favorecer competências ou personagens populares;
+- rejeitar sequências ou rerrolar encontros sorteados;
 - alterar as abordagens depois da seleção do grupo.
 
-### 11.3 Concentração de competências
+### 11.5 Concentração de competências
 
 Cada competência aparece seis vezes no catálogo completo, distribuída de acordo com sua família: competências corpóreas aparecem quatro vezes no Pool A e duas no Pool B; competências liminares aparecem duas vezes no Pool A e quatro no Pool B. Ainda assim, uma seleção de cinco encontros pode concentrar determinadas combinações.
 
-O protótipo deve começar com sorteio puro sem repetição. Regras de rejeição ou novo embaralhamento só devem ser adicionadas se testes mostrarem sequências excessivamente repetitivas.
+O sorteio puro sem repetição é a regra confirmada. Sequências concentradas continuam válidas e devem ser registradas para QA; qualquer filtro futuro exigirá uma nova decisão de design, não será introduzido automaticamente por resultado de playtest.
 
 ---
 
@@ -647,13 +677,15 @@ Toda falha é letal. Não existem:
 
 1. A situação se torna fatal.
 2. Todos os heróis presentes são exibidos.
-3. O jogador escolhe quem será sacrificado.
+3. O jogador escolhe qual herói será sacrificado; o bardo nunca é uma opção.
 4. O escolhido pronuncia uma despedida curta.
 5. A morte é apresentada de forma coerente com a armadilha.
 6. O herói é removido permanentemente.
 7. Suas duas competências desaparecem da expedição e do elenco disponível.
 8. A cobertura é recalculada.
-9. A expedição continua somente se uma regra de continuação confirmada permitir.
+9. A expedição continua enquanto houver ao menos um herói presente.
+10. Se o último herói presente morrer e houver sobreviventes na cidade, o bardo recua automaticamente.
+11. Se o último herói presente era também o último do elenco total, o bardo morre e ocorre o bad ending.
 
 O sacrifício combina perda emocional e estratégica. A armadilha não escolhe automaticamente a vítima.
 
@@ -674,19 +706,22 @@ A estrutura técnica pode ser reutilizada, mas a justificativa textual não deve
 
 ### 13.4 Grupo reduzido
 
-Depois de uma morte, três heróis tornam-se dois e a cobertura máxima cai para quatro competências. Depois de uma segunda morte, resta um herói com duas competências. O efeito bola de neve é intencional como tensão, mas precisa de validação para não tornar a continuação uma sequência automática de mortes.
+Depois de uma morte, três heróis tornam-se dois e a cobertura máxima cai para quatro competências. Depois de uma segunda morte, resta um herói com duas competências. A expedição prossegue normalmente com esse único herói.
 
-Permanecem pendentes:
+Uma nova expedição usa exatamente três heróis quando o elenco total possui três ou mais sobreviventes. Se restarem apenas um ou dois no elenco total, todos os sobreviventes formam a nova expedição. Nesse estado reduzido, o recuo voluntário fica indisponível.
 
-- continuação com um único herói;
-- destino do último herói da expedição;
-- continuação do bardo sozinho;
-- início de nova expedição com menos de três sobreviventes;
-- abandono voluntário da masmorra;
-- substituição de heróis durante uma expedição;
-- seleção do bardo como sacrifício em casos especiais.
+O efeito bola de neve é intencional como tensão, mas precisa de validação para não tornar a continuação uma sequência automática de mortes.
 
-Enquanto esses itens não forem decididos, o protótipo pode exercitar a remoção e o recálculo, mas não deve apresentar seu comportamento como regra final da campanha.
+### 13.5 Recuo e troca de formação
+
+- O jogador pode recuar voluntariamente quando, somando quem está na expedição e quem está na cidade, o elenco total ainda possui ao menos três heróis vivos.
+- O recuo pode ocorrer durante a preparação, entre encontros ou depois de uma armadilha e suas três abordagens serem reveladas.
+- Escolher uma abordagem é o ponto de compromisso: dessa escolha até a resolução completa do sucesso ou do sacrifício, recuar fica indisponível.
+- Todo recuo reinicia a masmorra na primeira posição.
+- Mortes e atribuições de encontros já reveladas permanecem.
+- Não existe custo, recurso consumido, limite de usos nem punição adicional por recuar.
+- A formação só pode ser alterada na cidade depois de um recuo ou entre masmorras; não existe substituição durante uma tentativa.
+- Se nenhum herói permanecer na expedição e ainda houver sobreviventes na cidade, o recuo é automático mesmo que restem somente um ou dois heróis no elenco total.
 
 ---
 
@@ -749,28 +784,27 @@ A masmorra final deve:
 - produzir o encerramento central;
 - produzir os epílogos.
 
-Ela deve possuir pelo menos uma sequência ou encontro exclusivo. Somente misturar encontros já vistos não produz um clímax satisfatório.
+Nesta versão, sua distinção mecânica vem de reunir os seis encontros ainda não vistos e misturar os dois pools. Ela não possui encontro nem regra exclusiva; identidade, revelação e encenação próprias continuam sendo responsabilidades narrativas pendentes.
 
-### 15.2 Baseline estrutural
+### 15.2 Estrutura confirmada
 
-Para o protótipo, usar:
+Usar:
 
-- dois encontros sorteados do Pool A;
-- dois encontros sorteados do Pool B;
-- um encontro final exclusivo.
+- os três encontros do Pool A que não apareceram na masmorra física;
+- os três encontros do Pool B que não apareceram na masmorra sobrenatural;
+- os seis encontros embaralhados juntos, com distribuição uniforme;
+- as mesmas regras de persistência por posição usadas nas masmorras iniciais;
+- nenhum encontro exclusivo nesta versão.
 
-Esta distribuição é uma baseline, não uma regra narrativa definitiva.
+Uma campanha concluída apresenta todos os 16 encontros do catálogo: cinco de cada pool nas masmorras iniciais e os três restantes de cada pool na final.
 
 ### 15.3 Elementos pendentes
 
 - identidade visual e narrativa própria;
-- regra exclusiva;
 - forma do clímax sem combate;
 - verdade sobre o tesouro;
-- encontro final;
-- ameaça direta ao bardo;
 - decisão entre destruir, abandonar ou reivindicar o tesouro;
-- desfecho de uma campanha sem heróis sobreviventes.
+- forma narrativa de cobrar as mortes anteriores sem acrescentar uma regra mecânica exclusiva.
 
 ---
 
@@ -782,6 +816,7 @@ Esta distribuição é uma baseline, não uma regra narrativa definitiva.
 - Cada herói sobrevivente recebe um epílogo curto.
 - O resultado combina o encerramento central com os epílogos disponíveis.
 - A morte permanente determina quais epílogos aparecem.
+- Se os oito heróis morrerem, o bardo também morre e ocorre o bad ending.
 
 Essa composição preserva a ideia de “um final por personagem” sem exigir finais completos para todas as combinações de sobreviventes.
 
@@ -789,9 +824,8 @@ Essa composição preserva a ideia de “um final por personagem” sem exigir f
 
 - memoriais ou epílogos póstumos;
 - finais alternativos para o tesouro;
-- encerramento específico do bardo;
+- encerramento do bardo quando ele sobrevive;
 - final com um único sobrevivente;
-- final sem heróis;
 - consequências narrativas de muitas mortes;
 - revelação da responsabilidade ou culpa do bardo.
 
@@ -909,11 +943,18 @@ O encontro exige Força, Percepção e Destreza. Nenhuma está presente; qualque
 
 O grupo possui Atletismo, Força e Vontade. Todas as abordagens funcionam, embora possam produzir descrições diferentes.
 
-### 17.5 Decisão de teste
+### 17.5 Distribuição emergente confirmada
 
-Três abordagens transferem parte do desafio da preparação para a leitura. Se for indispensável que até um trio intacto com seis competências possa encontrar uma armadilha sem solução, a variante de duas abordagens é a alternativa registrada.
+Três abordagens por encontro são a regra definitiva. O sorteio não consulta a formação nem impõe cotas de estados 0/3, 1/3, 2/3 ou 3/3 por masmorra. A distribuição emerge somente da matriz confirmada, da formação atual e das mortes ocorridas.
 
-O protótipo deve comparar as duas configurações antes de qualquer mudança definitiva.
+Considerando os 56 trios intactos contra os oito encontros de cada pool, a matriz vigente produz:
+
+| Pool | 0/3 | 1/3 | 2/3 | 3/3 |
+|---|---:|---:|---:|---:|
+| A | 1,3% | 25,4% | 52,2% | 21,0% |
+| B | 3,6% | 24,1% | 48,2% | 24,1% |
+
+Esses percentuais são referências de QA e balanceamento global, não metas aplicadas a uma campanha individual.
 
 ---
 
@@ -959,11 +1000,11 @@ A primeira versão deve conter:
 
 - um protagonista bardo;
 - oito heróis;
-- seleção de três heróis sobreviventes por expedição;
+- seleção de três heróis sobreviventes por expedição quando houver ao menos três, ou de todos quando restarem apenas um ou dois;
 - bardo acompanhando automaticamente, sem ocupar vaga;
 - bardo com zero competências;
 - três masmorras;
-- cinco encontros por masmorra;
+- cinco encontros em cada masmorra inicial e seis na masmorra final;
 - oito encontros no Pool A;
 - oito encontros no Pool B;
 - separação estrita entre os pools iniciais;
@@ -979,6 +1020,7 @@ A primeira versão deve conter:
 - três abordagens por encontro;
 - três competências diferentes por encontro;
 - todas as opções sempre visíveis;
+- todas as opções sempre selecionáveis;
 - competências ocultas na apresentação ao jogador;
 - resolução determinística;
 - sucesso garantido com a competência;
@@ -987,12 +1029,15 @@ A primeira versão deve conter:
 - escolha de sacrifício;
 - morte permanente;
 - recálculo imediato das competências;
-- pelo menos um encontro ou sequência exclusiva na masmorra final;
+- recuo voluntário antes da escolha de abordagem quando o elenco total possuir ao menos três heróis;
+- reinício da masmorra após recuo, com mortes e posições reveladas preservadas;
+- continuação com um ou dois heróis e recuo voluntário bloqueado quando o elenco total possuir menos de três;
+- recuo automático do bardo quando o último herói da expedição morrer e ainda houver sobreviventes na cidade;
+- masmorra final formada pelos três encontros restantes de cada pool, sem conteúdo exclusivo nesta versão;
 - um encerramento central;
+- bad ending quando os oito heróis e o bardo morrerem;
 - epílogos dos sobreviventes;
 - ausência de combate e progressão numérica.
-
-Os comportamentos dependentes das decisões de continuação após mortes devem permanecer isolados até que essas decisões sejam aprovadas.
 
 ---
 
@@ -1023,7 +1068,7 @@ Os comportamentos dependentes das decisões de continuação após mortes devem 
 
 **Risco:** jogadores veteranos identificarem composições dominantes e nunca precisarem sacrificar ninguém enquanto o trio permanecer intacto.
 
-**Validação:** comparar o modelo principal de três abordagens com uma variante curta de duas; medir passabilidade e mortes por nível de experiência do jogador.
+**Validação:** medir passabilidade, recuos e mortes por composição e nível de experiência do jogador. A quantidade de três abordagens não depende desse teste para permanecer confirmada.
 
 ### 21.2 A leitura se tornar o único desafio
 
@@ -1035,7 +1080,7 @@ Os comportamentos dependentes das decisões de continuação após mortes devem 
 
 **Risco:** a primeira morte reduzir a cobertura máxima de seis para quatro competências e transformar a expedição em uma sequência de mortes inevitáveis.
 
-**Validação:** simular todos os grupos de dois e um herói contra todas as sequências de cinco encontros; definir as regras de continuação antes de fechar a campanha.
+**Validação:** simular todos os grupos de dois e um herói contra todas as sequências de cinco encontros e contra os seis encontros finais; medir se a continuação obrigatória com elenco reduzido vira uma sequência automática de mortes.
 
 ### 21.4 Composições de cobertura alta dominarem
 
@@ -1084,15 +1129,27 @@ Quatro abordagens não devem ser adotadas no protótipo: aumentariam o conteúdo
 
 ### 21.10 Masmorra final pouco distinta
 
-**Risco:** o clímax parecer apenas uma repetição dos dois pools.
+**Risco:** embora use os seis encontros ainda não vistos, o clímax parecer apenas uma continuação dos dois pools por não possuir conteúdo mecânico exclusivo.
 
-**Validação:** exigir pelo menos um encontro final exclusivo e uma revelação ou regra própria.
+**Validação:** verificar se ordem, apresentação e revelação narrativa distinguem a masmorra final sem ampliar o escopo mecânico.
 
 ### 21.11 Concentração do sorteio
 
 **Risco:** mesmo com representatividade global equilibrada, uma seleção de cinco encontros concentrar competências ou estruturas narrativas semelhantes.
 
-**Validação:** registrar sementes, frequências e estados de viabilidade; adicionar rejeição de sequências somente com evidência de teste.
+**Validação:** registrar sementes, frequências e estados de viabilidade. A regra vigente não rejeita sequências; qualquer filtro futuro exige nova decisão de design.
+
+### 21.12 Recuo como reconhecimento sem risco
+
+**Risco:** como o jogador pode recuar depois de ver uma armadilha e antes de escolher uma abordagem, jogadores pacientes podem reconhecer posições e reduzir o risco por repetição.
+
+**Validação:** medir frequência de recuos, tempo repetido e percepção de tensão. O recuo não recebe custo ou limite automaticamente; qualquer punição futura exige nova decisão de design.
+
+### 21.13 Duração da masmorra final
+
+**Risco:** seis encontros fazerem a masmorra final ultrapassar a duração-alvo de 20 minutos.
+
+**Validação:** medir a duração real da final e o tempo da campanha sem contar repetições; ajustar o ritmo e a extensão das cenas antes de alterar a quantidade confirmada de encontros.
 
 ---
 
@@ -1100,41 +1157,51 @@ Quatro abordagens não devem ser adotadas no protótipo: aumentariam o conteúdo
 
 O protótipo central estará funcional quando:
 
-1. o jogador puder escolher três entre oito heróis;
-2. o bardo acompanhar automaticamente sem ocupar vaga;
-3. o bardo não contribuir com competências;
-4. cada herói possuir exatamente duas competências;
-5. cada competência aparecer exatamente duas vezes no elenco;
-6. os oito pares de competências forem únicos;
-7. cada encontro apresentar exatamente três opções;
-8. as três opções usarem competências diferentes;
-9. as opções não exibirem os nomes das competências;
-10. uma competência presente sempre produzir sucesso;
-11. uma competência ausente sempre produzir falha letal;
-12. existirem testes para os estados 0/3, 1/3, 2/3 e 3/3;
-13. uma falha abrir a seleção de sacrifício;
-14. o herói escolhido morrer permanentemente;
-15. suas competências serem removidas e a cobertura ser recalculada;
-16. o Pool A possuir oito encontros;
-17. o Pool B possuir oito encontros;
-18. cada competência aparecer seis vezes no catálogo completo;
-19. cada encontro do Pool A usar duas competências corpóreas e uma liminar;
-20. cada encontro do Pool B usar uma competência corpórea e duas liminares;
-21. cinco encontros serem sorteados sem repetição nas masmorras iniciais;
-22. a masmorra física usar somente o Pool A;
-23. a masmorra sobrenatural usar somente o Pool B;
-24. H1/H2/H3 possuir ao menos uma solução em todos os encontros;
-25. H4/H7/H8 encontrar estado 0/3 em O Redemoinho do Saci Engarrafado;
-26. um jogador de teste conseguir explicar uma falha retrospectivamente;
-27. um jogador distinguir Força, Atletismo, Destreza e Sobrevivência pelo texto;
-28. a remoção e o recálculo funcionarem depois de uma morte;
-29. qualquer comportamento de continuação após a morte corresponder a uma regra previamente aprovada;
-30. a campanha terminar quando os oito heróis morrerem;
-31. a morte do bardo terminar imediatamente a campanha;
-32. a masmorra final possuir pelo menos um conteúdo exclusivo;
-33. a semente ou sequência dos encontros ser registrável para QA;
-34. a identidade das armadilhas ser reconhecivelmente brasileira sem recorrer a ícones do Halloween norte-americano;
-35. o horror não representar religiões brasileiras vivas como fonte de maldade.
+1. o jogador escolher exatamente três heróis quando o elenco total possuir ao menos três sobreviventes;
+2. uma nova expedição usar todos os sobreviventes quando restarem somente um ou dois;
+3. o bardo acompanhar automaticamente sem ocupar vaga;
+4. o bardo não contribuir com competências;
+5. cada herói possuir exatamente duas competências;
+6. cada competência aparecer exatamente duas vezes no elenco;
+7. os oito pares de competências serem únicos;
+8. cada encontro apresentar exatamente três opções;
+9. as três opções usarem competências diferentes;
+10. as opções não exibirem os nomes das competências;
+11. as três opções permanecerem visíveis e selecionáveis;
+12. uma competência presente sempre produzir sucesso;
+13. uma competência ausente sempre produzir falha letal;
+14. sucessos diferentes não alterarem mecanicamente encontros posteriores;
+15. existirem testes para os estados 0/3, 1/3, 2/3 e 3/3;
+16. uma falha abrir a seleção de sacrifício somente com os heróis presentes;
+17. o herói escolhido morrer permanentemente;
+18. suas competências serem removidas e a cobertura ser recalculada;
+19. o Pool A possuir oito encontros;
+20. o Pool B possuir oito encontros;
+21. cada competência aparecer seis vezes no catálogo completo;
+22. cada encontro do Pool A usar duas competências corpóreas e uma liminar;
+23. cada encontro do Pool B usar uma competência corpórea e duas liminares;
+24. cada masmorra inicial preencher cinco posições uniformemente e sem repetição;
+25. uma posição revelada permanecer fixa até o fim da campanha e uma posição não alcançada continuar vazia;
+26. a masmorra física usar somente o Pool A;
+27. a masmorra sobrenatural usar somente o Pool B;
+28. a masmorra final usar os três encontros não vistos de cada pool, em ordem aleatória uniforme;
+29. H1/H2/H3 possuir ao menos uma solução em todos os encontros;
+30. H4/H7/H8 encontrar estado 0/3 em O Redemoinho do Saci Engarrafado;
+31. um jogador de teste conseguir explicar uma falha retrospectivamente;
+32. um jogador distinguir Força, Atletismo, Destreza e Sobrevivência pelo texto;
+33. a expedição continuar quando restar somente um herói presente;
+34. o recuo voluntário ficar indisponível quando o elenco total possuir menos de três heróis;
+35. o jogador poder recuar com ao menos três heróis vivos antes de escolher uma abordagem, inclusive depois de revelar a armadilha;
+36. a escolha da abordagem bloquear o recuo até a resolução completa da consequência;
+37. um recuo reiniciar a masmorra sem reverter mortes nem apagar posições reveladas;
+38. o recuo não consumir recursos, sofrer limite de usos nem aplicar outra punição;
+39. a formação só poder mudar na cidade, nunca durante uma tentativa;
+40. a morte do último herói presente provocar recuo automático quando houver sobreviventes na cidade;
+41. a morte dos oito heróis provocar também a morte do bardo e o bad ending;
+42. uma nova campanha apagar todas as posições persistentes;
+43. a semente e as atribuições dos encontros serem registráveis e repetíveis para QA;
+44. a identidade das armadilhas ser reconhecivelmente brasileira sem recorrer a ícones do Halloween norte-americano;
+45. o horror não representar religiões brasileiras vivas como fonte de maldade.
 
 ---
 
@@ -1142,33 +1209,9 @@ O protótipo central estará funcional quando:
 
 Esta seção é o registro exaustivo das questões ainda abertas. Nada aqui deve ser tratado como regra implícita.
 
-### 23.1 Abordagens e consequências
+As regras de abordagens, randomização, repetição, recuo, formação reduzida, sacrifício e morte do bardo não possuem pendências mecânicas nesta versão.
 
-- Confirmar definitivamente três abordagens ou retornar a duas após o teste comparativo.
-- Definir a distribuição desejada dos estados 0/3, 1/3, 2/3 e 3/3 por masmorra.
-- Definir se sucessos diferentes geram somente variação textual ou consequências futuras.
-- Definir se alguma abordagem pode alterar cenas posteriores.
-- Definir se uma opção pode ficar indisponível por uma razão narrativa que não seja competência.
-
-### 23.2 Randomização e repetição
-
-- Aprovar definitivamente o sorteio uniforme sem repetição.
-- Definir se sequências problemáticas serão rejeitadas.
-- Definir se uma semente pode ser repetida após fim de jogo.
-- Definir quando encontros já vistos podem retornar entre expedições ou campanhas.
-
-### 23.3 Expedição e morte
-
-- Continuação com um único herói.
-- Regra para o último herói da expedição.
-- Continuação do bardo sozinho.
-- Início de uma nova expedição com menos de três sobreviventes.
-- Abandono voluntário da masmorra.
-- Substituição de heróis durante uma expedição.
-- Participação do bardo na seleção de sacrifício.
-- Situações exatas de morte do bardo.
-
-### 23.4 Narrativa
+### 23.1 Narrativa
 
 - Natureza do tesouro familiar.
 - Maldição, entidade, pacto ou segredo associado.
@@ -1177,7 +1220,7 @@ Esta seção é o registro exaustivo das questões ainda abertas. Nada aqui deve
 - Verdade sobre as duas metades do mapa.
 - Revelação final e desfecho moral.
 
-### 23.5 Personagens
+### 23.2 Personagens
 
 - Correspondência entre H1–H8 e arquétipos.
 - Nomes, gêneros, aparências, personalidades e profissões.
@@ -1185,7 +1228,7 @@ Esta seção é o registro exaustivo das questões ainda abertas. Nada aqui deve
 - Forma de comunicar competências.
 - Despedidas e epílogos.
 
-### 23.6 Apresentação
+### 23.3 Apresentação
 
 - Engine e plataforma.
 - Resolução e orientação da tela.
@@ -1196,7 +1239,7 @@ Esta seção é o registro exaustivo das questões ainda abertas. Nada aqui deve
 - Interface de sacrifício.
 - Pistas visuais discretas.
 
-### 23.7 Produção
+### 23.4 Produção
 
 - Responsabilidades dos cinco integrantes da equipe.
 - Cronograma.
@@ -1211,29 +1254,33 @@ Esta seção é o registro exaustivo das questões ainda abertas. Nada aqui deve
 
 1. Implementar A1–A8 e B1–B8 como um único catálogo confirmado.
 2. Validar automaticamente as proporções por família e as seis ocorrências totais de cada competência.
-3. Construir a versão principal com três abordagens.
-4. Construir uma variante curta com duas abordagens.
+3. Construir todos os encontros com exatamente três abordagens.
+4. Implementar o preenchimento uniforme e persistente das posições.
 5. Simular os 56 trios contra os dois pools.
 6. Medir, por trio, quantos encontros ficam nos estados 0/3, 1/3, 2/3 e 3/3.
 7. Repetir a simulação após a morte de um e de dois heróis.
 8. Calcular a chance de sequências de cinco encontros totalmente passáveis.
 9. Identificar composições e competências dominantes.
 10. Testar especialmente os 16 trios com seis competências.
-11. Verificar se iniciantes conseguem inferir as opções e explicar os resultados.
-12. Verificar se jogadores experientes ainda sentem risco.
-13. Validar se o repertório é reconhecido como brasileiro sem transformar religiões vivas ou identidades regionais em fonte de maldade.
-14. Decidir definitivamente entre duas e três abordagens.
-15. Aprovar as regras de continuação após mortes.
-16. Somente então aprofundar nomes, personalidades, visuais e conteúdo narrativo final.
+11. Testar recuo antes e depois da revelação, bloqueio após a escolha, persistência de posições e perda de progresso.
+12. Testar recuo automático, expedições com um ou dois heróis e o bad ending após a morte dos oito.
+13. Verificar que a masmorra final usa exatamente os seis encontros ainda não vistos.
+14. Verificar se iniciantes conseguem inferir as opções e explicar os resultados.
+15. Verificar se jogadores experientes ainda sentem risco, apesar do reconhecimento sem custo por recuo.
+16. Medir a duração das três masmorras, especialmente a final com seis encontros.
+17. Validar se o repertório é reconhecido como brasileiro sem transformar religiões vivas ou identidades regionais em fonte de maldade.
+18. Aprofundar nomes, personalidades, visuais e conteúdo narrativo final somente quando essas decisões pendentes forem deliberadas.
 
 ---
 
-## 25. Resumo da baseline vigente
+## 25. Resumo das regras vigentes
 
-O protótipo atual usa um bardo sem competências e três heróis escolhidos entre oito. Cada herói possui duas das oito competências, em uma matriz simétrica. As duas primeiras masmorras têm identidades estritamente separadas, sorteiam cinco encontros de pools próprios com oito armadilhas cada e usam um repertório de assombrações, criaturas e espaços brasileiros.
+O jogo usa um bardo sem competências e três heróis escolhidos entre oito. Se restarem somente um ou dois heróis no elenco total, todos partem na expedição seguinte. Cada herói possui duas das oito competências, em uma matriz simétrica. As duas primeiras masmorras têm identidades estritamente separadas e cinco posições preenchidas progressivamente a partir de pools próprios com oito armadilhas cada.
 
 Cada armadilha apresenta três abordagens associadas a competências distintas. Uma competência presente garante sucesso; uma competência ausente produz falha letal e escolha de sacrifício. Força, Destreza, Sobrevivência e Atletismo formam a família corpórea; Percepção, Conhecimento, Ocultismo e Vontade formam a família liminar.
 
-Cada encontro do Pool A usa duas competências corpóreas e uma liminar; cada encontro do Pool B usa uma corpórea e duas liminares. Cada competência aparece seis vezes no catálogo completo. Os 16 encontros e essa distribuição estão confirmados. O sorteio sem repetição, a estrutura 2 + 2 + 1 da masmorra final e a comparação com duas abordagens continuam como baselines de protótipo, não decisões finais.
+Cada encontro do Pool A usa duas competências corpóreas e uma liminar; cada encontro do Pool B usa uma corpórea e duas liminares. Cada competência aparece seis vezes no catálogo completo. Os 16 encontros e essa distribuição estão confirmados. Uma posição revelada permanece fixa até o fim da campanha; recuar reinicia a masmorra sem apagar posições nem mortes. A final reúne, em ordem aleatória, os três encontros de cada pool que ainda não apareceram.
 
-A principal questão de balanceamento é que qualquer trio intacto com seis competências sempre possui ao menos uma solução em todo encontro de três abordagens. A principal questão de fluxo é o que acontece quando uma expedição fica com um ou nenhum herói. Ambas precisam de validação explícita antes de o sistema ser considerado fechado.
+O recuo voluntário é permitido antes da escolha de abordagem quando o elenco total possui ao menos três heróis. A escolha bloqueia o recuo até a consequência terminar. Com menos de três heróis, a expedição continua sem recuo voluntário; se o último herói presente morrer e houver reservas, o bardo recua automaticamente. Quando os oito heróis morrem, o bardo também morre e ocorre o bad ending.
+
+Não restam decisões mecânicas abertas nesta versão. O balanceamento, o efeito bola de neve, o uso estratégico do recuo e a duração da masmorra final ainda exigem simulação e playtest. Narrativa, personagens, apresentação e produção permanecem pendentes conforme a seção 23.
