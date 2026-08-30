@@ -565,9 +565,19 @@
     });
     T.equal(accepted(incomplete, { type: 'CONTINUE_DUNGEON' }).phase, 'invalid');
     var wrongPosition = stateFixture(physicalComplete, { position: 1 });
-    var wrongPositionResult = accepted(wrongPosition, { type: 'CONTINUE_DUNGEON' });
-    T.equal(wrongPositionResult.phase, 'invalid');
-    T.includes(violationCodes(Engine.validateState(wrongPosition)), 'invalid_dungeon_position');
+    var wrongPositionResult = Engine.dispatch(wrongPosition, { type: 'CONTINUE_DUNGEON' });
+    T.truthy(wrongPositionResult.ok);
+    T.equal(wrongPositionResult.state.phase, 'invalid');
+    T.includes(wrongPositionResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_dungeon_position');
+    var finalComplete = stateFixture(runSafeCampaign(true), {
+      phase: 'dungeon_complete',
+      position: 5,
+      pendingOutcome: null
+    });
+    var finalPositionResult = Engine.dispatch(finalComplete, { type: 'CONTINUE_DUNGEON' });
+    T.truthy(finalPositionResult.ok);
+    T.equal(finalPositionResult.state.phase, 'invalid');
+    T.includes(finalPositionResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_dungeon_position');
   });
 
   T.test('UT-048 — final atribui progressivamente somente seis candidatos sem repetição', function () {
@@ -661,6 +671,19 @@
     T.includes(codes, 'missing_phase_payload');
     T.includes(codes, 'missing_victim_payload');
     T.includes(codes, 'impossible_dungeon_transition');
+    var encounter = firstEncounter(['H1', 'H2', 'H3'], 7);
+    var malformedOutcome = stateFixture(accepted(encounter, { type: 'CHOOSE_APPROACH', approachId: 'A1-1' }), {
+      pendingOutcome: { success: true }
+    });
+    var malformedOutcomeResult = Engine.dispatch(malformedOutcome, { type: 'ACK_SUCCESS' });
+    T.truthy(malformedOutcomeResult.ok);
+    T.equal(malformedOutcomeResult.state.phase, 'invalid');
+    T.includes(malformedOutcomeResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_outcome_payload');
+    var confirmation = accepted(openSacrificeState(), { type: 'SELECT_VICTIM', heroId: 'H4' });
+    var invalidVictim = stateFixture(confirmation, { pendingVictimId: 'H9' });
+    T.includes(violationCodes(Engine.validateState(invalidVictim)), 'invalid_victim_payload');
+    var invalidPosition = stateFixture(encounter, { position: 0 });
+    T.includes(violationCodes(Engine.validateState(invalidPosition)), 'invalid_dungeon_position');
   });
 
   T.test('UT-059 — enterInvalid é idempotente e dispatch rejeita estado malformado', function () {
@@ -677,12 +700,28 @@
     var missingSequence = JSON.parse(JSON.stringify(Engine.createReadyState()));
     delete missingSequence.sequence;
     var missingSequenceResult = Engine.dispatch(missingSequence, { type: 'BEGIN', seed: 7 });
+    T.truthy(missingSequenceResult.ok);
     T.equal(missingSequenceResult.state.phase, 'invalid');
     T.includes(missingSequenceResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_state_shape');
     var malformedVictory = Engine.dispatch({ phase: 'victory' }, { type: 'NEW_CAMPAIGN' });
     T.truthy(malformedVictory.ok);
     T.equal(malformedVictory.state.phase, 'invalid');
     T.includes(malformedVictory.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_state_shape');
+    ['partyIds', 'deadHeroIds', 'draftPartyIds', 'assignments', 'actionHistory', 'invariantViolations'].forEach(function (field) {
+      var missingField = JSON.parse(JSON.stringify(Engine.createReadyState()));
+      delete missingField[field];
+      T.includes(violationCodes(Engine.validateState(missingField)), 'invalid_state_shape', field);
+    });
+    ['physical', 'supernatural', 'final'].forEach(function (dungeonId) {
+      var missingAssignments = JSON.parse(JSON.stringify(Engine.createReadyState()));
+      delete missingAssignments.assignments[dungeonId];
+      T.includes(violationCodes(Engine.validateState(missingAssignments)), 'invalid_state_shape', dungeonId);
+    });
+    [-1, 1.5].forEach(function (sequence) {
+      var invalidSequence = JSON.parse(JSON.stringify(Engine.createReadyState()));
+      invalidSequence.sequence = sequence;
+      T.includes(violationCodes(Engine.validateState(invalidSequence)), 'invalid_state_shape', String(sequence));
+    });
   });
 
   T.test('UT-060 — cada ação aceita incrementa a sequência e rejeição não acrescenta evento', function () {

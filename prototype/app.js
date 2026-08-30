@@ -1223,8 +1223,8 @@
 
   /**
    * @typedef {Object} ExpeditionController
-   * @property {(action: Object) => Object} dispatch
-   * @property {() => Object} getState
+   * @property {(action: GameAction) => EngineResult} dispatch
+   * @property {() => (CampaignState|null)} getState
    * @property {() => void} destroy
    */
   /** @type {Readonly<{createController: (root: HTMLElement) => ExpeditionController}>} */

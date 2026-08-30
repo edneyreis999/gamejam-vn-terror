@@ -76,13 +76,28 @@
     }
   }
 
-  function test(name, callback) {
+  function registerCaseId(registry, name) {
     var idMatch = /^([A-Z0-9]+-\d+)/.exec(name);
     var id = idMatch ? idMatch[1] : name;
-    if (registeredIds[id]) {
+    if (registry[id]) {
       throw new Error('ID de teste duplicado: ' + id + '.');
     }
-    registeredIds[id] = true;
+    registry[id] = true;
+  }
+
+  function duplicateGuardIsSound() {
+    var isolatedRegistry = Object.create(null);
+    registerCaseId(isolatedRegistry, 'E2E-001 — caso original');
+    try {
+      registerCaseId(isolatedRegistry, 'E2E-001 — caso duplicado');
+    } catch (error) {
+      return error.message === 'ID de teste duplicado: E2E-001.';
+    }
+    return false;
+  }
+
+  function test(name, callback) {
+    registerCaseId(registeredIds, name);
     cases.push({ name: name, callback: callback });
   }
 
@@ -91,6 +106,9 @@
     var registrationErrors = loadErrors.slice();
     if (cases.length !== EXPECTED_CASE_COUNT) {
       registrationErrors.push('A suíte registrou ' + cases.length + ' de ' + EXPECTED_CASE_COUNT + ' casos obrigatórios.');
+    }
+    if (!duplicateGuardIsSound()) {
+      registrationErrors.push('O canário de IDs E2E duplicados não foi rejeitado.');
     }
     ['ExpeditionData', 'ExpeditionEngine', 'ExpeditionApp'].forEach(function (globalName) {
       if (!global[globalName]) {

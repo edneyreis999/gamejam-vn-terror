@@ -1486,11 +1486,19 @@
   });
 
   Test.test('IT-094 — fluxo não oferece escolha de ordem das masmorras', function () {
-    var current = fixture();
+    var current = fixture(320);
     reachDungeonComplete(current.controller, 'physical', 70);
     Test.equal(current.root.querySelectorAll('[data-action="continue-dungeon"]').length, 1);
     Test.falsy(current.root.querySelector('[data-action="choose-dungeon"]'));
     Test.includes(current.root.textContent, 'Primeira metade do mapa recuperada.');
+    var map = current.root.querySelector('.map-halves');
+    var mapStyle = global.getComputedStyle(map);
+    Test.equal(mapStyle.paddingInlineStart, '0px');
+    Test.equal(mapStyle.listStyleType, 'none');
+    var halves = map.querySelectorAll('.map-half');
+    Test.equal(halves.length, 2);
+    Test.equal(Math.round(halves[0].getBoundingClientRect().left), Math.round(halves[1].getBoundingClientRect().left));
+    Test.truthy(current.root.scrollWidth <= 320);
     current.cleanup();
   });
 
