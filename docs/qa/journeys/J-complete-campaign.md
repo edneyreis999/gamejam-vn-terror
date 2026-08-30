@@ -27,7 +27,7 @@ journey:
   id: J-complete-campaign
   name: Concluir expedição e sacrifício
   value_statement: "O jogador atravessa 5+5+6 encontros, administra perdas e recebe um desfecho coerente."
-  personas: [Lia, primeira expedicionária, Caio, estrategista recorrente]
+  personas: ["Lia, primeira expedicionária", "Caio, estrategista recorrente"]
   entry_points:
     - url: file:///…/prototype/index.html
       origin: direct

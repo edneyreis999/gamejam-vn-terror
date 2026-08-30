@@ -49,7 +49,7 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 ### CH-seeded-diagnostics-reproduction — Caio
 
 - **Ran:** 14:40 → 14:48 (box respected: yes)
-- **Findings:** two fresh sessions with seed `20260830` produced signature `3624e3f0`, 54 history entries and identical assignments: physical `A6,A2,A5,A3,A8`; supernatural `B8,B1,B4,B5,B3`; final `B7,A4,B6,B2,A7,A1`. Both returned `{ok:true,violations:[]}`.
+- **Findings:** after review remediation, two fresh sessions with seed `20260830` produced FNV-1a signature `1635bb7b`, 64 history entries and identical assignments: physical `A6,A2,A5,A3,A8`; supernatural `B8,B1,B4,B5,B3`; final `B7,A4,B6,B2,A7,A1`. Both returned `{ok:true,violations:[]}`; the ten added events account for introduction continuation and nine accepted formation toggles across the three dungeons.
 - **Bugs filed/updated:** none.
 - **Scenarios settled:** ACC → pass; CAM → pass.
 - **Paper cuts:** none.
@@ -113,8 +113,8 @@ None. No reproduced finding entered the governor.
 
 ## Human Verifications Needed
 
-- [ ] Run a complete VoiceOver read/announcement walk on macOS hardware: confirm headings, live results and native dialogs audibly, not only by DOM/keyboard evidence.
-- [ ] Give the provisional 16-image inventory a final cultural/editorial approval before treating any art direction as canon; current QA only confirms the GDD guardrails.
+- [ ] `ACC-accessibility-diagnostics`: run a complete VoiceOver read/announcement walk on macOS hardware; confirm headings, live results and native dialogs audibly, not only by DOM/keyboard evidence.
+- [ ] `ART-encounter-art-content`: give the provisional 16-image inventory a final cultural/editorial approval before treating any art direction as canon; current QA only confirms the GDD guardrails.
 
 ## Decisions for a Human
 

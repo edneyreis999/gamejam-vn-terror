@@ -17,9 +17,9 @@ journey:
   id: J-reproduce-campaign
   name: Reproduzir campanha por seed
   value_statement: "O operador transforma um relato em duas sessões comparáveis sem alterar o domínio."
-  personas: [Caio, estrategista recorrente, Joana, jogadora ampliada]
+  personas: ["Caio, estrategista recorrente", "Joana, jogadora ampliada"]
   entry_points:
-    - url: file:///…/prototype/index.html#DevTools
+    - url: file:///…/prototype/index.html
       origin: direct
   actions:
     - step: 1

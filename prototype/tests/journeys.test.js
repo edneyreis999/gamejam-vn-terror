@@ -4,6 +4,10 @@
   var Test = global.ExpeditionTest;
   var Data = global.ExpeditionData;
   var Engine = global.ExpeditionEngine;
+  var MAX_SCENARIO_SEED = 100;
+  var MAX_DEATH_STEPS = 240;
+  var MAX_SHORT_JOURNEY_STEPS = 100;
+  var MAX_FULL_JOURNEY_STEPS = 120;
 
   function fixture(width) {
     var root = document.createElement('div');
@@ -85,7 +89,7 @@
         }
       }
     }
-    for (var seed = 1; seed < 100; seed += 1) {
+    for (var seed = 1; seed < MAX_SCENARIO_SEED; seed += 1) {
       for (var index = 0; index < combinations.length; index += 1) {
         var state = stateForFirstEncounter(seed, combinations[index]);
         if (Engine.deriveViability(state.partyIds, encounterFor(state)).count === target) {
@@ -108,7 +112,7 @@
 
   function driveDeaths(current, target) {
     var guard = 0;
-    while (current.controller.getState().deadHeroIds.length < target && guard < 240) {
+    while (current.controller.getState().deadHeroIds.length < target && guard < MAX_DEATH_STEPS) {
       guard += 1;
       var state = current.controller.getState();
       if (state.phase === 'ready') {
@@ -147,7 +151,7 @@
     Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: seed }).ok);
     current.root.querySelector('[data-action="continue-intro"]').click();
     var guard = 0;
-    while (current.controller.getState().phase !== 'victory' && guard < 100) {
+    while (current.controller.getState().phase !== 'victory' && guard < MAX_SHORT_JOURNEY_STEPS) {
       guard += 1;
       var state = current.controller.getState();
       if (state.phase === 'formation') {
@@ -184,7 +188,7 @@
     Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: 10 }).ok);
     current.root.querySelector('[data-action="continue-intro"]').click();
     var guard = 0;
-    while (current.controller.getState().phase !== 'victory' && guard < 120) {
+    while (current.controller.getState().phase !== 'victory' && guard < MAX_FULL_JOURNEY_STEPS) {
       guard += 1;
       var state = current.controller.getState();
       if (state.phase === 'formation') {
@@ -237,7 +241,9 @@
       Test.equal(document.activeElement, card);
       Test.equal(card.tagName, 'BUTTON');
       card.click();
-      Test.equal(current.root.querySelector('[data-id="' + heroId + '"]').getAttribute('aria-pressed'), 'true');
+      var updatedCard = current.root.querySelector('[data-id="' + heroId + '"]');
+      Test.equal(updatedCard.getAttribute('aria-pressed'), 'true');
+      Test.equal(document.activeElement, updatedCard);
     });
     var depart = current.root.querySelector('[data-action="depart"]');
     depart.focus();
@@ -415,7 +421,7 @@
       Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: 92 }).ok);
       current.root.querySelector('[data-action="continue-intro"]').click();
       var guard = 0;
-      while (current.controller.getState().phase !== 'victory' && guard < 120) {
+      while (current.controller.getState().phase !== 'victory' && guard < MAX_FULL_JOURNEY_STEPS) {
         guard += 1;
         var state = current.controller.getState();
         if (state.phase === 'formation') {
@@ -475,7 +481,7 @@
     intro.focus();
     intro.click();
     var guard = 0;
-    while (current.controller.getState().phase !== 'victory' && guard < 100) {
+    while (current.controller.getState().phase !== 'victory' && guard < MAX_SHORT_JOURNEY_STEPS) {
       guard += 1;
       var state = current.controller.getState();
       var control;

@@ -1,6 +1,6 @@
 // Suite: motor determinístico da campanha
 // Invariant: ações válidas produzem um novo estado coerente e ações inválidas não alteram a campanha.
-// Boundary IN: funções públicas de ExpeditionEngine com o catálogo real.
+// Boundary IN: motor, seletores e validadores de ExpeditionEngine com o catálogo real.
 // Boundary OUT: controlador do navegador, DOM, foco e API window.expeditionQA.
 (function (global) {
   'use strict';
@@ -8,6 +8,9 @@
   var T = global.ExpeditionTest;
   var Data = global.ExpeditionData;
   var Engine = global.ExpeditionEngine;
+  var MAX_EMPTY_PARTY_STEPS = 30;
+  var MAX_DEFEAT_STEPS = 400;
+  var MAX_VICTORY_STEPS = 250;
 
   function freezeFixture(value) {
     if (!value || typeof value !== 'object' || Object.isFrozen(value)) {
@@ -94,7 +97,7 @@
   function deathResultWithEmptyParty() {
     var state = firstEncounter(['H4', 'H7', 'H8'], 7);
     var guard = 0;
-    while (!(state.phase === 'death_result' && state.partyIds.length === 0) && guard < 30) {
+    while (!(state.phase === 'death_result' && state.partyIds.length === 0) && guard < MAX_EMPTY_PARTY_STEPS) {
       guard += 1;
       if (state.phase === 'encounter_choice') {
         state = accepted(state, { type: 'CHOOSE_APPROACH', approachId: chooseApproach(state, false).id });
@@ -149,7 +152,7 @@
   function runToDefeat() {
     var state = Engine.createReadyState();
     var guard = 0;
-    while (state.phase !== 'defeat' && guard < 400) {
+    while (state.phase !== 'defeat' && guard < MAX_DEFEAT_STEPS) {
       guard += 1;
       if (state.phase === 'ready') {
         state = accepted(state, { type: 'BEGIN', seed: 7 });
@@ -192,7 +195,7 @@
   function runSafeCampaign(stopBeforeFinalAcknowledgment) {
     var state = Engine.createReadyState();
     var guard = 0;
-    while (state.phase !== 'victory' && guard < 250) {
+    while (state.phase !== 'victory' && guard < MAX_VICTORY_STEPS) {
       guard += 1;
       if (state.phase === 'ready') {
         state = accepted(state, { type: 'BEGIN', seed: 20260830 });
@@ -264,6 +267,7 @@
       T.equal(Engine.selectEligible(items, 0).value, items[0]);
       T.equal(Engine.selectEligible(items, 0.9999999999999999).value, items[items.length - 1]);
     }
+    T.equal(Engine.selectEligible(['A1'], NaN).error.code, 'invalid_random_value');
   });
 
   T.test('UT-017 — revisita preserva encontro e estado do gerador', function () {
@@ -332,6 +336,9 @@
     var result = Engine.dispatch(state, { type: 'DEPART' });
     T.equal(result.error.code, 'invalid_transition');
     T.truthy(result.state === state);
+    var sacrifice = Engine.dispatch(startFormation(7), { type: 'CONFIRM_SACRIFICE' });
+    T.equal(sacrifice.error.code, 'invalid_transition');
+    T.truthy(sacrifice.state.phase === 'formation');
   });
 
   T.test('UT-024 — segundo BEGIN não cria outra campanha ou evento', function () {
@@ -468,7 +475,13 @@
   });
 
   T.test('UT-041 — recuo é elegível antes do compromisso com pelo menos três vivos', function () {
-    var state = firstEncounter(['H1', 'H2', 'H3'], 7);
+    var preparation = departWith(['H1', 'H2', 'H3'], 7);
+    T.truthy(Engine.deriveRetreatEligibility(preparation));
+    var confirmation = accepted(preparation, { type: 'REQUEST_RETREAT' });
+    T.equal(confirmation.phase, 'retreat_confirmation');
+    T.equal(accepted(confirmation, { type: 'CANCEL_RETREAT' }).phase, 'dungeon_intro');
+
+    var state = accepted(preparation, { type: 'ENTER_DUNGEON' });
     T.truthy(Engine.deriveRetreatEligibility(state));
     var threeAlive = stateFixture(state, { deadHeroIds: ['H4', 'H5', 'H6', 'H7', 'H8'] });
     T.truthy(Engine.deriveRetreatEligibility(threeAlive));
@@ -483,6 +496,7 @@
     });
     var twoAlive = accepted(accepted(reducedFormation, { type: 'DEPART' }), { type: 'ENTER_DUNGEON' });
     T.equal(Engine.dispatch(twoAlive, { type: 'REQUEST_RETREAT' }).error.code, 'retreat_unavailable');
+    T.falsy(Engine.deriveRetreatEligibility(startFormation(7)));
   });
 
   T.test('UT-043 — recuo retorna à formação e preserva mortes e atribuições', function () {
@@ -498,7 +512,7 @@
     T.deepEqual(state.assignments, before.assignments);
   });
 
-  T.test('UT-044 — cancelar recuo restaura o mesmo encontro sem sorteio ou evento duplicado', function () {
+  T.test('UT-044 — cancelar recuo restaura o mesmo encontro sem sorteio e registra as duas ações', function () {
     var state = firstEncounter(['H1', 'H2', 'H3'], 7);
     var before = Engine.snapshot(state);
     var rngState = state.rngState;
@@ -508,7 +522,8 @@
     T.equal(after.currentEncounter.id, before.currentEncounter.id);
     T.equal(state.rngState, rngState);
     T.deepEqual(after.assignments, before.assignments);
-    T.deepEqual(after.actionHistory, before.actionHistory);
+    T.deepEqual(after.actionHistory.slice(-2).map(function (entry) { return entry.type; }), ['retreat_requested', 'retreat_cancelled']);
+    T.equal(after.actionHistory.length, before.actionHistory.length + 2);
   });
 
   T.test('UT-045 — elegibilidade usa somente A na física e somente B na sobrenatural', function () {
@@ -544,6 +559,11 @@
     var finalState = Engine.advanceDungeon(supernaturalComplete).state;
     T.equal(finalState.dungeonId, 'final');
     T.equal(Engine.advanceDungeon(stateFixture(finalState, { phase: 'dungeon_complete' })).error.code, 'invalid_dungeon_order');
+    var incomplete = stateFixture(departWith(['H1', 'H2', 'H3'], 7), {
+      phase: 'dungeon_complete',
+      position: 5
+    });
+    T.equal(accepted(incomplete, { type: 'CONTINUE_DUNGEON' }).phase, 'invalid');
   });
 
   T.test('UT-048 — final atribui progressivamente somente seis candidatos sem repetição', function () {
@@ -646,14 +666,43 @@
     T.equal(invalid.phase, 'invalid');
     T.equal(invalid.invariantViolations[0].context.priorSnapshot.phase, 'formation');
     T.truthy(Engine.enterInvalid(invalid, [violation]) === invalid);
+    var malformedResult = Engine.dispatch({}, { type: 'BEGIN', seed: 7 });
+    T.truthy(malformedResult.ok);
+    T.equal(malformedResult.state.phase, 'invalid');
+    T.includes(malformedResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_state_shape');
   });
 
-  T.test('UT-060 — appendHistory incrementa sequência e rejeição não acrescenta evento', function () {
+  T.test('UT-060 — cada ação aceita incrementa a sequência e rejeição não acrescenta evento', function () {
+    function acceptOne(state, action) {
+      var beforeSequence = state.sequence;
+      var beforeLength = state.actionHistory.length;
+      var next = accepted(state, action);
+      T.equal(next.sequence, beforeSequence + 1, action.type);
+      T.equal(next.actionHistory.length, beforeLength + 1, action.type);
+      return next;
+    }
+
     var state = Engine.createReadyState();
     var withEvent = Engine.appendHistory(state, { type: 'test_event', value: 1 });
     T.equal(withEvent.sequence, 1);
     T.deepEqual(withEvent.actionHistory, [{ sequence: 1, type: 'test_event', value: 1 }]);
-    var started = accepted(state, { type: 'BEGIN', seed: 7 });
+    var started = acceptOne(state, { type: 'BEGIN', seed: 7 });
+    var formation = acceptOne(started, { type: 'CONTINUE_INTRO' });
+    formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' });
+    formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' });
+
+    var sacrifice = failedA1State();
+    sacrifice = acceptOne(sacrifice, { type: 'OPEN_SACRIFICE' });
+    sacrifice = acceptOne(sacrifice, { type: 'SELECT_VICTIM', heroId: 'H4' });
+    sacrifice = acceptOne(sacrifice, { type: 'CANCEL_SACRIFICE' });
+
+    var retreat = firstEncounter(['H1', 'H2', 'H3'], 7);
+    retreat = acceptOne(retreat, { type: 'REQUEST_RETREAT' });
+    retreat = acceptOne(retreat, { type: 'CANCEL_RETREAT' });
+
+    var automaticRetreat = accepted(deathResultWithEmptyParty(), { type: 'ACK_DEATH' });
+    acceptOne(automaticRetreat, { type: 'ACK_AUTO_RETREAT' });
+
     var rejected = Engine.dispatch(started, { type: 'BEGIN', seed: 8 });
     T.equal(rejected.state.sequence, started.sequence);
     T.deepEqual(rejected.state.actionHistory, started.actionHistory);

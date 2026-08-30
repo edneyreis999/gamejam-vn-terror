@@ -25,7 +25,7 @@ Não há servidor, instalação, login, persistência ou áudio. Recursos são r
 
 ## Taxonomia do ciclo
 
-- Jornada e funcional: quatro fluxos abaixo e os seis cenários.
+- Jornada e funcional: `J-local-offline-launch.md`, `J-complete-campaign.md`, `J-reproduce-campaign.md`, `J-run-browser-contract.md` e os seis cenários.
 - Experiência: charters de campanha, imagem/devlog e acessibilidade.
 - Erro/abandono: reload, imagens bloqueadas, recuo, morte e estado inválido.
 - Cross-cutting: offline, 320×800, 200%, movimento reduzido, seed repetida e canário `tests.html`.

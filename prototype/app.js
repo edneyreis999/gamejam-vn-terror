@@ -318,12 +318,18 @@
     var decision = element('section', 'paper-panel decision-panel');
     append(decision,
       element('p', '', 'Os encontros são atribuídos somente quando cada posição é alcançada. Posições reveladas permanecem fixas nesta campanha.'),
-      actionButton('Entrar', 'primary', 'enter-dungeon'),
-      actionButton('Consultar elenco', 'roster-toggle', 'open-roster')
+      actionButton('Entrar', 'primary', 'enter-dungeon')
     );
+    if (view.canRetreat || view.phase === 'retreat_confirmation') {
+      append(decision, actionButton('Recuar para a cidade', 'ghost', 'request-retreat'));
+    }
+    append(decision, actionButton('Consultar elenco', 'roster-toggle', 'open-roster'));
     append(main, scene, decision);
     append(grid, main, renderRoster(view, false));
     append(frame, grid, renderRosterDialog(view));
+    if (view.phase === 'retreat_confirmation') {
+      append(frame, renderRetreatConfirmation());
+    }
     return frame;
   }
 
@@ -569,8 +575,7 @@
   }
 
   function renderMapHalf(label, found) {
-    var half = element('div', 'map-half' + (found ? ' found' : ''));
-    half.setAttribute('role', 'listitem');
+    var half = element('li', 'map-half' + (found ? ' found' : ''));
     append(half, element('strong', '', label), element('span', '', found ? 'Recuperada' : 'Ainda desconhecida'));
     return half;
   }
@@ -587,8 +592,7 @@
     var detail = firstHalf
       ? 'A mata fecha a passagem atrás do grupo. A parte encontrada aponta para outro lugar, onde as vozes conhecem nomes que ninguém pronunciou.'
       : 'As duas metades revelam o caminho final. A natureza do tesouro e o horror familiar permanecem pendentes no GDD.';
-    var halves = element('div', 'map-halves');
-    halves.setAttribute('role', 'list');
+    var halves = element('ul', 'map-halves');
     halves.setAttribute('aria-label', 'Partes do mapa');
     append(halves,
       renderMapHalf('Primeira metade', true),
@@ -817,7 +821,10 @@
       if (view.phase === 'dungeon_intro') {
         return renderDungeonThreshold(view);
       }
-      if (view.phase === 'encounter_choice' || view.phase === 'retreat_confirmation') {
+      if (view.phase === 'retreat_confirmation') {
+        return view.retreatReturnPhase === 'dungeon_intro' ? renderDungeonThreshold(view) : renderEncounterChoice(view);
+      }
+      if (view.phase === 'encounter_choice') {
         return renderEncounterChoice(view);
       }
       if (view.phase === 'approach_result') {
@@ -895,6 +902,20 @@
       }
     }
 
+    function documentTitle(view) {
+      var prefix = '';
+      if (view.phase === 'formation') {
+        prefix = 'Formação · ';
+      } else if (view.phase === 'dungeon_intro') {
+        prefix = view.dungeon.label + ' · ';
+      } else if (view.phase === 'victory') {
+        prefix = 'Vitória · ';
+      } else if (view.phase === 'defeat') {
+        prefix = 'Derrota · ';
+      }
+      return prefix + 'Expedição e Sacrifício';
+    }
+
     function render(options) {
       if (destroyed) {
         return;
@@ -916,7 +937,7 @@
       stage.textContent = '';
       append(stage, surface);
       monitorOptionalImages();
-      document.title = (view.phase === 'ready' ? '' : view.phase === 'formation' ? 'Formação · ' : view.phase === 'dungeon_intro' ? view.dungeon.label + ' · ' : view.phase === 'victory' ? 'Vitória · ' : view.phase === 'defeat' ? 'Derrota · ' : '') + 'Expedição e Sacrifício';
+      document.title = documentTitle(view);
       if (ui.rosterOpen) {
         openRosterDialog();
       }
@@ -1042,7 +1063,10 @@
       } else if (action === 'continue-intro') {
         submit({ type: 'CONTINUE_INTRO' }, { focusHeading: true, announce: 'Formação disponível.' });
       } else if (action === 'toggle-hero') {
-        submit({ type: 'TOGGLE_HERO', heroId: trigger.dataset.id }, { announce: trigger.dataset.id + ' atualizado na formação.' });
+        submit({ type: 'TOGGLE_HERO', heroId: trigger.dataset.id }, {
+          focusSelector: '[data-action="toggle-hero"][data-id="' + trigger.dataset.id + '"]',
+          announce: trigger.dataset.id + ' atualizado na formação.'
+        });
       } else if (action === 'depart') {
         submit({ type: 'DEPART' }, { focusHeading: true, announce: 'Expedição formada.' });
       } else if (action === 'enter-dungeon') {
@@ -1193,6 +1217,7 @@
     });
   }
 
+  /** @type {Readonly<{createController: (root: HTMLElement) => Object}>} */
   var ExpeditionApp = Object.freeze({ createController: createController });
   global.ExpeditionApp = ExpeditionApp;
 

@@ -11,7 +11,7 @@ bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence: docs/qa/evidence/2026-08-30-browser-prototype/retreat-revisited-same-encounter.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-03-falha-explicada.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-04-confirmacao-h4.png
+evidence: docs/qa/evidence/2026-08-30-browser-prototype/retreat-revisited-same-encounter.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-01-competencias.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-02-abordagens-sem-rotulo.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-03-falha-explicada.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-04-confirmacao-h4.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-05-elenco-recalculado.png
 last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: FOR-formation-roster; ART-encounter-art-content
 ---

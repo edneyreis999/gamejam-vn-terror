@@ -4,6 +4,7 @@
   var Test = global.ExpeditionTest;
   var Data = global.ExpeditionData;
   var Engine = global.ExpeditionEngine;
+  var MAX_DEATH_STEPS = 240;
 
   function fixture(width) {
     var root = document.createElement('div');
@@ -71,7 +72,7 @@
 
   function driveDeaths(controller, targetCount) {
     var steps = 0;
-    while (controller.getState().deadHeroIds.length < targetCount && steps < 240) {
+    while (controller.getState().deadHeroIds.length < targetCount && steps < MAX_DEATH_STEPS) {
       steps += 1;
       var state = controller.getState();
       if (state.phase === 'ready') {
@@ -722,6 +723,8 @@
       var button = current.root.querySelector('[data-id="' + approach.id + '"]');
       Test.deepEqual(Object.keys(button.dataset).sort(), ['action', 'id']);
       Test.falsy(button.className.indexOf(approach.competencyId) >= 0);
+      Test.falsy(button.hasAttribute('aria-label'));
+      names.forEach(function (name) { Test.falsy(button.textContent.indexOf(name) >= 0); });
     });
     Test.falsy(current.root.querySelector('.encounter-decision').textContent.indexOf('Competência exigida') >= 0);
     Test.equal(names.length, 3);
@@ -747,7 +750,7 @@
     var trigger = current.root.querySelector('[data-action="open-roster"]');
     trigger.focus();
     trigger.click();
-    current.root.querySelector('[data-action="close-roster"]').click();
+    current.root.querySelector('#roster-dialog').dispatchEvent(new Event('cancel', { bubbles: true, cancelable: true }));
     await new Promise(function (resolve) { global.setTimeout(resolve, 75); });
     Test.equal(JSON.stringify(current.controller.getState()), before);
     Test.equal(document.activeElement.dataset.action, 'open-roster');
@@ -1146,10 +1149,12 @@
     var living = livingIds(current.controller.getState());
     selectHeroes(current.controller, living);
     Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
-    Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
     Test.equal(current.controller.getState().partyIds.length, 3);
     Test.equal(livingIds(current.controller.getState()).length, 3);
+    Test.truthy(current.root.querySelector('[data-action="request-retreat"]'));
     Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'CANCEL_RETREAT' }).ok);
+    Test.equal(current.controller.getState().phase, 'dungeon_intro');
     current.cleanup();
   });
 
@@ -1177,6 +1182,9 @@
     }
     var dead = current.controller.getState().deadHeroIds.slice();
     var assignment = current.controller.getState().assignments.physical[0];
+    Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
+    current.root.querySelector('#required-dialog').dispatchEvent(new Event('cancel', { bubbles: true, cancelable: true }));
+    Test.equal(current.controller.getState().phase, 'encounter_choice');
     Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
     Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);
     Test.deepEqual(current.controller.getState().deadHeroIds, dead);

@@ -1,7 +1,17 @@
 (function (global) {
   'use strict';
 
+  var EXPECTED_CASE_COUNT = 231;
   var cases = [];
+  var registeredIds = {};
+  var loadErrors = [];
+
+  global.addEventListener('error', function (event) {
+    var target = event.target;
+    if (target && target.tagName === 'SCRIPT') {
+      loadErrors.push('Falha ao carregar ' + (target.getAttribute('src') || 'script sem caminho') + '.');
+    }
+  }, true);
 
   function format(value) {
     if (typeof value === 'string') {
@@ -66,11 +76,31 @@
   }
 
   function test(name, callback) {
+    var idMatch = /^([A-Z]+-\d+)/.exec(name);
+    var id = idMatch ? idMatch[1] : name;
+    if (registeredIds[id]) {
+      throw new Error('ID de teste duplicado: ' + id + '.');
+    }
+    registeredIds[id] = true;
     cases.push({ name: name, callback: callback });
   }
 
   async function run() {
     var results = [];
+    var registrationErrors = loadErrors.slice();
+    if (cases.length !== EXPECTED_CASE_COUNT) {
+      registrationErrors.push('A suíte registrou ' + cases.length + ' de ' + EXPECTED_CASE_COUNT + ' casos obrigatórios.');
+    }
+    ['ExpeditionData', 'ExpeditionEngine', 'ExpeditionApp'].forEach(function (globalName) {
+      if (!global[globalName]) {
+        registrationErrors.push('Runtime obrigatório ausente: window.' + globalName + '.');
+      }
+    });
+    registrationErrors.forEach(function (message, index) {
+      var name = 'RUNNER-' + String(index + 1).padStart(3, '0') + ' — integridade da suíte';
+      results.push({ name: name, status: 'fail', error: message });
+      console.error('FAIL ' + name, message);
+    });
     for (var index = 0; index < cases.length; index += 1) {
       var current = cases[index];
       try {

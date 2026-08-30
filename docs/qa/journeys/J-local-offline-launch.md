@@ -16,7 +16,7 @@ journey:
   id: J-local-offline-launch
   name: Abrir sessão local offline
   value_statement: "O jogador inicia uma campanha local sem instalação, servidor ou rede."
-  personas: [Lia, primeira expedicionária, Rui, revisor de conteúdo]
+  personas: ["Lia, primeira expedicionária", "Rui, revisor de conteúdo"]
   entry_points:
     - url: file:///…/prototype/index.html
       origin: direct

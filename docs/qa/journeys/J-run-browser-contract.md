@@ -15,7 +15,7 @@ journey:
   id: J-run-browser-contract
   name: Executar contrato do navegador
   value_statement: "O colaborador verifica o protótipo sem instalar ferramentas."
-  personas: [Caio, estrategista recorrente]
+  personas: ["Caio, estrategista recorrente"]
   entry_points:
     - url: file:///…/prototype/tests.html
       origin: direct

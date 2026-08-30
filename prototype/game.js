@@ -3,6 +3,7 @@
 
   var Data = global.ExpeditionData;
   var UINT32_MAX = 4294967295;
+  var UINT32_RANGE = 4294967296;
   var MULBERRY_INCREMENT = 0x6D2B79F5;
   var PHASES = [
     'ready',
@@ -116,7 +117,7 @@
     var value = nextState;
     value = Math.imul(value ^ (value >>> 15), value | 1);
     value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-    value = ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+    value = ((value ^ (value >>> 14)) >>> 0) / UINT32_RANGE;
     return deepFreeze({ state: nextState, value: value });
   }
 
@@ -146,7 +147,7 @@
         error: { code: 'empty_eligible_set', message: 'Não há encontros elegíveis para sortear.' }
       });
     }
-    if (typeof randomValue !== 'number' || randomValue < 0 || randomValue >= 1) {
+    if (typeof randomValue !== 'number' || !Number.isFinite(randomValue) || randomValue < 0 || randomValue >= 1) {
       return deepFreeze({
         ok: false,
         error: { code: 'invalid_random_value', message: 'O valor aleatório deve estar entre 0 e 1.' }
@@ -245,7 +246,7 @@
       }
 
       var approachCompetencies = approaches.map(function (currentApproach) {
-        return currentApproach.competencyId;
+        return currentApproach && currentApproach.competencyId;
       });
       if (unique(approachCompetencies).length !== approachCompetencies.length) {
         violations.push(makeViolation('duplicate_approach_competency', 'O encontro ' + encounterId + ' repete uma competência entre as abordagens.', { encounterId: encounterId, competencyIds: approachCompetencies }));
@@ -266,7 +267,7 @@
       var bodilyCount = 0;
       var liminalCount = 0;
       approaches.forEach(function (currentApproach, index) {
-        var competency = source.competencies && source.competencies[currentApproach.competencyId];
+        var competency = currentApproach && source.competencies && source.competencies[currentApproach.competencyId];
         if (!currentApproach || currentApproach.id !== encounterId + '-' + (index + 1) || !currentApproach.text || !currentApproach.successText || !competency) {
           violations.push(makeViolation('invalid_approach_definition', 'Uma abordagem de ' + encounterId + ' está incompleta ou usa competência inválida.', { encounterId: encounterId, index: index + 1 }));
           return;
@@ -290,7 +291,7 @@
       } else {
         failureTexts.push(currentEncounter.failureText);
       }
-      if (!currentEncounter || typeof currentEncounter.imagePath !== 'string' || !/\.jpg$/i.test(currentEncounter.imagePath)) {
+      if (!currentEncounter || currentEncounter.imagePath !== 'assets/encounters/' + encounterId.toLowerCase() + '.jpg') {
         violations.push(makeViolation('invalid_encounter_image_path', 'O encontro ' + encounterId + ' deve apontar para um arquivo JPEG local.', { encounterId: encounterId }));
       } else {
         imagePaths.push(currentEncounter.imagePath);
@@ -419,7 +420,15 @@
   }
 
   function deriveRetreatEligibility(state) {
-    return livingHeroIds(state).length >= 3 && state.pendingOutcome === null && ['formation', 'dungeon_intro', 'encounter_choice'].indexOf(state.phase) >= 0;
+    return livingHeroIds(state).length >= 3 && state.pendingOutcome === null && ['dungeon_intro', 'encounter_choice'].indexOf(state.phase) >= 0;
+  }
+
+  function retreatReturnPhase(state) {
+    var lastEvent = state.actionHistory[state.actionHistory.length - 1];
+    if (lastEvent && lastEvent.type === 'retreat_requested' && ['dungeon_intro', 'encounter_choice'].indexOf(lastEvent.fromPhase) >= 0) {
+      return lastEvent.fromPhase;
+    }
+    return 'encounter_choice';
   }
 
   function currentEncounterId(state) {
@@ -650,10 +659,20 @@
     });
   }
 
+  function hasCampaignShape(state) {
+    return Boolean(state && Array.isArray(state.partyIds) && Array.isArray(state.deadHeroIds) &&
+      Array.isArray(state.draftPartyIds) && state.assignments && Array.isArray(state.assignments.physical) &&
+      Array.isArray(state.assignments.supernatural) && Array.isArray(state.assignments.final) &&
+      Array.isArray(state.actionHistory) && Array.isArray(state.invariantViolations));
+  }
+
   function validateState(state) {
     var violations = [];
     if (!state || typeof state !== 'object') {
       return deepFreeze({ ok: false, violations: [makeViolation('invalid_state_shape', 'O estado da campanha não é um objeto válido.', {})] });
+    }
+    if (!hasCampaignShape(state)) {
+      violations.push(makeViolation('invalid_state_shape', 'O estado da campanha não possui todas as coleções obrigatórias.', {}));
     }
     if (state.version !== 1) {
       violations.push(makeViolation('invalid_state_version', 'A versão do estado deve ser 1.', { version: state.version }));
@@ -745,6 +764,14 @@
       violations.push(makeViolation('unexpected_victim_payload', 'Há uma vítima pendente fora da confirmação de sacrifício.', { phase: state.phase, heroId: state.pendingVictimId }));
     }
 
+    if (state.phase === 'dungeon_complete') {
+      var completedAssignments = assignmentGroups[state.dungeonId];
+      var expectedCompletedPositions = expectedLengths[state.dungeonId];
+      if (!Array.isArray(completedAssignments) || completedAssignments.filter(Boolean).length !== expectedCompletedPositions) {
+        violations.push(makeViolation('incomplete_dungeon', 'A masmorra não pode ser concluída antes de todas as posições.', { dungeon: state.dungeonId }));
+      }
+    }
+
     if (state.dungeonId === 'supernatural' && assignmentGroups.physical && assignmentGroups.physical.filter(Boolean).length !== 5) {
       violations.push(makeViolation('impossible_dungeon_transition', 'A masmorra sobrenatural não pode começar antes da conclusão da primeira.', { dungeon: state.dungeonId }));
     }
@@ -768,10 +795,15 @@
   }
 
   function enterInvalid(state, violations) {
-    if (state.phase === 'invalid') {
+    if (state && state.phase === 'invalid') {
       return state;
     }
-    var priorSnapshot = snapshot(state);
+    var hasSnapshotShape = hasCampaignShape(state);
+    var priorSnapshot = hasSnapshotShape ? snapshot(state) : deepFreeze({
+      version: state && state.version,
+      phase: state && state.phase,
+      rawState: clone(state)
+    });
     var evidence = (violations || []).map(function (currentViolation) {
       var context = clone(currentViolation.context || {});
       context.priorSnapshot = priorSnapshot;
@@ -781,7 +813,7 @@
         context: context
       };
     });
-    return replace(state, { phase: 'invalid', invariantViolations: evidence });
+    return replace(hasSnapshotShape ? state : createReadyState(), { phase: 'invalid', invariantViolations: evidence });
   }
 
   function invalidTransition(state, action) {
@@ -825,11 +857,14 @@
       if (introFormation.mode === 'defeat') {
         return ok(changeWithHistory(state, { phase: 'defeat' }, { type: 'campaign_lost' }));
       }
-      return ok(replace(state, {
+      return ok(changeWithHistory(state, {
         phase: 'formation',
         dungeonId: 'physical',
         position: 1,
         draftPartyIds: introFormation.autoSelected ? introFormation.selectedHeroIds : []
+      }, {
+        type: 'formation_opened',
+        dungeon: 'physical'
       }));
     }
 
@@ -853,7 +888,11 @@
       } else {
         selected.push(action.heroId);
       }
-      return ok(replace(state, { draftPartyIds: selected }));
+      return ok(changeWithHistory(state, { draftPartyIds: selected }, {
+        type: 'formation_selection_changed',
+        heroId: action.heroId,
+        selected: selected.indexOf(action.heroId) >= 0
+      }));
     }
 
     if (action.type === 'DEPART') {
@@ -938,7 +977,10 @@
       if (state.partyIds.length === 0) {
         return error(state, 'empty_sacrifice_pool', 'Não há herói presente para o sacrifício.', {});
       }
-      return ok(replace(state, { phase: 'sacrifice_choice' }));
+      return ok(changeWithHistory(state, { phase: 'sacrifice_choice' }, {
+        type: 'sacrifice_choice_opened',
+        encounterId: state.pendingOutcome.encounterId
+      }));
     }
 
     if (action.type === 'SELECT_VICTIM') {
@@ -948,18 +990,28 @@
       if (state.partyIds.indexOf(action.heroId) < 0 || state.deadHeroIds.indexOf(action.heroId) >= 0 || !Data.heroes[action.heroId]) {
         return error(state, 'invalid_victim', 'Escolha um herói vivo presente na expedição.', { heroId: action.heroId });
       }
-      return ok(replace(state, { phase: 'sacrifice_confirmation', pendingVictimId: action.heroId }));
+      return ok(changeWithHistory(state, { phase: 'sacrifice_confirmation', pendingVictimId: action.heroId }, {
+        type: 'sacrifice_victim_selected',
+        encounterId: state.pendingOutcome.encounterId,
+        heroId: action.heroId
+      }));
     }
 
     if (action.type === 'CANCEL_SACRIFICE') {
       if (state.phase !== 'sacrifice_confirmation') {
         return invalidTransition(state, action);
       }
-      return ok(replace(state, { phase: 'sacrifice_choice', pendingVictimId: null }));
+      return ok(changeWithHistory(state, { phase: 'sacrifice_choice', pendingVictimId: null }, {
+        type: 'sacrifice_confirmation_cancelled',
+        encounterId: state.pendingOutcome.encounterId
+      }));
     }
 
     if (action.type === 'CONFIRM_SACRIFICE') {
-      if (state.phase !== 'sacrifice_confirmation' || !state.pendingVictimId || state.partyIds.indexOf(state.pendingVictimId) < 0) {
+      if (state.phase !== 'sacrifice_confirmation') {
+        return invalidTransition(state, action);
+      }
+      if (!state.pendingVictimId || state.partyIds.indexOf(state.pendingVictimId) < 0) {
         return error(state, 'invalid_victim', 'Escolha um herói vivo presente na expedição.', { heroId: state.pendingVictimId });
       }
       var victimId = state.pendingVictimId;
@@ -1010,17 +1062,28 @@
     }
 
     if (action.type === 'REQUEST_RETREAT') {
-      if (state.phase !== 'encounter_choice' || !deriveRetreatEligibility(state)) {
+      if (!deriveRetreatEligibility(state)) {
         return error(state, 'retreat_unavailable', 'O recuo não está disponível neste momento.', { aliveHeroes: livingHeroIds(state).length });
       }
-      return ok(replace(state, { phase: 'retreat_confirmation' }));
+      return ok(changeWithHistory(state, { phase: 'retreat_confirmation' }, {
+        type: 'retreat_requested',
+        dungeon: state.dungeonId,
+        position: state.position,
+        fromPhase: state.phase
+      }));
     }
 
     if (action.type === 'CANCEL_RETREAT') {
       if (state.phase !== 'retreat_confirmation') {
         return invalidTransition(state, action);
       }
-      return ok(replace(state, { phase: 'encounter_choice' }));
+      var returnPhase = retreatReturnPhase(state);
+      return ok(changeWithHistory(state, { phase: returnPhase }, {
+        type: 'retreat_cancelled',
+        dungeon: state.dungeonId,
+        position: state.position,
+        returnPhase: returnPhase
+      }));
     }
 
     if (action.type === 'CONFIRM_RETREAT') {
@@ -1032,11 +1095,14 @@
         return invalidTransition(state, action);
       }
       var returnFormation = deriveFormation(state);
-      return ok(replace(state, {
+      return ok(changeWithHistory(state, {
         phase: returnFormation.mode === 'defeat' ? 'defeat' : 'formation',
         partyIds: [],
         draftPartyIds: returnFormation.autoSelected ? returnFormation.selectedHeroIds : [],
         position: 1
+      }, {
+        type: 'automatic_retreat_acknowledged',
+        dungeon: state.dungeonId
       }));
     }
 
@@ -1089,6 +1155,7 @@
       bard: { label: 'Bardo', automatic: true, competencyLabels: [] },
       formation: state.phase === 'formation' ? deriveFormation(state) : null,
       canRetreat: deriveRetreatEligibility(state),
+      retreatReturnPhase: state.phase === 'retreat_confirmation' ? retreatReturnPhase(state) : null,
       encounter: null,
       outcome: null,
       chosenApproachText: null,
@@ -1152,6 +1219,7 @@
     return deepFreeze(view);
   }
 
+  /** Frozen domain engine used by the browser controller and deterministic QA suites. */
   global.ExpeditionEngine = deepFreeze({
     createReadyState: createReadyState,
     dispatch: dispatch,

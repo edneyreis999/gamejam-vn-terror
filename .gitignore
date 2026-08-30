@@ -19,11 +19,14 @@
 # AgentOps session artifacts
 .agents/
 .codex/
+.deep-review/
 /.env
 
 .compozy/tasks
 .compozy/memory
 
-# QA living docs — generated views & bulky evidence (source: docs/qa/scenarios/)
+# QA living docs — generated view (source: docs/qa/scenarios/)
 docs/qa/state.csv
+
+# QA living docs — bulky local evidence
 docs/qa/evidence/
