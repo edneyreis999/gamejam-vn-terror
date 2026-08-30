@@ -462,4 +462,68 @@
       current.cleanup();
     }
   });
+
+  Test.test('E2E-014 — jornada estreita funciona por controles focados com movimento reduzido', function () {
+    var current = fixture(320);
+    current.root.style.zoom = '2';
+    global.expeditionQA.setSeed(20260830);
+    var start = current.root.querySelector('[data-action="begin"]');
+    start.focus();
+    Test.equal(document.activeElement, start);
+    start.click();
+    var intro = current.root.querySelector('[data-action="continue-intro"]');
+    intro.focus();
+    intro.click();
+    var guard = 0;
+    while (current.controller.getState().phase !== 'victory' && guard < 100) {
+      guard += 1;
+      var state = current.controller.getState();
+      var control;
+      if (state.phase === 'formation') {
+        ['H1', 'H2', 'H3'].forEach(function (heroId) {
+          control = current.root.querySelector('[data-id="' + heroId + '"]');
+          control.focus();
+          control.click();
+        });
+        control = current.root.querySelector('[data-action="depart"]');
+      } else if (state.phase === 'dungeon_intro') {
+        control = current.root.querySelector('[data-action="enter-dungeon"]');
+      } else if (state.phase === 'encounter_choice') {
+        var approach = successfulApproach(state);
+        control = current.root.querySelector('[data-id="' + approach.id + '"]');
+      } else if (state.phase === 'approach_result') {
+        control = current.root.querySelector('[data-action="ack-success"]');
+      } else if (state.phase === 'dungeon_complete') {
+        control = current.root.querySelector('[data-action="continue-dungeon"]');
+      } else {
+        throw new Error('Fase inesperada na jornada por teclado: ' + state.phase);
+      }
+      control.focus();
+      Test.equal(document.activeElement, control);
+      control.click();
+    }
+    Test.equal(current.controller.getState().phase, 'victory');
+    Test.equal(current.root.querySelectorAll('audio, video, [autoplay]').length, 0);
+    Test.truthy(global.matchMedia('(prefers-reduced-motion: reduce)').matches || global.matchMedia('(prefers-reduced-motion: no-preference)').matches);
+    current.cleanup();
+  });
+
+  Test.test('E2E-015 — duas sessões com seed QA repetem snapshots e validam invariantes', function () {
+    var records = [];
+    for (var index = 0; index < 2; index += 1) {
+      var current = fixture();
+      Test.deepEqual(global.expeditionQA.setSeed(20260830), { ok: true, seed: 20260830 });
+      completeSafelyByControls(current, 1);
+      records.push({
+        assignments: global.expeditionQA.snapshot().assignments,
+        history: global.expeditionQA.snapshot().actionHistory,
+        validation: global.expeditionQA.validate()
+      });
+      current.cleanup();
+    }
+    Test.deepEqual(records[0].assignments, records[1].assignments);
+    Test.deepEqual(records[0].history, records[1].history);
+    Test.deepEqual(records[0].validation, { ok: true, violations: [] });
+    Test.deepEqual(records[1].validation, { ok: true, violations: [] });
+  });
 })(window);

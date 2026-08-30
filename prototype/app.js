@@ -17,6 +17,40 @@
     ])
   });
   var OPTIONAL_IMAGE_TIMEOUT_MS = 4000;
+  var activeQASession = null;
+
+  function deepFreeze(value) {
+    if (!value || typeof value !== 'object' || Object.isFrozen(value)) {
+      return value;
+    }
+    Object.keys(value).forEach(function (key) {
+      deepFreeze(value[key]);
+    });
+    return Object.freeze(value);
+  }
+
+  function inactiveSnapshot() {
+    return Engine.snapshot(Engine.createReadyState());
+  }
+
+  var expeditionQA = Object.freeze({
+    setSeed: function (seed) {
+      return activeQASession ? activeQASession.setSeed(seed) : deepFreeze({
+        ok: false,
+        error: {
+          code: 'campaign_unavailable',
+          message: 'A campanha ainda não está disponível.'
+        }
+      });
+    },
+    snapshot: function () {
+      return activeQASession ? activeQASession.snapshot() : inactiveSnapshot();
+    },
+    validate: function () {
+      return activeQASession ? activeQASession.validate() : deepFreeze({ ok: true, violations: [] });
+    }
+  });
+  global.expeditionQA = expeditionQA;
 
   function element(tagName, className, text) {
     var node = document.createElement(tagName);
@@ -675,6 +709,85 @@
     var assertiveRegion;
     var dialogCloseInProgress = false;
     var pendingDialogFocus = null;
+    var pendingSeed = null;
+    var invalidLogged = false;
+    var qaSession;
+
+    function qaError(code, message) {
+      return deepFreeze({ ok: false, error: { code: code, message: message } });
+    }
+
+    function setPendingSeed(seed) {
+      if (state.phase !== 'ready') {
+        return qaError('campaign_already_started', 'Defina a semente antes de iniciar a campanha.');
+      }
+      var normalized = Engine.normalizeSeed(seed);
+      if (!normalized.ok) {
+        return qaError('invalid_seed', 'Use um número inteiro entre 0 e 4294967295.');
+      }
+      pendingSeed = normalized.seed;
+      return deepFreeze({ ok: true, seed: pendingSeed });
+    }
+
+    function qaSnapshot() {
+      var current = Engine.snapshot(state);
+      if (state.phase !== 'ready' || pendingSeed === null) {
+        return current;
+      }
+      var copy = {};
+      Object.keys(current).forEach(function (key) {
+        copy[key] = current[key];
+      });
+      copy.seed = pendingSeed;
+      return deepFreeze(copy);
+    }
+
+    function imageAlternativeViolations() {
+      return Array.prototype.reduce.call(stage.querySelectorAll('img[data-optional-image]'), function (violations, image) {
+        if (!image.hasAttribute('alt')) {
+          violations.push(deepFreeze({
+            code: 'missing_image_alternative',
+            message: 'Uma imagem opcional não declara alternativa textual.',
+            context: { path: image.getAttribute('src') || null }
+          }));
+        }
+        return violations;
+      }, []);
+    }
+
+    function logInvalidState() {
+      if (invalidLogged || state.phase !== 'invalid') {
+        return;
+      }
+      invalidLogged = true;
+      state.invariantViolations.forEach(function (violation) {
+        console.error('invariant_violation', violation);
+      });
+    }
+
+    function stopForViolations(violations) {
+      if (violations.length === 0 || state.phase === 'invalid') {
+        return false;
+      }
+      state = Engine.enterInvalid(state, violations);
+      logInvalidState();
+      render({ focusHeading: true, assert: 'Execução interrompida. Recarregue a página.' });
+      return true;
+    }
+
+    function validateCampaign() {
+      var catalog = Engine.validateCatalog(Data);
+      var stateValidation = state.phase === 'invalid'
+        ? { ok: false, violations: state.invariantViolations }
+        : Engine.validateState(state);
+      var fatal = catalog.violations.concat(stateValidation.violations);
+      if (fatal.length > 0) {
+        stopForViolations(fatal);
+        return deepFreeze({ ok: false, violations: state.phase === 'invalid' ? state.invariantViolations : fatal });
+      }
+      var accessibility = imageAlternativeViolations();
+      return deepFreeze({ ok: accessibility.length === 0, violations: accessibility });
+    }
 
     function buildRoot() {
       root.textContent = '';
@@ -851,9 +964,27 @@
       }
       dispatching = true;
       try {
-        var result = Engine.dispatch(state, action);
+        var stateValidation = Engine.validateState(state);
+        if (!stateValidation.ok) {
+          stopForViolations(stateValidation.violations);
+          return deepFreeze({ ok: true, state: state });
+        }
+        var submittedAction = action;
+        if (action.type === 'BEGIN' && state.phase === 'ready') {
+          submittedAction = {
+            type: 'BEGIN',
+            seed: pendingSeed !== null
+              ? pendingSeed
+              : (action.seed === undefined ? Date.now() >>> 0 : action.seed)
+          };
+        }
+        var result = Engine.dispatch(state, submittedAction);
         if (result.ok) {
           state = result.state;
+          if (submittedAction.type === 'BEGIN' && state.phase !== 'ready') {
+            pendingSeed = null;
+          }
+          logInvalidState();
           ui.error = null;
           ui.rosterOpen = false;
           var renderOptions = {
@@ -907,7 +1038,7 @@
       }
       var action = trigger.dataset.action;
       if (action === 'begin') {
-        submit({ type: 'BEGIN', seed: Date.now() >>> 0 }, { focusHeading: true, announce: 'Campanha iniciada.' });
+        submit({ type: 'BEGIN' }, { focusHeading: true, announce: 'Campanha iniciada.' });
       } else if (action === 'continue-intro') {
         submit({ type: 'CONTINUE_INTRO' }, { focusHeading: true, announce: 'Formação disponível.' });
       } else if (action === 'toggle-hero') {
@@ -1020,8 +1151,16 @@
     var catalogValidation = Engine.validateCatalog(Data);
     if (!catalogValidation.ok) {
       state = Engine.enterInvalid(state, catalogValidation.violations);
+      logInvalidState();
     }
     render();
+
+    qaSession = Object.freeze({
+      setSeed: setPendingSeed,
+      snapshot: qaSnapshot,
+      validate: validateCampaign
+    });
+    activeQASession = qaSession;
 
     return Object.freeze({
       dispatch: function (action) {
@@ -1035,6 +1174,9 @@
           return;
         }
         destroyed = true;
+        if (activeQASession === qaSession) {
+          activeQASession = null;
+        }
         root.removeEventListener('click', onClick);
         root.removeEventListener('cancel', onCancel, true);
         root.removeEventListener('error', onOptionalImageError, true);

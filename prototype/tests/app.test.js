@@ -195,8 +195,7 @@
     }
   }
 
-  function completeWithoutDeaths(controller, seed) {
-    beginToFormation(controller, seed === undefined ? 29 : seed);
+  function finishWithoutDeaths(controller) {
     var guard = 0;
     while (controller.getState().phase !== 'victory' && guard < 100) {
       guard += 1;
@@ -215,6 +214,11 @@
       }
     }
     Test.equal(controller.getState().phase, 'victory');
+  }
+
+  function completeWithoutDeaths(controller, seed) {
+    beginToFormation(controller, seed === undefined ? 29 : seed);
+    finishWithoutDeaths(controller);
   }
 
   function prepareSoloPartyWithReserve(controller) {
@@ -1899,5 +1903,229 @@
     dimensions.forEach(function (value) { Test.deepEqual(value, [1600, 900]); });
     var report = Engine.validateCatalog().report;
     Data.competencyOrder.forEach(function (competencyId) { Test.equal(report.approachCompetencyOccurrences[competencyId], 6); });
+  });
+
+  Test.test('IT-131 — ativação obsoleta por teclado não repete a transição', function () {
+    var current = fixture();
+    var begin = current.root.querySelector('[data-action="begin"]');
+    begin.click();
+    begin.click();
+    Test.equal(current.controller.getState().phase, 'intro');
+    Test.equal(current.controller.getState().actionHistory.filter(function (entry) { return entry.type === 'campaign_started'; }).length, 1);
+    current.cleanup();
+  });
+
+  Test.test('IT-132 — imagem sem alt mantém texto funcional e gera diagnóstico', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 131);
+    var image = current.root.querySelector('img[data-optional-image]');
+    image.removeAttribute('alt');
+    var validation = global.expeditionQA.validate();
+    Test.includes(validation.violations.map(function (item) { return item.code; }), 'missing_image_alternative');
+    Test.truthy(current.root.querySelector('#encounter-title').textContent.length > 0);
+    Test.equal(current.root.querySelectorAll('[data-action="choose-approach"]').length, 3);
+    Test.equal(current.controller.getState().phase, 'encounter_choice');
+    current.cleanup();
+  });
+
+  Test.test('IT-133 — formação estreita empilha controles em ordem de leitura', function () {
+    var current = fixture(320);
+    beginToFormation(current.controller, 133);
+    var title = current.root.querySelector('#formation-title');
+    var firstControl = current.root.querySelector('.hero-card');
+    Test.truthy(Boolean(title.compareDocumentPosition(firstControl) & Node.DOCUMENT_POSITION_FOLLOWING));
+    Test.equal(global.getComputedStyle(current.root.querySelector('.hero-grid')).gridTemplateColumns.split(' ').length, 1);
+    Test.truthy(current.root.scrollWidth <= 320);
+    current.cleanup();
+  });
+
+  Test.test('IT-134 — bloqueio de autoplay não remove informação porque áudio inexiste', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 134);
+    Test.equal(current.root.querySelectorAll('audio, video').length, 0);
+    Test.truthy(current.root.querySelector('.scene-copy .prose').textContent.length > 0);
+    Test.equal(current.root.querySelectorAll('[data-action="choose-approach"]').length, 3);
+    current.cleanup();
+  });
+
+  Test.test('IT-135 — ativação rápida de uma escolha continua single-shot', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 135);
+    var button = current.root.querySelector('[data-action="choose-approach"]');
+    button.click();
+    button.click();
+    Test.equal(current.controller.getState().actionHistory.filter(function (entry) { return entry.type === 'approach_resolved'; }).length, 1);
+    current.cleanup();
+  });
+
+  Test.test('IT-136 — fechar o elenco devolve foco ao controle disparador', async function () {
+    var current = fixture(320);
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 136);
+    var trigger = current.root.querySelector('[data-action="open-roster"]');
+    trigger.focus();
+    trigger.click();
+    Test.equal(document.activeElement.dataset.action, 'close-roster');
+    current.root.querySelector('[data-action="close-roster"]').click();
+    await new Promise(function (resolve) { global.setTimeout(resolve, 75); });
+    Test.equal(document.activeElement, trigger);
+    current.cleanup();
+  });
+
+  Test.test('IT-137 — encontros repetem heading antes de abordagens e elenco', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 137);
+    for (var index = 0; index < 2; index += 1) {
+      var actions = Array.prototype.map.call(current.root.querySelectorAll('.encounter-decision [data-action]'), function (button) { return button.dataset.action; });
+      Test.deepEqual(actions.slice(0, 3), ['choose-approach', 'choose-approach', 'choose-approach']);
+      resolveSuccess(current.controller);
+      current.controller.dispatch({ type: 'ENTER_DUNGEON' });
+    }
+    current.cleanup();
+  });
+
+  Test.test('IT-138 — heading explicativo precede controles no DOM e no painel', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 138);
+    var heading = current.root.querySelector('#approach-title');
+    var control = current.root.querySelector('[data-action="choose-approach"]');
+    Test.truthy(Boolean(heading.compareDocumentPosition(control) & Node.DOCUMENT_POSITION_FOLLOWING));
+    current.cleanup();
+  });
+
+  Test.test('IT-139 — foco deixa controle comprometido e alcança o resultado', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 139);
+    var control = current.root.querySelector('[data-action="choose-approach"]');
+    control.focus();
+    control.click();
+    Test.falsy(control.isConnected);
+    Test.equal(document.activeElement.id, 'result-title');
+    current.cleanup();
+  });
+
+  Test.test('IT-140 — oito epílogos permanecem alcançáveis sem armadilha de foco', function () {
+    var current = fixture(320);
+    completeWithoutDeaths(current.controller, 140);
+    Test.equal(current.root.querySelectorAll('.epilogue-item').length, 8);
+    var restart = current.root.querySelector('[data-action="new-campaign"]');
+    restart.focus();
+    Test.equal(document.activeElement, restart);
+    Test.truthy(current.root.scrollWidth <= 320);
+    current.cleanup();
+  });
+
+  Test.test('IT-141 — seed malformada falha sem criar sessão parcial', function () {
+    var current = fixture();
+    global.expeditionQA.setSeed(77);
+    Test.equal(global.expeditionQA.setSeed('77').error.code, 'invalid_seed');
+    Test.equal(global.expeditionQA.snapshot().phase, 'ready');
+    Test.equal(global.expeditionQA.snapshot().seed, 77);
+    current.cleanup();
+  });
+
+  Test.test('IT-142 — ausência de seed QA cria semente inspecionável', function () {
+    var current = fixture();
+    current.root.querySelector('[data-action="begin"]').click();
+    var seed = global.expeditionQA.snapshot().seed;
+    Test.truthy(Number.isInteger(seed));
+    Test.truthy(seed >= 0 && seed <= 4294967295);
+    current.cleanup();
+  });
+
+  Test.test('IT-143 — seeds mínima e máxima iniciam; limites externos falham', function () {
+    [-1, 4294967296].forEach(function (seed) {
+      var invalid = fixture();
+      Test.equal(global.expeditionQA.setSeed(seed).error.code, 'invalid_seed');
+      invalid.cleanup();
+    });
+    [0, 4294967295].forEach(function (seed) {
+      var valid = fixture();
+      Test.truthy(global.expeditionQA.setSeed(seed).ok);
+      valid.root.querySelector('[data-action="begin"]').click();
+      Test.equal(global.expeditionQA.snapshot().seed, seed);
+      valid.cleanup();
+    });
+  });
+
+  Test.test('IT-144 — fluxo normal não revela QA, seed, pools ou mapeamentos', function () {
+    var current = fixture();
+    current.root.querySelector('[data-action="begin"]').click();
+    current.root.querySelector('[data-action="continue-intro"]').click();
+    Test.falsy(/expeditionQA|semente|seed|pool|viabilidade/i.test(current.root.textContent));
+    Test.equal(current.root.querySelectorAll('[data-qa], [data-seed]').length, 0);
+    current.cleanup();
+  });
+
+  Test.test('IT-145 — snapshots ao redor de consequência nunca misturam estados', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 145);
+    var before = global.expeditionQA.snapshot();
+    current.root.querySelector('[data-action="choose-approach"]').click();
+    var after = global.expeditionQA.snapshot();
+    Test.equal(before.phase, 'encounter_choice');
+    Test.equal(after.phase, 'approach_result');
+    Test.equal(after.actionHistory.length, before.actionHistory.length + 1);
+    Test.truthy(Object.isFrozen(after.actionHistory));
+    current.cleanup();
+  });
+
+  Test.test('IT-146 — nova montagem não conserva a seed QA anterior', function () {
+    var current = fixture();
+    global.expeditionQA.setSeed(146);
+    current.cleanup();
+    var reopened = fixture();
+    Test.equal(global.expeditionQA.snapshot().seed, null);
+    Test.equal(global.expeditionQA.snapshot().phase, 'ready');
+    reopened.cleanup();
+  });
+
+  Test.test('IT-147 — seed e ações iguais reproduzem atribuições em sessões frescas', function () {
+    var snapshots = [];
+    for (var index = 0; index < 2; index += 1) {
+      var current = fixture();
+      global.expeditionQA.setSeed(20260830);
+      reachEncounter(current.controller, ['H1', 'H2', 'H3'], 1);
+      snapshots.push(global.expeditionQA.snapshot());
+      current.cleanup();
+    }
+    Test.deepEqual(snapshots[0].assignments, snapshots[1].assignments);
+    Test.deepEqual(snapshots[0].actionHistory, snapshots[1].actionHistory);
+  });
+
+  Test.test('IT-148 — seed tardia é rejeitada sem reseed silencioso', function () {
+    var current = fixture();
+    global.expeditionQA.setSeed(148);
+    current.root.querySelector('[data-action="begin"]').click();
+    Test.equal(global.expeditionQA.setSeed(149).error.code, 'campaign_already_started');
+    Test.equal(global.expeditionQA.snapshot().seed, 148);
+    current.cleanup();
+  });
+
+  Test.test('IT-149 — nova campanha limpa diagnósticos e aceita uma nova seed', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 149);
+    current.root.querySelector('[data-action="new-campaign"]').click();
+    Test.deepEqual(global.expeditionQA.snapshot().invariantViolations, []);
+    Test.equal(global.expeditionQA.snapshot().assignments.physical.filter(Boolean).length, 0);
+    global.expeditionQA.setSeed(150);
+    current.root.querySelector('[data-action="begin"]').click();
+    Test.equal(global.expeditionQA.snapshot().seed, 150);
+    current.cleanup();
+  });
+
+  Test.test('IT-150 — histórico integral distingue revelações, recuo, abordagens e terminal', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 150);
+    current.controller.dispatch({ type: 'REQUEST_RETREAT' });
+    current.controller.dispatch({ type: 'CONFIRM_RETREAT' });
+    selectHeroes(current.controller, ['H1', 'H2', 'H3']);
+    current.controller.dispatch({ type: 'DEPART' });
+    finishWithoutDeaths(current.controller);
+    var history = global.expeditionQA.snapshot().actionHistory;
+    Test.equal(history.filter(function (entry) { return entry.type === 'encounter_revealed'; }).length, 16);
+    Test.equal(history.filter(function (entry) { return entry.type === 'approach_resolved'; }).length, 16);
+    Test.equal(history.filter(function (entry) { return entry.type === 'party_retreated'; }).length, 1);
+    Test.equal(history.filter(function (entry) { return entry.type === 'campaign_won'; }).length, 1);
+    current.cleanup();
   });
 })(window);

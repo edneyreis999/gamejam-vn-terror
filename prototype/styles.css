@@ -66,7 +66,7 @@
 }
 
 html {
-  min-width: 20rem;
+  min-width: 10rem;
   min-height: 100%;
   background: var(--surface-page);
 }
@@ -1112,6 +1112,67 @@ button.hero-card:hover {
   .confirmation-actions .button {
     width: 100%;
     text-align: center;
+  }
+}
+
+@container (max-width: 20rem) {
+  .game-header,
+  .main-region,
+  .introduction-panel,
+  .formation-panel,
+  .scene-copy,
+  .decision-panel,
+  .encounter-decision,
+  .result-panel,
+  .sacrifice-panel,
+  .automatic-retreat-panel,
+  .invalid-panel,
+  .transition-panel,
+  .outcome-panel {
+    padding: var(--space-3);
+  }
+
+  .brand,
+  .status-line,
+  .paper-panel,
+  .formation-summary,
+  .formation-footer,
+  .hero-card {
+    min-width: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  strong,
+  span,
+  small,
+  .button {
+    overflow-wrap: anywhere;
+  }
+
+  h1,
+  #formation-title,
+  .result-heading,
+  .decision-heading,
+  .transition-title,
+  .outcome-title {
+    font-size: 1.5rem;
+    line-height: 1.08;
+  }
+
+  .brand strong {
+    font-size: 0.85rem;
+  }
+
+  .hero-card {
+    min-height: 0;
+    padding: var(--space-3);
+  }
+
+  .button {
+    padding-inline: var(--space-3);
   }
 }
 

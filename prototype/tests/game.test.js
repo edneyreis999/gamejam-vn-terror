@@ -223,6 +223,22 @@
     return result.violations.map(function (violation) { return violation.code; });
   }
 
+  function qaFixture() {
+    var root = document.createElement('div');
+    root.style.position = 'fixed';
+    root.style.insetInlineStart = '-10000px';
+    document.body.appendChild(root);
+    var controller = global.ExpeditionApp.createController(root);
+    return {
+      root: root,
+      controller: controller,
+      cleanup: function () {
+        controller.destroy();
+        root.remove();
+      }
+    };
+  }
+
   T.test('UT-013 — geradores Mulberry32 com a mesma semente repetem vinte passos', function () {
     var left = Engine.createMulberry32(20260830);
     var right = Engine.createMulberry32(20260830);
@@ -641,5 +657,72 @@
     var rejected = Engine.dispatch(started, { type: 'BEGIN', seed: 8 });
     T.equal(rejected.state.sequence, started.sequence);
     T.deepEqual(rejected.state.actionHistory, started.actionHistory);
+  });
+
+  T.test('UT-061 — setSeed aceita 20260830 com a forma pública exata', function () {
+    var current = qaFixture();
+    T.deepEqual(global.expeditionQA.setSeed(20260830), { ok: true, seed: 20260830 });
+    T.equal(global.expeditionQA.snapshot().seed, 20260830);
+    current.cleanup();
+  });
+
+  T.test('UT-062 — semente inválida preserva a semente pendente anterior', function () {
+    var current = qaFixture();
+    global.expeditionQA.setSeed(17);
+    T.deepEqual(global.expeditionQA.setSeed(-1), {
+      ok: false,
+      error: { code: 'invalid_seed', message: 'Use um número inteiro entre 0 e 4294967295.' }
+    });
+    T.equal(global.expeditionQA.snapshot().seed, 17);
+    current.cleanup();
+  });
+
+  T.test('UT-063 — setSeed após BEGIN não altera a campanha', function () {
+    var current = qaFixture();
+    global.expeditionQA.setSeed(23);
+    current.root.querySelector('[data-action="begin"]').click();
+    T.deepEqual(global.expeditionQA.setSeed(42), {
+      ok: false,
+      error: { code: 'campaign_already_started', message: 'Defina a semente antes de iniciar a campanha.' }
+    });
+    T.equal(global.expeditionQA.snapshot().seed, 23);
+    current.cleanup();
+  });
+
+  T.test('UT-064 — validate agrega catálogo e estado sem transição ou sorteio', function () {
+    var current = qaFixture();
+    var before = JSON.stringify(global.expeditionQA.snapshot());
+    T.deepEqual(global.expeditionQA.validate(), { ok: true, violations: [] });
+    T.equal(JSON.stringify(global.expeditionQA.snapshot()), before);
+    current.cleanup();
+  });
+
+  T.test('UT-065 — objeto global congelado expõe somente três observadores permitidos', function () {
+    var current = qaFixture();
+    T.truthy(Object.isFrozen(global.expeditionQA));
+    T.deepEqual(Object.keys(global.expeditionQA).sort(), ['setSeed', 'snapshot', 'validate']);
+    ['dispatch', 'reset', 'assign', 'kill', 'revive'].forEach(function (name) {
+      T.equal(global.expeditionQA[name], undefined, name);
+    });
+    current.cleanup();
+  });
+
+  T.test('UT-066 — BEGIN usa Date.now por padrão e a semente pendente tem precedência', function () {
+    var originalNow = Date.now;
+    Date.now = function () { return 123456789; };
+    try {
+      var defaultCampaign = qaFixture();
+      defaultCampaign.root.querySelector('[data-action="begin"]').click();
+      T.equal(global.expeditionQA.snapshot().seed, 123456789);
+      defaultCampaign.cleanup();
+      var seededCampaign = qaFixture();
+      global.expeditionQA.setSeed(20260830);
+      seededCampaign.root.querySelector('[data-action="begin"]').click();
+      T.equal(global.expeditionQA.snapshot().seed, 20260830);
+      T.deepEqual(global.expeditionQA.setSeed(9).error.code, 'campaign_already_started');
+      seededCampaign.cleanup();
+    } finally {
+      Date.now = originalNow;
+    }
   });
 })(window);
