@@ -1075,6 +1075,8 @@
       canRetreat: deriveRetreatEligibility(state),
       encounter: null,
       outcome: null,
+      chosenApproachText: null,
+      death: null,
       eligibleVictims: [],
       pendingVictim: state.pendingVictimId ? heroPlayerRecord(state.pendingVictimId, state) : null,
       ending: null,
@@ -1094,6 +1096,10 @@
     }
 
     if (state.pendingOutcome && ['approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result'].indexOf(state.phase) >= 0) {
+      var resolvedApproach = activeEncounter && activeEncounter.approaches.filter(function (currentApproach) {
+        return currentApproach.id === state.pendingOutcome.approachId;
+      })[0];
+      var resolvedVictim = state.pendingOutcome.victimId ? Data.heroes[state.pendingOutcome.victimId] : null;
       view.outcome = {
         success: state.pendingOutcome.success,
         competencyLabel: Data.competencies[state.pendingOutcome.competencyId].label,
@@ -1101,8 +1107,16 @@
         explanation: state.pendingOutcome.resultText,
         victimId: state.pendingOutcome.victimId
       };
+      view.chosenApproachText = resolvedApproach ? resolvedApproach.text : '';
+      if (state.phase === 'death_result' && resolvedVictim) {
+        view.death = {
+          heroId: resolvedVictim.id,
+          heroLabel: resolvedVictim.label,
+          farewell: resolvedVictim.farewell
+        };
+      }
     }
-    if (state.phase === 'sacrifice_choice') {
+    if (state.phase === 'sacrifice_choice' || state.phase === 'sacrifice_confirmation') {
       view.eligibleVictims = state.partyIds.map(function (heroId) { return heroPlayerRecord(heroId, state); });
     }
     if (state.phase === 'victory') {

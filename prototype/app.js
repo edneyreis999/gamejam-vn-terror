@@ -304,6 +304,235 @@
     return dialog;
   }
 
+  function renderEncounterScene(view, label, title, description, titleId, pageLevel) {
+    var scene = element('section', 'scene encounter-scene');
+    scene.setAttribute('aria-labelledby', titleId);
+    scene.dataset.imageRegion = '';
+    if (view.encounter && view.encounter.imagePath) {
+      var image = element('img', 'encounter-image');
+      image.src = view.encounter.imagePath;
+      image.alt = '';
+      image.dataset.optionalImage = '';
+      append(scene, image);
+    }
+    var copy = element('div', 'scene-copy');
+    var heading = pageLevel
+      ? pageHeading(title, titleId, 'scene-title')
+      : element('h2', 'scene-title', title);
+    if (!pageLevel) {
+      heading.id = titleId;
+    }
+    append(copy, element('p', 'eyebrow', label), heading, element('p', 'prose', description));
+    if (view.position && view.positionTotal) {
+      append(copy, renderProgress(view));
+    }
+    append(scene, copy);
+    return scene;
+  }
+
+  function renderCampaignFrame(view, main, confirmation) {
+    var frame = element('div', 'artboard');
+    append(frame, renderHeader(view, view.dungeon.label));
+    var grid = element('div', 'game-grid');
+    append(grid, main, renderRoster(view, false));
+    append(frame, grid, renderRosterDialog(view));
+    if (confirmation) {
+      append(frame, confirmation);
+    }
+    return frame;
+  }
+
+  function renderRosterAccess() {
+    return actionButton('Consultar elenco', 'roster-toggle', 'open-roster');
+  }
+
+  function renderEncounterChoice(view) {
+    var main = element('main', 'main-region encounter-region');
+    main.id = 'main';
+    append(main, renderEncounterScene(view, 'Encontro revelado', view.encounter.title, view.encounter.description, 'encounter-title', true));
+    var decision = element('section', 'paper-panel encounter-decision');
+    decision.setAttribute('aria-labelledby', 'approach-title');
+    var approachTitle = element('h2', '', 'Como o grupo vai atravessar?');
+    approachTitle.id = 'approach-title';
+    var actions = element('div', 'approach-stack');
+    view.encounter.approaches.forEach(function (approach) {
+      append(actions, actionButton(approach.text, 'approach-action', 'choose-approach', approach.id));
+    });
+    if (view.canRetreat || view.phase === 'retreat_confirmation') {
+      append(actions, actionButton('Recuar para a cidade', 'ghost', 'request-retreat'));
+    }
+    append(decision,
+      element('p', 'eyebrow ink-eyebrow', 'Escolha uma abordagem'),
+      approachTitle,
+      actions,
+      element('p', 'helper', 'A escolha de uma abordagem impede o recuo até a consequência terminar.'),
+      renderRosterAccess()
+    );
+    append(main, decision);
+    var confirmation = view.phase === 'retreat_confirmation' ? renderRetreatConfirmation() : null;
+    return renderCampaignFrame(view, main, confirmation);
+  }
+
+  function renderApproachResult(view) {
+    var main = element('main', 'main-region encounter-region');
+    main.id = 'main';
+    append(main, renderEncounterScene(view, 'Abordagem escolhida', view.chosenApproachText, view.encounter.description, 'chosen-approach-title', false));
+    var decision = element('section', 'paper-panel result-panel');
+    var failure = !view.outcome.success;
+    var banner = element('div', 'result-banner' + (failure ? ' failure' : ' success'));
+    var resultTitle = pageHeading(failure ? 'Falha letal' : 'Sucesso', 'result-title', 'result-heading');
+    append(banner,
+      element('p', 'result-label', failure ? 'Consequência obrigatória' : 'Abordagem superada'),
+      resultTitle,
+      element('h2', 'competency-result', 'Competência exigida: ' + view.outcome.competencyLabel),
+      element('p', '', 'O grupo ' + (view.outcome.partyHasCompetency ? 'possui ' : 'não possui ') + view.outcome.competencyLabel + '.'),
+      element('p', 'result-explanation', view.outcome.explanation)
+    );
+    if (failure) {
+      append(banner, element('p', 'lethal-warning', 'O fracasso é letal. Alguém precisa ficar para trás.'));
+    }
+    var actions = element('div', 'result-actions');
+    append(actions,
+      actionButton(failure ? 'Escolher o sacrifício' : 'Prosseguir', failure ? 'danger' : 'primary', failure ? 'open-sacrifice' : 'ack-success'),
+      renderRosterAccess()
+    );
+    append(decision, banner, actions);
+    append(main, decision);
+    return renderCampaignFrame(view, main);
+  }
+
+  function renderVictimCard(hero, selected) {
+    var card = setAction(element('button', 'hero-card victim-card' + (selected ? ' selected' : '')), 'select-victim', hero.id);
+    card.type = 'button';
+    card.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    append(card, element('strong', '', hero.label));
+    hero.competencyLabels.forEach(function (label) {
+      append(card, element('span', '', label));
+    });
+    append(card, element('small', '', selected ? 'Selecionado' : 'Sacrificar ' + hero.label));
+    return card;
+  }
+
+  function renderSacrificeChoice(view) {
+    var main = element('main', 'main-region encounter-region');
+    main.id = 'main';
+    append(main, renderEncounterScene(
+      view,
+      'A saída está fechando',
+      'Alguém precisa ficar para trás.',
+      view.outcome.explanation,
+      'sacrifice-context-title',
+      false
+    ));
+    var decision = element('section', 'paper-panel sacrifice-panel');
+    decision.setAttribute('aria-labelledby', 'sacrifice-title');
+    var title = pageHeading('Escolha o sacrifício', 'sacrifice-title', 'decision-heading');
+    var victims = element('div', 'hero-grid victim-grid');
+    victims.setAttribute('role', 'group');
+    victims.setAttribute('aria-label', 'Heróis presentes que podem ser sacrificados');
+    view.eligibleVictims.forEach(function (hero) {
+      append(victims, renderVictimCard(hero, Boolean(view.pendingVictim && view.pendingVictim.id === hero.id)));
+    });
+    append(decision,
+      element('p', 'eyebrow ink-eyebrow', 'Consequência permanente'),
+      title,
+      element('p', 'irreversible-copy', 'Esta morte será permanente nesta campanha. O bardo e os heróis na cidade não podem ser escolhidos.'),
+      victims,
+      renderRosterAccess()
+    );
+    append(main, decision);
+    var confirmation = view.phase === 'sacrifice_confirmation' ? renderSacrificeConfirmation(view) : null;
+    return renderCampaignFrame(view, main, confirmation);
+  }
+
+  function confirmationActions(cancelLabel, cancelAction, confirmLabel, confirmAction, id) {
+    var actions = element('div', 'confirmation-actions');
+    append(actions,
+      actionButton(cancelLabel, '', cancelAction, id),
+      actionButton(confirmLabel, 'danger', confirmAction)
+    );
+    return actions;
+  }
+
+  function renderSacrificeConfirmation(view) {
+    var dialog = element('dialog', 'confirmation-dialog sacrifice-confirmation');
+    dialog.id = 'required-dialog';
+    dialog.dataset.requiredDialog = 'sacrifice';
+    dialog.setAttribute('aria-labelledby', 'confirm-sacrifice-title');
+    var victim = view.pendingVictim;
+    var consequence = element('p', 'confirmation-copy');
+    append(consequence,
+      element('strong', '', victim.label + ' morrerá'),
+      document.createTextNode(' e suas competências, ' + victim.competencyLabels.join(' e ') + ', serão perdidas.')
+    );
+    append(dialog,
+      element('p', 'eyebrow ink-eyebrow', 'Morte permanente'),
+      element('h2', '', 'Confirmar sacrifício?'),
+      consequence,
+      confirmationActions('Voltar à escolha', 'cancel-sacrifice', 'Confirmar sacrifício', 'confirm-sacrifice', victim.id)
+    );
+    dialog.querySelector('h2').id = 'confirm-sacrifice-title';
+    return dialog;
+  }
+
+  function renderRetreatConfirmation() {
+    var dialog = element('dialog', 'confirmation-dialog retreat-confirmation');
+    dialog.id = 'required-dialog';
+    dialog.dataset.requiredDialog = 'retreat';
+    dialog.setAttribute('aria-labelledby', 'confirm-retreat-title');
+    append(dialog,
+      element('p', 'eyebrow ink-eyebrow', 'Confirmar recuo'),
+      element('h2', '', 'Recuar para a cidade?'),
+      element('p', 'confirmation-copy', 'A próxima tentativa voltará ao primeiro encontro. Mortes e encontros revelados permanecerão.'),
+      confirmationActions('Continuar expedição', 'cancel-retreat', 'Recuar', 'confirm-retreat')
+    );
+    dialog.querySelector('h2').id = 'confirm-retreat-title';
+    return dialog;
+  }
+
+  function renderDeathResult(view) {
+    var main = element('main', 'main-region encounter-region');
+    main.id = 'main';
+    append(main, renderEncounterScene(view, 'A consequência foi cumprida', view.encounter.title, view.outcome.explanation, 'death-context-title', false));
+    var decision = element('section', 'paper-panel result-panel death-panel');
+    var title = pageHeading(view.death.heroLabel + ' ficou para trás.', 'death-title', 'result-heading');
+    var farewell = element('blockquote', 'farewell', view.death.farewell);
+    append(decision,
+      provisionalLabel(),
+      element('p', 'result-label failure-label', 'Morte permanente'),
+      title,
+      farewell,
+      element('p', 'result-explanation', view.outcome.explanation),
+      element('p', 'coverage-update', 'O elenco e as competências disponíveis foram recalculados.'),
+      actionButton('Prosseguir', 'primary', 'ack-death'),
+      renderRosterAccess()
+    );
+    append(main, decision);
+    return renderCampaignFrame(view, main);
+  }
+
+  function renderAutomaticRetreat(view) {
+    var main = element('main', 'main-region encounter-region');
+    main.id = 'main';
+    append(main, renderEncounterScene(
+      view,
+      'Expedição encerrada',
+      'O bardo retorna sozinho.',
+      'O último herói da expedição morreu. Ainda há sobreviventes na cidade.',
+      'automatic-retreat-title',
+      true
+    ));
+    var decision = element('section', 'paper-panel automatic-retreat-panel');
+    append(decision,
+      element('h2', '', 'Recuo automático'),
+      element('p', '', 'O bardo retorna sozinho para reunir os sobreviventes. Mortes e encontros revelados permanecem.'),
+      actionButton('Voltar à cidade', 'primary', 'ack-auto-retreat'),
+      renderRosterAccess()
+    );
+    append(main, decision);
+    return renderCampaignFrame(view, main);
+  }
+
   function renderReachedPosition(view) {
     var frame = element('div', 'artboard');
     append(frame, renderHeader(view, view.dungeon.label));
@@ -346,6 +575,9 @@
     var restoreFocus = null;
     var stage;
     var liveRegion;
+    var assertiveRegion;
+    var dialogCloseInProgress = false;
+    var pendingDialogFocus = null;
 
     function buildRoot() {
       root.textContent = '';
@@ -355,8 +587,11 @@
       liveRegion.setAttribute('role', 'status');
       liveRegion.setAttribute('aria-live', 'polite');
       liveRegion.setAttribute('aria-atomic', 'true');
+      assertiveRegion = element('div', 'sr-only');
+      assertiveRegion.setAttribute('aria-live', 'assertive');
+      assertiveRegion.setAttribute('aria-atomic', 'true');
       stage = element('div', 'app-stage');
-      append(root, skip, liveRegion, stage);
+      append(root, skip, liveRegion, assertiveRegion, stage);
     }
 
     function surfaceFor(view) {
@@ -371,6 +606,21 @@
       }
       if (view.phase === 'dungeon_intro') {
         return renderDungeonThreshold(view);
+      }
+      if (view.phase === 'encounter_choice' || view.phase === 'retreat_confirmation') {
+        return renderEncounterChoice(view);
+      }
+      if (view.phase === 'approach_result') {
+        return renderApproachResult(view);
+      }
+      if (view.phase === 'sacrifice_choice' || view.phase === 'sacrifice_confirmation') {
+        return renderSacrificeChoice(view);
+      }
+      if (view.phase === 'death_result') {
+        return renderDeathResult(view);
+      }
+      if (view.phase === 'automatic_retreat') {
+        return renderAutomaticRetreat(view);
       }
       if (view.phase === 'invalid') {
         return renderInvalid(view);
@@ -397,18 +647,60 @@
       }
     }
 
+    function openRequiredDialog() {
+      var dialog = stage.querySelector('[data-required-dialog]');
+      if (!dialog || dialog.open) {
+        return;
+      }
+      try {
+        dialog.showModal();
+      } catch (error) {
+        dialog.setAttribute('open', '');
+        dialog.setAttribute('role', 'dialog');
+        dialog.setAttribute('aria-modal', 'true');
+        console.warn('required_dialog_failed', error && error.message ? error.message : String(error));
+      }
+      var cancel = dialog.querySelector('[data-action^="cancel-"]');
+      if (cancel) {
+        cancel.focus();
+      }
+    }
+
+    function focusAfterDialogLifecycle(target) {
+      if (!target) {
+        return;
+      }
+      target.focus();
+      if (dialogCloseInProgress) {
+        pendingDialogFocus = target;
+      }
+    }
+
     function render(options) {
       if (destroyed) {
         return;
       }
       var view = Engine.derivePlayerView(state);
       var surface = surfaceFor(view);
+      var closingDialogs = stage.querySelectorAll('dialog[open]');
+      dialogCloseInProgress = closingDialogs.length > 0;
+      Array.prototype.forEach.call(closingDialogs, function (dialog) {
+        dialog.addEventListener('close', function () {
+          dialogCloseInProgress = false;
+          if (pendingDialogFocus && pendingDialogFocus.isConnected) {
+            pendingDialogFocus.focus();
+          }
+          pendingDialogFocus = null;
+        }, { once: true });
+        dialog.close();
+      });
       stage.textContent = '';
       append(stage, surface);
       document.title = (view.phase === 'ready' ? '' : view.phase === 'formation' ? 'Formação · ' : view.phase === 'dungeon_intro' ? view.dungeon.label + ' · ' : '') + 'Expedição e Sacrifício';
       if (ui.rosterOpen) {
         openRosterDialog();
       }
+      openRequiredDialog();
       if (options && options.announce) {
         liveRegion.textContent = '';
         global.requestAnimationFrame(function () {
@@ -417,15 +709,28 @@
           }
         });
       }
+      if (options && options.assert) {
+        assertiveRegion.textContent = '';
+        global.requestAnimationFrame(function () {
+          if (!destroyed) {
+            assertiveRegion.textContent = options.assert;
+          }
+        });
+      }
       if (options && options.focusError) {
         var error = stage.querySelector('[data-error-focus]');
         if (error) {
-          error.focus();
+          focusAfterDialogLifecycle(error);
         }
-      } else if (options && options.focusHeading) {
+      } else if (options && options.focusSelector) {
+        var focusTarget = stage.querySelector(options.focusSelector);
+        if (focusTarget) {
+          focusAfterDialogLifecycle(focusTarget);
+        }
+      } else if (options && options.focusHeading && !stage.querySelector('[data-required-dialog]')) {
         var heading = stage.querySelector('[data-surface-heading]');
         if (heading) {
-          heading.focus();
+          focusAfterDialogLifecycle(heading);
         }
       }
     }
@@ -443,7 +748,21 @@
         if (result.ok) {
           state = result.state;
           ui.error = null;
-          render({ focusHeading: Boolean(options && options.focusHeading), announce: options && options.announce });
+          ui.rosterOpen = false;
+          var renderOptions = {
+            focusHeading: Boolean(options && options.focusHeading),
+            focusSelector: options && options.focusSelector,
+            announce: options && options.announce,
+            assert: options && options.assert
+          };
+          if (options && options.announceOutcome && state.pendingOutcome) {
+            if (state.pendingOutcome.success) {
+              renderOptions.announce = 'Sucesso. A consequência aguarda confirmação.';
+            } else {
+              renderOptions.assert = 'Falha letal. Escolha um sacrifício para continuar.';
+            }
+          }
+          render(renderOptions);
         } else {
           ui.error = result.error.message;
           render({ focusError: true, announce: result.error.message });
@@ -457,11 +776,18 @@
     function closeRoster() {
       var dialog = stage.querySelector('#roster-dialog');
       ui.rosterOpen = false;
-      if (dialog && dialog.open) {
-        dialog.close();
-      }
       var target = restoreFocus;
       restoreFocus = null;
+      if (dialog && dialog.open) {
+        if (target) {
+          dialog.addEventListener('close', function () {
+            if (!destroyed && target.isConnected) {
+              target.focus();
+            }
+          }, { once: true });
+        }
+        dialog.close();
+      }
       if (target && target.isConnected) {
         target.focus();
       }
@@ -483,6 +809,28 @@
         submit({ type: 'DEPART' }, { focusHeading: true, announce: 'Expedição formada.' });
       } else if (action === 'enter-dungeon') {
         submit({ type: 'ENTER_DUNGEON' }, { focusHeading: true, announce: 'Posição alcançada.' });
+      } else if (action === 'choose-approach') {
+        submit({ type: 'CHOOSE_APPROACH', approachId: trigger.dataset.id }, { focusHeading: true, announceOutcome: true });
+      } else if (action === 'ack-success') {
+        submit({ type: 'ACK_SUCCESS' }, { focusHeading: true, announce: 'Posição concluída.' });
+      } else if (action === 'open-sacrifice') {
+        submit({ type: 'OPEN_SACRIFICE' }, { focusHeading: true, assert: 'Escolha obrigatória. Selecione um herói presente para o sacrifício.' });
+      } else if (action === 'select-victim') {
+        submit({ type: 'SELECT_VICTIM', heroId: trigger.dataset.id }, { assert: 'Confirmação de morte permanente.' });
+      } else if (action === 'cancel-sacrifice') {
+        submit({ type: 'CANCEL_SACRIFICE' }, { focusSelector: '[data-action="select-victim"][data-id="' + trigger.dataset.id + '"]', announce: 'Confirmação cancelada.' });
+      } else if (action === 'confirm-sacrifice') {
+        submit({ type: 'CONFIRM_SACRIFICE' }, { focusHeading: true, assert: 'Sacrifício confirmado. O elenco foi recalculado.' });
+      } else if (action === 'ack-death') {
+        submit({ type: 'ACK_DEATH' }, { focusHeading: true, announce: 'Consequência concluída.' });
+      } else if (action === 'request-retreat') {
+        submit({ type: 'REQUEST_RETREAT' }, { assert: 'Confirme o recuo para a cidade.' });
+      } else if (action === 'cancel-retreat') {
+        submit({ type: 'CANCEL_RETREAT' }, { focusSelector: '[data-action="request-retreat"]', announce: 'Recuo cancelado.' });
+      } else if (action === 'confirm-retreat') {
+        submit({ type: 'CONFIRM_RETREAT' }, { focusHeading: true, announce: 'A expedição voltou à cidade.' });
+      } else if (action === 'ack-auto-retreat') {
+        submit({ type: 'ACK_AUTO_RETREAT' }, { focusHeading: true, announce: 'Sobreviventes disponíveis para a próxima expedição.' });
       } else if (action === 'open-roster') {
         restoreFocus = trigger;
         ui.rosterOpen = true;
@@ -498,6 +846,14 @@
       if (event.target.id === 'roster-dialog') {
         event.preventDefault();
         closeRoster();
+      } else if (event.target.id === 'required-dialog') {
+        event.preventDefault();
+        if (state.phase === 'sacrifice_confirmation') {
+          var victimId = state.pendingVictimId;
+          submit({ type: 'CANCEL_SACRIFICE' }, { focusSelector: '[data-action="select-victim"][data-id="' + victimId + '"]', announce: 'Confirmação cancelada.' });
+        } else if (state.phase === 'retreat_confirmation') {
+          submit({ type: 'CANCEL_RETREAT' }, { focusSelector: '[data-action="request-retreat"]', announce: 'Recuo cancelado.' });
+        }
       }
     }
 
@@ -516,7 +872,7 @@
 
     buildRoot();
     root.addEventListener('click', onClick);
-    root.addEventListener('cancel', onCancel);
+    root.addEventListener('cancel', onCancel, true);
     root.addEventListener('error', onOptionalImageError, true);
 
     var catalogValidation = Engine.validateCatalog(Data);
@@ -538,11 +894,15 @@
         }
         destroyed = true;
         root.removeEventListener('click', onClick);
-        root.removeEventListener('cancel', onCancel);
+        root.removeEventListener('cancel', onCancel, true);
         root.removeEventListener('error', onOptionalImageError, true);
         var dialog = root.querySelector('#roster-dialog');
         if (dialog && dialog.open) {
           dialog.close();
+        }
+        var requiredDialog = root.querySelector('#required-dialog');
+        if (requiredDialog && requiredDialog.open) {
+          requiredDialog.close();
         }
         root.textContent = '';
       }

@@ -2,21 +2,145 @@
   'use strict';
 
   var Test = global.ExpeditionTest;
+  var Data = global.ExpeditionData;
+  var Engine = global.ExpeditionEngine;
 
-  function fixture() {
+  function fixture(width) {
     var root = document.createElement('div');
     root.style.position = 'fixed';
     root.style.insetInlineStart = '-10000px';
-    root.style.width = '1000px';
+    root.style.width = (width || 1000) + 'px';
     document.body.appendChild(root);
     var controller = global.ExpeditionApp.createController(root);
     return {
       root: root,
+      controller: controller,
       cleanup: function () {
         controller.destroy();
         root.remove();
       }
     };
+  }
+
+  function startEncounter(current, heroIds, seed) {
+    current.root.querySelector('[data-action="begin"]').click();
+    current.root.querySelector('[data-action="continue-intro"]').click();
+    (heroIds || ['H1', 'H2', 'H3']).forEach(function (heroId) {
+      current.root.querySelector('[data-id="' + heroId + '"]').click();
+    });
+    current.root.querySelector('[data-action="depart"]').click();
+    current.root.querySelector('[data-action="enter-dungeon"]').click();
+    if (seed !== undefined) {
+      throw new Error('A jornada de interface usa a semente de início fornecida pelo controlador.');
+    }
+  }
+
+  function encounterFor(state) {
+    return Data.encounters[state.assignments[state.dungeonId][state.position - 1]];
+  }
+
+  function uncoveredApproach(state) {
+    var covered = [];
+    state.partyIds.forEach(function (heroId) {
+      Data.heroes[heroId].competencyIds.forEach(function (competencyId) {
+        if (covered.indexOf(competencyId) < 0) {
+          covered.push(competencyId);
+        }
+      });
+    });
+    return encounterFor(state).approaches.filter(function (approach) {
+      return covered.indexOf(approach.competencyId) < 0;
+    })[0];
+  }
+
+  function successfulApproach(state) {
+    var covered = [];
+    state.partyIds.forEach(function (heroId) {
+      Data.heroes[heroId].competencyIds.forEach(function (competencyId) {
+        if (covered.indexOf(competencyId) < 0) {
+          covered.push(competencyId);
+        }
+      });
+    });
+    return encounterFor(state).approaches.filter(function (approach) {
+      return covered.indexOf(approach.competencyId) >= 0;
+    })[0];
+  }
+
+  function stateForFirstEncounter(seed, heroIds) {
+    var state = Engine.createReadyState();
+    state = Engine.dispatch(state, { type: 'BEGIN', seed: seed }).state;
+    state = Engine.dispatch(state, { type: 'CONTINUE_INTRO' }).state;
+    heroIds.forEach(function (heroId) { state = Engine.dispatch(state, { type: 'TOGGLE_HERO', heroId: heroId }).state; });
+    state = Engine.dispatch(state, { type: 'DEPART' }).state;
+    return Engine.dispatch(state, { type: 'ENTER_DUNGEON' }).state;
+  }
+
+  function scenarioForViability(target) {
+    var combinations = [];
+    for (var first = 0; first < Data.heroOrder.length - 2; first += 1) {
+      for (var second = first + 1; second < Data.heroOrder.length - 1; second += 1) {
+        for (var third = second + 1; third < Data.heroOrder.length; third += 1) {
+          combinations.push([Data.heroOrder[first], Data.heroOrder[second], Data.heroOrder[third]]);
+        }
+      }
+    }
+    for (var seed = 1; seed < 100; seed += 1) {
+      for (var index = 0; index < combinations.length; index += 1) {
+        var state = stateForFirstEncounter(seed, combinations[index]);
+        if (Engine.deriveViability(state.partyIds, encounterFor(state)).count === target) {
+          return { seed: seed, heroIds: combinations[index] };
+        }
+      }
+    }
+    throw new Error('Nenhuma fixture de viabilidade ' + target + '/3 foi encontrada.');
+  }
+
+  function mountSeededEncounter(current, scenario) {
+    Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: scenario.seed }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_INTRO' }).ok);
+    scenario.heroIds.forEach(function (heroId) {
+      current.root.querySelector('[data-id="' + heroId + '"]').click();
+    });
+    current.root.querySelector('[data-action="depart"]').click();
+    current.root.querySelector('[data-action="enter-dungeon"]').click();
+  }
+
+  function driveDeaths(current, target) {
+    var guard = 0;
+    while (current.controller.getState().deadHeroIds.length < target && guard < 240) {
+      guard += 1;
+      var state = current.controller.getState();
+      if (state.phase === 'ready') {
+        current.controller.dispatch({ type: 'BEGIN', seed: 17 });
+      } else if (state.phase === 'intro') {
+        current.controller.dispatch({ type: 'CONTINUE_INTRO' });
+      } else if (state.phase === 'formation') {
+        var living = Data.heroOrder.filter(function (heroId) { return state.deadHeroIds.indexOf(heroId) < 0; });
+        if (living.length >= 3) {
+          living.slice(0, 3).forEach(function (heroId) { current.controller.dispatch({ type: 'TOGGLE_HERO', heroId: heroId }); });
+        }
+        current.controller.dispatch({ type: 'DEPART' });
+      } else if (state.phase === 'dungeon_intro') {
+        current.controller.dispatch({ type: 'ENTER_DUNGEON' });
+      } else if (state.phase === 'encounter_choice') {
+        var approach = uncoveredApproach(state) || encounterFor(state).approaches[0];
+        current.controller.dispatch({ type: 'CHOOSE_APPROACH', approachId: approach.id });
+        if (state.partyIds.some(function (heroId) { return Data.heroes[heroId].competencyIds.indexOf(approach.competencyId) >= 0; })) {
+          current.controller.dispatch({ type: 'ACK_SUCCESS' });
+        } else {
+          current.controller.dispatch({ type: 'OPEN_SACRIFICE' });
+          current.controller.dispatch({ type: 'SELECT_VICTIM', heroId: state.partyIds[0] });
+          current.controller.dispatch({ type: 'CONFIRM_SACRIFICE' });
+          current.controller.dispatch({ type: 'ACK_DEATH' });
+        }
+      } else if (state.phase === 'automatic_retreat') {
+        current.controller.dispatch({ type: 'ACK_AUTO_RETREAT' });
+      } else if (state.phase === 'dungeon_complete') {
+        current.controller.dispatch({ type: 'CONTINUE_DUNGEON' });
+      }
+    }
+    Test.equal(current.controller.getState().deadHeroIds.length, target);
   }
 
   Test.test('E2E-001 — entrada file local inicia sessão jogável em português', function () {
@@ -55,6 +179,113 @@
     });
     Test.includes(roster.textContent, 'Bardo');
     Test.includes(roster.textContent, 'nenhuma competência');
+    current.cleanup();
+  });
+
+  Test.test('E2E-004 — consultar elenco interrompe e devolve o encontro intacto', async function () {
+    var current = fixture(320);
+    startEncounter(current);
+    var title = current.root.querySelector('#encounter-title').textContent;
+    var approaches = Array.prototype.map.call(current.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; });
+    var trigger = current.root.querySelector('[data-action="open-roster"]');
+    trigger.focus();
+    trigger.click();
+    ['Na expedição', 'Na cidade', 'Mortos'].forEach(function (label) { Test.includes(current.root.querySelector('#roster-dialog').textContent, label); });
+    current.root.querySelector('[data-action="close-roster"]').click();
+    await new Promise(function (resolve) { global.setTimeout(resolve, 75); });
+    Test.equal(document.activeElement, trigger);
+    Test.equal(current.root.querySelector('#encounter-title').textContent, title);
+    Test.deepEqual(Array.prototype.map.call(current.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; }), approaches);
+    current.cleanup();
+  });
+
+  Test.test('E2E-005 — recuar e reformar revisita a atribuição fixa sem antecipar outra', function () {
+    var current = fixture();
+    startEncounter(current);
+    var state = current.controller.getState();
+    var first = encounterFor(state).id;
+    Test.falsy(state.assignments.physical[1]);
+    current.root.querySelector('[data-action="request-retreat"]').click();
+    Test.truthy(current.root.querySelector('#required-dialog').open);
+    current.root.querySelector('[data-action="confirm-retreat"]').click();
+    ['H1', 'H2', 'H3'].forEach(function (heroId) { current.root.querySelector('[data-id="' + heroId + '"]').click(); });
+    current.root.querySelector('[data-action="depart"]').click();
+    current.root.querySelector('[data-action="enter-dungeon"]').click();
+    Test.equal(encounterFor(current.controller.getState()).id, first);
+    Test.falsy(current.controller.getState().assignments.physical[1]);
+    current.cleanup();
+  });
+
+  Test.test('E2E-006 — viabilidades zero a três ficam ocultas e explicadas após escolha', function () {
+    for (var target = 0; target <= 3; target += 1) {
+      var current = fixture();
+      var scenario = scenarioForViability(target);
+      mountSeededEncounter(current, scenario);
+      Test.equal(Engine.deriveViability(current.controller.getState().partyIds, encounterFor(current.controller.getState())).count, target);
+      Test.equal(current.root.querySelectorAll('[data-action="choose-approach"]').length, 3);
+      Test.falsy(current.root.querySelector('.encounter-decision').textContent.indexOf('Competência exigida') >= 0);
+      var approach = encounterFor(current.controller.getState()).approaches[0];
+      current.root.querySelector('[data-id="' + approach.id + '"]').click();
+      Test.includes(current.root.querySelector('.result-panel').textContent, 'Competência exigida: ' + Data.competencies[approach.competencyId].label);
+      Test.includes(current.root.querySelector('.result-panel').textContent, current.controller.getState().pendingOutcome.resultText);
+      current.cleanup();
+    }
+  });
+
+  Test.test('E2E-007 — sacrifício confirmado mostra despedida e remove o herói', async function () {
+    var current = fixture();
+    mountSeededEncounter(current, { seed: 23, heroIds: ['H4', 'H7', 'H8'] });
+    var failure = uncoveredApproach(current.controller.getState());
+    current.root.querySelector('[data-id="' + failure.id + '"]').click();
+    current.root.querySelector('[data-action="open-sacrifice"]').click();
+    var victim = current.controller.getState().partyIds[0];
+    current.root.querySelector('[data-action="select-victim"][data-id="' + victim + '"]').click();
+    Test.equal(document.activeElement.dataset.action, 'cancel-sacrifice');
+    current.root.querySelector('#required-dialog').dispatchEvent(new Event('cancel', { cancelable: true }));
+    await new Promise(function (resolve) { global.setTimeout(resolve, 75); });
+    Test.equal(current.controller.getState().phase, 'sacrifice_choice');
+    Test.equal(document.activeElement.dataset.id, victim);
+    current.root.querySelector('[data-action="select-victim"][data-id="' + victim + '"]').click();
+    current.root.querySelector('[data-action="confirm-sacrifice"]').click();
+    Test.includes(current.root.querySelector('.farewell').textContent, victim);
+    Test.includes(current.root.querySelector('.result-explanation').textContent, encounterFor(current.controller.getState()).failureText);
+    Test.includes(current.root.querySelector('.roster-region').textContent, victim + ' — Morto');
+    current.root.querySelector('[data-action="ack-death"]').click();
+    Test.falsy(current.controller.getState().partyIds.indexOf(victim) >= 0);
+    current.cleanup();
+  });
+
+  Test.test('E2E-008 — recuo posterior volta à formação com mortes e posições preservadas', function () {
+    var current = fixture();
+    mountSeededEncounter(current, { seed: 23, heroIds: ['H4', 'H7', 'H8'] });
+    var failure = uncoveredApproach(current.controller.getState());
+    current.root.querySelector('[data-id="' + failure.id + '"]').click();
+    current.root.querySelector('[data-action="open-sacrifice"]').click();
+    var victim = current.controller.getState().partyIds[0];
+    current.root.querySelector('[data-action="select-victim"][data-id="' + victim + '"]').click();
+    current.root.querySelector('[data-action="confirm-sacrifice"]').click();
+    current.root.querySelector('[data-action="ack-death"]').click();
+    current.root.querySelector('[data-action="enter-dungeon"]').click();
+    var revealed = current.controller.getState().assignments.physical.slice();
+    current.root.querySelector('[data-action="request-retreat"]').click();
+    current.root.querySelector('[data-action="confirm-retreat"]').click();
+    Test.equal(current.controller.getState().phase, 'formation');
+    Test.equal(current.controller.getState().position, 1);
+    Test.includes(current.controller.getState().deadHeroIds, victim);
+    Test.deepEqual(current.controller.getState().assignments.physical, revealed);
+    current.cleanup();
+  });
+
+  Test.test('E2E-009 — última morte da expedição exige reconhecer recuo automático', function () {
+    var current = fixture();
+    driveDeaths(current, 3);
+    Test.equal(current.controller.getState().phase, 'automatic_retreat');
+    Test.includes(current.root.textContent, 'O bardo retorna sozinho.');
+    Test.truthy(current.root.querySelector('[data-action="ack-auto-retreat"]'));
+    var survivors = Data.heroOrder.filter(function (heroId) { return current.controller.getState().deadHeroIds.indexOf(heroId) < 0; });
+    current.root.querySelector('[data-action="ack-auto-retreat"]').click();
+    Test.equal(current.controller.getState().phase, 'formation');
+    survivors.forEach(function (heroId) { Test.includes(current.root.textContent, heroId); });
     current.cleanup();
   });
 })(window);
