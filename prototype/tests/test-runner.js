@@ -1,0 +1,122 @@
+(function (global) {
+  'use strict';
+
+  var cases = [];
+
+  function format(value) {
+    if (typeof value === 'string') {
+      return JSON.stringify(value);
+    }
+    try {
+      return JSON.stringify(value, null, 2);
+    } catch (error) {
+      return String(value);
+    }
+  }
+
+  function fail(message) {
+    throw new Error(message);
+  }
+
+  function equal(actual, expected, message) {
+    if (!Object.is(actual, expected)) {
+      fail((message || 'Os valores deveriam ser iguais.') + '\nEsperado: ' + format(expected) + '\nRecebido: ' + format(actual));
+    }
+  }
+
+  function deepEqual(actual, expected, message) {
+    var actualText = JSON.stringify(actual);
+    var expectedText = JSON.stringify(expected);
+    if (actualText !== expectedText) {
+      fail((message || 'As estruturas deveriam ser iguais.') + '\nEsperado: ' + format(expected) + '\nRecebido: ' + format(actual));
+    }
+  }
+
+  function truthy(value, message) {
+    if (!value) {
+      fail((message || 'O valor deveria ser verdadeiro.') + '\nRecebido: ' + format(value));
+    }
+  }
+
+  function falsy(value, message) {
+    if (value) {
+      fail((message || 'O valor deveria ser falso.') + '\nRecebido: ' + format(value));
+    }
+  }
+
+  function includes(collection, expected, message) {
+    if (!collection || collection.indexOf(expected) < 0) {
+      fail((message || 'A coleção deveria conter o valor.') + '\nValor: ' + format(expected) + '\nColeção: ' + format(collection));
+    }
+  }
+
+  function throws(callback, expectedMessage, message) {
+    var caught = null;
+    try {
+      callback();
+    } catch (error) {
+      caught = error;
+    }
+    if (!caught) {
+      fail(message || 'A função deveria lançar um erro.');
+    }
+    if (expectedMessage && String(caught.message).indexOf(expectedMessage) < 0) {
+      fail((message || 'O erro não contém a mensagem esperada.') + '\nEsperado: ' + expectedMessage + '\nRecebido: ' + caught.message);
+    }
+  }
+
+  function test(name, callback) {
+    cases.push({ name: name, callback: callback });
+  }
+
+  async function run() {
+    var results = [];
+    for (var index = 0; index < cases.length; index += 1) {
+      var current = cases[index];
+      try {
+        await current.callback();
+        results.push({ name: current.name, status: 'pass' });
+        console.log('PASS ' + current.name);
+      } catch (error) {
+        results.push({ name: current.name, status: 'fail', error: error && error.stack ? error.stack : String(error) });
+        console.error('FAIL ' + current.name, error);
+      }
+    }
+
+    var passed = results.filter(function (result) { return result.status === 'pass'; }).length;
+    var failed = results.length - passed;
+    var report = Object.freeze({ total: results.length, passed: passed, failed: failed, results: results });
+    global.__expeditionTestResults = report;
+
+    var summary = document.getElementById('summary');
+    summary.textContent = passed + ' aprovados, ' + failed + ' falharam, ' + results.length + ' no total.';
+    summary.dataset.status = failed === 0 ? 'pass' : 'fail';
+
+    var list = document.getElementById('results');
+    results.forEach(function (result) {
+      var item = document.createElement('li');
+      item.className = result.status;
+      item.textContent = (result.status === 'pass' ? 'PASS — ' : 'FAIL — ') + result.name;
+      if (result.error) {
+        var detail = document.createElement('pre');
+        detail.textContent = result.error;
+        item.appendChild(detail);
+      }
+      list.appendChild(item);
+    });
+
+    document.title = (failed === 0 ? 'PASS' : 'FAIL') + ' — ' + passed + '/' + results.length + ' testes';
+  }
+
+  global.ExpeditionTest = Object.freeze({
+    test: test,
+    equal: equal,
+    deepEqual: deepEqual,
+    truthy: truthy,
+    falsy: falsy,
+    includes: includes,
+    throws: throws
+  });
+
+  global.addEventListener('DOMContentLoaded', run, { once: true });
+})(window);

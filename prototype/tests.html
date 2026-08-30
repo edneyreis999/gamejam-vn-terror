@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testes — Expedição e Sacrifício</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #171713; color: #eee8d8; }
+    body { max-width: 72rem; margin: 0 auto; padding: 2rem; }
+    h1 { font-family: Georgia, serif; }
+    #summary { padding: 1rem; border: 1px solid #82754e; background: #24231e; }
+    #summary[data-status="pass"] { border-color: #718568; }
+    #summary[data-status="fail"] { border-color: #9a4f49; }
+    ol { padding-left: 1.5rem; }
+    li { margin: 0.45rem 0; }
+    .pass { color: #a9c49d; }
+    .fail { color: #f0a39d; }
+    pre { overflow: auto; white-space: pre-wrap; background: #0f0f0d; padding: 0.75rem; }
+  </style>
+  <script defer src="data.js"></script>
+  <script defer src="game.js"></script>
+  <script defer src="tests/test-runner.js"></script>
+  <script defer src="tests/data.test.js"></script>
+  <script defer src="tests/game.test.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Testes unitários do protótipo</h1>
+    <p id="summary" role="status">Aguardando execução…</p>
+    <ol id="results" aria-label="Resultados dos testes"></ol>
+  </main>
+</body>
+</html>
