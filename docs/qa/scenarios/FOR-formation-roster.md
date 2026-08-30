@@ -6,13 +6,13 @@ persona: Joana, jogadora ampliada
 journey: J-complete-campaign
 expected: Competências, limites de formação, reservas, mortos e bardo permanecem compreensíveis e operáveis por teclado
 entry_points: file:///…/prototype/index.html
-qa_status: untested
+qa_status: pass
 bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence:
-last_report:
+evidence: docs/qa/evidence/2026-08-30-browser-prototype/keyboard-opening-focus.png; docs/qa/evidence/2026-08-30-browser-prototype/zoom-200-effective-formation.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-05-roster-recalculado.png
+last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: ACC-accessibility-diagnostics
 ---
 

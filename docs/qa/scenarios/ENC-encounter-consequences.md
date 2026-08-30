@@ -6,13 +6,13 @@ persona: Lia, primeira expedicionária
 journey: J-complete-campaign
 expected: Abordagens não rotuladas produzem explicação posterior, morte permanente ou recuo sem transições duplicadas
 entry_points: file:///…/prototype/index.html
-qa_status: untested
+qa_status: pass
 bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence:
-last_report:
+evidence: docs/qa/evidence/2026-08-30-browser-prototype/retreat-revisited-same-encounter.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-03-falha-explicada.png; docs/qa/evidence/2026-08-30-browser-prototype/devlog-04-confirmacao-h4.png
+last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: FOR-formation-roster; ART-encounter-art-content
 ---
 

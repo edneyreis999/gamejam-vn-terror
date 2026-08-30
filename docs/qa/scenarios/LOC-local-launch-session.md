@@ -6,13 +6,13 @@ persona: Lia, primeira expedicionária
 journey: J-local-offline-launch
 expected: A abertura, a formação e uma nova sessão funcionam por file URL sem rede ou promessa de retomada
 entry_points: file:///…/prototype/index.html
-qa_status: untested
+qa_status: pass
 bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence:
-last_report:
+evidence: docs/qa/evidence/2026-08-30-browser-prototype/all-images-blocked-fallback.png; docs/qa/evidence/2026-08-30-browser-prototype/exit-gate-231-pass-offline.png
+last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: ART-encounter-art-content
 ---
 

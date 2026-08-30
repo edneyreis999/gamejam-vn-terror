@@ -6,13 +6,13 @@ persona: Joana, jogadora ampliada
 journey: J-reproduce-campaign
 expected: Teclado, foco, zoom, movimento reduzido e a API QA de três métodos preservam uma campanha reproduzível e sem backdoors
 entry_points: file:///…/prototype/index.html; Chrome DevTools
-qa_status: untested
+qa_status: pass
 bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence:
-last_report:
+evidence: docs/qa/evidence/2026-08-30-browser-prototype/zoom-200-effective-encounter.png; docs/qa/evidence/2026-08-30-browser-prototype/zoom-200-effective-victory.png; docs/qa/evidence/2026-08-30-browser-prototype/exit-gate-231-pass-offline.png; .compozy/tasks/browser-prototype/evidence/visual/task_06/vc-601/implementation.png
+last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: FOR-formation-roster; CAM-dungeon-progression-outcomes
 ---
 
