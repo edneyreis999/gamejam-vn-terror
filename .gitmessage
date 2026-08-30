@@ -1,0 +1,26 @@
+<tipo>(<escopo opcional>): <resultado perceptível em até 72 caracteres>
+
+Experiência do jogador:
+- Antes: <como esse momento funcionava ou o que estava faltando>
+- Agora: <o que o jogador pode fazer, ver, ouvir, decidir ou sentir>
+- Por que importa: <impacto na tensão, clareza, ritmo, estratégia ou história>
+
+Validação:
+- [ ] <cenário jogado ou verificação executada; marque como não verificado quando necessário>
+
+Bastidores:
+- <decisão técnica ou de design que vale preservar; evite apenas listar arquivos>
+
+Material para devlog:
+- Momento demonstrável: <cena, escolha, personagem, armadilha ou fluxo>
+- Captura sugerida: <imagem ou clipe que evidencia a mudança>
+
+Limitações:
+- <risco, pendência ou "Nenhuma conhecida">
+
+# Tipos sugeridos: feat, fix, balance, narrative, ui, audio, refactor, test, docs, chore.
+# Escreva primeiro sobre o jogo; nomes de arquivos e detalhes técnicos ficam em Bastidores.
+# Use fatos observáveis. Não diga apenas "melhora", "ajusta" ou "implementa" sem explicar o efeito.
+# Se não houver impacto direto no jogo, declare isso e explique qual trabalho futuro foi viabilizado.
+# Remova campos que realmente não se aplicam, mas preserve Experiência do jogador e Validação.
+# Linhas iniciadas por # não farão parte da mensagem final.
