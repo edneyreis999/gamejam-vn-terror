@@ -1222,6 +1222,38 @@
   }
 
   /**
+   * @typedef {Object} GameAction
+   * @property {string} type
+   * @property {number=} seed
+   * @property {string=} heroId
+   * @property {string=} approachId
+   */
+  /**
+   * @typedef {Object} CampaignState
+   * @property {number} version
+   * @property {string} phase
+   * @property {(number|null)} seed
+   * @property {(number|null)} rngState
+   * @property {(string|null)} dungeonId
+   * @property {(number|null)} position
+   * @property {readonly string[]} draftPartyIds
+   * @property {readonly string[]} partyIds
+   * @property {readonly string[]} deadHeroIds
+   * @property {Readonly<{physical: readonly (string|null)[], supernatural: readonly (string|null)[], final: readonly (string|null)[]}>} assignments
+   * @property {(Object|null)} pendingOutcome
+   * @property {(string|null)} pendingVictimId
+   * @property {number} sequence
+   * @property {readonly Object[]} actionHistory
+   * @property {readonly Object[]} invariantViolations
+   */
+  /**
+   * @typedef {Object} EngineResult
+   * @property {boolean} ok
+   * @property {CampaignState=} state
+   * @property {readonly Object[]=} effects
+   * @property {{code: string, message: string, context: Object}=} error
+   */
+  /**
    * @typedef {Object} ExpeditionController
    * @property {(action: GameAction) => EngineResult} dispatch
    * @property {() => (CampaignState|null)} getState

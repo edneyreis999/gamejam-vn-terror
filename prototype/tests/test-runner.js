@@ -85,21 +85,27 @@
     registry[id] = true;
   }
 
+  function createRegistration(registry, targetCases) {
+    return function (name, callback) {
+      registerCaseId(registry, name);
+      targetCases.push({ name: name, callback: callback });
+    };
+  }
+
   function duplicateGuardIsSound() {
     var isolatedRegistry = Object.create(null);
-    registerCaseId(isolatedRegistry, 'E2E-001 — caso original');
+    var isolatedCases = [];
+    var isolatedTest = createRegistration(isolatedRegistry, isolatedCases);
+    isolatedTest('E2E-001 — caso original', function () {});
     try {
-      registerCaseId(isolatedRegistry, 'E2E-001 — caso duplicado');
+      isolatedTest('E2E-001 — caso duplicado', function () {});
     } catch (error) {
-      return error.message === 'ID de teste duplicado: E2E-001.';
+      return error.message === 'ID de teste duplicado: E2E-001.' && isolatedCases.length === 1;
     }
     return false;
   }
 
-  function test(name, callback) {
-    registerCaseId(registeredIds, name);
-    cases.push({ name: name, callback: callback });
-  }
+  var test = createRegistration(registeredIds, cases);
 
   async function run() {
     var results = [];

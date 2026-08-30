@@ -670,15 +670,31 @@
 
   function hasOutcomeShape(state) {
     var outcome = state.pendingOutcome;
-    var encounter = outcome && Data.encounters[outcome.encounterId];
-    var approach = encounter && encounter.approaches.filter(function (currentApproach) {
-      return currentApproach.id === outcome.approachId;
-    })[0];
-    return Boolean(outcome && encounter && approach && outcome.encounterId === currentEncounterId(state) &&
-      outcome.competencyId === approach.competencyId && Array.isArray(outcome.holderHeroIds) &&
-      outcome.holderHeroIds.every(function (heroId) { return Data.heroOrder.indexOf(heroId) >= 0; }) &&
-      typeof outcome.success === 'boolean' && typeof outcome.resultText === 'string' && outcome.resultText.length > 0 &&
-      (outcome.victimId === null || Data.heroOrder.indexOf(outcome.victimId) >= 0));
+    var encounterId = outcome && outcome.encounterId;
+    var encounter = typeof encounterId === 'string' && Object.prototype.hasOwnProperty.call(Data.encounters, encounterId)
+      ? Data.encounters[encounterId]
+      : null;
+    var approach = null;
+    if (encounter && Array.isArray(encounter.approaches)) {
+      for (var index = 0; index < encounter.approaches.length; index += 1) {
+        if (encounter.approaches[index].id === outcome.approachId) {
+          approach = encounter.approaches[index];
+          break;
+        }
+      }
+    }
+    if (!outcome || !encounter || !approach || outcome.encounterId !== currentEncounterId(state) || outcome.competencyId !== approach.competencyId) {
+      return false;
+    }
+    var expectedHolders = state.partyIds.filter(function (heroId) {
+      var hero = Object.prototype.hasOwnProperty.call(Data.heroes, heroId) ? Data.heroes[heroId] : null;
+      return hero && state.deadHeroIds.indexOf(heroId) < 0 && hero.competencyIds.indexOf(approach.competencyId) >= 0;
+    });
+    var holdersValid = Array.isArray(outcome.holderHeroIds) && sameMembers(outcome.holderHeroIds, expectedHolders);
+    var successValid = typeof outcome.success === 'boolean' && outcome.success === (expectedHolders.length > 0);
+    var resultTextValid = outcome.resultText === (outcome.success ? approach.successText : encounter.failureText);
+    var victimValid = outcome.victimId === null || Data.heroOrder.indexOf(outcome.victimId) >= 0;
+    return holdersValid && successValid && resultTextValid && victimValid;
   }
 
   function validateState(state) {
@@ -766,22 +782,24 @@
     }
 
     var activePositionLimit = expectedLengths[state.dungeonId];
-    if (state.phase !== 'ready' && state.phase !== 'intro' && state.phase !== 'invalid' && activePositionLimit &&
+    if (state.phase !== 'ready' && state.phase !== 'intro' && state.phase !== 'invalid' && state.phase !== 'dungeon_complete' && activePositionLimit &&
         (!Number.isInteger(state.position) || state.position < 1 || state.position > activePositionLimit)) {
       violations.push(makeViolation('invalid_dungeon_position', 'A posição ativa deve estar dentro da masmorra atual.', { dungeon: state.dungeonId, position: state.position, maximum: activePositionLimit }));
     }
 
     var outcomePhases = ['approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result'];
-    if (outcomePhases.indexOf(state.phase) >= 0 && !state.pendingOutcome) {
+    var isOutcomePhase = outcomePhases.indexOf(state.phase) >= 0;
+    var isSacrificePhase = ['sacrifice_choice', 'sacrifice_confirmation', 'death_result'].indexOf(state.phase) >= 0;
+    if (isOutcomePhase && !state.pendingOutcome) {
       violations.push(makeViolation('missing_phase_payload', 'A fase de consequência não possui resultado pendente.', { phase: state.phase }));
-    } else if (outcomePhases.indexOf(state.phase) >= 0 && !hasOutcomeShape(state)) {
+    } else if (isOutcomePhase && !hasOutcomeShape(state)) {
       violations.push(makeViolation('invalid_outcome_payload', 'O resultado pendente não corresponde ao encontro e à abordagem atuais.', { phase: state.phase }));
-    } else if (['sacrifice_choice', 'sacrifice_confirmation', 'death_result'].indexOf(state.phase) >= 0 && state.pendingOutcome.success !== false) {
+    } else if (isSacrificePhase && state.pendingOutcome.success !== false) {
       violations.push(makeViolation('invalid_outcome_payload', 'A consequência de sacrifício exige uma abordagem malsucedida.', { phase: state.phase }));
     } else if (state.phase === 'death_result' && (!state.pendingOutcome.victimId || state.deadHeroIds.indexOf(state.pendingOutcome.victimId) < 0)) {
       violations.push(makeViolation('invalid_outcome_payload', 'O resultado de morte exige uma vítima registrada entre os mortos.', { victimId: state.pendingOutcome.victimId }));
     }
-    if (outcomePhases.indexOf(state.phase) < 0 && state.pendingOutcome && state.phase !== 'invalid') {
+    if (!isOutcomePhase && state.pendingOutcome && state.phase !== 'invalid') {
       violations.push(makeViolation('unexpected_phase_payload', 'O estado possui um resultado pendente fora da fase de consequência.', { phase: state.phase }));
     }
     if (state.phase === 'sacrifice_confirmation' && !state.pendingVictimId) {
