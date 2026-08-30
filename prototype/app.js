@@ -533,6 +533,102 @@
     return renderCampaignFrame(view, main);
   }
 
+  function renderMapHalf(label, found) {
+    var half = element('div', 'map-half' + (found ? ' found' : ''));
+    half.setAttribute('role', 'listitem');
+    append(half, element('strong', '', label), element('span', '', found ? 'Recuperada' : 'Ainda desconhecida'));
+    return half;
+  }
+
+  function renderDungeonTransition(view) {
+    var firstHalf = view.dungeon.number === 1;
+    var frame = element('div', 'artboard');
+    append(frame, renderHeader(view, 'Masmorra concluída'));
+    var main = element('main', 'main-region transition-wrap dungeon-transition');
+    main.id = 'main';
+    main.setAttribute('aria-labelledby', 'transition-title');
+    var panel = element('section', 'paper-panel transition-panel');
+    var title = firstHalf ? 'Primeira metade do mapa recuperada.' : 'Segunda metade do mapa recuperada.';
+    var detail = firstHalf
+      ? 'A mata fecha a passagem atrás do grupo. A parte encontrada aponta para outro lugar, onde as vozes conhecem nomes que ninguém pronunciou.'
+      : 'As duas metades revelam o caminho final. A natureza do tesouro e o horror familiar permanecem pendentes no GDD.';
+    var halves = element('div', 'map-halves');
+    halves.setAttribute('role', 'list');
+    halves.setAttribute('aria-label', 'Partes do mapa');
+    append(halves,
+      renderMapHalf('Primeira metade', true),
+      renderMapHalf('Segunda metade', !firstHalf)
+    );
+    append(panel,
+      provisionalLabel(),
+      element('p', 'eyebrow ink-eyebrow', firstHalf ? 'O caminho se amplia' : 'O último caminho aparece'),
+      pageHeading(title, 'transition-title', 'transition-title'),
+      element('p', 'transition-copy', detail),
+      halves,
+      actionButton('Preparar a próxima expedição', 'primary', 'continue-dungeon')
+    );
+    append(main, panel);
+    append(frame, main);
+    return frame;
+  }
+
+  function renderOutcomeHeader(view, label) {
+    var header = element('header', 'game-header');
+    var brand = element('div', 'brand');
+    append(brand, element('span', 'eyebrow', label), element('strong', '', COPY.title));
+    var status = element('div', 'status-line');
+    append(status, statusFact(view.phase === 'victory' ? '16 encontros atravessados' : 'Derrota total'));
+    append(header, brand, status);
+    return header;
+  }
+
+  function renderVictory(view) {
+    var frame = element('div', 'artboard outcome-artboard');
+    append(frame, renderOutcomeHeader(view, 'Campanha concluída'));
+    var main = element('main', 'main-region outcome-wrap');
+    main.id = 'main';
+    main.setAttribute('aria-labelledby', 'victory-title');
+    var panel = element('section', 'paper-panel outcome-panel victory-panel');
+    var epilogues = element('ul', 'epilogue-list');
+    view.ending.epilogues.forEach(function (epilogue) {
+      var item = element('li', 'epilogue-item');
+      append(item, element('strong', '', epilogue.heroId), element('p', '', epilogue.text));
+      append(epilogues, item);
+    });
+    append(panel,
+      provisionalLabel(),
+      element('p', 'eyebrow ink-eyebrow', 'Vitória'),
+      pageHeading(view.ending.central, 'victory-title', 'outcome-title'),
+      element('p', 'outcome-copy', 'O protótipo encerra a campanha sem transformar a natureza do tesouro, o horror familiar ou os arcos finais em decisões implícitas.'),
+      element('h2', 'epilogue-heading', 'Sobreviventes'),
+      epilogues,
+      actionButton('Iniciar nova campanha', 'primary', 'new-campaign')
+    );
+    append(main, panel);
+    append(frame, main);
+    return frame;
+  }
+
+  function renderDefeat(view) {
+    var frame = element('div', 'artboard outcome-artboard defeat-artboard');
+    append(frame, renderOutcomeHeader(view, 'Campanha encerrada'));
+    var main = element('main', 'main-region outcome-wrap');
+    main.id = 'main';
+    main.setAttribute('aria-labelledby', 'defeat-title');
+    var panel = element('section', 'paper-panel outcome-panel defeat-panel');
+    append(panel,
+      provisionalLabel(),
+      element('p', 'eyebrow ink-eyebrow', 'Derrota total'),
+      pageHeading('Ninguém retorna.', 'defeat-title', 'outcome-title'),
+      element('p', 'outcome-copy', view.ending.central),
+      element('p', 'no-epilogues', 'Não há epílogos de sobreviventes nesta campanha.'),
+      actionButton('Iniciar nova campanha', 'danger', 'new-campaign')
+    );
+    append(main, panel);
+    append(frame, main);
+    return frame;
+  }
+
   function renderReachedPosition(view) {
     var frame = element('div', 'artboard');
     append(frame, renderHeader(view, view.dungeon.label));
@@ -622,6 +718,15 @@
       if (view.phase === 'automatic_retreat') {
         return renderAutomaticRetreat(view);
       }
+      if (view.phase === 'dungeon_complete') {
+        return renderDungeonTransition(view);
+      }
+      if (view.phase === 'victory') {
+        return renderVictory(view);
+      }
+      if (view.phase === 'defeat') {
+        return renderDefeat(view);
+      }
       if (view.phase === 'invalid') {
         return renderInvalid(view);
       }
@@ -696,7 +801,7 @@
       });
       stage.textContent = '';
       append(stage, surface);
-      document.title = (view.phase === 'ready' ? '' : view.phase === 'formation' ? 'Formação · ' : view.phase === 'dungeon_intro' ? view.dungeon.label + ' · ' : '') + 'Expedição e Sacrifício';
+      document.title = (view.phase === 'ready' ? '' : view.phase === 'formation' ? 'Formação · ' : view.phase === 'dungeon_intro' ? view.dungeon.label + ' · ' : view.phase === 'victory' ? 'Vitória · ' : view.phase === 'defeat' ? 'Derrota · ' : '') + 'Expedição e Sacrifício';
       if (ui.rosterOpen) {
         openRosterDialog();
       }
@@ -831,6 +936,10 @@
         submit({ type: 'CONFIRM_RETREAT' }, { focusHeading: true, announce: 'A expedição voltou à cidade.' });
       } else if (action === 'ack-auto-retreat') {
         submit({ type: 'ACK_AUTO_RETREAT' }, { focusHeading: true, announce: 'Sobreviventes disponíveis para a próxima expedição.' });
+      } else if (action === 'continue-dungeon') {
+        submit({ type: 'CONTINUE_DUNGEON' }, { focusHeading: true, announce: 'Próxima masmorra disponível.' });
+      } else if (action === 'new-campaign') {
+        submit({ type: 'NEW_CAMPAIGN' }, { focusHeading: true, announce: 'Nova campanha pronta para começar.' });
       } else if (action === 'open-roster') {
         restoreFocus = trigger;
         ui.rosterOpen = true;

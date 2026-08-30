@@ -3,6 +3,7 @@
 
   var Test = global.ExpeditionTest;
   var Data = global.ExpeditionData;
+  var Engine = global.ExpeditionEngine;
 
   function fixture(width) {
     var root = document.createElement('div');
@@ -230,6 +231,137 @@
     }
     Test.equal(controller.getState().partyIds.length, 1);
     Test.equal(livingIds(controller.getState()).length, 2);
+  }
+
+  function reachDungeonComplete(controller, dungeonId, seed) {
+    if (controller.getState().phase === 'ready') {
+      beginToFormation(controller, seed === undefined ? 47 : seed);
+    }
+    var guard = 0;
+    while (!(controller.getState().phase === 'dungeon_complete' && controller.getState().dungeonId === dungeonId) && guard < 100) {
+      guard += 1;
+      var state = controller.getState();
+      if (state.phase === 'formation') {
+        selectHeroes(controller, livingIds(state).slice(0, 3));
+        Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
+      } else if (state.phase === 'dungeon_intro') {
+        Test.truthy(controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+      } else if (state.phase === 'encounter_choice') {
+        resolveSuccess(controller);
+      } else if (state.phase === 'dungeon_complete') {
+        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+      } else {
+        throw new Error('Fase inesperada ao alcançar transição: ' + state.phase);
+      }
+    }
+    Test.equal(controller.getState().dungeonId, dungeonId);
+    Test.equal(controller.getState().phase, 'dungeon_complete');
+  }
+
+  function reachFinalPending(controller, seed) {
+    beginToFormation(controller, seed === undefined ? 53 : seed);
+    var guard = 0;
+    while (guard < 100) {
+      guard += 1;
+      var state = controller.getState();
+      if (state.phase === 'formation') {
+        selectHeroes(controller, ['H1', 'H2', 'H3']);
+        Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
+      } else if (state.phase === 'dungeon_intro') {
+        Test.truthy(controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+      } else if (state.phase === 'encounter_choice') {
+        var approach = successfulApproach(state);
+        Test.truthy(controller.dispatch({ type: 'CHOOSE_APPROACH', approachId: approach.id }).ok);
+        if (state.dungeonId === 'final' && state.position === 6) {
+          return;
+        }
+        Test.truthy(controller.dispatch({ type: 'ACK_SUCCESS' }).ok);
+      } else if (state.phase === 'dungeon_complete') {
+        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+      } else {
+        throw new Error('Fase inesperada antes do resultado final: ' + state.phase);
+      }
+    }
+    throw new Error('A fixture não alcançou o último resultado.');
+  }
+
+  var fourSurvivorScript = null;
+
+  function buildFourSurvivorScript() {
+    if (fourSurvivorScript) {
+      return fourSurvivorScript;
+    }
+    var parties = {
+      physical: ['H1', 'H2', 'H3'],
+      supernatural: ['H1', 'H5', 'H6'],
+      final: ['H1', 'H6', 'H7']
+    };
+    var victims = {
+      'physical:5': 'H2',
+      'supernatural:5': 'H5',
+      'final:5': 'H6',
+      'final:6': 'H7'
+    };
+    for (var seed = 1; seed <= 2000; seed += 1) {
+      var state = Engine.createReadyState();
+      var actions = [];
+      var valid = true;
+      function apply(action) {
+        var result = Engine.dispatch(state, action);
+        if (!result.ok) {
+          valid = false;
+          return;
+        }
+        state = result.state;
+        actions.push(action);
+      }
+      apply({ type: 'BEGIN', seed: seed });
+      apply({ type: 'CONTINUE_INTRO' });
+      var guard = 0;
+      while (valid && state.phase !== 'victory' && guard < 120) {
+        guard += 1;
+        if (state.phase === 'formation') {
+          parties[state.dungeonId].forEach(function (heroId) { apply({ type: 'TOGGLE_HERO', heroId: heroId }); });
+          apply({ type: 'DEPART' });
+        } else if (state.phase === 'dungeon_intro') {
+          apply({ type: 'ENTER_DUNGEON' });
+        } else if (state.phase === 'encounter_choice') {
+          var victim = victims[state.dungeonId + ':' + state.position];
+          var approach = victim ? failingApproach(state) : successfulApproach(state);
+          if (!approach) {
+            valid = false;
+          } else {
+            apply({ type: 'CHOOSE_APPROACH', approachId: approach.id });
+            if (victim) {
+              apply({ type: 'OPEN_SACRIFICE' });
+              apply({ type: 'SELECT_VICTIM', heroId: victim });
+              apply({ type: 'CONFIRM_SACRIFICE' });
+              apply({ type: 'ACK_DEATH' });
+            } else {
+              apply({ type: 'ACK_SUCCESS' });
+            }
+          }
+        } else if (state.phase === 'dungeon_complete') {
+          apply({ type: 'CONTINUE_DUNGEON' });
+        } else {
+          valid = false;
+        }
+      }
+      if (valid && state.phase === 'victory' && JSON.stringify(state.deadHeroIds.slice().sort()) === JSON.stringify(['H2', 'H5', 'H6', 'H7'])) {
+        fourSurvivorScript = actions;
+        return actions;
+      }
+    }
+    throw new Error('Nenhuma campanha controlada com quatro sobreviventes foi encontrada.');
+  }
+
+  function completeWithFourSurvivors(controller, stopBeforeLastAction) {
+    var actions = buildFourSurvivorScript();
+    var limit = stopBeforeLastAction ? actions.length - 1 : actions.length;
+    for (var index = 0; index < limit; index += 1) {
+      Test.truthy(controller.dispatch(actions[index]).ok, 'A ação controlada deve ser aceita: ' + actions[index].type);
+    }
+    return actions;
   }
 
   Test.test('IT-001 — apenas index.html é montado automaticamente como entrada', function () {
@@ -1205,6 +1337,377 @@
     Test.equal(state.actionHistory.filter(function (entry) { return entry.type === 'automatic_retreat'; }).length, 2);
     Test.equal(state.actionHistory.filter(function (entry) { return entry.type === 'hero_sacrificed'; }).length, 6);
     Test.truthy(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final).filter(Boolean).length > 0);
+    current.cleanup();
+  });
+
+  Test.test('IT-013 — campanhas concluídas repetidamente começam com estado limpo', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 61);
+    Test.truthy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    completeWithoutDeaths(current.controller, 62);
+    Test.equal(current.controller.getState().phase, 'victory');
+    Test.deepEqual(current.controller.getState().deadHeroIds, []);
+    current.cleanup();
+  });
+
+  Test.test('IT-015 — duas ações terminais criam uma única campanha nova', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 63);
+    Test.truthy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    var ready = JSON.stringify(current.controller.getState());
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.equal(JSON.stringify(current.controller.getState()), ready);
+    current.cleanup();
+  });
+
+  Test.test('IT-017 — nova campanha repetida não acumula reinicializações', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 64);
+    current.root.querySelector('[data-action="new-campaign"]').click();
+    Test.equal(current.controller.getState().phase, 'ready');
+    Test.equal(current.root.querySelectorAll('[data-action="new-campaign"]').length, 0);
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    current.cleanup();
+  });
+
+  Test.test('IT-018 — campanha nova não existe nem é aceita durante jogo ativo', function () {
+    var current = fixture();
+    reachEncounter(current.controller);
+    Test.falsy(current.root.querySelector('[data-action="new-campaign"]'));
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.equal(current.controller.getState().phase, 'encounter_choice');
+    current.cleanup();
+  });
+
+  Test.test('IT-019 — vitória e derrota retornam ao mesmo estado pronto', function () {
+    var victory = fixture();
+    completeWithoutDeaths(victory.controller, 65);
+    Test.truthy(victory.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    var victoryReset = JSON.stringify(victory.controller.getState());
+    victory.cleanup();
+    var defeat = fixture();
+    driveDeaths(defeat.controller, 8);
+    Test.truthy(defeat.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.equal(JSON.stringify(defeat.controller.getState()), victoryReset);
+    defeat.cleanup();
+  });
+
+  Test.test('IT-020 — inventário completo de atribuições é apagado na campanha nova', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 66);
+    Test.equal(current.controller.getState().assignments.physical.concat(current.controller.getState().assignments.supernatural, current.controller.getState().assignments.final).filter(Boolean).length, 16);
+    Test.truthy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.equal(current.controller.getState().assignments.physical.concat(current.controller.getState().assignments.supernatural, current.controller.getState().assignments.final).filter(Boolean).length, 0);
+    current.cleanup();
+  });
+
+  Test.test('IT-091 — entrada final prematura é interrompida como estado inválido', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 67);
+    var invalid = JSON.parse(JSON.stringify(current.controller.getState()));
+    invalid.dungeonId = 'final';
+    invalid.phase = 'dungeon_intro';
+    var result = Engine.dispatch(invalid, { type: 'ENTER_DUNGEON' });
+    Test.truthy(result.ok);
+    Test.equal(result.state.phase, 'invalid');
+    Test.includes(result.state.invariantViolations.map(function (violation) { return violation.code; }), 'impossible_dungeon_transition');
+    current.cleanup();
+  });
+
+  Test.test('IT-092 — inventário inicial corrompido para sem candidatos para em diagnóstico', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'supernatural', 68);
+    var invalid = JSON.parse(JSON.stringify(current.controller.getState()));
+    var unusedA = Data.encounterOrder.filter(function (id) { return id.charAt(0) === 'A' && invalid.assignments.physical.indexOf(id) < 0; })[0];
+    invalid.assignments.supernatural[0] = unusedA;
+    var result = Engine.dispatch(invalid, { type: 'CONTINUE_DUNGEON' });
+    Test.truthy(result.ok);
+    Test.equal(result.state.phase, 'invalid');
+    Test.truthy(result.state.invariantViolations.length > 0);
+    current.cleanup();
+  });
+
+  Test.test('IT-093 — sexta posição final esgota candidatos elegíveis', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 69);
+    Test.equal(current.controller.getState().assignments.final.filter(Boolean).length, 6);
+    Test.deepEqual(Engine.eligibleEncounterIds(current.controller.getState()), []);
+    current.cleanup();
+  });
+
+  Test.test('IT-094 — fluxo não oferece escolha de ordem das masmorras', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 70);
+    Test.equal(current.root.querySelectorAll('[data-action="continue-dungeon"]').length, 1);
+    Test.falsy(current.root.querySelector('[data-action="choose-dungeon"]'));
+    Test.includes(current.root.textContent, 'Primeira metade do mapa recuperada.');
+    current.cleanup();
+  });
+
+  Test.test('IT-095 — conclusão e avanço concorrentes mudam de masmorra uma vez', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 71);
+    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.falsy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.equal(current.controller.getState().dungeonId, 'supernatural');
+    Test.equal(current.controller.getState().actionHistory.filter(function (entry) { return entry.type === 'dungeon_advanced'; }).length, 1);
+    current.cleanup();
+  });
+
+  Test.test('IT-096 — recarregar entre masmorras volta à abertura', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 72);
+    current.cleanup();
+    var reopened = fixture();
+    Test.equal(reopened.controller.getState().phase, 'ready');
+    Test.falsy(reopened.controller.getState().dungeonId);
+    reopened.cleanup();
+  });
+
+  Test.test('IT-097 — masmorra inicial concluída não pode ser repetida', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 73);
+    var physical = current.controller.getState().assignments.physical.slice();
+    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.falsy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.deepEqual(current.controller.getState().assignments.physical, physical);
+    Test.equal(current.controller.getState().dungeonId, 'supernatural');
+    current.cleanup();
+  });
+
+  Test.test('IT-098 — final não preatribui posições futuras', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'supernatural', 74);
+    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.deepEqual(current.controller.getState().assignments.final, [null, null, null, null, null, null]);
+    selectHeroes(current.controller, ['H1', 'H2', 'H3']);
+    Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+    Test.equal(current.controller.getState().assignments.final.filter(Boolean).length, 1);
+    Test.falsy(current.controller.getState().assignments.final[1]);
+    current.cleanup();
+  });
+
+  Test.test('IT-099 — um ou dois sobreviventes são autoformados entre masmorras', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 75);
+    var reduced = JSON.parse(JSON.stringify(current.controller.getState()));
+    reduced.deadHeroIds = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+    reduced.partyIds = ['H7', 'H8'];
+    var result = Engine.dispatch(reduced, { type: 'CONTINUE_DUNGEON' });
+    Test.truthy(result.ok);
+    Test.equal(result.state.phase, 'formation');
+    Test.deepEqual(result.state.draftPartyIds, ['H7', 'H8']);
+    Test.truthy(Engine.deriveFormation(result.state).autoSelected);
+    current.cleanup();
+  });
+
+  Test.test('IT-100 — distribuição completa permanece cinco mais cinco mais seis', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 76);
+    var state = current.controller.getState();
+    Test.deepEqual([state.assignments.physical.filter(Boolean).length, state.assignments.supernatural.filter(Boolean).length, state.assignments.final.filter(Boolean).length], [5, 5, 6]);
+    Test.equal(new Set(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final)).size, 16);
+    current.cleanup();
+  });
+
+  Test.test('IT-101 — final permanece indisponível antes da sexta consequência', function () {
+    var current = fixture();
+    reachFinalPending(current.controller, 77);
+    Test.equal(current.controller.getState().phase, 'approach_result');
+    Test.falsy(current.root.querySelector('#victory-title'));
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    current.cleanup();
+  });
+
+  Test.test('IT-102 — zero sobreviventes nunca renderiza vitória', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 8);
+    Test.equal(current.controller.getState().phase, 'defeat');
+    Test.truthy(current.root.querySelector('#defeat-title'));
+    Test.falsy(current.root.querySelector('#victory-title'));
+    current.cleanup();
+  });
+
+  Test.test('IT-103 — oito sobreviventes recebem oito epílogos distintos', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 78);
+    Test.equal(current.root.querySelectorAll('.epilogue-item').length, 8);
+    Test.equal(new Set(Array.prototype.map.call(current.root.querySelectorAll('.epilogue-item strong'), function (node) { return node.textContent; })).size, 8);
+    current.cleanup();
+  });
+
+  Test.test('IT-104 — epílogos derivam apenas dos quatro sobreviventes canônicos', function () {
+    var current = fixture();
+    completeWithFourSurvivors(current.controller, false);
+    var labels = Array.prototype.map.call(current.root.querySelectorAll('.epilogue-item strong'), function (node) { return node.textContent; });
+    Test.deepEqual(labels, ['H1', 'H3', 'H4', 'H8']);
+    ['H2', 'H5', 'H6', 'H7'].forEach(function (heroId) { Test.falsy(labels.indexOf(heroId) >= 0); });
+    current.cleanup();
+  });
+
+  Test.test('IT-105 — desfecho se estabelece antes de uma única campanha nova', function () {
+    var current = fixture();
+    completeWithFourSurvivors(current.controller, false);
+    Test.equal(current.controller.getState().phase, 'victory');
+    Test.truthy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.equal(current.controller.getState().phase, 'ready');
+    current.cleanup();
+  });
+
+  Test.test('IT-106 — vitória substitui roster aberto sem perder sobreviventes', function () {
+    var current = fixture(320);
+    reachFinalPending(current.controller, 79);
+    current.root.querySelector('[data-action="open-roster"]').click();
+    Test.truthy(current.root.querySelector('#roster-dialog').open);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_SUCCESS' }).ok);
+    Test.equal(current.controller.getState().phase, 'victory');
+    Test.equal(current.root.querySelectorAll('.epilogue-item').length, 8);
+    Test.falsy(current.root.querySelector('#roster-dialog'));
+    current.cleanup();
+  });
+
+  Test.test('IT-107 — revisitar vitória não duplica epílogos', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 80);
+    var before = Array.prototype.map.call(current.root.querySelectorAll('.epilogue-item'), function (node) { return node.textContent; });
+    Test.falsy(current.controller.dispatch({ type: 'ACK_SUCCESS' }).ok);
+    var after = Array.prototype.map.call(current.root.querySelectorAll('.epilogue-item'), function (node) { return node.textContent; });
+    Test.deepEqual(after, before);
+    current.cleanup();
+  });
+
+  Test.test('IT-108 — encerramento central antecede epílogos no DOM', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 81);
+    var title = current.root.querySelector('#victory-title');
+    var heading = current.root.querySelector('.epilogue-heading');
+    Test.truthy(Boolean(title.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING));
+    Test.includes(title.textContent, 'A expedição alcançou o tesouro');
+    current.cleanup();
+  });
+
+  Test.test('IT-109 — morte no último encontro exclui vítima dos epílogos', function () {
+    var current = fixture();
+    completeWithFourSurvivors(current.controller, false);
+    var lastDeath = current.controller.getState().actionHistory.filter(function (entry) { return entry.type === 'hero_sacrificed'; }).slice(-1)[0];
+    Test.equal(lastDeath.heroId, 'H7');
+    Test.falsy(Array.prototype.some.call(current.root.querySelectorAll('.epilogue-item strong'), function (node) { return node.textContent === 'H7'; }));
+    current.cleanup();
+  });
+
+  Test.test('IT-110 — lista de um a oito epílogos conserva conteúdo e reflow', function () {
+    for (var count = 1; count <= 8; count += 1) {
+      Data.heroOrder.slice(0, count).forEach(function (heroId) { Test.includes(Data.heroes[heroId].epilogue, heroId); });
+    }
+    var current = fixture(320);
+    completeWithoutDeaths(current.controller, 82);
+    Test.equal(current.root.querySelectorAll('.epilogue-item').length, 8);
+    Test.equal(global.getComputedStyle(current.root.querySelector('.epilogue-list')).gridTemplateColumns.split(' ').length, 1);
+    Test.truthy(current.root.scrollWidth <= 320);
+    current.cleanup();
+  });
+
+  Test.test('IT-111 — derrota é rejeitada enquanto qualquer herói sobrevive', function () {
+    var current = fixture();
+    reachEncounter(current.controller);
+    Test.falsy(current.root.querySelector('#defeat-title'));
+    Test.falsy(current.root.querySelector('[data-action="new-campaign"]'));
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    current.cleanup();
+  });
+
+  Test.test('IT-112 — despedida ausente recebe fallback funcional com identificação', function () {
+    var current = fixture();
+    Test.equal(Engine.deriveFarewell({ label: 'H8', farewell: '' }), '“Sigam sem mim.” — despedida provisória de H8.');
+    reachEncounter(current.controller, ['H4', 'H7', 'H8']);
+    Test.truthy(current.root.querySelector('[data-action="choose-approach"]'));
+    current.cleanup();
+  });
+
+  Test.test('IT-113 — oitava morte em qualquer posição prevalece como derrota', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 8);
+    Test.equal(current.controller.getState().phase, 'defeat');
+    Test.includes(current.root.textContent, 'Os oito heróis morreram');
+    Test.falsy(current.root.querySelector('[data-action="enter-dungeon"]'));
+    current.cleanup();
+  });
+
+  Test.test('IT-114 — bardo nunca é ação manual de sacrifício', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H4', 'H7', 'H8']);
+    openFailure(current.controller);
+    Test.falsy(current.root.querySelector('[data-action="select-victim"][data-id="Bardo"]'));
+    Test.falsy(current.controller.dispatch({ type: 'SELECT_VICTIM', heroId: 'Bardo' }).ok);
+    current.cleanup();
+  });
+
+  Test.test('IT-115 — morte final vence recuo automático concorrente', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 8);
+    var history = current.controller.getState().actionHistory;
+    Test.equal(history.filter(function (entry) { return entry.type === 'campaign_lost'; }).length, 1);
+    Test.equal(history.slice(-1)[0].type, 'campaign_lost');
+    Test.falsy(current.controller.dispatch({ type: 'ACK_AUTO_RETREAT' }).ok);
+    current.cleanup();
+  });
+
+  Test.test('IT-116 — recarregar derrota inicia sessão fresca', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 8);
+    current.cleanup();
+    var reopened = fixture();
+    Test.equal(reopened.controller.getState().phase, 'ready');
+    Test.deepEqual(reopened.controller.getState().deadHeroIds, []);
+    reopened.cleanup();
+  });
+
+  Test.test('IT-117 — último sacrifício repetido produz um bardo morto uma vez', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 8);
+    var copy = current.root.querySelector('.outcome-copy').textContent;
+    Test.falsy(current.controller.dispatch({ type: 'CONFIRM_SACRIFICE' }).ok);
+    Test.equal(current.controller.getState().deadHeroIds.length, 8);
+    Test.equal((copy.match(/bardo também morre/g) || []).length, 1);
+    current.cleanup();
+  });
+
+  Test.test('IT-118 — campanha nova espera a consequência do último herói', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 7);
+    if (current.controller.getState().phase === 'dungeon_intro') {
+      Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+    }
+    openFailure(current.controller);
+    confirmVictim(current.controller, current.controller.getState().partyIds[0]);
+    Test.equal(current.controller.getState().phase, 'death_result');
+    Test.falsy(current.controller.dispatch({ type: 'NEW_CAMPAIGN' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DEATH' }).ok);
+    Test.equal(current.controller.getState().phase, 'defeat');
+    current.cleanup();
+  });
+
+  Test.test('IT-119 — última morte da expedição com reservas usa recuo automático', function () {
+    var current = fixture();
+    prepareSoloPartyWithReserve(current.controller);
+    openFailure(current.controller);
+    confirmVictim(current.controller, current.controller.getState().partyIds[0]);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DEATH' }).ok);
+    Test.equal(current.controller.getState().phase, 'automatic_retreat');
+    Test.falsy(current.root.querySelector('#defeat-title'));
+    current.cleanup();
+  });
+
+  Test.test('IT-120 — oito mortes acumuladas usam elenco total e encerram campanha', function () {
+    var current = fixture();
+    driveDeaths(current.controller, 8);
+    var state = current.controller.getState();
+    Test.equal(state.deadHeroIds.length, 8);
+    Test.equal(new Set(state.deadHeroIds).size, 8);
+    Test.equal(state.actionHistory.filter(function (entry) { return entry.type === 'hero_sacrificed'; }).length, 8);
+    Test.equal(state.phase, 'defeat');
     current.cleanup();
   });
 })(window);

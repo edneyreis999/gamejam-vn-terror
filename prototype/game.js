@@ -1052,6 +1052,10 @@
     };
   }
 
+  function deriveFarewell(hero) {
+    return hero.farewell || ('“Sigam sem mim.” — despedida provisória de ' + hero.label + '.');
+  }
+
   function derivePlayerView(state) {
     var activeEncounterId = currentEncounterId(state);
     var activeEncounter = activeEncounterId ? Data.encounters[activeEncounterId] : null;
@@ -1112,7 +1116,7 @@
         view.death = {
           heroId: resolvedVictim.id,
           heroLabel: resolvedVictim.label,
-          farewell: resolvedVictim.farewell
+          farewell: deriveFarewell(resolvedVictim)
         };
       }
     }
@@ -1140,6 +1144,7 @@
     createReadyState: createReadyState,
     dispatch: dispatch,
     derivePlayerView: derivePlayerView,
+    deriveFarewell: deriveFarewell,
     snapshot: snapshot,
     validateCatalog: validateCatalog,
     validateState: validateState,

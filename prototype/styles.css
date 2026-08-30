@@ -26,7 +26,7 @@
   --paper-highlight: rgba(255, 255, 255, 0.2);
   --paper-border: rgba(36, 32, 24, 0.22);
   --paper-line: rgba(36, 32, 24, 0.035);
-  --paper-text-muted: #625b4d;
+  --paper-text-muted: #595246;
   --ink-primary: #242018;
   --accent-blood: #8e2f2b;
   --accent-blood-text: #fff0e8;
@@ -653,6 +653,125 @@ button.hero-card:hover {
   margin-inline-end: var(--space-3);
 }
 
+.dungeon-transition,
+.outcome-wrap {
+  display: grid;
+  width: 100%;
+  min-height: calc(100vh - 9rem);
+  place-items: center;
+  padding-block: var(--space-8);
+}
+
+.transition-panel,
+.outcome-panel {
+  width: 100%;
+  min-width: 0;
+  max-width: 58rem;
+  padding: clamp(1.5rem, 4cqi, 3.5rem);
+}
+
+.transition-title,
+.outcome-title {
+  max-width: 22ch;
+  font-size: clamp(2rem, 10cqi, 4.75rem);
+  line-height: 0.98;
+}
+
+.transition-copy,
+.outcome-copy,
+.no-epilogues {
+  max-width: 66ch;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.map-halves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-8);
+}
+
+.map-half {
+  display: grid;
+  gap: var(--space-2);
+  min-height: 8rem;
+  align-content: end;
+  padding: var(--space-5);
+  border: 1px dashed var(--paper-border);
+  color: var(--paper-text-muted);
+  background: var(--paper-highlight);
+}
+
+.map-half.found {
+  border-style: solid;
+  border-color: var(--accent-moss);
+  color: var(--ink-primary);
+  background: var(--accent-moss-surface);
+}
+
+.map-half strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.map-half span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.outcome-artboard {
+  background:
+    radial-gradient(circle at 70% 18%, var(--surface-moss-glow), transparent 30rem),
+    var(--surface-frame);
+}
+
+.defeat-artboard {
+  background:
+    radial-gradient(circle at 50% 55%, var(--surface-blood-glow), transparent 28rem),
+    var(--surface-frame);
+}
+
+.epilogue-heading {
+  margin-block: var(--space-8) var(--space-4);
+  font-size: 1.75rem;
+}
+
+.epilogue-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-3);
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  list-style: none;
+}
+
+.epilogue-item {
+  padding: var(--space-4);
+  border: 1px solid var(--paper-border);
+  background: var(--paper-highlight);
+}
+
+.epilogue-item strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+}
+
+.epilogue-item p {
+  margin: var(--space-2) 0 0;
+}
+
+.defeat-panel {
+  border-block-start: 0.4375rem solid var(--accent-blood);
+}
+
+.no-epilogues {
+  font-weight: 800;
+}
+
 .confirmation-dialog {
   width: min(33.75rem, calc(100% - 2rem));
   max-height: calc(100vh - 2rem);
@@ -928,7 +1047,9 @@ button.hero-card:hover {
   }
 
   .victim-grid,
-  .confirmation-actions {
+  .confirmation-actions,
+  .map-halves,
+  .epilogue-list {
     grid-template-columns: minmax(0, 1fr);
   }
 

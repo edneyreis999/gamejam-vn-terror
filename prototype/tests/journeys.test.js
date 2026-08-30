@@ -143,6 +143,76 @@
     Test.equal(current.controller.getState().deadHeroIds.length, target);
   }
 
+  function completeSafelyByControls(current, seed) {
+    Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: seed }).ok);
+    current.root.querySelector('[data-action="continue-intro"]').click();
+    var guard = 0;
+    while (current.controller.getState().phase !== 'victory' && guard < 100) {
+      guard += 1;
+      var state = current.controller.getState();
+      if (state.phase === 'formation') {
+        ['H1', 'H2', 'H3'].forEach(function (heroId) { current.root.querySelector('[data-id="' + heroId + '"]').click(); });
+        current.root.querySelector('[data-action="depart"]').click();
+      } else if (state.phase === 'dungeon_intro') {
+        current.root.querySelector('[data-action="enter-dungeon"]').click();
+      } else if (state.phase === 'encounter_choice') {
+        var approach = successfulApproach(state);
+        current.root.querySelector('[data-id="' + approach.id + '"]').click();
+      } else if (state.phase === 'approach_result') {
+        current.root.querySelector('[data-action="ack-success"]').click();
+      } else if (state.phase === 'dungeon_complete') {
+        current.root.querySelector('[data-action="continue-dungeon"]').click();
+      } else {
+        throw new Error('Fase inesperada na jornada segura: ' + state.phase);
+      }
+    }
+    Test.equal(current.controller.getState().phase, 'victory');
+  }
+
+  function completeControlledFourByControls(current) {
+    var parties = {
+      physical: ['H1', 'H2', 'H3'],
+      supernatural: ['H1', 'H5', 'H6'],
+      final: ['H1', 'H6', 'H7']
+    };
+    var victims = {
+      'physical:5': 'H2',
+      'supernatural:5': 'H5',
+      'final:5': 'H6',
+      'final:6': 'H7'
+    };
+    Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: 10 }).ok);
+    current.root.querySelector('[data-action="continue-intro"]').click();
+    var guard = 0;
+    while (current.controller.getState().phase !== 'victory' && guard < 120) {
+      guard += 1;
+      var state = current.controller.getState();
+      if (state.phase === 'formation') {
+        parties[state.dungeonId].forEach(function (heroId) { current.root.querySelector('[data-id="' + heroId + '"]').click(); });
+        current.root.querySelector('[data-action="depart"]').click();
+      } else if (state.phase === 'dungeon_intro') {
+        current.root.querySelector('[data-action="enter-dungeon"]').click();
+      } else if (state.phase === 'encounter_choice') {
+        var victim = victims[state.dungeonId + ':' + state.position];
+        var approach = victim ? uncoveredApproach(state) : successfulApproach(state);
+        current.root.querySelector('[data-id="' + approach.id + '"]').click();
+        if (victim) {
+          current.root.querySelector('[data-action="open-sacrifice"]').click();
+          current.root.querySelector('[data-action="select-victim"][data-id="' + victim + '"]').click();
+          current.root.querySelector('[data-action="confirm-sacrifice"]').click();
+          current.root.querySelector('[data-action="ack-death"]').click();
+        }
+      } else if (state.phase === 'approach_result') {
+        current.root.querySelector('[data-action="ack-success"]').click();
+      } else if (state.phase === 'dungeon_complete') {
+        current.root.querySelector('[data-action="continue-dungeon"]').click();
+      } else {
+        throw new Error('Fase inesperada na jornada controlada: ' + state.phase);
+      }
+    }
+    Test.equal(current.controller.getState().phase, 'victory');
+  }
+
   Test.test('E2E-001 — entrada file local inicia sessão jogável em português', function () {
     var current = fixture();
     Test.equal(document.documentElement.lang, 'pt-BR');
@@ -286,6 +356,52 @@
     current.root.querySelector('[data-action="ack-auto-retreat"]').click();
     Test.equal(current.controller.getState().phase, 'formation');
     survivors.forEach(function (heroId) { Test.includes(current.root.textContent, heroId); });
+    current.cleanup();
+  });
+
+  Test.test('E2E-002 — vitória inicia campanha limpa e remontagem descarta progresso', function () {
+    var current = fixture();
+    completeSafelyByControls(current, 83);
+    current.root.querySelector('[data-action="new-campaign"]').click();
+    Test.equal(current.controller.getState().phase, 'ready');
+    Test.deepEqual(current.controller.getState().deadHeroIds, []);
+    Test.equal(current.controller.getState().assignments.physical.filter(Boolean).length, 0);
+    current.cleanup();
+    var reopened = fixture();
+    Test.equal(reopened.controller.getState().phase, 'ready');
+    Test.includes(reopened.root.textContent, 'Expedição e Sacrifício');
+    reopened.cleanup();
+  });
+
+  Test.test('E2E-010 — semente fixa atravessa cinco, cinco e seis até vitória', function () {
+    var current = fixture();
+    completeSafelyByControls(current, 84);
+    var state = current.controller.getState();
+    var ids = state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final);
+    Test.deepEqual([state.assignments.physical.length, state.assignments.supernatural.length, state.assignments.final.length], [5, 5, 6]);
+    Test.equal(new Set(ids).size, 16);
+    Test.includes(current.root.querySelector('#victory-title').textContent, 'A expedição alcançou o tesouro');
+    current.cleanup();
+  });
+
+  Test.test('E2E-011 — quatro sobreviventes recebem somente seus epílogos', function () {
+    var current = fixture();
+    completeControlledFourByControls(current);
+    var labels = Array.prototype.map.call(current.root.querySelectorAll('.epilogue-item strong'), function (node) { return node.textContent; });
+    Test.deepEqual(labels, ['H1', 'H3', 'H4', 'H8']);
+    Test.includes(current.root.querySelector('#victory-title').textContent, 'Sua natureza permanece pendente no GDD');
+    current.cleanup();
+  });
+
+  Test.test('E2E-012 — oito sacrifícios legais produzem derrota e nova campanha', function () {
+    var current = fixture();
+    driveDeaths(current, 8);
+    Test.equal(current.controller.getState().phase, 'defeat');
+    Test.includes(current.root.textContent, 'o bardo também morre');
+    Test.falsy(current.root.querySelector('.epilogue-list'));
+    current.root.querySelector('[data-action="new-campaign"]').click();
+    Test.equal(current.controller.getState().phase, 'ready');
+    Test.deepEqual(current.controller.getState().deadHeroIds, []);
     current.cleanup();
   });
 })(window);
