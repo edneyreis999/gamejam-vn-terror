@@ -93,6 +93,22 @@
     return left.slice().sort().join('|') === right.slice().sort().join('|');
   }
 
+  function findEncounter(encounterId, catalog) {
+    var source = catalog || Data;
+    return typeof encounterId === 'string' && source && source.encounters &&
+      Object.prototype.hasOwnProperty.call(source.encounters, encounterId)
+      ? source.encounters[encounterId]
+      : null;
+  }
+
+  function findHero(heroId, catalog) {
+    var source = catalog || Data;
+    return typeof heroId === 'string' && source && source.heroes &&
+      Object.prototype.hasOwnProperty.call(source.heroes, heroId)
+      ? source.heroes[heroId]
+      : null;
+  }
+
   function unique(values) {
     return values.filter(function (value, index) {
       return values.indexOf(value) === index;
@@ -381,8 +397,8 @@
   function partyCompetencyIds(partyIds, catalog) {
     var source = catalog || Data;
     return unique((partyIds || []).reduce(function (all, heroId) {
-      var hero = source.heroes[heroId];
-      return hero ? all.concat(hero.competencyIds) : all;
+      var hero = findHero(heroId, source);
+      return hero && Array.isArray(hero.competencyIds) ? all.concat(hero.competencyIds) : all;
     }, []));
   }
 
@@ -433,10 +449,12 @@
   }
 
   function currentEncounterId(state) {
-    if (!state.dungeonId || !state.position || !state.assignments[state.dungeonId]) {
+    if (!state || typeof state.dungeonId !== 'string' || !state.position || !state.assignments ||
+        !Object.prototype.hasOwnProperty.call(state.assignments, state.dungeonId) || !Array.isArray(state.assignments[state.dungeonId])) {
       return null;
     }
-    return state.assignments[state.dungeonId][state.position - 1] || null;
+    var encounterId = state.assignments[state.dungeonId][state.position - 1];
+    return findEncounter(encounterId) ? encounterId : null;
   }
 
   function deriveFinalCandidates(stateOrAssignments) {
@@ -668,29 +686,36 @@
       Array.isArray(state.actionHistory) && Array.isArray(state.invariantViolations));
   }
 
+  function findApproach(encounter, approachId) {
+    if (!encounter || !Array.isArray(encounter.approaches)) {
+      return null;
+    }
+    for (var index = 0; index < encounter.approaches.length; index += 1) {
+      if (encounter.approaches[index].id === approachId) {
+        return encounter.approaches[index];
+      }
+    }
+    return null;
+  }
+
   function hasOutcomeShape(state) {
     var outcome = state.pendingOutcome;
     var encounterId = outcome && outcome.encounterId;
-    var encounter = typeof encounterId === 'string' && Object.prototype.hasOwnProperty.call(Data.encounters, encounterId)
-      ? Data.encounters[encounterId]
-      : null;
-    var approach = null;
-    if (encounter && Array.isArray(encounter.approaches)) {
-      for (var index = 0; index < encounter.approaches.length; index += 1) {
-        if (encounter.approaches[index].id === outcome.approachId) {
-          approach = encounter.approaches[index];
-          break;
-        }
-      }
-    }
+    var encounter = findEncounter(encounterId);
+    var approach = findApproach(encounter, outcome && outcome.approachId);
     if (!outcome || !encounter || !approach || outcome.encounterId !== currentEncounterId(state) || outcome.competencyId !== approach.competencyId) {
       return false;
     }
     var expectedHolders = state.partyIds.filter(function (heroId) {
-      var hero = Object.prototype.hasOwnProperty.call(Data.heroes, heroId) ? Data.heroes[heroId] : null;
+      if (typeof heroId !== 'string' || Data.heroOrder.indexOf(heroId) < 0) {
+        return false;
+      }
+      var hero = findHero(heroId);
       return hero && state.deadHeroIds.indexOf(heroId) < 0 && hero.competencyIds.indexOf(approach.competencyId) >= 0;
     });
-    var holdersValid = Array.isArray(outcome.holderHeroIds) && sameMembers(outcome.holderHeroIds, expectedHolders);
+    var holdersValid = Array.isArray(outcome.holderHeroIds) && outcome.holderHeroIds.every(function (heroId) {
+      return typeof heroId === 'string' && Data.heroOrder.indexOf(heroId) >= 0;
+    }) && sameMembers(outcome.holderHeroIds, expectedHolders);
     var successValid = typeof outcome.success === 'boolean' && outcome.success === (expectedHolders.length > 0);
     var resultTextValid = outcome.resultText === (outcome.success ? approach.successText : encounter.failureText);
     var victimValid = outcome.victimId === null || Data.heroOrder.indexOf(outcome.victimId) >= 0;
@@ -725,7 +750,7 @@
         if (encounterId === null) {
           return;
         }
-        var currentEncounter = Data.encounters[encounterId];
+        var currentEncounter = findEncounter(encounterId);
         var validPool = dungeonId === 'final' || (dungeonId === 'physical' && currentEncounter && currentEncounter.pool === 'A') || (dungeonId === 'supernatural' && currentEncounter && currentEncounter.pool === 'B');
         if (!currentEncounter || !validPool) {
           violations.push(makeViolation('invalid_encounter_assignment', 'Uma posição contém um encontro incompatível.', { dungeon: dungeonId, encounterId: encounterId, position: index + 1 }));
@@ -804,7 +829,7 @@
     }
     if (state.phase === 'sacrifice_confirmation' && !state.pendingVictimId) {
       violations.push(makeViolation('missing_victim_payload', 'A confirmação de sacrifício não possui vítima.', {}));
-    } else if (state.phase === 'sacrifice_confirmation' && (!Data.heroes[state.pendingVictimId] || party.indexOf(state.pendingVictimId) < 0 || dead.indexOf(state.pendingVictimId) >= 0)) {
+    } else if (state.phase === 'sacrifice_confirmation' && (!findHero(state.pendingVictimId) || party.indexOf(state.pendingVictimId) < 0 || dead.indexOf(state.pendingVictimId) >= 0)) {
       violations.push(makeViolation('invalid_victim_payload', 'A vítima pendente precisa ser um herói vivo da expedição.', { heroId: state.pendingVictimId }));
     }
     if (state.phase !== 'sacrifice_confirmation' && state.pendingVictimId !== null && state.phase !== 'invalid') {
@@ -979,7 +1004,7 @@
       }
       var activeEncounterId = currentEncounterId(state);
       var activeEncounter = Data.encounters[activeEncounterId];
-      var chosenApproach = activeEncounter && activeEncounter.approaches.filter(function (currentApproach) { return currentApproach.id === action.approachId; })[0];
+      var chosenApproach = findApproach(activeEncounter, action.approachId);
       if (!chosenApproach) {
         return error(state, 'invalid_approach', 'A abordagem não pertence ao encontro atual.', { approachId: action.approachId, encounterId: activeEncounterId });
       }
@@ -1229,9 +1254,7 @@
     }
 
     if (state.pendingOutcome && ['approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result'].indexOf(state.phase) >= 0) {
-      var resolvedApproach = activeEncounter && activeEncounter.approaches.filter(function (currentApproach) {
-        return currentApproach.id === state.pendingOutcome.approachId;
-      })[0];
+      var resolvedApproach = findApproach(activeEncounter, state.pendingOutcome.approachId);
       var resolvedVictim = state.pendingOutcome.victimId ? Data.heroes[state.pendingOutcome.victimId] : null;
       view.outcome = {
         success: state.pendingOutcome.success,

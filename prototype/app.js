@@ -981,10 +981,10 @@
 
     function submit(action, options) {
       if (destroyed) {
-        return Object.freeze({ ok: false, error: Object.freeze({ code: 'controller_destroyed', message: 'O controlador foi encerrado.' }) });
+        return Object.freeze({ ok: false, error: Object.freeze({ code: 'controller_destroyed', message: 'O controlador foi encerrado.', context: Object.freeze({}) }) });
       }
       if (dispatching) {
-        return Object.freeze({ ok: false, error: Object.freeze({ code: 'transition_in_progress', message: 'Uma transição já está em andamento.' }) });
+        return Object.freeze({ ok: false, error: Object.freeze({ code: 'transition_in_progress', message: 'Uma transição já está em andamento.', context: Object.freeze({}) }) });
       }
       dispatching = true;
       try {
@@ -1221,37 +1221,90 @@
     });
   }
 
+  /** @typedef {'H1'|'H2'|'H3'|'H4'|'H5'|'H6'|'H7'|'H8'} HeroId */
+  /** @typedef {'physical'|'supernatural'|'final'} DungeonId */
+  /** @typedef {'A1'|'A2'|'A3'|'A4'|'A5'|'A6'|'A7'|'A8'|'B1'|'B2'|'B3'|'B4'|'B5'|'B6'|'B7'|'B8'} EncounterId */
+  /** @typedef {'strength'|'dexterity'|'perception'|'athletics'|'survival'|'knowledge'|'will'|'occultism'} CompetencyId */
   /**
-   * @typedef {Object} GameAction
-   * @property {string} type
-   * @property {number=} seed
-   * @property {string=} heroId
-   * @property {string=} approachId
+   * @typedef {'A1-1'|'A1-2'|'A1-3'|'A2-1'|'A2-2'|'A2-3'|'A3-1'|'A3-2'|'A3-3'|'A4-1'|'A4-2'|'A4-3'|
+   * 'A5-1'|'A5-2'|'A5-3'|'A6-1'|'A6-2'|'A6-3'|'A7-1'|'A7-2'|'A7-3'|'A8-1'|'A8-2'|'A8-3'|
+   * 'B1-1'|'B1-2'|'B1-3'|'B2-1'|'B2-2'|'B2-3'|'B3-1'|'B3-2'|'B3-3'|'B4-1'|'B4-2'|'B4-3'|
+   * 'B5-1'|'B5-2'|'B5-3'|'B6-1'|'B6-2'|'B6-3'|'B7-1'|'B7-2'|'B7-3'|'B8-1'|'B8-2'|'B8-3'} ApproachId
+   */
+  /**
+   * @typedef {'ready'|'intro'|'formation'|'dungeon_intro'|'encounter_choice'|'approach_result'|
+   * 'sacrifice_choice'|'sacrifice_confirmation'|'death_result'|'retreat_confirmation'|
+   * 'automatic_retreat'|'dungeon_complete'|'victory'|'defeat'|'invalid'} CampaignPhase
+   */
+  /**
+   * @typedef {{type: 'BEGIN', seed: number}|
+   * {type: 'TOGGLE_HERO', heroId: HeroId}|
+   * {type: 'SELECT_VICTIM', heroId: HeroId}|
+   * {type: 'CHOOSE_APPROACH', approachId: ApproachId}|
+   * {type: ('CONTINUE_INTRO'|'DEPART'|'ENTER_DUNGEON'|'ACK_SUCCESS'|'OPEN_SACRIFICE'|
+   * 'CANCEL_SACRIFICE'|'CONFIRM_SACRIFICE'|'ACK_DEATH'|'REQUEST_RETREAT'|'CANCEL_RETREAT'|
+   * 'CONFIRM_RETREAT'|'ACK_AUTO_RETREAT'|'CONTINUE_DUNGEON'|'NEW_CAMPAIGN')}} GameAction
+   */
+  /**
+   * @typedef {Object} PendingOutcome
+   * @property {EncounterId} encounterId
+   * @property {ApproachId} approachId
+   * @property {CompetencyId} competencyId
+   * @property {readonly HeroId[]} holderHeroIds
+   * @property {boolean} success
+   * @property {string} resultText
+   * @property {(HeroId|null)} victimId
+   */
+  /**
+   * @typedef {{sequence: number, type: 'campaign_started', seed: number}|
+   * {sequence: number, type: 'formation_opened', dungeon: 'physical'}|
+   * {sequence: number, type: 'formation_selection_changed', heroId: HeroId, selected: boolean}|
+   * {sequence: number, type: 'party_formed', heroes: readonly HeroId[]}|
+   * {sequence: number, type: ('encounter_revealed'|'encounter_revisited'), dungeon: DungeonId, position: number, encounterId: EncounterId}|
+   * {sequence: number, type: 'approach_resolved', dungeon: DungeonId, position: number, encounterId: EncounterId, approachId: ApproachId, competency: CompetencyId, success: boolean}|
+   * {sequence: number, type: ('sacrifice_choice_opened'|'sacrifice_confirmation_cancelled'), encounterId: EncounterId}|
+   * {sequence: number, type: ('sacrifice_victim_selected'|'hero_sacrificed'), encounterId: EncounterId, heroId: HeroId}|
+   * {sequence: number, type: ('party_retreated'|'dungeon_completed'|'dungeon_advanced'|'automatic_retreat'|'automatic_retreat_acknowledged'), dungeon: DungeonId}|
+   * {sequence: number, type: 'position_advanced', dungeon: DungeonId, position: number}|
+   * {sequence: number, type: 'retreat_requested', dungeon: DungeonId, position: number, fromPhase: ('dungeon_intro'|'encounter_choice')}|
+   * {sequence: number, type: 'retreat_cancelled', dungeon: DungeonId, position: number, returnPhase: ('dungeon_intro'|'encounter_choice')}|
+   * {sequence: number, type: 'campaign_won', survivors: readonly HeroId[]}|
+   * {sequence: number, type: 'campaign_lost'}} ActionEvent
+   */
+  /** @typedef {Readonly<Record<string, unknown>>} DiagnosticContext */
+  /** @typedef {Readonly<{code: string, message: string, context: DiagnosticContext}>} InvariantViolation */
+  /** @typedef {Readonly<Record<string, unknown>>} AppEffect */
+  /** @typedef {Readonly<{code: string, message: string, context: DiagnosticContext}>} EngineError */
+  /**
+   * @typedef {Object} CampaignAssignments
+   * @property {Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>} physical
+   * @property {Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>} supernatural
+   * @property {Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>} final
    */
   /**
    * @typedef {Object} CampaignState
-   * @property {number} version
-   * @property {string} phase
+   * @property {1} version
+   * @property {CampaignPhase} phase
    * @property {(number|null)} seed
    * @property {(number|null)} rngState
-   * @property {(string|null)} dungeonId
+   * @property {(DungeonId|null)} dungeonId
    * @property {(number|null)} position
-   * @property {readonly string[]} draftPartyIds
-   * @property {readonly string[]} partyIds
-   * @property {readonly string[]} deadHeroIds
-   * @property {Readonly<{physical: readonly (string|null)[], supernatural: readonly (string|null)[], final: readonly (string|null)[]}>} assignments
-   * @property {(Object|null)} pendingOutcome
-   * @property {(string|null)} pendingVictimId
+   * @property {readonly HeroId[]} draftPartyIds
+   * @property {readonly HeroId[]} partyIds
+   * @property {readonly HeroId[]} deadHeroIds
+   * @property {CampaignAssignments} assignments
+   * @property {(PendingOutcome|null)} pendingOutcome
+   * @property {(HeroId|null)} pendingVictimId
    * @property {number} sequence
-   * @property {readonly Object[]} actionHistory
-   * @property {readonly Object[]} invariantViolations
+   * @property {readonly ActionEvent[]} actionHistory
+   * @property {readonly InvariantViolation[]} invariantViolations
    */
   /**
    * @typedef {Object} EngineResult
    * @property {boolean} ok
    * @property {CampaignState=} state
-   * @property {readonly Object[]=} effects
-   * @property {{code: string, message: string, context: Object}=} error
+   * @property {readonly AppEffect[]=} effects
+   * @property {EngineError=} error
    */
   /**
    * @typedef {Object} ExpeditionController
