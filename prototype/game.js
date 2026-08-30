@@ -22,6 +22,7 @@
     'defeat',
     'invalid'
   ];
+  var RETREATABLE_PHASES = Object.freeze(['dungeon_intro', 'encounter_choice']);
 
   function deepFreeze(value) {
     if (!value || typeof value !== 'object' || Object.isFrozen(value)) {
@@ -420,12 +421,12 @@
   }
 
   function deriveRetreatEligibility(state) {
-    return livingHeroIds(state).length >= 3 && state.pendingOutcome === null && ['dungeon_intro', 'encounter_choice'].indexOf(state.phase) >= 0;
+    return livingHeroIds(state).length >= 3 && state.pendingOutcome === null && RETREATABLE_PHASES.indexOf(state.phase) >= 0;
   }
 
   function retreatReturnPhase(state) {
     var lastEvent = state.actionHistory[state.actionHistory.length - 1];
-    if (lastEvent && lastEvent.type === 'retreat_requested' && ['dungeon_intro', 'encounter_choice'].indexOf(lastEvent.fromPhase) >= 0) {
+    if (lastEvent && lastEvent.type === 'retreat_requested' && RETREATABLE_PHASES.indexOf(lastEvent.fromPhase) >= 0) {
       return lastEvent.fromPhase;
     }
     return 'encounter_choice';
@@ -660,7 +661,8 @@
   }
 
   function hasCampaignShape(state) {
-    return Boolean(state && Array.isArray(state.partyIds) && Array.isArray(state.deadHeroIds) &&
+    return Boolean(state && Number.isInteger(state.sequence) && state.sequence >= 0 &&
+      Array.isArray(state.partyIds) && Array.isArray(state.deadHeroIds) &&
       Array.isArray(state.draftPartyIds) && state.assignments && Array.isArray(state.assignments.physical) &&
       Array.isArray(state.assignments.supernatural) && Array.isArray(state.assignments.final) &&
       Array.isArray(state.actionHistory) && Array.isArray(state.invariantViolations));
@@ -672,7 +674,7 @@
       return deepFreeze({ ok: false, violations: [makeViolation('invalid_state_shape', 'O estado da campanha não é um objeto válido.', {})] });
     }
     if (!hasCampaignShape(state)) {
-      violations.push(makeViolation('invalid_state_shape', 'O estado da campanha não possui todas as coleções obrigatórias.', {}));
+      return deepFreeze({ ok: false, violations: [makeViolation('invalid_state_shape', 'O estado da campanha não possui todas as propriedades obrigatórias.', {})] });
     }
     if (state.version !== 1) {
       violations.push(makeViolation('invalid_state_version', 'A versão do estado deve ser 1.', { version: state.version }));
@@ -769,6 +771,9 @@
       var expectedCompletedPositions = expectedLengths[state.dungeonId];
       if (!Array.isArray(completedAssignments) || completedAssignments.filter(Boolean).length !== expectedCompletedPositions) {
         violations.push(makeViolation('incomplete_dungeon', 'A masmorra não pode ser concluída antes de todas as posições.', { dungeon: state.dungeonId }));
+      }
+      if (state.position !== expectedCompletedPositions) {
+        violations.push(makeViolation('invalid_dungeon_position', 'A conclusão da masmorra exige a última posição.', { dungeon: state.dungeonId, position: state.position, expectedPosition: expectedCompletedPositions }));
       }
     }
 

@@ -320,9 +320,7 @@
       element('p', '', 'Os encontros são atribuídos somente quando cada posição é alcançada. Posições reveladas permanecem fixas nesta campanha.'),
       actionButton('Entrar', 'primary', 'enter-dungeon')
     );
-    if (view.canRetreat || view.phase === 'retreat_confirmation') {
-      append(decision, actionButton('Recuar para a cidade', 'ghost', 'request-retreat'));
-    }
+    append(decision, renderRetreatAccess(view));
     append(decision, actionButton('Consultar elenco', 'roster-toggle', 'open-roster'));
     append(main, scene, decision);
     append(grid, main, renderRoster(view, false));
@@ -387,6 +385,13 @@
     return actionButton('Consultar elenco', 'roster-toggle', 'open-roster');
   }
 
+  function renderRetreatAccess(view) {
+    if (!view.canRetreat && view.phase !== 'retreat_confirmation') {
+      return null;
+    }
+    return actionButton('Recuar para a cidade', 'ghost', 'request-retreat');
+  }
+
   function renderEncounterChoice(view) {
     var main = element('main', 'main-region encounter-region');
     main.id = 'main';
@@ -399,9 +404,7 @@
     view.encounter.approaches.forEach(function (approach) {
       append(actions, actionButton(approach.text, 'approach-action', 'choose-approach', approach.id));
     });
-    if (view.canRetreat || view.phase === 'retreat_confirmation') {
-      append(actions, actionButton('Recuar para a cidade', 'ghost', 'request-retreat'));
-    }
+    append(actions, renderRetreatAccess(view));
     append(decision,
       element('p', 'eyebrow ink-eyebrow', 'Escolha uma abordagem'),
       approachTitle,
@@ -1063,9 +1066,10 @@
       } else if (action === 'continue-intro') {
         submit({ type: 'CONTINUE_INTRO' }, { focusHeading: true, announce: 'Formação disponível.' });
       } else if (action === 'toggle-hero') {
-        submit({ type: 'TOGGLE_HERO', heroId: trigger.dataset.id }, {
-          focusSelector: '[data-action="toggle-hero"][data-id="' + trigger.dataset.id + '"]',
-          announce: trigger.dataset.id + ' atualizado na formação.'
+        var heroId = trigger.dataset.id;
+        submit({ type: 'TOGGLE_HERO', heroId: heroId }, {
+          focusSelector: '[data-action="toggle-hero"][data-id="' + heroId + '"]',
+          announce: heroId + ' atualizado na formação.'
         });
       } else if (action === 'depart') {
         submit({ type: 'DEPART' }, { focusHeading: true, announce: 'Expedição formada.' });
@@ -1217,7 +1221,13 @@
     });
   }
 
-  /** @type {Readonly<{createController: (root: HTMLElement) => Object}>} */
+  /**
+   * @typedef {Object} ExpeditionController
+   * @property {(action: Object) => Object} dispatch
+   * @property {() => Object} getState
+   * @property {() => void} destroy
+   */
+  /** @type {Readonly<{createController: (root: HTMLElement) => ExpeditionController}>} */
   var ExpeditionApp = Object.freeze({ createController: createController });
   global.ExpeditionApp = ExpeditionApp;
 

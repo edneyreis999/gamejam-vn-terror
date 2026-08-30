@@ -702,6 +702,8 @@ button.hero-card:hover {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: var(--space-4);
   margin-block: var(--space-8);
+  padding: 0;
+  list-style: none;
 }
 
 .map-half {

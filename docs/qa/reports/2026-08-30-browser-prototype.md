@@ -113,8 +113,8 @@ None. No reproduced finding entered the governor.
 
 ## Human Verifications Needed
 
-- [ ] `ACC-accessibility-diagnostics`: run a complete VoiceOver read/announcement walk on macOS hardware; confirm headings, live results and native dialogs audibly, not only by DOM/keyboard evidence.
-- [ ] `ART-encounter-art-content`: give the provisional 16-image inventory a final cultural/editorial approval before treating any art direction as canon; current QA only confirms the GDD guardrails.
+- [ ] `ACC-accessibility-diagnostics`: run a complete VoiceOver read/announcement walk on macOS hardware; confirm headings, live results and native dialogs audibly, not only by DOM/keyboard evidence. (row #1 — `CH-keyboard-zoom-motion`)
+- [ ] `ART-encounter-art-content`: give the provisional 16-image inventory a final cultural/editorial approval before treating any art direction as canon; current QA only confirms the GDD guardrails. (row #3 — `CH-sixteen-image-devlog-review`)
 
 ## Decisions for a Human
 

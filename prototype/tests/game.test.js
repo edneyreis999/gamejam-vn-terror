@@ -564,6 +564,10 @@
       position: 5
     });
     T.equal(accepted(incomplete, { type: 'CONTINUE_DUNGEON' }).phase, 'invalid');
+    var wrongPosition = stateFixture(physicalComplete, { position: 1 });
+    var wrongPositionResult = accepted(wrongPosition, { type: 'CONTINUE_DUNGEON' });
+    T.equal(wrongPositionResult.phase, 'invalid');
+    T.includes(violationCodes(Engine.validateState(wrongPosition)), 'invalid_dungeon_position');
   });
 
   T.test('UT-048 — final atribui progressivamente somente seis candidatos sem repetição', function () {
@@ -659,7 +663,7 @@
     T.includes(codes, 'impossible_dungeon_transition');
   });
 
-  T.test('UT-059 — enterInvalid ocorre uma vez e preserva o snapshot anterior', function () {
+  T.test('UT-059 — enterInvalid é idempotente e dispatch rejeita estado malformado', function () {
     var state = startFormation(7);
     var violation = { code: 'forced_test_violation', message: 'Violação controlada.', context: { field: 'phase' } };
     var invalid = Engine.enterInvalid(state, [violation]);
@@ -670,15 +674,29 @@
     T.truthy(malformedResult.ok);
     T.equal(malformedResult.state.phase, 'invalid');
     T.includes(malformedResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_state_shape');
+    var missingSequence = JSON.parse(JSON.stringify(Engine.createReadyState()));
+    delete missingSequence.sequence;
+    var missingSequenceResult = Engine.dispatch(missingSequence, { type: 'BEGIN', seed: 7 });
+    T.equal(missingSequenceResult.state.phase, 'invalid');
+    T.includes(missingSequenceResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_state_shape');
+    var malformedVictory = Engine.dispatch({ phase: 'victory' }, { type: 'NEW_CAMPAIGN' });
+    T.truthy(malformedVictory.ok);
+    T.equal(malformedVictory.state.phase, 'invalid');
+    T.includes(malformedVictory.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_state_shape');
   });
 
   T.test('UT-060 — cada ação aceita incrementa a sequência e rejeição não acrescenta evento', function () {
-    function acceptOne(state, action) {
+    function acceptOne(state, action, expectedEvent) {
       var beforeSequence = state.sequence;
       var beforeLength = state.actionHistory.length;
       var next = accepted(state, action);
       T.equal(next.sequence, beforeSequence + 1, action.type);
       T.equal(next.actionHistory.length, beforeLength + 1, action.type);
+      var appended = next.actionHistory[next.actionHistory.length - 1];
+      T.equal(appended.sequence, next.sequence, action.type);
+      Object.keys(expectedEvent).forEach(function (key) {
+        T.deepEqual(appended[key], expectedEvent[key], action.type + '.' + key);
+      });
       return next;
     }
 
@@ -686,22 +704,22 @@
     var withEvent = Engine.appendHistory(state, { type: 'test_event', value: 1 });
     T.equal(withEvent.sequence, 1);
     T.deepEqual(withEvent.actionHistory, [{ sequence: 1, type: 'test_event', value: 1 }]);
-    var started = acceptOne(state, { type: 'BEGIN', seed: 7 });
-    var formation = acceptOne(started, { type: 'CONTINUE_INTRO' });
-    formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' });
-    formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' });
+    var started = acceptOne(state, { type: 'BEGIN', seed: 7 }, { type: 'campaign_started', seed: 7 });
+    var formation = acceptOne(started, { type: 'CONTINUE_INTRO' }, { type: 'formation_opened', dungeon: 'physical' });
+    formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' }, { type: 'formation_selection_changed', heroId: 'H1', selected: true });
+    formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' }, { type: 'formation_selection_changed', heroId: 'H1', selected: false });
 
     var sacrifice = failedA1State();
-    sacrifice = acceptOne(sacrifice, { type: 'OPEN_SACRIFICE' });
-    sacrifice = acceptOne(sacrifice, { type: 'SELECT_VICTIM', heroId: 'H4' });
-    sacrifice = acceptOne(sacrifice, { type: 'CANCEL_SACRIFICE' });
+    sacrifice = acceptOne(sacrifice, { type: 'OPEN_SACRIFICE' }, { type: 'sacrifice_choice_opened', encounterId: 'A1' });
+    sacrifice = acceptOne(sacrifice, { type: 'SELECT_VICTIM', heroId: 'H4' }, { type: 'sacrifice_victim_selected', encounterId: 'A1', heroId: 'H4' });
+    sacrifice = acceptOne(sacrifice, { type: 'CANCEL_SACRIFICE' }, { type: 'sacrifice_confirmation_cancelled', encounterId: 'A1' });
 
     var retreat = firstEncounter(['H1', 'H2', 'H3'], 7);
-    retreat = acceptOne(retreat, { type: 'REQUEST_RETREAT' });
-    retreat = acceptOne(retreat, { type: 'CANCEL_RETREAT' });
+    retreat = acceptOne(retreat, { type: 'REQUEST_RETREAT' }, { type: 'retreat_requested', dungeon: 'physical', position: 1, fromPhase: 'encounter_choice' });
+    retreat = acceptOne(retreat, { type: 'CANCEL_RETREAT' }, { type: 'retreat_cancelled', dungeon: 'physical', position: 1, returnPhase: 'encounter_choice' });
 
     var automaticRetreat = accepted(deathResultWithEmptyParty(), { type: 'ACK_DEATH' });
-    acceptOne(automaticRetreat, { type: 'ACK_AUTO_RETREAT' });
+    acceptOne(automaticRetreat, { type: 'ACK_AUTO_RETREAT' }, { type: 'automatic_retreat_acknowledged', dungeon: 'physical' });
 
     var rejected = Engine.dispatch(started, { type: 'BEGIN', seed: 8 });
     T.equal(rejected.state.sequence, started.sequence);

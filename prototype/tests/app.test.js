@@ -724,6 +724,9 @@
       Test.deepEqual(Object.keys(button.dataset).sort(), ['action', 'id']);
       Test.falsy(button.className.indexOf(approach.competencyId) >= 0);
       Test.falsy(button.hasAttribute('aria-label'));
+      Test.falsy(button.hasAttribute('aria-labelledby'));
+      Test.falsy(button.hasAttribute('aria-describedby'));
+      Test.falsy(button.hasAttribute('title'));
       names.forEach(function (name) { Test.falsy(button.textContent.indexOf(name) >= 0); });
     });
     Test.falsy(current.root.querySelector('.encounter-decision').textContent.indexOf('Competência exigida') >= 0);
@@ -750,7 +753,7 @@
     var trigger = current.root.querySelector('[data-action="open-roster"]');
     trigger.focus();
     trigger.click();
-    current.root.querySelector('#roster-dialog').dispatchEvent(new Event('cancel', { bubbles: true, cancelable: true }));
+    current.root.querySelector('#roster-dialog').dispatchEvent(new Event('cancel', { cancelable: true }));
     await new Promise(function (resolve) { global.setTimeout(resolve, 75); });
     Test.equal(JSON.stringify(current.controller.getState()), before);
     Test.equal(document.activeElement.dataset.action, 'open-roster');
@@ -1142,7 +1145,7 @@
     current.cleanup();
   });
 
-  Test.test('IT-072 — três heróis sem reserva ainda podem recuar', function () {
+  Test.test('IT-072 — três heróis sem reserva recuam pelo controle e Escape restaura o limiar', async function () {
     var current = fixture();
     driveDeaths(current.controller, 5);
     returnToFormation(current.controller);
@@ -1151,10 +1154,16 @@
     Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
     Test.equal(current.controller.getState().partyIds.length, 3);
     Test.equal(livingIds(current.controller.getState()).length, 3);
-    Test.truthy(current.root.querySelector('[data-action="request-retreat"]'));
-    Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
-    Test.truthy(current.controller.dispatch({ type: 'CANCEL_RETREAT' }).ok);
+    var retreat = current.root.querySelector('[data-action="request-retreat"]');
+    retreat.focus();
+    retreat.click();
+    var confirmation = current.root.querySelector('#required-dialog');
+    Test.truthy(confirmation.open);
+    Test.equal(document.activeElement.dataset.action, 'cancel-retreat');
+    confirmation.dispatchEvent(new Event('cancel', { cancelable: true }));
+    await new Promise(function (resolve) { global.setTimeout(resolve, 75); });
     Test.equal(current.controller.getState().phase, 'dungeon_intro');
+    Test.equal(document.activeElement.dataset.action, 'request-retreat');
     current.cleanup();
   });
 
@@ -1183,7 +1192,7 @@
     var dead = current.controller.getState().deadHeroIds.slice();
     var assignment = current.controller.getState().assignments.physical[0];
     Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
-    current.root.querySelector('#required-dialog').dispatchEvent(new Event('cancel', { bubbles: true, cancelable: true }));
+    current.root.querySelector('#required-dialog').dispatchEvent(new Event('cancel', { cancelable: true }));
     Test.equal(current.controller.getState().phase, 'encounter_choice');
     Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
     Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);

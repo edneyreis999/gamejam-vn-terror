@@ -1,9 +1,10 @@
 (function (global) {
   'use strict';
 
+  // 66 UT + 150 IT + 15 E2E cases from .compozy/tasks/browser-prototype/_tests.md.
   var EXPECTED_CASE_COUNT = 231;
   var cases = [];
-  var registeredIds = {};
+  var registeredIds = Object.create(null);
   var loadErrors = [];
 
   global.addEventListener('error', function (event) {
@@ -76,7 +77,7 @@
   }
 
   function test(name, callback) {
-    var idMatch = /^([A-Z]+-\d+)/.exec(name);
+    var idMatch = /^([A-Z0-9]+-\d+)/.exec(name);
     var id = idMatch ? idMatch[1] : name;
     if (registeredIds[id]) {
       throw new Error('ID de teste duplicado: ' + id + '.');

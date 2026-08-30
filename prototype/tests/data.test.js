@@ -81,7 +81,9 @@
     T.includes(violationCodes(Engine.validateCatalog(freezeFixture(fourApproaches))), 'invalid_approach_count');
     var nullApproach = cloneCatalog();
     nullApproach.encounters.A1.approaches[0] = null;
-    T.includes(violationCodes(Engine.validateCatalog(freezeFixture(nullApproach))), 'invalid_approach_definition');
+    var nullApproachResult = Engine.validateCatalog(freezeFixture(nullApproach));
+    T.falsy(nullApproachResult.ok);
+    T.includes(violationCodes(nullApproachResult), 'invalid_approach_definition');
   });
 
   T.test('UT-007 — competências repetidas nas abordagens do mesmo encontro são rejeitadas', function () {
@@ -137,6 +139,8 @@
     });
     var remoteImage = cloneCatalog();
     remoteImage.encounters.A1.imagePath = 'https://example.invalid/a1.jpg';
-    T.includes(violationCodes(Engine.validateCatalog(freezeFixture(remoteImage))), 'invalid_encounter_image_path');
+    var remoteImageResult = Engine.validateCatalog(freezeFixture(remoteImage));
+    T.falsy(remoteImageResult.ok);
+    T.includes(violationCodes(remoteImageResult), 'invalid_encounter_image_path');
   });
 })(window);
