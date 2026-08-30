@@ -364,6 +364,35 @@
     return actions;
   }
 
+  function cloneCatalog() {
+    return JSON.parse(JSON.stringify(Data));
+  }
+
+  function reachCatalogEncounter(controller, seed, encounterId) {
+    beginToFormation(controller, seed);
+    var guard = 0;
+    while (guard < 100) {
+      guard += 1;
+      var state = controller.getState();
+      if (state.phase === 'formation') {
+        selectHeroes(controller, ['H1', 'H2', 'H3']);
+        Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
+      } else if (state.phase === 'dungeon_intro') {
+        Test.truthy(controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+      } else if (state.phase === 'encounter_choice') {
+        if (currentEncounter(state).id === encounterId) {
+          return state;
+        }
+        resolveSuccess(controller);
+      } else if (state.phase === 'dungeon_complete') {
+        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+      } else {
+        throw new Error('Fase inesperada ao localizar ' + encounterId + ': ' + state.phase);
+      }
+    }
+    throw new Error(encounterId + ' não apareceu na campanha de teste.');
+  }
+
   Test.test('IT-001 — apenas index.html é montado automaticamente como entrada', function () {
     Test.falsy(document.getElementById('app'), 'O harness não deve se transformar em uma segunda entrada suportada.');
     Test.truthy(global.ExpeditionApp && typeof global.ExpeditionApp.createController === 'function');
@@ -1709,5 +1738,166 @@
     Test.equal(state.actionHistory.filter(function (entry) { return entry.type === 'hero_sacrificed'; }).length, 8);
     Test.equal(state.phase, 'defeat');
     current.cleanup();
+  });
+
+  Test.test('IT-010 — campanha completa depende somente de recursos locais relativos', function () {
+    var current = fixture();
+    completeWithoutDeaths(current.controller, 85);
+    var paths = Data.encounterOrder.map(function (encounterId) { return Data.encounters[encounterId].imagePath; });
+    Array.prototype.forEach.call(document.querySelectorAll('script[src], link[href]'), function (resource) {
+      var path = resource.getAttribute('src') || resource.getAttribute('href');
+      Test.falsy(/^(?:https?:)?\/\//i.test(path), path);
+    });
+    paths.forEach(function (path) {
+      Test.truthy(/^assets\/encounters\/[ab][1-8]\.jpg$/.test(path), path);
+    });
+    Test.equal(current.controller.getState().phase, 'victory');
+    current.cleanup();
+  });
+
+  Test.test('IT-121 — competência citada fora das três abordagens gera diagnóstico', function () {
+    var catalog = cloneCatalog();
+    catalog.encounters.A1.description += ' Conhecimento.';
+    var result = Engine.validateCatalog(catalog);
+    var violation = result.violations.filter(function (item) { return item.code === 'unmapped_competency_reference'; })[0];
+    Test.falsy(result.ok);
+    Test.equal(violation.context.encounterId, 'A1');
+    Test.equal(violation.context.competencyId, 'knowledge');
+  });
+
+  Test.test('IT-122 — imagem ausente preserva texto, ações e histórico', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 86);
+    var stateBefore = JSON.stringify(current.controller.getState());
+    var image = current.root.querySelector('img[data-optional-image]');
+    var expected = currentEncounter(current.controller.getState());
+    image.dispatchEvent(new Event('error'));
+    Test.truthy(current.root.querySelector('[data-image-region]').classList.contains('image-fallback'));
+    Test.includes(current.root.textContent, expected.title);
+    Test.includes(current.root.textContent, expected.description);
+    Test.equal(current.root.querySelectorAll('[data-action="choose-approach"]').length, 3);
+    Test.equal(JSON.stringify(current.controller.getState()), stateBefore);
+    current.cleanup();
+  });
+
+  Test.test('IT-123 — verbos corpóreos distinguem força, movimento, precisão e ambiente', function () {
+    Test.includes(Data.encounters.A4.approaches[1].text, 'Conter');
+    Test.includes(Data.encounters.A4.approaches[0].text, 'Escalar');
+    Test.includes(Data.encounters.A5.approaches[1].text, 'Desconectar');
+    Test.includes(Data.encounters.A3.approaches[0].text, 'Improvisar');
+    Test.deepEqual([
+      Data.encounters.A4.approaches[1].competencyId,
+      Data.encounters.A4.approaches[0].competencyId,
+      Data.encounters.A5.approaches[1].competencyId,
+      Data.encounters.A3.approaches[0].competencyId
+    ], ['strength', 'athletics', 'dexterity', 'survival']);
+  });
+
+  Test.test('IT-124 — cópia pré-compromisso não exibe pools nem rótulos internos', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 87);
+    var mainCopy = current.root.querySelector('main').textContent;
+    Test.falsy(/pool|masmorra física|masmorra sobrenatural|A\d-\d|B\d-\d/i.test(mainCopy));
+    currentEncounter(current.controller.getState()).approaches.forEach(function (approach) {
+      Test.falsy(mainCopy.indexOf(Data.competencies[approach.competencyId].label) >= 0);
+    });
+    current.cleanup();
+  });
+
+  Test.test('IT-125 — explicação permanece até reconhecimento da consequência', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 88);
+    var approach = successfulApproach(current.controller.getState());
+    Test.truthy(current.controller.dispatch({ type: 'CHOOSE_APPROACH', approachId: approach.id }).ok);
+    var explanation = current.root.querySelector('.result-explanation').textContent;
+    Test.falsy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+    Test.equal(current.controller.getState().phase, 'approach_result');
+    Test.equal(current.root.querySelector('.result-explanation').textContent, explanation);
+    current.cleanup();
+  });
+
+  Test.test('IT-126 — consulta ao elenco preserva encontro e escolhas completas', function () {
+    var current = fixture(320);
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 89);
+    var title = current.root.querySelector('#encounter-title').textContent;
+    var choices = Array.prototype.map.call(current.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; });
+    current.root.querySelector('[data-action="open-roster"]').click();
+    current.root.querySelector('[data-action="close-roster"]').click();
+    Test.equal(current.root.querySelector('#encounter-title').textContent, title);
+    Test.deepEqual(Array.prototype.map.call(current.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; }), choices);
+    Test.equal(current.controller.getState().phase, 'encounter_choice');
+    current.cleanup();
+  });
+
+  Test.test('IT-127 — encontro revisitado conserva texto, mapeamento e imagem', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 90);
+    var encounterId = currentEncounter(current.controller.getState()).id;
+    var before = {
+      title: current.root.querySelector('#encounter-title').textContent,
+      approaches: currentEncounter(current.controller.getState()).approaches,
+      image: current.root.querySelector('img').getAttribute('src')
+    };
+    Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);
+    selectHeroes(current.controller, ['H1', 'H2', 'H3']);
+    Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
+    Test.equal(currentEncounter(current.controller.getState()).id, encounterId);
+    Test.equal(current.root.querySelector('#encounter-title').textContent, before.title);
+    Test.deepEqual(currentEncounter(current.controller.getState()).approaches, before.approaches);
+    Test.equal(current.root.querySelector('img').getAttribute('src'), before.image);
+    current.cleanup();
+  });
+
+  Test.test('IT-128 — competência exigida aparece somente depois da escolha', function () {
+    var current = fixture();
+    reachEncounter(current.controller, ['H1', 'H2', 'H3'], 91);
+    var approach = successfulApproach(current.controller.getState());
+    var label = Data.competencies[approach.competencyId].label;
+    Test.falsy(current.root.querySelector('main').textContent.indexOf('Competência exigida') >= 0);
+    Test.falsy(current.root.querySelector('main').textContent.indexOf(label) >= 0);
+    Test.truthy(current.controller.dispatch({ type: 'CHOOSE_APPROACH', approachId: approach.id }).ok);
+    Test.includes(current.root.querySelector('.competency-result').textContent, label);
+    current.cleanup();
+  });
+
+  Test.test('IT-129 — A1 reutiliza conteúdo, abordagens e JPEG quando sorteado na final', function () {
+    var initial = fixture();
+    var initialState = reachCatalogEncounter(initial.controller, 1, 'A1');
+    var initialPresentation = {
+      dungeon: initialState.dungeonId,
+      title: initial.root.querySelector('#encounter-title').textContent,
+      description: initial.root.querySelector('.scene-copy .prose').textContent,
+      approaches: Array.prototype.map.call(initial.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; }),
+      image: initial.root.querySelector('img').getAttribute('src')
+    };
+    initial.cleanup();
+
+    var final = fixture();
+    var finalState = reachCatalogEncounter(final.controller, 2, 'A1');
+    Test.equal(initialPresentation.dungeon, 'physical');
+    Test.equal(finalState.dungeonId, 'final');
+    Test.equal(final.root.querySelector('#encounter-title').textContent, initialPresentation.title);
+    Test.equal(final.root.querySelector('.scene-copy .prose').textContent, initialPresentation.description);
+    Test.deepEqual(Array.prototype.map.call(final.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; }), initialPresentation.approaches);
+    Test.equal(final.root.querySelector('img').getAttribute('src'), initialPresentation.image);
+    final.cleanup();
+  });
+
+  Test.test('IT-130 — dezesseis JPEGs carregam em 1600 por 900 e preservam a matriz', async function () {
+    var paths = Data.encounterOrder.map(function (encounterId) { return Data.encounters[encounterId].imagePath; });
+    var dimensions = await Promise.all(paths.map(function (path) {
+      return new Promise(function (resolve, reject) {
+        var image = new Image();
+        image.addEventListener('load', function () { resolve([image.naturalWidth, image.naturalHeight]); }, { once: true });
+        image.addEventListener('error', function () { reject(new Error('Falha ao carregar ' + path)); }, { once: true });
+        image.src = path;
+      });
+    }));
+    Test.equal(new Set(paths).size, 16);
+    dimensions.forEach(function (value) { Test.deepEqual(value, [1600, 900]); });
+    var report = Engine.validateCatalog().report;
+    Data.competencyOrder.forEach(function (competencyId) { Test.equal(report.approachCompetencyOccurrences[competencyId], 6); });
   });
 })(window);

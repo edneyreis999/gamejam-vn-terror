@@ -404,4 +404,62 @@
     Test.deepEqual(current.controller.getState().deadHeroIds, []);
     current.cleanup();
   });
+
+  Test.test('E2E-013 — catálogo inteiro preserva conteúdo, JPEG, redação e fallback', function () {
+    var current = fixture();
+    var warnings = [];
+    var originalWarn = console.warn;
+    var observed = {};
+    console.warn = function () { warnings.push(Array.prototype.slice.call(arguments)); };
+    try {
+      Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: 92 }).ok);
+      current.root.querySelector('[data-action="continue-intro"]').click();
+      var guard = 0;
+      while (current.controller.getState().phase !== 'victory' && guard < 120) {
+        guard += 1;
+        var state = current.controller.getState();
+        if (state.phase === 'formation') {
+          ['H1', 'H2', 'H3'].forEach(function (heroId) { current.root.querySelector('[data-id="' + heroId + '"]').click(); });
+          current.root.querySelector('[data-action="depart"]').click();
+        } else if (state.phase === 'dungeon_intro') {
+          current.root.querySelector('[data-action="enter-dungeon"]').click();
+        } else if (state.phase === 'encounter_choice') {
+          var encounter = encounterFor(state);
+          var main = current.root.querySelector('main');
+          var image = current.root.querySelector('img[data-optional-image]');
+          var buttons = Array.prototype.map.call(current.root.querySelectorAll('[data-action="choose-approach"]'), function (button) { return button.textContent; });
+          Test.equal(current.root.querySelector('#encounter-title').textContent, encounter.title);
+          Test.equal(current.root.querySelector('.scene-copy .prose').textContent, encounter.description);
+          Test.deepEqual(buttons, encounter.approaches.map(function (approach) { return approach.text; }));
+          Test.equal(image.getAttribute('src'), encounter.imagePath);
+          Test.equal(image.getAttribute('alt'), '');
+          Test.falsy(/pool|masmorra física|masmorra sobrenatural|[AB]\d-\d/i.test(main.textContent));
+          var before = JSON.stringify(state);
+          image.dispatchEvent(new Event('error'));
+          Test.truthy(current.root.querySelector('[data-image-region]').classList.contains('image-fallback'));
+          Test.falsy(current.root.querySelector('img[data-optional-image]'));
+          Test.equal(JSON.stringify(current.controller.getState()), before);
+          Test.equal(current.root.querySelectorAll('[data-action="choose-approach"]').length, 3);
+          observed[encounter.id] = { imagePath: encounter.imagePath, dungeonId: state.dungeonId };
+          var approach = successfulApproach(state);
+          current.root.querySelector('[data-id="' + approach.id + '"]').click();
+        } else if (state.phase === 'approach_result') {
+          current.root.querySelector('[data-action="ack-success"]').click();
+        } else if (state.phase === 'dungeon_complete') {
+          current.root.querySelector('[data-action="continue-dungeon"]').click();
+        } else {
+          throw new Error('Fase inesperada no inventário visual: ' + state.phase);
+        }
+      }
+      Test.equal(current.controller.getState().phase, 'victory');
+      Test.deepEqual(Object.keys(observed).sort(), Data.encounterOrder.slice().sort());
+      Test.equal(new Set(Object.keys(observed).map(function (encounterId) { return observed[encounterId].imagePath; })).size, 16);
+      Test.equal(Object.keys(observed).filter(function (encounterId) { return observed[encounterId].dungeonId === 'final'; }).length, 6);
+      Test.equal(warnings.filter(function (args) { return args[0] === 'optional_image_failed'; }).length, 16);
+      warnings.forEach(function (args) { Test.truthy(/^assets\/encounters\/[ab][1-8]\.jpg$/.test(args[1]), args[1]); });
+    } finally {
+      console.warn = originalWarn;
+      current.cleanup();
+    }
+  });
 })(window);

@@ -495,7 +495,7 @@ button.hero-card:hover {
 
 .scene-copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 53.75rem;
   padding: 3.25rem var(--space-8) 1.875rem;
 }
@@ -535,8 +535,23 @@ button.hero-card:hover {
   min-height: 23rem;
 }
 
+.encounter-scene::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 13, 11, 0.78) 0%,
+    rgba(12, 13, 11, 0.64) 70%,
+    rgba(12, 13, 11, 0.42) 100%
+  );
+  content: "";
+  pointer-events: none;
+}
+
 .encounter-image {
   position: absolute;
+  z-index: 0;
   inset: 0;
   width: 100%;
   height: 100%;

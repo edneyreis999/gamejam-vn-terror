@@ -16,6 +16,7 @@
       Object.freeze({ title: 'As duas metades apontam para o último caminho.', detail: '' })
     ])
   });
+  var OPTIONAL_IMAGE_TIMEOUT_MS = 4000;
 
   function element(tagName, className, text) {
     var node = document.createElement(tagName);
@@ -310,9 +311,9 @@
     scene.dataset.imageRegion = '';
     if (view.encounter && view.encounter.imagePath) {
       var image = element('img', 'encounter-image');
-      image.src = view.encounter.imagePath;
       image.alt = '';
       image.dataset.optionalImage = '';
+      image.src = view.encounter.imagePath;
       append(scene, image);
     }
     var copy = element('div', 'scene-copy');
@@ -801,6 +802,7 @@
       });
       stage.textContent = '';
       append(stage, surface);
+      monitorOptionalImages();
       document.title = (view.phase === 'ready' ? '' : view.phase === 'formation' ? 'Formação · ' : view.phase === 'dungeon_intro' ? view.dungeon.label + ' · ' : view.phase === 'victory' ? 'Vitória · ' : view.phase === 'defeat' ? 'Derrota · ' : '') + 'Expedição e Sacrifício';
       if (ui.rosterOpen) {
         openRosterDialog();
@@ -966,17 +968,48 @@
       }
     }
 
-    function onOptionalImageError(event) {
-      var image = event.target;
+    function failOptionalImage(image) {
       if (!image || image.tagName !== 'IMG' || !image.hasAttribute('data-optional-image')) {
         return;
+      }
+      if (image.dataset.optionalImageFailed === 'true') {
+        return;
+      }
+      image.dataset.optionalImageFailed = 'true';
+      if (image.optionalImageTimeout) {
+        global.clearTimeout(image.optionalImageTimeout);
+        image.optionalImageTimeout = null;
       }
       var region = image.closest('[data-image-region]');
       if (region) {
         region.classList.add('image-fallback');
       }
+      var path = image.getAttribute('src') || 'sem caminho';
       image.remove();
-      console.warn('optional_image_failed', image.getAttribute('src') || 'sem caminho');
+      console.warn('optional_image_failed', path);
+    }
+
+    function onOptionalImageError(event) {
+      failOptionalImage(event.target);
+    }
+
+    function monitorOptionalImages() {
+      Array.prototype.forEach.call(root.querySelectorAll('img[data-optional-image]'), function (image) {
+        if (image.optionalImageTimeout || image.complete) {
+          return;
+        }
+        image.addEventListener('load', function () {
+          if (image.optionalImageTimeout) {
+            global.clearTimeout(image.optionalImageTimeout);
+            image.optionalImageTimeout = null;
+          }
+        }, { once: true });
+        image.optionalImageTimeout = global.setTimeout(function () {
+          if (image.isConnected && !image.complete) {
+            failOptionalImage(image);
+          }
+        }, OPTIONAL_IMAGE_TIMEOUT_MS);
+      });
     }
 
     buildRoot();

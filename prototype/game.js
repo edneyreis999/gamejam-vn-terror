@@ -251,6 +251,18 @@
         violations.push(makeViolation('duplicate_approach_competency', 'O encontro ' + encounterId + ' repete uma competência entre as abordagens.', { encounterId: encounterId, competencyIds: approachCompetencies }));
       }
 
+      var visibleCopy = [currentEncounter && currentEncounter.title, currentEncounter && currentEncounter.description, currentEncounter && currentEncounter.failureText]
+        .concat(approaches.map(function (currentApproach) { return currentApproach && currentApproach.text; }))
+        .filter(Boolean)
+        .join(' ')
+        .toLocaleLowerCase('pt-BR');
+      competencyIds.forEach(function (competencyId) {
+        var competency = source.competencies[competencyId];
+        if (competency && visibleCopy.indexOf(competency.label.toLocaleLowerCase('pt-BR')) >= 0 && approachCompetencies.indexOf(competencyId) < 0) {
+          violations.push(makeViolation('unmapped_competency_reference', 'O conteúdo de ' + encounterId + ' cita uma competência ausente de suas três abordagens.', { encounterId: encounterId, competencyId: competencyId }));
+        }
+      });
+
       var bodilyCount = 0;
       var liminalCount = 0;
       approaches.forEach(function (currentApproach, index) {
