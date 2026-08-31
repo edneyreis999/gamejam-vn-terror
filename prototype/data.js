@@ -285,6 +285,27 @@
     invalidState: 'O protótipo encontrou um estado inválido. Recarregue a página e registre a semente no console.'
   };
 
+  var destinations = {
+    physical: {
+      id: 'physical',
+      name: 'Caminho do Ferro e das Raízes',
+      rumor: 'Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.',
+      landmarkTotal: 5
+    },
+    supernatural: {
+      id: 'supernatural',
+      name: 'Caminho das Vozes e dos Espelhos',
+      rumor: 'Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.',
+      landmarkTotal: 5
+    },
+    final: {
+      id: 'final',
+      name: 'Caminho do Legado',
+      rumor: 'Duas partes do mapa apontam para aquilo que o bardo herdou.',
+      landmarkTotal: 6
+    }
+  };
+
   global.ExpeditionData = deepFreeze({
     version: 1,
     statuses: {
@@ -299,6 +320,7 @@
     competencies: competencies,
     heroes: heroes,
     encounters: encounters,
+    destinations: destinations,
     copy: copy
   });
 })(window);

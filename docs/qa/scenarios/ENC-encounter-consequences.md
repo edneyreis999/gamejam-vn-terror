@@ -6,7 +6,7 @@ persona: Lia, primeira expedicionária
 journey: J-complete-campaign
 expected: Abordagens não rotuladas produzem explicação posterior, morte permanente ou recuo sem transições duplicadas
 entry_points: file:///…/prototype/index.html
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:

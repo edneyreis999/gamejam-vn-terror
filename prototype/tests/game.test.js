@@ -54,8 +54,9 @@
     return current;
   }
 
-  function departWith(heroIds, seed) {
+  function departWith(heroIds, seed, dungeonId) {
     var state = selectParty(startFormation(seed), heroIds);
+    state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: dungeonId || 'physical' });
     return accepted(state, { type: 'DEPART' });
   }
 
@@ -161,6 +162,9 @@
       } else if (state.phase === 'formation') {
         var living = Engine.snapshot(state).aliveHeroes;
         state = selectParty(state, lowestCoverageParty(living));
+        if (state.selectedDungeonId === null) {
+          state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: Engine.deriveDestinationAvailability(state)[0] });
+        }
         state = accepted(state, { type: 'DEPART' });
       } else if (state.phase === 'dungeon_intro') {
         state = accepted(state, { type: 'ENTER_DUNGEON' });
@@ -179,7 +183,7 @@
       } else if (state.phase === 'automatic_retreat') {
         state = accepted(state, { type: 'ACK_AUTO_RETREAT' });
       } else if (state.phase === 'dungeon_complete') {
-        state = accepted(state, { type: 'CONTINUE_DUNGEON' });
+        state = accepted(state, { type: 'ACK_DUNGEON_COMPLETE' });
       } else if (state.phase === 'victory') {
         throw new Error('A campanha venceu antes de provar a derrota total.');
       } else {
@@ -192,7 +196,7 @@
     return state;
   }
 
-  function runSafeCampaign(stopBeforeFinalAcknowledgment) {
+  function runSafeCampaign(stopBeforeFinalAcknowledgment, firstDungeonId) {
     var state = Engine.createReadyState();
     var guard = 0;
     while (state.phase !== 'victory' && guard < MAX_VICTORY_STEPS) {
@@ -203,6 +207,13 @@
         state = accepted(state, { type: 'CONTINUE_INTRO' });
       } else if (state.phase === 'formation') {
         state = selectParty(state, ['H1', 'H2', 'H3']);
+        if (state.selectedDungeonId === null) {
+          var available = Engine.deriveDestinationAvailability(state);
+          var destination = state.routeProgress.physical === 0 && state.routeProgress.supernatural === 0 && firstDungeonId
+            ? firstDungeonId
+            : available[0];
+          state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: destination });
+        }
         state = accepted(state, { type: 'DEPART' });
       } else if (state.phase === 'dungeon_intro') {
         state = accepted(state, { type: 'ENTER_DUNGEON' });
@@ -214,7 +225,7 @@
         }
         state = accepted(state, { type: 'ACK_SUCCESS' });
       } else if (state.phase === 'dungeon_complete') {
-        state = accepted(state, { type: 'CONTINUE_DUNGEON' });
+        state = accepted(state, { type: 'ACK_DUNGEON_COMPLETE' });
       } else {
         throw new Error('Fase inesperada no roteiro seguro: ' + state.phase);
       }
@@ -277,6 +288,7 @@
     var state = accepted(revealed, { type: 'REQUEST_RETREAT' });
     state = accepted(state, { type: 'CONFIRM_RETREAT' });
     state = selectParty(state, ['H1', 'H2', 'H3']);
+    state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
     state = accepted(state, { type: 'DEPART' });
     state = Engine.revealCurrentPosition(state).state;
     T.equal(Engine.snapshot(state).currentEncounter.id, encounterId);
@@ -288,7 +300,7 @@
     var before = Engine.snapshot(revealed);
     var confirmation = accepted(revealed, { type: 'REQUEST_RETREAT' });
     var result = Engine.confirmRetreat(confirmation);
-    T.equal(result.state.position, 1);
+    T.equal(result.state.position, null);
     T.equal(result.state.seed, revealed.seed);
     T.equal(result.state.rngState, revealed.rngState);
     T.deepEqual(result.state.assignments, before.assignments);
@@ -316,7 +328,7 @@
 
   T.test('UT-021 — estado pronto possui forma limpa e dezesseis posições nulas', function () {
     var state = Engine.createReadyState();
-    T.deepEqual({ version: state.version, phase: state.phase, seed: state.seed, dungeon: state.dungeonId, position: state.position }, { version: 1, phase: 'ready', seed: null, dungeon: null, position: null });
+    T.deepEqual({ version: state.version, phase: state.phase, seed: state.seed, dungeon: state.dungeonId, position: state.position }, { version: 2, phase: 'ready', seed: null, dungeon: null, position: null });
     T.equal(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final).filter(function (value) { return value !== null; }).length, 0);
     T.equal(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final).length, 16);
     T.deepEqual([state.deadHeroIds, state.actionHistory], [[], []]);
@@ -352,9 +364,10 @@
   T.test('UT-025 — DEPART rejeita zero, um, dois ou quatro selecionados com elenco amplo', function () {
     [[], ['H1'], ['H1', 'H2']].forEach(function (heroIds) {
       var state = selectParty(startFormation(7), heroIds);
+      state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
       T.equal(Engine.dispatch(state, { type: 'DEPART' }).error.code, 'invalid_party_size');
     });
-    var fourSelected = stateFixture(startFormation(7), { draftPartyIds: ['H1', 'H2', 'H3', 'H4'] });
+    var fourSelected = stateFixture(startFormation(7), { selectedDungeonId: 'physical', draftPartyIds: ['H1', 'H2', 'H3', 'H4'] });
     T.equal(Engine.dispatch(fourSelected, { type: 'DEPART' }).error.code, 'invalid_party_size');
   });
 
@@ -492,6 +505,7 @@
     T.equal(Engine.dispatch(committed, { type: 'REQUEST_RETREAT' }).error.code, 'retreat_unavailable');
     var reducedFormation = stateFixture(startFormation(7), {
       deadHeroIds: ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+      selectedDungeonId: 'physical',
       draftPartyIds: ['H7', 'H8']
     });
     var twoAlive = accepted(accepted(reducedFormation, { type: 'DEPART' }), { type: 'ENTER_DUNGEON' });
@@ -507,7 +521,7 @@
     T.equal(state.phase, 'formation');
     T.deepEqual(state.partyIds, []);
     T.deepEqual(state.draftPartyIds, []);
-    T.equal(state.position, 1);
+    T.equal(state.position, null);
     T.deepEqual(state.deadHeroIds, before.deadHeroes);
     T.deepEqual(state.assignments, before.assignments);
   });
@@ -543,42 +557,19 @@
     T.equal(Engine.advancePosition(finalResult).state.phase, 'victory');
   });
 
-  T.test('UT-047 — avanço respeita física, sobrenatural e final sem replay', function () {
-    function assertInvalidDungeonPosition(state) {
-      var result = Engine.dispatch(state, { type: 'CONTINUE_DUNGEON' });
-      T.truthy(result.ok);
-      T.equal(result.state.phase, 'invalid');
-      T.includes(result.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_dungeon_position');
-    }
-
+  T.test('UT-047 — reconhecimento conclui a rota e seleção derivada impede replay', function () {
     var physicalComplete = stateFixture(departWith(['H1', 'H2', 'H3'], 7), {
       phase: 'dungeon_complete',
       position: 5,
+      routeProgress: { physical: 5, supernatural: 0, final: 0 },
       assignments: { physical: ['A1', 'A2', 'A3', 'A4', 'A5'], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] }
     });
-    var supernatural = Engine.advanceDungeon(physicalComplete).state;
-    T.equal(supernatural.dungeonId, 'supernatural');
-    var supernaturalComplete = stateFixture(supernatural, {
-      phase: 'dungeon_complete',
-      position: 5,
-      assignments: { physical: ['A1', 'A2', 'A3', 'A4', 'A5'], supernatural: ['B1', 'B2', 'B3', 'B4', 'B5'], final: [null, null, null, null, null, null] }
-    });
-    var finalState = Engine.advanceDungeon(supernaturalComplete).state;
-    T.equal(finalState.dungeonId, 'final');
-    T.equal(Engine.advanceDungeon(stateFixture(finalState, { phase: 'dungeon_complete' })).error.code, 'invalid_dungeon_order');
-    var incomplete = stateFixture(departWith(['H1', 'H2', 'H3'], 7), {
-      phase: 'dungeon_complete',
-      position: 5
-    });
-    T.equal(accepted(incomplete, { type: 'CONTINUE_DUNGEON' }).phase, 'invalid');
-    var wrongPosition = stateFixture(physicalComplete, { position: 1 });
-    assertInvalidDungeonPosition(wrongPosition);
-    var finalComplete = stateFixture(runSafeCampaign(true), {
-      phase: 'dungeon_complete',
-      position: 5,
-      pendingOutcome: null
-    });
-    assertInvalidDungeonPosition(finalComplete);
+    var next = accepted(physicalComplete, { type: 'ACK_DUNGEON_COMPLETE' });
+    T.equal(next.dungeonId, null);
+    T.equal(next.selectedDungeonId, 'supernatural');
+    T.equal(Engine.dispatch(next, { type: 'SELECT_DESTINATION', dungeonId: 'physical' }).error.code, 'destination_unavailable');
+    T.equal(Engine.dispatch(next, { type: 'CONTINUE_DUNGEON' }).error.code, 'invalid_transition');
+    T.equal(Engine.advanceDungeon, undefined);
   });
 
   T.test('UT-048 — final atribui progressivamente somente seis candidatos sem repetição', function () {
@@ -617,9 +608,9 @@
     T.deepEqual(accepted(defeat, { type: 'NEW_CAMPAIGN' }), Engine.createReadyState());
   });
 
-  T.test('UT-053 — snapshot possui exatamente as chaves v1 e posição baseada em um', function () {
+  T.test('UT-053 — snapshot possui as chaves v2 e posição baseada em um', function () {
     var snapshot = Engine.snapshot(firstEncounter(['H1', 'H2', 'H3'], 7));
-    T.deepEqual(Object.keys(snapshot).sort(), ['actionHistory', 'aliveHeroes', 'assignments', 'competencies', 'currentEncounter', 'deadHeroes', 'dungeon', 'invariantViolations', 'party', 'phase', 'position', 'seed', 'version']);
+    T.deepEqual(Object.keys(snapshot).sort(), ['actionHistory', 'aliveHeroes', 'assignments', 'competencies', 'currentEncounter', 'deadHeroes', 'destinations', 'draftParty', 'dungeon', 'invariantViolations', 'mapFragments', 'party', 'phase', 'position', 'seed', 'selectedDestination', 'version']);
     T.equal(snapshot.position, 1);
   });
 
@@ -678,7 +669,7 @@
     T.includes(codes, 'party_death_overlap');
     T.includes(codes, 'missing_phase_payload');
     T.includes(codes, 'missing_victim_payload');
-    T.includes(codes, 'impossible_dungeon_transition');
+    T.includes(codes, 'final_destination_locked');
     var encounter = firstEncounter(['H1', 'H2', 'H3'], 7);
     var malformedOutcome = stateFixture(accepted(encounter, { type: 'CHOOSE_APPROACH', approachId: 'A1-1' }), {
       pendingOutcome: { success: true }
@@ -833,7 +824,7 @@
     T.equal(withEvent.sequence, 1);
     T.deepEqual(withEvent.actionHistory, [{ sequence: 1, type: 'test_event', value: 1 }]);
     var started = acceptOne(state, { type: 'BEGIN', seed: 7 }, { type: 'campaign_started', seed: 7 });
-    var formation = acceptOne(started, { type: 'CONTINUE_INTRO' }, { type: 'formation_opened', dungeon: 'physical' });
+    var formation = acceptOne(started, { type: 'CONTINUE_INTRO' }, { type: 'formation_opened', availableDestinations: ['physical', 'supernatural'] });
     formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' }, { type: 'formation_selection_changed', heroId: 'H1', selected: true });
     formation = acceptOne(formation, { type: 'TOGGLE_HERO', heroId: 'H1' }, { type: 'formation_selection_changed', heroId: 'H1', selected: false });
 
@@ -919,5 +910,412 @@
     } finally {
       Date.now = originalNow;
     }
+  });
+
+  function outcomeFor(encounterId, approachId, partyIds, victimId) {
+    var encounter = Data.encounters[encounterId];
+    var approach = encounter.approaches.filter(function (candidate) { return candidate.id === approachId; })[0];
+    var holders = partyIds.filter(function (heroId) {
+      return Data.heroes[heroId].competencyIds.indexOf(approach.competencyId) >= 0;
+    });
+    var success = holders.length > 0;
+    return {
+      encounterId: encounterId,
+      approachId: approachId,
+      competencyId: approach.competencyId,
+      holderHeroIds: holders,
+      success: success,
+      resultText: success ? approach.successText : encounter.failureText,
+      victimId: victimId || null
+    };
+  }
+
+  function initialCompletionState(dungeonId, otherComplete) {
+    var assignments = {
+      physical: dungeonId === 'physical' || otherComplete ? ['A1', 'A2', 'A3', 'A4', 'A5'] : [null, null, null, null, null],
+      supernatural: dungeonId === 'supernatural' || otherComplete ? ['B1', 'B2', 'B3', 'B4', 'B5'] : [null, null, null, null, null],
+      final: [null, null, null, null, null, null]
+    };
+    return stateFixture(departWith(['H1', 'H2', 'H3'], 31, dungeonId), {
+      phase: 'dungeon_complete',
+      position: 5,
+      routeProgress: {
+        physical: assignments.physical[0] ? 5 : 0,
+        supernatural: assignments.supernatural[0] ? 5 : 0,
+        final: 0
+      },
+      assignments: assignments,
+      pendingOutcome: null,
+      pendingVictimId: null
+    });
+  }
+
+  function finalResolutionState() {
+    var base = departWith(['H1', 'H2', 'H3'], 41, 'physical');
+    var assignments = {
+      physical: ['A1', 'A2', 'A3', 'A4', 'A5'],
+      supernatural: ['B1', 'B2', 'B3', 'B4', 'B5'],
+      final: ['A6', 'A7', 'A8', 'B6', 'B7', 'B8']
+    };
+    return stateFixture(base, {
+      phase: 'approach_result',
+      dungeonId: 'final',
+      position: 6,
+      routeProgress: { physical: 5, supernatural: 5, final: 5 },
+      assignments: assignments,
+      pendingOutcome: outcomeFor('B8', 'B8-2', ['H1', 'H2', 'H3']),
+      pendingVictimId: null
+    });
+  }
+
+  T.test('UT-068 — estado pronto v2 separa seleção, rota ativa e progresso', function () {
+    var state = Engine.createReadyState();
+    T.equal(state.version, 2);
+    T.deepEqual([state.selectedDungeonId, state.dungeonId, state.position], [null, null, null]);
+    T.deepEqual(state.routeProgress, { physical: 0, supernatural: 0, final: 0 });
+    T.deepEqual(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final), new Array(16).fill(null));
+    T.deepEqual([state.draftPartyIds, state.partyIds, state.deadHeroIds, state.actionHistory], [[], [], [], []]);
+  });
+
+  T.test('UT-069 — destinos frescos mantêm duas rotas disponíveis e legado bloqueado', function () {
+    var state = startFormation(67);
+    T.deepEqual(Engine.deriveDestinations(state).map(function (destination) {
+      return [destination.id, destination.status, destination.selected, destination.landmarks.traversed, destination.lockReason];
+    }), [
+      ['physical', 'available', false, 0, null],
+      ['supernatural', 'available', false, 0, null],
+      ['final', 'locked', false, 0, 'map_fragments']
+    ]);
+  });
+
+  T.test('UT-070 — seleção disponível preserva formação e registra somente a escolha', function () {
+    var state = selectParty(startFormation(70), ['H1', 'H2', 'H3']);
+    var beforeLength = state.actionHistory.length;
+    var result = Engine.dispatch(state, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    T.truthy(result.ok);
+    T.equal(result.state.selectedDungeonId, 'physical');
+    T.deepEqual(result.state.draftPartyIds, ['H1', 'H2', 'H3']);
+    T.deepEqual(result.state.actionHistory.slice(beforeLength).map(function (event) { return event.type; }), ['destination_selected']);
+    T.equal(accepted(result.state, { type: 'SELECT_DESTINATION', dungeonId: 'physical' }).selectedDungeonId, 'physical');
+  });
+
+  T.test('UT-071 — destino desconhecido ou fora da preparação é rejeitado imutavelmente', function () {
+    var formation = startFormation(71);
+    var unknown = Engine.dispatch(formation, { type: 'SELECT_DESTINATION', dungeonId: 'unknown' });
+    T.equal(unknown.error.code, 'invalid_destination');
+    T.truthy(unknown.state === formation);
+    var intro = accepted(Engine.createReadyState(), { type: 'BEGIN', seed: 71 });
+    var wrongPhase = Engine.dispatch(intro, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    T.equal(wrongPhase.error.code, 'invalid_transition');
+    T.truthy(wrongPhase.state === intro);
+  });
+
+  T.test('UT-072 — legado bloqueado e caminho concluído nunca se tornam selecionados', function () {
+    var fresh = startFormation(72);
+    var locked = Engine.dispatch(fresh, { type: 'SELECT_DESTINATION', dungeonId: 'final' });
+    T.deepEqual({ code: locked.error.code, context: locked.error.context }, {
+      code: 'destination_unavailable',
+      context: { dungeon: 'final', status: 'locked' }
+    });
+    var afterCompletion = accepted(initialCompletionState('physical', false), { type: 'ACK_DUNGEON_COMPLETE' });
+    var completed = Engine.dispatch(afterCompletion, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    T.deepEqual({ code: completed.error.code, context: completed.error.context }, {
+      code: 'destination_unavailable',
+      context: { dungeon: 'physical', status: 'completed' }
+    });
+  });
+
+  T.test('UT-073 — trocar caminho altera apenas seleção e histórico aceito', function () {
+    var state = selectParty(startFormation(73), ['H1', 'H2', 'H3']);
+    state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    var before = Engine.snapshot(state);
+    var switched = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: 'supernatural' });
+    T.equal(switched.selectedDungeonId, 'supernatural');
+    T.deepEqual(switched.draftPartyIds, state.draftPartyIds);
+    T.deepEqual(switched.assignments, state.assignments);
+    T.deepEqual(switched.routeProgress, state.routeProgress);
+    T.equal(Engine.snapshot(switched).actionHistory.length, before.actionHistory.length + 1);
+  });
+
+  T.test('UT-074 — entrada em preparação deriva seleção neutra, única, final ou derrota', function () {
+    var fresh = Engine.enterFormation(accepted(Engine.createReadyState(), { type: 'BEGIN', seed: 74 }));
+    T.equal(fresh.selectedDungeonId, null);
+    var one = Engine.enterFormation(initialCompletionState('physical', false));
+    T.equal(one.selectedDungeonId, 'supernatural');
+    var final = Engine.enterFormation(initialCompletionState('supernatural', true));
+    T.equal(final.selectedDungeonId, 'final');
+    var noSurvivors = Engine.enterFormation(stateFixture(fresh, { deadHeroIds: Data.heroOrder.slice() }));
+    T.equal(noSurvivors.phase, 'defeat');
+  });
+
+  T.test('UT-075 — partida exige destino antes de validar a quantidade de heróis', function () {
+    var state = selectParty(startFormation(75), ['H1', 'H2']);
+    var result = Engine.dispatch(state, { type: 'DEPART' });
+    T.equal(result.error.code, 'destination_required');
+    T.deepEqual(result.state.draftPartyIds, ['H1', 'H2']);
+  });
+
+  T.test('UT-076 — partida compromete destino e formação atomicamente', function () {
+    var state = selectParty(startFormation(76), ['H1', 'H2', 'H3']);
+    state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: 'supernatural' });
+    var departed = accepted(state, { type: 'DEPART' });
+    T.deepEqual([departed.phase, departed.selectedDungeonId, departed.dungeonId, departed.position], ['dungeon_intro', null, 'supernatural', 1]);
+    T.deepEqual([departed.draftPartyIds, departed.partyIds], [[], ['H1', 'H2', 'H3']]);
+    T.deepEqual(departed.actionHistory.slice(-1)[0], {
+      sequence: departed.sequence,
+      type: 'party_formed',
+      dungeon: 'supernatural',
+      heroes: ['H1', 'H2', 'H3']
+    });
+  });
+
+  T.test('UT-077 — visão do jogador expõe somente os três registros de destino aprovados', function () {
+    var view = Engine.derivePlayerView(accepted(startFormation(77), { type: 'SELECT_DESTINATION', dungeonId: 'supernatural' }));
+    T.deepEqual(view.destinations.map(function (destination) { return destination.id; }), ['physical', 'supernatural', 'final']);
+    T.equal(view.destinations[1].name, 'Caminho das Vozes e dos Espelhos');
+    T.equal(view.destinations[1].selected, true);
+    T.deepEqual(view.destinations[2].landmarks, { traversed: 0, total: 6 });
+    T.equal(view.destinations[2].lockReason, 'map_fragments');
+  });
+
+  T.test('UT-078 — revelar encontro consome RNG mas não credita marco', function () {
+    var departed = departWith(['H1', 'H2', 'H3'], 78, 'physical');
+    var beforeProgress = departed.routeProgress;
+    var revealed = accepted(departed, { type: 'ENTER_DUNGEON' });
+    T.truthy(revealed.assignments.physical[0]);
+    T.falsy(revealed.rngState === departed.rngState);
+    T.deepEqual(revealed.routeProgress, beforeProgress);
+  });
+
+  T.test('UT-079 — sucesso no segundo marco credita somente a rota física', function () {
+    var state = departWith(['H1', 'H2', 'H3'], 79, 'physical');
+    state = stateFixture(state, {
+      phase: 'approach_result',
+      position: 2,
+      routeProgress: { physical: 1, supernatural: 0, final: 0 },
+      assignments: { physical: ['A1', 'A2', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] },
+      pendingOutcome: outcomeFor('A2', 'A2-1', ['H1', 'H2', 'H3'])
+    });
+    var next = accepted(state, { type: 'ACK_SUCCESS' });
+    T.deepEqual(next.routeProgress, { physical: 2, supernatural: 0, final: 0 });
+    T.equal(next.position, 3);
+  });
+
+  T.test('UT-080 — morte confirmada no terceiro marco credita a rota sobrenatural', function () {
+    var state = departWith(['H4', 'H7', 'H8'], 80, 'supernatural');
+    state = stateFixture(state, {
+      phase: 'death_result',
+      position: 3,
+      partyIds: ['H7', 'H8'],
+      deadHeroIds: ['H4'],
+      routeProgress: { physical: 0, supernatural: 2, final: 0 },
+      assignments: { physical: [null, null, null, null, null], supernatural: ['B1', 'B2', 'B3', null, null], final: [null, null, null, null, null, null] },
+      pendingOutcome: outcomeFor('B3', 'B3-1', ['H7', 'H8'], 'H4')
+    });
+    var next = accepted(state, { type: 'ACK_DEATH' });
+    T.deepEqual(next.routeProgress, { physical: 0, supernatural: 3, final: 0 });
+    T.equal(next.position, 4);
+  });
+
+  T.test('UT-081 — recuo limpa tentativa e preserva consequências e aleatoriedade', function () {
+    var state = firstEncounter(['H1', 'H2', 'H3'], 81);
+    state = stateFixture(state, { routeProgress: { physical: 1, supernatural: 0, final: 0 } });
+    var before = Engine.snapshot(state);
+    var rngState = state.rngState;
+    state = accepted(accepted(state, { type: 'REQUEST_RETREAT' }), { type: 'CONFIRM_RETREAT' });
+    T.deepEqual([state.dungeonId, state.position, state.selectedDungeonId], [null, null, null]);
+    T.deepEqual(state.routeProgress, { physical: 1, supernatural: 0, final: 0 });
+    T.deepEqual(state.assignments, before.assignments);
+    T.equal(state.rngState, rngState);
+  });
+
+  T.test('UT-082 — tentativas alternadas mantêm progresso e atribuições independentes', function () {
+    var physical = stateFixture(departWith(['H1', 'H2', 'H3'], 82, 'physical'), {
+      position: 2,
+      routeProgress: { physical: 2, supernatural: 0, final: 0 },
+      assignments: { physical: ['A1', 'A2', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] }
+    });
+    var town = accepted(accepted(physical, { type: 'REQUEST_RETREAT' }), { type: 'CONFIRM_RETREAT' });
+    town = accepted(town, { type: 'SELECT_DESTINATION', dungeonId: 'supernatural' });
+    town = selectParty(town, ['H1', 'H2', 'H3']);
+    var supernatural = accepted(town, { type: 'DEPART' });
+    supernatural = stateFixture(supernatural, {
+      position: 1,
+      routeProgress: { physical: 2, supernatural: 1, final: 0 },
+      assignments: { physical: ['A1', 'A2', null, null, null], supernatural: ['B1', null, null, null, null], final: [null, null, null, null, null, null] }
+    });
+    T.deepEqual(supernatural.routeProgress, { physical: 2, supernatural: 1, final: 0 });
+    T.deepEqual(supernatural.assignments.physical, ['A1', 'A2', null, null, null]);
+    T.deepEqual(supernatural.assignments.supernatural, ['B1', null, null, null, null]);
+  });
+
+  T.test('UT-083 — quinto marco só conclui depois da consequência resolvida', function () {
+    var unresolved = stateFixture(departWith(['H1', 'H2', 'H3'], 83, 'physical'), {
+      phase: 'encounter_choice',
+      position: 5,
+      routeProgress: { physical: 4, supernatural: 0, final: 0 },
+      assignments: { physical: ['A1', 'A2', 'A3', 'A4', 'A5'], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] }
+    });
+    T.equal(unresolved.routeProgress.physical, 4);
+    var resolved = stateFixture(unresolved, {
+      phase: 'approach_result',
+      pendingOutcome: outcomeFor('A5', 'A5-2', ['H1', 'H2', 'H3'])
+    });
+    var complete = accepted(resolved, { type: 'ACK_SUCCESS' });
+    T.equal(complete.routeProgress.physical, 5);
+    T.equal(complete.phase, 'dungeon_complete');
+  });
+
+  T.test('UT-084 — sexto marco final produz vitória sem exceder o limite', function () {
+    var victory = accepted(finalResolutionState(), { type: 'ACK_SUCCESS' });
+    T.equal(victory.phase, 'victory');
+    T.equal(victory.routeProgress.final, 6);
+    T.equal(Engine.validateState(victory).ok, true);
+  });
+
+  T.test('UT-085 — partes do mapa derivam somente dos dois progressos iniciais completos', function () {
+    [[0, 0, 0], [5, 0, 1], [0, 5, 1], [5, 5, 2]].forEach(function (entry) {
+      var state = stateFixture(Engine.createReadyState(), { routeProgress: { physical: entry[0], supernatural: entry[1], final: 0 } });
+      T.equal(Engine.deriveMapFragments(state), entry[2], entry.slice(0, 2).join('/'));
+    });
+  });
+
+  T.test('UT-086 — reconhecer qualquer primeira conclusão fecha a rota e escolhe a outra', function () {
+    ['physical', 'supernatural'].forEach(function (dungeonId) {
+      var next = accepted(initialCompletionState(dungeonId, false), { type: 'ACK_DUNGEON_COMPLETE' });
+      var other = dungeonId === 'physical' ? 'supernatural' : 'physical';
+      T.deepEqual([next.phase, next.dungeonId, next.selectedDungeonId], ['formation', null, other]);
+      T.equal(next.routeProgress[dungeonId], 5);
+      T.equal(Engine.deriveDestinations(next).filter(function (destination) { return destination.id === dungeonId; })[0].status, 'completed');
+    });
+  });
+
+  T.test('UT-087 — reconhecer a segunda conclusão libera e seleciona somente o legado', function () {
+    ['physical', 'supernatural'].forEach(function (dungeonId) {
+      var next = accepted(initialCompletionState(dungeonId, true), { type: 'ACK_DUNGEON_COMPLETE' });
+      T.deepEqual(Engine.deriveDestinationAvailability(next), ['final']);
+      T.equal(next.selectedDungeonId, 'final');
+      T.equal(Engine.deriveMapFragments(next), 2);
+    });
+  });
+
+  T.test('UT-088 — reconhecer conclusão duas vezes não duplica fragmento ou histórico', function () {
+    var once = accepted(initialCompletionState('physical', false), { type: 'ACK_DUNGEON_COMPLETE' });
+    var twice = Engine.dispatch(once, { type: 'ACK_DUNGEON_COMPLETE' });
+    T.equal(twice.error.code, 'invalid_transition');
+    T.truthy(twice.state === once);
+    T.equal(Engine.deriveMapFragments(once), 1);
+  });
+
+  T.test('UT-089 — legado prematuro não seleciona, não parte e não consome RNG', function () {
+    var state = selectParty(startFormation(89), ['H1', 'H2', 'H3']);
+    var rngState = state.rngState;
+    var selection = Engine.dispatch(state, { type: 'SELECT_DESTINATION', dungeonId: 'final' });
+    T.equal(selection.error.code, 'destination_unavailable');
+    T.truthy(selection.state === state);
+    T.equal(Engine.dispatch(state, { type: 'DEPART' }).error.code, 'destination_required');
+    T.equal(state.rngState, rngState);
+    T.deepEqual(state.assignments.final, [null, null, null, null, null, null]);
+  });
+
+  T.test('UT-090 — ordem física primeiro mantém os seis candidatos finais não usados', function () {
+    var state = initialCompletionState('supernatural', true);
+    T.deepEqual(Engine.deriveFinalCandidates(state), ['A6', 'A7', 'A8', 'B6', 'B7', 'B8']);
+  });
+
+  T.test('UT-091 — ordem sobrenatural primeiro produz os mesmos candidatos finais', function () {
+    var state = initialCompletionState('physical', true);
+    T.deepEqual(Engine.deriveFinalCandidates(state), ['A6', 'A7', 'A8', 'B6', 'B7', 'B8']);
+  });
+
+  T.test('UT-092 — ambas as ordens preservam cinco mais cinco mais seis IDs únicos', function () {
+    ['physical', 'supernatural'].forEach(function (firstDungeonId) {
+      var state = runSafeCampaign(false, firstDungeonId);
+      var result = Engine.completeCampaign(state);
+      T.equal(state.phase, 'victory', firstDungeonId);
+      T.deepEqual(state.routeProgress, { physical: 5, supernatural: 5, final: 6 }, firstDungeonId);
+      T.truthy(result.ok, firstDungeonId);
+      T.equal(new Set(result.encounterIds).size, 16, firstDungeonId);
+    });
+  });
+
+  T.test('UT-093 — nova campanha terminal sempre restaura o estado v2 exato', function () {
+    var victory = accepted(finalResolutionState(), { type: 'ACK_SUCCESS' });
+    var defeat = stateFixture(startFormation(93), { phase: 'defeat', deadHeroIds: Data.heroOrder.slice(), draftPartyIds: [] });
+    T.deepEqual(accepted(victory, { type: 'NEW_CAMPAIGN' }), Engine.createReadyState());
+    T.deepEqual(accepted(defeat, { type: 'NEW_CAMPAIGN' }), Engine.createReadyState());
+  });
+
+  T.test('UT-094 — progresso malformado é rejeitado sem reparo', function () {
+    [
+      { physical: 0, supernatural: 0 },
+      { physical: 0, supernatural: 0, final: 0, extra: 0 },
+      { physical: 1.5, supernatural: 0, final: 0 },
+      { physical: -1, supernatural: 0, final: 0 },
+      { physical: 6, supernatural: 0, final: 7 }
+    ].forEach(function (routeProgress) {
+      var state = stateFixture(Engine.createReadyState(), { routeProgress: routeProgress });
+      T.includes(violationCodes(Engine.validateState(state)), 'invalid_route_progress');
+      T.deepEqual(state.routeProgress, routeProgress);
+    });
+  });
+
+  T.test('UT-095 — progresso nunca ultrapassa atribuições e permite uma revelação adiante', function () {
+    var base = startFormation(95);
+    var beyond = stateFixture(base, { routeProgress: { physical: 2, supernatural: 0, final: 0 }, assignments: { physical: ['A1', null, null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(beyond)), 'route_progress_assignment_mismatch');
+    var incomplete = stateFixture(base, { routeProgress: { physical: 5, supernatural: 0, final: 0 }, assignments: { physical: ['A1', 'A2', 'A3', 'A4', null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(incomplete)), 'route_progress_assignment_mismatch');
+    var oneAhead = stateFixture(base, { routeProgress: { physical: 1, supernatural: 0, final: 0 }, assignments: { physical: ['A1', 'A2', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.falsy(violationCodes(Engine.validateState(oneAhead)).includes('route_progress_assignment_mismatch'));
+  });
+
+  T.test('UT-096 — seleção e rota ativa obedecem propriedade exclusiva por fase', function () {
+    var formation = startFormation(96);
+    T.includes(violationCodes(Engine.validateState(stateFixture(formation, { dungeonId: 'physical' }))), 'invalid_active_destination');
+    T.includes(violationCodes(Engine.validateState(stateFixture(formation, { selectedDungeonId: 'final' }))), 'final_destination_locked');
+    var active = departWith(['H1', 'H2', 'H3'], 96, 'physical');
+    T.includes(violationCodes(Engine.validateState(stateFixture(active, { selectedDungeonId: 'supernatural' }))), 'invalid_destination_selection');
+    T.includes(violationCodes(Engine.validateState(stateFixture(active, { selectedDungeonId: 'physical' }))), 'destination_ownership_overlap');
+  });
+
+  T.test('UT-097 — legado ativo, selecionado ou atribuído prematuramente é diagnosticado', function () {
+    var formation = startFormation(97);
+    T.includes(violationCodes(Engine.validateState(stateFixture(formation, { selectedDungeonId: 'final' }))), 'final_destination_locked');
+    var active = stateFixture(departWith(['H1', 'H2', 'H3'], 97, 'physical'), { dungeonId: 'final' });
+    T.includes(violationCodes(Engine.validateState(active)), 'final_destination_locked');
+    var assigned = stateFixture(formation, { assignments: { physical: [null, null, null, null, null], supernatural: [null, null, null, null, null], final: ['A1', null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(assigned)), 'premature_final_assignment');
+  });
+
+  T.test('UT-098 — conclusão e vitória exigem o progresso total correspondente', function () {
+    var incomplete = stateFixture(initialCompletionState('physical', false), { routeProgress: { physical: 4, supernatural: 0, final: 0 } });
+    T.includes(violationCodes(Engine.validateState(incomplete)), 'incomplete_dungeon');
+    var invalidVictory = stateFixture(finalResolutionState(), { phase: 'victory', pendingOutcome: null });
+    T.includes(violationCodes(Engine.validateState(invalidVictory)), 'invalid_victory_state');
+  });
+
+  T.test('UT-103 — ação e helper lineares não existem no contrato v2', function () {
+    var state = initialCompletionState('physical', false);
+    T.equal(Engine.dispatch(state, { type: 'CONTINUE_DUNGEON' }).error.code, 'invalid_transition');
+    T.equal(Engine.advanceDungeon, undefined);
+  });
+
+  T.test('UT-104 — estado v1 é rejeitado sem migração ou progresso sintetizado', function () {
+    var state = JSON.parse(JSON.stringify(Engine.createReadyState()));
+    state.version = 1;
+    delete state.selectedDungeonId;
+    delete state.routeProgress;
+    var result = Engine.validateState(freezeFixture(state));
+    T.includes(violationCodes(result), 'invalid_state_version');
+    T.falsy(Object.prototype.hasOwnProperty.call(state, 'routeProgress'));
+  });
+
+  T.test('UT-106 — registros de jogador não vazam mecânicas ou encontros futuros', function () {
+    Engine.derivePlayerView(startFormation(106)).destinations.forEach(function (destination) {
+      T.deepEqual(Object.keys(destination).sort(), ['id', 'landmarks', 'lockReason', 'name', 'rumor', 'selected', 'status']);
+      var visible = destination.name + ' ' + destination.rumor;
+      T.falsy(/masmorra física|masmorra sobrenatural|pool [ab]|força|destreza|percepção|conhecimento|ocultismo|vontade|sobrevivência|atletismo|\b[AB][1-8]\b/i.test(visible));
+    });
   });
 })(window);

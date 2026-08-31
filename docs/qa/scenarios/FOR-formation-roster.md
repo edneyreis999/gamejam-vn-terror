@@ -6,7 +6,7 @@ persona: Joana, jogadora ampliada
 journey: J-complete-campaign
 expected: Competências, limites de formação, reservas, mortos e bardo permanecem compreensíveis e operáveis por teclado
 entry_points: file:///…/prototype/index.html
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:

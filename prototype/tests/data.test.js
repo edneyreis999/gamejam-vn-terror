@@ -143,4 +143,34 @@
     T.falsy(remoteImageResult.ok);
     T.includes(violationCodes(remoteImageResult), 'invalid_encounter_image_path');
   });
+
+  T.test('UT-067 — catálogo publica somente os três destinos diegéticos congelados', function () {
+    T.truthy(Engine.validateCatalog().ok);
+    T.deepEqual(Object.keys(Data.destinations), ['physical', 'supernatural', 'final']);
+    T.deepEqual(Data.destinations, {
+      physical: {
+        id: 'physical',
+        name: 'Caminho do Ferro e das Raízes',
+        rumor: 'Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.',
+        landmarkTotal: 5
+      },
+      supernatural: {
+        id: 'supernatural',
+        name: 'Caminho das Vozes e dos Espelhos',
+        rumor: 'Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.',
+        landmarkTotal: 5
+      },
+      final: {
+        id: 'final',
+        name: 'Caminho do Legado',
+        rumor: 'Duas partes do mapa apontam para aquilo que o bardo herdou.',
+        landmarkTotal: 6
+      }
+    });
+    Object.keys(Data.destinations).forEach(function (dungeonId) {
+      var destination = Data.destinations[dungeonId];
+      T.truthy(Object.isFrozen(destination));
+      T.falsy(/physical|supernatural|pool [ab]|força|destreza|percepção|conhecimento|ocultismo|vontade|sobrevivência|atletismo/i.test(destination.name + ' ' + destination.rumor));
+    });
+  });
 })(window);

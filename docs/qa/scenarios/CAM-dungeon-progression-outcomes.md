@@ -6,7 +6,7 @@ persona: Caio, estrategista recorrente
 journey: J-complete-campaign
 expected: O caminho 5+5+6 termina em vitória ou derrota coerente e campanha nova limpa todas as consequências
 entry_points: file:///…/prototype/index.html
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:

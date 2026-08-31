@@ -6,7 +6,7 @@ persona: Joana, jogadora ampliada
 journey: J-reproduce-campaign
 expected: Teclado, foco, zoom, movimento reduzido e a API QA de três métodos preservam uma campanha reproduzível e sem backdoors
 entry_points: file:///…/prototype/index.html; Chrome DevTools
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:
