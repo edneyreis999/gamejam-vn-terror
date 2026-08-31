@@ -6,14 +6,14 @@ persona: Lia, primeira expedicionária
 journey: J-local-offline-launch
 expected: Index e testes abrem por file URL sem rede; a preparação começa com dois caminhos desmarcados, Legado bloqueado e nenhuma retomada implícita
 entry_points: file:///…/prototype/index.html; file:///…/prototype/tests.html
-qa_status: untested
+qa_status: pass
 bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence: docs/qa/evidence/2026-08-30-browser-prototype/all-images-blocked-fallback.png; docs/qa/evidence/2026-08-30-browser-prototype/exit-gate-231-pass-offline.png
-last_report: docs/qa/reports/2026-08-30-browser-prototype.md
+evidence: docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-offline-all-images-blocked-fallback.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-tests-entry-canary-final-351-pass.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-fresh-reset.png
+last_report: docs/qa/reports/2026-08-31-dungeon-route-selection.md
 overlaps: ART-encounter-art-content
 ---
 
-Planejar abertura neutra, três cartões diegéticos, dois rádios iniciais desmarcados, Legado bloqueado, recursos relativos, ausência de persistência e reload limpo. O canário novo `CH-route-tests-entry-canary` cobre o runner de 351 casos; `CH-offline-all-images-blocked` continua como canário adjacente. Preservar os caminhos históricos acima até a execução produzir evidência e relatório novos.
+Executado por `file://` e rede desligada: abertura neutra, dois rádios desmarcados, Legado bloqueado, fallback sem JPEG e reload limpo. O gate final local terminou em 351/351 com zero falhas.
