@@ -54,9 +54,18 @@
     return current;
   }
 
+  function ensureDestination(state, preferred) {
+    if (state.selectedDungeonId !== null) {
+      return state;
+    }
+    var available = Engine.deriveDestinationAvailability(state);
+    var dungeonId = available.indexOf(preferred) >= 0 ? preferred : available[0];
+    return accepted(state, { type: 'SELECT_DESTINATION', dungeonId: dungeonId });
+  }
+
   function departWith(heroIds, seed, dungeonId) {
     var state = selectParty(startFormation(seed), heroIds);
-    state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: dungeonId || 'physical' });
+    state = ensureDestination(state, dungeonId || 'physical');
     return accepted(state, { type: 'DEPART' });
   }
 
@@ -162,9 +171,7 @@
       } else if (state.phase === 'formation') {
         var living = Engine.snapshot(state).aliveHeroes;
         state = selectParty(state, lowestCoverageParty(living));
-        if (state.selectedDungeonId === null) {
-          state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: Engine.deriveDestinationAvailability(state)[0] });
-        }
+        state = ensureDestination(state);
         state = accepted(state, { type: 'DEPART' });
       } else if (state.phase === 'dungeon_intro') {
         state = accepted(state, { type: 'ENTER_DUNGEON' });
@@ -207,13 +214,10 @@
         state = accepted(state, { type: 'CONTINUE_INTRO' });
       } else if (state.phase === 'formation') {
         state = selectParty(state, ['H1', 'H2', 'H3']);
-        if (state.selectedDungeonId === null) {
-          var available = Engine.deriveDestinationAvailability(state);
-          var destination = state.routeProgress.physical === 0 && state.routeProgress.supernatural === 0 && firstDungeonId
-            ? firstDungeonId
-            : available[0];
-          state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: destination });
-        }
+        var preferred = state.routeProgress.physical === 0 && state.routeProgress.supernatural === 0
+          ? firstDungeonId
+          : null;
+        state = ensureDestination(state, preferred);
         state = accepted(state, { type: 'DEPART' });
       } else if (state.phase === 'dungeon_intro') {
         state = accepted(state, { type: 'ENTER_DUNGEON' });
@@ -288,7 +292,7 @@
     var state = accepted(revealed, { type: 'REQUEST_RETREAT' });
     state = accepted(state, { type: 'CONFIRM_RETREAT' });
     state = selectParty(state, ['H1', 'H2', 'H3']);
-    state = accepted(state, { type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    state = ensureDestination(state, 'physical');
     state = accepted(state, { type: 'DEPART' });
     state = Engine.revealCurrentPosition(state).state;
     T.equal(Engine.snapshot(state).currentEncounter.id, encounterId);
@@ -1284,6 +1288,11 @@
     T.includes(violationCodes(Engine.validateState(twoAhead)), 'route_progress_assignment_mismatch');
     var sparse = stateFixture(base, { assignments: { physical: [null, 'A1', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
     T.includes(violationCodes(Engine.validateState(sparse)), 'route_progress_assignment_mismatch');
+    var staleReady = stateFixture(Engine.createReadyState(), { assignments: { physical: ['A1', null, null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(staleReady)), 'route_progress_assignment_mismatch');
+    var intro = accepted(Engine.createReadyState(), { type: 'BEGIN', seed: 95 });
+    var staleIntro = stateFixture(intro, { assignments: { physical: ['A1', null, null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(staleIntro)), 'route_progress_assignment_mismatch');
   });
 
   T.test('UT-096 — seleção e rota ativa obedecem propriedade exclusiva por fase', function () {
@@ -1301,6 +1310,11 @@
     var formation = startFormation(97);
     var locked = Engine.validateState(stateFixture(formation, { selectedDungeonId: 'final' }));
     T.equal(locked.violations.filter(function (violation) { return violation.code === 'final_destination_locked'; }).length, 1);
+    T.deepEqual(locked.violations.filter(function (violation) { return violation.code === 'final_destination_locked'; })[0].context, {
+      selectedDestination: 'final',
+      fragmentsFound: 0,
+      fragmentsRequired: 2
+    });
     var active = stateFixture(departWith(['H1', 'H2', 'H3'], 97, 'physical'), { dungeonId: 'final' });
     T.includes(violationCodes(Engine.validateState(active)), 'final_destination_locked');
     var assigned = stateFixture(formation, { assignments: { physical: [null, null, null, null, null], supernatural: [null, null, null, null, null], final: ['A1', null, null, null, null, null] } });

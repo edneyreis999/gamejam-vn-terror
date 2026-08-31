@@ -260,7 +260,7 @@
       }
     };
 
-    if (!source.destinations || Object.keys(source.destinations).join('|') !== DUNGEON_IDS.join('|')) {
+    if (!source.destinations || !sameMembers(Object.keys(source.destinations), DUNGEON_IDS)) {
       violations.push(makeViolation('invalid_destination_catalog', 'O catálogo deve conter exatamente os três caminhos confirmados.', {
         ids: Object.keys(source.destinations || {})
       }));
@@ -918,6 +918,9 @@
         revealedPrefixLength += 1;
       }
       var assignmentProgressMismatch = assignedCount !== revealedPrefixLength;
+      if (state.phase === 'ready' || state.phase === 'intro') {
+        assignmentProgressMismatch = assignmentProgressMismatch || assignedCount !== 0;
+      }
       if (Number.isInteger(progress[dungeonId])) {
         assignmentProgressMismatch = assignmentProgressMismatch || revealedPrefixLength < progress[dungeonId] ||
           revealedPrefixLength > progress[dungeonId] + 1 ||
@@ -1037,7 +1040,6 @@
     if ((state.selectedDungeonId === 'final' || state.dungeonId === 'final') && mapFragments < 2) {
       violations.push(makeViolation('final_destination_locked', 'O Caminho do Legado exige as duas partes do mapa.', {
         selectedDestination: state.selectedDungeonId,
-        dungeon: state.dungeonId,
         fragmentsFound: mapFragments,
         fragmentsRequired: 2
       }));

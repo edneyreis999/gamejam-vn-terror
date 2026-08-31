@@ -131,7 +131,7 @@
     return header;
   }
 
-  function renderIntroduction(view) {
+  function renderIntroduction() {
     var main = element('main', 'artboard opening');
     main.id = 'main';
     var section = element('section', 'opening-content');
@@ -669,14 +669,18 @@
       renderMapHalf(destinationById(view.destinations, 'supernatural'))
     );
     var finalDestination = destinationById(view.destinations, 'final');
+    var finalStatusLabel = finalDestination.status === 'locked'
+      ? 'Bloqueado'
+      : (finalDestination.status === 'completed' ? 'Concluído' : 'Disponível');
     var legacy = element('p', 'legacy-status');
-    append(legacy, element('strong', '', finalDestination.name), document.createTextNode(' — ' + (view.mapFragments.found === view.mapFragments.total ? 'Disponível' : 'Bloqueado') + ' — ' + view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes recuperadas.'));
+    append(legacy, element('strong', '', finalDestination.name), document.createTextNode(' — ' + finalStatusLabel + ' — ' + view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes recuperadas.'));
     append(status, halves, legacy);
     return status;
   }
 
   function renderDungeonTransition(view) {
-    var mapComplete = view.mapFragments.found === view.mapFragments.total;
+    var finalDestination = destinationById(view.destinations, 'final');
+    var mapComplete = finalDestination.status === 'available' || finalDestination.status === 'completed';
     var frame = element('div', 'artboard');
     append(frame, renderHeader(view, 'Masmorra concluída'));
     var main = element('main', 'main-region transition-wrap dungeon-transition');
@@ -796,12 +800,12 @@
     return frame;
   }
 
-  function createController(root) {
+  function createController(root, initialState) {
     if (!root || root.nodeType !== 1) {
       throw new TypeError('ExpeditionApp.createController exige um elemento raiz.');
     }
 
-    var state = Engine.createReadyState();
+    var state = initialState || Engine.createReadyState();
     var ui = { error: null, rosterOpen: false };
     var destroyed = false;
     var dispatching = false;
@@ -814,6 +818,7 @@
     var pendingSeed = null;
     var invalidLogged = false;
     var lastRejectedAction = null;
+    var previousAutomaticSelectionAnnouncement = null;
     var qaSession;
 
     function qaError(code, message) {
@@ -912,7 +917,7 @@
         return renderOpening();
       }
       if (view.phase === 'intro') {
-        return renderIntroduction(view);
+        return renderIntroduction();
       }
       if (view.phase === 'formation') {
         return renderFormation(view, ui);
@@ -1054,9 +1059,10 @@
       }
       openRequiredDialog();
       var announcement = options && options.announce ? options.announce : '';
-      if (view.automaticSelectionAnnouncement) {
+      if (view.automaticSelectionAnnouncement && view.automaticSelectionAnnouncement !== previousAutomaticSelectionAnnouncement) {
         announcement += (announcement ? ' ' : '') + view.automaticSelectionAnnouncement;
       }
+      previousAutomaticSelectionAnnouncement = view.automaticSelectionAnnouncement;
       announceLive(announcement);
       if (options && options.assert) {
         assertiveRegion.textContent = '';
@@ -1305,6 +1311,12 @@
     if (!catalogValidation.ok) {
       state = Engine.enterInvalid(state, catalogValidation.violations);
       logInvalidState();
+    } else {
+      var initialStateValidation = Engine.validateState(state);
+      if (!initialStateValidation.ok) {
+        state = Engine.enterInvalid(state, initialStateValidation.violations);
+        logInvalidState();
+      }
     }
     render();
 
@@ -1418,7 +1430,7 @@
    * @property {() => (CampaignState|null)} getState
    * @property {() => void} destroy
    */
-  /** @type {Readonly<{createController: (root: HTMLElement) => ExpeditionController}>} */
+  /** @type {Readonly<{createController: (root: HTMLElement, initialState?: CampaignState) => ExpeditionController}>} */
   var ExpeditionApp = Object.freeze({ createController: createController });
   global.ExpeditionApp = ExpeditionApp;
 

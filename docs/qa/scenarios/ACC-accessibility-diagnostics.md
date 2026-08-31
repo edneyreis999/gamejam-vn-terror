@@ -16,4 +16,4 @@ last_report: docs/qa/reports/2026-08-31-dungeon-route-selection.md
 overlaps: FOR-formation-roster; CAM-dungeon-progression-outcomes
 ---
 
-Executado Chrome a 320 CSS px efetivos, zoom 200%, modo escuro, movimento reduzido e campanha completa somente por teclado. Axe encontrou zero violações. Seeds-limite, erro inválido/tardio, rejeição fora do histórico, limpeza após ação aceita, snapshots congelados e `validate` não mutante passaram usando somente os três métodos públicos.
+Executado Chrome a 320 CSS px efetivos, zoom 200%, modo escuro, movimento reduzido e campanha completa somente por teclado. Axe encontrou zero violações. Seeds-limite, erro inválido/tardio, snapshots congelados e `validate` não mutante foram inspecionados com os três métodos públicos; a rejeição `destination_unavailable` e sua limpeza foram verificadas separadamente pelo E2E-022 no runner usando `dispatch` do fixture.

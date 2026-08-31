@@ -4,9 +4,13 @@
 flowchart TD
   A[Entry local] --> B[Introdução neutra]
   B --> C[Preparação inicial: dois caminhos disponíveis e Legado bloqueado]
-  C --> D{Escolher caminho inicial}
-  D -->|Ferro e Raízes| E[Escolher três heróis antes ou depois da rota]
+  C --> D{Escolher caminho inicial ou heróis primeiro}
+  D -->|Ferro e Raízes| E[Escolher três heróis]
   D -->|Vozes e Espelhos| E
+  D -->|Heróis primeiro| H0[Escolher três heróis]
+  H0 --> R0{Escolher caminho inicial}
+  R0 -->|Ferro e Raízes| F
+  R0 -->|Vozes e Espelhos| F
   E --> F[Partir para o caminho escolhido]
   F --> G[Revelar encontro]
   G --> H{Abordagem cobre competência?}
@@ -66,7 +70,7 @@ journey:
   goal:
     observable: As ordens Ferro/Vozes e Vozes/Ferro convergem para o Legado e um desfecho sem repetição de caminho concluído
     side_effects: [historico-aceito-da-sessao, atribuicoes-por-caminho, partes-do-mapa]
-  true_end_state: Iniciar campanha nova retorna à abertura sem mortes, atribuições, partes do mapa, rota selecionada ou rota ativa
+  true_end_state: Iniciar campanha nova retorna à abertura sem mortes, atribuições, progresso dos caminhos em zero, partes do mapa, rota selecionada ou rota ativa
   exit:
     natural: nova campanha pronta
   abandonment:

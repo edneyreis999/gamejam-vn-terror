@@ -70,6 +70,13 @@
   T.test('UT-005 — mapa de encontros contém exatamente A1–A8 e B1–B8', function () {
     T.deepEqual(Object.keys(Data.encounters).sort(), Data.encounterOrder.slice().sort());
     T.equal(Data.encounterOrder.length, 16);
+    var fixture = cloneCatalog();
+    fixture.destinations = {
+      final: fixture.destinations.final,
+      supernatural: fixture.destinations.supernatural,
+      physical: fixture.destinations.physical
+    };
+    T.truthy(Engine.validateCatalog(freezeFixture(fixture)).ok);
   });
 
   T.test('UT-006 — encontros com duas ou quatro abordagens são rejeitados', function () {
