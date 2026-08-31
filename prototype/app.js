@@ -1245,18 +1245,10 @@
    * 'CANCEL_SACRIFICE'|'CONFIRM_SACRIFICE'|'ACK_DEATH'|'REQUEST_RETREAT'|'CANCEL_RETREAT'|
    * 'CONFIRM_RETREAT'|'ACK_AUTO_RETREAT'|'CONTINUE_DUNGEON'|'NEW_CAMPAIGN')}} GameAction
    */
+  /** @typedef {Readonly<{encounterId: EncounterId, approachId: ApproachId, competencyId: CompetencyId,
+   * holderHeroIds: readonly HeroId[], success: boolean, resultText: string, victimId: (HeroId|null)}>} PendingOutcome */
   /**
-   * @typedef {Object} PendingOutcome
-   * @property {EncounterId} encounterId
-   * @property {ApproachId} approachId
-   * @property {CompetencyId} competencyId
-   * @property {readonly HeroId[]} holderHeroIds
-   * @property {boolean} success
-   * @property {string} resultText
-   * @property {(HeroId|null)} victimId
-   */
-  /**
-   * @typedef {{sequence: number, type: 'campaign_started', seed: number}|
+   * @typedef {Readonly<({sequence: number, type: 'campaign_started', seed: number}|
    * {sequence: number, type: 'formation_opened', dungeon: 'physical'}|
    * {sequence: number, type: 'formation_selection_changed', heroId: HeroId, selected: boolean}|
    * {sequence: number, type: 'party_formed', heroes: readonly HeroId[]}|
@@ -1269,42 +1261,27 @@
    * {sequence: number, type: 'retreat_requested', dungeon: DungeonId, position: number, fromPhase: ('dungeon_intro'|'encounter_choice')}|
    * {sequence: number, type: 'retreat_cancelled', dungeon: DungeonId, position: number, returnPhase: ('dungeon_intro'|'encounter_choice')}|
    * {sequence: number, type: 'campaign_won', survivors: readonly HeroId[]}|
-   * {sequence: number, type: 'campaign_lost'}} ActionEvent
+   * {sequence: number, type: 'campaign_lost'})>} ActionEvent
    */
   /** @typedef {Readonly<Record<string, unknown>>} DiagnosticContext */
   /** @typedef {Readonly<{code: string, message: string, context: DiagnosticContext}>} InvariantViolation */
   /** @typedef {Readonly<Record<string, unknown>>} AppEffect */
   /** @typedef {Readonly<{code: string, message: string, context: DiagnosticContext}>} EngineError */
+  /** @typedef {Readonly<{
+   * physical: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>,
+   * supernatural: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>,
+   * final: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>
+   * }>} CampaignAssignments */
   /**
-   * @typedef {Object} CampaignAssignments
-   * @property {Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>} physical
-   * @property {Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>} supernatural
-   * @property {Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>} final
+   * @typedef {Readonly<{version: 1, phase: CampaignPhase, seed: (number|null), rngState: (number|null),
+   * dungeonId: (DungeonId|null), position: (number|null), draftPartyIds: readonly HeroId[],
+   * partyIds: readonly HeroId[], deadHeroIds: readonly HeroId[], assignments: CampaignAssignments,
+   * pendingOutcome: (PendingOutcome|null), pendingVictimId: (HeroId|null), sequence: number,
+   * actionHistory: readonly ActionEvent[], invariantViolations: readonly InvariantViolation[]}>} CampaignState
    */
   /**
-   * @typedef {Object} CampaignState
-   * @property {1} version
-   * @property {CampaignPhase} phase
-   * @property {(number|null)} seed
-   * @property {(number|null)} rngState
-   * @property {(DungeonId|null)} dungeonId
-   * @property {(number|null)} position
-   * @property {readonly HeroId[]} draftPartyIds
-   * @property {readonly HeroId[]} partyIds
-   * @property {readonly HeroId[]} deadHeroIds
-   * @property {CampaignAssignments} assignments
-   * @property {(PendingOutcome|null)} pendingOutcome
-   * @property {(HeroId|null)} pendingVictimId
-   * @property {number} sequence
-   * @property {readonly ActionEvent[]} actionHistory
-   * @property {readonly InvariantViolation[]} invariantViolations
-   */
-  /**
-   * @typedef {Object} EngineResult
-   * @property {boolean} ok
-   * @property {CampaignState=} state
-   * @property {readonly AppEffect[]=} effects
-   * @property {EngineError=} error
+   * @typedef {Readonly<{ok: boolean, state?: CampaignState, effects?: readonly AppEffect[],
+   * error?: EngineError}>} EngineResult
    */
   /**
    * @typedef {Object} ExpeditionController

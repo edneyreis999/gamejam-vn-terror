@@ -404,8 +404,8 @@
 
   function deriveViability(partyIds, encounterOrId, catalog) {
     var source = catalog || Data;
-    var currentEncounter = typeof encounterOrId === 'string' ? source.encounters[encounterOrId] : encounterOrId;
-    if (!currentEncounter) {
+    var currentEncounter = typeof encounterOrId === 'string' ? findEncounter(encounterOrId, source) : encounterOrId;
+    if (!currentEncounter || !Array.isArray(currentEncounter.approaches)) {
       return deepFreeze({ count: 0, total: 0, label: '0/0', approaches: [] });
     }
     var covered = partyCompetencyIds(partyIds || [], source);
@@ -806,7 +806,8 @@
       }
     }
 
-    var activePositionLimit = expectedLengths[state.dungeonId];
+    var hasKnownDungeon = typeof state.dungeonId === 'string' && Object.prototype.hasOwnProperty.call(expectedLengths, state.dungeonId);
+    var activePositionLimit = hasKnownDungeon ? expectedLengths[state.dungeonId] : null;
     if (state.phase !== 'ready' && state.phase !== 'intro' && state.phase !== 'invalid' && state.phase !== 'dungeon_complete' && activePositionLimit &&
         (!Number.isInteger(state.position) || state.position < 1 || state.position > activePositionLimit)) {
       violations.push(makeViolation('invalid_dungeon_position', 'A posição ativa deve estar dentro da masmorra atual.', { dungeon: state.dungeonId, position: state.position, maximum: activePositionLimit }));
@@ -837,8 +838,10 @@
     }
 
     if (state.phase === 'dungeon_complete') {
-      var completedAssignments = assignmentGroups[state.dungeonId];
-      var expectedCompletedPositions = expectedLengths[state.dungeonId];
+      var completedAssignments = hasKnownDungeon && Object.prototype.hasOwnProperty.call(assignmentGroups, state.dungeonId)
+        ? assignmentGroups[state.dungeonId]
+        : null;
+      var expectedCompletedPositions = hasKnownDungeon ? expectedLengths[state.dungeonId] : null;
       if (!Array.isArray(completedAssignments) || completedAssignments.filter(Boolean).length !== expectedCompletedPositions) {
         violations.push(makeViolation('incomplete_dungeon', 'A masmorra não pode ser concluída antes de todas as posições.', { dungeon: state.dungeonId }));
       }

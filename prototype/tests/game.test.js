@@ -659,11 +659,11 @@
   });
 
   T.test('UT-058 — sobreposição, payload de fase e salto de masmorra são violações separadas', function () {
-    function assertInvalidOutcome(state, action, label) {
+    function assertInvalidState(state, action, expectedCode, label) {
       var result = Engine.dispatch(state, action);
       T.truthy(result.ok, label);
       T.equal(result.state.phase, 'invalid', label);
-      T.includes(result.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_outcome_payload', label);
+      T.includes(result.state.invariantViolations.map(function (item) { return item.code; }), expectedCode, label);
     }
 
     var state = stateFixture(startFormation(7), {
@@ -694,8 +694,10 @@
       { label: 'competency mismatch', changes: { competencyId: 'will' } },
       { label: 'success without holders', changes: { holderHeroIds: [], success: true } },
       { label: 'holder outside party', changes: { holderHeroIds: ['H4'], success: true } },
+      { label: 'present incompatible holders', changes: { holderHeroIds: ['H1', 'H2', 'H3'], success: true } },
       { label: 'duplicate holder', changes: { holderHeroIds: ['H1', 'H1'], success: true } },
       { label: 'failure with holder', changes: { holderHeroIds: ['H1'], success: false } },
+      { label: 'non-boolean success', changes: { success: 'true' } },
       { label: 'result text mismatch', changes: { resultText: 'Resultado corrompido.' } },
       { label: 'unknown victim', changes: { victimId: 'H9' } },
       { label: 'object holder ID', changes: { holderHeroIds: [{ toString: null }] } }
@@ -703,25 +705,39 @@
       var outcome = JSON.parse(JSON.stringify(validResult.pendingOutcome));
       Object.keys(currentCase.changes).forEach(function (key) { outcome[key] = currentCase.changes[key]; });
       var corrupted = stateFixture(validResult, { pendingOutcome: outcome });
-      assertInvalidOutcome(corrupted, { type: outcome.success ? 'ACK_SUCCESS' : 'OPEN_SACRIFICE' }, currentCase.label);
+      assertInvalidState(corrupted, { type: outcome.success ? 'ACK_SUCCESS' : 'OPEN_SACRIFICE' }, 'invalid_outcome_payload', currentCase.label);
     });
+    var staleEncounter = Data.encounters.A2;
+    var staleApproach = staleEncounter.approaches[0];
+    var staleHolders = validResult.partyIds.filter(function (heroId) {
+      return Data.heroes[heroId].competencyIds.indexOf(staleApproach.competencyId) >= 0;
+    });
+    var staleOutcome = {
+      encounterId: staleEncounter.id,
+      approachId: staleApproach.id,
+      competencyId: staleApproach.competencyId,
+      holderHeroIds: staleHolders,
+      success: staleHolders.length > 0,
+      resultText: staleHolders.length > 0 ? staleApproach.successText : staleEncounter.failureText,
+      victimId: null
+    };
+    assertInvalidState(stateFixture(validResult, { pendingOutcome: staleOutcome }), { type: staleOutcome.success ? 'ACK_SUCCESS' : 'OPEN_SACRIFICE' }, 'invalid_outcome_payload', 'stale valid encounter');
     var objectPartyId = stateFixture(validResult, { partyIds: [{ toString: null }, 'H2', 'H3'] });
-    assertInvalidOutcome(objectPartyId, { type: 'ACK_SUCCESS' }, 'object party ID');
+    assertInvalidState(objectPartyId, { type: 'ACK_SUCCESS' }, 'invalid_outcome_payload', 'object party ID');
     var objectEncounterAssignments = JSON.parse(JSON.stringify(validResult.assignments));
     objectEncounterAssignments.physical[0] = { toString: null };
     var objectEncounterId = stateFixture(validResult, { assignments: objectEncounterAssignments });
-    var objectEncounterResult = Engine.dispatch(objectEncounterId, { type: 'ACK_SUCCESS' });
-    T.truthy(objectEncounterResult.ok, 'object encounter ID');
-    T.equal(objectEncounterResult.state.phase, 'invalid', 'object encounter ID');
-    T.includes(objectEncounterResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_encounter_assignment', 'object encounter ID');
+    assertInvalidState(objectEncounterId, { type: 'ACK_SUCCESS' }, 'invalid_encounter_assignment', 'object encounter ID');
     var confirmation = accepted(openSacrificeState(), { type: 'SELECT_VICTIM', heroId: 'H4' });
     var invalidVictim = stateFixture(confirmation, { pendingVictimId: 'H9' });
     T.includes(violationCodes(Engine.validateState(invalidVictim)), 'invalid_victim_payload');
     var objectVictim = stateFixture(confirmation, { pendingVictimId: { toString: null } });
-    var objectVictimResult = Engine.dispatch(objectVictim, { type: 'CONFIRM_SACRIFICE' });
-    T.truthy(objectVictimResult.ok, 'object victim ID');
-    T.equal(objectVictimResult.state.phase, 'invalid', 'object victim ID');
-    T.includes(objectVictimResult.state.invariantViolations.map(function (item) { return item.code; }), 'invalid_victim_payload', 'object victim ID');
+    assertInvalidState(objectVictim, { type: 'CONFIRM_SACRIFICE' }, 'invalid_victim_payload', 'object victim ID');
+    var canonicalFailure = failedA1State();
+    var failedResultText = stateFixture(canonicalFailure, {
+      pendingOutcome: Object.assign({}, canonicalFailure.pendingOutcome, { resultText: 'Falha corrompida.' })
+    });
+    assertInvalidState(failedResultText, { type: 'OPEN_SACRIFICE' }, 'invalid_outcome_payload', 'failure result text mismatch');
     var successfulSacrifice = JSON.parse(JSON.stringify(confirmation.pendingOutcome));
     successfulSacrifice.success = true;
     var invalidSacrifice = stateFixture(confirmation, { pendingOutcome: successfulSacrifice });
@@ -736,6 +752,13 @@
     var deathResult = accepted(confirmation, { type: 'CONFIRM_SACRIFICE' });
     var missingRegisteredDeath = stateFixture(deathResult, { deadHeroIds: ['H1'] });
     T.includes(violationCodes(Engine.validateState(missingRegisteredDeath)), 'invalid_outcome_payload');
+    ['__proto__', 'constructor', 'toString'].forEach(function (encounterId) {
+      T.equal(Engine.deriveViability(['H1'], encounterId).label, '0/0', encounterId);
+    });
+    var objectDungeon = stateFixture(validResult, { dungeonId: { toString: null } });
+    assertInvalidState(objectDungeon, { type: 'ACK_SUCCESS' }, 'invalid_dungeon_payload', 'object dungeon ID');
+    var objectCompletedDungeon = stateFixture(validResult, { phase: 'dungeon_complete', dungeonId: { toString: null }, pendingOutcome: null });
+    assertInvalidState(objectCompletedDungeon, { type: 'CONTINUE_DUNGEON' }, 'invalid_dungeon_payload', 'object completed dungeon ID');
     [
       { state: encounter, positions: [0, 6, 1.5, null] },
       { state: stateFixture(encounter, { dungeonId: 'supernatural' }), positions: [0, 6, 1.5, null] },

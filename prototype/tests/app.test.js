@@ -492,13 +492,28 @@
 
   Test.test('IT-011 — disparo duplo de início cria somente uma campanha', function () {
     var current = fixture();
+    var transitionInProgress = null;
+    current.root.addEventListener('focusin', function () {
+      transitionInProgress = current.controller.dispatch({ type: 'CONTINUE_INTRO' });
+    }, { once: true });
     var first = current.controller.dispatch({ type: 'BEGIN', seed: 3 });
     var second = current.controller.dispatch({ type: 'BEGIN', seed: 4 });
     Test.truthy(first.ok);
+    Test.deepEqual(transitionInProgress.error, {
+      code: 'transition_in_progress',
+      message: 'Uma transição já está em andamento.',
+      context: {}
+    });
     Test.falsy(second.ok);
     Test.equal(current.controller.getState().seed, 3);
     Test.equal(current.controller.getState().actionHistory.length, 1);
-    current.cleanup();
+    current.controller.destroy();
+    Test.deepEqual(current.controller.dispatch({ type: 'CONTINUE_INTRO' }).error, {
+      code: 'controller_destroyed',
+      message: 'O controlador foi encerrado.',
+      context: {}
+    });
+    current.root.remove();
   });
 
   Test.test('IT-012 — abertura fresca não mostra progresso antigo ou promessa de retomada', function () {
