@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contrato visual — Estado inválido de rota</title>
+    <link rel="stylesheet" href="artboards.css">
+    <script src="artboards.js" defer></script>
+  </head>
+  <body data-default-state="unknown-destination">
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <main class="artboard" id="main">
+      <header class="game-header"><div class="brand"><span class="eyebrow">Execução interrompida</span><strong>EXPEDIÇÃO E SACRIFÍCIO</strong></div><div class="status-line"><span>Diagnóstico preservado</span></div></header>
+      <section class="main-region invalid-panel" data-variant="unknown-destination" aria-labelledby="invalid-unknown-title">
+        <div class="paper-panel panel-padding invalid-panel"><p class="eyebrow">Não é seguro continuar</p><h1 id="invalid-unknown-title">O protótipo encontrou um estado inválido.</h1><p>Recarregue a página e registre a semente no console.</p><code class="diagnostic-note">Diagnóstico disponível no snapshot: destino desconhecido</code><div><button class="button danger" type="button">Recarregar a página</button></div></div>
+      </section>
+      <section class="main-region invalid-panel" data-variant="locked-final" aria-labelledby="invalid-final-title" hidden>
+        <div class="paper-panel panel-padding invalid-panel"><p class="eyebrow">Não é seguro continuar</p><h1 id="invalid-final-title">O protótipo encontrou um estado inválido.</h1><p>Recarregue a página e registre a semente no console.</p><code class="diagnostic-note">Diagnóstico disponível no snapshot: caminho final bloqueado</code><div><button class="button danger" type="button">Recarregar a página</button></div></div>
+      </section>
+      <section class="main-region invalid-panel" data-variant="invalid-progress" aria-labelledby="invalid-progress-title" hidden>
+        <div class="paper-panel panel-padding invalid-panel"><p class="eyebrow">Não é seguro continuar</p><h1 id="invalid-progress-title">O protótipo encontrou um estado inválido.</h1><p>Recarregue a página e registre a semente no console.</p><code class="diagnostic-note">Diagnóstico disponível no snapshot: progresso fora dos limites</code><div><button class="button danger" type="button">Recarregar a página</button></div></div>
+      </section>
+      <section class="main-region invalid-panel" data-variant="crossed-assignments" aria-labelledby="invalid-crossed-title" hidden>
+        <div class="paper-panel panel-padding invalid-panel"><p class="eyebrow">Não é seguro continuar</p><h1 id="invalid-crossed-title">O protótipo encontrou um estado inválido.</h1><p>Recarregue a página e registre a semente no console.</p><code class="diagnostic-note">Diagnóstico disponível no snapshot: encontros cruzaram caminhos</code><div><button class="button danger" type="button">Recarregar a página</button></div></div>
+      </section>
+    </main>
+  </body>
+</html>

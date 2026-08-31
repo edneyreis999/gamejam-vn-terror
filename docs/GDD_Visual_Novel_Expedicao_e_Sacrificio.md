@@ -1,12 +1,12 @@
 # GDD — Visual Novel de Expedição, Armadilhas e Sacrifício
 
 **Título provisório:** Projeto sem título\
-**Versão:** 0.6 — fluxo mecânico e randomização consolidados\
-**Data:** 30 de agosto de 2026\
-**Estado:** fluxo de expedição, randomização e catálogo de armadilhas aprovados\
+**Versão:** 0.7 — escolha da ordem das masmorras iniciais consolidada\
+**Data:** 31 de agosto de 2026\
+**Estado:** fluxo de expedição, escolha de rota, randomização e catálogo de armadilhas aprovados\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Duração-alvo:** até 20 minutos por masmorra e aproximadamente 60 minutos por campanha completa, sem contar repetições\
-**Autoridade:** este é o GDD canônico do projeto e substitui as versões 0.1, 0.2, 0.3, 0.4 e 0.5 como fonte de verdade.
+**Autoridade:** este é o GDD canônico do projeto e substitui as versões 0.1, 0.2, 0.3, 0.4, 0.5 e 0.6 como fonte de verdade.
 
 ---
 
@@ -44,6 +44,7 @@ Uma decisão pendente não invalida as regras confirmadas que a cercam. Por exem
 | Estados de viabilidade | 0/3, 1/3, 2/3 e 3/3 | Confirmado | 0/2, 1/2 e 2/2 na v0.2 |
 | Falha sem competência | Sempre letal | Confirmado | “Falha grave” na v0.1 |
 | Natureza das duas primeiras masmorras | Separação estrita entre ameaça física e sobrenatural | Confirmado | Separação apenas predominante nas versões anteriores |
+| Ordem das duas primeiras masmorras | Escolhida pelo jogador; a final libera somente depois de ambas | Confirmado | Ordem física → sobrenatural → final na v0.6 |
 | Catálogo de encontros | 8 por pool; 16 encontros aprovados | Confirmado | Divisão entre encontros confirmados e provisórios na v0.4 |
 | Distribuição das competências nos pools | Pool A: 2 corpóreas + 1 liminar por encontro; Pool B: 1 corpórea + 2 liminares | Confirmado | Matriz anterior da v0.4 |
 | Sorteio dos encontros | Preenchimento uniforme, sem repetição e persistente por posição revelada | Confirmado | Embaralhamento integral como baseline de protótipo |
@@ -113,12 +114,12 @@ Uma falha que não possa ser explicada retrospectivamente é um problema de escr
 
 O protagonista é um bardo ligado a um antigo tesouro de sua família. A localização do tesouro está registrada em um mapa dividido em duas partes:
 
-1. a primeira metade está escondida na masmorra física;
-2. a segunda metade está escondida na masmorra sobrenatural;
+1. uma metade está escondida na masmorra física;
+2. a outra metade está escondida na masmorra sobrenatural;
 3. reunidas, as metades revelam a localização da masmorra final;
 4. a masmorra final contém o tesouro familiar e o clímax da história.
 
-A ordem vigente da campanha é, portanto: **masmorra física → masmorra sobrenatural → masmorra final**.
+O jogador escolhe qual das duas masmorras iniciais explorar primeiro. Depois de concluir uma delas, somente a outra permanece disponível entre os caminhos iniciais. A masmorra final permanece visível, porém bloqueada, até que as duas metades do mapa tenham sido obtidas. A ordem vigente é, portanto: **uma masmorra inicial à escolha → a outra masmorra inicial → masmorra final**.
 
 A natureza do tesouro e do horror familiar está pendente. Possibilidades registradas, mas não aprovadas:
 
@@ -152,11 +153,13 @@ A campanha possui três masmorras, com duração-alvo de até 20 minutos cada.
 
 | Masmorra | Objetivo | Fonte dos encontros | Natureza das ameaças |
 |---|---|---|---|
-| **Física** | Obter a primeira metade do mapa | Pool A | Material, mecânica, ambiental, arquitetônica, animal ou corporal |
-| **Sobrenatural** | Obter a segunda metade do mapa | Pool B | Psicológica, ilusória, ritual, espiritual ou ligada à distorção da identidade e da realidade |
+| **Física** | Obter uma metade do mapa | Pool A | Material, mecânica, ambiental, arquitetônica, animal ou corporal |
+| **Sobrenatural** | Obter a outra metade do mapa | Pool B | Psicológica, ilusória, ritual, espiritual ou ligada à distorção da identidade e da realidade |
 | **Final** | Encontrar o tesouro e concluir a campanha | 3 encontros restantes do Pool A + 3 do Pool B | Combinação das duas naturezas e horror familiar |
 
 Cada uma das duas primeiras masmorras usa exclusivamente o próprio pool. A separação estrita diz respeito à **natureza da ameaça**, enquanto a matriz controla a natureza das abordagens: cada encontro físico oferece duas competências corpóreas e uma liminar; cada encontro sobrenatural oferece uma corpórea e duas liminares. Uma ameaça material ainda pode ser superada por Ocultismo, e uma manifestação sobrenatural por Força, desde que a situação sustente essa lógica.
+
+As duas masmorras iniciais começam disponíveis. Uma masmorra concluída não pode receber outra expedição na mesma campanha. A final permanece bloqueada até a conclusão das duas iniciais. Escolher uma ordem diferente não altera pools, quantidade de encontros, persistência, mortes, sorteio ou composição da masmorra final.
 
 ### 5.3 Quantidade e sorteio
 
@@ -210,29 +213,32 @@ Quando os oito heróis estiverem mortos, o bardo também morre e a campanha term
 
 ## 7. Loop principal
 
-1. O jogador lê a apresentação da próxima masmorra.
-2. Examina os heróis sobreviventes.
-3. Interpreta históricos, profissões, falas, equipamentos e características.
+1. Na cidade, o jogador consulta os caminhos disponíveis, concluídos e bloqueados.
+2. Escolhe o destino da próxima expedição e examina os heróis sobreviventes na mesma etapa de preparação, em qualquer ordem.
+3. Interpreta históricos, profissões, falas, equipamentos, características e os indícios diegéticos de cada destino.
 4. Escolhe três heróis, ou todos os sobreviventes quando restarem somente um ou dois.
-5. O bardo acompanha o grupo automaticamente.
-6. O jogo prepara cinco posições nas masmorras iniciais ou seis na final, preservando qualquer posição já revelada na campanha.
-7. Cada encontro apresenta três abordagens.
-8. As três abordagens permanecem visíveis.
-9. O jogo não informa quais abordagens são viáveis.
-10. Antes de escolher uma abordagem, o jogador pode recuar se o elenco total ainda possuir ao menos três heróis; isso continua possível depois que a armadilha foi revelada.
-11. O jogador escolhe uma abordagem, não um executor.
-12. A escolha da abordagem bloqueia o recuo até que toda a consequência seja resolvida.
-13. O sistema verifica coletivamente os heróis sobreviventes presentes.
-14. Se a competência correspondente estiver presente, ocorre sucesso.
-15. Se estiver ausente, ocorre falha letal.
-16. Em uma falha, o jogador escolhe um herói presente para ser sacrificado; o bardo nunca aparece nessa seleção.
-17. O herói morre permanentemente.
-18. Suas competências são removidas da expedição e do elenco disponível.
-19. A cobertura do grupo é recalculada.
-20. O grupo prossegue mesmo quando resta somente um herói.
-21. Se o último herói presente morrer, o bardo recua automaticamente quando houver sobreviventes na cidade; se os oito heróis estiverem mortos, ocorre o bad ending.
-22. Após cinco encontros nas masmorras iniciais ou seis na final, a expedição alcança seu objetivo.
-23. Depois das duas primeiras masmorras, o grupo acessa a masmorra final.
+5. Quando as duas masmorras iniciais estão disponíveis, nenhuma vem escolhida por padrão; quando existe somente um destino disponível, ele vem pré-selecionado.
+6. O jogador pode trocar o destino antes de partir sem perder a seleção de heróis.
+7. O bardo acompanha o grupo automaticamente.
+8. O jogo prepara cinco posições nas masmorras iniciais ou seis na final, preservando qualquer posição já revelada na campanha.
+9. Cada encontro apresenta três abordagens.
+10. As três abordagens permanecem visíveis.
+11. O jogo não informa quais abordagens são viáveis.
+12. Antes de escolher uma abordagem, o jogador pode recuar se o elenco total ainda possuir ao menos três heróis; isso continua possível depois que a armadilha foi revelada.
+13. O jogador escolhe uma abordagem, não um executor.
+14. A escolha da abordagem bloqueia o recuo até que toda a consequência seja resolvida.
+15. O sistema verifica coletivamente os heróis sobreviventes presentes.
+16. Se a competência correspondente estiver presente, ocorre sucesso.
+17. Se estiver ausente, ocorre falha letal.
+18. Em uma falha, o jogador escolhe um herói presente para ser sacrificado; o bardo nunca aparece nessa seleção.
+19. O herói morre permanentemente.
+20. Suas competências são removidas da expedição e do elenco disponível.
+21. A cobertura do grupo é recalculada.
+22. O grupo prossegue mesmo quando resta somente um herói.
+23. Se o último herói presente morrer, o bardo recua automaticamente quando houver sobreviventes na cidade; se os oito heróis estiverem mortos, ocorre o bad ending.
+24. Após cinco encontros nas masmorras iniciais ou seis na final, a expedição alcança seu objetivo.
+25. Uma breve conclusão antecede o retorno à cidade; o caminho concluído fica indisponível para novas expedições.
+26. Depois das duas masmorras iniciais, o grupo acessa a masmorra final.
 
 ---
 
@@ -721,6 +727,7 @@ O efeito bola de neve é intencional como tensão, mas precisa de validação pa
 - Mortes e atribuições de encontros já reveladas permanecem.
 - Não existe custo, recurso consumido, limite de usos nem punição adicional por recuar.
 - A formação só pode ser alterada na cidade depois de um recuo ou entre masmorras; não existe substituição durante uma tentativa.
+- Ao voltar à cidade, o jogador pode escolher qualquer masmorra inicial disponível, inclusive trocar de caminho depois de um recuo; cada masmorra preserva separadamente suas posições reveladas.
 - Se nenhum herói permanecer na expedição e ainda houver sobreviventes na cidade, o recuo é automático mesmo que restem somente um ou dois heróis no elenco total.
 
 ---
@@ -752,6 +759,10 @@ A interface não deve escrever “masmorra física” ou “masmorra sobrenatura
 - objetos encontrados na entrada.
 
 O repertório visual e sonoro parte de assombrações, criaturas e espaços brasileiros. O Pool A enfatiza mata fechada, casarões, telhados, cozinhas, depósitos, pomares e instalações rurais transformadas em ameaças corporais. O Pool B enfatiza assobios, visagens, procissões, presságios, reflexos e vozes que distorcem memória e identidade.
+
+Na baseline do protótipo, os três destinos usam os nomes diegéticos **Caminho do Ferro e das Raízes**, **Caminho das Vozes e dos Espelhos** e **Caminho do Legado**. Os nomes e seus rumores curtos permanecem `Baseline de protótipo`; a regra de ocultar as classificações internas é `Confirmado`. Cada destino pode comunicar somente nome, rumor, estado, maior percurso já concluído em marcos atravessados e progresso das metades do mapa, sem revelar pools, competências, viabilidade ou encontros futuros. Esse número registra o conhecimento obtido e não funciona como checkpoint: um recuo ainda reinicia a masmorra desde a primeira posição.
+
+Na etapa de seleção de destino desta versão, a apresentação reaproveita os recursos visuais locais e o tratamento em CSS já existentes. Novas ilustrações geradas especificamente para os três caminhos ficam fora do incremento. A captura sugerida para o devlog é o retorno à preparação depois da primeira conclusão: um caminho concluído, o outro disponível e o Caminho do Legado ainda bloqueado com uma das duas metades obtida.
 
 O jogo não deve recorrer a abóboras, “doces ou travessuras”, cemitérios góticos importados ou outros atalhos do Halloween norte-americano. Também não deve representar religiões brasileiras vivas como fonte de maldade; o horror nasce da corrupção ficcional de lendas, sinais e memórias, não da demonização de práticas religiosas.
 
@@ -1004,6 +1015,11 @@ A primeira versão deve conter:
 - bardo acompanhando automaticamente, sem ocupar vaga;
 - bardo com zero competências;
 - três masmorras;
+- escolha da ordem das duas masmorras iniciais durante a formação;
+- escolha de destino e de heróis em qualquer ordem na mesma etapa de preparação;
+- progresso parcial visível dos caminhos incompletos em marcos atravessados;
+- masmorras iniciais concluídas indisponíveis para novas expedições;
+- masmorra final visível e bloqueada até a obtenção das duas metades do mapa;
 - cinco encontros em cada masmorra inicial e seis na masmorra final;
 - oito encontros no Pool A;
 - oito encontros no Pool B;
@@ -1059,6 +1075,7 @@ A primeira versão deve conter:
 - Cenas inteiramente exclusivas para cada combinação de vítima e armadilha.
 - Finais completos para todas as combinações de sobreviventes.
 - Sistema formal e extenso de pistas visuais antes da validação textual.
+- Novas ilustrações geradas especificamente para os cartões de destino.
 
 ---
 
@@ -1201,7 +1218,16 @@ O protótipo central estará funcional quando:
 42. uma nova campanha apagar todas as posições persistentes;
 43. a semente e as atribuições dos encontros serem registráveis e repetíveis para QA;
 44. a identidade das armadilhas ser reconhecivelmente brasileira sem recorrer a ícones do Halloween norte-americano;
-45. o horror não representar religiões brasileiras vivas como fonte de maldade.
+45. o horror não representar religiões brasileiras vivas como fonte de maldade;
+46. as duas masmorras iniciais começarem disponíveis e sem seleção padrão;
+47. o jogador poder concluir as duas masmorras iniciais em qualquer ordem;
+48. trocar o destino antes de partir preservar a formação escolhida;
+49. um recuo permitir escolher a outra masmorra inicial sem apagar mortes nem posições reveladas;
+50. uma masmorra concluída permanecer visível, marcada como concluída e indisponível;
+51. a masmorra final permanecer visível e bloqueada até as duas metades do mapa serem obtidas;
+52. os destinos usarem nomes e rumores diegéticos sem expor classificações internas, pools ou competências;
+53. um caminho incompleto exibir seu progresso parcial em marcos atravessados;
+54. destino e heróis poderem ser escolhidos em qualquer ordem durante a preparação.
 
 ---
 
@@ -1209,7 +1235,7 @@ O protótipo central estará funcional quando:
 
 Esta seção é o registro exaustivo das questões ainda abertas. Nada aqui deve ser tratado como regra implícita.
 
-As regras de abordagens, randomização, repetição, recuo, formação reduzida, sacrifício e morte do bardo não possuem pendências mecânicas nesta versão.
+As regras de abordagens, randomização, repetição, escolha da ordem das masmorras, recuo, formação reduzida, sacrifício e morte do bardo não possuem pendências mecânicas nesta versão.
 
 ### 23.1 Narrativa
 
@@ -1275,7 +1301,7 @@ As regras de abordagens, randomização, repetição, recuo, formação reduzida
 
 ## 25. Resumo das regras vigentes
 
-O jogo usa um bardo sem competências e três heróis escolhidos entre oito. Se restarem somente um ou dois heróis no elenco total, todos partem na expedição seguinte. Cada herói possui duas das oito competências, em uma matriz simétrica. As duas primeiras masmorras têm identidades estritamente separadas e cinco posições preenchidas progressivamente a partir de pools próprios com oito armadilhas cada.
+O jogo usa um bardo sem competências e três heróis escolhidos entre oito. Se restarem somente um ou dois heróis no elenco total, todos partem na expedição seguinte. Cada herói possui duas das oito competências, em uma matriz simétrica. As duas primeiras masmorras têm identidades estritamente separadas, podem ser concluídas em qualquer ordem e possuem cinco posições preenchidas progressivamente a partir de pools próprios com oito armadilhas cada. A formação reúne escolha de heróis e destino; caminhos concluídos não podem ser repetidos, e a masmorra final libera somente depois das duas metades do mapa.
 
 Cada armadilha apresenta três abordagens associadas a competências distintas. Uma competência presente garante sucesso; uma competência ausente produz falha letal e escolha de sacrifício. Força, Destreza, Sobrevivência e Atletismo formam a família corpórea; Percepção, Conhecimento, Ocultismo e Vontade formam a família liminar.
 

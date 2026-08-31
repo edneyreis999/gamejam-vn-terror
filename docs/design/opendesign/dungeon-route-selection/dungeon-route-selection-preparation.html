@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contrato visual — Preparação de expedição</title>
+    <link rel="stylesheet" href="artboards.css">
+    <script src="artboards.js" defer></script>
+  </head>
+  <body data-default-state="initial">
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <main class="artboard" id="main">
+      <header class="game-header">
+        <div class="brand"><span class="eyebrow">Próxima expedição</span><strong>EXPEDIÇÃO E SACRIFÍCIO</strong></div>
+        <div class="status-line"><span>8 heróis sobreviventes</span><span>0 de 2 partes do mapa</span></div>
+      </header>
+
+      <section class="main-region route-panel" data-variant="initial" aria-labelledby="initial-title">
+        <div class="paper-panel panel-padding preparation-layout">
+          <div>
+            <span class="provisional">Conteúdo provisório do protótipo</span>
+            <p class="eyebrow">Preparação</p>
+            <h1 id="initial-title">Prepare a expedição</h1>
+          </div>
+          <fieldset class="route-group">
+            <legend>Escolha o caminho</legend>
+            <p class="route-summary">Nenhum caminho escolhido</p>
+            <div class="route-grid">
+              <label class="route-card route-choice">
+                <input type="radio" name="destination-initial" value="iron">
+                <strong class="route-name">Caminho do Ferro e das Raízes</strong>
+                <span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span>
+                <span class="route-state">Disponível</span>
+                <span class="route-progress">0 de 5 marcos atravessados</span>
+              </label>
+              <label class="route-card route-choice">
+                <input type="radio" name="destination-initial" value="voices">
+                <strong class="route-name">Caminho das Vozes e dos Espelhos</strong>
+                <span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span>
+                <span class="route-state">Disponível</span>
+                <span class="route-progress">0 de 5 marcos atravessados</span>
+              </label>
+              <article class="route-card locked" aria-label="Caminho do Legado, bloqueado">
+                <strong class="route-name">Caminho do Legado</strong>
+                <span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span>
+                <span class="route-state">Bloqueado</span>
+                <span class="route-progress">0 de 6 marcos atravessados · 0 de 2 partes do mapa recuperadas</span>
+                <span class="route-lock">As duas partes do mapa são necessárias.</span>
+              </article>
+            </div>
+          </fieldset>
+          <section class="hero-section" aria-labelledby="initial-heroes">
+            <h2 id="initial-heroes">Escolha os heróis</h2>
+            <div class="hero-grid" role="group" aria-label="Oito heróis sobreviventes">
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H1</strong><span>Força · Vontade</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H2</strong><span>Destreza · Atletismo</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H4</strong><span>Conhecimento · Ocultismo</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H5</strong><span>Força · Conhecimento</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H6</strong><span>Destreza · Percepção</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H7</strong><span>Ocultismo · Atletismo</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Disponível</small></button>
+            </div>
+          </section>
+          <footer class="formation-footer">
+            <div><strong>0 de 3 selecionados</strong><p class="helper">O bardo acompanha o grupo automaticamente e não oferece competências.</p></div>
+            <button class="button primary" type="button">Partir</button>
+          </footer>
+        </div>
+      </section>
+
+      <section class="main-region route-panel" data-variant="selected" aria-labelledby="selected-title" hidden>
+        <div class="paper-panel panel-padding preparation-layout">
+          <div><span class="provisional">Conteúdo provisório do protótipo</span><p class="eyebrow">Preparação</p><h1 id="selected-title">Prepare a expedição</h1></div>
+          <fieldset class="route-group">
+            <legend>Escolha o caminho</legend>
+            <p class="route-summary" data-route-summary>Caminho escolhido: Caminho das Vozes e dos Espelhos</p>
+            <div class="route-grid">
+              <label class="route-card route-choice"><input type="radio" name="destination-selected" value="iron"><strong class="route-name">Caminho do Ferro e das Raízes</strong><span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span><span class="route-state">Disponível</span><span class="route-progress">0 de 5 marcos atravessados</span></label>
+              <label class="route-card route-choice"><input type="radio" name="destination-selected" value="voices" checked><strong class="route-name">Caminho das Vozes e dos Espelhos</strong><span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span><span class="route-state" data-route-selected-status>Escolhido</span><span class="route-progress">0 de 5 marcos atravessados</span></label>
+              <article class="route-card locked" aria-label="Caminho do Legado, bloqueado"><strong class="route-name">Caminho do Legado</strong><span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span><span class="route-state">Bloqueado</span><span class="route-progress">0 de 6 marcos atravessados · 0 de 2 partes do mapa recuperadas</span><span class="route-lock">As duas partes do mapa são necessárias.</span></article>
+            </div>
+          </fieldset>
+          <section class="hero-section" aria-labelledby="selected-heroes">
+            <h2 id="selected-heroes">Escolha os heróis</h2>
+            <div class="hero-grid">
+              <button class="hero-card selected" type="button" aria-pressed="true"><strong>H1</strong><span>Força · Vontade</span><small>Selecionado</small></button>
+              <button class="hero-card selected" type="button" aria-pressed="true"><strong>H2</strong><span>Destreza · Atletismo</span><small>Selecionado</small></button>
+              <button class="hero-card selected" type="button" aria-pressed="true"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Selecionado</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H4</strong><span>Conhecimento · Ocultismo</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H5</strong><span>Força · Conhecimento</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H6</strong><span>Destreza · Percepção</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H7</strong><span>Ocultismo · Atletismo</span><small>Disponível</small></button>
+              <button class="hero-card" type="button" aria-pressed="false"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Disponível</small></button>
+            </div>
+          </section>
+          <p class="inline-error" role="alert" data-if-error="destination-required" hidden>Escolha um caminho antes de partir.</p>
+          <footer class="formation-footer"><div><strong>3 de 3 selecionados</strong><p class="helper">Trocar o caminho preserva esta formação.</p></div><button class="button primary" type="button" data-departure>Partir para Caminho das Vozes e dos Espelhos</button></footer>
+        </div>
+      </section>
+
+      <section class="main-region route-panel" data-variant="after-retreat" aria-labelledby="retreat-title" hidden>
+        <div class="paper-panel panel-padding preparation-layout">
+          <div><span class="provisional">Conteúdo provisório do protótipo</span><p class="eyebrow">Retorno à cidade</p><h1 id="retreat-title">Prepare a expedição</h1></div>
+          <fieldset class="route-group">
+            <legend>Escolha o caminho</legend><p class="route-summary">Nenhum caminho escolhido</p>
+            <div class="route-grid">
+              <label class="route-card route-choice"><input type="radio" name="destination-retreat" value="iron"><strong class="route-name">Caminho do Ferro e das Raízes</strong><span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span><span class="route-state">Disponível</span><span class="route-progress">2 de 5 marcos atravessados</span><span class="route-lock">A próxima tentativa começa no primeiro marco.</span></label>
+              <label class="route-card route-choice"><input type="radio" name="destination-retreat" value="voices"><strong class="route-name">Caminho das Vozes e dos Espelhos</strong><span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span><span class="route-state">Disponível</span><span class="route-progress">1 de 5 marcos atravessados</span><span class="route-lock">A próxima tentativa começa no primeiro marco.</span></label>
+              <article class="route-card locked" aria-label="Caminho do Legado, bloqueado"><strong class="route-name">Caminho do Legado</strong><span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span><span class="route-state">Bloqueado</span><span class="route-progress">0 de 6 marcos atravessados · 0 de 2 partes do mapa recuperadas</span><span class="route-lock">As duas partes do mapa são necessárias.</span></article>
+            </div>
+          </fieldset>
+          <section class="hero-section" aria-labelledby="retreat-heroes"><h2 id="retreat-heroes">Escolha os heróis</h2><div class="hero-grid"><button class="hero-card selected" type="button" aria-pressed="true"><strong>H1</strong><span>Força · Vontade</span><small>Selecionado</small></button><button class="hero-card selected" type="button" aria-pressed="true"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Selecionado</small></button><button class="hero-card" type="button" aria-pressed="false"><strong>H4</strong><span>Conhecimento · Ocultismo</span><small>Disponível</small></button><button class="hero-card" type="button" aria-pressed="false"><strong>H6</strong><span>Destreza · Percepção</span><small>Disponível</small></button><button class="hero-card" type="button" aria-pressed="false"><strong>H7</strong><span>Ocultismo · Atletismo</span><small>Disponível</small></button><button class="hero-card" type="button" aria-pressed="false"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Disponível</small></button></div></section>
+          <footer class="formation-footer"><div><strong>2 de 3 selecionados</strong><p class="helper">Mortes e encontros revelados permanecem registrados em seus caminhos.</p></div><button class="button primary" type="button">Partir</button></footer>
+        </div>
+      </section>
+
+      <section class="main-region route-panel" data-variant="one-complete" data-completed="physical" aria-labelledby="one-physical-title" hidden>
+        <div class="paper-panel panel-padding preparation-layout">
+          <div><span class="provisional">Conteúdo provisório do protótipo</span><p class="eyebrow">Uma parte do mapa recuperada</p><h1 id="one-physical-title">Prepare a expedição</h1></div>
+          <fieldset class="route-group"><legend>Escolha o caminho</legend><p class="route-summary">Caminho escolhido: Caminho das Vozes e dos Espelhos</p><div class="route-grid">
+            <article class="route-card completed" aria-label="Caminho do Ferro e das Raízes, concluído"><strong class="route-name">Caminho do Ferro e das Raízes</strong><span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span><span class="route-state">Concluído</span><span class="route-progress">5 de 5 marcos atravessados · parte recuperada</span></article>
+            <label class="route-card route-choice"><input type="radio" name="destination-one-physical" value="voices" checked><strong class="route-name">Caminho das Vozes e dos Espelhos</strong><span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span><span class="route-state">Escolhido</span><span class="route-progress">0 de 5 marcos atravessados</span></label>
+            <article class="route-card locked" aria-label="Caminho do Legado, bloqueado"><strong class="route-name">Caminho do Legado</strong><span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span><span class="route-state">Bloqueado</span><span class="route-progress">0 de 6 marcos atravessados · 1 de 2 partes do mapa recuperadas</span><span class="route-lock">As duas partes do mapa são necessárias.</span></article>
+          </div></fieldset>
+          <section class="hero-section" aria-labelledby="one-physical-heroes"><h2 id="one-physical-heroes">Escolha os heróis</h2><div class="hero-grid"><button class="hero-card selected" type="button" aria-pressed="true"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Selecionado automaticamente</small></button><button class="hero-card selected" type="button" aria-pressed="true"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Selecionado automaticamente</small></button></div></section>
+          <footer class="formation-footer"><div><strong>2 sobreviventes selecionados</strong><p class="helper">O caminho restante foi escolhido automaticamente. A partida ainda precisa ser confirmada.</p></div><button class="button primary" type="button">Partir para Caminho das Vozes e dos Espelhos</button></footer>
+        </div>
+      </section>
+
+      <section class="main-region route-panel" data-variant="one-complete" data-completed="supernatural" aria-labelledby="one-supernatural-title" hidden>
+        <div class="paper-panel panel-padding preparation-layout">
+          <div><span class="provisional">Conteúdo provisório do protótipo</span><p class="eyebrow">Uma parte do mapa recuperada</p><h1 id="one-supernatural-title">Prepare a expedição</h1></div>
+          <fieldset class="route-group"><legend>Escolha o caminho</legend><p class="route-summary">Caminho escolhido: Caminho do Ferro e das Raízes</p><div class="route-grid">
+            <label class="route-card route-choice"><input type="radio" name="destination-one-supernatural" value="iron" checked><strong class="route-name">Caminho do Ferro e das Raízes</strong><span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span><span class="route-state">Escolhido</span><span class="route-progress">0 de 5 marcos atravessados</span></label>
+            <article class="route-card completed" aria-label="Caminho das Vozes e dos Espelhos, concluído"><strong class="route-name">Caminho das Vozes e dos Espelhos</strong><span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span><span class="route-state">Concluído</span><span class="route-progress">5 de 5 marcos atravessados · parte recuperada</span></article>
+            <article class="route-card locked" aria-label="Caminho do Legado, bloqueado"><strong class="route-name">Caminho do Legado</strong><span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span><span class="route-state">Bloqueado</span><span class="route-progress">0 de 6 marcos atravessados · 1 de 2 partes do mapa recuperadas</span><span class="route-lock">As duas partes do mapa são necessárias.</span></article>
+          </div></fieldset>
+          <section class="hero-section" aria-labelledby="one-supernatural-heroes"><h2 id="one-supernatural-heroes">Escolha os heróis</h2><div class="hero-grid"><button class="hero-card selected" type="button" aria-pressed="true"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Selecionado automaticamente</small></button><button class="hero-card selected" type="button" aria-pressed="true"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Selecionado automaticamente</small></button></div></section>
+          <footer class="formation-footer"><div><strong>2 sobreviventes selecionados</strong><p class="helper">O caminho restante foi escolhido automaticamente. A partida ainda precisa ser confirmada.</p></div><button class="button primary" type="button">Partir para Caminho do Ferro e das Raízes</button></footer>
+        </div>
+      </section>
+
+      <section class="main-region route-panel" data-variant="final-unlocked" aria-labelledby="final-title" hidden>
+        <div class="paper-panel panel-padding preparation-layout">
+          <div><span class="provisional">Conteúdo provisório do protótipo</span><p class="eyebrow">O mapa está inteiro</p><h1 id="final-title">Prepare a expedição</h1></div>
+          <fieldset class="route-group"><legend>Escolha o caminho</legend><p class="route-summary">Caminho escolhido: Caminho do Legado</p><div class="route-grid">
+            <article class="route-card completed" aria-label="Caminho do Ferro e das Raízes, concluído"><strong class="route-name">Caminho do Ferro e das Raízes</strong><span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span><span class="route-state">Concluído</span><span class="route-progress">5 de 5 marcos atravessados · parte recuperada</span></article>
+            <article class="route-card completed" aria-label="Caminho das Vozes e dos Espelhos, concluído"><strong class="route-name">Caminho das Vozes e dos Espelhos</strong><span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span><span class="route-state">Concluído</span><span class="route-progress">5 de 5 marcos atravessados · parte recuperada</span></article>
+            <label class="route-card route-choice"><input type="radio" name="destination-final" value="legacy" checked><strong class="route-name">Caminho do Legado</strong><span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span><span class="route-state">Escolhido</span><span class="route-progress">0 de 6 marcos atravessados · 2 de 2 partes do mapa recuperadas</span></label>
+          </div></fieldset>
+          <section class="hero-section" aria-labelledby="final-heroes"><h2 id="final-heroes">Escolha os heróis</h2><div class="hero-grid"><button class="hero-card selected" type="button" aria-pressed="true"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Selecionado</small></button><button class="hero-card selected" type="button" aria-pressed="true"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Selecionado</small></button></div></section>
+          <footer class="formation-footer"><div><strong>2 sobreviventes selecionados</strong><p class="helper">O Caminho do Legado foi escolhido automaticamente.</p></div><button class="button primary" type="button">Partir para Caminho do Legado</button></footer>
+        </div>
+      </section>
+
+      <section class="main-region route-panel" data-variant="narrow-zoom" aria-labelledby="narrow-title" hidden>
+        <div class="paper-panel panel-padding preparation-layout">
+          <div><span class="provisional">Conteúdo provisório do protótipo</span><p class="eyebrow">Preparação</p><h1 id="narrow-title">Prepare a expedição</h1></div>
+          <fieldset class="route-group"><legend>Escolha o caminho</legend><p class="route-summary">Nenhum caminho escolhido</p><div class="route-grid">
+            <label class="route-card route-choice"><input type="radio" name="destination-narrow" value="iron"><strong class="route-name">Caminho do Ferro e das Raízes</strong><span class="route-rumor">Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.</span><span class="route-state">Disponível</span><span class="route-progress">0 de 5 marcos atravessados</span></label>
+            <label class="route-card route-choice"><input type="radio" name="destination-narrow" value="voices"><strong class="route-name">Caminho das Vozes e dos Espelhos</strong><span class="route-rumor">Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.</span><span class="route-state">Disponível</span><span class="route-progress">0 de 5 marcos atravessados</span></label>
+            <article class="route-card locked"><strong class="route-name">Caminho do Legado</strong><span class="route-rumor">Duas partes do mapa apontam para aquilo que o bardo herdou.</span><span class="route-state">Bloqueado</span><span class="route-progress">0 de 6 marcos atravessados · 0 de 2 partes do mapa recuperadas</span><span class="route-lock">As duas partes do mapa são necessárias.</span></article>
+          </div></fieldset>
+          <section class="hero-section" aria-labelledby="narrow-heroes"><h2 id="narrow-heroes">Escolha os heróis</h2><div class="hero-grid"><button class="hero-card" type="button"><strong>H1</strong><span>Força · Vontade</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H2</strong><span>Destreza · Atletismo</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H3</strong><span>Percepção · Sobrevivência</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H4</strong><span>Conhecimento · Ocultismo</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H5</strong><span>Força · Conhecimento</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H6</strong><span>Destreza · Percepção</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H7</strong><span>Ocultismo · Atletismo</span><small>Disponível</small></button><button class="hero-card" type="button"><strong>H8</strong><span>Vontade · Sobrevivência</span><small>Disponível</small></button></div></section>
+          <footer class="formation-footer"><div><strong>0 de 3 selecionados</strong><p class="helper">A ordem permanece: caminhos, heróis e partida.</p></div><button class="button primary" type="button">Partir</button></footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
