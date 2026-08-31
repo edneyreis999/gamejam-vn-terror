@@ -6,7 +6,7 @@ persona: Lia, primeira expedicionária
 journey: J-local-offline-launch
 expected: A abertura, a formação e uma nova sessão funcionam por file URL sem rede ou promessa de retomada
 entry_points: file:///…/prototype/index.html
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:

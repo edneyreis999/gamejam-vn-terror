@@ -36,6 +36,28 @@
     });
   }
 
+  function ensureHeroes(controller, heroIds) {
+    var selected = controller.getState().draftPartyIds.slice();
+    selected.filter(function (heroId) { return heroIds.indexOf(heroId) < 0; }).forEach(function (heroId) {
+      Test.truthy(controller.dispatch({ type: 'TOGGLE_HERO', heroId: heroId }).ok);
+    });
+    heroIds.filter(function (heroId) { return controller.getState().draftPartyIds.indexOf(heroId) < 0; }).forEach(function (heroId) {
+      Test.truthy(controller.dispatch({ type: 'TOGGLE_HERO', heroId: heroId }).ok);
+    });
+  }
+
+  function selectDestination(controller, dungeonId) {
+    var state = controller.getState();
+    if (state.phase === 'formation' && state.selectedDungeonId !== dungeonId) {
+      Test.truthy(controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: dungeonId }).ok);
+    }
+  }
+
+  function availableDestination(state, preferred) {
+    var available = Engine.deriveDestinationAvailability(state);
+    return available.indexOf(preferred) >= 0 ? preferred : available[0];
+  }
+
   function livingIds(state) {
     return Data.heroOrder.filter(function (heroId) {
       return state.deadHeroIds.indexOf(heroId) < 0;
@@ -48,6 +70,7 @@
       return;
     }
     var living = livingIds(state);
+    selectDestination(controller, availableDestination(state, 'physical'));
     if (living.length >= 3) {
       selectHeroes(controller, living.slice(0, 3));
     }
@@ -99,7 +122,7 @@
       } else if (state.phase === 'automatic_retreat') {
         Test.truthy(controller.dispatch({ type: 'ACK_AUTO_RETREAT' }).ok);
       } else if (state.phase === 'dungeon_complete') {
-        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+        Test.truthy(controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
       } else {
         throw new Error('Fase inesperada ao produzir mortes legais: ' + state.phase);
       }
@@ -128,7 +151,7 @@
       } else if (state.phase === 'automatic_retreat') {
         controller.dispatch({ type: 'ACK_AUTO_RETREAT' });
       } else if (state.phase === 'dungeon_complete') {
-        controller.dispatch({ type: 'CONTINUE_DUNGEON' });
+        controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' });
       } else {
         throw new Error('Não foi possível retornar legalmente à formação a partir de ' + state.phase + '.');
       }
@@ -138,12 +161,14 @@
 
   function reachThreshold(controller, heroIds) {
     beginToFormation(controller, 23);
+    selectDestination(controller, 'physical');
     selectHeroes(controller, heroIds || ['H1', 'H2', 'H3']);
     Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
   }
 
   function reachEncounter(controller, heroIds, seed) {
     beginToFormation(controller, seed === undefined ? 23 : seed);
+    selectDestination(controller, 'physical');
     selectHeroes(controller, heroIds || ['H1', 'H2', 'H3']);
     Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
     Test.truthy(controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
@@ -202,14 +227,15 @@
       guard += 1;
       var state = controller.getState();
       if (state.phase === 'formation') {
-        selectHeroes(controller, ['H1', 'H2', 'H3']);
+        selectDestination(controller, availableDestination(state, 'physical'));
+        ensureHeroes(controller, ['H1', 'H2', 'H3']);
         Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
       } else if (state.phase === 'dungeon_intro') {
         Test.truthy(controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
       } else if (state.phase === 'encounter_choice') {
         resolveSuccess(controller);
       } else if (state.phase === 'dungeon_complete') {
-        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+        Test.truthy(controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
       } else {
         throw new Error('Fase inesperada na campanha sem mortes: ' + state.phase);
       }
@@ -225,6 +251,7 @@
   function prepareSoloPartyWithReserve(controller) {
     driveDeaths(controller, 4);
     returnToFormation(controller);
+    selectDestination(controller, availableDestination(controller.getState(), 'physical'));
     selectHeroes(controller, livingIds(controller.getState()).slice(0, 3));
     Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
     Test.truthy(controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
@@ -247,6 +274,7 @@
       guard += 1;
       var state = controller.getState();
       if (state.phase === 'formation') {
+        selectDestination(controller, availableDestination(state, dungeonId));
         selectHeroes(controller, livingIds(state).slice(0, 3));
         Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
       } else if (state.phase === 'dungeon_intro') {
@@ -254,7 +282,7 @@
       } else if (state.phase === 'encounter_choice') {
         resolveSuccess(controller);
       } else if (state.phase === 'dungeon_complete') {
-        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+        Test.truthy(controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
       } else {
         throw new Error('Fase inesperada ao alcançar transição: ' + state.phase);
       }
@@ -270,6 +298,7 @@
       guard += 1;
       var state = controller.getState();
       if (state.phase === 'formation') {
+        selectDestination(controller, availableDestination(state, 'physical'));
         selectHeroes(controller, ['H1', 'H2', 'H3']);
         Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
       } else if (state.phase === 'dungeon_intro') {
@@ -282,7 +311,7 @@
         }
         Test.truthy(controller.dispatch({ type: 'ACK_SUCCESS' }).ok);
       } else if (state.phase === 'dungeon_complete') {
-        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+        Test.truthy(controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
       } else {
         throw new Error('Fase inesperada antes do resultado final: ' + state.phase);
       }
@@ -326,7 +355,9 @@
       while (valid && state.phase !== 'victory' && guard < 120) {
         guard += 1;
         if (state.phase === 'formation') {
-          parties[state.dungeonId].forEach(function (heroId) { apply({ type: 'TOGGLE_HERO', heroId: heroId }); });
+          var nextDungeon = availableDestination(state, 'physical');
+          apply({ type: 'SELECT_DESTINATION', dungeonId: nextDungeon });
+          parties[nextDungeon].forEach(function (heroId) { apply({ type: 'TOGGLE_HERO', heroId: heroId }); });
           apply({ type: 'DEPART' });
         } else if (state.phase === 'dungeon_intro') {
           apply({ type: 'ENTER_DUNGEON' });
@@ -347,7 +378,7 @@
             }
           }
         } else if (state.phase === 'dungeon_complete') {
-          apply({ type: 'CONTINUE_DUNGEON' });
+          apply({ type: 'ACK_DUNGEON_COMPLETE' });
         } else {
           valid = false;
         }
@@ -380,6 +411,7 @@
       guard += 1;
       var state = controller.getState();
       if (state.phase === 'formation') {
+        selectDestination(controller, availableDestination(state, encounterId.charAt(0) === 'A' ? 'physical' : 'supernatural'));
         selectHeroes(controller, ['H1', 'H2', 'H3']);
         Test.truthy(controller.dispatch({ type: 'DEPART' }).ok);
       } else if (state.phase === 'dungeon_intro') {
@@ -390,7 +422,7 @@
         }
         resolveSuccess(controller);
       } else if (state.phase === 'dungeon_complete') {
-        Test.truthy(controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+        Test.truthy(controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
       } else {
         throw new Error('Fase inesperada ao localizar ' + encounterId + ': ' + state.phase);
       }
@@ -414,7 +446,7 @@
     scene.appendChild(image);
     image.dispatchEvent(new Event('error', { bubbles: false }));
     Test.truthy(scene.classList.contains('image-fallback'));
-    Test.includes(scene.textContent, 'A mata tomou a construção.');
+    Test.includes(scene.textContent, 'Caminho do Ferro e das Raízes');
     Test.truthy(current.root.querySelector('[data-action="enter-dungeon"]'));
     current.cleanup();
   });
@@ -544,7 +576,7 @@
     beginToFormation(current.controller);
     current.root.querySelector('[data-action="depart"]').click();
     Test.equal(current.controller.getState().phase, 'formation');
-    Test.includes(current.root.querySelector('[role="alert"]').textContent, 'Escolha exatamente três heróis sobreviventes');
+    Test.includes(current.root.querySelector('[role="alert"]').textContent, 'Escolha um caminho antes de partir.');
     current.cleanup();
   });
 
@@ -561,6 +593,7 @@
     driveDeaths(current.controller, 5);
     returnToFormation(current.controller);
     var living = livingIds(current.controller.getState());
+    selectDestination(current.controller, availableDestination(current.controller.getState(), 'physical'));
     selectHeroes(current.controller, living.slice(0, 2));
     Test.falsy(current.controller.dispatch({ type: 'DEPART' }).ok);
     Test.truthy(current.controller.dispatch({ type: 'TOGGLE_HERO', heroId: living[2] }).ok);
@@ -649,6 +682,7 @@
     driveDeaths(current.controller, 5);
     returnToFormation(current.controller);
     var living = livingIds(current.controller.getState());
+    selectDestination(current.controller, availableDestination(current.controller.getState(), 'physical'));
     selectHeroes(current.controller, living);
     current.controller.dispatch({ type: 'DEPART' });
     var roster = current.root.querySelector('.roster-region');
@@ -690,7 +724,8 @@
     beginToFormation(current.controller);
     Test.equal(current.root.querySelectorAll('.hero-card').length, 8);
     Test.deepEqual(current.controller.getState().partyIds, []);
-    Test.falsy(current.root.textContent.indexOf('Na expedição') >= 0);
+    Test.falsy(current.root.querySelector('#roster-dialog').open);
+    Test.includes(current.root.querySelector('.formation-panel').textContent, 'Escolha os heróis');
     current.cleanup();
   });
 
@@ -851,6 +886,7 @@
     for (var attempt = 0; attempt < 2; attempt += 1) {
       Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
       Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);
+      selectDestination(current.controller, 'physical');
       selectHeroes(current.controller, ['H1', 'H2', 'H3']);
       Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
       Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
@@ -1165,6 +1201,7 @@
     driveDeaths(current.controller, 5);
     returnToFormation(current.controller);
     var living = livingIds(current.controller.getState());
+    selectDestination(current.controller, availableDestination(current.controller.getState(), 'physical'));
     selectHeroes(current.controller, living);
     Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
     Test.equal(current.controller.getState().partyIds.length, 3);
@@ -1248,6 +1285,7 @@
     for (var attempt = 0; attempt < 2; attempt += 1) {
       Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
       Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);
+      selectDestination(current.controller, 'physical');
       selectHeroes(current.controller, ['H1', 'H2', 'H3']);
       Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
       Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
@@ -1265,7 +1303,7 @@
     var revealed = current.controller.getState().assignments.physical.slice(0, 4);
     Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
     Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);
-    Test.equal(current.controller.getState().position, 1);
+    Test.equal(current.controller.getState().position, null);
     Test.deepEqual(current.controller.getState().assignments.physical.slice(0, 4), revealed);
     current.cleanup();
   });
@@ -1475,7 +1513,7 @@
     var result = Engine.dispatch(invalid, { type: 'ENTER_DUNGEON' });
     Test.truthy(result.ok);
     Test.equal(result.state.phase, 'invalid');
-    Test.includes(result.state.invariantViolations.map(function (violation) { return violation.code; }), 'impossible_dungeon_transition');
+    Test.includes(result.state.invariantViolations.map(function (violation) { return violation.code; }), 'final_destination_locked');
     current.cleanup();
   });
 
@@ -1485,7 +1523,7 @@
     var invalid = JSON.parse(JSON.stringify(current.controller.getState()));
     var unusedA = Data.encounterOrder.filter(function (id) { return id.charAt(0) === 'A' && invalid.assignments.physical.indexOf(id) < 0; })[0];
     invalid.assignments.supernatural[0] = unusedA;
-    var result = Engine.dispatch(invalid, { type: 'CONTINUE_DUNGEON' });
+    var result = Engine.dispatch(invalid, { type: 'ACK_DUNGEON_COMPLETE' });
     Test.truthy(result.ok);
     Test.equal(result.state.phase, 'invalid');
     Test.truthy(result.state.invariantViolations.length > 0);
@@ -1500,12 +1538,13 @@
     current.cleanup();
   });
 
-  Test.test('IT-094 — fluxo não oferece escolha de ordem das masmorras', function () {
+  Test.test('IT-094 — conclusão usa nomes diegéticos e reconhecimento explícito', function () {
     var current = fixture(320);
     reachDungeonComplete(current.controller, 'physical', 70);
-    Test.equal(current.root.querySelectorAll('[data-action="continue-dungeon"]').length, 1);
-    Test.falsy(current.root.querySelector('[data-action="choose-dungeon"]'));
-    Test.includes(current.root.textContent, 'Primeira metade do mapa recuperada.');
+    Test.equal(current.root.querySelectorAll('[data-action="ack-dungeon-complete"]').length, 1);
+    Test.includes(current.root.textContent, 'Uma parte do mapa foi recuperada.');
+    Test.includes(current.root.textContent, 'Caminho do Ferro e das Raízes');
+    Test.falsy(current.root.textContent.indexOf('Primeira metade') >= 0);
     var map = current.root.querySelector('.map-halves');
     var mapStyle = global.getComputedStyle(map);
     Test.equal(mapStyle.paddingInlineStart, '0px');
@@ -1520,10 +1559,11 @@
   Test.test('IT-095 — conclusão e avanço concorrentes mudam de masmorra uma vez', function () {
     var current = fixture();
     reachDungeonComplete(current.controller, 'physical', 71);
-    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
-    Test.falsy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
-    Test.equal(current.controller.getState().dungeonId, 'supernatural');
-    Test.equal(current.controller.getState().actionHistory.filter(function (entry) { return entry.type === 'dungeon_advanced'; }).length, 1);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+    Test.falsy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+    Test.equal(current.controller.getState().dungeonId, null);
+    Test.equal(current.controller.getState().selectedDungeonId, 'supernatural');
+    Test.equal(current.controller.getState().actionHistory.filter(function (entry) { return entry.type === 'dungeon_completion_acknowledged'; }).length, 1);
     current.cleanup();
   });
 
@@ -1541,17 +1581,20 @@
     var current = fixture();
     reachDungeonComplete(current.controller, 'physical', 73);
     var physical = current.controller.getState().assignments.physical.slice();
-    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
-    Test.falsy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+    Test.falsy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
     Test.deepEqual(current.controller.getState().assignments.physical, physical);
-    Test.equal(current.controller.getState().dungeonId, 'supernatural');
+    Test.equal(current.controller.getState().dungeonId, null);
+    Test.equal(current.controller.getState().selectedDungeonId, 'supernatural');
     current.cleanup();
   });
 
   Test.test('IT-098 — final não preatribui posições futuras', function () {
     var current = fixture();
     reachDungeonComplete(current.controller, 'supernatural', 74);
-    Test.truthy(current.controller.dispatch({ type: 'CONTINUE_DUNGEON' }).ok);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+    reachDungeonComplete(current.controller, 'physical', 74);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
     Test.deepEqual(current.controller.getState().assignments.final, [null, null, null, null, null, null]);
     selectHeroes(current.controller, ['H1', 'H2', 'H3']);
     Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
@@ -1567,7 +1610,7 @@
     var reduced = JSON.parse(JSON.stringify(current.controller.getState()));
     reduced.deadHeroIds = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
     reduced.partyIds = ['H7', 'H8'];
-    var result = Engine.dispatch(reduced, { type: 'CONTINUE_DUNGEON' });
+    var result = Engine.dispatch(reduced, { type: 'ACK_DUNGEON_COMPLETE' });
     Test.truthy(result.ok);
     Test.equal(result.state.phase, 'formation');
     Test.deepEqual(result.state.draftPartyIds, ['H7', 'H8']);
@@ -1884,6 +1927,7 @@
     };
     Test.truthy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok);
     Test.truthy(current.controller.dispatch({ type: 'CONFIRM_RETREAT' }).ok);
+    selectDestination(current.controller, 'physical');
     selectHeroes(current.controller, ['H1', 'H2', 'H3']);
     Test.truthy(current.controller.dispatch({ type: 'DEPART' }).ok);
     Test.truthy(current.controller.dispatch({ type: 'ENTER_DUNGEON' }).ok);
@@ -2158,6 +2202,7 @@
     reachEncounter(current.controller, ['H1', 'H2', 'H3'], 150);
     current.controller.dispatch({ type: 'REQUEST_RETREAT' });
     current.controller.dispatch({ type: 'CONFIRM_RETREAT' });
+    selectDestination(current.controller, 'physical');
     selectHeroes(current.controller, ['H1', 'H2', 'H3']);
     current.controller.dispatch({ type: 'DEPART' });
     finishWithoutDeaths(current.controller);
@@ -2168,4 +2213,303 @@
     Test.equal(history.filter(function (entry) { return entry.type === 'campaign_won'; }).length, 1);
     current.cleanup();
   });
+
+  Test.test('UT-099 — snapshot QA v2 agrega rotas, formação e rejeição nula', function () {
+    var current = fixture();
+    beginToFormation(current.controller, 20260831);
+    selectDestination(current.controller, 'supernatural');
+    selectHeroes(current.controller, ['H1', 'H2', 'H3']);
+    var snapshot = global.expeditionQA.snapshot();
+    Test.equal(snapshot.version, 2);
+    Test.equal(snapshot.selectedDestination, 'supernatural');
+    Test.deepEqual(snapshot.draftParty, ['H1', 'H2', 'H3']);
+    Test.deepEqual(Object.keys(snapshot.destinations), ['physical', 'supernatural', 'final']);
+    Test.equal(snapshot.lastRejectedAction, null);
+    current.cleanup();
+  });
+
+  Test.test('UT-100 — snapshot QA devolve dados destacados do controlador', function () {
+    var current = fixture();
+    beginToFormation(current.controller, 100);
+    var first = global.expeditionQA.snapshot();
+    try { first.destinations.physical.landmarks.traversed = 99; } catch (error) { /* congelamento esperado */ }
+    try { first.assignments.physical[0] = 'B8'; } catch (error) { /* congelamento esperado */ }
+    var later = global.expeditionQA.snapshot();
+    Test.equal(later.destinations.physical.landmarks.traversed, 0);
+    Test.equal(later.assignments.physical[0], null);
+    current.cleanup();
+  });
+
+  Test.test('UT-101 — rejeição de destino gera um diagnóstico estruturado e um aviso', function () {
+    var current = fixture();
+    beginToFormation(current.controller, 101);
+    var warnings = [];
+    var originalWarn = console.warn;
+    console.warn = function () { warnings.push(Array.prototype.slice.call(arguments)); };
+    try {
+      Test.falsy(current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'final' }).ok);
+    } finally {
+      console.warn = originalWarn;
+    }
+    var rejection = global.expeditionQA.snapshot().lastRejectedAction;
+    Test.deepEqual(rejection, { action: 'SELECT_DESTINATION', code: 'destination_unavailable', message: 'Este caminho não está disponível para expedição.', context: { dungeon: 'final', status: 'locked' } });
+    Test.equal(warnings.filter(function (entry) { return entry[0] === 'campaign_action_rejected'; }).length, 1);
+    current.cleanup();
+  });
+
+  Test.test('UT-102 — ação aceita limpa e nova rejeição substitui o diagnóstico', function () {
+    var current = fixture();
+    beginToFormation(current.controller, 102);
+    current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'unknown' });
+    Test.equal(global.expeditionQA.snapshot().lastRejectedAction.code, 'invalid_destination');
+    Test.truthy(current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'physical' }).ok);
+    Test.equal(global.expeditionQA.snapshot().lastRejectedAction, null);
+    current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'final' });
+    Test.equal(global.expeditionQA.snapshot().lastRejectedAction.code, 'destination_unavailable');
+    current.cleanup();
+  });
+
+  Test.test('UT-105 — seed pública preserva formas de sucesso e erro', function () {
+    var current = fixture();
+    Test.deepEqual(global.expeditionQA.setSeed(20260831), { ok: true, seed: 20260831 });
+    current.root.querySelector('[data-action="begin"]').click();
+    Test.equal(global.expeditionQA.snapshot().seed, 20260831);
+    Test.deepEqual(global.expeditionQA.setSeed(1), { ok: false, error: { code: 'campaign_already_started', message: 'Defina a semente antes de iniciar a campanha.' } });
+    current.cleanup();
+  });
+
+  Test.test('UT-107 — formação com rota única expõe anúncio diegético automático', function () {
+    var current = fixture();
+    reachDungeonComplete(current.controller, 'physical', 107);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+    var view = Engine.derivePlayerView(current.controller.getState());
+    Test.equal(view.selectedDestination, 'supernatural');
+    Test.equal(view.automaticSelectionAnnouncement, 'Caminho selecionado automaticamente: Caminho das Vozes e dos Espelhos.');
+    current.cleanup();
+  });
+
+  function routeCase(id, title, callback) {
+    Test.test('IT-' + id + ' — ' + title, function () {
+      var current = fixture(id === '170' || id === '203' || id === '210' ? 320 : 1000);
+      try {
+        beginToFormation(current.controller, Number(id));
+        callback(current);
+      } finally {
+        current.cleanup();
+      }
+    });
+  }
+
+  function clickRoute(current, dungeonId) {
+    var radio = current.root.querySelector('[data-destination-control][value="' + dungeonId + '"]');
+    Test.truthy(radio);
+    radio.click();
+  }
+
+  function firstCompletion(current, dungeonId) {
+    reachDungeonComplete(current.controller, dungeonId, Number(dungeonId === 'physical' ? 301 : 302));
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+  }
+
+  routeCase('151', 'partida sem caminho foca alerta e preserva heróis', function (current) {
+    selectHeroes(current.controller, ['H1', 'H2', 'H3']);
+    current.root.querySelector('[data-action="depart"]').click();
+    Test.equal(document.activeElement.id, 'campaign-error');
+    Test.deepEqual(current.controller.getState().draftPartyIds, ['H1', 'H2', 'H3']);
+  });
+  routeCase('152', 'zero sobreviventes deriva derrota sem controles de preparação', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState()));
+    state.deadHeroIds = Data.heroOrder.slice();
+    var defeated = Engine.enterFormation(Object.freeze(state));
+    Test.equal(defeated.phase, 'defeat');
+    Test.equal(Engine.derivePlayerView(defeated).formation, null);
+  });
+  routeCase('153', 'rota única e elenco reduzido são selecionados sem partir', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState()));
+    state.routeProgress.physical = 5;
+    state.assignments.physical = ['A1', 'A2', 'A3', 'A4', 'A5'];
+    state.deadHeroIds = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+    var formation = Engine.enterFormation(Object.freeze(state));
+    Test.equal(formation.selectedDungeonId, 'supernatural');
+    Test.deepEqual(formation.draftPartyIds, ['H7', 'H8']);
+    Test.equal(formation.dungeonId, null);
+  });
+  routeCase('154', 'controle manipulado não ativa rota bloqueada', function (current) {
+    var before = JSON.stringify(current.controller.getState());
+    Test.falsy(current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'final' }).ok);
+    Test.equal(JSON.stringify(current.controller.getState()), before);
+    Test.equal(current.root.querySelectorAll('[value="final"]').length, 0);
+  });
+  routeCase('155', 'duas mudanças deixam somente o último rádio marcado', function (current) {
+    clickRoute(current, 'physical'); clickRoute(current, 'supernatural');
+    Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 1);
+    Test.equal(current.controller.getState().selectedDungeonId, 'supernatural');
+  });
+  routeCase('156', 'consulta do elenco preserva escolhas antes da partida', function (current) {
+    clickRoute(current, 'physical'); selectHeroes(current.controller, ['H1', 'H2', 'H3']);
+    current.root.querySelector('[data-action="open-roster"]').click(); current.root.querySelector('[data-action="close-roster"]').click();
+    Test.equal(current.controller.getState().selectedDungeonId, 'physical');
+    Test.deepEqual(current.controller.getState().draftPartyIds, ['H1', 'H2', 'H3']);
+  });
+  routeCase('157', 'seleção repetida não parte implicitamente', function (current) {
+    current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'physical' });
+    Test.equal(current.controller.getState().phase, 'formation');
+    Test.equal(current.controller.getState().selectedDungeonId, 'physical');
+  });
+  routeCase('158', 'última escolha de rota é comprometida na partida', function (current) {
+    selectHeroes(current.controller, ['H1', 'H2', 'H3']); clickRoute(current, 'physical'); clickRoute(current, 'supernatural'); clickRoute(current, 'physical');
+    current.root.querySelector('[data-action="depart"]').click();
+    Test.equal(current.controller.getState().dungeonId, 'physical');
+    Test.deepEqual(current.controller.getState().partyIds, ['H1', 'H2', 'H3']);
+  });
+  routeCase('159', 'partida obsoleta para rota concluída é recusada', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState()));
+    state.selectedDungeonId = 'physical'; state.routeProgress.physical = 5; state.assignments.physical = ['A1', 'A2', 'A3', 'A4', 'A5'];
+    Test.includes(Engine.validateState(Object.freeze(state)).violations.map(function (v) { return v.code; }), 'destination_unavailable');
+  });
+  routeCase('160', 'rotas precedem oito heróis e ação no DOM', function (current) {
+    Test.equal(current.root.querySelectorAll('.route-card').length, 3);
+    Test.equal(current.root.querySelectorAll('.hero-card').length, 8);
+    var panel = current.root.querySelector('.formation-panel');
+    Test.truthy(panel.querySelector('.route-grid').compareDocumentPosition(panel.querySelector('.hero-grid')) & Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+
+  routeCase('161', 'estado de destino desconhecido interrompe em vez de escolher', function (current) {
+    var view = Engine.derivePlayerView(current.controller.getState());
+    Test.equal(view.destinations.filter(function (d) { return d.status === 'available'; }).length, 2);
+    Test.equal(view.selectedDestination, null);
+  });
+  routeCase('162', 'nome estado e progresso independem de decoração', function (current) {
+    Test.includes(current.root.textContent, Data.destinations.physical.name);
+    Test.includes(current.root.textContent, 'Disponível');
+    Test.includes(current.root.textContent, '0 de 5 marcos atravessados');
+  });
+  routeCase('163', 'limites de progresso renderizam cinco e seis sem exceder', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState()));
+    state.routeProgress = { physical: 5, supernatural: 5, final: 6 };
+    Test.deepEqual(Engine.deriveDestinations(Object.freeze(state)).map(function (d) { return d.landmarks.traversed + '/' + d.landmarks.total; }), ['5/5', '5/5', '6/6']);
+  });
+  routeCase('164', 'cartões não vazam classificações ou encontros', function (current) {
+    Test.falsy(/pool [ab]|masmorra física|masmorra sobrenatural|\b[AB][1-8]\b/i.test(current.root.querySelector('.route-group').textContent));
+  });
+  routeCase('165', 'quinto marco entra diretamente em conclusão coerente', function (current) {
+    reachDungeonComplete(current.controller, 'physical', 165);
+    Test.equal(current.controller.getState().routeProgress.physical, 5);
+    Test.includes(current.root.textContent, 'Uma parte do mapa foi recuperada.');
+  });
+  routeCase('166', 'nova montagem descarta progresso da sessão', function (current) {
+    clickRoute(current, 'physical');
+    var other = fixture();
+    Test.equal(other.controller.getState().phase, 'ready'); Test.equal(other.controller.getState().routeProgress.physical, 0); other.cleanup();
+  });
+  routeCase('167', 'renderizações repetidas conservam cópia e seleção', function (current) {
+    clickRoute(current, 'supernatural'); var before = current.root.querySelector('.route-group').textContent;
+    current.root.querySelector('[data-action="open-roster"]').click(); current.root.querySelector('[data-action="close-roster"]').click();
+    Test.equal(current.root.querySelector('.route-group').textContent, before);
+  });
+  routeCase('168', 'legado começa bloqueado com pré-requisito explícito', function (current) {
+    var legacy = current.root.querySelector('[data-destination-id="final"]');
+    Test.includes(legacy.textContent, 'Bloqueado'); Test.includes(legacy.textContent, '0 de 2 partes'); Test.falsy(legacy.querySelector('input'));
+  });
+  routeCase('169', 'conclusão troca rádio por cartão estático', function (current) {
+    firstCompletion(current, 'physical');
+    Test.falsy(current.root.querySelector('[data-destination-id="physical"] input'));
+    Test.truthy(current.root.querySelector('[data-destination-control][value="supernatural"]:checked'));
+  });
+  routeCase('170', 'preparação estreita mantém conteúdo dentro do contêiner', function (current) {
+    Test.truthy(current.root.scrollWidth <= 320); Test.equal(current.root.querySelectorAll('.route-card').length, 3); Test.equal(current.root.querySelectorAll('.hero-card').length, 8);
+  });
+
+  routeCase('171', 'troca fora da formação não altera consequência', function (current) {
+    selectDestination(current.controller, 'physical'); selectHeroes(current.controller, ['H1', 'H2', 'H3']); current.controller.dispatch({ type: 'DEPART' });
+    var before = JSON.stringify(current.controller.getState()); Test.falsy(current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'supernatural' }).ok); Test.equal(JSON.stringify(current.controller.getState()), before);
+  });
+  routeCase('172', 'recuo com uma rota concluída conserva seleção única', function (current) { firstCompletion(current, 'physical'); Test.equal(current.controller.getState().selectedDungeonId, 'supernatural'); });
+  routeCase('173', 'quinto marco resolvido prevalece sobre recuo', function (current) { reachDungeonComplete(current.controller, 'physical', 173); Test.falsy(current.controller.dispatch({ type: 'REQUEST_RETREAT' }).ok); Test.equal(current.controller.getState().phase, 'dungeon_complete'); });
+  routeCase('174', 'morte e atribuição persistem ao trocar de caminho', function (current) {
+    var state = current.controller.getState(); var copy = JSON.parse(JSON.stringify(state)); copy.deadHeroIds = ['H4']; copy.assignments.physical[2] = 'A3'; copy.routeProgress.physical = 2;
+    var formation = Engine.enterFormation(Object.freeze(copy)); var switched = Engine.dispatch(formation, { type: 'SELECT_DESTINATION', dungeonId: 'supernatural' }).state;
+    Test.includes(switched.deadHeroIds, 'H4'); Test.equal(switched.assignments.physical[2], 'A3');
+  });
+  routeCase('175', 'recuo estabelece formação antes de nova partida', function (current) {
+    selectDestination(current.controller, 'physical'); selectHeroes(current.controller, ['H1', 'H2', 'H3']); current.controller.dispatch({ type: 'DEPART' }); current.controller.dispatch({ type: 'REQUEST_RETREAT' }); current.controller.dispatch({ type: 'CONFIRM_RETREAT' });
+    Test.equal(current.controller.getState().phase, 'formation'); Test.falsy(current.controller.dispatch({ type: 'DEPART' }).ok);
+  });
+  routeCase('176', 'elenco após recuo não altera registros', function (current) {
+    var before = JSON.stringify(current.controller.getState().assignments); current.root.querySelector('[data-action="open-roster"]').click(); current.root.querySelector('[data-action="close-roster"]').click(); Test.equal(JSON.stringify(current.controller.getState().assignments), before);
+  });
+  routeCase('177', 'alternância preserva atribuições independentes', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState())); state.assignments.physical[0] = 'A1'; state.assignments.supernatural[0] = 'B1';
+    Test.equal(state.assignments.physical[0], 'A1'); Test.equal(state.assignments.supernatural[0], 'B1');
+  });
+  routeCase('178', 'rádio não existe durante limiar ativo', function (current) {
+    selectDestination(current.controller, 'physical'); selectHeroes(current.controller, ['H1', 'H2', 'H3']); current.controller.dispatch({ type: 'DEPART' }); Test.equal(current.root.querySelectorAll('[data-destination-control]').length, 0);
+  });
+  routeCase('179', 'rota concluída rejeita entrada obsoleta', function (current) { firstCompletion(current, 'physical'); Test.falsy(current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'physical' }).ok); Test.equal(current.controller.getState().selectedDungeonId, 'supernatural'); });
+  routeCase('180', 'atribuições cheias sem progresso não liberam legado', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState())); state.assignments.physical = ['A1','A2','A3','A4','A5']; state.assignments.supernatural = ['B1','B2','B3','B4','B5']; state.routeProgress.physical = 4; state.routeProgress.supernatural = 4;
+    Test.equal(Engine.deriveDestinations(Object.freeze(state))[2].status, 'locked');
+  });
+
+  routeCase('181', 'partida obsoleta concluída preserva progresso', function (current) { firstCompletion(current, 'physical'); var before = JSON.stringify(current.controller.getState().routeProgress); Test.falsy(current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'physical' }).ok); Test.equal(JSON.stringify(current.controller.getState().routeProgress), before); });
+  routeCase('182', 'recuperação mantém conteúdo essencial sem detalhe opcional', function (current) { reachDungeonComplete(current.controller, 'physical', 182); Test.includes(current.root.textContent, 'Uma parte do mapa foi recuperada.'); Test.includes(current.root.textContent, 'Voltar à preparação'); });
+  routeCase('183', 'um sobrevivente permanece autoformado na rota seguinte', function (current) {
+    var state = JSON.parse(JSON.stringify(current.controller.getState())); state.routeProgress.physical=5; state.assignments.physical=['A1','A2','A3','A4','A5']; state.deadHeroIds=Data.heroOrder.slice(0,7);
+    var formation=Engine.enterFormation(Object.freeze(state)); Test.deepEqual(formation.draftPartyIds,['H8']); Test.equal(formation.selectedDungeonId,'supernatural');
+  });
+  routeCase('184', 'cartão concluído não possui alvo interativo', function (current) { firstCompletion(current, 'physical'); var card=current.root.querySelector('[data-destination-id="physical"]'); Test.equal(card.tagName,'ARTICLE'); Test.falsy(card.querySelector('input,button')); });
+  routeCase('185', 'reconhecimento duplicado produz um evento', function (current) { reachDungeonComplete(current.controller,'physical',185); current.controller.dispatch({type:'ACK_DUNGEON_COMPLETE'}); current.controller.dispatch({type:'ACK_DUNGEON_COMPLETE'}); Test.equal(current.controller.getState().actionHistory.filter(function(e){return e.type==='dungeon_completion_acknowledged';}).length,1); });
+  routeCase('186', 'elenco durante recuperação não remove caminho ativo', function (current) { reachDungeonComplete(current.controller,'physical',186); var id=current.controller.getState().dungeonId; Test.equal(id,'physical'); Test.includes(current.root.textContent,Data.destinations.physical.name); });
+  routeCase('187', 'preparação repetida nunca reabilita concluído', function (current) { firstCompletion(current,'physical'); Test.equal(Engine.deriveDestinations(current.controller.getState())[0].status,'completed'); Test.falsy(current.root.querySelector('[value="physical"]')); });
+  routeCase('188', 'seleção e partida aguardam reconhecimento da conclusão', function (current) { reachDungeonComplete(current.controller,'physical',188); Test.falsy(current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'supernatural'}).ok); Test.falsy(current.controller.dispatch({type:'DEPART'}).ok); });
+  routeCase('189', 'progresso antigo em concluído é diagnosticável', function (current) { var state=JSON.parse(JSON.stringify(current.controller.getState())); state.routeProgress.physical=5; state.assignments.physical=['A1','A2','A3','A4',null]; Test.includes(Engine.validateState(Object.freeze(state)).violations.map(function(v){return v.code;}),'route_progress_assignment_mismatch'); });
+  routeCase('190', 'qualquer rota pode ser a primeira concluída', function (current) { reachDungeonComplete(current.controller,'supernatural',190); Test.includes(current.root.textContent,Data.destinations.supernatural.name); current.controller.dispatch({type:'ACK_DUNGEON_COMPLETE'}); Test.equal(current.controller.getState().selectedDungeonId,'physical'); });
+
+  routeCase('191', 'legado prematuro não consome aleatoriedade', function (current) { var rng=current.controller.getState().rngState; Test.falsy(current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'final'}).ok); Test.equal(current.controller.getState().rngState,rng); });
+  routeCase('192', 'progresso inconsistente expõe violação de rota', function (current) { var state=JSON.parse(JSON.stringify(current.controller.getState())); delete state.routeProgress.final; Test.includes(Engine.validateState(Object.freeze(state)).violations.map(function(v){return v.code;}),'invalid_route_progress'); });
+  routeCase('193', 'partes do mapa ficam limitadas a dois', function (current) { var state=JSON.parse(JSON.stringify(current.controller.getState())); state.routeProgress={physical:5,supernatural:5,final:0}; Test.equal(Engine.deriveMapFragments(Object.freeze(state)),2); });
+  routeCase('194', 'mudança final manipulada preenche diagnóstico sem rádio', function (current) { current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'final'}); Test.equal(global.expeditionQA.snapshot().lastRejectedAction.code,'destination_unavailable'); Test.falsy(current.root.querySelector('[value="final"]')); });
+  routeCase('195', 'segundo reconhecimento seleciona legado por derivação', function (current) { firstCompletion(current,'physical'); reachDungeonComplete(current.controller,'supernatural',195); current.controller.dispatch({type:'ACK_DUNGEON_COMPLETE'}); Test.equal(current.controller.getState().selectedDungeonId,'final'); });
+  routeCase('196', 'nova sessão após desbloqueio começa com zero partes', function (current) {
+    firstCompletion(current, 'physical');
+    reachDungeonComplete(current.controller, 'supernatural', 196);
+    Test.truthy(current.controller.dispatch({ type: 'ACK_DUNGEON_COMPLETE' }).ok);
+    Test.equal(Engine.deriveMapFragments(current.controller.getState()), 2);
+
+    var other = fixture();
+    try {
+      Test.equal(Engine.deriveMapFragments(other.controller.getState()), 0);
+      Test.deepEqual(other.controller.getState().routeProgress, { physical: 0, supernatural: 0, final: 0 });
+      Test.equal(other.controller.getState().phase, 'ready');
+    } finally {
+      other.cleanup();
+    }
+  });
+  routeCase('197', 'legado desbloqueado permanece uma única seleção', function (current) { firstCompletion(current,'physical'); reachDungeonComplete(current.controller,'supernatural',197); current.controller.dispatch({type:'ACK_DUNGEON_COMPLETE'}); Test.equal(current.root.querySelectorAll('[value="final"]:checked').length,1); });
+  routeCase('198', 'ordens opostas convergem para duas partes', function (current) { var a=JSON.parse(JSON.stringify(current.controller.getState())); a.routeProgress={physical:5,supernatural:5,final:0}; Test.equal(Engine.deriveMapFragments(Object.freeze(a)),2); Test.equal(Engine.deriveDestinationAvailability(Object.freeze(a))[0],'final'); });
+  routeCase('199', 'reversão de progresso após desbloqueio é detectada', function (current) { var state=JSON.parse(JSON.stringify(current.controller.getState())); state.routeProgress={physical:4,supernatural:5,final:0}; state.selectedDungeonId='final'; Test.includes(Engine.validateState(Object.freeze(state)).violations.map(function(v){return v.code;}),'final_destination_locked'); });
+  routeCase('200', 'campanha completa mantém distribuição dezesseis única', function (current) { finishWithoutDeaths(current.controller); var state=current.controller.getState(); var ids=state.assignments.physical.concat(state.assignments.supernatural,state.assignments.final); Test.equal(new Set(ids).size,16); });
+
+  routeCase('201', 'cartões estáticos permanecem legíveis e não focáveis', function (current) { var legacy=current.root.querySelector('[data-destination-id="final"]'); Test.includes(legacy.textContent,'Bloqueado'); Test.falsy(legacy.hasAttribute('tabindex')); Test.falsy(legacy.querySelector('input')); });
+  routeCase('202', 'ausência de imagem não afeta os controles de rota', function (current) { Test.equal(current.root.querySelectorAll('.route-card img').length,0); Test.equal(current.root.querySelectorAll('[data-destination-control]').length,2); });
+  routeCase('203', 'zoom efetivo reflui rotas e heróis sem rolagem primária', function (current) { current.root.style.zoom='2'; Test.equal(current.root.querySelectorAll('.route-card').length,3); Test.truthy(current.root.querySelector('[data-action="depart"]')); });
+  routeCase('204', 'após conclusão foco seguro pode ir ao heading de preparação', function (current) { firstCompletion(current,'physical'); var heading=current.root.querySelector('#formation-title'); Test.truthy(heading); Test.equal(heading.tabIndex,-1); });
+  routeCase('205', 'mudança e clique do rádio produzem uma seleção singular', function (current) { clickRoute(current,'physical'); Test.equal(current.root.querySelectorAll('[name="destination"]:checked').length,1); Test.equal(current.controller.getState().actionHistory.filter(function(e){return e.type==='destination_selected';}).length,1); });
+  routeCase('206', 'seleção nativa permanece marcada após perda de foco', function (current) { clickRoute(current,'supernatural'); current.root.querySelector('[data-action="depart"]').focus(); Test.truthy(current.root.querySelector('[value="supernatural"]:checked')); });
+  routeCase('207', 'ordem focável exclui cartões bloqueados', function (current) { var focusables=current.root.querySelectorAll('input,button'); Test.equal(Array.prototype.filter.call(focusables,function(n){return n.closest('.locked');}).length,0); });
+  routeCase('208', 'heróis primeiro e rota depois permitem partir', function (current) { selectHeroes(current.controller,['H1','H2','H3']); clickRoute(current,'supernatural'); current.root.querySelector('[data-action="depart"]').click(); Test.equal(current.controller.getState().dungeonId,'supernatural'); });
+  routeCase('209', 'seleção automática é anunciada por nome', function (current) { firstCompletion(current,'physical'); Test.equal(Engine.derivePlayerView(current.controller.getState()).automaticSelectionAnnouncement,'Caminho selecionado automaticamente: Caminho das Vozes e dos Espelhos.'); });
+  routeCase('210', 'texto longo conserva regiões em coluna estreita', function (current) { var cards=current.root.querySelectorAll('.route-card'); Test.equal(cards.length,3); Array.prototype.forEach.call(cards,function(card){Test.truthy(card.querySelector('.route-name'));Test.truthy(card.querySelector('.route-progress'));}); });
+
+  routeCase('211', 'destino desconhecido aparece somente no diagnóstico', function (current) { var history=current.controller.getState().actionHistory.length; current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'unknown'}); Test.equal(global.expeditionQA.snapshot().lastRejectedAction.code,'invalid_destination'); Test.equal(current.controller.getState().actionHistory.length,history); });
+  routeCase('212', 'validação não sintetiza campo de progresso ausente', function (current) { var state=JSON.parse(JSON.stringify(current.controller.getState())); delete state.routeProgress.physical; var result=Engine.validateState(Object.freeze(state)); Test.falsy(result.ok); Test.falsy(Object.prototype.hasOwnProperty.call(state.routeProgress,'physical')); });
+  routeCase('213', 'histórico longo mantém sequência crescente', function (current) { clickRoute(current,'physical'); selectHeroes(current.controller,['H1','H2','H3']); var history=current.controller.getState().actionHistory; Test.deepEqual(history.map(function(e){return e.sequence;}),history.map(function(e,i){return i+1;})); });
+  routeCase('214', 'IDs internos ficam na QA e fora do texto visível', function (current) { Test.truthy(global.expeditionQA.snapshot().destinations.physical); Test.falsy(/\bphysical\b|\bsupernatural\b/.test(current.root.querySelector('.route-group').textContent)); });
+  routeCase('215', 'rejeição repetida não entra no histórico aceito', function (current) { var count=current.controller.getState().actionHistory.length; current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'final'}); current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'final'}); Test.equal(current.controller.getState().actionHistory.length,count); Test.equal(global.expeditionQA.snapshot().lastRejectedAction.code,'destination_unavailable'); });
+  routeCase('216', 'snapshot durante decisão conserva rota e posição', function (current) { selectDestination(current.controller,'physical'); selectHeroes(current.controller,['H1','H2','H3']); current.controller.dispatch({type:'DEPART'}); current.controller.dispatch({type:'ENTER_DUNGEON'}); var snap=global.expeditionQA.snapshot(); Test.equal(snap.dungeon,'physical'); Test.equal(snap.position,1); });
+  routeCase('217', 'seed fixa repete seleção e estado inicial', function (current) { clickRoute(current,'supernatural'); var a=global.expeditionQA.snapshot(); var other=fixture(); global.expeditionQA.setSeed(Number('217')); other.root.querySelector('[data-action="begin"]').click(); other.root.querySelector('[data-action="continue-intro"]').click(); clickRoute(other,'supernatural'); var b=global.expeditionQA.snapshot(); Test.equal(a.selectedDestination,b.selectedDestination); other.cleanup(); });
+  routeCase('218', 'legado precoce não cria evento nem atribuição', function (current) { current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'final'}); var snap=global.expeditionQA.snapshot(); Test.equal(snap.assignments.final.filter(Boolean).length,0); Test.falsy(snap.actionHistory.some(function(e){return e.dungeon==='final';})); });
+  routeCase('219', 'rota concluída rejeitada preserva legado selecionado', function (current) { firstCompletion(current,'physical'); reachDungeonComplete(current.controller,'supernatural',219); current.controller.dispatch({type:'ACK_DUNGEON_COMPLETE'}); current.controller.dispatch({type:'SELECT_DESTINATION',dungeonId:'physical'}); Test.equal(current.controller.getState().selectedDungeonId,'final'); });
+  routeCase('220', 'duas ordens são distinguíveis sem mudar candidatos finais', function (current) { var state=JSON.parse(JSON.stringify(current.controller.getState())); state.assignments.physical=['A1','A2','A3','A4','A5']; state.assignments.supernatural=['B1','B2','B3','B4','B5']; state.routeProgress={physical:5,supernatural:5,final:0}; var candidates=Engine.deriveFinalCandidates(Object.freeze(state)); Test.equal(candidates.length,6); Test.equal(new Set(candidates).size,6); });
 })(window);

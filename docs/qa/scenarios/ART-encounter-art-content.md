@@ -6,7 +6,7 @@ persona: Rui, revisor de conteúdo
 journey: J-complete-campaign
 expected: Cada encontro mantém texto canônico, JPEG local decorativo, fallback funcional e nenhuma pista visual privilegiada ou dano cultural
 entry_points: file:///…/prototype/index.html
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:

@@ -274,12 +274,7 @@
   var copy = {
     status: 'prototype_baseline',
     provisionalLabel: 'Conteúdo provisório do protótipo',
-    intro: 'O bardo reuniu oito heróis para recuperar duas metades de um mapa e seguir até o último caminho. A natureza do tesouro e o horror familiar permanecem pendentes no GDD.',
-    dungeonIntroductions: {
-      physical: 'A mata tomou a construção. A primeira metade do mapa está adiante.',
-      supernatural: 'As vozes sabem nomes que ninguém pronunciou. A segunda metade do mapa está adiante.',
-      final: 'As duas metades apontam para o último caminho.'
-    },
+    intro: 'Duas partes do mapa aguardam em caminhos diferentes. O grupo decide qual delas buscar primeiro.',
     centralEnding: 'A expedição alcançou o tesouro. Sua natureza permanece pendente no GDD.',
     badEnding: 'Os oito heróis morreram. Sem ninguém para conduzir de volta, o bardo também morre.',
     invalidState: 'O protótipo encontrou um estado inválido. Recarregue a página e registre a semente no console.'

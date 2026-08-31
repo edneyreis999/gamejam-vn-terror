@@ -8,13 +8,9 @@
     baseline: 'Baseline jogável para validação mecânica',
     rules: 'Escolha três heróis. Leia as armadilhas. Toda falha exige um sacrifício.',
     disclosure: 'As competências dos heróis estão visíveis neste protótipo. As competências das abordagens permanecem ocultas até a escolha.',
-    intro: 'O bardo reuniu oito heróis para recuperar duas metades de um mapa e seguir até o último caminho. A natureza do tesouro e o horror familiar permanecem pendentes no GDD.',
+    intro: 'Duas partes do mapa aguardam em caminhos diferentes. O grupo decide qual delas buscar primeiro.',
     provisional: 'Conteúdo provisório do protótipo',
-    dungeonIntroductions: Object.freeze([
-      Object.freeze({ title: 'A mata tomou a construção.', detail: 'A primeira metade do mapa está adiante.' }),
-      Object.freeze({ title: 'As vozes sabem nomes que ninguém pronunciou.', detail: 'A segunda metade do mapa está adiante.' }),
-      Object.freeze({ title: 'As duas metades apontam para o último caminho.', detail: '' })
-    ])
+    routeRestart: 'O grupo reconhece este caminho, mas a travessia recomeça no primeiro marco.'
   });
   var OPTIONAL_IMAGE_TIMEOUT_MS = 4000;
   var activeQASession = null;
@@ -30,7 +26,11 @@
   }
 
   function inactiveSnapshot() {
-    return Engine.snapshot(Engine.createReadyState());
+    var snapshot = Engine.snapshot(Engine.createReadyState());
+    var copy = {};
+    Object.keys(snapshot).forEach(function (key) { copy[key] = snapshot[key]; });
+    copy.lastRejectedAction = null;
+    return deepFreeze(copy);
   }
 
   var expeditionQA = Object.freeze({
@@ -121,27 +121,30 @@
     append(brand, element('span', 'eyebrow', contextLabel), element('strong', '', COPY.title));
     var status = element('div', 'status-line');
     if (view.position && view.positionTotal) {
-      append(status, statusFact('Posição ' + view.position + ' de ' + view.positionTotal));
+      append(status, statusFact('Encontro ' + view.position + ' de ' + view.positionTotal));
     }
     append(status, statusFact(view.survivorCount + (view.survivorCount === 1 ? ' herói sobrevivente' : ' heróis sobreviventes')));
+    if (view.phase === 'formation' || view.phase === 'dungeon_complete') {
+      append(status, statusFact(view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes do mapa'));
+    }
     append(header, brand, status);
     return header;
   }
 
   function renderIntroduction(view) {
-    var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, 'Prólogo'));
-    var main = element('main', 'main-region transition-wrap');
+    var main = element('main', 'artboard opening');
     main.id = 'main';
-    var panel = element('section', 'paper-panel introduction-panel');
-    panel.setAttribute('aria-labelledby', 'intro-title');
-    var title = pageHeading('Antes do primeiro caminho', 'intro-title');
-    var prose = element('p', 'intro-copy', COPY.intro);
-    var note = element('p', 'helper', 'Identidades, relações e epílogos finais permanecem pendentes. H1–H8 são identificações funcionais deste protótipo.');
-    append(panel, provisionalLabel(), title, prose, note, actionButton('Examinar o elenco', 'primary', 'continue-intro'));
-    append(main, panel);
-    append(frame, main);
-    return frame;
+    var section = element('section', 'opening-content');
+    section.setAttribute('aria-labelledby', 'intro-title');
+    append(section,
+      provisionalLabel(),
+      element('p', 'eyebrow', 'Antes da partida'),
+      pageHeading('Expedição e Sacrifício', 'intro-title', 'opening-title'),
+      element('p', 'lead', COPY.intro),
+      actionButton('Preparar expedição', 'primary opening-action', 'continue-intro')
+    );
+    append(main, section);
+    return main;
   }
 
   function heroLookup(view) {
@@ -177,18 +180,83 @@
     return card;
   }
 
+  function destinationStatusLabel(destination) {
+    if (destination.status === 'completed') {
+      return 'Concluído';
+    }
+    if (destination.status === 'locked') {
+      return 'Bloqueado';
+    }
+    return destination.selected ? 'Escolhido' : 'Disponível';
+  }
+
+  function renderDestinationCard(destination, mapFragments) {
+    var className = 'route-card ' + (destination.status === 'available' ? 'route-choice' : destination.status);
+    var card;
+    if (destination.status === 'available') {
+      card = element('label', className + (destination.selected ? ' selected' : ''));
+      var radio = element('input', 'route-radio');
+      radio.type = 'radio';
+      radio.name = 'destination';
+      radio.value = destination.id;
+      radio.checked = destination.selected;
+      radio.dataset.destinationControl = '';
+      append(card, radio);
+    } else {
+      card = element('article', className);
+      card.setAttribute('aria-label', destination.name + ', ' + destinationStatusLabel(destination).toLowerCase());
+    }
+    card.dataset.destinationId = destination.id;
+    append(card,
+      element('strong', 'route-name', destination.name),
+      element('span', 'route-rumor', destination.rumor),
+      element('span', 'route-state', destinationStatusLabel(destination))
+    );
+    var progress = destination.landmarks.traversed + ' de ' + destination.landmarks.total + ' marcos atravessados';
+    if (destination.status === 'completed' && destination.id !== 'final') {
+      progress += ' · parte recuperada';
+    }
+    if (destination.id === 'final') {
+      progress += ' · ' + mapFragments.found + ' de ' + mapFragments.total + ' partes do mapa recuperadas';
+    }
+    append(card, element('span', 'route-progress', progress));
+    if (destination.lockReason === 'map_fragments') {
+      append(card, element('span', 'route-lock', 'As duas partes do mapa são necessárias.'));
+    } else if (destination.landmarks.traversed > 0 && destination.status === 'available') {
+      append(card, element('span', 'route-lock', 'A próxima tentativa começa no primeiro marco.'));
+    }
+    return card;
+  }
+
+  function renderDestinationSelector(view) {
+    var fieldset = element('fieldset', 'route-group');
+    append(fieldset, element('legend', '', 'Escolha o caminho'));
+    var selected = view.destinations.filter(function (destination) { return destination.selected; })[0];
+    append(fieldset, element('p', 'route-summary', selected ? 'Caminho escolhido: ' + selected.name : 'Nenhum caminho escolhido'));
+    var grid = element('div', 'route-grid');
+    view.destinations.forEach(function (destination) {
+      append(grid, renderDestinationCard(destination, view.mapFragments));
+    });
+    append(fieldset, grid);
+    return fieldset;
+  }
+
   function renderFormation(view, ui) {
     var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, view.dungeon ? view.dungeon.label : 'Próxima expedição'));
+    append(frame, renderHeader(view, 'Próxima expedição'));
     var main = element('main', 'main-region formation-wrap');
     main.id = 'main';
     var panel = element('section', 'paper-panel formation-panel');
     panel.setAttribute('aria-labelledby', 'formation-title');
-    var title = pageHeading('Forme a expedição', 'formation-title');
+    var title = pageHeading('Prepare a expedição', 'formation-title');
     var formation = view.formation;
     var instruction = formation.autoSelected
       ? 'Todos os sobreviventes formarão esta expedição.'
       : 'Escolha exatamente três heróis sobreviventes. Suas competências serão verificadas coletivamente.';
+    var heroSection = element('section', 'hero-section');
+    heroSection.setAttribute('aria-labelledby', 'heroes-title');
+    var heroTitle = element('h2', '', 'Escolha os heróis');
+    heroTitle.id = 'heroes-title';
     var grid = element('div', 'hero-grid');
     grid.setAttribute('role', 'group');
     grid.setAttribute('aria-label', 'Elenco da campanha');
@@ -206,20 +274,24 @@
       element('strong', '', selectedCount + ' de ' + formation.requiredCount + ' selecionados'),
       element('p', 'helper', 'O bardo acompanha o grupo automaticamente e não oferece competências.')
     );
-    var departLabel = 'Partir com ' + formation.requiredCount + (formation.requiredCount === 1 ? ' herói' : ' heróis');
-    append(footer, summary, actionButton(departLabel, 'primary', 'depart'));
-    append(panel, provisionalLabel(), element('p', 'eyebrow', 'Formação'), title, element('p', 'formation-instruction', instruction), grid);
+    append(heroSection, heroTitle, element('p', 'formation-instruction', instruction), grid);
+    var selectedDestination = view.destinations.filter(function (destination) { return destination.selected; })[0];
+    var departLabel = selectedDestination ? 'Partir para ' + selectedDestination.name : 'Partir';
+    var formationActions = element('div', 'formation-actions');
+    append(formationActions, actionButton('Consultar elenco', '', 'open-roster'), actionButton(departLabel, 'primary', 'depart'));
+    append(footer, summary, formationActions);
+    append(panel, provisionalLabel(), element('p', 'eyebrow', 'Preparação'), title, renderDestinationSelector(view), heroSection);
     if (ui.error) {
       append(panel, renderInlineError(ui.error));
     }
     append(panel, footer);
     append(main, panel);
-    append(frame, main);
+    append(frame, main, renderRosterDialog(view));
     return frame;
   }
 
   function renderInlineError(message) {
-    var error = element('p', 'inline-error', message + ' Revise a formação e tente novamente.');
+    var error = element('p', 'inline-error', message);
     error.id = 'campaign-error';
     error.tabIndex = -1;
     error.setAttribute('role', 'alert');
@@ -291,11 +363,6 @@
     return panel;
   }
 
-  function dungeonCopy(view) {
-    var index = view.dungeon ? view.dungeon.number - 1 : 0;
-    return COPY.dungeonIntroductions[index] || COPY.dungeonIntroductions[0];
-  }
-
   function renderDungeonThreshold(view) {
     var frame = element('div', 'artboard');
     append(frame, renderHeader(view, view.dungeon.label));
@@ -306,19 +373,19 @@
     scene.setAttribute('aria-labelledby', 'threshold-title');
     scene.dataset.imageRegion = '';
     var copy = element('div', 'scene-copy');
-    var intro = dungeonCopy(view);
+    var revisited = view.dungeon.landmarks.traversed > 0;
     append(copy,
       provisionalLabel(),
-      element('p', 'eyebrow', view.dungeon.label),
-      pageHeading(intro.title, 'threshold-title', 'scene-title'),
-      element('p', 'prose', intro.detail),
+      element('p', 'eyebrow', view.dungeon.id === 'final' ? 'As duas partes do mapa' : (revisited ? 'Caminho revisitado' : 'Caminho escolhido')),
+      pageHeading(view.dungeon.name, 'threshold-title', 'scene-title'),
+      element('p', 'prose', view.dungeon.rumor),
       renderProgress(view)
     );
     append(scene, copy);
     var decision = element('section', 'paper-panel decision-panel');
     append(decision,
-      element('p', '', 'Os encontros são atribuídos somente quando cada posição é alcançada. Posições reveladas permanecem fixas nesta campanha.'),
-      actionButton('Entrar', 'primary', 'enter-dungeon')
+      element('p', '', revisited ? COPY.routeRestart : (view.dungeon.id === 'final' ? 'Seis encontros aguardam além deste limiar.' : 'O primeiro encontro ainda não foi revelado.')),
+      actionButton('Entrar no caminho', 'primary', 'enter-dungeon')
     );
     append(decision, renderRetreatAccess(view));
     append(decision, actionButton('Consultar elenco', 'roster-toggle', 'open-roster'));
@@ -577,37 +644,41 @@
     return renderCampaignFrame(view, main);
   }
 
-  function renderMapHalf(label, found) {
+  function renderMapHalf(destination) {
+    var found = destination.status === 'completed';
     var half = element('li', 'map-half' + (found ? ' found' : ''));
-    append(half, element('strong', '', label), element('span', '', found ? 'Recuperada' : 'Ainda desconhecida'));
+    append(half, element('strong', '', destination.name), element('span', '', found ? 'Concluído · parte recuperada' : 'Ainda incompleto'));
     return half;
   }
 
   function renderDungeonTransition(view) {
-    var firstHalf = view.dungeon.number === 1;
+    var mapComplete = view.mapFragments.found === 2;
     var frame = element('div', 'artboard');
     append(frame, renderHeader(view, 'Masmorra concluída'));
     var main = element('main', 'main-region transition-wrap dungeon-transition');
     main.id = 'main';
     main.setAttribute('aria-labelledby', 'transition-title');
     var panel = element('section', 'paper-panel transition-panel');
-    var title = firstHalf ? 'Primeira metade do mapa recuperada.' : 'Segunda metade do mapa recuperada.';
-    var detail = firstHalf
-      ? 'A mata fecha a passagem atrás do grupo. A parte encontrada aponta para outro lugar, onde as vozes conhecem nomes que ninguém pronunciou.'
-      : 'As duas metades revelam o caminho final. A natureza do tesouro e o horror familiar permanecem pendentes no GDD.';
+    var title = mapComplete ? 'O mapa está inteiro.' : 'Uma parte do mapa foi recuperada.';
+    var detail = mapComplete
+      ? 'Os dois caminhos iniciais foram concluídos. O destino indicado pelo mapa agora está disponível.'
+      : view.dungeon.name + ' concluído. O outro caminho ainda guarda a parte que falta.';
     var halves = element('ul', 'map-halves');
     halves.setAttribute('aria-label', 'Partes do mapa');
     append(halves,
-      renderMapHalf('Primeira metade', true),
-      renderMapHalf('Segunda metade', !firstHalf)
+      renderMapHalf(view.destinations[0]),
+      renderMapHalf(view.destinations[1])
     );
+    var legacy = element('p', 'legacy-status');
+    append(legacy, element('strong', '', view.destinations[2].name), document.createTextNode(' — ' + (mapComplete ? 'Disponível' : 'Bloqueado') + ' — ' + view.mapFragments.found + ' de 2 partes recuperadas.'));
     append(panel,
       provisionalLabel(),
-      element('p', 'eyebrow ink-eyebrow', firstHalf ? 'O caminho se amplia' : 'O último caminho aparece'),
+      element('p', 'eyebrow ink-eyebrow', mapComplete ? 'As duas partes foram recuperadas' : 'Parte do mapa recuperada'),
       pageHeading(title, 'transition-title', 'transition-title'),
       element('p', 'transition-copy', detail),
       halves,
-      actionButton('Preparar a próxima expedição', 'primary', 'continue-dungeon')
+      legacy,
+      actionButton('Voltar à preparação', 'primary', 'ack-dungeon-complete')
     );
     append(main, panel);
     append(frame, main);
@@ -687,18 +758,27 @@
   }
 
   function renderInvalid(view) {
-    var main = element('main', 'artboard invalid-state');
+    var frame = element('div', 'artboard invalid-state');
+    var header = element('header', 'game-header');
+    var brand = element('div', 'brand');
+    append(brand, element('span', 'eyebrow', 'Execução interrompida'), element('strong', '', COPY.title));
+    var status = element('div', 'status-line');
+    append(status, statusFact('Diagnóstico preservado'));
+    append(header, brand, status);
+    var main = element('main', 'main-region invalid-wrap');
     main.id = 'main';
     var panel = element('section', 'paper-panel invalid-panel');
+    panel.setAttribute('aria-labelledby', 'invalid-title');
     var title = pageHeading('O protótipo encontrou um estado inválido.', 'invalid-title');
     append(panel,
-      element('p', 'eyebrow', 'Execução interrompida'),
+      element('p', 'eyebrow', 'Não é seguro continuar'),
       title,
       element('p', '', view.invalidMessage || 'Recarregue a página e registre a semente no console.'),
       actionButton('Recarregar a página', 'danger', 'reload')
     );
     append(main, panel);
-    return main;
+    append(frame, header, main);
+    return frame;
   }
 
   function createController(root) {
@@ -718,6 +798,7 @@
     var pendingDialogFocus = null;
     var pendingSeed = null;
     var invalidLogged = false;
+    var lastRejectedAction = null;
     var qaSession;
 
     function qaError(code, message) {
@@ -738,14 +819,14 @@
 
     function qaSnapshot() {
       var current = Engine.snapshot(state);
-      if (state.phase !== 'ready' || pendingSeed === null) {
-        return current;
-      }
       var copy = {};
       Object.keys(current).forEach(function (key) {
         copy[key] = current[key];
       });
-      copy.seed = pendingSeed;
+      if (state.phase === 'ready' && pendingSeed !== null) {
+        copy.seed = pendingSeed;
+      }
+      copy.lastRejectedAction = lastRejectedAction;
       return deepFreeze(copy);
     }
 
@@ -953,6 +1034,14 @@
           }
         });
       }
+      if ((!options || !options.announce) && view.automaticSelectionAnnouncement) {
+        liveRegion.textContent = '';
+        global.requestAnimationFrame(function () {
+          if (!destroyed) {
+            liveRegion.textContent = view.automaticSelectionAnnouncement;
+          }
+        });
+      }
       if (options && options.assert) {
         assertiveRegion.textContent = '';
         global.requestAnimationFrame(function () {
@@ -1005,6 +1094,7 @@
         var result = Engine.dispatch(state, submittedAction);
         if (result.ok) {
           state = result.state;
+          lastRejectedAction = null;
           if (submittedAction.type === 'BEGIN' && state.phase !== 'ready') {
             pendingSeed = null;
           }
@@ -1026,6 +1116,13 @@
           }
           render(renderOptions);
         } else {
+          lastRejectedAction = deepFreeze({
+            action: submittedAction.type,
+            code: result.error.code,
+            message: result.error.message,
+            context: result.error.context || {}
+          });
+          console.warn('campaign_action_rejected', lastRejectedAction);
           ui.error = result.error.message;
           render({ focusError: true, announce: result.error.message });
         }
@@ -1097,8 +1194,8 @@
         submit({ type: 'CONFIRM_RETREAT' }, { focusHeading: true, announce: 'A expedição voltou à cidade.' });
       } else if (action === 'ack-auto-retreat') {
         submit({ type: 'ACK_AUTO_RETREAT' }, { focusHeading: true, announce: 'Sobreviventes disponíveis para a próxima expedição.' });
-      } else if (action === 'continue-dungeon') {
-        submit({ type: 'CONTINUE_DUNGEON' }, { focusHeading: true, announce: 'Próxima masmorra disponível.' });
+      } else if (action === 'ack-dungeon-complete') {
+        submit({ type: 'ACK_DUNGEON_COMPLETE' }, { focusHeading: true, announce: 'Preparação disponível.' });
       } else if (action === 'new-campaign') {
         submit({ type: 'NEW_CAMPAIGN' }, { focusHeading: true, announce: 'Nova campanha pronta para começar.' });
       } else if (action === 'open-roster') {
@@ -1125,6 +1222,17 @@
           submit({ type: 'CANCEL_RETREAT' }, { focusSelector: '[data-action="request-retreat"]', announce: 'Recuo cancelado.' });
         }
       }
+    }
+
+    function onChange(event) {
+      var control = event.target;
+      if (!control || !control.matches('[data-destination-control]') || !root.contains(control)) {
+        return;
+      }
+      submit({ type: 'SELECT_DESTINATION', dungeonId: control.value }, {
+        focusSelector: '[data-destination-control][value="' + control.value + '"]',
+        announce: 'Caminho escolhido: ' + (Data.destinations[control.value] ? Data.destinations[control.value].name : control.value) + '.'
+      });
     }
 
     function failOptionalImage(image) {
@@ -1173,6 +1281,7 @@
 
     buildRoot();
     root.addEventListener('click', onClick);
+    root.addEventListener('change', onChange);
     root.addEventListener('cancel', onCancel, true);
     root.addEventListener('error', onOptionalImageError, true);
 
@@ -1206,6 +1315,7 @@
           activeQASession = null;
         }
         root.removeEventListener('click', onClick);
+        root.removeEventListener('change', onChange);
         root.removeEventListener('cancel', onCancel, true);
         root.removeEventListener('error', onOptionalImageError, true);
         var dialog = root.querySelector('#roster-dialog');
@@ -1239,24 +1349,26 @@
   /**
    * @typedef {{type: 'BEGIN', seed: number}|
    * {type: 'TOGGLE_HERO', heroId: HeroId}|
+   * {type: 'SELECT_DESTINATION', dungeonId: DungeonId}|
    * {type: 'SELECT_VICTIM', heroId: HeroId}|
    * {type: 'CHOOSE_APPROACH', approachId: ApproachId}|
    * {type: ('CONTINUE_INTRO'|'DEPART'|'ENTER_DUNGEON'|'ACK_SUCCESS'|'OPEN_SACRIFICE'|
    * 'CANCEL_SACRIFICE'|'CONFIRM_SACRIFICE'|'ACK_DEATH'|'REQUEST_RETREAT'|'CANCEL_RETREAT'|
-   * 'CONFIRM_RETREAT'|'ACK_AUTO_RETREAT'|'CONTINUE_DUNGEON'|'NEW_CAMPAIGN')}} GameAction
+   * 'CONFIRM_RETREAT'|'ACK_AUTO_RETREAT'|'ACK_DUNGEON_COMPLETE'|'NEW_CAMPAIGN')}} GameAction
    */
   /** @typedef {Readonly<{encounterId: EncounterId, approachId: ApproachId, competencyId: CompetencyId,
    * holderHeroIds: readonly HeroId[], success: boolean, resultText: string, victimId: (HeroId|null)}>} PendingOutcome */
   /**
    * @typedef {Readonly<({sequence: number, type: 'campaign_started', seed: number}|
-   * {sequence: number, type: 'formation_opened', dungeon: 'physical'}|
+   * {sequence: number, type: 'formation_opened', availableDestinations: readonly DungeonId[]}|
+   * {sequence: number, type: 'destination_selected', dungeon: DungeonId}|
    * {sequence: number, type: 'formation_selection_changed', heroId: HeroId, selected: boolean}|
    * {sequence: number, type: 'party_formed', heroes: readonly HeroId[]}|
    * {sequence: number, type: ('encounter_revealed'|'encounter_revisited'), dungeon: DungeonId, position: number, encounterId: EncounterId}|
    * {sequence: number, type: 'approach_resolved', dungeon: DungeonId, position: number, encounterId: EncounterId, approachId: ApproachId, competency: CompetencyId, success: boolean}|
    * {sequence: number, type: ('sacrifice_choice_opened'|'sacrifice_confirmation_cancelled'), encounterId: EncounterId}|
    * {sequence: number, type: ('sacrifice_victim_selected'|'hero_sacrificed'), encounterId: EncounterId, heroId: HeroId}|
-   * {sequence: number, type: ('party_retreated'|'dungeon_completed'|'dungeon_advanced'|'automatic_retreat'|'automatic_retreat_acknowledged'), dungeon: DungeonId}|
+   * {sequence: number, type: ('party_retreated'|'dungeon_completed'|'dungeon_completion_acknowledged'|'automatic_retreat'|'automatic_retreat_acknowledged'), dungeon: DungeonId}|
    * {sequence: number, type: 'position_advanced', dungeon: DungeonId, position: number}|
    * {sequence: number, type: 'retreat_requested', dungeon: DungeonId, position: number, fromPhase: ('dungeon_intro'|'encounter_choice')}|
    * {sequence: number, type: 'retreat_cancelled', dungeon: DungeonId, position: number, returnPhase: ('dungeon_intro'|'encounter_choice')}|
@@ -1273,9 +1385,10 @@
    * final: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>
    * }>} CampaignAssignments */
   /**
-   * @typedef {Readonly<{version: 1, phase: CampaignPhase, seed: (number|null), rngState: (number|null),
-   * dungeonId: (DungeonId|null), position: (number|null), draftPartyIds: readonly HeroId[],
+   * @typedef {Readonly<{version: 2, phase: CampaignPhase, seed: (number|null), rngState: (number|null),
+   * selectedDungeonId: (DungeonId|null), dungeonId: (DungeonId|null), position: (number|null), draftPartyIds: readonly HeroId[],
    * partyIds: readonly HeroId[], deadHeroIds: readonly HeroId[], assignments: CampaignAssignments,
+   * routeProgress: Readonly<Record<DungeonId, number>>,
    * pendingOutcome: (PendingOutcome|null), pendingVictimId: (HeroId|null), sequence: number,
    * actionHistory: readonly ActionEvent[], invariantViolations: readonly InvariantViolation[]}>} CampaignState
    */
