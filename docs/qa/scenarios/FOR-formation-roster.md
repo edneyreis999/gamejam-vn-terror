@@ -1,10 +1,10 @@
 ---
 id: FOR-formation-roster
 area: FOR
-title: Formar expedições e consultar o elenco
+title: Escolher caminho e formar expedições
 persona: Joana, jogadora ampliada
 journey: J-complete-campaign
-expected: Competências, limites de formação, reservas, mortos e bardo permanecem compreensíveis e operáveis por teclado
+expected: Caminho e heróis podem ser escolhidos em qualquer ordem; estados disponível, concluído e bloqueado, limites, reservas, mortos e bardo permanecem compreensíveis por teclado
 entry_points: file:///…/prototype/index.html
 qa_status: untested
 bug_ids:
@@ -16,4 +16,4 @@ last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: ACC-accessibility-diagnostics
 ---
 
-Inclui grupos de três, formação automática com um/dois sobreviventes, retorno de foco do diálogo e recálculo após mortes.
+Planejar rota antes/depois dos heróis, troca de rota sem perder formação, erro de partida com escolhas preservadas, formação automática com um/dois sobreviventes, cartões concluído/bloqueado não focáveis, diálogo de elenco e retorno de foco. `CH-route-order-and-gate` é o alvo; `CH-keyboard-zoom-motion` é o canário de acessibilidade. Preservar a evidência histórica até a nova caminhada.

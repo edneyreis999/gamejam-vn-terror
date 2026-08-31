@@ -1,11 +1,11 @@
 ---
 id: LOC-local-launch-session
 area: LOC
-title: Abrir e reiniciar uma sessão local offline
+title: Abrir preparação e runner locais sem rede
 persona: Lia, primeira expedicionária
 journey: J-local-offline-launch
-expected: A abertura, a formação e uma nova sessão funcionam por file URL sem rede ou promessa de retomada
-entry_points: file:///…/prototype/index.html
+expected: Index e testes abrem por file URL sem rede; a preparação começa com dois caminhos desmarcados, Legado bloqueado e nenhuma retomada implícita
+entry_points: file:///…/prototype/index.html; file:///…/prototype/tests.html
 qa_status: untested
 bug_ids:
 fix_status:
@@ -16,4 +16,4 @@ last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: ART-encounter-art-content
 ---
 
-Observar scripts/recursos locais, cópia em português, ausência de persistência e comportamento após reload. Registrar Chrome, file URL, rede, viewport e superfícies não exercitadas.
+Planejar abertura neutra, três cartões diegéticos, dois rádios iniciais desmarcados, Legado bloqueado, recursos relativos, ausência de persistência e reload limpo. O canário novo `CH-route-tests-entry-canary` cobre o runner de 351 casos; `CH-offline-all-images-blocked` continua como canário adjacente. Preservar os caminhos históricos acima até a execução produzir evidência e relatório novos.

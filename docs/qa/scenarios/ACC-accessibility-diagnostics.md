@@ -4,8 +4,8 @@ area: ACC
 title: Completar por teclado e reproduzir diagnósticos
 persona: Joana, jogadora ampliada
 journey: J-reproduce-campaign
-expected: Teclado, foco, zoom, movimento reduzido e a API QA de três métodos preservam uma campanha reproduzível e sem backdoors
-entry_points: file:///…/prototype/index.html; Chrome DevTools
+expected: Rádios nativos, cartões estáticos, foco, zoom e movimento reduzido permitem ambas as ordens; snapshot v2 e a API de três métodos reproduzem rejeições sem backdoors
+entry_points: file:///…/prototype/index.html; file:///…/prototype/tests.html; Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
 qa_status: untested
 bug_ids:
 fix_status:
@@ -16,4 +16,4 @@ last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: FOR-formation-roster; CAM-dungeon-progression-outcomes
 ---
 
-Registrar Chrome, viewport 320×800, zoom 200%, movimento reduzido, seed `20260830`, duas sequências idênticas, snapshots, validate e o stop S11 por fixture controlada. Nunca injetar ou reparar estado pela API pública.
+Planejar Chrome a 320×800, zoom 200%, movimento reduzido, navegação completa por teclado, rádios disponíveis, cartões concluído/bloqueado fora da ordem de foco, anúncio de seleção única, seed `20260831`, snapshots v2 por ordem, última rejeição, limpeza após ação aceita e validate não mutante. `CH-keyboard-zoom-motion` e `CH-seeded-diagnostics-reproduction` são canários reutilizados; `CH-route-tests-entry-canary` confirma o contrato 351. Nunca injetar ou reparar estado pela API pública.

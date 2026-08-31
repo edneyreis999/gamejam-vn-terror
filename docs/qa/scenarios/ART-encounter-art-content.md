@@ -4,7 +4,7 @@ area: ART
 title: Revisar arte e conteúdo dos dezesseis encontros
 persona: Rui, revisor de conteúdo
 journey: J-complete-campaign
-expected: Cada encontro mantém texto canônico, JPEG local decorativo, fallback funcional e nenhuma pista visual privilegiada ou dano cultural
+expected: Os dezesseis encontros mantêm texto, JPEG decorativo e fallback; os três destinos continuam compreensíveis sem arte nova, pista mecânica privilegiada ou canon inventado
 entry_points: file:///…/prototype/index.html
 qa_status: untested
 bug_ids:
@@ -16,4 +16,4 @@ last_report: docs/qa/reports/2026-08-30-browser-prototype.md
 overlaps: LOC-local-launch-session; ENC-encounter-consequences
 ---
 
-Inventariar 16 caminhos/imagens, revisitar aparições finais, bloquear todas as imagens e registrar qualquer superfície não alcançada. Áudio está fora do escopo.
+Planejar inventário A1–A8/B1–B8, reaparições no Legado, bloqueio de todos os JPEGs e leitura completa de nome, rumor, estado e ação dos destinos sem imagem própria. `CH-offline-all-images-blocked` e `CH-sixteen-image-devlog-review` permanecem canários adequados. Áudio e arte específica de rota continuam fora do escopo; referências históricas não são substituídas durante o planejamento.
