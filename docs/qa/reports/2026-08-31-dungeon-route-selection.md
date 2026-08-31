@@ -2,9 +2,9 @@
 
 - **Scope:** seleção da ordem dos dois caminhos iniciais, troca após recuo, fechamento de rota, portão final, contrato QA v2 e canários adjacentes
 - **Cadence tier:** targeted
-- **Build:** baseline `4668b73`; remediação sobre `6b0bfb3`, runtime SHA-256 `abb3c17c3c0d434f71361bd27c50886b3c1ad89bc1d344f24bec24000c9b29f3` e runner SHA-256 `c8f3d52b800488f427f913ab277c75f674284a2f2acf1e91328c0cd2e127b194` · **Environment:** Chrome desktop estável, `file://`, rede desligada, sem servidor; driver `agent-browser` porque `browser-use:browser` não está disponível neste ambiente
-- **Started:** 2026-08-31T18:16:10Z · **Closed:** 2026-08-31T21:53:48Z · **Status:** closed
-- **Fresh remediation windows:** runner 2026-08-31T21:53:05Z → 2026-08-31T21:53:19Z; teclado real 2026-08-31T21:53:46Z → 2026-08-31T21:53:48Z.
+- **Build:** baseline `4668b73`; remediação após `09533e0`, runtime SHA-256 agregado `53ceb7bb74575be1066aeea3dca84071212f28976fc6ecc0a873157f5cdc026f` e runner SHA-256 agregado `3bcc0baddd57993d9ff62abcc1491187ebf65c1ab4ec359b082c7c6802d4a6cb` · **Environment:** Chrome desktop estável, `file://`, rede desligada, sem servidor; driver `agent-browser` porque `browser-use:browser` não está disponível neste ambiente
+- **Started:** 2026-08-31T18:16:10Z · **Closed:** 2026-08-31T23:29:15Z · **Status:** closed
+- **Fresh remediation windows:** runner 2026-08-31T23:29:11Z → 2026-08-31T23:29:15Z; teclado real 2026-08-31T21:53:46Z → 2026-08-31T21:53:48Z.
 
 ## Personas
 
@@ -157,19 +157,19 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 
 | Journey | Usability | Accessibility | Perceived performance | Compatibility | Error recoverability | Production parity |
 |---|---|---|---|---|---|---|
-| J-complete-campaign | Pass — estados e nomes diegéticos visíveis | Pass — teclado, foco, zoom e Axe 0 | Pass — respostas imediatas, sem espera ou layout shift observado | Pass no contrato Chrome-only em 1440 e 320 efetivos, claro/escuro e reduced motion | Pass — erro de rota preserva formação; cancelamentos e reload têm resultado explícito | Pass qualificado — mesmo HTML/CSS/JS local entregue; sem servidor, auth ou storage por desenho |
+| J-complete-campaign | Pass — estados e nomes diegéticos visíveis | Pass — teclado, foco, zoom e Axe 0 | Pass — respostas imediatas, sem espera ou layout shift observado | Pass no contrato Chrome-only em 1440 e 320 efetivos, modo escuro e reduced motion; modo claro não foi verificado | Pass — erro de rota preserva formação; cancelamentos e reload têm resultado explícito | Pass qualificado — mesmo HTML/CSS/JS local entregue; sem servidor, auth ou storage por desenho |
 | J-local-offline-launch | Pass — entrada e fallback mantêm a tarefa clara | Pass — conteúdo essencial independe de imagem/áudio | Pass — carga local e ações imediatas offline | Pass no Chrome suportado e viewport estreito | Pass — imagem ausente degrada, reload inicia sessão limpa | Pass qualificado — rede e 16 imagens bloqueadas; extensões de navegador não foram simuladas |
 | J-reproduce-campaign | Pass — ordem e diagnóstico ficam distinguíveis no snapshot | Pass — inspeção não altera a jornada pública | Pass — quatro replays locais concluídos no mesmo gate | Pass no Chrome-only por `file://` | Pass — erros de seed/rota são estruturados e não entram no histórico aceito | Pass qualificado — API QA permanece limitada a três métodos e o bloqueio usa fixture separado |
-| J-run-browser-contract | Pass — título e resumo público concordam | Pass — relatório textual permanece legível | Pass — 351 casos concluídos em 14 s na janela fresca | Pass no Chrome desktop suportado | Pass — zero linhas FAIL; fixtures inválidas aparecem como testes esperados | Pass — runner carrega exatamente os mesmos arquivos de produção da entrada local |
+| J-run-browser-contract | Pass — título e resumo público concordam | Pass — relatório textual permanece legível | Pass — 351 casos concluídos em 4 s na janela fresca | Pass no Chrome desktop suportado | Pass — zero linhas FAIL; fixtures inválidas aparecem como testes esperados | Pass — runner carrega exatamente os mesmos arquivos de produção da entrada local |
 
-Safari, Firefox, navegadores móveis, autenticação, backend, extensões, persistência, áudio e serviços externos não foram verificados porque estão fora do contrato confirmado deste protótipo.
+Modo claro, Safari, Firefox, navegadores móveis, autenticação, backend, extensões, persistência, áudio e serviços externos não foram verificados porque estão fora do contrato confirmado deste protótipo.
 
 ## What Was Fixed
 
-- A janela fresca da remediação usou o runtime e runner identificados pelos SHA-256 do cabeçalho. Entre 21:53:05Z e 21:53:19Z, Chrome abriu `prototype/tests.html` diretamente e retornou `PASS — 351/351 testes`, `{total: 351, passed: 351, failed: 0}` e zero falhas. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-runner-351-pass.png`.
+- A janela fresca da terceira remediação usou o runtime e runner identificados pelos SHA-256 agregados do cabeçalho. Entre 23:29:11Z e 23:29:15Z, Chrome abriu `prototype/tests.html` diretamente e retornou 351 aprovados, zero falhas e `{total: 351, passed: 351, failed: 0}`. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round3-remediation-runner-351-pass.png`.
 - Entre 21:53:46Z e 21:53:48Z, uma sessão Chrome fresca usou Tab, Espaço e Enter reais em 320 CSS px efetivos, modo escuro e movimento reduzido. Antes de partir, a rota física e H1/H2/H3 estavam selecionados, **Partir** tinha foco e não havia overflow; Enter chegou a `dungeon_intro`, posição 1, foco `#threshold-title` e `validate()` sem violações. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-real-keyboard-formation.png`.
-- Na remediação do deep-review, o reconhecimento de conclusão passou a anunciar o nome diegético da única rota selecionada e a mover foco ao heading de preparação. Reexecução Chrome por controles visíveis observou `Preparação disponível. Caminho selecionado automaticamente: Caminho das Vozes e dos Espelhos.`, foco em `#formation-title` e `validate()` sem violações.
-- O último membro da expedição sacrificado no sexto marco final agora conclui a campanha em vez de entrar em recuo inválido. Reexecução Chrome com seed `1`, somente por controles visíveis, concluiu `5/5/6`, sacrificou H1/H3/H4 nos marcos finais 4/5/6, preservou H2/H5/H6/H7/H8 e terminou em vitória com `validate()` sem violações. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-last-sacrifice-victory.png`.
+- No commit `6b0bfb3`, `prototype/app.js` passou a anunciar o nome diegético da única rota selecionada e a mover foco ao heading de preparação; IT-204/IT-209 e a reexecução Chrome por controles visíveis observaram `Preparação disponível. Caminho selecionado automaticamente: Caminho das Vozes e dos Espelhos.`, foco em `#formation-title` e `validate()` sem violações.
+- No commit `6b0bfb3`, `prototype/game.js` passou a concluir a campanha quando o último membro da expedição é sacrificado no sexto marco final, antes da decisão de recuo. UT-039 e a reexecução Chrome com seed `1`, somente por controles visíveis, concluíram `5/5/6`, sacrificaram H1/H3/H4 nos marcos finais 4/5/6, preservaram H2/H5/H6/H7/H8 e terminaram em vitória com `validate()` sem violações. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-last-sacrifice-victory.png`.
 
 ## Paper Cuts
 
@@ -197,8 +197,8 @@ Nenhuma para este ciclo; decisões narrativas e de apresentação permanecem `Pe
 
 ## Final Status
 
-- **Exit gate (full automated suite):** Chrome desktop, direto por `file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html`, rede desligada — reexecutado entre 2026-08-31T21:53:05Z e 2026-08-31T21:53:19Z com título `PASS — 351/351 testes`; `window.__expeditionTestResults = {total: 351, passed: 351, failed: 0}`; zero linhas FAIL. Evidência fresca: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-runner-351-pass.png`.
+- **Exit gate (full automated suite):** Chrome desktop, direto por `file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html`, rede desligada — reexecutado entre 2026-08-31T23:29:11Z e 2026-08-31T23:29:15Z com 351 aprovados; `window.__expeditionTestResults = {total: 351, passed: 351, failed: 0}`; zero linhas FAIL. Evidência fresca: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round3-remediation-runner-351-pass.png`.
 - **Issues by user impact:** 0 Blocks-Completion, 0 Data-Loss, 0 Trust-Damage, 0 Friction, 0 Cosmetic.
 - **Coverage:** 18/18 linhas Pass, 7/7 charters executados, 6/6 cenários reconciliados, 4/4 jornadas observadas.
-- **Verification not performed:** Safari, Firefox, navegadores móveis, serviços, autenticação, persistência e áudio — todos fora do escopo confirmado; extensões reais do navegador não foram simuladas.
+- **Verification not performed:** modo claro, Safari, Firefox, navegadores móveis, serviços, autenticação, persistência e áudio — todos fora do escopo confirmado; extensões reais do navegador não foram simuladas.
 - **Verdict:** ready — ciclo de mecânica pronto para entrega do protótipo; decisões `Pendente`/`Fora do escopo` continuam registradas no GDD.

@@ -42,7 +42,7 @@ journey:
       expected_observable: A sessão pública confirma que o cartão não é acionável; o fixture registra destination_unavailable fora do histórico e a seleção aceita seguinte limpa lastRejectedAction
     - step: 3
       verb: Repetir ações idênticas em duas sessões para cada ordem inicial
-      expected_observable: Cada par repete atribuições, progresso e histórico; ambas as ordens convergem para os mesmos candidatos finais
+      expected_observable: E2E-015 executa quatro sessões — duas Ferro/Vozes e duas Vozes/Ferro — e cada par repete o snapshot completo, incluindo atribuições, progresso e histórico; E2E-023/E2E-024 distinguem as ordens aceitas e validam os candidatos finais
     - step: 4
       verb: Executar validate e tentar seed inválida ou tardia
       expected_observable: validate não muta estado, os erros são estruturados e o objeto público continua com exatamente três métodos

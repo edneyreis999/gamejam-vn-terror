@@ -63,7 +63,7 @@ journey:
       expected_observable: Mortes, atribuições e maior percurso permanecem ligados ao caminho correto, mas a nova tentativa recomeça no primeiro marco
     - step: 4
       verb: Concluir os dois caminhos iniciais em qualquer ordem
-      expected_observable: Cada concluído vira cartão estático, o outro fica selecionado e o Legado só libera com 2 de 2 partes
+      expected_observable: "Após a primeira conclusão, o caminho concluído vira cartão estático, o outro fica selecionado e o Legado mostra 1 de 2 partes; após a segunda, ambos ficam estáticos e o Legado fica selecionado em 2 de 2."
     - step: 5
       verb: Confirmar a formação e Partir para o Caminho do Legado, atravessá-lo e iniciar campanha nova
       expected_observable: O Legado fica selecionado automaticamente, mas exige grupo válido e Partir explícito; seis encontros levam a vitória ou derrota e o reset remove toda consequência da sessão anterior

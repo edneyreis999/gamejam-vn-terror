@@ -1062,6 +1062,10 @@
     T.equal(final.selectedDungeonId, 'final');
     var noSurvivors = accepted(stateFixture(intro, { deadHeroIds: Data.heroOrder.slice() }), { type: 'CONTINUE_INTRO' });
     T.equal(noSurvivors.phase, 'defeat');
+    T.deepEqual(noSurvivors.actionHistory.slice(-1)[0], {
+      sequence: noSurvivors.sequence,
+      type: 'campaign_lost'
+    });
   });
 
   T.test('UT-075 — partida exige destino antes de validar a quantidade de heróis', function () {
@@ -1302,6 +1306,7 @@
     var active = departWith(['H1', 'H2', 'H3'], 96, 'physical');
     T.includes(violationCodes(Engine.validateState(stateFixture(active, { selectedDungeonId: 'supernatural' }))), 'invalid_destination_selection');
     T.includes(violationCodes(Engine.validateState(stateFixture(active, { selectedDungeonId: 'physical' }))), 'destination_ownership_overlap');
+    T.includes(violationCodes(Engine.validateState(stateFixture(active, { position: 2 }))), 'invalid_dungeon_position');
     var soleRoute = accepted(initialCompletionState('physical', false), { type: 'ACK_DUNGEON_COMPLETE' });
     T.includes(violationCodes(Engine.validateState(stateFixture(soleRoute, { selectedDungeonId: null }))), 'invalid_destination_selection');
   });

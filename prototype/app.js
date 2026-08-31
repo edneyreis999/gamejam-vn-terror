@@ -389,7 +389,7 @@
     append(scene, copy);
     var decision = element('section', 'paper-panel decision-panel');
     append(decision,
-      element('p', '', revisited ? COPY.routeRestart : (view.dungeon.id === 'final' ? 'Seis encontros aguardam além deste limiar.' : 'O primeiro encontro ainda não foi revelado.')),
+      element('p', '', revisited ? COPY.routeRestart : (view.dungeon.id === 'final' ? 'Seis encontros aguardam além deste limiar.' : (view.encounter ? 'O primeiro encontro já foi revelado nesta campanha.' : 'O primeiro encontro ainda não foi revelado.'))),
       actionButton('Entrar no caminho', 'primary', 'enter-dungeon')
     );
     append(decision, renderRetreatAccess(view));
@@ -669,9 +669,7 @@
       renderMapHalf(destinationById(view.destinations, 'supernatural'))
     );
     var finalDestination = destinationById(view.destinations, 'final');
-    var finalStatusLabel = finalDestination.status === 'locked'
-      ? 'Bloqueado'
-      : (finalDestination.status === 'completed' ? 'Concluído' : 'Disponível');
+    var finalStatusLabel = destinationStatusLabel(finalDestination);
     var legacy = element('p', 'legacy-status');
     append(legacy, element('strong', '', finalDestination.name), document.createTextNode(' — ' + finalStatusLabel + ' — ' + view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes recuperadas.'));
     append(status, halves, legacy);
@@ -697,10 +695,12 @@
       pageHeading(title, 'transition-title', 'transition-title'),
       element('p', 'transition-copy', detail),
       renderFragmentStatus(view),
-      actionButton('Voltar à preparação', 'primary', 'ack-dungeon-complete')
+      actionButton('Voltar à preparação', 'primary', 'ack-dungeon-complete'),
+      renderRosterAccess()
     );
     append(main, panel);
     append(frame, main);
+    append(frame, renderRosterDialog(view));
     return frame;
   }
 
@@ -805,7 +805,7 @@
       throw new TypeError('ExpeditionApp.createController exige um elemento raiz.');
     }
 
-    var state = initialState || Engine.createReadyState();
+    var state = initialState ? deepFreeze(JSON.parse(JSON.stringify(initialState))) : Engine.createReadyState();
     var ui = { error: null, rosterOpen: false };
     var destroyed = false;
     var dispatching = false;
@@ -890,8 +890,7 @@
         : Engine.validateState(state);
       var fatal = catalog.violations.concat(stateValidation.violations);
       if (fatal.length > 0) {
-        stopForViolations(fatal);
-        return deepFreeze({ ok: false, violations: state.phase === 'invalid' ? state.invariantViolations : fatal });
+        return deepFreeze({ ok: false, violations: fatal });
       }
       var accessibility = imageAlternativeViolations();
       return deepFreeze({ ok: accessibility.length === 0, violations: accessibility });

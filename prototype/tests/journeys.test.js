@@ -33,12 +33,11 @@
   }
 
   function chooseRoute(current, dungeonId) {
-    if (current.controller.getState().selectedDungeonId === dungeonId) {
-      return;
-    }
     var control = current.root.querySelector('[data-destination-control][value="' + dungeonId + '"]');
     Test.truthy(control, 'O caminho disponível precisa ter um rádio nativo.');
-    control.click();
+    if (current.controller.getState().selectedDungeonId !== dungeonId) {
+      control.click();
+    }
     Test.equal(current.controller.getState().selectedDungeonId, dungeonId);
     Test.truthy(control.checked);
   }
@@ -529,7 +528,8 @@
         chooseRoute(current, availableDestination(state, 'physical'));
         ['H1', 'H2', 'H3'].forEach(function (heroId) {
           control = current.root.querySelector('[data-action="toggle-hero"][data-id="' + heroId + '"]');
-          if (control && control.getAttribute('aria-pressed') !== 'true') {
+          Test.truthy(control, 'Cada herói da jornada por teclado precisa ter controle focável.');
+          if (control.getAttribute('aria-pressed') !== 'true') {
             control.focus();
             control.click();
           }
@@ -577,7 +577,8 @@
     });
   });
 
-  function driveOrderByControls(current, order, stopAfterAcknowledgments) {
+  function driveOrderByControls(current, order, options) {
+    options = options || {};
     if (current.controller.getState().phase === 'ready') {
       Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: 20260831 }).ok);
       current.root.querySelector('[data-action="continue-intro"]').click();
@@ -602,9 +603,12 @@
       } else if (state.phase === 'approach_result') {
         current.root.querySelector('[data-action="ack-success"]').click();
       } else if (state.phase === 'dungeon_complete') {
+        if (options.stopBeforeAcknowledgment === acknowledgments + 1) {
+          return;
+        }
         current.root.querySelector('[data-action="ack-dungeon-complete"]').click();
         acknowledgments += 1;
-        if (stopAfterAcknowledgments === acknowledgments) {
+        if (options.stopAfterAcknowledgments === acknowledgments) {
           return;
         }
       } else {
@@ -656,11 +660,15 @@
     current.root.querySelector('[data-action="request-retreat"]').click();
     current.root.querySelector('[data-action="confirm-retreat"]').click();
     Test.equal(current.controller.getState().routeProgress.physical, 2);
+    Test.equal(current.controller.getState().selectedDungeonId, null);
+    Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 0);
     chooseRoute(current, 'supernatural'); ensureHeroes(current, ['H1', 'H2', 'H3']); current.root.querySelector('[data-action="depart"]').click(); current.root.querySelector('[data-action="enter-dungeon"]').click();
     var supernaturalAssignment = current.controller.getState().assignments.supernatural[0];
     var deathsBeforeReturn = current.controller.getState().deadHeroIds.slice();
     current.root.querySelector('[data-action="request-retreat"]').click();
     current.root.querySelector('[data-action="confirm-retreat"]').click();
+    Test.equal(current.controller.getState().selectedDungeonId, null);
+    Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 0);
     chooseRoute(current, 'physical'); ensureHeroes(current, ['H1', 'H2', 'H3']); current.root.querySelector('[data-action="depart"]').click(); current.root.querySelector('[data-action="enter-dungeon"]').click();
     Test.deepEqual(current.controller.getState().assignments.physical.slice(0, 3), physicalAssignments);
     Test.equal(current.controller.getState().assignments.supernatural[0], supernaturalAssignment);
@@ -671,7 +679,7 @@
 
   Test.test('E2E-019 — primeira conclusão produz o estado demonstrável do devlog', function () {
     var current = fixture();
-    driveOrderByControls(current, ['physical', 'supernatural'], 1);
+    driveOrderByControls(current, ['physical', 'supernatural'], { stopAfterAcknowledgments: 1 });
     Test.truthy(current.root.querySelector('[data-destination-id="physical"].completed'));
     Test.truthy(current.root.querySelector('[value="supernatural"]:checked'));
     Test.includes(current.root.querySelector('[data-destination-id="final"]').textContent, '1 de 2 partes');
@@ -681,10 +689,15 @@
 
   Test.test('E2E-020 — segunda conclusão desbloqueia e seleciona o legado', function () {
     var current = fixture();
-    driveOrderByControls(current, ['physical', 'supernatural'], 2);
+    driveOrderByControls(current, ['physical', 'supernatural'], { stopBeforeAcknowledgment: 2 });
+    Test.equal(current.controller.getState().phase, 'dungeon_complete');
+    Test.includes(current.root.querySelector('#transition-title').textContent, 'O mapa está inteiro.');
+    Test.equal(current.root.querySelectorAll('.map-half.found').length, 2);
+    Test.equal(current.root.querySelector('.legacy-status').textContent, 'Caminho do Legado — Disponível — 2 de 2 partes recuperadas.');
+    current.root.querySelector('[data-action="ack-dungeon-complete"]').click();
+    Test.equal(current.controller.getState().phase, 'formation');
     Test.equal(current.root.querySelectorAll('.route-card.completed').length, 2);
     Test.truthy(current.root.querySelector('[value="final"]:checked'));
-    Test.includes(current.root.querySelector('[data-destination-id="final"]').textContent, '2 de 2 partes');
     ensureHeroes(current, ['H1', 'H2', 'H3']);
     current.root.querySelector('[data-action="depart"]').click();
     Test.equal(current.controller.getState().dungeonId, 'final');
@@ -717,10 +730,15 @@
     Test.deepEqual(global.expeditionQA.setSeed(20260831), { ok: true, seed: 20260831 });
     current.root.querySelector('[data-action="begin"]').click(); current.root.querySelector('[data-action="continue-intro"]').click();
     chooseRoute(current, 'supernatural'); ensureHeroes(current, ['H1', 'H2', 'H3']);
-    var acceptedBefore = global.expeditionQA.snapshot().actionHistory.length;
+    var beforeRejection = global.expeditionQA.snapshot();
+    var acceptedBefore = beforeRejection.actionHistory.length;
     current.controller.dispatch({ type: 'SELECT_DESTINATION', dungeonId: 'final' });
-    Test.equal(global.expeditionQA.snapshot().lastRejectedAction.code, 'destination_unavailable');
-    Test.equal(global.expeditionQA.snapshot().actionHistory.length, acceptedBefore);
+    var afterRejection = global.expeditionQA.snapshot();
+    Test.equal(afterRejection.lastRejectedAction.code, 'destination_unavailable');
+    Test.equal(afterRejection.actionHistory.length, acceptedBefore);
+    ['version', 'phase', 'seed', 'dungeon', 'selectedDestination', 'position', 'draftParty', 'party', 'aliveHeroes', 'deadHeroes', 'mapFragments', 'destinations', 'competencies', 'assignments', 'currentEncounter', 'actionHistory', 'invariantViolations'].forEach(function (key) {
+      Test.deepEqual(afterRejection[key], beforeRejection[key], key);
+    });
     chooseRoute(current, 'physical');
     Test.equal(global.expeditionQA.snapshot().lastRejectedAction, null);
     Test.deepEqual(global.expeditionQA.validate(), { ok: true, violations: [] });
