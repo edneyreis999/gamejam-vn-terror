@@ -4,7 +4,7 @@ area: ACC
 title: Completar por teclado e reproduzir diagnósticos
 persona: Joana, jogadora ampliada
 journey: J-reproduce-campaign
-expected: Rádios nativos, cartões estáticos, foco, zoom e movimento reduzido permitem ambas as ordens; snapshot v2 e a API de três métodos reproduzem rejeições sem backdoors
+expected: Rádios nativos, controles operáveis por teclado, cartões estáticos, foco, zoom e movimento reduzido permitem ambas as ordens; snapshot v2 e a API de três métodos reproduzem rejeições sem backdoors
 entry_points: file:///…/prototype/index.html; file:///…/prototype/tests.html; Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
 qa_status: pass
 bug_ids:

@@ -3,7 +3,7 @@
 ```mermaid
 flowchart TD
   A[Entry local] --> B[Introdução neutra]
-  B --> C[Preparação: dois caminhos disponíveis e Legado bloqueado]
+  B --> C[Preparação inicial: dois caminhos disponíveis e Legado bloqueado]
   C --> D{Escolher caminho inicial}
   D -->|Ferro e Raízes| E[Escolher três heróis antes ou depois da rota]
   D -->|Vozes e Espelhos| E
@@ -22,16 +22,19 @@ flowchart TD
   N -->|sim| O[Reconhecer parte do mapa recuperada]
   O --> P{Quantas partes?}
   P -->|1 de 2| Q[Devlog: concluído estático, outro inicial selecionado, Legado bloqueado]
-  Q --> C
+  Q --> C2[Preparação após 1/2: concluído estático, outro disponível e selecionado, Legado bloqueado]
+  C2 --> F
   P -->|2 de 2| R[Legado liberado e selecionado]
-  R --> S[Atravessar seis encontros finais]
+  R --> R2[Voltar à preparação, formar o grupo e confirmar Partir]
+  R2 --> S[Atravessar seis encontros finais]
   S --> T{Há sobreviventes?}
   T -->|sim| U[Vitória e epílogos]
   T -->|não| V[Derrota total]
   U --> W[Campanha nova]
   V --> W
   W --> X[True end: abertura limpa, sem rota ou consequência anterior]
-  G -.->|fechar aba| Y[Abandono: sessão em memória perdida]
+  C -.->|fechar aba| Y[Abandono: sessão em memória perdida]
+  G -.->|fechar aba| Y
   Y --> A
 ```
 
@@ -58,8 +61,8 @@ journey:
       verb: Concluir os dois caminhos iniciais em qualquer ordem
       expected_observable: Cada concluído vira cartão estático, o outro fica selecionado e o Legado só libera com 2 de 2 partes
     - step: 5
-      verb: Atravessar o Caminho do Legado e iniciar campanha nova
-      expected_observable: Seis encontros levam a vitória ou derrota e o reset remove toda consequência da sessão anterior
+      verb: Confirmar a formação e Partir para o Caminho do Legado, atravessá-lo e iniciar campanha nova
+      expected_observable: O Legado fica selecionado automaticamente, mas exige grupo válido e Partir explícito; seis encontros levam a vitória ou derrota e o reset remove toda consequência da sessão anterior
   goal:
     observable: As ordens Ferro/Vozes e Vozes/Ferro convergem para o Legado e um desfecho sem repetição de caminho concluído
     side_effects: [historico-aceito-da-sessao, atribuicoes-por-caminho, partes-do-mapa]
@@ -67,8 +70,11 @@ journey:
   exit:
     natural: nova campanha pronta
   abandonment:
+    - at_step: 2
+      how: Fechar ou recarregar a aba durante a preparação
+      resume: Uma sessão limpa aparece, sem recuperação implícita
     - at_step: 3
-      how: Fechar ou recarregar a aba durante uma consequência ou preparação
+      how: Fechar ou recarregar a aba durante uma consequência
       resume: Uma sessão limpa aparece, sem recuperação implícita
   crosses: [preparacao, encontros, imagens, caminhos, fragmentos, desfechos, acessibilidade]
 ```

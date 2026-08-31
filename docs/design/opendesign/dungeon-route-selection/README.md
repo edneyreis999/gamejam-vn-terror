@@ -72,6 +72,8 @@ zoom, producing an effective 320 CSS-pixel content width.
 - `dungeon-route-selection-fragment-recovery.html?state=second-fragment-final-unlock`
 - `dungeon-route-selection-fragment-recovery.html?state=first-fragment-either-path&completed=physical&mode=narrow`
 
+The fragment-recovery `mode=narrow` capture uses a 640×900 Chrome viewport at 200 percent zoom, producing an effective 320 CSS-pixel content width.
+
 ### Invalid state
 
 - `dungeon-route-selection-invalid-state.html?state=unknown-destination`

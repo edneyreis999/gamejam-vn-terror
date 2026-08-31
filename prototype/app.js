@@ -192,6 +192,7 @@
 
   function renderDestinationCard(destination, mapFragments) {
     var className = 'route-card ' + (destination.status === 'available' ? 'route-choice' : destination.status);
+    var statusLabel = destinationStatusLabel(destination);
     var card;
     if (destination.status === 'available') {
       card = element('label', className + (destination.selected ? ' selected' : ''));
@@ -204,13 +205,13 @@
       append(card, radio);
     } else {
       card = element('article', className);
-      card.setAttribute('aria-label', destination.name + ', ' + destinationStatusLabel(destination).toLowerCase());
+      card.setAttribute('aria-label', destination.name + ', ' + statusLabel.toLowerCase());
     }
     card.dataset.destinationId = destination.id;
     append(card,
       element('strong', 'route-name', destination.name),
       element('span', 'route-rumor', destination.rumor),
-      element('span', 'route-state', destinationStatusLabel(destination))
+      element('span', 'route-state', statusLabel)
     );
     var progress = destination.landmarks.traversed + ' de ' + destination.landmarks.total + ' marcos atravessados';
     if (destination.status === 'completed' && destination.id !== 'final') {
@@ -223,15 +224,19 @@
     if (destination.lockReason === 'map_fragments') {
       append(card, element('span', 'route-lock', 'As duas partes do mapa são necessárias.'));
     } else if (destination.landmarks.traversed > 0 && destination.status === 'available') {
-      append(card, element('span', 'route-lock', 'A próxima tentativa começa no primeiro marco.'));
+      append(card, element('span', 'route-note', 'A próxima tentativa começa no primeiro marco.'));
     }
     return card;
+  }
+
+  function selectedDestination(view) {
+    return view.destinations.filter(function (destination) { return destination.selected; })[0] || null;
   }
 
   function renderDestinationSelector(view) {
     var fieldset = element('fieldset', 'route-group');
     append(fieldset, element('legend', '', 'Escolha o caminho'));
-    var selected = view.destinations.filter(function (destination) { return destination.selected; })[0];
+    var selected = selectedDestination(view);
     append(fieldset, element('p', 'route-summary', selected ? 'Caminho escolhido: ' + selected.name : 'Nenhum caminho escolhido'));
     var grid = element('div', 'route-grid');
     view.destinations.forEach(function (destination) {
@@ -275,8 +280,8 @@
       element('p', 'helper', 'O bardo acompanha o grupo automaticamente e não oferece competências.')
     );
     append(heroSection, heroTitle, element('p', 'formation-instruction', instruction), grid);
-    var selectedDestination = view.destinations.filter(function (destination) { return destination.selected; })[0];
-    var departLabel = selectedDestination ? 'Partir para ' + selectedDestination.name : 'Partir';
+    var selectedRoute = selectedDestination(view);
+    var departLabel = selectedRoute ? 'Partir para ' + selectedRoute.name : 'Partir';
     var formationActions = element('div', 'formation-actions');
     append(formationActions, actionButton('Consultar elenco', '', 'open-roster'), actionButton(departLabel, 'primary', 'depart'));
     append(footer, summary, formationActions);
@@ -651,8 +656,27 @@
     return half;
   }
 
+  function destinationById(destinations, dungeonId) {
+    return destinations.filter(function (destination) { return destination.id === dungeonId; })[0] || null;
+  }
+
+  function renderFragmentStatus(view) {
+    var status = element('div', 'fragment-status');
+    var halves = element('ul', 'map-halves');
+    halves.setAttribute('aria-label', 'Partes do mapa');
+    append(halves,
+      renderMapHalf(destinationById(view.destinations, 'physical')),
+      renderMapHalf(destinationById(view.destinations, 'supernatural'))
+    );
+    var finalDestination = destinationById(view.destinations, 'final');
+    var legacy = element('p', 'legacy-status');
+    append(legacy, element('strong', '', finalDestination.name), document.createTextNode(' — ' + (view.mapFragments.found === view.mapFragments.total ? 'Disponível' : 'Bloqueado') + ' — ' + view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes recuperadas.'));
+    append(status, halves, legacy);
+    return status;
+  }
+
   function renderDungeonTransition(view) {
-    var mapComplete = view.mapFragments.found === 2;
+    var mapComplete = view.mapFragments.found === view.mapFragments.total;
     var frame = element('div', 'artboard');
     append(frame, renderHeader(view, 'Masmorra concluída'));
     var main = element('main', 'main-region transition-wrap dungeon-transition');
@@ -663,21 +687,12 @@
     var detail = mapComplete
       ? 'Os dois caminhos iniciais foram concluídos. O destino indicado pelo mapa agora está disponível.'
       : view.dungeon.name + ' concluído. O outro caminho ainda guarda a parte que falta.';
-    var halves = element('ul', 'map-halves');
-    halves.setAttribute('aria-label', 'Partes do mapa');
-    append(halves,
-      renderMapHalf(view.destinations[0]),
-      renderMapHalf(view.destinations[1])
-    );
-    var legacy = element('p', 'legacy-status');
-    append(legacy, element('strong', '', view.destinations[2].name), document.createTextNode(' — ' + (mapComplete ? 'Disponível' : 'Bloqueado') + ' — ' + view.mapFragments.found + ' de 2 partes recuperadas.'));
     append(panel,
       provisionalLabel(),
       element('p', 'eyebrow ink-eyebrow', mapComplete ? 'As duas partes foram recuperadas' : 'Parte do mapa recuperada'),
       pageHeading(title, 'transition-title', 'transition-title'),
       element('p', 'transition-copy', detail),
-      halves,
-      legacy,
+      renderFragmentStatus(view),
       actionButton('Voltar à preparação', 'primary', 'ack-dungeon-complete')
     );
     append(main, panel);
@@ -1000,6 +1015,18 @@
       return prefix + 'Expedição e Sacrifício';
     }
 
+    function announceLive(message) {
+      if (!message) {
+        return;
+      }
+      liveRegion.textContent = '';
+      global.requestAnimationFrame(function () {
+        if (!destroyed) {
+          liveRegion.textContent = message;
+        }
+      });
+    }
+
     function render(options) {
       if (destroyed) {
         return;
@@ -1026,22 +1053,11 @@
         openRosterDialog();
       }
       openRequiredDialog();
-      if (options && options.announce) {
-        liveRegion.textContent = '';
-        global.requestAnimationFrame(function () {
-          if (!destroyed) {
-            liveRegion.textContent = options.announce;
-          }
-        });
+      var announcement = options && options.announce ? options.announce : '';
+      if (view.automaticSelectionAnnouncement) {
+        announcement += (announcement ? ' ' : '') + view.automaticSelectionAnnouncement;
       }
-      if ((!options || !options.announce) && view.automaticSelectionAnnouncement) {
-        liveRegion.textContent = '';
-        global.requestAnimationFrame(function () {
-          if (!destroyed) {
-            liveRegion.textContent = view.automaticSelectionAnnouncement;
-          }
-        });
-      }
+      announceLive(announcement);
       if (options && options.assert) {
         assertiveRegion.textContent = '';
         global.requestAnimationFrame(function () {
@@ -1363,7 +1379,7 @@
    * {sequence: number, type: 'formation_opened', availableDestinations: readonly DungeonId[]}|
    * {sequence: number, type: 'destination_selected', dungeon: DungeonId}|
    * {sequence: number, type: 'formation_selection_changed', heroId: HeroId, selected: boolean}|
-   * {sequence: number, type: 'party_formed', heroes: readonly HeroId[]}|
+   * {sequence: number, type: 'party_formed', dungeon: DungeonId, heroes: readonly HeroId[]}|
    * {sequence: number, type: ('encounter_revealed'|'encounter_revisited'), dungeon: DungeonId, position: number, encounterId: EncounterId}|
    * {sequence: number, type: 'approach_resolved', dungeon: DungeonId, position: number, encounterId: EncounterId, approachId: ApproachId, competency: CompetencyId, success: boolean}|
    * {sequence: number, type: ('sacrifice_choice_opened'|'sacrifice_confirmation_cancelled'), encounterId: EncounterId}|

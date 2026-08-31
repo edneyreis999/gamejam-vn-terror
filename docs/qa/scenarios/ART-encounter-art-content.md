@@ -4,7 +4,7 @@ area: ART
 title: Revisar arte e conteúdo dos dezesseis encontros
 persona: Rui, revisor de conteúdo
 journey: J-complete-campaign
-expected: Os dezesseis encontros mantêm texto, JPEG decorativo e fallback; os três destinos continuam compreensíveis sem arte nova, pista mecânica privilegiada ou canon inventado
+expected: Os dezesseis encontros mantêm texto, JPEG decorativo e fallback; os três destinos continuam compreensíveis sem arte nova, pista mecânica privilegiada, canon inventado, atalhos de Halloween norte-americano ou demonização de religiões brasileiras vivas
 entry_points: file:///…/prototype/index.html
 qa_status: pass
 bug_ids:

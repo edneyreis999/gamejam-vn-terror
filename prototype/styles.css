@@ -439,8 +439,10 @@ h3 {
 .completed .route-state::before { background: var(--accent-moss); }
 .locked .route-state::before { border-style: dashed; }
 .route-progress,
-.route-lock { font-size: 0.875rem; font-weight: 750; }
-.route-lock { padding-block-start: var(--space-2); border-block-start: 1px dashed var(--paper-border); }
+.route-lock,
+.route-note { font-size: 0.875rem; font-weight: 750; }
+.route-lock,
+.route-note { padding-block-start: var(--space-2); border-block-start: 1px dashed var(--paper-border); }
 .hero-section { margin-block-start: var(--space-8); padding-block-start: var(--space-6); border-block-start: 1px solid var(--paper-border); }
 
 .hero-grid {

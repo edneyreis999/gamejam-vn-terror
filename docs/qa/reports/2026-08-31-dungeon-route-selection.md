@@ -3,7 +3,7 @@
 - **Scope:** seleção da ordem dos dois caminhos iniciais, troca após recuo, fechamento de rota, portão final, contrato QA v2 e canários adjacentes
 - **Cadence tier:** targeted
 - **Build:** `4668b73` · **Environment:** Chrome desktop estável, `file://`, rede desligada, sem servidor; driver `agent-browser` porque `browser-use:browser` não está disponível neste ambiente
-- **Started:** 2026-08-31T18:16:10Z · **Closed:** 2026-08-31T18:46:40Z · **Status:** closed — pass
+- **Started:** 2026-08-31T18:16:10Z · **Closed:** 2026-08-31T18:46:40Z · **Status:** closed
 
 ## Personas
 
@@ -67,7 +67,7 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 - **Driver / entry:** `agent-browser`, duas sessões Chrome desktop frescas por `file:///…/prototype/index.html`, rede desligada; seed pública `20260831` definida antes do início.
 - **Steps observed:** heróis antes da rota produziram o erro focado `Escolha um caminho antes de partir.` sem perder H1/H2/H3; alternância de rádios e consulta de elenco preservaram escolhas; recuos após um marco em cada rota mantiveram atribuições A7/B1 e registros independentes `1/1`; revisita voltou à posição 1 com a cópia de reinício; cada rota concluída virou cartão estático.
 - **Goal / true end:** Ferro→Vozes→Legado e Vozes→Ferro→Legado chegaram a vitória pela UI. Cada sessão terminou com progresso `5/5/6`, contagem `5/5/6`, 16 IDs únicos, zero mortos e `validate()` sem violações; reload da primeira sessão retornou a `ready`, seed nula, zero partes, zero progresso e atribuições vazias.
-- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-missing-route.png`; `CH-route-order-and-gate-after-retreat.png`; `CH-route-order-and-gate-revisit-first-landmark.png`; `CH-route-order-and-gate-devlog-1-of-2.png`; `CH-route-order-and-gate-final-unlocked.png`; `CH-route-order-and-gate-order-a-victory.png`; `CH-route-order-and-gate-order-b-1-of-2.png`; `CH-route-order-and-gate-order-b-victory.png`; `CH-route-order-and-gate-fresh-reset.png`.
+- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-missing-route.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-after-retreat.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-revisit-first-landmark.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-devlog-1-of-2.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-final-unlocked.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-a-victory.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-b-1-of-2.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-b-victory.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-fresh-reset.png`.
 - **Devlog checkpoint:** Ferro e Raízes estático em `5 de 5`, Vozes e Espelhos como único rádio selecionado e Legado bloqueado em `1 de 2`; o cartão concluído não continha `input` ou `button`.
 - **Findings:** nenhum defeito funcional. Axe no checkpoint reportou zero violações; contraste ficou `incomplete` pela limitação conhecida do gradiente, coberta pelos 11 pares AA medidos no contrato visual.
 - **Bugs filed/updated:** nenhum.
@@ -82,7 +82,7 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 - **Driver / entry:** `agent-browser`, `file:///…/prototype/index.html`, viewport 640×800 com zoom CSS do documento em `2` (320 CSS px efetivos), rede desligada, modo escuro e `prefers-reduced-motion: reduce`.
 - **Steps observed:** abertura, introdução, escolha do rádio, H1/H2/H3, elenco, Escape, partida, 16 decisões, duas transições e campanha nova foram percorridos com Tab/Shift+Tab, Espaço, Enter e Escape. O diálogo devolveu foco a **Consultar elenco**; os cartões bloqueado/concluído permaneceram fora da ordem focável e cada transição focou um heading seguro.
 - **Goal / true end:** vitória por teclado em `5/5/6`, oito epílogos, zero mortes, zero overflow horizontal e reset para `ready`, seed nula, zero partes e zero mortos.
-- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-keyboard-zoom-motion-formation-320-effective.png`; `CH-keyboard-zoom-motion-victory.png`.
+- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-keyboard-zoom-motion-formation-320-effective.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-keyboard-zoom-motion-victory.png`.
 - **Findings:** Axe WCAG A/AA reportou zero violações. O contraste permaneceu `incomplete` apenas porque a ferramenta não resolve o fundo em gradiente; os 11 pares já medidos pelo contrato visual continuam AA.
 - **Bugs filed/updated:** nenhum.
 - **Scenarios settled:** FOR-formation-roster e ACC-accessibility-diagnostics → pass; ENC e CAM mantidos pass pelas caminhadas convergentes.
@@ -105,9 +105,9 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 
 - **Ran:** 2026-08-31T18:34:00Z → 2026-08-31T18:36:00Z (box respected: yes)
 - **Driver / entry:** `agent-browser`, sessões frescas por `file:///…/prototype/index.html`; inspeção restrita a `setSeed`, `snapshot` e `validate`.
-- **Steps observed:** seeds `0` e `4294967295` foram aceitas; `-1` retornou `invalid_seed`; reseed depois de iniciar retornou `campaign_already_started`. Partida sem caminho manteve histórico em 5 eventos, focou `#campaign-error` e publicou `DEPART/destination_required`; selecionar Vozes acrescentou um evento e limpou a rejeição.
+- **Steps observed:** seeds `0` e `4294967295` foram aceitas; `-1` retornou `invalid_seed`; reseed depois de iniciar retornou `campaign_already_started`. Partida sem caminho manteve histórico em 5 eventos, focou `#campaign-error` e publicou `DEPART/destination_required`; selecionar Vozes acrescentou um evento e limpou a rejeição. Separadamente, E2E-022 no runner submeteu `SELECT_DESTINATION/final` ao controlador, comprovou `destination_unavailable` fora do histórico e verificou a limpeza pela ação aceita seguinte; a UI pública manteve o cartão bloqueado estático e não acionável.
 - **Reproduction:** duas sessões com seed `20260830`, Vozes e H1/H2/H3 produziram B6 na posição 1 e histórico integral byte a byte igual. O snapshot estava profundamente congelado/destacado; tentativa de mutação não alterou leitura posterior. `validate()` foi não mutante e retornou zero violações. O objeto global expôs exatamente três métodos.
-- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-rejection.png`; `CH-seeded-diagnostics-reproduction-seed-20260830.png`.
+- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-rejection.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-seed-20260830.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-route-tests-entry-canary-final-351-pass.png`.
 - **Findings / bugs:** nenhum.
 - **Scenarios settled:** ACC-accessibility-diagnostics e CAM-dungeon-progression-outcomes → pass.
 - **Paper cuts:** nenhum.
@@ -119,7 +119,7 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 - **Driver / entry:** `agent-browser`, duas sessões frescas por `file:///…/prototype/index.html`; todas as transições acionadas por controles visíveis, sem dispatch.
 - **Steps observed:** a sessão de vitória terminou em `5/5/6`, oito epílogos e zero mortos. A sessão de derrota, iniciada com seed `23`, sacrificou legalmente H4, H7, H8, H1, H2, H3, H5 e H6; o terminal informou: “Os oito heróis morreram. Sem ninguém para conduzir de volta, o bardo também morre.”
 - **True ends:** **Iniciar nova campanha** após cada terminal retornou a `ready`, seed nula, zero partes e elenco íntegro.
-- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-victory.png`; `CH-complete-outcomes-canary-defeat.png`.
+- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-victory.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-defeat.png`.
 - **Findings / bugs:** nenhum; ambos os terminais passaram em `validate()`.
 - **Scenarios settled:** CAM-dungeon-progression-outcomes e ENC-encounter-consequences → pass.
 - **Paper cuts:** nenhum.
@@ -129,9 +129,9 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 
 - **Ran:** 2026-08-31T18:38:00Z → 2026-08-31T18:45:00Z (box respected: yes)
 - **Driver / entry:** inspeção direta dos 16 JPEGs locais e campanha real com `agent-browser` por `file:///…/prototype/index.html`, primeiro em 1440×900 e depois em 320×800.
-- **Inventory:** A1–A8 e B1–B8 foram inspecionados em quadro completo e atravessados uma vez cada na UI estreita. Cada arquivo carregou em 1600×900, `object-fit: cover`, três abordagens e sem overflow. Nenhuma imagem contém texto embutido, rótulo de competência ou pista mecânica; a cópia visível continua marcada como provisória onde o GDD assim exige.
+- **Inventory:** A1–A8 e B1–B8 são JPEGs de 1600×900; a UI foi observada em 1440×900 e 320×800, com `object-fit: cover`, três abordagens e sem overflow. Nenhuma imagem contém texto embutido, rótulo de competência ou pista mecânica, atalho de Halloween norte-americano ou demonização de religiões brasileiras vivas; a cópia visível continua marcada como provisória onde o GDD assim exige.
 - **Devlog sequence:** seed `23` com H4/H7/H8 revelou A1 em `0/3`; a abordagem produziu falha letal; selecionar H4 abriu confirmação, cancelar devolveu foco ao card H4, e confirmar moveu H4 para **Mortos** com H7/H8 ainda na expedição.
-- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-narrow-encounter.png`; `CH-sixteen-image-devlog-review-seed23-approaches.png`; `CH-sixteen-image-devlog-review-seed23-failure.png`; `CH-sixteen-image-devlog-review-seed23-confirmation.png`; `CH-sixteen-image-devlog-review-seed23-roster.png`.
+- **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-narrow-encounter.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-seed23-approaches.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-seed23-failure.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-seed23-confirmation.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-seed23-roster.png`.
 - **Findings / bugs:** nenhum; não foi inferido canon novo a partir das ilustrações.
 - **Scenarios settled:** ART-encounter-art-content e ENC-encounter-consequences → pass.
 - **Paper cuts:** nenhum.
@@ -154,7 +154,8 @@ Safari, Firefox, navegadores móveis, autenticação, backend, extensões, persi
 
 ## What Was Fixed
 
-Nenhuma correção foi necessária nesta execução.
+- Na remediação do deep-review, o reconhecimento de conclusão passou a anunciar o nome diegético da única rota selecionada e a mover foco ao heading de preparação. Reexecução Chrome por controles visíveis observou `Preparação disponível. Caminho selecionado automaticamente: Caminho das Vozes e dos Espelhos.`, foco em `#formation-title` e `validate()` sem violações.
+- O último membro da expedição sacrificado no sexto marco final agora conclui a campanha em vez de entrar em recuo inválido. Reexecução Chrome com seed `1`, somente por controles visíveis, concluiu `5/5/6`, sacrificou H1/H3/H4 nos marcos finais 4/5/6, preservou H2/H5/H6/H7/H8 e terminou em vitória com `validate()` sem violações. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-last-sacrifice-victory.png`.
 
 ## Paper Cuts
 
@@ -168,11 +169,11 @@ Nenhuma correção foi necessária nesta execução.
 
 ## Human Verifications Needed
 
-Nenhuma prevista; o protótipo não possui pagamento, email, SMS, OAuth ou serviço externo.
+Nenhuma para este ciclo de mecânica; o protótipo não possui pagamento, email, SMS, OAuth ou serviço externo. Decisões narrativas e de apresentação permanecem `Pendente`/`Fora do escopo` conforme o GDD canônico.
 
 ## Decisions for a Human
 
-Nenhuma.
+Nenhuma para este ciclo; decisões narrativas e de apresentação permanecem `Pendente`/`Fora do escopo` conforme o GDD canônico.
 
 ## Learnings
 
@@ -182,8 +183,8 @@ Nenhuma.
 
 ## Final Status
 
-- **Exit gate (full automated suite):** Pass — título `PASS — 351/351 testes`; `window.__expeditionTestResults = {total: 351, passed: 351, failed: 0}`; zero linhas FAIL. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-route-tests-entry-canary-final-351-pass.png`.
-- **Issues by user impact:** 0 Blocks-Completion, 0 Data-Loss, 0 Trust-Damage, 0 Friction, 0 Polish.
+- **Exit gate (full automated suite):** Chrome desktop, direto por `file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html`, rede desligada — reexecutado após a remediação com título `PASS — 351/351 testes`; `window.__expeditionTestResults = {total: 351, passed: 351, failed: 0}`; zero linhas FAIL. Evidência histórica do mesmo gate: `../evidence/2026-08-31-dungeon-route-selection/CH-route-tests-entry-canary-final-351-pass.png`.
+- **Issues by user impact:** 0 Blocks-Completion, 0 Data-Loss, 0 Trust-Damage, 0 Friction, 0 Cosmetic.
 - **Coverage:** 18/18 linhas Pass, 7/7 charters executados, 6/6 cenários reconciliados, 4/4 jornadas observadas.
 - **Verification not performed:** Safari, Firefox, navegadores móveis, serviços, autenticação, persistência e áudio — todos fora do escopo confirmado; extensões reais do navegador não foram simuladas.
-- **Verdict:** Pass — ciclo pronto para entrega do protótipo, sem decisão humana pendente.
+- **Verdict:** ready — ciclo de mecânica pronto para entrega do protótipo; decisões `Pendente`/`Fora do escopo` continuam registradas no GDD.

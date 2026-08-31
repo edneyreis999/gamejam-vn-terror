@@ -11,9 +11,9 @@ bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence: docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-devlog-1-of-2.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-final-unlocked.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-a-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-b-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-defeat.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-fresh-reset.png
+evidence: docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-devlog-1-of-2.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-final-unlocked.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-a-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-order-b-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-complete-outcomes-canary-defeat.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-fresh-reset.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-last-sacrifice-victory.png
 last_report: docs/qa/reports/2026-08-31-dungeon-route-selection.md
 overlaps: ENC-encounter-consequences; ACC-accessibility-diagnostics
 ---
 
-Executadas as duas ordens completas, fechamento de rota, momento de devlog em `1 de 2`, desbloqueio em `2 de 2`, 16 atribuições únicas e Legado `6/6`. Vitória e derrota em sessões frescas convergiram para campanha nova limpa.
+Executadas as duas ordens completas, fechamento de rota, momento de devlog em `1 de 2`, desbloqueio em `2 de 2`, 16 atribuições únicas e Legado `6/6`. Vitória e derrota em sessões frescas convergiram para campanha nova limpa. Após a remediação, uma caminhada por controles visíveis também sacrificou o último membro da expedição no sexto marco final e terminou em vitória válida com cinco sobreviventes na cidade.

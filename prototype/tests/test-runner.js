@@ -1,7 +1,7 @@
 (function (global) {
   'use strict';
 
-  // 66 UT + 150 IT + 15 E2E cases from .compozy/tasks/browser-prototype/_tests.md.
+  // 107 UT + 220 IT + 24 E2E cases from .compozy/tasks/dungeon-route-selection/_tests.md.
   var EXPECTED_CASE_COUNT = 351;
   var cases = [];
   var registeredIds = Object.create(null);

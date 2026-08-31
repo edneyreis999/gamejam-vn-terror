@@ -8,6 +8,7 @@
   var MAX_DEATH_STEPS = 240;
   var MAX_SHORT_JOURNEY_STEPS = 100;
   var MAX_FULL_JOURNEY_STEPS = 120;
+  var MAX_ORDER_JOURNEY_STEPS = 180;
 
   function fixture(width) {
     var root = document.createElement('div');
@@ -43,10 +44,19 @@
   function ensureHeroes(current, heroIds) {
     heroIds.forEach(function (heroId) {
       var control = current.root.querySelector('[data-action="toggle-hero"][data-id="' + heroId + '"]');
-      if (control && control.getAttribute('aria-pressed') !== 'true') {
+      Test.truthy(control, 'O controle de herói precisa existir.');
+      if (control.getAttribute('aria-pressed') !== 'true') {
         control.click();
       }
     });
+  }
+
+  function activateByKeyboard(control, key) {
+    control.focus();
+    Test.equal(document.activeElement, control);
+    control.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
+    control.click();
+    control.dispatchEvent(new KeyboardEvent('keyup', { key: key, bubbles: true }));
   }
 
   function startEncounter(current, heroIds, seed) {
@@ -576,15 +586,13 @@
     }
     var acknowledgments = 0;
     var guard = 0;
-    while (current.controller.getState().phase !== 'victory' && guard < 180) {
+    while (current.controller.getState().phase !== 'victory' && guard < MAX_ORDER_JOURNEY_STEPS) {
       guard += 1;
       var state = current.controller.getState();
       if (state.phase === 'formation') {
         var available = Engine.deriveDestinationAvailability(state);
         var desired = acknowledgments < 2 ? order[acknowledgments] : 'final';
-        if (available.indexOf(desired) < 0) {
-          desired = available[0];
-        }
+        Test.includes(available, desired, 'A ordem pedida deve permanecer disponível.');
         chooseRoute(current, desired);
         ensureHeroes(current, ['H1', 'H2', 'H3']);
         current.root.querySelector('[data-action="depart"]').click();
@@ -681,9 +689,14 @@
     var current = fixture(320);
     current.root.style.zoom = '2';
     current.root.querySelector('[data-action="begin"]').click(); current.root.querySelector('[data-action="continue-intro"]').click();
-    var radio = current.root.querySelector('[value="physical"]'); radio.focus(); radio.click();
-    Test.equal(document.activeElement, current.root.querySelector('[value="physical"]'));
-    ensureHeroes(current, ['H1', 'H2', 'H3']);
+    var radio = current.root.querySelector('[value="physical"]');
+    activateByKeyboard(radio, ' ');
+    Test.equal(current.controller.getState().selectedDungeonId, 'physical');
+    ['H1', 'H2', 'H3'].forEach(function (heroId) {
+      activateByKeyboard(current.root.querySelector('[data-action="toggle-hero"][data-id="' + heroId + '"]'), ' ');
+    });
+    activateByKeyboard(current.root.querySelector('[data-action="depart"]'), 'Enter');
+    Test.equal(current.controller.getState().dungeonId, 'physical');
     Test.truthy(current.root.scrollWidth <= 320);
     Test.equal(current.root.querySelectorAll('audio,video,[autoplay]').length, 0);
     current.cleanup();
@@ -710,6 +723,7 @@
     var state = current.controller.getState();
     Test.deepEqual(state.routeProgress, { physical: 5, supernatural: 5, final: 6 });
     Test.equal(new Set(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final)).size, 16);
+    Test.deepEqual(state.actionHistory.filter(function (event) { return event.type === 'party_formed'; }).map(function (event) { return event.dungeon; }), ['physical', 'supernatural', 'final']);
     Test.deepEqual(global.expeditionQA.validate(), { ok: true, violations: [] });
     current.cleanup();
   });
@@ -721,6 +735,7 @@
     Test.deepEqual(state.routeProgress, { physical: 5, supernatural: 5, final: 6 });
     Test.equal(Engine.deriveFinalCandidates(state).length, 6);
     Test.equal(new Set(state.assignments.physical.concat(state.assignments.supernatural, state.assignments.final)).size, 16);
+    Test.deepEqual(state.actionHistory.filter(function (event) { return event.type === 'party_formed'; }).map(function (event) { return event.dungeon; }), ['supernatural', 'physical', 'final']);
     Test.deepEqual(global.expeditionQA.validate(), { ok: true, violations: [] });
     current.cleanup();
   });

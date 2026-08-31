@@ -5,6 +5,7 @@
   --surface-raised: #242620;
   --surface-border: rgba(238, 229, 207, 0.2);
   --surface-shadow: rgba(0, 0, 0, 0.38);
+  --surface-shadow-soft: rgba(0, 0, 0, 0.2);
   --surface-pattern: rgba(238, 229, 207, 0.055);
   --surface-pattern-dark: rgba(0, 0, 0, 0.28);
   --surface-moss-glow: rgba(83, 109, 79, 0.2);
@@ -50,7 +51,7 @@
   --radius-surface: 0.25rem;
   --radius-round: 999rem;
   --shadow-frame: 0 1.5rem 4.375rem var(--surface-shadow);
-  --shadow-paper: 0 0.9375rem 2.625rem rgba(0, 0, 0, 0.2);
+  --shadow-paper: 0 0.9375rem 2.625rem var(--surface-shadow-soft);
   --duration-fast: 120ms;
   --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -337,7 +338,7 @@ html[data-mode="missing-decoration"] .scene::before,
 
 .route-panel,
 .transition-panel,
-.invalid-panel {
+.invalid-region {
   max-width: 68.75rem;
   margin-inline: auto;
 }
@@ -459,13 +460,15 @@ html[data-mode="missing-decoration"] .scene::before,
 }
 
 .route-progress,
-.route-lock {
+.route-lock,
+.route-note {
   margin: 0;
   font-size: 0.875rem;
   font-weight: 750;
 }
 
-.route-lock {
+.route-lock,
+.route-note {
   padding-block-start: var(--space-2);
   border-block-start: 1px dashed var(--paper-border);
 }

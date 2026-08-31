@@ -23,6 +23,14 @@
     variant.hidden = variant !== selected;
   });
 
+  if (selected && selected.dataset.survivors) {
+    const survivorCount = Number(selected.dataset.survivors);
+    const survivorStatus = document.querySelector("[data-survivor-status]");
+    const fragmentStatus = document.querySelector("[data-fragment-status]");
+    if (survivorStatus) survivorStatus.textContent = `${survivorCount} ${survivorCount === 1 ? "herói sobrevivente" : "heróis sobreviventes"}`;
+    if (fragmentStatus) fragmentStatus.textContent = `${selected.dataset.fragments} de 2 partes do mapa`;
+  }
+
   if (error === "destination-required" && selected) {
     selected.querySelectorAll('input[type="radio"]').forEach((input) => {
       input.checked = false;

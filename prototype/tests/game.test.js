@@ -478,6 +478,17 @@
     var state = accepted(deathResult, { type: 'ACK_DEATH' });
     T.equal(state.phase, 'automatic_retreat');
     T.deepEqual(state.assignments, assignments);
+
+    var terminalDeath = stateFixture(finalResolutionState(), {
+      phase: 'death_result',
+      partyIds: [],
+      deadHeroIds: ['H8'],
+      pendingOutcome: outcomeFor('B8', 'B8-2', [], 'H8')
+    });
+    var terminal = accepted(terminalDeath, { type: 'ACK_DEATH' });
+    T.equal(terminal.phase, 'victory');
+    T.equal(terminal.routeProgress.final, 6);
+    T.truthy(Engine.validateState(terminal).ok);
   });
 
   T.test('UT-040 — morte de todo o elenco entra em derrota, nunca recuo automático', function () {
@@ -1038,13 +1049,14 @@
   });
 
   T.test('UT-074 — entrada em preparação deriva seleção neutra, única, final ou derrota', function () {
-    var fresh = Engine.enterFormation(accepted(Engine.createReadyState(), { type: 'BEGIN', seed: 74 }));
+    var intro = accepted(Engine.createReadyState(), { type: 'BEGIN', seed: 74 });
+    var fresh = accepted(intro, { type: 'CONTINUE_INTRO' });
     T.equal(fresh.selectedDungeonId, null);
-    var one = Engine.enterFormation(initialCompletionState('physical', false));
+    var one = accepted(initialCompletionState('physical', false), { type: 'ACK_DUNGEON_COMPLETE' });
     T.equal(one.selectedDungeonId, 'supernatural');
-    var final = Engine.enterFormation(initialCompletionState('supernatural', true));
+    var final = accepted(initialCompletionState('supernatural', true), { type: 'ACK_DUNGEON_COMPLETE' });
     T.equal(final.selectedDungeonId, 'final');
-    var noSurvivors = Engine.enterFormation(stateFixture(fresh, { deadHeroIds: Data.heroOrder.slice() }));
+    var noSurvivors = accepted(stateFixture(intro, { deadHeroIds: Data.heroOrder.slice() }), { type: 'CONTINUE_INTRO' });
     T.equal(noSurvivors.phase, 'defeat');
   });
 
@@ -1130,23 +1142,20 @@
   });
 
   T.test('UT-082 — tentativas alternadas mantêm progresso e atribuições independentes', function () {
-    var physical = stateFixture(departWith(['H1', 'H2', 'H3'], 82, 'physical'), {
-      position: 2,
-      routeProgress: { physical: 2, supernatural: 0, final: 0 },
-      assignments: { physical: ['A1', 'A2', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] }
-    });
+    var physical = accepted(departWith(['H1', 'H2', 'H3'], 82, 'physical'), { type: 'ENTER_DUNGEON' });
+    var physicalEncounter = physical.assignments.physical[0];
+    var physicalApproach = chooseApproach(physical, true);
+    physical = accepted(accepted(physical, { type: 'CHOOSE_APPROACH', approachId: physicalApproach.id }), { type: 'ACK_SUCCESS' });
+    physical = accepted(physical, { type: 'ENTER_DUNGEON' });
+    var secondPhysicalEncounter = physical.assignments.physical[1];
     var town = accepted(accepted(physical, { type: 'REQUEST_RETREAT' }), { type: 'CONFIRM_RETREAT' });
     town = accepted(town, { type: 'SELECT_DESTINATION', dungeonId: 'supernatural' });
     town = selectParty(town, ['H1', 'H2', 'H3']);
-    var supernatural = accepted(town, { type: 'DEPART' });
-    supernatural = stateFixture(supernatural, {
-      position: 1,
-      routeProgress: { physical: 2, supernatural: 1, final: 0 },
-      assignments: { physical: ['A1', 'A2', null, null, null], supernatural: ['B1', null, null, null, null], final: [null, null, null, null, null, null] }
-    });
-    T.deepEqual(supernatural.routeProgress, { physical: 2, supernatural: 1, final: 0 });
-    T.deepEqual(supernatural.assignments.physical, ['A1', 'A2', null, null, null]);
-    T.deepEqual(supernatural.assignments.supernatural, ['B1', null, null, null, null]);
+    var supernatural = accepted(accepted(town, { type: 'DEPART' }), { type: 'ENTER_DUNGEON' });
+    T.deepEqual(supernatural.routeProgress, { physical: 1, supernatural: 0, final: 0 });
+    T.deepEqual(supernatural.assignments.physical.slice(0, 2), [physicalEncounter, secondPhysicalEncounter]);
+    T.truthy(supernatural.assignments.supernatural[0]);
+    T.falsy(supernatural.assignments.physical.includes(supernatural.assignments.supernatural[0]));
   });
 
   T.test('UT-083 — quinto marco só conclui depois da consequência resolvida', function () {
@@ -1157,6 +1166,9 @@
       assignments: { physical: ['A1', 'A2', 'A3', 'A4', 'A5'], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] }
     });
     T.equal(unresolved.routeProgress.physical, 4);
+    var rejected = Engine.dispatch(unresolved, { type: 'ACK_SUCCESS' });
+    T.equal(rejected.error.code, 'invalid_transition');
+    T.truthy(rejected.state === unresolved);
     var resolved = stateFixture(unresolved, {
       phase: 'approach_result',
       pendingOutcome: outcomeFor('A5', 'A5-2', ['H1', 'H2', 'H3'])
@@ -1268,6 +1280,10 @@
     T.includes(violationCodes(Engine.validateState(incomplete)), 'route_progress_assignment_mismatch');
     var oneAhead = stateFixture(base, { routeProgress: { physical: 1, supernatural: 0, final: 0 }, assignments: { physical: ['A1', 'A2', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
     T.falsy(violationCodes(Engine.validateState(oneAhead)).includes('route_progress_assignment_mismatch'));
+    var twoAhead = stateFixture(base, { routeProgress: { physical: 0, supernatural: 0, final: 0 }, assignments: { physical: ['A1', 'A2', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(twoAhead)), 'route_progress_assignment_mismatch');
+    var sparse = stateFixture(base, { assignments: { physical: [null, 'A1', null, null, null], supernatural: [null, null, null, null, null], final: [null, null, null, null, null, null] } });
+    T.includes(violationCodes(Engine.validateState(sparse)), 'route_progress_assignment_mismatch');
   });
 
   T.test('UT-096 — seleção e rota ativa obedecem propriedade exclusiva por fase', function () {
@@ -1277,11 +1293,14 @@
     var active = departWith(['H1', 'H2', 'H3'], 96, 'physical');
     T.includes(violationCodes(Engine.validateState(stateFixture(active, { selectedDungeonId: 'supernatural' }))), 'invalid_destination_selection');
     T.includes(violationCodes(Engine.validateState(stateFixture(active, { selectedDungeonId: 'physical' }))), 'destination_ownership_overlap');
+    var soleRoute = accepted(initialCompletionState('physical', false), { type: 'ACK_DUNGEON_COMPLETE' });
+    T.includes(violationCodes(Engine.validateState(stateFixture(soleRoute, { selectedDungeonId: null }))), 'invalid_destination_selection');
   });
 
   T.test('UT-097 — legado ativo, selecionado ou atribuído prematuramente é diagnosticado', function () {
     var formation = startFormation(97);
-    T.includes(violationCodes(Engine.validateState(stateFixture(formation, { selectedDungeonId: 'final' }))), 'final_destination_locked');
+    var locked = Engine.validateState(stateFixture(formation, { selectedDungeonId: 'final' }));
+    T.equal(locked.violations.filter(function (violation) { return violation.code === 'final_destination_locked'; }).length, 1);
     var active = stateFixture(departWith(['H1', 'H2', 'H3'], 97, 'physical'), { dungeonId: 'final' });
     T.includes(violationCodes(Engine.validateState(active)), 'final_destination_locked');
     var assigned = stateFixture(formation, { assignments: { physical: [null, null, null, null, null], supernatural: [null, null, null, null, null], final: ['A1', null, null, null, null, null] } });

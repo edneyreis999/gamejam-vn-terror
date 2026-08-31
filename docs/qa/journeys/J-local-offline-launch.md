@@ -29,7 +29,7 @@ journey:
       expected_observable: A abertura e a introdução neutra aparecem em português sem recurso remoto
     - step: 2
       verb: Preparar a expedição
-      expected_observable: Ferro e Raízes e Vozes e Espelhos aparecem como rádios desmarcados, enquanto Legado aparece estático e bloqueado
+      expected_observable: Caminho do Ferro e das Raízes e Caminho das Vozes e dos Espelhos aparecem como rádios desmarcados, enquanto Caminho do Legado aparece estático e bloqueado
     - step: 3
       verb: Escolher um caminho e três heróis
       expected_observable: A ação de partir nomeia o caminho escolhido e continua operável sem rede

@@ -60,7 +60,11 @@
   ];
   var RETREATABLE_PHASES = Object.freeze(['dungeon_intro', 'encounter_choice']);
   var DUNGEON_IDS = Object.freeze(['physical', 'supernatural', 'final']);
-  var DUNGEON_TOTALS = Object.freeze({ physical: 5, supernatural: 5, final: 6 });
+  var DUNGEON_TOTALS = Object.freeze(DUNGEON_IDS.reduce(function (totals, dungeonId) {
+    totals[dungeonId] = Data.destinations[dungeonId].landmarkTotal;
+    return totals;
+  }, {}));
+  var ACTIVE_DUNGEON_PHASES = Object.freeze(['dungeon_intro', 'encounter_choice', 'approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result', 'retreat_confirmation', 'automatic_retreat', 'dungeon_complete', 'victory']);
 
   function deepFreeze(value) {
     if (!value || typeof value !== 'object' || Object.isFrozen(value)) {
@@ -514,8 +518,14 @@
 
   function deriveMapFragments(state) {
     var progress = state.routeProgress || {};
-    return Number(progress.physical === DUNGEON_TOTALS.physical) +
-      Number(progress.supernatural === DUNGEON_TOTALS.supernatural);
+    var fragments = 0;
+    if (progress.physical === DUNGEON_TOTALS.physical) {
+      fragments += 1;
+    }
+    if (progress.supernatural === DUNGEON_TOTALS.supernatural) {
+      fragments += 1;
+    }
+    return fragments;
   }
 
   function deriveDestinationAvailability(state) {
@@ -553,6 +563,13 @@
         lockReason: dungeonId === 'final' && fragments < 2 ? 'map_fragments' : null
       };
     }));
+  }
+
+  function findDestinationView(stateOrDestinations, dungeonId) {
+    var destinations = Array.isArray(stateOrDestinations) ? stateOrDestinations : deriveDestinations(stateOrDestinations);
+    return destinations.filter(function (destination) {
+      return destination.id === dungeonId;
+    })[0] || null;
   }
 
   function enterFormation(state, event) {
@@ -704,11 +721,7 @@
   }
 
   function recordCurrentPosition(state) {
-    var nextProgress = {
-      physical: state.routeProgress.physical,
-      supernatural: state.routeProgress.supernatural,
-      final: state.routeProgress.final
-    };
+    var nextProgress = clone(state.routeProgress);
     nextProgress[state.dungeonId] = Math.max(nextProgress[state.dungeonId], state.position);
     return replace(state, { routeProgress: nextProgress });
   }
@@ -878,8 +891,8 @@
     var assignmentGroups = state.assignments || {};
     var expectedLengths = DUNGEON_TOTALS;
     var progress = state.routeProgress || {};
-    var progressKeys = Object.keys(progress).sort();
-    if (progressKeys.join('|') !== DUNGEON_IDS.slice().sort().join('|')) {
+    var progressKeys = Object.keys(progress);
+    if (!sameMembers(progressKeys, DUNGEON_IDS)) {
       violations.push(makeViolation('invalid_route_progress', 'O progresso precisa conter exatamente os três caminhos.', { keys: progressKeys }));
     }
     DUNGEON_IDS.forEach(function (dungeonId) {
@@ -900,8 +913,17 @@
         return;
       }
       var assignedCount = slots.filter(Boolean).length;
-      if (Number.isInteger(progress[dungeonId]) && (progress[dungeonId] > assignedCount ||
-          (progress[dungeonId] === expectedLengths[dungeonId] && assignedCount !== expectedLengths[dungeonId]))) {
+      var revealedPrefixLength = 0;
+      while (revealedPrefixLength < slots.length && slots[revealedPrefixLength]) {
+        revealedPrefixLength += 1;
+      }
+      var assignmentProgressMismatch = assignedCount !== revealedPrefixLength;
+      if (Number.isInteger(progress[dungeonId])) {
+        assignmentProgressMismatch = assignmentProgressMismatch || revealedPrefixLength < progress[dungeonId] ||
+          revealedPrefixLength > progress[dungeonId] + 1 ||
+          (progress[dungeonId] === expectedLengths[dungeonId] && revealedPrefixLength !== expectedLengths[dungeonId]);
+      }
+      if (assignmentProgressMismatch) {
         violations.push(makeViolation('route_progress_assignment_mismatch', 'O progresso não corresponde às posições reveladas.', {
           dungeon: dungeonId,
           progress: progress[dungeonId],
@@ -966,7 +988,8 @@
       }
     }
 
-    var activeDungeonPhases = ['dungeon_intro', 'encounter_choice', 'approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result', 'retreat_confirmation', 'automatic_retreat', 'dungeon_complete', 'victory'];
+    var availableDestinations = deriveDestinationAvailability(state);
+    var mapFragments = deriveMapFragments(state);
     var hasKnownDungeon = DUNGEON_IDS.indexOf(state.dungeonId) >= 0;
     if (['ready', 'intro', 'formation'].indexOf(state.phase) >= 0 && state.dungeonId !== null) {
       violations.push(makeViolation('invalid_active_destination', 'Esta fase não pode manter um caminho ativo.', { phase: state.phase, dungeon: state.dungeonId }));
@@ -974,7 +997,7 @@
     if (['intro', 'formation'].indexOf(state.phase) >= 0 && state.position !== null) {
       violations.push(makeViolation('invalid_dungeon_position', 'Esta fase não pode manter uma posição ativa.', { phase: state.phase, position: state.position }));
     }
-    if (activeDungeonPhases.indexOf(state.phase) >= 0 && !hasKnownDungeon) {
+    if (ACTIVE_DUNGEON_PHASES.indexOf(state.phase) >= 0 && !hasKnownDungeon) {
       violations.push(makeViolation('invalid_dungeon_payload', 'A fase ativa precisa de um caminho válido.', { phase: state.phase, dungeon: state.dungeonId }));
     }
     if (state.phase !== 'formation' && state.selectedDungeonId !== null) {
@@ -983,16 +1006,22 @@
         selectedDestination: state.selectedDungeonId
       }));
     }
+    if (state.phase === 'formation' && availableDestinations.length === 1 && state.selectedDungeonId !== availableDestinations[0]) {
+      violations.push(makeViolation('invalid_destination_selection', 'A única rota disponível precisa permanecer selecionada automaticamente.', {
+        selectedDestination: state.selectedDungeonId,
+        availableDestinations: availableDestinations
+      }));
+    }
+    if (state.phase === 'formation' && availableDestinations.length === 0) {
+      violations.push(makeViolation('invalid_destination_selection', 'A preparação precisa possuir ao menos um caminho disponível.', {
+        selectedDestination: state.selectedDungeonId,
+        availableDestinations: availableDestinations
+      }));
+    }
     if (state.phase === 'formation' && state.selectedDungeonId !== null) {
       if (DUNGEON_IDS.indexOf(state.selectedDungeonId) < 0) {
         violations.push(makeViolation('invalid_destination_selection', 'O caminho selecionado é desconhecido.', { selectedDestination: state.selectedDungeonId }));
-      } else if (state.selectedDungeonId === 'final' && deriveMapFragments(state) < 2) {
-        violations.push(makeViolation('final_destination_locked', 'O Caminho do Legado exige as duas partes do mapa.', {
-          selectedDestination: 'final',
-          fragmentsFound: deriveMapFragments(state),
-          fragmentsRequired: 2
-        }));
-      } else if (deriveDestinationAvailability(state).indexOf(state.selectedDungeonId) < 0) {
+      } else if ((state.selectedDungeonId !== 'final' || mapFragments === 2) && availableDestinations.indexOf(state.selectedDungeonId) < 0) {
         violations.push(makeViolation('destination_unavailable', 'Um caminho concluído ou bloqueado não pode ficar selecionado.', { selectedDestination: state.selectedDungeonId }));
       }
     }
@@ -1005,22 +1034,22 @@
     if (hasKnownDungeon && progress[state.dungeonId] === expectedLengths[state.dungeonId] && state.phase !== 'dungeon_complete' && state.phase !== 'victory') {
       violations.push(makeViolation('destination_unavailable', 'Um caminho concluído não pode permanecer ativo.', { dungeon: state.dungeonId }));
     }
-    if ((state.selectedDungeonId === 'final' || state.dungeonId === 'final') && deriveMapFragments(state) < 2) {
+    if ((state.selectedDungeonId === 'final' || state.dungeonId === 'final') && mapFragments < 2) {
       violations.push(makeViolation('final_destination_locked', 'O Caminho do Legado exige as duas partes do mapa.', {
         selectedDestination: state.selectedDungeonId,
         dungeon: state.dungeonId,
-        fragmentsFound: deriveMapFragments(state),
+        fragmentsFound: mapFragments,
         fragmentsRequired: 2
       }));
     }
-    if (assignmentGroups.final && assignmentGroups.final.some(Boolean) && deriveMapFragments(state) < 2) {
+    if (assignmentGroups.final && assignmentGroups.final.some(Boolean) && mapFragments < 2) {
       violations.push(makeViolation('premature_final_assignment', 'O caminho final não pode receber encontros antes das duas partes do mapa.', {
-        fragmentsFound: deriveMapFragments(state)
+        fragmentsFound: mapFragments
       }));
     }
 
     var activePositionLimit = hasKnownDungeon ? expectedLengths[state.dungeonId] : null;
-    if (activeDungeonPhases.indexOf(state.phase) >= 0 && state.phase !== 'dungeon_complete' && activePositionLimit &&
+    if (ACTIVE_DUNGEON_PHASES.indexOf(state.phase) >= 0 && state.phase !== 'dungeon_complete' && activePositionLimit &&
         (!Number.isInteger(state.position) || state.position < 1 || state.position > activePositionLimit)) {
       violations.push(makeViolation('invalid_dungeon_position', 'A posição ativa deve estar dentro da masmorra atual.', { dungeon: state.dungeonId, position: state.position, maximum: activePositionLimit }));
     }
@@ -1091,7 +1120,7 @@
       return state;
     }
     var hasSnapshotShape = hasCampaignShape(state) && state.routeProgress &&
-      Object.keys(state.routeProgress).sort().join('|') === DUNGEON_IDS.slice().sort().join('|');
+      sameMembers(Object.keys(state.routeProgress), DUNGEON_IDS);
     var priorSnapshot = hasSnapshotShape ? snapshot(state) : deepFreeze({
       version: state && state.version,
       phase: state && state.phase,
@@ -1159,9 +1188,7 @@
       if (DUNGEON_IDS.indexOf(action.dungeonId) < 0) {
         return error(state, 'invalid_destination', 'O caminho informado não existe.', { dungeon: action.dungeonId });
       }
-      var destination = deriveDestinations(state).filter(function (record) {
-        return record.id === action.dungeonId;
-      })[0];
+      var destination = findDestinationView(state, action.dungeonId);
       if (!destination || destination.status !== 'available') {
         return error(state, 'destination_unavailable', 'Este caminho não está disponível para expedição.', {
           dungeon: action.dungeonId,
@@ -1210,9 +1237,7 @@
       }
       var availableDestinations = deriveDestinationAvailability(state);
       if (availableDestinations.indexOf(state.selectedDungeonId) < 0) {
-        var selectedDestination = deriveDestinations(state).filter(function (record) {
-          return record.id === state.selectedDungeonId;
-        })[0];
+        var selectedDestination = findDestinationView(state, state.selectedDungeonId);
         return error(state, 'destination_unavailable', 'Este caminho não está disponível para expedição.', {
           dungeon: state.selectedDungeonId,
           status: selectedDestination ? selectedDestination.status : 'unknown'
@@ -1369,6 +1394,9 @@
         }));
       }
       if (state.partyIds.length === 0) {
+        if (state.position === DUNGEON_TOTALS[state.dungeonId]) {
+          return advancePosition(state);
+        }
         return ok(changeWithHistory(recordCurrentPosition(state), {
           phase: 'automatic_retreat',
           position: 1,
@@ -1460,9 +1488,7 @@
     var activeEncounterId = currentEncounterId(state);
     var activeEncounter = activeEncounterId ? Data.encounters[activeEncounterId] : null;
     var destinations = deriveDestinations(state);
-    var activeDestination = state.dungeonId ? destinations.filter(function (destination) {
-      return destination.id === state.dungeonId;
-    })[0] : null;
+    var activeDestination = state.dungeonId ? findDestinationView(destinations, state.dungeonId) : null;
     var availableDestinations = deriveDestinationAvailability(state);
     var automaticSelection = state.phase === 'formation' && state.selectedDungeonId !== null && availableDestinations.length === 1;
     var view = {
@@ -1569,7 +1595,6 @@
     deriveMapFragments: deriveMapFragments,
     deriveDestinationAvailability: deriveDestinationAvailability,
     deriveDestinations: deriveDestinations,
-    enterFormation: enterFormation,
     deriveRetreatEligibility: deriveRetreatEligibility,
     deriveFinalCandidates: deriveFinalCandidates,
     eligibleEncounterIds: eligibleEncounterIds,
