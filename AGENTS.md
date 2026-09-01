@@ -21,6 +21,23 @@
 - Não adicione rede, armazenamento, markup executável, assets remotos ou código de runtime de terceiros ao protótipo sem uma mudança de design aprovada.
 - Mantenha a inspeção de QA somente leitura e restrinja mutações da campanha a ações validadas do jogador.
 
+# Gestão no Trello
+
+- Use o [quadro da game jam](https://trello.com/b/I0FkvVtc/gamejam-visual-novel) para gerenciar execução, ordem, responsáveis, dependências e prazos; mantenha decisões de design no GDD canônico.
+- Separe o backlog por `Narrativa`, `UI/UX`, `Technical Art` e `Programação`; mantenha cards executáveis acima dos cards `[ÉPICO]`.
+- Quebre cards grandes em cards executáveis de meio dia a dois dias e registre responsável, início, fim, dependências, paralelismo e entrega mínima.
+- Trate a data de entrega como prazo da primeira versão utilizável; mova-a para `Done — Refinamento Conhecido` quando houver ajustes conhecidos ou para `Done` quando não houver.
+- Teste continuamente durante o desenvolvimento e registre problemas como cards `[BUG]` no backlog da disciplina responsável, sem criar cards separados de QA.
+- Planeje com seis horas por pessoa por dia, use fins de semana como folga e buffer e reserve os últimos seis dias apenas para bugs e refinamento, sem novas features.
+- Use placeholders somente durante o desenvolvimento; substitua todos por assets finais antes da entrega.
+
+# Equipe da Coreto
+
+- Direcione a programação em RPG Maker prioritariamente ao Edney; ele é generalista e também pode apoiar Narrativa.
+- Direcione Technical Art e ilustração final ao Lucas, único ilustrador da equipe; use seu apoio em programação somente como contingência.
+- Direcione UI/UX e trabalho no Figma à Pati, única pessoa da equipe que usa a ferramenta; ela também mentora João e Maria.
+- Direcione João e Maria a Narrativa e testes manuais; eles são menores aprendizes e não assumem tarefas das outras disciplinas.
+
 # Entregas
 
 - Siga `.gitmessage` ao preparar mensagens de commit, inclusive com `git commit -m`.
