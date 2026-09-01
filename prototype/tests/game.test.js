@@ -1309,6 +1309,20 @@
     T.includes(violationCodes(Engine.validateState(stateFixture(active, { position: 2 }))), 'invalid_dungeon_position');
     var soleRoute = accepted(initialCompletionState('physical', false), { type: 'ACK_DUNGEON_COMPLETE' });
     T.includes(violationCodes(Engine.validateState(stateFixture(soleRoute, { selectedDungeonId: null }))), 'invalid_destination_selection');
+    var completed = runSafeCampaign(false, 'physical');
+    var routeLessFormation = stateFixture(completed, {
+      phase: 'formation',
+      selectedDungeonId: null,
+      dungeonId: null,
+      position: null,
+      partyIds: [],
+      draftPartyIds: [],
+      pendingOutcome: null,
+      pendingVictimId: null
+    });
+    T.includes(violationCodes(Engine.validateState(routeLessFormation)), 'invalid_destination_selection');
+    var encounterWithoutAssignment = stateFixture(active, { phase: 'encounter_choice' });
+    T.includes(violationCodes(Engine.validateState(encounterWithoutAssignment)), 'missing_phase_payload');
   });
 
   T.test('UT-097 — legado ativo, selecionado ou atribuído prematuramente é diagnosticado', function () {

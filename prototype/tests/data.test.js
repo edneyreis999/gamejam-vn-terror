@@ -86,6 +86,17 @@
     var malformedDestination = cloneCatalog();
     malformedDestination.destinations.physical.landmarkTotal = 6;
     T.includes(violationCodes(Engine.validateCatalog(freezeFixture(malformedDestination))), 'invalid_destination_definition');
+    [
+      function (destination) { destination.id = 'unknown'; },
+      function (destination) { destination.name = 'Nome alterado'; },
+      function (destination) { destination.rumor = 'Rumor alterado'; },
+      function (destination) { destination.extra = true; },
+      function (destination) { delete destination.rumor; }
+    ].forEach(function (mutateDestination) {
+      var invalidDefinition = cloneCatalog();
+      mutateDestination(invalidDefinition.destinations.physical);
+      T.includes(violationCodes(Engine.validateCatalog(freezeFixture(invalidDefinition))), 'invalid_destination_definition');
+    });
   });
 
   T.test('UT-006 — encontros com duas ou quatro abordagens são rejeitados', function () {

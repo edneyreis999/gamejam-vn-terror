@@ -379,9 +379,20 @@
     scene.dataset.imageRegion = '';
     var copy = element('div', 'scene-copy');
     var revisited = view.dungeon.landmarks.traversed > 0;
+    var thresholdEyebrow = 'Caminho escolhido';
+    var thresholdCopy = 'O primeiro encontro ainda não foi revelado.';
+    if (view.dungeon.id === 'final') {
+      thresholdEyebrow = 'As duas partes do mapa';
+      thresholdCopy = 'Seis encontros aguardam além deste limiar.';
+    } else if (revisited) {
+      thresholdEyebrow = 'Caminho revisitado';
+      thresholdCopy = COPY.routeRestart;
+    } else if (view.encounter) {
+      thresholdCopy = 'O primeiro encontro já foi revelado nesta campanha.';
+    }
     append(copy,
       provisionalLabel(),
-      element('p', 'eyebrow', view.dungeon.id === 'final' ? 'As duas partes do mapa' : (revisited ? 'Caminho revisitado' : 'Caminho escolhido')),
+      element('p', 'eyebrow', thresholdEyebrow),
       pageHeading(view.dungeon.name, 'threshold-title', 'scene-title'),
       element('p', 'prose', view.dungeon.rumor),
       renderProgress(view)
@@ -389,7 +400,7 @@
     append(scene, copy);
     var decision = element('section', 'paper-panel decision-panel');
     append(decision,
-      element('p', '', revisited ? COPY.routeRestart : (view.dungeon.id === 'final' ? 'Seis encontros aguardam além deste limiar.' : (view.encounter ? 'O primeiro encontro já foi revelado nesta campanha.' : 'O primeiro encontro ainda não foi revelado.'))),
+      element('p', '', thresholdCopy),
       actionButton('Entrar no caminho', 'primary', 'enter-dungeon')
     );
     append(decision, renderRetreatAccess(view));

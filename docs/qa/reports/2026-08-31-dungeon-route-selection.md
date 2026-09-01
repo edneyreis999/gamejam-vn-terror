@@ -2,9 +2,9 @@
 
 - **Scope:** seleção da ordem dos dois caminhos iniciais, troca após recuo, fechamento de rota, portão final, contrato QA v2 e canários adjacentes
 - **Cadence tier:** targeted
-- **Build:** baseline `4668b73`; remediação após `09533e0`, runtime SHA-256 agregado `53ceb7bb74575be1066aeea3dca84071212f28976fc6ecc0a873157f5cdc026f` e runner SHA-256 agregado `3bcc0baddd57993d9ff62abcc1491187ebf65c1ab4ec359b082c7c6802d4a6cb` · **Environment:** Chrome desktop estável, `file://`, rede desligada, sem servidor; driver `agent-browser` porque `browser-use:browser` não está disponível neste ambiente
-- **Started:** 2026-08-31T18:16:10Z · **Closed:** 2026-08-31T23:29:15Z · **Status:** closed
-- **Fresh remediation windows:** runner 2026-08-31T23:29:11Z → 2026-08-31T23:29:15Z; teclado real 2026-08-31T21:53:46Z → 2026-08-31T21:53:48Z.
+- **Build:** baseline `4668b73`; remediação após `1ccc712`, runtime SHA-256 agregado `46ab6971f2b995ec49087f088d887a57b67011045fb06fffce9a610e19dc6f4e` e runner SHA-256 agregado `ac180b85b721dd8277b388af7119f8f5a21e1dbac44b2c9da4ecd9bb9d422c1c` · **Environment:** Chrome desktop estável, `file://`, rede desligada, sem servidor; driver `agent-browser` porque `browser-use:browser` não está disponível neste ambiente
+- **Started:** 2026-08-31T18:16:10Z · **Closed:** 2026-09-01T01:11:30Z · **Status:** closed
+- **Fresh remediation windows:** runner 2026-09-01T01:11:25Z → 2026-09-01T01:11:30Z; teclado real 2026-09-01T01:11:16Z → 2026-09-01T01:11:17Z.
 
 ## Personas
 
@@ -107,7 +107,7 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 - **Ran:** 2026-08-31T18:34:00Z → 2026-08-31T18:36:00Z (box respected: yes)
 - **Driver / entry:** `agent-browser`, sessões frescas por `file:///…/prototype/index.html`; inspeção restrita a `setSeed`, `snapshot` e `validate`.
 - **Steps observed:** seeds `0` e `4294967295` foram aceitas; `-1` retornou `invalid_seed`; reseed depois de iniciar retornou `campaign_already_started`. Partida sem caminho manteve histórico em 5 eventos, focou `#campaign-error` e publicou `DEPART/destination_required`; selecionar Vozes acrescentou um evento e limpou a rejeição. Separadamente, E2E-022 no runner submeteu `SELECT_DESTINATION/final` ao controlador, comprovou `destination_unavailable` fora do histórico e verificou a limpeza pela ação aceita seguinte; a UI pública manteve o cartão bloqueado estático e não acionável.
-- **Reproduction:** a execução fresca de E2E-015 realizou quatro campanhas com seed `20260830`: duas Ferro→Vozes→Legado e duas Vozes→Ferro→Legado. Cada par comparou o snapshot v2 completo — atribuições, `routeProgress`, histórico e diagnóstico — e foi idêntico; E2E-023/E2E-024 confirmaram as identidades explícitas em `destination_selected`, a ordem em `party_formed`, `5/5/6`, 16 encontros únicos e zero violações. O snapshot permaneceu profundamente congelado/destacado; tentativa de mutação não alterou leitura posterior. `validate()` foi não mutante e o objeto global expôs exatamente três métodos.
+- **Reproduction:** a execução fresca de E2E-015 realizou quatro campanhas com seed `20260830`: duas Ferro→Vozes→Legado e duas Vozes→Ferro→Legado. Cada par comparou o snapshot v2 completo — atribuições, marcos atravessados em `destinations`, histórico e diagnóstico — e foi idêntico; E2E-023/E2E-024 confirmaram as identidades explícitas em `destination_selected`, a ordem em `party_formed`, `5/5/6`, 16 encontros únicos e zero violações. O snapshot permaneceu profundamente congelado/destacado; tentativa de mutação não alterou leitura posterior. `validate()` foi não mutante e o objeto global expôs exatamente três métodos.
 - **Evidence:** `../evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-rejection.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-seed-20260830.png`; `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-runner-351-pass.png`.
 - **Findings / bugs:** nenhum.
 - **Scenarios settled:** ACC-accessibility-diagnostics e CAM-dungeon-progression-outcomes → pass.
@@ -142,7 +142,7 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 
 | Probe | Input/state | Observed result | Evidence |
 |---|---|---|---|
-| Partida vazia | Nenhum caminho e nenhum herói | `destination_required`, foco no alerta e formação preservada | `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-missing-route.png` |
+| Partida sem caminho | H1/H2/H3 selecionados e nenhum caminho | `destination_required`, foco no alerta e formação preservada | `../evidence/2026-08-31-dungeon-route-selection/CH-route-order-and-gate-missing-route.png` |
 | Mudança rápida de rota | Ferro→Vozes→Ferro antes de partir | Um único rádio marcado e último destino comprometido | `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-final-runner-351-pass.png` (IT-155/IT-158) |
 | Elenco e Escape | Rota/heróis escolhidos, diálogo aberto | Escape fechou e devolveu foco sem perder seleção | `../evidence/2026-08-31-dungeon-route-selection/CH-keyboard-zoom-motion-formation-320-effective.png` |
 | Sacrifício cancelado/repetido | Vítima escolhida, cancelar e confirmar | Cancelamento restaurou foco; confirmação gerou uma morte | `../evidence/2026-08-31-dungeon-route-selection/CH-sixteen-image-devlog-review-seed23-confirmation.png` |
@@ -160,12 +160,14 @@ Status legend: `Pending | Pass | Fixed | Skipped | Blocked (needs human verify) 
 | J-complete-campaign | Pass — estados e nomes diegéticos visíveis | Pass — teclado, foco, zoom e Axe 0 | Pass — respostas imediatas, sem espera ou layout shift observado | Pass no contrato Chrome-only em 1440 e 320 efetivos, modo escuro e reduced motion; modo claro não foi verificado | Pass — erro de rota preserva formação; cancelamentos e reload têm resultado explícito | Pass qualificado — mesmo HTML/CSS/JS local entregue; sem servidor, auth ou storage por desenho |
 | J-local-offline-launch | Pass — entrada e fallback mantêm a tarefa clara | Pass — conteúdo essencial independe de imagem/áudio | Pass — carga local e ações imediatas offline | Pass no Chrome suportado e viewport estreito | Pass — imagem ausente degrada, reload inicia sessão limpa | Pass qualificado — rede e 16 imagens bloqueadas; extensões de navegador não foram simuladas |
 | J-reproduce-campaign | Pass — ordem e diagnóstico ficam distinguíveis no snapshot | Pass — inspeção não altera a jornada pública | Pass — quatro replays locais concluídos no mesmo gate | Pass no Chrome-only por `file://` | Pass — erros de seed/rota são estruturados e não entram no histórico aceito | Pass qualificado — API QA permanece limitada a três métodos e o bloqueio usa fixture separado |
-| J-run-browser-contract | Pass — título e resumo público concordam | Pass — relatório textual permanece legível | Pass — 351 casos concluídos em 4 s na janela fresca | Pass no Chrome desktop suportado | Pass — zero linhas FAIL; fixtures inválidas aparecem como testes esperados | Pass — runner carrega exatamente os mesmos arquivos de produção da entrada local |
+| J-run-browser-contract | Pass — título e resumo público concordam | Pass — relatório textual permanece legível | Pass — 351 casos concluídos em 5 s na janela fresca | Pass no Chrome desktop suportado | Pass — zero linhas FAIL; fixtures inválidas aparecem como testes esperados | Pass — runner carrega exatamente os mesmos arquivos de produção da entrada local |
 
 Modo claro, Safari, Firefox, navegadores móveis, autenticação, backend, extensões, persistência, áudio e serviços externos não foram verificados porque estão fora do contrato confirmado deste protótipo.
 
 ## What Was Fixed
 
+- Entre 01:11:25Z e 01:11:30Z, a quarta remediação abriu o runner pelo HTML local e confirmou 351 aprovados, zero falhas e zero linhas FAIL com os hashes agregados do cabeçalho. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round4-remediation-runner-351-pass.png`.
+- Entre 01:11:16Z e 01:11:17Z, uma sessão Chrome fresca percorreu abertura, introdução, rádio físico, H1/H2/H3, elenco, fechamento do diálogo e **Partir** com Tab, Espaço e Enter reais em 320 CSS px efetivos, modo escuro e movimento reduzido. A sessão chegou a `dungeon_intro`, posição 1, foco `#threshold-title`, sem overflow e com `validate()` sem violações. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round4-real-keyboard-formation.png`.
 - A janela fresca da terceira remediação usou o runtime e runner identificados pelos SHA-256 agregados do cabeçalho. Entre 23:29:11Z e 23:29:15Z, Chrome abriu `prototype/tests.html` diretamente e retornou 351 aprovados, zero falhas e `{total: 351, passed: 351, failed: 0}`. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round3-remediation-runner-351-pass.png`.
 - Entre 21:53:46Z e 21:53:48Z, uma sessão Chrome fresca usou Tab, Espaço e Enter reais em 320 CSS px efetivos, modo escuro e movimento reduzido. Antes de partir, a rota física e H1/H2/H3 estavam selecionados, **Partir** tinha foco e não havia overflow; Enter chegou a `dungeon_intro`, posição 1, foco `#threshold-title` e `validate()` sem violações. Evidência: `../evidence/2026-08-31-dungeon-route-selection/CH-review-remediation-real-keyboard-formation.png`.
 - No commit `6b0bfb3`, `prototype/app.js` passou a anunciar o nome diegético da única rota selecionada e a mover foco ao heading de preparação; IT-204/IT-209 e a reexecução Chrome por controles visíveis observaram `Preparação disponível. Caminho selecionado automaticamente: Caminho das Vozes e dos Espelhos.`, foco em `#formation-title` e `validate()` sem violações.
@@ -197,7 +199,7 @@ Nenhuma para este ciclo; decisões narrativas e de apresentação permanecem `Pe
 
 ## Final Status
 
-- **Exit gate (full automated suite):** Chrome desktop, direto por `file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html`, rede desligada — reexecutado entre 2026-08-31T23:29:11Z e 2026-08-31T23:29:15Z com 351 aprovados; `window.__expeditionTestResults = {total: 351, passed: 351, failed: 0}`; zero linhas FAIL. Evidência fresca: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round3-remediation-runner-351-pass.png`.
+- **Exit gate (full automated suite):** Chrome desktop, direto por `file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html`, rede desligada — reexecutado entre 2026-09-01T01:11:25Z e 2026-09-01T01:11:30Z com 351 aprovados; `window.__expeditionTestResults = {total: 351, passed: 351, failed: 0}`; zero linhas FAIL. Evidência fresca: `../evidence/2026-08-31-dungeon-route-selection/CH-review-round4-remediation-runner-351-pass.png`.
 - **Issues by user impact:** 0 Blocks-Completion, 0 Data-Loss, 0 Trust-Damage, 0 Friction, 0 Cosmetic.
 - **Coverage:** 18/18 linhas Pass, 7/7 charters executados, 6/6 cenários reconciliados, 4/4 jornadas observadas.
 - **Verification not performed:** modo claro, Safari, Firefox, navegadores móveis, serviços, autenticação, persistência e áudio — todos fora do escopo confirmado; extensões reais do navegador não foram simuladas.

@@ -20,14 +20,17 @@ flowchart TD
   I --> L{Recuar ou continuar?}
   K --> L
   L -->|recuar| M[Voltar à preparação com consequências e registros preservados]
-  M -->|mesmo ou outro incompleto| C
+  M --> M2{Algum caminho inicial já foi concluído?}
+  M2 -->|não| C
+  M2 -->|sim| C2
   L -->|continuar| N{Caminho concluído?}
   N -->|não| G
   N -->|sim| O[Reconhecer parte do mapa recuperada]
   O --> P{Quantas partes?}
   P -->|1 de 2| Q[Devlog: concluído estático, outro inicial selecionado, Legado bloqueado]
   Q --> C2[Preparação após 1/2: concluído estático, outro disponível e selecionado, Legado bloqueado]
-  C2 --> F
+  C2 --> C3[Formar o grupo e confirmar Partir]
+  C3 --> F
   P -->|2 de 2| R[Legado liberado e selecionado]
   R --> R2[Voltar à preparação, formar o grupo e confirmar Partir]
   R2 --> S[Atravessar seis encontros finais]
@@ -63,7 +66,7 @@ journey:
       expected_observable: Mortes, atribuições e maior percurso permanecem ligados ao caminho correto, mas a nova tentativa recomeça no primeiro marco
     - step: 4
       verb: Concluir os dois caminhos iniciais em qualquer ordem
-      expected_observable: "Após a primeira conclusão, o caminho concluído vira cartão estático, o outro fica selecionado e o Legado mostra 1 de 2 partes; após a segunda, ambos ficam estáticos e o Legado fica selecionado em 2 de 2."
+      expected_observable: "1/2 — após a primeira conclusão, o caminho concluído vira cartão estático, o outro fica selecionado e o Legado mostra 1 de 2 partes; 2/2 — após a segunda, ambos ficam estáticos e o Legado fica selecionado em 2 de 2."
     - step: 5
       verb: Confirmar a formação e Partir para o Caminho do Legado, atravessá-lo e iniciar campanha nova
       expected_observable: O Legado fica selecionado automaticamente, mas exige grupo válido e Partir explícito; seis encontros levam a vitória ou derrota e o reset remove toda consequência da sessão anterior

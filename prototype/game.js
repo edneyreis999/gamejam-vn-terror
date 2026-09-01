@@ -1018,7 +1018,9 @@
         selectedDestination: state.selectedDungeonId
       }));
     }
-    if (state.phase === 'formation' && availableDestinations.length === 1 && state.selectedDungeonId !== availableDestinations[0]) {
+    if (state.phase === 'formation' && availableDestinations.length === 1 &&
+        (state.selectedDungeonId === null || DUNGEON_IDS.indexOf(state.selectedDungeonId) >= 0) &&
+        state.selectedDungeonId !== availableDestinations[0]) {
       violations.push(makeViolation('invalid_destination_selection', 'A única rota disponível precisa permanecer selecionada automaticamente.', {
         selectedDestination: state.selectedDungeonId,
         availableDestinations: availableDestinations
@@ -1066,6 +1068,16 @@
     if (ACTIVE_DUNGEON_PHASES.indexOf(state.phase) >= 0 && state.phase !== 'dungeon_complete' && activePositionLimit &&
         (!Number.isInteger(state.position) || state.position < 1 || state.position > activePositionLimit || state.position > progress[state.dungeonId] + 1)) {
       violations.push(makeViolation('invalid_dungeon_position', 'A posição ativa deve estar dentro da masmorra atual.', { dungeon: state.dungeonId, position: state.position, maximum: activePositionLimit }));
+    }
+
+    var phaseRequiresEncounter = ['encounter_choice', 'approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result'].indexOf(state.phase) >= 0 ||
+      (state.phase === 'retreat_confirmation' && retreatReturnPhase(state) === 'encounter_choice');
+    if (phaseRequiresEncounter && !currentEncounterId(state)) {
+      violations.push(makeViolation('missing_phase_payload', 'A fase atual exige um encontro revelado na posição ativa.', {
+        phase: state.phase,
+        dungeon: state.dungeonId,
+        position: state.position
+      }));
     }
 
     var outcomePhases = ['approach_result', 'sacrifice_choice', 'sacrifice_confirmation', 'death_result'];
@@ -1515,7 +1527,7 @@
         ? 'Caminho selecionado automaticamente: ' + Data.destinations[state.selectedDungeonId].name + '.'
         : null,
       position: state.position,
-      positionTotal: state.dungeonId === 'final' ? 6 : (state.dungeonId ? 5 : null),
+      positionTotal: activeDestination ? activeDestination.landmarks.total : null,
       survivorCount: livingHeroIds(state).length,
       party: state.partyIds.map(function (heroId) { return heroPlayerRecord(heroId, state); }),
       town: townHeroIds(state).map(function (heroId) { return heroPlayerRecord(heroId, state); }),

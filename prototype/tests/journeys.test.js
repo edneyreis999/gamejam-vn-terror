@@ -33,11 +33,14 @@
   }
 
   function chooseRoute(current, dungeonId) {
-    var control = current.root.querySelector('[data-destination-control][value="' + dungeonId + '"]');
+    var selector = '[data-destination-control][value="' + dungeonId + '"]';
+    var control = current.root.querySelector(selector);
     Test.truthy(control, 'O caminho disponível precisa ter um rádio nativo.');
     if (current.controller.getState().selectedDungeonId !== dungeonId) {
       control.click();
     }
+    control = current.root.querySelector(selector);
+    Test.truthy(control, 'O rádio precisa permanecer renderizado após a seleção.');
     Test.equal(current.controller.getState().selectedDungeonId, dungeonId);
     Test.truthy(control.checked);
   }
@@ -563,8 +566,7 @@
       for (var index = 0; index < 2; index += 1) {
         var current = fixture();
         try {
-          Test.deepEqual(global.expeditionQA.setSeed(20260830), { ok: true, seed: 20260830 });
-          driveOrderByControls(current, order);
+          driveOrderByControls(current, order, { seed: 20260830 });
           records.push({ snapshot: global.expeditionQA.snapshot(), validation: global.expeditionQA.validate() });
         } finally {
           current.cleanup();
@@ -580,7 +582,9 @@
   function driveOrderByControls(current, order, options) {
     options = options || {};
     if (current.controller.getState().phase === 'ready') {
-      Test.truthy(current.controller.dispatch({ type: 'BEGIN', seed: 20260831 }).ok);
+      var seed = options.seed === undefined ? 20260831 : options.seed;
+      Test.deepEqual(global.expeditionQA.setSeed(seed), { ok: true, seed: seed });
+      current.root.querySelector('[data-action="begin"]').click();
       current.root.querySelector('[data-action="continue-intro"]').click();
     }
     var acknowledgments = 0;
@@ -620,6 +624,7 @@
 
   Test.test('E2E-016 — heróis primeiro, alerta de caminho e partida física preservada', function () {
     var current = fixture();
+    try {
     current.root.querySelector('[data-action="begin"]').click();
     current.root.querySelector('[data-action="continue-intro"]').click();
     ensureHeroes(current, ['H1', 'H2', 'H3']);
@@ -630,12 +635,16 @@
     Test.equal(current.controller.getState().dungeonId, 'physical');
     Test.deepEqual(current.controller.getState().partyIds, ['H1', 'H2', 'H3']);
     Test.includes(current.root.textContent, 'Caminho do Ferro e das Raízes');
-    current.cleanup();
+    } finally {
+      current.cleanup();
+    }
   });
 
   Test.test('E2E-017 — rota sobrenatural pode vir antes dos heróis sem rótulo interno', function () {
     var current = fixture();
-    current.controller.dispatch({ type: 'BEGIN', seed: 20260831 });
+    try {
+    Test.deepEqual(global.expeditionQA.setSeed(20260831), { ok: true, seed: 20260831 });
+    current.root.querySelector('[data-action="begin"]').click();
     current.root.querySelector('[data-action="continue-intro"]').click();
     Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 0);
     Test.falsy(current.root.querySelector('[data-destination-id="final"] input'));
@@ -644,11 +653,14 @@
     current.root.querySelector('[data-action="depart"]').click();
     Test.equal(current.controller.getState().dungeonId, 'supernatural');
     Test.falsy(/masmorra sobrenatural|pool b/i.test(current.root.textContent));
-    current.cleanup();
+    } finally {
+      current.cleanup();
+    }
   });
 
   Test.test('E2E-018 — recuo permite alternar caminhos sem perder registros', function () {
     var current = fixture();
+    try {
     startEncounter(current);
     for (var resolved = 0; resolved < 2; resolved += 1) {
       var success = successfulApproach(current.controller.getState());
@@ -662,33 +674,46 @@
     Test.equal(current.controller.getState().routeProgress.physical, 2);
     Test.equal(current.controller.getState().selectedDungeonId, null);
     Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 0);
-    chooseRoute(current, 'supernatural'); ensureHeroes(current, ['H1', 'H2', 'H3']); current.root.querySelector('[data-action="depart"]').click(); current.root.querySelector('[data-action="enter-dungeon"]').click();
+    chooseRoute(current, 'supernatural');
+    ensureHeroes(current, ['H1', 'H2', 'H3']);
+    current.root.querySelector('[data-action="depart"]').click();
+    current.root.querySelector('[data-action="enter-dungeon"]').click();
     var supernaturalAssignment = current.controller.getState().assignments.supernatural[0];
-    var deathsBeforeReturn = current.controller.getState().deadHeroIds.slice();
+    var deadHeroIdsBeforeReturn = current.controller.getState().deadHeroIds.slice();
     current.root.querySelector('[data-action="request-retreat"]').click();
     current.root.querySelector('[data-action="confirm-retreat"]').click();
     Test.equal(current.controller.getState().selectedDungeonId, null);
     Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 0);
-    chooseRoute(current, 'physical'); ensureHeroes(current, ['H1', 'H2', 'H3']); current.root.querySelector('[data-action="depart"]').click(); current.root.querySelector('[data-action="enter-dungeon"]').click();
+    chooseRoute(current, 'physical');
+    ensureHeroes(current, ['H1', 'H2', 'H3']);
+    current.root.querySelector('[data-action="depart"]').click();
+    Test.includes(current.root.textContent, 'O grupo reconhece este caminho, mas a travessia recomeça no primeiro marco.');
+    current.root.querySelector('[data-action="enter-dungeon"]').click();
     Test.deepEqual(current.controller.getState().assignments.physical.slice(0, 3), physicalAssignments);
     Test.equal(current.controller.getState().assignments.supernatural[0], supernaturalAssignment);
     Test.deepEqual(current.controller.getState().routeProgress, { physical: 2, supernatural: 0, final: 0 });
-    Test.deepEqual(current.controller.getState().deadHeroIds, deathsBeforeReturn);
-    current.cleanup();
+    Test.deepEqual(current.controller.getState().deadHeroIds, deadHeroIdsBeforeReturn);
+    } finally {
+      current.cleanup();
+    }
   });
 
   Test.test('E2E-019 — primeira conclusão produz o estado demonstrável do devlog', function () {
     var current = fixture();
+    try {
     driveOrderByControls(current, ['physical', 'supernatural'], { stopAfterAcknowledgments: 1 });
     Test.truthy(current.root.querySelector('[data-destination-id="physical"].completed'));
     Test.truthy(current.root.querySelector('[value="supernatural"]:checked'));
     Test.includes(current.root.querySelector('[data-destination-id="final"]').textContent, '1 de 2 partes');
     Test.falsy(current.root.querySelector('[data-destination-id="physical"] input'));
-    current.cleanup();
+    } finally {
+      current.cleanup();
+    }
   });
 
   Test.test('E2E-020 — segunda conclusão desbloqueia e seleciona o legado', function () {
     var current = fixture();
+    try {
     driveOrderByControls(current, ['physical', 'supernatural'], { stopBeforeAcknowledgment: 2 });
     Test.equal(current.controller.getState().phase, 'dungeon_complete');
     Test.includes(current.root.querySelector('#transition-title').textContent, 'O mapa está inteiro.');
@@ -702,31 +727,86 @@
     current.root.querySelector('[data-action="depart"]').click();
     Test.equal(current.controller.getState().dungeonId, 'final');
     Test.equal(current.controller.getState().position, 1);
-    current.cleanup();
+    } finally {
+      current.cleanup();
+    }
   });
 
-  Test.test('E2E-021 — preparação mantém controles nativos em zoom efetivo e sem mídia automática', function () {
+  function activateByKeyboard(control, key) {
+    Test.truthy(control, 'O controle ativado por teclado precisa existir.');
+    control.focus();
+    Test.equal(document.activeElement, control);
+    control.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
+    control.dispatchEvent(new KeyboardEvent('keyup', { key: key, bubbles: true }));
+    control.click();
+  }
+
+  Test.test('E2E-021 — preparação mantém controles nativos em zoom efetivo e sem mídia automática', async function () {
     var current = fixture(320);
     current.root.style.zoom = '2';
-    current.root.querySelector('[data-action="begin"]').click(); current.root.querySelector('[data-action="continue-intro"]').click();
-    var radio = current.root.querySelector('[value="physical"]');
-    Test.equal(radio.type, 'radio');
-    radio.click();
-    Test.equal(current.controller.getState().selectedDungeonId, 'physical');
-    ['H1', 'H2', 'H3'].forEach(function (heroId) {
-      var heroControl = current.root.querySelector('[data-action="toggle-hero"][data-id="' + heroId + '"]');
-      Test.equal(heroControl.tagName, 'BUTTON');
-      heroControl.click();
-    });
-    current.root.querySelector('[data-action="depart"]').click();
-    Test.equal(current.controller.getState().dungeonId, 'physical');
-    Test.truthy(current.root.scrollWidth <= 320);
-    Test.equal(current.root.querySelectorAll('audio,video,[autoplay]').length, 0);
-    current.cleanup();
+    try {
+      Test.deepEqual(global.expeditionQA.setSeed(20260831), { ok: true, seed: 20260831 });
+      activateByKeyboard(current.root.querySelector('[data-action="begin"]'), 'Enter');
+      activateByKeyboard(current.root.querySelector('[data-action="continue-intro"]'), 'Enter');
+      var rosterChecked = false;
+      var completionCount = 0;
+      var guard = 0;
+      while (current.controller.getState().phase !== 'victory' && guard < MAX_ORDER_JOURNEY_STEPS) {
+        guard += 1;
+        var state = current.controller.getState();
+        if (state.phase === 'formation') {
+          var desired = Engine.deriveDestinationAvailability(state)[0];
+          var radio = current.root.querySelector('[value="' + desired + '"]');
+          Test.equal(radio.type, 'radio');
+          radio.focus();
+          Test.equal(document.activeElement, radio);
+          if (!radio.checked) {
+            activateByKeyboard(radio, ' ');
+          }
+          ['H1', 'H2', 'H3'].forEach(function (heroId, index) {
+            var heroControl = current.root.querySelector('[data-action="toggle-hero"][data-id="' + heroId + '"]');
+            Test.equal(heroControl.tagName, 'BUTTON');
+            if (heroControl.getAttribute('aria-pressed') !== 'true') {
+              activateByKeyboard(heroControl, index % 2 === 0 ? 'Enter' : ' ');
+            }
+          });
+          if (!rosterChecked) {
+            activateByKeyboard(current.root.querySelector('[data-action="open-roster"]'), 'Enter');
+            Test.truthy(current.root.querySelector('#roster-dialog').open);
+            activateByKeyboard(current.root.querySelector('[data-action="close-roster"]'), 'Enter');
+            rosterChecked = true;
+          }
+          activateByKeyboard(current.root.querySelector('[data-action="depart"]'), 'Enter');
+        } else if (state.phase === 'dungeon_intro') {
+          activateByKeyboard(current.root.querySelector('[data-action="enter-dungeon"]'), 'Enter');
+        } else if (state.phase === 'encounter_choice') {
+          var approach = successfulApproach(state);
+          activateByKeyboard(current.root.querySelector('[data-id="' + approach.id + '"]'), 'Enter');
+        } else if (state.phase === 'approach_result') {
+          activateByKeyboard(current.root.querySelector('[data-action="ack-success"]'), 'Enter');
+        } else if (state.phase === 'dungeon_complete') {
+          activateByKeyboard(current.root.querySelector('[data-action="ack-dungeon-complete"]'), 'Enter');
+          completionCount += 1;
+          await new Promise(function (resolve) { global.requestAnimationFrame(resolve); });
+          Test.includes(current.root.querySelector('[role="status"]').textContent, 'Caminho selecionado automaticamente:');
+          Test.equal(current.root.querySelectorAll('[data-destination-control]:checked').length, 1);
+        } else {
+          throw new Error('Fase inesperada na jornada por teclado: ' + state.phase);
+        }
+      }
+      Test.equal(current.controller.getState().phase, 'victory');
+      Test.equal(completionCount, 2);
+      Test.truthy(current.root.scrollWidth <= 320);
+      Test.equal(current.root.querySelectorAll('audio,video,[autoplay]').length, 0);
+      Test.truthy(global.matchMedia('(prefers-reduced-motion: reduce)').matches || global.matchMedia('(prefers-reduced-motion: no-preference)').matches);
+    } finally {
+      current.cleanup();
+    }
   });
 
   Test.test('E2E-022 — seed e diagnóstico QA v2 reproduzem ação bloqueada', function () {
     var current = fixture();
+    try {
     Test.deepEqual(global.expeditionQA.setSeed(20260831), { ok: true, seed: 20260831 });
     current.root.querySelector('[data-action="begin"]').click(); current.root.querySelector('[data-action="continue-intro"]').click();
     chooseRoute(current, 'supernatural'); ensureHeroes(current, ['H1', 'H2', 'H3']);
@@ -742,7 +822,9 @@
     chooseRoute(current, 'physical');
     Test.equal(global.expeditionQA.snapshot().lastRejectedAction, null);
     Test.deepEqual(global.expeditionQA.validate(), { ok: true, violations: [] });
-    current.cleanup();
+    } finally {
+      current.cleanup();
+    }
   });
 
   function assertCompletedCampaign(current, expectedInitialOrder) {
@@ -756,16 +838,22 @@
 
   Test.test('E2E-023 — campanha física sobrenatural legado fecha 5 5 6', function () {
     var current = fixture();
-    driveOrderByControls(current, ['physical', 'supernatural']);
-    assertCompletedCampaign(current, ['physical', 'supernatural']);
-    current.cleanup();
+    try {
+      driveOrderByControls(current, ['physical', 'supernatural']);
+      assertCompletedCampaign(current, ['physical', 'supernatural']);
+    } finally {
+      current.cleanup();
+    }
   });
 
   Test.test('E2E-024 — campanha sobrenatural física legado fecha 5 5 6', function () {
     var current = fixture();
-    driveOrderByControls(current, ['supernatural', 'physical']);
-    assertCompletedCampaign(current, ['supernatural', 'physical']);
-    Test.equal(Engine.deriveFinalCandidates(current.controller.getState()).length, 6);
-    current.cleanup();
+    try {
+      driveOrderByControls(current, ['supernatural', 'physical']);
+      assertCompletedCampaign(current, ['supernatural', 'physical']);
+      Test.equal(Engine.deriveFinalCandidates(current.controller.getState()).length, 6);
+    } finally {
+      current.cleanup();
+    }
   });
 })(window);
