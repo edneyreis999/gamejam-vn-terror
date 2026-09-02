@@ -324,6 +324,8 @@ Não consulte mapas JSON, eventos, IDs, switches, variáveis, plugins, código o
 
 Preencha esse núcleo antes de acrescentar auditoria, automação ou medição. Cada passo deve dizer onde o jogador parece estar, qual ação executar, qual mudança visível confirma o avanço e como parar ou recuperar com segurança. Prefira marcos como portas, estátuas, bordas, falas ou rótulos de opção. Uma sequência de teclas sem pré-condição e sem sinal de parada não é uma rota validável.
 
+Quando uma interação observada depender de orientação, materialize imediatamente antes da confirmação a entrada pública que produziu essa orientação na descoberta. Adjacência ou pose visual servem como marcos, mas não substituem a reprodução da sequência que acionou o evento.
+
 ### Acrescente extensões somente quando contratadas
 
 - **Identidade exata:** registre fingerprint do build e do cartão, método e origem quando o ensaio depender de revisão exata, automação ou adulteração.
