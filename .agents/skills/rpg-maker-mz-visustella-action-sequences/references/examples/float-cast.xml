@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionSequenceExample illustrative="true" normative="false">
+  <metadata>
+    <title>Float Cast</title>
+    <sourceKind>sanitized-current-common-event-fixture</sourceKind>
+    <structuralAudit>passed</structuralAudit>
+    <semanticAudit>command-order-and-payload-preserved</semanticAudit>
+    <runtimePlaytest>not-claimed</runtimePlaytest>
+  </metadata>
+  <dependencies>
+    <plugin>VisuMZ_1_BattleCore</plugin>
+  </dependencies>
+  <commands>
+    <command index="0" code="108" indent="0">
+      <parameter index="0" type="string">====================================DESCRIPTION==========================================</parameter>
+    </command>
+    <command index="1" code="408" indent="0">
+      <parameter index="0" type="string">- Setup: Standard attack setup</parameter>
+    </command>
+    <command index="2" code="408" indent="0">
+      <parameter index="0" type="string">- Float Animation: Animation plays on user</parameter>
+    </command>
+    <command index="3" code="408" indent="0">
+      <parameter index="0" type="string">- Float: User floats upward</parameter>
+    </command>
+    <command index="4" code="408" indent="0">
+      <parameter index="0" type="string">- Cast: User performs cast motion and freezes</parameter>
+    </command>
+    <command index="5" code="408" indent="0">
+      <parameter index="0" type="string">- Action Effect (Flash): Apply damage, (de)buffs and play skill animation play on target</parameter>
+    </command>
+    <command index="6" code="108" indent="0">
+      <parameter index="0" type="string">as screen flashes</parameter>
+    </command>
+    <command index="7" code="408" indent="0">
+      <parameter index="0" type="string">- Descend: User returns to ground</parameter>
+    </command>
+    <command index="8" code="408" indent="0">
+      <parameter index="0" type="string">- Finish: Standard attack finish</parameter>
+    </command>
+    <command index="9" code="408" indent="0">
+      <parameter index="0" type="string">=========================================================================================</parameter>
+    </command>
+    <command index="10" code="118" indent="0">
+      <parameter index="0" type="string">Setup</parameter>
+    </command>
+    <command index="11" code="108" indent="0">
+      <parameter index="0" type="string">- Displays attack name</parameter>
+    </command>
+    <command index="12" code="408" indent="0">
+      <parameter index="0" type="string">- Makes targets immortal so they don&apos;t die in the middle of multiple hit attacks</parameter>
+    </command>
+    <command index="13" code="408" indent="0">
+      <parameter index="0" type="string">- No battle step or cast animation</parameter>
+    </command>
+    <command index="14" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_SetupAction</commandId>
+      <displayName>ACSET: Setup Action Set</displayName>
+      <arguments>{&quot;DisplayAction:eval&quot;:&quot;true&quot;,&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;ActionStart:eval&quot;:&quot;false&quot;,&quot;WaitForMovement:eval&quot;:&quot;false&quot;,&quot;CastAnimation:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="15" code="657" indent="0">
+      <parameter index="0" type="string">Display Action = true</parameter>
+    </command>
+    <command index="16" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: On = true</parameter>
+    </command>
+    <command index="17" code="657" indent="0">
+      <parameter index="0" type="string">Battle Step = false</parameter>
+    </command>
+    <command index="18" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = false</parameter>
+    </command>
+    <command index="19" code="657" indent="0">
+      <parameter index="0" type="string">Cast Animation = false</parameter>
+    </command>
+    <command index="20" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation = false</parameter>
+    </command>
+    <command index="21" code="118" indent="0">
+      <parameter index="0" type="string">Float Animation</parameter>
+    </command>
+    <command index="22" code="108" indent="0">
+      <parameter index="0" type="string">- Animation plays on user as they float upwards.</parameter>
+    </command>
+    <command index="23" code="408" indent="0">
+      <parameter index="0" type="string">- Wait 5 frames</parameter>
+    </command>
+    <command index="24" code="408" indent="0">
+      <parameter index="0" type="string"></parameter>
+    </command>
+    <command index="25" code="408" indent="0">
+      <parameter index="0" type="string">Recommend customizing with a faster, smaller animation</parameter>
+    </command>
+    <command index="26" code="408" indent="0">
+      <parameter index="0" type="string">(E.g. Heal One 1, 50% size, 200% speed on user&apos;s base)</parameter>
+    </command>
+    <command index="27" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_ShowAnimation</commandId>
+      <displayName>ANIM: Show Animation</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;AnimationID:num&quot;:&quot;&lt;animationid-num&gt;&quot;,&quot;Mirror:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="28" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="29" code="657" indent="0">
+      <parameter index="0" type="string">Animation &lt;animation-id&gt;</parameter>
+    </command>
+    <command index="30" code="657" indent="0">
+      <parameter index="0" type="string">Mirror Animation = false</parameter>
+    </command>
+    <command index="31" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation? = false</parameter>
+    </command>
+    <command index="32" code="230" indent="0">
+      <parameter index="0" type="number">5</parameter>
+    </command>
+    <command index="33" code="118" indent="0">
+      <parameter index="0" type="string">Float</parameter>
+    </command>
+    <command index="34" code="108" indent="0">
+      <parameter index="0" type="string">- User floats 100 px</parameter>
+    </command>
+    <command index="35" code="408" indent="0">
+      <parameter index="0" type="string">- User preforms chanting motion</parameter>
+    </command>
+    <command index="36" code="408" indent="0">
+      <parameter index="0" type="string">- Wait Until Float is complete</parameter>
+    </command>
+    <command index="37" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_Float</commandId>
+      <displayName>MOVE: Float</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;Height:eval&quot;:&quot;100&quot;,&quot;Duration:eval&quot;:&quot;60&quot;,&quot;EasingType:str&quot;:&quot;InOutSine&quot;,&quot;WaitForFloat:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="38" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="39" code="657" indent="0">
+      <parameter index="0" type="string">Desired Height = 100</parameter>
+    </command>
+    <command index="40" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 60</parameter>
+    </command>
+    <command index="41" code="657" indent="0">
+      <parameter index="0" type="string">Float Easing = InOutSine</parameter>
+    </command>
+    <command index="42" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Float? = false</parameter>
+    </command>
+    <command index="43" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;chant&quot;,&quot;ShowWeapon:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="44" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="45" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = chant</parameter>
+    </command>
+    <command index="46" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = false</parameter>
+    </command>
+    <command index="47" code="230" indent="0">
+      <parameter index="0" type="number">55</parameter>
+    </command>
+    <command index="48" code="118" indent="0">
+      <parameter index="0" type="string">Cast</parameter>
+    </command>
+    <command index="49" code="108" indent="0">
+      <parameter index="0" type="string">- User performs Spell motion</parameter>
+    </command>
+    <command index="50" code="408" indent="0">
+      <parameter index="0" type="string">- Wait 11 frames</parameter>
+    </command>
+    <command index="51" code="408" indent="0">
+      <parameter index="0" type="string">- Spell motion freezes on last frame</parameter>
+    </command>
+    <command index="52" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;spell&quot;,&quot;ShowWeapon:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="53" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="54" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = spell</parameter>
+    </command>
+    <command index="55" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = true</parameter>
+    </command>
+    <command index="56" code="230" indent="0">
+      <parameter index="0" type="number">11</parameter>
+    </command>
+    <command index="57" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_FreezeMotionFrame</commandId>
+      <displayName>MOTION: Freeze Motion Frame</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;spell&quot;,&quot;Frame:num&quot;:&quot;2&quot;,&quot;ShowWeapon:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="58" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="59" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = spell</parameter>
+    </command>
+    <command index="60" code="657" indent="0">
+      <parameter index="0" type="string">Frame Index = 2</parameter>
+    </command>
+    <command index="61" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = false</parameter>
+    </command>
+    <command index="62" code="118" indent="0">
+      <parameter index="0" type="string">Action Effect (Flash)</parameter>
+    </command>
+    <command index="63" code="108" indent="0">
+      <parameter index="0" type="string">- Deal damage to targets based on skill&apos;s damage formula and apply any buffs or debuffs </parameter>
+    </command>
+    <command index="64" code="408" indent="0">
+      <parameter index="0" type="string">based on skill&apos;s effects</parameter>
+    </command>
+    <command index="65" code="408" indent="0">
+      <parameter index="0" type="string">- Play animation on targets based on skill&apos;s settings</parameter>
+    </command>
+    <command index="66" code="408" indent="0">
+      <parameter index="0" type="string">- Play &lt;sound-effect&gt; SE</parameter>
+    </command>
+    <command index="67" code="408" indent="0">
+      <parameter index="0" type="string">- Flash Screen</parameter>
+    </command>
+    <command index="68" code="408" indent="0">
+      <parameter index="0" type="string">- Wait for Action Effect (Flash) to complete</parameter>
+    </command>
+    <command index="69" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_ActionEffect</commandId>
+      <displayName>MECH: Action Effect</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;}</arguments>
+    </command>
+    <command index="70" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="71" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_ActionAnimation</commandId>
+      <displayName>ANIM: Action Animation</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;Mirror:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="72" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="73" code="657" indent="0">
+      <parameter index="0" type="string">Mirror Animation = false</parameter>
+    </command>
+    <command index="74" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation? = false</parameter>
+    </command>
+    <command index="75" code="250" indent="0">
+      <parameter index="0" type="object">{&quot;name&quot;:&quot;&lt;sound-effect&gt;&quot;,&quot;volume&quot;:90,&quot;pitch&quot;:130,&quot;pan&quot;:0}</parameter>
+    </command>
+    <command index="76" code="224" indent="0">
+      <parameter index="0" type="array">[255,255,255,153]</parameter>
+      <parameter index="1" type="number">5</parameter>
+      <parameter index="2" type="boolean">false</parameter>
+    </command>
+    <command index="77" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_WaitForAnimation</commandId>
+      <displayName>ANIM: Wait For Animation</displayName>
+      <arguments>{}</arguments>
+    </command>
+    <command index="78" code="118" indent="0">
+      <parameter index="0" type="string">Descend</parameter>
+    </command>
+    <command index="79" code="108" indent="0">
+      <parameter index="0" type="string">- User floats to ground</parameter>
+    </command>
+    <command index="80" code="408" indent="0">
+      <parameter index="0" type="string">- User performs evade motion</parameter>
+    </command>
+    <command index="81" code="408" indent="0">
+      <parameter index="0" type="string">- Wait for Descend to complete</parameter>
+    </command>
+    <command index="82" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_Float</commandId>
+      <displayName>MOVE: Float</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;Height:eval&quot;:&quot;0&quot;,&quot;Duration:eval&quot;:&quot;12&quot;,&quot;EasingType:str&quot;:&quot;OutQuad&quot;,&quot;WaitForFloat:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="83" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="84" code="657" indent="0">
+      <parameter index="0" type="string">Desired Height = 0</parameter>
+    </command>
+    <command index="85" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 12</parameter>
+    </command>
+    <command index="86" code="657" indent="0">
+      <parameter index="0" type="string">Float Easing = OutQuad</parameter>
+    </command>
+    <command index="87" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Float? = false</parameter>
+    </command>
+    <command index="88" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;evade&quot;,&quot;ShowWeapon:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="89" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="90" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = evade</parameter>
+    </command>
+    <command index="91" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = true</parameter>
+    </command>
+    <command index="92" code="230" indent="0">
+      <parameter index="0" type="number">12</parameter>
+    </command>
+    <command index="93" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;walk&quot;,&quot;ShowWeapon:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="94" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="95" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = walk</parameter>
+    </command>
+    <command index="96" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = true</parameter>
+    </command>
+    <command index="97" code="118" indent="0">
+      <parameter index="0" type="string">Finish</parameter>
+    </command>
+    <command index="98" code="108" indent="0">
+      <parameter index="0" type="string">- Turns off immortal, clears battle log, and moves everyone back to home space</parameter>
+    </command>
+    <command index="99" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_FinishAction</commandId>
+      <displayName>ACSET: Finish Action</displayName>
+      <arguments>{&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;WaitForNewLine:eval&quot;:&quot;true&quot;,&quot;WaitForEffect:eval&quot;:&quot;true&quot;,&quot;ClearBattleLog:eval&quot;:&quot;true&quot;,&quot;ActionEnd:eval&quot;:&quot;true&quot;,&quot;WaitForMovement:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="100" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: Off = true</parameter>
+    </command>
+    <command index="101" code="657" indent="0">
+      <parameter index="0" type="string">Wait For New Line = true</parameter>
+    </command>
+    <command index="102" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Effects = true</parameter>
+    </command>
+    <command index="103" code="657" indent="0">
+      <parameter index="0" type="string">Clear Battle Log = true</parameter>
+    </command>
+    <command index="104" code="657" indent="0">
+      <parameter index="0" type="string">Home Reset = true</parameter>
+    </command>
+    <command index="105" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = true</parameter>
+    </command>
+    <command index="106" code="0" indent="0">
+    </command>
+  </commands>
+</actionSequenceExample>

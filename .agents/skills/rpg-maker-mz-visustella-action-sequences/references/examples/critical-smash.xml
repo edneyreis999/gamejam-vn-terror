@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionSequenceExample illustrative="true" normative="false">
+  <metadata>
+    <title>Critical Smash</title>
+    <sourceKind>sanitized-current-common-event-fixture</sourceKind>
+    <structuralAudit>passed</structuralAudit>
+    <semanticAudit>command-order-and-payload-preserved</semanticAudit>
+    <runtimePlaytest>not-claimed</runtimePlaytest>
+  </metadata>
+  <dependencies>
+    <plugin>VisuMZ_1_BattleCore</plugin>
+  </dependencies>
+  <commands>
+    <command index="0" code="108" indent="0">
+      <parameter index="0" type="string">====================================NOTES================================================</parameter>
+    </command>
+    <command index="1" code="408" indent="0">
+      <parameter index="0" type="string">Uses user&apos;s crit rate and target&apos;s crit evade stats to determine if a critical hit occurs,</parameter>
+    </command>
+    <command index="2" code="408" indent="0">
+      <parameter index="0" type="string">then adds a debuff if a crit lands</parameter>
+    </command>
+    <command index="3" code="108" indent="0">
+      <parameter index="0" type="string">====================================DESCRIPTION==========================================</parameter>
+    </command>
+    <command index="4" code="408" indent="0">
+      <parameter index="0" type="string">- Setup: Attack setup, explanation text, and timer start</parameter>
+    </command>
+    <command index="5" code="408" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="6" code="408" indent="0">
+      <parameter index="0" type="string">then a random number from 1-100 is selected. A conditional checks if that number is equal </parameter>
+    </command>
+    <command index="7" code="408" indent="0">
+      <parameter index="0" type="string">to or less than the crit rate</parameter>
+    </command>
+    <command index="8" code="408" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="9" code="108" indent="0">
+      <parameter index="0" type="string">debuff is added to the target</parameter>
+    </command>
+    <command index="10" code="408" indent="0">
+      <parameter index="0" type="string">- Crit Failure: Else a regular attack occurs</parameter>
+    </command>
+    <command index="11" code="408" indent="0">
+      <parameter index="0" type="string">- Finish: Standard attack finish</parameter>
+    </command>
+    <command index="12" code="408" indent="0">
+      <parameter index="0" type="string">=========================================================================================</parameter>
+    </command>
+    <command index="13" code="118" indent="0">
+      <parameter index="0" type="string">Setup</parameter>
+    </command>
+    <command index="14" code="108" indent="0">
+      <parameter index="0" type="string">- Displays attack name</parameter>
+    </command>
+    <command index="15" code="408" indent="0">
+      <parameter index="0" type="string">- Makes targets immortal so they don&apos;t die in the middle of multiple hit attacks</parameter>
+    </command>
+    <command index="16" code="408" indent="0">
+      <parameter index="0" type="string">- No battle step or cast animation</parameter>
+    </command>
+    <command index="17" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_SetupAction</commandId>
+      <displayName>ACSET: Setup Action Set</displayName>
+      <arguments>{&quot;DisplayAction:eval&quot;:&quot;true&quot;,&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;ActionStart:eval&quot;:&quot;false&quot;,&quot;WaitForMovement:eval&quot;:&quot;false&quot;,&quot;CastAnimation:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="18" code="657" indent="0">
+      <parameter index="0" type="string">Display Action = true</parameter>
+    </command>
+    <command index="19" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: On = true</parameter>
+    </command>
+    <command index="20" code="657" indent="0">
+      <parameter index="0" type="string">Battle Step = false</parameter>
+    </command>
+    <command index="21" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = false</parameter>
+    </command>
+    <command index="22" code="657" indent="0">
+      <parameter index="0" type="string">Cast Animation = false</parameter>
+    </command>
+    <command index="23" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation = false</parameter>
+    </command>
+    <command index="24" code="118" indent="0">
+      <parameter index="0" type="string">Crit Check</parameter>
+    </command>
+    <command index="25" code="108" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="26" code="408" indent="0">
+      <parameter index="0" type="string">in order to make it an integer</parameter>
+    </command>
+    <command index="27" code="408" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="28" code="408" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="29" code="408" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="30" code="355" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="31" code="355" indent="0">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="32" code="111" indent="0">
+      <parameter index="0" type="number">12</parameter>
+      <parameter index="1" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="33" code="118" indent="1">
+      <parameter index="0" type="string">Crit Success</parameter>
+    </command>
+    <command index="34" code="108" indent="1">
+      <parameter index="0" type="string">&lt;project-javascript&gt;</parameter>
+    </command>
+    <command index="35" code="408" indent="1">
+      <parameter index="0" type="string">- +200% Crit rate on hit is added and multiplied by 1000</parameter>
+    </command>
+    <command index="36" code="408" indent="1">
+      <parameter index="0" type="string">- Accuracy is increased by 200%</parameter>
+    </command>
+    <command index="37" code="408" indent="1">
+      <parameter index="0" type="string">- Add two defense debuffs to target</parameter>
+    </command>
+    <command index="38" code="408" indent="1">
+      <parameter index="0" type="string">- Wait 12 Frames</parameter>
+    </command>
+    <command index="39" code="408" indent="1">
+      <parameter index="0" type="string">- User performs attack motion based on user&apos;s weapon (sword swing/thrust etc.)</parameter>
+    </command>
+    <command index="40" code="108" indent="1">
+      <parameter index="0" type="string">- Flash screen</parameter>
+    </command>
+    <command index="41" code="408" indent="1">
+      <parameter index="0" type="string">- Shake screen</parameter>
+    </command>
+    <command index="42" code="408" indent="1">
+      <parameter index="0" type="string">- Play animation on target based on skill&apos;s settings</parameter>
+    </command>
+    <command index="43" code="408" indent="1">
+      <parameter index="0" type="string">- Deal damage to targets based on skill&apos;s damage formula and apply any buffs or debuffs </parameter>
+    </command>
+    <command index="44" code="408" indent="1">
+      <parameter index="0" type="string">debuffs based on skill&apos;s effects</parameter>
+    </command>
+    <command index="45" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_Multipliers</commandId>
+      <displayName>MECH: Multipliers</displayName>
+      <arguments>{&quot;CriticalHit&quot;:&quot;&quot;,&quot;CriticalHitRate:eval&quot;:&quot;1000&quot;,&quot;CriticalHitFlat:eval&quot;:&quot;+200&quot;,&quot;CriticalDmg&quot;:&quot;&quot;,&quot;CriticalDmgRate:eval&quot;:&quot;1.00&quot;,&quot;CriticalDmgFlat:eval&quot;:&quot;+0.00&quot;,&quot;Damage&quot;:&quot;&quot;,&quot;DamageRate:eval&quot;:&quot;1.00&quot;,&quot;DamageFlat:eval&quot;:&quot;+0.00&quot;,&quot;HitRate&quot;:&quot;&quot;,&quot;HitRate:eval&quot;:&quot;1.00&quot;,&quot;HitFlat:eval&quot;:&quot;+200&quot;}</arguments>
+    </command>
+    <command index="46" code="657" indent="1">
+      <parameter index="0" type="string">Critical Hit% = </parameter>
+    </command>
+    <command index="47" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1000</parameter>
+    </command>
+    <command index="48" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +200</parameter>
+    </command>
+    <command index="49" code="657" indent="1">
+      <parameter index="0" type="string">Critical Damage = </parameter>
+    </command>
+    <command index="50" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1.00</parameter>
+    </command>
+    <command index="51" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +0.00</parameter>
+    </command>
+    <command index="52" code="657" indent="1">
+      <parameter index="0" type="string">Damage/Healing = </parameter>
+    </command>
+    <command index="53" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1.00</parameter>
+    </command>
+    <command index="54" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +0.00</parameter>
+    </command>
+    <command index="55" code="657" indent="1">
+      <parameter index="0" type="string">Hit Rate = </parameter>
+    </command>
+    <command index="56" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1.00</parameter>
+    </command>
+    <command index="57" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +200</parameter>
+    </command>
+    <command index="58" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_AddBuffDebuff</commandId>
+      <displayName>MECH: Add Buff/Debuff</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;current target\&quot;]&quot;,&quot;Buffs:arraystr&quot;:&quot;[]&quot;,&quot;Debuffs:arraystr&quot;:&quot;[\&quot;DEF\&quot;,\&quot;DEF\&quot;]&quot;,&quot;Turns:eval&quot;:&quot;5&quot;}</arguments>
+    </command>
+    <command index="59" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;current target&quot;]</parameter>
+    </command>
+    <command index="60" code="657" indent="1">
+      <parameter index="0" type="string">Buff Parameters = []</parameter>
+    </command>
+    <command index="61" code="657" indent="1">
+      <parameter index="0" type="string">Debuff Parameters = [&quot;DEF&quot;,&quot;DEF&quot;]</parameter>
+    </command>
+    <command index="62" code="657" indent="1">
+      <parameter index="0" type="string">Turns = 5</parameter>
+    </command>
+    <command index="63" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;attack&quot;,&quot;ShowWeapon:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="64" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="65" code="657" indent="1">
+      <parameter index="0" type="string">Motion Type = attack</parameter>
+    </command>
+    <command index="66" code="657" indent="1">
+      <parameter index="0" type="string">Show Weapon? = true</parameter>
+    </command>
+    <command index="67" code="230" indent="1">
+      <parameter index="0" type="number">12</parameter>
+    </command>
+    <command index="68" code="224" indent="1">
+      <parameter index="0" type="array">[255,102,85,170]</parameter>
+      <parameter index="1" type="number">20</parameter>
+      <parameter index="2" type="boolean">false</parameter>
+    </command>
+    <command index="69" code="225" indent="1">
+      <parameter index="0" type="number">5</parameter>
+      <parameter index="1" type="number">5</parameter>
+      <parameter index="2" type="number">20</parameter>
+      <parameter index="3" type="boolean">false</parameter>
+    </command>
+    <command index="70" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_ActionAnimation</commandId>
+      <displayName>ANIM: Action Animation</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;Mirror:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="71" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="72" code="657" indent="1">
+      <parameter index="0" type="string">Mirror Animation = false</parameter>
+    </command>
+    <command index="73" code="657" indent="1">
+      <parameter index="0" type="string">Wait For Animation? = false</parameter>
+    </command>
+    <command index="74" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_ActionEffect</commandId>
+      <displayName>MECH: Action Effect</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;current target\&quot;]&quot;}</arguments>
+    </command>
+    <command index="75" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;current target&quot;]</parameter>
+    </command>
+    <command index="76" code="0" indent="1">
+    </command>
+    <command index="77" code="411" indent="0">
+    </command>
+    <command index="78" code="118" indent="1">
+      <parameter index="0" type="string">Crit Failure</parameter>
+    </command>
+    <command index="79" code="108" indent="1">
+      <parameter index="0" type="string">- Crit rate goes down by 200%</parameter>
+    </command>
+    <command index="80" code="408" indent="1">
+      <parameter index="0" type="string">- User performs attack motion based on user&apos;s weapon (sword swing/thrust etc.)</parameter>
+    </command>
+    <command index="81" code="408" indent="1">
+      <parameter index="0" type="string">- Wait 12 frames</parameter>
+    </command>
+    <command index="82" code="408" indent="1">
+      <parameter index="0" type="string">- Play animation on target based on skill&apos;s settings</parameter>
+    </command>
+    <command index="83" code="408" indent="1">
+      <parameter index="0" type="string">- Deal damage to targets based on skill&apos;s damage formula and apply any buffs or debuffs </parameter>
+    </command>
+    <command index="84" code="408" indent="1">
+      <parameter index="0" type="string">debuffs based on skill&apos;s effects</parameter>
+    </command>
+    <command index="85" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_Multipliers</commandId>
+      <displayName>MECH: Multipliers</displayName>
+      <arguments>{&quot;CriticalHit&quot;:&quot;&quot;,&quot;CriticalHitRate:eval&quot;:&quot;0&quot;,&quot;CriticalHitFlat:eval&quot;:&quot;-200&quot;,&quot;CriticalDmg&quot;:&quot;&quot;,&quot;CriticalDmgRate:eval&quot;:&quot;1.00&quot;,&quot;CriticalDmgFlat:eval&quot;:&quot;+0.00&quot;,&quot;Damage&quot;:&quot;&quot;,&quot;DamageRate:eval&quot;:&quot;1.00&quot;,&quot;DamageFlat:eval&quot;:&quot;+0.00&quot;,&quot;HitRate&quot;:&quot;&quot;,&quot;HitRate:eval&quot;:&quot;1.00&quot;,&quot;HitFlat:eval&quot;:&quot;+0.00&quot;}</arguments>
+    </command>
+    <command index="86" code="657" indent="1">
+      <parameter index="0" type="string">Critical Hit% = </parameter>
+    </command>
+    <command index="87" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 0</parameter>
+    </command>
+    <command index="88" code="657" indent="1">
+      <parameter index="0" type="string">Flat = -200</parameter>
+    </command>
+    <command index="89" code="657" indent="1">
+      <parameter index="0" type="string">Critical Damage = </parameter>
+    </command>
+    <command index="90" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1.00</parameter>
+    </command>
+    <command index="91" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +0.00</parameter>
+    </command>
+    <command index="92" code="657" indent="1">
+      <parameter index="0" type="string">Damage/Healing = </parameter>
+    </command>
+    <command index="93" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1.00</parameter>
+    </command>
+    <command index="94" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +0.00</parameter>
+    </command>
+    <command index="95" code="657" indent="1">
+      <parameter index="0" type="string">Hit Rate = </parameter>
+    </command>
+    <command index="96" code="657" indent="1">
+      <parameter index="0" type="string">Rate = 1.00</parameter>
+    </command>
+    <command index="97" code="657" indent="1">
+      <parameter index="0" type="string">Flat = +0.00</parameter>
+    </command>
+    <command index="98" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;attack&quot;,&quot;ShowWeapon:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="99" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="100" code="657" indent="1">
+      <parameter index="0" type="string">Motion Type = attack</parameter>
+    </command>
+    <command index="101" code="657" indent="1">
+      <parameter index="0" type="string">Show Weapon? = true</parameter>
+    </command>
+    <command index="102" code="230" indent="1">
+      <parameter index="0" type="number">12</parameter>
+    </command>
+    <command index="103" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_ActionAnimation</commandId>
+      <displayName>ANIM: Action Animation</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;Mirror:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="104" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="105" code="657" indent="1">
+      <parameter index="0" type="string">Mirror Animation = false</parameter>
+    </command>
+    <command index="106" code="657" indent="1">
+      <parameter index="0" type="string">Wait For Animation? = false</parameter>
+    </command>
+    <command index="107" code="357" indent="1">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_ActionEffect</commandId>
+      <displayName>MECH: Action Effect</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;current target\&quot;]&quot;}</arguments>
+    </command>
+    <command index="108" code="657" indent="1">
+      <parameter index="0" type="string">Targets = [&quot;current target&quot;]</parameter>
+    </command>
+    <command index="109" code="0" indent="1">
+    </command>
+    <command index="110" code="412" indent="0">
+    </command>
+    <command index="111" code="118" indent="0">
+      <parameter index="0" type="string">Finish</parameter>
+    </command>
+    <command index="112" code="108" indent="0">
+      <parameter index="0" type="string">- Turns off immortal, clears battle log, and moves everyone back to home space</parameter>
+    </command>
+    <command index="113" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_FinishAction</commandId>
+      <displayName>ACSET: Finish Action</displayName>
+      <arguments>{&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;WaitForNewLine:eval&quot;:&quot;true&quot;,&quot;WaitForEffect:eval&quot;:&quot;true&quot;,&quot;ClearBattleLog:eval&quot;:&quot;true&quot;,&quot;ActionEnd:eval&quot;:&quot;true&quot;,&quot;WaitForMovement:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="114" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: Off = true</parameter>
+    </command>
+    <command index="115" code="657" indent="0">
+      <parameter index="0" type="string">Wait For New Line = true</parameter>
+    </command>
+    <command index="116" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Effects = true</parameter>
+    </command>
+    <command index="117" code="657" indent="0">
+      <parameter index="0" type="string">Clear Battle Log = true</parameter>
+    </command>
+    <command index="118" code="657" indent="0">
+      <parameter index="0" type="string">Home Reset = true</parameter>
+    </command>
+    <command index="119" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = true</parameter>
+    </command>
+    <command index="120" code="230" indent="0">
+      <parameter index="0" type="number">12</parameter>
+    </command>
+    <command index="121" code="0" indent="0">
+    </command>
+  </commands>
+</actionSequenceExample>

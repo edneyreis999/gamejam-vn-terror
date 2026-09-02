@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionSequenceExample illustrative="true" normative="false">
+  <metadata>
+    <title>Tackle</title>
+    <sourceKind>sanitized-current-common-event-fixture</sourceKind>
+    <structuralAudit>passed</structuralAudit>
+    <semanticAudit>command-order-and-payload-preserved</semanticAudit>
+    <runtimePlaytest>not-claimed</runtimePlaytest>
+  </metadata>
+  <dependencies>
+    <plugin>VisuMZ_1_BattleCore</plugin>
+  </dependencies>
+  <commands>
+    <command index="0" code="108" indent="0">
+      <parameter index="0" type="string">====================================DESCRIPTION==========================================</parameter>
+    </command>
+    <command index="1" code="408" indent="0">
+      <parameter index="0" type="string">- Setup: Standard attack setup</parameter>
+    </command>
+    <command index="2" code="408" indent="0">
+      <parameter index="0" type="string">- Jump to Target: User jumps to front base of enemy</parameter>
+    </command>
+    <command index="3" code="408" indent="0">
+      <parameter index="0" type="string">- Back Up: User backs up</parameter>
+    </command>
+    <command index="4" code="408" indent="0">
+      <parameter index="0" type="string">- Tackle: User dashes forward</parameter>
+    </command>
+    <command index="5" code="408" indent="0">
+      <parameter index="0" type="string">- Action Effect: Damage, (de)buffs and skill animation play on target</parameter>
+    </command>
+    <command index="6" code="108" indent="0">
+      <parameter index="0" type="string">- Knockback: Target is knocked backwards</parameter>
+    </command>
+    <command index="7" code="408" indent="0">
+      <parameter index="0" type="string">- Finish: Standard attack finish</parameter>
+    </command>
+    <command index="8" code="408" indent="0">
+      <parameter index="0" type="string">=========================================================================================</parameter>
+    </command>
+    <command index="9" code="118" indent="0">
+      <parameter index="0" type="string">Setup</parameter>
+    </command>
+    <command index="10" code="108" indent="0">
+      <parameter index="0" type="string">- Displays attack name</parameter>
+    </command>
+    <command index="11" code="408" indent="0">
+      <parameter index="0" type="string">- Makes targets immortal so they don&apos;t die in the middle of multiple hit attacks</parameter>
+    </command>
+    <command index="12" code="408" indent="0">
+      <parameter index="0" type="string">- No battle step or cast animation</parameter>
+    </command>
+    <command index="13" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_SetupAction</commandId>
+      <displayName>ACSET: Setup Action Set</displayName>
+      <arguments>{&quot;DisplayAction:eval&quot;:&quot;true&quot;,&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;ActionStart:eval&quot;:&quot;false&quot;,&quot;WaitForMovement:eval&quot;:&quot;false&quot;,&quot;CastAnimation:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="14" code="657" indent="0">
+      <parameter index="0" type="string">Display Action = true</parameter>
+    </command>
+    <command index="15" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: On = true</parameter>
+    </command>
+    <command index="16" code="657" indent="0">
+      <parameter index="0" type="string">Battle Step = false</parameter>
+    </command>
+    <command index="17" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = false</parameter>
+    </command>
+    <command index="18" code="657" indent="0">
+      <parameter index="0" type="string">Cast Animation = false</parameter>
+    </command>
+    <command index="19" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation = false</parameter>
+    </command>
+    <command index="20" code="118" indent="0">
+      <parameter index="0" type="string">Jump to Target</parameter>
+    </command>
+    <command index="21" code="108" indent="0">
+      <parameter index="0" type="string">- User moves to the front base of the enemy + 24 px</parameter>
+    </command>
+    <command index="22" code="408" indent="0">
+      <parameter index="0" type="string">- User jumps 100 px</parameter>
+    </command>
+    <command index="23" code="408" indent="0">
+      <parameter index="0" type="string">- Wait until Tackle Setup is complete + 6 frames</parameter>
+    </command>
+    <command index="24" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_MoveToTarget</commandId>
+      <displayName>MOVE: Move To Target(s)</displayName>
+      <arguments>{&quot;Targets1:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;Targets2:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;TargetLocation:str&quot;:&quot;front base&quot;,&quot;MeleeDistance:eval&quot;:&quot;0&quot;,&quot;OffsetAdjust:str&quot;:&quot;horz&quot;,&quot;OffsetX:eval&quot;:&quot;24&quot;,&quot;OffsetY:eval&quot;:&quot;0&quot;,&quot;Duration:eval&quot;:&quot;12&quot;,&quot;FaceDirection:eval&quot;:&quot;true&quot;,&quot;EasingType:str&quot;:&quot;Linear&quot;,&quot;MotionType:str&quot;:&quot;walk&quot;,&quot;WaitForMovement:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="25" code="657" indent="0">
+      <parameter index="0" type="string">Targets (Moving) = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="26" code="657" indent="0">
+      <parameter index="0" type="string">Targets (Destination) = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="27" code="657" indent="0">
+      <parameter index="0" type="string">Target Location = front base</parameter>
+    </command>
+    <command index="28" code="657" indent="0">
+      <parameter index="0" type="string">Melee Distance = 0</parameter>
+    </command>
+    <command index="29" code="657" indent="0">
+      <parameter index="0" type="string">Offset Adjustment = horz</parameter>
+    </command>
+    <command index="30" code="657" indent="0">
+      <parameter index="0" type="string">Offset: X = 24</parameter>
+    </command>
+    <command index="31" code="657" indent="0">
+      <parameter index="0" type="string">Offset: Y = 0</parameter>
+    </command>
+    <command index="32" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 12</parameter>
+    </command>
+    <command index="33" code="657" indent="0">
+      <parameter index="0" type="string">Face Destination? = true</parameter>
+    </command>
+    <command index="34" code="657" indent="0">
+      <parameter index="0" type="string">Movement Easing = Linear</parameter>
+    </command>
+    <command index="35" code="657" indent="0">
+      <parameter index="0" type="string">Movement Motion = walk</parameter>
+    </command>
+    <command index="36" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement? = false</parameter>
+    </command>
+    <command index="37" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_Jump</commandId>
+      <displayName>MOVE: Jump</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;Height:eval&quot;:&quot;100&quot;,&quot;Duration:eval&quot;:&quot;12&quot;,&quot;WaitForJump:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="38" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="39" code="657" indent="0">
+      <parameter index="0" type="string">Desired Height = 100</parameter>
+    </command>
+    <command index="40" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 12</parameter>
+    </command>
+    <command index="41" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Jump? = false</parameter>
+    </command>
+    <command index="42" code="230" indent="0">
+      <parameter index="0" type="number">18</parameter>
+    </command>
+    <command index="43" code="118" indent="0">
+      <parameter index="0" type="string">Back Up</parameter>
+    </command>
+    <command index="44" code="108" indent="0">
+      <parameter index="0" type="string">- User backs up 96 px</parameter>
+    </command>
+    <command index="45" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_MoveBy</commandId>
+      <displayName>MOVE: Move Distance</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;DistanceAdjust:str&quot;:&quot;horz&quot;,&quot;DistanceX:eval&quot;:&quot;-96&quot;,&quot;DistanceY:eval&quot;:&quot;0&quot;,&quot;Duration:eval&quot;:&quot;6&quot;,&quot;FaceDirection:eval&quot;:&quot;false&quot;,&quot;EasingType:str&quot;:&quot;Linear&quot;,&quot;MotionType:str&quot;:&quot;walk&quot;,&quot;WaitForMovement:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="46" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="47" code="657" indent="0">
+      <parameter index="0" type="string">Distance Adjustment = horz</parameter>
+    </command>
+    <command index="48" code="657" indent="0">
+      <parameter index="0" type="string">Distance: X = -96</parameter>
+    </command>
+    <command index="49" code="657" indent="0">
+      <parameter index="0" type="string">Distance: Y = 0</parameter>
+    </command>
+    <command index="50" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 6</parameter>
+    </command>
+    <command index="51" code="657" indent="0">
+      <parameter index="0" type="string">Face Destination? = false</parameter>
+    </command>
+    <command index="52" code="657" indent="0">
+      <parameter index="0" type="string">Movement Easing = Linear</parameter>
+    </command>
+    <command index="53" code="657" indent="0">
+      <parameter index="0" type="string">Movement Motion = walk</parameter>
+    </command>
+    <command index="54" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement? = true</parameter>
+    </command>
+    <command index="55" code="118" indent="0">
+      <parameter index="0" type="string">Tackle</parameter>
+    </command>
+    <command index="56" code="108" indent="0">
+      <parameter index="0" type="string">- User moves into enemy&apos;s center base</parameter>
+    </command>
+    <command index="57" code="408" indent="0">
+      <parameter index="0" type="string">- User perform attack motion based on user&apos;s weapon (sword swing/thrust etc.)</parameter>
+    </command>
+    <command index="58" code="408" indent="0">
+      <parameter index="0" type="string">- Wait for Tackle to complete + 1 frame</parameter>
+    </command>
+    <command index="59" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_MoveToTarget</commandId>
+      <displayName>MOVE: Move To Target(s)</displayName>
+      <arguments>{&quot;Targets1:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;Targets2:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;TargetLocation:str&quot;:&quot;middle base&quot;,&quot;MeleeDistance:eval&quot;:&quot;0&quot;,&quot;OffsetAdjust:str&quot;:&quot;horz&quot;,&quot;OffsetX:eval&quot;:&quot;0&quot;,&quot;OffsetY:eval&quot;:&quot;0&quot;,&quot;Duration:eval&quot;:&quot;6&quot;,&quot;FaceDirection:eval&quot;:&quot;false&quot;,&quot;EasingType:str&quot;:&quot;Linear&quot;,&quot;MotionType:str&quot;:&quot;attack&quot;,&quot;WaitForMovement:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="60" code="657" indent="0">
+      <parameter index="0" type="string">Targets (Moving) = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="61" code="657" indent="0">
+      <parameter index="0" type="string">Targets (Destination) = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="62" code="657" indent="0">
+      <parameter index="0" type="string">Target Location = middle base</parameter>
+    </command>
+    <command index="63" code="657" indent="0">
+      <parameter index="0" type="string">Melee Distance = 0</parameter>
+    </command>
+    <command index="64" code="657" indent="0">
+      <parameter index="0" type="string">Offset Adjustment = horz</parameter>
+    </command>
+    <command index="65" code="657" indent="0">
+      <parameter index="0" type="string">Offset: X = 0</parameter>
+    </command>
+    <command index="66" code="657" indent="0">
+      <parameter index="0" type="string">Offset: Y = 0</parameter>
+    </command>
+    <command index="67" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 6</parameter>
+    </command>
+    <command index="68" code="657" indent="0">
+      <parameter index="0" type="string">Face Destination? = false</parameter>
+    </command>
+    <command index="69" code="657" indent="0">
+      <parameter index="0" type="string">Movement Easing = Linear</parameter>
+    </command>
+    <command index="70" code="657" indent="0">
+      <parameter index="0" type="string">Movement Motion = attack</parameter>
+    </command>
+    <command index="71" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement? = false</parameter>
+    </command>
+    <command index="72" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;attack&quot;,&quot;ShowWeapon:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="73" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="74" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = attack</parameter>
+    </command>
+    <command index="75" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = true</parameter>
+    </command>
+    <command index="76" code="230" indent="0">
+      <parameter index="0" type="number">7</parameter>
+    </command>
+    <command index="77" code="118" indent="0">
+      <parameter index="0" type="string">Action Effect</parameter>
+    </command>
+    <command index="78" code="108" indent="0">
+      <parameter index="0" type="string">- Deal damage to target based on skill&apos;s damage formula and apply any </parameter>
+    </command>
+    <command index="79" code="408" indent="0">
+      <parameter index="0" type="string">buffs or debuffs based on skill&apos;s effects</parameter>
+    </command>
+    <command index="80" code="408" indent="0">
+      <parameter index="0" type="string">- Play animation on target based on skill&apos;s settings</parameter>
+    </command>
+    <command index="81" code="408" indent="0">
+      <parameter index="0" type="string">- Wait 6 frames</parameter>
+    </command>
+    <command index="82" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_ActionAnimation</commandId>
+      <displayName>ANIM: Action Animation</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;Mirror:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="83" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="84" code="657" indent="0">
+      <parameter index="0" type="string">Mirror Animation = false</parameter>
+    </command>
+    <command index="85" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation? = false</parameter>
+    </command>
+    <command index="86" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_ActionEffect</commandId>
+      <displayName>MECH: Action Effect</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;}</arguments>
+    </command>
+    <command index="87" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="88" code="230" indent="0">
+      <parameter index="0" type="number">6</parameter>
+    </command>
+    <command index="89" code="118" indent="0">
+      <parameter index="0" type="string">Knockback</parameter>
+    </command>
+    <command index="90" code="108" indent="0">
+      <parameter index="0" type="string">- Target moves backwards 96 px</parameter>
+    </command>
+    <command index="91" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Movement_MoveBy</commandId>
+      <displayName>MOVE: Move Distance</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;current target\&quot;]&quot;,&quot;DistanceAdjust:str&quot;:&quot;horz&quot;,&quot;DistanceX:eval&quot;:&quot;-96&quot;,&quot;DistanceY:eval&quot;:&quot;0&quot;,&quot;Duration:eval&quot;:&quot;3&quot;,&quot;FaceDirection:eval&quot;:&quot;false&quot;,&quot;EasingType:str&quot;:&quot;Linear&quot;,&quot;MotionType:str&quot;:&quot;walk&quot;,&quot;WaitForMovement:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="92" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;current target&quot;]</parameter>
+    </command>
+    <command index="93" code="657" indent="0">
+      <parameter index="0" type="string">Distance Adjustment = horz</parameter>
+    </command>
+    <command index="94" code="657" indent="0">
+      <parameter index="0" type="string">Distance: X = -96</parameter>
+    </command>
+    <command index="95" code="657" indent="0">
+      <parameter index="0" type="string">Distance: Y = 0</parameter>
+    </command>
+    <command index="96" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 3</parameter>
+    </command>
+    <command index="97" code="657" indent="0">
+      <parameter index="0" type="string">Face Destination? = false</parameter>
+    </command>
+    <command index="98" code="657" indent="0">
+      <parameter index="0" type="string">Movement Easing = Linear</parameter>
+    </command>
+    <command index="99" code="657" indent="0">
+      <parameter index="0" type="string">Movement Motion = walk</parameter>
+    </command>
+    <command index="100" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement? = true</parameter>
+    </command>
+    <command index="101" code="118" indent="0">
+      <parameter index="0" type="string">Finish</parameter>
+    </command>
+    <command index="102" code="108" indent="0">
+      <parameter index="0" type="string">- Turns off immortal, clears battle log, and moves everyone back to home space</parameter>
+    </command>
+    <command index="103" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_FinishAction</commandId>
+      <displayName>ACSET: Finish Action</displayName>
+      <arguments>{&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;WaitForNewLine:eval&quot;:&quot;true&quot;,&quot;WaitForEffect:eval&quot;:&quot;true&quot;,&quot;ClearBattleLog:eval&quot;:&quot;true&quot;,&quot;ActionEnd:eval&quot;:&quot;true&quot;,&quot;WaitForMovement:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="104" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: Off = true</parameter>
+    </command>
+    <command index="105" code="657" indent="0">
+      <parameter index="0" type="string">Wait For New Line = true</parameter>
+    </command>
+    <command index="106" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Effects = true</parameter>
+    </command>
+    <command index="107" code="657" indent="0">
+      <parameter index="0" type="string">Clear Battle Log = true</parameter>
+    </command>
+    <command index="108" code="657" indent="0">
+      <parameter index="0" type="string">Home Reset = true</parameter>
+    </command>
+    <command index="109" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = true</parameter>
+    </command>
+    <command index="110" code="0" indent="0">
+    </command>
+  </commands>
+</actionSequenceExample>

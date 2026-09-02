@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionSequenceExample illustrative="true" normative="false">
+  <metadata>
+    <title>Magic Projectile</title>
+    <sourceKind>sanitized-current-common-event-fixture</sourceKind>
+    <structuralAudit>passed</structuralAudit>
+    <semanticAudit>command-order-and-payload-preserved</semanticAudit>
+    <runtimePlaytest>not-claimed</runtimePlaytest>
+  </metadata>
+  <dependencies>
+    <plugin>VisuMZ_1_BattleCore</plugin>
+    <plugin>VisuMZ_3_ActSeqProjectiles</plugin>
+  </dependencies>
+  <commands>
+    <command index="0" code="108" indent="0">
+      <parameter index="0" type="string">====================================Notes==========================================</parameter>
+    </command>
+    <command index="1" code="408" indent="0">
+      <parameter index="0" type="string">Requires Visustella&apos;s Action Sequence Projectiles plugin</parameter>
+    </command>
+    <command index="2" code="408" indent="0">
+      <parameter index="0" type="string">&lt;external-reference-removed&gt;</parameter>
+    </command>
+    <command index="3" code="408" indent="0">
+      <parameter index="0" type="string"></parameter>
+    </command>
+    <command index="4" code="408" indent="0">
+      <parameter index="0" type="string">For best results, try other animations:</parameter>
+    </command>
+    <command index="5" code="408" indent="0">
+      <parameter index="0" type="string">e.g. &lt;external-reference-removed&gt;</parameter>
+    </command>
+    <command index="6" code="108" indent="0">
+      <parameter index="0" type="string">====================================DESCRIPTION==========================================</parameter>
+    </command>
+    <command index="7" code="408" indent="0">
+      <parameter index="0" type="string">- Setup: Standard attack setup</parameter>
+    </command>
+    <command index="8" code="408" indent="0">
+      <parameter index="0" type="string">- Cast: User performs Cast motion</parameter>
+    </command>
+    <command index="9" code="408" indent="0">
+      <parameter index="0" type="string">- Fire Projectile: Animation travels from user to target</parameter>
+    </command>
+    <command index="10" code="408" indent="0">
+      <parameter index="0" type="string">- Action Effect (Flash): Apply damage, (de)buffs and play skill animation play on target</parameter>
+    </command>
+    <command index="11" code="408" indent="0">
+      <parameter index="0" type="string">- Finish: Standard attack finish</parameter>
+    </command>
+    <command index="12" code="108" indent="0">
+      <parameter index="0" type="string">=========================================================================================</parameter>
+    </command>
+    <command index="13" code="118" indent="0">
+      <parameter index="0" type="string">Setup</parameter>
+    </command>
+    <command index="14" code="108" indent="0">
+      <parameter index="0" type="string">- Displays attack name</parameter>
+    </command>
+    <command index="15" code="408" indent="0">
+      <parameter index="0" type="string">- Makes targets immortal so they don&apos;t die in the middle of multiple hit attacks</parameter>
+    </command>
+    <command index="16" code="408" indent="0">
+      <parameter index="0" type="string">- No battle step or cast animation</parameter>
+    </command>
+    <command index="17" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_SetupAction</commandId>
+      <displayName>ACSET: Setup Action Set</displayName>
+      <arguments>{&quot;DisplayAction:eval&quot;:&quot;true&quot;,&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;ActionStart:eval&quot;:&quot;false&quot;,&quot;WaitForMovement:eval&quot;:&quot;false&quot;,&quot;CastAnimation:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="18" code="657" indent="0">
+      <parameter index="0" type="string">Display Action = true</parameter>
+    </command>
+    <command index="19" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: On = true</parameter>
+    </command>
+    <command index="20" code="657" indent="0">
+      <parameter index="0" type="string">Battle Step = false</parameter>
+    </command>
+    <command index="21" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = false</parameter>
+    </command>
+    <command index="22" code="657" indent="0">
+      <parameter index="0" type="string">Cast Animation = false</parameter>
+    </command>
+    <command index="23" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation = false</parameter>
+    </command>
+    <command index="24" code="230" indent="0">
+      <parameter index="0" type="number">5</parameter>
+    </command>
+    <command index="25" code="118" indent="0">
+      <parameter index="0" type="string">Cast</parameter>
+    </command>
+    <command index="26" code="108" indent="0">
+      <parameter index="0" type="string">- User performs Spell motion</parameter>
+    </command>
+    <command index="27" code="408" indent="0">
+      <parameter index="0" type="string">- Wait until Cast is complete minus 1 frame</parameter>
+    </command>
+    <command index="28" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Motion_MotionType</commandId>
+      <displayName>MOTION: Motion Type</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;user\&quot;]&quot;,&quot;MotionType:str&quot;:&quot;spell&quot;,&quot;ShowWeapon:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="29" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;user&quot;]</parameter>
+    </command>
+    <command index="30" code="657" indent="0">
+      <parameter index="0" type="string">Motion Type = spell</parameter>
+    </command>
+    <command index="31" code="657" indent="0">
+      <parameter index="0" type="string">Show Weapon? = false</parameter>
+    </command>
+    <command index="32" code="230" indent="0">
+      <parameter index="0" type="number">11</parameter>
+    </command>
+    <command index="33" code="118" indent="0">
+      <parameter index="0" type="string">Fire Projectile</parameter>
+    </command>
+    <command index="34" code="108" indent="0">
+      <parameter index="0" type="string">- Animation &lt;animation-id&gt; travels from user to target</parameter>
+    </command>
+    <command index="35" code="408" indent="0">
+      <parameter index="0" type="string">- Wait 18 frames</parameter>
+    </command>
+    <command index="36" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Projectile_Animation</commandId>
+      <displayName>PROJECTILE: Animation</displayName>
+      <arguments>{&quot;Coordinates&quot;:&quot;&quot;,&quot;Start:struct&quot;:&quot;{\&quot;Type:str\&quot;:\&quot;target\&quot;,\&quot;Targets:arraystr\&quot;:\&quot;[\\\&quot;user\\\&quot;]\&quot;,\&quot;TargetCenter:eval\&quot;:\&quot;false\&quot;,\&quot;PointX:eval\&quot;:\&quot;Graphics.width / 2\&quot;,\&quot;PointY:eval\&quot;:\&quot;Graphics.height / 2\&quot;,\&quot;OffsetX:eval\&quot;:\&quot;-110\&quot;,\&quot;OffsetY:eval\&quot;:\&quot;+20\&quot;}&quot;,&quot;Goal:struct&quot;:&quot;{\&quot;Type:str\&quot;:\&quot;target\&quot;,\&quot;Targets:arraystr\&quot;:\&quot;[\\\&quot;all targets\\\&quot;]\&quot;,\&quot;TargetCenter:eval\&quot;:\&quot;false\&quot;,\&quot;PointX:eval\&quot;:\&quot;Graphics.width / 2\&quot;,\&quot;PointY:eval\&quot;:\&quot;Graphics.height / 2\&quot;,\&quot;OffsetX:eval\&quot;:\&quot;+0\&quot;,\&quot;OffsetY:eval\&quot;:\&quot;+0\&quot;}&quot;,&quot;Settings&quot;:&quot;&quot;,&quot;AnimationID:num&quot;:&quot;&lt;animationid-num&gt;&quot;,&quot;Duration:eval&quot;:&quot;20&quot;,&quot;WaitForProjectile:eval&quot;:&quot;false&quot;,&quot;Extra:struct&quot;:&quot;{\&quot;AutoAngle:eval\&quot;:\&quot;true\&quot;,\&quot;AngleOffset:eval\&quot;:\&quot;-45\&quot;,\&quot;Arc:eval\&quot;:\&quot;0\&quot;,\&quot;EasingType:str\&quot;:\&quot;InSine\&quot;,\&quot;Spin:eval\&quot;:\&quot;+0.0\&quot;}&quot;}</arguments>
+    </command>
+    <command index="37" code="657" indent="0">
+      <parameter index="0" type="string">Coordinates = </parameter>
+    </command>
+    <command index="38" code="657" indent="0">
+      <parameter index="0" type="string">Start Location = {&quot;Type:str&quot;:&quot;target&quot;,&quot;Targets:arraystr&quot;:&quot;[…</parameter>
+    </command>
+    <command index="39" code="657" indent="0">
+      <parameter index="0" type="string">Goal Location = {&quot;Type:str&quot;:&quot;target&quot;,&quot;Targets:arraystr&quot;:&quot;[\…</parameter>
+    </command>
+    <command index="40" code="657" indent="0">
+      <parameter index="0" type="string">Settings = </parameter>
+    </command>
+    <command index="41" code="657" indent="0">
+      <parameter index="0" type="string">Animation &lt;animation-id&gt;</parameter>
+    </command>
+    <command index="42" code="657" indent="0">
+      <parameter index="0" type="string">Duration = 20</parameter>
+    </command>
+    <command index="43" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Projectile? = false</parameter>
+    </command>
+    <command index="44" code="657" indent="0">
+      <parameter index="0" type="string">Extra Settings = {&quot;AutoAngle:eval&quot;:&quot;true&quot;,&quot;AngleOffset:eval…</parameter>
+    </command>
+    <command index="45" code="230" indent="0">
+      <parameter index="0" type="number">18</parameter>
+    </command>
+    <command index="46" code="118" indent="0">
+      <parameter index="0" type="string">Action Effect</parameter>
+    </command>
+    <command index="47" code="108" indent="0">
+      <parameter index="0" type="string">- Deal damage to targets based on skill&apos;s damage formula and apply any buffs or debuffs </parameter>
+    </command>
+    <command index="48" code="408" indent="0">
+      <parameter index="0" type="string">based on skill&apos;s effects</parameter>
+    </command>
+    <command index="49" code="408" indent="0">
+      <parameter index="0" type="string">- Play animation on targets based on skill&apos;s settings</parameter>
+    </command>
+    <command index="50" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Mechanics_ActionEffect</commandId>
+      <displayName>MECH: Action Effect</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;}</arguments>
+    </command>
+    <command index="51" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="52" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Animation_ActionAnimation</commandId>
+      <displayName>ANIM: Action Animation</displayName>
+      <arguments>{&quot;Targets:arraystr&quot;:&quot;[\&quot;all targets\&quot;]&quot;,&quot;Mirror:eval&quot;:&quot;false&quot;,&quot;WaitForAnimation:eval&quot;:&quot;false&quot;}</arguments>
+    </command>
+    <command index="53" code="657" indent="0">
+      <parameter index="0" type="string">Targets = [&quot;all targets&quot;]</parameter>
+    </command>
+    <command index="54" code="657" indent="0">
+      <parameter index="0" type="string">Mirror Animation = false</parameter>
+    </command>
+    <command index="55" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Animation? = false</parameter>
+    </command>
+    <command index="56" code="118" indent="0">
+      <parameter index="0" type="string">Finish</parameter>
+    </command>
+    <command index="57" code="108" indent="0">
+      <parameter index="0" type="string">- Turns off immortal, clears battle log, and moves everyone back to home space</parameter>
+    </command>
+    <command index="58" code="357" indent="0">
+      <plugin>VisuMZ_1_BattleCore</plugin>
+      <commandId>ActSeq_Set_FinishAction</commandId>
+      <displayName>ACSET: Finish Action</displayName>
+      <arguments>{&quot;ApplyImmortal:eval&quot;:&quot;true&quot;,&quot;WaitForNewLine:eval&quot;:&quot;true&quot;,&quot;WaitForEffect:eval&quot;:&quot;true&quot;,&quot;ClearBattleLog:eval&quot;:&quot;true&quot;,&quot;ActionEnd:eval&quot;:&quot;true&quot;,&quot;WaitForMovement:eval&quot;:&quot;true&quot;}</arguments>
+    </command>
+    <command index="59" code="657" indent="0">
+      <parameter index="0" type="string">Immortal: Off = true</parameter>
+    </command>
+    <command index="60" code="657" indent="0">
+      <parameter index="0" type="string">Wait For New Line = true</parameter>
+    </command>
+    <command index="61" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Effects = true</parameter>
+    </command>
+    <command index="62" code="657" indent="0">
+      <parameter index="0" type="string">Clear Battle Log = true</parameter>
+    </command>
+    <command index="63" code="657" indent="0">
+      <parameter index="0" type="string">Home Reset = true</parameter>
+    </command>
+    <command index="64" code="657" indent="0">
+      <parameter index="0" type="string">Wait For Movement = true</parameter>
+    </command>
+    <command index="65" code="230" indent="0">
+      <parameter index="0" type="number">60</parameter>
+    </command>
+    <command index="66" code="0" indent="0">
+    </command>
+  </commands>
+</actionSequenceExample>
