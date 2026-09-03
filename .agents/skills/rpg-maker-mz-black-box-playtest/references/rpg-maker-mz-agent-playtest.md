@@ -1,8 +1,8 @@
 # Como testar um jogo RPG Maker MZ como jogador no navegador
 
-Use este guia para executar, como jogador, um cenário local de um jogo RPG Maker MZ no navegador: entrar no estado inicial contratado, descobrir um caminho até o objetivo, registrar esse caminho e reproduzi-lo depois de um reinício limpo.
+Use este guia como jogador-autor ou replayer de um cenário local de RPG Maker MZ no navegador. O jogador-autor entra no estado inicial, descobre um caminho com observação pública e coaching narrativo registrado, escreve o cartão por checkpoint e o reproduz após reinício. O replayer recebe somente o cartão aprovado e comprova sua reprodução sem coaching ao vivo.
 
-O procedimento serve para visual novels, RPGs com exploração e jogos híbridos. Encerramento, créditos, retorno ao título e nova partida são um módulo condicional, não um ciclo universal do RPG Maker MZ. Dados, rotas e limites de um projeto específico pertencem à ficha e ao cartão local daquele build, não a este procedimento genérico.
+O procedimento serve para visual novels, RPGs com exploração e jogos híbridos. Encerramento, créditos, retorno ao título e nova partida são um módulo condicional, não um ciclo universal do RPG Maker MZ. Dados, rotas e limites de um projeto específico pertencem à ficha e ao cartão local daquele build, não a este procedimento genérico. O contrato entre invocador, jogador e especialista está em `assisted-checkpoint-protocol.md`; o jogador continua caixa-preta mesmo quando recebe uma dica traduzida pelo invocador.
 
 ## Resultado esperado
 
@@ -10,8 +10,8 @@ Ao terminar, você deve ter:
 
 - executado o cenário contratado em um navegador real;
 - produzido uma cadeia cronológica de evidências para os checkpoints relevantes;
-- criado um cartão de rota local, específico para o build e o trecho percorrido, usando somente observações públicas;
-- reiniciado o trecho e comprovado que esse cartão permite repetir o percurso;
+- criado um cartão de rota local, específico para o build e o trecho percorrido, usando observações públicas e registrando separadamente qualquer coaching narrativo;
+- reiniciado o trecho e comprovado, no `pass^k` local, que esse cartão permite repetir o percurso;
 - separado expectativa, observação e inferência;
 - atribuído `PASS`, `FAIL` ou `BLOCKED` ao jogo sem confundir defeitos do jogo com falhas do ambiente, da ficha ou do sensor;
 - quando contratado, detectado e reparado um cartão vencido ou adulterado e repetido o percurso a partir de outro reinício limpo;
@@ -19,7 +19,7 @@ Ao terminar, você deve ter:
 
 Este guia não verifica implementação interna, regras ocultas, áudio sem sensor de áudio nem comportamento de NW.js por equivalência presumida. Testes unitários, inspeção de saves e diagnósticos internos usam outros sensores e não substituem o playtest.
 
-Siga o núcleo nesta ordem: valide a ficha, prepare sessão e orçamento, descubra pela superfície pública, escreva o cartão mínimo, reinicie e faça o replay limpo. Leia e aplique fingerprint, automação, SLA, créditos ou adulteração apenas quando a ficha contratar a extensão correspondente.
+Siga o núcleo nesta ordem: valide a ficha e o gate de replay com SLA local, prepare sessão e orçamento, descubra pela superfície pública, escreva cada checkpoint imediatamente, incorpore somente coaching auditado entre tentativas, reinicie e faça os replays limpos. Leia e aplique fingerprint, automação, créditos ou adulteração apenas quando a ficha local ativar a extensão correspondente.
 
 ## 1. Receba um contrato executável
 
@@ -41,6 +41,7 @@ Um diretório de desenvolvimento pode ser reconhecido por `game.rmmzproject`, ma
 | Reinício após conclusão | ação pública autorizada para retornar ao começo do mapa, cena ou segmento depois de alcançar o destino; sinal visível do estado restaurado |
 | Reinício após abortagem | ação pública autorizada para retornar do meio do trecho ao estado inicial depois de uma divergência; sinal visível do estado restaurado; ou `não disponível` |
 | Orçamento da rodada | limite total; fatias ou prioridades já impostas; limite sem progresso e critério de parada |
+| Gate de replay | SLA local fornecida ou inferida, origem, início, fim, tolerância, exclusões e `pass^k` |
 | Sensores | captura, vídeo, áudio e logs permitidos |
 | Destinos duráveis | diretórios do cartão de rota, das evidências e do relatório |
 | Restrições | offline, sem save, somente teclado, acessibilidade ou outras |
@@ -59,7 +60,6 @@ Inclua somente quando o cenário ou o veredito depender do campo:
 | Storage | quando saves preexistentes, persistência ou isolamento alterarem o estado inicial |
 | Persona | quando o comportamento representado mudar decisões ou critérios |
 | Módulo de encerramento | quando o objetivo incluir ending, créditos, saída, retorno ao título ou nova partida; descreva os sinais de cada etapa |
-| Replay com SLA local | somente quando fornecido; defina valor, origem, início, fim, tolerância e exclusões |
 | Resiliência da rota | quando houver reutilização entre builds ou adulteração cega; defina escopo e orçamento de reparo |
 | Automação pública | quando o replay usar batch, guardas instrumentadas, proxies, trace ou vídeo |
 
@@ -73,7 +73,7 @@ Não combine medições diferentes sob um único rótulo. O locale do jogo não 
 
 Respeite o estado das decisões do projeto. Um item `Pendente` não é comportamento esperado; uma `Baseline de protótipo` não deve ser relatada como decisão definitiva.
 
-O preparador pode consultar documentação, arquivos de autoria e configuração para montar a ficha. O executor caixa-preta recebe somente a ficha e este guia. A ficha pode nomear o objetivo e seus sinais públicos, mas não entrega receita de percurso, resposta de escolha, rota histórica nem relatório de uma rodada anterior. Durante o percurso, o executor não procura rotas, respostas ou gatilhos em mapas, eventos, switches, variáveis, plugins ou código.
+O invocador e o especialista podem consultar documentação, arquivos de autoria e configuração dentro de seus contratos. O jogador-autor começa sem rota histórica e recebe somente ficha, este guia, seu cartão, seus próprios artefatos e coaching narrativo mediado pelo invocador; continua sem procurar respostas em mapas, eventos, switches, variáveis, plugins ou código. O replayer recebe a rota completa, mas nenhum log de aprendizagem, causa interna ou dica ao vivo.
 
 ### Protocolo de validade e divergência
 
@@ -141,7 +141,7 @@ Explore de forma sistemática:
 5. reordene as fronteiras restantes depois de cada nova pista;
 6. não repita um ramo `ESGOTADO` sem uma observação nova que justifique reabri-lo.
 
-O orçamento de descoberta e uma eventual SLA de replay são contratos diferentes. A SLA existe somente quando a ficha local a fornece e não deve ser inferida da fatia usada para explorar.
+O orçamento de descoberta e a SLA de replay são contratos diferentes. A SLA local é fornecida pelo humano ou inferida e justificada pelo invocador com apoio da análise privada e da calibração pública; nunca é inferida da fatia usada para explorar nem copiada de outra quest.
 
 ## 3. Use o ciclo de interação controlada
 
@@ -232,9 +232,10 @@ No checkpoint de reentrada, compare com `C1` usando os sinais públicos definido
 
 ### Visual novel
 
-- avance texto com uma confirmação por vez;
+- espere a página terminar de revelar e o indicador público de continuação estabilizar antes de confirmar;
+- depois de cada confirmação, diferencie publicamente três resultados: a página apenas terminou de revelar, a próxima página apareceu ou a janela fechou;
+- avance texto com uma confirmação por vez e registre qual desses sinais encerrou a ação;
 - observe falante, retrato, fundo, janela, indicador de continuação e histórico quando disponível;
-- espere a linha terminar de revelar antes de concluir que está cortada;
 - capture todas as opções antes de escolher;
 - desative auto e skip, salvo quando forem objeto do cenário;
 - após cada escolha ou mudança de cena, volte ao ciclo Observe–Decida–Aja–Estabilize–Compare.
@@ -250,6 +251,10 @@ No checkpoint de reentrada, compare com `C1` usando os sinais públicos definido
 - não infira perda, ganho ou ausência de membros por um quadro transitório; confirme o elenco em outro estado estável ou sinal público adequado;
 - considere que a câmera pode recentralizar, rolar ou ocultar coordenadas absolutas; descreva relações com marcos visíveis;
 - em uma junção, registre os ramos tentados; em um beco sem saída, volte ao último ponto conhecido.
+
+Divida uma perna espacial sempre que ela atravessar além da área imediatamente visível, provocar rolagem da câmera ou depender de colisão para parar. Cada trecho deve terminar em uma **âncora pública** que o jogador consiga reconhecer — parede, porta, corredor, objeto, NPC ou composição visual distintiva — e o trecho seguinte começa somente depois dessa âncora ser observada. Contagem de células ou duração sustentada pode materializar a entrada entre duas âncoras, mas não substitui a confirmação da âncora de chegada.
+
+Quando a ferramenta não consegue reconhecer a âncora durante uma entrada contínua, use grupos curtos com o ciclo Observe–Decida–Aja–Estabilize–Compare. Uma sustentação até colisão só é reproduzível quando a tela confirma tanto a parada quanto a relação espacial esperada; tempo decorrido, câmera estabilizada ou ausência de erro não bastam.
 
 Mantenha um log textual compacto, sem criar uma captura por célula:
 
@@ -288,16 +293,16 @@ O cartão de rota local é o segundo guia que o próprio executor escreve para s
 
 ### Separe descoberta de replay
 
-Durante a primeira passagem:
+Durante a passagem de autoria:
 
 1. explore dentro do orçamento e mantenha o log de ações, junções, diálogos, escolhas e recuperações;
-2. registre somente controles, marcos, relações espaciais, textos e reações que apareceram nas superfícies públicas;
+2. registre controles, marcos, relações espaciais, textos e reações que apareceram nas superfícies públicas; registre coaching narrativo em proveniência separada;
 3. ao alcançar o destino, extraia do log o caminho bem-sucedido mais direto conhecido;
 4. retire tentativas sem progresso da rota principal e preserve somente recuperações que um novo executor possa precisar;
 5. escreva o cartão no destino durável indicado pela ficha;
-6. marque-o como `RASCUNHO` até que um replay iniciado do estado contratado confirme todos os passos.
+6. marque-o como `RASCUNHO` até que o `pass^k` local, iniciado do estado contratado e sob um único hash aprovado, confirme todos os passos.
 
-Não consulte mapas JSON, eventos, IDs, switches, variáveis, plugins, código ou saves para completar o cartão. Células contadas visualmente e marcos vistos pelo jogador são observações públicas; coordenadas internas e nomes descobertos nos dados do projeto não são.
+O jogador não consulta mapas JSON, eventos, IDs, switches, variáveis, plugins, código ou saves para completar o cartão. Células contadas visualmente e marcos vistos pelo jogador são observações públicas; coordenadas internas e nomes descobertos nos dados do projeto não são. Toda contribuição do especialista chega como ação/sinal público via invocador e muda a proveniência do cartão para assistida.
 
 ### Comece pelo cartão mínimo
 
@@ -309,28 +314,42 @@ Não consulte mapas JSON, eventos, IDs, switches, variáveis, plugins, código o
 - Build e origem:
 - Entrada pública:
 - Derivado somente de observação pública: sim | não
+- Revisão e SHA-256 candidato:
+- Aprovação externa: <manifesto e hash | ainda não aprovado>
 - Estado inicial e sinal visível:
 - Destino e sinal visível de conclusão:
 - Procedimento público de reinício após conclusão e sinal de restauração:
 - Procedimento público de reinício após abortagem e sinal de restauração: <procedimento | não disponível>
 - Controles e durações efetivamente observados:
 - Validade e condições de expiração:
-- Revisão do cartão e revisão anterior:
+- Revisão anterior e motivo da mudança:
 
-| Passo | Pré-condição ou marco visível | Ação materializada | Sinal observável de saída ou parada | Recuperação segura |
-|---|---|---|---|---|
-| R01 | | | | |
+| Step ID | Pré-condição pública | Inputs realmente despachados | Reação visível | Guarda de conclusão | Guarda de retomada | Recuperação segura | Dependências |
+|---|---|---|---|---|---|---|---|
+| R01 | | | | | | | |
 ```
 
-Preencha esse núcleo antes de acrescentar auditoria, automação ou medição. Cada passo deve dizer onde o jogador parece estar, qual ação executar, qual mudança visível confirma o avanço e como parar ou recuperar com segurança. Prefira marcos como portas, estátuas, bordas, falas ou rótulos de opção. Uma sequência de teclas sem pré-condição e sem sinal de parada não é uma rota validável.
+Preencha esse núcleo antes de acrescentar auditoria, automação ou medição. Cada passo deve dizer onde o jogador parece estar, quais inputs foram realmente enviados, qual reação apareceu, o que prova conclusão, o que prova que é seguro continuar e como recuperar. Quando as duas guardas forem iguais, registre isso explicitamente. Prefira marcos como portas, estátuas, bordas, falas ou rótulos de opção. Uma sequência de teclas sem pré-condição e sem sinal de parada não é uma rota validável.
 
 Quando uma interação observada depender de orientação, materialize imediatamente antes da confirmação a entrada pública que produziu essa orientação na descoberta. Adjacência ou pose visual servem como marcos, mas não substituem a reprodução da sequência que acionou o evento.
 
-### Acrescente extensões somente quando contratadas
+Trate diálogo como uma sequência de transições observáveis, não como uma contagem de confirmações. Um passo `Confirmar × N` só é materializável quando o cartão nomeia, para cada confirmação, o sinal público de entrada e um dos sinais de saída: texto totalmente revelado, próxima página identificável ou janela fechada. Se esses sinais não forem distinguíveis pela ferramenta, mantenha confirmações unitárias na cadência controlada e inclua o custo das observações no preflight; uma espera fixa organiza a tentativa, mas não comprova prontidão.
 
+Antes de salvar o cartão como `RASCUNHO`, aplique o **gate de estabilidade da rota** a todos os passos:
+
+1. cada perna espacial longa está dividida por âncoras públicas observadas;
+2. cada interação direcional reproduz a orientação imediatamente antes da confirmação;
+3. cada página de diálogo possui sinal público de prontidão e saída, sem contagem opaca;
+4. cada transição, colisão e escolha começa de uma pré-condição observada e termina num sinal distinguível;
+5. toda espera fixa permanece apenas como limite de estabilização, nunca como prova de que o próximo passo está pronto.
+
+Qualquer item ausente mantém o cartão incompleto e impede o replay oficial. Registre a lacuna e calibre publicamente dentro do orçamento da rodada.
+
+### Complete o gate de replay e acrescente extensões contratadas
+
+- **SLA local obrigatória:** registre se foi fornecida pelo humano ou inferida pelo invocador, além de origem, início, fim, tolerância, exclusões, `pass^k` e preflight com limite inferior, soma nominal, margem e orçamento previsto.
 - **Identidade exata:** registre fingerprint do build e do cartão, método e origem quando o ensaio depender de revisão exata, automação ou adulteração.
 - **Automação pública:** para cada passo automatizado, acrescente custo nominal, guarda semântica e proxy público que a ferramenta realmente consiga interpretar.
-- **SLA local:** somente quando a ficha fornecer uma, registre origem, início, fim, tolerância, exclusões e preflight com limite inferior, soma nominal, margem e orçamento previsto.
 - **Resiliência:** registre orçamento de recuperação e um histórico com revisão, divergência observada, passo descartado, correção confirmada e build do replay limpo.
 
 Antes de tentar uma SLA curta ou execução em batch, materialize cada ação: entrada, ordem, contagem de repetições ou duração sustentada, momento da liberação e intervalo necessário. Registre checkpoints públicos entre grupos. Faça essa calibração na descoberta ou num replay sem veredito cronométrico; não improvise parâmetros dentro da medição oficial.
@@ -355,9 +374,10 @@ Imediatamente antes de cada replay ou reparo:
 3. invalide funções, macros, listas de ações, caches e planos compilados de outra revisão, mesmo na mesma sessão;
 4. releia em ordem a pré-condição, ação, sinal de saída e recuperação de cada Step ID;
 5. faça um lint semântico: a ação pode conduzir da pré-condição ao sinal de saída descrito?;
-6. durante a tentativa, registre por Step ID as ações realmente enviadas.
+6. refaça o gate de estabilidade da rota e rejeite pernas longas sem âncoras ou lotes de diálogo sem sinais intermediários;
+7. durante a tentativa, registre por Step ID as ações realmente enviadas.
 
-Materialize um manifesto durável novo quando o replay usar automação, SLA ou ensaio de resiliência. Inclua caminho, revisão, fingerprint quando contratado e a cópia exata dos campos executados. Num replay manual simples, o próprio cartão relido e o log por Step ID são suficientes.
+Materialize um manifesto durável separado para todo replay. Inclua caminho, hash e revisão do cartão, build ou fingerprint quando contratado, SLA local, `pass^k` e procedimento de evidência autorizado.
 
 Por exemplo, mover à esquerda não pode prometer chegada a uma parede à direita sem um mecanismo observado que explique essa transição. Contradição, Step ID ausente, ação não materializada ou divergência entre manifesto e arquivo deixa o cartão `VENCIDO` e o replay `FAIL`; não inicie a medição oficial. Entre no fluxo de recuperação pública, repare o cartão, incremente a revisão e, quando contratado, calcule um novo fingerprint antes da tentativa seguinte.
 
@@ -365,7 +385,7 @@ No reparo, o manifesto preserva a identidade da revisão inválida e os passos s
 
 Concluir o objetivo com macro, função, cache ou plano de outra revisão não prova o cartão vigente, ainda que a tela final correta apareça. Classifique essa tentativa pela matriz causal da seção 10.
 
-### Prepare e faça o replay limpo
+### Prepare e faça os replays limpos
 
 #### Faça o preflight do orçamento
 
@@ -398,19 +418,19 @@ Se o procedimento deste guia levar o executor a produzir um cartão sem prefligh
 #### Execute o replay limpo
 
 1. Termine a passagem de descoberta e salve o cartão como `RASCUNHO`.
-2. Quando houver SLA, conclua o preflight e prossiga somente com viabilidade demonstrada.
+2. Conclua o preflight da SLA local e prossiga somente com viabilidade demonstrada.
 3. Reinicie o mapa, a cena ou o segmento pelo procedimento público contratado.
 4. Confirme visualmente o estado inicial. Se ele não reapareceu, não inicie o replay nem o cronômetro.
 5. Execute somente os passos do cartão, na ordem, observando a pré-condição e o sinal de saída de cada um.
-6. Se a ficha fornecer uma SLA local, meça entre os eventos de início e fim definidos nela. Não inclua nem exclua carregamento, diálogo, boot ou captura por suposição.
-7. Marque o cartão como `VALIDADO` somente se o destino for concluído a partir do estado inicial correto e todos os passos corresponderem ao que apareceu.
-8. Registre duração e instrumento quando houver medição. Sem SLA fornecida, avalie reprodutibilidade, não invente um limite universal.
+6. Meça a SLA local fornecida ou inferida entre os eventos de início e fim definidos na ficha. Não inclua nem exclua carregamento, diálogo, boot ou captura por suposição.
+7. Marque o cartão como `VALIDADO` somente depois que a quantidade local de passes consecutivos for concluída a partir do estado inicial correto, sob o mesmo hash, e todos os passos corresponderem ao que apareceu.
+8. Registre duração, instrumento, SLA local e sua origem. Não transforme o valor desta ficha em limite universal.
 
 Uma violação de SLA reprova a eficiência do cartão ou do ambiente medido, conforme a evidência; não prova por si só um defeito funcional no jogo. Não acelere animações, use skip, teleporte ou retire esperas exigidas pelo jogador para cumprir prazo.
 
 Se qualquer passo divergir, interrompa a medição, libere as entradas e marque o replay do cartão como `FAIL`. Use o reinício público de abortagem antes de outra tentativa. Se ele estiver `não disponível`, a continuação fica `BLOCKED`; não reutilize o estado intermediário nem alegue `PASS` porque o objetivo foi alcançado depois por exploração ou correção improvisada.
 
-O primeiro replay limpo do cartão produzido é também o teste de aceite do procedimento de autoria deste guia principal. Classifique qualquer falha pela matriz causal da seção 10; o cartão preserva o diagnóstico, mas não isenta o procedimento que ensinou o executor a escrevê-lo.
+O conjunto contratado de replays limpos do cartão produzido é o teste de aceite do procedimento de autoria deste guia principal. Classifique qualquer falha pela matriz causal da seção 10; o cartão preserva o diagnóstico, mas não isenta o procedimento que ensinou o executor a escrevê-lo.
 
 #### Instrumente uma SLA local sem perder observabilidade
 
@@ -447,9 +467,11 @@ Ao primeiro conflito entre cartão e tela:
 6. conclua o objetivo quando possível e corrija o cartão com os marcos e ações observados;
 7. incremente a revisão, registre o reparo e associe o cartão ao build em que a correção foi aprendida.
 
+Ao reparar um passo, invalide também todo passo posterior cuja pré-condição dependa da posição, orientação, página de diálogo, escolha ou estado produzido pelo trecho divergente. Reobserve esses passos na recuperação pública antes de incluí-los na nova revisão. Um passo posterior que funcionou numa passagem antiga não permanece calibrado por presunção quando o caminho que o alimenta mudou.
+
 Instrução vencida não autoriza insistência cega. Ausência do marco esperado, mudança de layout, colisão onde antes havia passagem, opção renomeada ou ação que conduz a outro estado são sinais suficientes para suspender o passo. Uma diferença cosmética que preserva a mesma ação e o mesmo resultado pode ser registrada sem reescrever a rota.
 
-Depois de reparar, encerre a passagem de recuperação e use o procedimento público de reinício. Confirme novamente o estado inicial por seus sinais visíveis; não reutilize posição, escolhas, diálogo ou outro estado intermediário. Só então faça o replay limpo final. O cartão volta a `VALIDADO` apenas quando esse replay conclui o destino sem exploração improvisada e, se houver SLA local, dentro do contrato cronométrico.
+Depois de reparar, encerre a passagem de recuperação e use o procedimento público de reinício. Confirme novamente o estado inicial por seus sinais visíveis; não reutilize posição, escolhas, diálogo ou outro estado intermediário. Só então faça o replay limpo final. O cartão volta a `VALIDADO` apenas quando esse replay conclui o destino sem exploração improvisada e dentro do contrato cronométrico local.
 
 ## 7. Recupere-se sem mascarar defeitos
 
@@ -562,8 +584,8 @@ Depois de `FAIL`, corrigir ou substituir somente o cartão não devolve `PASS` a
 - Relógio monotônico da descoberta: <instrumento, t0, deadlines e duração>
 - Limite por ramo e resumo do ledger de fronteiras:
 - Cartão de rota, caminho, build, revisão e status; fingerprint quando contratado:
-- Manifesto de execução quando exigido e comparação com ações enviadas:
-- Replay local: sem SLA | <contrato local, preflight e duração medida>
+- Manifesto de aprovação e comparação com ações enviadas:
+- Replay local: <SLA fornecida ou inferida, preflight e duração medida>
 - Extensões condicionais verificadas:
 - Veredito do jogo: PASS | FAIL | BLOCKED
 - Veredito da ficha de laboratório: PASS | FAIL | BLOCKED
@@ -604,7 +626,7 @@ Não converta `não verificado` em sucesso e não misture causa inferida com sin
 
 ## Critérios de êxito do guia
 
-Com este guia e uma ficha válida, um agente sem outro contexto deve conseguir:
+Com este guia, o protocolo assistido e uma ficha válida, os papéis isolados devem conseguir:
 
 1. abrir a entrada pública sem modificar o jogo;
 2. detectar uma ficha vencida antes de confiar em sua rota;
@@ -612,10 +634,10 @@ Com este guia e uma ficha válida, um agente sem outro contexto deve conseguir:
 4. iniciar um relógio monotônico antes da descoberta e preservar as fatias de escrita e replay;
 5. explorar uma VN, um RPG tradicional ou um híbrido sistematicamente, com ledger, limite por ramo e prioridade semântica;
 6. distinguir movimento, orientação, colisão, transição e falha de sensor;
-7. produzir primeiro um cartão mínimo executável, específico do build e derivado somente de observação pública;
+7. produzir primeiro um cartão mínimo executável, específico do build, ancorado em observação pública e com coaching marcado por proveniência;
 8. reler a revisão durável e usar fingerprint, manifesto e proxies somente quando contratados;
-9. reiniciar o trecho e passar o primeiro replay limpo do cartão produzido;
-10. aplicar uma SLA somente quando a ficha local a definir e demonstrar sua viabilidade antes do replay oficial;
+9. reiniciar o trecho e cumprir o `pass^k` local com o cartão produzido;
+10. aplicar a SLA fornecida ou inferida para a ficha local e demonstrar sua viabilidade antes do replay oficial;
 11. quando contratado, comprovar ending, créditos, retorno ao título e nova partida sem universalizar esse ciclo;
 12. quando contratado, detectar uma adulteração cega, descartar os passos divergentes e reparar o cartão sem inspecionar o jogo por dentro;
 13. fazer outro reinício limpo e passar o replay final usando o cartão reparado;
