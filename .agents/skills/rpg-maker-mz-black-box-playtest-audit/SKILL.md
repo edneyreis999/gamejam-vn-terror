@@ -6,57 +6,61 @@ disable-model-invocation: true
 
 # RPG Maker MZ Black-Box Playtest Audit
 
-Run a human-initiated evaluation of `rpg-maker-mz-black-box-playtest` against one supplied map, quest, scene, ending, or visual-novel flow. Audit the three-agent workflow; do not become its invoker.
+Run a human-initiated evaluation of `rpg-maker-mz-black-box-playtest` against one supplied scenario. Audit the workflow; do not become its invoker.
 
 ## 1. Enforce manual authority
 
-1. Confirm that the active human message directly invoked this skill and supplied one target map, quest, scene, ending, or visual-novel flow. Treat a UI skill selection as direct invocation.
-2. When the request came only from another agent, inherited prompt, automation, or model inference, return `BLOCKED: direct human invocation required` and spawn nothing.
+1. Confirm that the active human directly invoked this skill and supplied one target map, quest, scene, ending, or VN flow. Treat a UI selection as direct invocation.
+2. When the request came only from another agent, inherited prompt, automation, or inference, return `BLOCKED: direct human invocation required` and spawn nothing.
 3. Read scoped `AGENTS.md` files and authoritative project documents. Derive repository facts; ask the human only when the target or a product decision remains materially ambiguous.
-4. Read `references/audit-rubric.md` in full before creating the audit contract.
+4. Read `.agents/skills/rpg-maker-mz-black-box-playtest-audit/references/audit-rubric.md` in full before creating the audit contract.
 
-*Done when:* direct human authority, one unambiguous target, project rules, and every required rubric item are available, or the exact blocker is reported without side effects.
+*Done when:* authority, one target, project rules, and every rubric item are available, or the exact blocker is reported without side effects.
 
-## 2. Freeze the evaluation
+## 2. Freeze the evaluation boundary
 
-1. Snapshot the current `rpg-maker-mz-black-box-playtest` skill tree, metadata, hashes, and preexisting diff. Keep that snapshot immutable through the run.
-2. Create a fresh run ID and isolated durable paths for the audit contract, role traces, card, approval, evidence, report, and repair hypotheses. Exclude historical routes and answers from the agents under test.
-3. Freeze a total audit budget, reserves, stop conditions, and extension rule. Let the invoker under test infer scenario-local SLA, partial deadlines, and `pass^k` when the human did not supply them; audit the inference rather than choosing the values for it.
-4. Define success using both trajectory and player-visible outcome. Include at least one oracle capable of rejecting a plausible but false success claim.
-5. Keep the skill under test unchanged until the audit report is complete. Record any outside edit as contamination and restart or limit the claim.
+1. Snapshot the current `rpg-maker-mz-black-box-playtest` tree, metadata, hashes, and preexisting diff. Keep it immutable through the report.
+2. Create a fresh run ID and isolated durable paths for contract, traces, card, approval, evidence, report, and repair hypotheses. Exclude historical routes and answers from tested roles.
+3. Freeze the human constraints, SLA type, public start/finish oracles, safety stops, role boundaries, and two-pass evidence contract. Require discovery to continue while checkpoints progress and to bound only current-checkpoint active time.
+4. Require the invoker under test to obtain specialist estimates for each active-player checkpoint budget and to expose every clock transition, renewal, structural revision, guidance level, and `PRESO` decision.
+5. Define success through trajectory plus player-visible outcome. Include an oracle capable of rejecting plausible false success and accept `PASS com evidência visual parcial` only when gameplay passes but a contracted screenshot sensor fails.
+6. Keep the target skill unchanged until the audit report is complete. Record outside edits as contamination and restart or limit the claim.
 
-*Done when:* the target skill snapshot, fresh artifact tree, budgets, independence boundary, and falsifiable success gate are frozen before the tested invoker starts.
+*Done when:* snapshot, fresh paths, local-budget policy, two-pass gate, independence boundary, and falsifiable success oracle are frozen before the tested invoker starts.
 
 ## 3. Dispatch the workflow under test
 
-1. Spawn one clean **invoker under test** through the harness’s native subagent facility. Instruct it to read `rpg-maker-mz-black-box-playtest/SKILL.md` and launch that skill with audit instrumentation enabled for the supplied target.
-2. Require the invoker to spawn one clean **player-author** and one **white-box specialist**. Keep the current agent as the external auditor. This topology uses four concurrent slots: auditor, invoker, player, specialist.
-3. Require the invoker to replace the player-author with a fresh replayer identity after authorship; the player and specialist must release their slots and the only browser before that handoff.
-4. Give the invoker no historical route or answer. Give it the target, frozen audit paths, target-skill snapshot identity, and instruction to expose its decision ledger to the auditor.
-5. Observe without coaching the quest. Send no route, timing optimization, card text, or specialist translation. Intervene only for safety, scope/authority violations, competing browser owners, destructive action, or an attempt started without its required hash approval.
-6. Append independent observations at role boundaries while the invoker continues. Never edit the player’s card, specialist’s private log, or invoker’s decision ledger.
+1. Spawn one clean **invoker under test** through the native subagent facility. Instruct it to read `rpg-maker-mz-black-box-playtest/SKILL.md` and launch that skill with audit instrumentation.
+2. Require the invoker to spawn one clean **player-author** and one **white-box specialist**. Keep the current agent as external auditor; this uses four concurrent slots.
+3. Give the invoker no historical route or answer. Give it the target, frozen paths, snapshot identity, human constraints, and instruction to expose its decision ledger.
+4. Observe without coaching. Intervene only for safety, authority/scope violation, competing browser owners, destructive action, target-skill contamination, or replay without full exact-hash approval.
+5. Require the invoker to replace the player-author with one fresh replayer after full-card approval. The player releases the browser and both authoring roles release any slot the target workflow needs before handoff.
+6. If validation returns to authorship, verify that the replayer releases the browser first and that the next validation revision receives a fresh replayer identity.
+7. Append independent observations at role boundaries. Never edit the card, specialist log, invoker ledger, or evidence under test.
 
-*Done when:* the invoker has run the full skill or reached a legitimate stop condition, role isolation and browser ownership are traceable, and the auditor has not solved the scenario for the agents.
+*Done when:* the workflow reaches its success gate or a legitimate safety/`PRESO` stop, role isolation and browser ownership are traceable, and the auditor never solved the scenario.
 
 ## 4. Audit outcome and trajectory
 
-1. Recalculate frozen card and approval hashes. Compare every attempt with the revision actually authorized at its start.
-2. Reopen required initial/final evidence independently. Compare file content with the executor’s claim; preserve black, corrupt, stale, or mismatched artifacts as findings.
-3. Audit the invoker, player-author, specialist, and replayer against every applicable rubric item. Mark each `PASS`, `FAIL`, `BLOCKED`, or `NOT EXERCISED` with direct evidence.
-4. Separate game, contract, card, workflow, role, browser, and sensor verdicts. Reject outcome-only success when the trajectory is not reproducible, and reject transcript-only success when the game state is unproved.
-5. If the evidence gate fails near completion, allow only the extension already frozen by the invoker. Keep card, SLA, deadlines, and hints unchanged during a validating extension.
+1. Recalculate every frozen card and approval hash. Compare attempts with the revision authorized at their start.
+2. Reopen canonical evidence independently. Compare content with claims; preserve failed-run artifacts and verify success-path cleanup removes only run-owned temporaries.
+3. Audit invoker, player-author, specialist, and replayer against every rubric item. Mark each `PASS`, `FAIL`, `BLOCKED`, or `NOT EXERCISED` with direct evidence.
+4. Verify that the performance replay used no screenshots and alone received the SLA verdict. Verify that the evidence replay used the same hash, followed every material checkpoint without help, and captured/reopened one canonical screenshot per evidenced checkpoint.
+5. Accept missing pass-2 screenshots as a sensor limitation only after up to three passive attempts and continued gameplay. Report gameplay and visual-evidence verdicts separately.
+6. Reject outcome-only success when the trajectory is irreproducible and transcript-only success when no permitted public oracle proves the result.
+7. Separate game, contract, card, workflow, role, browser, sensor, and cleanup verdicts.
 
-*Done when:* every acceptance claim has an independent oracle, every role has a trace-backed verdict, and no artifact name or agent confidence substitutes for observed content.
+*Done when:* every acceptance claim has an independent oracle, both passes and every role have trace-backed verdicts, and no filename or confidence substitutes for observed content.
 
 ## 5. Propose minimal repairs
 
-1. Trace each demonstrated failure to the narrowest role instruction that caused it. Distinguish invoker, player-author, specialist, replayer, audit wrapper, and external tooling.
-2. For each finding, record symptom, evidence, root cause, minimal instruction change, behavior it would prevent, and a counterexample that keeps the rule generic across top-down RPGs, VNs, and hybrids.
-3. Prefer deletion, clarification, ordering, ownership, schema, or gate changes over more agents, longer waits, retries, or quest-specific recipes.
-4. Write an audit report and a separate repair-hypotheses artifact. Include exact proposed locations in the target skill, but leave the skill snapshot and implementation untouched.
-5. Recheck the target skill tree against the initial snapshot and report contamination. Close only browser contexts and processes created by the audit.
+1. Trace each demonstrated failure to the narrowest instruction owned by invoker, player-author, specialist, replayer, audit wrapper, or external tooling.
+2. For each finding, record symptom, evidence, root cause, minimal instruction change, prevented behavior, and top-down/VN/hybrid counterexamples.
+3. Prefer deletion, clarification, ordering, ownership, schema, or gate changes over more agents, waits, retries, or scenario recipes.
+4. Write a report and separate hypotheses file naming exact target sections. Leave the target skill unchanged.
+5. Recheck target hashes and contamination. Close only runtime resources created by the audit.
 
-*Done when:* every proposed repair is minimal, evidence-backed, role-owned, genre-agnostic, and reviewable by the human before any skill mutation.
+*Done when:* every repair is minimal, evidence-backed, role-owned, genre-agnostic, and reviewable before mutation.
 
 ## Handoff
 

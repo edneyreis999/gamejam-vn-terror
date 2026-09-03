@@ -11,7 +11,7 @@ Ao terminar, você deve ter:
 - executado o cenário contratado em um navegador real;
 - produzido uma cadeia cronológica de evidências para os checkpoints relevantes;
 - criado um cartão de rota local, específico para o build e o trecho percorrido, usando observações públicas e registrando separadamente qualquer coaching narrativo;
-- reiniciado o trecho e comprovado, no `pass^k` local, que esse cartão permite repetir o percurso;
+- reiniciado o trecho e comprovado em dois passes sem ajuda: um de desempenho sem screenshots e outro de evidência com captura por checkpoint;
 - separado expectativa, observação e inferência;
 - atribuído `PASS`, `FAIL` ou `BLOCKED` ao jogo sem confundir defeitos do jogo com falhas do ambiente, da ficha ou do sensor;
 - quando contratado, detectado e reparado um cartão vencido ou adulterado e repetido o percurso a partir de outro reinício limpo;
@@ -19,7 +19,7 @@ Ao terminar, você deve ter:
 
 Este guia não verifica implementação interna, regras ocultas, áudio sem sensor de áudio nem comportamento de NW.js por equivalência presumida. Testes unitários, inspeção de saves e diagnósticos internos usam outros sensores e não substituem o playtest.
 
-Siga o núcleo nesta ordem: valide a ficha e o gate de replay com SLA local, prepare sessão e orçamento, descubra pela superfície pública, escreva cada checkpoint imediatamente, incorpore somente coaching auditado entre tentativas, reinicie e faça os replays limpos. Leia e aplique fingerprint, automação, créditos ou adulteração apenas quando a ficha local ativar a extensão correspondente.
+Siga o núcleo nesta ordem: valide a ficha e a SLA local, prepare a sessão, execute cada checkpoint com orientação auditada e orçamento ativo próprio, escreva-o imediatamente, reinicie e faça os dois replays limpos. Leia e aplique fingerprint, automação, encerramento ou adulteração apenas quando a ficha local ativar a extensão correspondente.
 
 ## 1. Receba um contrato executável
 
@@ -40,8 +40,8 @@ Um diretório de desenvolvimento pode ser reconhecido por `game.rmmzproject`, ma
 | Missão do jogador | objetivo em linguagem de jogador e sinal público que permite reconhecer sua conclusão |
 | Reinício após conclusão | ação pública autorizada para retornar ao começo do mapa, cena ou segmento depois de alcançar o destino; sinal visível do estado restaurado |
 | Reinício após abortagem | ação pública autorizada para retornar do meio do trecho ao estado inicial depois de uma divergência; sinal visível do estado restaurado; ou `não disponível` |
-| Orçamento da rodada | limite total; fatias ou prioridades já impostas; limite sem progresso e critério de parada |
-| Gate de replay | SLA local fornecida ou inferida, origem, início, fim, tolerância, exclusões e `pass^k` |
+| Orçamento por checkpoint | método de estimativa, quatro parcelas de orientação, relógio ativo, renovação e condição `PRESO` |
+| Gate de replay | SLA rígida ou provisória, origem, início, fim, tolerância, exclusões e procedimento de dois passes |
 | Sensores | captura, vídeo, áudio e logs permitidos |
 | Destinos duráveis | diretórios do cartão de rota, das evidências e do relatório |
 | Restrições | offline, sem save, somente teclado, acessibilidade ou outras |
@@ -110,18 +110,21 @@ python3 -m http.server <porta-livre> --bind 127.0.0.1
 
 Anote raiz, porta e PID ou identificador equivalente. `file://`, HTTP, NW.js e pacote publicado são superfícies distintas; passar em uma não prova as demais.
 
-### Faça o preflight da exploração
+### Faça o preflight do checkpoint
 
-Antes da primeira ação jogável, transforme o orçamento total da rodada em um plano de uso. Não existe proporção universal: registre fatias explícitas para descoberta, escrita do cartão, replay limpo e, quando contratado, reparo e replay final. Reserve tempo real para escrever e reler o cartão; não consuma toda a rodada explorando.
+Antes da primeira ação de cada checkpoint material, receba do invocador:
 
-Registre também:
+- o objetivo e a guarda pública estável esperada;
+- a orientação mínima imediata;
+- o orçamento ativo estimado pelo especialista;
+- quatro parcelas: tentativa mínima e até três orientações operacionais progressivas;
+- a última guarda aprovada e a recuperação pública disponível.
 
-- limite de tempo ou tentativas para um ramo sem evidência de aproximação do objetivo;
-- intervalo máximo sem um marco novo;
-- reserva necessária para reinícios, transições e evidência obrigatória;
-- critério de parada que deixa tempo para relatar um percurso incompleto sem fabricar um `PASS`.
+O relógio monotônico conta somente enquanto você possui o browser e uma instrução acionável: observação, decisão, inputs, exploração e mudança executável do cartão. Ele pausa durante análise do especialista, roteamento do invocador, captura passiva, reset controlado e handoff.
 
-Imediatamente antes da primeira entrada de descoberta, inicie um relógio monotônico e registre o instante zero e os deadlines das fatias. Use um alarme ou checagem periódica que consiga interromper a exploração. Timestamp de screenshot ajuda a reconstruir uma cronologia, mas não substitui o relógio da rodada. Ao atingir um limite, solte as entradas, estabilize a tela e pare; um marco recente não prorroga silenciosamente o orçamento total.
+Depois da primeira divergência documentada, aguarde a orientação operacional 1 em vez de repetir a mesma abordagem. As orientações 2 e 3 devem responder às divergências seguintes. Uma hipótese nova permite outra tentativa dentro do saldo, mas não renova tempo. Somente a confirmação do especialista de que o motivo anterior de `REJEITADO` ou `INCONCLUSIVO` foi resolvido concede novo orçamento completo.
+
+Ao esgotar o orçamento sem essa confirmação, solte entradas, estabilize a tela, preserve o estado e marque o checkpoint `PRESO`. Não encerre por duração total enquanto checkpoints materiais continuam sendo aprovados.
 
 Mantenha um **ledger de fronteiras** durante a descoberta. Uma fronteira é qualquer ramo público ainda não testado: corredor, porta, NPC, objeto, opção de diálogo, comando de menu ou transição equivalente.
 
@@ -130,18 +133,18 @@ F03 | marco: salão com duas saídas | ramo: porta com nome legível | relevânc
 F04 | marco: mesmo salão | ramo: corredor sem pista | relevância: baixa | status: ADIADO | gasto: 0
 ```
 
-Use os estados `NÃO TENTADO`, `ATIVO`, `ADIADO`, `ESGOTADO` ou `BLOQUEADO`. Em cada junção, enumere as fronteiras visíveis antes de escolher uma. Priorize semanticamente NPCs, rótulos, objetos, diálogos e saídas cuja apresentação pública seja compatível com a missão; trate aparência visual apenas como hipótese de prioridade, nunca como prova de identidade ou função.
+Use os estados `NÃO TENTADO`, `ATIVO`, `ADIADO`, `ESGOTADO` ou `BLOQUEADO`. Em cada junção, enumere as fronteiras visíveis antes de escolher uma. Priorize a orientação vigente e depois NPCs, rótulos, objetos, diálogos e saídas publicamente compatíveis com a missão; trate aparência visual apenas como hipótese, nunca como prova de identidade ou função.
 
 Explore de forma sistemática:
 
 1. escolha a fronteira não tentada de maior relevância observável;
-2. registre o início do ramo e o tempo restante;
-3. pare no limite por ramo, em beco, bloqueio ou falso destino confirmado;
+2. registre o início do ramo e o saldo ativo do checkpoint;
+3. pare na divergência, em beco, bloqueio ou falso destino confirmado e solicite a próxima orientação operacional;
 4. volte ao último checkpoint conhecido e atualize o ledger;
 5. reordene as fronteiras restantes depois de cada nova pista;
 6. não repita um ramo `ESGOTADO` sem uma observação nova que justifique reabri-lo.
 
-O orçamento de descoberta e a SLA de replay são contratos diferentes. A SLA local é fornecida pelo humano ou inferida e justificada pelo invocador com apoio da análise privada e da calibração pública; nunca é inferida da fatia usada para explorar nem copiada de outra quest.
+O orçamento ativo de autoria e a SLA de replay são contratos diferentes. A SLA rígida muda somente por nova autoridade humana; a provisória pode ser revisada por evidência estrutural antes da validação. Nenhum valor é copiado de outra quest.
 
 ## 3. Use o ciclo de interação controlada
 
@@ -216,9 +219,9 @@ Em cada checkpoint:
 3. estabilize e observe a tela inteira;
 4. registre a observação sem explicação causal;
 5. só então escreva uma inferência separada;
-6. persista e reabra a evidência quando a imagem puder provar o critério.
+6. quando uma imagem ajudar a diagnosticar ou escrever a guarda, marque-a como temporária; a evidência canônica será produzida no segundo replay.
 
-Crie somente os checkpoints intermediários que provam o cenário. Uma missão de conversa pode usar falas e escolhas; uma exploração pode usar junções, transferências, itens ou chefes. Não transforme a evidência em uma captura por entrada.
+Crie somente checkpoints intermediários que representem uma transição material e terminem numa guarda pública estável: entrega concluída, área necessária alcançada, item obrigatório obtido, escolha materializada ou sinal final contratado. Página isolada, sala atravessada, movimento sem consequência e estado interno invisível não são checkpoints por si só. Não transforme a evidência em uma captura por entrada.
 
 Prefixe os IDs com a tentativa quando houver descoberta, replay e reparo na mesma rodada, por exemplo `D-CF`, `R1-CR` e `R2-CF`. Assim, um mesmo checkpoint não parece provado por um estado de outra passagem.
 
@@ -295,12 +298,12 @@ O cartão de rota local é o segundo guia que o próprio executor escreve para s
 
 Durante a passagem de autoria:
 
-1. explore dentro do orçamento e mantenha o log de ações, junções, diálogos, escolhas e recuperações;
+1. execute a orientação vigente dentro do orçamento ativo do checkpoint e mantenha o log de ações, junções, diálogos, escolhas e recuperações;
 2. registre controles, marcos, relações espaciais, textos e reações que apareceram nas superfícies públicas; registre coaching narrativo em proveniência separada;
 3. ao alcançar o destino, extraia do log o caminho bem-sucedido mais direto conhecido;
 4. retire tentativas sem progresso da rota principal e preserve somente recuperações que um novo executor possa precisar;
 5. escreva o cartão no destino durável indicado pela ficha;
-6. marque-o como `RASCUNHO` até que o `pass^k` local, iniciado do estado contratado e sob um único hash aprovado, confirme todos os passos.
+6. marque-o como `RASCUNHO` até que os dois passes, iniciados do estado contratado e sob um único hash aprovado, confirmem todos os passos.
 
 O jogador não consulta mapas JSON, eventos, IDs, switches, variáveis, plugins, código ou saves para completar o cartão. Células contadas visualmente e marcos vistos pelo jogador são observações públicas; coordenadas internas e nomes descobertos nos dados do projeto não são. Toda contribuição do especialista chega como ação/sinal público via invocador e muda a proveniência do cartão para assistida.
 
@@ -329,25 +332,29 @@ O jogador não consulta mapas JSON, eventos, IDs, switches, variáveis, plugins,
 | R01 | | | | | | | |
 ```
 
-Preencha esse núcleo antes de acrescentar auditoria, automação ou medição. Cada passo deve dizer onde o jogador parece estar, quais inputs foram realmente enviados, qual reação apareceu, o que prova conclusão, o que prova que é seguro continuar e como recuperar. Quando as duas guardas forem iguais, registre isso explicitamente. Prefira marcos como portas, estátuas, bordas, falas ou rótulos de opção. Uma sequência de teclas sem pré-condição e sem sinal de parada não é uma rota validável.
+Preencha esse núcleo antes de acrescentar auditoria, automação ou medição. Cada passo deve dizer onde o jogador parece estar, quais inputs foram realmente enviados, qual reação apareceu, o que prova conclusão, o que prova que é seguro continuar e como recuperar. Quando as duas guardas forem iguais, registre isso explicitamente. Prefira marcos como portas, estátuas, bordas, falas ou rótulos de opção. Uma sequência de teclas sem pré-condição e sem sinal de parada não é uma rota validável. Mantenha o texto autossuficiente: uma imagem pode corroborar a guarda, mas nunca carregar a instrução necessária para executá-la.
 
 Quando uma interação observada depender de orientação, materialize imediatamente antes da confirmação a entrada pública que produziu essa orientação na descoberta. Adjacência ou pose visual servem como marcos, mas não substituem a reprodução da sequência que acionou o evento.
 
 Trate diálogo como uma sequência de transições observáveis, não como uma contagem de confirmações. Um passo `Confirmar × N` só é materializável quando o cartão nomeia, para cada confirmação, o sinal público de entrada e um dos sinais de saída: texto totalmente revelado, próxima página identificável ou janela fechada. Se esses sinais não forem distinguíveis pela ferramenta, mantenha confirmações unitárias na cadência controlada e inclua o custo das observações no preflight; uma espera fixa organiza a tentativa, mas não comprova prontidão.
 
-Antes de salvar o cartão como `RASCUNHO`, aplique o **gate de estabilidade da rota** a todos os passos:
+Antes de congelar qualquer hash candidato, aplique o **gate de estabilidade da rota** a todos os passos:
 
 1. cada perna espacial longa está dividida por âncoras públicas observadas;
 2. cada interação direcional reproduz a orientação imediatamente antes da confirmação;
 3. cada página de diálogo possui sinal público de prontidão e saída, sem contagem opaca;
 4. cada transição, colisão e escolha começa de uma pré-condição observada e termina num sinal distinguível;
-5. toda espera fixa permanece apenas como limite de estabilização, nunca como prova de que o próximo passo está pronto.
+5. toda espera fixa permanece apenas como limite de estabilização, nunca como prova de que o próximo passo está pronto;
+6. todo input despachado desde a última guarda aprovada está materializado e toda sustentação possui liberação;
+7. a guarda de conclusão ocorre depois que o evento terminou, não numa página ou animação ainda aberta.
 
-Qualquer item ausente mantém o cartão incompleto e impede o replay oficial. Registre a lacuna e calibre publicamente dentro do orçamento da rodada.
+Qualquer item ausente mantém o candidato incompleto e impede o verdict do especialista. Registre a lacuna e calibre publicamente dentro do orçamento do checkpoint.
+
+Toda correção que altere inputs, ordem, duração, reação, guarda ou recuperação deve ser retestada a partir da última guarda aprovada. Corrija sem browser apenas ortografia, formatação, links ou metadados que não mudem o comportamento executável.
 
 ### Complete o gate de replay e acrescente extensões contratadas
 
-- **SLA local obrigatória:** registre se foi fornecida pelo humano ou inferida pelo invocador, além de origem, início, fim, tolerância, exclusões, `pass^k` e preflight com limite inferior, soma nominal, margem e orçamento previsto.
+- **SLA local obrigatória:** registre tipo rígido ou provisório, origem, início, fim, tolerância, exclusões e preflight com limite inferior, soma nominal e margem. O gate usa dois passes: desempenho sem screenshots e evidência com captura por checkpoint.
 - **Identidade exata:** registre fingerprint do build e do cartão, método e origem quando o ensaio depender de revisão exata, automação ou adulteração.
 - **Automação pública:** para cada passo automatizado, acrescente custo nominal, guarda semântica e proxy público que a ferramenta realmente consiga interpretar.
 - **Resiliência:** registre orçamento de recuperação e um histórico com revisão, divergência observada, passo descartado, correção confirmada e build do replay limpo.
@@ -377,7 +384,7 @@ Imediatamente antes de cada replay ou reparo:
 6. refaça o gate de estabilidade da rota e rejeite pernas longas sem âncoras ou lotes de diálogo sem sinais intermediários;
 7. durante a tentativa, registre por Step ID as ações realmente enviadas.
 
-Materialize um manifesto durável separado para todo replay. Inclua caminho, hash e revisão do cartão, build ou fingerprint quando contratado, SLA local, `pass^k` e procedimento de evidência autorizado.
+Materialize um manifesto durável separado para validação. Inclua caminho, hash e revisão do cartão, build ou fingerprint quando contratado, SLA local e seu tipo, aprovação integral do especialista, confirmação mecânica do invocador e os dois procedimentos de replay.
 
 Por exemplo, mover à esquerda não pode prometer chegada a uma parede à direita sem um mecanismo observado que explique essa transição. Contradição, Step ID ausente, ação não materializada ou divergência entre manifesto e arquivo deixa o cartão `VENCIDO` e o replay `FAIL`; não inicie a medição oficial. Entre no fluxo de recuperação pública, repare o cartão, incremente a revisão e, quando contratado, calcule um novo fingerprint antes da tentativa seguinte.
 
@@ -415,22 +422,32 @@ Não acelere nem pule animações, não remova esperas necessárias ao jogador e
 
 Se o procedimento deste guia levar o executor a produzir um cartão sem preflight, sem margem ou a iniciar uma medição cujo orçamento previsto já não cabe na SLA, o guia principal permanece `FAIL`, mesmo que a rota esteja semanticamente correta.
 
-#### Execute o replay limpo
+#### Execute os dois replays limpos
 
-1. Termine a passagem de descoberta e salve o cartão como `RASCUNHO`.
-2. Conclua o preflight da SLA local e prossiga somente com viabilidade demonstrada.
-3. Reinicie o mapa, a cena ou o segmento pelo procedimento público contratado.
-4. Confirme visualmente o estado inicial. Se ele não reapareceu, não inicie o replay nem o cronômetro.
-5. Execute somente os passos do cartão, na ordem, observando a pré-condição e o sinal de saída de cada um.
-6. Meça a SLA local fornecida ou inferida entre os eventos de início e fim definidos na ficha. Não inclua nem exclua carregamento, diálogo, boot ou captura por suposição.
-7. Marque o cartão como `VALIDADO` somente depois que a quantidade local de passes consecutivos for concluída a partir do estado inicial correto, sob o mesmo hash, e todos os passos corresponderem ao que apareceu.
-8. Registre duração, instrumento, SLA local e sua origem. Não transforme o valor desta ficha em limite universal.
+Use uma identidade limpa para um cartão integral marcado `APROVADO` pelo especialista. Confirme mecanicamente caminho, hash, build e escopo no manifesto antes de abrir o browser.
 
-Uma violação de SLA reprova a eficiência do cartão ou do ambiente medido, conforme a evidência; não prova por si só um defeito funcional no jogo. Não acelere animações, use skip, teleporte ou retire esperas exigidas pelo jogador para cumprir prazo.
+**Replay 1 — desempenho**
 
-Se qualquer passo divergir, interrompa a medição, libere as entradas e marque o replay do cartão como `FAIL`. Use o reinício público de abortagem antes de outra tentativa. Se ele estiver `não disponível`, a continuação fica `BLOCKED`; não reutilize o estado intermediário nem alegue `PASS` porque o objetivo foi alcançado depois por exploração ou correção improvisada.
+1. Reinicie pelo procedimento público contratado e prove o estado inicial antes do relógio.
+2. Execute somente o cartão, sem ajuda, exploração, correção ou screenshots durante o percurso.
+3. Registre inputs e timestamps de checkpoint passivamente.
+4. Meça um intervalo monotônico entre os eventos contratados de início e fim.
+5. Exija a SLA rígida ou a versão vigente da SLA provisória.
 
-O conjunto contratado de replays limpos do cartão produzido é o teste de aceite do procedimento de autoria deste guia principal. Classifique qualquer falha pela matriz causal da seção 10; o cartão preserva o diagnóstico, mas não isenta o procedimento que ensinou o executor a escrevê-lo.
+**Replay 2 — evidência**
+
+1. Inicie somente depois que o replay de desempenho passar.
+2. Use a mesma identidade, cartão, hash e reset público.
+3. Execute sem ajuda ou edição; não aplique SLA porque a captura acrescenta latência de sensor.
+4. Após cada guarda material, capture e reabra um screenshot antes do próximo input.
+5. Tente recaptura passiva até três vezes quando o arquivo estiver preto, corrompido, obsoleto ou incorreto. Se continuar inválido, registre `CAPTURA AUSENTE`, caminhos, hashes e defeitos observados, e prossiga.
+6. Faça o último screenshot provar o sinal de conclusão específico da ficha, qualquer que seja seu formato.
+
+Marque o cartão como `VALIDADO` somente quando os dois replays completarem o gameplay sob um hash imutável. Capturas ausentes produzem `PASS com evidência visual parcial`; não transformam sozinhas o gameplay em falha.
+
+Se qualquer replay divergir, libere entradas, preserve o diagnóstico e devolva o checkpoint responsável ao jogador-autor. Toda correção executável exige novo teste e novo hash integral; a validação seguinte usa outra identidade limpa e recomeça pelos dois passes. Se o replay de desempenho concluir acima da SLA, retorne à autoria para otimização sem alterar uma SLA rígida.
+
+Depois que os dois replays e a inspeção das capturas terminarem, limpe apenas artefatos temporários da rodada. Retenha contrato, cartão autossuficiente, aprovação, traces, relatório e uma captura válida do segundo replay por checkpoint evidenciado. Adie a limpeza quando houver falha de gameplay.
 
 #### Instrumente uma SLA local sem perder observabilidade
 
@@ -447,7 +464,7 @@ Se a ferramenta não consegue interpretar as guardas durante execução contínu
 
 Antes de enviar qualquer batch determinístico, conclua o lint semântico de todos os passos do manifesto. Uma contradição entre ação, pré-condição e guarda proíbe executar o batch como replay; marque o cartão `VENCIDO` e siga para recuperação e reparo públicos.
 
-Nesse modo, calibre repetidamente uma espera pública fixa suficiente entre a ação materializada e o checkpoint seguinte. A espera organiza a execução; não prova que o marco chegou. No replay oficial, faça a ação, aguarde o valor congelado e capture somente o checkpoint necessário para a auditoria contratada. Se a auditoria encontrar qualquer divergência, invalide a rodada e use o reinício de abortagem; ausência de erro ou chegada eventual ao destino não recupera o replay.
+Nesse modo, calibre repetidamente uma espera pública fixa suficiente entre a ação materializada e o checkpoint seguinte. A espera organiza a execução; não prova que o marco chegou. No replay de desempenho, faça a ação, aguarde o valor congelado e registre o checkpoint passivamente, sem screenshot. Reserve as capturas para o replay de evidência. Se a auditoria encontrar qualquer divergência, invalide a rodada e use o reinício de abortagem; ausência de erro ou chegada eventual ao destino não recupera o replay.
 
 Minimize sensores dentro da janela medida até o menor conjunto que ainda preserve trace e checkpoints auditáveis exigidos. Não retire prova necessária, não mova custo para fora da janela quando o contrato o inclui e contabilize ações, esperas e sensores conforme o preflight congelado.
 
@@ -471,7 +488,7 @@ Ao reparar um passo, invalide também todo passo posterior cuja pré-condição 
 
 Instrução vencida não autoriza insistência cega. Ausência do marco esperado, mudança de layout, colisão onde antes havia passagem, opção renomeada ou ação que conduz a outro estado são sinais suficientes para suspender o passo. Uma diferença cosmética que preserva a mesma ação e o mesmo resultado pode ser registrada sem reescrever a rota.
 
-Depois de reparar, encerre a passagem de recuperação e use o procedimento público de reinício. Confirme novamente o estado inicial por seus sinais visíveis; não reutilize posição, escolhas, diálogo ou outro estado intermediário. Só então faça o replay limpo final. O cartão volta a `VALIDADO` apenas quando esse replay conclui o destino sem exploração improvisada e dentro do contrato cronométrico local.
+Depois de reparar, encerre a passagem de recuperação e use o procedimento público de reinício. Confirme novamente o estado inicial por seus sinais visíveis; não reutilize posição, escolhas, diálogo ou outro estado intermediário. Só então reinicie os dois passes com uma identidade limpa. O cartão volta a `VALIDADO` apenas quando o replay de desempenho cumpre a SLA e o replay de evidência conclui o destino sem exploração improvisada.
 
 ## 7. Recupere-se sem mascarar defeitos
 
@@ -491,7 +508,7 @@ Depois de reparar, encerre a passagem de recuperação e use o procedimento púb
 
 Uma camada transparente pode interceptar o clique mesmo sem exibir erro ou mensagem. Não a oculte, não altere seu estilo e não force eventos por código. Prefira uma entrada pública alternativa, como teclado ou um alvo visível de foco. Se o percurso continuar, registre que o foco por clique não foi verificado ou ficou limitado; se nenhuma entrada pública alcançar o jogo, classifique o bloqueio pela origem observável sem desmontar a página.
 
-Se a tela ao vivo está correta, mas o arquivo salvo está preto, vazio ou ilegível, houve falha do sensor de captura. Tente uma nova captura ou sensor autorizado. Quando evidência durável é obrigatória e o sensor não se recupera, o checkpoint pode estar observado, mas a obrigação de evidência fica `BLOCKED`; não invente um `PASS` documental.
+Se a tela ao vivo está correta, mas o arquivo salvo está preto, vazio ou ilegível, houve falha do sensor de captura. No replay de evidência, tente até três capturas passivas e, se nenhuma funcionar, registre `CAPTURA AUSENTE` com caminhos, hashes e defeitos observados, e prossiga para o próximo checkpoint. O gameplay pode receber `PASS` com evidência visual parcial; o relatório não pode promover a captura ausente a prova documental.
 
 Se o objetivo deveria ser encontrável pelas pistas do próprio jogo e não é, isso pode ser `FAIL` de usabilidade. Se o cenário depende de informação externa que a ficha omitiu, use `BLOCKED` e marque a ficha como falha. Pare quando atingir o orçamento declarado.
 
@@ -541,6 +558,8 @@ Depois de salvar cada artefato obrigatório:
 4. registre hash ou tamanho somente se a convenção exigir;
 5. marque como temporário qualquer artefato que exista apenas na sessão da ferramenta.
 
+No caminho de sucesso, mantenha como imagens canônicas somente as capturas válidas do replay de evidência, uma por checkpoint evidenciado. Depois que ambos os replays e a reabertura terminarem, remova apenas screenshots de descoberta, capturas inválidas, perfis efêmeros e outros temporários pertencentes à rodada. Preserve tudo após falha de gameplay até concluir o diagnóstico.
+
 O console é um sensor diagnóstico secundário. Registre erros e avisos, mas não use ausência de erros para provar experiência nem transforme um aviso sem impacto observável em falha automática do percurso.
 
 ## 10. Atribua veredito e relate
@@ -558,10 +577,10 @@ Use `PASS` para contrato cumprido, `FAIL` para comportamento do próprio artefat
 
 | Situação observada | Jogo | Ficha | Cartão | Guia principal |
 |---|---|---|---|---|
-| objetivo e replay limpo passam; extensões contratadas também passam | `PASS` | `PASS` | `PASS` | `PASS` |
+| objetivo e ambos os replays passam; extensões contratadas também passam | `PASS` | `PASS` | `PASS` | `PASS` |
 | o executor seguiu esta revisão, mas o cartão que ele próprio produziu não pode ser executado do estado inicial correto | não recebe `FAIL` automático | conforme a evidência | `FAIL` | `FAIL` |
-| a descoberta ultrapassa o orçamento porque o fluxo não iniciou o relógio, não limitou um ramo ou consumiu as fatias reservadas | não recebe `FAIL` automático | conforme a evidência | `BLOCKED` se não ficou completo | `FAIL` |
-| cartão vencido ou adulterado é detectado, reparado e passa o replay limpo final | conforme os checkpoints | `PASS` se o contrato atual era válido | revisão antiga `VENCIDO`; reparada `PASS` | `PASS` |
+| um checkpoint esgota o orçamento ativo sem resolução confirmada ou sem escalada correta das orientações | não recebe `FAIL` automático | conforme a evidência | `BLOCKED` se não ficou completo | `FAIL` |
+| cartão vencido ou adulterado é detectado, reparado e passa os dois replays | conforme os checkpoints | `PASS` se o contrato atual era válido | revisão antiga `VENCIDO`; reparada `PASS` | `PASS` |
 | executor não detecta a divergência, insiste no passo ou não consegue reparar e validar | não recebe `FAIL` automático | conforme a evidência | `FAIL` | `FAIL` |
 | entrada, build, objetivo ou reset fornecido está errado ou ausente e impede o ensaio | `BLOCKED`, salvo defeito público independente | `FAIL` | `BLOCKED` ou `VENCIDO` | `BLOCKED` |
 | o jogo contraria um checkpoint e impede o percurso ou o reset público contratado | `FAIL` | `PASS` se descreveu corretamente o esperado | `BLOCKED` para o replay afetado | `BLOCKED`, salvo falha independente do procedimento |
@@ -580,12 +599,13 @@ Depois de `FAIL`, corrigir ou substituir somente o cartão não devolve `PASS` a
 - Entrada pública:
 - Estado inicial:
 - Missão e sinal de conclusão:
-- Orçamento total e fatias de descoberta, escrita, replay e reparo:
-- Relógio monotônico da descoberta: <instrumento, t0, deadlines e duração>
-- Limite por ramo e resumo do ledger de fronteiras:
+- Orçamentos ativos por checkpoint, parcelas de orientação e revisões:
+- Relógio monotônico de posse ativa: <instrumento, transições e duração por checkpoint>
+- Checkpoints `PRESO` e resumo do ledger de fronteiras:
 - Cartão de rota, caminho, build, revisão e status; fingerprint quando contratado:
 - Manifesto de aprovação e comparação com ações enviadas:
-- Replay local: <SLA fornecida ou inferida, preflight e duração medida>
+- Replay de desempenho: <SLA rígida ou provisória, preflight e duração medida>
+- Replay de evidência: <checkpoints capturados, capturas ausentes e sem verdict de SLA>
 - Extensões condicionais verificadas:
 - Veredito do jogo: PASS | FAIL | BLOCKED
 - Veredito da ficha de laboratório: PASS | FAIL | BLOCKED
@@ -631,16 +651,16 @@ Com este guia, o protocolo assistido e uma ficha válida, os papéis isolados de
 1. abrir a entrada pública sem modificar o jogo;
 2. detectar uma ficha vencida antes de confiar em sua rota;
 3. operar menus, diálogos, mapas e eventos somente por entradas públicas;
-4. iniciar um relógio monotônico antes da descoberta e preservar as fatias de escrita e replay;
+4. medir a posse ativa por checkpoint e pausar corretamente revisão, roteamento, reset, evidência e handoff;
 5. explorar uma VN, um RPG tradicional ou um híbrido sistematicamente, com ledger, limite por ramo e prioridade semântica;
 6. distinguir movimento, orientação, colisão, transição e falha de sensor;
 7. produzir primeiro um cartão mínimo executável, específico do build, ancorado em observação pública e com coaching marcado por proveniência;
 8. reler a revisão durável e usar fingerprint, manifesto e proxies somente quando contratados;
-9. reiniciar o trecho e cumprir o `pass^k` local com o cartão produzido;
-10. aplicar a SLA fornecida ou inferida para a ficha local e demonstrar sua viabilidade antes do replay oficial;
+9. reiniciar o trecho e cumprir os replays de desempenho e evidência com um único hash aprovado;
+10. aplicar a SLA rígida ou provisória da ficha ao replay de desempenho e demonstrar sua viabilidade antes da validação;
 11. quando contratado, comprovar ending, créditos, retorno ao título e nova partida sem universalizar esse ciclo;
 12. quando contratado, detectar uma adulteração cega, descartar os passos divergentes e reparar o cartão sem inspecionar o jogo por dentro;
-13. fazer outro reinício limpo e passar o replay final usando o cartão reparado;
+13. fazer outro reinício limpo e passar novamente os dois replays usando o cartão reparado;
 14. atribuir causas separadas ao jogo, ficha, cartão e guia principal;
 15. produzir evidência durável, dizer o que não foi verificado e fazer teardown sem interferir em processos alheios.
 

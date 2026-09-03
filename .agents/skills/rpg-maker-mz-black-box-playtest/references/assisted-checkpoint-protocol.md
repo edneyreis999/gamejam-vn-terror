@@ -1,8 +1,8 @@
 # Assisted checkpoint protocol
 
-Use this protocol to coordinate an RPG Maker MZ playtest in which a black-box player learns in the browser while a white-box specialist checks the player’s written route. The specialist coaches; it never replaces real-browser proof.
+Use this protocol to coordinate an RPG Maker MZ playtest in which a black-box player executes public browser actions while a white-box specialist supplies progressively specific public guidance and approves the written route. The specialist coaches; it never replaces browser proof.
 
-The protocol applies to classic top-down RPGs, visual novels, and hybrids. A checkpoint is an observable state transition, not necessarily a tile. Route details, numeric SLAs, timing ratios, and endings remain local to the current contract.
+The protocol applies to top-down RPGs, visual novels, and hybrids. A material checkpoint is a stable, player-visible state transition that proves trajectory progress or provides safe reproduction. Route details, timing values, and finish signals remain local to the current contract.
 
 ## Contract
 
@@ -13,20 +13,24 @@ Record before browser input:
 | Target | Map, quest, scene, ending, or VN flow in player language |
 | Build | Revision/fingerprint and invalidation conditions |
 | Public entry | URL, file, or authorized command |
-| Start | Public reset procedure and stable initial signal |
-| Finish | Public signal that proves the objective |
+| Start | Public reset and stable initial signal |
+| Finish | Scenario-specific public completion signal and rejecting oracle |
 | Abort reset | Public recovery from an incomplete attempt, or `unavailable` |
 | Completion reset | Public recovery after the objective, or `unavailable` |
-| Browser lease | One owner, context/profile, geometry, locale, storage policy |
-| Sensors | Screenshots, trace, video, audio, console, and their limits |
-| Total budget | Learning deadline, validation reserve, reporting reserve, stop rules, extension rule |
-| Replay gate | Scenario-local SLA, source/rationale, clock boundaries, tolerance, `pass^k` |
-| Durable paths | Contract, card, approval, public log, private specialist log, evidence, report, audit |
-| Audit | `off` or external auditor identity and trace requirements |
+| Browser lease | One owner, context/profile, geometry, locale, and storage policy |
+| Sensors | Trace, screenshots, video, audio, console, and their limits |
+| Checkpoint budget | Active-player clock, estimation method, renewal rule, and `PRESO` condition |
+| Replay gate | SLA value/type, clock boundaries, tolerance, and fixed two-pass procedure |
+| Durable paths | Contract, card, approval, role logs, evidence, report, and audit |
+| Safety stops | Reset loss, unsafe action, contamination, mutation, external impossibility, and hash violation |
+| Audit | `off` or external auditor identity and exact trace requirements |
 
-When the human supplies an SLA, freeze it as a contract constraint. Otherwise the invoker owns an explicit provisional estimate. The specialist may privately estimate a lower bound and nominal route cost; public calibration supplies observed costs. Revise an inferred SLA only between closed attempts, retain the evidence and prior estimate, and reset the official streak. A supplied SLA changes only with new human authority.
+Classify the SLA:
 
-Infer no universal numeric default. The same rule applies to partial deadlines, experiment budgets, phase ratios, attempt counts, and extensions.
+- **rigid:** a human requirement; change it only with new human authority;
+- **provisional:** a human-labeled estimate or agent inference; revise it only from specialist evidence of structural cost and before validation.
+
+A change to a provisional SLA during validation closes the attempt, supersedes the manifest, and restarts both passes under a new contract. Infer no universal numeric defaults for SLA, checkpoint budgets, guidance parcels, waits, or retries.
 
 ## Role contracts
 
@@ -34,106 +38,132 @@ Infer no universal numeric default. The same rule applies to partial deadlines, 
 
 Own:
 
-- contract, total clock, local SLA, cumulative checkpoint targets and last-safe limits;
-- task IDs, artifact paths, browser lease, attempt lifecycle, stop/extension decisions;
-- translation of specialist findings into narrative guidance;
-- exact revision/hash gates and the separate approval manifest;
-- causal verdicts and independent evidence audit.
+- contract, active-player clock, browser lease, attempt lifecycle, and safety stops;
+- exact public relay from specialist to player;
+- mechanical confirmation that specialist verdict, scope, and hash match the current candidate;
+- validation handoffs, cleanup gate, causal verdicts, and report.
 
-The invoker may inspect private specialist output but does not play or write the card. It never authorizes an attempt while lint for that exact hash is pending. In audit mode, it emits a concise decision ledger containing input, decision, rationale, timestamp, affected attempt, and outcome.
+The invoker does not play, write the card, or semantically approve it. In audit mode, record the exact player-facing relay or `NO PUBLIC RELAY`, source role, recipient, timestamp, assisted-provenance tag, candidate hash, clock transition, and outcome.
 
 ### Player-author
 
 Own:
 
-- the only browser during learning;
-- public observation, exploration, divergence reports, actual input ledger;
+- the only browser during authorship;
+- public execution, divergence reports, and actual input ledger;
 - the only writes to the route card;
-- checkpoint evidence produced in its own session.
+- temporary discovery evidence inside the run-owned path.
 
-Read only the public contract, player operating guide, current card, player-created artifacts, and hints relayed by the invoker. A hint may be detailed, but remains expressed as player action, public anchor/signal, and recovery. Mark `Derived only from public observation: no` after the first assisted hint.
+Read only the public contract, player guide, current card, player-created artifacts, and invoker relays. Mark the route as assisted after the first specialist orientation. Challenge a relay whose action/reaction order contradicts the browser trace.
 
-At each checkpoint, write before continuing. Challenge any correction whose action/reaction order contradicts the browser trace. Stop browser input while preparing a replay hash or when a public guard is unstable.
+Before hashing a checkpoint candidate, verify:
+
+1. every dispatched input since the last approved guard is materialized;
+2. every held input has a release;
+3. the visible reaction follows its causal action;
+4. the claimed completion guard is stable and post-event;
+5. the resume guard and recovery are explicit;
+6. the text alone is sufficient to execute the route.
 
 ### White-box specialist
 
 Own:
 
-- private feasibility model of the whole target;
-- smallest-source-slice investigation triggered by player observations;
-- exact card-fragment lint and public optimization proposal;
-- distinction between what source proves and what only the browser can prove.
+- private whole-scenario feasibility and checkpoint graph;
+- next-checkpoint definition and active-player budget estimate;
+- minimal orientation and up to three progressive operational orientations;
+- smallest-source-slice review of exact candidate hashes;
+- sole semantic checkpoint and full-card verdict.
 
-Use no browser and never edit the card. Report only to the invoker. Return one verdict for the exact revision/hash:
+Use no browser, edit no card, and report only to the invoker. Return:
 
 ```text
-VERDICT: ACK | REJECT | UNCERTAIN
-SCOPE: <checkpoint fragment>
+VERDICT: APROVADO | REJEITADO | INCONCLUSIVO
+SCOPE: <checkpoint fragment or full card>
+CARD SHA-256: <exact hash>
 SOURCE PROVES: <private facts>
 BROWSER MUST PROVE: <public guards>
+PUBLIC ORIENTATION LEVEL: MINIMAL | OPERATIONAL-1 | OPERATIONAL-2 | OPERATIONAL-3 | NONE
 PUBLIC GUIDANCE:
   1. precondition/anchor
-  2. action
+  2. public action
   3. visible reaction
-  4. exit/resume guard
+  4. completion/resume guard
   5. recovery
-TIMING EFFECT: <task-local projection; no universal number>
+ACTIVE BUDGET EFFECT: <scenario-local estimate or justified revision>
 DEPENDENCIES INVALIDATED: <IDs or none>
 ```
 
-Number action sequences linearly. Bind every wait to the action that triggers it. A fixed wait is a stabilization ceiling or calibrated input interval, not proof of readiness.
-
-The specialist may model future route cost privately. Public guidance optimizes only a segment already traversed by the player. Reveal a next-segment hint only after the player reports a public divergence in that segment.
+Bind waits to causal actions. Treat time as stabilization or calibrated input, never readiness proof. Express guidance through public controls, directions, visible landmarks, character traits, text, reactions, guards, and recovery. Keep internal coordinates, event IDs, variables, hidden values, and source-only timing out of the public relay.
 
 ### Clean replayer
 
-After authorship closes, replace the player-author with a fresh identity and browser context. Give it only the skill, player guide, contract, frozen card, and approval manifest. The replayer neither reads learning logs/private analysis nor edits the card. It executes the configured consecutive `pass^k` under one unchanged hash and no live gameplay guidance.
+After full-card approval, replace the player-author with one fresh identity and browser context. Give it only the skill, player guide, contract, frozen card, and approval manifest. It reads no learning logs or private analysis, edits no card, explores nothing, and receives no live gameplay help.
 
-## Checkpoints and card fragments
+The same identity executes both passes for one unchanged hash. A card revision retires it; the next validation uses another fresh replayer.
 
-Choose only checkpoints that prove progress or make recovery/reproduction safer. Use any applicable class:
+## Material checkpoints
 
-- **spatial:** stable public relation to an NPC, object, door, landmark, or region;
-- **dialogue:** identifiable page fully revealed, next page present, or window closed;
-- **choice:** all visible options captured and selected outcome materialized;
-- **public state:** menu, inventory, party, quest log, HUD, or other player-visible change;
-- **scene:** transfer, cutscene, battle boundary, ending, credits, title, or restored start;
-- **hybrid:** a transition whose input can affect both movement and dialogue.
+Create a checkpoint only when a stable public guard proves a necessary state transition or safe reproduction boundary, such as:
 
-Use the route-card schema in section 6 of `rpg-maker-mz-agent-playtest.md`. Treat its input ledger as factual: reconcile it with tool calls or trace before hashing. Reaching the correct screen does not repair an omitted or extra input. Preserve rejected revisions; mark them non-executable.
+- a required handoff completed and control returned;
+- a necessary area, transfer, or scene reached;
+- a required item or public state acquired;
+- a choice committed and its next state stabilized;
+- the contracted finish signal materialized.
+
+A dialogue page, room crossing, movement without consequence, hidden variable, or equivalent screenshot does not independently earn checkpoint status. The specialist may use hidden state privately only to map dependencies to public outcomes.
+
+For each fragment, record:
+
+```text
+precondition → dispatched action → visible reaction → completion guard → resume guard → recovery → dependencies
+```
+
+Preserve rejected revisions as non-executable. A screenshot may corroborate a guard; the card remains executable from its text alone.
+
+## Active checkpoint budget
+
+Continue discovery while material checkpoints progress. Bound duration only for current-checkpoint active work and scenario-level safety or integrity stops.
+
+Before each checkpoint, have the specialist estimate four scenario-local parcels:
+
+1. one attempt with immediate minimal orientation;
+2. one attempt with operational orientation 1 after the first documented divergence;
+3. one attempt with operational orientation 2, revised from the next divergence;
+4. one attempt with operational orientation 3, the most explicit public sequence allowed.
+
+The estimate accounts for required navigation, dialogue, choices, transitions, animations, and public calibration. Start the monotonic active-player clock when the player owns the browser plus an actionable orientation. Keep it running while the player observes, decides, enters controls, explores, or changes executable card content. Pause it for:
+
+- specialist analysis;
+- invoker routing and mechanical hash checks;
+- passive capture/persistence work;
+- controlled reset and return to the starting guard;
+- browser or role handoff.
+
+Deliver minimal orientation immediately; do not spend a blind exploration phase. After the first failed attempt, deliver operational orientation 1 immediately. Each later operational orientation must respond to the preceding public divergence rather than restate earlier guidance. After operational orientation 3, the player may continue using it while local active time remains.
+
+A new hypothesis authorizes another attempt only inside the remaining budget. A newly visible but unapproved state does not renew time. Renew the entire local budget and all four guidance parcels only when the specialist confirms that a correction resolved the reason for the preceding `REJEITADO` or `INCONCLUSIVO`; preserve the prior history so later guidance cannot repeat it.
+
+Before expiry, revise the budget only for newly demonstrated structural cost, such as additional required navigation, pages, choices, transitions, or animations. Player disorientation, repeated inputs, tool latency, weak guidance, or proximity to expiry do not justify revision. Preserve already consumed guidance levels.
+
+When active time expires without a confirmed resolution, release inputs, stabilize the screen, preserve the artifacts, mark the checkpoint `PRESO`, and stop the workflow. Waiting on a submitted specialist verdict does not consume active time and cannot trigger `PRESO`.
 
 ## Checkpoint loop
 
-1. Start from the last publicly proven state.
-2. Let the player explore until one material checkpoint or divergence.
-3. Have the player append the fragment immediately and freeze a candidate revision/hash.
-4. Start specialist lint of that exact hash.
-5. While lint runs, allow provisional discovery only when the current screen satisfies a separate resume guard. Label its clock and artifacts non-official.
-6. If the base fragment is rejected, discard dependent provisional discoveries and close the attempt.
-7. If accepted, relay the public guidance and apply it only to a new revision between closed attempts.
-8. Replay the cumulative prefix from public reset under frozen partial deadlines. Default to one material checkpoint per prefix; batch adjacent low-risk checkpoints only to protect a recorded validation reserve.
-9. Promote the fragment only after its public guards survive cumulative replay or the final clean replay explicitly covers it.
-10. Repeat until the full route has a feasible preflight.
+1. Start from the last approved public guard.
+2. Have the specialist define the next material checkpoint, budget, and minimal public orientation.
+3. Relay the exact orientation through the invoker and start the active-player clock.
+4. Let the player attempt the checkpoint. After a divergence, pause the clock for specialist analysis, then resume with the next operational orientation.
+5. Have the player append the complete fragment and input ledger immediately after reaching the claimed guard.
+6. Run the player self-check, freeze a candidate hash, and pause browser input.
+7. Have the specialist return the exact-hash semantic verdict. Have the invoker confirm only verdict/scope/hash identity.
+8. On `APROVADO`, continue from the stable approved guard without a cumulative reset.
+9. On `REJEITADO` or `INCONCLUSIVO`, invalidate dependent work. Replay every executable correction from the nearest valid approved guard; apply editorial-only corrections without gameplay replay.
+10. Use the broader public reset only when the current guard is invalid, recovery fails, dependency recalibration requires it, or full validation begins.
+11. Repeat until the specialist marks the full self-contained card `APROVADO` for its exact hash.
 
-Discovery time never counts as replay SLA. Partial targets guide diagnosis and optimization; only a complete replay receives the official scenario verdict.
-
-## Timing and budget control
-
-Keep two domains separate:
-
-- **experiment clock:** continuous across learning, writing, review, reset, validation, and reporting;
-- **replay clock:** one monotonic interval between contracted public start and finish events.
-
-For each checkpoint, the invoker may freeze:
-
-- a cumulative target for expected efficient progress;
-- a cumulative last-safe limit after which the remaining demonstrated lower bound cannot fit the full SLA.
-
-A missed target requests diagnosis; it does not automatically fail the game. A last-safe breach closes the attempt only when the contract’s feasibility arithmetic justifies it. Sensor, screenshot, authoring, and orchestration overhead stays attributed to its real clock domain; never loosen a game SLA to hide instrumentation cost.
-
-Before a full official replay, record lower bound, nominal sum, variability margin, and predicted total. Start only when the predicted total is below the local SLA with defensible margin. Freeze card, deadlines, SLA, and `pass^k` before the streak.
-
-## Approval and validation
+## Approval manifest
 
 Keep approval separate from immutable content:
 
@@ -143,39 +173,55 @@ Keep approval separate from immutable content:
 - Card path:
 - Card SHA-256:
 - Build/fingerprint:
-- Approved by specialist:
-- Approved by invoker:
-- Scenario-local SLA and clock boundaries:
-- Required consecutive passes (`k`):
+- Specialist full-card verdict: APROVADO | REJEITADO | INCONCLUSIVO
+- Invoker hash/scope match: YES | NO
+- SLA: <value, rigid | provisional, origin, clock boundaries>
+- Performance replay: required, screenshot-free, SLA-governed
+- Evidence replay: required, checkpoint screenshots, no SLA verdict
 - Required trajectory evidence:
 - Required outcome evidence:
-- Status: APPROVED | REJECTED | SUPERSEDED
+- Canonical evidence paths:
+- Status: APROVADO | REJEITADO | SUBSTITUÍDO
 ```
 
-The clean replayer recalculates the card hash before opening the browser. Each qualifying replay starts from public reset and uses the same approval. A card edit, deadline/SLA change, gameplay hint, corrective input, wrong start, or missing required oracle breaks the streak.
+Start validation only when the specialist marked the complete card `APROVADO` and the invoker mechanically matched the exact current hash and full scope.
 
-Record both oracles:
+## Two-pass validation
 
-- **trajectory:** actual public inputs, attempt IDs, passive timestamps, resets, and divergences;
-- **outcome:** player-visible state proving the objective.
+### Performance replay — pass 1
 
-After the finish timestamp, reopen every required artifact. If a screenshot is black, corrupt, or shows another state, preserve it as sensor evidence and recapture passively while the correct live state remains. When the live state cannot be recovered without gameplay input, that replay lacks required durable evidence and cannot count toward `pass^k`.
+1. Recalculate the approved card hash.
+2. Reset publicly and prove the contracted initial signal before the replay clock starts.
+3. Capture no screenshots during the measured path.
+4. Execute only the card and record actual inputs plus passive checkpoint timestamps.
+5. Measure one monotonic interval from contracted start to contracted finish.
+6. Require the rigid or current provisional SLA.
 
-The invoker independently reopens the initial and final artifacts. Filename, executor confidence, absence of console errors, or eventual arrival never substitutes for content.
+If gameplay diverges or the finish exceeds SLA, close the pass and preserve the trace. Release the replayer, return the responsible checkpoint to player authorship or optimization, retest every executable change, obtain a new full-card approval, and validate again with a fresh replayer. Keep a rigid SLA unchanged; revise a provisional SLA only through its authority rule.
 
-## Stop and verdict
+### Evidence replay — pass 2
 
-Stop on the first contracted terminal condition: success, exhausted total budget, infeasible remaining lower bound, unavailable public reset, safety boundary, or repeated failure limit without a new hypothesis. Define counts and extensions locally before play; never import them from another run.
+Run only after pass 1 succeeds. Use the same card, hash, public reset, and replayer. Apply no SLA verdict because capture latency belongs to the sensor.
 
-Report separate verdicts for:
+At every material completion guard:
 
-- game behavior;
-- local contract and inferred timing quality;
-- card and approval manifest;
-- player operating guide/workflow;
-- invoker, player-author, specialist, clean replayer;
-- browser/sensor/tooling.
+1. stabilize the public state;
+2. capture one candidate screenshot;
+3. reopen it before the next gameplay input;
+4. retry passively up to three times when black, corrupt, stale, or mismatched;
+5. after three sensor failures, record `CAPTURA AUSENTE`, attempted paths/hashes, and observed defects, then continue to later checkpoints.
 
-Classify a defect at the narrowest causal owner supported by evidence. A specialist correction error, player log omission, premature invoker ACK, black screenshot, and game-state failure are different defects even when they occur in the same attempt.
+The final checkpoint proves the scenario-specific finish signal; no universal ending, credits, title, map, or control scheme is assumed. Both passes must complete gameplay without hints, corrections, exploration, or card edits. Missing screenshots yield `PASS com evidência visual parcial`, never a gameplay failure by themselves.
 
-In audit mode, preserve the target skill snapshot, role traces, rejected revisions, and independent artifact checks. Propose the smallest generic instruction change that would have prevented each demonstrated failure. Route-specific steps and scenario-local numbers remain evidence, never skill rules.
+## Cleanup and verdict
+
+Clean only after both gameplay passes complete and every captured canonical screenshot is reopened:
+
+- delete only run-owned temporary profiles, discovery screenshots, invalid captures, and temporary files;
+- retain the contract, self-contained card, approval, traces, report, and one valid pass-2 screenshot per evidenced checkpoint;
+- record `CAPTURA AUSENTE` for checkpoints lacking a valid image;
+- defer cleanup after any gameplay failure so diagnosis remains possible.
+
+Keep separate verdicts for game, contract, card, workflow, invoker, player-author, specialist, replayer, browser, and sensor. Stop outside `PRESO` only for an unsafe/destructive action, unavailable required reset, role/browser contamination, unauthorized build or skill mutation, external technical impossibility, or replay without full exact-hash approval. Elapsed scenario time is not a terminal condition.
+
+In audit mode, preserve the frozen skill snapshot and exact role traces. Propose only the smallest evidence-backed, genre-agnostic instruction repair for a demonstrated failure; scenario routes, timings, and finish types remain evidence rather than skill rules.
