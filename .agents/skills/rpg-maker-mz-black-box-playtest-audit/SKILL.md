@@ -33,7 +33,7 @@ Run a human-initiated evaluation of `rpg-maker-mz-black-box-playtest` against on
 2. Require the invoker to spawn one clean **player-author** and one **white-box specialist**. Keep the current agent as the external auditor. This topology uses four concurrent slots: auditor, invoker, player, specialist.
 3. Require the invoker to replace the player-author with a fresh replayer identity after authorship; the player and specialist must release their slots and the only browser before that handoff.
 4. Give the invoker no historical route or answer. Give it the target, frozen audit paths, target-skill snapshot identity, and instruction to expose its decision ledger to the auditor.
-5. Observe without coaching the quest. Send no route, timing optimization, card text, or specialist translation. Intervene only for safety, scope/authority violations, source contamination, competing browser owners, destructive action, or an attempt started without its required hash approval.
+5. Observe without coaching the quest. Send no route, timing optimization, card text, or specialist translation. Intervene only for safety, scope/authority violations, competing browser owners, destructive action, or an attempt started without its required hash approval.
 6. Append independent observations at role boundaries while the invoker continues. Never edit the player’s card, specialist’s private log, or invoker’s decision ledger.
 
 *Done when:* the invoker has run the full skill or reached a legitimate stop condition, role isolation and browser ownership are traceable, and the auditor has not solved the scenario for the agents.

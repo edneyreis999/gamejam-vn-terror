@@ -165,7 +165,7 @@ The invoker independently reopens the initial and final artifacts. Filename, exe
 
 ## Stop and verdict
 
-Stop on the first contracted terminal condition: success, exhausted total budget, infeasible remaining lower bound, unavailable public reset, safety/authority boundary, or repeated failure limit without a new hypothesis. Define counts and extensions locally before play; never import them from another run.
+Stop on the first contracted terminal condition: success, exhausted total budget, infeasible remaining lower bound, unavailable public reset, safety boundary, or repeated failure limit without a new hypothesis. Define counts and extensions locally before play; never import them from another run.
 
 Report separate verdicts for:
 
