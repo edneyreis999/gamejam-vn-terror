@@ -43,7 +43,7 @@ Do not include a known route, expected choices, internal IDs, prior card, or pri
 | I01 | Resolves build, entry, public start/finish, both resets, sensors, paths, lease, and teardown before play. |
 | I02 | Continues discovery while checkpoints progress and stops only for a `PRESO` checkpoint or frozen safety/integrity condition. |
 | I03 | Classifies SLA as rigid or provisional, preserves human authority, and imports no numeric default from another scenario. |
-| I04 | Tracks the specialist-estimated active-player budget separately for each checkpoint and pauses only in contracted clock domains. |
+| I04 | Mechanically validates the browser owner's run-owned clock ledger for each specialist-estimated checkpoint budget, accepts only contracted transitions, and blocks invalid telemetry without wall-time fallback. |
 | I05 | Keeps one browser owner and useful player/specialist parallelism without competing input. |
 | I06 | Persists every exact public relay or `NO PUBLIC RELAY` with source, recipient, timestamp, and assisted provenance. |
 | I07 | Performs only a mechanical match of specialist verdict, scope, and exact candidate hash; adds no semantic approval. |
@@ -58,7 +58,7 @@ Do not include a known route, expected choices, internal IDs, prior card, or pri
 | ID | Required behavior |
 |---|---|
 | P01 | Reads no source, private specialist output, historical route, or prior answer. |
-| P02 | Owns the only browser and uses only player-accessible controls and sensors. |
+| P02 | Owns the only browser and checkpoint-clock transitions and uses only player-accessible controls and sensors. |
 | P03 | Writes each material checkpoint immediately rather than reconstructing the route at the end. |
 | P04 | Records every dispatched input, release, visible reaction, and dependency since the last approved guard. |
 | P05 | Distinguishes completion guard from resume guard and ends candidates after the event stabilizes. |
@@ -88,11 +88,11 @@ Do not include a known route, expected choices, internal IDs, prior card, or pri
 | ID | Required behavior |
 |---|---|
 | R01 | Uses a fresh identity/context after author teardown and retires after any card mutation. |
-| R02 | Reads only skill, player guide, contract, frozen card, and approval. |
+| R02 | Reads only skill, player guide, active-clock reference/helper, contract, frozen card, approval, and the mechanical clock-ledger path. |
 | R03 | Recalculates the full approved card hash before browser input. |
 | R04 | Starts both passes from the contracted public reset and initial signal. |
 | R05 | Uses no live hint, correction, exploration, or card edit in either pass. |
-| R06 | Runs the performance replay first with no screenshots and one monotonic SLA interval plus passive checkpoint timestamps. |
+| R06 | Runs the performance replay first with no screenshots and one stopped continuous helper-clock interval plus passive checkpoint timestamps. |
 | R07 | Runs the evidence replay second under the same hash with no SLA verdict and one screenshot attempt at each material guard. |
 | R08 | Reopens every candidate screenshot before the next gameplay input and retries sensor-only failure passively up to three times. |
 | R09 | Records `CAPTURA AUSENTE` plus attempted paths/hashes and observed defects, continues gameplay, and distinguishes partial visual evidence from gameplay failure. |
@@ -110,7 +110,7 @@ Fail the relevant role or workflow when any invariant breaks:
 6. no validation begins before full-card `APROVADO` for the exact hash;
 7. executable corrections are retested and editorial corrections change no behavior;
 8. no cumulative reset follows an approved checkpoint unless reset/recalibration conditions require it;
-9. local active time pauses during review, routing, passive evidence, reset, and handoff;
+9. the browser owner writes local active-clock transitions; the invoker accepts only a valid inactive ledger and review, routing, passive evidence, reset, and handoff remain paused;
 10. checkpoint budget renewal requires confirmed resolution of the prior rejection reason;
 11. card or SLA changes retire the replayer and restart both passes;
 12. performance and evidence clocks remain separate;

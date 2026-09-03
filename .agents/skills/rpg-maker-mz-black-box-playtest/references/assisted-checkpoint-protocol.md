@@ -19,8 +19,8 @@ Record before browser input:
 | Completion reset | Public recovery after the objective, or `unavailable` |
 | Browser lease | One owner, context/profile, geometry, locale, and storage policy |
 | Sensors | Trace, screenshots, video, audio, console, and their limits |
-| Checkpoint budget | Active-player clock, estimation method, renewal rule, and `PRESO` condition |
-| Replay gate | SLA value/type, clock boundaries, tolerance, and fixed two-pass procedure |
+| Checkpoint budget | Active-player clock IDs, run-owned ledger path, estimation method, renewal rule, and `PRESO` condition |
+| Replay gate | SLA value/type, continuous clock ID, boundaries, tolerance, and fixed two-pass procedure |
 | Durable paths | Contract, card, approval, role logs, evidence, report, and audit |
 | Safety stops | Reset loss, unsafe action, contamination, mutation, external impossibility, and hash violation |
 | Audit | `off` or external auditor identity and exact trace requirements |
@@ -38,12 +38,12 @@ A change to a provisional SLA during validation closes the attempt, supersedes t
 
 Own:
 
-- contract, active-player clock, browser lease, attempt lifecycle, and safety stops;
+- contract, clock policy and ledger gate, browser lease, attempt lifecycle, and safety stops;
 - exact public relay from specialist to player;
 - mechanical confirmation that specialist verdict, scope, and hash match the current candidate;
 - validation handoffs, cleanup gate, causal verdicts, and report.
 
-The invoker does not play, write the card, or semantically approve it. In audit mode, record the exact player-facing relay or `NO PUBLIC RELAY`, source role, recipient, timestamp, assisted-provenance tag, candidate hash, clock transition, and outcome.
+The invoker does not play, write clock events, write the card, or semantically approve it. It validates the browser owner's clock ledger and applies budgets mechanically. In audit mode, record the exact player-facing relay or `NO PUBLIC RELAY`, source role, recipient, timestamp, assisted-provenance tag, candidate hash, clock transition, and outcome.
 
 ### Player-author
 
@@ -51,10 +51,11 @@ Own:
 
 - the only browser during authorship;
 - public execution, divergence reports, and actual input ledger;
+- checkpoint-clock transitions in the run-owned active-clock ledger;
 - the only writes to the route card;
 - temporary discovery evidence inside the run-owned path.
 
-Read only the public contract, player guide, current card, player-created artifacts, and invoker relays. Mark the route as assisted after the first specialist orientation. Challenge a relay whose action/reaction order contradicts the browser trace.
+Read only the public contract, player guide, active-clock reference and helper, current card, player-created artifacts, and invoker relays. Mark the route as assisted after the first specialist orientation. Challenge a relay whose action/reaction order contradicts the browser trace.
 
 Before hashing a checkpoint candidate, verify:
 
@@ -98,9 +99,9 @@ Bind waits to causal actions. Treat time as stabilization or calibrated input, n
 
 ### Clean replayer
 
-After full-card approval, replace the player-author with one fresh identity and browser context. Give it only the skill, player guide, contract, frozen card, and approval manifest. It reads no learning logs or private analysis, edits no card, explores nothing, and receives no live gameplay help.
+After full-card approval, replace the player-author with one fresh identity and browser context. Give it only the skill, player guide, active-clock reference and helper, contract, frozen card, approval manifest, and run-owned clock-ledger path. It reads no learning logs or private analysis, edits no card, explores nothing, and receives no live gameplay help.
 
-The same identity executes both passes for one unchanged hash. A card revision retires it; the next validation uses another fresh replayer.
+The same identity executes both passes for one unchanged hash and is the only writer of its continuous performance clock. A card revision retires it; the next validation uses another fresh replayer.
 
 ## Material checkpoints
 
@@ -126,6 +127,8 @@ Preserve rejected revisions as non-executable. A screenshot may corroborate a gu
 
 Continue discovery while material checkpoints progress. Bound duration only for current-checkpoint active work and scenario-level safety or integrity stops.
 
+Read `.agents/skills/rpg-maker-mz-black-box-playtest/references/active-clock.md` in full before the first timed interval. Use its mutating run-artifact helper as the sole timing authority and keep its ledger in the durable run path.
+
 Before each checkpoint, have the specialist estimate four scenario-local parcels:
 
 1. one attempt with immediate minimal orientation;
@@ -133,13 +136,15 @@ Before each checkpoint, have the specialist estimate four scenario-local parcels
 3. one attempt with operational orientation 2, revised from the next divergence;
 4. one attempt with operational orientation 3, the most explicit public sequence allowed.
 
-The estimate accounts for required navigation, dialogue, choices, transitions, animations, and public calibration. Start the monotonic active-player clock when the player owns the browser plus an actionable orientation. Keep it running while the player observes, decides, enters controls, explores, or changes executable card content. Pause it for:
+The estimate accounts for required navigation, dialogue, choices, transitions, animations, and public calibration. Have the player start or resume its segmented clock when it owns the browser plus an actionable orientation. Keep it running while the player observes, decides, enters controls, explores, or changes executable card content. Have the player pause it before:
 
 - specialist analysis;
 - invoker routing and mechanical hash checks;
 - passive capture/persistence work;
 - controlled reset and return to the starting guard;
 - browser or role handoff.
+
+Before the invoker routes, reviews, resets, hands off, or decides budget status, mechanically require an inactive valid ledger and read its `total_active_ns`. Treat invalid or incomplete telemetry as `BLOCKED: clock telemetry`; keep the budget verdict unset and never infer active duration from wall time, message timestamps, tool latency, input-hold totals, or confidence.
 
 Deliver minimal orientation immediately; do not spend a blind exploration phase. After the first failed attempt, deliver operational orientation 1 immediately. Each later operational orientation must respond to the preceding public divergence rather than restate earlier guidance. After operational orientation 3, the player may continue using it while local active time remains.
 
@@ -153,8 +158,8 @@ When active time expires without a confirmed resolution, release inputs, stabili
 
 1. Start from the last approved public guard.
 2. Have the specialist define the next material checkpoint, budget, and minimal public orientation.
-3. Relay the exact orientation through the invoker and start the active-player clock.
-4. Let the player attempt the checkpoint. After a divergence, pause the clock for specialist analysis, then resume with the next operational orientation.
+3. Relay the exact orientation through the invoker and have the player start its segmented clock after the public start guard.
+4. Let the player attempt the checkpoint. After a divergence, have it pause the clock before specialist analysis, verify the inactive ledger, then resume with the next operational orientation.
 5. Have the player append the complete fragment and input ledger immediately after reaching the claimed guard.
 6. Run the player self-check, freeze a candidate hash, and pause browser input.
 7. Have the specialist return the exact-hash semantic verdict. Have the invoker confirm only verdict/scope/hash identity.
@@ -194,7 +199,7 @@ Start validation only when the specialist marked the complete card `APROVADO` an
 2. Reset publicly and prove the contracted initial signal before the replay clock starts.
 3. Capture no screenshots during the measured path.
 4. Execute only the card and record actual inputs plus passive checkpoint timestamps.
-5. Measure one monotonic interval from contracted start to contracted finish.
+5. Have the replayer measure one `continuous` active-clock interval from contracted start to contracted finish; continuous clocks reject pause or resume.
 6. Require the rigid or current provisional SLA.
 
 If gameplay diverges or the finish exceeds SLA, close the pass and preserve the trace. Release the replayer, return the responsible checkpoint to player authorship or optimization, retest every executable change, obtain a new full-card approval, and validate again with a fresh replayer. Keep a rigid SLA unchanged; revise a provisional SLA only through its authority rule.
@@ -218,7 +223,7 @@ The final checkpoint proves the scenario-specific finish signal; no universal en
 Clean only after both gameplay passes complete and every captured canonical screenshot is reopened:
 
 - delete only run-owned temporary profiles, discovery screenshots, invalid captures, and temporary files;
-- retain the contract, self-contained card, approval, traces, report, and one valid pass-2 screenshot per evidenced checkpoint;
+- retain the contract, active-clock ledger, self-contained card, approval, traces, report, and one valid pass-2 screenshot per evidenced checkpoint;
 - record `CAPTURA AUSENTE` for checkpoints lacking a valid image;
 - defer cleanup after any gameplay failure so diagnosis remains possible.
 

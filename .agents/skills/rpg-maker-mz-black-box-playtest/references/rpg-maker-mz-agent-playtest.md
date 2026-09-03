@@ -40,8 +40,8 @@ Um diretório de desenvolvimento pode ser reconhecido por `game.rmmzproject`, ma
 | Missão do jogador | objetivo em linguagem de jogador e sinal público que permite reconhecer sua conclusão |
 | Reinício após conclusão | ação pública autorizada para retornar ao começo do mapa, cena ou segmento depois de alcançar o destino; sinal visível do estado restaurado |
 | Reinício após abortagem | ação pública autorizada para retornar do meio do trecho ao estado inicial depois de uma divergência; sinal visível do estado restaurado; ou `não disponível` |
-| Orçamento por checkpoint | método de estimativa, quatro parcelas de orientação, relógio ativo, renovação e condição `PRESO` |
-| Gate de replay | SLA rígida ou provisória, origem, início, fim, tolerância, exclusões e procedimento de dois passes |
+| Orçamento por checkpoint | método de estimativa, quatro parcelas de orientação, IDs do relógio, ledger durável, renovação e condição `PRESO` |
+| Gate de replay | SLA rígida ou provisória, origem, ID do relógio contínuo, início, fim, tolerância, exclusões e procedimento de dois passes |
 | Sensores | captura, vídeo, áudio e logs permitidos |
 | Destinos duráveis | diretórios do cartão de rota, das evidências e do relatório |
 | Restrições | offline, sem save, somente teclado, acessibilidade ou outras |
@@ -120,11 +120,13 @@ Antes da primeira ação de cada checkpoint material, receba do invocador:
 - quatro parcelas: tentativa mínima e até três orientações operacionais progressivas;
 - a última guarda aprovada e a recuperação pública disponível.
 
-O relógio monotônico conta somente enquanto você possui o browser e uma instrução acionável: observação, decisão, inputs, exploração e mudança executável do cartão. Ele pausa durante análise do especialista, roteamento do invocador, captura passiva, reset controlado e handoff.
+Leia `.agents/skills/rpg-maker-mz-black-box-playtest/references/active-clock.md` integralmente antes do primeiro input cronometrado. Como dono do browser, seja o único escritor das transições do seu relógio no ledger da rodada. O helper mutante de artefato conta somente enquanto você possui o browser e uma instrução acionável: observação, decisão, inputs, exploração e mudança executável do cartão. Pause-o antes de análise do especialista, roteamento do invocador, captura passiva, reset controlado e handoff.
+
+Antes de entregar o controle ao invocador, faça o ledger passar em `verify --require-inactive`. Se o helper rejeitar um evento ou o ledger estiver ausente, corrompido ou incompleto, solte as entradas e reporte `BLOCKED: clock telemetry`; não estime o saldo pelo horário de mensagens.
 
 Depois da primeira divergência documentada, aguarde a orientação operacional 1 em vez de repetir a mesma abordagem. As orientações 2 e 3 devem responder às divergências seguintes. Uma hipótese nova permite outra tentativa dentro do saldo, mas não renova tempo. Somente a confirmação do especialista de que o motivo anterior de `REJEITADO` ou `INCONCLUSIVO` foi resolvido concede novo orçamento completo.
 
-Ao esgotar o orçamento sem essa confirmação, solte entradas, estabilize a tela, preserve o estado e marque o checkpoint `PRESO`. Não encerre por duração total enquanto checkpoints materiais continuam sendo aprovados.
+Quando o `total_active_ns` validado alcançar o orçamento sem essa confirmação, solte entradas, estabilize a tela, preserve o estado e marque o checkpoint `PRESO`. Não encerre por duração total enquanto checkpoints materiais continuam sendo aprovados.
 
 Mantenha um **ledger de fronteiras** durante a descoberta. Uma fronteira é qualquer ramo público ainda não testado: corredor, porta, NPC, objeto, opção de diálogo, comando de menu ou transição equivalente.
 
@@ -600,7 +602,7 @@ Depois de `FAIL`, corrigir ou substituir somente o cartão não devolve `PASS` a
 - Estado inicial:
 - Missão e sinal de conclusão:
 - Orçamentos ativos por checkpoint, parcelas de orientação e revisões:
-- Relógio monotônico de posse ativa: <instrumento, transições e duração por checkpoint>
+- Relógio monotônico de posse ativa: <ledger, IDs, instrumento, transições e duração por checkpoint>
 - Checkpoints `PRESO` e resumo do ledger de fronteiras:
 - Cartão de rota, caminho, build, revisão e status; fingerprint quando contratado:
 - Manifesto de aprovação e comparação com ações enviadas:
@@ -651,7 +653,7 @@ Com este guia, o protocolo assistido e uma ficha válida, os papéis isolados de
 1. abrir a entrada pública sem modificar o jogo;
 2. detectar uma ficha vencida antes de confiar em sua rota;
 3. operar menus, diálogos, mapas e eventos somente por entradas públicas;
-4. medir a posse ativa por checkpoint e pausar corretamente revisão, roteamento, reset, evidência e handoff;
+4. medir a posse ativa por checkpoint no ledger monotônico e pausar corretamente revisão, roteamento, reset, evidência e handoff;
 5. explorar uma VN, um RPG tradicional ou um híbrido sistematicamente, com ledger, limite por ramo e prioridade semântica;
 6. distinguir movimento, orientação, colisão, transição e falha de sensor;
 7. produzir primeiro um cartão mínimo executável, específico do build, ancorado em observação pública e com coaching marcado por proveniência;
