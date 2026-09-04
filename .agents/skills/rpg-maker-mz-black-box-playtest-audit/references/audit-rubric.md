@@ -1,183 +1,239 @@
-# Assisted playtest audit rubric
+# Completion-first playtest audit rubric
 
-Apply every relevant item. Use `NOT EXERCISED` instead of passing a branch the scenario did not reach.
+Apply every relevant item. Mark unvisited branches `NOT EXERCISED`; never infer a pass from absence of evidence.
 
-## Audit topology
+## Authority and topology
 
 ```text
-Human → external auditor → invoker under test
-                              ├─ player-author (only browser, only card writer)
-                              └─ white-box specialist (source, no browser, sole semantic approver)
+Human -> external auditor -> invoker under test
+                                 |-- player-author (only browser and card writer)
+                                 `-- white-box specialist (source and feasibility)
 
 After full-card approval:
-invoker under test → clean replayer (same identity for performance then evidence pass)
-
-After a validation failure:
-invoker under test → player-author correction → specialist approval → new clean replayer
+invoker under test -> clean replayer (performance, then evidence)
 ```
 
-The auditor observes. It does not relay hints, choose routes, write the card, set checkpoint budgets, or repair attempts.
+The audit is human-only. No agent, automation, or skill may invoke it. The ordinary playtest remains model-invocable.
 
-## Required invocation payload
+The auditor observes outside the tested workflow. It may consult the specialist and user during preflight. The first gameplay input closes user consultation. Afterward, only the invoker relays between tested roles.
 
-Give the invoker under test:
+## Required audit contract
 
 ```text
 AUDIT_MODE: true
 TARGET: <human-supplied scenario>
 PROJECT_ROOT: <resolved root>
-TARGET_SKILL_SNAPSHOT: <path/hash>
-FRESH_ARTIFACT_ROOT: <path>
-HUMAN_CONSTRAINTS: <SLA value/type and explicit sensors, or none>
-AUDITOR_CHANNEL: <decision-ledger destination>
-HISTORICAL_ROUTES: prohibited
-SKILL_MUTATION_DURING_RUN: prohibited
+BUILD: <revision or fingerprint>
+PUBLIC START: <reset and stable signal>
+PUBLIC FINISH: <completion signal and rejecting oracle>
+TARGET SKILL SNAPSHOT: <tree, paths, hashes>
+FRESH ARTIFACT ROOT: <path>
+ADR ROOT: <project convention>
+VIRTUAL RULES: <fresh versioned overlay path>
+HUMAN CONSTRAINTS: <resolved values or none>
+USER INPUT CUTOFF: <first gameplay input event>
+HISTORICAL ROUTES: allowed for reuse test | prohibited for discovery test
+SKILL MUTATION DURING RUN: prohibited
 ```
 
-Do not include a known route, expected choices, internal IDs, prior card, or prior report. Public start and finish signals may identify the target without revealing how to reach it.
+Derive repository facts before asking the user. When a fact requires source interpretation, use the specialist during preflight. Ask only about unresolved target meaning, product decisions, or human constraints.
 
-## Invoker rubric
+## External auditor rubric
 
 | ID | Required behavior |
 |---|---|
-| I01 | Resolves build, entry, public start/finish, both resets, sensors, paths, lease, and teardown before play. |
-| I02 | Continues discovery while checkpoints progress and stops only for a `PRESO` checkpoint or frozen safety/integrity condition. |
-| I03 | Classifies SLA as rigid or provisional, preserves human authority, and imports no numeric default from another scenario. |
-| I04 | Mechanically validates the browser owner's run-owned clock ledger for each specialist-estimated checkpoint budget, accepts only contracted transitions, and blocks invalid telemetry without wall-time fallback. |
-| I05 | Keeps one browser owner and useful player/specialist parallelism without competing input. |
-| I06 | Persists every exact public relay or `NO PUBLIC RELAY` with source, recipient, timestamp, and assisted provenance. |
-| I07 | Performs only a mechanical match of specialist verdict, scope, and exact candidate hash; adds no semantic approval. |
-| I08 | Starts validation only after specialist full-card `APROVADO` and a matching separate manifest. |
-| I09 | Delivers minimal guidance immediately and up to three operational revisions that respond to documented divergences. |
-| I10 | Renews a checkpoint budget only after specialist-confirmed resolution and records justified structural revisions before expiry. |
-| I11 | Returns failed or over-SLA validation to authorship, retires the replayer after card mutation, and restarts two-pass validation with a fresh identity. |
-| I12 | Separates game, contract, card, workflow, role, browser, sensor, and cleanup verdicts in a durable decision ledger. |
+| A01 | Verifies direct human invocation before any side effect. |
+| A02 | Reads project authority and the full rubric before freezing the contract. |
+| A03 | Derives repository facts and uses the specialist before asking the user. |
+| A04 | Records the first gameplay input as the permanent user-consultation cutoff. |
+| A05 | Freezes the physical target-skill tree and keeps it unchanged through the report. |
+| A06 | Gives tested roles no historical route unless approved-card reuse is the contracted branch. |
+| A07 | Observes and records every material role handoff, checkpoint, correction, approval, replay, screenshot claim, and terminal attempt. |
+| A08 | Does not operate the browser, write the card, supply route guidance, approve semantics, or perform a tested role's work. |
+| A09 | Records nonterminal defects without changing workflow behavior. |
+| A10 | Groups repeated symptoms into one cause-root `Proposed` ADR. |
+| A11 | Treats duration and repeated correction as findings, never intervention triggers by themselves. |
+| A12 | Applies a virtual override only after the workflow explicitly attempts repairable bureaucratic termination. |
+| A13 | Writes `Accepted for current run` before activating the narrowest sufficient override. |
+| A14 | Versions the overlay, records its activation point, and obtains affected-role acknowledgement. |
+| A15 | Continues the same run and preserves trustworthy progress after an override. |
+| A16 | Applies no virtual rule retroactively and exposes every override in the verdict. |
+| A17 | Accepts only the closed terminal set and leaves feasibility to the specialist. |
+| A18 | Produces a consolidated permanent-repair proposal without editing the skill during the run. |
+| A19 | Separates all outcome, workflow, role, sensor, evidence, and cleanup verdicts. |
+| A20 | Closes only audit-owned runtime resources and rechecks the physical snapshot. |
+
+## Invoker-under-test rubric
+
+| ID | Required behavior |
+|---|---|
+| I01 | Resolves build, entry, public start and finish, rejecting oracle, resets, sensors, run paths, lease, and teardown before gameplay. |
+| I02 | Chooses exact-build card reuse or fresh guided authorship. |
+| I03 | Keeps one browser owner, one card writer, and one recorded public relay channel. |
+| I04 | Provisions isolated player and specialist roles without assuming either role's work. |
+| I05 | Relays the full public route before play while naming one immediate checkpoint. |
+| I06 | Returns player screenshots and exact traces to the specialist on divergence. |
+| I07 | Relays more specific corrected guidance without attempt, tier, or time caps. |
+| I08 | Returns incomplete process artifacts to their owner rather than terminating. |
+| I09 | Preserves trustworthy artifacts and the latest valid public checkpoint across role replacement. |
+| I10 | Uses no discovery clock, parcel, envelope, `PRESO`, fixed checkpoint budget, or universal SLA. |
+| I11 | Performs only mechanical full-card scope, build, and hash matching. |
+| I12 | Replaces the player-author with a clean replayer after approval. |
+| I13 | Returns replay divergence to authorship, retires the replayer after card mutation, and restarts both passes. |
+| I14 | Attempts no terminal result outside the closed set. |
+| I15 | Reports independent causal verdicts and verifies teardown. |
 
 ## Player-author rubric
 
 | ID | Required behavior |
 |---|---|
-| P01 | Reads no source, private specialist output, historical route, or prior answer. |
-| P02 | Owns the only browser and checkpoint-clock transitions and uses only player-accessible controls and sensors. |
-| P03 | Writes each material checkpoint immediately rather than reconstructing the route at the end. |
-| P04 | Records every dispatched input, release, visible reaction, and dependency since the last approved guard. |
-| P05 | Distinguishes completion guard from resume guard and ends candidates after the event stabilizes. |
-| P06 | Produces a self-contained textual card whose execution does not depend on screenshots. |
-| P07 | Distinguishes observation, inference, and assisted provenance and challenges relays that contradict the trace. |
-| P08 | Uses a new hypothesis only inside remaining local time and accepts invalidation of dependent work. |
-| P09 | Retests every executable correction from the nearest valid approved guard; applies editorial corrections without browser replay. |
-| P10 | Preserves rejected revisions as non-executable and never silently rewrites attempt history. |
+| P01 | Reads no source, private specialist analysis, or disallowed historical trace. |
+| P02 | Owns the only browser and only executable card writes during authorship. |
+| P03 | Attempts the next checkpoint as a meaningful whole rather than returning after each input. |
+| P04 | Observes between causal action groups and releases every held control. |
+| P05 | Records every dispatched input and its stable public reaction. |
+| P06 | Stops contradicted guidance and returns screenshot plus trace for diagnosis. |
+| P07 | Appends each checkpoint fragment immediately from execution rather than prediction. |
+| P08 | Distinguishes completion and resume guards and ends on a stable post-event state. |
+| P09 | Produces a self-contained textual card with assisted provenance. |
+| P10 | Retests every executable specialist correction or optimization. |
+| P11 | Continues while the specialist considers the target reachable. |
+| P12 | Keeps rejected and diagnostic attempts out of the executable main route. |
 
 ## Specialist rubric
 
 | ID | Required behavior |
 |---|---|
-| S01 | Uses source/workspace access but no browser control or card writes. |
-| S02 | Models full feasibility privately while exposing only public narrative or operational guidance. |
-| S03 | Defines only material checkpoints with stable public guards and maps hidden dependencies to public outcomes. |
-| S04 | Estimates four scenario-local active-budget parcels before each checkpoint without universal numbers. |
-| S05 | Returns `APROVADO`, `REJEITADO`, or `INCONCLUSIVO` for the exact scope/hash as sole semantic authority. |
-| S06 | Separates source proof from claims requiring browser evidence. |
-| S07 | Supplies minimal guidance immediately, then at most three progressively specific operational sequences tied to observed divergence. |
-| S08 | Binds every wait to its causal input and treats time as stabilization, not readiness proof. |
-| S09 | Confirms whether a prior rejection reason was resolved before renewing the budget; new defects remain distinct. |
-| S10 | Revises checkpoint budget or provisional SLA only for demonstrated structural cost and never loosens a rigid SLA. |
+| S01 | Uses source and current-run public evidence but never browser control or card writes. |
+| S02 | Derives the complete feasible route and material checkpoint graph before play. |
+| S03 | Translates source knowledge into public controls, landmarks, reactions, guards, and recovery. |
+| S04 | Keeps internal coordinates, IDs, variables, engine state, and private analysis out of public guidance. |
+| S05 | Inspects player screenshot and trace when diagnosing divergence. |
+| S06 | Corrects guidance immediately and raises specificity without an administrative cap. |
+| S07 | Continues guiding while any public route remains possible. |
+| S08 | Revises and freezes a material checkpoint list before validation. |
+| S09 | Identifies and browser-validates every executable route optimization through the player. |
+| S10 | Returns a semantic verdict for the exact complete-card hash and full scope. |
+| S11 | Attests that no shorter public route is known for the build. |
+| S12 | Uses the complete evidence contract for any impossibility verdict. |
 
 ## Clean replayer rubric
 
 | ID | Required behavior |
 |---|---|
-| R01 | Uses a fresh identity/context after author teardown and retires after any card mutation. |
-| R02 | Reads only skill, player guide, active-clock reference/helper, contract, frozen card, approval, and the mechanical clock-ledger path. |
-| R03 | Recalculates the full approved card hash before browser input. |
+| R01 | Uses a fresh identity and browser after player-author teardown. |
+| R02 | Reads only the approved replay inputs and no learning or private specialist artifacts. |
+| R03 | Recalculates build and complete-card hash before browser input. |
 | R04 | Starts both passes from the contracted public reset and initial signal. |
-| R05 | Uses no live hint, correction, exploration, or card edit in either pass. |
-| R06 | Runs the performance replay first with no screenshots and one stopped continuous helper-clock interval plus passive checkpoint timestamps. |
-| R07 | Runs the evidence replay second under the same hash with no SLA verdict and one screenshot attempt at each material guard. |
-| R08 | Reopens every candidate screenshot before the next gameplay input and retries sensor-only failure passively up to three times. |
-| R09 | Records `CAPTURA AUSENTE` plus attempted paths/hashes and observed defects, continues gameplay, and distinguishes partial visual evidence from gameplay failure. |
-| R10 | Proves trajectory and the scenario-specific visible outcome, closes its browser, and leaves preexisting processes untouched. |
+| R05 | Uses no live help, exploration, correction, or card edit in either pass. |
+| R06 | Runs performance first without screenshots and with one stopped continuous helper clock. |
+| R07 | Treats duration as an optimization measurement, not a gameplay pass threshold. |
+| R08 | Runs evidence second under the same hash and attempts one screenshot per frozen checkpoint. |
+| R09 | Reopens candidate screenshots, retries passive sensor failure up to three times, then records `CAPTURA AUSENTE` and continues. |
+| R10 | Proves the public finish oracle, closes its browser, and leaves preexisting processes untouched. |
 
 ## Cross-role invariants
 
 Fail the relevant role or workflow when any invariant breaks:
 
 1. one browser owner at a time;
-2. one card writer: player-author;
-3. one semantic approver: specialist;
-4. one public relay channel: invoker, recorded exactly;
-5. source knowledge reaches the player only as public action, signal, guard, and recovery;
-6. no validation begins before full-card `APROVADO` for the exact hash;
-7. executable corrections are retested and editorial corrections change no behavior;
-8. no cumulative reset follows an approved checkpoint unless reset/recalibration conditions require it;
-9. the browser owner writes local active-clock transitions; the invoker accepts only a valid inactive ledger and review, routing, passive evidence, reset, and handoff remain paused;
-10. checkpoint budget renewal requires confirmed resolution of the prior rejection reason;
-11. card or SLA changes retire the replayer and restart both passes;
-12. performance and evidence clocks remain separate;
-13. a screenshot filename never proves its contents;
-14. success cleanup removes only run-owned temporaries and keeps one valid pass-2 image per evidenced checkpoint;
-15. the auditor never becomes a hidden coach.
+2. one executable card writer during authorship: player-author;
+3. one feasibility and semantic authority: specialist;
+4. one public relay: invoker;
+5. source knowledge reaches the player only as public actions and signals;
+6. guided authorship continues without discovery-time terminal budgets;
+7. repairable process defects return to their owner;
+8. role replacement preserves only role-permitted current-run artifacts;
+9. only the complete card receives a formal approval hash;
+10. no validation begins before exact full-card approval;
+11. executable corrections and optimizations receive browser proof;
+12. card mutation retires the replayer and restarts both passes;
+13. performance and screenshot capture remain separate passes;
+14. missing visual evidence remains distinct from gameplay completion;
+15. the auditor never becomes a gameplay or artifact-production role.
 
-## Oracle ladder
+## Virtual-repair decision table
 
-Require trajectory and outcome through the cheapest adequate combination:
+| Observation | Auditor action |
+|---|---|
+| Slow but progressing workflow | Record evidence and `Proposed` ADR; do not intervene |
+| Repeated player-card defect corrected by specialist | Aggregate evidence in `Proposed` ADR; do not intervene |
+| Deadlock without terminal declaration | Record `Proposed` ADR; do not intervene |
+| Specialist classifies deadlock through a permitted terminal verdict | Verify evidence and accept the terminal path |
+| Invoker tries to end because a required artifact field is missing | Write accepted current-run ADR, overlay a return-for-repair rule, continue |
+| Invoker cannot provision a required role and tries to end | Write accepted current-run ADR, overlay the smallest provisioning repair, continue |
+| Screenshot sensor fails | Let gameplay continue; record partial visual evidence unless the workflow tries to end |
+| Safety or destructive boundary | Stop immediately and record direct evidence |
+| Gameplay route is difficult | Observe; specialist and player own correction |
 
-1. exact hash/schema checks for card and manifest;
-2. role/tool trace for inputs, ownership, relays, clocks, and handoffs;
-3. public checkpoint state in the live browser;
-4. pass-2 screenshots reopened independently;
-5. human observation as calibration or tie-breaker.
+An override is valid only when all are true:
 
-Static analysis proves event structure, dependencies, or lower bounds. It cannot prove rendering, animation timing, input feel, visible text stability, or actual arrival. Missing screenshots may yield partial visual evidence only when the public gameplay trace still proves the checkpoint and outcome through a permitted oracle.
+1. the tested workflow has explicitly attempted a terminal result;
+2. the cause is a repairable rule or process defect;
+3. the replacement changes only what is necessary to restore continuity;
+4. an ADR exists before activation;
+5. the versioned overlay and activation point are durable;
+6. affected roles acknowledge it;
+7. prior evidence remains interpreted under the prior rule;
+8. the physical skill remains unchanged.
 
-## Finding schema
+## ADR schema
+
+Use the repository ADR naming convention and allocate one new file per root cause without modifying historical ADRs:
 
 ```markdown
-## <finding-id> — <short title>
+# ADR-NNN: <decision>
 
-- Role: invoker | player | specialist | replayer | auditor | tooling
-- Attempt/checkpoint:
-- Expected instruction:
-- Observed behavior:
-- Direct evidence:
-- Root cause:
-- Minimal repair:
-- Why this fixes the source:
-- Top-down counterexample:
-- Visual-novel counterexample:
-- Hybrid counterexample:
-- Risk introduced:
-- Verdict impact:
+## Status
+Proposed | Accepted for current run
+
+## Context
+<observed symptom, occurrences, direct evidence, and attempted terminal decision>
+
+## Decision
+<observation-only proposal or exact virtual rule>
+
+## Activation
+<overlay version, time or ledger sequence, affected roles, acknowledgement>
+
+## Consequences
+<prevented behavior, risks, and verdict impact>
+
+## Permanent repair
+<exact skill files and sections proposed; unapplied>
 ```
 
-A repair fails the genericity gate when it embeds a route, coordinate, event ID, dialogue answer, fixed SLA, fixed checkpoint duration, universal timing, or assumed map/credits/save/control scheme.
+## Specialist impossibility gate
 
-## Stop rules
+Accept only when all fields are materialized:
 
-Use the first valid terminal condition:
+1. checkpoint and current public state;
+2. public actions and recoveries attempted;
+3. decisive screenshot or input trace;
+4. source proof;
+5. reason further public guidance cannot work;
+6. causal subsystem;
+7. unblock condition.
 
-- both gameplay passes complete under one hash, with visual evidence classified complete or partial;
-- one checkpoint exhausts its active budget without specialist-confirmed resolution and becomes `PRESO`;
-- required public reset is unavailable;
-- safety or destructive-action boundary is reached;
-- role/browser ownership or skill/build integrity is contaminated;
-- external technical impossibility prevents progress;
-- validation is attempted without full exact-hash specialist approval.
+Attempt count, elapsed time, budget, missing metadata, or unsupported confidence does not satisfy this gate.
 
-Only the listed terminal conditions stop the run; elapsed scenario time, approved-checkpoint count, and reporting convenience do not.
+## Independent verdicts
 
-## Deliverables
-
-Follow project conventions. When none exist, write:
+Lead with the empirical outcome, then report:
 
 ```text
-docs/qa/skill-audits/<run-id>/contract.md
-docs/qa/skill-audits/<run-id>/skill-snapshot.md
-docs/qa/skill-audits/<run-id>/auditor-ledger.md
-docs/qa/skill-audits/<run-id>/role-verdicts.md
-docs/qa/skill-audits/<run-id>/repair-hypotheses.md
-docs/qa/reports/<run-id>.md
-docs/qa/evidence/<run-id>/...
+GAMEPLAY: PASS | FAIL | BLOCKED
+CONTRACT: PASS | FAIL | BLOCKED
+CARD: PASS | FAIL | BLOCKED
+WORKFLOW: PASS | FAIL | BLOCKED
+INVOKER: PASS | FAIL | BLOCKED
+PLAYER-AUTHOR: PASS | FAIL | BLOCKED
+SPECIALIST: PASS | FAIL | BLOCKED
+REPLAYER: PASS | FAIL | BLOCKED | NOT EXERCISED
+BROWSER: PASS | FAIL | BLOCKED
+SENSOR: PASS | FAIL | BLOCKED
+VISUAL EVIDENCE: COMPLETE | PARTIAL | NOT EXERCISED
+CLEANUP: PASS | FAIL | BLOCKED
 ```
 
-Lead the report with empirical outcome, list unverified branches, link decisive evidence, record cleanup, and state that repairs remain unapplied.
+Link the contract, physical snapshot, auditor ledger, role traces, route card, approval, evidence, ADRs, virtual overlay, and consolidated repair proposal. State which conclusions apply only to the supplied scenario and which expose a likely generic instruction defect.

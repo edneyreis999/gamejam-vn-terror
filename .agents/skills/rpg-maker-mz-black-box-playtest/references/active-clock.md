@@ -1,79 +1,47 @@
-# Active clock ledger
+# Performance replay clock
 
-Use the bundled mutating run-artifact helper as the sole authority for active playtest time:
+Use the bundled **mutating run-artifact helper** only for the screenshot-free performance replay:
 
 ```text
 python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py
 ```
 
-It changes only the run-owned JSONL path supplied through `--ledger`. It never reads or controls the game. Wall timestamps exist for audit correlation; every verdict-bearing duration comes from `time.monotonic_ns()`.
+Discovery and evidence replay use no verdict-bearing clock. Do not create segmented discovery clocks, parcels, envelopes, or active-time stop conditions.
 
-## Ownership and domains
+## Ownership and boundaries
 
-- The invoker freezes the ledger path, clock IDs, modes, budgets, start/finish guards, and permitted pause reasons. It reads and validates the ledger mechanically.
-- The current browser owner is the only writer for a clock. The player-author writes checkpoint-clock transitions; the clean replayer writes the performance-clock transitions.
-- Give every checkpoint attempt or renewed budget a unique `discovery:<attempt>:<checkpoint>` ID in `segmented` mode.
-- Give every performance replay a unique `performance:<attempt>` ID in `continuous` mode. The evidence replay receives no SLA clock.
-- Keep all clocks for one workflow in the same ledger so one monotonic source and global event order cover every role handoff.
+- The invoker freezes the run-owned ledger path, clock ID, writer identity, and public start and finish signals.
+- The clean replayer is the only event writer.
+- Use one `performance:<attempt>` clock in `continuous` mode.
+- Start immediately when the contracted public start signal materializes.
+- Stop immediately when the contracted public finish signal materializes.
+- Treat any interruption, pause, resume, gameplay help, screenshot, exploration, or card edit inside the interval as an invalid performance attempt.
 
 ## Commands
 
-Create the ledger parent before the first command. Start a checkpoint only after its public start guard and actionable orientation are both present:
+Create the ledger parent before the first event, then start and stop the continuous clock:
 
 ```sh
-python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> start --clock-id <discovery-id> --mode segmented --writer <player-id> --label MINIMAL
-```
+python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> start --clock-id <performance-id> --mode continuous --writer <replayer-id> --label PERFORMANCE
 
-Keep the clock active while the player observes, decides, enters controls, explores, or changes executable card content. Pause it before specialist review, invoker routing, passive capture or persistence, controlled reset, and browser handoff:
-
-```sh
-python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> pause --clock-id <discovery-id> --writer <player-id> --reason <contracted-reason>
-```
-
-Resume only after the browser owner again has an actionable orientation:
-
-```sh
-python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> resume --clock-id <discovery-id> --writer <player-id> --label <guidance-level>
-```
-
-Stop after the completion guard, terminal decision, or retirement of that clock:
-
-```sh
-python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> stop --clock-id <discovery-id> --writer <player-id> --reason <outcome>
-```
-
-For the performance replay, start a continuous clock immediately after the contracted public start signal and stop it immediately when the finish signal materializes:
-
-```sh
-python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> start --clock-id <performance-id> --mode continuous --writer <replayer-id> --label SLA
 python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> stop --clock-id <performance-id> --writer <replayer-id> --reason finish-signal
 ```
 
-A continuous clock rejects pause and resume. Any interruption between its contracted signals invalidates the performance attempt instead of subtracting time.
-
-## Mechanical gates
-
-Read one clock or the whole ledger with `status`. Before review, routing, reset, or handoff, require the browser owner to pause its segmented clock and make the invoker run:
-
-```sh
-python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> verify --require-inactive
-```
-
-At teardown, require every clock to be stopped:
+After the pass, have the invoker run:
 
 ```sh
 python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/active_clock.py --ledger <run-owned-clock.jsonl> verify --require-stopped
 ```
 
-The invoker compares `total_active_ns` with the frozen budget; agent wall time, message timestamps, tool-call duration, input-hold totals, and confidence estimates never substitute for this value.
+The measured `total_active_ns` is the performance result. Report it without applying a universal SLA. When the task supplied a performance goal, compare it separately without changing the gameplay-completion verdict.
 
-Treat a missing, corrupt, locked, regressing, writer-mismatched, or lifecycle-invalid ledger as `BLOCKED: clock telemetry`. Release public inputs, preserve artifacts, and keep the budget verdict unset until a valid ledger exists. Never declare `PRESO`, SLA pass, or SLA failure from fallback timing.
+## Failure handling
 
-## Record contract
+A missing, corrupt, locked, regressing, writer-mismatched, or lifecycle-invalid ledger invalidates the performance measurement, not the already observed guided completion. Preserve the attempt, repair the clock artifact or writer handoff, and rerun both validation passes with a fresh replayer if the card or replay identity changes. Never substitute wall time, message timestamps, tool-call duration, or summed input holds.
 
-Each append-only event records schema, sequence, clock ID, mode, writer, transition, state, label/reason, monotonic timestamp, audit wall timestamp, active delta, accumulated active time, and clock-source identity. The helper rejects edits that break sequence, accounting, lifecycle, writer ownership, or clock-source consistency.
+Each append-only event records sequence, clock ID, mode, writer, transition, state, monotonic timestamp, audit wall timestamp, active delta, accumulated active time, and clock-source identity. The helper rejects edits that break lifecycle, accounting, ownership, or clock-source consistency.
 
-Run the read-only regression helper after changing the clock implementation:
+After changing the clock implementation, run the bundled **read-only regression helper**:
 
 ```sh
 python3 .agents/skills/rpg-maker-mz-black-box-playtest/scripts/test_active_clock.py

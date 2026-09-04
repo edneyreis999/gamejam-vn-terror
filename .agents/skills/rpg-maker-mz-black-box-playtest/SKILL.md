@@ -1,75 +1,78 @@
 ---
 name: rpg-maker-mz-black-box-playtest
-description: Playtests RPG Maker MZ browser flows through an invoker, black-box player, white-box specialist, and clean replayer. Use when a player-visible flow must be discovered, checkpointed, optimized, and reproduced. Don't use for QA planning, unit or harness tests, internal-only diagnosis, or visual-only capture.
+description: Completion-first playtesting of an RPG Maker MZ map, quest, scene, ending, or visual-novel flow through public browser interaction, white-box guidance, a reusable route card, optimized replay, and checkpoint evidence. Use when a player-visible flow must be completed and made reproducible. Don't use for QA planning, unit tests, internal-only diagnosis, or visual-only capture.
 ---
 
-# RPG Maker MZ Assisted Black-Box Playtest
+# RPG Maker MZ Completion-First Black-Box Playtest
 
-Run one assisted workflow. `Black-box` names the player and replayer boundary; the specialist may inspect the workspace and translate source findings into public, player-facing guidance through the invoker.
+Complete one supplied player-visible flow. The current agent is the **invoker**. It coordinates one black-box player-author and one white-box specialist until the target is complete or the specialist proves that completion is impossible. Process defects are repaired in place; they are not terminal outcomes.
 
-## 1. Freeze the local contract
+## 1. Freeze an executable contract
 
-1. Read scoped `AGENTS.md` files and the project documents named by the task.
-2. Read `.agents/skills/rpg-maker-mz-black-box-playtest/references/assisted-checkpoint-protocol.md` and `.agents/skills/rpg-maker-mz-black-box-playtest/references/active-clock.md` in full.
-3. Resolve the target, public entry, build identity, public start and finish signals, completion and abort resets, browser geometry, sensors, durable paths, and teardown ownership.
-4. Classify the replay SLA as **rigid** or **provisional**. Treat a human-supplied SLA as rigid unless the human explicitly labels it provisional. Let the specialist justify revisions to a provisional SLA; let the invoker apply them mechanically before validation. A rigid SLA changes only with new human authority.
-5. Freeze `pass²`: one performance replay without screenshots followed by one evidence replay with one canonical screenshot per material checkpoint. Both use one unchanged card hash and no gameplay help.
-6. Continue discovery while checkpoints progress. Apply duration limits only to current-checkpoint active time and scenario-level safety or integrity stops.
-7. When launched by `rpg-maker-mz-black-box-playtest-audit`, enable audit instrumentation and record exact role handoffs, public relay payloads, hash gates, checkpoint clocks, corrections, evidence claims, cleanup, and terminal decisions.
+1. Read scoped `AGENTS.md` files and the authoritative project documents named by the task.
+2. Read `.agents/skills/rpg-maker-mz-black-box-playtest/references/assisted-checkpoint-protocol.md` in full.
+3. Use the supplied target and resolve every other contract field from the request and repository: build identity, public entry, stable start and finish signals, rejecting finish oracle, public resets, browser geometry, sensors, durable paths, safety boundaries, and teardown ownership. Never ask the user a question, including during preflight.
+4. Locate an existing approved route card for the same target and build. Reuse it when its manifest and entry conditions match; otherwise start guided authorship. Treat a divergent reused card as `VENCIDO` and repair it through authorship.
+5. Create a fresh run root for contract, traces, card or card revision, approval, screenshots, performance clock, and report.
 
-*Done when:* every contract field, SLA authority, two-pass gate, role boundary, safety stop, and audit requirement is explicit, or the exact blocker is recorded.
+*Done when:* the target and public success oracle are falsifiable, the build and reset policy are known, all run paths are isolated, and the workflow has selected reuse or authorship.
 
-## 2. Isolate the roles
+## 2. Establish the roles
 
-1. Assign one **invoker** to own the contract, clock policy and ledger gate, browser lease, public relay channel, mechanical hash/scope checks, attempt lifecycle, and report. Keep it out of gameplay, clock-event authorship, card authorship, semantic approval, and source-to-route judgment.
-2. Assign one clean **player-author** to own the only browser, checkpoint-clock transitions, and route card during authorship. Give it the public contract, player guide, clock reference, its own artifacts, and guidance relayed by the invoker. Keep source, private analysis, historical routes, and prior answers outside its context.
-3. Assign one **white-box specialist** without browser control. Give it the contract and workspace read access. Make it the sole semantic authority for checkpoint and full-card status: `APROVADO`, `REJEITADO`, or `INCONCLUSIVO` for an exact scope and hash.
-4. After full-card approval, close the player-author browser and assign one fresh **clean replayer** to the exclusive browser slot. Give it only this skill, the player guide, clock reference, contract, frozen card, and approval manifest. Make it the only writer of its performance clock.
-5. Let that replayer execute both passes for one unchanged hash. After any card edit, retire it and use a new replayer identity for the next two-pass validation.
-6. Keep one browser owner, one card writer, and one public relay channel at a time. Resume the player-author after a failed replay only after the replayer releases its browser and slot.
+1. Act as the **invoker**. Own the contract, browser lease, exact public relay, artifact repair loop, role lifecycle, validation handoffs, report, and teardown. Do not control gameplay, write the card, or make semantic route decisions.
+2. Assign one **player-author** as the only browser owner and only card writer during authorship. Give it the public contract, player guide, current card, its own public artifacts, and specialist guidance relayed by the invoker. Keep source and private specialist analysis outside its context.
+3. Assign one **white-box specialist** with source access and no browser control. Make it responsible for full-route feasibility, checkpoint selection, public guidance, diagnosis, route optimization, full-card semantic approval, and any impossibility verdict.
+4. Allow the specialist to inspect current-run public screenshots and exact input traces. Require it to keep private source facts separate from the `PUBLIC GUIDANCE` relayed to the player.
+5. Keep one browser owner, one card writer, and one public relay channel at a time. When a role must be replaced, transfer its durable, role-permitted current-run artifacts and continue from the latest trustworthy public checkpoint.
 
-*Done when:* inputs, writers, approval authority, communication edges, browser ownership, forbidden sources, and every author/replayer handoff are explicit and non-overlapping.
+*Done when:* role inputs, private boundaries, artifact ownership, browser ownership, and the single relay channel are explicit and usable.
 
-## 3. Author by locally budgeted checkpoint
+## 3. Reach the finish through checkpoint coaching
 
-1. Require the player-author and clean replayer to read `.agents/skills/rpg-maker-mz-black-box-playtest/references/rpg-maker-mz-agent-playtest.md` and `.agents/skills/rpg-maker-mz-black-box-playtest/references/active-clock.md` in full before browser input.
-2. Have the specialist choose the next material checkpoint and estimate its active-player budget before the player acts. Budget one minimal-guidance attempt plus up to three progressively specific operational-guidance attempts; derive every duration from the scenario rather than a universal default.
-3. Use the mutating run-artifact clock helper defined in `references/active-clock.md` as the sole timing authority. Have the player write monotonic start, pause, resume, and stop transitions while it owns actionable play; have the invoker validate and sum the ledger mechanically. Treat invalid or incomplete telemetry as `BLOCKED: clock telemetry`, with no budget verdict or wall-time fallback.
-4. At checkpoint start, relay a minimal public orientation containing only the immediate objective, one next public landmark or state, and the stop guard. Reserve route sequences, later-step transcripts, and recovery branches for operational guidance after the first documented divergence. Relay that guidance immediately and permit up to three progressively specific revisions, each responding to the preceding public trace and containing only public action, reaction, guard, and recovery.
-5. Continue from the last approved public guard. Use a broader public reset only when a rejected dependency invalidates that guard, safe recovery fails, the specialist requires dependency recalibration, or final validation begins.
-6. After every material checkpoint, have the player append the observed fragment and actual input ledger immediately. Before hashing, require it to verify every dispatched input since the last approved guard and a visibly completed post-event guard. Keep the card self-contained; screenshots are supplemental oracles, not required instructions.
-7. Have the specialist lint the exact candidate hash against the smallest relevant source slice and return the only semantic verdict. Have the invoker verify only that verdict, scope, and hash match the current candidate.
-8. Treat a new hypothesis as permission for another attempt inside the remaining budget, not as progress. Renew the full local budget and guidance cycle only when the specialist confirms that a correction resolved the prior `REJEITADO` or `INCONCLUSIVO`, even if a different defect then appears.
-9. Require every executable correction to be replayed from the last approved guard. Allow editorial-only corrections without gameplay replay. Revise a running checkpoint budget only for newly demonstrated structural cost, preserving guidance already consumed.
-10. Mark the checkpoint `PRESO` and stop when its active budget expires without confirmed resolution. Continue without a scenario-wide time stop while checkpoints keep earning approval.
+1. Require the player-author to read `.agents/skills/rpg-maker-mz-black-box-playtest/references/rpg-maker-mz-agent-playtest.md` in full before its first gameplay input.
+2. Have the specialist derive the complete public route and material checkpoint graph before play. Relay the complete route to the player, while making the next checkpoint the immediate objective.
+3. Let one player turn attempt the complete next checkpoint. The player may perform multiple observed public actions, advance dialogues, correct focus, and recover locally. It returns control after reaching the checkpoint, observing a contradiction, needing more precise guidance, or encountering a technical or safety condition.
+4. On difficulty or divergence, relay the player's screenshot and exact input trace to the specialist. Have the specialist return immediately more specific checkpoint-local guidance: exact public actions, counts or bounded holds when useful, visible reactions, stop guards, and recovery. Guidance has no attempt, relay, or active-time cap.
+5. Continue the player-observation-specialist loop while the specialist considers the target reachable. Do not run a discovery clock, parcel gate, envelope, or `PRESO` budget.
+6. After each reached checkpoint, have the player append the actions actually dispatched and the stable public reactions actually observed. The specialist confirms the fragment semantically; checkpoint fragments do not need individual hashes or formal verdict manifests.
+7. Return incomplete or inconsistent artifacts to their owner with the missing fields identified. Retry or replace the owner when necessary while preserving trustworthy progress. A repairable hash, schema, manifest, lifecycle, handoff, screenshot, path, or tooling defect never ends the playtest.
+8. Accept an impossibility verdict only from the specialist and only when it materializes every field required by the protocol. Otherwise return it for completion and continue.
 
-*Done when:* the full self-contained card is checkpointed, every fragment has an exact-hash specialist verdict, every executable correction was retested, and each local budget decision is backed by a valid inactive clock ledger.
+*Done when:* the finish oracle has materialized in the browser and every material checkpoint is represented by an executed, public, self-contained card fragment, or the specialist has proved a permitted terminal impossibility.
 
-## 4. Validate the frozen card twice
+## 4. Optimize and approve the complete card
 
-1. Freeze the card and create a separate approval manifest containing its exact hash, build, SLA type/value, two-pass procedure, and evidence paths. Start no validation until the specialist marks the full hash `APROVADO` and the invoker confirms that mechanical match.
-2. Run the **performance replay** first from the contracted public reset. Capture no screenshots during it. Have the replayer measure one continuous clock-helper interval between contracted start and finish, record inputs and passive timestamps, and require completion within the SLA.
-3. When the performance replay diverges or exceeds SLA, preserve the attempt, release the replayer, return the responsible checkpoint to authorship or optimization, approve a new full hash, and restart validation with a fresh replayer.
-4. After the performance pass, run the **evidence replay** from the same public reset with the same card and hash. Apply no SLA verdict because capture work adds sensor latency. At each material completion guard, capture and reopen one screenshot before the next gameplay input.
-5. Retry an invalid screenshot passively up to three times. If the sensor still fails, record `CAPTURA AUSENTE` plus attempted paths, hashes, and observed defects; continue the evidence replay and report `PASS com evidência visual parcial` when gameplay completes. Require each available screenshot to prove its contracted checkpoint; never assume a universal ending type.
-6. Send no gameplay hint, correction, exploration, or card edit during either pass. A gameplay divergence fails that pass; passive recapture does not.
-7. After both gameplay passes and evidence inspection complete, remove only run-owned temporary profiles, discovery screenshots, invalid captures, and temporary files. Keep the card, approval, traces, report, and one valid screenshot from the evidence replay per checkpoint. If either gameplay pass fails, defer cleanup for diagnosis.
+1. After first completion, have the specialist identify redundant navigation, inputs, dialogue operations, waits, and recoveries using source plus the public trace.
+2. Have the player-author test every executable optimization from the nearest trustworthy public reset or checkpoint. Keep only changes that are publicly reproduced.
+3. Freeze the final material checkpoint list for evidence. The list may have evolved during authorship but cannot change inside validation.
+4. Have the player finalize a self-contained card containing exact public preconditions, inputs, reactions, completion guards, resume guards, recovery, build identity, assisted provenance, and validity conditions.
+5. Hash the complete card once. Have the specialist return `APROVADO`, `REJEITADO`, or `INCONCLUSIVO` for that exact full-card hash and attest that no shorter public route is known for the build. Have the invoker mechanically match verdict, full scope, build, and hash in a separate approval manifest.
 
-*Done when:* one unchanged hash completes the performance pass within SLA under a valid stopped continuous clock, the evidence pass completes without help, visual coverage is classified as complete or partial, canonical artifacts are reopened, and success-path cleanup leaves only the retained evidence set.
+*Done when:* every executable optimization has browser proof and the complete immutable card has exact-hash specialist approval as the best known public route.
 
-## 5. Judge and close
+## 5. Validate the frozen card twice
 
-1. Keep separate verdicts for game, contract, card, workflow guide, invoker, player-author, specialist, replayer, browser, and sensor.
-2. Stop immediately for unsafe/destructive action, unavailable required reset, role/browser contamination, unauthorized build or skill mutation, external technical impossibility, replay without full exact-hash approval, or `PRESO` checkpoint. Do not convert elapsed scenario time into a stop condition.
-3. In audit mode, preserve the frozen skill snapshot and propose only evidence-backed, minimal, genre-agnostic repairs. Leave skill mutation to later human authority.
-4. Persist durable artifacts uncommitted. Close only runtime resources created by the run and verify teardown.
+1. Close the player-author browser and assign one fresh **clean replayer** to the exclusive browser slot. Give it only this skill, the player guide, contract, frozen card, approval manifest, performance-clock reference and helper, and its own artifacts.
+2. Require the replayer to read `.agents/skills/rpg-maker-mz-black-box-playtest/references/rpg-maker-mz-agent-playtest.md` and `.agents/skills/rpg-maker-mz-black-box-playtest/references/active-clock.md` in full before input.
+3. Run the **performance replay** first from the contracted public reset. Use no screenshots or live help. Execute only the card and measure one continuous helper-clock interval between the contracted start and finish signals. Report the measured duration and any human-supplied performance goal separately; time never invalidates proof of completion.
+4. Run the **evidence replay** from the same reset with the same replayer, card, and hash. Use no live help or card edits. At every frozen checkpoint, attempt one screenshot and reopen it before continuing. Retry an invalid capture passively up to three times, then record `CAPTURA AUSENTE` and continue. Missing screenshots make visual evidence partial, not gameplay unsuccessful.
+5. If either replay diverges, preserve the attempt, retire the replayer, return the responsible portion to guided authorship, approve a new full hash, and validate again with a new clean replayer. Continue until both gameplay passes complete or the specialist proves impossibility.
 
-*Done when:* outcome and trajectory support each verdict, missing visual evidence remains distinct from gameplay, every created runtime resource is closed, and no temporary artifact is deleted outside the successful cleanup gate.
+*Done when:* one unchanged approved hash completes both replays without help, the performance duration is recorded, and visual evidence is classified as complete or partial.
+
+## 6. Judge and close
+
+1. Keep separate verdicts for gameplay, contract, card, workflow, invoker, player-author, specialist, replayer, browser, sensor, and cleanup.
+2. End only after completed deliverables, explicit user cancellation, a destructive or safety boundary, a specialist-proved impossibility, or an external impossibility that prevents even the specialist from continuing.
+3. For specialist impossibility, require the checkpoint and current public state, attempted public actions and recoveries, decisive screenshot or trace, source proof, reason further guidance cannot work, causal subsystem, and the condition needed to unblock.
+4. Retain contract, card, approval, traces, report, performance ledger, and every valid canonical screenshot. Remove only run-owned temporary resources after successful validation; preserve failure artifacts for diagnosis. Close only runtime resources created by the run and verify teardown.
+
+*Done when:* every outcome has a causal verdict, the reusable card and available evidence are durable, all created runtime resources are closed, and unverified claims remain explicit.
 
 ## Companions
 
-- Human-only empirical skill audit: `rpg-maker-mz-black-box-playtest-audit`.
-- Route planning and durable QA design: `rpg-maker-mz-qa-report`.
-- General QA or harness execution: `rpg-maker-mz-qa-execution`.
+- Human-only empirical audit: `rpg-maker-mz-black-box-playtest-audit`. Never invoke it from this skill.
+- Route and QA planning: `rpg-maker-mz-qa-report`.
+- General harness execution: `rpg-maker-mz-qa-execution`.
 - Specialized visual capture: `rpg-maker-mz-visual-evidence`.
-- Completion and release gates: `rpg-maker-mz-final-verify`.
+- Release evidence: `rpg-maker-mz-final-verify`.
