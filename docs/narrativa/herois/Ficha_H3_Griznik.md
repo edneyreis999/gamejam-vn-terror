@@ -1,8 +1,8 @@
 # Ficha do herói — Griznik
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** código H3; nome Griznik; sexo masculino; ocupação carpinteiro  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,12 +11,12 @@
 | Campo | Resposta |
 |---|---|
 | Código | H3 |
-| Nome provisório | Griznik |
+| Nome | Griznik |
 | Pronomes | Ele/dele |
-| Idade aproximada | 36 anos — proposta |
-| Raça | Goblin — proposta |
+| Idade | 36 anos |
+| Raça | Goblin |
 | Ocupação | Carpinteiro |
-| Arquétipo | Construtor improvisador — proposta |
+| Arquétipo | Construtor improvisador |
 | Competência 1 | Percepção |
 | Competência 2 | Sobrevivência |
 
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar encontrado ao fim da expedição.
-- **O que o herói espera conseguir:** abrir uma oficina própria e deixar de aceitar construções baratas que colocam trabalhadores e moradores em risco — proposta.
+- **O que o herói espera conseguir:** abrir uma oficina própria e deixar de aceitar construções baratas que colocam trabalhadores e moradores em risco.
 - **Por que aceita correr perigo:** acredita que sua experiência com estruturas e trabalho em áreas isoladas pode manter o grupo vivo, e vê a recompensa como sua única chance de independência.
 - **O que poderia fazê-lo querer desistir:** perceber que o grupo continua avançando mesmo depois de todos os sinais indicarem que o caminho foi preparado para matá-los.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Percepção
 
@@ -74,7 +77,7 @@ Griznik não resolve perigos por força bruta nem por precisão excepcional. Sua
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Nada fica de pé por acaso. Descobrimos o que sustenta isto e descobrimos o que pode cair.”
+- **Ao entrar numa rota:** “Nada fica de pé por acaso. Descobrimos o que sustenta isto e descobrimos o que pode cair.”
 - **Depois de escapar de um perigo:** “Funcionou. Não bem, não bonito, mas funcionou.”
 - **Depois da morte de outro herói:** “Eu devia ter visto. Sempre há um sinal antes de alguma coisa quebrar.”
 
@@ -82,7 +85,7 @@ Griznik não resolve perigos por força bruta nem por precisão excepcional. Sua
 
 ## 5. Aparência
 
-- **Descrição curta:** Griznik é um goblin magro, de braços compridos e mãos marcadas por cortes pequenos e antigos. Mantém a cabeça levemente inclinada e os olhos em movimento, inspecionando o ambiente mesmo durante uma conversa — proposta.
+- **Descrição curta:** Griznik é um goblin magro, de braços compridos e mãos marcadas por cortes pequenos e antigos. Mantém a cabeça levemente inclinada e os olhos em movimento, inspecionando o ambiente mesmo durante uma conversa.
 - **Roupa ou equipamento principal:** colete de trabalho com muitos bolsos, serrote curto, martelo leve, cordel e estojo de ferramentas.
 - **Detalhe visual ligado à Percepção:** uma pequena lente presa ao colete e marcas de giz nos dedos para destacar rachaduras e encaixes.
 - **Detalhe visual ligado à Sobrevivência:** rolo de corda, lona dobrada e peças reaproveitadas presas à mochila.
@@ -94,16 +97,18 @@ Griznik não resolve perigos por força bruta nem por precisão excepcional. Sua
 
 ### Relação com o bardo
 
-- **Como se conheceram:** o bardo contratou Griznik para examinar um baú antigo e descobrir se havia um compartimento escondido ligado aos registros da expedição — proposta.
+- **Como se conheceram:** o bardo contratou Griznik para examinar um baú antigo e descobrir se havia um compartimento escondido ligado aos registros da expedição.
 - **Por que confia ou desconfia dele:** confia que os documentos e o mapa do bardo são reais, mas percebe contradições sempre que pergunta de onde vieram.
 - **O que poderia causar um conflito entre os dois:** o bardo desprezar um aviso estrutural ou esconder uma informação que impediria Griznik de avaliar corretamente o perigo.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H8 — Draska | Amizade profissional — proposta | Ambos leem ambientes hostis e valorizam prevenção. Draska entende pedra e túneis; Griznik entende madeira e estruturas, mas os dois podem disputar qual risco deve ser resolvido primeiro. |
-| H6 | Curiosidade competitiva — proposta | Ambos percebem detalhes que outros ignoram, mas podem usar métodos muito diferentes para chegar às próprias conclusões. Confirmar depois que H6 for criado. |
+| Draska (H8) | Parceria profissional competitiva | Ambos leem ambientes hostis e valorizam prevenção, mas disputam qual risco precisa ser estabilizado primeiro. |
+| Liora (H6) | Parceria investigativa e curiosidade competitiva | Griznik lê estruturas próximas; Liora conecta sinais a uma rota ampla. A diferença de escala produz cooperação e disputa. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,43 +117,20 @@ Griznik não resolve perigos por força bruta nem por precisão excepcional. Sua
 - **Como reage ao ser escolhido para o sacrifício:** procura o ponto exato em que sua ação pode sustentar a passagem por mais tempo e entrega instruções até o último instante.
 - **Frase curta de despedida:** “Eu seguro a estrutura. Vocês aproveitem a saída.”
 - **O que o grupo perde emocionalmente com sua morte:** a certeza de que até restos, ruínas e situações aparentemente perdidas ainda podiam ser transformados em uma solução.
-- **O que faz depois da campanha, caso sobreviva:** abre uma oficina dedicada a construções seguras e passa a recusar trabalhos que economizem à custa de vidas. Guarda as lascas recolhidas na expedição em uma parede, junto aos nomes de quem não voltou — proposta.
+- **O que faz depois da campanha, caso sobreviva:** abre uma oficina dedicada a construções seguras e passa a recusar trabalhos que economizem à custa de vidas. Guarda as lascas recolhidas na expedição em uma parede, junto aos nomes de quem não voltou.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** reconstrói em voz alta a sequência de omissões e decisões de Ivaí, tratando a fraude como uma estrutura defeituosa que ainda precisa ser reparada.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** destruir o medalhão e salvar Ivaí para encerrar as mortes da linhagem. A sobrevivência cria obrigação de reparo, não recompensa.
 
----
-
-# Checklist do designer
-
-- [x] Usei o par de competências correto.
-- [x] Mostrei cada competência de pelo menos duas formas.
-- [x] A motivação justifica participar da expedição.
-- [x] O herói possui uma qualidade, um defeito e um medo claros.
-- [x] As falas parecem pertencer ao mesmo personagem.
-- [x] Criei duas relações que podem aparecer no jogo.
-- [x] A despedida é curta e combina com sua personalidade.
-- [x] Não tratei elementos pendentes como decisões aprovadas.
-- [x] Mantive as respostas curtas.
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
 
-# Revisão do líder de design
+## 9. Autoridade e exibição do epílogo
 
-- [ ] O herói é diferente dos demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] O herói tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
-
-**Status:** Rascunho  
-**Comentários do revisor:** [PREENCHER]
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.

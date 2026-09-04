@@ -1,8 +1,8 @@
 # Ficha do herói — Bimbren
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** código H5; nome Bimbren; sexo masculino; ocupação mensageiro  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,12 +11,12 @@
 | Campo | Resposta |
 |---|---|
 | Código | H5 |
-| Nome provisório | Bimbren |
+| Nome | Bimbren |
 | Pronomes | Ele/dele |
-| Idade aproximada | 39 anos — proposta |
-| Raça | Gnomo — proposta |
+| Idade | 39 anos |
+| Raça | Gnomo |
 | Ocupação | Mensageiro |
-| Arquétipo | Portador do dever — proposta |
+| Arquétipo | Portador do dever |
 | Competência 1 | Força |
 | Competência 2 | Conhecimento |
 
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar e acesso a rotas antigas registradas no mapa da expedição.
-- **O que o herói espera conseguir:** reabrir um serviço de mensagens entre comunidades isoladas depois que a antiga rota comercial foi abandonada — proposta.
+- **O que o herói espera conseguir:** reabrir um serviço de mensagens entre comunidades isoladas depois que a antiga rota comercial foi abandonada.
 - **Por que aceita correr perigo:** acredita que os mapas encontrados podem revelar uma travessia segura e que sua experiência com viagens e cargas será essencial para o grupo.
 - **O que poderia fazê-lo querer desistir:** descobrir que a missão apresentada pelo bardo nunca existiu da forma prometida e que as mortes servem apenas a um interesse pessoal oculto.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Força
 
@@ -74,7 +77,7 @@ Bimbren não deve ser descrito como especialmente rápido, acrobático ou resist
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Destino confirmado. Agora precisamos garantir que todos cheguem até ele.”
+- **Ao entrar numa rota:** “Destino confirmado. Agora precisamos garantir que todos cheguem até ele.”
 - **Depois de escapar de um perigo:** “Atrasados, machucados, mas ainda em rota.”
 - **Depois da morte de outro herói:** “Ele não era uma encomenda perdida. Não vou reduzi-lo a um custo da viagem.”
 
@@ -82,7 +85,7 @@ Bimbren não deve ser descrito como especialmente rápido, acrobático ou resist
 
 ## 5. Aparência
 
-- **Descrição curta:** Bimbren é um gnomo compacto e musculoso, com barba curta e cuidadosamente aparada. Sua postura parece ajustada para sustentar uma mochila pesada, e seus olhos percorrem placas, marcas e inscrições por hábito — proposta.
+- **Descrição curta:** Bimbren é um gnomo compacto e musculoso, com barba curta e cuidadosamente aparada. Sua postura parece ajustada para sustentar uma mochila pesada, e seus olhos percorrem placas, marcas e inscrições por hábito.
 - **Roupa ou equipamento principal:** casaco de mensageiro reforçado, mochila estruturada, bolsas impermeáveis e bastão usado para apoiar cargas.
 - **Detalhe visual ligado à Força:** correias largas nos ombros, luvas grossas e marcas de pressão deixadas pelo transporte constante de peso.
 - **Detalhe visual ligado ao Conhecimento:** livro de rotas, estojo de selos e pequenas etiquetas escritas em vários sistemas.
@@ -94,16 +97,18 @@ Bimbren não deve ser descrito como especialmente rápido, acrobático ou resist
 
 ### Relação com o bardo
 
-- **Como se conheceram:** Bimbren entregou ao bardo os últimos registros deixados por sua mãe e guardou na memória a reação incomum dele ao receber o pacote — proposta.
+- **Como se conheceram:** Bimbren entregou ao bardo os últimos registros deixados por sua mãe e guardou na memória a reação incomum dele ao receber o pacote.
 - **Por que confia ou desconfia dele:** confia na autenticidade dos registros, mas desconfia de que o bardo omitiu parte da mensagem ao recrutar os heróis.
 - **O que poderia causar um conflito entre os dois:** descobrir que o bardo alterou o propósito da “entrega” e levou o grupo a cumprir um compromisso que nunca aceitou conscientemente.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H1 — Gorvak | Amizade prática — proposta | Ambos lidam com peso e trabalho físico sem exibição. Gorvak questiona a obediência de Bimbren a uma missão; Bimbren questiona o hábito de Gorvak de assumir sozinho todo fardo. |
-| H4 — Seraphina | Respeito intelectual — proposta | Bimbren valoriza o método e os registros de Seraphina, enquanto ela pode desafiar sua tendência a tratar instruções antigas como obrigações ainda válidas. |
+| Gorvak (H1) | Amizade prática | Os dois assumem peso e dever sem alarde; entram em conflito quando Bimbren transforma dever em autossacrifício e Gorvak insiste que proteção também exige permanecer vivo. |
+| Seraphina (H4) | Respeito intelectual | Ambos valorizam conhecimento e dever, mas debatem quando cumprir uma obrigação deixa de ser cuidado e passa a produzir dano. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,43 +117,20 @@ Bimbren não deve ser descrito como especialmente rápido, acrobático ou resist
 - **Como reage ao ser escolhido para o sacrifício:** entrega seus registros ao sobrevivente mais próximo, confirma a direção da saída e assume o peso necessário para manter a passagem aberta.
 - **Frase curta de despedida:** “Minha rota termina aqui. A de vocês, não.”
 - **O que o grupo perde emocionalmente com sua morte:** a certeza de que promessas seriam lembradas e de que ninguém seria abandonado apenas por tornar a jornada mais difícil.
-- **O que faz depois da campanha, caso sobreviva:** reabre o serviço de mensagens, mas abandona a regra de que toda entrega deve ser concluída a qualquer preço. Registra os nomes dos companheiros em seu livro de rotas e passa a ensinar que o dever existe para servir pessoas, não para sacrificá-las — proposta.
+- **O que faz depois da campanha, caso sobreviva:** reabre o serviço de mensagens, mas abandona a regra de que toda entrega deve ser concluída a qualquer preço. Registra os nomes dos companheiros em seu livro de rotas e passa a ensinar que o dever existe para servir pessoas, não para sacrificá-las.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** declara que a missão apresentada por Ivaí era fraudulenta. Uma promessa obtida por omissão não cria dever legítimo para quem foi enganado.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** reunir o medalhão e libertar Floraí e Pérola. O compromisso original dos amantes foi livremente escolhido e deve prevalecer sobre a falsa missão.
 
----
-
-# Checklist do designer
-
-- [x] Usei o par de competências correto.
-- [x] Mostrei cada competência de pelo menos duas formas.
-- [x] A motivação justifica participar da expedição.
-- [x] O herói possui uma qualidade, um defeito e um medo claros.
-- [x] As falas parecem pertencer ao mesmo personagem.
-- [x] Criei duas relações que podem aparecer no jogo.
-- [x] A despedida é curta e combina com sua personalidade.
-- [x] Não tratei elementos pendentes como decisões aprovadas.
-- [x] Mantive as respostas curtas.
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
 
-# Revisão do líder de design
+## 9. Autoridade e exibição do epílogo
 
-- [ ] O herói é diferente dos demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] O herói tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
-
-**Status:** Rascunho  
-**Comentários do revisor:** [PREENCHER]
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.

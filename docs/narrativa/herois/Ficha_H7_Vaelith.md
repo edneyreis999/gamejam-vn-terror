@@ -1,8 +1,8 @@
 # Ficha do herói — Vaelith
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** código H7; nome Vaelith; sexo masculino; ocupação escriba  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,12 +11,12 @@
 | Campo | Resposta |
 |---|---|
 | Código | H7 |
-| Nome provisório | Vaelith |
+| Nome | Vaelith |
 | Pronomes | Ele/dele |
-| Idade aproximada | 32 anos — proposta |
-| Raça | Elfo — proposta |
+| Idade | 32 anos |
+| Raça | Elfo |
 | Ocupação | Escriba |
-| Arquétipo | Pesquisador de campo — proposta |
+| Arquétipo | Pesquisador de campo |
 | Competência 1 | Ocultismo |
 | Competência 2 | Atletismo |
 
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar e permissão para copiar inscrições e documentos encontrados durante a expedição.
-- **O que o herói espera conseguir:** completar um arquivo de textos sobrenaturais destruído por pessoas que temiam seu conteúdo — proposta.
+- **O que o herói espera conseguir:** completar um arquivo de textos sobrenaturais destruído por pessoas que temiam seu conteúdo.
 - **Por que aceita correr perigo:** acredita que registrar as regras de entidades e maldições é a melhor forma de impedir que outras pessoas sejam vítimas delas.
 - **O que poderia fazê-lo querer desistir:** perceber que sua presença está ajudando a libertar uma força que nenhum registro ensina a conter.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Ocultismo
 
@@ -74,7 +77,7 @@ Vaelith não deve superar obstáculos por força bruta nem por manipulação exc
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Se as paredes quiserem nos ameaçar, ao menos que tenham a cortesia de escrever com clareza.”
+- **Ao entrar numa rota:** “Se as paredes quiserem nos ameaçar, ao menos que tenham a cortesia de escrever com clareza.”
 - **Depois de escapar de um perigo:** “Quase morremos, mas agora sabemos exatamente por quê.”
 - **Depois da morte de outro herói:** “Vou escrever o nome dele inteiro. O horror não terá o direito de reduzi-lo a uma nota.”
 
@@ -82,7 +85,7 @@ Vaelith não deve superar obstáculos por força bruta nem por manipulação exc
 
 ## 5. Aparência
 
-- **Descrição curta:** Vaelith é um elfo alto e flexível, com cabelo preso por tiras de pergaminho reaproveitadas. Seus braços e joelhos trazem marcas de escaladas, enquanto manchas de tinta cobrem permanentemente seus dedos — proposta.
+- **Descrição curta:** Vaelith é um elfo alto e flexível, com cabelo preso por tiras de pergaminho reaproveitadas. Seus braços e joelhos trazem marcas de escaladas, enquanto manchas de tinta cobrem permanentemente seus dedos.
 - **Roupa ou equipamento principal:** roupas leves de viagem, estojo impermeável de escrita, bolsa de pergaminhos e corda presa à cintura.
 - **Detalhe visual ligado ao Ocultismo:** luva fina usada apenas ao manusear inscrições e um conjunto de folhas incompletas, nas quais símbolos perigosos nunca aparecem inteiros.
 - **Detalhe visual ligado ao Atletismo:** calçados flexíveis, joelheiras e mosquetões simples para escalada.
@@ -94,16 +97,18 @@ Vaelith não deve superar obstáculos por força bruta nem por manipulação exc
 
 ### Relação com o bardo
 
-- **Como se conheceram:** o bardo pediu que Vaelith identificasse símbolos presentes em uma cópia incompleta dos registros familiares — proposta.
+- **Como se conheceram:** o bardo pediu que Vaelith identificasse símbolos presentes em uma cópia incompleta dos registros familiares.
 - **Por que confia ou desconfia dele:** confia que o bardo possui acesso a informações autênticas, mas desconfia dos trechos que foram removidos antes de chegarem às suas mãos.
 - **O que poderia causar um conflito entre os dois:** descobrir que o bardo censurou uma advertência ou pretende destruir um artefato antes que suas regras sejam compreendidas.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H4 — Seraphina | Debate cauteloso — proposta | Ambos compreendem o sobrenatural. Seraphina prioriza proteger pessoas e conter riscos; Vaelith deseja preservar e estudar o que encontram. |
-| H2 — Elowen | Competição provocativa — proposta | Ambos possuem Atletismo. Elowen atravessa obstáculos pela eficiência da caçadora; Vaelith faz isso para alcançar registros, e sua curiosidade pode levá-lo a aceitar riscos que ela considera inúteis. |
+| Seraphina (H4) | Respeito cauteloso e desconfiança | Ambos compreendem o sobrenatural. Seraphina prioriza consentimento e contenção; Vaelith quer preservar e estudar os registros. |
+| Elowen (H2) | Competição provocativa | Ambos atravessam obstáculos com agilidade, mas divergem sobre riscos sobrenaturais: Elowen prioriza a saída; Vaelith, o registro. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,43 +117,20 @@ Vaelith não deve superar obstáculos por força bruta nem por manipulação exc
 - **Como reage ao ser escolhido para o sacrifício:** entrega suas anotações, indica a passagem que os outros devem alcançar e usa a própria mobilidade para afastar ou conter o perigo.
 - **Frase curta de despedida:** “Levem as páginas. Façam minha última linha valer.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que enfrentava o desconhecido com curiosidade suficiente para fazer o horror parecer compreensível, mas nunca insignificante.
-- **O que faz depois da campanha, caso sobreviva:** organiza o arquivo que buscava, mas restringe textos capazes de causar dano quando lidos sem preparo. Acrescenta os relatos dos companheiros e passa a ensinar que preservar conhecimento também exige saber quando não o divulgar — proposta.
+- **O que faz depois da campanha, caso sobreviva:** organiza o arquivo que buscava, mas restringe textos capazes de causar dano quando lidos sem preparo. Acrescenta os relatos dos companheiros e passa a ensinar que preservar conhecimento também exige saber quando não o divulgar.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** revolta-se com a censura dos registros e com a decisão de Ivaí de destruir uma prova antes que os demais conhecessem suas regras.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** reunir o medalhão, libertar os amantes e preservar o artefato como proteção e evidência da verdade ocultada.
 
----
-
-# Checklist do designer
-
-- [x] Usei o par de competências correto.
-- [x] Mostrei cada competência de pelo menos duas formas.
-- [x] A motivação justifica participar da expedição.
-- [x] O herói possui uma qualidade, um defeito e um medo claros.
-- [x] As falas parecem pertencer ao mesmo personagem.
-- [x] Criei duas relações que podem aparecer no jogo.
-- [x] A despedida é curta e combina com sua personalidade.
-- [x] Não tratei elementos pendentes como decisões aprovadas.
-- [x] Mantive as respostas curtas.
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
 
-# Revisão do líder de design
+## 9. Autoridade e exibição do epílogo
 
-- [ ] O herói é diferente dos demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] O herói tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
-
-**Status:** Rascunho  
-**Comentários do revisor:** [PREENCHER]
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.

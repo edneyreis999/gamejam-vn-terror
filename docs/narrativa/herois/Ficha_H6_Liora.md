@@ -1,8 +1,8 @@
 # Ficha da heroína — Liora
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** código H6; nome Liora; sexo feminino; ocupação navegadora  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,12 +11,12 @@
 | Campo | Resposta |
 |---|---|
 | Código | H6 |
-| Nome provisório | Liora |
+| Nome | Liora |
 | Pronomes | Ela/dela |
-| Idade aproximada | 34 anos — proposta |
-| Raça | Gnoma — proposta |
+| Idade | 34 anos |
+| Raça | Gnoma |
 | Ocupação | Navegadora |
-| Arquétipo | Cartógrafa meticulosa — proposta |
+| Arquétipo | Cartógrafa meticulosa |
 | Competência 1 | Destreza |
 | Competência 2 | Percepção |
 
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar e o direito de copiar os mapas descobertos durante a expedição.
-- **O que a heroína espera conseguir:** publicar um atlas de rotas esquecidas e recuperar sua reputação depois que uma embarcação sob sua orientação desapareceu numa neblina incomum — proposta.
+- **O que a heroína espera conseguir:** publicar um atlas de rotas esquecidas e recuperar sua reputação depois que uma embarcação sob sua orientação desapareceu numa neblina incomum.
 - **Por que aceita correr perigo:** acredita que os destinos do bardo podem explicar alterações de rota que os mapas comuns não registram e provar que o desaparecimento não foi causado por um erro simples de navegação.
 - **O que poderia fazê-la querer desistir:** descobrir que o bardo adulterou mapas, omitiu marcos ou usa informações falsas para conduzir o grupo.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Destreza
 
@@ -74,7 +77,7 @@ Liora não vence obstáculos por velocidade, escalada ou força. Sua Destreza ap
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Marquem a entrada. Um caminho só existe quando sabemos percorrê-lo nos dois sentidos.”
+- **Ao entrar numa rota:** “Marquem a entrada. Um caminho só existe quando sabemos percorrê-lo nos dois sentidos.”
 - **Depois de escapar de um perigo:** “Não foi sorte. O ar mudou antes da passagem fechar.”
 - **Depois da morte de outro herói:** “Eu desenhei uma rota de volta. Ela não serve se não voltarmos todos.”
 
@@ -82,7 +85,7 @@ Liora não vence obstáculos por velocidade, escalada ou força. Sua Destreza ap
 
 ## 5. Aparência
 
-- **Descrição curta:** Liora é uma mulher de porte esguio, pele marcada pelo sol e cabelos presos em tranças firmes para enfrentar vento e chuva. Mantém os olhos em constante movimento entre o chão, o horizonte e seus instrumentos — proposta.
+- **Descrição curta:** Liora é uma gnoma de porte esguio, pele marcada pelo sol e cabelos presos em tranças firmes para enfrentar vento e chuva. Mantém os olhos em constante movimento entre o chão, o horizonte e seus instrumentos.
 - **Roupa ou equipamento principal:** casaco impermeável curto, estojo de navegação, bolsa de mapas e bússola protegida por uma caixa rígida.
 - **Detalhe visual ligado à Destreza:** compassos, lentes e instrumentos finos presos em compartimentos feitos sob medida.
 - **Detalhe visual ligado à Percepção:** pequena luneta e tiras de tecido que usa para verificar correntes de ar.
@@ -94,16 +97,18 @@ Liora não vence obstáculos por velocidade, escalada ou força. Sua Destreza ap
 
 ### Relação com o bardo
 
-- **Como se conheceram:** o bardo pediu que Liora comparasse as duas rotas iniciais com mapas antigos e ela percebeu que algumas referências haviam sido deliberadamente omitidas — proposta.
+- **Como se conheceram:** o bardo pediu que Liora comparasse as duas rotas iniciais com mapas antigos e ela percebeu que algumas referências haviam sido deliberadamente omitidas.
 - **Por que confia ou desconfia dele:** confia que ele conhece os destinos, mas desconfia da diferença entre aquilo que aparece nos registros e aquilo que ele diz lembrar.
 - **O que poderia causar um conflito entre os dois:** o bardo insistir numa direção sem revelar a informação que justifica sua certeza.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H2 — Elowen | Competição amigável — proposta | Ambas possuem Destreza. Elowen age por instinto e movimento; Liora prefere instrumentos e confirmação, levando cada uma a desafiar o método da outra. |
-| H3 — Griznik | Parceria investigativa — proposta | Ambos percebem detalhes ignorados pelo grupo. Griznik lê estruturas próximas; Liora conecta sinais a uma rota mais ampla, embora possam discordar sobre qual escala importa primeiro. |
+| Elowen (H2) | Competição amistosa | Ambas trabalham com precisão. Elowen age por instinto e movimento; Liora prefere instrumentos e confirmação, e cada uma desafia o método da outra. |
+| Griznik (H3) | Parceria investigativa e curiosidade competitiva | Griznik lê estruturas próximas; Liora conecta sinais a uma rota ampla. A diferença de escala produz cooperação e disputa. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,43 +117,20 @@ Liora não vence obstáculos por velocidade, escalada ou força. Sua Destreza ap
 - **Como reage ao ser escolhida para o sacrifício:** entrega o mapa atualizado, aponta a rota mais segura e exige que os demais confirmem as instruções antes de partir.
 - **Frase curta de despedida:** “O caminho está marcado. Não deixem que termine comigo.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que mantinha uma direção quando o ambiente parecia contradizer a realidade e que sempre procurava um caminho de volta.
-- **O que faz depois da campanha, caso sobreviva:** conclui o atlas, mas publica também seus erros, dúvidas e rotas incompletas. Dedica a obra aos companheiros perdidos e passa a ensinar que admitir estar perdida é o primeiro passo para reencontrar o caminho — proposta.
+- **O que faz depois da campanha, caso sobreviva:** conclui o atlas, mas publica também seus erros, dúvidas e rotas incompletas. Dedica a obra aos companheiros perdidos e passa a ensinar que admitir estar perdida é o primeiro passo para reencontrar o caminho.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** compara as omissões de Ivaí com os registros e admite que também escondeu suspeitas para preservar sua autoridade. Isso não reduz a responsabilidade dele, mas impede que ela se coloque fora do problema.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** destruir o medalhão e salvar Ivaí. Uma pessoa viva pode responder pelo que fez, registrar a verdade e corrigir o rumo.
 
----
-
-# Checklist do designer
-
-- [x] Usei o par de competências correto.
-- [x] Mostrei cada competência de pelo menos duas formas.
-- [x] A motivação justifica participar da expedição.
-- [x] A heroína possui uma qualidade, um defeito e um medo claros.
-- [x] As falas parecem pertencer à mesma personagem.
-- [x] Criei duas relações que podem aparecer no jogo.
-- [x] A despedida é curta e combina com sua personalidade.
-- [x] Não tratei elementos pendentes como decisões aprovadas.
-- [x] Mantive as respostas curtas.
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
 
-# Revisão do líder de design
+## 9. Autoridade e exibição do epílogo
 
-- [ ] A heroína é diferente das demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] A heroína tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
-
-**Status:** Rascunho  
-**Comentários do revisor:** [PREENCHER]
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.

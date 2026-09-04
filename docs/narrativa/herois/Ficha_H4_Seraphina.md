@@ -1,8 +1,8 @@
 # Ficha da heroína — Seraphina
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** código H4; nome Seraphina; sexo feminino; raça troll; ocupação curandeira  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,12 +11,12 @@
 | Campo | Resposta |
 |---|---|
 | Código | H4 |
-| Nome provisório | Seraphina |
+| Nome | Seraphina |
 | Pronomes | Ela/dela |
-| Idade aproximada | 54 anos — proposta |
+| Idade | 54 anos |
 | Raça | Troll |
 | Ocupação | Curandeira |
-| Arquétipo | Sábia contestada — proposta |
+| Arquétipo | Sábia contestada |
 | Competência 1 | Conhecimento |
 | Competência 2 | Ocultismo |
 
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar e acesso aos registros antigos encontrados durante a busca.
-- **O que a heroína espera conseguir:** recuperar um tratado perdido sobre males sobrenaturais e financiar uma pequena casa de cura aberta a pessoas rejeitadas por outros médicos — proposta.
-- **Por que aceita correr perigo:** acredita que as dungeons guardam conhecimentos capazes de salvar pacientes para os quais os tratamentos comuns não funcionam.
+- **O que a heroína espera conseguir:** recuperar um tratado perdido sobre males sobrenaturais e financiar uma pequena casa de cura aberta a pessoas rejeitadas por outros médicos.
+- **Por que aceita correr perigo:** acredita que os destinos guardam conhecimentos capazes de salvar pacientes para os quais os tratamentos comuns não funcionam.
 - **O que poderia fazê-la querer desistir:** perceber que o bardo destrói evidências, esconde sintomas ou trata as mortes do grupo como um custo aceitável.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Conhecimento
 
@@ -74,7 +77,7 @@ O Conhecimento de Seraphina aplica estudo médico, histórico e técnico. Seu Oc
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Observem antes de nomear o perigo. Um diagnóstico apressado também mata.”
+- **Ao entrar numa rota:** “Observem antes de nomear o perigo. Um diagnóstico apressado também mata.”
 - **Depois de escapar de um perigo:** “Funcionou porque entendemos a regra. Não atribuam à sorte o que precisaremos repetir.”
 - **Depois da morte de outro herói:** “Eu conhecia tantos modos de impedir uma morte. Nenhum deles serviu quando importava.”
 
@@ -82,7 +85,7 @@ O Conhecimento de Seraphina aplica estudo médico, histórico e técnico. Seu Oc
 
 ## 5. Aparência
 
-- **Descrição curta:** Seraphina é uma troll alta e robusta, com postura tranquila e movimentos deliberados. Seu rosto carrega pequenas incisões decorativas, e seus cabelos longos são presos para não interferir no trabalho — proposta.
+- **Descrição curta:** Seraphina é uma troll alta e robusta, com postura tranquila e movimentos deliberados. Seu rosto carrega pequenas incisões decorativas, e seus cabelos longos são presos para não interferir no trabalho.
 - **Roupa ou equipamento principal:** túnica de viagem reforçada, bolsa de curativos, estojo de amostras e caderno protegido por uma capa impermeável.
 - **Detalhe visual ligado ao Conhecimento:** anotações organizadas por cores, frascos identificados e instrumentos médicos bem conservados.
 - **Detalhe visual ligado ao Ocultismo:** pequenas placas de ardósia nas quais copia símbolos sem precisar tocar nos originais.
@@ -94,16 +97,18 @@ O Conhecimento de Seraphina aplica estudo médico, histórico e técnico. Seu Oc
 
 ### Relação com o bardo
 
-- **Como se conheceram:** o bardo procurou Seraphina para avaliar sintomas estranhos que ele dizia pertencerem a um parente — proposta.
+- **Como se conheceram:** o bardo procurou Seraphina para avaliar sintomas estranhos que ele dizia pertencerem a um parente.
 - **Por que confia ou desconfia dele:** reconhece sintomas e medo verdadeiros, mas desconfia da história incompleta que ele apresenta para explicá-los.
 - **O que poderia causar um conflito entre os dois:** descobrir que o bardo ocultou uma maldição ou recusou informações que poderiam ter evitado uma morte.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H5 | Debate respeitoso — proposta | Ambos possuem Conhecimento, mas podem divergir sobre o valor de registros teóricos diante da experiência clínica de Seraphina. Confirmar depois que H5 for criado. |
-| H7 | Desconfiança profissional — proposta | Ambos compreendem o sobrenatural, mas podem discordar sobre até onde é seguro interagir com uma força desconhecida. Confirmar depois que H7 for criado. |
+| Bimbren (H5) | Respeito intelectual | Ambos valorizam conhecimento e dever, mas debatem quando cumprir uma obrigação deixa de ser cuidado e passa a produzir dano. |
+| Vaelith (H7) | Respeito cauteloso e desconfiança | Ambos compreendem o sobrenatural. Seraphina prioriza consentimento e contenção; Vaelith quer preservar e estudar os registros. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,43 +117,20 @@ O Conhecimento de Seraphina aplica estudo médico, histórico e técnico. Seu Oc
 - **Como reage ao ser escolhida para o sacrifício:** verifica rapidamente as condições dos sobreviventes, entrega seus suprimentos e transforma a despedida em instruções para mantê-los vivos.
 - **Frase curta de despedida:** “Vivam. Depois decidam o que esta morte significa.”
 - **O que o grupo perde emocionalmente com sua morte:** a presença que compreendia o medo e o sofrimento sem tratá-los como fraqueza, além da esperança de que todo horror possuía uma regra investigável.
-- **O que faz depois da campanha, caso sobreviva:** abre sua casa de cura e registra tudo o que aprendeu, incluindo os próprios erros. Passa a exigir consentimento claro de seus pacientes, reconhecendo que salvar alguém não lhe concede o direito de escolher por essa pessoa — proposta.
+- **O que faz depois da campanha, caso sobreviva:** abre sua casa de cura e registra tudo o que aprendeu, incluindo os próprios erros. Passa a exigir consentimento claro de seus pacientes, reconhecendo que salvar alguém não lhe concede o direito de escolher por essa pessoa.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** condena com frieza a ausência de consentimento. Seu impulso de tratar Ivaí não diminui a gravidade de ele ter decidido quais riscos os outros poderiam aceitar.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** reunir o medalhão e libertar Floraí e Pérola, restaurando o juramento livremente escolhido. Se o jogador destruir o artefato, ela ainda tratará Ivaí enquanto puder, sem transformar cuidado em absolvição.
 
----
-
-# Checklist do designer
-
-- [x] Usei o par de competências correto.
-- [x] Mostrei cada competência de pelo menos duas formas.
-- [x] A motivação justifica participar da expedição.
-- [x] A heroína possui uma qualidade, um defeito e um medo claros.
-- [x] As falas parecem pertencer à mesma personagem.
-- [x] Criei duas relações que podem aparecer no jogo.
-- [x] A despedida é curta e combina com sua personalidade.
-- [x] Não tratei elementos pendentes como decisões aprovadas.
-- [x] Mantive as respostas curtas.
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
 
-# Revisão do líder de design
+## 9. Autoridade e exibição do epílogo
 
-- [ ] A heroína é diferente das demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] A heroína tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
-
-**Status:** Rascunho  
-**Comentários do revisor:** [PREENCHER]
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.

@@ -1,60 +1,32 @@
-# Template simples de criação de heróis
+# Template canônico de ficha de herói
 
-Use uma cópia desta ficha para cada herói. O objetivo é criar uma primeira versão clara e jogável — não definir todos os detalhes do personagem.
+**Autoridade:** subordinado ao GDD canônico sem sufixo
 
-**Tempo sugerido de preenchimento:** 30 a 45 minutos.  
-**Regra:** se uma resposta passar de três frases, tente resumir.
+**Uso:** revisar uma das oito fichas existentes sem alterar decisões de design
 
----
-
-## Antes de começar
-
-O líder do projeto deve informar ao designer:
-
-- o código do herói: H1 a H8;
-- as duas competências que ele deve possuir;
-- quais elementos narrativos estão aprovados para uso.
-
-O designer **não deve mudar as competências** nem decidir sozinho pontos pendentes do GDD.
-
-### Pares já definidos
-
-| Código | Competências |
-|---|---|
-| H1 | Força + Vontade |
-| H2 | Destreza + Atletismo |
-| H3 | Percepção + Sobrevivência |
-| H4 | Conhecimento + Ocultismo |
-| H5 | Força + Conhecimento |
-| H6 | Destreza + Percepção |
-| H7 | Ocultismo + Atletismo |
-| H8 | Vontade + Sobrevivência |
+Este é o único template de heróis do projeto. As identidades H1–H8 já estão confirmadas; criar outro herói, trocar competências, raça, posição final ou regra de epílogo exige nova decisão no GDD.
 
 ---
 
-# Ficha do herói
-
-## 1. Conceito básico
+## 1. Identidade confirmada
 
 | Campo | Resposta |
 |---|---|
 | Código | H[ ] |
-| Nome provisório | [PREENCHER] |
-| Pronomes | [PREENCHER] |
-| Idade aproximada | [PREENCHER] |
-| Raça | [PREENCHER] |
-| Ocupação | [PREENCHER] |
-| Arquétipo | [PREENCHER] |
-| Competência 1 | [PREENCHER conforme a tabela] |
-| Competência 2 | [PREENCHER conforme a tabela] |
+| Nome | [PREENCHER conforme o GDD] |
+| Pronomes | [PREENCHER conforme o GDD] |
+| Idade | [PREENCHER conforme o GDD] |
+| Raça | [PREENCHER conforme o GDD] |
+| Ocupação | [PREENCHER conforme o GDD] |
+| Arquétipo | [PREENCHER conforme o GDD] |
 
-### Resumo em uma frase
+A raça desta tabela prevalece sobre qualquer descrição contraditória no restante da ficha.
 
-> [Nome] é uma/um [ocupação] de arquétipo [arquétipo] que [característica marcante], mas [fraqueza ou contradição].
+### Resumo público
 
-**Exemplo:** Lina é uma guia experiente que mantém o grupo calmo, mas esconde o próprio medo de ficar sozinha.
+> [Nome] é uma/um [ocupação] que [característica marcante], mas [fraqueza ou contradição].
 
-### Três palavras para definir o herói
+### Três palavras
 
 1. [PREENCHER]
 2. [PREENCHER]
@@ -62,40 +34,52 @@ O designer **não deve mudar as competências** nem decidir sozinho pontos pende
 
 ---
 
-## 2. Por que participa da expedição?
+## 2. Motivação
 
-- **O que o bardo prometeu:** [PREENCHER]
+- **O que Ivaí prometeu:** [PREENCHER]
 - **O que o herói espera conseguir:** [PREENCHER]
-- **Por que aceita correr perigo:** [PREENCHER]
-- **O que poderia fazê-lo querer desistir:** [PREENCHER]
+- **Por que aceita o perigo:** [PREENCHER]
+- **O que o faria confrontar Ivaí:** [PREENCHER]
 
-> A motivação deve ser forte o bastante para justificar uma expedição perigosa. “Quer dinheiro” pode funcionar, mas explique por que precisa dele.
+A motivação deve justificar a expedição sem pressupor que o herói conhece a maldição ou o plano de destruir o medalhão.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
 
-As competências não devem aparecer apenas como etiquetas. O jogador precisa percebê-las pelo passado, pelas falas, pela profissão ou pelo comportamento do herói.
+> Esta seção serve à autoria, aos dados e ao QA. Os nomes das competências não aparecem na bio pública, nos cards, nas abordagens nem no feedback de sucesso ou falha.
 
-### Competência 1 — [NOME]
+| Código | Competências internas |
+|---|---|
+| H1 — Gorvak | Força + Vontade |
+| H2 — Elowen | Destreza + Atletismo |
+| H3 — Griznik | Percepção + Sobrevivência |
+| H4 — Seraphina | Conhecimento + Ocultismo |
+| H5 — Bimbren | Força + Conhecimento |
+| H6 — Liora | Destreza + Percepção |
+| H7 — Vaelith | Ocultismo + Atletismo |
+| H8 — Draska | Vontade + Sobrevivência |
 
-- **Como aprendeu:** [PREENCHER]
-- **Uma situação em que já usou essa capacidade:** [PREENCHER]
-- **Uma pista visível ou comportamental:** [PREENCHER]
-- **Uma fala que sugere a competência:** “[PREENCHER]”
+Para cada competência, registrar:
 
-### Competência 2 — [NOME]
+- como foi aprendida;
+- uma experiência anterior;
+- uma pista de equipamento ou comportamento;
+- uma fala que a sugira sem nomeá-la.
 
-- **Como aprendeu:** [PREENCHER]
-- **Uma situação em que já usou essa capacidade:** [PREENCHER]
-- **Uma pista visível ou comportamental:** [PREENCHER]
-- **Uma fala que sugere a competência:** “[PREENCHER]”
+Fronteiras corpóreas:
 
-### Atenção às competências físicas
+- **Força:** erguer, empurrar, romper ou sustentar peso;
+- **Atletismo:** correr, saltar, escalar, nadar ou sustentar esforço;
+- **Destreza:** manipular com precisão ou coordenação fina;
+- **Sobrevivência:** ler e usar o ambiente para preservar o grupo.
 
-- **Força:** erguer, empurrar, romper ou sustentar peso.
-- **Atletismo:** correr, saltar, escalar, nadar ou resistir ao esforço.
-- **Destreza:** manipular objetos com precisão ou coordenação fina.
+Fronteiras liminares:
+
+- **Percepção:** detectar sinais e inconsistências;
+- **Conhecimento:** aplicar estudo histórico, técnico ou natural;
+- **Ocultismo:** compreender regras de entidades, rituais e maldições;
+- **Vontade:** resistir a medo, dor, compulsão e manipulação.
 
 ---
 
@@ -104,97 +88,84 @@ As competências não devem aparecer apenas como etiquetas. O jogador precisa pe
 - **Melhor qualidade:** [PREENCHER]
 - **Principal defeito:** [PREENCHER]
 - **Maior medo:** [PREENCHER]
-- **Como reage sob pressão:** [PREENCHER]
-- **Como demonstra carinho ou amizade:** [PREENCHER]
-- **Jeito de falar:** [Direto, formal, brincalhão, tímido, sarcástico etc.]
+- **Reação sob pressão:** [PREENCHER]
+- **Demonstração de afeto:** [PREENCHER]
+- **Jeito de falar:** [PREENCHER]
 
-### Três falas de teste
+### Falas de teste
 
-- **Ao entrar em uma dungeon:** “[PREENCHER]”
-- **Depois de escapar de um perigo:** “[PREENCHER]”
-- **Depois da morte de outro herói:** “[PREENCHER]”
+- **Entrada numa rota:** “[PREENCHER]”
+- **Depois de um perigo:** “[PREENCHER]”
+- **Depois da morte de alguém:** “[PREENCHER]”
 
-> Leia as três falas sem olhar o nome. Elas parecem ter sido ditas pela mesma pessoa? Parecem diferentes das falas dos outros heróis?
+As falas devem ser reconhecíveis sem o nome do personagem e não podem revelar etiquetas de competência.
 
 ---
 
 ## 5. Aparência
 
-- **Descrição curta:** [Duas ou três frases.]
+- **Descrição curta:** [PREENCHER]
 - **Roupa ou equipamento principal:** [PREENCHER]
-- **Detalhe visual ligado à competência 1:** [PREENCHER]
-- **Detalhe visual ligado à competência 2:** [PREENCHER]
-- **Elemento que o diferencia dos outros heróis:** [PREENCHER]
+- **Pistas diegéticas das capacidades:** [PREENCHER]
+- **Elemento visual distintivo:** [PREENCHER]
 
-> Não é necessário definir poses, expressões, paleta completa ou quantidade de sprites nesta etapa.
+A descrição deve corresponder à raça da tabela inicial. A ficha define uma única pose ou expressão de referência; variantes ficam fora do escopo.
 
 ---
 
 ## 6. Relações
 
-### Relação com o bardo
+### Relação com Ivaí
 
 - **Como se conheceram:** [PREENCHER]
-- **Por que confia ou desconfia dele:** [PREENCHER]
-- **O que poderia causar um conflito entre os dois:** [PREENCHER]
+- **Razão de confiança ou desconfiança:** [PREENCHER]
+- **Gatilho de conflito:** [PREENCHER]
 
-### Relação com dois heróis
+### Relações bilaterais permitidas
 
-| Outro herói | Tipo de relação | Motivo |
-|---|---|---|
-| H[ ] | Amizade / Rivalidade / Desconfiança / Admiração / Outra | [PREENCHER] |
-| H[ ] | Amizade / Rivalidade / Desconfiança / Admiração / Outra | [PREENCHER] |
+| Herói | Pares confirmados |
+|---|---|
+| Gorvak | Bimbren e Draska |
+| Elowen | Liora e Vaelith |
+| Griznik | Draska e Liora |
+| Seraphina | Bimbren e Vaelith |
+| Bimbren | Gorvak e Seraphina |
+| Liora | Elowen e Griznik |
+| Vaelith | Elowen e Seraphina |
+| Draska | Gorvak e Griznik |
 
-> Escolha relações que possam aparecer em falas ou decisões. Não crie apenas informações de passado sem efeito no jogo.
-
----
-
-## 7. Sacrifício e epílogo
-
-- **Como reage ao ser escolhido para o sacrifício:** [Uma frase.]
-- **Frase curta de despedida:** “[PREENCHER]”
-- **O que o grupo perde emocionalmente com sua morte:** [PREENCHER]
-- **O que faz depois da campanha, caso sobreviva:** [Duas ou três frases.]
+A descrição de um par deve ser compatível nas duas fichas. Outros pares podem trocar falas coletivas, mas não recebem arco bilateral.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 7. Sacrifício e epílogo predefinido
 
-> Preencha esta seção somente se o líder confirmar que a proposta “O Medalhão das Duas Margens” foi aprovada. Ela ainda não substitui automaticamente o GDD canônico.
+- **Reação ao sacrifício:** [Uma frase.]
+- **Despedida fixa:** “[PREENCHER]”
+- **Perda emocional:** [PREENCHER]
+- **Epílogo fixo de sobrevivência:** [Duas ou três frases.]
 
-- **Como reage ao descobrir que o bardo mentiu:** [PREENCHER]
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** [PREENCHER]
-- **Essa opinião pode mudar? O que causaria a mudança?** [PREENCHER]
-
----
-
-# Checklist do designer
-
-Antes de entregar a ficha, confirme:
-
-- [ ] Usei o par de competências correto.
-- [ ] Mostrei cada competência de pelo menos duas formas.
-- [ ] A motivação justifica participar da expedição.
-- [ ] O herói possui uma qualidade, um defeito e um medo claros.
-- [ ] As falas parecem pertencer ao mesmo personagem.
-- [ ] Criei duas relações que podem aparecer no jogo.
-- [ ] A despedida é curta e combina com sua personalidade.
-- [ ] Não tratei elementos pendentes como decisões aprovadas.
-- [ ] Mantive as respostas curtas.
+A despedida é usada depois do clique único que confirma a vítima. O epílogo não é criado pelo final: o jogo exibe literalmente o texto desta ficha somente quando o herói está vivo e presente na formação após o sexto encontro do Vilarejo. Mortos aparecem no memorial; sobreviventes na cidade não aparecem.
 
 ---
 
-# Revisão do líder de design
+## 8. Posição fixa no clímax
 
-Esta seção deve ser preenchida pelo responsável pela revisão, não pelo designer que criou a ficha.
+- **Reação à mentira de Ivaí:** [PREENCHER conforme o GDD]
+- **Opinião:** reunir o medalhão / destruir o medalhão
+- **Justificativa:** [PREENCHER conforme o GDD]
+- **Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia opções.
 
-- [ ] O herói é diferente dos demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] O herói tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
+---
 
-**Status:** Rascunho / Precisa de ajustes / Aprovado  
-**Comentários do revisor:** [PREENCHER]
+## 9. Checklist de consistência
+
+- [ ] Identidade e raça correspondem à tabela inicial e ao GDD.
+- [ ] Competências correspondem à matriz H1–H8.
+- [ ] Bio pública, falas e feedback não nomeiam competências.
+- [ ] Força, Atletismo, Destreza e Sobrevivência mantêm fronteiras distintas.
+- [ ] As duas relações são bilaterais e pertencem aos pares permitidos.
+- [ ] Despedida e epílogo são textos únicos e predefinidos.
+- [ ] Opinião do clímax corresponde à posição fixa no GDD.
+- [ ] Não foram criadas variantes por herói para resultados de armadilha.
+- [ ] Nenhum conteúdo contradiz o GDD canônico.

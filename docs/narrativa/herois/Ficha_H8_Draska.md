@@ -1,8 +1,8 @@
 # Ficha do herói — Draska
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** nome Draska; sexo feminino; raça goblin; ocupação mineradora  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,12 +11,12 @@
 | Campo | Resposta |
 |---|---|
 | Código | H8 |
-| Nome provisório | Draska |
+| Nome | Draska |
 | Pronomes | Ela/dela |
-| Idade aproximada | 31 anos — proposta |
+| Idade | 31 anos |
 | Raça | Goblin |
 | Ocupação | Mineradora |
-| Arquétipo | Sobrevivente pragmática — proposta |
+| Arquétipo | Sobrevivente pragmática |
 | Competência 1 | Vontade |
 | Competência 2 | Sobrevivência |
 
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar encontrado ao fim da expedição.
-- **O que a heroína espera conseguir:** comprar os direitos de exploração de uma mina abandonada e transformá-la em uma cooperativa para trabalhadores expulsos de outras escavações — proposta.
+- **O que a heroína espera conseguir:** comprar os direitos de exploração de uma mina abandonada e transformá-la em uma cooperativa para trabalhadores expulsos de outras escavações.
 - **Por que aceita correr perigo:** acredita que sua experiência em lugares instáveis lhe dá uma chance real de voltar viva e de impedir que o grupo cometa erros fatais.
 - **O que poderia fazê-la querer desistir:** perceber que o bardo esconde riscos capazes de tornar qualquer planejamento inútil.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Vontade
 
@@ -74,7 +77,7 @@ Draska não resolve obstáculos por potência bruta, velocidade ou manipulação
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Antes de avançar: chão, teto, ar e saída. Nessa ordem.”
+- **Ao entrar numa rota:** “Antes de avançar: chão, teto, ar e saída. Nessa ordem.”
 - **Depois de escapar de um perigo:** “Sobrevivemos. Agora descubram por que quase não sobrevivemos.”
 - **Depois da morte de outro herói:** “Guardem o que ele carregava. E guardem o motivo de ele não estar mais aqui.”
 
@@ -82,7 +85,7 @@ Draska não resolve obstáculos por potência bruta, velocidade ou manipulação
 
 ## 5. Aparência
 
-- **Descrição curta:** Draska é uma goblin baixa e compacta, com olhos adaptados à penumbra e cabelo preso bem junto à cabeça. Suas roupas mostram remendos cuidadosos e manchas minerais que nunca desaparecem por completo — proposta.
+- **Descrição curta:** Draska é uma goblin baixa e compacta, com olhos adaptados à penumbra e cabelo preso bem junto à cabeça. Suas roupas mostram remendos cuidadosos e manchas minerais que nunca desaparecem por completo.
 - **Roupa ou equipamento principal:** casaco curto de mineração, botas reforçadas, capacete gasto e uma pequena picareta usada como ferramenta.
 - **Detalhe visual ligado à Vontade:** um cordão de contas de pedra que ela percorre com os dedos para controlar a respiração.
 - **Detalhe visual ligado à Sobrevivência:** cinto com cantil, giz, corda curta e pequenas cunhas para marcar ou estabilizar caminhos.
@@ -94,16 +97,18 @@ Draska não resolve obstáculos por potência bruta, velocidade ou manipulação
 
 ### Relação com o bardo
 
-- **Como se conheceram:** o bardo a procurou para avaliar se seus mapas e registros indicavam rotas realmente transitáveis — proposta.
+- **Como se conheceram:** o bardo a procurou para avaliar se seus mapas e registros indicavam rotas realmente transitáveis.
 - **Por que confia ou desconfia dele:** respeita o fato de ele ter reunido especialistas, mas percebe que suas respostas sobre o tesouro são cuidadosamente incompletas.
 - **O que poderia causar um conflito entre os dois:** o bardo ignorar um risco que conhecia ou insistir em avançar sem revelar informações necessárias ao grupo.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H1 — Gorvak | Respeito com atrito — proposta | Ambos resistem à pressão, mas Draska considera perigoso o hábito de Gorvak de suportar tudo sozinho; ele pode considerar excessiva a necessidade dela de revisar cada risco. |
-| H3 | Rivalidade profissional — proposta | Ambos compreendem ambientes hostis, mas podem discordar sobre quais sinais merecem confiança e qual rota oferece maior chance de sobrevivência. Confirmar depois que H3 for criado. |
+| Gorvak (H1) | Respeito silencioso com atrito | Ambos resistem sob pressão. Draska prioriza prevenir o risco; Gorvak tende a suportá-lo sozinho. |
+| Griznik (H3) | Parceria profissional competitiva | Ambos leem ambientes hostis e valorizam prevenção, mas disputam qual risco precisa ser estabilizado primeiro. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,43 +117,20 @@ Draska não resolve obstáculos por potência bruta, velocidade ou manipulação
 - **Como reage ao ser escolhida para o sacrifício:** confirma rapidamente a rota de fuga dos demais e exige que ninguém volte para buscá-la.
 - **Frase curta de despedida:** “Eu marco o caminho. Vocês terminam de percorrê-lo.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que transformava pânico e incerteza em ações concretas, fazendo o grupo acreditar que ainda existia uma saída.
-- **O que faz depois da campanha, caso sobreviva:** adquire a mina abandonada e funda a cooperativa que planejava. Na entrada, registra os nomes dos companheiros mortos e estabelece uma regra: nenhuma recompensa vale esconder um risco da equipe — proposta.
+- **O que faz depois da campanha, caso sobreviva:** adquire a mina abandonada e funda a cooperativa que planejava. Na entrada, registra os nomes dos companheiros mortos e estabelece uma regra: nenhuma recompensa vale esconder um risco da equipe.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** separa fatos, promessas e custos, e acusa Ivaí de ter impedido o grupo de avaliar o risco real antes de partir.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** destruir o medalhão e salvar Ivaí como opção de menor dano imediato. A sobrevivência dele é uma dívida a ser paga, não um prêmio.
 
----
-
-# Checklist do designer
-
-- [x] Usei o par de competências correto.
-- [x] Mostrei cada competência de pelo menos duas formas.
-- [x] A motivação justifica participar da expedição.
-- [x] A heroína possui uma qualidade, um defeito e um medo claros.
-- [x] As falas parecem pertencer à mesma personagem.
-- [x] Criei duas relações que podem aparecer no jogo.
-- [x] A despedida é curta e combina com sua personalidade.
-- [x] Não tratei elementos pendentes como decisões aprovadas.
-- [x] Mantive as respostas curtas.
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
 
-# Revisão do líder de design
+## 9. Autoridade e exibição do epílogo
 
-- [ ] A heroína é diferente das demais em personalidade, voz e aparência.
-- [ ] As competências são compreensíveis, mas não estão explicadas como números.
-- [ ] Força, Atletismo e Destreza não foram confundidas.
-- [ ] A heroína tem valor emocional além de sua utilidade mecânica.
-- [ ] A morte não remove uma informação indispensável para concluir a história.
-- [ ] O conteúdo cabe no escopo de produção.
-- [ ] Pontos condicionais da proposta narrativa continuam identificados.
-
-**Status:** Rascunho  
-**Comentários do revisor:** [PREENCHER]
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.

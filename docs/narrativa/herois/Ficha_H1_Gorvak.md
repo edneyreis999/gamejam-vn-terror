@@ -1,8 +1,8 @@
 # Ficha do herói — Gorvak
 
-**Status:** rascunho para revisão  
-**Informações fornecidas:** nome Gorvak; sexo masculino; ocupação ferreiro  
-**Demais informações:** propostas de design
+**Status:** confirmado pelo GDD v4.0
+
+**Autoridade:** referência de personagem subordinada ao GDD canônico sem sufixo
 
 ---
 
@@ -11,10 +11,10 @@
 | Campo | Resposta |
 |---|---|
 | Código | H1 |
-| Nome provisório | Gorvak |
+| Nome | Gorvak |
 | Pronomes | Ele/dele |
-| Idade aproximada | 42 anos |
-| Raça | Anão — proposta |
+| Idade | 42 anos |
+| Raça | Anão |
 | Ocupação | Ferreiro |
 | Arquétipo | Protetor relutante |
 | Competência 1 | Força |
@@ -35,13 +35,16 @@
 ## 2. Por que participa da expedição?
 
 - **O que o bardo prometeu:** uma parte do tesouro familiar encontrado ao fim da expedição.
-- **O que o herói espera conseguir:** dinheiro para reconstruir sua forja, destruída por um incêndio, e voltar a sustentar os aprendizes que dependiam dela — proposta.
+- **O que o herói espera conseguir:** dinheiro para reconstruir sua forja, destruída por um incêndio, e voltar a sustentar os aprendizes que dependiam dela.
 - **Por que aceita correr perigo:** sente-se responsável pelos aprendizes e acredita que pode proteger aventureiros menos resistentes durante a jornada.
 - **O que poderia fazê-lo querer desistir:** perceber que o bardo está sacrificando vidas por um objetivo diferente daquele que apresentou ao grupo.
 
 ---
 
-## 3. Como mostrar as competências
+## 3. Competências internas e comunicação diegética
+
+> Os nomes abaixo são informação de autoria, dados e QA. Não aparecem na bio pública, nos cards nem no feedback das armadilhas.
+
 
 ### Competência 1 — Força
 
@@ -74,7 +77,7 @@ Gorvak não deve ser apresentado como especialmente rápido, ágil ou preciso. S
 
 ### Três falas de teste
 
-- **Ao entrar em uma dungeon:** “Lugar velho avisa antes de cair. Prestem atenção aos estalos.”
+- **Ao entrar numa rota:** “Lugar velho avisa antes de cair. Prestem atenção aos estalos.”
 - **Depois de escapar de um perigo:** “Respirem agora. As pernas podem tremer depois.”
 - **Depois da morte de outro herói:** “Não digam que foi necessário. Digam o nome dele e lembrem o preço.”
 
@@ -82,7 +85,7 @@ Gorvak não deve ser apresentado como especialmente rápido, ágil ou preciso. S
 
 ## 5. Aparência
 
-- **Descrição curta:** Gorvak é um orc largo e pesado, de meia-idade, com os braços marcados por queimaduras antigas. Mantém uma postura estável e movimentos controlados, como se estivesse sempre trabalhando perto de metal incandescente — proposta.
+- **Descrição curta:** Gorvak é um anão largo e pesado, de meia-idade, com os braços marcados por queimaduras antigas. Mantém uma postura estável e movimentos controlados, como se estivesse sempre trabalhando perto de metal incandescente.
 - **Roupa ou equipamento principal:** avental curto de couro sobre roupas de viagem, luvas grossas e um martelo de forja adaptado como ferramenta.
 - **Detalhe visual ligado à Força:** braços, ombros e mãos desenvolvidos pelo trabalho, além de uma faixa usada para carregar peso.
 - **Detalhe visual ligado à Vontade:** cicatrizes de queimadura que ele não esconde e um pequeno prego torto da antiga forja preso ao pescoço.
@@ -94,16 +97,18 @@ Gorvak não deve ser apresentado como especialmente rápido, ágil ou preciso. S
 
 ### Relação com o bardo
 
-- **Como se conheceram:** o bardo procurou Gorvak para reparar uma peça antiga ligada à expedição e descobriu que ele precisava reerguer a oficina — proposta.
+- **Como se conheceram:** o bardo procurou Gorvak para reparar uma peça antiga ligada à expedição e descobriu que ele precisava reerguer a oficina.
 - **Por que confia ou desconfia dele:** confia que o bardo conhece o caminho, mas desconfia de sua evasividade sempre que o assunto é o verdadeiro valor do tesouro.
 - **O que poderia causar um conflito entre os dois:** descobrir que o bardo conhecia a letalidade da jornada ou escondeu seu verdadeiro objetivo.
 
-### Relação com dois heróis
+### Relações bilaterais confirmadas
 
 | Outro herói | Tipo de relação | Motivo |
 |---|---|---|
-| H5 | Rivalidade respeitosa — proposta | Ambos possuem Força, mas Gorvak valoriza experiência prática e pode entrar em atrito com a abordagem baseada em Conhecimento de H5. Confirmar depois que H5 for criado. |
-| H8 | Admiração silenciosa — proposta | Gorvak reconhece em H8 a mesma capacidade de resistir ao medo, embora cada um demonstre Vontade de forma diferente. Confirmar depois que H8 for criado. |
+| Bimbren (H5) | Amizade prática | Os dois assumem peso e dever sem alarde; entram em conflito quando Bimbren transforma dever em autossacrifício e Gorvak insiste que proteção também exige permanecer vivo. |
+| Draska (H8) | Respeito silencioso com atrito | Ambos resistem sob pressão. Draska prioriza prevenir o risco; Gorvak tende a suportá-lo sozinho. |
+
+Os demais pares podem dialogar em grupo, mas não possuem arco bilateral próprio nesta versão.
 
 ---
 
@@ -112,16 +117,20 @@ Gorvak não deve ser apresentado como especialmente rápido, ágil ou preciso. S
 - **Como reage ao ser escolhido para o sacrifício:** aceita sem implorar, mas obriga o bardo a encará-lo e reconhecer a escolha.
 - **Frase curta de despedida:** “Não desperdicem o tempo que estou comprando.”
 - **O que o grupo perde emocionalmente com sua morte:** a sensação de que existe alguém capaz de permanecer firme quando todos os demais entram em pânico.
-- **O que faz depois da campanha, caso sobreviva:** reconstrói a forja, mas grava nela os nomes dos companheiros mortos. Passa a ensinar aos aprendizes que força não é suportar tudo sozinho — proposta.
+- **O que faz depois da campanha, caso sobreviva:** reconstrói a forja, mas grava nela os nomes dos companheiros mortos. Passa a ensinar aos aprendizes que força não é suportar tudo sozinho.
 
 ---
 
-## 8. Campo opcional — proposta do Medalhão
+## 8. Posição no clímax
 
-> Não preenchido. Esta seção depende da aprovação da proposta “O Medalhão das Duas Margens”.
+**Reação à mentira:** reage com raiva contida, obriga Ivaí a encarar os presentes e a nomear cada pessoa morta. Não aceita que “necessidade” apague a responsabilidade.
 
-- **Como reage ao descobrir que o bardo mentiu:** pendente de aprovação narrativa.
-- **Defenderia salvar o bardo ou libertar os amantes? Por quê?** pendente de aprovação narrativa.
-- **Essa opinião pode mudar? O que causaria a mudança?** pendente de aprovação narrativa.
+**Opinião fixa:** reunir o medalhão e libertar Floraí e Pérola. Ivaí deve aceitar pessoalmente o custo da história que impôs aos outros.
+
+**Efeito mecânico:** a opinião não muda, não constitui voto e não bloqueia nenhuma escolha.
 
 ---
+
+## 9. Autoridade e exibição do epílogo
+
+A despedida e o epílogo da seção 7 são textos predefinidos desta ficha. O jogo exibe literalmente o epílogo somente se este herói estiver vivo e presente na formação após o sexto encontro do Vilarejo Partido. Sobreviventes deixados na cidade não aparecem; mortos aparecem apenas no memorial coletivo. O final escolhido não gera nem adapta outro epílogo.
