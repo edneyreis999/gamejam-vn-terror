@@ -1,145 +1,131 @@
 # Playing an RPG Maker MZ scenario through the browser
 
-Use this guide as the player-author or clean replayer. The player-author receives a source-informed public route, proves it through browser actions, and writes a reusable card from observed behavior. The replayer proves that the approved card works without help.
+Use this guide as player-author or clean replayer. Read `controller-and-route-card.md` in full before browser input. The player-author proves specialist-derived public transactions and writes the reusable JSON card. The clean replayer proves the approved card without help.
 
 ## Black-box boundary
 
-Use the same public surfaces available to a human player: keyboard, mouse, visible menus, dialogue, and inspectable live images. Record public reactions after causal action groups.
+Use surfaces available to a human player: the installed controller, visible game image, menus, dialogue, and public reset. Observe before and after whole transactions.
 
-Keep these internal surfaces outside the player context:
+Keep these surfaces outside the player context:
 
 - RPG Maker globals, map data, events, switches, variables, saves, plugins, and source;
 - DOM or page-script state used to identify or change gameplay;
 - debug, teleport, passability bypass, engine-speed changes, or route automation;
-- private specialist analysis and historical learning traces.
+- private specialist analysis and historical learning traces;
+- direct Playwright keyboard, mouse, arbitrary waits, or inline input code.
 
-The player may receive exact source-derived **public** instructions through the invoker: keys, clicks, counts, bounded holds, choices, visible landmarks, text, reactions, guards, and recovery. Mark the card as assisted after receiving them.
+The controller may use visible canvas geometry only to deliver the public `focusCanvas` action. Its cadence sensor and receipt channel are transport instrumentation, not gameplay sensors.
 
-## Prepare the browser
+## Prepare the browser and controller
 
 Before gameplay:
 
-1. Read the public contract and identify the target, build, entry, reset, initial signal, finish oracle, screenshots path, and browser ownership.
+1. Read the public contract; identify target, build, entry, reset, guards, scratch root, canonical output, browser owner, and release oracle.
 2. Enter through the contracted public URL, file, or command without changing the game.
-3. Use only the run-owned browser profile or context and contracted viewport.
-4. Confirm that a live visual call returns an image the player can actually inspect.
-5. Stabilize the first surface and record it before sending gameplay input.
+3. Use only the run-owned browser lease and contracted viewport.
+4. Confirm that the live public-pixel sensor returns an image the player can inspect.
+5. Generate and run a fresh controller preflight in this browser identity.
+6. Require valid cadence and matching controller identity. Record telemetry failure separately without treating it as delivery failure.
+7. Execute frozen `setup` transactions through the controller, then establish the initial visible guard before the first `route` transaction.
 
-Keep one browser owner. Release every held key even when observation or capture fails. Start only processes named by the contract and record their exact identities for teardown.
+The technical preflight sends no keyboard or mouse input. Public focus and reset belong in carded `setup` transactions after preflight and before the contracted start signal.
 
-## Attempt one checkpoint per turn
+## Execute one checkpoint per turn
 
-The specialist supplies the complete public route before play, and the invoker identifies the next checkpoint as the immediate objective. One player turn attempts that checkpoint as a whole.
+The specialist supplies the complete public route and the next checkpoint. One player turn attempts that checkpoint as a whole:
 
-Within the turn, repeat:
+1. **Observe** the public precondition.
+2. **Prepare** the named transaction with the bundled helper.
+3. **Execute** only the generated runner through `browser_run_code_unsafe({filename})`.
+4. **Classify** delivery and telemetry from its returned receipt.
+5. During clean replay, **persist** the exact receipt through the run-bound ledger procedure before any next input.
+6. **Observe** one stable public image after the transaction.
+7. **Compare** it with the postcondition and recovery guard.
+8. **Record** the transaction result and public reaction in scratch; during authorship, append proved content to the JSON card.
 
-1. **Observe** the stable screen, focus, selection, orientation, and last change.
-2. **Act** with one causal public group: a short movement sequence, one menu operation, one dialogue advance, or another bounded instruction from the route.
-3. **Release** every held input.
-4. **Stabilize** movement, animation, text reveal, fade, followers, and camera.
-5. **Compare** the visible result with the route's reaction and stop guard.
-6. **Record** the exact dispatched input and observed result.
+Do not inspect every discrete pulse. Continue within the same turn while the route and screen agree. Return to the invoker at the checkpoint, on contradiction, when guidance needs correction, or at a technical or safety boundary.
 
-Continue within the same turn while the route and current public state agree. Return to the invoker when the checkpoint is reached, the route is contradicted, more precision is needed, or a technical or safety condition appears.
+Discovery has no clock, input-slice gate, attempt cap, guidance tier, or checkpoint-time failure. Progress is measured by material public checkpoints.
 
-There is no discovery clock, input-slice gate, attempt cap, guidance tier, or checkpoint-time failure. Progress is measured by reached public checkpoints.
+## Apply transaction boundaries
 
-## Diagnose a divergence publicly
+### Dialogue
 
-When the expected guard does not appear:
+Batch the proven confirmation count for consecutive pages. A confirmation may finish text reveal instead of advancing; the count proved during authorship already captures that behavior for the build and controller identity.
 
-1. release inputs and stabilize;
-2. record the public precondition, exact input, visible reaction, and expected reaction;
-3. capture one current-run diagnostic screenshot when it would disambiguate the state;
-4. send the screenshot path and input trace through the invoker;
-5. wait for corrected or more specific specialist guidance;
-6. continue from the current trustworthy state or perform the public recovery supplied by the specialist.
+End the transaction before an unobserved choice or irreversible action. If the postcondition is absent while the exact safe dialogue guard remains visible, execute only the card's frozen recovery. Otherwise return to specialist-guided authorship.
 
-Do not repeat a contradicted instruction as truth. A new specialist instruction may specify exact counts, holds, choices, focus actions, landmarks, or recovery. Execute it only through public controls and confirm each material reaction.
+### Menus and choices
 
-Common public diagnoses include:
+Start `navigateMenu` from a visible selection and mode. It may contain several logical directions followed by confirmation. Verify only the postcondition unless the sequence could enter an unproved irreversible mode.
+
+### Top-down movement
+
+Use one `move` transaction for a browser-proved sequence of directional runs between visible checkpoints. Counts are discrete pulses, not seconds. Confirm arrival, interaction relation, and facing only when the postcondition requires them. Camera and follower motion are not player displacement by themselves.
+
+### Hybrid flows
+
+Separate transactions at choice, menu, transfer, or other boundaries where another input could commit an unseen branch. Safe map-to-dialogue or dialogue-to-map transitions may remain inside a proved transaction.
+
+## Diagnose divergence publicly
+
+When the postcondition does not appear:
+
+1. use the controller result to distinguish complete from uncertain delivery;
+2. observe the current public state;
+3. execute frozen recovery only when its exact guard matches;
+4. otherwise send the current image and controller result through the invoker;
+5. let the specialist replace the transaction or recovery;
+6. browser-test every executable replacement before writing it to the card.
+
+Do not repeat contradicted guidance as truth. Telemetry failure marks timing invalid but does not stop gameplay. Delivery uncertainty requires observation because the game state may have changed.
+
+Common diagnoses:
 
 | Observation | Controlled response |
 |---|---|
-| Key appears ignored | Recheck focus and stable state, then try the specialist's bounded hold or alternate public key |
-| Character turns without moving | Record orientation change separately from displacement |
-| Camera scrolls or followers move | Identify the controlled leader and use visible landmarks rather than screen coordinates |
-| Dialogue does not advance | Distinguish text reveal, next page, closed window, and choice state |
-| Menu or save screen opens | Release inputs, use the public recovery, and re-establish the card precondition |
-| Screenshot is black or stale | Reopen it, retry passively, and keep sensor failure separate from gameplay |
-| Route contradicts the screen | Stop that step and request specialist correction with screenshot plus trace |
+| Input has no visible effect | Check the returned delivery status and public focus guard; request specialist correction |
+| Character turns without moving | Record orientation separately from displacement |
+| Dialogue remains open | Apply only the frozen same-dialogue recovery when its guard matches |
+| A choice appears | Stop dialogue input and begin the separately proved menu transaction |
+| Wrong menu or scene appears | Stop; use frozen public recovery or return to authorship |
+| Live image is black or stale | Replace the rolling scratch image; keep sensor failure separate from gameplay |
+| Route contradicts the screen | Stop that transaction and return exact public evidence to the specialist |
 
-## Genre-specific observation
+## Author and optimize the card
 
-### Visual novel
+Only the player-author writes executable card content. Keep one JSON card matching `controller-and-route-card.md`. Append transactions from observed execution, including public precondition, action, postcondition, checkpoint relation, and proved recovery.
 
-- Wait for the page and continuation indicator to stabilize.
-- Use one confirmation per observable dialogue transition unless the approved card has a tested deterministic group.
-- Distinguish finishing text reveal, opening the next page, closing the message window, and entering a choice.
-- Record every visible choice before selecting the instructed option.
-- Keep auto and skip disabled unless the route explicitly tested them as public actions.
+The specialist may correct route meaning, but the player retests every change to action, order, count, choice, guard, or recovery. Text-only clarifications that do not change execution need no replay.
 
-### Top-down exploration
+After the first finish, browser-test specialist-proposed removal of detours, redundant inputs, and unnecessary recovery. Keep failed attempts in scratch, never in the main route. Finalize only when every retained transaction has public proof and the specialist knows no faster public route for the build.
 
-- Confirm displacement separately from orientation, collision, follower movement, and camera motion.
-- Break long legs at visible anchors such as a door, wall, corridor, object, NPC, or distinctive composition.
-- Use exact tested counts or bounded holds between anchors; elapsed time alone never proves arrival.
-- Near events and transfers, stabilize and observe before the next action group.
-- Record the public relation needed for interaction, including facing direction when material.
+Validate the complete card with the read-only helper. The specialist approves its canonical hash and controller identity; the invoker matches them mechanically.
 
-### Hybrid flow
+## Run one clean replay
 
-Revalidate focus and mode after every transition between movement, dialogue, menu, and choice. An input valid in one mode may advance another unexpectedly.
+As clean replayer:
 
-## Write the route card from execution
+1. receive no authoring trace or private specialist artifact;
+2. recalculate the card hash and controller identity;
+3. acquire a released browser lease and run a fresh no-input preflight;
+4. persist preflight and each later runner receipt to the run-bound ledger before any next input;
+5. execute frozen `setup` transactions through the controller to reset publicly;
+6. prove the initial guard and start the continuous operational clock;
+7. execute only frozen `route` transactions and guarded recovery;
+8. observe once after every persisted transaction;
+9. persist that same observation only when it is a frozen material checkpoint;
+10. stop the operational clock at the visible finish guard;
+11. summarize the complete receipt ledger against the approved card.
 
-Only the player-author writes executable card steps. Append a fragment immediately after reaching each material checkpoint:
+For a nonmaterial observation, overwrite `<scratch>/live.png`. For a material checkpoint, write its carded PNG basename in the staging area and use the returned image as the live observation. Do not reopen it during replay. After the finish, the invoker reopens and hashes every staged canonical image.
 
-```markdown
-| Step | Public precondition | Inputs dispatched | Visible reactions | Completion guard | Resume guard | Recovery | Dependencies |
-|---|---|---|---|---|---|---|---|
-```
+Any unguarded gameplay divergence ends that replay identity and returns the affected transaction to authorship. Missing images or timing data do not revoke an otherwise observed finish.
 
-The card header records target, build, entry, public reset, initial signal, finish oracle, controls, assisted provenance, validity conditions, revision, and approval status.
+## Report and release
 
-For every step:
+Separate expectation, observation, and inference. Report gameplay, card, workflow, both timing metrics, browser, visual evidence, and cleanup independently.
 
-- describe the state in player-visible language;
-- record the inputs that actually worked, including holds and releases;
-- bind each action group to its visible reaction;
-- end on a stable post-event completion guard;
-- state the resume guard even when it equals completion;
-- provide safe public recovery;
-- make the text executable without a screenshot.
+Close the run-owned browser pages and verify the harness release oracle. When the harness exposes a profile holder, act only on the recorded run-owned identity. Never match or terminate browsers broadly.
 
-The specialist may correct route meaning, but the player retests every change to inputs, order, duration, choice, guard, or recovery. Spelling, formatting, and metadata-only corrections need no browser replay.
-
-## Optimize after first completion
-
-After the finish oracle appears, execute specialist-proposed optimizations through the browser. Remove detours, redundant interactions, unnecessary dialogue operations, blind waits, and recovery steps from the main path only after a public retest. Keep diagnostic attempts in the trace rather than in the executable route.
-
-Finalize the card only after every retained step has been observed and the specialist knows no faster public route for the build. The complete card then receives one hash and formal approval.
-
-## Clean replays
-
-As a clean replayer:
-
-1. Reopen the durable card and approval; recalculate the hash before browser input.
-2. Start from the contracted public reset and prove the initial state.
-3. Execute only the approved card. Do not request help, explore, correct, or edit.
-
-### Performance pass
-
-Read `.agents/skills/rpg-maker-mz-black-box-playtest/references/active-clock.md` in full. Run first without screenshots. Measure one continuous interval from the contracted start signal to the finish oracle. Record inputs and passive checkpoint timestamps. Duration is an optimization result, not a gameplay pass threshold.
-
-### Evidence pass
-
-After performance completes, reset and use the same identity, card, and hash. At each frozen checkpoint, stabilize, capture one screenshot, and reopen it before the next input. Retry a bad capture passively up to three times; then record `CAPTURA AUSENTE` and continue. The final screenshot, when available, must show the scenario-specific finish signal.
-
-Any gameplay divergence ends that replay. Preserve its trace and return the card to guided authorship; a corrected hash requires a new replayer and both passes again. Missing screenshots alone do not fail gameplay.
-
-## Report and teardown
-
-Separate expectation, observation, and inference. Report gameplay, card, workflow, browser, and visual evidence independently. A filename or expected checkpoint never proves image contents.
-
-Retain the contract, approved card, manifest, public traces, performance ledger, report, and valid evidence-pass screenshots. After success, remove only run-owned diagnostic captures, invalid images, temporary profiles, and temporary files. Preserve failure artifacts. Close only the browser contexts and processes created by the run, using their exact recorded identities.
+After verified promotion, remove the exact current-run scratch root. Leave artifacts from older executions untouched.

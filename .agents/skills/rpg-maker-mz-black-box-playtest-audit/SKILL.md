@@ -1,6 +1,6 @@
 ---
 name: rpg-maker-mz-black-box-playtest-audit
-description: Human-only empirical audit of the RPG Maker MZ completion-first browser playtest. Use only when a human directly selects it; don't use from agents, automation, or other skills.
+description: Human-only RPG Maker MZ playtest auditing. Use when a human directly requests an empirical audit of rpg-maker-mz-black-box-playtest. Don't use for autonomous execution, indirect invocation, or ordinary playtesting.
 disable-model-invocation: true
 ---
 
@@ -29,21 +29,21 @@ Audit one human-supplied scenario through a complete execution of `rpg-maker-mz-
 ## 3. Freeze the evaluation and launch the tested workflow
 
 1. Snapshot the physical `rpg-maker-mz-black-box-playtest` tree, metadata, hashes, and preexisting diff. Keep those files immutable through the audit report.
-2. Create a fresh audit root for contract, tested-role artifacts, evidence, auditor ledger, `virtual-rules.md`, report, and consolidated repair proposal. Keep historical routes outside tested-role contexts unless the audit contract explicitly tests approved-card reuse.
+2. Create `.artifacts/rpg-maker-mz-playtest-audit/<run-id>/` for the contract, tested-role artifacts, evidence staging, root-cause decisions, auditor ledger, `virtual-rules.md`, report, and consolidated proposal. Keep historical routes outside tested-role contexts unless the contract explicitly tests approved-card reuse.
 3. Spawn one clean **invoker under test** and instruct it to run `rpg-maker-mz-black-box-playtest` with audit instrumentation. The external auditor remains outside that workflow.
 4. Require the invoker to provision a clean player-author and white-box specialist. If its harness cannot provision them and it attempts to terminate, handle that condition through the virtual-repair gate rather than assuming those roles.
-5. Observe role boundaries, public relays, browser ownership, card writes, checkpoints, specialist corrections, full-card approval, both replays, screenshots, cleanup, and every attempted terminal decision.
+5. Observe role boundaries, structured public relays, browser ownership, controller use, card writes, checkpoints, specialist corrections, full-card approval, the clean replay, promotion, cleanup, and every attempted terminal decision.
 
 *Done when:* the immutable physical baseline, isolated run paths, tested invoker, role topology, and observation ledger are live without route knowledge leaking from the auditor.
 
 ## 4. Observe without correcting nonterminal behavior
 
 1. Record violations, inefficiency, repeated corrections, excessive duration, weak artifacts, role drift, deadlocks, and missed requirements with direct evidence.
-2. Create or update one `Proposed` ADR per root cause. Group repeated occurrences under the same ADR rather than creating one decision per symptom.
+2. Create or update one scratch decision per root cause. Group repeated occurrences under the same decision rather than creating one document per symptom.
 3. Let the tested workflow continue unchanged while the problem remains nonterminal. Do not improve its route, prompts, artifacts, role behavior, timing, or coordination during the run.
 4. Treat wall time, repetition, and lack of elegance as observations only. A deadlock becomes terminal only when the specialist materializes a permitted impossibility or an external failure prevents the specialist itself from continuing.
 
-*Done when:* every observed nonterminal defect has evidence and a root-cause ADR while the auditor has made no behavioral intervention.
+*Done when:* every observed nonterminal defect has evidence and a root-cause scratch ADR while the auditor has made no behavioral intervention.
 
 ## 5. Override only premature bureaucratic termination
 
@@ -56,6 +56,8 @@ When the workflow explicitly attempts to terminate for a repairable process defe
 5. Continue the same run from the latest trustworthy checkpoint. Preserve identities and artifacts when usable; replace a role only when the repair requires it. Never reinterpret earlier evidence under the new rule.
 6. Allow virtual rules to accumulate in the overlay. Apply each only from its recorded activation point.
 
+A virtual rule cannot authorize raw gameplay input, replace the controller, reinterpret a controller hash, or edit the frozen skill tree. Record such integrity defects as failures.
+
 Typical repairable causes include a missing hash, incomplete schema, invalid manifest, failed handoff, role-provisioning limitation, path mismatch, lifecycle error, clock artifact, or screenshot defect. Prefer returning the artifact to its owner for correction. The auditor does not fill the field, write the card, choose gameplay, control the browser, or declare semantic approval.
 
 *Done when:* the smallest recorded virtual change has removed only the premature stop, the same run is progressing again, and the physical skill snapshot still matches.
@@ -64,7 +66,7 @@ Typical repairable causes include a missing hash, incomplete schema, invalid man
 
 Permit the tested workflow to end only for:
 
-- approved card plus both completed gameplay replays;
+- approved card plus one completed clean replay;
 - explicit user cancellation received without solicitation;
 - a destructive or safety boundary;
 - specialist-proved impossibility with the complete evidence contract;
@@ -78,11 +80,11 @@ After verifying complete evidence for one of these conditions, the auditor may e
 
 ## 7. Audit outcome and deliver repairs
 
-1. Recalculate the final card, approval, skill snapshot, and virtual-overlay hashes. Reopen canonical screenshots independently; filenames do not prove contents.
-2. Audit gameplay, contract, card, workflow, invoker, player-author, specialist, replayer, browser, sensor, evidence, and cleanup separately. Completion does not erase workflow failures; workflow failures do not erase observed completion.
+1. Recalculate the final card, controller, approval, complete skill-tree snapshot, and virtual-overlay hashes. Reopen canonical screenshots independently; filenames do not prove contents.
+2. Audit three primary axes: execution integrity, final-result validity, and closure hygiene. Within them, keep gameplay, contract, card, workflow, roles, browser, sensor, performance, evidence, and cleanup as separate verdicts.
 3. Mark rubric items `PASS`, `FAIL`, `BLOCKED`, or `NOT EXERCISED` with direct evidence.
-4. Preserve every ADR, distinguish `Proposed` from `Accepted for current run`, and list exactly which virtual rules affected the result.
-5. Produce a consolidated, reviewable proposal naming the exact sections and files to change in both skills. Do not apply it during the audit.
-6. Close only runtime resources created by the audit and verify that the physical target-skill snapshot remains unchanged.
+4. Consolidate every scratch decision and list exactly which virtual rules affected the result.
+5. Produce a reviewable proposal naming the exact sections and files to change in both skills. Do not apply it during the audit.
+6. Close only audit-owned resources, verify the physical skill snapshot, promote only the final report and consolidated proposal, then remove the exact audit scratch root after reopening and hashing both files.
 
-*Done when:* the report leads with the empirical outcome, every independent verdict is supported, all virtual influence is visible, permanent repairs are proposed but unapplied, and teardown is verified.
+*Done when:* the three axes and independent verdicts are supported, all virtual influence is visible, only the two canonical audit documents are versionable, the skill tree is unchanged, and teardown is verified.

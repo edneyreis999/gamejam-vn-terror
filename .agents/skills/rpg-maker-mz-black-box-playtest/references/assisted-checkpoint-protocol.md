@@ -1,6 +1,6 @@
 # Completion-first assisted checkpoint protocol
 
-Use this protocol to coordinate a black-box browser player with a white-box specialist. The specialist knows how the scenario works; the player proves that the route works through public controls and visible outcomes. Completion is the governing invariant.
+Use this protocol to coordinate a black-box browser player with a white-box specialist. The specialist derives public transactions; the player proves them through the controller and visible outcomes. Completion remains the governing invariant.
 
 ## Contract
 
@@ -11,13 +11,14 @@ Materialize these fields before the first gameplay input:
 | Target | One map, quest, scene, ending, or VN flow in player language |
 | Build | Revision or fingerprint and invalidation conditions |
 | Public entry | URL, file, or authorized launch command |
-| Start | Public reset and stable initial signal |
-| Finish | Public completion signal plus an oracle that rejects plausible false success |
-| Resets | Public recovery after divergence and after completion, or a proved limitation |
-| Browser | One owner, context or profile, geometry, locale, and storage policy |
-| Sensors | Live visual sensor, trace, screenshots, and known limits |
-| Artifacts | Run root, contract, role traces, card, approval, evidence, clock, and report |
-| Performance | Measurement boundaries and any supplied goal; no universal SLA |
+| Start | Public reset and stable initial guard |
+| Finish | Public completion guard plus an oracle that rejects plausible false success |
+| Resets | Public recovery after divergence and completion, or a proved limitation |
+| Browser | One owner, lease or profile identity, geometry, locale, storage, and release oracle |
+| Sensors | Live public-pixel sensor, canonical capture mechanism, and known limits |
+| Controller | Installed identity, Playwright adapter, closed vocabulary, and preflight |
+| Artifacts | Ignored scratch root, canonical output root, promotion set, and cleanup oracle |
+| Performance | Active-route and total-operational boundaries plus any supplied goal |
 | Safety | Destructive actions, external-state boundaries, and teardown ownership |
 
 Resolve repository facts without asking the user. The ordinary playtest never asks the user a question, including during preflight. Preserve the project's distinction between confirmed requirements, prototype baselines, pending decisions, and out-of-scope ideas.
@@ -26,77 +27,80 @@ Resolve repository facts without asking the user. The ordinary playtest never as
 
 ### Invoker
 
-The current agent is the invoker. It owns orchestration, exact public relay, browser lease, artifact repair, role replacement, hash matching, validation handoff, causal reporting, and teardown.
+The current agent is the invoker. It owns orchestration, exact structured relay, browser lease, controller preflight, artifact repair, role replacement, hash matching, validation handoff, causal reporting, promotion, and teardown.
 
-It forwards guidance rather than interpreting it. It does not operate the browser, author card steps, decide route semantics, declare scenario impossibility, or turn a repairable process defect into a terminal result.
+It forwards guidance rather than interpreting it. It does not operate gameplay, author card transactions, decide route semantics, declare scenario impossibility, or turn a repairable process defect into a terminal result.
 
 ### Player-author
 
-The player-author owns the only browser and the only writes to the route card during authorship. It reads the public contract, player guide, current card, its own traces and screenshots, and `PUBLIC GUIDANCE` relayed by the invoker. It reads no source or private specialist analysis.
+The player-author owns the only browser and the only card writes during authorship. It reads the public contract, player guide, controller contract, current card, its own scratch artifacts, and `PUBLIC GUIDANCE` relayed by the invoker. It reads no source or private specialist analysis.
 
-One turn covers a genuine attempt at the next checkpoint. Within that turn the player may execute multiple public actions while observing between causal groups. It releases held controls, records every dispatched input, and returns control at a checkpoint, contradiction, need for more guidance, technical limitation, or safety boundary.
+One turn attempts the next checkpoint as a whole. The player invokes only controller-generated runner files and observes at transaction boundaries. It records the controller result and returns control at a checkpoint, contradiction, need for guidance, technical limitation, or safety boundary.
 
 ### White-box specialist
 
-The specialist reads the workspace and may inspect current-run public screenshots and input traces. It never controls the browser or writes the player's card. It owns:
+The specialist reads the workspace and may inspect current-run public images and controller results. It never controls the browser or writes the player's card. It owns:
 
 - whole-scenario feasibility and dependency analysis;
-- the complete public route and material checkpoint graph;
-- increasingly precise checkpoint guidance without a relay limit;
+- the complete public transaction route and material checkpoint graph;
+- checkpoint guidance and frozen recovery without a relay limit;
 - diagnosis of public divergence against source behavior;
 - route optimization;
-- semantic approval of the complete card hash;
+- semantic approval of the complete canonical card hash;
 - declarations of impossibility.
 
-Keep private source facts in specialist-owned artifacts. Put only player-usable public information in `PUBLIC GUIDANCE`.
+Keep private source facts in specialist-owned scratch artifacts. Put only player-usable public information in guidance.
 
 ### Clean replayer
 
-After approval, a fresh replayer receives only the skill, player guide, contract, frozen card, approval manifest, performance-clock instructions, and its own artifacts. It reads no learning trace or private specialist output, edits no card, explores nothing, and receives no gameplay help.
+After approval, a fresh replayer receives only the skill, player guide, controller contract, public contract, frozen card, approval, clock instructions, and its scratch paths. It reads no learning trace or private specialist output, edits no card, explores nothing, and receives no gameplay help.
 
-The same replayer executes performance then evidence for one unchanged hash. Any card edit retires that identity.
+The replayer executes one timed replay with checkpoint evidence for one unchanged hash. Any card edit retires that identity.
 
-## Specialist package and public guidance
+## Atomic public guidance
 
-Before play, the specialist materializes the full route and checkpoint graph. Route steps may contain exact public keys, clicks, counts, bounded holds, menu choices, visible landmarks, text, and stop guards. Internal coordinates, event IDs, switches, variables, saves, engine objects, DOM manipulation, and source-only facts remain private.
+Before play, the specialist materializes the full route and checkpoint graph. Route steps use only controller actions, logical directions, counts, menu inputs, visible landmarks, text, and guards. Internal coordinates, event IDs, switches, variables, saves, engine objects, physical-key timing, DOM manipulation, and source-only facts remain private.
 
-For the active checkpoint, return:
+For the active checkpoint, return one object:
 
-```text
-CHECKPOINT: <ID and public objective>
-PRECONDITION: <stable public state>
-PUBLIC GUIDANCE:
-  1. <public action or action sequence>
-  2. <visible reaction after each causal group>
-  3. <completion and resume guards>
-  4. <safe recovery>
-FINISH RELATION: <why this checkpoint is necessary>
-PRIVATE SOURCE BASIS: <specialist-only artifact reference>
+```json
+{
+  "checkpoint": "<ID and public objective>",
+  "precondition": "<stable public state>",
+  "action": { "type": "<closed controller action>" },
+  "postcondition": "<visible result>",
+  "recovery": {
+    "guard": "<visible state where correction remains safe>",
+    "action": { "type": "<closed controller action>" }
+  },
+  "finishRelation": "<why this checkpoint is necessary>",
+  "privateSourceBasis": "<specialist-only scratch reference>"
+}
 ```
 
-When the player cannot follow the route, use its latest screenshot and exact input trace to produce a more specific replacement guidance block for the same checkpoint. Correct wrong guidance immediately. Specificity has no fixed tier or attempt cap. Keep guiding while a public route remains possible.
+The invoker verifies that every required field appears exactly once and relays the same object without reconstruction or a Markdown intermediary. Invalid guidance returns to the specialist. On divergence, the specialist uses the latest public image and controller result to produce one complete replacement object. Specificity has no tier, retry, or time cap.
 
-## Material checkpoints and card fragments
+## Transactions and material checkpoints
 
-A material checkpoint is a stable, player-visible state proving necessary trajectory progress or safe reproduction. Examples include a required handoff, area transfer, acquired public state, committed choice, or finish signal. A dialogue page, ordinary movement, or hidden variable is not independently material.
+A material checkpoint is a stable, player-visible state proving necessary trajectory progress or safe reproduction. Examples include a required handoff, area transfer, publicly visible acquired state, committed choice, or finish signal. An ordinary dialogue page, movement turn, or hidden variable is not independently material.
 
-The specialist proposes the initial graph and may revise it when browser evidence exposes a better public boundary. Freeze the final list before validation.
+The specialist proposes the graph and may revise it when browser evidence exposes a better boundary. Freeze the smallest sufficient final list before validation. Each frozen checkpoint owns exactly one canonical PNG basename.
 
-After reaching a checkpoint, the player appends:
+Batch pages inside a proven dialogue segment and compose directional runs between public checkpoints. The player observes before and after the transaction, not between its pulses. End the transaction before an unobserved choice or irreversible action. A transaction may enter or leave a mode only when the whole sequence is proven and cannot commit an unseen branch.
 
-```text
-precondition -> dispatched inputs -> visible reactions -> completion guard -> resume guard -> recovery -> dependencies
-```
+After reaching a checkpoint, the player appends the proved precondition, closed-vocabulary action, visible postcondition, checkpoint relation, and any proved recovery to the JSON card. Write from observed execution, not specialist prediction. Only the complete canonical JSON card receives a formal hash verdict.
 
-Write the fragment from observed execution, not from specialist prediction. Make the text sufficient without screenshots. Mark specialist-derived guidance as assisted provenance. The specialist may confirm checkpoint meaning informally; only the complete card receives a formal hash verdict.
+## Divergence and recovery
 
-## Continuity and artifact repair
+When the postcondition does not appear, the player observes the current public state. If the exact frozen recovery guard matches, it executes that recovery through the controller and observes again. Otherwise it returns to the specialist; the replay never receives live specialist help.
 
-Return every incomplete or inconsistent artifact to its owner with an explicit list of defects. Examples include missing hash, wrong scope, absent field, invalid manifest, incomplete trace, or mismatched path. The owner repairs it; if that role cannot continue, replace it and provide the replacement every current-run artifact allowed by its role.
+Separate controller results:
 
-Continue from the latest trustworthy public checkpoint. Reset farther back only when browser state, a dependency, or the card's precondition is no longer trustworthy. Preserve corrected and rejected revisions in the trace without treating them as executable.
+- uncertain delivery affects gameplay state and requires observation plus recovery or renewed authorship;
+- invalid telemetry affects only its metric and never stops the attempt to reach the finish;
+- missing or invalid visual capture affects evidence, not an otherwise observed gameplay result.
 
-Discovery has no active-time budget, parcel, envelope, guidance tier, or `PRESO` state. Long duration and repeated specialist correction are reportable workflow signals, not stop conditions.
+Return incomplete artifacts to their owner. Continue from the latest trustworthy public checkpoint. Keep corrected and rejected drafts only in ignored scratch and consolidate their causal value in the final report. Discovery has no active-time budget, parcel, envelope, guidance tier, or `PRESO` state.
 
 ## Impossibility contract
 
@@ -106,55 +110,56 @@ Only the specialist may declare that the target cannot be reached. It must mater
 VERDICT: IMPOSSIBLE
 CHECKPOINT AND PUBLIC STATE:
 PUBLIC ACTIONS AND RECOVERIES ATTEMPTED:
-DECISIVE SCREENSHOT OR TRACE:
-SOURCE PROVES:
-WHY MORE PUBLIC GUIDANCE CANNOT WORK:
+DECISIVE SCREENSHOT OR CONTROLLER RESULT:
 CAUSE: game | contract | browser | sensor | harness | external
 UNBLOCK CONDITION:
 ```
 
-A duration, attempt count, missing process field, role failure, or unsupported assertion is not impossibility. Return an incomplete verdict to the specialist and continue. An external failure may terminate only when it prevents even the specialist from investigating or guiding further.
+A duration, attempt count, missing process field, role failure, or unsupported assertion is not impossibility. Return an incomplete verdict to the specialist. External failure terminates only when it prevents the specialist from investigating or guiding any public route.
 
 ## Optimization and approval
 
-After the first public finish, the specialist compares source and trace to remove unnecessary navigation, interactions, dialogue operations, waits, and recovery from the successful route. The player retests every executable change. The resulting claim is the fastest known public route for that build, not a mathematical proof of a global optimum.
+After the first public finish, the specialist compares source and public results to remove unnecessary transactions, inputs, and recoveries. The player browser-tests every executable change. The result is the fastest known public route for that build, not a mathematical proof of global optimality.
 
-The final card contains build and entry validity, public start and finish signals, controls, assisted provenance, exact ordered steps, guards, recovery, checkpoint list, and revision history. Hash only this complete candidate.
-
-The specialist's formal verdict is:
+The final card follows `controller-and-route-card.md`. Validate it with the bundled helper and use the printed canonical JSON hash. The specialist returns:
 
 ```text
 VERDICT: APROVADO | REJEITADO | INCONCLUSIVO
 SCOPE: FULL CARD
-CARD SHA-256:
+CANONICAL CARD SHA-256:
+CONTROLLER IDENTITY:
 BUILD:
 PUBLIC ROUTE FEASIBLE:
-KNOWN REDUNDANT STEPS: <none or list>
+KNOWN REDUNDANT TRANSACTIONS: <none or list>
 BROWSER EVIDENCE REQUIRED:
 ```
 
-The invoker checks only scope, build, and hash identity. A rejection returns to guided authorship; it does not terminate the workflow.
+The invoker checks only scope, build, controller, and hash identity. A rejection returns to guided authorship.
 
-## Two-pass validation
+## Single validation replay
 
-### Performance replay
+Release the player-author browser and prove the exact lease available before creating a clean replayer. Regenerate and run the no-input controller preflight in the new browser identity. Match its identity to the card and approval.
 
-Reset publicly, prove the initial state, start one continuous monotonic helper clock at the contracted start signal, and execute only the card. Use no screenshots, exploration, corrections, or help. Stop the clock at the public finish signal. Report raw duration and any supplied performance goal separately. Completion does not fail because of elapsed time.
+Execute the frozen `setup` transactions through the controller to reset publicly, then prove the initial guard and start one continuous operational helper clock. Execute only the frozen `route` transactions without exploration, edits, or live help. The controller validates setup receipts but excludes them from active route time.
 
-### Evidence replay
+Observe once after each transaction. Overwrite one live image in scratch for nonmaterial boundaries. At a frozen checkpoint, use the same observation as its staged canonical PNG. Do not reopen it during replay. Execute frozen recovery only under its exact visible guard.
 
-After performance completes, reset publicly and execute the same card and hash with the same replayer. Use no help or edits. At each frozen checkpoint, attempt and reopen one screenshot before the next gameplay action. Retry a bad capture passively up to three times; then record `CAPTURA AUSENTE` and continue. Visual evidence may be partial while gameplay succeeds.
+After every runner, persist its exact receipt to the run-bound ledger before the next input. Stop the operational clock at the public finish guard, summarize the complete ledger against the card, then reopen every staged canonical image. Measurement failure classifies only its metric and does not revoke observed completion.
 
-A gameplay divergence in either pass returns the affected section to player authorship and specialist review. Approve a new full hash and run both passes again with a new replayer.
+Any other gameplay divergence retires the replayer and returns the affected transaction to authorship and specialist approval. A changed card receives a new canonical hash and a new clean replay.
 
-## Terminal outcomes and reporting
+## Terminal outcomes and promotion
 
 The workflow ends only for:
 
-- complete card approval plus both completed gameplay replays;
+- complete card approval plus one completed clean replay;
 - explicit user cancellation received during the run;
 - a destructive or safety boundary;
 - a complete specialist impossibility verdict;
 - an external impossibility preventing specialist continuation.
 
-Report gameplay, contract, card, workflow, each role, browser, sensor, visual evidence, and cleanup independently. Keep available screenshots supplemental. Preserve failure diagnostics; after successful validation, remove only run-owned temporary resources and retain the contract, card, approval, traces, performance ledger, report, and valid canonical screenshots.
+Report gameplay, contract, card, workflow, every role, browser, sensor, both performance metrics, visual evidence, and cleanup independently.
+
+Keep current-run drafts, diagnostics, receipts, console logs, runners, role traces, and individual guidance artifacts in `.artifacts/rpg-maker-mz-playtest/<run-id>/`.
+
+On success, promote only the final contract, JSON card, approval, report, consolidated performance ledger, and one valid image per frozen material checkpoint. On impossibility, external block, or cancellation, promote only the report, applicable verdict, and decisive minimum evidence. Reopen and hash the promoted set before removing the exact current-run scratch root. This policy applies to the current run; historical artifacts are outside its scope.
