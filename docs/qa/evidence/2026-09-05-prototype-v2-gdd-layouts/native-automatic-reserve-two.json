@@ -1,0 +1,2906 @@
+{
+  "schemaVersion": 1,
+  "driver": "agent-browser native pointer clicks, sequenced by an external Node process",
+  "interactionBoundary": "setSeed before Jogar; agent-browser click for all player actions; snapshot/validate read-only",
+  "entry": "file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/index.html",
+  "sessionName": "task05-reserve-two",
+  "recipeName": ".compozy/tasks/prototype-v2-gdd-layouts/execution/supervisor-small-reserve-recipes.json#2",
+  "seed": 1,
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "network": "offline",
+  "plannedActions": 70,
+  "seedResult": "\"{\\\"ok\\\":true,\\\"seed\\\":1}\"",
+  "checkpoints": [
+    {
+      "actionCount": 20,
+      "observation": "\"{\\\"phase\\\":\\\"formation\\\",\\\"sequence\\\":20,\\\"aliveHeroes\\\":[\\\"H1\\\",\\\"H2\\\",\\\"H3\\\",\\\"H4\\\",\\\"H5\\\",\\\"H7\\\",\\\"H8\\\"],\\\"deadHeroes\\\":[\\\"H6\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\""
+    },
+    {
+      "actionCount": 40,
+      "observation": "\"{\\\"phase\\\":\\\"retreat_confirmation\\\",\\\"sequence\\\":40,\\\"aliveHeroes\\\":[\\\"H1\\\",\\\"H2\\\",\\\"H5\\\",\\\"H7\\\",\\\"H8\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\""
+    },
+    {
+      "actionCount": 60,
+      "observation": "\"{\\\"phase\\\":\\\"death_result\\\",\\\"sequence\\\":60,\\\"aliveHeroes\\\":[\\\"H2\\\",\\\"H7\\\",\\\"H8\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\""
+    },
+    {
+      "actionCount": 70,
+      "observation": "\"{\\\"phase\\\":\\\"formation\\\",\\\"sequence\\\":70,\\\"aliveHeroes\\\":[\\\"H2\\\",\\\"H7\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\",\\\"H8\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\""
+    }
+  ],
+  "finalObservation": "\"{\\\"phase\\\":\\\"formation\\\",\\\"sequence\\\":70,\\\"seed\\\":1,\\\"aliveHeroes\\\":[\\\"H2\\\",\\\"H7\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\",\\\"H8\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"presentedDeaths\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\",\\\"H8\\\"],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\"",
+  "screenshotPath": "docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/native-automatic-reserve-two.png",
+  "transcript": [
+    {
+      "args": [
+        "--allow-file-access",
+        "open",
+        "file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/index.html"
+      ],
+      "status": 0,
+      "stdout": "✓ Afogados em Terra Seca\n  file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/index.html",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "set",
+        "viewport",
+        "1920",
+        "1080"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "set",
+        "offline",
+        "on"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify(window.expeditionQA.setSeed(1))"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"ok\\\":true,\\\"seed\\\":1}\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"BEGIN\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H2\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H4\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H6\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"OPEN_DESTINATIONS\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_DESTINATION\"][data-value=\"physical\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"DEPART\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ENTER_DUNGEON\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CHOOSE_APPROACH\"][data-value=\"A6-1\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_VICTIM\"][data-value=\"H6\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"REQUEST_RETREAT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CONFIRM_RETREAT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H2\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "(()=>{const s=window.expeditionQA.snapshot();return JSON.stringify({phase:s.phase,sequence:s.sequence,aliveHeroes:s.aliveHeroes,deadHeroes:s.deadHeroes,rewards:s.rewards,ending:s.ending,climaxParty:s.climaxParty,epilogueHeroes:s.epilogueHeroes,invariantViolations:s.invariantViolations,validation:window.expeditionQA.validate()})})()"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"phase\\\":\\\"formation\\\",\\\"sequence\\\":20,\\\"aliveHeroes\\\":[\\\"H1\\\",\\\"H2\\\",\\\"H3\\\",\\\"H4\\\",\\\"H5\\\",\\\"H7\\\",\\\"H8\\\"],\\\"deadHeroes\\\":[\\\"H6\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H3\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H7\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"OPEN_DESTINATIONS\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_DESTINATION\"][data-value=\"physical\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"DEPART\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ENTER_DUNGEON\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CHOOSE_APPROACH\"][data-value=\"A6-1\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_VICTIM\"][data-value=\"H4\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ENTER_DUNGEON\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CHOOSE_APPROACH\"][data-value=\"A1-1\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_VICTIM\"][data-value=\"H3\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"REQUEST_RETREAT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "(()=>{const s=window.expeditionQA.snapshot();return JSON.stringify({phase:s.phase,sequence:s.sequence,aliveHeroes:s.aliveHeroes,deadHeroes:s.deadHeroes,rewards:s.rewards,ending:s.ending,climaxParty:s.climaxParty,epilogueHeroes:s.epilogueHeroes,invariantViolations:s.invariantViolations,validation:window.expeditionQA.validate()})})()"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"phase\\\":\\\"retreat_confirmation\\\",\\\"sequence\\\":40,\\\"aliveHeroes\\\":[\\\"H1\\\",\\\"H2\\\",\\\"H5\\\",\\\"H7\\\",\\\"H8\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CONFIRM_RETREAT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H7\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H5\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H8\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"TOGGLE_HERO\"][data-value=\"H1\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"OPEN_DESTINATIONS\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_DESTINATION\"][data-value=\"physical\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"DEPART\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ENTER_DUNGEON\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CHOOSE_APPROACH\"][data-value=\"A6-3\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_VICTIM\"][data-value=\"H1\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ENTER_DUNGEON\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CHOOSE_APPROACH\"][data-value=\"A1-2\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_VICTIM\"][data-value=\"H5\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "(()=>{const s=window.expeditionQA.snapshot();return JSON.stringify({phase:s.phase,sequence:s.sequence,aliveHeroes:s.aliveHeroes,deadHeroes:s.deadHeroes,rewards:s.rewards,ending:s.ending,climaxParty:s.climaxParty,epilogueHeroes:s.epilogueHeroes,invariantViolations:s.invariantViolations,validation:window.expeditionQA.validate()})})()"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"phase\\\":\\\"death_result\\\",\\\"sequence\\\":60,\\\"aliveHeroes\\\":[\\\"H2\\\",\\\"H7\\\",\\\"H8\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ENTER_DUNGEON\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"CHOOSE_APPROACH\"][data-value=\"A5-1\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"SELECT_VICTIM\"][data-value=\"H8\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "move",
+        "10",
+        "10"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "down"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "mouse",
+        "up"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "click",
+        "button[data-action=\"ADVANCE_TEXT\"]"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "(()=>{const s=window.expeditionQA.snapshot();return JSON.stringify({phase:s.phase,sequence:s.sequence,aliveHeroes:s.aliveHeroes,deadHeroes:s.deadHeroes,rewards:s.rewards,ending:s.ending,climaxParty:s.climaxParty,epilogueHeroes:s.epilogueHeroes,invariantViolations:s.invariantViolations,validation:window.expeditionQA.validate()})})()"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"phase\\\":\\\"formation\\\",\\\"sequence\\\":70,\\\"aliveHeroes\\\":[\\\"H2\\\",\\\"H7\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\",\\\"H8\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "screenshot",
+        "docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/native-automatic-reserve-two.png"
+      ],
+      "status": 0,
+      "stdout": "✓ Screenshot saved to docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/native-automatic-reserve-two.png",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "(()=>{const s=window.expeditionQA.snapshot();return JSON.stringify({phase:s.phase,sequence:s.sequence,seed:s.seed,aliveHeroes:s.aliveHeroes,deadHeroes:s.deadHeroes,rewards:s.rewards,ending:s.ending,climaxParty:s.climaxParty,epilogueHeroes:s.epilogueHeroes,presentedDeaths:s.presentedDeaths,invariantViolations:s.invariantViolations,validation:window.expeditionQA.validate()})})()"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"phase\\\":\\\"formation\\\",\\\"sequence\\\":70,\\\"seed\\\":1,\\\"aliveHeroes\\\":[\\\"H2\\\",\\\"H7\\\"],\\\"deadHeroes\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\",\\\"H8\\\"],\\\"rewards\\\":{\\\"routeOrder\\\":[],\\\"mapPieces\\\":[],\\\"medallionComplete\\\":false},\\\"ending\\\":null,\\\"climaxParty\\\":[],\\\"epilogueHeroes\\\":[],\\\"presentedDeaths\\\":[\\\"H6\\\",\\\"H4\\\",\\\"H3\\\",\\\"H1\\\",\\\"H5\\\",\\\"H8\\\"],\\\"invariantViolations\\\":[],\\\"validation\\\":{\\\"ok\\\":true,\\\"violations\\\":[]}}\"",
+      "stderr": ""
+    }
+  ]
+}

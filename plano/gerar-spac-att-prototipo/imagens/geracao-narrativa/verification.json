@@ -1,0 +1,64 @@
+{
+  "scope": "seven selected generated assets and prompt count",
+  "assets": [
+    {
+      "file": "personagens/ivai.png",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "c12f523d0e4de323727749dff89cc08ee7e724211eb3f4582ecf3c96bd8eaf48",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    },
+    {
+      "file": "personagens/florai.png",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "b05469c26740c396e1302e65154caa4527470cb8d9aae8615f4b619311faa4af",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    },
+    {
+      "file": "personagens/perola.png",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "c7f8ea217926a80839245f257cb9a62af48b303da4190a1cc63c928d90f846e7",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    },
+    {
+      "file": "personagens/andira.png",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "2fdcaf87201859022a1333b30a51ed491b8c652500c1cfdabd1a98722b30b8f4",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    },
+    {
+      "file": "cenarios/igreja-interior.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "be9ab30f9c01c8fe92f7912d9a5e68130bc13334f56c815f5d23073dddaca392",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    },
+    {
+      "file": "cenarios/parque-figueira.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "534489487249e759bd28edaa7c5ca3c4cf1c48194acd4d3d76bada5df710cea4",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    },
+    {
+      "file": "cenarios/casa-do-conselho.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4617db6e89709c2f8e450b04289b1b2e10eb28d4365b9334780073148da5f956",
+      "identical_to_original": true,
+      "color_type": "RGB, no alpha"
+    }
+  ],
+  "initial_prompts": 7,
+  "revision_prompts": 1,
+  "result": "PASS"
+}

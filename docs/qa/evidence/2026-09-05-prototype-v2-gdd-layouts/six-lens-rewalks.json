@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "method": "Historical reconciliation across the six living QA scenario areas. This file is preserved for traceability and is not accepted as the qa-execution experiential-lens re-walk.",
+  "status": "scenario_reconciliation_only",
+  "acceptance": "not_accepted_as_experiential_lens_pass",
+  "rewalks": [
+    {
+      "id": "RW-01-native-pointer-destroy-with-deaths",
+      "source": "native-destroy-with-deaths.json",
+      "driver": "agent-browser native pointer clicks for every player action",
+      "environment": "file://, offline, 1280x720, isolated fresh session, seed 1 before Jogar",
+      "endpoint": "campaign_complete; physical to supernatural; destroy; H4/H7/H8 dead; validate ok",
+      "lenses": {
+        "CAM": "117 accepted actions reached the destroy terminal after both routes and a complete medallion.",
+        "ENC": "The journey crossed sacrifice_choice and three recorded death consequences before the terminal choice.",
+        "FOR": "The campaign continued with five living heroes; separate native-pointer reserve probes corroborate automatic groups with one and two living heroes, and the total-loss journey records three.",
+        "ACC": "The pointer path remained reachable through the inspected portrait-overlap case by naturally moving outside the sheet and back to a visible portrait point; validate stayed clean. The final native-keyboard supplement separately confirms irreversible sacrifice, held-Enter protection, Escape focus return and immediate reduced-motion absence.",
+        "LOC": "The original package ran directly from file:// with offline mode enabled.",
+        "ART": "The terminal and death presentation remained functionally readable; the current 252-pair visual contract passes. Editorial, cultural and final-art acceptance remain human-only."
+      }
+    },
+    {
+      "id": "RW-02-native-keyboard-reunion-no-death",
+      "source": "../prototype-v2-gdd-layouts/supervisor-keyboard-zoom/summary.json",
+      "driver": "Playwright MCP native Tab, arrows, Enter, Space and Escape; native Chrome zoom 125%",
+      "environment": "file://, offline, 1536x864 effective CSS pixels, DPR 1.25, isolated fresh profile, seed 20260831 before Jogar",
+      "endpoint": "campaign_complete; physical to supernatural; reunite; eight living heroes; no memorial; restart and reload both returned ready",
+      "lenses": {
+        "CAM": "106 accepted campaign actions reached reunion after Igreja, Parque, Vilarejo and Conselho; the terminal stayed stable during roster consultation.",
+        "ENC": "All encounters were completed through public controls with eight heroes alive and no memorial path.",
+        "FOR": "All eight hero sheets were reached by arrow navigation without changing the campaign sequence; H1/H2/H3 were selected with Space.",
+        "ACC": "Native keyboard, focus return, modal containment, Shift+Tab, Escape and native 125% zoom were observed with zero horizontal overflow.",
+        "LOC": "The local package made zero HTTP(S) requests; Jogar novamente and literal reload returned clean opening state with null seed and no inherited seen text.",
+        "ART": "Accepted native framebuffer captures preserve readable formation, routes, Council and completed state. Human VoiceOver, editorial, cultural and final-art judgments remain unperformed."
+      }
+    }
+  ],
+  "supportingEvidence": [
+    "native-destroy-with-deaths.json",
+    "native-automatic-reserve-one.json",
+    "native-automatic-reserve-two.json",
+    "native-final-total-loss.json",
+    "pointer-overlap-probe.json",
+    "keyboard-size-probes.json",
+    "offline-local-canary.json",
+    "final-visual-validation.json",
+    "../prototype-v2-gdd-layouts/supervisor-keyboard-zoom/summary.json",
+    "../prototype-v2-gdd-layouts/supervisor-keyboard-zoom/debrief.md",
+    "../prototype-v2-gdd-layouts/supervisor-final-supplements/summary.json",
+    "../prototype-v2-gdd-layouts/supervisor-final-supplements/debrief.md"
+  ]
+}

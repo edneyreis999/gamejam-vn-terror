@@ -1,15 +1,15 @@
 # QA viva — Expedição e Sacrifício
 
-Esta é a única árvore durável de QA do protótipo. Cenários guardam o último veredito; jornadas e charters permanecem entre ciclos; cada execução cria um relatório datado.
+Esta é a única árvore durável de QA do protótipo. Cenários guardam o último veredito; jornadas e charters permanecem entre ciclos; cada execução cria um relatório datado. O planejamento atual não transforma evidência automatizada, visual ou histórica em observação de uma pessoa.
 
 ## Áreas
 
 - `LOC`: abertura local, offline e sessão em memória.
 - `FOR`: formação, elenco e foco.
 - `ENC`: encontros, consequências, recuo e sacrifício.
-- `CAM`: progressão, vitória, derrota e campanha nova.
-- `ART`: conteúdo e imagens dos 16 encontros.
-- `ACC`: teclado, zoom, movimento reduzido e diagnósticos.
+- `CAM`: progressão, Conselho, desfechos e campanha nova.
+- `ART`: conteúdo, sensibilidade cultural e imagens.
+- `ACC`: teclado, zoom dentro do desktop suportado, movimento reduzido e diagnósticos.
 
 ## Entradas públicas
 
@@ -17,30 +17,38 @@ Esta é a única árvore durável de QA do protótipo. Cenários guardam o últi
 - Automação local: `file:///…/prototype/tests.html`.
 - Operador: `window.expeditionQA` no DevTools, somente `setSeed`, `snapshot` e `validate`.
 
-Não há servidor, instalação, login, persistência ou áudio. Recursos são relativos e devem funcionar com rede desligada. Evidência volumosa fica em `docs/qa/evidence/` e é ignorada; relatórios apontam apenas checkpoints e falhas.
+Não há servidor, instalação, login, persistência ou áudio. Recursos são relativos e devem funcionar com rede desligada. Evidência volumosa fica em `docs/qa/evidence/` e é ignorada; relatórios apontam apenas checkpoints e falhas. `docs/qa/state.csv` é uma visualização gerada e nunca é fonte de planejamento.
 
 ## Aplicabilidade deste ciclo
 
-`make verify`, Playwright, daemon, HTTP/UDS, `config.toml`, CLI do produto e isolamento de runtime/worktree não se aplicam: `_spec.md` e ADR-004 fixam HTML/CSS/JS direto por `file://`, sem build ou servidor. A validação automatizada suportada é abrir `prototype/tests.html`. Superfícies não exercitadas devem ser nomeadas no relatório; não se simula infraestrutura ausente.
+`make verify`, daemon, HTTP/UDS, `config.toml`, CLI do produto e isolamento de runtime/worktree não se aplicam: `_spec.md` e os ADRs preservam HTML/CSS/JS direto por `file://`, sem build ou servidor. A validação automatizada suportada é abrir `prototype/tests.html` no Chrome. Playwright não é dependência do produto, mas pode e deve dirigir a QA da task_05 quando estiver disponível, inclusive sobre páginas `file://`. O manifesto desta linha de base contém 168 IDs únicos (158 V2 e 10 BASE); a sessão confere o manifesto carregado e o relatório estruturado em vez de herdar os totais históricos de 231 ou 351.
 
-## Taxonomia do ciclo
+O desktop suportado exige área efetiva mínima de 1280×720 CSS px, já descontado o zoom do navegador. 1920×1080 é a captura de referência. Larguras estreitas, 320 px efetivos e touch/mobile não pertencem a este incremento. VoiceOver com uma pessoa, aprovação editorial e cultural e aceitação da arte final continuam verificações humanas distintas; resultados automatizados ou observados por agente não as encerram.
 
-- Jornada e funcional: [J-local-offline-launch](journeys/J-local-offline-launch.md), [J-complete-campaign](journeys/J-complete-campaign.md), [J-reproduce-campaign](journeys/J-reproduce-campaign.md), [J-run-browser-contract](journeys/J-run-browser-contract.md) e os [seis cenários](scenarios/).
-- Experiência: charters de campanha, imagem/devlog e acessibilidade.
-- Erro/abandono: reload, imagens bloqueadas, recuo, morte e estado inválido.
-- Cross-cutting: offline, 320×800, 200%, movimento reduzido, seed repetida e canário `tests.html`.
-- Continuidade entre dispositivos foi conscientemente omitida: o GDD não promete persistência e reload inicia sessão nova.
+## Registro de bugs
 
-## Ciclo de seleção de caminhos — 2026-08-31
+Não há arquivo de bug aberto em `docs/qa/bugs/` no início deste ciclo. Um sintoma encontrado deve ser deduplicado no registro vivo, ligado a pelo menos um dos seis cenários e encaminhado ao backlog da disciplina dona (`Narrativa`, `UI/UX`, `Technical Art` ou `Programação`). Não existe backlog separado de QA e este plano não publica cards externos.
 
-Cadência `targeted`: as quatro jornadas públicas alteradas serão caminhadas, com a ordem de maior risco primeiro.
+## Taxonomia do ciclo atual
 
-1. [CH-route-order-and-gate](charters/CH-route-order-and-gate.md) — alvo de 90 minutos para as duas ordens, recuo com troca, fechamento, checkpoint de devlog e liberação do Legado.
-2. [CH-route-tests-entry-canary](charters/CH-route-tests-entry-canary.md) — canário novo de 30 minutos para a entrada direta e o total imutável de 351 casos; o histórico `CH-tests-entry-canary` permanece sem edição como registro do baseline de 231.
-3. [CH-keyboard-zoom-motion](charters/CH-keyboard-zoom-motion.md) — canário adjacente de teclado, foco, 320×800, zoom 200% e movimento reduzido.
-4. [CH-offline-all-images-blocked](charters/CH-offline-all-images-blocked.md) — canário adjacente de `file://`, rede desligada e fallback de imagem.
-5. [CH-seeded-diagnostics-reproduction](charters/CH-seeded-diagnostics-reproduction.md) — canário histórico de determinismo com seed `20260830`; o alvo novo registra seed `20260831`, snapshot v2 e rejeições sem reescrever esta missão imutável.
-6. [CH-complete-outcomes-canary](charters/CH-complete-outcomes-canary.md) — canário adjacente para vitória, derrota e campanha nova.
-7. [CH-sixteen-image-devlog-review](charters/CH-sixteen-image-devlog-review.md) — canário adjacente para conteúdo, arte local e fallback dos dezesseis encontros.
+- Jornada e funcional: as quatro jornadas públicas e os seis cenários cobrem S01–S12, ambas as ordens iniciais e os três desfechos.
+- Experiência: preparação, perda irreversível, leitura, foco, texto PT-BR, arte provisória e estados terminais são observados dentro das jornadas.
+- Erro e abandono: recuo, morte, estado rejeitado, imagem ausente, fechamento/reload e reinício explícito têm ramificações planejadas.
+- Cross-cutting: offline, teclado, zoom com área efetiva ≥1280×720, movimento reduzido, seed repetida, informação pública/privada e o canário `tests.html`.
+- Continuidade entre dispositivos foi conscientemente omitida porque a campanha é somente em memória; reload inicia uma sessão nova.
+- Autenticação, permissões, serviço, HTTP/UDS, configuração, extensão, áudio e armazenamento são não aplicáveis ao runtime local.
 
-O plano cobre jornada/funcional, experiência, erro/abandono e cross-cutting. Autenticação, permissão, serviço, HTTP/UDS, CLI, configuração, extensão, persistência entre dispositivos e áudio foram considerados e são não aplicáveis ao protótipo local. Esta seção agenda observações; não registra execução, evidência nova ou veredito.
+## Ciclo Prototype V2 — 2026-09-05
+
+Cadência combinada: `full` para a campanha P0/P1 e `targeted` para as entradas adjacentes local e do runner. A ordem abaixo prioriza impacto e raio de regressão. Cada missão usa exatamente uma tour e inclui o estado terminal ou a condição de abandono/reinício que encerra a sessão.
+
+1. [CH-v3-campaign-terminal-matrix](charters/CH-v3-campaign-terminal-matrix.md) — Caio percorre ambas as ordens, os três desfechos e as precedências de morte até **Campanha concluída** e a abertura limpa.
+2. [CH-v3-first-return-loss](charters/CH-v3-first-return-loss.md) — Lia investiga sacrifício imediato, ausência no primeiro retorno, retorno posterior e abandono por reload.
+3. [CH-v3-keyboard-desktop](charters/CH-v3-keyboard-desktop.md) — Joana percorre S01–S12 por teclado, com zoom dentro do mínimo efetivo e movimento reduzido.
+4. [CH-v3-human-voiceover](charters/CH-v3-human-voiceover.md) — Joana e uma pessoa operadora avaliam nomes, ordem, anúncios e mudanças dinâmicas com VoiceOver real.
+5. [CH-v3-human-editorial-art](charters/CH-v3-human-editorial-art.md) — Rui conduz a revisão humana PT-BR, editorial, cultural e de arte final sem importar vereditos de automação.
+6. [CH-v3-seeded-public-contract](charters/CH-v3-seeded-public-contract.md) — Caio reproduz seeds, fronteiras de texto visto e separação entre projeção pública e diagnóstico V3 somente leitura.
+7. [CH-v3-offline-local-canary](charters/CH-v3-offline-local-canary.md) — Rui abre a cópia local sem rede, bloqueia imagens e confirma que reload abandona a campanha.
+8. [CH-v3-browser-manifest-canary](charters/CH-v3-browser-manifest-canary.md) — Caio verifica o manifesto atual, o relatório estruturado e a retomada por nova abertura após interrupção.
+
+Os charters anteriores continuam imutáveis como registros de suas missões de 231, 351 e 320 px. Eles não integram a matriz atual e seus debriefs e evidências permanecem nos relatórios históricos.

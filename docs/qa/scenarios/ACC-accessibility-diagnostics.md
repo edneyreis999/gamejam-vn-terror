@@ -1,19 +1,21 @@
 ---
 id: ACC-accessibility-diagnostics
 area: ACC
-title: Completar por teclado e reproduzir diagnósticos
+title: Completar o desktop suportado por teclado e inspecionar V3
 persona: Joana, jogadora ampliada
 journey: J-reproduce-campaign
-expected: Rádios nativos, controles operáveis por teclado, cartões estáticos, foco, zoom e movimento reduzido permitem ambas as ordens; snapshot v2 e a API de três métodos reproduzem rejeições sem backdoors
+expected: Teclado, foco, zoom com área efetiva mínima de 1280×720, movimento reduzido e as três leituras QA preservam S01–S12 sem avançar ou mutar a campanha
 entry_points: file:///…/prototype/index.html; file:///…/prototype/tests.html; Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
 qa_status: pass
 bug_ids:
 fix_status:
 retest_status:
 fix_commits:
-evidence: docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-keyboard-zoom-motion-formation-320-effective.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-keyboard-zoom-motion-victory.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-rejection.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-seeded-diagnostics-reproduction-seed-20260830.png; docs/qa/evidence/2026-08-31-dungeon-route-selection/CH-route-tests-entry-canary-final-351-pass.png
-last_report: docs/qa/reports/2026-08-31-dungeon-route-selection.md
+evidence: docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/keyboard-size-probes.json; docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/reduced-motion-slot-probe.json; docs/qa/evidence/prototype-v2-gdd-layouts/supervisor-keyboard-zoom/summary.json; docs/qa/evidence/prototype-v2-gdd-layouts/supervisor-final-supplements/summary.json; docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/seeded-public-contract.json
+last_report: docs/qa/reports/2026-09-05-prototype-v2-gdd-layouts.md
 overlaps: FOR-formation-roster; CAM-dungeon-progression-outcomes
 ---
 
-Executado Chrome a 320 CSS px efetivos, zoom 200%, modo escuro, movimento reduzido e campanha completa somente por teclado. Axe encontrou zero violações. Seeds-limite, erro inválido/tardio, snapshots congelados e `validate` não mutante foram inspecionados com os três métodos públicos; a rejeição `destination_unavailable` e sua limpeza foram verificadas separadamente pelo E2E-022 no runner usando `dispatch` do fixture.
+Planejar Tab, Shift+Tab, setas, Enter, Espaço e Escape; inspeção de herói, diálogos, leitura, sacrifício sem segunda confirmação, Conselho, desfechos e reinício; zoom apenas quando a área efetiva continuar ≥1280×720; movimento reduzido deve eliminar a espera visual sem alterar a verdade da campanha. Snapshot V3, seeds-limite, rejeições, objetos destacados e validate não mutante pertencem à observação de agente.
+
+VoiceOver com pessoa usuária permanece uma verificação humana separada. Axe, DOM, comparação visual e travessia por agente não produzem esse veredito. Os relatórios anteriores preservam sua história, mas não são evidência do estado planejado atual.

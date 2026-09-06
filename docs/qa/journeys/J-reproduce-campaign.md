@@ -1,60 +1,64 @@
-# Reproduzir uma campanha com o contrato QA v2
+# Reproduzir uma campanha com o contrato QA V3
 
 ```mermaid
 flowchart TD
-  A[Entry: DevTools antes de iniciar] --> B[setSeed 20260831]
-  B --> C[Preparação e snapshot v2]
-  C --> D[Observar Legado estático na UI pública]
-  D --> D2[Executar E2E-022 no runner para submeter a seleção bloqueada]
-  D2 --> E[lastRejectedAction preenchida e histórico aceito intacto]
-  E --> F[Ação aceita limpa a rejeição]
-  F --> G{Escolher ordem inicial}
-  G -->|Ferro depois Vozes| H[Jogar roteiro fixo]
-  G -->|Vozes depois Ferro| H
-  H --> I[snapshot e validate]
-  I --> J[Reabrir arquivo e reaplicar seed e mesma ordem]
-  I -.-> X[Abandono: recarregar sem reaplicar seed]
-  J --> H
-  B -->|seed inválida ou tardia| K[Erro estruturado sem reseed]
-  K -.-> X[Abandono: recarregar sem reaplicar seed]
-  I --> L[True end: pares da mesma ordem repetem atribuições e histórico]
+  A[Entry: abrir index.html e DevTools antes de Jogar] --> B[setSeed com uint32 válido]
+  B --> C[Jogar e caminhar somente por controles públicos]
+  C --> D[snapshot V3 e validate somente leitura]
+  D --> E{Reabrir e repetir mesma seed e roteiro}
+  E -->|mesma ordem e ações| F[Comparar snapshots, atribuições e histórico]
+  E -->|ordem inicial oposta| G[Comparar identidade por ordem sem mistura]
+  F --> H[Testar limites de texto visto]
+  G --> H
+  H --> I[Pulo atravessa somente passagens concluídas e para antes de texto novo ou decisão]
+  I --> J[Comparar projeção pública com diagnóstico privado]
+  J --> K[True end: reprodução documentada e sessão ainda válida]
+  B -->|seed inválida ou tardia| L[Erro estruturado sem reseed]
+  D -->|tentativa de mutar snapshot| M[Leitura seguinte permanece intacta]
+  C -.->|recarregar sem reaplicar seed| X[Abandono: seed nula e campanha limpa]
+  L --> X
+  X --> A
 ```
 
 ```yaml
 journey:
   id: J-reproduce-campaign
   name: Reproduzir campanha por seed e ordem
-  value_statement: "O operador reproduz qualquer ordem inicial e diagnostica rejeições sem mutar o domínio nem criar backdoors."
+  value_statement: "O operador reproduz decisões e diagnostica rejeições sem alterar o domínio nem revelar fatos privados ao jogador."
   personas: ["Caio, estrategista recorrente", "Joana, jogadora ampliada"]
   entry_points:
     - url: file:///…/prototype/index.html
       origin: direct
     - url: Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
       origin: direct
-    - url: file:///…/prototype/tests.html — E2E-022
-      origin: direct
   actions:
     - step: 1
-      verb: Definir seed 20260831 antes do início e inspecionar snapshot v2
-      expected_observable: setSeed retorna ok e snapshot expõe seleção, rota ativa, progresso, partes, formação, histórico e rejeição nula
+      verb: Definir seed uint32 antes de Jogar
+      expected_observable: setSeed aceita 0 e 4294967295, rejeita valores inválidos e não aceita reseed depois do início
     - step: 2
-      verb: Observar o Legado estático na sessão pública e executar E2E-022 no runner para submeter a seleção bloqueada
-      expected_observable: A sessão pública confirma que o cartão não é acionável; o fixture registra destination_unavailable fora do histórico e a seleção aceita seguinte limpa lastRejectedAction
+      verb: Repetir a mesma ordem e ações em sessões frescas
+      expected_observable: Snapshots V3 repetem atribuições, progressos, leitura, inventário, desfecho e histórico aceito
     - step: 3
-      verb: Repetir ações idênticas em duas sessões para cada ordem inicial
-      expected_observable: E2E-015 executa quatro sessões — duas Ferro/Vozes e duas Vozes/Ferro — e cada par repete o snapshot completo, incluindo atribuições, progresso e histórico; E2E-023/E2E-024 distinguem as ordens aceitas e validam os candidatos finais
+      verb: Consultar snapshot e validate e tentar alterar os objetos retornados
+      expected_observable: As leituras são destacadas e não mutantes; window.expeditionQA continua expondo exatamente setSeed, snapshot e validate
     - step: 4
-      verb: Executar validate e tentar seed inválida ou tardia
-      expected_observable: validate não muta estado, os erros são estruturados e o objeto público continua com exatamente três métodos
+      verb: Comparar conteúdo visível ao jogador com o diagnóstico
+      expected_observable: Nomes, rumores, progresso conhecido e consequências públicas aparecem; competências, cobertura, viabilidade, seed, IDs internos e atribuições futuras ficam somente no diagnóstico
+    - step: 5
+      verb: Completar, revisitar e tentar pular passagens vistas e inéditas
+      expected_observable: Apenas texto explicitamente concluído nesta campanha é pulável e uma ativação para antes do primeiro texto novo ou decisão
   goal:
-    observable: Snapshots v2 da mesma seed, ordem e roteiro são iguais, e diagnósticos não alteram a história aceita
+    observable: A mesma seed e roteiro reproduzem o estado V3 sem backdoor, vazamento privado ou avanço por inspeção
     side_effects: [nenhum-estado-duravel]
-  true_end_state: A sessão continua jogável e window.expeditionQA expõe somente setSeed, snapshot e validate
+  true_end_state: A reprodução termina com snapshot comparável, validate válido e campanha ainda operável pelos controles do jogador
   exit:
-    natural: relatório de QA com seed, ordem, roteiro e snapshots comparáveis
+    natural: registro da seed, ordem, roteiro e snapshots comparáveis
   abandonment:
-    - at_step: 3
+    - at_step: 2
       how: Recarregar sem reaplicar a seed
-      resume: Snapshot pronto retorna seed nula, zero partes e nenhuma rota ativa
-  crosses: [devtools, controlador, motor-deterministico, selecao-de-caminho]
+      resume: Snapshot pronto retorna seed nula, histórico vazio e nenhuma rota ativa
+    - at_step: 5
+      how: Fechar antes de completar uma passagem inédita
+      resume: Nova campanha não herda elegibilidade de pulo
+  crosses: [S02, S04, S05, S08, S09, S10, S12, diagnostico-v3]
 ```

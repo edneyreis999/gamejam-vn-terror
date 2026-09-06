@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T00:40:37.113Z",
+  "driver": "agent-browser read-only observation of the complete static runner",
+  "entry": "file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html",
+  "network": "offline",
+  "transcript": [
+    {
+      "args": [
+        "--allow-file-access",
+        "open",
+        "file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html"
+      ],
+      "status": 0,
+      "stdout": "✓ Testes — Expedição e Sacrifício\n  file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "set",
+        "viewport",
+        "1280",
+        "720"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "set",
+        "offline",
+        "on"
+      ],
+      "status": 0,
+      "stdout": "✓ Done",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"null\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "eval",
+        "JSON.stringify((()=>{const r=window.__expeditionTestResults;if(!r)return null;const ids=window.ExpeditionCaseManifest||[];return {title:document.title,summary:document.getElementById('summary').textContent,status:document.getElementById('summary').dataset.status,total:r.total,passed:r.passed,failed:r.failed,manifestTotal:ids.length,v2:ids.filter(id=>id.startsWith('V2/')).length,base:ids.filter(id=>id.startsWith('BASE/')).length,unique:new Set(ids).size,failures:r.results.filter(x=>x.status==='fail').map(x=>({name:x.name,error:x.error}))}})())"
+      ],
+      "status": 0,
+      "stdout": "\"{\\\"title\\\":\\\"PASS — 168/168 testes\\\",\\\"summary\\\":\\\"168 aprovados, 0 falharam, 168 no total.\\\",\\\"status\\\":\\\"pass\\\",\\\"total\\\":168,\\\"passed\\\":168,\\\"failed\\\":0,\\\"manifestTotal\\\":168,\\\"v2\\\":158,\\\"base\\\":10,\\\"unique\\\":168,\\\"failures\\\":[]}\"",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "screenshot",
+        "/Users/edney/projects/coreto/gamejam-vn-terror/docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/final-browser-suite.png"
+      ],
+      "status": 0,
+      "stdout": "✓ Screenshot saved to /Users/edney/projects/coreto/gamejam-vn-terror/docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/final-browser-suite.png",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "errors"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "close"
+      ],
+      "status": 0,
+      "stdout": "✓ Browser closed",
+      "stderr": ""
+    }
+  ],
+  "report": {
+    "title": "PASS — 168/168 testes",
+    "summary": "168 aprovados, 0 falharam, 168 no total.",
+    "status": "pass",
+    "total": 168,
+    "passed": 168,
+    "failed": 0,
+    "manifestTotal": 168,
+    "v2": 158,
+    "base": 10,
+    "unique": 168,
+    "failures": []
+  },
+  "console": [],
+  "status": "pass"
+}

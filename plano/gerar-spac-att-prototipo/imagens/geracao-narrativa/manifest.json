@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-05",
+  "mode": "native image_gen",
+  "status": "Prototype baseline",
+  "style_reference": "herois/Gorvak.png",
+  "assets": [
+    {
+      "slug": "ivai",
+      "name": "Ivaí",
+      "path": "personagens/ivai.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-91e5e5b9-b2d3-4210-a2da-d577857a39f9.png",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "slug": "florai",
+      "name": "Floraí",
+      "path": "personagens/florai.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-b8fe411a-6716-489a-a083-3b9f4ea7c266.png",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "slug": "perola",
+      "name": "Pérola",
+      "path": "personagens/perola.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-83205e45-71bf-48fd-ba88-928f37d7f1d1.png",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "slug": "andira",
+      "name": "Andirá — reflexo",
+      "path": "personagens/andira.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-6872a282-efb2-488b-954b-c1dcf16b56c1.png",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "slug": "igreja-interior",
+      "name": "Igreja — prisão sob o altar",
+      "path": "cenarios/igreja-interior.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-2773a7d1-c7de-4a2f-a9ed-af7657cda257.png",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "slug": "parque-figueira",
+      "name": "Parque — raízes da figueira",
+      "path": "cenarios/parque-figueira.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-0f7864ef-7d01-4a3b-9487-5c8f51ca0ec5.png",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "slug": "casa-do-conselho",
+      "name": "Casa do Conselho",
+      "path": "cenarios/casa-do-conselho.png",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-e2e03088-ba6a-451c-b88f-6d543abb5409.png",
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "discarded": [
+    {
+      "slug": "andira",
+      "source": "/Users/edney/.codex/generated_images/01a070b8-1da1-77d2-ab0e-493805779fcc/exec-a1ce5b93-90e4-40f3-b02c-dbb319061e28.png",
+      "reason": "Beard and projecting nose conflicted with the canonical entity description; replaced by a targeted facial edit."
+    }
+  ]
+}

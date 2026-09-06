@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "method": "Two new post-session real journey re-walks through Chrome desktop using only native agent-browser pointer/keyboard controls for player actions; QA API calls are seed setup or read-only observation.",
+  "acceptedLensNames": [
+    "usability",
+    "accessibility",
+    "perceivedPerformance",
+    "compatibility",
+    "errorRecoverability",
+    "productionParity"
+  ],
+  "scope": {
+    "browser": "Chrome desktop",
+    "entry": "file:// prototype/index.html",
+    "viewports": [
+      "1280x720",
+      "1920x1080"
+    ],
+    "network": "offline",
+    "excluded": [
+      "mobile",
+      "other browsers",
+      "extensions",
+      "server deployment",
+      "human VoiceOver/editorial/cultural/final-art judgment"
+    ]
+  },
+  "sourceHashes": {
+    "prototype/index.html": "9cf44d3686c1d12ee5cd5e709bd3d0b2e6c84dd318e7b68a521a0e827d43ad98",
+    "prototype/app.js": "d7fe8d824b013ca4979d2984c0fdef3f7c2bab6f374ed5aaa729f5c02ba9709e",
+    "prototype/game.js": "c71b7408df82671870ffaabd6128680a3d85385b3381152ad864248abd8d7a4a",
+    "prototype/data.js": "f4a5be59cb58885c9f46e02a04289c7cd9c6cf7ad13c15da0ca1bb90b073c5ec",
+    "prototype/narrative.js": "51504747383613af92a81e11bb1e629ce5820894d66fe6eebd7a50f09c9a82c7",
+    "prototype/styles.css": "ed295d17f3e472b139b6bcfb1db4b910d92ab66bf00910d9ef3ea9369306ffe8"
+  },
+  "journeys": [],
+  "raw": {
+    "complete": null,
+    "reproduce": null
+  },
+  "error": "Error: ✗ Element not found: button[data-action=\"TOGGLE_HERO\"][data-value=\"H1\"]. Verify the selector, role, or name is correct and the element exists in the DOM.\n    at run (/Users/edney/projects/coreto/gamejam-vn-terror/.compozy/tasks/prototype-v2-gdd-layouts/execution/run-experiential-lens-rewalks.cjs:37:68)\n    at Object.action (/Users/edney/projects/coreto/gamejam-vn-terror/.compozy/tasks/prototype-v2-gdd-layouts/execution/run-experiential-lens-rewalks.cjs:52:20)\n    at runCompleteCampaign (/Users/edney/projects/coreto/gamejam-vn-terror/.compozy/tasks/prototype-v2-gdd-layouts/execution/run-experiential-lens-rewalks.cjs:78:35)\n    at Object.<anonymous> (/Users/edney/projects/coreto/gamejam-vn-terror/.compozy/tasks/prototype-v2-gdd-layouts/execution/run-experiential-lens-rewalks.cjs:157:18)\n    at Module._compile (node:internal/modules/cjs/loader:1781:14)\n    at Object..js (node:internal/modules/cjs/loader:1913:10)\n    at Module.load (node:internal/modules/cjs/loader:1505:32)\n    at Function._load (node:internal/modules/cjs/loader:1309:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)"
+}
