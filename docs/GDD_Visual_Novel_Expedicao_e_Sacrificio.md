@@ -24,19 +24,28 @@ Documentos históricos de origem:
 - revisões intermediárias do antigo arquivo canônico, recuperáveis pelo histórico do Git;
 - [inventário histórico de pendências da v0.4](./narrativa/Pendencias_e_Decisoes_do_Time_GDD_v0.4.md).
 
-Cada definição deste documento possui um dos três estados abaixo. A ausência de uma etiqueta numa regra declarativa significa **Confirmado**.
+Cada definição deste documento possui um dos estados abaixo. A ausência de uma etiqueta numa regra declarativa significa **Confirmado**.
 
 | Estado | Significado | Consequência |
 |---|---|---|
 | **Confirmado** | Decisão vigente e aprovada | É autoridade de design até ser substituída por nova decisão registrada |
+| **Baseline de protótipo** | Conteúdo provisório autorizado para um incremento identificado | Permite avaliar a experiência sem transformar esse conteúdo em aprovação final |
 | **Hipótese a validar** | Risco ou expectativa que requer simulação ou playtest | A validação produz evidência; não altera o design automaticamente |
 | **Fora do escopo** | Elemento deliberadamente excluído deste GDD ou do conteúdo descrito | A fronteira objetiva informa qual trabalho adicional seria necessário |
 
-Não existem decisões `Pendentes` nem `Baseline de protótipo` nesta versão. Uma futura mudança de comportamento deve ser deliberada e, para implementação, descrita em spec incremental. Specs concluídas e o protótipo atual são baselines históricas, não autoridades contra este GDD.
+O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`. As decisões posteriores de conteúdo provisório são identificadas explicitamente neste documento e na spec incremental correspondente. Uma futura mudança de comportamento deve ser deliberada e, para implementação, descrita em spec incremental. Specs concluídas e o protótipo atual são baselines históricas, não autoridades contra este GDD.
 
 ### 1.1 Relação com o protótipo v2.0
 
 O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve buscar essa visão, mas seu recorte exato será definido posteriormente em specs incrementais e no Trello; aprovar este GDD não significa que todo o conteúdo estará obrigatoriamente presente na primeira entrega da v2.0.
+
+**Recorte aprovado para `prototype-v2-gdd-layouts`:** a atualização abrange a experiência jogável do GDD e os novos layouts, com **salvamento, áudio e suporte a telas com pouca largura fora do escopo deste incremento**, conforme decisões posteriores da entrevista e ADRs 006, 008 e 011. A campanha permanece sem som e somente na sessão aberta; recarregar ou reabrir a página inicia uma nova campanha. Mortes, encontros revelados e progresso continuam preservados entre expedições da mesma sessão. Os contratos de salvamento da seção 3.7, áudio da seção 19.4 e reflow para o jogo completo permanecem confirmados.
+
+**Apresentação desktop deste incremento:** telas estreitas e layouts alternativos para acomodá-las não são requisito de implementação nem de QA. Isso retira a exigência de reflow a 320 px efetivos do protótipo, inclusive quando a pouca largura resulta do zoom. Mantêm-se teclado, foco visível, texto legível e redução de movimento na área desktop suportada. A área útil mínima aprovada é **1280 × 720 pixels efetivos dentro do navegador**, já considerando o zoom. A referência mede a área do jogo, não a resolução do monitor; o zoom continua utilizável enquanto essa área mínima for mantida.
+
+**Textos faltantes — Baseline de protótipo para `prototype-v2-gdd-layouts`:** os trechos narrativos ainda não escritos recebem redação provisória em PT-BR, fiel ao GDD, para revisão da equipe, conforme o ADR-007. Esse conteúdo deve permitir jogar as cenas e compreender suas escolhas e consequências. Textos canônicos já existentes, incluindo despedidas e epílogos das fichas, permanecem como referência obrigatória; a redação provisória não altera acontecimentos, regras ou fatos confirmados nem equivale a aprovação editorial final.
+
+**Arte — Baseline de protótipo para `prototype-v2-gdd-layouts`:** a versão jogável de avaliação pode usar imagens provisórias, incluindo geração dos retratos faltantes de Ivaí, Floraí, Pérola e Andirá e dos cenários narrativos da Igreja, da figueira no Parque e do Conselho, conforme o ADR-009. As gerações seguem o traço de referência do Gorvak e respeitam os fatos visuais do GDD. Detalhes não definidos no GDD permanecem propostas provisórias; as artes finais substituem os placeholders antes da entrega do jogo, preservando a direção da seção 19.2.
 
 Este documento define produto e comportamento. Tarefas, responsáveis por cards, ordem, dependências, datas e progresso pertencem ao [quadro da game jam no Trello](https://trello.com/b/I0FkvVtc/gamejam-visual-novel).
 
@@ -121,8 +130,8 @@ Cada encontro possui um único texto de sucesso por abordagem e um único texto 
 ### 3.6 Plataforma, publicação e entrada
 
 - Alvo: Chrome estável em desktop, com teclado e mouse.
-- Layout fluido, sem resolução lógica fixa, com reflow funcional até 320 px de largura efetiva e zoom de 200%.
-- A largura reduzida é requisito de reflow e acessibilidade, não suporte oficial a celular ou toque.
+- Para o jogo completo: layout fluido, sem resolução lógica fixa, com reflow funcional até 320 px de largura efetiva e zoom de 200%.
+- Para o jogo completo, a largura reduzida é requisito de reflow e acessibilidade, não suporte oficial a celular ou toque. O incremento `prototype-v2-gdd-layouts` exclui telas estreitas conforme a seção 1.1 e o ADR-011.
 - A versão pública pretendida será um jogo HTML5 incorporado à página do itch.io.
 - O visitante clica explicitamente em **Jogar**; não há início automático ao carregar a página.
 - Não haverá arquivo público para download. O ZIP exigido para envio ao itch.io é somente o pacote de hospedagem e não uma modalidade oferecida ao jogador.
@@ -130,6 +139,8 @@ Cada encontro possui um único texto de sucesso por abordagem e um único texto 
 - A execução local direta e offline continua disponível à equipe para desenvolvimento e QA; não constitui modalidade pública de distribuição.
 
 ### 3.7 Salvamento
+
+**Aplicação:** contrato confirmado para o jogo completo. Salvamento e retomada após recarregar a página estão **fora do escopo** da atualização `prototype-v2-gdd-layouts`, conforme a seção 1.1; esse protótipo mantém a campanha somente em memória durante a sessão aberta.
 
 - Existe um único salvamento automático local por navegador em `localStorage`, sem conta, nuvem ou comunicação de rede.
 - O salvamento ocorre após: preparação concluída; abordagem escolhida e consequência resolvida; sacrifício; conclusão de rota; entrada no clímax; e escolha final.
@@ -919,6 +930,8 @@ Quando o oitavo herói morre, Ivaí fica sem proteção antes de recuperar o med
 3. epílogos predefinidos dos heróis elegíveis, somente nos dois finais da escolha;
 4. tela de campanha concluída.
 
+**Encerramento confirmado para a atualização do protótipo v2.0:** a última tela apresenta **Campanha concluída** e o botão **Jogar novamente**. O botão retorna à tela de avisos com **Jogar**, pronta para uma campanha nova, com todos os heróis vivos e sem o progresso ou o histórico de leitura da campanha anterior. A passagem pelo encerramento não inicia outra campanha automaticamente.
+
 ---
 
 ## 17. Balanceamento e consequências matemáticas
@@ -1105,7 +1118,36 @@ Cada ficha define um único epílogo de sobrevivência, independente da escolha 
 - Abordagens e resultados nunca mostram competências.
 - A seleção de sacrifício deixa a irreversibilidade visível antes dos cards, mas executa a morte no primeiro clique.
 - Texto é a fonte obrigatória de informação; cor, som e imagem nunca são o único canal.
-- O layout deve preservar ordem de leitura, foco visível, navegação por teclado e reflow até 320 px efetivos ou zoom de 200%.
+- O layout deve preservar ordem de leitura, foco visível e navegação por teclado. O reflow até 320 px efetivos e o zoom de 200% são requisitos do jogo completo; o suporte do incremento `prototype-v2-gdd-layouts` segue a fronteira de apresentação desktop da seção 1.1.
+
+#### 19.1.1 Preparação na taverna
+
+**Estado: Confirmado para a atualização do protótipo v2.0.**
+
+- A composição da taverna é a tela interativa de seleção, com os oito heróis inicialmente distribuídos pelo ambiente. A consulta aos destinos permanece acessível na mesma etapa de preparação.
+- O botão **Escolher destino** abre um painel sobre a taverna com os três caminhos, suas ilustrações, rumores, estados e progresso conhecido. Escolher um destino disponível fecha o painel e mostra o destino junto de **Partir**, preservando os heróis selecionados. Continuam valendo os bloqueios e as regras de conclusão das rotas.
+- A fala de apresentação de um herói aparece ao passar o mouse sobre ele ou ao alcançá-lo com as setas do teclado.
+- As falas usam balões de conversa normais, levemente estilizados, conforme a referência do Figma.
+- O balão aparece ao lado do herói, no lado com espaço disponível: à direita de quem está à esquerda da tela e à esquerda de quem está à direita. O posicionamento se adapta ao espaço sem colocar o balão abaixo do herói. A ficha de apresentação permanece acima da cabeça, separada da fala.
+- Dentro da área desktop suportada, a imagem do herói pode diminuir para acomodar o balão lateral, preservando o tamanho legível do texto e a ficha acima da cabeça. Os selecionados continuam proporcionalmente maiores que os não selecionados. A decisão posterior de excluir telas estreitas limita a adaptação antes prevista para janelas estreitas ou com zoom; ela não exige um layout alternativo fora da área desktop suportada.
+- O mesmo hover ou foco mostra uma ficha acima da cabeça do herói, apresentada como um formulário que ele preencheu para se apresentar na taverna. A ficha reúne nome, pronomes, raça, profissão, resumo público e estado; a fala permanece em seu balão próprio. O conteúdo da ficha é predefinido, e as competências internas continuam ocultas.
+- Na formação manual, clicar no herói ou pressionar Enter/Espaço sobre o herói em foco inclui ou retira sua participação. As setas navegam e mostram as falas, preservando a formação escolhida.
+- Heróis escolhidos para a expedição recebem um contorno dourado discreto e ficam um pouco maiores enquanto estiverem selecionados. O destaque persiste quando o jogador consulta outro herói e permanece distinto do foco de navegação. A ampliação preserva o lugar do herói na composição e a leitura da ficha e da fala. Com até três sobreviventes, continua valendo a formação automática e o mesmo destaque para os integrantes.
+- Heróis mortos deixam seus lugares vazios na taverna; os sobreviventes mantêm suas posições na composição. Os mortos continuam identificados como **Morto** na consulta ao elenco e aparecem no memorial final.
+- No primeiro retorno à taverna após a morte de um herói, sua imagem desaparece gradualmente durante **um segundo**. Nos retornos seguintes, seu lugar já está vazio.
+- Se vários heróis morrerem antes do mesmo retorno à taverna, suas imagens desaparecem **simultaneamente**, durante o mesmo intervalo de **um segundo**; os sobreviventes mantêm seus lugares.
+- A preparação permanece disponível durante esse segundo. Se o jogador sair da taverna antes do fim, o efeito termina e não se repete no próximo retorno; os lugares já aparecem vazios.
+- Com a preferência de redução de movimento do sistema ativada, os lugares aparecem vazios imediatamente, preservando a informação textual das mortes.
+- Esse desaparecimento representa a perda na interface. A morte já ocorreu na expedição e continua permanente durante todo o efeito; a imagem em desaparecimento não permite selecionar o herói nem consultar sua fala como se estivesse vivo.
+
+#### 19.1.2 Leitura das cenas
+
+**Estado: Confirmado para a atualização do protótipo v2.0.**
+
+- O texto das cenas aparece em trechos completos, sem revelação letra a letra.
+- O jogador controla o ritmo de leitura: clicar na caixa de texto, no botão **Avançar** ou pressionar Enter avança um trecho completo. Avançar o texto não ativa uma escolha que acaba de aparecer.
+- As escolhas de abordagem aparecem depois da apresentação do encontro.
+- O botão **Pular texto já lido** aparece quando o trecho atual já foi visto na campanha. Uma ativação pula os trechos consecutivos já lidos e para ao chegar a texto inédito ou a uma escolha, preservando a restrição da seção 3.5.
 
 ### 19.2 Direção artística
 
@@ -1114,12 +1156,15 @@ A direção é pintura digital 2D semirrealista, escura e de baixa saturação. 
 O conjunto de conteúdo visual previsto contém:
 
 - 16 ilustrações de encontro;
-- 4 cenários narrativos: cidade ou acampamento, Igreja e Pérola, Parque e Floraí, Conselho;
+- 3 ilustrações de apresentação dos destinos, uma para cada caminho no painel de escolha;
+- 4 cenários narrativos: taverna da cidade, Igreja e Pérola, Parque e Floraí, Conselho;
 - 12 retratos estáticos: Ivaí, oito heróis, Floraí, Pérola e Andirá;
 - uma pose ou expressão por personagem;
 - finais compostos com Conselho, retratos e sobreposições existentes, sem CG exclusivo.
 
 Irati e Palotina aparecem somente em texto, documentos, silhuetas ou detalhes de objetos. As 16 imagens atuais do protótipo são referências ou placeholders porque ainda não representam integralmente o mundo aprovado. A técnica, a hierarquia de acabamento e o esforço por imagem ficam fora do escopo desta etapa e requerem planejamento de Technical Art com Lucas.
+
+**Composição confirmada para a atualização do protótipo v2.0:** Ivaí, Floraí, Pérola e Andirá usam versões dos retratos sem fundo branco, sobrepostas aos cenários e preservando o traço das ilustrações provisórias. Floraí e Pérola permanecem representados em suas respectivas prisões; Andirá aparece somente no reflexo. Esse tratamento mantém os retratos separados dos cenários e não altera a direção artística final nem o estado provisório dos assets.
 
 ### 19.3 Parque das Águas Assombradas
 
@@ -1128,6 +1173,8 @@ O parque foi aberto pela Companhia das Duas Margens, formada por descendentes co
 Na versão descrita, essa história aparece somente por uma ou duas referências ambientais. Fundadores, funcionários, documentos empresariais e história comercial detalhada ficam fora do escopo porque exigiriam conteúdo narrativo sem função no loop atual.
 
 ### 19.4 Áudio
+
+**Aplicação:** contrato confirmado para o jogo completo. Áudio está **fora do escopo** da atualização `prototype-v2-gdd-layouts`, conforme a seção 1.1 e o ADR-008; esse protótipo permanece sem som, sem assets ou controles de áudio.
 
 - Sem vozes.
 - Quatro loops ambientais: preparação; Caminho da Igreja; Parque; Vilarejo e Conselho.
@@ -1204,7 +1251,7 @@ Balanceamento numérico, ajustes de texto e mudanças de ritmo só podem ser esc
 | Epílogos gerados, adaptados ao final ou para heróis fora do clímax | Requer escrita combinatória e nova regra de elegibilidade |
 | História detalhada da companhia do parque | Requer conteúdo narrativo sem função atual |
 | Técnica e níveis de acabamento por asset | Requer planejamento de Technical Art conforme disponibilidade de Lucas |
-| Animação, lip sync, expressões múltiplas e CGs exclusivos | Requer produção artística adicional |
+| Animação, lip sync, expressões múltiplas e CGs exclusivos | Requer produção artística adicional; a única exceção aqui aprovada é a transição de desaparecimento de um segundo na taverna, descrita na seção 19.1.1, usando a imagem estática |
 | Vozes, temas por herói, áudio binaural e SFX exclusivo por encontro | Requer produção e QA de áudio adicionais |
 | Assets remotos, código de runtime de terceiros ou comunicação de rede durante a partida | Requer mudança de arquitetura e avaliação de segurança |
 | Aparência final das duas peças do mapa | Requer direção conjunta de UI/UX e Technical Art; funcionalmente, uma é anã, outra é élfica e a sobreposição revela o Vilarejo |
@@ -1229,6 +1276,22 @@ Essas fronteiras não atribuem cards. O Trello é a fonte exclusiva para execuç
 - As decisões de mundo, personagens, clímax, apresentação, plataforma e escopo foram aprovadas na entrevista que antecedeu a v4.0.
 - As fichas de herói foram elevadas de propostas a referências subordinadas confirmadas.
 - O snapshot v4.0 é imutável como registro histórico. Futuras decisões atualizam primeiro o GDD canônico sem sufixo e, quando necessário, geram nova versão numerada.
+- Após o snapshot v4.0, a entrevista da spec incremental `prototype-v2-gdd-layouts` confirmou a preparação interativa na taverna, as falas por hover ou setas, a seleção por clique ou Enter/Espaço, o destaque dos integrantes da expedição e o desaparecimento de um segundo no primeiro retorno após cada morte. Essas decisões constam na seção 19.1.1 e no ADR-003 da spec.
+- A mesma entrevista definiu a apresentação pública de cada herói como uma ficha preenchida por ele, exibida acima de sua cabeça na taverna ao receber hover ou foco, acompanhada de um balão separado para a fala.
+- A escolha de destino passou a usar um painel sobre a taverna, com uma ilustração própria por caminho, conforme o ADR-004 da mesma spec incremental.
+- A leitura passou a usar trechos completos, avançados por clique ou Enter, com as escolhas após a apresentação do encontro, conforme a seção 19.1.2 e o ADR-005 da mesma spec incremental.
+- A entrevista excluiu salvamento do incremento `prototype-v2-gdd-layouts`, preservando a campanha somente na sessão aberta. O ADR-006 registra essa fronteira sem remover o salvamento da visão completa do jogo.
+- A entrevista autorizou redação provisória em PT-BR para os trechos narrativos faltantes desse incremento, fiel ao GDD e sujeita à revisão da equipe, conforme o ADR-007.
+- A entrevista também excluiu áudio do incremento `prototype-v2-gdd-layouts`, conforme o ADR-008, preservando sua previsão para o jogo completo.
+- A entrevista autorizou gerar a arte narrativa faltante como placeholder da versão de avaliação e esclareceu que sua substituição é necessária antes da entrega do jogo, conforme o ADR-009.
+- Na etapa de detalhamento das telas, a entrevista definiu o destaque dos integrantes da expedição como contorno dourado discreto e pequeno aumento de tamanho enquanto selecionados, registrado no ADR-003 da mesma spec.
+- A mesma etapa definiu os balões de fala ao lado do herói, voltados para o espaço disponível na tela, mantendo a ficha acima da cabeça, conforme o ADR-003.
+- Para acomodar essa apresentação em janelas estreitas ou com zoom, a entrevista aprovou diminuir as imagens dos heróis preservando o texto legível e o destaque proporcional dos selecionados, conforme o ADR-003.
+- A entrevista confirmou que o desaparecimento não bloqueia a preparação, termina ao sair da taverna sem se repetir e é substituído por lugares imediatamente vazios com redução de movimento, preservando a informação textual das mortes, conforme o ADR-003.
+- A entrevista confirmou versões sem fundo branco dos retratos de Ivaí, Floraí, Pérola e Andirá sobre os cenários, preservando as prisões dos amantes e Andirá somente no reflexo, conforme o ADR-009.
+- A entrevista definiu os controles de leitura como clique na caixa de texto, **Avançar** ou Enter, além de **Pular texto já lido** para trechos consecutivos vistos, com parada em texto inédito ou escolha, conforme o ADR-005.
+- A entrevista definiu **Campanha concluída** com **Jogar novamente**, retornando à tela de avisos e **Jogar** para uma campanha nova, conforme o ADR-010.
+- A entrevista excluiu telas com pouca largura do protótipo, retirando layouts alternativos e o critério de reflow a 320 px desse incremento e limitando a adaptação de retratos à área desktop suportada, conforme o ADR-011. O contrato do jogo completo permanece preservado. A decisão seguinte fixou essa área útil mínima em 1280 × 720 pixels efetivos no navegador, já considerando o zoom.
 
 ---
 

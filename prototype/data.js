@@ -35,29 +35,151 @@
     H8: ['will', 'survival']
   };
 
+  var heroContent = {
+    H1: {
+      label: 'Gorvak', pronouns: 'Ele/dele', race: 'Anão', profession: 'Ferreiro',
+      summary: 'Gorvak é um ferreiro de arquétipo protetor que suporta pesos e horrores para manter os outros de pé, mas se recusa a admitir quando ele próprio precisa de ajuda.',
+      presentationText: 'Lugar velho avisa antes de cair. Prestem atenção aos estalos.',
+      farewell: '“Não desperdicem o tempo que estou comprando.”',
+      opinion: 'reunir o medalhão e libertar Floraí e Pérola. Ivaí deve aceitar pessoalmente o custo da história que impôs aos outros.',
+      epilogue: 'reconstrói a forja, mas grava nela os nomes dos companheiros mortos. Passa a ensinar aos aprendizes que força não é suportar tudo sozinho.'
+    },
+    H2: {
+      label: 'Elowen', pronouns: 'Ela/dela', race: 'Elfa', profession: 'Caçadora',
+      summary: 'Elowen é uma caçadora de arquétipo batedora que abre caminhos com precisão e rapidez, mas sua confiança no próprio corpo faz com que assuma riscos antes de ouvir o restante do grupo.',
+      presentationText: 'Se existe uma entrada, existe uma saída. Vamos encontrá-la antes que precise de nós.',
+      farewell: '“Quando eu correr, não olhem para trás.”',
+      opinion: 'destruir o medalhão e salvar Ivaí. Vivo, ele deverá responder pelo dano e participar da reparação; morto, escaparia dessa obrigação.',
+      epilogue: 'usa sua parte da recompensa para proteger o território de caça e passa a treinar novos batedores. Pela primeira vez, ensina que velocidade também significa saber quando esperar pelo grupo.'
+    },
+    H3: {
+      label: 'Griznik', pronouns: 'Ele/dele', race: 'Goblin', profession: 'Carpinteiro',
+      summary: 'Griznik é um carpinteiro de arquétipo construtor que enxerga saídas onde os outros veem apenas ruínas, mas tenta consertar todos os problemas para não encarar aqueles que não pode resolver.',
+      presentationText: 'Nada fica de pé por acaso. Descobrimos o que sustenta isto e descobrimos o que pode cair.',
+      farewell: '“Eu seguro a estrutura. Vocês aproveitem a saída.”',
+      opinion: 'destruir o medalhão e salvar Ivaí para encerrar as mortes da linhagem. A sobrevivência cria obrigação de reparo, não recompensa.',
+      epilogue: 'abre uma oficina dedicada a construções seguras e passa a recusar trabalhos que economizem à custa de vidas. Guarda as lascas recolhidas na expedição em uma parede, junto aos nomes de quem não voltou.'
+    },
+    H4: {
+      label: 'Seraphina', pronouns: 'Ela/dela', race: 'Troll', profession: 'Curandeira',
+      summary: 'Seraphina é uma curandeira troll de arquétipo sábia que estuda tanto o corpo quanto as forças que o assombram, mas sua certeza de saber o que é melhor pode fazê-la decidir pelos outros.',
+      presentationText: 'Observem antes de nomear o perigo. Um diagnóstico apressado também mata.',
+      farewell: '“Vivam. Depois decidam o que esta morte significa.”',
+      opinion: 'reunir o medalhão e libertar Floraí e Pérola, restaurando o juramento livremente escolhido. Se o jogador destruir o artefato, ela ainda tratará Ivaí enquanto puder, sem transformar cuidado em absolvição.',
+      epilogue: 'abre sua casa de cura e registra tudo o que aprendeu, incluindo os próprios erros. Passa a exigir consentimento claro de seus pacientes, reconhecendo que salvar alguém não lhe concede o direito de escolher por essa pessoa.'
+    },
+    H5: {
+      label: 'Bimbren', pronouns: 'Ele/dele', race: 'Gnomo', profession: 'Mensageiro',
+      summary: 'Bimbren é um mensageiro gnomo de arquétipo portador do dever que conhece caminhos e carrega pesos que derrubariam outros viajantes, mas sua obsessão em concluir uma entrega pode fazê-lo ignorar o custo da missão.',
+      presentationText: 'Destino confirmado. Agora precisamos garantir que todos cheguem até ele.',
+      farewell: '“Minha rota termina aqui. A de vocês, não.”',
+      opinion: 'reunir o medalhão e libertar Floraí e Pérola. O compromisso original dos amantes foi livremente escolhido e deve prevalecer sobre a falsa missão.',
+      epilogue: 'reabre o serviço de mensagens, mas abandona a regra de que toda entrega deve ser concluída a qualquer preço. Registra os nomes dos companheiros em seu livro de rotas e passa a ensinar que o dever existe para servir pessoas, não para sacrificá-las.'
+    },
+    H6: {
+      label: 'Liora', pronouns: 'Ela/dela', race: 'Gnoma', profession: 'Navegadora',
+      summary: 'Liora é uma navegadora de arquétipo cartógrafa que transforma sinais mínimos em caminhos seguros, mas sua necessidade de estar certa a impede de admitir quando perdeu o rumo.',
+      presentationText: 'Marquem a entrada. Um caminho só existe quando sabemos percorrê-lo nos dois sentidos.',
+      farewell: '“O caminho está marcado. Não deixem que termine comigo.”',
+      opinion: 'destruir o medalhão e salvar Ivaí. Uma pessoa viva pode responder pelo que fez, registrar a verdade e corrigir o rumo.',
+      epilogue: 'conclui o atlas, mas publica também seus erros, dúvidas e rotas incompletas. Dedica a obra aos companheiros perdidos e passa a ensinar que admitir estar perdida é o primeiro passo para reencontrar o caminho.'
+    },
+    H7: {
+      label: 'Vaelith', pronouns: 'Ele/dele', race: 'Elfo', profession: 'Escriba',
+      summary: 'Vaelith é um escriba de arquétipo pesquisador que escala ruínas para registrar conhecimentos proibidos antes que desapareçam, mas sua curiosidade o faz avançar quando deveria deixar certas palavras esquecidas.',
+      presentationText: 'Se as paredes quiserem nos ameaçar, ao menos que tenham a cortesia de escrever com clareza.',
+      farewell: '“Levem as páginas. Façam minha última linha valer.”',
+      opinion: 'reunir o medalhão, libertar os amantes e preservar o artefato como proteção e evidência da verdade ocultada.',
+      epilogue: 'organiza o arquivo que buscava, mas restringe textos capazes de causar dano quando lidos sem preparo. Acrescenta os relatos dos companheiros e passa a ensinar que preservar conhecimento também exige saber quando não o divulgar.'
+    },
+    H8: {
+      label: 'Draska', pronouns: 'Ela/dela', race: 'Goblin', profession: 'Mineradora',
+      summary: 'Draska é uma mineradora goblin de arquétipo sobrevivente que mantém a cabeça no lugar quando tudo desaba, mas sua necessidade de prever cada risco dificulta confiar nas decisões dos outros.',
+      presentationText: 'Antes de avançar: chão, teto, ar e saída. Nessa ordem.',
+      farewell: '“Eu marco o caminho. Vocês terminam de percorrê-lo.”',
+      opinion: 'destruir o medalhão e salvar Ivaí como opção de menor dano imediato. A sobrevivência dele é uma dívida a ser paga, não um prêmio.',
+      epilogue: 'adquire a mina abandonada e funda a cooperativa que planejava. Na entrada, registra os nomes dos companheiros mortos e estabelece uma regra: nenhuma recompensa vale esconder um risco da equipe.'
+    }
+  };
+
   var heroes = {};
   Object.keys(heroPairs).forEach(function (heroId) {
-    heroes[heroId] = {
+    var content = heroContent[heroId];
+    heroes[heroId] = Object.assign({
       id: heroId,
-      label: heroId,
-      identityStatus: 'prototype_baseline',
+      identityStatus: 'confirmed',
+      fixedTextStatus: 'confirmed',
+      presentationStatus: 'confirmed',
+      artStatus: 'prototype_baseline',
       competenciesStatus: 'confirmed',
       competencyIds: heroPairs[heroId],
-      farewell: '“Sigam sem mim.” — despedida provisória de ' + heroId + '.',
-      farewellStatus: 'prototype_baseline',
-      epilogue: heroId + ' sobreviveu à campanha. Epílogo final pendente.',
-      epilogueStatus: 'prototype_baseline'
-    };
+      portraitPath: 'assets/heroes/' + content.label.toLowerCase() + '.png',
+      source: 'docs/narrativa/herois/Ficha_' + heroId + '_' + content.label + '.md'
+    }, content);
   });
 
+  var causalFailureTexts = {
+    'A1-1': 'A comporta permanece travada; o redemoinho ricocheteia nas paredes e fecha a saída com cacos.',
+    'A1-2': 'As presilhas escapam uma após outra, libertando turbilhões que se unem diante da passagem.',
+    'A1-3': 'A fuligem aponta para um falso centro; o grupo entra no giro e os cacos bloqueiam o retorno.',
+    'A2-1': 'Um nó errado libera a tensão das estacas, que fecham o corredor atrás dos cipós.',
+    'A2-2': 'O vento muda sob a copa fechada, conduzindo o grupo ao corredor de estacas ocultas.',
+    'A2-3': 'A regra reconstruída repete a mentira dos pés virados, e árvores tombadas isolam a única saída.',
+    'A3-1': 'As cunhas se partem sob o primeiro impacto, deixando o socador livre para perseguir o grupo.',
+    'A3-2': 'O ritmo muda no meio da travessia, e os pilões menores empurram o grupo para o centro.',
+    'A3-3': 'O verso apagado reaparece na caixa sem corda, acelerando o socador até ele abandonar os trilhos.',
+    'A4-1': 'As costelas se fecham antes da escalada terminar, derrubando o grupo de volta ao salão.',
+    'A4-2': 'As barras resistem e comprimem os braços que as sustentam, reduzindo o vão a uma fresta.',
+    'A4-3': 'O rugido interrompe o movimento diante da trava, e a jaula fecha o último espaço livre.',
+    'A5-1': 'A grade emperra acima da baia, e a carcaça retorna arrastando correntes pela saída.',
+    'A5-2': 'O fecho prende a ferramenta nas correntes aquecidas, que selam o corredor com fogo.',
+    'A5-3': 'A leitura do ciclo atrasa uma descarga; a caldeira entra em sobrepressão e incendeia a passagem.',
+    'A6-1': 'As raízes arrancadas se dividem em fibras menores e apertam o corredor por todos os lados.',
+    'A6-2': 'O túnel alcança tecido ainda vivo, que se fecha ao redor do grupo como uma cicatriz.',
+    'A6-3': 'O nome rompido pertence a outro morto; o vínculo do Corpo-Seco se fortalece e reúne as raízes.',
+    'A7-1': 'Os ganchos destravados descem juntos e amontoam os sacos diante da saída.',
+    'A7-2': 'Uma corrente cede durante o balanço, lançando o grupo de volta à esteira da prensa.',
+    'A7-3': 'Uma voz reconhecida recebe resposta; os sacos se agitam e seus ganchos fecham o corredor.',
+    'A8-1': 'Os apoios se apoiam numa viga podre, que transfere todo o peso para o centro do forro.',
+    'A8-2': 'A passada chega antes da travessia, quebrando os caibros e encurtando a passagem.',
+    'A8-3': 'Um eco é tomado por passo real; o grupo entra justamente na faixa onde o teto desaba.',
+    'B1-1': 'O eco escolhido responde depois do assobio, e a casa fecha suas frestas ao redor das vozes.',
+    'B1-2': 'A promessa apontada como falsa pertence a um dos heróis, e a Matinta apaga seu nome das paredes.',
+    'B1-3': 'O assobio abandona o postigo antes que ele seja arrancado e ocupa todas as janelas da casa.',
+    'B2-1': 'A sombra escolhida pertence a um morto comum; a figura da frente apaga as velas dos vivos.',
+    'B2-2': 'O vínculo resiste nos panos e troca os nomes bordados, incorporando o grupo ao cortejo.',
+    'B2-3': 'A costura se rompe junto com o tecido funerário, e as almas reconhecem os nomes expostos.',
+    'B3-1': 'Um reflexo é tomado por olho verdadeiro, e as lembranças projetadas cercam o grupo em fogo.',
+    'B3-2': 'A memória sustentada contém uma mentira; suas versões queimadas apagam o caminho de volta.',
+    'B3-3': 'O barro seca antes da travessia terminar, e as luzes passam a arder sob a pele.',
+    'B4-1': 'As exigências parecem compatíveis porque a imitadora altera os troncos durante a comparação.',
+    'B4-2': 'O nome desfeito pertence à guardiã verdadeira, ampliando a voz roubada entre as árvores.',
+    'B4-3': 'As copas completam o círculo antes da travessia, dobrando os galhos de volta ao mesmo ponto.',
+    'B5-1': 'A convocação reconstruída usa a data errada, e o espelho mais antigo troca o rosto de quem lê.',
+    'B5-2': 'O reflexo corrigido encontra uma culpa não admitida e ocupa o lugar de quem desviou os olhos.',
+    'B5-3': 'O vidro se parte voltado para os demais, multiplicando a figura loira por todo o banheiro.',
+    'B6-1': 'O nome restituído pertence a outro poço, e a canção sobe pelas pedras com a voz do grupo.',
+    'B6-2': 'O próximo verso interrompe a respiração, tornando o chão seco tão sufocante quanto água profunda.',
+    'B6-3': 'Um fio de cabelo se rompe no nó errado, soltando a trança que sustentava a passagem.',
+    'B7-1': 'O eco invertido é apenas atraso do salão; o grito verdadeiro aproxima todas as datas do presente.',
+    'B7-2': 'A morte apontada como estranha traz o nome de um herói, que termina de surgir na mortalha.',
+    'B7-3': 'As penas conduzem a uma corrente de ar fechada pelo tecido, que envolve a saída por inteiro.',
+    'B8-1': 'A marca de convite se completa antes de ser fechada, abrindo uma boca dentada na parede.',
+    'B8-2': 'Uma voz infantil imita um pedido conhecido e recebe resposta, criando novas portas ao redor.',
+    'B8-3': 'O madeiramento termina numa entrada falsa, cujos dentes fecham o cômodo atrás do grupo.'
+  };
+
   function approach(encounterId, number, text, competencyId, successText) {
+    var id = encounterId + '-' + number;
     return {
-      id: encounterId + '-' + number,
+      id: id,
       text: text,
       textStatus: 'confirmed',
       competencyId: competencyId,
       successText: successText,
-      successTextStatus: 'prototype_baseline'
+      failureText: causalFailureTexts[id],
+      successTextStatus: 'prototype_baseline',
+      failureTextStatus: 'prototype_baseline'
     };
   }
 
@@ -69,8 +191,8 @@
       description: description,
       contentStatus: 'confirmed',
       approaches: approaches,
-      failureText: failureText,
-      failureTextStatus: 'confirmed',
+      deathText: failureText.charAt(0).toUpperCase() + failureText.slice(1),
+      deathTextStatus: 'confirmed',
       imagePath: 'assets/encounters/' + id.toLowerCase() + '.jpg',
       imageStatus: 'prototype_baseline'
     };
@@ -141,7 +263,7 @@
       'A6',
       'A',
       'O Pomar do Corpo-Seco',
-      'Um cadáver ressequido foi incorporado ao tronco central de um pomar subterrâneo. Suas raízes atravessam outros corpos e apertam o corredor como dedos, enquanto frutos duros caem e se abrem cheios de dentes humanos.',
+      'Um cadáver ressequido foi incorporado ao tronco central de um pomar subterrâneo. Suas raízes atravessam outros corpos e apertam o corredor como dedos, enquanto frutos duros caem e se abrem cheios de dentes de diferentes povos mortais.',
       [
         approach('A6', 1, 'Arrancar as raízes principais antes que fechem a passagem', 'strength', 'As raízes principais são arrancadas antes de fechar o corredor.'),
         approach('A6', 2, 'Identificar fibras mortas e improvisar um túnel entre os pontos sem seiva', 'survival', 'Um túnel é aberto entre as fibras sem seiva.'),
@@ -275,7 +397,7 @@
     status: 'prototype_baseline',
     provisionalLabel: 'Conteúdo provisório do protótipo',
     intro: 'Duas partes do mapa aguardam em caminhos diferentes. O grupo decide qual delas buscar primeiro.',
-    centralEnding: 'A expedição alcançou o tesouro. Sua natureza permanece pendente no GDD.',
+    centralEnding: 'Na Casa do Conselho, Ivaí decide reunir ou destruir o Medalhão das Duas Margens e assume a consequência escolhida.',
     badEnding: 'Os oito heróis morreram. Sem ninguém para conduzir de volta, o bardo também morre.',
     invalidState: 'O protótipo encontrou um estado inválido. Recarregue a página e registre a semente no console.'
   };
@@ -283,26 +405,29 @@
   var destinations = {
     physical: {
       id: 'physical',
-      name: 'Caminho do Ferro e das Raízes',
-      rumor: 'Onde o mato rompe telhas e ferragens, algo guarda uma parte do mapa.',
+      name: 'Caminho da Igreja',
+      rumor: 'Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.',
+      previewPath: 'assets/destinations/caminho-da-igreja.png',
       landmarkTotal: 5
     },
     supernatural: {
       id: 'supernatural',
-      name: 'Caminho das Vozes e dos Espelhos',
-      rumor: 'Há vozes nos reflexos, repetindo nomes que ninguém lhes contou.',
+      name: 'Parque das Águas Assombradas',
+      rumor: 'Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.',
+      previewPath: 'assets/destinations/parque-das-aguas-assombradas.png',
       landmarkTotal: 5
     },
     final: {
       id: 'final',
-      name: 'Caminho do Legado',
-      rumor: 'Duas partes do mapa apontam para aquilo que o bardo herdou.',
+      name: 'Vilarejo Partido',
+      rumor: 'As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.',
+      previewPath: 'assets/destinations/vilarejo-partido.png',
       landmarkTotal: 6
     }
   };
 
   global.ExpeditionData = deepFreeze({
-    version: 1,
+    version: 2,
     statuses: {
       confirmed: 'confirmed',
       prototypeBaseline: 'prototype_baseline',

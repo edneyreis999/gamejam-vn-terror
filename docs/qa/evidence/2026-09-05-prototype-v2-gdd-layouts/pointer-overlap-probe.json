@@ -1,0 +1,24 @@
+{
+  "status": "pass",
+  "driver": "agent-browser native mouse move/down/up with read-only geometry observation",
+  "viewport": { "width": 1280, "height": 720 },
+  "setup": "Fresh file:// campaign advanced by native click commands to preparation; H4 inspected by native hover",
+  "coveredTarget": {
+    "target": "H5",
+    "rect": { "x": 695.03125, "y": 281.59375, "width": 94.71875, "height": 172.796875 },
+    "sampledPoints": 5,
+    "result": "All five points were initially covered by descendants of H4's expanded inspection control"
+  },
+  "naturalPointerPath": {
+    "neutralPoint": { "x": 1200, "y": 680 },
+    "targetPoint": { "x": 742, "y": 368 },
+    "elementBeforeTargetMove": "IMG inside H5 button",
+    "input": "mouse move target; mouse down; mouse up",
+    "observable": "draftParty became [H5] and validate returned ok with zero violations"
+  },
+  "evidence": [
+    "docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/pointer-overlap-before.png",
+    "docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/pointer-overlap-after.png"
+  ],
+  "finding": "No unreachable pointer target reproduced. Moving the pointer out of the prior hero inspection collapses it, after which the target portrait is exposed and activates normally."
+}

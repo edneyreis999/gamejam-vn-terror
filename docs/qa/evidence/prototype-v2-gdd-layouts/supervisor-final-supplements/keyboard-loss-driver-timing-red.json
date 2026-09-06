@@ -1,0 +1,6735 @@
+{
+  "observed_at": "2026-09-06T00:29:42.613Z",
+  "actions": [
+    {
+      "action": {
+        "type": "BEGIN",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 0,
+      "afterSequence": 1,
+      "phase": "intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "intro",
+        "sequence": 1,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": {
+          "sceneId": "prologue",
+          "passageId": "prologue.01",
+          "index": 0,
+          "total": 3,
+          "canSkip": false
+        },
+        "seenPassages": [],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nO convite de Ivaí\n\nA chuva acompanha Ivaí até a taverna, onde oito viajantes esperam por uma promessa de tesouro.\n\n1 de 3\n\nAvançar",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoO convite de IvaíCenário de O convite de Ivaí — imagem indisponívelA chuva acompanha Iva"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 1,
+      "afterSequence": 2,
+      "phase": "intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "intro",
+        "sequence": 2,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": {
+          "sceneId": "prologue",
+          "passageId": "prologue.02",
+          "index": 1,
+          "total": 3,
+          "canSkip": false
+        },
+        "seenPassages": [
+          "prologue.01"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nO convite de Ivaí\n\nIvaí\n\nMinha mãe deixou registros de duas rotas e de um vilarejo apagado dos mapas. A recompensa será dividida entre quem voltar comigo.\n\n2 de 3\n\nAvançar",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoO convite de IvaíCenário de O convite de Ivaí — imagem indisponívelIvaí — imagem indispo"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 2,
+      "afterSequence": 3,
+      "phase": "intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "intro",
+        "sequence": 3,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": {
+          "sceneId": "prologue",
+          "passageId": "irati.01",
+          "index": 2,
+          "total": 3,
+          "canSkip": false
+        },
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nO convite de Ivaí\n\nIrati escrevera na margem do último registro: “Não leve outras pessoas para pagar uma dívida que não escolheram.”\n\n3 de 3\n\nAvançar",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoO convite de IvaíCenário de O convite de Ivaí — imagem indisponívelIrati escrevera na ma"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 3,
+      "afterSequence": 4,
+      "phase": "formation",
+      "snapshot": {
+        "version": 3,
+        "phase": "formation",
+        "sequence": 4,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nPreparação na taverna\nExpedição\n0 de 3 presentes\nDestino ainda não escolhido\nConsultar elenco\nEscolher destino\nPartir",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoPreparação na tavernaRetrato de Gorvak — imagem indisponívelGorvakPronomesEle/deleRaçaAnãoOcupaçãoFerrei"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "TOGGLE_HERO",
+        "value": "H1"
+      },
+      "key": "Space",
+      "beforeSequence": 4,
+      "afterSequence": 5,
+      "phase": "formation",
+      "snapshot": {
+        "version": 3,
+        "phase": "formation",
+        "sequence": 5,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [
+          "H1"
+        ],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nPreparação na taverna\nNa expedição\nExpedição\n1 de 3 presentes\nDestino ainda não escolhido\nConsultar elenco\nEscolher destino\nPartir",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoPreparação na tavernaRetrato de Gorvak — imagem indisponívelNa expediçãoGorvakPronomesEle/deleRaçaAnãoOc"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "TOGGLE_HERO",
+        "value": "H5"
+      },
+      "key": "Space",
+      "beforeSequence": 5,
+      "afterSequence": 6,
+      "phase": "formation",
+      "snapshot": {
+        "version": 3,
+        "phase": "formation",
+        "sequence": 6,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [
+          "H1",
+          "H5"
+        ],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nPreparação na taverna\nNa expedição\nNa expedição\nExpedição\n2 de 3 presentes\nDestino ainda não escolhido\nConsultar elenco\nEscolher destino\nPartir",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoPreparação na tavernaRetrato de Gorvak — imagem indisponívelNa expediçãoGorvakPronomesEle/deleRaçaAnãoOc"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "TOGGLE_HERO",
+        "value": "H8"
+      },
+      "key": "Space",
+      "beforeSequence": 6,
+      "afterSequence": 7,
+      "phase": "formation",
+      "snapshot": {
+        "version": 3,
+        "phase": "formation",
+        "sequence": 7,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nPreparação na taverna\nNa expedição\nNa expedição\nNa expedição\nExpedição\n3 de 3 presentes\nDestino ainda não escolhido\nConsultar elenco\nEscolher destino\nPartir",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoPreparação na tavernaRetrato de Gorvak — imagem indisponívelNa expediçãoGorvakPronomesEle/deleRaçaAnãoOc"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "OPEN_DESTINATIONS",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 7,
+      "afterSequence": 7,
+      "phase": "formation",
+      "snapshot": {
+        "version": 3,
+        "phase": "formation",
+        "sequence": 7,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": null,
+        "position": null,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nPreparação na taverna\nNa expedição\nNa expedição\nNa expedição\nExpedição\n3 de 3 presentes\nDestino ainda não escolhido\nConsultar elenco\nEscolher destino\nPartir\nFechar\nEscolher destino\nCaminho da Igreja\n\nSob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.\n\nDISPONÍVEL\n\nProgresso conhecido: 0/5\n\nEscolher Caminho da Igreja\nParque das Águas Assombradas\n\nNas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.\n\nDISPONÍVEL\n\nProgresso conhecido: 0/5\n\nEscolher Parque das Águas Assombradas\nVilarejo Partido\n\nAs duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.\n\nBLOQUEADO\n\nProgresso conhecido: 0/6\n\nEncontre e sobreponha as duas peças do mapa.",
+      "focus": {
+        "action": "CLOSE_PANEL",
+        "text": "Fechar"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "SELECT_DESTINATION",
+        "value": "physical"
+      },
+      "key": "Enter",
+      "beforeSequence": 7,
+      "afterSequence": 8,
+      "phase": "formation",
+      "snapshot": {
+        "version": 3,
+        "phase": "formation",
+        "sequence": 8,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": null,
+        "selectedDestination": "physical",
+        "position": null,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": true,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nPreparação na taverna\nNa expedição\nNa expedição\nNa expedição\nExpedição\n3 de 3 presentes\nDestino: Caminho da Igreja\nConsultar elenco\nEscolher destino\nPartir",
+      "focus": {
+        "action": "OPEN_DESTINATIONS",
+        "text": "Escolher destino"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "DEPART",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 8,
+      "afterSequence": 9,
+      "phase": "dungeon_intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "dungeon_intro",
+        "sequence": 9,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": {
+          "sceneId": "threshold.physical",
+          "passageId": "threshold.physical.01",
+          "index": 0,
+          "total": 1,
+          "canSkip": false
+        },
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nAvançar\nRecuar\nCaminho da Igreja\nEncontro 1 de 5\nProgresso conhecido: 0/5\nÀ entrada do caminho\n\nIvaí\n\nA igreja se inclina sobre raízes antigas. O caminho segue sob o altar, onde a pedra parece respirar.\n\n1 de 1",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoGorvak — imagem indisponívelBimbren — imagem indisponívelDraska — imagem indisponívelÀ e"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 9,
+      "afterSequence": 10,
+      "phase": "dungeon_intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "dungeon_intro",
+        "sequence": 10,
+        "seed": 20260831,
+        "rngState": 20260831,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nEntrar no encontro\nRecuar\nCaminho da Igreja\nEncontro 1 de 5\nProgresso conhecido: 0/5\nÀ entrada do caminho\n\nA expedição alcançou a posição 1 de 5.",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoGorvak — imagem indisponívelBimbren — imagem indisponívelDraska — imagem indisponívelÀ e"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ENTER_DUNGEON",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 10,
+      "afterSequence": 11,
+      "phase": "encounter_intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "encounter_intro",
+        "sequence": 11,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": {
+          "id": "A7",
+          "viability": 1,
+          "approaches": [
+            {
+              "id": "A7-1",
+              "competency": "dexterity",
+              "viable": false
+            },
+            {
+              "id": "A7-2",
+              "competency": "athletics",
+              "viable": false
+            },
+            {
+              "id": "A7-3",
+              "competency": "will",
+              "viable": true
+            }
+          ]
+        },
+        "reading": {
+          "sceneId": "encounter.A7",
+          "passageId": "encounter.A7.01",
+          "index": 0,
+          "total": 1,
+          "canSkip": false
+        },
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nAvançar\nRecuar\nCaminho da Igreja\nEncontro 1 de 5\nProgresso conhecido: 0/5\nO Depósito do Homem do Saco\n\nSacos pendem de ganchos móveis em um depósito sem janelas. Alguns contêm apenas areia; outros se debatem e chamam os heróis pelas vozes de pessoas conhecidas enquanto uma esteira conduz todos para uma prensa.\n\n1 de 1",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoGorvak — imagem indisponívelBimbren — imagem indisponívelDraska — imagem indisponívelO D"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 11,
+      "afterSequence": 12,
+      "phase": "encounter_choice",
+      "snapshot": {
+        "version": 3,
+        "phase": "encounter_choice",
+        "sequence": 12,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": {
+          "id": "A7",
+          "viability": 1,
+          "approaches": [
+            {
+              "id": "A7-1",
+              "competency": "dexterity",
+              "viable": false
+            },
+            {
+              "id": "A7-2",
+              "competency": "athletics",
+              "viable": false
+            },
+            {
+              "id": "A7-3",
+              "competency": "will",
+              "viable": true
+            }
+          ]
+        },
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nDestravar os ganchos certos e abrir espaço entre os sacos\nBalançar entre as correntes e alcançar a saída antes da prensa\nIgnorar as vozes conhecidas e não abrir os sacos que pedem ajuda\nRecuar\nCaminho da Igreja\nEncontro 1 de 5\nProgresso conhecido: 0/5\nO Depósito do Homem do Saco\n\nSacos pendem de ganchos móveis em um depósito sem janelas. Alguns contêm apenas areia; outros se debatem e chamam os heróis pelas vozes de pessoas conhecidas enquanto uma esteira conduz todos para uma prensa.",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoGorvak — imagem indisponívelBimbren — imagem indisponívelDraska — imagem indisponívelO D"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "CHOOSE_APPROACH",
+        "value": "A7-1"
+      },
+      "key": "Enter",
+      "beforeSequence": 12,
+      "afterSequence": 13,
+      "phase": "approach_result",
+      "snapshot": {
+        "version": 3,
+        "phase": "approach_result",
+        "sequence": 13,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": {
+          "id": "A7",
+          "viability": 1,
+          "approaches": [
+            {
+              "id": "A7-1",
+              "competency": "dexterity",
+              "viable": false
+            },
+            {
+              "id": "A7-2",
+              "competency": "athletics",
+              "viable": false
+            },
+            {
+              "id": "A7-3",
+              "competency": "will",
+              "viable": true
+            }
+          ]
+        },
+        "reading": {
+          "sceneId": "result.A7-1.failure",
+          "passageId": "result.A7-1.failure.01",
+          "index": 0,
+          "total": 1,
+          "canSkip": false
+        },
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          },
+          {
+            "sequence": 13,
+            "type": "approach_chosen",
+            "approachId": "A7-1",
+            "success": false
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nAvançar\nCaminho da Igreja\nEncontro 1 de 5\nProgresso conhecido: 0/5\nO Depósito do Homem do Saco\n\nOs ganchos destravados descem juntos e amontoam os sacos diante da saída.\n\n1 de 1",
+      "focus": {
+        "text": "O Depósito do Homem do Saco"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 13,
+      "afterSequence": 14,
+      "phase": "sacrifice_choice",
+      "snapshot": {
+        "version": 3,
+        "phase": "sacrifice_choice",
+        "sequence": 14,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H1",
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": {
+          "id": "A7",
+          "viability": 1,
+          "approaches": [
+            {
+              "id": "A7-1",
+              "competency": "dexterity",
+              "viable": false
+            },
+            {
+              "id": "A7-2",
+              "competency": "athletics",
+              "viable": false
+            },
+            {
+              "id": "A7-3",
+              "competency": "will",
+              "viable": true
+            }
+          ]
+        },
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01",
+          "result.A7-1.failure.01"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          },
+          {
+            "sequence": 13,
+            "type": "approach_chosen",
+            "approachId": "A7-1",
+            "success": false
+          },
+          {
+            "sequence": 14,
+            "type": "passage_completed",
+            "passageId": "result.A7-1.failure.01"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nA escolha é irreversível\n\nA primeira pessoa ativada morrerá imediatamente para abrir a passagem. Não haverá confirmação ou retorno.\n\nSacrificar Gorvak\nSacrificar Bimbren\nSacrificar Draska",
+      "focus": {
+        "text": "A escolha é irreversível"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 15,
+      "afterSequence": 16,
+      "phase": "death_result",
+      "snapshot": {
+        "version": 3,
+        "phase": "death_result",
+        "sequence": 16,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 1,
+        "draftParty": [
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [
+          "H1"
+        ],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": {
+          "id": "A7",
+          "viability": 1,
+          "approaches": [
+            {
+              "id": "A7-1",
+              "competency": "dexterity",
+              "viable": false
+            },
+            {
+              "id": "A7-2",
+              "competency": "athletics",
+              "viable": false
+            },
+            {
+              "id": "A7-3",
+              "competency": "will",
+              "viable": true
+            }
+          ]
+        },
+        "reading": {
+          "sceneId": "death.A7",
+          "passageId": "death.A7.context",
+          "index": 1,
+          "total": 2,
+          "canSkip": false
+        },
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01",
+          "result.A7-1.failure.01",
+          "farewell.H1"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          },
+          {
+            "sequence": 13,
+            "type": "approach_chosen",
+            "approachId": "A7-1",
+            "success": false
+          },
+          {
+            "sequence": 14,
+            "type": "passage_completed",
+            "passageId": "result.A7-1.failure.01"
+          },
+          {
+            "sequence": 15,
+            "type": "hero_died",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 16,
+            "type": "passage_completed",
+            "passageId": "farewell.H1"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\n\nCONSEQUÊNCIA IRREVERSÍVEL\n\nA perda\n\nOs ganchos recolhem os sacos e fecham o corredor. Um herói precisa ocupar um deles e seguir para a prensa para que o contrapeso libere a saída.\n\n2 de 2\n\nAvançar",
+      "focus": {
+        "text": "A perda"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "ADVANCE_TEXT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 16,
+      "afterSequence": 17,
+      "phase": "dungeon_intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "dungeon_intro",
+        "sequence": 17,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 2,
+        "draftParty": [
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [
+          "H1"
+        ],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 1,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01",
+          "result.A7-1.failure.01",
+          "farewell.H1",
+          "death.A7.context"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          },
+          {
+            "sequence": 13,
+            "type": "approach_chosen",
+            "approachId": "A7-1",
+            "success": false
+          },
+          {
+            "sequence": 14,
+            "type": "passage_completed",
+            "passageId": "result.A7-1.failure.01"
+          },
+          {
+            "sequence": 15,
+            "type": "hero_died",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 16,
+            "type": "passage_completed",
+            "passageId": "farewell.H1"
+          },
+          {
+            "sequence": 17,
+            "type": "passage_completed",
+            "passageId": "death.A7.context"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nEntrar no encontro\nRecuar\nCaminho da Igreja\nEncontro 2 de 5\nProgresso conhecido: 1/5\nÀ entrada do caminho\n\nA expedição alcançou a posição 2 de 5.",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "REQUEST_RETREAT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 17,
+      "afterSequence": 18,
+      "phase": "retreat_confirmation",
+      "snapshot": {
+        "version": 3,
+        "phase": "retreat_confirmation",
+        "sequence": 18,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 2,
+        "draftParty": [
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [
+          "H1"
+        ],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 1,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01",
+          "result.A7-1.failure.01",
+          "farewell.H1",
+          "death.A7.context"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          },
+          {
+            "sequence": 13,
+            "type": "approach_chosen",
+            "approachId": "A7-1",
+            "success": false
+          },
+          {
+            "sequence": 14,
+            "type": "passage_completed",
+            "passageId": "result.A7-1.failure.01"
+          },
+          {
+            "sequence": 15,
+            "type": "hero_died",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 16,
+            "type": "passage_completed",
+            "passageId": "farewell.H1"
+          },
+          {
+            "sequence": 17,
+            "type": "passage_completed",
+            "passageId": "death.A7.context"
+          },
+          {
+            "sequence": 18,
+            "type": "retreat_requested"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nRecuar para a taverna?\n\nOs encontros revelados e o maior progresso concluído serão preservados.\n\nCancelarConfirmar recuo",
+      "focus": {
+        "action": "CANCEL_RETREAT",
+        "text": "Cancelar"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "REQUEST_RETREAT",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 19,
+      "afterSequence": 19,
+      "phase": "dungeon_intro",
+      "snapshot": {
+        "version": 3,
+        "phase": "dungeon_intro",
+        "sequence": 19,
+        "seed": 20260831,
+        "rngState": 1851826644,
+        "dungeon": "physical",
+        "selectedDestination": null,
+        "position": 2,
+        "draftParty": [
+          "H5",
+          "H8"
+        ],
+        "party": [
+          "H5",
+          "H8"
+        ],
+        "aliveHeroes": [
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8"
+        ],
+        "deadHeroes": [
+          "H1"
+        ],
+        "heroNames": {
+          "H1": "Gorvak",
+          "H2": "Elowen",
+          "H3": "Griznik",
+          "H4": "Seraphina",
+          "H5": "Bimbren",
+          "H6": "Liora",
+          "H7": "Vaelith",
+          "H8": "Draska"
+        },
+        "mapFragments": {
+          "found": 0,
+          "total": 2
+        },
+        "destinations": {
+          "physical": {
+            "id": "physical",
+            "name": "Caminho da Igreja",
+            "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+            "previewPath": "assets/destinations/caminho-da-igreja.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 1,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "supernatural": {
+            "id": "supernatural",
+            "name": "Parque das Águas Assombradas",
+            "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+            "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+            "status": "available",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 5
+            },
+            "lockReason": null
+          },
+          "final": {
+            "id": "final",
+            "name": "Vilarejo Partido",
+            "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+            "previewPath": "assets/destinations/vilarejo-partido.png",
+            "status": "locked",
+            "selected": false,
+            "landmarks": {
+              "traversed": 0,
+              "total": 6
+            },
+            "lockReason": "Encontre e sobreponha as duas peças do mapa."
+          }
+        },
+        "competencies": {
+          "H1": [
+            "strength",
+            "will"
+          ],
+          "H2": [
+            "dexterity",
+            "athletics"
+          ],
+          "H3": [
+            "perception",
+            "survival"
+          ],
+          "H4": [
+            "knowledge",
+            "occultism"
+          ],
+          "H5": [
+            "strength",
+            "knowledge"
+          ],
+          "H6": [
+            "dexterity",
+            "perception"
+          ],
+          "H7": [
+            "occultism",
+            "athletics"
+          ],
+          "H8": [
+            "will",
+            "survival"
+          ]
+        },
+        "assignments": {
+          "physical": [
+            "A7",
+            null,
+            null,
+            null,
+            null
+          ],
+          "supernatural": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "final": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "currentEncounter": null,
+        "reading": null,
+        "seenPassages": [
+          "prologue.01",
+          "prologue.02",
+          "threshold.physical.01",
+          "encounter.A7.01",
+          "result.A7-1.failure.01",
+          "farewell.H1",
+          "death.A7.context"
+        ],
+        "rewards": {
+          "routeOrder": [],
+          "mapPieces": [],
+          "medallionComplete": false
+        },
+        "ending": null,
+        "climaxParty": [],
+        "epilogueHeroes": [],
+        "presentedDeaths": [],
+        "actionHistory": [
+          {
+            "sequence": 1,
+            "type": "campaign_started",
+            "seed": 20260831
+          },
+          {
+            "sequence": 2,
+            "type": "passage_completed",
+            "passageId": "prologue.01"
+          },
+          {
+            "sequence": 3,
+            "type": "passage_completed",
+            "passageId": "prologue.02"
+          },
+          {
+            "sequence": 4,
+            "type": "passage_completed",
+            "passageId": "irati.01"
+          },
+          {
+            "sequence": 5,
+            "type": "hero_toggled",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 6,
+            "type": "hero_toggled",
+            "heroId": "H5"
+          },
+          {
+            "sequence": 7,
+            "type": "hero_toggled",
+            "heroId": "H8"
+          },
+          {
+            "sequence": 8,
+            "type": "destination_selected",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 9,
+            "type": "departed",
+            "dungeon": "physical"
+          },
+          {
+            "sequence": 10,
+            "type": "passage_completed",
+            "passageId": "threshold.physical.01"
+          },
+          {
+            "sequence": 11,
+            "type": "encounter_revealed",
+            "encounterId": "A7"
+          },
+          {
+            "sequence": 12,
+            "type": "passage_completed",
+            "passageId": "encounter.A7.01"
+          },
+          {
+            "sequence": 13,
+            "type": "approach_chosen",
+            "approachId": "A7-1",
+            "success": false
+          },
+          {
+            "sequence": 14,
+            "type": "passage_completed",
+            "passageId": "result.A7-1.failure.01"
+          },
+          {
+            "sequence": 15,
+            "type": "hero_died",
+            "heroId": "H1"
+          },
+          {
+            "sequence": 16,
+            "type": "passage_completed",
+            "passageId": "farewell.H1"
+          },
+          {
+            "sequence": 17,
+            "type": "passage_completed",
+            "passageId": "death.A7.context"
+          },
+          {
+            "sequence": 18,
+            "type": "retreat_requested"
+          },
+          {
+            "sequence": 19,
+            "type": "retreat_cancelled"
+          }
+        ],
+        "invariantViolations": [],
+        "lastRejectedAction": null
+      },
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nEntrar no encontro\nRecuar\nCaminho da Igreja\nEncontro 2 de 5\nProgresso conhecido: 1/5\nÀ entrada do caminho\n\nA expedição alcançou a posição 2 de 5.",
+      "focus": {
+        "action": "REQUEST_RETREAT",
+        "text": "Recuar"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    }
+  ],
+  "navigation": [
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "BEGIN",
+        "text": "Jogar"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "A chuva acompanha Ivaí até a taverna, onde oito viajantes esperam por uma promessa de tesouro.1 de 3"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "IvaíMinha mãe deixou registros de duas rotas e de um vilarejo apagado dos mapas. A recompensa será dividida entre quem voltar comigo.2 de 3"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "Irati escrevera na margem do último registro: “Não leve outras pessoas para pagar uma dívida que não escolheram.”3 de 3"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H1",
+        "text": "Retrato de Gorvak — imagem indisponívelGorvakPronomesEle/deleRaçaAnãoOcupaçãoFerreiroEstadoDisponívelGorvak é um ferreiro de arquétipo protetor que su"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H1",
+        "text": "Retrato de Gorvak — imagem indisponívelNa expediçãoGorvakPronomesEle/deleRaçaAnãoOcupaçãoFerreiroEstadoSelecionadoGorvak é um ferreiro de arquétipo pr"
+      }
+    },
+    {
+      "key": "ArrowUp",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H3",
+        "text": "Retrato de Griznik — imagem indisponívelGriznikPronomesEle/deleRaçaGoblinOcupaçãoCarpinteiroEstadoDisponívelGriznik é um carpinteiro de arquétipo cons"
+      }
+    },
+    {
+      "key": "ArrowUp",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H5",
+        "text": "Retrato de Bimbren — imagem indisponívelBimbrenPronomesEle/deleRaçaGnomoOcupaçãoMensageiroEstadoDisponívelBimbren é um mensageiro gnomo de arquétipo p"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H5",
+        "text": "Retrato de Bimbren — imagem indisponívelNa expediçãoBimbrenPronomesEle/deleRaçaGnomoOcupaçãoMensageiroEstadoSelecionadoBimbren é um mensageiro gnomo d"
+      }
+    },
+    {
+      "key": "ArrowUp",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H7",
+        "text": "Retrato de Vaelith — imagem indisponívelVaelithPronomesEle/deleRaçaElfoOcupaçãoEscribaEstadoDisponívelVaelith é um escriba de arquétipo pesquisador qu"
+      }
+    },
+    {
+      "key": "ArrowRight",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H8",
+        "text": "Retrato de Draska — imagem indisponívelDraskaPronomesEla/delaRaçaGoblinOcupaçãoMineradoraEstadoDisponívelDraska é uma mineradora goblin de arquétipo s"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "TOGGLE_HERO",
+        "value": "H8",
+        "text": "Retrato de Draska — imagem indisponívelNa expediçãoDraskaPronomesEla/delaRaçaGoblinOcupaçãoMineradoraEstadoSelecionadoDraska é uma mineradora goblin d"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "DraskaPronomesEla/delaRaçaGoblinOcupaçãoMineradoraEstadoSelecionadoDraska é uma mineradora goblin de arquétipo sobrevivente que mantém a cabeça no lug"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_DESTINATIONS",
+        "text": "Escolher destino"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "SELECT_DESTINATION",
+        "value": "physical",
+        "text": "Escolher Caminho da Igreja"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "DEPART",
+        "text": "Partir"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "Avançar"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "Avançar"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "CHOOSE_APPROACH",
+        "value": "A7-1",
+        "text": "Destravar os ganchos certos e abrir espaço entre os sacos"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "Avançar"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "SELECT_VICTIM",
+        "value": "H1",
+        "text": " — imagem indisponívelSacrificar Gorvak"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "Gorvak“Não desperdicem o tempo que estou comprando.”1 de 2"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ADVANCE_TEXT",
+        "text": "Os ganchos recolhem os sacos e fecham o corredor. Um herói precisa ocupar um deles e seguir para a prensa para que o contrapeso libere a saída.2 de 2"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "REQUEST_RETREAT",
+        "text": "Recuar"
+      }
+    },
+    {
+      "key": "Escape",
+      "focus": {
+        "action": "REQUEST_RETREAT",
+        "text": "Recuar"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoBimbren — imagem indisponívelDraska — imagem indisponívelÀ entrada do caminho — imagem i"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "ENTER_DUNGEON",
+        "text": "Entrar no encontro"
+      }
+    }
+  ],
+  "errors": [],
+  "remote_requests": [],
+  "warning": {
+    "snapshot": {
+      "version": 3,
+      "phase": "sacrifice_choice",
+      "sequence": 14,
+      "seed": 20260831,
+      "rngState": 1851826644,
+      "dungeon": "physical",
+      "selectedDestination": null,
+      "position": 1,
+      "draftParty": [
+        "H1",
+        "H5",
+        "H8"
+      ],
+      "party": [
+        "H1",
+        "H5",
+        "H8"
+      ],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": {
+        "id": "A7",
+        "viability": 1,
+        "approaches": [
+          {
+            "id": "A7-1",
+            "competency": "dexterity",
+            "viable": false
+          },
+          {
+            "id": "A7-2",
+            "competency": "athletics",
+            "viable": false
+          },
+          {
+            "id": "A7-3",
+            "competency": "will",
+            "viable": true
+          }
+        ]
+      },
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.failure.01"
+      ],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H5"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H8"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": false
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.failure.01"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nA escolha é irreversível\n\nA primeira pessoa ativada morrerá imediatamente para abrir a passagem. Não haverá confirmação ou retorno.\n\nSacrificar Gorvak\nSacrificar Bimbren\nSacrificar Draska",
+    "focus": {
+      "text": "A escolha é irreversível"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "focused_victim": {
+    "snapshot": {
+      "version": 3,
+      "phase": "sacrifice_choice",
+      "sequence": 14,
+      "seed": 20260831,
+      "rngState": 1851826644,
+      "dungeon": "physical",
+      "selectedDestination": null,
+      "position": 1,
+      "draftParty": [
+        "H1",
+        "H5",
+        "H8"
+      ],
+      "party": [
+        "H1",
+        "H5",
+        "H8"
+      ],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": {
+        "id": "A7",
+        "viability": 1,
+        "approaches": [
+          {
+            "id": "A7-1",
+            "competency": "dexterity",
+            "viable": false
+          },
+          {
+            "id": "A7-2",
+            "competency": "athletics",
+            "viable": false
+          },
+          {
+            "id": "A7-3",
+            "competency": "will",
+            "viable": true
+          }
+        ]
+      },
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.failure.01"
+      ],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H5"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H8"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": false
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.failure.01"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nA escolha é irreversível\n\nA primeira pessoa ativada morrerá imediatamente para abrir a passagem. Não haverá confirmação ou retorno.\n\nSacrificar Gorvak\nSacrificar Bimbren\nSacrificar Draska",
+    "focus": {
+      "action": "SELECT_VICTIM",
+      "value": "H1",
+      "text": " — imagem indisponívelSacrificar Gorvak"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "held_enter_after": {
+    "snapshot": {
+      "version": 3,
+      "phase": "death_result",
+      "sequence": 15,
+      "seed": 20260831,
+      "rngState": 1851826644,
+      "dungeon": "physical",
+      "selectedDestination": null,
+      "position": 1,
+      "draftParty": [
+        "H5",
+        "H8"
+      ],
+      "party": [
+        "H5",
+        "H8"
+      ],
+      "aliveHeroes": [
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [
+        "H1"
+      ],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": {
+        "id": "A7",
+        "viability": 1,
+        "approaches": [
+          {
+            "id": "A7-1",
+            "competency": "dexterity",
+            "viable": false
+          },
+          {
+            "id": "A7-2",
+            "competency": "athletics",
+            "viable": false
+          },
+          {
+            "id": "A7-3",
+            "competency": "will",
+            "viable": true
+          }
+        ]
+      },
+      "reading": {
+        "sceneId": "death.A7",
+        "passageId": "farewell.H1",
+        "index": 0,
+        "total": 2,
+        "canSkip": false
+      },
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.failure.01"
+      ],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H5"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H8"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": false
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.failure.01"
+        },
+        {
+          "sequence": 15,
+          "type": "hero_died",
+          "heroId": "H1"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\n\nCONSEQUÊNCIA IRREVERSÍVEL\n\nDespedida\n\nGorvak\n\n“Não desperdicem o tempo que estou comprando.”\n\n1 de 2\n\nAvançar",
+    "focus": {
+      "text": "Despedida"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "retreat_modal": {
+    "snapshot": {
+      "version": 3,
+      "phase": "retreat_confirmation",
+      "sequence": 18,
+      "seed": 20260831,
+      "rngState": 1851826644,
+      "dungeon": "physical",
+      "selectedDestination": null,
+      "position": 2,
+      "draftParty": [
+        "H5",
+        "H8"
+      ],
+      "party": [
+        "H5",
+        "H8"
+      ],
+      "aliveHeroes": [
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [
+        "H1"
+      ],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 1,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.failure.01",
+        "farewell.H1",
+        "death.A7.context"
+      ],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H5"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H8"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": false
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.failure.01"
+        },
+        {
+          "sequence": 15,
+          "type": "hero_died",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 16,
+          "type": "passage_completed",
+          "passageId": "farewell.H1"
+        },
+        {
+          "sequence": 17,
+          "type": "passage_completed",
+          "passageId": "death.A7.context"
+        },
+        {
+          "sequence": 18,
+          "type": "retreat_requested"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nRecuar para a taverna?\n\nOs encontros revelados e o maior progresso concluído serão preservados.\n\nCancelarConfirmar recuo",
+    "focus": {
+      "action": "CANCEL_RETREAT",
+      "text": "Cancelar"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "overflow": false,
+    "modal": true
+  },
+  "retreat_canceled": {
+    "snapshot": {
+      "version": 3,
+      "phase": "dungeon_intro",
+      "sequence": 19,
+      "seed": 20260831,
+      "rngState": 1851826644,
+      "dungeon": "physical",
+      "selectedDestination": null,
+      "position": 2,
+      "draftParty": [
+        "H5",
+        "H8"
+      ],
+      "party": [
+        "H5",
+        "H8"
+      ],
+      "aliveHeroes": [
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [
+        "H1"
+      ],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 1,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.failure.01",
+        "farewell.H1",
+        "death.A7.context"
+      ],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H5"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H8"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": false
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.failure.01"
+        },
+        {
+          "sequence": 15,
+          "type": "hero_died",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 16,
+          "type": "passage_completed",
+          "passageId": "farewell.H1"
+        },
+        {
+          "sequence": 17,
+          "type": "passage_completed",
+          "passageId": "death.A7.context"
+        },
+        {
+          "sequence": 18,
+          "type": "retreat_requested"
+        },
+        {
+          "sequence": 19,
+          "type": "retreat_cancelled"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nEntrar no encontro\nRecuar\nCaminho da Igreja\nEncontro 2 de 5\nProgresso conhecido: 1/5\nÀ entrada do caminho\n\nA expedição alcançou a posição 2 de 5.",
+    "focus": {
+      "action": "REQUEST_RETREAT",
+      "text": "Recuar"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "status": "fail",
+  "failure": "Error: Keyboard reachability failed CONFIRM_RETREAT/null",
+  "last": {
+    "snapshot": {
+      "version": 3,
+      "phase": "dungeon_intro",
+      "sequence": 19,
+      "seed": 20260831,
+      "rngState": 1851826644,
+      "dungeon": "physical",
+      "selectedDestination": null,
+      "position": 2,
+      "draftParty": [
+        "H5",
+        "H8"
+      ],
+      "party": [
+        "H5",
+        "H8"
+      ],
+      "aliveHeroes": [
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [
+        "H1"
+      ],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 1,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.failure.01",
+        "farewell.H1",
+        "death.A7.context"
+      ],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H5"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H8"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": false
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.failure.01"
+        },
+        {
+          "sequence": 15,
+          "type": "hero_died",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 16,
+          "type": "passage_completed",
+          "passageId": "farewell.H1"
+        },
+        {
+          "sequence": 17,
+          "type": "passage_completed",
+          "passageId": "death.A7.context"
+        },
+        {
+          "sequence": 18,
+          "type": "retreat_requested"
+        },
+        {
+          "sequence": 19,
+          "type": "retreat_cancelled"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nEntrar no encontro\nRecuar\nCaminho da Igreja\nEncontro 2 de 5\nProgresso conhecido: 1/5\nÀ entrada do caminho\n\nA expedição alcançou a posição 2 de 5.",
+    "focus": {
+      "action": "ENTER_DUNGEON",
+      "text": "Entrar no encontro"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "overflow": false,
+    "modal": false
+  }
+}

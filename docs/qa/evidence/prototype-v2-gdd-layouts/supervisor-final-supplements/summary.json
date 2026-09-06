@@ -1,0 +1,56 @@
+{
+  "status": "pass",
+  "observed_at": "2026-09-06T00:38:17.491770+00:00",
+  "driver": "Playwright MCP with actual native Tab/arrows/Enter/Space/Escape, fresh isolated Chrome context, locale pt-BR, offline file://index.html,1280x720 CSS,reducedMotion reduce",
+  "scope": [
+    "S06 focus-only inspection, first activation irreversible death and held-Enter boundary",
+    "Native Escape cancellation/focus return, deliberate reopen and confirmed retreat",
+    "Immediate reduced-motion absence sampled3.9ms after confirmation",
+    "Seen threshold/encounter skipping stops at actual choices; unseen alternate result not skippable; literal reload clears reading memory",
+    "Exact28-field V3 snapshot equality at accepted action19 between two freshly reloaded same-seed public-control prefixes"
+  ],
+  "records": [
+    "keyboard-loss-reduced-motion.json",
+    "seen-text-revisit.json",
+    "seen-text-boundaries.json",
+    "seed-repeatability-prefix.json",
+    "reduced-motion-exact-dom.json"
+  ],
+  "source_hashes": {
+    "prototype/app.js": "d7fe8d824b013ca4979d2984c0fdef3f7c2bab6f374ed5aaa729f5c02ba9709e",
+    "prototype/data.js": "f4a5be59cb58885c9f46e02a04289c7cd9c6cf7ad13c15da0ca1bb90b073c5ec",
+    "prototype/game.js": "c71b7408df82671870ffaabd6128680a3d85385b3381152ad864248abd8d7a4a",
+    "prototype/index.html": "9cf44d3686c1d12ee5cd5e709bd3d0b2e6c84dd318e7b68a521a0e827d43ad98",
+    "prototype/narrative.js": "51504747383613af92a81e11bb1e629ce5820894d66fe6eebd7a50f09c9a82c7",
+    "prototype/styles.css": "ed295d17f3e472b139b6bcfb1db4b910d92ab66bf00910d9ef3ea9369306ffe8",
+    "prototype/tests/app.test.js": "cfcaa05b9936915a40ba561866961cad9549794b9ac7f40dc73892bc61f39e4b",
+    "prototype/tests/boundary-recipes.js": "43e01a8f8fe13efbc8d344c042cad09e12c54f8bf71413e894a27330453238ae",
+    "prototype/tests/browser-driver.js": "071ca44afc0cbe18dc0f9417041923e8fb7374f5eadfa7d722fae36c28d6139c",
+    "prototype/tests/case-manifest.js": "c1c28071c6491f18038a016e4ef3e4dcf7b8edb0d539632602144c83d64e91ac",
+    "prototype/tests/data.test.js": "0acc2d649c2d9cdf20f0c9954341a8bd314ebe205b89b4163c798dd202b4e056",
+    "prototype/tests/fixtures/fatal-missing-prologue.html": "c304e47a506bede111060658b6c4b1c9cf439071b006968de2f231de9588c01b",
+    "prototype/tests/fixtures/index-observer.html": "42571ba37dd28608c84d7e8bab3c6fe9197f66a88aad442482651eec7cd892e4",
+    "prototype/tests/fixtures/index-observer.js": "df9a78172e36f703e2fd406c13b2fc8f988370a3fc5046e3643f8c95b72987a5",
+    "prototype/tests/fixtures/isolated-session.html": "3ebf16d0d7fc0aac593081c0a390bafceffe9faafcf900cc2147416e8b24b24c",
+    "prototype/tests/fixtures/isolated-session.js": "0efb2ec86b0f1d4f1e3951a8bf1ea2346190cc846560882658164d372a171e99",
+    "prototype/tests/fixtures/literal-passage.html": "5243a5a7e350979c1baff40711462665b3dd5ecf4be0f01d55205656c86d5b3a",
+    "prototype/tests/fixtures/task03-browser-boundaries.js": "6165f5f840613c5439aa85793dc94531f86a09302ca969f013fa404183be9204",
+    "prototype/tests/game.test.js": "4d386cbe950a2e1aa8b25194fbd3bc6d3792430be10667c2e279915d992b8621",
+    "prototype/tests/journeys.test.js": "4c02dd712fc507baedf2706d3b4768cc463ff5b597e45d07de9a1f11d7c3b266",
+    "prototype/tests/retained-baseline.test.js": "96c85e0ccf465ede47a1980c5cc798a3769d22fecdfa548989051a87a87a3626",
+    "prototype/tests/retained-consultation.test.js": "38da4e337a478f286b9c8e224c7c610c45611f0ae34885a4c1ba58c2154951c6",
+    "prototype/tests/task03.test.js": "2acbab32fb68efd3e5a461250ffaf69c3678d8269051f39a2f8ae42383827755",
+    "prototype/tests/test-runner.js": "9516e2493c0ff858b23e1cee4c79de28ba1def3cc42b1dc001a99b2f4586e950",
+    "prototype/tests/visual-fixtures.html": "a873d18489398068989d57dc843ef720ac2805c7867aa3f2e9553a1674f04d49",
+    "prototype/tests/visual-fixtures.js": "f3ef3c4274dac9c8f41f7dc1eaa70bf816ebd0baed70bcb966e0f5d51582c40e",
+    "prototype/tests.html": "8a38bef51f4a5491883b2fc6f31f530ea01610e34c9bba3e81a3069a6e44e869"
+  },
+  "changed_sources": [],
+  "limitations": [
+    "This is an agent-observed supplement, not human VoiceOver/editorial/cultural/art approval.",
+    "Two preserved driver timing attempts reopened REQUEST_RETREAT inside the existing350ms same-action guard and were not accepted as full journeys. A clean deliberately paced replay completed without runtime edits.",
+    "The ghosts field of keyboard-loss-reduced-motion.json used a nonexistent selector and is excluded from absence acceptance. reduced-motion-exact-dom.json re-walked the public recipe and sampled actual .hero-card.is-fading, dead hero card, empty place and active animations3.9ms after return.",
+    "Seed comparison is the complete snapshot at the common valid action19 prefix before either timing attempt diverged; it does not approve later failed driver actions or claim full-campaign duplicate coverage."
+  ],
+  "owned_context_closed": true
+}

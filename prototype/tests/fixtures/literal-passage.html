@@ -1,0 +1,5 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Literal fixture</title>
+<script src="../../data.js"></script><script src="../../narrative.js"></script>
+<script>var literal=JSON.parse(JSON.stringify(window.ExpeditionNarrative));literal.passages['prologue.01'].text='<img src=x onerror=alert(1)>';window.ExpeditionNarrative=literal;</script>
+<script src="../../game.js"></script><script src="../../app.js"></script></head><body><div id="app"></div>
+<script>addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.querySelector('[data-action="BEGIN"]').click();var panel=document.querySelector('.passage-panel');parent.postMessage({fixture:'literal-passage',text:panel.textContent,imgCount:panel.querySelectorAll('img').length},'*');},0);});</script></body></html>

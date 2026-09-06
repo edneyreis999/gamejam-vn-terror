@@ -1,0 +1,3236 @@
+{
+  "observed_at": "2026-09-05T23:47:51.542Z",
+  "actions": [
+    {
+      "action": {
+        "type": "OPEN_ROSTER",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 106,
+      "afterSequence": 106,
+      "phase": "campaign_complete",
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nCampanha concluída\n\nA história desta expedição terminou. Outro caminho exige uma campanha nova.\n\nJogar novamente\nFechar\nHeróis\nVIVO\nGorvak\nFerreiro anão\nVIVO\nElowen\nCaçadora elfa\nVIVO\nGriznik\nCarpinteiro goblin\nVIVO\nSeraphina\nCurandeira troll\nVIVO\nBimbren\nMensageiro gnomo\nVIVO\nLiora\nNavegadora gnoma\nVIVO\nVaelith\nEscriba elfo\nVIVO\nDraska\nMineradora goblin",
+      "focus": {
+        "action": "CLOSE_PANEL",
+        "text": "Fechar"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "NEW_CAMPAIGN",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 106,
+      "afterSequence": 0,
+      "phase": "ready",
+      "text": "AFOGADOS EM TERRA SECA\n\nUma campanha de horror e responsabilidade\n\nVISUAL NOVEL DE HORROR\n\nAfogados em Terra Seca\nClassificação e avisos de conteúdo\n\nIndicado para maiores de 16 anos. Contém morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre povos fantásticos e horror psicológico.\n\nJogar",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaUma campanha de horror e responsabilidadeVisual novel de horrorAfogados em Terra SecaClassificação e avisos de conteúdoIndica"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    },
+    {
+      "action": {
+        "type": "BEGIN",
+        "value": null
+      },
+      "key": "Enter",
+      "beforeSequence": 0,
+      "afterSequence": 1,
+      "phase": "intro",
+      "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nO convite de Ivaí\n\nA chuva acompanha Ivaí até a taverna, onde oito viajantes esperam por uma promessa de tesouro.\n\n1 de 3\n\nAvançar",
+      "focus": {
+        "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoO convite de IvaíCenário de O convite de Ivaí — imagem indisponívelA chuva acompanha Iva"
+      },
+      "validation": {
+        "ok": true,
+        "violations": []
+      },
+      "overflow": false
+    }
+  ],
+  "navigation": [
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Escape",
+      "focus": {
+        "action": "OPEN_ROSTER",
+        "text": "Consultar elenco"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "NEW_CAMPAIGN",
+        "text": "Jogar novamente"
+      }
+    },
+    {
+      "key": "Tab",
+      "focus": {
+        "action": "BEGIN",
+        "text": "Jogar"
+      }
+    }
+  ],
+  "errors": [],
+  "remote_requests": [],
+  "stable_terminal": {
+    "snapshot": {
+      "version": 3,
+      "phase": "campaign_complete",
+      "sequence": 106,
+      "seed": 20260831,
+      "rngState": 3555510063,
+      "dungeon": "final",
+      "selectedDestination": null,
+      "position": 6,
+      "draftParty": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "party": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 2,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 5,
+            "total": 5
+          },
+          "lockReason": "Caminho concluído."
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 5,
+            "total": 5
+          },
+          "lockReason": "Caminho concluído."
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 6,
+            "total": 6
+          },
+          "lockReason": "Caminho concluído."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          "A1",
+          "A8",
+          "A4",
+          "A5"
+        ],
+        "supernatural": [
+          "B7",
+          "B4",
+          "B5",
+          "B8",
+          "B1"
+        ],
+        "final": [
+          "B3",
+          "A6",
+          "A3",
+          "B2",
+          "A2",
+          "B6"
+        ]
+      },
+      "currentEncounter": {
+        "id": "B6",
+        "viability": 2,
+        "approaches": [
+          {
+            "id": "B6-1",
+            "competency": "occultism",
+            "viable": false
+          },
+          {
+            "id": "B6-2",
+            "competency": "will",
+            "viable": true
+          },
+          {
+            "id": "B6-3",
+            "competency": "dexterity",
+            "viable": true
+          }
+        ]
+      },
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.success.01",
+        "encounter.A1.01",
+        "result.A1-1.success.01",
+        "encounter.A8.01",
+        "result.A8-1.success.01",
+        "encounter.A4.01",
+        "result.A4-1.success.01",
+        "encounter.A5.01",
+        "result.A5-1.success.01",
+        "lover.physical.01",
+        "lover.physical.warning",
+        "reward.physical",
+        "threshold.supernatural.01",
+        "encounter.B7.01",
+        "result.B7-1.success.01",
+        "encounter.B4.01",
+        "result.B4-3.success.01",
+        "encounter.B5.01",
+        "result.B5-2.success.01",
+        "encounter.B8.01",
+        "result.B8-2.success.01",
+        "encounter.B1.01",
+        "result.B1-1.success.01",
+        "lover.supernatural.01",
+        "lover.supernatural.warning",
+        "lover.supernatural.second",
+        "reward.supernatural",
+        "map.reveal.01",
+        "threshold.final.01",
+        "encounter.B3.01",
+        "result.B3-1.success.01",
+        "encounter.A6.01",
+        "result.A6-1.success.01",
+        "encounter.A3.01",
+        "result.A3-1.success.01",
+        "encounter.B2.01",
+        "result.B2-1.success.01",
+        "encounter.A2.01",
+        "result.A2-1.success.01",
+        "encounter.B6.01",
+        "result.B6-2.success.01",
+        "council.01",
+        "council.02",
+        "council.03",
+        "irati.03",
+        "council.challenge",
+        "council.confession",
+        "council.andira",
+        "opinion.H1",
+        "opinion.H2",
+        "opinion.H3",
+        "ending.reunite.01",
+        "ending.reunite.02",
+        "epilogue.H1",
+        "epilogue.H2",
+        "epilogue.H3"
+      ],
+      "rewards": {
+        "routeOrder": [
+          "physical",
+          "supernatural"
+        ],
+        "mapPieces": [
+          "physical",
+          "supernatural"
+        ],
+        "medallionComplete": true
+      },
+      "ending": "reunite",
+      "climaxParty": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "epilogueHeroes": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H2"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H3"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": true
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.success.01"
+        },
+        {
+          "sequence": 15,
+          "type": "encounter_revealed",
+          "encounterId": "A1"
+        },
+        {
+          "sequence": 16,
+          "type": "passage_completed",
+          "passageId": "encounter.A1.01"
+        },
+        {
+          "sequence": 17,
+          "type": "approach_chosen",
+          "approachId": "A1-1",
+          "success": true
+        },
+        {
+          "sequence": 18,
+          "type": "passage_completed",
+          "passageId": "result.A1-1.success.01"
+        },
+        {
+          "sequence": 19,
+          "type": "encounter_revealed",
+          "encounterId": "A8"
+        },
+        {
+          "sequence": 20,
+          "type": "passage_completed",
+          "passageId": "encounter.A8.01"
+        },
+        {
+          "sequence": 21,
+          "type": "approach_chosen",
+          "approachId": "A8-1",
+          "success": true
+        },
+        {
+          "sequence": 22,
+          "type": "passage_completed",
+          "passageId": "result.A8-1.success.01"
+        },
+        {
+          "sequence": 23,
+          "type": "encounter_revealed",
+          "encounterId": "A4"
+        },
+        {
+          "sequence": 24,
+          "type": "passage_completed",
+          "passageId": "encounter.A4.01"
+        },
+        {
+          "sequence": 25,
+          "type": "approach_chosen",
+          "approachId": "A4-1",
+          "success": true
+        },
+        {
+          "sequence": 26,
+          "type": "passage_completed",
+          "passageId": "result.A4-1.success.01"
+        },
+        {
+          "sequence": 27,
+          "type": "encounter_revealed",
+          "encounterId": "A5"
+        },
+        {
+          "sequence": 28,
+          "type": "passage_completed",
+          "passageId": "encounter.A5.01"
+        },
+        {
+          "sequence": 29,
+          "type": "approach_chosen",
+          "approachId": "A5-1",
+          "success": true
+        },
+        {
+          "sequence": 30,
+          "type": "passage_completed",
+          "passageId": "result.A5-1.success.01"
+        },
+        {
+          "sequence": 31,
+          "type": "passage_completed",
+          "passageId": "lover.physical.01"
+        },
+        {
+          "sequence": 32,
+          "type": "passage_completed",
+          "passageId": "lover.physical.warning"
+        },
+        {
+          "sequence": 33,
+          "type": "passage_completed",
+          "passageId": "reward.physical"
+        },
+        {
+          "sequence": 34,
+          "type": "passage_completed",
+          "passageId": "irati.02.01"
+        },
+        {
+          "sequence": 35,
+          "type": "destination_selected",
+          "dungeon": "supernatural"
+        },
+        {
+          "sequence": 36,
+          "type": "departed",
+          "dungeon": "supernatural"
+        },
+        {
+          "sequence": 37,
+          "type": "passage_completed",
+          "passageId": "threshold.supernatural.01"
+        },
+        {
+          "sequence": 38,
+          "type": "encounter_revealed",
+          "encounterId": "B7"
+        },
+        {
+          "sequence": 39,
+          "type": "passage_completed",
+          "passageId": "encounter.B7.01"
+        },
+        {
+          "sequence": 40,
+          "type": "approach_chosen",
+          "approachId": "B7-1",
+          "success": true
+        },
+        {
+          "sequence": 41,
+          "type": "passage_completed",
+          "passageId": "result.B7-1.success.01"
+        },
+        {
+          "sequence": 42,
+          "type": "encounter_revealed",
+          "encounterId": "B4"
+        },
+        {
+          "sequence": 43,
+          "type": "passage_completed",
+          "passageId": "encounter.B4.01"
+        },
+        {
+          "sequence": 44,
+          "type": "approach_chosen",
+          "approachId": "B4-3",
+          "success": true
+        },
+        {
+          "sequence": 45,
+          "type": "passage_completed",
+          "passageId": "result.B4-3.success.01"
+        },
+        {
+          "sequence": 46,
+          "type": "encounter_revealed",
+          "encounterId": "B5"
+        },
+        {
+          "sequence": 47,
+          "type": "passage_completed",
+          "passageId": "encounter.B5.01"
+        },
+        {
+          "sequence": 48,
+          "type": "approach_chosen",
+          "approachId": "B5-2",
+          "success": true
+        },
+        {
+          "sequence": 49,
+          "type": "passage_completed",
+          "passageId": "result.B5-2.success.01"
+        },
+        {
+          "sequence": 50,
+          "type": "encounter_revealed",
+          "encounterId": "B8"
+        },
+        {
+          "sequence": 51,
+          "type": "passage_completed",
+          "passageId": "encounter.B8.01"
+        },
+        {
+          "sequence": 52,
+          "type": "approach_chosen",
+          "approachId": "B8-2",
+          "success": true
+        },
+        {
+          "sequence": 53,
+          "type": "passage_completed",
+          "passageId": "result.B8-2.success.01"
+        },
+        {
+          "sequence": 54,
+          "type": "encounter_revealed",
+          "encounterId": "B1"
+        },
+        {
+          "sequence": 55,
+          "type": "passage_completed",
+          "passageId": "encounter.B1.01"
+        },
+        {
+          "sequence": 56,
+          "type": "approach_chosen",
+          "approachId": "B1-1",
+          "success": true
+        },
+        {
+          "sequence": 57,
+          "type": "passage_completed",
+          "passageId": "result.B1-1.success.01"
+        },
+        {
+          "sequence": 58,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.01"
+        },
+        {
+          "sequence": 59,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.warning"
+        },
+        {
+          "sequence": 60,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.second"
+        },
+        {
+          "sequence": 61,
+          "type": "passage_completed",
+          "passageId": "reward.supernatural"
+        },
+        {
+          "sequence": 62,
+          "type": "passage_completed",
+          "passageId": "map.reveal.01"
+        },
+        {
+          "sequence": 63,
+          "type": "passage_completed",
+          "passageId": "map.reveal.02"
+        },
+        {
+          "sequence": 64,
+          "type": "destination_selected",
+          "dungeon": "final"
+        },
+        {
+          "sequence": 65,
+          "type": "departed",
+          "dungeon": "final"
+        },
+        {
+          "sequence": 66,
+          "type": "passage_completed",
+          "passageId": "threshold.final.01"
+        },
+        {
+          "sequence": 67,
+          "type": "encounter_revealed",
+          "encounterId": "B3"
+        },
+        {
+          "sequence": 68,
+          "type": "passage_completed",
+          "passageId": "encounter.B3.01"
+        },
+        {
+          "sequence": 69,
+          "type": "approach_chosen",
+          "approachId": "B3-1",
+          "success": true
+        },
+        {
+          "sequence": 70,
+          "type": "passage_completed",
+          "passageId": "result.B3-1.success.01"
+        },
+        {
+          "sequence": 71,
+          "type": "encounter_revealed",
+          "encounterId": "A6"
+        },
+        {
+          "sequence": 72,
+          "type": "passage_completed",
+          "passageId": "encounter.A6.01"
+        },
+        {
+          "sequence": 73,
+          "type": "approach_chosen",
+          "approachId": "A6-1",
+          "success": true
+        },
+        {
+          "sequence": 74,
+          "type": "passage_completed",
+          "passageId": "result.A6-1.success.01"
+        },
+        {
+          "sequence": 75,
+          "type": "encounter_revealed",
+          "encounterId": "A3"
+        },
+        {
+          "sequence": 76,
+          "type": "passage_completed",
+          "passageId": "encounter.A3.01"
+        },
+        {
+          "sequence": 77,
+          "type": "approach_chosen",
+          "approachId": "A3-1",
+          "success": true
+        },
+        {
+          "sequence": 78,
+          "type": "passage_completed",
+          "passageId": "result.A3-1.success.01"
+        },
+        {
+          "sequence": 79,
+          "type": "encounter_revealed",
+          "encounterId": "B2"
+        },
+        {
+          "sequence": 80,
+          "type": "passage_completed",
+          "passageId": "encounter.B2.01"
+        },
+        {
+          "sequence": 81,
+          "type": "approach_chosen",
+          "approachId": "B2-1",
+          "success": true
+        },
+        {
+          "sequence": 82,
+          "type": "passage_completed",
+          "passageId": "result.B2-1.success.01"
+        },
+        {
+          "sequence": 83,
+          "type": "encounter_revealed",
+          "encounterId": "A2"
+        },
+        {
+          "sequence": 84,
+          "type": "passage_completed",
+          "passageId": "encounter.A2.01"
+        },
+        {
+          "sequence": 85,
+          "type": "approach_chosen",
+          "approachId": "A2-1",
+          "success": true
+        },
+        {
+          "sequence": 86,
+          "type": "passage_completed",
+          "passageId": "result.A2-1.success.01"
+        },
+        {
+          "sequence": 87,
+          "type": "encounter_revealed",
+          "encounterId": "B6"
+        },
+        {
+          "sequence": 88,
+          "type": "passage_completed",
+          "passageId": "encounter.B6.01"
+        },
+        {
+          "sequence": 89,
+          "type": "approach_chosen",
+          "approachId": "B6-2",
+          "success": true
+        },
+        {
+          "sequence": 90,
+          "type": "passage_completed",
+          "passageId": "result.B6-2.success.01"
+        },
+        {
+          "sequence": 91,
+          "type": "passage_completed",
+          "passageId": "council.01"
+        },
+        {
+          "sequence": 92,
+          "type": "passage_completed",
+          "passageId": "council.02"
+        },
+        {
+          "sequence": 93,
+          "type": "passage_completed",
+          "passageId": "council.03"
+        },
+        {
+          "sequence": 94,
+          "type": "passage_completed",
+          "passageId": "irati.03"
+        },
+        {
+          "sequence": 95,
+          "type": "passage_completed",
+          "passageId": "council.challenge"
+        },
+        {
+          "sequence": 96,
+          "type": "passage_completed",
+          "passageId": "council.confession"
+        },
+        {
+          "sequence": 97,
+          "type": "passage_completed",
+          "passageId": "council.andira"
+        },
+        {
+          "sequence": 98,
+          "type": "passage_completed",
+          "passageId": "opinion.H1"
+        },
+        {
+          "sequence": 99,
+          "type": "passage_completed",
+          "passageId": "opinion.H2"
+        },
+        {
+          "sequence": 100,
+          "type": "passage_completed",
+          "passageId": "opinion.H3"
+        },
+        {
+          "sequence": 101,
+          "type": "ending_chosen",
+          "ending": "reunite"
+        },
+        {
+          "sequence": 102,
+          "type": "passage_completed",
+          "passageId": "ending.reunite.01"
+        },
+        {
+          "sequence": 103,
+          "type": "passage_completed",
+          "passageId": "ending.reunite.02"
+        },
+        {
+          "sequence": 104,
+          "type": "passage_completed",
+          "passageId": "epilogue.H1"
+        },
+        {
+          "sequence": 105,
+          "type": "passage_completed",
+          "passageId": "epilogue.H2"
+        },
+        {
+          "sequence": 106,
+          "type": "passage_completed",
+          "passageId": "epilogue.H3"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nCampanha concluída\n\nA história desta expedição terminou. Outro caminho exige uma campanha nova.\n\nJogar novamente",
+    "focus": {
+      "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoCampanha concluídaA história desta expedição terminou. Outro caminho exige uma campanha "
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "terminal_roster": {
+    "snapshot": {
+      "version": 3,
+      "phase": "campaign_complete",
+      "sequence": 106,
+      "seed": 20260831,
+      "rngState": 3555510063,
+      "dungeon": "final",
+      "selectedDestination": null,
+      "position": 6,
+      "draftParty": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "party": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 2,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 5,
+            "total": 5
+          },
+          "lockReason": "Caminho concluído."
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 5,
+            "total": 5
+          },
+          "lockReason": "Caminho concluído."
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 6,
+            "total": 6
+          },
+          "lockReason": "Caminho concluído."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          "A1",
+          "A8",
+          "A4",
+          "A5"
+        ],
+        "supernatural": [
+          "B7",
+          "B4",
+          "B5",
+          "B8",
+          "B1"
+        ],
+        "final": [
+          "B3",
+          "A6",
+          "A3",
+          "B2",
+          "A2",
+          "B6"
+        ]
+      },
+      "currentEncounter": {
+        "id": "B6",
+        "viability": 2,
+        "approaches": [
+          {
+            "id": "B6-1",
+            "competency": "occultism",
+            "viable": false
+          },
+          {
+            "id": "B6-2",
+            "competency": "will",
+            "viable": true
+          },
+          {
+            "id": "B6-3",
+            "competency": "dexterity",
+            "viable": true
+          }
+        ]
+      },
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.success.01",
+        "encounter.A1.01",
+        "result.A1-1.success.01",
+        "encounter.A8.01",
+        "result.A8-1.success.01",
+        "encounter.A4.01",
+        "result.A4-1.success.01",
+        "encounter.A5.01",
+        "result.A5-1.success.01",
+        "lover.physical.01",
+        "lover.physical.warning",
+        "reward.physical",
+        "threshold.supernatural.01",
+        "encounter.B7.01",
+        "result.B7-1.success.01",
+        "encounter.B4.01",
+        "result.B4-3.success.01",
+        "encounter.B5.01",
+        "result.B5-2.success.01",
+        "encounter.B8.01",
+        "result.B8-2.success.01",
+        "encounter.B1.01",
+        "result.B1-1.success.01",
+        "lover.supernatural.01",
+        "lover.supernatural.warning",
+        "lover.supernatural.second",
+        "reward.supernatural",
+        "map.reveal.01",
+        "threshold.final.01",
+        "encounter.B3.01",
+        "result.B3-1.success.01",
+        "encounter.A6.01",
+        "result.A6-1.success.01",
+        "encounter.A3.01",
+        "result.A3-1.success.01",
+        "encounter.B2.01",
+        "result.B2-1.success.01",
+        "encounter.A2.01",
+        "result.A2-1.success.01",
+        "encounter.B6.01",
+        "result.B6-2.success.01",
+        "council.01",
+        "council.02",
+        "council.03",
+        "irati.03",
+        "council.challenge",
+        "council.confession",
+        "council.andira",
+        "opinion.H1",
+        "opinion.H2",
+        "opinion.H3",
+        "ending.reunite.01",
+        "ending.reunite.02",
+        "epilogue.H1",
+        "epilogue.H2",
+        "epilogue.H3"
+      ],
+      "rewards": {
+        "routeOrder": [
+          "physical",
+          "supernatural"
+        ],
+        "mapPieces": [
+          "physical",
+          "supernatural"
+        ],
+        "medallionComplete": true
+      },
+      "ending": "reunite",
+      "climaxParty": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "epilogueHeroes": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H2"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H3"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": true
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.success.01"
+        },
+        {
+          "sequence": 15,
+          "type": "encounter_revealed",
+          "encounterId": "A1"
+        },
+        {
+          "sequence": 16,
+          "type": "passage_completed",
+          "passageId": "encounter.A1.01"
+        },
+        {
+          "sequence": 17,
+          "type": "approach_chosen",
+          "approachId": "A1-1",
+          "success": true
+        },
+        {
+          "sequence": 18,
+          "type": "passage_completed",
+          "passageId": "result.A1-1.success.01"
+        },
+        {
+          "sequence": 19,
+          "type": "encounter_revealed",
+          "encounterId": "A8"
+        },
+        {
+          "sequence": 20,
+          "type": "passage_completed",
+          "passageId": "encounter.A8.01"
+        },
+        {
+          "sequence": 21,
+          "type": "approach_chosen",
+          "approachId": "A8-1",
+          "success": true
+        },
+        {
+          "sequence": 22,
+          "type": "passage_completed",
+          "passageId": "result.A8-1.success.01"
+        },
+        {
+          "sequence": 23,
+          "type": "encounter_revealed",
+          "encounterId": "A4"
+        },
+        {
+          "sequence": 24,
+          "type": "passage_completed",
+          "passageId": "encounter.A4.01"
+        },
+        {
+          "sequence": 25,
+          "type": "approach_chosen",
+          "approachId": "A4-1",
+          "success": true
+        },
+        {
+          "sequence": 26,
+          "type": "passage_completed",
+          "passageId": "result.A4-1.success.01"
+        },
+        {
+          "sequence": 27,
+          "type": "encounter_revealed",
+          "encounterId": "A5"
+        },
+        {
+          "sequence": 28,
+          "type": "passage_completed",
+          "passageId": "encounter.A5.01"
+        },
+        {
+          "sequence": 29,
+          "type": "approach_chosen",
+          "approachId": "A5-1",
+          "success": true
+        },
+        {
+          "sequence": 30,
+          "type": "passage_completed",
+          "passageId": "result.A5-1.success.01"
+        },
+        {
+          "sequence": 31,
+          "type": "passage_completed",
+          "passageId": "lover.physical.01"
+        },
+        {
+          "sequence": 32,
+          "type": "passage_completed",
+          "passageId": "lover.physical.warning"
+        },
+        {
+          "sequence": 33,
+          "type": "passage_completed",
+          "passageId": "reward.physical"
+        },
+        {
+          "sequence": 34,
+          "type": "passage_completed",
+          "passageId": "irati.02.01"
+        },
+        {
+          "sequence": 35,
+          "type": "destination_selected",
+          "dungeon": "supernatural"
+        },
+        {
+          "sequence": 36,
+          "type": "departed",
+          "dungeon": "supernatural"
+        },
+        {
+          "sequence": 37,
+          "type": "passage_completed",
+          "passageId": "threshold.supernatural.01"
+        },
+        {
+          "sequence": 38,
+          "type": "encounter_revealed",
+          "encounterId": "B7"
+        },
+        {
+          "sequence": 39,
+          "type": "passage_completed",
+          "passageId": "encounter.B7.01"
+        },
+        {
+          "sequence": 40,
+          "type": "approach_chosen",
+          "approachId": "B7-1",
+          "success": true
+        },
+        {
+          "sequence": 41,
+          "type": "passage_completed",
+          "passageId": "result.B7-1.success.01"
+        },
+        {
+          "sequence": 42,
+          "type": "encounter_revealed",
+          "encounterId": "B4"
+        },
+        {
+          "sequence": 43,
+          "type": "passage_completed",
+          "passageId": "encounter.B4.01"
+        },
+        {
+          "sequence": 44,
+          "type": "approach_chosen",
+          "approachId": "B4-3",
+          "success": true
+        },
+        {
+          "sequence": 45,
+          "type": "passage_completed",
+          "passageId": "result.B4-3.success.01"
+        },
+        {
+          "sequence": 46,
+          "type": "encounter_revealed",
+          "encounterId": "B5"
+        },
+        {
+          "sequence": 47,
+          "type": "passage_completed",
+          "passageId": "encounter.B5.01"
+        },
+        {
+          "sequence": 48,
+          "type": "approach_chosen",
+          "approachId": "B5-2",
+          "success": true
+        },
+        {
+          "sequence": 49,
+          "type": "passage_completed",
+          "passageId": "result.B5-2.success.01"
+        },
+        {
+          "sequence": 50,
+          "type": "encounter_revealed",
+          "encounterId": "B8"
+        },
+        {
+          "sequence": 51,
+          "type": "passage_completed",
+          "passageId": "encounter.B8.01"
+        },
+        {
+          "sequence": 52,
+          "type": "approach_chosen",
+          "approachId": "B8-2",
+          "success": true
+        },
+        {
+          "sequence": 53,
+          "type": "passage_completed",
+          "passageId": "result.B8-2.success.01"
+        },
+        {
+          "sequence": 54,
+          "type": "encounter_revealed",
+          "encounterId": "B1"
+        },
+        {
+          "sequence": 55,
+          "type": "passage_completed",
+          "passageId": "encounter.B1.01"
+        },
+        {
+          "sequence": 56,
+          "type": "approach_chosen",
+          "approachId": "B1-1",
+          "success": true
+        },
+        {
+          "sequence": 57,
+          "type": "passage_completed",
+          "passageId": "result.B1-1.success.01"
+        },
+        {
+          "sequence": 58,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.01"
+        },
+        {
+          "sequence": 59,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.warning"
+        },
+        {
+          "sequence": 60,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.second"
+        },
+        {
+          "sequence": 61,
+          "type": "passage_completed",
+          "passageId": "reward.supernatural"
+        },
+        {
+          "sequence": 62,
+          "type": "passage_completed",
+          "passageId": "map.reveal.01"
+        },
+        {
+          "sequence": 63,
+          "type": "passage_completed",
+          "passageId": "map.reveal.02"
+        },
+        {
+          "sequence": 64,
+          "type": "destination_selected",
+          "dungeon": "final"
+        },
+        {
+          "sequence": 65,
+          "type": "departed",
+          "dungeon": "final"
+        },
+        {
+          "sequence": 66,
+          "type": "passage_completed",
+          "passageId": "threshold.final.01"
+        },
+        {
+          "sequence": 67,
+          "type": "encounter_revealed",
+          "encounterId": "B3"
+        },
+        {
+          "sequence": 68,
+          "type": "passage_completed",
+          "passageId": "encounter.B3.01"
+        },
+        {
+          "sequence": 69,
+          "type": "approach_chosen",
+          "approachId": "B3-1",
+          "success": true
+        },
+        {
+          "sequence": 70,
+          "type": "passage_completed",
+          "passageId": "result.B3-1.success.01"
+        },
+        {
+          "sequence": 71,
+          "type": "encounter_revealed",
+          "encounterId": "A6"
+        },
+        {
+          "sequence": 72,
+          "type": "passage_completed",
+          "passageId": "encounter.A6.01"
+        },
+        {
+          "sequence": 73,
+          "type": "approach_chosen",
+          "approachId": "A6-1",
+          "success": true
+        },
+        {
+          "sequence": 74,
+          "type": "passage_completed",
+          "passageId": "result.A6-1.success.01"
+        },
+        {
+          "sequence": 75,
+          "type": "encounter_revealed",
+          "encounterId": "A3"
+        },
+        {
+          "sequence": 76,
+          "type": "passage_completed",
+          "passageId": "encounter.A3.01"
+        },
+        {
+          "sequence": 77,
+          "type": "approach_chosen",
+          "approachId": "A3-1",
+          "success": true
+        },
+        {
+          "sequence": 78,
+          "type": "passage_completed",
+          "passageId": "result.A3-1.success.01"
+        },
+        {
+          "sequence": 79,
+          "type": "encounter_revealed",
+          "encounterId": "B2"
+        },
+        {
+          "sequence": 80,
+          "type": "passage_completed",
+          "passageId": "encounter.B2.01"
+        },
+        {
+          "sequence": 81,
+          "type": "approach_chosen",
+          "approachId": "B2-1",
+          "success": true
+        },
+        {
+          "sequence": 82,
+          "type": "passage_completed",
+          "passageId": "result.B2-1.success.01"
+        },
+        {
+          "sequence": 83,
+          "type": "encounter_revealed",
+          "encounterId": "A2"
+        },
+        {
+          "sequence": 84,
+          "type": "passage_completed",
+          "passageId": "encounter.A2.01"
+        },
+        {
+          "sequence": 85,
+          "type": "approach_chosen",
+          "approachId": "A2-1",
+          "success": true
+        },
+        {
+          "sequence": 86,
+          "type": "passage_completed",
+          "passageId": "result.A2-1.success.01"
+        },
+        {
+          "sequence": 87,
+          "type": "encounter_revealed",
+          "encounterId": "B6"
+        },
+        {
+          "sequence": 88,
+          "type": "passage_completed",
+          "passageId": "encounter.B6.01"
+        },
+        {
+          "sequence": 89,
+          "type": "approach_chosen",
+          "approachId": "B6-2",
+          "success": true
+        },
+        {
+          "sequence": 90,
+          "type": "passage_completed",
+          "passageId": "result.B6-2.success.01"
+        },
+        {
+          "sequence": 91,
+          "type": "passage_completed",
+          "passageId": "council.01"
+        },
+        {
+          "sequence": 92,
+          "type": "passage_completed",
+          "passageId": "council.02"
+        },
+        {
+          "sequence": 93,
+          "type": "passage_completed",
+          "passageId": "council.03"
+        },
+        {
+          "sequence": 94,
+          "type": "passage_completed",
+          "passageId": "irati.03"
+        },
+        {
+          "sequence": 95,
+          "type": "passage_completed",
+          "passageId": "council.challenge"
+        },
+        {
+          "sequence": 96,
+          "type": "passage_completed",
+          "passageId": "council.confession"
+        },
+        {
+          "sequence": 97,
+          "type": "passage_completed",
+          "passageId": "council.andira"
+        },
+        {
+          "sequence": 98,
+          "type": "passage_completed",
+          "passageId": "opinion.H1"
+        },
+        {
+          "sequence": 99,
+          "type": "passage_completed",
+          "passageId": "opinion.H2"
+        },
+        {
+          "sequence": 100,
+          "type": "passage_completed",
+          "passageId": "opinion.H3"
+        },
+        {
+          "sequence": 101,
+          "type": "ending_chosen",
+          "ending": "reunite"
+        },
+        {
+          "sequence": 102,
+          "type": "passage_completed",
+          "passageId": "ending.reunite.01"
+        },
+        {
+          "sequence": 103,
+          "type": "passage_completed",
+          "passageId": "ending.reunite.02"
+        },
+        {
+          "sequence": 104,
+          "type": "passage_completed",
+          "passageId": "epilogue.H1"
+        },
+        {
+          "sequence": 105,
+          "type": "passage_completed",
+          "passageId": "epilogue.H2"
+        },
+        {
+          "sequence": 106,
+          "type": "passage_completed",
+          "passageId": "epilogue.H3"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nCampanha concluída\n\nA história desta expedição terminou. Outro caminho exige uma campanha nova.\n\nJogar novamente\nFechar\nHeróis\nVIVO\nGorvak\nFerreiro anão\nVIVO\nElowen\nCaçadora elfa\nVIVO\nGriznik\nCarpinteiro goblin\nVIVO\nSeraphina\nCurandeira troll\nVIVO\nBimbren\nMensageiro gnomo\nVIVO\nLiora\nNavegadora gnoma\nVIVO\nVaelith\nEscriba elfo\nVIVO\nDraska\nMineradora goblin",
+    "focus": {
+      "action": "CLOSE_PANEL",
+      "text": "Fechar"
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": true
+  },
+  "terminal_focus": {
+    "snapshot": {
+      "version": 3,
+      "phase": "campaign_complete",
+      "sequence": 106,
+      "seed": 20260831,
+      "rngState": 3555510063,
+      "dungeon": "final",
+      "selectedDestination": null,
+      "position": 6,
+      "draftParty": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "party": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 2,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 5,
+            "total": 5
+          },
+          "lockReason": "Caminho concluído."
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 5,
+            "total": 5
+          },
+          "lockReason": "Caminho concluído."
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "completed",
+          "selected": false,
+          "landmarks": {
+            "traversed": 6,
+            "total": 6
+          },
+          "lockReason": "Caminho concluído."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          "A7",
+          "A1",
+          "A8",
+          "A4",
+          "A5"
+        ],
+        "supernatural": [
+          "B7",
+          "B4",
+          "B5",
+          "B8",
+          "B1"
+        ],
+        "final": [
+          "B3",
+          "A6",
+          "A3",
+          "B2",
+          "A2",
+          "B6"
+        ]
+      },
+      "currentEncounter": {
+        "id": "B6",
+        "viability": 2,
+        "approaches": [
+          {
+            "id": "B6-1",
+            "competency": "occultism",
+            "viable": false
+          },
+          {
+            "id": "B6-2",
+            "competency": "will",
+            "viable": true
+          },
+          {
+            "id": "B6-3",
+            "competency": "dexterity",
+            "viable": true
+          }
+        ]
+      },
+      "reading": null,
+      "seenPassages": [
+        "prologue.01",
+        "prologue.02",
+        "threshold.physical.01",
+        "encounter.A7.01",
+        "result.A7-1.success.01",
+        "encounter.A1.01",
+        "result.A1-1.success.01",
+        "encounter.A8.01",
+        "result.A8-1.success.01",
+        "encounter.A4.01",
+        "result.A4-1.success.01",
+        "encounter.A5.01",
+        "result.A5-1.success.01",
+        "lover.physical.01",
+        "lover.physical.warning",
+        "reward.physical",
+        "threshold.supernatural.01",
+        "encounter.B7.01",
+        "result.B7-1.success.01",
+        "encounter.B4.01",
+        "result.B4-3.success.01",
+        "encounter.B5.01",
+        "result.B5-2.success.01",
+        "encounter.B8.01",
+        "result.B8-2.success.01",
+        "encounter.B1.01",
+        "result.B1-1.success.01",
+        "lover.supernatural.01",
+        "lover.supernatural.warning",
+        "lover.supernatural.second",
+        "reward.supernatural",
+        "map.reveal.01",
+        "threshold.final.01",
+        "encounter.B3.01",
+        "result.B3-1.success.01",
+        "encounter.A6.01",
+        "result.A6-1.success.01",
+        "encounter.A3.01",
+        "result.A3-1.success.01",
+        "encounter.B2.01",
+        "result.B2-1.success.01",
+        "encounter.A2.01",
+        "result.A2-1.success.01",
+        "encounter.B6.01",
+        "result.B6-2.success.01",
+        "council.01",
+        "council.02",
+        "council.03",
+        "irati.03",
+        "council.challenge",
+        "council.confession",
+        "council.andira",
+        "opinion.H1",
+        "opinion.H2",
+        "opinion.H3",
+        "ending.reunite.01",
+        "ending.reunite.02",
+        "epilogue.H1",
+        "epilogue.H2",
+        "epilogue.H3"
+      ],
+      "rewards": {
+        "routeOrder": [
+          "physical",
+          "supernatural"
+        ],
+        "mapPieces": [
+          "physical",
+          "supernatural"
+        ],
+        "medallionComplete": true
+      },
+      "ending": "reunite",
+      "climaxParty": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "epilogueHeroes": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 20260831
+        },
+        {
+          "sequence": 2,
+          "type": "passage_completed",
+          "passageId": "prologue.01"
+        },
+        {
+          "sequence": 3,
+          "type": "passage_completed",
+          "passageId": "prologue.02"
+        },
+        {
+          "sequence": 4,
+          "type": "passage_completed",
+          "passageId": "irati.01"
+        },
+        {
+          "sequence": 5,
+          "type": "hero_toggled",
+          "heroId": "H1"
+        },
+        {
+          "sequence": 6,
+          "type": "hero_toggled",
+          "heroId": "H2"
+        },
+        {
+          "sequence": 7,
+          "type": "hero_toggled",
+          "heroId": "H3"
+        },
+        {
+          "sequence": 8,
+          "type": "destination_selected",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 9,
+          "type": "departed",
+          "dungeon": "physical"
+        },
+        {
+          "sequence": 10,
+          "type": "passage_completed",
+          "passageId": "threshold.physical.01"
+        },
+        {
+          "sequence": 11,
+          "type": "encounter_revealed",
+          "encounterId": "A7"
+        },
+        {
+          "sequence": 12,
+          "type": "passage_completed",
+          "passageId": "encounter.A7.01"
+        },
+        {
+          "sequence": 13,
+          "type": "approach_chosen",
+          "approachId": "A7-1",
+          "success": true
+        },
+        {
+          "sequence": 14,
+          "type": "passage_completed",
+          "passageId": "result.A7-1.success.01"
+        },
+        {
+          "sequence": 15,
+          "type": "encounter_revealed",
+          "encounterId": "A1"
+        },
+        {
+          "sequence": 16,
+          "type": "passage_completed",
+          "passageId": "encounter.A1.01"
+        },
+        {
+          "sequence": 17,
+          "type": "approach_chosen",
+          "approachId": "A1-1",
+          "success": true
+        },
+        {
+          "sequence": 18,
+          "type": "passage_completed",
+          "passageId": "result.A1-1.success.01"
+        },
+        {
+          "sequence": 19,
+          "type": "encounter_revealed",
+          "encounterId": "A8"
+        },
+        {
+          "sequence": 20,
+          "type": "passage_completed",
+          "passageId": "encounter.A8.01"
+        },
+        {
+          "sequence": 21,
+          "type": "approach_chosen",
+          "approachId": "A8-1",
+          "success": true
+        },
+        {
+          "sequence": 22,
+          "type": "passage_completed",
+          "passageId": "result.A8-1.success.01"
+        },
+        {
+          "sequence": 23,
+          "type": "encounter_revealed",
+          "encounterId": "A4"
+        },
+        {
+          "sequence": 24,
+          "type": "passage_completed",
+          "passageId": "encounter.A4.01"
+        },
+        {
+          "sequence": 25,
+          "type": "approach_chosen",
+          "approachId": "A4-1",
+          "success": true
+        },
+        {
+          "sequence": 26,
+          "type": "passage_completed",
+          "passageId": "result.A4-1.success.01"
+        },
+        {
+          "sequence": 27,
+          "type": "encounter_revealed",
+          "encounterId": "A5"
+        },
+        {
+          "sequence": 28,
+          "type": "passage_completed",
+          "passageId": "encounter.A5.01"
+        },
+        {
+          "sequence": 29,
+          "type": "approach_chosen",
+          "approachId": "A5-1",
+          "success": true
+        },
+        {
+          "sequence": 30,
+          "type": "passage_completed",
+          "passageId": "result.A5-1.success.01"
+        },
+        {
+          "sequence": 31,
+          "type": "passage_completed",
+          "passageId": "lover.physical.01"
+        },
+        {
+          "sequence": 32,
+          "type": "passage_completed",
+          "passageId": "lover.physical.warning"
+        },
+        {
+          "sequence": 33,
+          "type": "passage_completed",
+          "passageId": "reward.physical"
+        },
+        {
+          "sequence": 34,
+          "type": "passage_completed",
+          "passageId": "irati.02.01"
+        },
+        {
+          "sequence": 35,
+          "type": "destination_selected",
+          "dungeon": "supernatural"
+        },
+        {
+          "sequence": 36,
+          "type": "departed",
+          "dungeon": "supernatural"
+        },
+        {
+          "sequence": 37,
+          "type": "passage_completed",
+          "passageId": "threshold.supernatural.01"
+        },
+        {
+          "sequence": 38,
+          "type": "encounter_revealed",
+          "encounterId": "B7"
+        },
+        {
+          "sequence": 39,
+          "type": "passage_completed",
+          "passageId": "encounter.B7.01"
+        },
+        {
+          "sequence": 40,
+          "type": "approach_chosen",
+          "approachId": "B7-1",
+          "success": true
+        },
+        {
+          "sequence": 41,
+          "type": "passage_completed",
+          "passageId": "result.B7-1.success.01"
+        },
+        {
+          "sequence": 42,
+          "type": "encounter_revealed",
+          "encounterId": "B4"
+        },
+        {
+          "sequence": 43,
+          "type": "passage_completed",
+          "passageId": "encounter.B4.01"
+        },
+        {
+          "sequence": 44,
+          "type": "approach_chosen",
+          "approachId": "B4-3",
+          "success": true
+        },
+        {
+          "sequence": 45,
+          "type": "passage_completed",
+          "passageId": "result.B4-3.success.01"
+        },
+        {
+          "sequence": 46,
+          "type": "encounter_revealed",
+          "encounterId": "B5"
+        },
+        {
+          "sequence": 47,
+          "type": "passage_completed",
+          "passageId": "encounter.B5.01"
+        },
+        {
+          "sequence": 48,
+          "type": "approach_chosen",
+          "approachId": "B5-2",
+          "success": true
+        },
+        {
+          "sequence": 49,
+          "type": "passage_completed",
+          "passageId": "result.B5-2.success.01"
+        },
+        {
+          "sequence": 50,
+          "type": "encounter_revealed",
+          "encounterId": "B8"
+        },
+        {
+          "sequence": 51,
+          "type": "passage_completed",
+          "passageId": "encounter.B8.01"
+        },
+        {
+          "sequence": 52,
+          "type": "approach_chosen",
+          "approachId": "B8-2",
+          "success": true
+        },
+        {
+          "sequence": 53,
+          "type": "passage_completed",
+          "passageId": "result.B8-2.success.01"
+        },
+        {
+          "sequence": 54,
+          "type": "encounter_revealed",
+          "encounterId": "B1"
+        },
+        {
+          "sequence": 55,
+          "type": "passage_completed",
+          "passageId": "encounter.B1.01"
+        },
+        {
+          "sequence": 56,
+          "type": "approach_chosen",
+          "approachId": "B1-1",
+          "success": true
+        },
+        {
+          "sequence": 57,
+          "type": "passage_completed",
+          "passageId": "result.B1-1.success.01"
+        },
+        {
+          "sequence": 58,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.01"
+        },
+        {
+          "sequence": 59,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.warning"
+        },
+        {
+          "sequence": 60,
+          "type": "passage_completed",
+          "passageId": "lover.supernatural.second"
+        },
+        {
+          "sequence": 61,
+          "type": "passage_completed",
+          "passageId": "reward.supernatural"
+        },
+        {
+          "sequence": 62,
+          "type": "passage_completed",
+          "passageId": "map.reveal.01"
+        },
+        {
+          "sequence": 63,
+          "type": "passage_completed",
+          "passageId": "map.reveal.02"
+        },
+        {
+          "sequence": 64,
+          "type": "destination_selected",
+          "dungeon": "final"
+        },
+        {
+          "sequence": 65,
+          "type": "departed",
+          "dungeon": "final"
+        },
+        {
+          "sequence": 66,
+          "type": "passage_completed",
+          "passageId": "threshold.final.01"
+        },
+        {
+          "sequence": 67,
+          "type": "encounter_revealed",
+          "encounterId": "B3"
+        },
+        {
+          "sequence": 68,
+          "type": "passage_completed",
+          "passageId": "encounter.B3.01"
+        },
+        {
+          "sequence": 69,
+          "type": "approach_chosen",
+          "approachId": "B3-1",
+          "success": true
+        },
+        {
+          "sequence": 70,
+          "type": "passage_completed",
+          "passageId": "result.B3-1.success.01"
+        },
+        {
+          "sequence": 71,
+          "type": "encounter_revealed",
+          "encounterId": "A6"
+        },
+        {
+          "sequence": 72,
+          "type": "passage_completed",
+          "passageId": "encounter.A6.01"
+        },
+        {
+          "sequence": 73,
+          "type": "approach_chosen",
+          "approachId": "A6-1",
+          "success": true
+        },
+        {
+          "sequence": 74,
+          "type": "passage_completed",
+          "passageId": "result.A6-1.success.01"
+        },
+        {
+          "sequence": 75,
+          "type": "encounter_revealed",
+          "encounterId": "A3"
+        },
+        {
+          "sequence": 76,
+          "type": "passage_completed",
+          "passageId": "encounter.A3.01"
+        },
+        {
+          "sequence": 77,
+          "type": "approach_chosen",
+          "approachId": "A3-1",
+          "success": true
+        },
+        {
+          "sequence": 78,
+          "type": "passage_completed",
+          "passageId": "result.A3-1.success.01"
+        },
+        {
+          "sequence": 79,
+          "type": "encounter_revealed",
+          "encounterId": "B2"
+        },
+        {
+          "sequence": 80,
+          "type": "passage_completed",
+          "passageId": "encounter.B2.01"
+        },
+        {
+          "sequence": 81,
+          "type": "approach_chosen",
+          "approachId": "B2-1",
+          "success": true
+        },
+        {
+          "sequence": 82,
+          "type": "passage_completed",
+          "passageId": "result.B2-1.success.01"
+        },
+        {
+          "sequence": 83,
+          "type": "encounter_revealed",
+          "encounterId": "A2"
+        },
+        {
+          "sequence": 84,
+          "type": "passage_completed",
+          "passageId": "encounter.A2.01"
+        },
+        {
+          "sequence": 85,
+          "type": "approach_chosen",
+          "approachId": "A2-1",
+          "success": true
+        },
+        {
+          "sequence": 86,
+          "type": "passage_completed",
+          "passageId": "result.A2-1.success.01"
+        },
+        {
+          "sequence": 87,
+          "type": "encounter_revealed",
+          "encounterId": "B6"
+        },
+        {
+          "sequence": 88,
+          "type": "passage_completed",
+          "passageId": "encounter.B6.01"
+        },
+        {
+          "sequence": 89,
+          "type": "approach_chosen",
+          "approachId": "B6-2",
+          "success": true
+        },
+        {
+          "sequence": 90,
+          "type": "passage_completed",
+          "passageId": "result.B6-2.success.01"
+        },
+        {
+          "sequence": 91,
+          "type": "passage_completed",
+          "passageId": "council.01"
+        },
+        {
+          "sequence": 92,
+          "type": "passage_completed",
+          "passageId": "council.02"
+        },
+        {
+          "sequence": 93,
+          "type": "passage_completed",
+          "passageId": "council.03"
+        },
+        {
+          "sequence": 94,
+          "type": "passage_completed",
+          "passageId": "irati.03"
+        },
+        {
+          "sequence": 95,
+          "type": "passage_completed",
+          "passageId": "council.challenge"
+        },
+        {
+          "sequence": 96,
+          "type": "passage_completed",
+          "passageId": "council.confession"
+        },
+        {
+          "sequence": 97,
+          "type": "passage_completed",
+          "passageId": "council.andira"
+        },
+        {
+          "sequence": 98,
+          "type": "passage_completed",
+          "passageId": "opinion.H1"
+        },
+        {
+          "sequence": 99,
+          "type": "passage_completed",
+          "passageId": "opinion.H2"
+        },
+        {
+          "sequence": 100,
+          "type": "passage_completed",
+          "passageId": "opinion.H3"
+        },
+        {
+          "sequence": 101,
+          "type": "ending_chosen",
+          "ending": "reunite"
+        },
+        {
+          "sequence": 102,
+          "type": "passage_completed",
+          "passageId": "ending.reunite.01"
+        },
+        {
+          "sequence": 103,
+          "type": "passage_completed",
+          "passageId": "ending.reunite.02"
+        },
+        {
+          "sequence": 104,
+          "type": "passage_completed",
+          "passageId": "epilogue.H1"
+        },
+        {
+          "sequence": 105,
+          "type": "passage_completed",
+          "passageId": "epilogue.H2"
+        },
+        {
+          "sequence": 106,
+          "type": "passage_completed",
+          "passageId": "epilogue.H3"
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nCampanha concluída\n\nA história desta expedição terminou. Outro caminho exige uma campanha nova.\n\nJogar novamente",
+    "focus": {
+      "action": "OPEN_ROSTER",
+      "text": "Consultar elenco"
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "restarted": {
+    "snapshot": {
+      "version": 3,
+      "phase": "ready",
+      "sequence": 0,
+      "seed": null,
+      "rngState": null,
+      "dungeon": null,
+      "selectedDestination": null,
+      "position": null,
+      "draftParty": [],
+      "party": [],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": null,
+      "seenPassages": [],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nUma campanha de horror e responsabilidade\n\nVISUAL NOVEL DE HORROR\n\nAfogados em Terra Seca\nClassificação e avisos de conteúdo\n\nIndicado para maiores de 16 anos. Contém morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre povos fantásticos e horror psicológico.\n\nJogar",
+    "focus": {
+      "text": "\n  Afogados em Terra SecaUma campanha de horror e responsabilidadeVisual novel de horrorAfogados em Terra SecaClassificação e avisos de conteúdoIndica"
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "unseen_intro": {
+    "snapshot": {
+      "version": 3,
+      "phase": "intro",
+      "sequence": 1,
+      "seed": 1945676743,
+      "rngState": 1945676743,
+      "dungeon": null,
+      "selectedDestination": null,
+      "position": null,
+      "draftParty": [],
+      "party": [],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": {
+        "sceneId": "prologue",
+        "passageId": "prologue.01",
+        "index": 0,
+        "total": 3,
+        "canSkip": false
+      },
+      "seenPassages": [],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [
+        {
+          "sequence": 1,
+          "type": "campaign_started",
+          "seed": 1945676743
+        }
+      ],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nCampanha em andamento\n\nConsultar elenco\nO convite de Ivaí\n\nA chuva acompanha Ivaí até a taverna, onde oito viajantes esperam por uma promessa de tesouro.\n\n1 de 3\n\nAvançar",
+    "focus": {
+      "text": "\n  Afogados em Terra SecaCampanha em andamentoConsultar elencoO convite de IvaíCenário de O convite de Ivaí — imagem indisponívelA chuva acompanha Iva"
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "reload_intro": {
+    "snapshot": {
+      "version": 3,
+      "phase": "ready",
+      "sequence": 0,
+      "seed": null,
+      "rngState": null,
+      "dungeon": null,
+      "selectedDestination": null,
+      "position": null,
+      "draftParty": [],
+      "party": [],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": null,
+      "seenPassages": [],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nUma campanha de horror e responsabilidade\n\nVISUAL NOVEL DE HORROR\n\nAfogados em Terra Seca\nClassificação e avisos de conteúdo\n\nIndicado para maiores de 16 anos. Contém morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre povos fantásticos e horror psicológico.\n\nJogar",
+    "focus": {
+      "text": "\n  Afogados em Terra SecaUma campanha de horror e responsabilidadeVisual novel de horrorAfogados em Terra SecaClassificação e avisos de conteúdoIndica"
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": false
+  },
+  "status": "pass",
+  "last": {
+    "snapshot": {
+      "version": 3,
+      "phase": "ready",
+      "sequence": 0,
+      "seed": null,
+      "rngState": null,
+      "dungeon": null,
+      "selectedDestination": null,
+      "position": null,
+      "draftParty": [],
+      "party": [],
+      "aliveHeroes": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "deadHeroes": [],
+      "heroNames": {
+        "H1": "Gorvak",
+        "H2": "Elowen",
+        "H3": "Griznik",
+        "H4": "Seraphina",
+        "H5": "Bimbren",
+        "H6": "Liora",
+        "H7": "Vaelith",
+        "H8": "Draska"
+      },
+      "mapFragments": {
+        "found": 0,
+        "total": 2
+      },
+      "destinations": {
+        "physical": {
+          "id": "physical",
+          "name": "Caminho da Igreja",
+          "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+          "previewPath": "assets/destinations/caminho-da-igreja.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "supernatural": {
+          "id": "supernatural",
+          "name": "Parque das Águas Assombradas",
+          "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+          "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+          "status": "available",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 5
+          },
+          "lockReason": null
+        },
+        "final": {
+          "id": "final",
+          "name": "Vilarejo Partido",
+          "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+          "previewPath": "assets/destinations/vilarejo-partido.png",
+          "status": "locked",
+          "selected": false,
+          "landmarks": {
+            "traversed": 0,
+            "total": 6
+          },
+          "lockReason": "Encontre e sobreponha as duas peças do mapa."
+        }
+      },
+      "competencies": {
+        "H1": [
+          "strength",
+          "will"
+        ],
+        "H2": [
+          "dexterity",
+          "athletics"
+        ],
+        "H3": [
+          "perception",
+          "survival"
+        ],
+        "H4": [
+          "knowledge",
+          "occultism"
+        ],
+        "H5": [
+          "strength",
+          "knowledge"
+        ],
+        "H6": [
+          "dexterity",
+          "perception"
+        ],
+        "H7": [
+          "occultism",
+          "athletics"
+        ],
+        "H8": [
+          "will",
+          "survival"
+        ]
+      },
+      "assignments": {
+        "physical": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "supernatural": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "final": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "currentEncounter": null,
+      "reading": null,
+      "seenPassages": [],
+      "rewards": {
+        "routeOrder": [],
+        "mapPieces": [],
+        "medallionComplete": false
+      },
+      "ending": null,
+      "climaxParty": [],
+      "epilogueHeroes": [],
+      "presentedDeaths": [],
+      "actionHistory": [],
+      "invariantViolations": [],
+      "lastRejectedAction": null
+    },
+    "validation": {
+      "ok": true,
+      "violations": []
+    },
+    "text": "AFOGADOS EM TERRA SECA\n\nUma campanha de horror e responsabilidade\n\nVISUAL NOVEL DE HORROR\n\nAfogados em Terra Seca\nClassificação e avisos de conteúdo\n\nIndicado para maiores de 16 anos. Contém morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre povos fantásticos e horror psicológico.\n\nJogar",
+    "focus": {
+      "text": "\n  Afogados em Terra SecaUma campanha de horror e responsabilidadeVisual novel de horrorAfogados em Terra SecaClassificação e avisos de conteúdoIndica"
+    },
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "dpr": 1.25
+    },
+    "overflow": false,
+    "modal": false
+  }
+}

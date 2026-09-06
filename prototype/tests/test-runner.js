@@ -1,8 +1,7 @@
 (function (global) {
   'use strict';
 
-  // 107 UT + 220 IT + 24 E2E cases from .compozy/tasks/dungeon-route-selection/_tests.md.
-  var EXPECTED_CASE_COUNT = 351;
+  var manifest = global.ExpeditionCaseManifest || [];
   var cases = [];
   var registeredIds = Object.create(null);
   var loadErrors = [];
@@ -77,7 +76,7 @@
   }
 
   function registerCaseId(registry, name) {
-    var idMatch = /^([A-Z0-9]+-\d+)/.exec(name);
+    var idMatch = /^([A-Z0-9]+\/[A-Z0-9]+-\d{3})(?:\s|$)/.exec(name);
     var id = idMatch ? idMatch[1] : name;
     if (registry[id]) {
       throw new Error('ID de teste duplicado: ' + id + '.');
@@ -92,31 +91,64 @@
     };
   }
 
+  function caseId(name) {
+    var match = /^([A-Z0-9]+\/[A-Z0-9]+-\d{3})(?:\s|$)/.exec(name);
+    return match ? match[1] : name;
+  }
+
+  function auditRegistrations(expected, actual) {
+    var errors = [];
+    var expectedCounts = Object.create(null);
+    var actualCounts = Object.create(null);
+    (expected || []).forEach(function (id) {
+      expectedCounts[id] = (expectedCounts[id] || 0) + 1;
+      if (expectedCounts[id] > 1) errors.push('O manifesto contém ID duplicado: ' + id + '.');
+    });
+    (actual || []).forEach(function (name) {
+      var id = caseId(name);
+      actualCounts[id] = (actualCounts[id] || 0) + 1;
+      if (actualCounts[id] > 1) errors.push('ID de teste duplicado: ' + id + '.');
+    });
+    Object.keys(expectedCounts).forEach(function (id) {
+      if (!actualCounts[id]) errors.push('Caso obrigatório não registrado: ' + id + '.');
+    });
+    Object.keys(actualCounts).forEach(function (id) {
+      if (!expectedCounts[id]) errors.push('Caso inesperado registrado: ' + id + '.');
+    });
+    return Object.freeze({ ok: errors.length === 0, errors: Object.freeze(errors) });
+  }
+
   function duplicateGuardIsSound() {
     var isolatedRegistry = Object.create(null);
     var isolatedCases = [];
     var isolatedTest = createRegistration(isolatedRegistry, isolatedCases);
-    isolatedTest('E2E-001 — caso original', function () {});
+    isolatedTest('V2/E2E-001 — caso original', function () {});
     try {
-      isolatedTest('E2E-001 — caso duplicado', function () {});
+      isolatedTest('V2/E2E-001 — caso duplicado', function () {});
     } catch (error) {
-      return error.message === 'ID de teste duplicado: E2E-001.' && isolatedCases.length === 1;
+      return error.message === 'ID de teste duplicado: V2/E2E-001.' && isolatedCases.length === 1;
     }
     return false;
   }
 
-  var test = createRegistration(registeredIds, cases);
+  var registerTest = createRegistration(registeredIds, cases);
+  function test(name, callback) {
+    try {
+      registerTest(name, callback);
+    } catch (error) {
+      loadErrors.push(error.message);
+      throw error;
+    }
+  }
 
   async function run() {
     var results = [];
     var registrationErrors = loadErrors.slice();
-    if (cases.length !== EXPECTED_CASE_COUNT) {
-      registrationErrors.push('A suíte registrou ' + cases.length + ' de ' + EXPECTED_CASE_COUNT + ' casos obrigatórios.');
-    }
+    registrationErrors = registrationErrors.concat(auditRegistrations(manifest, cases.map(function (item) { return item.name; })).errors);
     if (!duplicateGuardIsSound()) {
       registrationErrors.push('O canário de IDs E2E duplicados não foi rejeitado.');
     }
-    ['ExpeditionData', 'ExpeditionEngine', 'ExpeditionApp'].forEach(function (globalName) {
+    ['ExpeditionData', 'ExpeditionNarrative', 'ExpeditionEngine', 'ExpeditionApp'].forEach(function (globalName) {
       if (!global[globalName]) {
         registrationErrors.push('Runtime obrigatório ausente: window.' + globalName + '.');
       }
@@ -170,7 +202,8 @@
     truthy: truthy,
     falsy: falsy,
     includes: includes,
-    throws: throws
+    throws: throws,
+    auditRegistrations: auditRegistrations
   });
 
   global.addEventListener('DOMContentLoaded', run, { once: true });

@@ -1,0 +1,305 @@
+{
+  "status": "pass",
+  "observed_at": "2026-09-06T00:35:10.735990+00:00",
+  "scope": "Exact complete V3 snapshot comparison at accepted action19 from two fresh literal-reload campaigns using the same pre-BEGIN seed and identical accepted public-control actions; not a claim that either later harness failure passed",
+  "seed": 20260831,
+  "initial_route_order": [
+    "physical"
+  ],
+  "compared_fields": [
+    "version",
+    "phase",
+    "sequence",
+    "seed",
+    "rngState",
+    "dungeon",
+    "selectedDestination",
+    "position",
+    "draftParty",
+    "party",
+    "aliveHeroes",
+    "deadHeroes",
+    "heroNames",
+    "mapFragments",
+    "destinations",
+    "competencies",
+    "assignments",
+    "currentEncounter",
+    "reading",
+    "seenPassages",
+    "rewards",
+    "ending",
+    "climaxParty",
+    "epilogueHeroes",
+    "presentedDeaths",
+    "actionHistory",
+    "invariantViolations",
+    "lastRejectedAction"
+  ],
+  "sequence": 19,
+  "first_record": "keyboard-loss-driver-timing-180ms.json#retreat_canceled.snapshot",
+  "second_record": "keyboard-loss-reduced-motion.json#retreat_canceled.snapshot",
+  "equal": true,
+  "snapshot": {
+    "version": 3,
+    "phase": "dungeon_intro",
+    "sequence": 19,
+    "seed": 20260831,
+    "rngState": 1851826644,
+    "dungeon": "physical",
+    "selectedDestination": null,
+    "position": 2,
+    "draftParty": [
+      "H5",
+      "H8"
+    ],
+    "party": [
+      "H5",
+      "H8"
+    ],
+    "aliveHeroes": [
+      "H2",
+      "H3",
+      "H4",
+      "H5",
+      "H6",
+      "H7",
+      "H8"
+    ],
+    "deadHeroes": [
+      "H1"
+    ],
+    "heroNames": {
+      "H1": "Gorvak",
+      "H2": "Elowen",
+      "H3": "Griznik",
+      "H4": "Seraphina",
+      "H5": "Bimbren",
+      "H6": "Liora",
+      "H7": "Vaelith",
+      "H8": "Draska"
+    },
+    "mapFragments": {
+      "found": 0,
+      "total": 2
+    },
+    "destinations": {
+      "physical": {
+        "id": "physical",
+        "name": "Caminho da Igreja",
+        "rumor": "Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.",
+        "previewPath": "assets/destinations/caminho-da-igreja.png",
+        "status": "available",
+        "selected": false,
+        "landmarks": {
+          "traversed": 1,
+          "total": 5
+        },
+        "lockReason": null
+      },
+      "supernatural": {
+        "id": "supernatural",
+        "name": "Parque das Águas Assombradas",
+        "rumor": "Nas atrações abandonadas, uma figueira aprisiona uma voz que conhece o mapa.",
+        "previewPath": "assets/destinations/parque-das-aguas-assombradas.png",
+        "status": "available",
+        "selected": false,
+        "landmarks": {
+          "traversed": 0,
+          "total": 5
+        },
+        "lockReason": null
+      },
+      "final": {
+        "id": "final",
+        "name": "Vilarejo Partido",
+        "rumor": "As duas peças sobrepostas revelam o vilarejo onde a verdade foi enterrada.",
+        "previewPath": "assets/destinations/vilarejo-partido.png",
+        "status": "locked",
+        "selected": false,
+        "landmarks": {
+          "traversed": 0,
+          "total": 6
+        },
+        "lockReason": "Encontre e sobreponha as duas peças do mapa."
+      }
+    },
+    "competencies": {
+      "H1": [
+        "strength",
+        "will"
+      ],
+      "H2": [
+        "dexterity",
+        "athletics"
+      ],
+      "H3": [
+        "perception",
+        "survival"
+      ],
+      "H4": [
+        "knowledge",
+        "occultism"
+      ],
+      "H5": [
+        "strength",
+        "knowledge"
+      ],
+      "H6": [
+        "dexterity",
+        "perception"
+      ],
+      "H7": [
+        "occultism",
+        "athletics"
+      ],
+      "H8": [
+        "will",
+        "survival"
+      ]
+    },
+    "assignments": {
+      "physical": [
+        "A7",
+        null,
+        null,
+        null,
+        null
+      ],
+      "supernatural": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "currentEncounter": null,
+    "reading": null,
+    "seenPassages": [
+      "prologue.01",
+      "prologue.02",
+      "threshold.physical.01",
+      "encounter.A7.01",
+      "result.A7-1.failure.01",
+      "farewell.H1",
+      "death.A7.context"
+    ],
+    "rewards": {
+      "routeOrder": [],
+      "mapPieces": [],
+      "medallionComplete": false
+    },
+    "ending": null,
+    "climaxParty": [],
+    "epilogueHeroes": [],
+    "presentedDeaths": [],
+    "actionHistory": [
+      {
+        "sequence": 1,
+        "type": "campaign_started",
+        "seed": 20260831
+      },
+      {
+        "sequence": 2,
+        "type": "passage_completed",
+        "passageId": "prologue.01"
+      },
+      {
+        "sequence": 3,
+        "type": "passage_completed",
+        "passageId": "prologue.02"
+      },
+      {
+        "sequence": 4,
+        "type": "passage_completed",
+        "passageId": "irati.01"
+      },
+      {
+        "sequence": 5,
+        "type": "hero_toggled",
+        "heroId": "H1"
+      },
+      {
+        "sequence": 6,
+        "type": "hero_toggled",
+        "heroId": "H5"
+      },
+      {
+        "sequence": 7,
+        "type": "hero_toggled",
+        "heroId": "H8"
+      },
+      {
+        "sequence": 8,
+        "type": "destination_selected",
+        "dungeon": "physical"
+      },
+      {
+        "sequence": 9,
+        "type": "departed",
+        "dungeon": "physical"
+      },
+      {
+        "sequence": 10,
+        "type": "passage_completed",
+        "passageId": "threshold.physical.01"
+      },
+      {
+        "sequence": 11,
+        "type": "encounter_revealed",
+        "encounterId": "A7"
+      },
+      {
+        "sequence": 12,
+        "type": "passage_completed",
+        "passageId": "encounter.A7.01"
+      },
+      {
+        "sequence": 13,
+        "type": "approach_chosen",
+        "approachId": "A7-1",
+        "success": false
+      },
+      {
+        "sequence": 14,
+        "type": "passage_completed",
+        "passageId": "result.A7-1.failure.01"
+      },
+      {
+        "sequence": 15,
+        "type": "hero_died",
+        "heroId": "H1"
+      },
+      {
+        "sequence": 16,
+        "type": "passage_completed",
+        "passageId": "farewell.H1"
+      },
+      {
+        "sequence": 17,
+        "type": "passage_completed",
+        "passageId": "death.A7.context"
+      },
+      {
+        "sequence": 18,
+        "type": "retreat_requested"
+      },
+      {
+        "sequence": 19,
+        "type": "retreat_cancelled"
+      }
+    ],
+    "invariantViolations": [],
+    "lastRejectedAction": null
+  },
+  "basis": "Fields include current assignments, RNG, reading, seen text, route progress, hero membership, deaths, history and rewards. Both observations precede any differing follow-up action."
+}

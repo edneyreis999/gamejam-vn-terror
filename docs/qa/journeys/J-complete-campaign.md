@@ -2,86 +2,102 @@
 
 ```mermaid
 flowchart TD
-  A[Entry local] --> B[Introdução neutra]
-  B --> C[Preparação inicial: dois caminhos disponíveis e Legado bloqueado]
-  C --> D{Escolher caminho inicial ou heróis primeiro}
-  D -->|Ferro e Raízes| E[Escolher três heróis]
-  D -->|Vozes e Espelhos| E
-  D -->|Heróis primeiro| H0[Escolher três heróis]
-  H0 --> R0{Escolher caminho inicial}
-  R0 -->|Ferro e Raízes| F
-  R0 -->|Vozes e Espelhos| F
-  E --> F[Partir para o caminho escolhido]
-  F --> G[Revelar encontro]
-  G --> H{Abordagem cobre competência?}
-  H -->|sim| I[Explicação e avanço]
-  H -->|não| J[Escolher e confirmar sacrifício]
-  J --> K[Elenco recalculado]
-  I --> L{Recuar ou continuar?}
-  K --> L
-  L -->|recuar| M[Voltar à preparação com consequências e registros preservados]
-  M --> M2{Algum caminho inicial já foi concluído?}
-  M2 -->|não| C
-  M2 -->|sim| C2
-  L -->|continuar| N{Caminho concluído?}
-  N -->|não| G
-  N -->|sim| O[Reconhecer parte do mapa recuperada]
-  O --> P{Quantas partes?}
-  P -->|1 de 2| Q[Devlog: concluído estático, outro inicial selecionado, Legado bloqueado]
-  Q --> C2[Preparação após 1/2: concluído estático, outro disponível e selecionado, Legado bloqueado]
-  C2 --> C3[Formar o grupo e confirmar Partir]
-  C3 --> F
-  P -->|2 de 2| R[Legado liberado e selecionado]
-  R --> R2[Voltar à preparação, formar o grupo e confirmar Partir]
-  R2 --> S[Atravessar seis encontros finais]
-  S --> T{Há sobreviventes?}
-  T -->|sim| U[Vitória e epílogos]
-  T -->|não| V[Derrota total]
-  U --> W[Campanha nova]
-  V --> W
-  W --> X[True end: abertura limpa, sem rota ou consequência anterior]
-  C -.->|fechar aba| Y[Abandono: sessão em memória perdida]
-  G -.->|fechar aba| Y
-  Y --> A
+  A[Entry: abrir index.html por file URL] --> B[Avisos de conteúdo e Jogar]
+  B --> C[Prólogo sem revelar maldição ou medalhão]
+  C --> D[Preparação: dois caminhos disponíveis e Legado bloqueado]
+  D --> E{Escolher heróis ou destino primeiro}
+  E --> F[Formar até três e partir para Ferro ou Vozes]
+  F --> G[Apresentação completa do encontro]
+  G --> H{Escolher abordagem}
+  H -->|sucesso| I[Ler consequência causal]
+  H -->|falha| J[Aviso irreversível e escolha de vítima]
+  J --> K[Morte no primeiro acionamento e despedida]
+  I --> L{Continuar, recuar ou concluir rota}
+  K --> P{Precedência após a morte}
+  P -->|zero vivos no elenco| BAD[Desfecho ruim antes de recompensa ou Conselho]
+  P -->|última posição e reservas vivas| L
+  P -->|grupo vazio antes da última posição| AR[Retorno automático explicado]
+  P -->|grupo ainda vivo| L
+  AR --> D
+  L -->|recuar| R[Confirmar retorno; mortes e atribuições persistem, tentativa reinicia no marco 1]
+  R --> D
+  L -->|próximo marco| G
+  L -->|5º marco inicial| M[Amante, revelação conforme ordem e parte do mapa]
+  M --> N{Partes do mapa}
+  N -->|1 de 2| D
+  N -->|2 de 2| O[Mapa recomposto e Legado liberado]
+  O --> D2[Formar grupo e partir explicitamente para Legado]
+  D2 --> G2[Atravessar seis encontros finais]
+  G2 --> Q{Estado após o sexto marco}
+  Q -->|grupo vivo| CNL[Conselho, opiniões elegíveis e duas escolhas]
+  Q -->|grupo vazio com reservas| SOLO[Conselho com Ivaí sozinho, sem opiniões]
+  Q -->|oitava morte| BAD
+  CNL --> U{Escolha do medalhão}
+  SOLO --> U
+  U -->|reunir| ER[Desfecho da reunião]
+  U -->|destruir| ED[Desfecho da destruição]
+  ER --> MEM{Houve mortes?}
+  ED --> MEM
+  BAD --> MEMBAD[Memorial dos oito; sem epílogos individuais]
+  MEM -->|sim| MEM2[Memorial e epílogos elegíveis H1-H8]
+  MEM -->|não| NOM[Omitir memorial e seguir aos epílogos elegíveis]
+  MEM2 --> CC[True end 1: Campanha concluída]
+  NOM --> CC
+  MEMBAD --> CC
+  CC -->|Jogar novamente| Z[True end 2: avisos de conteúdo, oito vivos e sessão V3 limpa]
+  D -.->|fechar ou recarregar| X[Abandono: campanha em memória descartada]
+  G -.->|fechar ou recarregar| X
+  CC -.->|fechar sem Jogar novamente| X2[Abandono terminal: nenhuma campanha nova começa]
+  X --> A
+  X2 --> A
 ```
 
 ```yaml
 journey:
   id: J-complete-campaign
   name: Concluir expedição em qualquer ordem
-  value_statement: "O jogador escolhe a ordem dos dois caminhos iniciais, administra perdas e alcança um desfecho coerente pelo Caminho do Legado."
+  value_statement: "O jogador prepara a equipe, administra perdas e alcança um dos três desfechos canônicos sem receber informação mecânica privada."
   personas: ["Lia, primeira expedicionária", "Caio, estrategista recorrente", "Joana, jogadora ampliada", "Rui, revisor de conteúdo"]
   entry_points:
     - url: file:///…/prototype/index.html
       origin: direct
   actions:
     - step: 1
-      verb: Comparar os dois caminhos iniciais e o Legado bloqueado
-      expected_observable: Dois rádios começam desmarcados e o terceiro cartão explica a exigência de duas partes do mapa
+      verb: Ler avisos e prólogo, então preparar heróis e um dos dois caminhos iniciais em qualquer ordem
+      expected_observable: A UI mostra nomes, rumores e estados públicos; competências, viabilidade, IDs, seed e atribuições futuras não aparecem
     - step: 2
-      verb: Escolher destino e três heróis em qualquer ordem
-      expected_observable: As duas escolhas são preservadas e a partida compromete somente o caminho selecionado
+      verb: Resolver os cinco marcos de cada caminho inicial nas ordens Ferro/Vozes e Vozes/Ferro
+      expected_observable: Recuos, mortes, atribuições, revelações e partes do mapa permanecem ligados à campanha e o Legado só libera após 2 de 2
     - step: 3
-      verb: Resolver encontros, sacrificar ou recuar para trocar de caminho
-      expected_observable: Mortes, atribuições e maior percurso permanecem ligados ao caminho correto, mas a nova tentativa recomeça no primeiro marco
+      verb: Exercitar falha e sacrifício
+      expected_observable: O aviso vem antes das vítimas e o primeiro acionamento confirmado mata sem segunda confirmação; o primeiro retorno apresenta todas as ausências uma vez e retornos posteriores mostram lugares vazios imediatamente
     - step: 4
-      verb: Concluir os dois caminhos iniciais em qualquer ordem
-      expected_observable: "1/2 — após a primeira conclusão, o caminho concluído vira cartão estático, o outro fica selecionado e o Legado mostra 1 de 2 partes; 2/2 — após a segunda, ambos ficam estáticos e o Legado fica selecionado em 2 de 2."
+      verb: Resolver as três precedências de grupo vazio
+      expected_observable: Perda total vence qualquer recompensa; morte na última posição com reservas conclui a rota; grupo vazio antes da última posição retorna automaticamente
     - step: 5
-      verb: Confirmar a formação e Partir para o Caminho do Legado, atravessá-lo e iniciar campanha nova
-      expected_observable: O Legado fica selecionado automaticamente, mas exige grupo válido e Partir explícito; seis encontros levam a vitória ou derrota e o reset remove toda consequência da sessão anterior
+      verb: Atravessar o sexto marco final e chegar ao Conselho ou ao desfecho ruim
+      expected_observable: Sobreviventes atuais formam o Conselho; grupo vazio com reservas usa Ivaí sozinho e zero opiniões; oito mortos seguem ao desfecho ruim antes do Conselho
+    - step: 6
+      verb: Concluir reunião, destruição e perda total em sessões frescas
+      expected_observable: Memorial aparece somente quando houve mortes, epílogos elegíveis seguem em H1-H8 e todos convergem para Campanha concluída
+    - step: 7
+      verb: Acionar Jogar novamente
+      expected_observable: A abertura reaparece sem seed, texto visto, mortes, rotas, recompensas ou ações da campanha anterior
   goal:
-    observable: As ordens Ferro/Vozes e Vozes/Ferro convergem para o Legado e um desfecho sem repetição de caminho concluído
-    side_effects: [historico-aceito-da-sessao, atribuicoes-por-caminho, partes-do-mapa]
-  true_end_state: Iniciar campanha nova retorna à abertura sem mortes, atribuições, progresso dos caminhos em zero, partes do mapa, rota selecionada ou rota ativa
+    observable: Ambas as ordens e os três desfechos chegam ao terminal correto e o reinício explícito cria uma campanha limpa
+    side_effects: [historico-da-sessao, atribuicoes-por-caminho, mortes, partes-do-mapa, medalhao, texto-visto]
+  true_end_state: Campanha concluída permanece terminal até Jogar novamente; depois a abertura mostra oito heróis vivos e nenhum estado herdado
   exit:
-    natural: nova campanha pronta
+    natural: abertura limpa pronta para Jogar ou aba fechada no terminal
   abandonment:
-    - at_step: 2
-      how: Fechar ou recarregar a aba durante a preparação
-      resume: Uma sessão limpa aparece, sem recuperação implícita
+    - at_step: 1
+      how: Fechar ou recarregar durante a preparação
+      resume: A abertura reaparece sem retomada implícita
     - at_step: 3
-      how: Fechar ou recarregar a aba durante uma consequência
-      resume: Uma sessão limpa aparece, sem recuperação implícita
-  crosses: [preparacao, encontros, imagens, caminhos, fragmentos, desfechos, acessibilidade]
+      how: Fechar ou recarregar durante consequência, fade ou leitura
+      resume: A campanha em memória é descartada e texto anterior não é elegível para pulo
+    - at_step: 7
+      how: Fechar em Campanha concluída sem acionar Jogar novamente
+      resume: Nova abertura limpa, sem reinício automático
+  crosses: [S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12]
 ```

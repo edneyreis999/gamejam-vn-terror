@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "source": "final-sixth-solo-council public recipe with only the final visible choice changed",
+  "seed": 1,
+  "expectedEnding": "destroy",
+  "actions": [
+    {
+      "type": "BEGIN",
+      "seed": 1,
+      "expectedSequence": 0
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 1
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 2
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 3
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H1",
+      "expectedSequence": 4
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H2",
+      "expectedSequence": 5
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H3",
+      "expectedSequence": 6
+    },
+    {
+      "type": "SELECT_DESTINATION",
+      "dungeonId": "physical",
+      "expectedSequence": 7
+    },
+    {
+      "type": "DEPART",
+      "expectedSequence": 8
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 9
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 10
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 11
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A6-1",
+      "expectedSequence": 12
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 13
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 14
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 15
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A1-1",
+      "expectedSequence": 16
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 17
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 18
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 19
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A5-1",
+      "expectedSequence": 20
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 21
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 22
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 23
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A8-1",
+      "expectedSequence": 24
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 25
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 26
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 27
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A7-1",
+      "expectedSequence": 28
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 29
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 30
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 31
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 32
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 33
+    },
+    {
+      "type": "DEPART",
+      "expectedSequence": 34
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 35
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 36
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 37
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B3-1",
+      "expectedSequence": 38
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 39
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 40
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 41
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B6-2",
+      "expectedSequence": 42
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 43
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 44
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 45
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B7-1",
+      "expectedSequence": 46
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 47
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 48
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 49
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B4-3",
+      "expectedSequence": 50
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 51
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 52
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 53
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B8-2",
+      "expectedSequence": 54
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 55
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 56
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 57
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 58
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 59
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 60
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 61
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H1",
+      "expectedSequence": 62
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H2",
+      "expectedSequence": 63
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H3",
+      "expectedSequence": 64
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H4",
+      "expectedSequence": 65
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H7",
+      "expectedSequence": 66
+    },
+    {
+      "type": "TOGGLE_HERO",
+      "heroId": "H8",
+      "expectedSequence": 67
+    },
+    {
+      "type": "DEPART",
+      "expectedSequence": 68
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 69
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 70
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 71
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A4-1",
+      "expectedSequence": 72
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 73
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 74
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 75
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B1-1",
+      "expectedSequence": 76
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 77
+    },
+    {
+      "type": "SELECT_VICTIM",
+      "heroId": "H4",
+      "expectedSequence": 78
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 79
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 80
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 81
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 82
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A2-2",
+      "expectedSequence": 83
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 84
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 85
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 86
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B2-1",
+      "expectedSequence": 87
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 88
+    },
+    {
+      "type": "SELECT_VICTIM",
+      "heroId": "H7",
+      "expectedSequence": 89
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 90
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 91
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 92
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 93
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "A3-1",
+      "expectedSequence": 94
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 95
+    },
+    {
+      "type": "ENTER_DUNGEON",
+      "expectedSequence": 96
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 97
+    },
+    {
+      "type": "CHOOSE_APPROACH",
+      "approachId": "B5-1",
+      "expectedSequence": 98
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 99
+    },
+    {
+      "type": "SELECT_VICTIM",
+      "heroId": "H8",
+      "expectedSequence": 100
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 101
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 102
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 103
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 104
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 105
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 106
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 107
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 108
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 109
+    },
+    {
+      "type": "CHOOSE_ENDING",
+      "ending": "destroy",
+      "expectedSequence": 110
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 111
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 112
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 113
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 114
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 115
+    },
+    {
+      "type": "ADVANCE_TEXT",
+      "expectedSequence": 116
+    }
+  ]
+}

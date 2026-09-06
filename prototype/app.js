@@ -2,1459 +2,638 @@
   'use strict';
 
   var Data = global.ExpeditionData;
+  var Narrative = global.ExpeditionNarrative;
   var Engine = global.ExpeditionEngine;
-  var COPY = Object.freeze({
-    title: 'EXPEDIÇÃO E SACRIFÍCIO',
-    baseline: 'Baseline jogável para validação mecânica',
-    rules: 'Escolha três heróis. Leia as armadilhas. Toda falha exige um sacrifício.',
-    disclosure: 'As competências dos heróis estão visíveis neste protótipo. As competências das abordagens permanecem ocultas até a escolha.',
-    intro: 'Duas partes do mapa aguardam em caminhos diferentes. O grupo decide qual delas buscar primeiro.',
-    provisional: 'Conteúdo provisório do protótipo',
-    routeRestart: 'O grupo reconhece este caminho, mas a travessia recomeça no primeiro marco.'
-  });
-  var OPTIONAL_IMAGE_TIMEOUT_MS = 4000;
-  var activeQASession = null;
+  var activeQA = null;
+  var HERO_POSITIONS = {
+    H1: [9, 69], H2: [25, 73], H3: [38, 61], H4: [48, 76],
+    H5: [58, 60], H6: [69, 77], H7: [80, 54], H8: [91, 72]
+  };
 
   function deepFreeze(value) {
-    if (!value || typeof value !== 'object' || Object.isFrozen(value)) {
-      return value;
-    }
-    Object.keys(value).forEach(function (key) {
-      deepFreeze(value[key]);
-    });
+    if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
+    Object.getOwnPropertyNames(value).forEach(function (key) { deepFreeze(value[key]); });
     return Object.freeze(value);
   }
-
-  function inactiveSnapshot() {
-    var snapshot = Engine.snapshot(Engine.createReadyState());
-    var copy = {};
-    Object.keys(snapshot).forEach(function (key) { copy[key] = snapshot[key]; });
-    copy.lastRejectedAction = null;
-    return deepFreeze(copy);
-  }
-
-  var expeditionQA = Object.freeze({
-    setSeed: function (seed) {
-      return activeQASession ? activeQASession.setSeed(seed) : deepFreeze({
-        ok: false,
-        error: {
-          code: 'campaign_unavailable',
-          message: 'A campanha ainda não está disponível.'
-        }
-      });
-    },
-    snapshot: function () {
-      return activeQASession ? activeQASession.snapshot() : inactiveSnapshot();
-    },
-    validate: function () {
-      return activeQASession ? activeQASession.validate() : deepFreeze({ ok: true, violations: [] });
-    }
-  });
-  global.expeditionQA = expeditionQA;
-
-  function element(tagName, className, text) {
-    var node = document.createElement(tagName);
-    if (className) {
-      node.className = className;
-    }
-    if (typeof text === 'string') {
-      node.textContent = text;
-    }
+  function clone(value) { return JSON.parse(JSON.stringify(value)); }
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined && text !== null) node.textContent = text;
     return node;
   }
-
-  function append(parent) {
-    for (var index = 1; index < arguments.length; index += 1) {
-      if (arguments[index]) {
-        parent.appendChild(arguments[index]);
-      }
-    }
-    return parent;
+  function button(label, action, value, className) {
+    var node = el('button', className || 'action-button', label);
+    node.type = 'button';
+    node.dataset.action = action;
+    if (value !== undefined) node.dataset.value = value;
+    return node;
   }
-
-  function setAction(button, action, id) {
-    button.dataset.action = action;
-    if (id) {
-      button.dataset.id = id;
-    }
-    return button;
-  }
-
-  function actionButton(label, variant, action, id) {
-    return setAction(element('button', 'button' + (variant ? ' ' + variant : ''), label), action, id);
-  }
-
-  function provisionalLabel() {
-    return element('span', 'provisional', COPY.provisional);
-  }
-
-  function pageHeading(text, id, className) {
-    var heading = element('h1', className || '', text);
-    heading.id = id;
-    heading.tabIndex = -1;
-    heading.dataset.surfaceHeading = '';
-    return heading;
-  }
-
-  function statusFact(text) {
-    return element('span', '', text);
-  }
-
-  function renderOpening() {
-    var main = element('main', 'artboard opening');
-    main.id = 'main';
-    var section = element('section', 'opening-content');
-    section.setAttribute('aria-labelledby', 'opening-title');
-    var eyebrow = element('p', 'eyebrow', COPY.baseline);
-    var title = pageHeading('Expedição e Sacrifício', 'opening-title', 'opening-title');
-    var rules = element('p', 'lead', COPY.rules);
-    var disclosure = element('p', 'lead', COPY.disclosure);
-    var start = actionButton('Iniciar campanha', 'primary opening-action', 'begin');
-    append(section, eyebrow, title, rules, disclosure, start);
-    append(main, section);
-    return main;
-  }
-
-  function renderHeader(view, contextLabel) {
-    var header = element('header', 'game-header');
-    var brand = element('div', 'brand');
-    append(brand, element('span', 'eyebrow', contextLabel), element('strong', '', COPY.title));
-    var status = element('div', 'status-line');
-    if (view.position && view.positionTotal) {
-      append(status, statusFact('Encontro ' + view.position + ' de ' + view.positionTotal));
-    }
-    append(status, statusFact(view.survivorCount + (view.survivorCount === 1 ? ' herói sobrevivente' : ' heróis sobreviventes')));
-    if (view.phase === 'formation' || view.phase === 'dungeon_complete') {
-      append(status, statusFact(view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes do mapa'));
-    }
-    append(header, brand, status);
-    return header;
-  }
-
-  function renderIntroduction() {
-    var main = element('main', 'artboard opening');
-    main.id = 'main';
-    var section = element('section', 'opening-content');
-    section.setAttribute('aria-labelledby', 'intro-title');
-    append(section,
-      provisionalLabel(),
-      element('p', 'eyebrow', 'Antes da partida'),
-      pageHeading('Expedição e Sacrifício', 'intro-title', 'opening-title'),
-      element('p', 'lead', COPY.intro),
-      actionButton('Preparar expedição', 'primary opening-action', 'continue-intro')
-    );
-    append(main, section);
-    return main;
-  }
-
-  function heroLookup(view) {
-    var records = {};
-    view.party.concat(view.town, view.dead).forEach(function (hero) {
-      records[hero.id] = hero;
-    });
-    return records;
-  }
-
-  function competencyText(hero) {
-    return hero.competencyLabels.join(' · ');
-  }
-
-  function renderHeroCard(hero, formation) {
-    var selected = formation.selectedHeroIds.indexOf(hero.id) >= 0;
-    var isDead = hero.lifeState === 'dead';
-    var card;
-    if (!isDead && !formation.autoSelected) {
-      card = setAction(element('button', 'hero-card' + (selected ? ' selected' : '')), 'toggle-hero', hero.id);
-      card.type = 'button';
-      card.setAttribute('aria-pressed', selected ? 'true' : 'false');
-    } else {
-      card = element('article', 'hero-card' + (selected ? ' selected automatic' : '') + (isDead ? ' dead' : ''));
-    }
-    card.dataset.heroId = hero.id;
-    append(card, element('strong', '', hero.label));
-    hero.competencyLabels.forEach(function (label) {
-      append(card, element('span', '', label));
-    });
-    var stateLabel = isDead ? 'Morto' : (selected ? (formation.autoSelected ? 'Formação automática' : 'Selecionado') : 'Disponível');
-    append(card, element('small', '', stateLabel));
-    return card;
-  }
-
-  function destinationStatusLabel(destination) {
-    if (destination.status === 'completed') {
-      return 'Concluído';
-    }
-    if (destination.status === 'locked') {
-      return 'Bloqueado';
-    }
-    return destination.selected ? 'Escolhido' : 'Disponível';
-  }
-
-  function renderDestinationCard(destination, mapFragments) {
-    var className = 'route-card ' + (destination.status === 'available' ? 'route-choice' : destination.status);
-    var statusLabel = destinationStatusLabel(destination);
-    var card;
-    if (destination.status === 'available') {
-      card = element('label', className + (destination.selected ? ' selected' : ''));
-      var radio = element('input', 'route-radio');
-      radio.type = 'radio';
-      radio.name = 'destination';
-      radio.value = destination.id;
-      radio.checked = destination.selected;
-      radio.dataset.destinationControl = '';
-      append(card, radio);
-    } else {
-      card = element('article', className);
-      card.setAttribute('aria-label', destination.name + ', ' + statusLabel.toLowerCase());
-    }
-    card.dataset.destinationId = destination.id;
-    append(card,
-      element('strong', 'route-name', destination.name),
-      element('span', 'route-rumor', destination.rumor),
-      element('span', 'route-state', statusLabel)
-    );
-    var progress = destination.landmarks.traversed + ' de ' + destination.landmarks.total + ' marcos atravessados';
-    if (destination.status === 'completed' && destination.id !== 'final') {
-      progress += ' · parte recuperada';
-    }
-    if (destination.id === 'final') {
-      progress += ' · ' + mapFragments.found + ' de ' + mapFragments.total + ' partes do mapa recuperadas';
-    }
-    append(card, element('span', 'route-progress', progress));
-    if (destination.lockReason === 'map_fragments') {
-      append(card, element('span', 'route-lock', 'As duas partes do mapa são necessárias.'));
-    } else if (destination.landmarks.traversed > 0 && destination.status === 'available') {
-      append(card, element('span', 'route-note', 'A próxima tentativa começa no primeiro marco.'));
-    }
-    return card;
-  }
-
-  function selectedDestination(view) {
-    return view.destinations.filter(function (destination) { return destination.selected; })[0] || null;
-  }
-
-  function renderDestinationSelector(view) {
-    var fieldset = element('fieldset', 'route-group');
-    append(fieldset, element('legend', '', 'Escolha o caminho'));
-    var selected = selectedDestination(view);
-    append(fieldset, element('p', 'route-summary', selected ? 'Caminho escolhido: ' + selected.name : 'Nenhum caminho escolhido'));
-    var grid = element('div', 'route-grid');
-    view.destinations.forEach(function (destination) {
-      append(grid, renderDestinationCard(destination, view.mapFragments));
-    });
-    append(fieldset, grid);
-    return fieldset;
-  }
-
-  function renderFormation(view, ui) {
-    var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, 'Próxima expedição'));
-    var main = element('main', 'main-region formation-wrap');
-    main.id = 'main';
-    var panel = element('section', 'paper-panel formation-panel');
-    panel.setAttribute('aria-labelledby', 'formation-title');
-    var title = pageHeading('Prepare a expedição', 'formation-title');
-    var formation = view.formation;
-    var instruction = formation.autoSelected
-      ? 'Todos os sobreviventes formarão esta expedição.'
-      : 'Escolha exatamente três heróis sobreviventes. Suas competências serão verificadas coletivamente.';
-    var heroSection = element('section', 'hero-section');
-    heroSection.setAttribute('aria-labelledby', 'heroes-title');
-    var heroTitle = element('h2', '', 'Escolha os heróis');
-    heroTitle.id = 'heroes-title';
-    var grid = element('div', 'hero-grid');
-    grid.setAttribute('role', 'group');
-    grid.setAttribute('aria-label', 'Elenco da campanha');
-    var heroes = heroLookup(view);
-    Data.heroOrder.forEach(function (heroId) {
-      if (heroes[heroId]) {
-        append(grid, renderHeroCard(heroes[heroId], formation));
-      }
-    });
-
-    var footer = element('footer', 'formation-footer');
-    var summary = element('div', 'formation-summary');
-    var selectedCount = formation.selectedHeroIds.length;
-    append(summary,
-      element('strong', '', selectedCount + ' de ' + formation.requiredCount + ' selecionados'),
-      element('p', 'helper', 'O bardo acompanha o grupo automaticamente e não oferece competências.')
-    );
-    append(heroSection, heroTitle, element('p', 'formation-instruction', instruction), grid);
-    var selectedRoute = selectedDestination(view);
-    var departLabel = selectedRoute ? 'Partir para ' + selectedRoute.name : 'Partir';
-    var formationActions = element('div', 'formation-actions');
-    append(formationActions, actionButton('Consultar elenco', '', 'open-roster'), actionButton(departLabel, 'primary', 'depart'));
-    append(footer, summary, formationActions);
-    append(panel, provisionalLabel(), element('p', 'eyebrow', 'Preparação'), title, renderDestinationSelector(view), heroSection);
-    if (ui.error) {
-      append(panel, renderInlineError(ui.error));
-    }
-    append(panel, footer);
-    append(main, panel);
-    append(frame, main, renderRosterDialog(view));
+  function image(path, alt, className) {
+    var frame = el('div', 'image-frame ' + (className || ''));
+    var img = el('img'); img.src = path; img.alt = alt;
+    var fallback = el('p', 'image-fallback', alt + ' — imagem indisponível'); fallback.hidden = true;
+    img.onerror = function () {
+      console.warn('optional_image_failed', path);
+      img.onerror = null; img.remove(); fallback.hidden = false; frame.classList.add('has-missing-image');
+    };
+    frame.appendChild(img); frame.appendChild(fallback);
     return frame;
   }
-
-  function renderInlineError(message) {
-    var error = element('p', 'inline-error', message);
-    error.id = 'campaign-error';
-    error.tabIndex = -1;
-    error.setAttribute('role', 'alert');
-    error.dataset.errorFocus = '';
-    return error;
-  }
-
-  function renderProgress(view) {
-    var list = element('ol', 'progress-marks');
-    list.setAttribute('aria-label', 'Progresso do caminho');
-    for (var position = 1; position <= view.positionTotal; position += 1) {
-      var item = element('li', '', String(position));
-      var status = 'Não alcançada';
-      if (position < view.position) {
-        item.className = 'done';
-        status = 'Concluída';
-      } else if (position === view.position) {
-        item.className = view.encounter ? 'revealed current' : 'current';
-        status = view.encounter ? 'Revelada' : 'Atual, ainda não revelada';
-      }
-      item.setAttribute('aria-label', 'Posição ' + position + ': ' + status);
-      append(list, item);
-    }
-    return list;
-  }
-
-  function rosterGroup(title, heroes, emptyCopy) {
-    var section = element('section', 'roster-group');
-    append(section, element('h3', '', title));
-    var list = element('ul', 'roster-list');
-    if (heroes.length === 0) {
-      append(list, element('li', 'roster-empty', emptyCopy));
-    } else {
-      heroes.forEach(function (hero) {
-        var item = element('li', 'roster-item' + (hero.lifeState === 'dead' ? ' dead' : ''));
-        var label = hero.label + (hero.lifeState === 'dead' ? ' — Morto' : '');
-        append(item, element('strong', '', label), element('small', '', competencyText(hero)));
-        append(list, item);
-      });
-    }
-    append(section, list);
-    return section;
-  }
-
-  function renderRoster(view, compact) {
-    var panel = element(compact ? 'div' : 'aside', compact ? 'roster-panel' : 'roster-region');
-    if (!compact) {
-      panel.setAttribute('aria-labelledby', 'roster-title');
-    }
-    var heading = element('div', 'roster-title');
-    var title = element('h2', '', 'Elenco');
-    if (!compact) {
-      title.id = 'roster-title';
-    }
-    append(heading, title, element('small', '', view.survivorCount + (view.survivorCount === 1 ? ' vivo' : ' vivos')));
-    append(panel, heading,
-      rosterGroup('Na expedição', view.party, 'Nenhum herói na expedição.'),
-      rosterGroup('Na cidade', view.town, 'Nenhum herói na cidade.'),
-      rosterGroup('Mortos', view.dead, 'Nenhum herói morreu.')
-    );
-    var bard = element('section', 'roster-group');
-    append(bard, element('h3', '', 'Companheiro'));
-    var bardList = element('ul', 'roster-list');
-    var bardItem = element('li', 'roster-item');
-    append(bardItem, element('strong', '', view.bard.label), element('small', '', 'Acompanha o grupo · nenhuma competência'));
-    append(bardList, bardItem);
-    append(bard, bardList);
-    append(panel, bard);
-    return panel;
-  }
-
-  function renderDungeonThreshold(view) {
-    var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, view.dungeon.label));
-    var grid = element('div', 'game-grid');
-    var main = element('main', 'main-region');
-    main.id = 'main';
-    var scene = element('section', 'scene');
-    scene.setAttribute('aria-labelledby', 'threshold-title');
-    scene.dataset.imageRegion = '';
-    var copy = element('div', 'scene-copy');
-    var revisited = view.dungeon.landmarks.traversed > 0;
-    var thresholdEyebrow = 'Caminho escolhido';
-    var thresholdCopy = 'O primeiro encontro ainda não foi revelado.';
-    if (view.dungeon.id === 'final') {
-      thresholdEyebrow = 'As duas partes do mapa';
-      thresholdCopy = 'Seis encontros aguardam além deste limiar.';
-    } else if (revisited) {
-      thresholdEyebrow = 'Caminho revisitado';
-      thresholdCopy = COPY.routeRestart;
-    } else if (view.encounter) {
-      thresholdCopy = 'O primeiro encontro já foi revelado nesta campanha.';
-    }
-    append(copy,
-      provisionalLabel(),
-      element('p', 'eyebrow', thresholdEyebrow),
-      pageHeading(view.dungeon.name, 'threshold-title', 'scene-title'),
-      element('p', 'prose', view.dungeon.rumor),
-      renderProgress(view)
-    );
-    append(scene, copy);
-    var decision = element('section', 'paper-panel decision-panel');
-    append(decision,
-      element('p', '', thresholdCopy),
-      actionButton('Entrar no caminho', 'primary', 'enter-dungeon')
-    );
-    append(decision, renderRetreatAccess(view));
-    append(decision, actionButton('Consultar elenco', 'roster-toggle', 'open-roster'));
-    append(main, scene, decision);
-    append(grid, main, renderRoster(view, false));
-    append(frame, grid, renderRosterDialog(view));
-    if (view.phase === 'retreat_confirmation') {
-      append(frame, renderRetreatConfirmation());
-    }
-    return frame;
-  }
-
-  function renderRosterDialog(view) {
-    var dialog = element('dialog', 'roster-dialog');
-    dialog.id = 'roster-dialog';
-    dialog.setAttribute('aria-labelledby', 'roster-dialog-title');
-    var header = element('div', 'dialog-heading');
-    var title = element('h2', '', 'Consultar elenco');
-    title.id = 'roster-dialog-title';
-    append(header, title, actionButton('Fechar elenco', 'ghost close-button', 'close-roster'));
-    append(dialog, header, renderRoster(view, true));
-    return dialog;
-  }
-
-  function renderEncounterScene(view, label, title, description, titleId, pageLevel) {
-    var scene = element('section', 'scene encounter-scene');
-    scene.setAttribute('aria-labelledby', titleId);
-    scene.dataset.imageRegion = '';
-    if (view.encounter && view.encounter.imagePath) {
-      var image = element('img', 'encounter-image');
-      image.alt = '';
-      image.dataset.optionalImage = '';
-      image.src = view.encounter.imagePath;
-      append(scene, image);
-    }
-    var copy = element('div', 'scene-copy');
-    var heading = pageLevel
-      ? pageHeading(title, titleId, 'scene-title')
-      : element('h2', 'scene-title', title);
-    if (!pageLevel) {
-      heading.id = titleId;
-    }
-    append(copy, element('p', 'eyebrow', label), heading, element('p', 'prose', description));
-    if (view.position && view.positionTotal) {
-      append(copy, renderProgress(view));
-    }
-    append(scene, copy);
-    return scene;
-  }
-
-  function renderCampaignFrame(view, main, confirmation) {
-    var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, view.dungeon.label));
-    var grid = element('div', 'game-grid');
-    append(grid, main, renderRoster(view, false));
-    append(frame, grid, renderRosterDialog(view));
-    if (confirmation) {
-      append(frame, confirmation);
-    }
-    return frame;
-  }
-
-  function renderRosterAccess() {
-    return actionButton('Consultar elenco', 'roster-toggle', 'open-roster');
-  }
-
-  function renderRetreatAccess(view) {
-    if (!view.canRetreat && view.phase !== 'retreat_confirmation') {
-      return null;
-    }
-    return actionButton('Recuar para a cidade', 'ghost', 'request-retreat');
-  }
-
-  function renderEncounterChoice(view) {
-    var main = element('main', 'main-region encounter-region');
-    main.id = 'main';
-    append(main, renderEncounterScene(view, 'Encontro revelado', view.encounter.title, view.encounter.description, 'encounter-title', true));
-    var decision = element('section', 'paper-panel encounter-decision');
-    decision.setAttribute('aria-labelledby', 'approach-title');
-    var approachTitle = element('h2', '', 'Como o grupo vai atravessar?');
-    approachTitle.id = 'approach-title';
-    var actions = element('div', 'approach-stack');
-    view.encounter.approaches.forEach(function (approach) {
-      append(actions, actionButton(approach.text, 'approach-action', 'choose-approach', approach.id));
-    });
-    append(actions, renderRetreatAccess(view));
-    append(decision,
-      element('p', 'eyebrow ink-eyebrow', 'Escolha uma abordagem'),
-      approachTitle,
-      actions,
-      element('p', 'helper', 'A escolha de uma abordagem impede o recuo até a consequência terminar.'),
-      renderRosterAccess()
-    );
-    append(main, decision);
-    var confirmation = view.phase === 'retreat_confirmation' ? renderRetreatConfirmation() : null;
-    return renderCampaignFrame(view, main, confirmation);
-  }
-
-  function renderApproachResult(view) {
-    var main = element('main', 'main-region encounter-region');
-    main.id = 'main';
-    append(main, renderEncounterScene(view, 'Abordagem escolhida', view.chosenApproachText, view.encounter.description, 'chosen-approach-title', false));
-    var decision = element('section', 'paper-panel result-panel');
-    var failure = !view.outcome.success;
-    var banner = element('div', 'result-banner' + (failure ? ' failure' : ' success'));
-    var resultTitle = pageHeading(failure ? 'Falha letal' : 'Sucesso', 'result-title', 'result-heading');
-    append(banner,
-      element('p', 'result-label', failure ? 'Consequência obrigatória' : 'Abordagem superada'),
-      resultTitle,
-      element('h2', 'competency-result', 'Competência exigida: ' + view.outcome.competencyLabel),
-      element('p', '', 'O grupo ' + (view.outcome.partyHasCompetency ? 'possui ' : 'não possui ') + view.outcome.competencyLabel + '.'),
-      element('p', 'result-explanation', view.outcome.explanation)
-    );
-    if (failure) {
-      append(banner, element('p', 'lethal-warning', 'O fracasso é letal. Alguém precisa ficar para trás.'));
-    }
-    var actions = element('div', 'result-actions');
-    append(actions,
-      actionButton(failure ? 'Escolher o sacrifício' : 'Prosseguir', failure ? 'danger' : 'primary', failure ? 'open-sacrifice' : 'ack-success'),
-      renderRosterAccess()
-    );
-    append(decision, banner, actions);
-    append(main, decision);
-    return renderCampaignFrame(view, main);
-  }
-
-  function renderVictimCard(hero, selected) {
-    var card = setAction(element('button', 'hero-card victim-card' + (selected ? ' selected' : '')), 'select-victim', hero.id);
-    card.type = 'button';
-    card.setAttribute('aria-pressed', selected ? 'true' : 'false');
-    append(card, element('strong', '', hero.label));
-    hero.competencyLabels.forEach(function (label) {
-      append(card, element('span', '', label));
-    });
-    append(card, element('small', '', selected ? 'Selecionado' : 'Sacrificar ' + hero.label));
-    return card;
-  }
-
-  function renderSacrificeChoice(view) {
-    var main = element('main', 'main-region encounter-region');
-    main.id = 'main';
-    append(main, renderEncounterScene(
-      view,
-      'A saída está fechando',
-      'Alguém precisa ficar para trás.',
-      view.outcome.explanation,
-      'sacrifice-context-title',
-      false
-    ));
-    var decision = element('section', 'paper-panel sacrifice-panel');
-    decision.setAttribute('aria-labelledby', 'sacrifice-title');
-    var title = pageHeading('Escolha o sacrifício', 'sacrifice-title', 'decision-heading');
-    var victims = element('div', 'hero-grid victim-grid');
-    victims.setAttribute('role', 'group');
-    victims.setAttribute('aria-label', 'Heróis presentes que podem ser sacrificados');
-    view.eligibleVictims.forEach(function (hero) {
-      append(victims, renderVictimCard(hero, Boolean(view.pendingVictim && view.pendingVictim.id === hero.id)));
-    });
-    append(decision,
-      element('p', 'eyebrow ink-eyebrow', 'Consequência permanente'),
-      title,
-      element('p', 'irreversible-copy', 'Esta morte será permanente nesta campanha. O bardo e os heróis na cidade não podem ser escolhidos.'),
-      victims,
-      renderRosterAccess()
-    );
-    append(main, decision);
-    var confirmation = view.phase === 'sacrifice_confirmation' ? renderSacrificeConfirmation(view) : null;
-    return renderCampaignFrame(view, main, confirmation);
-  }
-
-  function confirmationActions(cancelLabel, cancelAction, confirmLabel, confirmAction, id) {
-    var actions = element('div', 'confirmation-actions');
-    append(actions,
-      actionButton(cancelLabel, '', cancelAction, id),
-      actionButton(confirmLabel, 'danger', confirmAction)
-    );
-    return actions;
-  }
-
-  function renderSacrificeConfirmation(view) {
-    var dialog = element('dialog', 'confirmation-dialog sacrifice-confirmation');
-    dialog.id = 'required-dialog';
-    dialog.dataset.requiredDialog = 'sacrifice';
-    dialog.setAttribute('aria-labelledby', 'confirm-sacrifice-title');
-    var victim = view.pendingVictim;
-    var consequence = element('p', 'confirmation-copy');
-    append(consequence,
-      element('strong', '', victim.label + ' morrerá'),
-      document.createTextNode(' e suas competências, ' + victim.competencyLabels.join(' e ') + ', serão perdidas.')
-    );
-    append(dialog,
-      element('p', 'eyebrow ink-eyebrow', 'Morte permanente'),
-      element('h2', '', 'Confirmar sacrifício?'),
-      consequence,
-      confirmationActions('Voltar à escolha', 'cancel-sacrifice', 'Confirmar sacrifício', 'confirm-sacrifice', victim.id)
-    );
-    dialog.querySelector('h2').id = 'confirm-sacrifice-title';
-    return dialog;
-  }
-
-  function renderRetreatConfirmation() {
-    var dialog = element('dialog', 'confirmation-dialog retreat-confirmation');
-    dialog.id = 'required-dialog';
-    dialog.dataset.requiredDialog = 'retreat';
-    dialog.setAttribute('aria-labelledby', 'confirm-retreat-title');
-    append(dialog,
-      element('p', 'eyebrow ink-eyebrow', 'Confirmar recuo'),
-      element('h2', '', 'Recuar para a cidade?'),
-      element('p', 'confirmation-copy', 'A próxima tentativa voltará ao primeiro encontro. Mortes e encontros revelados permanecerão.'),
-      confirmationActions('Continuar expedição', 'cancel-retreat', 'Recuar', 'confirm-retreat')
-    );
-    dialog.querySelector('h2').id = 'confirm-retreat-title';
-    return dialog;
-  }
-
-  function renderDeathResult(view) {
-    var main = element('main', 'main-region encounter-region');
-    main.id = 'main';
-    append(main, renderEncounterScene(view, 'A consequência foi cumprida', view.encounter.title, view.outcome.explanation, 'death-context-title', false));
-    var decision = element('section', 'paper-panel result-panel death-panel');
-    var title = pageHeading(view.death.heroLabel + ' ficou para trás.', 'death-title', 'result-heading');
-    var farewell = element('blockquote', 'farewell', view.death.farewell);
-    append(decision,
-      provisionalLabel(),
-      element('p', 'result-label failure-label', 'Morte permanente'),
-      title,
-      farewell,
-      element('p', 'result-explanation', view.outcome.explanation),
-      element('p', 'coverage-update', 'O elenco e as competências disponíveis foram recalculados.'),
-      actionButton('Prosseguir', 'primary', 'ack-death'),
-      renderRosterAccess()
-    );
-    append(main, decision);
-    return renderCampaignFrame(view, main);
-  }
-
-  function renderAutomaticRetreat(view) {
-    var main = element('main', 'main-region encounter-region');
-    main.id = 'main';
-    append(main, renderEncounterScene(
-      view,
-      'Expedição encerrada',
-      'O bardo retorna sozinho.',
-      'O último herói da expedição morreu. Ainda há sobreviventes na cidade.',
-      'automatic-retreat-title',
-      true
-    ));
-    var decision = element('section', 'paper-panel automatic-retreat-panel');
-    append(decision,
-      element('h2', '', 'Recuo automático'),
-      element('p', '', 'O bardo retorna sozinho para reunir os sobreviventes. Mortes e encontros revelados permanecem.'),
-      actionButton('Voltar à cidade', 'primary', 'ack-auto-retreat'),
-      renderRosterAccess()
-    );
-    append(main, decision);
-    return renderCampaignFrame(view, main);
-  }
-
-  function renderMapHalf(destination) {
-    var found = destination.status === 'completed';
-    var half = element('li', 'map-half' + (found ? ' found' : ''));
-    append(half, element('strong', '', destination.name), element('span', '', found ? 'Concluído · parte recuperada' : 'Ainda incompleto'));
-    return half;
-  }
-
-  function destinationById(destinations, dungeonId) {
-    return destinations.filter(function (destination) { return destination.id === dungeonId; })[0] || null;
-  }
-
-  function renderFragmentStatus(view) {
-    var status = element('div', 'fragment-status');
-    var halves = element('ul', 'map-halves');
-    halves.setAttribute('aria-label', 'Partes do mapa');
-    append(halves,
-      renderMapHalf(destinationById(view.destinations, 'physical')),
-      renderMapHalf(destinationById(view.destinations, 'supernatural'))
-    );
-    var finalDestination = destinationById(view.destinations, 'final');
-    var finalStatusLabel = destinationStatusLabel(finalDestination);
-    var legacy = element('p', 'legacy-status');
-    append(legacy, element('strong', '', finalDestination.name), document.createTextNode(' — ' + finalStatusLabel + ' — ' + view.mapFragments.found + ' de ' + view.mapFragments.total + ' partes recuperadas.'));
-    append(status, halves, legacy);
-    return status;
-  }
-
-  function renderDungeonTransition(view) {
-    var finalDestination = destinationById(view.destinations, 'final');
-    var mapComplete = finalDestination.status === 'available' || finalDestination.status === 'completed';
-    var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, 'Masmorra concluída'));
-    var main = element('main', 'main-region transition-wrap dungeon-transition');
-    main.id = 'main';
-    main.setAttribute('aria-labelledby', 'transition-title');
-    var panel = element('section', 'paper-panel transition-panel');
-    var title = mapComplete ? 'O mapa está inteiro.' : 'Uma parte do mapa foi recuperada.';
-    var detail = mapComplete
-      ? 'Os dois caminhos iniciais foram concluídos. O destino indicado pelo mapa agora está disponível.'
-      : view.dungeon.name + ' concluído. O outro caminho ainda guarda a parte que falta.';
-    append(panel,
-      provisionalLabel(),
-      element('p', 'eyebrow ink-eyebrow', mapComplete ? 'As duas partes foram recuperadas' : 'Parte do mapa recuperada'),
-      pageHeading(title, 'transition-title', 'transition-title'),
-      element('p', 'transition-copy', detail),
-      renderFragmentStatus(view),
-      actionButton('Voltar à preparação', 'primary', 'ack-dungeon-complete'),
-      renderRosterAccess()
-    );
-    append(main, panel);
-    append(frame, main);
-    append(frame, renderRosterDialog(view));
-    return frame;
-  }
-
-  function renderOutcomeHeader(view, label) {
-    var header = element('header', 'game-header');
-    var brand = element('div', 'brand');
-    append(brand, element('span', 'eyebrow', label), element('strong', '', COPY.title));
-    var status = element('div', 'status-line');
-    append(status, statusFact(view.phase === 'victory' ? '16 encontros atravessados' : 'Derrota total'));
-    append(header, brand, status);
-    return header;
-  }
-
-  function renderVictory(view) {
-    var frame = element('div', 'artboard outcome-artboard');
-    append(frame, renderOutcomeHeader(view, 'Campanha concluída'));
-    var main = element('main', 'main-region outcome-wrap');
-    main.id = 'main';
-    main.setAttribute('aria-labelledby', 'victory-title');
-    var panel = element('section', 'paper-panel outcome-panel victory-panel');
-    var epilogues = element('ul', 'epilogue-list');
-    view.ending.epilogues.forEach(function (epilogue) {
-      var item = element('li', 'epilogue-item');
-      append(item, element('strong', '', epilogue.heroId), element('p', '', epilogue.text));
-      append(epilogues, item);
-    });
-    append(panel,
-      provisionalLabel(),
-      element('p', 'eyebrow ink-eyebrow', 'Vitória'),
-      pageHeading(view.ending.central, 'victory-title', 'outcome-title'),
-      element('p', 'outcome-copy', 'O protótipo encerra a campanha sem transformar a natureza do tesouro, o horror familiar ou os arcos finais em decisões implícitas.'),
-      element('h2', 'epilogue-heading', 'Sobreviventes'),
-      epilogues,
-      actionButton('Iniciar nova campanha', 'primary', 'new-campaign')
-    );
-    append(main, panel);
-    append(frame, main);
-    return frame;
-  }
-
-  function renderDefeat(view) {
-    var frame = element('div', 'artboard outcome-artboard defeat-artboard');
-    append(frame, renderOutcomeHeader(view, 'Campanha encerrada'));
-    var main = element('main', 'main-region outcome-wrap');
-    main.id = 'main';
-    main.setAttribute('aria-labelledby', 'defeat-title');
-    var panel = element('section', 'paper-panel outcome-panel defeat-panel');
-    append(panel,
-      provisionalLabel(),
-      element('p', 'eyebrow ink-eyebrow', 'Derrota total'),
-      pageHeading('Ninguém retorna.', 'defeat-title', 'outcome-title'),
-      element('p', 'outcome-copy', view.ending.central),
-      element('p', 'no-epilogues', 'Não há epílogos de sobreviventes nesta campanha.'),
-      actionButton('Iniciar nova campanha', 'danger', 'new-campaign')
-    );
-    append(main, panel);
-    append(frame, main);
-    return frame;
-  }
-
-  function renderReachedPosition(view) {
-    var frame = element('div', 'artboard');
-    append(frame, renderHeader(view, view.dungeon.label));
-    var grid = element('div', 'game-grid');
-    var main = element('main', 'main-region');
-    main.id = 'main';
-    var panel = element('section', 'paper-panel introduction-panel');
-    var title = pageHeading('Posição alcançada', 'position-reached-title');
-    append(panel, title, element('p', '', 'O encontro desta posição foi revelado. A decisão permanece preservada na sessão atual.'));
-    append(main, panel);
-    append(grid, main, renderRoster(view, false));
-    append(frame, grid, renderRosterDialog(view));
-    return frame;
-  }
-
-  function renderInvalid(view) {
-    var frame = element('div', 'artboard invalid-state');
-    var header = element('header', 'game-header');
-    var brand = element('div', 'brand');
-    append(brand, element('span', 'eyebrow', 'Execução interrompida'), element('strong', '', COPY.title));
-    var status = element('div', 'status-line');
-    append(status, statusFact('Diagnóstico preservado'));
-    append(header, brand, status);
-    var main = element('main', 'main-region invalid-wrap');
-    main.id = 'main';
-    var panel = element('section', 'paper-panel invalid-panel');
-    panel.setAttribute('aria-labelledby', 'invalid-title');
-    var title = pageHeading('O protótipo encontrou um estado inválido.', 'invalid-title');
-    append(panel,
-      element('p', 'eyebrow', 'Não é seguro continuar'),
-      title,
-      element('p', '', view.invalidMessage || 'Recarregue a página e registre a semente no console.'),
-      actionButton('Recarregar a página', 'danger', 'reload')
-    );
-    append(main, panel);
-    append(frame, header, main);
-    return frame;
-  }
+  function heading(text, level) { return el('h' + (level || 1), 'scene-heading', text); }
 
   function createController(root, initialState) {
-    if (!root || root.nodeType !== 1) {
-      throw new TypeError('ExpeditionApp.createController exige um elemento raiz.');
+    if (!root || typeof root.appendChild !== 'function') throw new TypeError('ExpeditionApp.createController exige um elemento raiz.');
+    var state = initialState || Engine.createReadyState();
+    var destroyed = false, transitioning = false, pendingSeed = null, lastRejectedAction = null;
+    var panel = null, panelTrigger = null, renderGeneration = 0, lastActivation = { key: '', at: 0 };
+    var inspectedHeroId = null, inspectionSuppressedId = null, rovingHeroId = null;
+    var absence = null, ownedTimers = [], mediaQuery = null;
+
+    function later(callback, delay) {
+      var id = global.setTimeout(function () {
+        ownedTimers = ownedTimers.filter(function (item) { return item !== id; });
+        if (!destroyed) callback();
+      }, delay);
+      ownedTimers.push(id);
+      return id;
+    }
+    function cancelTimer(id) {
+      if (id === null || id === undefined) return;
+      global.clearTimeout(id);
+      ownedTimers = ownedTimers.filter(function (item) { return item !== id; });
+    }
+    function clearAbsence() {
+      if (absence) cancelTimer(absence.timer);
+      absence = null;
+    }
+    function reduceMotion() { return Boolean(mediaQuery && mediaQuery.matches); }
+    function onMotionChange(event) {
+      if (!event.matches || !absence) return;
+      clearAbsence();
+      if (state.phase === 'formation') render([]);
+    }
+    if (typeof global.matchMedia === 'function') {
+      mediaQuery = global.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mediaQuery.addEventListener) mediaQuery.addEventListener('change', onMotionChange);
+      else if (mediaQuery.addListener) mediaQuery.addListener(onMotionChange);
     }
 
-    var state = initialState ? deepFreeze(JSON.parse(JSON.stringify(initialState))) : Engine.createReadyState();
-    var ui = { error: null, rosterOpen: false };
-    var destroyed = false;
-    var dispatching = false;
-    var restoreFocus = null;
-    var stage;
-    var liveRegion;
-    var assertiveRegion;
-    var dialogCloseInProgress = false;
-    var pendingDialogFocus = null;
-    var pendingSeed = null;
-    var invalidLogged = false;
-    var lastRejectedAction = null;
-    var previousAutomaticSelectionAnnouncement = null;
-    var qaSession;
-
-    function qaError(code, message) {
-      return deepFreeze({ ok: false, error: { code: code, message: message } });
+    function makeSnapshot() {
+      var snapshot = clone(Engine.snapshot(state));
+      snapshot.lastRejectedAction = lastRejectedAction ? clone(lastRejectedAction) : null;
+      return deepFreeze(snapshot);
     }
-
-    function setPendingSeed(seed) {
-      if (state.phase !== 'ready') {
-        return qaError('campaign_already_started', 'Defina a semente antes de iniciar a campanha.');
-      }
+    function validate() {
+      var catalog = Engine.validateCatalog(Data, Narrative);
+      if (!catalog.ok) return catalog;
+      return Engine.validateState(state);
+    }
+    function setSeed(seed) {
+      if (destroyed || !activeQA || activeQA.controller !== controller) return deepFreeze({ ok: false, error: { code: 'campaign_unavailable', message: 'A campanha ainda não está disponível.' } });
+      if (state.phase !== 'ready') return deepFreeze({ ok: false, error: { code: 'campaign_already_started', message: 'Defina a semente antes de iniciar a campanha.' } });
       var normalized = Engine.normalizeSeed(seed);
-      if (!normalized.ok) {
-        return qaError('invalid_seed', 'Use um número inteiro entre 0 e 4294967295.');
-      }
+      if (!normalized.ok) return normalized;
       pendingSeed = normalized.seed;
-      return deepFreeze({ ok: true, seed: pendingSeed });
+      return normalized;
     }
-
-    function qaSnapshot() {
-      var current = Engine.snapshot(state);
-      var copy = {};
-      Object.keys(current).forEach(function (key) {
-        copy[key] = current[key];
-      });
-      if (state.phase === 'ready' && pendingSeed !== null) {
-        copy.seed = pendingSeed;
-      }
-      copy.lastRejectedAction = lastRejectedAction;
-      return deepFreeze(copy);
+    function stamp(action) {
+      var stamped = Object.assign({}, action);
+      stamped.expectedSequence = state.sequence;
+      if (stamped.type === 'BEGIN') stamped.seed = pendingSeed === null ? (Date.now() >>> 0) : pendingSeed;
+      return stamped;
     }
-
-    function imageAlternativeViolations() {
-      return Array.prototype.reduce.call(stage.querySelectorAll('img[data-optional-image]'), function (violations, image) {
-        if (!image.hasAttribute('alt')) {
-          violations.push(deepFreeze({
-            code: 'missing_image_alternative',
-            message: 'Uma imagem opcional não declara alternativa textual.',
-            context: { path: image.getAttribute('src') || null }
-          }));
-        }
-        return violations;
-      }, []);
+    function acceptEffects(effects) {
+      var effect = (effects || []).filter(function (item) { return item.type === 'tavern_absence'; })[0];
+      if (!effect || reduceMotion()) return;
+      clearAbsence();
+      var deadline = Date.now() + 1000;
+      absence = { heroIds: effect.heroIds.slice(), deadline: deadline, timer: null };
+      absence.timer = later(function () {
+        if (!absence || absence.deadline !== deadline) return;
+        absence = null;
+        if (state.phase === 'formation') render([]);
+      }, 1000);
     }
-
-    function logInvalidState() {
-      if (invalidLogged || state.phase !== 'invalid') {
-        return;
-      }
-      invalidLogged = true;
-      state.invariantViolations.forEach(function (violation) {
-        console.error('invariant_violation', violation);
-      });
-    }
-
-    function stopForViolations(violations) {
-      if (violations.length === 0 || state.phase === 'invalid') {
-        return false;
-      }
-      state = Engine.enterInvalid(state, violations);
-      logInvalidState();
-      render({ focusHeading: true, assert: 'Execução interrompida. Recarregue a página.' });
-      return true;
-    }
-
-    function validateCampaign() {
-      var catalog = Engine.validateCatalog(Data);
-      var stateValidation = state.phase === 'invalid'
-        ? { ok: false, violations: state.invariantViolations }
-        : Engine.validateState(state);
-      var fatal = catalog.violations.concat(stateValidation.violations);
-      if (fatal.length > 0) {
-        return deepFreeze({ ok: false, violations: fatal });
-      }
-      var accessibility = imageAlternativeViolations();
-      return deepFreeze({ ok: accessibility.length === 0, violations: accessibility });
-    }
-
-    function buildRoot() {
-      root.textContent = '';
-      var skip = element('a', 'skip-link', 'Pular para o conteúdo');
-      skip.href = '#main';
-      liveRegion = element('div', 'sr-only');
-      liveRegion.setAttribute('role', 'status');
-      liveRegion.setAttribute('aria-live', 'polite');
-      liveRegion.setAttribute('aria-atomic', 'true');
-      assertiveRegion = element('div', 'sr-only');
-      assertiveRegion.setAttribute('aria-live', 'assertive');
-      assertiveRegion.setAttribute('aria-atomic', 'true');
-      stage = element('div', 'app-stage');
-      append(root, skip, liveRegion, assertiveRegion, stage);
-    }
-
-    function surfaceFor(view) {
-      if (view.phase === 'ready') {
-        return renderOpening();
-      }
-      if (view.phase === 'intro') {
-        return renderIntroduction();
-      }
-      if (view.phase === 'formation') {
-        return renderFormation(view, ui);
-      }
-      if (view.phase === 'dungeon_intro') {
-        return renderDungeonThreshold(view);
-      }
-      if (view.phase === 'retreat_confirmation') {
-        return view.retreatReturnPhase === 'dungeon_intro' ? renderDungeonThreshold(view) : renderEncounterChoice(view);
-      }
-      if (view.phase === 'encounter_choice') {
-        return renderEncounterChoice(view);
-      }
-      if (view.phase === 'approach_result') {
-        return renderApproachResult(view);
-      }
-      if (view.phase === 'sacrifice_choice' || view.phase === 'sacrifice_confirmation') {
-        return renderSacrificeChoice(view);
-      }
-      if (view.phase === 'death_result') {
-        return renderDeathResult(view);
-      }
-      if (view.phase === 'automatic_retreat') {
-        return renderAutomaticRetreat(view);
-      }
-      if (view.phase === 'dungeon_complete') {
-        return renderDungeonTransition(view);
-      }
-      if (view.phase === 'victory') {
-        return renderVictory(view);
-      }
-      if (view.phase === 'defeat') {
-        return renderDefeat(view);
-      }
-      if (view.phase === 'invalid') {
-        return renderInvalid(view);
-      }
-      return renderReachedPosition(view);
-    }
-
-    function openRosterDialog() {
-      var dialog = stage.querySelector('#roster-dialog');
-      if (!dialog || dialog.open) {
-        return;
-      }
+    function dispatch(action) {
+      if (destroyed) return { ok: false, state: state, error: { code: 'controller_destroyed', message: 'O controlador foi encerrado.', context: {} } };
+      if (transitioning) return { ok: false, state: state, error: { code: 'transition_in_progress', message: 'Uma transição já está em andamento.', context: {} } };
+      transitioning = true;
       try {
-        dialog.showModal();
-      } catch (error) {
-        dialog.setAttribute('open', '');
-        dialog.setAttribute('role', 'dialog');
-        dialog.setAttribute('aria-modal', 'true');
-        console.warn('optional_dialog_failed', error && error.message ? error.message : String(error));
-      }
-      var close = dialog.querySelector('[data-action="close-roster"]');
-      if (close) {
-        close.focus();
-      }
-    }
-
-    function openRequiredDialog() {
-      var dialog = stage.querySelector('[data-required-dialog]');
-      if (!dialog || dialog.open) {
-        return;
-      }
-      try {
-        dialog.showModal();
-      } catch (error) {
-        dialog.setAttribute('open', '');
-        dialog.setAttribute('role', 'dialog');
-        dialog.setAttribute('aria-modal', 'true');
-        console.warn('required_dialog_failed', error && error.message ? error.message : String(error));
-      }
-      var cancel = dialog.querySelector('[data-action^="cancel-"]');
-      if (cancel) {
-        cancel.focus();
-      }
-    }
-
-    function focusAfterDialogLifecycle(target) {
-      if (!target) {
-        return;
-      }
-      target.focus();
-      if (dialogCloseInProgress) {
-        pendingDialogFocus = target;
-      }
-    }
-
-    function documentTitle(view) {
-      var prefix = '';
-      if (view.phase === 'formation') {
-        prefix = 'Formação · ';
-      } else if (view.phase === 'dungeon_intro') {
-        prefix = view.dungeon.label + ' · ';
-      } else if (view.phase === 'victory') {
-        prefix = 'Vitória · ';
-      } else if (view.phase === 'defeat') {
-        prefix = 'Derrota · ';
-      }
-      return prefix + 'Expedição e Sacrifício';
-    }
-
-    function announceLive(message) {
-      if (!message) {
-        return;
-      }
-      liveRegion.textContent = '';
-      global.requestAnimationFrame(function () {
-        if (!destroyed) {
-          liveRegion.textContent = message;
-        }
-      });
-    }
-
-    function render(options) {
-      if (destroyed) {
-        return;
-      }
-      var view = Engine.derivePlayerView(state);
-      var surface = surfaceFor(view);
-      var closingDialogs = stage.querySelectorAll('dialog[open]');
-      dialogCloseInProgress = closingDialogs.length > 0;
-      Array.prototype.forEach.call(closingDialogs, function (dialog) {
-        dialog.addEventListener('close', function () {
-          dialogCloseInProgress = false;
-          if (pendingDialogFocus && pendingDialogFocus.isConnected) {
-            pendingDialogFocus.focus();
-          }
-          pendingDialogFocus = null;
-        }, { once: true });
-        dialog.close();
-      });
-      stage.textContent = '';
-      append(stage, surface);
-      monitorOptionalImages();
-      document.title = documentTitle(view);
-      if (ui.rosterOpen) {
-        openRosterDialog();
-      }
-      openRequiredDialog();
-      var announcement = options && options.announce ? options.announce : '';
-      if (view.automaticSelectionAnnouncement && view.automaticSelectionAnnouncement !== previousAutomaticSelectionAnnouncement) {
-        announcement += (announcement ? ' ' : '') + view.automaticSelectionAnnouncement;
-      }
-      previousAutomaticSelectionAnnouncement = view.automaticSelectionAnnouncement;
-      announceLive(announcement);
-      if (options && options.assert) {
-        assertiveRegion.textContent = '';
-        global.requestAnimationFrame(function () {
-          if (!destroyed) {
-            assertiveRegion.textContent = options.assert;
-          }
-        });
-      }
-      if (options && options.focusError) {
-        var error = stage.querySelector('[data-error-focus]');
-        if (error) {
-          focusAfterDialogLifecycle(error);
-        }
-      } else if (options && options.focusSelector) {
-        var focusTarget = stage.querySelector(options.focusSelector);
-        if (focusTarget) {
-          focusAfterDialogLifecycle(focusTarget);
-        }
-      } else if (options && options.focusHeading && !stage.querySelector('[data-required-dialog]')) {
-        var heading = stage.querySelector('[data-surface-heading]');
-        if (heading) {
-          focusAfterDialogLifecycle(heading);
-        }
-      }
-    }
-
-    function submit(action, options) {
-      if (destroyed) {
-        return Object.freeze({ ok: false, error: Object.freeze({ code: 'controller_destroyed', message: 'O controlador foi encerrado.', context: Object.freeze({}) }) });
-      }
-      if (dispatching) {
-        return Object.freeze({ ok: false, error: Object.freeze({ code: 'transition_in_progress', message: 'Uma transição já está em andamento.', context: Object.freeze({}) }) });
-      }
-      dispatching = true;
-      try {
-        var stateValidation = Engine.validateState(state);
-        if (!stateValidation.ok) {
-          stopForViolations(stateValidation.violations);
-          return deepFreeze({ ok: true, state: state });
-        }
-        var submittedAction = action;
-        if (action.type === 'BEGIN' && state.phase === 'ready') {
-          submittedAction = {
-            type: 'BEGIN',
-            seed: pendingSeed !== null
-              ? pendingSeed
-              : (action.seed === undefined ? Date.now() >>> 0 : action.seed)
-          };
-        }
-        var result = Engine.dispatch(state, submittedAction);
+        var submitted = Object.prototype.hasOwnProperty.call(action, 'expectedSequence') ? action : stamp(action);
+        var previousPhase = state.phase;
+        var result = Engine.dispatch(state, submitted);
         if (result.ok) {
-          state = result.state;
-          lastRejectedAction = null;
-          if (submittedAction.type === 'BEGIN' && state.phase !== 'ready') {
-            pendingSeed = null;
-          }
-          logInvalidState();
-          ui.error = null;
-          ui.rosterOpen = false;
-          var renderOptions = {
-            focusHeading: Boolean(options && options.focusHeading),
-            focusSelector: options && options.focusSelector,
-            announce: options && options.announce,
-            assert: options && options.assert
-          };
-          if (options && options.announceOutcome && state.pendingOutcome) {
-            if (state.pendingOutcome.success) {
-              renderOptions.announce = 'Sucesso. A consequência aguarda confirmação.';
-            } else {
-              renderOptions.assert = 'Falha letal. Escolha um sacrifício para continuar.';
-            }
-          }
-          render(renderOptions);
+          state = result.state; lastRejectedAction = null; panel = null;
+          if (submitted.type === 'BEGIN') pendingSeed = null;
+          if (state.phase === 'formation') acceptEffects(result.effects);
+          else clearAbsence();
+          render(result.effects);
         } else {
-          lastRejectedAction = deepFreeze({
-            action: submittedAction.type,
-            code: result.error.code,
-            message: result.error.message,
-            context: result.error.context || {}
-          });
-          console.warn('campaign_action_rejected', lastRejectedAction);
-          ui.error = result.error.message;
-          render({ focusError: true, announce: result.error.message });
+          lastRejectedAction = { action: submitted.type, code: result.error.code, message: result.error.message, context: clone(result.error.context) };
+          render([]);
+        }
+        var focusTarget = null;
+        if (!result.ok) focusTarget = root.querySelector('[role="alert"]');
+        else if (submitted.type === 'CHOOSE_APPROACH' && state.phase === 'approach_result') focusTarget = root.querySelector('.encounter-screen .scene-heading');
+        else if (previousPhase === 'dungeon_complete' && state.phase === 'formation') focusTarget = root.querySelector('.formation-screen .scene-heading');
+        else if (submitted.type === 'CANCEL_RETREAT') focusTarget = root.querySelector('[data-action="REQUEST_RETREAT"]');
+        if (focusTarget) {
+          if (!focusTarget.hasAttribute('tabindex')) focusTarget.tabIndex = -1;
+          focusTarget.focus();
         }
         return result;
-      } finally {
-        dispatching = false;
-      }
+      } finally { transitioning = false; }
     }
 
-    function closeRoster() {
-      var dialog = stage.querySelector('#roster-dialog');
-      ui.rosterOpen = false;
-      var target = restoreFocus;
-      restoreFocus = null;
-      if (dialog && dialog.open) {
-        if (target) {
-          dialog.addEventListener('close', function () {
-            if (!destroyed && target.isConnected) {
-              target.focus();
-            }
-          }, { once: true });
+    function renderHeader(main) {
+      var brand = el('header', 'game-header');
+      var identity = el('div', 'header-identity');
+      identity.appendChild(el('p', 'eyebrow', 'Afogados em Terra Seca'));
+      identity.appendChild(el('p', 'campaign-status', state.phase === 'ready' ? 'Uma campanha de horror e responsabilidade' : 'Campanha em andamento'));
+      brand.appendChild(identity);
+      if (state.phase !== 'ready' && state.phase !== 'invalid' && state.phase !== 'formation') brand.appendChild(button('Consultar elenco', 'OPEN_ROSTER', undefined, 'header-roster action-button'));
+      main.appendChild(brand);
+    }
+    function renderReady(main) {
+      var section = el('section', 'entry-screen');
+      section.appendChild(el('p', 'lead', 'Visual novel de horror'));
+      section.appendChild(heading('Afogados em Terra Seca'));
+      var notices = el('div', 'content-notices');
+      notices.appendChild(el('h2', '', 'Classificação e avisos de conteúdo'));
+      notices.appendChild(el('p', '', 'Indicado para maiores de 16 anos. Contém morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre povos fantásticos e horror psicológico.'));
+      section.appendChild(notices);
+      section.appendChild(button('Jogar', 'BEGIN', undefined, 'primary-action'));
+      main.appendChild(section);
+    }
+    function sceneBackground(sceneId) {
+      var scene = Narrative.scenes[sceneId];
+      var background = scene && Narrative.backgrounds[scene.backgroundId];
+      return background && background.path;
+    }
+    function speakerPortrait(reading) {
+      if (!reading || !reading.speakerId) return null;
+      if (Data.heroes[reading.speakerId]) return Data.heroes[reading.speakerId].portraitPath;
+      return Narrative.speakers[reading.speakerId] && Narrative.speakers[reading.speakerId].portraitPath;
+    }
+    function readingActions(view) {
+      var actions = el('div', 'scene-actions');
+      actions.appendChild(button('Avançar', 'ADVANCE_TEXT', undefined, 'primary-action'));
+      if (view.reading.canSkip) actions.appendChild(button('Pular texto já lido', 'SKIP_SEEN_TEXT'));
+      if (view.canRetreat) actions.appendChild(button('Recuar', 'REQUEST_RETREAT'));
+      return actions;
+    }
+    function readingPassage(view) {
+      var passage = el('div', 'passage-panel'); passage.tabIndex = 0; passage.dataset.action = 'ADVANCE_TEXT';
+      if (view.reading.speakerName) passage.appendChild(el('p', 'speaker-name', view.reading.speakerName));
+      passage.appendChild(el('p', 'passage-text', view.reading.text));
+      passage.appendChild(el('p', 'passage-progress', (view.reading.index + 1) + ' de ' + view.reading.total));
+      return passage;
+    }
+    function renderExpedition(main, view) {
+      var section = el('section', 'encounter-screen');
+      var party = el('div', 'expedition-party'); party.setAttribute('aria-label', 'Heróis da expedição');
+      view.heroes.filter(function (hero) { return hero.alive && state.partyIds.indexOf(hero.id) >= 0; }).forEach(function (hero) {
+        party.appendChild(image(hero.portraitPath, hero.name, 'expedition-portrait'));
+      });
+      section.appendChild(party);
+      var threshold = view.phase === 'dungeon_intro';
+      var destination = view.destinations[state.dungeonId];
+      var title = threshold ? 'À entrada do caminho' : view.currentEncounter.title;
+      section.appendChild(image(threshold ? destination.previewPath : view.currentEncounter.imagePath, title, 'encounter-art'));
+      var choices = el('div', 'approach-grid');
+      if (view.phase === 'encounter_choice') {
+        view.currentEncounter.approaches.forEach(function (item) { choices.appendChild(button(item.text, 'CHOOSE_APPROACH', item.id, 'approach-card')); });
+        if (view.canRetreat) choices.appendChild(button('Recuar', 'REQUEST_RETREAT'));
+      } else if (view.reading) choices.appendChild(readingActions(view));
+      else {
+        choices.appendChild(button('Entrar no encontro', 'ENTER_DUNGEON', undefined, 'primary-action'));
+        if (view.canRetreat) choices.appendChild(button('Recuar', 'REQUEST_RETREAT'));
+      }
+      section.appendChild(choices);
+      var passage = view.reading ? readingPassage(view) : el('div', 'encounter-copy');
+      var meta = el('div', 'encounter-progress');
+      meta.appendChild(el('span', '', destination.name));
+      meta.appendChild(el('span', '', 'Encontro ' + state.position + ' de ' + destination.landmarks.total));
+      meta.appendChild(el('span', '', 'Progresso conhecido: ' + destination.landmarks.traversed + '/' + destination.landmarks.total));
+      passage.insertBefore(heading(title), passage.firstChild);
+      passage.insertBefore(meta, passage.firstChild);
+      if (!view.reading) passage.appendChild(el('p', 'passage-text', threshold ? 'A expedição alcançou a posição ' + state.position + ' de ' + destination.landmarks.total + '.' : view.currentEncounter.description));
+      section.appendChild(passage); main.appendChild(section);
+    }
+    function renderConsequence(main, view) {
+      var section = el('section', 'consequence-screen');
+      var card = el('div', 'consequence-card');
+      card.appendChild(el('p', 'consequence-label', 'Consequência irreversível'));
+      var title = heading(view.reading.passageId.indexOf('farewell.') === 0 ? 'Despedida' : 'A perda');
+      title.tabIndex = -1; card.appendChild(title);
+      card.appendChild(readingPassage(view)); card.appendChild(readingActions(view));
+      section.appendChild(card); main.appendChild(section);
+      later(function () { if (title.isConnected) title.focus(); }, 0);
+    }
+    function renderLovers(main, view) {
+      var section = el('section', 'lover-screen');
+      var sceneId = view.reading.sceneId;
+      var background = sceneBackground(sceneId);
+      if (background) section.appendChild(image(background, 'Cenário da descoberta', 'scene-background'));
+      var isLover = sceneId.indexOf('lover.') === 0;
+      if (isLover) {
+        var physical = sceneId.indexOf('lover.physical.') === 0;
+        var speaker = Narrative.speakers[physical ? 'perola' : 'florai'];
+        section.appendChild(image(speaker.portraitPath, speaker.name + (physical ? ' incorporada à pedra' : ' incorporado às raízes'), 'speaker-portrait lover-portrait'));
+        section.appendChild(el('div', 'prison-boundary ' + (physical ? 'stone' : 'roots'), physical ? 'Pedra da prisão sob o altar' : 'Raízes da figueira-prisão'));
+      }
+      var card = el('div', 'lover-card');
+      card.appendChild(heading(isLover ? speaker.name : 'A peça do mapa'));
+      card.appendChild(readingPassage(view));
+      if (state.mapPieceIds.length) {
+        var pieces = el('div', 'map-pieces'); pieces.setAttribute('aria-label', 'Peças do mapa');
+        state.mapPieceIds.forEach(function (id) { pieces.appendChild(el('span', 'map-piece', id === 'physical' ? 'Peça anã' : 'Peça élfica')); });
+        card.appendChild(pieces);
+      }
+      card.appendChild(readingActions(view)); section.appendChild(card); main.appendChild(section);
+    }
+    function councilStage(view) {
+      var section = el('section', 'council-screen');
+      section.appendChild(image(Narrative.backgrounds.council.path, 'Casa do Conselho', 'scene-background'));
+      if ((view.reading && view.reading.speakerId === 'andira') || state.seenPassageIds.indexOf('council.andira') >= 0) {
+        section.appendChild(image(Narrative.speakers.andira.portraitPath, 'Andirá somente no reflexo', 'speaker-portrait reflection-portrait'));
+      }
+      var party = el('div', 'council-party');
+      view.climaxHeroes.forEach(function (hero) { party.appendChild(image(hero.portraitPath, hero.name, 'expedition-portrait')); });
+      section.appendChild(party);
+      return section;
+    }
+    function renderCouncil(main, view) {
+      var section = councilStage(view), card = el('div', 'council-card');
+      card.appendChild(heading('A Casa do Conselho')); card.appendChild(readingPassage(view));
+      card.appendChild(readingActions(view)); section.appendChild(card); main.appendChild(section);
+    }
+    function renderClosingPassage(main, view) {
+      var section = el('section', 'closing-screen phase-' + view.phase);
+      var card = el('div', 'consequence-card');
+      var title = { memorial: 'Memorial', epilogue: 'Depois da expedição', automatic_retreat: 'Retorno obrigatório' }[view.phase];
+      if (!title) title = { bad: 'Afogados em terra seca', reunite: 'As duas margens', destroy: 'O medalhão destruído' }[view.ending];
+      card.appendChild(heading(title));
+      if (view.phase === 'memorial' && /^memorial\.H[1-8]$/.test(view.reading.passageId)) {
+        var heroId = view.reading.passageId.split('.')[1], hero = Data.heroes[heroId];
+        card.appendChild(image(hero.portraitPath, 'Retrato memorial de ' + hero.label, 'speaker-portrait memorial-portrait'));
+      }
+      card.appendChild(readingPassage(view));
+      card.appendChild(readingActions(view)); section.appendChild(card); main.appendChild(section);
+    }
+    function renderReading(main, view) {
+      if (['dungeon_intro', 'encounter_intro', 'approach_result'].indexOf(view.phase) >= 0) { renderExpedition(main, view); return; }
+      if (view.phase === 'death_result') { renderConsequence(main, view); return; }
+      if (view.phase === 'dungeon_complete') { renderLovers(main, view); return; }
+      if (view.phase === 'council') { renderCouncil(main, view); return; }
+      if (['ending', 'memorial', 'epilogue', 'automatic_retreat'].indexOf(view.phase) >= 0) { renderClosingPassage(main, view); return; }
+      var section = el('section', 'narrative-screen phase-' + view.phase);
+      var title = ({ intro: 'O convite de Ivaí', dungeon_complete: 'A peça do mapa', council: 'A Casa do Conselho', ending: 'O destino do medalhão', memorial: 'Memorial', epilogue: 'Depois da expedição', automatic_retreat: 'Retorno obrigatório' }[view.phase] || 'A expedição');
+      section.appendChild(heading(title));
+      var stage = el('div', 'narrative-stage');
+      var background = sceneBackground(view.reading.sceneId);
+      if (background) stage.appendChild(image(background, 'Cenário de ' + title, 'scene-background'));
+      var portrait = speakerPortrait(view.reading);
+      if (portrait) {
+        var portraitClass = view.reading.speakerId === 'andira' ? 'speaker-portrait reflection-portrait' : 'speaker-portrait';
+        stage.appendChild(image(portrait, view.reading.speakerName || 'Personagem', portraitClass));
+      }
+      stage.appendChild(readingPassage(view)); section.appendChild(stage);
+      section.appendChild(readingActions(view)); main.appendChild(section);
+    }
+    function renderHeroCard(hero, automatic, fading) {
+      var position = HERO_POSITIONS[hero.id];
+      var spot = el('div', 'hero-spot hero-spot-' + hero.id.toLowerCase());
+      spot.dataset.heroId = hero.id;
+      spot.style.setProperty('--hero-x', position[0] + '%');
+      spot.style.setProperty('--hero-y', position[1] + '%');
+      if (!hero.alive && !fading) {
+        spot.classList.add('is-empty');
+        spot.appendChild(el('span', 'sr-only', 'Lugar vazio'));
+        return spot;
+      }
+      var card = el('button', 'hero-card' + (hero.selected ? ' is-selected' : '') + (fading ? ' is-fading' : '') + (inspectedHeroId === hero.id && inspectionSuppressedId !== hero.id ? ' is-inspected' : ''));
+      card.type = 'button'; card.dataset.action = hero.alive && !automatic ? 'TOGGLE_HERO' : 'INSPECT_HERO'; card.dataset.value = hero.id;
+      card.dataset.heroId = hero.id; card.dataset.x = position[0]; card.dataset.y = position[1];
+      card.disabled = !hero.alive || fading;
+      card.tabIndex = hero.alive && !fading && rovingHeroId === hero.id ? 0 : -1;
+      card.setAttribute('aria-pressed', hero.selected ? 'true' : 'false');
+      card.setAttribute('aria-label', hero.name + ', ' + (hero.selected ? 'na expedição' : 'fora da expedição') + '. Inspecionar e ' + (automatic ? 'membro automático' : 'alternar participação'));
+      if (fading && absence) {
+        var remaining = Math.max(0, absence.deadline - Date.now());
+        card.style.setProperty('--absence-opacity', String(remaining / 1000));
+        card.style.setProperty('--absence-duration', remaining + 'ms');
+      }
+      card.appendChild(image(hero.portraitPath, 'Retrato de ' + hero.name, 'hero-portrait'));
+      if (hero.selected) card.appendChild(el('span', 'membership-label', 'Na expedição'));
+      var sheet = el('span', 'hero-sheet');
+      sheet.appendChild(el('strong', 'hero-sheet-name', hero.name));
+      [['Pronomes', hero.pronouns], ['Raça', hero.race], ['Ocupação', hero.profession], ['Estado', hero.selected ? 'Selecionado' : 'Disponível']].forEach(function (field) {
+        var row = el('span', 'hero-sheet-row'); row.appendChild(el('b', '', field[0])); row.appendChild(el('span', '', field[1])); sheet.appendChild(row);
+      });
+      sheet.appendChild(el('span', 'hero-summary', hero.summary));
+      var speech = el('span', 'hero-speech', '“' + hero.presentationText + '”');
+      if (position[0] >= 52) speech.classList.add('speech-left'); else speech.classList.add('speech-right');
+      card.appendChild(sheet); card.appendChild(speech); spot.appendChild(card);
+      return spot;
+    }
+    function renderFormation(main, view, effects) {
+      var section = el('section', 'formation-screen');
+      var title = heading('Preparação na taverna'); title.classList.add('sr-only'); section.appendChild(title);
+      var tavern = el('div', 'tavern-stage'); tavern.style.backgroundImage = 'url("assets/scenes/taverna.png")';
+      var fading = absence && Date.now() < absence.deadline ? absence.heroIds : [];
+      var firstLiving = view.heroes.filter(function (hero) { return hero.alive && fading.indexOf(hero.id) < 0; })[0];
+      if (!rovingHeroId || !view.heroes.some(function (hero) { return hero.id === rovingHeroId && hero.alive && fading.indexOf(hero.id) < 0; })) rovingHeroId = firstLiving && firstLiving.id;
+      view.heroes.forEach(function (hero) {
+        var renderedHero = view.formation.automatic && hero.alive ? Object.assign({}, hero, { selected: true }) : hero;
+        tavern.appendChild(renderHeroCard(renderedHero, view.formation.automatic, fading.indexOf(hero.id) >= 0));
+      });
+      section.appendChild(tavern);
+      var selected = view.selectedDestination && view.destinations[view.selectedDestination];
+      var summary = el('div', 'formation-summary');
+      summary.appendChild(el('strong', '', 'Expedição'));
+      summary.appendChild(el('span', '', view.formation.selectedHeroIds.length + ' de ' + view.formation.required + ' presentes'));
+      summary.appendChild(el('span', 'selected-destination', selected ? 'Destino: ' + selected.name : 'Destino ainda não escolhido'));
+      section.appendChild(summary);
+      var actions = el('div', 'scene-actions');
+      actions.appendChild(button('Consultar elenco', 'OPEN_ROSTER'));
+      actions.appendChild(button('Escolher destino', 'OPEN_DESTINATIONS'));
+      actions.appendChild(button('Partir', 'DEPART', undefined, 'primary-action'));
+      section.appendChild(actions); main.appendChild(section);
+    }
+    function renderDestinations(main, view) {
+      var dialog = el('dialog', 'overlay-panel destination-dialog'); dialog.setAttribute('aria-modal', 'true'); dialog.setAttribute('aria-labelledby', 'destination-dialog-title');
+      var close = button('Fechar', 'CLOSE_PANEL'); close.classList.add('dialog-close'); dialog.appendChild(close);
+      var title = heading('Escolher destino', 2); title.id = 'destination-dialog-title'; dialog.appendChild(title);
+      var cards = el('div', 'destination-grid');
+      Object.keys(view.destinations).forEach(function (id) {
+        var destination = view.destinations[id], card = el('article', 'destination-card status-' + destination.status);
+        if (destination.selected) {
+          card.classList.add('is-selected');
+          card.setAttribute('aria-label', destination.name + ', destino escolhido');
         }
-        dialog.close();
+        card.appendChild(image(destination.previewPath, destination.name, 'destination-preview'));
+        card.appendChild(el('h3', '', destination.name)); card.appendChild(el('p', '', destination.rumor));
+        var status = destination.status === 'available' ? 'Disponível' : (destination.status === 'completed' ? 'Concluído' : 'Bloqueado');
+        card.appendChild(el('p', 'destination-status', status));
+        if (destination.selected) card.appendChild(el('p', 'destination-selection', 'Destino escolhido'));
+        card.appendChild(el('p', 'destination-progress', 'Progresso conhecido: ' + destination.landmarks.traversed + '/' + destination.landmarks.total));
+        if (destination.lockReason) card.appendChild(el('p', 'destination-reason', destination.lockReason));
+        if (destination.status === 'available') card.appendChild(button('Escolher ' + destination.name, 'SELECT_DESTINATION', id));
+        cards.appendChild(card);
+      });
+      dialog.appendChild(cards); main.appendChild(dialog);
+    }
+    function renderRoster(main, view) {
+      var dialog = el('dialog', 'overlay-panel roster-dialog'); dialog.setAttribute('aria-modal', 'true'); dialog.setAttribute('aria-labelledby', 'roster-dialog-title');
+      var close = button('Fechar', 'CLOSE_PANEL'); close.classList.add('dialog-close'); dialog.appendChild(close);
+      var title = heading('Heróis', 2); title.id = 'roster-dialog-title'; dialog.appendChild(title);
+      var list = el('ul', 'roster-list');
+      view.heroes.forEach(function (hero) {
+        var item = el('li', hero.alive ? 'is-alive' : 'is-dead');
+        item.appendChild(image(hero.portraitPath, '', 'roster-portrait'));
+        var copy = el('div'); copy.appendChild(el('span', 'roster-state', hero.alive ? 'Vivo' : 'Morto'));
+        copy.appendChild(el('strong', '', hero.name)); copy.appendChild(el('span', '', hero.profession + ' ' + hero.race.toLowerCase()));
+        item.appendChild(copy); list.appendChild(item);
+      });
+      dialog.appendChild(list); main.appendChild(dialog);
+    }
+    function renderSacrifice(main, view) {
+      var section = el('section', 'sacrifice-screen');
+      var card = el('div', 'consequence-card'); section.appendChild(card);
+      var warning = heading('A escolha é irreversível', 1); warning.tabIndex = -1; card.appendChild(warning);
+      card.appendChild(el('p', 'irreversible-warning', 'A primeira pessoa ativada morrerá imediatamente para abrir a passagem. Não haverá confirmação ou retorno.'));
+      var choices = el('div', 'victim-grid');
+      view.victims.forEach(function (hero) {
+        var victim = button('', 'SELECT_VICTIM', hero.id, 'victim-card');
+        victim.appendChild(image(hero.portraitPath, '', 'victim-portrait'));
+        victim.appendChild(el('strong', '', 'Sacrificar ' + hero.name)); choices.appendChild(victim);
+      });
+      card.appendChild(choices); main.appendChild(section);
+      later(function () { if (warning.isConnected) warning.focus(); }, 0);
+    }
+    function renderFinalChoice(main, view) {
+      var section = councilStage(view), card = el('div', 'council-card final-choice-screen');
+      card.appendChild(heading('O destino do Medalhão das Duas Margens'));
+      card.appendChild(el('p', 'passage-text', 'As opiniões dos sobreviventes não votam nem bloqueiam Ivaí. A decisão é sua.'));
+      view.endingChoices.forEach(function (choice) { card.appendChild(button(choice.label, 'CHOOSE_ENDING', choice.id, 'ending-choice')); });
+      section.appendChild(card); main.appendChild(section);
+    }
+    function renderRetreat(main) {
+      var section = el('dialog', 'overlay-panel'); section.setAttribute('aria-modal', 'true');
+      section.appendChild(heading('Recuar para a taverna?', 2));
+      section.appendChild(el('p', '', 'Os encontros revelados e o maior progresso concluído serão preservados.'));
+      section.appendChild(button('Cancelar', 'CANCEL_RETREAT')); section.appendChild(button('Confirmar recuo', 'CONFIRM_RETREAT', undefined, 'primary-action'));
+      main.appendChild(section);
+    }
+    function renderComplete(main) {
+      var section = el('section', 'campaign-complete'); section.appendChild(heading('Campanha concluída'));
+      section.appendChild(el('p', 'lead', 'A história desta expedição terminou. Outro caminho exige uma campanha nova.'));
+      section.appendChild(button('Jogar novamente', 'NEW_CAMPAIGN', undefined, 'primary-action')); main.appendChild(section);
+    }
+    function renderInvalid(main) {
+      var section = el('section', 'fatal-screen'); section.appendChild(heading('O protótipo encontrou um estado inválido.'));
+      section.appendChild(el('p', '', 'Recarregue a página e registre a semente e a sequência de ações.'));
+      var reload = button('Recarregar a página', 'RELOAD'); section.appendChild(reload); main.appendChild(section);
+    }
+    function render(effects) {
+      if (destroyed) return;
+      renderGeneration += 1;
+      Array.prototype.forEach.call(root.querySelectorAll('img'), function (img) { img.onerror = null; });
+      Array.prototype.forEach.call(root.querySelectorAll('dialog[open]'), function (dialog) {
+        if (typeof dialog.close === 'function') dialog.close();
+        else dialog.removeAttribute('open');
+      });
+      root.textContent = '';
+      var main = el('main', 'game-shell'); renderHeader(main);
+      var view = Engine.derivePlayerView(state);
+      if (view.phase === 'ready') renderReady(main);
+      else if (view.phase === 'formation') renderFormation(main, view, effects);
+      else if (view.reading) renderReading(main, view);
+      else if (view.phase === 'dungeon_intro') renderExpedition(main, view);
+      else if (view.phase === 'encounter_choice') renderExpedition(main, view);
+      else if (view.phase === 'sacrifice_choice') renderSacrifice(main, view);
+      else if (view.phase === 'retreat_confirmation') renderRetreat(main);
+      else if (view.phase === 'final_choice') renderFinalChoice(main, view);
+      else if (view.phase === 'campaign_complete') renderComplete(main);
+      else renderInvalid(main);
+      if (lastRejectedAction) {
+        var live = el('p', 'action-feedback', lastRejectedAction.message); live.setAttribute('role', 'alert'); main.appendChild(live);
       }
-      if (target && target.isConnected) {
-        target.focus();
+      if (panel === 'destinations' && view.phase === 'formation') renderDestinations(main, view);
+      if (panel === 'roster' && view.phase !== 'ready' && view.phase !== 'invalid') renderRoster(main, view);
+      root.appendChild(main);
+      Array.prototype.forEach.call(root.querySelectorAll('dialog:not([open])'), function (dialog) {
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+        else dialog.setAttribute('open', '');
+      });
+      if (panel) {
+        var closeButton = root.querySelector('dialog[open] [data-action="CLOSE_PANEL"]');
+        if (closeButton) closeButton.focus();
+      } else if (panelTrigger) {
+        var restoredTrigger = root.querySelector('[data-action="' + panelTrigger + '"]');
+        if (restoredTrigger) restoredTrigger.focus();
+        panelTrigger = null;
       }
     }
-
+    function actionFromNode(node) {
+      var type = node.dataset.action, value = node.dataset.value;
+      if (type === 'SELECT_DESTINATION') return { type: type, dungeonId: value };
+      if (type === 'TOGGLE_HERO' || type === 'SELECT_VICTIM') return { type: type, heroId: value };
+      if (type === 'CHOOSE_APPROACH') return { type: type, approachId: value };
+      if (type === 'CHOOSE_ENDING') return { type: type, ending: value };
+      return { type: type };
+    }
+    function setInspection(heroId, suppress) {
+      inspectedHeroId = heroId;
+      inspectionSuppressedId = suppress ? heroId : null;
+      Array.prototype.forEach.call(root.querySelectorAll('.hero-card'), function (card) {
+        card.classList.toggle('is-inspected', card.dataset.heroId === heroId && inspectionSuppressedId !== heroId);
+      });
+    }
+    function activate(node, event) {
+      if (!node || !node.dataset.action) return;
+      var type = node.dataset.action;
+      if (type === 'OPEN_DESTINATIONS') { panelTrigger = type; panel = 'destinations'; render([]); return; }
+      if (type === 'OPEN_ROSTER') { panelTrigger = type; panel = 'roster'; render([]); return; }
+      if (type === 'CLOSE_PANEL') { panel = null; render([]); return; }
+      if (type === 'INSPECT_HERO') { setInspection(node.dataset.heroId || node.dataset.value, false); return; }
+      if (type === 'RELOAD') { global.location.reload(); return; }
+      var key = type + ':' + (node.dataset.value || ''); var now = event.timeStamp || Date.now();
+      if (lastActivation.key === key && now - lastActivation.at < 350) return;
+      lastActivation = { key: key, at: now };
+      var generation = renderGeneration;
+      if (!node.isConnected || generation !== renderGeneration) return;
+      dispatch(actionFromNode(node));
+    }
     function onClick(event) {
-      var trigger = event.target.closest('[data-action]');
-      if (!trigger || !root.contains(trigger)) {
-        return;
-      }
-      var action = trigger.dataset.action;
-      if (action === 'begin') {
-        submit({ type: 'BEGIN' }, { focusHeading: true, announce: 'Campanha iniciada.' });
-      } else if (action === 'continue-intro') {
-        submit({ type: 'CONTINUE_INTRO' }, { focusHeading: true, announce: 'Formação disponível.' });
-      } else if (action === 'toggle-hero') {
-        var heroId = trigger.dataset.id;
-        submit({ type: 'TOGGLE_HERO', heroId: heroId }, {
-          focusSelector: '[data-action="toggle-hero"][data-id="' + heroId + '"]',
-          announce: heroId + ' atualizado na formação.'
-        });
-      } else if (action === 'depart') {
-        submit({ type: 'DEPART' }, { focusHeading: true, announce: 'Expedição formada.' });
-      } else if (action === 'enter-dungeon') {
-        submit({ type: 'ENTER_DUNGEON' }, { focusHeading: true, announce: 'Posição alcançada.' });
-      } else if (action === 'choose-approach') {
-        submit({ type: 'CHOOSE_APPROACH', approachId: trigger.dataset.id }, { focusHeading: true, announceOutcome: true });
-      } else if (action === 'ack-success') {
-        submit({ type: 'ACK_SUCCESS' }, { focusHeading: true, announce: 'Posição concluída.' });
-      } else if (action === 'open-sacrifice') {
-        submit({ type: 'OPEN_SACRIFICE' }, { focusHeading: true, assert: 'Escolha obrigatória. Selecione um herói presente para o sacrifício.' });
-      } else if (action === 'select-victim') {
-        submit({ type: 'SELECT_VICTIM', heroId: trigger.dataset.id }, { assert: 'Confirmação de morte permanente.' });
-      } else if (action === 'cancel-sacrifice') {
-        submit({ type: 'CANCEL_SACRIFICE' }, { focusSelector: '[data-action="select-victim"][data-id="' + trigger.dataset.id + '"]', announce: 'Confirmação cancelada.' });
-      } else if (action === 'confirm-sacrifice') {
-        submit({ type: 'CONFIRM_SACRIFICE' }, { focusHeading: true, assert: 'Sacrifício confirmado. O elenco foi recalculado.' });
-      } else if (action === 'ack-death') {
-        submit({ type: 'ACK_DEATH' }, { focusHeading: true, announce: 'Consequência concluída.' });
-      } else if (action === 'request-retreat') {
-        submit({ type: 'REQUEST_RETREAT' }, { assert: 'Confirme o recuo para a cidade.' });
-      } else if (action === 'cancel-retreat') {
-        submit({ type: 'CANCEL_RETREAT' }, { focusSelector: '[data-action="request-retreat"]', announce: 'Recuo cancelado.' });
-      } else if (action === 'confirm-retreat') {
-        submit({ type: 'CONFIRM_RETREAT' }, { focusHeading: true, announce: 'A expedição voltou à cidade.' });
-      } else if (action === 'ack-auto-retreat') {
-        submit({ type: 'ACK_AUTO_RETREAT' }, { focusHeading: true, announce: 'Sobreviventes disponíveis para a próxima expedição.' });
-      } else if (action === 'ack-dungeon-complete') {
-        submit({ type: 'ACK_DUNGEON_COMPLETE' }, { focusHeading: true, announce: 'Preparação disponível.' });
-      } else if (action === 'new-campaign') {
-        submit({ type: 'NEW_CAMPAIGN' }, { focusHeading: true, announce: 'Nova campanha pronta para começar.' });
-      } else if (action === 'open-roster') {
-        restoreFocus = trigger;
-        ui.rosterOpen = true;
-        openRosterDialog();
-      } else if (action === 'close-roster') {
-        closeRoster();
-      } else if (action === 'reload') {
-        global.location.reload();
-      }
+      var target = event.target.closest('[data-action]');
+      if (!target || !root.contains(target)) return;
+      var openDialog = root.querySelector('dialog[open]');
+      if (openDialog && !openDialog.contains(target)) return;
+      if (target.classList.contains('passage-panel') && event.target.closest('button')) return;
+      if (target.classList.contains('passage-panel') && global.getSelection && String(global.getSelection())) return;
+      activate(target, event);
     }
-
-    function onCancel(event) {
-      if (event.target.id === 'roster-dialog') {
-        event.preventDefault();
-        closeRoster();
-      } else if (event.target.id === 'required-dialog') {
-        event.preventDefault();
-        if (state.phase === 'sacrifice_confirmation') {
-          var victimId = state.pendingVictimId;
-          submit({ type: 'CANCEL_SACRIFICE' }, { focusSelector: '[data-action="select-victim"][data-id="' + victimId + '"]', announce: 'Confirmação cancelada.' });
-        } else if (state.phase === 'retreat_confirmation') {
-          submit({ type: 'CANCEL_RETREAT' }, { focusSelector: '[data-action="request-retreat"]', announce: 'Recuo cancelado.' });
+    function onMouseOver(event) {
+      if (panel) return;
+      var card = event.target.closest && event.target.closest('.hero-card');
+      if (card && root.contains(card) && !card.disabled) setInspection(card.dataset.heroId, false);
+    }
+    function onMouseOut(event) {
+      var card = event.target.closest && event.target.closest('.hero-card');
+      if (!card || card !== root.querySelector('.hero-card.is-inspected')) return;
+      if (event.relatedTarget && card.contains(event.relatedTarget)) return;
+      if (document.activeElement !== card) setInspection(null, false);
+    }
+    function onFocusIn(event) {
+      var card = event.target.closest && event.target.closest('.hero-card');
+      if (!card || card.disabled) return;
+      rovingHeroId = card.dataset.heroId;
+      Array.prototype.forEach.call(root.querySelectorAll('.hero-card'), function (item) { item.tabIndex = item === card ? 0 : -1; });
+      if (inspectionSuppressedId !== card.dataset.heroId) setInspection(card.dataset.heroId, false);
+    }
+    function onFocusOut(event) {
+      var card = event.target.closest && event.target.closest('.hero-card');
+      if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+      if (!card.matches(':hover')) setInspection(null, false);
+    }
+    function onDialogCancel(event) {
+      if (!event.target || event.target.tagName !== 'DIALOG') return;
+      event.preventDefault();
+      if (panel) { panel = null; render([]); return; }
+      if (state.phase === 'retreat_confirmation') dispatch({ type: 'CANCEL_RETREAT' });
+    }
+    function directionalHero(card, key) {
+      var source = card.getBoundingClientRect();
+      var x = source.left + source.width / 2, y = source.top + source.height / 2;
+      return Array.prototype.slice.call(root.querySelectorAll('.hero-card:not([disabled])')).filter(function (candidate) {
+        if (candidate === card) return false;
+        var rect = candidate.getBoundingClientRect();
+        var dx = rect.left + rect.width / 2 - x, dy = rect.top + rect.height / 2 - y;
+        if (key === 'ArrowLeft') return dx < 0;
+        if (key === 'ArrowRight') return dx > 0;
+        if (key === 'ArrowUp') return dy < 0;
+        return dy > 0;
+      }).sort(function (a, b) {
+        var ar = a.getBoundingClientRect(), br = b.getBoundingClientRect();
+        var adx = ar.left + ar.width / 2 - x, ady = ar.top + ar.height / 2 - y;
+        var bdx = br.left + br.width / 2 - x, bdy = br.top + br.height / 2 - y;
+        return (adx * adx + ady * ady) - (bdx * bdx + bdy * bdy);
+      })[0] || null;
+    }
+    function onKeydown(event) {
+      if (event.repeat) return;
+      if (event.key === 'Escape' && panel) { event.preventDefault(); panel = null; render([]); return; }
+      if (event.key === 'Escape' && event.target.classList && event.target.classList.contains('hero-card')) { event.preventDefault(); setInspection(event.target.dataset.heroId, true); return; }
+      if (panel && event.key === 'Tab') {
+        var controls = Array.prototype.slice.call(root.querySelectorAll('dialog[open] button:not([disabled])'));
+        if (controls.length) {
+          var activeIndex = controls.indexOf(document.activeElement);
+          var nextIndex = event.shiftKey ? activeIndex - 1 : activeIndex + 1;
+          if (nextIndex < 0) nextIndex = controls.length - 1;
+          if (nextIndex >= controls.length) nextIndex = 0;
+          event.preventDefault(); controls[nextIndex].focus();
         }
-      }
-    }
-
-    function onChange(event) {
-      var control = event.target;
-      if (!control || !control.matches('[data-destination-control]') || !root.contains(control)) {
         return;
       }
-      submit({ type: 'SELECT_DESTINATION', dungeonId: control.value }, {
-        focusSelector: '[data-destination-control][value="' + control.value + '"]',
-        announce: 'Caminho escolhido: ' + (Data.destinations[control.value] ? Data.destinations[control.value].name : control.value) + '.'
-      });
-    }
-
-    function failOptionalImage(image) {
-      if (!image || image.tagName !== 'IMG' || !image.hasAttribute('data-optional-image')) {
+      if (!panel && /^Arrow(Left|Right|Up|Down)$/.test(event.key) && event.target.classList && event.target.classList.contains('hero-card')) {
+        var nextCard = directionalHero(event.target, event.key);
+        if (nextCard) { event.preventDefault(); nextCard.focus(); }
         return;
       }
-      if (image.dataset.optionalImageFailed === 'true') {
-        return;
-      }
-      image.dataset.optionalImageFailed = 'true';
-      if (image.optionalImageTimeout) {
-        global.clearTimeout(image.optionalImageTimeout);
-        image.optionalImageTimeout = null;
-      }
-      var region = image.closest('[data-image-region]');
-      if (region) {
-        region.classList.add('image-fallback');
-      }
-      var path = image.getAttribute('src') || 'sem caminho';
-      image.remove();
-      console.warn('optional_image_failed', path);
+      if (event.key === 'Enter' && state.reading && !event.target.closest('button')) { event.preventDefault(); dispatch({ type: 'ADVANCE_TEXT' }); }
     }
-
-    function onOptionalImageError(event) {
-      failOptionalImage(event.target);
-    }
-
-    function monitorOptionalImages() {
-      Array.prototype.forEach.call(root.querySelectorAll('img[data-optional-image]'), function (image) {
-        if (image.optionalImageTimeout || image.complete) {
-          return;
-        }
-        image.addEventListener('load', function () {
-          if (image.optionalImageTimeout) {
-            global.clearTimeout(image.optionalImageTimeout);
-            image.optionalImageTimeout = null;
-          }
-        }, { once: true });
-        image.optionalImageTimeout = global.setTimeout(function () {
-          if (image.isConnected && !image.complete) {
-            failOptionalImage(image);
-          }
-        }, OPTIONAL_IMAGE_TIMEOUT_MS);
-      });
-    }
-
-    buildRoot();
-    root.addEventListener('click', onClick);
-    root.addEventListener('change', onChange);
-    root.addEventListener('cancel', onCancel, true);
-    root.addEventListener('error', onOptionalImageError, true);
-
-    var catalogValidation = Engine.validateCatalog(Data);
-    if (!catalogValidation.ok) {
-      state = Engine.enterInvalid(state, catalogValidation.violations);
-      logInvalidState();
-    } else {
-      var initialStateValidation = Engine.validateState(state);
-      if (!initialStateValidation.ok) {
-        state = Engine.enterInvalid(state, initialStateValidation.violations);
-        logInvalidState();
-      }
-    }
-    render();
-
-    qaSession = Object.freeze({
-      setSeed: setPendingSeed,
-      snapshot: qaSnapshot,
-      validate: validateCampaign
-    });
-    activeQASession = qaSession;
-
-    return Object.freeze({
-      dispatch: function (action) {
-        return submit(action, { focusHeading: true });
-      },
-      getState: function () {
-        return state;
-      },
+    root.addEventListener('click', onClick); root.addEventListener('keydown', onKeydown);
+    root.addEventListener('cancel', onDialogCancel, true);
+    root.addEventListener('mouseover', onMouseOver); root.addEventListener('mouseout', onMouseOut);
+    root.addEventListener('focusin', onFocusIn); root.addEventListener('focusout', onFocusOut);
+    var controller = {
+      dispatch: dispatch,
+      getState: function () { return state; },
       destroy: function () {
-        if (destroyed) {
-          return;
-        }
+        if (destroyed) return;
         destroyed = true;
-        if (activeQASession === qaSession) {
-          activeQASession = null;
+        Array.prototype.forEach.call(root.querySelectorAll('dialog[open]'), function (dialog) {
+          if (typeof dialog.close === 'function') dialog.close();
+          else dialog.removeAttribute('open');
+        });
+        clearAbsence(); ownedTimers.slice().forEach(cancelTimer);
+        if (mediaQuery) {
+          if (mediaQuery.removeEventListener) mediaQuery.removeEventListener('change', onMotionChange);
+          else if (mediaQuery.removeListener) mediaQuery.removeListener(onMotionChange);
         }
-        root.removeEventListener('click', onClick);
-        root.removeEventListener('change', onChange);
-        root.removeEventListener('cancel', onCancel, true);
-        root.removeEventListener('error', onOptionalImageError, true);
-        var dialog = root.querySelector('#roster-dialog');
-        if (dialog && dialog.open) {
-          dialog.close();
-        }
-        var requiredDialog = root.querySelector('#required-dialog');
-        if (requiredDialog && requiredDialog.open) {
-          requiredDialog.close();
-        }
-        root.textContent = '';
+        root.removeEventListener('click', onClick); root.removeEventListener('keydown', onKeydown);
+        root.removeEventListener('cancel', onDialogCancel, true);
+        root.removeEventListener('mouseover', onMouseOver); root.removeEventListener('mouseout', onMouseOut);
+        root.removeEventListener('focusin', onFocusIn); root.removeEventListener('focusout', onFocusOut);
+        Array.prototype.forEach.call(root.querySelectorAll('img'), function (img) { img.onerror = null; });
+        panel = null; root.textContent = '';
+        if (activeQA && activeQA.controller === controller) activeQA = null;
       }
-    });
+    };
+    activeQA = { controller: controller, setSeed: setSeed, snapshot: makeSnapshot, validate: validate };
+    render([]);
+    return controller;
   }
 
-  /** @typedef {'H1'|'H2'|'H3'|'H4'|'H5'|'H6'|'H7'|'H8'} HeroId */
-  /** @typedef {'physical'|'supernatural'|'final'} DungeonId */
-  /** @typedef {'A1'|'A2'|'A3'|'A4'|'A5'|'A6'|'A7'|'A8'|'B1'|'B2'|'B3'|'B4'|'B5'|'B6'|'B7'|'B8'} EncounterId */
-  /** @typedef {'strength'|'dexterity'|'perception'|'athletics'|'survival'|'knowledge'|'will'|'occultism'} CompetencyId */
-  /**
-   * @typedef {'A1-1'|'A1-2'|'A1-3'|'A2-1'|'A2-2'|'A2-3'|'A3-1'|'A3-2'|'A3-3'|'A4-1'|'A4-2'|'A4-3'|
-   * 'A5-1'|'A5-2'|'A5-3'|'A6-1'|'A6-2'|'A6-3'|'A7-1'|'A7-2'|'A7-3'|'A8-1'|'A8-2'|'A8-3'|
-   * 'B1-1'|'B1-2'|'B1-3'|'B2-1'|'B2-2'|'B2-3'|'B3-1'|'B3-2'|'B3-3'|'B4-1'|'B4-2'|'B4-3'|
-   * 'B5-1'|'B5-2'|'B5-3'|'B6-1'|'B6-2'|'B6-3'|'B7-1'|'B7-2'|'B7-3'|'B8-1'|'B8-2'|'B8-3'} ApproachId
-   */
-  /**
-   * @typedef {'ready'|'intro'|'formation'|'dungeon_intro'|'encounter_choice'|'approach_result'|
-   * 'sacrifice_choice'|'sacrifice_confirmation'|'death_result'|'retreat_confirmation'|
-   * 'automatic_retreat'|'dungeon_complete'|'victory'|'defeat'|'invalid'} CampaignPhase
-   */
-  /**
-   * @typedef {{type: 'BEGIN', seed: number}|
-   * {type: 'TOGGLE_HERO', heroId: HeroId}|
-   * {type: 'SELECT_DESTINATION', dungeonId: DungeonId}|
-   * {type: 'SELECT_VICTIM', heroId: HeroId}|
-   * {type: 'CHOOSE_APPROACH', approachId: ApproachId}|
-   * {type: ('CONTINUE_INTRO'|'DEPART'|'ENTER_DUNGEON'|'ACK_SUCCESS'|'OPEN_SACRIFICE'|
-   * 'CANCEL_SACRIFICE'|'CONFIRM_SACRIFICE'|'ACK_DEATH'|'REQUEST_RETREAT'|'CANCEL_RETREAT'|
-   * 'CONFIRM_RETREAT'|'ACK_AUTO_RETREAT'|'ACK_DUNGEON_COMPLETE'|'NEW_CAMPAIGN')}} GameAction
-   */
-  /** @typedef {Readonly<{encounterId: EncounterId, approachId: ApproachId, competencyId: CompetencyId,
-   * holderHeroIds: readonly HeroId[], success: boolean, resultText: string, victimId: (HeroId|null)}>} PendingOutcome */
-  /**
-   * @typedef {Readonly<({sequence: number, type: 'campaign_started', seed: number}|
-   * {sequence: number, type: 'formation_opened', availableDestinations: readonly DungeonId[]}|
-   * {sequence: number, type: 'destination_selected', dungeon: DungeonId}|
-   * {sequence: number, type: 'formation_selection_changed', heroId: HeroId, selected: boolean}|
-   * {sequence: number, type: 'party_formed', dungeon: DungeonId, heroes: readonly HeroId[]}|
-   * {sequence: number, type: ('encounter_revealed'|'encounter_revisited'), dungeon: DungeonId, position: number, encounterId: EncounterId}|
-   * {sequence: number, type: 'approach_resolved', dungeon: DungeonId, position: number, encounterId: EncounterId, approachId: ApproachId, competency: CompetencyId, success: boolean}|
-   * {sequence: number, type: ('sacrifice_choice_opened'|'sacrifice_confirmation_cancelled'), encounterId: EncounterId}|
-   * {sequence: number, type: ('sacrifice_victim_selected'|'hero_sacrificed'), encounterId: EncounterId, heroId: HeroId}|
-   * {sequence: number, type: ('party_retreated'|'dungeon_completed'|'dungeon_completion_acknowledged'|'automatic_retreat'|'automatic_retreat_acknowledged'), dungeon: DungeonId}|
-   * {sequence: number, type: 'position_advanced', dungeon: DungeonId, position: number}|
-   * {sequence: number, type: 'retreat_requested', dungeon: DungeonId, position: number, fromPhase: ('dungeon_intro'|'encounter_choice')}|
-   * {sequence: number, type: 'retreat_cancelled', dungeon: DungeonId, position: number, returnPhase: ('dungeon_intro'|'encounter_choice')}|
-   * {sequence: number, type: 'campaign_won', survivors: readonly HeroId[]}|
-   * {sequence: number, type: 'campaign_lost'})>} ActionEvent
-   */
-  /** @typedef {Readonly<Record<string, unknown>>} DiagnosticContext */
-  /** @typedef {Readonly<{code: string, message: string, context: DiagnosticContext}>} InvariantViolation */
-  /** @typedef {Readonly<Record<string, unknown>>} AppEffect */
-  /** @typedef {Readonly<{code: string, message: string, context: DiagnosticContext}>} EngineError */
-  /** @typedef {Readonly<{
-   * physical: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>,
-   * supernatural: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>,
-   * final: Readonly<[(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null),(EncounterId|null)]>
-   * }>} CampaignAssignments */
-  /**
-   * @typedef {Readonly<{version: 2, phase: CampaignPhase, seed: (number|null), rngState: (number|null),
-   * selectedDungeonId: (DungeonId|null), dungeonId: (DungeonId|null), position: (number|null), draftPartyIds: readonly HeroId[],
-   * partyIds: readonly HeroId[], deadHeroIds: readonly HeroId[], assignments: CampaignAssignments,
-   * routeProgress: Readonly<Record<DungeonId, number>>,
-   * pendingOutcome: (PendingOutcome|null), pendingVictimId: (HeroId|null), sequence: number,
-   * actionHistory: readonly ActionEvent[], invariantViolations: readonly InvariantViolation[]}>} CampaignState
-   */
-  /**
-   * @typedef {Readonly<{ok: boolean, state?: CampaignState, effects?: readonly AppEffect[],
-   * error?: EngineError}>} EngineResult
-   */
-  /**
-   * @typedef {Object} ExpeditionController
-   * @property {(action: GameAction) => EngineResult} dispatch
-   * @property {() => (CampaignState|null)} getState
-   * @property {() => void} destroy
-   */
-  /** @type {Readonly<{createController: (root: HTMLElement, initialState?: CampaignState) => ExpeditionController}>} */
-  var ExpeditionApp = Object.freeze({ createController: createController });
-  global.ExpeditionApp = ExpeditionApp;
-
-  function mountEntry() {
+  var qa = {};
+  Object.defineProperties(qa, {
+    setSeed: { enumerable: true, value: function (seed) { return activeQA ? activeQA.setSeed(seed) : deepFreeze({ ok: false, error: { code: 'campaign_unavailable', message: 'A campanha ainda não está disponível.' } }); } },
+    snapshot: { enumerable: true, value: function () { return activeQA ? activeQA.snapshot() : null; } },
+    validate: { enumerable: true, value: function () { return activeQA ? activeQA.validate() : deepFreeze({ ok: false, violations: [{ code: 'campaign_unavailable', message: 'A campanha ainda não está disponível.', context: {} }] }); } }
+  });
+  global.expeditionQA = deepFreeze(qa);
+  global.ExpeditionApp = deepFreeze({ createController: createController });
+  document.addEventListener('DOMContentLoaded', function () {
     var root = document.getElementById('app');
-    if (root && !root.dataset.mounted) {
-      root.dataset.mounted = 'true';
-      createController(root);
+    if (!root) return;
+    var catalog = Engine.validateCatalog(Data, Narrative);
+    var controller = createController(root);
+    if (!catalog.ok) {
+      var invalid = clone(controller.getState()); invalid.phase = 'invalid'; invalid.invariantViolations = clone(catalog.violations);
+      controller.destroy(); createController(root, deepFreeze(invalid));
     }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mountEntry, { once: true });
-  } else {
-    mountEntry();
-  }
+  });
 })(window);

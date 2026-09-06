@@ -1,0 +1,402 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06T00:56:22.221Z",
+  "status": "pass",
+  "total": 36,
+  "passed": 36,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "session matrix has eight rows",
+      "ok": true,
+      "detail": {
+        "rows": 8
+      }
+    },
+    {
+      "name": "session matrix has no Pending",
+      "ok": true,
+      "detail": [
+        "| 1 | CH-v3-campaign-terminal-matrix | J-complete-campaign / CAM, ENC, FOR | Caio | Feature Tour | Pass | | |",
+        "| 2 | CH-v3-first-return-loss | J-complete-campaign / ENC, FOR, CAM | Lia | Interrupt Tour | Pass | | |",
+        "| 3 | CH-v3-keyboard-desktop | J-complete-campaign / ACC, FOR, ENC, CAM | Joana | Feature Tour | Pass | | |",
+        "| 4 | CH-v3-human-voiceover | J-complete-campaign / ACC, FOR, ENC, CAM | Joana + pessoa operadora | Feature Tour | Blocked (needs human verify) | | |",
+        "| 5 | CH-v3-human-editorial-art | J-complete-campaign / ART, ENC, CAM | Rui + pessoa revisora | Locale Tour | Blocked (needs human verify) | | |",
+        "| 6 | CH-v3-seeded-public-contract | J-reproduce-campaign / ACC, CAM, FOR, ENC | Caio | Garbage Tour | Pass | | |",
+        "| 7 | CH-v3-offline-local-canary | J-local-offline-launch / LOC, ART | Rui | Network Tour | Pass | | |",
+        "| 8 | CH-v3-browser-manifest-canary | J-run-browser-contract / LOC, ACC | Caio | Feature Tour | Pass | | |"
+      ]
+    },
+    {
+      "name": "session matrix has no Skipped",
+      "ok": true,
+      "detail": [
+        "| 1 | CH-v3-campaign-terminal-matrix | J-complete-campaign / CAM, ENC, FOR | Caio | Feature Tour | Pass | | |",
+        "| 2 | CH-v3-first-return-loss | J-complete-campaign / ENC, FOR, CAM | Lia | Interrupt Tour | Pass | | |",
+        "| 3 | CH-v3-keyboard-desktop | J-complete-campaign / ACC, FOR, ENC, CAM | Joana | Feature Tour | Pass | | |",
+        "| 4 | CH-v3-human-voiceover | J-complete-campaign / ACC, FOR, ENC, CAM | Joana + pessoa operadora | Feature Tour | Blocked (needs human verify) | | |",
+        "| 5 | CH-v3-human-editorial-art | J-complete-campaign / ART, ENC, CAM | Rui + pessoa revisora | Locale Tour | Blocked (needs human verify) | | |",
+        "| 6 | CH-v3-seeded-public-contract | J-reproduce-campaign / ACC, CAM, FOR, ENC | Caio | Garbage Tour | Pass | | |",
+        "| 7 | CH-v3-offline-local-canary | J-local-offline-launch / LOC, ART | Rui | Network Tour | Pass | | |",
+        "| 8 | CH-v3-browser-manifest-canary | J-run-browser-contract / LOC, ACC | Caio | Feature Tour | Pass | | |"
+      ]
+    },
+    {
+      "name": "human-only rows stay blocked",
+      "ok": true,
+      "detail": [
+        "| 1 | CH-v3-campaign-terminal-matrix | J-complete-campaign / CAM, ENC, FOR | Caio | Feature Tour | Pass | | |",
+        "| 2 | CH-v3-first-return-loss | J-complete-campaign / ENC, FOR, CAM | Lia | Interrupt Tour | Pass | | |",
+        "| 3 | CH-v3-keyboard-desktop | J-complete-campaign / ACC, FOR, ENC, CAM | Joana | Feature Tour | Pass | | |",
+        "| 4 | CH-v3-human-voiceover | J-complete-campaign / ACC, FOR, ENC, CAM | Joana + pessoa operadora | Feature Tour | Blocked (needs human verify) | | |",
+        "| 5 | CH-v3-human-editorial-art | J-complete-campaign / ART, ENC, CAM | Rui + pessoa revisora | Locale Tour | Blocked (needs human verify) | | |",
+        "| 6 | CH-v3-seeded-public-contract | J-reproduce-campaign / ACC, CAM, FOR, ENC | Caio | Garbage Tour | Pass | | |",
+        "| 7 | CH-v3-offline-local-canary | J-local-offline-launch / LOC, ART | Rui | Network Tour | Pass | | |",
+        "| 8 | CH-v3-browser-manifest-canary | J-run-browser-contract / LOC, ACC | Caio | Feature Tour | Pass | | |"
+      ]
+    },
+    {
+      "name": "scenario ACC-accessibility-diagnostics.md",
+      "ok": true,
+      "detail": {
+        "expected": "pass",
+        "actual": "pass"
+      }
+    },
+    {
+      "name": "scenario ART-encounter-art-content.md",
+      "ok": true,
+      "detail": {
+        "expected": "blocked-verify",
+        "actual": "blocked-verify"
+      }
+    },
+    {
+      "name": "scenario CAM-dungeon-progression-outcomes.md",
+      "ok": true,
+      "detail": {
+        "expected": "pass",
+        "actual": "pass"
+      }
+    },
+    {
+      "name": "scenario ENC-encounter-consequences.md",
+      "ok": true,
+      "detail": {
+        "expected": "pass",
+        "actual": "pass"
+      }
+    },
+    {
+      "name": "scenario FOR-formation-roster.md",
+      "ok": true,
+      "detail": {
+        "expected": "pass",
+        "actual": "pass"
+      }
+    },
+    {
+      "name": "scenario LOC-local-launch-session.md",
+      "ok": true,
+      "detail": {
+        "expected": "pass",
+        "actual": "pass"
+      }
+    },
+    {
+      "name": "browser suite 168/168",
+      "ok": true,
+      "detail": {
+        "title": "PASS — 168/168 testes",
+        "summary": "168 aprovados, 0 falharam, 168 no total.",
+        "status": "pass",
+        "total": 168,
+        "passed": 168,
+        "failed": 0,
+        "manifestTotal": 168,
+        "v2": 158,
+        "base": 10,
+        "unique": 168,
+        "failures": []
+      }
+    },
+    {
+      "name": "manifest composition",
+      "ok": true,
+      "detail": {
+        "title": "PASS — 168/168 testes",
+        "summary": "168 aprovados, 0 falharam, 168 no total.",
+        "status": "pass",
+        "total": 168,
+        "passed": 168,
+        "failed": 0,
+        "manifestTotal": 168,
+        "v2": 158,
+        "base": 10,
+        "unique": 168,
+        "failures": []
+      }
+    },
+    {
+      "name": "browser console clean",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "visual pairs 252/252",
+      "ok": true,
+      "detail": {
+        "generated_at": "2026-09-06T00:41:43.302Z",
+        "total": 252,
+        "passed": 252,
+        "failed": 0,
+        "validator": "/Users/edney/projects/coreto/gamejam-vn-terror/.agents/skills/eng/eng-ui-screenshot/scripts/validate-visual-contract.mjs"
+      }
+    },
+    {
+      "name": "browser-manifest-canaries.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "keyboard-size-probes.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "offline-local-canary.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "seeded-public-contract.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "pointer-overlap-probe.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "reduced-motion-slot-probe.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "three negative runner canaries failed attributably",
+      "ok": true,
+      "detail": {
+        "missingManifest": 1,
+        "duplicateManifest": 3,
+        "missingScript": 13
+      }
+    },
+    {
+      "name": "supervisor-keyboard-zoom/summary.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass",
+        "changed_sources": []
+      }
+    },
+    {
+      "name": "supervisor-keyboard-zoom/summary.json source hashes current",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "supervisor-final-supplements/summary.json accepted",
+      "ok": true,
+      "detail": {
+        "status": "pass",
+        "changed_sources": [],
+        "owned_context_closed": true
+      }
+    },
+    {
+      "name": "supervisor-final-supplements/summary.json source hashes current",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "final supplement keyboard-loss-reduced-motion.json",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "final supplement reduced-motion-exact-dom.json",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "final supplement seed-repeatability-prefix.json",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "final supplement seen-text-boundaries.json",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "final supplement seen-text-revisit.json",
+      "ok": true,
+      "detail": {
+        "status": "pass"
+      }
+    },
+    {
+      "name": "seed prefix exact equality",
+      "ok": true,
+      "detail": {
+        "equal": true,
+        "fields": 28,
+        "sequence": 19
+      }
+    },
+    {
+      "name": "scenario-area reconciliation is not accepted as lens pass",
+      "ok": true,
+      "detail": {
+        "status": "scenario_reconciliation_only",
+        "acceptance": "not_accepted_as_experiential_lens_pass"
+      }
+    },
+    {
+      "name": "two real experiential-lens journey rewalks",
+      "ok": true,
+      "detail": [
+        {
+          "id": "J-complete-campaign",
+          "lenses": {
+            "usability": "pass",
+            "accessibility": "pass",
+            "perceivedPerformance": "pass",
+            "compatibility": "pass",
+            "errorRecoverability": "pass",
+            "productionParity": "pass"
+          }
+        },
+        {
+          "id": "J-reproduce-campaign",
+          "lenses": {
+            "usability": "pass",
+            "accessibility": "pass",
+            "perceivedPerformance": "pass",
+            "compatibility": "pass",
+            "errorRecoverability": "pass",
+            "productionParity": "pass"
+          }
+        }
+      ]
+    },
+    {
+      "name": "experiential rewalk sessions were unique and closed",
+      "ok": true,
+      "detail": {
+        "ownership": {
+          "attemptId": "1788655802329-31026",
+          "sessionPrefix": "task05-lens-",
+          "closePolicy": "finally, owned sessions only",
+          "mutatingRetryPolicy": "none"
+        },
+        "closedOwnedSessions": [
+          {
+            "session": "task05-lens-complete-1788655802329-31026",
+            "status": 0,
+            "stdout": "✓ Browser closed",
+            "stderr": ""
+          },
+          {
+            "session": "task05-lens-reproduce-a-1788655802329-31026",
+            "status": 0,
+            "stdout": "✓ Browser closed",
+            "stderr": ""
+          },
+          {
+            "session": "task05-lens-reproduce-b-1788655802329-31026",
+            "status": 0,
+            "stdout": "✓ Browser closed",
+            "stderr": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "experiential rewalk source hashes current",
+      "ok": true,
+      "detail": [
+        "prototype/index.html",
+        "prototype/app.js",
+        "prototype/game.js",
+        "prototype/data.js",
+        "prototype/narrative.js",
+        "prototype/styles.css"
+      ]
+    },
+    {
+      "name": "experiential endpoints accepted",
+      "ok": true,
+      "detail": {
+        "complete": {
+          "phase": "campaign_complete",
+          "sequence": 119,
+          "ending": "destroy",
+          "deadHeroes": [
+            "H4",
+            "H7",
+            "H8"
+          ],
+          "validation": {
+            "ok": true,
+            "violations": []
+          }
+        },
+        "reproduceEqual": true,
+        "reload": {
+          "label": "literal-reload-clean-state",
+          "observedAt": "2026-09-06T00:51:23.462Z",
+          "phase": "ready",
+          "sequence": 0,
+          "validation": {
+            "ok": true,
+            "violations": []
+          },
+          "headingCount": 2,
+          "visibleButtonNames": [
+            "Jogar"
+          ],
+          "activeElement": {
+            "tag": "BODY",
+            "action": null,
+            "text": "Afogados em Terra SecaUma campanha de horror e responsabilidadeVisual novel de h"
+          },
+          "horizontalOverflow": false,
+          "externalResources": [],
+          "bodyText": "AFOGADOS EM TERRA SECA\n\nUma campanha de horror e responsabilidade\n\nVISUAL NOVEL DE HORROR\n\nAfogados em Terra Seca\nClassificação e avisos de conteúdo\n\nIndicado para maiores de 16 anos. Contém morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre povos fantásticos e horror psicológico.\n\nJogar"
+        }
+      }
+    }
+  ]
+}

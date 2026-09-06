@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "sourceSession": "task05-reduced-loss",
+  "driver": "agent-browser read-only DOM and public QA observation after native pointer journey",
+  "motionPreference": "reduced",
+  "reducedMotion": true,
+  "emptySlots": [
+    { "hero": "H4", "text": "Lugar vazio", "animationDuration": "0s", "transitionDuration": "0s", "opacity": "1" },
+    { "hero": "H7", "text": "Lugar vazio", "animationDuration": "0s", "transitionDuration": "0s", "opacity": "1" },
+    { "hero": "H8", "text": "Lugar vazio", "animationDuration": "0s", "transitionDuration": "0s", "opacity": "1" }
+  ],
+  "presentedDeaths": ["H4", "H7", "H8"],
+  "validation": { "ok": true, "violations": [] },
+  "status": "pass"
+}

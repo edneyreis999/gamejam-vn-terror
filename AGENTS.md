@@ -23,6 +23,7 @@
 
 # Gestão no Trello
 
+- Se o MCP do Trello retornar `unauthorized_client: refresh_token is invalid`, renove a autenticação com `codex mcp login trello`. Copie a URL emitida pelo comando e execute `open '<URL>'` no macOS para abri-la no navegador padrão do usuário; não use um navegador de automação ou perfil isolado. Informe ao usuário que deve concluir a autorização na página aberta. Mantenha o comando de login em execução até receber `Successfully logged in to MCP server 'trello'` e então repita a operação que falhou. Use sempre a URL gerada pela tentativa atual de login.
 - Use o [quadro da game jam](https://trello.com/b/I0FkvVtc/gamejam-visual-novel) para gerenciar execução, ordem, responsáveis, dependências e prazos; mantenha decisões de design no GDD canônico.
 - Separe o backlog por `Narrativa`, `UI/UX`, `Technical Art` e `Programação`; mantenha cards executáveis acima dos cards `[ÉPICO]`.
 - Quebre cards grandes em cards executáveis de meio dia a dois dias e registre responsável, início, fim, dependências, paralelismo e entrega mínima.

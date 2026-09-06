@@ -2,46 +2,53 @@
 
 ```mermaid
 flowchart TD
-  A[Entry: abrir prototype/index.html por file URL e desligar rede] --> B[Abertura em português]
-  B --> C[Introdução neutra: preparar expedição]
-  C --> D[Preparação com três destinos diegéticos]
-  D --> E[Dois rádios iniciais desmarcados e Legado bloqueado]
-  E --> F[Escolher rota e heróis]
-  F --> G[True end: sessão jogável sem servidor ou rede]
-  F -->|imagem local bloqueada depois| H[Fallback mantém texto, estado e ações]
-  H --> G
-  D -->|recarregar ou fechar| X[Abandono: progresso descartado]
-  X --> A
+  A[Entry: abrir prototype/index.html por file URL com rede desligada] --> B[Avisos de conteúdo e Jogar em PT-BR]
+  B --> C[Prólogo e preparação sem recurso remoto]
+  C --> D[Dois caminhos iniciais disponíveis e Legado bloqueado]
+  D --> E[Escolher destino e heróis em qualquer ordem]
+  E --> F[Partir e ler o primeiro encontro]
+  F -->|imagem local indisponível| G[Fallback mantém texto, estado e ações]
+  F --> H[True end 1: primeira decisão continua operável offline]
+  G --> H
+  C -.->|recarregar ou fechar| X[Abandono: sessão em memória descartada]
+  F -.->|recarregar ou fechar| X
+  X --> Y[True end 2: nova abertura sem rota, mortes ou texto visto]
 ```
 
 ```yaml
 journey:
   id: J-local-offline-launch
   name: Abrir sessão local offline
-  value_statement: "O jogador inicia uma campanha local e escolhe seu primeiro caminho sem instalação, servidor ou rede."
+  value_statement: "O jogador inicia o protótipo e alcança uma decisão usando somente o pacote local."
   personas: ["Lia, primeira expedicionária", "Rui, revisor de conteúdo"]
   entry_points:
     - url: file:///…/prototype/index.html
       origin: direct
   actions:
     - step: 1
-      verb: Abrir o HTML local com rede desligada
-      expected_observable: A abertura e a introdução neutra aparecem em português sem recurso remoto
+      verb: Abrir index.html no Chrome desktop com rede desligada
+      expected_observable: Avisos, Jogar e prólogo aparecem em PT-BR sem HTTP(S), servidor ou instalação
     - step: 2
-      verb: Preparar a expedição
-      expected_observable: Caminho do Ferro e das Raízes e Caminho das Vozes e dos Espelhos aparecem como rádios desmarcados, enquanto Caminho do Legado aparece estático e bloqueado
+      verb: Preparar destino e equipe
+      expected_observable: Os dois caminhos iniciais estão disponíveis, Legado está bloqueado e nenhuma seleção é inventada
     - step: 3
-      verb: Escolher um caminho e três heróis
-      expected_observable: A ação de partir nomeia o caminho escolhido e continua operável sem rede
+      verb: Partir e chegar à primeira escolha com imagens disponíveis ou bloqueadas
+      expected_observable: Texto e controles bastam para compreender e continuar, sem fallback remoto
+    - step: 4
+      verb: Recarregar durante preparação ou encontro
+      expected_observable: A abertura reaparece e nenhuma campanha é retomada
   goal:
-    observable: A preparação permite iniciar qualquer caminho inicial usando somente arquivos relativos locais
+    observable: A primeira decisão de encontro permanece jogável offline e reload encerra a sessão anterior
     side_effects: [sessao-em-memoria]
-  true_end_state: Uma nova abertura volta ao início sem rota marcada, progresso anterior ou promessa de retomada
+  true_end_state: A escolha do primeiro encontro está operável offline; após abandono, uma nova abertura não contém estado anterior
   exit:
-    natural: limiar do caminho escolhido ou aba fechada
+    natural: primeira decisão operável ou nova abertura após reload
   abandonment:
     - at_step: 2
-      how: Recarregar ou fechar a aba durante a preparação
-      resume: Uma sessão limpa reapresenta os dois caminhos iniciais desmarcados
-  crosses: [arquivos-locais, preparacao, fallback-de-imagem]
+      how: Recarregar ou fechar durante preparação
+      resume: Nova sessão mostra avisos e nenhum destino selecionado
+    - at_step: 3
+      how: Recarregar ou fechar depois de partir
+      resume: Nova sessão começa antes do prólogo e não oferece continuação
+  crosses: [arquivos-locais, S01, S02, S03, S04, S05, S12]
 ```

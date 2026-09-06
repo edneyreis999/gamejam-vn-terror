@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <script>
+    window.__storageAttempts = 0;
+    ['localStorage', 'sessionStorage'].forEach(function (name) {
+      Object.defineProperty(window, name, { configurable: true, get: function () {
+        window.__storageAttempts += 1;
+        throw new Error(name + ' desabilitado pelo contrato de isolamento.');
+      }});
+    });
+  </script>
+  <script defer src="../../data.js"></script>
+  <script defer src="../../narrative.js"></script>
+  <script defer src="../../game.js"></script>
+  <script defer src="../../app.js"></script>
+  <script defer src="../boundary-recipes.js"></script>
+  <script defer src="isolated-session.js"></script>
+</head>
+<body><div id="app"></div></body>
+</html>

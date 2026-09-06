@@ -10,7 +10,7 @@ Os três links pertencem ao arquivo `game-jam-vn-terror`, cuja chave é `9wIDhV1
 | --- | --- | --- |
 | [Página — 0-1](https://www.figma.com/design/9wIDhV1yDkoQMNYZHbY9r7/game-jam-vn-terror?node-id=0-1&p=f) | `0:1` | Abriu exibindo a composição identificada como `menu-inicial`: ilustração em tons de cinza com personagens em uma sala ao redor de uma mesa. |
 | [Diálogo e escolhas — 34-186](https://www.figma.com/design/9wIDhV1yDkoQMNYZHbY9r7/game-jam-vn-terror?node-id=34-186) | `34:186` | Fundo de fantasia sombria, três personagens à esquerda, três opções à direita com bordas de pergaminho e caixa de texto clara na faixa inferior. |
-| [Quadro de personagens — 12-64](https://www.figma.com/design/9wIDhV1yDkoQMNYZHbY9r7/game-jam-vn-terror?node-id=12-64&p=f) | `12:64` | Quadro identificado como `Desktop - 1`, com várias composições de personagens e fichas em formato de coração. Abriu com zoom de 7%, insuficiente para ler os textos internos. |
+| [Quadro de personagens — 12-64](https://www.figma.com/design/9wIDhV1yDkoQMNYZHbY9r7/game-jam-vn-terror?node-id=12-64&p=f) | `12:64` | Quadro identificado como `Desktop - 1`, com várias composições de personagens e balões de conversa levemente estilizados, conforme esclarecimento do autor durante a entrevista. Abriu com zoom de 7%, insuficiente para ler os textos internos. |
 
 As descrições registram o que apareceu na sessão. O link de página `0:1` não deve ser tratado como um endereço exclusivo do frame `menu-inicial`.
 

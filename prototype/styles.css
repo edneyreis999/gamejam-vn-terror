@@ -58,6 +58,151 @@
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* V3 campaign surfaces */
+.game-shell {
+  height: 100vh;
+  color: #f3ead2;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(94, 76, 49, 0.3), transparent 38%),
+    repeating-linear-gradient(97deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 7px),
+    #0e0c0a;
+  display: grid;
+  grid-template-rows: 68px minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.game-shell .game-header { min-height: 0; display: flex; justify-content: space-between; gap: 2rem; align-items: center; padding: 0 3vw; border-bottom: 1px solid rgba(185, 139, 63, .5); background: rgba(16, 13, 10, .96); }
+.game-header p { margin: 0; }
+.eyebrow { color: #d6b96e; letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; }
+.campaign-status { color: #c8c1ad; font-size: .9rem; }
+.entry-screen, .campaign-complete, .fatal-screen { align-self: start; width: min(1040px, 82vw); max-height: calc(100vh - 120px); overflow: auto; margin: 1.35vh auto; padding: clamp(28px, 4vw, 64px); color: #17130f; text-align: center; background: repeating-linear-gradient(0deg, transparent 0 28px, rgba(70,50,28,.035) 28px 29px), #f4e8cd; border: 1px solid #8a6c3e; box-shadow: 0 14px 48px rgba(8,7,5,.78), inset 0 0 40px rgba(126,89,40,.13); }
+.entry-screen { position: relative; }
+.entry-screen::before { content: "16"; display: grid; place-items: center; width: 72px; height: 72px; margin: 0 auto 17px; color: #7f2826; border: 2px solid #7f2826; border-radius: 50%; font-family: Georgia, serif; font-weight: 700; }
+.entry-screen .scene-heading, .campaign-complete .scene-heading, .fatal-screen .scene-heading { max-width: none; color: #17130f; text-shadow: 0 1px #fff3d1; }
+.entry-screen .lead { margin: 0 0 8px; color: #73501f; font-family: Georgia, "Times New Roman", serif; font-size: clamp(11px, .85vw, 15px); font-weight: 700; line-height: normal; letter-spacing: .18em; text-transform: uppercase; }
+.campaign-complete .lead, .fatal-screen p { margin-inline: auto; color: #17130f; }
+.entry-screen .content-notices { max-width: 760px; margin: 18px auto 26px; padding: 0; border: 0; background: transparent; font-family: Georgia, "Times New Roman", serif; font-size: 15px; line-height: 1.42; }
+.entry-screen .content-notices h2 { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.scene-heading { font-family: Georgia, serif; color: #f3dfaa; margin: 0 0 1rem; line-height: 1.05; }
+.entry-screen .scene-heading { margin-bottom: 14px; font-size: clamp(34px, 4.2vw, 74px); line-height: .98; letter-spacing: 0; }
+.lead { max-width: 62ch; color: #ded5be; font-size: 1.08rem; line-height: 1.65; }
+.content-notices { margin: 2rem 0; padding: 1.25rem 1.5rem; border-left: .25rem solid #a78d54; background: #161711cc; line-height: 1.55; }
+.primary-action, .action-button, .approach-card, .victim-card, .ending-choice { border: 1px solid #a58b55; background: #24241d; color: #f6edd8; padding: .8rem 1.15rem; font: inherit; cursor: pointer; }
+.primary-action { background: #806333; color: #fff8e7; font-weight: 700; }
+.entry-screen .primary-action { min-height: 44px; padding: 11px 19px; font-family: Georgia, "Times New Roman", serif; line-height: normal; letter-spacing: .035em; background: #6c5028; border-color: #e0bd72; }
+.primary-action:hover, .action-button:hover, .approach-card:hover, .victim-card:hover, .ending-choice:hover { background: #9a7940; }
+button:focus-visible, [tabindex]:focus-visible { outline: .2rem solid #f6ce68; outline-offset: .2rem; }
+.scene-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.narrative-screen, .encounter-screen, .sacrifice-screen, .final-choice-screen, .formation-screen { max-width: 112rem; margin: 0 auto; }
+.narrative-screen { width: 100%; height: 100%; min-height: 0; padding: 2vh 4vw 1vh; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.narrative-screen > .scene-heading { margin-bottom: .5rem; font-size: clamp(1.5rem, 2.5vw, 2.4rem); line-height: 1.04; }
+.narrative-screen > .scene-actions { margin-top: .65rem; justify-content: flex-end; }
+.narrative-stage { position: relative; min-height: 0; overflow: hidden; border: 1px solid #6e6247; background: #111; box-shadow: 0 1.5rem 4rem #0008; display: grid; grid-template-columns: minmax(230px, 30vw) 1fr; gap: 18px; padding: 3vh 4vw; }
+.scene-background, .scene-background img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.scene-background img { object-fit: cover; opacity: .68; }
+.encounter-art { position: absolute; inset: 0; }
+.encounter-art img { width: 100%; height: 100%; object-fit: cover; opacity: .66; }
+.speaker-portrait { position: relative; inset: auto; z-index: 2; grid-column: 1; align-self: end; width: 100%; height: 100%; min-height: 0; }
+.speaker-portrait img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 16px 14px rgba(0,0,0,.72)); }
+.passage-panel { position: relative; z-index: 4; grid-column: 2; align-self: center; max-height: 52vh; overflow: auto; min-height: 8rem; padding: clamp(22px,3vw,46px); background: linear-gradient(135deg, #eee2bf 0, #d9c493 100%); color: #211b13; border: .25rem double #6e5330; box-shadow: 0 1rem 3rem #000a; cursor: pointer; }
+.passage-text { max-width: 82ch; font-family: Georgia, serif; font-size: clamp(1.05rem, 1.35vw, 1.35rem); line-height: 1.55; margin: .35rem 0; }
+.speaker-name { margin: 0; font-weight: 800; color: #583f22; }
+.passage-progress { margin: .25rem 0 0; text-align: right; font-size: .8rem; color: #62523c; }
+.tavern-stage { display: grid; grid-template-columns: repeat(4, minmax(10rem, 1fr)); gap: clamp(.75rem, 1.4vw, 1.4rem); min-height: 31rem; padding: 2rem; background-size: cover; background-position: center; border: 1px solid #706344; }
+.hero-card { position: relative; align-self: end; min-height: 19rem; padding: .5rem; border: 1px solid #7d7153; background: linear-gradient(#17181266, #11130ff2); color: #f3ead2; overflow: visible; }
+.hero-card.is-selected { border-color: #f1cb66; box-shadow: 0 0 0 .2rem #f1cb6655, 0 1rem 2rem #0008; transform: scale(1.05); transform-origin: bottom center; }
+.hero-card.is-fading { animation: tavern-absence 1s linear forwards; pointer-events: none; }
+.hero-card.is-dead { visibility: hidden; }
+.hero-portrait { height: 13rem; }
+.hero-portrait img { width: 100%; height: 100%; object-fit: contain; object-position: bottom center; }
+.hero-name, .hero-role { display: block; }
+.hero-name { font-family: Georgia, serif; color: #f3d895; font-size: 1.1rem; }
+.hero-role { color: #c9c0aa; font-size: .85rem; }
+.hero-sheet { display: none; position: absolute; z-index: 8; left: 50%; bottom: calc(100% + .75rem); width: min(24rem, 28vw); transform: translateX(-50%); padding: 1rem; background: #eadbb5; color: #2a2115; border: .18rem double #735735; text-align: left; box-shadow: 0 1rem 2rem #0009; }
+.hero-card:hover .hero-sheet, .hero-card:focus-visible .hero-sheet { display: block; }
+.hero-summary, .hero-speech { display: block; line-height: 1.4; }
+.hero-speech { margin-top: .65rem; font-family: Georgia, serif; font-style: italic; }
+.selected-destination { padding: .9rem 1rem; background: #171812; border-left: .25rem solid #c29f53; }
+.overlay-panel { position: fixed; z-index: 30; inset: 5vh 5vw; overflow: auto; padding: 1.5rem; background: #171711f8; border: .2rem solid #a58b55; box-shadow: 0 0 0 100vmax #000b; }
+.destination-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.destination-card { padding: 1rem; background: #24231d; border: 1px solid #6d624b; }
+.destination-preview { height: 12rem; }
+.destination-preview img { width: 100%; height: 100%; object-fit: cover; }
+.destination-status { color: #e0c783; }
+.roster-list { font-size: 1.1rem; line-height: 1.8; }
+.encounter-screen {
+  max-width: none; width: 100%; height: 100%; min-height: 0; padding: 3vh 3vw;
+  display: grid; grid-template-columns: 24vw minmax(0, 1fr) 31vw;
+  grid-template-rows: minmax(0, 1fr) auto; gap: 18px;
+}
+.expedition-party { display: flex; align-items: end; justify-content: center; gap: 1vw; min-width: 0; min-height: 0; }
+.expedition-portrait { width: min(8.2vw, 138px); min-width: 0; max-height: 100%; }
+.expedition-portrait img { display: block; width: 100%; max-height: 55vh; object-fit: contain; object-position: bottom; filter: drop-shadow(0 8px 6px #000); }
+.encounter-screen > .encounter-art { position: relative; inset: auto; min-height: 0; border: 1px solid rgba(231,212,173,.45); }
+.encounter-screen > .encounter-art img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 1; }
+.encounter-screen > .passage-panel, .encounter-copy {
+  grid-column: 1 / -1; align-self: stretch; min-height: 19vh; max-height: 30vh;
+  overflow: auto; padding: 16px 28px; color: #17130f; background: #f4e8cd;
+  border: 1px solid #8a6c3e; box-shadow: 0 14px 48px rgba(8,7,5,.78);
+}
+.encounter-screen .scene-heading { max-width: none; margin: 5px 0; font-size: clamp(18px, 1.35vw, 26px); line-height: 1.15; letter-spacing: 0; color: #17130f; }
+.encounter-screen .passage-text { max-width: none; margin: 5px 0 0; font-size: clamp(15px, 1vw, 19px); line-height: 1.42; }
+.encounter-screen .speaker-name { font-size: .8rem; }
+.encounter-progress { display: flex; justify-content: space-between; gap: 12px; color: #67553b; font-size: 12px; line-height: 1.4; }
+.approach-grid { min-height: 0; display: grid; align-content: center; gap: 14px; }
+.approach-grid .scene-actions { display: grid; margin: 0; }
+.approach-card { padding: 17px 20px; text-align: left; font-family: Georgia, serif; font-size: clamp(15px, 1vw, 19px); font-weight: 700; line-height: 1.4; background: #f4e8cd; color: #17130f; border: 2px solid #74552d; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.approach-card:hover, .victim-card:hover { background: #e7d4ad; }
+.sacrifice-screen, .consequence-screen { display: grid; place-items: center; width: 100%; height: 100%; min-height: 0; padding: 4vh 7vw; }
+.consequence-card { width: min(1040px, 84vw); max-height: 100%; overflow: auto; padding: clamp(28px, 4vw, 58px); color: #17130f; background: #f4e8cd; border: 1px solid #8a6c3e; box-shadow: 0 14px 48px rgba(8,7,5,.78); }
+.consequence-card .scene-heading { max-width: none; font-size: clamp(28px, 2.2vw, 42px); line-height: 1.08; color: #17130f; letter-spacing: 0; }
+.consequence-label { color: #73501f; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+.consequence-card .passage-panel { min-height: 0; max-height: none; padding: 0; border: 0; box-shadow: none; background: transparent; }
+.consequence-card .scene-actions { justify-content: start; }
+.irreversible-warning { max-width: 65ch; padding: 14px 18px; border-left: 7px solid #7f2826; background: rgba(127,40,38,.1); }
+.game-shell .victim-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 22px 0 0; }
+.victim-card { min-width: 0; padding: 16px; color: #17130f; background: #ead9b8; border: 1px solid #8f6d3d; }
+.victim-portrait { height: min(25vh, 230px); margin-bottom: 8px; }
+.victim-portrait img { width: 100%; height: 100%; object-fit: contain; }
+.closing-screen { display: grid; place-items: center; width: 100%; height: 100%; min-height: 0; padding: 4vh 6vw; }
+.closing-screen .consequence-card { text-align: center; }
+.closing-screen .scene-actions { justify-content: center; }
+.closing-screen .memorial-portrait { width: min(112px, 12vw); height: min(132px, 18vh); margin: 0 auto 10px; }
+.closing-screen .memorial-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.lover-screen, .council-screen { position: relative; width: 100%; height: 100%; min-height: 0; isolation: isolate; overflow: hidden; }
+.lover-card, .council-card { position: absolute; z-index: 5; overflow: auto; padding: 28px 34px; color: #17130f; background: #f4e8cd; border: 1px solid #8a6c3e; box-shadow: 0 14px 48px rgba(8,7,5,.78); }
+.lover-card { right: 5vw; bottom: 4vh; width: min(58vw, 920px); max-height: 76%; }
+.council-card { right: 3vw; top: 4vh; width: min(45vw, 760px); max-height: calc(100% - 8vh); }
+.lover-card .scene-heading, .council-card .scene-heading { max-width: none; font-size: clamp(28px, 2.2vw, 42px); line-height: 1.08; letter-spacing: 0; color: #17130f; }
+.lover-card .passage-panel, .council-card .passage-panel { min-height: 0; max-height: none; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.lover-screen .lover-portrait { position: absolute; left: 5vw; bottom: 0; width: min(31vw, 480px); height: 85%; }
+.prison-boundary { position: absolute; z-index: 3; left: 3vw; bottom: 0; width: min(35vw, 550px); height: 24%; display: flex; align-items: end; justify-content: center; padding: 0 20px 12px; color: #f4e8cd; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; text-shadow: 0 2px 4px #000; }
+.prison-boundary.stone { background: linear-gradient(155deg, transparent 0 22%, rgba(49,43,35,.88) 23% 54%, rgba(25,22,18,.96) 55%); clip-path: polygon(0 42%, 12% 25%, 27% 38%, 43% 12%, 61% 34%, 78% 18%, 100% 41%, 100% 100%, 0 100%); }
+.prison-boundary.roots { background: repeating-linear-gradient(108deg, transparent 0 18px, rgba(52,38,24,.92) 19px 34px, transparent 35px 52px), linear-gradient(transparent, rgba(25,18,12,.94)); clip-path: polygon(0 34%, 12% 22%, 25% 43%, 38% 15%, 51% 38%, 66% 12%, 80% 40%, 100% 24%, 100% 100%, 0 100%); }
+.map-pieces { padding: 8px 0; }
+.map-piece { display: inline-grid; place-items: center; width: 155px; height: 115px; margin: 8px; color: #704f27; background: #e8d7b0; border: 2px dashed #805a2c; clip-path: polygon(4% 12%, 88% 2%, 96% 83%, 16% 98%); font-weight: 700; }
+.map-piece + .map-piece { margin-left: -52px; transform: rotate(4deg); opacity: .84; }
+.council-party { position: absolute; z-index: 4; left: 2vw; bottom: 0; display: flex; align-items: end; }
+.council-party .expedition-portrait { width: min(10vw, 165px); }
+.council-party img { max-height: 42vh; }
+.final-choice-screen { display: grid; gap: 1rem; }
+
+@media (max-height: 800px) {
+  .game-shell { grid-template-rows: 56px minmax(0, 1fr); }
+  .game-shell .game-header { padding: 0 2vw; }
+  .consequence-card { padding: 24px 34px; }
+  .game-shell .victim-grid { margin-top: 12px; }
+  .victim-card { padding: 8px; }
+  .victim-portrait { height: min(17vh, 125px); }
+}
+.action-feedback { position: fixed; z-index: 60; right: 1rem; bottom: 1rem; max-width: 32rem; padding: 1rem; background: #431f1a; border: 1px solid #d78272; color: #fff3e5; }
+.image-fallback { display: grid; place-items: center; height: 100%; margin: 0; padding: 1rem; color: #eadbb5; background: #25251e; border: 1px dashed #8b7b59; }
+.image-fallback[hidden] { display: none; }
+@keyframes tavern-absence { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .hero-card.is-fading { animation: none; opacity: 0; } }
+@media (min-width: 1700px) { .tavern-stage { grid-template-columns: repeat(8, 1fr); } .hero-sheet { width: 20rem; } }
+@media (max-width: 1360px) { .entry-screen { padding: 24px 38px; } }
+
 * {
   box-sizing: border-box;
 }
@@ -95,6 +240,10 @@ a:focus-visible,
 [tabindex]:focus-visible {
   outline: 0.1875rem solid var(--focus-ring);
   outline-offset: 0.25rem;
+}
+
+.victim-card:focus-visible {
+  outline-color: var(--ink-primary);
 }
 
 h1,
@@ -1294,4 +1443,352 @@ button.hero-card:hover {
   .progress-marks .current {
     forced-color-adjust: auto;
   }
+}
+
+/* The V3 controller shares this stylesheet with the historical prototype.
+   Keep its scene components insulated from the older generic card rules above. */
+.game-shell .hero-card {
+  position: relative;
+  align-self: end;
+  min-width: 0;
+  min-height: 19rem;
+  padding: .5rem;
+  border: 1px solid #7d7153;
+  border-radius: 0;
+  background: linear-gradient(#17181266, #11130ff2);
+  color: #f3ead2;
+  overflow: visible;
+  text-align: start;
+}
+
+.game-shell .hero-card.is-selected {
+  border: 1px solid #f1cb66;
+  box-shadow: 0 0 0 .2rem #f1cb6655, 0 1rem 2rem #0008;
+  transform: scale(1.05);
+  transform-origin: bottom center;
+}
+
+.game-shell .hero-card.is-dead {
+  visibility: hidden;
+}
+
+.game-shell .hero-card.is-fading {
+  visibility: visible;
+  animation: tavern-absence 1s linear forwards;
+  pointer-events: none;
+}
+
+.game-shell .hero-card .hero-portrait {
+  display: block;
+  height: 13rem;
+}
+
+.game-shell .hero-card .hero-name,
+.game-shell .hero-card .hero-role,
+.game-shell .hero-card .hero-sheet,
+.game-shell .hero-card .hero-sheet-field,
+.game-shell .hero-card .hero-summary,
+.game-shell .hero-card .hero-speech {
+  display: block;
+}
+
+.game-shell .hero-card .hero-sheet,
+.game-shell .hero-card .hero-speech {
+  display: none;
+  position: absolute;
+  z-index: 8;
+  width: min(24rem, 28vw);
+  padding: 1rem;
+  background: #eadbb5;
+  color: #2a2115;
+  border: .18rem double #735735;
+  box-shadow: 0 1rem 2rem #0009;
+  white-space: normal;
+}
+
+.game-shell .hero-card .hero-sheet {
+  left: 50%;
+  bottom: calc(100% + .75rem);
+  transform: translateX(-50%);
+}
+
+.game-shell .hero-card .hero-speech {
+  top: 18%;
+  left: calc(100% + .75rem);
+  font-family: Georgia, serif;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.game-shell .hero-card:nth-child(n+5) .hero-speech {
+  right: calc(100% + .75rem);
+  left: auto;
+}
+
+.game-shell .hero-card:hover .hero-sheet,
+.game-shell .hero-card:hover .hero-speech,
+.game-shell .hero-card:focus-visible .hero-sheet,
+.game-shell .hero-card:focus-visible .hero-speech {
+  display: block;
+}
+
+.game-shell .reflection-portrait {
+  position: absolute; z-index: 3; left: 29%; right: 24%; bottom: 7%;
+  width: auto; height: 43%; overflow: hidden; border-radius: 50%;
+  transform: perspective(600px) rotateX(62deg); box-shadow: inset 0 0 38px #000;
+}
+.game-shell .reflection-portrait.has-missing-image { transform: none; height: 18%; border-radius: 0; }
+.game-shell .reflection-portrait img {
+  width: 100%; height: 165%; object-fit: contain; object-position: center;
+  transform: rotateX(-62deg) translateY(-14%); opacity: .84; filter: contrast(1.2) sepia(.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-shell .hero-card.is-fading {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Task 03: fixed tavern composition and consultation surfaces. */
+.game-shell .formation-screen {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.game-shell .tavern-stage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background-position: center;
+  background-size: cover;
+}
+
+.game-shell .tavern-stage::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8, 7, 5, .03) 35%, rgba(8, 7, 5, .48) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.game-shell .formation-screen > .scene-actions {
+  position: absolute;
+  z-index: 20;
+  top: 18px;
+  right: 24px;
+  margin: 0;
+}
+
+.game-shell .formation-screen > .formation-summary {
+  position: absolute;
+  z-index: 18;
+  bottom: 22px;
+  left: 26px;
+  display: grid;
+  min-width: 255px;
+  gap: 2px;
+  padding: 14px 20px;
+  border-left: 4px solid #b88b3c;
+  color: #f3ead2;
+  background: rgba(14, 12, 9, .88);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.game-shell .formation-summary strong { font-size: 1.08rem; }
+.game-shell .formation-summary span { font-size: .86rem; }
+.game-shell .formation-summary .selected-destination { margin: 4px 0 0; padding: 0; border: 0; background: none; color: #d9c79e; }
+
+.game-shell .hero-spot {
+  position: absolute;
+  z-index: 3;
+  left: var(--hero-x);
+  top: var(--hero-y);
+  width: clamp(74px, 8.2vw, 128px);
+  height: clamp(150px, 25vh, 236px);
+  transform: translate(-50%, -100%);
+}
+
+.game-shell .hero-spot.is-empty { pointer-events: none; }
+.game-shell .hero-spot:has(.hero-card.is-inspected),
+.game-shell .hero-spot:has(.hero-card:focus-visible) { z-index: 24; }
+
+.game-shell .hero-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  color: #f3ead2;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: center bottom;
+}
+
+.game-shell button.hero-card:hover { border: 0; background: transparent; }
+.game-shell .hero-card.is-selected { border: 0; box-shadow: none; transform: scale(1.05); }
+.game-shell .hero-card.is-selected .hero-portrait { filter: drop-shadow(0 0 7px #f0c85f) drop-shadow(0 8px 6px #000); }
+.game-shell .hero-card.is-inspected::before,
+.game-shell .hero-card:focus-visible::before {
+  position: absolute;
+  z-index: 3;
+  inset: 2px;
+  border: 3px dashed #f1ddb0;
+  content: "";
+  pointer-events: none;
+}
+.game-shell .hero-card:focus-visible { outline: 0; }
+
+.game-shell .hero-card .hero-portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 6px #000);
+}
+.game-shell .hero-card .hero-portrait img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+
+.game-shell .membership-label {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: -10px;
+  display: block;
+  width: max-content;
+  padding: 2px 6px;
+  border: 1px solid #c99c44;
+  color: #fff1ca;
+  background: #68491d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11px;
+  transform: translateX(-50%);
+}
+
+.game-shell .hero-card .hero-sheet,
+.game-shell .hero-card .hero-speech { display: none; }
+.game-shell .hero-card.is-inspected .hero-sheet,
+.game-shell .hero-card.is-inspected .hero-speech { display: block; }
+
+.game-shell .hero-card .hero-sheet {
+  position: absolute;
+  z-index: 12;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  width: min(360px, 31vw);
+  max-height: min(220px, 33vh);
+  padding: 14px 18px;
+  overflow: auto;
+  border: 4px double #8a6b3d;
+  color: #211810;
+  background: #f2e4c4;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .72);
+  text-align: left;
+  transform: translateX(-50%);
+}
+.game-shell .hero-sheet-name { display: block; margin-bottom: 4px; font: 700 20px/1.1 Georgia, serif; }
+.game-shell .hero-sheet-row { display: grid; grid-template-columns: 78px 1fr; gap: 5px; font: 14px/1.25 Georgia, serif; }
+.game-shell .hero-summary { display: block; margin-top: 4px; font: 13px/1.3 Georgia, serif; }
+
+.game-shell .hero-card .hero-speech {
+  position: absolute;
+  z-index: 13;
+  top: 25%;
+  width: min(315px, 27vw);
+  padding: 11px 16px;
+  border: 2px solid #8a6b3d;
+  border-radius: 48% 45% 42% 46%;
+  color: #211810;
+  background: #f2e4c4;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .55);
+  font: italic 700 16px/1.25 Georgia, serif;
+  text-align: left;
+}
+.game-shell .hero-card .hero-speech.speech-right { right: auto; left: calc(100% + 12px); }
+.game-shell .hero-card .hero-speech.speech-left { right: calc(100% + 12px); left: auto; }
+
+.game-shell .hero-spot-h1 .hero-sheet {
+  left: 0;
+  transform: none;
+}
+
+.game-shell .hero-spot-h8 .hero-sheet {
+  right: 0;
+  left: auto;
+  transform: none;
+}
+
+.game-shell .hero-spot-h3 .hero-card .hero-sheet,
+.game-shell .hero-spot-h5 .hero-card .hero-sheet,
+.game-shell .hero-spot-h7 .hero-card .hero-sheet {
+  bottom: calc(100% + 10px);
+  max-height: 120px;
+}
+
+.game-shell .hero-card.is-fading {
+  visibility: visible;
+  opacity: var(--absence-opacity, 1);
+  animation: tavern-absence var(--absence-duration, 1000ms) linear forwards;
+  pointer-events: none;
+}
+@keyframes tavern-absence { from { opacity: var(--absence-opacity, 1); } to { opacity: 0; } }
+
+.game-shell .overlay-panel {
+  position: fixed;
+  z-index: 50;
+  inset: 12vh 5vw;
+  max-width: none;
+  max-height: none;
+  padding: 34px 38px;
+  overflow: auto;
+  border: 6px double #89693a;
+  color: #211810;
+  background: repeating-linear-gradient(0deg, transparent 0 28px, rgba(70,50,28,.035) 28px 29px), #f4e8cd;
+  box-shadow: 0 0 0 100vmax rgba(4, 3, 2, .76), 0 18px 54px #000;
+}
+.game-shell .overlay-panel .scene-heading { max-width: none; color: #211810; font-size: clamp(32px, 3vw, 46px); }
+.game-shell .dialog-close { float: right; min-width: 104px; }
+.game-shell .destination-grid { clear: both; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.game-shell .destination-card { color: #211810; background: rgba(255, 249, 229, .55); border-color: #9a7440; }
+.game-shell .destination-card.is-selected { outline: 4px double #a87826; outline-offset: -5px; background: #fff3cf; box-shadow: inset 0 0 0 1px #e0bd68, 0 8px 20px rgba(70, 43, 12, .2); }
+.game-shell .destination-card h3 { margin: 8px 0 5px; font: 700 20px/1.15 Georgia, serif; }
+.game-shell .destination-card p { margin-bottom: 8px; }
+.game-shell .destination-preview { height: min(24vh, 205px); }
+.game-shell .destination-status { display: inline-block; padding: 2px 8px; color: #fff4d7; background: #77572c; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+.game-shell .destination-selection { color: #6b4213; font-size: 12px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+.game-shell .destination-progress, .game-shell .destination-reason { font-size: 13px; color: #5d4d38; }
+.game-shell .status-locked, .game-shell .status-completed { opacity: .68; }
+
+.game-shell .roster-list { clear: both; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.game-shell .roster-list li { display: grid; grid-template-columns: 74px 1fr; gap: 12px; min-width: 0; min-height: 112px; align-items: center; padding: 10px; border: 1px solid #99723c; background: rgba(255, 249, 229, .5); }
+.game-shell .roster-list li.is-dead { opacity: .55; filter: grayscale(1); }
+.game-shell .roster-list strong, .game-shell .roster-list span { display: block; }
+.game-shell .roster-list strong { font: 700 19px/1.15 Georgia, serif; }
+.game-shell .roster-state { color: #714c20; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.game-shell .roster-portrait { width: 68px; height: 92px; }
+.game-shell .roster-portrait img { width: 100%; height: 100%; object-fit: contain; }
+
+@media (max-height: 800px) {
+  .game-shell .hero-spot { width: clamp(68px, 7.4vw, 104px); height: clamp(126px, 24vh, 180px); }
+  .game-shell .hero-card .hero-sheet { max-height: 205px; }
+  .game-shell .overlay-panel { inset: 8vh 5vw; padding: 24px 32px; }
+  .game-shell .destination-preview { height: 22vh; }
+  .game-shell .roster-list li { min-height: 92px; }
+  .game-shell .roster-portrait { height: 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-shell .hero-card.is-fading { animation: none; opacity: 0; }
 }
