@@ -1,0 +1,21 @@
+// One entry keeps native suites serial on the documented, stable local origin.
+import './suites/native-boot.mjs';
+import './suites/content.mjs';
+import './suites/formation.mjs';
+import './suites/encounters.mjs';
+import './suites/sacrifice.mjs';
+import './suites/persistence.mjs';
+import './suites/retreat.mjs';
+import './suites/discovery.mjs';
+import './suites/endings.mjs';
+import './suites/memorial.mjs';
+import './suites/diagnostics.mjs';
+import './suites/shared-ui.mjs';
+import './suites/native-diagnostics.mjs';
+import './suites/native-controls.mjs';
+import './suites/native-audio.mjs';
+import './suites/native-inventory.mjs';
+import './suites/native-checkpoints.mjs';
+import './suites/native-death-context.mjs';
+import { verifyRegistrations } from './helpers/canonical-cases.mjs';
+verifyRegistrations();

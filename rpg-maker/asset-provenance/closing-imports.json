@@ -1,0 +1,26 @@
+[
+  {
+    "source": ".compozy/tasks/init-rpg-maker-mz/assets/ending-reunite-v2.png",
+    "runtime": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_EndingReunite.png",
+    "sha256": "664456631a5904a3cd4cdf26b12102764ee23bc31ab15c556d34bd9a341f769a",
+    "status": "provisional; byte-for-byte import"
+  },
+  {
+    "source": ".compozy/tasks/init-rpg-maker-mz/assets/ending-destroy-v2.png",
+    "runtime": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_EndingDestroy.png",
+    "sha256": "9ee750b35da8d04cf94fe6a25cf7c8631bf23041c94f6f51d9af8453a2e72f8c",
+    "status": "provisional; byte-for-byte import"
+  },
+  {
+    "source": ".compozy/tasks/init-rpg-maker-mz/assets/ending-total-loss-v2.png",
+    "runtime": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_EndingTotalLoss.png",
+    "sha256": "5ab627b78bacb403077b26b4d77637104e7d8e201bb5b4db89cc0304eff31a27",
+    "status": "provisional; byte-for-byte import"
+  },
+  {
+    "source": ".compozy/tasks/init-rpg-maker-mz/assets/memorial-background-v1.png",
+    "runtime": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Memorial.png",
+    "sha256": "63ba02a17429b970a3bba7777f1b4e1b9542c8057c874fe8f60c643bfce0313b",
+    "status": "provisional; byte-for-byte import"
+  }
+]

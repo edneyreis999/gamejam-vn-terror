@@ -2,6 +2,26 @@
 
 Esta é a única árvore durável de QA do protótipo. Cenários guardam o último veredito; jornadas e charters permanecem entre ciclos; cada execução cria um relatório datado. O planejamento atual não transforma evidência automatizada, visual ou histórica em observação de uma pessoa.
 
+## Evidências brutas e material de entrega
+
+`docs/qa/evidence/` e `docs/qa/runs/` têm a mesma responsabilidade: saídas locais de QA, ignoradas pelo Git. Não são entradas do jogo nem o lugar permanente do material necessário para compor devlogs. Os runners podem recriar seus diretórios; não precisam de resultados históricos para testar o código atual. Neste projeto, runs é uma localização reservada; os runners MZ atuais escrevem em evidence.
+
+Após o aceite, preservar os registros brutos em arquivo local com manifesto e hashes, consolidar resultados nos relatórios e copiar as capturas selecionadas para `docs/qa/deliveries/<incremento>/`. Esses materiais de entrega devem funcionar em um clone sem evidence/runs. Links históricos para evidências continuam servindo como proveniência local, não como dependência do material de entrega.
+
+O [incremento MZ aceito](deliveries/init-rpg-maker-mz/README.md) tem resumo, aceite, manifesto do runtime e cinco capturas independentes, incluindo o desaparecimento de Gorvak e a visita posterior. Não exige os milhares de arquivos brutos para compor seu devlog. Os181 arquivos de ciclos anteriores em evidence foram retirados do versionamento no commit e888338, por orientação do usuário, com cópias locais e hashes preservados. Links desses ciclos continuam como referência ao acervo local.
+
+## Migração MZ em execução — 2026-09-09
+
+A spec `init-rpg-maker-mz` tem [evidência incremental](reports/2026-09-09-native-mz-implementation.md) da campanha nativa, save, finais, controles e áudio. O [plano MZ](guides/native-mz-cycle.md) mapeia as 23 jornadas E2E e os sensores visual, auditivo, humano e de exportação; planejamento não indica execução.
+
+Use o [servidor e runner Node documentados](../../rpg-maker/README.md), em `http://127.0.0.1:18726/`. **Continuar** exige a mesma origem e perfil; mantenha uma única aba ativa. Não há trava entre abas. A inspeção usa somente `expeditionQA.setSeed`, `snapshot` e `validate`, com seed apenas antes de Jogar. O pacote Web deve incluir todos os assets dinâmicos e ser aberto por servidor local, sem publicação.
+
+As jornadas MZ são [campanha completa](journeys/J-mz-complete-campaign.md), [recuperação e exportação](journeys/J-mz-recovery-export.md), [teclado e diagnóstico](journeys/J-mz-qa-accessibility.md) e [revisão audiovisual e humana](journeys/J-mz-creative-review.md). Seus cenários `*-mz-*` mantêm vereditos próprios. A audição e a aprovação final de arte, texto, sensibilidade cultural e atribuições permanecem explícitas.
+
+A execução foi pausada pelo usuário após quatro campanhas observadas; o [relatório de playtest](reports/2026-09-09-native-mz-playtest.md) registra resultados parciais, limitações de evidência e próximos passos. Nenhum cenário foi promovido a aceite integral.
+
+As seções abaixo preservam a linha de base histórica do protótipo HTML e não devem ser aplicadas como restrições da migração aprovada.
+
 ## Áreas
 
 - `LOC`: abertura local, offline e sessão em memória.

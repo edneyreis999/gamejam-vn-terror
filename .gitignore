@@ -1,27 +1,47 @@
-/coverage
-/dist
+# Arquivos locais do sistema e editores
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+/.history/
+
+# Dependências, caches e arquivos gerados
+node_modules/
+/coverage/
+/dist/
 /.artifacts/
+__pycache__/
+*.py[cod]
+*.log
 /frontend/js/**/*.d.ts
 /tsconfig.domain-dto.tsbuildinfo
 /tsconfig.application.tsbuildinfo
 /.tsbuildinfo
-/node_modules
-/.history
-.DS_Store
-__pycache__/
-*.py[cod]
-/tasks
-/Maelen
+
+# Saves locais do RPG Maker
+/rpg-maker/The Dryland Drowned/save/
 /frontend/save/*.rmmzsave
-/temp
-/zik-prompts-oneshot
-.claude
-.claude/settings.local.json
 
-# AgentOps session artifacts
+# Configurações locais com segredos
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Estado local das ferramentas de agentes
+.claude/
 .deep-review/
-/.env
+.compozy/tasks/
+.compozy/memory/
+.playwright-mcp/
 
-.compozy/tasks
-.compozy/memory
-.playwright-mcp
+# Acervo e diretórios locais de fluxos anteriores
+/tasks/
+/Maelen/
+/temp/
+/zik-prompts-oneshot/
+
+# Saídas brutas de QA; resumos e capturas selecionadas ficam em docs/qa/deliveries/
+/docs/qa/evidence/
+/docs/qa/runs/
+/docs/qa/state.csv

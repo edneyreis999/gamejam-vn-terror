@@ -1,0 +1,119 @@
+{
+  "source": "docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md §§9,12",
+  "heroPairs": {
+    "H1": [
+      "strength",
+      "will"
+    ],
+    "H2": [
+      "dexterity",
+      "athletics"
+    ],
+    "H3": [
+      "perception",
+      "survival"
+    ],
+    "H4": [
+      "knowledge",
+      "occultism"
+    ],
+    "H5": [
+      "strength",
+      "knowledge"
+    ],
+    "H6": [
+      "dexterity",
+      "perception"
+    ],
+    "H7": [
+      "occultism",
+      "athletics"
+    ],
+    "H8": [
+      "will",
+      "survival"
+    ]
+  },
+  "encounterPairs": {
+    "A1": [
+      "strength",
+      "dexterity",
+      "perception"
+    ],
+    "A2": [
+      "dexterity",
+      "survival",
+      "knowledge"
+    ],
+    "A3": [
+      "survival",
+      "athletics",
+      "occultism"
+    ],
+    "A4": [
+      "athletics",
+      "strength",
+      "will"
+    ],
+    "A5": [
+      "strength",
+      "dexterity",
+      "knowledge"
+    ],
+    "A6": [
+      "strength",
+      "survival",
+      "occultism"
+    ],
+    "A7": [
+      "dexterity",
+      "athletics",
+      "will"
+    ],
+    "A8": [
+      "survival",
+      "athletics",
+      "perception"
+    ],
+    "B1": [
+      "perception",
+      "knowledge",
+      "strength"
+    ],
+    "B2": [
+      "perception",
+      "occultism",
+      "dexterity"
+    ],
+    "B3": [
+      "perception",
+      "will",
+      "survival"
+    ],
+    "B4": [
+      "knowledge",
+      "occultism",
+      "athletics"
+    ],
+    "B5": [
+      "knowledge",
+      "will",
+      "strength"
+    ],
+    "B6": [
+      "occultism",
+      "will",
+      "dexterity"
+    ],
+    "B7": [
+      "perception",
+      "knowledge",
+      "survival"
+    ],
+    "B8": [
+      "occultism",
+      "will",
+      "athletics"
+    ]
+  }
+}

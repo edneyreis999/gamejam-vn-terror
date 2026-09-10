@@ -1,0 +1,9 @@
+{
+  "mode": "builtin image_gen.imagegen",
+  "reference": ".compozy/tasks/init-rpg-maker-mz/assets/memorial-gravestone-frame-v1.png",
+  "status": "provisional; creative approval pending",
+  "rejected": "exec-efa4a841-3be9-4d96-8a3c-41460a080a32.png",
+  "accepted": "exec-1ccb765d-c148-4a1f-8673-0810d18c30f8.png",
+  "acceptedPrompt": "Create an RGBA PNG with transparent background. Preserve this gravestone's existing shape, size, position, inscription plaque and line art. Cut out the inside of the upper rectangular portrait frame, making that rectangle completely transparent. Keep its border. The rest of the gravestone stays unchanged.",
+  "note": "First output painted an opaque checkerboard and was rejected. Second output has genuine RGBA transparency. Original outputs retained. No scripted pixel edit."
+}
