@@ -1,0 +1,1 @@
+E:/Projetos/loki-framework/agents/execution-context-reader.md

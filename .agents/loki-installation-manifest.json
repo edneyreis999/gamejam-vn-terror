@@ -1,0 +1,886 @@
+{
+  "created_at": "2026-08-31T21:23:19Z",
+  "dest_root": "E:\\Projetos\\gamejam-vn-terror",
+  "install_profile": "consumer",
+  "install_scope": [
+    "both",
+    "consumer-only"
+  ],
+  "links": [
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\excalidraw-diagram-generator",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\excalidraw-diagram-generator",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\json-canvas",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\json-canvas",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-action-plan-authoring",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-action-plan-authoring",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-agent-creator",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-agent-creator",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-agent-execution-evidence",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-agent-execution-evidence",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-agentic-orchestration",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-agentic-orchestration",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-analytic-inference",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-analytic-inference",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-analytic-inference-preparation",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-analytic-inference-preparation",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-command-creator",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-command-creator",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-command-workflows",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-command-workflows",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-documentation-writing",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-documentation-writing",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-domain-context-preflight",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-domain-context-preflight",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-execution-knowledge-capture",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-execution-knowledge-capture",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-external-knowledge-extraction",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-external-knowledge-extraction",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-framework-impact-audit",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-framework-impact-audit",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-git-workflow",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-git-workflow",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-implement-feature-execution",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-implement-feature-execution",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-index-navigator",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-index-navigator",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-internal-command-workflows",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-internal-command-workflows",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-skill-creator",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-skill-creator",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-tech-analysis-authoring",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-tech-analysis-authoring",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-template-library",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-template-library",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-web-deep-research",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-web-deep-research",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-abrir-pr",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-abrir-pr",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-agentic-development",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-agentic-development",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-catalogar-docs",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-catalogar-docs",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-commit",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-commit",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-continuous-improvement",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-continuous-improvement",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-criar-branch",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-criar-branch",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-deep-analysis",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-deep-analysis",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-deep-research",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-deep-research",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-demand-text-improver",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-demand-text-improver",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-enrich-tasks",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-enrich-tasks",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-feedback",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-feedback",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-generate-inferences",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-generate-inferences",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-human-decision-preflight",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-human-decision-preflight",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-implement-feature",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-implement-feature",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-init",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-init",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-knowledge-extraction-analysis",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-knowledge-extraction-analysis",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-retrospectiva-tecnica",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-retrospectiva-tecnica",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-self-healing",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-self-healing",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-tech-analysis",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-tech-analysis",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\obsidian-bases",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\obsidian-bases",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\obsidian-cli",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\obsidian-cli",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\obsidian-markdown",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\obsidian-markdown",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-data-json",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-data-json",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-plugin-workflow",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-plugin-workflow",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-project-inventory",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-project-inventory",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-action-sequences",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-action-sequences",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-battle-mechanics",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-battle-mechanics",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-compat-diagnostics",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-compat-diagnostics",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-events-presentation",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-events-presentation",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-message-core-localization",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-message-core-localization",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-notetags",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-notetags",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-plugin-commands",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-plugin-commands",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-plugin-index",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-plugin-index",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-plugin-parameters",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-plugin-parameters",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-progression-economy",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-progression-economy",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "skill"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\audio-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\audio-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\balance-economy-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\balance-economy-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\bibliotecario.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\bibliotecario.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\catalogador.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\catalogador.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\execution-context-reader.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\execution-context-reader.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\execution-knowledge-cataloger.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\execution-knowledge-cataloger.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\framework-artifact-quality-auditor.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\framework-artifact-quality-auditor.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\framework-artifact-writer.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\framework-artifact-writer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\game-business-analyst.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\game-business-analyst.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\game-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\game-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\game-product-owner.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\game-product-owner.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\gameplay-engineer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\gameplay-engineer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\level-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\level-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\narrative-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\narrative-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\narrative-qa.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\narrative-qa.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\quest-content-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\quest-content-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\retrospective-digester.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\retrospective-digester.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\runtime-qa.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\runtime-qa.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\scene-presentation-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\scene-presentation-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\session-evidence-auditor.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\session-evidence-auditor.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\source-researcher.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\source-researcher.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\standards-curator.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\standards-curator.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\technical-artist.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\technical-artist.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\technical-implementer.md",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\technical-implementer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\ux-ui-designer.md",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\agents\\ux-ui-designer.md",
+      "source_kind": "file",
+      "status": "created",
+      "type": "agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\templates",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\templates",
+      "source_kind": "directory",
+      "status": "created",
+      "type": "templates"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\audio-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\audio-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\balance-economy-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\balance-economy-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\bibliotecario.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\bibliotecario.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\catalogador.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\catalogador.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\execution-context-reader.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\execution-context-reader.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\execution-knowledge-cataloger.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\execution-knowledge-cataloger.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\framework-artifact-quality-auditor.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\framework-artifact-quality-auditor.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\framework-artifact-writer.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\framework-artifact-writer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\game-business-analyst.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\game-business-analyst.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\game-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\game-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\game-product-owner.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\game-product-owner.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\gameplay-engineer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\gameplay-engineer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\level-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\level-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\narrative-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\narrative-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\narrative-qa.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\narrative-qa.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\quest-content-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\quest-content-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\retrospective-digester.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\retrospective-digester.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\runtime-qa.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\runtime-qa.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\scene-presentation-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\scene-presentation-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\session-evidence-auditor.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\session-evidence-auditor.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\source-researcher.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\source-researcher.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\standards-curator.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\standards-curator.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\technical-artist.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\technical-artist.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\technical-implementer.toml",
+      "install_scope": "both",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\technical-implementer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    },
+    {
+      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\ux-ui-designer.toml",
+      "install_scope": "consumer-only",
+      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\ux-ui-designer.toml",
+      "source_kind": "file",
+      "status": "created",
+      "type": "codex-agent"
+    }
+  ],
+  "mode": "apply",
+  "package_root": "E:\\Projetos\\loki-framework",
+  "replace": false
+}
