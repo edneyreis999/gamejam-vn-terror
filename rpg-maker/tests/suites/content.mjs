@@ -7,6 +7,7 @@ import { createRequire } from 'node:module';
 import { cp, mkdtemp, readFile, readdir, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import vm from 'node:vm';
 import { canonicalCase, assertRegistrations, manifest } from '../helpers/canonical-cases.mjs';
 import { openChrome, project, startServer } from '../helpers/native-chrome.mjs';
 import { hash, layoutErrors, localAssets, nativeFiles } from '../../tools/native-layout.mjs';
@@ -48,7 +49,7 @@ function cli(args) {
   return { code: result.status, output: JSON.parse(result.stdout), stdout: result.stdout };
 }
 
-canonicalCase('UT-047', 'native sections resolve stable identities without copying prose into the rule catalog', () => {
+canonicalCase('UT-047', 'native sections resolve stable identities without copying prose into the rule catalog', async () => {
   const result = parse(original);
   assert.deepEqual(result.violations, []);
   assert.deepEqual(result.catalog.scenes.prologue.passageIds, ['prologue.01', 'prologue.02', 'irati.01']);
@@ -68,6 +69,33 @@ canonicalCase('UT-047', 'native sections resolve stable identities without copyi
   }
   assert.deepEqual(parse(multiline).violations, []);
   assert.deepEqual(parse(multiline).catalog, result.catalog);
+
+  // Separate realms expose missing runtime APIs without changing Node's globals.
+  for (const unavailable of [['Object.hasOwn'], ['Array.prototype.at'], ['Object.hasOwn', 'Array.prototype.at']]) {
+    const context = vm.createContext({ eventsJson: JSON.stringify(original), systemJson: JSON.stringify(system) });
+    vm.runInContext(unavailable.map(api => `delete ${api};`).join('\n'), context);
+    for (const name of ['Dryland_CampaignRules', 'Dryland_EventBridge']) {
+      const filename = path.join(project, 'js/plugins', `${name}.js`);
+      vm.runInContext(await readFile(filename, 'utf8'), context, { filename });
+    }
+    const observed = JSON.parse(vm.runInContext(`JSON.stringify((() => {
+      const parsed = DrylandEventBridge.parseEventCatalog(JSON.parse(eventsJson), JSON.parse(systemJson));
+      const rules = DrylandCampaignRules.createRules(parsed.catalog);
+      const started = rules.dispatch(rules.createReadyState(), { type: 'BEGIN', seed: 0, expectedSequence: 0 });
+      return {
+        violations: parsed.violations,
+        passages: parsed.catalog.scenes.prologue.passageIds,
+        started: started.ok,
+        phase: started.state.phase,
+        valid: rules.validateState(started.state).ok,
+        inheritedAction: DrylandEventBridge.validateBridgeAction({ action: 'toString', value: '' }).ok
+      };
+    })())`, context));
+    assert.deepEqual(observed, {
+      violations: [], passages: ['prologue.01', 'prologue.02', 'irati.01'],
+      started: true, phase: 'intro', valid: true, inheritedAction: false
+    }, unavailable.join(', '));
+  }
 });
 
 canonicalCase('UT-048', 'duplicates and missing required sections report one primary defect', () => {

@@ -9,6 +9,7 @@
 (function(global) {
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value));
+  const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   function freeze(value) {
     if (value && typeof value === 'object' && !Object.isFrozen(value)) {
       Object.values(value).forEach(freeze);
@@ -59,7 +60,7 @@
   function createRules(input) {
     const problems = [];
     for (const id of ['prologue', ...routeIds.map(id => `threshold.${id}`)]) {
-      if (!Array.isArray(input?.scenes?.[id]?.passageIds) || !input.scenes[id].passageIds.length || input.scenes[id].passageIds.some(id => !Object.hasOwn(input.passages || {}, id))) {
+      if (!Array.isArray(input?.scenes?.[id]?.passageIds) || !input.scenes[id].passageIds.length || input.scenes[id].passageIds.some(id => !hasOwn(input.passages || {}, id))) {
         problems.push({ code: 'invalid_scene_reference', id });
       }
     }
@@ -98,7 +99,7 @@
     const UINT32_RANGE = 4294967296, MULBERRY_INCREMENT = 0x6D2B79F5;
     const deepFreeze = freeze;
     const sameArray = (a, b) => Array.isArray(a) && Array.isArray(b) && same(a, b);
-    const hasPassage = id => Object.hasOwn(catalog.passages, id);
+    const hasPassage = id => hasOwn(catalog.passages, id);
     const historyFields = {
       BEGIN: ['seed'], COMPLETE_PASSAGE: ['passageId'], SKIP_SEEN_TEXT: ['passageId'],
       SELECT_DESTINATION: ['dungeonId'], TOGGLE_HERO: ['heroId'], DEPART: ['dungeonId'],
@@ -117,7 +118,7 @@
       ending: id => ['reunite', 'destroy'].includes(id)
     };
     function validHistoryEvent(event) {
-      if (!event || typeof event.type !== 'string' || !Object.hasOwn(historyFields, event.type)) return false;
+      if (!event || typeof event.type !== 'string' || !hasOwn(historyFields, event.type)) return false;
       const fields = historyFields[event.type];
       return Object.keys(event).sort().join(',') === ['sequence', 'type', ...fields].sort().join(',') &&
         fields.every(field => historyValues[field](event[field]));
@@ -547,7 +548,7 @@
     }
 
     function malformed(action) {
-      if (!action || typeof action.type !== 'string' || !Number.isInteger(action.expectedSequence) || !Object.hasOwn(ACTION_FIELDS, action.type)) return true;
+      if (!action || typeof action.type !== 'string' || !Number.isInteger(action.expectedSequence) || !hasOwn(ACTION_FIELDS, action.type)) return true;
       var allowed = ['type', 'expectedSequence'].concat(ACTION_FIELDS[action.type]);
       return !Number.isSafeInteger(action.expectedSequence) || action.expectedSequence < 0 || Object.keys(action).sort().join(',') !== allowed.sort().join(',');
     }

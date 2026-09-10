@@ -55,6 +55,7 @@
 (function(global) {
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value));
+  const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   function freeze(value) {
     if (value && typeof value === 'object' && !Object.isFrozen(value)) {
       Object.values(value).forEach(freeze);
@@ -124,11 +125,11 @@
           route: ['id', 'name', 'pool', 'landmarkTotal'], competency: ['id', 'name', 'family']
         };
         if (Object.keys(value).some(key => !fields[match[1]].includes(key)) ||
-            (Object.hasOwn(value, 'name') && !safeText(value.name)) ||
+            (hasOwn(value, 'name') && !safeText(value.name)) ||
             (match[1] === 'encounter' && (!Array.isArray(value.approaches) || value.approaches.some(approach =>
               !approach || Object.keys(approach).sort().join(',') !== 'competencyId,id')))) issue('invalid_scene_reference', value.id);
         const table = { scene: 'scenes', hero: 'heroes', encounter: 'encounters', route: 'destinations', competency: 'competencies' }[match[1]];
-        if (Object.hasOwn(catalog[table], value.id)) issue('invalid_scene_reference', value.id);
+        if (hasOwn(catalog[table], value.id)) issue('invalid_scene_reference', value.id);
         else catalog[table][value.id] = value;
         if (match[1] === 'hero') {
           required.add(`profile.${value.id}`);
@@ -144,7 +145,7 @@
       if (!speakers.has(meta.speaker)) issue('invalid_speaker', id);
       if (!statuses.has(meta.status)) issue('invalid_status', id);
       if (!meta.source?.trim()) issue('missing_source', id);
-      if (meta.scene && !Object.hasOwn(catalog.scenes, meta.scene)) issue('invalid_scene_reference', id);
+      if (meta.scene && !hasOwn(catalog.scenes, meta.scene)) issue('invalid_scene_reference', id);
       let text = '';
       const choices = [];
       const branches = [];
@@ -169,7 +170,7 @@
           else choices.push(p[0]);
           branches.push({ indent: command.indent, count: p[0]?.length, seen: [] });
         } else if ([402, 403, 404].includes(command.code)) {
-          const branch = branches.at(-1);
+          const branch = branches[branches.length - 1];
           if (!branch || branch.indent !== command.indent) issue('unsupported_content_command', id);
           else if (command.code === 402) branch.seen.push(p[0]);
           else if (command.code === 404) {
@@ -179,7 +180,7 @@
         } else if (command.code === 0 && command.indent === indent) issue('unsupported_content_command', id);
         else if (command.code === 231) asset(`img/pictures/${p[1]}.png`, id);
         else if (command.code === 408 && ![108, 408].includes(previous?.code)) issue('unsupported_content_command', id);
-        if (command.indent > (branches.at(-1)?.indent ?? indent) + (branches.length ? 1 : 0)) issue('unsupported_content_command', id);
+        if (command.indent > (branches[branches.length - 1]?.indent ?? indent) + (branches.length ? 1 : 0)) issue('unsupported_content_command', id);
         previous = command;
       }
       if (branches.length) issue('unsupported_content_command', id);
@@ -187,7 +188,7 @@
         if (choices.length !== 1 || choices[0].length !== 3) issue('invalid_choice_count', id);
       } else if (!text.trim()) issue('missing_text', id);
       if (meta.asset) asset(meta.asset, id);
-      if (!Object.hasOwn(locations, id)) {
+      if (!hasOwn(locations, id)) {
         locations[id] = { commonEventId: event.id, start, end, indent };
         catalog.passages[id] = { id, speakerId: meta.speaker === 'narrator' ? null : meta.speaker, status: meta.status, source: meta.source };
       }
@@ -223,7 +224,7 @@
             section = null;
           } else if (section && line.startsWith('@')) {
             const match = /^@(passage|speaker|status|source|scene|asset) (.+)$/.exec(line);
-            if (!match || Object.hasOwn(section.meta, match[1])) issue('unsafe_text', section.id);
+            if (!match || hasOwn(section.meta, match[1])) issue('unsafe_text', section.id);
             else section.meta[match[1]] = match[2];
           }
         }
@@ -232,7 +233,7 @@
     }
     for (const id of required) if (!declared.has(id)) issue('missing_section', id);
     for (const scene of Object.values(catalog.scenes)) {
-      if (!Array.isArray(scene.passageIds) || !scene.passageIds.length || scene.passageIds.some(id => !Object.hasOwn(locations, id) && !required.has(id))) {
+      if (!Array.isArray(scene.passageIds) || !scene.passageIds.length || scene.passageIds.some(id => !hasOwn(locations, id) && !required.has(id))) {
         issue('invalid_scene_reference', scene.id);
       }
     }
@@ -281,7 +282,7 @@
     REQUEST_RETREAT: null, CANCEL_RETREAT: null, CONFIRM_RETREAT: null, CHOOSE_ENDING: 'ending',
     SKIP_SEEN_TEXT: null, NEW_CAMPAIGN: null });
   function validateBridgeAction(args, readVariable, variableCount) {
-    if (!args || typeof args !== 'object' || !Object.hasOwn(actionFields, args.action) ||
+    if (!args || typeof args !== 'object' || !hasOwn(actionFields, args.action) ||
         Object.keys(args).some(key => !['action', 'value'].includes(key)) ||
         (args.value !== undefined && typeof args.value !== 'string')) return commandError('invalid_action');
     let value = args.value || '';
@@ -560,8 +561,9 @@
     measure.fontFace = $gameSystem.mainFontFace(); measure.fontSize = size;
     const lines = [''];
     for (const word of text.split(/\s+/)) {
-      const next = lines.at(-1) ? `${lines.at(-1)} ${word}` : word;
-      if (measure.measureTextWidth(next) > 280 && lines.at(-1)) lines.push(word);
+      const lastLine = lines[lines.length - 1];
+      const next = lastLine ? `${lastLine} ${word}` : word;
+      if (measure.measureTextWidth(next) > 280 && lastLine) lines.push(word);
       else lines[lines.length - 1] = next;
     }
     measure.destroy();
