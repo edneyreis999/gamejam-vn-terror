@@ -14,7 +14,7 @@ O relato inicial incluía o aviso `The provided value 'undefined' is not a valid
 
 ## Causa
 
-O commit `d625820` alterou a posição inicial global em [System.json](../../rpg-maker/The%20Dryland%20Drowned/data/System.json):
+O commit `d625820` alterou a posição inicial global em [System.json](<../../../rpg-maker/The Dryland Drowned/data/System.json>):
 
 | Campo | Configuração anterior | Configuração que causava o loop |
 |---|---:|---:|
@@ -28,7 +28,7 @@ Com o início apontando para o mapa 1, a sessão nova entrava no próprio mapa q
 
 O histórico demonstra a alteração dos valores. A ação exata no editor que produziu a mudança não foi observada e não é atribuída a uma pessoa neste registro.
 
-A separação entre título, prólogo e taverna é confirmada pelo [GDD canônico, seção 1.1](../GDD_Visual_Novel_Expedicao_e_Sacrificio.md). Restaurar a posição anterior recupera esse comportamento; não cria uma nova decisão de design.
+A separação entre título, prólogo e taverna é confirmada pelo [GDD canônico, seção 1.1](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md). Restaurar a posição anterior recupera esse comportamento; não cria uma nova decisão de design.
 
 ## Por que não era o aviso de Canvas
 
@@ -84,11 +84,11 @@ O comando `node --test --test-name-pattern='^UT-' rpg-maker/tests/campaign.test.
 
 Tentativas anteriores do teste dirigido falharam antes do clique por preparação de janela ou divergência entre escala configurada e dimensões da captura. Esses resultados não foram tratados como falhas do produto nem como passes. A execução final usou DPR 1, capturou imagens de 1280 × 720, completou a jornada e encerrou seus próprios recursos.
 
-As capturas abaixo foram inspecionadas. O [resumo de evidências](2026-09-10-jogar-retorna-ao-titulo/evidencias.json) preserva hashes dos arquivos relevantes e das imagens. Os logs brutos permanecem no acervo local `.artifacts/title-loop-check/` e não são necessários para ler este documento.
+As capturas abaixo foram inspecionadas. O [resumo de evidências](evidencias.json) preserva hashes dos arquivos relevantes e das imagens. Os logs brutos permanecem no acervo local `.artifacts/title-loop-check/` e não são necessários para ler este documento.
 
-![Prólogo aberto depois de clicar em Jogar](2026-09-10-jogar-retorna-ao-titulo/prologo.png)
+![Prólogo aberto depois de clicar em Jogar](prologo.png)
 
-![Taverna depois dos três trechos do prólogo](2026-09-10-jogar-retorna-ao-titulo/taverna.png)
+![Taverna depois dos três trechos do prólogo](taverna.png)
 
 ## Aprendizados e prevenção
 
