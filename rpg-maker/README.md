@@ -6,15 +6,19 @@ Este projeto migra a campanha do protótipo HTML para eventos nativos do RPG Mak
 
 ## Jogar localmente
 
-Na raiz do repositório, com Python 3 instalado:
+No Windows (PowerShell ou Prompt de Comando) e no macOS (Terminal), instale Node 22+ e Google Chrome. Na raiz do repositório, execute o mesmo comando nos dois sistemas, sem instalação de dependências:
 
 ```sh
-python3 -m http.server 18726 --bind 127.0.0.1 --directory 'rpg-maker/The Dryland Drowned'
+npm --prefix "rpg-maker/The Dryland Drowned" start
 ```
 
-Abra `http://127.0.0.1:18726/` no Chrome. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
+Dentro da pasta `rpg-maker/The Dryland Drowned`, basta `npm start`. Se o PowerShell bloquear `npm.ps1` pela política de execução, use `npm.cmd` no lugar de `npm`, sem alterar a política do sistema.
+
+O comando serve `http://127.0.0.1:18726/` e abre o Chrome automaticamente no Windows e macOS; se a abertura falhar, abra o endereço manualmente no Chrome. Use `npm --prefix "rpg-maker/The Dryland Drowned" start -- --no-open` para apenas servir. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
 
 Mantenha uma única aba e o mesmo endereço, porta e perfil do navegador para usar **Continuar**. Se a porta estiver ocupada, confira qual servidor está atendendo antes de iniciar outro. A execução local não publica o jogo nem exige build. O protótipo HTML permanece em `prototype/index.html`, com sua campanha em memória.
+
+Para identificar quem ocupa a porta, use `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows. Se for este jogo, reutilize o endereço; caso contrário, escolha uma porta livre, por exemplo `npm --prefix "rpg-maker/The Dryland Drowned" start -- --port 18727`. O comando não encerra o processo existente nem troca de porta automaticamente. Saves da porta anterior não aparecem no novo endereço.
 
 ### Save e Continuação
 

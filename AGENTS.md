@@ -21,6 +21,11 @@
 - Não adicione rede, armazenamento, markup executável, assets remotos ou código de runtime de terceiros ao protótipo sem uma mudança de design aprovada.
 - Mantenha a inspeção de QA somente leitura e restrinja mutações da campanha a ações validadas do jogador.
 
+# Abrir o jogo
+
+- Com Node 22+ e Chrome instalados, execute `npm --prefix "rpg-maker/The Dryland Drowned" start` na raiz, no Windows ou macOS; o servidor usa `http://127.0.0.1:18726/` e abre o Chrome. Mantenha o processo em execução durante a sessão.
+- Se houver `EADDRINUSE` ou aviso de porta ocupada, identifique o processo com `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows e confirme o conteúdo servido antes de reutilizar o endereço; não encerre processos desconhecidos. Para outra porta livre, execute `npm --prefix "rpg-maker/The Dryland Drowned" start -- --port 18727` e informe que saves da porta anterior não aparecem no novo endereço.
+
 # Gestão no Trello
 
 - Se o MCP do Trello retornar `unauthorized_client: refresh_token is invalid`, renove a autenticação com `codex mcp login trello`. Copie a URL emitida pelo comando e execute `open '<URL>'` no macOS para abri-la no navegador padrão do usuário; não use um navegador de automação ou perfil isolado. Informe ao usuário que deve concluir a autorização na página aberta. Mantenha o comando de login em execução até receber `Successfully logged in to MCP server 'trello'` e então repita a operação que falhou. Use sempre a URL gerada pela tentativa atual de login.
