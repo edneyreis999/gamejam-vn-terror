@@ -1,0 +1,143 @@
+[
+  null,
+  {
+    "id": 1,
+    "name": "História — Prólogo",
+    "trigger": 0,
+    "switchId": 1,
+    "list": [
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@scene {\"id\":\"prologue\",\"backgroundId\":\"tavern\",\"passageIds\":[\"prologue.01\",\"prologue.02\",\"irati.01\"]}"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@dryland-section prologue.02"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@passage prologue.02"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@speaker ivai"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@status prototype_baseline"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@source ADR-007"
+        ]
+      },
+      {
+        "code": 101,
+        "indent": 0,
+        "parameters": [
+          "",
+          0,
+          0,
+          2,
+          "Ivaí"
+        ]
+      },
+      {
+        "code": 401,
+        "indent": 0,
+        "parameters": [
+          "Minha mãe deixou registros de duas rotas e de um vilarejo apagado dos mapas. A recompensa será dividida entre quem voltar comigo."
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@dryland-end"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@dryland-section irati.01"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@passage irati.01"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@speaker narrator"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@status confirmed"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@source GDD seção 4.7"
+        ]
+      },
+      {
+        "code": 101,
+        "indent": 0,
+        "parameters": [
+          "",
+          0,
+          0,
+          2,
+          ""
+        ]
+      },
+      {
+        "code": 401,
+        "indent": 0,
+        "parameters": [
+          "Irati escrevera na margem do último registro: “Não leve outras pessoas para pagar uma dívida que não escolheram.”"
+        ]
+      },
+      {
+        "code": 108,
+        "indent": 0,
+        "parameters": [
+          "@dryland-end"
+        ]
+      },
+      {
+        "code": 0,
+        "indent": 0,
+        "parameters": []
+      }
+    ]
+  }
+]

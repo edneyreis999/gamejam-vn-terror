@@ -1,0 +1,62 @@
+[
+  {
+    "kind": "complete",
+    "source": "exec-eb452e89-9e47-4107-8301-07c9b7a314ab.png",
+    "sha256": "d8d091482197816dbac18c4ce64eeee53665224344e265abcb6be9b834748b25",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "opaque_bounds": [
+      55,
+      68,
+      1197,
+      1182
+    ]
+  },
+  {
+    "kind": "elven",
+    "source": "exec-0191db88-77af-44c7-bd19-3077dc78b068.png",
+    "sha256": "8c582f6a8a7c987e3dacd60890e115844de8f9e46397966d11b7f9c8f6ec6d64",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "opaque_bounds": [
+      601,
+      68,
+      1199,
+      1182
+    ]
+  },
+  {
+    "kind": "dwarven",
+    "source": "exec-70d42d2e-f293-4c57-92b8-fbdb3066a98f.png",
+    "sha256": "eca6e84fa5fd08acbb4a1d67491f1d6ad5e95767284ed185fdb5b489639af026",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "opaque_bounds": [
+      55,
+      70,
+      629,
+      1176
+    ]
+  }
+]

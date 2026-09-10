@@ -1,9 +1,0 @@
-# Suplementos finais — Joana e Caio
-
-**Pass no escopo observado.** Playwright MCP, contexto Chrome isolado, `file://index.html`, offline, PT-BR, 1280 × 720 e movimento reduzido. Todas as mutações da campanha usaram Tab/setas/Enter/Espaço/Escape; apenas seed inicial e observação utilizaram `expeditionQA`.
-
-Joana leu o aviso, focou Gorvak sem matá-lo e o sacrificou no primeiro Enter. Repetições da tecla mantida não avançaram a despedida nem mataram outra pessoa. Após a leitura, Escape cancelou o recuo e devolveu foco a Recuar. O diálogo pôde ser reaberto e confirmado com uma ativação deliberada. Uma execução nova da mesma rota verificou o retorno 3,9 ms após a tecla: H1 morto, lugar vazio, nenhum cartão de H1, nenhum `.is-fading` e nenhuma animação. A preferência de movimento reduzido estava ativa e o estado válido.
-
-Caio voltou à mesma rota: o limiar e a apresentação do encontro já concluídos ofereceram pulo; cada pulo parou antes da próxima decisão. A mesma abordagem com a equipe alterada produziu uma consequência inédita, sem botão de pulo. Depois da leitura, um reload literal retornou à abertura sem texto visto. A comparação de todos os 28 campos do snapshot V3 na ação 19 de duas campanhas frescas com a mesma seed e o mesmo prefixo foi exatamente igual, incluindo atribuições, RNG, perdas, leitura e histórico.
-
-As cinco observações aceitas e os fingerprints estão em `summary.json`. Duas tentativas de reabrir o recuo em menos de 350 ms foram preservadas como falhas do ritmo do driver; não justificaram alterar o jogo. O primeiro contador de fantasmas apontava para uma classe inexistente e foi excluído da aceitação: o replay `reduced-motion-exact-dom.json` o substitui com observação dos elementos reais e do tempo de amostragem. Não houve mudança de fonte; o contexto do navegador foi fechado. Nenhuma aprovação humana é inferida destes resultados.

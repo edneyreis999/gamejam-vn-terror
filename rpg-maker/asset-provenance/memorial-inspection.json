@@ -1,0 +1,33 @@
+[
+  {
+    "source": "exec-efa4a841-3be9-4d96-8a3c-41460a080a32.png",
+    "sha256": "96d5f064dae7cf9c3873f0b4f96a84025b1084fe669f202d41301a4508f96ef8",
+    "mode": "RGB",
+    "size": [
+      1120,
+      1404
+    ],
+    "centerPixel": [
+      168,
+      169,
+      169
+    ],
+    "accepted": false
+  },
+  {
+    "source": "exec-1ccb765d-c148-4a1f-8673-0810d18c30f8.png",
+    "sha256": "3ac0bd2c140b0b74aa6a96ef5db19a2364716a0e47834e24baec1425f692dd73",
+    "mode": "RGBA",
+    "size": [
+      1120,
+      1404
+    ],
+    "centerPixel": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "accepted": true
+  }
+]

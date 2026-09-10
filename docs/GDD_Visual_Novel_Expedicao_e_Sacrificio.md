@@ -37,6 +37,28 @@ O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`
 
 ### 1.1 Relação com o protótipo v2.0
 
+**Sucesso de abordagem em `init-rpg-maker-mz` — Confirmado:** apresentar a consequência por texto nativo do RPG Maker, sem herói nem busto na cena. Reutilizar a mesma imagem de fundo da armadilha, sem ilustração adicional de sucesso. Manter autoria em eventos, leitura no ritmo do jogador e regras de progresso e autosave (ADR-027).
+
+**Controles de encontro em `init-rpg-maker-mz` — Confirmado:** posicionar **Rever descrição** e **Recuar** na parte superior da interface, separados dos diálogos inferiores e das três abordagens. Manter as regras de disponibilidade de cada ação e acesso por mouse e teclado (ADR-026).
+
+**Releitura de armadilha em `init-rpg-maker-mz` — Confirmado:** antes de escolher uma abordagem, oferecer **Rever descrição** junto das três opções, como ação auxiliar. Reapresentar somente a descrição do encontro atual na janela inferior e retornar às mesmas escolhas, sem alterar sorteio, progresso ou decisões. Não constitui histórico geral nem desfaz uma abordagem já escolhida (ADR-025).
+
+**Consulta de heróis em `init-rpg-maker-mz` — Atualização confirmada:** remover a ficha acima da cabeça. Hover ou foco pelas setas apenas destaca o herói. A opção Conversar apresenta todas as informações públicas anteriores (nome, pronomes, raça, profissão, resumo e estado) em uma sequência de diálogo com texto inferior e busto, junto da apresentação existente. Não revelar competências internas. Esta decisão substitui a ficha por foco descrita anteriormente para este incremento; as oito conversas foram aceitas pelo usuário para este incremento; revisão criativa final de entrega permanece separada (ADR-024).
+
+**Fala de seleção em `init-rpg-maker-mz` — Confirmado:** cada herói terá uma fala própria após ser adicionado com sucesso pela opção Selecionar, usando a janela inferior de texto e o busto. Essa fala é distinta da conversa comum e do aviso de grupo cheio. A formação já aparece atualizada; fechar a fala não repete a seleção. Os textos serão autorados nos eventos e permanecem provisórios até revisão editorial (ADR-023).
+
+**Grupo cheio em `init-rpg-maker-mz` — Confirmado:** ao tentar selecionar um quarto integrante, o próprio herói explica a Ivaí que o grupo está completo e é necessário retirar alguém. Usar texto inferior nativo e o busto desse herói, mantendo os três integrantes sem substituição automática. Selecionar permanece acionável para apresentar esse retorno, em lugar de apenas desabilitá-lo. As falas por herói serão escritas nos eventos e permanecem provisórias até revisão editorial (ADR-022).
+
+**Rótulo de seleção em `init-rpg-maker-mz` — Confirmado:** na formação manual, o menu de um herói integrante mostra **Retirar do grupo** em lugar de **Selecionar**. Para não integrantes, permanece **Selecionar**. Mantém-se a formação automática obrigatória quando restam de um a três heróis vivos (ADR-021).
+
+**Interação com heróis em `init-rpg-maker-mz` — Confirmado:** hover ou foco pelas setas apenas destaca o herói, sem ficha nem fala automática (ADR-024). Clique ou confirmação pelo teclado abre as opções **Conversar** e **Selecionar**. Conversar apresenta a mesma frase fixa do protótipo na janela nativa de texto inferior, com o busto do herói acima dela pelo VNPictureBusts, sem balão lateral (ADR-020); Selecionar altera a participação na expedição conforme as regras existentes. Abrir ou cancelar o menu e conversar não alteram a formação. Essa decisão substitui, neste incremento, a fala por hover e a seleção direta por clique (ADR-019).
+
+**Mapas de encerramento em `init-rpg-maker-mz` — Confirmado:** Conselho em mapa exclusivo; mapa principal de Finais com três submapas exclusivos (Reunir, Destruir e derrota por perda total); mapa de Memorial e Epílogos com oito submapas, um por epílogo de herói. O memorial apresenta os mortos quando houver; os epílogos continuam restritos aos sobreviventes participantes do clímax, sem incluir reservas. A árvore de mapas não cria seleção livre de finais ou epílogos (ADR-018).
+
+**Mapas de armadilhas em `init-rpg-maker-mz` — Confirmado:** criar um mapa principal para armadilhas físicas e outro para sobrenaturais, com um submapa exclusivo para cada armadilha na árvore do editor: A1–A8 e B1–B8, respectivamente. Cada submapa é um mapa nativo independente. Essa organização não altera sorteios, composição das rotas ou progresso, nem acrescenta um menu de escolha de armadilhas (ADR-017).
+
+**Organização de mapas em `init-rpg-maker-mz` — Confirmado:** o prólogo tem mapa exclusivo e a taverna interativa tem outro mapa exclusivo no editor. O prólogo mantém a imagem de fundo da taverna. Concluí-lo leva à taverna; retornos posteriores não repetem o prólogo nem reiniciam a campanha. Esta decisão não exige um mapa para cada uma das demais cenas (ADR-016).
+
 O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve buscar essa visão, mas seu recorte exato será definido posteriormente em specs incrementais e no Trello; aprovar este GDD não significa que todo o conteúdo estará obrigatoriamente presente na primeira entrega da v2.0.
 
 **Recorte aprovado para `prototype-v2-gdd-layouts`:** a atualização abrange a experiência jogável do GDD e os novos layouts, com **salvamento, áudio e suporte a telas com pouca largura fora do escopo deste incremento**, conforme decisões posteriores da entrevista e ADRs 006, 008 e 011. A campanha permanece sem som e somente na sessão aberta; recarregar ou reabrir a página inicia uma nova campanha. Mortes, encontros revelados e progresso continuam preservados entre expedições da mesma sessão. Os contratos de salvamento da seção 3.7, áudio da seção 19.4 e reflow para o jogo completo permanecem confirmados.
@@ -48,6 +70,20 @@ O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve busc
 **Arte — Baseline de protótipo para `prototype-v2-gdd-layouts`:** a versão jogável de avaliação pode usar imagens provisórias, incluindo geração dos retratos faltantes de Ivaí, Floraí, Pérola e Andirá e dos cenários narrativos da Igreja, da figueira no Parque e do Conselho, conforme o ADR-009. As gerações seguem o traço de referência do Gorvak e respeitam os fatos visuais do GDD. Detalhes não definidos no GDD permanecem propostas provisórias; as artes finais substituem os placeholders antes da entrega do jogo, preservando a direção da seção 19.2.
 
 Este documento define produto e comportamento. Tarefas, responsáveis por cards, ordem, dependências, datas e progresso pertencem ao [quadro da game jam no Trello](https://trello.com/b/I0FkvVtc/gamejam-visual-novel).
+
+**Recorte de apresentação aprovado para `init-rpg-maker-mz` — Confirmado:** a primeira versão MZ preserva toda a campanha, as regras confirmadas, as informações públicas e a taverna interativa, permitindo adaptar a apresentação para desktop. Paridade integral de apresentação e reflow do jogo completo não é requisito deste incremento, conforme o ADR-001 da spec incremental. As decisões específicas de navegação, área desktop, execução local, dependências, salvamento, áudio e recursos de leitura estão registradas nas exceções deste incremento abaixo e nas seções correspondentes. Os requisitos do jogo completo permanecem vigentes fora desse recorte.
+
+**Execução local aprovada para `init-rpg-maker-mz` — Confirmado:** a equipe testa o projeto MZ no Chrome por um servidor local que entrega os arquivos do próprio computador, sem exigir publicação na internet. A abertura direta por `file://` deixa de ser requisito deste incremento; o HTML existente permanece como referência offline. Esta decisão, registrada no ADR-002, não altera a distribuição pública nem aprova serviços remotos, política de armazenamento ou uma etapa de build.
+
+**Autoria de cenas para `init-rpg-maker-mz` — Confirmado:** os textos das cenas migradas serão escritos e revisados nos eventos pelo editor do RPG Maker, sem manter um segundo catálogo de texto de runtime com edição independente, conforme o ADR-006. O conteúdo atual é fonte de migração; o GDD e as fichas continuam referências de autoridade editorial, e textos provisórios mantêm seu estado de baseline até revisão.
+
+**Área desktop para `init-rpg-maker-mz` — Confirmado:** mínimo de **1280 × 720 pixels efetivos de área do jogo dentro do navegador**, conforme o ADR-008. Layouts para áreas menores ficam fora deste incremento. A resolução interna, a escala e o comportamento ao redimensionar seguem o contrato de superfície da spec.
+
+**Uso em abas para `init-rpg-maker-mz` — Confirmado:** suportar uma única aba ativa do jogo por vez, sem sistema próprio de coordenação entre campanhas abertas simultaneamente, conforme o ADR-010. Uso simultâneo em várias abas fica fora deste incremento; não há promessa de bloqueio da segunda aba ou proteção contra gravações concorrentes. Esse limite também se aplica ao salvamento da seção 3.7.
+
+**Diretriz de integração para `init-rpg-maker-mz` — Confirmado:** priorizar comportamentos nativos do RPG Maker e recursos dos plugins selecionados; criar complementos somente para lacunas necessárias às regras e à experiência aprovadas, conforme o ADR-011. Ficam autorizados o runtime local incluído na engine e os plugins locais necessários à composição, como exceção à restrição do protótipo HTML a bibliotecas de terceiros. Isso não autoriza compras, serviços remotos, bibliotecas sem relação com a migração nem features adicionais por conveniência. Usar HIDE pelo botão e atalho Tab e os avisos nativos de autosave, ajustando as opções para retirar histórico e acesso manual a saves fora do recorte.
+
+**Divisão de responsabilidades para `init-rpg-maker-mz` — Confirmado:** um complemento próprio concentra validação de formação, sobreviventes, atribuições de encontros, resolução de abordagens, mortes, progresso e elegibilidade de Conselho/epílogos. Os eventos chamam essas ações e apresentam seus resultados; textos, imagens, áudio e gravação do save permanecem nos recursos nativos e plugins selecionados, conforme o ADR-014. Essa divisão não autoriza um novo renderizador ou backend próprio de salvamento.
 
 ### 1.2 Decisões que substituem versões anteriores
 
@@ -143,11 +179,14 @@ Cada encontro possui um único texto de sucesso por abordagem e um único texto 
 **Aplicação:** contrato confirmado para o jogo completo. Salvamento e retomada após recarregar a página estão **fora do escopo** da atualização `prototype-v2-gdd-layouts`, conforme a seção 1.1; esse protótipo mantém a campanha somente em memória durante a sessão aberta.
 
 - Existe um único salvamento automático local por navegador em `localStorage`, sem conta, nuvem ou comunicação de rede.
+- **Exceção confirmada para `init-rpg-maker-mz`:** o primeiro incremento inclui salvamento pela infraestrutura nativa do RPG Maker MZ, usando seu backend local de navegador em lugar da exigência literal de `localStorage`, conforme o ADR-003. Permanecem campanha única automática, retomada após fechar o jogo e irreversibilidade de mortes e decisões concluídas. A escolha da infraestrutura não autoriza múltiplos slots manuais nem recarregar para desfazer decisões. A retomada, o tratamento de falha de gravação e o limite de uma aba seguem as decisões específicas deste incremento abaixo e na seção 1.1.
+- **Falha de gravação em `init-rpg-maker-mz` — Confirmado:** usar o tratamento nativo de salvamento do RPG Maker, sem o fluxo próprio proposto de bloquear o avanço e oferecer nova tentativa. Se uma gravação falhar, a retomada fica limitada ao último estado salvo com sucesso; não há garantia de persistência das decisões posteriores a esse ponto. Essa exceção não autoriza salvamento manual nem desfazer decisões por escolha do jogador. O comportamento efetivo com os plugins instalados está descrito na spec e deve ser verificado na implementação.
 - O salvamento ocorre após: preparação concluída; abordagem escolhida e consequência resolvida; sacrifício; conclusão de rota; entrada no clímax; e escolha final.
 - O estado inclui formação, sobreviventes, encontros atribuídos, progresso das rotas, inventário, ordem e escolhas necessárias para reprodução determinística.
 - Ao continuar, uma cena textual interrompida reinicia do começo; decisões concluídas não são revertidas.
-- **Novo jogo** exige confirmação antes de substituir a campanha.
-- Salvamento corrompido ou incompatível deve ser informado antes de o jogo permitir iniciar outra campanha.
+- **Retomada confirmada para `init-rpg-maker-mz`:** posicionar o autosave depois da decisão validada e antes da próxima fala ou escolha. Continuar retoma esse último ponto salvo com sucesso, sem reaplicar a decisão. Por exemplo: a morte é registrada antes do save e a despedida começa depois dele; ao continuar, a despedida reaparece com o herói já morto. Esse ponto de evento salvo define o reinício textual do incremento, em lugar de prometer restauração da caixa aberta ou reinício de uma conversa maior, conforme o ADR-012. Mantém-se o tratamento nativo de falhas do ADR-003.
+- **Novo jogo** exige confirmação antes de substituir a campanha no contrato anterior. **Exceção confirmada para `init-rpg-maker-mz` (ADR-015):** Novo jogo inicia uma campanha nova diretamente, sem verificar o save anterior nem pedir confirmação de substituição. Continuar carrega o último autosave; o próximo autosave bem-sucedido da nova campanha substitui o anterior.
+- Salvamento corrompido ou incompatível deve ser informado antes de o jogo permitir iniciar outra campanha no contrato anterior. **Exceção MZ (ADR-015):** validar e informar falhas ao tentar Continuar; Novo jogo não depende dessa verificação.
 - A escolha final é gravada imediatamente. Depois dela, **Continuar** reabre apenas o desfecho, o memorial e os epílogos daquela campanha; rever a outra escolha exige um novo jogo.
 - O bad ending também marca a campanha como concluída; **Continuar** reabre esse desfecho e seu memorial, sem retornar ao último encontro.
 
@@ -319,7 +358,7 @@ Na falha, o jogador atua como Ivaí e indica quem executará a ação fatal inev
 ## 7. Loop principal
 
 1. O jogo apresenta classificação e avisos de conteúdo antes do início.
-2. No menu, **Continuar** aparece quando existe salvamento; **Novo jogo** pede confirmação se for sobrescrevê-lo.
+2. No menu, **Continuar** aparece quando existe salvamento; **Novo jogo** pede confirmação se for sobrescrevê-lo no contrato anterior; no incremento MZ inicia diretamente, conforme ADR-015.
 3. Na preparação, o jogador consulta destinos e cards dos heróis em qualquer ordem.
 4. Os cards mostram retrato, nome, pronomes, raça, profissão, resumo narrativo e estado, nunca competências.
 5. Com quatro ou mais vivos, escolhe exatamente três; com até três, todos entram automaticamente.
@@ -1122,7 +1161,9 @@ Cada ficha define um único epílogo de sobrevivência, independente da escolha 
 
 #### 19.1.1 Preparação na taverna
 
-**Estado: Confirmado para a atualização do protótipo v2.0.**
+**Adaptação confirmada para `init-rpg-maker-mz`:** os heróis mantêm seus lugares na composição, mas as setas podem percorrê-los em uma ordem fixa, sem obrigação de seguir a proximidade visual na direção pressionada, conforme o ADR-007. Consultar por foco ou hover continua separado de selecionar participação; preservam-se destaque persistente dos integrantes, foco visível e lugares vazios após mortes. A ordem é Gorvak, Elowen, Griznik, Seraphina, Bimbren, Liora, Vaelith e Draska, pulando mortos e restaurando o foco elegível ao fechar menus.
+
+**Baseline histórica: confirmado para a atualização HTML do protótipo v2.0.** As regras abaixo de ficha por hover, balão lateral e clique direto não se aplicam ao MZ: neste incremento, foco apenas destaca e clique abre Conversar/Selecionar ou Retirar do grupo. Conversar mostra a identidade e apresentação na janela inferior com busto. As demais regras de formação, lugares fixos e ausência permanecem vigentes.
 
 - A composição da taverna é a tela interativa de seleção, com os oito heróis inicialmente distribuídos pelo ambiente. A consulta aos destinos permanece acessível na mesma etapa de preparação.
 - O botão **Escolher destino** abre um painel sobre a taverna com os três caminhos, suas ilustrações, rumores, estados e progresso conhecido. Escolher um destino disponível fecha o painel e mostra o destino junto de **Partir**, preservando os heróis selecionados. Continuam valendo os bloqueios e as regras de conclusão das rotas.
@@ -1140,9 +1181,13 @@ Cada ficha define um único epílogo de sobrevivência, independente da escolha 
 - Com a preferência de redução de movimento do sistema ativada, os lugares aparecem vazios imediatamente, preservando a informação textual das mortes.
 - Esse desaparecimento representa a perda na interface. A morte já ocorreu na expedição e continua permanente durante todo o efeito; a imagem em desaparecimento não permite selecionar o herói nem consultar sua fala como se estivesse vivo.
 
+**Recurso auxiliar de apresentação para `init-rpg-maker-mz` — Confirmado:** incluir HIDE para ocultar temporariamente a interface e contemplar a cena. **Fora do escopo deste incremento:** histórico público de diálogos (LOG), conforme o ADR-005. HIDE não cria investigação por pistas ocultas nem muda decisões da campanha. HIDE ou Tab oculta; Tab ou clique esquerdo restaura sem avançar nem escolher uma opção. Esta decisão não aprova AUTO nem avanço rápido de texto inédito.
+
+**Falha de ilustração em `init-rpg-maker-mz` — Confirmado:** usar o tratamento nativo de erro de carregamento e nova tentativa do RPG Maker, conforme o ADR-009. Não implementar continuação própria somente com texto quando uma ilustração falhar. A apresentação textual continua obrigatória para a informação narrativa durante a partida normal; a decisão não autoriza assets ausentes no pacote entregue.
+
 #### 19.1.2 Leitura das cenas
 
-**Estado: Confirmado para a atualização do protótipo v2.0.**
+**Baseline histórica: confirmado para a atualização HTML do protótipo v2.0.** As regras abaixo de ficha por hover, balão lateral e clique direto não se aplicam ao MZ: neste incremento, foco apenas destaca e clique abre Conversar/Selecionar ou Retirar do grupo. Conversar mostra a identidade e apresentação na janela inferior com busto. As demais regras de formação, lugares fixos e ausência permanecem vigentes.
 
 - O texto das cenas aparece em trechos completos, sem revelação letra a letra.
 - O jogador controla o ritmo de leitura: clicar na caixa de texto, no botão **Avançar** ou pressionar Enter avança um trecho completo. Avançar o texto não ativa uma escolha que acaba de aparecer.
@@ -1173,6 +1218,8 @@ O parque foi aberto pela Companhia das Duas Margens, formada por descendentes co
 Na versão descrita, essa história aparece somente por uma ou duas referências ambientais. Fundadores, funcionários, documentos empresariais e história comercial detalhada ficam fora do escopo porque exigiriam conteúdo narrativo sem função no loop atual.
 
 ### 19.4 Áudio
+
+**Recorte confirmado para `init-rpg-maker-mz`:** áudio entra no primeiro incremento. **Baseline de protótipo:** usar os áudios nativos já presentes no projeto MZ, selecionados conforme a adequação a cada cena, com seleção delegada ao agente e ajuste posterior pela equipe, conforme o ADR-004. Essa autorização não constitui aprovação artística final das faixas e efeitos escolhidos. Mantêm-se as fronteiras de áudio abaixo; não é necessário aguardar produção de áudio final para integrar esta versão.
 
 **Aplicação:** contrato confirmado para o jogo completo. Áudio está **fora do escopo** da atualização `prototype-v2-gdd-layouts`, conforme a seção 1.1 e o ADR-008; esse protótipo permanece sem som, sem assets ou controles de áudio.
 
@@ -1234,7 +1281,7 @@ Balanceamento numérico, ajustes de texto e mudanças de ritmo só podem ser esc
 | Recorte exato da primeira entrega do protótipo v2.0 | Requer specs incrementais aprovadas e planejamento no Trello |
 | Critérios de “versão da jam pronta”, cronograma de publicação e plano detalhado de QA | Requer etapa posterior de implementação, QA e entrega |
 | Cronograma, ordem, dependências e responsáveis por tarefas | Pertencem exclusivamente ao Trello |
-| Migração para RPG Maker MZ | Requer spec incremental e comprovação de paridade |
+| Implementação da migração para RPG Maker MZ | O recorte e as exceções de `init-rpg-maker-mz` estão confirmados neste GDD; a execução requer a spec incremental aprovada e comprovação da paridade acordada |
 | Versão pública para download | A distribuição aprovada é somente o jogo incorporado no itch.io |
 | Localização jogável EN-US | Requer tradução, revisão, adaptação de layout e QA próprios |
 | Celular e controles por toque | Requer desenho de interação e matriz de dispositivos |
@@ -1308,3 +1355,27 @@ Caminho da Igreja e Parque das Águas Assombradas usam cinco encontros sorteados
 Somente heróis vivos presentes após o sexto encontro opinam e têm o epílogo predefinido de sua ficha exibido. Mortos aparecem no memorial; vivos na cidade não participam. Reunir o medalhão liberta Floraí e Pérola e mata Ivaí. Destruí-lo salva Ivaí e encerra a maldição, mas permite que Andirá absorva os amantes e suas memórias. Se os oito heróis morrerem, Ivaí morre antes da escolha.
 
 O GDD v4.0 define a visão completa. O recorte de cada incremento do protótipo v2.0 será decidido posteriormente em specs e no Trello.
+
+**Complemento confirmado do ADR-026 para `init-rpg-maker-mz`:** Rever descrição e Recuar no topo ficam acionáveis na fase de escolha das abordagens, conforme suas regras, por PictureChoices. Não ficam ativos durante a apresentação textual; retornam ao terminar a releitura.
+
+**Recebimento das peças em `init-rpg-maker-mz` — Confirmado:** retirar o busto, manter o cenário e apresentar a peça no centro com aparecimento gradual, som curto e mensagem inferior nativa identificando a peça recebida. A imagem permanece até o avanço do jogador. Usar comandos nativos de eventos; manter o orçamento de efeitos e a alternativa sem animação para movimento reduzido (ADR-028).
+
+**Sobreposição do mapa em `init-rpg-maker-mz` — Confirmado:** após obter as duas peças, apresentar uma animação automática sobre o fundo da taverna, sem quebra-cabeça. As peças se alinham no centro e revelam o mapa completo e o caminho do Vilarejo; a explicação espera o avanço do jogador. Usar imagens e movimentos nativos, com alternativa direta para movimento reduzido (ADR-029).
+
+**Conselho e desfechos do medalhão em `init-rpg-maker-mz` — Confirmado:** falas de Ivaí e participantes elegíveis do Conselho usam bustos, um por vez, sobre o mesmo cenário. Os finais Reunir e Destruir apresentam texto nativo sobre seus fundos próprios de tela inteira, sem bustos, mantendo os submapas exclusivos (ADRs 031–032, substituindo a apresentação anterior do ADR-030).
+
+**Atualização dos finais MZ — Confirmado (ADR-031):** Reunir e Destruir usam fundos próprios gerados em tela inteira, com texto nativo sobreposto embaixo, substituindo a decisão anterior de reutilizar apenas o cenário. As imagens geradas são propostas provisórias, não arte final aprovada.
+
+**Final por perda total MZ — Confirmado:** usar ilustração própria de tela inteira com narração nativa sobreposta, conforme ADR-032. A arte gerada é provisória e não altera o momento ou local lógico em que a derrota pode ocorrer.
+
+**Memorial MZ — Confirmado:** apresentar juntos em uma única tela os retratos e nomes de todos os heróis mortos na campanha, sem páginas individuais. Omitir quando não houver mortos; manter os epílogos elegíveis separados (ADR-033).
+
+**Animação do memorial MZ — Confirmado:** um Common Event exclusivo executa a animação: mostrar apenas as lápides e bustos dos heróis mortos; reduzir e mover cada busto até o topo de sua lápide, transformando-o visualmente em retrato emoldurado. A composição final reúne todos na mesma tela. O mapa do memorial chama esse evento; usar comandos nativos de imagens e movimento. A versão padrão é animada (ADR-034).
+
+**Local da morte no memorial MZ — Confirmado:** registrar por herói a rota, armadilha e posição em que morreu, junto da morte e antes do autosave. A lápide apresenta uma descrição curta do local usando os nomes públicos da rota e armadilha. O registro persiste na campanha e é limpo em Novo jogo; decisões repetidas não o sobrescrevem (ADR-035).
+
+**Inscrição da lápide MZ — Complemento confirmado:** a descrição curta pode contar como o herói morreu, conforme a morte contextual da armadilha, mantendo o local registrado. Priorizar uma frase narrativa breve e fiel ao acontecimento (ADR-035).
+
+**Encerramento MZ — Confirmado:** epílogos elegíveis usam bustos existentes e texto nativo inferior, em seus submapas. Depois, apresentar créditos com botão **Pular créditos**, acessível por mouse e teclado. Conclusão normal ou pulo retorna à tela inicial sem alterar o desfecho salvo. Se não houver epílogos, seguir do memorial aos créditos; omitir também o memorial quando não houver mortos (ADR-036).
+
+**Compatibilidade de saves MZ — ADR-037:** alterações na organização ou no conteúdo dos eventos/mapas podem tornar saves anteriores incompatíveis. Continuar informa a incompatibilidade sem apagar o save; Novo jogo permanece disponível diretamente. Essa política integra a revisão técnica autorizada e não promete migração entre versões.

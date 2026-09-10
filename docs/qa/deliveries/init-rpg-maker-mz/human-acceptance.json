@@ -1,0 +1,17 @@
+{
+  "acceptedAt": "2026-09-10T03:36:52.489027+00:00",
+  "acceptedBy": "Edney (usuário nesta conversa)",
+  "statement": "está aprovado pelos testes humanos",
+  "scope": "Incremento init-rpg-maker-mz no estado atual, após resumo explícito das pendências humanas de áudio, UI e arte/editorial/cultural/atribuição.",
+  "criteria": [
+    "E2E-020",
+    "V-AUDIO",
+    "V-VISUAL",
+    "V-HUMAN"
+  ],
+  "kind": "User-reported human acceptance; no assistant audition or individual reviewer attribution claimed.",
+  "gitHead": "12a372de9c3a61680683ab7703235e7ffd5e366f",
+  "workingTree": "uncommitted; exact runtime files bound by runtime-manifest.json",
+  "knownRefinement": "BUG-20260909-memorial-survivors-total-loss remains unfixed, accepted as known refinement for this increment.",
+  "editorTests": "Excluded by earlier explicit user instruction; future ADR remains user-owned."
+}

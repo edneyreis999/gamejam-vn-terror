@@ -9,7 +9,7 @@
 
 ## Game Terms
 
-- **Campaign**: one page-lifetime run from the initial roster to victory or total defeat.
+- **Campaign**: one narrative run from the initial roster to its ending or deliberate replacement. The HTML prototype confines it to one page lifetime; the accepted `init-rpg-maker-mz` increment resumes it across page visits from its last successful automatic save (ADRs 003 and 012).
 - **Expedition**: one party attempt inside one selected dungeon; retreat or party wipe ends the attempt without ending the campaign when survivors remain.
 - **Formation**: the town decision surface where the player prepares the next expedition.
 - **Initial dungeon**: either of the two map-half destinations, internally backed by the physical or supernatural encounter pool.

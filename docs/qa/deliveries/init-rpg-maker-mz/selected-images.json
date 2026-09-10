@@ -1,0 +1,27 @@
+[
+  {
+    "selected": "continue.png",
+    "source": "docs/qa/evidence/init-rpg-maker-mz/task-13/directed-current-package-20260910-01/exported-continue.png",
+    "sha256": "736b63bb68f7ffdb0a1295cf457d0e4ac7eb60d426549e9a1f0e789fcb6ec4e3"
+  },
+  {
+    "selected": "options-pt-br.png",
+    "source": "docs/qa/evidence/init-rpg-maker-mz/task-13/directed-current-package-20260909-03/all-volumes-muted.png",
+    "sha256": "405076ed5e0f9cda2edca3816deef36f4ea854abd1e8e3458cb67e5ac3dfd14f"
+  },
+  {
+    "selected": "zoom-110.png",
+    "source": "docs/qa/evidence/init-rpg-maker-mz/task-13/directed-zoom-20260909-01/long-choice-focus-2.png",
+    "sha256": "3917226f3b5a6bd850ab58606b05824b6b0014abeee24ea58cf411e7fa5310c6"
+  },
+  {
+    "selected": "gorvak-disappearing-middle.png",
+    "source": "docs/qa/evidence/init-rpg-maker-mz/task-13/directed-absence-20260909-03/gorvak-disappearing-middle.png",
+    "sha256": "b530177de606bfee869c18b4b9026e90277f67af1d02ad9691ce1ea983edd23d"
+  },
+  {
+    "selected": "gorvak-absent-later-visit.png",
+    "source": "docs/qa/evidence/init-rpg-maker-mz/task-13/directed-absence-20260909-03/gorvak-absent-later-visit.png",
+    "sha256": "b5a649ed066cb8d23deb0928eeff5dbcd78d43e74003b848d9540ae94124f30a"
+  }
+]
