@@ -86,7 +86,7 @@ All eight tavern heroes are required delivery coverage. Maintain a ledger for H1
 
 ## Commands and execution status
 
-Run from repository root. The commands below preserve the original proposed filters; actual execution results are recorded in task notes and the current report.
+Run from repository root. The commands below preserve the original proposed filters; actual execution results are recorded in task notes and the current report. Since 2026-09-11, use `npm start` from the repository root in place of the historical launch command below; see the [current launch instructions](../../../rpg-maker/README.md#jogar-localmente).
 
 ~~~sh
 node rpg-maker/tools/validate-content.mjs --json

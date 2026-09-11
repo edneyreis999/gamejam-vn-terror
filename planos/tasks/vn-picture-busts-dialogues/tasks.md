@@ -61,7 +61,7 @@ Each V ID has exactly one primary owner. Supporting evidence does not duplicate 
 
 Run the content CLI after each native change and revision: `node rpg-maker/tools/validate-content.mjs --json`. Task files give focused existing test filters; append newly registered IDs to those filters. Full final registered verification is `node --test rpg-maker/tests/*.test.mjs` in the isolated test copy. Revision updates use `node rpg-maker/tools/revise-layout.mjs --revision <fresh-unused-id>`; the placeholder is resolved during execution, never reused literally.
 
-`npm --prefix "rpg-maker/The Dryland Drowned" start` launches the local game in Chrome, separately from the brief editor editability check. Directed acceptance uses the installed qa-execution runner, `rpg-maker/qa/directed-adapter.mjs`, and the extended existing journey/surface cases; legacy direct `node --test rpg-maker/qa/*.test.mjs` is not acceptance evidence. Do not run browser suites alongside another task's server on the fixed origin.
+`npm start` from the repository root launches the local game in Chrome, separately from the brief editor editability check. Directed acceptance uses the installed qa-execution runner, `rpg-maker/qa/directed-adapter.mjs`, and the extended existing journey/surface cases; legacy direct `node --test rpg-maker/qa/*.test.mjs` is not acceptance evidence. Do not run browser suites alongside another task's server on the fixed origin.
 
 Task notes and verification.md are the durable execution record. Task 08 creates the incremental guide/charter and maps current scenario owners; task 09 writes the dated report and selected delivery evidence. Raw logs, fixtures and screenshots remain in unique evidence directories until selectively preserved for the devlog.
 

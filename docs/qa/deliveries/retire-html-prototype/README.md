@@ -7,7 +7,7 @@ O único projeto de jogo é `rpg-maker/The Dryland Drowned/`. A implementação 
 Para jogar, execute na raiz:
 
 ```sh
-npm --prefix "rpg-maker/The Dryland Drowned" start
+npm start
 ```
 
 As instruções completas estão no [README MZ](../../../../rpg-maker/README.md). O comando continua usando Node 22+, Chrome e servidor local, sem build. A revisão do manifesto segue a política existente: saves de layouts anteriores podem ser recusados sem serem apagados; não houve migração de saves.
