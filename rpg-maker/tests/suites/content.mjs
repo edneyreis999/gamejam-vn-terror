@@ -463,7 +463,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
   const helper={list:events[location.commonEventId].list.slice(location.start,location.end)};
   const move=helper.list.find(c=>c.code===357&&c.parameters[1]==='Move_MoveToCoordinates').parameters[3];
   const scale=helper.list.find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo').parameters[3];
-  assert.equal(move['TargetX:str'],'320');assert.equal(scale['TargetScaleX:str'],'100');
+  assert.equal(move['TargetX:str'],'200');assert.equal(scale['TargetScaleX:str'],'100');
   move['TargetX:str']='342';scale['TargetScaleX:str']='44';scale['TargetScaleY:str']='44';
   const profileList=events[location.commonEventId].list;
   const enter=profileList.findIndex((c,i)=>i>=location.start&&c.code===357&&c.parameters[1]==='Basic_EnterBust');
@@ -555,7 +555,7 @@ canonicalCase('UT-071','native recovery follows edited entry, conditional roster
  const focus=resizedList.findIndex((c,i)=>i>registry.locations['speech.H1'].start&&c.code===117&&c.parameters[0]===68);
  resizedList.splice(focus,0,command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleTo','Scale_ScaleTo',{'PictureID:arrayeval':'["60"]','TargetScaleX:str':'80','TargetScaleY:str':'80','Duration:eval':'0'}]));
  const resizedComposition=deriveVisualComposition(resized,parse(resized),'speech.H1',1,{});
- assert.equal(resizedComposition.targets.get(60).x,320,'Changing scale alone preserves authored position');
+ assert.equal(resizedComposition.targets.get(60).x,200,'Changing scale alone preserves authored position');
  assert.equal(resizedComposition.targets.get(60).scaleX,80);
  assert.throws(()=>deriveVisualComposition(events,edited,'speech.H1',999,{}),/Invalid visual text box/);
  assert.throws(()=>deriveVisualComposition(original,registry,'missing.section',0,{}),/Invalid visual composition input/);
@@ -645,7 +645,7 @@ canonicalCase('UT-074','global focus style independently scales speaker and list
   assert.ok(Math.abs(first.targets.get(slot).scaleX-110)<1e-9,`First speaker is focused: ${id}`);
  }
  const composition=deriveVisualComposition(original,parsed,'speech.H1',0,{},style);
- assert.deepEqual([composition.targets.get(60).x,composition.targets.get(60).scaleX,composition.targets.get(60).tone],[296,80,[-60,-60,-60,0]]);
+ assert.deepEqual([composition.targets.get(60).x,composition.targets.get(60).scaleX,composition.targets.get(60).tone],[176,80,[-60,-60,-60,0]]);
  assert.ok(Math.abs(composition.targets.get(63).scaleX-110)<1e-9);
  assert.equal(composition.targets.get(63).x,960);
  assert.equal(composition.bases.get(60).scaleX,100);
@@ -665,7 +665,7 @@ canonicalCase('UT-074','global focus style independently scales speaker and list
  assert.equal(deriveVisualComposition(large,largeRegistry,'speech.H1',0,{},style).targets.get(60).x,-2584);
  const none=parseFocusParameters({ListenerDarkness:'0',ListenerOffset:'0',ListenerScale:'100',SpeakerScale:'100',FocusDuration:'0'}).style;
  const unchanged=deriveVisualComposition(original,parsed,'speech.H1',0,{},none);
- assert.deepEqual([unchanged.targets.get(60).x,unchanged.targets.get(60).scaleX,unchanged.targets.get(60).tone],[320,100,[0,0,0,0]]);
+ assert.deepEqual([unchanged.targets.get(60).x,unchanged.targets.get(60).scaleX,unchanged.targets.get(60).tone],[200,100,[0,0,0,0]]);
  const empty=clone(original),location=parsed.locations['council.challenge'],list=empty[location.commonEventId].list;
  list.splice(list.findIndex((c,i)=>i>=location.start&&c.code===101),0,command(117,[68]));
  const variables={144:0,145:2,146:3};
@@ -693,7 +693,7 @@ canonicalCase('IT-069','Plugin Manager focus settings survive Options and a styl
  await browser.waitFor(settled);
  const snapshot=()=>browser.evaluate('[60,63].map(id=>{const p=$gameScreen.picture(id);return {id,x:p.x(),scale:p.scaleX(),tone:p.tone()}})');
  const first=await snapshot();
- assert.deepEqual(first[0],{id:60,x:296,scale:160,tone:[-60,-60,-60,0]});
+ assert.deepEqual(first[0],{id:60,x:176,scale:160,tone:[-60,-60,-60,0]});
  assert.ok(Math.abs(first[1].scale-110)<.001);
  const campaignBefore=await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)');
  const textBefore=await browser.evaluate('$gameMessage.allText()');
@@ -729,7 +729,7 @@ canonicalCase('IT-069','Plugin Manager focus settings survive Options and a styl
  const resumed=await snapshot();
  // Native MZ does not serialize Game_Message. The saved interpreter resumes
  // at the next authored box, which belongs to Gorvak; it must not replay Ivai's line.
- assert.deepEqual(resumed[0],{id:60,x:320,scale:240,tone:[0,0,0,0]});
+ assert.deepEqual(resumed[0],{id:60,x:200,scale:240,tone:[0,0,0,0]});
  assert.deepEqual(resumed[1],{id:63,x:968,scale:75,tone:[-80,-80,-80,0]});
  assert.equal(await browser.evaluate('$gameMessage.speakerName()'),'Gorvak');
  const speechLocation=parse(prepared.events).locations['speech.H1'];
@@ -752,7 +752,7 @@ canonicalCase('IT-069','Plugin Manager focus settings survive Options and a styl
  assert.equal(reducedDurations.length,6);
  assert.deepEqual([...new Set(reducedDurations)],['0'],'Reduced motion requests instantaneous transforms; the vendor applies them on its next picture update');
  const reduced=await snapshot();
- assert.deepEqual(reduced[0],{id:60,x:312,scale:150,tone:[-80,-80,-80,0]});
+ assert.deepEqual(reduced[0],{id:60,x:192,scale:150,tone:[-80,-80,-80,0]});
  assert.deepEqual(reduced[1],{id:63,x:960,scale:120,tone:[0,0,0,0]});
  await browser.screenshot(`${folder}/updated-style-reduced.png`);
  assert.equal(hash(await readFile(path.join(prepared.directory,'js/plugins/Dryland_EventBridge.js'))),pluginHash);

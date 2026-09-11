@@ -6,13 +6,13 @@ persona: Rui, revisor de conteúdo
 journey: J-mz-creative-review
 expected: Telas permanecem legíveis e os contextos, temas e efeitos possuem revisão audiovisual registrada.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: pass
-bug_ids:
-fix_status:
+qa_status: fail
+bug_ids: BUG-20260911-tavern-portraits-offscreen
+fix_status: pending
 retest_status:
 fix_commits:
-evidence: docs/qa/reports/2026-09-09-native-mz-playtest.md
-last_report: docs/qa/reports/2026-09-09-native-mz-playtest.md
+evidence: docs/qa/deliveries/pr3-taverna/README.md
+last_report: planos/tasks/pr3-taverna/verification.md
 overlaps: LOC-mz-session-recovery-export
 ---
 
@@ -31,3 +31,7 @@ Estado deste incremento: **FAIL em V007: prisões visíveis ausentes; BLOCKED em
 [Guia e variantes](../guides/vn-picture-busts-dialogues.md) · [Charter](../charters/CH-vn-picture-busts-dialogues.md). A tarefa09 registra evidência e veredito incremental sem apagar o histórico. Fonte relevante alterada reabre somente os sensores afetados.
 
 Resultado consolidado no [relatório de2026-09-11](../reports/2026-09-11-vn-picture-busts-dialogues.md). A cobertura atual e a retenção qualificada das capturas anteriores estão separadas; nenhum aceite humano desta composição é alegado.
+
+## Final verify pr3-taverna — 2026-09-11
+
+**FAIL para o enquadramento dos retratos:** Elowen e Vaelith ficam fora da tela nos quadros iniciais; outros heróis ficam excessivamente ampliados. Reproduzido também com os dados da main. O palco e as interações preservadas do PR passam. [Defeito](../bugs/BUG-20260911-tavern-portraits-offscreen.md) · [evidências e escopo](../../../planos/tasks/pr3-taverna/verification.md). Os aceites históricos acima mantêm seu escopo; este resultado não os reinterpreta nem declara nova aprovação artística.

@@ -1,5 +1,5 @@
 {
-  "nativeLayoutVersion": "mz-20260911-focus-parameters-02",
+  "nativeLayoutVersion": "mz-20260911-pr3-taverna-02",
   "revisions": {
     "mz-20260909-01": "97b455b26e373fedc6ce4e22747f9ded757168841e82cab99e372ac1b4c14ce8",
     "mz-20260909-02": "616367f7be1dbdff758fd900cb32112a5122ea6f8ed102119a1d92a608472446",
@@ -33,10 +33,12 @@
     "mz-20260911-slot-authorship-02": "990804b24e37930869802cf89b45a45d5b31c8605aa550ad35af8def03225ab5",
     "mz-20260911-slot-authorship-03": "cd761b82e60a164d312f71f70342f90cbf5591538b77719c31534f298eff4a10",
     "mz-20260911-focus-parameters-01": "a04197a5ee61d27eda42cf9eac15c2bacb17cde6aab92af9f3385b89d8aaf8e1",
-    "mz-20260911-focus-parameters-02": "7db3510fe7039b769346af87b8b2ba177e0fcb4b3ec2d738338d2bce30db52e1"
+    "mz-20260911-focus-parameters-02": "7db3510fe7039b769346af87b8b2ba177e0fcb4b3ec2d738338d2bce30db52e1",
+    "mz-20260911-pr3-taverna-01": "eefe669aa8ff8c81d57aa36611b75a45a0aba7f3fdd82dad06d871e441478045",
+    "mz-20260911-pr3-taverna-02": "a2124bdf47eb3d459ba4003ba547854c4f74cdb7358f14829414702f5c3e0530"
   },
   "files": {
-    "data/CommonEvents.json": "6448bfab20d66fabeb66dd90e3af985eef888cf6e8df6de0593d68e8469a1b1c",
+    "data/CommonEvents.json": "4b2fd20b5fde05b6b97787230af2c871a0a83170d0522c4673ade398c90ac2d8",
     "data/Map001.json": "7ab36e9cf1590617f2ac56eadbd07803433677bffea7810be4a1775b9b469cdc",
     "data/Map002.json": "4b9b1ff70419ec775b699686b0f7b21bdc7fd4e0e8da0ba91060b60dc611b975",
     "data/Map003.json": "982f7abd781b4f8d14c5363c82233fe93980a965278767dadff0bf530fff77bf",
@@ -74,7 +76,7 @@
     "data/Map035.json": "fd23d704a4b94cc3d29194e5b712dbf341560bdffcc515143f22d22b8f5ace80",
     "data/Map036.json": "60813f000602a8c1fd7e40c0ed55cb9e1e26a9931682a423c0b76beceb7f2212",
     "data/MapInfos.json": "f5b68c23f624ac9ff109403a7f3743b02d8e066a79b3299ed29d2230ec71ac7c",
-    "data/System.json": "7f0234c5dbe3611c65ca48d2a9ddcc3d5c18123e01305473b8eb69741da66753"
+    "data/System.json": "d4a142dda4ad9ab23fb7945495f035b73a8ec24749c1448e8227c168a7e5be9b"
   },
   "assets": [
     "audio/bgm/Battle1.ogg",
@@ -882,6 +884,14 @@
     "img/pictures/Dryland_Memorial.png",
     "img/pictures/Dryland_Panel.png",
     "img/pictures/Dryland_Tag.png",
+    "img/pictures/Dryland_Tavern_H1.png",
+    "img/pictures/Dryland_Tavern_H2.png",
+    "img/pictures/Dryland_Tavern_H3.png",
+    "img/pictures/Dryland_Tavern_H4.png",
+    "img/pictures/Dryland_Tavern_H5.png",
+    "img/pictures/Dryland_Tavern_H6.png",
+    "img/pictures/Dryland_Tavern_H7.png",
+    "img/pictures/Dryland_Tavern_H8.png",
     "img/pictures/Dryland_Taverna.png",
     "img/pictures/Dryland_andira.png",
     "img/pictures/Dryland_florai.png",
@@ -983,6 +993,14 @@
     "img/pictures/SF_People1_6.png",
     "img/pictures/SF_People1_7.png",
     "img/pictures/SF_People1_8.png",
+    "img/pictures/h1-Gorvak.png",
+    "img/pictures/h2-Elowen.png",
+    "img/pictures/h3-Griznik.png",
+    "img/pictures/h4-Seraphina.png",
+    "img/pictures/h5-Bimbren.png",
+    "img/pictures/h6-Liora.png",
+    "img/pictures/h7-Vaelith.png",
+    "img/pictures/h8-Draska.png",
     "img/sv_actors/Actor1_1.png",
     "img/sv_actors/Actor1_2.png",
     "img/sv_actors/Actor1_3.png",

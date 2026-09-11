@@ -129,7 +129,7 @@ Recortes do memorial, imagens e estilos de interface ainda têm ajustes em JavaS
 
 ### Taverna e preparação
 
-Os oito eventos **Herói — Nome** contêm `profile.Hn`, `speech.Hn`, `selection.Hn` e `party_full.Hn`. Profile e speech usam o conteúdo aceito; as falas de seleção e grupo cheio permanecem marcadas como provisórias. O busto usa a arte local integral, posicionada e escalada pelo VNPictureBusts. Não há outro catálogo de parágrafos em JavaScript.
+Os oito eventos **Herói — Nome** contêm `profile.Hn`, `speech.Hn`, `selection.Hn` e `party_full.Hn`. As quatro famílias são placeholders provisórios para todos os oito heróis, com revisão narrativa pendente. A [integração do PR #3](../planos/tasks/pr3-taverna/spec.md) reabre o aceite editorial anterior sem reescrever as falas. O busto usa a arte local integral, posicionada e escalada pelo VNPictureBusts. Não há outro catálogo de parágrafos em JavaScript.
 
 O evento **Taverna — Palco** possui as posições nativas dos retratos e botões. A orquestração da taverna mantém Show Choices com ramos editáveis: Herói, Destinos, Elenco e Partir. O comentário `@dryland-choice formation` expande o ramo Herói nos sobreviventes do catálogo e vincula os retratos pelo PictureChoices; o resultado retorna ao ramo original. Os modos `hero`, `destinations` e `roster` mantêm os respectivos ramos. Preserve esses comentários ao editar as escolhas. Os callbacks de foco do ChoiceCmnEvts são somente observacionais; quem decide é a ação validada.
 
@@ -142,6 +142,8 @@ Use setas para percorrer os heróis na ordem canônica, Enter para abrir Convers
 **Recuar** aparece antes de comprometer uma abordagem quando restam pelo menos três heróis vivos no elenco. A confirmação retorna à taverna e salva a formação retornada; cancelar restaura o encontro. Mortes, encontros revelados e maior percurso conhecido permanecem. Uma nova tentativa começa na primeira posição.
 
 Quando a expedição fica vazia antes de concluir a rota e há reservas vivas, o texto de retorno automático leva à taverna. O evento **Taverna — Ausências** faz os novos mortos desaparecerem juntos durante 60 frames nativos, sem mudar suas posições ou permitir interação com eles. Movimento reduzido deixa os lugares vazios imediatamente. Sair durante o efeito ou usar Continuar a partir do retorno já registrado não o repete; **Elenco** mantém as mortes por escrito.
+
+A composição do palco preserva as imagens e posições de Lucas no PR #3. Os arquivos `Dryland_Tavern_H1.png` a `Dryland_Tavern_H8.png` contêm essas artes sem alteração de bytes; `Dryland_H1.png` a `Dryland_H8.png` continuam atendendo diálogos, Conselho e memorial. Os arquivos `h1-Gorvak.png` a `h8-Draska.png` entregues no PR também foram preservados. O CE38 mantém escala de 35% para os oito heróis, controles superiores nas posições autoradas e Partir embaixo. A [decisão de integração](../planos/tasks/pr3-taverna/adrs/adr-001.md) registra a separação dos arquivos e a entrada do Gorvak no sistema de foco atual.
 
 **Taverna — Palco** restaura apenas os retratos ausentes a cada ciclo, para recuperar a cena após uma conversa sem reiniciar movimentos em andamento. Preserve as condições dos comandos Show Picture e os movimentos simultâneos, sem espera individual por herói.
 
