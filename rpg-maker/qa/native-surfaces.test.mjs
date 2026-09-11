@@ -2,9 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { setTimeout as delay } from 'node:timers/promises';
-import { openChrome, startServer } from '../tests/helpers/native-chrome.mjs';
+import { openChrome, startServer, origin } from '../tests/helpers/native-chrome.mjs';
+import { archiveFiles, archiveRecord, captureNativeSave, sha256 } from './native-save-archive.mjs';
 import { NativePlayer, DirectedNativePlayer } from './native-player.mjs';
 export const sourceFiles = [new URL('./native-player.mjs', import.meta.url)];
+const saveArchive = ['bust-save-producer','bust-save-consumer','bust-save-incompatible'].includes(process.env.DRYLAND_QA_SURFACE);
+const saveIncompatible = process.env.DRYLAND_QA_SURFACE === 'bust-save-incompatible';
+const saveConsumer = saveIncompatible || process.env.DRYLAND_QA_SURFACE === 'bust-save-consumer';
+const bustControls = process.env.DRYLAND_QA_SURFACE === 'bust-controls-tavern';
+const bustTavern = process.env.DRYLAND_QA_SURFACE === 'bust-tavern';
 const recovery = process.env.DRYLAND_QA_SURFACE === 'storage-recovery' || process.env.DRYLAND_QA_SURFACE === 'image-recovery';
 const imageRecovery = process.env.DRYLAND_QA_SURFACE === 'image-recovery';
 const absence = process.env.DRYLAND_QA_SURFACE === 'absence-retreat';
@@ -15,10 +21,10 @@ const currentPackage = process.env.DRYLAND_QA_SURFACE === 'current-package';
 const packageReview = editorPackage || currentPackage;
 const encounterInput = process.env.DRYLAND_QA_SURFACE === 'encounter-input';
 export const scenario = {
-  id: recovery ? (imageRecovery ? 'image-recovery' : 'storage-recovery') : absence ? 'absence-retreat' : packageReview ? process.env.DRYLAND_QA_SURFACE : encounterInput ? 'encounter-input' : 'entry-preparation-hide',
+  id: bustControls ? 'bust-controls-tavern' : saveArchive ? process.env.DRYLAND_QA_SURFACE : bustTavern ? 'bust-tavern' : recovery ? (imageRecovery ? 'image-recovery' : 'storage-recovery') : absence ? 'absence-retreat' : packageReview ? process.env.DRYLAND_QA_SURFACE : encounterInput ? 'encounter-input' : 'entry-preparation-hide',
   faultIds: recovery ? [imageRecovery ? 'required-image' : 'storage-rejection'] : [],
   publicCommands: ['expeditionQA.setSeed'],
-  criteria: recovery ? (imageRecovery ? ['E2E-017'] : ['E2E-013', 'E2E-014']).map(id => ({ id, variant: 'isolated-recovery', expectedRef: 'docs/qa/guides/native-mz-cycle.md' })) : absence ? ['E2E-004', 'E2E-005', 'E2E-019'].map(id => ({ id, variant: 'absence-retreat', expectedRef: 'docs/qa/guides/native-mz-cycle.md' })) : editorPackage ? [
+  criteria: bustControls ? [{id:'D-06',variant:large?'tavern-reduced':'tavern-normal',expectedRef:'planos/tasks/vn-picture-busts-dialogues/verification.md#runtime-scenarios'}] : saveArchive ? [{id:'D-07',variant:saveConsumer?'archive-preboot-continue':'native-checkpoint-producer',expectedRef:'planos/tasks/vn-picture-busts-dialogues/verification.md#runtime-scenarios'}] : bustTavern ? [{id:'D-01',variant:large?'all-eight-reduced':'all-eight-normal',expectedRef:'planos/tasks/vn-picture-busts-dialogues/verification.md#runtime-scenarios'}] : recovery ? (imageRecovery ? ['E2E-017'] : ['E2E-013', 'E2E-014']).map(id => ({ id, variant: 'isolated-recovery', expectedRef: 'docs/qa/guides/native-mz-cycle.md' })) : absence ? ['E2E-004', 'E2E-005', 'E2E-019'].map(id => ({ id, variant: 'absence-retreat', expectedRef: 'docs/qa/guides/native-mz-cycle.md' })) : editorPackage ? [
     { id: 'E2E-018', variant: 'editor-package', expectedRef: 'docs/qa/guides/native-mz-cycle.md#E2E-018' },
     { id: 'V-EXPORT', variant: 'editor-package', expectedRef: 'docs/qa/guides/native-mz-cycle.md#V-EXPORT' }
   ] : currentPackage ? [
@@ -31,11 +37,14 @@ export const scenario = {
     { id: 'E2E-015', variant: 'message-choice-hide', expectedRef: 'docs/qa/guides/native-mz-cycle.md#E2E-015' }
   ],
   requires: ['native-mz', 'public-input'],
-  browser: { width: large ? 1920 : 1280, height: large ? 1080 : 720, reducedMotion: large ? 'reduce' : 'no-preference', dpr: 1, locale: 'pt-BR', query: '', timeoutMs: 30000, ...(nativeZoom ? { nativeZoom: 1.1, launchArgs: ['--window-size=1920,1080'] } : {}) }
+  browser: { width: large ? 1920 : 1280, height: large ? 1080 : 720, reducedMotion: large ? 'reduce' : 'no-preference', dpr: 1, locale: 'pt-BR', query: '', timeoutMs: 30000, ...(bustTavern || bustControls || saveArchive ? { launchArgs: ['--force-device-scale-factor=1'] } : {}), ...(nativeZoom ? { nativeZoom: 1.1, launchArgs: ['--window-size=1920,1080'] } : {}) }
 };
 
 export async function execute(context) {
   const player = new DirectedNativePlayer(context);
+  if (saveArchive) return executeSaveArchive(context, player);
+  if (bustControls) return executeBustControls(context, player);
+  if (bustTavern) return executeBustTavern(context, player);
   if (recovery) return executeRecovery(context, player);
   await player.choicesContaining('Jogar');
   assert.deepEqual(await context.input.publicCommand('expeditionQA.setSeed', [9]), { ok: true, seed: 9 });
@@ -309,8 +318,145 @@ async function executeRecovery(context, player) {
   await context.shot('new-game-restored');
 }
 
+async function executeBustControls(context,player) {
+ await player.choicesContaining('Jogar');await context.input.publicCommand('expeditionQA.setSeed',[0]);
+ await player.choose('Jogar');await player.choicesContaining('Gorvak');
+ for(const cache of ['cold','warm']){
+  await player.choose('Gorvak',{mouse:cache==='warm'});await player.choose('Conversar');
+  for(let box=0;box<7;box++){
+   await player.ready();
+   if(box===2||box===5)await player.dialogueControls(`tavern-${cache}-box-${box}`,[60,63]);
+   await context.input.key('Enter',box===0?650:70);
+  }
+  await player.choicesContaining('Gorvak');
+  assert.equal(await context.read('completed-conversation',()=>[60,61,62,63,64,65].every(id=>!$gameScreen.picture(id))),true);
+ }
+ for(const hero of ['Gorvak','Elowen','Griznik']){await player.choose(hero);await player.choose('Selecionar');}
+ await player.choose('Destinos');await player.choose('Caminho da Igreja');await player.choose('Partir');
+ await player.choicesContaining('Rever descrição');await player.choose('Recuar');await player.choose('Recuar');
+ await player.choicesContaining('Partir');await player.choose('Destinos');await player.choose('Caminho da Igreja');await player.choose('Partir');await player.ready();
+ const revisit=await player.snapshot('legal-seen-revisit');assert.equal(revisit.snapshot.reading.canSkip,true);
+ await context.wait(()=>SceneManager._scene._drylandSkipWindow.visible);await context.input.key('s',650);
+ await player.ready();const skipped=await player.snapshot('legal-seen-skipped');
+ assert.equal(skipped.snapshot.actionHistory.filter(a=>a.type==='SKIP_SEEN_TEXT').length,1);
+ assert.deepEqual(skipped.snapshot.deadHeroes,revisit.snapshot.deadHeroes);assert.deepEqual(skipped.snapshot.party,revisit.snapshot.party);
+ await context.shot('legal-seen-skip-result');
+ await player.choicesContaining('Rever descrição');
+ assert.equal((await player.snapshot('no-carried-skip')).snapshot.currentEncounter!==null,true);
+}
+
+async function executeBustTavern(context, player) {
+  const names = ['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska'];
+  await player.choose('Jogar');
+  await player.choicesContaining('Gorvak');
+  const before = await player.snapshot('tavern-start');
+  for (const [hero, name] of names.entries()) {
+    await player.choose(name); await player.choose('Conversar');
+    for (let box = 0; box < 7; box++) {
+      await player.ready();
+      const active = box === 2 || box === 4 ? 63 : 60;
+      await context.wait(slot => $gameScreen.picture(slot) && $gameScreen.picture(slot).tone().every(v => v === 0), active);
+      const picture = await context.read(`${name}-box-${box}`, () => ({
+        speaker:$gameMessage.speakerName(),text:$gameMessage.allText(),
+        pictures:[60,63].map(id=>{const p=$gameScreen.picture(id);return p?{id,name:p.name(),scale:p.scaleX(),tone:p.tone(),x:p.x(),y:p.y()}:null;})
+      }));
+      assert.equal(picture.speaker,active===63?'Ivaí':name);
+      assert.equal(picture.pictures[0].name,`Dryland_H${hero+1}`);
+      if(box<2) assert.equal(picture.pictures[1],null); else assert.equal(picture.pictures[1].name,'Dryland_ivai');
+      assert.deepEqual(await player.snapshot(`${name}-unchanged-${box}`),before);
+      await context.shot(`tavern-H${hero+1}-box-${box}`);
+      if(hero===0&&box===2) {
+        await context.input.key('Tab');
+        await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);
+        await context.shot('tavern-hidden-art');
+        await context.input.key('Tab');
+        await context.wait(()=>SceneManager._scene._messageWindow.scale.x===1);
+        assert.equal((await player.surface()).text,picture.text);
+      }
+      await context.input.key('Enter');
+      if (hero === 0) {
+        for (let sample = 0; sample < 3; sample++) {
+          const label = `tavern-transition-H1-box-${box}-${sample}`;
+          const value = await context.read(label, () => ({frame:Graphics.frameCount,
+            pictures:[60,63].map(id=>{const p=$gameScreen.picture(id);return p?{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone(),opacity:p.opacity()}:null;})}));
+          await context.shot(label);
+          context.report.observations.push({label,kind:'tavern-temporal',value});
+        }
+      }
+    }
+    await player.ready();
+    assert.equal((await player.surface()).text,'Vivo/Viva · Fora do grupo');
+    assert.equal(await context.read('conversation-exit',()=>[60,63].every(id=>!$gameScreen.picture(id))),true);
+    await player.choicesContaining(name);
+  }
+  for(const [hero,name] of names.entries()) {
+    await player.choose(name); await player.choose('Selecionar'); await player.ready();
+    assert.equal(await context.read('selected-feedback',()=>$gameScreen.picture(60)?.name()),`Dryland_H${hero+1}`);
+    await context.shot(`selection-H${hero+1}`);
+    await player.choicesContaining(name); await player.choose(name); await player.choose('Retirar do grupo');
+  }
+  for(const [hero,name] of names.entries()) {
+    const others=names.filter(n=>n!==name).slice(0,3);
+    for(const other of others){await player.choose(other);await player.choose('Selecionar');}
+    await player.choicesContaining(name);
+    const full=await player.snapshot(`full-before-H${hero+1}`);
+    await player.choose(name);await player.choose('Selecionar');await player.ready();
+    assert.equal(await context.read('full-feedback',()=>$gameScreen.picture(60)?.name()),`Dryland_H${hero+1}`);
+    const after=await player.snapshot(`full-after-H${hero+1}`);
+    assert.deepEqual(after.snapshot.draftParty,full.snapshot.draftParty);
+    assert.equal(after.snapshot.sequence,full.snapshot.sequence);
+    await context.shot(`party-full-H${hero+1}`);
+    for(const other of others){await player.choose(other);await player.choose('Retirar do grupo');}
+  }
+}
+
+async function executeSaveArchive(context,player) {
+  if(!saveConsumer){
+    await player.choicesContaining('Jogar');
+    await context.input.publicCommand('expeditionQA.setSeed',[0]);
+    await player.choose('Jogar');await player.ready();
+    const archive=await captureNativeSave(context,'initial-checkpoint');
+    assert.equal(archive.campaign.phase,'intro');assert.equal(archive.campaign.sequence,1);
+    await context.shot('initial-checkpoint-message');
+    return;
+  }
+  const master=await readFile(process.env.DRYLAND_QA_SAVE_ARCHIVE);
+  const archive=JSON.parse(await readFile(`${context.fixture}/${archiveFiles.archive}`,'utf8'));
+  await player.choicesContaining('Continuar');
+  const original=await context.read('restored-native-bytes',async()=>({payload:await StorageManager.loadZip('file0'),index:await StorageManager.loadZip('global')}));
+  assert.equal(original.payload,archiveRecord(archive.storageState,archive.keys.payload));
+  assert.equal(original.index,archiveRecord(archive.storageState,archive.keys.index));
+  if(saveIncompatible){
+    const before=await context.read('before-incompatible-continue',()=>expeditionQA.snapshot());
+    await player.choose('Continuar');
+    await player.choicesContaining('Novo jogo');
+    assert.deepEqual(await context.read('refused-native-save',()=>StorageManager.loadZip('file0')),original.payload);
+    assert.deepEqual(await context.read('refused-campaign',()=>expeditionQA.snapshot().phase),before.phase);
+    await context.shot('incompatible-refused');
+    await player.choose('Novo jogo');await player.ready();
+    assert.equal((await player.snapshot('new-game-after-refusal')).snapshot.phase,'intro');
+    assert.equal(sha256(await readFile(process.env.DRYLAND_QA_SAVE_ARCHIVE)),sha256(master));
+    await context.shot('new-game-after-refusal');return;
+  }
+  for(let replay=0;replay<2;replay++){
+    await player.choose('Continuar');await player.ready();
+    assert.deepEqual(await context.read(`continued-campaign-${replay}`,()=>$gameSystem._dryland.campaign),archive.campaign);
+    assert.equal(await context.read(`continued-save-${replay}`,()=>StorageManager.loadZip('file0')),original.payload);
+    await context.shot(`continued-checkpoint-${replay}`);
+    if(replay===0){await context.reopen();await player.choicesContaining('Continuar');}
+  }
+  await player.choicesContaining('Gorvak');
+  for(const hero of ['Gorvak','Elowen','Griznik']){await player.choose(hero);await player.choose('Selecionar');}
+  await player.choose('Destinos');await player.choose('Caminho da Igreja');await player.choose('Partir');await player.ready();
+  const branch=await captureNativeSave(context,'branch-departure');
+  assert.equal(branch.campaign.phase,'dungeon_intro');assert.equal(branch.campaign.seed,archive.campaign.seed);
+  assert.notEqual(branch.payloadSha256,archive.payloadSha256);
+  assert.equal(sha256(await readFile(process.env.DRYLAND_QA_SAVE_ARCHIVE)),sha256(master),'Later branch autosaves must preserve the archived master.');
+  await context.shot('branch-departure');
+}
+
 export async function verify({ expected, artifacts, report }) {
-  const external = report.network.filter(row => row.url?.startsWith('http') && !row.url.startsWith('http://127.0.0.1:18726/'));
+  const external = report.network.filter(row => row.url?.startsWith('http') && !row.url.startsWith(origin));
   assert.deepEqual(external, []);
   return { expectedErrors: report.errors.flatMap((error, index) => recovery && /E2E isolated I\/O rejection|Dryland_H1.png|net::ERR_FAILED/.test(error.message) ? [{ index, expectedRef: imageRecovery ? 'E2E-017' : 'E2E-013', reason: 'Explicit isolated boundary fault' }] : []), criteria: expected.map(criterion => ({ ...criterion,
     status: 'executed-awaiting-review', observed: `Completed ${scenario.id}; inspect the matching screenshots and recorded assertions.`,

@@ -4,18 +4,24 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { openChrome, startServer } from '../tests/helpers/native-chrome.mjs';
 import { NativePlayer, DirectedNativePlayer } from './native-player.mjs';
-export const sourceFiles = [new URL('./native-player.mjs', import.meta.url), new URL('../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md', import.meta.url), new URL('../tests/fixtures/boundary-recipes.json', import.meta.url)];
+import { observeBustPassage, observeBustTransition } from './native-bust-observation.mjs';
+import { archiveFiles, captureNativeSave, sha256 } from './native-save-archive.mjs';
+export const sourceFiles = [new URL('./native-player.mjs', import.meta.url), new URL('./native-bust-observation.mjs', import.meta.url), new URL('./native-save-archive.mjs', import.meta.url), new URL('../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md', import.meta.url), new URL('../tests/fixtures/boundary-recipes.json', import.meta.url), new URL('../tests/fixtures/council-bust-recipes.json', import.meta.url)];
 const directedJourney = process.env.DRYLAND_QA_JOURNEY || 'physical-first-reunite';
+const bustBank = directedJourney.startsWith('council-') || directedJourney === 'bust-council-continue';
+const bustCoverage = bustBank || process.env.DRYLAND_QA_BUST_COVERAGE === '1';
+const controls = process.env.DRYLAND_QA_JOURNEY === 'bust-controls-council';
 const mixed = directedJourney === 'mixed-memorial-credits';
 const boundary = directedJourney.startsWith('final-sixth-');
 const inverse = directedJourney === 'supernatural-first-destroy';
-const largeViewport = process.env.DRYLAND_QA_VIEWPORT === 'large';
+const largeViewport = ['large', 'large-reduced'].includes(process.env.DRYLAND_QA_VIEWPORT);
+const reducedMotion = process.env.DRYLAND_QA_VIEWPORT === 'large-reduced';
 export const scenario = {
   id: directedJourney,
   publicCommands: ['expeditionQA.setSeed'],
-  criteria: [{ id: mixed ? 'E2E-023' : boundary ? (directedJourney.endsWith('solo-council') ? 'E2E-008' : 'E2E-011') : inverse ? 'E2E-010' : 'E2E-009', variant: `${directedJourney}${largeViewport ? '-large' : ''}`, expectedRef: 'docs/qa/guides/native-mz-cycle.md#Receitas-e-decisoes' }],
+  criteria: bustCoverage ? ['V-004','V-007'].map(id=>({id,variant:`${directedJourney}${largeViewport?'-large-reduced':''}`,expectedRef:'docs/qa/guides/vn-picture-busts-dialogues.md'})) : [{ id: controls ? 'D-06' : mixed ? 'E2E-023' : boundary ? (directedJourney.endsWith('solo-council') ? 'E2E-008' : 'E2E-011') : inverse ? 'E2E-010' : 'E2E-009', variant: `${directedJourney}${largeViewport ? '-large' : ''}`, expectedRef: 'docs/qa/guides/native-mz-cycle.md#Receitas-e-decisoes' }],
   requires: ['native-mz', 'public-input'],
-  browser: { width: largeViewport ? 1920 : 1280, height: largeViewport ? 1080 : 720, dpr: 1, locale: 'pt-BR', query: '', timeoutMs: 30000 }
+  browser: { width: largeViewport ? 1920 : 1280, height: largeViewport ? 1080 : 720, dpr: 1, reducedMotion: reducedMotion ? 'reduce' : 'no-preference', launchArgs: ['--force-device-scale-factor=1'], locale: 'pt-BR', query: '', timeoutMs: 30000 }
 };
 
 const gdd = await readFile(new URL('../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md', import.meta.url), 'utf8');
@@ -26,7 +32,9 @@ assert.equal(decisionPlan.length, 16);
 assert.ok(decisionPlan.every(encounter => encounter.choices.length === 3));
 
 export async function execute(context) {
-  const player = new DirectedNativePlayer(context);
+  const inspected=new Set();
+  const player = new DirectedNativePlayer(context,{onPassage:bustCoverage?player=>observeBustPassage(context,player):controls?async player=>{const s=(await player.snapshot('controls-stage')).snapshot;const id=s.reading?.passageId;if(['council.confession','opinion.H1'].includes(id)&&!inspected.has(id)){await player.dialogueControls(id.replaceAll('.','-'),[60,61,62,63]);inspected.add(id);}}:undefined,onAdvance:bustCoverage?player=>observeBustTransition(context,player):undefined});
+  if (bustBank) return executeBustBank(context, player);
   if (boundary) return executeBoundary(context, player);
   await player.choicesContaining('Jogar');
   assert.deepEqual(await context.input.publicCommand('expeditionQA.setSeed', [0]), { ok: true, seed: 0 });
@@ -65,6 +73,7 @@ export async function execute(context) {
   }
   const endingLabel = inverse ? 'Destruir o medalhão — sobreviver e entregá-los a Andirá' : 'Reunir o medalhão — libertar os amantes e morrer';
   await player.choicesContaining(endingLabel);
+  if(controls)assert.deepEqual([...inspected],['council.confession','opinion.H1']);
   const council = await player.snapshot('council');
   assert.deepEqual(council.snapshot.deadHeroes, mixed ? ['H4'] : []);
   assert.deepEqual(council.snapshot.climaxParty, ['H1', 'H2', 'H3']);
@@ -120,6 +129,80 @@ export async function execute(context) {
   }
 }
 
+async function executeBustBank(context, player) {
+  const started = Date.now();
+  const consumer = directedJourney === 'bust-council-continue';
+  let roster, master, masterBytes;
+  if (consumer) {
+    masterBytes = await readFile(`${context.fixture}/${archiveFiles.archive}`);
+    master = JSON.parse(masterBytes);
+    assert.equal(master.campaign.phase,'council','Only a genuine Council checkpoint supplies this suffix.');
+    roster = master.campaign.climaxPartyIds;
+    await player.choose('Continuar'); await player.ready();
+    const restored = (await player.snapshot('bank-continue')).snapshot;
+    assert.equal(restored.phase,'council');
+    assert.equal(restored.sequence,master.campaign.sequence);
+    assert.deepEqual(restored.climaxParty,roster);
+  } else {
+    const bank = JSON.parse(await readFile(new URL('../tests/fixtures/council-bust-recipes.json',import.meta.url),'utf8'));
+    const recipe = bank.recipes.find(recipe=>recipe.id===directedJourney);
+    assert.ok(recipe,`Unknown Council recipe ${directedJourney}`);
+    roster = recipe.targetCouncilRoster;
+    await player.choicesContaining('Jogar');
+    assert.deepEqual(await context.input.publicCommand('expeditionQA.setSeed',[recipe.seed]),{ok:true,seed:recipe.seed});
+    await player.choose('Jogar');
+    const names = {H1:'Gorvak',H2:'Elowen',H3:'Griznik',H4:'Seraphina',H5:'Bimbren',H6:'Liora',H7:'Vaelith',H8:'Draska'};
+    const routes = {physical:'Caminho da Igreja',supernatural:'Parque das Águas Assombradas',final:'Vilarejo Partido'};
+    for (const action of recipe.actionsToCouncil) {
+      if (['BEGIN','COMPLETE_PASSAGE','ENTER_DUNGEON'].includes(action.type)) continue;
+      context.report.observations.push({label:'bank-recipe-action',kind:'decision-plan',value:action});
+      switch (action.type) {
+        case 'TOGGLE_HERO': {
+          await player.choose(names[action.heroId]);
+          const menu = await player.choicesContaining('Conversar');
+          await player.choose(menu.labels.includes('Retirar do grupo')?'Retirar do grupo':'Selecionar');
+          break;
+        }
+        case 'SELECT_DESTINATION': await player.choose('Destinos'); await player.choose(routes[action.dungeonId]); break;
+        case 'DEPART': await player.choose('Partir'); break;
+        case 'CHOOSE_APPROACH': {
+          const [id,number]=action.approachId.split('-');
+          await player.choose(decisionPlan.find(encounter=>encounter.id===id).choices[Number(number)-1].label);
+          break;
+        }
+        case 'SELECT_VICTIM': await player.choose(`Sacrificar ${names[action.heroId]}`); break;
+        default: throw Error(`Unmapped Council recipe action ${action.type}`);
+      }
+    }
+  }
+  const prefixMs = Date.now()-started;
+  const ending = process.env.DRYLAND_QA_ENDING || (consumer?'destroy':'reunite');
+  assert.ok(['reunite','destroy'].includes(ending));
+  const label = ending==='reunite'?'Reunir o medalhão — libertar os amantes e morrer':'Destruir o medalhão — sobreviver e entregá-los a Andirá';
+  await player.choicesContaining(label);
+  const council = (await player.snapshot('bank-final-choice')).snapshot;
+  assert.equal(council.lastRejectedAction,null,'No rejected presentation on the public Council route.');
+  assert.deepEqual(council.climaxParty,roster);
+  assert.deepEqual(await context.read('bank-choice-cleared',()=>[60,61,62,63,64,65].filter(id=>$gameScreen.picture(id))),[]);
+  await context.shot('bank-final-choice');
+  if (!consumer) {
+    const archive = await captureNativeSave(context,'council-checkpoint');
+    assert.equal(archive.campaign.phase,'council');
+    assert.deepEqual(archive.campaign.climaxPartyIds,roster);
+  }
+  const suffixStarted=Date.now();
+  await player.choose(label);await player.choicesContaining('Pular créditos');
+  const terminal=(await player.snapshot('bank-terminal')).snapshot;
+  assert.equal(terminal.ending,ending);assert.deepEqual(terminal.epilogueHeroes,roster);
+  assert.deepEqual(terminal.deadHeroes,council.deadHeroes);
+  assert.deepEqual(await context.read('bank-credits-cleared',()=>[60,61,62,63,64,65].filter(id=>$gameScreen.picture(id))),[]);
+  await context.shot('bank-credits');
+  await captureNativeSave(context,'terminal-checkpoint');
+  await player.choose('Pular créditos');await player.choicesContaining('Continuar');
+  if (consumer) assert.equal(sha256(await readFile(`${context.fixture}/${archiveFiles.archive}`)),sha256(masterBytes),'Immutable checkpoint master remains unchanged.');
+  context.report.observations.push({label:'bank-timing',kind:'native-checkpoint-bank',value:{consumer,roster,prefixOrRestoreMs:prefixMs,councilAndArchiveMs:suffixStarted-started-prefixMs,endingSuffixMs:Date.now()-suffixStarted,totalMs:Date.now()-started,producer:master?.producer??null}});
+}
+
 async function executeBoundary(context, player) {
   const recipe = recipes[directedJourney];
   assert.ok(recipe, `Unknown boundary recipe: ${directedJourney}`);
@@ -166,6 +249,8 @@ async function executeBoundary(context, player) {
           assert.equal(restored.snapshot.sequence, before.snapshot.sequence);
           assert.deepEqual(restored.snapshot.deadHeroes, ['H1']);
           assert.equal(restored.snapshot.reading.passageId, before.snapshot.reading.passageId);
+          await context.wait(() => $gameScreen.picture(60)?.name() === 'Dryland_H1');
+          assert.deepEqual(await context.read('farewell-exclusive-slots', () => [61, 62, 63, 64, 65].filter(id => $gameScreen.picture(id))), []);
           await context.shot('farewell-restored');
           resumedFarewell = true;
         }
