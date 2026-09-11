@@ -2,7 +2,7 @@
 
 Aceite humano do incremento registrado em2026-09-10; Tasks01–13 concluídas, com refinamento narrativo conhecido. Veja [entrega e evidências selecionadas](../docs/qa/deliveries/init-rpg-maker-mz/README.md). As referências a revisão pendente abaixo são histórico de implementação, superado pelo aceite do estado atual.
 
-Este projeto migra a campanha do protótipo HTML para eventos nativos do RPG Maker MZ. A implementação segue a [spec ativa](../.compozy/tasks/init-rpg-maker-mz/_spec.md) e seu [grafo de tarefas](../.compozy/tasks/init-rpg-maker-mz/tasks.md).
+O único projeto de jogo fica em `rpg-maker/The Dryland Drowned/`. Conteúdo, exemplos de implementação e evidências atuais devem partir dos dados, plugins, assets e testes MZ. A entrega mantida acima resume a migração concluída. Sua spec e o grafo originais permanecem em `.compozy/tasks/init-rpg-maker-mz/`, acervo histórico local ignorado pelo Git e indisponível num clone novo.
 
 ## Jogar localmente
 
@@ -16,7 +16,7 @@ Dentro da pasta `rpg-maker/The Dryland Drowned`, basta `npm start`. Se o PowerSh
 
 O comando serve `http://127.0.0.1:18726/` e abre o Chrome automaticamente no Windows e macOS; se a abertura falhar, abra o endereço manualmente no Chrome. Use `npm --prefix "rpg-maker/The Dryland Drowned" start -- --no-open` para apenas servir. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
 
-Mantenha uma única aba e o mesmo endereço, porta e perfil do navegador para usar **Continuar**. Se a porta estiver ocupada, confira qual servidor está atendendo antes de iniciar outro. A execução local não publica o jogo nem exige build. O protótipo HTML permanece em `prototype/index.html`, com sua campanha em memória.
+Mantenha uma única aba e o mesmo endereço, porta e perfil do navegador para usar **Continuar**. Se a porta estiver ocupada, confira qual servidor está atendendo antes de iniciar outro. A execução local não publica o jogo nem exige build.
 
 Para identificar quem ocupa a porta, use `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows. Se for este jogo, reutilize o endereço; caso contrário, escolha uma porta livre, por exemplo `npm --prefix "rpg-maker/The Dryland Drowned" start -- --port 18727`. O comando não encerra o processo existente nem troca de porta automaticamente. Saves da porta anterior não aparecem no novo endereço.
 
@@ -60,7 +60,7 @@ Fora das seções, um comentário `@scene {"id":"prologue","backgroundId":"taver
 
 `parseEventCatalog(commonEvents, system)` retorna `catalog` (metadados), `locations` (por ID: `commonEventId`, `start` inclusivo, `end` exclusivo e `indent`) e `violations` (um erro primário por ID). `catalog.passages` tem apenas identidade, speaker, status e fonte. O runtime e a CLI fornecem `system.drylandAssets` como inventário derivado; esse campo não é editado nem salvo em System.json. O texto é obtido diretamente dos comandos localizados.
 
-As artes importadas continuam provisórias. `img/pictures/Dryland_Taverna.png` vem de `prototype/assets/scenes/taverna.png`, sem alteração da imagem.
+A proveniência histórica de `img/pictures/Dryland_Taverna.png` e das demais artes importadas está em [imported-assets.json](asset-provenance/imported-assets.json), com os caminhos atuais e hashes.
 
 Os eventos de encontros contêm as 16 descrições, 48 abordagens e seus resultados. Cada seção `choices.A1`–`choices.B8` mantém exatamente três ramos no editor. **Rever descrição** e **Recuar** são controles separados dessas abordagens. O Common Event **Campanha — Fluxo de encontros** transfere para o mapa atribuído e encerra o evento anterior; não acrescente Erase Event após uma transferência, pois isso pode apagar o evento do mapa destino.
 

@@ -13,12 +13,12 @@
 
 # Arquitetura
 
-- Mantenha o protótipo jogável sem etapa de build, offline e diretamente executável no Chrome, salvo mudança aprovada em spec.
-- Mantenha conteúdo de catálogo, regras do jogo, renderização no navegador e testes em suas camadas atuais de responsabilidade.
+- Trabalhe no jogo em `rpg-maker/The Dryland Drowned/`; use seus dados, plugins e assets como fonte da implementação. O jogo local roda no Chrome pelo servidor documentado abaixo, sem build nem serviços remotos.
+- Mantenha conteúdo nos eventos nativos, regras nos plugins de domínio e testes em `rpg-maker/tests/`, conforme os contratos MZ aprovados.
 
 # Segurança
 
-- Não adicione rede, armazenamento, markup executável, assets remotos ou código de runtime de terceiros ao protótipo sem uma mudança de design aprovada.
+- Preserve engine e plugins MZ; novas dependências, serviços remotos ou mudanças nesses contratos exigem design aprovado.
 - Mantenha a inspeção de QA somente leitura e restrinja mutações da campanha a ações validadas do jogador.
 
 # Abrir o jogo

@@ -18,7 +18,7 @@ Write Compozy artifacts in English and player-facing runtime copy in Brazilian P
 
 ## SD-005 — Local Runtime
 
-Preserve direct `file://` execution with HTML, CSS, and classic JavaScript unless an accepted spec explicitly changes it.
+Use `rpg-maker/The Dryland Drowned/` as the only game implementation. Run it through the documented local server; consult native data, plugins and `rpg-maker/tests/` for implementation evidence.
 
 ## SD-006 — Supported Browser
 
@@ -26,7 +26,7 @@ Promise only current stable desktop Chrome; do not imply cross-browser support.
 
 ## SD-007 — Offline and Audio Boundary
 
-Keep runtime network access, remote assets, and audio out of scope.
+Preserve approved native autosave and local audio contracts. Remote assets and services remain outside the approved scope.
 
 ## SD-008 — Diegetic Presentation
 

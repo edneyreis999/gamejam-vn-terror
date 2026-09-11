@@ -1,0 +1,33 @@
+{
+  "round": "01",
+  "date": "2026-09-10",
+  "fingerprint": "eda639fae1f4a328e2e0bed2cecc9b62fd742e90f576758ea28e278aac1d392b",
+  "algorithm": "SHA-256 of sorted compact JSON files mapping",
+  "files": {
+    ".compozy/tasks/init-rpg-maker-mz/adrs/adr-002.md": "dfa21298666d004312ea8a964cca298497011d8ba1270d26b8df3005be2ac0da",
+    ".compozy/tasks/init-rpg-maker-mz/adrs/adr-037.md": "d28dbf974292dbd3bbabedb2363ef1d87516c18f156993d133832d3ddcaa293f",
+    "AGENTS.md": "8be8240aa49db599728854010498d519f3591d10d0346031984e1641566aa747",
+    "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+    "docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md": "dce44529f9c60ea52edfc905d56876aadad405eeff3c6621cd1bcff07ea68609",
+    "docs/_memory/glossary.md": "56c181aee165e0fbe62ea97686fa4cd85bb751f69a7e67a6286a1ee59e5c2ad6",
+    "docs/_memory/lessons/L-007-e2e-follows-runtime-contract.md": "d4e4119c5e3cc4e8f043e688e8c89dad4d7c21ca672b3b53198908dba70c0fbc",
+    "docs/_memory/spec-authoring-playbook.md": "88922f7df069606551bdb5be70444dc70297d09b4188795e854cc0c3ad225aaf",
+    "docs/_memory/standing_directives.md": "19b638bea96f54dada4cbcf61758468aa1ac7f11ee31d4882857f4c68047df4c",
+    "docs/qa/README.md": "7a338f6a612adadd7bdc588bca31f7c1c42b158ae7daf9a94675a06141d3bc7c",
+    "docs/qa/guides/native-mz-cycle.md": "2d2425baa0e01c000bb2e1e60cc629fb434d276f877a85286e2e7d45293adbd4",
+    "planos/tasks/retire-html-prototype/adrs/adr-001.md": "01f95833d87fb38c98b113bf8ddc42e0d0db892679713b40ad0dab2e73be8c27",
+    "planos/tasks/retire-html-prototype/retire-html-prototype.programacao.md": "f4c859017b940a271f8ac905d2295c14e1041fa9ec083a74d82ff778b7d2d00b",
+    "planos/tasks/retire-html-prototype/spec.md": "a140ec650e3a90789c85ba12eceb1a8e67e569890f89d680aec6ab17bb42a2a3",
+    "planos/tasks/retire-html-prototype/verification.md": "6254cc11bb0a26b58ee72791e030b2805536bc5e556a62fb9bffefcd61ff0e89",
+    "rpg-maker/README.md": "dee1eb43ccf9c77db9a89712645f5fc964c6d32ba73e0266f27944cd3d1eaed2",
+    "rpg-maker/The Dryland Drowned/data/CommonEvents.json": "9e5310df912b953225bb273e7776bdd5e4880b516334f7fec0d2b8919f387941",
+    "rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js": "1b29bd17d68f6ed645061ff93efac323e573b5970c136fd4e50b30f96a702ae9",
+    "rpg-maker/The Dryland Drowned/package.json": "e7dd51b2dd1cfb653dca77211de5f8a8278d1d0478bc5c1ab34388cfa27b3dc5",
+    "rpg-maker/asset-provenance/README.md": "42a995d5f0a00a07518533ca4ce222acfbcbfc4b8bd25e1be7f87ab39075835b",
+    "rpg-maker/tests/campaign.test.mjs": "c953f1d8215333a0ade30721ea9352fba86b526f59ca79f71451141913d41fed",
+    "rpg-maker/tests/fixtures/boundary-recipes.json": "41162508b9988c47e223e217d2daef7471c20bf4125b68d53004830de4b5de22",
+    "rpg-maker/tests/suites/native-inventory.mjs": "531e326f1dfd19ae2a8c6148c7a27dc3a532ce3d8318ad24321f42bd7ef2459f",
+    "rpg-maker/tools/native-layout.mjs": "de5805895af05a7b820a7da30366d899601afa6499f242f512cc2ab3087bf495",
+    "rpg-maker/tools/revise-layout.mjs": "b8e2dcc2bb2507f2a6d5a467e8354b7015cee502882defa60ca20bc7076c17dc"
+  }
+}

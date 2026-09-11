@@ -43,13 +43,13 @@ Never silently reinterpret a confirmed GDD rule. When a requested feature confli
 
 ## Project Baseline
 
-- Runtime: local HTML, CSS, and classic JavaScript with no build or server.
-- Supported surface: current stable desktop Chrome opened through `file://`.
-- Session: memory only; reload starts a new campaign.
-- Audio: out of scope.
+- Runtime: RPG Maker MZ in `rpg-maker/The Dryland Drowned/`, with local engine and approved plugins; no build.
+- Supported surface: current stable desktop Chrome through the documented local server.
+- Persistence: native autosave; Continue requires a compatible native revision.
+- Audio: approved local native audio; retain its acceptance status.
 - Player copy: Brazilian Portuguese.
 - Normal UI: no internal pool IDs, competency mappings, seeds, or QA controls.
-- QA: the frozen `window.expeditionQA` surface plus the direct browser test document.
+- QA: the read-only `window.expeditionQA` surface, `rpg-maker/tests/`, and the native QA plan. Each increment selects its required sensors.
 
 An incremental spec may change these only through an explicit user decision and ADR.
 

@@ -1,8 +1,10 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # Executar o contrato automatizado local
 
 ```mermaid
 flowchart TD
-  A[Entry: abrir prototype/tests.html por file URL] --> B[Runner carrega fontes reais e manifesto]
+  A[Entry: abrir retired HTML artifact (tests.html) por file URL] --> B[Runner carrega fontes reais e manifesto]
   B --> C[Auditar IDs esperados, registrados e duplicados]
   C --> D[Executar os casos sequencialmente com raízes isoladas]
   D --> E{Alguma falha ou divergência de registro?}
@@ -22,7 +24,7 @@ journey:
   value_statement: "O colaborador verifica o manifesto atual e o runtime local sem instalar ferramentas nem depender de rede."
   personas: ["Caio, estrategista recorrente"]
   entry_points:
-    - url: file:///…/prototype/tests.html
+    - url: retired HTML artifact (tests.html)
       origin: direct
   actions:
     - step: 1

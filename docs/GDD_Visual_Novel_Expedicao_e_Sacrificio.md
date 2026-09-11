@@ -22,7 +22,7 @@ Documentos históricos de origem:
 - [GDD v0.2](./GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.2.md)
 - [GDD v0.3](./GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.3.md)
 - revisões intermediárias do antigo arquivo canônico, recuperáveis pelo histórico do Git;
-- [inventário histórico de pendências da v0.4](./narrativa/Pendencias_e_Decisoes_do_Time_GDD_v0.4.md).
+- inventário histórico de pendências da v0.4 (documento ausente desta árvore).
 
 Cada definição deste documento possui um dos estados abaixo. A ausência de uma etiqueta numa regra declarativa significa **Confirmado**.
 
@@ -61,7 +61,7 @@ O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`
 
 O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve buscar essa visão, mas seu recorte exato será definido posteriormente em specs incrementais e no Trello; aprovar este GDD não significa que todo o conteúdo estará obrigatoriamente presente na primeira entrega da v2.0.
 
-**Recorte aprovado para `prototype-v2-gdd-layouts`:** a atualização abrange a experiência jogável do GDD e os novos layouts, com **salvamento, áudio e suporte a telas com pouca largura fora do escopo deste incremento**, conforme decisões posteriores da entrevista e ADRs 006, 008 e 011. A campanha permanece sem som e somente na sessão aberta; recarregar ou reabrir a página inicia uma nova campanha. Mortes, encontros revelados e progresso continuam preservados entre expedições da mesma sessão. Os contratos de salvamento da seção 3.7, áudio da seção 19.4 e reflow para o jogo completo permanecem confirmados.
+**Recorte histórico aprovado para `prototype-v2-gdd-layouts` (anterior ao MZ):** a atualização abrange a experiência jogável do GDD e os novos layouts, com **salvamento, áudio e suporte a telas com pouca largura fora do escopo deste incremento**, conforme decisões posteriores da entrevista e ADRs 006, 008 e 011. A campanha permanece sem som e somente na sessão aberta; recarregar ou reabrir a página inicia uma nova campanha. Mortes, encontros revelados e progresso continuam preservados entre expedições da mesma sessão. Os contratos de salvamento da seção 3.7, áudio da seção 19.4 e reflow para o jogo completo permanecem confirmados.
 
 **Apresentação desktop deste incremento:** telas estreitas e layouts alternativos para acomodá-las não são requisito de implementação nem de QA. Isso retira a exigência de reflow a 320 px efetivos do protótipo, inclusive quando a pouca largura resulta do zoom. Mantêm-se teclado, foco visível, texto legível e redução de movimento na área desktop suportada. A área útil mínima aprovada é **1280 × 720 pixels efetivos dentro do navegador**, já considerando o zoom. A referência mede a área do jogo, não a resolução do monitor; o zoom continua utilizável enquanto essa área mínima for mantida.
 
@@ -73,7 +73,7 @@ Este documento define produto e comportamento. Tarefas, responsáveis por cards,
 
 **Recorte de apresentação aprovado para `init-rpg-maker-mz` — Confirmado:** a primeira versão MZ preserva toda a campanha, as regras confirmadas, as informações públicas e a taverna interativa, permitindo adaptar a apresentação para desktop. Paridade integral de apresentação e reflow do jogo completo não é requisito deste incremento, conforme o ADR-001 da spec incremental. As decisões específicas de navegação, área desktop, execução local, dependências, salvamento, áudio e recursos de leitura estão registradas nas exceções deste incremento abaixo e nas seções correspondentes. Os requisitos do jogo completo permanecem vigentes fora desse recorte.
 
-**Execução local aprovada para `init-rpg-maker-mz` — Confirmado:** a equipe testa o projeto MZ no Chrome por um servidor local que entrega os arquivos do próprio computador, sem exigir publicação na internet. A abertura direta por `file://` deixa de ser requisito deste incremento; o HTML existente permanece como referência offline. Esta decisão, registrada no ADR-002, não altera a distribuição pública nem aprova serviços remotos, política de armazenamento ou uma etapa de build.
+**Execução local aprovada para `init-rpg-maker-mz` — Confirmado:** a equipe testa o projeto MZ no Chrome por um servidor local que entrega os arquivos do próprio computador, sem exigir publicação na internet. A abertura direta por `file://` deixa de ser requisito deste incremento; o projeto atual é `rpg-maker/The Dryland Drowned/`. Esta decisão, registrada no ADR-002, não altera a distribuição pública nem aprova serviços remotos, política de armazenamento ou uma etapa de build.
 
 **Autoria de cenas para `init-rpg-maker-mz` — Confirmado:** os textos das cenas migradas serão escritos e revisados nos eventos pelo editor do RPG Maker, sem manter um segundo catálogo de texto de runtime com edição independente, conforme o ADR-006. O conteúdo atual é fonte de migração; o GDD e as fichas continuam referências de autoridade editorial, e textos provisórios mantêm seu estado de baseline até revisão.
 
@@ -84,6 +84,8 @@ Este documento define produto e comportamento. Tarefas, responsáveis por cards,
 **Diretriz de integração para `init-rpg-maker-mz` — Confirmado:** priorizar comportamentos nativos do RPG Maker e recursos dos plugins selecionados; criar complementos somente para lacunas necessárias às regras e à experiência aprovadas, conforme o ADR-011. Ficam autorizados o runtime local incluído na engine e os plugins locais necessários à composição, como exceção à restrição do protótipo HTML a bibliotecas de terceiros. Isso não autoriza compras, serviços remotos, bibliotecas sem relação com a migração nem features adicionais por conveniência. Usar HIDE pelo botão e atalho Tab e os avisos nativos de autosave, ajustando as opções para retirar histórico e acesso manual a saves fora do recorte.
 
 **Divisão de responsabilidades para `init-rpg-maker-mz` — Confirmado:** um complemento próprio concentra validação de formação, sobreviventes, atribuições de encontros, resolução de abordagens, mortes, progresso e elegibilidade de Conselho/epílogos. Os eventos chamam essas ações e apresentam seus resultados; textos, imagens, áudio e gravação do save permanecem nos recursos nativos e plugins selecionados, conforme o ADR-014. Essa divisão não autoriza um novo renderizador ou backend próprio de salvamento.
+
+**Projeto único — Confirmado em `retire-html-prototype`:** a equipe trabalha exclusivamente em `rpg-maker/The Dryland Drowned/`. Dados, plugins e assets nativos são a fonte da implementação; testes ficam em `rpg-maker/tests/`. A implementação HTML foi retirada. Registros históricos preservam decisões e resultados anteriores, sem orientar recuperação ou consulta ao código retirado. Todos os assets existentes no MZ foram preservados nesta atualização.
 
 ### 1.2 Decisões que substituem versões anteriores
 

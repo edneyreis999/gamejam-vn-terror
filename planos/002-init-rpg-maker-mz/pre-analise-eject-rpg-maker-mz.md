@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # Pré-análise do eject para RPG Maker MZ
 
 **Data:** 6 de setembro de 2026. **Estado:** investigação concluída para iniciar a entrevista; arquitetura e recorte de migração ainda não aprovados. **Fonte de design:** GDD canônico, incluindo as alterações posteriores ao snapshot v4.0.
@@ -484,16 +486,18 @@ Q1–Q3 podem mudar drasticamente a necessidade de código de apresentação/inf
 
 ### 8.1 Fontes locais primárias
 
-Os links de plugins completos estão no [inventário](inventario-plugins.md). As linhas abaixo se referem à versão auditada; os [hashes SHA-256](evidencias/fontes-sha256.json) permitem detectar mudança posterior.
+Os nomes em `evidencias/` abaixo identificam os registros da análise original. Esses arquivos não estão nesta árvore versionada; são referências históricas, não pré-requisitos para executar ou manter o jogo atual.
+
+Os links de plugins completos estão no [inventário](inventario-plugins.md). As linhas abaixo se referem à versão auditada; os hashes SHA-256 (`evidencias/fontes-sha256.json`) permitem detectar mudança posterior.
 
 | Fonte | Evidência principal e linhas de referência | Features relacionadas |
 |---|---|---|
 | [GDD canônico](../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md) | §§1.1, 3.5–3.7, 5–16, 19 e 22: autoridade, plataforma, save, regras, apresentação e exclusões | Todas; define o alvo, não o grau de implementação |
-| [Entry](../../prototype/index.html), [README](../../prototype/README.md) | Ordem dos quatro scripts e contrato de execução/QA | F01, F56–57 |
-| [Dados](../../prototype/data.js), [narrativa](../../prototype/narrative.js) | Catálogo de heróis/encontros/destinos e passagens com identidade/status | F06–09, F22–26, F30, F34–41, F59 |
-| [Engine](../../prototype/game.js) | L20 estado; L46 Mulberry; L489 preparação/ausência; L505 conclusão; L523 precedência; L597 dispatch; L700+ projeção/snapshot | F14–17, F20, F23–45, F56 |
-| [Renderer](../../prototype/app.js) | L51+ controlador; L99+ ausência; L167+ leitura; L311+ taverna; L377+ painéis; L416+ sacrifício; L521+ input | F01–22, F27–30, F46–57 |
-| [CSS](../../prototype/styles.css) | L61–204 superfícies atuais; L1448+ overrides; L1553+ taverna fixa e efeitos | F08–17, F50–55 |
+| Entry (historical HTML reference), README (historical HTML reference) | Ordem dos quatro scripts e contrato de execução/QA | F01, F56–57 |
+| Dados (historical HTML reference), narrativa (historical HTML reference) | Catálogo de heróis/encontros/destinos e passagens com identidade/status | F06–09, F22–26, F30, F34–41, F59 |
+| Engine (historical HTML reference) | L20 estado; L46 Mulberry; L489 preparação/ausência; L505 conclusão; L523 precedência; L597 dispatch; L700+ projeção/snapshot | F14–17, F20, F23–45, F56 |
+| Renderer (historical HTML reference) | L51+ controlador; L99+ ausência; L167+ leitura; L311+ taverna; L377+ painéis; L416+ sacrifício; L521+ input | F01–22, F27–30, F46–57 |
+| CSS (historical HTML reference) | L61–204 superfícies atuais; L1448+ overrides; L1553+ taverna fixa e efeitos | F08–17, F50–55 |
 | [Plugins configurados](../../rpg-maker/The%20Dryland%20Drowned/js/plugins.js) | 17 entradas ativas; parâmetros examinados em §2.2 | Configuração de todos os candidatos |
 | [System](../../rpg-maker/The%20Dryland%20Drowned/data/System.json), [Map001](../../rpg-maker/The%20Dryland%20Drowned/data/Map001.json), [CommonEvents](../../rpg-maker/The%20Dryland%20Drowned/data/CommonEvents.json) | Resolução, party inicial, mapa sem eventos e quatro CEs vazios | F01–02, F57; estado embrionário do MZ |
 | [main.js MZ](../../rpg-maker/The%20Dryland%20Drowned/js/main.js) | Lista de libs locais, teste XHR e boot | F57 |
@@ -531,13 +535,13 @@ A consulta externa complementou os arquivos instalados; não foi usada para pres
 
 1. Leitura do GDD canônico, catálogo, narrativa, engine, renderer, CSS e contratos de QA do protótipo; inventário dos 23 arquivos, parâmetros ativos e dependências.
 2. Navegação do protótipo por `file://`, viewport 1280×720, seed **20260831**: avisos → prólogo → taverna → hover/ficha/fala → selecionar H1/H2/H3 → painel de destinos → Parque → primeiro encontro **B7** → abordagem B7-2 → falha → tela de sacrifício → uma ativação sacrifica H1 → despedida/contexto da morte. Snapshot confirmou `death_result`, mortos `[H1]`, presentes `[H2,H3]` e validador `ok: true`.
-3. Execução de `prototype/tests.html` por navegador: **168 aprovados, 0 falharam, 168 no total**. Saída preservada em [testes-prototipo.txt](evidencias/testes-prototipo.txt). São testes do HTML, não de uma migração MZ.
-4. Boot do MZ por `file://`: erro explícito de leitura local. Boot HTTP temporário em `127.0.0.1:18726`: runtime 1.10.0, `Scene_EventedTitleMap`, mapa 1 com zero eventos, 816×624, localForage `asyncStorage`, 126 comandos registrados; sem page errors reportados pela ferramenta nessa observação. Valores preservados em [boot-mz-http.json](evidencias/boot-mz-http.json).
+3. Execução de `retired HTML artifact (tests.html)` por navegador: **168 aprovados, 0 falharam, 168 no total**. Saída preservada em testes-prototipo.txt (`evidencias/testes-prototipo.txt`). São testes do HTML, não de uma migração MZ.
+4. Boot do MZ por `file://`: erro explícito de leitura local. Boot HTTP temporário em `127.0.0.1:18726`: runtime 1.10.0, `Scene_EventedTitleMap`, mapa 1 com zero eventos, 816×624, localForage `asyncStorage`, 126 comandos registrados; sem page errors reportados pela ferramenta nessa observação. Valores preservados em boot-mz-http.json (`evidencias/boot-mz-http.json`).
 5. Inspeção somente leitura dos aliases carregados para localizar superfícies concorrentes. Nenhuma configuração ou comando de gameplay MZ foi alterado para produzir uma demonstração artificial de feature.
 
-Capturas: [taverna](evidencias/prototipo-taverna.png), [encontro](evidencias/prototipo-encontro.png), [sacrifício](evidencias/prototipo-sacrificio.png), [erro MZ file](evidencias/mz-file-erro.png) e [título MZ atual](evidencias/mz-titulo-atual.png).
+Capturas: taverna (`evidencias/prototipo-taverna.png`), encontro (`evidencias/prototipo-encontro.png`), sacrifício (`evidencias/prototipo-sacrificio.png`), erro MZ file (`evidencias/mz-file-erro.png`) e título MZ atual (`evidencias/mz-titulo-atual.png`).
 
-Conferência documental: [relatório de verificação](evidencias/verificacao.md). Os 40 arquivos de referência mantiveram os hashes registrados; as alterações pré-existentes de configuração MZ foram preservadas.
+Conferência documental: relatório de verificação (`evidencias/verificacao.md`). Os 40 arquivos de referência mantiveram os hashes registrados; as alterações pré-existentes de configuração MZ foram preservadas.
 
 **Não verificado nesta pré-análise:** integração jogável das composições propostas no MZ; save/load real de campanha migrada; recuperação de gravação interrompida; hospedagem itch.io; reflow/zoom no MZ; política de duas abas; leitor de tela; performance da campanha MZ completa; áudio final; revisão editorial ou aprovação da arte. As coberturas estimadas não substituem esses ensaios.
 

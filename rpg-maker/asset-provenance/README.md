@@ -20,7 +20,7 @@ Todas usam canvas de 1254 × 1254 e transparência RGBA. O eixo da igreja, da fi
 
 Os prompts completos e a seleção dos resultados estão em [map-prompts.json](map-prompts.json). Dimensões, limites opacos e SHA-256 estão em [map-inspection.json](map-inspection.json). Três tentativas da peça anã foram rejeitadas por conter quadriculado opaco; o quarto resultado foi aceito para integração após verificar seu alfa. Os rascunhos permanecem em `.compozy/tasks/init-rpg-maker-mz/assets/map-generation/`.
 
-Pérola e Floraí foram importados byte por byte de `prototype/assets/characters/perola.png` e `florai.png`, que já eram derivados transparentes documentados no inventário do protótipo. Continuam sujeitos à revisão artística final da equipe.
+Pérola e Floraí foram importados byte por byte de derivados transparentes da etapa HTML. O [inventário de importação](imported-assets.json) preserva a proveniência e identifica os arquivos atuais no MZ. Continuam sujeitos à revisão artística final da equipe.
 
 Existência e alfa dos arquivos não constituem aprovação visual. As capturas e verificações da composição nativa pertencem aos casos IT-052/IT-053 em `docs/qa/evidence/init-rpg-maker-mz/task-08/`.
 

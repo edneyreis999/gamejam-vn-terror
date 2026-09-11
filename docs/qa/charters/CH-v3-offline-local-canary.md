@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # CH-v3-offline-local-canary: Pacote local, imagens e abandono
 
 ```yaml
@@ -11,7 +13,7 @@ charter:
     network: flaky
     locale: pt-BR
   journey: J-local-offline-launch
-  entry_point: file:///…/prototype/index.html
+  entry_point: retired HTML artifact (index.html)
   scenarios: [LOC-local-launch-session, ART-encounter-art-content]
   tour: Network Tour
   time_box_minutes: 60

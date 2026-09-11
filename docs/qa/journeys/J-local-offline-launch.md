@@ -1,8 +1,10 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # Abrir e abandonar uma sessão local offline
 
 ```mermaid
 flowchart TD
-  A[Entry: abrir prototype/index.html por file URL com rede desligada] --> B[Avisos de conteúdo e Jogar em PT-BR]
+  A[Entry: abrir retired HTML artifact (index.html) por file URL com rede desligada] --> B[Avisos de conteúdo e Jogar em PT-BR]
   B --> C[Prólogo e preparação sem recurso remoto]
   C --> D[Dois caminhos iniciais disponíveis e Legado bloqueado]
   D --> E[Escolher destino e heróis em qualquer ordem]
@@ -22,7 +24,7 @@ journey:
   value_statement: "O jogador inicia o protótipo e alcança uma decisão usando somente o pacote local."
   personas: ["Lia, primeira expedicionária", "Rui, revisor de conteúdo"]
   entry_points:
-    - url: file:///…/prototype/index.html
+    - url: retired HTML artifact (index.html)
       origin: direct
   actions:
     - step: 1
