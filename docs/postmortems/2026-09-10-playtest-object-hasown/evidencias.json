@@ -1,0 +1,184 @@
+{
+  "incident": "2026-09-10-playtest-object-hasown",
+  "documentedAt": "2026-09-10",
+  "fixCommit": "ca4dadc4213508f644090c0fb5b8cb10f6bdce0b",
+  "windows": {
+    "kind": "human_report",
+    "quote": "Funcionou lá!",
+    "runtimeVersions": null,
+    "limit": "Confirmação de funcionamento após correção; sem percurso detalhado ou medição local."
+  },
+  "nwjs": {
+    "result": "nw-boot.json",
+    "screenshot": "nw-boot.png",
+    "platform": "macOS",
+    "limit": "Abertura até o título; inspeção somente leitura; campanha não percorrida."
+  },
+  "chrome": {
+    "startedAt": "2026-09-10T19:44:05.577Z",
+    "finishedAt": "2026-09-10T19:44:10.960Z",
+    "criteria": [
+      {
+        "id": "IT-001",
+        "variant": "editor-compat-chrome",
+        "expectedRef": "rpg-maker/tests/suites/native-boot.mjs: IT-001 expects map 2 prologue after Jogar",
+        "status": "pass",
+        "observed": {
+          "after": {
+            "scene": "Scene_Map",
+            "map": 2,
+            "startMap": 2,
+            "text": "A chuva acompanha Ivaí até a taverna, onde oito viajantes esperam por uma promessa de tesouro.",
+            "choices": [],
+            "phase": "intro",
+            "frame": 27
+          },
+          "tavern": {
+            "scene": "Scene_Map",
+            "map": 3,
+            "startMap": 2,
+            "text": "",
+            "choices": [
+              "Gorvak<Bind Picture: 10><Choice Common Event: 30><Hide Choice Window>",
+              "Elowen<Bind Picture: 11><Choice Common Event: 31>",
+              "Griznik<Bind Picture: 12><Choice Common Event: 32>",
+              "Seraphina<Bind Picture: 13><Choice Common Event: 33>",
+              "Bimbren<Bind Picture: 14><Choice Common Event: 34>",
+              "Liora<Bind Picture: 15><Choice Common Event: 35>",
+              "Vaelith<Bind Picture: 16><Choice Common Event: 36>",
+              "Draska<Bind Picture: 17><Choice Common Event: 37>",
+              "Destinos<Bind Picture: 41>",
+              "Elenco<Bind Picture: 42>",
+              "Partir<Bind Picture: 43>"
+            ],
+            "phase": "formation",
+            "frame": 112
+          }
+        },
+        "evidence": [
+          "chrome-before-jogar.png",
+          "chrome-after-jogar.png",
+          "chrome-tavern.png"
+        ],
+        "limits": [
+          "macOS Chrome; Windows not executed"
+        ]
+      }
+    ],
+    "errors": [],
+    "cleanup": [
+      {
+        "resource": "input-log",
+        "status": "closed"
+      },
+      {
+        "resource": "audio-capture",
+        "status": "closed"
+      },
+      {
+        "resource": "capture-session",
+        "status": "closed"
+      },
+      {
+        "resource": "context",
+        "status": "closed"
+      },
+      {
+        "resource": "browser",
+        "status": "closed"
+      },
+      {
+        "resource": "service",
+        "status": "closed"
+      }
+    ],
+    "environment": {
+      "browser": "152.0.7977.83",
+      "node": "v22.23.2",
+      "platform": "darwin",
+      "release": "25.5.0",
+      "arch": "arm64",
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    },
+    "screenshots": [
+      "chrome-before-jogar.png",
+      "chrome-after-jogar.png",
+      "chrome-tavern.png"
+    ]
+  },
+  "tests": {
+    "before": "unit-before.txt",
+    "after": "unit-final.txt",
+    "selectedSuite": "unit-all-after.txt",
+    "command": "node --test --test-name-pattern='^UT-(?!059 )' rpg-maker/tests/campaign.test.mjs",
+    "passed": 65,
+    "excluded": "UT-059: porta 18726 ocupada"
+  },
+  "files": [
+    {
+      "path": "rpg-maker/The Dryland Drowned/js/plugins/Dryland_CampaignRules.js",
+      "sha256": "9f43fd365b8c7f307efc36f8b7c4216ae0802341120faa2cc96ce6d66615851b",
+      "matches": "commit ca4dadc, fixture NW.js e fixture Chrome"
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js",
+      "sha256": "1b29bd17d68f6ed645061ff93efac323e573b5970c136fd4e50b30f96a702ae9",
+      "matches": "commit ca4dadc, fixture NW.js e fixture Chrome"
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/data/CommonEvents.json",
+      "sha256": "9e5310df912b953225bb273e7776bdd5e4880b516334f7fec0d2b8919f387941",
+      "matches": "commit ca4dadc, fixture NW.js e fixture Chrome"
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/data/System.json",
+      "sha256": "69456c9fc529b11777653a20c19d0b4b118f71dbabd6c90bd7cca0ac2819236e",
+      "matches": "commit ca4dadc, fixture NW.js e fixture Chrome"
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/native-layout-manifest.json",
+      "sha256": "4fd19422900d4ab9c7f41a7fc39a8be7dfc29f74484d4a8ef7d02cc6ea0623a0",
+      "matches": "commit ca4dadc, fixture NW.js e fixture Chrome"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "chrome-after-jogar.png",
+      "sha256": "77d3b07e7fae6b58eb03051afc9b87b5bd7d2189ec55924d8648ee41ba0d1179"
+    },
+    {
+      "path": "chrome-before-jogar.png",
+      "sha256": "4b3bf376dbd850d9c6272d54e9ac38d0af1be965c20e8564f90f2e96d646a1aa"
+    },
+    {
+      "path": "chrome-tavern.png",
+      "sha256": "873c248bc3aed2fb63cd3b715de5c4d12c33cfb4f8f8ee69dcc85545def41dd4"
+    },
+    {
+      "path": "nw-boot.json",
+      "sha256": "d394c4b51c7d1d64cc5197b877ce964e74c82eeb4b1c788f11dd6a50bafe85a2"
+    },
+    {
+      "path": "nw-boot.png",
+      "sha256": "27607209494e1e9ac8da981e96707dcffd3096fd59e39cdeb606023d247e2979"
+    },
+    {
+      "path": "unit-all-after.txt",
+      "sha256": "bf43b7cc1ed8c85f08855e108c4fe026fda149531ef406694f03c9f3d17ba267"
+    },
+    {
+      "path": "unit-before.txt",
+      "sha256": "7b0442f02c8824738b011f321c32e2cb72e4368613e46057de0db418f84426f5"
+    },
+    {
+      "path": "unit-final.txt",
+      "sha256": "53a7f1f2af8b79c98323d5f08789ff5c8992d37410c49e6becb41b971a4a0313"
+    }
+  ],
+  "rawChromeReport": {
+    "path": ".artifacts/title-loop-check/result-editor-compat-chrome/report.json",
+    "sha256": "897a97f4c6c588e84457f2a6c0edebbf8f34a28cfd0c70e1c2be0402e6601c57"
+  }
+}
