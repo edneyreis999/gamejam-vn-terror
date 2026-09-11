@@ -1,5 +1,5 @@
 {
-  "scope": "Tasks01–11: complete authored native runtime; E2E and human acceptance remain Task13",
+  "scope": "Tasks01\u201311: complete authored native runtime; E2E and human acceptance remain Task13",
   "tasks": {
     "10": [
       "IT-022",
@@ -147,6 +147,30 @@
       "UT-036",
       "IT-048",
       "IT-054"
+    ],
+    "vn-picture-busts-dialogues": [
+      "UT-067",
+      "UT-068",
+      "IT-060",
+      "IT-061",
+      "IT-062",
+      "IT-063",
+      "UT-069",
+      "IT-064",
+      "IT-065",
+      "IT-066",
+      "UT-070",
+      "IT-067",
+      "IT-068"
+    ],
+    "vn-slot-authorship": [
+      "UT-071",
+      "UT-072"
+    ],
+    "vn-focus-parameters": [
+      "UT-073",
+      "UT-074",
+      "IT-069"
     ]
   }
 }

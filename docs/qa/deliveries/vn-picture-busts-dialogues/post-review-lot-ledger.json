@@ -1,0 +1,366 @@
+{
+  "date": "2026-09-11",
+  "nativeRevision": "mz-20260911-busts-native-01",
+  "eventBridgeSha256": "7b161464b1ccb489a01502ce8bae57fa4ba2c13fc46ea8ad30c953d984736e55",
+  "currentLots": [
+    {
+      "case": "council-triple-H1-H2-H3-seed0",
+      "mode": "normal",
+      "report": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T11-08-57-113Z/report.json",
+        "sha256": "9c806f2312874ce9f1b355e9a16ad18f9fda45de69e7f77ed8ab104d890b1446"
+      },
+      "runtimeAssertions": "PASS",
+      "executorStatus": "executed-awaiting-review",
+      "durationMs": 94919,
+      "errors": [],
+      "cleanup": [
+        {
+          "resource": "input-log",
+          "status": "closed"
+        },
+        {
+          "resource": "audio-capture",
+          "status": "closed"
+        },
+        {
+          "resource": "capture-session",
+          "status": "closed"
+        },
+        {
+          "resource": "context",
+          "status": "closed"
+        },
+        {
+          "resource": "browser",
+          "status": "closed"
+        },
+        {
+          "resource": "service",
+          "status": "closed"
+        }
+      ],
+      "bankTiming": {
+        "consumer": false,
+        "roster": [
+          "H1",
+          "H2",
+          "H3"
+        ],
+        "prefixOrRestoreMs": 74796,
+        "councilAndArchiveMs": 10189,
+        "endingSuffixMs": 8163,
+        "totalMs": 93148,
+        "producer": null
+      }
+    },
+    {
+      "case": "bust-council-continue",
+      "mode": "large-reduced",
+      "report": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-council-continue-2026-09-11T11-10-33-202Z/report.json",
+        "sha256": "6bacd12dd6861440c393fea9cd58b891a14b03b4b7f883d3c3b3adca94390a30"
+      },
+      "runtimeAssertions": "PASS",
+      "executorStatus": "executed-awaiting-review",
+      "durationMs": 28090,
+      "errors": [],
+      "cleanup": [
+        {
+          "resource": "input-log",
+          "status": "closed"
+        },
+        {
+          "resource": "audio-capture",
+          "status": "closed"
+        },
+        {
+          "resource": "capture-session",
+          "status": "closed"
+        },
+        {
+          "resource": "context",
+          "status": "closed"
+        },
+        {
+          "resource": "browser",
+          "status": "closed"
+        },
+        {
+          "resource": "service",
+          "status": "closed"
+        }
+      ],
+      "bankTiming": {
+        "consumer": true,
+        "roster": [
+          "H1",
+          "H2",
+          "H3"
+        ],
+        "prefixOrRestoreMs": 2808,
+        "councilAndArchiveMs": 14014,
+        "endingSuffixMs": 9599,
+        "totalMs": 26421,
+        "producer": {
+          "scenario": "council-triple-H1-H2-H3-seed0",
+          "run": "/Users/edney/projects/coreto/gamejam-vn-terror/docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T11-08-57-113Z",
+          "startedAt": "2026-09-11T11:08:58.167Z",
+          "environment": {
+            "url": "http://127.0.0.1:18727/",
+            "timeOrigin": 1789124939162.5,
+            "width": 1280,
+            "height": 720,
+            "dpr": 1,
+            "locale": "pt-BR",
+            "fonts": [],
+            "focused": true,
+            "visibility": "visible",
+            "geometryEvents": 3,
+            "canvas": [
+              {
+                "width": 800,
+                "height": 600,
+                "rect": {
+                  "x": 640,
+                  "y": 360,
+                  "width": 0,
+                  "height": 0,
+                  "top": 360,
+                  "right": 640,
+                  "bottom": 360,
+                  "left": 640
+                }
+              }
+            ],
+            "targetId": "CE9812958998D698129EF7F8904426CE",
+            "contextId": "DE4D57CBD2C2962149CE094F257C5107",
+            "browser": "153.0.8010.36",
+            "node": "v22.23.2",
+            "platform": "darwin",
+            "release": "25.5.0",
+            "arch": "arm64"
+          },
+          "storageArtifact": "council-checkpoint.storage.json",
+          "storageSha256": "cbe92bc2fd916e8d1a863fb7862d66e99fb2004e6e08183d2d0903b09046e70b",
+          "inputCount": 327,
+          "omittedNavigation": [],
+          "method": "native autosave after recorded public player inputs"
+        }
+      }
+    },
+    {
+      "case": "bust-tavern",
+      "mode": "normal",
+      "report": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T11-11-02-204Z/report.json",
+        "sha256": "52547bf717374b9a9f66f4b10e94ba6bf875277bcec82f671cbdc7f29e2a1cbe"
+      },
+      "runtimeAssertions": "PASS",
+      "executorStatus": "executed-awaiting-review",
+      "durationMs": 128705,
+      "errors": [],
+      "cleanup": [
+        {
+          "resource": "input-log",
+          "status": "closed"
+        },
+        {
+          "resource": "audio-capture",
+          "status": "closed"
+        },
+        {
+          "resource": "capture-session",
+          "status": "closed"
+        },
+        {
+          "resource": "context",
+          "status": "closed"
+        },
+        {
+          "resource": "browser",
+          "status": "closed"
+        },
+        {
+          "resource": "service",
+          "status": "closed"
+        }
+      ],
+      "bankTiming": null
+    },
+    {
+      "case": "bust-tavern",
+      "mode": "large-reduced",
+      "report": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T11-13-11-681Z/report.json",
+        "sha256": "ac6791efe75a4e2f4ea170c40203626f8c7b09d67cbe3237e1f624c8508f4d70"
+      },
+      "runtimeAssertions": "PASS",
+      "executorStatus": "executed-awaiting-review",
+      "durationMs": 138411,
+      "errors": [],
+      "cleanup": [
+        {
+          "resource": "input-log",
+          "status": "closed"
+        },
+        {
+          "resource": "audio-capture",
+          "status": "closed"
+        },
+        {
+          "resource": "capture-session",
+          "status": "closed"
+        },
+        {
+          "resource": "context",
+          "status": "closed"
+        },
+        {
+          "resource": "browser",
+          "status": "closed"
+        },
+        {
+          "resource": "service",
+          "status": "closed"
+        }
+      ],
+      "bankTiming": null
+    }
+  ],
+  "tavernStateEquivalence": [
+    {
+      "mode": "normal",
+      "base": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-02/directed-bust-tavern-2026-09-11T07-26-27-306Z/report.json",
+        "sha256": "387e9735542e87a5f5eac1d9a445d9da678f807e5555fee2b46731086435322f"
+      },
+      "current": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T11-11-02-204Z/report.json",
+        "sha256": "52547bf717374b9a9f66f4b10e94ba6bf875277bcec82f671cbdc7f29e2a1cbe"
+      },
+      "matchingRenderStates": 56,
+      "different": [],
+      "fields": "speaker, full text, pictures id/name/x/y/scale/tone; not pixel or temporal equality"
+    },
+    {
+      "mode": "large-reduced",
+      "base": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-02/directed-bust-tavern-2026-09-11T07-29-17-366Z/report.json",
+        "sha256": "6d9f59ff27467dc7391a6998aaf84abab82f41a5eda8e23d9407e9d51b8ddf03"
+      },
+      "current": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T11-13-11-681Z/report.json",
+        "sha256": "ac6791efe75a4e2f4ea170c40203626f8c7b09d67cbe3237e1f624c8508f4d70"
+      },
+      "matchingRenderStates": 56,
+      "different": [],
+      "fields": "speaker, full text, pictures id/name/x/y/scale/tone; not pixel or temporal equality"
+    }
+  ],
+  "currentCouncilMaster": {
+    "archive": {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T11-08-57-113Z/council-checkpoint.archive.json",
+      "sha256": "7b4eac816d200727ff57dd6d8e37d94610a19c4dd78213a7f91bea9588efb8f9"
+    },
+    "payloadSha256": "c63a02ce2393dcb701bf494d125849c6381bd527347381c599311cdf41229170",
+    "indexSha256": "de0a6d5fd40d6c65fd83598ffe0662b14fd5b3ed320d5ea6ee55f7b6c7d1a79f",
+    "roster": [
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "phase": "council",
+    "sourceFilesMatched": 1419,
+    "masterIntactAfterConsumer": true,
+    "producer": {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T11-08-57-113Z/report.json",
+      "sha256": "9c806f2312874ce9f1b355e9a16ad18f9fda45de69e7f77ed8ab104d890b1446"
+    },
+    "consumer": {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-council-continue-2026-09-11T11-10-33-202Z/report.json",
+      "sha256": "6bacd12dd6861440c393fea9cd58b891a14b03b4b7f883d3c3b3adca94390a30"
+    },
+    "producerTiming": {
+      "consumer": false,
+      "roster": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "prefixOrRestoreMs": 74796,
+      "councilAndArchiveMs": 10189,
+      "endingSuffixMs": 8163,
+      "totalMs": 93148,
+      "producer": null
+    },
+    "consumerTiming": {
+      "consumer": true,
+      "roster": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "prefixOrRestoreMs": 2808,
+      "councilAndArchiveMs": 14014,
+      "endingSuffixMs": 9599,
+      "totalMs": 26421,
+      "producer": {
+        "scenario": "council-triple-H1-H2-H3-seed0",
+        "run": "/Users/edney/projects/coreto/gamejam-vn-terror/docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T11-08-57-113Z",
+        "startedAt": "2026-09-11T11:08:58.167Z",
+        "environment": {
+          "url": "http://127.0.0.1:18727/",
+          "timeOrigin": 1789124939162.5,
+          "width": 1280,
+          "height": 720,
+          "dpr": 1,
+          "locale": "pt-BR",
+          "fonts": [],
+          "focused": true,
+          "visibility": "visible",
+          "geometryEvents": 3,
+          "canvas": [
+            {
+              "width": 800,
+              "height": 600,
+              "rect": {
+                "x": 640,
+                "y": 360,
+                "width": 0,
+                "height": 0,
+                "top": 360,
+                "right": 640,
+                "bottom": 360,
+                "left": 640
+              }
+            }
+          ],
+          "targetId": "CE9812958998D698129EF7F8904426CE",
+          "contextId": "DE4D57CBD2C2962149CE094F257C5107",
+          "browser": "153.0.8010.36",
+          "node": "v22.23.2",
+          "platform": "darwin",
+          "release": "25.5.0",
+          "arch": "arm64"
+        },
+        "storageArtifact": "council-checkpoint.storage.json",
+        "storageSha256": "cbe92bc2fd916e8d1a863fb7862d66e99fb2004e6e08183d2d0903b09046e70b",
+        "inputCount": 327,
+        "omittedNavigation": [],
+        "method": "native autosave after recorded public player inputs"
+      }
+    }
+  },
+  "retentionDecision": "Accept the previous 24 lots only for their recorded source and unaffected authored visual/content observables. RD1 changes three owner-entry guards; all native recipes/assets/campaign facts match. Current full 138 tests and four fresh legal lots confirm affected lifecycle paths. I/Z/L and the other seven rosters are not described as fresh post-RD1 directed replays.",
+  "priorBankCompatibility": "Eight pre-RD1 masters remain immutable historical evidence; strict current-source import must reject them. Only the newly captured H1/H2/H3 master is current-source compatible.",
+  "impactAudit": {
+    "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/evidence-impact-post-rd1-20260911.json",
+    "sha256": "b431067486a90dd2c9224de7293adb2d8d0ecb7818f351e59958f7abda51f6cd"
+  },
+  "fullSuiteFreshness": {
+    "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/full-suite-freshness-20260911.json",
+    "sha256": "484a4523b10d4ba27a417228efdc1941793060a5a19ef4879a174773da145d39"
+  },
+  "human_accepted": false
+}

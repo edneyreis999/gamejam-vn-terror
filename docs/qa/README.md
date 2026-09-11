@@ -22,6 +22,10 @@ A execução foi pausada pelo usuário após quatro campanhas observadas; o [rel
 
 As seções abaixo são registros históricos da etapa HTML encerrada. Seus procedimentos não são executáveis nem evidência do MZ atual. Para novos testes, use exclusivamente o plano MZ e os sensores aprovados na spec do incremento.
 
+## Incremento de bustos — 2026-09-11
+
+O [guia de diálogos nativos](guides/vn-picture-busts-dialogues.md) e o [charter](charters/CH-vn-picture-busts-dialogues.md) planejam a composição de bustos e a retomada de checkpoints genuínos. Execução autorizada em loop; a pausa histórica acima não se aplica a esse pedido. Vereditos permanecem separados da baseline.
+
 ## Áreas
 
 - `LOC`: abertura local, offline e sessão em memória.

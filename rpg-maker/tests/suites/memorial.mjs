@@ -101,8 +101,8 @@ async function walkWithEpilogues(browser){
     if(state.phase==='campaign_complete'){await creditsReady(browser);return seen;}
     if(state.phase==='epilogue'){
       const hero=state.reading.sceneId.split('.')[1],name=`Dryland_${hero}`;
-      await browser.waitFor(`$gameScreen.picture(18)?.name()===${JSON.stringify(name)}`);
-      assert.deepEqual(await browser.evaluate('Array.from({length:12},(_,i)=>$gameScreen.picture(10+i)?.name()).filter(Boolean)'),[name]);
+      await browser.waitFor(`$gameScreen.picture(60)?.name()===${JSON.stringify(name)}`);
+      assert.deepEqual(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'),[name]);
       assert.equal(await browser.evaluate('$gameMap.mapId()'),28+Number(hero.slice(1)));
       const id=state.reading.passageIds[state.reading.index];
       const list=events.find(e=>e?.list.some(c=>c.code===108&&c.parameters[0]===`@dryland-section ${id}`)).list;

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { activate, choices, tavern } from '../helpers/formation.mjs';
+import { councilWithHeroes, councilAfterLosses } from '../helpers/closing-presentation.mjs';
 import { accepted, complete, rejectUnchanged } from '../helpers/campaign.mjs';
 import { continueSave } from '../helpers/discovery.mjs';
 import { closingReady, councilBoundary, councilState, finalChoice, finishNativeClosing, installClosing, observeClosing } from '../helpers/closing.mjs';
@@ -43,26 +44,36 @@ canonicalCase('UT-036','the memorial is omitted for no deaths and otherwise cont
   if(dead.length)assert.deepEqual(state.reading.passageIds,['memorial.intro',...dead.map(id=>`memorial.${id}`)]);
  }
 });
-async function readCouncil(browser){
+async function readCouncil(browser,testId='IT-054'){
  const seen=[];
  for(let count=0;count<35;count++){
-  if((await snapshot(browser)).phase==='final_choice'){await choices(browser,'ending');return seen;}
+  if((await snapshot(browser)).phase==='final_choice'){await choices(browser,'ending');assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection||null'),null,'Council exit must not report a rejected presentation helper');return seen;}
   await closingReady(browser);const state=await snapshot(browser);
   assert.ok(['approach_result','death_result','council'].includes(state.phase));
   if(state.phase==='council'){
    const id=state.reading.passageIds[state.reading.index];
    if(!seen.some(x=>x.id===id)){
     const speaker=await browser.evaluate('$gameMessage.speakerName()');
-    const expected=speaker==='Ivaí'?'Dryland_ivai':speaker==='Andirá'?'Dryland_andira':/^opinion\.H[1-8]$/.test(id)?`Dryland_${id.slice(-2)}`:null;
-    if(expected)await browser.waitFor(`$gameScreen.picture(18)?.name()===${JSON.stringify(expected)}`);
-    const pictures=await browser.evaluate('Array.from({length:12},(_,i)=>$gameScreen.picture(10+i)?.name()).filter(Boolean)');
-    assert.deepEqual(pictures,expected?[expected]:[]);
+    const heroes=state.climaxPartyIds;
+    const staged=id==='council.challenge'||id==='council.confession'||id.startsWith('opinion.');
+    const hasIvai=['council.solo','council.confession','council.andira'].includes(id)||id.startsWith('opinion.');
+    const expected=[...Array.from({length:3},(_,i)=>staged&&heroes[i]?`Dryland_${heroes[i]}`:null),hasIvai?'Dryland_ivai':null,null,id==='council.andira'?'Dryland_andira':null];
+    const pictures=await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)?.name()||null)');
+    assert.deepEqual(pictures,expected,id);
+    const focus = id.startsWith('opinion.') ? 60 + heroes.indexOf(id.slice(-2)) : id==='council.andira' ? 65 : hasIvai ? 63 : null;
+    if(focus!==null){
+     const tones=expected.map((name,index)=>name?{slot:60+index,tone:60+index===focus?[0,0,0,0]:[-24,-24,-24,0]}:null).filter(Boolean);
+     await browser.waitFor(`${JSON.stringify(tones)}.every(({slot,tone})=>$gameScreen.picture(slot).tone().every((value,index)=>value===tone[index]))`);
+     assert.deepEqual(await snapshot(browser),state,'Focus does not change campaign facts or complete a passage.');
+    }
+    assert.deepEqual(await browser.evaluate('[144,145,146].map(id=>$gameVariables.value(id))'),Array.from({length:3},(_,i)=>heroes[i]?Number(heroes[i].slice(1)):0));
+    assert.equal(await browser.evaluate('$gameScreen.picture(18)==null'),true);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),'Dryland_Council');
     if(speaker==='Andirá'){
-     const bounds=await browser.evaluate('(()=>{const p=SceneManager._scene._spriteset._pictureContainer.children.find(x=>x._pictureId===18);const b=p.getBounds();return {x:b.x,y:b.y,width:b.width,height:b.height};})()');
-     assert.ok(bounds.y>=0&&bounds.y+bounds.height<=512,JSON.stringify(bounds));
-     await browser.screenshot(`${evidence('IT-054')}/andira-reflection.png`);
+     const reflection=await browser.evaluate('(()=>{const p=$gameScreen.picture(65);return {x:p.x(),y:p.y(),scale:p.scaleX()};})()');
+     assert.deepEqual(reflection,{x:330,y:500,scale:100},'Uniform authored reflection; PNG framing deferred by user.');
     }
+    if(staged||speaker==='Andirá') await browser.screenshot(`${evidence(testId)}/${heroes.join('-')||'solo'}-${id}.png`);
     seen.push({id,speaker,pictures});
    }
   }
@@ -74,23 +85,24 @@ async function assertFullBackground(browser){
  const bounds=await browser.evaluate('(()=>{const p=$gameScreen.picture(1),b=ImageManager.loadPicture(p.name());return {width:b.width*p.scaleX()/100,height:b.height*p.scaleY()/100,x:p.x(),y:p.y(),origin:p.origin()};})()');
  assert.equal(bounds.origin,1);assert.equal(bounds.x,640);assert.equal(bounds.y,360);assert.ok(bounds.width>=1280-1e-9&&bounds.height>=720-1e-9,JSON.stringify(bounds));
 }
-canonicalCase('IT-054','native Council presents one current bust and each medallion outcome fills its exclusive map without a bust',{timeout:240000},async t=>{
+canonicalCase('IT-054','native Council retains eligible slots, stages reflected intervention and clears the ensemble before each exclusive outcome',{timeout:240000},async t=>{
  const browser=await tavern(t);await observeClosing(browser);
- for(const [kind,ending] of [['collective','reunite'],['mixed','destroy'],['solo','reunite']]){
+ for(const [kind,ending,reduced] of [['collective','reunite',true],['collective','reunite',false],['mixed','destroy',false],['solo','reunite',true]]){
+  await browser.call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:reduced?'reduce':'no-preference'}]});
   await browser.evaluate('closingLog={maps:[],saves:[]};');await installClosing(browser,councilBoundary(kind));
-  const seen=await readCouncil(browser), state=await snapshot(browser);
+  const seen=await readCouncil(browser,`IT-054/${reduced?'reduced':'normal'}`), state=await snapshot(browser);
   assert.deepEqual(seen.filter(x=>x.id.startsWith('opinion.')).map(x=>x.id),(kind==='solo'?[]:['opinion.H1','opinion.H2','opinion.H3']));
   assert.equal(state.medallionComplete,true);assert.equal(state.phase,'final_choice');
-  assert.equal(await browser.evaluate('$gameScreen.picture(18)==null'),true);
+  assert.equal(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
   assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['council','council']);
   assert.equal(await browser.evaluate('$gameMessage.choices().length'),2);
-  await browser.screenshot(`${evidence('IT-054')}/${kind}-choice.png`);
+  await browser.screenshot(`${evidence('IT-054')}/${reduced?'reduced':'normal'}-${kind}-choice.png`);
   await activate(browser,'ending',ending==='reunite'?0:1);await closingReady(browser);
   const after=await snapshot(browser);assert.equal(after.endingId,ending);assert.equal(after.phase,'ending');
   assert.equal(await browser.evaluate('$gameMap.mapId()'),ending==='reunite'?25:26);
   assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),ending==='reunite'?'Dryland_EndingReunite':'Dryland_EndingDestroy');
   assert.equal(await browser.evaluate('Array.from({length:12},(_,i)=>$gameScreen.picture(10+i)).some(Boolean)'),false);
-  await assertFullBackground(browser);await browser.screenshot(`${evidence('IT-054')}/${kind}-${ending}.png`);
+  await assertFullBackground(browser);await browser.screenshot(`${evidence('IT-054')}/${reduced?'reduced':'normal'}-${kind}-${ending}.png`);
   assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file0').then(x=>x.system._dryland.campaign)"),after);
   assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['council','council','ending']);
  }
@@ -135,5 +147,18 @@ canonicalCase('IT-048','native saved outcomes route only through their own endin
   assert.equal(await browser.evaluate("StorageManager.loadZip('file0')"),bytes);
   const endingMaps=await browser.evaluate('closingLog.maps.filter(id=>[25,26,27].includes(id))');
   assert.deepEqual([...new Set(endingMaps)],[{reunite:25,destroy:26,bad:27}[ending]]);
+ }
+});
+
+canonicalCase('IT-061','native Council supports every hero recipe in canonically reachable occupied slots without changing eligibility',{timeout:300000},async t=>{
+ const browser=await tavern(t);
+ for(const party of [['H1','H2','H3'],['H2','H3','H4'],['H3','H4','H5'],['H4','H5','H6'],['H5','H6','H7'],['H6','H7','H8'],['H7','H8'],['H8']]){
+  let state=party.length===3?councilWithHeroes(party):councilAfterLosses(party);
+  while(state.reading.passageIds[state.reading.index]!=='council.challenge') state=complete(state);
+  await installClosing(browser,state);
+  const seen=await readCouncil(browser,'IT-061'),after=await snapshot(browser);
+  assert.deepEqual(seen.filter(x=>x.id.startsWith('opinion.')).map(x=>x.id),party.map(id=>`opinion.${id}`));
+  assert.deepEqual(after.climaxPartyIds,party);assert.deepEqual(after.deadHeroIds,state.deadHeroIds);assert.deepEqual(after.partyIds,state.partyIds);
+  assert.equal(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
  }
 });
