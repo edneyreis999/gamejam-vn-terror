@@ -1,5 +1,4 @@
 {
-  "sourcePath": "prototype/tests/boundary-recipes.js",
   "sourceSha256": "43e01a8f8fe13efbc8d344c042cad09e12c54f8bf71413e894a27330453238ae",
   "recipes": {
     "initial-fifth-last-party": {
@@ -1305,5 +1304,6 @@
         }
       ]
     }
-  }
+  },
+  "sourceDescription": "Reviewed deterministic campaign action recipes from the completed HTML iteration; historical source hash retained for provenance."
 }

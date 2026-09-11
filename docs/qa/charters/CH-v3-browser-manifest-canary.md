@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # CH-v3-browser-manifest-canary: Manifesto e relatório local
 
 ```yaml
@@ -11,7 +13,7 @@ charter:
     network: wifi-fast
     locale: pt-BR
   journey: J-run-browser-contract
-  entry_point: file:///…/prototype/tests.html
+  entry_point: retired HTML artifact (tests.html)
   scenarios: [LOC-local-launch-session, ACC-accessibility-diagnostics]
   tour: Feature Tour
   time_box_minutes: 30

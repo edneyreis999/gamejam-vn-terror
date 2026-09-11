@@ -5,7 +5,7 @@ title: Preparar a equipe e reconhecer ausências permanentes
 persona: Lia, primeira expedicionária
 journey: J-complete-campaign
 expected: Heróis e destino podem ser escolhidos em qualquer ordem e os estados disponível, selecionado, automático, morto, concluído, bloqueado e vazio permanecem públicos e distintos
-entry_points: file:///…/prototype/index.html
+entry_points: retired HTML artifact (index.html)
 qa_status: pass
 bug_ids:
 fix_status:
@@ -15,6 +15,9 @@ evidence: docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/native-automatic-
 last_report: docs/qa/reports/2026-09-05-prototype-v2-gdd-layouts.md
 overlaps: ACC-accessibility-diagnostics; ENC-encounter-consequences
 ---
+
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 
 Planejar formação manual de zero a três, tentativa de quarto, formação automática com um a três vivos, inspeção separada da seleção, consulta do elenco e preservação da equipe ao trocar o destino. Nomes, resumos, fala, morte e progresso conhecido são públicos; competências, cobertura, viabilidade, seed, IDs internos e atribuições futuras não podem aparecer no conteúdo do jogador.
 

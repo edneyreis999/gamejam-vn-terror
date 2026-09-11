@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # Reproduzir uma campanha com o contrato QA V3
 
 ```mermaid
@@ -27,7 +29,7 @@ journey:
   value_statement: "O operador reproduz decisões e diagnostica rejeições sem alterar o domínio nem revelar fatos privados ao jogador."
   personas: ["Caio, estrategista recorrente", "Joana, jogadora ampliada"]
   entry_points:
-    - url: file:///…/prototype/index.html
+    - url: retired HTML artifact (index.html)
       origin: direct
     - url: Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
       origin: direct

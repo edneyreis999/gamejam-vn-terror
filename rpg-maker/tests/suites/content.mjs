@@ -11,6 +11,7 @@ import vm from 'node:vm';
 import { canonicalCase, assertRegistrations, manifest } from '../helpers/canonical-cases.mjs';
 import { openChrome, project, startServer } from '../helpers/native-chrome.mjs';
 import { hash, layoutErrors, localAssets, nativeFiles } from '../../tools/native-layout.mjs';
+import { assertNativeContent } from '../helpers/native-content.mjs';
 
 const require = createRequire(import.meta.url);
 const { parseEventCatalog } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
@@ -52,6 +53,7 @@ function cli(args) {
 canonicalCase('UT-047', 'native sections resolve stable identities without copying prose into the rule catalog', async () => {
   const result = parse(original);
   assert.deepEqual(result.violations, []);
+  assertNativeContent(original, result);
   assert.deepEqual(result.catalog.scenes.prologue.passageIds, ['prologue.01', 'prologue.02', 'irati.01']);
   for (const id of result.catalog.scenes.prologue.passageIds) {
     const location = result.locations[id];
@@ -101,6 +103,15 @@ canonicalCase('UT-047', 'native sections resolve stable identities without copyi
 canonicalCase('UT-048', 'duplicates and missing required sections report one primary defect', () => {
   errors(fixture(...section('farewell.H1'), ...section('farewell.H1')), [{ code: 'duplicate_section', id: 'farewell.H1' }]);
   errors(removeSection(clone(original), 'prologue.01'), [{ code: 'missing_section', id: 'prologue.01' }]);
+  const missing = removeSection(clone(original), 'prologue.01');
+  assert.throws(() => assertNativeContent(missing, parse(missing)), assert.AssertionError);
+  const reordered = clone(original);
+  const declaration = reordered[1].list.find(c => c.code === 108 && c.parameters[0].startsWith('@scene '));
+  const scene = JSON.parse(declaration.parameters[0].slice(7));
+  scene.passageIds.reverse();
+  declaration.parameters[0] = `@scene ${JSON.stringify(scene)}`;
+  assert.deepEqual(parse(reordered).violations, []);
+  assert.throws(() => assertNativeContent(reordered, parse(reordered)), /scene order: prologue/);
 });
 
 canonicalCase('UT-049', 'empty and unclosed ranges fail without escaping their native section', () => {
@@ -143,6 +154,16 @@ canonicalCase('UT-052', 'metadata, scene references and choice counts have disti
   choices.splice(5, 2, command(102, [['Um', 'Dois'], -1, 0, 2, 0]), command(402, [0, 'Um']),
     command(0, [], 1), command(402, [1, 'Dois']), command(0, [], 1), command(404, []));
   errors(fixture(...choices), [{ code: 'invalid_choice_count', id: 'choices.A1' }]);
+  const missingBranch = clone(original);
+  const location = parse(missingBranch).locations['choices.A1'];
+  const choice = missingBranch[location.commonEventId].list.slice(location.start, location.end).find(c => c.code === 102);
+  choice.parameters[0].pop();
+  const list = missingBranch[location.commonEventId].list;
+  const lastBranch = list.findIndex((c, index) => index > location.start && index < location.end && c.code === 402 && c.parameters[0] === 2);
+  const close = list.findIndex((c, index) => index > lastBranch && index < location.end && c.code === 404);
+  list.splice(lastBranch, close - lastBranch);
+  assert.ok(parse(missingBranch).violations.some(v => v.code === 'invalid_choice_count' && v.id === 'choices.A1'));
+  assert.throws(() => assertNativeContent(missingBranch, parse(missingBranch)), assert.AssertionError);
 });
 
 canonicalCase('UT-053', 'required assets must exist inside the local project', () => {

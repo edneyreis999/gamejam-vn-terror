@@ -4,7 +4,7 @@ These twelve local HTML files are authored reference artboards for `prototype-v2
 
 Each file accepts the design-only selector `?state=<name>`. The complete 252-row state/viewport contract is `.compozy/tasks/prototype-v2-gdd-layouts/analysis/visual-contract-inventory.json`. Captures and their source/capture checksums are retained under `.compozy/tasks/prototype-v2-gdd-layouts/evidence/references/`.
 
-The reference pages load only `artboards.css`, `artboards.js` and packaged local images. They do not read campaign state, storage, external fonts or the live game's scripts. The selector is deliberately absent from `prototype/index.html` and the public QA API.
+The reference pages load only `artboards.css`, `artboards.js` and packaged local images. They do not read campaign state, storage, external fonts or the live game's scripts. These historical design examples are separate from the current MZ game and its public QA API. Images resolve to the existing MZ assets.
 
 ## Source identity
 

@@ -5,7 +5,7 @@ title: Completar o desktop suportado por teclado e inspecionar V3
 persona: Joana, jogadora ampliada
 journey: J-reproduce-campaign
 expected: Teclado, foco, zoom com área efetiva mínima de 1280×720, movimento reduzido e as três leituras QA preservam S01–S12 sem avançar ou mutar a campanha
-entry_points: file:///…/prototype/index.html; file:///…/prototype/tests.html; Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
+entry_points: retired HTML artifact (index.html); retired HTML artifact (tests.html); Chrome DevTools — window.expeditionQA.setSeed, snapshot e validate
 qa_status: pass
 bug_ids:
 fix_status:
@@ -15,6 +15,9 @@ evidence: docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/keyboard-size-pro
 last_report: docs/qa/reports/2026-09-05-prototype-v2-gdd-layouts.md
 overlaps: FOR-formation-roster; CAM-dungeon-progression-outcomes
 ---
+
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 
 Planejar Tab, Shift+Tab, setas, Enter, Espaço e Escape; inspeção de herói, diálogos, leitura, sacrifício sem segunda confirmação, Conselho, desfechos e reinício; zoom apenas quando a área efetiva continuar ≥1280×720; movimento reduzido deve eliminar a espera visual sem alterar a verdade da campanha. Snapshot V3, seeds-limite, rejeições, objetos destacados e validate não mutante pertencem à observação de agente.
 

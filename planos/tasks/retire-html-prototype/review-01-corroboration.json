@@ -1,0 +1,9 @@
+{
+  "date": "2026-09-10",
+  "original_fingerprint": "eda639fae1f4a328e2e0bed2cecc9b62fd742e90f576758ea28e278aac1d392b",
+  "files": {
+    "rpg-maker/tests/suites/content.mjs": "4238ee0a45942a5dce46a9b96ef7bc723652f63a0c105f81331d179a30893fa6",
+    "rpg-maker/tests/suites/persistence.mjs": "70e41c13d72b07b178229a2377dac39af85eaa5d262aada4cba83a9014d21580",
+    "docs/design/opendesign/prototype-v2-gdd-layouts/tools/prepare_assets.py": "90537aa2ae8282feaf9de9b8da4e4aa4053cb87754bacf3c0f0fa6fe45f697c3"
+  }
+}

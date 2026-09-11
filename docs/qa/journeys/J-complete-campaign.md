@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # Concluir a campanha completa em qualquer ordem
 
 ```mermaid
@@ -59,7 +61,7 @@ journey:
   value_statement: "O jogador prepara a equipe, administra perdas e alcança um dos três desfechos canônicos sem receber informação mecânica privada."
   personas: ["Lia, primeira expedicionária", "Caio, estrategista recorrente", "Joana, jogadora ampliada", "Rui, revisor de conteúdo"]
   entry_points:
-    - url: file:///…/prototype/index.html
+    - url: retired HTML artifact (index.html)
       origin: direct
   actions:
     - step: 1

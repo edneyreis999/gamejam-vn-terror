@@ -5,7 +5,7 @@ title: Concluir ambas as ordens e os três desfechos
 persona: Caio, estrategista recorrente
 journey: J-complete-campaign
 expected: Ferro/Vozes e Vozes/Ferro convergem ao Legado e a reunião, destruição ou perda total obedecem às precedências, lembranças elegíveis e reinício limpo
-entry_points: file:///…/prototype/index.html
+entry_points: retired HTML artifact (index.html)
 qa_status: pass
 bug_ids:
 fix_status:
@@ -15,6 +15,9 @@ evidence: docs/qa/evidence/2026-09-05-prototype-v2-gdd-layouts/native-final-solo
 last_report: docs/qa/reports/2026-09-05-prototype-v2-gdd-layouts.md
 overlaps: ENC-encounter-consequences; ACC-accessibility-diagnostics
 ---
+
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 
 Planejar sessões frescas para as duas ordens, 5+5+6 posições, recompensa após a quinta posição inicial, Legado somente após duas partes e três terminais. Incluir perda do último membro do grupo na última posição com reservas, Conselho com Ivaí sozinho, zero opiniões, perda total antes de recompensa/Conselho, memorial omitido quando ninguém morre e memorial dos oito no desfecho ruim.
 

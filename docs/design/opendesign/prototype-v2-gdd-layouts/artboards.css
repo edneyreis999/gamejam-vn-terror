@@ -167,7 +167,7 @@ p, li { font-size: clamp(15px, 1.15vw, 21px); line-height: 1.42; }
 .reading-controls { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 12px; padding: 0 2px 1vh; }
 .scene-caption { position: absolute; top: 18px; left: 28px; z-index: 4; padding: 8px 12px; background: rgba(11,9,7,.82); border-left: 3px solid var(--brass); color: var(--paper-dim); }
 
-.tavern-stage { background-image: linear-gradient(rgba(15,11,7,.24), rgba(8,6,4,.62)), url('../../../../prototype/assets/scenes/taverna.png'); }
+.tavern-stage { background-image: linear-gradient(rgba(15,11,7,.24), rgba(8,6,4,.62)), url('../../../../rpg-maker/The Dryland Drowned/img/pictures/Dryland_Taverna.png'); }
 .tavern-stage::before { background: linear-gradient(180deg, rgba(8,6,4,.22), rgba(8,6,4,.08) 52%, rgba(8,6,4,.68)); }
 .tavern-controls { position: absolute; z-index: 10; top: 18px; right: 28px; display: flex; gap: 10px; }
 .party-readout { position: absolute; z-index: 10; left: 28px; bottom: 22px; min-width: 280px; padding: 14px 18px; background: rgba(15,12,9,.9); border-left: 3px solid var(--brass); }
