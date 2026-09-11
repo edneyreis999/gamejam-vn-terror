@@ -4,6 +4,7 @@ import { resolve, join, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import os from 'node:os';
+import {createAudioCapture} from './browser-audio.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const errorInfo = error => ({ name: error.name, message: error.message, stack: error.stack });
@@ -27,7 +28,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
   if (inside(fixture, root)) throw new Error('Evidence output must be outside the served fixture.');
   await mkdir(root);
   const report = { mode: 'directed-browser', scenario: scenario.id, startedAt: new Date().toISOString(), fixture, criteria: [], checkpoints: [], inputs: [], observations: [], errors: [], cleanup: [], sources: [], status: 'in_progress' };
-  let browser, context, page, session, service, lease, terminal = false;
+  let browser, context, page, session, service, lease, audio, terminal = false;
   const heldKeys = new Set(), heldButtons = new Set();
   const failure = (phase, error) => { report.errors.push({ phase, ...errorInfo(error) }); report.failure ??= { phase, ...errorInfo(error) }; report.status = 'fail'; };
   const owned = async (resource, close) => {
@@ -43,7 +44,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     return actual;
   };
   try {
-    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
+    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
       const bytes = await readFile(file); const name = `source-${index}${String(file).endsWith('.json') ? '.json' : '.mjs'}`;
       await writeFile(join(root, name), bytes, { flag: 'wx' }); report.sources.push({ path: name, originalPath: String(file), sha256: digest(bytes) });
     }
@@ -129,17 +130,19 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       const after = await identity();
       if (!isDeepStrictEqual(before, after)) throw new Error('Geometry/document changed during capture.');
       const bytes = Buffer.from(png.data, 'base64');
-      if (bytes.readUInt32BE(16) !== Math.round(expectedGeometry.width * expectedGeometry.dpr) || bytes.readUInt32BE(20) !== Math.round(expectedGeometry.height * expectedGeometry.dpr)) throw new Error('Capture dimensions mismatch.');
+      if (bytes.readUInt32BE(16) !== Math.round(expectedGeometry.width * expectedGeometry.dpr) || bytes.readUInt32BE(20) !== Math.round(expectedGeometry.height * expectedGeometry.dpr)) throw new Error(`Capture dimensions mismatch: PNG ${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}, expected ${Math.round(expectedGeometry.width * expectedGeometry.dpr)}x${Math.round(expectedGeometry.height * expectedGeometry.dpr)}.`);
       const path = `${id}.png`; await writeFile(join(root, path), bytes, { flag: 'wx' });
       report.checkpoints.push({ id, path, sha256: digest(bytes), at: Date.now(), capture: { before, after } });
     };
     const reload = async () => {
+      await audio.cleanup();
       report.priorDocuments ??= []; report.priorDocuments.push(await metadata());
       await page.reload({ waitUntil: 'load' }); await page.evaluate(() => document.fonts.ready);
       lease = { ...lease, ...(await metadata()) }; await identity();
     };
     const reopen = async () => {
       await identity();
+      await audio.cleanup();
       report.priorDocuments ??= [];
       report.priorDocuments.push({ ...(await metadata()), inputs: await page.evaluate(() => globalThis.__qaTelemetry) });
       await session.detach();
@@ -176,14 +179,17 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       if (definition.type === 'network') {
         if (enabled) await context.route(definition.pattern, route => route.abort('failed'));
         else await context.unroute(definition.pattern);
-      } else if (definition.type === 'boundary' && enabled && typeof definition.apply === 'function') {
-        await page.evaluate(definition.apply);
+      } else if (definition.type === 'boundary') {
+        const operation = enabled ? definition.apply : definition.restore;
+        if (typeof operation !== 'function') throw new Error(`Unsupported fault operation: ${id}`);
+        await page.evaluate(operation);
       } else throw new Error(`Unsupported fault operation: ${id}`);
       report.observations.push({ label: id, kind: 'declared-fault', enabled, expectedRef: definition.expectedRef, at: Date.now() });
       await identity();
     };
+    audio = createAudioCapture({getPage: () => page, identity, report, root, digest, scenario});
     const executionStarted = Date.now();
-    await caseModule.execute({ input: { key, keyDown, keyUp, pointer, publicCommand }, fault, wait, read, shot, reload, reopen, report, fixture, output: root, descriptor });
+    await caseModule.execute({ input: { key, keyDown, keyUp, pointer, publicCommand }, fault, wait, read, shot, audio, reload, reopen, report, fixture, output: root, descriptor });
     report.executionMs = Date.now() - executionStarted;
     const result = await caseModule.verify({ observations: report.observations, artifacts: report.checkpoints, expected: scenario.criteria, report });
     if (!Array.isArray(result?.criteria) || !Array.isArray(result.pendingReviews)) throw new Error('verify must return criteria and pendingReviews arrays.');
@@ -214,6 +220,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       for (const button of heldButtons) await owned(`button:${button}`, () => page.mouse.up({ button }));
       await owned('input-log', async () => { report.publicInputLog = await page.evaluate(() => globalThis.__qaTelemetry); });
     }
+    if (audio) await owned('audio-capture', () => audio.cleanup());
     if (session) await owned('capture-session', () => session.detach());
     if (context) await owned('context', () => context.close());
     if (browser) await owned('browser', () => browser.close());
