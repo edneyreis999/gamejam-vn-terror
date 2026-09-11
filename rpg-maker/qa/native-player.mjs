@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { setTimeout as delay } from 'node:timers/promises';
 
 export class DirectedNativePlayer {
-  constructor(context) { this.context = context; this.serial = 0; }
+  constructor(context, { onPassage, onAdvance } = {}) { this.context = context; this.serial = 0; this.bustSerial = 0; this.onPassage = onPassage; this.onAdvance = onAdvance; }
 
   async surface() {
     return this.context.read('native-visible-surface', () => {
@@ -42,8 +42,10 @@ export class DirectedNativePlayer {
       const surface = await this.ready();
       if (surface.active && surface.labels.includes(label)) return surface;
       assert.ok(surface.paused, `Expected visible ${label}; found ${JSON.stringify(surface)}`);
+      if (this.onPassage) await this.onPassage(this, surface);
       await this.context.shot(`passage-${++this.serial}`);
       await this.context.input.key('Enter');
+      if (this.onAdvance) await this.onAdvance(this, surface);
     }
     throw new Error(`Too many passages before ${label}`);
   }
@@ -78,6 +80,26 @@ export class DirectedNativePlayer {
       assert.equal((await this.surface()).index, index);
       await this.context.shot(`focus-${++this.serial}`);
       await this.context.input.key('Enter');
+    }
+  }
+
+  async dialogueControls(label, expectedSlots) {
+    const context=this.context;
+    await context.wait(()=>[60,61,62,63,64,65].every(id=>{const p=$gameScreen.picture(id);return !p||p.tone().every(v=>v===0||v===-24);}));
+    const composition=()=>context.read(`${label}-composition`,()=>({text:$gameMessage.allText(),speaker:$gameMessage.speakerName(),
+      pictures:[60,61,62,63,64,65].map(id=>{const p=$gameScreen.picture(id);return p?{id,name:p.name(),x:p.x(),y:p.y(),scale:p.scaleX(),tone:p.tone()}:null;})}));
+    const before=await composition(),campaign=await this.snapshot(`${label}-campaign`);
+    assert.deepEqual(before.pictures.filter(Boolean).map(p=>p.id),expectedSlots);
+    for(const restore of ['keyboard','mouse']){
+      await context.input.key('Tab');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);
+      assert.deepEqual(await context.read(`${label}-hidden-art`,()=>SceneManager._scene._spriteset._pictureContainer.children.filter(s=>s._pictureId>=60&&s._pictureId<=65&&s.picture()).map(s=>({id:s._pictureId,visible:s.worldVisible}))),expectedSlots.map(id=>({id,visible:true})));
+      await context.shot(`${label}-${restore}-hidden`);
+      if(restore==='keyboard')await context.input.key('Tab');
+      else {const point=await context.read(`${label}-restore-point`,()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/3};});await this.click(point.x,point.y);}
+      await context.wait(()=>SceneManager._scene._messageWindow.scale.x===1);
+      assert.deepEqual(await composition(),before,'Restoring input must preserve text and settled focus.');
+      assert.deepEqual(await this.snapshot(`${label}-restored-campaign`),campaign);
+      await context.shot(`${label}-${restore}-restored`);
     }
   }
 
