@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import os from 'node:os';
 import {createAudioCapture} from './browser-audio.mjs';
+import {loadStorageFixture, storageCapture} from './browser-storage.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const errorInfo = error => ({ name: error.name, message: error.message, stack: error.stack });
@@ -28,12 +29,19 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
   if (inside(fixture, root)) throw new Error('Evidence output must be outside the served fixture.');
   await mkdir(root);
   const report = { mode: 'directed-browser', scenario: scenario.id, startedAt: new Date().toISOString(), fixture, criteria: [], checkpoints: [], inputs: [], observations: [], errors: [], cleanup: [], sources: [], status: 'in_progress' };
-  let browser, context, page, session, service, lease, audio, terminal = false;
+  let browser, context, page, session, service, lease, audio, terminal = false, touchActive = false;
   const heldKeys = new Set(), heldButtons = new Set();
   const failure = (phase, error) => { report.errors.push({ phase, ...errorInfo(error) }); report.failure ??= { phase, ...errorInfo(error) }; report.status = 'fail'; };
   const owned = async (resource, close) => {
     try { await close(); report.cleanup.push({ resource, status: 'closed' }); }
     catch (error) { failure(`cleanup:${resource}`, error); report.cleanup.push({ resource, status: 'failed', message: error.message }); }
+  };
+  const releaseTouch = async () => {
+    if (touchActive) {
+      await session.send('Input.dispatchTouchEvent', {type: 'touchCancel', touchPoints: []});
+      report.inputs.push({type: 'touch-cancel', source: 'lifecycle', at: Date.now()});
+      touchActive = false;
+    }
   };
   const metadata = () => page.evaluate(() => ({ url: location.href, timeOrigin: performance.timeOrigin, width: innerWidth, height: innerHeight, dpr: devicePixelRatio, locale: navigator.language, fonts: [...document.fonts].map(f => ({ family: f.family, status: f.status })), focused: document.hasFocus(), visibility: document.visibilityState, geometryEvents: globalThis.__qaTelemetry.geometry, canvas: [...document.querySelectorAll('canvas')].map(c => ({ width: c.width, height: c.height, rect: c.getBoundingClientRect().toJSON() })) }));
   const identity = async () => {
@@ -44,7 +52,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     return actual;
   };
   try {
-    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
+    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./browser-storage.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
       const bytes = await readFile(file); const name = `source-${index}${String(file).endsWith('.json') ? '.json' : '.mjs'}`;
       await writeFile(join(root, name), bytes, { flag: 'wx' }); report.sources.push({ path: name, originalPath: String(file), sha256: digest(bytes) });
     }
@@ -66,7 +74,9 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     const baseUrl = new URL(service.url);
     if (!['127.0.0.1', 'localhost', '[::1]'].includes(baseUrl.hostname)) throw new Error('QA service must be local.');
     browser = await chromium.launch({ channel: config.channel ?? 'chrome', headless: false, args: config.launchArgs ?? [] });
-    context = await browser.newContext({ ...(config.nativeZoom ? { viewport: null } : { viewport: { width: config.width, height: config.height }, deviceScaleFactor: config.dpr }), locale: config.locale, reducedMotion: config.reducedMotion ?? 'no-preference' });
+    const storageState = await loadStorageFixture({ descriptor, fixture, origin: baseUrl.origin });
+    if (storageState) report.storagePreparation = { phase: 'before-first-page', ...descriptor.storageFixture, origin: baseUrl.origin };
+    context = await browser.newContext({ ...(config.nativeZoom ? { viewport: null } : { viewport: { width: config.width, height: config.height }, deviceScaleFactor: config.dpr }), locale: config.locale, hasTouch: config.hasTouch ?? false, reducedMotion: config.reducedMotion ?? 'no-preference', ...(storageState ? { storageState } : {}) });
     report.network = [];
     context.on('request', request => report.network.push({ event: 'request', url: request.url(), method: request.method(), at: Date.now() }));
     context.on('response', response => report.network.push({ event: 'response', url: response.url(), status: response.status(), at: Date.now() }));
@@ -80,6 +90,8 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     await context.addInitScript(() => {
       globalThis.__qaTelemetry = { inputs: [], geometry: 0 };
       for (const type of ['keydown', 'keyup', 'pointerdown', 'pointerup']) addEventListener(type, e => __qaTelemetry.inputs.push({ type, key: e.key, x: e.clientX, y: e.clientY, trusted: e.isTrusted, at: performance.now() }), true);
+      addEventListener('wheel', e => __qaTelemetry.inputs.push({type: 'wheel', x: e.clientX, y: e.clientY, deltaX: e.deltaX, deltaY: e.deltaY, deltaMode: e.deltaMode, trusted: e.isTrusted, at: performance.now()}), {capture: true, passive: true});
+      for (const type of ['touchstart', 'touchmove', 'touchend', 'touchcancel']) addEventListener(type, e => __qaTelemetry.inputs.push({type, touches: [...e.touches].map(t => ({id: t.identifier, x: t.clientX, y: t.clientY})), trusted: e.isTrusted, at: performance.now()}), {capture: true, passive: true});
       addEventListener('resize', () => __qaTelemetry.geometry++);
       const observeGeometry = () => {
         const observer = new ResizeObserver(() => __qaTelemetry.geometry++);
@@ -120,8 +132,26 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     const key = async (value, holdMs = 70) => { await keyDown(value); try { await new Promise(r => setTimeout(r, holdMs)); } finally { await page.keyboard.up(value); heldKeys.delete(value); report.inputs.push({ type: 'key-up', key: value, at: Date.now() }); } await new Promise(r => setTimeout(r, config.keyReleaseMs ?? 35)); };
     const pointer = {
       move: (x, y) => input('pointer-move', { x, y }, () => page.mouse.move(x, y)),
+      wheel: (deltaX, deltaY) => input('pointer-wheel', { deltaX, deltaY }, () => page.mouse.wheel(deltaX, deltaY)),
       down: (button = 'left') => input('pointer-down', { button }, async () => { heldButtons.add(button); await page.mouse.down({ button }); }),
       up: (button = 'left') => input('pointer-up', { button }, async () => { await page.mouse.up({ button }); heldButtons.delete(button); })
+    };
+    const touch = {
+      start: (x, y) => input('touch-start', {x, y}, async () => {
+        if (!config.hasTouch) throw new Error('Touch input requires scenario.browser.hasTouch.');
+        if (touchActive) throw new Error('End the active touch before starting another.');
+        touchActive = true;
+        await session.send('Input.dispatchTouchEvent', {type: 'touchStart', touchPoints: [{x, y, id: 0}]});
+      }),
+      move: (x, y) => input('touch-move', {x, y}, async () => {
+        if (!touchActive) throw new Error('Touch move requires an active touch.');
+        await session.send('Input.dispatchTouchEvent', {type: 'touchMove', touchPoints: [{x, y, id: 0}]});
+      }),
+      end: () => input('touch-end', {}, async () => {
+        if (!touchActive) throw new Error('Touch end requires an active touch.');
+        await session.send('Input.dispatchTouchEvent', {type: 'touchEnd', touchPoints: []});
+        touchActive = false;
+      })
     };
     const shot = async id => {
       if (!safeId(id)) throw new Error('Invalid capture ID.');
@@ -136,6 +166,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     };
     const reload = async () => {
       await audio.cleanup();
+      await releaseTouch();
       report.priorDocuments ??= []; report.priorDocuments.push(await metadata());
       await page.reload({ waitUntil: 'load' }); await page.evaluate(() => document.fonts.ready);
       lease = { ...lease, ...(await metadata()) }; await identity();
@@ -143,6 +174,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     const reopen = async () => {
       await identity();
       await audio.cleanup();
+      await releaseTouch();
       report.priorDocuments ??= [];
       report.priorDocuments.push({ ...(await metadata()), inputs: await page.evaluate(() => globalThis.__qaTelemetry) });
       await session.detach();
@@ -189,7 +221,8 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     };
     audio = createAudioCapture({getPage: () => page, identity, report, root, digest, scenario});
     const executionStarted = Date.now();
-    await caseModule.execute({ input: { key, keyDown, keyUp, pointer, publicCommand }, fault, wait, read, shot, audio, reload, reopen, report, fixture, output: root, descriptor });
+    const storage = { capture: storageCapture({ context, identity, report, output: root, origin: baseUrl.origin }) };
+    await caseModule.execute({ input: { key, keyDown, keyUp, pointer, touch, publicCommand }, fault, wait, read, shot, audio, storage, reload, reopen, report, fixture, output: root, descriptor });
     report.executionMs = Date.now() - executionStarted;
     const result = await caseModule.verify({ observations: report.observations, artifacts: report.checkpoints, expected: scenario.criteria, report });
     if (!Array.isArray(result?.criteria) || !Array.isArray(result.pendingReviews)) throw new Error('verify must return criteria and pendingReviews arrays.');
@@ -218,6 +251,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     if (page && !page.isClosed()) {
       for (const key of heldKeys) await owned(`key:${key}`, () => page.keyboard.up(key));
       for (const button of heldButtons) await owned(`button:${button}`, () => page.mouse.up({ button }));
+      if (touchActive) await owned('touch', releaseTouch);
       await owned('input-log', async () => { report.publicInputLog = await page.evaluate(() => globalThis.__qaTelemetry); });
     }
     if (audio) await owned('audio-capture', () => audio.cleanup());
