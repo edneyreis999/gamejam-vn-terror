@@ -61,3 +61,39 @@ wait predicates still own game readiness.
 If the contract deliberately triggers a browser error, verify may return
 expectedErrors: [{index, expectedRef, reason}] referencing the preserved error
 array. Unclassified browser errors fail the run; never suppress the original log.
+
+## WebAudio recordings
+
+For an assigned audio criterion, declare `scenario.audioSources` entries as
+`{master: {path: 'WebAudio._masterGainNode', expectedRef: 'path/to/contract'}}`.
+The path must resolve to an existing AudioNode in a running context after a
+public player gesture. `context.audio.start(id, 'master')` connects an observing
+MediaStream destination without replacing the audible destination.
+`context.audio.stop()` disconnects only that branch and registers a hashed
+Opus/WebM artifact, duration, sample rate, per-channel RMS and peak.
+Only one recording may run at a time. `reload()` and `reopen()` finish an
+outstanding recording before replacing its document; if recording fails, the
+navigation does not proceed. Cleanup also stops an outstanding recording.
+Decode/write errors propagate, release the capture state and do not register a
+successful checkpoint. A capture is evidence of rendered graph audio,
+not physical speaker output or human comfort. No microphone/device permission
+is requested, and no unrelated tab or app is recorded.
+
+For a declared boundary fault, export `apply()` and `restore()` on its definition.
+`context.fault(id, false)` invokes only that restore function and records restoration.
+Both functions operate solely at the assigned external I/O boundary; use `finally`
+to restore before a retry or when the case exits.
+
+The tool's lifecycle suite lives beside the module, outside the game suites.
+From the repository root, with Node 22+ and Chrome installed:
+
+```sh
+npm ci --prefix .agents/skills/rpg-maker-mz-qa-execution/scripts
+node --test .agents/skills/rpg-maker-mz-qa-execution/scripts/browser-audio.test.mjs
+```
+
+It uses temporary synthetic WebAudio fixtures and isolated Chrome processes,
+with speaker output muted. It tests actual Opus/WebM recording and filesystem
+writes, injected allocation/decode failures, write collisions and executor
+reload/reopen/fault restoration. Fixtures and artifacts are removed on exit;
+the suite does not use the game, user profile, microphone or shared server.
