@@ -35,7 +35,8 @@ Case module (passed as --case):
 - `scenario`: `{id, criteria:[{id,variant,expectedRef}], requires:[], browser:
   {width,height,dpr,locale,channel?,query?,timeoutMs?,launchArgs?}}`.
 - `execute(context)`: public actions and auxiliary observations. Context has
-  input.key/keyDown/keyUp, input.pointer.move/down/up, wait(predicate,arg),
+  input.key/keyDown/keyUp, input.pointer.move/down/up/wheel, input.touch.start/move/end,
+  wait(predicate,arg),
   read(label,function,arg), shot(uniqueId), reload(), descriptor, fixture,
   output and report. Functions may be async. read labels observations; wait
   polls a read-only predicate. Key hold duration is a gesture parameter, not
@@ -55,8 +56,23 @@ candidate's observations. Use composition rather than subclassing the runner.
 
 Modules may export sourceFiles as file URLs for local helper dependencies that
 contribute to the run; the runner snapshots and hashes these with entry modules.
-Browser keyReleaseMs (default 35) is the released portion of a key gesture;
+  Browser keyReleaseMs (default 35) is the released portion of a key gesture;
 wait predicates still own game readiness.
+
+`input.pointer.wheel(deltaX, deltaY)` sends a mouse-wheel gesture at the current
+pointer position, with deltas in CSS pixels. Move to the intended target first,
+then wait for the application effect: wheel dispatch does not wait for scrolling
+or the game update. The report records the requested deltas and the trusted
+WheelEvent delivered by Chrome. This is browser input, not proof of a physical
+mouse or touchpad device.
+
+For a touch criterion, declare `scenario.browser.hasTouch: true` before launch.
+`input.touch.start(x, y)`, `move(x, y)` and `end()` send one-finger touch gestures
+through the owned Chrome session. Coordinates are viewport CSS pixels. End a
+gesture before starting another. The runner cancels a remaining touch before
+reload/reopen and during cleanup; events and requests stay in the input log.
+This tests Chrome touch handling with touch capability enabled, not a physical
+touchscreen. The case must still use public gestures to reach the game effect.
 
 If the contract deliberately triggers a browser error, verify may return
 expectedErrors: [{index, expectedRef, reason}] referencing the preserved error
@@ -97,3 +113,29 @@ with speaker output muted. It tests actual Opus/WebM recording and filesystem
 writes, injected allocation/decode failures, write collisions and executor
 reload/reopen/fault restoration. Fixtures and artifacts are removed on exit;
 the suite does not use the game, user profile, microphone or shared server.
+
+## Native save archives
+
+A project may declare an immutable `descriptor.storageFixture` with `{path,
+sha256}` matching an entry in `descriptor.files`. The JSON uses Playwright
+storage-state format with IndexedDB included. The runner verifies its path/hash
+and local origin, then supplies it to `newContext` before creating the first
+page. It records `storagePreparation.phase = before-first-page`. No import or
+storage replacement operation is exposed during gameplay. Cookie imports and
+foreign origins are rejected for these local game fixtures.
+
+`context.storage.capture(id)` reads storage from the owned context, verifies the
+document lease before/after, and registers a hashed `id.storage.json` artifact.
+It never changes game storage. The project case must first verify native save
+completion and a consistent persisted index, then bind the unchanged payload
+and index to game/source revision, origin, actual campaign and producer inputs.
+The project adapter owns compatibility checks and must copy an archived master
+into each new fixture, recording omitted navigation and its producer. Later
+autosaves belong only to that context; never replace the archived master.
+
+Generic capture/path/hash/lease coverage lives in
+`scripts/browser-storage.test.mjs`. Native checkpoint production, pre-boot
+restore, Continue and branch integrity require the project's directed case;
+synthetic storage unit inputs do not prove legal navigation.
+
+Dryland's named `bust-save-incompatible` scenario is a deliberate compatibility-negative fixture: it imports an unchanged archive from a different native revision only to assert native Continue refusal and usable New Game. Ordinary archive consumers require exact runtime file hashes and revision. `DRYLAND_QA_BASELINE` is limited to the producer scenario, copies the four recorded historical runtime/layout files into a disposable game, and retains their hashes in producer provenance; it never touches the working game or save facts.

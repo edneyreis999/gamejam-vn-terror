@@ -1,0 +1,71 @@
+{
+  "scope": "Selected native authoring/2x2 fixtures, inspected legal Council campaign captures, and known lover-prison visual gaps. No human acceptance or release readiness.",
+  "files": [
+    {
+      "file": "2x2-native-normal.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-07/2026-09-11T09-17-04-954Z/captured/qa/evidence/init-rpg-maker-mz/task-11/IT-068/normal-cold/focus-60-0.png",
+      "sha256": "f04b667263c29f6d774c0195aacbb14030327368118b93c5139f6fcdfce71c8f",
+      "kind": "labeled integration fixture; not canonical campaign"
+    },
+    {
+      "file": "2x2-native-reduced.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-07/2026-09-11T09-17-04-954Z/captured/qa/evidence/init-rpg-maker-mz/task-11/IT-068/reduced-warm/focus-64-3.png",
+      "sha256": "2ed2982a8a4d0f7cd1738b5bcc06affbfd70ce0f557f89666e1971b9196c92b1",
+      "kind": "labeled integration fixture; not canonical campaign"
+    },
+    {
+      "file": "authored-position-scale.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-07/2026-09-11T09-12-45-831Z/captured/qa/evidence/init-rpg-maker-mz/task-vn-picture-busts-dialogues/IT-067/authored-342-44.png",
+      "sha256": "6f78f4c73d55363d5027baf35979d55a79c95d1de0ec492e22b9c2074c968361",
+      "kind": "labeled integration fixture; not canonical campaign"
+    },
+    {
+      "file": "known-gap-perola-prison.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-06/directed-bust-controls-council-2026-09-11T09-06-42-698Z/passage-34.png",
+      "sha256": "52ac35c15c82dbf97b19730695f5e2864280f36f6062cc665cd541bbefdcbe95",
+      "kind": "known visual gap"
+    },
+    {
+      "file": "known-gap-florai-prison.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-06/directed-bust-controls-council-2026-09-11T09-06-42-698Z/passage-58.png",
+      "sha256": "c396947503208c988770f2219cdd78e53948ea64c109b3f1e66d4f3929a781c7",
+      "kind": "known visual gap"
+    },
+    {
+      "file": "council-demand.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-57-16-756Z/bust-53-council-challenge.png",
+      "sha256": "e1d32a77d965005b604ed2ef4ba6640c1635fe4ec38055925fb76d82b33fd2ca",
+      "kind": "legal directed campaign C1; inspected by agent, no human acceptance"
+    },
+    {
+      "file": "council-ivai.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-57-16-756Z/bust-54-council-confession.png",
+      "sha256": "964f200d3f576ff1826f1785b492196fd58cd528a4c485591e158052eac2de9f",
+      "kind": "legal directed campaign C1; inspected by agent, no human acceptance"
+    },
+    {
+      "file": "council-andira.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-57-16-756Z/bust-55-council-andira.png",
+      "sha256": "49f865dc9fc40c52bced46c2d536b71303fd2b92fdee91b7fd5f4e709b642b9a",
+      "kind": "legal directed campaign C1; inspected by agent, no human acceptance"
+    },
+    {
+      "file": "council-opinions-restored.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-57-16-756Z/bust-58-opinion-H3.png",
+      "sha256": "b5dcfcfade4a15de51dfdab4d21ccf77dd2497bab8d93ecbb6434ec9cbb86398",
+      "kind": "legal directed campaign C1; inspected by agent, no human acceptance"
+    },
+    {
+      "file": "tavern-ivai.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T10-15-27-246Z/tavern-H1-box-2.png",
+      "sha256": "aeb38c82439616989a51e87ae5957e4c619ea9b569f6e33c2997503da839c00a",
+      "kind": "legal directed campaign T normal; parent inspected faces, sides, focus, readable name and full text; pre-RD1 EventBridge 9288e012, no human acceptance"
+    },
+    {
+      "file": "tavern-gorvak.png",
+      "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T10-15-27-246Z/tavern-H1-box-3.png",
+      "sha256": "21a29876239c67184a0883aac0336581094521057c3fd6cdd1bd6f576671d70a",
+      "kind": "legal directed campaign T normal; parent inspected faces, sides, focus, readable name and full text; pre-RD1 EventBridge 9288e012, no human acceptance"
+    }
+  ]
+}

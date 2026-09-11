@@ -86,7 +86,7 @@ export async function frames(browser, count) {
 }
 // Legal actions produce additional climax parties; no campaign facts are
 // synthesized merely to make an otherwise ineligible epilogue appear.
-export function endingWithHeroes(party) {
+export function councilWithHeroes(party) {
   for (let seed=0;seed<32;seed++) {
     let state=formation(seed);
     for(const route of ['physical','supernatural'])state=finishReading(successfulRoute(state,route));
@@ -102,7 +102,32 @@ export function endingWithHeroes(party) {
     }
     if(!valid)continue;
     assert.deepEqual(state.climaxPartyIds,heroes.filter(id=>party.includes(id)));
-    return accepted(finishReading(state),'CHOOSE_ENDING',{ending:'destroy'});
+    return state;
   }
   assert.fail('No legal all-success boundary found for the requested witness party.');
+}
+
+export function endingWithHeroes(party) {
+  return accepted(finishReading(councilWithHeroes(party)),'CHOOSE_ENDING',{ending:'destroy'});
+}
+
+export function councilAfterLosses(survivors) {
+  const recipes = {
+    'H8': [['A7-1'],['A5-1','H7'],['B8-2'],['B1-1'],['B2-2','H6'],['A8-1']],
+    'H7,H8': [['A7-1'],['A5-2'],['B8-1'],['B1-2','H6'],['B2-2'],['A8-1']]
+  };
+  const recipe=recipes[survivors.join(',')];
+  assert.ok(recipe,'Requested survivors need a recorded legal fixture recipe.');
+  let state=formation(0);
+  for(const route of ['physical','supernatural'])state=finishReading(successfulRoute(state,route));
+  for(const heroId of state.draftPartyIds)state=accepted(state,'TOGGLE_HERO',{heroId});
+  for(const heroId of ['H6','H7','H8'])state=accepted(state,'TOGGLE_HERO',{heroId});
+  state=finishReading(accepted(accepted(state,'SELECT_DESTINATION',{dungeonId:'final'}),'DEPART'));
+  for(const [approachId,victim] of recipe){
+    state=complete(accepted(state,'ENTER_DUNGEON'));
+    state=complete(accepted(state,'CHOOSE_APPROACH',{approachId}));
+    if(victim)state=finishReading(accepted(state,'SELECT_VICTIM',{heroId:victim}));
+  }
+  assert.equal(state.phase,'council');assert.deepEqual(state.climaxPartyIds,survivors);
+  return state;
 }

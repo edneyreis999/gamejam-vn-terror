@@ -48,6 +48,6 @@ canonicalCase('IT-027','HIDE removes consultation overlays and targets while ret
  await activate(browser,'formation',0);await choices(browser,'hero');
  await activate(browser,'hero',0);await pause(browser);
  const before=await state(browser);await browser.press('Tab',9);await hidden(browser,true);
- assert.equal(await browser.evaluate('SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===18).worldVisible'),true);
+ assert.equal(await browser.evaluate('SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===60).worldVisible'),true);
  await browser.press('Tab',9);await hidden(browser,false);assert.deepEqual(await state(browser),before);
 });

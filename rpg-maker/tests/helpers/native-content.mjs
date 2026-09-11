@@ -68,3 +68,18 @@ export function assertNativeContent(events, parsed) {
     }
   }
 }
+
+// Literal editor serialization, independently transcribed from the installed public header.
+export function nativeBustRecipe() {
+  const plugin = (name, args) => ({ code: 357, indent: 0, parameters: ['VisuMZ_2_VNPictureBusts', name, '', args] });
+  const targets = { 'PictureID:arrayeval': '["60"]', 'Duration:eval': '20' };
+  return [
+    plugin('Basic_EnterBust', { 'PictureID:eval': '60', 'PictureName:str': 'Dryland_H1', 'Origin:str': 'Bust', 'Position:num': '2',
+      'StartOffsetX:eval': '-32', 'StartOffsetY:eval': '0', 'EasingType:str': 'OutSine', 'HorzMirror:str': 'None', 'Duration:eval': '20' }),
+    plugin('Scale_ScaleTo', { ...targets, 'TargetScaleX:str': '40', 'TargetScaleY:str': '40' }),
+    plugin('Move_MoveToCoordinates', { ...targets, 'TargetX:str': '300', 'TargetY:str': '780', 'EasingType:str': 'InOutSine', 'FlipDirection:str': 'None' }),
+    plugin('Tone_NormalBust', { ...targets }),
+    plugin('Tone_CustomToneBust', { ...targets, 'customTone:eval': '[-24,-24,-24,0]' }),
+    plugin('Basic_ExitBusts', { ...targets, 'EndOffsetX:eval': '-32', 'EndOffsetY:eval': '0', 'EasingType:str': 'InSine', 'FlipDirection:str': 'None', 'AutoErase:eval': 'true' })
+  ];
+}
