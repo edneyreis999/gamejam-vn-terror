@@ -1,0 +1,32 @@
+TAP version 13
+# Subtest: UT-047 — native sections resolve stable identities without copying prose into the rule catalog
+not ok 1 - UT-047 — native sections resolve stable identities without copying prose into the rule catalog
+  ---
+  duration_ms: 382.006333
+  type: 'test'
+  location: '/Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/tests/helpers/canonical-cases.mjs:52:3'
+  failureType: 'testCodeFailure'
+  error: 'Object.hasOwn is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    declaration (/Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js:127:21)
+    Object.parseEventCatalog (/Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js:204:29)
+    evalmachine.<anonymous>:2:41
+    evalmachine.<anonymous>:13:7
+    Script.runInContext (node:vm:149:12)
+    Object.runInContext (node:vm:301:6)
+    file:///Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/tests/suites/content.mjs:81:36
+    async TestContext.<anonymous> (file:///Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/tests/helpers/canonical-cases.mjs:54:7)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 448.263125

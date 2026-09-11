@@ -1,0 +1,16 @@
+TAP version 13
+# Subtest: UT-047 — native sections resolve stable identities without copying prose into the rule catalog
+ok 1 - UT-047 — native sections resolve stable identities without copying prose into the rule catalog
+  ---
+  duration_ms: 410.516167
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 489.846958

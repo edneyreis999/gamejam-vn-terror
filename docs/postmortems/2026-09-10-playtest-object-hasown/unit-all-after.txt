@@ -1,0 +1,400 @@
+TAP version 13
+# Subtest: UT-047 — native sections resolve stable identities without copying prose into the rule catalog
+ok 1 - UT-047 — native sections resolve stable identities without copying prose into the rule catalog
+  ---
+  duration_ms: 380.619459
+  type: 'test'
+  ...
+# Subtest: UT-048 — duplicates and missing required sections report one primary defect
+ok 2 - UT-048 — duplicates and missing required sections report one primary defect
+  ---
+  duration_ms: 14.571584
+  type: 'test'
+  ...
+# Subtest: UT-049 — empty and unclosed ranges fail without escaping their native section
+ok 3 - UT-049 — empty and unclosed ranges fail without escaping their native section
+  ---
+  duration_ms: 23.676916
+  type: 'test'
+  ...
+# Subtest: UT-050 — executable text escapes in public profiles are rejected without evaluation
+ok 4 - UT-050 — executable text escapes in public profiles are rejected without evaluation
+  ---
+  duration_ms: 6.884167
+  type: 'test'
+  ...
+# Subtest: UT-051 — scripts and mutation commands cannot run inside content ranges
+ok 5 - UT-051 — scripts and mutation commands cannot run inside content ranges
+  ---
+  duration_ms: 7.502292
+  type: 'test'
+  ...
+# Subtest: UT-052 — metadata, scene references and choice counts have distinct diagnostics
+ok 6 - UT-052 — metadata, scene references and choice counts have distinct diagnostics
+  ---
+  duration_ms: 9.442959
+  type: 'test'
+  ...
+# Subtest: UT-053 — required assets must exist inside the local project
+ok 7 - UT-053 — required assets must exist inside the local project
+  ---
+  duration_ms: 6.851
+  type: 'test'
+  ...
+# Subtest: UT-054 — eight public profiles and speeches are indexed independently of private competencies
+ok 8 - UT-054 — eight public profiles and speeches are indexed independently of private competencies
+  ---
+  duration_ms: 7.205209
+  type: 'test'
+  ...
+# Subtest: UT-057 — shared lover warnings retain one identity across order variants and wording edits
+ok 9 - UT-057 — shared lover warnings retain one identity across order variants and wording edits
+  ---
+  duration_ms: 21.20425
+  type: 'test'
+  ...
+# Subtest: UT-060 — event renumbering rebuilds locations while preserving passage identity
+ok 10 - UT-060 — event renumbering rebuilds locations while preserving passage identity
+  ---
+  duration_ms: 15.724
+  type: 'test'
+  ...
+# Subtest: UT-003 — Mulberry32 preserves the independent seed-zero vector
+ok 11 - UT-003 — Mulberry32 preserves the independent seed-zero vector
+  ---
+  duration_ms: 6.966208
+  type: 'test'
+  ...
+# Subtest: UT-004 — BEGIN accepts only unsigned 32-bit integer seeds
+ok 12 - UT-004 — BEGIN accepts only unsigned 32-bit integer seeds
+  ---
+  duration_ms: 8.56975
+  type: 'test'
+  ...
+# Subtest: UT-005 — first reveal assigns only the current position, without increasing progress
+ok 13 - UT-005 — first reveal assigns only the current position, without increasing progress
+  ---
+  duration_ms: 6.831
+  type: 'test'
+  ...
+# Subtest: UT-006 — real retreat/departure/reveal transitions reuse the saved position and RNG
+ok 14 - UT-006 — real retreat/departure/reveal transitions reuse the saved position and RNG
+  ---
+  duration_ms: 6.691416
+  type: 'test'
+  ...
+# Subtest: UT-007 — the final route consumes exactly the three leftovers from each initial pool
+ok 15 - UT-007 — the final route consumes exactly the three leftovers from each initial pool
+  ---
+  duration_ms: 23.810791
+  type: 'test'
+  ...
+# Subtest: UT-016 — all 48 approaches follow independent provider sets for every three-hero party
+ok 16 - UT-016 — all 48 approaches follow independent provider sets for every three-hero party
+  ---
+  duration_ms: 407.241458
+  type: 'test'
+  ...
+# Subtest: UT-018 — a zero-viability party still receives all three choices and fails each approach
+ok 17 - UT-018 — a zero-viability party still receives all three choices and fails each approach
+  ---
+  duration_ms: 9.639708
+  type: 'test'
+  ...
+# Subtest: UT-019 — an approach from another encounter cannot commit an outcome
+ok 18 - UT-019 — an approach from another encounter cannot commit an outcome
+  ---
+  duration_ms: 7.923583
+  type: 'test'
+  ...
+# Subtest: UT-020 — retreat is unavailable after committing either outcome
+ok 19 - UT-020 — retreat is unavailable after committing either outcome
+  ---
+  duration_ms: 7.673542
+  type: 'test'
+  ...
+# Subtest: UT-037 — seen-text skipping stops before the first unseen passage or a choice
+ok 20 - UT-037 — seen-text skipping stops before the first unseen passage or a choice
+  ---
+  duration_ms: 7.660958
+  type: 'test'
+  ...
+# Subtest: UT-038 — unseen text cannot be skipped
+ok 21 - UT-038 — unseen text cannot be skipped
+  ---
+  duration_ms: 12.884542
+  type: 'test'
+  ...
+# Subtest: UT-055 — only the current passage can record completion
+ok 22 - UT-055 — only the current passage can record completion
+  ---
+  duration_ms: 7.34775
+  type: 'test'
+  ...
+# Subtest: UT-001 — the native catalog matches the independent GDD transcription, including all 48 approaches
+ok 23 - UT-001 — the native catalog matches the independent GDD transcription, including all 48 approaches
+  ---
+  duration_ms: 7.629667
+  type: 'test'
+  ...
+# Subtest: UT-002 — corrupt canonical pairs reject construction before a campaign starts
+ok 24 - UT-002 — corrupt canonical pairs reject construction before a campaign starts
+  ---
+  duration_ms: 13.706708
+  type: 'test'
+  ...
+# Subtest: UT-008 — one through three survivors are mandatory; four through eight require three selected heroes
+ok 25 - UT-008 — one through three survivors are mandatory; four through eight require three selected heroes
+  ---
+  duration_ms: 7.975459
+  type: 'test'
+  ...
+# Subtest: UT-009 — manual toggles alter only membership and the accepted action journal
+ok 26 - UT-009 — manual toggles alter only membership and the accepted action journal
+  ---
+  duration_ms: 7.482958
+  type: 'test'
+  ...
+# Subtest: UT-010 — a fourth member is rejected without replacing anyone or consuming RNG
+ok 27 - UT-010 — a fourth member is rejected without replacing anyone or consuming RNG
+  ---
+  duration_ms: 6.365167
+  type: 'test'
+  ...
+# Subtest: UT-011 — unknown/dead members and removal from automatic formation are rejected
+ok 28 - UT-011 — unknown/dead members and removal from automatic formation are rejected
+  ---
+  duration_ms: 6.867625
+  type: 'test'
+  ...
+# Subtest: UT-012 — unknown destinations preserve the campaign
+ok 29 - UT-012 — unknown destinations preserve the campaign
+  ---
+  duration_ms: 6.439208
+  type: 'test'
+  ...
+# Subtest: UT-013 — locked final and completed routes cannot be selected
+ok 30 - UT-013 — locked final and completed routes cannot be selected
+  ---
+  duration_ms: 6.451417
+  type: 'test'
+  ...
+# Subtest: UT-014 — departure requires a destination and exactly three manual members
+ok 31 - UT-014 — departure requires a destination and exactly three manual members
+  ---
+  duration_ms: 12.091583
+  type: 'test'
+  ...
+# Subtest: UT-015 — departure carries the selected living heroes and consumes no protagonist slot
+ok 32 - UT-015 — departure carries the selected living heroes and consumes no protagonist slot
+  ---
+  duration_ms: 6.885375
+  type: 'test'
+  ...
+# Subtest: UT-017 — public projections exclude private competencies, viability and pool labels
+ok 33 - UT-017 — public projections exclude private competencies, viability and pool labels
+  ---
+  duration_ms: 7.859041
+  type: 'test'
+  ...
+# Subtest: UT-021 — one victim activation is irreversible and its original revision cannot kill again
+ok 34 - UT-021 — one victim activation is irreversible and its original revision cannot kill again
+  ---
+  duration_ms: 8.0785
+  type: 'test'
+  ...
+# Subtest: UT-022 — protagonist, reserve, unknown and dead victims are rejected without mutation
+ok 35 - UT-022 — protagonist, reserve, unknown and dead victims are rejected without mutation
+  ---
+  duration_ms: 8.150875
+  type: 'test'
+  ...
+# Subtest: UT-023 — the sole remaining H2 still requires an explicit victim activation
+ok 36 - UT-023 — the sole remaining H2 still requires an explicit victim activation
+  ---
+  duration_ms: 11.525708
+  type: 'test'
+  ...
+# Subtest: UT-024 — a death leaving H2 continues with H2 and cannot recruit reserves mid-route
+ok 37 - UT-024 — a death leaving H2 continues with H2 and cannot recruit reserves mid-route
+  ---
+  duration_ms: 8.153958
+  type: 'test'
+  ...
+# Subtest: UT-025 — an empty expedition before the route end returns automatically when reserves survive
+ok 38 - UT-025 — an empty expedition before the route end returns automatically when reserves survive
+  ---
+  duration_ms: 8.726833
+  type: 'test'
+  ...
+# Subtest: UT-026 — the fifth initial encounter rewards completion even when the last present hero dies
+ok 39 - UT-026 — the fifth initial encounter rewards completion even when the last present hero dies
+  ---
+  duration_ms: 11.801875
+  type: 'test'
+  ...
+# Subtest: UT-027 — the sixth final encounter with living reserves enters the solo Council
+ok 40 - UT-027 — the sixth final encounter with living reserves enters the solo Council
+  ---
+  duration_ms: 25.922542
+  type: 'test'
+  ...
+# Subtest: UT-028 — the eighth death takes bad-ending precedence even on the sixth final encounter
+ok 41 - UT-028 — the eighth death takes bad-ending precedence even on the sixth final encounter
+  ---
+  duration_ms: 36.637875
+  type: 'test'
+  ...
+# Subtest: UT-056 — zero living heroes cannot depart and the terminal ending remains authoritative
+ok 42 - UT-056 — zero living heroes cannot depart and the terminal ending remains authoritative
+  ---
+  duration_ms: 35.909084
+  type: 'test'
+  ...
+# Subtest: UT-066 — death context is atomic, immutable, strictly validated and cleared by New Game
+ok 43 - UT-066 — death context is atomic, immutable, strictly validated and cleared by New Game
+  ---
+  duration_ms: 58.667417
+  type: 'test'
+  ...
+# Subtest: UT-029 — voluntary retreat requires at least three living heroes even with automatic formation
+ok 44 - UT-029 — voluntary retreat requires at least three living heroes even with automatic formation
+  ---
+  duration_ms: 9.197333
+  type: 'test'
+  ...
+# Subtest: UT-030 — confirmed retreat preserves deaths, assignments and greatest progress across renewed attempts
+ok 45 - UT-030 — confirmed retreat preserves deaths, assignments and greatest progress across renewed attempts
+  ---
+  duration_ms: 9.356041
+  type: 'test'
+  ...
+# Subtest: UT-031 — retreat cancellation restores each exact allowed cursor and rejects repeated cancellation
+ok 46 - UT-031 — retreat cancellation restores each exact allowed cursor and rejects repeated cancellation
+  ---
+  duration_ms: 9.023792
+  type: 'test'
+  ...
+# Subtest: UT-042 — terminal New Game clears every prior campaign fact
+ok 47 - UT-042 — terminal New Game clears every prior campaign fact
+  ---
+  duration_ms: 40.504666
+  type: 'test'
+  ...
+# Subtest: UT-044 — save envelope round-trip retains the entire pending death campaign
+ok 48 - UT-044 — save envelope round-trip retains the entire pending death campaign
+  ---
+  duration_ms: 7.8865
+  type: 'test'
+  ...
+# Subtest: UT-045 — missing, incompatible and corrupt envelopes reject without creating ready state
+ok 49 - UT-045 — missing, incompatible and corrupt envelopes reject without creating ready state
+  ---
+  duration_ms: 13.303834
+  type: 'test'
+  ...
+# Subtest: UT-058 — each saved terminal choice preserves its own ending and closing eligibility
+ok 50 - UT-058 — each saved terminal choice preserves its own ending and closing eligibility
+  ---
+  duration_ms: 58.29125
+  type: 'test'
+  ...
+# Subtest: UT-063 — unknown reasons and active presentation cannot be checkpoint boundaries
+ok 51 - UT-063 — unknown reasons and active presentation cannot be checkpoint boundaries
+  ---
+  duration_ms: 9.628333
+  type: 'test'
+  ...
+# Subtest: UT-032 — both legal route orders award exactly one piece per receipt and unlock only with both
+ok 52 - UT-032 — both legal route orders award exactly one piece per receipt and unlock only with both
+  ---
+  duration_ms: 30.749
+  type: 'test'
+  ...
+# Subtest: UT-033 — Council freezes only living climax witnesses in canonical order and chooses exactly one confession branch
+ok 53 - UT-033 — Council freezes only living climax witnesses in canonical order and chooses exactly one confession branch
+  ---
+  duration_ms: 57.433875
+  type: 'test'
+  ...
+# Subtest: UT-034 — both medallion choices commit their own outcome once and invalid endings preserve state
+ok 54 - UT-034 — both medallion choices commit their own outcome once and invalid endings preserve state
+  ---
+  duration_ms: 32.770958
+  type: 'test'
+  ...
+# Subtest: UT-035 — fixed epilogues belong only to living climax participants under either medallion ending
+ok 55 - UT-035 — fixed epilogues belong only to living climax participants under either medallion ending
+  ---
+  duration_ms: 168.233542
+  type: 'test'
+  ...
+# Subtest: UT-036 — the memorial is omitted for no deaths and otherwise contains exactly the recorded dead
+ok 56 - UT-036 — the memorial is omitted for no deaths and otherwise contains exactly the recorded dead
+  ---
+  duration_ms: 96.661209
+  type: 'test'
+  ...
+# Subtest: UT-039 — two actions captured at one revision accept the first once and reject the second unchanged
+ok 57 - UT-039 — two actions captured at one revision accept the first once and reject the second unchanged
+  ---
+  duration_ms: 8.298916
+  type: 'test'
+  ...
+# Subtest: UT-040 — malformed actions reject missing unsafe or unexpected fields without changing ready state
+ok 58 - UT-040 — malformed actions reject missing unsafe or unexpected fields without changing ready state
+  ---
+  duration_ms: 8.153583
+  type: 'test'
+  ...
+# Subtest: UT-041 — every otherwise valid action rejects all prohibited campaign phases without effects
+ok 59 - UT-041 — every otherwise valid action rejects all prohibited campaign phases without effects
+  ---
+  duration_ms: 37.379334
+  type: 'test'
+  ...
+# Subtest: UT-043 — duplicate deaths impossible party membership and invalid reading cursors block normal dispatch
+ok 60 - UT-043 — duplicate deaths impossible party membership and invalid reading cursors block normal dispatch
+  ---
+  duration_ms: 8.622333
+  type: 'test'
+  ...
+# Subtest: UT-046 — version4 observations retain source meanings and detach all nested campaign data
+ok 61 - UT-046 — version4 observations retain source meanings and detach all nested campaign data
+  ---
+  duration_ms: 9.892167
+  type: 'test'
+  ...
+# Subtest: UT-061 — every documented domain or command rejection uses its exact Portuguese vocabulary
+ok 62 - UT-061 — every documented domain or command rejection uses its exact Portuguese vocabulary
+  ---
+  duration_ms: 8.685458
+  type: 'test'
+  ...
+# Subtest: UT-062 — typed bridge arguments reject executable strings unknown enums and invalid presentation targets before dispatch
+ok 63 - UT-062 — typed bridge arguments reject executable strings unknown enums and invalid presentation targets before dispatch
+  ---
+  duration_ms: 6.589625
+  type: 'test'
+  ...
+# Subtest: UT-064 — unavailable QA methods return the exact error without constructing or replacing any session
+ok 64 - UT-064 — unavailable QA methods return the exact error without constructing or replacing any session
+  ---
+  duration_ms: 11.748208
+  type: 'test'
+  ...
+# Subtest: UT-065 — invalid supplied domain state is preserved and cannot run normal dispatch
+ok 65 - UT-065 — invalid supplied domain state is preserved and cannot run normal dispatch
+  ---
+  duration_ms: 6.8405
+  type: 'test'
+  ...
+1..65
+# tests 65
+# suites 0
+# pass 65
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2027.825167
