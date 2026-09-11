@@ -13,13 +13,13 @@ import { canonicalCase, assertRegistrations, manifest } from '../helpers/canonic
 import { openChrome, project, startServer } from '../helpers/native-chrome.mjs';
 import { hash, layoutErrors, localAssets, nativeFiles } from '../../tools/native-layout.mjs';
 import { assertNativeContent } from '../helpers/native-content.mjs';
-import { appendEnsemble, ensembleFixture, prepareBustFixture, setFixtureFocus } from '../helpers/native-bust-fixture.mjs';
+import { appendEnsemble, ensembleFixture, prepareBustFixture } from '../helpers/native-bust-fixture.mjs';
 import { parsePluginList, readPluginParameters } from '../../tools/plugin-settings.mjs';
 import { click } from '../helpers/native-shared.mjs';
 import { activate, choices, pause } from '../helpers/formation.mjs';
 
 const require = createRequire(import.meta.url);
-const { parseEventCatalog, deriveVisualComposition, parseFocusParameters } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
+const { parseEventCatalog, restorationCommands } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
 const { createRules } = require('../../The Dryland Drowned/js/plugins/Dryland_CampaignRules.js');
 const clone = value => structuredClone(value);
 const original = JSON.parse(await readFile(path.join(project, 'data/CommonEvents.json'), 'utf8'));
@@ -349,42 +349,34 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   assert.deepEqual(browser.exceptions, []);
 });
 
-canonicalCase('UT-067', 'native bust recipes accept literal editor commands and reject executable or malformed arguments', () => {
+canonicalCase('UT-067', 'native visual payloads belong to VNPictureBusts while campaign commands stay outside presentation', () => {
   const accepted = nativeBustRecipe();
-  errors(fixture(...section('profile.H1', 'Perfil.', accepted)), []);
-  const mutations = [
-    ['namespace', list => { list[0].parameters[0] = 'Dryland_EventBridge'; }],
-    ['command', list => { list[0].parameters[1] = 'Scale_ScaleReset'; }],
-    ['missing key', list => { delete list[0].parameters[3]['Origin:str']; }],
-    ['extra key', list => { list[0].parameters[3].extra = '0'; }],
-    ...['PictureID:eval', 'StartOffsetX:eval', 'StartOffsetY:eval', 'Duration:eval'].map(key =>
-      [key, list => { list[0].parameters[3][key] = '(globalThis.drylandUnsafeExecuted = true, 60)'; }]),
-    ['foreign picture', list => { list[0].parameters[3]['PictureID:eval'] = '18'; }],
-    ['wrong scene slot', list => { list[0].parameters[3]['PictureID:eval'] = '63'; }],
-    ['missing asset', list => { list[0].parameters[3]['PictureName:str'] = 'Dryland_missing'; }],
-    ['path', list => { list[0].parameters[3]['PictureName:str'] = '../Dryland_H1'; }],
-    ['mirror', list => { list[0].parameters[3]['HorzMirror:str'] = 'Auto'; }],
-    ['scale zero', list => { list[1].parameters[3]['TargetScaleX:str'] = '0'; }],
-    ['scale huge', list => { list[1].parameters[3]['TargetScaleX:str'] = '201'; }],
-    ['coordinate expression', list => { list[2].parameters[3]['TargetX:str'] = 'Graphics.width / 2'; }],
-    ['coordinate bounds', list => { list[2].parameters[3]['TargetY:str'] = '1441'; }],
-    ['easing', list => { list[2].parameters[3]['EasingType:str'] = 'InBounce'; }],
-    ['tone expression', list => { list[4].parameters[3]['customTone:eval'] = '[globalThis.drylandUnsafeExecuted = true,0,0,0]'; }],
-    ['gray bounds', list => { list[4].parameters[3]['customTone:eval'] = '[0,0,0,-1]'; }],
-    ['no autoerase', list => { list[5].parameters[3]['AutoErase:eval'] = 'false'; }],
-    ...['[]', '["60","60"]', '["60","61"]', '[60]', '["60+0"]', '{}'].map(value =>
-      [value, list => { list[1].parameters[3]['PictureID:arrayeval'] = value; }])
+  const variations = [
+    ['Basic_EnterBust', 'Origin:str', 'Center'],
+    ['Basic_EnterBust', 'HorzMirror:str', 'Auto'],
+    ['Basic_EnterBust', 'PictureName:str', 'Dryland_Tavern_H1'],
+    ['Basic_EnterBust', 'PictureID:eval', '60 + 6'],
+    ['Basic_EnterBust', 'EasingType:str', 'OutBounce'],
+    ['Scale_ScaleTo', 'TargetScaleX:str', '250'],
+    ['Scale_ScaleTo', 'Duration:eval', '120'],
+    ['Move_MoveToCoordinates', 'TargetX:str', 'Graphics.width / 2'],
+    ['Tone_CustomToneBust', 'customTone:eval', '[10,20,30,40]'],
+    ['Basic_ExitBusts', 'AutoErase:eval', 'false']
   ];
-  delete globalThis.drylandUnsafeExecuted;
-  for (const [label, mutate] of mutations) {
-    const list = clone(accepted); mutate(list);
-    assert.deepEqual(parse(fixture(...section('profile.H1', 'Perfil.', list))).violations,
-      [{ code: 'unsupported_content_command', id: 'profile.H1' }], label);
+  for (const [name,key,value] of variations) {
+    const list=clone(accepted);list.find(c=>c.parameters[1]===name).parameters[3][key]=value;
+    errors(fixture(...section('profile.H1','Perfil.',list)),[]);
   }
-  assert.equal(globalThis.drylandUnsafeExecuted, undefined);
-  const unavailable = { ...system, drylandAssets: system.drylandAssets.filter(file => file !== 'img/pictures/Dryland_H1.png') };
-  assert.deepEqual(parseEventCatalog(fixture(...section('profile.H1', 'Perfil.', accepted)), unavailable).violations,
-    [{ code: 'invalid_asset_reference', id: 'profile.H1' }]);
+  const extra=command(357,['VisuMZ_2_VNPictureBusts','Swaying_Enable','Swaying',{'PictureID:arrayeval':'["66"]','SpeedAngle:eval':'20','RateAngle:eval':'2'}]);
+  errors(fixture(...section('profile.H1','Perfil.',[extra])),[]);
+  const expression=clone(accepted);
+  expression[0].parameters[3]['Duration:eval']='(globalThis.drylandUnsafeExecuted = true, 20)';
+  delete globalThis.drylandUnsafeExecuted;
+  errors(fixture(...section('profile.H1','Perfil.',expression)),[]);
+  assert.equal(globalThis.drylandUnsafeExecuted,undefined,'Static inspection never evaluates vendor expressions');
+  for (const p of [['Dryland_EventBridge','Action','Action',{action:'BEGIN'}],['OtherPlugin','Run','Run',{}],['VisuMZ_2_VNPictureBusts','Run','Run',null]]) {
+    assert.ok(parse(fixture(...section('profile.H1','Perfil.',[command(357,p)]))).violations.some(v=>v.code==='unsupported_content_command'));
+  }
 });
 
 canonicalCase('UT-068', 'pure native helper graphs validate untaken branches and never acquire passage completion', () => {
@@ -423,11 +415,8 @@ canonicalCase('UT-068', 'pure native helper graphs validate untaken branches and
     ['script branch', e => { e[3].list[1].parameters = [12, 'true']; }],
     ['inequality', e => { e[3].list[1].parameters[4] = 1; }],
     ['projection write', e => { e[4].list.splice(1, 0, command(122, [144,144,0,0,1])); }],
-    ['untaken unsafe branch', e => { e[4].list[1].parameters[3]['Duration:eval'] = 'globalThis.drylandUnsafeExecuted = true'; }],
     ['orphan annotation', e => { e[4].list.splice(1, 0, command(657, ['Duration = 20'])); }],
     ['misindented annotation', e => { e[4].list.splice(2, 0, command(657, ['Duration = 20'], 1)); }],
-    ['orphan wait', e => { e[4].list.splice(1, 0, command(230, [20])); }],
-    ['long wait', e => { e[3].list.find(c => c.code === 230).parameters = [61]; }],
     ['missing branch end', e => { e[3].list = e[3].list.filter(c => c.code !== 412); }],
     ['duplicate else', e => { e[3].list.splice(e[3].list.findIndex(c => c.code === 411),0,command(411, [])); }],
     ['trigger', e => { e[4].trigger = 2; }],
@@ -463,17 +452,24 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
   const helper={list:events[location.commonEventId].list.slice(location.start,location.end)};
   const move=helper.list.find(c=>c.code===357&&c.parameters[1]==='Move_MoveToCoordinates').parameters[3];
   const scale=helper.list.find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo').parameters[3];
-  assert.equal(move['TargetX:str'],'200');assert.equal(scale['TargetScaleX:str'],'100');
   move['TargetX:str']='342';scale['TargetScaleX:str']='44';scale['TargetScaleY:str']='44';
   const profileList=events[location.commonEventId].list;
   const enter=profileList.findIndex((c,i)=>i>=location.start&&c.code===357&&c.parameters[1]==='Basic_EnterBust');
-  profileList.splice(enter,0,command(117,[68]));
+  profileList.splice(enter,0,command(117,[80]));
+  const profileEnd=parse(events).locations['profile.H1'].end;
+  profileList.splice(profileEnd,0,command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}]));
+  for(const [id,x,scaleValue] of [[81,'326','39.6'],[80,'342','44']]){
+   for(const c of events[id].list.filter(c=>c.code===357&&c.parameters[3]['PictureID:arrayeval']==='["60"]')){
+    if(c.parameters[1]==='Move_MoveToCoordinates')c.parameters[3]['TargetX:str']=x;
+    if(c.parameters[1]==='Scale_ScaleTo'){c.parameters[3]['TargetScaleX:str']=scaleValue;c.parameters[3]['TargetScaleY:str']=scaleValue;}
+   }
+  }
   const speech=parse(events).locations['speech.H1'];
   const list=events[speech.commonEventId].list;
   const text=list.findIndex((c,i)=>i>=speech.start&&c.code===101);
   list.splice(text,0,clone(list[text]),command(401,['Caixa técnica inserida — mesma autoria.']));
-  const focus=list.findIndex((c,i)=>i>speech.start&&c.code===117&&c.parameters[0]===68);
-  list.splice(focus,0,command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleTo','Scale_ScaleTo',{'PictureID:arrayeval':'["60"]','TargetScaleX:str':'80','TargetScaleY:str':'80','Duration:eval':'0'}]));
+  const focus=list.findIndex((c,i)=>i>speech.start&&c.code===117&&c.parameters[0]===80);
+  list.splice(focus+1,0,command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleTo','Scale_ScaleTo',{'PictureID:arrayeval':'["60"]','TargetScaleX:str':'80','TargetScaleY:str':'80','Duration:eval':'0'}]));
  });
  assert.deepEqual(parse(prepared.events).catalog,parse(original).catalog);
  await startServer(t,prepared.directory);const browser=await openChrome(t);await firstPrologue(browser);
@@ -495,6 +491,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  await browser.press('Enter',13);await pause(browser);
  assert.equal(await browser.evaluate('$gameMessage.allText()'),'Caixa técnica inserida — mesma autoria.');
  await browser.waitFor('$gameScreen.picture(60)?.x()===326&&$gameScreen.picture(60)?.scaleX()===39.6');
+ assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'),'Dryland_H2','Completed source includes visuals after its final text');
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),before);
  await browser.press('Enter',13);await pause(browser);
  await browser.evaluate('DataManager.saveGame(0)');
@@ -509,254 +506,118 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-vn-picture-busts-dialogues/IT-067/authored-342-44.png');
 });
 
-canonicalCase('UT-071','native recovery follows edited entry, conditional roster and inserted boxes without effects or extra helpers',()=>{
+canonicalCase('UT-071','restoration extracts the current native visual prefix without evaluating or copying narrative effects',()=>{
  const events=clone(original),registry=parse(events),location=registry.locations['profile.H1'];
  const list=events[location.commonEventId].list;
- const move=list.slice(location.start,location.end).find(c=>c.code===357&&c.parameters[1]==='Move_MoveToCoordinates');
- move.parameters[3]['TargetX:str']='342';
+ list.slice(location.start,location.end).find(c=>c.code===357&&c.parameters[1]==='Move_MoveToCoordinates').parameters[3]['TargetX:str']='342';
  const speech=registry.locations['speech.H1'];
  const box=list.findIndex((c,i)=>i>=speech.start&&c.code===101);
  list.splice(box,0,clone(list[box]),command(401,['Inserted technical box']));
  const edited=parse(events),before=JSON.stringify(events);
- assert.deepEqual(edited.violations,[]);
- const restored=deriveVisualComposition(events,edited,'speech.H1',0,{});
- assert.equal(restored.targets.get(60).x,326);
- assert.equal(restored.targets.get(60).scaleX,90);
- assert.equal(restored.targets.get(63).scaleX,100);
- assert.deepEqual(deriveVisualComposition(events,edited,'speech.H1',1,{}),restored,'Inserted same-focus box needs no new restore helper');
- assert.equal(JSON.stringify(events),before,'Reduction cannot mutate source commands');
- for(const roster of [[1,2,3],[8,0,0],[0,0,0]]){
-  const variables={144:roster[0],145:roster[1],146:roster[2]};
-  const composition=deriveVisualComposition(original,registry,'council.confession',0,variables);
-  assert.deepEqual([...composition.targets.keys()].sort(),roster.map((hero,i)=>hero?60+i:null).filter(Boolean).concat(63));
-  for(const [i,hero]of roster.entries())if(hero){
-   const target=composition.targets.get(60+i);
-   assert.equal(target.enter['PictureName:str'],`Dryland_H${hero}`);
-   assert.equal(target.scaleX,54);
-  }
- }
- const optional=clone(original),council=registry.locations['council.challenge'];
- const councilList=optional[council.commonEventId].list;
- const firstText=councilList.findIndex((c,i)=>i>=council.start&&c.code===101);
- councilList.splice(firstText,0,command(117,[68]));
- const optionalRegistry=parse(optional);
- assert.deepEqual(optionalRegistry.violations,[]);
- for(const roster of [[0,0,0],[0,2,3]]){
-  const variables={144:roster[0],145:roster[1],146:roster[2]};
-  assert.deepEqual(deriveVisualComposition(optional,optionalRegistry,'council.challenge',0,variables),
-   deriveVisualComposition(original,registry,'council.challenge',0,variables),'Focusing an absent position preserves the entire current composition');
- }
- const occupied=deriveVisualComposition(optional,optionalRegistry,'council.challenge',0,{144:1,145:2,146:3});
- assert.equal(occupied.targets.get(60).scaleX,60);
- assert.equal(occupied.targets.get(61).scaleX,54);
- // A new scale authored while the hero listens must not turn the listener's
- // temporary X into its entry base during recovery.
- const resized=clone(original),resizedList=resized[registry.locations['speech.H1'].commonEventId].list;
- const focus=resizedList.findIndex((c,i)=>i>registry.locations['speech.H1'].start&&c.code===117&&c.parameters[0]===68);
- resizedList.splice(focus,0,command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleTo','Scale_ScaleTo',{'PictureID:arrayeval':'["60"]','TargetScaleX:str':'80','TargetScaleY:str':'80','Duration:eval':'0'}]));
- const resizedComposition=deriveVisualComposition(resized,parse(resized),'speech.H1',1,{});
- assert.equal(resizedComposition.targets.get(60).x,200,'Changing scale alone preserves authored position');
- assert.equal(resizedComposition.targets.get(60).scaleX,80);
- assert.throws(()=>deriveVisualComposition(events,edited,'speech.H1',999,{}),/Invalid visual text box/);
- assert.throws(()=>deriveVisualComposition(original,registry,'missing.section',0,{}),/Invalid visual composition input/);
+ const restored=restorationCommands(events,edited,'speech.H1',0);
+ assert.ok(restored.some(c=>c.code===357&&c.parameters[3]['TargetX:str']==='342'),'Inherited entry comes from the edited event');
+ assert.deepEqual(restorationCommands(events,edited,'speech.H1',1),restored,'An inserted box requires no restoration recipe');
+ assert.ok(restored.every(c=>[0,111,411,412,357].includes(c.code)));
+ assert.ok(restored.filter(c=>c.code===357).every(c=>c.parameters[0]==='VisuMZ_2_VNPictureBusts'));
+ const council=restorationCommands(events,edited,'council.confession',0);
+ assert.ok(council.some(c=>c.code===111&&c.parameters[1]===144),'The native interpreter owns roster branches');
+ assert.ok(!council.some(c=>[101,401,117,122,230].includes(c.code)));
+ restored.find(c=>c.code===357).parameters[3]['PictureName:str']='changed copy';
+ assert.equal(JSON.stringify(events),before,'Extracting and executing a restoration cannot mutate native lists');
+ const trailing=clone(original),profile=parse(trailing).locations['profile.H1'];
+ const change=command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}]);
+ trailing[profile.commonEventId].list.splice(profile.end,0,change);
+ const trailingRegistry=parse(trailing);
+ assert.ok(restorationCommands(trailing,trailingRegistry,'speech.H1',0).some(c=>c.parameters[1]==='Basic_GraphicChange'),'Completed inherited sources include trailing visuals');
+ assert.ok(!restorationCommands(trailing,trailingRegistry,'profile.H1',1).some(c=>c.parameters[1]==='Basic_GraphicChange'),'Current text box does not execute future visuals');
+ assert.throws(()=>restorationCommands(events,edited,'speech.H1',999),/Invalid visual text box/);
+ assert.throws(()=>restorationCommands(events,edited,'missing.section',0),/Invalid visual restoration input/);
 });
 
-canonicalCase('UT-072','native visual sources and slot focus reject cycles, cross-conversation references and executable arguments',()=>{
- const locate=(events,id)=>{const l=parse(original).locations[id];return events[l.commonEventId].list.slice(l.start,l.end);};
+canonicalCase('UT-072','restoration sources reject cycles and foreign conversations without constraining visual composition',()=>{
  for(const [id,value]of [['profile.H1','speech.H1'],['speech.H1','profile.H2'],['speech.H1','missing.section']]){
-  const events=clone(original),l=parse(original).locations[id];
-  const list=events[l.commonEventId].list;
-  const source=locate(events,id).find(c=>[108,408].includes(c.code)&&c.parameters[0].includes('@visualFrom '));
+  const events=clone(original),l=parse(original).locations[id],list=events[l.commonEventId].list;
+  const source=list.slice(l.start,l.end).find(c=>[108,408].includes(c.code)&&c.parameters[0].includes('@visualFrom '));
   if(source)source.parameters[0]=source.parameters[0].replace(/@visualFrom [^\n]+/,`@visualFrom ${value}`);
   else list.splice(l.start+1,0,comment(`@visualFrom ${value}`));
   assert.ok(parse(events).violations.some(v=>v.code==='invalid_visual_source'),value);
  }
  for(const name of ['Scale_ScaleTo','Move_MoveToCoordinates']){
-  const events=clone(original),l=parse(original).locations['profile.H1'];
-  const list=events[l.commonEventId].list;
-  const index=list.findIndex((c,i)=>i>=l.start&&i<l.end&&c.code===357&&c.parameters[1]===name);
-  list.splice(index,1);
-  assert.ok(parse(events).violations.some(v=>v.code==='invalid_visual_entry'),`Missing ${name} must reject before play`);
- }
- const incompleteBranch=clone(original);
- const entry=incompleteBranch[73].list.findIndex(c=>c.code===357&&c.parameters[1]==='Basic_EnterBust');
- // Re-entering after the base was established leaves only this authored branch incomplete.
- const sectionLocation=parse(original).locations['council.challenge'];
- const sectionList=incompleteBranch[sectionLocation.commonEventId].list;
- const firstText=sectionList.findIndex((c,i)=>i>=sectionLocation.start&&c.code===101);
- sectionList.splice(firstText,0,command(111,[1,144,0,8,0]),{...clone(incompleteBranch[73].list[entry]),indent:1},command(412,[]));
- assert.ok(parse(incompleteBranch).violations.some(v=>v.code==='invalid_visual_entry'),'Untaken hero branch is validated');
- for(const [key,value]of [['slot','18'],['slot','60+0'],['listenerScale','0'],['listenerTone','process.exit()'],['duration','61']]){
-  const events=clone(original),focus=events[68].list.find(c=>c.code===357);
-  focus.parameters[3][key]=value;
-  assert.ok(parse(events).violations.length>0,`${key}=${value}`);
+  const events=clone(original),l=parse(original).locations['profile.H1'],list=events[l.commonEventId].list;
+  list.splice(list.findIndex((c,i)=>i>=l.start&&i<l.end&&c.code===357&&c.parameters[1]===name),1);
+  assert.deepEqual(parse(events).violations,[],'Native vendor defaults do not require an EventBridge base recipe');
  }
 });
 
-canonicalCase('UT-073','focus settings expose bounded editor fields and the CLI rejects invalid project configuration',async t=>{
- const expected={ListenerDarkness:24,ListenerScale:90,SpeakerScale:100,ListenerOffset:16,FocusDuration:20};
- assert.deepEqual(parseFocusParameters({}).style,expected);
- assert.deepEqual(parseFocusParameters(await readPluginParameters(project,'Dryland_EventBridge')).style,expected);
+canonicalCase('UT-073','native focus replaces the obsolete plugin settings and remains editable in common events',async t=>{
+ assert.deepEqual(await readPluginParameters(project,'Dryland_EventBridge'),{});
  const header=(await readFile(path.join(project,'js/plugins/Dryland_EventBridge.js'),'utf8')).split('*/')[0];
- for(const [key,min,max]of [['ListenerDarkness',0,255],['ListenerScale',1,100],['SpeakerScale',100,150],['ListenerOffset',0,100],['FocusDuration',0,60]]){
-  const block=header.split(`@param ${key}\n`)[1].split('@param ')[0];
-  assert.ok(block.includes('@type number'),key);
-  assert.ok(block.includes(`@default ${expected[key]}\n`),key);
-  assert.ok(block.includes(`@min ${min}\n`)&&block.includes(`@max ${max}\n`),key);
-  for(const value of [min,max])assert.equal(parseFocusParameters({[key]:String(value)}).style[key],value);
-  for(const raw of ['', ' ', 'NaN', '1+1', '1.5', String(min-1), String(max+1), 24, null]){
-   const result=parseFocusParameters({[key]:raw});
-   assert.equal(result.ok,false,`${key}=${JSON.stringify(raw)}`);
-   assert.equal(result.errors[0].parameter,key);
-   assert.match(result.errors[0].message,/Dryland_EventBridge/);
-  }
- }
- for(const malformed of [null,[],false])assert.equal(parseFocusParameters(malformed).ok,false);
+ assert.ok(!header.includes('@command Focus'));
+ assert.ok(!header.includes('@param SpeakerScale'));
+ assert.ok(!original.some(e=>e?.list.some(c=>c.code===357&&c.parameters[0]==='Dryland_EventBridge'&&c.parameters[1]==='Focus')));
+ const prepared=await prepareBustFixture(t,'fixture-native-focus-cli',events=>{
+  const scale=events[80].list.find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo');
+  scale.parameters[3]['TargetScaleX:str']='250';scale.parameters[3]['Duration:eval']='120';
+ });
+ assert.equal(cli(['--project',prepared.directory,'--json']).code,0);
  assert.throws(()=>parsePluginList('var $plugins = []; globalThis.executed = true;'));
- assert.throws(()=>parsePluginList('var $plugins = [(()=>42)()];'));
- const prepared=await prepareBustFixture(t,'fixture-focus-parameters-cli',()=>{}, {ListenerDarkness:'256'});
- const result=cli(['--project',prepared.directory,'--json']);
- assert.equal(result.code,1);
- assert.equal(result.output.errors[0].code,'invalid_plugin_parameter');
- assert.equal(result.output.errors[0].parameter,'ListenerDarkness');
- assert.match(result.output.errors[0].message,/0 e 255/);
- await setFixtureFocus(prepared.directory,{ListenerDarkness:'60'});
- assert.equal(cli(['--project',prepared.directory,'--json']).code,0,'Missing remaining fields use their documented defaults');
- for(const [duration,wait,valid]of [[undefined,20,true],[undefined,21,false],['30',30,true],['8',9,false],['0',0,true],['0',1,false]]){
-  const parameters=duration===undefined?{}:{FocusDuration:duration};
-  const waited=await prepareBustFixture(t,'fixture-focus-wait',events=>{
-   const list=events[68].list,focus=list.findIndex(c=>c.code===357&&c.parameters[1]==='Focus');
-   list.splice(focus+1,0,command(230,[wait]));
-  },parameters);
-  const violations=parseEventCatalog(waited.events,system,parseFocusParameters(parameters).style).violations;
-  assert.equal(violations.length===0,valid,`Parser: duration=${duration}, wait=${wait}`);
-  const checked=cli(['--project',waited.directory,'--json']);
-  assert.equal(checked.code,valid?0:1,`CLI: duration=${duration}, wait=${wait}`);
-  if(!valid)assert.ok(checked.output.errors.some(error=>error.code==='unsupported_content_command'&&error.id==='helper.68'));
- }
 });
 
-canonicalCase('UT-074','global focus style independently scales speaker and listener and preserves neutral, empty and reflected positions',()=>{
- const parsed=parse(original);
- const style=parseFocusParameters({ListenerDarkness:'60',ListenerScale:'80',SpeakerScale:'110',ListenerOffset:'24',FocusDuration:'8'}).style;
- for(const id of ['profile.H1','selection.H1','party_full.H1','farewell.H1','epilogue.H1','lover.physical.warning','lover.supernatural.second','council.solo']){
-  const first=deriveVisualComposition(original,parsed,id,0,{},style);
-  const slot=id.startsWith('lover.')||id==='council.solo'?63:60;
-  assert.ok(Math.abs(first.targets.get(slot).scaleX-110)<1e-9,`First speaker is focused: ${id}`);
- }
- const composition=deriveVisualComposition(original,parsed,'speech.H1',0,{},style);
- assert.deepEqual([composition.targets.get(60).x,composition.targets.get(60).scaleX,composition.targets.get(60).tone],[176,80,[-60,-60,-60,0]]);
- assert.ok(Math.abs(composition.targets.get(63).scaleX-110)<1e-9);
- assert.equal(composition.targets.get(63).x,960);
- assert.equal(composition.bases.get(60).scaleX,100);
- const neutral=deriveVisualComposition(original,parsed,'council.challenge',0,{144:1,145:2,146:3},style);
- assert.deepEqual([neutral.targets.get(60).scaleX,neutral.targets.get(61).tone],[60,[0,0,0,0]]);
- const reflected=deriveVisualComposition(original,parsed,'council.andira',0,{144:1,145:2,146:3},style);
- assert.equal(reflected.targets.get(65).x,330);
- assert.ok(Math.abs(reflected.targets.get(65).scaleX-110)<1e-9);
- const large=clone(original),entryLocation=parsed.locations['profile.H1'];
- const entryCommands=large[entryLocation.commonEventId].list.slice(entryLocation.start,entryLocation.end);
- const scale=entryCommands.find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo').parameters[3];
- scale['TargetScaleX:str']='200';scale['TargetScaleY:str']='200';
- entryCommands.find(c=>c.code===357&&c.parameters[1]==='Move_MoveToCoordinates').parameters[3]['TargetX:str']='-2560';
- const largeRegistry=parse(large);assert.deepEqual(largeRegistry.violations,[]);
- const largeResult=deriveVisualComposition(large,largeRegistry,'speech.H1',1,{},style);
- assert.ok(Math.abs(largeResult.targets.get(60).scaleX-220)<1e-9,'Derived focus may exceed the authored scale limit');
- assert.equal(deriveVisualComposition(large,largeRegistry,'speech.H1',0,{},style).targets.get(60).x,-2584);
- const none=parseFocusParameters({ListenerDarkness:'0',ListenerOffset:'0',ListenerScale:'100',SpeakerScale:'100',FocusDuration:'0'}).style;
- const unchanged=deriveVisualComposition(original,parsed,'speech.H1',0,{},none);
- assert.deepEqual([unchanged.targets.get(60).x,unchanged.targets.get(60).scaleX,unchanged.targets.get(60).tone],[200,100,[0,0,0,0]]);
- const empty=clone(original),location=parsed.locations['council.challenge'],list=empty[location.commonEventId].list;
- list.splice(list.findIndex((c,i)=>i>=location.start&&c.code===101),0,command(117,[68]));
- const variables={144:0,145:2,146:3};
- assert.deepEqual(deriveVisualComposition(empty,parse(empty),'council.challenge',0,variables,style),deriveVisualComposition(original,parsed,'council.challenge',0,variables,style));
+canonicalCase('UT-074','restoration preserves relative commands, vendor options and custom tones in authored order',()=>{
+ const events=clone(original),l=parse(events).locations['profile.H1'],list=events[l.commonEventId].list;
+ const first=list.findIndex((c,i)=>i>=l.start&&c.code===101);
+ const extra=[
+  command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}]),
+  command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleBy','Scale',{'PictureID:arrayeval':'["60"]','ScaleX:eval':'20','ScaleY:eval':'10','Duration:eval':'80'}]),
+  command(357,['VisuMZ_2_VNPictureBusts','Tone_PresetBust','Tone',{'PictureID:arrayeval':'["60"]','Preset:str':'Sunset','Duration:eval':'90'}])
+ ];
+ list.splice(first,0,...extra);
+ const restored=restorationCommands(events,parse(events),'profile.H1',0);
+ assert.deepEqual(restored.slice(-4,-1),extra);
 });
 
-canonicalCase('IT-069','Plugin Manager focus settings survive Options and a style-only reload uses the compatible native save',{timeout:120000},async t=>{
- const initial={ListenerDarkness:'60',ListenerScale:'80',SpeakerScale:'110',ListenerOffset:'24',FocusDuration:'8'};
- const updated={ListenerDarkness:'80',ListenerScale:'75',SpeakerScale:'120',ListenerOffset:'8',FocusDuration:'12'};
- const prepared=await prepareBustFixture(t,'fixture-global-focus-20260911',events=>{
-  const location=parse(events).locations['profile.H1'];
-  const scale=events[location.commonEventId].list.slice(location.start,location.end).find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo');
-  scale.parameters[3]['TargetScaleX:str']='200';scale.parameters[3]['TargetScaleY:str']='200';
- },initial);
- const layoutBefore=await readFile(path.join(prepared.directory,'native-layout-manifest.json'),'utf8');
- const pluginHash=hash(await readFile(path.join(prepared.directory,'js/plugins/Dryland_EventBridge.js')));
- const sourceHash=hash(await readFile(path.join(prepared.directory,'data/CommonEvents.json')));
+canonicalCase('IT-069','artist parameters and additional native effects survive Options and compatible Continue',{timeout:120000},async t=>{
+ const prepared=await prepareBustFixture(t,'fixture-native-freedom-20260911',events=>{
+  const l=parse(events).locations['profile.H1'],list=events[l.commonEventId].list;
+  for(const c of list.slice(l.start,l.end).filter(c=>c.code===357)){
+   const args=c.parameters[3];
+   if('PictureID:eval' in args)args['PictureID:eval']='60 + 6';
+   if('PictureID:arrayeval' in args)args['PictureID:arrayeval']='["60 + 6"]';
+   if(c.parameters[1]==='Basic_EnterBust')Object.assign(args,{'Origin:str':'Center','HorzMirror:str':'Mirror','EasingType:str':'OutBounce','Duration:eval':'75'});
+   if(c.parameters[1]==='Scale_ScaleTo')Object.assign(args,{'TargetScaleX:str':'73','TargetScaleY:str':'73','Duration:eval':'80'});
+   if(c.parameters[1]==='Move_MoveToCoordinates')Object.assign(args,{'TargetX:str':'Graphics.width / 2','TargetY:str':'420','Duration:eval':'85','EasingType:str':'OutQuad'});
+  }
+  const first=list.findIndex((c,i)=>i>=l.start&&c.code===101);
+  list.splice(first,0,
+   command(230,[90]),
+   command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'66','PictureName:str':'Dryland_H2'}]),
+   command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleBy','Scale',{'PictureID:arrayeval':'["66"]','ScaleX:eval':'7','ScaleY:eval':'7','Duration:eval':'10'}]),
+   command(357,['VisuMZ_2_VNPictureBusts','Tone_PresetBust','Tone',{'PictureID:arrayeval':'["66"]','Preset:str':'Sunset','Duration:eval':'20'}]),
+   command(230,[20]));
+ });
  await startServer(t,prepared.directory);const browser=await openChrome(t);await firstPrologue(browser);
  for(let box=0;box<3;box++){await pause(browser);await browser.press('Enter',13);}
  await choices(browser,'formation');await activate(browser,'formation',0);await activate(browser,'hero',0);await pause(browser);
- await browser.waitFor('Math.abs($gameScreen.picture(60)?.scaleX()-220)<.001');
- // The profile has two authored boxes before Ivai enters the conversation.
- for(let box=0;box<2;box++){await browser.press('Enter',13);await pause(browser);}
- const settled='[60,63].every(id=>{const p=$gameScreen.picture(id),sprite=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id);return p&&p._duration===0&&p._toneDuration===0&&sprite?.worldVisible})';
+ const settled='$gameScreen.picture(66)&&$gameScreen.picture(66)._duration===0&&$gameScreen.picture(66)._toneDuration===0';
  await browser.waitFor(settled);
- const snapshot=()=>browser.evaluate('[60,63].map(id=>{const p=$gameScreen.picture(id);return {id,x:p.x(),scale:p.scaleX(),tone:p.tone()}})');
- const first=await snapshot();
- assert.deepEqual(first[0],{id:60,x:176,scale:160,tone:[-60,-60,-60,0]});
- assert.ok(Math.abs(first[1].scale-110)<.001);
+ const snapshot=()=>browser.evaluate('(()=>{const p=$gameScreen.picture(66);return {name:p.name(),x:p.x(),y:p.y(),scaleX:p.scaleX(),scaleY:p.scaleY(),tone:p.tone(),origin:p.origin()}})()');
+ const before=await snapshot();
+ assert.equal(before.name,'Dryland_H2');assert.equal(before.x,640);assert.equal(before.y,420);assert.equal(before.scaleX,-80,'Native mirroring is retained');assert.equal(before.scaleY,80);
+ assert.ok(before.tone.some(v=>v!==0));
  const campaignBefore=await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)');
- const textBefore=await browser.evaluate('$gameMessage.allText()');
- const refocus=(slot='63')=>browser.evaluate(`(()=>{
-  let i=$gameMap._interpreter;while(i._childInterpreter)i=i._childInterpreter;
-  const original=PluginManager.callCommand,requested=[];
-  PluginManager.callCommand=function(interpreter,name,command,args){
-   if(name==='VisuMZ_2_VNPictureBusts')requested.push(args['Duration:eval']);
-   return original.apply(this,arguments);
-  };
-  try{
-   PluginManager.callCommand(i,'Dryland_EventBridge','Focus',{slot:'0'});
-   PluginManager.callCommand(i,'Dryland_EventBridge','Focus',{slot:${JSON.stringify(slot)}});
-   return {durations:[60,63].map(id=>$gameScreen.picture(id)._duration),requested};
-  }finally{PluginManager.callCommand=original;}
- })()`);
- const normalFocus=await refocus();
- assert.deepEqual(normalFocus.durations,[8,8],'The configured duration reaches actual native picture interpolation');
- assert.equal(normalFocus.requested.length,12);
- assert.deepEqual([...new Set(normalFocus.requested)],['8']);
- await browser.waitFor(settled);
+ const folder='docs/qa/evidence/init-rpg-maker-mz/task-vn-focus-parameters/IT-069';
+ await browser.screenshot(`${folder}/native-authored.png`);
  await click(browser,560,693);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&!SceneManager._scene.isBusy()");
  await browser.press('Escape',27);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Map'&&!SceneManager._scene.isBusy()");await pause(browser);await browser.waitFor(settled);
- assert.deepEqual(await snapshot(),first,'Options reconstruction uses the same configured style');
- const folder='docs/qa/evidence/init-rpg-maker-mz/task-vn-focus-parameters/IT-069';
- await browser.screenshot(`${folder}/custom-style.png`);
- await browser.evaluate('DataManager.saveGame(0)');
- await setFixtureFocus(prepared.directory,updated);
- assert.equal(await readFile(path.join(prepared.directory,'native-layout-manifest.json'),'utf8'),layoutBefore,'Style-only edit retains the native revision');
- await browser.reopen();
+ assert.deepEqual(await snapshot(),before,'Options restores all authored vendor effects');
+ await browser.evaluate('DataManager.saveGame(0)');await browser.reopen();
  await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await pause(browser);await browser.waitFor(settled);
- const resumed=await snapshot();
- // Native MZ does not serialize Game_Message. The saved interpreter resumes
- // at the next authored box, which belongs to Gorvak; it must not replay Ivai's line.
- assert.deepEqual(resumed[0],{id:60,x:200,scale:240,tone:[0,0,0,0]});
- assert.deepEqual(resumed[1],{id:63,x:968,scale:75,tone:[-80,-80,-80,0]});
- assert.equal(await browser.evaluate('$gameMessage.speakerName()'),'Gorvak');
- const speechLocation=parse(prepared.events).locations['speech.H1'];
- const speechCommands=prepared.events[speechLocation.commonEventId].list.slice(speechLocation.start,speechLocation.end);
- const nextBox=speechCommands.findIndex(c=>c.code===101&&c.parameters[4]==='Gorvak');
- const reply=[];for(let i=nextBox+1;speechCommands[i]?.code===401;i++)reply.push(speechCommands[i].parameters[0]);
- assert.equal(await browser.evaluate('$gameMessage.allText()'),reply.join('\n'),'Continue reaches the next authored reply');
- assert.notEqual(reply.join('\n'),textBefore,'The completed line is not replayed');
+ assert.deepEqual(await snapshot(),before,'Native Continue restores the same final composition');
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),campaignBefore);
- assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection?.code||null'),null);
- await browser.screenshot(`${folder}/updated-style-continue.png`);
- await browser.call('Emulation.setDeviceMetricsOverride',{width:1920,height:1080,deviceScaleFactor:1,mobile:false});
- await browser.call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
- // Observe the next authored Focus through real input. Injecting Focus into
- // a paused message would bypass the interpreter boundary that reveals busts.
- await browser.evaluate(`window._focusTestOriginal=PluginManager.callCommand;window._focusTestDurations=[];
-  PluginManager.callCommand=function(i,name,command,args){if(name==='VisuMZ_2_VNPictureBusts')window._focusTestDurations.push(args['Duration:eval']);return window._focusTestOriginal.apply(this,arguments);};`);
- await browser.press('Enter',13);await pause(browser);await browser.waitFor(settled);
- const reducedDurations=await browser.evaluate(`(()=>{PluginManager.callCommand=window._focusTestOriginal;delete window._focusTestOriginal;const values=window._focusTestDurations;delete window._focusTestDurations;return values;})()`);
- assert.equal(reducedDurations.length,6);
- assert.deepEqual([...new Set(reducedDurations)],['0'],'Reduced motion requests instantaneous transforms; the vendor applies them on its next picture update');
- const reduced=await snapshot();
- assert.deepEqual(reduced[0],{id:60,x:192,scale:150,tone:[-80,-80,-80,0]});
- assert.deepEqual(reduced[1],{id:63,x:960,scale:120,tone:[0,0,0,0]});
- await browser.screenshot(`${folder}/updated-style-reduced.png`);
- assert.equal(hash(await readFile(path.join(prepared.directory,'js/plugins/Dryland_EventBridge.js'))),pluginHash);
- assert.equal(hash(await readFile(path.join(prepared.directory,'data/CommonEvents.json'))),sourceHash);
+ await browser.screenshot(`${folder}/native-restored.png`);
+ for(let box=0;box<6;box++){await browser.press('Enter',13);await pause(browser);}
+ await browser.press('Enter',13);await choices(browser,'formation');
+ assert.equal(await browser.evaluate('$gameScreen.picture(66)||null'),null,'Actual authored picture IDs are cleaned up');
  assert.deepEqual(browser.exceptions,[]);
- await writeFile(`${folder}/configuration.json`,JSON.stringify({initial,updated,first,resumed,reduced,pluginHash,sourceHash,layout:JSON.parse(layoutBefore).nativeLayoutVersion,browser:browser.version},null,2)+'\n');
 });

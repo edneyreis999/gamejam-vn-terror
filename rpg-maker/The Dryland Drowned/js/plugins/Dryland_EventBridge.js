@@ -3,54 +3,6 @@
  * @plugindesc Afogados em Terra Seca — integração de eventos nativos
  * @author Coreto
  * @orderAfter Dryland_CampaignRules
- * @param BustFocus
- * @text Bustos — Foco da conversa
- *
- * @param ListenerDarkness
- * @text Escurecimento dos ouvintes
- * @parent BustFocus
- * @type number
- * @min 0
- * @max 255
- * @default 24
- * @desc Intensidade do escurecimento. 0 não escurece; valores maiores escurecem mais. Não é porcentagem.
- *
- * @param ListenerScale
- * @text Escala dos ouvintes (%)
- * @parent BustFocus
- * @type number
- * @min 1
- * @max 100
- * @default 90
- * @desc Tamanho ao escutar, relativo à escala base definida na entrada do retrato.
- *
- * @param SpeakerScale
- * @text Escala do falante (%)
- * @parent BustFocus
- * @type number
- * @min 100
- * @max 150
- * @default 100
- * @desc Tamanho ao falar, relativo à escala base. 100 preserva a base; 110 amplia em 10%.
- *
- * @param ListenerOffset
- * @text Recuo dos ouvintes (pixels)
- * @parent BustFocus
- * @type number
- * @min 0
- * @max 100
- * @default 16
- * @desc Afastamento horizontal ao escutar. 0 desativa. Andirá mantém sua posição refletida.
- *
- * @param FocusDuration
- * @text Duração da troca de foco (frames)
- * @parent BustFocus
- * @type number
- * @min 0
- * @max 60
- * @default 20
- * @desc Duração da troca de falante. 0 é instantâneo. Retomada e movimento reduzido usam 0.
- *
  * @command CaptureContext
  * @text Capturar contexto
  * @command Action
@@ -92,24 +44,6 @@
  * @type select
  * @option tavern
  * @option council
- * @arg slots
- * @text Pictures da conversa (vazio usa o padrão)
- * @type select
- * @option
- * @option 60
- * @option 63
- * @option 60,63
- * @option 60,61,62,63,65
- * @option 60,61,63,64
- * @default
- * @command Focus
- * @text Foco por posição
- * @arg slot
- * @text Picture em destaque (0 = neutro)
- * @type number
- * @min 0
- * @max 65
- * @default 60
  * @command Present
  * @text Apresentar trecho atual
  * @command Checkpoint
@@ -126,12 +60,11 @@
  * @option council
  * @option ending
  * @help
- * Ajuste o estilo global em Bustos — Foco da conversa e reinicie o jogo.
- * O comando Foco por posição informa somente qual Picture fala (0 = neutro).
- * Imagem, posição e escala base continuam nos eventos nativos do editor.
- * Os percentuais de falante e ouvinte usam a base de entrada, sem acumular.
- * Não há substituição de estilo por cena. Continue usa o estilo atual do projeto.
- * Alterar apenas estes cinco parâmetros não invalida saves compatíveis.
+ * Autore imagem, escala, posição, tom e foco nos eventos com VNPictureBusts.
+ * O EventBridge restaura a composição ao retomar a conversa.
+ * A restauração reaplica comandos visuais sem falas, escolhas ou ações da campanha.
+ * Animações pontuais não se repetem; ciclos contínuos podem reiniciar.
+ * Expressões nos parâmetros devem ser puras: serão avaliadas novamente na retomada.
  * Guia: rpg-maker/README.md, seção Editar bustos e foco dos diálogos.
  */
 
@@ -170,106 +103,21 @@
     return p[1] === 0 && integer(p[10], 0, 9999) && typeof p[11] === 'boolean' && integer(p[12], 0, 3);
   }
 
-  const bustCommands = {
-    Basic_EnterBust: ['PictureID:eval', 'PictureName:str', 'Origin:str', 'Position:num', 'StartOffsetX:eval', 'StartOffsetY:eval', 'EasingType:str', 'HorzMirror:str', 'Duration:eval'],
-    Basic_ExitBusts: ['PictureID:arrayeval', 'EndOffsetX:eval', 'EndOffsetY:eval', 'EasingType:str', 'FlipDirection:str', 'Duration:eval', 'AutoErase:eval'],
-    Scale_ScaleTo: ['PictureID:arrayeval', 'TargetScaleX:str', 'TargetScaleY:str', 'Duration:eval'],
-    Move_MoveToCoordinates: ['PictureID:arrayeval', 'TargetX:str', 'TargetY:str', 'EasingType:str', 'FlipDirection:str', 'Duration:eval'],
-    Tone_NormalBust: ['PictureID:arrayeval', 'Duration:eval'],
-    Tone_CustomToneBust: ['PictureID:arrayeval', 'customTone:eval', 'Duration:eval']
-  };
-  const bustAssets = new Set([...Array.from({ length: 8 }, (_, i) => `Dryland_H${i + 1}`),
-    'Dryland_ivai', 'Dryland_perola', 'Dryland_florai', 'Dryland_andira']);
-  const literalNumber = value => typeof value === 'string' && /^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(value) && Number.isFinite(Number(value));
-  function validBustCommand(p, system, slots) {
-    if (p.length !== 4 || p[0] !== 'VisuMZ_2_VNPictureBusts' || !hasOwn(bustCommands, p[1]) ||
-        typeof p[2] !== 'string' || !p[3] || Array.isArray(p[3]) || typeof p[3] !== 'object') return false;
-    const args = p[3], keys = bustCommands[p[1]];
-    if (Object.keys(args).sort().join(',') !== keys.slice().sort().join(',') || keys.some(key => typeof args[key] !== 'string')) return false;
-    const number = (key, min, max, integer = false) => literalNumber(args[key]) && Number(args[key]) >= min && Number(args[key]) <= max && (!integer || Number.isInteger(Number(args[key])));
-    if (!number('Duration:eval', 0, 60, true)) return false;
-    if (keys.includes('PictureID:eval')) {
-      if (!number('PictureID:eval', 60, 65, true) || !slots.has(Number(args['PictureID:eval']))) return false;
-    } else {
-      let ids;
-      try { ids = JSON.parse(args['PictureID:arrayeval']); } catch { return false; }
-      if (!Array.isArray(ids) || !ids.length || ids.some(id => !literalNumber(id) || !Number.isInteger(Number(id)) || !slots.has(Number(id))) ||
-          new Set(ids.map(Number)).size !== ids.length) return false;
-    }
-    if (keys.includes('EasingType:str') && !['Linear', 'OutSine', 'InSine', 'InOutSine'].includes(args['EasingType:str'])) return false;
-    for (const key of ['HorzMirror:str', 'FlipDirection:str']) if (keys.includes(key) && args[key] !== 'None') return false;
-    for (const key of ['TargetScaleX:str', 'TargetScaleY:str']) if (keys.includes(key) && (!number(key, 0, 200) || Number(args[key]) === 0)) return false;
-    const width = system?.advanced?.screenWidth || 1280, height = system?.advanced?.screenHeight || 720;
-    for (const key of ['StartOffsetX:eval', 'EndOffsetX:eval', 'TargetX:str']) if (keys.includes(key) && !number(key, -2 * width, 2 * width)) return false;
-    for (const key of ['StartOffsetY:eval', 'EndOffsetY:eval', 'TargetY:str']) if (keys.includes(key) && !number(key, -2 * height, 2 * height)) return false;
-    if (p[1] === 'Basic_EnterBust' && (!bustAssets.has(args['PictureName:str']) || args['Origin:str'] !== 'Bust' || !number('Position:num', 0, 10, true))) return false;
-    if (p[1] === 'Basic_ExitBusts' && args['AutoErase:eval'] !== 'true') return false;
-    if (p[1] === 'Tone_CustomToneBust') {
-      let tone;
-      try { tone = JSON.parse(args['customTone:eval']); } catch { return false; }
-      if (!Array.isArray(tone) || tone.length !== 4 || tone.some((v, i) => !Number.isInteger(v) || v < (i === 3 ? 0 : -255) || v > 255)) return false;
-    }
-    return true;
-  }
-  const focusParameterFields = [
-    ['ListenerDarkness', 'Escurecimento dos ouvintes', 24, 0, 255],
-    ['ListenerScale', 'Escala dos ouvintes (%)', 90, 1, 100],
-    ['SpeakerScale', 'Escala do falante (%)', 100, 100, 150],
-    ['ListenerOffset', 'Recuo dos ouvintes (pixels)', 16, 0, 100],
-    ['FocusDuration', 'Duração da troca de foco (frames)', 20, 0, 60]
-  ];
-  const defaultFocusStyle = freeze(Object.fromEntries(focusParameterFields.map(([key, , value]) => [key, value])));
-  function parseFocusParameters(parameters) {
-    const style = {}, errors = [];
-    if (!parameters || typeof parameters !== 'object' || Array.isArray(parameters)) {
-      return { ok: false, errors: [{ code: 'invalid_plugin_parameters', plugin: 'Dryland_EventBridge',
-        message: 'Dryland_EventBridge: configuração de Bustos — Foco da conversa inválida.' }] };
-    }
-    for (const [key, label, fallback, min, max] of focusParameterFields) {
-      const raw = hasOwn(parameters, key) ? parameters[key] : String(fallback);
-      const value = Number(raw);
-      if (!literalNumber(raw) || !Number.isInteger(value) || value < min || value > max) {
-        errors.push({ code: 'invalid_plugin_parameter', plugin: 'Dryland_EventBridge', parameter: key,
-          message: `Dryland_EventBridge → Bustos — Foco da conversa → ${label}: use um inteiro entre ${min} e ${max}.` });
-      } else style[key] = value;
-    }
-    return errors.length ? { ok: false, errors } : { ok: true, style: freeze(style), errors };
-  }
-  function validFocusCommand(p, slots) {
-    const args = p[3];
-    return p.length === 4 && p[0] === 'Dryland_EventBridge' && p[1] === 'Focus' && typeof p[2] === 'string' &&
-      args && Object.keys(args).join(',') === 'slot' && literalNumber(args.slot) && Number.isInteger(Number(args.slot)) &&
-      (Number(args.slot) === 0 || slots.has(Number(args.slot)));
-  }
-  function baseTransform(name, args) {
-    return name === 'Scale_ScaleTo'
-      ? { scaleX: Number(args['TargetScaleX:str']), scaleY: Number(args['TargetScaleY:str']) }
-      : { x: Number(args['TargetX:str']), y: Number(args['TargetY:str']) };
-  }
-  function focusedTargets(bases, args, style) {
-    const active = Number(args.slot), darkness = -style.ListenerDarkness || 0;
-    if (active && !bases.has(active)) return new Map();
-    return new Map([...bases].map(([slot, base]) => {
-      const listening = active !== 0 && slot !== active;
-      const ratio = active === 0 ? 1 : (listening ? style.ListenerScale : style.SpeakerScale) / 100;
-      return [slot, { ...base, x: base.x + (listening && slot !== 65 ? style.ListenerOffset * (slot < 63 ? -1 : 1) : 0),
-        scaleX: base.scaleX * ratio, scaleY: base.scaleY * ratio,
-        tone: listening ? [darkness, darkness, darkness, 0] : [0, 0, 0, 0] }];
-    }));
+  function isNativeBustCommand(p) {
+    return p.length === 4 && p[0] === 'VisuMZ_2_VNPictureBusts' && typeof p[1] === 'string' &&
+      typeof p[2] === 'string' && p[3] && typeof p[3] === 'object' && !Array.isArray(p[3]);
   }
   const visualFamily = id => /^(profile|speech)\.H[1-8]$/.test(id) ? `tavern.${id.split('.')[1]}` :
     /^(council\.(challenge|solo|confession|andira)|opinion\.H[1-8])$/.test(id) ? 'council' : id;
 
-  function dialogueSlots(id) {
-    if (/^(profile|selection|party_full|farewell|epilogue)\.H[1-8]$/.test(id)) return new Set([60]);
-    if (/^speech\.H[1-8]$/.test(id)) return new Set([60, 63]);
-    if (/^(council\.(challenge|solo|confession|andira)|opinion\.H[1-8])$/.test(id)) return new Set([60, 61, 62, 63, 65]);
-    if (/^lover\.(physical|supernatural)\.(warning|second)$/.test(id)) return new Set([63]);
-    return new Set();
+  function isBustDialogue(id) {
+    return /^(profile|speech|selection|party_full|farewell|epilogue|opinion)\.H[1-8]$/.test(id) ||
+      /^council\.(challenge|solo|confession|andira)$/.test(id) ||
+      /^lover\.(physical|supernatural)\.(warning|second)$/.test(id);
   }
 
   /** Index native command ranges. No command, escape or metadata is evaluated. */
-  function parseEventCatalog(commonEvents, system, style = defaultFocusStyle) {
+  function parseEventCatalog(commonEvents, system) {
     const catalog = { version: 1, passages: {}, scenes: {}, heroes: {}, encounters: {}, destinations: {}, competencies: {} };
     const locations = {};
     const visualSources = {};
@@ -309,9 +157,9 @@
         helpers[event.id] = { name: match[1], commonEventId: event.id };
       }
     }
-    function presentationGraph(list, id, slots, ancestry = [], pure = false, base = 0) {
+    function presentationGraph(list, id, ancestry = [], pure = false, base = 0) {
       const branches = [];
-      let previous = null, transition = null;
+      let previous = null;
       for (let index = 0; index < list.length; index++) {
         const c = list[index], p = c.parameters;
         const fail = () => issue('unsupported_content_command', id);
@@ -331,19 +179,14 @@
           } else if (c.code === 117) {
             const helper = helpers[p[0]];
             if (p.length !== 1 || !Number.isInteger(p[0]) || !helper || ancestry.includes(p[0])) fail();
-            else presentationGraph(commonEvents[p[0]].list, id, slots, [...ancestry, p[0]], true);
+            else presentationGraph(commonEvents[p[0]].list, id, [...ancestry, p[0]], true);
           } else if (c.code === 357) {
-            if (!validBustCommand(p, system, slots) && !validFocusCommand(p, slots)) fail();
-            else {
-              if (p[1] === 'Basic_EnterBust') asset(`img/pictures/${p[3]['PictureName:str']}.png`, id);
-              transition = p[1] === 'Focus' ? style.FocusDuration : Number(p[3]['Duration:eval']);
-            }
+            if (!isNativeBustCommand(p)) fail();
           } else if (c.code === 657) {
             if (![357, 657].includes(previous?.code) || previous.indent !== c.indent || p.length !== 1 ||
                 typeof p[0] !== 'string' || !p[0].trim() || /[\r\n\u001b]/.test(p[0])) fail();
           } else if (c.code === 230) {
-            if (p.length !== 1 || !Number.isInteger(p[0]) || p[0] < 0 || p[0] > 60 ||
-                ![357, 657].includes(previous?.code) || transition === null || p[0] > transition) fail();
+            if (p.length !== 1 || !Number.isInteger(p[0]) || p[0] < 0) fail();
           } else if (pure && [108, 408].includes(c.code)) {
             if (p.length !== 1 || typeof p[0] !== 'string' || (c.code === 408 && ![108, 408].includes(previous?.code)) ||
                 (p[0].includes('@') && !(index === 0 && /^@dryland-presentation-helper /.test(p[0])))) fail();
@@ -354,7 +197,6 @@
           // The restricted branch body is presentation-only even inside a passage.
           fail();
         }
-        if (![357, 657].includes(c.code)) transition = null;
         previous = c;
       }
       if (branches.length || (pure && (list[list.length - 1]?.code !== 0 || list[list.length - 1]?.indent !== 0))) issue('unsupported_content_command', id);
@@ -397,7 +239,7 @@
       if (!statuses.has(meta.status)) issue('invalid_status', id);
       if (!meta.source?.trim()) issue('missing_source', id);
       if (meta.scene && !hasOwn(catalog.scenes, meta.scene)) issue('invalid_scene_reference', id);
-      presentationGraph(event.list.slice(start + 1, end), id, dialogueSlots(id), [], false, indent);
+      presentationGraph(event.list.slice(start + 1, end), id, [], false, indent);
       let text = '';
       const choices = [];
       const branches = [];
@@ -465,7 +307,7 @@
     }
     if (violations.length) return freeze({ catalog, locations, helpers, violations });
     indexHelpers();
-    for (const helper of Object.values(helpers)) presentationGraph(commonEvents[helper.commonEventId].list, `helper.${helper.commonEventId}`, new Set([60, 61, 62, 63, 64, 65]), [helper.commonEventId], true);
+    for (const helper of Object.values(helpers)) presentationGraph(commonEvents[helper.commonEventId].list, `helper.${helper.commonEventId}`, [helper.commonEventId], true);
     // Read plans first so their physical position in the editor does not matter.
     for (const event of commonEvents.filter(Boolean)) {
       let inside = false;
@@ -514,104 +356,39 @@
       const sources = visualSources[id] || [];
       if (new Set(sources).size !== sources.length) issue('invalid_visual_source', id);
       for (const source of sources) {
-        if (!hasOwn(locations, source) || !dialogueSlots(source).size || visualFamily(source) !== visualFamily(id)) issue('invalid_visual_source', id);
+        if (!hasOwn(locations, source) || !isBustDialogue(source) || visualFamily(source) !== visualFamily(id)) issue('invalid_visual_source', id);
         else checkSources(source, [...ancestry, id]);
       }
     }
     for (const id of Object.keys(visualSources)) checkSources(id);
-    if (!violations.length) validateVisualEntries(commonEvents, locations, visualSources, issue);
     return freeze({ catalog, locations, helpers, visualSources, violations });
   }
 
-  // Track possible entry fields through native branches without running events.
-  // 0 = absent; 1 = entered; 2 = authored scale; 4 = authored position.
-  function validateVisualEntries(events, locations, sources, issue) {
-    const merge = (a, b) => new Map([...new Set([...a.keys(), ...b.keys()])].map(slot =>
-      [slot, new Set([...(a.get(slot) || [0]), ...(b.get(slot) || [0])])]));
-    const complete = state => [...state.values()].every(fields => [...fields].every(mask => mask === 0 || mask === 7));
-    function effects(list, state, id) {
-      const branches = [];
+  function restorationCommands(commonEvents, parsed, id, box) {
+    if (parsed.violations.length || !parsed.locations[id] || !Number.isInteger(box) || box < 0) throw new Error('Invalid visual restoration input');
+    const commands = [];
+    function append(list, base = 0) {
       for (const command of list) {
-        const p = command.parameters;
-        if (command.code === 111) branches.push({ before: new Map(state), then: null });
-        else if (command.code === 411) {
-          const branch = branches[branches.length - 1]; branch.then = state; state = new Map(branch.before);
-        } else if (command.code === 412) {
-          const branch = branches.pop(); state = merge(branch.then || branch.before, state);
-        } else if (command.code === 117) state = effects(events[p[0]].list, state, id);
-        else if (command.code === 101 || (command.code === 357 && p[0] === 'Dryland_EventBridge' && p[1] === 'Focus')) {
-          if (!complete(state)) issue('invalid_visual_entry', id);
-        } else if (command.code === 357 && p[0] === 'VisuMZ_2_VNPictureBusts') {
-          const name = p[1], args = p[3];
-          if (name === 'Basic_EnterBust') state.set(Number(args['PictureID:eval']), new Set([1]));
-          else for (const slot of JSON.parse(args['PictureID:arrayeval']).map(Number)) {
-            if (name === 'Basic_ExitBusts') state.delete(slot);
-            else if (state.has(slot) && Number(args['Duration:eval']) === 0 && ['Scale_ScaleTo', 'Move_MoveToCoordinates'].includes(name)) {
-              const field = name === 'Scale_ScaleTo' ? 2 : 4;
-              state.set(slot, new Set([...state.get(slot)].map(mask => mask ? mask | field : 0)));
-            }
-          }
-        }
-      }
-      return state;
-    }
-    function section(id, state) {
-      for (const source of sources[id] || []) state = section(source, state);
-      const location = locations[id], list = events[location.commonEventId].list.slice(location.start, location.end);
-      let lastText = list.length - 1;
-      while (lastText >= 0 && list[lastText].code !== 101) lastText--;
-      return effects(list.slice(0, lastText + 1), state, id);
-    }
-    for (const id of Object.keys(locations)) if (dialogueSlots(id).size) section(id, new Map());
-  }
-
-  function deriveVisualComposition(commonEvents, parsed, id, box, variables, style = defaultFocusStyle) {
-    if (parsed.violations.length || !parsed.locations[id] || !Number.isInteger(box) || box < 0) throw new Error('Invalid visual composition input');
-    const targets = new Map(), bases = new Map();
-    function effects(list) {
-      const branches = [];
-      const enabled = () => branches.every(branch => branch);
-      for (const command of list) {
-        const p = command.parameters;
-        if (command.code === 111) { branches.push(variables[p[1]] === p[3]); continue; }
-        if (command.code === 411) { branches[branches.length - 1] = !branches[branches.length - 1]; continue; }
-        if (command.code === 412) { branches.pop(); continue; }
-        if (!enabled()) continue;
-        if (command.code === 117) effects(commonEvents[p[0]].list);
-        else if (command.code === 357 && p[0] === 'Dryland_EventBridge' && p[1] === 'Focus') {
-          for (const [slot, target] of focusedTargets(bases, p[3], style)) targets.set(slot, target);
-        } else if (command.code === 357 && p[0] === 'VisuMZ_2_VNPictureBusts') {
-          const args = p[3], name = p[1];
-          if (name === 'Basic_EnterBust') {
-            const slot = Number(args['PictureID:eval']);
-            const target = { enter: clone(args), tone: [0, 0, 0, 0] };
-            targets.set(slot, target); bases.set(slot, { ...target });
-            continue;
-          }
-          for (const slot of JSON.parse(args['PictureID:arrayeval']).map(Number)) {
-            if (name === 'Basic_ExitBusts') { targets.delete(slot); bases.delete(slot); continue; }
-            const target = targets.get(slot);
-            if (!target) continue;
-            if (name === 'Scale_ScaleTo') Object.assign(target, { scaleX: Number(args['TargetScaleX:str']), scaleY: Number(args['TargetScaleY:str']) });
-            if (name === 'Move_MoveToCoordinates') Object.assign(target, { x: Number(args['TargetX:str']), y: Number(args['TargetY:str']) });
-            if (name === 'Tone_NormalBust') target.tone = [0, 0, 0, 0];
-            if (name === 'Tone_CustomToneBust') target.tone = JSON.parse(args['customTone:eval']);
-            if (Number(args['Duration:eval']) === 0 && ['Scale_ScaleTo', 'Move_MoveToCoordinates'].includes(name)) Object.assign(bases.get(slot), baseTransform(name, args));
-          }
+        if (command.code === 117) {
+          append(commonEvents[command.parameters[0]].list, base + command.indent);
+        } else if ([111, 411, 412].includes(command.code) ||
+            (command.code === 357 && isNativeBustCommand(command.parameters))) {
+          commands.push({ ...clone(command), indent: base + command.indent });
         }
       }
     }
     function section(sectionId, selectedBox) {
       for (const source of parsed.visualSources[sectionId] || []) section(source);
-      const location = parsed.locations[sectionId], list = commonEvents[location.commonEventId].list.slice(location.start, location.end);
+      const location = parsed.locations[sectionId];
+      const list = commonEvents[location.commonEventId].list.slice(location.start, location.end);
       const texts = list.flatMap((command, index) => command.code === 101 ? [index] : []);
-      const end = texts[selectedBox === undefined ? texts.length - 1 : selectedBox];
+      const end = selectedBox === undefined ? list.length : texts[selectedBox];
       if (end === undefined) throw new Error(`Invalid visual text box: ${sectionId}.${selectedBox}`);
-      effects(list.slice(0, end));
+      append(list.slice(0, end), -location.indent);
     }
     section(id, box);
-    for (const target of targets.values()) if (![target.x, target.y, target.scaleX, target.scaleY].every(Number.isFinite)) throw new Error(`Incomplete native visual entry: ${id}`);
-    return { targets, bases };
+    commands.push({ code: 0, indent: 0, parameters: [] });
+    return commands;
   }
 
   function validateEnvelope(envelope, nativeLayoutVersion, validateState) {
@@ -707,14 +484,10 @@
     });
   }
 
-  const api = freeze({ parseFocusParameters, parseEventCatalog, deriveVisualComposition, validateEnvelope, validateCheckpoint, validateBridgeAction, validateObserve, validateCapturedContext, createQa });
+  const api = freeze({ parseEventCatalog, restorationCommands, validateEnvelope, validateCheckpoint, validateBridgeAction, validateObserve, validateCapturedContext, createQa });
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.DrylandEventBridge = api;
   if (typeof DataManager === 'undefined') return;
-
-  const focusConfiguration = parseFocusParameters(PluginManager.parameters('Dryland_EventBridge'));
-  if (!focusConfiguration.ok) throw new Error(focusConfiguration.errors.map(error => error.message).join('\n'));
-  const focusStyle = focusConfiguration.style;
 
   let registry;
   let rules;
@@ -749,7 +522,7 @@
   DataManager.isDatabaseLoaded = function() {
     if (!databaseLoaded.call(this)) return false;
     if (!registry) {
-      registry = parseEventCatalog($dataCommonEvents, { ...$dataSystem, drylandAssets: global.$dataDrylandLayout.assets }, focusStyle);
+      registry = parseEventCatalog($dataCommonEvents, { ...$dataSystem, drylandAssets: global.$dataDrylandLayout.assets });
       if (registry.violations.length) throw new Error(`Dryland content: ${JSON.stringify(registry.violations)}`);
       rules = global.DrylandCampaignRules.createRules(registry.catalog);
     }
@@ -818,32 +591,22 @@
     if (!conversation) return;
     const owner = conversation;
     conversation = null;
-    owner.phase = 'closed';
-    owner.initialTargets.clear();
-    owner.bases.clear();
-    owner.focusTargets.clear();
     owner.recovery?.clear();
     owner.recovery = null;
     for (const id of owner.slots) $gameScreen.erasePicture(id);
   }
-  function beginConversation(key, slots) {
+  function beginConversation(key) {
     if (conversation?.key === key) return conversation;
     closeConversation();
-    conversation = { key, serial: ++conversationSerial, phase: 'preparing', slots: new Set(slots), initialTargets: new Map(), bases: new Map(), focusTargets: new Map() };
+    conversation = { key, serial: ++conversationSerial, slots: new Set(), recovery: null };
     return conversation;
   }
   PluginManager.registerCommand('Dryland_EventBridge', 'Conversation', function(args) {
     if (!ensureCampaign('Conversation')) return;
     const keys = Object.keys(args).sort().join(',');
-    const allocation = hasOwn(args, 'slots') ? args.slots : '';
-    if (!['kind,operation', 'kind,operation,slots'].includes(keys) || !['tavern', 'council'].includes(args.kind) ||
-        !['begin', 'reconcile', 'end'].includes(args.operation) ||
-        !['', '60', '63', '60,63', '60,61,62,63,65', '60,61,63,64'].includes(allocation) ||
-        (args.operation !== 'begin' && allocation)) return reportRejection('Conversation', commandError('invalid_target'));
-    const slots = allocation ? allocation.split(',').map(Number) : args.kind === 'council' ? [60, 61, 62, 63, 65] : [60, 63];
+    if (keys !== 'kind,operation' || !['tavern', 'council'].includes(args.kind) ||
+        !['begin', 'reconcile', 'end'].includes(args.operation)) return reportRejection('Conversation', commandError('invalid_target'));
     const key = args.kind === 'council' ? 'council' : `tavern.${$gameVariables.value(22)}`;
-    if (args.operation === 'begin' && conversation?.key === key &&
-        (conversation.slots.size !== slots.length || slots.some(slot => !conversation.slots.has(slot)))) return reportRejection('Conversation', commandError('invalid_target'));
     if (args.operation === 'reconcile') {
       reconcileConversation();
     } else if (args.operation === 'end') {
@@ -851,10 +614,10 @@
       delete this._drylandDialogueOwner;
     } else if (args.kind === 'council' && campaign().phase === 'council') {
       refreshCouncilProjection();
-      this._drylandDialogueOwner = beginConversation(key, slots).serial;
+      this._drylandDialogueOwner = beginConversation(key).serial;
     } else if (args.kind === 'tavern' && campaign().phase === 'formation' && this._drylandContext === campaign().sequence &&
         publicView().formation.livingHeroIds.includes($gameVariables.value(22))) {
-      this._drylandDialogueOwner = beginConversation(key, slots).serial;
+      this._drylandDialogueOwner = beginConversation(key).serial;
     } else {
       reportRejection('Conversation', commandError('invalid_target'));
     }
@@ -883,72 +646,36 @@
     return nativeCommonEvent.call(this, params);
   };
   const nativePluginCommand = Game_Interpreter.prototype.command357;
-  function executeBust(interpreter, params, recordBase = true) {
-    if (params[0] !== 'VisuMZ_2_VNPictureBusts' || !interpreter._drylandDialogueOwner) return nativePluginCommand.call(interpreter, params);
-    if (!conversation || interpreter._drylandDialogueOwner !== conversation.serial) return true;
-    // Authored commands have editor bounds; derived focus/recovery targets can exceed the entry scale or position.
-    if (recordBase && !interpreter._drylandRecovery && !validBustCommand(params, $dataSystem, conversation.slots)) throw new Error(`Invalid native dialogue command: ${JSON.stringify(params)}`);
-    if (params[1] === 'Basic_EnterBust') {
-      if (!interpreter._drylandRecovery) conversation.bases.delete(Number(params[3]['PictureID:eval']));
-      conversation.focusTargets.delete(Number(params[3]['PictureID:eval']));
-      conversation.phase = 'preparing';
-      if (!ImageManager.loadPicture(params[3]['PictureName:str']).isReady()) return false;
+  let creatingBustFor = null;
+  const showBustPicture = Game_Screen.prototype.showPicture;
+  Game_Screen.prototype.showPicture = function(id, ...args) {
+    showBustPicture.call(this, id, ...args);
+    if (creatingBustFor) creatingBustFor.slots.add(id);
+  };
+  Game_Interpreter.prototype.command357 = function(params) {
+    if (params[0] !== 'VisuMZ_2_VNPictureBusts' || !this._drylandDialogueOwner) return nativePluginCommand.call(this, params);
+    if (!conversation || this._drylandDialogueOwner !== conversation.serial) return true;
+    if (this._drylandRecovery && params[1] === 'Basic_PlayAniBust') return true;
+    if (['Basic_EnterBust', 'Basic_GraphicChange'].includes(params[1]) && !ImageManager.loadPicture(params[3]['PictureName:str']).isReady()) return false;
+    // The vendor decodes arguments in place. Keep editor commands reusable for restoration.
+    const args = clone(params[3]);
+    const immediate = this._drylandRecovery || global.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (immediate && hasOwn(args, 'Duration:eval')) args['Duration:eval'] = '0';
+    const previousOwner = creatingBustFor;
+    creatingBustFor = conversation;
+    let result;
+    try {
+      result = nativePluginCommand.call(this, [params[0], params[1], params[2], args]);
+    } finally {
+      creatingBustFor = previousOwner;
     }
-    const reduced = interpreter._drylandRecovery || global.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // The vendor decodes arguments in place; the editable native list stays literal.
-    const args = { ...params[3], ...(reduced ? { 'Duration:eval': '0' } : {}) };
-    const result = nativePluginCommand.call(interpreter, [params[0], params[1], params[2], args]);
-    if (Number(args['Duration:eval']) === 0 && params[1] !== 'Basic_EnterBust') {
-      for (const id of JSON.parse(params[3]['PictureID:arrayeval']).map(Number)) {
-        const target = conversation.initialTargets.get(id) || {};
-        if (params[1] === 'Scale_ScaleTo') Object.assign(target, { scaleX: Number(args['TargetScaleX:str']), scaleY: Number(args['TargetScaleY:str']) });
-        if (params[1] === 'Move_MoveToCoordinates') Object.assign(target, { x: Number(args['TargetX:str']), y: Number(args['TargetY:str']) });
-        if (params[1] === 'Tone_NormalBust') target.tone = [0, 0, 0, 0];
-        if (params[1] === 'Tone_CustomToneBust') target.tone = JSON.parse(args['customTone:eval']);
-        if (params[1] === 'Basic_ExitBusts') {
-          // The vendor's auto-erase advances on a nonzero fade clock.
-          // An instantaneous authored/reduced exit has no clock to finish.
-          conversation.initialTargets.delete(id);
-          $gameScreen.erasePicture(id);
-        } else conversation.initialTargets.set(id, target);
-      }
+    // An instantaneous native fade has no clock on which the vendor can auto-erase.
+    if (Number(args['Duration:eval']) === 0 && [true, 'true'].includes(args['AutoErase:eval'])) {
+      const ids = args['PictureID:arrayeval'];
+      for (const id of Array.isArray(ids) ? ids : JSON.parse(ids)) $gameScreen.erasePicture(Number(id));
     }
-    if (recordBase && !interpreter._drylandRecovery && Number(params[3]['Duration:eval']) === 0 && ['Scale_ScaleTo', 'Move_MoveToCoordinates'].includes(params[1])) {
-      for (const slot of JSON.parse(params[3]['PictureID:arrayeval']).map(Number)) {
-        const base = conversation.bases.get(slot) || {};
-        Object.assign(base, baseTransform(params[1], params[3]));
-        conversation.bases.set(slot, base);
-      }
-    }
-    if (recordBase && params[1] !== 'Basic_EnterBust') {
-      for (const slot of JSON.parse(params[3]['PictureID:arrayeval']).map(Number)) conversation.focusTargets.delete(slot);
-    }
-    if (params[1] === 'Basic_ExitBusts') for (const slot of JSON.parse(params[3]['PictureID:arrayeval']).map(Number)) {
-      conversation.bases.delete(slot); conversation.focusTargets.delete(slot);
-    }
-    conversation.phase = params[1] === 'Basic_ExitBusts' ? 'exiting' : conversation.initialTargets.size ? 'preparing' : 'active';
     return result;
-  }
-  Game_Interpreter.prototype.command357 = function(params) { return executeBust(this, params); };
-  function transformCommands(slot, target, duration) {
-    const ids = JSON.stringify([String(slot)]), command = (name, args) => [
-      'VisuMZ_2_VNPictureBusts', name, name, { 'PictureID:arrayeval': ids, 'Duration:eval': String(duration), ...args }
-    ];
-    return [command('Scale_ScaleTo', { 'TargetScaleX:str': String(target.scaleX), 'TargetScaleY:str': String(target.scaleY) }),
-      command('Move_MoveToCoordinates', { 'TargetX:str': String(target.x), 'TargetY:str': String(target.y), 'EasingType:str': 'InOutSine', 'FlipDirection:str': 'None' }),
-      command('Tone_CustomToneBust', { 'customTone:eval': JSON.stringify(target.tone) })];
-  }
-  PluginManager.registerCommand('Dryland_EventBridge', 'Focus', function(args) {
-    if (!conversation || this._drylandDialogueOwner !== conversation.serial || !validFocusCommand(['Dryland_EventBridge', 'Focus', 'Focus', args], conversation.slots)) {
-      return reportRejection('Focus', commandError('invalid_target'));
-    }
-    const occupied = new Map([...conversation.bases].filter(([slot]) => $gameScreen.picture(slot)));
-    for (const [slot, target] of focusedTargets(occupied, args, focusStyle)) {
-      if (JSON.stringify(conversation.focusTargets.get(slot)) === JSON.stringify(target)) continue;
-      for (const params of transformCommands(slot, target, focusStyle.FocusDuration)) executeBust(this, params, false);
-      conversation.focusTargets.set(slot, target);
-    }
-  });
+  };
   const nativeWait = Game_Interpreter.prototype.command230;
   Game_Interpreter.prototype.command230 = function(params) {
     if (this._drylandRecovery || (this._drylandDialogueOwner && global.matchMedia('(prefers-reduced-motion: reduce)').matches)) return true;
@@ -962,8 +689,8 @@
     const presentation = root?._drylandPresentation;
     if (!presentation || presentation.expectedSequence !== campaign()?.sequence) return;
     if (conversation && root._drylandDialogueOwner === conversation.serial) return;
-    const id = presentation.passageId, slots = dialogueSlots(id);
-    if (!slots.size) return;
+    const id = presentation.passageId;
+    if (!isBustDialogue(id)) return;
     if (presentation.observational) {
       if (campaign().phase !== 'formation' || !/^(profile|speech|selection|party_full)\.H[1-8]$/.test(id) ||
           !publicView().formation.livingHeroIds.includes(id.split('.')[1])) return;
@@ -977,20 +704,11 @@
     root._childInterpreter?.clear();
     root._childInterpreter = null;
     refreshCouncilProjection();
-    const owner = beginConversation(key, key.startsWith('tavern.') ? [60, 63] : slots);
-    for (const slot of owner.slots) $gameScreen.erasePicture(slot);
+    const owner = beginConversation(key);
     for (const interpreter of [...ancestors, root]) interpreter._drylandDialogueOwner = owner.serial;
-    // Final effects have no passage-completion authority.
+    // This interpreter contains native visual commands only and cannot complete passages.
     const recovery = new Game_Interpreter();
-    const composition = deriveVisualComposition($dataCommonEvents, registry, id, box,
-      Object.fromEntries([144, 145, 146].map(variable => [variable, $gameVariables.value(variable)])), focusStyle);
-    const commands = [];
-    for (const [slot, target] of composition.targets) {
-      commands.push({ code: 357, indent: 0, parameters: ['VisuMZ_2_VNPictureBusts', 'Basic_EnterBust', 'Basic_EnterBust', { ...target.enter, 'Duration:eval': '0' }] });
-      for (const parameters of transformCommands(slot, target, 0)) commands.push({ code: 357, indent: 0, parameters });
-    }
-    commands.push({ code: 0, indent: 0, parameters: [] });
-    owner.bases = composition.bases;
+    const commands = restorationCommands($dataCommonEvents, registry, id, box);
     recovery.setup(commands, root._eventId);
     recovery._drylandDialogueOwner = owner.serial;
     recovery._drylandRecovery = true;
@@ -1008,7 +726,6 @@
       owner.recovery.update();
       if (conversation === owner && !owner.recovery.isRunning()) {
         owner.recovery = null;
-        owner.phase = 'active';
       }
     }
     updateConversationScene.call(this);
@@ -1024,7 +741,7 @@
   const updateDialoguePicture = Sprite_Picture.prototype.update;
   Sprite_Picture.prototype.update = function() {
     updateDialoguePicture.call(this);
-    if (conversation?.initialTargets.has(this._pictureId) || (conversation?.recovery && conversation.slots.has(this._pictureId))) this.visible = false;
+    if (conversation?.recovery && conversation.slots.has(this._pictureId)) this.visible = false;
   };
 
   function nextCheckpoint(before, after, action) {
@@ -1412,10 +1129,10 @@
       return;
     }
     if (/^(selection|party_full|farewell|epilogue)\.H[1-8]$/.test(passageId) || /^lover\.(physical|supernatural)\.(warning|second)$/.test(passageId)) {
-      this._drylandDialogueOwner = beginConversation(passageId, dialogueSlots(passageId)).serial;
+      this._drylandDialogueOwner = beginConversation(passageId).serial;
     }
     const ownerKey = /^(profile|speech)\./.test(passageId) ? `tavern.${hero}` : /^(council|opinion)\./.test(passageId) ? 'council' : passageId;
-    if (dialogueSlots(passageId).size && (!conversation || this._drylandDialogueOwner !== conversation.serial || conversation.key !== ownerKey)) {
+    if (isBustDialogue(passageId) && (!conversation || this._drylandDialogueOwner !== conversation.serial || conversation.key !== ownerKey)) {
       return reportRejection('Present', commandError('invalid_target'), { passageId });
     }
     if (inspection) {
@@ -1667,20 +1384,6 @@
   const executeCommand = Game_Interpreter.prototype.executeCommand;
   Game_Interpreter.prototype.executeCommand = function() {
     if ($gameTemp._drylandInvalid && !this._drylandErrorPresentation) return false;
-    if (conversation && this._drylandDialogueOwner === conversation.serial && conversation.initialTargets.size) {
-      const command = this.currentCommand();
-      const immediate = this._drylandRecovery || global.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const initializing = command?.code === 657 || (command?.code === 357 && command.parameters[0] === 'VisuMZ_2_VNPictureBusts' && (immediate || Number(command.parameters[3]['Duration:eval']) === 0));
-      if (!initializing) {
-        for (const [id, target] of conversation.initialTargets) {
-          const picture = $gameScreen.picture(id);
-          if (!picture || Object.entries(target).some(([key, value]) => key === 'tone'
-            ? picture.tone().some((channel, index) => channel !== value[index]) : picture[key]() !== value)) return false;
-        }
-        conversation.initialTargets.clear();
-        conversation.phase = 'active';
-      }
-    }
     return executeCommand.call(this);
   };
   function presentInvalidCampaign(scene) {
@@ -1722,7 +1425,7 @@
     if (!result.ok) return;
     interpreter.clear();
     const state = campaign(), passageId = state.reading?.passageIds[state.reading.index];
-    skippedPresentation = dialogueSlots(passageId).size ? { passageId, expectedSequence: state.sequence } : null;
+    skippedPresentation = isBustDialogue(passageId) ? { passageId, expectedSequence: state.sequence } : null;
     // Native updateInput normally releases pause before ending the message.
     scene._messageWindow.pause = false;
     scene._messageWindow.terminateMessage();

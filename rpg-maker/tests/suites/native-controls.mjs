@@ -93,7 +93,7 @@ canonicalCase('IT-064','clearing a native conversation cancels queued active/foc
   await activate(browser,'formation',0);await activate(browser,'hero',0);await pause(browser);
   const before=await state(browser);
   if(stage!=='active'){
-   const operation=stage==='focus'?'Focus':'Basic_ExitBusts';
+   const operation=stage==='focus'?'Tone_CustomToneBust':'Basic_ExitBusts';
    await browser.evaluate(`holdDialogueAfter=${JSON.stringify(operation)};`);
    const boxes=stage==='focus'?2:7;
    for(let box=0;box<boxes;box++){await pause(browser);await browser.press('Enter',13);}
@@ -208,12 +208,6 @@ canonicalCase('IT-068','the authored 2x2 fixture uses production ownership, indi
      await browser.evaluate('delete $gameTemp._drylandLastRejection;$gameVariables.setValue(24,"");');await frames(browser,3);
     }
     if(index===4)assert.deepEqual(actual,previous,'Repeated same speaker has identical settled focus');
-    if(index===4){
-     const args={slot:'64'};
-     const observed=await browser.evaluate(`(()=>{let i=$gameMap._interpreter;while(i._childInterpreter)i=i._childInterpreter;delete $gameTemp._drylandLastRejection;PluginManager.callCommand(i,'Dryland_EventBridge','Focus',${JSON.stringify(args)});return [60,61,63,64].map(id=>$gameScreen.picture(id)._duration);})()`);
-     assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection?.code||null'),null);
-     assert.deepEqual(observed,[0,0,0,0],'Repeated settled focus starts no new interpolation');
-    }
 
     previous=actual;observations.push({variant,index,actual});
     const folder=`${evidence('IT-068')}/${variant}`;await browser.screenshot(`${folder}/focus-${line.slot}-${index}.png`);

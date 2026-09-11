@@ -1,5 +1,5 @@
 {
-  "nativeLayoutVersion": "mz-20260911-pr3-taverna-02",
+  "nativeLayoutVersion": "mz-20260911-native-bust-authorship-04",
   "revisions": {
     "mz-20260909-01": "97b455b26e373fedc6ce4e22747f9ded757168841e82cab99e372ac1b4c14ce8",
     "mz-20260909-02": "616367f7be1dbdff758fd900cb32112a5122ea6f8ed102119a1d92a608472446",
@@ -35,10 +35,14 @@
     "mz-20260911-focus-parameters-01": "a04197a5ee61d27eda42cf9eac15c2bacb17cde6aab92af9f3385b89d8aaf8e1",
     "mz-20260911-focus-parameters-02": "7db3510fe7039b769346af87b8b2ba177e0fcb4b3ec2d738338d2bce30db52e1",
     "mz-20260911-pr3-taverna-01": "eefe669aa8ff8c81d57aa36611b75a45a0aba7f3fdd82dad06d871e441478045",
-    "mz-20260911-pr3-taverna-02": "a2124bdf47eb3d459ba4003ba547854c4f74cdb7358f14829414702f5c3e0530"
+    "mz-20260911-pr3-taverna-02": "a2124bdf47eb3d459ba4003ba547854c4f74cdb7358f14829414702f5c3e0530",
+    "mz-20260911-native-bust-authorship-01": "a2124bdf47eb3d459ba4003ba547854c4f74cdb7358f14829414702f5c3e0530",
+    "mz-20260911-native-bust-authorship-02": "6336a36f5ead4943c0c51c8250b5cbde6ac3321940698dfc2122326ac5ef7af4",
+    "mz-20260911-native-bust-authorship-03": "c5753fc73319230ae572db4372224e658cebd1982d5947cf7e47c4f42bd637d2",
+    "mz-20260911-native-bust-authorship-04": "20d12e0f555e958f319365450f0b380243595d361554c430bf532e84ba7fa76f"
   },
   "files": {
-    "data/CommonEvents.json": "4b2fd20b5fde05b6b97787230af2c871a0a83170d0522c4673ade398c90ac2d8",
+    "data/CommonEvents.json": "6c9c31f98ce3717302d1c74f595f4481698bb033b204f59e13bb5d73bb353379",
     "data/Map001.json": "7ab36e9cf1590617f2ac56eadbd07803433677bffea7810be4a1775b9b469cdc",
     "data/Map002.json": "4b9b1ff70419ec775b699686b0f7b21bdc7fd4e0e8da0ba91060b60dc611b975",
     "data/Map003.json": "982f7abd781b4f8d14c5363c82233fe93980a965278767dadff0bf530fff77bf",
@@ -76,7 +80,7 @@
     "data/Map035.json": "fd23d704a4b94cc3d29194e5b712dbf341560bdffcc515143f22d22b8f5ace80",
     "data/Map036.json": "60813f000602a8c1fd7e40c0ed55cb9e1e26a9931682a423c0b76beceb7f2212",
     "data/MapInfos.json": "f5b68c23f624ac9ff109403a7f3743b02d8e066a79b3299ed29d2230ec71ac7c",
-    "data/System.json": "d4a142dda4ad9ab23fb7945495f035b73a8ec24749c1448e8227c168a7e5be9b"
+    "data/System.json": "a1b4e023889423dcb0b9280ba41f19b3139aeb75f8de875d62b0c71f63263066"
   },
   "assets": [
     "audio/bgm/Battle1.ogg",

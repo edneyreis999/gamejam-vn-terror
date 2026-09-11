@@ -70,56 +70,36 @@ Os 193 IDs de texto e 160 planos da baseline já estão nos eventos nativos como
 
 ### Editar bustos e foco dos diálogos
 
-A autoria atual usa **12 Common Events auxiliares (68–79)**. A [spec incremental](../planos/tasks/vn-slot-authorship/spec.md) substitui as receitas por herói e os 104 eventos de restauração do incremento anterior. Todos os PNGs foram preservados: as posições abaixo pressupõem retratos padronizados que Edney ajustará depois.
+**Imagem, posição, escala, tom, animação e foco são autorados nos comandos do VNPictureBusts.** O EventBridge mantém a restauração e o ciclo da conversa; não oferece mais o comando Focus nem os cinco parâmetros globais. A [spec de autoria nativa](../planos/tasks/vn-native-bust-authorship/spec.md) substitui esse contrato anterior.
 
-1. Em **Database → Common Events**, encontre `@dryland-section profile.H1` (Gorvak, CE5), ou a seção desejada nos eventos narrativos 1–67. Edite a imagem em **VNPictureBusts → Enter Bust**, e a base em **Scale To** e **Move To Coordinates**, ambos com duração zero. A entrada fica no próprio evento narrativo. A validação recusa uma entrada sem escala e posição completas antes do texto ou foco. Preserve a orientação `None`.
-2. Antes da fala, chame o helper de foco da posição ocupada. O comando **Dryland_EventBridge → Foco por posição** informa somente qual Picture fala. Ajuste o estilo comum no **Plugin Manager → Dryland_EventBridge → Bustos — Foco da conversa**, conforme a tabela abaixo. Repetir o mesmo foco não acumula escala nem reinicia a animação. Se a posição reservada estiver vazia, o foco mantém a composição atual, inclusive ao carregar um save.
-3. Edite ou acrescente **Show Text** no mesmo trecho. A retomada calcula a composição pelos mesmos comandos nativos até a caixa atual. Não existe receita de restauração para atualizar. Se um trecho continua a composição de outro, preserve `@visualFrom`, descrito abaixo.
-4. Ao alterar os eventos, salve no editor e atribua uma revisão nativa inédita usando os comandos de **Verificar** abaixo. A troca de revisão recusa saves incompatíveis e conserva seus arquivos. Ao alterar **somente os cinco parâmetros de foco**, salve o Plugin Manager e recarregue o jogo: não é necessário trocar a revisão nativa, e Continuar aplica o estilo atual aos saves compatíveis. Confira a conversa, Opções, HIDE, saída e Continuar no Chrome.
+1. Em **Database → Common Events**, abra **005–012** para os diálogos dos heróis, ou o evento narrativo desejado. Em cada trecho, edite os comandos VNPictureBusts normalmente: imagem, origem, espelhamento, curva, posição, escala e duração. A duração de Scale To e Move To Coordinates pode ser diferente de zero. Os limites e a interpretação dos parâmetros pertencem ao VNPictureBusts.
+2. Para destacar quem fala, use **Scale To**, **Move To Coordinates** e **Tone**, antes do Show Text. Você pode escrever os comandos na própria cena ou chamar um auxiliar. Não existe mais um foco automático sobrescrevendo o resultado.
+3. A migração preserva o destaque atual em auxiliares nativos: **CE080** destaca o herói na taverna e **CE081** destaca Ivaí. Edite esses eventos para mudar o destaque compartilhado pelos oito diálogos. Como os valores agora são explícitos, mudar a escala da entrada não recalcula os valores desses auxiliares. Ajuste os comandos posteriores que você quiser que acompanhem a entrada.
+4. Use **Wait** quando a animação deve terminar antes da fala ou do próximo comando. Comandos sem espera podem executar ao mesmo tempo, conforme o VNPictureBusts. Prefira valores absolutos para composições repetíveis; ajustes relativos acumulam conforme a sequência autorada.
+5. Salve no editor, atribua uma revisão nativa inédita pelos comandos de **Verificar** e recarregue o jogo. Mudanças nos eventos continuam sujeitas ao contrato de revisão e incompatibilidade de saves anteriores. Confira a conversa, Opções, HIDE, saída e Continuar no Chrome.
 
-| Parâmetro global | Padrão | Limites e efeito |
-| --- | --- | --- |
-| Escurecimento dos ouvintes | 24 | Inteiro de 0 a 255. Maior = mais escuro; 0 não escurece. Não é porcentagem. |
-| Escala dos ouvintes (%) | 90 | Inteiro de 1 a 100; percentual da escala base da entrada. |
-| Escala do falante (%) | 100 | Inteiro de 100 a 150; 110 amplia em 10% sobre a escala base. |
-| Recuo dos ouvintes (pixels) | 16 | Inteiro de 0 a 100; 0 desativa. Andirá mantém sua posição refletida. |
-| Duração da troca de foco (frames) | 20 | Inteiro de 0 a 60; 0 é instantâneo. Movimento reduzido e reconstrução usam 0. |
-
-Exemplo: com base de entrada em 60%, falante em 110% fica em 66%, enquanto ouvinte em 90% fica em 54%. Os dois fatores usam a mesma base, sem multiplicar um ao outro. Para escurecer mais, altere **Escurecimento dos ouvintes** de 24 para 60; não é preciso editar arrays de tom ou os sete comandos Focus. Não há substituição de estilo por cena. O foco neutro mantém todos na base e no tom normal, mesmo com falante acima de 100%.
-
-Esses campos são configuração do projeto, não opções do jogador. Campos ausentes usam os defaults; valores preenchidos inválidos são recusados pelo jogo e pelo validador, com o nome do campo a corrigir. A [spec dos parâmetros](../planos/tasks/vn-focus-parameters/spec.md) registra a migração inicial dos comandos; saves anteriores a essa migração continuam sujeitos à incompatibilidade de revisão.
-
-| Common Event | Função |
+| Common Event | Função atual, inteiramente autorada em comandos nativos |
 | --- | --- |
-| 68–72 | Foco nos slots 60, 61, 62, 63 e 64, respectivamente |
-| 73 | Entrada dos heróis no Conselho: condições escolhem as imagens; uma base por posição |
-| 74 | Intervenção de Andirá: oculta heróis, entra no slot 65 e recebe foco |
-| 75 | Retorno dos heróis após a saída de Andirá |
-| 76 | Saída do slot esquerdo 60 |
-| 77 | Saída do Conselho: 60–63 e 65 |
-| 78 | Saída do slot direito 63 |
-| 79 | Foco neutro: todos na base de entrada |
+| 68–72 | Destaque das posições 60, 61, 62, 63 e 64 no Conselho |
+| 73 | Entrada dos heróis no Conselho, conforme as projeções 144–146 |
+| 74–75 | Intervenção de Andirá e retorno dos heróis |
+| 76–78 | Saídas do herói, Conselho e personagem da direita |
+| 79 | Composição neutra do Conselho |
+| 80–81 | Destaque do herói e de Ivaí na taverna |
 
-No Conselho, as variáveis 144–146 projetam os heróis elegíveis em ordem. No CE73, altere os três grupos **Scale To / Move To Coordinates** para mudar o layout; cada grupo atende todos os oito heróis naquela posição. Só a seleção de imagem exige ramos por herói. Não escreva manualmente nessas variáveis de projeção.
+São **14 auxiliares (68–81)**. Falas isoladas usam a composição da própria entrada. As imagens e os textos existentes foram preservados; o enquadramento final dos PNGs continua sob autoria da equipe.
 
-| Uso | Picture | Base X/Y | Escala |
-| --- | --- | --- | --- |
-| Herói em conversa ou fala isolada | 60 | 320 / 850 | 100% |
-| Ivaí ou amante à direita | 63 | 960 / 850 | 100% |
-| Heróis no Conselho | 60 / 61 / 62 | 200 / 650; 420 / 650; 640 / 650 | 60% |
-| Andirá refletido | 65 | 330 / 500 | 100% |
+Pictures 60–65 continuam sendo a convenção dos diálogos existentes. O EventBridge acompanha os IDs criados pelo VNPictureBusts durante a conversa para limpá-los ao sair, sem impor essa faixa. Ao escolher outro ID, confira se ele não é usado pelo fundo, palco, memorial ou interface: reutilizar um ID substitui a imagem que já o ocupava.
 
-Esses valores são bases de autoria para a padronização futura; não validam o enquadramento dos PNGs atuais. O slot 64 atende o segundo participante à direita em composições 2×2. Os slots 60–65 são reservados aos diálogos, separados do palco, memorial e interface.
+`@visualFrom profile.H1` em `speech.H1` informa que a conversa continua a composição do perfil. Preserve essas referências e os comentários `@dryland-section`/`@dryland-end`. Ao retomar, o EventBridge extrai os comandos visuais anteriores à caixa atual e os entrega ao próprio VNPictureBusts. Texto, escolhas, waits e ações da campanha não são repetidos. Referências ausentes, ciclos e mistura de conversas continuam sendo erros estruturais.
 
-`@visualFrom profile.H1` em `speech.H1` herda a composição visual do perfil. As referências do Conselho herdam entrada do elenco e de Ivaí; a seção atual aplica sua intervenção ou foco. A reconstrução percorre somente comandos visuais e condições permitidas, sem executar texto, decisões ou checkpoints. Referências ausentes, ciclos e relações entre conversas diferentes são recusados pela validação. Ao criar uma nova participação visual, escreva os comandos na própria seção; ao continuar uma existente, reutilize sua fonte.
+A retomada reconstrói o **resultado final** dos comandos, com duração zero. Animações pontuais de batalha não se repetem; efeitos contínuos podem reiniciar seu ciclo. Expressões dos campos `:eval` são código do autor e podem ser avaliadas novamente: use apenas cálculos sem efeitos colaterais. Valores dependentes de tempo, aleatoriedade ou estado alterado podem produzir outro resultado. Não use esses campos para alterar a campanha.
 
-Cada auxiliar tem trigger **None** e comentário `@dryland-presentation-helper <nome>`. Admite Enter, Exit, Scale, Move e Tone do VNPictureBusts, **Focus** do EventBridge, chamadas acíclicas a auxiliares, waits de até 60 frames e condições de igualdade das projeções 144–146. Preserve os comentários 657 do editor. Argumentos numéricos são literais; não use Script ou expressões nos argumentos `:eval`.
+Cada auxiliar mantém trigger **None** e comentário `@dryland-presentation-helper <nome>`. Comandos do VNPictureBusts e seus parâmetros são livres; chamadas a auxiliares devem ser acíclicas. Os ramos de elenco usam as projeções 144–146, sem escrever nelas. Show Text, escolhas, scripts e ações da campanha pertencem aos seus trechos narrativos e de domínio, não aos auxiliares visuais. Os diagnósticos e limites próprios do fornecedor continuam aplicáveis.
 
-Se acrescentar **Wait** imediatamente após **Focus** dentro de um auxiliar, a espera não pode exceder **Duração da troca de foco**. Ao reduzir esse parâmetro, revise as esperas que tiver adicionado; duração 0 admite somente espera 0. Os auxiliares atuais não contêm esperas após Focus.
+**Conversation** delimita a conversa e a limpeza. Imagens aguardam o carregamento real, com Retry nativo. Movimento reduzido elimina durações e waits de apresentação; HIDE conserva os bustos e oculta a interface. O EventBridge não altera engine nem arquivos da VisuStella.
 
-**Conversation** continua responsável pela duração da conversa e por limpar seus retratos. Nenhum auxiliar pode abrir uma conversa por conta própria. Imagens aguardam o carregamento real, com **Retry** nativo quando necessário; movimento reduzido usa os mesmos alvos sem animação. HIDE mantém a arte e oculta a interface. Cancelamento e skip conservam os limites da narrativa.
-
-`IT-067` verifica edição de posição/escala, retorno de Opções e Continuar com uma caixa inserida; `IT-068` usa a [fixture técnica 2×2](tests/fixtures/vn-picture-busts-2x2/recipe.json) para testar os quatro focos, repetição, HIDE e saída no MZ real. A fixture não acrescenta história à campanha.
+`IT-067` verifica autoria e caixas inseridas; `IT-068` cobre foco manual, HIDE e saída na fixture 2×2; `IT-069` cobre parâmetros antes bloqueados, comandos adicionais, outro Picture ID, Opções e Continue. A [verificação do incremento](../planos/tasks/vn-native-bust-authorship/verification.md) registra os resultados efetivamente executados.
 
 Os scripts de migração em `planos/tasks/` são registros de transformações pontuais. Não os execute novamente para editar o jogo: `CommonEvents.json` salvo no editor é a fonte atual.
 

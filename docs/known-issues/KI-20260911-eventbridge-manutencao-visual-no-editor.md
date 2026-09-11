@@ -1,5 +1,7 @@
 # Limitação conhecida: manutenção visual do EventBridge ainda depende de JavaScript
 
+> Atualização de contrato em 2026-09-11: [autoria nativa de bustos](../../planos/tasks/vn-native-bust-authorship/spec.md) substitui o foco automático e os cinco controles do EventBridge por comandos VNPictureBusts nos eventos. As referências a esses controles abaixo são históricas. A ampliação de participantes e as demais pendências não são implementadas por essa mudança.
+
 Data: 2026-09-11. Estado: **adiado; sem implementação, prazo ou compromisso neste incremento**. Público: Edney, UI/UX e Technical Art.
 
 ## Contexto e objetivo
