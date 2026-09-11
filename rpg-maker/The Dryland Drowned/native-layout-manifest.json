@@ -1,5 +1,5 @@
 {
-  "nativeLayoutVersion": "mz-20260910-retirement-01",
+  "nativeLayoutVersion": "mz-20260911-focus-parameters-02",
   "revisions": {
     "mz-20260909-01": "97b455b26e373fedc6ce4e22747f9ded757168841e82cab99e372ac1b4c14ce8",
     "mz-20260909-02": "616367f7be1dbdff758fd900cb32112a5122ea6f8ed102119a1d92a608472446",
@@ -23,10 +23,20 @@
     "mz-20260909-20": "526c1c6abf536e4778c83c3d9aa682391ca67c330196a99c5bea6f59706fe664",
     "mz-20260909-21": "deb47a09b0312d8692ea4cbd3b819bab3157a2524d21461c5e7a269427f4f9da",
     "mz-20260910-22": "5df7c4c95a96797540bbead10c65dc29dd9f437ce4f98d8fe45a0112adf1216e",
-    "mz-20260910-retirement-01": "e5bfc21ff2250caa17291ecf7139269b28a50a3af83a8a73001a5e1d4b7af150"
+    "mz-20260910-retirement-01": "e5bfc21ff2250caa17291ecf7139269b28a50a3af83a8a73001a5e1d4b7af150",
+    "mz-20260911-busts-tavern-01": "5a26630c016c09416ff34fe510133e7102d933b3325426a2068f97bcfda7c7bf",
+    "mz-20260911-busts-council-01": "7c30caabbfbebbec50c6235ef47bc42e6e377c3978f86e19db331fc4f6824018",
+    "mz-20260911-busts-complete-01": "798529b2707fd80b0e87ee3f6fe2b5944ae22ed395f2c5d505cff2c016e39ec3",
+    "mz-20260911-busts-recovery-01": "3038b7d8e1bc728beb9ddd911c48486d6433c21b13365d4225e5420ca22db4c0",
+    "mz-20260911-busts-native-01": "3038b7d8e1bc728beb9ddd911c48486d6433c21b13365d4225e5420ca22db4c0",
+    "mz-20260911-slot-authorship-01": "7f9af3a0990d41631df3daf00fb6b2572fa373b66b33b57721b22c0b2bc67a11",
+    "mz-20260911-slot-authorship-02": "990804b24e37930869802cf89b45a45d5b31c8605aa550ad35af8def03225ab5",
+    "mz-20260911-slot-authorship-03": "cd761b82e60a164d312f71f70342f90cbf5591538b77719c31534f298eff4a10",
+    "mz-20260911-focus-parameters-01": "a04197a5ee61d27eda42cf9eac15c2bacb17cde6aab92af9f3385b89d8aaf8e1",
+    "mz-20260911-focus-parameters-02": "7db3510fe7039b769346af87b8b2ba177e0fcb4b3ec2d738338d2bce30db52e1"
   },
   "files": {
-    "data/CommonEvents.json": "6c596afcf52429d941c8db2e4124d5a4ec04a67e0e21176e946a79eeeaa77280",
+    "data/CommonEvents.json": "6448bfab20d66fabeb66dd90e3af985eef888cf6e8df6de0593d68e8469a1b1c",
     "data/Map001.json": "7ab36e9cf1590617f2ac56eadbd07803433677bffea7810be4a1775b9b469cdc",
     "data/Map002.json": "4b9b1ff70419ec775b699686b0f7b21bdc7fd4e0e8da0ba91060b60dc611b975",
     "data/Map003.json": "982f7abd781b4f8d14c5363c82233fe93980a965278767dadff0bf530fff77bf",
@@ -64,7 +74,7 @@
     "data/Map035.json": "fd23d704a4b94cc3d29194e5b712dbf341560bdffcc515143f22d22b8f5ace80",
     "data/Map036.json": "60813f000602a8c1fd7e40c0ed55cb9e1e26a9931682a423c0b76beceb7f2212",
     "data/MapInfos.json": "f5b68c23f624ac9ff109403a7f3743b02d8e066a79b3299ed29d2230ec71ac7c",
-    "data/System.json": "69456c9fc529b11777653a20c19d0b4b118f71dbabd6c90bd7cca0ac2819236e"
+    "data/System.json": "7f0234c5dbe3611c65ca48d2a9ddcc3d5c18123e01305473b8eb69741da66753"
   },
   "assets": [
     "audio/bgm/Battle1.ogg",

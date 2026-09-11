@@ -1,0 +1,52 @@
+{
+  "scope": "Local implementation review, not a release or visual acceptance verdict.",
+  "date": "2026-09-11",
+  "base": "ab25a3acd545f28cf9e1e6a735efdbad6c80e965",
+  "nativeRevision": "mz-20260911-busts-native-01",
+  "eventBridgeSha256": "7b161464b1ccb489a01502ce8bae57fa4ba2c13fc46ea8ad30c953d984736e55",
+  "review": {
+    "verdict": "SHIP for reviewed code scope",
+    "paths": 75,
+    "inheritedHunks": 139,
+    "deltaHunks": 6,
+    "lenses": 7,
+    "confirmedOpenDefects": 0,
+    "rawArtifact": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/review-20260911-round2/findings.json",
+    "rawArtifactSha256": "3d71e52d67c0167a3d41309d0b009129b33cd42904f4412094c0c3615c05e871"
+  },
+  "resolved": [
+    {
+      "id": "RD0001",
+      "bug": "docs/qa/bugs/BUG-20260911-ownerless-bust-helper.md",
+      "reproduction": "Native IT-068 failed before fix; passed after marked helper and Present ownership guards."
+    }
+  ],
+  "suppressed": [
+    {
+      "id": "RD0002",
+      "reason": "No harmful path at approved checkpoint boundaries; proposed harmful checkpoint was outside the authored contract."
+    }
+  ],
+  "deslop": {
+    "scope": "Parent inspected current branch diff and new source plus independent review; retained literal validation and real native lifecycle guards, no type casts/lint suppressions/swallowed errors or broad rewriting introduced by cleanup.",
+    "result": "No additional cleanup needed in reviewed implementation."
+  },
+  "human_accepted": false,
+  "limitations": [
+    "Required V007 visible lover prisons fail under locked-art contract.",
+    "Required V008 editor parameter acceptance unverified because CUA could not access the running MZ window.",
+    "Full post-fix suite and post-review directed lot completion recorded separately in the QA report."
+  ],
+  "temporalObserverDelta": {
+    "artifact": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/review-20260911-round2/qa-temporal-delta.json",
+    "sha256": "058f58ab802b365863daeafc06794d7eb94a571e5cabac44913702326cd44e97",
+    "result": "clear_delta; exercised in both current T lots"
+  },
+  "fullSuite": {
+    "passed": 138,
+    "failed": 0,
+    "skipped": 0,
+    "cliExit": 0,
+    "run": "2026-09-11T10-36-54-403Z"
+  }
+}

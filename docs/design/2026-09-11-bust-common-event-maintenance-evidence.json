@@ -1,0 +1,296 @@
+{
+  "capturedAt": "2026-09-11T13:58:22.749774+00:00",
+  "method": "Read-only structured JSON comparison and installed source/header inspection; no runtime replay or mutation.",
+  "families": [
+    {
+      "family": "tavern",
+      "first": 68,
+      "last": 94,
+      "events": 27,
+      "commandRecords": 190,
+      "vendorCommands": 134,
+      "branches": 0,
+      "commonEventCalls": 0
+    },
+    {
+      "family": "council",
+      "first": 95,
+      "last": 108,
+      "events": 14,
+      "commandRecords": 1294,
+      "vendorCommands": 782,
+      "branches": 240,
+      "commonEventCalls": 1
+    },
+    {
+      "family": "lovers",
+      "first": 109,
+      "last": 111,
+      "events": 3,
+      "commandRecords": 16,
+      "vendorCommands": 9,
+      "branches": 0,
+      "commonEventCalls": 0
+    },
+    {
+      "family": "restore",
+      "first": 112,
+      "last": 215,
+      "events": 104,
+      "commandRecords": 411,
+      "vendorCommands": 0,
+      "branches": 0,
+      "commonEventCalls": 203
+    }
+  ],
+  "newHelpers": 148,
+  "restoration": {
+    "events": 104,
+    "distinctBodies": 38,
+    "duplicateRedundancy": 66,
+    "groups": [
+      [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117
+      ],
+      [
+        118,
+        120
+      ],
+      [
+        119,
+        121,
+        122
+      ],
+      [
+        123
+      ],
+      [
+        124,
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      [
+        130,
+        132
+      ],
+      [
+        131,
+        133,
+        134
+      ],
+      [
+        135
+      ],
+      [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141
+      ],
+      [
+        142,
+        144
+      ],
+      [
+        143,
+        145,
+        146
+      ],
+      [
+        147
+      ],
+      [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153
+      ],
+      [
+        154,
+        156
+      ],
+      [
+        155,
+        157,
+        158
+      ],
+      [
+        159
+      ],
+      [
+        160,
+        161,
+        162,
+        163,
+        164,
+        165
+      ],
+      [
+        166,
+        168
+      ],
+      [
+        167,
+        169,
+        170
+      ],
+      [
+        171
+      ],
+      [
+        172,
+        173,
+        174,
+        175,
+        176,
+        177
+      ],
+      [
+        178,
+        180
+      ],
+      [
+        179,
+        181,
+        182
+      ],
+      [
+        183
+      ],
+      [
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      [
+        190,
+        192
+      ],
+      [
+        191,
+        193,
+        194
+      ],
+      [
+        195
+      ],
+      [
+        196,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      [
+        202,
+        204
+      ],
+      [
+        203,
+        205,
+        206
+      ],
+      [
+        207
+      ],
+      [
+        208,
+        209
+      ],
+      [
+        210,
+        211
+      ],
+      [
+        212
+      ],
+      [
+        213
+      ],
+      [
+        214
+      ],
+      [
+        215
+      ]
+    ],
+    "comparison": "Exact commands excluding unique leading marker and terminal command; no semantic inlining."
+  },
+  "projectX": {
+    "mapEvents": 12,
+    "focusEvents": [
+      {
+        "id": 7,
+        "name": "Fala-ID1",
+        "trigger": 2,
+        "switchId": 43
+      },
+      {
+        "id": 8,
+        "name": "Fala-ID2",
+        "trigger": 2,
+        "switchId": 44
+      },
+      {
+        "id": 9,
+        "name": "Fala-ID3",
+        "trigger": 2,
+        "switchId": 45
+      },
+      {
+        "id": 10,
+        "name": "Fala-ID4",
+        "trigger": 2,
+        "switchId": 46
+      }
+    ],
+    "vnPluginIdentical": true
+  },
+  "sources": [
+    {
+      "path": "rpg-maker/The Dryland Drowned/data/CommonEvents.json",
+      "sha256": "1f9b6362f9c7e2b377b598822078c4114994cb2f00fdf675590e0546a0ee062f"
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js",
+      "sha256": "7b161464b1ccb489a01502ce8bae57fa4ba2c13fc46ea8ad30c953d984736e55"
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/js/plugins/VisuMZ_2_VNPictureBusts.js",
+      "sha256": "a4013494d5bd7d996cc39ce00e4817c93d96c54a7c32782ae666ef55a42d203c"
+    },
+    {
+      "path": "docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md",
+      "sha256": "649914e3a9704116bd283f57df11dd1e94916f43ece36881dd0b074af1eff4a9"
+    },
+    {
+      "path": "/Users/edney/projects/coreto/projectX/frontend/data/Map020.json",
+      "sha256": "e2777d1a239af0304bcc03ecd37bf066b995ce4ff60e5cdce5216f8156cff42f"
+    },
+    {
+      "path": "/Users/edney/projects/coreto/projectX/frontend/data/CommonEvents.json",
+      "sha256": "ed899d649549079a9c71886b515554b99ad810a247aad3bf4f16ab0ed003a336"
+    },
+    {
+      "path": "/Users/edney/projects/coreto/projectX/frontend/js/plugins/VisuMZ_2_VNPictureBusts.js",
+      "sha256": "a4013494d5bd7d996cc39ce00e4817c93d96c54a7c32782ae666ef55a42d203c"
+    }
+  ],
+  "proposedCounts": "82 after exact restoration-body deduplication requires changed native binding/resolver; about25–30 for recommended larger refactor is an architectural estimate, not a measured implementation result."
+}

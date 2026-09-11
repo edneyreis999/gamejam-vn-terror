@@ -146,7 +146,7 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
     await browser.screenshot(`${evidence}/candidates-${count}.png`);
     await activate(browser, 'sacrifice', count - 1);
     const victim = state.partyIds[count - 1];
-    await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === ${JSON.stringify(catalog.heroes[victim].name)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0 && $gameScreen.picture(18)?.name() === 'Dryland_${victim}'`);
+    await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === ${JSON.stringify(catalog.heroes[victim].name)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0 && $gameScreen.picture(60)?.name() === 'Dryland_${victim}'`);
     const after = await snapshot(browser);
     assert.deepEqual(after.deadHeroIds, [...state.deadHeroIds, victim]);
     assert.equal(after.sequence, state.sequence + 1);
@@ -156,7 +156,7 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
     await browser.screenshot(`${evidence}/farewell-${count}.png`);
     await browser.press('Enter', 13);
     await pause(browser);
-    assert.equal(await browser.evaluate('$gameScreen.picture(18) == null'), true);
+    assert.equal(await browser.evaluate('$gameScreen.picture(60) == null'), true);
     assert.equal(await browser.evaluate('$gameMessage.speakerName()'), '');
     assert.equal((await snapshot(browser)).deadHeroIds.length, state.deadHeroIds.length + 1);
     await browser.screenshot(`${evidence}/context-${count}.png`);

@@ -4,9 +4,11 @@ import { cp, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { validateNativeArchive, sha256 } from '../../qa/native-save-archive.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, pause, rules, tavern } from '../helpers/formation.mjs';
-import { accepted, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
+import { act, activate, choices, events, pause, rules, tavern } from '../helpers/formation.mjs';
+import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
+import { closingReady, councilState, installClosing } from '../helpers/closing.mjs';
 import { openChrome, origin, project, startServer } from '../helpers/native-chrome.mjs';
 import { hash, localAssets, nativeFiles } from '../../tools/native-layout.mjs';
 const require = createRequire(import.meta.url);
@@ -348,4 +350,92 @@ canonicalCase('IT-059', 'all native layout changes reject old nested saves befor
     assert.deepEqual((await snapshot(browser)).deadHeroIds, []);
     await browser.evaluate(`StorageManager.saveZip('file0',${JSON.stringify(bytes)})`);
   }
+});
+
+canonicalCase('IT-062','native Continue rebuilds missing conversation pictures from saved presentation stacks without replaying displayed text',{timeout:180000},async t=>{
+ const browser=await tavern(t);
+ const text=events[5].list.filter(c=>c.code===401).slice(0,7).map(c=>c.parameters[0]);
+ await browser.evaluate(`window.bustSaveHold=false;window.bustSaveHeld=false;
+  const execute=Game_Interpreter.prototype.executeCommand;
+  Game_Interpreter.prototype.executeCommand=function(){const c=this.currentCommand();if(bustSaveHold&&c?.code===357&&c.parameters[0]==='VisuMZ_2_VNPictureBusts'&&c.parameters[1]==='Tone_NormalBust'){bustSaveHeld=true;return false;}return execute.call(this);};`);
+ for(const savedBox of [-1,0,2]){
+  await browser.evaluate(`bustSaveHold=${savedBox===-1};bustSaveHeld=false;`);
+  await activate(browser,'formation',0);await activate(browser,'hero',0);
+  for(let box=0;box<=savedBox;box++){
+   await browser.waitFor(`$gameMessage.allText()===${JSON.stringify(text[box])}&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+   if(box<savedBox)await browser.press('Enter',13);
+  }
+  if(savedBox===-1)await browser.waitFor('bustSaveHeld');
+  const before=await snapshot(browser);
+  // Synthetic active-text save: this exercises native serialization and load,
+  // not a new player checkpoint. Remove only transient visual fixture state.
+  await browser.evaluate('for(let id=60;id<=65;id++)$gameScreen.erasePicture(id);');
+  await browser.evaluate('DataManager.saveGame(0)');const bytes=await savedBytes(browser);
+  await toTitle(browser);await browser.evaluate('bustSaveHold=false;ImageManager.clear();');await browser.press('Enter',13);
+  await browser.waitFor(`$gameMessage.allText()===${JSON.stringify(text[savedBox+1])}&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+  assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'),'Dryland_H1');
+  assert.equal(await browser.evaluate('$gameScreen.picture(63)?.name()||null'),savedBox>=2?'Dryland_ivai':null);
+  assert.deepEqual(await snapshot(browser),before);assert.equal(await savedBytes(browser),bytes);
+  await browser.screenshot(`${evidence('IT-062')}/continued-box-${savedBox+1}.png`);
+  for(let box=savedBox+1;box<7;box++){await pause(browser);await browser.press('Enter',13);}
+  await pause(browser);await browser.press('Enter',13);await choices(browser,'formation');
+ }
+});
+
+canonicalCase('IT-063','continued Council stages restore derived roster and helper effects while native completion advances exactly once',{timeout:240000},async t=>{
+ const browser=await tavern(t);
+ for(const [kind,target] of [['collective','council.challenge'],['collective','council.confession'],['collective','council.andira'],['collective','opinion.H1'],['collective','opinion.H2'],['solo','council.solo']]){
+  await installClosing(browser,councilState(kind));
+  for(let step=0;step<12;step++){
+   await closingReady(browser);const current=await snapshot(browser);
+   if(current.reading.passageIds[current.reading.index]===target)break;
+   await browser.press('Enter',13);
+  }
+  const before=await snapshot(browser);assert.equal(before.reading.passageIds[before.reading.index],target);
+  await browser.evaluate('for(let id=60;id<=65;id++)$gameScreen.erasePicture(id);[144,145,146].forEach((id,index)=>$gameVariables.setValue(id,8-index));');
+  await browser.evaluate('DataManager.saveGame(0)');const bytes=await savedBytes(browser);
+  await toTitle(browser);await browser.press('Enter',13);await closingReady(browser);
+  const after=await snapshot(browser);assert.deepEqual(after,complete(before));assert.equal(await savedBytes(browser),bytes);
+  const next=after.reading.passageIds[after.reading.index];
+  const heroes=next==='council.andira'?[]:after.climaxPartyIds;
+  assert.deepEqual(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)?.name()||null)'),[...Array.from({length:3},(_,i)=>heroes[i]?`Dryland_${heroes[i]}`:null),'Dryland_ivai',null,next==='council.andira'?'Dryland_andira':null]);
+  assert.deepEqual(await browser.evaluate('[144,145,146].map(id=>$gameVariables.value(id))'),Array.from({length:3},(_,i)=>after.climaxPartyIds[i]?Number(after.climaxPartyIds[i].slice(1)):0));
+  await browser.screenshot(`${evidence('IT-063')}/${kind}-${target}-continued.png`);
+ }
+});
+
+canonicalCase('UT-069','native QA archives reject changed source, revision, origin and payload/index without mutating their master',()=>{
+ const files=[{path:'data/System.json',sha256:'source'}];
+ const archive={schemaVersion:1,origin:'http://127.0.0.1:18727',layout:'native-current',sourceFiles:files,keys:{payload:'native.file0',index:'native.global'},payloadSha256:sha256('payload'),indexSha256:sha256('index'),storageState:{origins:[{indexedDB:[{stores:[{records:[{key:'native.file0',value:'payload'},{key:'native.global',value:'index'}]}]}]}]}};
+ const baseline=structuredClone(archive);
+ validateNativeArchive(archive,files,archive.origin,archive.layout);
+ for(const [change,expected] of [
+  [value=>value.sourceFiles[0].sha256='changed',/sources changed/],
+  [value=>value.layout='native-older',/revision is incompatible/],
+  [value=>value.origin='http://127.0.0.1:18726',/strictly equal/],
+  [value=>value.storageState.origins[0].indexedDB[0].stores[0].records[0].value='changed',/strictly equal/],
+  [value=>value.storageState.origins[0].indexedDB[0].stores[0].records[1].value='changed',/strictly equal/]
+ ]){const edited=structuredClone(archive);change(edited);assert.throws(()=>validateNativeArchive(edited,files,archive.origin,archive.layout),expected);}
+ assert.deepEqual(archive,baseline);
+});
+
+canonicalCase('IT-066','cancelling a cold post-load reconstruction invalidates its queued image and private helper without touching the save',{timeout:90000},async t=>{
+ const browser=await tavern(t);await activate(browser,'formation',0);await activate(browser,'hero',0);await pause(browser);
+ const before=await snapshot(browser);
+ // Remove transient pictures so the private restoration helper, rather than
+ // Scene_Map's initial sprite loading, owns the held cold image request.
+ await browser.evaluate('for(let id=60;id<=65;id++)$gameScreen.erasePicture(id);DataManager.saveGame(0)');const bytes=await savedBytes(browser);
+ await toTitle(browser);
+ await browser.evaluate(`ImageManager.clear();window.cancelledRecovery=false;
+  const update=Game_Map.prototype.updateInterpreter;Game_Map.prototype.updateInterpreter=function(){if(!cancelledRecovery)update.call(this);};
+  const start=Bitmap.prototype._startLoading;Bitmap.prototype._startLoading=function(){if(this._url.endsWith('/Dryland_H1.png')&&!window.resumeRecoveryImage){this._loadingState='loading';window.resumeRecoveryImage=()=>start.call(this);}else start.call(this);};`);
+ await titleChoice(browser,'Continuar');await browser.waitFor('typeof resumeRecoveryImage==="function"&&$gameMap.mapId()===3');
+ assert.equal(await browser.evaluate('$gameMessage.hasText()'),false,'Recovery waits for the actual required bitmap.');
+ await browser.evaluate(`$gameScreen.showPicture(18,'Dryland_H2',0,20,30,10,10,255,0);cancelledRecovery=true;$gameMap._interpreter.clear();$gameMessage.clear();resumeRecoveryImage();`);
+ await browser.waitFor('ImageManager.isReady()');await browser.evaluate('new Promise(resolve=>{let frames=45;const tick=()=>--frames?requestAnimationFrame(tick):resolve();requestAnimationFrame(tick);})');
+ assert.equal(await browser.evaluate('[60,61,62,63,64,65].every(id=>!$gameScreen.picture(id))'),true);
+ assert.equal(await browser.evaluate('$gameScreen.picture(18).name()'),'Dryland_H2');
+ assert.equal(await browser.evaluate('$gameMessage.hasText()'),false);
+ assert.deepEqual(await snapshot(browser),before);assert.equal(await savedBytes(browser),bytes);
+ await browser.screenshot(`${evidence('IT-066')}/cancelled-cold-reconstruction.png`);
 });

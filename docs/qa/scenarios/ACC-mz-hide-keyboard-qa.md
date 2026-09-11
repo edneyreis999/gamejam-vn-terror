@@ -25,3 +25,11 @@ Retomada 2026-09-09: BUG-20260909-hide-overlapping-choices corrigido e verificad
 Retomada atual: HIDE/opções e QA somente leitura passaram; área maior/reduced motion executados. Zoom específico permanece pendente.
 
 Retomada adicional: zoom real110% executado e inspecionado, área efetiva1555×874 CSS. Tradução da ajuda das opções verificada nas duas áreas, com IT-028 passando. Esta atualização substitui as pendências históricas de zoom/opções acima. Ver lotes directed-zoom e directed-current-package do mesmo ciclo.
+
+## Incremento vn-picture-busts-dialogues — 2026-09-11
+
+Estado deste incremento: **PASS no escopo de D06/D10: controles e interrupções, com evidência dirigida retida e integrações da suíte atual**. O `qa_status` e o aceite humano acima pertencem à baseline indicada em seu relatório; não são promovidos para os novos bustos. D06/D10: HIDE conserva arte, restauração consome Tab/clique, S somente visto, cancelamento não ressuscita pictures. LoteU dirigido; loteX explicitamente integração.
+
+[Guia e variantes](../guides/vn-picture-busts-dialogues.md) · [Charter](../charters/CH-vn-picture-busts-dialogues.md). A tarefa09 registra evidência e veredito incremental sem apagar o histórico. Fonte relevante alterada reabre somente os sensores afetados.
+
+Resultado consolidado no [relatório de2026-09-11](../reports/2026-09-11-vn-picture-busts-dialogues.md). A cobertura atual e a retenção qualificada das capturas anteriores estão separadas; nenhum aceite humano desta composição é alegado.

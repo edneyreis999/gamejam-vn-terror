@@ -1,0 +1,642 @@
+{
+  "scope": "Isolated technical fixture; no canonical story. Local helper IDs are relocated when preparing the disposable project.",
+  "transcript": [
+    {
+      "slot": 60,
+      "speaker": "Gorvak",
+      "text": "Fixture técnica 2x2 — fala 1. Sem conteúdo de campanha."
+    },
+    {
+      "slot": 61,
+      "speaker": "Elowen",
+      "text": "Fixture técnica 2x2 — fala 2. Sem conteúdo de campanha."
+    },
+    {
+      "slot": 63,
+      "speaker": "Ivaí",
+      "text": "Fixture técnica 2x2 — fala 3. Sem conteúdo de campanha."
+    },
+    {
+      "slot": 64,
+      "speaker": "Pérola",
+      "text": "Fixture técnica 2x2 — fala 4. Sem conteúdo de campanha."
+    },
+    {
+      "slot": 64,
+      "speaker": "Pérola",
+      "text": "Fixture técnica 2x2 — fala 5. Sem conteúdo de campanha."
+    }
+  ],
+  "helpers": [
+    {
+      "id": 1,
+      "name": "fixture.2x2.enter",
+      "list": [
+        {
+          "code": 108,
+          "indent": 0,
+          "parameters": [
+            "@dryland-presentation-helper fixture.2x2.enter"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "60",
+              "PictureName:str": "Dryland_H1",
+              "Origin:str": "Bust",
+              "Position:num": "2",
+              "StartOffsetX:eval": "-32",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "20"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "TargetX:str": "210",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_NormalBust",
+            "Tone_NormalBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "61",
+              "PictureName:str": "Dryland_H2",
+              "Origin:str": "Bust",
+              "Position:num": "2",
+              "StartOffsetX:eval": "-32",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "20"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "TargetX:str": "470",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "customTone:eval": "[-24,-24,-24,0]",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "63",
+              "PictureName:str": "Dryland_ivai",
+              "Origin:str": "Bust",
+              "Position:num": "8",
+              "StartOffsetX:eval": "-32",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "20"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "TargetX:str": "810",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "customTone:eval": "[-24,-24,-24,0]",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "64",
+              "PictureName:str": "Dryland_perola",
+              "Origin:str": "Bust",
+              "Position:num": "8",
+              "StartOffsetX:eval": "0",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "20"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "TargetX:str": "1100",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "customTone:eval": "[-24,-24,-24,0]",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 0,
+          "indent": 0,
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "fixture.2x2.focus.60",
+      "list": [
+        {
+          "code": 108,
+          "indent": 0,
+          "parameters": [
+            "@dryland-presentation-helper fixture.2x2.focus.60"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "Dryland_EventBridge",
+            "Focus",
+            "Focus",
+            {
+              "slot": "60"
+            }
+          ]
+        },
+        {
+          "code": 0,
+          "indent": 0,
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "fixture.2x2.focus.61",
+      "list": [
+        {
+          "code": 108,
+          "indent": 0,
+          "parameters": [
+            "@dryland-presentation-helper fixture.2x2.focus.61"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "Dryland_EventBridge",
+            "Focus",
+            "Focus",
+            {
+              "slot": "61"
+            }
+          ]
+        },
+        {
+          "code": 0,
+          "indent": 0,
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "fixture.2x2.focus.63",
+      "list": [
+        {
+          "code": 108,
+          "indent": 0,
+          "parameters": [
+            "@dryland-presentation-helper fixture.2x2.focus.63"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "Dryland_EventBridge",
+            "Focus",
+            "Focus",
+            {
+              "slot": "63"
+            }
+          ]
+        },
+        {
+          "code": 0,
+          "indent": 0,
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "fixture.2x2.focus.64",
+      "list": [
+        {
+          "code": 108,
+          "indent": 0,
+          "parameters": [
+            "@dryland-presentation-helper fixture.2x2.focus.64"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "Dryland_EventBridge",
+            "Focus",
+            "Focus",
+            {
+              "slot": "64"
+            }
+          ]
+        },
+        {
+          "code": 0,
+          "indent": 0,
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "fixture.2x2.exit",
+      "list": [
+        {
+          "code": 108,
+          "indent": 0,
+          "parameters": [
+            "@dryland-presentation-helper fixture.2x2.exit"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_ExitBusts",
+            "Basic_ExitBusts",
+            {
+              "PictureID:arrayeval": "[\"60\",\"61\",\"63\",\"64\"]",
+              "EndOffsetX:eval": "0",
+              "EndOffsetY:eval": "0",
+              "EasingType:str": "InSine",
+              "FlipDirection:str": "None",
+              "Duration:eval": "20",
+              "AutoErase:eval": "true"
+            }
+          ]
+        },
+        {
+          "code": 230,
+          "indent": 0,
+          "parameters": [
+            20
+          ]
+        },
+        {
+          "code": 0,
+          "indent": 0,
+          "parameters": []
+        }
+      ]
+    }
+  ],
+  "root": [
+    {
+      "code": 357,
+      "indent": 0,
+      "parameters": [
+        "Dryland_EventBridge",
+        "Conversation",
+        "Conversation",
+        {
+          "kind": "council",
+          "operation": "begin",
+          "slots": "60,61,63,64"
+        }
+      ]
+    },
+    {
+      "code": 117,
+      "indent": 0,
+      "parameters": [
+        1
+      ]
+    },
+    {
+      "code": 117,
+      "indent": 0,
+      "parameters": [
+        2
+      ]
+    },
+    {
+      "code": 101,
+      "indent": 0,
+      "parameters": [
+        "",
+        0,
+        0,
+        2,
+        "Gorvak"
+      ]
+    },
+    {
+      "code": 401,
+      "indent": 0,
+      "parameters": [
+        "Fixture técnica 2x2 — fala 1. Sem conteúdo de campanha."
+      ]
+    },
+    {
+      "code": 117,
+      "indent": 0,
+      "parameters": [
+        3
+      ]
+    },
+    {
+      "code": 101,
+      "indent": 0,
+      "parameters": [
+        "",
+        0,
+        0,
+        2,
+        "Elowen"
+      ]
+    },
+    {
+      "code": 401,
+      "indent": 0,
+      "parameters": [
+        "Fixture técnica 2x2 — fala 2. Sem conteúdo de campanha."
+      ]
+    },
+    {
+      "code": 117,
+      "indent": 0,
+      "parameters": [
+        4
+      ]
+    },
+    {
+      "code": 101,
+      "indent": 0,
+      "parameters": [
+        "",
+        0,
+        0,
+        2,
+        "Ivaí"
+      ]
+    },
+    {
+      "code": 401,
+      "indent": 0,
+      "parameters": [
+        "Fixture técnica 2x2 — fala 3. Sem conteúdo de campanha."
+      ]
+    },
+    {
+      "code": 117,
+      "indent": 0,
+      "parameters": [
+        5
+      ]
+    },
+    {
+      "code": 101,
+      "indent": 0,
+      "parameters": [
+        "",
+        0,
+        0,
+        2,
+        "Pérola"
+      ]
+    },
+    {
+      "code": 401,
+      "indent": 0,
+      "parameters": [
+        "Fixture técnica 2x2 — fala 4. Sem conteúdo de campanha."
+      ]
+    },
+    {
+      "code": 101,
+      "indent": 0,
+      "parameters": [
+        "",
+        0,
+        0,
+        2,
+        "Pérola"
+      ]
+    },
+    {
+      "code": 401,
+      "indent": 0,
+      "parameters": [
+        "Fixture técnica 2x2 — fala 5. Sem conteúdo de campanha."
+      ]
+    },
+    {
+      "code": 117,
+      "indent": 0,
+      "parameters": [
+        6
+      ]
+    },
+    {
+      "code": 357,
+      "indent": 0,
+      "parameters": [
+        "Dryland_EventBridge",
+        "Conversation",
+        "Conversation",
+        {
+          "kind": "council",
+          "operation": "end"
+        }
+      ]
+    },
+    {
+      "code": 0,
+      "indent": 0,
+      "parameters": []
+    }
+  ]
+}

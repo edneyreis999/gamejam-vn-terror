@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "artifact": "council-bank-ledger",
+  "generatedOn": "2026-09-11",
+  "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/council-bank-ledger-20260911.json",
+  "scope": {
+    "currentEvidenceWindow": "2026-09-11 producer C runs 09:57:16.756Z–10:13:18.244Z; consumer R runs 09:59:22.148Z–10:15:01.187Z",
+    "producerRuns": 8,
+    "consumerRuns": 8,
+    "pairRuns": 8,
+    "excludedFailedRun": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-56-43-911Z",
+    "excludedFailedRunReason": "outside the requested 09:57–10:15 evidence window",
+    "c1r1PriorMeaning": "C1/R1 is the H1/H2/H3 producer-consumer pair captured before final-lots; final-lots run.mjs deliberately iterates recipes.slice(1)."
+  },
+  "evidenceSemantics": {
+    "executorStatus": "executed-awaiting-review",
+    "runtimeAssertionsOnly": true,
+    "visualLedger": {
+      "separate": true,
+      "acceptanceClaim": false,
+      "reviewStatus": "pending in each consumer report",
+      "pendingReviewText": "Inspect Council, ending, epilogues and credits."
+    },
+    "finalLotsExitCodes": {
+      "relevantRuns": 14,
+      "allZero": true
+    },
+    "candidateFreshness": {
+      "currentRunEventBridgeSha256": "9288e01288678adfdf36f075c9ef2bf7a97283a6edfb478b44ea7b33a29e1eb4",
+      "observedInAll16Reports": true,
+      "laterCandidateFreshnessClaim": false,
+      "note": "The ledger is bound to hashes retained by these reports. Runtime revisions after the evidence window are outside this claim."
+    }
+  },
+  "sourceSnapshot": {
+    "git": [
+      "ab25a3acd545f28cf9e1e6a735efdbad6c80e965"
+    ],
+    "layout": [
+      "mz-20260911-busts-native-01"
+    ],
+    "descriptorFileHashes": {
+      "data/CommonEvents.json": [
+        "1f9b6362f9c7e2b377b598822078c4114994cb2f00fdf675590e0546a0ee062f"
+      ],
+      "data/System.json": [
+        "7f0234c5dbe3611c65ca48d2a9ddcc3d5c18123e01305473b8eb69741da66753"
+      ],
+      "js/plugins/Dryland_CampaignRules.js": [
+        "9f43fd365b8c7f307efc36f8b7c4216ae0802341120faa2cc96ce6d66615851b"
+      ],
+      "js/plugins/Dryland_EventBridge.js": [
+        "9288e01288678adfdf36f075c9ef2bf7a97283a6edfb478b44ea7b33a29e1eb4"
+      ],
+      "native-layout-manifest.json": [
+        "dcb0b9a0a24fa8a91764cae48badd154348717f6684c6bcda9ead12cb44d9999"
+      ]
+    },
+    "recipeFixture": {
+      "path": "rpg-maker/tests/fixtures/council-bust-recipes.json",
+      "sha256": "6fdaa6aec81236b4945c0ab508917f34616e0c718ce4d39ae818c17f905c3244"
+    }
+  },
+  "finalLots": {
+    "resultCount": 22,
+    "relevantCurrentResultCount": 14,
+    "otherResultIds": [
+      {
+        "id": "bust-tavern",
+        "mode": "normal",
+        "kind": "surface",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T10-15-27-246Z"
+      },
+      {
+        "id": "supernatural-first-destroy",
+        "mode": "normal",
+        "kind": "journey",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-supernatural-first-destroy-2026-09-11T10-17-36-608Z"
+      },
+      {
+        "id": "final-sixth-solo-council",
+        "mode": "normal",
+        "kind": "journey",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-final-sixth-solo-council-2026-09-11T10-19-14-603Z"
+      },
+      {
+        "id": "final-sixth-total-loss",
+        "mode": "normal",
+        "kind": "journey",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-final-sixth-total-loss-2026-09-11T10-21-05-944Z"
+      },
+      {
+        "id": "bust-tavern",
+        "mode": "large-reduced",
+        "kind": "surface",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-bust-tavern-2026-09-11T10-23-24-932Z"
+      },
+      {
+        "id": "supernatural-first-destroy",
+        "mode": "large-reduced",
+        "kind": "journey",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-supernatural-first-destroy-2026-09-11T10-25-45-497Z"
+      },
+      {
+        "id": "final-sixth-solo-council",
+        "mode": "large-reduced",
+        "kind": "journey",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-final-sixth-solo-council-2026-09-11T10-27-57-268Z"
+      },
+      {
+        "id": "final-sixth-total-loss",
+        "mode": "large-reduced",
+        "kind": "journey",
+        "code": 0,
+        "output": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/directed-final-sixth-total-loss-2026-09-11T10-30-18-709Z"
+      }
+    ]
+  },
+  "pairs": [
+    {
+      "pairId": "C1/R1",
+      "priorToFinalLots": true,
+      "finalLotsIncluded": false,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H1",
+          "asset": "Dryland_H1",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H2",
+          "asset": "Dryland_H2",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 62,
+          "heroId": "H3",
+          "asset": "Dryland_H3",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-57-16-756Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T09-59-22-148Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [],
+      "consumerDeadHeroIds": [],
+      "producerCouncilArchiveSha256": "3c9917a6cf6a8a611a4723659b982fbb584ab546ca0c1fbb34f0740e75ebbccb",
+      "consumerTerminalArchiveSha256": "86af6e7e8513e92213adfeaf639369467c3be75360ae18c289d3fbdda33369e4",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C2/R2",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H2",
+        "H3",
+        "H4"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H2",
+          "asset": "Dryland_H2",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H3",
+          "asset": "Dryland_H3",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 62,
+          "heroId": "H4",
+          "asset": "Dryland_H4",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-triple-H2-H3-H4-seed0-2026-09-11T10-00-30-756Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-02-07-701Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [],
+      "consumerDeadHeroIds": [],
+      "producerCouncilArchiveSha256": "336f0c9fd5295e875495fd06dc5f83e245f9d0622eb35c06ff56e1bb177eee62",
+      "consumerTerminalArchiveSha256": "4499dfb49e67b31eac7fb5f4cd2ac9faa961fc85afa34b231305036deb345692",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C3/R3",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 1,
+      "targetCouncilRoster": [
+        "H3",
+        "H4",
+        "H5"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H3",
+          "asset": "Dryland_H3",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H4",
+          "asset": "Dryland_H4",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 62,
+          "heroId": "H5",
+          "asset": "Dryland_H5",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-triple-H3-H4-H5-seed1-2026-09-11T10-02-37-173Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-04-16-159Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [],
+      "consumerDeadHeroIds": [],
+      "producerCouncilArchiveSha256": "9e6749bd29eceaedae14b3e779180b5d7139e6f04cdc6c3feb6e134bbc401208",
+      "consumerTerminalArchiveSha256": "f8b3f601535eff89aa2226b523bf4d72968088b3e9bea5e08d24bf6e05a639b9",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C4/R4",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H4",
+          "asset": "Dryland_H4",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H5",
+          "asset": "Dryland_H5",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 62,
+          "heroId": "H6",
+          "asset": "Dryland_H6",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-triple-H4-H5-H6-seed0-2026-09-11T10-04-45-585Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-06-24-868Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [],
+      "consumerDeadHeroIds": [],
+      "producerCouncilArchiveSha256": "5139c38f3951a69c7c8adaeeb2a96fde5dcceb24838504227ca5cf9dbf0f810b",
+      "consumerTerminalArchiveSha256": "7caf37fd9e11888772e05e701f23ef80dd9255884bcbde205a536978339f75cc",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C5/R5",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H5",
+          "asset": "Dryland_H5",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H6",
+          "asset": "Dryland_H6",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 62,
+          "heroId": "H7",
+          "asset": "Dryland_H7",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-triple-H5-H6-H7-seed0-2026-09-11T10-06-54-256Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-08-30-247Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [],
+      "consumerDeadHeroIds": [],
+      "producerCouncilArchiveSha256": "50a477a911827d147704dd143024fc327046da2bd16f3b3bbf1105a4858152a1",
+      "consumerTerminalArchiveSha256": "9860b35d2d3ab720978f6cc22e6c1cf27630aad7ae035829b55d8f7313a6d542",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C6/R6",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H6",
+          "asset": "Dryland_H6",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H7",
+          "asset": "Dryland_H7",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 62,
+          "heroId": "H8",
+          "asset": "Dryland_H8",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-triple-H6-H7-H8-seed0-2026-09-11T10-08-59-171Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-10-38-646Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [],
+      "consumerDeadHeroIds": [],
+      "producerCouncilArchiveSha256": "82d5bd403e47fe2e677626fc80d6286d7fd6f6e9908ecc655b95309c5349000f",
+      "consumerTerminalArchiveSha256": "6253da51e8aa5b0d81a1413fe7bcc188ce18fa8f813147260ef1d4add62b19d0",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C7/R7",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H7",
+        "H8"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H7",
+          "asset": "Dryland_H7",
+          "actualMatchesExpected": true
+        },
+        {
+          "slot": 61,
+          "heroId": "H8",
+          "asset": "Dryland_H8",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-pair-H7-H8-seed0-2026-09-11T10-11-07-956Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-12-48-892Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [
+        "H6"
+      ],
+      "consumerDeadHeroIds": [
+        "H6"
+      ],
+      "producerCouncilArchiveSha256": "384a257ab0bcf59d0af278b2706b8210ec22a22a5ed47df31d4d371172e352e8",
+      "consumerTerminalArchiveSha256": "4ed2c0c18ce1575d6d276866c26070a0fe758ddc126830d832662c2d84eddd68",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    },
+    {
+      "pairId": "C8/R8",
+      "priorToFinalLots": false,
+      "finalLotsIncluded": true,
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H8"
+      ],
+      "slotPairs": [
+        {
+          "slot": 60,
+          "heroId": "H8",
+          "asset": "Dryland_H8",
+          "actualMatchesExpected": true
+        }
+      ],
+      "producerId": "directed-council-single-H8-seed0-2026-09-11T10-13-18-244Z",
+      "consumerId": "directed-bust-council-continue-2026-09-11T10-15-01-187Z",
+      "producerEndingId": "reunite",
+      "consumerEndingId": "destroy",
+      "producerDeadHeroIds": [
+        "H7",
+        "H6"
+      ],
+      "consumerDeadHeroIds": [
+        "H7",
+        "H6"
+      ],
+      "producerCouncilArchiveSha256": "622bf6c2d82293580b6f1bb17a343092963ae8936e2498b74b5cb77faff41821",
+      "consumerTerminalArchiveSha256": "c4e18de27bd3a166f0f5619d4e4446170d02d945afe00a7dd2487040c5b3d668",
+      "runtimeAssertionStatus": {
+        "producer": "executed-awaiting-review",
+        "consumer": "executed-awaiting-review"
+      },
+      "visualLedger": {
+        "status": "separate",
+        "acceptanceClaim": false,
+        "pendingReviews": [
+          "Inspect Council, ending, epilogues and credits."
+        ]
+      }
+    }
+  ],
+  "aggregate": {
+    "runs": {
+      "total": 16,
+      "producers": 8,
+      "consumers": 8,
+      "statusCounts": {
+        "executed-awaiting-review": 16
+      }
+    },
+    "criteria": {
+      "allReportsHaveV004AndV007": true,
+      "statuses": [
+        "executed-awaiting-review"
+      ]
+    },
+    "errors": {
+      "reportErrors": 0,
+      "expectedErrors": 0
+    },
+    "inputs": {
+      "total": 2996,
+      "producers": 2710,
+      "consumers": 286
+    },
+    "checkpoints": {
+      "total": 2267,
+      "png": 2243,
+      "json": 24
+    },
+    "timingMs": {
+      "producerExecutionTotal": 774972,
+      "consumerExecutionTotal": 210696,
+      "producerExecutionMin": 93546,
+      "producerExecutionMedian": 97195,
+      "producerExecutionMax": 100432,
+      "consumerExecutionMin": 23357,
+      "consumerExecutionMedian": 26770,
+      "consumerExecutionMax": 27483
+    },
+    "slotCoverage": {
+      "expectedUniquePairs": 21,
+      "actualMatchesExpected": 21,
+      "allExpectedPairsObserved": true,
+      "slots": [
+        60,
+        61,
+        62
+      ]
+    },
+    "outcomes": {
+      "producerEndingIds": [
+        "reunite"
+      ],
+      "consumerEndingIds": [
+        "destroy"
+      ],
+      "producerDeadRosterCounts": [
+        {
+          "id": "directed-council-triple-H1-H2-H3-seed0-2026-09-11T09-57-16-756Z",
+          "roster": [
+            "H1",
+            "H2",
+            "H3"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-council-triple-H2-H3-H4-seed0-2026-09-11T10-00-30-756Z",
+          "roster": [
+            "H2",
+            "H3",
+            "H4"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-council-triple-H3-H4-H5-seed1-2026-09-11T10-02-37-173Z",
+          "roster": [
+            "H3",
+            "H4",
+            "H5"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-council-triple-H4-H5-H6-seed0-2026-09-11T10-04-45-585Z",
+          "roster": [
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-council-triple-H5-H6-H7-seed0-2026-09-11T10-06-54-256Z",
+          "roster": [
+            "H5",
+            "H6",
+            "H7"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-council-triple-H6-H7-H8-seed0-2026-09-11T10-08-59-171Z",
+          "roster": [
+            "H6",
+            "H7",
+            "H8"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-council-pair-H7-H8-seed0-2026-09-11T10-11-07-956Z",
+          "roster": [
+            "H7",
+            "H8"
+          ],
+          "dead": [
+            "H6"
+          ]
+        },
+        {
+          "id": "directed-council-single-H8-seed0-2026-09-11T10-13-18-244Z",
+          "roster": [
+            "H8"
+          ],
+          "dead": [
+            "H7",
+            "H6"
+          ]
+        }
+      ],
+      "consumerDeadRosterCounts": [
+        {
+          "id": "directed-bust-council-continue-2026-09-11T09-59-22-148Z",
+          "roster": [
+            "H1",
+            "H2",
+            "H3"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-02-07-701Z",
+          "roster": [
+            "H2",
+            "H3",
+            "H4"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-04-16-159Z",
+          "roster": [
+            "H3",
+            "H4",
+            "H5"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-06-24-868Z",
+          "roster": [
+            "H4",
+            "H5",
+            "H6"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-08-30-247Z",
+          "roster": [
+            "H5",
+            "H6",
+            "H7"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-10-38-646Z",
+          "roster": [
+            "H6",
+            "H7",
+            "H8"
+          ],
+          "dead": []
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-12-48-892Z",
+          "roster": [
+            "H7",
+            "H8"
+          ],
+          "dead": [
+            "H6"
+          ]
+        },
+        {
+          "id": "directed-bust-council-continue-2026-09-11T10-15-01-187Z",
+          "roster": [
+            "H8"
+          ],
+          "dead": [
+            "H7",
+            "H6"
+          ]
+        }
+      ]
+    },
+    "invariants": {
+      "producerCouncilChecksAllPass": true,
+      "consumerRestoreAndTerminalChecksAllPass": true,
+      "masterNoMutablePathsAllConsumers": true,
+      "visualAcceptanceClaims": 0,
+      "runtimeInvariantEvidence": {
+        "reportsChecked": 16,
+        "nonEmptyInvariantViolationArrays": 0,
+        "reportErrors": 0,
+        "expectedErrors": 0,
+        "source": "retained producer/consumer report.json observations and checkpoint states"
+      }
+    }
+  },
+  "verificationObligations": [
+    "Review the retained Council, ending, epilogue and credits captures through the separate visual ledger before calling visual acceptance.",
+    "Treat executed-awaiting-review as runtime assertion evidence only; it does not close the visual review.",
+    "If a later EventBridge candidate is evaluated, produce a fresh directed bank run and do not inherit this ledger’s 9288… freshness boundary."
+  ]
+}

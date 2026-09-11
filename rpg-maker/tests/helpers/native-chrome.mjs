@@ -5,11 +5,13 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 
-export const origin = 'http://127.0.0.1:18726/';
+const port = process.env.DRYLAND_QA_PORT || '18726';
+if (!/^\d+$/.test(port) || Number(port) < 1024 || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
+export const origin = `http://127.0.0.1:${port}/`;
 export const project = path.resolve('rpg-maker/The Dryland Drowned');
 
 export async function startServer(t, directory = project) {
-  const server = spawn('python3', ['-u', '-m', 'http.server', '18726', '--bind', '127.0.0.1', '--directory', directory], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const server = spawn('python3', ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { stdio: ['ignore', 'pipe', 'pipe'] });
   let log = '';
   server.stdout.on('data', data => { log += data; });
   server.stderr.on('data', data => { log += data; });
@@ -85,6 +87,9 @@ export async function openChrome(t, options = {}) {
       chrome.kill('SIGTERM');
       await exited;
     }
+    // Chrome's detached crash reporter can retain stderr after the browser exits.
+    // These pipes belong to this test session; no process should keep them open.
+    for (const stream of [chrome.stderr, chrome.stdio[3], chrome.stdio[4]]) stream.destroy();
     await rm(profile, { recursive: true, force: true });
   });
   const version = await send('Browser.getVersion');

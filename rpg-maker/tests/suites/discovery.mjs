@@ -44,7 +44,7 @@ async function reachReceipt(browser, order, index) {
     if (id.endsWith('warning') || id.endsWith('second')) {
       const speaker = route === 'physical' ? 'Pérola' : 'Floraí';
       const asset = route === 'physical' ? 'Dryland_perola' : 'Dryland_florai';
-      await browser.waitFor(`$gameScreen.picture(18)?.name() === ${JSON.stringify(asset)}`);
+      await browser.waitFor(`$gameScreen.picture(63)?.name() === ${JSON.stringify(asset)}`);
       assert.equal(await browser.evaluate('$gameMessage.speakerName()'), speaker);
     }
     await browser.press('Enter', 13);
@@ -75,7 +75,7 @@ canonicalCase('IT-052', 'both native piece receipts preserve scene, alpha, cente
     await reachReceipt(browser, order, 0);
     assert.equal(await browser.evaluate('$gameMessage.allText()'), receipt(route));
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), expectedBackground(route));
-    assert.equal(await browser.evaluate('$gameScreen.picture(18) == null'), true);
+    assert.equal(await browser.evaluate('$gameScreen.picture(63) == null'), true);
     await assertBackgroundCoverage(browser);
     assert.equal(await browser.evaluate('$gameMessage.isChoice()'), false);
     const before = await snapshot(browser);
@@ -128,7 +128,7 @@ canonicalCase('IT-053', 'native automatic assembly runs in both orders with inde
     assert.equal(await browser.evaluate('$gameScreen.picture(4)?.name()'), 'Dryland_MapComplete');
     await assertBackgroundCoverage(browser);
     assert.equal(await browser.evaluate('$gameScreen.picture(4).opacity()'), 255);
-    assert.equal(await browser.evaluate('$gameScreen.picture(2) == null && $gameScreen.picture(3) == null && $gameScreen.picture(18) == null'), true);
+    assert.equal(await browser.evaluate('$gameScreen.picture(2) == null && $gameScreen.picture(3) == null && $gameScreen.picture(63) == null'), true);
     const log = (await browser.evaluate('discoveryEvents')).filter(event => event.scene === 'map.reveal');
     assert.ok(log.length); for (const event of log) { assert.deepEqual(event.pieces, order); assert.equal(event.sequence, after.sequence); }
     assert.equal(log.filter(event => event.name === 'playSe').length, 1);
