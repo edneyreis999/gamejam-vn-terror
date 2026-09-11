@@ -1,8 +1,5 @@
 {
     "name": "rmmz-game",
-    "scripts": {
-        "start": "node ../tools/start-game.mjs"
-    },
     "main": "index.html",
     "chromium-args": "--force-color-profile=srgb",
     "window": {

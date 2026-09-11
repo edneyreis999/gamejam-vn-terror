@@ -7,6 +7,8 @@ slug: retire-html-prototype
 
 This is the approved historical baseline, completed and accepted on 2026-09-10. [verification.md](verification.md) owns the final result and later verification; the task graph and review records preserve execution history rather than instructions to restart it.
 
+Launch update (2026-09-11): the package script now lives at the repository root. Use `npm start` there, as documented in the [current MZ README](../../../rpg-maker/README.md#jogar-localmente). The command below remains part of the accepted historical baseline.
+
 ## Objective
 
 Remove the retired HTML game directory and every documentation reference that directs people or agents to that directory for implementation, examples, evidence, assets or tests. All ongoing game development uses `rpg-maker/The Dryland Drowned/`. The canonical GDD remains the design authority; native MZ files provide implementation evidence.

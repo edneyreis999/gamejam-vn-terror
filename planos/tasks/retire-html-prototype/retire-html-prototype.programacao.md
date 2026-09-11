@@ -19,7 +19,7 @@ Approved by the user on 2026-09-10 as part of the complete reviewed spec set ("A
 | Scene and narrative authorship | `rpg-maker/The Dryland Drowned/data/` via the MZ editor |
 | Campaign rules and integration | `rpg-maker/The Dryland Drowned/js/plugins/` |
 | Verification | `rpg-maker/tests/`, `rpg-maker/tools/validate-content.mjs` |
-| Local launch | `rpg-maker/tools/start-game.mjs`, called by the game's package script |
+| Local launch | `rpg-maker/tools/start-game.mjs`, called by the game's package script at acceptance; since 2026-09-11, called by the repository root package script (`npm start`) |
 | QA and selected devlog evidence | `docs/qa/` and `docs/qa/deliveries/` |
 
 ## Consumer disposition

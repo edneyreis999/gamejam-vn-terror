@@ -9,16 +9,16 @@ O único projeto de jogo fica em `rpg-maker/The Dryland Drowned/`. Conteúdo, ex
 No Windows (PowerShell ou Prompt de Comando) e no macOS (Terminal), instale Node 22+ e Google Chrome. Na raiz do repositório, execute o mesmo comando nos dois sistemas, sem instalação de dependências:
 
 ```sh
-npm --prefix "rpg-maker/The Dryland Drowned" start
+npm start
 ```
 
-Dentro da pasta `rpg-maker/The Dryland Drowned`, basta `npm start`. Se o PowerShell bloquear `npm.ps1` pela política de execução, use `npm.cmd` no lugar de `npm`, sem alterar a política do sistema.
+Execute na raiz do repositório, onde fica o `package.json` das ferramentas. O `package.json` dentro de `rpg-maker/The Dryland Drowned/` fica reservado ao aplicativo MZ; o comando de desenvolvimento fica fora dessa pasta para não depender de sua preservação pelo editor. Se o PowerShell bloquear `npm.ps1` pela política de execução, use `npm.cmd` no lugar de `npm`, sem alterar a política do sistema.
 
-O comando serve `http://127.0.0.1:18726/` e abre o Chrome automaticamente no Windows e macOS; se a abertura falhar, abra o endereço manualmente no Chrome. Use `npm --prefix "rpg-maker/The Dryland Drowned" start -- --no-open` para apenas servir. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
+O comando serve `http://127.0.0.1:18726/` e abre o Chrome automaticamente no Windows e macOS; se a abertura falhar, abra o endereço manualmente no Chrome. Use `npm start -- --no-open` para apenas servir. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
 
 Mantenha uma única aba e o mesmo endereço, porta e perfil do navegador para usar **Continuar**. Se a porta estiver ocupada, confira qual servidor está atendendo antes de iniciar outro. A execução local não publica o jogo nem exige build.
 
-Para identificar quem ocupa a porta, use `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows. Se for este jogo, reutilize o endereço; caso contrário, escolha uma porta livre, por exemplo `npm --prefix "rpg-maker/The Dryland Drowned" start -- --port 18727`. O comando não encerra o processo existente nem troca de porta automaticamente. Saves da porta anterior não aparecem no novo endereço.
+Para identificar quem ocupa a porta, use `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows. Se for este jogo, reutilize o endereço; caso contrário, escolha uma porta livre, por exemplo `npm start -- --port 18727`. O comando não encerra o processo existente nem troca de porta automaticamente. Saves da porta anterior não aparecem no novo endereço.
 
 ### Save e Continuação
 
