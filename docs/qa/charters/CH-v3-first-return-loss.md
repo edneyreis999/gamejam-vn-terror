@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # CH-v3-first-return-loss: Sacrifício e ausência no retorno
 
 ```yaml
@@ -11,7 +13,7 @@ charter:
     network: wifi-fast
     locale: pt-BR
   journey: J-complete-campaign
-  entry_point: file:///…/prototype/index.html
+  entry_point: retired HTML artifact (index.html)
   scenarios: [ENC-encounter-consequences, FOR-formation-roster, CAM-dungeon-progression-outcomes]
   tour: Interrupt Tour
   time_box_minutes: 60

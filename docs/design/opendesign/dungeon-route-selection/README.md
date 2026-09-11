@@ -1,16 +1,16 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # Dungeon Route Selection Visual Contracts
 
-Durable HTML references for the six route-selection surfaces defined in
-`.compozy/tasks/dungeon-route-selection/_uiux.md`. Open each file directly in
-the supported desktop Chrome browser; no server, build, network request, or
-package installation is required.
+Historical design examples for the six route-selection surfaces recorded in
+`.compozy/tasks/dungeon-route-selection/_uiux.md`. They document the earlier
+HTML presentation; current implementation and presentation authority belong
+to the approved MZ contracts and canonical GDD.
 
-These files are normative for composition, hierarchy, spacing, typography,
+These files recorded the historical baseline for composition, hierarchy, spacing, typography,
 state signals, focus treatment, responsive topology, and the approved
 prototype-baseline copy. Runtime data, native Chrome control internals, the
-canonical GDD, and engine-owned behavior remain authoritative when task 03
-implements the production surface. Nothing in this directory is imported by
-`prototype/`.
+canonical GDD, and engine-owned behavior were considered by the original task 03. These examples are not imported by the current game.
 
 ## Design frame
 
@@ -21,9 +21,8 @@ implements the production surface. Nothing in this directory is imported by
 - `MOTION_INTENSITY`: 1/10.
 - `INFORMATION_DENSITY`: 7/10.
 - Authority fallback: this repository has no root `DESIGN.md` or shared UI
-  package. The canonical GDD, `_uiux.md`, and the semantic tokens in
-  `prototype/styles.css` are the local visual authorities. No new design
-  system is introduced here.
+  package. The earlier design used the canonical GDD and its contemporary UI contract.
+  The retired stylesheet is not a source or fallback for current work.
 
 ## State URLs
 

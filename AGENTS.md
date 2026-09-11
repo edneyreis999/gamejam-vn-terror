@@ -13,18 +13,18 @@
 
 # Arquitetura
 
-- Mantenha o protótipo jogável sem etapa de build, offline e diretamente executável no Chrome, salvo mudança aprovada em spec.
-- Mantenha conteúdo de catálogo, regras do jogo, renderização no navegador e testes em suas camadas atuais de responsabilidade.
+- Trabalhe no jogo em `rpg-maker/The Dryland Drowned/`; use seus dados, plugins e assets como fonte da implementação. O jogo local roda no Chrome pelo servidor documentado abaixo, sem build nem serviços remotos.
+- Mantenha conteúdo nos eventos nativos, regras nos plugins de domínio e testes em `rpg-maker/tests/`, conforme os contratos MZ aprovados.
 
 # Segurança
 
-- Não adicione rede, armazenamento, markup executável, assets remotos ou código de runtime de terceiros ao protótipo sem uma mudança de design aprovada.
+- Preserve engine e plugins MZ; novas dependências, serviços remotos ou mudanças nesses contratos exigem design aprovado.
 - Mantenha a inspeção de QA somente leitura e restrinja mutações da campanha a ações validadas do jogador.
 
 # Abrir o jogo
 
-- Com Node 22+ e Chrome instalados, execute `npm --prefix "rpg-maker/The Dryland Drowned" start` na raiz, no Windows ou macOS; o servidor usa `http://127.0.0.1:18726/` e abre o Chrome. Mantenha o processo em execução durante a sessão.
-- Se houver `EADDRINUSE` ou aviso de porta ocupada, identifique o processo com `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows e confirme o conteúdo servido antes de reutilizar o endereço; não encerre processos desconhecidos. Para outra porta livre, execute `npm --prefix "rpg-maker/The Dryland Drowned" start -- --port 18727` e informe que saves da porta anterior não aparecem no novo endereço.
+- Com Node 22+ e Chrome instalados, execute `npm start` na raiz, no Windows ou macOS; o servidor usa `http://127.0.0.1:18726/` e abre o Chrome. Mantenha o processo em execução durante a sessão.
+- Se houver `EADDRINUSE` ou aviso de porta ocupada, identifique o processo com `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows e confirme o conteúdo servido antes de reutilizar o endereço; não encerre processos desconhecidos. Para outra porta livre, execute `npm start -- --port 18727` e informe que saves da porta anterior não aparecem no novo endereço.
 
 # Gestão no Trello
 

@@ -2,9 +2,10 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { defaultProject, layoutErrors, localAssets, nativeFiles } from './native-layout.mjs';
+import { readPluginParameters } from './plugin-settings.mjs';
 
 const require = createRequire(import.meta.url);
-const { parseEventCatalog } = require('../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
+const { parseEventCatalog, parseFocusParameters } = require('../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
 const args = process.argv.slice(2);
 let project = defaultProject;
 let json = false;
@@ -26,7 +27,14 @@ if (!valid) {
     const commonEvents = JSON.parse(await readFile(path.join(project, 'data/CommonEvents.json'), 'utf8'));
     const system = JSON.parse(await readFile(path.join(project, 'data/System.json'), 'utf8'));
     const assets = await localAssets(project);
-    errors = parseEventCatalog(commonEvents, { ...system, drylandAssets: assets }).violations;
+    let configuration;
+    try {
+      configuration = parseFocusParameters(await readPluginParameters(project, 'Dryland_EventBridge'));
+    } catch (error) {
+      configuration = { errors: [{ code: 'invalid_plugin_configuration', message: error.message }] };
+    }
+    errors = parseEventCatalog(commonEvents, { ...system, drylandAssets: assets }, configuration.style).violations;
+    if (errors.length === 0) errors = configuration.errors;
     if (errors.length === 0) {
       const manifest = JSON.parse(await readFile(path.join(project, 'native-layout-manifest.json'), 'utf8'));
       errors = layoutErrors(manifest, await nativeFiles(project), assets);
@@ -37,4 +45,4 @@ if (!valid) {
   process.exitCode = errors.length ? 1 : 0;
 }
 const result = { ok: errors.length === 0, errors };
-console.log(json ? JSON.stringify(result) : (result.ok ? 'Conteúdo e revisão nativa válidos.' : errors.map(error => `${error.code}${error.id ? ': ' + error.id : ''}`).join('\n')));
+console.log(json ? JSON.stringify(result) : (result.ok ? 'Conteúdo e revisão nativa válidos.' : errors.map(error => error.message || `${error.code}${error.id ? ': ' + error.id : ''}`).join('\n')));

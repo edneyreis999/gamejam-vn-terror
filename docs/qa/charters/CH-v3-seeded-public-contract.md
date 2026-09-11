@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # CH-v3-seeded-public-contract: Reprodução e fronteiras V3
 
 ```yaml
@@ -11,7 +13,7 @@ charter:
     network: wifi-fast
     locale: pt-BR
   journey: J-reproduce-campaign
-  entry_point: file:///…/prototype/index.html e Chrome DevTools antes de Jogar
+  entry_point: retired HTML artifact (index.html) e Chrome DevTools antes de Jogar
   scenarios: [ACC-accessibility-diagnostics, CAM-dungeon-progression-outcomes, FOR-formation-roster, ENC-encounter-consequences]
   tour: Garbage Tour
   time_box_minutes: 60

@@ -1,0 +1,7 @@
+{
+  "name": "gamejam-vn-terror",
+  "private": true,
+  "scripts": {
+    "start": "node rpg-maker/tools/start-game.mjs"
+  }
+}

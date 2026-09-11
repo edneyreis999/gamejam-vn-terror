@@ -1,0 +1,206 @@
+{
+  "date": "2026-09-11",
+  "verdict": "NOT_READY: two required technical sensors unresolved",
+  "states": {
+    "implemented": false,
+    "static_verified": true,
+    "runtime_verified": false,
+    "human_accepted": false,
+    "release_ready": false
+  },
+  "tasks": {
+    "01": "completed",
+    "02": "completed",
+    "03": "completed",
+    "04": "completed",
+    "05": "completed",
+    "06": "completed",
+    "08": "completed",
+    "07": "blocked: MZ editor evidence",
+    "09": "blocked: visible prisons and inherited editor evidence"
+  },
+  "source": {
+    "baseHead": "ab25a3acd545f28cf9e1e6a735efdbad6c80e965",
+    "nativeRevision": "mz-20260911-busts-native-01",
+    "eventBridge": {
+      "path": "rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js",
+      "sha256": "7b161464b1ccb489a01502ce8bae57fa4ba2c13fc46ea8ad30c953d984736e55"
+    },
+    "commonEvents": {
+      "path": "rpg-maker/The Dryland Drowned/data/CommonEvents.json",
+      "sha256": "1f9b6362f9c7e2b377b598822078c4114994cb2f00fdf675590e0546a0ee062f"
+    },
+    "manifest": {
+      "path": "rpg-maker/The Dryland Drowned/native-layout-manifest.json",
+      "sha256": "dcb0b9a0a24fa8a91764cae48badd154348717f6684c6bcda9ead12cb44d9999"
+    }
+  },
+  "implementation": {
+    "migratedSections": 63,
+    "originalBustBoxes": 103,
+    "preservedSections": 258,
+    "preservedIndexedBoxes": 282,
+    "protectedFilesUnchanged": 1234,
+    "tavernHeroes": 8,
+    "tavernFamilies": 4,
+    "councilEligibleHeroSlotPairs": 21,
+    "vendorEngineAssetsUnchanged": true
+  },
+  "validation": {
+    "fullSuite": {
+      "command": "node --test rpg-maker/tests/*.test.mjs",
+      "passed": 138,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0,
+      "contentCliExit": 0,
+      "durationMs": 1900715,
+      "node": "22.23.2",
+      "chrome": "153.0.8010.36",
+      "fixture": {
+        "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/2026-09-11T10-36-54-403Z/fixture-manifest.json",
+        "sha256": "1b41fbafca646a51666abe6597d8dcdea59a108fafbb6213147cb771aa044258"
+      },
+      "unchangedFinalFiles": 1476,
+      "changedFinalFiles": [
+        "rpg-maker/README.md",
+        "rpg-maker/qa/native-surfaces.test.mjs"
+      ],
+      "impact": "README only; directed-only read-only temporal captures reviewed and executed separately. All runtime and registered-test files match."
+    },
+    "directed": {
+      "preReviewLots": 24,
+      "currentPostReviewLots": 4,
+      "assertions": "PASS for all28 lots on their recorded source",
+      "retention": "Prior lots retained for unchanged visual/content observables after guard-only impact analysis; not relabeled as current runtime replays."
+    },
+    "visual": {
+      "independentTavernPngs": 254,
+      "parentUniquePngs": 212,
+      "parentRecords": 41,
+      "setsMayOverlap": true,
+      "currentTavernEquivalentStableStates": 112,
+      "currentH1TemporalInspected": {
+        "normal": 21,
+        "largeReduced": 12
+      },
+      "selectedDeliveryPngs": 11,
+      "limits": "Agent inspection of listed images; no continuous frame-cadence inference, human acceptance or editor evidence."
+    },
+    "review": {
+      "verdict": "SHIP for code scope",
+      "openConfirmedCodeFindings": 0,
+      "fixed": "RD0001",
+      "suppressed": "RD0002 outside approved checkpoint boundary",
+      "temporalDelta": "clear_delta"
+    },
+    "deslop": "No additional cleanup justified after review."
+  },
+  "sensors": {
+    "V-001": "PASS with assigned current or explicitly retained evidence",
+    "V-002": "PASS with assigned current or explicitly retained evidence",
+    "V-003": "PASS with assigned current or explicitly retained evidence",
+    "V-004": "PASS with assigned current or explicitly retained evidence",
+    "V-005": "PASS with assigned current or explicitly retained evidence",
+    "V-006": "PASS with assigned current or explicitly retained evidence",
+    "V-009": "PASS with assigned current or explicitly retained evidence",
+    "V-007": "FAIL: visible confinement absent in locked lover PNGs; other inspected criteria pass",
+    "V-008": "BLOCKED: installed running MZ inaccessible via CUA cgWindowNotFound; Chrome authored-change fixture passed"
+  },
+  "scenarios": {
+    "D-01": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-02": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-04": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-05": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-06": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-07": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-08": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-09": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-10": "PASS scoped; see verification.md for current/retained/integration distinction",
+    "D-03": "Functional PASS; visible prison criterion FAIL"
+  },
+  "blockers": [
+    {
+      "sensor": "V-007",
+      "owner": "Technical Art / Lucas",
+      "bug": "docs/qa/bugs/BUG-20260911-lovers-prison-not-visible.md",
+      "nextEvidence": "Resolve visible-confinement requirement against locked-art/six-command scope, then inspect both lovers in both areas/orders; no replacement art was authorized implicitly."
+    },
+    {
+      "sensor": "V-008",
+      "owner": "Programação / Edney",
+      "task": "planos/tasks/vn-picture-busts-dialogues/task-07.md",
+      "nextEvidence": "When editor window access is available, perform the one representative command/parameter edit-and-accept check under ADR004; Chrome results cannot replace it."
+    }
+  ],
+  "knownRefinement": "docs/qa/bugs/BUG-20260911-pause-indicator-clipped.md",
+  "bank": {
+    "historicalMasters": 8,
+    "strictCurrentCompatibleNewMasters": 1,
+    "currentRoster": [
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "masterUnmodified": true,
+    "details": {
+      "path": "docs/qa/deliveries/vn-picture-busts-dialogues/post-review-lot-ledger.json",
+      "sha256": "a31ba6d4a00786139ac4809615020ed3d1c3ba9df1fc5c0c757237b70b3a271a"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/preservation-post-review-20260911.json",
+      "sha256": "b0f2fe5a02d908359987e5e8cf2b8098c55cd6dfaf867ad9b39dd8a4a663cc2d"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/evidence-impact-post-rd1-20260911.json",
+      "sha256": "b431067486a90dd2c9224de7293adb2d8d0ecb7818f351e59958f7abda51f6cd"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/full-suite-freshness-20260911.json",
+      "sha256": "484a4523b10d4ba27a417228efdc1941793060a5a19ef4879a174773da145d39"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/post-review-lot-ledger.json",
+      "sha256": "a31ba6d4a00786139ac4809615020ed3d1c3ba9df1fc5c0c757237b70b3a271a"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/campaign-variant-ledger-20260911.json",
+      "sha256": "047d49e7e3f25f227bc87dd9a548cea5468f393d4b74e2c0fb3ff886b08cbe98"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/parent-visual-ledger-20260911.json",
+      "sha256": "363d8dc66fbaa8c144cacd73ca20f5c49cd736df6d2ed8c06eb1727cf19df566"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/tavern-visual-review-20260911.json",
+      "sha256": "5465a94d7c3abfca7a257e4edeb6b3a5e230a61e8738550d916da059f048a5cb"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/review-20260911-round2/findings.json",
+      "sha256": "3d71e52d67c0167a3d41309d0b009129b33cd42904f4412094c0c3615c05e871"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/review-20260911-round2/qa-temporal-delta.json",
+      "sha256": "058f58ab802b365863daeafc06794d7eb94a571e5cabac44913702326cd44e97"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/cleanup-final.json",
+      "sha256": "96221f1380fca596b5cc3bdac74baeb89227dc673bb9721254f850a35f264122"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/2026-09-11T10-36-54-403Z/result.json",
+      "sha256": "f4735b52baaff76ddbbd11b32bc2677b1815b138cba17bfcaddf44430e48e603"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/2026-09-11T10-36-54-403Z/tests.log",
+      "sha256": "f8e15abc8746825bc3c4e070b34cec1626c131815ac522f5db777d1e0272e473"
+    },
+    {
+      "path": "docs/qa/evidence/vn-picture-busts-dialogues/task-09/2026-09-11T10-36-54-403Z/content-validation.json",
+      "sha256": "262a0828df0ea4e61afdc0f0e34538376e5d6de950a8f3079645c37568f489f4"
+    }
+  ],
+  "gitActions": "No staging, commit, PR or publication."
+}

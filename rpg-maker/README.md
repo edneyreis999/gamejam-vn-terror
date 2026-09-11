@@ -2,23 +2,23 @@
 
 Aceite humano do incremento registrado em2026-09-10; Tasks01–13 concluídas, com refinamento narrativo conhecido. Veja [entrega e evidências selecionadas](../docs/qa/deliveries/init-rpg-maker-mz/README.md). As referências a revisão pendente abaixo são histórico de implementação, superado pelo aceite do estado atual.
 
-Este projeto migra a campanha do protótipo HTML para eventos nativos do RPG Maker MZ. A implementação segue a [spec ativa](../.compozy/tasks/init-rpg-maker-mz/_spec.md) e seu [grafo de tarefas](../.compozy/tasks/init-rpg-maker-mz/tasks.md).
+O único projeto de jogo fica em `rpg-maker/The Dryland Drowned/`. Conteúdo, exemplos de implementação e evidências atuais devem partir dos dados, plugins, assets e testes MZ. A entrega mantida acima resume a migração concluída. Sua spec e o grafo originais permanecem em `.compozy/tasks/init-rpg-maker-mz/`, acervo histórico local ignorado pelo Git e indisponível num clone novo.
 
 ## Jogar localmente
 
 No Windows (PowerShell ou Prompt de Comando) e no macOS (Terminal), instale Node 22+ e Google Chrome. Na raiz do repositório, execute o mesmo comando nos dois sistemas, sem instalação de dependências:
 
 ```sh
-npm --prefix "rpg-maker/The Dryland Drowned" start
+npm start
 ```
 
-Dentro da pasta `rpg-maker/The Dryland Drowned`, basta `npm start`. Se o PowerShell bloquear `npm.ps1` pela política de execução, use `npm.cmd` no lugar de `npm`, sem alterar a política do sistema.
+Execute na raiz do repositório, onde fica o `package.json` das ferramentas. O `package.json` dentro de `rpg-maker/The Dryland Drowned/` fica reservado ao aplicativo MZ; o comando de desenvolvimento fica fora dessa pasta para não depender de sua preservação pelo editor. Se o PowerShell bloquear `npm.ps1` pela política de execução, use `npm.cmd` no lugar de `npm`, sem alterar a política do sistema.
 
-O comando serve `http://127.0.0.1:18726/` e abre o Chrome automaticamente no Windows e macOS; se a abertura falhar, abra o endereço manualmente no Chrome. Use `npm --prefix "rpg-maker/The Dryland Drowned" start -- --no-open` para apenas servir. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
+O comando serve `http://127.0.0.1:18726/` e abre o Chrome automaticamente no Windows e macOS; se a abertura falhar, abra o endereço manualmente no Chrome. Use `npm start -- --no-open` para apenas servir. Os avisos aparecem antes de **Jogar**. Use Enter ou o mouse para confirmar; os diálogos avançam no ritmo do jogador. Encerre o servidor com Ctrl+C no terminal que o iniciou.
 
-Mantenha uma única aba e o mesmo endereço, porta e perfil do navegador para usar **Continuar**. Se a porta estiver ocupada, confira qual servidor está atendendo antes de iniciar outro. A execução local não publica o jogo nem exige build. O protótipo HTML permanece em `prototype/index.html`, com sua campanha em memória.
+Mantenha uma única aba e o mesmo endereço, porta e perfil do navegador para usar **Continuar**. Se a porta estiver ocupada, confira qual servidor está atendendo antes de iniciar outro. A execução local não publica o jogo nem exige build.
 
-Para identificar quem ocupa a porta, use `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows. Se for este jogo, reutilize o endereço; caso contrário, escolha uma porta livre, por exemplo `npm --prefix "rpg-maker/The Dryland Drowned" start -- --port 18727`. O comando não encerra o processo existente nem troca de porta automaticamente. Saves da porta anterior não aparecem no novo endereço.
+Para identificar quem ocupa a porta, use `lsof -nP -iTCP:18726 -sTCP:LISTEN` no macOS ou `netstat -ano | findstr :18726` no Windows. Se for este jogo, reutilize o endereço; caso contrário, escolha uma porta livre, por exemplo `npm start -- --port 18727`. O comando não encerra o processo existente nem troca de porta automaticamente. Saves da porta anterior não aparecem no novo endereço.
 
 ### Save e Continuação
 
@@ -60,7 +60,7 @@ Fora das seções, um comentário `@scene {"id":"prologue","backgroundId":"taver
 
 `parseEventCatalog(commonEvents, system)` retorna `catalog` (metadados), `locations` (por ID: `commonEventId`, `start` inclusivo, `end` exclusivo e `indent`) e `violations` (um erro primário por ID). `catalog.passages` tem apenas identidade, speaker, status e fonte. O runtime e a CLI fornecem `system.drylandAssets` como inventário derivado; esse campo não é editado nem salvo em System.json. O texto é obtido diretamente dos comandos localizados.
 
-As artes importadas continuam provisórias. `img/pictures/Dryland_Taverna.png` vem de `prototype/assets/scenes/taverna.png`, sem alteração da imagem.
+A proveniência histórica de `img/pictures/Dryland_Taverna.png` e das demais artes importadas está em [imported-assets.json](asset-provenance/imported-assets.json), com os caminhos atuais e hashes.
 
 Os eventos de encontros contêm as 16 descrições, 48 abordagens e seus resultados. Cada seção `choices.A1`–`choices.B8` mantém exatamente três ramos no editor. **Rever descrição** e **Recuar** são controles separados dessas abordagens. O Common Event **Campanha — Fluxo de encontros** transfere para o mapa atribuído e encerra o evento anterior; não acrescente Erase Event após uma transferência, pois isso pode apagar o evento do mapa destino.
 
@@ -68,9 +68,68 @@ Os 193 IDs de texto e 160 planos da baseline já estão nos eventos nativos como
 
 **Sacrifício — Escolha irreversível** apresenta o aviso antes dos candidatos. A primeira ativação de um botão Sacrificar decide a morte, inclusive com um único candidato. **Sacrifício — Palco de candidatos** mantém posições e escalas das imagens no editor. Os textos `farewell.Hn` e `death.<encontro>.context` preservam a despedida e a consequência; `memorial_cause.<encontro>` contém uma síntese provisória para o memorial. O registro de morte guarda os IDs reais de rota, encontro, posição e abordagem.
 
+### Editar bustos e foco dos diálogos
+
+A autoria atual usa **12 Common Events auxiliares (68–79)**. A [spec incremental](../planos/tasks/vn-slot-authorship/spec.md) substitui as receitas por herói e os 104 eventos de restauração do incremento anterior. Todos os PNGs foram preservados: as posições abaixo pressupõem retratos padronizados que Edney ajustará depois.
+
+1. Em **Database → Common Events**, encontre `@dryland-section profile.H1` (Gorvak, CE5), ou a seção desejada nos eventos narrativos 1–67. Edite a imagem em **VNPictureBusts → Enter Bust**, e a base em **Scale To** e **Move To Coordinates**, ambos com duração zero. A entrada fica no próprio evento narrativo. A validação recusa uma entrada sem escala e posição completas antes do texto ou foco. Preserve a orientação `None`.
+2. Antes da fala, chame o helper de foco da posição ocupada. O comando **Dryland_EventBridge → Foco por posição** informa somente qual Picture fala. Ajuste o estilo comum no **Plugin Manager → Dryland_EventBridge → Bustos — Foco da conversa**, conforme a tabela abaixo. Repetir o mesmo foco não acumula escala nem reinicia a animação. Se a posição reservada estiver vazia, o foco mantém a composição atual, inclusive ao carregar um save.
+3. Edite ou acrescente **Show Text** no mesmo trecho. A retomada calcula a composição pelos mesmos comandos nativos até a caixa atual. Não existe receita de restauração para atualizar. Se um trecho continua a composição de outro, preserve `@visualFrom`, descrito abaixo.
+4. Ao alterar os eventos, salve no editor e atribua uma revisão nativa inédita usando os comandos de **Verificar** abaixo. A troca de revisão recusa saves incompatíveis e conserva seus arquivos. Ao alterar **somente os cinco parâmetros de foco**, salve o Plugin Manager e recarregue o jogo: não é necessário trocar a revisão nativa, e Continuar aplica o estilo atual aos saves compatíveis. Confira a conversa, Opções, HIDE, saída e Continuar no Chrome.
+
+| Parâmetro global | Padrão | Limites e efeito |
+| --- | --- | --- |
+| Escurecimento dos ouvintes | 24 | Inteiro de 0 a 255. Maior = mais escuro; 0 não escurece. Não é porcentagem. |
+| Escala dos ouvintes (%) | 90 | Inteiro de 1 a 100; percentual da escala base da entrada. |
+| Escala do falante (%) | 100 | Inteiro de 100 a 150; 110 amplia em 10% sobre a escala base. |
+| Recuo dos ouvintes (pixels) | 16 | Inteiro de 0 a 100; 0 desativa. Andirá mantém sua posição refletida. |
+| Duração da troca de foco (frames) | 20 | Inteiro de 0 a 60; 0 é instantâneo. Movimento reduzido e reconstrução usam 0. |
+
+Exemplo: com base de entrada em 60%, falante em 110% fica em 66%, enquanto ouvinte em 90% fica em 54%. Os dois fatores usam a mesma base, sem multiplicar um ao outro. Para escurecer mais, altere **Escurecimento dos ouvintes** de 24 para 60; não é preciso editar arrays de tom ou os sete comandos Focus. Não há substituição de estilo por cena. O foco neutro mantém todos na base e no tom normal, mesmo com falante acima de 100%.
+
+Esses campos são configuração do projeto, não opções do jogador. Campos ausentes usam os defaults; valores preenchidos inválidos são recusados pelo jogo e pelo validador, com o nome do campo a corrigir. A [spec dos parâmetros](../planos/tasks/vn-focus-parameters/spec.md) registra a migração inicial dos comandos; saves anteriores a essa migração continuam sujeitos à incompatibilidade de revisão.
+
+| Common Event | Função |
+| --- | --- |
+| 68–72 | Foco nos slots 60, 61, 62, 63 e 64, respectivamente |
+| 73 | Entrada dos heróis no Conselho: condições escolhem as imagens; uma base por posição |
+| 74 | Intervenção de Andirá: oculta heróis, entra no slot 65 e recebe foco |
+| 75 | Retorno dos heróis após a saída de Andirá |
+| 76 | Saída do slot esquerdo 60 |
+| 77 | Saída do Conselho: 60–63 e 65 |
+| 78 | Saída do slot direito 63 |
+| 79 | Foco neutro: todos na base de entrada |
+
+No Conselho, as variáveis 144–146 projetam os heróis elegíveis em ordem. No CE73, altere os três grupos **Scale To / Move To Coordinates** para mudar o layout; cada grupo atende todos os oito heróis naquela posição. Só a seleção de imagem exige ramos por herói. Não escreva manualmente nessas variáveis de projeção.
+
+| Uso | Picture | Base X/Y | Escala |
+| --- | --- | --- | --- |
+| Herói em conversa ou fala isolada | 60 | 320 / 850 | 100% |
+| Ivaí ou amante à direita | 63 | 960 / 850 | 100% |
+| Heróis no Conselho | 60 / 61 / 62 | 200 / 650; 420 / 650; 640 / 650 | 60% |
+| Andirá refletido | 65 | 330 / 500 | 100% |
+
+Esses valores são bases de autoria para a padronização futura; não validam o enquadramento dos PNGs atuais. O slot 64 atende o segundo participante à direita em composições 2×2. Os slots 60–65 são reservados aos diálogos, separados do palco, memorial e interface.
+
+`@visualFrom profile.H1` em `speech.H1` herda a composição visual do perfil. As referências do Conselho herdam entrada do elenco e de Ivaí; a seção atual aplica sua intervenção ou foco. A reconstrução percorre somente comandos visuais e condições permitidas, sem executar texto, decisões ou checkpoints. Referências ausentes, ciclos e relações entre conversas diferentes são recusados pela validação. Ao criar uma nova participação visual, escreva os comandos na própria seção; ao continuar uma existente, reutilize sua fonte.
+
+Cada auxiliar tem trigger **None** e comentário `@dryland-presentation-helper <nome>`. Admite Enter, Exit, Scale, Move e Tone do VNPictureBusts, **Focus** do EventBridge, chamadas acíclicas a auxiliares, waits de até 60 frames e condições de igualdade das projeções 144–146. Preserve os comentários 657 do editor. Argumentos numéricos são literais; não use Script ou expressões nos argumentos `:eval`.
+
+Se acrescentar **Wait** imediatamente após **Focus** dentro de um auxiliar, a espera não pode exceder **Duração da troca de foco**. Ao reduzir esse parâmetro, revise as esperas que tiver adicionado; duração 0 admite somente espera 0. Os auxiliares atuais não contêm esperas após Focus.
+
+**Conversation** continua responsável pela duração da conversa e por limpar seus retratos. Nenhum auxiliar pode abrir uma conversa por conta própria. Imagens aguardam o carregamento real, com **Retry** nativo quando necessário; movimento reduzido usa os mesmos alvos sem animação. HIDE mantém a arte e oculta a interface. Cancelamento e skip conservam os limites da narrativa.
+
+`IT-067` verifica edição de posição/escala, retorno de Opções e Continuar com uma caixa inserida; `IT-068` usa a [fixture técnica 2×2](tests/fixtures/vn-picture-busts-2x2/recipe.json) para testar os quatro focos, repetição, HIDE e saída no MZ real. A fixture não acrescenta história à campanha.
+
+Os scripts de migração em `planos/tasks/` são registros de transformações pontuais. Não os execute novamente para editar o jogo: `CommonEvents.json` salvo no editor é a fonte atual.
+
+A ampliação de participantes além das composições atuais permanece adiada. A [limitação conhecida e proposta de evolução do foco](../docs/known-issues/KI-20260911-bustos-participantes-e-foco-por-posicao.md) registra os limites de autoria e as decisões pendentes para uma eventual extensão do VNPictureBusts.
+
+Recortes do memorial, imagens e estilos de interface ainda têm ajustes em JavaScript. As [demais oportunidades de manutenção pelo editor](../docs/known-issues/KI-20260911-eventbridge-manutencao-visual-no-editor.md) estão registradas para incrementos futuros.
+
 ### Taverna e preparação
 
-Os oito eventos **Herói — Nome** contêm `profile.Hn`, `speech.Hn`, `selection.Hn` e `party_full.Hn`. Profile e speech usam o conteúdo aceito; as falas de seleção e grupo cheio permanecem marcadas como provisórias. O busto usa a arte local integral, posicionada e escalada pelo VNPictureBusts. Não há outro catálogo de parágrafos em JavaScript.
+Os oito eventos **Herói — Nome** contêm `profile.Hn`, `speech.Hn`, `selection.Hn` e `party_full.Hn`. As quatro famílias são placeholders provisórios para todos os oito heróis, com revisão narrativa pendente. A [integração do PR #3](../planos/tasks/pr3-taverna/spec.md) reabre o aceite editorial anterior sem reescrever as falas. O busto usa a arte local integral, posicionada e escalada pelo VNPictureBusts. Não há outro catálogo de parágrafos em JavaScript.
 
 O evento **Taverna — Palco** possui as posições nativas dos retratos e botões. A orquestração da taverna mantém Show Choices com ramos editáveis: Herói, Destinos, Elenco e Partir. O comentário `@dryland-choice formation` expande o ramo Herói nos sobreviventes do catálogo e vincula os retratos pelo PictureChoices; o resultado retorna ao ramo original. Os modos `hero`, `destinations` e `roster` mantêm os respectivos ramos. Preserve esses comentários ao editar as escolhas. Os callbacks de foco do ChoiceCmnEvts são somente observacionais; quem decide é a ação validada.
 
@@ -83,6 +142,8 @@ Use setas para percorrer os heróis na ordem canônica, Enter para abrir Convers
 **Recuar** aparece antes de comprometer uma abordagem quando restam pelo menos três heróis vivos no elenco. A confirmação retorna à taverna e salva a formação retornada; cancelar restaura o encontro. Mortes, encontros revelados e maior percurso conhecido permanecem. Uma nova tentativa começa na primeira posição.
 
 Quando a expedição fica vazia antes de concluir a rota e há reservas vivas, o texto de retorno automático leva à taverna. O evento **Taverna — Ausências** faz os novos mortos desaparecerem juntos durante 60 frames nativos, sem mudar suas posições ou permitir interação com eles. Movimento reduzido deixa os lugares vazios imediatamente. Sair durante o efeito ou usar Continuar a partir do retorno já registrado não o repete; **Elenco** mantém as mortes por escrito.
+
+A composição do palco preserva as imagens e posições de Lucas no PR #3. Os arquivos `Dryland_Tavern_H1.png` a `Dryland_Tavern_H8.png` contêm essas artes sem alteração de bytes; `Dryland_H1.png` a `Dryland_H8.png` continuam atendendo diálogos, Conselho e memorial. Os arquivos `h1-Gorvak.png` a `h8-Draska.png` entregues no PR também foram preservados. O CE38 mantém escala de 35% para os oito heróis, controles superiores nas posições autoradas e Partir embaixo. A [decisão de integração](../planos/tasks/pr3-taverna/adrs/adr-001.md) registra a separação dos arquivos e a entrada do Gorvak no sistema de foco atual.
 
 **Taverna — Palco** restaura apenas os retratos ausentes a cada ciclo, para recuperar a cena após uma conversa sem reiniciar movimentos em andamento. Preserve as condições dos comandos Show Picture e os movimentos simultâneos, sem espera individual por herói.
 

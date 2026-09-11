@@ -1,0 +1,3846 @@
+{
+  "provenance": {
+    "source": "docs/qa/evidence/vn-picture-busts-dialogues/task-03/recipe-research-20260911/council-recipes.json",
+    "sha256": "255af5989dd71ca39b4051fbc5993c2713e222375bcc98c0f29f2399a3d90e37",
+    "method": {
+      "engine": "Dryland_CampaignRules.dispatch",
+      "actionSemantics": "Every recorded action is accepted with expectedSequence equal to the pre-dispatch state sequence; COMPLETE_PASSAGE records the actual current passageId.",
+      "opening": "seeded BEGIN, complete intro, physical then supernatural routes with canonical H1/H2/H3 and first GDD-viable approach.",
+      "finalFormation": "final entered party is selected through TOGGLE_HERO actions, then final dungeon is entered.",
+      "validation": "Generation and full replay from createReadyState validate every resulting state and the final Council state."
+    },
+    "sourceHashes": {
+      "docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md": "649914e3a9704116bd283f57df11dd1e94916f43ece36881dd0b074af1eff4a9",
+      "rpg-maker/The Dryland Drowned/data/CommonEvents.json": "70ed11572ac89fa2e33b10f92c91bb981c0280aa64e5fa79e4a9023a96dacf3a",
+      "rpg-maker/The Dryland Drowned/data/System.json": "7f0234c5dbe3611c65ca48d2a9ddcc3d5c18123e01305473b8eb69741da66753",
+      "rpg-maker/The Dryland Drowned/native-layout-manifest.json": "8a0a4d42dbd18aca5f14b1549e1492bdb80f96cd644d6d5c0aadc4cf9e1d38c9",
+      "rpg-maker/The Dryland Drowned/js/plugins/Dryland_CampaignRules.js": "9f43fd365b8c7f307efc36f8b7c4216ae0802341120faa2cc96ce6d66615851b",
+      "rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js": "d060d7689f10820bf13520587aaf88ea48349650efdddf07c8b3a1e915f3bbf4",
+      "rpg-maker/tests/fixtures/gdd-competencies.json": "d719e8b0436e4e4a7769e6415a876ee80418060bd2d56ef9bdd1b16a854b5d9b",
+      "rpg-maker/tests/helpers/campaign.mjs": "049afd8d84b45c4580a4ecf86a9ab8335d6dd95a4d85141cfaa607e54bfd4217",
+      "rpg-maker/tests/helpers/closing-presentation.mjs": "d0e8c477530a21356b623f77cf28af4387dec3c41925b2a3fc3b9445709c2867",
+      "rpg-maker/tests/helpers/discovery.mjs": "3c01718ab93a9ade4b44c63346ce3bc1d0c35dd3e095f7aa7250488234ad445e",
+      "rpg-maker/tests/helpers/formation.mjs": "eff0c25d8043caccf07e251b677d89f9b4112e9a1fb0632675df3ab7bfc2de0f"
+    }
+  },
+  "recipes": [
+    {
+      "id": "council-triple-H1-H2-H3-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-1",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-1.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-2",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-2.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 89
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
+          "expectedSequence": 90
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-1.success.01",
+          "expectedSequence": 91
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 92
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 93
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-1",
+          "expectedSequence": 94
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-1.success.01",
+          "expectedSequence": 95
+        }
+      ]
+    },
+    {
+      "id": "council-triple-H2-H3-H4-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H2",
+        "H3",
+        "H4"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H4",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-2",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-2.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-1",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-1.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 89
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
+          "expectedSequence": 90
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-1.success.01",
+          "expectedSequence": 91
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 92
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 93
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-1",
+          "expectedSequence": 94
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-1.success.01",
+          "expectedSequence": 95
+        }
+      ]
+    },
+    {
+      "id": "council-triple-H3-H4-H5-seed1",
+      "seed": 1,
+      "targetCouncilRoster": [
+        "H3",
+        "H4",
+        "H5"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 1,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-2",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-2.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H4",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H5",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-2",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-2.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-2",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-2.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-1.success.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 89
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 90
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 91
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 92
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 93
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-1",
+          "expectedSequence": 94
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-1.success.01",
+          "expectedSequence": 95
+        }
+      ]
+    },
+    {
+      "id": "council-triple-H4-H5-H6-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H4",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H5",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H6",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-1",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-1.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-1",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-1.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 89
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
+          "expectedSequence": 90
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-1.success.01",
+          "expectedSequence": 91
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 92
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 93
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-3",
+          "expectedSequence": 94
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-3.success.01",
+          "expectedSequence": 95
+        }
+      ]
+    },
+    {
+      "id": "council-triple-H5-H6-H7-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H5",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H6",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H7",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-1",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-1.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-1",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-1.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 89
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
+          "expectedSequence": 90
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-1.success.01",
+          "expectedSequence": 91
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 92
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 93
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-2",
+          "expectedSequence": 94
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-2.success.01",
+          "expectedSequence": 95
+        }
+      ]
+    },
+    {
+      "id": "council-triple-H6-H7-H8-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H6",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H7",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H8",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-2",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-2.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-1",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-1.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 89
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
+          "expectedSequence": 90
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-1.success.01",
+          "expectedSequence": 91
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 92
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 93
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-1",
+          "expectedSequence": 94
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-1.success.01",
+          "expectedSequence": 95
+        }
+      ]
+    },
+    {
+      "id": "council-pair-H7-H8-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H7",
+        "H8"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H6",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H7",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H8",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-2",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-2.success.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 81
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-1",
+          "expectedSequence": 82
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-1.success.01",
+          "expectedSequence": 83
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 84
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 85
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-2",
+          "expectedSequence": 86
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-2.failure.01",
+          "expectedSequence": 87
+        },
+        {
+          "type": "SELECT_VICTIM",
+          "heroId": "H6",
+          "expectedSequence": 88
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "farewell.H6",
+          "expectedSequence": 89
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "death.B1.context",
+          "expectedSequence": 90
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 91
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 92
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-2",
+          "expectedSequence": 93
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-2.success.01",
+          "expectedSequence": 94
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 95
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 96
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-1",
+          "expectedSequence": 97
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-1.success.01",
+          "expectedSequence": 98
+        }
+      ]
+    },
+    {
+      "id": "council-single-H8-seed0",
+      "seed": 0,
+      "targetCouncilRoster": [
+        "H8"
+      ],
+      "actionsToCouncil": [
+        {
+          "type": "BEGIN",
+          "seed": 0,
+          "expectedSequence": 0
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.01",
+          "expectedSequence": 1
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "prologue.02",
+          "expectedSequence": 2
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.01",
+          "expectedSequence": 3
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 4
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 5
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 6
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "physical",
+          "expectedSequence": 7
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 8
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.physical.01",
+          "expectedSequence": 9
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 10
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A3.01",
+          "expectedSequence": 11
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
+          "expectedSequence": 12
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A3-1.success.01",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 14
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A1.01",
+          "expectedSequence": 15
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
+          "expectedSequence": 16
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A1-1.success.01",
+          "expectedSequence": 17
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 18
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A4.01",
+          "expectedSequence": 19
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
+          "expectedSequence": 20
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A4-1.success.01",
+          "expectedSequence": 21
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 22
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A2.01",
+          "expectedSequence": 23
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-1",
+          "expectedSequence": 24
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A2-1.success.01",
+          "expectedSequence": 25
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 26
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A6.01",
+          "expectedSequence": 27
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
+          "expectedSequence": 28
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A6-1.success.01",
+          "expectedSequence": 29
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.01",
+          "expectedSequence": 30
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.physical.warning",
+          "expectedSequence": 31
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.physical",
+          "expectedSequence": 32
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "irati.02.01",
+          "expectedSequence": 33
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "supernatural",
+          "expectedSequence": 34
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 35
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.supernatural.01",
+          "expectedSequence": 36
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 37
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B5.01",
+          "expectedSequence": 38
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
+          "expectedSequence": 39
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B5-2.success.01",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B6.01",
+          "expectedSequence": 42
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B6-2",
+          "expectedSequence": 43
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B6-2.success.01",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 45
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B4.01",
+          "expectedSequence": 46
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-3",
+          "expectedSequence": 47
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B4-3.success.01",
+          "expectedSequence": 48
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 49
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B3.01",
+          "expectedSequence": 50
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
+          "expectedSequence": 51
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B3-1.success.01",
+          "expectedSequence": 52
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 53
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B7.01",
+          "expectedSequence": 54
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
+          "expectedSequence": 55
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B7-1.success.01",
+          "expectedSequence": 56
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.01",
+          "expectedSequence": 57
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.warning",
+          "expectedSequence": 58
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "lover.supernatural.second",
+          "expectedSequence": 59
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "reward.supernatural",
+          "expectedSequence": 60
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.01",
+          "expectedSequence": 61
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "map.reveal.02",
+          "expectedSequence": 62
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H1",
+          "expectedSequence": 63
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
+          "expectedSequence": 64
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
+          "expectedSequence": 65
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H6",
+          "expectedSequence": 66
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H7",
+          "expectedSequence": 67
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H8",
+          "expectedSequence": 68
+        },
+        {
+          "type": "SELECT_DESTINATION",
+          "dungeonId": "final",
+          "expectedSequence": 69
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 70
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "threshold.final.01",
+          "expectedSequence": 71
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 72
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A7.01",
+          "expectedSequence": 73
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
+          "expectedSequence": 74
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A7-1.success.01",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 76
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A5.01",
+          "expectedSequence": 77
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-1",
+          "expectedSequence": 78
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A5-1.failure.01",
+          "expectedSequence": 79
+        },
+        {
+          "type": "SELECT_VICTIM",
+          "heroId": "H7",
+          "expectedSequence": 80
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "farewell.H7",
+          "expectedSequence": 81
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "death.A5.context",
+          "expectedSequence": 82
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 83
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B8.01",
+          "expectedSequence": 84
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-2",
+          "expectedSequence": 85
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B8-2.success.01",
+          "expectedSequence": 86
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 87
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B1.01",
+          "expectedSequence": 88
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
+          "expectedSequence": 89
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B1-1.success.01",
+          "expectedSequence": 90
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 91
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.B2.01",
+          "expectedSequence": 92
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-2",
+          "expectedSequence": 93
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.B2-2.failure.01",
+          "expectedSequence": 94
+        },
+        {
+          "type": "SELECT_VICTIM",
+          "heroId": "H6",
+          "expectedSequence": 95
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "farewell.H6",
+          "expectedSequence": 96
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "death.B2.context",
+          "expectedSequence": 97
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 98
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "encounter.A8.01",
+          "expectedSequence": 99
+        },
+        {
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-1",
+          "expectedSequence": 100
+        },
+        {
+          "type": "COMPLETE_PASSAGE",
+          "passageId": "result.A8-1.success.01",
+          "expectedSequence": 101
+        }
+      ]
+    }
+  ]
+}

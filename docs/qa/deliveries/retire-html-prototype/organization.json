@@ -1,0 +1,44 @@
+{
+  "observedOn": "2026-09-10",
+  "checkpoint": "Post-acceptance organization before the separately authorized commit/PR workflow; Git fields describe this historical checkpoint.",
+  "scope": "retire-html-prototype",
+  "acceptance": "human-acceptance.json",
+  "archive": {
+    "path": "/Users/edney/projects/coreto/gamejam-vn-terror/.artifacts/archives/retire-html-prototype-accepted-20260910",
+    "manifest": "manifest.json",
+    "files": 2128,
+    "bytes": 58876755,
+    "sha256Verified": true,
+    "availableInFreshClone": false
+  },
+  "retiredFromCandidateSet": [
+    "planos/tasks/retire-html-prototype/review-01-candidates.md",
+    "planos/tasks/retire-html-prototype/scripts/sanitize-native.py"
+  ],
+  "preservedInPlace": [
+    "docs/qa/evidence/retire-html-prototype/",
+    "/private/tmp/coreto-retirement-originals-9oigrt75"
+  ],
+  "maintained": [
+    "native game, assets and tests",
+    "approved spec, ADR, final peer review and its hash baselines",
+    "current documentation and asset provenance",
+    "delivery summary and human acceptance"
+  ],
+  "visualMaterial": "Nonvisual maintenance delivery; no new screenshot required or claimed.",
+  "indexChanged": false,
+  "commitCreated": false,
+  "organizationChecks": {
+    "status": "PASS",
+    "archiveFilesVerified": 2128,
+    "maintainedMarkdownFilesChecked": 14,
+    "localLinksChecked": 77,
+    "brokenLinks": 0,
+    "ignoredOutputPaths": true,
+    "requiredInputsVersionable": true,
+    "indexPreserved": true,
+    "unitInputHashesUnchanged": 42,
+    "browserExecuted": false,
+    "materialGaps": []
+  }
+}

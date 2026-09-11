@@ -23,4 +23,4 @@ A apresentação distingue explicitamente conteúdo `Confirmado`, `Baseline de p
 
 ## Assets
 
-As cinco imagens em `pitch/assets/` são cópias de referências atmosféricas já existentes em `prototype/assets/encounters/`. Elas apoiam o pitch sem representar uma direção de arte definitiva.
+As cinco imagens em `pitch/assets/` são cópias de referências atmosféricas da etapa HTML anterior. Elas apoiam o pitch sem representar uma direção de arte definitiva.

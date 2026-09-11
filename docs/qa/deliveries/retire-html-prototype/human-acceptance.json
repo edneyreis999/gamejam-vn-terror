@@ -1,0 +1,21 @@
+{
+  "scope": "retire-html-prototype",
+  "criterion": "V-006",
+  "date": "2026-09-10",
+  "quote": "está aprovado",
+  "decision": "accepted",
+  "head": "d01cba6fe08b2b1191dc6df246fb54cf391b238a",
+  "acceptedDocumentHashes": {
+    "planos/tasks/retire-html-prototype/tasks.md": "c901f6e86e921c4129223e7bf4df1ddad27042bf7700969c0f0af231b01d5fe4",
+    "planos/tasks/retire-html-prototype/task-06.md": "17da5a0cedc3d78eb714609dc013e53727827847fb12ef8addfb59f07af80045",
+    "planos/tasks/retire-html-prototype/verification.md": "895bfc3a71f7ffdc3626fc33ac33b0eb8cdd2cf9dc5d50f910fc42a9db68ffad",
+    "planos/tasks/retire-html-prototype/retire-html-prototype.programacao.md": "51c401be454616d1feb53e5f7e8f47d0d532274fea3c67228a47e046671a3379",
+    "docs/qa/reports/2026-09-10-retire-html-prototype.md": "1c57211a72b6ab6f1a2093bb58e747c022dfffae01ff4065b0b6d17002f9fa46",
+    "rpg-maker/README.md": "592e9da382535fe2a253a56f5836c54d1c66e99b4452fa8ea8607822253a7ed4",
+    "docs/qa/README.md": "49ba488396a1365add35280e78f9a5ef3c7d5156204a796b7484b878d55af475",
+    "AGENTS.md": "ea6e847df49b55cf4b92dd74cd04b6cf707d30c4d98de840af54f41ab861644f",
+    "docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md": "230babb59bc82b6857726f11eb8d0fc74f4848e40ed46258f5319aa95c18368e"
+  },
+  "runtimeVerified": false,
+  "limits": "Acceptance covers final retirement documentation and approved static/unit scope; it does not accept browser-audio tooling or validate gameplay."
+}

@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # CH-v3-human-voiceover: Leitura da campanha com VoiceOver
 
 ```yaml
@@ -11,7 +13,7 @@ charter:
     network: wifi-fast
     locale: pt-BR
   journey: J-complete-campaign
-  entry_point: file:///…/prototype/index.html
+  entry_point: retired HTML artifact (index.html)
   scenarios: [ACC-accessibility-diagnostics, FOR-formation-roster, ENC-encounter-consequences, CAM-dungeon-progression-outcomes]
   tour: Feature Tour
   time_box_minutes: 90

@@ -1,0 +1,118 @@
+{
+  "head": "b50e27593777d6310959b1a4d6375d48ba324ff0",
+  "mergeMain": "ee70f87a6c8bd3b054cd10ed6a878d3e9c514668",
+  "selected": [
+    {
+      "path": "tavern-overview.png",
+      "source": "docs/qa/evidence/pr3-taverna/final-verify-2026-09-11T19-31-24-998Z/pr3-tavern-overview.png",
+      "sha256": "9cbfb1544d9714e14aac0c080da98330a15ee33749a4ebc6483c93e91f40de7b"
+    },
+    {
+      "path": "tavern-after-return.png",
+      "source": "docs/qa/evidence/pr3-taverna/final-verify-2026-09-11T19-31-24-998Z/pr3-after-reentry.png",
+      "sha256": "1627891b7ea2490de8aab1c2e44273df11174005a4018903f6b7f619417b1db2"
+    },
+    {
+      "path": "conversation-gorvak-ivai.png",
+      "source": "docs/qa/evidence/pr3-taverna/final-verify-2026-09-11T19-31-24-998Z/tavern-H1-box-2.png",
+      "sha256": "6da682ae4bb506b36c99e214590746fae0b876894b4158ffd124aadfb0a27a2f"
+    },
+    {
+      "path": "conversation-elowen.png",
+      "source": "docs/qa/evidence/pr3-taverna/final-verify-2026-09-11T19-31-24-998Z/tavern-H2-box-1.png",
+      "sha256": "4f6c1a0872fa8f155bc7d28ae8b44cef19af02014c671fcdcc1a83692a9a725b"
+    },
+    {
+      "path": "conversation-vaelith.png",
+      "source": "docs/qa/evidence/pr3-taverna/final-verify-2026-09-11T19-31-24-998Z/tavern-H7-box-1.png",
+      "sha256": "ac4992e0f93ee35be0b270c2e385134f2ec386a2a3cd2ab434012cab66b74312"
+    },
+    {
+      "path": "main-elowen.png",
+      "source": "docs/qa/evidence/pr3-taverna/baseline-2026-09-11T19-35-33-246Z/main-Elowen.png",
+      "sha256": "710d8f8d66f2c83c8123461cd7bffb6aa0de6317b572fa591a0cfb2bdc3a9408"
+    }
+  ],
+  "runs": [
+    {
+      "path": "docs/qa/evidence/pr3-taverna/final-verify-2026-09-11T19-31-24-998Z/report.json",
+      "sha256": "1b7be7eeb126e411d7a99fcc6a33a077238e721c44f5135c5d43a7699203d48a",
+      "collectionStatus": "executed-awaiting-review",
+      "layout": "mz-20260911-pr3-taverna-02",
+      "browser": "153.0.8010.36",
+      "node": "v22.23.2",
+      "viewport": [
+        1280,
+        720
+      ],
+      "dpr": 1,
+      "durationMs": 139125,
+      "errors": 0,
+      "cleanup": "closed",
+      "inputs": [
+        {
+          "path": "data/CommonEvents.json",
+          "sha256": "4b2fd20b5fde05b6b97787230af2c871a0a83170d0522c4673ade398c90ac2d8"
+        },
+        {
+          "path": "data/System.json",
+          "sha256": "d4a142dda4ad9ab23fb7945495f035b73a8ec24749c1448e8227c168a7e5be9b"
+        },
+        {
+          "path": "js/plugins/Dryland_EventBridge.js",
+          "sha256": "248ede44d9e1826841f32c9adf14213faed096df934c55000c8c4fa8631a6b14"
+        },
+        {
+          "path": "js/plugins.js",
+          "sha256": "ddd91805d03e4756c021f1222677e9dc90c4e50378c554aff3b0259f6d099139"
+        },
+        {
+          "path": "native-layout-manifest.json",
+          "sha256": "bbf815dfe03577e10adba2978689b7c695cf5229bf473d87a4cc5575b07e8499"
+        }
+      ]
+    },
+    {
+      "path": "docs/qa/evidence/pr3-taverna/baseline-2026-09-11T19-35-33-246Z/report.json",
+      "sha256": "73c4da23131aa75c09db3b38c425cfc5b36f450743c0480e854e83f1056ba03d",
+      "collectionStatus": "executed-awaiting-review",
+      "layout": "mz-20260911-focus-parameters-02",
+      "browser": "153.0.8010.36",
+      "node": "v22.23.2",
+      "viewport": [
+        1280,
+        720
+      ],
+      "dpr": 1,
+      "durationMs": 18072,
+      "errors": 0,
+      "cleanup": "closed",
+      "inputs": [
+        {
+          "path": "data/CommonEvents.json",
+          "sha256": "6448bfab20d66fabeb66dd90e3af985eef888cf6e8df6de0593d68e8469a1b1c"
+        },
+        {
+          "path": "data/System.json",
+          "sha256": "7f0234c5dbe3611c65ca48d2a9ddcc3d5c18123e01305473b8eb69741da66753"
+        },
+        {
+          "path": "js/plugins/Dryland_EventBridge.js",
+          "sha256": "248ede44d9e1826841f32c9adf14213faed096df934c55000c8c4fa8631a6b14"
+        },
+        {
+          "path": "js/plugins.js",
+          "sha256": "ddd91805d03e4756c021f1222677e9dc90c4e50378c554aff3b0259f6d099139"
+        },
+        {
+          "path": "native-layout-manifest.json",
+          "sha256": "bacdbf0b2c803fceb947c9f2b0dabc8e8a13e10db3e79a75a51beabe73a34645"
+        }
+      ]
+    }
+  ],
+  "baselinePreparation": "Current isolated fixture with main CommonEvents/System/manifest restored; other relevant assets and runtime sources byte-identical to main. Additional unused PR pictures remain in fixture.",
+  "afterCancelEqualsAfterReentry": true,
+  "reviewOwner": "planos/tasks/pr3-taverna/verification.md",
+  "archiveAvailability": "Raw sources and reports are local-only; selected images are independently versioned."
+}

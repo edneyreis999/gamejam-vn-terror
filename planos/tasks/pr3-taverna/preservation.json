@@ -1,0 +1,101 @@
+{
+  "checks": [
+    "All dialogue text/choices, 12 helpers and unaffected events match main",
+    "CE38 equals Lucas version except asset filenames and corrected branch indentation",
+    "32 initial tavern sections provisional; all spoken text unchanged",
+    "All 16 PR image payloads preserved; main portraits byte-identical",
+    "No engine/vendor/plugin change against main; database changes limited to CommonEvents and editor-generated System.versionId; only approved image additions"
+  ],
+  "assets": [
+    {
+      "source": "Dryland_H1.png",
+      "destination": "Dryland_Tavern_H1.png",
+      "sha256": "62a2aa51b5fc0cbdad044b6b4ce6b6f9bf3fef4607b2bc88c716582a0f80ed97"
+    },
+    {
+      "source": "h1-Gorvak.png",
+      "destination": "h1-Gorvak.png",
+      "sha256": "4d9e351c77b0cf7f89f4e734e228c987aa4941f8baf6c12178e32a6a1c03a494"
+    },
+    {
+      "source": "Dryland_H2.png",
+      "destination": "Dryland_Tavern_H2.png",
+      "sha256": "be4a005a0f955c74c01a878b5a7dff7988bfa751dfe70c7d92251f8ed4b095dc"
+    },
+    {
+      "source": "h2-Elowen.png",
+      "destination": "h2-Elowen.png",
+      "sha256": "f393eeacf54314c2b4974765d8e98a3f4d03e1b2b9a8944be22926ce5751a4bf"
+    },
+    {
+      "source": "Dryland_H3.png",
+      "destination": "Dryland_Tavern_H3.png",
+      "sha256": "4db9a100777da341a99bbb09e94894b995c68ef21104b1efa67f109b453085e2"
+    },
+    {
+      "source": "h3-Griznik.png",
+      "destination": "h3-Griznik.png",
+      "sha256": "8e07631013b8fdb4bf504323e49f02c3fe231e6b71c063b6d1180536bb0dd0d9"
+    },
+    {
+      "source": "Dryland_H4.png",
+      "destination": "Dryland_Tavern_H4.png",
+      "sha256": "3559cb25b4958e0e086c0fa45fac0eb8d7b058eaaa9a10c7f6aeaa2df278d135"
+    },
+    {
+      "source": "h4-Seraphina.png",
+      "destination": "h4-Seraphina.png",
+      "sha256": "078285868b9b8e3a7465176db0e7541a391dfa8e4cf612be96f3ada809d99263"
+    },
+    {
+      "source": "Dryland_H5.png",
+      "destination": "Dryland_Tavern_H5.png",
+      "sha256": "fbc7d718bb4d1947e8da9bb911f7407b008aea813c21cf59de0af9f8c8f0195f"
+    },
+    {
+      "source": "h5-Bimbren.png",
+      "destination": "h5-Bimbren.png",
+      "sha256": "b6e1ca4187a8b2173a39183b077358c9d3e0c8fd4a48d8f72efb948326fe9f23"
+    },
+    {
+      "source": "Dryland_H6.png",
+      "destination": "Dryland_Tavern_H6.png",
+      "sha256": "08c9ce8dab1340102828231759ef34207923dca6743b08ae66c5178f47686ee2"
+    },
+    {
+      "source": "h6-Liora.png",
+      "destination": "h6-Liora.png",
+      "sha256": "df167716fbe88b1d8bfe781d7ac26ffc02fbab5e90ae7885a339044bfffca6d1"
+    },
+    {
+      "source": "Dryland_H7.png",
+      "destination": "Dryland_Tavern_H7.png",
+      "sha256": "30084f3faa0477c2175b423c9d3612711138454527a8e3456deaf0c93bd4de4f"
+    },
+    {
+      "source": "h7-Vaelith.png",
+      "destination": "h7-Vaelith.png",
+      "sha256": "4a70f33010d036391f47d9bcec943aabf1c441c7b6116f1ff47816e94009bd9b"
+    },
+    {
+      "source": "Dryland_H8.png",
+      "destination": "Dryland_Tavern_H8.png",
+      "sha256": "0f9b63304e7de4701ca253b3ca32c97aeac2a14c44b9abb82ae7bcb42de55b5a"
+    },
+    {
+      "source": "h8-Draska.png",
+      "destination": "h8-Draska.png",
+      "sha256": "8ddcf436028f9486fb4b845ec5dd0474031a9c87ea4e0f3f4e79b85b9a60c1f4"
+    }
+  ],
+  "pr": "b50e27593777d6310959b1a4d6375d48ba324ff0",
+  "main": "ee70f87a6c8bd3b054cd10ed6a878d3e9c514668",
+  "nativeLayoutVersion": "mz-20260911-pr3-taverna-02",
+  "editorSave": {
+    "commonEvents": "same parsed content; serialization only",
+    "systemChangedFields": [
+      "versionId"
+    ],
+    "validated": true
+  }
+}

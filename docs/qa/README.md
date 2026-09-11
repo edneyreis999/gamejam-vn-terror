@@ -1,6 +1,6 @@
 # QA viva — Expedição e Sacrifício
 
-Esta é a única árvore durável de QA do protótipo. Cenários guardam o último veredito; jornadas e charters permanecem entre ciclos; cada execução cria um relatório datado. O planejamento atual não transforma evidência automatizada, visual ou histórica em observação de uma pessoa.
+Esta é a única árvore durável de QA do jogo em `rpg-maker/The Dryland Drowned/`. Cenários guardam o último veredito; jornadas e charters permanecem entre ciclos; cada execução cria um relatório datado. O planejamento atual não transforma evidência automatizada, visual ou histórica em observação de uma pessoa.
 
 ## Evidências brutas e material de entrega
 
@@ -20,7 +20,11 @@ As jornadas MZ são [campanha completa](journeys/J-mz-complete-campaign.md), [re
 
 A execução foi pausada pelo usuário após quatro campanhas observadas; o [relatório de playtest](reports/2026-09-09-native-mz-playtest.md) registra resultados parciais, limitações de evidência e próximos passos. Nenhum cenário foi promovido a aceite integral.
 
-As seções abaixo preservam a linha de base histórica do protótipo HTML e não devem ser aplicadas como restrições da migração aprovada.
+As seções abaixo são registros históricos da etapa HTML encerrada. Seus procedimentos não são executáveis nem evidência do MZ atual. Para novos testes, use exclusivamente o plano MZ e os sensores aprovados na spec do incremento.
+
+## Incremento de bustos — 2026-09-11
+
+O [guia de diálogos nativos](guides/vn-picture-busts-dialogues.md) e o [charter](charters/CH-vn-picture-busts-dialogues.md) planejam a composição de bustos e a retomada de checkpoints genuínos. Execução autorizada em loop; a pausa histórica acima não se aplica a esse pedido. Vereditos permanecem separados da baseline.
 
 ## Áreas
 
@@ -31,17 +35,11 @@ As seções abaixo preservam a linha de base histórica do protótipo HTML e nã
 - `ART`: conteúdo, sensibilidade cultural e imagens.
 - `ACC`: teclado, zoom dentro do desktop suportado, movimento reduzido e diagnósticos.
 
-## Entradas públicas
+## Entradas e execução históricas
 
-- Jogador: `file:///…/prototype/index.html`, somente Chrome desktop estável.
-- Automação local: `file:///…/prototype/tests.html`.
-- Operador: `window.expeditionQA` no DevTools, somente `setSeed`, `snapshot` e `validate`.
+A etapa HTML tinha uma página de jogo, um runner local e a API de inspeção `window.expeditionQA`, com `setSeed`, `snapshot` e `validate`. A execução era direta, offline, sem servidor, persistência ou áudio. Essas entradas e seus comandos foram retirados; este registro não orienta sua recuperação.
 
-Não há servidor, instalação, login, persistência ou áudio. Recursos são relativos e devem funcionar com rede desligada. Evidência volumosa fica em `docs/qa/evidence/` e é ignorada; relatórios apontam apenas checkpoints e falhas. `docs/qa/state.csv` é uma visualização gerada e nunca é fonte de planejamento.
-
-## Aplicabilidade deste ciclo
-
-`make verify`, daemon, HTTP/UDS, `config.toml`, CLI do produto e isolamento de runtime/worktree não se aplicam: `_spec.md` e os ADRs preservam HTML/CSS/JS direto por `file://`, sem build ou servidor. A validação automatizada suportada é abrir `prototype/tests.html` no Chrome. Playwright não é dependência do produto, mas pode e deve dirigir a QA da task_05 quando estiver disponível, inclusive sobre páginas `file://`. O manifesto desta linha de base contém 168 IDs únicos (158 V2 e 10 BASE); a sessão confere o manifesto carregado e o relatório estruturado em vez de herdar os totais históricos de 231 ou 351.
+O manifesto histórico continha 168 IDs únicos (158 V2 e 10 BASE). Os totais anteriores de 231 ou 351 pertencem aos relatórios de seus respectivos ciclos. `docs/qa/state.csv` é uma visualização histórica gerada, não uma fonte de planejamento atual.
 
 O desktop suportado exige área efetiva mínima de 1280×720 CSS px, já descontado o zoom do navegador. 1920×1080 é a captura de referência. Larguras estreitas, 320 px efetivos e touch/mobile não pertencem a este incremento. VoiceOver com uma pessoa, aprovação editorial e cultural e aceitação da arte final continuam verificações humanas distintas; resultados automatizados ou observados por agente não as encerram.
 

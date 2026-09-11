@@ -1,0 +1,883 @@
+{
+  "description": "Historical import provenance retained independently of a retired implementation. Native files were not modified by this inventory. Historical statuses are not a new creative acceptance.",
+  "npc_derivation": "The four NPC portraits were made transparent by removing the connected pale background while preserving foreground RGB, per the historical import record.",
+  "assets": [
+    {
+      "asset": "gorvak.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H1.png",
+      "current_sha256": "4d9e351c77b0cf7f89f4e734e228c987aa4941f8baf6c12178e32a6a1c03a494",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 1584,
+        "height": 1986,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "4d9e351c77b0cf7f89f4e734e228c987aa4941f8baf6c12178e32a6a1c03a494",
+        "source_sha256": "4d9e351c77b0cf7f89f4e734e228c987aa4941f8baf6c12178e32a6a1c03a494",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Gorvak.png"
+      }
+    },
+    {
+      "asset": "elowen.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H2.png",
+      "current_sha256": "f393eeacf54314c2b4974765d8e98a3f4d03e1b2b9a8944be22926ce5751a4bf",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 2160,
+        "height": 3840,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "f393eeacf54314c2b4974765d8e98a3f4d03e1b2b9a8944be22926ce5751a4bf",
+        "source_sha256": "f393eeacf54314c2b4974765d8e98a3f4d03e1b2b9a8944be22926ce5751a4bf",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Elowen.png"
+      }
+    },
+    {
+      "asset": "griznik.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H3.png",
+      "current_sha256": "8e07631013b8fdb4bf504323e49f02c3fe231e6b71c063b6d1180536bb0dd0d9",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 1358,
+        "height": 2147,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "8e07631013b8fdb4bf504323e49f02c3fe231e6b71c063b6d1180536bb0dd0d9",
+        "source_sha256": "8e07631013b8fdb4bf504323e49f02c3fe231e6b71c063b6d1180536bb0dd0d9",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Griznik.png"
+      }
+    },
+    {
+      "asset": "seraphina.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H4.png",
+      "current_sha256": "078285868b9b8e3a7465176db0e7541a391dfa8e4cf612be96f3ada809d99263",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 2160,
+        "height": 3840,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "078285868b9b8e3a7465176db0e7541a391dfa8e4cf612be96f3ada809d99263",
+        "source_sha256": "078285868b9b8e3a7465176db0e7541a391dfa8e4cf612be96f3ada809d99263",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Seraphina.png"
+      }
+    },
+    {
+      "asset": "bimbren.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H5.png",
+      "current_sha256": "b6e1ca4187a8b2173a39183b077358c9d3e0c8fd4a48d8f72efb948326fe9f23",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 1494,
+        "height": 2354,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "b6e1ca4187a8b2173a39183b077358c9d3e0c8fd4a48d8f72efb948326fe9f23",
+        "source_sha256": "b6e1ca4187a8b2173a39183b077358c9d3e0c8fd4a48d8f72efb948326fe9f23",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Bimbren.png"
+      }
+    },
+    {
+      "asset": "liora.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H6.png",
+      "current_sha256": "df167716fbe88b1d8bfe781d7ac26ffc02fbab5e90ae7885a339044bfffca6d1",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 1552,
+        "height": 2397,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "df167716fbe88b1d8bfe781d7ac26ffc02fbab5e90ae7885a339044bfffca6d1",
+        "source_sha256": "df167716fbe88b1d8bfe781d7ac26ffc02fbab5e90ae7885a339044bfffca6d1",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Liora.png"
+      }
+    },
+    {
+      "asset": "vaelith.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H7.png",
+      "current_sha256": "4a70f33010d036391f47d9bcec943aabf1c441c7b6116f1ff47816e94009bd9b",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 2160,
+        "height": 3840,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "4a70f33010d036391f47d9bcec943aabf1c441c7b6116f1ff47816e94009bd9b",
+        "source_sha256": "4a70f33010d036391f47d9bcec943aabf1c441c7b6116f1ff47816e94009bd9b",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Vaelith.png"
+      }
+    },
+    {
+      "asset": "draska.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_H8.png",
+      "current_sha256": "8ddcf436028f9486fb4b845ec5dd0474031a9c87ea4e0f3f4e79b85b9a60c1f4",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "hero",
+        "width": 1264,
+        "height": 2136,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "8ddcf436028f9486fb4b845ec5dd0474031a9c87ea4e0f3f4e79b85b9a60c1f4",
+        "source_sha256": "8ddcf436028f9486fb4b845ec5dd0474031a9c87ea4e0f3f4e79b85b9a60c1f4",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/herois/Draska.png"
+      }
+    },
+    {
+      "asset": "ivai.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_ivai.png",
+      "current_sha256": "74a24ac459be761944b6444368f71714d5cd5aa445c0af49cd3ae4d845e2cc11",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "character",
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "74a24ac459be761944b6444368f71714d5cd5aa445c0af49cd3ae4d845e2cc11",
+        "source_sha256": "c12f523d0e4de323727749dff89cc08ee7e724211eb3f4582ecf3c96bd8eaf48",
+        "byte_identical_to_source": false,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/personagens/ivai.png"
+      }
+    },
+    {
+      "asset": "florai.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_florai.png",
+      "current_sha256": "7fe6857b727df9f344c51d99c071ebd6369f9d65328653aef635418eafc1625e",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "character",
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "7fe6857b727df9f344c51d99c071ebd6369f9d65328653aef635418eafc1625e",
+        "source_sha256": "b05469c26740c396e1302e65154caa4527470cb8d9aae8615f4b619311faa4af",
+        "byte_identical_to_source": false,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/personagens/florai.png"
+      }
+    },
+    {
+      "asset": "perola.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_perola.png",
+      "current_sha256": "3608703d1732146f6e9d227c3ddfe091769e55357a2c9e42b2244c0e7c4c7c4a",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "character",
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "3608703d1732146f6e9d227c3ddfe091769e55357a2c9e42b2244c0e7c4c7c4a",
+        "source_sha256": "c7f8ea217926a80839245f257cb9a62af48b303da4190a1cc63c928d90f846e7",
+        "byte_identical_to_source": false,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/personagens/perola.png"
+      }
+    },
+    {
+      "asset": "andira.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_andira.png",
+      "current_sha256": "3b5885d023341891ad9de0a2d1dd9b74cdc90e132a56109453962fdd238d769b",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "character",
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "sha256": "3b5885d023341891ad9de0a2d1dd9b74cdc90e132a56109453962fdd238d769b",
+        "source_sha256": "2fdcaf87201859022a1333b30a51ed491b8c652500c1cfdabd1a98722b30b8f4",
+        "byte_identical_to_source": false,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/personagens/andira.png"
+      }
+    },
+    {
+      "asset": "caminho-da-igreja.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Destination_physical.png",
+      "current_sha256": "22b9cf7a66d91937626d09f2b5dc8284bf6d98c867dcff119fba8a8af64bd3bf",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "destination",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "22b9cf7a66d91937626d09f2b5dc8284bf6d98c867dcff119fba8a8af64bd3bf",
+        "source_sha256": "22b9cf7a66d91937626d09f2b5dc8284bf6d98c867dcff119fba8a8af64bd3bf",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/destinos/caminho-da-igreja.png"
+      }
+    },
+    {
+      "asset": "parque-das-aguas-assombradas.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Destination_supernatural.png",
+      "current_sha256": "404b9843c2cfb35796586cc77ff7647fef8171416f736b36d2046bfbce142605",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "destination",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "404b9843c2cfb35796586cc77ff7647fef8171416f736b36d2046bfbce142605",
+        "source_sha256": "404b9843c2cfb35796586cc77ff7647fef8171416f736b36d2046bfbce142605",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/destinos/parque-das-aguas-assombradas.png"
+      }
+    },
+    {
+      "asset": "vilarejo-partido.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Destination_final.png",
+      "current_sha256": "738f65dc3754d7d7e8a5f2b6ace252c682f05e55bc1dfb2cd728b4afd5150cc5",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "destination",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "738f65dc3754d7d7e8a5f2b6ace252c682f05e55bc1dfb2cd728b4afd5150cc5",
+        "source_sha256": "738f65dc3754d7d7e8a5f2b6ace252c682f05e55bc1dfb2cd728b4afd5150cc5",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/destinos/vilarejo-partido.png"
+      }
+    },
+    {
+      "asset": "taverna.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Taverna.png",
+      "current_sha256": "a1ab83a8eeb47ddbed2d17211c55c1287d6d1416744ff1c3104c72b86ca3eeb1",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "scene",
+        "width": 1267,
+        "height": 727,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "a1ab83a8eeb47ddbed2d17211c55c1287d6d1416744ff1c3104c72b86ca3eeb1",
+        "source_sha256": "a1ab83a8eeb47ddbed2d17211c55c1287d6d1416744ff1c3104c72b86ca3eeb1",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/taverna-brief.png"
+      }
+    },
+    {
+      "asset": "igreja-interior.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Church.png",
+      "current_sha256": "be9ab30f9c01c8fe92f7912d9a5e68130bc13334f56c815f5d23073dddaca392",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "scene",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "be9ab30f9c01c8fe92f7912d9a5e68130bc13334f56c815f5d23073dddaca392",
+        "source_sha256": "be9ab30f9c01c8fe92f7912d9a5e68130bc13334f56c815f5d23073dddaca392",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/cenarios/igreja-interior.png"
+      }
+    },
+    {
+      "asset": "parque-figueira.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Figtree.png",
+      "current_sha256": "534489487249e759bd28edaa7c5ca3c4cf1c48194acd4d3d76bada5df710cea4",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "scene",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "534489487249e759bd28edaa7c5ca3c4cf1c48194acd4d3d76bada5df710cea4",
+        "source_sha256": "534489487249e759bd28edaa7c5ca3c4cf1c48194acd4d3d76bada5df710cea4",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/cenarios/parque-figueira.png"
+      }
+    },
+    {
+      "asset": "casa-do-conselho.png",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Council.png",
+      "current_sha256": "4617db6e89709c2f8e450b04289b1b2e10eb28d4365b9334780073148da5f956",
+      "source_to_current_comparison": "byte-identical",
+      "historical_record": {
+        "category": "scene",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "4617db6e89709c2f8e450b04289b1b2e10eb28d4365b9334780073148da5f956",
+        "source_sha256": "4617db6e89709c2f8e450b04289b1b2e10eb28d4365b9334780073148da5f956",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "plano/gerar-spac-att-prototipo/imagens/cenarios/casa-do-conselho.png"
+      }
+    },
+    {
+      "asset": "a1.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A1.png",
+      "current_sha256": "8da36924dfc3618bb7b26a164e61a26f9f3cef146d6d81c1a19592e8225d72d9",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.20369513888888888,
+          0.15811597222222223,
+          0.28596805555555554
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "799a62be826320fef61627a58f95defb734257b48b9e742346a64bd1a85a0459",
+        "source_sha256": "799a62be826320fef61627a58f95defb734257b48b9e742346a64bd1a85a0459",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a1.jpg"
+      }
+    },
+    {
+      "asset": "a2.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A2.png",
+      "current_sha256": "539366a92ccd0cf98c4117787f99ad03ff9dfa1b788bc7770fba54d8e336ea92",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.15947708333333332,
+          0.1626298611111111,
+          0.39919027777777777
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "6381d38df86ef121696f6453783d9ba5bef903911c506494c688348a0bfedc1e",
+        "source_sha256": "6381d38df86ef121696f6453783d9ba5bef903911c506494c688348a0bfedc1e",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a2.jpg"
+      }
+    },
+    {
+      "asset": "a3.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A3.png",
+      "current_sha256": "3c48ce1b6865d5b82ce2df7f5a91f4bf31be9b0c2b80cf93477122c3f9ad000b",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.2973631944444444,
+          0.20714652777777778,
+          0.3632958333333333
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "e1b9b801a102c4cacfe82b857184e40db0d48021bde9b9e65b6848c229574632",
+        "source_sha256": "e1b9b801a102c4cacfe82b857184e40db0d48021bde9b9e65b6848c229574632",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a3.jpg"
+      }
+    },
+    {
+      "asset": "a4.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A4.png",
+      "current_sha256": "37c860b5f608b4e8b810377c0895fadbe0b92837c401da0e924dbfd0592fd1fb",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.14356458333333333,
+          0.13322847222222223,
+          0.249525
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "6c8017b6bc9b245df936df40aca6cfe6fb01fb235183fb735150173f5f339997",
+        "source_sha256": "6c8017b6bc9b245df936df40aca6cfe6fb01fb235183fb735150173f5f339997",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a4.jpg"
+      }
+    },
+    {
+      "asset": "a5.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A5.png",
+      "current_sha256": "d60a247d61e77dfa791ca6ea3c787e7df1f9f7c2b6302cdcd125cafb4f217297",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.42578472222222224,
+          0.2540201388888889,
+          0.35980833333333334
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "6508d97dc8a72043ea52472b706c73aaa13895f5044b61913ac847782b67b32a",
+        "source_sha256": "6508d97dc8a72043ea52472b706c73aaa13895f5044b61913ac847782b67b32a",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a5.jpg"
+      }
+    },
+    {
+      "asset": "a6.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A6.png",
+      "current_sha256": "df1d85a5a35e49f785e66cc7ce1088bdedd680ac1957329e1506225f32298ac3",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.26253055555555554,
+          0.191225,
+          0.38067430555555554
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "4565ac10d946e5b35674817b5d9fcf4ff7f7ee0e9c62d2a9842f27f4a0ef8193",
+        "source_sha256": "4565ac10d946e5b35674817b5d9fcf4ff7f7ee0e9c62d2a9842f27f4a0ef8193",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a6.jpg"
+      }
+    },
+    {
+      "asset": "a7.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A7.png",
+      "current_sha256": "63068f006ea49af7c290612a7bce0b7cfb289c00b574bcbe8b65227f376fb728",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.2899673611111111,
+          0.22505416666666667,
+          0.38316180555555557
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "04fa9a9ac090e022fc95b2f734b9e26ff25ec8f8285b6d45d6f299e8d9059e9e",
+        "source_sha256": "04fa9a9ac090e022fc95b2f734b9e26ff25ec8f8285b6d45d6f299e8d9059e9e",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a7.jpg"
+      }
+    },
+    {
+      "asset": "a8.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_A8.png",
+      "current_sha256": "c389dd235971442e30e80d7bd6618c83ade5bd4e94bec3f91c669b9003f9c26c",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.10548541666666666,
+          0.14459097222222222,
+          0.1434513888888889
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "b10c1d6848001a71d2872f79330df1fa21883d1a2ec69569c75a4d70731a3cc5",
+        "source_sha256": "b10c1d6848001a71d2872f79330df1fa21883d1a2ec69569c75a4d70731a3cc5",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image a8.jpg"
+      }
+    },
+    {
+      "asset": "b1.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B1.png",
+      "current_sha256": "7a046062934238ed9eaf48b5a50738cd81cb1c606b16efa347cd94e7d9533ce0",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.15889722222222222,
+          0.12061944444444445,
+          0.1958236111111111
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "57bc1fdb536c855666dc1d20da754e7ecbd85a4d67da7ede6b99cc5f44a867ca",
+        "source_sha256": "57bc1fdb536c855666dc1d20da754e7ecbd85a4d67da7ede6b99cc5f44a867ca",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b1.jpg"
+      }
+    },
+    {
+      "asset": "b2.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B2.png",
+      "current_sha256": "cd384f2b062d5fc32d2f643469146553e0ad0189c0a6b485d8404e99cf70b51d",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.11373611111111111,
+          0.11683611111111111,
+          0.16836041666666668
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "82e65be1ae5ecba0ab4ff35873565661bc81016e1ea93a74ca971e5c173c5b3c",
+        "source_sha256": "82e65be1ae5ecba0ab4ff35873565661bc81016e1ea93a74ca971e5c173c5b3c",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b2.jpg"
+      }
+    },
+    {
+      "asset": "b3.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B3.png",
+      "current_sha256": "94ae5c75684e254c26d4957084547f94a120a57b8b364750a434d5b26a15d8de",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.23119375,
+          0.15777569444444445,
+          0.28778333333333334
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "7c9260406d4c5c52097115c5b3218687f7bcf96468427320a594a954f9cbd434",
+        "source_sha256": "7c9260406d4c5c52097115c5b3218687f7bcf96468427320a594a954f9cbd434",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b3.jpg"
+      }
+    },
+    {
+      "asset": "b4.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B4.png",
+      "current_sha256": "c8548fa7098e24f532142b38a2c28623e2a153eaa7b98e115f5d7143a11c38a1",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.24989027777777778,
+          0.21541805555555554,
+          0.4855638888888889
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "af1df438fcf34c603ae83673c77b1f94a0132242fafecdb0ba55cffa3f5255fe",
+        "source_sha256": "af1df438fcf34c603ae83673c77b1f94a0132242fafecdb0ba55cffa3f5255fe",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b4.jpg"
+      }
+    },
+    {
+      "asset": "b5.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B5.png",
+      "current_sha256": "679b8c4a33c407da180483cde580fc1dda04dc302d00a67a86dc8be47c174bf4",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.11049375,
+          0.09856111111111111,
+          0.17587916666666667
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "58cb75c0db96cbf11e0227e6955a4e7b99659975b6496274f761feab6fd20b3d",
+        "source_sha256": "58cb75c0db96cbf11e0227e6955a4e7b99659975b6496274f761feab6fd20b3d",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b5.jpg"
+      }
+    },
+    {
+      "asset": "b6.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B6.png",
+      "current_sha256": "592c7f6e22bf187fc143fbc00451d8dd4b5a712050e2dacfaa547ab4eb4c9035",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.28598055555555557,
+          0.20549027777777779,
+          0.24441597222222222
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "e79d6433a19d92215864fdc1a0070f07ae55b430d4ca0a212baaa06210d5cedd",
+        "source_sha256": "e79d6433a19d92215864fdc1a0070f07ae55b430d4ca0a212baaa06210d5cedd",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b6.jpg"
+      }
+    },
+    {
+      "asset": "b7.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B7.png",
+      "current_sha256": "958cf2c61a5c37643948c99f0abfd7f1f29700da8d1a512cfa5cb6a76a92ef71",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.10795,
+          0.08803125,
+          0.13124444444444444
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "e5d062bcd8eee1d5a01487787ac7644e3264313b3778e23e3acdcff6fdd0a329",
+        "source_sha256": "e5d062bcd8eee1d5a01487787ac7644e3264313b3778e23e3acdcff6fdd0a329",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b7.jpg"
+      }
+    },
+    {
+      "asset": "b8.jpg",
+      "current_path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_Encounter_B8.png",
+      "current_sha256": "6de0d7bf6151a51c607538e4f459fc59150cf68bae11190f2d9679ffa66e0a9b",
+      "source_to_current_comparison": "Existing PNG conversion by sips from the same encounter source, verified in historical migration code; not byte/pixel-identical.",
+      "comparison_measurement": {
+        "dimensions": [
+          1600,
+          900
+        ],
+        "mean_absolute_rgb_difference": [
+          0.21193541666666665,
+          0.15787847222222223,
+          0.2536777777777778
+        ]
+      },
+      "historical_record": {
+        "category": "encounter",
+        "width": 1600,
+        "height": 900,
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "sha256": "a9eacb749af9370b6a9e9eb0cc618b9c6ed7fbd51933bbdf1f495e769aba5098",
+        "source_sha256": "a9eacb749af9370b6a9e9eb0cc618b9c6ed7fbd51933bbdf1f495e769aba5098",
+        "byte_identical_to_source": true,
+        "rgb_identical_to_source": true,
+        "status": "provisional prototype baseline",
+        "source_description": "Historical local encounter image b8.jpg"
+      }
+    }
+  ]
+}

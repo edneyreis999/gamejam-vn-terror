@@ -4,7 +4,44 @@
   const root = document.getElementById("artboard");
   const surface = document.body.dataset.surface;
   const state = new URLSearchParams(location.search).get("state") || "default";
-  const A = "../../../../prototype/assets/";
+  const A = "../../../../rpg-maker/The Dryland Drowned/img/pictures/";
+  const assets = {
+    "heroes/gorvak.png": "Dryland_H1.png",
+    "heroes/elowen.png": "Dryland_H2.png",
+    "heroes/griznik.png": "Dryland_H3.png",
+    "heroes/seraphina.png": "Dryland_H4.png",
+    "heroes/bimbren.png": "Dryland_H5.png",
+    "heroes/liora.png": "Dryland_H6.png",
+    "heroes/vaelith.png": "Dryland_H7.png",
+    "heroes/draska.png": "Dryland_H8.png",
+    "characters/ivai.png": "Dryland_ivai.png",
+    "characters/florai.png": "Dryland_florai.png",
+    "characters/perola.png": "Dryland_perola.png",
+    "characters/andira.png": "Dryland_andira.png",
+    "destinations/caminho-da-igreja.png": "Dryland_Destination_physical.png",
+    "destinations/parque-das-aguas-assombradas.png": "Dryland_Destination_supernatural.png",
+    "destinations/vilarejo-partido.png": "Dryland_Destination_final.png",
+    "scenes/taverna.png": "Dryland_Taverna.png",
+    "scenes/igreja-interior.png": "Dryland_Church.png",
+    "scenes/parque-figueira.png": "Dryland_Figtree.png",
+    "scenes/casa-do-conselho.png": "Dryland_Council.png",
+    "encounters/a1.jpg": "Dryland_Encounter_A1.png",
+    "encounters/a2.jpg": "Dryland_Encounter_A2.png",
+    "encounters/a3.jpg": "Dryland_Encounter_A3.png",
+    "encounters/a4.jpg": "Dryland_Encounter_A4.png",
+    "encounters/a5.jpg": "Dryland_Encounter_A5.png",
+    "encounters/a6.jpg": "Dryland_Encounter_A6.png",
+    "encounters/a7.jpg": "Dryland_Encounter_A7.png",
+    "encounters/a8.jpg": "Dryland_Encounter_A8.png",
+    "encounters/b1.jpg": "Dryland_Encounter_B1.png",
+    "encounters/b2.jpg": "Dryland_Encounter_B2.png",
+    "encounters/b3.jpg": "Dryland_Encounter_B3.png",
+    "encounters/b4.jpg": "Dryland_Encounter_B4.png",
+    "encounters/b5.jpg": "Dryland_Encounter_B5.png",
+    "encounters/b6.jpg": "Dryland_Encounter_B6.png",
+    "encounters/b7.jpg": "Dryland_Encounter_B7.png",
+    "encounters/b8.jpg": "Dryland_Encounter_B8.png"
+  };
   const heroes = ["gorvak", "elowen", "griznik", "seraphina", "bimbren", "liora", "vaelith", "draska"];
   const names = ["Gorvak", "Elowen", "Griznik", "Seraphina", "Bimbren", "Liora", "Vaelith", "Draska"];
   const pronouns = ["Ele/dele", "Ela/dela", "Ele/dele", "Ela/dela", "Ele/dele", "Ela/dela", "Ele/dele", "Ela/dela"];
@@ -67,7 +104,7 @@
   const title = stateLabels[state] || "Variação de referência";
   const top = (label, progress = "Referência de composição") => `<header class="topbar"><strong>Afogados em Terra Seca</strong><span>${esc(label)}</span><span>${esc(progress)}</span></header>`;
   const screen = (label, body, cls = "") => `<section class="screen" data-state="${esc(state)}">${top(label)}<div class="stage ${cls}">${body}</div></section>`;
-  const img = (path, alt, cls = "") => `<img class="${cls}" src="${A}${path}" alt="${esc(alt)}">`;
+  const img = (path, alt, cls = "") => `<img class="${cls}" src="${A}${assets[path]}" alt="${esc(alt)}">`;
   const fallback = (text) => `<div class="image-fallback" role="img" aria-label="${esc(text)}">${esc(text)}<br><span class="small">O texto e as ações continuam disponíveis.</span></div>`;
   const paper = (body, cls = "", style = "") => `<article class="paper ${cls}"${style ? ` style="${style}"` : ""}>${body}</article>`;
   const button = (text, cls = "") => `<button class="btn ${cls}" type="button">${esc(text)}</button>`;
@@ -164,7 +201,7 @@
     const controls = threshold ? button("Entrar no encontro", "primary focused") + button("Recuar", "ghost")
       : choicesVisible ? content.approaches.map((text) => `<button class="choice">${esc(text)}</button>`).join("")
       : (state === "revisited-presentation" ? button("Pular texto já lido", "ghost") : "") + button("Avançar", "primary focused") + (consequence ? "" : button("Recuar", "ghost"));
-    return screen("Expedição", `<div class="encounter-layout"><div class="party-column">${heroes.slice(0, count).map((h, i) => img(`heroes/${h}.png`, names[i])).join("")}</div><div class="encounter-art"${missing ? "" : ` style="background-image:url('${A}${imagePath}')"`}>${missing ? fallback("Imagem do encontro indisponível") : ""}</div><div class="choice-column">${controls}</div>${paper(`<div class="meta"><span>Caminho da Igreja</span><span>${state === "last-route-position" ? "Encontro 5 de 5" : "Encontro 1 de 5"}</span></div><h3>${threshold ? "À entrada do caminho" : esc(content.title)}</h3><p>${esc(result)}</p>`, "passage")}</div>`);
+    return screen("Expedição", `<div class="encounter-layout"><div class="party-column">${heroes.slice(0, count).map((h, i) => img(`heroes/${h}.png`, names[i])).join("")}</div><div class="encounter-art"${missing ? "" : ` style="background-image:url('${A}${assets[imagePath]}')"`}>${missing ? fallback("Imagem do encontro indisponível") : ""}</div><div class="choice-column">${controls}</div>${paper(`<div class="meta"><span>Caminho da Igreja</span><span>${state === "last-route-position" ? "Encontro 5 de 5" : "Encontro 1 de 5"}</span></div><h3>${threshold ? "À entrada do caminho" : esc(content.title)}</h3><p>${esc(result)}</p>`, "passage")}</div>`);
   }
 
   function sacrifice() {
@@ -176,7 +213,7 @@
 
   function retreat() {
     if (state === "cancelled-to-passage") {
-      return screen("Expedição", `<div class="encounter-layout"><div class="party-column">${heroes.slice(0, 3).map((h, i) => img(`heroes/${h}.png`, names[i])).join("")}</div><div class="encounter-art" style="background-image:url('${A}encounters/a1.jpg')"></div><div class="choice-column"><div class="reading-prompt">O recuo foi cancelado. O trecho continua na mesma posição.</div></div>${paper(`<div class="meta"><span>Caminho da Igreja</span><span>Encontro 1 de 5</span></div><h3>Travessia interrompida</h3><p>${longText}</p><div class="actions">${button("Avançar", "primary focused")}${button("Recuar", "ghost")}</div>`, "passage")}</div>`);
+      return screen("Expedição", `<div class="encounter-layout"><div class="party-column">${heroes.slice(0, 3).map((h, i) => img(`heroes/${h}.png`, names[i])).join("")}</div><div class="encounter-art" style="background-image:url('${A}${assets["encounters/a1.jpg"]}')"></div><div class="choice-column"><div class="reading-prompt">O recuo foi cancelado. O trecho continua na mesma posição.</div></div>${paper(`<div class="meta"><span>Caminho da Igreja</span><span>Encontro 1 de 5</span></div><h3>Travessia interrompida</h3><p>${longText}</p><div class="actions">${button("Avançar", "primary focused")}${button("Recuar", "ghost")}</div>`, "passage")}</div>`);
     }
     const automatic = state.startsWith("automatic-");
     const blocked = state === "ineligible-request" || state === "committed-consequence";
@@ -196,7 +233,7 @@
     const two = state === "two-pieces-overlay";
     const bg = perola ? "igreja-interior.png" : "parque-figueira.png";
     const prison = perola ? "Pedra da prisão sob o altar" : "Raízes da figueira-prisão";
-    return screen("Amantes e mapa", `<div class="lover-layout" style="background:${missingBg ? "#15110d" : `linear-gradient(rgba(8,6,4,.18),rgba(8,6,4,.55)),url('${A}scenes/${bg}') center/cover`}">${missingBg ? fallback("Cenário narrativo indisponível") : ""}${missingPortrait ? fallback("Retrato do amante indisponível") : `${img(`characters/${perola ? "perola" : "florai"}.png`, perola ? "Pérola incorporada à pedra" : "Floraí incorporado às raízes", `lover-portrait ${perola ? "stone-bound" : "root-bound"}`)}<div class="prison-boundary ${perola ? "stone" : "roots"}">${prison}</div>`}${paper(`<p class="kicker brass-text">${perola ? "Sob o altar" : "Entre as raízes"}</p><h2>${perola ? "Pérola" : "Floraí"}</h2><p>${state.endsWith("second") ? "Ivaí conhece mais desta história do que admite. Não confundam as peças do mapa com as metades do medalhão." : "Uma metade não revela a entrada. Procurem a outra margem, mas desconfiem de quem já decidiu o fim."}</p><div><span class="map-piece">Peça ${perola ? "anã" : "élfica"}</span>${two ? '<span class="map-piece second">Segunda peça</span>' : ""}</div>`, "lover-text")}</div>`, "");
+    return screen("Amantes e mapa", `<div class="lover-layout" style="background:${missingBg ? "#15110d" : `linear-gradient(rgba(8,6,4,.18),rgba(8,6,4,.55)),url('${A}${assets[`scenes/${bg}`]}') center/cover`}">${missingBg ? fallback("Cenário narrativo indisponível") : ""}${missingPortrait ? fallback("Retrato do amante indisponível") : `${img(`characters/${perola ? "perola" : "florai"}.png`, perola ? "Pérola incorporada à pedra" : "Floraí incorporado às raízes", `lover-portrait ${perola ? "stone-bound" : "root-bound"}`)}<div class="prison-boundary ${perola ? "stone" : "roots"}">${prison}</div>`}${paper(`<p class="kicker brass-text">${perola ? "Sob o altar" : "Entre as raízes"}</p><h2>${perola ? "Pérola" : "Floraí"}</h2><p>${state.endsWith("second") ? "Ivaí conhece mais desta história do que admite. Não confundam as peças do mapa com as metades do medalhão." : "Uma metade não revela a entrada. Procurem a outra margem, mas desconfiem de quem já decidiu o fim."}</p><div><span class="map-piece">Peça ${perola ? "anã" : "élfica"}</span>${two ? '<span class="map-piece second">Segunda peça</span>' : ""}</div>`, "lover-text")}</div>`, "");
   }
 
   function council() {
@@ -204,7 +241,7 @@
     const missing = state === "missing-art";
     const choice = state === "final-choice";
     const committed = state === "reunite-committed" ? "Ivaí une as duas metades. O juramento volta a existir e a escolha já não pode ser alterada." : state === "destroy-committed" ? "Ivaí parte as duas metades. Andirá se move no reflexo e a escolha já não pode ser alterada." : "";
-    return screen("Conselho", `<div class="council-layout" style="background:${missing ? "#15110d" : `linear-gradient(rgba(8,6,4,.18),rgba(8,6,4,.58)),url('${A}scenes/casa-do-conselho.png') center/cover`}">${missing ? fallback("Arte do Conselho indisponível") : `<div class="reflection-pool">${img("characters/andira.png", "Andirá somente no reflexo")}</div>`}<div class="council-party">${heroes.slice(0, count).map((h, i) => img(`heroes/${h}.png`, names[i])).join("")}</div>${paper(`<p class="kicker brass-text">Casa do Conselho</p><h2>${title}</h2><p>${committed || (state === "opinion" ? "reunir o medalhão e libertar Floraí e Pérola. Ivaí deve aceitar pessoalmente o custo da história que impôs aos outros." : "O registro de Palotina confirma os dois custos. Ivaí confessa que planejava destruir o medalhão antes de reunir o grupo.")}</p>${choice ? `<div class="actions">${button("Reunir o medalhão")}${button("Destruir o medalhão", "danger")}</div>` : committed ? button("Avançar", "primary focused") : ""}`, "council-text")}</div>`);
+    return screen("Conselho", `<div class="council-layout" style="background:${missing ? "#15110d" : `linear-gradient(rgba(8,6,4,.18),rgba(8,6,4,.58)),url('${A}${assets["scenes/casa-do-conselho.png"]}') center/cover`}">${missing ? fallback("Arte do Conselho indisponível") : `<div class="reflection-pool">${img("characters/andira.png", "Andirá somente no reflexo")}</div>`}<div class="council-party">${heroes.slice(0, count).map((h, i) => img(`heroes/${h}.png`, names[i])).join("")}</div>${paper(`<p class="kicker brass-text">Casa do Conselho</p><h2>${title}</h2><p>${committed || (state === "opinion" ? "reunir o medalhão e libertar Floraí e Pérola. Ivaí deve aceitar pessoalmente o custo da história que impôs aos outros." : "O registro de Palotina confirma os dois custos. Ivaí confessa que planejava destruir o medalhão antes de reunir o grupo.")}</p>${choice ? `<div class="actions">${button("Reunir o medalhão")}${button("Destruir o medalhão", "danger")}</div>` : committed ? button("Avançar", "primary focused") : ""}`, "council-text")}</div>`);
   }
 
   function endings() {

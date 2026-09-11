@@ -1,3 +1,5 @@
+> Historical record: the HTML implementation has been retired. Procedures and source references below describe that past delivery only; do not execute them, recover its source, or treat its results as evidence of the current game. Current implementation: `rpg-maker/The Dryland Drowned/`; current tests: `rpg-maker/tests/`.
+
 # QA Run Report — 2026-08-30 — browser prototype
 
 - **Scope:** full release walk of the direct-file browser prototype after tasks 01–07
@@ -143,7 +145,7 @@ Safari, Firefox, mobile browsers, server deployments, authentication, persistenc
 
 ## Final Status
 
-- **Exit gate (full automated suite):** Chrome 152, direct `file:///Users/edney/projects/coreto/gamejam-vn-terror/prototype/tests.html`, network offline — `231 aprovados, 0 falharam, 231 no total.`
+- **Exit gate (full automated suite):** Chrome 152, direct `retired HTML artifact (tests.html)`, network offline — `231 aprovados, 0 falharam, 231 no total.`
 - **Issues by user impact:** Blocks-Completion 0 · Data-Loss 0 · Trust-Damage 0 · Friction 0 · Cosmetic 0
 - **Coverage:** 4/4 journeys and 6/6 charters walked; 6/6 scenarios pass. VoiceOver audio observation and final human cultural ownership are explicitly unverified, not silently counted.
 - **Verdict:** ready — the contracted Chrome/file prototype is playable, deterministic, offline and evidence-backed; retain the two human checks before treating it as a public accessibility/cultural sign-off.
