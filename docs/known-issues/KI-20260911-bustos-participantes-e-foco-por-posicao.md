@@ -1,5 +1,7 @@
 # Limitação conhecida: participantes adicionais e foco por posição
 
+> Atualização de contrato em 2026-09-11: [autoria nativa de bustos](../../planos/tasks/vn-native-bust-authorship/spec.md) substitui o foco automático e os cinco controles do EventBridge por comandos VNPictureBusts nos eventos. As referências a esses controles abaixo são históricas. A ampliação de participantes e as demais pendências não são implementadas por essa mudança.
+
 Data: 2026-09-11. Público: Edney e futuros responsáveis pela programação e autoria de cenas.
 
 **Estado: adiado por decisão do usuário; retomar somente se houver necessidade.** Este documento registra uma limitação de extensibilidade e uma hipótese de evolução. Não é uma spec aprovada, um defeito reproduzido nas conversas entregues ou autorização para alterar plugins. Não define prazo ou compromisso de implementação.

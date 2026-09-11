@@ -5,7 +5,7 @@ import { defaultProject, layoutErrors, localAssets, nativeFiles } from './native
 import { readPluginParameters } from './plugin-settings.mjs';
 
 const require = createRequire(import.meta.url);
-const { parseEventCatalog, parseFocusParameters } = require('../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
+const { parseEventCatalog } = require('../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
 const args = process.argv.slice(2);
 let project = defaultProject;
 let json = false;
@@ -27,14 +27,14 @@ if (!valid) {
     const commonEvents = JSON.parse(await readFile(path.join(project, 'data/CommonEvents.json'), 'utf8'));
     const system = JSON.parse(await readFile(path.join(project, 'data/System.json'), 'utf8'));
     const assets = await localAssets(project);
-    let configuration;
+    let configurationErrors = [];
     try {
-      configuration = parseFocusParameters(await readPluginParameters(project, 'Dryland_EventBridge'));
+      await readPluginParameters(project, 'Dryland_EventBridge');
     } catch (error) {
-      configuration = { errors: [{ code: 'invalid_plugin_configuration', message: error.message }] };
+      configurationErrors = [{ code: 'invalid_plugin_configuration', message: error.message }];
     }
-    errors = parseEventCatalog(commonEvents, { ...system, drylandAssets: assets }, configuration.style).violations;
-    if (errors.length === 0) errors = configuration.errors;
+    errors = parseEventCatalog(commonEvents, { ...system, drylandAssets: assets }).violations;
+    if (errors.length === 0) errors = configurationErrors;
     if (errors.length === 0) {
       const manifest = JSON.parse(await readFile(path.join(project, 'native-layout-manifest.json'), 'utf8'));
       errors = layoutErrors(manifest, await nativeFiles(project), assets);

@@ -324,11 +324,183 @@
           "code": 357,
           "indent": 0,
           "parameters": [
-            "Dryland_EventBridge",
-            "Focus",
-            "Focus",
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
             {
-              "slot": "60"
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "210",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "454",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "826",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "1116",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
             }
           ]
         },
@@ -354,11 +526,183 @@
           "code": 357,
           "indent": 0,
           "parameters": [
-            "Dryland_EventBridge",
-            "Focus",
-            "Focus",
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
             {
-              "slot": "61"
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "194",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "470",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "826",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "1116",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
             }
           ]
         },
@@ -384,11 +728,183 @@
           "code": 357,
           "indent": 0,
           "parameters": [
-            "Dryland_EventBridge",
-            "Focus",
-            "Focus",
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
             {
-              "slot": "63"
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "194",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "454",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "810",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "1116",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
             }
           ]
         },
@@ -414,11 +930,183 @@
           "code": 357,
           "indent": 0,
           "parameters": [
-            "Dryland_EventBridge",
-            "Focus",
-            "Focus",
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
             {
-              "slot": "64"
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "194",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "454",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "826",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "TargetX:str": "1100",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 0,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "20",
+              "customTone:eval": "[0,0,0,0]"
             }
           ]
         },
@@ -483,8 +1171,7 @@
         "Conversation",
         {
           "kind": "council",
-          "operation": "begin",
-          "slots": "60,61,63,64"
+          "operation": "begin"
         }
       ]
     },
