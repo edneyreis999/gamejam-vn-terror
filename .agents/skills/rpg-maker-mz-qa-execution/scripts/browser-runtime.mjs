@@ -44,6 +44,24 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     }
   };
   const metadata = () => page.evaluate(() => ({ url: location.href, timeOrigin: performance.timeOrigin, width: innerWidth, height: innerHeight, dpr: devicePixelRatio, locale: navigator.language, fonts: [...document.fonts].map(f => ({ family: f.family, status: f.status })), focused: document.hasFocus(), visibility: document.visibilityState, geometryEvents: globalThis.__qaTelemetry.geometry, canvas: [...document.querySelectorAll('canvas')].map(c => ({ width: c.width, height: c.height, rect: c.getBoundingClientRect().toJSON() })) }));
+  const physicalViewport = async () => {
+    const metrics = await session.send('Page.getLayoutMetrics');
+    const viewport = metrics?.layoutViewport;
+    const visual = metrics?.visualViewport;
+    if (!viewport || !Number.isSafeInteger(viewport.clientWidth) || !Number.isSafeInteger(viewport.clientHeight)) throw new Error('CDP physical layout viewport unavailable.');
+    if (!visual || visual.scale !== 1) throw new Error(`Capture requires visualViewport.scale=1; got ${visual?.scale ?? 'unavailable'}.`);
+    const scrollbars = await page.evaluate(() => {
+      const root = document.documentElement;
+      return {
+        vertical: innerWidth > root.clientWidth,
+        horizontal: innerHeight > root.clientHeight,
+        width: Math.max(0, innerWidth - root.clientWidth),
+        height: Math.max(0, innerHeight - root.clientHeight)
+      };
+    });
+    if (scrollbars.vertical || scrollbars.horizontal) throw new Error(`Capture requires a scrollbar-free viewport; got ${JSON.stringify(scrollbars)}.`);
+    return { width: viewport.clientWidth, height: viewport.clientHeight, visualScale: visual.scale, scrollbars };
+  };
   const identity = async () => {
     if (page.isClosed() || context.pages().length !== 1 || context.pages()[0] !== page) throw new Error('Owned page changed.');
     const target = (await session.send('Target.getTargetInfo')).targetInfo;
@@ -114,7 +132,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       const handle = await page.waitForFunction(({ dpr, factor, width, height }) => Math.abs(devicePixelRatio / dpr - factor) < 0.000001 && innerWidth >= width && innerHeight >= height && document.hasFocus(), { dpr: before.dpr, factor: config.nativeZoom, width: config.width, height: config.height }, { timeout: 180000, polling: 'raf' });
       await handle.dispose();
       expectedGeometry = await metadata();
-      report.nativeZoom = { before, after: expectedGeometry, factor: config.nativeZoom, sensor: 'native browser UI; viewport and DPR emulation disabled' };
+      report.nativeZoom = { before, after: expectedGeometry, raster: await physicalViewport(), factor: config.nativeZoom, sensor: 'native browser UI; viewport and DPR emulation disabled' };
     }
     const target = (await session.send('Target.getTargetInfo')).targetInfo;
     lease = { ...(await metadata()), targetId: target.targetId, contextId: target.browserContextId };
@@ -156,13 +174,15 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     const shot = async id => {
       if (!safeId(id)) throw new Error('Invalid capture ID.');
       const before = await identity();
+      const rasterBefore = await physicalViewport();
       const png = await session.send('Page.captureScreenshot', { format: 'png', fromSurface: true, captureBeyondViewport: false });
       const after = await identity();
-      if (!isDeepStrictEqual(before, after)) throw new Error('Geometry/document changed during capture.');
+      const rasterAfter = await physicalViewport();
+      if (!isDeepStrictEqual(before, after) || !isDeepStrictEqual(rasterBefore, rasterAfter)) throw new Error('Geometry/document or physical raster viewport changed during capture.');
       const bytes = Buffer.from(png.data, 'base64');
-      if (bytes.readUInt32BE(16) !== Math.round(expectedGeometry.width * expectedGeometry.dpr) || bytes.readUInt32BE(20) !== Math.round(expectedGeometry.height * expectedGeometry.dpr)) throw new Error(`Capture dimensions mismatch: PNG ${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}, expected ${Math.round(expectedGeometry.width * expectedGeometry.dpr)}x${Math.round(expectedGeometry.height * expectedGeometry.dpr)}.`);
+      if (bytes.readUInt32BE(16) !== rasterBefore.width || bytes.readUInt32BE(20) !== rasterBefore.height) throw new Error(`Capture dimensions mismatch: PNG ${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}, expected CDP physical viewport ${rasterBefore.width}x${rasterBefore.height}.`);
       const path = `${id}.png`; await writeFile(join(root, path), bytes, { flag: 'wx' });
-      report.checkpoints.push({ id, path, sha256: digest(bytes), at: Date.now(), capture: { before, after } });
+      report.checkpoints.push({ id, path, sha256: digest(bytes), at: Date.now(), capture: { before, after, rasterBefore, rasterAfter } });
     };
     const reload = async () => {
       await audio.cleanup();

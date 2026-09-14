@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import vm from 'node:vm';
+
+const [source, destination] = process.argv.slice(2);
+assert.ok(source && destination, 'Usage: node remove-auto-button.mjs <source plugins.js> <destination plugins.js>');
+const text = await readFile(source, 'utf8');
+const context = {};
+vm.runInNewContext(text, context);
+const records = JSON.parse(JSON.stringify(context.$plugins));
+const targets = records.filter(plugin => plugin.name === 'VisuMZ_2_ExtMessageFunc');
+assert.equal(targets.length, 1);
+const plugin = targets[0];
+assert.equal(plugin.status, true);
+const before = JSON.stringify(plugin);
+const buttons = JSON.parse(plugin.parameters['Buttons:struct']);
+assert.deepEqual(JSON.parse(buttons['List:arraystr']), ['auto', 'fastFwd', 'options', 'hide']);
+assert.equal(buttons['AutoKey:str'], 'none');
+buttons['List:arraystr'] = JSON.stringify(['fastFwd', 'options', 'hide']);
+plugin.parameters['Buttons:struct'] = JSON.stringify(buttons);
+assert.equal(text.split(before).length, 2, 'Expected one serialized provider record');
+const updated = text.replace(before, JSON.stringify(plugin));
+const result = {};
+vm.runInNewContext(updated, result);
+assert.deepEqual(JSON.parse(JSON.stringify(result.$plugins)), records);
+await writeFile(destination, updated);
+console.log(`Removed AUTO from VisuMZ_2_ExtMessageFunc in ${destination}`);

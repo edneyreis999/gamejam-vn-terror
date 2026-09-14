@@ -2,7 +2,6 @@ import { cp, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { project } from './native-chrome.mjs';
-import { hash, nativeFiles } from '../../tools/native-layout.mjs';
 
 export const ensembleFixture = JSON.parse(await readFile(new URL('../fixtures/vn-picture-busts-2x2/recipe.json', import.meta.url), 'utf8'));
 export function appendEnsemble(events) {
@@ -16,8 +15,8 @@ export function appendEnsemble(events) {
   events.push({ id: root, name: 'Fixture técnica — 2x2', trigger: 0, switchId: 1, list: relocate(ensembleFixture.root) });
   return root;
 }
-export async function prepareBustFixture(t, revision, edit) {
-  const directory = await mkdtemp(path.join(tmpdir(), 'dryland-native-recipe-'));
+export async function prepareBustFixture(t, label, edit) {
+  const directory = await mkdtemp(path.join(tmpdir(), label+'-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
   for (const entry of await readdir(project, { withFileTypes: true })) {
     const source = path.join(project, entry.name), target = path.join(directory, entry.name);
@@ -28,12 +27,5 @@ export async function prepareBustFixture(t, revision, edit) {
   const events = JSON.parse(await readFile(file, 'utf8'));
   const result = edit(events);
   await writeFile(file, JSON.stringify(events));
-  const manifestFile = path.join(directory, 'native-layout-manifest.json');
-  const layout = JSON.parse(await readFile(manifestFile, 'utf8'));
-  if (Object.hasOwn(layout.revisions, revision)) throw Error('Fixture revision already used');
-  layout.nativeLayoutVersion = revision;
-  layout.files = await nativeFiles(directory);
-  layout.revisions[revision] = hash(JSON.stringify(layout.files));
-  await writeFile(manifestFile, JSON.stringify(layout));
   return { directory, events, result };
 }

@@ -36,6 +36,13 @@ export async function startServer(t, directory = project) {
 
 export async function openChrome(t, options = {}) {
   const profile = await mkdtemp(path.join(tmpdir(), 'dryland-native-'));
+  if (options.zoom && options.zoom !== 1) {
+    await mkdir(path.join(profile, 'Default'));
+    // ChromeZoomLevelPrefs: default profile partition key is x + hex(empty path).
+    await writeFile(path.join(profile, 'Default/Preferences'), JSON.stringify({
+      partition: { default_zoom_level: { x: Math.log(options.zoom) / Math.log(1.2) } }
+    }));
+  }
   const executable = process.env.DRYLAND_CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
   const chrome = spawn(executable, [
     '--headless=new', '--remote-debugging-pipe', '--no-first-run', '--no-default-browser-check',
@@ -121,7 +128,7 @@ export async function openChrome(t, options = {}) {
       if (await evaluate(expression)) return;
       await delay(50);
     }
-    const state = await evaluate(`({scene:SceneManager._scene?.constructor.name,map:window.$gameMap?.mapId(),phase:window.$gameSystem?._dryland?.campaign.phase,text:window.$gameMessage?.allText(),choices:window.$gameMessage?._drylandChoices,pause:SceneManager._scene?._messageWindow?.pause,wait:SceneManager._scene?._messageWindow?._waitCount})`);
+    const state = await evaluate(`({scene:SceneManager._scene?.constructor.name,map:window.$gameMap?.mapId(),phase:window.$gameSystem?._dryland?.campaign.phase,text:window.$gameMessage?.allText(),choices:window.$gameMessage?.choices(),pause:SceneManager._scene?._messageWindow?.pause,wait:SceneManager._scene?._messageWindow?._waitCount})`);
     throw new Error(`Native state not reached: ${expression}; observed ${JSON.stringify(state)}`);
   }
   async function press(key, keyCode) {
@@ -143,4 +150,18 @@ export async function openChrome(t, options = {}) {
   }
   await call('Page.navigate', { url: origin });
   return { evaluate, waitFor, press, screenshot, version, exceptions, requests, responses, call, reopen };
+}
+
+export async function selectFile(browser, fileId) {
+  await browser.waitFor('SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+  if (fileId !== undefined) {
+    for (let step = 0; step < 25; step++) {
+      const current = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');
+      if (current === fileId) break;
+      await browser.press(current < fileId ? 'ArrowRight' : 'ArrowLeft', current < fileId ? 39 : 37);
+    }
+    const actual = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');
+    if (actual !== fileId) throw new Error(`Native file selection: expected ${fileId}, got ${actual}`);
+  }
+  await browser.press('Enter', 13);
 }

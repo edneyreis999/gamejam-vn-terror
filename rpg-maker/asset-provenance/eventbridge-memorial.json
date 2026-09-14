@@ -1,0 +1,129 @@
+{
+  "date": "2026-09-12",
+  "method": "built-in image_gen edits of existing art",
+  "status": "Prepared derivatives; Lucas framing judgment remains pending in task16. Original creative statuses are unchanged.",
+  "rejectedAttempt": "First outputs baked a checkerboard into RGB. Corrected to opaque charcoal portraits; no runtime transparency/crop dependency.",
+  "records": [
+    {
+      "hero": "H1",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H1.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H1.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-fcdb3625-38c9-4886-ae5b-710bea56e5af.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H1.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "4d9e351c77b0cf7f89f4e734e228c987aa4941f8baf6c12178e32a6a1c03a494",
+      "derivativeSha256": "b0449a5fb02e087a483ffb2c33faa4fae95ecb3d1dbe6b50890c2eb82f9d7687",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H2",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H2.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H2.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-71ceff71-2e58-48d4-bee6-a3901b47084a.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H2.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "f393eeacf54314c2b4974765d8e98a3f4d03e1b2b9a8944be22926ce5751a4bf",
+      "derivativeSha256": "8ca241a04554474708566d097fec99809cfc0442ae2df8dcbe2a7776e716ad8b",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H3",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H3.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H3.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-81bcceba-8883-42b0-b28e-4e8642409719.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H3.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "detailCorrection": "Precise correction only: there is a tiny triangle of visible checkerboard directly UNDER THE CHIN between the jaw and the shirt collar/neck, near the center of this portrait. Replace that entire tiny checkered triangle with solid opaque charcoal #24221b, matching the background gap. Preserve the existing outline ink lines. Do not change any other pixel, character, face, pose or framing. No checkerboard or grid must remain anywhere in the image.",
+      "sourceSha256": "8e07631013b8fdb4bf504323e49f02c3fe231e6b71c063b6d1180536bb0dd0d9",
+      "derivativeSha256": "71ca668b87f2d7f687c4d4e3756f8db41f063a78d8f8bf9983b3645fe51ab206",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H4",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H4.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H4.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-ee6ccb0b-bc59-41df-b240-7e4b326187bb.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H4.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "078285868b9b8e3a7465176db0e7541a391dfa8e4cf612be96f3ada809d99263",
+      "derivativeSha256": "b021926986eaaccdac7b8cc601545ec4c624552e83ceb5aec267c58feff0b1b0",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H5",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H5.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H5.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-dd814f85-f7db-4531-b4e6-af172bfb8351.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H5.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "b6e1ca4187a8b2173a39183b077358c9d3e0c8fd4a48d8f72efb948326fe9f23",
+      "derivativeSha256": "78e4c80c30cb0294fd36eee758deab2e3af18b02d66b61a73aec509a68dc97de",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H6",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H6.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H6.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-8b0fd20f-1d62-4d06-9daf-3a4982100c65.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H6.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "df167716fbe88b1d8bfe781d7ac26ffc02fbab5e90ae7885a339044bfffca6d1",
+      "derivativeSha256": "47af88ebd25b90ecc225baa33f5acda14c08e35012af38b0079a9ad9e5747b48",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H7",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H7.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H7.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-2cbab9a3-c4e9-4cdb-befc-bdaabb270829.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H7.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "4a70f33010d036391f47d9bcec943aabf1c441c7b6116f1ff47816e94009bd9b",
+      "derivativeSha256": "d62067f960afb352f02cfc46844e3045d1ed68c4d3069570c4831af3215e0f11",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    },
+    {
+      "hero": "H8",
+      "source": "The Dryland Drowned/img/pictures/Dryland_H8.png",
+      "derivative": "The Dryland Drowned/img/pictures/Dryland_Memorial_H8.png",
+      "generated": "/Users/edney/.codex/generated_images/01a097c9-4368-7960-b9f7-297573667705/exec-8979ccfb-279d-4805-91da-e7c2c5abffcb.png",
+      "prompt": "Use case: identity-preserve. Asset: production memorial portrait for RPG Maker game. Edit target: attached Dryland_H8.png. Create ONE tightly framed head and upper shoulders portrait from this exact existing drawing. Preserve the original face identity, expression, head angle, hair/headgear, black sketch lines and flat parchment tan fill exactly; do not redesign, embellish, recolor, add shadows or add a frame. Portrait canvas aspect ratio 4:5, with the whole head including ears/hair/hat and a small margin at top, face centered, upper shoulders at bottom. Transparent background outside the existing character silhouette, preserve alpha; no white background, no text, no border. This is a framing derivative of the existing artwork, not new character art. Output PNG.",
+      "backgroundCorrection": "Edit only the background of this memorial portrait: replace ALL checkerboard/grid pixels outside the character with perfectly uniform opaque charcoal color #24221b. No checkerboard anywhere. Keep every character line, face, expression, clothing, composition and dimensions unchanged. No other changes, no texture, no gradients, no new frame, no text. The deliverable is intentionally opaque, a finished charcoal-background portrait ready for the game's memorial.",
+      "sourceSha256": "8ddcf436028f9486fb4b845ec5dd0474031a9c87ea4e0f3f4e79b85b9a60c1f4",
+      "derivativeSha256": "15f26f34c17f5e5f6927934822b077bf604d793d7bb8bb676c3b4774500ae914",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGB"
+    }
+  ]
+}

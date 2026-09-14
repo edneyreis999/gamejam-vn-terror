@@ -7,7 +7,7 @@ B["Jogar até um checkpoint"] --> C
 C["Interromper uma gravação ou um carregamento de imagem isoladamente"] --> D
 D["Observar feedback nativo e recuperar o último save ou usar Retry"] --> E
 E["Editar uma cena aprovada em cópia completa no RPG Maker MZ e validar"] --> F
-F["Exportar todos os assets e abrir o pacote pelo mesmo contrato HTTP"] --> G
+F["Conferir o pacote local completo e abri-lo pelo mesmo contrato HTTP"] --> G
 G["Jogar, salvar, fechar a aba e Continuar ao reabrir"] --> H
 H["Encerrar o servidor e remover somente o perfil de teste"]
 C -->|imagem ausente| D
@@ -23,7 +23,7 @@ H --> Z["Texto editado e assets dinâmicos estão no pacote; Continue restaura s
 journey:
   id: J-mz-recovery-export
   name: "Retomar uma campanha no pacote local após interrupção"
-  value_statement: "Editar uma cena em cópia, exportar seus arquivos e recuperar uma campanha sem perder decisões válidas."
+  value_statement: "Editar uma cena em cópia completa e recuperar uma campanha no arquivo correto sem perder decisões válidas."
   personas: ["Rui, revisor de conteúdo"]
   entry_points:
     - url: http://127.0.0.1:18726/
@@ -45,7 +45,7 @@ journey:
       verb: "Editar uma cena aprovada em cópia completa no RPG Maker MZ e validar"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 6
-      verb: "Exportar todos os assets e abrir o pacote pelo mesmo contrato HTTP"
+      verb: "Conferir o pacote local completo e abri-lo pelo mesmo contrato HTTP"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 7
       verb: "Jogar, salvar, fechar a aba e Continuar ao reabrir"
@@ -55,7 +55,7 @@ journey:
       expected_observable: "Texto editado e assets dinâmicos estão no pacote; Continue restaura seu próprio checkpoint."
   goal:
     observable: "Texto editado e assets dinâmicos estão no pacote; Continue restaura seu próprio checkpoint."
-    side_effects: ["O arquivo nativo file0 é persistido na origem e no perfil isolados."]
+    side_effects: ["O arquivo selecionado e seu índice são persistidos na mesma origem e perfil isolados."]
   true_end_state: "Texto editado e assets dinâmicos estão no pacote; Continue restaura seu próprio checkpoint."
   exit:
     natural: Título ou sessão local encerrada
@@ -69,3 +69,7 @@ journey:
 Preparação, receitas, sensores e teardown: [plano MZ](../guides/native-mz-cycle.md). O histórico HTML permanece em suas próprias jornadas.
 
 Para o incremento de bustos, seguir os [lotes nativos de diálogo](../guides/vn-picture-busts-dialogues.md). A jornada existente continua dona do fluxo; exportação, audição e aceite humano históricos não acrescentam gates ao incremento autorizado.
+
+## Incremento eventbridge-minimal-runtime — 2026-09-12
+
+Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runtime.md) e [relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Seleção nativa de arquivos, chamadas diretas de CE, observação somente leitura e controles do provider substituem receitas de seed/API/revisão/S. Cenários deste incremento começam untested. Os relatórios anteriores preservam o histórico e não transferem PASS.

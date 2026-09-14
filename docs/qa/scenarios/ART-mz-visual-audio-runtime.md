@@ -6,13 +6,13 @@ persona: Rui, revisor de conteúdo
 journey: J-mz-creative-review
 expected: Telas permanecem legíveis e os contextos, temas e efeitos possuem revisão audiovisual registrada.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: fail
+qa_status: blocked-verify
 bug_ids: BUG-20260911-tavern-portraits-offscreen
-fix_status: pending
+fix_status:
 retest_status:
 fix_commits:
-evidence: docs/qa/deliveries/pr3-taverna/README.md
-last_report: planos/tasks/pr3-taverna/verification.md
+evidence: docs/qa/reports/2026-09-12-eventbridge-minimal-runtime.md
+last_report: docs/qa/reports/2026-09-12-eventbridge-minimal-runtime.md
 overlaps: LOC-mz-session-recovery-export
 ---
 
@@ -20,7 +20,7 @@ Cobertura primária: E2E-018, E2E-020, V-VISUAL, V-AUDIO.
 
 [Plano e receitas](../guides/native-mz-cycle.md). Usar ações reais de jogador no runtime MZ; fixtures diretas de estado pertencem somente à integração. A aprovação humana e a audição real não podem ser inferidas de nomes de arquivos, hashes, decodificação ou screenshots.
 
-Retomada atual: Muitas superfícies e três finais inspecionados; matriz visual maior completa e audição efetiva pendentes.
+Retomada da baseline anterior: Muitas superfícies e três finais inspecionados; matriz visual maior completa e audição efetiva pendentes.
 
 Aceite humano final informado pelo usuário em2026-09-10: “está aprovado pelos testes humanos”. Registro: docs/qa/deliveries/init-rpg-maker-mz/human-acceptance.json. Supera bloqueios humanos históricos; refinamento narrativo conhecido não foi corrigido.
 
@@ -35,3 +35,12 @@ Resultado consolidado no [relatório de2026-09-11](../reports/2026-09-11-vn-pict
 ## Final verify pr3-taverna — 2026-09-11
 
 **FAIL para o enquadramento dos retratos:** Elowen e Vaelith ficam fora da tela nos quadros iniciais; outros heróis ficam excessivamente ampliados. Reproduzido também com os dados da main. O palco e as interações preservadas do PR passam. [Defeito](../bugs/BUG-20260911-tavern-portraits-offscreen.md) · [evidências e escopo](../../../planos/tasks/pr3-taverna/verification.md). Os aceites históricos acima mantêm seu escopo; este resultado não os reinterpreta nem declara nova aprovação artística.
+
+## Incremento eventbridge-minimal-runtime — 2026-09-12
+
+Planejado, **untested**. S04/S05/S06T/S08/S10/S11/S12; lotes B/C/D/E/G/H. Sessões: CH-mz-audio-review; CH-mz-campaign-terminal-matrix. [Guia corrente](../guides/eventbridge-minimal-runtime.md) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Todos os resultados anteriores acima mantêm seu escopo histórico. Estado anterior do tracker: `fail`; relatório: `planos/tasks/pr3-taverna/verification.md`; evidência: `docs/qa/deliveries/pr3-taverna/README.md`. Não há campanha dirigida ou aceite humano novo declarado por esta atualização.
+
+
+## Execução eventbridge-minimal-runtime — 2026-09-13
+
+Estado corrente: **blocked-verify**. Memorial0/1/3/8, transições/ausências e créditos têm integração e imagens inspecionadas; continuidade e áudio BGS/ME/SE têm observação nativa, BGM tem equivalência isolada sem introduzir música nova. Não há audição humana nem aceite de enquadramento/controle; esses limites impedem PASS global. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.

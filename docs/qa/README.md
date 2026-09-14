@@ -10,11 +10,15 @@ Após o aceite, preservar os registros brutos em arquivo local com manifesto e h
 
 O [incremento MZ aceito](deliveries/init-rpg-maker-mz/README.md) tem resumo, aceite, manifesto do runtime e cinco capturas independentes, incluindo o desaparecimento de Gorvak e a visita posterior. Não exige os milhares de arquivos brutos para compor seu devlog. Os181 arquivos de ciclos anteriores em evidence foram retirados do versionamento no commit e888338, por orientação do usuário, com cópias locais e hashes preservados. Links desses ciclos continuam como referência ao acervo local.
 
-## Migração MZ em execução — 2026-09-09
+## Ciclo corrente — EventBridge mínimo
+
+A [spec incremental](../../planos/tasks/eventbridge-minimal-runtime/spec.md) está em QA dirigido. Use o [guia executável e banco](guides/eventbridge-minimal-runtime.md), o [charter de primeira campanha](charters/CH-eventbridge-first-campaign.md) e o [relatório corrente](reports/2026-09-12-eventbridge-minimal-runtime.md). Autoria e arquivos seguem o [guia MZ](../../rpg-maker/README.md). A integração técnica01–14 está consolidada; editor, jornadas e quatro pareceres humanos têm sensores próprios. Resultados históricos não passam este candidato.
+
+## Migração MZ histórica — 2026-09-09
 
 A spec `init-rpg-maker-mz` tem [evidência incremental](reports/2026-09-09-native-mz-implementation.md) da campanha nativa, save, finais, controles e áudio. O [plano MZ](guides/native-mz-cycle.md) mapeia as 23 jornadas E2E e os sensores visual, auditivo, humano e de exportação; planejamento não indica execução.
 
-Use o [servidor e runner Node documentados](../../rpg-maker/README.md), em `http://127.0.0.1:18726/`. **Continuar** exige a mesma origem e perfil; mantenha uma única aba ativa. Não há trava entre abas. A inspeção usa somente `expeditionQA.setSeed`, `snapshot` e `validate`, com seed apenas antes de Jogar. O pacote Web deve incluir todos os assets dinâmicos e ser aberto por servidor local, sem publicação.
+Use o [servidor e runner Node documentados](../../rpg-maker/README.md), em `http://127.0.0.1:18726/`. **Continuar** exige a mesma origem e perfil; mantenha uma única aba ativa. Não há trava entre abas. No incremento atual, a inspeção lê objetos nativos sem alterá-los; não existe console de QA nem seleção de seed. Toda decisão da campanha passa por entrada do jogador. O pacote Web deve incluir todos os assets dinâmicos e ser aberto por servidor local, sem publicação.
 
 As jornadas MZ são [campanha completa](journeys/J-mz-complete-campaign.md), [recuperação e exportação](journeys/J-mz-recovery-export.md), [teclado e diagnóstico](journeys/J-mz-qa-accessibility.md) e [revisão audiovisual e humana](journeys/J-mz-creative-review.md). Seus cenários `*-mz-*` mantêm vereditos próprios. A audição e a aprovação final de arte, texto, sensibilidade cultural e atribuições permanecem explícitas.
 

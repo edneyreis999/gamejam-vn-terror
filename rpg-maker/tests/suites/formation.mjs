@@ -100,7 +100,7 @@ canonicalCase('UT-017', 'public projections exclude private competencies, viabil
   const view = rules.playerView(state);
   assert.equal(view.heroes[0].name, 'Gorvak');
   const text = JSON.stringify(view);
-  for (const secret of [...Object.keys(catalog.competencies), 'competencyId', 'viable', 'viability', '"pool"', '"A"', '"B"']) assert.ok(!text.includes(secret), secret);
+  for (const secret of [...new Set(Object.values(gdd.heroPairs).flat()), 'competencyId', 'viable', 'viability', '"pool"', '"A"', '"B"']) assert.ok(!text.includes(secret), secret);
   assert.deepEqual(state, before);
 });
 canonicalCase('UT-059', 'stock actor membership and HP cannot change campaign life or competency results', { timeout: 60000 }, async t => {
@@ -112,7 +112,7 @@ canonicalCase('UT-059', 'stock actor membership and HP cannot change campaign li
   assert.deepEqual(rules.deriveViability(['H1', 'H2', 'H3'], 'A1'), viability);
   assert.equal(await browser.evaluate('$gameActors.actor(1).hp'), 0);
 });
-canonicalCase('IT-002', 'native CaptureContext → Action → Observe updates only the intended hero membership', { timeout: 60000 }, async t => {
+canonicalCase('IT-002', 'native CaptureContext → Action → Query updates only the intended hero membership', { timeout: 60000 }, async t => {
   const browser = await tavern(t);
   assert.equal(await browser.evaluate('$gameMessage.choices().length'), 11);
   const before = await snapshot(browser);
@@ -121,7 +121,7 @@ canonicalCase('IT-002', 'native CaptureContext → Action → Observe updates on
     $gameVariables.setValue(22, 'H1');
     PluginManager.callCommand(interpreter, 'Dryland_EventBridge', 'CaptureContext', {});
     PluginManager.callCommand(interpreter, 'Dryland_EventBridge', 'Action', {action:'TOGGLE_HERO',value:'H1'});
-    PluginManager.callCommand(interpreter, 'Dryland_EventBridge', 'Observe', {target:'formation'});
+    PluginManager.callCommand(interpreter, 'Dryland_EventBridge', 'Query', {kind:'heroSelected',id:'H1',variable:'28'});
     return {result:$gameVariables.value(24), selected:$gameVariables.value(28), state:$gameSystem._dryland.campaign};
   })()`);
   assert.equal(result.result, 'ok');
@@ -133,21 +133,21 @@ canonicalCase('IT-002', 'native CaptureContext → Action → Observe updates on
 canonicalCase('IT-006', 'rapid focus is observational; activation and the full native conversation consume distinct input', { timeout: 90000 }, async t => {
   const browser = await tavern(t);
   const before = await snapshot(browser);
-  const authored = await browser.evaluate('JSON.stringify($dataCommonEvents.slice(68))');
   for (const key of ['ArrowRight', 'ArrowRight', 'ArrowLeft']) await browser.press(key, key === 'ArrowRight' ? 39 : 37);
   assert.equal(await browser.evaluate('$gameVariables.value(22)'), 'H2');
   assert.deepEqual(await snapshot(browser), before);
   assert.equal(await browser.evaluate('$gameMessage.hasText()'), false);
   await activate(browser, 'formation', 0);
   await choices(browser, 'hero');
-  assert.deepEqual(await browser.evaluate('$gameMessage.choices()'), ['Conversar', 'Selecionar']);
+  assert.equal(await browser.evaluate('$gameVariables.value(153)'), 'Selecionar');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'), 2);
   assert.deepEqual(await snapshot(browser), before);
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 0);
   await activate(browser, 'formation', 0);
   await activate(browser, 'hero', 0);
-  const expected = events[5].list.filter(c => c.code === 401).slice(0, 7).map(c => c.parameters[0]);
+  const expected = ['Perfil — Gorvak', 'Conversa — Gorvak'].flatMap(name => events.find(event => event?.name === name).list.filter(c => c.code === 401).map(c => c.parameters[0]));
   assert.match(expected[0], /Gorvak · Ele\/dele · Anão · Ferreiro/);
   assert.equal(expected.at(-1), 'Lugar velho avisa antes de cair. Prestem atenção aos estalos.');
   for (const [index, text] of expected.entries()) {
@@ -157,7 +157,7 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
     assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'), 'Dryland_H1');
     assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), index >= 2);
     await browser.waitFor('$gameScreen.picture(60)._duration===0');
-    assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),speaker==='Dryland_H1'?100:90,'uniform base with positional focus');
+    assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),index < 2 ? 50 : speaker==='Dryland_H1'?100:90,'authored Gorvak scale and subsequent native focus');
     if (index >= 2) assert.equal(await browser.evaluate('$gameScreen.picture(63).scaleX()'),speaker==='Dryland_ivai'?100:90,'same base for Ivaí');
     assert.equal(await browser.evaluate('$gameScreen.picture(18) == null'), true);
     if (index >= 2) {
@@ -175,7 +175,7 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
   await browser.press('Enter', 13);
   await choices(browser, 'formation');
   assert.deepEqual(await snapshot(browser), before);
-  assert.equal(await browser.evaluate('JSON.stringify($dataCommonEvents.slice(68))'), authored, 'vendor decoding must not mutate editable helper arguments');
+  assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'), [82,83], 'only completed native profile and conversation units were read');
   assert.deepEqual(browser.exceptions, []);
 });
 canonicalCase('IT-007', 'native selection, removal, full-party feedback and mandatory automatic rosters obey their gates', { timeout: 180000 }, async t => {
@@ -186,7 +186,7 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
     await pause(browser);
     assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'), `Dryland_H${hero + 1}`);
     assert.deepEqual((await snapshot(browser)).draftPartyIds, heroes.slice(0, hero + 1));
-    assert.equal(await browser.evaluate('$gameMessage.allText()'), events[5 + hero].list.filter(c => c.code === 401).at(-2).parameters[0]);
+    assert.equal(await browser.evaluate('$gameMessage.allText()'), events.find(event => event?.name === `Selecionado — ${catalog.heroes[heroes[hero]].name}`).list.find(c => c.code === 401).parameters[0]);
     const accepted = await snapshot(browser);
     await browser.press('Enter', 13);
     await choices(browser, 'formation');
@@ -197,7 +197,7 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
   await activate(browser, 'hero', 1);
   await pause(browser);
   assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'), 'Dryland_H4');
-  assert.equal(await browser.evaluate('$gameMessage.allText()'), events[8].list.filter(c => c.code === 401).at(-1).parameters[0]);
+  assert.equal(await browser.evaluate('$gameMessage.allText()'), events.find(event => event?.name === 'Grupo cheio — Seraphina').list.find(c => c.code === 401).parameters[0]);
   assert.deepEqual(await snapshot(browser), full);
   await browser.screenshot(`${evidence('IT-007')}/full-party.png`);
   await browser.press('Enter', 13);
@@ -205,7 +205,8 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
   assert.deepEqual(await snapshot(browser), full);
   await activate(browser, 'formation', 0);
   await choices(browser, 'hero');
-  assert.deepEqual(await browser.evaluate('$gameMessage.choices()'), ['Conversar', 'Retirar do grupo']);
+  assert.equal(await browser.evaluate('$gameVariables.value(153)'), 'Retirar do grupo');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'), 2);
   await activate(browser, 'hero', 1);
   await choices(browser, 'formation');
   assert.deepEqual((await snapshot(browser)).draftPartyIds, ['H2', 'H3']);
@@ -256,7 +257,8 @@ canonicalCase('IT-008', 'destination choice/cancellation preserve membership and
   assert.equal(after.selectedDungeonId, 'physical');
   assert.deepEqual(after.draftPartyIds, before.draftPartyIds);
   assert.equal(after.rngState, before.rngState);
-  assert.ok((await browser.evaluate('$gameScreen.getPictureTextData(44).center')).includes('Caminho da Igreja'));
+  const destinationLabel = await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(44).center)');
+  assert.ok(destinationLabel.replaceAll(String.fromCharCode(27) + 'WrapBreak[0]', ' ').includes('Caminho da Igreja'));
   assert.equal(await browser.evaluate('$gameScreen.picture(71) == null'), true);
   assert.equal(await browser.evaluate('Boolean($gameVariables.value(25))'), false);
 });
@@ -269,7 +271,7 @@ canonicalCase('IT-041', 'prepared retreat/revisit inputs display traversed progr
   await activate(browser, 'formation', 8);
   await choices(browser, 'destinations');
   assert.deepEqual(rules.playerView(await snapshot(browser)).destinations.physical.landmarks, { traversed: 2, total: 5 });
-  assert.ok((await browser.evaluate('$gameScreen.getPictureTextData(78).center')).includes('2/5'));
+  assert.ok((await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(78).center)')).includes('2/5'));
   await browser.screenshot(`${evidence('IT-041')}/known-progress.png`);
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
@@ -279,10 +281,11 @@ canonicalCase('IT-041', 'prepared retreat/revisit inputs display traversed progr
   assert.deepEqual(rules.playerView(await snapshot(browser)).destinations.physical.landmarks, { traversed: 2, total: 5 });
 });
 
-canonicalCase('IT-060', 'cancelling a conversation while its required image loads cannot resurrect its pictures or text', { timeout: 90000 }, async t => {
+canonicalCase('IT-060', 'default asynchronous bust loading continues native text and cancellation cannot resurrect it', { timeout: 90000 }, async t => {
   const browser = await tavern(t);
   const before = await snapshot(browser);
-  const saved = await browser.evaluate("StorageManager.loadZip('file0')");
+  const savedFile = await browser.evaluate('$gameSystem.savefileId()');
+  const saved = await browser.evaluate("StorageManager.loadZip('file'+$gameSystem.savefileId())");
   // Hold only the image I/O boundary; the interpreter and vendor remain real.
   await browser.evaluate(`(() => {
     const start = Bitmap.prototype._startLoading;
@@ -297,14 +300,121 @@ canonicalCase('IT-060', 'cancelling a conversation while its required image load
   await activate(browser, 'formation', 0);
   await activate(browser, 'hero', 0);
   await browser.waitFor('typeof window.resumeDialogueImage === "function"');
-  assert.equal(await browser.evaluate('$gameMessage.hasText()'), false, 'unready art cannot expose readable dialogue');
-  assert.equal(await browser.evaluate('$gameScreen.picture(60) == null'), true);
+  await browser.waitFor('$gameMessage.hasText()');
+  assert.equal(await browser.evaluate("ImageManager._cache['img/pictures/Dryland_H1.png'].isReady()"), false, 'Default loading does not create a project text barrier');
+  assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'), 'Dryland_H1');
   assert.deepEqual(await snapshot(browser), before);
   // Explicit interruption fixture, not a directed player journey.
   await browser.evaluate('$gameMap._interpreter.clear(); SceneManager.goto(Scene_Title); window.resumeDialogueImage();');
   await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
   assert.equal(await browser.evaluate('[60,61,62,63,64,65].every(id => !$gameScreen.picture(id))'), true);
   assert.equal(await browser.evaluate('$gameMessage.allText().includes("Gorvak")'), false);
-  assert.equal(await browser.evaluate("StorageManager.loadZip('file0')"), saved);
+  assert.equal(await browser.evaluate(`StorageManager.loadZip('file${savedFile}')`), saved);
   assert.deepEqual(browser.exceptions, []);
+});
+
+canonicalCase('UT-075', 'editor declarations change public names without scene metadata or campaign mutation', async () => {
+  const { readConfiguration, query } = await import('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js').then(m => m.default);
+  const { createCatalog } = await import('../../The Dryland Drowned/js/plugins/Dryland_CampaignRules.js').then(m => m.default);
+  const edited = structuredClone(events[4]);
+  edited.list.find(c => c.parameters[1] === 'ConfigureHero').parameters[3].name = 'Gorvak editado';
+  edited.list.unshift({code:108,indent:0,parameters:['Comentário livre sem metadados.']});
+  const configuration = readConfiguration(edited), data = createCatalog(configuration), localRules = createRules(data);
+  const state = formation(), before = JSON.stringify(state);
+  assert.equal(query(localRules, data, state, 'heroName', 'H1'), 'Gorvak editado');
+  assert.equal(query(localRules, data, state, 'livingCount'), 8);
+  assert.equal(query(localRules, data, state, 'selectedCount'), 0);
+  assert.equal(query(localRules, data, state, 'livingHero', '', 7), 'H8');
+  assert.equal(query(localRules, data, state, 'candidateCount'), 0);
+  assert.equal(query(localRules, data, state, 'routeStatus', 'final'), 'locked');
+  assert.equal(query(localRules, data, state, 'deadCount'), 0);
+  assert.equal(query(localRules, data, state, 'deathRoute', 'H1'), '');
+  assert.equal(query(localRules, data, state, 'hasReading'), false);
+  assert.equal(JSON.stringify(state), before);
+  assert.deepEqual(readConfiguration(edited), configuration);
+  assert.throws(() => query(localRules, data, state, 'notAQuery'), /Unknown campaign query/);
+  assert.throws(() => query(localRules, data, state, 'heroName', 'H9'), /Unknown identity/);
+  assert.equal(query(localRules, data, state, 'encounterName'), '');
+  delete configuration.encounters.A1;
+  assert.throws(() => createRules(createCatalog(configuration)), CatalogError);
+});
+
+canonicalCase('IT-070', 'native queries and configuration are observational and captured completion rejects replay', {timeout:60000}, async t => {
+  const browser = await tavern(t);
+  const result = await browser.evaluate(`(() => {
+    const interpreter = new Game_Interpreter(), before = JSON.stringify($gameSystem._dryland.campaign);
+    interpreter.setup($dataCommonEvents[4].list, 0);
+    interpreter.update();
+    PluginManager.callCommand(interpreter,'Dryland_EventBridge','Query',{kind:'phase',variable:'31'});
+    const phase = $gameVariables.value(31);
+    const unchanged = before === JSON.stringify($gameSystem._dryland.campaign);
+    const missing = $gameSystem._dryland;
+    delete $gameSystem._dryland;
+    let error;
+    try { PluginManager.callCommand(interpreter,'Dryland_EventBridge','Query',{kind:'phase',variable:'31'}); }
+    catch (failure) { error = failure.message; }
+    $gameSystem._dryland = missing;
+    // Isolated command-boundary fixture, not a player journey or save.
+    const config = DrylandEventBridge.readConfiguration($dataCommonEvents[4]);
+    const rules = DrylandCampaignRules.createRules(DrylandCampaignRules.createCatalog(config));
+    $gameSystem._dryland.campaign = rules.dispatch(rules.createReadyState(), {type:'BEGIN',seed:123,expectedSequence:0}).state;
+    const start = $gameSystem._dryland.campaign;
+    PluginManager.callCommand(interpreter,'Dryland_EventBridge','CaptureContext',{});
+    $gameVariables.setValue(148,9999);
+    $gameVariables.setValue(149,'unrelated-global-variable');
+    PluginManager.callCommand(interpreter,'Dryland_EventBridge','ReadingComplete',{});
+    const completed = $gameSystem._dryland.campaign;
+    PluginManager.callCommand(interpreter,'Dryland_EventBridge','ReadingComplete',{});
+    const replay = $gameVariables.value(24), once = completed === $gameSystem._dryland.campaign;
+    interpreter._drylandContext = completed.sequence; // Isolated wrong-passage boundary fixture.
+    PluginManager.callCommand(interpreter,'Dryland_EventBridge','ReadingComplete',{});
+    return {phase,unchanged,error,advance:completed.sequence-start.sequence,replay,once,wrongPassageUnchanged:completed === $gameSystem._dryland.campaign};
+  })()`);
+  assert.equal(result.phase, 'formation');
+  assert.equal(result.unchanged, true);
+  assert.match(result.error, /Campaign data is missing/);
+  assert.equal(result.advance, 1);
+  assert.equal(result.once, true);
+  assert.equal(result.wrongPassageUnchanged, true);
+  assert.equal(result.replay, 'stale_action');
+  const loading = await browser.evaluate(`(async () => {
+    const name = DataManager.makeSavename($gameSystem.savefileId()), contents = await StorageManager.loadObject(name);
+    const expected = contents.system._dryland.campaign.sequence;
+    contents.system._dryland.nativeLayoutVersion = 'older-text-only-revision';
+    await StorageManager.saveObject(name, contents);
+    await DataManager.loadGame($gameSystem.savefileId());
+    const actual = $gameSystem._dryland.campaign.sequence;
+    delete contents.system._dryland;
+    await StorageManager.saveObject(name, contents);
+    let rejected = false;
+    try { await DataManager.loadGame($gameSystem.savefileId()); } catch { rejected = true; }
+    return {expected, actual, rejected, repaired: Boolean($gameSystem._dryland)};
+  })()`);
+  assert.equal(loading.actual, loading.expected);
+  assert.equal(loading.rejected, true);
+  assert.equal(loading.repaired, false);
+  assert.deepEqual(browser.exceptions, []);
+});
+
+// INVARIANT: each native tavern label retains its own identity and roster inspection is observational.
+// OWNING_LAYER: native integration; EXISTING_SUITE: formation.mjs.
+canonicalCase('IT-072', 'native tavern labels and mouse roster work at the larger desktop viewport', {timeout:60000}, async t => {
+  const browser=await tavern(t,{width:1920,height:1080});
+  const before=await snapshot(browser);
+  const labels=await browser.evaluate(`Array.from({length:8},(_,i)=>SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(30+i).center).replace(/\\x1bFS\\[\\d+\\]/g,''))`);
+  assert.deepEqual(labels,['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska']);
+  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/tavern-1920.png');
+  const point=await browser.evaluate(`(() => {const rect=Graphics._canvas.getBoundingClientRect();return {x:rect.x+1144*rect.width/1280,y:rect.y+56*rect.height/720};})()`);
+  await browser.call('Input.dispatchMouseEvent',{type:'mouseMoved',...point});
+  await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',...point,button:'left',buttons:1,clickCount:1});
+  await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',...point,button:'left',buttons:0,clickCount:1});
+  await choices(browser,'roster');
+  const roster=await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))');
+  assert.deepEqual(roster,labels.map(name=>`${name} — Presente`));
+  assert.deepEqual(await snapshot(browser),before);
+  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/roster-1920.png');
+  await browser.press('Escape',27);await choices(browser,'formation');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),9);
+  assert.deepEqual(await snapshot(browser),before);
+  assert.deepEqual(browser.exceptions,[]);
 });

@@ -1,3 +1,4 @@
+import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, choices, formation, heroes, pause, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
@@ -27,7 +28,7 @@ canonicalCase('UT-030', 'confirmed retreat preserves deaths, assignments and gre
   const returned = accepted(accepted(before, 'REQUEST_RETREAT'), 'CONFIRM_RETREAT');
   assert.equal(returned.phase, 'formation'); assert.equal(returned.position, null); assert.equal(returned.dungeonId, null);
   for (const key of ['deadHeroIds', 'deathLocations', 'assignments', 'progress', 'rngState']) assert.deepEqual(returned[key], before[key], key);
-  assert.deepEqual(returned.presentedDeathIds, ['H1', 'H2']);
+  assert.equal(Object.hasOwn(returned, 'presentedDeathIds'), false);
   let state = returned;
   for (const heroId of ['H4', 'H5']) state = accepted(state, 'TOGGLE_HERO', { heroId });
   state = accepted(state, 'SELECT_DESTINATION', { dungeonId: 'supernatural' });
@@ -93,12 +94,12 @@ canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed po
   const returned = await snapshot(browser);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.deepEqual(returned, finishReading(before));
-  assert.deepEqual(returned.presentedDeathIds, ['H1', 'H2', 'H3']);
+  assert.deepEqual(await browser.evaluate('[38,39,40].map(id=>$gameSwitches.value(id))'), [true,true,true]);
   assert.equal(returned.history.filter(action => action.passageId?.startsWith('prologue.')).length, before.history.filter(action => action.passageId?.startsWith('prologue.')).length);
   const moves = await browser.evaluate('absenceMoves');
   assert.deepEqual(moves.map(move => move.args[0]), [10, 11, 12]);
   assert.equal(new Set(moves.map(move => move.frame)).size, 1);
-  assert.deepEqual(moves.map(move => move.args.slice(2, 4)), [[115, 367], [320, 396], [486, 309]]);
+  assert.deepEqual(moves.map(move => move.args.slice(2, 4)), [[344, 520], [840, 176], [760, 497]]);
   await browser.waitFor('absenceFrames.length === 65');
   const frames = await browser.evaluate('absenceFrames');
   for (const frame of frames) {
@@ -113,7 +114,8 @@ canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed po
     }
   }
   assert.ok(frames[28].pictures.every(picture => picture && picture.opacity > 100 && picture.opacity < 150));
-  assert.deepEqual(frames[59].pictures, [null, null, null]);
+  assert.ok(frames[59].pictures.every(picture=>!picture || picture.opacity===0));
+  assert.deepEqual(frames[64].pictures, [null, null, null]);
   assert.deepEqual(await snapshot(browser), returned);
   await browser.screenshot(`${evidence('IT-009')}/empty-fixed-places.png`);
   // Redraw the same dedicated map with no new domain transition: no repeat fade.
@@ -126,13 +128,13 @@ canonicalCase('IT-010', 'interrupting the first return consumes absence and neve
   const { browser } = await beginReturn(t);
   const before = await snapshot(browser);
   assert.ok(await browser.evaluate('[10,11,12].some(id=>$gameScreen.picture(id)?.opacity()>0)'), 'Interruption occurs before the native fade completes.');
-  assert.equal(await browser.evaluate("$gameMessage._drylandChoices.entries.some(entry=>['H1','H2','H3'].includes(entry.heroId))"), false);
-  await browser.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 115, y: 367 });
-  await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', x: 115, y: 367, button: 'left', clickCount: 1 });
+  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))"), false);
+  await browser.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 344, y: 520 });
+  await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', x: 344, y: 520, button: 'left', clickCount: 1 });
   await browser.evaluate('new Promise(resolve => requestAnimationFrame(resolve))');
-  await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x: 115, y: 367, button: 'left', clickCount: 1 });
+  await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x: 344, y: 520, button: 'left', clickCount: 1 });
   await browser.evaluate('new Promise(resolve => requestAnimationFrame(resolve))');
-  assert.equal(await browser.evaluate('$gameMessage._drylandChoices?.kind'), 'formation');
+  assert.equal(await browser.evaluate('$gameMessage._drylandChoiceFocus?.key'), 'formation');
   assert.deepEqual(await snapshot(browser), before);
   // Interrupt at the native map-transfer I/O boundary. Shared map 4 routes the
   // unchanged formation back to map 3 through its real orchestration event.
@@ -141,13 +143,13 @@ canonicalCase('IT-010', 'interrupting the first return consumes absence and neve
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  assert.equal(await browser.evaluate("$gameMessage._drylandChoices.entries.some(entry=>['H1','H2','H3'].includes(entry.heroId))"), false);
+  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))"), false);
   assert.deepEqual(await snapshot(browser), before);
-  // The accepted return already consumed these deaths in campaign truth.
+  // The accepted return already saved the native absence switches.
   // Continue at that checkpoint shows empty places, without a second fade.
   await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
   await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  await browser.press('Enter', 13); await choices(browser, 'formation');
+  await browser.press('Enter', 13); await selectFile(browser,1); await choices(browser, 'formation');
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
   assert.deepEqual(await snapshot(browser), before);
@@ -157,10 +159,10 @@ canonicalCase('IT-011', 'native reduced motion immediately removes new losses wh
   assert.deepEqual(await snapshot(browser), finishReading(before));
   assert.equal(await browser.evaluate('absenceMoves.length'), 0);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  const index = await browser.evaluate("$gameMessage._drylandChoices.entries.findIndex(entry=>entry.branch===2)");
+  const index = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(entry=>entry.name.startsWith('Elenco'))");
   await activate(browser, 'formation', index); await choices(browser, 'roster');
-  const panel = await browser.evaluate('$gameScreen.getPictureTextData(71)');
-  for (const name of ['Gorvak', 'Elowen', 'Griznik']) assert.ok(JSON.stringify(panel).includes(`${name} — Morto`), name);
+  const panel = await browser.evaluate(`SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(71).upperleft)`);
+  for (const name of ['Gorvak', 'Elowen', 'Griznik']) assert.ok(panel.replace(/\x1bWrapBreak\[0\]/g,' ').includes(`${name} — Morto`), JSON.stringify({name,panel,rows:await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))')}));
   await browser.screenshot(`${evidence('IT-011')}/reduced-motion-roster.png`);
 });
 canonicalCase('IT-013', 'native retreat cancellation restores choices, confirmation returns safely and commitment removes retreat', { timeout: 120000 }, async t => {
@@ -177,7 +179,7 @@ canonicalCase('IT-013', 'native retreat cancellation restores choices, confirmat
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.equal(returned.position, null);
   for (const key of ['assignments','progress','rngState','deadHeroIds','deathLocations']) assert.deepEqual(returned[key], before[key], key);
-  assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file0').then(contents=>contents.system._dryland.campaign)"), returned);
+  assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(contents=>contents.system._dryland.campaign)"), returned);
   await installRoute(browser, before); await choices(browser, 'approaches');
   await activate(browser, 'approaches', 0); await pause(browser);
   const committed = await snapshot(browser);

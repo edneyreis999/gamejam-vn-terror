@@ -20,11 +20,9 @@ export function assertRegistrations(contract, ids) {
 }
 export function verifyRegistrations() { assertRegistrations(manifest, registered); }
 
-async function evidence(id, verdict, error) {
-  const owner = Object.entries(manifest.tasks).find(([, ids]) => ids.includes(id))?.[0];
-  assert.ok(owner, `Unowned canonical case ${id}`);
+async function sourceHashes() {
   const sha256 = {};
-  for (const directory of ['rpg-maker/tests', 'rpg-maker/tools', 'rpg-maker/The Dryland Drowned/data']) {
+  for (const directory of ['rpg-maker/tests', 'rpg-maker/tools', 'rpg-maker/The Dryland Drowned/data', 'rpg-maker/qa']) {
     async function visit(current) {
       for (const entry of await readdir(current, { withFileTypes: true })) {
         const file = path.join(current, entry.name);
@@ -34,16 +32,27 @@ async function evidence(id, verdict, error) {
     }
     await visit(directory);
   }
-  for (const file of ['js/plugins.js', 'js/plugins/Dryland_CampaignRules.js', 'js/plugins/Dryland_EventBridge.js', 'native-layout-manifest.json']) {
+  for (const file of ['js/plugins.js', 'js/plugins/Dryland_CampaignRules.js', 'js/plugins/Dryland_EventBridge.js', 'js/plugins/Dryland_Presentation.js']) {
     const full = `rpg-maker/The Dryland Drowned/${file}`;
     sha256[full] = hash(await readFile(full));
   }
+  return sha256;
+}
+const runSources = await sourceHashes();
+
+async function evidence(id, verdict, error) {
+  const owner = Object.entries(manifest.tasks).find(([, ids]) => ids.includes(id))?.[0];
+  assert.ok(owner, `Unowned canonical case ${id}`);
+  const currentSources = await sourceHashes();
+  const changedInputs = [...new Set([...Object.keys(runSources), ...Object.keys(currentSources)])]
+    .filter(file => runSources[file] !== currentSources[file]);
   const directory = `docs/qa/evidence/init-rpg-maker-mz/task-${owner}/${id}`;
   await mkdir(directory, { recursive: true });
   const filters = process.execArgv.filter(arg => arg.startsWith('--test-name-pattern')).map(arg => JSON.stringify(arg));
-  await writeFile(`${directory}/execution.json`, JSON.stringify({ id, verdict, runStarted, finished: new Date().toISOString(),
+  await writeFile(`${directory}/execution.json`, JSON.stringify({ id, verdict: changedInputs.length ? 'STALE' : verdict, runStarted, finished: new Date().toISOString(),
     command: ['node --test', ...filters, 'rpg-maker/tests/*.test.mjs'].join(' '), node: process.version, scope: manifest.scope,
-    ...(error ? { error: error.message } : {}), sha256 }, null, 2) + '\n');
+    ...(error ? { error: error.message } : {}), sha256: runSources, changedInputs }, null, 2) + '\n');
+  assert.deepEqual(changedInputs, [], 'Canonical evidence inputs changed during the run');
 }
 
 export function canonicalCase(id, title, options, body) {

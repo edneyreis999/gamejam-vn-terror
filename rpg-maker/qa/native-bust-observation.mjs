@@ -5,14 +5,14 @@ import assert from 'node:assert/strict';
 export async function observeBustPassage(context, player) {
   player.lastBustPassage = null;
   const before = await player.snapshot('bust-passage-state');
-  const state = before.snapshot, id = state.reading?.passageId;
+  const state = before.campaign, id = state.reading?.passageIds[state.reading.index];
   if (!id) return;
   const expected = new Map();
   const hero = /^(farewell|epilogue)\.(H[1-8])$/.exec(id);
   if (hero) expected.set(60, `Dryland_${hero[2]}`);
   if (/^lover\.(physical|supernatural)\.(warning|second)$/.test(id)) expected.set(63, id.includes('physical') ? 'Dryland_perola' : 'Dryland_florai');
   if (/^(council\.(challenge|solo|confession|andira)|opinion\.H[1-8])$/.test(id)) {
-    if (id !== 'council.andira') state.climaxParty.forEach((hero, index) => expected.set(60 + index, `Dryland_${hero}`));
+    if (id !== 'council.andira') state.climaxPartyIds.forEach((hero, index) => expected.set(60 + index, `Dryland_${hero}`));
     if (id !== 'council.challenge') expected.set(63, 'Dryland_ivai');
     if (id === 'council.andira') expected.set(65, 'Dryland_andira');
   }
@@ -44,14 +44,31 @@ export async function observeBustPassage(context, player) {
   player.lastBustPassage = id;
 }
 
-export async function observeBustTransition(context, player) {
+export async function observeBustTransition(context, player, advance) {
   const id = player.lastBustPassage;
   if (!/^(council\.(challenge|confession|andira)|opinion\.|lover\.|farewell\.|epilogue\.)/.test(id || '')) return;
+  assert.equal(typeof advance, 'function', 'Bust temporal observation requires a real public-input advance callback.');
+  const initial = await context.read(`bust-transition-${id}-initial`, () => ({
+    frame: Graphics.frameCount,
+    passageId: $gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index] ?? null,
+    pictures: [60,61,62,63,64,65].flatMap(id => {
+      const p = $gameScreen.picture(id);
+      return p ? [{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone(),opacity:p.opacity()}] : [];
+    })
+  }));
+  await advance();
+  let previousFrame = initial.frame;
+  const observations = [];
   for (let sample = 0; sample < 3; sample++) {
+    await context.wait(frame => Graphics.frameCount > frame, previousFrame);
     const value = await context.read(`bust-transition-${id}-${sample}`, () => ({frame:Graphics.frameCount,
+      passageId: $gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index] ?? null,
       pictures:[60,61,62,63,64,65].flatMap(id=>{const p=$gameScreen.picture(id);return p?[{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone(),opacity:p.opacity()}]:[]})}));
     const label = `bust-transition-${player.bustSerial}-${sample}-${id.replaceAll('.', '-')}`;
     await context.shot(label);
     context.report.observations.push({label,kind:'bust-temporal',value});
+    observations.push(value);
+    previousFrame = value.frame;
   }
+  return {from:{id,frame:initial.frame,pictures:initial.pictures},observations};
 }

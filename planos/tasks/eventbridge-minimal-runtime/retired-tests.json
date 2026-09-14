@@ -1,0 +1,34 @@
+{
+  "reason": "Oracles exclusively enforced removed editorial/QA/restoration/revision contracts; retained behavior has native owners. See task14 notes.",
+  "ids": [
+    "UT-047",
+    "UT-048",
+    "UT-049",
+    "UT-050",
+    "UT-051",
+    "UT-052",
+    "UT-053",
+    "UT-054",
+    "UT-060",
+    "IT-032",
+    "IT-033",
+    "IT-034",
+    "UT-067",
+    "UT-068",
+    "UT-071",
+    "UT-072",
+    "UT-074",
+    "UT-064",
+    "IT-042",
+    "IT-043",
+    "IT-046",
+    "IT-063",
+    "IT-030"
+  ],
+  "consolidations": {
+    "IT-030": {
+      "owner": "IT-075 in suites/native-inventory.mjs",
+      "reason": "Removed active-scene immediate-Retry polling contract. IT075 retains actual local404, absence of an active-scene project error poll, native scene-start LoadError/Retry, real retry loading and unchanged campaign."
+    }
+  }
+}

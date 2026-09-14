@@ -1,0 +1,10 @@
+import fs from 'node:fs';import {read,reduced,write} from './native-migration-helpers.mjs';
+const events=read('CommonEvents.json');
+for(const event of events.slice(5,13))event.list=event.list.flatMap(command=>(command.code===357&&command.parameters[1]==='Basic_ExitBusts')||command.code===230?reduced([command]):[command]);
+write(events);
+const mapFile='rpg-maker/The Dryland Drowned/data/Map028.json';const map=JSON.parse(fs.readFileSync(mapFile));map.events[1].name='Memorial — fluxo nativo';fs.writeFileSync(mapFile,JSON.stringify(map)+'\n');
+const file='rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js';let source=fs.readFileSync(file,'utf8');
+const start=source.indexOf(' * @command Conversation'),end=source.indexOf(' * @command Checkpoint',start);source=source.slice(0,start)+source.slice(end);
+source=source.replace('const locations = {}, visualSources = {}, helpers = {};','const locations = {};').replace("          } else if (section && line.startsWith('@visualFrom ')) visualSources[section.id] = line.slice(12).split(' ');\n          else if (line.startsWith('@dryland-presentation-helper ')) helpers[event.id] = { commonEventId: event.id };","          }").replace('return { locations, visualSources, helpers };','return { locations };');
+source=source.replace('        $gameSystem._dryland.campaign = freeze(campaign());','      $gameSystem._dryland.campaign = freeze(campaign());').replace('        observeCredits(this, args.target);','      observeCredits(this, args.target);');
+fs.writeFileSync(file,source);

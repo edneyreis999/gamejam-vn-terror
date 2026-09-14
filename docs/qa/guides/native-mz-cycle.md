@@ -1,5 +1,7 @@
 # Ciclo de QA nativa MZ — 2026-09-09
 
+> Procedimentos históricos: este guia descreve a baseline anterior. Para a migração EventBridge mínima, use o [guia MZ atual](../../../rpg-maker/README.md) e a [verificação incremental](../../../planos/tasks/eventbridge-minimal-runtime/verification.md). Receitas com preset de seed, manifesto ou APIs retiradas não são executáveis no candidato atual. Os relatórios associados conservam seu escopo e resultados originais.
+
 Este ciclo full verifica a migração aprovada na spec init-rpg-maker-mz. A matriz abaixo é um plano; não declara jornadas executadas. O relatório datado distingue evidência automatizada, observação visual e parecer humano.
 
 ## Preparação e isolamento

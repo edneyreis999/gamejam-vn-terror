@@ -1,4 +1,3 @@
-import assert from 'node:assert/strict';
 import { cp, mkdtemp, readdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -9,28 +8,15 @@ import { archiveFiles, validateNativeArchive } from './native-save-archive.mjs';
 
 export const sourceFiles = [new URL('../tests/helpers/native-chrome.mjs', import.meta.url), new URL('./native-save-archive.mjs', import.meta.url)];
 
-function validateFixtureArchive(archive, files, layout) {
-  if (process.env.DRYLAND_QA_SURFACE === 'bust-save-incompatible') {
-    assert.notEqual(archive.layout, layout, 'Refusal case requires a genuinely older native revision.');
-    validateNativeArchive(archive, archive.sourceFiles, new URL(origin).origin, archive.layout);
-  } else validateNativeArchive(archive, files, new URL(origin).origin, layout);
-}
-
-export async function prepare({ project }) {
+export async function prepare({ project, archivePath = process.env.DRYLAND_QA_SAVE_ARCHIVE }) {
   const directory = await mkdtemp(join(tmpdir(), 'dryland-directed-'));
   const fixture = join(directory, 'game');
   try {
     await cp(resolve(project, 'rpg-maker/The Dryland Drowned'), fixture, { recursive: true });
-    if (process.env.DRYLAND_QA_BASELINE) {
-      assert.equal(process.env.DRYLAND_QA_SURFACE, 'bust-save-producer');
-      for (const file of ['data/CommonEvents.json', 'data/System.json', 'js/plugins/Dryland_EventBridge.js', 'native-layout-manifest.json']) {
-        await cp(resolve(process.env.DRYLAND_QA_BASELINE, file), join(fixture, file));
-      }
-    }
-    if (process.env.DRYLAND_QA_SAVE_ARCHIVE) {
-      const archive = JSON.parse(await readFile(resolve(process.env.DRYLAND_QA_SAVE_ARCHIVE), 'utf8'));
+    if (archivePath) {
+      const archive = JSON.parse(await readFile(resolve(archivePath), 'utf8'));
       const current = await describe({ project, fixture });
-      validateFixtureArchive(archive, current.files, current.layout);
+      validateNativeArchive(archive, current.files, new URL(origin).origin);
       await writeFile(join(fixture, archiveFiles.archive), JSON.stringify(archive) + '\n', { flag: 'wx' });
       await writeFile(join(fixture, archiveFiles.storage), JSON.stringify(archive.storageState) + '\n', { flag: 'wx' });
       return { fixture, omittedNavigation: [{ producer: archive.producer, campaign: archive.campaign }], storage: 'native checkpoint copy restored before first page' };
@@ -53,13 +39,12 @@ export async function describe({ project, fixture }) {
     }
   }
   await visit();
-  const layout = JSON.parse(await readFile(join(fixture, 'native-layout-manifest.json'), 'utf8'));
   const storageFile = files.find(entry => entry.path === archiveFiles.storage);
   const archive = storageFile ? JSON.parse(await readFile(join(fixture, archiveFiles.archive), 'utf8')) : null;
-  if (archive) validateFixtureArchive(archive, files, layout.nativeLayoutVersion);
+  if (archive) validateNativeArchive(archive, files, new URL(origin).origin);
   return { files, mutablePaths: [], capabilities: ['native-mz', 'public-input'],
-    ...(archive ? { storageFixture: storageFile, omittedNavigation: [{ producer: archive.producer, campaign: archive.campaign }] } : {}),
-    layout: layout.nativeLayoutVersion, git: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: project, encoding: 'utf8' }).trim(),
+    ...(archive ? { storageFixture: storageFile, nativeArchive: {fileId:archive.fileId,payloadSha256:archive.payloadSha256,identitySha256:archive.identitySha256,producer:archive.producer}, omittedNavigation: [{ producer: archive.producer, campaign: archive.campaign }] } : {}),
+    git: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: project, encoding: 'utf8' }).trim(),
     command: [process.execPath, ...process.argv.slice(1)], storage: archive ? 'native checkpoint copy; pre-boot restore; Continue required' : 'isolated browser context; no preinstalled campaign' };
 }
 

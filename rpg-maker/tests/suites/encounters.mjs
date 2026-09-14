@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, catalog, choices, formation, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, formation, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-04/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -116,19 +116,6 @@ canonicalCase('UT-020', 'retreat is unavailable after committing either outcome'
     rejected(accepted(encounterFixture('A1', party), 'CHOOSE_APPROACH', { approachId: 'A1-1' }), 'REQUEST_RETREAT', {}, 'retreat_unavailable');
   }
 });
-canonicalCase('UT-037', 'seen-text skipping stops before the first unseen passage or a choice', () => {
-  const state = structuredClone(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }));
-  state.seenPassageIds = ['prologue.01', 'prologue.02'];
-  const skipped = accepted(state, 'SKIP_SEEN_TEXT');
-  assert.equal(skipped.reading.index, 2);
-  assert.equal(skipped.reading.passageIds[2], 'irati.01');
-  assert.deepEqual(skipped.seenPassageIds, state.seenPassageIds);
-  state.seenPassageIds.push('irati.01');
-  assert.equal(accepted(state, 'SKIP_SEEN_TEXT').phase, 'formation');
-});
-canonicalCase('UT-038', 'unseen text cannot be skipped', () => {
-  rejected(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }), 'SKIP_SEEN_TEXT', {}, 'text_not_seen');
-});
 canonicalCase('UT-055', 'only the current passage can record completion', () => {
   const intro = accepted(rules.createReadyState(), 'BEGIN', { seed: 0 });
   const completed = readAll(intro);
@@ -172,7 +159,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
   assert.deepEqual(after.assignments, before.assignments);
   await browser.call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
   await choices(browser, 'approaches');
-  assert.equal(await browser.evaluate('$gameMessage._drylandChoices.entries.filter(entry => /^A[1-8]-[1-3]$/.test(entry.value)).length'), 3);
+  assert.equal(await browser.evaluate('$gameMessage.choices().filter(label => /<Bind Picture: 5[0-2]>/.test(label)).length'), 3);
   await browser.screenshot(`${evidence('IT-005')}/approaches.png`);
   // Restore the same native pre-description input to exercise the mouse boundary.
   await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(before)}; $gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Map);`);
@@ -186,7 +173,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
   await choices(browser, 'approaches');
   assert.equal((await snapshot(browser)).phase, 'encounter_choice');
   assert.equal((await snapshot(browser)).pendingOutcome, null);
-  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [0, 0], 'Only departure and reveal save; transfer and closing input add no write.');
+  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Only departure and reveal save; transfer and closing input add no write.');
 });
 canonicalCase('IT-049', 'repeated native rereading is observational and restores the same choices and focus', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);
@@ -206,12 +193,12 @@ canonicalCase('IT-049', 'repeated native rereading is observational and restores
     assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 3);
     assert.deepEqual(await snapshot(browser), before);
   }
-  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [0, 0], 'Repeated rereading adds no write after departure/reveal.');
+  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Repeated rereading adds no write after departure/reveal.');
   await browser.screenshot(`${evidence('IT-049')}/restored-choices.png`);
   await activate(browser, 'approaches', 0);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'approach_result' && $gameMessage.hasText()");
   assert.equal(await browser.evaluate('$gameScreen.picture(41) == null && $gameScreen.picture(42) == null'), true);
-  assert.equal(await browser.evaluate("$gameMessage._drylandChoices?.entries.some(entry => entry.value === 'reread') || false"), false);
+  assert.equal(await browser.evaluate("$gameMessage.choices().some(label => /Reler|Reread/.test(label))"), false);
 });
 canonicalCase('IT-051', 'success uses native text on the same encounter artwork with no hero or success illustration', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);

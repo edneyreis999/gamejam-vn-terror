@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import {read,c,write} from './native-migration-helpers.mjs';
+const file='rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js';let src=fs.readFileSync(file,'utf8');
+function remove(from,to){const begin=src.indexOf(from),end=src.indexOf(to,begin);if(begin<0||end<0)throw Error(from);src=src.slice(0,begin)+src.slice(end);}
+remove('  // Transitional index','  function validateCheckpoint');
+remove('  const observeTargets','  function validateCapturedContext');
+remove('  // Dependency ports','  function readConfiguration');
+remove("  Object.defineProperty(global, 'expeditionQA'",'  function reportRejection');
+src=src.replace('readConfiguration, query, parseEventCatalog, validateEnvelope, validateCheckpoint, validateBridgeAction, validateObserve, validateCapturedContext, createQa','readConfiguration, query, validateCheckpoint, validateBridgeAction, validateCapturedContext');
+src=src.replace('  let pendingSeed = null;\n','').replace('  let loading = false;\n','').replace('    loading = true;\n','').replace('    }).finally(() => { loading = false; pendingSeed = null; });','    });').replace('pendingSeed ?? (Date.now() >>> 0)','Date.now() >>> 0').replace('      if (result.ok) pendingSeed = null;\n','');
+src=src.replace('context.messageBusy === false && context.presentationActive === false','context.messageBusy === false');
+remove('    let presentationActive = false;','    const checked = validateCheckpoint');src=src.replace('messageBusy: $gameMessage.isBusy(), presentationActive','messageBusy: $gameMessage.isBusy()');
+for(const code of ['invalid_target','missing_section','campaign_unavailable','campaign_already_started','invalid_seed'])src=src.replace(new RegExp('    '+code+": '[^']*',?\\n"),'');
+src=src.replace("invalid_state: 'A campanha contém um estado inválido.',\n  });","invalid_state: 'A campanha contém um estado inválido.'\n  });");
+remove('    let value = Number(args.valueVariable)','    const field = actionFields');
+src=src.replace('    const field = actionFields[args.action];',`    const variable = Number(args.valueVariable || 0);
+    if (!Number.isSafeInteger(variable) || variable < 0 || variable >= variableCount) return commandError('invalid_action');
+    const value = variable > 0 ? readVariable(variable) : args.value || '';
+    const field = actionFields[args.action];`);
+fs.writeFileSync(file,src);
+const rulesFile='rpg-maker/The Dryland Drowned/js/plugins/Dryland_CampaignRules.js';let rules=fs.readFileSync(rulesFile,'utf8');
+const start=rules.indexOf('    // Observation preserves domain'),end=rules.indexOf('    return freeze({',start);rules=rules.slice(0,start)+rules.slice(end);rules=rules.replace(' : null }),\n      snapshot',' : null })');fs.writeFileSync(rulesFile,rules);
+const events=read('CommonEvents.json');events[66]={...events[66],name:'Reservado — antiga política de campanha indisponível',trigger:0,list:[c(0)]};write(events);
+for(const path of ['rpg-maker/The Dryland Drowned/native-layout-manifest.json','rpg-maker/tools/revise-layout.mjs','rpg-maker/tools/validate-content.mjs'])fs.unlinkSync(path);

@@ -2,7 +2,7 @@
 
 ```mermaid
 flowchart TD
-A["Ativar Jogar e ler o prólogo"] --> B
+A["Ativar Jogar, escolher arquivo e ler o prólogo"] --> B
 B["Consultar e preparar o grupo na taverna"] --> C
 C["Escolher destino e partir"] --> D
 D["Ler encontros e decidir abordagens, sacrifício ou recuo"] --> E
@@ -10,13 +10,15 @@ E["Obter as duas peças e seguir ao Vilarejo"] --> F
 F["Ler Conselho e escolher o destino do medalhão, ou alcançar a perda total"] --> G
 G["Ler memorial elegível, epílogos e créditos"] --> H
 H["Fechar e reabrir a aba, então Continuar"]
+A -->|cancelar arquivo| T[Título sem sobrescrita]
+T --> A
 D -->|recuar| C
 D -->|grupo perdido| C
 D -->|oitava morte| G
 F -->|reservas sem testemunhas| G
 D -.-> X["Abandono: fechar a aba ou interromper a revisão"]
 X --> R["Continuar restaura o último checkpoint, inclusive uma despedida interrompida."]
-R --> A
+R --> D
 H --> Z["O mesmo desfecho salvo reaparece sem uma nova escolha final."]
 ```
 
@@ -31,7 +33,7 @@ journey:
       origin: direct
   actions:
     - step: 1
-      verb: "Ativar Jogar e ler o prólogo"
+      verb: "Ativar Jogar, escolher arquivo e ler o prólogo"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 2
       verb: "Consultar e preparar o grupo na taverna"
@@ -70,3 +72,7 @@ journey:
 Preparação, receitas, sensores e teardown: [plano MZ](../guides/native-mz-cycle.md). O histórico HTML permanece em suas próprias jornadas.
 
 Para o incremento de bustos, seguir os [lotes nativos de diálogo](../guides/vn-picture-busts-dialogues.md). A jornada existente continua dona do fluxo; exportação, audição e aceite humano históricos não acrescentam gates ao incremento autorizado.
+
+## Incremento eventbridge-minimal-runtime — 2026-09-12
+
+Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runtime.md) e [relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Seleção nativa de arquivos, chamadas diretas de CE, observação somente leitura e controles do provider substituem receitas de seed/API/revisão/S. Cenários deste incremento começam untested. Os relatórios anteriores preservam o histórico e não transferem PASS.

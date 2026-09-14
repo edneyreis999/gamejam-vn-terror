@@ -45,11 +45,11 @@ Never silently reinterpret a confirmed GDD rule. When a requested feature confli
 
 - Runtime: RPG Maker MZ in `rpg-maker/The Dryland Drowned/`, with local engine and approved plugins; no build.
 - Supported surface: current stable desktop Chrome through the documented local server.
-- Persistence: native autosave; Continue requires a compatible native revision.
+- Persistence: native SaveCore file selection and current-file autosave; Continue uses native objects without a content-revision gate. Structural save compatibility is evaluated separately.
 - Audio: approved local native audio; retain its acceptance status.
 - Player copy: Brazilian Portuguese.
 - Normal UI: no internal pool IDs, competency mappings, seeds, or QA controls.
-- QA: the read-only `window.expeditionQA` surface, `rpg-maker/tests/`, and the native QA plan. Each increment selects its required sensors.
+- QA: read-only observations of native MZ objects, `rpg-maker/tests/`, and the current native QA plan. Player inputs alone mutate directed campaigns; no shipped QA console or seed setter. Each increment selects its required sensors.
 
 An incremental spec may change these only through an explicit user decision and ADR.
 

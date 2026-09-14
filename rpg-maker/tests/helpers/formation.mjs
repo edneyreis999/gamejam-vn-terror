@@ -2,15 +2,13 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { localAssets } from '../../tools/native-layout.mjs';
-import { openChrome, project, startServer } from './native-chrome.mjs';
+import { openChrome, project, selectFile, startServer } from './native-chrome.mjs';
 
 const require = createRequire(import.meta.url);
-export const { createRules, CatalogError } = require('../../The Dryland Drowned/js/plugins/Dryland_CampaignRules.js');
-const { parseEventCatalog } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
+export const { createCatalog, createRules, CatalogError } = require('../../The Dryland Drowned/js/plugins/Dryland_CampaignRules.js');
+const { readConfiguration } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
 export const events = JSON.parse(await readFile(path.join(project, 'data/CommonEvents.json'), 'utf8'));
-const system = { ...JSON.parse(await readFile(path.join(project, 'data/System.json'), 'utf8')), drylandAssets: await localAssets(project) };
-export const catalog = parseEventCatalog(events, system).catalog;
+export const catalog = createCatalog(readConfiguration(events[4]));
 export const rules = createRules(catalog);
 export const heroes = Array.from({ length: 8 }, (_, i) => `H${i + 1}`);
 export function act(state, type, fields = {}) { return rules.dispatch(state, { type, ...fields, expectedSequence: state.sequence }); }
@@ -24,7 +22,6 @@ export function formation(seed = 12345) {
 export function rosterFixture(deadHeroIds) {
   const state = structuredClone(formation());
   state.deadHeroIds = deadHeroIds.slice();
-  state.presentedDeathIds = deadHeroIds.slice();
   for (const [index, id] of deadHeroIds.entries()) {
     const routeId = index < 5 ? 'physical' : 'supernatural';
     const position = index < 5 ? index + 1 : index - 4;
@@ -40,7 +37,7 @@ export function rosterFixture(deadHeroIds) {
   return state;
 }
 export async function choices(browser, kind) {
-  await browser.waitFor(`$gameMessage._drylandChoices?.kind === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
+  await browser.waitFor(`$gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
 }
 export async function activate(browser, kind, index) {
   await choices(browser, kind);
@@ -55,11 +52,11 @@ export async function activate(browser, kind, index) {
 export async function pause(browser) {
   await browser.waitFor('$gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0');
 }
-export async function tavern(t) {
+export async function tavern(t, options = {}) {
   await startServer(t);
-  const browser = await openChrome(t);
+  const browser = await openChrome(t, options);
   await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  await browser.press('Enter', 13);
+  await browser.press('Enter', 13);await selectFile(browser,1);
   for (const marker of ['A chuva acompanha Ivaí', 'Minha mãe deixou registros', 'Irati escrevera']) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     await browser.press('Enter', 13);
