@@ -1,0 +1,32 @@
+TAP version 13
+# Subtest: IT-047 — the native package contains every authored picture and live common-event target across CE and map lists without a revision registry
+not ok 1 - IT-047 — the native package contains every authored picture and live common-event target across CE and map lists without a revision registry
+  ---
+  duration_ms: 6051.811083
+  type: 'test'
+  location: '/Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/tests/helpers/canonical-cases.mjs:61:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    CE1 must remain a native database record readable by the editor
+
+    undefined !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/tests/suites/native-inventory.mjs:33:44
+    async TestContext.<anonymous> (file:///Users/edney/projects/coreto/gamejam-vn-terror/rpg-maker/tests/helpers/canonical-cases.mjs:63:7)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6441.407833

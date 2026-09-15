@@ -1,0 +1,82 @@
+{
+  "date": "2026-09-15",
+  "scope": "Common Events editor regression; not full campaign or old-save compatibility",
+  "baseCommit": "19135ca18ba6578bb5d83c3a5b4df1c011d273ed",
+  "introducedBy": "f411756",
+  "integratedBy": "5936afa (PR #13)",
+  "lastPrRetainedBug": "8678d9d (PR #14)",
+  "editor": {
+    "platform": "macOS",
+    "application": "RPG Maker MZ",
+    "versionRecorded": false,
+    "before": "empty Common Events list after reopening project",
+    "after": "list restored and CE004 readable in disposable copy and original project",
+    "archivedScreenshots": []
+  },
+  "structuralComparison": {
+    "arrayLengthBefore": 352,
+    "arrayLengthAfter": 352,
+    "replacedNullSlots": 232,
+    "unchangedExistingRecords": 119,
+    "reservedNullIndex": 0
+  },
+  "sourceSha256": {
+    "rpg-maker/The Dryland Drowned/data/CommonEvents.json": "76239c09b975d1f20c69b308d4b08609732fdbf6360321d951e55a95aa0ef231",
+    "rpg-maker/tests/suites/native-inventory.mjs": "7948c0773697bfb236d461773d2d5bc18659c21cdbfc48a113ac3714cca1e22d",
+    "planos/tasks/eventbridge-minimal-runtime/fix-common-event-editor-slots.mjs": "66f5779a58e06865127f11e017026bb7cc53b49b5c00fed11692e76b53b93eb3"
+  },
+  "tests": [
+    {
+      "id": "IT-001",
+      "verdict": "PASS",
+      "runStarted": "2026-09-15T18:13:29.965Z",
+      "finished": "2026-09-15T18:13:42.659Z",
+      "node": "v22.23.2",
+      "changedInputs": [],
+      "sourceCount": 109,
+      "currentSourceHashMatch": true,
+      "canonicalRecord": "docs/qa/evidence/init-rpg-maker-mz/task-01/IT-001/execution.json"
+    },
+    {
+      "id": "IT-004",
+      "verdict": "PASS",
+      "runStarted": "2026-09-15T18:13:29.965Z",
+      "finished": "2026-09-15T18:14:04.119Z",
+      "node": "v22.23.2",
+      "changedInputs": [],
+      "sourceCount": 109,
+      "currentSourceHashMatch": true,
+      "canonicalRecord": "docs/qa/evidence/init-rpg-maker-mz/task-02/IT-004/execution.json"
+    },
+    {
+      "id": "IT-047",
+      "verdict": "PASS",
+      "runStarted": "2026-09-15T18:13:29.965Z",
+      "finished": "2026-09-15T18:13:49.866Z",
+      "node": "v22.23.2",
+      "changedInputs": [],
+      "sourceCount": 109,
+      "currentSourceHashMatch": true,
+      "canonicalRecord": "docs/qa/evidence/init-rpg-maker-mz/task-11/IT-047/execution.json"
+    }
+  ],
+  "logs": {
+    "before.txt": {
+      "sha256": "f1771b7dbc375f0b57a87e48bcf3413956432873c9be8d9ee1074be27b594c75",
+      "exitCode": 1,
+      "originalSha256": "4ad71fb6d69922bf34fbfff2e9d522b37e9ec690a8dbcd81f3b92dd15b4d8d0b",
+      "formatting": "Only trailing whitespace removed; original preserved in local archive."
+    },
+    "after.txt": {
+      "sha256": "93ce600e06a9a82cbba818e06cda87918bd62b3eba2d227ecdfd2bde8d7350ac",
+      "exitCode": 0
+    }
+  },
+  "limitations": [
+    "No complete campaign replay",
+    "No Windows editor replay",
+    "No old-save migration validation",
+    "No editor save-and-reopen write test",
+    "No inspection of editor internals"
+  ]
+}

@@ -29,7 +29,11 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
   const map=await response.json();
   return {id:info.id,events:map.events||[],pages:(map.events||[]).filter(Boolean).flatMap(event=>(event.pages||[]).map((page,index)=>({eventId:event.id,page:index,list:page.list||[]})))};
  }))`),assets=new Set(await localAssets(project));
- for(const id of retiredCommonEvents)assert.equal(events[id],null,`Retired Common Event CE${id} keeps its numeric slot`);
+ assert.equal(events[0],null,'Common Event index zero remains reserved');
+ for(let id=1;id<events.length;id++)assert.equal(events[id]?.id,id,`CE${id} must remain a native database record readable by the editor`);
+ for(const id of retiredCommonEvents)assert.deepEqual(events[id],{
+  id,name:'',trigger:0,switchId:1,list:[{code:0,indent:0,parameters:[]}]
+ },`Retired Common Event CE${id} keeps an empty native slot without executable content`);
  const mapById=new Map(maps.map(map=>[map.id,map]));
  for(const [mapId,eventId] of retiredMapShortcuts)assert.equal(mapById.get(mapId)?.events[eventId],null,`Retired shortcut Map${String(mapId).padStart(3,'0')}/event${String(eventId).padStart(3,'0')} keeps its event slot`);
  for(const mapId of [37,38,39,40,41,42,43,44]) {
@@ -56,7 +60,10 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
   }
  }
  for(const {owner,list} of lists)for(const command of list){
-  if(command.code===117)assert.ok(events[command.parameters[0]],`${owner} -> CE${command.parameters[0]}`);
+  if(command.code===117){
+   assert.ok(events[command.parameters[0]],`${owner} -> CE${command.parameters[0]}`);
+   assert.ok(!retiredCommonEvents.includes(command.parameters[0]),`${owner} must not call retired CE${command.parameters[0]}`);
+  }
   if(command.code===231&&command.parameters[1])assert.ok(assets.has('img/pictures/'+command.parameters[1]+'.png'),`${owner}: ${command.parameters[1]}`);
   if(command.code===357){const [plugin,name,,args]=command.parameters;
    assert.equal(await browser.evaluate(`typeof PluginManager._commands[${JSON.stringify(plugin+':'+name)}]`),'function',`${owner}: ${plugin}:${name}`);
