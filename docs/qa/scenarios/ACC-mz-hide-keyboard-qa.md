@@ -6,7 +6,7 @@ persona: Joana, jogadora ampliada
 journey: J-mz-qa-accessibility
 expected: Foco, restauração e opções mantêm o controle explícito sem mutação pelo diagnóstico.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: blocked-verify
+qa_status: untested
 bug_ids: BUG-20260909-hide-overlapping-choices; BUG-20260909-options-help-english
 fix_status:
 retest_status:
@@ -42,3 +42,11 @@ Planejado, **untested**. S07/S08; lotes B/C. Sessões: CH-mz-keyboard-qa. [Guia 
 ## Execução eventbridge-minimal-runtime — 2026-09-13
 
 Estado corrente: **blocked-verify**. HIDE por teclado/mouse, held input, AUTO/FAST separados e resets passaram em1280/1920 e no zoom nativo110% final (302 entradas/125 capturas PNG). Resta somente o parecer humano de conforto/clareza. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+Parcial: HIDE/Options/FAST e dois viewports/modos executados; zoom nativo excluído pela ADR-G003. MAS-01/05: MA-A/B/F; HIDE/Options/FAST, limites de input em escala padrão. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+A [ADR-G003](../../adrs/adr-g003-excluir-testes-de-zoom-nativo.md) substitui a exigência anterior de zoom neste cenário. Preservar evidência histórica sem reabrir essa variante.

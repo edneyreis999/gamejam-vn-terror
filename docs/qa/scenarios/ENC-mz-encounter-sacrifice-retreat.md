@@ -6,7 +6,7 @@ persona: Lia, primeira expedicionária
 journey: J-mz-complete-campaign
 expected: Escolhas explícitas preservam encontro, progresso e morte nas revisitas e na retomada.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: pass
+qa_status: untested
 bug_ids:
 fix_status:
 retest_status:
@@ -38,3 +38,8 @@ Planejado, **untested**. S02/S04/S05/S09; lotes A/B/D/F. Sessões: CH-eventbridg
 ## Execução eventbridge-minimal-runtime — 2026-09-13
 
 Estado corrente: **pass**. S02/S04/S05/S09: campanhas nas duas ordens de rota, sucesso/falha a partir do mesmo A3, vítimas alternativas de um mestre pré-sacrifício, recuo, mortes/ausências e Continue. Provas dirigidas em fresh-physical-01, supernatural-first-01 (falha de verificador separada), bad-01→bad-resume-02, approach-*-final-01, victim-final-01 e return-*; integração canônica retida como sensor distinto. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+PASS funcional: duas ordens, três abordagens/vítimas, recuo, mortes e retomada por arquivos genuínos. MAS-04/05/06: MA-C/D/E/F; famílias físicas/sobrenaturais, sacrifício/recuo e retomada. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.

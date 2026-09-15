@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, events, pause, tavern } from '../helpers/formation.mjs';
+import { activate, choices, pause, tavern } from '../helpers/formation.mjs';
 import { councilWithHeroes, councilAfterLosses } from '../helpers/closing-presentation.mjs';
 import { accepted, complete, rejectUnchanged } from '../helpers/campaign.mjs';
 import { continueSave } from '../helpers/discovery.mjs';
@@ -165,6 +166,8 @@ canonicalCase('IT-061','native Council supports every hero recipe in canonically
 
 canonicalCase('IT-073', 'each eligible epilogue executes its native body and completes exactly one campaign passage', {timeout: 180000}, async t => {
  const browser=await tavern(t);
+ for(const reduced of [false,true]){
+ await browser.call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:reduced?'reduce':'no-preference'}]});
  for(let hero=1;hero<=8;hero++){
   const party=hero<=6?[`H${hero}`,`H${hero+1}`,`H${hero+2}`]:['H6','H7','H8'];
   let input=accepted(councilWithHeroes(party),'COMPLETE_PASSAGE',{passageId:'council.01'});
@@ -172,19 +175,27 @@ canonicalCase('IT-073', 'each eligible epilogue executes its native body and com
   input=accepted(input,'CHOOSE_ENDING',{ending:'destroy'});
   while(input.reading?.sceneId!==`epilogue.H${hero}`)input=complete(input);
   // Isolated native integration input, earned by pure domain actions; not directed QA.
-  await installClosing(browser,input);await closingReady(browser);
-  const body=events.find(event=>event?.name===`epilogue.H${hero}`);
-  const expected=body.list.filter(command=>command.code===401).map(command=>command.parameters[0]);
+  for(const entryMap of hero===1?[4,29,30]:hero===2?[29]:[28+hero]){
+  await installClosing(browser,input,entryMap);await closingReady(browser);
+  const map=JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(28+hero).padStart(3,'0')}.json`,import.meta.url),'utf8'));
+  const local=map.events[1].pages[0].list;
+  const expected=local.filter(command=>command.code===401).map(command=>command.parameters[0]);
+  assert.deepEqual(await browser.evaluate('({map:$gameMap._interpreter._mapId,event:$gameMap._interpreter._eventId,child:Boolean($gameMap._interpreter._childInterpreter)})'),{map:28+hero,event:1,child:false});
   for(const text of expected){
    await pause(browser);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
    assert.equal(await browser.evaluate('$gameMap.mapId()'),28+hero);
    assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'),`Dryland_H${hero}`);
    assert.deepEqual(await snapshot(browser),input);
+   await browser.waitFor("(()=>{const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===60);return s?.bitmap?.isReady()&&s.worldVisible&&s.worldAlpha>0&&$gameScreen.picture(60).opacity()===255;})()");
+   assert.equal(await browser.evaluate('(()=>{const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===60);const b=s.getBounds();return b.width>0&&b.width<=Graphics.width&&b.y<SceneManager._scene._messageWindow.y&&b.y+b.height>0;})()'),true,'The loaded epilogue portrait fits the screen width and intersects the visible story area');
+   if(entryMap===28+hero||hero===2)await browser.screenshot(`${evidence('IT-073')}/epilogue-H${hero}-${reduced?'reduced':'normal'}.png`);
    await browser.press('Enter',13);
   }
   await browser.waitFor(`$gameSystem._dryland.campaign.sequence === ${input.sequence+1}`);
   const after=await snapshot(browser);
   assert.deepEqual(after,complete(input));
   assert.notEqual(await browser.evaluate('$gameScreen.picture(60)?.name()'),`Dryland_H${hero}`);
+ }
+ }
  }
 });

@@ -58,15 +58,24 @@ async function observeSeInput(context){
 async function observeFastInput(context,player,audioKind=null){
  const before=await context.read('fast-input-before',kind=>({frame:Graphics.frameCount,disallowed:$gameSystem.isExtendedFastForwardDisallowed(),active:$gameTemp.isExtendedFastForwardMode(),paused:!!SceneManager._scene._messageWindow?.pause,audio:kind==='bgs'&&AudioManager._bgsBuffer?{name:AudioManager._currentBgs?.name??null,start:AudioManager._bgsBuffer._startTime??null,volume:AudioManager._bgsBuffer.volume,playing:AudioManager._bgsBuffer.isPlaying()}:null}),audioKind);
  if(!before.paused)return{status:'unavailable',before};
- const point=await consolePoint(context,'fastfwd','fast-input-geometry');await player.click(point.x,point.y);
- await context.wait(frame=>Graphics.frameCount>frame,before.frame);
- const during=await context.read('fast-input-during',kind=>({frame:Graphics.frameCount,disallowed:$gameSystem.isExtendedFastForwardDisallowed(),active:$gameTemp.isExtendedFastForwardMode(),passageId:$gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index]??null,audio:kind==='bgs'&&AudioManager._bgsBuffer?{name:AudioManager._currentBgs?.name??null,start:AudioManager._bgsBuffer._startTime??null,volume:AudioManager._bgsBuffer.volume,playing:AudioManager._bgsBuffer.isPlaying()}:null}),audioKind);
- if(before.disallowed){assert.equal(during.active,false,'A disallowed reading must reject FAST input.');await player.ready();return{status:'blocked-by-reading-permission',before,during};}
+ const point=await consolePoint(context,'fastfwd','fast-input-geometry');
+ const sampleFast=async kind=>{
+  const sample=()=>({frame:Graphics.frameCount,disallowed:$gameSystem.isExtendedFastForwardDisallowed(),active:$gameTemp.isExtendedFastForwardMode(),passageId:$gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index]??null,audio:kind==='bgs'&&AudioManager._bgsBuffer?{name:AudioManager._currentBgs?.name??null,start:AudioManager._bgsBuffer._startTime??null,volume:AudioManager._bgsBuffer.volume,playing:AudioManager._bgsBuffer.isPlaying()}:null});
+  const started=performance.now();let current=sample();
+  while(!current.active&&performance.now()-started<3000){await new Promise(resolve=>requestAnimationFrame(resolve));current=sample();}
+  return current;
+ };
+ let during;
+ if(before.disallowed){
+  await player.click(point.x,point.y);
+  during=await context.read('fast-input-rejected',()=>({active:$gameTemp.isExtendedFastForwardMode()}));
+  assert.equal(during.active,false,'A disallowed reading must reject FAST input.');await player.ready();return{status:'blocked-by-reading-permission',before,during};
+ }
+ [during]=await Promise.all([context.read('fast-input-during',sampleFast,audioKind),player.click(point.x,point.y)]);
  assert.equal(during.active,true,'An allowed reading must activate FAST through its public control.');
- const cancelPoint=await consolePoint(context,'fastfwd','fast-input-cancel-geometry');await player.click(cancelPoint.x,cancelPoint.y);
- await context.wait(frame=>Graphics.frameCount>frame,during.frame);
+ await player.returnToTavern();
  const after=await context.read('fast-input-after',kind=>({frame:Graphics.frameCount,active:$gameTemp.isExtendedFastForwardMode(),passageId:$gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index]??null,audio:kind==='bgs'&&AudioManager._bgsBuffer?{name:AudioManager._currentBgs?.name??null,start:AudioManager._bgsBuffer._startTime??null,volume:AudioManager._bgsBuffer.volume,playing:AudioManager._bgsBuffer.isPlaying()}:null}),audioKind);
- assert.equal(after.active,false,'The public FAST control must cancel FAST.');
+ assert.equal(after.active,false,'FAST must reset at the native choice boundary.');
  if(audioKind==='bgs'&&before.audio){for(const sample of [during.audio,after.audio]){assert.equal(sample?.name,before.audio.name);assert.equal(sample?.start,before.audio.start);assert.equal(sample?.volume,before.audio.volume);assert.equal(sample?.playing,true);}}
  await player.ready();return{status:'input-observed',before,during,after};
 }
@@ -81,13 +90,13 @@ export async function execute(context){
  let fastInput=null,transition=null;
  if(cue==='bgs'){
   const transitionBefore=await context.read('bgs-transition-before',()=>({frame:Graphics.frameCount,name:AudioManager._currentBgs?.name||'',start:AudioManager._bgsBuffer?._startTime??null}));
-  await player.until('formation');await player.choose('Gorvak');await player.choose('Conversar');await player.until('formation');
+  await player.returnToTavern();await player.choose('Gorvak');await player.choose('Conversar');await player.returnToTavern();
   const completed=await player.snapshot('bgs-after-first-gorvak');assert.ok(completed.readUnits.includes(83),'The first Gorvak conversation must complete before the FAST reread probe.');
   const transitionAfter=await context.read('bgs-transition-after',()=>({frame:Graphics.frameCount,name:AudioManager._currentBgs?.name||'',start:AudioManager._bgsBuffer?._startTime??null}));
   transition={before:transitionBefore,after:transitionAfter,trigger:'public reading/choice inputs'};
   assert.equal(transitionAfter.name,'People1');
   await player.choose('Gorvak');await player.choose('Conversar');await player.ready();
-  fastInput=await observeFastInput(context,player,'bgs');await player.until('formation');
+  fastInput=await observeFastInput(context,player,'bgs');
   const afterFast=await player.snapshot('bgs-after-fast');assert.deepEqual(afterFast.campaign,completed.campaign,'FAST reread must preserve campaign facts.');
   const reset=await context.read('fast-choice-reset',()=>({fast:$gameTemp.isExtendedFastForwardMode(),auto:$gameTemp.isMessageAutoForwardMode(),kind:$gameMessage._drylandChoiceFocus?.key||'formation'}));assert.equal(reset.fast,false);assert.equal(reset.auto,false);fastInput={...fastInput,reset};
   await player.choose('Gorvak');await player.choose('Conversar');await player.ready();

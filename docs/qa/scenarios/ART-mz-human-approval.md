@@ -6,7 +6,7 @@ persona: Rui, revisor de conteúdo
 journey: J-mz-creative-review
 expected: Pessoas registram os quatro pareceres aplicáveis de autoria, UI/leitura, memorial e áudio perceptível desta implementação.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: blocked-verify
+qa_status: untested
 bug_ids: BUG-20260909-memorial-survivors-total-loss
 fix_status:
 retest_status:
@@ -32,3 +32,8 @@ Planejado, **untested**. Quatro julgamentos delimitados em verification.md; auto
 ## Execução eventbridge-minimal-runtime — 2026-09-13
 
 Estado corrente: **blocked-verify**. Quatro pareceres humanos após implementação continuam pendentes: autoria sem JavaScript, clareza/conforto dos controles, memorial/composição e resposta audível de volume. Capturas, trilhas e resultados técnicos estão disponíveis no relatório; nenhum resultado do agente é tratado como aceite humano. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+blocked-verify: demonstração nativa de edição/reprodução PASS; quatro pareceres humanos continuam pendentes. MAV-014/MAS-07: MA-I e quatro julgamentos atribuídos; autoria, UI/controles, memorial e áudio. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.

@@ -57,12 +57,18 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
     const map = await response.json();
     return {id:info.id,parent:info.parentId,name:info.name,stable:map.note,width:map.width,height:map.height,cells:map.data.length,events:map.events.filter(Boolean).length};
   }))`);
-  assert.equal(maps.length, 36);
-  assert.equal(new Set(maps.map(map => map.stable)).size, 36);
+  assert.equal(maps.length, 44);
+  assert.equal(new Set(maps.map(map => map.stable)).size, 44);
   for (const map of maps) assert.equal(map.cells, map.width * map.height * 6);
   const lookup = id => maps.find(map => map.stable === `<drylandMap:${id}>`);
   assert.equal(lookup('prologue').id, 2);
   assert.equal(lookup('tavern').id, 3);
+  assert.equal(lookup('gorvak-interaction').id, 37);
+  assert.equal(lookup('gorvak-interaction').parent, lookup('tavern').id);
+  for (const [name, id] of [['elowen',38],['griznik',39],['seraphina',40],['bimbren',41],['liora',42],['vaelith',43],['draska',44]]) {
+    assert.equal(lookup(`${name}-interaction`).id,id);
+    assert.equal(lookup(`${name}-interaction`).parent,lookup('tavern').id);
+  }
   assert.equal(lookup('story').id, 4);
   for (const [family, parent] of [['A', 'physical_traps'], ['B', 'supernatural_traps']]) {
     for (let number = 1; number <= 8; number++) assert.equal(lookup(`encounter.${family}${number}`).parent, lookup(parent).id);

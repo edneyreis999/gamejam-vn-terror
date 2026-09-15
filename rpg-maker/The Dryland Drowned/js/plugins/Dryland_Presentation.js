@@ -40,6 +40,12 @@
  * @text Consumir confirmação atual
  * @command ObservationBegin
  * @text Iniciar leitura observacional
+ * @arg unit
+ * @text Identidade da leitura no mapa
+ * @desc 0 usa o ID do evento comum. Em mapas, informe uma identidade reservada pela arquitetura.
+ * @type number
+ * @min 0
+ * @default 0
  * @arg switch
  * @text Já lido — switch de saída
  * @type switch
@@ -84,13 +90,15 @@
  * @arg variable
  * @type variable
  * @help
- * Coloque Iniciar/Concluir leitura observacional no próprio evento comum.
+ * Coloque Iniciar/Concluir leitura observacional junto ao texto nativo.
  * Uma unidade só é marcada como lida ao chegar ao comando Concluir.
  * Use uma unidade por evento comum. Trocar o seletor para outro evento
  * cria uma identidade de leitura diferente. Cancelar não conclui a unidade.
+ * Em mapas, informe uma identidade explícita e única por unidade.
+ * Maps037–044 reservam 82–113, identidades das leituras dos oito heróis.
  * Para texto de campanha, consulte passageRead no Bridge e passe o switch
  * a Preparar controles de leitura; encerre antes de ReadingComplete.
- * AUTO e FAST usam o provedor instalado e exigem seleção do jogador.
+ * FAST usa o provedor instalado e exige seleção do jogador.
  * Cada nova unidade, escolha e transferência desliga os modos anteriores.
  * Imagens, posições, textos e movimentos são autorados nos eventos.
  */
@@ -126,8 +134,9 @@
     delete this._drylandReadingUnitActive;
   };
   PluginManager.registerCommand('Dryland_Presentation', 'ObservationBegin', function(args) {
-    const id = this._drylandCommonEventId;
-    if (!id) throw new Error('Observational reading must start inside a Common Event.');
+    const explicit = Number(args.unit ?? 0);
+    const id = explicit === 0 ? this._drylandCommonEventId : explicit;
+    if (!Number.isInteger(id) || id < 1) throw new Error('Observational reading requires a Common Event or a positive integer unit ID.');
     this._drylandObservedUnit = id;
     this._drylandReadingUnitActive = true;
     const read = $gameSystem._drylandReadUnits.includes(id);

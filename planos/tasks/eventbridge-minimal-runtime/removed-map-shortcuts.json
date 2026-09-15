@@ -1,0 +1,254 @@
+[
+  {
+    "map": 3,
+    "event": 2,
+    "common": 4,
+    "name": "Configuração do jogo"
+  },
+  {
+    "map": 3,
+    "event": 3,
+    "common": 5,
+    "name": "Gorvak"
+  },
+  {
+    "map": 3,
+    "event": 4,
+    "common": 6,
+    "name": "Elowen"
+  },
+  {
+    "map": 3,
+    "event": 5,
+    "common": 7,
+    "name": "Griznik"
+  },
+  {
+    "map": 3,
+    "event": 6,
+    "common": 8,
+    "name": "Seraphina"
+  },
+  {
+    "map": 3,
+    "event": 7,
+    "common": 9,
+    "name": "Bimbren"
+  },
+  {
+    "map": 3,
+    "event": 8,
+    "common": 10,
+    "name": "Liora"
+  },
+  {
+    "map": 3,
+    "event": 9,
+    "common": 11,
+    "name": "Vaelith"
+  },
+  {
+    "map": 3,
+    "event": 10,
+    "common": 12,
+    "name": "Draska"
+  },
+  {
+    "map": 3,
+    "event": 11,
+    "common": 38,
+    "name": "Interface da taverna"
+  },
+  {
+    "map": 3,
+    "event": 12,
+    "common": 39,
+    "name": "Destinos"
+  },
+  {
+    "map": 3,
+    "event": 13,
+    "common": 117,
+    "name": "Elenco"
+  },
+  {
+    "map": 3,
+    "event": 14,
+    "common": 351,
+    "name": "Taverna — Carregar imagens"
+  },
+  {
+    "map": 7,
+    "event": 2,
+    "common": 13,
+    "name": "Descrição, abordagens e resultados — A1"
+  },
+  {
+    "map": 8,
+    "event": 2,
+    "common": 14,
+    "name": "Descrição, abordagens e resultados — A2"
+  },
+  {
+    "map": 9,
+    "event": 2,
+    "common": 15,
+    "name": "Descrição, abordagens e resultados — A3"
+  },
+  {
+    "map": 10,
+    "event": 2,
+    "common": 16,
+    "name": "Descrição, abordagens e resultados — A4"
+  },
+  {
+    "map": 11,
+    "event": 2,
+    "common": 17,
+    "name": "Descrição, abordagens e resultados — A5"
+  },
+  {
+    "map": 12,
+    "event": 2,
+    "common": 18,
+    "name": "Descrição, abordagens e resultados — A6"
+  },
+  {
+    "map": 13,
+    "event": 2,
+    "common": 19,
+    "name": "Descrição, abordagens e resultados — A7"
+  },
+  {
+    "map": 14,
+    "event": 2,
+    "common": 20,
+    "name": "Descrição, abordagens e resultados — A8"
+  },
+  {
+    "map": 15,
+    "event": 2,
+    "common": 21,
+    "name": "Descrição, abordagens e resultados — B1"
+  },
+  {
+    "map": 16,
+    "event": 2,
+    "common": 22,
+    "name": "Descrição, abordagens e resultados — B2"
+  },
+  {
+    "map": 17,
+    "event": 2,
+    "common": 23,
+    "name": "Descrição, abordagens e resultados — B3"
+  },
+  {
+    "map": 18,
+    "event": 2,
+    "common": 24,
+    "name": "Descrição, abordagens e resultados — B4"
+  },
+  {
+    "map": 19,
+    "event": 2,
+    "common": 25,
+    "name": "Descrição, abordagens e resultados — B5"
+  },
+  {
+    "map": 20,
+    "event": 2,
+    "common": 26,
+    "name": "Descrição, abordagens e resultados — B6"
+  },
+  {
+    "map": 21,
+    "event": 2,
+    "common": 27,
+    "name": "Descrição, abordagens e resultados — B7"
+  },
+  {
+    "map": 22,
+    "event": 2,
+    "common": 28,
+    "name": "Descrição, abordagens e resultados — B8"
+  },
+  {
+    "map": 23,
+    "event": 2,
+    "common": 335,
+    "name": "Conselho"
+  },
+  {
+    "map": 23,
+    "event": 3,
+    "common": 53,
+    "name": "Escolha do medalhão"
+  },
+  {
+    "map": 25,
+    "event": 2,
+    "common": 55,
+    "name": "Reunir"
+  },
+  {
+    "map": 26,
+    "event": 2,
+    "common": 56,
+    "name": "Destruir"
+  },
+  {
+    "map": 27,
+    "event": 2,
+    "common": 57,
+    "name": "Perda total"
+  },
+  {
+    "map": 29,
+    "event": 2,
+    "common": 306,
+    "name": "Epílogo H1"
+  },
+  {
+    "map": 30,
+    "event": 2,
+    "common": 308,
+    "name": "Epílogo H2"
+  },
+  {
+    "map": 31,
+    "event": 2,
+    "common": 310,
+    "name": "Epílogo H3"
+  },
+  {
+    "map": 32,
+    "event": 2,
+    "common": 312,
+    "name": "Epílogo H4"
+  },
+  {
+    "map": 33,
+    "event": 2,
+    "common": 314,
+    "name": "Epílogo H5"
+  },
+  {
+    "map": 34,
+    "event": 2,
+    "common": 316,
+    "name": "Epílogo H6"
+  },
+  {
+    "map": 35,
+    "event": 2,
+    "common": 318,
+    "name": "Epílogo H7"
+  },
+  {
+    "map": 36,
+    "event": 2,
+    "common": 320,
+    "name": "Epílogo H8"
+  }
+]

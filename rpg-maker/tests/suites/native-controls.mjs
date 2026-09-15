@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause, tavern } from '../helpers/formation.mjs';
+import { activate, choices, installFixture, pause, rosterFixture, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -55,19 +55,29 @@ canonicalCase('IT-064','native interruption stops queued commands without erasin
   const update=Game_Map.prototype.updateInterpreter;Game_Map.prototype.updateInterpreter=function(){if(!cancelledMapLoop)update.call(this);};
   const native=Game_Interpreter.prototype.command357;
   Game_Interpreter.prototype.command357=function(p){const result=native.call(this,p);if(result&&p[0]==='VisuMZ_2_VNPictureBusts'&&p[1]===holdDialogueAfter){dialogueHeld=this;holdDialogueAfter=null;}return result;};
+  const erase=Game_Interpreter.prototype.command235;
+  Game_Interpreter.prototype.command235=function(p){const result=erase.call(this,p);if(result&&p[0]===60&&holdDialogueAfter==='ErasePicture'){dialogueHeld=this;holdDialogueAfter=null;}return result;};
   const execute=Game_Interpreter.prototype.executeCommand;
   Game_Interpreter.prototype.executeCommand=function(){return dialogueHeld===this?false:execute.call(this);};`);
  for(const reduced of [false,true])for(const stage of ['active','focus','exit']){
   await browser.call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:reduced?'reduce':'no-preference'}]});
   await browser.evaluate('dialogueHeld=null;holdDialogueAfter=null;cancelledMapLoop=false;');
   await installPhase(browser,fixtures.formation);await choices(browser,'formation');
-  await activate(browser,'formation',0);await activate(browser,'hero',0);await pause(browser);
+  await activate(browser,'formation',1);await activate(browser,'hero',0);await pause(browser);
   const before=await state(browser);
   if(stage!=='active'){
-   const operation=stage==='focus'?'Tone_CustomToneBust':'Basic_ExitBusts';
+   const operation=stage==='focus'?'Tone_CustomToneBust':'ErasePicture';
    await browser.evaluate(`holdDialogueAfter=${JSON.stringify(operation)};`);
-   const boxes=stage==='focus'?2:7;
-   for(let box=0;box<boxes;box++){await pause(browser);await browser.press('Enter',13);}
+   for(let box=0;box<12;box++){
+    await browser.waitFor('Boolean(dialogueHeld)||SceneManager._scene._choiceListWindow?.isOpenAndActive()||($gameMessage.hasText()&&SceneManager._scene._messageWindow?.pause&&SceneManager._scene._messageWindow._waitCount===0)');
+    if(await browser.evaluate('Boolean(dialogueHeld)'))break;
+    if(await browser.evaluate('SceneManager._scene._choiceListWindow?.isOpenAndActive()')){
+     assert.equal(stage,'exit','Focus effect must execute before the conversation returns to its menu');
+     await activate(browser,'hero',2);
+     break;
+    }
+    await browser.press('Enter',13);
+   }
    await browser.waitFor('Boolean(dialogueHeld)');
   }
   const queued=await browser.evaluate(`(()=>{
@@ -78,15 +88,65 @@ canonicalCase('IT-064','native interruption stops queued commands without erasin
    return {background,hadQueuedEffect};
   })()`);
   assert.equal(queued.hadQueuedEffect,stage!=='active');
+  if(stage==='exit'){
+   assert.equal(await browser.evaluate('$gameScreen.picture(60)==null'),true);
+   assert.equal(await browser.evaluate('$gameScreen.picture(63)==null'),true);
+   assert.equal(await browser.evaluate('$gameMap.mapId()'),38,'Cancellation stops the queued return transfer');
+  }
   const imageNames=await browser.evaluate('[60,61,62,63,64,65].map(id=>$gameScreen.picture(id)?.name()||null)');
   await frames(browser,45);
   assert.equal(await browser.evaluate('!$gameMap._interpreter.isRunning()&&!$gameMap._interpreter._childInterpreter'),true);
-  if(stage!=='exit')assert.deepEqual(await browser.evaluate('[60,61,62,63,64,65].map(id=>$gameScreen.picture(id)?.name()||null)'),imageNames,'Native cancellation does not erase the saved screen');
+  assert.deepEqual(await browser.evaluate('[60,61,62,63,64,65].map(id=>$gameScreen.picture(id)?.name()||null)'),imageNames,'Native cancellation does not erase the saved screen');
   assert.equal(await browser.evaluate('$gameScreen.picture(18).name()'),'Dryland_H2');
   assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),queued.background);
   assert.deepEqual(await state(browser),before);
   await browser.screenshot(`${evidence('IT-064')}/${stage}-${reduced?'reduced':'normal'}-cancelled.png`);
  }
+});
+
+canonicalCase('IT-080','migrated hero visits transfer to their own map and cancel or reject stale entry without campaign changes',{timeout:180000},async t=>{
+ const browser=await tavern(t);
+ const ambience=()=>browser.evaluate('({name:AudioManager._currentBgs?.name,start:AudioManager._bgsBuffer?._startTime,playing:AudioManager._bgsBuffer?.isPlaying()})');
+ const tavernAmbience=await ambience();
+ assert.equal(tavernAmbience.name,'People1');assert.equal(tavernAmbience.playing,true);
+ const interpreterMaps=()=>browser.evaluate(`(()=>{const maps=[];for(let i=$gameMap._interpreter;i;i=i._childInterpreter)maps.push(i._mapId);return maps})()`);
+ await browser.evaluate(`window.staleHeroTransfers=[];
+  const setup=Game_Map.prototype.setup;Game_Map.prototype.setup=function(id){staleHeroTransfers.push(id);return setup.call(this,id);};`);
+ for(const [heroIndex,mapId] of [[0,37],[1,38],[2,39],[3,40],[4,41],[5,42],[6,43],[7,44]]) {
+ await installFixture(browser,rosterFixture([]));
+ const before=await state(browser);
+ await activate(browser,'formation',heroIndex);await choices(browser,'hero');
+ assert.equal(await browser.evaluate('$gameMap.mapId()'),mapId);
+ assert.deepEqual(await browser.evaluate(`SceneManager._scene._choiceListWindow._list.map(item=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(item.name).replace(/<[^>]*>/g,'').replace(/\\x1b[A-Za-z]+\\[[^\\]]*\\]/g,'').replace(/\\s+/g,' ').trim())`),['Conversar','Selecionar','Voltar à taverna']);
+ assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'),3);
+ assert.deepEqual(await interpreterMaps(),[mapId],'The source interpreter is replaced by the destination map root before its menu');
+ assert.deepEqual(await ambience(),tavernAmbience,'Entering the child map keeps the playing ambience start time');
+ assert.deepEqual(await state(browser),before,'Opening the map is observational');
+ await browser.press('Escape',27);await choices(browser,'formation');
+ assert.equal(await browser.evaluate('$gameMap.mapId()'),3);
+ assert.equal(await browser.evaluate('$gameMessage._drylandChoiceFocus.key'),'formation');
+ assert.equal(await browser.evaluate('$gameMessage.choices().length'),11);
+ assert.deepEqual([...new Set(await interpreterMaps())],[3],'Return leaves no hero-map interpreter in the native chain');
+ assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),heroIndex,'Return restores the chosen tavern portrait');
+ assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),'Dryland_Taverna');
+ assert.deepEqual(await ambience(),tavernAmbience,'Returning does not restart the tavern ambience');
+ assert.deepEqual(await state(browser),before,'Canceling the interaction does not mutate campaign state');
+ // Isolated stale-entry fixture: the native guard must reject a dead hero even
+ // if a transfer is already pending. Ordinary tavern UI never exposes it here.
+ await installFixture(browser,rosterFixture([`H${heroIndex+1}`]));
+ const dead=await state(browser);
+ assert.equal(await browser.evaluate(`$gameSwitches.value(${21+heroIndex})`),false);
+ await browser.evaluate(`staleHeroTransfers=[];
+  $gameMessage.clear();
+  $gameMap._interpreter.setup([{code:201,indent:0,parameters:[0,${mapId},10,7,2,2]},{code:115,indent:0,parameters:[]},{code:0,indent:0,parameters:[]}],0);
+  SceneManager.goto(Scene_Map);`);
+ await browser.waitFor('staleHeroTransfers.length===2');
+ await choices(browser,'formation');
+ assert.deepEqual(await browser.evaluate('staleHeroTransfers'),[mapId,3]);
+ assert.deepEqual(await state(browser),dead);
+ assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'),[],'Rejected entry executes no hero reading unit');
+ }
+ assert.deepEqual(browser.exceptions,[]);
 });
 
 canonicalCase('IT-065','installed FAST completes authored Council units and revokes at unseen text and the final choice',{timeout:180000},async t=>{
@@ -202,13 +262,42 @@ canonicalCase('IT-077','FAST-only console executes native text and waits, with c
  await browser.evaluate('Game_Map.prototype.setupStartingEvent=function(){return false;};$gameMap._interpreter.clear();SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();');
  await browser.waitFor('SceneManager._scene._messageWindow.isClosed()');
  const before=await state(browser),id=prepared.result;
+ const explicitUnit=82;
+ const explicitList=await browser.evaluate(`(()=>{
+  const list=structuredClone($dataCommonEvents[${id}].list);
+  const begin=list.find(command=>command.code===357&&command.parameters[1]==='ObservationBegin');
+  begin.parameters[3]={unit:${JSON.stringify(String(explicitUnit))}};
+  return list;
+ })()`);
+ async function beginList(list,eventId=0){
+  await browser.waitFor('!$gameMap._interpreter.isRunning()&&!$gameMessage.isBusy()');
+  await browser.evaluate(`$gameMap._interpreter.setup(${JSON.stringify(list)},${eventId});`);
+  await pause(browser);
+  await browser.waitFor('SceneManager._scene._messageWindow.isOpen()');
+ }
  async function begin(){
   await browser.waitFor('!$gameMap._interpreter.isRunning()&&!$gameMessage.isBusy()');
   await browser.evaluate(`$gameMap._interpreter.setup($dataCommonEvents[${id}].list,0);`);
   await pause(browser);
   await browser.waitFor('SceneManager._scene._messageWindow.isOpen()');
  }
+ async function beginExplicit(){await beginList(explicitList,1);}
  const modes=()=>browser.evaluate('({blocked:$gameSystem.isExtendedFastForwardDisallowed(),auto:Boolean($gameTemp.isMessageAutoForwardMode()),fast:Boolean($gameTemp.isExtendedFastForwardMode())})');
+ assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${explicitUnit})`),false);
+ await beginExplicit();
+ assert.equal(await browser.evaluate('Boolean($gameMap._interpreter._drylandCommonEventId)'),false,'Map-authored clone has no Common Event identity');
+ await browser.evaluate('$gameMap._interpreter.clear();SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();');
+ await browser.waitFor('SceneManager._scene._messageWindow.isClosed()');
+ assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${explicitUnit})`),false,'Partial explicit-unit cancellation never marks a unit read');
+ await beginExplicit();await browser.press('Enter',13);
+ await browser.waitFor("$gameMessage.allText()==='Última.'&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0");
+ await browser.press('Enter',13);await browser.waitFor('!$gameMap._interpreter.isRunning()');
+ assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.filter(i=>i===${explicitUnit}).length`),1,'Explicit map unit completes once');
+ await beginExplicit();
+ assert.deepEqual(await modes(),{blocked:false,auto:false,fast:false});
+ await clickConsole(browser,'fastFwd');await browser.waitFor('!$gameMap._interpreter.isRunning()');
+ assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.filter(i=>i===${explicitUnit}).length`),1,'FAST reread does not duplicate explicit map unit');
+ assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${id})`),false,'Explicit map unit does not consume implicit Common Event identity');
  await begin();assert.deepEqual(await modes(),{blocked:true,auto:false,fast:false});
  assert.deepEqual(await browser.evaluate('SceneManager._scene._messageWindow._buttonConsoleButtons.filter(button=>button.worldVisible).map(button=>button._type)'),['fastfwd','options','hide']);
  await browser.screenshot(`${evidence('IT-077')}/fast-only-unread.png`);

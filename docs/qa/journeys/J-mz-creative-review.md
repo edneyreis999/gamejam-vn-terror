@@ -72,3 +72,10 @@ Para o incremento de bustos, seguir os [lotes nativos de diálogo](../guides/vn-
 ## Incremento eventbridge-minimal-runtime — 2026-09-12
 
 Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runtime.md) e [relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Seleção nativa de arquivos, chamadas diretas de CE, observação somente leitura e controles do provider substituem receitas de seed/API/revisão/S. Cenários deste incremento começam untested. Os relatórios anteriores preservam o histórico e não transferem PASS.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+Abrir capturas jogadas de cada herói, Conselho, finais e memorial → conferir enquadramento/legibilidade → ouvir trilhas de Options/cues → registrar pessoa/data/decisão. Rejeição volta ao dono da superfície; ausência de julgamento permanece pendente. MA-A/B/F/G/I.
+
+[Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.

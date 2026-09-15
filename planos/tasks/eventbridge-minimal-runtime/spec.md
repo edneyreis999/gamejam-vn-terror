@@ -7,6 +7,8 @@ slug: eventbridge-minimal-runtime
 
 ## Objective
 
+**Current increment — 2026-09-14:** the user requested the [map-authorship expansion](#map-authorship-expansion--2026-09-14), including removal of displaced Common Events, then authorized execution. Tasks19–29 completed the scene migrations, retirement and canonical join; [verification.md](verification.md) owns the evidence. Task15 completed the current QA plan and task16 completed the available directed, visual, audio and native-editor execution and is blocked-verify on the remaining visual/human gaps recorded in verification.md. Human acceptance remains separate. [ADR-006](adrs/adr-006.md) records scope and lifecycle constraints; earlier delivery statements below describe their own baselines.
+
 Let the team edit scenes, conversations, presentation and game configuration in RPG Maker MZ without editing JavaScript or running a content-revision command. Keep Dryland_EventBridge as the connection between native events, campaign rules and autosave. Remove its editorial enforcement and QA features from the game.
 
 The user completed the functional interview on 2026-09-12. The user approved the complete spec set on 2026-09-12 with “Aprovo”, explicitly including the separate local presentation adapter and the editable initial capacity of 20 SaveCore files. The approved design is now being executed through [tasks.md](tasks.md); [verification.md](verification.md) records actual evidence and pending product/human sensors.
@@ -14,6 +16,8 @@ The user completed the functional interview on 2026-09-12. The user approved the
 The user's subsequent review direction on the same date is incorporated in [ADR-002](adrs/adr-002.md): native events call their Common Events directly, and image loading retains the engine/provider default after investigation found no ready per-image wait command for the existing editor-only scope. The internal Script API and CoreEngine preload are documented there. No Bridge content-dispatch command or project image-wait command is added.
 
 The user's later request adds CoreEngine System: Load Images for every tavern image, as recorded in [ADR-003](adrs/adr-003.md). This narrows the earlier preload exclusion to the rest of the game.
+
+The subsequent 2026-09-14 adoption of [ADR-G001](../../../docs/adrs/adr-g001-mapas-de-interacao-dos-herois.md) and [ADR-G002](../../../docs/adrs/adr-g002-remocao-de-atalhos-editoriais.md) promotes the implemented Gorvak map and shortcut removal. The incremental EX requirements below override earlier conflicting H1 routing and editorial-entry assumptions. The later MA increment below records the completed applicability analysis and pending migration of the other heroes.
 
 ## Scope
 
@@ -117,6 +121,8 @@ Update all live event calls, plugin metadata/configuration, tool imports, canoni
 | [ADR-001](adrs/adr-001.md) | User / specification | Product and technical design accepted | Replaced baselines and deliberate tradeoffs | New |
 | [ADR-002](adrs/adr-002.md) | User / specification | Review amendments accepted | Direct Common Event calls; default native/provider image loading | Supersedes the two reviewed contract gaps |
 | [ADR-003](adrs/adr-003.md) | User / specification | Tavern preload requested and accepted | CoreEngine Load Images for all tavern images | Narrows the preload exclusion |
+| [ADR-G001](../../../docs/adrs/adr-g001-mapas-de-interacao-dos-herois.md) and [ADR-G002](../../../docs/adrs/adr-g002-remocao-de-atalhos-editoriais.md) | User | Architecture and organization accepted, 2026-09-14 | Hero map authorship and removal of editorial-only shortcuts | Supersede ADR-005 in full and the explicit portions of earlier ADRs |
+| [ADR-006](adrs/adr-006.md) | User | Expansion requested for spec/tasks, then task19 execution authorized, 2026-09-14 | Seven heroes, selected campaign maps, native handoff and displaced-CE retirement | Supersedes the pilot-only deferral; task19 implemented, remaining expansion pending |
 | [Native bust baseline](../vn-native-bust-authorship/spec.md) | Programming / Technical Art | Historical approved increment | Current restoration and authorship behavior | Superseded only where specified; leave history |
 | [Current native project guide](../../../rpg-maker/README.md) and maintained game sources | Programming | Current implementation baseline | Existing native entry, checkpoints, editor workflow and event maps | Migrate current instructions; preserve historical evidence |
 | [Programming](eventbridge-minimal-runtime.programacao.md) | Programação | Approved | Layer boundaries, command/data lifecycle and deletion inventory | New |
@@ -168,3 +174,114 @@ Programming's deletion table is part of this spec. Remove dependencies, not just
 No open approval decision remains. The user approved the complete spec, verification plan and discipline contracts, including the local presentation-adapter boundary and vendor-default file capacity, on 2026-09-12, then directed the narrower native authorship/loading corrections in ADR-002. Implementation and task decomposition have not started. Provider integration and native recovery need the implementation evidence listed in verification.md; they are not represented as already proven. Image loading follows the explicitly accepted engine/provider default. If other constraints cannot be met without a different product behavior or vendor change, bring that concrete conflict back rather than silently weakening the accepted scope.
 
 Devlog: start at the Gorvak event on the Taverna map, change native text or a visual value, save in MZ and show the result. Pair it with the event-authored memorial and speed-2 credits; capture only the implemented candidate and retain the distinction between functional delivery and final creative approval.
+
+## Experimental branch increment — Gorvak map and authoring shortcuts
+
+**Current status: architecture and organization accepted on 2026-09-14.** After reviewing the implementation, the user requested promotion of the two decisions to [ADR-G001](../../../docs/adrs/adr-g001-mapas-de-interacao-dos-herois.md) and [ADR-G002](../../../docs/adrs/adr-g002-remocao-de-atalhos-editoriais.md). [ADR-005](adrs/adr-005.md) is now the fully superseded historical experiment record. This section retains the implemented incremental requirements and supersedes their conflicting baseline routing. The original pilot covered Gorvak and the42 shortcuts; the subsequent MA increment below owns the later expansion. Earlier technical evidence retains its original scope, and other human judgments remain separate.
+
+- **EX-001 — Real map-owned Gorvak interaction:** clicking/confirming Gorvak in the tavern transfers to Conversa — Gorvak, a child map whose automatic event contains the actual native menu, dialogue and responses. Other heroes stay in the baseline model.
+- **EX-002 — Formation and navigation:** Conversar preserves campaign facts; selecting/removing H1 uses existing rules and responses. Full-party and automatic-formation restrictions remain intact. Conversation/selection returns to this menu; Voltar à taverna or cancel returns to the formation surface with current facts and focus. Ivaí remains outside party slots.
+- **EX-003 — Presentation and reading:** explicit outgoing-picture cleanup; existing assets/text, native H1/Ivaí framing, HIDE/Options and FAST-only seen-text controls. Map-owned units preserve reading identities82–85 through an optional ObservationBegin unit argument. No transferred interpreter may continue the outgoing choice loop.
+- **EX-004 — Remove authoring-only map entries:** reconcile and remove the 42 candidates inventoried in task16, preserving null slots, automatic entries, Common Event consumers and stable IDs. H1's retired Common Events are a separate consequence of EX-001; unrelated content and configuration/preload remain.
+- **EX-005 — Continuity:** native transfer adds no autosave, formation reset, new campaign phase or new persistence layer. Preserve earned-checkpoint Continue; assess structural save compatibility honestly.
+- **EX-006 — Human evaluation:** prove actual editor-to-runtime authorship and evaluate hero-menu/return cost. The user has accepted the architecture and organization under [ADR-G001](../../../docs/adrs/adr-g001-mapas-de-interacao-dos-herois.md) and [ADR-G002](../../../docs/adrs/adr-g002-remocao-de-atalhos-editoriais.md); remaining framing/control judgments stay in verification.md. That pilot scope excluded the other seven heroes; the subsequent MA increment below records their analysis and planned migration.
+
+Tasks17/18 implement the vertical slices; the existing task15/16 QA pair is extended for this branch. The experiment changes programming, UI/UX and native presentation placement; narrative text and audio content retain their previous approvals and pending creative statuses. It adds no dependency, service, asset placeholder or build step.
+
+
+## Map authorship expansion — 2026-09-14
+
+**Status: execution authorized; implementation and verification follow the task graph.** The user requested applying the recommended expansion and explicitly removing Common Events that cease to be used, then authorized the next step. Tasks19–28 record the implemented scene slices; task29 joins their verification before the directed/human tail. This increment follows [ADR-006](adrs/adr-006.md), [ADR-G001](../../../docs/adrs/adr-g001-mapas-de-interacao-dos-herois.md) and [ADR-G002](../../../docs/adrs/adr-g002-remocao-de-atalhos-editoriais.md). The earlier pilot-only deferral is superseded for the scope below; prior implementation/QA and human decisions retain their dated scope.
+
+### Scope and order
+
+Implement H2–H8 using Gorvak's actual map-owned interaction model. Then move the prologue, eight epilogues, three endings, Council and sixteen encounters into their existing scene maps. Establish and verify the CE040 handoff through Gorvak's epilogue before extending campaign-map ownership; use A1 as the representative encounter before the other fifteen. Retire displaced Common Events within each slice, followed by one complete consumer/orphan reconciliation. Reuse the existing task15/16 QA pair after all implementation leaves.
+
+Lower-priority follow-up, not part of these implementation tasks: moving CE003's tavern orchestration into Map003 and creating a dedicated credits map for CE061/063. Retain destination/roster panels, shared sacrifice, configuration, preload, checkpoints, audio and memorial animation. This scope does not introduce a map per line, a different navigation action for campaign scenes, new content, new assets, gameplay changes, vendor changes or general image preload.
+
+### Requirements
+
+- **MA-001 — Complete hero map authorship.** H2–H8 each have a real child map under Taverna. The tavern portrait transfers to that map and ends its source path. The map contains menu, existing profile/conversation, successful-selection/full-party responses, native bust commands and explicit Voltar à taverna/cancel. Talk and selection return to the hero menu, with the hero retained and Ivaí absent outside his participation. Dynamic group status uses the menu. Preserve full/automatic/dead guards and validated TOGGLE_HERO behavior. Gorvak remains a regression reference.
+- **MA-002 — Prologue authored in Map002.** Its native event contains the three current passages in order, with BEGIN, the initial checkpoint, audio and transfer to Taverna preserved. New Game runs the prologue once; later tavern returns do not replay it. Continue resumes the actual stored boundary.
+- **MA-003 — One execution owner for migrated campaign scenes.** A migrated map owns its local passage/choice flow. CE040 routes between scenes and retains only the unmigrated/shared responsibilities still required. A scene body cannot execute both in CE040 and in its map. Map identity is checked against campaign facts, not used as another source of phase or eligibility. Prove the native handoff in Map029 before the larger migrations.
+- **MA-004 — Epilogues authored in Maps029–036.** Each map contains its own existing epilogue and bust presentation. Preserve the eligible climax-party order, omissions, reading completion and continuation to the next epilogue or credits. No repeated menu/return-to-tavern behavior is added to an epilogue.
+- **MA-005 — Endings authored in Maps025–027.** Reunir, Destruir and Perda total contain their specific current passages, backgrounds and presentation. Preserve the committed ending and progression to memorial/eligible epilogues/credits, including total loss without the medallion choice.
+- **MA-006 — Council authored in Map023.** The map owns Council text including irati.03 (CE321), eligible opinions, Andirá's intervention and the existing medallion choice. Preserve participants, their order, solo behavior, medallion completion and immediate ending checkpoint. No absent hero speaks and no choice is committed twice. Shared presentation helpers may remain functional calls.
+- **MA-007 — Encounters authored in Maps007–022.** Each map owns its existing description, three approaches and success/failure presentation, retaining reread, retreat, sacrifice and death/result continuations. A1 proves the complete lifecycle before the other encounters. CampaignRules still determines assignment, legality, outcome, victim/death, route progression and rewards. Shared consequences or memorial inscriptions must not be duplicated merely to empty the Common Event database.
+- **MA-008 — Remove displaced Common Events from the game.** After moving all consumers of a displaced body, replace its slot by null without renumbering. Remove obsolete executable selectors/callers in the same slice; keep no dead named wrapper, empty substitute or second editable copy. Each deletion requires evidence of original consumers, their replacement and no remaining functional reference. Audit transitive helpers after all slices. An unresolved functional consumer means migrate that consumer or retain the Common Event with its reason; it is not permission to delete it anyway.
+- **MA-009 — Preserve reading, state and persistence.** Preserve explicit observation identities 86–113 for H2–H8, separate from H1's 82–85, and all semantic campaign passage IDs. Partial reading remains unread; FAST stays file-local and resets at choices/transfers. Native checkpoints keep their timing/file/await behavior and Continue does not repeat an action, death, reward or ending. No transfer autosave, new campaign phase, duplicate state store, revision gate or legacy-save conversion is introduced.
+- **MA-010 — Preserve presentation and input lifetimes.** Explicitly retire outgoing pictures, restore only derived presentation where required, maintain Options/HIDE and one gesture per interaction. Preserve existing native ambience/cues without accidental restart, the two desktop viewports and reduced-motion behavior. Calibrate each hero's art independently through native fields; preserve assets and their current creative status.
+- **MA-011 — Authoring and package remain complete.** Editing the played text/menu/bust commands of a migrated scene is possible from its actual map without JavaScript, a content registry or a revision command. Update current guides, canonical tests and directed drivers to the real paths. Required source may not depend on ignored evidence or obsolete CEs. Preserve the map-to-played-edit demonstration for the devlog; human judgment is recorded separately from technical editability.
+
+### Concrete migration and retirement inventory
+
+This is the starting inventory before tasks19–29, not a current allocation table or an unconditional deletion list. Task19's ledger records its completed removals and Maps038–040. Reconcile IDs and every consumer on each execution checkout; existing IDs and unrelated slots remain stable.
+
+| Slice | Current authored bodies | Destination | Retirement scope after consumers move |
+| --- | --- | --- | --- |
+| Elowen / Griznik / Seraphina | CE006/007/008 and CE086–097 | Three new Taverna child maps | These 15 bodies; preserve observation IDs86–97 |
+| Bimbren / Liora / Vaelith / Draska | CE009–012 and CE098–113 | Four new Taverna child maps | These 20 bodies; preserve observation IDs98–113 |
+| Prologue | CE001 and CE114–116 | Map002 | These four bodies after direct native authoring and preserved completion boundaries |
+| H1 epilogue pilot | CE306, selected through CE041/040 | Map029 | CE306; remove only its CE041 branch and the displaced CE040 local execution |
+| Other epilogues | CE308/310/312/314/316/318/320 | Maps030–036 | Seven bodies and their obsolete selection branches; CE041 may still have opinions/irati.03 consumers |
+| Three endings | CE055–057 and CE329–334, selected through CE336 | Maps025–027 | These nine bodies and CE336 after its final consumer is replaced |
+| Council | CE053/054/335, CE321–328 and opinion units CE305/307/309/311/313/315/317/319 | Map023 | These scene-specific bodies after all consumers move; retire CE041 after its final epilogue/opinion/irati.03 caller is replaced |
+| A1 then A2–A8/B1–B8 | CE013–028; per-encounter description, result and approach units in CE118–261; selection in CE262 | Maps007–022 | Only the migrated units and selectors proven unused; preserve the death-inscription units used by CE347 |
+| Final reconciliation | Helpers/selectors made obsolete by the above slices | Existing retained native consumers | Remove every confirmed transitive orphan in scope; retain functional CE040 routing and shared helpers with recorded consumers |
+
+CE125/134/143/152/161/170/179/188/197/206/215/224/233/242/251/260 contain encounter death inscriptions selected by CE347 for the memorial. They are explicitly retained while that consumer remains. Configuration CE004, focus callbacks CE030–037, HIDE callbacks CE064/065, audio CE067, checkpoints CE044, absence bookkeeping CE348–350 and preload CE351 are functional consumers/helpers, not blanket deletion targets. CE350 runs in parallel under its switch even without a direct call117.
+
+### State and native execution contract
+
+| State | Source of truth / lifetime | Native consumer and transition |
+| --- | --- | --- |
+| Formation, alive/selected heroes, assigned encounter, phase, ending and eligible epilogues | Existing serialized CampaignRules state | Map events query facts and issue existing validated actions; no second map/variable truth |
+| Expected campaign passage and committed sequence | Existing campaign reading/context | CaptureContext and exactly one ReadingComplete for the actual semantic passage, then the existing checkpoint boundary where required |
+| Observational units already read | Existing per-file Game_System UI reading store | Map-authored ObservationBegin uses the preserved positive unit ID; ObservationComplete only after full reading |
+| Map/event/interpreter position, pictures and native variables | MZ/SaveCore native state | One local execution owner; explicit source exit on transfer; Continue resumes the stored boundary |
+| Menu focus, read permission, picture bindings and animation progress | Existing presentation/native lifetime | Reset/clean at ownership boundaries; no serialization of transient scene objects as campaign facts |
+
+Task22 must materialize a phase/map/call-return table and demonstrate it using H1's epilogue. Entry guards refresh facts, distinguish already-current map from a required transfer, and prevent an old source chain from continuing. After each local passage, refresh facts and either continue the next local passage or hand off to routing. Reduce only the corresponding CE040 branch at each migration so the rest of the game remains playable between slices. Never copy the entire CE040 state machine into each map or introduce a Bridge text dispatcher. Task26 extends and proves the same contract for encounter phases before the remaining fifteen encounters.
+
+The local map must keep capture/completion on the correct interpreter. Nested Common Events do not implicitly complete their parent passage. Resuming a checkpoint cannot both replay a local body and let CE040 execute it again. Pending asynchronous saves finish through the existing coordinator before ownership changes. Native transfers do not automatically clear Game_Screen pictures; their explicit outgoing cleanup remains required.
+
+### Deletion procedure and evidence
+
+Each implementation slice records its initial body/consumer inventory, performs a structured JSON transformation with pre/postconditions, updates executable references, then nulls the displaced slots. Inspect native call117 in all relevant maps, Common Events and troops; embedded choice tags; enabled provider/configuration parameters and their real consumers; autorun/parallel switches; and project reserve/call code. Reconcile tests and current guides. A numeric ObservationBegin unit preserving read history is not a reference to an executable Common Event body.
+
+Retain an exact removed-ID/name/destination/consumer record beside the task's implementation evidence, plus any retained candidate and its functional reason. Preserve historical specs/reports as history. This inventory is a development artifact, not a new shipped registry or prerequisite to edit native events. Do not repurpose retired reading IDs for different content, compact arrays, delete assets based on CE retirement, alter personal saves or infer source compatibility from a zero-reference count alone.
+
+### Affected surfaces and verification ownership
+
+The changes affect CommonEvents.json, existing map event lists, MapInfos and the seven appended hero maps. System variables/switches and project Presentation metadata need changes only if the existing contract cannot express the approved behavior; engine/vendor files, plugin order, CampaignRules mechanics, save schema, source assets, deployment and dependencies are preserved. CommonEvents/MapInfos are shared write surfaces and the task chain serializes their mutations.
+
+Canonical tests stay in rpg-maker/tests/suites/, with campaign.test.mjs and test-manifest.json as their existing entry/catalog. Adapt rpg-maker/qa/native-player.mjs and affected directed scenarios to the actual map/menu paths. The five discipline amendments below this increment's authority govern text, visuals, controls, audio and implementation; the new [verification section](verification.md#map-authorship-expansion--2026-09-14) owns sensors, scenarios, freshness and human decisions.
+
+| Requirements | Primary verification |
+| --- | --- |
+| MA-001 | MAV-001/002; MAV-013/014 for directed/human evidence |
+| MA-002 | MAV-003 |
+| MA-003 | MAV-004; MAV-012 |
+| MA-004 | MAV-004/005 |
+| MA-005 | MAV-006 |
+| MA-006 | MAV-007 |
+| MA-007 | MAV-008/009/010 |
+| MA-008 | MAV-011, with deletion evidence contributed by every slice |
+| MA-009 | MAV-001–010 and MAV-012/013 |
+| MA-010 | MAV-012/013/014 |
+| MA-011 | MAV-011/013/014 |
+
+### Authority and completion
+
+The user accepted the recommended scope for spec/task creation on 2026-09-14. ADR-006 and this amendment preserve the established gameplay contracts; they do not infer final creative or implementation acceptance. No additional product choice is needed for the included behavior. The concrete CE040 handoff is an implementation/proof responsibility of task22, not a reason to leave subsequent tasks unspecified. A solution requiring a different gameplay result or vendor contract must be brought back as a concrete design conflict.
+
+Completion requires implemented maps, removal of every confirmed displaced body, passing assigned technical/runtime criteria and the applicable human judgments in verification.md. Tasks15/16 are reused after task29; no duplicate QA pair, automatic commit or publication is added. Demonstrate a non-Gorvak hero and one migrated campaign scene edited in MZ and then reached through actual gameplay. Capture the live map tree, native edited command and played result for the devlog.
+
+### Execution progress
+
+Tasks19/20 have implemented all eight hero interactions in Maps037–044 with technical MAV-001/002 evidence. The prologue, all sixteen encounters, Council, three endings and eight epilogues also use local map ownership; the canonical join and QA retain their graph status in [tasks.md](tasks.md) and sensor status in [verification.md](verification.md). No expanded human acceptance is implied.
+
+
+### Política de QA — zoom nativo
+
+[ADR-G003](../../../docs/adrs/adr-g003-excluir-testes-de-zoom-nativo.md) retira testes de zoom nativo por decisão aprovada do usuário. O recorte substitui exigências anteriores de QA, preserva resoluções e controles desktop e não aprova os defeitos visuais ou pareceres humanos pendentes.

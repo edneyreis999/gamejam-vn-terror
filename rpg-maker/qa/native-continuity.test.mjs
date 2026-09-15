@@ -20,7 +20,10 @@ export async function execute(context){
  await player.choose('Continuar');await player.file(parent.fileId);await player.ready();
  assert.equal((await player.snapshot('loaded-file')).fileId,parent.fileId);
  assert.equal(sha256(await context.read('parent-bytes',id=>StorageManager.loadZip('file'+id),parent.fileId)),parent.payloadSha256);
- const id=await reach(player);await observeBustPassage(context,player);
+ const id=await reach(player);
+ if(family==='council')await player.assertMapOwner(23);
+ if(family==='epilogue')await player.assertMapOwner(28+Number(id.split('.')[1].slice(1)));
+ await observeBustPassage(context,player);
  const {campaign:before}=await player.snapshot('before-controls');
  const slots=family==='council'?before.climaxPartyIds.map((_,i)=>60+i):[60];
  await player.dialogueControls(family,slots);

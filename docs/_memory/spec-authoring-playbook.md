@@ -8,7 +8,7 @@ This playbook governs Compozy specs for the Expedition and Sacrifice project. It
 
 1. The current user decision in the active grill.
 2. `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md` after the decision is incorporated.
-3. Accepted ADRs in the active incremental spec.
+3. Accepted [general project ADRs](../adrs/README.md) and applicable ADRs in the active incremental spec, respecting their explicit full or partial supersession links.
 4. The active spec and its companions.
 5. Completed specs as historical implementation baselines.
 6. Numbered GDD versions as history only.

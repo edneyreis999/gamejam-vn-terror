@@ -6,7 +6,7 @@ import path from 'node:path';
 import { deflateSync } from 'node:zlib';
 import { validateNativeArchive, sha256 } from '../../qa/native-save-archive.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, pause, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
 import { councilState } from '../helpers/closing.mjs';
 import { installPhase, clickConsole } from '../helpers/native-shared.mjs';
@@ -144,9 +144,23 @@ canonicalCase('IT-015', 'the saved checkpoint command replays without repeating 
   assert.equal(await savedBytes(browser), bytes, 'Exact replay performs no redundant storage write.');
   await browser.screenshot(`${evidence('IT-015')}/continued-farewell.png`);
 });
-canonicalCase('IT-016', 'a nested common-event save restores its parents and finishes each consequence once', { timeout: 90000 }, async t => {
+canonicalCase('IT-016', 'a map-owned encounter restores its shared sacrifice interpreter and finishes each consequence once', { timeout: 90000 }, async t => {
   const browser = await tavern(t), { after } = await commitSacrifice(browser);
-  assert.ok(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(contents=>{let count=0;for(let i=contents.map._interpreter;i;i=i._childInterpreter)count++;return count;})") >= 3);
+  const savedOwner = await browser.evaluate(`StorageManager.loadObject('file'+$gameSystem.savefileId()).then(contents=>{
+    const root=contents.map._interpreter, child=root._childInterpreter;
+    return {mapId:root._mapId,eventId:root._eventId,
+      mapCommands:JSON.stringify(root._list)===JSON.stringify($dataMap.events[1].pages[0].list),
+      sacrificeCommands:JSON.stringify(child?._list)===JSON.stringify($dataCommonEvents[42].list),
+      grandchild:Boolean(child?._childInterpreter),command:child?.currentCommand(),wait:child?._waitMode};
+  })`);
+  assert.equal(savedOwner.mapId,8);
+  assert.equal(savedOwner.eventId,1);
+  assert.equal(savedOwner.mapCommands,true);
+  assert.equal(savedOwner.sacrificeCommands,true);
+  assert.equal(savedOwner.grandchild,false);
+  assert.equal(savedOwner.command.parameters[1],'Checkpoint');
+  assert.equal(savedOwner.command.parameters[3].reason,'sacrifice');
+  assert.equal(savedOwner.wait,'dryland-save');
   await toTitle(browser); await titleChoice(browser, 'Continuar');
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   await browser.press('Enter', 13); await pause(browser);
@@ -245,7 +259,8 @@ canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns
  const browser=await tavern(t),records=[];
  async function finishTavernUnit(){
   for(let box=0;box<16;box++){
-   await browser.waitFor("($gameMessage._drylandChoiceFocus?.key==='formation'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&!$gameMessage.hasText())||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)");
+   await browser.waitFor("($gameMessage._drylandChoiceFocus?.key==='formation'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&!$gameMessage.hasText())||($gameMessage._drylandChoiceFocus?.key==='hero'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&$gameMessage.choices().includes('Voltar à taverna'))||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)");
+   if(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key==='hero'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&$gameMessage.choices().includes('Voltar à taverna')")){await returnToTavern(browser);return;}
    if(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key==='formation'&&!$gameMessage.hasText()"))return;
    await browser.press('Enter',13);
   }
@@ -329,7 +344,7 @@ canonicalCase('IT-045', 'SaveCore replaces an explicitly selected occupied file 
  assert.equal(await browser.evaluate(`StorageManager.loadZip('file'+${file})`),bytes);
  await browser.screenshot(`${evidence('IT-045')}/cancelled-unindexed-file.png`);
 });
-canonicalCase('IT-059', 'text and historical revision labels do not reject native saves while an unsupported map reference follows native LoadError', { timeout:120000 }, async t => {
+canonicalCase('IT-059', 'native saves retain serialized map text despite revision labels while New Game reads edits and missing maps follow LoadError', { timeout:120000 }, async t => {
  const directory=await mkdtemp(path.join(tmpdir(),'dryland-native-revision-'));
  t.after(()=>rm(directory,{recursive:true,force:true}));
  for(const entry of await readdir(project,{withFileTypes:true})){
@@ -342,22 +357,30 @@ canonicalCase('IT-059', 'text and historical revision labels do not reject nativ
  const before=await snapshot(browser);
  // Isolated I/O fixture adds old labels to otherwise current native objects.
  await browser.evaluate("StorageManager.loadObject('file1').then(c=>{Object.assign(c.system._dryland,{schemaVersion:99,catalogVersion:99,nativeLayoutVersion:'historical-label'});return StorageManager.saveObject('file1',c);})");
- const bytes=await savedBytes(browser),eventFile=path.join(directory,'data/CommonEvents.json'),edited=JSON.parse(await readFile(eventFile,'utf8'));
+ const bytes=await savedBytes(browser),eventFile=path.join(directory,'data/Map002.json'),edited=JSON.parse(await readFile(eventFile,'utf8'));
  const revised='Texto revisado na mesma estrutura nativa.';
- edited[115].list.find(c=>c.code===401).parameters[0]=revised;
+ const secondText=edited.events[1].pages[0].list.filter(c=>c.code===401)[1],original=secondText.parameters[0];
+ assert.notEqual(original,revised);
+ secondText.parameters[0]=revised;
  await writeFile(eventFile,JSON.stringify(edited));
  await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await titleChoice(browser,'Continuar',1);await pause(browser);
  assert.deepEqual(await snapshot(browser),before);
  assert.equal(await savedBytes(browser),bytes);
  await browser.press('Enter',13);
- await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(revised)})&&SceneManager._scene._messageWindow.pause`);
+ await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(original)})&&SceneManager._scene._messageWindow.pause`);
  assert.equal((await snapshot(browser)).sequence,before.sequence+1);
  assert.equal(await savedBytes(browser),bytes);
- await browser.screenshot(`${evidence('IT-059')}/same-structure-revised-text.png`);
+ await browser.screenshot(`${evidence('IT-059')}/continued-serialized-map-text.png`);
+ await toTitle(browser);await titleChoice(browser,'Novo jogo');await selectFile(browser,2);await pause(browser);
+ await browser.press('Enter',13);
+ await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(revised)})&&SceneManager._scene._messageWindow.pause`);
+ assert.equal(await browser.evaluate('$gameSystem.savefileId()'),2);
+ assert.equal(await browser.evaluate("StorageManager.loadZip('file1')"),bytes,'New Game must preserve the original campaign file.');
+ await browser.screenshot(`${evidence('IT-059')}/new-game-revised-map-text.png`);
  // An unavailable historical map is an unsupported native structure, not a revision-label rejection.
  await browser.evaluate("StorageManager.loadObject('file1').then(c=>{c.map._mapId=999;return StorageManager.saveObject('file1',c);})");
- const unsupported=await savedBytes(browser);
+ const unsupported=await browser.evaluate("StorageManager.loadZip('file1')");
  await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await titleChoice(browser,'Continuar',1);
  await assert.rejects(browser.waitFor('$gameMap.mapId()===999&&SceneManager._scene.constructor===Scene_Map&&SceneManager._scene.isStarted()&&!SceneManager._scene.isBusy()'),/Map999/);
@@ -366,20 +389,26 @@ canonicalCase('IT-059', 'text and historical revision labels do not reject nativ
  await browser.screenshot(`${evidence('IT-059')}/unsupported-map-native-error.png`);
 });
 
-canonicalCase('IT-062','native Options and saved interpreters retain tavern Council farewell and epilogue pictures without replay',{timeout:180000},async t=>{
+canonicalCase('IT-062','native Options and saved interpreters retain tavern Council farewell and epilogue pictures without replay',{timeout:300000},async t=>{
  const browser=await tavern(t);
- await browser.evaluate(`window.continuityLoaded=false;window.continuityHold=false;window.continuityCues=[];
+ await browser.evaluate(`window.continuityLoaded=false;window.continuityHold=false;window.continuityCues=[];window.continuityWrites=[];
+  const save=DataManager.saveGame;DataManager.saveGame=function(id){const row={sequence:$gameSystem._dryland.campaign.sequence,done:false};continuityWrites.push(row);return save.call(this,id).then(result=>{row.done=true;return result;});};
   const execute=Game_Interpreter.prototype.executeCommand;
   Game_Interpreter.prototype.executeCommand=function(){return continuityLoaded&&continuityHold?false:execute.call(this);};
   const load=DataManager.loadGame;DataManager.loadGame=function(id){return load.call(this,id).then(result=>{continuityLoaded=true;return result;});};
   const audio=AudioManager.playSe;AudioManager.playSe=function(cue){continuityCues.push(cue.name);return audio.call(this,cue);};`);
  const pictures=()=>browser.evaluate(`Array.from({length:100},(_,id)=>{const p=$gameScreen.picture(id);return p?{id,name:p.name(),x:p.x(),y:p.y(),scaleX:p.scaleX(),scaleY:p.scaleY(),opacity:p.opacity(),tone:p.tone(),origin:p.origin()}:null;}).filter(Boolean)`);
- for(const kind of ['tavern','council','farewell','epilogue']){
+ for(const kind of ['tavern','council','farewell',...Array.from({length:8},(_,index)=>`epilogue.H${index+1}`)]){
   await browser.evaluate('continuityLoaded=false;continuityHold=false;');
   if(kind==='tavern'){await activate(browser,'formation',0);await activate(browser,'hero',0);}
   else if(kind==='council')await installPhase(browser,councilState());
   else if(kind==='farewell')await installPhase(browser,complete(accepted(failureWithCount(3),'SELECT_VICTIM',{heroId:'H1'})));
-  else {let epilogue=endingWithHeroes(['H1','H2','H3']);while(epilogue.phase==='ending')epilogue=complete(epilogue);await installPhase(browser,epilogue);}
+  else {
+   const hero=Number(kind.slice(-1)),party=hero<=6?[`H${hero}`,`H${hero+1}`,`H${hero+2}`]:['H6','H7','H8'];
+   let epilogue=endingWithHeroes(party);
+   while(epilogue.reading?.sceneId!==kind)epilogue=complete(epilogue);
+   await installPhase(browser,epilogue);
+  }
   await pause(browser);
   await browser.evaluate("$gameScreen.showPicture(92,'Dryland_Button',0,31,37,30,40,181,0)");
   await browser.waitFor('$gameScreen._pictures.filter(Boolean).every(p=>p._duration===0&&p._toneDuration===0)');
@@ -390,22 +419,41 @@ canonicalCase('IT-062','native Options and saved interpreters retain tavern Coun
   assert.deepEqual(await browser.evaluate('continuityCues'),cues,kind+' Options must not replay audio');
   // Isolated native save fixture. Freeze only the post-load execution boundary
   // to inspect the serialized screen/interpreter before ordinary continuation.
+  const savedChain=await browser.evaluate(`(()=>{const rows=[];for(let i=$gameMap._interpreter;i;i=i._childInterpreter)rows.push({mapId:i._mapId,eventId:i._eventId,index:i._index});return rows})()`);
   await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');const bytes=await savedBytes(browser);
   await toTitle(browser);await browser.evaluate('continuityLoaded=false;continuityHold=true;');await titleChoice(browser,'Continuar');
   await browser.waitFor("continuityLoaded&&SceneManager._scene.constructor.name==='Scene_Map'&&SceneManager._scene._messageWindow&&!SceneManager._scene.isBusy()");
   assert.deepEqual(await pictures(),shown,kind+' Continue');assert.deepEqual(await snapshot(browser),before);assert.equal(await savedBytes(browser),bytes);
-  assert.equal(await browser.evaluate('Boolean($gameMap._interpreter._childInterpreter)'),true,'Native interpreter chain survives serialization');
+  const chain=await browser.evaluate(`(()=>{const rows=[];for(let i=$gameMap._interpreter;i;i=i._childInterpreter)rows.push({mapId:i._mapId,eventId:i._eventId,index:i._index});return rows})()`);
+  if(kind==='tavern'||kind==='council'||kind.startsWith('epilogue.')){
+   assert.deepEqual(chain,savedChain,'The exact native command position survives serialization');
+   assert.deepEqual(chain.map(row=>row.mapId),[kind==='tavern'?37:kind==='council'?23:28+Number(kind.slice(-1))],'Map-authored scene retains its root interpreter after serialization');
+   assert.equal(chain[0].eventId,1,'Map-authored scene retains its event identity after serialization');
+  }else assert.ok(chain.length > 1,'Native interpreter chain survives serialization');
   await browser.screenshot(evidence('IT-062')+'/'+kind+'-native-continuity.png');
+  const writesBefore=await browser.evaluate('continuityWrites.length');
   await browser.evaluate('continuityHold=false;');
+  if(kind==='council'){
+   const expected=complete(before);
+   await browser.waitFor(`continuityWrites.length===${writesBefore+1}&&continuityWrites.at(-1).done&&$gameSystem._dryland.campaign.sequence===${expected.sequence}`);
+   await pause(browser);
+   assert.deepEqual(await snapshot(browser),expected,'Saved Council passage commits the medallion once');
+   assert.deepEqual(await savedCampaign(browser),expected,'The Council semantic checkpoint saves that exact completion');
+   assert.deepEqual(await browser.evaluate('continuityWrites.slice('+writesBefore+')'),[{sequence:expected.sequence,done:true}]);
+  }
+  if(kind.startsWith('epilogue.')){
+   await browser.waitFor(`$gameSystem._dryland.campaign.sequence===${before.sequence+1}`);
+   assert.deepEqual(await snapshot(browser),complete(before),'Continue completes the saved local passage once');
+   assert.equal(await savedBytes(browser),bytes,'Epilogue continuation adds no semantic checkpoint');
+  }
  }
 });
 
 
-
 canonicalCase('UT-069','native QA archives bind the selected file, identity, source, origin and payload/index without mutating their master',()=>{
  const files=[{path:'data/System.json',sha256:'source'}];
- const nativeState={mapId:2,readUnits:[83],presentedDeaths:Array.from({length:8},(_,index)=>({heroId:'H'+(index+1),presented:index===0})),interpreters:[{eventId:1,commonEventId:83,index:4,waitMode:'message'}]};
- const contents={system:{_savefileId:7,_dryland:{campaign:{sequence:3}},_drylandReadUnits:[83]},map:{_mapId:2,_interpreter:{_eventId:1,_drylandCommonEventId:83,_index:4,_waitMode:'message','@':'Game_Interpreter'}},switches:{_data:Array.from({length:46},(_,index)=>index===38)}};
+ const nativeState={mapId:37,readUnits:[83],presentedDeaths:Array.from({length:8},(_,index)=>({heroId:'H'+(index+1),presented:index===0})),interpreters:[{eventId:1,index:4,waitMode:'message'}]};
+ const contents={system:{_savefileId:7,_dryland:{campaign:{sequence:3}},_drylandReadUnits:[83]},map:{_mapId:37,_interpreter:{_mapId:37,_eventId:1,_index:4,_waitMode:'message','@':'Game_Interpreter'}},switches:{_data:Array.from({length:46},(_,index)=>index===38)}};
  const encode=value=>deflateSync(JSON.stringify(value),{level:1}).toString('latin1');
  const payload=encode(contents),indexPayload=encode([null,null,null,null,null,null,null,{title:'native'}]);
  const archive={schemaVersion:2,nativeState,origin:'http://127.0.0.1:18726',fileId:7,gameId:42,campaign:{sequence:3},index:{title:'native'},sourceFiles:files,keys:{payload:'rmmzsave.42.file7',index:'rmmzsave.42.global'},payloadSha256:sha256(payload),indexSha256:sha256(indexPayload),storageState:{origins:[{indexedDB:[{stores:[{records:[{key:'rmmzsave.42.file7',value:payload},{key:'rmmzsave.42.global',value:indexPayload}]}]}]}]}};
@@ -430,7 +478,7 @@ canonicalCase('IT-066','cold native Continue retains saved pictures and cancelli
  await toTitle(browser);
  await browser.evaluate(`ImageManager.clear();
   const start=Bitmap.prototype._startLoading;Bitmap.prototype._startLoading=function(){if(this._url.endsWith('/Dryland_H1.png')&&!window.resumeSavedImage){this._loadingState='loading';window.resumeSavedImage=()=>start.call(this);}else start.call(this);};`);
- await titleChoice(browser,'Continuar');await browser.waitFor('typeof resumeSavedImage==="function"&&$gameMap.mapId()===3');
+ await titleChoice(browser,'Continuar');await browser.waitFor('typeof resumeSavedImage==="function"&&$gameMap.mapId()===37');
  assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'),'Dryland_H1');
  assert.equal(await browser.evaluate('$gameScreen.picture(92)?.opacity()'),181);
  assert.equal(await browser.evaluate(`StorageManager.loadZip('file${fileId}')`),bytes);

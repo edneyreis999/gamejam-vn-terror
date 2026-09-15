@@ -6,7 +6,7 @@ persona: Rui, revisor de conteúdo
 journey: J-mz-creative-review
 expected: Telas permanecem legíveis e os contextos, temas e efeitos possuem revisão audiovisual registrada.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: blocked-verify
+qa_status: untested
 bug_ids: BUG-20260911-tavern-portraits-offscreen
 fix_status:
 retest_status:
@@ -44,3 +44,8 @@ Planejado, **untested**. S04/S05/S06T/S08/S10/S11/S12; lotes B/C/D/E/G/H. Sessõ
 ## Execução eventbridge-minimal-runtime — 2026-09-13
 
 Estado corrente: **blocked-verify**. Memorial0/1/3/8, transições/ausências e créditos têm integração e imagens inspecionadas; continuidade e áudio BGS/ME/SE têm observação nativa, BGM tem equivalência isolada sem introduzir música nova. Não há audição humana nem aceite de enquadramento/controle; esses limites impedem PASS global. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+blocked-verify: enquadramento do Conselho reprovado; epílogos corrigidos; áudio nativo observado, sem audição humana. MAS-01/03/05/06: MA-A/B/C/D/E/F/G/H; imagens em dois viewports/modos e trilhas renderizadas. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.

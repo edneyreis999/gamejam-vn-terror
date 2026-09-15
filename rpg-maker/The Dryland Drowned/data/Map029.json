@@ -2498,10 +2498,390 @@
           },
           "list": [
             {
+              "code": 118,
+              "indent": 0,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
               "code": 117,
               "indent": 0,
               "parameters": [
+                304
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "!($gameVariables.value(31) === 'epilogue' && $gameVariables.value(60) === 'H1')"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
                 40
+              ]
+            },
+            {
+              "code": 115,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 0,
+              "parameters": [
+                337
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 0,
+              "parameters": [
+                1,
+                "Dryland_Memorial",
+                1,
+                0,
+                640,
+                360,
+                76.55502392344498,
+                76.55502392344498,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "epilogue.H1. Grava em switch 48 (ligado = verdadeiro); preserva os fatos da"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "epilogue.H1",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(47)"
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Dryland_H1",
+                  "Origin:str": "Bust",
+                  "Position:num": "2",
+                  "StartOffsetX:eval": "-32",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 411,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Dryland_H1",
+                  "Origin:str": "Bust",
+                  "Position:num": "2",
+                  "StartOffsetX:eval": "-32",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "20"
+                }
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "34",
+                  "TargetScaleY:str": "34",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "320",
+                  "TargetY:str": "725",
+                  "EasingType:str": "InOutSine",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Tone_NormalBust",
+                "Tone_NormalBust",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Gorvak"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "reconstrói a forja, mas grava nela os nomes dos companheiros mortos. Passa a ensinar aos aprendizes que força não é suportar tudo sozinho."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 0,
+              "parameters": [
+                76
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 0,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 0,
+              "parameters": [
+                "scene"
               ]
             },
             {
@@ -2532,72 +2912,6 @@
         }
       ]
     },
-    {
-      "id": 2,
-      "name": "Epílogo H1",
-      "note": "",
-      "x": 1,
-      "y": 0,
-      "pages": [
-        {
-          "conditions": {
-            "actorId": 1,
-            "actorValid": false,
-            "itemId": 1,
-            "itemValid": false,
-            "selfSwitchCh": "A",
-            "selfSwitchValid": false,
-            "switch1Id": 1,
-            "switch1Valid": false,
-            "switch2Id": 1,
-            "switch2Valid": false,
-            "variableId": 1,
-            "variableValid": false,
-            "variableValue": 0
-          },
-          "directionFix": true,
-          "image": {
-            "tileId": 0,
-            "characterName": "",
-            "direction": 2,
-            "pattern": 1,
-            "characterIndex": 0
-          },
-          "list": [
-            {
-              "code": 117,
-              "indent": 0,
-              "parameters": [
-                306
-              ]
-            },
-            {
-              "code": 0,
-              "indent": 0,
-              "parameters": []
-            }
-          ],
-          "moveFrequency": 3,
-          "moveRoute": {
-            "list": [
-              {
-                "code": 0,
-                "parameters": []
-              }
-            ],
-            "repeat": true,
-            "skippable": false,
-            "wait": false
-          },
-          "moveSpeed": 3,
-          "moveType": 0,
-          "priorityType": 0,
-          "stepAnime": false,
-          "through": true,
-          "trigger": 0,
-          "walkAnime": false
-        }
-      ]
-    }
+    null
   ]
 }

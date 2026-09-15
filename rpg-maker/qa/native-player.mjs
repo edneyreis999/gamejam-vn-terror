@@ -4,6 +4,15 @@ import { setTimeout as delay } from 'node:timers/promises';
 export class DirectedNativePlayer {
   constructor(context, { onPassage, onAdvance } = {}) { this.context = context; this.serial = 0; this.bustSerial = 0; this.onPassage = onPassage; this.onAdvance = onAdvance; }
 
+  async assertMapOwner(mapId) {
+    const actual = await this.context.read('native-map-owner', () => ({
+      map: $gameMap.mapId(), event: $gameMap._interpreter._eventId,
+      listMatches: JSON.stringify($gameMap._interpreter._list) === JSON.stringify($dataMap.events[1].pages[0].list),
+      child: Boolean($gameMap._interpreter._childInterpreter)
+    }));
+    assert.deepEqual(actual, {map: mapId, event: 1, listMatches: true, child: false});
+  }
+
   async surface() {
     return this.context.read('native-visible-surface', () => {
       const scene = window.SceneManager?._scene;
@@ -93,7 +102,7 @@ export class DirectedNativePlayer {
   async choose(label, { mouse = false } = {}) {
     const surface = await this.choicesContaining(label);
     assert.equal(surface.labels.filter(value => value === label).length, 1, `Ambiguous visible label: ${label}`);
-    const prior = await this.context.read('choice-before-input',()=>JSON.stringify($gameMessage.choices()));
+    const prior = await this.context.read('choice-before-input',()=>JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label))));
     const index = surface.labels.indexOf(label);
     assert.equal(await this.context.read('choice-eligibility',i=>SceneManager._scene._choiceListWindow._list[i].enabled,index),true,'Choice must be eligible: '+label);
     if (mouse) {
@@ -125,7 +134,7 @@ export class DirectedNativePlayer {
       await this.context.shot(`focus-${++this.serial}`);
       await this.context.input.key('Enter');
     }
-    await this.context.wait(previous=>!SceneManager._scene._choiceListWindow?.isOpenAndActive()||JSON.stringify($gameMessage.choices())!==previous,prior);
+    await this.context.wait(previous=>!SceneManager._scene._choiceListWindow?.isOpenAndActive()||JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label)))!==previous,prior);
   }
 
   async dialogueControls(label, expectedSlots) {
@@ -157,6 +166,17 @@ export class DirectedNativePlayer {
     }
     assert.equal(await this.context.read('confirmed-native-file',()=>{const w=SceneManager._scene._listWindow;return w.indexToSavefileId(w.index());}),fileId);
     await this.context.shot(`file-${++this.serial}`);await this.context.input.key('Enter');
+  }
+
+  async returnToTavern() {
+    const surface = await this.ready();
+    if ([37, 38, 39, 40, 41, 42, 43, 44].includes(surface.map)) {
+      await this.until('hero');
+      await this.choose('Voltar à taverna');
+    }
+    const tavern = await this.until('formation');
+    assert.equal(tavern.map, 3);
+    return tavern;
   }
 
   async until(kind) {

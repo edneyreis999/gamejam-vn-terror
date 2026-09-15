@@ -44,14 +44,14 @@ export function councilState(kind = 'collective') {
   return state;
 }
 export function finalChoice(kind = 'collective') { assert.notEqual(kind, 'bad'); return finishReading(councilState(kind)); }
-export async function installClosing(browser, state) {
+export async function installClosing(browser, state, entryMap) {
   assert.equal(rules.validateState(state).ok, true);
   const encounter = state.pendingOutcome?.encounterId;
   const map = state.phase === 'epilogue' ? 28 + Number(state.reading.sceneId.slice(-1))
     : ['memorial','campaign_complete'].includes(state.phase) ? 28
     : state.phase === 'ending' ? { reunite: 25, destroy: 26, bad: 27 }[state.endingId]
     : encounter ? (encounter[0] === 'A' ? 6 : 14) + Number(encounter.slice(1)) : 23;
-  await browser.evaluate(`$gameSystem._dryland.campaign=${JSON.stringify(state)};$gameTemp._drylandPersistence={status:'idle',lastSuccessfulSequence:null,lastError:null};$gameMap._interpreter.clear();$gameMessage.clear();$gamePlayer.reserveTransfer(${map},10,7,2,0);SceneManager.goto(Scene_Map);`);
+  await browser.evaluate(`$gameSystem._dryland.campaign=${JSON.stringify(state)};$gameTemp._drylandPersistence={status:'idle',lastSuccessfulSequence:null,lastError:null};$gameMap._interpreter.clear();$gameMessage.clear();$gamePlayer.reserveTransfer(${entryMap ?? map},10,7,2,0);SceneManager.goto(Scene_Map);`);
   await browser.waitFor(`$gameMap.mapId()===${map} && SceneManager._scene._messageWindow && !SceneManager._scene.isBusy() && ($gameMessage.hasText() || $gameMessage.isChoice())`);
 }
 export async function closingReady(browser) {

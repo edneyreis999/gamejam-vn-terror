@@ -2,8 +2,9 @@
 // OUT: staged sacrifice, semantic saving and later discovery/ending surfaces.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { installPhase } from '../helpers/native-shared.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, formation, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, formation, heroes, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-04/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -132,7 +133,7 @@ async function nativeEncounter(t) {
     await activate(browser, 'hero', 1);
     await pause(browser);
     await browser.press('Enter', 13);
-    await choices(browser, 'formation');
+    await returnToTavern(browser);
   }
   await activate(browser, 'formation', 8);
   await activate(browser, 'destinations', 0);
@@ -220,3 +221,77 @@ canonicalCase('IT-051', 'success uses native text on the same encounter artwork 
   assert.equal(after.assignments.physical.filter(Boolean).length, 2);
   assert.deepEqual(rules.validateState(after), { ok: true, violations: [] });
 });
+
+async function verifyNativeEncounterMaps(t, ids, testId) {
+  const browser = await tavern(t);
+  await browser.evaluate(`window.encounterWrites=[];const save=DataManager.saveGame;DataManager.saveGame=function(id){const row={sequence:$gameSystem._dryland.campaign.sequence,done:false};encounterWrites.push(row);return save.call(this,id).then(result=>{row.done=true;return result;});};`);
+  for (const id of ids) {
+    const mapId = (id[0] === 'A' ? 6 : 14) + Number(id.slice(1));
+    const map = JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(mapId).padStart(3,'0')}.json`,import.meta.url),'utf8'));
+    const list = map.events[1].pages[0].list;
+    function passageText(passageId) {
+      const start = list.findIndex(command => command.code === 357 && command.parameters[1] === 'Query' && command.parameters[3].id === passageId);
+      assert.ok(start >= 0, passageId);
+      return list.slice(start).find(command => command.code === 401).parameters[0];
+    }
+    async function assertLocalPause(expected, text) {
+      await pause(browser);
+      assert.deepEqual(await snapshot(browser),expected,id+' native campaign');
+      assert.equal(await browser.evaluate('$gameMessage.allText()'),text,id+' authored text');
+      assert.deepEqual(await browser.evaluate('({map:$gameMap.mapId(),root:$gameMap._interpreter._mapId,event:$gameMap._interpreter._eventId,child:Boolean($gameMap._interpreter._childInterpreter)})'),{map:mapId,root:mapId,event:1,child:false});
+      assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),`Dryland_Encounter_${id}`);
+    }
+    for (const [index, competency] of gdd.encounterPairs[id].entries()) for (const success of [true,false]) {
+      const providers = heroes.filter(hero => gdd.heroPairs[hero].includes(competency));
+      const nonProviders = heroes.filter(hero => !providers.includes(hero));
+      const party = success ? [providers[0],...nonProviders.slice(0,2)] : nonProviders.slice(0,3);
+      const seed = structuredClone(depart(formation(),id[0]==='A'?'physical':'supernatural',party));
+      seed.assignments[seed.dungeonId][0] = id;
+      const intro = accepted(seed,'ENTER_DUNGEON'), choice = complete(intro);
+      if(index===0&&success){
+        await installPhase(browser,intro);
+        await assertLocalPause(intro,passageText(`encounter.${id}.01`));
+        await browser.press('Enter',13);
+      } else await installPhase(browser,choice);
+      await choices(browser,'approaches');
+      assert.deepEqual(await snapshot(browser),choice);
+      assert.equal(await browser.evaluate('$gameMessage.choices().filter(label=>/<Bind Picture: 5[0-2]>/.test(label)).length'),3);
+      if(id==='A1'&&index===0&&success){
+        const labels=await browser.evaluate('$gameMessage.choices()');
+        await activate(browser,'approaches',3);
+        await assertLocalPause(choice,passageText('encounter.A1.01'));
+        await browser.press('Enter',13);await choices(browser,'approaches');
+        assert.deepEqual(await browser.evaluate('$gameMessage.choices()'),labels);
+        assert.deepEqual(await snapshot(browser),choice,'Reread is observational');
+        await activate(browser,'approaches',4);await choices(browser,'retreat');
+        const confirmation=accepted(choice,'REQUEST_RETREAT');
+        assert.deepEqual(await snapshot(browser),confirmation);
+        await activate(browser,'retreat',1);await choices(browser,'approaches');
+        const cancelled=accepted(confirmation,'CANCEL_RETREAT');
+        assert.deepEqual(await snapshot(browser),cancelled);
+        await activate(browser,'approaches',4);await activate(browser,'retreat',0);
+        await choices(browser,'formation');
+        assert.deepEqual(await snapshot(browser),accepted(accepted(cancelled,'REQUEST_RETREAT'),'CONFIRM_RETREAT'));
+        await installPhase(browser,choice);await choices(browser,'approaches');
+      }
+      const writesBefore=await browser.evaluate('encounterWrites.length');
+      const result=accepted(choice,'CHOOSE_APPROACH',{approachId:`${id}-${index+1}`});
+      assert.equal(result.pendingOutcome.success,success,'Independent GDD providers select the expected outcome');
+      await activate(browser,'approaches',index);
+      await assertLocalPause(result,passageText(`result.${id}-${index+1}.${success?'success':'failure'}.01`));
+      await browser.waitFor(`encounterWrites.length===${writesBefore+1}&&encounterWrites.at(-1).done`);
+      assert.deepEqual(await browser.evaluate('encounterWrites.slice('+writesBefore+')'),[{sequence:result.sequence,done:true}]);
+      if(index===0)await browser.screenshot(`${evidence(testId)}/${id}-${success?'success':'failure'}.png`);
+      await browser.press('Enter',13);
+      const consequence=complete(result),after=success?accepted(consequence,'ENTER_DUNGEON'):consequence;
+      await browser.waitFor(`$gameSystem._dryland.campaign.sequence===${after.sequence}&&$gameMessage.hasText()`);
+      assert.deepEqual(await snapshot(browser),after,'One result completion reaches the next reveal or sacrifice');
+    }
+  }
+  assert.deepEqual(browser.exceptions,[]);
+}
+canonicalCase('IT-082','A1 native map owns description reread retreat and every approach outcome',{timeout:180000},t=>verifyNativeEncounterMaps(t,['A1'],'IT-082'));
+
+canonicalCase('IT-083','A2 through A8 own every native approach outcome and next-scene handoff',{timeout:360000},t=>verifyNativeEncounterMaps(t,['A2','A3','A4','A5','A6','A7','A8'],'IT-083'));
+
+canonicalCase('IT-084','B1 through B8 own every native approach outcome and next-scene handoff',{timeout:360000},t=>verifyNativeEncounterMaps(t,['B1','B2','B3','B4','B5','B6','B7','B8'],'IT-084'));

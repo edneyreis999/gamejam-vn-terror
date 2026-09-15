@@ -87,7 +87,10 @@ canonicalCase('IT-079','selected file archives restore before boot into independ
     }
     assert.deepEqual((await player.snapshot('restored-parent')).campaign,parent.campaign);
     await player.until('formation');
-    for(const hero of branch==='A'?['Gorvak','Elowen','Griznik']:['Seraphina','Bimbren','Liora']){await player.choose(hero);await player.choose('Selecionar');}
+    for(const hero of branch==='A'?['Gorvak','Elowen','Griznik']:['Seraphina','Bimbren','Liora']){
+      await player.choose(hero);await player.choose('Selecionar');
+      await player.returnToTavern();
+    }
     await player.choose('Destinos');const surface=await player.until('destinations');
     await player.choose(surface.labels[branch==='A'?0:1]);await player.choose('Partir');await player.ready();
     const child=await captureNativeSave(context,'child');

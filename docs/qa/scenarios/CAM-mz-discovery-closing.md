@@ -6,7 +6,7 @@ persona: Caio, estrategista recorrente
 journey: J-mz-complete-campaign
 expected: Peças, Conselho, desfecho, memorial e epílogos correspondem às decisões e continuam salvos.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: pass
+qa_status: untested
 bug_ids: BUG-20260909-final-passage-not-seen
 fix_status:
 retest_status:
@@ -38,3 +38,8 @@ Planejado, **untested**. S04/S09/S10/S12; lotes B/D/F/H. Sessões: CH-mz-campaig
 ## Execução eventbridge-minimal-runtime — 2026-09-13
 
 Estado corrente: **pass**. S04/S09/S10/S12: Reunir/Destruir compartilham pai anterior à decisão, bad tem produtor próprio de oito perdas; arquivos A/B e Continue terminal preservam bytes. Seis modos finais de créditos foram executados duas vezes cada, com linha final/velocidade observadas; IT058 retido conta o retorno único ao título e a fixture longa permanece integração isolada. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+Fluxo dos três desfechos PASS; enquadramento do Conselho reprovado, epílogos corrigidos com retestes. MAS-03/04/06: MA-C/D/E/H; duas ordens, três finais, Conselho, memorial, epílogos e créditos. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.

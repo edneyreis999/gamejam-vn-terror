@@ -6,8 +6,8 @@ import { closingReady, finishNativeClosing, installClosing, observeClosing } fro
 import { beginEnding, campaignSnapshot, creditsReady, endingWithHeroes, finishPhase, frames, heroNames, memorialReady, observePresentation, pictureRows, resetPresentation, titleReady } from '../helpers/closing-presentation.mjs';
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-10/${id}`;
 import { saveBytes } from '../helpers/native-shared.mjs';
-import { selectFile } from '../helpers/native-chrome.mjs';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { project, selectFile } from '../helpers/native-chrome.mjs';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 async function intoMemorial(browser,kind,ending){
   await beginEnding(browser,kind,ending);await finishPhase(browser,'ending');await memorialReady(browser);
   return campaignSnapshot(browser);
@@ -106,7 +106,10 @@ async function walkWithEpilogues(browser){
       assert.deepEqual(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'),[name]);
       assert.equal(await browser.evaluate('$gameMap.mapId()'),28+Number(hero.slice(1)));
       const id=state.reading.passageIds[state.reading.index];
-      const list=events.find(e=>e?.name===id).list;
+      assert.equal(id,`epilogue.${hero}`);
+      const map=JSON.parse(await readFile(`${project}/data/Map${String(28+Number(hero.slice(1))).padStart(3,'0')}.json`,'utf8'));
+      const list=map.events[1].pages[0].list;
+      assert.equal(list.filter(c=>c.code===101).length,1,'Each epilogue owns one native text block');
       const expectedText=list.filter(c=>c.code===401).map(c=>c.parameters[0]).join('\n');
       assert.equal(await browser.evaluate('$gameMessage.allText()'),expectedText);
       if(!seen.includes(hero)){seen.push(hero);await browser.screenshot(`${evidence('IT-058')}/epilogue-${hero}.png`);}

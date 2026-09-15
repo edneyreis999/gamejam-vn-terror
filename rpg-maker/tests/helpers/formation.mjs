@@ -8,6 +8,8 @@ const require = createRequire(import.meta.url);
 export const { createCatalog, createRules, CatalogError } = require('../../The Dryland Drowned/js/plugins/Dryland_CampaignRules.js');
 const { readConfiguration } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
 export const events = JSON.parse(await readFile(path.join(project, 'data/CommonEvents.json'), 'utf8'));
+export const gorvakMap = JSON.parse(await readFile(path.join(project, 'data/Map037.json'), 'utf8'));
+export const heroMaps = new Map([[37, gorvakMap], ...await Promise.all([38, 39, 40, 41, 42, 43, 44].map(async id => [id, JSON.parse(await readFile(path.join(project, `data/Map${String(id).padStart(3, '0')}.json`), 'utf8'))]))]);
 export const catalog = createCatalog(readConfiguration(events[4]));
 export const rules = createRules(catalog);
 export const heroes = Array.from({ length: 8 }, (_, i) => `H${i + 1}`);
@@ -36,8 +38,23 @@ export function rosterFixture(deadHeroIds) {
   assert.deepEqual(rules.validateState(state), { ok: true, violations: [] });
   return state;
 }
+
+const presentation = (command, name) => command?.code === 357 && command.parameters?.[0] === 'Dryland_Presentation' && command.parameters?.[1] === name;
+export function gorvakUnitTexts(unit) {
+  return heroUnitTexts(unit);
+}
+export function heroUnitTexts(unit) {
+  const mapId = 37 + Math.floor((unit - 82) / 4);
+  const list = heroMaps.get(mapId).events[1].pages[0].list;
+  const start = list.findIndex(command => presentation(command, 'ObservationBegin') && Number(command.parameters?.[3]?.unit) === unit);
+  assert.ok(start >= 0, `Missing hero reading unit ${unit}`);
+  const end = list.findIndex((command, index) => index > start && presentation(command, 'ObservationComplete'));
+  assert.ok(end > start, `Missing completion for hero unit ${unit}`);
+  return list.slice(start, end).filter(command => command.code === 401).map(command => command.parameters[0]);
+}
+
 export async function choices(browser, kind) {
-  await browser.waitFor(`$gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
+  await browser.waitFor(`$gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'hero' || ${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
 }
 export async function activate(browser, kind, index) {
   await choices(browser, kind);
@@ -64,6 +81,12 @@ export async function tavern(t, options = {}) {
   await choices(browser, 'formation');
   return browser;
 }
+
+export async function returnToTavern(browser) {
+  if (await browser.evaluate("$gameMessage.choices().includes('Voltar à taverna')")) await activate(browser, 'hero', 2);
+  await choices(browser, 'formation');
+}
+
 export async function installFixture(browser, state) {
   assert.equal(rules.validateState(state).ok, true);
   // Install a prepared domain input at the real engine's game-object boundary.

@@ -1,13 +1,15 @@
 ---
 id: "15"
 status: completed
-depends_on: ["14"]
+depends_on: ["29"]
 verification_ids: []
 ---
 
 # Task 15 — Plan the current native QA cycle
 
 ## Outcome
+
+**Reopened expansion scope — 2026-09-14:** prior planning below remains completed history. Tasks19–29 and MA-001–011 require a fresh planning delta after task29. This task owns no product verification ID and does not require new game implementation.
 
 The existing docs/qa tree contains an executable, current plan for this migration, with each required scenario, variant, evidence producer, human judgment and teardown assigned before play begins.
 
@@ -80,3 +82,25 @@ Current guide: docs/qa/guides/eventbridge-minimal-runtime.md. Dated report: docs
 Actual availability: Chrome153.0.8010.36/Node22.23.2; CUA MZ normal window reachable after first timeout; default system audio output is MacBook Pro speakers. No human reviewer has supplied acceptance or been contacted remotely. GUI editing, directed play, listening and the four decisions remain pending. Known portrait/prison/total-loss-prose issues were deduplicated against existing records; no new bug or Trello card/message was created. Gorvak/editor, memorial and credits capture points are preserved.
 
 Validation: current guide/charter/report relative links resolve; all seven selected scenarios have valid flat frontmatter and untested status; four flows contain completion and abandonment; all fourteen V-IDs retain one primary owner. git diff --check passes. Task16 can execute the planned lots; this planning task adds no product PASS.
+
+## Experimental delta — 2026-09-14
+
+User-authorized ADR-005 adds tasks17/18. Extend the existing directed plan for EXV-003/004: Gorvak map ownership, menu/selection/return, observation/history and absence of shortcut dependencies. Preserve prior lots as history; the completed planning delta below assigns execution to task16.
+
+Experimental planning delta completed: the current QA guide now maps EXV-003/004 to normal 1280×720, reduced 1920×1080, actual selection/removal/full-party/navigation/Continue, and a disposable native MZ edit replayed by `gorvak-editor.test.mjs`. Fixtures, expected outcomes, source invalidation and human limits are explicit. Existing task16 remains the execution/human owner.
+
+
+## Map-authorship expansion planning delta — completed
+
+Authority: [ADR-006](adrs/adr-006.md), spec MA-001–011 and verification MAV-001–014/MAS-01–07. This remains the graph's only QA planning task and now depends on the sole implementation leaf, task29.
+
+- [x] Inventory actual task19–29 source, removal/retention ledgers, canonical results, isolated fixtures, implemented map IDs and current authoring paths. Confirm no required input is an ignored historical output.
+- [x] Update the current guide, formation/recovery/closing/encounter/accessibility/audiovisual journeys and scenarios for MAS-01–07. Preserve old reports and the accepted Gorvak organization separately.
+- [x] Assign every variant to resumable directed, native-editor, visual, audio or human lots. MAV-001–012 keep their implementation owners; task16 alone owns MAV-013/014 and its existing V/EXV criteria.
+- [x] Plan all-eight hero visits and per-art framing evidence; one fresh complete campaign, both route orders and three outcomes using genuine compatible checkpoint branches; exhaustive sixteen-encounter and participant variants remain separately labeled native integration.
+- [x] Inspect archive ancestry against changed map/CE/interpreter lists. Reuse only compatible play-earned parents and regenerate the shortest needed prefix; preserve immutable masters and record genuine saved boundaries rather than the later live screen.
+- [x] Schedule one short disposable MZ session covering a non-Gorvak hero and one campaign map, with played edited results and original/edited hashes. Keep final framing, control/navigation, author usability and applicable audible judgment explicit.
+- [x] Record exact existing runner invocations, expected map/event/reading/save observations, input/PNG/audio outputs, failure recovery and owned-resource teardown in the current guide. Follow local-game-run.md; no remote publication, synthetic directed state or unknown-server termination.
+- [x] Update verification and hand off the executable lots to task16. Capture the native map tree, command and played result for later accepted devlog material.
+
+Planning completed after task29. The maintained guide now assigns MA-A–I, current maps/232 retirements, source invalidation, new genuine checkpoint producers, two viewports/motion and native110%, native editor Map002/Map038, rendered audio, independent expected effects and owned-resource teardown. Four journeys and seven scenarios were updated; the current report keeps every unexecuted lot pending. Earlier notes above describe the previous two QA scopes.

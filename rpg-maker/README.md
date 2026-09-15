@@ -20,19 +20,19 @@ Para Continue, preserve endereço, porta e perfil do navegador. Use uma aba de j
 
 Os checkpoints explícitos gravam no arquivo escolhido: início, partida, revelação, abordagem, sacrifício, consequência, recompensa, Conselho e final. Transferências não acrescentam autosaves incidentais. A gravação segura o evento até concluir; uma falha libera a espera e mantém o último arquivo salvo com sucesso. O comportamento de erro e seleção pertence ao SaveCore/MZ instalado.
 
-Continue restaura objetos, imagens, mapa e pilha dos interpretadores nativos. A retomada do mesmo checkpoint não repete a decisão nem grava novamente a sequência já salva. Um final carregado reapresenta o desfecho comprometido e seu encerramento. Alterar apenas texto ou um rótulo histórico de revisão não cria bloqueio de carregamento. Mudanças estruturais em mapas/listas de comandos podem tornar saves antigos incompatíveis com o conteúdo; não há promessa de migração automática.
+Continue restaura objetos, imagens, mapa e pilha dos interpretadores nativos. A retomada do mesmo checkpoint não repete a decisão nem grava novamente a sequência já salva. Um final carregado reapresenta o desfecho comprometido e seu encerramento. Alterar apenas texto ou um rótulo histórico de revisão não cria bloqueio de carregamento. Um save pode conservar o texto da lista de comandos já serializada; inicie um Novo jogo para conferir o texto atual de um mapa. Mudanças estruturais em mapas/listas de comandos podem tornar saves antigos incompatíveis com o conteúdo; não há promessa de migração automática.
 
 ## Editar cenas e conversas
 
-Abra `The Dryland Drowned/game.rmmzproject` no MZ. A árvore contém título (1), prólogo (2), taverna (3), palco (4), encontros (7–22), Conselho (23), finais (25–27), memorial (28) e epílogos (29–36). Mapas históricos reservados preservam seus IDs.
+Abra `The Dryland Drowned/game.rmmzproject` no MZ. A árvore contém título (1), prólogo (2), taverna (3), palco (4), encontros (7–22), Conselho (23), finais (25–27), memorial (28) epílogos (29–36) e conversas dos heróis (37–44, filhos da taverna). Mapas históricos reservados preservam seus IDs.
 
 Para mudar Gorvak:
 
-1. Abra o mapa Taverna e seu evento **Gorvak**. Siga **Chamar evento comum** até a interação do herói.
-2. No ramo **Conversar**, o seletor **Chamar evento comum** aponta diretamente para **Conversa — Gorvak**. Abra esse Common Event para editar **Mostrar texto**, ou selecione outro evento de conversa.
+1. Na árvore, expanda **Taverna** e abra **Conversa — Gorvak**, Map037.
+2. Abra o evento001. O próprio evento contém menu, perfil, conversa, respostas de seleção e retorno; edite **Mostrar texto** no ramo desejado.
 3. Edite imagens, posição, escala, tom, duração e saída nos comandos nativos/VNPictureBusts do evento correspondente. Salve pelo editor e inicie uma sessão de teste para ver o resultado.
 
-O prólogo usa CE1 e chamadas para CE114–116. As interações dos oito heróis usam CE5–12; os textos observacionais estão em CE82–113. As famílias de encontros usam CE13–28, seus textos nativos e o fluxo CE262. Conselho/finais/epílogos têm entradas nomeadas nos respectivos mapas; siga os seletores **Chamar evento comum** para localizar o conteúdo.
+Prólogo, encontros, Conselho, finais e epílogos têm seus textos e escolhas no evento001 dos respectivos mapas. Maps037–044 correspondem a Gorvak, Elowen, Griznik, Seraphina, Bimbren, Liora, Vaelith e Draska. CE040 encaminha cenas da campanha e conserva as responsabilidades compartilhadas ainda necessárias. Sacrifícios, despedidas, descobertas, memorial, configuração, preload e créditos continuam usando Common Events funcionais. Os42 atalhos editoriais foram removidos; a entrada de autoria é o evento que o jogo executa.
 
 Não é necessário adicionar comentários de identidade ou executar uma CLI para habilitar comandos suportados pelo MZ/provedor. Os comentários históricos de fonte e status podem continuar úteis aos autores. Preserve a distinção criativa do [GDD canônico](../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md); uma edição técnica não aprova texto ou arte provisórios.
 
@@ -48,7 +48,7 @@ Os eventos autoram imagem, escala, posição, tom, foco, saída e limpeza. O Bri
 
 **Dryland_Presentation** integra controles e apresentação. **BindInterfacePicture** identifica uma imagem como interface para HIDE; fundos, retratos narrativos e lápides permanecem visíveis. **ChoiceFocus** prepara navegação/foco das escolhas. **MotionPreference** consulta movimento reduzido para o evento escolher sua sequência animada ou imediata.
 
-Uma leitura observacional usa **ObservationBegin/ObservationComplete** dentro do próprio Common Event. Só a conclusão marca seu ID como lido. Substituir o seletor por outro CE cria uma nova unidade; texto alterado no mesmo CE mantém a identidade. Para passagens de campanha, o evento consulta **passageRead**, chama **ReadingPermission** e encerra com **ReadingEnd** antes de **ReadingComplete**.
+Uma leitura observacional usa **ObservationBegin/ObservationComplete** no interpretador que executa o conteúdo. Nos mapas dos heróis, **ObservationBegin** recebe uma unidade numérica explícita, preservando82–113 apesar da remoção dos antigos CEs. Só a conclusão marca a unidade como lida. Editar o texto mantém essa identidade; uma unidade realmente nova precisa de uma identidade própria. Para passagens de campanha, o evento consulta **passageRead**, chama **ReadingPermission** e encerra com **ReadingEnd** antes de **ReadingComplete**.
 
 FAST é o controle de aceleração do Extended Message Functions e exige unidade já concluída e seleção do jogador. O botão AUTO foi removido por decisão de 2026-09-14; Configurações e HIDE permanecem. Nova unidade, escolha, transferência, Options/retomada desligam os modos ativos. Não há atalho S de pulo instantâneo. Tab/HIDE oculta a interface; Tab ou clique esquerdo restaura sem confirmar o trecho. Movimento do personagem e aceleração comum de eventos ficam bloqueados; o menu RPG permanece desabilitado por comando nativo.
 

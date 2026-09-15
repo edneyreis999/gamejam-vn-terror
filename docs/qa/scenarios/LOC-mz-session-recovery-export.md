@@ -6,7 +6,7 @@ persona: Rui, revisor de conteúdo
 journey: J-mz-recovery-export
 expected: O pacote íntegro restaura seu último checkpoint e oferece recuperação nativa das falhas isoladas.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
-qa_status: blocked-verify
+qa_status: untested
 bug_ids: BUG-20260910-save-history-schema
 fix_status:
 retest_status:
@@ -42,3 +42,8 @@ Planejado, **untested**. S01/S03/S04/S06/S06T/S09/S09E; lotes A/B/E/F. Sessões:
 ## Execução eventbridge-minimal-runtime — 2026-09-13
 
 Estado corrente: **blocked-verify**. A/B, cancelamento, arquivos nativos, ramificações e reabertura passaram; falhas/loading são integração isolada. A navegação mapa→evento e cópia autoral passaram, incluindo picture92 antes/depois de Options/Continue. Resta somente o parecer humano de usabilidade de autoria. [Relatório e limites](../reports/2026-09-12-eventbridge-minimal-runtime.md). Operador: Codex; personas representam perspectivas de teste. Os pareceres humanos permanecem no contrato de verificação.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+PASS técnico: arquivosA/B e Continue nas fronteiras com proveniência jogada; nenhuma campanha de usuário foi alterada. MAS-02/05/07: MA-A/F/I; arquivos/checkpoints genuínos e edição nativa Map002/Map038. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.

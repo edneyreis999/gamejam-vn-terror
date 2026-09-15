@@ -126,7 +126,7 @@ export async function execute(context){
  const player=new DirectedNativePlayer(context),fromArchive=Boolean(context.descriptor.storageFixture);
  const fileId=Number(process.env.DRYLAND_QA_FILE||context.descriptor.nativeArchive?.fileId||1);
  if(fromArchive){await player.choose('Continuar');await player.file(fileId);}
- else{await player.choose('Jogar');await player.file(fileId);await player.until('formation');await captureNativeSave(context,'new-campaign');}
+ else{await player.choose('Jogar');await player.file(fileId);await player.returnToTavern();await captureNativeSave(context,'new-campaign');}
  await player.ready();
  const parent=await player.snapshot('entry-campaign');
  assert.equal(parent.fileId,fileId);
@@ -138,7 +138,7 @@ export async function execute(context){
   assert.equal(Number(Boolean(approachRequest))+Number(Boolean(victimRequest)),1,'Branch-only requires exactly one approach or victim request.');
   assert.ok(branchType==='victim'?parent.campaign.phase==='sacrifice_choice':['encounter_intro','encounter_choice'].includes(parent.campaign.phase),'Parent must precede the requested decision.');
  }
- let count=0,forcedApproach=false,retreatedForBank=false,branchChosen=false;
+ let count=0,forcedApproach=false,retreatedForBank=false,branchChosen=false,councilBanked=false;
  const recordedDeaths=new Set(),recordedReturns=new Set();
  while(count++<350){
   const surface=await player.ready(),{campaign:state}=await player.snapshot(`decision-${count}`);
@@ -150,6 +150,9 @@ export async function execute(context){
    context.report.observations.push({label:'branch-result',kind:'journey-result',value:{variant,branchType,phase:state.phase,parent:parent.campaign,result:child.campaign,fileId:child.fileId,payloadSha256:child.payloadSha256}});return;
   }
   if(['ending','memorial','epilogue','campaign_complete'].includes(state.phase))break;
+  if(state.phase==='council'&&!councilBanked){
+   await captureNativeSave(context,'council-entry');councilBanked=true;
+  }
   if(state.phase==='death_result'&&!recordedDeaths.has(state.deadHeroIds.at(-1))){
    const hero=state.deadHeroIds.at(-1);await captureNativeSave(context,`committed-death-${hero}`);recordedDeaths.add(hero);
   }
@@ -171,8 +174,8 @@ export async function execute(context){
    const alive=names.map((_,i)=>'H'+(i+1)).filter(id=>!state.deadHeroIds.includes(id));
    if(alive.length>3){
     const desired=bad?['H4','H7','H5','H1','H8','H3','H2','H6'].filter(id=>alive.includes(id)).slice(0,3):['H1','H2','H3'];
-    for(const hero of state.draftPartyIds.filter(id=>!desired.includes(id))){await player.choose(names[Number(hero.slice(1))-1]);await player.choose('Retirar do grupo');}
-    for(const hero of desired.filter(id=>!state.draftPartyIds.includes(id))){await player.choose(names[Number(hero.slice(1))-1]);await player.choose('Selecionar');}
+    for(const hero of state.draftPartyIds.filter(id=>!desired.includes(id))){await player.choose(names[Number(hero.slice(1))-1]);await player.choose('Retirar do grupo');await player.returnToTavern();}
+    for(const hero of desired.filter(id=>!state.draftPartyIds.includes(id))){await player.choose(names[Number(hero.slice(1))-1]);await player.choose('Selecionar');await player.returnToTavern();}
    }
    const route=routeOrder.find(id=>!state.completedDungeonIds.includes(id));
    await player.choose('Destinos');const destinations=await player.until('destinations');
@@ -181,10 +184,11 @@ export async function execute(context){
    assert.ok(label);await player.choose(destinations.labels.find(text=>text.includes(label)));await player.choose('Partir');
   }else if(surface.active&&surface.kind==='approaches'){
    const id=state.assignments[state.dungeonId][state.position-1];
+   await player.assertMapOwner((id[0]==='A'?6:14)+Number(id.slice(1)));
    await captureNativeSave(context,`reveal-${state.dungeonId}-${state.position}-${state.sequence}`);
    if((process.env.DRYLAND_QA_BANK_RETREAT==='1'&&!fromArchive||process.env.DRYLAND_QA_RETURN_ONLY==='1')&&!retreatedForBank){
     await player.choose(surface.labels[4]);const retreat=await player.until('retreat');await player.choose(retreat.labels[0]);
-    await player.until('formation');await captureNativeSave(context,'formation-return');retreatedForBank=true;continue;
+    await player.returnToTavern();await captureNativeSave(context,'formation-return');retreatedForBank=true;continue;
    }
    const viable=gdd.encounterPairs[id].map(c=>state.partyIds.some(h=>gdd.heroPairs[h].includes(c)));
    let choice=bad?viable.indexOf(false):viable.indexOf(true);
@@ -196,6 +200,7 @@ export async function execute(context){
    await captureNativeSave(context,`victim-${state.dungeonId}-${state.position}-${state.sequence}`);
    const choice=Number(victimRequest||1)-1;await player.choose(surface.labels[choice]);if(branchType==='victim')branchChosen=true;
   }else if(surface.active&&surface.kind==='ending'){
+   await player.assertMapOwner(23);
    await captureNativeSave(context,'final-choice');
    await player.choose(surface.labels[variant.includes('destroy')?1:0]);
   }else{

@@ -4,7 +4,7 @@
 - **Cadence tier:** full no escopo aprovado da migração.
 - **Build:** 5d0d9ab0296e7150cfbdd7ab263d304eeab06fdb + diff da spec; inventário task14/20260912/candidate.json.
 - **Environment:** macOS/Chrome153.0.8010.36/Node22.23.2; http://127.0.0.1:18726/; perfis/cópias isolados.
-- **Started:** planejamento2026-09-12; execução2026-09-12/13. **Status:** blocked-verify somente para quatro pareceres humanos; execução técnica encerrada. Operador: Codex, com personas usadas como perspectivas de teste; nenhum parecer foi atribuído a pessoas fictícias.
+- **Started:** planejamento2026-09-12; execução inicial2026-09-12/13 e expansão2026-09-14. **Status atual:** blocked-verify na expansão: defeitos visuais preexistentes e quatro pareceres humanos; zoom excluído pela ADR-G003. O fechamento técnico anterior abaixo conserva seu escopo. Operador: Codex, com personas usadas como perspectivas de teste; nenhum parecer foi atribuído a pessoas fictícias.
 
 ## Personas
 
@@ -210,3 +210,71 @@ Correção da limpeza: a comparação textual de `/var` com `/private/var` não 
 
 
 Contagem final de evidências: `checkpoints` inclui PNG e snapshots de storage. As contagens de imagens acima foram corrigidas pelo sufixo `.png`: editor04 tem43 PNG+1 storage (44 registros), zoom05 tem125 PNG+2 storage (127 registros), e campanha fresca tem120 PNG+21 storage (141 registros). Os reports brutos não foram alterados.
+
+
+### Experimentos de mapa de Gorvak e remoção dos atalhos — 2026-09-14
+
+Na branch `experiment/gorvak-interaction-map`, filha de `refactor/native-bust-restoration` em `de4f9768c8fda6cdd075e662fc66e02244ec3d06`, Map037 contém a interação real de Gorvak. A escolha na taverna transfere para esse mapa; conversar e selecionar retornam ao menu do herói, e Voltar/Escape retorna à taverna. Os nove blocos de diálogo foram preservados. A remoção separada colocou exatamente 42 atalhos em slots nulos de 29 mapas, preservou os 33 eventos antigos restantes e manteve válidas as 685 chamadas nativas a Common Events. CE004/configuração e CE351/preload continuam necessários. CE005/082–085 foram aposentados pela migração de H1, não pela remoção dos atalhos.
+
+A evidência local ignorada está em `docs/qa/evidence/eventbridge-minimal-runtime/experiments-20260914/`. `surfaces-normal-04` executou 532 entradas públicas e produziu 182 PNG; `surfaces-reduced-01`, em 1920×1080 com movimento reduzido, executou 320 entradas e produziu 129 PNG. Ambos terminaram sem erros. O fluxo normal cobre entrada por mouse/teclado, cancelamento, conversa dos oito heróis, HIDE/Options, FAST inédito/releitura, seleção, remoção, grupo cheio e arquivos A/B com partida e Continue reais. A variante reduzida cobre navegação, leitura e apresentação; não herda a cobertura A/B da variante normal. Codex inspecionou as capturas de menu, conversa H1/Ivaí, rejeição de grupo cheio e composição reduzida; `visual-review.json` delimita imagens e hashes. Os reports brutos conservam `executed-awaiting-review`; esta revisão técnica não constitui parecer humano.
+
+No editor MZ, Codex abriu uma cópia descartável, navegou por Taverna → Conversa — Gorvak → evento001, editou a primeira fala para “Gorvak — fala editada no mapa.” e salvou pela UI. `editor-runtime-01` executou 35 entradas públicas, gerou 17 PNG e mostrou a fala editada sob o interpretador nativo de Map037, com unidade82 inicialmente inédita e campanha preservada. O salvamento do MZ alterou semanticamente só essa fala e metadados do editor (MapInfos.expanded, System.versionId/editMapId); a cópia não foi aplicada ao jogo principal. O projeto principal foi reaberto no editor com Map037 selecionado. Isso prova editabilidade técnica; a facilidade de autoria continua a depender do tópico humano1.
+
+Falhas e correções preservadas: a primeira captura revelou que um comando de foco de 20 frames sobrescrevia a duração inicial antes do primeiro tick da imagem. O evento agora estabelece o foco inicial imediatamente e mantém a animação nas mudanças posteriores de falante. Não houve alteração de engine/provider. `surfaces-normal-01` também expôs um sensor que esperava observar FAST depois de a unidade curta já ter terminado; a observação passou a registrar a progressão por frames. `surfaces-normal-02` expôs a espera do driver por rótulos brutos: selecionar/remover usa a mesma variável nativa, mas muda o texto renderizado. O driver agora compara os rótulos convertidos. As execuções finais usam diretórios novos e mantêm as falhas anteriores.
+
+A evidência reduzida e a edição no MZ precedem a remoção de dois condicionais cujos dois ramos já executavam os mesmos comandos de duração zero; a equivalência foi conferida e seu escopo retido está em `static-audit.json`. O fluxo normal04 foi executado novamente após essa simplificação. Restaurar a indentação original de 28 mapas mudou apenas bytes de formatação: os objetos JSON da cópia jogada e do candidato final são iguais. `directed-results.json` indexa os reports e a limpeza dos navegadores/servidores próprios. Nenhuma captura ou integração aceita automaticamente a ADR, os outros sete heróis ou os quatro pareceres humanos pendentes.
+
+Fechamento canônico do experimento: 22 IDs afetados passaram por execução final ou evidência retida com a mesma implementação. Run02 passou13/16; run03 passou5/7; run04 passou5/5. A primeira tentativa não iniciou o jogo por porta ocupada por um servidor próprio órfão. Os reports/falhas não foram sobrescritos. IT080 corrigiu o preparo da transferência com mensagem anterior aberta e confirmou que People1 preserva o instante de início nas duas transferências; IT074 passou a esperar fala pausada ou menu nativo aberto; IT076 busca o comando real de entrada H1 em Map037; o helper de encontros agora executa o retorno explícito de Gorvak. IT005/049/051 passaram com esse helper. IT048 cobriu os três desfechos e Continue, IT073 os oito epílogos e IT079 os arquivos/ramificações independentes. `canonical-results.json` registra hashes e aplicabilidade; nenhum teste de jogo foi substituído por uma espera arbitrária.
+
+Tasks17/18 concluídas tecnicamente, EXV-001–003 PASS, EXV-004 pendente. A ADR005 continua experimental. A auditoria mantém código/dados/testes e documentação com seus consumidores; logs, capturas e saves de QA são locais e ignorados. Não houve alteração de engine/provider/assets, novas dependências, commit, staging ou publicação. Os pareceres humanos e a seleção posterior de mídia continuam sob verification.md/task16.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+Plano: [guia atual](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14), tasks15/16 e MAS-01–07. Task29 encerrou o join técnico; o registro detalhado de falhas/retestes/equivalência pertence à verificação. Nenhum resultado abaixo é herdado da experiência anterior de Gorvak.
+
+| Lote | Resultado atual | Sensores |
+| --- | --- | --- |
+| MA-A/B | Parcial: oito heróis/arquivos/imagens PASS; zoom excluído pela ADR-G003 | Oito heróis, normal/reduzido, zoom110%, arquivos A/B e imagens |
+| MA-C/D/E | Fluxo PASS; Conselho com defeito visual | Campanhas genuínas, duas ordens e três desfechos |
+| MA-F | Continuidade PASS; apresentação tem ressalvas | HIDE/Options/Continue nas fronteiras, com pais jogados |
+| MA-G | Sensores nativos PASS; audição humana pendente | Observação/gravação de áudio renderizado; audição humana separada |
+| MA-H | Técnico PASS | Créditos naturais/acelerados e teclado/mouse cedo/tarde |
+| MA-I | Edição e reprodução PASS; usabilidade humana pendente | Editor MZ Map002/Map038 e reprodução das falas |
+
+Recursos conferidos: Node22.23.2, Chrome153.0.8010.36, dependência Playwright instalada, MZ acessível. A saída padrão enumerada na preparação atual é Powerbeats Pro; MacBook Pro também está disponível. Isso não declara audição humana nem autorização para capturar microfone. Evidência bruta local ignorada: `docs/qa/evidence/eventbridge-minimal-runtime/map-authorship-expansion/`; masters anteriores às listas migradas não serão importados.
+
+
+### Fechamento da execução da expansão — 2026-09-14
+
+As tasks01–15 e17–29 estão concluídas. A task16 fica **blocked-verify**, com execução registrada e pendências delimitadas; o plano não está integralmente aprovado. `implemented=true`, `static_verified=true`, `runtime_verified=false`, `human_accepted=false`, `release_ready=false`. Os resultados funcionais não anulam as falhas/ausências de sensor abaixo.
+
+O join canônico contém **134 PASS por composição**: execução completa inicial129PASS/5FAIL, correções dos cinco consumidores desatualizados, retestes focados e evidência equivalente dos casos não afetados. O comando completo original continua exit1. Após calibrar os epílogos, IT047/062/073 passaram novamente, com captura dos oito heróis nos dois modos. `task-29/composite-after-framing.json` identifica a origem de cada caso. Não houve um novo comando completo134/134.
+
+MA-A/B: `surfaces-normal-01` e `surfaces-reduced-01` exercitaram os oito menus/perfis/conversas em1280×720 normal e1920×1080 reduzido. A revisão independente inspecionou48PNG de rostos/texto/painéis; arquivosA/B foram exercitados no lote normal. O H1 da seleção de48 mostra o perfil, não o corpo da conversa; o fluxo nativo e os demais registros mantêm seus próprios escopos. A captura `conversation-options.png` também foi inspecionada, sem recorte do painel.
+
+MA-C/D/E: `campaign-physical-01`, `campaign-supernatural-01` e `campaign-losses-01` partem de jogos novos e alcançam Reunir, Destruir e perda total, respectivamente. Cobrem duas ordens de rota, recuo genuíno, oito mortes e Continue do arquivo terminal sem reescrita indevida. `approach-1/2/3-01`, `victim-1/2/3-01` e quatro `return-<normal|reduce>-<wait|leave>-01` usam arquivos ganhos nessas campanhas. Cada origem e sequência está no archive e em `task16-tail-plan.json` local; nenhum pai anterior à correção dos epílogos foi importado. A ausência de Vaelith após o fade de retorno foi observada nos PNG antes/depois.
+
+MA-F: `continuity-council-01`, `continuity-farewell-01` e `continuity-epilogue-01` cobrem HIDE por teclado/mouse, Options e Continue nas fronteiras. O pai `council-parent-01/council-entry` foi produzido por inputs reais a partir do encontro final; a pequena extensão de `native-journeys.test.mjs` apenas arquiva o checkpoint existente ao observar a fase council. Não altera a campanha. Nos PNG de Gorvak no epílogo, HIDE remove os controles e a restauração recupera a fala mantendo personagem/fundo.
+
+MA-G: `audio-bgs-03`, `audio-me-01`, `audio-se-01` e `audio-bgm-01` verificaram a resposta nativa. People1 mantém o mesmo início nas transferências e no FAST; volume0 silencia o buffer e a restauração recupera0,24 sem reinício. Organ responde0,26→0→0,26. Cursor3 toca um novo buffer com ganho0,36/0/0,27 conforme40/0/30%. A campanha não possui BGM ativo; IT029 conserva a equivalência isolada, sem inventar música. WebM registra o grafo WebAudio renderizado, sem microfone. Isso não é audição humana. BGS01 falhou ao amostrar FAST depois da leitura curta; BGS02 comprovou ativação, mas o segundo clique rápido não serviu como sensor de cancelamento. BGS03 observa ativação por frame e reset no menu por inputs públicos; não enfraquece a assertiva de áudio contínuo. Falhas anteriores foram preservadas.
+
+MA-H: créditos naturais, acelerados, teclado/mouse e acionamento tardio passaram nas campanhas e em `credits-late-keyboard-01`/`credits-late-mouse-01`; a imagem intermediária mostra o texto e o botão dentro da tela. MA-I: a edição de duas falas code401 em Map002/Map038 pela UI do MZ foi salva e reproduzida na mesma cópia descartável. `editor-ui/edit-diff.json` separa textos e metadados nativos. O projeto principal foi reaberto sem os textos de demonstração.
+
+### Pendências atuais e retomada
+
+1. **Zoom nativo110%:** `surfaces-zoom-01` falhou no preflight. CUA selecionou o Chrome do perfil pessoal, não a instância própria do runner; nenhum zoom foi alterado no perfil pessoal. O timeout e a limpeza estão preservados. Exigência posteriormente retirada pela ADR-G003; não retomar esse lote. O registro da falha permanece histórico.
+2. **Enquadramento do Conselho:** `campaign-physical-01/story-76.png` confirma rostos cortados por escalas/posições genéricas anteriores à migração. O contrato de arte preserva Conselho/Andirá e estilos compartilhados; a correção requer ampliação explícita desse escopo ou follow-up próprio. O defeito permanece no registro de retratos, sem aprovação visual. A pergunta de escopo foi apresentada ao usuário; ausência de resposta não aprova a ampliação.
+3. **Pareceres humanos:** autoria sem JavaScript; legibilidade/navegação/controle; composição do memorial; resposta audível/conforto. A organização de Gorvak já aceita mantém seu escopo. A edição técnica e as capturas da expansão não fornecem esses pareceres.
+
+Os reports brutos têm status `executed-awaiting-review`; o presente fechamento distingue seus sensores e limites. `directed-results.json` agrega30 tentativas, incluindo as falhas preservadas e a campanha anterior à calibração. Os29 reports que chegaram à execução registram encerramento dos seis recursos próprios; o preflight de zoom encerrou os cinco recursos que chegou a abrir, sem iniciar áudio. Não houve staging, commit, publicação ou alteração de arquivos de campanha do usuário. As11 bases JSON com mudanças apenas de formatação continuam preservadas e excluídas da proposta de entrega.
+
+
+Revisão independente final dos epílogos:16/16PNG inspecionados, todos com rosto e torso visíveis. H2 também foi confirmado nas duas campanhas. A alteração se limita a Scale/Move nas posições18/19 de cada mapa; conteúdo, índices e assets preservados. O parecer técnico está em `.artifacts/task16-epilogue-visual-review.json`; não substitui a aprovação humana de composição.
+
+A inspeção final confirmou também o problema nos helpers compartilhados de despedida: `continuity-farewell-01/bust-1-farewell-H4.png` mostra apenas os pés ampliados de Seraphina. A continuidade funcional passa, mas esse enquadramento está reprovado. A correção das despedidas integra o follow-up de apresentação compartilhada, registrado no mesmo bug dos retratos; os corpos de despedida não foram migrados neste incremento.
+
+
+### Decisão posterior — excluir zoom nativo
+
+A [ADR-G003](../../adrs/adr-g003-excluir-testes-de-zoom-nativo.md), aceita pelo usuário, retira o sensor de zoom do contrato e dos bloqueadores. Sua falha de preflight não foi convertida em PASS. A task16 permanece blocked-verify por enquadramento e julgamentos humanos. Nenhum jogo ou teste foi executado nesta alteração documental.

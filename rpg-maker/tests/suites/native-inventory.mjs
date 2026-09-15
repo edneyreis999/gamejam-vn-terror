@@ -3,16 +3,58 @@ import assert from 'node:assert/strict';
 import { access } from 'node:fs/promises';
 import { selectFile, project } from '../helpers/native-chrome.mjs';
 import { localAssets } from '../../tools/native-files.mjs';
+import { catalog } from '../helpers/formation.mjs';
 import { entry } from '../helpers/native-shared.mjs';
+
+const memorialUnits = Array.from({length:16},(_,index)=>125+index*9);
+const retiredCommonEvents = [
+  1, ...Array.from({length:24},(_,index)=>5+index), 41, 53, 54, 55, 56, 57,
+  62, 66, 72, 80, 81, ...Array.from({length:35},(_,index)=>82+index),
+  ...Array.from({length:144},(_,index)=>118+index).filter(id=>!memorialUnits.includes(id)),
+  262, ...Array.from({length:32},(_,index)=>305+index)
+];
+const retiredMapShortcuts = [
+  ...Array.from({length: 8}, (_, index) => [3, index + 3]),
+  [3, 11], [3, 12], [3, 13], [3, 14], [3, 2],
+  ...Array.from({length: 8}, (_, index) => [index + 7, 2]),
+  ...Array.from({length: 8}, (_, index) => [index + 15, 2]),
+  [23, 2], [23, 3], [25, 2], [26, 2], [27, 2],
+  ...Array.from({length: 8}, (_, index) => [index + 29, 2])
+];
 
 canonicalCase('IT-047', 'the native package contains every authored picture and live common-event target across CE and map lists without a revision registry', {timeout:60000}, async t => {
  const browser=await entry(t),events=await browser.evaluate('$dataCommonEvents'),maps=await browser.evaluate(`Promise.all($dataMapInfos.filter(Boolean).map(async info=>{
   const response=await fetch('data/Map'+String(info.id).padStart(3,'0')+'.json');
   if(!response.ok)throw new Error('Missing map '+info.id);
   const map=await response.json();
-  return {id:info.id,pages:(map.events||[]).filter(Boolean).flatMap(event=>(event.pages||[]).map((page,index)=>({eventId:event.id,page:index,list:page.list||[]})))};
+  return {id:info.id,events:map.events||[],pages:(map.events||[]).filter(Boolean).flatMap(event=>(event.pages||[]).map((page,index)=>({eventId:event.id,page:index,list:page.list||[]})))};
  }))`),assets=new Set(await localAssets(project));
- const lists=[...events.filter(Boolean).map(event=>({owner:'CE'+event.id,list:event.list})),...maps.flatMap(map=>map.pages.map(page=>({owner:`Map${String(map.id).padStart(3,'0')}/event${page.eventId}/page${page.page}`,list:page.list})))];
+ for(const id of retiredCommonEvents)assert.equal(events[id],null,`Retired Common Event CE${id} keeps its numeric slot`);
+ const mapById=new Map(maps.map(map=>[map.id,map]));
+ for(const [mapId,eventId] of retiredMapShortcuts)assert.equal(mapById.get(mapId)?.events[eventId],null,`Retired shortcut Map${String(mapId).padStart(3,'0')}/event${String(eventId).padStart(3,'0')} keeps its event slot`);
+ for(const mapId of [37,38,39,40,41,42,43,44]) {
+  assert.equal(mapById.get(mapId)?.id,mapId,'The hero map is included in the native package');
+  assert.equal(await browser.evaluate(`$dataMapInfos[${mapId}]?.parentId`),3,'The hero map remains a child of Taverna');
+  const mapUnits=mapById.get(mapId)?.pages.flatMap(page=>page.list).filter(command=>command.code===357&&command.parameters[0]==='Dryland_Presentation'&&command.parameters[1]==='ObservationBegin').map(command=>Number(command.parameters[3]?.unit));
+  assert.deepEqual(mapUnits,Array.from({length:4},(_,index)=>82+(mapId-37)*4+index),'The map owns its preserved reading identities');
+ }
+ const troops=await browser.evaluate('$dataTroops');
+ const lists=[...events.filter(Boolean).map(event=>({owner:'CE'+event.id,list:event.list})),...maps.flatMap(map=>map.pages.map(page=>({owner:`Map${String(map.id).padStart(3,'0')}/event${page.eventId}/page${page.page}`,mapId:map.id,list:page.list}))),...troops.filter(Boolean).flatMap(troop=>troop.pages.map(page=>({owner:'Troop'+troop.id,list:page.list})))];
+ for(const id of memorialUnits){assert.ok(events[id],'Memorial unit remains live');assert.ok(events[347].list.some(command=>command.code===117&&command.parameters[0]===id),'CE347 retains its inscription selector');}
+ const prologue=mapById.get(2).pages.flatMap(page=>page.list);
+ assert.equal(prologue.filter(command=>command.code===101).length,3,'Map002 owns all three prologue text boxes');
+ assert.equal(prologue.filter(command=>command.code===357&&command.parameters[0]==='Dryland_EventBridge'&&command.parameters[1]==='ReadingComplete').length,3,'Map002 owns their three semantic completions; IT-004 proves order and identity');
+ for(const id of Object.keys(catalog.passages)){
+  let mapId;const hero=/^epilogue\.H([1-8])$/.exec(id),encounter=/^(?:encounter|result)\.([AB])([1-8])(?:\.|-)/.exec(id),ending=/^ending\.(reunite|destroy|bad)\./.exec(id);
+  if(hero)mapId=28+Number(hero[1]);
+  else if(id.startsWith('council.')||id.startsWith('opinion.')||id==='irati.03')mapId=23;
+  else if(ending)mapId={reunite:25,destroy:26,bad:27}[ending[1]];
+  else if(encounter)mapId=(encounter[1]==='A'?6:14)+Number(encounter[2]);
+  if(mapId){
+   const owners=lists.flatMap(row=>row.list.filter(command=>command.code===357&&command.parameters[0]==='Dryland_EventBridge'&&command.parameters[1]==='Query'&&command.parameters[3].kind==='passageRead'&&command.parameters[3].id===id).map(()=>row.mapId));
+   assert.deepEqual(owners,[mapId],id+' has one map-authored source');
+  }
+ }
  for(const {owner,list} of lists)for(const command of list){
   if(command.code===117)assert.ok(events[command.parameters[0]],`${owner} -> CE${command.parameters[0]}`);
   if(command.code===231&&command.parameters[1])assert.ok(assets.has('img/pictures/'+command.parameters[1]+'.png'),`${owner}: ${command.parameters[1]}`);
@@ -30,7 +72,7 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
 canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image before entry return and resumed interaction', {timeout:90000}, async t => {
   const { default: assert } = await import('node:assert/strict');
   const { stat } = await import('node:fs/promises');
-  const { events, choices, activate, pause } = await import('../helpers/formation.mjs');
+  const { events, choices, activate, pause, returnToTavern } = await import('../helpers/formation.mjs');
   const expected=['Taverna',...Array.from({length:8},(_,i)=>`Tavern_H${i+1}`),...Array.from({length:8},(_,i)=>`H${i+1}`),'ivai','Button','Tag','Panel','DestinationCard','DestinationLabel','Destination_physical','Destination_supernatural','Destination_final','MapDwarven','MapElven','MapComplete'].map(name=>'Dryland_'+name);
   const helper=events.find(event=>event?.name==='Taverna — Carregar imagens');
   const command=helper.list.find(command=>command.code===357);
@@ -71,8 +113,13 @@ canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image 
   await browser.evaluate('preloadLog=[];');await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
   assert.deepEqual(await browser.evaluate('preloadLog.filter(item=>item.type==="request").slice(-29).map(item=>item.name)'),expected);
   assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign'),before);
-  for(let step=0;step<7;step++){await browser.press('Enter',13);if(await browser.evaluate('$gameMessage._drylandChoiceFocus?.key==="formation"'))break;await pause(browser);}
-  await choices(browser,'formation');
+  const heroMenu='$gameMessage._drylandChoiceFocus?.key==="hero"&&SceneManager._scene._choiceListWindow?.isOpenAndActive()';
+  for(let step=0;step<12;step++){
+    await browser.press('Enter',13);
+    await browser.waitFor(`(${heroMenu})||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)`);
+    if(await browser.evaluate(heroMenu))break;
+  }
+  await choices(browser,'hero');await returnToTavern(browser);
   assert.ok(await browser.evaluate('preloadLog.some(item=>item.type==="stage")'));
   await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-08/20260912/preloaded-return.png');
   assert.deepEqual(browser.exceptions,[]);
@@ -112,13 +159,13 @@ canonicalCase('IT-075', 'late missing pictures retain default scene-start LoadEr
 
 canonicalCase('IT-076', 'native bust entry graphic change and prepared memorial pictures remain asynchronous', {timeout:60000}, async t => {
   const { default: assert } = await import('node:assert/strict');
-  const { tavern, events, pause, activate } = await import('../helpers/formation.mjs');
+  const { tavern, gorvakMap, pause, activate } = await import('../helpers/formation.mjs');
   const browser=await tavern(t),before=await browser.evaluate('$gameSystem._dryland.campaign');
   await activate(browser,'formation',0);await activate(browser,'hero',0);await pause(browser);
   await browser.evaluate(`SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();Game_Map.prototype.setupStartingEvent=function(){return false;};$gameMap._interpreter.clear();$gameMessage.clear();
     window.delayedPicture='';window.releaseNativeImage=null;
     const start=Bitmap.prototype._startLoading;Bitmap.prototype._startLoading=function(){if(this._url.endsWith('/'+delayedPicture+'.png')&&!releaseNativeImage){this._loadingState='loading';releaseNativeImage=()=>start.call(this);}else start.call(this);};`);
-  const enter=structuredClone(events.find(event=>event?.name==='Perfil — Gorvak').list.find(command=>command.code===357&&command.parameters[1]==='Basic_EnterBust'));
+  const enter=structuredClone(gorvakMap.events[1].pages[0].list.find(command=>command.code===357&&command.parameters[1]==='Basic_EnterBust'));
   enter.indent=0;
   const change={code:357,indent:0,parameters:['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}]};
   const memorial={code:231,indent:0,parameters:[61,'Dryland_Memorial_H3',1,0,640,200,20,20,255,0]};

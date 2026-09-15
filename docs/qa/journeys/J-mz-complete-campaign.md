@@ -76,3 +76,14 @@ Para o incremento de bustos, seguir os [lotes nativos de diálogo](../guides/vn-
 ## Incremento eventbridge-minimal-runtime — 2026-09-12
 
 Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runtime.md) e [relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Seleção nativa de arquivos, chamadas diretas de CE, observação somente leitura e controles do provider substituem receitas de seed/API/revisão/S. Cenários deste incremento começam untested. Os relatórios anteriores preservam o histórico e não transferem PASS.
+
+## Experimental Gorvak map — 2026-09-14
+
+ADR-005 adds one playable child map and removes42 authoring shortcuts. Gorvak now returns to his own menu after conversation/selection; use Voltar à taverna or cancel to leave. The other seven heroes retain their previous interaction. [Current guide](../guides/eventbridge-minimal-runtime.md) owns EXV-003/004 variants and the native-editor replay; [task16](../../../planos/tasks/eventbridge-minimal-runtime/task-16.md) records execution and pending human acceptance. Historical runs above retain their original source scope.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+Jogar/arquivo → prólogo Map002 → formação → herói em Map037–044 → retorno/seleção → encontros Maps007–022 → Conselho23 → final25–27 → memorial/epílogos29–36 → créditos. Desistência/recuo/Continue usam checkpoints realmente gravados. MA-A/C/D/E/H.
+
+[Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.

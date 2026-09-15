@@ -25,7 +25,7 @@ export async function prepareBustFixture(t, label, edit) {
   }
   const file = path.join(directory, 'data/CommonEvents.json');
   const events = JSON.parse(await readFile(file, 'utf8'));
-  const result = edit(events);
+  const result = await edit(events, directory);
   await writeFile(file, JSON.stringify(events));
   return { directory, events, result };
 }
