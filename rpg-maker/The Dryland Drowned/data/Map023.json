@@ -3745,8 +3745,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "100",
-                  "TargetScaleY:str": "100",
+                  "TargetScaleX:str": "44",
+                  "TargetScaleY:str": "44",
                   "Duration:eval": "0"
                 }
               ]
@@ -3761,7 +3761,7 @@
                 {
                   "PictureID:arrayeval": "[\"63\"]",
                   "TargetX:str": "960",
-                  "TargetY:str": "850",
+                  "TargetY:str": "725",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -4071,8 +4071,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "100",
-                  "TargetScaleY:str": "100",
+                  "TargetScaleX:str": "44",
+                  "TargetScaleY:str": "44",
                   "Duration:eval": "0"
                 }
               ]
@@ -4087,7 +4087,7 @@
                 {
                   "PictureID:arrayeval": "[\"63\"]",
                   "TargetX:str": "960",
-                  "TargetY:str": "850",
+                  "TargetY:str": "725",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"

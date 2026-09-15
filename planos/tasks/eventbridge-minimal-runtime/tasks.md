@@ -5,6 +5,9 @@ slug: eventbridge-minimal-runtime
 
 # Tasks — Minimal EventBridge and native editor authorship
 
+**Atualização — 2026-09-15:** os bustos compartilhados do Conselho e das oito despedidas foram corrigidos e passaram nos testes e na inspeção visual. A [verificação atual](verification.md#correção-dos-bustos-compartilhados--2026-09-15) encerra o bloqueio técnico de enquadramento; task16 permanece blocked-verify somente pelos quatro pareceres humanos. Registros anteriores de defeito/escopo pendente são históricos. Mudanças ainda locais, sem commit ou atualização do PR.
+
+
 The FAST-only amendment accepted on 2026-09-14 is recorded in [ADR-004](adrs/adr-004.md) and [verification.md](verification.md); prior AUTO execution remains historical.
 
 The approved [spec](spec.md), [verification](verification.md), five discipline contracts and ADR-001–003 remain the behavior authority. [Review 02](review-02.md) permits task decomposition; its SHIP verdict does not certify the game.
@@ -222,4 +225,4 @@ Historical task19 snapshot; its next-task statements were superseded by executio
 28 tasks completed; task16 blocked-verify after the available QA execution. No implementation task remains ready to start. Resume only the [documented technical/visual/human gaps](task-16.md#final-expansion-handoff--2026-09-14); the implemented migration and CE retirement are complete. The aggregate is not release-ready.
 
 
-A [ADR-G003](../../../docs/adrs/adr-g003-excluir-testes-de-zoom-nativo.md) exclui o sensor de zoom nativo do trabalho restante da task16. Retomada limitada aos defeitos visuais e aceites humanos; adequar a seleção legada de testes antes de qualquer nova execução que inclua variantes de zoom.
+A [ADR-G003](../../../docs/adrs/adr-g003-excluir-testes-de-zoom-nativo.md) exclui o sensor de zoom nativo do trabalho restante da task16. O [final verify do PR13 em 2026-09-15](verification.md#final-verify-do-pr13--2026-09-15) retirou localmente a seleção legada de zoom e verificou seis casos canônicos. Retomada limitada aos defeitos visuais e aceites humanos; não há mudança nos 28 estados completos nem no bloqueio da task16.

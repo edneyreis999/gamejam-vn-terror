@@ -6,6 +6,7 @@ import { councilWithHeroes, councilAfterLosses } from '../helpers/closing-presen
 import { accepted, complete, rejectUnchanged } from '../helpers/campaign.mjs';
 import { continueSave } from '../helpers/discovery.mjs';
 import { closingReady, councilBoundary, councilState, finalChoice, finishNativeClosing, installClosing, observeClosing } from '../helpers/closing.mjs';
+import { assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-09/${id}`;
 const snapshot=browser=>browser.evaluate('$gameSystem._dryland.campaign');
 const ended=(kind,ending)=>kind==='bad'?councilState('bad'):accepted(finalChoice(kind),'CHOOSE_ENDING',{ending});
@@ -72,9 +73,12 @@ async function readCouncil(browser,testId='IT-054'){
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),'Dryland_Council');
     if(speaker==='Andirá'){
      const reflection=await browser.evaluate('(()=>{const p=$gameScreen.picture(65);return {x:p.x(),y:p.y(),scale:p.scaleX()};})()');
-     assert.deepEqual(reflection,{x:330,y:500,scale:100},'Uniform authored reflection; PNG framing deferred by user.');
+     assert.ok(reflection.x<640&&reflection.y>0&&reflection.scale>0,'Andirá stays in the left reflection, using the existing undistorted asset.');
     }
-    if(staged||speaker==='Andirá') await browser.screenshot(`${evidence(testId)}/${heroes.join('-')||'solo'}-${id}.png`);
+    if(staged||hasIvai){
+     await browser.screenshot(`${evidence(testId)}/${heroes.join('-')||'solo'}-${id}.png`);
+     await assertPortraitFraming(browser,expected.flatMap((name,i)=>name?[60+i]:[]),id);
+    }
     seen.push({id,speaker,pictures});
    }
   }
@@ -153,14 +157,18 @@ canonicalCase('IT-048','native saved outcomes route only through their own endin
 
 canonicalCase('IT-061','native Council supports every hero recipe in canonically reachable occupied slots without changing eligibility',{timeout:300000},async t=>{
  const browser=await tavern(t);
+ for(const reduced of [false,true]){
+  await browser.call('Emulation.setDeviceMetricsOverride',{width:reduced?1920:1280,height:reduced?1080:720,deviceScaleFactor:1,mobile:false});
+  await browser.call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:reduced?'reduce':'no-preference'}]});
  for(const party of [['H1','H2','H3'],['H2','H3','H4'],['H3','H4','H5'],['H4','H5','H6'],['H5','H6','H7'],['H6','H7','H8'],['H7','H8'],['H8']]){
   let state=party.length===3?councilWithHeroes(party):councilAfterLosses(party);
   while(state.reading.passageIds[state.reading.index]!=='council.challenge') state=complete(state);
   await installClosing(browser,state);
-  const seen=await readCouncil(browser,'IT-061'),after=await snapshot(browser);
+  const seen=await readCouncil(browser,`IT-061/${reduced?'reduced':'normal'}`),after=await snapshot(browser);
   assert.deepEqual(seen.filter(x=>x.id.startsWith('opinion.')).map(x=>x.id),party.map(id=>`opinion.${id}`));
   assert.deepEqual(after.climaxPartyIds,party);assert.deepEqual(after.deadHeroIds,state.deadHeroIds);assert.deepEqual(after.partyIds,state.partyIds);
   assert.equal(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
+ }
  }
 });
 

@@ -20,7 +20,7 @@ O stash listado como `stash@{0}` tinha a descrição `On fix/speaker-scale-reduc
 
 ## O que o código já responde
 
-Fontes: [EventBridge](../../../rpg-maker/The%20Dryland%20Drowned/js/plugins/Dryland_EventBridge.js), [configuração dos plugins](../../../rpg-maker/The%20Dryland%20Drowned/js/plugins.js), [Common Events](../../../rpg-maker/The%20Dryland%20Drowned/data/CommonEvents.json), [metadados do VNPictureBusts](../../../rpg-maker/The%20Dryland%20Drowned/js/plugins/VisuMZ_2_VNPictureBusts.js) e [guia de edição](../../../rpg-maker/README.md#editar-bustos-e-foco-dos-diálogos).
+Fontes: [EventBridge](../../../rpg-maker/The%20Dryland%20Drowned/js/plugins/Dryland_EventBridge.js), [configuração dos plugins](../../../rpg-maker/The%20Dryland%20Drowned/js/plugins.js), [Common Events](../../../rpg-maker/The%20Dryland%20Drowned/data/CommonEvents.json), [metadados do VNPictureBusts](../../../rpg-maker/The%20Dryland%20Drowned/js/plugins/VisuMZ_2_VNPictureBusts.js) e [guia de edição](../../../rpg-maker/README.md#editar-cenas-e-conversas).
 
 | Assunto | Evidência atual | Consequência para a entrevista |
 | --- | --- | --- |

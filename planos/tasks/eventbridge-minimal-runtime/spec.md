@@ -285,3 +285,7 @@ Tasks19/20 have implemented all eight hero interactions in Maps037–044 with te
 ### Política de QA — zoom nativo
 
 [ADR-G003](../../../docs/adrs/adr-g003-excluir-testes-de-zoom-nativo.md) retira testes de zoom nativo por decisão aprovada do usuário. O recorte substitui exigências anteriores de QA, preserva resoluções e controles desktop e não aprova os defeitos visuais ou pareceres humanos pendentes.
+
+### Correção dos bustos compartilhados — 2026-09-15
+
+Após o final verify do PR13, o usuário solicitou listar os bustos cortados, corrigi-los e executar testes. A task16 passa a corrigir também o enquadramento compartilhado do Conselho e das despedidas, antes preservado e pendente de autorização. O [contrato de Technical Art](eventbridge-minimal-runtime.technical-art.md#correção-de-enquadramento-compartilhado--2026-09-15) delimita escala/posição por personagem e as invariantes preservadas; a [verificação](verification.md#correção-dos-bustos-compartilhados--2026-09-15) registra as provas antes/depois. Manter eventos nativos, assets existentes, falantes/ouvintes, Andirá no reflexo e regras da campanha. Os julgamentos humanos de autoria, UI, memorial e áudio continuam separados.

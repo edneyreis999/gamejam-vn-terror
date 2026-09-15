@@ -2,9 +2,8 @@ import assert from 'node:assert/strict';
 import { DirectedNativePlayer } from './native-player.mjs';
 import { captureNativeSave, sha256 } from './native-save-archive.mjs';
 export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url)];
-const nativeZoom=process.env.DRYLAND_QA_ZOOM==='110'?1.1:undefined;
 const variant=process.env.DRYLAND_QA_SURFACE||'native-tavern-controls',large=process.env.DRYLAND_QA_VIEWPORT==='large';
-export const scenario={id:variant,criteria:[{id:'controls',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md'}],requires:['native-mz','public-input'],audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{...(nativeZoom?{nativeZoom}:{}),width:nativeZoom?1280:large?1920:1280,height:nativeZoom?720:large?1080:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
+export const scenario={id:variant,criteria:[{id:'controls',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md'}],requires:['native-mz','public-input'],audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{width:large?1920:1280,height:large?1080:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
 export async function execute(context){
  const player=new DirectedNativePlayer(context);
  if(!context.descriptor.storageFixture){await player.choose('Jogar');await context.wait(()=>SceneManager._scene instanceof Scene_File&&!SceneManager._scene.isBusy());await context.input.key('Escape');await player.choicesContaining('Jogar');await context.shot('cancelled-file-title');}

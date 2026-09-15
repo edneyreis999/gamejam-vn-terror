@@ -341,7 +341,7 @@ canonicalCase('IT-077','FAST-only console executes native text and waits, with c
  assert.deepEqual(browser.exceptions,[]);
 });
 
-canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appearance across desktop sizes motion and real browser zoom',{timeout:180000},async t=>{
+canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appearance across desktop sizes and motion preferences',{timeout:180000},async t=>{
  const prepared=await prepareBustFixture(t,'interface-bindings-20260912',events=>{
   const id=events.length,c=(code,parameters=[])=>({code,indent:0,parameters});
   events.push({id,name:'Fixture técnica — elementos nomeados',trigger:0,switchId:1,list:[
@@ -353,14 +353,14 @@ canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appea
  });
  await startServer(t,prepared.directory);const observations=[];
  await mkdir(evidence('IT-078'),{recursive:true});
- for(const variant of [{width:1280,height:720,reduced:false,zoom:1},{width:1920,height:1080,reduced:true,zoom:1},{width:1920,height:1080,reduced:false,zoom:1.1},{width:1920,height:1080,reduced:true,zoom:1.1}]){
+ for(const variant of [{width:1280,height:720,reduced:false},{width:1920,height:1080,reduced:true}]){
   await t.test(JSON.stringify(variant),async t=>{
    const browser=await openChrome(t,variant);
    await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
    const screen=await browser.evaluate('({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,scale:visualViewport.scale,canvas:Graphics.app.view.getBoundingClientRect().toJSON(),motion:matchMedia("(prefers-reduced-motion: reduce)").matches})');
    assert.ok(screen.width>=1280&&screen.height>=720,JSON.stringify(screen));
-   assert.ok(Math.abs(screen.dpr-variant.zoom)<.01,`Real browser zoom: ${JSON.stringify(screen)}`);
-   assert.equal(screen.scale,1,'Browser zoom is distinct from visual-viewport pinch scaling');
+   assert.equal(screen.dpr,1,'The desktop fixture uses its declared raster scale');
+   assert.equal(screen.scale,1);
    assert.equal(screen.motion,variant.reduced);
    await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
    assert.equal(await browser.evaluate('$gameSystem.isMenuEnabled()'),false,'Native startup command disables menu in ordinary sessions');
@@ -378,16 +378,16 @@ canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appea
    await browser.waitFor('$gameMessage.hasText()&&SceneManager._scene._messageWindow.isOpen()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0');const reading=await state(browser);
    const appearance=()=>browser.evaluate('[30,97].map(id=>{const p=$gameScreen.picture(id),s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id);return {id,opacity:p.opacity(),visible:s.visible,worldVisible:s.worldVisible,alpha:s.alpha,renderable:s.renderable,ready:s.bitmap?.isReady(),bounds:s.getBounds().toJSON?.()||{x:s.x,y:s.y,width:s.width,height:s.height},name:p.name(),x:p.x(),y:p.y()}})');
    const shown=await appearance();
-   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-${variant.zoom}-shown.png`);
+   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-shown.png`);
    await browser.press('Tab',9);await hidden(browser,true);
    const concealed=await appearance();assert.equal(concealed[0].visible,true,'An unbound image is not hidden because of its numeric ID');assert.equal(concealed[1].visible,false);
    assert.equal(concealed[1].opacity,83);
-   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-${variant.zoom}-hidden.png`);
+   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-hidden.png`);
    await click(browser,screen.canvas.x+screen.canvas.width/2,screen.canvas.y+screen.canvas.height/3);await hidden(browser,false);
    assert.deepEqual(await appearance(),shown);assert.deepEqual(await state(browser),reading);
    assert.equal(await browser.evaluate('SceneManager._scene._messageWindow.isOpen()'),true);
    assert.equal(await browser.evaluate('$gameMessage.allText()'),'A interface deve voltar com a mesma aparência.');
-   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-${variant.zoom}-restored.png`);
+   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-restored.png`);
    observations.push({variant,screen,browser:browser.version,shown});
    assert.deepEqual(browser.exceptions,[]);
   });

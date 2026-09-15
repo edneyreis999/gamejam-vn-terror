@@ -76,4 +76,3 @@ Record command, exit status, current revision/dirty files, changed source/config
 ## Execution Notes
 
 Technical PASS: IT-001/006/007/008/072. CE38 owns stage labels/styles/availability; CE39 owns native destinations; CE117 owns roster; CE3 uses consecutive native choices (six entries per editor dialog). Presentation ChoiceFocus retains eligible UI focus without campaign access. Variables 150–185 and switches 21–33 hold named UI projections. Independent variable lifetimes fixed all labels erroneously rendering the last name. The second native choice block has default -1 so it does not override the first block’s focus. Hero and route labels query public configuration. 1280 and 1920 captures inspected; original portrait positions/provisional art preserved. Death fades remain task06. Human UI/editor acceptance remains task16. Evidence: docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/.
-

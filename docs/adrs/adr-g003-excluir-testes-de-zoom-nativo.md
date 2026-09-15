@@ -17,7 +17,7 @@ O usuário considera esse esforço desproporcional ao risco e ao objetivo do pro
 
 Retirar o zoom nativo do navegador da matriz de QA. Não planejar, executar ou repetir variantes de110%,200% ou outros fatores de ampliação como condição de conclusão de tasks, specs ou entregas. Não usar mudança de DPR, escala de imagem ou simulação de viewport como substituto desse teste retirado.
 
-Manter as verificações de área desktop suportada, resoluções1280×720 e1920×1080, movimento normal/reduzido, legibilidade, foco, navegação por teclado/mouse, HIDE, FAST e continuidade. Essas verificações usam o navegador em escala padrão, sem uma matriz adicional de zoom.
+Manter as verificações de área desktop suportada, resoluções1280×720 e 1920×1080, movimento normal/reduzido, legibilidade, foco, navegação por teclado/mouse, HIDE, FAST e continuidade. Essas verificações usam o navegador em escala padrão, sem uma matriz adicional de zoom.
 
 O zoom continua sendo um recurso do navegador. Esta ADR não o desativa, não altera engine/plugins e não declara suporte de zoom verificado. Os requisitos de apresentação do jogo completo no GDD não reintroduzem automaticamente uma campanha de testes de zoom. Uma futura revisão desta decisão deve ser explícita e motivada por uma necessidade de produto ou defeito concreto.
 
@@ -25,7 +25,9 @@ O zoom continua sendo um recurso do navegador. Esta ADR não o desativa, não al
 
 Na task16, o sensor de110% passa de bloqueado para **fora do escopo por decisão aprovada**. A tentativa que expirou continua registrada como falha de preflight histórica; não é convertida em PASS. As capturas e resultados anteriores permanecem evidência dos seus próprios períodos.
 
-O guia deixa de prescrever `DRYLAND_QA_ZOOM=110`. Variantes de zoom ainda presentes em código de teste legado não constituem obrigação vigente: devem ser retiradas da seleção executável pelo seu proprietário antes de uma nova execução dessa matriz. Esta alteração documental não declara essa limpeza de código realizada e não autoriza repetir testes de zoom para validá-la.
+O guia deixa de prescrever `DRYLAND_QA_ZOOM=110`. Na aprovação desta ADR, a limpeza do código legado ainda estava pendente; a decisão não autorizava repetir testes de zoom para validá-la.
+
+Em 2026-09-15, o final verify do PR13 retirou localmente as duas variantes de zoom de IT078 e o seletor `DRYLAND_QA_ZOOM` de `native-surfaces.test.mjs`. IT078 passou com 1280×720/movimento normal e 1920×1080/movimento reduzido, em escala padrão, preservando as verificações de HIDE, aparência e entrada. Nenhuma variante de zoom foi executada. A [verificação do PR](../../planos/tasks/eventbridge-minimal-runtime/verification.md#final-verify-do-pr13--2026-09-15) distingue essa correção local do commit publicado.
 
 Os defeitos de enquadramento do Conselho e das despedidas, assim como os pareceres humanos de autoria, UI, memorial e áudio, conservam seus estados. Excluir um sensor não aprova esses itens.
 

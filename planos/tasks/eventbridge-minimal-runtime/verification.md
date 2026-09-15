@@ -2,14 +2,16 @@
 status: approved
 implemented: true
 static_verified: true
-runtime_verified: false
+runtime_verified: true
 human_accepted: false
 release_ready: false
 ---
 
 # Verification — minimal EventBridge
 
-**Current aggregate scope — 2026-09-14:** the [map-authorship expansion](#map-authorship-expansion--2026-09-14) adds MA-001–011 and MAV-001–014. Tasks19–29/MAV-001–012 have technical PASS for the implemented expansion and canonical join. Task15 is complete; task16 is blocked-verify after directed execution: preexisting Council/farewell framing failures and assigned human judgments remain. Native zoom is excluded by ADR-G003. Epilogue framing has focused passing retests. Aggregate flags below separate implementation from outstanding QA and human acceptance. Earlier V/EXV results below retain only their recorded scope. Architecture approval remains accepted; current task execution is recorded separately below.
+**Estado atual — 2026-09-15:** a [correção dos bustos compartilhados](#correção-dos-bustos-compartilhados--2026-09-15) passa nos sensores técnicos. `implemented`, `static_verified` e `runtime_verified` são verdadeiros; `human_accepted` e `release_ready` continuam falsos. Task16 permanece blocked-verify pelos quatro pareceres humanos. A correção está local, posterior ao head publicado do PR13.
+
+**Escopo agregado:** a expansão de autoria adicionou MA-001–011 e MAV-001–014. Tasks01–15/17–29 e MAV-001–013 têm seus resultados técnicos delimitados abaixo; MAV-014 aguarda os pareceres humanos. Zoom nativo está excluído pela ADR-G003. As seções datadas anteriores preservam falhas, fontes e limites históricos, inclusive o final verify do PR13 antes desta correção.
 
 This file verifies [spec.md](spec.md). The 2026-09-14 FAST-only amendment is recorded in ADR-004 and the dated section below; earlier AUTO observations are historical. The parent baseline completed implementation and technical verification; the ADR-005 section below owns the later experimental changes. Task14 retains its historical passing evidence for 129 canonical IDs; its original failing full command and focused corrections remain distinct. Directed campaigns, native-editor authorship, actual Continue, native 110% zoom, temporal/visual observations and rendered audio cover the planned technical variants. The user subsequently accepted architecture and organization under [ADR-G001](../../../docs/adrs/adr-g001-mapas-de-interacao-dos-herois.md) and [ADR-G002](../../../docs/adrs/adr-g002-remocao-de-atalhos-editoriais.md); the [current adoption record](#architectural-adoption--2026-09-14) scopes that acceptance. Human topic1 is partially accepted, while its remaining scope and the other three assigned judgments still require decisions before accepted-delivery media organization. No historical product acceptance is transferred to unrelated criteria.
 
@@ -276,7 +278,7 @@ Every MAV ID has one primary owner; shared suite names designate contribution, n
 | MAV-010 | MA-007/009 | Task28 | B1–B8 execute their own local text/choices/results under Maps015–022; both route orders and remaining-encounter use preserve assignment/result semantics | encounters, content, native-death-context; eight maps, CE021–028 and per-encounter units | PASS — task28 native integration |
 | MAV-011 | MA-008/011 | Task29 | Structured package/reference audit: every confirmed displaced body is null, every surviving executable reference resolves, no duplicated migrated prose/wrapper, preserved IDs and retained shared consumers explained; current tests/guides target the live paths | native-inventory, native-boot, content; full data/configuration/provider tags/project reserve-call sites, removed-ID ledger and current docs | PASS — task29 composite; directed/human tail remains separate |
 | MAV-012 | MA-003/009/010 | Task29 | Canonical regression and native continuity: no repeated action/read/save across boundaries; correct A/B file history, guard behavior, HIDE/Options/FAST, explicit pictures and unchanged native audio; failures resolved in owning suites | persistence, native-checkpoints, native-controls, native-audio, shared-ui plus affected canonical suites; full migrated candidate and fixture dependencies | PASS — task29 composite; directed/human tail remains separate |
-| MAV-013 | MA-001–011 | Task16 | Directed-browser/visual/audio observation for MAS-01–06: actual player entries, menus, campaign transitions and genuine Continue, with readable captures and preserved cue continuity | Current QA guide/drivers, candidate event lists/assets/provider settings and play-earned archives | BLOCKED — directed functional lots pass; Council/farewell visual defects unresolved; native zoom excluded by ADR-G003 |
+| MAV-013 | MA-001–011 | Task16 | Directed-browser/visual/audio observation for MAS-01–06: actual player entries, menus, campaign transitions and genuine Continue, with readable captures and preserved cue continuity | Current QA guide/drivers, candidate event lists/assets/provider settings and play-earned archives | Technical PASS — directed functional lots retained; Council/farewell corrected and verified on 2026-09-15 below; native zoom excluded by ADR-G003 |
 | MAV-014 | MA-010/011 | Task16 | MAS-07: short native-editor edit-to-play demonstration plus explicit human authoring, framing/navigation/control and applicable audio judgments; keep provisional writing/art status separate | Actual map ownership, native editor selectors, recordings/captures and reviewer/date decisions | BLOCKED — native edit-to-play PASS; four assigned human judgments pending |
 
 The existing 18 V/EXV criteria retain their primary owners and dated evidence. Reuse depends on source/fixture/expected-result equivalence; the new table does not silently reclassify old CE5/352 or Common Event routing tests as proof of map-owned content.
@@ -379,6 +381,8 @@ Task15 completed the current MA-A–I planning delta after task29. The maintaine
 
 ### Final expansion audit — 2026-09-14
 
+Historical expansion-only snapshot, before the merge and formatting commit. The [PR13 inventory](#final-verify-do-pr13--2026-09-15) supersedes the candidate counts and Git selection below; it does not replace their dated execution evidence.
+
 The [current QA closeout](../../../docs/qa/reports/2026-09-12-eventbridge-minimal-runtime.md#fechamento-da-execução-da-expansão--2026-09-14) records each MA lot, genuine parent provenance, failed attempts, source equivalence and bounded resumption. Tasks01–15/17–29 are complete; task16 is **blocked-verify**. MAV-001–012 remain technically PASS; MAV-013/014 are explicitly BLOCKED. The original14 V and4 EXV retain dated proof and existing human limits; they do not override the expanded blockers. Thus all32 criteria retain an owner and scoped verdict.
 
 Canonical134 PASS is a composite, with the original full129/5 exit1 preserved. The final epilogue overlay reran IT047/062/073 after two picture-parameter changes per map029–036. `task-29/composite-after-framing.json` retains original evidence hashes; unaffected behavior is equivalent, not newly executed. The final IT064 expects pictures60 and63 absent at Map038 cancellation, because the menu already erased63; all remaining pictures/campaign facts stay preserved. Earlier diagnoses suggesting63 must remain visible are superseded by the final live-path test.
@@ -409,6 +413,78 @@ PASS para a edição editorial e sua estrutura; sem nova execução de runtime o
 
 ### Autorização de integração na branch mãe — 2026-09-15
 
+Registro histórico da seleção anterior ao commit de formatação `27549e4` e à abertura do PR13. O [inventário atual](#final-verify-do-pr13--2026-09-15) inclui os onze JSONs posteriormente autorizados e o trabalho herdado da branch mãe.
+
 O usuário autorizou criar os commits pendentes e integrar `experiment/gorvak-interaction-map` em `refactor/native-bust-restoration`. A seleção auditada inclui133 arquivos da migração, comentários editoriais, testes/QA e decisões;11 bases JSON com alterações preexistentes apenas de formatação permanecem locais, preservadas e fora do commit. O inventário local desta operação é `.artifacts/merge-candidate.json`.
 
 A autorização é para versionar e integrar o trabalho. A task16 permanece blocked-verify pelos defeitos visuais e julgamentos humanos registrados; não há aceite de release inferido. A cobertura de comentários e as referências nativas foram conferidas novamente; os134 resultados canônicos consolidados mantêm as fontes e os limites históricos, sem nova execução completa. O resultado Git da integração é verificável pelo histórico das duas branches.
+
+## Final verify do PR13 — 2026-09-15
+
+Escopo: [PR13](https://github.com/edneyreis999/gamejam-vn-terror/pull/13), `refactor/native-bust-restoration` → `main`; base `453d3d2468ccdf5a5c9b12f402dd6ddd366636e5`, head `27549e448d34ee29ca189eed4170d60f34c645c5`. O inventário inclui todos os 263 caminhos do PR: 150 adições, 105 modificações e 8 exclusões, inclusive a implementação herdada de `de4f976` e as 11 bases JSON de formatação posteriormente incluídas por solicitação do usuário. O PR permanece draft e sem checks de CI; a ausência de conflito de merge não é aprovação técnica.
+
+| Escopo | Veredito | Evidência e limite |
+| --- | --- | --- |
+| Head publicado | FAIL documental e nos checks de higiene/contrato de QA | Onze documentos falham em `git diff --check`; IT078 e o seletor de superfícies ainda permitem zoom retirado pela ADR-G003; há instrução de ferramenta removida, link e inventário documental desatualizados. Correções descritas abaixo estão apenas locais. |
+| Checkout com correções desta revisão | PASS documental, nos checks estáticos e seis casos selecionados | 95 arquivos JS/MJS passam em sintaxe, 62 JSON são válidos, 1.866 chamadas possuem comentários e 552 referências code117 resolvem. As correções documentais e 282 links dos documentos locais alterados foram conferidos. `git diff --check origin/main` passa após a limpeza. Isso não certifica apresentação ou aceite humano. |
+| Apresentação do Conselho/despedidas | FAIL | O [bug de enquadramento](../../../docs/qa/bugs/BUG-20260911-tavern-portraits-offscreen.md) conserva as capturas de bustos cortados. Não houve recalibração nem nova campanha nesta revisão. |
+| Entrega contratada e candidato para release | BLOCKED | `implemented=true`, `static_verified=true` no checkout corrigido; `runtime_verified=false`, `human_accepted=false`, `release_ready=false`. Task16 permanece blocked-verify. |
+
+Correções locais: retirar somente as duas variantes de zoom de IT078 e o seletor `DRYLAND_QA_ZOOM` do driver `native-surfaces.test.mjs`; preservar dimensões desktop, movimento, HIDE, aparência, entrada e continuidade. Os onze documentos receberam somente limpeza de espaços/fim de arquivo, preservando quebras de linha Markdown. Esta verificação, task16, grafo e ADR-G003 registram a conclusão da limpeza. Nenhum dado de jogo, plugin, engine, asset ou dependência foi alterado nesta revisão.
+
+Execução nova, Node 22.23.2 e Chrome 153.0.8010.36, com perfis/servidores isolados:
+
+```sh
+DRYLAND_QA_PORT=18730 node --test --test-name-pattern='^IT-(001|016|047|059|074|078) ' rpg-maker/tests/campaign.test.mjs
+```
+
+Resultado: seis IDs PASS, saída 0, duração de 123 segundos; IT078 contém duas variantes, 1280×720/normal e 1920×1080/reduzido. Os casos cobrem entrada nativa, continuidade de sacrifício, referências/assets, texto serializado em Continue, preload e HIDE/entrada. As capturas inspecionadas de IT078 mostram a fixture isolada ocultando/restaurando a imagem vinculada e preservando a independente; não são aceite artístico do jogo. Nenhum zoom foi executado. Logs, versões e hashes antes/depois estão no arquivo local `.artifacts/pr13-final-verify/canonical-final/`; não houve mudança dos inputs durante a execução.
+
+As revisões independentes de runtime e testes não encontraram defeito funcional novo nem necessidade de ampliar essa execução. O composto histórico 134 PASS continua composto: a execução completa original foi 129 PASS / 5 FAIL, seguida das correções e retestes registrados. Não se declara uma nova execução completa. O driver `native-editor.test.mjs` é a baseline histórica de CE82/352; o guia já o exclui dos sensores atuais, que usam `gorvak-editor.test.mjs` e `map-editor.test.mjs`.
+
+A revisão documental confirmou três correções locais: `DOC-PR13-001`, fragmento do README corrigido na entrevista de redução de escala; `DOC-PR13-002`, guia de retirada HTML passa a apresentar o validador removido apenas como histórico e aponta para as instruções atuais; `DOC-PR13-003`, inventários de 131/133 arquivos identificados como históricos, com os 263 caminhos do PR discriminados neste fechamento. O último achado não exige excluir os onze JSONs autorizados. As revisões originais permanecem preservadas; a reconciliação de achados e a conferência dos links pertencem a esta revisão.
+
+Reaproveitamento delimitado: dos 46 arquivos nativos comparados com a cópia anterior aos comentários, os comandos executáveis mantêm parâmetros e ordem; sete atributos `collapsed` de Map037 são metadados editoriais adicionais. As inserções 108/408 deslocam índices e não autorizam importar antigas cadeias de intérpretes como prova atual. `System.versionId` mudou de 38868622 no final073 histórico para 98197978: o MZ pode recarregar o mapa ao abrir um save com versão distinta. Os testes novos usam o candidato atual; a equivalência preserva os resultados de campanhas criadas/carregadas dentro de sua própria versão, sem garantir migração de saves antigos. IT059 não testa divergência desse `versionId` nativo. A remoção do seletor de zoom preserva o caminho normal/reduzido do driver de superfícies; seu relatório anterior não foi reexecutado ou reetiquetado. A correção anterior do amostrador de áudio mantém seu resultado BGS03 próprio.
+
+Os quatro pareceres humanos continuam sendo: usabilidade de autoria no editor sem JavaScript, clareza/conforto de leitura e controles, composição do memorial e resposta audível do volume. O primeiro conserva o aceite parcial da organização de Gorvak/remoção dos atalhos. Nenhum deles aprova os defeitos técnicos de enquadramento.
+
+O inventário, hashes, comparações e revisões detalhadas ficam em `.artifacts/pr13-final-verify/`, como evidência local ignorada. A seleção local contabiliza 264 caminhos: os 263 do PR e a correção do guia de retirada HTML, consumidor externo da ferramenta removida; 19 arquivos têm alterações locais. Cada caminho tem responsável, finalidade e disposição. Mantêm-se fontes do jogo, testes, contratos, proveniência de assets e registros históricos úteis; as oito exclusões não deixam import ou leitura obrigatória no runtime/testes/QA atuais. Fontes históricas e saídas locais são distintas das dependências para rodar um clone novo. Capturas brutas e arquivos de campanha continuam locais. Seleção de mídia para devlog e organização pós-aceite permanecem pendentes, sem apagar evidência útil.
+
+Estado Git desta revisão: índice preservado; nenhum commit, push, comentário remoto, alteração do PR ou merge realizado. As correções locais e este registro ainda precisam ser versionados para integrar o PR. Recursos de teste próprios foram fechados; nenhum save pessoal foi alterado.
+
+
+## Correção dos bustos compartilhados — 2026-09-15
+
+**PASS técnico para o enquadramento corrigido.** O usuário pediu listar e corrigir os bustos cortados, autorizando a recalibração antes adiada no Conselho/Andirá e nas despedidas. A [spec](spec.md#correção-dos-bustos-compartilhados--2026-09-15) e o [contrato de arte](eventbridge-minimal-runtime.technical-art.md#correção-de-enquadramento-compartilhado--2026-09-15) registram esse escopo. O [bug](../../../docs/qa/bugs/BUG-20260911-tavern-portraits-offscreen.md#correção-compartilhada--2026-09-15) lista todos os locais e passa a resolvido tecnicamente no checkout.
+
+A mudança de runtime se limita a `CommonEvents.json` (CE068–071, CE073/074/079 e CE282–289) e quatro comandos de Ivaí no evento001 de Map023. No Conselho, 66 grupos Scale/Move passam a escolher valores literais por herói mediante condições nativas sobre as variáveis existentes144–146. Escala uniforme e posição consideram a área opaca de cada PNG; falante, ouvinte e retorno ao estado neutro usam transformações absolutas. Ivaí fica à direita e Andirá permanece na própria arte de reflexo. As oito despedidas recebem os mesmos valores dos mapas individuais037–044. Conteúdo, progressão, elegibilidade, tons, duração/easing, saída, assets, plugins, engine e `System.versionId` ficam preservados. O [script materializado](fix-shared-bust-framing.mjs) documenta a aplicação única; não é dependência do jogo nem deve ser reexecutado sobre os dados já corrigidos.
+
+| Sensor novo | Resultado e alcance |
+| --- | --- |
+| IT012 | PASS: dez cenários de escolha em cada modo, incluindo os oito heróis e os casos originais de três/dois/um candidatos; morte única, aviso, rejeição de Escape, contexto, rosto enquadrado e limpeza. |
+| IT061 | PASS: oito formações por modo, 16 combinações; cobre todos os heróis nos slots canonicamente alcançáveis, foco, Ivaí/Andirá, elegibilidade e limpeza. |
+| IT054 | PASS: Conselho coletivo/misto/solo e transições para os desfechos exclusivos. |
+| IT062 | PASS: Opções e save/Continue preservam imagens e intérpretes em 11 contextos, incluindo Conselho, despedida e oito epílogos, sem replay de campanha. |
+| IT047 | PASS: assets autorados presentes e referências nativas vivas resolvidas. |
+| Inspeção visual | PASS: 18 PNG do Conselho revisados independentemente e 16 PNG das despedidas vistos pelo executor; rostos e parte superior visíveis, sem corte indevido ou oclusão entre personagens. A janela continua sobrepondo a parte inferior das ilustrações conforme o layout solo existente. |
+| Estrutura e higiene | PASS: JSON válido, sintaxe dos quatro MJS alterados, diff sem erro de espaços, 1.866 comentários antes das chamadas Dryland preservados; revisão independente dos 15 CEs e Map023 sem achado. |
+
+Os sensores de enquadramento leem pixels opacos e a transformação real dos sprites carregados, após terminar movimento/tom. Assim, margens transparentes não fazem um personagem fora da tela passar. Os testes IT012/061 falharam nos dados anteriores: H3 na despedida tinha topo opaco em y=-1236 e H1 no Conselho em y=-496,6; ambos passaram com os dados corrigidos. A medição não reconhece rostos nem avalia sobreposição; a inspeção real dos PNG cobre esse limite. Foram usados 1280×720/movimento normal e 1920×1080/movimento reduzido, sem zoom nativo.
+
+Execuções locais em Node22.23.2 / Chrome153.0.8010.36:
+
+```sh
+DRYLAND_QA_PORT=18730 node --test --test-name-pattern='^IT-(012|061) ' rpg-maker/tests/campaign.test.mjs
+DRYLAND_QA_PORT=18730 node --test --test-name-pattern='^IT-(012|047|054|062) ' rpg-maker/tests/campaign.test.mjs
+DRYLAND_QA_PORT=18730 node --test --test-name-pattern='^IT-012 ' rpg-maker/tests/campaign.test.mjs
+```
+
+O primeiro comando foi executado antes (duas falhas) e depois da correção (dois PASS). O segundo passou os quatro casos. A revisão detectou que as três escolhas antigas de IT012 sacrificavam H3; o último comando passou novamente após incluir explicitamente H1/H2 e afirmar a cobertura de todos os heróis (124 segundos). São cinco IDs distintos com PASS nesta correção, não uma nova execução completa dos134 casos. `results.json` conserva os cinco registros e a equivalência: depois de IT047/054/061/062, mudou apenas o corpo da matriz de IT012 em `sacrifice.mjs`; runtime, helper e corpos dos outros casos mantêm os hashes executados.
+
+São testes de integração nativa com fixtures identificadas, não novas campanhas dirigidas. Os percursos funcionais e o áudio do lote anterior são retidos apenas em seu alcance: regras, conteúdo, comandos de progressão/áudio e providers não mudaram; os novos testes executam os caminhos de apresentação e persistência afetados. Não se importaram checkpoints antigos com índices de intérprete anteriores à expansão das listas. A continuidade nova usa saves do candidato atual e não certifica migração de saves antigos.
+
+MAV-013 recebe PASS técnico pela combinação delimitada de lotes dirigidos anteriores, retestes atuais e inspeção visual. MAV-014 e a entrega agregada permanecem **BLOCKED exclusivamente pelos quatro pareceres humanos**: autoria sem JavaScript; clareza/conforto de leitura e controles; composição do memorial; resposta audível do volume. A aprovação parcial de Gorvak/atalhos permanece válida no seu escopo. Não se infere aceite artístico ou humano dos testes.
+
+Evidência local ignorada em `.artifacts/shared-bust-framing/`: dados anteriores, logs vermelhos/verdes, registros canônicos com hashes em `final-pass/`, `results.json`, revisão de fonte e três revisões visuais. As imagens originais ficam sob `docs/qa/evidence/init-rpg-maker-mz/task-09/IT-061/{normal,reduced}/` e `task-05/IT-012/farewell-H*-{normal,reduced}.png`. Esse arquivo local não acompanha um clone; a descrição e os comandos mantidos acima preservam diagnóstico, solução e reprodução. Momento demonstrável: Conselho com três heróis e intervenção de Andirá, seguido de despedida de Seraphina; as capturas sugeridas são `normal/H1-H2-H3-council.andira.png` e `farewell-H4-normal.png`.
+
+Auditoria de candidato: manter os dois dados consumidos pelo jogo, três arquivos de testes, script de aplicação única e os sete documentos de escopo/resultado existentes. Omitir qualquer um perde comportamento, regressão ou justificativa; nenhuma nova autoridade de status foi criada. As 19 alterações locais anteriores foram preservadas; somente task16, grafo e esta verificação receberam a atualização de status desta correção. Logs/capturas excedentes ficam locais, sem exclusão. `candidate.json` distingue os 13 caminhos desta correção dos demais arquivos pendentes. Seleção de mídia versionada e organização pós-aceite continuam pendentes, sem bloquear o diagnóstico técnico. Índice preservado, nenhum commit/push ou atualização do PR; os processos próprios dos testes foram encerrados.
