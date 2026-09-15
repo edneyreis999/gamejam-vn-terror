@@ -1,0 +1,6 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {execFileSync} from 'node:child_process';
+const root='docs/qa/evidence/eventbridge-minimal-runtime/task-12/20260912';fs.mkdirSync(root,{recursive:true});
+for(const name of ['audio','buffers'])fs.copyFileSync(`/tmp/eventbridge-task12-${name}.log`,`${root}/${name}.log`);
+for(const id of ['IT-028','IT-029'])fs.cpSync(`docs/qa/evidence/init-rpg-maker-mz/task-11/${id}`,`${root}/${id}`,{recursive:true});
+const files=['data/CommonEvents.json','js/plugins.js','js/plugins/Dryland_EventBridge.js','js/plugins/Dryland_Presentation.js','js/rmmz_managers.js','audio/me/Musical1.ogg','audio/me/Organ.ogg'];
+fs.writeFileSync(`${root}/candidate.json`,JSON.stringify({revision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),dirty:execFileSync('git',['status','--short'],{encoding:'utf8'}),node:process.version,origin:'http://127.0.0.1:18726/',viewport:{width:1280,height:720},zoom:100,motion:'normal',audibleJudgment:'pending task16; decoded/playing buffers are technical observations only',sha256:Object.fromEntries(files.map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(`rpg-maker/The Dryland Drowned/${file}`)).digest('hex')]))},null,2)+'\n');

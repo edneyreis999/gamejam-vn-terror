@@ -2467,7 +2467,7 @@
     null,
     {
       "id": 1,
-      "name": "Campanha — Apresentação",
+      "name": "Fluxo — A5",
       "note": "",
       "x": 0,
       "y": 0,
@@ -2514,10 +2514,3062 @@
               ]
             },
             {
+              "code": 118,
+              "indent": 0,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 0,
+              "parameters": [
+                21,
+                21,
+                0,
+                4,
+                "\"\""
+              ]
+            },
+            {
               "code": 117,
               "indent": 0,
               "parameters": [
+                304
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "!([\"encounter_intro\",\"encounter_choice\",\"approach_result\",\"retreat_confirmation\",\"sacrifice_choice\",\"death_result\",\"automatic_retreat\"].includes($gameVariables.value(31)) && $gameVariables.value(32) === 'A5')"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
                 40
+              ]
+            },
+            {
+              "code": 115,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'encounter_intro'"
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "description"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'encounter_choice'"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 1,
+              "parameters": [
+                23,
+                23,
+                0,
+                4,
+                "\"\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 1,
+              "parameters": [
+                50,
+                "Dryland_Approach",
+                1,
+                0,
+                640,
+                375,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Identifica a imagem 50 como interface: “Abordagens — A5 — 50”. Ela acompanha o"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "50",
+                  "name": "Abordagens — A5 — 50"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "Padding:eval": "8",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[22]Erguer a grade de alimentação e prender a carcaça em uma baia\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 1,
+              "parameters": [
+                51,
+                "Dryland_Approach",
+                1,
+                0,
+                640,
+                490,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Identifica a imagem 51 como interface: “Abordagens — A5 — 51”. Ela acompanha o"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "51",
+                  "name": "Abordagens — A5 — 51"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "Padding:eval": "8",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[22]Desconectar o fecho do arreio sem tocar nas correntes aquecidas\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 1,
+              "parameters": [
+                52,
+                "Dryland_Approach",
+                1,
+                0,
+                640,
+                605,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Identifica a imagem 52 como interface: “Abordagens — A5 — 52”. Ela acompanha o"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "52",
+                  "name": "Abordagens — A5 — 52"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[52]",
+                  "Padding:eval": "8",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[22]Identificar o ciclo de pressão e abrir a válvula entre duas descargas\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[52]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Prepara o foco do próximo menu (approaches). Restaura a última opção focada"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "desse grupo, se ainda disponível. Permite navegar também pelas setas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "esquerda/direita."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "ChoiceFocus",
+                "ChoiceFocus",
+                {
+                  "key": "approaches",
+                  "horizontal": "true",
+                  "remember": "true"
+                }
+              ]
+            },
+            {
+              "code": 102,
+              "indent": 1,
+              "parameters": [
+                [
+                  "Erguer a grade de alimentação e prender a carcaça em uma baia<Bind Picture: 50><Hide Choice Window>",
+                  "Desconectar o fecho do arreio sem tocar nas correntes aquecidas<Bind Picture: 51><Hide Choice Window>",
+                  "Identificar o ciclo de pressão e abrir a válvula entre duas descargas<Bind Picture: 52><Hide Choice Window>",
+                  "Rever descrição<Bind Picture: 41>",
+                  "Recuar<Bind Picture: 42><Show Switch: 34>"
+                ],
+                -1,
+                0,
+                2,
+                0
+              ]
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                0,
+                "Erguer a grade de alimentação e prender a carcaça em uma baia<Bind Picture: 50><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                23,
+                23,
+                0,
+                4,
+                "\"A5-1\""
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                1,
+                "Desconectar o fecho do arreio sem tocar nas correntes aquecidas<Bind Picture: 51><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                23,
+                23,
+                0,
+                4,
+                "\"A5-2\""
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                2,
+                "Identificar o ciclo de pressão e abrir a válvula entre duas descargas<Bind Picture: 52><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                23,
+                23,
+                0,
+                4,
+                "\"A5-3\""
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                3,
+                "Rever descrição<Bind Picture: 41>"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                23,
+                23,
+                0,
+                4,
+                "\"reread\""
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                4,
+                "Recuar<Bind Picture: 42><Show Switch: 34>"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                23,
+                23,
+                0,
+                4,
+                "\"retreat\""
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 404,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(23) === 'reread'"
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                21,
+                21,
+                0,
+                4,
+                "\"reread\""
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                71
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                72
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                73
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                74
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                75
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                76
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                77
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                78
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                79
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                80
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                81
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                82
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                83
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                84
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                85
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                86
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                87
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                88
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                89
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                10
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                11
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                12
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                13
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                14
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                15
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                16
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                17
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                18
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                19
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                20
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                21
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                30
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                31
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                32
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                33
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                34
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                35
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                36
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                37
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                38
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                39
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                40
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                41
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                42
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                43
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                45
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                46
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                47
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                48
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                49
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                51
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                52
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                53
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                54
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                55
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                56
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                57
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                58
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                59
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 2,
+              "parameters": [
+                "description"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(23) === 'retreat'"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Solicita abrir a confirmação de recuo da expedição. As regras validam a ação;"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "a variável 24 recebe “ok” ou o motivo da recusa."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Action",
+                "Action",
+                {
+                  "action": "REQUEST_RETREAT",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 2,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Solicita aplicar a abordagem escolhida; as regras calculam sua consequência."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "Usa a identidade contida na variável 23. As regras validam a ação; a variável"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "24 recebe “ok” ou o motivo da recusa."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Action",
+                "Action",
+                {
+                  "action": "CHOOSE_APPROACH",
+                  "value": "",
+                  "valueVariable": "23"
+                }
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(24) === 'ok'"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Valida o ponto de salvamento: abordagem escolhida. Se necessário, solicita o"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "autosave ao SaveCore no arquivo atual e espera a gravação; evita repetir o"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "mesmo ponto já salvo."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Checkpoint",
+                "Checkpoint",
+                {
+                  "reason": "approach"
+                }
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 2,
+              "parameters": [
+                46,
+                46,
+                0,
+                4,
+                "\"\""
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'approach_result'"
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(56) === \"result.A5-1.success.01\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "result.A5-1.success.01. Grava em switch 48 (ligado = verdadeiro); preserva os"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "fatos da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "result.A5-1.success.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "A grade é erguida, prendendo a carcaça em uma baia."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(56) === \"result.A5-1.failure.01\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "result.A5-1.failure.01. Grava em switch 48 (ligado = verdadeiro); preserva os"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "fatos da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "result.A5-1.failure.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "A grade emperra acima da baia, e a carcaça retorna arrastando correntes pela saída."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(56) === \"result.A5-2.success.01\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "result.A5-2.success.01. Grava em switch 48 (ligado = verdadeiro); preserva os"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "fatos da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "result.A5-2.success.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "O fecho é desconectado sem tocar nas correntes incandescentes."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(56) === \"result.A5-2.failure.01\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "result.A5-2.failure.01. Grava em switch 48 (ligado = verdadeiro); preserva os"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "fatos da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "result.A5-2.failure.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "O fecho prende a ferramenta nas correntes aquecidas, que selam o corredor com fogo."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(56) === \"result.A5-3.success.01\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "result.A5-3.success.01. Grava em switch 48 (ligado = verdadeiro); preserva os"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "fatos da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "result.A5-3.success.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "A válvula é aberta no intervalo exato entre as descargas."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 1,
+              "parameters": [
+                12,
+                "$gameVariables.value(56) === \"result.A5-3.failure.01\""
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "result.A5-3.failure.01. Grava em switch 48 (ligado = verdadeiro); preserva os"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "fatos da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "result.A5-3.failure.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "A leitura do ciclo atrasa uma descarga; a caldeira entra em sobrepressão e incendeia a passagem."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'retreat_confirmation'"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Prepara o foco do próximo menu (retreat). Usa o foco inicial definido pelas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "escolhas nativas. Permite navegar também pelas setas esquerda/direita."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "ChoiceFocus",
+                "ChoiceFocus",
+                {
+                  "key": "retreat",
+                  "horizontal": "true",
+                  "remember": "false"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 1,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 1,
+              "parameters": [
+                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
+              ]
+            },
+            {
+              "code": 102,
+              "indent": 1,
+              "parameters": [
+                [
+                  "Recuar",
+                  "Continuar expedição"
+                ],
+                -2,
+                0,
+                2,
+                0
+              ]
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                0,
+                "Recuar"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Confirma o recuo e aplica o retorno definido pelas regras da campanha. As"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "regras validam a ação; a variável 24 recebe “ok” ou o motivo da recusa."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Action",
+                "Action",
+                {
+                  "action": "CONFIRM_RETREAT",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 2,
+              "parameters": [
+                12,
+                "$gameVariables.value(24) === 'ok'"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 3,
+              "parameters": [
+                348
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 3,
+              "parameters": [
+                "Valida o ponto de salvamento: consequência concluída. Se necessário, solicita"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 3,
+              "parameters": [
+                "o autosave ao SaveCore no arquivo atual e espera a gravação; evita repetir o"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 3,
+              "parameters": [
+                "mesmo ponto já salvo."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Checkpoint",
+                "Checkpoint",
+                {
+                  "reason": "consequence"
+                }
+              ]
+            },
+            {
+              "code": 122,
+              "indent": 3,
+              "parameters": [
+                46,
+                46,
+                0,
+                4,
+                "\"\""
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 402,
+              "indent": 1,
+              "parameters": [
+                1,
+                "Continuar expedição"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Cancela a solicitação de recuo e recupera a etapa anterior. As regras validam"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "a ação; a variável 24 recebe “ok” ou o motivo da recusa."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Action",
+                "Action",
+                {
+                  "action": "CANCEL_RETREAT",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 403,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 108,
+              "indent": 2,
+              "parameters": [
+                "Cancela a solicitação de recuo e recupera a etapa anterior. As regras validam"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 2,
+              "parameters": [
+                "a ação; a variável 24 recebe “ok” ou o motivo da recusa."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Action",
+                "Action",
+                {
+                  "action": "CANCEL_RETREAT",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 2,
+              "parameters": []
+            },
+            {
+              "code": 404,
+              "indent": 1,
+              "parameters": []
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'sacrifice_choice'"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                42
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'death_result'"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                291
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(31) === 'automatic_retreat'"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                291
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 1,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 1,
+              "parameters": [
+                "scene"
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 118,
+              "indent": 0,
+              "parameters": [
+                "description"
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(21) !== 'reread'"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Guarda a etapa de progresso e a passagem atuais neste evento. As próximas"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "ações usam essa referência para rejeitar escolhas ou conclusões que ficaram"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "desatualizadas."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_EventBridge",
+                "CaptureContext",
+                "CaptureContext",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Consulta se a passagem indicada já foi lida nesta campanha. Identidade:"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "encounter.A5.01. Grava em switch 48 (ligado = verdadeiro); preserva os fatos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "da campanha."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_EventBridge",
+                "Query",
+                "Query",
+                {
+                  "kind": "passageRead",
+                  "id": "encounter.A5.01",
+                  "index": "0",
+                  "variable": "0",
+                  "switch": "48",
+                  "identityVariable": "0"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Consulta o switch 48: ligado permite FAST nesta leitura, desligado bloqueia."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "Reinicia os modos de avanço; FAST depende da escolha do jogador."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingPermission",
+                "ReadingPermission",
+                {
+                  "switch": "48"
+                }
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "efeitos."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Uma cavalariça de pedra abriga uma carcaça equina de ferro ligada a foles e caldeiras. Sem cabeça, ela percorre baias estreitas enquanto expele fogo pelo pescoço e arrasta correntes incandescentes pelo chão."
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 0,
+              "parameters": [
+                "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "ReadingEnd",
+                "ReadingEnd",
+                {}
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(21) !== 'reread'"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 1,
+              "parameters": [
+                "Conclui a passagem capturada, se a campanha ainda estiver no ponto esperado."
+              ]
+            },
+            {
+              "code": 408,
+              "indent": 1,
+              "parameters": [
+                "As regras atualizam o progresso e indicam o próximo salvamento na variável 46."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_EventBridge",
+                "ReadingComplete",
+                "ReadingComplete",
+                {}
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 0,
+              "parameters": [
+                44
+              ]
+            },
+            {
+              "code": 119,
+              "indent": 0,
+              "parameters": [
+                "scene"
               ]
             },
             {
@@ -2547,6 +5599,7 @@
           "walkAnime": false
         }
       ]
-    }
+    },
+    null
   ]
 }

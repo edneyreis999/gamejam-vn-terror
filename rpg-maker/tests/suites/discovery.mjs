@@ -102,7 +102,7 @@ canonicalCase('IT-052', 'both native piece receipts preserve scene, alpha, cente
     assert.equal(await browser.evaluate('$gameScreen.picture(2) == null && $gameScreen.picture(3) == null'), true);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), 'Dryland_Taverna');
     await assertBackgroundCoverage(browser);
-    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file0').then(x=>x.system._dryland.campaign)"), after);
+    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"), after);
     const sounds = await browser.evaluate("discoveryEvents.filter(e=>e.name==='playSe').length");
     await continueSave(browser); await passage(browser, 'irati.02.01');
     assert.deepEqual(await snapshot(browser), after);
@@ -142,7 +142,7 @@ canonicalCase('IT-053', 'native automatic assembly runs in both orders with inde
       assert.ok(done.frame - moves[0].frame >= 120);
     }
     await browser.screenshot(`${evidence('IT-053')}/${order[0]}-first-${reduced ? 'reduced' : 'animated'}.png`);
-    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file0').then(x=>x.system._dryland.campaign)"), after);
+    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"), after);
     await continueSave(browser); await passage(browser, 'map.reveal.01');
     assert.deepEqual(await snapshot(browser), after, 'Cosmetic replay leaves the already awarded pieces and unlock unchanged.');
     await browser.press('Enter', 13); await passage(browser, 'map.reveal.02');

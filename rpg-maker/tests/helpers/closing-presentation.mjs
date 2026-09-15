@@ -34,12 +34,21 @@ export async function observePresentation(browser) {
     window.closingPresentation={events:[],ticks:[],returns:0,captions:{}};
     const call=PluginManager.callCommand;
     PluginManager.callCommand=function(interpreter,plugin,command,args){
-      if(plugin==='Dryland_EventBridge'&&command==='Observe'&&/^(memorial|credits)/.test(args.target)) closingPresentation.events.push({type:args.target,frame:Graphics.frameCount,sequence:$gameSystem._dryland.campaign.sequence});
       if(plugin==='VisuMZ_1_MessageCore'&&command==='PictureTextChange'){
         const ids=JSON.parse(args['PictureIDs:arraynum']);
-        for(const id of ids)if(id>=30&&id<=37&&$gameSystem._dryland.campaign.phase==='memorial')closingPresentation.captions[id]=JSON.parse(args['upperleft:json']);
+        for(const id of ids)if(id>=30&&id<=37&&$gameSystem._dryland.campaign.phase==='memorial')closingPresentation.captions[id]=SceneManager._scene._messageWindow.convertEscapeCharacters(JSON.parse(args['upperleft:json'])).replace(/\\x1bWrapBreak\\[0\\]/gi,' ');
       }
       return call.call(this,interpreter,plugin,command,args);
+    };
+    const common=Game_Interpreter.prototype.command117;
+    Game_Interpreter.prototype.command117=function(params){
+      if(params[0]===59)closingPresentation.events.push({type:'memorial',frame:Graphics.frameCount,sequence:$gameSystem._dryland.campaign.sequence});
+      return common.call(this,params);
+    };
+    const set=Game_Switches.prototype.setValue;
+    Game_Switches.prototype.setValue=function(id,value){
+      if(id===46&&value)closingPresentation.events.push({type:'memorial_ready',frame:Graphics.frameCount,sequence:$gameSystem._dryland.campaign.sequence});
+      return set.call(this,id,value);
     };
     const move=Game_Screen.prototype.movePicture;
     Game_Screen.prototype.movePicture=function(...args){
@@ -49,11 +58,15 @@ export async function observePresentation(browser) {
     const update=Game_Screen.prototype.updatePictures;
     Game_Screen.prototype.updatePictures=function(){
       update.call(this);
-      if($gameTemp._drylandMemorial&&!$gameTemp._drylandMemorial.ready)closingPresentation.ticks.push({
+      if($gameSystem._dryland.campaign.phase==='memorial'&&!$gameSwitches.value(46))closingPresentation.ticks.push({
         frame:Graphics.frameCount,sequence:$gameSystem._dryland.campaign.sequence,
-        overlap:SceneManager._scene._spriteset?._pictureContainer.children.filter(s=>s._drylandGhost&&s._drylandGhost.opacity>0&&s.opacity>0).length
+        overlap:Array.from({length:8},(_,i)=>i).filter(i=>$gameScreen.picture(46+i)?.opacity()>0&&$gameScreen.picture(10+i)?.opacity()>0).length
       });
     };
+    const scrollStart=Window_ScrollText.prototype.startMessage;
+    Window_ScrollText.prototype.startMessage=function(){scrollStart.call(this);closingPresentation.events.push({type:'credits',frame:Graphics.frameCount,height:this._allTextHeight,speed:$gameMessage.scrollSpeed(),noFast:$gameMessage.scrollNoFast()});};
+    const scrollEnd=Window_ScrollText.prototype.terminateMessage;
+    Window_ScrollText.prototype.terminateMessage=function(){closingPresentation.events.push({type:'credits_finish',frame:Graphics.frameCount,y:this._scrollY,height:this._allTextHeight,natural:this._scrollY>=this._allTextHeight});return scrollEnd.call(this);};
     const go=SceneManager.goto;
     SceneManager.goto=function(scene){if(scene===Scene_Title)closingPresentation.returns++;return go.call(this,scene);};
   })()`);
@@ -62,7 +75,7 @@ export async function resetPresentation(browser) {
   await browser.evaluate('closingPresentation={events:[],ticks:[],returns:0,captions:{}};');
 }
 export async function memorialReady(browser) {
-  await browser.waitFor("$gameSystem._dryland.campaign.phase==='memorial'&&$gameMap.mapId()===28&&$gameTemp._drylandMemorial?.ready&&$gameMessage.hasText()&&SceneManager._scene._messageWindow?.pause&&SceneManager._scene._messageWindow._waitCount===0&&!SceneManager._scene.isBusy()");
+  await browser.waitFor("$gameSystem._dryland.campaign.phase==='memorial'&&$gameMap.mapId()===28&&$gameSwitches.value(46)&&$gameMessage.hasText()&&SceneManager._scene._messageWindow?.pause&&SceneManager._scene._messageWindow._waitCount===0&&!SceneManager._scene.isBusy()");
 }
 export async function pictureRows(browser) {
   return browser.evaluate(`Array.from({length:8},(_,i)=>{
@@ -74,7 +87,8 @@ export async function pictureRows(browser) {
   })`);
 }
 export async function creditsReady(browser) {
-  await choices(browser,'credits');
+  await browser.waitFor("SceneManager._scene._scrollTextWindow?._text && SceneManager._scene._scrollTextWindow.visible && SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===41)?.bitmap?.isReady()");
+  assert.deepEqual(await browser.evaluate('[$gameMessage.scrollSpeed(),$gameMessage.scrollNoFast()]'),[2,false]);
   assert.equal(await browser.evaluate('$gameScreen.picture(41)?.name()'),'Dryland_Button');
   assert.equal((await campaignSnapshot(browser)).phase,'campaign_complete');
 }

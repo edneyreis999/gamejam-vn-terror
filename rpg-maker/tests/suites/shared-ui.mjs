@@ -1,18 +1,19 @@
+import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { activate, choices, pause, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
-import { assertHiddenPictures, click, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
+import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-11/${id}`;
 const fixtures=phaseFixtures();
 canonicalCase('IT-025','native HIDE and Tab preserve the same message and consume both supported restoring inputs',{timeout:90000},async t=>{
- const browser=await entry(t);await browser.press('Enter',13);await pause(browser);
+ const browser=await entry(t);await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  const before=await state(browser),text=await browser.evaluate('$gameMessage.allText()');
  await browser.press('Tab',9);await hidden(browser,true);await frames(browser,15);assert.deepEqual(await state(browser),before);
  await browser.screenshot(`${evidence('IT-025')}/hidden-prologue.png`);
  await browser.press('Tab',9);await hidden(browser,false);assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
- await click(browser,717,693);await hidden(browser,true);
+ await clickConsole(browser,'hide');await hidden(browser,true);
  await click(browser,900,150);await hidden(browser,false);assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
  await browser.screenshot(`${evidence('IT-025')}/restored-prologue.png`);
  await browser.press('Enter',13);await pause(browser);assert.equal((await state(browser)).sequence,before.sequence+1);

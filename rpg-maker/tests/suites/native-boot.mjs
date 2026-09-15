@@ -7,14 +7,14 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { openChrome, origin, project, startServer } from '../helpers/native-chrome.mjs';
+import { openChrome, origin, project, selectFile, startServer } from '../helpers/native-chrome.mjs';
 
 const evidenceRoot = path.resolve('docs/qa/evidence/init-rpg-maker-mz/task-01');
 const requiredPlugins = [
   'VisuMZ_0_CoreEngine', 'VisuMZ_1_MessageCore', 'VisuMZ_1_OptionsCore', 'VisuMZ_1_SaveCore',
   'VisuMZ_2_ExtMessageFunc', 'VisuMZ_2_PictureChoices', 'VisuMZ_2_VNPictureBusts',
   'VisuMZ_3_ChoiceCmnEvts', 'VisuMZ_4_EventTitleScene', 'VisuMZ_4_MessageVisibility',
-  'Dryland_CampaignRules', 'Dryland_EventBridge'
+  'Dryland_CampaignRules', 'Dryland_EventBridge', 'Dryland_Presentation'
 ];
 
 async function record(id, result) {
@@ -49,7 +49,7 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
   assert.ok(!entry.bgm?.name);
   assert.match(entry.text, /16 anos.*morte permanente/s);
   assert.deepEqual(entry.choices, ['Jogar', 'Configurações']);
-  assert.deepEqual(entry.console, ['options', 'hide']);
+  assert.deepEqual(entry.console, ['fastFwd', 'options', 'hide']);
 
   const maps = await browser.evaluate(`Promise.all($dataMapInfos.filter(Boolean).map(async info => {
     const response = await fetch('data/Map' + String(info.id).padStart(3, '0') + '.json');
@@ -57,12 +57,18 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
     const map = await response.json();
     return {id:info.id,parent:info.parentId,name:info.name,stable:map.note,width:map.width,height:map.height,cells:map.data.length,events:map.events.filter(Boolean).length};
   }))`);
-  assert.equal(maps.length, 36);
-  assert.equal(new Set(maps.map(map => map.stable)).size, 36);
+  assert.equal(maps.length, 44);
+  assert.equal(new Set(maps.map(map => map.stable)).size, 44);
   for (const map of maps) assert.equal(map.cells, map.width * map.height * 6);
   const lookup = id => maps.find(map => map.stable === `<drylandMap:${id}>`);
   assert.equal(lookup('prologue').id, 2);
   assert.equal(lookup('tavern').id, 3);
+  assert.equal(lookup('gorvak-interaction').id, 37);
+  assert.equal(lookup('gorvak-interaction').parent, lookup('tavern').id);
+  for (const [name, id] of [['elowen',38],['griznik',39],['seraphina',40],['bimbren',41],['liora',42],['vaelith',43],['draska',44]]) {
+    assert.equal(lookup(`${name}-interaction`).id,id);
+    assert.equal(lookup(`${name}-interaction`).parent,lookup('tavern').id);
+  }
   assert.equal(lookup('story').id, 4);
   for (const [family, parent] of [['A', 'physical_traps'], ['B', 'supernatural_traps']]) {
     for (let number = 1; number <= 8; number++) assert.equal(lookup(`encounter.${family}${number}`).parent, lookup(parent).id);
@@ -72,7 +78,7 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
   assert.equal(lookup('council').parent, 0);
   await browser.screenshot(path.join(evidenceRoot, 'IT-001/entry.png'));
 
-  await browser.press('Enter', 13);
+  await browser.press('Enter', 13);await selectFile(browser,1);
   await browser.waitFor("$gameMap.mapId() === 2 && SceneManager._scene._messageWindow?.pause");
   const passages = [];
   for (const marker of ['A chuva acompanha Ivaí', 'Minha mãe deixou registros', 'Irati escrevera']) {
@@ -81,7 +87,7 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
     if (passages.length === 1) await browser.screenshot(path.join(evidenceRoot, 'IT-001/prologue.png'));
     await browser.press('Enter', 13);
   }
-  await browser.waitFor("$gameMap.mapId() === 3 && !SceneManager._scene.isBusy() && $gameMessage._drylandChoices?.kind === 'formation' && SceneManager._scene._choiceListWindow?.isOpenAndActive()");
+  await browser.waitFor("$gameMap.mapId() === 3 && !SceneManager._scene.isBusy() && $gameMessage._drylandChoiceFocus?.key === 'formation' && SceneManager._scene._choiceListWindow?.isOpenAndActive()");
   const tavern = await browser.evaluate('({mapId:$gameMap.mapId(),canMove:$gamePlayer.canMove(),menu:SceneManager._scene.isMenuEnabled(),text:$gameMessage.allText(),picture:$gameScreen.picture(1).name()})');
   assert.equal(tavern.canMove, false);
   assert.equal(tavern.menu, false);

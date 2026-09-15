@@ -33,15 +33,41 @@
       "name": "fixture.2x2.enter",
       "list": [
         {
-          "code": 108,
+          "code": 111,
           "indent": 0,
           "parameters": [
-            "@dryland-presentation-helper fixture.2x2.enter"
+            12,
+            "$gameVariables.value(47)"
           ]
         },
         {
           "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "60",
+              "PictureName:str": "Dryland_H1",
+              "Origin:str": "Bust",
+              "Position:num": "2",
+              "StartOffsetX:eval": "-32",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 411,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Basic_EnterBust",
@@ -58,6 +84,11 @@
               "Duration:eval": "20"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 357,
@@ -105,8 +136,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 111,
           "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "61",
+              "PictureName:str": "Dryland_H2",
+              "Origin:str": "Bust",
+              "Position:num": "2",
+              "StartOffsetX:eval": "-32",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Basic_EnterBust",
@@ -123,6 +187,11 @@
               "Duration:eval": "20"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 357,
@@ -171,8 +240,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 111,
           "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "63",
+              "PictureName:str": "Dryland_ivai",
+              "Origin:str": "Bust",
+              "Position:num": "8",
+              "StartOffsetX:eval": "-32",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Basic_EnterBust",
@@ -189,6 +291,11 @@
               "Duration:eval": "20"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 357,
@@ -237,8 +344,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 111,
           "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_EnterBust",
+            "Basic_EnterBust",
+            {
+              "PictureID:eval": "64",
+              "PictureName:str": "Dryland_perola",
+              "Origin:str": "Bust",
+              "Position:num": "8",
+              "StartOffsetX:eval": "0",
+              "StartOffsetY:eval": "0",
+              "EasingType:str": "OutSine",
+              "HorzMirror:str": "None",
+              "Duration:eval": "0"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Basic_EnterBust",
@@ -255,6 +395,11 @@
               "Duration:eval": "20"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 357,
@@ -314,15 +459,36 @@
       "name": "fixture.2x2.focus.60",
       "list": [
         {
-          "code": 108,
+          "code": 111,
           "indent": 0,
           "parameters": [
-            "@dryland-presentation-helper fixture.2x2.focus.60"
+            12,
+            "$gameVariables.value(47)"
           ]
         },
         {
           "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 411,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -336,8 +502,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "210",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -353,8 +554,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -367,8 +600,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -382,8 +648,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "454",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -399,8 +700,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -413,8 +746,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -428,8 +794,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "826",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -445,8 +846,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -459,8 +892,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -474,8 +940,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "1116",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -491,8 +992,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -503,6 +1036,11 @@
               "customTone:eval": "[-24,-24,-24,0]"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 0,
@@ -516,15 +1054,36 @@
       "name": "fixture.2x2.focus.61",
       "list": [
         {
-          "code": 108,
+          "code": 111,
           "indent": 0,
           "parameters": [
-            "@dryland-presentation-helper fixture.2x2.focus.61"
+            12,
+            "$gameVariables.value(47)"
           ]
         },
         {
           "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -538,8 +1097,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "194",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -555,8 +1149,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -569,8 +1195,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -584,8 +1243,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "470",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -601,8 +1295,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -615,8 +1341,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -630,8 +1389,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "826",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -647,8 +1441,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -661,8 +1487,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -676,8 +1535,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "1116",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -693,8 +1587,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -705,6 +1631,11 @@
               "customTone:eval": "[-24,-24,-24,0]"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 0,
@@ -718,15 +1649,36 @@
       "name": "fixture.2x2.focus.63",
       "list": [
         {
-          "code": 108,
+          "code": 111,
           "indent": 0,
           "parameters": [
-            "@dryland-presentation-helper fixture.2x2.focus.63"
+            12,
+            "$gameVariables.value(47)"
           ]
         },
         {
           "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -740,8 +1692,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "194",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -757,8 +1744,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -771,8 +1790,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -786,8 +1838,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "454",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -803,8 +1890,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -817,8 +1936,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -832,8 +1984,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "810",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -849,8 +2036,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -863,8 +2082,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -878,8 +2130,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "1116",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -895,8 +2182,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -907,6 +2226,11 @@
               "customTone:eval": "[-24,-24,-24,0]"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 0,
@@ -920,15 +2244,36 @@
       "name": "fixture.2x2.focus.64",
       "list": [
         {
-          "code": 108,
+          "code": 111,
           "indent": 0,
           "parameters": [
-            "@dryland-presentation-helper fixture.2x2.focus.64"
+            12,
+            "$gameVariables.value(47)"
           ]
         },
         {
           "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -942,8 +2287,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "194",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -959,8 +2339,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"60\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -973,8 +2385,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -988,8 +2433,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "454",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -1005,8 +2485,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"61\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -1019,8 +2531,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "54",
+              "TargetScaleY:str": "54"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -1034,8 +2579,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "826",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -1051,8 +2631,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"63\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[-24,-24,-24,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -1065,8 +2677,41 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Scale_ScaleTo",
+            "Scale_ScaleTo",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetScaleX:str": "60",
+              "TargetScaleY:str": "60"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Scale_ScaleTo",
@@ -1080,8 +2725,43 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Move_MoveToCoordinates",
+            "Move_MoveToCoordinates",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "TargetX:str": "1100",
+              "TargetY:str": "650",
+              "EasingType:str": "InOutSine",
+              "FlipDirection:str": "None"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Move_MoveToCoordinates",
@@ -1097,8 +2777,40 @@
           ]
         },
         {
-          "code": 357,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Tone_CustomToneBust",
+            "Tone_CustomToneBust",
+            {
+              "PictureID:arrayeval": "[\"64\"]",
+              "Duration:eval": "0",
+              "customTone:eval": "[0,0,0,0]"
+            }
+          ]
+        },
+        {
+          "code": 411,
+          "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Tone_CustomToneBust",
@@ -1109,6 +2821,11 @@
               "customTone:eval": "[0,0,0,0]"
             }
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 0,
@@ -1122,15 +2839,67 @@
       "name": "fixture.2x2.exit",
       "list": [
         {
-          "code": 108,
+          "code": 111,
           "indent": 0,
           "parameters": [
-            "@dryland-presentation-helper fixture.2x2.exit"
+            12,
+            "$gameVariables.value(47)"
           ]
         },
         {
           "code": 357,
+          "indent": 1,
+          "parameters": [
+            "VisuMZ_2_VNPictureBusts",
+            "Basic_ExitBusts",
+            "Basic_ExitBusts",
+            {
+              "PictureID:arrayeval": "[\"60\",\"61\",\"63\",\"64\"]",
+              "EndOffsetX:eval": "0",
+              "EndOffsetY:eval": "0",
+              "EasingType:str": "InSine",
+              "FlipDirection:str": "None",
+              "Duration:eval": "0",
+              "AutoErase:eval": "true"
+            }
+          ]
+        },
+        {
+          "code": 235,
+          "indent": 1,
+          "parameters": [
+            60
+          ]
+        },
+        {
+          "code": 235,
+          "indent": 1,
+          "parameters": [
+            61
+          ]
+        },
+        {
+          "code": 235,
+          "indent": 1,
+          "parameters": [
+            63
+          ]
+        },
+        {
+          "code": 235,
+          "indent": 1,
+          "parameters": [
+            64
+          ]
+        },
+        {
+          "code": 411,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 357,
+          "indent": 1,
           "parameters": [
             "VisuMZ_2_VNPictureBusts",
             "Basic_ExitBusts",
@@ -1147,11 +2916,29 @@
           ]
         },
         {
-          "code": 230,
+          "code": 412,
           "indent": 0,
+          "parameters": []
+        },
+        {
+          "code": 111,
+          "indent": 0,
+          "parameters": [
+            12,
+            "!$gameVariables.value(47)"
+          ]
+        },
+        {
+          "code": 230,
+          "indent": 1,
           "parameters": [
             20
           ]
+        },
+        {
+          "code": 412,
+          "indent": 0,
+          "parameters": []
         },
         {
           "code": 0,
@@ -1166,12 +2953,11 @@
       "code": 357,
       "indent": 0,
       "parameters": [
-        "Dryland_EventBridge",
-        "Conversation",
-        "Conversation",
+        "Dryland_Presentation",
+        "MotionPreference",
+        "MotionPreference",
         {
-          "kind": "council",
-          "operation": "begin"
+          "variable": "47"
         }
       ]
     },
@@ -1305,19 +3091,6 @@
       "indent": 0,
       "parameters": [
         6
-      ]
-    },
-    {
-      "code": 357,
-      "indent": 0,
-      "parameters": [
-        "Dryland_EventBridge",
-        "Conversation",
-        "Conversation",
-        {
-          "kind": "council",
-          "operation": "end"
-        }
       ]
     },
     {

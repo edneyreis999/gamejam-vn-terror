@@ -1,5 +1,7 @@
 # QA incremental — bustos nativos de diálogo
 
+> Procedimentos históricos: este guia descreve a baseline anterior. Para a migração EventBridge mínima, use o [guia MZ atual](../../../rpg-maker/README.md) e a [verificação incremental](../../../planos/tasks/eventbridge-minimal-runtime/verification.md). Receitas com preset de seed, manifesto ou APIs retiradas não são executáveis no candidato atual. Os relatórios associados conservam seu escopo e resultados originais.
+
 Este guia executa a [spec aprovada](../../../planos/tasks/vn-picture-busts-dialogues/spec.md), com critérios em [verification.md](../../../planos/tasks/vn-picture-busts-dialogues/verification.md). Complementa o [ciclo nativo](native-mz-cycle.md); não reaproveita aceite histórico como prova da nova composição. A tarefa09 registra resultados; este documento define a cobertura. O [charter](../charters/CH-vn-picture-busts-dialogues.md) usa as personas existentes.
 
 ## Ambiente e fronteiras

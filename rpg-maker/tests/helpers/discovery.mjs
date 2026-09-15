@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { selectFile } from './native-chrome.mjs';
 import { readFile } from 'node:fs/promises';
 import { formation, rules } from './formation.mjs';
 import { accepted, complete, finishReading } from './campaign.mjs';
@@ -43,7 +44,7 @@ export async function continueSave(browser) {
   await browser.evaluate('$gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Title);');
   await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   assert.equal(await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()]'), 'Continuar');
-  await browser.press('Enter', 13);
+  await browser.press('Enter', 13);await selectFile(browser);
 }
 export async function observeDiscovery(browser) {
   await browser.evaluate(`(() => {

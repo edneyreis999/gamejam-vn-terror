@@ -3,16 +3,25 @@ import { openChrome, startServer } from './native-chrome.mjs';
 import { rules } from './formation.mjs';
 import { frames } from './closing-presentation.mjs';
 export const state = browser => browser.evaluate('$gameSystem._dryland.campaign');
-export const qa = browser => browser.evaluate('expeditionQA.snapshot()');
-export const saveBytes = browser => browser.evaluate("StorageManager.loadZip('file0')");
+export const saveBytes = browser => browser.evaluate("StorageManager.loadZip('file'+$gameSystem.savefileId())");
 export async function entry(t) {
  await startServer(t);const browser=await openChrome(t);
- await browser.waitFor("window.expeditionQA&&window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  return browser;
 }
 export async function click(browser,x,y){
  await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:1});await frames(browser,2);
  await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',x,y,button:'left',buttons:0,clickCount:1});await frames(browser,3);
+}
+export async function clickConsole(browser, type) {
+ const point = await browser.evaluate(`(() => {
+  const button = SceneManager._scene._messageWindow._buttonConsoleButtons.find(b => b._type === ${JSON.stringify(type.toLowerCase())});
+  if (!button?.worldVisible) throw new Error('Console button is not visible: ' + ${JSON.stringify(type)});
+  const bounds = button.getBounds(), canvas = Graphics.app.view.getBoundingClientRect();
+  return { x: canvas.x + (bounds.x + bounds.width / 2) * canvas.width / Graphics.width,
+   y: canvas.y + (bounds.y + bounds.height / 2) * canvas.height / Graphics.height };
+ })()`);
+ await click(browser, point.x, point.y);
 }
 export async function hidden(browser,value){
  await browser.waitFor(`Boolean($gameTemp._drylandInterfaceHidden)===${value}&&SceneManager._scene._messageWindow.scale.x===${value?0:1}`);

@@ -6,9 +6,9 @@ A["Abrir o pacote local depois de Jogar"] --> B
 B["Percorrer os quatro contextos de ambiência"] --> C
 C["Ouvir os dois temas finais e os efeitos selecionados"] --> D
 D["Inspecionar telas, textos longos, três finais e oito sepulturas"] --> E
-E["Revisar texto, sensibilidade cultural, arte final e atribuições em pessoa"] --> F
+E["Revisar autoria sem JS, controles/leitura, novo memorial e áudio do incremento"] --> F
 F["Registrar aprovações, ajustes conhecidos ou bloqueios por item"] --> G
-G["Conferir a revisão no pacote exportado"] --> H
+G["Conferir a revisão no pacote local"] --> H
 H["Encerrar o servidor e a sessão"]
 E -->|ajuste necessário| D
 E -->|sem revisor humano| F
@@ -22,7 +22,7 @@ H --> Z["Cada item possui parecer real com revisor, data e evidência; pendênci
 journey:
   id: J-mz-creative-review
   name: "Revisar a apresentação audiovisual e registrar o aceite humano"
-  value_statement: "Julgar arte, texto, atribuição e áudio com evidência explícita de quem revisou."
+  value_statement: "Julgar a apresentação e o áudio alterados com evidência explícita de quem revisou."
   personas: ["Rui, revisor de conteúdo"]
   entry_points:
     - url: http://127.0.0.1:18726/
@@ -41,13 +41,13 @@ journey:
       verb: "Inspecionar telas, textos longos, três finais e oito sepulturas"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 5
-      verb: "Revisar texto, sensibilidade cultural, arte final e atribuições em pessoa"
+      verb: "Revisar autoria sem JS, controles/leitura, novo memorial e áudio do incremento"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 6
       verb: "Registrar aprovações, ajustes conhecidos ou bloqueios por item"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 7
-      verb: "Conferir a revisão no pacote exportado"
+      verb: "Conferir a revisão no pacote local"
       expected_observable: "A superfície nativa responde à ação explícita e mantém a decisão anterior até novo aceite."
     - step: 8
       verb: "Encerrar o servidor e a sessão"
@@ -68,3 +68,14 @@ journey:
 Preparação, receitas, sensores e teardown: [plano MZ](../guides/native-mz-cycle.md). O histórico HTML permanece em suas próprias jornadas.
 
 Para o incremento de bustos, seguir os [lotes nativos de diálogo](../guides/vn-picture-busts-dialogues.md). A jornada existente continua dona do fluxo; exportação, audição e aceite humano históricos não acrescentam gates ao incremento autorizado.
+
+## Incremento eventbridge-minimal-runtime — 2026-09-12
+
+Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runtime.md) e [relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Seleção nativa de arquivos, chamadas diretas de CE, observação somente leitura e controles do provider substituem receitas de seed/API/revisão/S. Cenários deste incremento começam untested. Os relatórios anteriores preservam o histórico e não transferem PASS.
+
+
+## Expansão de autoria por mapa — 2026-09-14
+
+Abrir capturas jogadas de cada herói, Conselho, finais e memorial → conferir enquadramento/legibilidade → ouvir trilhas de Options/cues → registrar pessoa/data/decisão. Rejeição volta ao dono da superfície; ausência de julgamento permanece pendente. MA-A/B/F/G/I.
+
+[Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.

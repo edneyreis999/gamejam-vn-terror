@@ -1,5 +1,5 @@
 {
-  "scope": "Tasks01\u201311: complete authored native runtime; E2E and human acceptance remain Task13",
+  "scope": "Canonical native integration and pure mechanical tests; eventbridge-minimal-runtime. Directed/editor/visual/audio/human evidence is recorded separately.",
   "tasks": {
     "10": [
       "IT-022",
@@ -15,45 +15,29 @@
       "UT-046",
       "UT-061",
       "UT-062",
-      "UT-064",
       "UT-065",
       "IT-025",
       "IT-026",
       "IT-027",
       "IT-003",
-      "IT-042",
-      "IT-043",
       "IT-031",
       "IT-040",
-      "IT-046",
-      "IT-030",
       "IT-038",
       "IT-050",
       "IT-028",
       "IT-029",
       "IT-047",
       "IT-014",
-      "IT-057"
+      "IT-057",
+      "IT-079"
     ],
     "01": [
       "IT-001",
       "IT-037"
     ],
     "02": [
-      "UT-047",
-      "UT-048",
-      "UT-049",
-      "UT-050",
-      "UT-051",
-      "UT-052",
-      "UT-053",
-      "UT-054",
       "UT-057",
-      "UT-060",
       "IT-004",
-      "IT-032",
-      "IT-033",
-      "IT-034",
       "IT-035",
       "IT-036"
     ],
@@ -86,8 +70,6 @@
       "UT-018",
       "UT-019",
       "UT-020",
-      "UT-037",
-      "UT-038",
       "UT-055",
       "IT-005",
       "IT-049",
@@ -149,12 +131,9 @@
       "IT-054"
     ],
     "vn-picture-busts-dialogues": [
-      "UT-067",
-      "UT-068",
       "IT-060",
       "IT-061",
       "IT-062",
-      "IT-063",
       "UT-069",
       "IT-064",
       "IT-065",
@@ -163,14 +142,27 @@
       "IT-067",
       "IT-068"
     ],
-    "vn-slot-authorship": [
-      "UT-071",
-      "UT-072"
-    ],
+    "vn-slot-authorship": [],
     "vn-focus-parameters": [
       "UT-073",
-      "UT-074",
       "IT-069"
+    ],
+    "eventbridge-minimal-runtime": [
+      "UT-075",
+      "IT-070",
+      "IT-071",
+      "IT-072",
+      "IT-073",
+      "IT-074",
+      "IT-075",
+      "IT-076",
+      "IT-077",
+      "IT-078",
+      "IT-080",
+      "IT-081",
+      "IT-082",
+      "IT-083",
+      "IT-084"
     ]
   }
 }

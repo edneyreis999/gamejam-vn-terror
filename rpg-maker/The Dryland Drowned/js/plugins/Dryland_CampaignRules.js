@@ -41,13 +41,48 @@
     ['knowledge', 'will', 'strength'], ['occultism', 'will', 'dexterity'],
     ['perception', 'knowledge', 'survival'], ['occultism', 'will', 'athletics']
   ];
+  function createCatalog(configuration) {
+    const scenes = {
+      prologue: ['prologue.01', 'prologue.02', 'irati.01'],
+      'irati.02': ['irati.02.01'], 'map.reveal': ['map.reveal.01', 'map.reveal.02'],
+      automatic_retreat: ['automatic_retreat.01'],
+      council: ['council.01', 'council.02', 'council.03', 'irati.03', 'council.challenge', 'council.solo', 'council.confession', 'council.andira'],
+      memorial: ['memorial.intro']
+    };
+    for (const id of routeIds) scenes[`threshold.${id}`] = [`threshold.${id}.01`];
+    for (const id of ['physical', 'supernatural']) {
+      scenes[`lover.${id}.first`] = [`lover.${id}.01`, `lover.${id}.warning`, `reward.${id}`];
+      scenes[`lover.${id}.second`] = [`lover.${id}.01`, `lover.${id}.warning`, `lover.${id}.second`, `reward.${id}`];
+    }
+    for (const id of ['reunite', 'destroy', 'bad']) scenes[`ending.${id}`] = [`ending.${id}.01`, `ending.${id}.02`];
+    for (const id of heroIds) for (const kind of ['opinion', 'epilogue']) scenes[`${kind}.${id}`] = [`${kind}.${id}`];
+    for (const id of encounterIds) {
+      scenes[`encounter.${id}`] = [`encounter.${id}.01`];
+      scenes[`death.${id}`] = [`death.${id}.context`];
+      for (let i = 1; i <= 3; i++) for (const result of ['success', 'failure']) {
+        const key = `result.${id}-${i}.${result}`;
+        scenes[key] = [`${key}.01`];
+      }
+    }
+    const passageIds = [...Object.values(scenes).flat(), ...heroIds.flatMap(id => [`farewell.${id}`, `memorial.${id}`])];
+    return freeze({
+      version: 1,
+      scenes: Object.fromEntries(Object.entries(scenes).map(([id, passageIds]) => [id, {id, passageIds}])),
+      passages: Object.fromEntries(passageIds.map(id => [id, {id}])),
+      heroes: Object.fromEntries(heroIds.map((id, i) => [id, {id, name: configuration.heroes[id], competencyIds: canonicalPairs[i]}])),
+      encounters: Object.fromEntries(encounterIds.map((id, i) => [id, {id, name: configuration.encounters[id], pool: id[0],
+        approaches: approachPairs[i].map((competencyId, a) => ({id: `${id}-${a + 1}`, competencyId}))}])),
+      destinations: Object.fromEntries(routeIds.map(id => [id, {id, name: configuration.routes[id], landmarkTotal: id === 'final' ? 6 : 5}]))
+    });
+  }
+
   const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
   const uint32 = value => Number.isInteger(value) && value >= 0 && value <= 4294967295;
   function readyObject() {
     return {
       version: 1, phase: 'ready', seed: null, rngState: null,
       selectedDungeonId: null, dungeonId: null, position: null,
-      draftPartyIds: [], partyIds: [], deadHeroIds: [], presentedDeathIds: [], deathLocations: {},
+      draftPartyIds: [], partyIds: [], deadHeroIds: [], deathLocations: {},
       assignments: { physical: Array(5).fill(null), supernatural: Array(5).fill(null), final: Array(6).fill(null) },
       progress: { physical: 0, supernatural: 0, final: 0 }, completedDungeonIds: [],
       pendingOutcome: null, reading: null, seenPassageIds: [], mapPieceIds: [],
@@ -75,7 +110,7 @@
     for (const [index, id] of encounterIds.entries()) {
       const encounter = input?.encounters?.[id];
       const approaches = encounter?.approaches;
-      if (encounter?.id !== id || encounter.pool !== id[0] || !Array.isArray(approaches) || approaches.length !== 3 ||
+      if (encounter?.id !== id || typeof encounter.name !== 'string' || !encounter.name.trim() || encounter.pool !== id[0] || !Array.isArray(approaches) || approaches.length !== 3 ||
           approaches.some((approach, i) => approach.id !== `${id}-${i + 1}` || !competencies.has(approach.competencyId)) ||
           !same(approaches.map(approach => approach.competencyId), approachPairs[index])) problems.push({ code: 'invalid_encounter_catalog', id });
       else {
@@ -95,13 +130,13 @@
     const HERO_IDS = heroIds, DUNGEON_IDS = routeIds;
     const Data = { heroes: catalog.heroes, encounters: catalog.encounters, encounterOrder: encounterIds, destinations: catalog.destinations };
     const Narrative = { scenes: catalog.scenes, passages: catalog.passages };
-    const ACTION_FIELDS = {"BEGIN":["seed"],"COMPLETE_PASSAGE":["passageId"],"SKIP_SEEN_TEXT":[],"SELECT_DESTINATION":["dungeonId"],"TOGGLE_HERO":["heroId"],"DEPART":[],"ENTER_DUNGEON":[],"CHOOSE_APPROACH":["approachId"],"SELECT_VICTIM":["heroId"],"REQUEST_RETREAT":[],"CANCEL_RETREAT":[],"CONFIRM_RETREAT":[],"CHOOSE_ENDING":["ending"],"NEW_CAMPAIGN":[]};
+    const ACTION_FIELDS = {"BEGIN":["seed"],"COMPLETE_PASSAGE":["passageId"],"SELECT_DESTINATION":["dungeonId"],"TOGGLE_HERO":["heroId"],"DEPART":[],"ENTER_DUNGEON":[],"CHOOSE_APPROACH":["approachId"],"SELECT_VICTIM":["heroId"],"REQUEST_RETREAT":[],"CANCEL_RETREAT":[],"CONFIRM_RETREAT":[],"CHOOSE_ENDING":["ending"],"NEW_CAMPAIGN":[]};
     const UINT32_RANGE = 4294967296, MULBERRY_INCREMENT = 0x6D2B79F5;
     const deepFreeze = freeze;
     const sameArray = (a, b) => Array.isArray(a) && Array.isArray(b) && same(a, b);
     const hasPassage = id => hasOwn(catalog.passages, id);
     const historyFields = {
-      BEGIN: ['seed'], COMPLETE_PASSAGE: ['passageId'], SKIP_SEEN_TEXT: ['passageId'],
+      BEGIN: ['seed'], COMPLETE_PASSAGE: ['passageId'],
       SELECT_DESTINATION: ['dungeonId'], TOGGLE_HERO: ['heroId'], DEPART: ['dungeonId'],
       ENTER_DUNGEON: ['encounterId'], CHOOSE_APPROACH: ['approachId', 'success'],
       SELECT_VICTIM: ['heroId'], REQUEST_RETREAT: [], CANCEL_RETREAT: [],
@@ -217,7 +252,7 @@
       var issues = [];
       if (!state || typeof state !== 'object' || Object.keys(state).sort().join(',') !== stateKeys ||
           !Number.isSafeInteger(state.sequence) || typeof state.medallionComplete !== 'boolean' ||
-          ['history', 'deadHeroIds', 'presentedDeathIds', 'draftPartyIds', 'partyIds', 'climaxPartyIds', 'seenPassageIds', 'completedDungeonIds', 'mapPieceIds', 'invariantViolations'].some(key => !Array.isArray(state[key])) ||
+          ['history', 'deadHeroIds', 'draftPartyIds', 'partyIds', 'climaxPartyIds', 'seenPassageIds', 'completedDungeonIds', 'mapPieceIds', 'invariantViolations'].some(key => !Array.isArray(state[key])) ||
           ['assignments', 'progress'].some(key => !state[key] || Array.isArray(state[key]) || Object.keys(state[key]).sort().join(',') !== [...routeIds].sort().join(','))) {
         return resultValidation([v('invalid_state', 'A campanha contém um estado inválido.')]);
       }
@@ -248,14 +283,12 @@
       var dead = Array.isArray(state.deadHeroIds) ? state.deadHeroIds : [];
       var party = Array.isArray(state.partyIds) ? state.partyIds : [];
       var draft = Array.isArray(state.draftPartyIds) ? state.draftPartyIds : [];
-      var presented = Array.isArray(state.presentedDeathIds) ? state.presentedDeathIds : [];
       var seenPassages = Array.isArray(state.seenPassageIds) ? state.seenPassageIds : [];
       var completed = Array.isArray(state.completedDungeonIds) ? state.completedDungeonIds : [];
       var mapPieces = Array.isArray(state.mapPieceIds) ? state.mapPieceIds : [];
       var climaxParty = Array.isArray(state.climaxPartyIds) ? state.climaxPartyIds : [];
       if (!Array.isArray(state.deadHeroIds)) issues.push(v('invalid_dead_roster', 'A lista de heróis mortos é inválida.', { heroId: null }));
       if (!Array.isArray(state.partyIds) || !Array.isArray(state.draftPartyIds)) issues.push(v('invalid_party', 'A formação atual é inválida.', { heroId: null }));
-      if (!Array.isArray(state.presentedDeathIds)) issues.push(v('invalid_dead_roster', 'A lista de heróis mortos é inválida.', { heroId: null }));
       if (!Array.isArray(state.seenPassageIds)) issues.push(v('invalid_reading_cursor', 'A posição de leitura é inválida.', { sceneId: null, index: 0, total: 0 }));
       if (!Array.isArray(state.completedDungeonIds)) issues.push(v('invalid_progress', 'O progresso de rota é inválido.', { dungeon: null, progress: null }));
       if (!Array.isArray(state.mapPieceIds)) issues.push(v('invalid_reward_state', 'As descobertas não correspondem ao progresso da campanha.', { reward: null }));
@@ -271,9 +304,6 @@
         if (HERO_IDS.indexOf(id) < 0 || dead.indexOf(id) >= 0 || draft.indexOf(id) !== index) issues.push(v('invalid_party', 'A formação atual é inválida.', { heroId: id }));
       });
       if (draft.length > 3 || party.length > 3) issues.push(v('invalid_party', 'A formação atual é inválida.', { heroId: null }));
-      presented.forEach(function (id, index, list) {
-        if (dead.indexOf(id) < 0 || list.indexOf(id) !== index) issues.push(v('invalid_dead_roster', 'A lista de heróis mortos é inválida.', { heroId: id }));
-      });
       if (state.phase !== 'ready' && state.phase !== 'invalid' && (!normalizeSeed(state.seed).ok || !normalizeSeed(state.rngState).ok)) {
         issues.push(v('invalid_rng_state', 'O estado do gerador aleatório é inválido.', { seed: state.seed, rngState: state.rngState }));
       }
@@ -443,16 +473,14 @@
 
     function formationTransition(state) {
       var living = livingHeroIds(state), automatic = living.length <= 3;
-      var newDeaths = state.deadHeroIds.filter(function (id) { return state.presentedDeathIds.indexOf(id) < 0; });
       var available = DUNGEON_IDS.filter(function (id) { return routeStatus(state, id) === 'available'; });
       return {
         changes: {
           phase: 'formation', dungeonId: null, position: null, partyIds: [], pendingOutcome: null, reading: null, retreatReturn: null,
           draftPartyIds: automatic ? living : state.draftPartyIds.filter(function (id) { return living.indexOf(id) >= 0; }),
-          selectedDungeonId: available.length === 1 ? available[0] : (available.indexOf(state.selectedDungeonId) >= 0 ? state.selectedDungeonId : null),
-          presentedDeathIds: state.presentedDeathIds.concat(newDeaths)
+          selectedDungeonId: available.length === 1 ? available[0] : (available.indexOf(state.selectedDungeonId) >= 0 ? state.selectedDungeonId : null)
         },
-        effects: newDeaths.length ? [{ type: 'tavern_absence', heroIds: newDeaths }] : []
+        effects: []
       };
     }
 
@@ -565,19 +593,11 @@
         if (!seed.ok) return rejected(state, seed.error.code, seed.error.message, {});
         return accepted(state, { phase: 'intro', seed: seed.seed, rngState: seed.seed, reading: reading('prologue') }, { type: 'BEGIN', seed: seed.seed });
       }
-      if (action.type === 'COMPLETE_PASSAGE' || action.type === 'SKIP_SEEN_TEXT') {
+      if (action.type === 'COMPLETE_PASSAGE') {
         if (!state.reading) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', { phase: state.phase, action: action.type });
         var passageId = state.reading.passageIds[state.reading.index];
-        if (action.type === 'COMPLETE_PASSAGE' && action.passageId !== passageId) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', {});
-        if (action.type === 'SKIP_SEEN_TEXT' && state.seenPassageIds.indexOf(passageId) < 0) return rejected(state, 'text_not_seen', 'Este trecho ainda não foi lido nesta campanha.', { passageId: passageId });
+        if (action.passageId !== passageId) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', {});
         var step = completeCurrentPassage(state);
-        if (action.type === 'SKIP_SEEN_TEXT') {
-          var guard = Object.keys(Narrative.passages).length + 1;
-          while (step.changes.reading && step.changes.seenPassageIds.indexOf(step.changes.reading.passageIds[step.changes.reading.index]) >= 0 && guard > 0) {
-            step = completeCurrentPassage(step.changes);
-            guard -= 1;
-          }
-        }
         return accepted(state, step.changes, { type: action.type, passageId: passageId }, step.effects);
       }
       if (action.type === 'SELECT_DESTINATION') {
@@ -674,56 +694,15 @@
       const form = deriveFormation(state);
       return state.phase === 'formation' && form.livingHeroIds.length > 0 && form.selectedHeroIds.length === form.required && routeIds.includes(state.selectedDungeonId) && routeStatus(state, state.selectedDungeonId) === 'available';
     }
-    // Observation preserves domain field meanings and never draws or advances.
-    function snapshot(state) {
-      const source = state && typeof state === 'object' ? state : {};
-      const list = key => Array.isArray(source[key]) ? source[key] : [];
-      const dead = list('deadHeroIds'), party = list('partyIds'), seen = list('seenPassageIds');
-      const encounter = currentEncounter(source);
-      const current = encounter ? {
-        id: encounter.id,
-        viability: deriveViability(party, encounter).count,
-        approaches: encounter.approaches.map(approach => ({
-          id: approach.id, competency: approach.competencyId,
-          viable: party.some(id => catalog.heroes[id]?.competencyIds.includes(approach.competencyId))
-        }))
-      } : null;
-      const cursor = source.reading;
-      const passageId = Array.isArray(cursor?.passageIds) ? cursor.passageIds[cursor.index] : null;
-      const destinations = source.progress && Array.isArray(source.completedDungeonIds) && Array.isArray(source.mapPieceIds)
-        ? deriveDestinations(source) : {};
-      return clone({
-        version: 4, phase: source.phase ?? null, sequence: source.sequence ?? null,
-        seed: source.seed ?? null, rngState: source.rngState ?? null,
-        dungeon: source.dungeonId ?? null, selectedDestination: source.selectedDungeonId ?? null,
-        position: source.position ?? null, draftParty: list('draftPartyIds'), party,
-        aliveHeroes: heroIds.filter(id => !dead.includes(id)), deadHeroes: dead,
-        heroNames: Object.fromEntries(heroIds.map(id => [id, catalog.heroes[id].name])),
-        mapFragments: { found: list('mapPieceIds').length, total: 2 }, destinations,
-        competencies: Object.fromEntries(heroIds.map(id => [id, catalog.heroes[id].competencyIds])),
-        assignments: source.assignments ?? null, currentEncounter: current,
-        reading: passageId ? { sceneId: cursor.sceneId, passageId, index: cursor.index,
-          total: cursor.passageIds.length, canSkip: seen.includes(passageId) } : null,
-        seenPassages: seen,
-        rewards: { routeOrder: list('completedDungeonIds').filter(id => id !== 'final'),
-          mapPieces: list('mapPieceIds'), medallionComplete: source.medallionComplete ?? null },
-        ending: source.endingId ?? null, climaxParty: list('climaxPartyIds'),
-        epilogueHeroes: source.endingId && source.endingId !== 'bad' ? list('climaxPartyIds') : [],
-        presentedDeaths: list('presentedDeathIds'), actionHistory: list('history'),
-        invariantViolations: list('invariantViolations'), lastRejectedAction: null
-      });
-    }
-
     return freeze({
       createReadyState, dispatch, validateState, deriveFormation, deriveDestinations, deriveViability, deriveFinalCandidates, mulberry32Step,
       playerView: state => clone({ phase: state.phase, sequence: state.sequence, reading: state.reading,
         heroes: heroIds.map(id => ({ id, name: catalog.heroes[id].name, alive: !state.deadHeroIds.includes(id), selected: deriveFormation(state).selectedHeroIds.includes(id) })),
         formation: deriveFormation(state), destinations: deriveDestinations(state), canDepart: canDepart(state), canRetreat: deriveRetreatEligibility(state),
-        currentEncounter: currentEncounter(state) ? { id: currentEncounter(state).id, name: currentEncounter(state).name, approachIds: currentEncounter(state).approaches.map(approach => approach.id) } : null }),
-      snapshot
+        currentEncounter: currentEncounter(state) ? { id: currentEncounter(state).id, name: currentEncounter(state).name, approachIds: currentEncounter(state).approaches.map(approach => approach.id) } : null })
     });
   }
-  const api = freeze({ createRules, CatalogError });
+  const api = freeze({ createCatalog, createRules, CatalogError });
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.DrylandCampaignRules = api;
 })(globalThis);

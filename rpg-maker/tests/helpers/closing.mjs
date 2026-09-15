@@ -2,10 +2,29 @@ import assert from 'node:assert/strict';
 import { formation, rules } from './formation.mjs';
 import { accepted, complete, finishReading, replayUntil } from './campaign.mjs';
 import { successfulRoute } from './discovery.mjs';
+import { readFile } from 'node:fs/promises';
+const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 export function councilBoundary(kind = 'collective') {
   if (kind === 'solo') return replayUntil('final-sixth-solo-council', state => state.phase === 'death_result' && state.dungeonId === 'final' && state.position === 6 && state.partyIds.length === 0);
   if (kind === 'bad') return replayUntil('final-sixth-total-loss', state => state.phase === 'death_result' && state.deadHeroIds.length === 8);
   let state = formation(0);
+  if (kind === 'three') {
+    // Isolated fixture earned through legal domain actions, not player QA.
+    for (const heroId of ['H4','H7','H8']) state = accepted(state, 'TOGGLE_HERO', { heroId });
+    state = accepted(state, 'SELECT_DESTINATION', { dungeonId: 'physical' });
+    state = finishReading(accepted(state, 'DEPART'));
+    while (state.phase !== 'formation') {
+      if (state.phase === 'encounter_choice') {
+        const id = state.assignments.physical[state.position - 1];
+        const index = gdd.encounterPairs[id].findIndex(competency => !state.partyIds.some(hero => gdd.heroPairs[hero].includes(competency)));
+        state = accepted(state, 'CHOOSE_APPROACH', { approachId: `${id}-${Math.max(index, 0) + 1}` });
+        assert.equal(state.pendingOutcome.success, index < 0);
+      } else if (state.phase === 'sacrifice_choice') state = accepted(state, 'SELECT_VICTIM', { heroId: state.partyIds[0] });
+      else if (state.reading) state = complete(state);
+      else state = accepted(state, 'ENTER_DUNGEON');
+    }
+    assert.equal(state.deadHeroIds.length, 3);
+  }
   if (kind === 'mixed') {
     for (const heroId of ['H1','H2','H4']) state = accepted(state, 'TOGGLE_HERO', { heroId });
     state = accepted(state, 'SELECT_DESTINATION', { dungeonId: 'physical' });
@@ -25,12 +44,14 @@ export function councilState(kind = 'collective') {
   return state;
 }
 export function finalChoice(kind = 'collective') { assert.notEqual(kind, 'bad'); return finishReading(councilState(kind)); }
-export async function installClosing(browser, state) {
+export async function installClosing(browser, state, entryMap) {
   assert.equal(rules.validateState(state).ok, true);
   const encounter = state.pendingOutcome?.encounterId;
-  const map = state.phase === 'ending' ? { reunite: 25, destroy: 26, bad: 27 }[state.endingId]
+  const map = state.phase === 'epilogue' ? 28 + Number(state.reading.sceneId.slice(-1))
+    : ['memorial','campaign_complete'].includes(state.phase) ? 28
+    : state.phase === 'ending' ? { reunite: 25, destroy: 26, bad: 27 }[state.endingId]
     : encounter ? (encounter[0] === 'A' ? 6 : 14) + Number(encounter.slice(1)) : 23;
-  await browser.evaluate(`$gameSystem._dryland.campaign=${JSON.stringify(state)};$gameTemp._drylandPersistence={status:'idle',lastSuccessfulSequence:null,lastError:null};$gameMap._interpreter.clear();$gameMessage.clear();$gamePlayer.reserveTransfer(${map},10,7,2,0);SceneManager.goto(Scene_Map);`);
+  await browser.evaluate(`$gameSystem._dryland.campaign=${JSON.stringify(state)};$gameTemp._drylandPersistence={status:'idle',lastSuccessfulSequence:null,lastError:null};$gameMap._interpreter.clear();$gameMessage.clear();$gamePlayer.reserveTransfer(${entryMap ?? map},10,7,2,0);SceneManager.goto(Scene_Map);`);
   await browser.waitFor(`$gameMap.mapId()===${map} && SceneManager._scene._messageWindow && !SceneManager._scene.isBusy() && ($gameMessage.hasText() || $gameMessage.isChoice())`);
 }
 export async function closingReady(browser) {
@@ -46,7 +67,7 @@ export async function observeClosing(browser) {
     const setup=Game_Map.prototype.setup;
     Game_Map.prototype.setup=function(id){closingLog.maps.push(id);return setup.call(this,id);};
     const save=DataManager.saveGame;
-    DataManager.saveGame=function(id){const s=$gameSystem._dryland.campaign;closingLog.saves.push({id,phase:s.phase,sequence:s.sequence,endingId:s.endingId});return save.call(this,id);};
+    DataManager.saveGame=function(...args){const s=$gameSystem._dryland.campaign;closingLog.saves.push({id:args[0],phase:s.phase,sequence:s.sequence,endingId:s.endingId});return save.apply(this,args);};
   })()`);
 }
 export async function finishNativeClosing(browser) {

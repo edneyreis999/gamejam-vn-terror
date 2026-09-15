@@ -2,8 +2,9 @@
 // OUT: staged sacrifice, semantic saving and later discovery/ending surfaces.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { installPhase } from '../helpers/native-shared.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, catalog, choices, formation, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, formation, heroes, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-04/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -116,19 +117,6 @@ canonicalCase('UT-020', 'retreat is unavailable after committing either outcome'
     rejected(accepted(encounterFixture('A1', party), 'CHOOSE_APPROACH', { approachId: 'A1-1' }), 'REQUEST_RETREAT', {}, 'retreat_unavailable');
   }
 });
-canonicalCase('UT-037', 'seen-text skipping stops before the first unseen passage or a choice', () => {
-  const state = structuredClone(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }));
-  state.seenPassageIds = ['prologue.01', 'prologue.02'];
-  const skipped = accepted(state, 'SKIP_SEEN_TEXT');
-  assert.equal(skipped.reading.index, 2);
-  assert.equal(skipped.reading.passageIds[2], 'irati.01');
-  assert.deepEqual(skipped.seenPassageIds, state.seenPassageIds);
-  state.seenPassageIds.push('irati.01');
-  assert.equal(accepted(state, 'SKIP_SEEN_TEXT').phase, 'formation');
-});
-canonicalCase('UT-038', 'unseen text cannot be skipped', () => {
-  rejected(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }), 'SKIP_SEEN_TEXT', {}, 'text_not_seen');
-});
 canonicalCase('UT-055', 'only the current passage can record completion', () => {
   const intro = accepted(rules.createReadyState(), 'BEGIN', { seed: 0 });
   const completed = readAll(intro);
@@ -145,7 +133,7 @@ async function nativeEncounter(t) {
     await activate(browser, 'hero', 1);
     await pause(browser);
     await browser.press('Enter', 13);
-    await choices(browser, 'formation');
+    await returnToTavern(browser);
   }
   await activate(browser, 'formation', 8);
   await activate(browser, 'destinations', 0);
@@ -172,7 +160,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
   assert.deepEqual(after.assignments, before.assignments);
   await browser.call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
   await choices(browser, 'approaches');
-  assert.equal(await browser.evaluate('$gameMessage._drylandChoices.entries.filter(entry => /^A[1-8]-[1-3]$/.test(entry.value)).length'), 3);
+  assert.equal(await browser.evaluate('$gameMessage.choices().filter(label => /<Bind Picture: 5[0-2]>/.test(label)).length'), 3);
   await browser.screenshot(`${evidence('IT-005')}/approaches.png`);
   // Restore the same native pre-description input to exercise the mouse boundary.
   await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(before)}; $gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Map);`);
@@ -186,7 +174,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
   await choices(browser, 'approaches');
   assert.equal((await snapshot(browser)).phase, 'encounter_choice');
   assert.equal((await snapshot(browser)).pendingOutcome, null);
-  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [0, 0], 'Only departure and reveal save; transfer and closing input add no write.');
+  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Only departure and reveal save; transfer and closing input add no write.');
 });
 canonicalCase('IT-049', 'repeated native rereading is observational and restores the same choices and focus', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);
@@ -206,12 +194,12 @@ canonicalCase('IT-049', 'repeated native rereading is observational and restores
     assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 3);
     assert.deepEqual(await snapshot(browser), before);
   }
-  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [0, 0], 'Repeated rereading adds no write after departure/reveal.');
+  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Repeated rereading adds no write after departure/reveal.');
   await browser.screenshot(`${evidence('IT-049')}/restored-choices.png`);
   await activate(browser, 'approaches', 0);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'approach_result' && $gameMessage.hasText()");
   assert.equal(await browser.evaluate('$gameScreen.picture(41) == null && $gameScreen.picture(42) == null'), true);
-  assert.equal(await browser.evaluate("$gameMessage._drylandChoices?.entries.some(entry => entry.value === 'reread') || false"), false);
+  assert.equal(await browser.evaluate("$gameMessage.choices().some(label => /Reler|Reread/.test(label))"), false);
 });
 canonicalCase('IT-051', 'success uses native text on the same encounter artwork with no hero or success illustration', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);
@@ -233,3 +221,77 @@ canonicalCase('IT-051', 'success uses native text on the same encounter artwork 
   assert.equal(after.assignments.physical.filter(Boolean).length, 2);
   assert.deepEqual(rules.validateState(after), { ok: true, violations: [] });
 });
+
+async function verifyNativeEncounterMaps(t, ids, testId) {
+  const browser = await tavern(t);
+  await browser.evaluate(`window.encounterWrites=[];const save=DataManager.saveGame;DataManager.saveGame=function(id){const row={sequence:$gameSystem._dryland.campaign.sequence,done:false};encounterWrites.push(row);return save.call(this,id).then(result=>{row.done=true;return result;});};`);
+  for (const id of ids) {
+    const mapId = (id[0] === 'A' ? 6 : 14) + Number(id.slice(1));
+    const map = JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(mapId).padStart(3,'0')}.json`,import.meta.url),'utf8'));
+    const list = map.events[1].pages[0].list;
+    function passageText(passageId) {
+      const start = list.findIndex(command => command.code === 357 && command.parameters[1] === 'Query' && command.parameters[3].id === passageId);
+      assert.ok(start >= 0, passageId);
+      return list.slice(start).find(command => command.code === 401).parameters[0];
+    }
+    async function assertLocalPause(expected, text) {
+      await pause(browser);
+      assert.deepEqual(await snapshot(browser),expected,id+' native campaign');
+      assert.equal(await browser.evaluate('$gameMessage.allText()'),text,id+' authored text');
+      assert.deepEqual(await browser.evaluate('({map:$gameMap.mapId(),root:$gameMap._interpreter._mapId,event:$gameMap._interpreter._eventId,child:Boolean($gameMap._interpreter._childInterpreter)})'),{map:mapId,root:mapId,event:1,child:false});
+      assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),`Dryland_Encounter_${id}`);
+    }
+    for (const [index, competency] of gdd.encounterPairs[id].entries()) for (const success of [true,false]) {
+      const providers = heroes.filter(hero => gdd.heroPairs[hero].includes(competency));
+      const nonProviders = heroes.filter(hero => !providers.includes(hero));
+      const party = success ? [providers[0],...nonProviders.slice(0,2)] : nonProviders.slice(0,3);
+      const seed = structuredClone(depart(formation(),id[0]==='A'?'physical':'supernatural',party));
+      seed.assignments[seed.dungeonId][0] = id;
+      const intro = accepted(seed,'ENTER_DUNGEON'), choice = complete(intro);
+      if(index===0&&success){
+        await installPhase(browser,intro);
+        await assertLocalPause(intro,passageText(`encounter.${id}.01`));
+        await browser.press('Enter',13);
+      } else await installPhase(browser,choice);
+      await choices(browser,'approaches');
+      assert.deepEqual(await snapshot(browser),choice);
+      assert.equal(await browser.evaluate('$gameMessage.choices().filter(label=>/<Bind Picture: 5[0-2]>/.test(label)).length'),3);
+      if(id==='A1'&&index===0&&success){
+        const labels=await browser.evaluate('$gameMessage.choices()');
+        await activate(browser,'approaches',3);
+        await assertLocalPause(choice,passageText('encounter.A1.01'));
+        await browser.press('Enter',13);await choices(browser,'approaches');
+        assert.deepEqual(await browser.evaluate('$gameMessage.choices()'),labels);
+        assert.deepEqual(await snapshot(browser),choice,'Reread is observational');
+        await activate(browser,'approaches',4);await choices(browser,'retreat');
+        const confirmation=accepted(choice,'REQUEST_RETREAT');
+        assert.deepEqual(await snapshot(browser),confirmation);
+        await activate(browser,'retreat',1);await choices(browser,'approaches');
+        const cancelled=accepted(confirmation,'CANCEL_RETREAT');
+        assert.deepEqual(await snapshot(browser),cancelled);
+        await activate(browser,'approaches',4);await activate(browser,'retreat',0);
+        await choices(browser,'formation');
+        assert.deepEqual(await snapshot(browser),accepted(accepted(cancelled,'REQUEST_RETREAT'),'CONFIRM_RETREAT'));
+        await installPhase(browser,choice);await choices(browser,'approaches');
+      }
+      const writesBefore=await browser.evaluate('encounterWrites.length');
+      const result=accepted(choice,'CHOOSE_APPROACH',{approachId:`${id}-${index+1}`});
+      assert.equal(result.pendingOutcome.success,success,'Independent GDD providers select the expected outcome');
+      await activate(browser,'approaches',index);
+      await assertLocalPause(result,passageText(`result.${id}-${index+1}.${success?'success':'failure'}.01`));
+      await browser.waitFor(`encounterWrites.length===${writesBefore+1}&&encounterWrites.at(-1).done`);
+      assert.deepEqual(await browser.evaluate('encounterWrites.slice('+writesBefore+')'),[{sequence:result.sequence,done:true}]);
+      if(index===0)await browser.screenshot(`${evidence(testId)}/${id}-${success?'success':'failure'}.png`);
+      await browser.press('Enter',13);
+      const consequence=complete(result),after=success?accepted(consequence,'ENTER_DUNGEON'):consequence;
+      await browser.waitFor(`$gameSystem._dryland.campaign.sequence===${after.sequence}&&$gameMessage.hasText()`);
+      assert.deepEqual(await snapshot(browser),after,'One result completion reaches the next reveal or sacrifice');
+    }
+  }
+  assert.deepEqual(browser.exceptions,[]);
+}
+canonicalCase('IT-082','A1 native map owns description reread retreat and every approach outcome',{timeout:180000},t=>verifyNativeEncounterMaps(t,['A1'],'IT-082'));
+
+canonicalCase('IT-083','A2 through A8 own every native approach outcome and next-scene handoff',{timeout:360000},t=>verifyNativeEncounterMaps(t,['A2','A3','A4','A5','A6','A7','A8'],'IT-083'));
+
+canonicalCase('IT-084','B1 through B8 own every native approach outcome and next-scene handoff',{timeout:360000},t=>verifyNativeEncounterMaps(t,['B1','B2','B3','B4','B5','B6','B7','B8'],'IT-084'));

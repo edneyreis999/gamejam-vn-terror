@@ -27,3 +27,9 @@ Existência e alfa dos arquivos não constituem aprovação visual. As capturas 
 ## Memorial e finais
 
 As artes v2 dos finais e o fundo do memorial foram importados sem alteração de pixels; veja closing-imports.json. A moldura com centro transparente foi preparada pelo gerador de imagens, com a tentativa rejeitada e a aceita preservadas. Prompts e inspeção estão em memorial-prompts.json e memorial-inspection.json. Os recortes em memorial-source-crops.json são retângulos de apresentação nativa, não arquivos de imagem editados. Os PNGs dos heróis permanecem intactos. A composição nativa ainda está sendo verificada; a aprovação artística final segue pendente.
+
+## Memorial — incremento eventbridge-minimal-runtime
+
+Os oito retratos `Dryland_Memorial_H1.png` a `Dryland_Memorial_H8.png` são derivados preparados a partir das artes atuais dos heróis, que permanecem intactas. Cada PNG RGB de 1122 × 1402 tem fundo carvão opaco intencional e é composto sob a moldura transparente por comandos nativos. Posições, escala, entrada e crossfade pertencem ao CE59; o runtime não recorta imagens nem cria sprites auxiliares. O painel usa `Dryland_DestinationCard` com escala nativa, sem crop.
+
+[Proveniência do incremento](eventbridge-memorial.json) registra prompts, fontes, arquivos gerados, dimensões, hashes e tentativas rejeitadas. `memorial-source-crops.json` permanece apenas como histórico da implementação anterior. Os derivados foram inspecionados individualmente; o julgamento de enquadramento de Lucas continua atribuído à task 16 e não altera os aceites históricos das artes fonte.

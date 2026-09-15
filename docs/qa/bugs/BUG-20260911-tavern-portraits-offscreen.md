@@ -42,3 +42,19 @@ O controle dirigido na main esperou bitmap carregado, opacidade 255 e movimento 
 ## Verification
 
 Reproduzido no candidato `mz-20260911-pr3-taverna-02` e no controle da main `mz-20260911-focus-parameters-02`. Nenhuma correção foi aplicada ou aprovada neste registro. O recorte de preservação do merge passa; a apresentação dos retratos permanece reprovada.
+
+
+## Re-found (2026-09-14) — epilogues after map authorship expansion
+
+The same oversized solo-portrait setup remains in Maps029–036, copied from CE306/308/310/312/314/316/318/320. Directed campaign `campaign-physical-before-framing` reached Elowen through a fresh game, physical route first, native Council/Reunir and epilogues; `passage-52.png` shows her text with no portrait. Integration IT058 also captured Draska's oversized legs. These local records are under `docs/qa/evidence/eventbridge-minimal-runtime/map-authorship-expansion/`; they retain the failing source hashes.
+
+The task16 correction changes only the existing Scale_ScaleTo and Move_MoveToCoordinates parameters in each epilogue, using the same hero's solo layout from Maps037–044. Images, command positions, text, reading IDs, actions, save policy and vendor/plugin code remain unchanged. The materialized `fix-epilogue-framing.mjs` in the active spec checks preconditions and preserves native JSON structure. Fix is in the working tree, without a commit. IT073 now exercises all8 epilogues in both motion modes, requires loaded visible sprites within screen width and captures the framing; IT062 checks all8 native serialized presentations. Directed and visual retests remain in progress in task16. Earlier tavern-only findings and preservation decisions above remain historical.
+
+
+## Current scoped verification — 2026-09-14
+
+The eight tavern interaction maps now pass the48-image normal/reduced review. The epilogue correction passes IT047/062/073 and the independent16-image review: H1–H8 have visible faces and torsos, including H2 in both route orders. Source inspection confirms only Scale/Move at native command indices18/19 changed in each epilogue. This is technical framing verification; composition approval remains separate.
+
+The bug stays **open** for the shared Council presentation. A genuine current campaign reaches Map023 and `campaign-physical-01/story-76.png` shows oversized/cropped Gorvak, Griznik and Ivaí. The inherited generic scales/positions are still authored in the Council/shared helpers, unlike the calibrated solo scenes. The active technical-art contract explicitly preserves Council/Andirá and shared styles; the user was asked whether to extend scope. Pending that decision, this is a confirmed follow-up, not a visual PASS or an implemented correction. Raw current evidence and reviewer reports are indexed by task16 of eventbridge-minimal-runtime.
+
+The farewell shared presentation is also affected: `continuity-farewell-01/bust-1-farewell-H4.png` visibly shows only Seraphina's enlarged feet while her final line is displayed. This is a confirmed framing failure, distinct from the passing HIDE/Options/Continue behavior. The shared farewell bodies were retained rather than migrated in this increment; include their calibration in the same presentation follow-up, with all eight assets checked.

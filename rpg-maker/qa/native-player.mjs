@@ -1,16 +1,26 @@
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
 import { setTimeout as delay } from 'node:timers/promises';
 
 export class DirectedNativePlayer {
   constructor(context, { onPassage, onAdvance } = {}) { this.context = context; this.serial = 0; this.bustSerial = 0; this.onPassage = onPassage; this.onAdvance = onAdvance; }
+
+  async assertMapOwner(mapId) {
+    const actual = await this.context.read('native-map-owner', () => ({
+      map: $gameMap.mapId(), event: $gameMap._interpreter._eventId,
+      listMatches: JSON.stringify($gameMap._interpreter._list) === JSON.stringify($dataMap.events[1].pages[0].list),
+      child: Boolean($gameMap._interpreter._childInterpreter)
+    }));
+    assert.deepEqual(actual, {map: mapId, event: 1, listMatches: true, child: false});
+  }
 
   async surface() {
     return this.context.read('native-visible-surface', () => {
       const scene = window.SceneManager?._scene;
       const message = scene?._messageWindow, choices = scene?._choiceListWindow;
       return { text: window.$gameMessage?.allText() || '',
-        labels: (window.$gameMessage?.choices() || []).map(label => label.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()),
+        labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
+        kind: window.$gameMessage?._drylandChoiceFocus?.key || 'title',
+        scrolling: !!scene?._scrollTextWindow?._text,
         active: !!choices?.isOpenAndActive(), index: choices?.index(),
         paused: !!message?.pause, hidden: !!message && message.scale.x === 0,
         map: window.$gameMap?.mapId(), error: window.Graphics?._errorPrinter?.textContent || '' };
@@ -18,27 +28,66 @@ export class DirectedNativePlayer {
   }
 
   async ready() {
-    await this.context.wait(() => {
-      const scene = window.SceneManager?._scene;
-      const message = scene?._messageWindow, choices = scene?._choiceListWindow;
-      return window.Graphics?._errorPrinter?.textContent || (message && message.scale.x !== 0 &&
-        !scene.isBusy() && ((message.pause && message._waitCount === 0) || choices?.isOpenAndActive()));
+    const surface = await this.context.read('native-visible-surface', async () => {
+      const read = () => {
+        const scene = window.SceneManager?._scene;
+        const message = scene?._messageWindow, choices = scene?._choiceListWindow;
+        const error = window.Graphics?._errorPrinter?.textContent || '';
+        const auto = Boolean(window.$gameTemp?.isMessageAutoForwardMode?.());
+        const fast = Boolean(window.$gameTemp?.isExtendedFastForwardMode?.());
+        const rawAutoForwardCount = message?._autoForwardCount;
+        const autoForwardCount = Number.isFinite(rawAutoForwardCount) ? rawAutoForwardCount : null;
+        const visible = Boolean(message && message.scale.x !== 0 && !scene.isBusy() &&
+          (scene._scrollTextWindow?._text || (message.pause && message._waitCount === 0) || choices?.isOpenAndActive()));
+        return { error, auto, fast, visible,
+          autoForwardCount,
+          value: { text: window.$gameMessage?.allText() || '',
+            labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
+            kind: window.$gameMessage?._drylandChoiceFocus?.key || 'title',
+            scrolling: !!scene?._scrollTextWindow?._text,
+            active: !!choices?.isOpenAndActive(), index: choices?.index(),
+            paused: !!message?.pause, hidden: !!message && message.scale.x === 0,
+            map: window.$gameMap?.mapId(), error } };
+      };
+      const stallWindow = 30000;
+      let deadline = performance.now() + stallWindow;
+      let currentText;
+      let lowestFiniteAutoForwardCount = null;
+      for (;;) {
+        const current = read();
+        const now = performance.now();
+        const finiteAutoForwardCount = current.autoForwardCount !== null && current.autoForwardCount >= 0
+          ? current.autoForwardCount : null;
+        if (current.value.text !== currentText) {
+          currentText = current.value.text;
+          lowestFiniteAutoForwardCount = finiteAutoForwardCount;
+          deadline = now + stallWindow;
+        } else if (current.auto && finiteAutoForwardCount !== null) {
+          if (lowestFiniteAutoForwardCount === null) {
+            lowestFiniteAutoForwardCount = finiteAutoForwardCount;
+          } else if (finiteAutoForwardCount < lowestFiniteAutoForwardCount) {
+            lowestFiniteAutoForwardCount = finiteAutoForwardCount;
+            deadline = now + stallWindow;
+          }
+        }
+        if (current.error || (current.visible && !current.auto && !current.fast)) return current.value;
+        if (now >= deadline) {
+          throw Error(`Native surface did not settle before the ready deadline: ${JSON.stringify({
+            error: current.error, auto: current.auto, fast: current.fast, visible: current.visible,
+            text: current.value.text, kind: current.value.kind, map: current.value.map,
+            frame: window.Graphics?.frameCount, autoForwardCount: current.autoForwardCount,
+            lowestAutoForwardCount: lowestFiniteAutoForwardCount
+          })}`);
+        }
+        await new Promise(resolve => requestAnimationFrame(resolve));
+      }
     });
-    const surface = await this.surface();
     assert.equal(surface.error, '');
     return surface;
   }
 
   async choicesContaining(label) {
     for (let count = 0; count < 100; count++) {
-      await this.context.wait(target => {
-        const scene = window.SceneManager?._scene;
-        const message = scene?._messageWindow, choices = scene?._choiceListWindow;
-        const labels = (window.$gameMessage?.choices() || []).map(value => value.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim());
-        return window.Graphics?._errorPrinter?.textContent || (message && !scene.isBusy() &&
-          message.scale.x !== 0 && ((choices?.isOpenAndActive() && labels.includes(target)) ||
-            (message.pause && message._waitCount === 0)));
-      }, label);
       const surface = await this.ready();
       if (surface.active && surface.labels.includes(label)) return surface;
       assert.ok(surface.paused, `Expected visible ${label}; found ${JSON.stringify(surface)}`);
@@ -53,23 +102,27 @@ export class DirectedNativePlayer {
   async choose(label, { mouse = false } = {}) {
     const surface = await this.choicesContaining(label);
     assert.equal(surface.labels.filter(value => value === label).length, 1, `Ambiguous visible label: ${label}`);
+    const prior = await this.context.read('choice-before-input',()=>JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label))));
     const index = surface.labels.indexOf(label);
+    assert.equal(await this.context.read('choice-eligibility',i=>SceneManager._scene._choiceListWindow._list[i].enabled,index),true,'Choice must be eligible: '+label);
     if (mouse) {
       const point = await this.context.read('visible-choice-geometry', target => {
-        const raw = $gameMessage.choices().find(value => value.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() === target);
-        const binding = /<Bind Picture: (\d+)>/.exec(raw);
+        const item = SceneManager._scene._choiceListWindow._list.find(item => SceneManager._scene._choiceListWindow.convertEscapeCharacters(item.name).replace(/<[^>]*>/g,'').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim() === target);
+        const raw = item.name;
+        const binding = /<Bind Picture: (\d+)>/.exec($gameMessage.choices()[item.ext]);
         const scene = SceneManager._scene;
         const canvas = document.querySelector('canvas').getBoundingClientRect();
         let bounds;
         if (binding) bounds = scene._spriteset._pictureContainer.children.find(sprite => sprite._pictureId === Number(binding[1])).getBounds();
         else {
           const window = scene._choiceListWindow;
-          const rect = window.itemRect($gameMessage.choices().indexOf(raw));
+          const rect = window.itemRect(window._list.findIndex(item=>item.name===raw));
           bounds = { x: window.x + window.padding + rect.x, y: window.y + window.padding + rect.y, width: rect.width, height: rect.height };
         }
         return { x: canvas.x + (bounds.x + bounds.width / 2) * canvas.width / Graphics.width,
           y: canvas.y + (bounds.y + bounds.height / 2) * canvas.height / Graphics.height };
       }, label);
+      await this.context.shot(`mouse-target-${++this.serial}`);
       await this.click(point.x, point.y);
     } else {
       for (let step = 0; step < surface.labels.length; step++) {
@@ -81,6 +134,7 @@ export class DirectedNativePlayer {
       await this.context.shot(`focus-${++this.serial}`);
       await this.context.input.key('Enter');
     }
+    await this.context.wait(previous=>!SceneManager._scene._choiceListWindow?.isOpenAndActive()||JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label)))!==previous,prior);
   }
 
   async dialogueControls(label, expectedSlots) {
@@ -103,166 +157,47 @@ export class DirectedNativePlayer {
     }
   }
 
+  async file(fileId) {
+    await this.context.wait(()=>SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy());
+    for(let step=0;step<20;step++){
+      const current=await this.context.read('selected-native-file',()=>{const w=SceneManager._scene._listWindow;return w.indexToSavefileId(w.index());});
+      if(current===fileId)break;
+      await this.context.input.key(current<fileId?'ArrowRight':'ArrowLeft');
+    }
+    assert.equal(await this.context.read('confirmed-native-file',()=>{const w=SceneManager._scene._listWindow;return w.indexToSavefileId(w.index());}),fileId);
+    await this.context.shot(`file-${++this.serial}`);await this.context.input.key('Enter');
+  }
+
+  async returnToTavern() {
+    const surface = await this.ready();
+    if ([37, 38, 39, 40, 41, 42, 43, 44].includes(surface.map)) {
+      await this.until('hero');
+      await this.choose('Voltar à taverna');
+    }
+    const tavern = await this.until('formation');
+    assert.equal(tavern.map, 3);
+    return tavern;
+  }
+
+  async until(kind) {
+    for(let step=0;step<100;step++){
+      const surface=await this.ready();
+      if((kind==='credits'&&surface.scrolling)||(surface.active&&surface.kind===kind))return surface;
+      assert.ok(surface.paused,`Expected ${kind}: ${JSON.stringify(surface)}`);
+      if(this.onPassage)await this.onPassage(this,surface);
+      await this.context.shot(`passage-${++this.serial}`);await this.context.input.key('Enter');
+      if(this.onAdvance)await this.onAdvance(this,surface);
+    }
+    throw Error('Too many passages before '+kind);
+  }
+
   async snapshot(label) {
-    return this.context.read(label, () => ({ snapshot: expeditionQA.snapshot(), validation: expeditionQA.validate() }));
+    return this.context.read(label, () => ({ campaign:$gameSystem._dryland.campaign, fileId:$gameSystem.savefileId(), readUnits:$gameSystem._drylandReadUnits, persistence:$gameTemp._drylandPersistence }));
   }
 
   async click(x, y) {
     await this.context.input.pointer.move(x, y);
     await this.context.input.pointer.down();
     try { await delay(70); } finally { await this.context.input.pointer.up(); }
-  }
-}
-
-// E2E uses real input. Page evaluation only observes QA and the native UI;
-// no interpreter, campaign, switch, variable or save is manufactured here.
-export class NativePlayer {
-  constructor(browser, directory) { this.browser=browser;this.directory=directory;this.log=[];this.captures=new Set();this.serial=0; }
-  async observe() {
-    const value=await this.browser.evaluate(`(() => {
-      const scene=window.SceneManager?._scene,m=scene?._messageWindow,c=scene?._choiceListWindow;
-      const entries=window.$gameMessage?._drylandChoices?.entries;
-      return {qa:window.expeditionQA?.snapshot(),validation:window.expeditionQA?.validate(),
-        scene:scene?.constructor.name,map:window.$gameMap?.mapId(),frame:window.Graphics?.frameCount,
-        text:window.$gameMessage?.allText()||'',pause:!!m?.pause,wait:m?._waitCount||0,
-        active:!!c?.isOpenAndActive(),busy:!m||!!scene?.isBusy(),kind:window.$gameMessage?._drylandChoices?.kind||'title',
-        entries:entries||window.$gameMessage?.choices().map(label=>({label,enabled:true}))||[],index:c?.index(),
-        hidden:!!(m&&m.scale.x===0),error:window.Graphics?._errorPrinter?.textContent||'',
-        viewport:{width:innerWidth,height:innerHeight,ratio:devicePixelRatio,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches},
-        canvas:document.querySelector('canvas')?.getBoundingClientRect().toJSON()};
-    })()`);
-    if(value.error)throw new Error(value.error);
-    if(value.qa?.phase&&value.qa.phase!=='ready')assert.equal(value.validation?.ok,true,JSON.stringify(value.validation));
-    return value;
-  }
-  async record(surface,label='observe',capture=false) {
-    const q=surface.qa;
-    this.log.push({at:new Date().toISOString(),label,frame:surface.frame,map:surface.map,text:surface.text,
-      kind:surface.kind,entries:surface.entries,index:surface.index,viewport:surface.viewport,
-      state:q&&{phase:q.phase,sequence:q.sequence,seed:q.seed,rngState:q.rngState,dungeon:q.dungeon,position:q.position,
-        draftParty:q.draftParty,party:q.party,deadHeroes:q.deadHeroes,mapFragments:q.mapFragments,
-        reading:q.reading,ending:q.ending,climaxParty:q.climaxParty,presentedDeaths:q.presentedDeaths,persistence:q.persistence}});
-    if(capture){await this.browser.screenshot(`${this.directory}/${String(++this.serial).padStart(3,'0')}-${label.replace(/[^\w.-]/g,'_')}.png`);}
-    await this.flush();
-  }
-  async flush(){await mkdir(this.directory,{recursive:true});await writeFile(`${this.directory}/transcript.json`,JSON.stringify({browser:this.browser.version,observations:this.log},null,2)+'\n');}
-  async ready() {
-    const deadline=Date.now()+30000;
-    let last;
-    while(Date.now()<deadline){
-      last=await this.observe();
-      if(!last.busy&&!last.hidden){
-        if(last.active&&(!last.text||['retreat','title'].includes(last.kind)))return last;
-        if(last.text&&last.pause&&last.wait===0)return last;
-      }
-      await delay(60);
-    }
-    throw new Error('Native player surface timed out: '+JSON.stringify(last));
-  }
-  async readUntil(kind) {
-    for(let step=0;step<100;step++){
-      const s=await this.ready();
-      if(s.active&&s.kind===kind&&(!s.text||['retreat','title'].includes(s.kind)))return s;
-      if(s.active&&(!s.text||['retreat','title'].includes(s.kind)))throw new Error(`Expected ${kind}, reached ${s.kind}: ${JSON.stringify(s.entries)}`);
-      const identity=s.qa?.reading?.sceneId||`${s.map}-${s.kind}`;
-      const capture=!this.captures.has(identity);this.captures.add(identity);
-      await this.record(s,'passage-'+(s.qa?.reading?.passageId||identity),capture);
-      await this.browser.press('Enter',13);
-    }
-    throw new Error(`Too many passages before ${kind}`);
-  }
-  async choose(kind,predicate,{mouse=false,label='choice'}={}) {
-    const s=await this.readUntil(kind);
-    const index=typeof predicate==='number'?predicate:s.entries.findIndex(predicate);
-    assert.ok(index>=0&&index<s.entries.length,`${kind}: missing requested choice in ${JSON.stringify(s.entries)}`);
-    assert.notEqual(s.entries[index].enabled,false,`${kind}: requested disabled ${s.entries[index].label}`);
-    if(mouse){
-      const match=/<Bind Picture: (\d+)>/.exec(s.entries[index].label);
-      assert.ok(match,'Mouse choice needs its actual native picture target.');
-      const p=await this.browser.evaluate(`(()=>{const b=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===${Number(match[1])}).getBounds();const c=document.querySelector('canvas').getBoundingClientRect();return{x:c.x+(b.x+b.width/2)*c.width/Graphics.width,y:c.y+(b.y+b.height/2)*c.height/Graphics.height}})()`);
-      await this.record(s,label+':'+s.entries[index].label,true);await this.click(p.x,p.y);
-    }else{
-      for(let step=0;step<20;step++){
-        const current=await this.browser.evaluate('SceneManager._scene._choiceListWindow.index()');
-        if(current===index)break;
-        await this.browser.press(current<index?'ArrowDown':'ArrowUp',current<index?40:38);
-      }
-      assert.equal(await this.browser.evaluate('SceneManager._scene._choiceListWindow.index()'),index);
-      await this.record({...s,index},label+':'+s.entries[index].label,true);await this.browser.press('Enter',13);
-    }
-  }
-  async click(x,y){
-    await this.browser.call('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:1});
-    await delay(40);
-    await this.browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',x,y,button:'left',buttons:0,clickCount:1});
-    await delay(80);
-  }
-  async begin(seed){
-    await this.readUntil('title');
-    assert.deepEqual(await this.browser.evaluate(`expeditionQA.setSeed(${seed})`),{ok:true,seed});
-    await this.choose('title',e=>e.label==='Jogar');
-    return this.readUntil('formation');
-  }
-  async action(action){
-    switch(action.type){
-      case 'TOGGLE_HERO':
-        await this.choose('formation',e=>e.heroId===action.heroId);
-        await this.choose('hero',e=>/^(Selecionar|Retirar do grupo)$/.test(e.label));break;
-      case 'SELECT_DESTINATION':
-        await this.choose('formation',e=>e.label.startsWith('Destinos'));
-        await this.choose('destinations',e=>e.dungeonId===action.dungeonId);break;
-      case 'DEPART':await this.choose('formation',e=>e.label.startsWith('Partir'));break;
-      case 'CHOOSE_APPROACH':await this.choose('approaches',e=>e.value===action.approachId);break;
-      case 'SELECT_VICTIM':await this.choose('sacrifice',e=>e.heroId===action.heroId);break;
-      case 'REQUEST_RETREAT':await this.choose('approaches',e=>e.value==='retreat');break;
-      case 'CONFIRM_RETREAT':await this.choose('retreat',0);break;
-      case 'CANCEL_RETREAT':await this.choose('retreat',1);break;
-      case 'CHOOSE_ENDING':await this.choose('ending',action.ending==='reunite'?0:1);break;
-      default:throw new Error('Unsupported player decision '+action.type);
-    }
-  }
-  async recipe(recipe,{beforeAction,afterAction}={}){
-    await this.begin(recipe.seed);
-    for(const action of recipe.actions){
-      if(['BEGIN','ADVANCE_TEXT','ENTER_DUNGEON'].includes(action.type))continue;
-      if(beforeAction)await beforeAction(action,this);
-      await this.action(action);
-      if(afterAction)await afterAction(action,this);
-    }
-  }
-  async route(route){
-    let s=await this.readUntil('formation');
-    for(const heroId of ['H1','H2','H3']){
-      if(!s.qa.draftParty.includes(heroId))await this.action({type:'TOGGLE_HERO',heroId});
-      s=await this.readUntil('formation');
-    }
-    await this.action({type:'SELECT_DESTINATION',dungeonId:route});
-    await this.action({type:'DEPART'});
-    for(let position=1;position<=(route==='final'?6:5);position++){
-      s=await this.readUntil('approaches');assert.equal(s.qa.position,position);assert.equal(s.qa.dungeon,route);
-      const viable=s.qa.currentEncounter.approaches.find(a=>a.viable);
-      assert.ok(viable,'Living competencies must support this successful recipe.');
-      await this.action({type:'CHOOSE_APPROACH',approachId:viable.id});
-    }
-  }
-  async resume(){
-    const before=await this.observe();
-    await this.browser.waitFor("expeditionQA.snapshot().persistence?.status==='saved'");
-    await this.record(before,'before-tab-close',true);
-    await this.browser.reopen();
-    await this.choose('title',e=>e.label==='Continuar');
-    const after=await this.ready();
-    await this.record(after,'after-tab-reopen-continue',true);
-    return after;
-  }
-  async closing(mode='keyboard'){
-    const s=await this.readUntil('credits');
-    assert.equal(s.qa.phase,'campaign_complete');
-    await writeFile(`${this.directory}/terminal-qa.json`,JSON.stringify(s.qa,null,2)+'\n');
-    if(mode==='automatic')await this.browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()");
-    else await this.choose('credits',0,{mouse:mode==='mouse',label:'credits-'+mode});
-    const title=await this.readUntil('title');assert.ok(title.entries.some(e=>e.label==='Continuar'));
-    await this.record(title,'terminal-title',true);
-    return s.qa;
   }
 }

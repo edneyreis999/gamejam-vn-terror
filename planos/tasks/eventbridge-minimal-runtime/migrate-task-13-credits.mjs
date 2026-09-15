@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import {read,c,call,presentation,show,text,erase,write} from './native-migration-helpers.mjs';
+const events=read('CommonEvents.json');
+const lines=events[63].list.filter(command=>command.code===401).map(command=>command.parameters[0]);
+events[63].list=[c(105,[2,false]),...lines.map(line=>c(405,[`<center>${line}`])),c(0)];
+events[61].list=[call(337),show(1,'Dryland_Memorial',640,360,76.555,76.555),show(41,'Dryland_Button',1100,672,140),text(41,'\\FS[16]Pular créditos · Esc'),presentation('BindScrollSkip',{picture:'41',key:'cancel'}),call(63),...erase(2,89),presentation('ConsumeInput'),c(354),c(0)];
+events[62]={...events[62],name:'Reservado — antigo temporizador de créditos',trigger:0,list:[c(0)]};
+write(events);
+const file='rpg-maker/The Dryland Drowned/js/plugins/Dryland_EventBridge.js';let src=fs.readFileSync(file,'utf8');
+src=src.replace(/ \* @command Observe[\s\S]*?(?= \* @command Checkpoint)/,'');
+src=src.replace(/      \/\/ These existing ranges[\s\S]*?registry = \{ \.\.\.parsed, catalog \};/,'      registry = { catalog };');
+const begin=src.indexOf('  function pictureText('),end=src.indexOf("  for (const name of ['ConfigureHero'",begin);
+src=src.slice(0,begin)+src.slice(end);
+src=src.replace('  const publicView = () => rules.playerView(campaign());\n','').replace('    refreshFormationVariables();\n','').replace('    delete this._drylandChoiceKind;\n','');
+src=src.slice(0,src.indexOf('  // The editor owns the branches;'))+'})(globalThis);\n';fs.writeFileSync(file,src);
