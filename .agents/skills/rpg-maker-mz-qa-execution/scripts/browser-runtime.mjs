@@ -1,16 +1,28 @@
 import { chromium } from 'playwright';
+import {createAudioCapture, audioCapture} from './audio-capture.mjs';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
-import { resolve, join, relative, isAbsolute } from 'node:path';
+import { resolve, join, relative, isAbsolute, dirname, basename } from 'node:path';
 import { createHash } from 'node:crypto';
-import { isDeepStrictEqual } from 'node:util';
-import os from 'node:os';
-import {createAudioCapture} from './browser-audio.mjs';
 import {loadStorageFixture, storageCapture} from './browser-storage.mjs';
+import os from 'node:os';
+import {withDeadline,readObservation} from './observation-deadline.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-const errorInfo = error => ({ name: error.name, message: error.message, stack: error.stack });
+const errorInfo = error => ({ name: error.name, message: error.message, stack: error.stack, ...(error.partialObservation?{partialObservation:error.partialObservation}:{}), ...(error.partialObservationUnavailable?{partialObservationUnavailable:error.partialObservationUnavailable}:{}) });
 const inside = (root, file) => { const rel = relative(root, file); return rel !== '..' && !rel.startsWith('../') && !isAbsolute(rel); };
 const safeId = id => typeof id === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(id);
+
+async function resolveDestination(file) {
+  const segments = [];
+  let ancestor = resolve(file);
+  while (true) {
+    try { return resolve(await realpath(ancestor), ...segments.reverse()); }
+    catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      segments.push(basename(ancestor)); ancestor = dirname(ancestor);
+    }
+  }
+}
 
 export async function run({ project, fixture, output, adapter, caseModule, sources = [] }) {
   project = await realpath(project);
@@ -22,57 +34,48 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
   if (!safeId(scenario?.id) || !Array.isArray(scenario.criteria) || !scenario.criteria.length) throw new Error('Scenario ID and required criteria are mandatory.');
   const config = scenario.browser;
   if (!config || !Number.isInteger(config.width) || config.width <= 0 || !Number.isInteger(config.height) || config.height <= 0 || !(config.dpr > 0) || !config.locale) throw new Error('Explicit width, height, DPR and locale required.');
+  if ('nativeZoom' in config) throw new Error('nativeZoom was removed; migrate this case to ordinary browser configuration.');
+  if (config.recordVideo !== undefined && typeof config.recordVideo !== 'boolean') throw new Error('recordVideo must be boolean.');
+  if (scenario.audioFormat !== undefined && !['webm', 'wav'].includes(scenario.audioFormat)) throw new Error('audioFormat must be webm or wav.');
+  if (config.video !== undefined && typeof config.video !== 'boolean') throw new Error('video must be boolean.');
+  if (config.video && config.recordVideo) throw new Error('Choose video or recordVideo, not both.');
   const timeout = config.timeoutMs ?? 15000;
-  if (config.nativeZoom !== undefined && !(config.nativeZoom > 1)) throw new Error('nativeZoom must request enlargement.');
-  let expectedGeometry = config;
-  const root = resolve(output);
+  const executionTimeout = config.executionTimeoutMs ?? 600000, cleanupTimeout = config.cleanupTimeoutMs ?? 15000;
+  if (![timeout,executionTimeout,cleanupTimeout].every(value=>Number.isSafeInteger(value)&&value>0)) throw new Error('Browser deadlines must be positive integer milliseconds.');
+  const root = await resolveDestination(output);
   if (inside(fixture, root)) throw new Error('Evidence output must be outside the served fixture.');
   await mkdir(root);
   const report = { mode: 'directed-browser', scenario: scenario.id, startedAt: new Date().toISOString(), fixture, criteria: [], checkpoints: [], inputs: [], observations: [], errors: [], cleanup: [], sources: [], status: 'in_progress' };
   let browser, context, page, session, service, lease, audio, terminal = false, touchActive = false;
+  const videos = [], audioIds = new Set();
+  const activeFaults = new Map();
+  let video;
   const heldKeys = new Set(), heldButtons = new Set();
   const failure = (phase, error) => { report.errors.push({ phase, ...errorInfo(error) }); report.failure ??= { phase, ...errorInfo(error) }; report.status = 'fail'; };
   const owned = async (resource, close) => {
-    try { await close(); report.cleanup.push({ resource, status: 'closed' }); }
+    try { await withDeadline(close, cleanupTimeout, `cleanup:${resource}`); report.cleanup.push({ resource, status: 'closed' }); }
     catch (error) { failure(`cleanup:${resource}`, error); report.cleanup.push({ resource, status: 'failed', message: error.message }); }
   };
   const releaseTouch = async () => {
-    if (touchActive) {
+    if (touchActive && session) {
       await session.send('Input.dispatchTouchEvent', {type: 'touchCancel', touchPoints: []});
       report.inputs.push({type: 'touch-cancel', source: 'lifecycle', at: Date.now()});
       touchActive = false;
     }
   };
-  const metadata = () => page.evaluate(() => ({ url: location.href, timeOrigin: performance.timeOrigin, width: innerWidth, height: innerHeight, dpr: devicePixelRatio, locale: navigator.language, fonts: [...document.fonts].map(f => ({ family: f.family, status: f.status })), focused: document.hasFocus(), visibility: document.visibilityState, geometryEvents: globalThis.__qaTelemetry.geometry, canvas: [...document.querySelectorAll('canvas')].map(c => ({ width: c.width, height: c.height, rect: c.getBoundingClientRect().toJSON() })) }));
-  const physicalViewport = async () => {
-    const metrics = await session.send('Page.getLayoutMetrics');
-    const viewport = metrics?.layoutViewport;
-    const visual = metrics?.visualViewport;
-    if (!viewport || !Number.isSafeInteger(viewport.clientWidth) || !Number.isSafeInteger(viewport.clientHeight)) throw new Error('CDP physical layout viewport unavailable.');
-    if (!visual || visual.scale !== 1) throw new Error(`Capture requires visualViewport.scale=1; got ${visual?.scale ?? 'unavailable'}.`);
-    const scrollbars = await page.evaluate(() => {
-      const root = document.documentElement;
-      return {
-        vertical: innerWidth > root.clientWidth,
-        horizontal: innerHeight > root.clientHeight,
-        width: Math.max(0, innerWidth - root.clientWidth),
-        height: Math.max(0, innerHeight - root.clientHeight)
-      };
-    });
-    if (scrollbars.vertical || scrollbars.horizontal) throw new Error(`Capture requires a scrollbar-free viewport; got ${JSON.stringify(scrollbars)}.`);
-    return { width: viewport.clientWidth, height: viewport.clientHeight, visualScale: visual.scale, scrollbars };
-  };
+  const metadata = () => page.evaluate(() => ({url: location.href, timeOrigin: performance.timeOrigin,
+    locale: navigator.language, focused: document.hasFocus(), visibility: document.visibilityState}));
   const identity = async () => {
     if (page.isClosed() || context.pages().length !== 1 || context.pages()[0] !== page) throw new Error('Owned page changed.');
     const target = (await session.send('Target.getTargetInfo')).targetInfo;
     const actual = await metadata();
-    if (target.targetId !== lease.targetId || target.browserContextId !== lease.contextId || actual.url !== lease.url || actual.timeOrigin !== lease.timeOrigin || actual.width !== expectedGeometry.width || actual.height !== expectedGeometry.height || actual.dpr !== expectedGeometry.dpr || actual.locale !== config.locale || !actual.focused || actual.visibility !== 'visible') throw new Error('Document, geometry or focus changed.');
+    if (target.targetId !== lease.targetId || target.browserContextId !== lease.contextId || actual.url !== lease.url || actual.timeOrigin !== lease.timeOrigin || actual.locale !== config.locale || !actual.focused || actual.visibility !== 'visible') throw new Error('Document or focus changed.');
     return actual;
   };
   try {
-    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./browser-storage.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
+    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./audio-capture.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./browser-storage.mjs', import.meta.url), new URL('./observation-deadline.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
       const bytes = await readFile(file); const name = `source-${index}${String(file).endsWith('.json') ? '.json' : '.mjs'}`;
-      await writeFile(join(root, name), bytes, { flag: 'wx' }); report.sources.push({ path: name, originalPath: String(file), sha256: digest(bytes) });
+      await writeFile(join(root, name), bytes, { flag: 'wx' }); report.sources.push({ path: name, originalPath: await realpath(file), sha256: digest(bytes) });
     }
     const descriptor = await adapter.describe({ project, fixture });
     if (!Array.isArray(descriptor?.files) || !descriptor.files.length || !Array.isArray(descriptor.mutablePaths)) throw new Error('Descriptor requires files and mutablePaths.');
@@ -85,61 +88,61 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       if (entry.sha256 && hash !== entry.sha256) throw new Error(`Stale fixture input: ${entry.path}`);
       report.files.push({ path: entry.path, sha256: hash });
     }
-    for (const path of descriptor.mutablePaths) if (!inside(fixture, resolve(fixture, path))) throw new Error('Mutable destination outside fixture.');
+    for (const path of descriptor.mutablePaths) if (!inside(fixture, await resolveDestination(resolve(fixture, path)))) throw new Error('Mutable destination outside fixture.');
     for (const capability of scenario.requires ?? []) if (!descriptor.capabilities?.includes(capability)) throw new Error(`Fixture capability unavailable: ${capability}`);
     service = await adapter.start({ project, fixture });
     if (typeof service?.close !== 'function' || !service.url) throw new Error('start must return URL and close().');
     const baseUrl = new URL(service.url);
     if (!['127.0.0.1', 'localhost', '[::1]'].includes(baseUrl.hostname)) throw new Error('QA service must be local.');
-    browser = await chromium.launch({ channel: config.channel ?? 'chrome', headless: false, args: config.launchArgs ?? [] });
-    const storageState = await loadStorageFixture({ descriptor, fixture, origin: baseUrl.origin });
-    if (storageState) report.storagePreparation = { phase: 'before-first-page', ...descriptor.storageFixture, origin: baseUrl.origin };
-    context = await browser.newContext({ ...(config.nativeZoom ? { viewport: null } : { viewport: { width: config.width, height: config.height }, deviceScaleFactor: config.dpr }), locale: config.locale, hasTouch: config.hasTouch ?? false, reducedMotion: config.reducedMotion ?? 'no-preference', ...(storageState ? { storageState } : {}) });
-    report.network = [];
-    context.on('request', request => report.network.push({ event: 'request', url: request.url(), method: request.method(), at: Date.now() }));
-    context.on('response', response => report.network.push({ event: 'response', url: response.url(), status: response.status(), at: Date.now() }));
-    context.on('requestfailed', request => report.network.push({ event: 'failure', url: request.url(), error: request.failure(), at: Date.now() }));
-    page = await context.newPage(); page.setDefaultTimeout(timeout);
-    const observePage = current => {
-      current.on('pageerror', e => report.errors.push({ phase: 'page', ...errorInfo(e) }));
-      current.on('console', m => { if (m.type() === 'error') report.errors.push({ phase: 'console', message: m.text() }); });
-    };
-    observePage(page);
-    await context.addInitScript(() => {
-      globalThis.__qaTelemetry = { inputs: [], geometry: 0 };
-      for (const type of ['keydown', 'keyup', 'pointerdown', 'pointerup']) addEventListener(type, e => __qaTelemetry.inputs.push({ type, key: e.key, x: e.clientX, y: e.clientY, trusted: e.isTrusted, at: performance.now() }), true);
-      addEventListener('wheel', e => __qaTelemetry.inputs.push({type: 'wheel', x: e.clientX, y: e.clientY, deltaX: e.deltaX, deltaY: e.deltaY, deltaMode: e.deltaMode, trusted: e.isTrusted, at: performance.now()}), {capture: true, passive: true});
-      for (const type of ['touchstart', 'touchmove', 'touchend', 'touchcancel']) addEventListener(type, e => __qaTelemetry.inputs.push({type, touches: [...e.touches].map(t => ({id: t.identifier, x: t.clientX, y: t.clientY})), trusted: e.isTrusted, at: performance.now()}), {capture: true, passive: true});
-      addEventListener('resize', () => __qaTelemetry.geometry++);
-      const observeGeometry = () => {
-        const observer = new ResizeObserver(() => __qaTelemetry.geometry++);
-        observer.observe(document.documentElement);
-        for (const canvas of document.querySelectorAll('canvas')) observer.observe(canvas);
-        new MutationObserver(records => {
-          if (records.some(record => record.target instanceof HTMLCanvasElement)) __qaTelemetry.geometry++;
-        }).observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ['width', 'height', 'style'] });
-      };
-      if (document.readyState === 'loading') addEventListener('DOMContentLoaded', observeGeometry, { once: true });
-      else observeGeometry();
-    });
-    session = await context.newCDPSession(page);
-    await page.goto(new URL(config.query ?? '?test', baseUrl).href, { waitUntil: 'load' });
-    await page.bringToFront(); await page.evaluate(() => document.fonts.ready);
-    if (config.nativeZoom) {
-      const before = await metadata();
-      await writeFile(join(root, 'native-zoom-preparation.json'), JSON.stringify({ before, factor: config.nativeZoom, minimum: { width: config.width, height: config.height } }, null, 2) + '\n', { flag: 'wx' });
-      console.log(`Native zoom preparation: use the owned Chrome UI to set ${config.nativeZoom * 100}% and retain at least ${config.width}x${config.height} CSS pixels.`);
-      const handle = await page.waitForFunction(({ dpr, factor, width, height }) => Math.abs(devicePixelRatio / dpr - factor) < 0.000001 && innerWidth >= width && innerHeight >= height && document.hasFocus(), { dpr: before.dpr, factor: config.nativeZoom, width: config.width, height: config.height }, { timeout: 180000, polling: 'raf' });
-      await handle.dispose();
-      expectedGeometry = await metadata();
-      report.nativeZoom = { before, after: expectedGeometry, raster: await physicalViewport(), factor: config.nativeZoom, sensor: 'native browser UI; viewport and DPR emulation disabled' };
+    const storageState = await loadStorageFixture({descriptor, fixture, origin: baseUrl.origin});
+    if (storageState) {
+      const source = descriptor.storageFixture ?? descriptor.storageImport ?? descriptor.storageSeed;
+      const path = 'storage-import.json', bytes = Buffer.from(JSON.stringify(storageState));
+      await writeFile(join(root, path), bytes, {flag: 'wx'});
+      report.checkpoints.push({id: 'storage-import', kind: 'browser-storage', path, sha256: digest(bytes), at: Date.now()});
+      report.storagePreparation = {phase: 'before-first-page', ...source, origin: baseUrl.origin};
+      report.storageImport = {...source, targetOrigin: baseUrl.origin, mappedSha256: digest(bytes)};
     }
-    const target = (await session.send('Target.getTargetInfo')).targetInfo;
-    lease = { ...(await metadata()), targetId: target.targetId, contextId: target.browserContextId };
-    await identity();
+    browser = await chromium.launch({ channel: config.channel ?? 'chrome', headless: false, args: config.launchArgs ?? [] });
+    const openPage = async () => {
+      page = await context.newPage(); page.setDefaultTimeout(timeout);
+      if (config.video) video = page.video();
+      const recording = config.recordVideo ? { handle: page.video(), startedAt: Date.now() } : undefined;
+      if (recording) videos.push(recording);
+      page.on('pageerror', e => report.errors.push({ phase: 'page', ...errorInfo(e) }));
+      page.on('console', m => { if (m.type() === 'error') report.errors.push({ phase: 'console', message: m.text() }); });
+      await page.addInitScript(() => {
+        globalThis.__qaTelemetry = { inputs: [] };
+        for (const type of ['keydown', 'keyup', 'pointerdown', 'pointerup', 'wheel']) addEventListener(type, e => __qaTelemetry.inputs.push({ type, key: e.key, x: e.clientX, y: e.clientY, deltaX: e.deltaX, deltaY: e.deltaY, deltaMode: e.deltaMode, trusted: e.isTrusted, at: performance.now() }), true);
+        for (const type of ['touchstart', 'touchmove', 'touchend', 'touchcancel']) {
+          addEventListener(type, event => __qaTelemetry.inputs.push({type,
+            touches: [...event.touches].map(touch => ({id: touch.identifier, x: touch.clientX, y: touch.clientY})),
+            trusted: event.isTrusted, at: performance.now()}), {capture: true, passive: true});
+        }
+      });
+      session = await context.newCDPSession(page);
+      await page.goto(new URL(config.query ?? '?test', baseUrl).href, { waitUntil: 'load' });
+      await page.bringToFront(); await page.evaluate(() => document.fonts.ready);
+      const target = (await session.send('Target.getTargetInfo')).targetInfo;
+      lease = { ...(await metadata()), targetId: target.targetId, contextId: target.browserContextId };
+      await identity();
+      if (recording) recording.lease = { ...lease };
+    };
+    const openContext = async storageState => {
+      context = await browser.newContext({viewport: {width: config.width, height: config.height},
+        deviceScaleFactor: config.dpr, locale: config.locale, hasTouch: config.hasTouch ?? false,
+        reducedMotion: config.reducedMotion ?? 'no-preference', storageState,
+        ...((config.recordVideo || config.video) ? {recordVideo: {dir: join(root, 'video'), size: {width: config.width, height: config.height}}} : {})});
+      report.network ??= [];
+      context.on('request', request => report.network.push({event: 'request', url: request.url(), method: request.method(), at: Date.now()}));
+      context.on('response', response => report.network.push({event: 'response', url: response.url(), status: response.status(), at: Date.now()}));
+      context.on('requestfailed', request => report.network.push({event: 'failure', url: request.url(), error: request.failure(), at: Date.now()}));
+      await openPage();
+    };
+    await openContext(storageState);
     report.environment = { ...lease, browser: browser.version(), node: process.version, platform: process.platform, release: os.release(), arch: process.arch };
     const wait = async (fn, arg) => { await identity(); const handle = await page.waitForFunction(fn, arg, { timeout, polling: 'raf' }); await handle.dispose(); await identity(); };
-    const read = async (label, fn, arg) => { await identity(); const value = await page.evaluate(fn, arg); await identity(); report.observations.push({ label, kind: 'auxiliary-read', at: Date.now(), value }); return value; };
+    const read = async (label, fn, arg) => { await identity(); const value = await readObservation(page, label, fn, arg, timeout); await identity(); report.observations.push({ label, kind: 'auxiliary-read', at: Date.now(), value }); return value; };
     const input = async (type, detail, action) => {
       if (terminal) throw new Error('Input stopped after uncertain operation; start a new run from a reliable reset.');
       try { await identity(); const at = Date.now(); await action(); report.inputs.push({ type, ...detail, at }); }
@@ -150,9 +153,9 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     const key = async (value, holdMs = 70) => { await keyDown(value); try { await new Promise(r => setTimeout(r, holdMs)); } finally { await page.keyboard.up(value); heldKeys.delete(value); report.inputs.push({ type: 'key-up', key: value, at: Date.now() }); } await new Promise(r => setTimeout(r, config.keyReleaseMs ?? 35)); };
     const pointer = {
       move: (x, y) => input('pointer-move', { x, y }, () => page.mouse.move(x, y)),
-      wheel: (deltaX, deltaY) => input('pointer-wheel', { deltaX, deltaY }, () => page.mouse.wheel(deltaX, deltaY)),
       down: (button = 'left') => input('pointer-down', { button }, async () => { heldButtons.add(button); await page.mouse.down({ button }); }),
-      up: (button = 'left') => input('pointer-up', { button }, async () => { await page.mouse.up({ button }); heldButtons.delete(button); })
+      up: (button = 'left') => input('pointer-up', { button }, async () => { await page.mouse.up({ button }); heldButtons.delete(button); }),
+      wheel: (deltaX, deltaY) => input('pointer-wheel', { deltaX, deltaY }, () => page.mouse.wheel(deltaX, deltaY))
     };
     const touch = {
       start: (x, y) => input('touch-start', {x, y}, async () => {
@@ -174,42 +177,60 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     const shot = async id => {
       if (!safeId(id)) throw new Error('Invalid capture ID.');
       const before = await identity();
-      const rasterBefore = await physicalViewport();
       const png = await session.send('Page.captureScreenshot', { format: 'png', fromSurface: true, captureBeyondViewport: false });
       const after = await identity();
-      const rasterAfter = await physicalViewport();
-      if (!isDeepStrictEqual(before, after) || !isDeepStrictEqual(rasterBefore, rasterAfter)) throw new Error('Geometry/document or physical raster viewport changed during capture.');
       const bytes = Buffer.from(png.data, 'base64');
-      if (bytes.readUInt32BE(16) !== rasterBefore.width || bytes.readUInt32BE(20) !== rasterBefore.height) throw new Error(`Capture dimensions mismatch: PNG ${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}, expected CDP physical viewport ${rasterBefore.width}x${rasterBefore.height}.`);
+
       const path = `${id}.png`; await writeFile(join(root, path), bytes, { flag: 'wx' });
-      report.checkpoints.push({ id, path, sha256: digest(bytes), at: Date.now(), capture: { before, after, rasterBefore, rasterAfter } });
+      report.checkpoints.push({ id, path, sha256: digest(bytes), at: Date.now(), capture: { before, after } });
     };
     const reload = async () => {
-      await audio.cleanup();
+      await identity();
+      if(audio)await audio.close();
       await releaseTouch();
       report.priorDocuments ??= []; report.priorDocuments.push(await metadata());
       await page.reload({ waitUntil: 'load' }); await page.evaluate(() => document.fonts.ready);
       lease = { ...lease, ...(await metadata()) }; await identity();
     };
+    const makeAudio = () => scenario.audioFormat === 'webm'
+      ? createAudioCapture({getPage:()=>page,root,report,usedIds:audioIds,sources:scenario.audioSources,identity,register:artifact=>report.checkpoints.push(artifact)})
+      : audioCapture({page,identity,report,output:root,sources:scenario.audioSources,usedIds:audioIds});
     const reopen = async () => {
-      await identity();
-      await audio.cleanup();
+      if (heldKeys.size || heldButtons.size) throw new Error('Release public inputs before reopening.');
+      if (activeFaults.size) throw new Error('Restore active faults before recreating the browser context.');
       await releaseTouch();
-      report.priorDocuments ??= [];
-      report.priorDocuments.push({ ...(await metadata()), inputs: await page.evaluate(() => globalThis.__qaTelemetry) });
-      await session.detach();
-      await page.close();
-      page = await context.newPage();
-      page.setDefaultTimeout(timeout);
-      observePage(page);
-      session = await context.newCDPSession(page);
-      await page.goto(new URL(config.query ?? '?test', baseUrl).href, { waitUntil: 'load' });
-      await page.bringToFront();
-      await page.evaluate(() => document.fonts.ready);
-      const target = (await session.send('Target.getTargetInfo')).targetInfo;
-      lease = { ...(await metadata()), targetId: target.targetId, contextId: target.browserContextId };
       await identity();
+      if (audio) await audio.close();
+      const prior = { ...lease, publicInputLog: await page.evaluate(() => globalThis.__qaTelemetry) };
+      const storageState = await context.storageState({ indexedDB: true });
+      const id = `storage-reopen-${(report.reopenedContexts?.length ?? 0) + 1}`;
+      const bytes = Buffer.from(JSON.stringify(storageState));
+      const path = `${id}.json`;
+      await writeFile(join(root, path), bytes, { flag: 'wx' });
+      report.checkpoints.push({ id, kind: 'browser-storage', path, sha256: digest(bytes), at: Date.now() });
+      await session.detach(); session = undefined;
+      await context.close(); context = undefined;
+      report.cleanup.push({ resource: `context:${prior.contextId}`, status: 'closed' });
+      await openContext(storageState);
+      if (lease.contextId === prior.contextId || lease.targetId === prior.targetId) throw new Error('Reopen did not create a new browser context and target.');
+      report.reopenedContexts ??= [];
+      report.reopenedContexts.push({ prior, current: { ...lease }, storage: path });
+      audio = makeAudio();
     };
+    const reopenPage = async () => {
+      await identity();
+      if (heldKeys.size || heldButtons.size) throw new Error('Release public inputs before reopening.');
+      if (audio) await audio.close();
+      await releaseTouch();
+      const prior = {...lease, inputs: await page.evaluate(() => globalThis.__qaTelemetry)};
+      report.priorDocuments ??= []; report.priorDocuments.push(prior);
+      await session.detach(); session = undefined;
+      await page.close();
+      await openPage();
+      if (lease.contextId !== prior.contextId || lease.targetId === prior.targetId) throw new Error('Page reopen must retain its context and replace its target.');
+      audio = makeAudio();
+    };
+    audio = makeAudio();
     const publicCommand = async (path, args = []) => {
       if (!scenario.publicCommands?.includes(path) || !/^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*)+$/.test(path)) throw new Error(`Undeclared public command: ${path}`);
       let result;
@@ -224,25 +245,47 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       report.observations.push({ label: path, kind: 'public-command-result', value: result, at: Date.now() });
       return result;
     };
+    const restoreFault = async (id, definition) => {
+      if (definition.type === 'network') await context.unroute(definition.pattern, definition.handler);
+      else await page.evaluate(definition.restore);
+      activeFaults.delete(id);
+    };
     const fault = async (id, enabled = true) => {
       const definition = caseModule.faults?.[id];
-      if (!scenario.faultIds?.includes(id) || !definition?.expectedRef) throw new Error(`Undeclared fault: ${id}`);
-      await identity();
+      if (!scenario.faultIds?.includes(id) || !definition?.expectedRef) throw new Error('Declare the assigned external fault: ' + id);
       if (definition.type === 'network') {
-        if (enabled) await context.route(definition.pattern, route => route.abort('failed'));
-        else await context.unroute(definition.pattern);
-      } else if (definition.type === 'boundary') {
-        const operation = enabled ? definition.apply : definition.restore;
-        if (typeof operation !== 'function') throw new Error(`Unsupported fault operation: ${id}`);
-        await page.evaluate(operation);
-      } else throw new Error(`Unsupported fault operation: ${id}`);
-      report.observations.push({ label: id, kind: 'declared-fault', enabled, expectedRef: definition.expectedRef, at: Date.now() });
+        if (!definition.pattern) throw new Error('Network fault requires a route pattern.');
+      } else if (definition.type !== 'boundary' || typeof definition.apply !== 'function' || typeof definition.restore !== 'function') {
+        throw new Error('Boundary fault requires apply and restore.');
+      }
+      await identity();
+      if (enabled) {
+        if (activeFaults.has(id)) throw new Error('Fault already active: ' + id);
+        const active = {...definition};
+        if (definition.type === 'network') {
+          active.handler = route => route.abort('failed');
+          activeFaults.set(id, active);
+          await context.route(definition.pattern, active.handler);
+        } else {
+          activeFaults.set(id, active);
+          await page.evaluate(definition.apply);
+        }
+      } else {
+        const active = activeFaults.get(id);
+        if (!active) throw new Error('Fault is not active: ' + id);
+        await restoreFault(id, active);
+      }
+      report.observations.push({label: id, kind: 'declared-fault', enabled, expectedRef: definition.expectedRef, at: Date.now()});
+      (report.boundaryFaults ??= []).push({id, type: definition.type, enabled, expectedRef: definition.expectedRef, at: Date.now()});
       await identity();
     };
-    audio = createAudioCapture({getPage: () => page, identity, report, root, digest, scenario});
+    const storage = {capture: async id => {
+      if (!scenario.storage?.expectedRef) throw new Error('Declare the storage evidence contract.');
+      return storageCapture({context, identity, report, output: root, origin: baseUrl.origin,
+        expectedRef: scenario.storage.expectedRef})(id);
+    }};
     const executionStarted = Date.now();
-    const storage = { capture: storageCapture({ context, identity, report, output: root, origin: baseUrl.origin }) };
-    await caseModule.execute({ input: { key, keyDown, keyUp, pointer, touch, publicCommand }, fault, wait, read, shot, audio, storage, reload, reopen, report, fixture, output: root, descriptor });
+    await withDeadline(() => caseModule.execute({ input: { key, keyDown, keyUp, pointer, touch, publicCommand }, wait, read, shot, reload, reopen, reopenContext: reopen, reopenPage, get audio() { return audio; }, fault, storage, report, fixture, output: root, descriptor }), executionTimeout, 'case execution');
     report.executionMs = Date.now() - executionStarted;
     const result = await caseModule.verify({ observations: report.observations, artifacts: report.checkpoints, expected: scenario.criteria, report });
     if (!Array.isArray(result?.criteria) || !Array.isArray(result.pendingReviews)) throw new Error('verify must return criteria and pendingReviews arrays.');
@@ -266,18 +309,33 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     report.expectedErrors = result.expectedErrors ?? [];
     if (report.errors.some((_, index) => !acceptedErrors.has(index))) { report.status = 'fail'; report.failure ??= { phase: 'browser', message: 'Unexpected browser errors require diagnosis.' }; }
     for (const artifact of report.checkpoints) if (digest(await readFile(join(root, artifact.path))) !== artifact.sha256) throw new Error(`Artifact integrity failure: ${artifact.path}`);
-  } catch (error) { failure('execution', error); }
+  } catch (error) { terminal = true; failure('execution', error); }
   finally {
     if (page && !page.isClosed()) {
+      for (const [id, definition] of [...activeFaults].reverse()) await owned('fault:' + id, async () => {
+        if (definition.type === 'network') await context.unroute(definition.pattern, definition.handler);
+        else await page.evaluate(definition.restore);
+        activeFaults.delete(id);
+      });
+      await owned('touch', releaseTouch);
       for (const key of heldKeys) await owned(`key:${key}`, () => page.keyboard.up(key));
       for (const button of heldButtons) await owned(`button:${button}`, () => page.mouse.up({ button }));
-      if (touchActive) await owned('touch', releaseTouch);
       await owned('input-log', async () => { report.publicInputLog = await page.evaluate(() => globalThis.__qaTelemetry); });
     }
-    if (audio) await owned('audio-capture', () => audio.cleanup());
+    if(audio)await owned('audio-capture',()=>audio.close());
     if (session) await owned('capture-session', () => session.detach());
     if (context) await owned('context', () => context.close());
+    if(video)await owned('video',async()=>{const path='playthrough.webm';await video.saveAs(join(root,path));const original=await video.path();if(original!==join(root,path))await video.delete();const bytes=await readFile(join(root,path));report.video={path,sha256:digest(bytes),width:config.width,height:config.height};});
     if (browser) await owned('browser', () => browser.close());
+    for (const [index, recording] of videos.entries()) await owned(`video:${index + 1}`, async () => {
+      const file = await realpath(await recording.handle.path());
+      if (!inside(root, file)) throw new Error('Video output escaped the owned run.');
+      const bytes = await readFile(file);
+      if (bytes.length < 4 || bytes.readUInt32BE(0) !== 0x1a45dfa3) throw new Error('Video capture did not produce WebM bytes.');
+      const artifact = { id: `gameplay-${index + 1}`, kind: 'video', path: relative(root, file), sha256: digest(bytes), bytes: bytes.length, startedAt: recording.startedAt, lease: recording.lease, audio: false };
+      report.checkpoints.push(artifact);
+      report.videos ??= []; report.videos.push(artifact);
+    });
     if (service?.close) await owned('service', () => service.close());
     report.finishedAt = new Date().toISOString(); report.durationMs = Date.parse(report.finishedAt) - Date.parse(report.startedAt);
     report.infrastructureMs = report.durationMs - (report.executionMs ?? 0);

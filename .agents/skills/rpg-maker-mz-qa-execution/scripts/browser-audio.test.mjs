@@ -14,7 +14,7 @@ import {createAudioCapture} from './browser-audio.mjs';
 import {run} from './browser-runtime.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-const scenario = {audioSources: {master: {path: 'fixture.master', expectedRef: 'browser-audio.test.mjs'}}};
+const scenario = {audioFormat: 'webm', audioSources: {master: {path: 'fixture.master', expectedRef: 'browser-audio.test.mjs'}}};
 const fixture = `<button onclick="unlock()">Start tone</button><script>
   globalThis.fixture = {};
   async function unlock() {
@@ -172,7 +172,7 @@ test('executor restores a declared fault and finishes captures across reload and
       },
       restore: () => {delete fixture.context.decodeAudioData;}
     }},
-    execute: async ({audio, input, wait, read, fault, reload, reopen}) => {
+    execute: async ({audio, input, wait, read, fault, reload, reopenPage: reopen}) => {
       const unlock = async () => {
         await input.key('Tab');
         await input.key('Enter');

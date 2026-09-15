@@ -22,9 +22,22 @@ proof or a truthful pending state. Do not add a separate qualification campaign.
 ## ESM interface
 
 Adapter module (passed as --adapter):
+- Optional `fixtureDirectory({project,request})`: choose the ordinary fixture
+  parent inside the project, independent of receipt metadata. The entry appends
+  a unique run ID; omitted uses `.artifacts/qa-fixtures/<spec-directory>`.
+- Optional `describeRequest({project,request})`: read-only recipe, policy and
+  dependency groups before preparation. Each group supplies `id`, `root`
+  (`project` or installed `sensor`), `path`, optional relative `exclude` and
+  `optional`. Directories include membership and bytes. Declare transitive
+  source/build/runtime/fixture/sensor/expected dependencies, excluding outputs.
+  Missing/unknown metadata sends the request to ordinary QA. No model analysis
+  is required per lookup. Add `describePrepared({project,fixture,request})` to
+  verify actual prepared inputs against the recipe and return stable provenance.
+  Normalizations must be explicit and case-specific; stateful recipes retain
+  their save/origin/history identity. Use the project-local integration guide beside its adapter for supported cases.
 - `prepare({project, output, scenario})`: called by the project preparation entry,
-  before the runner. Return fixture path and preparation metadata. Existing valid
-  fixtures may be reused. Never prepare over production or existing results.
+  before the runner. Return fixture path and preparation metadata. When output is supplied,
+  create that exact new fixture directory. Never prepare over production or existing results.
 - `describe({project, fixture})`: return `{files:[{path,sha256?}], mutablePaths:[],
   capabilities:[], ...projectMetadata}`. File paths are relative to fixture;
   list every relevant engine/plugin/data/asset input. Hashes are checked freshly.
@@ -33,11 +46,11 @@ Adapter module (passed as --adapter):
 
 Case module (passed as --case):
 - `scenario`: `{id, criteria:[{id,variant,expectedRef}], requires:[], browser:
-  {width,height,dpr,locale,channel?,query?,timeoutMs?,launchArgs?}}`.
+  {width,height,dpr,locale,channel?,query?,timeoutMs?,launchArgs?,recordVideo?,hasTouch?,reducedMotion?}}`.
 - `execute(context)`: public actions and auxiliary observations. Context has
-  input.key/keyDown/keyUp, input.pointer.move/down/up/wheel, input.touch.start/move/end,
-  wait(predicate,arg),
-  read(label,function,arg), shot(uniqueId), reload(), descriptor, fixture,
+  input.key/keyDown/keyUp, input.pointer.move/down/up/wheel(deltaX, deltaY),
+  input.touch.start/move/end, wait(predicate,arg),
+  read(label,function,arg), shot(uniqueId), reload(), reopenPage(), reopenContext(), descriptor, fixture,
   output and report. Functions may be async. read labels observations; wait
   polls a read-only predicate. Key hold duration is a gesture parameter, not
   a readiness assertion. Raw browser ownership is retained by the runner.
@@ -56,86 +69,124 @@ candidate's observations. Use composition rather than subclassing the runner.
 
 Modules may export sourceFiles as file URLs for local helper dependencies that
 contribute to the run; the runner snapshots and hashes these with entry modules.
-  Browser keyReleaseMs (default 35) is the released portion of a key gesture;
+Browser keyReleaseMs (default 35) is the released portion of a key gesture;
 wait predicates still own game readiness.
-
-`input.pointer.wheel(deltaX, deltaY)` sends a mouse-wheel gesture at the current
-pointer position, with deltas in CSS pixels. Move to the intended target first,
-then wait for the application effect: wheel dispatch does not wait for scrolling
-or the game update. The report records the requested deltas and the trusted
-WheelEvent delivered by Chrome. This is browser input, not proof of a physical
-mouse or touchpad device.
-
-For a touch criterion, declare `scenario.browser.hasTouch: true` before launch.
-`input.touch.start(x, y)`, `move(x, y)` and `end()` send one-finger touch gestures
-through the owned Chrome session. Coordinates are viewport CSS pixels. End a
-gesture before starting another. The runner cancels a remaining touch before
-reload/reopen and during cleanup; events and requests stay in the input log.
-This tests Chrome touch handling with touch capability enabled, not a physical
-touchscreen. The case must still use public gestures to reach the game effect.
 
 If the contract deliberately triggers a browser error, verify may return
 expectedErrors: [{index, expectedRef, reason}] referencing the preserved error
 array. Unclassified browser errors fail the run; never suppress the original log.
 
-## WebAudio recordings
+## Input and document ownership
 
-For an assigned audio criterion, declare `scenario.audioSources` entries as
-`{master: {path: 'WebAudio._masterGainNode', expectedRef: 'path/to/contract'}}`.
-The path must resolve to an existing AudioNode in a running context after a
-public player gesture. `context.audio.start(id, 'master')` connects an observing
-MediaStream destination without replacing the audible destination.
-`context.audio.stop()` disconnects only that branch and registers a hashed
-Opus/WebM artifact, duration, sample rate, per-channel RMS and peak.
-Only one recording may run at a time. `reload()` and `reopen()` finish an
-outstanding recording before replacing its document; if recording fails, the
-navigation does not proceed. Cleanup also stops an outstanding recording.
-Decode/write errors propagate, release the capture state and do not register a
-successful checkpoint. A capture is evidence of rendered graph audio,
-not physical speaker output or human comfort. No microphone/device permission
-is requested, and no unrelated tab or app is recorded.
+Set `browser.hasTouch: true` for one-finger `input.touch.start(x,y)`, `move(x,y)`
+and `end()` in viewport CSS coordinates. Lifecycle transitions cancel an active
+touch; cleanup releases held keys and pointer buttons. This is synthesized Chrome
+input, not physical touchscreen evidence. `browser.reducedMotion` is passed to
+the browser context (`reduce` or `no-preference`).
 
-For a declared boundary fault, export `apply()` and `restore()` on its definition.
-`context.fault(id, false)` invokes only that restore function and records restoration.
-Both functions operate solely at the assigned external I/O boundary; use `finally`
-to restore before a retry or when the case exits.
+Width, height and DPR configure the context. Screenshots retain their actual
+bytes and hashes without geometry/raster equality guards. The runner does not
+prepare or test native browser zoom. Remove retired `nativeZoom` options from
+cases; a supplied retired option is rejected explicitly. Document identity,
+owned page/context, focus and visibility remain checked around public actions.
 
-The tool's lifecycle suite lives beside the module, outside the game suites.
-From the repository root, with Node 22+ and Chrome installed:
+`input.publicCommand(path,args)` is available only for names explicitly listed in
+`scenario.publicCommands`. Use it only at an authorized setup/public-command
+boundary; a historical setup recipe does not authorize campaign mutation or
+calling the behavior under test instead of exercising player actions.
 
-```sh
-npm ci --prefix .agents/skills/rpg-maker-mz-qa-execution/scripts
-node --test .agents/skills/rpg-maker-mz-qa-execution/scripts/browser-audio.test.mjs
-```
+## Reload and reappearance
 
-It uses temporary synthetic WebAudio fixtures and isolated Chrome processes,
-with speaker output muted. It tests actual Opus/WebM recording and filesystem
-writes, injected allocation/decode failures, write collisions and executor
-reload/reopen/fault restoration. Fixtures and artifacts are removed on exit;
-the suite does not use the game, user profile, microphone or shared server.
+- `reload()` reloads the owned page and updates its document identity.
+- `reopenPage()` closes the page and opens another page in the same browser
+  context. It preserves that context's storage and records the old page's inputs.
+- `reopenContext()` exports real storage, closes the owned context, creates a new
+  context/target and restores storage before its first page. `reopen()` retains
+  this same meaning for existing callers; it never changes meaning by project.
 
-## Native save archives
+Release keys/buttons before reopening. Restore active external faults before
+recreating the context. Audio is finalized before navigation; a capture failure
+stops that transition. A new page starts through ordinary boot: the case must
+select Continue/Load through the UI and verify the actual saved campaign.
+Reopening, storage export or source equality alone does not prove successful load.
 
-A project may declare an immutable `descriptor.storageFixture` with `{path,
-sha256}` matching an entry in `descriptor.files`. The JSON uses Playwright
-storage-state format with IndexedDB included. The runner verifies its path/hash
-and local origin, then supplies it to `newContext` before creating the first
-page. It records `storagePreparation.phase = before-first-page`. No import or
-storage replacement operation is exposed during gameplay. Cookie imports and
-foreign origins are rejected for these local game fixtures.
+## Save capture and pre-boot import
 
-`context.storage.capture(id)` reads storage from the owned context, verifies the
-document lease before/after, and registers a hashed `id.storage.json` artifact.
-It never changes game storage. The project case must first verify native save
-completion and a consistent persisted index, then bind the unchanged payload
-and index to game/source revision, origin, actual campaign and producer inputs.
-The project adapter owns compatibility checks and must copy an archived master
-into each new fixture, recording omitted navigation and its producer. Later
-autosaves belong only to that context; never replace the archived master.
+Declare `scenario.storage.expectedRef` before calling `storage.capture(id)` after
+a public save. It returns `{id,path,sha256,origin,expectedRef,state,...metadata}`,
+where `state` is the unchanged Playwright storage payload including IndexedDB.
+The hashed artifact is registered in both `report.checkpoints` and
+`report.storageExports`. The project owns native payload/index validation and
+checkpoint provenance. Capture is read-only and cannot fabricate a campaign.
 
-Generic capture/path/hash/lease coverage lives in
-`scripts/browser-storage.test.mjs`. Native checkpoint production, pre-boot
-restore, Continue and branch integrity require the project's directed case;
-synthetic storage unit inputs do not prove legal navigation.
+The descriptor may select exactly one explicit input contract:
 
-Dryland's named `bust-save-incompatible` scenario is a deliberate compatibility-negative fixture: it imports an unchanged archive from a different native revision only to assert native Continue refusal and usable New Game. Ordinary archive consumers require exact runtime file hashes and revision. `DRYLAND_QA_BASELINE` is limited to the producer scenario, copies the four recorded historical runtime/layout files into a disposable game, and retains their hashes in producer provenance; it never touches the working game or save facts.
+- `storageFixture:{path,sha256}`: immutable inventoried archive already bound to
+  the fixture's exact local origin; its hash must also appear in `descriptor.files`.
+- `storageImport:{path,sha256,sourceOrigin}`: immutable inventoried input whose
+  single local origin is remapped to the owned server, preserving save bytes.
+- `storageSeed:{path,sha256,sourceOrigin,expectedRef}`: the same declared replay
+  operation with an additional expected-contract reference for existing adapters.
+
+The loader checks path, hash, one local origin and absence of cookies before
+creating the first page. It records `report.storagePreparation.phase` as
+`before-first-page`, plus source and remapped hashes in `report.storageImport`.
+Project key mapping and campaign compatibility belong in the adapter; no import
+operation is available during gameplay. Named incompatible-save cases and historical
+producer recipes belong in project-local guidance beside the adapter.
+
+`browser-storage.mjs` owns these storage primitives; its accompanying
+`browser-storage.test.mjs` covers the helper contract. Project suites retain the
+native checkpoint and Continue cases.
+
+## Audio and video
+
+Declare `scenario.audioSources:{id:{path,expectedRef}}` for an existing running
+WebAudio node after a public gesture. `audio.start(captureId,sourceId)` and
+`audio.stop()` capture graph output without detaching its audible destination.
+IDs are unique across the entire run, including reopened documents.
+
+`scenario.audioFormat` explicitly selects `webm` or `wav` (default). Both return
+hashed artifacts registered in `report.checkpoints` and `report.audioRecordings`.
+WebM uses Opus with decoded channel metrics; WAV uses stereo PCM with sample
+counts and metrics. Artifacts retain source identity, duration and sample rate.
+Inspect/listen to the actual material for assigned perceptual claims; rendered
+samples alone do not establish speaker output, comfort or human acceptance.
+
+`audio-capture.mjs` exposes the format entry points and WAV encoder;
+`browser-audio.mjs` owns the single WebM capture implementation. Their suites are
+`scripts/tests/audio-capture.test.mjs` and `scripts/browser-audio.test.mjs` relative
+to the installed skill. Decode/write/allocation failures stay visible, release
+owned resources and do not register a successful artifact. Lifecycle and final
+cleanup close outstanding captures before replacing their page.
+
+`browser.recordVideo:true` records each owned page to `video/`, registering its
+hash and initial identity in `report.videos` and checkpoints after teardown.
+It requires the FFmpeg binary for the installed Playwright version. The legacy
+`browser.video:true` retains the final page as `playthrough.webm`; choose one
+recording option. Video has no audio, so assigned sound evidence stays separate.
+Review video after teardown, when its bytes are complete.
+
+## External faults and deadlines
+
+Declare `scenario.faultIds` and `faults:{id:{type,expectedRef,...definition}}`.
+`type:'boundary'` requires browser-side `apply` and `restore`; `type:'network'`
+requires a route `pattern` and aborts matching requests. `fault(id)` applies the
+fault and `fault(id,false)` restores only that owned boundary/route. Cleanup
+attempts every active restoration and preserves the first failure. Network
+requests, responses and failures are retained in `report.network`.
+
+`browser.timeoutMs` also bounds asynchronous `read` callbacks. A temporal
+observation may append auxiliary rows to `__qaTelemetry.pendingObservation.rows`
+and stop scheduling work when `pendingObservation.cancelled` is true. Failed
+observations retain partial evidence. Whole-case execution uses
+`browser.executionTimeoutMs` (default 600000); each cleanup uses
+`browser.cleanupTimeoutMs` (default 15000). These are failure deadlines, not waits
+that advance game state. `observation-deadline.mjs` owns those boundaries.
+
+## Project-local integration
+
+Read the project's declared QA guide and the integration note beside its adapter.
+Record real game layout, archive producers, origin/port, supported receipt recipes
+and ordinary fallback there. Generic skills resolve their own support files from
+the installation and do not require another project's checkout or historical plans.

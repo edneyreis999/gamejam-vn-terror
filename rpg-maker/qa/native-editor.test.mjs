@@ -12,7 +12,7 @@ export const sourceFiles = [
   new URL('./native-save-archive.mjs', import.meta.url)
 ];
 
-export const scenario = {
+export const scenario = {storage:{expectedRef:"planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios"},
   id: 'native-editor-authorship',
   criteria: [{ id: 'authorship', variant: 'native-editor-copy', expectedRef: 'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios' }],
   requires: ['native-mz', 'public-input'],
@@ -420,7 +420,7 @@ export async function execute(context) {
   await context.shot('editor-departure');
 
   // A real close/reopen and Continue must restore the native payload and its authored picture.
-  await context.reopen();
+  await context.reopenPage();
   await player.choose('Continuar');
   await player.file(departure.fileId);
   await player.ready();

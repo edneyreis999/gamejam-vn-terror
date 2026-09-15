@@ -90,9 +90,8 @@ critério. Preservar cada pasta de execução e anexar `visual-review.json`; nun
 reescrever o relatório bruto para fazê-lo passar. Os drivers legados agora
 produzem somente evidência parcial em pastas próprias, sem sobrescrever IDs.
 
-Retomada adicional: `DRYLAND_QA_SURFACE=current-package` valida a cópia atual sem
-a frase histórica de edição. `DRYLAND_QA_VIEWPORT=native-zoom` usa janela real,
-aguarda zoom de 110% aplicado via Computer Use e exige ao menos 1280×720 pixels
-CSS; conferir também o retângulo efetivo do canvas. `large-reduced` continua sendo
-1920×1080 emulado com movimento reduzido. O zoom real não altera as preferências
-do perfil pessoal do usuário.
+As antigas variantes de ajuste de zoom foram retiradas. Para a matriz corrente,
+seguir [eventbridge-minimal-runtime.md](eventbridge-minimal-runtime.md) e a
+[integração local das skills](../../../rpg-maker/qa/skill-integration.md).
+O executor comum não abre uma sessão para solicitar ajustes de zoom nem confere
+igualdade de geometria/raster durante capturas.

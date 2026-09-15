@@ -23,8 +23,13 @@ in full before browser input. When project integration is absent or incomplete,
 read [references/project-integration.md](references/project-integration.md) in full
 before preparation. Resolve this skill's scripts by its installed location.
 Helper roles: dependency installation is bootstrap; directed-browser.mjs mutates
-only the isolated QA runtime/output; capture and inspection are reads. On script
+only the isolated QA runtime/output; request-evidence.mjs also writes receipts;
+inspect-evidence.mjs records completed inspection; audio-capture.mjs and browser-audio.mjs attach an isolated graph recording destination and writes
+registered audio artifacts; capture and inspection are reads of the running output. On script
 failure preserve the run and follow the recovery branch in the directed reference.
+Before fixture preparation, use request-evidence.mjs through the directed reference.
+Consume eligible collection and inspection separately; receipt failures continue
+through ordinary QA without a new gate or a required optimization repair.
 For non-browser sensors, use the project's declared interface and assigned proof.
 Honor a user's pause before browser launch, including smoke tests.
 

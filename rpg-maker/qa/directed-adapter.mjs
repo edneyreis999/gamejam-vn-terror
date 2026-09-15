@@ -1,4 +1,4 @@
-import { cp, mkdtemp, readdir, readFile, writeFile, rm } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -8,9 +8,10 @@ import { archiveFiles, validateNativeArchive } from './native-save-archive.mjs';
 
 export const sourceFiles = [new URL('../tests/helpers/native-chrome.mjs', import.meta.url), new URL('./native-save-archive.mjs', import.meta.url)];
 
-export async function prepare({ project, archivePath = process.env.DRYLAND_QA_SAVE_ARCHIVE }) {
-  const directory = await mkdtemp(join(tmpdir(), 'dryland-directed-'));
-  const fixture = join(directory, 'game');
+export async function prepare({ project, output, archivePath = process.env.DRYLAND_QA_SAVE_ARCHIVE }) {
+  const directory = output ? resolve(output) : await mkdtemp(join(tmpdir(), 'dryland-directed-'));
+  if (output) await mkdir(directory);
+  const fixture = output ? directory : join(directory, 'game');
   try {
     await cp(resolve(project, 'rpg-maker/The Dryland Drowned'), fixture, { recursive: true });
     if (archivePath) {

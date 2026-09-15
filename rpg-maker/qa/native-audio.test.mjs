@@ -9,7 +9,7 @@ const audioCoverage={
  se:{status:'authored-and-system-cue',canonical:['CommonEvents[47,48,67] command250','System.sounds']}
 };
 if (!audioCoverage[cue]) throw new Error(`Unsupported DRYLAND_QA_AUDIO cue: ${cue}`);
-export const scenario={id:'audio-'+cue,criteria:[{id:'audio',variant:cue,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',timeoutMs:30000}};
+export const scenario={id:'audio-'+cue,criteria:[{id:'audio',variant:cue,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],audioFormat:'webm',audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',timeoutMs:30000}};
 const keys=['bgmVolume','bgsVolume','meVolume','seVolume'];
 const volumes=context=>context.read('audio-preferences',()=>Object.fromEntries(['bgmVolume','bgsVolume','meVolume','seVolume'].map(k=>[k,ConfigManager[k]])));
 async function consolePoint(context,type,label=`console-${type}`){
@@ -108,7 +108,7 @@ export async function execute(context){
   await context.input.key('Escape');await player.ready();assert.deepEqual((await player.snapshot('audio-campaign-after-options')).campaign,before.campaign);
   await context.input.key('Tab');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);await context.shot('audio-hide');
   await context.input.key('Tab');await player.ready();await context.audio.stop();
-  await context.reopen();await player.choose('Continuar');await player.file(file);await player.ready();assert.deepEqual(await volumes(context),configured);
+  await context.reopenPage();await player.choose('Continuar');await player.file(file);await player.ready();assert.deepEqual(await volumes(context),configured);
   context.report.observations.push({label:'audio-result',kind:'audio-result',value:{cue,se,configured,fastInput,coverage:audioCoverage[cue]}});return;
  }
  await context.wait(kind=>AudioManager['_'+kind+'Buffer']?.isPlaying(),cue);
@@ -130,7 +130,7 @@ export async function execute(context){
  assert.deepEqual((await player.snapshot('audio-campaign-after-options')).campaign,before.campaign);
  await context.input.key('Tab');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);await context.shot('audio-hide');
  await context.input.key('Tab');await player.ready();await context.audio.stop();
- await context.reopen();await player.choose('Continuar');await player.file(file);await player.ready();assert.deepEqual(await volumes(context),configured);
+ await context.reopenPage();await player.choose('Continuar');await player.file(file);await player.ready();assert.deepEqual(await volumes(context),configured);
  context.report.observations.push({label:'audio-result',kind:'audio-result',value:{cue,initial,muted,restored,configured,transition,fastInput,coverage:audioCoverage[cue]}});
 }
 export async function verify({expected,artifacts,report}){

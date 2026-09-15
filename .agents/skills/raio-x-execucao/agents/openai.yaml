@@ -1,0 +1,6 @@
+interface:
+  display_name: "Raio X de execução"
+  short_description: "Slides de tempo, tokens e qualidade da execução"
+  default_prompt: "Use $raio-x-execucao para analisar a execução indicada e criar os slides em docs/raio-x/<slug>/."
+policy:
+  allow_implicit_invocation: false

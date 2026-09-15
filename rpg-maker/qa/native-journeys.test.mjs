@@ -5,7 +5,7 @@ import { captureNativeSave, sha256 } from './native-save-archive.mjs';
 export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url),new URL('../tests/fixtures/gdd-competencies.json',import.meta.url)];
 const variant=process.env.DRYLAND_QA_JOURNEY||'physical-first-reunite';
 const gdd=JSON.parse(await readFile(new URL('../tests/fixtures/gdd-competencies.json',import.meta.url),'utf8'));
-export const scenario={id:variant,criteria:[{id:'campaign',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
+export const scenario={storage:{expectedRef:"planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios"},id:variant,criteria:[{id:'campaign',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
 const names=['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska'];
 async function readCredits(context,label){
  return context.read(label,()=>{
@@ -214,7 +214,7 @@ export async function execute(context){
  await finishCredits(context,player,'first');
  const preserved=await context.read('terminal-file-after-title',id=>StorageManager.loadZip('file'+id),terminal.fileId);
  assert.equal(sha256(preserved),terminal.payloadSha256);
- await context.reopen();await player.choose('Continuar');await player.file(terminal.fileId);
+ await context.reopenPage();await player.choose('Continuar');await player.file(terminal.fileId);
  await player.ready();
  assert.equal((await player.snapshot('terminal-after-reopen')).campaign.endingId,terminal.campaign.endingId);
  assert.equal((await player.snapshot('continued-file-id')).fileId,terminal.fileId);

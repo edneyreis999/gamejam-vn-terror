@@ -4,7 +4,7 @@ import { captureNativeSave, sha256 } from './native-save-archive.mjs';
 import { observeBustPassage, observeBustTransition } from './native-bust-observation.mjs';
 export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url),new URL('./native-bust-observation.mjs',import.meta.url)];
 const family=process.env.DRYLAND_QA_CONTEXT||'farewell';
-export const scenario={id:'continuity-'+family,criteria:[{id:'continuity',variant:family,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
+export const scenario={storage:{expectedRef:"planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios"},id:'continuity-'+family,criteria:[{id:'continuity',variant:family,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
 async function reach(player){
  for(let i=0;i<80;i++){
   const surface=await player.ready(),{campaign}=await player.snapshot('context-navigation');
@@ -35,7 +35,7 @@ export async function execute(context){
  await context.wait(()=>SceneManager._scene instanceof Scene_Options&&!SceneManager._scene.isBusy());await context.shot('options');
  await context.input.key('Escape');await player.ready();assert.equal((await player.surface()).text,text);assert.deepEqual((await player.snapshot('after-options')).campaign,before);
  await observeBustPassage(context,player);const save=await captureNativeSave(context,'context-checkpoint');
- await context.reopen();await player.choose('Continuar');await player.file(save.fileId);await player.ready();
+ await context.reopenPage();await player.choose('Continuar');await player.file(save.fileId);await player.ready();
  assert.deepEqual((await player.snapshot('loaded-checkpoint')).campaign,save.campaign);
  assert.equal(await reach(player),id);await observeBustPassage(context,player);
  assert.equal((await player.surface()).text,text);assert.deepEqual((await player.snapshot('after-reread-prefix')).campaign,before);

@@ -1,12 +1,13 @@
 import {writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
-export function createAudioCapture({getPage, identity, report, root, digest, scenario}) {
+export function createAudioCapture({getPage, identity, report, root, digest, scenario, usedIds = new Set(), register = artifact => report.checkpoints.push(artifact)}) {
   let active;
   const start = async (id, sourceId) => {
-    if (active || !/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(id)) throw new Error('Invalid or overlapping audio capture.');
+    if (active) throw new Error('An audio capture is already active.');
+    if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(id) || usedIds.has(id)) throw new Error('Invalid or reused audio capture ID.');
     const source = scenario.audioSources?.[sourceId];
-    if (!source?.expectedRef || !/^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*)+$/.test(source.path)) throw new Error('Audio source must be declared with a contract reference.');
+    if (!source?.expectedRef || !/^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*)*$/.test(source.path)) throw new Error('Audio source must be declared with a contract reference.');
     await identity();
     const metadata = await getPage().evaluate(path => {
       const node = path.split('.').reduce((value, key) => value[key], globalThis);
@@ -32,10 +33,11 @@ export function createAudioCapture({getPage, identity, report, root, digest, sce
       return {mimeType, sampleRate: node.context.sampleRate, contextTime: node.context.currentTime, contextState: node.context.state};
     }, source.path);
     active = {id, sourceId, source, metadata, at: Date.now()};
+    usedIds.add(id);
     report.observations.push({label: id, kind: 'audio-tap-start', ...active});
     await identity();
   };
-  const stop = async () => {
+  const stop = async ({partial = false} = {}) => {
     if (!active) throw new Error('No active audio capture.');
     await identity();
     try {
@@ -62,23 +64,26 @@ export function createAudioCapture({getPage, identity, report, root, digest, sce
           });
           return {data: dataUrl.slice(dataUrl.indexOf(',') + 1), duration: decoded.duration, sampleRate: decoded.sampleRate, channels};
         } finally {
-          node.disconnect(destination);
-          for (const track of destination.stream.getTracks()) track.stop();
-          delete globalThis.__qaAudioCapture;
+          try { node.disconnect(destination); }
+          finally {
+            for (const track of destination.stream.getTracks()) track.stop();
+            delete globalThis.__qaAudioCapture;
+          }
         }
       });
       const {data, ...analysis} = recording;
       const bytes = Buffer.from(data, 'base64');
       const path = active.id + '.webm';
       await writeFile(join(root, path), bytes, {flag: 'wx'});
-      const artifact = {id: active.id, path, type: 'audio', sha256: digest(bytes), at: Date.now(), capture: {...active, ...analysis}, limits: ['Rendered WebAudio graph recording; physical speaker output and human comfort require separate review.']};
-      report.checkpoints.push(artifact);
+      const artifact = {id: active.id, path, type: 'audio', kind: 'audio', partial, source: active.source, sourceId: active.sourceId, sha256: digest(bytes), at: Date.now(), capture: {...active, ...analysis}, limits: ['Rendered WebAudio graph recording; physical speaker output and human comfort require separate review.']};
+      register(artifact);
+      (report.audioRecordings ??= []).push(artifact);
       await identity();
       return artifact;
     } finally {
       active = undefined;
     }
   };
-  const cleanup = async () => {if (active) await stop();};
-  return {start, stop, cleanup};
+  const cleanup = async () => {if (active) await stop({partial: true});};
+  return {start, stop, cleanup, close: cleanup};
 }

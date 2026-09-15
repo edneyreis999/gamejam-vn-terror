@@ -72,7 +72,7 @@ canonicalCase('IT-079','selected file archives restore before boot into independ
  for(const branch of ['producer','A','B']){
   const archivePath=branch==='producer'?undefined:path.join(output,'producer','parent.archive.json');
   const prepared=await adapter.prepare({project:process.cwd(),archivePath});t.after(()=>rm(path.dirname(prepared.fixture),{recursive:true,force:true}));
-  const caseModule={scenario:{id:'archive-'+branch,criteria:[{id:'native-storage',variant:branch,expectedRef:'planos/tasks/eventbridge-minimal-runtime/task-14.md'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',timeoutMs:30000}},
+  const caseModule={scenario:{storage:{expectedRef:'native checkpoint production and branch integrity'},id:'archive-'+branch,criteria:[{id:'native-storage',variant:branch,expectedRef:'planos/tasks/eventbridge-minimal-runtime/task-14.md'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',timeoutMs:30000}},
    sourceFiles:[new URL('../../qa/native-player.mjs',import.meta.url),new URL('../../qa/native-save-archive.mjs',import.meta.url)],
    async execute(context){
     const player=new DirectedNativePlayer(context);

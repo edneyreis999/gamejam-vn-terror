@@ -24,9 +24,9 @@ Tasks01–14 concluídas; os quatro ramos08/11/12/13 foram integrados pela14. As
 
 Leia [execução local](../../_memory/local-game-run.md) antes de iniciar/reutilizar o servidor. Na raiz: `npm start`; origem `http://127.0.0.1:18726/`. Uma sessão/perfil isolado e um servidor por vez. O executor da skill inicia o mesmo servidor local para a cópia completa e o encerra. Porta ocupada exige identificar processo/conteúdo; nunca encerrar servidor desconhecido.
 
-Chrome153.0.8010.36/Node22.23.2 disponíveis. `system_profiler SPAudioDataType` confirmou alto-falantes do MacBook Pro como saída padrão; isso não comprova audição ou aprovação. O MZ está acessível por CUA (`jp.co.kadokawa.rpgmz`); a primeira abertura expirou, a segunda mostrou a janela. Abrir uma cópia descartável, preservando o projeto pessoal que estava aberto. Interação real com o editor ainda será executada. O navegador dirigido declara1280×720 ou1920×1080 CSS, DPR1 e escala nativa inicial1; PNG e geometria devem concordar. Zoom nativo excluído pela ADR-G003; usar escala padrão. Movimento normal/reduzido é registrado por sessão.
+Chrome153.0.8010.36/Node22.23.2 disponíveis. `system_profiler SPAudioDataType` confirmou alto-falantes do MacBook Pro como saída padrão; isso não comprova audição ou aprovação. O MZ está acessível por CUA (`jp.co.kadokawa.rpgmz`); a primeira abertura expirou, a segunda mostrou a janela. Abrir uma cópia descartável, preservando o projeto pessoal que estava aberto. Interação real com o editor ainda será executada. O navegador dirigido declara1280×720 ou1920×1080 CSS, DPR1 e escala nativa inicial1; As dimensões configuram a janela; o executor comum não impõe igualdade de geometria/raster na captura. Zoom nativo excluído pela ADR-G003; usar escala padrão. Movimento normal/reduzido é registrado por sessão.
 
-A inspeção usa objetos MZ, rede e storage somente leitura. Toda decisão passa por controles públicos. Não usar seed injetada, dispatch direto, switches/variáveis de campanha editados, console QA, reconstrução visual ou importação de save sintético em jornada dirigida. Os casos canônicos de falhas I/O, estados exaustivos e texto longo são integração isolada, identificados como tal. A skill mantém a identidade da página, viewport, fontes, inputs, gravações e teardown.
+A inspeção usa objetos MZ, rede e storage somente leitura. Toda decisão passa por controles públicos. Não usar seed injetada, dispatch direto, switches/variáveis de campanha editados, console QA, reconstrução visual ou importação de save sintético em jornada dirigida. Os casos canônicos de falhas I/O, estados exaustivos e texto longo são integração isolada, identificados como tal. A skill mantém identidade da página, foco, inputs, gravações e teardown; a configuração da janela não é uma guarda de geometria.
 
 ## Caminhos nativos atuais
 
@@ -149,3 +149,10 @@ Julgamentos finais continuam separados: autor sem JavaScript avalia a localizaç
 ## Exclusão de zoom nativo — ADR-G003
 
 A [ADR-G003](../../adrs/adr-g003-excluir-testes-de-zoom-nativo.md) substitui parcialmente as variantes de zoom antes previstas neste guia. Não programar nem retomar testes de zoom nativo. As tentativas anteriores permanecem históricas. A matriz desktop e os demais sensores continuam vigentes.
+
+## Integração comum das skills
+
+A [nota local](../../../rpg-maker/qa/skill-integration.md) registra preparo com output
+explícito, captura de storage, WebM declarado e reabertura de página no mesmo
+contexto. O executor comum também oferece recriação explícita de contexto, WAV,
+vídeo e recibos com fallback ordinário quando faltam metadados de equivalência.

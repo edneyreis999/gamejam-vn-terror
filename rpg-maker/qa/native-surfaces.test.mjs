@@ -3,7 +3,7 @@ import { DirectedNativePlayer } from './native-player.mjs';
 import { captureNativeSave, sha256 } from './native-save-archive.mjs';
 export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url)];
 const variant=process.env.DRYLAND_QA_SURFACE||'native-tavern-controls',large=process.env.DRYLAND_QA_VIEWPORT==='large';
-export const scenario={id:variant,criteria:[{id:'controls',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md'}],requires:['native-mz','public-input'],audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{width:large?1920:1280,height:large?1080:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
+export const scenario={storage:{expectedRef:"planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios"},id:variant,criteria:[{id:'controls',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md'}],requires:['native-mz','public-input'],audioFormat:'webm',audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{width:large?1920:1280,height:large?1080:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
 export async function execute(context){
  const player=new DirectedNativePlayer(context);
  if(!context.descriptor.storageFixture){await player.choose('Jogar');await context.wait(()=>SceneManager._scene instanceof Scene_File&&!SceneManager._scene.isBusy());await context.input.key('Escape');await player.choicesContaining('Jogar');await context.shot('cancelled-file-title');}
@@ -98,7 +98,7 @@ export async function execute(context){
   await player.choose('Elowen');await player.choose('Retirar do grupo');await player.returnToTavern();assert.equal((await player.snapshot('removed-hero')).campaign.draftPartyIds.length,2);await player.choose('Elowen');await player.choose('Selecionar');await player.returnToTavern();
   await player.choose('Destinos');const routes=await player.until('destinations');await player.choose(routes.labels[0]);await player.choose('Partir');await player.until('approaches');
   const a=await captureNativeSave(context,'campaign-a');assert.ok(a.nativeState.readUnits.includes(83));
-  await context.reopen();await player.choose('Novo jogo');
+  await context.reopenPage();await player.choose('Novo jogo');
   await context.wait(()=>SceneManager._scene instanceof Scene_File&&!SceneManager._scene.isBusy());
   await context.shot('occupied-file-selector');await context.input.key('Escape');await player.choicesContaining('Continuar');
   assert.equal(sha256(await context.read('a-after-cancel',id=>StorageManager.loadZip('file'+id),a.fileId)),a.payloadSha256);
@@ -106,9 +106,9 @@ export async function execute(context){
   await player.file(2);await player.returnToTavern();
   const b=await player.snapshot('campaign-b-fresh');assert.equal(b.fileId,2);assert.ok(!b.readUnits.includes(83));assert.notEqual(b.campaign.seed,a.campaign.seed);
   assert.equal(sha256(await context.read('a-preserved-after-b',id=>StorageManager.loadZip('file'+id),a.fileId)),a.payloadSha256);
-  const bSave=await captureNativeSave(context,'campaign-b');await context.reopen();await player.choose('Continuar');await player.file(a.fileId);await player.ready();
+  const bSave=await captureNativeSave(context,'campaign-b');await context.reopenPage();await player.choose('Continuar');await player.file(a.fileId);await player.ready();
   const restored=await player.snapshot('campaign-a-restored');assert.equal(restored.fileId,a.fileId);assert.deepEqual(restored.campaign,a.campaign);assert.ok(restored.readUnits.includes(83));await player.until('approaches');
-  await context.reopen();await player.choose('Continuar');await player.file(2);await player.ready();assert.deepEqual((await player.snapshot('campaign-b-restored')).campaign,bSave.campaign);assert.ok(!(await player.snapshot('campaign-b-reading')).readUnits.includes(83));
+  await context.reopenPage();await player.choose('Continuar');await player.file(2);await player.ready();assert.deepEqual((await player.snapshot('campaign-b-restored')).campaign,bSave.campaign);assert.ok(!(await player.snapshot('campaign-b-reading')).readUnits.includes(83));
  }
 
  context.report.observations.push({label:'surface-result',kind:'surface-result',value:{variant,before:before.campaign,modes}});
