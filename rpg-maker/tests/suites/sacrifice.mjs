@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, catalog, choices, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, complete, failureWithCount, finishReading, rejectUnchanged, replayUntil } from '../helpers/campaign.mjs';
+import { assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
 const evidence = 'docs/qa/evidence/init-rpg-maker-mz/task-05/IT-012';
 canonicalCase('UT-021', 'one victim activation is irreversible and its original revision cannot kill again', () => {
@@ -122,39 +123,52 @@ canonicalCase('UT-066', 'death context is atomic, immutable, strictly validated 
   assert.deepEqual(accepted(terminal, 'NEW_CAMPAIGN').deathLocations, {});
 
 });
-canonicalCase('IT-012', 'native sacrifice warns before three, two or one candidates and activates exactly one death', { timeout: 120000 }, async t => {
+canonicalCase('IT-012', 'native sacrifice warns before three, two or one candidates and activates exactly one death', { timeout: 240000 }, async t => {
   const browser = await tavern(t);
-  for (const count of [3, 2, 1]) {
-    const state = failureWithCount(count), encounter = state.pendingOutcome.encounterId;
-    const mapId = 6 + Number(encounter.slice(1));
-    await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(state)}; $gameMap._interpreter.clear(); $gameMessage.clear(); $gamePlayer.reserveTransfer(${mapId},10,7,2,0); SceneManager.goto(Scene_Map);`);
-    await browser.waitFor(`$gameMap.mapId() === ${mapId} && $gameMessage.allText().includes('A escolha é irreversível') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()`);
-    assert.equal(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key === 'sacrifice'"), false);
-    assert.deepEqual(await snapshot(browser), state);
-    await browser.screenshot(`${evidence}/warning-${count}.png`);
-    await browser.press('Enter', 13);
-    await choices(browser, 'sacrifice');
-    assert.deepEqual(await browser.evaluate('Array.from({length: SceneManager._scene._choiceListWindow.maxItems()}, (_, i) => $gameVariables.value(36 + i))'), state.partyIds);
-    assert.equal(await browser.evaluate(`Array.from({length:${count}}, (_, index) => $gameScreen.picture(10 + index)).every(picture => picture.x() > 100 && picture.x() < 1180 && picture.y() > 200 && picture.y() < 550)`), true, 'Each candidate illustration must be framed inside the native desktop stage.');
-    await browser.press('Escape', 27);
-    await choices(browser, 'sacrifice');
-    assert.deepEqual(await snapshot(browser), state);
-    await browser.screenshot(`${evidence}/candidates-${count}.png`);
-    await activate(browser, 'sacrifice', count - 1);
-    const victim = state.partyIds[count - 1];
-    await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === ${JSON.stringify(catalog.heroes[victim].name)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0 && $gameScreen.picture(60)?.name() === 'Dryland_${victim}'`);
-    const after = await snapshot(browser);
-    assert.deepEqual(after.deadHeroIds, [...state.deadHeroIds, victim]);
-    assert.equal(after.sequence, state.sequence + 1);
-    assert.deepEqual(after.deathLocations[victim], { routeId: 'physical', encounterId: encounter, encounterPosition: state.position, approachId: state.pendingOutcome.approachId });
-    assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${encounter}`);
-    assert.equal(await browser.evaluate('$gameScreen.picture(50) == null'), true);
-    await browser.screenshot(`${evidence}/farewell-${count}.png`);
-    await browser.press('Enter', 13);
-    await pause(browser);
-    assert.equal(await browser.evaluate('$gameScreen.picture(60) == null'), true);
-    assert.equal(await browser.evaluate('$gameMessage.speakerName()'), '');
-    assert.equal((await snapshot(browser)).deadHeroIds.length, state.deadHeroIds.length + 1);
-    await browser.screenshot(`${evidence}/context-${count}.png`);
+  const scenarios = [3, 2, 1].map(count => ({ state: failureWithCount(count), index: count - 1 }));
+  for (const heroId of heroes) {
+    if (scenarios.some(({ state, index }) => state.partyIds[index] === heroId)) continue;
+    const state = replayUntil('final-sixth-total-loss', candidate =>
+      candidate.phase === 'sacrifice_choice' && candidate.partyIds.includes(heroId));
+    scenarios.push({ state, index: state.partyIds.indexOf(heroId) });
+  }
+  assert.deepEqual([...new Set(scenarios.map(({ state, index }) => state.partyIds[index]))].sort(), heroes);
+  for (const reduced of [false, true]) {
+    await browser.call('Emulation.setDeviceMetricsOverride', { width: reduced ? 1920 : 1280, height: reduced ? 1080 : 720, deviceScaleFactor: 1, mobile: false });
+    await browser.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: reduced ? 'reduce' : 'no-preference' }] });
+    for (const { state, index } of scenarios) {
+      const count = state.partyIds.length, encounter = state.pendingOutcome.encounterId;
+      const victim = state.partyIds[index], label = `${victim}-${reduced ? 'reduced' : 'normal'}`;
+      const mapId = (encounter[0] === 'A' ? 6 : 14) + Number(encounter.slice(1));
+      await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(state)}; $gameMap._interpreter.clear(); $gameMessage.clear(); $gamePlayer.reserveTransfer(${mapId},10,7,2,0); SceneManager.goto(Scene_Map);`);
+      await browser.waitFor(`$gameMap.mapId() === ${mapId} && $gameMessage.allText().includes('A escolha é irreversível') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()`);
+      assert.equal(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key === 'sacrifice'"), false);
+      assert.deepEqual(await snapshot(browser), state);
+      await browser.screenshot(`${evidence}/warning-${label}.png`);
+      await browser.press('Enter', 13);
+      await choices(browser, 'sacrifice');
+      assert.deepEqual(await browser.evaluate('Array.from({length: SceneManager._scene._choiceListWindow.maxItems()}, (_, i) => $gameVariables.value(36 + i))'), state.partyIds);
+      assert.equal(await browser.evaluate(`Array.from({length:${count}}, (_, index) => $gameScreen.picture(10 + index)).every(picture => picture.x() > 100 && picture.x() < 1180 && picture.y() > 200 && picture.y() < 550)`), true, 'Each candidate illustration must be framed inside the native desktop stage.');
+      await browser.press('Escape', 27);
+      await choices(browser, 'sacrifice');
+      assert.deepEqual(await snapshot(browser), state);
+      await browser.screenshot(`${evidence}/candidates-${label}.png`);
+      await activate(browser, 'sacrifice', index);
+      await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === ${JSON.stringify(catalog.heroes[victim].name)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0 && $gameScreen.picture(60)?.name() === 'Dryland_${victim}'`);
+      const after = await snapshot(browser);
+      assert.deepEqual(after.deadHeroIds, [...state.deadHeroIds, victim]);
+      assert.equal(after.sequence, state.sequence + 1);
+      assert.deepEqual(after.deathLocations[victim], { routeId: state.dungeonId, encounterId: encounter, encounterPosition: state.position, approachId: state.pendingOutcome.approachId });
+      assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${encounter}`);
+      assert.equal(await browser.evaluate('$gameScreen.picture(50) == null'), true);
+      await browser.screenshot(`${evidence}/farewell-${label}.png`);
+      await assertPortraitFraming(browser, [60], `farewell.${victim}`);
+      await browser.press('Enter', 13);
+      await pause(browser);
+      assert.equal(await browser.evaluate('$gameScreen.picture(60) == null'), true);
+      assert.equal(await browser.evaluate('$gameMessage.speakerName()'), '');
+      assert.equal((await snapshot(browser)).deadHeroIds.length, state.deadHeroIds.length + 1);
+      await browser.screenshot(`${evidence}/context-${label}.png`);
+    }
   }
 });

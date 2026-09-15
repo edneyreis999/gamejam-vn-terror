@@ -1,6 +1,6 @@
 # Auditoria estática do pacote — task 14
 
-**Data:** 2026-09-12  
+**Data:** 2026-09-12\
 **Escopo:** `data/Map*.json`, `data/CommonEvents.json`, comandos de plugin e
 assets que esses dados referenciam; imports dos utilitários/QA/testes canônicos;
 diff contra engine/vendor. Esta é uma inspeção do candidato compartilhado, não

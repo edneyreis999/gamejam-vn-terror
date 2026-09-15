@@ -1,8 +1,8 @@
 # Revisão final independente — testes, tools, README e asset-provenance
 
-**Data:** 2026-09-13  
-**Base congelada:** `5d0d9ab0296e7150cfbdd7ab263d304eeab06fdb`  
-**Estado revisado:** working tree compartilhado; sem commit, browser ou servidor.  
+**Data:** 2026-09-13\
+**Base congelada:** `5d0d9ab0296e7150cfbdd7ab263d304eeab06fdb`\
+**Estado revisado:** working tree compartilhado; sem commit, browser ou servidor.\
 **Escopo:** todos os 40 caminhos alterados/adicionados/removidos em `rpg-maker/tests/`, `rpg-maker/tools/`, `rpg-maker/README.md` e `rpg-maker/asset-provenance/`.
 
 ## Fingerprints

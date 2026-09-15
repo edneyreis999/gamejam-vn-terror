@@ -7,6 +7,9 @@ verification_ids: [V-001, V-002, V-003, V-005, V-006, V-007, V-008, V-009, V-010
 
 # Task 16 — Execute resumable QA and verify delivery
 
+**Atualização — 2026-09-15:** os bustos compartilhados do Conselho e das oito despedidas foram corrigidos e passaram nos testes e na inspeção visual. A [verificação atual](verification.md#correção-dos-bustos-compartilhados--2026-09-15) encerra o bloqueio técnico de enquadramento; task16 permanece blocked-verify somente pelos quatro pareceres humanos. Registros anteriores de defeito/escopo pendente são históricos. Mudanças ainda locais, sem commit ou atualização do PR.
+
+
 ## Outcome
 
 **Reopened expansion scope — 2026-09-14:** implementation tasks19–29 and the new task15 planning delta precede this execution. MAV-013/014 extend the current primary criteria; prior completed/blocked lots and human decisions below remain dated history. The expanded candidate now has scoped directed results; the final closeout below owns its remaining sensor/visual/human gaps.
@@ -187,9 +190,9 @@ Final image inspection also confirms cropped farewell H4 in the retained shared 
 
 ### Exclusão de zoom nativo — ADR-G003
 
-[ADR-G003](../../../docs/adrs/adr-g003-excluir-testes-de-zoom-nativo.md) aceita a retirada desse teste como esforço excessivo de QA. Não retomar `surfaces-zoom-01` nem preparar novas variantes de zoom. A falha anterior permanece histórica; resoluções desktop e modos de movimento continuam no plano. Antes de uma futura execução da matriz canônica que ainda contenha variantes de zoom (IT078), retirar somente essas variantes do código legado, preservando os demais sensores; esta atualização é documental e não executou essa limpeza.
+[ADR-G003](../../../docs/adrs/adr-g003-excluir-testes-de-zoom-nativo.md) aceita a retirada desse teste como esforço excessivo de QA. Não retomar `surfaces-zoom-01` nem preparar novas variantes de zoom. A falha anterior permanece histórica; resoluções desktop e modos de movimento continuam no plano. A limpeza do código ficou pendente na atualização documental inicial e foi realizada localmente no final verify de2026-09-15: IT078 mantém as duas variantes desktop sem zoom e o driver de superfícies deixa de selecionar zoom pela variável de ambiente.
 
-Pendências atuais: enquadramento do Conselho/despedidas e os quatro pareceres da tabela Human Acceptance, com aceite parcial já registrado para autoria/organização de Gorvak. Nenhuma nova execução foi realizada para esta ADR.
+Pendências atuais: enquadramento do Conselho/despedidas e os quatro pareceres da tabela Human Acceptance, com aceite parcial já registrado para autoria/organização de Gorvak. O [final verify do PR13](verification.md#final-verify-do-pr13--2026-09-15) registra seis casos canônicos novos com PASS, incluindo IT078 sem zoom, e os limites de reaproveitamento da evidência anterior. A task permanece blocked-verify.
 
 
 ### Apoio ao parecer de autoria — comentários dos plugins Dryland

@@ -1,6 +1,6 @@
 # Proveniência — correção do oráculo de raster no zoom nativo
 
-Data: 2026-09-13  
+Data: 2026-09-13\
 Escopo autorizado: `.agents/skills/rpg-maker-mz-qa-execution/scripts/browser-runtime.mjs` e este registro.
 
 ## Motivo

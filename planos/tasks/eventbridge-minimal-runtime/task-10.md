@@ -88,4 +88,3 @@ Desktop variants: 1280×720 normal at100%; 1920×1080 reduced at100%; 1920×1080
 First failures retained: CE135's parameter1 enables menu; both the initial config edit and the old Map002 command used it. Read-only startup trace proved CoreEngine did reserve/execute CE4. Corrected parameter0 and removed the conflicting map command. The isolated HIDE fixture initially reused a paused closing message window, making its first capture misleading; it now cancels that fixture window through the native lifecycle and waits for the new message to be open. Final geometry/appearance captures and all four variants passed.
 
 Evidence, raw failures, startup trace, fingerprints, current hashes, Chrome153.0.8010.36/Node22.23.2 metadata, images and actual viewport/zoom measurements: docs/qa/evidence/eventbridge-minimal-runtime/task-10/20260912/. These are isolated native integrations, not directed QA or human approval. No mixed-sensor V-ID or commit is closed by this result.
-

@@ -1,6 +1,6 @@
 # BUG-20260911-tavern-portraits-offscreen: heróis aparecem cortados ou ausentes nas conversas
 
-- **Status:** open
+- **Status:** resolved — correção técnica verificada no checkout em 2026-09-15; ainda sem commit
 - **Impact (user-side):** Friction
 - **Severity:** Medium · **Priority:** P2
 - **Persona Affected:** Rui, revisor de conteúdo
@@ -58,3 +58,24 @@ The eight tavern interaction maps now pass the48-image normal/reduced review. Th
 The bug stays **open** for the shared Council presentation. A genuine current campaign reaches Map023 and `campaign-physical-01/story-76.png` shows oversized/cropped Gorvak, Griznik and Ivaí. The inherited generic scales/positions are still authored in the Council/shared helpers, unlike the calibrated solo scenes. The active technical-art contract explicitly preserves Council/Andirá and shared styles; the user was asked whether to extend scope. Pending that decision, this is a confirmed follow-up, not a visual PASS or an implemented correction. Raw current evidence and reviewer reports are indexed by task16 of eventbridge-minimal-runtime.
 
 The farewell shared presentation is also affected: `continuity-farewell-01/bust-1-farewell-H4.png` visibly shows only Seraphina's enlarged feet while her final line is displayed. This is a confirmed framing failure, distinct from the passing HIDE/Options/Continue behavior. The shared farewell bodies were retained rather than migrated in this increment; include their calibration in the same presentation follow-up, with all eight assets checked.
+
+
+## Correção compartilhada — 2026-09-15
+
+A solicitação explícita do usuário autorizou o escopo antes adiado. Os bloqueios técnicos remanescentes foram corrigidos nos seguintes locais:
+
+| Cena | Local no editor |
+| --- | --- |
+| Conselho — heróis, Ivaí e reflexo de Andirá | Map023, evento001; CEs068/069/070/071 (falantes), 073 (entrada), 074 (intervenção) e079 (neutro). CE075 reutiliza a entrada corrigida. |
+| Despedida de Gorvak | CE282 — farewell.H1 |
+| Despedida de Elowen | CE283 — farewell.H2 |
+| Despedida de Griznik | CE284 — farewell.H3 |
+| Despedida de Seraphina | CE285 — farewell.H4 |
+| Despedida de Bimbren | CE286 — farewell.H5 |
+| Despedida de Liora | CE287 — farewell.H6 |
+| Despedida de Vaelith | CE288 — farewell.H7 |
+| Despedida de Draska | CE289 — farewell.H8 |
+
+A escala genérica ignorava dimensões e margens transparentes dos PNGs. O Conselho agora usa escala/posição nativa por personagem, com variantes absolutas de falante/ouvinte; Ivaí e a arte existente de Andirá foram reenquadrados. As despedidas usam os parâmetros individuais já calibrados nos mapas037–044. Nenhum PNG ou plugin foi modificado. Conversas da taverna e epílogos conservam a correção e as verificações anteriores descritas acima.
+
+IT012/061 reproduziram o defeito com os dados antigos e passaram após a alteração. IT012 cobre agora os oito heróis em ambos os modos; IT047/054/062 também passam. A inspeção real de18 capturas do Conselho e16 das despedidas confirma rostos/parte superior visíveis sem corte indevido; a janela sobrepõe a parte inferior conforme o enquadramento solo existente. Isso encerra este bug técnico, sem aprovar composição artística, navegação ou áudio. A [verificação da task16](../../../planos/tasks/eventbridge-minimal-runtime/verification.md#correção-dos-bustos-compartilhados--2026-09-15) registra comandos, evidência, equivalência e os quatro pareceres humanos ainda pendentes. As seções anteriores preservam as observações de suas respectivas datas.

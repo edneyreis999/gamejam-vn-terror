@@ -278,3 +278,10 @@ A inspeção final confirmou também o problema nos helpers compartilhados de de
 ### Decisão posterior — excluir zoom nativo
 
 A [ADR-G003](../../adrs/adr-g003-excluir-testes-de-zoom-nativo.md), aceita pelo usuário, retira o sensor de zoom do contrato e dos bloqueadores. Sua falha de preflight não foi convertida em PASS. A task16 permanece blocked-verify por enquadramento e julgamentos humanos. Nenhum jogo ou teste foi executado nesta alteração documental.
+
+
+### Correção de enquadramento — 2026-09-15
+
+O usuário autorizou e foi concluída a calibração dos sete helpers do Conselho, quatro comandos de Ivaí em Map023 e oito despedidas. Cinco IDs canônicos distintos (IT012/047/054/061/062) passaram, com falhas anteriores preservadas de IT012/061. A revisão visual inspecionou18 imagens do Conselho e16 despedidas em1280×720/normal e1920×1080/reduzido. O [bug de retratos](../bugs/BUG-20260911-tavern-portraits-offscreen.md#correção-compartilhada--2026-09-15) está resolvido tecnicamente no checkout.
+
+São retestes de integração e inspeção visual, sem nova campanha dirigida ou audição humana. Os percursos/áudio anteriores conservam seu alcance por equivalência, documentada no [fechamento atual](../../../planos/tasks/eventbridge-minimal-runtime/verification.md#correção-dos-bustos-compartilhados--2026-09-15). MAV-013 passa tecnicamente; MAV-014 e task16 continuam bloqueados pelos quatro pareceres humanos. `runtime_verified=true`, `human_accepted=false`, `release_ready=false`. A falha de zoom continua excluída, sem reteste. Nenhum commit ou publicação foi realizado nesta correção.
