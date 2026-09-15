@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Epílogos — Afogados em Terra Seca</title>
+<style>
+:root {
+  color-scheme: dark;
+  --page: #141310;
+  --panel: #201c17;
+  --text: #f5ead7;
+  --muted: #c8b99f;
+  --accent: #dfbd7b;
+  --border: #8b7858;
+  --hover: #3a3023;
+  --space: 8px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--text); font-family: Georgia, 'Times New Roman', serif; }
+main { height: 100svh; min-height: 520px; display: flex; flex-direction: column; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 24px; background: var(--page); }
+h1 { margin: 0; font-size: 20px; font-weight: normal; }
+header small { color: var(--muted); font: 12px/1.5 system-ui, sans-serif; }
+.tools { display: flex; align-items: center; gap: 8px; }
+button, select { min-height: 44px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 3px; background: var(--panel); color: var(--text); font: 14px system-ui, sans-serif; cursor: pointer; }
+button:hover, select:hover { background: var(--hover); }
+button:active { background: var(--page); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+button:disabled { color: var(--muted); border-style: dashed; cursor: default; }
+.scene { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.art { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: contain; }
+.dialogue { position: absolute; bottom: 24px; left: 5%; right: 5%; padding: 20px 28px 16px; border: 1px solid var(--border); background: var(--panel); }
+.heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+h2 { color: var(--accent); margin: 0; font-size: 24px; font-weight: normal; }
+.position { font: 13px system-ui, sans-serif; color: var(--muted); }
+#text { font-size: clamp(18px, 1.65vw, 25px); line-height: 1.55; margin: 12px 0 16px; min-height: 3.1em; }
+.controls { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+.hint { color: var(--muted); font: 12px system-ui, sans-serif; }
+.navigation { display: flex; gap: 8px; }
+#next { border-color: var(--accent); }
+#image-error { position: absolute; top: 24px; left: 5%; padding: 16px; background: var(--panel); }
+body.art-only .dialogue { display: none; }
+@media (max-width: 650px) {
+  main { min-height: 640px; }
+  header { padding: 8px 12px; flex-wrap: wrap; gap: 8px; }
+  h1 { font-size: 18px; }
+  header small, .hint { display: none; }
+  .tools { flex-wrap: wrap; }
+  button, select { padding: 8px 12px; }
+  .dialogue { bottom: 12px; left: 12px; right: 12px; padding: 16px; }
+  h2 { font-size: 22px; }
+  #text { font-size: 18px; }
+  .controls { justify-content: flex-end; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1>Epílogos</h1><small>Afogados em Terra Seca · Prévia de leitura</small></div>
+    <div class="tools">
+      <label for="hero">Herói</label>
+      <select id="hero"></select>
+      <button id="toggle" aria-pressed="false">Ocultar texto</button>
+    </div>
+  </header>
+  <section class="scene" aria-label="Cena do epílogo">
+    <img class="art" id="art" alt="">
+    <p id="image-error" role="alert" hidden></p>
+    <article class="dialogue" aria-label="Narração">
+      <div aria-live="polite" aria-atomic="true">
+        <div class="heading"><h2 id="name"></h2><span class="position" id="position"></span></div>
+        <p id="text"></p>
+      </div>
+      <div class="controls">
+        <span class="hint">← → navegar · Enter ou Espaço avançar</span>
+        <nav class="navigation" aria-label="Navegação dos trechos">
+          <button id="previous">← Voltar</button>
+          <button id="next">Avançar →</button>
+        </nav>
+      </div>
+    </article>
+  </section>
+</main>
+<script>
+const heroes = [
+  {
+    "name": "Gorvak",
+    "image": "gorvak.png",
+    "pages": [
+      "Quando retorna, Gorvak encontra os restos da antiga forja cobertos de poeira. Usa sua recompensa para reconstruí-la e chama de volta os aprendizes. Durante semanas, o som dos martelos volta a ocupar a rua.",
+      "Acima da entrada, ele grava os nomes dos companheiros que não sobreviveram à expedição."
+    ]
+  },
+  {
+    "name": "Draska",
+    "image": "draska.png",
+    "pages": [
+      "Após sobreviver à campanha, ela usa sua parte da recompensa para adquirir a mina abandonada e fundar a cooperativa que sempre planejou. Leva meses até que o primeiro túnel seja considerado seguro.",
+      "Nesse tempo, trabalha ao lado dos novos companheiros, recuperando ferramentas, reforçando passagens e aprendendo a dividir as decisões que antes tomava sozinha. Na entrada da mina, uma placa guarda os nomes daqueles que não voltaram.",
+      "Ela acompanha a gravação de cada nome e deixa espaço para uma frase: “Nenhuma recompensa vale esconder um risco da equipe.”"
+    ]
+  },
+  {
+    "name": "Elowen",
+    "image": "elowen.png",
+    "pages": [
+      "Elowen usa sua recompensa para garantir que a mata de sua comunidade permaneça protegida. Os primeiros dias de volta são passados percorrendo as trilhas conhecidas. Em algumas curvas, ainda se vira para comentar algo com quem já não está atrás dela.",
+      "Logo começa a treinar novos batedores. Ensina a atravessar rios, reconhecer armadilhas e encontrar apoio onde parece não existir passagem. Continua provocadora e quase impossível de alcançar numa corrida, mas agora interrompe a marcha para conferir se todos acompanham."
+    ]
+  },
+  {
+    "name": "Griznik",
+    "image": "griznik.png",
+    "pages": [
+      "Griznik abre a oficina que sempre desejou. Na parede atrás da bancada, organiza as lascas recolhidas durante a expedição. Sob cada uma, escreve o nome de um companheiro e uma pequena lembrança: uma piada, uma discussão, um gesto que ninguém mais teria motivo para registrar.",
+      "Sua oficina fica conhecida pelas construções seguras e pelos orçamentos que ele se recusa a reduzir quando isso exige retirar um apoio necessário"
+    ]
+  },
+  {
+    "name": "Seraphina",
+    "image": "seraphina.png",
+    "pages": [
+      "Seraphina inaugura uma pequena casa de cura para receber aqueles que não encontraram ajuda em outro lugar. As prateleiras se enchem de ervas, instrumentos e registros sobre males que muitos preferem ignorar. À noite, organiza o conhecimento trazido da expedição.",
+      "Escreve os tratamentos que funcionaram e demora mais nas páginas dedicadas aos próprios erros."
+    ]
+  },
+  {
+    "name": "Bimbren",
+    "image": "bimbren.png",
+    "pages": [
+      "Bimbren usa a recompensa para reabrir o serviço de mensagens entre as comunidades isoladas. Recupera postos de descanso, organiza os trajetos e contrata novos mensageiros. Na primeira página de seu livro de rotas, registra os nomes dos companheiros que não voltaram.",
+      "Durante algum tempo, ainda promete prazos difíceis e confere o relógio sempre que alguém se atrasa. Até que um jovem mensageiro retorna com a bolsa cheia: a ponte estava cedendo, e ele decidiu interromper a viagem"
+    ]
+  },
+  {
+    "name": "Liora",
+    "image": "liora.bmp",
+    "pages": [
+      "Liora finalmente conclui seu atlas. Espalha sobre a mesa os mapas da expedição e passa meses comparando anotações, corrigindo distâncias e separando o que testemunhou daquilo que apenas suspeita.",
+      "Quando a obra é publicada, algumas páginas trazem rotas interrompidas, advertências e espaços em branco."
+    ]
+  },
+  {
+    "name": "Vaelith",
+    "image": "vaelith.png",
+    "pages": [
+      "Vaelith retorna com os registros da expedição e começa a reconstruir o arquivo que buscava. Reúne cópias dispersas, recupera relatos esquecidos e organiza advertências para que outros reconheçam os perigos que seu grupo enfrentou. Alguns textos ficam sob acesso restrito.",
+      "Nos catálogos, ele explica o risco e indica o preparo necessário para estudá-los."
+    ]
+  }
+];
+const slides = heroes.flatMap((hero, heroIndex) => hero.pages.map((text, page) => ({heroIndex, page, text})));
+const art = document.querySelector('#art');
+const heroSelect = document.querySelector('#hero');
+const previous = document.querySelector('#previous');
+const next = document.querySelector('#next');
+const toggle = document.querySelector('#toggle');
+const error = document.querySelector('#image-error');
+let current = 0;
+heroes.forEach((hero, index) => heroSelect.add(new Option(hero.name, index)));
+function render() {
+  const slide = slides[current];
+  const hero = heroes[slide.heroIndex];
+  const imagePath = `../docs/narrativa/ilustracao-epilogo/${hero.image}`;
+  if (art.getAttribute('src') !== imagePath) {
+    error.hidden = true;
+    art.src = imagePath;
+    art.alt = `Ilustração do epílogo de ${hero.name}`;
+  }
+  heroSelect.value = slide.heroIndex;
+  document.querySelector('#name').textContent = hero.name;
+  document.querySelector('#text').textContent = slide.text;
+  document.querySelector('#position').textContent = `Trecho ${slide.page + 1} de ${hero.pages.length} · Herói ${slide.heroIndex + 1} de ${heroes.length}`;
+  previous.disabled = current === 0;
+  next.textContent = current === slides.length - 1 ? 'Recomeçar ↺' : 'Avançar →';
+}
+function advance() { current = (current + 1) % slides.length; render(); }
+function back() { current = Math.max(0, current - 1); render(); }
+next.addEventListener('click', advance);
+previous.addEventListener('click', back);
+heroSelect.addEventListener('change', () => {
+  current = slides.findIndex(slide => slide.heroIndex === Number(heroSelect.value));
+  render();
+});
+toggle.addEventListener('click', () => {
+  const hidden = document.body.classList.toggle('art-only');
+  toggle.textContent = hidden ? 'Mostrar texto' : 'Ocultar texto';
+  toggle.setAttribute('aria-pressed', String(hidden));
+});
+document.addEventListener('keydown', event => {
+  if (event.target.matches('button, select, input, textarea') || event.altKey || event.ctrlKey || event.metaKey) return;
+  if (['ArrowRight', 'Enter', ' '].includes(event.key)) { event.preventDefault(); advance(); }
+  if (event.key === 'ArrowLeft') { event.preventDefault(); back(); }
+});
+art.addEventListener('error', () => {
+  error.textContent = 'Não foi possível abrir a ilustração. Verifique as imagens em docs/narrativa/ilustracao-epilogo e recarregue a página.';
+  error.hidden = false;
+});
+render();
+</script>
+</body>
+</html>
