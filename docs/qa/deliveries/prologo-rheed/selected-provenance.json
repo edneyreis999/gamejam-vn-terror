@@ -1,0 +1,30 @@
+{
+  "narrador.png": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\runs\\f2c1a8e5-e4b8-4633-9ea1-9b27031900bf\\opening-box-6.png",
+    "sha256": "789c0008d1a5a456debb6741453ebaa5a4c2253f7c02bc7d1040fc65bea0b9d3"
+  },
+  "ivai.png": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\runs\\f2c1a8e5-e4b8-4633-9ea1-9b27031900bf\\opening-box-7.png",
+    "sha256": "a782ac19fcd721ee6a973c86bd300463d4ebd0738271a40d3669de5498b05492"
+  },
+  "rheed-jovem.png": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\pair-final-A3\\opening-box-8.png",
+    "sha256": "e92a5bfe1cd8d0c30a67cc4ccd1ba4bcc5c5fad9231904d842ab50320ec9e462"
+  },
+  "resposta-final.png": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\pair-final-A3\\opening-box-9.png",
+    "sha256": "b5976bf41ba91cf039ad80cdf6c27b80cbf2c5cb112fea1a7c8a35fada80865b"
+  },
+  "preparacao.png": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\pair-final-B\\returned-after-retreat.png",
+    "sha256": "7e0c6de895e3eda81e393a6c41edeb77a8cbd94a70d7ffe9bdf8bc43ec5d0f47"
+  },
+  "prologo.wav": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\pair-final-A3\\opening-audio.wav",
+    "sha256": "b0f4b205ed1bf47ad216f3b4d0555a74dc3a5ad17ee605b6bba606e2b000e9cb"
+  },
+  "preparacao.wav": {
+    "source": "docs\\qa\\evidence\\prologo-rheed\\task-03\\pair-final-A3\\preparation-audio.wav",
+    "sha256": "b6d01e37b0d6e9fa9bd68d8cdbb46c7e1cbb5756c2f504fcce6aa74ba6bd5bcf"
+  }
+}

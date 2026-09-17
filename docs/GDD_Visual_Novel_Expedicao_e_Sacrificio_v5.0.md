@@ -18,7 +18,7 @@ Este GDD consolida as regras mecânicas do antigo documento canônico v0.7, reap
 
 **Atualização confirmada em 2026-09-12:** a seção 26 registra as decisões da entrevista de simplificação do EventBridge. Ela substitui as regras anteriores conflitantes de autoria, restauração visual, arquivos de campanha, revisão de saves, controles de leitura e créditos. A implementação permanece pendente; a spec consolidada e suas propostas técnicas foram aprovadas pelo usuário.
 
-**Atualização 5.0 — Confirmado:** a seção 27 consolida as decisões aceitas para o prólogo de Rheed e substitui os recortes anteriores conflitantes de narração, texto, fundo e áudio da abertura. A spec consolidada foi aprovada pelo usuário; a implementação e as verificações técnicas da task 01 foram concluídas, com QA dirigido e revisão humana concluídos no escopo atualizado. Os snapshots numerados permanecem históricos e inalterados.
+**Atualização 5.0 — Confirmado:** a seção 27 consolida as decisões aceitas para o prólogo de Rheed e substitui os recortes anteriores conflitantes de narração, texto, fundo e áudio da abertura. A spec consolidada está em revisão; implementação e QA permanecem pendentes. O snapshot v4.0 continua histórico e inalterado.
 
 Documentos históricos de origem:
 
@@ -65,7 +65,7 @@ O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`
 
 **Mapas de armadilhas em `init-rpg-maker-mz` — Confirmado:** criar um mapa principal para armadilhas físicas e outro para sobrenaturais, com um submapa exclusivo para cada armadilha na árvore do editor: A1–A8 e B1–B8, respectivamente. Cada submapa é um mapa nativo independente. Essa organização não altera sorteios, composição das rotas ou progresso, nem acrescenta um menu de escolha de armadilhas (ADR-017).
 
-**Organização de mapas em `init-rpg-maker-mz` — Confirmado:** o prólogo tem mapa exclusivo e a taverna interativa tem outro mapa exclusivo no editor. O prólogo alterna fundo preto na narração do Rheed mais velho e taverna nas falas diretas de Ivaí e Rheed jovem (seção 27). Concluí-lo leva à taverna; retornos posteriores não repetem o prólogo nem reiniciam a campanha. Esta decisão não exige um mapa para cada uma das demais cenas (ADR-016).
+**Organização de mapas em `init-rpg-maker-mz` — Confirmado:** o prólogo tem mapa exclusivo e a taverna interativa tem outro mapa exclusivo no editor. O fundo de taverna do prólogo foi substituído pelo fundo preto provisório da seção 27. Concluí-lo leva à taverna; retornos posteriores não repetem o prólogo nem reiniciam a campanha. Esta decisão não exige um mapa para cada uma das demais cenas (ADR-016).
 
 O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve buscar essa visão, mas seu recorte exato será definido posteriormente em specs incrementais e no Trello; aprovar este GDD não significa que todo o conteúdo estará obrigatoriamente presente na primeira entrega da v2.0.
 
@@ -1442,7 +1442,7 @@ Remover os corpos de Common Events deslocados somente após migrar todos os cons
 
 ## 27. Prólogo de Rheed — GDD 5.0
 
-**Confirmado — decisões de produto aceitas na entrevista; implementação, QA dirigido e aceite humano concluídos no escopo desta atualização; refinamentos de encaixe dos bustos e fundo do narrador adiados, saves anteriores fora do escopo.** A [spec incremental](../planos/tasks/prologo-rheed/spec.md), o [roteiro](../planos/tasks/prologo-rheed/prologo-rheed.narrativa.md), a [ADR-001](../planos/tasks/prologo-rheed/adrs/adr-001.md) e a [verificação](../planos/tasks/prologo-rheed/verification.md) consolidam a entrega. O roteiro é a fonte editorial das falas desta abertura; este GDD governa seus fatos e limites. Aprovação das decisões individuais não equivale a QA ou aprovação da implementação.
+**Confirmado — decisões de produto aceitas na entrevista; implementação pendente.** A [spec incremental](../planos/tasks/prologo-rheed/spec.md), o [roteiro](../planos/tasks/prologo-rheed/prologo-rheed.narrativa.md), a [ADR-001](../planos/tasks/prologo-rheed/adrs/adr-001.md) e a [verificação](../planos/tasks/prologo-rheed/verification.md) consolidam a entrega. O roteiro é a fonte editorial das falas desta abertura; este GDD governa seus fatos e limites. Aprovação das decisões individuais não equivale a QA ou aprovação da implementação.
 
 ### 27.1 Efeito e sequência
 
@@ -1474,15 +1474,10 @@ Rheed mais velho conta o que viveu quando jovem, com voz próxima e coloquial, r
 
 **Confirmado:** narração predominante por Rheed mais velho, busto e caixa de diálogo inferior, com intervenções diretas pontuais de Ivaí. Sem cenas ilustradas ou imagens dos documentos. Usar os recursos locais de VisuMZ_2_VNPictureBusts e VisuMZ_4_AttachedPictures por autoria nativa; configuração e ativação serão verificadas na implementação, sem alterar arquivos do fornecedor.
 
-**Baseline de protótipo, ajustada por solicitação do usuário após revisão no Chrome e no RPG Maker MZ:** fundo preto durante a narração de Rheed mais velho (N01–N03); imagem existente `Dryland_Taverna` como fundo nas falas de Ivaí e Rheed jovem (N04–N06). A taverna aparece na primeira fala direta de Ivaí e permanece até a preparação. O prólogo continua sem áudio; não alterar preferências ou áudio do restante do jogo.
+**Baseline de protótipo:** fundo preto e ausência de áudio durante o prólogo. Não alterar preferências ou áudio do restante do jogo. Substitui o fundo de taverna e a ambiência compartilhada apenas na abertura.
 
-**Confirmado:** reutilizar o busto existente de Rheed mais velho e o de Ivaí. O usuário importou manualmente `rpg-maker/The Dryland Drowned/img/pictures/Reed final.png`; o nome nativo é `Reed final`, preservando a grafia e a arte fornecidas. A dependência de importação está resolvida. Não gerar nem escolher outro personagem para substituí-lo.
+**Confirmado:** reutilizar o busto existente de Rheed mais velho informado pelo usuário e o de Ivaí. **Pendente para integração:** identificar o arquivo do busto velho, não encontrado pelo nome Rheed nesta árvore. Não gerar nem escolher outro personagem para substituí-lo.
 
-**Confirmado — busto jovem importado:** usar `img/pictures/Reed-novo.png`, fornecido pelo usuário, preservando a arte. Nas falas diretas N04–N06, Rheed jovem fica à esquerda e Ivaí à direita, ambos visíveis sobre a taverna. Quem fala fica aproximadamente 10% maior; ao trocar o falante, o anterior retorna ao tamanho de escuta. A narração N01–N03 mantém somente Rheed mais velho centralizado sobre preto. Implementação inicial sem animação de zoom, com base dos bustos alinhada acima da caixa de diálogo e remoção de ambos ao entrar na preparação. Substitui a antiga pergunta provisória sem busto.
-
-**Pendente — refinamentos fora do escopo desta atualização, conforme revisão do usuário:** ajustar o encaixe dos bustos na caixa de diálogo e a imagem de fundo nas falas de Rheed mais velho. Manter a apresentação atual nesta entrega. O enquadramento final e a escolha do novo fundo serão definidos em trabalho futuro; nenhuma imagem substituta foi escolhida nesta decisão.
+**Pendente — entrega futura de Technical Art:** produzir o busto de Rheed jovem. **Baseline de protótipo autorizada:** até lá, a pergunta aparece com nome “Rheed”, fundo preto e sem busto. Retirar o busto anterior antes da pergunta e mostrar Ivaí na resposta. Não substituir o jovem pela imagem velha.
 
 Preservar mapa exclusivo, transferência única à preparação, ausência de repetição nos retornos e contratos nativos atuais de leitura e salvamento da seção 26. A introdução de Rheed não muda grupo, regras, rotas ou checkpoints. A verificação cobre texto, bustos, silêncio, leitura e retomada; o efeito narrativo exige avaliação humana.
-
-
-**Escopo de compatibilidade desta atualização do prólogo — Confirmado pelo usuário:** validar jogos novos e saves gerados nesta versão. Compatibilidade com saves anteriores fica fora do escopo; não foi verificada nem foi implementada migração. A task 03 encerra a entrega com os refinamentos visuais da seção 27.4 adiados.

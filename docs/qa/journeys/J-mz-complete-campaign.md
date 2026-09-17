@@ -87,3 +87,8 @@ ADR-005 adds one playable child map and removes42 authoring shortcuts. Gorvak no
 Jogar/arquivo → prólogo Map002 → formação → herói em Map037–044 → retorno/seleção → encontros Maps007–022 → Conselho23 → final25–27 → memorial/epílogos29–36 → créditos. Desistência/recuo/Continue usam checkpoints realmente gravados. MA-A/C/D/E/H.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Prólogo de Rheed — 2026-09-17
+
+O [plano incremental](../guides/prologo-rheed.md) cobre a entrada local nativa, abertura, controles, retomada e retorno à preparação. Usa o roteiro N01–N06, checkpoints genuínos e inspeção somente leitura. [Ciclo concluído no escopo aceito](../reports/2026-09-17-prologo-rheed.md#fechamento-do-ciclo). Não reutilizar procedimentos do protótipo HTML.

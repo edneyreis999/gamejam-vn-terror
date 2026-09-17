@@ -16,7 +16,15 @@ canonicalCase('IT-025','native HIDE and Tab preserve the same message and consum
  await clickConsole(browser,'hide');await hidden(browser,true);
  await click(browser,900,150);await hidden(browser,false);assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
  await browser.screenshot(`${evidence('IT-025')}/restored-prologue.png`);
- await browser.press('Enter',13);await pause(browser);assert.equal((await state(browser)).sequence,before.sequence+1);
+ await browser.press('Enter',13);await pause(browser);
+ assert.match(await browser.evaluate('$gameMessage.allText()'),/Naqueles dias,/);
+ assert.equal((await state(browser)).sequence,before.sequence,'The first narrator passage is still incomplete');
+ await browser.press('Enter',13);await pause(browser);
+ assert.match(await browser.evaluate('$gameMessage.allText()'),/Quando os oito chegaram/);
+ assert.equal((await state(browser)).sequence,before.sequence);
+ await browser.press('Enter',13);await pause(browser);
+ assert.match(await browser.evaluate('$gameMessage.allText()'),/Os papéis eram de Irati/);
+ assert.equal((await state(browser)).sequence,before.sequence+1);
 });
 canonicalCase('IT-026','hidden approach and sacrifice pictures cannot change focus or commit the restoring click',{timeout:120000},async t=>{
  const browser=await tavern(t);

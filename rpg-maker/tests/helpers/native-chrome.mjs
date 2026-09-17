@@ -11,7 +11,7 @@ export const origin = `http://127.0.0.1:${port}/`;
 export const project = path.resolve('rpg-maker/The Dryland Drowned');
 
 export async function startServer(t, directory = project) {
-  const server = spawn('python3', ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const server = spawn(process.platform === 'win32' ? 'python' : 'python3', ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
   let log = '';
   server.stdout.on('data', data => { log += data; });
   server.stderr.on('data', data => { log += data; });

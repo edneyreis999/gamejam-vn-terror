@@ -80,3 +80,8 @@ Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runt
 Menu do herói ou passagem de campanha → HIDE/Options → restaurar o mesmo contexto → FAST apenas no trecho concluído → próxima escolha sem confirmação carregada.1280×720 normal,1920×1080 reduzido e zoom nativo110% no mínimo efetivo. MA-A/B/F.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Prólogo de Rheed — 2026-09-17
+
+O [plano incremental](../guides/prologo-rheed.md) cobre a entrada local nativa, abertura, controles, retomada e retorno à preparação. Usa o roteiro N01–N06, checkpoints genuínos e inspeção somente leitura. [Ciclo concluído no escopo aceito](../reports/2026-09-17-prologo-rheed.md#fechamento-do-ciclo). Não reutilizar procedimentos do protótipo HTML.

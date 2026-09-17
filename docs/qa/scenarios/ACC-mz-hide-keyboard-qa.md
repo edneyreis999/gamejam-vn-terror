@@ -50,3 +50,13 @@ Parcial: HIDE/Options/FAST e dois viewports/modos executados; zoom nativo exclu�
 
 
 A [ADR-G003](../../adrs/adr-g003-excluir-testes-de-zoom-nativo.md) substitui a exigência anterior de zoom neste cenário. Preservar evidência histórica sem reabrir essa variante.
+
+
+## Incremento prologo-rheed — 2026-09-17
+
+**Plano inicial — histórico, executado conforme fechamento abaixo.** S02; lote B1; V-003; HIDE, Settings, FAST e mouse/teclado nos três estados de fala. [Plano dirigido](../guides/prologo-rheed.md) · [Relatório](../reports/2026-09-17-prologo-rheed.md). Os vereditos anteriores mantêm seu escopo; o ciclo novo não altera os passes históricos nem infere aceite humano. Resultados técnicos da task 01 são apoio limitado, não execução destes lotes.
+
+
+### Execução prologo-rheed — 2026-09-17
+
+Ciclo concluído no [relatório](../reports/2026-09-17-prologo-rheed.md#fechamento-do-ciclo): A1–A4, controles e retomada atual verificados; áudio confirmado pelo usuário. O suposto bug visual foi encerrado como falso positivo. Saves antigos e dois refinamentos visuais foram excluídos pelo usuário. Veredito PASS no escopo acordado; resultados históricos preservados.

@@ -43,7 +43,7 @@
   ];
   function createCatalog(configuration) {
     const scenes = {
-      prologue: ['prologue.01', 'prologue.02', 'irati.01'],
+      prologue: ["prologue.rheed.01","prologue.rheed.02","prologue.rheed.03","prologue.rheed.04","prologue.rheed.05","prologue.rheed.06"],
       'irati.02': ['irati.02.01'], 'map.reveal': ['map.reveal.01', 'map.reveal.02'],
       automatic_retreat: ['automatic_retreat.01'],
       council: ['council.01', 'council.02', 'council.03', 'irati.03', 'council.challenge', 'council.solo', 'council.confession', 'council.andira'],

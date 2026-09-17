@@ -47,3 +47,13 @@ Estado corrente: **blocked-verify**. A/B, cancelamento, arquivos nativos, ramifi
 ## Expansão de autoria por mapa — 2026-09-14
 
 PASS técnico: arquivosA/B e Continue nas fronteiras com proveniência jogada; nenhuma campanha de usuário foi alterada. MAS-02/05/07: MA-A/F/I; arquivos/checkpoints genuínos e edição nativa Map002/Map038. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+## Incremento prologo-rheed — 2026-09-17
+
+**Plano inicial — histórico, executado conforme fechamento abaixo.** S03; lotes B2/B4; V-003; checkpoint new_campaign e partida genuína; save antigo de formação indisponível. [Plano dirigido](../guides/prologo-rheed.md) · [Relatório](../reports/2026-09-17-prologo-rheed.md). Os vereditos anteriores mantêm seu escopo; o ciclo novo não altera os passes históricos nem infere aceite humano. Resultados técnicos da task 01 são apoio limitado, não execução destes lotes.
+
+
+### Execução prologo-rheed — 2026-09-17
+
+Ciclo concluído no [relatório](../reports/2026-09-17-prologo-rheed.md#fechamento-do-ciclo): A1–A4, controles e retomada atual verificados; áudio confirmado pelo usuário. O suposto bug visual foi encerrado como falso positivo. Saves antigos e dois refinamentos visuais foram excluídos pelo usuário. Veredito PASS no escopo acordado; resultados históricos preservados.

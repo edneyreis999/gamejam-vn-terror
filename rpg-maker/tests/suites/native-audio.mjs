@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { selectFile } from '../helpers/native-chrome.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause } from '../helpers/formation.mjs';
+import { activate, choices, pause, prologueMarkers } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
 import { accepted } from '../helpers/campaign.mjs';
@@ -30,8 +30,15 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  const observations=[];const browser=await entry(t);assert.equal(await browser.evaluate('Boolean(AudioManager._bgmBuffer||AudioManager._bgsBuffer||AudioManager._meBuffer)'),false);
  await browser.evaluate(`window.audioBuffers=[];const create=AudioManager.createBuffer;AudioManager.createBuffer=function(folder,name){const b=create.call(this,folder,name);audioBuffers.push({folder,name,buffer:b});return b;};`);
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
+ assert.equal((await state(browser)).phase,'intro');
+ for(const marker of prologueMarkers){
+  await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+  assert.equal(await browser.evaluate('Boolean(AudioManager._bgmBuffer||AudioManager._bgsBuffer||AudioManager._meBuffer)'),false);
+  await browser.press('Enter',13);
+ }
+ await choices(browser,'formation');
  await browser.waitFor("AudioManager._currentBgs?.name==='People1'&&AudioManager._bgsBuffer.isReady()");
- const current=await state(browser);assert.equal(current.phase,'intro');
+ const current=await state(browser);assert.equal(current.phase,'formation');
  for(const [route,name]of [['physical','Drips'],['supernatural','Wind1'],['final','Darkness']]){
   // Valid prepared route states exercise the installed native audio event.
   let prepared=route==='final'?finalChoice():fixtures.encounter_intro;

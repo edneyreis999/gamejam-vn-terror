@@ -10,6 +10,10 @@ Após o aceite, preservar os registros brutos em arquivo local com manifesto e h
 
 O [incremento MZ aceito](deliveries/init-rpg-maker-mz/README.md) tem resumo, aceite, manifesto do runtime e cinco capturas independentes, incluindo o desaparecimento de Gorvak e a visita posterior. Não exige os milhares de arquivos brutos para compor seu devlog. Os181 arquivos de ciclos anteriores em evidence foram retirados do versionamento no commit e888338, por orientação do usuário, com cópias locais e hashes preservados. Links desses ciclos continuam como referência ao acervo local.
 
+## Ciclo do prólogo de Rheed — 2026-09-17
+
+[Plano dirigido](guides/prologo-rheed.md), [charter](charters/CH-prologo-rheed.md) e [relatório](reports/2026-09-17-prologo-rheed.md). Ciclo concluído no escopo aceito: jogos novos e saves desta versão; encaixe dos bustos e fundo do narrador adiados. [Material selecionado](deliveries/prologo-rheed/README.md). O relatório preserva os vereditos históricos.
+
 ## Ciclo corrente — EventBridge mínimo
 
 A [spec incremental](../../planos/tasks/eventbridge-minimal-runtime/spec.md) está em QA dirigido. Use o [guia executável e banco](guides/eventbridge-minimal-runtime.md), o [charter de primeira campanha](charters/CH-eventbridge-first-campaign.md) e o [relatório corrente](reports/2026-09-12-eventbridge-minimal-runtime.md). Autoria e arquivos seguem o [guia MZ](../../rpg-maker/README.md). A integração técnica01–14 está consolidada; editor, jornadas e quatro pareceres humanos têm sensores próprios. Resultados históricos não passam este candidato.

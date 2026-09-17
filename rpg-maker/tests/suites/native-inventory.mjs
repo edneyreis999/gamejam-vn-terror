@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { access } from 'node:fs/promises';
 import { selectFile, project } from '../helpers/native-chrome.mjs';
 import { localAssets } from '../../tools/native-files.mjs';
-import { catalog } from '../helpers/formation.mjs';
+import { prologueMarkers, catalog } from '../helpers/formation.mjs';
 import { entry } from '../helpers/native-shared.mjs';
 
 const memorialUnits = Array.from({length:16},(_,index)=>125+index*9);
@@ -46,8 +46,8 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
  const lists=[...events.filter(Boolean).map(event=>({owner:'CE'+event.id,list:event.list})),...maps.flatMap(map=>map.pages.map(page=>({owner:`Map${String(map.id).padStart(3,'0')}/event${page.eventId}/page${page.page}`,mapId:map.id,list:page.list}))),...troops.filter(Boolean).flatMap(troop=>troop.pages.map(page=>({owner:'Troop'+troop.id,list:page.list})))];
  for(const id of memorialUnits){assert.ok(events[id],'Memorial unit remains live');assert.ok(events[347].list.some(command=>command.code===117&&command.parameters[0]===id),'CE347 retains its inscription selector');}
  const prologue=mapById.get(2).pages.flatMap(page=>page.list);
- assert.equal(prologue.filter(command=>command.code===101).length,3,'Map002 owns all three prologue text boxes');
- assert.equal(prologue.filter(command=>command.code===357&&command.parameters[0]==='Dryland_EventBridge'&&command.parameters[1]==='ReadingComplete').length,3,'Map002 owns their three semantic completions; IT-004 proves order and identity');
+ assert.equal(prologue.filter(command=>command.code===101).length,9,'Map002 owns the nine approved prologue text boxes');
+ assert.equal(prologue.filter(command=>command.code===357&&command.parameters[0]==='Dryland_EventBridge'&&command.parameters[1]==='ReadingComplete').length,6,'Map002 owns six semantic completions; IT-004 proves order and identity');
  for(const id of Object.keys(catalog.passages)){
   let mapId;const hero=/^epilogue\.H([1-8])$/.exec(id),encounter=/^(?:encounter|result)\.([AB])([1-8])(?:\.|-)/.exec(id),ending=/^ending\.(reunite|destroy|bad)\./.exec(id);
   if(hero)mapId=28+Number(hero[1]);
@@ -93,14 +93,15 @@ canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image 
       return plugin.call(this,interpreter,name,command,args);
     };
     const load=ImageManager.loadBitmap;ImageManager.loadBitmap=function(folder,name){if(preloadActive&&folder==='img/pictures/')preloadLog.push({type:'request',name});return load.call(this,folder,name);};
-    const show=Game_Screen.prototype.showPicture;Game_Screen.prototype.showPicture=function(id,name,...args){if(name==='Dryland_Taverna')preloadLog.push({type:'stage'});return show.call(this,id,name,...args);};`);
+    const show=Game_Screen.prototype.showPicture;Game_Screen.prototype.showPicture=function(id,name,...args){if(name==='Dryland_Taverna')preloadLog.push({type:'stage',mapId:$gameMap.mapId()});return show.call(this,id,name,...args);};`);
   await browser.press('Enter',13);await selectFile(browser,1);
-  for(const text of ['A chuva acompanha Ivaí','Minha mãe deixou registros','Irati escrevera']){
+  for(const text of prologueMarkers){
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(text)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);await browser.press('Enter',13);
   }
   await choices(browser,'formation');
   const first=await browser.evaluate('preloadLog');
-  const stage=first.findIndex(item=>item.type==='stage');
+  // The same background now appears in the prologue before preparation owns its preload.
+  const stage=first.findIndex(item=>item.type==='stage'&&item.mapId===3);
   assert.ok(stage>0,JSON.stringify(first));assert.deepEqual(first.slice(0,stage).filter(item=>item.type==='request').slice(-29).map(item=>item.name),expected);
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'),11,'Preload calls preserve the consecutive native choice blocks');
   // Hold an unused bust at the I/O boundary. The provider starts loading but

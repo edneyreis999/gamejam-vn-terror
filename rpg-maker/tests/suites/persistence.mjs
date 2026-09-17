@@ -6,7 +6,7 @@ import path from 'node:path';
 import { deflateSync } from 'node:zlib';
 import { validateNativeArchive, sha256 } from '../../qa/native-save-archive.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
+import { prologueMarkers, act, activate, choices, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
 import { councilState } from '../helpers/closing.mjs';
 import { installPhase, clickConsole } from '../helpers/native-shared.mjs';
@@ -288,7 +288,7 @@ canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns
  assert.equal(await browser.evaluate("StorageManager.loadZip('file1')"),aBytes,'Cancelling the occupied-file selection preserves A');
  await titleChoice(browser,'Novo jogo');await selectFile(browser,2);await pause(browser);
  assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'),[]);
- for(const marker of ['A chuva acompanha Ivaí','Minha mãe deixou registros','Irati escrevera']){
+ for(const marker of prologueMarkers){
   await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
   await browser.press('Enter',13);
  }

@@ -80,3 +80,8 @@ Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runt
 Cópia no MZ → editar fala em Map002 e Map038 → salvar → Novo jogo → jogar ambas as falas; após campanha, fechar/reabrir → escolher o arquivo verdadeiro → comparar o limite salvo. Cancelar seletor preserva arquivos. MA-A/F/I.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Prólogo de Rheed — 2026-09-17
+
+O [plano incremental](../guides/prologo-rheed.md) cobre a entrada local nativa, abertura, controles, retomada e retorno à preparação. Usa o roteiro N01–N06, checkpoints genuínos e inspeção somente leitura. [Ciclo concluído no escopo aceito](../reports/2026-09-17-prologo-rheed.md#fechamento-do-ciclo). Não reutilizar procedimentos do protótipo HTML.

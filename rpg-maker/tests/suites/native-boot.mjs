@@ -1,3 +1,4 @@
+import { prologueMarkers } from '../helpers/formation.mjs';
 // Suite: native campaign entry.
 // Invariant: explicit entry uses the selected native stack and exclusive scene maps.
 // Boundary IN: installed engine/plugins, authored title/prologue, map tree, loopback process.
@@ -13,7 +14,7 @@ const evidenceRoot = path.resolve('docs/qa/evidence/init-rpg-maker-mz/task-01');
 const requiredPlugins = [
   'VisuMZ_0_CoreEngine', 'VisuMZ_1_MessageCore', 'VisuMZ_1_OptionsCore', 'VisuMZ_1_SaveCore',
   'VisuMZ_2_ExtMessageFunc', 'VisuMZ_2_PictureChoices', 'VisuMZ_2_VNPictureBusts',
-  'VisuMZ_3_ChoiceCmnEvts', 'VisuMZ_4_EventTitleScene', 'VisuMZ_4_MessageVisibility',
+  'VisuMZ_3_ChoiceCmnEvts', 'VisuMZ_4_AttachedPictures', 'VisuMZ_4_EventTitleScene', 'VisuMZ_4_MessageVisibility',
   'Dryland_CampaignRules', 'Dryland_EventBridge', 'Dryland_Presentation'
 ];
 
@@ -81,7 +82,7 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
   await browser.press('Enter', 13);await selectFile(browser,1);
   await browser.waitFor("$gameMap.mapId() === 2 && SceneManager._scene._messageWindow?.pause");
   const passages = [];
-  for (const marker of ['A chuva acompanha Ivaí', 'Minha mãe deixou registros', 'Irati escrevera']) {
+  for (const marker of prologueMarkers) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     passages.push(await browser.evaluate('$gameMessage.allText()'));
     if (passages.length === 1) await browser.screenshot(path.join(evidenceRoot, 'IT-001/prologue.png'));

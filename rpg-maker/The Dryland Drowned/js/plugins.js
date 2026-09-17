@@ -258,7 +258,7 @@ var $plugins =
     },
     {
         "name": "VisuMZ_4_AttachedPictures",
-        "status": false,
+        "status": true,
         "description": "[RPG Maker MZ] [Tier 4] [Version 1.05] [AttachedPictures]",
         "parameters": {
             "BreakHead": "----------------------------------",
@@ -266,7 +266,7 @@ var $plugins =
             "ATTENTION": "READ THE HELP FILE",
             "BreakSettings": "----------------------------------",
             "MsgWindow": "",
-            "PictureIDs:arraynum": "[\"61\",\"62\",\"63\",\"64\",\"65\",\"66\",\"67\",\"68\",\"69\",\"70\"]",
+            "PictureIDs:arraynum": "[]",
             "ContainerPosition:num": "1",
             "BreakEnd1": "----------------------------------",
             "End Of": "Plugin Parameters",
