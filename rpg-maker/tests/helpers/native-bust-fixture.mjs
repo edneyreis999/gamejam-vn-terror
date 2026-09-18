@@ -34,9 +34,11 @@ export async function prepareBustFixture(t, label, edit) {
 // Read the rendered asset's opaque extent: transparent PNG margins must not
 // make an offscreen character pass a full-bitmap intersection check.
 export async function assertPortraitFraming(browser, ids, context) {
-  await browser.waitFor(`(${JSON.stringify(ids)}).every(id=>{const p=$gameScreen.picture(id),s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id);return p&&s?.bitmap?.isReady()&&s.worldVisible&&s.worldAlpha>0&&p.opacity()===255&&p._duration===0&&p._toneDuration===0;})`);
+  const spriteFor = `(id)=>{const scene=SceneManager._scene;const container=($gameSystem._attachedMessagePictures||[]).includes(id)?scene._messageWindow._pictureContainer:scene._spriteset._pictureContainer;return container?.children.find(s=>s._pictureId===id);}`;
+  await browser.waitFor(`(${JSON.stringify(ids)}).every(id=>{const p=$gameScreen.picture(id),s=(${spriteFor})(id);return p&&s?.bitmap?.isReady()&&s.worldVisible&&s.worldAlpha>0&&p.opacity()===255&&p._duration===0&&p._toneDuration===0;})`);
+  await browser.evaluate("new Promise(resolve=>Graphics.app.renderer.once('postrender',resolve))");
   const rows = await browser.evaluate(`(${JSON.stringify(ids)}).map(id=>{
-    const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id),b=s.bitmap;
+    const s=(${spriteFor})(id),b=s.bitmap;
     const rgba=b.context.getImageData(0,0,b.width,b.height).data;
     let left=b.width,top=b.height,right=0,bottom=0;
     for(let y=0;y<b.height;y++)for(let x=0;x<b.width;x++)if(rgba[(y*b.width+x)*4+3]>16){left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x+1);bottom=Math.max(bottom,y+1);}
@@ -50,4 +52,19 @@ export async function assertPortraitFraming(browser, ids, context) {
       `${context}: upper portrait must remain visible above the message: ${JSON.stringify(row)}`);
   }
   return rows;
+}
+
+export async function assertHidePreservesPortraits(browser, ids, capturePath) {
+  const inspect=`(()=>{const scene=SceneManager._scene;return ${JSON.stringify(ids)}.map(id=>{const container=($gameSystem._attachedMessagePictures||[]).includes(id)?scene._messageWindow._pictureContainer:scene._spriteset._pictureContainer;const sprite=container.children.find(s=>s._pictureId===id),bounds=sprite.getBounds();return{id,name:sprite.picture().name(),visible:sprite.worldVisible,alpha:sprite.worldAlpha,x:bounds.x,y:bounds.y,width:bounds.width,height:bounds.height};});})()`;
+  await assertPortraitFraming(browser,ids,'before HIDE');
+  const before=await browser.evaluate(inspect);
+  const reading=await browser.evaluate('({text:$gameMessage.allText(),campaign:$gameSystem._dryland.campaign})');
+  await browser.press('Tab',9);
+  await browser.waitFor('SceneManager._scene._messageWindow.scale.x===0');
+  await browser.evaluate("new Promise(resolve=>Graphics.app.renderer.once('postrender',resolve))");
+  assert.deepEqual(await browser.evaluate(inspect),before,'HIDE must leave the actual scene portraits visible at the same bounds.');
+  await browser.screenshot(capturePath);
+  await browser.press('Tab',9);
+  await browser.waitFor('SceneManager._scene._messageWindow.scale.x===1');
+  assert.deepEqual(await browser.evaluate('({text:$gameMessage.allText(),campaign:$gameSystem._dryland.campaign})'),reading);
 }

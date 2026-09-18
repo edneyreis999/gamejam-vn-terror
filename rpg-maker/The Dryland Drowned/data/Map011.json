@@ -3829,7 +3829,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A grade é erguida, prendendo a carcaça em uma baia."
+                "A grade pesada é levantada antes da chegada da criatura. Assim que a carcaça<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "de ferro entra na baia, a grade é solta e prende suas pernas. O fogo continua"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "saindo pelo pescoço, mas atinge apenas a parede de pedra. O caminho fica livre<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "para o grupo."
               ]
             },
             {
@@ -4243,7 +4275,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O fecho é desconectado sem tocar nas correntes incandescentes."
+                "O fecho do arreio é aberto no pequeno intervalo entre os golpes das correntes.<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Sem o fecho, as correntes caem e se enrolam nas pernas da criatura. Ela tenta<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "correr, tropeça no próprio metal e não consegue alcançar o grupo."
               ]
             },
             {
@@ -4657,7 +4703,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A válvula é aberta no intervalo exato entre as descargas."
+                "Os foles fazem três estalos antes de cada jato de fogo. Depois do terceiro<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "som, a válvula é aberta e o vapor escapa pela chaminé. O fogo diminui até"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "desaparecer, e a criatura para de se mover. A cavalariça fica segura para a<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "travessia."
               ]
             },
             {

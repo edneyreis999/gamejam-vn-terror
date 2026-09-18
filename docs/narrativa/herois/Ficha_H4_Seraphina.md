@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhida para o sacrifício:** verifica rapidamente as condições dos sobreviventes, entrega seus suprimentos e transforma a despedida em instruções para mantê-los vivos.
 - **Frase curta de despedida:** “Vivam. Depois decidam o que esta morte significa.”
 - **O que o grupo perde emocionalmente com sua morte:** a presença que compreendia o medo e o sofrimento sem tratá-los como fraqueza, além da esperança de que todo horror possuía uma regra investigável.
-- **O que faz depois da campanha, caso sobreviva:** abre sua casa de cura e registra tudo o que aprendeu, incluindo os próprios erros. Passa a exigir consentimento claro de seus pacientes, reconhecendo que salvar alguém não lhe concede o direito de escolher por essa pessoa.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Seraphina inaugura uma pequena casa de cura para receber aqueles que não encontraram ajuda em outro lugar. As prateleiras se enchem de ervas, instrumentos e registros sobre males que muitos preferem ignorar. À noite, organiza o conhecimento trazido da expedição.
+
+Escreve os tratamentos que funcionaram e demora mais nas páginas dedicadas aos próprios erros.
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

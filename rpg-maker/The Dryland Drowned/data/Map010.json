@@ -3829,7 +3829,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A escalada vence o fechamento das costelas de ferro."
+                "O grupo sobe pelas barras enquanto o espaço entre elas fica cada vez menor.<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Mesmo com o rugido assustador, todos alcançam uma abertura perto do teto. A<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "jaula se fecha logo abaixo, mas ninguém fica preso dentro dela."
               ]
             },
             {
@@ -4243,7 +4257,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As barras são contidas, mantendo uma passagem aberta."
+                "Duas barras são seguradas antes que se encostem. A força da jaula empurra o<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "ferro, mas o espaço continua aberto por tempo suficiente. O grupo atravessa a<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "passagem e as barras se fecham atrás dele."
               ]
             },
             {
@@ -4657,7 +4685,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O rugido não paralisa o grupo, e a trava é alcançada."
+                "O rugido tenta paralisar o corpo e obrigar todos a se encolherem. Mesmo com<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "medo, o grupo continua avançando até alcançar a trava. Quando ela é aberta, as<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "barras perdem o apoio, a jaula se desfaz e o caminho fica livre."
               ]
             },
             {

@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, installFixture, pause, rosterFixture, tavern } from '../helpers/formation.mjs';
+import { activate, choices, installFixture, pause, prologueMarkers, rosterFixture, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -370,7 +370,8 @@ canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appea
    assert.deepEqual(await browser.evaluate('[$gamePlayer.x,$gamePlayer.y]'),position);
    await hold(browser,'Enter',13);await frames(browser,35);
    assert.equal(await browser.evaluate('SceneManager._scene.isFastForward()'),false);
-   assert.equal((await state(browser)).sequence,before.sequence+1,'Held confirmation completes only the current manual unit');
+   assert.deepEqual(await state(browser),before,'Held confirmation does not complete the three-box passage');
+   assert.ok((await browser.evaluate('$gameMessage.allText()')).includes(prologueMarkers[1]),'Held confirmation advances exactly one box');
    await release(browser,'Enter',13);await pause(browser);
    await browser.evaluate('Game_Map.prototype.setupStartingEvent=function(){return false;};$gameMap._interpreter.clear();SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();');
    await browser.waitFor('SceneManager._scene._messageWindow.isClosed()');

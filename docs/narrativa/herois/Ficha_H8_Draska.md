@@ -117,7 +117,15 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhida para o sacrifício:** confirma rapidamente a rota de fuga dos demais e exige que ninguém volte para buscá-la.
 - **Frase curta de despedida:** “Eu marco o caminho. Vocês terminam de percorrê-lo.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que transformava pânico e incerteza em ações concretas, fazendo o grupo acreditar que ainda existia uma saída.
-- **O que faz depois da campanha, caso sobreviva:** adquire a mina abandonada e funda a cooperativa que planejava. Na entrada, registra os nomes dos companheiros mortos e estabelece uma regra: nenhuma recompensa vale esconder um risco da equipe.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Após sobreviver à campanha, ela usa sua parte da recompensa para adquirir a mina abandonada e fundar a cooperativa que sempre planejou. Leva meses até que o primeiro túnel seja considerado seguro.
+
+Nesse tempo, trabalha ao lado dos novos companheiros, recuperando ferramentas, reforçando passagens e aprendendo a dividir as decisões que antes tomava sozinha. Na entrada da mina, uma placa guarda os nomes daqueles que não voltaram.
+
+Ela acompanha a gravação de cada nome e deixa espaço para uma frase: “Nenhuma recompensa vale esconder um risco da equipe.”
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

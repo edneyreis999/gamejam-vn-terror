@@ -80,3 +80,8 @@ Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runt
 Menu do herói ou passagem de campanha → HIDE/Options → restaurar o mesmo contexto → FAST apenas no trecho concluído → próxima escolha sem confirmação carregada.1280×720 normal,1920×1080 reduzido e zoom nativo110% no mínimo efetivo. MA-A/B/F.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-01/02/04/11; A/B/F. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

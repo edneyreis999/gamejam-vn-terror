@@ -18,6 +18,8 @@ Este GDD consolida as regras mecânicas do antigo documento canônico v0.7, reap
 
 **Atualização confirmada em 2026-09-12:** a seção 26 registra as decisões da entrevista de simplificação do EventBridge. Ela substitui as regras anteriores conflitantes de autoria, restauração visual, arquivos de campanha, revisão de saves, controles de leitura e créditos. A implementação permanece pendente; a spec consolidada e suas propostas técnicas foram aprovadas pelo usuário.
 
+**Atualização confirmada em 2026-09-17/18:** a integração dos PRs #15–19 tem escopo de produto aprovado na [spec incremental](../planos/tasks/approved-narrative-dialogue-staging/spec.md). As seções 12.1, 15, 18.2, 19 e 27 registram os recortes substituídos. O conjunto completo da spec e seu projeto técnico foram aprovados em 18/09/2026 após validação; essa aprovação não declara a integração implementada ou verificada. A seção 27 incorpora o enquadramento do prólogo aprovado no PR #19, distinguindo sua entrega de origem das mudanças desta integração.
+
 Documentos históricos de origem:
 
 - [GDD v0.1](./GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.1.md)
@@ -33,6 +35,7 @@ Cada definição deste documento possui um dos estados abaixo. A ausência de um
 | **Confirmado** | Decisão vigente e aprovada | É autoridade de design até ser substituída por nova decisão registrada |
 | **Baseline de protótipo** | Conteúdo provisório autorizado para um incremento identificado | Permite avaliar a experiência sem transformar esse conteúdo em aprovação final |
 | **Hipótese a validar** | Risco ou expectativa que requer simulação ou playtest | A validação produz evidência; não altera o design automaticamente |
+| **Pendente** | Decisão ou dependência ainda não resolvida | Não resolver implicitamente na implementação |
 | **Fora do escopo** | Elemento deliberadamente excluído deste GDD ou do conteúdo descrito | A fronteira objetiva informa qual trabalho adicional seria necessário |
 
 O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`. As decisões posteriores de conteúdo provisório são identificadas explicitamente neste documento e na spec incremental correspondente. Uma futura mudança de comportamento deve ser deliberada e, para implementação, descrita em spec incremental. Specs concluídas e o protótipo atual são baselines históricas, não autoridades contra este GDD.
@@ -61,7 +64,7 @@ O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`
 
 **Mapas de armadilhas em `init-rpg-maker-mz` — Confirmado:** criar um mapa principal para armadilhas físicas e outro para sobrenaturais, com um submapa exclusivo para cada armadilha na árvore do editor: A1–A8 e B1–B8, respectivamente. Cada submapa é um mapa nativo independente. Essa organização não altera sorteios, composição das rotas ou progresso, nem acrescenta um menu de escolha de armadilhas (ADR-017).
 
-**Organização de mapas em `init-rpg-maker-mz` — Confirmado:** o prólogo tem mapa exclusivo e a taverna interativa tem outro mapa exclusivo no editor. O prólogo mantém a imagem de fundo da taverna. Concluí-lo leva à taverna; retornos posteriores não repetem o prólogo nem reiniciam a campanha. Esta decisão não exige um mapa para cada uma das demais cenas (ADR-016).
+**Organização de mapas em `init-rpg-maker-mz` — Confirmado, com prólogo atualizado na seção 27:** o prólogo tem mapa exclusivo e a taverna interativa tem outro mapa exclusivo no editor. Rheed mais velho narra sobre preto; as falas diretas de Rheed jovem e Ivaí usam a taverna. Concluí-lo leva à taverna; retornos posteriores não repetem o prólogo nem reiniciam a campanha. Esta decisão não exige um mapa para cada uma das demais cenas (ADR-016).
 
 O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve buscar essa visão, mas seu recorte exato será definido posteriormente em specs incrementais e no Trello; aprovar este GDD não significa que todo o conteúdo estará obrigatoriamente presente na primeira entrega da v2.0.
 
@@ -70,6 +73,8 @@ O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve busc
 **Apresentação desktop deste incremento:** telas estreitas e layouts alternativos para acomodá-las não são requisito de implementação nem de QA. Isso retira a exigência de reflow a 320 px efetivos do protótipo, inclusive quando a pouca largura resulta do zoom. Mantêm-se teclado, foco visível, texto legível e redução de movimento na área desktop suportada. A área útil mínima aprovada é **1280 × 720 pixels efetivos dentro do navegador**, já considerando o zoom. A referência mede a área do jogo, não a resolução do monitor; o zoom continua utilizável enquanto essa área mínima for mantida.
 
 **Política de QA — Confirmado em2026-09-14:** a [ADR-G003](adrs/adr-g003-excluir-testes-de-zoom-nativo.md) exclui testes de zoom nativo da matriz de QA por esforço desproporcional ao objetivo do projeto. Permanecem os testes de resoluções desktop, legibilidade, foco, teclado/mouse e movimento reduzido em escala padrão. Essa exclusão de sensor não declara zoom verificado nem altera o recurso do navegador.
+
+**Execução e verificação — Confirmado em 2026-09-18:** as [ADRs G004–G006](adrs/README.md) adotam neste projeto as decisões 010–012 do Pixi-Rework. O harness pode reorganizar tarefas preservando produto, provas e aceite; testes manuais e automatizados de gamepad ficam **Fora do escopo de testes**, sem retirar funcionalidades; testes pesados podem ser agrupados e repetições redundantes omitidas por evidência e risco, mantendo jornadas E2E, riscos distintos e aceites humanos. Essas escolhas operacionais não exigem nova autorização por caso dentro dos limites das ADRs. Ao terminar testes, fechar os aplicativos e processos abertos pelo agente, preservando as sessões do usuário. A adoção não amplia ambientes suportados, não converte omissões/dispensas em testes aprovados nem encerra pendências históricas.
 
 **Textos faltantes — Baseline de protótipo para `prototype-v2-gdd-layouts`:** os trechos narrativos ainda não escritos recebem redação provisória em PT-BR, fiel ao GDD, para revisão da equipe, conforme o ADR-007. Esse conteúdo deve permitir jogar as cenas e compreender suas escolhas e consequências. Textos canônicos já existentes, incluindo despedidas e epílogos das fichas, permanecem como referência obrigatória; a redação provisória não altera acontecimentos, regras ou fatos confirmados nem equivale a aprovação editorial final.
 
@@ -143,7 +148,7 @@ Depois do sexto encontro final, os heróis ainda vivos na formação do clímax 
 
 ### 3.1 Fantasia central
 
-Ser responsável por conduzir pessoas competentes por uma expedição cuja preparação esconde lacunas fatais, até descobrir que o narrador transformou essas pessoas em peças de um desfecho decidido de antemão.
+Ser responsável por conduzir pessoas competentes por uma expedição cuja preparação esconde lacunas fatais, até descobrir que Ivaí transformou essas pessoas em peças de um desfecho decidido de antemão.
 
 ### 3.2 Pilares
 
@@ -151,7 +156,7 @@ Ser responsável por conduzir pessoas competentes por uma expedição cuja prepa
 2. **Leitura sem etiquetas:** profissões, histórias, equipamentos e comportamento sugerem capacidades, mas a interface não nomeia competências.
 3. **Perda emocional e estratégica:** cada morte elimina uma pessoa e duas capacidades internas.
 4. **Horror por responsabilidade:** o jogador escolhe a abordagem, a vítima e, ao final, quem pagará pela ruptura do medalhão.
-5. **Narrador comprometido:** Ivaí conduz a história, mas sua versão é parcial e interessada.
+5. **Omissão interessada:** Ivaí conduz a expedição, mas sua versão é parcial e interessada. Rheed mais velho narra no presente os acontecimentos desse passado.
 
 ### 3.3 Emoções pretendidas
 
@@ -219,6 +224,8 @@ A história ocorre num mundo fantástico secundário inspirado no interior e nas
 As raças possuem conflitos históricos, políticos e culturais. Esses conflitos não são qualidades biológicas nem tornam povos inteiros moralmente homogêneos. Instituições e lideranças usam diferenças culturais para justificar disputas materiais; indivíduos podem reproduzir, contestar ou atravessar esses preconceitos.
 
 A tecnologia corresponde aproximadamente ao fim do século XIX: transporte animal e fluvial, oficinas, mineração, imprensa e atrações mecânicas. Não existem rádio, automóveis, armas de fogo modernas ou comunicação instantânea.
+
+**Enquadramento da narração — Confirmado em 2026-09-17:** no presente, Rheed mais velho se tornou o melhor contador de histórias de Daratrine. Durante um evento chamado **Noite da História**, numa cidade, ele conta esta história para centenas de criaturas; o jogador também faz parte dessa plateia. A cidade não foi nomeada e esta decisão não define a natureza geográfica de Daratrine. O contexto não acrescenta avatar, falas ou escolhas da plateia. Os acontecimentos da expedição, com Rheed jovem, pertencem ao passado. A apresentação visual e sonora segue as seções 19.2 e 19.4.
 
 ### 4.2 As famílias dos amantes
 
@@ -297,7 +304,7 @@ Sequência causal da tragédia:
 
 Irati, mãe de Ivaí, era uma anã e guardiã de genealogias e registros da família de Pérola. Morreu aos 58 anos, dois anos antes da campanha, afogada sobrenaturalmente num cômodo seco. Ela se recusara a buscar a segunda metade do medalhão porque considerava a oferta de Andirá uma coerção.
 
-Deixou para Ivaí a primeira metade do medalhão, uma genealogia, relatos contraditórios e o aviso de não envolver outras pessoas. Seus documentos não provam qual dos dois efeitos do artefato é verdadeiro. O jogador vê somente três excertos curtos: no prólogo, após obter a primeira peça do mapa e durante a revelação final.
+Deixou para Ivaí a primeira metade do medalhão, uma genealogia, relatos contraditórios e o aviso de não envolver outras pessoas. Seus documentos não provam qual dos dois efeitos do artefato é verdadeiro. Os registros entram no prólogo, após obter a primeira peça do mapa e durante a revelação final. Na abertura aprovada do PR #19, Rheed menciona lembranças e uma tradição familiar, sem ler um excerto literal; o aviso está incorporado à apresentação. Os dois excertos posteriores permanecem, com o último após as opiniões no Conselho nesta integração.
 
 Leitura livre, inventário documental e códice ficam fora do escopo porque exigiriam interface e conteúdo adicionais.
 
@@ -339,7 +346,7 @@ No Caminho da Igreja, Pérola permanece incorporada à pedra sob o altar e as fu
 
 ### 5.3 Progressão da revelação
 
-1. **Prólogo:** Ivaí mostra registros incompletos de Irati, diz buscar um tesouro familiar e oculta maldição, medalhão e plano.
+1. **Prólogo:** Rheed mais velho apresenta os registros incompletos de Irati e a busca pelo tesouro da família de Ivaí. O recrutamento apesar do aviso materno é mencionado; maldição, medalhão e plano permanecem ocultos. Documentos são descritos sem ilustrações; a troca pública entre Rheed jovem e Ivaí encerra a cena, conforme a seção 27.
 2. **Caminho da Igreja concluído:** Pérola reconhece o objeto escondido por Ivaí como metade do medalhão e entrega a peça anã do mapa.
 3. **Parque concluído:** Floraí entrega a peça élfica e recorda que Andirá depende de uma escolha voluntária; ele não conhece com segurança os efeitos finais.
 4. **Ordem variável:** o primeiro amante encontrado faz somente um aviso vago. O segundo percebe que Ivaí sabe mais do que admite e desperta a suspeita do grupo. Cada um possui uma única linha condicional adicional se sua rota for concluída por último. As memórias dos dois permanecem fragmentárias.
@@ -347,6 +354,8 @@ No Caminho da Igreja, Pérola permanece incorporada à pedra sob o altar e as fu
 6. **Conselho:** a segunda metade do medalhão, escondida ali por Tibagi, e o registro final de Palotina revelam os dois resultados. As metades do medalhão, não as peças do mapa, determinam a escolha.
 
 Floraí e Pérola não aparecem nem falam no Conselho. A confirmação final vem do registro de Palotina, e não de projeções ou páginas mágicas.
+
+**Fechamentos de rota — Confirmado para a integração dos PRs #15–19:** acrescentar as narrações da primeira e da segunda trilha do PR #16 depois da sequência do amante e da entrega da peça, antes da continuação de Irati/mapa completo e do retorno à preparação. Primeira e segunda indicam a ordem de conclusão, não Igreja e Parque fixos. Rheed mais velho apresenta essas falas no presente sobre preto. Não adaptar a redação para percursos solo neste incremento; essa limitação foi aceita, preservando os participantes reais e as regras existentes.
 
 ### 5.4 Sorteio
 
@@ -365,7 +374,7 @@ O algoritmo completo está na seção 11.
 
 ## 6. Ivaí na mecânica
 
-Ivaí é o ponto de vista principal, reúne e acompanha o grupo e narra a campanha. Possui zero competências e, portanto, não torna abordagens viáveis, não amplia cobertura, não resolve armadilhas e não substitui um herói.
+Ivaí é o protagonista por meio de quem o jogador toma as decisões da campanha; reúne e acompanha o grupo. A narração cabe a Rheed mais velho, que conta no presente os acontecimentos do passado. Ivaí possui zero competências e, portanto, não torna abordagens viáveis, não amplia cobertura, não resolve armadilhas e não substitui um herói.
 
 Ele nunca aparece entre as vítimas de uma armadilha. Se o último herói presente morrer e houver reservas na cidade, Ivaí recua automaticamente. Se a morte deixar todos os oito heróis mortos, Andirá alcança Ivaí antes da recuperação do medalhão: uma poça reflete água onde o chão está seco, a maldição o afoga e a campanha termina sem escolha final.
 
@@ -602,6 +611,8 @@ O sorteio puro sem repetição é a regra confirmada. Sequências concentradas c
 | Seis ocorrências de cada competência no catálogo completo | Confirmado |
 
 Os 16 encontros formam uma única matriz vigente. Qualquer reescrita deve preservar três competências distintas, a proporção entre famílias no respectivo pool e seis ocorrências totais de cada competência; caso contrário, a matriz inteira deve ser recalculada.
+
+**Integração do PR #18 — Confirmado em 2026-09-17 para `approved-narrative-dialogue-staging`:** substituir somente os 30 textos de sucesso fornecidos para A1–A8 e B1–B2. Preservar a redação atual das opções de abordagem, descrições, falhas, mortes e todos os textos de B3–B8. Os títulos simplificados do catálogo são referências de autoria, não novas opções do jogador. **Baseline de protótipo:** integrar os parágrafos fornecidos mesmo quando sua coerência com os demais textos ainda precisar de revisão. O usuário deixou esse refinamento para depois; reescrita, complementação dos arquivos vazios e nova aprovação editorial ficam **Fora do escopo deste incremento** e não bloqueiam sua entrega. Preservar associação correta entre escolha e resultado, legibilidade, competências e regras da campanha. A [ADR-002](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-002-trap-prose-integration-boundary.md) registra o recorte, sem substituir a intenção editorial de longo prazo das seções 10 e 14.
 
 ### 12.2 Pool A — Masmorra Física
 
@@ -934,12 +945,15 @@ Depois do sexto encontro:
 2. as peças sobrepostas do mapa indicam um cofre sob o piso;
 3. o grupo encontra a segunda metade do medalhão e o registro final de Palotina;
 4. o registro declara brevemente os dois resultados possíveis;
-5. um sobrevivente exige explicações; se Ivaí estiver sozinho, ele lê e confessa para si mesmo;
+5. Rheed narra a cobrança de explicações conforme o texto aprovado do PR #16; a mesma redação é aceita no percurso solo, sem acrescentar participantes ausentes;
 6. Ivaí admite que conhecia a maldição, pretendia destruir o artefato e recrutou o grupo sob uma promessa falsa;
 7. Andirá surge somente no reflexo da água que invade o piso e exige uma escolha;
 8. cada herói elegível dá sua opinião curta e fixa;
-9. o jogador escolhe como Ivaí;
-10. o jogo apresenta desfecho, memorial e epílogos aplicáveis.
+9. aparece o último excerto de Irati;
+10. o jogador escolhe como Ivaí;
+11. o jogo apresenta desfecho, memorial e epílogos aplicáveis.
+
+**Texto e ordem — Confirmado para `approved-narrative-dialogue-staging`:** a abertura do Conselho, do cofre à confissão, é substituída pelo texto da terceira trilha no PR #16, sem repetir a revelação anterior. Alternar Rheed sobre preto e as falas diretas no passado. Preservar Andirá e opiniões, deslocando o excerto final de Irati para depois delas. Refinamentos de redação solo ficam fora deste incremento.
 
 Se a última pessoa da formação morrer no sexto encontro, mas houver heróis vivos na cidade, sua ação abre o caminho. Ivaí alcança o Conselho sozinho, escolhe sem opiniões e não há epílogos individuais. Não existe retorno à cidade nem justificativa para reservas chegarem ao Conselho.
 
@@ -947,7 +961,7 @@ Se a última pessoa da formação morrer no sexto encontro, mas houver heróis v
 
 Somente um herói que esteja vivo **e** pertença à formação presente depois do sexto encontro opina e tem seu epílogo exibido. Heróis vivos deixados na cidade não testemunham a revelação, não opinam e não aparecem no epílogo. Heróis mortos aparecem apenas no memorial coletivo.
 
-Cada ficha já contém um epílogo predefinido. O jogo não concede, cria, adapta nem combina um novo epílogo segundo o final escolhido: ele apenas exibe literalmente o texto da ficha para cada herói elegível, na ordem estável H1–H8. As opiniões usam a mesma ordem.
+Cada herói possui um epílogo predefinido, independente do final escolhido. **Substituição confirmada na integração dos PRs #15–19:** os oito textos e ilustrações fornecidos no PR #15 substituem os epílogos anteriores das fichas; sua sincronização documental faz parte da integração. O jogo não cria nem combina variantes. Manter a ordem estável H1–H8, também usada nas opiniões. A [ADR-003 incremental](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-003-approved-prose-and-illustrated-epilogues.md) registra autoridade e apresentação.
 
 ### 15.2 Opiniões fixas
 
@@ -1160,6 +1174,8 @@ Campos das fichas sobre “querer desistir” são gatilhos dramáticos para con
 
 Cada ficha define um único epílogo de sobrevivência, independente da escolha final. Esse texto é conteúdo autoral fixo, não recompensa calculada. Ele só é mostrado se o herói estiver vivo e presente na formação do clímax. A ficha também define uma única despedida, usada em qualquer sacrifício.
 
+**Atualização confirmada:** os textos aprovados do PR #15 passam a ser a fonte dos epílogos durante sua sincronização com as fichas, conforme a seção 15.1. As demais informações das fichas, inclusive despedidas e opiniões, permanecem como estão.
+
 ---
 
 ## 19. Apresentação
@@ -1216,18 +1232,26 @@ Cada ficha define um único epílogo de sobrevivência, independente da escolha 
 
 A direção é pintura digital 2D semirrealista, escura e de baixa saturação. A paleta combina musgo, madeira, lama, pedra, água azul-esverdeada, latão e vermelho escuro. Ambientes e interiores remetem a um Paraná fantástico ribeirinho. O horror é atmosférico; não há gore explícito.
 
+**Distinção temporal — Confirmado em 2026-09-17 para `approved-narrative-dialogue-staging`:** Rheed mais velho conta a história no presente e aparece em cores. Rheed jovem e todos os acontecimentos narrados pertencem ao passado, representado em tons pastel. Ivaí permanece como protagonista da expedição; Rheed é o narrador. A [ADR-001 deste incremento](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-001-rheed-temporal-presentation.md) registra a decisão e substitui a proposta anterior de manter o cenário do passado escurecido atrás do narrador.
+
+**Fundo do narrador — Confirmado para este incremento:** sempre que Rheed mais velho aparecer, mostrar somente seu retrato sobre fundo preto, no prólogo e nas demais intervenções. Nas falas diretas, retornar à composição da cena do passado. O contexto é a Noite da História, numa cidade, diante de centenas de ouvintes. **Pendente:** o cenário ainda não foi desenhado; o nome da cidade, o desenho do local e sua produção artística ficam **Fora do escopo deste incremento**. O preto é a apresentação aprovada enquanto esse cenário não existe; não inventar uma imagem substituta. A regra não acrescenta bustos aos epílogos ilustrados aprovados.
+
+**Conversa direta do prólogo — Confirmado:** Rheed jovem e Ivaí seguem o padrão de entrada, destaque do falante, escurecimento do ouvinte e saída da conversa de Gorvak do PR #17, com enquadramento adaptado aos retratos. Preservar os textos aprovados do PR #19, Rheed jovem à esquerda, Ivaí à direita e fundo da taverna. A atualização sonora da seção 19.4 substitui o silêncio da abertura. Estas decisões substituem, na integração, o destaque instantâneo de 10% e o silêncio da entrega original, sem reescrever sua spec histórica.
+
 O conjunto de conteúdo visual previsto contém:
 
 - 16 ilustrações de encontro;
 - 3 ilustrações de apresentação dos destinos, uma para cada caminho no painel de escolha;
 - 4 cenários narrativos: taverna da cidade, Igreja e Pérola, Parque e Floraí, Conselho;
-- 12 retratos estáticos: Ivaí, oito heróis, Floraí, Pérola e Andirá;
+- 14 retratos estáticos: Ivaí, oito heróis, Floraí, Pérola, Andirá, Rheed jovem e Rheed mais velho;
 - uma pose ou expressão por personagem;
 - finais compostos com Conselho, retratos e sobreposições existentes, sem CG exclusivo.
 
 Irati e Palotina aparecem somente em texto, documentos, silhuetas ou detalhes de objetos. As 16 imagens atuais do protótipo são referências ou placeholders porque ainda não representam integralmente o mundo aprovado. A técnica, a hierarquia de acabamento e o esforço por imagem ficam fora do escopo desta etapa e requerem planejamento de Technical Art com Lucas.
 
 **Composição confirmada para a atualização do protótipo v2.0:** Ivaí, Floraí, Pérola e Andirá usam versões dos retratos sem fundo branco, sobrepostas aos cenários e preservando o traço das ilustrações provisórias. Floraí e Pérola permanecem representados em suas respectivas prisões; Andirá aparece somente no reflexo. Esse tratamento mantém os retratos separados dos cenários e não altera a direção artística final nem o estado provisório dos assets.
+
+**Confinamento dos amantes — Confirmado em 2026-09-18 para `approved-narrative-dialogue-staging`:** o usuário autorizou gerar as duas artes necessárias para tornar a prisão perceptível, seguindo o traço dos heróis e da taverna atuais. Pérola é uma pedra entalhada de forma rústica que apenas sugere uma anã; Floraí é uma figueira antiga que dá a impressão de um elfo entalhado no tronco. As feições são genéricas, sem detalhes de identidade, roupas ou corpos vivos: o desgaste deve comunicar os muitos anos nessa forma. A silhueta e a sugestão do rosto permanecem perceptíveis acima da janela de diálogo. Preservar os originais e integrar versões próprias nos eventos nativos. Esta autorização substitui a restrição de preservar exclusivamente os PNGs anteriores para esses dois consumidores; não altera os demais assets nem a narrativa. Decisão D-019 da [spec incremental](../planos/tasks/approved-narrative-dialogue-staging/spec.md).
 
 ### 19.3 Parque das Águas Assombradas
 
@@ -1238,6 +1262,8 @@ Na versão descrita, essa história aparece somente por uma ou duas referências
 ### 19.4 Áudio
 
 **Recorte confirmado para `init-rpg-maker-mz`:** áudio entra no primeiro incremento. **Baseline de protótipo:** usar os áudios nativos já presentes no projeto MZ, selecionados conforme a adequação a cada cena, com seleção delegada ao agente e ajuste posterior pela equipe, conforme o ADR-004. Essa autorização não constitui aprovação artística final das faixas e efeitos escolhidos. Mantêm-se as fronteiras de áudio abaixo; não é necessário aguardar produção de áudio final para integrar esta versão.
+
+**Distinção temporal — Confirmado em 2026-09-17 para `approved-narrative-dialogue-staging`:** usar música e sons narrativos distintos no presente e no passado, inclusive no prólogo. O presente acompanha Rheed e a plateia da Noite da História; o passado acompanha a taverna, os lugares da expedição e suas consequências. Esta decisão substitui o silêncio da entrega original do prólogo e a proposta de silenciar as demais narrações. **Baseline de protótipo:** a escolha das faixas e efeitos locais e sua calibração são delegadas ao agente, conforme o [contrato de áudio aprovado](../planos/tasks/approved-narrative-dialogue-staging/approved-narrative-dialogue-staging.audio.md). Preservar controles de volume, mudo, efeitos contextuais e temas dos finais. Não acrescentar dublagem ou falas inteligíveis da plateia. A decisão amplia os ambientes sonoros previstos abaixo com o contexto do presente; não aprova dependências ou serviços remotos nem produção de uma trilha original.
 
 **Aplicação:** contrato confirmado para o jogo completo. Áudio está **fora do escopo** da atualização `prototype-v2-gdd-layouts`, conforme a seção 1.1 e o ADR-008; esse protótipo permanece sem som, sem assets ou controles de áudio.
 
@@ -1370,7 +1396,7 @@ Cada encontro apresenta três abordagens. Uma competência presente garante suce
 
 Caminho da Igreja e Parque das Águas Assombradas usam cinco encontros sorteados de pools distintos. O Vilarejo usa os seis restantes. Posições reveladas e mortes persistem; recuar reinicia a rota. As peças anã e élfica do mapa liberam o Vilarejo, onde a outra metade do medalhão e o registro de Palotina revelam os dois resultados.
 
-Somente heróis vivos presentes após o sexto encontro opinam e têm o epílogo predefinido de sua ficha exibido. Mortos aparecem no memorial; vivos na cidade não participam. Reunir o medalhão liberta Floraí e Pérola e mata Ivaí. Destruí-lo salva Ivaí e encerra a maldição, mas permite que Andirá absorva os amantes e suas memórias. Se os oito heróis morrerem, Ivaí morre antes da escolha.
+Somente heróis vivos presentes após o sexto encontro opinam e têm seu epílogo predefinido exibido, usando a fonte atualizada da seção 15.1. Mortos aparecem no memorial; vivos na cidade não participam. Reunir o medalhão liberta Floraí e Pérola e mata Ivaí. Destruí-lo salva Ivaí e encerra a maldição, mas permite que Andirá absorva os amantes e suas memórias. Se os oito heróis morrerem, Ivaí morre antes da escolha.
 
 O GDD v4.0 define a visão completa. O recorte de cada incremento do protótipo v2.0 será decidido posteriormente em specs e no Trello.
 
@@ -1394,7 +1420,9 @@ O GDD v4.0 define a visão completa. O recorte de cada incremento do protótipo 
 
 **Inscrição da lápide MZ — Complemento confirmado:** a descrição curta pode contar como o herói morreu, conforme a morte contextual da armadilha, mantendo o local registrado. Priorizar uma frase narrativa breve e fiel ao acontecimento (ADR-035).
 
-**Encerramento MZ — Confirmado:** epílogos elegíveis usam bustos existentes e texto nativo inferior, em seus submapas. Depois, apresentar créditos com botão **Pular créditos**, acessível por mouse e teclado. Conclusão normal ou pulo retorna à tela inicial sem alterar o desfecho salvo. Se não houver epílogos, seguir do memorial aos créditos; omitir também o memorial quando não houver mortos (ADR-036).
+**Encerramento MZ — Confirmado, com apresentação dos epílogos substituída em 2026-09-17/18:** cada epílogo elegível usa sua ilustração aprovada do PR #15 como cena, inteira, centralizada e proporcional, com faixas pretas quando necessário. Manter texto nativo inferior e controles de leitura, inclusive HIDE, sem busto sobreposto, recorte de bordas ou distorção. Preservar os submapas e a elegibilidade. Depois, apresentar créditos com botão **Pular créditos**, acessível por mouse e teclado. Conclusão normal ou pulo retorna à tela inicial sem alterar o desfecho salvo. Se não houver epílogos, seguir do memorial aos créditos; omitir também o memorial quando não houver mortos. A [ADR-003 incremental](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-003-approved-prose-and-illustrated-epilogues.md) substitui esse recorte visual da ADR-036 histórica.
+
+**Textos dos finais — Confirmado para esta integração:** usar os três textos do PR #16 com as imagens existentes `Dryland_EndingReunite`, `Dryland_EndingDestroy` e `Dryland_EndingTotalLoss`. As imagens adicionais descritas, mas não produzidas no PR, ficam fora do escopo. Preservar consequências, memorial, epílogos e créditos; não acrescentar busto do narrador aos finais ilustrados.
 
 **Compatibilidade de saves MZ — ADR-037:** alterações na organização ou no conteúdo dos eventos/mapas podem tornar saves anteriores incompatíveis. Continuar informa a incompatibilidade sem apagar o save; Novo jogo permanece disponível diretamente. Essa política integra a revisão técnica autorizada e não promete migração entre versões.
 
@@ -1435,3 +1463,31 @@ H2–H8 seguem o menu e retorno explícito já aceitos. As demais cenas preserva
 Remover os corpos de Common Events deslocados somente após migrar todos os consumidores funcionais, preservando posições, IDs e identidades de leitura. **Correção técnica em 2026-09-15:** no banco de Eventos Comuns, posições desocupadas usam registros nativos vazios, sem nome nem ativação, com apenas o comando terminal; somente o índice zero fica `null`. Os `null` introduzidos pela migração ocultavam a lista no editor MZ. Isso corrige a representação dos slots, sem restaurar conteúdo removido. Manter os helpers ainda usados, inclusive configuração, preload, callbacks, eventos paralelos e inscrições de morte compartilhadas com o memorial. Não deixar cópias editoriais obsoletas nem introduzir registro obrigatório de conteúdo. A migração de autoria não aprova novos textos, assets, enquadramento final ou mudanças das regras de campanha.
 
 **Follow-up de prioridade menor:** orquestração da própria taverna no Map003 e mapa exclusivo de créditos ficam fora das tasks deste incremento. As verificações técnicas, dirigidas e humanas serão atualizadas no par de QA existente; os aceites anteriores conservam seu escopo.
+
+## 27. Prólogo de Rheed e integração narrativa dos PRs #15–19
+
+**Produto e projeto técnico confirmados; integração ainda não implementada:** incorporar o prólogo e os dois retratos entregues pelo [PR #19](https://github.com/edneyreis999/gamejam-vn-terror/pull/19), preservando a [spec de origem concluída](https://github.com/edneyreis999/gamejam-vn-terror/blob/daa4f7cf0d0d074135d12dc96bbe3f77dd749ea8/planos/tasks/prologo-rheed/spec.md) e o snapshot GDD v5.0 como história daquela entrega. Os resultados de QA da origem não certificam a integração. A [spec incremental atual](../planos/tasks/approved-narrative-dialogue-staging/spec.md) reúne as substituições posteriores de apresentação, áudio e alcance da narração, sem reabrir as falas aprovadas.
+
+### 27.1 Enquadramento e roteiro preservados
+
+Rheed é um anão que, jovem, auxiliava Ivaí e distribuiu os anúncios da expedição sob suas ordens. Conhece o objetivo de quebrar a maldição e se preocupa com Ivaí, mas a abertura omite esse conhecimento. Acompanhará as expedições como ajudante e testemunha, fora das três vagas, sem habilidades controladas pelo jogador, sem resolver armadilhas e sem ser candidato a sacrifício. Pode sobreviver à perda dos oito heróis e de Ivaí para contar a história; isso não impede a derrota da campanha.
+
+Sequência aprovada: apresentação de Rheed mais velho → chegada dos oito à taverna e registros de Irati → lembranças, tradição familiar e mapas incompletos → promessa de Ivaí → pergunta pública de Rheed jovem → resposta de Ivaí → preparação. Os oito estão presentes sem falas ou reações adicionais. Documentos não recebem imagens; os destinos são nomeados na preparação. Os mapas iniciais mencionados não substituem as duas peças conquistadas nas rotas.
+
+**Redação aceita:** preservar o relato de recrutamento “a contragosto de Irati”, mesmo com sua ambiguidade já discutida na origem. Irati continua morta há dois anos; não se altera a cronologia. Não descrever a tradição específica, detalhar o tesouro ou restaurar o antigo excerto independente da abertura. A promessa de repartir a descoberta permanece **Baseline de protótipo** aceita no PR #19.
+
+O último diálogo permanece: Rheed jovem pergunta “Você não está esquecendo de nenhuma informação, mestre?” e Ivaí responde “Os detalhes serão adicionados ao longo do caminho.” Após o avanço do jogador, encerrar imediatamente, sem reação, interpretação ou coda.
+
+### 27.2 Apresentação vigente nesta integração
+
+As seções 19.2/19.4 e a [ADR-001 incremental](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-001-rheed-temporal-presentation.md) prevalecem sobre a apresentação original do PR #19: Rheed mais velho em cores sobre preto; passado em tons pastel; conversa jovem/Ivaí no padrão de Gorvak; música e sons distintos por época. O silêncio e o destaque instantâneo de 10% da origem ficam históricos. Preservar os arquivos fornecidos `Reed final.png` e `Reed-novo.png`, com Rheed jovem à esquerda e Ivaí à direita na taverna do PR #17.
+
+A cena presente é a Noite da História numa cidade, diante de centenas de criaturas incluindo o jogador. Rheed tornou-se o melhor contador de histórias de Daratrine. Nome da cidade, desenho do local e nova arte continuam fora do incremento. Não acrescentar personagem controlável, plateia desenhada, falas extras ou mecânica de participação do público.
+
+A exclusão original de narração fora do prólogo é ampliada somente para os novos trechos narrados das rotas e do Conselho no PR #16. Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação.
+
+### 27.3 Leitura, entrega e limites
+
+Preservar mapa exclusivo, ritmo do jogador, controles nativos, transferência única à preparação e ausência de repetição em retornos normais à taverna. A leitura usa os checkpoints semânticos existentes, sem acrescentar autosave a cada caixa. Continue parte do último checkpoint bem-sucedido, que pode anteceder uma leitura não salva.
+
+O PR #19 aprovou validar jogos novos e saves produzidos por sua própria versão, sem migrar saves anteriores. O projeto técnico da integração, aprovado pelo usuário em 18/09/2026 após a validação da spec, preserva essa limitação, mantendo arquivos pessoais intocados e sem bloqueio de revisão. O conjunto técnico e o plano de verificação estão aprovados; implementação e evidência do jogo integrado continuam pendentes, separadas dos aceites de produto e da entrega de origem.

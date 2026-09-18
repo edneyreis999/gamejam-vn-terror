@@ -2,6 +2,14 @@
 
 Esta é a única árvore durável de QA do jogo em `rpg-maker/The Dryland Drowned/`. Cenários guardam o último veredito; jornadas e charters permanecem entre ciclos; cada execução cria um relatório datado. O planejamento atual não transforma evidência automatizada, visual ou histórica em observação de uma pessoa.
 
+## Políticas vigentes de execução — 2026-09-18
+
+Aplicar as [ADRs G004–G006](../adrs/README.md) ao planejar, executar, retomar e fechar campanhas, inclusive ao reconciliar roteiros antigos. A [G004](../adrs/adr-g004-autonomia-do-harness-na-execucao-de-tarefas.md) permite reorganizar donos e dependências documentais sem nova aprovação, preservando obrigações e registrando suas transferências. A [G005](../adrs/adr-g005-exclusao-de-testes-de-gamepad.md) exclui testes de gamepad; a exclusão de zoom nativo da [G003](../adrs/adr-g003-excluir-testes-de-zoom-nativo.md) permanece vigente.
+
+A [G006](../adrs/adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md) rege agrupamentos, representantes e omissões fundamentadas em provas válidas, equivalência concreta, risco residual e condições de invalidação. Preservar jornadas E2E, riscos distintos, inspeção somente leitura e aceites humanos. Atualizar o roteiro e a matriz existentes antes do fechamento; uma política aceita não encerra cenários por si só.
+
+Distinguir resultados executados, dispensa explícita (`waived`), **omitido por redundância/risco coberto**, adiamento e bloqueio. Dispensas e omissões não são `pass`; ausência de evidência ou falha observada não vira redundância. Ao terminar, inclusive por falha, bloqueio ou cancelamento, confirmar o encerramento dos aplicativos, abas e processos auxiliares abertos pelo agente, preservando recursos e alterações preexistentes do usuário. Registrar qualquer recurso que permaneça aberto e o motivo.
+
 ## Evidências brutas e material de entrega
 
 `docs/qa/evidence/` e `docs/qa/runs/` têm a mesma responsabilidade: saídas locais de QA, ignoradas pelo Git. Não são entradas do jogo nem o lugar permanente do material necessário para compor devlogs. Os runners podem recriar seus diretórios; não precisam de resultados históricos para testar o código atual. Neste projeto, runs é uma localização reservada; os runners MZ atuais escrevem em evidence.
@@ -10,7 +18,11 @@ Após o aceite, preservar os registros brutos em arquivo local com manifesto e h
 
 O [incremento MZ aceito](deliveries/init-rpg-maker-mz/README.md) tem resumo, aceite, manifesto do runtime e cinco capturas independentes, incluindo o desaparecimento de Gorvak e a visita posterior. Não exige os milhares de arquivos brutos para compor seu devlog. Os181 arquivos de ciclos anteriores em evidence foram retirados do versionamento no commit e888338, por orientação do usuário, com cópias locais e hashes preservados. Links desses ciclos continuam como referência ao acervo local.
 
-## Ciclo corrente — EventBridge mínimo
+## Ciclo corrente — integração narrativa aprovada
+
+[Guia](guides/approved-narrative-dialogue-staging.md) · [charter](charters/CH-approved-narrative-dialogue-staging.md) · [verificação](../../planos/tasks/approved-narrative-dialogue-staging/verification.md). Implementação e testes focados coletados; agregado e QA final em execução. Nenhum PASS audiovisual/humano é herdado.
+
+## Ciclo anterior — EventBridge mínimo
 
 A [spec incremental](../../planos/tasks/eventbridge-minimal-runtime/spec.md) está em QA dirigido. Use o [guia executável e banco](guides/eventbridge-minimal-runtime.md), o [charter de primeira campanha](charters/CH-eventbridge-first-campaign.md) e o [relatório corrente](reports/2026-09-12-eventbridge-minimal-runtime.md). Autoria e arquivos seguem o [guia MZ](../../rpg-maker/README.md). A integração técnica01–14 está consolidada; editor, jornadas e quatro pareceres humanos têm sensores próprios. Resultados históricos não passam este candidato.
 

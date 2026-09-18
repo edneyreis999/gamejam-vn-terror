@@ -43,8 +43,9 @@
   ];
   function createCatalog(configuration) {
     const scenes = {
-      prologue: ['prologue.01', 'prologue.02', 'irati.01'],
+      prologue: ['prologue.rheed.01', 'prologue.rheed.02', 'prologue.rheed.03', 'prologue.rheed.04', 'prologue.rheed.05', 'prologue.rheed.06'],
       'irati.02': ['irati.02.01'], 'map.reveal': ['map.reveal.01', 'map.reveal.02'],
+      'closure.first': ['closure.first.01'], 'closure.second': ['closure.second.01'],
       automatic_retreat: ['automatic_retreat.01'],
       council: ['council.01', 'council.02', 'council.03', 'irati.03', 'council.challenge', 'council.solo', 'council.confession', 'council.andira'],
       memorial: ['memorial.intro']
@@ -162,7 +163,7 @@
     const resultValidation = violations => freeze({ ok: violations.length === 0, violations });
     const createReadyState = () => freeze(readyObject());
     const stateKeys = Object.keys(readyObject()).sort().join(',');
-    const requiredPlans = ['prologue', 'automatic_retreat', 'irati.02', 'map.reveal', 'council', 'memorial',
+    const requiredPlans = ['prologue', 'automatic_retreat', 'irati.02', 'map.reveal', 'closure.first', 'closure.second', 'council', 'memorial',
       ...routeIds.map(id => 'threshold.' + id),
       ...['physical', 'supernatural'].flatMap(id => ['first', 'second'].map(order => 'lover.' + id + '.' + order)),
       ...['reunite', 'destroy', 'bad'].map(id => 'ending.' + id),
@@ -409,7 +410,7 @@
         else if (state.phase === 'encounter_intro') expectedSceneId = currentEncounter(state) && 'encounter.' + currentEncounter(state).id;
         else if (state.phase === 'approach_result' && state.pendingOutcome) expectedSceneId = 'result.' + state.pendingOutcome.approachId + '.' + (state.pendingOutcome.success ? 'success' : 'failure');
         else if (state.phase === 'automatic_retreat') expectedSceneId = 'automatic_retreat';
-        else if (state.phase === 'dungeon_complete') expectedSceneId = readingSceneId.indexOf('lover.' + state.dungeonId + '.') === 0 || readingSceneId === 'irati.02' || readingSceneId === 'map.reveal' ? readingSceneId : null;
+        else if (state.phase === 'dungeon_complete') expectedSceneId = readingSceneId.indexOf('lover.' + state.dungeonId + '.') === 0 || readingSceneId === 'irati.02' || readingSceneId === 'map.reveal' || (readingSceneId === 'closure.first' && state.mapPieceIds.length === 1) || (readingSceneId === 'closure.second' && state.mapPieceIds.length === 2) ? readingSceneId : null;
         else if (state.phase === 'council') expectedSceneId = 'council';
         else if (state.phase === 'ending') expectedSceneId = 'ending.' + state.endingId;
         else if (state.phase === 'memorial') expectedSceneId = 'memorial';
@@ -417,9 +418,7 @@
         else if (state.phase === 'death_result' && state.pendingOutcome) expectedSceneId = 'death.' + state.pendingOutcome.encounterId;
         if (scene && Array.isArray(state.reading.passageIds)) {
           if (state.phase === 'council' && readingSceneId === 'council') {
-            var councilPlan = scene.passageIds.slice(0, 4).concat([climaxParty.length ? 'council.challenge' : 'council.solo', 'council.confession', 'council.andira']);
-            climaxParty.forEach(function (id) { councilPlan.push('opinion.' + id); });
-            planMatches = sameArray(state.reading.passageIds, councilPlan);
+            planMatches = sameArray(state.reading.passageIds, councilPlan(climaxParty));
           } else if (state.phase === 'death_result' && state.pendingOutcome && state.pendingOutcome.victimId) {
             planMatches = readingSceneId === 'death.' + state.pendingOutcome.encounterId && sameArray(state.reading.passageIds, ['farewell.' + state.pendingOutcome.victimId, 'death.' + state.pendingOutcome.encounterId + '.context']);
           } else if (state.phase === 'memorial') {
@@ -484,6 +483,11 @@
       };
     }
 
+    function councilPlan(participants) {
+      return ['council.01', 'council.02', 'council.03', participants.length ? 'council.challenge' : 'council.solo', 'council.confession', 'council.andira']
+        .concat(HERO_IDS.filter(function (id) { return participants.indexOf(id) >= 0; }).map(function (id) { return 'opinion.' + id; }), ['irati.03']);
+    }
+
     function completeRoute(state) {
       var next = clone(state), dungeon = state.dungeonId;
       next.progress[dungeon] = Math.max(next.progress[dungeon], state.position);
@@ -492,9 +496,7 @@
       if (dungeon === 'final') {
         next.phase = 'council';
         next.climaxPartyIds = HERO_IDS.filter(function (id) { return next.partyIds.indexOf(id) >= 0 && next.deadHeroIds.indexOf(id) < 0; });
-        var plan = Narrative.scenes.council.passageIds.slice(0, 4).concat([next.climaxPartyIds.length ? 'council.challenge' : 'council.solo', 'council.confession', 'council.andira']);
-        next.climaxPartyIds.forEach(function (id) { plan = plan.concat(Narrative.scenes['opinion.' + id].passageIds); });
-        next.reading = reading('council', plan);
+        next.reading = reading('council', councilPlan(next.climaxPartyIds));
       } else {
         next.phase = 'dungeon_complete';
         var order = next.completedDungeonIds.filter(function (id) { return id !== 'final'; });
@@ -530,6 +532,10 @@
       if (state.phase === 'dungeon_complete' && sceneId.indexOf('lover.') === 0) {
         var reward = sceneId.indexOf('physical') >= 0 ? 'physical' : 'supernatural';
         if (next.mapPieceIds.indexOf(reward) < 0) next.mapPieceIds.push(reward);
+        next.reading = reading(next.mapPieceIds.length === 1 ? 'closure.first' : 'closure.second');
+        return { changes: next, effects: [] };
+      }
+      if (sceneId === 'closure.first' || sceneId === 'closure.second') {
         next.reading = reading(next.mapPieceIds.length === 1 ? 'irati.02' : 'map.reveal');
         return { changes: next, effects: [] };
       }

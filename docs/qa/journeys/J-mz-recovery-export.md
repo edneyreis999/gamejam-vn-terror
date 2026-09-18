@@ -80,3 +80,8 @@ Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runt
 Cópia no MZ → editar fala em Map002 e Map038 → salvar → Novo jogo → jogar ambas as falas; após campanha, fechar/reabrir → escolher o arquivo verdadeiro → comparar o limite salvo. Cancelar seletor preserva arquivos. MA-A/F/I.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-10; E. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

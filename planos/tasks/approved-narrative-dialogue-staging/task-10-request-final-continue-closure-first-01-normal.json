@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+  "requestId": "staging-final-continue-closure-first-01-normal-20260918",
+  "consumer": "task-10",
+  "case": "/Users/edney/projects/coreto/gamejam-vn-terror/planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "staging-continue-closure-first-01",
+    "profile": "1280x720-normal",
+    "variant": "closure-first-01",
+    "configuration": "final-candidate-file1-port18727-keyboard"
+  },
+  "claims": [
+    {
+      "id": "earned-continue",
+      "variant": "closure-first-01",
+      "sensor": "directed-browser",
+      "group": "continue",
+      "source": {
+        "id": "earned-continue",
+        "variant": "closure-first-01"
+      },
+      "expected": {
+        "path": "planos/tasks/approved-narrative-dialogue-staging/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-10",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Fresh candidate after Draska and threshold exit repairs; new earned parents and stable captures."
+  }
+}

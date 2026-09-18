@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhido para o sacrifício:** entrega seus registros ao sobrevivente mais próximo, confirma a direção da saída e assume o peso necessário para manter a passagem aberta.
 - **Frase curta de despedida:** “Minha rota termina aqui. A de vocês, não.”
 - **O que o grupo perde emocionalmente com sua morte:** a certeza de que promessas seriam lembradas e de que ninguém seria abandonado apenas por tornar a jornada mais difícil.
-- **O que faz depois da campanha, caso sobreviva:** reabre o serviço de mensagens, mas abandona a regra de que toda entrega deve ser concluída a qualquer preço. Registra os nomes dos companheiros em seu livro de rotas e passa a ensinar que o dever existe para servir pessoas, não para sacrificá-las.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Bimbren usa a recompensa para reabrir o serviço de mensagens entre as comunidades isoladas. Recupera postos de descanso, organiza os trajetos e contrata novos mensageiros. Na primeira página de seu livro de rotas, registra os nomes dos companheiros que não voltaram.
+
+Durante algum tempo, ainda promete prazos difíceis e confere o relógio sempre que alguém se atrasa. Até que um jovem mensageiro retorna com a bolsa cheia: a ponte estava cedendo, e ele decidiu interromper a viagem
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

@@ -2,10 +2,12 @@
 // OUT: staged sacrifice, semantic saving and later discovery/ending surfaces.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { normalizeProse as normalize, passageBoxes } from '../helpers/native-reading.mjs';
 import { installPhase } from '../helpers/native-shared.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, choices, formation, heroes, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
+const approvedSuccesses = JSON.parse(await readFile(new URL('../fixtures/approved-trap-successes.json', import.meta.url), 'utf8')).successes;
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-04/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
 function accepted(state, type, fields = {}) {
@@ -122,11 +124,11 @@ canonicalCase('UT-055', 'only the current passage can record completion', () => 
   const completed = readAll(intro);
   assert.deepEqual(completed.seenPassageIds, intro.reading.passageIds);
   assert.deepEqual(intro.seenPassageIds, []);
-  rejected(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }), 'COMPLETE_PASSAGE', { passageId: 'prologue.02' }, 'invalid_transition');
+  rejected(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }), 'COMPLETE_PASSAGE', { passageId: 'prologue.rheed.02' }, 'invalid_transition');
 });
 
-async function nativeEncounter(t) {
-  const browser = await tavern(t);
+async function nativeEncounter(t, options = {}) {
+  const browser = await tavern(t, options);
   await browser.evaluate(`window.nativeSaveCalls = []; const nativeSave = DataManager.saveGame; DataManager.saveGame = function(id) { nativeSaveCalls.push(id); return nativeSave.call(this,id); }`);
   for (let index = 0; index < 3; index++) {
     await activate(browser, 'formation', index);
@@ -146,35 +148,38 @@ async function nativeEncounter(t) {
 async function frames(browser, count = 4) {
   await browser.evaluate(`new Promise(resolve => { let count = ${count}; function frame() { if (--count <= 0) resolve(); else requestAnimationFrame(frame); } requestAnimationFrame(frame); })`);
 }
-canonicalCase('IT-005', 'real transfer and final-description held/double input never commit a newly opened approach', { timeout: 90000 }, async t => {
-  const browser = await nativeEncounter(t);
-  const before = await snapshot(browser), id = before.assignments.physical[0];
-  assert.equal(await browser.evaluate('$gameMap.mapId()'), Number(id.slice(1)) + 6);
-  assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${id}`);
-  await browser.call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
-  await frames(browser, 20);
-  const after = await snapshot(browser);
-  assert.equal(after.phase, 'encounter_choice');
-  assert.equal(after.pendingOutcome, null);
-  assert.equal(after.rngState, before.rngState);
-  assert.deepEqual(after.assignments, before.assignments);
-  await browser.call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
-  await choices(browser, 'approaches');
-  assert.equal(await browser.evaluate('$gameMessage.choices().filter(label => /<Bind Picture: 5[0-2]>/.test(label)).length'), 3);
-  await browser.screenshot(`${evidence('IT-005')}/approaches.png`);
-  // Restore the same native pre-description input to exercise the mouse boundary.
-  await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(before)}; $gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Map);`);
-  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
-  for (const clickCount of [1, 2]) {
-    await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', button: 'left', x: 640, y: 605, clickCount });
-    await frames(browser, 2);
-    await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', button: 'left', x: 640, y: 605, clickCount });
-    await frames(browser, 2);
-  }
-  await choices(browser, 'approaches');
-  assert.equal((await snapshot(browser)).phase, 'encounter_choice');
-  assert.equal((await snapshot(browser)).pendingOutcome, null);
-  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Only departure and reveal save; transfer and closing input add no write.');
+canonicalCase('IT-005', 'real transfer and final-description held/double input never commit a newly opened approach', { timeout: 180000 }, async t => {
+  for (const reduced of [false, true]) await t.test(reduced ? 'reduced' : 'normal', async t => {
+    const browser = await nativeEncounter(t, { reduced });
+    assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'), [], 'The threshold releases every owned portrait before the encounter');
+    const before = await snapshot(browser), id = before.assignments.physical[0];
+    assert.equal(await browser.evaluate('$gameMap.mapId()'), Number(id.slice(1)) + 6);
+    assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${id}`);
+    await browser.call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
+    await frames(browser, 20);
+    const after = await snapshot(browser);
+    assert.equal(after.phase, 'encounter_choice');
+    assert.equal(after.pendingOutcome, null);
+    assert.equal(after.rngState, before.rngState);
+    assert.deepEqual(after.assignments, before.assignments);
+    await browser.call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
+    await choices(browser, 'approaches');
+    assert.equal(await browser.evaluate('$gameMessage.choices().filter(label => /<Bind Picture: 5[0-2]>/.test(label)).length'), 3);
+    await browser.screenshot(`${evidence('IT-005')}/${reduced ? 'reduced' : 'normal'}-approaches.png`);
+    // Restore the same native pre-description input to exercise the mouse boundary.
+    await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(before)}; $gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Map);`);
+    await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
+    for (const clickCount of [1, 2]) {
+      await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', button: 'left', x: 640, y: 605, clickCount });
+      await frames(browser, 2);
+      await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', button: 'left', x: 640, y: 605, clickCount });
+      await frames(browser, 2);
+    }
+    await choices(browser, 'approaches');
+    assert.equal((await snapshot(browser)).phase, 'encounter_choice');
+    assert.equal((await snapshot(browser)).pendingOutcome, null);
+    assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Only departure and reveal save; transfer and closing input add no write.');
+  });
 });
 canonicalCase('IT-049', 'repeated native rereading is observational and restores the same choices and focus', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);
@@ -213,7 +218,14 @@ canonicalCase('IT-051', 'success uses native text on the same encounter artwork 
   assert.equal(await browser.evaluate('$gameScreen.picture(41) == null && $gameScreen.picture(42) == null'), true);
   assert.ok(await browser.evaluate('$gameMessage.allText().length > 10'));
   await browser.screenshot(`${evidence('IT-051')}/native-success.png`);
-  await browser.press('Enter', 13);
+  const result = await snapshot(browser), id = result.pendingOutcome.encounterId;
+  const mapId = (id[0] === 'A' ? 6 : 14) + Number(id.slice(1));
+  const map = JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(mapId).padStart(3,'0')}.json`,import.meta.url),'utf8'));
+  for(const box of passageBoxes(map.events[1].pages[0].list, result.reading.passageIds[result.reading.index])) {
+    await browser.waitFor(`$gameMessage.allText()===${JSON.stringify(box)}&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+    assert.deepEqual(await snapshot(browser), result, 'A partial success cannot advance progress');
+    await browser.press('Enter', 13);
+  }
   await browser.waitFor("$gameSystem._dryland.campaign.position === 2 && $gameSystem._dryland.campaign.phase === 'encounter_intro'");
   const after = await snapshot(browser);
   assert.equal(after.progress.physical, 1);
@@ -278,11 +290,19 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
       const result=accepted(choice,'CHOOSE_APPROACH',{approachId:`${id}-${index+1}`});
       assert.equal(result.pendingOutcome.success,success,'Independent GDD providers select the expected outcome');
       await activate(browser,'approaches',index);
-      await assertLocalPause(result,passageText(`result.${id}-${index+1}.${success?'success':'failure'}.01`));
+      const passageId=`result.${id}-${index+1}.${success?'success':'failure'}.01`;
+      const boxes=passageBoxes(list,passageId);
+      if(approvedSuccesses[passageId]) assert.equal(normalize(boxes.join(' ')),approvedSuccesses[passageId].text,'Pinned PR18 prose is the independent oracle');
+      await assertLocalPause(result,boxes[0]);
       await browser.waitFor(`encounterWrites.length===${writesBefore+1}&&encounterWrites.at(-1).done`);
       assert.deepEqual(await browser.evaluate('encounterWrites.slice('+writesBefore+')'),[{sequence:result.sequence,done:true}]);
       if(index===0)await browser.screenshot(`${evidence(testId)}/${id}-${success?'success':'failure'}.png`);
-      await browser.press('Enter',13);
+      for(const text of boxes){
+        await browser.waitFor(`$gameMessage.allText()===${JSON.stringify(text)}&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+        await assertLocalPause(result,text);
+        assert.ok(!result.seenPassageIds.includes(passageId),'Partial result stays unread');
+        await browser.press('Enter',13);
+      }
       const consequence=complete(result),after=success?accepted(consequence,'ENTER_DUNGEON'):consequence;
       await browser.waitFor(`$gameSystem._dryland.campaign.sequence===${after.sequence}&&$gameMessage.hasText()`);
       assert.deepEqual(await snapshot(browser),after,'One result completion reaches the next reveal or sacrifice');

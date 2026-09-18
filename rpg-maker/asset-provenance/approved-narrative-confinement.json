@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-18",
+  "method": "built-in image_gen",
+  "authority": "2026-09-18: user authorized image generation, waived audio audition and editor capture, then directed rustic eroded stone/tree forms with only generic humanoid resemblance after many years.",
+  "assets": [
+    {
+      "path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_perola_confined.png",
+      "sourcePortrait": "Dryland_perola.png",
+      "prompt": [
+        "Use case: stylized-concept. FINAL GAME ASSET, a rough ancient stone prison that only vaguely suggests a dwarf woman, NOT a living woman surrounded by stones. User correction supersedes preserving facial identity/detail. Image 1 (Pérola portrait) is ONLY loose reference for a broad stocky silhouette; discard all literal human details. Image 2 Gorvak and image 3 tavern are drawing-style references: black pen outlines, sparse crosshatching, flat warm parchment sepia. Create ONE single irregular upright mass of old weathered stone. In its upper half, primitive, very shallow eroded planes happen to suggest a short broad female dwarf, a rounded head, heavy brow, broad shoulders and a faint diagonal ridge vaguely reminiscent of a braid. The likeness must be generic, could be any dwarf woman: NO eyeballs, eyelashes, iris, individual lips, realistic nose, detailed ears, hair strands, clothes, buttons, belt, hands or skin. Face is scarcely a face, worn blunt hollows and ridges, asymmetrical and indistinct after MANY DECADES. Entire object is continuous stone, including face, with coarse chisel marks, chips, fissures, softened contours, sparse worn lichen patches. It should read first as a rugged ancient carved boulder, only second as a person. Not a pile of stones, not statue of detailed woman, not a sarcophagus with crisp portrait. Upper anthropomorphic suggestion readable above dialogue window; bottom simply widens into rough uncarved rock. Atmospheric, tragic, no gore. Single contained vertical silhouette on genuine TRANSPARENT alpha background; no black/white rectangle, no backdrop, no drawn checkerboard. 1024x1536 portrait. Face suggestion around upper quarter, stone shoulders around middle. Maintain same monochrome beige/black ink drawing style as tavern, no photorealistic shading, no bright colors, no text, no decorative frame.",
+        "Use case: precise-object-edit. EDIT ONLY the supplied stone figure. It is still too portrait-like and too neatly carved. Make it far more rustic, ancient and ambiguous: one monolithic irregular boulder with an EXTREMELY WEATHERED shallow relief vaguely resembling a stocky dwarf woman. Preserve canvas size, general silhouette, sepia flat fill, hand-inked linework and genuine transparent alpha background. Remove identity-specific facial detail: eyes become a few unequal shallow chips with NO eyeballs, mouth nearly erased, nose a blunt broken plane, jaw incomplete merging directly into stone. Destroy the clear hair and braid detail: replace neat braid segments with a single barely discernible worn diagonal rock ridge interrupted by erosion; eliminate decorative carving. Erase the distinct ear. No detailed forehead wrinkles. The stone texture and rough chisel facets should dominate over the humanoid impression. Reduce the tidy stacking-of-rocks pattern into larger fused natural rock planes with irregular fissures. Scattered lichen and decades of softened worn edges. All parts are STONE, never skin or clothes; subtle generic dwarf woman suggestion could be ANY individual. She has endured many decades in this form. Think ruined folk relief whose maker and subject are forgotten, not a recognizable statue. Same top-third vague head placement, broad shoulders, widening base, no new background or text."
+      ],
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "originalSha256": "3608703d1732146f6e9d227c3ddfe091769e55357a2c9e42b2244c0e7c4c7c4a",
+      "sha256": "0e3a5b295222d640f34886fe7161ef8904e0a14a00e6d806fe3f77d53bb5e59d",
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "rpg-maker/The Dryland Drowned/img/pictures/Dryland_florai_confined.png",
+      "sourcePortrait": "Dryland_florai.png",
+      "prompt": [
+        "Use case: stylized-concept. Create final transparent RPG Maker PNG asset, portrait 1024x1536. Subject is ONE ANCIENT FIG TREE TRUNK with a primitive weather-eroded elf-like relief barely suggested IN THE WOOD, as if someone has remained transformed into the tree for many decades. It is a tree FIRST, only vaguely a humanoid on second glance. The elf is NOT a living body caught in roots, NOT a detailed carved portrait, NOT a wooden humanoid person. A large natural gnarled fig trunk runs continuously from flared roots at bottom to broken old branches at top. Among its vertical bark folds in the upper central third is a faint long oval head shape, two worn diagonal ridges suggesting pointed ears, and just a few irregular depressions where eyes might be. No visible eyeballs, lips, detailed nose, distinct hair strands, beard, clothing, suspenders, belt, buttons, fingers, exposed skin or separate human limbs. Suggestion of shoulders and torso is only distorted trunk grain, age-obscured shallow relief. Could be ANY ELF, identity unrecognizable. Weathering dominates: old scars, knots, cracked bark, hollows, moss/lichen in sparse monochrome patches, worn carving gradually swallowed by new tree growth. A few small fig leaves on two short side branches may help identify the tree; no wide leafy crown. No ornamental symmetry. Top and sides fit canvas; solid base roots below. STYLE: match supplied Gorvak and tavern reference images ONLY for black ink line drawing and sparse hatching over flat warm parchment beige fill. Same hand-drawn sepia medieval fantasy line art; no photorealism, no painterly gradients, no strong colors. Genuine transparent alpha outside tree silhouette, no scene background, no rectangle, no drawn checkerboard, no text. The vague elf suggestion must remain in top half, visible above game's lower dialogue window."
+      ],
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "originalSha256": "7fe6857b727df9f344c51d99c071ebd6369f9d65328653aef635418eafc1625e",
+      "sha256": "e943de52594d56565a1597353ceae53e267806bf8e979bf7655fcc3cc5bc31fd",
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    }
+  ],
+  "styleReferences": [
+    "h1-Gorvak.png",
+    "Dryland_Taverna.png"
+  ],
+  "nativeConsumers": [
+    293,
+    295,
+    297,
+    299
+  ],
+  "originalsPreserved": true,
+  "artDirection": "Stone is Pérola's body; fig tree is Floraí's body. Indistinct generic likeness, weathering, no living anatomy/clothing or detailed facial identity. Rejected earlier portraits remain generation history, not shipped art."
+}

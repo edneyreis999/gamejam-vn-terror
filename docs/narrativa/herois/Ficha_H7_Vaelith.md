@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhido para o sacrifício:** entrega suas anotações, indica a passagem que os outros devem alcançar e usa a própria mobilidade para afastar ou conter o perigo.
 - **Frase curta de despedida:** “Levem as páginas. Façam minha última linha valer.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que enfrentava o desconhecido com curiosidade suficiente para fazer o horror parecer compreensível, mas nunca insignificante.
-- **O que faz depois da campanha, caso sobreviva:** organiza o arquivo que buscava, mas restringe textos capazes de causar dano quando lidos sem preparo. Acrescenta os relatos dos companheiros e passa a ensinar que preservar conhecimento também exige saber quando não o divulgar.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Vaelith retorna com os registros da expedição e começa a reconstruir o arquivo que buscava. Reúne cópias dispersas, recupera relatos esquecidos e organiza advertências para que outros reconheçam os perigos que seu grupo enfrentou. Alguns textos ficam sob acesso restrito.
+
+Nos catálogos, ele explica o risco e indica o preparo necessário para estudá-los.
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

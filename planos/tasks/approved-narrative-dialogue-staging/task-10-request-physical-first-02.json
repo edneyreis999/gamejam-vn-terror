@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+  "requestId": "staging-physical-first-20260918-02",
+  "consumer": "task-10",
+  "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-directed.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "approved-staging-physical-first",
+    "profile": "1280x720-normal",
+    "variant": "physical-first",
+    "configuration": "file1-fresh-keyboard-mouse-natural-credits-port18727"
+  },
+  "claims": [
+    {
+      "id": "staging-journey",
+      "variant": "physical-first",
+      "sensor": "directed-browser",
+      "group": "fresh-campaign",
+      "source": {
+        "id": "staging-journey",
+        "variant": "physical-first"
+      },
+      "expected": {
+        "path": "planos/tasks/approved-narrative-dialogue-staging/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-10",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Reexecutar campanha completa após F-01 HIDE e quebras nativas de texto; DPR1 explícito."
+  }
+}

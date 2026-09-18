@@ -43,3 +43,8 @@ Estado corrente: **pass**. S04/S09/S10/S12: Reunir/Destruir compartilham pai ant
 ## Expansão de autoria por mapa — 2026-09-14
 
 Fluxo dos três desfechos PASS; enquadramento do Conselho reprovado, epílogos corrigidos com retestes. MAS-03/04/06: MA-C/D/E/H; duas ordens, três finais, Conselho, memorial, epílogos e créditos. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-05/06/07/08/09; B/C/D. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

@@ -47,3 +47,8 @@ Estado corrente: **blocked-verify**. A/B, cancelamento, arquivos nativos, ramifi
 ## Expansão de autoria por mapa — 2026-09-14
 
 PASS técnico: arquivosA/B e Continue nas fronteiras com proveniência jogada; nenhuma campanha de usuário foi alterada. MAS-02/05/07: MA-A/F/I; arquivos/checkpoints genuínos e edição nativa Map002/Map038. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-10; E. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

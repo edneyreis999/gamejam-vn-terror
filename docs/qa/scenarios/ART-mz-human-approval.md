@@ -37,3 +37,8 @@ Estado corrente: **blocked-verify**. Quatro pareceres humanos após implementaç
 ## Expansão de autoria por mapa — 2026-09-14
 
 blocked-verify: demonstração nativa de edição/reprodução PASS; quatro pareceres humanos continuam pendentes. MAV-014/MAS-07: MA-I e quatro julgamentos atribuídos; autoria, UI/controles, memorial e áudio. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: V-004/006 e julgamentos aplicáveis; F. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

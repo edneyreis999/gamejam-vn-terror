@@ -2551,17 +2551,106 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
               "code": 231,
               "indent": 0,
               "parameters": [
                 1,
-                "Dryland_Memorial",
+                "Dryland_EpilogueH3",
                 1,
                 0,
                 640,
                 360,
-                76.55502392344498,
-                76.55502392344498,
+                70.3125,
+                70.3125,
                 255,
                 0
               ]
@@ -2695,106 +2784,28 @@
               ]
             },
             {
-              "code": 111,
+              "code": 101,
               "indent": 0,
               "parameters": [
-                12,
-                "$gameVariables.value(47)"
+                "",
+                0,
+                0,
+                2,
+                "Griznik"
               ]
             },
             {
-              "code": 357,
-              "indent": 1,
+              "code": 401,
+              "indent": 0,
               "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "60",
-                  "PictureName:str": "Dryland_H3",
-                  "Origin:str": "Bust",
-                  "Position:num": "2",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "0"
-                }
+                "Griznik abre a oficina que sempre desejou. Na parede atrás da bancada,<br>"
               ]
             },
             {
-              "code": 411,
-              "indent": 0,
-              "parameters": []
-            },
-            {
-              "code": 357,
-              "indent": 1,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "60",
-                  "PictureName:str": "Dryland_H3",
-                  "Origin:str": "Bust",
-                  "Position:num": "2",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "20"
-                }
-              ]
-            },
-            {
-              "code": 412,
-              "indent": 0,
-              "parameters": []
-            },
-            {
-              "code": 357,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Scale_ScaleTo",
-                "Scale_ScaleTo",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "50",
-                  "TargetScaleY:str": "50",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 0,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Move_MoveToCoordinates",
-                "Move_MoveToCoordinates",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "320",
-                  "TargetY:str": "1100",
-                  "EasingType:str": "InOutSine",
-                  "FlipDirection:str": "None",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 0,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Tone_NormalBust",
-                "Tone_NormalBust",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "Duration:eval": "0"
-                }
+                "organiza as lascas recolhidas durante a expedição. Sob cada uma, escreve o"
               ]
             },
             {
@@ -2812,28 +2823,39 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "abre uma oficina dedicada a construções seguras e passa a recusar trabalhos que economizem à custa de vidas. Guarda as lascas recolhidas na expedição em uma parede, junto aos nomes de quem não voltou."
+                "nome de um companheiro e uma pequena lembrança: uma piada, uma discussão, um<br>"
               ]
             },
             {
-              "code": 117,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                76
+                "gesto que ninguém mais teria motivo para registrar."
               ]
             },
             {
-              "code": 108,
+              "code": 101,
               "indent": 0,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+                "",
+                0,
+                0,
+                2,
+                "Griznik"
               ]
             },
             {
-              "code": 408,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "Sua oficina fica conhecida pelas construções seguras e pelos orçamentos que<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "ele se recusa a reduzir quando isso exige retirar um apoio necessário"
               ]
             },
             {

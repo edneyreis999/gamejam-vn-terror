@@ -8,10 +8,10 @@ import path from 'node:path';
 import { canonicalCase, assertRegistrations, manifest } from '../helpers/canonical-cases.mjs';
 import { openChrome, project, startServer, selectFile } from '../helpers/native-chrome.mjs';
 import { hash } from '../../tools/native-files.mjs';
-import { appendEnsemble, ensembleFixture, prepareBustFixture } from '../helpers/native-bust-fixture.mjs';
+import { appendEnsemble, assertHidePreservesPortraits, ensembleFixture, prepareBustFixture } from '../helpers/native-bust-fixture.mjs';
 import { parsePluginList, readPluginParameters } from '../../tools/plugin-settings.mjs';
 import { clickConsole } from '../helpers/native-shared.mjs';
-import { activate, choices, pause, catalog, rules, formation, returnToTavern } from '../helpers/formation.mjs';
+import { prologueMarkers, activate, choices, pause, catalog, rules, formation, returnToTavern } from '../helpers/formation.mjs';
 
 const clone = value => structuredClone(value);
 const original = JSON.parse(await readFile(path.join(project, 'data/CommonEvents.json'), 'utf8'));
@@ -47,25 +47,42 @@ canonicalCase('IT-004', 'The native prologue runs its authored passage and commi
   const browser = await openChrome(t);
   await firstPrologue(browser);
   const before = await browser.evaluate('({text:$gameMessage.allText(),state:$gameSystem._dryland.campaign})');
-  assert.match(before.text, /A chuva acompanha Ivaí/);
+  assert.match(before.text, /Meu nome é Rheed/);
+  await browser.screenshot('docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/older-rheed.png');
+  await assertHidePreservesPortraits(browser,[60],'docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/older-rheed-hide.png');
   assert.equal(before.state.sequence, 1);
   assert.deepEqual(before.state.seenPassageIds, []);
   assert.deepEqual(await browser.evaluate('({map:$gameMap._interpreter._mapId,event:$gameMap._interpreter._eventId,child:Boolean($gameMap._interpreter._childInterpreter)})'), {map:2,event:1,child:false});
-  await browser.press('Enter', 13);
-  await browser.waitFor("$gameMessage.allText().includes('Minha mãe deixou registros') && SceneManager._scene._messageWindow.pause");
-  await browser.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+  for (const marker of prologueMarkers.slice(0, 3)) {
+    await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
+    assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign.seenPassageIds'), [], 'Partial narrator passage stays unread');
+    await browser.press('Enter', 13);
+  }
+  await browser.waitFor("$gameMessage.allText().includes('Os papéis eram de Irati') && SceneManager._scene._messageWindow.pause");
   const after = await browser.evaluate('$gameSystem._dryland.campaign');
   assert.equal(after.sequence, 2);
-  assert.deepEqual(after.seenPassageIds, ['prologue.01']);
+  assert.deepEqual(after.seenPassageIds, ['prologue.rheed.01']);
   assert.equal(after.reading.index, 1);
-  assert.equal(after.history.filter(action => action.passageId === 'prologue.01').length, 1);
-  await pause(browser); await browser.press('Enter', 13); await pause(browser);
-  assert.match(await browser.evaluate('$gameMessage.allText()'), /Irati escrevera/);
-  await browser.press('Enter', 13); await choices(browser, 'formation');
+  assert.equal(after.history.filter(action => action.passageId === 'prologue.rheed.01').length, 1);
+  for (const marker of prologueMarkers.slice(3)) {
+    await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
+    const dialogue = marker.startsWith('Você') || marker.startsWith('Minha família') || marker.startsWith('Os detalhes');
+    const expectedBust = dialogue ? 'Reed-novo' : 'Reed final';
+    assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name() ?? null'), expectedBust);
+    assert.equal(await browser.evaluate('$gameScreen.picture(61)?.name() ?? null'), dialogue ? 'Dryland_ivai' : null);
+    assert.deepEqual(await browser.evaluate('[AudioManager._currentBgm?.name || "", AudioManager._currentBgs?.name || ""]'), dialogue ? ['Town3', 'People1'] : ['Town1', 'People2']);
+    if (marker.startsWith('Minha família') || marker.startsWith('Você') || marker.startsWith('Os detalhes')) {
+      if(marker.startsWith('Você'))await assertHidePreservesPortraits(browser,[60,61],'docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/young-rheed-hide.png');
+      await browser.screenshot(`docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/${marker.startsWith('Você') ? 'young-rheed' : marker.startsWith('Minha') ? 'promise' : 'closing'}.png`);
+    }
+    await browser.press('Enter', 13);
+  }
+  await choices(browser, 'formation');
   const finished = await browser.evaluate('$gameSystem._dryland.campaign');
-  assert.deepEqual(finished.seenPassageIds, ['prologue.01', 'prologue.02', 'irati.01']);
+  assert.deepEqual(finished.seenPassageIds, ['prologue.rheed.01', 'prologue.rheed.02', 'prologue.rheed.03', 'prologue.rheed.04', 'prologue.rheed.05', 'prologue.rheed.06']);
   assert.equal(finished.history.filter(action => action.type === 'BEGIN').length, 1);
-  assert.equal(finished.history.filter(action => action.type === 'COMPLETE_PASSAGE').length, 3);
+  assert.equal(finished.history.filter(action => action.type === 'COMPLETE_PASSAGE').length, 6);
+  assert.deepEqual(await browser.evaluate('[60,61].map(id => $gameScreen.picture(id) ?? null)'), [null, null]);
   await activate(browser, 'formation', 0); await choices(browser, 'hero'); await returnToTavern(browser);
   assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign'), finished, 'Tavern return does not replay the prologue');
   await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-02/IT-004/confirmed-first-passage.png');
@@ -84,7 +101,7 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   await startServer(t, directory);
   const browser = await openChrome(t);
   await firstPrologue(browser);
-  assert.match(await browser.evaluate('$gameMessage.allText()'), /A chuva acompanha Ivaí/);
+  assert.match(await browser.evaluate('$gameMessage.allText()'), /Meu nome é Rheed/);
   const pluginFile = path.join(project, 'js/plugins/Dryland_EventBridge.js');
   const pluginHash = hash(await readFile(pluginFile));
   const mapFile = path.join(directory, 'data/Map002.json');
@@ -93,7 +110,7 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   await writeFile(mapFile, JSON.stringify(edited));
   await browser.call('Page.reload', { ignoreCache: true });
   await firstPrologue(browser, 'Novo jogo');
-  assert.equal(await browser.evaluate('$gameMessage.allText()'), 'Texto salvo no evento nativo para verificar a releitura.');
+  assert.equal(await browser.evaluate('$gameMessage.allText()'), 'Texto salvo no evento nativo para verificar a releitura.\ncontragosto de Irati. ');
   assert.equal(hash(await readFile(pluginFile)), pluginHash);
   await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-02/IT-035/edited-native-text.png');
   assert.deepEqual(browser.exceptions, []);
@@ -119,7 +136,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
   const file=path.join(directory,'data/Map038.json'),map=JSON.parse(await readFile(file,'utf8')),list=map.events[1].pages[0].list;
   for(const c of list.filter(c=>c.code===357&&c.parameters[3]['PictureID:arrayeval']==='["60"]')){
    const args=c.parameters[3];
-   if(c.parameters[1]==='Move_MoveToCoordinates')args['TargetX:str']=args['TargetY:str']==='1254'?'326':'342';
+   if(c.parameters[1]==='Move_MoveToCoordinates')args['TargetX:str']=args['TargetY:str']==='701.04'?'326':'342';
    if(c.parameters[1]==='Scale_ScaleTo')args['TargetScaleX:str']=args['TargetScaleY:str']=args['TargetScaleX:str']==='36'?'39.6':'44';
   }
   const enter=list.findIndex(c=>c.code===357&&c.parameters[1]==='Basic_EnterBust');
@@ -136,7 +153,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  });
  assert.deepEqual(prepared.events[4],original[4]);
  await startServer(t,prepared.directory);const browser=await openChrome(t);await firstPrologue(browser);
- for(let box=0;box<3;box++){await pause(browser);await browser.press('Enter',13);}
+ for(let box=0;box<prologueMarkers.length;box++){await pause(browser);await browser.press('Enter',13);}
  await choices(browser,'formation');await activate(browser,'formation',1);await activate(browser,'hero',0);await pause(browser);
  await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===44');
  assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection?.code||null'),null,'Focus before entry leaves an empty owned slot untouched');
@@ -217,7 +234,7 @@ canonicalCase('IT-069','artist parameters and additional native effects survive 
   await writeFile(file,JSON.stringify(map));
  });
  await startServer(t,prepared.directory);const browser=await openChrome(t);await firstPrologue(browser);
- for(let box=0;box<3;box++){await pause(browser);await browser.press('Enter',13);}
+ for(let box=0;box<prologueMarkers.length;box++){await pause(browser);await browser.press('Enter',13);}
  await choices(browser,'formation');await activate(browser,'formation',1);await activate(browser,'hero',0);await pause(browser);
  const settled='$gameScreen.picture(66)&&$gameScreen.picture(66)._duration===0&&$gameScreen.picture(66)._toneDuration===0';
  await browser.waitFor(settled);
@@ -278,7 +295,7 @@ canonicalCase('IT-071', 'a replacement conversation runs without metadata and on
   await writeFile(path.join(directory,'data/CommonEvents.json'),JSON.stringify(edited));
   await startServer(t,directory);const browser=await openChrome(t);
   await firstPrologue(browser);
-  for(const text of ['A chuva acompanha Ivaí','Minha mãe deixou registros','Irati escrevera']) {
+  for(const text of prologueMarkers) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(text)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     await browser.press('Enter',13);
   }

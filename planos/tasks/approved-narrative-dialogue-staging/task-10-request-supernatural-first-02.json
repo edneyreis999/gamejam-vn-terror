@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+  "requestId": "staging-supernatural-first-20260918-02",
+  "consumer": "task-10",
+  "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-directed.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "approved-staging-supernatural-first",
+    "profile": "1920x1080-reduced",
+    "variant": "supernatural-first",
+    "configuration": "file2-preserve-file1-mouse-skip-credits-port18727"
+  },
+  "claims": [
+    {
+      "id": "staging-journey",
+      "variant": "supernatural-first",
+      "sensor": "directed-browser",
+      "group": "fresh-campaign",
+      "source": {
+        "id": "staging-journey",
+        "variant": "supernatural-first"
+      },
+      "expected": {
+        "path": "planos/tasks/approved-narrative-dialogue-staging/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-10",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Rota inversa, movimento reduzido, arquivo2 preservando arquivo1 real da campanha corrigida."
+  }
+}

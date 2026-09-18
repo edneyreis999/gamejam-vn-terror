@@ -3829,7 +3829,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As cunhas desviam os trilhos e abrem uma passagem segura."
+                "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "bate neles, seu caminho muda e ele cai dentro de um pilão vazio. A haste fica<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "presa na pedra, o mecanismo para e o grupo consegue atravessar a cozinha."
               ]
             },
             {
@@ -4243,7 +4257,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo acompanha o ritmo dos impactos e cruza a cozinha."
+                "A cantiga avisa quando cada golpe vai acontecer. O grupo avança nos pequenos<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "intervalos entre uma batida e outra, saltando sobre os pilões menores. O<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "último golpe atinge o chão quando todos já alcançaram a saída."
               ]
             },
             {
@@ -4657,7 +4685,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O verso é apagado, e a cantiga perde o domínio sobre o socador."
+                "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Sem saber para onde deve seguir, o socador para no alto e deixa o caminho<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "livre."
               ]
             },
             {

@@ -3829,7 +3829,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os apoios distribuem o peso e impedem que o teto desça."
+                "Pedaços de madeira são colocados sob as vigas mais fortes. Os apoios dividem o<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "peso e impedem que o teto continue descendo. A cada passo da criatura, a casa<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "inteira treme, mas o grupo consegue atravessar antes que os apoios se quebrem."
               ]
             },
             {
@@ -4243,7 +4257,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo atravessa os caibros antes da próxima passada."
+                "O grupo avança depressa pelos espaços estreitos do telhado. Logo depois, um pé<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "ossudo pisa no lugar que todos acabaram de deixar. A última parte do teto<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "desaba quando o grupo já alcançou a saída."
               ]
             },
             {
@@ -4657,7 +4685,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O padrão dos passos revela a faixa segura do forro."
+                "Muitos passos são apenas ecos, mas os verdadeiros fazem o pó cair antes de<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "cada pisada. Observando esse sinal, o grupo encontra uma faixa do telhado que"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "nunca é atingida. Todos seguem por ela enquanto os pés esmagam as telhas dos<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "dois lados."
               ]
             },
             {
