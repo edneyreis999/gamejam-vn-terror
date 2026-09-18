@@ -7,6 +7,11 @@ Este acervo reúne decisões gerais aceitas para o jogo. As ADRs locais das spec
 | [ADR-G001](adr-g001-mapas-de-interacao-dos-herois.md) | Autoria das interações dos heróis em mapas próprios | Aceita; implementada nos oito heróis | 2026-09-14 |
 | [ADR-G003](adr-g003-excluir-testes-de-zoom-nativo.md) | Exclusão de testes de zoom nativo da matriz de QA | Aceita | 2026-09-14 |
 | [ADR-G002](adr-g002-remocao-de-atalhos-editoriais.md) | Remoção de eventos de mapa que servem apenas como atalhos editoriais | Aceita; aplicada aos 42 eventos inventariados | 2026-09-14 |
+| [ADR-G004](adr-g004-autonomia-do-harness-na-execucao-de-tarefas.md) | Autonomia para reorganizar a execução preservando produto, provas e aceite | Aceita | 2026-09-18 |
+| [ADR-G005](adr-g005-exclusao-de-testes-de-gamepad.md) | Exclusão de testes de gamepad das campanhas atuais e futuras | Aceita | 2026-09-18 |
+| [ADR-G006](adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md) | Seleção e agrupamento de testes pesados por risco; encerramento dos recursos de teste | Aceita | 2026-09-18 |
+
+As ADRs G004–G006 adaptam, por determinação do usuário em 2026-09-18, as decisões 010–012 do projeto Pixi-Rework. Aplicam-se ao planejamento, execução, retomada e fechamento deste jogo, sem nova aprovação para cada reorganização ou omissão elegível. Cada ADR identifica a origem e seus limites locais; nenhuma importa outras decisões do projeto de origem por transitividade. Planos atuais devem ser reconciliados quando a política for aplicada, preservando baselines concluídas, evidências históricas e aceites humanos. A adoção não declara testes executados ou pendências encerradas.
 
 A aprovação é de arquitetura e organização. Os demais julgamentos de UI, arte, narrativa e áudio mantêm seus estados na [verificação da entrega](../../planos/tasks/eventbridge-minimal-runtime/verification.md#human-acceptance). A análise posterior foi incorporada ao [plano de expansão](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-006.md); a implementação e os sensores de cada fatia constam do grafo e da verificação da spec.
 

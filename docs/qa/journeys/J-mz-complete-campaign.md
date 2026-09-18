@@ -87,3 +87,8 @@ ADR-005 adds one playable child map and removes42 authoring shortcuts. Gorvak no
 Jogar/arquivo → prólogo Map002 → formação → herói em Map037–044 → retorno/seleção → encontros Maps007–022 → Conselho23 → final25–27 → memorial/epílogos29–36 → créditos. Desistência/recuo/Continue usam checkpoints realmente gravados. MA-A/C/D/E/H.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-01/02/04/05/07/08; A–D. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

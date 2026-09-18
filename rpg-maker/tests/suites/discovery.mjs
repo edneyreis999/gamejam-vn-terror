@@ -1,12 +1,17 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { normalizeProse, passageBoxes } from '../helpers/native-reading.mjs';
+import { assertHidePreservesPortraits, assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { choices, rules, tavern } from '../helpers/formation.mjs';
+import { choices, pause, rules, tavern } from '../helpers/formation.mjs';
 import { complete, finishReading, rejectUnchanged } from '../helpers/campaign.mjs';
 import { assertBackgroundCoverage, continueSave, discoveryBoundary, installDiscovery, observeDiscovery, orders, passage } from '../helpers/discovery.mjs';
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-08/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
 const receipt = route => `Você recebeu a peça ${route === 'physical' ? 'anã' : 'élfica'} do mapa.`;
 const expectedBackground = route => route === 'physical' ? 'Dryland_Church' : 'Dryland_Figtree';
+const approved = JSON.parse(await readFile(new URL('../fixtures/approved-closing-source.json', import.meta.url), 'utf8')).passages;
+const events = JSON.parse(await readFile(new URL('../../The Dryland Drowned/data/CommonEvents.json', import.meta.url), 'utf8'));
 canonicalCase('UT-032', 'both legal route orders award exactly one piece per receipt and unlock only with both', () => {
   for (const order of orders) {
     for (const index of [0, 1]) {
@@ -19,7 +24,10 @@ canonicalCase('UT-032', 'both legal route orders award exactly one piece per rec
       const after = complete(state);
       assert.deepEqual(after.mapPieceIds, order.slice(0, index + 1));
       assert.deepEqual(after.completedDungeonIds, order.slice(0, index + 1));
-      assert.equal(after.reading.sceneId, index === 0 ? 'irati.02' : 'map.reveal');
+      assert.equal(after.reading.sceneId, index === 0 ? 'closure.first' : 'closure.second');
+      const continuation = complete(after);
+      assert.equal(continuation.reading.sceneId, index === 0 ? 'irati.02' : 'map.reveal');
+      assert.deepEqual(continuation.mapPieceIds, after.mapPieceIds);
       assert.equal(rules.playerView(after).destinations.final.status, index === 0 ? 'locked' : 'available');
       const stale = rules.dispatch(after, { type: 'COMPLETE_PASSAGE', passageId: `reward.${order[index]}`, expectedSequence: state.sequence });
       assert.equal(stale.ok, false); assert.deepEqual(stale.state, after); assert.deepEqual(stale.effects, []);
@@ -35,7 +43,10 @@ canonicalCase('UT-032', 'both legal route orders award exactly one piece per rec
 async function reachReceipt(browser, order, index) {
   const state = discoveryBoundary(order, index), route = order[index];
   await installDiscovery(browser, state);
-  await browser.press('Enter', 13);
+  for (let box = 0; (await snapshot(browser)).phase === 'approach_result'; box++) {
+    assert.ok(box < 3);
+    await pause(browser); await browser.press('Enter', 13);
+  }
   for (const id of [`lover.${route}.01`, `lover.${route}.warning`, ...(index ? [`lover.${route}.second`] : [])]) {
     await passage(browser, id);
     assert.equal(await browser.evaluate('$gameMap.mapId()'), 4);
@@ -43,14 +54,45 @@ async function reachReceipt(browser, order, index) {
     assert.deepEqual((await snapshot(browser)).mapPieceIds, order.slice(0, index));
     if (id.endsWith('warning') || id.endsWith('second')) {
       const speaker = route === 'physical' ? 'Pérola' : 'Floraí';
-      const asset = route === 'physical' ? 'Dryland_perola' : 'Dryland_florai';
+      const asset = route === 'physical' ? 'Dryland_perola_confined' : 'Dryland_florai_confined';
       await browser.waitFor(`$gameScreen.picture(63)?.name() === ${JSON.stringify(asset)}`);
       assert.equal(await browser.evaluate('$gameMessage.speakerName()'), speaker);
+      await assertPortraitFraming(browser, [63], id);
+      await browser.screenshot(`${evidence('IT-052')}/${route}-${index}-${id}.png`);
+      const reduced = await browser.evaluate("matchMedia('(prefers-reduced-motion: reduce)').matches");
+      const view = reduced ? { width: 1920, height: 1080 } : { width: 1280, height: 720 };
+      await browser.call('Emulation.setDeviceMetricsOverride', { ...view, deviceScaleFactor: 1, mobile: false });
+      await browser.waitFor(`innerWidth === ${view.width} && innerHeight === ${view.height}`);
+      const capture = `${evidence(index === 0 ? 'IT-052' : 'IT-053')}/prison-${id}-${reduced ? 'reduced-1080' : 'normal-720'}`;
+      await assertPortraitFraming(browser, [63], id);
+      await browser.screenshot(`${capture}.png`);
+      await assertHidePreservesPortraits(browser, [63], `${capture}-hide.png`);
     }
     await browser.press('Enter', 13);
   }
   await passage(browser, `reward.${route}`);
   return state;
+}
+async function readClosure(browser, order) {
+  const id = `closure.${order}.01`;
+  await passage(browser, id);
+  const before = await snapshot(browser);
+  const event = events.find(e => e?.name === `closure.${order}`);
+  const boxes = passageBoxes(event.list, id);
+  assert.equal(normalizeProse(boxes.join(' ')), approved[id].join(' '));
+  for (const [index, text] of boxes.entries()) {
+    await pause(browser);
+    assert.equal(await browser.evaluate('$gameMessage.allText()'), text);
+    assert.deepEqual(await snapshot(browser), before, 'No paragraph may complete the closure early');
+    assert.equal(await browser.evaluate('$gameScreen.picture(1) == null && $gameScreen.picture(60)?.name() === "Reed final"'), true);
+    assert.deepEqual(await browser.evaluate('({bgm:AudioManager._currentBgm?.name,bgs:AudioManager._currentBgs?.name})'), {bgm:'Town1',bgs:'People2'});
+    if(index===0)await assertHidePreservesPortraits(browser,[60],`${evidence('IT-052')}/closure-${order}-hide.png`);
+    await browser.screenshot(`${evidence('IT-052')}/closure-${order}-${index}.png`);
+    await browser.press('Enter', 13);
+  }
+  await browser.waitFor(`$gameSystem._dryland.campaign.sequence === ${before.sequence+1}`);
+  assert.deepEqual(await snapshot(browser), complete(before));
+  return before;
 }
 async function visibleBounds(browser, id) {
   // Inspect actual engine-loaded pixels and the native transform, without
@@ -96,15 +138,19 @@ canonicalCase('IT-052', 'both native piece receipts preserve scene, alpha, cente
     await browser.evaluate('new Promise(resolve => {let n=40;function tick(){if(--n===0)resolve();else requestAnimationFrame(tick);}requestAnimationFrame(tick);})');
     assert.deepEqual(await snapshot(browser), before, 'Presentation time cannot award or dismiss.');
     await browser.screenshot(`${evidence('IT-052')}/${route}-${reduced ? 'reduced' : 'fade'}-receipt.png`);
-    await browser.press('Enter', 13); await passage(browser, 'irati.02.01');
+    await browser.press('Enter', 13); await passage(browser, 'closure.first.01');
+    const checkpoint = await snapshot(browser);
+    await readClosure(browser, 'first'); await passage(browser, 'irati.02.01');
     const after = await snapshot(browser);
     assert.deepEqual(after.mapPieceIds, [route]); assert.equal(after.reading.sceneId, 'irati.02');
     assert.equal(await browser.evaluate('$gameScreen.picture(2) == null && $gameScreen.picture(3) == null'), true);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), 'Dryland_Taverna');
     await assertBackgroundCoverage(browser);
-    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"), after);
+    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"), checkpoint);
     const sounds = await browser.evaluate("discoveryEvents.filter(e=>e.name==='playSe').length");
-    await continueSave(browser); await passage(browser, 'irati.02.01');
+    await continueSave(browser); await passage(browser, 'closure.first.01');
+    assert.deepEqual(await snapshot(browser), checkpoint);
+    await readClosure(browser, 'first'); await passage(browser, 'irati.02.01');
     assert.deepEqual(await snapshot(browser), after);
     assert.equal(await browser.evaluate('$gameScreen.picture(2) == null && $gameScreen.picture(3) == null'), true, 'Restored parent event cleans the receipt before Irati.');
     assert.equal(await browser.evaluate("discoveryEvents.filter(e=>e.name==='playSe').length"), sounds);
@@ -120,10 +166,13 @@ canonicalCase('IT-053', 'native automatic assembly runs in both orders with inde
     const before = await snapshot(browser); assert.deepEqual(before.mapPieceIds, order.slice(0, 1));
     await browser.evaluate('discoveryEvents.length=0;');
     await browser.press('Enter', 13);
+    await passage(browser, 'closure.second.01');
+    const checkpoint = await snapshot(browser);
+    await readClosure(browser, 'second');
     await passage(browser, 'map.reveal.01');
     const after = await snapshot(browser);
     assert.deepEqual(after.mapPieceIds, order); assert.equal(rules.playerView(after).destinations.final.status, 'available');
-    assert.equal(after.reading.index, 0); assert.equal(after.sequence, before.sequence + 1);
+    assert.equal(after.reading.index, 0); assert.equal(after.sequence, before.sequence + 2);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), 'Dryland_Taverna');
     assert.equal(await browser.evaluate('$gameScreen.picture(4)?.name()'), 'Dryland_MapComplete');
     await assertBackgroundCoverage(browser);
@@ -142,8 +191,10 @@ canonicalCase('IT-053', 'native automatic assembly runs in both orders with inde
       assert.ok(done.frame - moves[0].frame >= 120);
     }
     await browser.screenshot(`${evidence('IT-053')}/${order[0]}-first-${reduced ? 'reduced' : 'animated'}.png`);
-    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"), after);
-    await continueSave(browser); await passage(browser, 'map.reveal.01');
+    assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"), checkpoint);
+    await continueSave(browser); await passage(browser, 'closure.second.01');
+    assert.deepEqual(await snapshot(browser), checkpoint);
+    await readClosure(browser, 'second'); await passage(browser, 'map.reveal.01');
     assert.deepEqual(await snapshot(browser), after, 'Cosmetic replay leaves the already awarded pieces and unlock unchanged.');
     await browser.press('Enter', 13); await passage(browser, 'map.reveal.02');
     assert.equal(await browser.evaluate('$gameScreen.picture(4)?.name()'), 'Dryland_MapComplete');

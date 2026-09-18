@@ -3829,7 +3829,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A comporta cede, e o redemoinho muda de direção."
+                "A passagem de ar é presa com força. Sem conseguir seguir em frente, o vento<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "muda de direção e empurra o redemoinho de volta para as garrafas. Os cacos"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "caem no chão, os pequenos redemoinhos ficam presos novamente e a saída se<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "abre."
               ]
             },
             {
@@ -4243,7 +4275,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As presilhas se fecham antes que novos turbilhões escapem."
+                "As garrafas são fechadas uma após a outra, antes que comecem a se agitar. Sem<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "receber mais vento, o redemoinho fica cada vez mais fraco. Os cacos caem e o<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "último sopro desaparece dentro de uma garrafa com um assobio."
               ]
             },
             {
@@ -4657,7 +4703,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O olho imóvel é encontrado, e o grupo atravessa fora do giro."
+                "Mesmo com tudo girando, existe um pequeno espaço parado no centro do<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "redemoinho. Ao alcançar esse ponto, o movimento do vento se quebra. Os"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "redemoinhos menores batem uns nos outros, os cacos caem e o caminho fica<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "livre."
               ]
             },
             {

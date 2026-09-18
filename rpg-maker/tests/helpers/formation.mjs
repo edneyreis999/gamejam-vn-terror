@@ -13,6 +13,11 @@ export const heroMaps = new Map([[37, gorvakMap], ...await Promise.all([38, 39, 
 export const catalog = createCatalog(readConfiguration(events[4]));
 export const rules = createRules(catalog);
 export const heroes = Array.from({ length: 8 }, (_, i) => `H${i + 1}`);
+export const prologueMarkers = [
+  'Meu nome é Rheed.', 'Naqueles dias,', 'Quando os oito chegaram',
+  'Os papéis eram de Irati', 'Os mapas estavam incompletos.', 'Do tesouro, falou pouco.',
+  'Minha família deixou as pistas.', 'Você não está esquecendo', 'Os detalhes serão adicionados'
+];
 export function act(state, type, fields = {}) { return rules.dispatch(state, { type, ...fields, expectedSequence: state.sequence }); }
 export function formation(seed = 12345) {
   let state = act(rules.createReadyState(), 'BEGIN', { seed }).state;
@@ -74,7 +79,7 @@ export async function tavern(t, options = {}) {
   const browser = await openChrome(t, options);
   await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   await browser.press('Enter', 13);await selectFile(browser,1);
-  for (const marker of ['A chuva acompanha Ivaí', 'Minha mãe deixou registros', 'Irati escrevera']) {
+  for (const marker of prologueMarkers) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     await browser.press('Enter', 13);
   }
@@ -83,7 +88,8 @@ export async function tavern(t, options = {}) {
 }
 
 export async function returnToTavern(browser) {
-  if (await browser.evaluate("$gameMessage.choices().includes('Voltar à taverna')")) await activate(browser, 'hero', 2);
+  await browser.waitFor("['hero','formation'].includes($gameMessage._drylandChoiceFocus?.key) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  if (await browser.evaluate("$gameMessage._drylandChoiceFocus.key === 'hero'")) await activate(browser, 'hero', 2);
   await choices(browser, 'formation');
 }
 

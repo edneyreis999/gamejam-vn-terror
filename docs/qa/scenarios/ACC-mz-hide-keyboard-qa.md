@@ -50,3 +50,8 @@ Parcial: HIDE/Options/FAST e dois viewports/modos executados; zoom nativo exclu�
 
 
 A [ADR-G003](../../adrs/adr-g003-excluir-testes-de-zoom-nativo.md) substitui a exigência anterior de zoom neste cenário. Preservar evidência histórica sem reabrir essa variante.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-01/02/04/11; A/B/F. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

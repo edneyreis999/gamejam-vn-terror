@@ -43,3 +43,8 @@ Estado corrente: **pass**. S02/S04/S05/S09: campanhas nas duas ordens de rota, s
 ## Expansão de autoria por mapa — 2026-09-14
 
 PASS funcional: duas ordens, três abordagens/vítimas, recuo, mortes e retomada por arquivos genuínos. MAS-04/05/06: MA-C/D/E/F; famílias físicas/sobrenaturais, sacrifício/recuo e retomada. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-03/04/06; B/D. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

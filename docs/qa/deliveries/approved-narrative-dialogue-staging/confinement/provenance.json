@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-18",
+  "operator": "Codex",
+  "purpose": "Actual runtime captures after user requested rustic stone/tree forms weathered over many years. Editor capture is deferred by user.",
+  "assetRecord": "../../../../../rpg-maker/asset-provenance/approved-narrative-confinement.json",
+  "captures": [
+    {
+      "file": "perola.png",
+      "source": "docs/qa/evidence/approved-narrative-dialogue-staging/confinement-20260918/IT-052/prison-lover.physical.warning-normal-720.png",
+      "sha256": "95fe91ad38a1429b4fa96f087f759c6d5637e585d82be014a9503d5b6a5a101c",
+      "viewport": [
+        1280,
+        720
+      ],
+      "motion": "normal",
+      "mode": "native-engine fixture, not directed campaign",
+      "passage": "lover.physical.warning"
+    },
+    {
+      "file": "perola-hide.png",
+      "source": "docs/qa/evidence/approved-narrative-dialogue-staging/confinement-20260918/IT-052/prison-lover.physical.warning-normal-720-hide.png",
+      "sha256": "f12a96888f6f1370239b71bd81286b723c9f3fe1cdccc78a88670be437b771ef",
+      "viewport": [
+        1280,
+        720
+      ],
+      "motion": "normal",
+      "mode": "native-engine fixture, not directed campaign",
+      "passage": "lover.physical.warning"
+    },
+    {
+      "file": "florai.png",
+      "source": "docs/qa/evidence/approved-narrative-dialogue-staging/confinement-20260918/IT-052/prison-lover.supernatural.warning-normal-720.png",
+      "sha256": "ca0d49bb4799149172c41925e5979e11cd297cd910a2f1493a78718cfdb17f08",
+      "viewport": [
+        1280,
+        720
+      ],
+      "motion": "normal",
+      "mode": "native-engine fixture, not directed campaign",
+      "passage": "lover.supernatural.warning"
+    },
+    {
+      "file": "florai-hide.png",
+      "source": "docs/qa/evidence/approved-narrative-dialogue-staging/confinement-20260918/IT-052/prison-lover.supernatural.warning-normal-720-hide.png",
+      "sha256": "1c5bf42f1d59f93293a8243b5683c93d6f8aae9c2b8d090300e0611f97d6ff61",
+      "viewport": [
+        1280,
+        720
+      ],
+      "motion": "normal",
+      "mode": "native-engine fixture, not directed campaign",
+      "passage": "lover.supernatural.warning"
+    }
+  ]
+}

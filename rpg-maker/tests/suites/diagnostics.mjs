@@ -26,7 +26,7 @@ canonicalCase('UT-040','malformed actions reject missing unsafe or unexpected fi
 canonicalCase('UT-041','every otherwise valid action rejects all prohibited campaign phases without effects',()=>{
  const phases=['ready','intro','formation','dungeon_intro','encounter_intro','encounter_choice','approach_result','sacrifice_choice','death_result','retreat_confirmation','automatic_retreat','dungeon_complete','council','final_choice','ending','memorial','epilogue','campaign_complete','invalid'];
  assert.deepEqual(Object.keys(states).sort(),phases.sort());
- const actions={BEGIN:{seed:0},TOGGLE_HERO:{heroId:'H1'},SELECT_DESTINATION:{dungeonId:'physical'},DEPART:{},ENTER_DUNGEON:{},CHOOSE_APPROACH:{approachId:'A1-1'},SELECT_VICTIM:{heroId:'H1'},REQUEST_RETREAT:{},CANCEL_RETREAT:{},CONFIRM_RETREAT:{},CHOOSE_ENDING:{ending:'reunite'},NEW_CAMPAIGN:{},COMPLETE_PASSAGE:{passageId:'prologue.01'}};
+ const actions={BEGIN:{seed:0},TOGGLE_HERO:{heroId:'H1'},SELECT_DESTINATION:{dungeonId:'physical'},DEPART:{},ENTER_DUNGEON:{},CHOOSE_APPROACH:{approachId:'A1-1'},SELECT_VICTIM:{heroId:'H1'},REQUEST_RETREAT:{},CANCEL_RETREAT:{},CONFIRM_RETREAT:{},CHOOSE_ENDING:{ending:'reunite'},NEW_CAMPAIGN:{},COMPLETE_PASSAGE:{passageId:'prologue.rheed.01'}};
  const allowed=(type,state)=>{
   if(type==='COMPLETE_PASSAGE')return Boolean(state.reading);
   if(type==='REQUEST_RETREAT')return rules.playerView(state).canRetreat;

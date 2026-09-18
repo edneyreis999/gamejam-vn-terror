@@ -3829,7 +3829,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A sombra invertida denuncia a figura que conduz a procissão."
+                "Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "contrário. Quando essa figura é retirada da frente da procissão, as outras"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "panos e o grupo é libertado."
               ]
             },
             {
@@ -4243,7 +4275,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O vínculo é apagado, e os nomes vivos deixam a procissão."
+                "As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "corredor carregando panos vazios até desaparecerem na escuridão."
               ]
             },
             {
@@ -4657,7 +4703,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As costuras se desfazem sem romper o tecido funerário."
+                "Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "abrem espaço no meio da procissão e deixam o grupo passar."
               ]
             },
             {

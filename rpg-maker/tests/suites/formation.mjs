@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
+import { assertAdvanceIndicatorFits } from '../helpers/native-reading.mjs';
 import { clickConsole, hidden } from '../helpers/native-shared.mjs';
 import { act, activate, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
 
@@ -262,6 +263,8 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
       assert.equal(expected.length, 7);
       for (const [index, text] of expected.entries()) {
         await browser.waitFor(`$gameMessage.allText() === ${JSON.stringify(text)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
+        await assertAdvanceIndicatorFits(browser);
+        if (index === 1) await browser.screenshot(`${evidence('IT-081')}/${heroId}-${reduced ? 'reduced' : 'normal'}-description.png`);
         assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'), `Dryland_${heroId}`);
         assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), index >= 2);
         if (!reduced) assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${index < 2 ? unit : unit + 1})`), false, 'Partial unit remains unread');

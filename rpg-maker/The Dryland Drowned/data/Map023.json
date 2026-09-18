@@ -2551,22 +2551,6 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 0,
-              "parameters": [
-                1,
-                "Dryland_Council",
-                1,
-                0,
-                640,
-                360,
-                83.33333333333333,
-                83.33333333333333,
-                255,
-                0
-              ]
-            },
-            {
               "code": 111,
               "indent": 0,
               "parameters": [
@@ -2837,6 +2821,200 @@
               ]
             },
             {
+              "code": 111,
+              "indent": 2,
+              "parameters": [
+                12,
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                1
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                2
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                3
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                4
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Reed final",
+                  "Origin:str": "Upper Left",
+                  "Position:num": "5",
+                  "StartOffsetX:eval": "0",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "85.71428571428571",
+                  "TargetScaleY:str": "85.71428571428571",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
+                  "TargetY:str": "32",
+                  "EasingType:str": "Linear",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 2,
+              "parameters": []
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -2844,28 +3022,21 @@
                 0,
                 0,
                 2,
-                ""
+                "Rheed"
               ]
             },
             {
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Na Casa do Conselho, um cofre intacto guarda a segunda metade do Medalhão das Duas Margens."
+                "“No cofre, encontramos a segunda metade do medalhão e um registro de Palotina.<br>"
               ]
             },
             {
-              "code": 108,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
-              ]
-            },
-            {
-              "code": 408,
-              "indent": 2,
-              "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "Quando aproximamos as duas peças para examiná-las, Ivaí perdeu a compostura.”"
               ]
             },
             {
@@ -3044,6 +3215,190 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 2,
+              "parameters": [
+                1,
+                "Dryland_Council",
+                1,
+                0,
+                640,
+                360,
+                83.33333333333333,
+                83.33333333333333,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                73
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "63",
+                  "PictureName:str": "Dryland_ivai",
+                  "Origin:str": "Bust",
+                  "Position:num": "8",
+                  "StartOffsetX:eval": "-32",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"63\"]",
+                  "TargetScaleX:str": "44",
+                  "TargetScaleY:str": "44",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"63\"]",
+                  "TargetX:str": "960",
+                  "TargetY:str": "454.664",
+                  "EasingType:str": "InOutSine",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Tone_NormalBust",
+                "Tone_NormalBust",
+                {
+                  "PictureID:arrayeval": "[\"63\"]",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                71
+              ]
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -3051,28 +3406,14 @@
                 0,
                 0,
                 2,
-                ""
+                "Ivaí"
               ]
             },
             {
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O registro de Palotina afirma: reunir as metades liberta Floraí e Pérola, mas entrega a vida do descendente amaldiçoado."
-              ]
-            },
-            {
-              "code": 108,
-              "indent": 2,
-              "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
-              ]
-            },
-            {
-              "code": 408,
-              "indent": 2,
-              "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "“Não juntem! Se restaurarem o medalhão, eu morro!”"
               ]
             },
             {
@@ -3251,6 +3592,200 @@
               ]
             },
             {
+              "code": 111,
+              "indent": 2,
+              "parameters": [
+                12,
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                1
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                2
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                3
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                4
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Reed final",
+                  "Origin:str": "Upper Left",
+                  "Position:num": "5",
+                  "StartOffsetX:eval": "0",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "85.71428571428571",
+                  "TargetScaleY:str": "85.71428571428571",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
+                  "TargetY:str": "32",
+                  "EasingType:str": "Linear",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 2,
+              "parameters": []
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -3258,28 +3793,46 @@
                 0,
                 0,
                 2,
-                ""
+                "Rheed"
               ]
             },
             {
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Destruí-las encerra a maldição da linhagem, remove a proteção dos amantes e permite que Andirá os absorva com suas memórias."
+                "“Ele percebeu o que tinha dito. Mas já era tarde."
               ]
             },
             {
-              "code": 108,
+              "code": 101,
               "indent": 2,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+                "",
+                0,
+                0,
+                2,
+                "Rheed"
               ]
             },
             {
-              "code": 408,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "O registro confirmou: reunir as metades libertaria Floraí e Pérola, ao custo<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "da vida de Ivaí. Destruí-las salvaria o bardo, mas entregaria os amantes e<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "suas memórias a Andirá.”"
               ]
             },
             {
@@ -3458,18 +4011,198 @@
               ]
             },
             {
-              "code": 117,
+              "code": 111,
               "indent": 2,
               "parameters": [
-                73
+                12,
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
               ]
             },
             {
-              "code": 117,
-              "indent": 2,
+              "code": 235,
+              "indent": 3,
               "parameters": [
-                79
+                1
               ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                2
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                3
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                4
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Reed final",
+                  "Origin:str": "Upper Left",
+                  "Position:num": "5",
+                  "StartOffsetX:eval": "0",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "85.71428571428571",
+                  "TargetScaleY:str": "85.71428571428571",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
+                  "TargetY:str": "32",
+                  "EasingType:str": "Linear",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 2,
+              "parameters": []
             },
             {
               "code": 101,
@@ -3479,28 +4212,28 @@
                 0,
                 0,
                 2,
-                ""
+                "Rheed"
               ]
             },
             {
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O primeiro sobrevivente encara Ivaí e exige que ele diga por que trouxe o grupo até ali."
+                "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações,<br>"
               ]
             },
             {
-              "code": 108,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+                "perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que<br>"
               ]
             },
             {
-              "code": 408,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "tinha escondido a verdade?”"
               ]
             },
             {
@@ -3683,7 +4416,136 @@
               "indent": 2,
               "parameters": [
                 12,
-                "$gameVariables.value(47)"
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                1
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                2
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                3
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                4
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 3,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
               ]
             },
             {
@@ -3694,40 +4556,47 @@
                 "Basic_EnterBust",
                 "Basic_EnterBust",
                 {
-                  "PictureID:eval": "63",
-                  "PictureName:str": "Dryland_ivai",
-                  "Origin:str": "Bust",
-                  "Position:num": "8",
-                  "StartOffsetX:eval": "-32",
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Reed final",
+                  "Origin:str": "Upper Left",
+                  "Position:num": "5",
+                  "StartOffsetX:eval": "0",
                   "StartOffsetY:eval": "0",
                   "EasingType:str": "OutSine",
                   "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "85.71428571428571",
+                  "TargetScaleY:str": "85.71428571428571",
                   "Duration:eval": "0"
                 }
               ]
             },
             {
-              "code": 411,
-              "indent": 2,
-              "parameters": []
-            },
-            {
               "code": 357,
               "indent": 3,
               "parameters": [
                 "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
                 {
-                  "PictureID:eval": "63",
-                  "PictureName:str": "Dryland_ivai",
-                  "Origin:str": "Bust",
-                  "Position:num": "8",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "20"
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
+                  "TargetY:str": "32",
+                  "EasingType:str": "Linear",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
                 }
               ]
             },
@@ -3737,51 +4606,6 @@
               "parameters": []
             },
             {
-              "code": 357,
-              "indent": 2,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Scale_ScaleTo",
-                "Scale_ScaleTo",
-                {
-                  "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "44",
-                  "TargetScaleY:str": "44",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 2,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Move_MoveToCoordinates",
-                "Move_MoveToCoordinates",
-                {
-                  "PictureID:arrayeval": "[\"63\"]",
-                  "TargetX:str": "960",
-                  "TargetY:str": "725",
-                  "EasingType:str": "InOutSine",
-                  "FlipDirection:str": "None",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 2,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Tone_NormalBust",
-                "Tone_NormalBust",
-                {
-                  "PictureID:arrayeval": "[\"63\"]",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -3789,28 +4613,28 @@
                 0,
                 0,
                 2,
-                "Ivaí"
+                "Rheed"
               ]
             },
             {
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Sozinho diante do reflexo, Ivaí admite em voz alta aquilo que ocultou dos que ficaram na cidade."
+                "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações,<br>"
               ]
             },
             {
-              "code": 108,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+                "perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que<br>"
               ]
             },
             {
-              "code": 408,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "tinha escondido a verdade?”"
               ]
             },
             {
@@ -3989,32 +4813,120 @@
               ]
             },
             {
-              "code": 111,
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
+              "code": 231,
               "indent": 2,
               "parameters": [
                 1,
-                144,
+                "Dryland_Council",
+                1,
                 0,
-                0,
+                640,
+                360,
+                83.33333333333333,
+                83.33333333333333,
+                255,
                 0
               ]
             },
             {
-              "code": 411,
+              "code": 117,
               "indent": 2,
-              "parameters": []
-            },
-            {
-              "code": 111,
-              "indent": 3,
               "parameters": [
-                12,
-                "$gameVariables.value(47)"
+                73
               ]
             },
             {
               "code": 357,
-              "indent": 4,
+              "indent": 2,
               "parameters": [
                 "VisuMZ_2_VNPictureBusts",
                 "Basic_EnterBust",
@@ -4028,43 +4940,13 @@
                   "StartOffsetY:eval": "0",
                   "EasingType:str": "OutSine",
                   "HorzMirror:str": "None",
-                  "Duration:eval": "0"
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                 }
               ]
             },
             {
-              "code": 411,
-              "indent": 3,
-              "parameters": []
-            },
-            {
               "code": 357,
-              "indent": 4,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "63",
-                  "PictureName:str": "Dryland_ivai",
-                  "Origin:str": "Bust",
-                  "Position:num": "8",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "20"
-                }
-              ]
-            },
-            {
-              "code": 412,
-              "indent": 3,
-              "parameters": []
-            },
-            {
-              "code": 357,
-              "indent": 3,
+              "indent": 2,
               "parameters": [
                 "VisuMZ_2_VNPictureBusts",
                 "Scale_ScaleTo",
@@ -4079,7 +4961,7 @@
             },
             {
               "code": 357,
-              "indent": 3,
+              "indent": 2,
               "parameters": [
                 "VisuMZ_2_VNPictureBusts",
                 "Move_MoveToCoordinates",
@@ -4087,7 +4969,7 @@
                 {
                   "PictureID:arrayeval": "[\"63\"]",
                   "TargetX:str": "960",
-                  "TargetY:str": "725",
+                  "TargetY:str": "454.664",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -4096,7 +4978,7 @@
             },
             {
               "code": 357,
-              "indent": 3,
+              "indent": 2,
               "parameters": [
                 "VisuMZ_2_VNPictureBusts",
                 "Tone_NormalBust",
@@ -4106,11 +4988,6 @@
                   "Duration:eval": "0"
                 }
               ]
-            },
-            {
-              "code": 412,
-              "indent": 2,
-              "parameters": []
             },
             {
               "code": 117,
@@ -4134,21 +5011,14 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Andirá me mostrou os dois finais. Eu pretendia destruir o medalhão para sobreviver e chamei vocês com uma promessa de tesouro."
+                "“Eu já conhecia a maldição. Pretendia destruir o medalhão desde o início. Tive<br>"
               ]
             },
             {
-              "code": 108,
+              "code": 401,
               "indent": 2,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
-              ]
-            },
-            {
-              "code": 408,
-              "indent": 2,
-              "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "medo de que ninguém viesse se soubesse.”"
               ]
             },
             {
@@ -6802,6 +7672,95 @@
               "parameters": [
                 12,
                 "$gameVariables.value(56) === \"irati.03\""
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
               ]
             },
             {

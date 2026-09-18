@@ -1,3 +1,4 @@
+import { prologueMarkers } from '../helpers/formation.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { cp, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
@@ -288,7 +289,7 @@ canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns
  assert.equal(await browser.evaluate("StorageManager.loadZip('file1')"),aBytes,'Cancelling the occupied-file selection preserves A');
  await titleChoice(browser,'Novo jogo');await selectFile(browser,2);await pause(browser);
  assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'),[]);
- for(const marker of ['A chuva acompanha Ivaí','Minha mãe deixou registros','Irati escrevera']){
+ for(const marker of prologueMarkers){
   await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
   await browser.press('Enter',13);
  }
@@ -359,7 +360,10 @@ canonicalCase('IT-059', 'native saves retain serialized map text despite revisio
  await browser.evaluate("StorageManager.loadObject('file1').then(c=>{Object.assign(c.system._dryland,{schemaVersion:99,catalogVersion:99,nativeLayoutVersion:'historical-label'});return StorageManager.saveObject('file1',c);})");
  const bytes=await savedBytes(browser),eventFile=path.join(directory,'data/Map002.json'),edited=JSON.parse(await readFile(eventFile,'utf8'));
  const revised='Texto revisado na mesma estrutura nativa.';
- const secondText=edited.events[1].pages[0].list.filter(c=>c.code===401)[1],original=secondText.parameters[0];
+ const commands=edited.events[1].pages[0].list;
+ const secondBox=commands.map((c,index)=>c.code===101?index:-1).filter(index=>index>=0)[1];
+ const secondText=commands[secondBox+1],original=secondText.parameters[0];
+ assert.equal(secondText.code,401);
  assert.notEqual(original,revised);
  secondText.parameters[0]=revised;
  await writeFile(eventFile,JSON.stringify(edited));
@@ -369,7 +373,7 @@ canonicalCase('IT-059', 'native saves retain serialized map text despite revisio
  assert.equal(await savedBytes(browser),bytes);
  await browser.press('Enter',13);
  await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(original)})&&SceneManager._scene._messageWindow.pause`);
- assert.equal((await snapshot(browser)).sequence,before.sequence+1);
+ assert.deepEqual(await snapshot(browser),before,'The second box still belongs to the incomplete first prologue passage.');
  assert.equal(await savedBytes(browser),bytes);
  await browser.screenshot(`${evidence('IT-059')}/continued-serialized-map-text.png`);
  await toTitle(browser);await titleChoice(browser,'Novo jogo');await selectFile(browser,2);await pause(browser);
@@ -442,6 +446,11 @@ canonicalCase('IT-062','native Options and saved interpreters retain tavern Coun
    assert.deepEqual(await browser.evaluate('continuityWrites.slice('+writesBefore+')'),[{sequence:expected.sequence,done:true}]);
   }
   if(kind.startsWith('epilogue.')){
+   for(let box=0;(await snapshot(browser)).sequence===before.sequence;box++){
+    assert.ok(box<8,'Remaining approved epilogue boxes must finish');
+    await pause(browser);assert.deepEqual(await snapshot(browser),before,'Remaining text is still part of the saved semantic unit');
+    await browser.press('Enter',13);
+   }
    await browser.waitFor(`$gameSystem._dryland.campaign.sequence===${before.sequence+1}`);
    assert.deepEqual(await snapshot(browser),complete(before),'Continue completes the saved local passage once');
    assert.equal(await savedBytes(browser),bytes,'Epilogue continuation adds no semantic checkpoint');

@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhida para o sacrifício:** entrega o mapa atualizado, aponta a rota mais segura e exige que os demais confirmem as instruções antes de partir.
 - **Frase curta de despedida:** “O caminho está marcado. Não deixem que termine comigo.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que mantinha uma direção quando o ambiente parecia contradizer a realidade e que sempre procurava um caminho de volta.
-- **O que faz depois da campanha, caso sobreviva:** conclui o atlas, mas publica também seus erros, dúvidas e rotas incompletas. Dedica a obra aos companheiros perdidos e passa a ensinar que admitir estar perdida é o primeiro passo para reencontrar o caminho.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Liora finalmente conclui seu atlas. Espalha sobre a mesa os mapas da expedição e passa meses comparando anotações, corrigindo distâncias e separando o que testemunhou daquilo que apenas suspeita.
+
+Quando a obra é publicada, algumas páginas trazem rotas interrompidas, advertências e espaços em branco.
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

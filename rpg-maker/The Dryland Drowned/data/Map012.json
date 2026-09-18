@@ -3829,7 +3829,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As raízes principais são arrancadas antes de fechar o corredor."
+                "As raízes mais grossas são arrancadas antes de cercarem o grupo. Sem elas para<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "se segurar no chão, o tronco central se inclina e puxa as raízes menores para"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "longe do corredor. Os frutos cheios de dentes caem ao lado, e o caminho fica<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "livre."
               ]
             },
             {
@@ -4243,7 +4275,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Um túnel é aberto entre as fibras sem seiva."
+                "Algumas raízes estão secas e não se movem como as outras. Elas são afastadas e<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "apoiadas com galhos, formando um pequeno túnel. As raízes vivas se fecham ao<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "redor, mas não percebem o grupo passando pelo trecho morto."
               ]
             },
             {
@@ -4657,7 +4703,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O nome é rompido, e as raízes perdem o vínculo com o cadáver."
+                "O nome que prende o cadáver ao pomar é encontrado nas marcas do tronco. Quando<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "essa ligação é quebrada, o corpo se solta da árvore e as raízes param de se<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "mover. O pomar seca rapidamente, abrindo uma passagem entre os troncos."
               ]
             },
             {

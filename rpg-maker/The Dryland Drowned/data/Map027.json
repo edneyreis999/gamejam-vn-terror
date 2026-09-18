@@ -2551,6 +2551,95 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
               "code": 231,
               "indent": 0,
               "parameters": [
@@ -2717,7 +2806,32 @@
               "code": 401,
               "indent": 1,
               "parameters": [
-                "Com os oito heróis mortos, não resta ninguém para impedir que o reflexo alcance Ivaí em chão seco."
+                "Uma poça aparece no chão seco. No reflexo, Ivaí vê Andirá."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 1,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 1,
+              "parameters": [
+                "Ivaí fica sem ar, cai no chão e morre afogado. Ele não chega a fazer a escolha<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 1,
+              "parameters": [
+                "sobre o medalhão."
               ]
             },
             {
@@ -2917,14 +3031,14 @@
                 0,
                 0,
                 2,
-                "Andirá"
+                ""
               ]
             },
             {
               "code": 401,
               "indent": 1,
               "parameters": [
-                "Água inexistente enche os pulmões do bardo. A dívida termina antes que o medalhão possa ser escolhido."
+                "Depois, aparecem os nomes dos heróis mortos e a tela de fim de jogo."
               ]
             },
             {

@@ -1,0 +1,155 @@
+{
+  "sourceRevision": "2f91f94610ea27671d2bfeb9b5e4bf16abe718de",
+  "successes": {
+    "result.A1-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a1-O-Redemoinho-do-Saci-Engarrafado",
+      "sha256": "85c98b57b4ba4e38a83a1c0e5bb9ab1584bc825a0159441bb203d651089931d3",
+      "text": "A passagem de ar é presa com força. Sem conseguir seguir em frente, o vento muda de direção e empurra o redemoinho de volta para as garrafas. Os cacos caem no chão, os pequenos redemoinhos ficam presos novamente e a saída se abre."
+    },
+    "result.A1-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a1-O-Redemoinho-do-Saci-Engarrafado",
+      "sha256": "85c98b57b4ba4e38a83a1c0e5bb9ab1584bc825a0159441bb203d651089931d3",
+      "text": "As garrafas são fechadas uma após a outra, antes que comecem a se agitar. Sem receber mais vento, o redemoinho fica cada vez mais fraco. Os cacos caem e o último sopro desaparece dentro de uma garrafa com um assobio."
+    },
+    "result.A1-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a1-O-Redemoinho-do-Saci-Engarrafado",
+      "sha256": "85c98b57b4ba4e38a83a1c0e5bb9ab1584bc825a0159441bb203d651089931d3",
+      "text": "Mesmo com tudo girando, existe um pequeno espaço parado no centro do redemoinho. Ao alcançar esse ponto, o movimento do vento se quebra. Os redemoinhos menores batem uns nos outros, os cacos caem e o caminho fica livre."
+    },
+    "result.A2-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a2-A-Trilha-de-Pés-Virados",
+      "sha256": "d7fab2a83b9491b49e08d4b98dc5c0242f30a6881a3b635be65b145f65991094",
+      "text": "Os nós são desfeitos com cuidado, sem puxar os cipós que controlam a armadilha. As estacas voltam devagar para dentro da terra. Quando o último nó é solto, os cipós caem no chão e deixam uma passagem segura entre as árvores."
+    },
+    "result.A2-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a2-A-Trilha-de-Pés-Virados",
+      "sha256": "d7fab2a83b9491b49e08d4b98dc5c0242f30a6881a3b635be65b145f65991094",
+      "text": "As pegadas apontam para caminhos diferentes, mas o vento, o terreno e as plantas mostram a direção verdadeira. Seguindo esses sinais, o grupo evita os cipós e as estacas escondidas. As pegadas falsas ficam para trás e o caminho continua aberto."
+    },
+    "result.A2-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a2-A-Trilha-de-Pés-Virados",
+      "sha256": "d7fab2a83b9491b49e08d4b98dc5c0242f30a6881a3b635be65b145f65991094",
+      "text": "As pegadas parecem confusas, mas seus calcanhares formam uma sequência. Quando o grupo lê os rastros ao contrário, descobre qual caminho não cruza nenhuma armadilha. As árvores permanecem paradas e todos conseguem atravessar em segurança."
+    },
+    "result.A3-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a3-O-Pilão-da-Cuca",
+      "sha256": "eb0a6a8ff54cd3ce6825cb463251eaecc868fcf39eab75be82029dcd9165f417",
+      "text": "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador bate neles, seu caminho muda e ele cai dentro de um pilão vazio. A haste fica presa na pedra, o mecanismo para e o grupo consegue atravessar a cozinha."
+    },
+    "result.A3-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a3-O-Pilão-da-Cuca",
+      "sha256": "eb0a6a8ff54cd3ce6825cb463251eaecc868fcf39eab75be82029dcd9165f417",
+      "text": "A cantiga avisa quando cada golpe vai acontecer. O grupo avança nos pequenos intervalos entre uma batida e outra, saltando sobre os pilões menores. O último golpe atinge o chão quando todos já alcançaram a saída."
+    },
+    "result.A3-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a3-O-Pilão-da-Cuca",
+      "sha256": "eb0a6a8ff54cd3ce6825cb463251eaecc868fcf39eab75be82029dcd9165f417",
+      "text": "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas. Sem saber para onde deve seguir, o socador para no alto e deixa o caminho livre."
+    },
+    "result.A4-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a4-A-Jaula-do-Mapinguari",
+      "sha256": "5166f4b584f3f6af5c87ce4c673178138d7c226def93dff169d11a33d3b331b9",
+      "text": "O grupo sobe pelas barras enquanto o espaço entre elas fica cada vez menor. Mesmo com o rugido assustador, todos alcançam uma abertura perto do teto. A jaula se fecha logo abaixo, mas ninguém fica preso dentro dela."
+    },
+    "result.A4-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a4-A-Jaula-do-Mapinguari",
+      "sha256": "5166f4b584f3f6af5c87ce4c673178138d7c226def93dff169d11a33d3b331b9",
+      "text": "Duas barras são seguradas antes que se encostem. A força da jaula empurra o ferro, mas o espaço continua aberto por tempo suficiente. O grupo atravessa a passagem e as barras se fecham atrás dele."
+    },
+    "result.A4-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a4-A-Jaula-do-Mapinguari",
+      "sha256": "5166f4b584f3f6af5c87ce4c673178138d7c226def93dff169d11a33d3b331b9",
+      "text": "O rugido tenta paralisar o corpo e obrigar todos a se encolherem. Mesmo com medo, o grupo continua avançando até alcançar a trava. Quando ela é aberta, as barras perdem o apoio, a jaula se desfaz e o caminho fica livre."
+    },
+    "result.A5-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a5-A-Cavalariça-da-Mula-sem-Cabeça",
+      "sha256": "c35586fb0162100a332177441389319b8e0e6e6533ee7640ee675db4ea8dee68",
+      "text": "A grade pesada é levantada antes da chegada da criatura. Assim que a carcaça de ferro entra na baia, a grade é solta e prende suas pernas. O fogo continua saindo pelo pescoço, mas atinge apenas a parede de pedra. O caminho fica livre para o grupo."
+    },
+    "result.A5-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a5-A-Cavalariça-da-Mula-sem-Cabeça",
+      "sha256": "c35586fb0162100a332177441389319b8e0e6e6533ee7640ee675db4ea8dee68",
+      "text": "O fecho do arreio é aberto no pequeno intervalo entre os golpes das correntes. Sem o fecho, as correntes caem e se enrolam nas pernas da criatura. Ela tenta correr, tropeça no próprio metal e não consegue alcançar o grupo."
+    },
+    "result.A5-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a5-A-Cavalariça-da-Mula-sem-Cabeça",
+      "sha256": "c35586fb0162100a332177441389319b8e0e6e6533ee7640ee675db4ea8dee68",
+      "text": "Os foles fazem três estalos antes de cada jato de fogo. Depois do terceiro som, a válvula é aberta e o vapor escapa pela chaminé. O fogo diminui até desaparecer, e a criatura para de se mover. A cavalariça fica segura para a travessia."
+    },
+    "result.A6-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a6-O-Pomar-do-Corpo-Seco",
+      "sha256": "c274cb095ceac700104432d77adc8a7dbf687d83c07c256f7b1304276a74d123",
+      "text": "As raízes mais grossas são arrancadas antes de cercarem o grupo. Sem elas para se segurar no chão, o tronco central se inclina e puxa as raízes menores para longe do corredor. Os frutos cheios de dentes caem ao lado, e o caminho fica livre."
+    },
+    "result.A6-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a6-O-Pomar-do-Corpo-Seco",
+      "sha256": "c274cb095ceac700104432d77adc8a7dbf687d83c07c256f7b1304276a74d123",
+      "text": "Algumas raízes estão secas e não se movem como as outras. Elas são afastadas e apoiadas com galhos, formando um pequeno túnel. As raízes vivas se fecham ao redor, mas não percebem o grupo passando pelo trecho morto."
+    },
+    "result.A6-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a6-O-Pomar-do-Corpo-Seco",
+      "sha256": "c274cb095ceac700104432d77adc8a7dbf687d83c07c256f7b1304276a74d123",
+      "text": "O nome que prende o cadáver ao pomar é encontrado nas marcas do tronco. Quando essa ligação é quebrada, o corpo se solta da árvore e as raízes param de se mover. O pomar seca rapidamente, abrindo uma passagem entre os troncos."
+    },
+    "result.A7-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a7-O-Depósito-do-Homem-do-Saco",
+      "sha256": "ceab89d9a2b5b4703fbb7b0a77fc4cc47960f8b25e6ef5d841797909d39cfd81",
+      "text": "Os ganchos certos são soltos um após o outro. Os sacos se afastam para os lados e deixam um corredor livre no meio do depósito. As vozes continuam pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
+    },
+    "result.A7-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a7-O-Depósito-do-Homem-do-Saco",
+      "sha256": "ceab89d9a2b5b4703fbb7b0a77fc4cc47960f8b25e6ef5d841797909d39cfd81",
+      "text": "O grupo usa as correntes para passar por cima dos sacos e dos ganchos. Cada balanço leva todos para mais perto da saída e para longe da prensa. Quando a máquina esmaga os sacos, o grupo já está em segurança do outro lado."
+    },
+    "result.A7-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a7-O-Depósito-do-Homem-do-Saco",
+      "sha256": "ceab89d9a2b5b4703fbb7b0a77fc4cc47960f8b25e6ef5d841797909d39cfd81",
+      "text": "As vozes imitam pessoas conhecidas e pedem para serem libertadas, mas ninguém responde. Sem conseguir enganar o grupo, elas começam a se confundir e a chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho até a saída permanece aberto."
+    },
+    "result.A8-1.success.01": {
+      "source": "docs/narrativa/armadilhas/a8-O-Telhado-da-Pisadeira",
+      "sha256": "41dd1d844bb661a5b618c648dd51e8cf25e8ca6e8fe994eeaeeaf1af28770e73",
+      "text": "Pedaços de madeira são colocados sob as vigas mais fortes. Os apoios dividem o peso e impedem que o teto continue descendo. A cada passo da criatura, a casa inteira treme, mas o grupo consegue atravessar antes que os apoios se quebrem."
+    },
+    "result.A8-2.success.01": {
+      "source": "docs/narrativa/armadilhas/a8-O-Telhado-da-Pisadeira",
+      "sha256": "41dd1d844bb661a5b618c648dd51e8cf25e8ca6e8fe994eeaeeaf1af28770e73",
+      "text": "O grupo avança depressa pelos espaços estreitos do telhado. Logo depois, um pé ossudo pisa no lugar que todos acabaram de deixar. A última parte do teto desaba quando o grupo já alcançou a saída."
+    },
+    "result.A8-3.success.01": {
+      "source": "docs/narrativa/armadilhas/a8-O-Telhado-da-Pisadeira",
+      "sha256": "41dd1d844bb661a5b618c648dd51e8cf25e8ca6e8fe994eeaeeaf1af28770e73",
+      "text": "Muitos passos são apenas ecos, mas os verdadeiros fazem o pó cair antes de cada pisada. Observando esse sinal, o grupo encontra uma faixa do telhado que nunca é atingida. Todos seguem por ela enquanto os pés esmagam as telhas dos dois lados."
+    },
+    "result.B1-1.success.01": {
+      "source": "docs/narrativa/armadilhas/b1-O-Assobio-da-Matinta",
+      "sha256": "d557614dcc53654e562b074b258368cfd942e317f2c7b1fb2041f78f324031fe",
+      "text": "Quase todos os ecos surgem depois do assobio. Apenas um aparece antes e revela a fresta onde a presença está escondida. Quando a abertura é fechada, o som volta contra si mesmo, perde as vozes roubadas e desaparece."
+    },
+    "result.B1-2.success.01": {
+      "source": "docs/narrativa/armadilhas/b1-O-Assobio-da-Matinta",
+      "sha256": "d557614dcc53654e562b074b258368cfd942e317f2c7b1fb2041f78f324031fe",
+      "text": "As promessas escritas nas paredes parecem iguais, mas uma delas conta uma história que nunca aconteceu. Quando a promessa falsa é descoberta, suas palavras desaparecem da madeira. As lembranças roubadas voltam, e a casa já não consegue imitar as vozes do grupo."
+    },
+    "result.B1-3.success.01": {
+      "source": "docs/narrativa/armadilhas/b1-O-Assobio-da-Matinta",
+      "sha256": "d557614dcc53654e562b074b258368cfd942e317f2c7b1fb2041f78f324031fe",
+      "text": "A pequena janela é arrancada junto com a presença escondida em sua madeira. Do lado de fora, o assobio se mistura com o vento e perde a força. As portas e janelas param de respirar, e o grupo consegue deixar o casarão."
+    },
+    "result.B2-1.success.01": {
+      "source": "docs/narrativa/armadilhas/b2-A-Procissão-das-Almas",
+      "sha256": "d9e1991e269bd2574e22e41dda46f84f99c59b1cebe6b51269448576f4b2ffb7",
+      "text": "Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado contrário. Quando essa figura é retirada da frente da procissão, as outras almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos panos e o grupo é libertado."
+    },
+    "result.B2-2.success.01": {
+      "source": "docs/narrativa/armadilhas/b2-A-Procissão-das-Almas",
+      "sha256": "d9e1991e269bd2574e22e41dda46f84f99c59b1cebe6b51269448576f4b2ffb7",
+      "text": "As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão."
+    },
+    "result.B2-3.success.01": {
+      "source": "docs/narrativa/armadilhas/b2-A-Procissão-das-Almas",
+      "sha256": "d9e1991e269bd2574e22e41dda46f84f99c59b1cebe6b51269448576f4b2ffb7",
+      "text": "Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas abrem espaço no meio da procissão e deixam o grupo passar."
+    }
+  }
+}

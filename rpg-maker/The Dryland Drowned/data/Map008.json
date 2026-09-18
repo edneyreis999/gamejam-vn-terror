@@ -3829,7 +3829,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os nós cedem sem disparar as estacas ocultas."
+                "Os nós são desfeitos com cuidado, sem puxar os cipós que controlam a<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "armadilha. As estacas voltam devagar para dentro da terra. Quando o último nó<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "é solto, os cipós caem no chão e deixam uma passagem segura entre as árvores."
               ]
             },
             {
@@ -4243,7 +4257,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os sinais reais da mata conduzem o grupo para fora da trilha falsa."
+                "As pegadas apontam para caminhos diferentes, mas o vento, o terreno e as<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "plantas mostram a direção verdadeira. Seguindo esses sinais, o grupo evita os"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "cipós e as estacas escondidas. As pegadas falsas ficam para trás e o caminho<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "continua aberto."
               ]
             },
             {
@@ -4657,7 +4703,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A regra dos rastros revela o único desvio coerente."
+                "As pegadas parecem confusas, mas seus calcanhares formam uma sequência. Quando<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "o grupo lê os rastros ao contrário, descobre qual caminho não cruza nenhuma"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "armadilha. As árvores permanecem paradas e todos conseguem atravessar em<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "segurança."
               ]
             },
             {

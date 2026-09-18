@@ -2551,17 +2551,106 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
               "code": 231,
               "indent": 0,
               "parameters": [
                 1,
-                "Dryland_Memorial",
+                "Dryland_EpilogueH7",
                 1,
                 0,
                 640,
                 360,
-                76.55502392344498,
-                76.55502392344498,
+                70.3125,
+                70.3125,
                 255,
                 0
               ]
@@ -2695,106 +2784,28 @@
               ]
             },
             {
-              "code": 111,
+              "code": 101,
               "indent": 0,
               "parameters": [
-                12,
-                "$gameVariables.value(47)"
+                "",
+                0,
+                0,
+                2,
+                "Vaelith"
               ]
             },
             {
-              "code": 357,
-              "indent": 1,
+              "code": 401,
+              "indent": 0,
               "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "60",
-                  "PictureName:str": "Dryland_H7",
-                  "Origin:str": "Bust",
-                  "Position:num": "2",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "0"
-                }
+                "Vaelith retorna com os registros da expedição e começa a reconstruir o arquivo<br>"
               ]
             },
             {
-              "code": 411,
-              "indent": 0,
-              "parameters": []
-            },
-            {
-              "code": 357,
-              "indent": 1,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "60",
-                  "PictureName:str": "Dryland_H7",
-                  "Origin:str": "Bust",
-                  "Position:num": "2",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "20"
-                }
-              ]
-            },
-            {
-              "code": 412,
-              "indent": 0,
-              "parameters": []
-            },
-            {
-              "code": 357,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Scale_ScaleTo",
-                "Scale_ScaleTo",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "43",
-                  "TargetScaleY:str": "43",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 0,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Move_MoveToCoordinates",
-                "Move_MoveToCoordinates",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "395",
-                  "TargetY:str": "1513",
-                  "EasingType:str": "InOutSine",
-                  "FlipDirection:str": "None",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 0,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Tone_NormalBust",
-                "Tone_NormalBust",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "Duration:eval": "0"
-                }
+                "que buscava. Reúne cópias dispersas, recupera relatos esquecidos e organiza"
               ]
             },
             {
@@ -2812,28 +2823,39 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "organiza o arquivo que buscava, mas restringe textos capazes de causar dano quando lidos sem preparo. Acrescenta os relatos dos companheiros e passa a ensinar que preservar conhecimento também exige saber quando não o divulgar."
+                "advertências para que outros reconheçam os perigos que seu grupo enfrentou.<br>"
               ]
             },
             {
-              "code": 117,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                76
+                "Alguns textos ficam sob acesso restrito."
               ]
             },
             {
-              "code": 108,
+              "code": 101,
               "indent": 0,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+                "",
+                0,
+                0,
+                2,
+                "Vaelith"
               ]
             },
             {
-              "code": 408,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "Nos catálogos, ele explica o risco e indica o preparo necessário para<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "estudá-los."
               ]
             },
             {

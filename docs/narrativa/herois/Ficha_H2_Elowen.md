@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhida para o sacrifício:** procura imediatamente uma ação que abra distância entre o perigo e os demais, escondendo o medo atrás de uma provocação.
 - **Frase curta de despedida:** “Quando eu correr, não olhem para trás.”
 - **O que o grupo perde emocionalmente com sua morte:** a pessoa que transformava hesitação em movimento e fazia até uma rota impossível parecer alcançável.
-- **O que faz depois da campanha, caso sobreviva:** usa sua parte da recompensa para proteger o território de caça e passa a treinar novos batedores. Pela primeira vez, ensina que velocidade também significa saber quando esperar pelo grupo.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Elowen usa sua recompensa para garantir que a mata de sua comunidade permaneça protegida. Os primeiros dias de volta são passados percorrendo as trilhas conhecidas. Em algumas curvas, ainda se vira para comentar algo com quem já não está atrás dela.
+
+Logo começa a treinar novos batedores. Ensina a atravessar rios, reconhecer armadilhas e encontrar apoio onde parece não existir passagem. Continua provocadora e quase impossível de alcançar numa corrida, mas agora interrompe a marcha para conferir se todos acompanham.
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

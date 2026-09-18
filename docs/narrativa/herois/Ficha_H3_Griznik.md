@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhido para o sacrifício:** procura o ponto exato em que sua ação pode sustentar a passagem por mais tempo e entrega instruções até o último instante.
 - **Frase curta de despedida:** “Eu seguro a estrutura. Vocês aproveitem a saída.”
 - **O que o grupo perde emocionalmente com sua morte:** a certeza de que até restos, ruínas e situações aparentemente perdidas ainda podiam ser transformados em uma solução.
-- **O que faz depois da campanha, caso sobreviva:** abre uma oficina dedicada a construções seguras e passa a recusar trabalhos que economizem à custa de vidas. Guarda as lascas recolhidas na expedição em uma parede, junto aos nomes de quem não voltou.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Griznik abre a oficina que sempre desejou. Na parede atrás da bancada, organiza as lascas recolhidas durante a expedição. Sob cada uma, escreve o nome de um companheiro e uma pequena lembrança: uma piada, uma discussão, um gesto que ninguém mais teria motivo para registrar.
+
+Sua oficina fica conhecida pelas construções seguras e pelos orçamentos que ele se recusa a reduzir quando isso exige retirar um apoio necessário
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 
