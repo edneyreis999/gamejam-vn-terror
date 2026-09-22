@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { selectFile } from '../helpers/native-chrome.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause } from '../helpers/formation.mjs';
+import { activate, choices, pause, prologueMarkers } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
 import { accepted } from '../helpers/campaign.mjs';
@@ -30,8 +30,21 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  const observations=[];const browser=await entry(t);assert.equal(await browser.evaluate('Boolean(AudioManager._bgmBuffer||AudioManager._bgsBuffer||AudioManager._meBuffer)'),false);
  await browser.evaluate(`window.audioBuffers=[];const create=AudioManager.createBuffer;AudioManager.createBuffer=function(folder,name){const b=create.call(this,folder,name);audioBuffers.push({folder,name,buffer:b});return b;};`);
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
- await browser.waitFor("AudioManager._currentBgs?.name==='People1'&&AudioManager._bgsBuffer.isReady()");
+ await browser.waitFor("AudioManager._currentBgm?.name==='Town1'&&AudioManager._currentBgs?.name==='People2'&&AudioManager._bgmBuffer.isReady()&&AudioManager._bgsBuffer.isReady()");
  const current=await state(browser);assert.equal(current.phase,'intro');
+ const welcome=await browser.evaluate('({music:AudioManager._currentBgm,ambience:AudioManager._currentBgs,applause:audioBuffers.filter(x=>x.name==="Applause1").length})');
+ assert.equal(welcome.music.volume,45);assert.equal(welcome.ambience.volume,25);assert.equal(welcome.applause,1);
+ await browser.press('Tab',9);await hidden(browser,true);await browser.press('Tab',9);await hidden(browser,false);
+ assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.name==="Applause1").length'),1,'HIDE does not repeat the welcome');
+ for(const marker of prologueMarkers.slice(0,6)){
+  await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+  await browser.press('Enter',13);
+ }
+ await pause(browser);
+ await browser.waitFor("AudioManager._currentBgm?.name==='Town3'&&AudioManager._currentBgs?.name==='People1'&&AudioManager._bgmBuffer.isReady()&&AudioManager._bgsBuffer.isReady()");
+ assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.folder==="bgm/"&&x.buffer.isPlaying()).length'),1);
+ assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.name==="Applause1").length'),1);
+ observations.push({kind:'authored-temporal-opening',welcome,past:await browser.evaluate('({music:AudioManager._currentBgm,ambience:AudioManager._currentBgs})')});
  for(const [route,name]of [['physical','Drips'],['supernatural','Wind1'],['final','Darkness']]){
   // Valid prepared route states exercise the installed native audio event.
   let prepared=route==='final'?finalChoice():fixtures.encounter_intro;
@@ -40,12 +53,14 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
   }
   await installPhase(browser,prepared);
   await browser.waitFor(`AudioManager._currentBgs?.name===${JSON.stringify(name)}&&AudioManager._bgsBuffer.isReady()`);
+  assert.equal(await browser.evaluate('AudioManager._currentBgm.name'),'Dungeon2');
   assert.equal(await browser.evaluate("audioBuffers.filter(x=>x.folder==='bgs/'&&x.buffer.isPlaying()).length"),1);
  }
  for(const [ending,name]of [['reunite','Musical1'],['destroy','Organ']]){
   await installPhase(browser,accepted(finalChoice(),'CHOOSE_ENDING',{ending}));await pause(browser);
   await browser.waitFor(`AudioManager._meBuffer?.isReady()&&audioBuffers.some(x=>x.folder==='me/'&&x.name===${JSON.stringify(name)})`);
   assert.equal(await browser.evaluate('AudioManager._bgsBuffer'),null);
+  assert.equal(await browser.evaluate('AudioManager._bgmBuffer'),null,'Ending themes cannot resume the expedition score');
   assert.equal(await browser.evaluate("audioBuffers.filter(x=>x.folder==='me/'&&x.buffer.isPlaying()).length"),1);
   const playing=await browser.evaluate('window.observedMe=AudioManager._meBuffer;({volume:observedMe.volume,start:observedMe._startTime,count:audioBuffers.length,descriptor:AudioManager._currentMe})');const volume=playing.volume;assert.ok(volume>0);assert.equal(playing.descriptor.name,name);observations.push({name,...playing});
   await browser.press('Tab',9);await hidden(browser,true);await browser.press('Tab',9);await hidden(browser,false);
@@ -55,9 +70,7 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
   assert.equal(await browser.evaluate('AudioManager._meBuffer===observedMe'),true);
   assert.equal(await browser.evaluate('observedMe._startTime'),playing.start);assert.equal(await browser.evaluate('audioBuffers.length'),playing.count);
  }
- // The authored campaign has no live BGM (System.titleBgm is empty). Use the
- // configured System battle BGM as a native command equivalence, without
- // claiming that the campaign has a new musical cue.
+ // Supplement the authored temporal cuts with isolated native BGM mute/restore.
  const beforeBgm=await state(browser),bgmConfig=await browser.evaluate('ConfigManager.bgmVolume');
  await browser.evaluate("new Game_Interpreter().command249([{name:'',volume:60,pitch:100,pan:0}]);");
  await browser.evaluate("new Game_Interpreter().command241([{...$dataSystem.battleBgm}]);");
@@ -112,7 +125,7 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  await installPhase(browser,fixtures.encounter_choice);await choices(browser,'approaches');const before=await state(browser);
  await activate(browser,'approaches',3);await pause(browser);await browser.press('Enter',13);await choices(browser,'approaches');assert.deepEqual(await state(browser),before);
  assert.equal(await browser.evaluate('AudioManager._bgsBuffer.volume'),0);
- assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness','me/Musical1','me/Organ'].map(k=>[k,true])));
+ assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness','me/Musical1','me/Organ'].map(k=>[k,true])));
  const effects=await browser.evaluate('[...new Set([...$dataCommonEvents.filter(Boolean).flatMap(e=>e.list.filter(c=>c.code===250).map(c=>c.parameters[0].name)),...[0,1,2,3,5,6].map(i=>$dataSystem.sounds[i].name)])].sort()');
  assert.deepEqual(effects,['Buzzer1','Cancel2','Collapse1','Cursor3','Decision2','Door1','Item3','Load2','Save2','Water1'].sort());
  const directory='docs/qa/evidence/init-rpg-maker-mz/task-11/IT-029';await mkdir(directory,{recursive:true});

@@ -79,3 +79,8 @@ Fluxo corrente: [guia e banco de checkpoints](../guides/eventbridge-minimal-runt
 Abrir capturas jogadas de cada herói, Conselho, finais e memorial → conferir enquadramento/legibilidade → ouvir trilhas de Options/cues → registrar pessoa/data/decisão. Rejeição volta ao dono da superfície; ausência de julgamento permanece pendente. MA-A/B/F/G/I.
 
 [Plano dirigido e sensores](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14). O relatório existente recebe os resultados novos; este planejamento não aprova execução nem substitui os julgamentos humanos.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Planejado, execução dirigida ainda não observada. Cobertura: S-01/05/07/08/09/11; C/D/F. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.

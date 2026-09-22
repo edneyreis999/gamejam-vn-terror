@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
+import { passageBoxes } from '../helpers/native-reading.mjs';
 import { catalog, events, heroes, tavern } from '../helpers/formation.mjs';
 import { complete } from '../helpers/campaign.mjs';
 import { closingReady, finishNativeClosing, installClosing, observeClosing } from '../helpers/closing.mjs';
@@ -96,29 +97,34 @@ canonicalCase('IT-056','dedicated native memorial moves all losses together and 
   }
 });
 async function walkWithEpilogues(browser){
-  const seen=[];
+  const seen=[], readings=new Map();
   for(let i=0;i<80;i++){
     await closingReady(browser);const state=await campaignSnapshot(browser);
-    if(state.phase==='campaign_complete'){await creditsReady(browser);return seen;}
+    if(state.phase==='campaign_complete'){
+      for(const [hero,reading] of readings)assert.equal(reading.index,reading.boxes.length,`${hero}: every authored box precedes credits`);
+      await creditsReady(browser);return seen;
+    }
     if(state.phase==='epilogue'){
-      const hero=state.reading.sceneId.split('.')[1],name=`Dryland_${hero}`;
-      await browser.waitFor(`$gameScreen.picture(60)?.name()===${JSON.stringify(name)}`);
-      assert.deepEqual(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'),[name]);
+      const hero=state.reading.sceneId.split('.')[1],name=`Dryland_Epilogue${hero}`;
+      await browser.waitFor(`$gameScreen.picture(1)?.name()===${JSON.stringify(name)}`);
+      assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'),[]);
       assert.equal(await browser.evaluate('$gameMap.mapId()'),28+Number(hero.slice(1)));
       const id=state.reading.passageIds[state.reading.index];
       assert.equal(id,`epilogue.${hero}`);
-      const map=JSON.parse(await readFile(`${project}/data/Map${String(28+Number(hero.slice(1))).padStart(3,'0')}.json`,'utf8'));
-      const list=map.events[1].pages[0].list;
-      assert.equal(list.filter(c=>c.code===101).length,1,'Each epilogue owns one native text block');
-      const expectedText=list.filter(c=>c.code===401).map(c=>c.parameters[0]).join('\n');
-      assert.equal(await browser.evaluate('$gameMessage.allText()'),expectedText);
-      if(!seen.includes(hero)){seen.push(hero);await browser.screenshot(`${evidence('IT-058')}/epilogue-${hero}.png`);}
+      if(!readings.has(hero)){
+        const map=JSON.parse(await readFile(`${project}/data/Map${String(28+Number(hero.slice(1))).padStart(3,'0')}.json`,'utf8'));
+        readings.set(hero,{boxes:passageBoxes(map.events[1].pages[0].list,id),index:0});
+        seen.push(hero);await browser.screenshot(`${evidence('IT-058')}/epilogue-${hero}.png`);
+      }
+      const reading=readings.get(hero);
+      assert.ok(reading.index<reading.boxes.length,`${hero}: no repeated box`);
+      assert.equal(await browser.evaluate('$gameMessage.allText()'),reading.boxes[reading.index++]);
     }
     await browser.press('Enter',13);
   }
   assert.fail('Closing did not reach credits.');
 }
-canonicalCase('IT-058','all eligible native epilogue busts lead to visible mouse/keyboard/automatic credits without an extra title action',{timeout:240000},async t=>{
+canonicalCase('IT-058','all eligible native epilogue illustrations lead to visible mouse/keyboard/automatic credits without an extra title action',{timeout:300000},async t=>{
   const browser=await tavern(t);await observePresentation(browser);
   const seen=[];
   for(const party of [['H1','H2','H3'],['H4','H5','H6'],['H6','H7','H8']]){

@@ -1,0 +1,57 @@
+{
+  "sourceRevision": "ba53ad9d1d3848a2aef80d34abf1f5d391489b6c",
+  "passages": {
+    "closure.first.01": [
+      "“Finalmente, uma parte do mapa estava em nossas mãos.",
+      "Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir.",
+      "Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a outra metade.",
+      "Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como enfrentar o que vinha pela frente.”"
+    ],
+    "closure.second.01": [
+      "“Ali estava a parte que faltava.",
+      "Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna, abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam.",
+      "Foi quando me dei conta: tínhamos encontrado o mapa.",
+      "Mas ainda precisaríamos seguir o caminho.”"
+    ],
+    "council.01": [
+      "“No cofre, encontramos a segunda metade do medalhão e um registro de Palotina. Quando aproximamos as duas peças para examiná-las, Ivaí perdeu a compostura.”"
+    ],
+    "council.02": [
+      "“Não juntem! Se restaurarem o medalhão, eu morro!”"
+    ],
+    "council.03": [
+      "“Ele percebeu o que tinha dito. Mas já era tarde.",
+      "O registro confirmou: reunir as metades libertaria Floraí e Pérola, ao custo da vida de Ivaí. Destruí-las salvaria o bardo, mas entregaria os amantes e suas memórias a Andirá.”"
+    ],
+    "council.challenge": [
+      "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações, perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que tinha escondido a verdade?”"
+    ],
+    "council.solo": [
+      "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações, perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que tinha escondido a verdade?”"
+    ],
+    "council.confession": [
+      "“Eu já conhecia a maldição. Pretendia destruir o medalhão desde o início. Tive medo de que ninguém viesse se soubesse.”"
+    ],
+    "ending.reunite.01": [
+      "Ivaí junta as duas metades. A pedra que prende Pérola se abre, e as raízes soltam Floraí.",
+      "Ivaí fica sem ar e cai no chão. Ele morre afogado, mesmo com o chão seco."
+    ],
+    "ending.reunite.02": [
+      "Depois, vemos Pérola e Floraí livres. Eles se encontram, dão as mãos e seguem juntos. Andirá continua existindo, mas não pode pegar os dois."
+    ],
+    "ending.destroy.01": [
+      "Ivaí quebra as duas metades. Ele respira sem dor e percebe que vai sobreviver. A maldição da família acaba.",
+      "Uma água escura cobre Pérola e Floraí. Andirá leva os dois e as lembranças do amor deles."
+    ],
+    "ending.destroy.02": [
+      "A última cena mostra Ivaí vivo, olhando os pedaços do medalhão em silêncio."
+    ],
+    "ending.bad.01": [
+      "Uma poça aparece no chão seco. No reflexo, Ivaí vê Andirá.",
+      "Ivaí fica sem ar, cai no chão e morre afogado. Ele não chega a fazer a escolha sobre o medalhão."
+    ],
+    "ending.bad.02": [
+      "Depois, aparecem os nomes dos heróis mortos e a tela de fim de jogo."
+    ]
+  }
+}

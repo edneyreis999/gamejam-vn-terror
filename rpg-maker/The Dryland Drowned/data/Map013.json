@@ -3829,7 +3829,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os ganchos certos são destravados, abrindo caminho entre os sacos."
+                "Os ganchos certos são soltos um após o outro. Os sacos se afastam para os<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "lados e deixam um corredor livre no meio do depósito. As vozes continuam<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
               ]
             },
             {
@@ -4243,7 +4257,21 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo alcança a saída antes que a prensa feche o corredor."
+                "O grupo usa as correntes para passar por cima dos sacos e dos ganchos. Cada<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "balanço leva todos para mais perto da saída e para longe da prensa. Quando a<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "máquina esmaga os sacos, o grupo já está em segurança do outro lado."
               ]
             },
             {
@@ -4657,7 +4685,39 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As vozes não quebram a decisão do grupo, e os sacos permanecem fechados."
+                "As vozes imitam pessoas conhecidas e pedem para serem libertadas, mas ninguém<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "responde. Sem conseguir enganar o grupo, elas começam a se confundir e a"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "até a saída permanece aberto."
               ]
             },
             {

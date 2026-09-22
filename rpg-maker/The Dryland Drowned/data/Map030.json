@@ -2551,17 +2551,106 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
+                }
+              ]
+            },
+            {
               "code": 231,
               "indent": 0,
               "parameters": [
                 1,
-                "Dryland_Memorial",
+                "Dryland_EpilogueH2",
                 1,
                 0,
                 640,
                 360,
-                76.55502392344498,
-                76.55502392344498,
+                76.51434643995749,
+                76.51434643995749,
                 255,
                 0
               ]
@@ -2695,106 +2784,28 @@
               ]
             },
             {
-              "code": 111,
+              "code": 101,
               "indent": 0,
               "parameters": [
-                12,
-                "$gameVariables.value(47)"
+                "",
+                0,
+                0,
+                2,
+                "Elowen"
               ]
             },
             {
-              "code": 357,
-              "indent": 1,
+              "code": 401,
+              "indent": 0,
               "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "60",
-                  "PictureName:str": "Dryland_H2",
-                  "Origin:str": "Bust",
-                  "Position:num": "2",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "0"
-                }
+                "Elowen usa sua recompensa para garantir que a mata de sua comunidade permaneça<br>"
               ]
             },
             {
-              "code": 411,
-              "indent": 0,
-              "parameters": []
-            },
-            {
-              "code": 357,
-              "indent": 1,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Basic_EnterBust",
-                "Basic_EnterBust",
-                {
-                  "PictureID:eval": "60",
-                  "PictureName:str": "Dryland_H2",
-                  "Origin:str": "Bust",
-                  "Position:num": "2",
-                  "StartOffsetX:eval": "-32",
-                  "StartOffsetY:eval": "0",
-                  "EasingType:str": "OutSine",
-                  "HorzMirror:str": "None",
-                  "Duration:eval": "20"
-                }
-              ]
-            },
-            {
-              "code": 412,
-              "indent": 0,
-              "parameters": []
-            },
-            {
-              "code": 357,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Scale_ScaleTo",
-                "Scale_ScaleTo",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "38",
-                  "TargetScaleY:str": "38",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 0,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Move_MoveToCoordinates",
-                "Move_MoveToCoordinates",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "250",
-                  "TargetY:str": "1320",
-                  "EasingType:str": "InOutSine",
-                  "FlipDirection:str": "None",
-                  "Duration:eval": "0"
-                }
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 0,
-              "parameters": [
-                "VisuMZ_2_VNPictureBusts",
-                "Tone_NormalBust",
-                "Tone_NormalBust",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "Duration:eval": "0"
-                }
+                "protegida. Os primeiros dias de volta são passados percorrendo as trilhas"
               ]
             },
             {
@@ -2812,28 +2823,64 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "usa sua parte da recompensa para proteger o território de caça e passa a treinar novos batedores. Pela primeira vez, ensina que velocidade também significa saber quando esperar pelo grupo."
+                "conhecidas. Em algumas curvas, ainda se vira para comentar algo com quem já<br>"
               ]
             },
             {
-              "code": 117,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                76
+                "não está atrás dela."
               ]
             },
             {
-              "code": 108,
+              "code": 101,
               "indent": 0,
               "parameters": [
-                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
+                "",
+                0,
+                0,
+                2,
+                "Elowen"
               ]
             },
             {
-              "code": 408,
+              "code": 401,
               "indent": 0,
               "parameters": [
-                "da passagem da campanha fica a cargo do EventBridge."
+                "Logo começa a treinar novos batedores. Ensina a atravessar rios, reconhecer<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "armadilhas e encontrar apoio onde parece não existir passagem. Continua"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Elowen"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "provocadora e quase impossível de alcançar numa corrida, mas agora interrompe<br>"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "a marcha para conferir se todos acompanham."
               ]
             },
             {

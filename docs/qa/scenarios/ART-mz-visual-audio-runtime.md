@@ -49,3 +49,8 @@ Estado corrente: **blocked-verify**. Memorial0/1/3/8, transições/ausências e 
 ## Expansão de autoria por mapa — 2026-09-14
 
 blocked-verify: enquadramento do Conselho reprovado; epílogos corrigidos; áudio nativo observado, sem audição humana. MAS-01/03/05/06: MA-A/B/C/D/E/F/G/H; imagens em dois viewports/modos e trilhas renderizadas. [Guia e entradas atuais](../guides/eventbridge-minimal-runtime.md#expansão-de-autoria-por-mapa--plano-de-execução-2026-09-14) · [Relatório](../reports/2026-09-12-eventbridge-minimal-runtime.md). Task29 é o join canônico; task16 registra execução e limites. A aprovação prévia de Gorvak é parcial de organização, sem aprovação implícita das demais superfícies. Os resultados históricos acima permanecem vinculados às respectivas fontes.
+
+
+## Integração narrativa aprovada — 2026-09-18
+
+Execução técnica concluída. A prisão rústica foi corrigida após direção explícita do usuário; IT-052/053 e inspeção de runtime passam nas duas resoluções/perfis, com HIDE. Audição e captura do editor foram dispensadas por D-020/021; não são sensores executados. Aceite humano final registrado após o “Perfeito” do usuário em2026-09-18. [Verificação atual](../../../planos/tasks/approved-narrative-dialogue-staging/verification.md) e [relatório](../reports/2026-09-18-approved-narrative-dialogue-staging.md). Vereditos históricos acima não são reescritos.

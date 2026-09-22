@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+  "requestId": "staging-formation-normal-20260918",
+  "consumer": "task-10",
+  "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-formation.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "staging-formation-normal",
+    "profile": "1280x720-normal",
+    "variant": "normal",
+    "configuration": "file1-fresh-stable-formation-port18727"
+  },
+  "claims": [
+    {
+      "id": "formation-render",
+      "variant": "normal",
+      "sensor": "directed-browser",
+      "group": "formation",
+      "source": {
+        "id": "formation-render",
+        "variant": "normal"
+      },
+      "expected": {
+        "path": "planos/tasks/approved-narrative-dialogue-staging/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-10",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Resolver capturas transitórias dos ramos de formação; Draska antes do reparo F03 não recebe aceitação de indicador."
+  }
+}

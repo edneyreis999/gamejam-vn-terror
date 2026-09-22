@@ -22,91 +22,90 @@
           "expectedSequence": 3
         },
         {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 4
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 5
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 6
+        },
+        {
           "type": "TOGGLE_HERO",
           "heroId": "H4",
-          "expectedSequence": 4
+          "expectedSequence": 7
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H7",
-          "expectedSequence": 5
+          "expectedSequence": 8
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H8",
-          "expectedSequence": 6
+          "expectedSequence": 9
         },
         {
           "type": "SELECT_DESTINATION",
           "dungeonId": "physical",
-          "expectedSequence": 7
-        },
-        {
-          "type": "DEPART",
-          "expectedSequence": 8
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 9
-        },
-        {
-          "type": "ENTER_DUNGEON",
           "expectedSequence": 10
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "DEPART",
           "expectedSequence": 11
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 12
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 14
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A6-2",
-          "expectedSequence": 12
+          "expectedSequence": 15
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 13
+          "expectedSequence": 16
         },
         {
           "type": "ENTER_DUNGEON",
-          "expectedSequence": 14
+          "expectedSequence": 17
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 15
+          "expectedSequence": 18
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A3-1",
-          "expectedSequence": 16
+          "expectedSequence": 19
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 17
+          "expectedSequence": 20
         },
         {
           "type": "ENTER_DUNGEON",
-          "expectedSequence": 18
+          "expectedSequence": 21
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 19
+          "expectedSequence": 22
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A2-1",
-          "expectedSequence": 20
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 21
-        },
-        {
-          "type": "SELECT_VICTIM",
-          "heroId": "H4",
-          "expectedSequence": 22
-        },
-        {
-          "type": "ADVANCE_TEXT",
           "expectedSequence": 23
         },
         {
@@ -114,7 +113,8 @@
           "expectedSequence": 24
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "SELECT_VICTIM",
+          "heroId": "H4",
           "expectedSequence": 25
         },
         {
@@ -122,21 +122,20 @@
           "expectedSequence": 26
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A5-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 27
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 28
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H7",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 29
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-1",
           "expectedSequence": 30
         },
         {
@@ -144,7 +143,8 @@
           "expectedSequence": 31
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "SELECT_VICTIM",
+          "heroId": "H7",
           "expectedSequence": 32
         },
         {
@@ -152,21 +152,20 @@
           "expectedSequence": 33
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A8-2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 34
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 35
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H8",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 36
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A8-2",
           "expectedSequence": 37
         },
         {
@@ -174,7 +173,8 @@
           "expectedSequence": 38
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "SELECT_VICTIM",
+          "heroId": "H8",
           "expectedSequence": 39
         },
         {
@@ -188,6 +188,22 @@
         {
           "type": "ADVANCE_TEXT",
           "expectedSequence": 42
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 43
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 44
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 45
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 46
         }
       ]
     },
@@ -212,116 +228,115 @@
           "expectedSequence": 3
         },
         {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 4
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 5
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 6
+        },
+        {
           "type": "TOGGLE_HERO",
           "heroId": "H1",
-          "expectedSequence": 4
+          "expectedSequence": 7
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H2",
-          "expectedSequence": 5
+          "expectedSequence": 8
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H3",
-          "expectedSequence": 6
+          "expectedSequence": 9
         },
         {
           "type": "SELECT_DESTINATION",
           "dungeonId": "physical",
-          "expectedSequence": 7
-        },
-        {
-          "type": "DEPART",
-          "expectedSequence": 8
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 9
-        },
-        {
-          "type": "ENTER_DUNGEON",
           "expectedSequence": 10
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "DEPART",
           "expectedSequence": 11
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 12
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 14
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A6-1",
-          "expectedSequence": 12
+          "expectedSequence": 15
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 13
+          "expectedSequence": 16
         },
         {
           "type": "ENTER_DUNGEON",
-          "expectedSequence": 14
+          "expectedSequence": 17
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 15
+          "expectedSequence": 18
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A1-1",
-          "expectedSequence": 16
+          "expectedSequence": 19
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 17
+          "expectedSequence": 20
         },
         {
           "type": "ENTER_DUNGEON",
-          "expectedSequence": 18
+          "expectedSequence": 21
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 19
+          "expectedSequence": 22
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A5-1",
-          "expectedSequence": 20
+          "expectedSequence": 23
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 21
+          "expectedSequence": 24
         },
         {
           "type": "ENTER_DUNGEON",
-          "expectedSequence": 22
+          "expectedSequence": 25
         },
         {
           "type": "ADVANCE_TEXT",
-          "expectedSequence": 23
+          "expectedSequence": 26
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A8-1",
-          "expectedSequence": 24
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 25
-        },
-        {
-          "type": "ENTER_DUNGEON",
-          "expectedSequence": 26
-        },
-        {
-          "type": "ADVANCE_TEXT",
           "expectedSequence": 27
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A7-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 28
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 29
         },
         {
@@ -329,7 +344,8 @@
           "expectedSequence": 30
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-1",
           "expectedSequence": 31
         },
         {
@@ -341,7 +357,7 @@
           "expectedSequence": 33
         },
         {
-          "type": "DEPART",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 34
         },
         {
@@ -349,7 +365,7 @@
           "expectedSequence": 35
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 36
         },
         {
@@ -357,8 +373,7 @@
           "expectedSequence": 37
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B3-1",
+          "type": "DEPART",
           "expectedSequence": 38
         },
         {
@@ -375,7 +390,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B6-2",
+          "approachId": "B3-1",
           "expectedSequence": 42
         },
         {
@@ -392,7 +407,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B7-1",
+          "approachId": "B6-2",
           "expectedSequence": 46
         },
         {
@@ -409,7 +424,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B4-3",
+          "approachId": "B7-1",
           "expectedSequence": 50
         },
         {
@@ -426,7 +441,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B8-2",
+          "approachId": "B4-3",
           "expectedSequence": 54
         },
         {
@@ -434,7 +449,7 @@
           "expectedSequence": 55
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 56
         },
         {
@@ -442,7 +457,8 @@
           "expectedSequence": 57
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B8-2",
           "expectedSequence": 58
         },
         {
@@ -458,84 +474,82 @@
           "expectedSequence": 61
         },
         {
-          "type": "TOGGLE_HERO",
-          "heroId": "H1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 62
         },
         {
-          "type": "TOGGLE_HERO",
-          "heroId": "H2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 63
         },
         {
-          "type": "TOGGLE_HERO",
-          "heroId": "H3",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 64
         },
         {
-          "type": "TOGGLE_HERO",
-          "heroId": "H4",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 65
         },
         {
-          "type": "TOGGLE_HERO",
-          "heroId": "H7",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 66
         },
         {
           "type": "TOGGLE_HERO",
-          "heroId": "H8",
+          "heroId": "H1",
           "expectedSequence": 67
         },
         {
-          "type": "DEPART",
+          "type": "TOGGLE_HERO",
+          "heroId": "H2",
           "expectedSequence": 68
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "TOGGLE_HERO",
+          "heroId": "H3",
           "expectedSequence": 69
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "TOGGLE_HERO",
+          "heroId": "H4",
           "expectedSequence": 70
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "TOGGLE_HERO",
+          "heroId": "H7",
           "expectedSequence": 71
+        },
+        {
+          "type": "TOGGLE_HERO",
+          "heroId": "H8",
+          "expectedSequence": 72
+        },
+        {
+          "type": "DEPART",
+          "expectedSequence": 73
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 74
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 75
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 76
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A4-1",
-          "expectedSequence": 72
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 73
-        },
-        {
-          "type": "ENTER_DUNGEON",
-          "expectedSequence": 74
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 75
-        },
-        {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B1-1",
-          "expectedSequence": 76
-        },
-        {
-          "type": "ADVANCE_TEXT",
           "expectedSequence": 77
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H4",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 78
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 79
         },
         {
@@ -543,7 +557,8 @@
           "expectedSequence": 80
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B1-1",
           "expectedSequence": 81
         },
         {
@@ -551,8 +566,8 @@
           "expectedSequence": 82
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A2-2",
+          "type": "SELECT_VICTIM",
+          "heroId": "H4",
           "expectedSequence": 83
         },
         {
@@ -560,29 +575,28 @@
           "expectedSequence": 84
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 85
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 86
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B2-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 87
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A2-2",
           "expectedSequence": 88
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H7",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 89
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 90
         },
         {
@@ -590,7 +604,8 @@
           "expectedSequence": 91
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B2-1",
           "expectedSequence": 92
         },
         {
@@ -598,8 +613,8 @@
           "expectedSequence": 93
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A3-1",
+          "type": "SELECT_VICTIM",
+          "heroId": "H7",
           "expectedSequence": 94
         },
         {
@@ -607,29 +622,28 @@
           "expectedSequence": 95
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 96
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 97
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B5-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 98
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
           "expectedSequence": 99
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H8",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 100
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 101
         },
         {
@@ -637,7 +651,8 @@
           "expectedSequence": 102
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-1",
           "expectedSequence": 103
         },
         {
@@ -645,7 +660,8 @@
           "expectedSequence": 104
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "SELECT_VICTIM",
+          "heroId": "H8",
           "expectedSequence": 105
         },
         {
@@ -665,8 +681,7 @@
           "expectedSequence": 109
         },
         {
-          "type": "CHOOSE_ENDING",
-          "ending": "reunite",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 110
         },
         {
@@ -686,12 +701,33 @@
           "expectedSequence": 114
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_ENDING",
+          "ending": "reunite",
           "expectedSequence": 115
         },
         {
           "type": "ADVANCE_TEXT",
           "expectedSequence": 116
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 117
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 118
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 119
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 120
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 121
         }
       ]
     },
@@ -716,57 +752,56 @@
           "expectedSequence": 3
         },
         {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 4
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 5
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 6
+        },
+        {
           "type": "TOGGLE_HERO",
           "heroId": "H1",
-          "expectedSequence": 4
+          "expectedSequence": 7
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H2",
-          "expectedSequence": 5
+          "expectedSequence": 8
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H3",
-          "expectedSequence": 6
+          "expectedSequence": 9
         },
         {
           "type": "SELECT_DESTINATION",
           "dungeonId": "physical",
-          "expectedSequence": 7
-        },
-        {
-          "type": "DEPART",
-          "expectedSequence": 8
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 9
-        },
-        {
-          "type": "ENTER_DUNGEON",
           "expectedSequence": 10
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "DEPART",
           "expectedSequence": 11
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 12
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 13
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 14
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A2-3",
-          "expectedSequence": 12
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 13
-        },
-        {
-          "type": "SELECT_VICTIM",
-          "heroId": "H1",
-          "expectedSequence": 14
-        },
-        {
-          "type": "ADVANCE_TEXT",
           "expectedSequence": 15
         },
         {
@@ -774,7 +809,8 @@
           "expectedSequence": 16
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "SELECT_VICTIM",
+          "heroId": "H1",
           "expectedSequence": 17
         },
         {
@@ -782,21 +818,20 @@
           "expectedSequence": 18
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A7-3",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 19
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 20
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 21
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-3",
           "expectedSequence": 22
         },
         {
@@ -804,7 +839,8 @@
           "expectedSequence": 23
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "SELECT_VICTIM",
+          "heroId": "H2",
           "expectedSequence": 24
         },
         {
@@ -812,21 +848,20 @@
           "expectedSequence": 25
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A1-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 26
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 27
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H3",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 28
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-1",
           "expectedSequence": 29
         },
         {
@@ -834,61 +869,61 @@
           "expectedSequence": 30
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "SELECT_VICTIM",
+          "heroId": "H3",
           "expectedSequence": 31
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 32
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 33
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 34
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H4",
-          "expectedSequence": 32
+          "expectedSequence": 35
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H5",
-          "expectedSequence": 33
+          "expectedSequence": 36
         },
         {
           "type": "TOGGLE_HERO",
           "heroId": "H6",
-          "expectedSequence": 34
+          "expectedSequence": 37
         },
         {
           "type": "SELECT_DESTINATION",
           "dungeonId": "physical",
-          "expectedSequence": 35
-        },
-        {
-          "type": "DEPART",
-          "expectedSequence": 36
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 37
-        },
-        {
-          "type": "ENTER_DUNGEON",
           "expectedSequence": 38
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "DEPART",
           "expectedSequence": 39
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 40
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 41
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 42
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A2-2",
-          "expectedSequence": 40
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 41
-        },
-        {
-          "type": "SELECT_VICTIM",
-          "heroId": "H4",
-          "expectedSequence": 42
-        },
-        {
-          "type": "ADVANCE_TEXT",
           "expectedSequence": 43
         },
         {
@@ -896,7 +931,8 @@
           "expectedSequence": 44
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "SELECT_VICTIM",
+          "heroId": "H4",
           "expectedSequence": 45
         },
         {
@@ -904,21 +940,20 @@
           "expectedSequence": 46
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A7-2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 47
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 48
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H5",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 49
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A7-2",
           "expectedSequence": 50
         },
         {
@@ -926,7 +961,8 @@
           "expectedSequence": 51
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "SELECT_VICTIM",
+          "heroId": "H5",
           "expectedSequence": 52
         },
         {
@@ -934,46 +970,45 @@
           "expectedSequence": 53
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A1-2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 54
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 55
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 56
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A1-2",
           "expectedSequence": 57
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 58
+        },
+        {
+          "type": "ENTER_DUNGEON",
+          "expectedSequence": 59
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 60
         },
         {
           "type": "CHOOSE_APPROACH",
           "approachId": "A8-3",
-          "expectedSequence": 58
-        },
-        {
-          "type": "ADVANCE_TEXT",
-          "expectedSequence": 59
-        },
-        {
-          "type": "ENTER_DUNGEON",
-          "expectedSequence": 60
-        },
-        {
-          "type": "ADVANCE_TEXT",
           "expectedSequence": 61
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A5-2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 62
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 63
         },
         {
@@ -981,7 +1016,8 @@
           "expectedSequence": 64
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A5-2",
           "expectedSequence": 65
         },
         {
@@ -993,7 +1029,7 @@
           "expectedSequence": 67
         },
         {
-          "type": "DEPART",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 68
         },
         {
@@ -1001,7 +1037,7 @@
           "expectedSequence": 69
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 70
         },
         {
@@ -1009,8 +1045,7 @@
           "expectedSequence": 71
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B6-1",
+          "type": "DEPART",
           "expectedSequence": 72
         },
         {
@@ -1027,7 +1062,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B2-1",
+          "approachId": "B6-1",
           "expectedSequence": 76
         },
         {
@@ -1044,7 +1079,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B8-1",
+          "approachId": "B2-1",
           "expectedSequence": 80
         },
         {
@@ -1061,7 +1096,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B1-1",
+          "approachId": "B8-1",
           "expectedSequence": 84
         },
         {
@@ -1078,7 +1113,7 @@
         },
         {
           "type": "CHOOSE_APPROACH",
-          "approachId": "B5-2",
+          "approachId": "B1-1",
           "expectedSequence": 88
         },
         {
@@ -1086,7 +1121,7 @@
           "expectedSequence": 89
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 90
         },
         {
@@ -1094,7 +1129,8 @@
           "expectedSequence": 91
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B5-2",
           "expectedSequence": 92
         },
         {
@@ -1110,7 +1146,7 @@
           "expectedSequence": 95
         },
         {
-          "type": "DEPART",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 96
         },
         {
@@ -1118,7 +1154,7 @@
           "expectedSequence": 97
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 98
         },
         {
@@ -1126,38 +1162,36 @@
           "expectedSequence": 99
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B4-2",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 100
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "DEPART",
           "expectedSequence": 101
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 102
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 103
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A6-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 104
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B4-2",
           "expectedSequence": 105
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H6",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 106
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 107
         },
         {
@@ -1165,7 +1199,8 @@
           "expectedSequence": 108
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A6-1",
           "expectedSequence": 109
         },
         {
@@ -1173,8 +1208,8 @@
           "expectedSequence": 110
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A4-1",
+          "type": "SELECT_VICTIM",
+          "heroId": "H6",
           "expectedSequence": 111
         },
         {
@@ -1182,29 +1217,28 @@
           "expectedSequence": 112
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 113
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 114
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B7-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 115
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A4-1",
           "expectedSequence": 116
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H7",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 117
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 118
         },
         {
@@ -1212,7 +1246,8 @@
           "expectedSequence": 119
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B7-1",
           "expectedSequence": 120
         },
         {
@@ -1220,8 +1255,8 @@
           "expectedSequence": 121
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "A3-1",
+          "type": "SELECT_VICTIM",
+          "heroId": "H7",
           "expectedSequence": 122
         },
         {
@@ -1229,29 +1264,28 @@
           "expectedSequence": 123
         },
         {
-          "type": "ENTER_DUNGEON",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 124
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 125
         },
         {
-          "type": "CHOOSE_APPROACH",
-          "approachId": "B3-1",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 126
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "A3-1",
           "expectedSequence": 127
         },
         {
-          "type": "SELECT_VICTIM",
-          "heroId": "H8",
+          "type": "ADVANCE_TEXT",
           "expectedSequence": 128
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "ENTER_DUNGEON",
           "expectedSequence": 129
         },
         {
@@ -1259,7 +1293,8 @@
           "expectedSequence": 130
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "CHOOSE_APPROACH",
+          "approachId": "B3-1",
           "expectedSequence": 131
         },
         {
@@ -1267,7 +1302,8 @@
           "expectedSequence": 132
         },
         {
-          "type": "ADVANCE_TEXT",
+          "type": "SELECT_VICTIM",
+          "heroId": "H8",
           "expectedSequence": 133
         },
         {
@@ -1301,9 +1337,30 @@
         {
           "type": "ADVANCE_TEXT",
           "expectedSequence": 141
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 142
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 143
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 144
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 145
+        },
+        {
+          "type": "ADVANCE_TEXT",
+          "expectedSequence": 146
         }
       ]
     }
   },
-  "sourceDescription": "Reviewed deterministic campaign action recipes from the completed HTML iteration; historical source hash retained for provenance."
+  "sourceDescription": "Reviewed deterministic campaign action recipes from the completed HTML iteration; historical source hash retained for provenance.",
+  "prologueRevision": "prologo-rheed: six passages; original sourceSha256 identifies the pre-adaptation recipe source"
 }

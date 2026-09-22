@@ -117,7 +117,13 @@ Os demais pares podem dialogar em grupo, mas não possuem arco bilateral própri
 - **Como reage ao ser escolhido para o sacrifício:** aceita sem implorar, mas obriga o bardo a encará-lo e reconhecer a escolha.
 - **Frase curta de despedida:** “Não desperdicem o tempo que estou comprando.”
 - **O que o grupo perde emocionalmente com sua morte:** a sensação de que existe alguém capaz de permanecer firme quando todos os demais entram em pânico.
-- **O que faz depois da campanha, caso sobreviva:** reconstrói a forja, mas grava nela os nomes dos companheiros mortos. Passa a ensinar aos aprendizes que força não é suportar tudo sozinho.
+- **O que faz depois da campanha, caso sobreviva:**
+
+Quando retorna, Gorvak encontra os restos da antiga forja cobertos de poeira. Usa sua recompensa para reconstruí-la e chama de volta os aprendizes. Durante semanas, o som dos martelos volta a ocupar a rua.
+
+Acima da entrada, ele grava os nomes dos companheiros que não sobreviveram à expedição.
+
+Fonte aprovada: PR #15, commit `537b7e825d695799033223810c7429d190f30172`, `feedbacks/epilogos.html` (conferido com `feedbacks/epilogo-dos-herois`).
 
 ---
 

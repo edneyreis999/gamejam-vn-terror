@@ -69,7 +69,7 @@ function assertCreditProgress(before,after,expected){
  assert.ok(Math.abs(scrollDelta/frameDelta-expected)<0.000001,'Credits must advance at the native speed per frame.');
  return{frameDelta,scrollDelta,observedSpeed:scrollDelta/frameDelta};
 }
-async function finishCredits(context,player,label){
+export async function finishCredits(context,player,label){
  await player.until('credits');await context.shot(label+'-credits-start');
  const mode=process.env.DRYLAND_QA_CREDITS||'keyboard',allowed=['natural','accelerated','keyboard','mouse','late-keyboard','late-mouse'];
  assert.ok(allowed.includes(mode),'Unknown directed credits mode: '+mode);

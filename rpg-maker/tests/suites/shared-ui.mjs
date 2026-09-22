@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause, tavern } from '../helpers/formation.mjs';
+import { activate, choices, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -16,7 +16,9 @@ canonicalCase('IT-025','native HIDE and Tab preserve the same message and consum
  await clickConsole(browser,'hide');await hidden(browser,true);
  await click(browser,900,150);await hidden(browser,false);assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
  await browser.screenshot(`${evidence('IT-025')}/restored-prologue.png`);
- await browser.press('Enter',13);await pause(browser);assert.equal((await state(browser)).sequence,before.sequence+1);
+ await browser.press('Enter',13);await pause(browser);
+ assert.deepEqual(await state(browser),before,'The first of three boxes does not complete the passage');
+ assert.ok((await browser.evaluate('$gameMessage.allText()')).includes(prologueMarkers[1]),'One confirmation advances exactly one box');
 });
 canonicalCase('IT-026','hidden approach and sacrifice pictures cannot change focus or commit the restoring click',{timeout:120000},async t=>{
  const browser=await tavern(t);

@@ -6,7 +6,12 @@ import { councilWithHeroes, councilAfterLosses } from '../helpers/closing-presen
 import { accepted, complete, rejectUnchanged } from '../helpers/campaign.mjs';
 import { continueSave } from '../helpers/discovery.mjs';
 import { closingReady, councilBoundary, councilState, finalChoice, finishNativeClosing, installClosing, observeClosing } from '../helpers/closing.mjs';
-import { assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
+import { assertHidePreservesPortraits, assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
+import { assertAdvanceIndicatorFits, normalizeProse, passageBoxes } from '../helpers/native-reading.mjs';
+import { hidden } from '../helpers/native-shared.mjs';
+const approved = JSON.parse(await readFile(new URL('../fixtures/approved-closing-source.json', import.meta.url), 'utf8')).passages;
+const epilogues = JSON.parse(await readFile(new URL('../../asset-provenance/approved-narrative-epilogues.json', import.meta.url), 'utf8')).heroes;
+const councilMap = JSON.parse(await readFile(new URL('../../The Dryland Drowned/data/Map023.json', import.meta.url), 'utf8'));
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-09/${id}`;
 const snapshot=browser=>browser.evaluate('$gameSystem._dryland.campaign');
 const ended=(kind,ending)=>kind==='bad'?councilState('bad'):accepted(finalChoice(kind),'CHOOSE_ENDING',{ending});
@@ -18,10 +23,21 @@ canonicalCase('UT-033','Council freezes only living climax witnesses in canonica
   assert.equal(state.reading.passageIds.filter(id=>['council.solo','council.challenge'].includes(id)).length,1);
   assert.ok(state.reading.passageIds.includes(kind==='solo'?'council.solo':'council.challenge'));
   assert.equal(state.reading.passageIds.filter(id=>id==='council.confession').length,1);
+  assert.deepEqual(state.reading.passageIds, ['council.01','council.02','council.03',kind==='solo'?'council.solo':'council.challenge','council.confession','council.andira',...expected.map(id=>`opinion.${id}`),'irati.03']);
+  for (const id of state.reading.passageIds.filter(id=>approved[id])) {
+   assert.equal(normalizeProse(passageBoxes(councilMap.events[1].pages[0].list,id).join(' ')),approved[id].join(' '),id);
+  }
   for(const id of state.deadHeroIds)assert.equal(state.climaxPartyIds.includes(id),false);
  }
 });
-canonicalCase('UT-034','both medallion choices commit their own outcome once and invalid endings preserve state',()=>{
+canonicalCase('UT-034','both medallion choices commit their own outcome once and invalid endings preserve state',async()=>{
+ for (const [ending,number] of [['reunite',25],['destroy',26],['bad',27]]) {
+  const map=JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(number).padStart(3,'0')}.json`,import.meta.url),'utf8'));
+  for(const suffix of ['01','02']) {
+   const id=`ending.${ending}.${suffix}`;
+   assert.equal(normalizeProse(passageBoxes(map.events[1].pages[0].list,id).join(' ')),approved[id].join(' '),id);
+  }
+ }
  const before=finalChoice('mixed');
  for(const ending of ['reunite','destroy']){
   const state=accepted(before,'CHOOSE_ENDING',{ending});assert.equal(state.phase,'ending');assert.equal(state.endingId,ending);assert.equal(state.reading.sceneId,`ending.${ending}`);
@@ -47,19 +63,27 @@ canonicalCase('UT-036','the memorial is omitted for no deaths and otherwise cont
  }
 });
 async function readCouncil(browser,testId='IT-054'){
- const seen=[];
+ const seen=[],transcript=new Map();
  for(let count=0;count<35;count++){
-  if((await snapshot(browser)).phase==='final_choice'){await choices(browser,'ending');assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection||null'),null,'Council exit must not report a rejected presentation helper');return seen;}
+  if((await snapshot(browser)).phase==='final_choice'){
+   await choices(browser,'ending');
+   for(const [id,texts] of transcript) if(approved[id]) assert.equal(normalizeProse(texts.join(' ')),approved[id].join(' '),id);
+   assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection||null'),null,'Council exit must not report a rejected presentation helper');return seen;
+  }
   await closingReady(browser);const state=await snapshot(browser);
   assert.ok(['approach_result','death_result','council'].includes(state.phase));
   if(state.phase==='council'){
    const id=state.reading.passageIds[state.reading.index];
+   if(!transcript.has(id))transcript.set(id,[]);
+   transcript.get(id).push(await browser.evaluate('$gameMessage.allText()'));
    if(!seen.some(x=>x.id===id)){
     const speaker=await browser.evaluate('$gameMessage.speakerName()');
     const heroes=state.climaxPartyIds;
-    const staged=id==='council.challenge'||id==='council.confession'||id.startsWith('opinion.');
-    const hasIvai=['council.solo','council.confession','council.andira'].includes(id)||id.startsWith('opinion.');
+    const narrated=['council.01','council.03','council.challenge','council.solo'].includes(id);
+    const staged=id==='council.02'||id==='council.confession'||id.startsWith('opinion.');
+    const hasIvai=['council.02','council.confession','council.andira'].includes(id)||id.startsWith('opinion.');
     const expected=[...Array.from({length:3},(_,i)=>staged&&heroes[i]?`Dryland_${heroes[i]}`:null),hasIvai?'Dryland_ivai':null,null,id==='council.andira'?'Dryland_andira':null];
+    if(narrated)expected[0]='Reed final';
     const pictures=await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)?.name()||null)');
     assert.deepEqual(pictures,expected,id);
     const focus = id.startsWith('opinion.') ? 60 + heroes.indexOf(id.slice(-2)) : id==='council.andira' ? 65 : hasIvai ? 63 : null;
@@ -70,14 +94,16 @@ async function readCouncil(browser,testId='IT-054'){
     }
     assert.deepEqual(await browser.evaluate('[144,145,146].map(id=>$gameVariables.value(id))'),Array.from({length:3},(_,i)=>heroes[i]?Number(heroes[i].slice(1)):0));
     assert.equal(await browser.evaluate('$gameScreen.picture(18)==null'),true);
-    assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),'Dryland_Council');
+    assert.equal(await browser.evaluate('$gameScreen.picture(1)?.name()||null'),narrated?null:'Dryland_Council');
+    assert.deepEqual(await browser.evaluate('({bgm:AudioManager._currentBgm?.name,bgs:AudioManager._currentBgs?.name})'),narrated?{bgm:'Town1',bgs:'People2'}:{bgm:'Dungeon2',bgs:'Darkness'});
     if(speaker==='Andirá'){
      const reflection=await browser.evaluate('(()=>{const p=$gameScreen.picture(65);return {x:p.x(),y:p.y(),scale:p.scaleX()};})()');
      assert.ok(reflection.x<640&&reflection.y>0&&reflection.scale>0,'Andirá stays in the left reflection, using the existing undistorted asset.');
     }
-    if(staged||hasIvai){
-     await browser.screenshot(`${evidence(testId)}/${heroes.join('-')||'solo'}-${id}.png`);
+    if(staged||hasIvai||narrated){
      await assertPortraitFraming(browser,expected.flatMap((name,i)=>name?[60+i]:[]),id);
+     if(narrated&&testId.startsWith('IT-054/'))await assertHidePreservesPortraits(browser,[60],`${evidence(testId)}/${heroes.join('-')||'solo'}-${id}-hide.png`);
+     await browser.screenshot(`${evidence(testId)}/${heroes.join('-')||'solo'}-${id}.png`);
     }
     seen.push({id,speaker,pictures});
    }
@@ -155,7 +181,7 @@ canonicalCase('IT-048','native saved outcomes route only through their own endin
  }
 });
 
-canonicalCase('IT-061','native Council supports every hero recipe in canonically reachable occupied slots without changing eligibility',{timeout:300000},async t=>{
+canonicalCase('IT-061','native Council supports every hero recipe in canonically reachable occupied slots without changing eligibility',{timeout:480000},async t=>{
  const browser=await tavern(t);
  for(const reduced of [false,true]){
   await browser.call('Emulation.setDeviceMetricsOverride',{width:reduced?1920:1280,height:reduced?1080:720,deviceScaleFactor:1,mobile:false});
@@ -172,9 +198,10 @@ canonicalCase('IT-061','native Council supports every hero recipe in canonically
  }
 });
 
-canonicalCase('IT-073', 'each eligible epilogue executes its native body and completes exactly one campaign passage', {timeout: 180000}, async t => {
+canonicalCase('IT-073', 'each eligible epilogue executes its native body and completes exactly one campaign passage', {timeout: 300000}, async t => {
  const browser=await tavern(t);
  for(const reduced of [false,true]){
+ await browser.call('Emulation.setDeviceMetricsOverride',{width:reduced?1920:1280,height:reduced?1080:720,deviceScaleFactor:1,mobile:false});
  await browser.call('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:reduced?'reduce':'no-preference'}]});
  for(let hero=1;hero<=8;hero++){
   const party=hero<=6?[`H${hero}`,`H${hero+1}`,`H${hero+2}`]:['H6','H7','H8'];
@@ -187,16 +214,26 @@ canonicalCase('IT-073', 'each eligible epilogue executes its native body and com
   await installClosing(browser,input,entryMap);await closingReady(browser);
   const map=JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(28+hero).padStart(3,'0')}.json`,import.meta.url),'utf8'));
   const local=map.events[1].pages[0].list;
-  const expected=local.filter(command=>command.code===401).map(command=>command.parameters[0]);
+  const expected=passageBoxes(local,`epilogue.H${hero}`),source=epilogues[hero-1];
+  assert.equal(normalizeProse(expected.join(' ')),source.pages.join(' '));
   assert.deepEqual(await browser.evaluate('({map:$gameMap._interpreter._mapId,event:$gameMap._interpreter._eventId,child:Boolean($gameMap._interpreter._childInterpreter)})'),{map:28+hero,event:1,child:false});
-  for(const text of expected){
+  for(const [box,text] of expected.entries()){
    await pause(browser);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
+   await assertAdvanceIndicatorFits(browser);
    assert.equal(await browser.evaluate('$gameMap.mapId()'),28+hero);
-   assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'),`Dryland_H${hero}`);
+   assert.equal(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
+   assert.equal(await browser.evaluate('$gameScreen.picture(1)?.name()'),`Dryland_EpilogueH${hero}`);
    assert.deepEqual(await snapshot(browser),input);
-   await browser.waitFor("(()=>{const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===60);return s?.bitmap?.isReady()&&s.worldVisible&&s.worldAlpha>0&&$gameScreen.picture(60).opacity()===255;})()");
-   assert.equal(await browser.evaluate('(()=>{const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===60);const b=s.getBounds();return b.width>0&&b.width<=Graphics.width&&b.y<SceneManager._scene._messageWindow.y&&b.y+b.height>0;})()'),true,'The loaded epilogue portrait fits the screen width and intersects the visible story area');
-   if(entryMap===28+hero||hero===2)await browser.screenshot(`${evidence('IT-073')}/epilogue-H${hero}-${reduced?'reduced':'normal'}.png`);
+   await browser.waitFor("ImageManager.loadPicture($gameScreen.picture(1).name()).isReady()");
+   const geometry=await browser.evaluate('(()=>{const p=$gameScreen.picture(1),b=ImageManager.loadPicture(p.name());return{width:b.width,height:b.height,x:p.x(),y:p.y(),sx:p.scaleX(),sy:p.scaleY(),origin:p.origin(),logical:[Graphics.width,Graphics.height]};})()');
+   assert.deepEqual(geometry,{width:source.width,height:source.height,x:640,y:360,sx:source.scalePercent,sy:source.scalePercent,origin:1,logical:[1280,720]});
+   const prefix=`${evidence('IT-073')}/epilogue-H${hero}-${reduced?'reduced':'normal'}-${entryMap}-${box}`;
+   await browser.screenshot(`${prefix}.png`);
+   if(box===0){
+    await browser.press('Tab',9);await hidden(browser,true);
+    assert.deepEqual(await snapshot(browser),input);await browser.screenshot(`${prefix}-hide.png`);
+    await browser.press('Tab',9);await hidden(browser,false);
+   }
    await browser.press('Enter',13);
   }
   await browser.waitFor(`$gameSystem._dryland.campaign.sequence === ${input.sequence+1}`);

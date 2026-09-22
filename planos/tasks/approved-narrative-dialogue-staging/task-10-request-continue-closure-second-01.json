@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+  "requestId": "staging-continue-closure-second-01-20260918",
+  "consumer": "task-10",
+  "case": "/Users/edney/projects/coreto/gamejam-vn-terror/planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "staging-continue-closure-second-01",
+    "profile": "1280x720-normal",
+    "variant": "closure-second-01",
+    "configuration": "port18727-native-player-input-archive"
+  },
+  "claims": [
+    {
+      "id": "earned-continue",
+      "variant": "closure-second-01",
+      "sensor": "directed-browser",
+      "group": "continue",
+      "source": {
+        "id": "earned-continue",
+        "variant": "closure-second-01"
+      },
+      "expected": {
+        "path": "planos/tasks/approved-narrative-dialogue-staging/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-10",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Independent required outcome or earned Continue boundary, unchanged candidate."
+  }
+}

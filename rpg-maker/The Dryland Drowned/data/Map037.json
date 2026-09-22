@@ -2645,6 +2645,18 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Basic_EnterBust",
                                 "Basic_EnterBust",
@@ -2657,7 +2669,7 @@
                                     "StartOffsetY:eval": "0",
                                     "EasingType:str": "OutSine",
                                     "HorzMirror:str": "None",
-                                    "Duration:eval": "0"
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
                         },
@@ -2686,7 +2698,7 @@
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetX:str": "320",
-                                    "TargetY:str": "725",
+                                    "TargetY:str": "454.904",
                                     "EasingType:str": "InOutSine",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
@@ -2764,6 +2776,23 @@
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "34",
                                     "TargetScaleY:str": "34",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -3170,6 +3199,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3195,6 +3241,23 @@
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "34",
                                     "TargetScaleY:str": "34",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -3271,6 +3334,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3296,6 +3376,23 @@
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "34",
                                     "TargetScaleY:str": "34",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -3458,7 +3555,7 @@
                                     "StartOffsetY:eval": "0",
                                     "EasingType:str": "OutSine",
                                     "HorzMirror:str": "None",
-                                    "Duration:eval": "0"
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
                         },
@@ -3487,7 +3584,7 @@
                                 {
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetX:str": "960",
-                                    "TargetY:str": "725",
+                                    "TargetY:str": "454.664",
                                     "EasingType:str": "InOutSine",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
@@ -3527,6 +3624,23 @@
                             "indent": 1,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "470.792",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3547,6 +3661,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "44",
                                     "TargetScaleY:str": "44",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "454.664",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -3618,6 +3749,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3638,6 +3786,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "42",
                                     "TargetScaleY:str": "42",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "466.952",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -3681,6 +3846,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3701,6 +3883,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "42",
                                     "TargetScaleY:str": "42",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "466.952",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -3777,6 +3976,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "470.792",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3797,6 +4013,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "44",
                                     "TargetScaleY:str": "44",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "454.664",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -3840,6 +4073,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "470.792",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3860,6 +4110,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "44",
                                     "TargetScaleY:str": "44",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "454.664",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -3936,6 +4203,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -3956,6 +4240,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "42",
                                     "TargetScaleY:str": "42",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "466.952",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -3999,6 +4300,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -4019,6 +4337,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "42",
                                     "TargetScaleY:str": "42",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "466.952",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -4095,6 +4430,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -4115,6 +4467,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "42",
                                     "TargetScaleY:str": "42",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "466.952",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -4158,6 +4527,23 @@
                             "indent": 2,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -4178,6 +4564,23 @@
                                     "PictureID:arrayeval": "[\"63\"]",
                                     "TargetScaleX:str": "42",
                                     "TargetScaleY:str": "42",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "466.952",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -4256,6 +4659,56 @@
                             "parameters": [
                                 44
                             ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_ExitBusts",
+                                "Basic_ExitBusts",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "EndOffsetX:eval": "0",
+                                    "EndOffsetY:eval": "0",
+                                    "EasingType:str": "InSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20",
+                                    "AutoErase:eval": "true"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "!$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 230,
+                            "indent": 2,
+                            "parameters": [
+                                20
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
                         },
                         {
                             "code": 119,
@@ -4447,6 +4900,23 @@
                             "indent": 3,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -4472,6 +4942,23 @@
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "34",
                                     "TargetScaleY:str": "34",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -4659,6 +5146,23 @@
                             "indent": 3,
                             "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
                                 "Tone_CustomToneBust",
                                 "Tone_CustomToneBust",
                                 {
@@ -4684,6 +5188,23 @@
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "34",
                                     "TargetScaleY:str": "34",
+                                    "Duration:eval": "20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "454.904",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
                                     "Duration:eval": "20"
                                 }
                             ]
@@ -4769,6 +5290,56 @@
                             "parameters": []
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_ExitBusts",
+                                "Basic_ExitBusts",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "EndOffsetX:eval": "0",
+                                    "EndOffsetY:eval": "0",
+                                    "EasingType:str": "InSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20",
+                                    "AutoErase:eval": "true"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "!$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 230,
+                            "indent": 2,
+                            "parameters": [
+                                20
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
                             "code": 119,
                             "indent": 1,
                             "parameters": [
@@ -4812,6 +5383,56 @@
                             "parameters": [
                                 "return"
                             ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_ExitBusts",
+                                "Basic_ExitBusts",
+                                {
+                                    "PictureID:arrayeval": "[\"60\", \"63\"]",
+                                    "EndOffsetX:eval": "0",
+                                    "EndOffsetY:eval": "0",
+                                    "EasingType:str": "InSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20",
+                                    "AutoErase:eval": "true"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "!$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 230,
+                            "indent": 1,
+                            "parameters": [
+                                20
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 108,

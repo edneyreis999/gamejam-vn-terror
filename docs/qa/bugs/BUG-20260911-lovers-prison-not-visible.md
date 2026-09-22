@@ -1,6 +1,6 @@
 # BUG-20260911-lovers-prison-not-visible: Retratos das amantes não mostram seu confinamento
 
-- **Status:** open
+- **Status:** resolved
 - **Impact (user-side):** Trust-Damage
 - **Severity:** Medium · **Priority:** P1
 - **Persona Affected:** Rui, revisor de conteúdo
@@ -41,3 +41,11 @@ Os dados de enquadramento e PNGs não mudaram desde essas capturas. A revisão p
 Não implementado. O contrato de Technical Art exige simultaneamente os12PNG inalterados e confinamento visível. A gramática aprovada deste incremento não inclui máscara/oclusão nem nova arte. Alterar ou criar PNGs violaria a restrição de preservação; nenhuma mudança de design foi inferida.
 
 Próxima ação técnica: preparar composição/arte de confinamento com Lucas em escopo que autorize essa alteração, ou reconciliar explicitamente o critério com o baseline visual pretendido. V007 permanece sem PASS integral até existir solução e captura verificável. Isso não depende de aprovação opcional de gosto artístico e não interrompe os lotes independentes do loop atual.
+
+## Reobservação — 2026-09-18
+
+Candidato approved-narrative-dialogue-staging: enquadramento corrigido para44%, mas ausência de prisão confirmada pelo agente nas capturas `docs/qa/evidence/init-rpg-maker-mz/task-08/IT-052/physical-0-lover.physical.warning.png` e `supernatural-0-lover.supernatural.warning.png`. Igrejа/figueira ao fundo e figuras livres em primeiro plano, sem pedra/raízes de oclusão. Status open/FAIL visual preservado; decisão de design solicitada, demais lotes continuam. Não foi criado bug duplicado.
+
+## Resolução — 2026-09-18, direção rústica
+
+O usuário autorizou criar as artes e refinou a direção: pedra/figueira antigas que sugerem figuras genéricas, sem aparência viva ou detalhes de identidade. CEs293/295/297/299 usam `Dryland_perola_confined`/`Dryland_florai_confined`. Originais preservados. IT-052/053 PASS nas duas ordens, perfis normal/reduzido,1280×720/1920×1080, HIDE, recompensa e Continue. Inspeção das imagens reais confirma a prisão como o próprio material da figura. A ausência de confinamento está resolvida; aceite criativo final da nova arte permanece separado em verification.md da spec. Capturas: [Pérola](../deliveries/approved-narrative-dialogue-staging/confinement/perola.png) e [Floraí](../deliveries/approved-narrative-dialogue-staging/confinement/florai.png).
