@@ -14,8 +14,7 @@ Como o grupo deve escapar?
 
 **Falha:** a data atual aparece por inteiro, e a mortalha cai sobre o grupo. Para abrir uma saída, um dos heróis precisa escrever o próprio nome no tecido e aceitar o presságio. A mortalha se rasga e liberta os outros, mas se fecha ao redor de quem escreveu o nome.
 
-
-## sucesos despiníveis
+## Sucessos por abordagem
 
 1. **Encontrar o grito que soa ao contrário**
 
@@ -23,7 +22,7 @@ Todos os gritos produzem ecos, mas um deles parece surgir antes do som original.
 
 2. **Descobrir qual morte não pertence ao grupo**
 
-As datas escritas na mortalha seguem uma ordem, mas uma delas aconteceu antes do nascimento de todos. O grupo percebe que essa morte não pertence a ninguém presente. Quando a data falsa é separada das outras, os nomes desaparecem e o tecido volta para o teto.
+As datas futuras escritas na mortalha seguem uma ordem. Ao compará-las com os nomes que surgem no tecido, o grupo encontra uma morte atribuída a alguém que não está na expedição. Quando a data falsa é separada das outras, os nomes desaparecem e o tecido volta para o teto.
 
 3. **Seguir as penas até uma passagem segura**
 
