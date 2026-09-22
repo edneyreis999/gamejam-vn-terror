@@ -20,6 +20,7 @@
 
 # Planejamento e entregas
 
+- Ao planejar, executar ou verificar tarefas, aplique as ADRs G004–G006 em `docs/adrs/README.md`: autonomia de reorganização, exclusão de testes de gamepad e testes pesados por risco com encerramento dos recursos abertos pelo agente.
 - Antes de planejar trabalho, distribuir responsáveis, registrar bugs ou operar o Trello, leia `docs/_memory/trello-workflow.md` para o quadro, as regras de execução, a equipe e a autenticação.
 - Siga `.gitmessage` ao preparar mensagens de commit, inclusive com `git commit -m`.
 - Siga `.github/pull_request_template.md` ao preparar pull requests.

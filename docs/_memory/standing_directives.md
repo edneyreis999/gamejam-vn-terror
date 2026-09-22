@@ -43,3 +43,15 @@ Record only executed validation, keep human-only checks explicit, and preserve t
 ## SD-011 — No Implicit Decisions
 
 Do not resolve pending narrative, character, treasure, art-direction, publication, persistence, or audio decisions through placeholders or implementation convenience.
+
+## SD-012 — Task Execution Autonomy
+
+Apply [ADR-G004](../adrs/adr-g004-autonomia-do-harness-na-execucao-de-tarefas.md): reconcile organizational dependencies and verification ownership without renewed approval when approved behavior, required evidence and acceptance remain intact. Record transfers in existing task/verification artifacts; a transferred obligation remains open at its destination.
+
+## SD-013 — Gamepad Test Scope
+
+Apply [ADR-G005](../adrs/adr-g005-exclusao-de-testes-de-gamepad.md): exclude manual and automated gamepad tests from current and future campaigns, preserving functionality and existing code/evidence. Record any existing obligation as explicitly waived, never as an executed pass; retain other inputs and human checks.
+
+## SD-014 — Risk-Based Heavy Tests and Teardown
+
+Apply [ADR-G006](../adrs/adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md): group heavy checks and omit only evidenced redundancies, retaining representative E2E, distinct risks and human acceptance. Record equivalence, residual risk and invalidation conditions. At every session end, including failure/blockage/cancellation, confirm closure of apps, tabs and auxiliary processes opened by the agent, preserving preexisting user resources.

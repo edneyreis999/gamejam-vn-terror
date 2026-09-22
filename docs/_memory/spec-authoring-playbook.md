@@ -64,6 +64,9 @@ Every new or replaced GDD rule must state its status. A local prototype detail m
 
 ## Evidence and Handoff
 
+- Apply [ADR-G004](../adrs/adr-g004-autonomia-do-harness-na-execucao-de-tarefas.md), [ADR-G005](../adrs/adr-g005-exclusao-de-testes-de-gamepad.md) and [ADR-G006](../adrs/adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md) during authoring, decomposition, execution and final verification. Organizational reconciliation and eligible risk-based omissions do not need renewed approval; product changes still do.
+- Mark gamepad tests out of scope before decomposition. Keep required outcomes, sensors and owners explicit; select heavy checks by distinct risk and preserve representative E2E. Reconcile existing matrices with grouped representatives and justified omissions before closure; preserve historical approvals and results.
+- Keep executed results, explicit waivers, omissions for redundancy/covered risk, and pending/blocked checks distinct. Policy adoption alone closes no delivery. Plan teardown and report confirmed closure of resources opened by the agent, preserving preexisting user sessions.
 - Record only commands, browser walks, screenshots, and human checks actually performed.
 - Keep VoiceOver, cultural/editorial approval, and other human-only checks explicit until a person performs them.
 - Preserve or update the devlog moment and capture suggestion when the visible flow changes.
