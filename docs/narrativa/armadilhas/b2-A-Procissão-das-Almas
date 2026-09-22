@@ -1,0 +1,30 @@
+## B2. A Procissão das Almas
+
+**Uma procissão de figuras cobertas atravessa o corredor sem mover os pés. Cada uma carrega uma vela acesa e um pano bordado com o nome de um dos heróis.**
+
+**Quando uma chama se apaga, o herói ligado àquela vela começa a desaparecer das lembranças dos companheiros. Se todas se apagarem, ninguém no grupo conseguirá lembrar quem esteve ali.**
+
+Como o grupo deve escapar?
+
+1. Encontrar a única figura cuja sombra aponta para o lado contrário da luz.
+
+2. Romper o feitiço que liga os nomes bordados nos panos aos heróis.
+
+3. Desmanchar a costura de cada nome sem rasgar os panos da procissão.
+
+**Falha:** todas as velas se apagam, e a procissão passa a reconhecer o grupo como parte do cortejo. Para afastar as almas, um dos heróis precisa tomar a vela da frente e seguir com os mortos. A procissão vai embora levando o herói, enquanto os outros conseguem escapar.
+
+
+## sucesos despiníveis
+
+1. **Encontrar a figura com a sombra errada**
+
+Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado contrário. Quando essa figura é retirada da frente da procissão, as outras almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos panos e o grupo é libertado.
+
+2. **Apagar a ligação entre os nomes e a procissão**
+
+As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão.
+
+3. **Desfazer os nomes bordados nos panos** 
+
+Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas abrem espaço no meio da procissão e deixam o grupo passar.
