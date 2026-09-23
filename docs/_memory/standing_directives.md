@@ -55,3 +55,9 @@ Apply [ADR-G005](../adrs/adr-g005-exclusao-de-testes-de-gamepad.md): exclude man
 ## SD-014 — Risk-Based Heavy Tests and Teardown
 
 Apply [ADR-G006](../adrs/adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md): group heavy checks and omit only evidenced redundancies, retaining representative E2E, distinct risks and human acceptance. Record equivalence, residual risk and invalidation conditions. At every session end, including failure/blockage/cancellation, confirm closure of apps, tabs and auxiliary processes opened by the agent, preserving preexisting user resources.
+
+Explicit exception: [revised-trap-prose-integration ADR-003](../../planos/tasks/revised-trap-prose-integration/adrs/adr-003-proportionate-prose-verification.md) waives integration/E2E and related regression matrices for that prose-only increment under D-005; it does not change the default for other specs.
+
+## SD-015 — Self-Produced Test Saves
+
+A spec must not depend on external, user-provided, preexisting or another spec's saves. Start testing from a new campaign on its candidate and produce the needed saves during the tests through normal player inputs and the existing save mechanism. Reuse only that run's own compatible saves, including resumption with recorded provenance; recreate affected saves after relevant authored-list changes. Save/load may serve navigation without becoming a persistence test requirement. No save/state/seed editing is authorized. User decision on 2026-09-22, recorded as D-006 in [revised-trap-prose-integration ADR-003](../../planos/tasks/revised-trap-prose-integration/adrs/adr-003-proportionate-prose-verification.md#independent-save-preparation--d-006).

@@ -145,6 +145,20 @@ async function nativeEncounter(t, options = {}) {
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMap.mapId() >= 7 && $gameMap.mapId() <= 14 && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
   return browser;
 }
+async function readDescription(browser, { leaveFinal = false } = {}) {
+  const state = await snapshot(browser);
+  const id = state.assignments[state.dungeonId][state.position - 1];
+  const mapId = (id[0] === 'A' ? 6 : 14) + Number(id.slice(1));
+  const map = JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(mapId).padStart(3,'0')}.json`, import.meta.url), 'utf8'));
+  const boxes = passageBoxes(map.events[1].pages[0].list, `encounter.${id}.01`);
+  for (const [index, box] of boxes.entries()) {
+    await pause(browser);
+    assert.equal(await browser.evaluate('$gameMessage.allText()'), box);
+    assert.deepEqual(await snapshot(browser), state, 'Description boxes do not commit a consequence');
+    if (leaveFinal && index === boxes.length - 1) break;
+    await browser.press('Enter', 13);
+  }
+}
 async function frames(browser, count = 4) {
   await browser.evaluate(`new Promise(resolve => { let count = ${count}; function frame() { if (--count <= 0) resolve(); else requestAnimationFrame(frame); } requestAnimationFrame(frame); })`);
 }
@@ -155,6 +169,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
     const before = await snapshot(browser), id = before.assignments.physical[0];
     assert.equal(await browser.evaluate('$gameMap.mapId()'), Number(id.slice(1)) + 6);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${id}`);
+    await readDescription(browser, { leaveFinal: true });
     await browser.call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
     await frames(browser, 20);
     const after = await snapshot(browser);
@@ -169,6 +184,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
     // Restore the same native pre-description input to exercise the mouse boundary.
     await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(before)}; $gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Map);`);
     await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
+    await readDescription(browser, { leaveFinal: true });
     for (const clickCount of [1, 2]) {
       await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', button: 'left', x: 640, y: 605, clickCount });
       await frames(browser, 2);
@@ -184,7 +200,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
 canonicalCase('IT-049', 'repeated native rereading is observational and restores the same choices and focus', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);
   const description = await browser.evaluate('$gameMessage.allText()');
-  await browser.press('Enter', 13);
+  await readDescription(browser);
   await choices(browser, 'approaches');
   const before = await snapshot(browser), labels = await browser.evaluate('$gameMessage.choices()');
   for (let repeat = 0; repeat < 3; repeat++) {
@@ -193,7 +209,7 @@ canonicalCase('IT-049', 'repeated native rereading is observational and restores
     assert.equal(await browser.evaluate('$gameMessage.allText()'), description);
     assert.deepEqual(await snapshot(browser), before);
     assert.equal(await browser.evaluate('$gameScreen.picture(18) == null'), true);
-    await browser.press('Enter', 13);
+    await readDescription(browser);
     await choices(browser, 'approaches');
     assert.deepEqual(await browser.evaluate('$gameMessage.choices()'), labels);
     assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 3);
@@ -209,7 +225,7 @@ canonicalCase('IT-049', 'repeated native rereading is observational and restores
 canonicalCase('IT-051', 'success uses native text on the same encounter artwork with no hero or success illustration', { timeout: 90000 }, async t => {
   const browser = await nativeEncounter(t);
   const before = await snapshot(browser), background = await browser.evaluate('$gameScreen.picture(1).name()');
-  await browser.press('Enter', 13);
+  await readDescription(browser);
   await activate(browser, 'approaches', 0);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'approach_result' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   assert.equal((await snapshot(browser)).pendingOutcome.success, true);
@@ -241,11 +257,6 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
     const mapId = (id[0] === 'A' ? 6 : 14) + Number(id.slice(1));
     const map = JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(mapId).padStart(3,'0')}.json`,import.meta.url),'utf8'));
     const list = map.events[1].pages[0].list;
-    function passageText(passageId) {
-      const start = list.findIndex(command => command.code === 357 && command.parameters[1] === 'Query' && command.parameters[3].id === passageId);
-      assert.ok(start >= 0, passageId);
-      return list.slice(start).find(command => command.code === 401).parameters[0];
-    }
     async function assertLocalPause(expected, text) {
       await pause(browser);
       assert.deepEqual(await snapshot(browser),expected,id+' native campaign');
@@ -262,8 +273,10 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
       const intro = accepted(seed,'ENTER_DUNGEON'), choice = complete(intro);
       if(index===0&&success){
         await installPhase(browser,intro);
-        await assertLocalPause(intro,passageText(`encounter.${id}.01`));
-        await browser.press('Enter',13);
+        for (const text of passageBoxes(list, `encounter.${id}.01`)) {
+          await assertLocalPause(intro, text);
+          await browser.press('Enter',13);
+        }
       } else await installPhase(browser,choice);
       await choices(browser,'approaches');
       assert.deepEqual(await snapshot(browser),choice);
@@ -271,8 +284,11 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
       if(id==='A1'&&index===0&&success){
         const labels=await browser.evaluate('$gameMessage.choices()');
         await activate(browser,'approaches',3);
-        await assertLocalPause(choice,passageText('encounter.A1.01'));
-        await browser.press('Enter',13);await choices(browser,'approaches');
+        for (const text of passageBoxes(list, 'encounter.A1.01')) {
+          await assertLocalPause(choice, text);
+          await browser.press('Enter',13);
+        }
+        await choices(browser,'approaches');
         assert.deepEqual(await browser.evaluate('$gameMessage.choices()'),labels);
         assert.deepEqual(await snapshot(browser),choice,'Reread is observational');
         await activate(browser,'approaches',4);await choices(browser,'retreat');
@@ -292,7 +308,7 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
       await activate(browser,'approaches',index);
       const passageId=`result.${id}-${index+1}.${success?'success':'failure'}.01`;
       const boxes=passageBoxes(list,passageId);
-      if(approvedSuccesses[passageId]) assert.equal(normalize(boxes.join(' ')),approvedSuccesses[passageId].text,'Pinned PR18 prose is the independent oracle');
+      if(approvedSuccesses[passageId]) assert.equal(normalize(boxes.join(' ')),approvedSuccesses[passageId].text,'Pinned approved catalogue prose is the independent oracle');
       await assertLocalPause(result,boxes[0]);
       await browser.waitFor(`encounterWrites.length===${writesBefore+1}&&encounterWrites.at(-1).done`);
       assert.deepEqual(await browser.evaluate('encounterWrites.slice('+writesBefore+')'),[{sequence:result.sequence,done:true}]);

@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Reunir datas, nomes e riscos nas portas para reconstruir a convocação original\"",
+                  "center:json": "\"\\\\FS[22]Juntar as datas, os nomes e as marcas nas portas para descobrir\\ncomo a aparição foi chamada pela primeira vez.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Recusar o reflexo corrigido que promete devolver mortos e apagar culpas\"",
+                  "center:json": "\"\\\\FS[22]Recusar o reflexo perfeito que promete trazer pessoas mortas de\\nvolta e apagar antigas culpas.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar o espelho mais antigo da parede e virá-lo contra os demais\"",
+                  "center:json": "\"\\\\FS[22]Arrancar o espelho mais antigo da parede e virá-lo contra os\\noutros.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Reunir datas, nomes e riscos nas portas para reconstruir a convocação original<Bind Picture: 50><Hide Choice Window>",
-                  "Recusar o reflexo corrigido que promete devolver mortos e apagar culpas<Bind Picture: 51><Hide Choice Window>",
-                  "Arrancar o espelho mais antigo da parede e virá-lo contra os demais<Bind Picture: 52><Hide Choice Window>",
+                  "Juntar as datas, os nomes e as marcas nas portas para descobrir como a aparição foi chamada pela primeira vez.<Bind Picture: 50><Hide Choice Window>",
+                  "Recusar o reflexo perfeito que promete trazer pessoas mortas de volta e apagar antigas culpas.<Bind Picture: 51><Hide Choice Window>",
+                  "Arrancar o espelho mais antigo da parede e virá-lo contra os outros.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Reunir datas, nomes e riscos nas portas para reconstruir a convocação original<Bind Picture: 50><Hide Choice Window>"
+                "Juntar as datas, os nomes e as marcas nas portas para descobrir como a aparição foi chamada pela primeira vez.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Recusar o reflexo corrigido que promete devolver mortos e apagar culpas<Bind Picture: 51><Hide Choice Window>"
+                "Recusar o reflexo perfeito que promete trazer pessoas mortas de volta e apagar antigas culpas.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Arrancar o espelho mais antigo da parede e virá-lo contra os demais<Bind Picture: 52><Hide Choice Window>"
+                "Arrancar o espelho mais antigo da parede e virá-lo contra os outros.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A sequência original da convocação é reconstruída e interrompida."
+                "As datas, os nomes e os riscos nas portas formam uma sequência. O grupo descobre qual foi a ordem usada para chamar a figura do espelho. A sequência é repetida até o último passo, que não é realizado. Sem completar o chamado, a figura desaparece e os espelhos voltam ao normal."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O reflexo corrigido é recusado, e a troca perde força."
+                "O espelho mostra pessoas perdidas e uma vida sem culpa, mas essas imagens não são verdadeiras. O grupo recusa a troca e não aceita os reflexos como parte do mundo real. Sem conseguir enganar ninguém, a figura fica presa no vidro e desaparece."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O espelho mais antigo é arrancado e voltado contra os demais."
+                "O espelho mais antigo é retirado da parede e virado para os demais. A figura aparece em vários reflexos ao mesmo tempo e acaba presa entre eles. Os vidros escurecem, a aparição desaparece e o caminho fica livre."
               ]
             },
             {
@@ -5494,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Um banheiro escolar apodrecido repete o grupo em espelhos que não refletem a mesma hora. A figura loira aparece sempre no vidro mais antigo e troca detalhes com quem a observa: primeiro o uniforme, depois o rosto, por fim o lugar fora do espelho."
+                "O grupo entra em um banheiro escolar abandonado. Vários espelhos cobrem as paredes, mas cada um mostra um horário diferente. Mesmo quando os heróis se movem juntos, seus reflexos não repetem os gestos ao mesmo tempo."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Uma figura loira aparece sempre no espelho mais antigo. Aos poucos, ela troca de lugar com quem a observa: primeiro copia a roupa, depois toma o rosto da pessoa e, por fim, tenta sair do espelho em seu lugar.<br>Como o grupo deve escapar?"
               ]
             },
             {

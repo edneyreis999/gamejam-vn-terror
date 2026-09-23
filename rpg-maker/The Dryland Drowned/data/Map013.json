@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Destravar os ganchos certos e abrir espaço entre os sacos\"",
+                  "center:json": "\"\\\\FS[22]Destravar os ganchos certos e abrir uma passagem entre os sacos.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Balançar entre as correntes e alcançar a saída antes da prensa\"",
+                  "center:json": "\"\\\\FS[22]Balançar pelas correntes e alcançar a saída antes que a prensa\\nseja ativada.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda\"",
+                  "center:json": "\"\\\\FS[22]Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Destravar os ganchos certos e abrir espaço entre os sacos<Bind Picture: 50><Hide Choice Window>",
-                  "Balançar entre as correntes e alcançar a saída antes da prensa<Bind Picture: 51><Hide Choice Window>",
-                  "Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda<Bind Picture: 52><Hide Choice Window>",
+                  "Destravar os ganchos certos e abrir uma passagem entre os sacos.<Bind Picture: 50><Hide Choice Window>",
+                  "Balançar pelas correntes e alcançar a saída antes que a prensa seja ativada.<Bind Picture: 51><Hide Choice Window>",
+                  "Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Destravar os ganchos certos e abrir espaço entre os sacos<Bind Picture: 50><Hide Choice Window>"
+                "Destravar os ganchos certos e abrir uma passagem entre os sacos.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Balançar entre as correntes e alcançar a saída antes da prensa<Bind Picture: 51><Hide Choice Window>"
+                "Balançar pelas correntes e alcançar a saída antes que a prensa seja ativada.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda<Bind Picture: 52><Hide Choice Window>"
+                "Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,21 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os ganchos certos são soltos um após o outro. Os sacos se afastam para os<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "lados e deixam um corredor livre no meio do depósito. As vozes continuam<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
+                "Os ganchos certos são soltos um após o outro. Os sacos se afastam para os lados e deixam um corredor livre no meio do depósito. As vozes continuam pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
               ]
             },
             {
@@ -4257,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo usa as correntes para passar por cima dos sacos e dos ganchos. Cada<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "balanço leva todos para mais perto da saída e para longe da prensa. Quando a<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "máquina esmaga os sacos, o grupo já está em segurança do outro lado."
+                "O grupo usa as correntes para passar por cima dos sacos e dos ganchos. Cada balanço leva todos para mais perto da saída e para longe da prensa. Quando a máquina esmaga os sacos, o grupo já está em segurança do outro lado."
               ]
             },
             {
@@ -4685,39 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As vozes imitam pessoas conhecidas e pedem para serem libertadas, mas ninguém<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "responde. Sem conseguir enganar o grupo, elas começam a se confundir e a"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "até a saída permanece aberto."
+                "As vozes imitam pessoas conhecidas e pedem para serem libertadas, mas ninguém responde. Sem conseguir enganar o grupo, elas começam a se confundir e a chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho até a saída permanece aberto."
               ]
             },
             {
@@ -5554,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Sacos pendem de ganchos móveis em um depósito sem janelas. Alguns contêm apenas areia; outros se debatem e chamam os heróis pelas vozes de pessoas conhecidas enquanto uma esteira conduz todos para uma prensa."
+                "O grupo entra em um depósito sem janelas. Dezenas de sacos pendem de ganchos presos a correntes que se movem pelo teto. Alguns parecem conter apenas areia. Outros se debatem e chamam os heróis usando as vozes de pessoas conhecidas."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Os ganchos levam todos os sacos até uma enorme prensa no fim do corredor. Conforme as correntes avançam, fica cada vez mais difícil alcançar a saída.<br>Como o grupo deve escapar?"
               ]
             },
             {

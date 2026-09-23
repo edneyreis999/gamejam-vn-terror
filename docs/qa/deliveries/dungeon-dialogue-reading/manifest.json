@@ -1,0 +1,25 @@
+{
+  "purpose": "Accepted continuous dungeon dialogue: 89 fewer native message boxes; MessageCore EndPadding 32 via parameter only. Selected actual captures for delivery/devlog; no publication.",
+  "acceptance": {
+    "date": "2026-09-23",
+    "quote": "faça o final verify. testei aqui e está aprovado"
+  },
+  "verification": "../../../../planos/tasks/dungeon-dialogue-reading/verification.md",
+  "captures": [
+    {
+      "path": "B4-description.png",
+      "source": "docs/qa/evidence/dungeon-dialogue-reading/runs/aa879535-8ebd-44c3-a09b-c7355cffbba1/reading-7-encounter-B4-01.png",
+      "sha256": "cb14e0de7c2031586bafd55e45c4e1d22f7dc1c92e493dc9dfd434c6b2ad4a9b"
+    },
+    {
+      "path": "B3-success.png",
+      "source": "docs/qa/evidence/dungeon-dialogue-reading/runs/aa879535-8ebd-44c3-a09b-c7355cffbba1/reading-15-result-B3-3-success-01.png",
+      "sha256": "3893a1b720126a6a997814608ceb214f7ae548fe03e7d3230a54dd3c1a7ffae6"
+    },
+    {
+      "path": "first-closure.png",
+      "source": "docs/qa/evidence/dungeon-dialogue-reading/runs/aa879535-8ebd-44c3-a09b-c7355cffbba1/reading-4-closure-first-01.png",
+      "sha256": "0ca84eb5e725920f201e065d8ea4e678949f44166d81e359206fa74da34561f7"
+    }
+  ]
+}

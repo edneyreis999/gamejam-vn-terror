@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Comparar cada grito com o eco e localizar o presságio que soa ao contrário\"",
+                  "center:json": "\"\\\\FS[22]Comparar cada grito com seu eco e encontrar o som que se repete\\nao contrário.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Interpretar a ordem das datas e descobrir qual morte não pertence ao grupo\"",
+                  "center:json": "\"\\\\FS[22]Examinar a ordem das datas e descobrir qual morte não pertence ao\\ngrupo.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Seguir penas e correntes de ar até uma passagem que o tecido não alcança\"",
+                  "center:json": "\"\\\\FS[22]Seguir as penas e as correntes de ar até uma passagem fora do\\nalcance do tecido.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Comparar cada grito com o eco e localizar o presságio que soa ao contrário<Bind Picture: 50><Hide Choice Window>",
-                  "Interpretar a ordem das datas e descobrir qual morte não pertence ao grupo<Bind Picture: 51><Hide Choice Window>",
-                  "Seguir penas e correntes de ar até uma passagem que o tecido não alcança<Bind Picture: 52><Hide Choice Window>",
+                  "Comparar cada grito com seu eco e encontrar o som que se repete ao contrário.<Bind Picture: 50><Hide Choice Window>",
+                  "Examinar a ordem das datas e descobrir qual morte não pertence ao grupo.<Bind Picture: 51><Hide Choice Window>",
+                  "Seguir as penas e as correntes de ar até uma passagem fora do alcance do tecido.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Comparar cada grito com o eco e localizar o presságio que soa ao contrário<Bind Picture: 50><Hide Choice Window>"
+                "Comparar cada grito com seu eco e encontrar o som que se repete ao contrário.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Interpretar a ordem das datas e descobrir qual morte não pertence ao grupo<Bind Picture: 51><Hide Choice Window>"
+                "Examinar a ordem das datas e descobrir qual morte não pertence ao grupo.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Seguir penas e correntes de ar até uma passagem que o tecido não alcança<Bind Picture: 52><Hide Choice Window>"
+                "Seguir as penas e as correntes de ar até uma passagem fora do alcance do tecido.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O presságio invertido é localizado entre os ecos."
+                "Todos os gritos produzem ecos, mas um deles parece surgir antes do som original. Seguindo esse eco estranho, o grupo encontra o ponto onde a mortalha está sendo formada. Quando essa parte do tecido é desfeita, as datas desaparecem e a faixa cai no chão."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A data estranha é retirada da ordem imposta pela mortalha."
+                "As datas futuras escritas na mortalha seguem uma ordem. Ao compará-las com os nomes que surgem no tecido, o grupo encontra uma morte atribuída a alguém que não está na expedição. Quando a data falsa é separada das outras, os nomes desaparecem e o tecido volta para o teto."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Penas e correntes de ar conduzem a uma passagem fora do tecido."
+                "As penas no chão são empurradas por uma corrente de ar que a mortalha não consegue alcançar. O grupo segue esse caminho estreito enquanto o tecido desce ao redor. A mortalha tenta fechar a passagem, mas se rasga, e todos conseguem chegar ao outro lado."
               ]
             },
             {
@@ -5494,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grito de uma ave invisível rasga o teto e deixa cair uma faixa branca coberta por datas futuras. A cada novo grito, uma das datas se aproxima do presente e o nome de um herói começa a surgir no tecido."
+                "O grito de uma ave invisível corta o silêncio e abre um rasgo no teto. Uma longa faixa de tecido branco cai pela abertura, coberta por datas que ainda não aconteceram."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "A cada novo grito, uma das datas muda e se aproxima do dia atual. Ao mesmo tempo, o nome de um dos heróis começa a aparecer no tecido. Quando a data chegar ao presente, o presságio de morte estará completo.<br>Como o grupo deve escapar?"
               ]
             },
             {

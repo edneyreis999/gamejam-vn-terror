@@ -1,0 +1,130 @@
+{
+  "base": "04d5253e81fcd22ec0c120b9e82bd17d2bf541c1",
+  "runId": "e8a6bfee-ae8b-4299-b739-0347693799fa",
+  "localRawEvidence": "docs/qa/evidence/revised-trap-prose-integration/task-05/runs/e8a6bfee-ae8b-4299-b739-0347693799fa",
+  "rawReportSha256": "351ff8837dc8e395e767b4a0b1d132c21a2672e3513cabcb56ede3449ec68e94",
+  "environment": {
+    "browser": "153.0.8010.53",
+    "node": "v22.23.2",
+    "platform": "darwin",
+    "release": "25.5.0",
+    "arch": "arm64"
+  },
+  "viewport": [
+    1280,
+    720
+  ],
+  "inspection": {
+    "reviewer": "Codex /root",
+    "date": "2026-09-22",
+    "choices": "PASS — all 16 screens / 48 complete labels viewed",
+    "prose": "PASS — five named samples viewed; unviewed boxes are not certified",
+    "waived": "engine integration, E2E, controls, Continue, second resolution, gamepad"
+  },
+  "images": [
+    {
+      "path": "choices-A1.png",
+      "sha256": "22a9c18659511b7b3b5c104bb6887c3fd59f0e13ecd4554d48d8c1a044eca236"
+    },
+    {
+      "path": "choices-A2.png",
+      "sha256": "e659ee9cc97f80d42f7e2c27e5bb43cdc72e00db4591de80c0e18dbaf5174b2f"
+    },
+    {
+      "path": "choices-A3.png",
+      "sha256": "197d53dc8f6fc50399dcd0d92e10406960ff7f5bb08f88296cb5e76ba0d70fc6"
+    },
+    {
+      "path": "choices-A4.png",
+      "sha256": "bb1e920a9d2357eba0239e87d755b0486bbe0dc4e1e2cd12bd5912a5c90c5cd3"
+    },
+    {
+      "path": "choices-A5.png",
+      "sha256": "9a4151bc82636682b051c054989133b591ea698ba865ffca6fa1ba78b1cad6a6"
+    },
+    {
+      "path": "choices-A6.png",
+      "sha256": "0e80204f82751625d403411e12197e7ab7428d347ad05af686d6d9b10374d91e"
+    },
+    {
+      "path": "choices-A7.png",
+      "sha256": "e8994d2af3c437d204efc2ee345b7a5d45f0099596c113c23b24a81883ecd5f9"
+    },
+    {
+      "path": "choices-A8.png",
+      "sha256": "c477f808afd3b9c8da14bfdfff474600f74136e66c9eb2bd0c9f8d92ed1d5a9b"
+    },
+    {
+      "path": "choices-B1.png",
+      "sha256": "8b7ede82e90378215f8d092ef37e1b4cf86b1866aac56085b8db9cc450fb2bd3"
+    },
+    {
+      "path": "choices-B2.png",
+      "sha256": "908cd81ec245266537dfced1d0c17b76d5a672e255c53bdcf705cd5b81f9e2c0"
+    },
+    {
+      "path": "choices-B3.png",
+      "sha256": "0559b7b0161142393a07395a870c3454d0486472c6b6a21d4017808adb0db524"
+    },
+    {
+      "path": "choices-B4.png",
+      "sha256": "72f6bb93f3ee42300fc96cb942dccd2fc719c848fd5487253238bcad604aa234"
+    },
+    {
+      "path": "choices-B5.png",
+      "sha256": "50e4442a4517a6590ee338c67efc68cc5217b74d8bdfa8f64189cdb0b978ae03"
+    },
+    {
+      "path": "choices-B6.png",
+      "sha256": "b69d238f4e93dc4cf8dde8a236876b1541e7d83e8a049893477de0c1473db6c6"
+    },
+    {
+      "path": "choices-B7.png",
+      "sha256": "e47a7e90bb7b4bdabd7eaaed73574cf030ed9337ab8d8d0feba7241d70a5f666"
+    },
+    {
+      "path": "choices-B8.png",
+      "sha256": "17f1203d47a3069b9ed55d8caf03c6269801ddc91b4979eb494ac5c4b9883664"
+    },
+    {
+      "path": "prose-1-encounter-A7-01-box1.png",
+      "sha256": "fe2e8ba6965efef134293925c407140c3667bcc467d19a9c339567beee802547"
+    },
+    {
+      "path": "prose-2-encounter-A7-01-box5.png",
+      "sha256": "4d5a1c849aa4a98c794a17ccfd687c6b9dcf56300f964071e52f9e3abea66b94"
+    },
+    {
+      "path": "prose-3-result-A7-1-success-01-box1.png",
+      "sha256": "630fec301628fafc67a7ca38b07669922d4ade85fb3f0b5262a681dff575227e"
+    },
+    {
+      "path": "prose-4-result-A8-1-success-01-box1.png",
+      "sha256": "48602a21962da069b41a8d5015d58cca110b7b1589d153c5ce7b27b23dc8db07"
+    },
+    {
+      "path": "prose-5-death-A6-context-box1.png",
+      "sha256": "3a78bd2d02e689cc724e08c2b3f3c82de09155c75bfd99a9d1e678532156cab6"
+    }
+  ],
+  "gameSources": {
+    "data/CommonEvents.json": "71238ecc4cc660c3bea7a2edc9ecd40f250e8327957dfa2c9b64ed1e340c838f",
+    "data/Map007.json": "b154afabf584d2ab623a5c8f66941ece3f7baa3cc2420e07b246e3236dc52caa",
+    "data/Map008.json": "c8b8ab57aab58979b966aa968c7d214ac959fc28b7a4944fca3fecb9011624a4",
+    "data/Map009.json": "c42f33b7d45b189fd5a3180ea38063f75e3ef7e3bf83684250a0c6fb6af3d270",
+    "data/Map010.json": "199422ce7c773786beea79328b8bf14be200c24611a260b75ce088ef014f62c1",
+    "data/Map011.json": "8ca0395d0ff225f30ad780ce6ca5ad151139c23f21a90ab10c3d43259f603137",
+    "data/Map012.json": "a16368020376470719bf7cd5e2558d3fde9cc3fc881edecddf9cbec5a70d15b0",
+    "data/Map013.json": "36286a40e51e04f5180ab1cf2505d8b91a50089b1882f553d4715c6c5f11fd1c",
+    "data/Map014.json": "3d3cc3990a89f524acf689e0989866a0a2d4cb93be6679f2c25e131edf69e678",
+    "data/Map015.json": "07b6f876b31f15886dc37731bc3c65a161dafd981abdf654ae7e50d81faf5ca0",
+    "data/Map016.json": "1590cd4629d8c96bcb2e22095793e90c151dad7e41baa1233f4bafd3154e7df4",
+    "data/Map017.json": "248cc8335901b3580dd8dd02ef83609bde7dccd0209958b04ffe9fbfe8f304a5",
+    "data/Map018.json": "c47e05dfabf8e5fcf2e47ddd234cd26594859e51ea99b26e8bd9bf19014d3652",
+    "data/Map019.json": "055157b369f856d4a205903ebf4f8a1bf7c630f7ad6a50ea8e29abc411a7cbdf",
+    "data/Map020.json": "e37452b4401fced28e3301fdd0514ab1d1a76201b6223ab4229a8c624ae86231",
+    "data/Map021.json": "a1ebcd17e13963dc13ad1d6ceacc17825b1c419df832474a6ee86cb5516d5262",
+    "data/Map022.json": "24a3cd20ad1c2c8c44853354993dca080722c36046139751f017abb30b0033af"
+  },
+  "gameFingerprint": "bc9256235ba640937247a10cd9fb08126cb2d8ac3ce4fd47cc1e7e3325ec40c0"
+}

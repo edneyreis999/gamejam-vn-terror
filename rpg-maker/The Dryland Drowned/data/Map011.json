@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Erguer a grade de alimentação e prender a carcaça em uma baia\"",
+                  "center:json": "\"\\\\FS[22]Erguer a grade de uma das baias e prender a criatura lá dentro.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desconectar o fecho do arreio sem tocar nas correntes aquecidas\"",
+                  "center:json": "\"\\\\FS[22]Abrir o fecho do arreio sem tocar nas correntes aquecidas.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Identificar o ciclo de pressão e abrir a válvula entre duas descargas\"",
+                  "center:json": "\"\\\\FS[22]Observar o ritmo da caldeira e abrir a válvula entre duas rajadas\\nde fogo.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Erguer a grade de alimentação e prender a carcaça em uma baia<Bind Picture: 50><Hide Choice Window>",
-                  "Desconectar o fecho do arreio sem tocar nas correntes aquecidas<Bind Picture: 51><Hide Choice Window>",
-                  "Identificar o ciclo de pressão e abrir a válvula entre duas descargas<Bind Picture: 52><Hide Choice Window>",
+                  "Erguer a grade de uma das baias e prender a criatura lá dentro.<Bind Picture: 50><Hide Choice Window>",
+                  "Abrir o fecho do arreio sem tocar nas correntes aquecidas.<Bind Picture: 51><Hide Choice Window>",
+                  "Observar o ritmo da caldeira e abrir a válvula entre duas rajadas de fogo.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Erguer a grade de alimentação e prender a carcaça em uma baia<Bind Picture: 50><Hide Choice Window>"
+                "Erguer a grade de uma das baias e prender a criatura lá dentro.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Desconectar o fecho do arreio sem tocar nas correntes aquecidas<Bind Picture: 51><Hide Choice Window>"
+                "Abrir o fecho do arreio sem tocar nas correntes aquecidas.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Identificar o ciclo de pressão e abrir a válvula entre duas descargas<Bind Picture: 52><Hide Choice Window>"
+                "Observar o ritmo da caldeira e abrir a válvula entre duas rajadas de fogo.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,39 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A grade pesada é levantada antes da chegada da criatura. Assim que a carcaça<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "de ferro entra na baia, a grade é solta e prende suas pernas. O fogo continua"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "saindo pelo pescoço, mas atinge apenas a parede de pedra. O caminho fica livre<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "para o grupo."
+                "A grade pesada é levantada antes da chegada da criatura. Assim que a carcaça de ferro entra na baia, a grade é solta e prende suas pernas. O fogo continua saindo pelo pescoço, mas atinge apenas a parede de pedra. O caminho fica livre para o grupo."
               ]
             },
             {
@@ -4275,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O fecho do arreio é aberto no pequeno intervalo entre os golpes das correntes.<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Sem o fecho, as correntes caem e se enrolam nas pernas da criatura. Ela tenta<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "correr, tropeça no próprio metal e não consegue alcançar o grupo."
+                "O fecho do arreio é aberto no pequeno intervalo entre os golpes das correntes. Sem o fecho, as correntes caem e se enrolam nas pernas da criatura. Ela tenta correr, tropeça no próprio metal e não consegue alcançar o grupo."
               ]
             },
             {
@@ -4703,39 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os foles fazem três estalos antes de cada jato de fogo. Depois do terceiro<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "som, a válvula é aberta e o vapor escapa pela chaminé. O fogo diminui até"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "desaparecer, e a criatura para de se mover. A cavalariça fica segura para a<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "travessia."
+                "Os foles fazem três estalos antes de cada jato de fogo. Depois do terceiro som, a válvula é aberta e o vapor escapa pela chaminé. O fogo diminui até desaparecer, e a criatura para de se mover. A cavalariça fica segura para a travessia."
               ]
             },
             {
@@ -5572,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma cavalariça de pedra abriga uma carcaça equina de ferro ligada a foles e caldeiras. Sem cabeça, ela percorre baias estreitas enquanto expele fogo pelo pescoço e arrasta correntes incandescentes pelo chão."
+                "O grupo entra em uma cavalariça de pedra dividida por baias estreitas. No centro está uma criatura mecânica com o corpo de um cavalo, feita de ferro e sem cabeça. Tubos ligam sua carcaça a grandes foles e a uma caldeira."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "A máquina começa a correr entre as baias. Chamas saem de seu pescoço aberto, enquanto correntes em brasa são arrastadas pelo chão. A saída fica do outro lado da cavalariça.<br>Como o grupo deve escapar?"
               ]
             },
             {

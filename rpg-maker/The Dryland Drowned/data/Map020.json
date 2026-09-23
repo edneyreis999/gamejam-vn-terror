@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Restituir ao poço o nome roubado pela canção e romper o chamado\"",
+                  "center:json": "\"\\\\FS[22]Devolver ao poço o nome roubado pela canção e quebrar o\\nencantamento.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Respirar contra a sensação de afogamento e recusar o próximo verso\"",
+                  "center:json": "\"\\\\FS[22]Controlar a respiração, resistir à sensação de afogamento e\\nrecusar o próximo verso.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desatar o trançado de cabelos sem romper o fio que sustenta a passagem\"",
+                  "center:json": "\"\\\\FS[22]Desfazer a trança de cabelos sem romper o fio que mantém a\\npassagem aberta.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Restituir ao poço o nome roubado pela canção e romper o chamado<Bind Picture: 50><Hide Choice Window>",
-                  "Respirar contra a sensação de afogamento e recusar o próximo verso<Bind Picture: 51><Hide Choice Window>",
-                  "Desatar o trançado de cabelos sem romper o fio que sustenta a passagem<Bind Picture: 52><Hide Choice Window>",
+                  "Devolver ao poço o nome roubado pela canção e quebrar o encantamento.<Bind Picture: 50><Hide Choice Window>",
+                  "Controlar a respiração, resistir à sensação de afogamento e recusar o próximo verso.<Bind Picture: 51><Hide Choice Window>",
+                  "Desfazer a trança de cabelos sem romper o fio que mantém a passagem aberta.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Restituir ao poço o nome roubado pela canção e romper o chamado<Bind Picture: 50><Hide Choice Window>"
+                "Devolver ao poço o nome roubado pela canção e quebrar o encantamento.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Respirar contra a sensação de afogamento e recusar o próximo verso<Bind Picture: 51><Hide Choice Window>"
+                "Controlar a respiração, resistir à sensação de afogamento e recusar o próximo verso.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Desatar o trançado de cabelos sem romper o fio que sustenta a passagem<Bind Picture: 52><Hide Choice Window>"
+                "Desfazer a trança de cabelos sem romper o fio que mantém a passagem aberta.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O nome volta ao poço, e o chamado se rompe."
+                "O nome escondido na canção é devolvido ao poço. Ele deixa de imitar as vozes do grupo e responde apenas com um som vindo das pedras. Sem o nome roubado para chamar novas vítimas, a música desaparece e os cabelos param de subir pelas paredes."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo controla a respiração e recusa o verso seguinte."
+                "Mesmo sentindo como se estivesse debaixo d’água, o grupo respira devagar e não acompanha a canção. O verso seguinte fica sem resposta, e a sensação de afogamento começa a diminuir. Quando o canto termina, todos conseguem respirar normalmente outra vez."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O trançado é desatado sem romper a passagem."
+                "Os nós da corda são soltos um de cada vez, sem romper o fio principal que sustenta a passagem. Quando o último nó é aberto, os cabelos deixam de se mover e a canção perde a força. A corda permanece firme e permite que o grupo atravesse com segurança."
               ]
             },
             {
@@ -5494,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Um poço sem água devolve uma canção na voz de quem se inclina sobre ele. Cabelos úmidos sobem pelas pedras e formam uma corda, enquanto cada verso convence o ouvinte de que está se afogando em um lugar completamente seco."
+                "O grupo encontra um poço fundo, mas completamente seco. Quando alguém se inclina sobre a abertura, uma canção sobe usando a voz dessa pessoa."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Cabelos molhados saem do poço e se enrolam até formar uma longa corda. A cada novo verso, os heróis sentem água entrando em seus pulmões, mesmo sem haver uma única gota ao redor.<br>Como o grupo deve escapar?"
               ]
             },
             {

@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Travar a comporta de ventilação e obrigar o vento a mudar de direção\"",
+                  "center:json": "\"\\\\FS[22]Forçar a comporta de ventilação até mudar a direção do\\nredemoinho.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Fechar as presilhas das garrafas antes que libertem novos turbilhões\"",
+                  "center:json": "\"\\\\FS[22]Fechar rapidamente as presilhas das garrafas que ainda estão\\ninteiras.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Seguir a fuligem e os cacos para localizar o olho imóvel do redemoinho\"",
+                  "center:json": "\"\\\\FS[22]Observar o caminho da fuligem e dos cacos para encontrar o centro\\ncalmo do redemoinho.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Travar a comporta de ventilação e obrigar o vento a mudar de direção<Bind Picture: 50><Hide Choice Window>",
-                  "Fechar as presilhas das garrafas antes que libertem novos turbilhões<Bind Picture: 51><Hide Choice Window>",
-                  "Seguir a fuligem e os cacos para localizar o olho imóvel do redemoinho<Bind Picture: 52><Hide Choice Window>",
+                  "Forçar a comporta de ventilação até mudar a direção do redemoinho.<Bind Picture: 50><Hide Choice Window>",
+                  "Fechar rapidamente as presilhas das garrafas que ainda estão inteiras.<Bind Picture: 51><Hide Choice Window>",
+                  "Observar o caminho da fuligem e dos cacos para encontrar o centro calmo do redemoinho.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Travar a comporta de ventilação e obrigar o vento a mudar de direção<Bind Picture: 50><Hide Choice Window>"
+                "Forçar a comporta de ventilação até mudar a direção do redemoinho.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Fechar as presilhas das garrafas antes que libertem novos turbilhões<Bind Picture: 51><Hide Choice Window>"
+                "Fechar rapidamente as presilhas das garrafas que ainda estão inteiras.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Seguir a fuligem e os cacos para localizar o olho imóvel do redemoinho<Bind Picture: 52><Hide Choice Window>"
+                "Observar o caminho da fuligem e dos cacos para encontrar o centro calmo do redemoinho.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,39 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A passagem de ar é presa com força. Sem conseguir seguir em frente, o vento<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "muda de direção e empurra o redemoinho de volta para as garrafas. Os cacos"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "caem no chão, os pequenos redemoinhos ficam presos novamente e a saída se<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "abre."
+                "A passagem de ar é presa com força. Sem conseguir seguir em frente, o vento muda de direção e empurra o redemoinho para outra garrafa, ainda inteira. Os cacos caem no chão, os pequenos redemoinhos ficam presos novamente e a saída se abre."
               ]
             },
             {
@@ -4275,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As garrafas são fechadas uma após a outra, antes que comecem a se agitar. Sem<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "receber mais vento, o redemoinho fica cada vez mais fraco. Os cacos caem e o<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "último sopro desaparece dentro de uma garrafa com um assobio."
+                "As garrafas são fechadas uma após a outra, antes que as presilhas se abram e libertem novos redemoinhos. Sem receber mais vento, o redemoinho fica cada vez mais fraco. Os cacos caem e o último sopro desaparece dentro de uma garrafa. O grupo consegue escapar."
               ]
             },
             {
@@ -4703,39 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Mesmo com tudo girando, existe um pequeno espaço parado no centro do<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "redemoinho. Ao alcançar esse ponto, o movimento do vento se quebra. Os"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "redemoinhos menores batem uns nos outros, os cacos caem e o caminho fica<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "livre."
+                "Mesmo com tudo girando, existe um pequeno espaço parado no centro do redemoinho. Ao alcançar esse ponto, o movimento do vento se quebra. Os redemoinhos menores batem uns nos outros, os cacos caem e o caminho fica livre."
               ]
             },
             {
@@ -5572,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma oficina abandonada está cercada por garrafas escuras, todas fechadas com pequenas presilhas de latão. Quando a primeira se quebra, um redemoinho atravessa o cômodo, arranca lascas das paredes e incorpora os cacos ao próprio giro."
+                "A oficina abandonada está cheia de garrafas escuras, fechadas com presilhas de latão. Dizem que cada uma aprisiona um redemoinho criado pelo Saci."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Assim que o grupo entra, uma garrafa cai e se quebra. Um vento violento toma conta da sala, arranca pedaços das paredes e lança cacos de vidro pelo ar. Outras garrafas começam a tremer. Se elas também se abrirem, os redemoinhos vão se juntar e bloquear a única saída.<br>Como o grupo deve enfrentar a armadilha?"
               ]
             },
             {

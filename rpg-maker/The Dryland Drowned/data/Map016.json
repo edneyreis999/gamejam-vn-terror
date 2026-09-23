@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Encontrar a única figura cuja sombra aponta contra a luz das velas\"",
+                  "center:json": "\"\\\\FS[22]Encontrar a única figura cuja sombra aponta para o lado contrário\\nda luz.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Apagar dos panos o vínculo que atribui os vivos à procissão\"",
+                  "center:json": "\"\\\\FS[22]Romper o feitiço que liga os nomes bordados nos panos aos heróis.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desmanchar a costura de cada nome sem rasgar o tecido funerário\"",
+                  "center:json": "\"\\\\FS[22]Desmanchar a costura de cada nome sem rasgar os panos da\\nprocissão.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Encontrar a única figura cuja sombra aponta contra a luz das velas<Bind Picture: 50><Hide Choice Window>",
-                  "Apagar dos panos o vínculo que atribui os vivos à procissão<Bind Picture: 51><Hide Choice Window>",
-                  "Desmanchar a costura de cada nome sem rasgar o tecido funerário<Bind Picture: 52><Hide Choice Window>",
+                  "Encontrar a única figura cuja sombra aponta para o lado contrário da luz.<Bind Picture: 50><Hide Choice Window>",
+                  "Romper o feitiço que liga os nomes bordados nos panos aos heróis.<Bind Picture: 51><Hide Choice Window>",
+                  "Desmanchar a costura de cada nome sem rasgar os panos da procissão.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Encontrar a única figura cuja sombra aponta contra a luz das velas<Bind Picture: 50><Hide Choice Window>"
+                "Encontrar a única figura cuja sombra aponta para o lado contrário da luz.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Apagar dos panos o vínculo que atribui os vivos à procissão<Bind Picture: 51><Hide Choice Window>"
+                "Romper o feitiço que liga os nomes bordados nos panos aos heróis.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Desmanchar a costura de cada nome sem rasgar o tecido funerário<Bind Picture: 52><Hide Choice Window>"
+                "Desmanchar a costura de cada nome sem rasgar os panos da procissão.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,39 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "contrário. Quando essa figura é retirada da frente da procissão, as outras"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "panos e o grupo é libertado."
+                "Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado contrário. Quando essa figura é retirada da frente da procissão, as outras almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos panos e o grupo é libertado."
               ]
             },
             {
@@ -4275,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "corredor carregando panos vazios até desaparecerem na escuridão."
+                "As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão."
               ]
             },
             {
@@ -4703,21 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "abrem espaço no meio da procissão e deixam o grupo passar."
+                "Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas abrem espaço no meio da procissão e deixam o grupo passar."
               ]
             },
             {
@@ -5554,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma procissão atravessa o corredor sem mover os pés. Cada figura carrega uma vela e um pano bordado com o nome de alguém do grupo; quando a chama correspondente se apaga, a pessoa começa a desaparecer das lembranças dos companheiros."
+                "Uma procissão de figuras cobertas atravessa o corredor sem mover os pés. Cada uma carrega uma vela acesa e um pano bordado com o nome de um dos heróis."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Quando uma chama se apaga, o herói ligado àquela vela começa a desaparecer das lembranças dos companheiros. Se todas se apagarem, ninguém no grupo conseguirá lembrar quem esteve ali.<br>Como o grupo deve escapar?"
               ]
             },
             {
