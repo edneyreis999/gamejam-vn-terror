@@ -53045,7 +53045,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Os redemoinhos se unem e fecham a saída com uma muralha de cacos. Um herói precisa abrir a comporta por dentro e permanecer como lastro enquanto o vento o arrasta para longe dos demais."
+                    "as outras garrafas se abrem e os redemoinhos se juntam. Uma parede de vento e vidro bloqueia a saída. Para abrir uma passagem, um dos heróis precisa segurar a comporta por dentro. O restante do grupo consegue escapar, mas o herói é arrancado do chão e levado pelo redemoinho."
                 ]
             },
             {
@@ -53197,7 +53197,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "As árvores tombam como cancelas e empurram o grupo para um corredor de estacas. Um herói precisa segurar o último tronco enquanto os outros escapam pela passagem estreita."
+                    "os cipós são acionados e várias árvores tombam, bloqueando os caminhos. O grupo é empurrado para uma passagem cercada por estacas. Para que os outros escapem, um dos heróis precisa permanecer para trás e segurar o último tronco."
                 ]
             },
             {
@@ -53349,7 +53349,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "O socador abandona os trilhos e passa a perseguir o grupo. Um herói precisa atraí-lo para o pilão central e permanecer sob o impacto que bloqueia a máquina."
+                    "o socador se solta dos trilhos e começa a perseguir o grupo. Para impedir que ele alcance os outros, um dos heróis precisa atraí-lo até o pilão central e permanecer no local do impacto. O golpe prende o socador e permite que o restante do grupo escape."
                 ]
             },
             {
@@ -53501,7 +53501,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "As costelas fecham-se de uma vez. Um herói precisa ocupar o centro e receber a compressão para manter um último vão aberto aos demais."
+                    "as barras se fecham de uma vez. Para manter a última passagem aberta, um dos heróis precisa ficar no centro da jaula e suportar a pressão. Os outros conseguem escapar, mas não há tempo para voltar e salvá-lo."
                 ]
             },
             {
@@ -53653,7 +53653,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "A caldeira entra em sobrepressão e transforma a saída em uma fornalha. Um herói precisa continuar operando a válvula junto à carcaça até que os outros atravessem."
+                    "a pressão da caldeira aumenta e uma onda de fogo bloqueia a saída. Para abrir uma passagem, um dos heróis precisa permanecer ao lado da criatura e continuar controlando a válvula. Os outros conseguem atravessar, mas ele não consegue sair antes que as chamas tomem a cavalariça."
                 ]
             },
             {
@@ -53805,7 +53805,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "As raízes formam um nó vivo ao redor do grupo. Um herói precisa deixar-se envolver pelo tronco para que a planta solte os demais e complete o enxerto."
+                    "as raízes se enrolam ao redor do grupo e formam um nó. Para que os outros sejam libertados, um dos heróis precisa se deixar prender pelo tronco. A planta solta os demais, mas transforma o herói em parte da árvore."
                 ]
             },
             {
@@ -53957,7 +53957,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Os ganchos recolhem os sacos e fecham o corredor. Um herói precisa ocupar um deles e seguir para a prensa para que o contrapeso libere a saída."
+                    "os ganchos puxam todos os sacos para o centro e bloqueiam o corredor. Para liberar a saída, um dos heróis precisa entrar em um saco e servir de contrapeso. A passagem se abre para os outros, mas o saco com o herói continua seguindo em direção à prensa."
                 ]
             },
             {
@@ -54109,7 +54109,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Dois pés surgem sobre a mesma viga e o telhado desaba em sequência. Um herói precisa permanecer sob a viga mestra e sustentar o impacto tempo suficiente para os demais saírem."
+                    "dois pés atingem a mesma viga, e o telhado começa a desabar. Para impedir que tudo caia de uma vez, um dos heróis precisa ficar sob a viga principal e sustentar o impacto. Os outros conseguem escapar, mas o teto desaba sobre quem permaneceu para trás."
                 ]
             },
             {
@@ -54261,7 +54261,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "O assobio rouba todas as vozes ao mesmo tempo. Um herói precisa responder com o próprio nome e tornar-se a nova voz da casa para que os demais sejam esquecidos pela presença."
+                    "o assobio começa a apagar as vozes do grupo. Para afastar a presença, um dos heróis precisa dizer o próprio nome antes que sua voz desapareça. A casa toma essa voz para si e esquece os demais, que conseguem escapar. O herói passa a ser a nova voz presa no casarão."
                 ]
             },
             {
@@ -54413,7 +54413,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "As chamas se apagam e a procissão reconhece todo o grupo. Um herói precisa tomar a vela da frente e seguir com os mortos para conduzir o cortejo para longe dos demais."
+                    "todas as velas se apagam, e a procissão passa a reconhecer o grupo como parte do cortejo. Para afastar as almas, um dos heróis precisa tomar a vela da frente e seguir com os mortos. A procissão vai embora levando o herói, enquanto os outros conseguem escapar."
                 ]
             },
             {
@@ -54565,7 +54565,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Todos os olhos se fixam em uma única lembrança compartilhada. Um herói precisa reivindicá-la como exclusivamente sua e permanecer dentro dela enquanto os demais recuperam o próprio passado."
+                    "todos os olhos se voltam para uma lembrança que pertence ao grupo inteiro. Para libertar os outros, um dos heróis precisa aceitar aquela lembrança como se fosse somente sua. Os companheiros recuperam o próprio passado, mas o herói fica preso para sempre dentro da lembrança."
                 ]
             },
             {
@@ -54717,7 +54717,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "A floresta aceita a promessa como verdadeira e exige alguém em cumprimento. Um herói precisa assumir o acordo falsificado e desaparecer entre as árvores para que os demais sejam liberados."
+                    "a floresta aceita a promessa falsa como se fosse verdadeira e exige que alguém cumpra o acordo. Para libertar os outros, um dos heróis precisa aceitar a dívida. A mata abre a passagem, mas o herói desaparece entre as árvores."
                 ]
             },
             {
@@ -54869,7 +54869,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Os reflexos deixam de imitar o grupo e caminham para fora. Um herói precisa entrar no espelho vazio e ocupar o lugar da figura para que os outros reflexos voltem ao vidro."
+                    "os reflexos param de imitar o grupo e começam a sair dos espelhos. Para obrigá-los a voltar, um dos heróis precisa entrar no único vidro que ficou vazio e ocupar o lugar da figura loira. Os outros escapam, mas o herói permanece preso no espelho."
                 ]
             },
             {
@@ -55021,7 +55021,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Água invisível preenche os pulmões de todos. Um herói precisa descer pela corda e responder ao canto no fundo do poço para que os demais voltem a respirar."
+                    "a água invisível enche os pulmões de todo o grupo. Para que os outros voltem a respirar, um dos heróis precisa descer pela corda e responder ao canto no fundo do poço. A canção se cala, mas o herói não retorna."
                 ]
             },
             {
@@ -55173,7 +55173,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "A data atual aparece inteira e a mortalha desce sobre todos. Um herói precisa escrever o próprio nome no tecido e aceitar o presságio para rasgar uma saída aos demais."
+                    "a data atual aparece por inteiro, e a mortalha cai sobre o grupo. Para abrir uma saída, um dos heróis precisa escrever o próprio nome no tecido e aceitar o presságio. A mortalha se rasga e liberta os outros, mas se fecha ao redor de quem escreveu o nome."
                 ]
             },
             {
@@ -55325,7 +55325,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "Todas as portas se abrem para a mesma boca. Um herói precisa responder ao chamado e atravessar o batente para que a casa volte a ter paredes."
+                    "todas as portas se abrem ao mesmo tempo e formam uma única boca enorme. Para fazer a casa voltar ao normal, um dos heróis precisa responder ao chamado e atravessar a passagem. As portas desaparecem e os outros ficam seguros, mas o herói é levado pela criatura."
                 ]
             },
             {
@@ -67300,75 +67300,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "“Finalmente, uma parte do mapa estava em nossas mãos."
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir."
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a<br>"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "outra metade."
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como<br>"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "enfrentar o que vinha pela frente.”"
+                    "“Finalmente, uma parte do mapa estava em nossas mãos. Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir. Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a outra metade. Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como enfrentar o que vinha pela frente.”"
                 ]
             },
             {
@@ -67658,68 +67590,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "“Ali estava a parte que faltava."
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna,<br>"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam."
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Foi quando me dei conta: tínhamos encontrado o mapa."
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Mas ainda precisaríamos seguir o caminho.”"
+                    "“Ali estava a parte que faltava. Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna, abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam. Foi quando me dei conta: tínhamos encontrado o mapa. Mas ainda precisaríamos seguir o caminho.”"
                 ]
             },
             {

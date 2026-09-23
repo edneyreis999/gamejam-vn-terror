@@ -1,0 +1,16 @@
+{
+  "purpose": "Human-accepted two-page A description layout; selected captures for review/devlog, no publication.",
+  "acceptance": "User tested in browser and said Nossa, bem melhor.",
+  "captures": [
+    {
+      "path": "A1-page-1.png",
+      "sha256": "457ffc7ab43bddfb10bdc3d2d8883c5da7a2dbdc245133f627905a8e9b5755a5",
+      "source": "docs/qa/evidence/trap-a-description-reading/runs/05746b97-c774-4978-9c4e-0202ec41c391/A1-page-1.png"
+    },
+    {
+      "path": "A1-page-2.png",
+      "sha256": "15e7dc606e2cd5fcff15987355147b895d41927eef9191b5f671e8aac9804f46",
+      "source": "docs/qa/evidence/trap-a-description-reading/runs/05746b97-c774-4978-9c4e-0202ec41c391/A1-page-2.png"
+    }
+  ]
+}

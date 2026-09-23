@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar as raízes principais antes que fechem a passagem\"",
+                  "center:json": "\"\\\\FS[22]Arrancar as raízes principais antes que bloqueiem a passagem.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Identificar fibras mortas e improvisar um túnel entre os pontos sem seiva\"",
+                  "center:json": "\"\\\\FS[22]Encontrar as partes mortas da planta e abrir um túnel por onde\\nnão passa seiva.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Romper o nome que prende o cadáver à terra\"",
+                  "center:json": "\"\\\\FS[22]Quebrar o vínculo sobrenatural entre o corpo e a terra.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Arrancar as raízes principais antes que fechem a passagem<Bind Picture: 50><Hide Choice Window>",
-                  "Identificar fibras mortas e improvisar um túnel entre os pontos sem seiva<Bind Picture: 51><Hide Choice Window>",
-                  "Romper o nome que prende o cadáver à terra<Bind Picture: 52><Hide Choice Window>",
+                  "Arrancar as raízes principais antes que bloqueiem a passagem.<Bind Picture: 50><Hide Choice Window>",
+                  "Encontrar as partes mortas da planta e abrir um túnel por onde não passa seiva.<Bind Picture: 51><Hide Choice Window>",
+                  "Quebrar o vínculo sobrenatural entre o corpo e a terra.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Arrancar as raízes principais antes que fechem a passagem<Bind Picture: 50><Hide Choice Window>"
+                "Arrancar as raízes principais antes que bloqueiem a passagem.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Identificar fibras mortas e improvisar um túnel entre os pontos sem seiva<Bind Picture: 51><Hide Choice Window>"
+                "Encontrar as partes mortas da planta e abrir um túnel por onde não passa seiva.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Romper o nome que prende o cadáver à terra<Bind Picture: 52><Hide Choice Window>"
+                "Quebrar o vínculo sobrenatural entre o corpo e a terra.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,39 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As raízes mais grossas são arrancadas antes de cercarem o grupo. Sem elas para<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "se segurar no chão, o tronco central se inclina e puxa as raízes menores para"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "longe do corredor. Os frutos cheios de dentes caem ao lado, e o caminho fica<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "livre."
+                "As raízes mais grossas são arrancadas antes de cercarem o grupo. Sem elas para se segurar no chão, o tronco central se inclina e puxa as raízes menores para longe do corredor. Os frutos cheios de dentes caem ao lado, e o caminho fica livre."
               ]
             },
             {
@@ -4275,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Algumas raízes estão secas e não se movem como as outras. Elas são afastadas e<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "apoiadas com galhos, formando um pequeno túnel. As raízes vivas se fecham ao<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "redor, mas não percebem o grupo passando pelo trecho morto."
+                "Algumas raízes estão secas e não se movem como as outras. Elas são afastadas e apoiadas com galhos, formando um pequeno túnel. As raízes vivas se fecham ao redor, mas não percebem o grupo passando pelo trecho morto."
               ]
             },
             {
@@ -4703,21 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O nome que prende o cadáver ao pomar é encontrado nas marcas do tronco. Quando<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "essa ligação é quebrada, o corpo se solta da árvore e as raízes param de se<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "mover. O pomar seca rapidamente, abrindo uma passagem entre os troncos."
+                "O nome que prende o cadáver ao pomar é encontrado nas marcas do tronco. Quando essa ligação é quebrada, o corpo se solta da árvore e as raízes param de se mover. O pomar seca rapidamente, abrindo uma passagem entre os troncos."
               ]
             },
             {
@@ -5554,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Um cadáver ressequido foi incorporado ao tronco central de um pomar subterrâneo. Suas raízes atravessam outros corpos e apertam o corredor como dedos, enquanto frutos duros caem e se abrem cheios de dentes de diferentes povos mortais."
+                "O grupo entra em um pomar escondido no subsolo. No centro há uma árvore enorme, com um corpo ressecado preso ao tronco. Suas raízes atravessam o chão e se espalham por todo o lugar."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Quando os heróis se aproximam, as raízes começam a fechar o corredor como dedos. Frutos duros caem dos galhos e se abrem no chão, revelando fileiras de dentes em seu interior. A passagem está ficando cada vez mais estreita.<br>Como o grupo deve escapar?"
               ]
             },
             {

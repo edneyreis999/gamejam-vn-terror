@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Escalar as costelas antes que o espaço entre elas desapareça\"",
+                  "center:json": "\"\\\\FS[22]Escalar as barras antes que o espaço entre elas desapareça.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Conter duas barras e abrir uma passagem à força\"",
+                  "center:json": "\"\\\\FS[22]Segurar duas barras e abrir uma passagem usando a força.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Resistir ao rugido e alcançar a trava sem se encolher\"",
+                  "center:json": "\"\\\\FS[22]Resistir ao medo causado pelo rugido e alcançar a trava da jaula.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Escalar as costelas antes que o espaço entre elas desapareça<Bind Picture: 50><Hide Choice Window>",
-                  "Conter duas barras e abrir uma passagem à força<Bind Picture: 51><Hide Choice Window>",
-                  "Resistir ao rugido e alcançar a trava sem se encolher<Bind Picture: 52><Hide Choice Window>",
+                  "Escalar as barras antes que o espaço entre elas desapareça.<Bind Picture: 50><Hide Choice Window>",
+                  "Segurar duas barras e abrir uma passagem usando a força.<Bind Picture: 51><Hide Choice Window>",
+                  "Resistir ao medo causado pelo rugido e alcançar a trava da jaula.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Escalar as costelas antes que o espaço entre elas desapareça<Bind Picture: 50><Hide Choice Window>"
+                "Escalar as barras antes que o espaço entre elas desapareça.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Conter duas barras e abrir uma passagem à força<Bind Picture: 51><Hide Choice Window>"
+                "Segurar duas barras e abrir uma passagem usando a força.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Resistir ao rugido e alcançar a trava sem se encolher<Bind Picture: 52><Hide Choice Window>"
+                "Resistir ao medo causado pelo rugido e alcançar a trava da jaula.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,21 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo sobe pelas barras enquanto o espaço entre elas fica cada vez menor.<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Mesmo com o rugido assustador, todos alcançam uma abertura perto do teto. A<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "jaula se fecha logo abaixo, mas ninguém fica preso dentro dela."
+                "O grupo sobe pelas barras enquanto o espaço entre elas fica cada vez menor. Mesmo com o rugido assustador, todos alcançam uma abertura perto do teto. A jaula se fecha logo abaixo, mas ninguém fica preso dentro dela."
               ]
             },
             {
@@ -4257,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Duas barras são seguradas antes que se encostem. A força da jaula empurra o<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "ferro, mas o espaço continua aberto por tempo suficiente. O grupo atravessa a<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "passagem e as barras se fecham atrás dele."
+                "Duas barras são seguradas antes que se encostem. A força da jaula empurra o ferro, mas o espaço continua aberto por tempo suficiente. O grupo atravessa a passagem e as barras se fecham atrás dele."
               ]
             },
             {
@@ -4685,21 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O rugido tenta paralisar o corpo e obrigar todos a se encolherem. Mesmo com<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "medo, o grupo continua avançando até alcançar a trava. Quando ela é aberta, as<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "barras perdem o apoio, a jaula se desfaz e o caminho fica livre."
+                "O rugido tenta paralisar o corpo e obrigar todos a se encolherem. Mesmo com medo, o grupo continua avançando até alcançar a trava. Quando ela é aberta, as barras perdem o apoio, a jaula se desfaz e o caminho fica livre."
               ]
             },
             {
@@ -5536,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Costelas de ferro fecham-se ao redor de um salão coberto de pelos grossos e marcas de garras. Um rugido vindo de lugar nenhum paralisa os músculos enquanto as barras comprimem lentamente tudo o que está dentro."
+                "O grupo entra em um salão coberto por pelos grossos e marcas profundas de garras. De repente, grandes barras de ferro, parecidas com costelas, saem das paredes e formam uma jaula ao redor de todos."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Um rugido invisível ecoa pelo salão. O medo deixa os músculos pesados e dificulta qualquer movimento. Ao mesmo tempo, as barras começam a se fechar, diminuindo cada vez mais o espaço dentro da jaula.<br>Como o grupo deve escapar?"
               ]
             },
             {

@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Soltar os nós invertidos sem liberar a tensão das estacas\"",
+                  "center:json": "\"\\\\FS[22]Desatar com cuidado os nós dos cipós sem acionar as estacas.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Abandonar as pegadas e orientar-se pelo vento, pela inclinação e pela\\nvegetação\"",
+                  "center:json": "\"\\\\FS[22]Ignorar as pegadas e encontrar o caminho usando o vento, o\\nterreno e a vegetação.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Reconstruir a regra dos rastros de pés virados e identificar o único desvio\\ncoerente\"",
+                  "center:json": "\"\\\\FS[22]Usar o conhecimento sobre pés virados para descobrir qual rastro\\nindica o caminho verdadeiro.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Soltar os nós invertidos sem liberar a tensão das estacas<Bind Picture: 50><Hide Choice Window>",
-                  "Abandonar as pegadas e orientar-se pelo vento, pela inclinação e pela\nvegetação<Bind Picture: 51><Hide Choice Window>",
-                  "Reconstruir a regra dos rastros de pés virados e identificar o único desvio\ncoerente<Bind Picture: 52><Hide Choice Window>",
+                  "Desatar com cuidado os nós dos cipós sem acionar as estacas.<Bind Picture: 50><Hide Choice Window>",
+                  "Ignorar as pegadas e encontrar o caminho usando o vento, o terreno e a vegetação.<Bind Picture: 51><Hide Choice Window>",
+                  "Usar o conhecimento sobre pés virados para descobrir qual rastro indica o caminho verdadeiro.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Soltar os nós invertidos sem liberar a tensão das estacas<Bind Picture: 50><Hide Choice Window>"
+                "Desatar com cuidado os nós dos cipós sem acionar as estacas.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Abandonar as pegadas e orientar-se pelo vento, pela inclinação e pela\nvegetação<Bind Picture: 51><Hide Choice Window>"
+                "Ignorar as pegadas e encontrar o caminho usando o vento, o terreno e a vegetação.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Reconstruir a regra dos rastros de pés virados e identificar o único desvio\ncoerente<Bind Picture: 52><Hide Choice Window>"
+                "Usar o conhecimento sobre pés virados para descobrir qual rastro indica o caminho verdadeiro.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,21 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os nós são desfeitos com cuidado, sem puxar os cipós que controlam a<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "armadilha. As estacas voltam devagar para dentro da terra. Quando o último nó<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "é solto, os cipós caem no chão e deixam uma passagem segura entre as árvores."
+                "Os nós são desfeitos com cuidado, sem puxar os cipós que controlam a armadilha. As estacas voltam devagar para dentro da terra. Quando o último nó é solto, os cipós caem no chão e deixam uma passagem segura entre as árvores."
               ]
             },
             {
@@ -4257,39 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As pegadas apontam para caminhos diferentes, mas o vento, o terreno e as<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "plantas mostram a direção verdadeira. Seguindo esses sinais, o grupo evita os"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "cipós e as estacas escondidas. As pegadas falsas ficam para trás e o caminho<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "continua aberto."
+                "As pegadas apontam para caminhos diferentes, mas o vento, o terreno e as plantas mostram a direção verdadeira. Seguindo esses sinais, o grupo evita os cipós e as estacas escondidas. As pegadas falsas ficam para trás e o caminho continua aberto."
               ]
             },
             {
@@ -4703,39 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As pegadas parecem confusas, mas seus calcanhares formam uma sequência. Quando<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "o grupo lê os rastros ao contrário, descobre qual caminho não cruza nenhuma"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "armadilha. As árvores permanecem paradas e todos conseguem atravessar em<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "segurança."
+                "As pegadas parecem confusas, mas seus calcanhares formam uma sequência. Quando o grupo lê os rastros ao contrário, descobre qual caminho não cruza nenhuma armadilha. As árvores permanecem paradas e todos conseguem atravessar em segurança."
               ]
             },
             {
@@ -5572,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma trilha de terra atravessa uma mata que cresceu para dentro da construção. Pegadas com os calcanhares voltados para a frente indicam caminhos diferentes, enquanto cipós tensionados e estacas escondidas convertem cada direção errada em uma armadilha física."
+                "Uma trilha de terra atravessa a mata que cresceu para dentro da construção. Pelo caminho, várias pegadas parecem apontar para direções diferentes. Todas têm algo estranho: os calcanhares estão voltados para a frente, como se quem deixou os rastros caminhasse na direção contrária."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Cipós esticados cruzam a trilha e estão ligados a estacas escondidas entre as plantas. Escolher o caminho errado ou tocar em um cipó pode ativar a armadilha.<br>Como o grupo deve atravessar a trilha?"
               ]
             },
             {

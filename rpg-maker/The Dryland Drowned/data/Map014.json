@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Distribuir o peso pelas vigas mestras e improvisar apoios para o teto\"",
+                  "center:json": "\"\\\\FS[22]Distribuir o peso entre as vigas mais fortes e criar apoios para\\nsegurar o teto.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Rastejar entre os caibros antes da próxima passada\"",
+                  "center:json": "\"\\\\FS[22]Rastejar entre as vigas menores antes que a criatura dê o próximo\\npasso.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Distinguir os passos reais dos ecos e localizar a faixa que não será pisada\"",
+                  "center:json": "\"\\\\FS[22]Separar os passos verdadeiros dos ecos e encontrar a parte do\\ntelhado que não será pisada.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Distribuir o peso pelas vigas mestras e improvisar apoios para o teto<Bind Picture: 50><Hide Choice Window>",
-                  "Rastejar entre os caibros antes da próxima passada<Bind Picture: 51><Hide Choice Window>",
-                  "Distinguir os passos reais dos ecos e localizar a faixa que não será pisada<Bind Picture: 52><Hide Choice Window>",
+                  "Distribuir o peso entre as vigas mais fortes e criar apoios para segurar o teto.<Bind Picture: 50><Hide Choice Window>",
+                  "Rastejar entre as vigas menores antes que a criatura dê o próximo passo.<Bind Picture: 51><Hide Choice Window>",
+                  "Separar os passos verdadeiros dos ecos e encontrar a parte do telhado que não será pisada.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Distribuir o peso pelas vigas mestras e improvisar apoios para o teto<Bind Picture: 50><Hide Choice Window>"
+                "Distribuir o peso entre as vigas mais fortes e criar apoios para segurar o teto.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Rastejar entre os caibros antes da próxima passada<Bind Picture: 51><Hide Choice Window>"
+                "Rastejar entre as vigas menores antes que a criatura dê o próximo passo.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Distinguir os passos reais dos ecos e localizar a faixa que não será pisada<Bind Picture: 52><Hide Choice Window>"
+                "Separar os passos verdadeiros dos ecos e encontrar a parte do telhado que não será pisada.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,21 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Pedaços de madeira são colocados sob as vigas mais fortes. Os apoios dividem o<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "peso e impedem que o teto continue descendo. A cada passo da criatura, a casa<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "inteira treme, mas o grupo consegue atravessar antes que os apoios se quebrem."
+                "Pedaços de madeira são colocados sob as vigas mais fortes. Os apoios dividem o peso e impedem que o teto continue descendo. A cada passo da criatura, a casa inteira treme, mas o grupo consegue atravessar antes que os apoios se quebrem."
               ]
             },
             {
@@ -4257,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo avança depressa pelos espaços estreitos do telhado. Logo depois, um pé<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "ossudo pisa no lugar que todos acabaram de deixar. A última parte do teto<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "desaba quando o grupo já alcançou a saída."
+                "O grupo avança depressa pelos espaços estreitos do telhado. Logo depois, um pé ossudo pisa no lugar que todos acabaram de deixar. A última parte do teto desaba quando o grupo já alcançou a saída."
               ]
             },
             {
@@ -4685,39 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Muitos passos são apenas ecos, mas os verdadeiros fazem o pó cair antes de<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "cada pisada. Observando esse sinal, o grupo encontra uma faixa do telhado que"
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "nunca é atingida. Todos seguem por ela enquanto os pés esmagam as telhas dos<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "dois lados."
+                "Muitos passos são apenas ecos, mas os verdadeiros fazem o pó cair antes de cada pisada. Observando esse sinal, o grupo encontra uma faixa do telhado que nunca é atingida. Todos seguem por ela enquanto os pés esmagam as telhas dos dois lados."
               ]
             },
             {
@@ -5554,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo entra no forro baixo de um casarão, onde telhas e vigas descem a cada passo pesado ouvido acima. A presença nunca aparece inteira: somente pés ossudos projetam marcas no reboco enquanto o teto comprime o peito de quem está embaixo."
+                "O grupo entra no forro baixo de um casarão. Acima deles, passos pesados atravessam o telhado. A cada passada, as telhas e as vigas descem um pouco mais, reduzindo o espaço para se mover."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "A criatura nunca aparece por inteiro. Apenas marcas de pés ossudos surgem no reboco, como se algo enorme caminhasse sobre a casa. Se o teto continuar baixando, o grupo ficará preso.<br>Como o grupo deve escapar?"
               ]
             },
             {

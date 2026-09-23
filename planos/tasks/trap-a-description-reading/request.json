@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/trap-a-description-reading/spec.md",
+  "requestId": "trap-a-description-reading-20260922-01",
+  "consumer": "task-02",
+  "case": "planos/tasks/trap-a-description-reading/visual.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "trap-a-description-reading",
+    "profile": "1280x720",
+    "variant": "1280x720",
+    "configuration": "fresh-campaign-port18733"
+  },
+  "claims": [
+    {
+      "id": "A-READING",
+      "variant": "1280x720",
+      "sensor": "directed-browser",
+      "group": "a-reading",
+      "source": {
+        "id": "A-READING",
+        "variant": "1280x720"
+      },
+      "expected": {
+        "path": "planos/tasks/trap-a-description-reading/verification.md",
+        "heading": "Expected reading"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/trap-a-description-reading",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "New authored description lists; fresh own campaign required."
+  }
+}

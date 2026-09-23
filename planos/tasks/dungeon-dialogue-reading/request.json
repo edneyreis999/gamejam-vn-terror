@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/dungeon-dialogue-reading/spec.md",
+  "requestId": "dungeon-dialogue-reading-01",
+  "consumer": "task-02",
+  "case": "planos/tasks/dungeon-dialogue-reading/visual.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "dungeon-dialogue-reading",
+    "profile": "1280x720",
+    "variant": "1280x720",
+    "configuration": "fresh-campaign-port18734"
+  },
+  "claims": [
+    {
+      "id": "DUNGEON-READING",
+      "variant": "1280x720",
+      "sensor": "directed-browser",
+      "group": "dungeon-reading",
+      "source": {
+        "id": "DUNGEON-READING",
+        "variant": "1280x720"
+      },
+      "expected": {
+        "path": "planos/tasks/dungeon-dialogue-reading/verification.md",
+        "heading": "Expected dungeon reading"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/dungeon-dialogue-reading",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "New authored description lists; fresh own campaign required."
+  }
+}

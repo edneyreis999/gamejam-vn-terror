@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/revised-trap-prose-integration/spec.md",
+  "requestId": "revised-prose-fit-20260922-03",
+  "consumer": "task-05",
+  "case": "planos/tasks/revised-trap-prose-integration/task-05-visual.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "revised-trap-prose-fit",
+    "profile": "1280x720",
+    "variant": "1280x720",
+    "configuration": "own-reveal-resume-file1-port18732"
+  },
+  "claims": [
+    {
+      "id": "FIT-CHOICES",
+      "variant": "1280x720",
+      "sensor": "directed-browser",
+      "group": "visual-fit",
+      "source": {
+        "id": "FIT-CHOICES",
+        "variant": "1280x720"
+      },
+      "expected": {
+        "path": "planos/tasks/revised-trap-prose-integration/task-05.md",
+        "heading": "Required visual coverage"
+      }
+    },
+    {
+      "id": "FIT-PROSE",
+      "variant": "1280x720",
+      "sensor": "directed-browser",
+      "group": "visual-fit",
+      "source": {
+        "id": "FIT-PROSE",
+        "variant": "1280x720"
+      },
+      "expected": {
+        "path": "planos/tasks/revised-trap-prose-integration/task-05.md",
+        "heading": "Required visual coverage"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/revised-trap-prose-integration/task-05",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Resume own candidate reveal after correcting navigation party and capture raster scale."
+  }
+}

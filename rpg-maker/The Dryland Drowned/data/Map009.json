@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Improvisar cunhas com madeira, fibras e cascas para desviar os trilhos\"",
+                  "center:json": "\"\\\\FS[22]Usar madeira, fibras e cascas para criar obstáculos e desviar o\\nsocador.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Atravessar os pilões menores acompanhando o ritmo dos impactos\"",
+                  "center:json": "\"\\\\FS[22]Avançar entre os pilões menores, acompanhando o ritmo dos\\nimpactos.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Apagar o verso que prende a cantiga ao socador\"",
+                  "center:json": "\"\\\\FS[22]Encontrar e apagar o verso que liga a cantiga ao socador.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Improvisar cunhas com madeira, fibras e cascas para desviar os trilhos<Bind Picture: 50><Hide Choice Window>",
-                  "Atravessar os pilões menores acompanhando o ritmo dos impactos<Bind Picture: 51><Hide Choice Window>",
-                  "Apagar o verso que prende a cantiga ao socador<Bind Picture: 52><Hide Choice Window>",
+                  "Usar madeira, fibras e cascas para criar obstáculos e desviar o socador.<Bind Picture: 50><Hide Choice Window>",
+                  "Avançar entre os pilões menores, acompanhando o ritmo dos impactos.<Bind Picture: 51><Hide Choice Window>",
+                  "Encontrar e apagar o verso que liga a cantiga ao socador.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Improvisar cunhas com madeira, fibras e cascas para desviar os trilhos<Bind Picture: 50><Hide Choice Window>"
+                "Usar madeira, fibras e cascas para criar obstáculos e desviar o socador.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Atravessar os pilões menores acompanhando o ritmo dos impactos<Bind Picture: 51><Hide Choice Window>"
+                "Avançar entre os pilões menores, acompanhando o ritmo dos impactos.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Apagar o verso que prende a cantiga ao socador<Bind Picture: 52><Hide Choice Window>"
+                "Encontrar e apagar o verso que liga a cantiga ao socador.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,21 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "bate neles, seu caminho muda e ele cai dentro de um pilão vazio. A haste fica<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "presa na pedra, o mecanismo para e o grupo consegue atravessar a cozinha."
+                "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador bate neles, seu caminho muda e ele cai dentro de um pilão vazio. A haste fica presa na pedra, o mecanismo para e o grupo consegue atravessar a cozinha."
               ]
             },
             {
@@ -4257,21 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A cantiga avisa quando cada golpe vai acontecer. O grupo avança nos pequenos<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "intervalos entre uma batida e outra, saltando sobre os pilões menores. O<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "último golpe atinge o chão quando todos já alcançaram a saída."
+                "A cantiga avisa quando cada golpe vai acontecer. O grupo avança nos pequenos intervalos entre uma batida e outra, saltando sobre os pilões menores. O último golpe atinge o chão quando todos já alcançaram a saída."
               ]
             },
             {
@@ -4685,39 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas."
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 2,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                ""
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Sem saber para onde deve seguir, o socador para no alto e deixa o caminho<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "livre."
+                "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas. Sem saber para onde deve seguir, o socador para no alto e deixa o caminho livre."
               ]
             },
             {
@@ -5554,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma cozinha de engenho contém um pilão grande o bastante para esmagar uma pessoa. O socador percorre trilhos no teto e muda de direção ao som de uma cantiga de ninar emitida por uma caixa sem corda."
+                "O grupo entra na cozinha de um antigo engenho. No centro do lugar há um pilão enorme, grande o bastante para prender uma pessoa. Acima dele, um pesado socador se move por trilhos presos ao teto."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Uma caixa começa a tocar uma cantiga de ninar sozinha. A cada verso, o socador muda de direção e atinge um pilão diferente. O único caminho para a saída passa entre os impactos.<br>Como o grupo deve atravessar a cozinha?"
               ]
             },
             {

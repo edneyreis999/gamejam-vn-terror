@@ -86,6 +86,12 @@ Uma justificativa pode cobrir uma família comprovadamente equivalente. Capturar
 - Omitir por intuição, cansaço ou custo isolado foi rejeitado: não demonstra risco coberto.
 - Seleção por evidência com E2E preservado concentra esforço em riscos distintos, mas exige rever equivalências quando sua base mudar.
 
+## Exceção explícita — integração de prosa revisada, 2026-09-22
+
+Por decisão posterior do usuário (D-005), a [ADR-003 de `revised-trap-prose-integration`](../../planos/tasks/revised-trap-prose-integration/adrs/adr-003-proportionate-prose-verification.md) dispensa integração no engine, E2E, controles/Continue e segunda resolução somente nesse incremento. Permanecem comparação estática de conteúdo/estrutura e inspeção visual em 1280×720. Essa dispensa substitui localmente a exigência de E2E representativo; não decorre apenas da autonomia de reorganização e não se estende às demais specs. Encerramento de recursos, evidência honesta e reavaliação de riscos continuam aplicáveis.
+
+A mesma decisão registra D-006: specs produzem seus próprios saves de teste, sem depender de saves externos; ver [SD-015](../_memory/standing_directives.md#sd-015--self-produced-test-saves). Saves da própria execução podem apoiar a navegação sem tornar persistência um alvo de teste.
+
 ## Rastreabilidade
 
 Autorização: pedido explícito do usuário em 2026-09-18 para aplicar neste projeto as decisões das ADRs 010, 011 e 012 do Pixi-Rework, incluindo a regra de encerramento dos aplicativos.

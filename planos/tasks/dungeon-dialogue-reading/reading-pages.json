@@ -1,0 +1,1244 @@
+[
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-1.success.01",
+    "text": "A passagem de ar é presa com força. Sem conseguir seguir em frente, o vento muda de direção e empurra o redemoinho para outra garrafa, ainda inteira. Os cacos caem no chão, os pequenos redemoinhos ficam presos novamente e a saída se abre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-1.failure.01",
+    "text": "A comporta permanece travada; o redemoinho ricocheteia nas paredes e fecha a saída com cacos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-2.success.01",
+    "text": "As garrafas são fechadas uma após a outra, antes que as presilhas se abram e libertem novos redemoinhos. Sem receber mais vento, o redemoinho fica cada vez mais fraco. Os cacos caem e o último sopro desaparece dentro de uma garrafa. O grupo consegue escapar.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-2.failure.01",
+    "text": "As presilhas escapam uma após outra, libertando turbilhões que se unem diante da passagem.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-3.success.01",
+    "text": "Mesmo com tudo girando, existe um pequeno espaço parado no centro do redemoinho. Ao alcançar esse ponto, o movimento do vento se quebra. Os redemoinhos menores batem uns nos outros, os cacos caem e o caminho fica livre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-3.failure.01",
+    "text": "A fuligem aponta para um falso centro; o grupo entra no giro e os cacos bloqueiam o retorno.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "result.A1-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "encounter.A1.01",
+    "text": "A oficina abandonada está cheia de garrafas escuras, fechadas com presilhas de latão. Dizem que cada uma aprisiona um redemoinho criado pelo Saci.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map007.json:event1",
+    "reading": "encounter.A1.01",
+    "text": "Assim que o grupo entra, uma garrafa cai e se quebra. Um vento violento toma conta da sala, arranca pedaços das paredes e lança cacos de vidro pelo ar. Outras garrafas começam a tremer. Se elas também se abrirem, os redemoinhos vão se juntar e bloquear a única saída.<br>Como o grupo deve enfrentar a armadilha?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-1.success.01",
+    "text": "Os nós são desfeitos com cuidado, sem puxar os cipós que controlam a armadilha. As estacas voltam devagar para dentro da terra. Quando o último nó é solto, os cipós caem no chão e deixam uma passagem segura entre as árvores.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-1.failure.01",
+    "text": "Um nó errado libera a tensão das estacas, que fecham o corredor atrás dos cipós.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-2.success.01",
+    "text": "As pegadas apontam para caminhos diferentes, mas o vento, o terreno e as plantas mostram a direção verdadeira. Seguindo esses sinais, o grupo evita os cipós e as estacas escondidas. As pegadas falsas ficam para trás e o caminho continua aberto.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-2.failure.01",
+    "text": "O vento muda sob a copa fechada, conduzindo o grupo ao corredor de estacas ocultas.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-3.success.01",
+    "text": "As pegadas parecem confusas, mas seus calcanhares formam uma sequência. Quando o grupo lê os rastros ao contrário, descobre qual caminho não cruza nenhuma armadilha. As árvores permanecem paradas e todos conseguem atravessar em segurança.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-3.failure.01",
+    "text": "A regra reconstruída repete a mentira dos pés virados, e árvores tombadas isolam a única saída.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "result.A2-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "encounter.A2.01",
+    "text": "Uma trilha de terra atravessa a mata que cresceu para dentro da construção. Pelo caminho, várias pegadas parecem apontar para direções diferentes. Todas têm algo estranho: os calcanhares estão voltados para a frente, como se quem deixou os rastros caminhasse na direção contrária.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map008.json:event1",
+    "reading": "encounter.A2.01",
+    "text": "Cipós esticados cruzam a trilha e estão ligados a estacas escondidas entre as plantas. Escolher o caminho errado ou tocar em um cipó pode ativar a armadilha.<br>Como o grupo deve atravessar a trilha?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-1.success.01",
+    "text": "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador bate neles, seu caminho muda e ele cai dentro de um pilão vazio. A haste fica presa na pedra, o mecanismo para e o grupo consegue atravessar a cozinha.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-1.failure.01",
+    "text": "As cunhas se partem sob o primeiro impacto, deixando o socador livre para perseguir o grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-2.success.01",
+    "text": "A cantiga avisa quando cada golpe vai acontecer. O grupo avança nos pequenos intervalos entre uma batida e outra, saltando sobre os pilões menores. O último golpe atinge o chão quando todos já alcançaram a saída.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-2.failure.01",
+    "text": "O ritmo muda no meio da travessia, e os pilões menores empurram o grupo para o centro.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-3.success.01",
+    "text": "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas. Sem saber para onde deve seguir, o socador para no alto e deixa o caminho livre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-3.failure.01",
+    "text": "O verso apagado reaparece na caixa sem corda, acelerando o socador até ele abandonar os trilhos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "result.A3-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "encounter.A3.01",
+    "text": "O grupo entra na cozinha de um antigo engenho. No centro do lugar há um pilão enorme, grande o bastante para prender uma pessoa. Acima dele, um pesado socador se move por trilhos presos ao teto.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map009.json:event1",
+    "reading": "encounter.A3.01",
+    "text": "Uma caixa começa a tocar uma cantiga de ninar sozinha. A cada verso, o socador muda de direção e atinge um pilão diferente. O único caminho para a saída passa entre os impactos.<br>Como o grupo deve atravessar a cozinha?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-1.success.01",
+    "text": "O grupo sobe pelas barras enquanto o espaço entre elas fica cada vez menor. Mesmo com o rugido assustador, todos alcançam uma abertura perto do teto. A jaula se fecha logo abaixo, mas ninguém fica preso dentro dela.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-1.failure.01",
+    "text": "As costelas se fecham antes da escalada terminar, derrubando o grupo de volta ao salão.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-2.success.01",
+    "text": "Duas barras são seguradas antes que se encostem. A força da jaula empurra o ferro, mas o espaço continua aberto por tempo suficiente. O grupo atravessa a passagem e as barras se fecham atrás dele.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-2.failure.01",
+    "text": "As barras resistem e comprimem os braços que as sustentam, reduzindo o vão a uma fresta.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-3.success.01",
+    "text": "O rugido tenta paralisar o corpo e obrigar todos a se encolherem. Mesmo com medo, o grupo continua avançando até alcançar a trava. Quando ela é aberta, as barras perdem o apoio, a jaula se desfaz e o caminho fica livre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-3.failure.01",
+    "text": "O rugido interrompe o movimento diante da trava, e a jaula fecha o último espaço livre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "result.A4-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "encounter.A4.01",
+    "text": "O grupo entra em um salão coberto por pelos grossos e marcas profundas de garras. De repente, grandes barras de ferro, parecidas com costelas, saem das paredes e formam uma jaula ao redor de todos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map010.json:event1",
+    "reading": "encounter.A4.01",
+    "text": "Um rugido invisível ecoa pelo salão. O medo deixa os músculos pesados e dificulta qualquer movimento. Ao mesmo tempo, as barras começam a se fechar, diminuindo cada vez mais o espaço dentro da jaula.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-1.success.01",
+    "text": "A grade pesada é levantada antes da chegada da criatura. Assim que a carcaça de ferro entra na baia, a grade é solta e prende suas pernas. O fogo continua saindo pelo pescoço, mas atinge apenas a parede de pedra. O caminho fica livre para o grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-1.failure.01",
+    "text": "A grade emperra acima da baia, e a carcaça retorna arrastando correntes pela saída.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-2.success.01",
+    "text": "O fecho do arreio é aberto no pequeno intervalo entre os golpes das correntes. Sem o fecho, as correntes caem e se enrolam nas pernas da criatura. Ela tenta correr, tropeça no próprio metal e não consegue alcançar o grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-2.failure.01",
+    "text": "O fecho prende a ferramenta nas correntes aquecidas, que selam o corredor com fogo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-3.success.01",
+    "text": "Os foles fazem três estalos antes de cada jato de fogo. Depois do terceiro som, a válvula é aberta e o vapor escapa pela chaminé. O fogo diminui até desaparecer, e a criatura para de se mover. A cavalariça fica segura para a travessia.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-3.failure.01",
+    "text": "A leitura do ciclo atrasa uma descarga; a caldeira entra em sobrepressão e incendeia a passagem.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "result.A5-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "encounter.A5.01",
+    "text": "O grupo entra em uma cavalariça de pedra dividida por baias estreitas. No centro está uma criatura mecânica com o corpo de um cavalo, feita de ferro e sem cabeça. Tubos ligam sua carcaça a grandes foles e a uma caldeira.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map011.json:event1",
+    "reading": "encounter.A5.01",
+    "text": "A máquina começa a correr entre as baias. Chamas saem de seu pescoço aberto, enquanto correntes em brasa são arrastadas pelo chão. A saída fica do outro lado da cavalariça.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-1.success.01",
+    "text": "As raízes mais grossas são arrancadas antes de cercarem o grupo. Sem elas para se segurar no chão, o tronco central se inclina e puxa as raízes menores para longe do corredor. Os frutos cheios de dentes caem ao lado, e o caminho fica livre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-1.failure.01",
+    "text": "As raízes arrancadas se dividem em fibras menores e apertam o corredor por todos os lados.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-2.success.01",
+    "text": "Algumas raízes estão secas e não se movem como as outras. Elas são afastadas e apoiadas com galhos, formando um pequeno túnel. As raízes vivas se fecham ao redor, mas não percebem o grupo passando pelo trecho morto.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-2.failure.01",
+    "text": "O túnel alcança tecido ainda vivo, que se fecha ao redor do grupo como uma cicatriz.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-3.success.01",
+    "text": "O nome que prende o cadáver ao pomar é encontrado nas marcas do tronco. Quando essa ligação é quebrada, o corpo se solta da árvore e as raízes param de se mover. O pomar seca rapidamente, abrindo uma passagem entre os troncos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-3.failure.01",
+    "text": "O nome rompido pertence a outro morto; o vínculo do Corpo-Seco se fortalece e reúne as raízes.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "result.A6-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "encounter.A6.01",
+    "text": "O grupo entra em um pomar escondido no subsolo. No centro há uma árvore enorme, com um corpo ressecado preso ao tronco. Suas raízes atravessam o chão e se espalham por todo o lugar.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map012.json:event1",
+    "reading": "encounter.A6.01",
+    "text": "Quando os heróis se aproximam, as raízes começam a fechar o corredor como dedos. Frutos duros caem dos galhos e se abrem no chão, revelando fileiras de dentes em seu interior. A passagem está ficando cada vez mais estreita.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-1.success.01",
+    "text": "Os ganchos certos são soltos um após o outro. Os sacos se afastam para os lados e deixam um corredor livre no meio do depósito. As vozes continuam pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-1.failure.01",
+    "text": "Os ganchos destravados descem juntos e amontoam os sacos diante da saída.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-2.success.01",
+    "text": "O grupo usa as correntes para passar por cima dos sacos e dos ganchos. Cada balanço leva todos para mais perto da saída e para longe da prensa. Quando a máquina esmaga os sacos, o grupo já está em segurança do outro lado.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-2.failure.01",
+    "text": "Uma corrente cede durante o balanço, lançando o grupo de volta à esteira da prensa.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-3.success.01",
+    "text": "As vozes imitam pessoas conhecidas e pedem para serem libertadas, mas ninguém responde. Sem conseguir enganar o grupo, elas começam a se confundir e a chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho até a saída permanece aberto.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-3.failure.01",
+    "text": "Uma voz reconhecida recebe resposta; os sacos se agitam e seus ganchos fecham o corredor.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "result.A7-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "encounter.A7.01",
+    "text": "O grupo entra em um depósito sem janelas. Dezenas de sacos pendem de ganchos presos a correntes que se movem pelo teto. Alguns parecem conter apenas areia. Outros se debatem e chamam os heróis usando as vozes de pessoas conhecidas.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map013.json:event1",
+    "reading": "encounter.A7.01",
+    "text": "Os ganchos levam todos os sacos até uma enorme prensa no fim do corredor. Conforme as correntes avançam, fica cada vez mais difícil alcançar a saída.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-1.success.01",
+    "text": "Pedaços de madeira são colocados sob as vigas mais fortes. Os apoios dividem o peso e impedem que o teto continue descendo. A cada passo da criatura, a casa inteira treme, mas o grupo consegue atravessar antes que os apoios se quebrem.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-1.failure.01",
+    "text": "Os apoios se apoiam numa viga podre, que transfere todo o peso para o centro do forro.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-2.success.01",
+    "text": "O grupo avança depressa pelos espaços estreitos do telhado. Logo depois, um pé ossudo pisa no lugar que todos acabaram de deixar. A última parte do teto desaba quando o grupo já alcançou a saída.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-2.failure.01",
+    "text": "A passada chega antes da travessia, quebrando os caibros e encurtando a passagem.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-3.success.01",
+    "text": "Muitos passos são apenas ecos, mas os verdadeiros fazem o pó cair antes de cada pisada. Observando esse sinal, o grupo encontra uma faixa do telhado que nunca é atingida. Todos seguem por ela enquanto os pés esmagam as telhas dos dois lados.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-3.failure.01",
+    "text": "Um eco é tomado por passo real; o grupo entra justamente na faixa onde o teto desaba.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "result.A8-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "encounter.A8.01",
+    "text": "O grupo entra no forro baixo de um casarão. Acima deles, passos pesados atravessam o telhado. A cada passada, as telhas e as vigas descem um pouco mais, reduzindo o espaço para se mover.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map014.json:event1",
+    "reading": "encounter.A8.01",
+    "text": "A criatura nunca aparece por inteiro. Apenas marcas de pés ossudos surgem no reboco, como se algo enorme caminhasse sobre a casa. Se o teto continuar baixando, o grupo ficará preso.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-1.success.01",
+    "text": "Quase todos os ecos surgem depois do assobio. Apenas um aparece antes e revela a fresta onde a presença está escondida. Quando a abertura é fechada, o som volta contra si mesmo, perde as vozes roubadas e desaparece.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-1.failure.01",
+    "text": "O eco escolhido responde depois do assobio, e a casa fecha suas frestas ao redor das vozes.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-2.success.01",
+    "text": "As promessas escritas nas paredes parecem iguais, mas uma delas conta uma história que nunca aconteceu. Quando a promessa falsa é descoberta, suas palavras desaparecem da madeira. As lembranças roubadas voltam, e a casa já não consegue imitar as vozes do grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-2.failure.01",
+    "text": "A promessa apontada como falsa pertence a um dos heróis, e a Matinta apaga seu nome das paredes.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-3.success.01",
+    "text": "A pequena janela é arrancada junto com a presença escondida em sua madeira. Do lado de fora, o assobio se mistura com o vento e perde a força. As portas e janelas param de respirar, e o grupo consegue deixar o casarão.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-3.failure.01",
+    "text": "O assobio abandona o postigo antes que ele seja arrancado e ocupa todas as janelas da casa.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "result.B1-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "encounter.B1.01",
+    "text": "Um assobio atravessa as frestas de um casarão abandonado. Logo depois, o som responde usando a voz do último herói que falou.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map015.json:event1",
+    "reading": "encounter.B1.01",
+    "text": "Cada vez que alguém responde ao assobio, uma palavra desaparece das lembranças do grupo. As portas e janelas começam a se mover como bocas, tentando repetir os nomes dos heróis antes que eles sejam esquecidos.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-1.success.01",
+    "text": "Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado contrário. Quando essa figura é retirada da frente da procissão, as outras almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos panos e o grupo é libertado.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-1.failure.01",
+    "text": "A sombra escolhida pertence a um morto comum; a figura da frente apaga as velas dos vivos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-2.success.01",
+    "text": "As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-2.failure.01",
+    "text": "O vínculo resiste nos panos e troca os nomes bordados, incorporando o grupo ao cortejo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-3.success.01",
+    "text": "Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas abrem espaço no meio da procissão e deixam o grupo passar.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-3.failure.01",
+    "text": "A costura se rompe junto com o tecido funerário, e as almas reconhecem os nomes expostos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "result.B2-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "encounter.B2.01",
+    "text": "Uma procissão de figuras cobertas atravessa o corredor sem mover os pés. Cada uma carrega uma vela acesa e um pano bordado com o nome de um dos heróis.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map016.json:event1",
+    "reading": "encounter.B2.01",
+    "text": "Quando uma chama se apaga, o herói ligado àquela vela começa a desaparecer das lembranças dos companheiros. Se todas se apagarem, ninguém no grupo conseguirá lembrar quem esteve ali.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-1.success.01",
+    "text": "As lembranças mudam sem parar, mas alguns olhos de fogo permanecem sempre no mesmo lugar. O grupo percebe que esses são os olhos verdadeiros e evita olhar diretamente para eles. Sem conseguir prender ninguém nas imagens do passado, as luzes se fecham e o caminho aparece.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-1.failure.01",
+    "text": "Um reflexo é tomado por olho verdadeiro, e as lembranças projetadas cercam o grupo em fogo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-2.success.01",
+    "text": "Os olhos mostram versões diferentes do passado para causar medo e confusão. O grupo escolhe uma lembrança verdadeira e não aceita nenhuma das imagens falsas. Sem conseguir mudar essa memória, o fogo perde a força e desaparece na escuridão.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-2.failure.01",
+    "text": "A memória sustentada contém uma mentira; suas versões queimadas apagam o caminho de volta.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-3.success.01",
+    "text": "O grupo cobre o corpo com barro frio. O contato com a terra e o vento ajuda a reconhecer o ambiente real em meio às lembranças em chamas. Em vez de seguir as luzes, todos avançam na direção indicada pelo vento. Os olhos tentam abrir caminhos falsos, mas ficam para trás. Ao chegar à saída, o barro cai e ninguém perde suas lembranças.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-3.failure.01",
+    "text": "O barro seca antes da travessia terminar, e as luzes passam a arder sob a pele.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "result.B3-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "encounter.B3.01",
+    "text": "Pontos de fogo aparecem na escuridão como olhos sem pálpebras. As chamas não queimam o corpo. Em vez disso, elas mostram lembranças que os heróis tentaram esconder.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map017.json:event1",
+    "reading": "encounter.B3.01",
+    "text": "Dentro dessas lembranças, pessoas e lugares começam a pegar fogo. Quanto mais os heróis observam, mais difícil fica saber o que aconteceu de verdade e o que foi criado pelos olhos.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-1.success.01",
+    "text": "As frases gravadas nas árvores contam versões diferentes da mesma promessa. Algumas falam de dias, pessoas e pagamentos que não poderiam existir juntos. Quando as contradições são mostradas, a floresta percebe a mentira. Os galhos se afastam e abrem o caminho.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-1.failure.01",
+    "text": "As exigências parecem compatíveis porque a imitadora altera os troncos durante a comparação.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-2.success.01",
+    "text": "A criatura usa o nome da guardiã da mata para controlar as árvores. Quando esse nome é separado de sua voz, ela perde o poder sobre a floresta. Os galhos param de se mover, e a verdadeira mata expulsa a imitadora.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-2.failure.01",
+    "text": "O nome desfeito pertence à guardiã verdadeira, ampliando a voz roubada entre as árvores.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-3.success.01",
+    "text": "O grupo sobe nas árvores e avança rapidamente pelos galhos. A floresta tenta fechar a passagem, mas cada novo galho serve de apoio antes de se juntar aos outros. Todos saltam para fora no último instante, deixando a criatura presa dentro do círculo de árvores.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-3.failure.01",
+    "text": "As copas completam o círculo antes da travessia, dobrando os galhos de volta ao mesmo ponto.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "result.B4-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "encounter.B4.01",
+    "text": "Uma voz escondida entre as árvores cobra uma promessa que nenhum dos heróis se lembra de ter feito. Ela afirma ser a Comadre Fulozinha, guardiã da mata, e exige que o grupo cumpra o acordo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map018.json:event1",
+    "reading": "encounter.B4.01",
+    "text": "Porém, cada tronco mostra uma versão diferente da promessa. Quando alguém aceita uma das exigências, os galhos se fecham ao redor do grupo. A presença não é a verdadeira guardiã, mas uma criatura usando seu nome.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-1.success.01",
+    "text": "As datas, os nomes e os riscos nas portas formam uma sequência. O grupo descobre qual foi a ordem usada para chamar a figura do espelho. A sequência é repetida até o último passo, que não é realizado. Sem completar o chamado, a figura desaparece e os espelhos voltam ao normal.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-1.failure.01",
+    "text": "A convocação reconstruída usa a data errada, e o espelho mais antigo troca o rosto de quem lê.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-2.success.01",
+    "text": "O espelho mostra pessoas perdidas e uma vida sem culpa, mas essas imagens não são verdadeiras. O grupo recusa a troca e não aceita os reflexos como parte do mundo real. Sem conseguir enganar ninguém, a figura fica presa no vidro e desaparece.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-2.failure.01",
+    "text": "O reflexo corrigido encontra uma culpa não admitida e ocupa o lugar de quem desviou os olhos.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-3.success.01",
+    "text": "O espelho mais antigo é retirado da parede e virado para os demais. A figura aparece em vários reflexos ao mesmo tempo e acaba presa entre eles. Os vidros escurecem, a aparição desaparece e o caminho fica livre.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-3.failure.01",
+    "text": "O vidro se parte voltado para os demais, multiplicando a figura loira por todo o banheiro.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "result.B5-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "encounter.B5.01",
+    "text": "O grupo entra em um banheiro escolar abandonado. Vários espelhos cobrem as paredes, mas cada um mostra um horário diferente. Mesmo quando os heróis se movem juntos, seus reflexos não repetem os gestos ao mesmo tempo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map019.json:event1",
+    "reading": "encounter.B5.01",
+    "text": "Uma figura loira aparece sempre no espelho mais antigo. Aos poucos, ela troca de lugar com quem a observa: primeiro copia a roupa, depois toma o rosto da pessoa e, por fim, tenta sair do espelho em seu lugar.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-1.success.01",
+    "text": "O nome escondido na canção é devolvido ao poço. Ele deixa de imitar as vozes do grupo e responde apenas com um som vindo das pedras. Sem o nome roubado para chamar novas vítimas, a música desaparece e os cabelos param de subir pelas paredes.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-1.failure.01",
+    "text": "O nome restituído pertence a outro poço, e a canção sobe pelas pedras com a voz do grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-2.success.01",
+    "text": "Mesmo sentindo como se estivesse debaixo d’água, o grupo respira devagar e não acompanha a canção. O verso seguinte fica sem resposta, e a sensação de afogamento começa a diminuir. Quando o canto termina, todos conseguem respirar normalmente outra vez.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-2.failure.01",
+    "text": "O próximo verso interrompe a respiração, tornando o chão seco tão sufocante quanto água profunda.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-3.success.01",
+    "text": "Os nós da corda são soltos um de cada vez, sem romper o fio principal que sustenta a passagem. Quando o último nó é aberto, os cabelos deixam de se mover e a canção perde a força. A corda permanece firme e permite que o grupo atravesse com segurança.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-3.failure.01",
+    "text": "Um fio de cabelo se rompe no nó errado, soltando a trança que sustentava a passagem.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "result.B6-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "encounter.B6.01",
+    "text": "O grupo encontra um poço fundo, mas completamente seco. Quando alguém se inclina sobre a abertura, uma canção sobe usando a voz dessa pessoa.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map020.json:event1",
+    "reading": "encounter.B6.01",
+    "text": "Cabelos molhados saem do poço e se enrolam até formar uma longa corda. A cada novo verso, os heróis sentem água entrando em seus pulmões, mesmo sem haver uma única gota ao redor.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-1.success.01",
+    "text": "Todos os gritos produzem ecos, mas um deles parece surgir antes do som original. Seguindo esse eco estranho, o grupo encontra o ponto onde a mortalha está sendo formada. Quando essa parte do tecido é desfeita, as datas desaparecem e a faixa cai no chão.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-1.failure.01",
+    "text": "O eco invertido é apenas atraso do salão; o grito verdadeiro aproxima todas as datas do presente.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-2.success.01",
+    "text": "As datas futuras escritas na mortalha seguem uma ordem. Ao compará-las com os nomes que surgem no tecido, o grupo encontra uma morte atribuída a alguém que não está na expedição. Quando a data falsa é separada das outras, os nomes desaparecem e o tecido volta para o teto.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-2.failure.01",
+    "text": "A morte apontada como estranha traz o nome de um herói, que termina de surgir na mortalha.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-3.success.01",
+    "text": "As penas no chão são empurradas por uma corrente de ar que a mortalha não consegue alcançar. O grupo segue esse caminho estreito enquanto o tecido desce ao redor. A mortalha tenta fechar a passagem, mas se rasga, e todos conseguem chegar ao outro lado.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-3.failure.01",
+    "text": "As penas conduzem a uma corrente de ar fechada pelo tecido, que envolve a saída por inteiro.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "result.B7-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "encounter.B7.01",
+    "text": "O grito de uma ave invisível corta o silêncio e abre um rasgo no teto. Uma longa faixa de tecido branco cai pela abertura, coberta por datas que ainda não aconteceram.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map021.json:event1",
+    "reading": "encounter.B7.01",
+    "text": "A cada novo grito, uma das datas muda e se aproxima do dia atual. Ao mesmo tempo, o nome de um dos heróis começa a aparecer no tecido. Quando a data chegar ao presente, o presságio de morte estará completo.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-1.success.01",
+    "text": "A marca na parede é fechada antes que o último traço da porta apareça. Sem um convite completo, a criatura não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-1.failure.01",
+    "text": "A marca de convite se completa antes de ser fechada, abrindo uma boca dentada na parede.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-2.success.01",
+    "text": "A criatura imita vozes de crianças perdidas, mas ninguém responde. Sem receber uma resposta, ela não consegue criar novas portas. As vozes ficam cada vez mais fracas, os dentes caem da parede e a criatura vai embora com fome.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-2.failure.01",
+    "text": "Uma voz infantil imita um pedido conhecido e recebe resposta, criando novas portas ao redor.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-3.success.01",
+    "text": "O grupo entra no espaço estreito entre as vigas e avança enquanto as portas falsas devoram os cômodos. A criatura tenta alcançar todos pelas paredes, mas não cabe entre os pedaços de madeira. O grupo chega ao outro lado antes que a casa desabe e feche todas as entradas.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-3.failure.01",
+    "text": "O madeiramento termina numa entrada falsa, cujos dentes fecham o cômodo atrás do grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "result.B8-3.failure.01",
+    "text": "Recuar preserva o que o grupo descobriu. Voltar para a taverna?",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "encounter.B8.01",
+    "text": "O grupo está preso dentro de uma casa sem portas. Do lado de fora, uma criatura com cascos caminha ao redor das paredes e chama pelos heróis usando vozes de crianças perdidas.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map022.json:event1",
+    "reading": "encounter.B8.01",
+    "text": "Cada vez que alguém responde, o desenho de uma porta surge na parede. Dentes começam a crescer ao redor da passagem, e a criatura fica mais perto de entrar. Quanto mais portas aparecem, menores ficam os cômodos da casa.<br>Como o grupo deve escapar?",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE263",
+    "reading": "threshold.physical.01",
+    "text": "A igreja se inclina sobre raízes antigas. O caminho segue sob o altar, onde a pedra parece respirar.",
+    "speaker": "Ivaí"
+  },
+  {
+    "owner": "CommonEvents.json:CE264",
+    "reading": "threshold.supernatural.01",
+    "text": "As atrações do parque rangem sem vento. Uma voz chama de dentro da figueira mais velha.",
+    "speaker": "Ivaí"
+  },
+  {
+    "owner": "CommonEvents.json:CE265",
+    "reading": "threshold.final.01",
+    "text": "As peças sobrepostas conduzem às ruínas do Vilarejo Partido e à Casa do Conselho.",
+    "speaker": "Ivaí"
+  },
+  {
+    "owner": "CommonEvents.json:CE266",
+    "reading": "death.A1.context",
+    "text": "as outras garrafas se abrem e os redemoinhos se juntam. Uma parede de vento e vidro bloqueia a saída. Para abrir uma passagem, um dos heróis precisa segurar a comporta por dentro. O restante do grupo consegue escapar, mas o herói é arrancado do chão e levado pelo redemoinho.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE267",
+    "reading": "death.A2.context",
+    "text": "os cipós são acionados e várias árvores tombam, bloqueando os caminhos. O grupo é empurrado para uma passagem cercada por estacas. Para que os outros escapem, um dos heróis precisa permanecer para trás e segurar o último tronco.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE268",
+    "reading": "death.A3.context",
+    "text": "o socador se solta dos trilhos e começa a perseguir o grupo. Para impedir que ele alcance os outros, um dos heróis precisa atraí-lo até o pilão central e permanecer no local do impacto. O golpe prende o socador e permite que o restante do grupo escape.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE269",
+    "reading": "death.A4.context",
+    "text": "as barras se fecham de uma vez. Para manter a última passagem aberta, um dos heróis precisa ficar no centro da jaula e suportar a pressão. Os outros conseguem escapar, mas não há tempo para voltar e salvá-lo.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE270",
+    "reading": "death.A5.context",
+    "text": "a pressão da caldeira aumenta e uma onda de fogo bloqueia a saída. Para abrir uma passagem, um dos heróis precisa permanecer ao lado da criatura e continuar controlando a válvula. Os outros conseguem atravessar, mas ele não consegue sair antes que as chamas tomem a cavalariça.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE271",
+    "reading": "death.A6.context",
+    "text": "as raízes se enrolam ao redor do grupo e formam um nó. Para que os outros sejam libertados, um dos heróis precisa se deixar prender pelo tronco. A planta solta os demais, mas transforma o herói em parte da árvore.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE272",
+    "reading": "death.A7.context",
+    "text": "os ganchos puxam todos os sacos para o centro e bloqueiam o corredor. Para liberar a saída, um dos heróis precisa entrar em um saco e servir de contrapeso. A passagem se abre para os outros, mas o saco com o herói continua seguindo em direção à prensa.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE273",
+    "reading": "death.A8.context",
+    "text": "dois pés atingem a mesma viga, e o telhado começa a desabar. Para impedir que tudo caia de uma vez, um dos heróis precisa ficar sob a viga principal e sustentar o impacto. Os outros conseguem escapar, mas o teto desaba sobre quem permaneceu para trás.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE274",
+    "reading": "death.B1.context",
+    "text": "o assobio começa a apagar as vozes do grupo. Para afastar a presença, um dos heróis precisa dizer o próprio nome antes que sua voz desapareça. A casa toma essa voz para si e esquece os demais, que conseguem escapar. O herói passa a ser a nova voz presa no casarão.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE275",
+    "reading": "death.B2.context",
+    "text": "todas as velas se apagam, e a procissão passa a reconhecer o grupo como parte do cortejo. Para afastar as almas, um dos heróis precisa tomar a vela da frente e seguir com os mortos. A procissão vai embora levando o herói, enquanto os outros conseguem escapar.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE276",
+    "reading": "death.B3.context",
+    "text": "todos os olhos se voltam para uma lembrança que pertence ao grupo inteiro. Para libertar os outros, um dos heróis precisa aceitar aquela lembrança como se fosse somente sua. Os companheiros recuperam o próprio passado, mas o herói fica preso para sempre dentro da lembrança.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE277",
+    "reading": "death.B4.context",
+    "text": "a floresta aceita a promessa falsa como se fosse verdadeira e exige que alguém cumpra o acordo. Para libertar os outros, um dos heróis precisa aceitar a dívida. A mata abre a passagem, mas o herói desaparece entre as árvores.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE278",
+    "reading": "death.B5.context",
+    "text": "os reflexos param de imitar o grupo e começam a sair dos espelhos. Para obrigá-los a voltar, um dos heróis precisa entrar no único vidro que ficou vazio e ocupar o lugar da figura loira. Os outros escapam, mas o herói permanece preso no espelho.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE279",
+    "reading": "death.B6.context",
+    "text": "a água invisível enche os pulmões de todo o grupo. Para que os outros voltem a respirar, um dos heróis precisa descer pela corda e responder ao canto no fundo do poço. A canção se cala, mas o herói não retorna.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE280",
+    "reading": "death.B7.context",
+    "text": "a data atual aparece por inteiro, e a mortalha cai sobre o grupo. Para abrir uma saída, um dos heróis precisa escrever o próprio nome no tecido e aceitar o presságio. A mortalha se rasga e liberta os outros, mas se fecha ao redor de quem escreveu o nome.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE281",
+    "reading": "death.B8.context",
+    "text": "todas as portas se abrem ao mesmo tempo e formam uma única boca enorme. Para fazer a casa voltar ao normal, um dos heróis precisa responder ao chamado e atravessar a passagem. As portas desaparecem e os outros ficam seguros, mas o herói é levado pela criatura.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE282",
+    "reading": "farewell.H1",
+    "text": "“Não desperdicem o tempo que estou comprando.”",
+    "speaker": "Gorvak"
+  },
+  {
+    "owner": "CommonEvents.json:CE283",
+    "reading": "farewell.H2",
+    "text": "“Quando eu correr, não olhem para trás.”",
+    "speaker": "Elowen"
+  },
+  {
+    "owner": "CommonEvents.json:CE284",
+    "reading": "farewell.H3",
+    "text": "“Eu seguro a estrutura. Vocês aproveitem a saída.”",
+    "speaker": "Griznik"
+  },
+  {
+    "owner": "CommonEvents.json:CE285",
+    "reading": "farewell.H4",
+    "text": "“Vivam. Depois decidam o que esta morte significa.”",
+    "speaker": "Seraphina"
+  },
+  {
+    "owner": "CommonEvents.json:CE286",
+    "reading": "farewell.H5",
+    "text": "“Minha rota termina aqui. A de vocês, não.”",
+    "speaker": "Bimbren"
+  },
+  {
+    "owner": "CommonEvents.json:CE287",
+    "reading": "farewell.H6",
+    "text": "“O caminho está marcado. Não deixem que termine comigo.”",
+    "speaker": "Liora"
+  },
+  {
+    "owner": "CommonEvents.json:CE288",
+    "reading": "farewell.H7",
+    "text": "“Levem as páginas. Façam minha última linha valer.”",
+    "speaker": "Vaelith"
+  },
+  {
+    "owner": "CommonEvents.json:CE289",
+    "reading": "farewell.H8",
+    "text": "“Eu marco o caminho. Vocês terminam de percorrê-lo.”",
+    "speaker": "Draska"
+  },
+  {
+    "owner": "CommonEvents.json:CE290",
+    "reading": "automatic_retreat.01",
+    "text": "Sem ninguém na expedição para continuar, Ivaí retorna à taverna. Os sobreviventes que ficaram na cidade poderão formar um novo grupo.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE292",
+    "reading": "lover.physical.01",
+    "text": "Sob o altar, Pérola permanece incorporada à pedra, consciente e protegida por uma metade quebrada do juramento.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE293",
+    "reading": "lover.physical.warning",
+    "text": "A outra margem guarda o caminho. Não confiem numa promessa que omite o preço.",
+    "speaker": "Pérola"
+  },
+  {
+    "owner": "CommonEvents.json:CE294",
+    "reading": "reward.physical",
+    "text": "Você recebeu a peça anã do mapa.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE295",
+    "reading": "lover.physical.second",
+    "text": "Se Floraí já entregou a peça dele, então Andirá conduziu vocês até a escolha que deseja.",
+    "speaker": "Pérola"
+  },
+  {
+    "owner": "CommonEvents.json:CE296",
+    "reading": "lover.supernatural.01",
+    "text": "Floraí fala entre as raízes da figueira que o mantém prisioneiro, ainda separado de Pérola.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE297",
+    "reading": "lover.supernatural.warning",
+    "text": "Procurem a outra peça. E desconfiem de toda voz que diga haver apenas uma saída.",
+    "speaker": "Floraí"
+  },
+  {
+    "owner": "CommonEvents.json:CE298",
+    "reading": "reward.supernatural",
+    "text": "Você recebeu a peça élfica do mapa.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE299",
+    "reading": "lover.supernatural.second",
+    "text": "Se Pérola falou primeiro, então alguém conhece a ordem dos nossos passos e espera pelo reencontro.",
+    "speaker": "Floraí"
+  },
+  {
+    "owner": "CommonEvents.json:CE300",
+    "reading": "irati.02.01",
+    "text": "No verso da primeira peça, Ivaí reconhece outro trecho de Irati: “O mapa encontra a segunda metade; ele não decide o destino do medalhão.”",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE301",
+    "reading": "map.reveal.01",
+    "text": "As duas peças do mapa se sobrepõem. Linhas antes incompletas revelam a entrada do Vilarejo Partido.",
+    "speaker": ""
+  },
+  {
+    "owner": "CommonEvents.json:CE302",
+    "reading": "map.reveal.02",
+    "text": "É lá que encontraremos a outra metade do medalhão — e a verdade que eu devia ter contado antes.",
+    "speaker": "Ivaí"
+  },
+  {
+    "owner": "CommonEvents.json:CE352",
+    "reading": "closure.first.01",
+    "text": "“Finalmente, uma parte do mapa estava em nossas mãos. Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir. Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a outra metade. Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como enfrentar o que vinha pela frente.”",
+    "speaker": "Rheed"
+  },
+  {
+    "owner": "CommonEvents.json:CE353",
+    "reading": "closure.second.01",
+    "text": "“Ali estava a parte que faltava. Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna, abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam. Foi quando me dei conta: tínhamos encontrado o mapa. Mas ainda precisaríamos seguir o caminho.”",
+    "speaker": "Rheed"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.01",
+    "text": "“No cofre, encontramos a segunda metade do medalhão e um registro de Palotina. Quando aproximamos as duas peças para examiná-las, Ivaí perdeu a compostura.”",
+    "speaker": "Rheed"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.02",
+    "text": "“Não juntem! Se restaurarem o medalhão, eu morro!”",
+    "speaker": "Ivaí"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.03",
+    "text": "“Ele percebeu o que tinha dito. Mas já era tarde. O registro confirmou: reunir as metades libertaria Floraí e Pérola, ao custo da vida de Ivaí. Destruí-las salvaria o bardo, mas entregaria os amantes e suas memórias a Andirá.”",
+    "speaker": "Rheed"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.challenge",
+    "text": "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações, perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que tinha escondido a verdade?”",
+    "speaker": "Rheed"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.solo",
+    "text": "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações, perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que tinha escondido a verdade?”",
+    "speaker": "Rheed"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.confession",
+    "text": "“Eu já conhecia a maldição. Pretendia destruir o medalhão desde o início. Tive medo de que ninguém viesse se soubesse.”",
+    "speaker": "Ivaí"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "council.andira",
+    "text": "Na água parada, uma silhueta de asas escuras sorri sem sair do reflexo: “Agora escolha livremente.”",
+    "speaker": "Andirá"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H1",
+    "text": "reunir o medalhão e libertar Floraí e Pérola. Ivaí deve aceitar pessoalmente o custo da história que impôs aos outros.",
+    "speaker": "Gorvak"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H2",
+    "text": "destruir o medalhão e salvar Ivaí. Vivo, ele deverá responder pelo dano e participar da reparação; morto, escaparia dessa obrigação.",
+    "speaker": "Elowen"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H3",
+    "text": "destruir o medalhão e salvar Ivaí para encerrar as mortes da linhagem. A sobrevivência cria obrigação de reparo, não recompensa.",
+    "speaker": "Griznik"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H4",
+    "text": "reunir o medalhão e libertar Floraí e Pérola, restaurando o juramento livremente escolhido. Se o jogador destruir o artefato, ela ainda tratará Ivaí enquanto puder, sem transformar cuidado em absolvição.",
+    "speaker": "Seraphina"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H5",
+    "text": "reunir o medalhão e libertar Floraí e Pérola. O compromisso original dos amantes foi livremente escolhido e deve prevalecer sobre a falsa missão.",
+    "speaker": "Bimbren"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H6",
+    "text": "destruir o medalhão e salvar Ivaí. Uma pessoa viva pode responder pelo que fez, registrar a verdade e corrigir o rumo.",
+    "speaker": "Liora"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H7",
+    "text": "reunir o medalhão, libertar os amantes e preservar o artefato como proteção e evidência da verdade ocultada.",
+    "speaker": "Vaelith"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "opinion.H8",
+    "text": "destruir o medalhão e salvar Ivaí como opção de menor dano imediato. A sobrevivência dele é uma dívida a ser paga, não um prêmio.",
+    "speaker": "Draska"
+  },
+  {
+    "owner": "Map023.json:event1",
+    "reading": "irati.03",
+    "text": "O último excerto de Irati confirma que a escolha só pode ser voluntária e que nenhuma das duas consequências pode ser evitada.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map025.json:event1",
+    "reading": "ending.reunite.01",
+    "text": "Ivaí junta as duas metades. A pedra que prende Pérola se abre, e as raízes soltam Floraí. Ivaí fica sem ar e cai no chão. Ele morre afogado, mesmo com o chão seco.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map025.json:event1",
+    "reading": "ending.reunite.02",
+    "text": "Depois, vemos Pérola e Floraí livres. Eles se encontram, dão as mãos e seguem juntos. Andirá continua existindo, mas não pode pegar os dois.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map026.json:event1",
+    "reading": "ending.destroy.01",
+    "text": "Ivaí quebra as duas metades. Ele respira sem dor e percebe que vai sobreviver. A maldição da família acaba. Uma água escura cobre Pérola e Floraí. Andirá leva os dois e as lembranças do amor deles.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map026.json:event1",
+    "reading": "ending.destroy.02",
+    "text": "A última cena mostra Ivaí vivo, olhando os pedaços do medalhão em silêncio.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map027.json:event1",
+    "reading": "ending.bad.01",
+    "text": "Uma poça aparece no chão seco. No reflexo, Ivaí vê Andirá. Ivaí fica sem ar, cai no chão e morre afogado. Ele não chega a fazer a escolha sobre o medalhão.",
+    "speaker": ""
+  },
+  {
+    "owner": "Map027.json:event1",
+    "reading": "ending.bad.02",
+    "text": "Depois, aparecem os nomes dos heróis mortos e a tela de fim de jogo.",
+    "speaker": ""
+  }
+]

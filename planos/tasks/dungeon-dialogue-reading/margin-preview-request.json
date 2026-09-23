@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/dungeon-dialogue-reading/spec.md",
+  "requestId": "dungeon-dialogue-margin-preview-01",
+  "consumer": "task-02",
+  "case": "planos/tasks/dungeon-dialogue-reading/visual.mjs",
+  "adapter": "planos/tasks/dungeon-dialogue-reading/margin-preview-adapter.mjs",
+  "scenario": {
+    "id": "dungeon-dialogue-reading",
+    "profile": "1280x720",
+    "variant": "1280x720",
+    "configuration": "isolated-32px-margin-proposal-port18735"
+  },
+  "claims": [
+    {
+      "id": "DUNGEON-READING",
+      "variant": "1280x720",
+      "sensor": "directed-browser",
+      "group": "dungeon-reading",
+      "source": {
+        "id": "DUNGEON-READING",
+        "variant": "1280x720"
+      },
+      "expected": {
+        "path": "planos/tasks/dungeon-dialogue-reading/verification.md",
+        "heading": "Expected dungeon reading"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/dungeon-dialogue-reading",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Reviewable isolated proposal; live plugin configuration unchanged."
+  }
+}

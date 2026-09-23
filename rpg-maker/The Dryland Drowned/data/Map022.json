@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Fechar a marca de convite antes que a criatura complete uma entrada\"",
+                  "center:json": "\"\\\\FS[22]Apagar a marca do convite antes que a criatura consiga completar\\numa porta.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Recusar as vozes infantis e não responder ao pedido vindo da parede\"",
+                  "center:json": "\"\\\\FS[22]Ignorar as vozes das crianças e não responder aos pedidos vindos\\ndas paredes.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Atravessar o madeiramento enquanto as portas falsas devoram os cômodos\"",
+                  "center:json": "\"\\\\FS[22]Escalar a estrutura de madeira da casa antes que as portas falsas\\ndestruam os cômodos.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Fechar a marca de convite antes que a criatura complete uma entrada<Bind Picture: 50><Hide Choice Window>",
-                  "Recusar as vozes infantis e não responder ao pedido vindo da parede<Bind Picture: 51><Hide Choice Window>",
-                  "Atravessar o madeiramento enquanto as portas falsas devoram os cômodos<Bind Picture: 52><Hide Choice Window>",
+                  "Apagar a marca do convite antes que a criatura consiga completar uma porta.<Bind Picture: 50><Hide Choice Window>",
+                  "Ignorar as vozes das crianças e não responder aos pedidos vindos das paredes.<Bind Picture: 51><Hide Choice Window>",
+                  "Escalar a estrutura de madeira da casa antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Fechar a marca de convite antes que a criatura complete uma entrada<Bind Picture: 50><Hide Choice Window>"
+                "Apagar a marca do convite antes que a criatura consiga completar uma porta.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Recusar as vozes infantis e não responder ao pedido vindo da parede<Bind Picture: 51><Hide Choice Window>"
+                "Ignorar as vozes das crianças e não responder aos pedidos vindos das paredes.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Atravessar o madeiramento enquanto as portas falsas devoram os cômodos<Bind Picture: 52><Hide Choice Window>"
+                "Escalar a estrutura de madeira da casa antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A marca de convite é fechada antes que a entrada se complete."
+                "A marca na parede é fechada antes que o último traço da porta apareça. Sem um convite completo, a criatura não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As vozes são recusadas, e nenhuma nova porta se abre."
+                "A criatura imita vozes de crianças perdidas, mas ninguém responde. Sem receber uma resposta, ela não consegue criar novas portas. As vozes ficam cada vez mais fracas, os dentes caem da parede e a criatura vai embora com fome."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo atravessa o madeiramento antes que as portas devorem a casa."
+                "O grupo entra no espaço estreito entre as vigas e avança enquanto as portas falsas devoram os cômodos. A criatura tenta alcançar todos pelas paredes, mas não cabe entre os pedaços de madeira. O grupo chega ao outro lado antes que a casa desabe e feche todas as entradas."
               ]
             },
             {
@@ -5494,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma coisa com cascos percorre o lado de fora de uma casa sem portas, falando com vozes de crianças perdidas. A cada resposta, uma nova entrada aparece na parede e dentes crescem ao redor do batente."
+                "O grupo está preso dentro de uma casa sem portas. Do lado de fora, uma criatura com cascos caminha ao redor das paredes e chama pelos heróis usando vozes de crianças perdidas."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Cada vez que alguém responde, o desenho de uma porta surge na parede. Dentes começam a crescer ao redor da passagem, e a criatura fica mais perto de entrar. Quanto mais portas aparecem, menores ficam os cômodos da casa.<br>Como o grupo deve escapar?"
               ]
             },
             {

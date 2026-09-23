@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Distinguir os olhos verdadeiros dos reflexos nas lembranças projetadas\"",
+                  "center:json": "\"\\\\FS[22]Separar os olhos verdadeiros dos reflexos que aparecem nas\\nlembranças.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Sustentar uma memória verdadeira sem desviar o olhar para as versões queimadas\"",
+                  "center:json": "\"\\\\FS[22]Concentrar-se em uma lembrança verdadeira sem olhar para as\\nversões em chamas.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Cobrir o corpo com barro frio e avançar seguindo o vento, não as luzes\"",
+                  "center:json": "\"\\\\FS[22]Cobrir o corpo com barro frio e seguir o vento em vez das luzes.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Distinguir os olhos verdadeiros dos reflexos nas lembranças projetadas<Bind Picture: 50><Hide Choice Window>",
-                  "Sustentar uma memória verdadeira sem desviar o olhar para as versões queimadas<Bind Picture: 51><Hide Choice Window>",
-                  "Cobrir o corpo com barro frio e avançar seguindo o vento, não as luzes<Bind Picture: 52><Hide Choice Window>",
+                  "Separar os olhos verdadeiros dos reflexos que aparecem nas lembranças.<Bind Picture: 50><Hide Choice Window>",
+                  "Concentrar-se em uma lembrança verdadeira sem olhar para as versões em chamas.<Bind Picture: 51><Hide Choice Window>",
+                  "Cobrir o corpo com barro frio e seguir o vento em vez das luzes.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Distinguir os olhos verdadeiros dos reflexos nas lembranças projetadas<Bind Picture: 50><Hide Choice Window>"
+                "Separar os olhos verdadeiros dos reflexos que aparecem nas lembranças.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Sustentar uma memória verdadeira sem desviar o olhar para as versões queimadas<Bind Picture: 51><Hide Choice Window>"
+                "Concentrar-se em uma lembrança verdadeira sem olhar para as versões em chamas.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Cobrir o corpo com barro frio e avançar seguindo o vento, não as luzes<Bind Picture: 52><Hide Choice Window>"
+                "Cobrir o corpo com barro frio e seguir o vento em vez das luzes.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os olhos verdadeiros são separados dos reflexos nas lembranças."
+                "As lembranças mudam sem parar, mas alguns olhos de fogo permanecem sempre no mesmo lugar. O grupo percebe que esses são os olhos verdadeiros e evita olhar diretamente para eles. Sem conseguir prender ninguém nas imagens do passado, as luzes se fecham e o caminho aparece."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Uma memória verdadeira preserva a identidade do grupo."
+                "Os olhos mostram versões diferentes do passado para causar medo e confusão. O grupo escolhe uma lembrança verdadeira e não aceita nenhuma das imagens falsas. Sem conseguir mudar essa memória, o fogo perde a força e desaparece na escuridão."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O barro frio protege o corpo, e o vento guia a travessia."
+                "O grupo cobre o corpo com barro frio. O contato com a terra e o vento ajuda a reconhecer o ambiente real em meio às lembranças em chamas. Em vez de seguir as luzes, todos avançam na direção indicada pelo vento. Os olhos tentam abrir caminhos falsos, mas ficam para trás. Ao chegar à saída, o barro cai e ninguém perde suas lembranças."
               ]
             },
             {
@@ -5494,7 +5494,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Pontos de fogo abrem-se na escuridão como olhos sem pálpebras. Eles não queimam a pele: iluminam lembranças que os heróis esconderam e incendeiam essas cenas por dentro, até que a vítima já não saiba se viveu ou inventou o próprio passado."
+                "Pontos de fogo aparecem na escuridão como olhos sem pálpebras. As chamas não queimam o corpo. Em vez disso, elas mostram lembranças que os heróis tentaram esconder."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Dentro dessas lembranças, pessoas e lugares começam a pegar fogo. Quanto mais os heróis observam, mais difícil fica saber o que aconteceu de verdade e o que foi criado pelos olhos.<br>Como o grupo deve escapar?"
               ]
             },
             {
