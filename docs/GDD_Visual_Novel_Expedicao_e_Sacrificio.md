@@ -2,13 +2,14 @@
 
 **Título em PT-BR:** Afogados em Terra Seca\
 **Título internacional para metadados:** The Dryland Drowned\
-**Versão:** 4.0\
-**Data:** 4 de setembro de 2026\
+**Versão-base:** 4.0, com atualizações incrementais\
+**Data da consolidação-base:** 4 de setembro de 2026\
+**Última atualização:** 23 de setembro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Idioma jogável:** PT-BR\
 **Duração-alvo:** 60 a 75 minutos na primeira campanha completa; 35 a 50 minutos em repetição\
-**Autoridade:** `GDD_Visual_Novel_Expedicao_e_Sacrificio.md`, sem sufixo, é a fonte de verdade atual. O snapshot `GDD_Visual_Novel_Expedicao_e_Sacrificio_v4.0.md` registra o mesmo conteúdo na data de criação e torna-se histórico quando o canônico voltar a evoluir.
+**Autoridade:** este é o único GDD vigente. As versões numeradas anteriores estão preservadas no histórico do Git; não são documentos complementares nem devem ser combinadas com as regras atuais.
 
 ---
 
@@ -20,13 +21,18 @@ Este GDD consolida as regras mecânicas do antigo documento canônico v0.7, reap
 
 **Atualização confirmada em 2026-09-17/18:** a integração dos PRs #15–19 tem escopo de produto aprovado na [spec incremental](../planos/tasks/approved-narrative-dialogue-staging/spec.md). As seções 12.1, 15, 18.2, 19 e 27 registram os recortes substituídos. O conjunto completo da spec e seu projeto técnico foram aprovados em 18/09/2026 após validação; essa aprovação não declara a integração implementada ou verificada. A seção 27 incorpora o enquadramento do prólogo aprovado no PR #19, distinguindo sua entrega de origem das mudanças desta integração.
 
-Documentos históricos de origem:
+Histórico de origem, preservado no Git:
 
-- [GDD v0.1](./GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.1.md)
-- [GDD v0.2](./GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.2.md)
-- [GDD v0.3](./GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.3.md)
-- revisões intermediárias do antigo arquivo canônico, recuperáveis pelo histórico do Git;
-- inventário histórico de pendências da v0.4 (documento ausente desta árvore).
+| Registro | Revisão do Git | Arquivo naquela revisão |
+| --- | --- | --- |
+| GDD v0.1 | `2ba4365` | `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.1.md` |
+| GDD v0.2 | `2ba4365` | `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.2.md` |
+| GDD v0.3 | `c528aaf` | `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio_v0.3.md` |
+| Snapshot v4.0 | `5928471` | `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio_v4.0.md` |
+
+Para consultar um registro sem restaurar cópias na pasta, use `git show <revisão>:<arquivo>`. As revisões intermediárias do antigo arquivo canônico também permanecem no Git. O inventário histórico de pendências da v0.4 não está nesta árvore.
+
+A [proposta narrativa de 31/08/2026](design/historico/proposta-medalhao-2026-08-31.md) foi preservada como material histórico de concepção. A trama incorporada e suas revisões constam neste GDD; os nomes, alternativas e pendências da proposta não constituem decisões vigentes adicionais.
 
 Cada definição deste documento possui um dos estados abaixo. A ausência de uma etiqueta numa regra declarativa significa **Confirmado**.
 
@@ -1380,7 +1386,7 @@ Essas fronteiras não atribuem cards. O Trello é a fonte exclusiva para execuç
 - A trama do Medalhão das Duas Margens foi recuperada da v0.3, mas todas as regras mecânicas conflitantes daquela versão foram descartadas.
 - As decisões de mundo, personagens, clímax, apresentação, plataforma e escopo foram aprovadas na entrevista que antecedeu a v4.0.
 - As fichas de herói foram elevadas de propostas a referências subordinadas confirmadas.
-- O snapshot v4.0 é imutável como registro histórico. Futuras decisões atualizam primeiro o GDD canônico sem sufixo e, quando necessário, geram nova versão numerada.
+- O snapshot v4.0 permanece imutável no histórico do Git. Em 2026-09-23, por solicitação do usuário, as cópias numeradas foram retiradas de `docs` para manter um único GDD. Futuras decisões atualizam este arquivo; o Git preserva as versões anteriores, sem novas cópias numeradas.
 - Após o snapshot v4.0, a entrevista da spec incremental `prototype-v2-gdd-layouts` confirmou a preparação interativa na taverna, as falas por hover ou setas, a seleção por clique ou Enter/Espaço, o destaque dos integrantes da expedição e o desaparecimento de um segundo no primeiro retorno após cada morte. Essas decisões constam na seção 19.1.1 e no ADR-003 da spec.
 - A mesma entrevista definiu a apresentação pública de cada herói como uma ficha preenchida por ele, exibida acima de sua cabeça na taverna ao receber hover ou foco, acompanhada de um balão separado para a fala.
 - A escolha de destino passou a usar um painel sobre a taverna, com uma ilustração própria por caminho, conforme o ADR-004 da mesma spec incremental.
