@@ -6,22 +6,21 @@
 
 # Fonte de verdade
 
-- Consulte `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md` antes de propor ou implementar decisões de design.
-- Trate versões numeradas do GDD como histórico; em conflitos, prevalece o GDD canônico sem sufixo de versão.
+- Consulte o GDD canônico em `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md` antes de propor ou implementar decisões de design; ele prevalece sobre versões numeradas, mantidas como histórico.
 - Preserve a distinção entre `Confirmado`, `Baseline de protótipo`, `Pendente` e `Fora do escopo`; não transforme pendências em decisões implícitas.
 - Trate specs Compozy concluídas como baselines históricas; descreva mudanças posteriores de comportamento em uma spec incremental.
 - Leia `docs/_memory/spec-authoring-playbook.md`, `docs/_memory/standing_directives.md` e `docs/_memory/glossary.md` antes de criar specs Compozy.
 
 # Implementação e execução
 
-- Trabalhe no jogo em `rpg-maker/The Dryland Drowned/`; use seus dados, plugins e assets como fonte da implementação, sem build nem serviços remotos.
+- Use `rpg-maker/The Dryland Drowned/` como única implementação do jogo, sem build; consulte seus dados, plugins e assets.
 - Mantenha conteúdo nos eventos nativos, regras nos plugins de domínio e testes em `rpg-maker/tests/`, conforme os contratos MZ aprovados.
 - Para abrir o jogo no Windows ou macOS com Node 22+ e Chrome, execute `npm start` na raiz; leia `docs/_memory/local-game-run.md` antes de iniciar ou reutilizar o servidor.
 
 # Planejamento e entregas
 
-- Ao planejar, executar ou verificar tarefas, aplique as ADRs G004–G006 em `docs/adrs/README.md`: autonomia de reorganização, exclusão de testes de gamepad e testes pesados por risco com encerramento dos recursos abertos pelo agente.
-- Antes de planejar trabalho, distribuir responsáveis, registrar bugs ou operar o Trello, leia `docs/_memory/trello-workflow.md` para o quadro, as regras de execução, a equipe e a autenticação.
-- Siga `.gitmessage` ao preparar mensagens de commit, inclusive com `git commit -m`.
+- Ao planejar, executar, retomar ou verificar tarefas, aplique as ADRs G004–G006 em `docs/adrs/README.md`.
+- Antes de planejar trabalho, distribuir responsáveis, registrar bugs ou operar o Trello, leia `docs/_memory/trello-workflow.md`.
+- Siga `.gitmessage` ao preparar mensagens de commit.
 - Siga `.github/pull_request_template.md` ao preparar pull requests.
-- Preserve, quando aplicável, o momento demonstrável e a captura sugerida para o devlog.
+- Ao alterar um fluxo visível, preserve ou atualize o momento demonstrável e a captura sugerida para o devlog.
