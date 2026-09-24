@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "pluginId": "Coreto_3_ChoiceCmnEvts",
+  "namespace": "choice-common-events",
+  "version": "0.1.0",
+  "reference": {
+    "pluginId": "VisuMZ_3_ChoiceCmnEvts",
+    "version": "1.02"
+  },
+  "dependencies": {
+    "required": [
+      [
+        "Coreto_1_MessageCore",
+        "VisuMZ_1_MessageCore"
+      ]
+    ],
+    "cores": {
+      "Coreto_0_CoreEngine": "0.1.0",
+      "VisuMZ_0_CoreEngine": "1.90"
+    },
+    "messages": {
+      "Coreto_1_MessageCore": "0.1.0",
+      "VisuMZ_1_MessageCore": "1.54"
+    }
+  },
+  "orderAfter": [
+    "Coreto_0_CoreEngine",
+    "VisuMZ_0_CoreEngine",
+    "Coreto_1_MessageCore",
+    "VisuMZ_1_MessageCore",
+    "Coreto_2_PictureChoices",
+    "VisuMZ_2_PictureChoices"
+  ],
+  "orderBefore": [
+    "Coreto_4_AttachedPictures",
+    "VisuMZ_4_AttachedPictures",
+    "Coreto_4_EventTitleScene",
+    "VisuMZ_4_EventTitleScene",
+    "Coreto_4_MessageVisibility",
+    "VisuMZ_4_MessageVisibility"
+  ],
+  "parameters": [
+    {
+      "id": "CORETO-CONFIG-SOURCE",
+      "key": "CoretoConfigSource",
+      "storageKey": "CoretoConfigSource",
+      "label": "Configuration source",
+      "description": "inherit reads the original entry when present; own reads this entry. Switching does not copy values.",
+      "type": "string",
+      "editorType": "select",
+      "options": [
+        "inherit",
+        "own"
+      ],
+      "default": "inherit",
+      "nativeDefault": "inherit",
+      "availability": "supported"
+    }
+  ],
+  "commands": [],
+  "commandAliases": [],
+  "tags": [
+    {
+      "id": "CC-T-SELECT",
+      "key": "choice-common-event",
+      "label": "Choice Common Event",
+      "description": "Start the Common Event whose database ID replaces {value} when the cursor highlights this native Show Choices option, including the initial highlight. Put the tag in the choice label in a map event. This happens before confirmation; staying on the same option does not retrigger it.",
+      "type": "number",
+      "min": 0,
+      "max": 9007199254740991,
+      "pattern": "<(?:CHOICE|SELECT) (?:COMMON EVENT|COMMONEVENT|EVENT): (\\d+)>",
+      "template": "<Choice Common Event: {value}>",
+      "targets": [
+        "choice-text"
+      ],
+      "availability": "supported",
+      "scopeLimit": "Choose an existing ID in Database > Common Events. ID 0 does nothing; with Coreto Message, a missing ID is ignored. Runs as a separate message Common Event interpreter while choices remain open, on Scene_Map or the event-title map scene; battle choices are not supported. If a label has multiple tags, the last ID wins. The tag is removed from the displayed label.",
+      "dependencies": ["Enable Coreto_3_ChoiceCmnEvts after a Message provider (Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.54); do not enable both Message providers."],
+      "examples": [
+        "<Choice Common Event: 1>"
+      ]
+    }
+  ],
+  "methods": []
+}

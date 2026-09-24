@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "pluginId": "Coreto_4_AttachedPictures",
+  "namespace": "attached-pictures",
+  "version": "0.1.0",
+  "reference": {
+    "pluginId": "VisuMZ_4_AttachedPictures",
+    "version": "1.05"
+  },
+  "dependencies": {
+    "required": [],
+    "cores": {
+      "Coreto_0_CoreEngine": "0.1.0",
+      "VisuMZ_0_CoreEngine": "1.90"
+    },
+    "messages": {
+      "Coreto_1_MessageCore": "0.1.0",
+      "VisuMZ_1_MessageCore": "1.54"
+    }
+  },
+  "orderAfter": [
+    "Coreto_0_CoreEngine",
+    "VisuMZ_0_CoreEngine",
+    "Coreto_1_MessageCore",
+    "VisuMZ_1_MessageCore",
+    "Coreto_2_PictureChoices",
+    "VisuMZ_2_PictureChoices",
+    "Coreto_2_VNPictureBusts",
+    "VisuMZ_2_VNPictureBusts",
+    "Coreto_3_ChoiceCmnEvts",
+    "VisuMZ_3_ChoiceCmnEvts"
+  ],
+  "orderBefore": [
+    "Coreto_4_EventTitleScene",
+    "VisuMZ_4_EventTitleScene",
+    "Coreto_4_MessageVisibility",
+    "VisuMZ_4_MessageVisibility"
+  ],
+  "parameters": [
+    {
+      "id": "CORETO-CONFIG-SOURCE",
+      "key": "CoretoConfigSource",
+      "storageKey": "CoretoConfigSource",
+      "label": "Configuration source",
+      "description": "inherit reads the original entry when present; own reads this entry. Switching does not copy values.",
+      "type": "string",
+      "editorType": "select",
+      "options": [
+        "inherit",
+        "own"
+      ],
+      "default": "inherit",
+      "nativeDefault": "inherit",
+      "availability": "supported"
+    },
+    {
+      "id": "AP-P-PictureIDs:arraynum",
+      "key": "PictureIDs",
+      "storageKey": "PictureIDs:arraynum",
+      "label": "Default Attached ID(s)",
+      "description": "Picture IDs initially attached to the message window in a new game; also used when loading a save with no stored message-picture attachment list.",
+      "editorType": "number[]",
+      "nativeDefault": "[\"61\",\"62\",\"63\",\"64\",\"65\",\"66\",\"67\",\"68\",\"69\",\"70\"]",
+      "availability": "supported",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "integer": true,
+        "min": 1,
+        "default": 1
+      },
+      "default": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "min": 1,
+      "context": "The list is stored in the save after initialization; changing this default does not replace an existing saved list. Use Show Picture to display each selected ID. Attachments use the picture coordinates relative to the message window, are visible only while it is open, and cannot receive picture clicks. IDs must fit the game picture range. An empty array gives no default attachments. Use MessageAddPicture and MessageRemovePicture to change the current game list."
+    },
+    {
+      "id": "AP-P-ContainerPosition:num",
+      "key": "ContainerPosition",
+      "storageKey": "ContainerPosition:num",
+      "label": "Container Position",
+      "description": "Layer of the attached-picture container inside the message window: behind its skin, in front of its skin, or in front of its text.",
+      "editorType": "select",
+      "nativeDefault": "1",
+      "availability": "supported",
+      "type": "number",
+      "default": 1,
+      "options": [
+        0,
+        1,
+        2
+      ],
+      "optionLabels": {
+        "0": "0 - Behind Window Skin",
+        "1": "1 - In Front of Window Skin",
+        "2": "2 - In Front of Window Text"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "AP-C-MessageAddPicture",
+      "key": "MessageAddPicture",
+      "label": "Message: Attach Picture(s)",
+      "description": "Attach the selected Picture IDs to the message window. The change takes effect when this event command runs and the window next updates.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "AP-MessageAddPicture-PictureID:arraynum",
+          "key": "PictureID",
+          "storageKey": "PictureID:arraynum",
+          "label": "Picture ID(s)",
+          "description": "Select which Picture ID's to attach to the Message Window.",
+          "editorType": "number[]",
+          "nativeDefault": "[\"1\"]",
+          "availability": "supported",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "integer": true,
+            "min": 1,
+            "default": 1
+          },
+          "default": [
+            1
+          ],
+          "min": 1
+        }
+      ],
+      "context": "Show Picture creates the displayed image; it may run before or after attachment. While attached, its Show/Move Picture coordinates are local to the message window and its normal screen sprite is hidden. The attached image is visible only while the window is open, follows its transforms and cannot receive picture clicks. IDs outside 1..$gameScreen.maxPictures() have no attached sprite. Repeated IDs do not duplicate sprites. A picture that already has attached children is ignored; otherwise any previous picture-parent link is removed. The attachment list persists in the save until removed."
+    },
+    {
+      "id": "AP-C-MessageRemovePicture",
+      "key": "MessageRemovePicture",
+      "label": "Message: Remove Picture(s)",
+      "description": "Detach the selected Picture IDs from the message window without erasing their Show Picture data.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "AP-MessageRemovePicture-PictureID:arraynum",
+          "key": "PictureID",
+          "storageKey": "PictureID:arraynum",
+          "label": "Picture ID(s)",
+          "description": "Select which Picture ID's to remove from the Message Window.",
+          "editorType": "number[]",
+          "nativeDefault": "[\"1\"]",
+          "availability": "supported",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "integer": true,
+            "min": 1,
+            "default": 1
+          },
+          "default": [
+            1
+          ],
+          "min": 1
+        }
+      ],
+      "context": "On the next sprite update, a displayed picture returns to the normal screen picture layer using its existing Show/Move Picture coordinates as screen coordinates. No world-position conversion occurs, so it can jump visually. An erased or never-shown picture stays absent. Removing an ID that is not message-attached has no effect. The updated attachment list persists in the save."
+    },
+    {
+      "id": "AP-C-PictureAddPicture",
+      "key": "PictureAddPicture",
+      "label": "Picture: Attach Picture(s)",
+      "description": "Attach the PictureID images as children of the TargetID picture when this event command runs.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "AP-PictureAddPicture-PictureID:arraynum",
+          "key": "PictureID",
+          "storageKey": "PictureID:arraynum",
+          "label": "Attach Picture ID(s)",
+          "description": "Select which Picture ID's to attach to another picture.",
+          "editorType": "number[]",
+          "nativeDefault": "[\"1\"]",
+          "availability": "supported",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "integer": true,
+            "min": 1,
+            "default": 1
+          },
+          "default": [
+            1
+          ],
+          "min": 1
+        },
+        {
+          "id": "AP-PictureAddPicture-TargetID:num",
+          "key": "TargetID",
+          "storageKey": "TargetID:num",
+          "label": "Target Picture ID",
+          "description": "Select which Picture ID to attach the above picture(s) to.",
+          "editorType": "number",
+          "nativeDefault": "2",
+          "availability": "supported",
+          "type": "number",
+          "default": 2,
+          "min": 1
+        }
+      ],
+      "context": "Use Show Picture for both child and target; attachment may be set before they are shown. Children use their own Show/Move Picture coordinates relative to the target and inherit its position, scale, rotation and opacity through the parent transform. A missing or erased target hides its children; their normal screen sprites are hidden while attached. Picture clicks are disabled for attached children. Use integer IDs in 1..$gameScreen.maxPictures(). Self-attachment, a target already attached elsewhere, and a child that already has children are ignored, preventing chains and cycles. Repeated IDs do not duplicate sprites. An accepted link replaces any previous parent or message-window attachment and persists in the save."
+    },
+    {
+      "id": "AP-C-PictureRemovePicture",
+      "key": "PictureRemovePicture",
+      "label": "Picture: Remove Picture(s)",
+      "description": "Detach the selected child Picture IDs from their picture parents without erasing their Show Picture data.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "AP-PictureRemovePicture-PictureID:arraynum",
+          "key": "PictureID",
+          "storageKey": "PictureID:arraynum",
+          "label": "Picture ID(s)",
+          "description": "Select which Picture ID's to remove from any other pictures.",
+          "editorType": "number[]",
+          "nativeDefault": "[\"1\"]",
+          "availability": "supported",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "integer": true,
+            "min": 1,
+            "default": 1
+          },
+          "default": [
+            1
+          ],
+          "min": 1
+        }
+      ],
+      "context": "On the next sprite update, a displayed picture returns to the normal screen picture layer with its existing Show/Move Picture coordinates, scale, rotation and opacity. Parent transforms are no longer applied and no world-position conversion occurs, so it can jump visually. An erased or never-shown picture stays absent. IDs without a picture-parent link are unchanged; message-window attachments are not removed by this command. The updated links persist in the save."
+    }
+  ],
+  "commandAliases": [
+    "VisuMZ_4_AttachedPictures"
+  ],
+  "tags": [],
+  "methods": []
+}

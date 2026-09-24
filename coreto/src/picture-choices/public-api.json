@@ -1,0 +1,1328 @@
+{
+  "schemaVersion": 1,
+  "pluginId": "Coreto_2_PictureChoices",
+  "namespace": "picture-choices",
+  "version": "0.1.0",
+  "reference": {
+    "pluginId": "VisuMZ_2_PictureChoices",
+    "version": "1.02"
+  },
+  "dependencies": {
+    "required": [],
+    "cores": {
+      "Coreto_0_CoreEngine": "0.1.0",
+      "VisuMZ_0_CoreEngine": "1.90"
+    },
+    "messages": {
+      "Coreto_1_MessageCore": "0.1.0",
+      "VisuMZ_1_MessageCore": "1.54"
+    },
+    "before": {},
+    "integrations": {}
+  },
+  "orderAfter": [
+    "Coreto_0_CoreEngine",
+    "VisuMZ_0_CoreEngine",
+    "Coreto_1_MessageCore",
+    "VisuMZ_1_MessageCore"
+  ],
+  "orderBefore": [
+    "Coreto_3_ChoiceCmnEvts",
+    "VisuMZ_3_ChoiceCmnEvts",
+    "Coreto_4_AttachedPictures",
+    "VisuMZ_4_AttachedPictures",
+    "Coreto_4_EventTitleScene",
+    "VisuMZ_4_EventTitleScene",
+    "Coreto_4_MessageVisibility",
+    "VisuMZ_4_MessageVisibility"
+  ],
+  "parameters": [
+    {
+      "id": "CORETO-CONFIG-SOURCE",
+      "key": "CoretoConfigSource",
+      "storageKey": "CoretoConfigSource",
+      "label": "Configuration source",
+      "description": "inherit reads the original entry when present; own reads this entry. Switching does not copy values.",
+      "type": "string",
+      "editorType": "select",
+      "options": [
+        "inherit",
+        "own"
+      ],
+      "default": "inherit",
+      "nativeDefault": "inherit",
+      "availability": "supported"
+    },
+    {
+      "id": "PC-P-AutoClear:eval",
+      "key": "AutoClear",
+      "storageKey": "AutoClear:eval",
+      "label": "Auto Clear",
+      "description": "Clear all picture-to-choice bindings and their selected/deselected settings after a choice is confirmed or cancelled. Does not erase displayed pictures. Set false to retain these settings until a Clear command, Erase Picture, or a new game clears them.",
+      "editorType": "boolean",
+      "nativeDefault": "true",
+      "availability": "supported",
+      "type": "boolean",
+      "default": true,
+      "on": "Automatic",
+      "off": "Manual"
+    },
+    {
+      "id": "PC-P-SameCheck:eval",
+      "key": "SameCheck",
+      "storageKey": "SameCheck:eval",
+      "label": "Same Check",
+      "description": "During playtest, compare the On Select and On Deselect objects supplied to a Change Picture Choice Settings command. If equal, display an alert and exit the game. Disable to allow identical settings. This check does not run in a deployed game.",
+      "editorType": "boolean",
+      "nativeDefault": "true",
+      "availability": "supported",
+      "type": "boolean",
+      "default": true,
+      "on": "Check",
+      "off": "Don't Check"
+    }
+  ],
+  "commands": [
+    {
+      "id": "PC-C-ClearAll",
+      "key": "ClearAll",
+      "label": "Clear: All Selection Settings",
+      "description": "Clear all picture-to-choice bindings and selection settings for every picture ID.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [],
+      "context": "Clears both choice bindings and selected/deselected settings, without erasing displayed pictures. ClearAll affects all IDs. ID lists are rounded and clamped to the game picture range; range boundaries are clamped, sorted and included at both ends. Use whole picture IDs."
+    },
+    {
+      "id": "PC-C-ClearPictureID",
+      "key": "ClearPictureID",
+      "label": "Clear: Picture ID(s) Selection Settings",
+      "description": "Clears all selection settings for the ID'd pictures.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "PC-ClearPictureID-PictureIDs:arraynum",
+          "key": "PictureIDs",
+          "storageKey": "PictureIDs:arraynum",
+          "label": "Picture ID(s)",
+          "description": "Select which Picture ID(s) to clear.",
+          "editorType": "number[]",
+          "nativeDefault": "[\"1\"]",
+          "availability": "supported",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "default": 1,
+            "integer": true,
+            "min": 1
+          },
+          "default": [
+            1
+          ],
+          "min": 1
+        }
+      ],
+      "context": "Clears both choice bindings and selected/deselected settings, without erasing displayed pictures. ClearAll affects all IDs. ID lists are rounded and clamped to the game picture range; range boundaries are clamped, sorted and included at both ends. Use whole picture IDs."
+    },
+    {
+      "id": "PC-C-ClearPictureRange",
+      "key": "ClearPictureRange",
+      "label": "Clear: Picture Range Selection Settings",
+      "description": "Clears all selection settings for the picture ID's in range.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "PC-ClearPictureRange-StartID:num",
+          "key": "StartID",
+          "storageKey": "StartID:num",
+          "label": "Starting ID",
+          "description": "First boundary of the picture ID range. Both endpoints are included; reversed boundaries are sorted. Use whole IDs; runtime clamps each boundary to 1..$gameScreen.maxPictures(). Fractional boundaries are not rounded: the runtime steps by 1 from the smaller numeric boundary, which can produce fractional picture keys. Use whole IDs for actual pictures.",
+          "editorType": "number",
+          "nativeDefault": "1",
+          "availability": "supported",
+          "type": "number",
+          "default": 1,
+          "min": 1
+        },
+        {
+          "id": "PC-ClearPictureRange-EndingID:num",
+          "key": "EndingID",
+          "storageKey": "EndingID:num",
+          "label": "Ending ID",
+          "description": "Second boundary of the picture ID range. Both endpoints are included; reversed boundaries are sorted. Use whole IDs; runtime clamps each boundary to 1..$gameScreen.maxPictures(). Fractional boundaries are not rounded: the runtime steps by 1 from the smaller numeric boundary, which can produce fractional picture keys. Use whole IDs for actual pictures.",
+          "editorType": "number",
+          "nativeDefault": "100",
+          "availability": "supported",
+          "type": "number",
+          "default": 100,
+          "min": 1
+        }
+      ],
+      "context": "Clears both choice bindings and selected/deselected settings, without erasing displayed pictures. ClearAll affects all IDs. ID lists are rounded and clamped to the game picture range; range boundaries are clamped, sorted and included at both ends. Use whole picture IDs."
+    },
+    {
+      "id": "PC-C-ChangePictureChoiceSettingsOne",
+      "key": "ChangePictureChoiceSettingsOne",
+      "label": "Picture Settings: Change ID(s)",
+      "description": "Changes select and deselect settings for the picture ID(s).",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "PC-ChangePictureChoiceSettingsOne-PictureIDs:arraynum",
+          "key": "PictureIDs",
+          "storageKey": "PictureIDs:arraynum",
+          "label": "Picture ID(s)",
+          "description": "Select which Picture ID(s) to change settings for.",
+          "editorType": "number[]",
+          "nativeDefault": "[\"1\"]",
+          "availability": "supported",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "default": 1,
+            "integer": true,
+            "min": 1
+          },
+          "default": [
+            1
+          ],
+          "min": 1
+        },
+        {
+          "id": "PC-ChangePictureChoiceSettingsOne-OnSelectSettings:struct",
+          "key": "OnSelectSettings",
+          "storageKey": "OnSelectSettings:struct",
+          "label": "On Select Settings",
+          "description": "Picture settings when selecting that choice.",
+          "editorType": "struct<Picture>",
+          "nativeDefault": "{\"Easing\":\"\",\"Duration:num\":\"10\",\"easingType:str\":\"Linear\",\"Position\":\"\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"Blend\":\"\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"Tone\":\"\",\"TargetToneRed:str\":\"Unchanged\",\"TargetToneGreen:str\":\"Unchanged\",\"TargetToneBlue:str\":\"Unchanged\",\"TargetToneGray:str\":\"Unchanged\"}",
+          "availability": "supported",
+          "type": "struct",
+          "structName": "Picture",
+          "fields": [
+            {
+              "id": "PC-PICTURE-Duration:num",
+              "key": "Duration",
+              "storageKey": "Duration:num",
+              "label": "Duration",
+              "description": "Transition length in game update frames for picture position, scale, opacity and tone. Use a positive whole number (normally 60 frames is about one second); zero or a negative value applies immediately. Initial choice highlighting and applying deselected settings when showing a picture are immediate regardless of this value.",
+              "editorType": "text",
+              "nativeDefault": "10",
+              "availability": "supported",
+              "type": "number",
+              "default": 10
+            },
+            {
+              "id": "PC-PICTURE-easingType:str",
+              "key": "easingType",
+              "storageKey": "easingType:str",
+              "label": "Easing Type",
+              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "editorType": "combo",
+              "nativeDefault": "Linear",
+              "availability": "supported",
+              "type": "string",
+              "default": "Linear",
+              "suggestions": [
+                "Linear",
+                "InSine",
+                "OutSine",
+                "InOutSine",
+                "InQuad",
+                "OutQuad",
+                "InOutQuad",
+                "InCubic",
+                "OutCubic",
+                "InOutCubic",
+                "InQuart",
+                "OutQuart",
+                "InOutQuart",
+                "InQuint",
+                "OutQuint",
+                "InOutQuint",
+                "InExpo",
+                "OutExpo",
+                "InOutExpo",
+                "InCirc",
+                "OutCirc",
+                "InOutCirc",
+                "InBack",
+                "OutBack",
+                "InOutBack",
+                "InElastic",
+                "OutElastic",
+                "InOutElastic",
+                "InBounce",
+                "OutBounce",
+                "InOutBounce"
+              ]
+            },
+            {
+              "id": "PC-PICTURE-TargetX:str",
+              "key": "TargetX",
+              "storageKey": "TargetX:str",
+              "label": "Target X",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetY:str",
+              "key": "TargetY",
+              "storageKey": "TargetY:str",
+              "label": "Target Y",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleX:str",
+              "key": "TargetScaleX",
+              "storageKey": "TargetScaleX:str",
+              "label": "Target Width %",
+              "description": "Target horizontal scale as a percentage of the image width: 100 is original size, 50 is half, 0 collapses width, and negative values mirror horizontally. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target horizontal scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleY:str",
+              "key": "TargetScaleY",
+              "storageKey": "TargetScaleY:str",
+              "label": "Target Height %",
+              "description": "Target vertical scale as a percentage of the image height: 100 is original size, 50 is half, 0 collapses height, and negative values mirror vertically. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target vertical scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetOpacity:str",
+              "key": "TargetOpacity",
+              "storageKey": "TargetOpacity:str",
+              "label": "Target Opacity",
+              "description": "Target opacity from 0 (transparent) to 255 (fully opaque). Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current target opacity. Choose a value in 0..255; this command does not clamp the expression result.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-BlendMode:num",
+              "key": "BlendMode",
+              "storageKey": "BlendMode:num",
+              "label": "Blend Mode",
+              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "editorType": "select",
+              "nativeDefault": "-1",
+              "availability": "supported",
+              "type": "number",
+              "default": -1,
+              "options": [
+                -1,
+                0,
+                1,
+                2,
+                3
+              ],
+              "optionLabels": {
+                "0": "0 - Normal",
+                "1": "1 - Additive",
+                "2": "2 - Multiply",
+                "3": "3 - Screen",
+                "-1": "-1 - Unchanged"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneRed:str",
+              "key": "TargetToneRed",
+              "storageKey": "TargetToneRed:str",
+              "label": "Target Tone Red",
+              "description": "Target red tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current red tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGreen:str",
+              "key": "TargetToneGreen",
+              "storageKey": "TargetToneGreen:str",
+              "label": "Target Tone Green",
+              "description": "Target green tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current green tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneBlue:str",
+              "key": "TargetToneBlue",
+              "storageKey": "TargetToneBlue:str",
+              "label": "Target Tone Blue",
+              "description": "Target blue tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current blue tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGray:str",
+              "key": "TargetToneGray",
+              "storageKey": "TargetToneGray:str",
+              "label": "Target Tone Gray",
+              "description": "Target grayscale amount from 0 (original color saturation) to 255 (fully grayscale), clamped to this range. Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current gray tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            }
+          ],
+          "default": {
+            "Duration": 10,
+            "easingType": "Linear",
+            "TargetX": "Unchanged",
+            "TargetY": "Unchanged",
+            "TargetScaleX": "Unchanged",
+            "TargetScaleY": "Unchanged",
+            "TargetOpacity": "Unchanged",
+            "BlendMode": -1,
+            "TargetToneRed": "Unchanged",
+            "TargetToneGreen": "Unchanged",
+            "TargetToneBlue": "Unchanged",
+            "TargetToneGray": "Unchanged"
+          },
+          "context": "Fill this object inside the command value using its field keys. These settings apply when the matching choice is highlighted. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+        },
+        {
+          "id": "PC-ChangePictureChoiceSettingsOne-OnDeselectSettings:struct",
+          "key": "OnDeselectSettings",
+          "storageKey": "OnDeselectSettings:struct",
+          "label": "On Deselect Settings",
+          "description": "Picture settings when deselecting that choice.",
+          "editorType": "struct<Picture>",
+          "nativeDefault": "{\"Easing\":\"\",\"Duration:num\":\"10\",\"easingType:str\":\"Linear\",\"Position\":\"\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"Blend\":\"\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"Tone\":\"\",\"TargetToneRed:str\":\"Unchanged\",\"TargetToneGreen:str\":\"Unchanged\",\"TargetToneBlue:str\":\"Unchanged\",\"TargetToneGray:str\":\"Unchanged\"}",
+          "availability": "supported",
+          "type": "struct",
+          "structName": "Picture",
+          "fields": [
+            {
+              "id": "PC-PICTURE-Duration:num",
+              "key": "Duration",
+              "storageKey": "Duration:num",
+              "label": "Duration",
+              "description": "Transition length in game update frames for picture position, scale, opacity and tone. Use a positive whole number (normally 60 frames is about one second); zero or a negative value applies immediately. Initial choice highlighting and applying deselected settings when showing a picture are immediate regardless of this value.",
+              "editorType": "text",
+              "nativeDefault": "10",
+              "availability": "supported",
+              "type": "number",
+              "default": 10
+            },
+            {
+              "id": "PC-PICTURE-easingType:str",
+              "key": "easingType",
+              "storageKey": "easingType:str",
+              "label": "Easing Type",
+              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "editorType": "combo",
+              "nativeDefault": "Linear",
+              "availability": "supported",
+              "type": "string",
+              "default": "Linear",
+              "suggestions": [
+                "Linear",
+                "InSine",
+                "OutSine",
+                "InOutSine",
+                "InQuad",
+                "OutQuad",
+                "InOutQuad",
+                "InCubic",
+                "OutCubic",
+                "InOutCubic",
+                "InQuart",
+                "OutQuart",
+                "InOutQuart",
+                "InQuint",
+                "OutQuint",
+                "InOutQuint",
+                "InExpo",
+                "OutExpo",
+                "InOutExpo",
+                "InCirc",
+                "OutCirc",
+                "InOutCirc",
+                "InBack",
+                "OutBack",
+                "InOutBack",
+                "InElastic",
+                "OutElastic",
+                "InOutElastic",
+                "InBounce",
+                "OutBounce",
+                "InOutBounce"
+              ]
+            },
+            {
+              "id": "PC-PICTURE-TargetX:str",
+              "key": "TargetX",
+              "storageKey": "TargetX:str",
+              "label": "Target X",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetY:str",
+              "key": "TargetY",
+              "storageKey": "TargetY:str",
+              "label": "Target Y",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleX:str",
+              "key": "TargetScaleX",
+              "storageKey": "TargetScaleX:str",
+              "label": "Target Width %",
+              "description": "Target horizontal scale as a percentage of the image width: 100 is original size, 50 is half, 0 collapses width, and negative values mirror horizontally. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target horizontal scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleY:str",
+              "key": "TargetScaleY",
+              "storageKey": "TargetScaleY:str",
+              "label": "Target Height %",
+              "description": "Target vertical scale as a percentage of the image height: 100 is original size, 50 is half, 0 collapses height, and negative values mirror vertically. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target vertical scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetOpacity:str",
+              "key": "TargetOpacity",
+              "storageKey": "TargetOpacity:str",
+              "label": "Target Opacity",
+              "description": "Target opacity from 0 (transparent) to 255 (fully opaque). Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current target opacity. Choose a value in 0..255; this command does not clamp the expression result.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-BlendMode:num",
+              "key": "BlendMode",
+              "storageKey": "BlendMode:num",
+              "label": "Blend Mode",
+              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "editorType": "select",
+              "nativeDefault": "-1",
+              "availability": "supported",
+              "type": "number",
+              "default": -1,
+              "options": [
+                -1,
+                0,
+                1,
+                2,
+                3
+              ],
+              "optionLabels": {
+                "0": "0 - Normal",
+                "1": "1 - Additive",
+                "2": "2 - Multiply",
+                "3": "3 - Screen",
+                "-1": "-1 - Unchanged"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneRed:str",
+              "key": "TargetToneRed",
+              "storageKey": "TargetToneRed:str",
+              "label": "Target Tone Red",
+              "description": "Target red tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current red tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGreen:str",
+              "key": "TargetToneGreen",
+              "storageKey": "TargetToneGreen:str",
+              "label": "Target Tone Green",
+              "description": "Target green tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current green tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneBlue:str",
+              "key": "TargetToneBlue",
+              "storageKey": "TargetToneBlue:str",
+              "label": "Target Tone Blue",
+              "description": "Target blue tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current blue tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGray:str",
+              "key": "TargetToneGray",
+              "storageKey": "TargetToneGray:str",
+              "label": "Target Tone Gray",
+              "description": "Target grayscale amount from 0 (original color saturation) to 255 (fully grayscale), clamped to this range. Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current gray tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            }
+          ],
+          "default": {
+            "Duration": 10,
+            "easingType": "Linear",
+            "TargetX": "Unchanged",
+            "TargetY": "Unchanged",
+            "TargetScaleX": "Unchanged",
+            "TargetScaleY": "Unchanged",
+            "TargetOpacity": "Unchanged",
+            "BlendMode": -1,
+            "TargetToneRed": "Unchanged",
+            "TargetToneGreen": "Unchanged",
+            "TargetToneBlue": "Unchanged",
+            "TargetToneGray": "Unchanged"
+          },
+          "context": "Fill this object inside the command value using its field keys. These settings apply when another choice is highlighted, so this bound choice is not selected. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+        }
+      ],
+      "context": "Configure settings before Show Choices. Show Picture creates each image; add <Bind Picture: 1> to its choice text for illustrative ID 1. Cursor highlighting, including initial selection, applies selected settings to matching bound pictures and deselected settings to the others; missing pictures are skipped. Pointer hover highlights and clicking confirms the bound choice. These commands only store settings; they neither show images nor bind choices. Initial highlighting applies instantly. Erase Picture clears that ID, and AutoClear can clear all bindings/settings after confirmation or cancellation. Use whole IDs; lists are rounded/clamped and ranges are clamped/sorted/inclusive within the game picture range. The example uses opacity 255 when selected and 160 when deselected, so the two settings differ with SameCheck enabled; use existing shown and bound pictures 1 (or 1 and 2 for the range).",
+      "examples": [
+        "picture-choices commands list --target common-event:1 --json",
+        "picture-choices commands insert --target common-event:1 --before 0 --command ChangePictureChoiceSettingsOne --value '{\"PictureIDs\":[1],\"OnSelectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"255\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"},\"OnDeselectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"160\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"}}' --expected-hash HASH_FROM_LIST"
+      ]
+    },
+    {
+      "id": "PC-C-ChangePictureChoiceSettingsRange",
+      "key": "ChangePictureChoiceSettingsRange",
+      "label": "Picture Settings: Change Range",
+      "description": "Changes select and deselect settings for the picture ID's in range.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "PC-ChangePictureChoiceSettingsRange-StartID:num",
+          "key": "StartID",
+          "storageKey": "StartID:num",
+          "label": "Starting ID",
+          "description": "First boundary of the picture ID range. Both endpoints are included; reversed boundaries are sorted. Use whole IDs; runtime clamps each boundary to 1..$gameScreen.maxPictures(). Fractional boundaries are not rounded: the runtime steps by 1 from the smaller numeric boundary, which can produce fractional picture keys. Use whole IDs for actual pictures.",
+          "editorType": "number",
+          "nativeDefault": "1",
+          "availability": "supported",
+          "type": "number",
+          "default": 1,
+          "min": 1
+        },
+        {
+          "id": "PC-ChangePictureChoiceSettingsRange-EndingID:num",
+          "key": "EndingID",
+          "storageKey": "EndingID:num",
+          "label": "Ending ID",
+          "description": "Second boundary of the picture ID range. Both endpoints are included; reversed boundaries are sorted. Use whole IDs; runtime clamps each boundary to 1..$gameScreen.maxPictures(). Fractional boundaries are not rounded: the runtime steps by 1 from the smaller numeric boundary, which can produce fractional picture keys. Use whole IDs for actual pictures.",
+          "editorType": "number",
+          "nativeDefault": "100",
+          "availability": "supported",
+          "type": "number",
+          "default": 100,
+          "min": 1
+        },
+        {
+          "id": "PC-ChangePictureChoiceSettingsRange-OnSelectSettings:struct",
+          "key": "OnSelectSettings",
+          "storageKey": "OnSelectSettings:struct",
+          "label": "On Select Settings",
+          "description": "Picture settings when selecting that choice.",
+          "editorType": "struct<Picture>",
+          "nativeDefault": "{\"Easing\":\"\",\"Duration:num\":\"10\",\"easingType:str\":\"Linear\",\"Position\":\"\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"Blend\":\"\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"Tone\":\"\",\"TargetToneRed:str\":\"Unchanged\",\"TargetToneGreen:str\":\"Unchanged\",\"TargetToneBlue:str\":\"Unchanged\",\"TargetToneGray:str\":\"Unchanged\"}",
+          "availability": "supported",
+          "type": "struct",
+          "structName": "Picture",
+          "fields": [
+            {
+              "id": "PC-PICTURE-Duration:num",
+              "key": "Duration",
+              "storageKey": "Duration:num",
+              "label": "Duration",
+              "description": "Transition length in game update frames for picture position, scale, opacity and tone. Use a positive whole number (normally 60 frames is about one second); zero or a negative value applies immediately. Initial choice highlighting and applying deselected settings when showing a picture are immediate regardless of this value.",
+              "editorType": "text",
+              "nativeDefault": "10",
+              "availability": "supported",
+              "type": "number",
+              "default": 10
+            },
+            {
+              "id": "PC-PICTURE-easingType:str",
+              "key": "easingType",
+              "storageKey": "easingType:str",
+              "label": "Easing Type",
+              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "editorType": "combo",
+              "nativeDefault": "Linear",
+              "availability": "supported",
+              "type": "string",
+              "default": "Linear",
+              "suggestions": [
+                "Linear",
+                "InSine",
+                "OutSine",
+                "InOutSine",
+                "InQuad",
+                "OutQuad",
+                "InOutQuad",
+                "InCubic",
+                "OutCubic",
+                "InOutCubic",
+                "InQuart",
+                "OutQuart",
+                "InOutQuart",
+                "InQuint",
+                "OutQuint",
+                "InOutQuint",
+                "InExpo",
+                "OutExpo",
+                "InOutExpo",
+                "InCirc",
+                "OutCirc",
+                "InOutCirc",
+                "InBack",
+                "OutBack",
+                "InOutBack",
+                "InElastic",
+                "OutElastic",
+                "InOutElastic",
+                "InBounce",
+                "OutBounce",
+                "InOutBounce"
+              ]
+            },
+            {
+              "id": "PC-PICTURE-TargetX:str",
+              "key": "TargetX",
+              "storageKey": "TargetX:str",
+              "label": "Target X",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetY:str",
+              "key": "TargetY",
+              "storageKey": "TargetY:str",
+              "label": "Target Y",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleX:str",
+              "key": "TargetScaleX",
+              "storageKey": "TargetScaleX:str",
+              "label": "Target Width %",
+              "description": "Target horizontal scale as a percentage of the image width: 100 is original size, 50 is half, 0 collapses width, and negative values mirror horizontally. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target horizontal scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleY:str",
+              "key": "TargetScaleY",
+              "storageKey": "TargetScaleY:str",
+              "label": "Target Height %",
+              "description": "Target vertical scale as a percentage of the image height: 100 is original size, 50 is half, 0 collapses height, and negative values mirror vertically. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target vertical scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetOpacity:str",
+              "key": "TargetOpacity",
+              "storageKey": "TargetOpacity:str",
+              "label": "Target Opacity",
+              "description": "Target opacity from 0 (transparent) to 255 (fully opaque). Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current target opacity. Choose a value in 0..255; this command does not clamp the expression result.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-BlendMode:num",
+              "key": "BlendMode",
+              "storageKey": "BlendMode:num",
+              "label": "Blend Mode",
+              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "editorType": "select",
+              "nativeDefault": "-1",
+              "availability": "supported",
+              "type": "number",
+              "default": -1,
+              "options": [
+                -1,
+                0,
+                1,
+                2,
+                3
+              ],
+              "optionLabels": {
+                "0": "0 - Normal",
+                "1": "1 - Additive",
+                "2": "2 - Multiply",
+                "3": "3 - Screen",
+                "-1": "-1 - Unchanged"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneRed:str",
+              "key": "TargetToneRed",
+              "storageKey": "TargetToneRed:str",
+              "label": "Target Tone Red",
+              "description": "Target red tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current red tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGreen:str",
+              "key": "TargetToneGreen",
+              "storageKey": "TargetToneGreen:str",
+              "label": "Target Tone Green",
+              "description": "Target green tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current green tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneBlue:str",
+              "key": "TargetToneBlue",
+              "storageKey": "TargetToneBlue:str",
+              "label": "Target Tone Blue",
+              "description": "Target blue tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current blue tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGray:str",
+              "key": "TargetToneGray",
+              "storageKey": "TargetToneGray:str",
+              "label": "Target Tone Gray",
+              "description": "Target grayscale amount from 0 (original color saturation) to 255 (fully grayscale), clamped to this range. Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current gray tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            }
+          ],
+          "default": {
+            "Duration": 10,
+            "easingType": "Linear",
+            "TargetX": "Unchanged",
+            "TargetY": "Unchanged",
+            "TargetScaleX": "Unchanged",
+            "TargetScaleY": "Unchanged",
+            "TargetOpacity": "Unchanged",
+            "BlendMode": -1,
+            "TargetToneRed": "Unchanged",
+            "TargetToneGreen": "Unchanged",
+            "TargetToneBlue": "Unchanged",
+            "TargetToneGray": "Unchanged"
+          },
+          "context": "Fill this object inside the command value using its field keys. These settings apply when the matching choice is highlighted. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+        },
+        {
+          "id": "PC-ChangePictureChoiceSettingsRange-OnDeselectSettings:struct",
+          "key": "OnDeselectSettings",
+          "storageKey": "OnDeselectSettings:struct",
+          "label": "On Deselect Settings",
+          "description": "Picture settings when deselecting that choice.",
+          "editorType": "struct<Picture>",
+          "nativeDefault": "{\"Easing\":\"\",\"Duration:num\":\"10\",\"easingType:str\":\"Linear\",\"Position\":\"\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"Blend\":\"\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"Tone\":\"\",\"TargetToneRed:str\":\"Unchanged\",\"TargetToneGreen:str\":\"Unchanged\",\"TargetToneBlue:str\":\"Unchanged\",\"TargetToneGray:str\":\"Unchanged\"}",
+          "availability": "supported",
+          "type": "struct",
+          "structName": "Picture",
+          "fields": [
+            {
+              "id": "PC-PICTURE-Duration:num",
+              "key": "Duration",
+              "storageKey": "Duration:num",
+              "label": "Duration",
+              "description": "Transition length in game update frames for picture position, scale, opacity and tone. Use a positive whole number (normally 60 frames is about one second); zero or a negative value applies immediately. Initial choice highlighting and applying deselected settings when showing a picture are immediate regardless of this value.",
+              "editorType": "text",
+              "nativeDefault": "10",
+              "availability": "supported",
+              "type": "number",
+              "default": 10
+            },
+            {
+              "id": "PC-PICTURE-easingType:str",
+              "key": "easingType",
+              "storageKey": "easingType:str",
+              "label": "Easing Type",
+              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "editorType": "combo",
+              "nativeDefault": "Linear",
+              "availability": "supported",
+              "type": "string",
+              "default": "Linear",
+              "suggestions": [
+                "Linear",
+                "InSine",
+                "OutSine",
+                "InOutSine",
+                "InQuad",
+                "OutQuad",
+                "InOutQuad",
+                "InCubic",
+                "OutCubic",
+                "InOutCubic",
+                "InQuart",
+                "OutQuart",
+                "InOutQuart",
+                "InQuint",
+                "OutQuint",
+                "InOutQuint",
+                "InExpo",
+                "OutExpo",
+                "InOutExpo",
+                "InCirc",
+                "OutCirc",
+                "InOutCirc",
+                "InBack",
+                "OutBack",
+                "InOutBack",
+                "InElastic",
+                "OutElastic",
+                "InOutElastic",
+                "InBounce",
+                "OutBounce",
+                "InOutBounce"
+              ]
+            },
+            {
+              "id": "PC-PICTURE-TargetX:str",
+              "key": "TargetX",
+              "storageKey": "TargetX:str",
+              "label": "Target X",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetY:str",
+              "key": "TargetY",
+              "storageKey": "TargetY:str",
+              "label": "Target Y",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleX:str",
+              "key": "TargetScaleX",
+              "storageKey": "TargetScaleX:str",
+              "label": "Target Width %",
+              "description": "Target horizontal scale as a percentage of the image width: 100 is original size, 50 is half, 0 collapses width, and negative values mirror horizontally. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target horizontal scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetScaleY:str",
+              "key": "TargetScaleY",
+              "storageKey": "TargetScaleY:str",
+              "label": "Target Height %",
+              "description": "Target vertical scale as a percentage of the image height: 100 is original size, 50 is half, 0 collapses height, and negative values mirror vertically. Enter a numeric JavaScript expression as a string, such as \"110\"; Unchanged preserves the current target vertical scale.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetOpacity:str",
+              "key": "TargetOpacity",
+              "storageKey": "TargetOpacity:str",
+              "label": "Target Opacity",
+              "description": "Target opacity from 0 (transparent) to 255 (fully opaque). Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current target opacity. Choose a value in 0..255; this command does not clamp the expression result.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-BlendMode:num",
+              "key": "BlendMode",
+              "storageKey": "BlendMode:num",
+              "label": "Blend Mode",
+              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "editorType": "select",
+              "nativeDefault": "-1",
+              "availability": "supported",
+              "type": "number",
+              "default": -1,
+              "options": [
+                -1,
+                0,
+                1,
+                2,
+                3
+              ],
+              "optionLabels": {
+                "0": "0 - Normal",
+                "1": "1 - Additive",
+                "2": "2 - Multiply",
+                "3": "3 - Screen",
+                "-1": "-1 - Unchanged"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneRed:str",
+              "key": "TargetToneRed",
+              "storageKey": "TargetToneRed:str",
+              "label": "Target Tone Red",
+              "description": "Target red tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current red tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGreen:str",
+              "key": "TargetToneGreen",
+              "storageKey": "TargetToneGreen:str",
+              "label": "Target Tone Green",
+              "description": "Target green tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current green tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneBlue:str",
+              "key": "TargetToneBlue",
+              "storageKey": "TargetToneBlue:str",
+              "label": "Target Tone Blue",
+              "description": "Target blue tone offset from -255 to 255, clamped to this range: 0 is neutral, positive adds the channel and negative subtracts it. Enter a numeric JavaScript expression as a string, such as \"40\"; Unchanged preserves the current blue tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            },
+            {
+              "id": "PC-PICTURE-TargetToneGray:str",
+              "key": "TargetToneGray",
+              "storageKey": "TargetToneGray:str",
+              "label": "Target Tone Gray",
+              "description": "Target grayscale amount from 0 (original color saturation) to 255 (fully grayscale), clamped to this range. Enter a numeric JavaScript expression as a string, such as \"128\"; Unchanged preserves the current gray tone component.",
+              "editorType": "text",
+              "nativeDefault": "Unchanged",
+              "availability": "supported",
+              "type": "string",
+              "default": "Unchanged",
+              "javascript": {
+                "kind": "expression",
+                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
+              }
+            }
+          ],
+          "default": {
+            "Duration": 10,
+            "easingType": "Linear",
+            "TargetX": "Unchanged",
+            "TargetY": "Unchanged",
+            "TargetScaleX": "Unchanged",
+            "TargetScaleY": "Unchanged",
+            "TargetOpacity": "Unchanged",
+            "BlendMode": -1,
+            "TargetToneRed": "Unchanged",
+            "TargetToneGreen": "Unchanged",
+            "TargetToneBlue": "Unchanged",
+            "TargetToneGray": "Unchanged"
+          },
+          "context": "Fill this object inside the command value using its field keys. These settings apply when another choice is highlighted, so this bound choice is not selected. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+        }
+      ],
+      "context": "Configure settings before Show Choices. Show Picture creates each image; add <Bind Picture: 1> to its choice text for illustrative ID 1. Cursor highlighting, including initial selection, applies selected settings to matching bound pictures and deselected settings to the others; missing pictures are skipped. Pointer hover highlights and clicking confirms the bound choice. These commands only store settings; they neither show images nor bind choices. Initial highlighting applies instantly. Erase Picture clears that ID, and AutoClear can clear all bindings/settings after confirmation or cancellation. Use whole IDs; lists are rounded/clamped and ranges are clamped/sorted/inclusive within the game picture range. The example uses opacity 255 when selected and 160 when deselected, so the two settings differ with SameCheck enabled; use existing shown and bound pictures 1 (or 1 and 2 for the range).",
+      "examples": [
+        "picture-choices commands list --target common-event:1 --json",
+        "picture-choices commands insert --target common-event:1 --before 0 --command ChangePictureChoiceSettingsRange --value '{\"StartID\":1,\"EndingID\":2,\"OnSelectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"255\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"},\"OnDeselectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"160\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"}}' --expected-hash HASH_FROM_LIST"
+      ]
+    }
+  ],
+  "commandAliases": [
+    "VisuMZ_2_PictureChoices"
+  ],
+  "tags": [
+    {
+      "id": "PC-T-BIND",
+      "key": "bind-picture",
+      "label": "Bind Picture",
+      "description": "Place this tag in Show Choices choice text to bind the given picture ID to that choice; the tag is removed from displayed text. Use Show Picture to create the image before choices appear. Hovering the picture highlights its choice; clicking confirms it. A missing picture has no visible/clickable sprite and is skipped for selection effects. Bind IDs within the game picture range; selection effects currently iterate IDs below $gameScreen.maxPictures(), excluding that final ID. The last binding for the same picture wins. Erase Picture and the configured AutoClear behavior clear bindings. The published min/max describe accepted tag syntax, not the available picture slots: the parser stores the ID without clamping. ID 0 and IDs above the game picture maximum do not identify a normal displayed picture.",
+      "type": "number",
+      "min": 0,
+      "max": 9007199254740991,
+      "pattern": "<BIND PICTURES?: (\\d+)>",
+      "template": "<Bind Picture: {value}>",
+      "targets": [
+        "choice-text"
+      ],
+      "availability": "supported",
+      "occurrences": "last binding for each picture",
+      "examples": [
+        "<Bind Picture: 1>"
+      ]
+    },
+    {
+      "id": "PC-T-HIDE",
+      "key": "hide-choice-window",
+      "label": "Hide Choice Window",
+      "description": "Hide the choice window while retaining keyboard and picture input.",
+      "type": "string",
+      "pattern": "<HIDE CHOICE WINDOW>",
+      "targets": [
+        "choice-text"
+      ],
+      "availability": "supported",
+      "occurrences": "any choice hides the window",
+      "examples": [
+        "<Hide Choice Window>"
+      ]
+    }
+  ],
+  "methods": []
+}
