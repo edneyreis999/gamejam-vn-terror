@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "pluginId": "Coreto_4_EventTitleScene",
+  "namespace": "event-title-scene",
+  "version": "0.1.0",
+  "reference": {
+    "pluginId": "VisuMZ_4_EventTitleScene",
+    "version": "1.06"
+  },
+  "dependencies": {
+    "required": [],
+    "cores": {
+      "Coreto_0_CoreEngine": "0.1.0",
+      "VisuMZ_0_CoreEngine": "1.90"
+    },
+    "messages": {
+      "Coreto_1_MessageCore": "0.1.0",
+      "VisuMZ_1_MessageCore": "1.54"
+    }
+  },
+  "orderAfter": [
+    "Coreto_0_CoreEngine",
+    "VisuMZ_0_CoreEngine",
+    "Coreto_1_MessageCore",
+    "VisuMZ_1_MessageCore",
+    "Coreto_2_PictureChoices",
+    "VisuMZ_2_PictureChoices",
+    "Coreto_2_VNPictureBusts",
+    "VisuMZ_2_VNPictureBusts",
+    "Coreto_3_ChoiceCmnEvts",
+    "VisuMZ_3_ChoiceCmnEvts",
+    "Coreto_1_OptionsCore",
+    "VisuMZ_1_OptionsCore",
+    "Coreto_1_SaveCore",
+    "VisuMZ_1_SaveCore",
+    "Coreto_4_AttachedPictures",
+    "VisuMZ_4_AttachedPictures"
+  ],
+  "orderBefore": [
+    "Coreto_4_MessageVisibility",
+    "VisuMZ_4_MessageVisibility"
+  ],
+  "parameters": [
+    {
+      "id": "CORETO-CONFIG-SOURCE",
+      "key": "CoretoConfigSource",
+      "storageKey": "CoretoConfigSource",
+      "label": "Configuration source",
+      "description": "inherit reads the original entry when present; own reads this entry. Switching does not copy values.",
+      "type": "string",
+      "editorType": "select",
+      "options": [
+        "inherit",
+        "own"
+      ],
+      "default": "inherit",
+      "nativeDefault": "inherit",
+      "availability": "supported"
+    },
+    {
+      "id": "ET-P-MapID:num",
+      "key": "MapID",
+      "storageKey": "MapID:num",
+      "label": "Map ID",
+      "description": "Select the map used for the evented title scene.",
+      "type": "number",
+      "editorType": "number",
+      "nativeDefault": "1",
+      "default": 1,
+      "availability": "supported",
+      "min": 1,
+      "max": 999
+    },
+    {
+      "id": "ET-P-MapX:num",
+      "key": "MapX",
+      "storageKey": "MapX:num",
+      "label": "Map X",
+      "description": "Player starting X tile coordinate (column, increasing to the right) on the map selected by MapID when the evented title scene starts.",
+      "type": "number",
+      "editorType": "number",
+      "nativeDefault": "10",
+      "default": 10,
+      "availability": "supported",
+      "min": 0,
+      "max": 255,
+      "context": "Use a whole tile coordinate with zero at the top-left tile of the selected map. Choose a tile inside that map as well as within the published numeric limits. This sets the player transfer destination, not a pixel offset of the title artwork. The paired MapX/MapY parameters determine the destination even when PlayerTransparent hides the player."
+    },
+    {
+      "id": "ET-P-MapY:num",
+      "key": "MapY",
+      "storageKey": "MapY:num",
+      "label": "Map Y",
+      "description": "Player starting Y tile coordinate (row, increasing downward) on the map selected by MapID when the evented title scene starts.",
+      "type": "number",
+      "editorType": "number",
+      "nativeDefault": "10",
+      "default": 10,
+      "availability": "supported",
+      "min": 0,
+      "max": 255,
+      "context": "Use a whole tile coordinate with zero at the top-left tile of the selected map. Choose a tile inside that map as well as within the published numeric limits. This sets the player transfer destination, not a pixel offset of the title artwork. The paired MapX/MapY parameters determine the destination even when PlayerTransparent hides the player."
+    },
+    {
+      "id": "ET-P-FaceDirection:num",
+      "key": "FaceDirection",
+      "storageKey": "FaceDirection:num",
+      "label": "Face Direction",
+      "description": "What direction will the player face on the title scene?",
+      "type": "number",
+      "editorType": "select",
+      "nativeDefault": "2",
+      "default": 2,
+      "availability": "supported",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "optionLabels": {
+        "1": "Down Left",
+        "2": "Down",
+        "3": "Down Right",
+        "4": "Left",
+        "6": "Right",
+        "7": "Up Left",
+        "8": "Up",
+        "9": "Up Right"
+      }
+    },
+    {
+      "id": "ET-P-PlayerTransparent:eval",
+      "key": "PlayerTransparent",
+      "storageKey": "PlayerTransparent:eval",
+      "label": "Transparent?",
+      "description": "Make the player transparent on the title scene?",
+      "type": "boolean",
+      "editorType": "boolean",
+      "nativeDefault": "true",
+      "default": true,
+      "availability": "supported",
+      "on": "Transparent",
+      "off": "Opaque"
+    },
+    {
+      "id": "ET-P-CanInputMove:eval",
+      "key": "CanInputMove",
+      "storageKey": "CanInputMove:eval",
+      "label": "Can Input Move?",
+      "description": "Can the player move while on the title scene?",
+      "type": "boolean",
+      "editorType": "boolean",
+      "nativeDefault": "false",
+      "default": false,
+      "availability": "supported",
+      "on": "Allow",
+      "off": "Disallow"
+    },
+    {
+      "id": "ET-P-ShowFollowers:eval",
+      "key": "ShowFollowers",
+      "storageKey": "ShowFollowers:eval",
+      "label": "Show Followers?",
+      "description": "Show player followers on the title scene?",
+      "type": "boolean",
+      "editorType": "boolean",
+      "nativeDefault": "false",
+      "default": false,
+      "availability": "supported",
+      "on": "Show",
+      "off": "Hide"
+    }
+  ],
+  "commands": [
+    {
+      "id": "ET-C-NewGame",
+      "key": "NewGame",
+      "label": "System: Start New Game",
+      "description": "Leaves the current scene and starts a new game.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "ET-NewGame-SlowFade:eval",
+          "key": "SlowFade",
+          "storageKey": "SlowFade:eval",
+          "label": "Slow Fade Out?",
+          "description": "Use a slow fade out transition to the next scene?",
+          "type": "string",
+          "editorType": "boolean",
+          "nativeDefault": "true",
+          "default": "true",
+          "availability": "supported",
+          "javascript": {
+            "kind": "expression",
+            "returnType": "boolean"
+          },
+          "on": "Slow",
+          "off": "Normal"
+        }
+      ]
+    },
+    {
+      "id": "ET-C-LoadScreen",
+      "key": "LoadScreen",
+      "label": "System: Open Load Scene",
+      "description": "Leaves the current scene and opens the load game scene.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "ET-LoadScreen-SlowFade:eval",
+          "key": "SlowFade",
+          "storageKey": "SlowFade:eval",
+          "label": "Slow Fade Out?",
+          "description": "Use a slow fade out transition to the next scene?",
+          "type": "string",
+          "editorType": "boolean",
+          "nativeDefault": "false",
+          "default": "false",
+          "availability": "supported",
+          "javascript": {
+            "kind": "expression",
+            "returnType": "boolean"
+          },
+          "on": "Slow",
+          "off": "Normal"
+        }
+      ]
+    },
+    {
+      "id": "ET-C-Options",
+      "key": "Options",
+      "label": "System: Open Options Scene",
+      "description": "Leaves the current scene and opens the options scene.",
+      "availability": "supported",
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ],
+      "args": [
+        {
+          "id": "ET-Options-SlowFade:eval",
+          "key": "SlowFade",
+          "storageKey": "SlowFade:eval",
+          "label": "Slow Fade Out?",
+          "description": "Use a slow fade out transition to the next scene?",
+          "type": "string",
+          "editorType": "boolean",
+          "nativeDefault": "false",
+          "default": "false",
+          "availability": "supported",
+          "javascript": {
+            "kind": "expression",
+            "returnType": "boolean"
+          },
+          "on": "Slow",
+          "off": "Normal"
+        }
+      ]
+    }
+  ],
+  "commandAliases": [
+    "VisuMZ_4_EventTitleScene"
+  ],
+  "tags": [
+    {
+      "id": "ET-RX-001",
+      "key": "continue",
+      "label": "Continue choice",
+      "description": "Disable the tagged choice when no save exists.",
+      "type": "string",
+      "pattern": "<CONTINUE>",
+      "targets": [
+        "choice-text"
+      ],
+      "availability": "supported",
+      "occurrences": "All matching tags are removed; availability follows storage.",
+      "examples": [
+        "<Continue>"
+      ]
+    }
+  ],
+  "methods": []
+}

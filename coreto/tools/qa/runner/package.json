@@ -1,0 +1,8 @@
+{
+  "name": "rpg-maker-directed-browser",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "dependencies": { "playwright": "1.63.0" }
+}
