@@ -152,26 +152,24 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
   await activate(browser, 'formation', 0);
   await activate(browser, 'hero', 0);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 37);
-  const expected = [...gorvakUnitTexts(82), ...gorvakUnitTexts(83)];
-  assert.match(expected[0], /Gorvak · Ele\/dele · Anão · Ferreiro/);
-  assert.equal(expected.at(-1), 'Lugar velho avisa antes de cair. Prestem atenção aos estalos.');
+  const expected = gorvakUnitTexts(83);
+  assert.equal(expected[0], 'Por que decidiu participar da expedição, Gorvak?');
+  assert.equal(expected.at(-1), 'Mas prestem atenção aos estalos. Madeira velha pode estar avisando que vai ceder.');
   for (const [index, text] of expected.entries()) {
     await browser.waitFor(`$gameMessage.allText() === ${JSON.stringify(text)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0 && $gameScreen.picture(60)`);
-    const speaker = index === 2 || index === 4 ? 'Dryland_ivai' : 'Dryland_H1';
+    const speaker = index === 0 || index === 2 ? 'Dryland_ivai' : 'Dryland_H1';
     assert.equal(await browser.evaluate(`$gameScreen.picture(${speaker === 'Dryland_ivai' ? 63 : 60}).name()`), speaker);
     assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'), 'Dryland_H1');
-    assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), index >= 2);
+    assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), true);
     await browser.waitFor('$gameScreen.picture(60)._duration===0');
-    assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),speaker==='Dryland_H1'?34:32,'map-authored Gorvak scale and subsequent native focus');
-    if (index >= 2) assert.equal(await browser.evaluate('$gameScreen.picture(63).scaleX()'),speaker==='Dryland_ivai'?44:42,'map-authored Ivaí focus');
+    assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),speaker==='Dryland_H1'?50:45,'map-authored Gorvak scale and subsequent native focus');
+    assert.equal(await browser.evaluate('$gameScreen.picture(63).scaleX()'),speaker==='Dryland_ivai'?50:45,'map-authored Ivaí focus');
     assert.equal(await browser.evaluate('$gameScreen.picture(18) == null'), true);
-    if (index >= 2) {
-      const listener = speaker === 'Dryland_ivai' ? 60 : 63;
-      await browser.waitFor(`$gameScreen.picture(${listener}).tone().every((value, index) => value === (index === 3 ? 0 : -24))`);
-      assert.deepEqual(await browser.evaluate(`$gameScreen.picture(${listener}).tone()`), [-24, -24, -24, 0]);
-    }
+    const listener = speaker === 'Dryland_ivai' ? 60 : 63;
+    await browser.waitFor(`$gameScreen.picture(${listener}).tone().every((value, index) => value === (index === 3 ? 0 : -24))`);
+    assert.deepEqual(await browser.evaluate(`$gameScreen.picture(${listener}).tone()`), [-24, -24, -24, 0]);
     assert.deepEqual(await snapshot(browser), before);
-    if (index === 0) await browser.screenshot(`${evidence('IT-006')}/profile.png`);
+    if (index === 0) await browser.screenshot(`${evidence('IT-006')}/opening.png`);
     if (index === 2) await browser.screenshot(`${evidence('IT-006')}/conversation.png`);
     await browser.press('Enter', 13);
   }
@@ -181,7 +179,7 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
   await returnToTavern(browser);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.deepEqual(await snapshot(browser), before);
-  assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'), [82,83], 'only completed native profile and conversation units were read');
+  assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'), [83], 'only the completed conversation was read; the retired profile is absent');
   assert.deepEqual(browser.exceptions, []);
 });
 canonicalCase('IT-007', 'native selection, removal, full-party feedback and mandatory automatic rosters obey their gates', { timeout: 180000 }, async t => {
@@ -251,7 +249,7 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
     await browser.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: reduced ? 'reduce' : 'no-preference' }] });
     await browser.call('Emulation.setDeviceMetricsOverride', { width: reduced ? 1920 : 1280, height: reduced ? 1080 : 720, deviceScaleFactor: 1, mobile: false });
     for (const heroIndex of [0, 1, 2, 3, 4, 5, 6, 7]) {
-      const heroId = heroes[heroIndex], mapId = 37 + heroIndex, unit = 82 + heroIndex * 4;
+      const heroId = heroes[heroIndex], mapId = 37 + heroIndex, unit = 83 + heroIndex * 4;
       await installFixture(browser, formation());
       const before = await snapshot(browser);
       await activate(browser, 'formation', heroIndex);
@@ -259,15 +257,15 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
       assert.equal(await browser.evaluate('$gameMap.mapId()'), mapId);
       await browser.screenshot(`${evidence('IT-081')}/${heroId}-${reduced ? 'reduced' : 'normal'}-menu.png`);
       await activate(browser, 'hero', 0);
-      const expected = [...heroUnitTexts(unit), ...heroUnitTexts(unit + 1)];
-      assert.equal(expected.length, 7);
+      const expected = heroUnitTexts(unit);
+      assert.equal(expected.length, 6);
       for (const [index, text] of expected.entries()) {
         await browser.waitFor(`$gameMessage.allText() === ${JSON.stringify(text)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
         await assertAdvanceIndicatorFits(browser);
         if (index === 1) await browser.screenshot(`${evidence('IT-081')}/${heroId}-${reduced ? 'reduced' : 'normal'}-description.png`);
         assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'), `Dryland_${heroId}`);
-        assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), index >= 2);
-        if (!reduced) assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${index < 2 ? unit : unit + 1})`), false, 'Partial unit remains unread');
+        assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), true);
+        if (!reduced) assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${unit})`), false, 'Partial unit remains unread');
         if (index === 2) {
           await browser.waitFor('$gameScreen.picture(60)._duration===0&&$gameScreen.picture(60)._toneDuration===0&&$gameScreen.picture(63)._duration===0');
           const pictures = await browser.evaluate('JsonEx.stringify([$gameScreen.picture(60),$gameScreen.picture(63)])');
@@ -286,14 +284,11 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
       }
       await choices(browser, 'hero');
       assert.equal(await browser.evaluate('Boolean($gameScreen.picture(63))'), false);
-      assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${unit})&&$gameSystem._drylandReadUnits.includes(${unit + 1})`), true);
+      assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${unit})&&!$gameSystem._drylandReadUnits.includes(${unit - 1})`), true);
       await activate(browser, 'hero', 0); await pause(browser);
       assert.equal(await browser.evaluate('$gameSystem.isExtendedFastForwardDisallowed()'), false);
       await clickConsole(browser, 'fastfwd');
-      await browser.waitFor(`$gameMessage.allText()===${JSON.stringify(expected[2])}&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
-      assert.equal(await browser.evaluate('Boolean($gameTemp.isExtendedFastForwardMode())'), false, 'The next observation unit resets FAST');
-      assert.equal(await browser.evaluate('$gameSystem.isExtendedFastForwardDisallowed()'), false, 'The completed conversation remains eligible');
-      await clickConsole(browser, 'fastfwd'); await choices(browser, 'hero');
+      await choices(browser, 'hero');
       assert.equal(await browser.evaluate('Boolean($gameTemp.isExtendedFastForwardMode())'), false, 'FAST stops at the hero menu');
       await returnToTavern(browser);
       assert.deepEqual(await snapshot(browser), before);

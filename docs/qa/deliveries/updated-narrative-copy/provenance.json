@@ -1,0 +1,69 @@
+{
+  "selectedOn": "2026-09-26",
+  "capturedOn": "2026-09-25",
+  "captures": [
+    {
+      "file": "opening.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/f9526011-03a4-4efd-9656-d985aabd5286/opening-after-options.png",
+      "run": "f9526011-03a4-4efd-9656-d985aabd5286",
+      "sha256": "c5e89fb3222cb811429e15bc11553e37801c001efba0dbafc3a4fbfdfd3f2a1b",
+      "caption": "Conversa começa pela pergunta de Ivaí"
+    },
+    {
+      "file": "seraphina.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/7be07497-2383-4370-b468-8d89ad00cf04/reading-35-40.png",
+      "run": "7be07497-2383-4370-b468-8d89ad00cf04",
+      "sha256": "f2fc4a1ab9dd10e017726dc1e82d960c399aef63b28f08b12b2e3697418a96b8",
+      "caption": "Resposta longa de Seraphina"
+    },
+    {
+      "file": "approaches-a5.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/7be07497-2383-4370-b468-8d89ad00cf04/choices-A5.png",
+      "run": "7be07497-2383-4370-b468-8d89ad00cf04",
+      "sha256": "459896bbd38e9cd22de98d93315bf43bc6e099abb62ef1328480da6a6d647fb1",
+      "caption": "Três abordagens de A5"
+    },
+    {
+      "file": "farewell-gorvak.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/7be07497-2383-4370-b468-8d89ad00cf04/reading-93-farewell-H1.png",
+      "run": "7be07497-2383-4370-b468-8d89ad00cf04",
+      "sha256": "168c5a9272ea3ce1a33a130982bcad02362ae3b4a5133479f4b127dbcb41a926",
+      "caption": "Despedida de Gorvak após a escolha da vítima"
+    },
+    {
+      "file": "death-a5.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/7be07497-2383-4370-b468-8d89ad00cf04/reading-94-death-A5-context.png",
+      "run": "7be07497-2383-4370-b468-8d89ad00cf04",
+      "sha256": "710d9306b84a962e71b4bca6911de13cbe0b9cb41ef9479032a1a82eeeb0bb5a",
+      "caption": "Narração contextual da morte em A5"
+    },
+    {
+      "file": "council-first.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/1e7c4e3a-1e65-4303-b8ec-17a3305e2faf/reading-8-opinion-H8.png",
+      "run": "1e7c4e3a-1e65-4303-b8ec-17a3305e2faf",
+      "sha256": "e2769cc6afaaaab0d41ee61e13854f4fad7f4b89c4bc035fe0a7b50082644e33",
+      "caption": "Primeiro parágrafo da opinião de Draska"
+    },
+    {
+      "file": "council-second.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/1e7c4e3a-1e65-4303-b8ec-17a3305e2faf/reading-9-opinion-H8.png",
+      "run": "1e7c4e3a-1e65-4303-b8ec-17a3305e2faf",
+      "sha256": "d61ab3c9e492eaecfacd8a3f87866bd80212b528a15ea0fe7c2b89a33e05558b",
+      "caption": "Segundo parágrafo da opinião de Draska"
+    },
+    {
+      "file": "memorial-720.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/15a732fa-7379-4e63-9dd6-8ad89bfc08d5/reading-138-memorial-H1.png",
+      "run": "15a732fa-7379-4e63-9dd6-8ad89bfc08d5",
+      "sha256": "a5dbdfbd763d65c136288ca9589d81330a85d1fa9c8e88f1b30c35e35bbddd3a",
+      "caption": "Causas e locais de A1/A5 em 1280×720"
+    },
+    {
+      "file": "memorial-1080.png",
+      "source": "docs/qa/evidence/updated-narrative-copy/runs/1e7c4e3a-1e65-4303-b8ec-17a3305e2faf/reading-14-memorial-H1.png",
+      "run": "1e7c4e3a-1e65-4303-b8ec-17a3305e2faf",
+      "sha256": "a75c0644f362c3ccaced3eaccc4eb0833910dc348004bc54d865664b33f2c244",
+      "caption": "Causas e locais de A1/A5 em 1920×1080"
+    }
+  ]
+}

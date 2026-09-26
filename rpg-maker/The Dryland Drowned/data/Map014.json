@@ -5494,7 +5494,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo entra no forro baixo de um casarão. Acima deles, passos pesados atravessam o telhado. A cada passada, as telhas e as vigas descem um pouco mais, reduzindo o espaço para se mover."
+                "O grupo entra no forro baixo de um casarão. Acima deles, passos pesados atravessam o telhado. A cada passada, as telhas e as vigas descem um pouco mais, deixando menos espaço para o grupo se mover."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "A criatura nunca aparece por inteiro. Apenas marcas de pés ossudos surgem no reboco, como se algo enorme caminhasse sobre a casa. Se o teto continuar baixando, o grupo ficará preso.<br>Como o grupo deve escapar?"
+                "A criatura nunca aparece por inteiro. Apenas marcas de pés ossudos surgem no reboco, como se algo enorme caminhasse sobre a casa. Há tábuas soltas entre as vigas e uma abertura na outra ponta do forro. Se o teto continuar baixando, o grupo ficará preso antes de alcançá-la."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

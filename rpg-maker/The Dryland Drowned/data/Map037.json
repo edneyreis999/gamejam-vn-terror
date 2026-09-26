@@ -3091,306 +3091,6 @@
                             "code": 108,
                             "indent": 1,
                             "parameters": [
-                                "Leitura 82: Perfil — Gorvak. Texto nativo; identidade preservada pela ADR-G001."
-                            ]
-                        },
-                        {
-                            "code": 108,
-                            "indent": 1,
-                            "parameters": [
-                                "Identifica a leitura 82 e consulta seu histórico. Reinicia os controles e"
-                            ]
-                        },
-                        {
-                            "code": 408,
-                            "indent": 1,
-                            "parameters": [
-                                "permite FAST somente se essa unidade já foi concluída."
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
-                                "Dryland_Presentation",
-                                "ObservationBegin",
-                                "ObservationBegin",
-                                {
-                                    "unit": "82",
-                                    "switch": "0"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 108,
-                            "indent": 1,
-                            "parameters": [
-                                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
-                            ]
-                        },
-                        {
-                            "code": 408,
-                            "indent": 1,
-                            "parameters": [
-                                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
-                            ]
-                        },
-                        {
-                            "code": 408,
-                            "indent": 1,
-                            "parameters": [
-                                "efeitos."
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
-                                "Dryland_Presentation",
-                                "MotionPreference",
-                                "MotionPreference",
-                                {
-                                    "variable": "47"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 111,
-                            "indent": 1,
-                            "parameters": [
-                                12,
-                                "$gameVariables.value(47)"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
-                                    "Duration:eval": "0"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "customTone:eval": "[0,0,0,0]",
-                                    "Duration:eval": "0"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 411,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "customTone:eval": "[0,0,0,0]",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 412,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                351
-                            ]
-                        },
-                        {
-                            "code": 101,
-                            "indent": 1,
-                            "parameters": [
-                                "",
-                                0,
-                                0,
-                                2,
-                                "Gorvak"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Gorvak · Ele/dele · Anão · Ferreiro"
-                            ]
-                        },
-                        {
-                            "code": 111,
-                            "indent": 1,
-                            "parameters": [
-                                12,
-                                "$gameVariables.value(47)"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
-                                    "Duration:eval": "0"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "customTone:eval": "[0,0,0,0]",
-                                    "Duration:eval": "0"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 411,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 2,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "customTone:eval": "[0,0,0,0]",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 412,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                351
-                            ]
-                        },
-                        {
-                            "code": 101,
-                            "indent": 1,
-                            "parameters": [
-                                "",
-                                0,
-                                0,
-                                2,
-                                "Gorvak"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Gorvak é um ferreiro de arquétipo protetor que suporta pesos e horrores para manter os outros de pé, mas se recusa a admitir quando ele próprio precisa de ajuda."
-                            ]
-                        },
-                        {
-                            "code": 108,
-                            "indent": 1,
-                            "parameters": [
-                                "Marca esta unidade como lida no histórico de leitura e encerra seus controles."
-                            ]
-                        },
-                        {
-                            "code": 408,
-                            "indent": 1,
-                            "parameters": [
-                                "A releitura poderá usar FAST; o comando não salva o arquivo por conta própria."
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
-                                "Dryland_Presentation",
-                                "ObservationComplete",
-                                "ObservationComplete",
-                                {}
-                            ]
-                        },
-                        {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                44
-                            ]
-                        },
-                        {
-                            "code": 108,
-                            "indent": 1,
-                            "parameters": [
                                 "Leitura 83: Conversa — Gorvak. Texto nativo; identidade preservada pela ADR-G001."
                             ]
                         },
@@ -3599,7 +3299,7 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "O que espera encontrar nessa viagem, Gorvak?"
+                                "Por que decidiu participar da expedição, Gorvak?"
                             ]
                         },
                         {
@@ -3758,7 +3458,7 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Sou um anão de forja, Ivaí. Ferreiro. O incêndio levou minha oficina, mas meus aprendizes ainda precisam dela. Minha parte vai levantar aquelas paredes de novo."
+                                "Minha oficina pegou fogo. Quero usar minha parte do tesouro para reconstruí-la e trazer meus aprendizes de volta ao trabalho."
                             ]
                         },
                         {
@@ -3917,7 +3617,7 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "E até chegarmos ao tesouro?"
+                                "E durante a viagem? Como pode nos ajudar?"
                             ]
                         },
                         {
@@ -4076,7 +3776,7 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Eu seguro o que precisar ser segurado para os outros passarem. Não precisa se preocupar comigo. Cuide de quem vem atrás."
+                                "Se uma porta pesada bloquear o caminho, posso abri-la. Se uma viga ceder, posso sustentá-la enquanto vocês passam. Foi assim que ajudei meus aprendizes a escapar do incêndio."
                             ]
                         },
                         {
@@ -4235,7 +3935,25 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Lugar velho avisa antes de cair. Prestem atenção aos estalos."
+                                "E, se o medo apertar, fico por perto. Mesmo com o teto desabando, consegui voltar para buscar meu último aprendiz."
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Gorvak"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "Mas prestem atenção aos estalos. Madeira velha pode estar avisando que vai ceder."
                             ]
                         },
                         {
@@ -4579,7 +4297,7 @@
                             "code": 401,
                             "indent": 2,
                             "parameters": [
-                                "Pode contar comigo, Ivaí. Vou conferir o equipamento antes de sairmos."
+                                "Pode contar comigo, Ivaí. Vou conferir nosso equipamento antes de sairmos."
                             ]
                         },
                         {
@@ -4791,7 +4509,7 @@
                             "code": 401,
                             "indent": 2,
                             "parameters": [
-                                "Já tem três com você, Ivaí. Não vou me enfiar entre eles. Acerte o grupo primeiro."
+                                "Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir."
                             ]
                         },
                         {

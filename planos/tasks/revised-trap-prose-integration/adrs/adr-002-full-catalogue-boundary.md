@@ -1,5 +1,9 @@
 # ADR-002 — Integrate the full revised trap catalogue
 
+## Later incremental copy boundary — 2026-09-25
+
+The [updated-narrative-copy ADR-001](../../updated-narrative-copy/adrs/adr-001-approved-copy-and-dialogue-boundary.md) adopts the later sixteen source files and replaces six pre-choice failures (A1-1, A5-1, A5-3, A7-2, B3-3, B6-3), preserving the other 42. It includes the approved wording that retains B6's descent rope. This later product approval does not rewrite this delivery's source snapshot, verification waiver or results; technical/verification design approval for the new increment was given under D-006 on 2026-09-25; implementation and verification execution remain pending. This was the authoring-time state; implementation and final acceptance on 2026-09-26 are recorded in the [increment verification](../../updated-narrative-copy/verification.md).
+
 Status: accepted product boundary on 2026-09-22 (D-002). Complete technical design subsequently approved under D-004 below; implementation remains pending.
 
 ## Decision and evidence

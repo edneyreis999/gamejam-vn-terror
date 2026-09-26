@@ -50188,7 +50188,7 @@
                     152,
                     0,
                     4,
-                    "\"Desapareceu no vento ao<br>manter a comporta aberta.\""
+                    "\"Desapareceu no redemoinho enquanto mantinha a janela aberta.\""
                 ]
             },
             {
@@ -50700,7 +50700,7 @@
                     152,
                     0,
                     4,
-                    "\"Permaneceu na válvula<br>enquanto a saída ardia.\""
+                    "\"Morreu nas chamas ao manter o registro de água aberto para os outros passarem.\""
                 ]
             },
             {
@@ -53045,7 +53045,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "as outras garrafas se abrem e os redemoinhos se juntam. Uma parede de vento e vidro bloqueia a saída. Para abrir uma passagem, um dos heróis precisa segurar a comporta por dentro. O restante do grupo consegue escapar, mas o herói é arrancado do chão e levado pelo redemoinho."
+                    "as outras garrafas se abrem e os redemoinhos se juntam. Uma parede de vento e vidro bloqueia a saída. Para abrir uma passagem, um dos heróis precisa segurar a janela por dentro. O restante do grupo consegue escapar, mas o herói é arrancado do chão e levado pelo redemoinho."
                 ]
             },
             {
@@ -53197,7 +53197,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "os cipós são acionados e várias árvores tombam, bloqueando os caminhos. O grupo é empurrado para uma passagem cercada por estacas. Para que os outros escapem, um dos heróis precisa permanecer para trás e segurar o último tronco."
+                    "os cipós são acionados e várias árvores tombam, bloqueando os caminhos. O grupo é empurrado para uma passagem cercada por estacas. Para que os outros escapem, um dos heróis precisa ficar para trás e segurar o último tronco. Quando os companheiros passam, seus braços cedem e o tronco o esmaga contra as estacas."
                 ]
             },
             {
@@ -53349,7 +53349,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "o socador se solta dos trilhos e começa a perseguir o grupo. Para impedir que ele alcance os outros, um dos heróis precisa atraí-lo até o pilão central e permanecer no local do impacto. O golpe prende o socador e permite que o restante do grupo escape."
+                    "o socador se solta dos trilhos e começa a perseguir o grupo. Para impedir que ele alcance os outros, um dos heróis precisa atraí-lo até o pilão central e ficar sob o socador quando ele descer. O golpe prende o socador e permite que o restante do grupo escape."
                 ]
             },
             {
@@ -53501,7 +53501,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "as barras se fecham de uma vez. Para manter a última passagem aberta, um dos heróis precisa ficar no centro da jaula e suportar a pressão. Os outros conseguem escapar, mas não há tempo para voltar e salvá-lo."
+                    "as barras se fecham de uma vez. Para manter a última passagem aberta, um dos heróis precisa ficar no centro da jaula e suportar a pressão. Os outros conseguem escapar. Assim que passam, as barras esmagam o herói que ficou para trás."
                 ]
             },
             {
@@ -53653,7 +53653,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "a pressão da caldeira aumenta e uma onda de fogo bloqueia a saída. Para abrir uma passagem, um dos heróis precisa permanecer ao lado da criatura e continuar controlando a válvula. Os outros conseguem atravessar, mas ele não consegue sair antes que as chamas tomem a cavalariça."
+                    "a mula dispara pelo corredor e cerca o grupo com fogo. O registro cede, mas só deixa a água passar enquanto alguém o segura aberto. Um dos heróis precisa ficar junto dele para manter as chamas baixas enquanto os outros atravessam. Quando o restante do grupo chega à saída, a cisterna esvazia. A água para, e o fogo alcança o herói antes que ele consiga sair."
                 ]
             },
             {
@@ -53805,7 +53805,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "as raízes se enrolam ao redor do grupo e formam um nó. Para que os outros sejam libertados, um dos heróis precisa se deixar prender pelo tronco. A planta solta os demais, mas transforma o herói em parte da árvore."
+                    "as raízes se enrolam ao redor do grupo e formam um nó. Para libertar os companheiros, um dos heróis precisa se deixar prender pelo tronco. A planta solta os demais, mas o herói fica preso e se torna parte da árvore."
                 ]
             },
             {
@@ -53957,7 +53957,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "os ganchos puxam todos os sacos para o centro e bloqueiam o corredor. Para liberar a saída, um dos heróis precisa entrar em um saco e servir de contrapeso. A passagem se abre para os outros, mas o saco com o herói continua seguindo em direção à prensa."
+                    "os ganchos puxam todos os sacos para o centro e bloqueiam o corredor. Para liberar a saída, um dos heróis precisa entrar em um saco e servir de contrapeso. A passagem se abre para os outros, mas o saco com o herói é levado até a prensa e esmagado."
                 ]
             },
             {
@@ -54109,7 +54109,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "dois pés atingem a mesma viga, e o telhado começa a desabar. Para impedir que tudo caia de uma vez, um dos heróis precisa ficar sob a viga principal e sustentar o impacto. Os outros conseguem escapar, mas o teto desaba sobre quem permaneceu para trás."
+                    "dois pés atingem a mesma viga, e o telhado começa a desabar. Para impedir que tudo caia de uma vez, um dos heróis precisa ficar sob a viga principal e sustentar o impacto. Os outros conseguem escapar, mas o teto desaba sobre quem ficou para trás."
                 ]
             },
             {
@@ -54717,7 +54717,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "a floresta aceita a promessa falsa como se fosse verdadeira e exige que alguém cumpra o acordo. Para libertar os outros, um dos heróis precisa aceitar a dívida. A mata abre a passagem, mas o herói desaparece entre as árvores."
+                    "os troncos passam a repetir a mesma cobrança, e a mata se fecha por completo. A promessa falsa agora prende todo o grupo. Para abrir o caminho, um dos heróis precisa assumir o acordo sozinho e seguir a voz para dentro da floresta. As raízes se afastam para deixar os outros sair, mas as árvores se fecham atrás do herói, que desaparece na mata e não retorna."
                 ]
             },
             {
@@ -55325,7 +55325,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "todas as portas se abrem ao mesmo tempo e formam uma única boca enorme. Para fazer a casa voltar ao normal, um dos heróis precisa responder ao chamado e atravessar a passagem. As portas desaparecem e os outros ficam seguros, mas o herói é levado pela criatura."
+                    "todas as portas se abrem ao mesmo tempo e formam uma única boca enorme. Para fazer a casa voltar ao normal, um dos heróis precisa responder ao chamado e atravessar a passagem. A boca se fecha sobre o herói e desaparece com ele. As paredes param de avançar, permitindo que os outros alcancem a abertura sob o telhado."
                 ]
             },
             {
@@ -55580,7 +55580,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "“Não desperdicem o tempo que estou comprando.”"
+                    "Eu fico aqui. Vou dar a vocês tempo para passar. Não desperdicem esse tempo."
                 ]
             },
             {

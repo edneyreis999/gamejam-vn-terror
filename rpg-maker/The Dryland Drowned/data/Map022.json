@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A marca na parede é fechada antes que o último traço da porta apareça. Sem um convite completo, a criatura não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta."
+                "A marca na parede é apagada antes que o último traço da porta apareça. Sem um convite completo, a criatura não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta. Com os cômodos parados, o grupo consegue alcançar a abertura sob o telhado e sair."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A criatura imita vozes de crianças perdidas, mas ninguém responde. Sem receber uma resposta, ela não consegue criar novas portas. As vozes ficam cada vez mais fracas, os dentes caem da parede e a criatura vai embora com fome."
+                "A criatura imita vozes de crianças perdidas, mas ninguém responde. Sem receber uma resposta, ela não consegue criar novas portas. As vozes ficam cada vez mais fracas, os dentes caem da parede e a criatura vai embora com fome. O grupo aproveita o silêncio para alcançar a abertura sob o telhado e deixar a casa."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo entra no espaço estreito entre as vigas e avança enquanto as portas falsas devoram os cômodos. A criatura tenta alcançar todos pelas paredes, mas não cabe entre os pedaços de madeira. O grupo chega ao outro lado antes que a casa desabe e feche todas as entradas."
+                "O grupo entra no espaço estreito entre as vigas e avança enquanto as portas falsas devoram os cômodos. A criatura tenta alcançar todos pelas paredes, mas não cabe entre os pedaços de madeira. O grupo alcança a abertura sob o telhado e sai antes que a casa desabe."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Cada vez que alguém responde, o desenho de uma porta surge na parede. Dentes começam a crescer ao redor da passagem, e a criatura fica mais perto de entrar. Quanto mais portas aparecem, menores ficam os cômodos da casa.<br>Como o grupo deve escapar?"
+                "Cada vez que alguém responde, o desenho de uma porta surge na parede. Dentes começam a crescer ao redor da passagem, e a criatura fica mais perto de entrar. Quanto mais portas aparecem, menores ficam os cômodos da casa. No alto, parte do reboco caiu e deixou à mostra as vigas e uma abertura sob o telhado."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

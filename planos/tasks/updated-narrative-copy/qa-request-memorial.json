@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/updated-narrative-copy/spec.md",
+  "requestId": "updated-copy-final-20260925-01",
+  "consumer": "implementation",
+  "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "updated-copy-playthrough",
+    "profile": "1280x720",
+    "variant": "1280x720",
+    "configuration": "fresh-final-candidate-port18735"
+  },
+  "claims": [
+    {
+      "id": "COPY-RUNTIME",
+      "variant": "1280x720",
+      "sensor": "directed-browser",
+      "group": "copy",
+      "source": {
+        "id": "COPY-RUNTIME",
+        "variant": "1280x720"
+      },
+      "expected": {
+        "path": "planos/tasks/updated-narrative-copy/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/updated-narrative-copy",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Both memorial causes use native wrap; B4-1/B6-1 successes split at final-sentence boundary after actual 26px font measurement found fifth-line fragments. New own campaign targets both successes."
+  }
+}

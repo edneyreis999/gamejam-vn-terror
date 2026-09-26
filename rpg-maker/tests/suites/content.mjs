@@ -136,17 +136,15 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
   const file=path.join(directory,'data/Map038.json'),map=JSON.parse(await readFile(file,'utf8')),list=map.events[1].pages[0].list;
   for(const c of list.filter(c=>c.code===357&&c.parameters[3]['PictureID:arrayeval']==='["60"]')){
    const args=c.parameters[3];
-   if(c.parameters[1]==='Move_MoveToCoordinates')args['TargetX:str']=args['TargetY:str']==='701.04'?'326':'342';
+   if(c.parameters[1]==='Move_MoveToCoordinates')args['TargetX:str']='342';
    if(c.parameters[1]==='Scale_ScaleTo')args['TargetScaleX:str']=args['TargetScaleY:str']=args['TargetScaleX:str']==='36'?'39.6':'44';
   }
   const enter=list.findIndex(c=>c.code===357&&c.parameters[1]==='Basic_EnterBust');
   const earlyFocus=clone(list.find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo'&&c.parameters[3]['PictureID:arrayeval']==='["60"]'));
   earlyFocus.indent=list[enter].indent;list.splice(enter,0,earlyFocus);
-  const profileEnd=list.findIndex(c=>c.code===357&&c.parameters[1]==='ObservationComplete');
-  list.splice(profileEnd,0,command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}],1));
   const conversation=list.findIndex(c=>c.code===357&&c.parameters[1]==='ObservationBegin'&&c.parameters[3].unit==='87');
   const text=list.findIndex((c,index)=>index>conversation&&c.code===101);
-  list.splice(text,0,clone(list[text]),command(401,['Caixa técnica inserida — mesma autoria.'],1));
+  list.splice(text+2,0,command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}],1),clone(list[text]),command(401,['Caixa técnica inserida — mesma autoria.'],1));
   const reply=list.findIndex((c,index)=>index>text&&c.code===101&&c.parameters[4]==='Elowen');
   list.splice(reply,0,command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleTo','Scale_ScaleTo',{'PictureID:arrayeval':'["60"]','TargetScaleX:str':'80','TargetScaleY:str':'80','Duration:eval':'0'}],1));
   await writeFile(file,JSON.stringify(map));
@@ -155,25 +153,23 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  await startServer(t,prepared.directory);const browser=await openChrome(t);await firstPrologue(browser);
  for(let box=0;box<prologueMarkers.length;box++){await pause(browser);await browser.press('Enter',13);}
  await choices(browser,'formation');await activate(browser,'formation',1);await activate(browser,'hero',0);await pause(browser);
- await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===44');
+ await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===39.6');
  assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection?.code||null'),null,'Focus before entry leaves an empty owned slot untouched');
  const before=await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)');
  await clickConsole(browser,'options');await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&!SceneManager._scene.isBusy()");
  await browser.press('Escape',27);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Map'&&SceneManager._scene._messageWindow&&!SceneManager._scene.isBusy()");await pause(browser);
  assert.equal(await browser.evaluate('$gameScreen.picture(60).x()'),342);
- assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),44);
+ assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),39.6);
  // Integration save fixture only: native serialization and title Continue,
  // without introducing a player save command.
- await browser.press('Enter',13);await pause(browser);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
  await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  assert.equal(await browser.evaluate('$gameMessage.allText()'),'Caixa técnica inserida — mesma autoria.');
- await browser.waitFor('$gameScreen.picture(60)?.x()===326&&$gameScreen.picture(60)?.scaleX()===39.6');
- assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'),'Dryland_H2','Completed source includes visuals after its final text');
+ await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===39.6');
+ assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'),'Dryland_H2','Inserted native box retains its preceding graphic change');
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),before);
- await browser.press('Enter',13);await pause(browser);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
  await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
@@ -207,10 +203,10 @@ canonicalCase('UT-073','native focus replaces obsolete plugin settings and remai
 canonicalCase('IT-069','artist parameters and additional native effects survive Options and compatible Continue',{timeout:120000},async t=>{
  const prepared=await prepareBustFixture(t,'fixture-native-freedom-20260911',async (events,directory)=>{
   const file=path.join(directory,'data/Map038.json'),map=JSON.parse(await readFile(file,'utf8')),list=map.events[1].pages[0].list;
-  const profile=list.findIndex(c=>c.code===357&&c.parameters[1]==='ObservationBegin'&&c.parameters[3].unit==='86');
-  const profileEnd=list.findIndex((c,index)=>index>profile&&c.code===357&&c.parameters[1]==='ObservationComplete');
+  const conversation=list.findIndex(c=>c.code===357&&c.parameters[1]==='ObservationBegin'&&c.parameters[3].unit==='87');
+  const conversationEnd=list.findIndex((c,index)=>index>conversation&&c.code===357&&c.parameters[1]==='ObservationComplete');
   // The extra picture has its own native entry and exit; normal hero focus stays independent.
-  const entry=list.slice(0,profile).filter(c=>c.code===357&&c.parameters[0]==='VisuMZ_2_VNPictureBusts').slice(0,5).map(clone);
+  const entry=list.slice(0,conversation).filter(c=>c.code===357&&c.parameters[0]==='VisuMZ_2_VNPictureBusts').slice(0,5).map(clone);
   for(const c of entry){
    const args=c.parameters[3];
    if('PictureID:eval' in args)args['PictureID:eval']='60 + 6';
@@ -219,7 +215,7 @@ canonicalCase('IT-069','artist parameters and additional native effects survive 
    if(c.parameters[1]==='Scale_ScaleTo')Object.assign(args,{'TargetScaleX:str':'73','TargetScaleY:str':'73','Duration:eval':'80'});
    if(c.parameters[1]==='Move_MoveToCoordinates')Object.assign(args,{'TargetX:str':'Graphics.width / 2','TargetY:str':'420','Duration:eval':'85','EasingType:str':'OutQuad'});
   }
-  const first=list.findIndex((c,index)=>index>profile&&index<profileEnd&&c.code===101);
+  const first=list.findIndex((c,index)=>index>conversation&&index<conversationEnd&&c.code===101);
   const additions=[...entry,
    command(231,[92,'Dryland_Button',0,0,31,37,100,100,181,0]),
    command(230,[90]),
@@ -257,7 +253,7 @@ canonicalCase('IT-069','artist parameters and additional native effects survive 
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),campaignBefore);
  await browser.screenshot(`${folder}/native-restored.png`);
- for(let box=0;box<5;box++){await browser.press('Enter',13);await pause(browser);}
+ for(let box=0;box<4;box++){await browser.press('Enter',13);await pause(browser);}
  await browser.press('Enter',13);await returnToTavern(browser);
  assert.equal(await browser.evaluate('$gameScreen.picture(66)||null'),null,'Actual authored picture IDs are cleaned up');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra,'Authored bust exit leaves the independent picture intact');
@@ -301,10 +297,6 @@ canonicalCase('IT-071', 'a replacement conversation runs without metadata and on
   }
   await choices(browser,'formation');const before=await browser.evaluate('$gameSystem._dryland.campaign');
   await activate(browser,'formation',1);await activate(browser,'hero',0);
-  for(const text of ['Elowen · Ela/dela','Elowen é uma caçadora']) {
-    await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(text)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
-    await browser.press('Enter',13);
-  }
   for(const text of ['Primeira fala da conversa substituta.','Última fala da conversa substituta.']) {
     await browser.waitFor(`$gameMessage.allText() === ${JSON.stringify(text)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     assert.equal(await browser.evaluate(`$gameSystem._drylandReadUnits.includes(${replacementId})`),false);

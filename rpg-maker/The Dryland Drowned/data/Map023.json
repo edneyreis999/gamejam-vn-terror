@@ -5443,7 +5443,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "reunir o medalhão e libertar Floraí e Pérola. Ivaí deve aceitar pessoalmente o custo da história que impôs aos outros."
+                "Olhe para nós, Ivaí. Você nos trouxe até aqui sem contar a verdade. Fez todos nós corrermos um risco que nem conhecíamos. Você precisa responder por cada vida perdida."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Gorvak"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Reúna o medalhão e liberte Floraí e Pérola. Sei que isso vai custar sua vida. Mas não é justo entregar os dois a Andirá para se salvar. Desta vez, cabe a você pagar o preço da sua escolha."
               ]
             },
             {
@@ -5742,7 +5760,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "destruir o medalhão e salvar Ivaí. Vivo, ele deverá responder pelo dano e participar da reparação; morto, escaparia dessa obrigação."
+                "Você sabia, Ivaí! E deixou a gente seguir sem contar nada? Como eu ia proteger alguém de um perigo que você escondeu?"
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Elowen"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Destrua o medalhão. Sei que Andirá vai absorver Floraí e Pérola, até as lembranças que têm um do outro. Ainda assim, quero você vivo para responder pelo que fez e reparar o que puder. E não confunda isso com perdão."
               ]
             },
             {
@@ -6041,7 +6077,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "destruir o medalhão e salvar Ivaí para encerrar as mortes da linhagem. A sobrevivência cria obrigação de reparo, não recompensa."
+                "Espere, Ivaí. Você já tinha metade do medalhão, sabia da maldição e queria encontrar a outra metade para destruir o artefato. Mas, para nós, falou só do tesouro. Cada vez que a gente decidia seguir, faltava uma parte da história."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Griznik"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Destrua o medalhão. Sei que Andirá vai absorver Floraí e Pérola e as lembranças que têm um do outro. Não tenho como consertar isso. Mas quero que as mortes causadas pela maldição da sua linhagem terminem aqui. Você vai viver, contar a verdade e reparar o que ainda puder. Comece sem esconder nada de ninguém."
               ]
             },
             {
@@ -6340,7 +6394,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "reunir o medalhão e libertar Floraí e Pérola, restaurando o juramento livremente escolhido. Se o jogador destruir o artefato, ela ainda tratará Ivaí enquanto puder, sem transformar cuidado em absolvição."
+                "Você sabia da maldição, Ivaí. Nós não. Aceitamos procurar um tesouro. Você escondeu os riscos e decidiu por nós. Ainda quero ajudar você, mas isso não desculpa o que fez."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Seraphina"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Reúna o medalhão e liberte Floraí e Pérola. O juramento foi uma escolha dos dois. Eles têm o direito de ficar juntos. Sei que restaurá-lo vai custar sua vida, e me dói pedir isso. Mas não posso recomendar que você entregue os dois a Andirá para se salvar."
               ]
             },
             {
@@ -6639,7 +6711,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "reunir o medalhão e libertar Floraí e Pérola. O compromisso original dos amantes foi livremente escolhido e deve prevalecer sobre a falsa missão."
+                "A missão que você nos apresentou era uma fraude, Ivaí. Prometi ajudar a buscar o tesouro da sua família. Você escondeu a maldição e nos levou a trabalhar pela sua salvação. Não pode cobrar de nós um compromisso que nunca aceitamos."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Bimbren"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Reúna o medalhão e liberte Floraí e Pérola. Os dois fizeram seu juramento por vontade própria. Esse compromisso deve ser respeitado. Sei que restaurar o juramento vai custar sua vida, mas entregar os dois a Andirá para se salvar prolongaria a injustiça que sofreram."
               ]
             },
             {
@@ -6938,7 +7028,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "destruir o medalhão e salvar Ivaí. Uma pessoa viva pode responder pelo que fez, registrar a verdade e corrigir o rumo."
+                "Havia referências nos registros que não apareciam no que você nos contou, Ivaí. Eu percebi. Devia ter falado, mas escondi minhas dúvidas para não parecer que estava perdida outra vez. Você sabia o que estava omitindo. Eu suspeitava e fiquei calada."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Liora"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Destrua o medalhão. Sei que isso entrega Floraí, Pérola e as lembranças dos dois a Andirá. Ainda assim, quero você vivo para responder pelo que fez e registrar a verdade. Vou contar também o que calei. Quem ouvir essa história precisa saber em que errou cada um de nós."
               ]
             },
             {
@@ -7237,7 +7345,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "reunir o medalhão, libertar os amantes e preservar o artefato como proteção e evidência da verdade ocultada."
+                "Então foi por isso que os registros chegaram incompletos às minhas mãos. Você retirou justamente o que precisávamos saber, Ivaí. Queria destruir o medalhão antes que entendêssemos o que ele protegia. Eu poderia ter estudado as advertências. Você decidiu que eu não devia lê-las."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Vaelith"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Reúna o medalhão. Restaure o juramento e liberte Floraí e Pérola. Sei que a maldição vai cobrar sua vida. Ainda assim, destruir a proteção dos dois para se salvar seria condená-los. Preserve o artefato e os registros. Precisamos de provas do que aconteceu para que ninguém volte a esconder essa história."
               ]
             },
             {
@@ -7536,7 +7662,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "destruir o medalhão e salvar Ivaí como opção de menor dano imediato. A sobrevivência dele é uma dívida a ser paga, não um prêmio."
+                "Você prometeu uma parte do tesouro, Ivaí. Escondeu a maldição e o que pretendia fazer com o medalhão. Não tínhamos como avaliar o risco. Podíamos conferir cada passagem e ainda assim morrer por algo que você já sabia."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Draska"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "Destrua o medalhão. Andirá vai absorver Floraí, Pérola e as lembranças dos dois. Sei o que estou pedindo. Mas vou escolher manter você vivo e encerrar a maldição da sua linhagem. É o menor dano que consigo aceitar agora. Depois, você terá de responder pelo que fez e ajudar quem prejudicou. Não vou deixar que trate a própria sobrevivência como recompensa."
               ]
             },
             {

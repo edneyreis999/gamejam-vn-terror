@@ -48,3 +48,8 @@ Fluxo dos três desfechos PASS; enquadramento do Conselho reprovado, epílogos c
 ## Integração narrativa aprovada — 2026-09-18
 
 Planejado, execução dirigida ainda não observada. Cobertura: S-05/06/07/08/09; B/C/D. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.
+
+
+## Textos atualizados — 2026-09-25
+
+Conselho com participantes vivos, opinião em dois parágrafos e final Reunir executados. Memoriais reais de A5/H1 e A1/H3 mostram causas aprovadas e localização gravada, completos em 1280×720 e 1920×1080. Opiniões não visitadas têm comparação estática e equivalência de apresentação, sem alegação de execução individual. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.

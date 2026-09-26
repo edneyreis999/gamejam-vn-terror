@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Duas barras são seguradas antes que se encostem. A força da jaula empurra o ferro, mas o espaço continua aberto por tempo suficiente. O grupo atravessa a passagem e as barras se fecham atrás dele."
+                "Duas barras são forçadas para os lados até entortarem. O ferro cede e deixa um vão que não se fecha com o restante da jaula. O grupo atravessa por ele antes que as outras barras alcancem a abertura."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Um rugido invisível ecoa pelo salão. O medo deixa os músculos pesados e dificulta qualquer movimento. Ao mesmo tempo, as barras começam a se fechar, diminuindo cada vez mais o espaço dentro da jaula.<br>Como o grupo deve escapar?"
+                "Um rugido invisível ecoa pelo salão. O medo deixa os músculos pesados e dificulta qualquer movimento. Ao mesmo tempo, as barras começam a se fechar, diminuindo cada vez mais o espaço dentro da jaula. Ainda há uma abertura perto do teto e uma trava ao alcance das mãos, mas o rugido torna difícil chegar até elas."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

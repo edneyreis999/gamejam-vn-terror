@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo cobre o corpo com barro frio. O contato com a terra e o vento ajuda a reconhecer o ambiente real em meio às lembranças em chamas. Em vez de seguir as luzes, todos avançam na direção indicada pelo vento. Os olhos tentam abrir caminhos falsos, mas ficam para trás. Ao chegar à saída, o barro cai e ninguém perde suas lembranças."
+                "O grupo espalha o barro frio sobre a pele e se concentra no contato com a terra úmida. Essa sensação ajuda a distinguir o lugar onde está das lembranças mostradas pelo fogo. Em vez de seguir as luzes, todos avançam na direção indicada pelo vento. Os olhos tentam abrir caminhos falsos, mas ficam para trás. Ao chegar à saída, o barro cai e ninguém perde suas lembranças."
               ]
             },
             {
@@ -4864,7 +4864,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O barro seca antes da travessia terminar, e as luzes passam a arder sob a pele."
+                "O barro seca antes de o grupo alcançar a saída. Sem sentir o contato com a terra úmida, os heróis voltam a seguir as luzes e se perdem nas lembranças."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Dentro dessas lembranças, pessoas e lugares começam a pegar fogo. Quanto mais os heróis observam, mais difícil fica saber o que aconteceu de verdade e o que foi criado pelos olhos.<br>Como o grupo deve escapar?"
+                "Dentro dessas lembranças, pessoas e lugares começam a pegar fogo. Quanto mais os heróis observam, mais difícil fica saber o que aconteceu de verdade e o que foi criado pelos olhos. Há barro úmido sob os pés, e uma corrente de ar atravessa o lugar."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {
