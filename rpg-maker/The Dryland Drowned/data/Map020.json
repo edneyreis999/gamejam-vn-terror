@@ -3829,7 +3829,25 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O nome escondido na canção é devolvido ao poço. Ele deixa de imitar as vozes do grupo e responde apenas com um som vindo das pedras. Sem o nome roubado para chamar novas vítimas, a música desaparece e os cabelos param de subir pelas paredes."
+                "O grupo percebe que o nome repetido permite à canção roubar outras vozes. Ao pronunciá-lo de volta para o fundo do poço, desfaz o encantamento. O poço deixa de imitar as vozes do grupo e responde apenas com um som vindo das pedras. Sem o nome roubado para chamar novas vítimas, a música desaparece e os cabelos param de subir pelas paredes."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 2,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "A trança fica imóvel sob as tábuas, permitindo que o grupo atravesse."
               ]
             },
             {
@@ -4243,7 +4261,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Mesmo sentindo como se estivesse debaixo d’água, o grupo respira devagar e não acompanha a canção. O verso seguinte fica sem resposta, e a sensação de afogamento começa a diminuir. Quando o canto termina, todos conseguem respirar normalmente outra vez."
+                "Mesmo sentindo como se estivesse debaixo d’água, o grupo respira devagar e não acompanha a canção. O verso seguinte fica sem resposta, e a sensação de afogamento começa a diminuir. Quando o canto termina, todos conseguem respirar normalmente outra vez e atravessam a passarela."
               ]
             },
             {
@@ -4657,7 +4675,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os nós da corda são soltos um de cada vez, sem romper o fio principal que sustenta a passagem. Quando o último nó é aberto, os cabelos deixam de se mover e a canção perde a força. A corda permanece firme e permite que o grupo atravesse com segurança."
+                "Os nós que se apertam ao ritmo da canção são soltos um de cada vez, sem romper a mecha que sustenta as tábuas. Quando o último nó é aberto, os cabelos deixam de se mover e a canção perde a força. A mecha de sustentação permanece firme, e o grupo atravessa a passarela."
               ]
             },
             {
@@ -4864,7 +4882,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Um fio de cabelo se rompe no nó errado, soltando a trança que sustentava a passagem."
+                "Os nós se apertam antes que o grupo consiga soltá-los. A canção se intensifica, e a sensação de afogamento impede a travessia."
               ]
             },
             {
@@ -5494,7 +5512,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo encontra um poço fundo, mas completamente seco. Quando alguém se inclina sobre a abertura, uma canção sobe usando a voz dessa pessoa."
+                "O grupo encontra um poço fundo, mas completamente seco. Uma passarela estreita cruza sua abertura até a saída. Quando alguém olha para baixo, uma canção sobe usando sua voz e repete um nome que ninguém reconhece."
               ]
             },
             {
@@ -5512,7 +5530,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Cabelos molhados saem do poço e se enrolam até formar uma longa corda. A cada novo verso, os heróis sentem água entrando em seus pulmões, mesmo sem haver uma única gota ao redor.<br>Como o grupo deve escapar?"
+                "Cabelos molhados sobem do poço, prendem-se às duas margens e se trançam sob as tábuas quebradas da passarela. Uma mecha grossa sustenta a travessia e continua até o fundo como uma corda; as outras se apertam em nós a cada verso. Os heróis sentem água entrando em seus pulmões, mesmo sem haver uma única gota ao redor."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

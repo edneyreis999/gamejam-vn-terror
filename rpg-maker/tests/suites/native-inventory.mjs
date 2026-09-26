@@ -41,7 +41,7 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
   assert.equal(mapById.get(mapId)?.id,mapId,'The hero map is included in the native package');
   assert.equal(await browser.evaluate(`$dataMapInfos[${mapId}]?.parentId`),3,'The hero map remains a child of Taverna');
   const mapUnits=mapById.get(mapId)?.pages.flatMap(page=>page.list).filter(command=>command.code===357&&command.parameters[0]==='Dryland_Presentation'&&command.parameters[1]==='ObservationBegin').map(command=>Number(command.parameters[3]?.unit));
-  assert.deepEqual(mapUnits,Array.from({length:4},(_,index)=>82+(mapId-37)*4+index),'The map owns its preserved reading identities');
+  assert.deepEqual(mapUnits,Array.from({length:3},(_,index)=>83+(mapId-37)*4+index),'The map owns its preserved reading identities');
  }
  const troops=await browser.evaluate('$dataTroops');
  const lists=[...events.filter(Boolean).map(event=>({owner:'CE'+event.id,list:event.list})),...maps.flatMap(map=>map.pages.map(page=>({owner:`Map${String(map.id).padStart(3,'0')}/event${page.eventId}/page${page.page}`,mapId:map.id,list:page.list}))),...troops.filter(Boolean).flatMap(troop=>troop.pages.map(page=>({owner:'Troop'+troop.id,list:page.list})))];

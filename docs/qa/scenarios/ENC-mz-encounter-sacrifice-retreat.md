@@ -48,3 +48,8 @@ PASS funcional: duas ordens, três abordagens/vítimas, recuo, mortes e retomada
 ## Integração narrativa aprovada — 2026-09-18
 
 Planejado, execução dirigida ainda não observada. Cobertura: S-03/04/06; B/D. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.
+
+
+## Textos atualizados — 2026-09-25
+
+Campanha dirigida cobriu os 16 encontros e 48 rótulos, releitura A/B, recuo/reformação, falha A5-3, despedida de Gorvak e mortes A5/A1. Continue preservou fatos confirmados de abordagem e vítima. B4-1/B6-1 tiveram apenas paginação ajustada entre frases, validada em novo percurso. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.

@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As pegadas apontam para caminhos diferentes, mas o vento, o terreno e as plantas mostram a direção verdadeira. Seguindo esses sinais, o grupo evita os cipós e as estacas escondidas. As pegadas falsas ficam para trás e o caminho continua aberto."
+                "As pegadas apontam para caminhos diferentes, mas o grupo se orienta pelo vento, pela inclinação do terreno e pelas plantas. Seguindo esses sinais, evita os cipós e as estacas escondidas. As pegadas falsas ficam para trás."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As pegadas parecem confusas, mas seus calcanhares formam uma sequência. Quando o grupo lê os rastros ao contrário, descobre qual caminho não cruza nenhuma armadilha. As árvores permanecem paradas e todos conseguem atravessar em segurança."
+                "O grupo reconhece o truque dos pés virados: a direção dos dedos engana quem tenta seguir os rastros. Ao reconstruir o trajeto no sentido contrário, encontra uma sequência de pegadas que contorna os cipós. As árvores permanecem paradas e todos conseguem atravessar em segurança."
               ]
             },
             {
@@ -5494,7 +5494,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma trilha de terra atravessa a mata que cresceu para dentro da construção. Pelo caminho, várias pegadas parecem apontar para direções diferentes. Todas têm algo estranho: os calcanhares estão voltados para a frente, como se quem deixou os rastros caminhasse na direção contrária."
+                "Uma trilha de terra atravessa a mata que cresceu para dentro da construção. Pelo caminho, várias pegadas apontam para direções diferentes. Há algo estranho nelas: os calcanhares estão voltados para a frente, como se quem deixou os rastros caminhasse na direção contrária."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Cipós esticados cruzam a trilha e estão ligados a estacas escondidas entre as plantas. Escolher o caminho errado ou tocar em um cipó pode ativar a armadilha.<br>Como o grupo deve atravessar a trilha?"
+                "Cipós esticados cruzam a trilha e estão ligados a estacas escondidas entre as plantas. Um passo no caminho errado ou um toque em um cipó pode ativar a armadilha."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve atravessar a trilha?"
               ]
             },
             {

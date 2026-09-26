@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar o postigo onde o assobio se esconde e jogá-lo para fora\\ndo casarão.\"",
+                  "center:json": "\"\\\\FS[22]Arrancar o postigo (a pequena janela onde o assobio se esconde) e\\njogá-lo para fora do casarão.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2919,7 +2919,7 @@
                 [
                   "Comparar o assobio com os ecos e encontrar a fresta que responde antes do som.<Bind Picture: 50><Hide Choice Window>",
                   "Examinar as promessas escritas nas paredes e descobrir qual delas nunca foi feita.<Bind Picture: 51><Hide Choice Window>",
-                  "Arrancar o postigo onde o assobio se esconde e jogá-lo para fora do casarão.<Bind Picture: 52><Hide Choice Window>",
+                  "Arrancar o postigo (a pequena janela onde o assobio se esconde) e jogá-lo para fora do casarão.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Arrancar o postigo onde o assobio se esconde e jogá-lo para fora do casarão.<Bind Picture: 52><Hide Choice Window>"
+                "Arrancar o postigo (a pequena janela onde o assobio se esconde) e jogá-lo para fora do casarão.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As promessas escritas nas paredes parecem iguais, mas uma delas conta uma história que nunca aconteceu. Quando a promessa falsa é descoberta, suas palavras desaparecem da madeira. As lembranças roubadas voltam, e a casa já não consegue imitar as vozes do grupo."
+                "Ao comparar as promessas com os nomes e as datas, o grupo encontra a assinatura de alguém que já havia morrido quando o acordo teria sido feito. A contradição revela a promessa inventada pela presença. Quando a mentira é apontada, suas palavras desaparecem da madeira. As lembranças roubadas voltam, e a casa já não consegue imitar as vozes do grupo."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A pequena janela é arrancada junto com a presença escondida em sua madeira. Do lado de fora, o assobio se mistura com o vento e perde a força. As portas e janelas param de respirar, e o grupo consegue deixar o casarão."
+                "A pequena janela é arrancada junto com a presença escondida em sua madeira. Do lado de fora, o assobio se mistura com o vento e perde a força. As portas e janelas param de se mover, e o grupo consegue deixar o casarão."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Cada vez que alguém responde ao assobio, uma palavra desaparece das lembranças do grupo. As portas e janelas começam a se mover como bocas, tentando repetir os nomes dos heróis antes que eles sejam esquecidos.<br>Como o grupo deve escapar?"
+                "Cada vez que alguém responde ao assobio, uma palavra desaparece das lembranças do grupo. As portas e janelas começam a se mover como bocas, tentando repetir os nomes dos heróis antes que eles sejam esquecidos. Nas paredes, promessas riscadas na madeira se misturam a nomes e datas de antigos moradores."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

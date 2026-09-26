@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador bate neles, seu caminho muda e ele cai dentro de um pilão vazio. A haste fica presa na pedra, o mecanismo para e o grupo consegue atravessar a cozinha."
+                "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador bate neles, muda de direção e cai dentro de um pilão vazio. O socador fica preso no pilão, o mecanismo para e o grupo consegue atravessar a cozinha."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas. Sem saber para onde deve seguir, o socador para no alto e deixa o caminho livre."
+                "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas. A ligação se rompe, e o socador fica imóvel nos trilhos, deixando o caminho livre."
               ]
             },
             {
@@ -5494,7 +5494,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo entra na cozinha de um antigo engenho. No centro do lugar há um pilão enorme, grande o bastante para prender uma pessoa. Acima dele, um pesado socador se move por trilhos presos ao teto."
+                "O grupo entra na cozinha de um antigo engenho. No centro há um pilão enorme, grande o bastante para prender uma pessoa. Pilões menores ocupam o restante da cozinha. Acima deles, um pesado socador se move por trilhos presos ao teto. Pedaços de madeira, fibras e cascas estão espalhados pelo chão."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma caixa começa a tocar uma cantiga de ninar sozinha. A cada verso, o socador muda de direção e atinge um pilão diferente. O único caminho para a saída passa entre os impactos.<br>Como o grupo deve atravessar a cozinha?"
+                "Uma caixa com versos escritos na superfície começa a tocar uma cantiga de ninar sozinha. A cada verso, o socador muda de direção e atinge um pilão diferente. O único caminho para a saída passa entre os golpes."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve atravessar a cozinha?"
               ]
             },
             {

@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Encontrar a única figura cuja sombra aponta para o lado contrário\\nda luz.\"",
+                  "center:json": "\"\\\\FS[22]Encontrar a única figura cuja sombra se volta para a própria\\nvela.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,7 +2917,7 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Encontrar a única figura cuja sombra aponta para o lado contrário da luz.<Bind Picture: 50><Hide Choice Window>",
+                  "Encontrar a única figura cuja sombra se volta para a própria vela.<Bind Picture: 50><Hide Choice Window>",
                   "Romper o feitiço que liga os nomes bordados nos panos aos heróis.<Bind Picture: 51><Hide Choice Window>",
                   "Desmanchar a costura de cada nome sem rasgar os panos da procissão.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Encontrar a única figura cuja sombra aponta para o lado contrário da luz.<Bind Picture: 50><Hide Choice Window>"
+                "Encontrar a única figura cuja sombra se volta para a própria vela.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Todas as sombras seguem a luz das velas, menos uma, que aponta para o lado contrário. Quando essa figura é retirada da frente da procissão, as outras almas perdem o caminho. As velas voltam a acender, os nomes desaparecem dos panos e o grupo é libertado."
+                "As sombras se alongam para longe das velas, menos uma, que se volta para a própria chama. Essa sombra revela qual figura guia o cortejo. O grupo passa pelo lado oposto. As outras almas seguem a guia, deixando livre uma passagem pelo corredor. Ao se afastarem das velas, os heróis recuperam as lembranças uns dos outros."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As marcas que prendem os nomes aos panos são apagadas. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão."
+                "O encantamento que liga os nomes bordados aos heróis é rompido. As letras perdem a forma, até restarem apenas fios soltos no tecido. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão."
               ]
             },
             {

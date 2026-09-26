@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Todos os gritos produzem ecos, mas um deles parece surgir antes do som original. Seguindo esse eco estranho, o grupo encontra o ponto onde a mortalha está sendo formada. Quando essa parte do tecido é desfeita, as datas desaparecem e a faixa cai no chão."
+                "Todos os gritos produzem ecos, mas um deles repete o som de trás para a frente. Seguindo esse eco estranho, o grupo encontra o ponto onde a mortalha está sendo formada. Ali, uma dobra do tecido vibra a cada grito. O grupo a prende contra a parede, abafando o eco invertido. As datas deixam de mudar, e a faixa cai no chão."
               ]
             },
             {
@@ -4243,7 +4243,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As datas futuras escritas na mortalha seguem uma ordem. Ao compará-las com os nomes que surgem no tecido, o grupo encontra uma morte atribuída a alguém que não está na expedição. Quando a data falsa é separada das outras, os nomes desaparecem e o tecido volta para o teto."
+                "O grupo compara as datas e percebe que uma delas recua de maneira diferente. Sob seus números, surge um nome que não pertence a nenhum dos presentes, escrito antes dos demais. Ao ler essa inscrição, o grupo revela que a mortalha está repetindo o presságio de outra pessoa. Os nomes dos heróis desaparecem e o tecido volta para o teto."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As penas no chão são empurradas por uma corrente de ar que a mortalha não consegue alcançar. O grupo segue esse caminho estreito enquanto o tecido desce ao redor. A mortalha tenta fechar a passagem, mas se rasga, e todos conseguem chegar ao outro lado."
+                "As penas no chão são empurradas por uma corrente de ar que a mortalha não consegue alcançar. O grupo segue esse caminho estreito enquanto o tecido desce ao redor. A mortalha se estica atrás dos heróis, mas não alcança a passagem. Todos conseguem chegar ao outro lado."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "A cada novo grito, uma das datas muda e se aproxima do dia atual. Ao mesmo tempo, o nome de um dos heróis começa a aparecer no tecido. Quando a data chegar ao presente, o presságio de morte estará completo.<br>Como o grupo deve escapar?"
+                "A cada novo grito, uma das datas muda e se aproxima do dia atual. Ao mesmo tempo, o nome de um dos heróis começa a aparecer no tecido. Quando a data chegar ao presente, o presságio de morte estará completo. Penas caídas se arrastam pelo chão, levadas por uma corrente de ar."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

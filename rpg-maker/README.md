@@ -29,7 +29,7 @@ Abra `The Dryland Drowned/game.rmmzproject` no MZ. A árvore contém título (1)
 Para mudar Gorvak:
 
 1. Na árvore, expanda **Taverna** e abra **Conversa — Gorvak**, Map037.
-2. Abra o evento001. O próprio evento contém menu, perfil, conversa, respostas de seleção e retorno; edite **Mostrar texto** no ramo desejado.
+2. Abra o evento001. O próprio evento contém menu, conversa iniciada por Ivaí, respostas de seleção e retorno; edite **Mostrar texto** no ramo desejado.
 3. Edite imagens, posição, escala, tom, duração e saída nos comandos nativos/VNPictureBusts do evento correspondente. Salve pelo editor e inicie uma sessão de teste para ver o resultado.
 
 Prólogo, encontros, Conselho, finais e epílogos têm seus textos e escolhas no evento001 dos respectivos mapas. Maps037–044 correspondem a Gorvak, Elowen, Griznik, Seraphina, Bimbren, Liora, Vaelith e Draska. CE040 encaminha cenas da campanha e conserva as responsabilidades compartilhadas ainda necessárias. Sacrifícios, despedidas, descobertas, memorial, configuração, preload e créditos continuam usando Common Events funcionais. Os42 atalhos editoriais foram removidos; a entrada de autoria é o evento que o jogo executa.
@@ -48,7 +48,7 @@ Os eventos autoram imagem, escala, posição, tom, foco, saída e limpeza. O Bri
 
 **Dryland_Presentation** integra controles e apresentação. **BindInterfacePicture** identifica uma imagem como interface para HIDE; fundos, retratos narrativos e lápides permanecem visíveis. **ChoiceFocus** prepara navegação/foco das escolhas. **MotionPreference** consulta movimento reduzido para o evento escolher sua sequência animada ou imediata.
 
-Uma leitura observacional usa **ObservationBegin/ObservationComplete** no interpretador que executa o conteúdo. Nos mapas dos heróis, **ObservationBegin** recebe uma unidade numérica explícita, preservando82–113 apesar da remoção dos antigos CEs. Só a conclusão marca a unidade como lida. Editar o texto mantém essa identidade; uma unidade realmente nova precisa de uma identidade própria. Para passagens de campanha, o evento consulta **passageRead**, chama **ReadingPermission** e encerra com **ReadingEnd** antes de **ReadingComplete**.
+Uma leitura observacional usa **ObservationBegin/ObservationComplete** no interpretador que executa o conteúdo. Nos mapas dos heróis, **ObservationBegin** recebe uma unidade numérica explícita, preservando os IDs de conversa (83/87/91/95/99/103/107/111), seleção (+1) e grupo cheio (+2). Os IDs 82/86/90/94/98/102/106/110 dos perfis removidos ficam aposentados, sem renumeração ou reúso. Só a conclusão marca a unidade como lida. Editar o texto mantém essa identidade; uma unidade realmente nova precisa de uma identidade própria. Para passagens de campanha, o evento consulta **passageRead**, chama **ReadingPermission** e encerra com **ReadingEnd** antes de **ReadingComplete**.
 
 FAST é o controle de aceleração do Extended Message Functions e exige unidade já concluída e seleção do jogador. O botão AUTO foi removido por decisão de 2026-09-14; Configurações e HIDE permanecem. Nova unidade, escolha, transferência, Options/retomada desligam os modos ativos. Não há atalho S de pulo instantâneo. Tab/HIDE oculta a interface; Tab ou clique esquerdo restaura sem confirmar o trecho. Movimento do personagem e aceleração comum de eventos ficam bloqueados; o menu RPG permanece desabilitado por comando nativo.
 

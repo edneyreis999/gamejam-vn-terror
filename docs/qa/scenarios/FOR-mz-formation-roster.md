@@ -4,7 +4,7 @@ area: FOR
 title: Preparar o grupo sem confundir consulta e seleção
 persona: Lia, primeira expedicionária
 journey: J-mz-complete-campaign
-expected: Elenco e perfis preservam a seleção, e Partir exige preparação válida.
+expected: Elenco e conversas preservam a seleção, e Partir exige preparação válida.
 entry_points: http://127.0.0.1:18726/; rpg-maker/The Dryland Drowned/game.rmmzproject
 qa_status: untested
 bug_ids:
@@ -52,3 +52,8 @@ Executado: formação, oito heróis e arquivos PASS; parecer de UI/autoria pende
 ## Integração narrativa aprovada — 2026-09-18
 
 Planejado, execução dirigida ainda não observada. Cobertura: S-02; A. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.
+
+
+## Textos atualizados — 2026-09-25
+
+Oito heróis passaram por Conversar (seis falas, entrada direta de Ivaí), seleção e resposta de grupo cheio, com igualdade da campanha durante consulta/grupo cheio. HIDE, Options/retorno e FAST após leitura completa passaram; testes canônicos mantêm autoria e Continue. Unidades de perfil retiradas; três unidades conservadas por herói. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.

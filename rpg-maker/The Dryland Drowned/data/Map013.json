@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Os ganchos certos são soltos um após o outro. Os sacos se afastam para os lados e deixam um corredor livre no meio do depósito. As vozes continuam pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
+                "Os ganchos certos são soltos um após o outro. Os sacos presos a esses ganchos caem fora da passagem, deixando um corredor livre no meio do depósito. As vozes continuam pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
               ]
             },
             {
@@ -4450,7 +4450,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "Uma corrente cede durante o balanço, lançando o grupo de volta à esteira da prensa."
+                "Uma corrente cede durante o balanço. O grupo cai entre os sacos, e os ganchos fecham o caminho até a saída."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As vozes imitam pessoas conhecidas e pedem para serem libertadas, mas ninguém responde. Sem conseguir enganar o grupo, elas começam a se confundir e a chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho até a saída permanece aberto."
+                "As vozes imitam pessoas conhecidas e pedem ajuda, mas ninguém responde. Sem conseguir enganar o grupo, elas começam a se confundir e a chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho até a saída permanece aberto."
               ]
             },
             {
@@ -5494,7 +5494,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo entra em um depósito sem janelas. Dezenas de sacos pendem de ganchos presos a correntes que se movem pelo teto. Alguns parecem conter apenas areia. Outros se debatem e chamam os heróis usando as vozes de pessoas conhecidas."
+                "O grupo entra em um depósito sem janelas. Dezenas de sacos pendem de ganchos presos a correntes que se movem pelo teto. Alguns parecem conter apenas areia. Outros se debatem e chamam os heróis com vozes de pessoas conhecidas."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Os ganchos levam todos os sacos até uma enorme prensa no fim do corredor. Conforme as correntes avançam, fica cada vez mais difícil alcançar a saída.<br>Como o grupo deve escapar?"
+                "Os ganchos levam todos os sacos até uma enorme prensa no fim do corredor. Ainda resta uma faixa estreita junto à parede para alcançar a saída. Sempre que alguém se aproxima de um saco que pede ajuda, os ganchos se voltam para essa passagem e começam a bloqueá-la."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

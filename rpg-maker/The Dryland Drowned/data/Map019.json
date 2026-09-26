@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "As datas, os nomes e os riscos nas portas formam uma sequência. O grupo descobre qual foi a ordem usada para chamar a figura do espelho. A sequência é repetida até o último passo, que não é realizado. Sem completar o chamado, a figura desaparece e os espelhos voltam ao normal."
+                "As datas, os nomes e os riscos nas portas formam uma sequência. O grupo descobre qual foi a ordem usada para chamar a figura do espelho. Entre os riscos, o grupo identifica a inscrição que completou o primeiro chamado e a apaga. Sem esse último trecho, a convocação se desfaz. A figura desaparece e os reflexos voltam a acompanhar os gestos dos heróis sem atraso."
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O espelho mais antigo é retirado da parede e virado para os demais. A figura aparece em vários reflexos ao mesmo tempo e acaba presa entre eles. Os vidros escurecem, a aparição desaparece e o caminho fica livre."
+                "O espelho mais antigo é retirado da parede e virado para os demais. A figura aparece em vários reflexos ao mesmo tempo e acaba presa entre eles. Os vidros escurecem, a aparição desaparece e o grupo pode sair."
               ]
             },
             {
@@ -5494,7 +5494,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo entra em um banheiro escolar abandonado. Vários espelhos cobrem as paredes, mas cada um mostra um horário diferente. Mesmo quando os heróis se movem juntos, seus reflexos não repetem os gestos ao mesmo tempo."
+                "O grupo entra em um banheiro escolar abandonado. Vários espelhos cobrem as paredes. Quando os heróis se movem juntos, seus reflexos não repetem os gestos ao mesmo tempo."
               ]
             },
             {
@@ -5512,7 +5512,25 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Uma figura loira aparece sempre no espelho mais antigo. Aos poucos, ela troca de lugar com quem a observa: primeiro copia a roupa, depois toma o rosto da pessoa e, por fim, tenta sair do espelho em seu lugar.<br>Como o grupo deve escapar?"
+                "Nomes, datas e riscos cobrem as portas. Uma figura loira aparece sempre no espelho mais antigo. Aos poucos, ela troca de lugar com quem a observa: primeiro copia a roupa, depois toma seu rosto e, por fim, tenta sair do espelho em seu lugar."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Como o grupo deve escapar?"
               ]
             },
             {

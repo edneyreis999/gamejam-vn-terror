@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/updated-narrative-copy/spec.md",
+  "requestId": "updated-copy-reduced-1920-20260925-01",
+  "consumer": "implementation",
+  "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "updated-copy-playthrough",
+    "profile": "1920x1080",
+    "variant": "1920x1080",
+    "configuration": "fresh-reduced-opening-port18734"
+  },
+  "claims": [
+    {
+      "id": "COPY-RUNTIME",
+      "variant": "1920x1080",
+      "sensor": "directed-browser",
+      "group": "copy",
+      "source": {
+        "id": "COPY-RUNTIME",
+        "variant": "1920x1080"
+      },
+      "expected": {
+        "path": "planos/tasks/updated-narrative-copy/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/updated-narrative-copy",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Directed reduced-motion opening, Options/HIDE, completed-only FAST and larger viewport."
+  }
+}
