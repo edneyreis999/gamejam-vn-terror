@@ -162,7 +162,8 @@ export class DirectedNativePlayer {
     await this.context.wait(()=>SceneManager._scene instanceof Scene_File || ($gameMessage._drylandChoiceFocus?.key==='age-notice'&&SceneManager._scene._choiceListWindow?.isOpenAndActive()));
     if((await this.surface()).kind==='age-notice'){
       assert.equal(await this.context.read('fresh-age-notice',()=>$gameTemp._drylandAgeNotice.checked),false);
-      await this.choose('Tenho 16 anos de idade ou mais',{settled:()=>$gameTemp._drylandAgeNotice.checked&&SceneManager._scene._choiceListWindow?.isOpenAndActive()});
+      const acknowledgement = (await this.ready()).labels.find(label => label.includes('Tenho 16 anos de idade ou mais'));
+      await this.choose(acknowledgement,{settled:()=>$gameTemp._drylandAgeNotice.checked&&SceneManager._scene._choiceListWindow?.isOpenAndActive()});
       await this.choose('Jogar');
     }
 

@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
+import { act, activate, tavernAction, choices, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -44,7 +44,7 @@ canonicalCase('IT-027','HIDE removes consultation overlays and targets while ret
  prepared=act(prepared,'COMPLETE_PREPARATION_INTRODUCTION').state;
  await installPhase(browser,prepared);await choices(browser,'formation');
  for(const[kind,index]of [['destinations',8],['roster',9]]){
-  await activate(browser,'formation',index);await choices(browser,kind);
+  if(kind==='roster')await tavernAction(browser,'Quadro');else await activate(browser,'formation',index);await choices(browser,kind);
   const before=await state(browser),focus=await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
   await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,kind==='destinations'?[72,73,74,75,81,82]:Array.from({length:19},(_,i)=>71+i));
   await click(browser,200,240);await hidden(browser,false);await choices(browser,kind);

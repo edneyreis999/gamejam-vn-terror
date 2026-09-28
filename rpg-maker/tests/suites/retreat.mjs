@@ -1,7 +1,7 @@
 import {continueSave} from '../helpers/discovery.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, formation, heroes, pause, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, tavernAction, choices, formation, heroes, pause, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, finishReading, replayUntil, rejectUnchanged } from '../helpers/campaign.mjs';
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-07/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -151,8 +151,7 @@ canonicalCase('IT-011', 'native reduced motion immediately removes new losses wh
   assert.deepEqual(await snapshot(browser), finishReading(before));
   assert.equal(await browser.evaluate('absenceMoves.length'), 0);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  const index = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(entry=>entry.name.startsWith('Quadro'))");
-  await activate(browser, 'formation', index); await choices(browser, 'roster');
+  await tavernAction(browser, 'Quadro'); await choices(browser, 'roster');
   const names=await browser.evaluate('[72,73,74].map(id=>SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(id).center))');
   for(const [i,name] of ['Gorvak','Elowen','Griznik'].entries())assert.ok(names[i].includes(name));
   await browser.screenshot(`${evidence('IT-011')}/reduced-motion-roster.png`);

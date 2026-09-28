@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, installFixture, pause, prologueMarkers, rosterFixture, tavern } from '../helpers/formation.mjs';
+import { act, activate, tavernAction, choices, installFixture, pause, prologueMarkers, rosterFixture, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -106,7 +106,7 @@ canonicalCase('IT-085','title entry requires fresh acknowledgement and consumes 
   await activate(browser,'title',0);await gate();
   assert.deepEqual(await status(),{checked:false,accepted:false,play:false});
   await click(browser,640,428);await gate();
-  await click(browser,640,512);await selectFile(browser,1);await pause(browser);
+  await activate(browser,'age-notice',1);await selectFile(browser,1);await pause(browser);
   await browser.waitFor('DataManager.isAnySavefileExists()');
   // Isolated provider-save fixture. Gameplay/live evidence does not use this jump.
   await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
@@ -136,7 +136,7 @@ canonicalCase('IT-038','native Options and consultations cannot carry held confi
  prepared=act(prepared,'COMPLETE_PREPARATION_INTRODUCTION').state;
  await installPhase(browser,prepared);await choices(browser,'formation');
  for(const [kind,index,closeIndex]of [['destinations',8,3],['roster',9,0]]){
-  await activate(browser,'formation',index);await choices(browser,kind);
+  if(kind==='roster')await tavernAction(browser,'Quadro');else await activate(browser,'formation',index);await choices(browser,kind);
   for(let step=0;step<closeIndex;step++)await browser.press('ArrowDown',40);
   const before=await state(browser);await hold(browser,'Enter',13);await choices(browser,'formation');await frames(browser,40);
   assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.hasText()'),false);await release(browser,'Enter',13);

@@ -77,6 +77,16 @@ export async function activate(browser, kind, index) {
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), index);
   await browser.press('Enter', 13);
 }
+export async function tavernAction(browser, label) {
+  await choices(browser, 'formation');
+  const trigger = await browser.evaluate('SceneManager._scene._choiceListWindow._list.findIndex(item => item.name.startsWith("Menu"))');
+  assert.ok(trigger >= 0, 'Tavern menu must be available');
+  await activate(browser, 'formation', trigger);
+  await choices(browser, 'formation-menu');
+  const index = await browser.evaluate(`SceneManager._scene._choiceListWindow._list.findIndex(item => item.name.replace(/\\s+/g, ' ').includes(${JSON.stringify(label)}))`);
+  assert.ok(index >= 0, 'Tavern action must be available: ' + label);
+  await activate(browser, 'formation-menu', index);
+}
 export async function pause(browser) {
   await browser.waitFor('$gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0');
 }

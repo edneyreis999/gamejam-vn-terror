@@ -8,7 +8,7 @@ import path from 'node:path';
 import { deflateSync } from 'node:zlib';
 import { validateNativeArchive, sha256 } from '../../qa/native-save-archive.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, tavernAction, choices, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
 import { councilState } from '../helpers/closing.mjs';
 import { installPhase, clickConsole, click } from '../helpers/native-shared.mjs';
@@ -503,18 +503,17 @@ canonicalCase('IT-066','cold native Continue retains saved pictures and cancelli
 
 canonicalCase('IT-088', 'manual preparation save writes the current file after native cursor advance and preserves observation-only progress', {timeout:180000}, async t => {
   const browser=await tavern(t),before=await snapshot(browser);
-  assert.equal(await browser.evaluate('$gameScreen.picture(44)?.name()'),'Dryland_SaveButton');
+  assert.equal(await browser.evaluate('Boolean($gameScreen.picture(44))'),false);
   assert.equal(before.draftPartyIds.length,0);
   await browser.evaluate('window.manualWrites=[];const save=StorageManager.saveObject;StorageManager.saveObject=function(name,contents){if(name==="file"+$gameSystem.savefileId()){let i=contents.map._interpreter;while(i._childInterpreter)i=i._childInterpreter;manualWrites.push({name,index:i._index,wait:i._waitMode,next:i._list[i._index],read:contents.system._drylandReadUnits.slice()});}return save.call(this,name,contents);};');
-  const point=await browser.evaluate('(()=>{const r=Graphics._canvas.getBoundingClientRect();return {x:r.x+1088*r.width/1280,y:r.y+40*r.height/720}})()');
-  await click(browser,point.x,point.y);await choices(browser,'formation');
+  await tavernAction(browser,'Salvar campanha atual');await choices(browser,'formation');
   await browser.waitFor('manualWrites.length===1&&Boolean($gameTemp._drylandSaveNotice)');
   await browser.waitFor('$gameScreen.picture(95).opacity()===255');
   const written=await browser.evaluate('manualWrites[0]');
   assert.equal(written.name,'file1');assert.equal(written.wait,'dryland-save');
   assert.notEqual(written.next?.parameters?.[1],'SaveCurrentCampaign');
   assert.deepEqual(await savedCampaign(browser),before);
-  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),11);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),9);
   await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-08/saved-empty-draft.png');
   await browser.waitFor('!$gameTemp._drylandSaveNotice&&$gameScreen.picture(95).opacity()===0');
   assert.equal(await browser.evaluate('$gameScreen.picture(95).opacity()'),0);
@@ -528,7 +527,7 @@ canonicalCase('IT-088', 'manual preparation save writes the current file after n
   await returnToTavern(browser);
   assert.deepEqual(await snapshot(browser),before);
   assert.equal(await browser.evaluate('$gameSystem._drylandReadUnits.includes(82)'),true);
-  await activate(browser,'formation',11);await choices(browser,'formation');
+  await tavernAction(browser,'Salvar campanha atual');await choices(browser,'formation');
   await browser.waitFor('manualWrites.length===2&&Boolean($gameTemp._drylandSaveNotice)');
   assert.equal(await browser.evaluate('manualWrites[1].read.includes(82)'),true);
   const bytes=await savedBytes(browser);
@@ -538,11 +537,11 @@ canonicalCase('IT-088', 'manual preparation save writes the current file after n
   assert.equal(await browser.evaluate('$gameSystem._drylandReadUnits.includes(82)'),true);
   assert.equal(await savedBytes(browser),bytes);
   assert.deepEqual(await snapshot(browser),before);
-  await activate(browser,'formation',10);
+  await tavernAction(browser,'Configurações');
   await browser.waitFor('SceneManager._scene.constructor.name==="Scene_Options"&&!SceneManager._scene.isBusy()');
   for(let i=0;i<4&&await browser.evaluate('SceneManager._scene.constructor.name==="Scene_Options"');i++)await browser.press('Escape',27);
   await choices(browser,'formation');
-  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),10);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),9);
   assert.deepEqual(await snapshot(browser),before);
   assert.deepEqual(browser.exceptions,[]);
 });
@@ -550,9 +549,9 @@ canonicalCase('IT-089', 'manual save serializes pending requests, preserves fail
   const browser=await tavern(t),before=await snapshot(browser);
   await observeNativeText(browser);
   await browser.evaluate('window.manualWrites=0;window.writeMode="hold";const save=StorageManager.saveObject;StorageManager.saveObject=function(name,contents){if(name!=="file"+$gameSystem.savefileId())return save.call(this,name,contents);manualWrites++;if(writeMode==="sync")throw new Error("injected synchronous failure");if(writeMode==="async")return Promise.reject(new Error("injected asynchronous failure"));if(writeMode==="hold")return new Promise((resolve,reject)=>{window.finishManualWrite=()=>save.call(this,name,contents).then(resolve,reject);});return save.call(this,name,contents);};');
-  await activate(browser,'formation',11);
+  await tavernAction(browser,'Salvar campanha atual');
   await browser.waitFor('manualWrites===1&&$gameTemp._drylandPersistence.status==="saving"');
-  assert.equal(await browser.evaluate('$gameScreen.getPictureTextData(44).center'),'\\FS[26]Salvando…');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow._list[2].name'),'\\FS[18]Salvando…');
   assert.equal(await browser.evaluate('Boolean($gameTemp._drylandSaveNotice)'),false);
   await browser.evaluate('let i=$gameMap._interpreter;while(i._childInterpreter)i=i._childInterpreter;PluginManager.callCommand(i,"Dryland_EventBridge","SaveCurrentCampaign",{noticePicture:"95"});PluginManager.callCommand(i,"Dryland_EventBridge","CaptureContext",{});PluginManager.callCommand(i,"Dryland_EventBridge","Action",{action:"TOGGLE_HERO",value:"H1"});');
   for(let i=0;i<3;i++)await browser.press('Enter',13);
@@ -562,18 +561,18 @@ canonicalCase('IT-089', 'manual save serializes pending requests, preserves fail
   const successful=await savedBytes(browser);
   for(const mode of ['sync','async']) {
     await browser.evaluate('writeMode='+JSON.stringify(mode));
-    await activate(browser,'formation',11);await choices(browser,'formation');
+    await tavernAction(browser,'Salvar campanha atual');await choices(browser,'formation');
     assert.equal((await diagnostic(browser)).status,'failed');
     assert.equal(await browser.evaluate('Boolean($gameTemp._drylandSaveNotice)'),false);
     assert.equal(await savedBytes(browser),successful);
     await browser.waitFor('nativeTextLog.some(text=>text.includes("Não foi possível salvar."))');
   }
-  await browser.evaluate('writeMode="pass"');await activate(browser,'formation',11);await choices(browser,'formation');
+  await browser.evaluate('writeMode="pass"');await tavernAction(browser,'Salvar campanha atual');await choices(browser,'formation');
   await browser.waitFor('Boolean($gameTemp._drylandSaveNotice)');
   assert.equal((await diagnostic(browser)).status,'saved');assert.equal(await browser.evaluate('manualWrites'),4);
-  await activate(browser,'formation',11);await choices(browser,'formation');
+  await tavernAction(browser,'Salvar campanha atual');await choices(browser,'formation');
   assert.equal(await browser.evaluate('StorageManager.loadObject("file"+$gameSystem.savefileId()).then(contents=>contents.screen.picture(95).opacity())'),0,'A second deliberate save cannot serialize the preceding success notice as visible');
-  await browser.evaluate('writeMode="hold"');await activate(browser,'formation',11);
+  await browser.evaluate('writeMode="hold"');await tavernAction(browser,'Salvar campanha atual');
   await browser.waitFor('manualWrites===6&&$gameTemp._drylandPersistence.status==="saving"');
   await toTitle(browser);
   await browser.evaluate('finishManualWrite()');

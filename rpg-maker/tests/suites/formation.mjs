@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { assertAdvanceIndicatorFits } from '../helpers/native-reading.mjs';
 import { click, clickConsole, hidden } from '../helpers/native-shared.mjs';
-import { act, activate, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, openDestinations, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, tavernAction, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, openDestinations, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
 
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -486,7 +486,7 @@ canonicalCase('IT-070', 'native queries and configuration are observational and 
 // OWNING_LAYER: native integration; EXISTING_SUITE: formation.mjs.
 canonicalCase('IT-072', 'wall board shows only complete deceased names and restores unchanged formation at both sizes', {timeout:120000}, async t => {
   const browser=await tavern(t);
-  assert.equal(await browser.evaluate('$gameScreen.picture(42).name()'),'Dryland_WallBoard');
+  assert.equal(await browser.evaluate('Boolean($gameScreen.picture(43)||$gameScreen.picture(44))'),false);
   const names=['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska'];
   for(const [width,height] of [[1280,720],[1920,1080]]) {
     await browser.call('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:false});
@@ -495,8 +495,7 @@ canonicalCase('IT-072', 'wall board shows only complete deceased names and resto
       const bounds=await browser.evaluate('SceneManager._scene._spriteset._pictureContainer.children.filter(s=>[42,10,11,12,13,14,15,16,17].includes(s._pictureId)&&s.picture()).map(s=>{const b=s.getBounds();return {id:s._pictureId,x:b.x,y:b.y,w:b.width,h:b.height}})');
       const board=bounds.find(b=>b.id===42);
       for(const hero of bounds.filter(b=>b.id!==42)) assert.ok(board.x+board.w<=hero.x||hero.x+hero.w<=board.x||board.y+board.h<=hero.y||hero.y+hero.h<=board.y);
-      const point=await browser.evaluate('(()=>{const r=Graphics._canvas.getBoundingClientRect();return {x:r.x+144*r.width/1280,y:r.y+144*r.height/720}})()');
-      await click(browser,point.x,point.y);await choices(browser,'roster');
+      await tavernAction(browser,'Quadro');await choices(browser,'roster');
       const rows=await browser.evaluate(`Array.from({length:8},(_,i)=>72+i).filter(id=>$gameScreen.picture(id)).map(id=>({id,text:SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(id).center).replace(/\\x1b[A-Za-z]+\\[[^\\]]*\\]/g,'').trim(),x:$gameScreen.picture(id).x(),y:$gameScreen.picture(id).y()}))`);
       assert.deepEqual(rows.map(row=>row.text),names.filter((_,i)=>dead.includes('H'+(i+1))));
       for(const [index,row] of rows.entries()) {assert.equal(row.x,640);assert.equal(row.y,208+48*index);assert.ok(row.y+24<=592);}
@@ -508,7 +507,7 @@ canonicalCase('IT-072', 'wall board shows only complete deceased names and resto
       assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),8-dead.length+1);
       assert.equal(await browser.evaluate('[71,72,73,74,75,76,77,78,79,81].every(id=>!$gameScreen.picture(id))'),true);
       assert.deepEqual(await snapshot(browser),before);
-      await activate(browser,'formation',8-dead.length+1);await choices(browser,'roster');
+      await tavernAction(browser,'Quadro');await choices(browser,'roster');
       await activate(browser,'roster',0);await choices(browser,'formation');
       assert.deepEqual(await snapshot(browser),before);
     }

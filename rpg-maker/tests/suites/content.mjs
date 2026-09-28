@@ -18,6 +18,33 @@ const original = JSON.parse(await readFile(path.join(project, 'data/CommonEvents
 const command = (code, parameters, indent = 0) => ({ code, indent, parameters });
 const end = () => command(0, []);
 
+canonicalCase('UT-080', 'G007 interfaces keep one action owner and preserve authored portrait and departure geometry', () => {
+  const age = original[354].list;
+  assert.equal(age.some(c => c.code === 231 && [3, 4, 5].includes(c.parameters[0])), false);
+  for (const choice of age.filter(c => c.code === 102)) {
+    assert.equal(choice.parameters[0].length, 3);
+    assert.ok(choice.parameters[0].every(label => !/<Bind Picture:|<Hide Choice Window>/.test(label)));
+    assert.equal(choice.parameters[1], 2, 'Cancel returns to title');
+  }
+  assert.ok(age.some(c => c.code === 102 && c.parameters[0][1].includes('<Disable>')));
+  const stage = original[38].list;
+  const positions = [[10,344,520],[12,840,176],[11,760,497],[13,1000,448],[14,528,336],[15,368,160],[16,1032,224],[17,176,264],[41,1136,664]];
+  for (const [id,x,y] of positions) {
+    const commands = stage.filter(c => c.code === 231 && c.parameters[0] === id);
+    assert.equal(commands.length, 1);
+    assert.deepEqual(commands[0].parameters.slice(2,8), [1,0,x,y,100,100]);
+  }
+  assert.equal(stage.some(c => c.code === 231 && [43,44].includes(c.parameters[0])), false);
+  const tavern = original[3].list;
+  const menu = tavern.find(c => c.code === 102 && c.parameters[0].some(label => label.includes('Fechar menu')));
+  assert.ok(menu);
+  assert.equal(menu.parameters[0].length, 4);
+  assert.equal(menu.parameters[1], 3);
+  assert.ok(menu.parameters[0].every(label => !/<Bind Picture:|<Hide Choice Window>/.test(label)));
+  assert.equal(tavern.filter(c => c.code === 117 && c.parameters[0] === 117).length, 1);
+  for (const name of ['Options','SaveCurrentCampaign']) assert.equal(tavern.filter(c => c.code === 357 && c.parameters[1] === name).length, 1);
+});
+
 canonicalCase('UT-076','the prologue preserves all nine approved blocks and six semantic reading boundaries',async()=>{
   const source=await readFile('planos/tasks/prototype-feedback-refinement/spec.md','utf8');
   const expected=[...source.split('### RQ-003 — Welcoming prologue')[1].split('### RQ-004')[0].matchAll(/^\s*> (.+)$/gm)].map(match=>match[1].trim());

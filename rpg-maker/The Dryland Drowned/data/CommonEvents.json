@@ -184,6 +184,21 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "2",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -3814,9 +3829,7 @@
                         "\\V[171]<Bind Picture: 16><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>",
                         "\\V[172]<Bind Picture: 17><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>",
                         "Seguir<Bind Picture: 41><Enable Switch: 29><Hide Choice Window>",
-                        "Quadro<Bind Picture: 42><Hide Choice Window>",
-                        "Configurações<Bind Picture: 43><Hide Choice Window>",
-                        "Salvar campanha atual<Bind Picture: 44><Hide Choice Window>"
+                        "Menu<Bind Picture: 42><Hide Choice Window>"
                     ],
                     -1,
                     -1,
@@ -4752,39 +4765,89 @@
                 "indent": 0,
                 "parameters": [
                     3,
-                    "Quadro<Bind Picture: 42><Hide Choice Window>"
+                    "Menu<Bind Picture: 42><Hide Choice Window>"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_2_PictureChoices",
+                    "ClearPictureID",
+                    "ClearPictureID",
+                    {
+                        "PictureIDs:arraynum": "[42]"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "ChoiceFocus",
+                    "ChoiceFocus",
+                    {
+                        "key": "formation-menu",
+                        "remember": "true",
+                        "horizontal": "false"
+                    }
+                ]
+            },
+            {
+                "code": 102,
+                "indent": 1,
+                "parameters": [
+                    [
+                        "\\FS[18]Quadro",
+                        "\\FS[18]Configurações",
+                        "\\FS[18]Salvar\ncampanha\natual",
+                        "\\FS[18]Fechar menu"
+                    ],
+                    3,
+                    0,
+                    2,
+                    0
+                ]
+            },
+            {
+                "code": 402,
+                "indent": 1,
+                "parameters": [
+                    0,
+                    "\\FS[18]Quadro"
                 ]
             },
             {
                 "code": 117,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     349
                 ]
             },
             {
                 "code": 117,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     117
                 ]
             },
             {
                 "code": 0,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 402,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
-                    4,
-                    "Configurações<Bind Picture: 43><Hide Choice Window>"
+                    1,
+                    "\\FS[18]Configurações"
                 ]
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     "VisuMZ_4_EventTitleScene",
                     "Options",
@@ -4796,42 +4859,32 @@
             },
             {
                 "code": 0,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 402,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
-                    5,
-                    "Salvar campanha atual<Bind Picture: 44><Hide Choice Window>"
+                    2,
+                    "\\FS[18]Salvar\ncampanha\natual"
                 ]
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
+                    "Dryland_Presentation",
+                    "ChoiceProgress",
+                    "ChoiceProgress",
                     {
-                        "PictureIDs:arraynum": "[44]",
-                        "Padding:eval": "12",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]Salvando…\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
+                        "text": "\\FS[18]Salvando…"
                     }
                 ]
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     "Dryland_EventBridge",
                     "SaveCurrentCampaign",
@@ -4840,6 +4893,41 @@
                         "noticePicture": "95"
                     }
                 ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "ChoiceProgress",
+                    "ChoiceProgress",
+                    {
+                        "text": ""
+                    }
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 1,
+                "parameters": [
+                    3,
+                    "\\FS[18]Fechar menu"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 404,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 0,
@@ -7497,6 +7585,21 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "41",
+                        "focusPicture": "41",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 0,
                 "parameters": [
@@ -7524,22 +7627,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    42,
-                    "Dryland_WallBoard",
-                    0,
-                    0,
-                    64,
-                    112,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 108,
                 "indent": 0,
                 "parameters": [
@@ -7551,19 +7638,6 @@
                 "indent": 0,
                 "parameters": [
                     "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "Dryland_Presentation",
-                    "BindInterfacePicture",
-                    "BindInterfacePicture",
-                    {
-                        "picture": "42",
-                        "name": "Taverna — Palco — 42"
-                    }
                 ]
             },
             {
@@ -7707,6 +7781,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "30",
+                        "focusPicture": "10",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -7738,7 +7827,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[165] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[165] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7765,7 +7854,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[165]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[165]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7941,6 +8030,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "31",
+                        "focusPicture": "12",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -7972,7 +8076,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[166] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[166] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7999,7 +8103,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[166]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[166]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8175,6 +8279,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "32",
+                        "focusPicture": "11",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -8206,7 +8325,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[167] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[167] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8233,7 +8352,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[167]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[167]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8409,6 +8528,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "33",
+                        "focusPicture": "13",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -8440,7 +8574,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[168] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[168] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8467,7 +8601,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[168]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[168]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8643,6 +8777,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "34",
+                        "focusPicture": "14",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -8674,7 +8823,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[169] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[169] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8701,7 +8850,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[169]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[169]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8877,6 +9026,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "35",
+                        "focusPicture": "15",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -8908,7 +9072,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[170] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[170] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8935,7 +9099,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[170]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[170]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9111,6 +9275,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "36",
+                        "focusPicture": "16",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -9142,7 +9321,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[171] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[171] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9169,7 +9348,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[171]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[171]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9345,6 +9524,21 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "37",
+                        "focusPicture": "17",
+                        "width": "0",
+                        "height": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
                     "PictureAddPicture",
@@ -9376,7 +9570,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[172] ✓\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[172] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9403,7 +9597,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[172]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[172]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9551,56 +9745,6 @@
                 ]
             },
             {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[41]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[42]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]Quadro\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[42]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
                 "code": 111,
                 "indent": 0,
                 "parameters": [
@@ -9709,11 +9853,11 @@
                 "code": 231,
                 "indent": 0,
                 "parameters": [
-                    43,
-                    "Dryland_SettingsButton",
+                    42,
+                    "Dryland_Button",
                     0,
                     0,
-                    32,
+                    1200,
                     16,
                     100,
                     100,
@@ -9725,17 +9869,32 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "42",
+                        "focusPicture": "42",
+                        "width": "56",
+                        "height": "48"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[43]",
+                        "PictureIDs:arraynum": "[42]",
                         "Padding:eval": "12",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]Configurações\"",
+                        "center:json": "\"☰\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9747,91 +9906,12 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[43]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    44,
-                    "Dryland_SaveButton",
-                    0,
-                    0,
-                    928,
-                    16,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[44]",
-                        "Padding:eval": "12",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]Salvar campanha atual\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[44]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
                     "Dryland_Presentation",
                     "BindInterfacePicture",
                     "BindInterfacePicture",
                     {
-                        "picture": "43",
-                        "name": "Taverna — configurações"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "Dryland_Presentation",
-                    "BindInterfacePicture",
-                    "BindInterfacePicture",
-                    {
-                        "picture": "44",
-                        "name": "Taverna — salvar campanha"
+                        "picture": "42",
+                        "name": "Taverna — menu"
                     }
                 ]
             },
@@ -16807,7 +16887,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[165]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[165]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -16978,7 +17058,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[166]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[166]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -17149,7 +17229,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[167]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[167]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -17320,7 +17400,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[168]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[168]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -17491,7 +17571,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[169]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[169]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -17662,7 +17742,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[170]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[170]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -17833,7 +17913,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[171]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[171]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -18004,7 +18084,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[172]\"",
+                        "center:json": "\"\\\\FS[22]\\\\V[172]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -71002,167 +71082,11 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    4,
-                    "Dryland_MenuButton",
-                    0,
-                    0,
-                    448,
-                    480,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[4]",
-                        "Padding:eval": "12",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]Jogar\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[4]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    5,
-                    "Dryland_MenuButton",
-                    0,
-                    0,
-                    448,
-                    560,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[5]",
-                        "Padding:eval": "12",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]Voltar ao título\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[5]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
                 "code": 111,
                 "indent": 0,
                 "parameters": [
                     12,
                     "$gameTemp._drylandAgeNotice.checked"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    3,
-                    "Dryland_AgeCheckbox",
-                    0,
-                    0,
-                    288,
-                    400,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[3]",
-                        "Padding:eval": "12",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26][X] Tenho 16 anos de idade ou mais\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[3]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
                 ]
             },
             {
@@ -71184,13 +71108,13 @@
                 "indent": 1,
                 "parameters": [
                     [
-                        "Tenho 16 anos de idade ou mais<Bind Picture: 3><Hide Choice Window>",
-                        "Jogar<Bind Picture: 4><Hide Choice Window>",
-                        "Voltar ao título<Bind Picture: 5><Hide Choice Window>"
+                        "[X] Tenho 16 anos de idade ou mais<Choice Width: 680>",
+                        "Jogar",
+                        "Voltar ao título"
                     ],
                     2,
                     0,
-                    2,
+                    1,
                     0
                 ]
             },
@@ -71199,7 +71123,7 @@
                 "indent": 1,
                 "parameters": [
                     0,
-                    "Tenho 16 anos de idade ou mais<Bind Picture: 3><Hide Choice Window>"
+                    "[X] Tenho 16 anos de idade ou mais<Choice Width: 680>"
                 ]
             },
             {
@@ -71226,7 +71150,7 @@
                 "indent": 1,
                 "parameters": [
                     1,
-                    "Jogar<Bind Picture: 4><Hide Choice Window>"
+                    "Jogar"
                 ]
             },
             {
@@ -71253,7 +71177,7 @@
                 "indent": 1,
                 "parameters": [
                     2,
-                    "Voltar ao título<Bind Picture: 5><Hide Choice Window>"
+                    "Voltar ao título"
                 ]
             },
             {
@@ -71286,73 +71210,6 @@
                 "parameters": []
             },
             {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    3,
-                    "Dryland_AgeCheckbox",
-                    0,
-                    0,
-                    288,
-                    400,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[3]",
-                        "Padding:eval": "12",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26][  ] Tenho 16 anos de idade ou mais\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[3]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
-                "code": 234,
-                "indent": 1,
-                "parameters": [
-                    4,
-                    [
-                        -110,
-                        -110,
-                        -110,
-                        0
-                    ],
-                    0,
-                    false
-                ]
-            },
-            {
                 "code": 357,
                 "indent": 1,
                 "parameters": [
@@ -71371,13 +71228,13 @@
                 "indent": 1,
                 "parameters": [
                     [
-                        "Tenho 16 anos de idade ou mais<Bind Picture: 3><Hide Choice Window>",
-                        "Jogar<Disable><Bind Picture: 4><Hide Choice Window>",
-                        "Voltar ao título<Bind Picture: 5><Hide Choice Window>"
+                        "[ ] Tenho 16 anos de idade ou mais<Choice Width: 680>",
+                        "Jogar<Disable>",
+                        "Voltar ao título"
                     ],
                     2,
                     0,
-                    2,
+                    1,
                     0
                 ]
             },
@@ -71386,7 +71243,7 @@
                 "indent": 1,
                 "parameters": [
                     0,
-                    "Tenho 16 anos de idade ou mais<Bind Picture: 3><Hide Choice Window>"
+                    "[ ] Tenho 16 anos de idade ou mais<Choice Width: 680>"
                 ]
             },
             {
@@ -71413,7 +71270,7 @@
                 "indent": 1,
                 "parameters": [
                     1,
-                    "Jogar<Disable><Bind Picture: 4><Hide Choice Window>"
+                    "Jogar<Disable>"
                 ]
             },
             {
@@ -71426,7 +71283,7 @@
                 "indent": 1,
                 "parameters": [
                     2,
-                    "Voltar ao título<Bind Picture: 5><Hide Choice Window>"
+                    "Voltar ao título"
                 ]
             },
             {
@@ -71480,39 +71337,6 @@
                 "indent": 0,
                 "parameters": [
                     2
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    3
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    4
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    5
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ClearPictureID",
-                    "ClearPictureID",
-                    {
-                        "PictureIDs:arraynum": "[2,3,4,5]"
-                    }
                 ]
             },
             {

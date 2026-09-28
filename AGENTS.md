@@ -6,6 +6,7 @@
 
 # Fonte de verdade
 
+- Antes de implementar ou modificar funcionalidades, consulte o índice em `docs/adrs/README.md` e leia as ADRs gerais e locais aplicáveis. Trate ADRs aceitas como restrições arquiteturais, respeitando a ordem de autoridade e as substituições explícitas; identifique conflitos antes de implementar, sem contorná-los silenciosamente. Para botões e listas de escolhas, aplique a ADR-G007, incluindo suas exceções para interfaces incompatíveis.
 - Consulte o GDD canônico em `docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md` antes de propor ou implementar decisões de design; ele prevalece sobre versões numeradas, mantidas como histórico.
 - Preserve a distinção entre `Confirmado`, `Baseline de protótipo`, `Pendente` e `Fora do escopo`; não transforme pendências em decisões implícitas.
 - Trate specs Compozy concluídas como baselines históricas; descreva mudanças posteriores de comportamento em uma spec incremental.

@@ -7,6 +7,25 @@
  * @text Bloquear movimento do personagem
  * @type boolean
  * @default true
+ * @command ChoiceProgress
+ * @text Mostrar progresso na escolha atual
+ * @arg text
+ * @type string
+ * @desc Vazio fecha a apresentação de progresso, sem reativar escolhas.
+ * @command WindowPicture
+ * @text Aplicar janela à apresentação da picture
+ * @arg picture
+ * @type number
+ * @min 1
+ * @arg focusPicture
+ * @type number
+ * @default 0
+ * @arg width
+ * @type number
+ * @default 0
+ * @arg height
+ * @type number
+ * @default 0
  * @param DisableEventAcceleration
  * @text Bloquear aceleração comum de eventos
  * @type boolean
@@ -114,12 +133,107 @@
  */
 (() => {
   'use strict';
-  // Scope dialogue ink to its window; menus and authored text stay unchanged.
+  const dialogueInk = '#211c14';
+  ColorManager.drylandDialogueInk = () => dialogueInk;
   const resetDialogueFont = Window_Message.prototype.resetFontSettings;
   Window_Message.prototype.resetFontSettings = function() {
     resetDialogueFont.call(this);
-    this.changeTextColor('#211c14');
+    this.changeTextColor(ColorManager.drylandDialogueInk());
     this.contents.outlineWidth = 0;
+  };
+  const resetWindowFont = Window_Base.prototype.resetFontSettings;
+  Window_Base.prototype.resetFontSettings = function() {
+    resetWindowFont.call(this);
+    if (this._drylandWindowInk || this instanceof Window_NameBox || this instanceof Window_ChoiceList) {
+      this.changeTextColor(ColorManager.drylandDialogueInk());
+      this.contents.outlineWidth = 0;
+    }
+  };
+  const consoleTextColor = Window_ButtonConsole.prototype.changeTextColor;
+  Window_ButtonConsole.prototype.changeTextColor = function(color) {
+    consoleTextColor.call(this, ['options', 'hide'].includes(this._type) ? ColorManager.drylandDialogueInk() : color);
+    if (['options', 'hide'].includes(this._type)) this.contents.outlineWidth = 0;
+  };
+  PluginManager.registerCommand('Dryland_Presentation', 'WindowPicture', function(args) {
+    const picture = $gameScreen.picture(Number(args.picture));
+    if (picture) picture._drylandWindowStyle = {
+      focusPicture: Number(args.focusPicture), width: Number(args.width), height: Number(args.height)
+    };
+  });
+  PluginManager.registerCommand('Dryland_Presentation', 'ChoiceProgress', function(args) {
+    const window = SceneManager._scene._choiceListWindow;
+    if (!args.text) { window.close(); return; }
+    window._list[window.index()].name = args.text;
+    for (const item of window._list) item.enabled = false;
+    window.refresh();
+    window.deactivate();
+    window.open();
+  });
+  // Reuse MessageCore's existing text window as the picture's renderer.
+  // PictureChoices remains the sole input owner, including attached hero labels.
+  const updatePictureText = Sprite_Picture.prototype.updatePictureText;
+  Sprite_Picture.prototype.updatePictureText = function() {
+    const style = this.picture()?._drylandWindowStyle;
+    if (this._pictureTextWindow && this._pictureTextWindow._drylandWindowInk !== Boolean(style)) {
+      this._pictureTextWindow._drylandWindowInk = Boolean(style);
+      this._pictureTextCache = {};
+    }
+    if (style && this.bitmap?.isReady()) {
+      if (!this._drylandWindowBitmap) {
+        this._drylandWindowBitmap = new Bitmap(style.width || this.bitmap.width, style.height || this.bitmap.height);
+        this.bitmap = this._drylandWindowBitmap;
+      }
+      this.createPictureText();
+      this._pictureTextWindow._drylandWindowInk = true;
+    }
+    updatePictureText.call(this);
+    const window = this._pictureTextWindow;
+    if (!window || (style && !this.bitmap)) return;
+    if (!style) {
+      if (window.parent === this) this.removeChild(window);
+      window._drylandWindowInk = false;
+      window.opacity = 0;
+      this._pictureTextSprite.visible = true;
+      if (this._drylandWindowBitmap) {
+        this._drylandWindowBitmap.destroy();
+        this._drylandWindowBitmap = null;
+        if (this.picture()) this.loadBitmap();
+      }
+      return;
+    }
+    if (window.parent !== this) this.addChildAt(window, 0);
+    this._pictureTextSprite.visible = false;
+    window.opacity = 255;
+    window.x = -this.anchor.x * this.bitmap.width;
+    window.y = -this.anchor.y * this.bitmap.height;
+    const choices = SceneManager._scene._choiceListWindow;
+    const choice = choices?._list[choices.index()];
+    const binding = choice && /<Bind Picture: (\d+)>/.exec($gameMessage.choices()[choice.ext]);
+    const focused = choices?.isOpenAndActive() && binding && Number(binding[1]) === style.focusPicture;
+    window.active = Boolean(focused);
+    window.setCursorRect(4, 4, focused ? window.width - 8 : 0, focused ? window.height - 8 : 0);
+  };
+  const destroyPicture = Sprite_Picture.prototype.destroy;
+  Sprite_Picture.prototype.destroy = function(...args) {
+    if (this._drylandWindowBitmap) this._drylandWindowBitmap.destroy();
+    return destroyPicture.apply(this, args);
+  };
+  const choiceWidth = Window_ChoiceList.prototype.windowWidth;
+  Window_ChoiceList.prototype.windowWidth = function() {
+    return $gameMessage._drylandChoiceFocus?.key === 'formation-menu' ? 152 : choiceWidth.call(this);
+  };
+  const choiceHeight = Window_ChoiceList.prototype.itemHeight;
+  Window_ChoiceList.prototype.itemHeight = function() {
+    return $gameMessage._drylandChoiceFocus?.key === 'formation-menu' ? 108 : choiceHeight.call(this);
+  };
+  const placeChoices = Window_ChoiceList.prototype.updatePlacement;
+  Window_ChoiceList.prototype.updatePlacement = function() {
+    placeChoices.call(this);
+    if ($gameMessage._drylandChoiceFocus?.key === 'formation-menu') {
+      this.x = Graphics.boxWidth - this.width - 8;
+      this.y = 80;
+    }
+    if ($gameMessage._drylandChoiceFocus?.key === 'age-notice') this.y = 400;
   };
   const initialize = Game_System.prototype.initialize;
   Game_System.prototype.initialize = function() {

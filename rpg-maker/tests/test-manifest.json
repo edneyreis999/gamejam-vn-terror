@@ -147,6 +147,9 @@
       "UT-073",
       "IT-069"
     ],
+    "interface-g007-refinement": [
+      "UT-080"
+    ],
     "prototype-feedback-refinement": [
       "IT-085",
       "UT-076",
