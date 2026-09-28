@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import {createAudioCapture, audioCapture} from './audio-capture.mjs';
 import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
-import { resolve, join, relative, isAbsolute, dirname, basename } from 'node:path';
+import { resolve, join, relative, isAbsolute, dirname, basename, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import {loadStorageFixture, storageCapture} from './browser-storage.mjs';
 import os from 'node:os';
@@ -9,7 +9,7 @@ import {withDeadline,readObservation} from './observation-deadline.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const errorInfo = error => ({ name: error.name, message: error.message, stack: error.stack, ...(error.partialObservation?{partialObservation:error.partialObservation}:{}), ...(error.partialObservationUnavailable?{partialObservationUnavailable:error.partialObservationUnavailable}:{}) });
-const inside = (root, file) => { const rel = relative(root, file); return rel !== '..' && !rel.startsWith('../') && !isAbsolute(rel); };
+const inside = (root, file) => { const rel = relative(root, file); return rel !== '..' && !rel.startsWith('..' + sep) && !isAbsolute(rel); };
 const safeId = id => typeof id === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(id);
 
 async function resolveDestination(file) {

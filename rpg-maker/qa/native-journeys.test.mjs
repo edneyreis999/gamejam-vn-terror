@@ -38,7 +38,7 @@ async function finalCreditLine(context,label){
 async function stableTitle(context,label){
  const titleReady=()=>{
   const scene=SceneManager._scene,choices=scene&&scene._choiceListWindow;
-  return $gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
+  return $gameMap.mapId()===1&&$gameMessage.choices().some(label=>label.replace(/<[^>]*>/g,'')==='Continuar')&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
  };
  const titleState=serial=>context.read(label+'-title-stable-'+serial,()=>{
   const scene=SceneManager._scene,choices=scene._choiceListWindow;
@@ -49,7 +49,7 @@ async function stableTitle(context,label){
  for(let serial=2;serial<=3;serial++){
   await context.wait(({frame})=>{
    const scene=SceneManager._scene,choices=scene&&scene._choiceListWindow;
-   return Graphics.frameCount>frame&&$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
+   return Graphics.frameCount>frame&&$gameMap.mapId()===1&&$gameMessage.choices().some(label=>label.replace(/<[^>]*>/g,'')==='Continuar')&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
   },samples.at(-1));
   samples.push(await titleState(serial));
  }
@@ -126,7 +126,7 @@ export async function execute(context){
  const player=new DirectedNativePlayer(context),fromArchive=Boolean(context.descriptor.storageFixture);
  const fileId=Number(process.env.DRYLAND_QA_FILE||context.descriptor.nativeArchive?.fileId||1);
  if(fromArchive){await player.choose('Continuar');await player.file(fileId);}
- else{await player.choose('Jogar');await player.file(fileId);await player.returnToTavern();await captureNativeSave(context,'new-campaign');}
+ else{await player.choose('Novo jogo');await player.file(fileId);await player.returnToTavern();await captureNativeSave(context,'new-campaign');}
  await player.ready();
  const parent=await player.snapshot('entry-campaign');
  assert.equal(parent.fileId,fileId);
@@ -161,7 +161,7 @@ export async function execute(context){
     await context.shot('return-before-exit');
     const dead=state.deadHeroIds.map(id=>9+Number(id.slice(1)));
     await context.read('return-portrait-opacity',ids=>ids.map(id=>({id,opacity:$gameScreen.picture(id)?.opacity()??null})),dead);
-    if(process.env.DRYLAND_QA_LEAVE_FADE==='1'){await player.choose('Destinos');await player.until('destinations');}
+    if(process.env.DRYLAND_QA_LEAVE_FADE==='1'){await player.choose('Seguir');await player.until('destinations');}
     else await context.wait(ids=>ids.every(id=>!$gameScreen.picture(id)),dead);
     assert.equal(await context.read('absence-erased',ids=>ids.every(id=>!$gameScreen.picture(id)),dead),true);
     await context.shot('return-after-exit-or-fade');const child=await captureNativeSave(context,'return-result');
@@ -178,10 +178,10 @@ export async function execute(context){
     for(const hero of desired.filter(id=>!state.draftPartyIds.includes(id))){await player.choose(names[Number(hero.slice(1))-1]);await player.choose('Selecionar');await player.returnToTavern();}
    }
    const route=routeOrder.find(id=>!state.completedDungeonIds.includes(id));
-   await player.choose('Destinos');const destinations=await player.until('destinations');
+   await player.choose('Seguir');const destinations=await player.until('destinations');
    // Public route labels are read from the functional editor configuration.
    const label=await context.read('public-route-name',id=>$dataCommonEvents[4].list.find(c=>c.code===357&&c.parameters[1]==='ConfigureRoute'&&c.parameters[3].id===id).parameters[3].name,route);
-   assert.ok(label);await player.choose(destinations.labels.find(text=>text.includes(label)));await player.choose('Partir');
+   assert.ok(label);await player.choose(destinations.labels.find(text=>text.includes(label)),{settled:id=>$gameSystem._dryland.campaign.selectedDungeonId===id,settledArg:route});await player.choose('Partir');
   }else if(surface.active&&surface.kind==='approaches'){
    const id=state.assignments[state.dungeonId][state.position-1];
    await player.assertMapOwner((id[0]==='A'?6:14)+Number(id.slice(1)));

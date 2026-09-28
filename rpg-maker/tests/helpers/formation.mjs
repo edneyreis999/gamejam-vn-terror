@@ -14,8 +14,8 @@ export const catalog = createCatalog(readConfiguration(events[4]));
 export const rules = createRules(catalog);
 export const heroes = Array.from({ length: 8 }, (_, i) => `H${i + 1}`);
 export const prologueMarkers = [
-  'Meu nome é Rheed.', 'Naqueles dias,', 'Quando os oito chegaram',
-  'Os papéis eram de Irati', 'Os mapas estavam incompletos.', 'Do tesouro, falou pouco.',
+  'Boa noite.', 'Naquele tempo,', 'Irati era a mãe dele.',
+  'Mesmo assim,', 'Havia lembranças da família,', 'Sobre o tesouro, falou pouco.',
   'Minha família deixou as pistas.', 'Você não está esquecendo', 'Os detalhes serão adicionados'
 ];
 export function act(state, type, fields = {}) { return rules.dispatch(state, { type, ...fields, expectedSequence: state.sequence }); }
@@ -55,11 +55,17 @@ export function heroUnitTexts(unit) {
   assert.ok(start >= 0, `Missing hero reading unit ${unit}`);
   const end = list.findIndex((command, index) => index > start && presentation(command, 'ObservationComplete'));
   assert.ok(end > start, `Missing completion for hero unit ${unit}`);
-  return list.slice(start, end).filter(command => command.code === 401).map(command => command.parameters[0]);
+  const boxes=[];let lines=[];
+  for(const command of list.slice(start,end)) {
+    if(command.code===101&&lines.length){boxes.push(lines.join('\n'));lines=[];}
+    if(command.code===401)lines.push(command.parameters[0]);
+  }
+  if(lines.length)boxes.push(lines.join('\n'));
+  return boxes;
 }
 
 export async function choices(browser, kind) {
-  await browser.waitFor(`$gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'hero' || ${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
+  await browser.waitFor(`window.$gameMessage && $gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'hero' || ${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
 }
 export async function activate(browser, kind, index) {
   await choices(browser, kind);
@@ -77,7 +83,7 @@ export async function pause(browser) {
 export async function tavern(t, options = {}) {
   await startServer(t);
   const browser = await openChrome(t, options);
-  await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("window.$gameMessage && ($gameMessage?._drylandChoiceFocus?.key === 'title') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   await browser.press('Enter', 13);await selectFile(browser,1);
   for (const marker of prologueMarkers) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0`);
@@ -91,6 +97,13 @@ export async function returnToTavern(browser) {
   await browser.waitFor("['hero','formation'].includes($gameMessage._drylandChoiceFocus?.key) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   if (await browser.evaluate("$gameMessage._drylandChoiceFocus.key === 'hero'")) await activate(browser, 'hero', 2);
   await choices(browser, 'formation');
+}
+
+export async function openDestinations(browser) {
+  await activate(browser, 'formation', 8);
+  await browser.waitFor("($gameMessage._drylandChoiceFocus?.key === 'destinations' && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !$gameMessage.hasText()) || ($gameMessage.allText().includes('vamos traçar nossa rota!') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0)");
+  if (await browser.evaluate('$gameMessage.hasText()')) await browser.press('Enter', 13);
+  await choices(browser, 'destinations');
 }
 
 export async function installFixture(browser, state) {

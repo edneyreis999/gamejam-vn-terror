@@ -8,6 +8,7 @@ import { test } from 'node:test';
 export const manifest = JSON.parse(readFileSync(new URL('../test-manifest.json', import.meta.url), 'utf8'));
 const registered = [];
 const runStarted = new Date().toISOString();
+export const evidenceRoot = process.env.DRYLAND_EVIDENCE_ROOT || `docs/qa/evidence/native-tests/${runStarted.replace(/[:.]/g, '-')}`;
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 export function assertRegistrations(contract, ids) {
   assert.ok(contract?.tasks && typeof contract.tasks === 'object', 'Missing test manifest');
@@ -46,7 +47,7 @@ async function evidence(id, verdict, error) {
   const currentSources = await sourceHashes();
   const changedInputs = [...new Set([...Object.keys(runSources), ...Object.keys(currentSources)])]
     .filter(file => runSources[file] !== currentSources[file]);
-  const directory = `docs/qa/evidence/init-rpg-maker-mz/task-${owner}/${id}`;
+  const directory = `${evidenceRoot}/${id}`;
   await mkdir(directory, { recursive: true });
   const filters = process.execArgv.filter(arg => arg.startsWith('--test-name-pattern')).map(arg => JSON.stringify(arg));
   await writeFile(`${directory}/execution.json`, JSON.stringify({ id, verdict: changedInputs.length ? 'STALE' : verdict, runStarted, finished: new Date().toISOString(),

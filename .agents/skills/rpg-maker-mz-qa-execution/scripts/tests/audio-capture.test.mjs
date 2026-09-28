@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {chromium} from 'playwright';
 import {createAudioCapture,audioCapture,encodeWav,captureProcessorSource} from '../audio-capture.mjs';
-import {runInNewContext} from 'node:vm';
+import {runInNewContext,createContext,runInContext} from 'node:vm';
 
 test('graph capture records tone and silence, preserves the source and retains partial capture on close',async t=>{
   const root=await mkdtemp(join(tmpdir(),'qa-audio-'));t.after(()=>rm(root,{recursive:true,force:true}));
@@ -67,7 +67,7 @@ test('the worklet preserves inactive quanta and variable render lengths in both 
  processor.process([[new Float32Array(64).fill(.75),new Float32Array(64).fill(-.25)]],output(64));
  assert.equal(messages.length,1,'Readiness is emitted once after actual processing');
  processor.port.onmessage({data:'stop'});
- const channels=JSON.parse(JSON.stringify(recording.channels));
+ const channels=Array.from(recording.channels,channel=>Array.from(channel));
  assert.deepEqual(channels.map(c=>c.length),[320,320]);
  assert.deepEqual(channels[0],[...Array(128).fill(.25),...Array(128).fill(0),...Array(64).fill(.75)]);
  assert.deepEqual(channels[1],[...Array(128).fill(-.5),...Array(128).fill(0),...Array(64).fill(-.25)]);
@@ -86,4 +86,24 @@ test('PCM start resolves only after its worklet processes a block',async()=>{
  await new Promise(resolve=>setImmediate(resolve));
  assert.equal(connected.length,1);assert.equal(finished,false,'A connected node alone is not capture readiness');
  finishEvaluation();await pending;assert.equal(finished,true);
+});
+
+test('long PCM transfer stays below the transport message bound without losing samples',async t=>{
+ const root=await mkdtemp(join(tmpdir(),'qa-pcm-transfer-'));t.after(()=>rm(root,{recursive:true,force:true}));
+ const frameCount=600001,channels=[Float32Array.from({length:frameCount},(_,i)=>Math.sin(i/17)*1.2),Float32Array.from({length:frameCount},(_,i)=>Math.cos(i/31)*.5)];
+ let node,connected=false,maxPayload=0;
+ const context={sampleRate:48000,destination:{},audioWorklet:{addModule:async()=>{}},createGain:()=>({gain:{},connect(){},disconnect(){}})};
+ const master={context,connect(value){node=value;connected=true;},disconnect(value){assert.equal(value,node);connected=false;}};
+ const sandbox=createContext({master,Blob,URL,btoa,AudioWorkletNode:class{
+  constructor(){this.port={postMessage:()=>this.port.onmessage({data:{done:true,channels}}),close(){}};}
+  connect(){setImmediate(()=>this.port.onmessage({data:{ready:true}}));}disconnect(){}
+ }});
+ const page={evaluate:async(fn,arg)=>{sandbox.arg=arg;const result=await runInContext('('+fn.toString()+')(arg)',sandbox);const size=JSON.stringify(result??null).length;maxPayload=Math.max(maxPayload,size);if(size>1500000)throw Error('Transport message exceeds bounded payload');return result;}};
+ const report={};const capture=audioCapture({page,identity:async()=>{},report,output:root,sources:{master:{path:'master',expectedRef:'bounded PCM transport'}}});
+ await capture.start('long','master');const record=await capture.stop();
+ const bytes=await readFile(join(root,record.path));assert.equal(bytes.length,44+frameCount*4);
+ assert.equal(bytes.readUInt32LE(40),frameCount*4);
+ assert.deepEqual(bytes,encodeWav(channels,48000),'Every nonconstant sample, channel and chunk boundary survives the binary transfer');
+ assert.deepEqual(record.capture.channels.map(c=>c.samples),[frameCount,frameCount]);for(let c=0;c<2;c++){const energy=channels[c].reduce((sum,value)=>sum+value*value,0);assert.ok(Math.abs(record.capture.channels[c].rms-Math.sqrt(energy/frameCount))<1e-12);}
+ assert.ok(maxPayload<=1500000);assert.equal(connected,false);assert.equal(sandbox.__qaAudioCapture,undefined);assert.equal(sandbox.__qaAudioStopped,undefined);assert.equal(report.audioRecordings.length,1);
 });

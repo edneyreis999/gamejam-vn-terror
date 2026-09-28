@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/prototype-feedback-refinement/spec.md",
+  "requestId": "title-options-style-1280-20260925-01",
+  "consumer": "task-01-manual-feedback",
+  "case": "planos/tasks/prototype-feedback-refinement/title-options-style.qa.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {"id": "title-options-style", "profile": "1280x720-normal", "variant": "1280-normal", "configuration": "native-window-title"},
+  "claims": [{"id": "shared-controls", "variant": "1280-normal", "sensor": "directed-browser", "group": "title-options", "source": {"id": "shared-controls", "variant": "1280-normal"}, "expected": {"path": "planos/tasks/prototype-feedback-refinement/verification.md", "heading": "Manual feedback: title controls"}}],
+  "evidenceRoot": "docs/qa/evidence/prototype-feedback-refinement/title-options-style",
+  "freshness": {"mode": "fresh", "reason": "User-requested replacement of title picture controls with shared native Options styling and input."}
+}

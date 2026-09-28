@@ -31,7 +31,7 @@ async function record(id, result) {
 canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prologue and complete map hierarchy', { timeout: 90000 }, async t => {
   await startServer(t);
   const browser = await openChrome(t);
-  await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("window.$gameMessage && ($gameMessage?._drylandChoiceFocus?.key === 'title') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   const entry = await browser.evaluate(`({
     plugins: $plugins.filter(p => p.status).map(p => p.name),
     loaded: PluginManager._scripts, size: [Graphics.width, Graphics.height],
@@ -48,8 +48,9 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
   assert.equal(entry.moving, false);
   assert.equal(entry.menu, false);
   assert.ok(!entry.bgm?.name);
-  assert.match(entry.text, /16 anos.*morte permanente/s);
-  assert.deepEqual(entry.choices, ['Jogar', 'Configurações']);
+  assert.equal(entry.text, '', 'The warning belongs to the separate notice');
+  assert.deepEqual(entry.choices.map(label => label.replace(/<[^>]*>/g, '')), ['Novo jogo', 'Continuar', 'Configurações']);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow._list[1].enabled'), false);
   assert.deepEqual(entry.console, ['fastFwd', 'options', 'hide']);
 
   const maps = await browser.evaluate(`Promise.all($dataMapInfos.filter(Boolean).map(async info => {
@@ -102,7 +103,7 @@ canonicalCase('IT-001', 'native entry loads the selected plugins, explicit prolo
 canonicalCase('IT-037', 'documented loopback command serves the native entry in Chrome and stops on SIGINT', { timeout: 45000 }, async t => {
   const server = await startServer(t);
   const browser = await openChrome(t);
-  await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar')");
+  await browser.waitFor("window.$gameMessage && ($gameMessage?._drylandChoiceFocus?.key === 'title')");
   assert.equal(await browser.evaluate('location.href'), origin);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 1);
   await server.stop();

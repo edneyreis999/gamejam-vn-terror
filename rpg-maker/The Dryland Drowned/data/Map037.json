@@ -3046,6 +3046,211 @@
                             ]
                         },
                         {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                50,
+                                "Dryland_NarrativeChoice",
+                                0,
+                                0,
+                                704,
+                                208,
+                                100,
+                                100,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "BindInterfacePicture",
+                                "BindInterfacePicture",
+                                {
+                                    "picture": "50",
+                                    "name": "Escolha narrativa"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_1_MessageCore",
+                                "PictureTextChange",
+                                "PictureTextChange",
+                                {
+                                    "PictureIDs:arraynum": "[50]",
+                                    "Padding:eval": "12",
+                                    "upperleft:json": "\"\"",
+                                    "up:json": "\"\"",
+                                    "upperright:json": "\"\"",
+                                    "left:json": "\"\"",
+                                    "center:json": "\"\\\\FS[26]Conversar\"",
+                                    "right:json": "\"\"",
+                                    "lowerleft:json": "\"\"",
+                                    "down:json": "\"\"",
+                                    "lowerright:json": "\"\""
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_PictureChoices",
+                                "ChangePictureChoiceSettingsOne",
+                                "ChangePictureChoiceSettingsOne",
+                                {
+                                    "PictureIDs:arraynum": "[50]",
+                                    "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                                    "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                51,
+                                "Dryland_NarrativeChoice",
+                                0,
+                                0,
+                                704,
+                                280,
+                                100,
+                                100,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "BindInterfacePicture",
+                                "BindInterfacePicture",
+                                {
+                                    "picture": "51",
+                                    "name": "Escolha narrativa"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_1_MessageCore",
+                                "PictureTextChange",
+                                "PictureTextChange",
+                                {
+                                    "PictureIDs:arraynum": "[51]",
+                                    "Padding:eval": "12",
+                                    "upperleft:json": "\"\"",
+                                    "up:json": "\"\"",
+                                    "upperright:json": "\"\"",
+                                    "left:json": "\"\"",
+                                    "center:json": "\"\\\\FS[26]\\\\V[153]\"",
+                                    "right:json": "\"\"",
+                                    "lowerleft:json": "\"\"",
+                                    "down:json": "\"\"",
+                                    "lowerright:json": "\"\""
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_PictureChoices",
+                                "ChangePictureChoiceSettingsOne",
+                                "ChangePictureChoiceSettingsOne",
+                                {
+                                    "PictureIDs:arraynum": "[51]",
+                                    "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                                    "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                52,
+                                "Dryland_NarrativeChoice",
+                                0,
+                                0,
+                                704,
+                                352,
+                                100,
+                                100,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "BindInterfacePicture",
+                                "BindInterfacePicture",
+                                {
+                                    "picture": "52",
+                                    "name": "Escolha narrativa"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_1_MessageCore",
+                                "PictureTextChange",
+                                "PictureTextChange",
+                                {
+                                    "PictureIDs:arraynum": "[52]",
+                                    "Padding:eval": "12",
+                                    "upperleft:json": "\"\"",
+                                    "up:json": "\"\"",
+                                    "upperright:json": "\"\"",
+                                    "left:json": "\"\"",
+                                    "center:json": "\"\\\\FS[26]Voltar à taverna\"",
+                                    "right:json": "\"\"",
+                                    "lowerleft:json": "\"\"",
+                                    "down:json": "\"\"",
+                                    "lowerright:json": "\"\""
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_PictureChoices",
+                                "ChangePictureChoiceSettingsOne",
+                                "ChangePictureChoiceSettingsOne",
+                                {
+                                    "PictureIDs:arraynum": "[52]",
+                                    "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                                    "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "ConsumeInput",
+                                "ConsumeInput",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 0,
                             "parameters": [
@@ -3068,9 +3273,9 @@
                             "indent": 0,
                             "parameters": [
                                 [
-                                    "Conversar",
-                                    "\\V[153]<Enable Switch: 30>",
-                                    "Voltar à taverna"
+                                    "Conversar<Bind Picture: 50><Hide Choice Window>",
+                                    "\\V[153]<Enable Switch: 30><Bind Picture: 51><Hide Choice Window>",
+                                    "Voltar à taverna<Bind Picture: 52><Hide Choice Window>"
                                 ],
                                 2,
                                 0,
@@ -4059,6 +4264,39 @@
                             "collapsed": true
                         },
                         {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                50
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                51
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                52
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_PictureChoices",
+                                "ClearPictureID",
+                                "ClearPictureID",
+                                {
+                                    "PictureIDs:arraynum": "[50,51,52]"
+                                }
+                            ]
+                        },
+                        {
                             "code": 108,
                             "indent": 1,
                             "parameters": [
@@ -4322,6 +4560,13 @@
                                 "ObservationComplete",
                                 "ObservationComplete",
                                 {}
+                            ]
+                        },
+                        {
+                            "code": 119,
+                            "indent": 2,
+                            "parameters": [
+                                "return"
                             ]
                         },
                         {
@@ -4618,6 +4863,39 @@
                                 "Voltar à taverna"
                             ],
                             "collapsed": true
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                50
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                51
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                52
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_PictureChoices",
+                                "ClearPictureID",
+                                "ClearPictureID",
+                                {
+                                    "PictureIDs:arraynum": "[50,51,52]"
+                                }
+                            ]
                         },
                         {
                             "code": 119,

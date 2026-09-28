@@ -14,6 +14,8 @@ O experimento reuniu a interação em um submapa de verdade: a escolha do retrat
 
 ## Decisão
 
+**Substituição parcial confirmada em 2026-09-24:** a [ADR de refinamento do protótipo](../../planos/tasks/prototype-feedback-refinement/adrs/adr-001-prototype-feedback-product.md), D-006, substitui no item 3 somente o retorno após adição bem-sucedida: depois da fala curta e do avanço do jogador, voltar automaticamente à taverna. Conversar, retirar, rejeitar grupo cheio e a autoria por mapas conservam o contrato. A aprovação da regra não declara a implementação desse refinamento concluída.
+
 1. A taverna apresenta os heróis disponíveis. Cada herói migrado tem um mapa próprio, filho da taverna na árvore do MZ, responsável pelo menu, perfil, conversa, bustos, respostas de seleção e retorno. O parentesco na árvore organiza a autoria; as transferências são comandos nativos explícitos.
 2. O evento do mapa contém a interação real. Helpers e Common Events funcionais continuam permitidos, mas o mapa não deve apenas redirecionar toda a interação para um controlador externo equivalente ao anterior.
 3. **Conversar** e **Selecionar / Retirar do grupo** retornam ao menu do herói. **Voltar à taverna** ou cancelar encerra a visita. O herói permanece visível no próprio menu; Ivaí entra durante sua participação na conversa e sai antes da volta ao menu.

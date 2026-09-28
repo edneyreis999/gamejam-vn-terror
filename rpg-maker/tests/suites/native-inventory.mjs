@@ -81,11 +81,11 @@ canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image 
   const { default: assert } = await import('node:assert/strict');
   const { stat } = await import('node:fs/promises');
   const { events, choices, activate, pause, returnToTavern } = await import('../helpers/formation.mjs');
-  const expected=['Taverna',...Array.from({length:8},(_,i)=>`Tavern_H${i+1}`),...Array.from({length:8},(_,i)=>`H${i+1}`),'ivai','Button','Tag','Panel','DestinationCard','DestinationLabel','Destination_physical','Destination_supernatural','Destination_final','MapDwarven','MapElven','MapComplete'].map(name=>'Dryland_'+name);
+  const expected=['Taverna',...Array.from({length:8},(_,i)=>`Tavern_H${i+1}`),...Array.from({length:8},(_,i)=>`H${i+1}`),'ivai','Button','Tag','Panel','DestinationCard','DestinationLabel','Destination_physical','Destination_supernatural','Destination_final','MapDwarven','MapElven','MapComplete','NarrativeChoice','RouteTarget','RouteInformation','RouteFooter','WallBoard','NamesReader','NameRow','SacrificeContainer','SettingsButton','SaveButton','SaveNotice','FinalChoice','MemorialLabel',"Black","TitleText","AgeWarning","MenuButton","AgeCheckbox","AgeMark",...Array.from({length:8},(_,i)=>`HeroGroup_H${i+1}`)].map(name=>'Dryland_'+name);
   const helper=events.find(event=>event?.name==='Taverna — Carregar imagens');
   const command=helper.list.find(command=>command.code===357);
   assert.equal(command.parameters[0],'VisuMZ_0_CoreEngine');assert.equal(command.parameters[1],'SystemLoadImages');
-  assert.deepEqual(JSON.parse(command.parameters[3]['pictures:arraystr']),expected);
+  assert.deepEqual(JSON.parse(command.parameters[3]['pictures:arraystr']).sort(),[...expected].sort());
   for(const name of expected)assert.ok((await stat(`rpg-maker/The Dryland Drowned/img/pictures/${name}.png`)).size>0);
   const browser=await entry(t);
   await browser.evaluate(`window.preloadLog=[];window.preloadActive=false;
@@ -102,8 +102,8 @@ canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image 
   await choices(browser,'formation');
   const first=await browser.evaluate('preloadLog');
   const stage=first.findIndex(item=>item.type==='stage');
-  assert.ok(stage>0,JSON.stringify(first));assert.deepEqual(first.slice(0,stage).filter(item=>item.type==='request').slice(-29).map(item=>item.name),expected);
-  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'),11,'Preload calls preserve the consecutive native choice blocks');
+  assert.ok(stage>0,JSON.stringify(first));assert.deepEqual(first.slice(0,stage).filter(item=>item.type==='request').slice(-expected.length).map(item=>item.name),expected);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'),12,'Preload calls preserve the consecutive native choice blocks');
   // Hold an unused bust at the I/O boundary. The provider starts loading but
   // neither the preload command nor the project freezes the active scene.
   await browser.evaluate(`preloadLog=[];delete ImageManager._cache['img/pictures/Dryland_H8.png'];
@@ -117,9 +117,9 @@ canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image 
   await browser.evaluate('releasePreloadImage()');await browser.waitFor('ImageManager.isReady()');
   await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
   await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+  await browser.waitFor("($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
   await browser.evaluate('preloadLog=[];');await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
-  assert.deepEqual(await browser.evaluate('preloadLog.filter(item=>item.type==="request").slice(-29).map(item=>item.name)'),expected);
+  assert.deepEqual(await browser.evaluate(`preloadLog.filter(item=>item.type==="request").slice(-${expected.length}).map(item=>item.name)`),expected);
   assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign'),before);
   const heroMenu='$gameMessage._drylandChoiceFocus?.key==="hero"&&SceneManager._scene._choiceListWindow?.isOpenAndActive()';
   for(let step=0;step<12;step++){

@@ -147,6 +147,18 @@
       "UT-073",
       "IT-069"
     ],
+    "prototype-feedback-refinement": [
+      "IT-085",
+      "UT-076",
+      "UT-077",
+      "IT-086",
+      "UT-078",
+      "IT-087",
+      "UT-079",
+      "IT-088",
+      "IT-089",
+      "IT-090"
+    ],
     "eventbridge-minimal-runtime": [
       "UT-075",
       "IT-070",

@@ -53,3 +53,8 @@ Planejado, execução dirigida ainda não observada. Cobertura: S-03/04/06; B/D.
 ## Textos atualizados — 2026-09-25
 
 Campanha dirigida cobriu os 16 encontros e 48 rótulos, releitura A/B, recuo/reformação, falha A5-3, despedida de Gorvak e mortes A5/A1. Continue preservou fatos confirmados de abordagem e vítima. B4-1/B6-1 tiveram apenas paginação ajustada entre frases, validada em novo percurso. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.
+
+
+## Prototype feedback refinement — 2026-09-25
+
+**Planejado; execução dirigida e aceite deste candidato pendentes.** S-002; B. Vítima não primeira, despedida antes da consequência nomeada, morte/checkpoint únicos, recuos voluntário/automático e ausência de mortos antigos e recentes. [Guia](../guides/prototype-feedback-refinement.md) · [charter](../charters/CH-prototype-feedback-refinement.md). Os vereditos históricos acima permanecem ligados às suas fontes. A task 13 registra os resultados por lote e mantém os três bugs reportados até o reteste dirigido.

@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const file='rpg-maker/tests/suites/memorial.mjs';
+let source=readFileSync(file,'utf8');
+source=source.replace("const browser=await tavern(t);await observePresentation(browser);\n  for(const [kind,ending]",`const browser=await tavern(t);await observePresentation(browser);
+  await browser.evaluate(\`(()=>{window.memorialDraws=[];const draw=Bitmap.prototype.drawText;Bitmap.prototype.drawText=function(text,x,y,maxWidth,lineHeight,align){if($gameSystem?._dryland?.campaign.phase==='memorial')memorialDraws.push({bitmap:this,text,x,y,maxWidth,lineHeight,font:this.fontSize,width:this.measureTextWidth(text)});return draw.apply(this,arguments);};})()\`);
+  for(const [kind,ending]`);
+source=source.replace('await assertMemorial(browser,state);const bytes=await saveBytes(browser);',`await assertMemorial(browser,state);const bytes=await saveBytes(browser);
+    const measurements=await browser.evaluate(\`Array.from({length:8},(_,i)=>{const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===30+i);const bitmaps=[];const visit=s=>{if(s.bitmap)bitmaps.push(s.bitmap);for(const c of s.children||[])visit(c);};visit(s);return {hero:'H'+(i+1),scale:[s.scale.x,s.scale.y],draws:memorialDraws.filter(d=>bitmaps.includes(d.bitmap)).map(({bitmap,...d})=>({...d,bitmap:[bitmap.width,bitmap.height]}))};})\`);
+    const {evidenceRoot}=await import('../helpers/canonical-cases.mjs');
+    await mkdir(evidenceRoot+'/memorial-measurements',{recursive:true});
+    await writeFile(evidenceRoot+'/memorial-measurements/'+kind+'.json',JSON.stringify(measurements,null,2));`);
+writeFileSync(file,source);

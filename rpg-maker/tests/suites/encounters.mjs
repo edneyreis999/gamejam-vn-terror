@@ -1,3 +1,4 @@
+import { openDestinations } from '../helpers/formation.mjs';
 // IN: independent matrix, real domain transitions and real MZ/Chrome inputs.
 // OUT: staged sacrifice, semantic saving and later discovery/ending surfaces.
 import assert from 'node:assert/strict';
@@ -137,9 +138,9 @@ async function nativeEncounter(t, options = {}) {
     await browser.press('Enter', 13);
     await returnToTavern(browser);
   }
-  await activate(browser, 'formation', 8);
+  await openDestinations(browser);
   await activate(browser, 'destinations', 0);
-  await activate(browser, 'formation', 10);
+  await activate(browser, 'destinations', 4);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'dungeon_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   await browser.press('Enter', 13);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMap.mapId() >= 7 && $gameMap.mapId() <= 14 && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");

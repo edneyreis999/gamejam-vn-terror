@@ -52,3 +52,8 @@ PASS técnico: arquivosA/B e Continue nas fronteiras com proveniência jogada; n
 ## Integração narrativa aprovada — 2026-09-18
 
 Planejado, execução dirigida ainda não observada. Cobertura: S-10; E. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.
+
+
+## Prototype feedback refinement — 2026-09-25
+
+**Planejado; execução dirigida e aceite deste candidato pendentes.** S-001/003/004; A/C/D. Saves próprios, ciência desmarcada no Continue, mesmo arquivo, introdução salva antes/depois e leitura não salva, último save válido e ramificações de pai imutável. Exportação/NW.js não integra este incremento. [Guia](../guides/prototype-feedback-refinement.md) · [charter](../charters/CH-prototype-feedback-refinement.md). Os vereditos históricos acima permanecem ligados às suas fontes. A task 13 registra os resultados por lote e mantém os três bugs reportados até o reteste dirigido.

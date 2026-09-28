@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { canonicalCase } from '../helpers/canonical-cases.mjs';
+import { canonicalCase, evidenceRoot } from '../helpers/canonical-cases.mjs';
 import { passageBoxes } from '../helpers/native-reading.mjs';
 import { catalog, events, heroes, tavern } from '../helpers/formation.mjs';
 import { complete } from '../helpers/campaign.mjs';
@@ -27,7 +27,7 @@ async function assertMemorial(browser,state){
     for(const bounds of [row.portrait,row.stone,row.text]){
       assert.ok(bounds.x>=-0.01&&bounds.y>=-0.01&&bounds.x+bounds.width<=1280.01&&bounds.y+bounds.height<=620.01,JSON.stringify(row));
     }
-    assert.ok(row.portrait.x>=row.stone.x&&row.portrait.x+row.portrait.width<=row.stone.x+row.stone.width);
+    assert.ok(row.portrait.x>=row.stone.x&&row.portrait.x+row.portrait.width<=row.stone.x+row.stone.width,JSON.stringify(row));
     assert.ok(row.portrait.y>=row.stone.y&&row.portrait.y+row.portrait.height<=row.stone.y+row.stone.height);
   }
   const sorted=rows.filter(row=>row.name).slice().sort((a,b)=>Math.abs(a.stone.y-b.stone.y)>10?a.stone.y-b.stone.y:a.stone.x-b.stone.x);
@@ -39,15 +39,46 @@ async function assertMemorial(browser,state){
 }
 canonicalCase('IT-055','one native memorial retains one, three or eight correctly framed dead heroes and omits zero deaths',{timeout:180000},async t=>{
   const browser=await tavern(t);await observePresentation(browser);
-  for(const [kind,ending] of [['mixed','destroy'],['three','destroy'],['bad','bad']]){
+  await browser.evaluate(`(()=>{window.memorialDraws=[];const draw=Bitmap.prototype.drawText;Bitmap.prototype.drawText=function(text,x,y,maxWidth,lineHeight,align){if($gameSystem?._dryland?.campaign.phase==='memorial')memorialDraws.push({bitmap:this,text,x,y,maxWidth,lineHeight,font:this.fontSize,width:this.measureTextWidth(text)});return draw.apply(this,arguments);};})()`);
+  for(const [kind,ending] of [['bad','bad'],['mixed','destroy'],['three','destroy']]){
+    await browser.evaluate('memorialDraws=[]');
     await resetPresentation(browser);const state=await intoMemorial(browser,kind,ending);
-    await assertMemorial(browser,state);const bytes=await saveBytes(browser);
+    const bytes=await saveBytes(browser);
+    const measurements=await browser.evaluate(`Array.from({length:8},(_,i)=>{const s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===30+i);const bitmaps=[];const visit=s=>{if(s.bitmap)bitmaps.push(s.bitmap);for(const c of s.children||[])visit(c);};visit(s);return {hero:'H'+(i+1),scale:[s.scale.x,s.scale.y],draws:memorialDraws.filter(d=>bitmaps.includes(d.bitmap)).map(({bitmap,...d})=>({...d,bitmap:[bitmap.width,bitmap.height]}))};})`);
+    const {evidenceRoot}=await import('../helpers/canonical-cases.mjs');
+    await mkdir(evidenceRoot+'/memorial-measurements',{recursive:true});
+    await writeFile(evidenceRoot+'/memorial-measurements/'+kind+'.json',JSON.stringify(measurements,null,2));
+    if(kind==='bad'){
+      const fields={names:heroNames,routes:Object.values(catalog.destinations).map(x=>x.name),encounters:Object.values(catalog.encounters).map(x=>x.name)};
+      const catalogMeasures=await browser.evaluate('(()=>{const f='+JSON.stringify(fields)+';const b=new Bitmap(1,1);b.fontFace=$gameSystem.mainFontFace();b.fontSize=24;const wrap=t=>{const lines=[];for(const word of t.split(/\\s+/)){const last=lines.at(-1);if(last&&b.measureTextWidth(last+" "+word)<=280)lines[lines.length-1]+=" "+word;else lines.push(word);}return lines;};const rows=[];for(const name of f.names)for(const route of f.routes)for(const encounter of f.encounters){const lines=[...wrap(name),...wrap(route),...wrap(encounter)];rows.push({name,route,encounter,lines,width:Math.max(...lines.map(t=>b.measureTextWidth(t))),height:18+lines.length*34});}b.destroy();return rows;})()');
+      await writeFile(evidenceRoot+'/memorial-measurements/catalog.json',JSON.stringify(catalogMeasures,null,2));
+      for(const item of catalogMeasures)assert.ok(item.width<=280&&item.height<=192,JSON.stringify(item));
+    }
+    await browser.screenshot(`${evidence('IT-055')}/${kind}-before-bounds.png`);
+    for(const row of measurements)for(const draw of row.draws.filter(draw=>draw.text)){
+      assert.ok(draw.font*row.scale[1]>=24,JSON.stringify({hero:row.hero,draw}));
+      assert.ok(draw.x>=0&&draw.y>=0&&draw.x+draw.width<=draw.bitmap[0]&&draw.y+draw.lineHeight<=draw.bitmap[1],JSON.stringify({hero:row.hero,draw}));
+    }
+    await assertMemorial(browser,state);
     await frames(browser,45);assert.deepEqual(await campaignSnapshot(browser),state);
     await browser.screenshot(`${evidence('IT-055')}/${kind}-collective.png`);
     await browser.press('Enter',13);await memorialReady(browser);
     await assertMemorial(browser,await campaignSnapshot(browser));
     assert.equal(await browser.evaluate("closingPresentation.events.filter(e=>e.type==='memorial').length"),1);
-    await finishPhase(browser,'memorial');
+    for(const hero of heroes.filter(id=>state.deadHeroIds.includes(id))){
+      const before=await campaignSnapshot(browser),index=Number(hero.slice(1))-1;
+      assert.equal(before.reading.passageIds[before.reading.index],`memorial.${hero}`);
+      assert.equal(await browser.evaluate('$gameMessage.allText()'),heroNames[index]+' não voltou da expedição.');
+      await browser.press('Enter',13);await memorialReady(browser);
+      assert.deepEqual(await campaignSnapshot(browser),before,'The first box does not complete the inscription');
+      const cause=events.find(e=>e?.name===`memorial_cause.${state.deathLocations[hero].encounterId}`).list.find(c=>c.code===122&&c.parameters[0]===152);
+      const expected=JSON.parse(cause.parameters[4]).replace(/<br>/g,' ').replace(/\s+/g,' ').trim();
+      const actual=await browser.evaluate("SceneManager._scene._messageWindow.convertEscapeCharacters($gameMessage.allText()).replace(/\\x1bWrapBreak\\[0\\]/gi,' ').replace(/\\s+/g,' ').trim()");
+      assert.equal(actual,expected,'Full authored inscription remains readable');
+      await browser.press('Enter',13);await closingReady(browser);
+      assert.equal((await campaignSnapshot(browser)).sequence,before.sequence+1);
+    }
+    assert.notEqual((await campaignSnapshot(browser)).phase,'memorial');
     assert.equal(await saveBytes(browser),bytes);
     assert.equal(await browser.evaluate('Array.from({length:28},(_,i)=>$gameScreen.picture(10+i)).some(Boolean)'),false);
   }
@@ -105,9 +136,9 @@ async function walkWithEpilogues(browser){
       await creditsReady(browser);return seen;
     }
     if(state.phase==='epilogue'){
-      const hero=state.reading.sceneId.split('.')[1],name=`Dryland_Epilogue${hero}`;
-      await browser.waitFor(`$gameScreen.picture(1)?.name()===${JSON.stringify(name)}`);
-      assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'),[]);
+      const hero=state.reading.sceneId.split('.')[1],name='Reed final';
+      await browser.waitFor(`$gameScreen.picture(60)?.name()===${JSON.stringify(name)}`);
+      assert.deepEqual(await browser.evaluate('Array.from({length:10},(_,i)=>$gameScreen.picture(61+i)?.name()).filter(Boolean)'),[]);
       assert.equal(await browser.evaluate('$gameMap.mapId()'),28+Number(hero.slice(1)));
       const id=state.reading.passageIds[state.reading.index];
       assert.equal(id,`epilogue.${hero}`);
@@ -181,18 +212,22 @@ canonicalCase('IT-058','all eligible native epilogue illustrations lead to visib
   assert.ok(natural.finish.frame-natural.start.frame>fast.finish.frame-fast.start.frame);
   await mkdir(evidence('IT-058'),{recursive:true});await writeFile(`${evidence('IT-058')}/scrolling.json`,JSON.stringify(results,null,2));
 });
-canonicalCase('IT-022','native terminal Continue repeatedly replays the saved outcome through memorial epilogues and credits without rewriting the selected file',{timeout:240000},async t=>{
+canonicalCase('IT-022','native terminal Continue repeatedly replays the saved outcome through memorial epilogues and credits without rewriting the selected file',{timeout:720000},async t=>{
   const browser=await tavern(t);await observePresentation(browser);await observeClosing(browser);
+  const started=Date.now(),progress=[];
+  const progressDirectory=`${evidenceRoot}/IT-022`;
+  await mkdir(progressDirectory,{recursive:true});
+  const observer=stage=>async passage=>{progress.push({elapsedMs:Date.now()-started,stage,...passage});await writeFile(`${progressDirectory}/progress.json`,JSON.stringify(progress,null,2));};
   for(const [kind,ending] of [['mixed','reunite'],['solo','destroy'],['bad','bad']]){
     await resetPresentation(browser);const terminal=await beginEnding(browser,kind,ending),bytes=await saveBytes(browser),fileId=await browser.evaluate('$gameSystem.savefileId()');
-    const baseline=await finishNativeClosing(browser);await creditsReady(browser);await browser.press('Escape',27);await titleReady(browser);
+    const baseline=await finishNativeClosing(browser,{onPassage:observer(kind+'-baseline')});await creditsReady(browser);await browser.press('Escape',27);await titleReady(browser);
     const count=await browser.evaluate('closingLog.saves.length');
     for(let repeat=0;repeat<2;repeat++){
       await titleReady(browser);
-      assert.equal(await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()]'),'Continuar');
+      assert.equal(await browser.evaluate("$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()].replace(/<[^>]*>/g,'')"),'Continuar');
       await browser.press('Enter',13);await selectFile(browser,fileId);await closingReady(browser);
       assert.deepEqual(await campaignSnapshot(browser),terminal);
-      const replay=await finishNativeClosing(browser);await creditsReady(browser);
+      const replay=await finishNativeClosing(browser,{onPassage:observer(kind+'-replay-'+repeat)});await creditsReady(browser);
       assert.deepEqual(replay.seen,baseline.seen);assert.equal(replay.state.endingId,ending);
       assert.equal(await browser.evaluate('closingLog.saves.length'),count);assert.equal(await saveBytes(browser),bytes);
       await browser.press('Escape',27);await titleReady(browser);

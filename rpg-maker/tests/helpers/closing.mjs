@@ -70,14 +70,15 @@ export async function observeClosing(browser) {
     DataManager.saveGame=function(...args){const s=$gameSystem._dryland.campaign;closingLog.saves.push({id:args[0],phase:s.phase,sequence:s.sequence,endingId:s.endingId});return save.apply(this,args);};
   })()`);
 }
-export async function finishNativeClosing(browser) {
+export async function finishNativeClosing(browser, { onPassage } = {}) {
   const seen=[];
   for(let count=0;count<80;count++){
     await closingReady(browser);
     const state=await browser.evaluate('$gameSystem._dryland.campaign');
     if(state.phase==='campaign_complete')return {state,seen};
     assert.ok(['ending','memorial','epilogue'].includes(state.phase), state.phase);
-    seen.push({phase:state.phase,sceneId:state.reading.sceneId,passageId:state.reading.passageIds[state.reading.index],map:await browser.evaluate('$gameMap.mapId()')});
+    seen.push({phase:state.phase,sceneId:state.reading.sceneId,passageId:state.reading.passageIds[state.reading.index],map:await browser.evaluate('$gameMap.mapId()'),text:await browser.evaluate('$gameMessage.allText()')});
+    if (onPassage) await onPassage(seen.at(-1));
     await browser.press('Enter',13);
   }
   assert.fail('Native closing did not reach its terminal reading boundary.');

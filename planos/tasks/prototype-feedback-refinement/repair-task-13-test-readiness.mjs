@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+const path='rpg-maker/tests/suites/persistence.mjs';
+let source=readFileSync(path,'utf8');
+assert.ok(source.includes('($gameMessage?._drylandChoiceFocus'));
+source=source.replaceAll('($gameMessage?._drylandChoiceFocus','(window.$gameMessage?._drylandChoiceFocus');
+writeFileSync(path,source);
+const helper='rpg-maker/tests/helpers/native-bust-fixture.mjs';
+source=readFileSync(helper,'utf8');assert.ok(source.includes('await symlink(source, target);'));
+writeFileSync(helper,source.replace('await symlink(source, target);',"await symlink(source, target, process.platform === 'win32' ? 'junction' : 'dir');"));

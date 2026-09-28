@@ -11,7 +11,7 @@ const fixtures=phaseFixtures(),keys=['bgmVolume','bgsVolume','meVolume','seVolum
 const volumes=browser=>browser.evaluate('Object.fromEntries(["bgmVolume","bgsVolume","meVolume","seVolume"].map(k=>[k,ConfigManager[k]]))');
 canonicalCase('IT-028','native audio preferences begin at40 clamp through keyboard input and survive a new campaign',{timeout:120000},async t=>{
  const browser=await entry(t);assert.deepEqual(await volumes(browser),Object.fromEntries(keys.map(k=>[k,40])));
- await browser.press('ArrowDown',40);await browser.press('Enter',13);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&SceneManager._scene._optionsWindow?.isOpenAndActive()");
+ await activate(browser,'title',2);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&SceneManager._scene._optionsWindow?.isOpenAndActive()");
  assert.deepEqual(await browser.evaluate('SceneManager._scene._optionsWindow._list.map(c=>({name:c.name,symbol:c.symbol}))'),keys.map((symbol,i)=>({symbol,name:'\\I[80]'+['Música','Ambiente','Temas','Efeitos'][i]})));
  for(const [index,key]of keys.entries()){
   if(index)await browser.press('ArrowDown',40);
@@ -21,10 +21,9 @@ canonicalCase('IT-028','native audio preferences begin at40 clamp through keyboa
  }
  const configured=await volumes(browser);assert.deepEqual(configured,{bgmVolume:90,bgsVolume:80,meVolume:70,seVolume:60});
  await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-11/IT-028/audio-options.png');
- await browser.press('Escape',27);await browser.waitFor("SceneManager._scene instanceof Scene_Map&&$gameMap.mapId()===1&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.press('Escape',27);await browser.waitFor("SceneManager._scene instanceof Scene_Map&&$gameMap.mapId()===1&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  const stored=await browser.evaluate("StorageManager.loadObject('config')");for(const key of keys)assert.equal(stored[key],configured[key]);
- if(await browser.evaluate('SceneManager._scene._choiceListWindow.index()')!==0)await browser.press('ArrowUp',38);
- await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);assert.deepEqual(await volumes(browser),configured);
+ await activate(browser,'title',0);await selectFile(browser,1);await pause(browser);assert.deepEqual(await volumes(browser),configured);
 });
 canonicalCase('IT-029','native ambience replacement and ending themes decode without stacking and zero volume leaves controls usable',{timeout:150000},async t=>{
  const observations=[];const browser=await entry(t);assert.equal(await browser.evaluate('Boolean(AudioManager._bgmBuffer||AudioManager._bgsBuffer||AudioManager._meBuffer)'),false);
@@ -130,4 +129,59 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  assert.deepEqual(effects,['Buzzer1','Cancel2','Collapse1','Cursor3','Decision2','Door1','Item3','Load2','Save2','Water1'].sort());
  const directory='docs/qa/evidence/init-rpg-maker-mz/task-11/IT-029';await mkdir(directory,{recursive:true});
  await writeFile(`${directory}/buffers.json`,JSON.stringify({browser:browser.version,kind:'isolated native buffer integration; no audible judgment',observations,buffers:await browser.evaluate('audioBuffers.map(x=>({folder:x.folder,name:x.name,ready:x.buffer.isReady(),playing:x.buffer.isPlaying(),duration:x.buffer._totalTime}))')},null,2)+'\n');
+});
+
+
+canonicalCase('IT-090','epilogue narration retains present-day buffers across heroes and controls then stops before credits',{timeout:240000},async t=>{
+ const {tavern}=await import('../helpers/formation.mjs');
+ const {beginEnding,finishPhase,creditsReady}=await import('../helpers/closing-presentation.mjs');
+ const {closingReady}=await import('../helpers/closing.mjs');
+ const {continueSave}=await import('../helpers/discovery.mjs');
+ const {clickConsole}=await import('../helpers/native-shared.mjs');
+ const browser=await tavern(t);
+ await browser.evaluate("window.epilogueAudio=[];const create=AudioManager.createBuffer;AudioManager.createBuffer=function(folder,name){const buffer=create.call(this,folder,name);epilogueAudio.push({folder,name,buffer});return buffer;};");
+ await beginEnding(browser,'collective','destroy');await finishPhase(browser,'ending');
+ const ready=()=>browser.waitFor("$gameSystem._dryland.campaign.phase==='epilogue'&&AudioManager._currentBgm?.name==='Town1'&&AudioManager._currentBgs?.name==='People2'&&AudioManager._bgmBuffer?.isPlaying()&&AudioManager._bgsBuffer?.isPlaying()");
+ await ready();
+ const descriptors=await browser.evaluate('({bgm:AudioManager._currentBgm,bgs:AudioManager._currentBgs})');
+ for(const [key,name,volume] of [['bgm','Town1',45],['bgs','People2',25]]){
+  assert.equal(descriptors[key].name,name);assert.equal(descriptors[key].volume,volume);assert.equal(descriptors[key].pitch,100);assert.equal(descriptors[key].pan,0);
+ }
+ await browser.evaluate('window.epilogueBgm=AudioManager._bgmBuffer;window.epilogueBgs=AudioManager._bgsBuffer;window.epilogueStarts=[epilogueBgm._startTime,epilogueBgs._startTime];');
+ const unchanged=async()=>{
+  assert.equal(await browser.evaluate('AudioManager._bgmBuffer===epilogueBgm&&AudioManager._bgsBuffer===epilogueBgs'),true);
+  assert.equal(await browser.evaluate('epilogueBgm._startTime===epilogueStarts[0]&&epilogueBgs._startTime===epilogueStarts[1]'),true);
+ };
+ const initial=await state(browser);
+ await browser.press('Tab',9);await hidden(browser,true);await unchanged();
+ await browser.press('Tab',9);await hidden(browser,false);
+ await clickConsole(browser,'options');await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&!SceneManager._scene.isBusy()");
+ await unchanged();await browser.press('Escape',27);await pause(browser);await unchanged();assert.deepEqual(await state(browser),initial);
+ await clickConsole(browser,'fastFwd');await unchanged();assert.deepEqual(await state(browser),initial,'FAST cannot skip an unseen epilogue');
+ await browser.evaluate('ConfigManager.bgmVolume=0;ConfigManager.bgsVolume=0;');
+ assert.deepEqual(await browser.evaluate('[AudioManager._bgmBuffer.volume,AudioManager._bgsBuffer.volume]'),[0,0]);await unchanged();
+ await browser.evaluate('ConfigManager.bgmVolume=40;ConfigManager.bgsVolume=40;');
+ const seen=[];
+ while((await state(browser)).phase==='epilogue'){
+  await closingReady(browser);await unchanged();const current=await state(browser);
+  if(!seen.includes(current.reading.sceneId))seen.push(current.reading.sceneId);
+  await browser.press('Enter',13);
+ }
+ assert.deepEqual(seen,['epilogue.H1','epilogue.H2','epilogue.H3']);
+ await creditsReady(browser);assert.equal(await browser.evaluate('AudioManager._bgmBuffer===null&&AudioManager._bgsBuffer===null'),true);
+ assert.equal(await browser.evaluate("epilogueAudio.filter(x=>x.name==='Applause1').length"),0);
+ // The real ending checkpoint replays through Continue; a new document/context
+ // is allowed to create buffers, unlike uninterrupted hero succession.
+ await continueSave(browser);await closingReady(browser);await finishPhase(browser,'ending');await ready();
+ assert.equal(await browser.evaluate('AudioManager._bgmBuffer!==epilogueBgm&&AudioManager._bgsBuffer!==epilogueBgs'),true);
+ await finishPhase(browser,'epilogue');await creditsReady(browser);
+ assert.equal(await browser.evaluate('AudioManager._bgmBuffer===null&&AudioManager._bgsBuffer===null'),true);
+ for(const [kind,ending] of [['solo','destroy'],['bad','bad']]){
+  await beginEnding(browser,kind,ending);await finishPhase(browser,'ending');
+  if((await state(browser)).phase==='memorial')await finishPhase(browser,'memorial');
+  await creditsReady(browser);assert.equal(await browser.evaluate('AudioManager._bgmBuffer===null&&AudioManager._bgsBuffer===null'),true);
+ }
+ const {evidenceRoot}=await import('../helpers/canonical-cases.mjs');
+ await mkdir(evidenceRoot+'/epilogue-audio',{recursive:true});
+ await writeFile(evidenceRoot+'/epilogue-audio/buffers.json',JSON.stringify({descriptors,seen,buffers:await browser.evaluate('epilogueAudio.map(({folder,name,buffer})=>({folder,name,ready:buffer.isReady(),playing:buffer.isPlaying()}))')},null,2));
 });

@@ -99,7 +99,7 @@ export class DirectedNativePlayer {
     throw new Error(`Too many passages before ${label}`);
   }
 
-  async choose(label, { mouse = false } = {}) {
+  async choose(label, { mouse = false, settled, settledArg } = {}) {
     const surface = await this.choicesContaining(label);
     assert.equal(surface.labels.filter(value => value === label).length, 1, `Ambiguous visible label: ${label}`);
     const prior = await this.context.read('choice-before-input',()=>JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label))));
@@ -134,7 +134,8 @@ export class DirectedNativePlayer {
       await this.context.shot(`focus-${++this.serial}`);
       await this.context.input.key('Enter');
     }
-    await this.context.wait(previous=>!SceneManager._scene._choiceListWindow?.isOpenAndActive()||JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label)))!==previous,prior);
+    if (settled) await this.context.wait(settled, settledArg);
+    else await this.context.wait(previous=>!SceneManager._scene._choiceListWindow?.isOpenAndActive()||JSON.stringify($gameMessage.choices().map(label=>SceneManager._scene._choiceListWindow.convertEscapeCharacters(label)))!==previous,prior);
   }
 
   async dialogueControls(label, expectedSlots) {
@@ -158,6 +159,13 @@ export class DirectedNativePlayer {
   }
 
   async file(fileId) {
+    await this.context.wait(()=>SceneManager._scene instanceof Scene_File || ($gameMessage._drylandChoiceFocus?.key==='age-notice'&&SceneManager._scene._choiceListWindow?.isOpenAndActive()));
+    if((await this.surface()).kind==='age-notice'){
+      assert.equal(await this.context.read('fresh-age-notice',()=>$gameTemp._drylandAgeNotice.checked),false);
+      await this.choose('Tenho 16 anos de idade ou mais',{settled:()=>$gameTemp._drylandAgeNotice.checked&&SceneManager._scene._choiceListWindow?.isOpenAndActive()});
+      await this.choose('Jogar');
+    }
+
     await this.context.wait(()=>SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy());
     for(let step=0;step<20;step++){
       const current=await this.context.read('selected-native-file',()=>{const w=SceneManager._scene._listWindow;return w.indexToSavefileId(w.index());});
@@ -169,14 +177,17 @@ export class DirectedNativePlayer {
   }
 
   async returnToTavern() {
-    const surface = await this.ready();
-    if ([37, 38, 39, 40, 41, 42, 43, 44].includes(surface.map)) {
-      await this.until('hero');
-      await this.choose('Voltar à taverna');
+    for(let step=0;step<100;step++){
+      const surface=await this.ready();
+      if(surface.active&&surface.kind==='formation'){assert.equal(surface.map,3);return surface;}
+      if(surface.active&&surface.kind==='hero'){await this.choose('Voltar à taverna');continue;}
+      assert.ok(surface.paused,'Expected hero dialogue or tavern: '+JSON.stringify(surface));
+      if(this.onPassage)await this.onPassage(this,surface);
+      await this.context.shot('return-passage-'+(++this.serial));
+      await this.context.input.key('Enter');
+      if(this.onAdvance)await this.onAdvance(this,surface);
     }
-    const tavern = await this.until('formation');
-    assert.equal(tavern.map, 3);
-    return tavern;
+    throw Error('Too many passages before tavern');
   }
 
   async until(kind) {

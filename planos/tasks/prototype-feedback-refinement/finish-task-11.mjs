@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,mkdirSync,cpSync} from 'node:fs';
+const root='planos/tasks/prototype-feedback-refinement/',dest='docs/qa/evidence/prototype-feedback-refinement/task-11/';
+const matrix='2026-09-25T17-43-30-091Z',replay='2026-09-25T17-55-16-338Z';
+for(const [run,ids] of [[matrix,['IT-090','UT-035','IT-073']],[replay,['IT-048']]])for(const id of ids)assert.equal(JSON.parse(readFileSync(`docs/qa/evidence/native-tests/${run}/${id}/execution.json`,'utf8')).verdict,'PASS');
+mkdirSync(dest,{recursive:true});
+for(const [run,label] of [['2026-09-25T17-42-32-732Z','baseline'],[matrix,'integrated-history'],[replay,'final/replay']])cpSync('docs/qa/evidence/native-tests/'+run,dest+label,{recursive:true});
+for(const id of ['IT-090','UT-035','IT-073'])cpSync(dest+'integrated-history/'+id,dest+'final/'+id,{recursive:true});
+let task=readFileSync(root+'task-11.md','utf8').replace('status: in_progress','status: completed').replaceAll('- [ ]','- [x]');
+task+='\nTechnical scope completed 2026-09-25. IT-073 passed all eight heroes in normal/reduced modes (231 seconds); IT-090 passed native audio continuity/restoration/cleanup and UT-035 passed source eligibility. IT-048 passed its four saved-outcome replay (1/1, exit 0, 279.9 seconds) with the bounded 420-second deadline. The intervening change affected only that test deadline; the other three receipts retain identical runtime. [Consolidated receipts](../../../docs/qa/evidence/prototype-feedback-refinement/task-11/final/) preserve the timed-out run separately. Source comparison, scoped review and deslop found no additional runtime change necessary. Owned test processes closed. V-010/LIVE, listening and human acceptance remain task 13.\n';
+writeFileSync(root+'task-11.md',task);
+writeFileSync(root+'tasks.md',readFileSync(root+'tasks.md','utf8').replaceAll('Tasks 01–10','Tasks 01–11').replace('task 11 is in progress','task 12 is in progress').replace('V-010/TECH, T-006/AUDIO | in_progress','V-010/TECH, T-006/AUDIO | completed').replace('QA-PLAN | pending','QA-PLAN | in_progress').replace('[task-11.md](task-11.md) is active','[task-12.md](task-12.md) is active'));
+writeFileSync(root+'verification.md',readFileSync(root+'verification.md','utf8')+'\nTask 11 technical scopes V-010/TECH and T-006/AUDIO completed: IT-073/090, UT-035 and IT-048 pass; final receipts, equivalence and retained first failures are linked in task-11.md. Tasks 12/13 own the remaining QA plan/live/editor/human work. No aggregate LIVE verdict is implied.\n');

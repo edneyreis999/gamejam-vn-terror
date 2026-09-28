@@ -18,7 +18,11 @@ Após o aceite, preservar os registros brutos em arquivo local com manifesto e h
 
 O [incremento MZ aceito](deliveries/init-rpg-maker-mz/README.md) tem resumo, aceite, manifesto do runtime e cinco capturas independentes, incluindo o desaparecimento de Gorvak e a visita posterior. Não exige os milhares de arquivos brutos para compor seu devlog. Os181 arquivos de ciclos anteriores em evidence foram retirados do versionamento no commit e888338, por orientação do usuário, com cópias locais e hashes preservados. Links desses ciclos continuam como referência ao acervo local.
 
-## Ciclo corrente — integração narrativa aprovada
+## Ciclo corrente — prototype-feedback-refinement
+
+[Guia](guides/prototype-feedback-refinement.md) · [charter](charters/CH-prototype-feedback-refinement.md) · [verificação](../../planos/tasks/prototype-feedback-refinement/verification.md). Tarefas técnicas 01–11 concluídas; QA dirigido/Editor/aceite final planejados nos lotes A–E da task 13. Nenhum PASS humano é herdado.
+
+## Ciclo anterior — integração narrativa aprovada
 
 [Guia](guides/approved-narrative-dialogue-staging.md) · [charter](charters/CH-approved-narrative-dialogue-staging.md) · [verificação](../../planos/tasks/approved-narrative-dialogue-staging/verification.md). Implementação e testes focados coletados; agregado e QA final em execução. Nenhum PASS audiovisual/humano é herdado.
 

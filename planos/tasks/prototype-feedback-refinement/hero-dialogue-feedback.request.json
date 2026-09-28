@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/prototype-feedback-refinement/spec.md",
+  "requestId": "hero-dialogue-feedback-1280-20260926",
+  "consumer": "task-03-manual-feedback",
+  "case": "planos/tasks/prototype-feedback-refinement/hero-dialogue-feedback.qa.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {"id":"hero-dialogue-feedback","profile":"1280x720","variant":"1280","configuration":"historical-composition"},
+  "claims": [{"id":"composition","variant":"1280","sensor":"directed-browser","group":"hero-dialogue","source":{"id":"composition","variant":"1280"},"expected":{"path":"planos/tasks/prototype-feedback-refinement/verification.md","heading":"Manual feedback: hero composition and dialogue ink"}}],
+  "evidenceRoot": "docs/qa/evidence/prototype-feedback-refinement/hero-dialogue-feedback",
+  "freshness": {"mode":"fresh","reason":"Manual feedback restores historical geometry and dialogue legibility."}
+}

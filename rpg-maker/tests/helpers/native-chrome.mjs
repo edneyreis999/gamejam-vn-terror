@@ -4,6 +4,7 @@ import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
+import { evidenceRoot } from './canonical-cases.mjs';
 
 const port = process.env.DRYLAND_QA_PORT || '18726';
 if (!/^\d+$/.test(port) || Number(port) < 1024 || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
@@ -11,7 +12,8 @@ export const origin = `http://127.0.0.1:${port}/`;
 export const project = path.resolve('rpg-maker/The Dryland Drowned');
 
 export async function startServer(t, directory = project) {
-  const server = spawn('python3', ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const python = process.env.DRYLAND_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
+  const server = spawn(python, ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
   let log = '';
   server.stdout.on('data', data => { log += data; });
   server.stderr.on('data', data => { log += data; });
@@ -43,12 +45,14 @@ export async function openChrome(t, options = {}) {
       partition: { default_zoom_level: { x: Math.log(options.zoom) / Math.log(1.2) } }
     }));
   }
-  const executable = process.env.DRYLAND_CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  const executable = process.env.DRYLAND_CHROME || (process.platform === 'win32'
+    ? path.join(process.env.PROGRAMFILES, 'Google/Chrome/Application/chrome.exe')
+    : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
   const chrome = spawn(executable, [
     '--headless=new', '--remote-debugging-pipe', '--no-first-run', '--no-default-browser-check',
     '--disable-background-networking', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
     `--user-data-dir=${profile}`, 'about:blank'
-  ], { stdio: ['ignore', 'ignore', 'pipe', 'pipe', 'pipe'] });
+  ], { windowsHide: true, stdio: ['ignore', 'ignore', 'pipe', 'pipe', 'pipe'] });
   let nextId = 0;
   let buffer = '';
   let stderr = '';
@@ -138,6 +142,7 @@ export async function openChrome(t, options = {}) {
     await evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
   }
   async function screenshot(file) {
+    if (file.startsWith('docs/qa/evidence/')) file = path.join(evidenceRoot, 'captures', file.slice('docs/qa/evidence/'.length));
     const result = await call('Page.captureScreenshot', { format: 'png' });
     await mkdir(path.dirname(file), { recursive: true });
     await writeFile(file, Buffer.from(result.data, 'base64'));
@@ -152,8 +157,20 @@ export async function openChrome(t, options = {}) {
   return { evaluate, waitFor, press, screenshot, version, exceptions, requests, responses, call, reopen };
 }
 
-export async function selectFile(browser, fileId) {
+export async function enterFileSelection(browser) {
+  await browser.waitFor("(SceneManager._scene instanceof Scene_File || $gameMessage._drylandChoiceFocus?.key === 'age-notice') && !SceneManager._scene.isBusy()");
+  if (await browser.evaluate("$gameMessage._drylandChoiceFocus?.key === 'age-notice'")) {
+    await browser.waitFor('SceneManager._scene._choiceListWindow?.isOpenAndActive()');
+    await browser.press('Enter', 13);
+    await browser.waitFor('$gameTemp._drylandAgeNotice.checked && SceneManager._scene._choiceListWindow?.isOpenAndActive()');
+    await browser.press('ArrowDown', 40);
+    await browser.press('Enter', 13);
+  }
   await browser.waitFor('SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+}
+
+export async function selectFile(browser, fileId) {
+  await enterFileSelection(browser);
   if (fileId !== undefined) {
     for (let step = 0; step < 25; step++) {
       const current = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');

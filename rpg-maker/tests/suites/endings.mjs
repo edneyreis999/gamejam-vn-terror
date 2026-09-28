@@ -8,7 +8,7 @@ import { continueSave } from '../helpers/discovery.mjs';
 import { closingReady, councilBoundary, councilState, finalChoice, finishNativeClosing, installClosing, observeClosing } from '../helpers/closing.mjs';
 import { assertHidePreservesPortraits, assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
 import { assertAdvanceIndicatorFits, normalizeProse, passageBoxes } from '../helpers/native-reading.mjs';
-import { hidden } from '../helpers/native-shared.mjs';
+import { hidden, click } from '../helpers/native-shared.mjs';
 const approved = JSON.parse(await readFile(new URL('../fixtures/approved-closing-source.json', import.meta.url), 'utf8')).passages;
 const epilogues = JSON.parse(await readFile(new URL('../../asset-provenance/approved-narrative-epilogues.json', import.meta.url), 'utf8')).heroes;
 const councilMap = JSON.parse(await readFile(new URL('../../The Dryland Drowned/data/Map023.json', import.meta.url), 'utf8'));
@@ -127,8 +127,25 @@ canonicalCase('IT-054','native Council retains eligible slots, stages reflected 
   assert.equal(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
   assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['council','council']);
   assert.equal(await browser.evaluate('$gameMessage.choices().length'),2);
+  const panels=await browser.evaluate('[50,51].map(id=>{const p=$gameScreen.picture(id),b=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id).getBounds();return {name:p?.name(),x:b.x,y:b.y,w:b.width,h:b.height,text:$gameScreen.getPictureTextData(id).center};})');
+  assert.deepEqual(panels.map(({name,x,y,w,h})=>({name,x,y,w,h})),[{name:'Dryland_FinalChoice',x:112,y:208,w:504,h:304},{name:'Dryland_FinalChoice',x:664,y:208,w:504,h:304}]);
+  for(const [i,parts] of [['Reunir o medalhão','libertar os amantes','e morrer'],['Destruir o medalhão','sobreviver e entregá-los','a Andirá']].entries())for(const part of parts)assert.ok(panels[i].text.includes(part));
+  await browser.press('ArrowRight',39);assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),1);
+  assert.deepEqual(await snapshot(browser),state);
+  await browser.press('ArrowLeft',37);
+  await browser.press('Tab',9);await hidden(browser,true);
+  assert.equal(await browser.evaluate('SceneManager._scene._spriteset._pictureContainer.children.filter(s=>[50,51].includes(s._pictureId)).some(s=>s.worldVisible)'),false);
+  await browser.press('Tab',9);await hidden(browser,false);assert.deepEqual(await snapshot(browser),state);
+
   await browser.screenshot(`${evidence('IT-054')}/${reduced?'reduced':'normal'}-${kind}-choice.png`);
-  await activate(browser,'ending',ending==='reunite'?0:1);await closingReady(browser);
+  if(kind==='solo')await activate(browser,'ending',0);
+  else {
+    const x=ending==='reunite'?364:916,y=reduced?312:420;
+    const point=await browser.evaluate('(()=>{const r=Graphics._canvas.getBoundingClientRect();return {x:r.x+'+x+'*r.width/1280,y:r.y+'+y+'*r.height/720}})()');
+    await click(browser,point.x,point.y);
+  }
+  await closingReady(browser);
+  assert.equal(await browser.evaluate('[50,51].some(id=>$gameScreen.picture(id))'),false);
   const after=await snapshot(browser);assert.equal(after.endingId,ending);assert.equal(after.phase,'ending');
   assert.equal(await browser.evaluate('$gameMap.mapId()'),ending==='reunite'?25:26);
   assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),ending==='reunite'?'Dryland_EndingReunite':'Dryland_EndingDestroy');
@@ -138,7 +155,7 @@ canonicalCase('IT-054','native Council retains eligible slots, stages reflected 
   assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['council','council','ending']);
  }
 });
-canonicalCase('IT-048','native saved outcomes route only through their own ending, conditional memorial and eligible epilogue maps',{timeout:300000},async t=>{
+canonicalCase('IT-048','native saved outcomes route only through their own ending, conditional memorial and eligible epilogue maps',{timeout:420000},async t=>{
  const browser=await tavern(t);await observeClosing(browser);
  for(const [kind,ending] of [['collective','reunite'],['mixed','destroy'],['solo','destroy'],['bad','bad']]){
   await browser.evaluate('closingLog={maps:[],saves:[]};');
@@ -221,12 +238,14 @@ canonicalCase('IT-073', 'each eligible epilogue executes its native body and com
    await pause(browser);assert.equal(await browser.evaluate('$gameMessage.allText()'),text);
    await assertAdvanceIndicatorFits(browser);
    assert.equal(await browser.evaluate('$gameMap.mapId()'),28+hero);
-   assert.equal(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
-   assert.equal(await browser.evaluate('$gameScreen.picture(1)?.name()'),`Dryland_EpilogueH${hero}`);
+   assert.equal(await browser.evaluate('Array.from({length:10},(_,i)=>$gameScreen.picture(61+i)).some(Boolean)'),false);
+   assert.equal(await browser.evaluate('$gameMessage.speakerName()'),'Rheed');
+   assert.equal(await browser.evaluate('$gameScreen.picture(1)?.name()'),'Dryland_Black');
+   assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'),'Reed final');
    assert.deepEqual(await snapshot(browser),input);
-   await browser.waitFor("ImageManager.loadPicture($gameScreen.picture(1).name()).isReady()");
-   const geometry=await browser.evaluate('(()=>{const p=$gameScreen.picture(1),b=ImageManager.loadPicture(p.name());return{width:b.width,height:b.height,x:p.x(),y:p.y(),sx:p.scaleX(),sy:p.scaleY(),origin:p.origin(),logical:[Graphics.width,Graphics.height]};})()');
-   assert.deepEqual(geometry,{width:source.width,height:source.height,x:640,y:360,sx:source.scalePercent,sy:source.scalePercent,origin:1,logical:[1280,720]});
+   await browser.waitFor("ImageManager.loadPicture($gameScreen.picture(60).name()).isReady()");
+   const geometry=await browser.evaluate('(()=>{const p=$gameScreen.picture(60),b=ImageManager.loadPicture(p.name());return{width:b.width,height:b.height,x:p.x(),y:p.y(),sx:p.scaleX(),sy:p.scaleY(),origin:p.origin(),logical:[Graphics.width,Graphics.height]};})()');
+   assert.deepEqual(geometry,{width:408,height:560,x:472.42857142857144,y:40,sx:82.14285714285714,sy:82.14285714285714,origin:0,logical:[1280,720]});
    const prefix=`${evidence('IT-073')}/epilogue-H${hero}-${reduced?'reduced':'normal'}-${entryMap}-${box}`;
    await browser.screenshot(`${prefix}.png`);
    if(box===0){

@@ -84,3 +84,8 @@ Abrir capturas jogadas de cada herói, Conselho, finais e memorial → conferir 
 ## Integração narrativa aprovada — 2026-09-18
 
 Planejado, execução dirigida ainda não observada. Cobertura: S-01/05/07/08/09/11; C/D/F. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.
+
+
+## Prototype feedback refinement — 2026-09-25
+
+A jornada preserva seu histórico e recebe os lotes aplicáveis A–E do [guia incremental](../guides/prototype-feedback-refinement.md). Novo jogo/Continuar passam por ciência fresca; a preparação usa Seguir, mapa e Partir; Quadro lista mortos; epílogos usam Rheed velho. Execução e pareceres ainda pendentes neste incremento; sensores técnicos têm recibos separados.

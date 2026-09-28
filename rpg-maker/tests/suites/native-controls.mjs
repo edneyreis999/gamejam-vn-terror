@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, installFixture, pause, prologueMarkers, rosterFixture, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, installFixture, pause, prologueMarkers, rosterFixture, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -11,8 +11,119 @@ import { councilState, installClosing } from '../helpers/closing.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 const fixtures=phaseFixtures();
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-11/${id}`;
+canonicalCase('IT-086','hero groups preserve historical portrait geometry and selection returns after acknowledgement',{timeout:120000},async t=>{
+  const browser=await tavern(t),before=await state(browser);
+  await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-03/tavern-targets.png');
+  const geometry=await browser.evaluate(`(() => {
+    const sprites=[];const visit=s=>{if(s._pictureId)sprites.push(s);for(const child of s.children||[])visit(child);};
+    visit(SceneManager._scene._spriteset._pictureContainer);
+    return Array.from({length:8},(_,i)=>{
+      const hero=sprites.find(s=>s._pictureId===20+i&&s.worldVisible),name=sprites.find(s=>s._pictureId===30+i&&s.worldVisible);
+      let parent=name.parent;while(parent&&!parent._pictureId)parent=parent.parent;
+      const origin=s=>s.getGlobalPosition();
+      return {hero:origin(hero),scale:hero.worldTransform.a,asset:$gameScreen.picture(20+i).name(),name:origin(name),nameScale:name.worldTransform.a,parent:parent?._pictureId};
+    });
+  })()`);
+  const original=[[344,520],[840,176],[760,497],[1000,448],[528,336],[368,160],[1032,224],[176,264]];
+  for(const [i,g] of geometry.entries()){
+    assert.deepEqual(g.hero,{x:original[i][0],y:original[i][1]},'Portrait positions match Git baseline c47c6fc');
+    assert.equal(g.scale,0.35);assert.equal(g.asset,'Dryland_Tavern_H'+(i+1));
+    assert.ok(Math.abs(g.name.x-original[i][0])<0.001&&Math.abs(g.name.y-original[i][1]-151)<0.001,'Names retain baseline world positions: '+JSON.stringify(g));
+    assert.ok(Math.abs(g.nameScale-1)<0.001);assert.equal(g.parent,[10,12,11,13,14,15,16,17][i],'Native parent groups each name with its portrait');
+  }
+  for(const [x,y,map] of [[344,520,37],[344,671,37],[840,327,38],[760,648,39]]) {
+    await click(browser,x,y);await choices(browser,'hero');
+    assert.equal(await browser.evaluate('$gameMap.mapId()'),map);
+    assert.deepEqual(await state(browser),before,'Opening any portion is observational');
+    await browser.press('Tab',9);
+    await browser.waitFor('SceneManager._scene._spriteset._pictureContainer.children.filter(s=>s._pictureId>=50&&s._pictureId<=52).every(s=>!s.visible)');
+    await browser.press('Tab',9);await choices(browser,'hero');
+    assert.deepEqual(await state(browser),before,'HIDE preserves the observational hero menu');
+    await browser.press('Escape',27);await choices(browser,'formation');
+  }
+  await activate(browser,'formation',0);await activate(browser,'hero',1);await pause(browser);
+  assert.equal((await state(browser)).draftPartyIds[0],'H1');
+  assert.match((await browser.evaluate('$gameMessage.allText()')).replace(/\s+/g,' '),/Vou conferir nosso equipamento antes de sairmos\./);
+  assert.equal(await browser.evaluate('$gameMap.mapId()'),37,'Acknowledgement waits for the player');
+  await browser.press('Enter',13);await choices(browser,'formation');
+  assert.equal(await browser.evaluate('$gameMap.mapId()'),3);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),0);
+  await activate(browser,'formation',0);await activate(browser,'hero',1);await choices(browser,'hero');
+  assert.deepEqual((await state(browser)).draftPartyIds,[],'Removal preserves its hero-menu loop');
+  await browser.press('Escape',27);await choices(browser,'formation');
+  await installFixture(browser,rosterFixture(['H1']));await choices(browser,'formation');
+  assert.equal(await browser.evaluate('$gameScreen.picture(10) == null'),true);
+  assert.deepEqual(browser.exceptions,[]);
+});
 async function hold(browser,key,keyCode){await browser.call('Input.dispatchKeyEvent',{type:'keyDown',key,code:key,windowsVirtualKeyCode:keyCode});}
 async function release(browser,key,keyCode){await browser.call('Input.dispatchKeyEvent',{type:'keyUp',key,code:key,windowsVirtualKeyCode:keyCode});await frames(browser,3);}
+canonicalCase('IT-085','title entry requires fresh acknowledgement and consumes cancellation and held confirmation',{timeout:120000},async t=>{
+  await startServer(t);const browser=await openChrome(t);
+  await browser.waitFor('window.$gameMessage && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+  assert.equal(await browser.evaluate('$gameMessage._drylandChoiceFocus?.key'),'title','The title precedes the separate warning');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.scale.x'),1,'Title uses the visible native selectable window shared with Options');
+  assert.equal(await browser.evaluate('[3,4,5].some(id=>$gameScreen.picture(id))'),false,'Title commands have no parallel picture buttons');
+  const appearance=window=>browser.evaluate(`(() => { const w=SceneManager._scene.${window}; return {skin:w.windowskin.url,font:w.contents.fontFace,size:w.contents.fontSize,outline:w.contents.outlineColor,back:w.backOpacity,itemHeight:w.itemHeight(),padding:w.itemPadding(),background:w.drawBackgroundRect.toString(),cursor:w._cursorSprite.bitmap===w.windowskin};})()`);
+  const titleAppearance=await appearance('_choiceListWindow');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.y>=Graphics.boxHeight/2'),true,'Commands remain below the game title');
+  await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-01/title.png');
+  await activate(browser,'title',2);
+  await browser.waitFor('SceneManager._scene instanceof Scene_Options && !SceneManager._scene.isBusy()');
+  assert.deepEqual(await appearance('_optionsWindow'),titleAppearance,'Title and Options share skin, type, item backgrounds and cursor renderer');
+  await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-01/options-reference.png');
+  await browser.press('Escape',27);await choices(browser,'title');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),0,'EventTitleScene restores the existing no-save default after Options');
+  const titlePoint=await browser.evaluate('(() => {const w=SceneManager._scene._choiceListWindow,r=w.itemRect(0);return {x:w.x+w.padding+r.x+r.width/2,y:w.y+w.padding+r.y+r.height/2,outside:w.x-20};})()');
+  const gate=()=>choices(browser,'age-notice');
+  const status=()=>browser.evaluate('({checked:$gameTemp._drylandAgeNotice.checked,accepted:$gameTemp._drylandAgeNotice.accepted,play:SceneManager._scene._choiceListWindow._list[1].enabled})');
+  for(const checked of [false,true]) {
+    await activate(browser,'title',0);await gate();
+    assert.deepEqual(await status(),{checked:false,accepted:false,play:false});
+    if(checked){await activate(browser,'age-notice',0);await gate();assert.deepEqual(await status(),{checked:true,accepted:false,play:true});}
+    await browser.press('Escape',27);await choices(browser,'title');
+    assert.equal(await browser.evaluate('DataManager.isAnySavefileExists()'),false);
+    assert.equal(await browser.evaluate('$gameTemp._drylandAgeNotice === undefined'),true);
+  }
+  await activate(browser,'title',0);await gate();await activate(browser,'age-notice',0);await gate();
+  await activate(browser,'age-notice',2);await choices(browser,'title');
+  await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',x:titlePoint.x,y:titlePoint.y,button:'left',buttons:1,clickCount:1});
+  await frames(browser,3);
+  await browser.call('Input.dispatchMouseEvent',{type:'mouseMoved',x:titlePoint.outside,y:titlePoint.y,button:'left',buttons:1});
+  await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',x:titlePoint.outside,y:titlePoint.y,button:'left',buttons:0,clickCount:1});
+  await choices(browser,'title');
+  assert.equal(await browser.evaluate('$gameTemp._drylandAgeNotice === undefined'),true,'Releasing outside the pressed target cancels that click');
+  await click(browser,titlePoint.x,titlePoint.y);await gate();await frames(browser,3);
+  assert.deepEqual(await status(),{checked:false,accepted:false,play:false},'A pointer gesture spanning entry cannot acknowledge age');
+  await browser.press('Escape',27);await choices(browser,'title');
+  await hold(browser,'Enter',13);await gate();await frames(browser,40);
+  assert.deepEqual(await status(),{checked:false,accepted:false,play:false});
+  await release(browser,'Enter',13);
+  await activate(browser,'age-notice',0);await gate();
+  await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-01/notice-checked.png');
+  await activate(browser,'age-notice',1);
+  await browser.waitFor('SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+  await browser.press('Escape',27);await choices(browser,'title');
+  await activate(browser,'title',0);await gate();
+  assert.deepEqual(await status(),{checked:false,accepted:false,play:false});
+  await click(browser,640,428);await gate();
+  await click(browser,640,512);await selectFile(browser,1);await pause(browser);
+  await browser.waitFor('DataManager.isAnySavefileExists()');
+  // Isolated provider-save fixture. Gameplay/live evidence does not use this jump.
+  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
+  await choices(browser,'title');
+  for(const checked of [false,true]) {
+    await activate(browser,'title',1);await gate();
+    assert.deepEqual(await status(),{checked:false,accepted:false,play:false});
+    if(checked){await activate(browser,'age-notice',0);await gate();}
+    await browser.press('Escape',27);await choices(browser,'title');
+  }
+  await activate(browser,'title',1);await gate();await activate(browser,'age-notice',0);await gate();await activate(browser,'age-notice',1);
+  await browser.waitFor('SceneManager._scene instanceof Scene_Load && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+  await browser.press('Escape',27);await choices(browser,'title');
+  await activate(browser,'title',1);await gate();
+  assert.deepEqual(await status(),{checked:false,accepted:false,play:false});
+  assert.deepEqual(browser.exceptions,[]);
+});
 canonicalCase('IT-038','native Options and consultations cannot carry held confirmation into the background story or party',{timeout:120000},async t=>{
  const browser=await entry(t);await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);const intro=await state(browser);
  await clickConsole(browser,'options');await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&!SceneManager._scene.isBusy()");
@@ -20,7 +131,10 @@ canonicalCase('IT-038','native Options and consultations cannot carry held confi
  for(let step=0;step<4&&await browser.evaluate("SceneManager._scene.constructor.name==='Scene_Options'");step++)await browser.press('Escape',27);
  await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Map'&&!SceneManager._scene.isBusy()");await frames(browser,40);
  assert.deepEqual(await state(browser),intro);await release(browser,'Enter',13);
- await installPhase(browser,fixtures.formation);
+ let prepared=fixtures.formation;
+ for(const heroId of ['H1','H2','H3'])prepared=act(prepared,'TOGGLE_HERO',{heroId}).state;
+ prepared=act(prepared,'COMPLETE_PREPARATION_INTRODUCTION').state;
+ await installPhase(browser,prepared);await choices(browser,'formation');
  for(const [kind,index,closeIndex]of [['destinations',8,3],['roster',9,0]]){
   await activate(browser,'formation',index);await choices(browser,kind);
   for(let step=0;step<closeIndex;step++)await browser.press('ArrowDown',40);
@@ -125,7 +239,7 @@ canonicalCase('IT-080','migrated hero visits transfer to their own map and cance
  await browser.press('Escape',27);await choices(browser,'formation');
  assert.equal(await browser.evaluate('$gameMap.mapId()'),3);
  assert.equal(await browser.evaluate('$gameMessage._drylandChoiceFocus.key'),'formation');
- assert.equal(await browser.evaluate('$gameMessage.choices().length'),11);
+ assert.equal(await browser.evaluate('$gameMessage.choices().length'),12);
  assert.deepEqual([...new Set(await interpreterMaps())],[3],'Return leaves no hero-map interpreter in the native chain');
  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),heroIndex,'Return restores the chosen tavern portrait');
  assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),'Dryland_Taverna');
@@ -188,7 +302,7 @@ canonicalCase('IT-065','installed FAST completes authored Council units and revo
 canonicalCase('IT-068','the authored 2x2 fixture uses native calls, individual focus, HIDE and clean exit/repeat',{timeout:180000},async t=>{
  const prepared=await prepareBustFixture(t,'fixture-native-2x2-20260911',appendEnsemble);
  await startServer(t,prepared.directory);const browser=await openChrome(t);
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);await installClosing(browser,councilState());await pause(browser);
  // Prepared integration input: disable only new map autoruns, then run the
  // authored native common event on the real map interpreter. No story commit.
@@ -256,7 +370,7 @@ canonicalCase('IT-077','FAST-only console executes native text and waits, with c
   ]});return id;
  });
  await startServer(t,prepared.directory);const browser=await openChrome(t);
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  // Prepared isolated native interpreter: no campaign transition is invoked.
  await browser.evaluate('Game_Map.prototype.setupStartingEvent=function(){return false;};$gameMap._interpreter.clear();SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();');
@@ -356,7 +470,7 @@ canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appea
  for(const variant of [{width:1280,height:720,reduced:false},{width:1920,height:1080,reduced:true}]){
   await t.test(JSON.stringify(variant),async t=>{
    const browser=await openChrome(t,variant);
-   await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+   await browser.waitFor("window.$gameMessage&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
    const screen=await browser.evaluate('({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,scale:visualViewport.scale,canvas:Graphics.app.view.getBoundingClientRect().toJSON(),motion:matchMedia("(prefers-reduced-motion: reduce)").matches})');
    assert.ok(screen.width>=1280&&screen.height>=720,JSON.stringify(screen));
    assert.equal(screen.dpr,1,'The desktop fixture uses its declared raster scale');

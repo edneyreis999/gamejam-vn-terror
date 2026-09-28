@@ -8,7 +8,7 @@ export const archiveFiles={archive:'.qa-native-archive.json',storage:'.qa-native
 export function archiveRecord(storage,key) {
   return storage.origins.flatMap(origin=>origin.indexedDB??[]).flatMap(database=>database.stores).flatMap(store=>store.records).find(record=>record.key===key)?.value;
 }
-export async function captureNativeSave(context,id) {
+export async function captureNativeSave(context,id,{method='native autosave after recorded public player inputs'}={}) {
   await context.wait(async()=>{
     if($gameTemp._drylandPersistence?.status!=='saved')return false;
     const [contents,index,test]=await Promise.all([StorageManager.loadObject('file'+$gameSystem.savefileId()),StorageManager.loadObject('global'),localforage.getItem('rmmzsave.test')]);
@@ -27,7 +27,7 @@ export async function captureNativeSave(context,id) {
   assert.equal(archiveRecord(captured.state,native.keys.index),native.indexPayload);
   const archive={schemaVersion:2,origin:native.origin,gameId:native.gameId,fileId:native.fileId,campaign:native.campaign,nativeState:native.nativeState,index:native.index,keys:native.keys,payloadSha256:sha256(native.payload),indexSha256:sha256(native.indexPayload),storageState:captured.state,
     sourceFiles:context.descriptor.files.filter(entry=>!Object.values(archiveFiles).includes(entry.path)),
-    producer:{scenario:context.report.scenario,run:context.output,startedAt:context.report.startedAt,environment:context.report.environment,storageArtifact:captured.path,storageSha256:captured.sha256,inputCount:context.report.inputs.length,omittedNavigation:context.descriptor.omittedNavigation??[],method:'native autosave after recorded public player inputs'}};
+    producer:{scenario:context.report.scenario,run:context.output,startedAt:context.report.startedAt,environment:context.report.environment,storageArtifact:captured.path,storageSha256:captured.sha256,inputCount:context.report.inputs.length,omittedNavigation:context.descriptor.omittedNavigation??[],method}};
   archive.identitySha256=sha256(JSON.stringify({fileId:archive.fileId,gameId:archive.gameId,campaign:archive.campaign,index:archive.index,keys:archive.keys}));
   const file=join(context.output,`${id}.archive.json`);
   await writeFile(file,JSON.stringify(archive,null,2)+'\n',{flag:'wx'});

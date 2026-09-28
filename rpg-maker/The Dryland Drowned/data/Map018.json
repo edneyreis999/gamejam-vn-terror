@@ -5025,6 +5025,146 @@
               ]
             },
             {
+              "code": 231,
+              "indent": 1,
+              "parameters": [
+                50,
+                "Dryland_NarrativeChoice",
+                0,
+                0,
+                704,
+                208,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "50",
+                  "name": "Escolha narrativa"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "Padding:eval": "12",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[26]Recuar\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 1,
+              "parameters": [
+                51,
+                "Dryland_NarrativeChoice",
+                0,
+                0,
+                704,
+                280,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "51",
+                  "name": "Escolha narrativa"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "Padding:eval": "12",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[26]Continuar expedição\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "ConsumeInput",
+                "ConsumeInput",
+                {}
+              ]
+            },
+            {
               "code": 101,
               "indent": 1,
               "parameters": [
@@ -5047,8 +5187,8 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Recuar",
-                  "Continuar expedição"
+                  "Recuar<Bind Picture: 50><Hide Choice Window>",
+                  "Continuar expedição<Bind Picture: 51><Hide Choice Window>"
                 ],
                 -2,
                 0,
@@ -5062,6 +5202,32 @@
               "parameters": [
                 0,
                 "Recuar"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                51
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ClearPictureID",
+                "ClearPictureID",
+                {
+                  "PictureIDs:arraynum": "[50,51]"
+                }
               ]
             },
             {
@@ -5169,6 +5335,32 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                51
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ClearPictureID",
+                "ClearPictureID",
+                {
+                  "PictureIDs:arraynum": "[50,51]"
+                }
+              ]
+            },
+            {
               "code": 108,
               "indent": 2,
               "parameters": [
@@ -5204,6 +5396,32 @@
               "code": 403,
               "indent": 1,
               "parameters": []
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 2,
+              "parameters": [
+                51
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ClearPictureID",
+                "ClearPictureID",
+                {
+                  "PictureIDs:arraynum": "[50,51]"
+                }
+              ]
             },
             {
               "code": 108,

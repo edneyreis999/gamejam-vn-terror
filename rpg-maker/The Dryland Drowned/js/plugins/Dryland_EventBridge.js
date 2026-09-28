@@ -86,6 +86,8 @@
  * @option candidateCount
  * @option candidate
  * @option partyHero
+ * @option preparationIntroductionCompleted
+ * @option canPrepare
  * @option canDepart
  * @option canRetreat
  * @option routeName
@@ -95,6 +97,8 @@
  * @option encounterId
  * @option encounterName
  * @option approachId
+ * @option victimName
+ * @option outcomeApproachId
  * @option outcomeSuccess
  * @option deadCount
  * @option deadHero
@@ -136,6 +140,7 @@
  * @option BEGIN
  * @option TOGGLE_HERO
  * @option SELECT_DESTINATION
+ * @option COMPLETE_PREPARATION_INTRODUCTION
  * @option DEPART
  * @option ENTER_DUNGEON
  * @option CHOOSE_APPROACH
@@ -219,6 +224,14 @@
  * @text Resultado
  * @type variable
  * @default 24
+ * @command SaveCurrentCampaign
+ * @text Salvar campanha atual
+ * @desc Grava o arquivo associado na preparação estável, após avançar o comando nativo.
+ * @arg noticePicture
+ * @text Imagem do aviso de sucesso
+ * @type number
+ * @min 1
+ * @default 95
  * @command Checkpoint
  * @text Salvar ponto da campanha
  * @arg reason
@@ -276,7 +289,7 @@
   });
   const commandError = code => ({ ok: false, error: { code, message: commandMessages[code] } });
   const actionFields = freeze({ BEGIN: null, TOGGLE_HERO: 'heroId', SELECT_DESTINATION: 'dungeonId',
-    DEPART: null, ENTER_DUNGEON: null, CHOOSE_APPROACH: 'approachId', SELECT_VICTIM: 'heroId',
+    COMPLETE_PREPARATION_INTRODUCTION: null, DEPART: null, ENTER_DUNGEON: null, CHOOSE_APPROACH: 'approachId', SELECT_VICTIM: 'heroId',
     REQUEST_RETREAT: null, CANCEL_RETREAT: null, CONFIRM_RETREAT: null, CHOOSE_ENDING: 'ending',
     NEW_CAMPAIGN: null });
   function validateBridgeAction(args, readVariable, variableCount) {
@@ -318,7 +331,7 @@
       return table[identity];
     };
     switch (kind) {
-      case 'phase': case 'sequence': return state[kind];
+      case 'phase': case 'sequence': case 'preparationIntroductionCompleted': return state[kind];
       case 'dungeonId': case 'selectedDungeonId': case 'endingId': return state[kind] || '';
       case 'position': return state.position || 0;
       case 'passageId': return passage;
@@ -338,6 +351,7 @@
       case 'candidateCount': return state.phase === 'sacrifice_choice' ? state.partyIds.length : 0;
       case 'candidate': return state.phase === 'sacrifice_choice' ? state.partyIds[index] || '' : '';
       case 'partyHero': return state.partyIds[index] || '';
+      case 'canPrepare': return state.phase === 'formation' && view.formation.required > 0 && view.formation.selectedHeroIds.length === view.formation.required;
       case 'canDepart': return view.canDepart;
       case 'canRetreat': return view.canRetreat;
       case 'routeName': return named(catalog.destinations, id).name;
@@ -347,6 +361,8 @@
       case 'encounterId': return view.currentEncounter?.id || '';
       case 'encounterName': return id || view.currentEncounter ? named(catalog.encounters, id || view.currentEncounter.id).name : '';
       case 'approachId': return view.currentEncounter?.approachIds[index] || '';
+      case 'victimName': return state.pendingOutcome?.victimId ? named(catalog.heroes, state.pendingOutcome.victimId).name : '';
+      case 'outcomeApproachId': return state.pendingOutcome?.approachId || '';
       case 'outcomeSuccess': return state.pendingOutcome?.success ?? false;
       case 'deadCount': return state.deadHeroIds.length;
       case 'deadHero': return state.deadHeroIds[index] || '';
@@ -368,6 +384,20 @@
   let registry;
   let rules;
   let inFlight = null;
+  let manualRequest = null;
+  const manualSaveCallbacks = new WeakMap();
+  for (const name of ['onAutosaveSuccess', 'onAutosaveFailure']) {
+    const notifyAutosave = Scene_Base.prototype[name];
+    Scene_Base.prototype[name] = function(...args) {
+      const request = manualSaveCallbacks.get(this);
+      if (request) {
+        manualSaveCallbacks.delete(this);
+        if (request.scene !== SceneManager._scene || request.system !== $gameSystem) return;
+        if (name === 'onAutosaveSuccess') return;
+      }
+      return notifyAutosave.apply(this, args);
+    };
+  }
   const idlePersistence = () => ({ status: 'idle', lastSuccessfulSequence: null, lastError: null });
   const persistence = () => $gameTemp._drylandPersistence || idlePersistence();
   function setPersistence(changes) { $gameTemp._drylandPersistence = { ...persistence(), ...changes }; }
@@ -396,35 +426,51 @@
   };
   const setupNewGame = DataManager.setupNewGame;
   DataManager.setupNewGame = function() {
+    manualRequest = null;
     setupNewGame.call(this);
     $gameSystem._dryland = {
       campaign: rules.createReadyState()
     };
     $gameTemp._drylandPersistence = idlePersistence();
   };
+  function finishManual(request, succeeded) {
+    if (!request || manualRequest !== request) return;
+    manualRequest = null;
+    if (succeeded && request.system === $gameSystem && request.scene === SceneManager._scene) {
+      plugin(request.interpreter, 'Dryland_Presentation', 'ShowSaveNotice', {picture: String(request.noticePicture)});
+    }
+  }
   const saveGame = DataManager.saveGame;
   DataManager.saveGame = function(...args) {
     if (inFlight) return inFlight;
-    const sequence = campaign().sequence;
-    setPersistence({ status: 'saving', lastError: null });
+    const sequence = campaign().sequence, system = $gameSystem, temp = $gameTemp;
+    const request = manualRequest?.status === 'writing' ? manualRequest : null;
+    const record = changes => { if (system === $gameSystem && temp === $gameTemp) setPersistence(changes); };
+    record({ status: 'saving', lastError: null });
     try {
       inFlight = Promise.resolve(saveGame.apply(this, args)).then(result => {
-        setPersistence({ status: 'saved', lastSuccessfulSequence: sequence, lastError: null });
+        record({ status: 'saved', lastSuccessfulSequence: sequence, lastError: null });
+        finishManual(request, true);
         return result;
       }, error => {
-        setPersistence({ status: 'failed', lastError: { code: 'save_failed' } });
+        record({ status: 'failed', lastError: { code: 'save_failed' } });
+        finishManual(request, false);
         throw error;
       }).finally(() => { inFlight = null; });
     } catch (error) {
-      setPersistence({ status: 'failed', lastError: { code: 'save_failed' } });
+      record({ status: 'failed', lastError: { code: 'save_failed' } });
+      finishManual(request, false);
       return Promise.reject(error);
     }
     return inFlight;
   };
   const loadGame = DataManager.loadGame;
   DataManager.loadGame = function(savefileId) {
+    manualRequest = null;
     return Promise.resolve().then(() => loadGame.call(this, savefileId)).then(result => {
-      $gameSystem._dryland.campaign = freeze(campaign());
+      const restored = rules.normalizeState(campaign());
+      if (!rules.validateState(restored).ok) throw new Error('A campanha contém um estado inválido.');
+      $gameSystem._dryland.campaign = freeze(restored);
       setPersistence({ status: 'saved', lastSuccessfulSequence: campaign().sequence, lastError: null });
       return result;
     });
@@ -443,7 +489,7 @@
   function apply(action) {
     const before = campaign();
     if (!ensureCampaign(action.type)) return { ...commandError('invalid_state'), state: before, effects: [] };
-    if (inFlight) {
+    if (inFlight || manualRequest) {
       return reportRejection(action.type, { ...commandError('invalid_transition'), state: before, effects: [] });
     }
     const transition = rules.dispatch(before, action);
@@ -477,6 +523,23 @@
     this._drylandContext = campaign().sequence;
     this._drylandReadingPassage = campaign().reading?.passageIds[campaign().reading.index];
   });
+  PluginManager.registerCommand('Dryland_EventBridge', 'SaveCurrentCampaign', function(args) {
+    const scene = SceneManager._scene, state = campaign(), file = $gameSystem.savefileId();
+    const stable = scene instanceof Scene_Map && state?.phase === 'formation' && rules.validateState(state).ok &&
+      Number.isInteger(file) && file > 0 && !$gameMessage.isBusy() && !scene.isBusy() &&
+      !scene._choiceListWindow?.active && !$gamePlayer.isTransferring() &&
+      !$gameTemp._drylandReturnPictures?.some(id => $gameScreen.picture(id)?._duration > 0);
+    if (!stable || inFlight || manualRequest) return reportRejection('SaveCurrentCampaign', commandError('invalid_transition'));
+    plugin(this, 'Dryland_Presentation', 'ClearSaveNotice', {});
+    manualRequest = {interpreter: this, system: $gameSystem, scene, status: 'scheduled', noticePicture: Number(args.noticePicture)};
+    this.setWaitMode('dryland-save');
+    $gameVariables.setValue(24, 'ok');
+  });
+  const terminateSaveScene = Scene_Map.prototype.terminate;
+  Scene_Map.prototype.terminate = function() {
+    manualRequest = null;
+    terminateSaveScene.call(this);
+  };
   PluginManager.registerCommand('Dryland_EventBridge', 'Checkpoint', function(args) {
     if (!ensureCampaign('Checkpoint')) return;
     const state = campaign();
@@ -495,6 +558,11 @@
   const updateWaitMode = Game_Interpreter.prototype.updateWaitMode;
   Game_Interpreter.prototype.updateWaitMode = function() {
     if (this._waitMode === 'dryland-save') {
+      if (manualRequest?.interpreter === this && manualRequest.status === 'scheduled') {
+        manualRequest.status = 'writing';
+        manualSaveCallbacks.set(manualRequest.scene, manualRequest);
+        plugin(this, 'VisuMZ_1_SaveCore', 'AutosaveForce', {});
+      }
       if (inFlight) return true;
       this._waitMode = '';
       return false;

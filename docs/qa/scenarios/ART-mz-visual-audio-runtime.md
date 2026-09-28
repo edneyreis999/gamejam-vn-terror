@@ -54,3 +54,8 @@ blocked-verify: enquadramento do Conselho reprovado; epílogos corrigidos; áudi
 ## Integração narrativa aprovada — 2026-09-18
 
 Execução técnica concluída. A prisão rústica foi corrigida após direção explícita do usuário; IT-052/053 e inspeção de runtime passam nas duas resoluções/perfis, com HIDE. Audição e captura do editor foram dispensadas por D-020/021; não são sensores executados. Aceite humano final registrado após o “Perfeito” do usuário em2026-09-18. [Verificação atual](../../../planos/tasks/approved-narrative-dialogue-staging/verification.md) e [relatório](../reports/2026-09-18-approved-narrative-dialogue-staging.md). Vereditos históricos acima não são reescritos.
+
+
+## Prototype feedback refinement — 2026-09-25
+
+**Planejado; execução dirigida e aceite deste candidato pendentes.** S-001–004/T-007; A–E. Famílias de retratos e caixas, textos completos, sete nomes/oito túmulos, ausência/retorno em vídeo, Town1/People2 nos epílogos sem aplauso e sem vazamento nos créditos. [Guia](../guides/prototype-feedback-refinement.md) · [charter](../charters/CH-prototype-feedback-refinement.md). Os vereditos históricos acima permanecem ligados às suas fontes. A task 13 registra os resultados por lote e mantém os três bugs reportados até o reteste dirigido.

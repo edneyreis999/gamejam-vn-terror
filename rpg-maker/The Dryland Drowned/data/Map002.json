@@ -2708,8 +2708,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "85.71428571428571",
-                  "TargetScaleY:str": "85.71428571428571",
+                  "TargetScaleX:str": "82.14285714285714",
+                  "TargetScaleY:str": "82.14285714285714",
                   "Duration:eval": "0"
                 }
               ]
@@ -2723,8 +2723,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                  "TargetY:str": "32",
+                  "TargetX:str": "472.42857142857144",
+                  "TargetY:str": "40",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -2834,14 +2834,21 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Meu nome é Rheed. Fui eu quem espalhou os anúncios da expedição, a mando de Ivaí e a"
+                "Boa noite. Pode se acomodar. Eu sou Rheed. Fico contente que tenha vindo me"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "contragosto de Irati. "
+                "ouvir nesta Noite da História. Antes de começar, se me permite, vou lhe contar"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "como entrei nessa história."
               ]
             },
             {
@@ -2859,46 +2866,21 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Naqueles dias, eu cuidava dos pequenos afazeres de Ivaí. Mesmo que sua mãe tenha"
+                "Naquele tempo, eu era bem mais jovem e acompanhava Ivaí, um bardo viajante. Era"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "deixado um aviso para não levar outros na missão, Ivaí insistiu que eu recrutasse"
+                "seu ajudante: cuidava dos pequenos afazeres e seguia suas orientações. Eu o"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "mercenários para nos acompanhar. "
-              ]
-            },
-            {
-              "code": 101,
-              "indent": 0,
-              "parameters": [
-                "",
-                0,
-                0,
-                2,
-                "Rheed"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Quando os oito chegaram à taverna, Ivaí transbordou de satisfação, abrindo os"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "registros de sua família para começar a passar as informações ao grupo."
+                "chamava de mestre."
               ]
             },
             {
@@ -3052,21 +3034,60 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Os papéis eram de Irati, mãe dele. Entre as anotações, havia lembranças da família,"
+                "Irati era a mãe dele. Guardava os registros da família e havia morrido dois anos"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "a descrição de uma tradição passada por gerações e referências àquele lugar que"
+                "antes. Entre os papéis que deixou, havia um aviso: Ivaí não deveria envolver"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "procurávamos."
+                "outras pessoas naquela busca."
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Rheed"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "Mesmo assim, Ivaí me pediu que espalhasse os anúncios da expedição. Fui eu quem"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "chamou os oito que você vai conhecer. Talvez seja melhor começarmos pelo dia em"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "que todos chegaram à taverna. Ivaí os recebeu com satisfação e abriu os papéis"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "da mãe para explicar a viagem."
               ]
             },
             {
@@ -3220,14 +3241,21 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Os mapas estavam incompletos. Ivaí admitiu isso assim que os abriu. Ainda havia"
+                "Havia lembranças da família, a descrição de uma tradição passada por gerações e"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "caminho por descobrir. "
+                "referências ao lugar que procurávamos. Os mapas estavam incompletos; Ivaí"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "admitiu isso assim que os abriu. Ainda havia caminho por descobrir."
               ]
             },
             {
@@ -3245,14 +3273,21 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "Do tesouro, falou pouco. Disse que pertencia à família. Mostrou as anotações da mãe,"
+                "Sobre o tesouro, falou pouco. Disse que pertencia à família, mostrou as"
               ]
             },
             {
               "code": 401,
               "indent": 0,
               "parameters": [
-                "explicou a ligação com o lugar e olhou para os oito."
+                "anotações de Irati e explicou a ligação delas com aquele lugar. Então olhou para"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "os oito e fez sua promessa."
               ]
             },
             {

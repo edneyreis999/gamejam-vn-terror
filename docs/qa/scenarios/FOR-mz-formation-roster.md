@@ -57,3 +57,8 @@ Planejado, execução dirigida ainda não observada. Cobertura: S-02; A. [Guia c
 ## Textos atualizados — 2026-09-25
 
 Oito heróis passaram por Conversar (seis falas, entrada direta de Ivaí), seleção e resposta de grupo cheio, com igualdade da campanha durante consulta/grupo cheio. HIDE, Options/retorno e FAST após leitura completa passaram; testes canônicos mantêm autoria e Continue. Unidades de perfil retiradas; três unidades conservadas por herói. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.
+
+
+## Prototype feedback refinement — 2026-09-25
+
+**Planejado; execução dirigida e aceite deste candidato pendentes.** S-001/002/003; A/B/C/E. Título e ciência fresca, oito visitas, seleção/remoção/grupo cheio, Seguir→mapa→Partir, Quadro somente com mortos e gravação do arquivo atual. [Guia](../guides/prototype-feedback-refinement.md) · [charter](../charters/CH-prototype-feedback-refinement.md). Os vereditos históricos acima permanecem ligados às suas fontes. A task 13 registra os resultados por lote e mantém os três bugs reportados até o reteste dirigido.

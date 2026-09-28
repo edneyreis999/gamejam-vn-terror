@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/prototype-feedback-refinement/spec.md",
+  "requestId": "refinement-bad-20260925-01",
+  "consumer": "task-13",
+  "case": "planos/tasks/prototype-feedback-refinement/task-13-directed.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "refinement-bad",
+    "profile": "1280x720-normal",
+    "variant": "bad",
+    "configuration": "candidate-file1-port18726"
+  },
+  "claims": [
+    {
+      "id": "refinement-journey",
+      "variant": "bad",
+      "sensor": "directed-browser",
+      "group": "campaign",
+      "source": {
+        "id": "refinement-journey",
+        "variant": "bad"
+      },
+      "expected": {
+        "path": "planos/tasks/prototype-feedback-refinement/verification.md",
+        "heading": "Runtime scenario groups"
+      }
+    }
+  ],
+  "evidenceRoot": "docs/qa/evidence/prototype-feedback-refinement/task-13",
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Distinct required bad path on the integrated candidate, through public input and compatible own archives where declared."
+  }
+}

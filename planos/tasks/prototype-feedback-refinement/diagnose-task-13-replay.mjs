@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+const helper='rpg-maker/tests/helpers/closing.mjs';let source=readFileSync(helper,'utf8');
+assert.ok(source.includes('export async function finishNativeClosing(browser) {'));
+source=source.replace('export async function finishNativeClosing(browser) {','export async function finishNativeClosing(browser, { onPassage } = {}) {');
+source=source.replace("    seen.push({phase:state.phase,sceneId:state.reading.sceneId,passageId:state.reading.passageIds[state.reading.index],map:await browser.evaluate('$gameMap.mapId()')});", "    seen.push({phase:state.phase,sceneId:state.reading.sceneId,passageId:state.reading.passageIds[state.reading.index],map:await browser.evaluate('$gameMap.mapId()')});\n    if (onPassage) await onPassage(seen.at(-1));");
+writeFileSync(helper,source);
+const suite='rpg-maker/tests/suites/memorial.mjs';source=readFileSync(suite,'utf8');
+const start=source.indexOf("canonicalCase('IT-022'");assert.ok(start>0);
+let block=source.slice(start).replace('{timeout:420000}','{timeout:720000}');
+block=block.replace('  for(const [kind,ending]',"  const started=Date.now(),progress=[];\n  await mkdir(evidence('IT-022'),{recursive:true});\n  const observer=stage=>async passage=>{progress.push({elapsedMs:Date.now()-started,stage,...passage});await writeFile(`${evidence('IT-022')}/progress.json`,JSON.stringify(progress,null,2));};\n  for(const [kind,ending]");
+block=block.replace('const baseline=await finishNativeClosing(browser);','const baseline=await finishNativeClosing(browser,{onPassage:observer(kind+\'-baseline\')});');
+block=block.replace('const replay=await finishNativeClosing(browser);','const replay=await finishNativeClosing(browser,{onPassage:observer(kind+\'-replay-\'+repeat)});');
+writeFileSync(suite,source.slice(0,start)+block);

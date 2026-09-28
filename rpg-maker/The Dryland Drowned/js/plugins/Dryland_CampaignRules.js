@@ -82,7 +82,7 @@
   function readyObject() {
     return {
       version: 1, phase: 'ready', seed: null, rngState: null,
-      selectedDungeonId: null, dungeonId: null, position: null,
+      selectedDungeonId: null, dungeonId: null, position: null, preparationIntroductionCompleted: false,
       draftPartyIds: [], partyIds: [], deadHeroIds: [], deathLocations: {},
       assignments: { physical: Array(5).fill(null), supernatural: Array(5).fill(null), final: Array(6).fill(null) },
       progress: { physical: 0, supernatural: 0, final: 0 }, completedDungeonIds: [],
@@ -131,13 +131,13 @@
     const HERO_IDS = heroIds, DUNGEON_IDS = routeIds;
     const Data = { heroes: catalog.heroes, encounters: catalog.encounters, encounterOrder: encounterIds, destinations: catalog.destinations };
     const Narrative = { scenes: catalog.scenes, passages: catalog.passages };
-    const ACTION_FIELDS = {"BEGIN":["seed"],"COMPLETE_PASSAGE":["passageId"],"SELECT_DESTINATION":["dungeonId"],"TOGGLE_HERO":["heroId"],"DEPART":[],"ENTER_DUNGEON":[],"CHOOSE_APPROACH":["approachId"],"SELECT_VICTIM":["heroId"],"REQUEST_RETREAT":[],"CANCEL_RETREAT":[],"CONFIRM_RETREAT":[],"CHOOSE_ENDING":["ending"],"NEW_CAMPAIGN":[]};
+    const ACTION_FIELDS = {"BEGIN":["seed"],"COMPLETE_PASSAGE":["passageId"],"SELECT_DESTINATION":["dungeonId"],"TOGGLE_HERO":["heroId"],"DEPART":[],"COMPLETE_PREPARATION_INTRODUCTION":[],"ENTER_DUNGEON":[],"CHOOSE_APPROACH":["approachId"],"SELECT_VICTIM":["heroId"],"REQUEST_RETREAT":[],"CANCEL_RETREAT":[],"CONFIRM_RETREAT":[],"CHOOSE_ENDING":["ending"],"NEW_CAMPAIGN":[]};
     const UINT32_RANGE = 4294967296, MULBERRY_INCREMENT = 0x6D2B79F5;
     const deepFreeze = freeze;
     const sameArray = (a, b) => Array.isArray(a) && Array.isArray(b) && same(a, b);
     const hasPassage = id => hasOwn(catalog.passages, id);
     const historyFields = {
-      BEGIN: ['seed'], COMPLETE_PASSAGE: ['passageId'],
+      BEGIN: ['seed'], COMPLETE_PASSAGE: ['passageId'], COMPLETE_PREPARATION_INTRODUCTION: [],
       SELECT_DESTINATION: ['dungeonId'], TOGGLE_HERO: ['heroId'], DEPART: ['dungeonId'],
       ENTER_DUNGEON: ['encounterId'], CHOOSE_APPROACH: ['approachId', 'success'],
       SELECT_VICTIM: ['heroId'], REQUEST_RETREAT: [], CANCEL_RETREAT: [],
@@ -252,12 +252,13 @@
     function validateState(state) {
       var issues = [];
       if (!state || typeof state !== 'object' || Object.keys(state).sort().join(',') !== stateKeys ||
-          !Number.isSafeInteger(state.sequence) || typeof state.medallionComplete !== 'boolean' ||
+          !Number.isSafeInteger(state.sequence) || typeof state.medallionComplete !== 'boolean' || typeof state.preparationIntroductionCompleted !== 'boolean' ||
           ['history', 'deadHeroIds', 'draftPartyIds', 'partyIds', 'climaxPartyIds', 'seenPassageIds', 'completedDungeonIds', 'mapPieceIds', 'invariantViolations'].some(key => !Array.isArray(state[key])) ||
           ['assignments', 'progress'].some(key => !state[key] || Array.isArray(state[key]) || Object.keys(state[key]).sort().join(',') !== [...routeIds].sort().join(','))) {
         return resultValidation([v('invalid_state', 'A campanha contém um estado inválido.')]);
       }
       if (state.phase === 'ready' && !same(state, readyObject())) return resultValidation([v('invalid_state', 'O estado inicial deve estar vazio.')]);
+      if (state.preparationIntroductionCompleted && state.phase !== 'formation') issues.push(v('invalid_preparation', 'A introdução pertence à preparação atual.'));
       if (state.history.some(event => !validHistoryEvent(event))) issues.push(v('invalid_action_history', 'O histórico contém uma ação inválida.'));
       if (!state.deathLocations || Array.isArray(state.deathLocations) || !same(Object.keys(state.deathLocations).sort(), [...state.deadHeroIds].sort())) issues.push(v('invalid_death_locations', 'As mortes não correspondem ao contexto registrado.'));
       else for (const death of Object.values(state.deathLocations)) {
@@ -475,7 +476,7 @@
       var available = DUNGEON_IDS.filter(function (id) { return routeStatus(state, id) === 'available'; });
       return {
         changes: {
-          phase: 'formation', dungeonId: null, position: null, partyIds: [], pendingOutcome: null, reading: null, retreatReturn: null,
+          phase: 'formation', preparationIntroductionCompleted: false, dungeonId: null, position: null, partyIds: [], pendingOutcome: null, reading: null, retreatReturn: null,
           draftPartyIds: automatic ? living : state.draftPartyIds.filter(function (id) { return living.indexOf(id) >= 0; }),
           selectedDungeonId: available.length === 1 ? available[0] : (available.indexOf(state.selectedDungeonId) >= 0 ? state.selectedDungeonId : null)
         },
@@ -606,6 +607,10 @@
         var step = completeCurrentPassage(state);
         return accepted(state, step.changes, { type: action.type, passageId: passageId }, step.effects);
       }
+      if (action.type === 'COMPLETE_PREPARATION_INTRODUCTION') {
+        if (state.phase !== 'formation' || state.preparationIntroductionCompleted) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', {});
+        return accepted(state, { preparationIntroductionCompleted: true }, { type: action.type });
+      }
       if (action.type === 'SELECT_DESTINATION') {
         if (state.phase !== 'formation') return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', { phase: state.phase, action: action.type });
         if (DUNGEON_IDS.indexOf(action.dungeonId) < 0) return rejected(state, 'invalid_destination', 'Escolha um caminho conhecido.', { dungeon: action.dungeonId });
@@ -632,7 +637,7 @@
         if (status !== 'available') return rejected(state, 'destination_unavailable', 'Este caminho não está disponível para expedição.', { dungeon: state.selectedDungeonId, status: status });
         form = deriveFormation(state);
         if (!form.livingHeroIds.length || form.selectedHeroIds.length !== form.required) return rejected(state, 'invalid_party_size', 'Escolha exatamente três heróis sobreviventes.', { count: form.selectedHeroIds.length, required: form.required });
-        return accepted(state, { phase: 'dungeon_intro', dungeonId: state.selectedDungeonId, selectedDungeonId: null, position: 1, partyIds: form.selectedHeroIds, draftPartyIds: form.selectedHeroIds, reading: reading('threshold.' + state.selectedDungeonId) }, { type: 'DEPART', dungeonId: state.selectedDungeonId });
+        return accepted(state, { phase: 'dungeon_intro', preparationIntroductionCompleted: false, dungeonId: state.selectedDungeonId, selectedDungeonId: null, position: 1, partyIds: form.selectedHeroIds, draftPartyIds: form.selectedHeroIds, reading: reading('threshold.' + state.selectedDungeonId) }, { type: 'DEPART', dungeonId: state.selectedDungeonId });
       }
       if (action.type === 'ENTER_DUNGEON') {
         if (state.phase !== 'dungeon_intro' || state.reading) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', { phase: state.phase, action: action.type });
@@ -701,7 +706,9 @@
       return state.phase === 'formation' && form.livingHeroIds.length > 0 && form.selectedHeroIds.length === form.required && routeIds.includes(state.selectedDungeonId) && routeStatus(state, state.selectedDungeonId) === 'available';
     }
     return freeze({
-      createReadyState, dispatch, validateState, deriveFormation, deriveDestinations, deriveViability, deriveFinalCandidates, mulberry32Step,
+      createReadyState, dispatch, validateState,
+      normalizeState: state => state && !hasOwn(state, 'preparationIntroductionCompleted') ? { ...state, preparationIntroductionCompleted: false } : state,
+      deriveFormation, deriveDestinations, deriveViability, deriveFinalCandidates, mulberry32Step,
       playerView: state => clone({ phase: state.phase, sequence: state.sequence, reading: state.reading,
         heroes: heroIds.map(id => ({ id, name: catalog.heroes[id].name, alive: !state.deadHeroIds.includes(id), selected: deriveFormation(state).selectedHeroIds.includes(id) })),
         formation: deriveFormation(state), destinations: deriveDestinations(state), canDepart: canDepart(state), canRetreat: deriveRetreatEligibility(state),

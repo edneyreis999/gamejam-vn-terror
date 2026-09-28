@@ -2644,15 +2644,79 @@
               "indent": 0,
               "parameters": [
                 1,
-                "Dryland_EpilogueH2",
-                1,
+                "Dryland_Black",
                 0,
-                640,
-                360,
-                76.51434643995749,
-                76.51434643995749,
+                0,
+                0,
+                0,
+                100,
+                100,
                 255,
                 0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Reed final",
+                  "Origin:str": "Upper Left",
+                  "Position:num": "5",
+                  "StartOffsetX:eval": "0",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "82.14285714285714",
+                  "TargetScaleY:str": "82.14285714285714",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "472.42857142857144",
+                  "TargetY:str": "40",
+                  "EasingType:str": "Linear",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
               ]
             },
             {
@@ -2791,7 +2855,7 @@
                 0,
                 0,
                 2,
-                "Elowen"
+                "Rheed"
               ]
             },
             {
@@ -2816,7 +2880,7 @@
                 0,
                 0,
                 2,
-                "Elowen"
+                "Rheed"
               ]
             },
             {
@@ -2841,7 +2905,7 @@
                 0,
                 0,
                 2,
-                "Elowen"
+                "Rheed"
               ]
             },
             {
@@ -2866,7 +2930,7 @@
                 0,
                 0,
                 2,
-                "Elowen"
+                "Rheed"
               ]
             },
             {

@@ -2986,8 +2986,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "85.71428571428571",
-                  "TargetScaleY:str": "85.71428571428571",
+                  "TargetScaleX:str": "82.14285714285714",
+                  "TargetScaleY:str": "82.14285714285714",
                   "Duration:eval": "0"
                 }
               ]
@@ -3001,8 +3001,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                  "TargetY:str": "32",
+                  "TargetX:str": "472.42857142857144",
+                  "TargetY:str": "40",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -3348,8 +3348,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "44",
-                  "TargetScaleY:str": "44",
+                  "TargetScaleX:str": "50",
+                  "TargetScaleY:str": "50",
                   "Duration:eval": "0"
                 }
               ]
@@ -3364,7 +3364,7 @@
                 {
                   "PictureID:arrayeval": "[\"63\"]",
                   "TargetX:str": "960",
-                  "TargetY:str": "454.664",
+                  "TargetY:str": "725",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -3750,8 +3750,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "85.71428571428571",
-                  "TargetScaleY:str": "85.71428571428571",
+                  "TargetScaleX:str": "82.14285714285714",
+                  "TargetScaleY:str": "82.14285714285714",
                   "Duration:eval": "0"
                 }
               ]
@@ -3765,8 +3765,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                  "TargetY:str": "32",
+                  "TargetX:str": "472.42857142857144",
+                  "TargetY:str": "40",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -4137,8 +4137,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "85.71428571428571",
-                  "TargetScaleY:str": "85.71428571428571",
+                  "TargetScaleX:str": "82.14285714285714",
+                  "TargetScaleY:str": "82.14285714285714",
                   "Duration:eval": "0"
                 }
               ]
@@ -4152,8 +4152,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                  "TargetY:str": "32",
+                  "TargetX:str": "472.42857142857144",
+                  "TargetY:str": "40",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -4524,8 +4524,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "85.71428571428571",
-                  "TargetScaleY:str": "85.71428571428571",
+                  "TargetScaleX:str": "82.14285714285714",
+                  "TargetScaleY:str": "82.14285714285714",
                   "Duration:eval": "0"
                 }
               ]
@@ -4539,8 +4539,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                  "TargetY:str": "32",
+                  "TargetX:str": "472.42857142857144",
+                  "TargetY:str": "40",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -4886,8 +4886,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "44",
-                  "TargetScaleY:str": "44",
+                  "TargetScaleX:str": "50",
+                  "TargetScaleY:str": "50",
                   "Duration:eval": "0"
                 }
               ]
@@ -4902,7 +4902,7 @@
                 {
                   "PictureID:arrayeval": "[\"63\"]",
                   "TargetX:str": "960",
-                  "TargetY:str": "454.664",
+                  "TargetY:str": "725",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -8118,12 +8118,287 @@
               ]
             },
             {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                60
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                61
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                62
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                63
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                64
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                65
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                66
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                67
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                68
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                69
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                70
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ClearPictureID",
+                "ClearPictureID",
+                {
+                  "PictureIDs:arraynum": "[60,61,62,63,64,65,66,67,68,69,70]"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_4_AttachedPictures",
+                "MessageRemovePicture",
+                "MessageRemovePicture",
+                {
+                  "PictureID:arraynum": "[60,61,62,63,64,65,66,67,68,69,70]"
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 0,
+              "parameters": [
+                50,
+                "Dryland_FinalChoice",
+                0,
+                0,
+                112,
+                208,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "Padding:eval": "12",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[26]\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[50]",
+                  "Padding:eval": "32",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[36]Reunir o medalhão\\n\\n\\\\FS[26]libertar os amantes\\ne morrer\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "50",
+                  "name": "Decisão final — reunir"
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 0,
+              "parameters": [
+                51,
+                "Dryland_FinalChoice",
+                0,
+                0,
+                664,
+                208,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "Padding:eval": "12",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[26]\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ChangePictureChoiceSettingsOne",
+                "ChangePictureChoiceSettingsOne",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
+                  "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[51]",
+                  "Padding:eval": "32",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\\\\FS[36]Destruir o medalhão\\n\\n\\\\FS[26]sobreviver e entregá-los\\na Andirá\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "51",
+                  "name": "Decisão final — destruir"
+                }
+              ]
+            },
+            {
               "code": 102,
               "indent": 0,
               "parameters": [
                 [
-                  "Reunir o medalhão — libertar os amantes e morrer",
-                  "Destruir o medalhão — sobreviver e entregá-los a Andirá"
+                  "Reunir o medalhão — libertar os amantes e morrer<Bind Picture: 50><Hide Choice Window>",
+                  "Destruir o medalhão — sobreviver e entregá-los a Andirá<Bind Picture: 51><Hide Choice Window>"
                 ],
                 -1,
                 0,
@@ -8136,7 +8411,33 @@
               "indent": 0,
               "parameters": [
                 0,
-                "Reunir o medalhão — libertar os amantes e morrer"
+                "Reunir o medalhão — libertar os amantes e morrer<Bind Picture: 50><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                51
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ClearPictureID",
+                "ClearPictureID",
+                {
+                  "PictureIDs:arraynum": "[50,51]"
+                }
               ]
             },
             {
@@ -8233,7 +8534,33 @@
               "indent": 0,
               "parameters": [
                 1,
-                "Destruir o medalhão — sobreviver e entregá-los a Andirá"
+                "Destruir o medalhão — sobreviver e entregá-los a Andirá<Bind Picture: 51><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                51
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "VisuMZ_2_PictureChoices",
+                "ClearPictureID",
+                "ClearPictureID",
+                {
+                  "PictureIDs:arraynum": "[50,51]"
+                }
               ]
             },
             {

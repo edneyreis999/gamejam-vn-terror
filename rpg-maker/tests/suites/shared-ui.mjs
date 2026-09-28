@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -39,10 +39,14 @@ canonicalCase('IT-026','hidden approach and sacrifice pictures cannot change foc
 });
 canonicalCase('IT-027','HIDE removes consultation overlays and targets while retaining character art and returning focus',{timeout:120000},async t=>{
  const browser=await tavern(t);
+ let prepared=fixtures.formation;
+ for(const heroId of ['H1','H2','H3'])prepared=act(prepared,'TOGGLE_HERO',{heroId}).state;
+ prepared=act(prepared,'COMPLETE_PREPARATION_INTRODUCTION').state;
+ await installPhase(browser,prepared);await choices(browser,'formation');
  for(const[kind,index]of [['destinations',8],['roster',9]]){
   await activate(browser,'formation',index);await choices(browser,kind);
   const before=await state(browser),focus=await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
-  await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,Array.from({length:19},(_,i)=>71+i));
+  await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,kind==='destinations'?[72,73,74,75,81,82]:Array.from({length:19},(_,i)=>71+i));
   await click(browser,200,240);await hidden(browser,false);await choices(browser,kind);
   assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),focus);
   await browser.screenshot(`${evidence('IT-027')}/${kind}-restored.png`);

@@ -1,4 +1,4 @@
-import { selectFile } from '../helpers/native-chrome.mjs';
+import {continueSave} from '../helpers/discovery.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, choices, formation, heroes, pause, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
@@ -67,42 +67,43 @@ async function observeAbsence(browser) {
     window.absenceMoves=[]; window.absenceFrames=[]; let elapsed=0;
     const move=Game_Screen.prototype.movePicture;
     Game_Screen.prototype.movePicture=function(...args){
-      if(args[0]>=10 && args[0]<=17 && args[6]===0 && args[8]===60) absenceMoves.push({frame:Graphics.frameCount,args});
+      if(args[0]>=10 && args[0]<=17 && args[6]===0 && args[8]===180) absenceMoves.push({frame:Graphics.frameCount,args});
       return move.apply(this,args);
     };
     const update=Game_Screen.prototype.updatePictures;
     Game_Screen.prototype.updatePictures=function(){
       update.call(this);
-      if(absenceMoves.length && elapsed<65) {
+      if(absenceMoves.length && elapsed<185) {
         elapsed++;
-        absenceFrames.push({elapsed,pictures:absenceMoves.map(({args})=>{const p=this.picture(args[0]);return p?{id:args[0],x:p.x(),y:p.y(),opacity:p.opacity()}:null;})});
+        absenceFrames.push({elapsed,choiceActive:SceneManager._scene._choiceListWindow?.active,pictures:absenceMoves.map(({args})=>{const p=this.picture(args[0]);return p?{id:args[0],x:p.x(),y:p.y(),opacity:p.opacity()}:null;})});
       }
     };
   })()`);
 }
-async function beginReturn(t, reduced = false) {
+async function beginReturn(t, reduced = false, during = false) {
   const browser = await tavern(t);
   await browser.call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: reduced ? 'reduce' : 'no-preference' }] });
   const before = automatic();
   await installRoute(browser, before); await pause(browser); await observeAbsence(browser);
   await browser.press('Enter', 13);
-  await choices(browser, 'formation');
+  if (during) await browser.waitFor('absenceMoves.length === 3');
+  else await choices(browser, 'formation');
   return { browser, before };
 }
-canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed positions over sixty picture frames', { timeout: 90000 }, async t => {
+canonicalCase('IT-009', 'native return fades all losses simultaneously for 180 frames before enabling preparation', { timeout: 150000 }, async t => {
   const { browser, before } = await beginReturn(t);
   const returned = await snapshot(browser);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.deepEqual(returned, finishReading(before));
-  assert.deepEqual(await browser.evaluate('[38,39,40].map(id=>$gameSwitches.value(id))'), [true,true,true]);
   assert.equal(returned.history.filter(action => action.passageId?.startsWith('prologue.')).length, before.history.filter(action => action.passageId?.startsWith('prologue.')).length);
   const moves = await browser.evaluate('absenceMoves');
-  assert.deepEqual(moves.map(move => move.args[0]), [10, 11, 12]);
+  assert.deepEqual(moves.map(move => move.args[0]), [10, 12, 11]);
   assert.equal(new Set(moves.map(move => move.frame)).size, 1);
   assert.deepEqual(moves.map(move => move.args.slice(2, 4)), [[344, 520], [840, 176], [760, 497]]);
-  await browser.waitFor('absenceFrames.length === 65');
+  await browser.waitFor('absenceFrames.length === 185');
   const frames = await browser.evaluate('absenceFrames');
   for (const frame of frames) {
+    if(frame.elapsed < 180) assert.equal(frame.choiceActive,false,JSON.stringify(frame));
     const visible = frame.pictures.filter(Boolean);
     assert.ok(visible.length === 0 || visible.length === 3);
     if (visible.length) {
@@ -113,9 +114,9 @@ canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed po
       }
     }
   }
-  assert.ok(frames[28].pictures.every(picture => picture && picture.opacity > 100 && picture.opacity < 150));
-  assert.ok(frames[59].pictures.every(picture=>!picture || picture.opacity===0));
-  assert.deepEqual(frames[64].pictures, [null, null, null]);
+  assert.ok(frames[89].pictures.every(picture => picture && picture.opacity > 100 && picture.opacity < 150));
+  assert.ok(frames[179].pictures.every(picture=>!picture || picture.opacity===0));
+  assert.deepEqual(frames[184].pictures, [null, null, null]);
   assert.deepEqual(await snapshot(browser), returned);
   await browser.screenshot(`${evidence('IT-009')}/empty-fixed-places.png`);
   // Redraw the same dedicated map with no new domain transition: no repeat fade.
@@ -123,46 +124,37 @@ canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed po
   await choices(browser, 'formation');
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
   assert.deepEqual(await snapshot(browser), returned);
+  // A later genuine return includes older losses even if legacy flags are set.
+  await browser.evaluate('[38,39,40].forEach(id=>$gameSwitches.setValue(id,true))');
+  await installRoute(browser,before);await pause(browser);await browser.press('Enter',13);
+  await choices(browser,'formation');
+  assert.deepEqual(await browser.evaluate('absenceMoves.slice(3).map(move=>move.args[0])'),[10,12,11]);
+  assert.deepEqual(await snapshot(browser),returned);
 });
-canonicalCase('IT-010', 'interrupting the first return consumes absence and never restores dead interaction targets', { timeout: 90000 }, async t => {
-  const { browser } = await beginReturn(t);
-  const before = await snapshot(browser);
-  assert.ok(await browser.evaluate('[10,11,12].some(id=>$gameScreen.picture(id)?.opacity()>0)'), 'Interruption occurs before the native fade completes.');
-  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))"), false);
-  await browser.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 344, y: 520 });
-  await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', x: 344, y: 520, button: 'left', clickCount: 1 });
-  await browser.evaluate('new Promise(resolve => requestAnimationFrame(resolve))');
-  await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x: 344, y: 520, button: 'left', clickCount: 1 });
-  await browser.evaluate('new Promise(resolve => requestAnimationFrame(resolve))');
-  assert.equal(await browser.evaluate('$gameMessage._drylandChoiceFocus?.key'), 'formation');
-  assert.deepEqual(await snapshot(browser), before);
-  // Interrupt at the native map-transfer I/O boundary. Shared map 4 routes the
-  // unchanged formation back to map 3 through its real orchestration event.
-  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();$gamePlayer.reserveTransfer(4,10,7,2,0);SceneManager.goto(Scene_Map);');
-  await choices(browser, 'formation');
-  assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
-  assert.equal(await browser.evaluate('absenceMoves.length'), 3);
-  assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))"), false);
-  assert.deepEqual(await snapshot(browser), before);
-  // The accepted return already saved the native absence switches.
-  // Continue at that checkpoint shows empty places, without a second fade.
-  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  await browser.press('Enter', 13); await selectFile(browser,1); await choices(browser, 'formation');
-  assert.equal(await browser.evaluate('absenceMoves.length'), 3);
-  assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  assert.deepEqual(await snapshot(browser), before);
+canonicalCase('IT-010', 'saving during the return wait restores empty places without replay or dead targets', { timeout: 90000 }, async t => {
+  const {browser}=await beginReturn(t,false,true);
+  const before=await snapshot(browser);
+  assert.ok(await browser.evaluate('[10,11,12].some(id=>$gameScreen.picture(id)?.opacity()>0)'));
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.active'),false);
+  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
+  const saved=await browser.evaluate('StorageManager.loadObject("file"+$gameSystem.savefileId()).then(contents=>{let i=contents.map._interpreter;while(i._childInterpreter)i=i._childInterpreter;return i._waitMode;})');
+  assert.equal(saved,'dryland-return');
+  await continueSave(browser);await choices(browser,'formation');
+  assert.equal(await browser.evaluate('absenceMoves.length'),3);
+  assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'),[false,false,false]);
+  assert.equal(await browser.evaluate('Boolean($gameTemp._drylandReturnPictures)'),false);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))'),false);
+  assert.deepEqual(await snapshot(browser),before);
 });
 canonicalCase('IT-011', 'native reduced motion immediately removes new losses while roster text preserves them', { timeout: 90000 }, async t => {
   const { browser, before } = await beginReturn(t, true);
   assert.deepEqual(await snapshot(browser), finishReading(before));
   assert.equal(await browser.evaluate('absenceMoves.length'), 0);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  const index = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(entry=>entry.name.startsWith('Elenco'))");
+  const index = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(entry=>entry.name.startsWith('Quadro'))");
   await activate(browser, 'formation', index); await choices(browser, 'roster');
-  const panel = await browser.evaluate(`SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(71).upperleft)`);
-  for (const name of ['Gorvak', 'Elowen', 'Griznik']) assert.ok(panel.replace(/\x1bWrapBreak\[0\]/g,' ').includes(`${name} — Morto`), JSON.stringify({name,panel,rows:await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))')}));
+  const names=await browser.evaluate('[72,73,74].map(id=>SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(id).center))');
+  for(const [i,name] of ['Gorvak','Elowen','Griznik'].entries())assert.ok(names[i].includes(name));
   await browser.screenshot(`${evidence('IT-011')}/reduced-motion-roster.png`);
 });
 canonicalCase('IT-013', 'native retreat cancellation restores choices, confirmation returns safely and commitment removes retreat', { timeout: 120000 }, async t => {

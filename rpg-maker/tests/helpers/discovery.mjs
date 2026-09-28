@@ -42,8 +42,8 @@ export async function passage(browser, id) {
 export async function continueSave(browser) {
   await browser.waitFor("$gameTemp._drylandPersistence?.status === 'saved'");
   await browser.evaluate('$gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  assert.equal(await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()]'), 'Continuar');
+  await browser.waitFor("$gameMap.mapId() === 1 && ($gameMessage?._drylandChoiceFocus?.key === 'title') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  assert.equal(await browser.evaluate("$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()].replace(/<[^>]*>/g,'')"), 'Continuar');
   await browser.press('Enter', 13);await selectFile(browser);
 }
 export async function observeDiscovery(browser) {
@@ -51,7 +51,7 @@ export async function observeDiscovery(browser) {
     window.discoveryEvents=[];
     for (const [owner,name] of [[Game_Screen.prototype,'showPicture'],[Game_Screen.prototype,'movePicture'],[Game_Screen.prototype,'erasePicture'],[AudioManager,'playSe']]) {
       const original=owner[name]; owner[name]=function(...args){
-        if((name==='playSe' && args[0].name==='Item3') || (name!=='playSe' && args[0]>=2 && args[0]<=4)) discoveryEvents.push({name,args,frame:Graphics.frameCount,scene:$gameSystem._dryland.campaign.reading?.sceneId,pieces:$gameSystem._dryland.campaign.mapPieceIds.slice(),sequence:$gameSystem._dryland.campaign.sequence});
+        if((name==='playSe' && args[0].name==='Item3') || (name!=='playSe' && ((args[0]>=2 && args[0]<=4) || args[0]===90))) discoveryEvents.push({name,args,frame:Graphics.frameCount,scene:$gameSystem._dryland.campaign.reading?.sceneId,pieces:$gameSystem._dryland.campaign.mapPieceIds.slice(),sequence:$gameSystem._dryland.campaign.sequence});
         return original.apply(this,args);
       };
     }

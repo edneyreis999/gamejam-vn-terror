@@ -23,8 +23,8 @@ export function encodeWav(channels,sampleRate){
 
 export function captureProcessorSource(processor){
   return `class QACapture extends AudioWorkletProcessor {
-          constructor(){super();this.chunks=[[],[]];this.stopped=false;this.ready=false;this.port.onmessage=()=>{this.stopped=true;this.port.postMessage({done:true,channels:this.chunks.map(chunks=>chunks.flat())});};}
-          process(inputs,outputs){if(this.stopped)return false;for(let c=0;c<2;c++){const samples=inputs[0][c]??new Float32Array(outputs[0][c].length);this.chunks[c].push(Array.from(samples));}if(!this.ready){this.ready=true;this.port.postMessage({ready:true});}return true;}
+          constructor(){super();this.chunks=[[],[]];this.stopped=false;this.ready=false;this.port.onmessage=()=>{this.stopped=true;const channels=this.chunks.map(chunks=>{const joined=new Float32Array(chunks.reduce((sum,chunk)=>sum+chunk.length,0));let offset=0;for(const chunk of chunks){joined.set(chunk,offset);offset+=chunk.length;}return joined;});this.chunks=null;this.port.postMessage({done:true,channels},channels.map(channel=>channel.buffer));};}
+          process(inputs,outputs){if(this.stopped)return false;for(let c=0;c<2;c++){const samples=inputs[0][c]??new Float32Array(outputs[0][c].length);this.chunks[c].push(new Float32Array(samples));}if(!this.ready){this.ready=true;this.port.postMessage({ready:true});}return true;}
         } registerProcessor(${JSON.stringify(processor)},QACapture);`;
 }
 
@@ -37,12 +37,40 @@ export function audioCapture({page,identity,report,output,sources,usedIds=new Se
       const state=globalThis.__qaAudioCapture;
       const chunks=await new Promise(resolve=>{state.node.port.onmessage=({data})=>{if(data.done)resolve(data.channels);};state.node.port.postMessage('stop');});
       state.source.disconnect(state.node);state.node.disconnect();state.silent.disconnect();state.node.port.close();URL.revokeObjectURL(state.url);delete globalThis.__qaAudioCapture;
-      return{id:state.id,source:state.sourceId,sampleRate:state.context.sampleRate,channels:chunks};
+      globalThis.__qaAudioStopped={channels:chunks};
+      return{id:state.id,source:state.sourceId,sampleRate:state.context.sampleRate,channelCount:chunks.length,frames:chunks[0].length};
     });
     active=false;await identity();
-    const bytes=encodeWav(capture.channels,capture.sampleRate),path=capture.id+'.wav';
-    await writeFile(join(output,path),bytes,{flag:'wx'});
-    const channels=capture.channels.map(samples=>{let peak=0,sum=0;for(const value of samples){peak=Math.max(peak,Math.abs(value));sum+=value*value;}return{samples:samples.length,peak,rms:Math.sqrt(sum/samples.length)};});
+    const path=capture.id+'.wav';
+    let bytes,channels,transferError;
+    try {
+      bytes=Buffer.alloc(44+capture.frames*capture.channelCount*2);
+      encodeWav(Array.from({length:capture.channelCount},()=>[]),capture.sampleRate).copy(bytes);
+      bytes.writeUInt32LE(bytes.length-8,4);bytes.writeUInt32LE(bytes.length-44,40);
+      channels=Array.from({length:capture.channelCount},()=>({samples:0,peak:0,energy:0}));
+      for(let start=0;start<capture.frames;start+=262144){
+        const part=await page.evaluate(({start,end})=>{
+          const channels=globalThis.__qaAudioStopped.channels;
+          const pcm=new Uint8Array((end-start)*channels.length*2),view=new DataView(pcm.buffer);
+          const metrics=channels.map(()=>({samples:0,peak:0,energy:0}));
+          for(let frame=start;frame<end;frame++)for(let channel=0;channel<channels.length;channel++){
+            const value=channels[channel][frame];if(!Number.isFinite(value))throw Error('Non-finite PCM sample.');
+            const clipped=Math.max(-1,Math.min(1,value));view.setInt16(((frame-start)*channels.length+channel)*2,Math.round(clipped*(clipped<0?32768:32767)),true);
+            const metric=metrics[channel];metric.samples++;metric.peak=Math.max(metric.peak,Math.abs(value));metric.energy+=value*value;
+          }
+          let binary='';for(let offset=0;offset<pcm.length;offset+=32768)binary+=String.fromCharCode(...pcm.subarray(offset,offset+32768));
+          return {pcm:btoa(binary),metrics};
+        },{start,end:Math.min(start+262144,capture.frames)});
+        Buffer.from(part.pcm,'base64').copy(bytes,44+start*capture.channelCount*2);
+        for(let channel=0;channel<channels.length;channel++){const total=channels[channel],metric=part.metrics[channel];total.samples+=metric.samples;total.peak=Math.max(total.peak,metric.peak);total.energy+=metric.energy;}
+      }
+      channels=channels.map(({samples,peak,energy})=>({samples,peak,rms:Math.sqrt(energy/samples)}));
+    } catch(error) { transferError=error;throw error; }
+    finally {
+      try { await page.evaluate(()=>{delete globalThis.__qaAudioStopped;}); }
+      catch(error) { if(transferError)throw new AggregateError([transferError,error],'PCM transfer and cleanup failed');throw error; }
+    }
+    await identity();await writeFile(join(output,path),bytes,{flag:'wx'});
     const record={id:capture.id,kind:'audio',type:'audio',path,sha256:createHash('sha256').update(bytes).digest('hex'),source:capture.source,capture:{sampleRate:capture.sampleRate,channels,duration:channels[0].samples/capture.sampleRate}};
     (report.audioRecordings??=[]).push(record);(report.checkpoints??=[]).push(record);return record;
   };

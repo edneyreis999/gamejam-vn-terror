@@ -73,6 +73,16 @@
  * @text Navegação horizontal
  * @type boolean
  * @default false
+ * @command ShowSaveNotice
+ * @text Exibir aviso de campanha salva
+ * @arg picture
+ * @type number
+ * @min 1
+ * @command ClearSaveNotice
+ * @text Limpar aviso de salvamento
+ * @command WaitForReturnPresentation
+ * @text Aguardar ausências do retorno
+ * @desc Aguarda os movimentos nativos ativos; uma retomada sem efeito termina imediatamente.
  * @command MotionPreference
  * @text Consultar movimento reduzido
  * @arg variable
@@ -104,6 +114,13 @@
  */
 (() => {
   'use strict';
+  // Scope dialogue ink to its window; menus and authored text stay unchanged.
+  const resetDialogueFont = Window_Message.prototype.resetFontSettings;
+  Window_Message.prototype.resetFontSettings = function() {
+    resetDialogueFont.call(this);
+    this.changeTextColor('#211c14');
+    this.contents.outlineWidth = 0;
+  };
   const initialize = Game_System.prototype.initialize;
   Game_System.prototype.initialize = function() {
     initialize.call(this);
@@ -179,19 +196,42 @@
   Window_Message.prototype.toggleAutoForward = function() {
     if (!$gameSystem.isExtendedFastForwardDisallowed()) toggleAuto.call(this);
   };
+  function clearSaveNotice() {
+    const notice = $gameTemp._drylandSaveNotice;
+    if (notice) {
+      const picture = $gameScreen.picture(notice.picture);
+      if (picture) picture.show(picture.name(), picture.origin(), picture.x(), picture.y(), picture.scaleX(), picture.scaleY(), 0, picture.blendMode());
+    }
+    delete $gameTemp._drylandSaveNotice;
+  }
+  PluginManager.registerCommand('Dryland_Presentation', 'ClearSaveNotice', clearSaveNotice);
+  PluginManager.registerCommand('Dryland_Presentation', 'ShowSaveNotice', function(args) {
+    clearSaveNotice();
+    const id = Number(args.picture), picture = $gameScreen.picture(id);
+    if (!picture) return;
+    $gameTemp._drylandSaveNotice = {picture: id, remaining: 120};
+    picture.show(picture.name(), picture.origin(), picture.x(), picture.y(), picture.scaleX(), picture.scaleY(), 255, picture.blendMode());
+  });
   const terminateMap = Scene_Map.prototype.terminate;
   Scene_Map.prototype.terminate = function() {
     resetModes();
+    delete $gameTemp._drylandReturnPictures;
+    if (SceneManager.isNextScene(Scene_Title)) delete $gameTemp._drylandPendingEffects;
+    clearSaveNotice();
     terminateMap.call(this);
   };
   const loadGame = DataManager.loadGame;
   DataManager.loadGame = function(id) {
+    clearSaveNotice();
     readingPermission(null, false);
+    delete $gameTemp._drylandPendingEffects;
+    delete $gameTemp._drylandReturnPictures;
     return loadGame.call(this, id).then(result => { resetModes(); return result; });
   };
   const transfer = Game_Interpreter.prototype.command201;
   Game_Interpreter.prototype.command201 = function(params) {
     readingPermission(this, false);
+    clearSaveNotice();
     return transfer.call(this, params);
   };
   PluginManager.registerCommand('Dryland_Presentation', 'ChoiceFocus', function(args) {
@@ -236,6 +276,21 @@
       else original.call(this, wrap);
     };
   }
+  PluginManager.registerCommand('Dryland_Presentation', 'WaitForReturnPresentation', function() {
+    if (!$gameTemp._drylandPendingEffects?.['return.moving']) return;
+    delete $gameTemp._drylandPendingEffects['return.moving'];
+    $gameTemp._drylandReturnPictures = Array.from({length:8}, (_, i) => 10 + i)
+      .filter(id => $gameScreen.picture(id)?._duration > 0);
+    this.setWaitMode('dryland-return');
+  });
+  const updateReturnWait = Game_Interpreter.prototype.updateWaitMode;
+  Game_Interpreter.prototype.updateWaitMode = function() {
+    if (this._waitMode !== 'dryland-return') return updateReturnWait.call(this);
+    if ($gameTemp._drylandReturnPictures?.some(id => $gameScreen.picture(id)?._duration > 0)) return true;
+    delete $gameTemp._drylandReturnPictures;
+    this._waitMode = '';
+    return false;
+  };
   PluginManager.registerCommand('Dryland_Presentation', 'MotionPreference', function(args) {
     $gameVariables.setValue(Number(args.variable), matchMedia('(prefers-reduced-motion: reduce)').matches);
   });
@@ -324,6 +379,16 @@
     if (picture) picture._drylandScrollSkipKey = args.key;
   });
   const pictureUiUpdate = Sprite_Picture.prototype.update;
+  const pictureTouched = Sprite_Picture.prototype.isBeingTouched;
+  Sprite_Picture.prototype.isBeingTouched = function() {
+    if (!pictureTouched.call(this)) return false;
+    if (!this.picture()?.name().startsWith('Dryland_HeroGroup_')) return true;
+    // Native pictures update bottom-first; overlapping groups must hit the visible top layer.
+    return !this.parent.children.some(sprite =>
+      sprite._pictureId > this._pictureId && sprite.worldVisible &&
+      sprite.picture()?.name().startsWith('Dryland_HeroGroup_') &&
+      pictureTouched.call(sprite));
+  };
   Sprite_Picture.prototype.update = function() {
     pictureUiUpdate.call(this);
     if (interfaceHidden() && this.picture()?._drylandInterfaceElement) this.visible = false;
@@ -347,6 +412,8 @@
       consumeConfirmation();
     }
     updateInterface.call(this);
+    const notice = $gameTemp._drylandSaveNotice;
+    if (notice && --notice.remaining <= 0) clearSaveNotice();
   };
   const settings = PluginManager.parameters('Dryland_Presentation');
   const canMove = Game_Player.prototype.canMove;

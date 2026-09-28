@@ -40,6 +40,16 @@ canonicalCase('UT-032', 'both legal route orders award exactly one piece per rec
     }
   }
 });
+async function assertRouteReturn(browser, reduced) {
+  const sequence=(await snapshot(browser)).sequence;
+  const moves=await browser.evaluate('discoveryEvents.filter(e=>e.name==="movePicture"&&e.args[0]===90&&e.sequence==='+sequence+')');
+  if(reduced)assert.deepEqual(moves,[]);
+  else {
+    assert.deepEqual(moves.map(e=>[e.args[6],e.args[8]]),[[255,30],[0,30]]);
+    assert.ok(moves[1].frame-moves[0].frame>=54,JSON.stringify(moves));
+    assert.equal(await browser.evaluate('$gameScreen.picture(90)==null'),true);
+  }
+}
 async function reachReceipt(browser, order, index) {
   const state = discoveryBoundary(order, index), route = order[index];
   await installDiscovery(browser, state);
@@ -154,7 +164,7 @@ canonicalCase('IT-052', 'both native piece receipts preserve scene, alpha, cente
     assert.deepEqual(await snapshot(browser), after);
     assert.equal(await browser.evaluate('$gameScreen.picture(2) == null && $gameScreen.picture(3) == null'), true, 'Restored parent event cleans the receipt before Irati.');
     assert.equal(await browser.evaluate("discoveryEvents.filter(e=>e.name==='playSe').length"), sounds);
-    await browser.press('Enter', 13); await choices(browser, 'formation');
+    await browser.press('Enter', 13); await choices(browser, 'formation');await assertRouteReturn(browser,reduced);
     assert.deepEqual((await snapshot(browser)).mapPieceIds, [route]);
   }
 });
@@ -198,7 +208,7 @@ canonicalCase('IT-053', 'native automatic assembly runs in both orders with inde
     assert.deepEqual(await snapshot(browser), after, 'Cosmetic replay leaves the already awarded pieces and unlock unchanged.');
     await browser.press('Enter', 13); await passage(browser, 'map.reveal.02');
     assert.equal(await browser.evaluate('$gameScreen.picture(4)?.name()'), 'Dryland_MapComplete');
-    await browser.press('Enter', 13); await choices(browser, 'formation');
+    await browser.press('Enter', 13); await choices(browser, 'formation');await assertRouteReturn(browser,reduced);
     const returned = await snapshot(browser);
     assert.ok(['map.reveal.01', 'map.reveal.02'].every(id => returned.seenPassageIds.includes(id)));
     assert.deepEqual(returned.mapPieceIds, order); assert.equal(rules.playerView(returned).destinations.final.status, 'available');

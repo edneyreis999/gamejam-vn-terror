@@ -1,3 +1,4 @@
+import { openDestinations } from '../helpers/formation.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -62,11 +63,11 @@ canonicalCase('IT-014','all nine authored semantic checkpoints save and install 
  let firstFileBytes;
  for(const file of [1,2]){
  if(file===2){await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');await titleReady(browser);}
- const newGameIndex=await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(file===1?'Jogar':'Novo jogo')})`);assert.ok(newGameIndex>=0);
+ const newGameIndex=await browser.evaluate("$gameMessage.choices().findIndex(choice=>choice.replace(/<[^>]*>/g,'')==='Novo jogo')");assert.ok(newGameIndex>=0);
  while(await browser.evaluate('SceneManager._scene._choiceListWindow.index()')!==newGameIndex)await browser.press('ArrowDown',40);
  await arm(browser,'new_campaign');await browser.press('Enter',13);await selectFile(browser,file);evidence.push(await roundTrip(browser,'new_campaign',{advance:true}));
  let prepared=fixtures.formation;for(const heroId of ['H1','H2','H3'])prepared=accepted(prepared,'TOGGLE_HERO',{heroId});prepared=accepted(prepared,'SELECT_DESTINATION',{dungeonId:'physical'});
- await installPhase(browser,prepared);await choices(browser,'formation');await arm(browser,'departure');await activate(browser,'formation',10);evidence.push(await roundTrip(browser,'departure'));
+ await installPhase(browser,prepared);await choices(browser,'formation');await openDestinations(browser);await arm(browser,'departure');await activate(browser,'destinations',4);evidence.push(await roundTrip(browser,'departure'));
  await arm(browser,'reveal');await advanceUntilSaved(browser,'reveal');evidence.push(await roundTrip(browser,'reveal'));
  await browser.press('Enter',13);await choices(browser,'approaches');const current=await state(browser),encounter=catalog.encounters[current.assignments[current.dungeonId][current.position-1]];const index=encounter.approaches.findIndex(a=>current.partyIds.some(id=>catalog.heroes[id].competencyIds.includes(a.competencyId)));assert.ok(index>=0);
  await arm(browser,'approach');await activate(browser,'approaches',index);evidence.push(await roundTrip(browser,'approach',{advance:true}));
@@ -97,7 +98,7 @@ canonicalCase('IT-079','selected file archives restore before boot into independ
    sourceFiles:[new URL('../../qa/native-player.mjs',import.meta.url),new URL('../../qa/native-save-archive.mjs',import.meta.url)],
    async execute(context){
     const player=new DirectedNativePlayer(context);
-    await player.choose(branch==='producer'?'Jogar':'Continuar');await player.file(7);await player.ready();
+    await player.choose(branch==='producer'?'Novo jogo':'Continuar');await player.file(7);await player.ready();
     if(branch==='producer'){
       parent=await captureNativeSave(context,'parent');
       assert.equal(parent.nativeState.mapId,2);
@@ -112,8 +113,8 @@ canonicalCase('IT-079','selected file archives restore before boot into independ
       await player.choose(hero);await player.choose('Selecionar');
       await player.returnToTavern();
     }
-    await player.choose('Destinos');const surface=await player.until('destinations');
-    await player.choose(surface.labels[branch==='A'?0:1]);await player.choose('Partir');await player.ready();
+    await player.choose('Seguir');const surface=await player.until('destinations');
+    await player.choose(surface.labels[branch==='A'?0:1],{settled:id=>$gameSystem._dryland.campaign.selectedDungeonId===id,settledArg:branch==='A'?'physical':'supernatural'});await player.choose('Partir');await player.ready();
     const child=await captureNativeSave(context,'child');
     assert.equal(child.fileId,7);assert.equal(child.campaign.dungeonId,branch==='A'?'physical':'supernatural');
     assert.deepEqual(child.campaign.partyIds,branch==='A'?['H1','H2','H3']:['H4','H5','H6']);

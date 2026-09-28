@@ -50,3 +50,7 @@ Integration must verify both temporal transitions, prologue playback, return to 
 ## Aceite do usuário — 2026-09-18
 
 D-020 da [spec](spec.md) aceita o áudio como pronto nesta entrega e dispensa a audição pendente. O usuário fará ajustes posteriores se necessário. As verificações técnicas de buffers, volumes, mute e restauração permanecem válidas; não se registra ouvinte nem julgamento auditivo inexistente. Esta decisão substitui a exigência de escuta como bloqueio de conclusão deste incremento, sem alterar cues, arquivos ou mixagem.
+
+## Later scoped supersession — 2026-09-24
+
+D-015 in the [prototype-feedback-refinement ADR](../prototype-feedback-refinement/adrs/adr-001-prototype-feedback-product.md#decisions) replaces only preservation of the former epilogue audio: the new older-Rheed epilogues use the existing present-day music and discreet audience, without opening applause. Ending, memorial and credits treatment remains separate. This note preserves the historical contract and acceptance above; the later increment owns its changed paths and verification.

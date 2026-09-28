@@ -12,6 +12,8 @@ The runtime wording and approved source art are not reopened for editorial accep
 
 ## Supersession and preserved rules
 
+**Later scoped supersession, 2026-09-24:** [prototype-feedback-refinement ADR-001](../../prototype-feedback-refinement/adrs/adr-001-prototype-feedback-product.md), D-007, replaces this record's illustrated/no-bust epilogue presentation with older Rheed over black and the standard lower dialogue box. It explicitly preserves this record's existing epilogue prose, eligibility and order. This note records the new product decision without changing historical approval or claiming the refinement is implemented.
+
 This replaces the canonical GDD's literal authority of earlier hero-sheet epilogue wording and its previous epilogue-bust rule. The [canonical GDD](../../../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md) now names the approved replacement and links this record. Completed specs remain historical.
 
 Preserve H1–H8 ordering, living-climax-participant eligibility, memorial membership, exclusion of reserves, the two voluntary ending consequences, total-loss precedence and subsequent credits. Do not create a gallery, additional ending choices, new rewards, new outcome art or a narrator bust over illustrated epilogues/endings.

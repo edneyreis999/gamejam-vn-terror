@@ -1,12 +1,8 @@
 # Falas de cada herói
 
-## H1 — Gorvak
+H1 — Gorvak
 
-### Apresentação
-
-Gorvak: Ele/dele · Anão · Ferreiro · 42 anos
-
-Gorvak salvou seus aprendizes do incêndio que destruiu sua forja. Agora busca dinheiro para reconstruí-la e voltar a sustentá-los. Protetor e teimoso, cuida dos outros, mas raramente aceita ajuda.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Gorvak?
 
@@ -20,33 +16,28 @@ Gorvak: E, se o medo apertar, fico por perto. Mesmo com o teto desabando, conseg
 
 Gorvak: Mas prestem atenção aos estalos. Madeira velha pode estar avisando que vai ceder.
 
-#### Ao ser selecionado
+Ao ser selecionado
 
 Gorvak: Pode contar comigo, Ivaí. Vou conferir nosso equipamento antes de sairmos.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Gorvak: Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir.
 
-### Despedida
+Despedida
 
-Gorvak: Olhe para mim, Ivaí. Vou dar a vocês tempo para passar. Façam esse tempo valer a pena.
+Gorvak: Eu fico aqui. Vou dar a vocês tempo para passar. Não desperdicem esse tempo.
 
-### Opinião
+Opinião
 
-Gorvak: Olhe para nós, Ivaí. Você nos trouxe até aqui sem contar a verdade. Fez todos nós corrermos um risco que nem conhecíamos. Se alguém morreu por isso, diga o nome. Você precisa responder por cada vida perdida.
+Gorvak: Olhe para nós, Ivaí. Você nos trouxe até aqui sem contar a verdade. Fez todos nós corrermos um risco que nem conhecíamos. Você precisa responder por cada vida perdida.
 
 Gorvak: Reúna o medalhão e liberte Floraí e Pérola. Sei que isso vai custar sua vida. Mas não é justo entregar os dois a Andirá para se salvar. Desta vez, cabe a você pagar o preço da sua escolha.
-
 ---
 
-## H2 — Elowen
+H2 — Elowen
 
-### Apresentação
-
-Elowen: Ela/dela · Elfa · Caçadora · 28 anos
-
-Elowen quer comprar a mata onde sua comunidade caça há gerações, antes que um proprietário distante mande cercá-la. Rápida e confiante, costuma tomar a dianteira, mas nem sempre espera para ouvir os outros.
+ Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Elowen?
 
@@ -54,39 +45,34 @@ Elowen: Querem cercar a mata onde minha comunidade caça. Vou usar minha parte d
 
 Ivaí: E durante a viagem? Como pode nos ajudar?
 
-Elowen: Sei lidar com armadilhas. Já cortei o fio de uma sem disparar o mecanismo que prendia uma companheira. Mas ninguém pode sair puxando as coisas antes de eu olhar.
+Elowen: Sei lidar com armadilhas. Já passei de uma sem disparar o mecanismo que prendia uma companheira. Mas ninguém pode sair puxando as coisas antes de eu olhar.
 
-Elowen: Também corro, salto e escalo. Já atravessei uma ravina para alcançar duas crianças antes de uma cheia. Se precisarmos de uma corda do outro lado, eu levo.
+Elowen: Também corro, salto e escalo. Já atravessei uma ravina para alcançar duas crianças. Se precisarmos de uma corda do outro lado, eu levo.
 
 Elowen: Só me avise dos perigos que conhece, Ivaí. Preciso saber onde estou pisando.
 
-#### Ao ser selecionada
+Ao ser selecionada
 
 Elowen: Já estava na hora, Ivaí. Estou pronta. Vamos ver se você acompanha.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Elowen: Você já escolheu três pessoas, Ivaí. Quer me levar? Então precisa tirar alguém do grupo primeiro.
 
-### Despedida
+Despedida
 
 Elowen: Quando eu correr, não olhem para trás.
 
-### Opinião
+Opinião
 
 Elowen: Você sabia, Ivaí! E deixou a gente seguir sem contar nada? Como eu ia proteger alguém de um perigo que você escondeu?
 
 Elowen: Destrua o medalhão. Sei que Andirá vai absorver Floraí e Pérola, até as lembranças que têm um do outro. Ainda assim, quero você vivo para responder pelo que fez e reparar o que puder. E não confunda isso com perdão.
-
 ---
 
-## H3 — Griznik
+H3 — Griznik
 
-### Apresentação
-
-Griznik: Ele/dele · Goblin · Carpinteiro · 36 anos
-
-Griznik quer abrir sua própria oficina e deixar de aceitar serviços que colocam trabalhadores e moradores em risco para reduzir custos. Observador e prestativo, sempre encontra algo para aproveitar ou consertar, mesmo quando ninguém pediu sua ajuda.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Griznik?
 
@@ -100,33 +86,28 @@ Griznik: Também sei me virar longe de casa. Já fiquei ilhado com uma equipe du
 
 Griznik: Aliás, essa correia da sua mochila está se soltando. Chegue mais perto. Eu arrumo enquanto você me conta da viagem.
 
-#### Ao ser selecionado
+Ao ser selecionado
 
 Griznik: Estou pronto, Ivaí. Só vou pegar aquela sobra de corda. Nunca se sabe quando vamos precisar dela.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Griznik: Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir. Enquanto isso, vou conferir as amarras das mochilas.
 
-### Despedida
+Despedida
 
 Griznik: Eu seguro a estrutura. Vocês aproveitem a saída.
 
-### Opinião
+Opinião
 
 Griznik: Espere, Ivaí. Você já tinha metade do medalhão, sabia da maldição e queria encontrar a outra metade para destruir o artefato. Mas, para nós, falou só do tesouro. Cada vez que a gente decidia seguir, faltava uma parte da história.
 
 Griznik: Destrua o medalhão. Sei que Andirá vai absorver Floraí e Pérola e as lembranças que têm um do outro. Não tenho como consertar isso. Mas quero que as mortes causadas pela maldição da sua linhagem terminem aqui. Você vai viver, contar a verdade e reparar o que ainda puder. Comece sem esconder nada de ninguém.
-
 ---
 
-## H4 — Seraphina
+H4 — Seraphina
 
-### Apresentação
-
-Seraphina: Ela/dela · Troll · Curandeira · 54 anos
-
-Seraphina busca um tratado perdido sobre males sobrenaturais e dinheiro para abrir uma casa de cura para quem não encontrou ajuda em outro lugar. Serena e estudiosa, escuta com atenção, mas pode insistir demais quando acredita saber o que é melhor para alguém.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Seraphina?
 
@@ -134,25 +115,25 @@ Seraphina: Quero abrir uma casa de cura. Há pessoas que chegam até mim depois 
 
 Ivaí: E durante a viagem? Como pode nos ajudar?
 
-Seraphina: Estudo doenças, ervas e venenos. Num povoado, diziam que alguém havia envenenado os doentes. Comparei os casos e descobri que todos bebiam da mesma fonte contaminada. Conseguimos impedir que mais gente adoecesse.
+Seraphina: Estudo doenças, ervas e venenos. Num povoado, diziam que alguém havia envenenado os doentes. Comparei os casos e descobri que todos bebiam da mesma fonte contaminada. Consegui impedir que mais gente adoecesse.
 
 Seraphina: Também trato de males que não começam no corpo. Uma família me procurou por causa de pesadelos que se repetiam todas as noites. Reconheci os sinais de um pacto antigo e interrompi o ritual que os alimentava. Se encontrarmos símbolos pelo caminho, preciso examiná-los antes que alguém toque neles.
 
 Seraphina: E me conte se sentir algo estranho, Ivaí. Mesmo que pareça sem importância. Fica difícil ajudar quando a pessoa esconde parte dos sintomas.
 
-#### Ao ser selecionada
+Ao ser selecionada
 
 Seraphina: Vou com vocês, Ivaí. Levem água limpa. Os curativos ficam comigo.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Seraphina: Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir. Enquanto decide, vou terminar de guardar os remédios.
 
-### Despedida
+Despedida
 
 Seraphina: Vivam. Depois decidam o que esta morte significa.
 
-### Opinião
+Opinião
 
 Seraphina: Você sabia da maldição, Ivaí. Nós não. Aceitamos procurar um tesouro. Você escondeu os riscos e decidiu por nós. Ainda quero ajudar você, mas isso não desculpa o que fez.
 
@@ -160,13 +141,9 @@ Seraphina: Reúna o medalhão e liberte Floraí e Pérola. O juramento foi uma e
 
 ---
 
-## H5 — Bimbren
+H5 — Bimbren
 
-### Apresentação
-
-Bimbren: Ele/dele · Gnomo · Mensageiro · 39 anos
-
-Bimbren quer reabrir um serviço de mensagens entre comunidades que ficaram isoladas quando a antiga rota comercial foi abandonada. Organizado e confiável, lembra cada compromisso que assume, mas tem dificuldade em aceitar que às vezes é preciso interromper uma viagem.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Bimbren?
 
@@ -174,25 +151,25 @@ Bimbren: Desde que abandonaram a antiga rota comercial, há comunidades sem rece
 
 Ivaí: E durante a viagem? Como pode nos ajudar?
 
-Bimbren: Passei anos carregando encomendas onde carroças não chegavam. Posso mover cargas pesadas e ajudar a liberar uma passagem. Certa vez, ergui uma carroça tombada o suficiente para tirarem o condutor debaixo do eixo.
+Bimbren: Passei anos carregando encomendas onde carroças não chegavam. Posso mover cargas pesadas e ajudar a liberar uma passagem. Certa vez, ergui uma carroça tombada o suficiente para tirar o condutor debaixo do eixo.
 
 Bimbren: Também estudo mapas, inscrições e selos antigos. Já reconheci um selo diplomático que estavam tratando como falsificação. Tenho essas referências no meu livro de rotas. Se encontrarmos um marco antigo, posso comparar as inscrições antes de seguirmos.
 
 Bimbren: Antes de sair, gostaria de conferir o trajeto com você. Quando assumo uma entrega, preciso saber aonde vou e o que esperam de mim.
 
-#### Ao ser selecionado
+Ao ser selecionado
 
 Bimbren: Pode contar comigo, Ivaí. Mostre quais volumes precisam ser levados. Vou distribuir o peso antes de partirmos.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Bimbren: Você já escolheu três pessoas, Ivaí. Para me incluir, precisa retirar alguém do grupo primeiro. Ficarei aqui com minhas coisas prontas.
 
-### Despedida
+Despedida
 
 Bimbren: Minha rota termina aqui. A de vocês, não.
 
-### Opinião
+Opinião
 
 Bimbren: A missão que você nos apresentou era uma fraude, Ivaí. Prometi ajudar a buscar o tesouro da sua família. Você escondeu a maldição e nos levou a trabalhar pela sua salvação. Não pode cobrar de nós um compromisso que nunca aceitamos.
 
@@ -200,17 +177,13 @@ Bimbren: Reúna o medalhão e liberte Floraí e Pérola. Os dois fizeram seu jur
 
 ---
 
-## H6 — Liora
+H6 — Liora
 
-### Apresentação
-
-Liora: Ela/dela · Gnoma · Navegadora · 34 anos
-
-Liora quer publicar um atlas de rotas esquecidas e recuperar sua reputação depois que uma embarcação sob sua orientação desapareceu numa neblina incomum. Atenta e cuidadosa, confere cada indicação do caminho, mas tem dificuldade em admitir suas dúvidas diante dos outros.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Liora?
 
-Liora: Quero publicar um atlas. Você me prometeu que eu poderia copiar os mapas que encontrássemos, e há rotas antigas que ainda preciso estudar. Uma embarcação sob minha orientação desapareceu numa neblina que os registros não explicam. Desde então, tratam o caso como um erro meu. Quero descobrir o que aconteceu.
+Liora: Quero publicar um mapa do mundo todo. Você me prometeu que eu poderia copiar os mapas que encontrássemos, e há rotas antigas que ainda preciso estudar. Uma embarcação sob minha orientação desapareceu numa neblina que os registros não explicam. Desde então, tratam o caso como um erro meu. Quero descobrir o que aconteceu.
 
 Ivaí: E durante a viagem? Como pode nos ajudar?
 
@@ -220,33 +193,28 @@ Liora: Também observo o que muda ao redor. Numa viagem, percebi uma mudança na
 
 Liora: Quando sairmos, me mostre os pontos de referência que conhece. Vou marcar também o caminho de volta.
 
-#### Ao ser selecionada
+Ao ser selecionada
 
 Liora: Estou pronta, Ivaí. Deixe os mapas comigo durante a caminhada. Quero acompanhar cada mudança de direção.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Liora: Você já escolheu três pessoas, Ivaí. Precisa retirar alguém do grupo antes de me incluir. Enquanto decide, vou conferir minhas anotações.
 
-### Despedida
+Despedida
 
 Liora: O caminho está marcado. Não deixem que termine comigo.
 
-### Opinião
+Opinião
 
 Liora: Havia referências nos registros que não apareciam no que você nos contou, Ivaí. Eu percebi. Devia ter falado, mas escondi minhas dúvidas para não parecer que estava perdida outra vez. Você sabia o que estava omitindo. Eu suspeitava e fiquei calada.
 
 Liora: Destrua o medalhão. Sei que isso entrega Floraí, Pérola e as lembranças dos dois a Andirá. Ainda assim, quero você vivo para responder pelo que fez e registrar a verdade. Vou contar também o que calei. Quem ouvir essa história precisa saber em que errou cada um de nós.
-
 ---
 
-## H7 — Vaelith
+H7 — Vaelith
 
-### Apresentação
-
-Vaelith: Ele/dele · Elfo · Escriba · 32 anos
-
-Vaelith quer reconstruir um arquivo de textos sobrenaturais destruído por pessoas que temiam seu conteúdo. Curioso e ousado, escala ruínas atrás de inscrições esquecidas e costuma se aproximar demais de um perigo quando acredita estar prestes a compreendê-lo.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Vaelith?
 
@@ -260,33 +228,27 @@ Vaelith: Também sei alcançar lugares difíceis. Já escalei a parede externa d
 
 Vaelith: Se encontrarmos algo escrito, me dê tempo para olhar. Só não leia em voz alta antes de eu conferir. Há textos em que isso basta para começar um ritual.
 
-#### Ao ser selecionado
+Ao ser selecionado
 
 Vaelith: Ótimo, Ivaí. Tenho papel, tinta e corda. Agora quero ver essas inscrições de perto.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Vaelith: Você já escolheu três pessoas, Ivaí. Para me levar, precisa retirar alguém primeiro. Posso esperar. As inscrições já esperaram bem mais.
 
-### Despedida
+Despedida
 
 Vaelith: Levem as páginas. Façam minha última linha valer.
 
-### Opinião
+Opinião
 
 Vaelith: Então foi por isso que os registros chegaram incompletos às minhas mãos. Você retirou justamente o que precisávamos saber, Ivaí. Queria destruir o medalhão antes que entendêssemos o que ele protegia. Eu poderia ter estudado as advertências. Você decidiu que eu não devia lê-las.
 
 Vaelith: Reúna o medalhão. Restaure o juramento e liberte Floraí e Pérola. Sei que a maldição vai cobrar sua vida. Ainda assim, destruir a proteção dos dois para se salvar seria condená-los. Preserve o artefato e os registros. Precisamos de provas do que aconteceu para que ninguém volte a esconder essa história.
-
 ---
+H8 — Draska
 
-## H8 — Draska
-
-### Apresentação
-
-Draska: Ela/dela · Goblin · Mineradora · 31 anos
-
-Draska quer comprar os direitos de exploração de uma mina abandonada e abrir uma cooperativa com trabalhadores expulsos de outras escavações. Prática e vigilante, compartilha os perigos que conhece, mas custa a confiar num plano quando não consegue avaliar todos os riscos.
+Apresentação
 
 Ivaí: Por que decidiu participar da expedição, Draska?
 
@@ -300,19 +262,19 @@ Draska: Também sei procurar uma saída. Uma vez, a entrada de uma galeria caiu.
 
 Draska: Então me diga os riscos que conhece, Ivaí. Preciso saber o que nos espera para decidir por onde ir.
 
-#### Ao ser selecionada
+Ao ser selecionada
 
 Draska: Certo, Ivaí. Levo água e comida de reserva. Antes de entrar em qualquer lugar, vamos conferir a saída.
 
-#### Se o grupo estiver cheio
+Se o grupo estiver cheio
 
 Draska: Já são três pessoas no grupo, Ivaí. Precisa tirar alguém antes de me incluir. Confira quem vai antes de sairmos.
 
-### Despedida
+Despedida
 
 Draska: Eu marco o caminho. Vocês terminam de percorrê-lo.
 
-### Opinião
+Opinião
 
 Draska: Você prometeu uma parte do tesouro, Ivaí. Escondeu a maldição e o que pretendia fazer com o medalhão. Não tínhamos como avaliar o risco. Podíamos conferir cada passagem e ainda assim morrer por algo que você já sabia.
 

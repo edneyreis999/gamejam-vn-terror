@@ -4,8 +4,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { assertAdvanceIndicatorFits } from '../helpers/native-reading.mjs';
-import { clickConsole, hidden } from '../helpers/native-shared.mjs';
-import { act, activate, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
+import { click, clickConsole, hidden } from '../helpers/native-shared.mjs';
+import { act, activate, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, openDestinations, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
 
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -116,7 +116,7 @@ canonicalCase('UT-059', 'stock actor membership and HP cannot change campaign li
 });
 canonicalCase('IT-002', 'native CaptureContext → Action → Query updates only the intended hero membership', { timeout: 60000 }, async t => {
   const browser = await tavern(t);
-  assert.equal(await browser.evaluate('$gameMessage.choices().length'), 11);
+  assert.equal(await browser.evaluate('$gameMessage.choices().length'), 12);
   const before = await snapshot(browser);
   const result = await browser.evaluate(`(() => {
     const interpreter = new Game_Interpreter();
@@ -300,8 +300,8 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
     await activate(browser, 'formation', heroIndex); await activate(browser, 'hero', 1); await pause(browser);
     assert.equal(await browser.evaluate('$gameMessage.allText()'), heroUnitTexts(unit + 2)[0]);
     assert.deepEqual((await snapshot(browser)).draftPartyIds, [heroId]);
-    await browser.press('Enter', 13); await choices(browser, 'hero');
-    await activate(browser, 'hero', 1); await choices(browser, 'hero');
+    await browser.press('Enter', 13); await choices(browser, 'formation');
+    await activate(browser, 'formation', heroIndex); await activate(browser, 'hero', 1); await choices(browser, 'hero');
     assert.deepEqual((await snapshot(browser)).draftPartyIds, []);
     await returnToTavern(browser);
     const full = selected(heroes.filter(id => id !== heroId).slice(0, 3));
@@ -324,47 +324,46 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
 });
 canonicalCase('IT-008', 'destination choice/cancellation preserve membership and return to the tavern', { timeout: 90000 }, async t => {
   const browser = await tavern(t);
+  await installFixture(browser,selected());
+  await openDestinations(browser);
   const before = await snapshot(browser);
-  await activate(browser, 'formation', 8);
-  await choices(browser, 'destinations');
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(2)'), false);
-  assert.deepEqual(await browser.evaluate('[72,73,74].map(id => $gameScreen.picture(id).name())'),
-    ['Dryland_Destination_physical', 'Dryland_Destination_supernatural', 'Dryland_Destination_final']);
-  const panelText = (await browser.evaluate('[75,76,77].map(id => $gameScreen.getPictureTextData(id).upperleft)')).join(' ').replace(/\s+/g, ' ');
-  for (const phrase of ['igreja tomada pela mata', 'uma figueira', 'duas peças']) assert.ok(panelText.includes(phrase), phrase);
+  assert.equal(await browser.evaluate('$gameScreen.picture(71).name()'),'Dryland_MapComplete');
+  assert.deepEqual(await browser.evaluate('[72,73,74].map(id => $gameScreen.picture(id).name())'),Array(3).fill('Dryland_RouteTarget'));
   await browser.screenshot(`${evidence('IT-008')}/destinations.png`);
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
   assert.deepEqual(await snapshot(browser), before);
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 8);
-  await activate(browser, 'formation', 8);
+  await openDestinations(browser);
   await activate(browser, 'destinations', 0);
-  await choices(browser, 'formation');
+  await choices(browser, 'destinations');
   const after = await snapshot(browser);
   assert.equal(after.selectedDungeonId, 'physical');
   assert.deepEqual(after.draftPartyIds, before.draftPartyIds);
   assert.equal(after.rngState, before.rngState);
-  const destinationLabel = await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(44).center)');
-  assert.ok(destinationLabel.replaceAll(String.fromCharCode(27) + 'WrapBreak[0]', ' ').includes('Caminho da Igreja'));
+  const panelText=(await browser.evaluate('$gameScreen.getPictureTextData(75).upperleft')).replace(/\s+/g,' ');
+  assert.ok(panelText.includes('Sob a igreja tomada pela mata,'));
+  await browser.press('Escape',27);await choices(browser,'formation');
   assert.equal(await browser.evaluate('$gameScreen.picture(71) == null'), true);
-  assert.equal(await browser.evaluate('Boolean($gameVariables.value(25))'), false);
+  assert.equal(await browser.evaluate('Boolean($gameVariables.value(25))'), true);
 });
 canonicalCase('IT-041', 'prepared retreat/revisit inputs display traversed progress without counting the newly revealed position', { timeout: 90000 }, async t => {
   const browser = await tavern(t);
-  const fixture = structuredClone(formation());
+  const fixture = structuredClone(selected());
   fixture.assignments.physical = ['A1', 'A2', 'A3', null, null];
   fixture.progress.physical = 2;
   await installFixture(browser, fixture);
-  await activate(browser, 'formation', 8);
-  await choices(browser, 'destinations');
+  await openDestinations(browser);
+  await activate(browser,'destinations',0);await choices(browser,'destinations');
   assert.deepEqual(rules.playerView(await snapshot(browser)).destinations.physical.landmarks, { traversed: 2, total: 5 });
-  assert.ok((await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(78).center)')).includes('2/5'));
+  assert.ok((await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(75).upperleft)')).includes('2/5'));
   await browser.screenshot(`${evidence('IT-041')}/known-progress.png`);
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
-  await activate(browser, 'formation', 8);
-  await choices(browser, 'destinations');
-  assert.deepEqual(await snapshot(browser), fixture);
+  const after=await snapshot(browser);
+  await openDestinations(browser);
+  assert.deepEqual(await snapshot(browser), after);
   assert.deepEqual(rules.playerView(await snapshot(browser)).destinations.physical.landmarks, { traversed: 2, total: 5 });
 });
 
@@ -393,7 +392,7 @@ canonicalCase('IT-060', 'default asynchronous bust loading continues native text
   assert.deepEqual(await snapshot(browser), before);
   // Explicit interruption fixture, not a directed player journey.
   await browser.evaluate('$gameMap._interpreter.clear(); SceneManager.goto(Scene_Title); window.resumeDialogueImage();');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
+  await browser.waitFor("$gameMap.mapId() === 1 && ($gameMessage?._drylandChoiceFocus?.key === 'title') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
   assert.equal(await browser.evaluate('[60,61,62,63,64,65].every(id => !$gameScreen.picture(id))'), true);
   assert.equal(await browser.evaluate('$gameMessage.allText().includes("Gorvak")'), false);
   assert.equal(await browser.evaluate(`StorageManager.loadZip('file${savedFile}')`), saved);
@@ -485,23 +484,132 @@ canonicalCase('IT-070', 'native queries and configuration are observational and 
 
 // INVARIANT: each native tavern label retains its own identity and roster inspection is observational.
 // OWNING_LAYER: native integration; EXISTING_SUITE: formation.mjs.
-canonicalCase('IT-072', 'native tavern labels and mouse roster work at the larger desktop viewport', {timeout:60000}, async t => {
-  const browser=await tavern(t,{width:1920,height:1080});
-  const before=await snapshot(browser);
-  const labels=await browser.evaluate(`Array.from({length:8},(_,i)=>SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(30+i).center).replace(/\\x1bFS\\[\\d+\\]/g,''))`);
-  assert.deepEqual(labels,['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska']);
-  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/tavern-1920.png');
-  const point=await browser.evaluate(`(() => {const rect=Graphics._canvas.getBoundingClientRect();return {x:rect.x+1144*rect.width/1280,y:rect.y+56*rect.height/720};})()`);
-  await browser.call('Input.dispatchMouseEvent',{type:'mouseMoved',...point});
-  await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',...point,button:'left',buttons:1,clickCount:1});
-  await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',...point,button:'left',buttons:0,clickCount:1});
-  await choices(browser,'roster');
-  const roster=await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))');
-  assert.deepEqual(roster,labels.map(name=>`${name} — Presente`));
-  assert.deepEqual(await snapshot(browser),before);
-  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/roster-1920.png');
+canonicalCase('IT-072', 'wall board shows only complete deceased names and restores unchanged formation at both sizes', {timeout:120000}, async t => {
+  const browser=await tavern(t);
+  assert.equal(await browser.evaluate('$gameScreen.picture(42).name()'),'Dryland_WallBoard');
+  const names=['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska'];
+  for(const [width,height] of [[1280,720],[1920,1080]]) {
+    await browser.call('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:false});
+    for(const dead of [[],['H5','H2'],['H7','H6','H5','H4','H3','H2','H1']]) {
+      const before=rosterFixture(dead);await installFixture(browser,before);
+      const bounds=await browser.evaluate('SceneManager._scene._spriteset._pictureContainer.children.filter(s=>[42,10,11,12,13,14,15,16,17].includes(s._pictureId)&&s.picture()).map(s=>{const b=s.getBounds();return {id:s._pictureId,x:b.x,y:b.y,w:b.width,h:b.height}})');
+      const board=bounds.find(b=>b.id===42);
+      for(const hero of bounds.filter(b=>b.id!==42)) assert.ok(board.x+board.w<=hero.x||hero.x+hero.w<=board.x||board.y+board.h<=hero.y||hero.y+hero.h<=board.y);
+      const point=await browser.evaluate('(()=>{const r=Graphics._canvas.getBoundingClientRect();return {x:r.x+144*r.width/1280,y:r.y+144*r.height/720}})()');
+      await click(browser,point.x,point.y);await choices(browser,'roster');
+      const rows=await browser.evaluate(`Array.from({length:8},(_,i)=>72+i).filter(id=>$gameScreen.picture(id)).map(id=>({id,text:SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(id).center).replace(/\\x1b[A-Za-z]+\\[[^\\]]*\\]/g,'').trim(),x:$gameScreen.picture(id).x(),y:$gameScreen.picture(id).y()}))`);
+      assert.deepEqual(rows.map(row=>row.text),names.filter((_,i)=>dead.includes('H'+(i+1))));
+      for(const [index,row] of rows.entries()) {assert.equal(row.x,640);assert.equal(row.y,208+48*index);assert.ok(row.y+24<=592);}
+      const backing=await browser.evaluate('$gameScreen.getPictureTextData(71).center');
+      if(!dead.length)assert.equal(backing,'\\FS[28]Ninguém ficou pelo caminho');else assert.equal(backing,'');
+      assert.deepEqual(await snapshot(browser),before);
+      await browser.screenshot(`docs/qa/evidence/prototype-feedback-refinement/task-05/board-${width}-${dead.length}.png`);
+      await browser.press('Escape',27);await choices(browser,'formation');
+      assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),8-dead.length+1);
+      assert.equal(await browser.evaluate('[71,72,73,74,75,76,77,78,79,81].every(id=>!$gameScreen.picture(id))'),true);
+      assert.deepEqual(await snapshot(browser),before);
+      await activate(browser,'formation',8-dead.length+1);await choices(browser,'roster');
+      await activate(browser,'roster',0);await choices(browser,'formation');
+      assert.deepEqual(await snapshot(browser),before);
+    }
+  }
+  assert.deepEqual(browser.exceptions,[]);
+});
+
+
+canonicalCase('UT-078', 'preparation introduction is guarded per expedition and old saves normalize only an absent boolean', () => {
+  const initial=formation();
+  assert.equal(initial.preparationIntroductionCompleted,false);
+  const completed=act(initial,'COMPLETE_PREPARATION_INTRODUCTION');
+  assert.equal(completed.ok,true);
+  assert.equal(completed.state.preparationIntroductionCompleted,true);
+  assert.deepEqual(completed.effects,[]);
+  assert.equal(rules.dispatch(completed.state,{type:'COMPLETE_PREPARATION_INTRODUCTION',expectedSequence:initial.sequence}).error.code,'stale_action');
+  rejected(completed.state,'COMPLETE_PREPARATION_INTRODUCTION',{},'invalid_transition');
+  rejected(rules.createReadyState(),'COMPLETE_PREPARATION_INTRODUCTION',{},'invalid_transition');
+  let state=completed.state;
+  for(const heroId of ['H1','H2','H3']) state=act(state,'TOGGLE_HERO',{heroId}).state;
+  state=act(state,'SELECT_DESTINATION',{dungeonId:'physical'}).state;
+  assert.equal(state.preparationIntroductionCompleted,true);
+  state=act(state,'DEPART').state;
+  assert.equal(state.preparationIntroductionCompleted,false);
+  while(state.reading) state=act(state,'COMPLETE_PASSAGE',{passageId:state.reading.passageIds[state.reading.index]}).state;
+  state=act(state,'ENTER_DUNGEON').state;
+  while(state.reading) state=act(state,'COMPLETE_PASSAGE',{passageId:state.reading.passageIds[state.reading.index]}).state;
+  state=act(state,'REQUEST_RETREAT').state;
+  state=act(state,'CONFIRM_RETREAT').state;
+  assert.equal(state.phase,'formation');
+  assert.equal(state.preparationIntroductionCompleted,false);
+  const legacy=structuredClone(initial);delete legacy.preparationIntroductionCompleted;
+  assert.deepEqual(rules.normalizeState(legacy),initial);
+  assert.equal(Object.hasOwn(legacy,'preparationIntroductionCompleted'),false);
+  assert.deepEqual(rules.normalizeState(JSON.parse(JSON.stringify(completed.state))),completed.state);
+  for(const value of [null,0,1,'false',{},[]]) {
+    const bad={...initial,preparationIntroductionCompleted:value};
+    assert.equal(rules.validateState(rules.normalizeState(bad)).ok,false);
+  }
+});
+
+canonicalCase('IT-087', 'party first map introduction and native file restoration retain the exact preparation boundary', {timeout:150000}, async t => {
+  const browser=await tavern(t);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(8)'),false);
+  const prepared=selected();
+  await installFixture(browser,prepared);
+  const savedBefore=await browser.evaluate('DataManager.saveGame($gameSystem.savefileId()).then(()=>StorageManager.loadZip("file"+$gameSystem.savefileId()))');
+  await activate(browser,'formation',8);await pause(browser);
+  assert.equal((await snapshot(browser)).preparationIntroductionCompleted,false);
+  assert.equal((await browser.evaluate('$gameMessage.allText()')).replace(/\s+/g,' '),'Bem, agora que nossa equipe está completa, vamos traçar nossa rota!');
+  await browser.press('Enter',13);await choices(browser,'destinations');
+  assert.equal((await snapshot(browser)).preparationIntroductionCompleted,true);
+  assert.equal(await browser.evaluate('StorageManager.loadZip("file"+$gameSystem.savefileId())'),savedBefore,'Introduction adds no save');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(4)'),false);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(2)'),false);
+  await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-04/map-unselected.png');
+  const beforeSelect=await snapshot(browser);
+  const pointer=async(x,y)=>{
+    await click(browser,x,y);
+    await choices(browser,'destinations');
+  };
+  await pointer(400,554);
+  assert.deepEqual(await snapshot(browser),beforeSelect,'Locked destination has no action');
+  for(const [x,y] of [[162,266],[280,310],[414,374]]) {
+    await pointer(x,y);
+    assert.equal((await snapshot(browser)).selectedDungeonId,'physical','Location/name/container share the selection');
+    assert.equal((await snapshot(browser)).phase,'formation');
+  }
+  await browser.press('Tab',9);
+  await browser.waitFor('SceneManager._scene._spriteset._pictureContainer.children.filter(s=>[72,73,74,75,81,82].includes(s._pictureId)).every(s=>!s.visible)');
+  await browser.press('Tab',9);await choices(browser,'destinations');
+  await activate(browser,'destinations',0);await choices(browser,'destinations');
+  const afterSelect=await snapshot(browser);
+  assert.equal(afterSelect.phase,'formation');assert.equal(afterSelect.selectedDungeonId,'physical');
+  assert.equal(afterSelect.rngState,beforeSelect.rngState);assert.deepEqual(afterSelect.draftPartyIds,beforeSelect.draftPartyIds);
+  await browser.screenshot('docs/qa/evidence/prototype-feedback-refinement/task-04/map-selected.png');
   await browser.press('Escape',27);await choices(browser,'formation');
-  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),9);
-  assert.deepEqual(await snapshot(browser),before);
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),8);
+  await activate(browser,'formation',8);await choices(browser,'destinations');
+  assert.deepEqual(await snapshot(browser),afterSelect);
+  await browser.press('Escape',27);await choices(browser,'formation');
+  // The native provider loads the exact on-disk before-reading campaign.
+  await browser.evaluate('DataManager.loadGame($gameSystem.savefileId())');
+  assert.equal((await snapshot(browser)).preparationIntroductionCompleted,false);
+  await browser.evaluate('StorageManager.loadObject("file"+$gameSystem.savefileId()).then(contents=>{delete contents.system._dryland.campaign.preparationIntroductionCompleted;return StorageManager.saveObject("file"+$gameSystem.savefileId(),contents)}).then(()=>DataManager.loadGame($gameSystem.savefileId()))');
+  assert.equal((await snapshot(browser)).preparationIntroductionCompleted,false,'Native loading normalizes a legacy absent field');
+  await browser.evaluate('SceneManager.goto(Scene_Map)');await choices(browser,'formation');
+  await activate(browser,'formation',8);await pause(browser);await browser.press('Enter',13);await choices(browser,'destinations');
+  await browser.press('Escape',27);await choices(browser,'formation');
+  const savedAfter=await snapshot(browser);
+  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
+  await browser.evaluate('DataManager.loadGame($gameSystem.savefileId())');
+  assert.deepEqual(await snapshot(browser),savedAfter);
+  await browser.evaluate('SceneManager.goto(Scene_Map)');await choices(browser,'formation');
+  await activate(browser,'formation',8);await choices(browser,'destinations');
+  await activate(browser,'destinations',0);await choices(browser,'destinations');
+  await activate(browser,'destinations',4);
+  await browser.waitFor('$gameMap.mapId()===4&&$gameSystem._dryland.campaign.phase==="dungeon_intro"&&$gameTemp._drylandPersistence.status==="saved"');
+  await browser.waitFor('SceneManager._scene._messageWindow.pause||SceneManager._scene._choiceListWindow.isOpenAndActive()');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isOpenAndActive()'),false,'Departure releases the tavern interpreter before the expedition starts');
+  assert.equal(await browser.evaluate('SceneManager._scene._messageWindow.pause'),true,'The expedition introduction is the next player-facing surface');
+  assert.equal((await snapshot(browser)).preparationIntroductionCompleted,false);
   assert.deepEqual(browser.exceptions,[]);
 });

@@ -2,10 +2,13 @@
 // calling the historical runtime. Native tests install those validated inputs
 // at the engine's game-object boundary, then exercise actual windows/plugins.
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, catalog, choices, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, complete, failureWithCount, finishReading, rejectUnchanged, replayUntil } from '../helpers/campaign.mjs';
 import { assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
+import {continueSave} from '../helpers/discovery.mjs';
+import {click} from '../helpers/native-shared.mjs';
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
 const evidence = 'docs/qa/evidence/init-rpg-maker-mz/task-05/IT-012';
 canonicalCase('UT-021', 'one victim activation is irreversible and its original revision cannot kill again', () => {
@@ -123,8 +126,12 @@ canonicalCase('UT-066', 'death context is atomic, immutable, strictly validated 
   assert.deepEqual(accepted(terminal, 'NEW_CAMPAIGN').deathLocations, {});
 
 });
-canonicalCase('IT-012', 'native sacrifice warns before three, two or one candidates and activates exactly one death', { timeout: 240000 }, async t => {
+canonicalCase('IT-012', 'native sacrifice warns before three, two or one candidates and activates exactly one death', { timeout: 420000 }, async t => {
   const browser = await tavern(t);
+  const source=await readFile('planos/tasks/prototype-feedback-refinement/proposed-consequences.md','utf8');
+  const expected=Object.fromEntries([...source.matchAll(/^### ([AB][1-8]) — .+\r?\n\r?\n([^\r\n]+)/gm)].map(match=>[match[1],match[2]]));
+  const leads=Object.fromEntries(source.split(/\r?\n/).filter(line=>/^\| B[17], approach 2 \|/.test(line)).map(line=>{const fields=line.split('|').map(part=>part.trim());return [fields[1].slice(0,2)+'-2',fields[3]];}));
+  let restored=false;
   const scenarios = [3, 2, 1].map(count => ({ state: failureWithCount(count), index: count - 1 }));
   for (const heroId of heroes) {
     if (scenarios.some(({ state, index }) => state.partyIds[index] === heroId)) continue;
@@ -148,12 +155,22 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
       await browser.press('Enter', 13);
       await choices(browser, 'sacrifice');
       assert.deepEqual(await browser.evaluate('Array.from({length: SceneManager._scene._choiceListWindow.maxItems()}, (_, i) => $gameVariables.value(36 + i))'), state.partyIds);
-      assert.equal(await browser.evaluate(`Array.from({length:${count}}, (_, index) => $gameScreen.picture(10 + index)).every(picture => picture.x() > 100 && picture.x() < 1180 && picture.y() > 200 && picture.y() < 550)`), true, 'Each candidate illustration must be framed inside the native desktop stage.');
+      const targets=await browser.evaluate(`Array.from({length:${count}},(_,i)=>{const sprites=SceneManager._scene._spriteset._pictureContainer.children;const parent=sprites.find(s=>s._pictureId===50+i);const descendants=node=>node.children.flatMap(child=>[child,...descendants(child)]);const base=parent.getBounds(),portrait=descendants(parent).find(s=>s._pictureId===10+i).getBounds();return {base:{x:base.x,y:base.y,w:base.width,h:base.height},portrait:{x:portrait.x,y:portrait.y,w:portrait.width,h:portrait.height}}})`);
+      await browser.screenshot(`${evidence}/targets-${label}.png`);
+      for(const [i,target] of targets.entries()) {
+        const b=target.base,p=target.portrait;assert.ok(b.x>=80&&b.x+b.w<=1200&&b.y===160&&b.y+b.h<=600);
+        assert.ok(p.x>=b.x&&p.y>=b.y&&p.x+p.w<=b.x+b.w&&p.y+p.h<=b.y+b.h-64,JSON.stringify(target));
+        if(i)assert.ok(b.x-(targets[i-1].base.x+targets[i-1].base.w)>=24);
+      }
       await browser.press('Escape', 27);
       await choices(browser, 'sacrifice');
       assert.deepEqual(await snapshot(browser), state);
       await browser.screenshot(`${evidence}/candidates-${label}.png`);
-      await activate(browser, 'sacrifice', index);
+      if(!reduced) {
+        const b=targets[index].base,area=scenarios.findIndex(s=>s.state===state)%3;
+        const point=await browser.evaluate(`(()=>{const r=Graphics._canvas.getBoundingClientRect();return {x:r.x+${area===2?b.x+2:b.x+b.w/2}*r.width/1280,y:r.y+${area===0?b.y+120:area===1?b.y+b.h-24:b.y+2}*r.height/720}})()`);
+        await click(browser,point.x,point.y);
+      } else await activate(browser, 'sacrifice', index);
       await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === ${JSON.stringify(catalog.heroes[victim].name)} && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0 && $gameScreen.picture(60)?.name() === 'Dryland_${victim}'`);
       const after = await snapshot(browser);
       assert.deepEqual(after.deadHeroIds, [...state.deadHeroIds, victim]);
@@ -161,6 +178,17 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
       assert.deepEqual(after.deathLocations[victim], { routeId: state.dungeonId, encounterId: encounter, encounterPosition: state.position, approachId: state.pendingOutcome.approachId });
       assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${encounter}`);
       assert.equal(await browser.evaluate('$gameScreen.picture(50) == null'), true);
+      const saved=await browser.evaluate('StorageManager.loadObject("file"+$gameSystem.savefileId()).then(contents=>contents.system._dryland.campaign)');
+      assert.equal(saved.pendingOutcome.victimId,victim);assert.deepEqual(saved.deadHeroIds,after.deadHeroIds);
+      if(!restored) {
+        assert.notEqual(index,0,'The resumed sacrifice exercises a non-first candidate');
+        const bytes=await browser.evaluate('StorageManager.loadZip("file"+$gameSystem.savefileId())');
+        await continueSave(browser);
+        await browser.waitFor(`$gameMessage.speakerName()===${JSON.stringify(catalog.heroes[victim].name)}&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
+        assert.deepEqual(await snapshot(browser),after);
+        assert.equal(await browser.evaluate('StorageManager.loadZip("file"+$gameSystem.savefileId())'),bytes,'Restoring the death boundary writes no second death');
+        restored=true;
+      }
       await browser.screenshot(`${evidence}/farewell-${label}.png`);
       await assertPortraitFraming(browser, [60], `farewell.${victim}`);
       await browser.press('Enter', 13);
@@ -169,6 +197,18 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
       assert.equal(await browser.evaluate('$gameMessage.speakerName()'), '');
       assert.equal((await snapshot(browser)).deadHeroIds.length, state.deadHeroIds.length + 1);
       await browser.screenshot(`${evidence}/context-${label}.png`);
+      const actual=[];
+      while((await snapshot(browser)).phase==='death_result') {
+        await pause(browser);
+        actual.push(await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameMessage.allText())'));
+        await browser.press('Enter',13);
+        await browser.waitFor('$gameSystem._dryland.campaign.phase!=="death_result"||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)');
+      }
+      const full=(leads[state.pendingOutcome.approachId]?leads[state.pendingOutcome.approachId]+' ':'')+expected[encounter];
+      assert.equal(actual.join(' ').replace(/\x1bWrapBreak\[0\]/g,' ').replace(/\s+/g,' ').trim(),full.replaceAll('{nome}',catalog.heroes[victim].name));
+      const finished=await snapshot(browser);
+      assert.deepEqual(finished.deadHeroIds,after.deadHeroIds);
+      assert.equal(finished.history.filter(action=>action.type==='SELECT_VICTIM').length,state.history.filter(action=>action.type==='SELECT_VICTIM').length+1);
     }
   }
 });

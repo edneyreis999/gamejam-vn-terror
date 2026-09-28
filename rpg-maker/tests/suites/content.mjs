@@ -18,6 +18,22 @@ const original = JSON.parse(await readFile(path.join(project, 'data/CommonEvents
 const command = (code, parameters, indent = 0) => ({ code, indent, parameters });
 const end = () => command(0, []);
 
+canonicalCase('UT-076','the prologue preserves all nine approved blocks and six semantic reading boundaries',async()=>{
+  const source=await readFile('planos/tasks/prototype-feedback-refinement/spec.md','utf8');
+  const expected=[...source.split('### RQ-003 — Welcoming prologue')[1].split('### RQ-004')[0].matchAll(/^\s*> (.+)$/gm)].map(match=>match[1].trim());
+  assert.equal(expected.length,9,'The editorial oracle contains all approved blocks');
+  const map=JSON.parse(await readFile(path.join(project,'data/Map002.json'),'utf8'));
+  const blocks=[],groups=[];let current=[],inGroup=0;
+  for(const item of map.events[1].pages[0].list){
+    if(item.code===101){if(current.length)blocks.push(current.join(' '));current=[];inGroup++;}
+    if(item.code===401)current.push(item.parameters[0].trim());
+    if(item.code===357&&item.parameters[0]==='Dryland_EventBridge'&&item.parameters[1]==='ReadingComplete'){groups.push(inGroup);inGroup=0;}
+  }
+  if(current.length)blocks.push(current.join(' '));
+  assert.deepEqual(blocks,expected);
+  assert.deepEqual(groups,[2,2,2,1,1,1],'Completion follows both narrated blocks, then each original direct-dialogue passage');
+});
+
 canonicalCase('UT-057', 'shared lover warnings retain mechanical reading identity independently of authored wording', () => {
   const id='lover.physical.warning';
   for(const scene of ['lover.physical.first','lover.physical.second'])assert.ok(catalog.scenes[scene].passageIds.includes(id));
@@ -25,6 +41,53 @@ canonicalCase('UT-057', 'shared lover warnings retain mechanical reading identit
   assert.equal(rules.validateState(read).ok,true);assert.equal(read.seenPassageIds.filter(value=>value===id).length,1);
 });
 
+canonicalCase('UT-077','all eight approved hero speech categories retain their complete native words',async()=>{
+  const source=await readFile('docs/narrativa/herois/Falas-de-cada-herói.md','utf8');
+  const council=JSON.parse(await readFile(path.join(project,'data/Map023.json'),'utf8')).events[1].pages[0].list;
+  const normalize=text=>text.replace(/\s+/g,' ').trim();
+  const prose=list=>normalize(list.filter(item=>item.code===401).map(item=>item.parameters[0]).join(' '));
+  const spans=source.split(/^H[1-8] — /m).slice(1);assert.equal(spans.length,8);
+  for(const [index,span] of spans.entries()) {
+    const categories={};let current;
+    for(const line of span.split(/\r?\n/).map(line=>line.trim())) {
+      if(/^(Apresentação|Ao ser selecionad[oa]|Se o grupo estiver cheio|Despedida|Opinião)$/.test(line)){current=line.startsWith('Ao ser')?'Seleção':line;categories[current]=[];}
+      else if(current&&line.includes(': '))categories[current].push(line.slice(line.indexOf(': ')+2));
+    }
+    const list=JSON.parse(await readFile(path.join(project,`data/Map${String(37+index).padStart(3,'0')}.json`),'utf8')).events[1].pages[0].list;
+    for(const [offset,category] of [[1,'Apresentação'],[2,'Seleção'],[3,'Se o grupo estiver cheio']]) {
+      const start=list.findIndex(item=>item.code===357&&item.parameters[1]==='ObservationBegin'&&Number(item.parameters[3].unit)===82+index*4+offset);
+      const end=list.findIndex((item,i)=>i>start&&item.code===357&&item.parameters[1]==='ObservationComplete');
+      assert.ok(start>=0&&end>start);assert.equal(prose(list.slice(start,end)),normalize(categories[category].join(' ')),`H${index+1} ${category}`);
+    }
+    const start=council.findIndex(item=>item.code===357&&item.parameters[1]==='Query'&&item.parameters[3].id===`opinion.H${index+1}`);
+    const end=council.findIndex((item,i)=>i>start&&item.code===357&&item.parameters[1]==='ReadingComplete');
+    assert.equal(prose(council.slice(start,end)),normalize(categories.Opinião.join(' ')),`H${index+1} opinion`);
+    assert.equal(prose(original[282+index].list),normalize(categories.Despedida.join(' ')),`H${index+1} farewell`);
+  }
+});
+
+
+canonicalCase('UT-079','all sixteen fatal consequences name the committed victim and both pre-selection failures remain neutral',async()=>{
+  const source=await readFile('planos/tasks/prototype-feedback-refinement/proposed-consequences.md','utf8');
+  const expected=[...source.matchAll(/^### ([AB][1-8]) — .+\r?\n\r?\n([^\r\n]+)/gm)].map(match=>({id:match[1],text:match[2]}));
+  const splits=source.split(/\r?\n/).filter(line=>/^\| B[17], approach 2 \|/.test(line)).map(line=>line.split('|').map(part=>part.trim()));
+  assert.equal(expected.length,16);assert.equal(splits.length,2);
+  const prose=list=>list.filter(row=>row.code===401).map(row=>row.parameters[0]).join(' ').replace(/\s+/g,' ').trim().replaceAll('\\V[152]','{nome}');
+  for(const [index,item] of expected.entries()) {
+    const list=original[266+index].list;
+    const split=splits.find(fields=>fields[1].startsWith(item.id));
+    assert.equal(prose(list),(split?split[3]+' ':'')+item.text,item.id);
+    assert.ok(list.some(row=>row.code===357&&row.parameters[1]==='Query'&&row.parameters[3].kind==='victimName'&&row.parameters[3].variable==='152'));
+    if(split)assert.ok(list.some(row=>row.code===111&&row.parameters[1]===`$gameVariables.value(159) === '${item.id}-2'`));
+  }
+  for(const fields of splits) {
+    const id=fields[1].slice(0,2),mapId=id==='B1'?15:21;
+    const list=JSON.parse(await readFile(path.join(project,`data/Map${String(mapId).padStart(3,'0')}.json`),'utf8')).events[1].pages[0].list;
+    const start=list.findIndex(row=>row.code===357&&row.parameters[1]==='Query'&&row.parameters[3].id===`result.${id}-2.failure.01`);
+    const end=list.findIndex((row,index)=>index>start&&row.code===357&&row.parameters[1]==='ReadingComplete');
+    assert.equal(prose(list.slice(start,end)),fields[2]);
+  }
+});
 
 canonicalCase('IT-036', 'manifest rejects empty, missing, duplicate or mismatched registrations', () => {
   const ids = Object.values(manifest.tasks).flat();
@@ -34,11 +97,8 @@ canonicalCase('IT-036', 'manifest rejects empty, missing, duplicate or mismatche
     [manifest, [...ids.slice(1), 'UT-999']]]) assert.throws(() => assertRegistrations(contract, registrations));
 });
 
-async function firstPrologue(browser, label = 'Jogar') {
-  await browser.waitFor(`window.$gameMessage && $gameMessage.choices().includes(${JSON.stringify(label)}) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()`);
-  const index = await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(label)})`);
-  for (let step = 0; step < index; step++) await browser.press('ArrowDown', 40);
-  await browser.press('Enter', 13);
+async function firstPrologue(browser) {
+  await activate(browser,'title',0);
   await selectFile(browser,1);
   await browser.waitFor("$gameMap.mapId() === 2 && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0");
 }
@@ -47,24 +107,24 @@ canonicalCase('IT-004', 'The native prologue runs its authored passage and commi
   const browser = await openChrome(t);
   await firstPrologue(browser);
   const before = await browser.evaluate('({text:$gameMessage.allText(),state:$gameSystem._dryland.campaign})');
-  assert.match(before.text, /Meu nome é Rheed/);
+  assert.match(before.text, /Boa noite\. Pode se acomodar\. Eu sou Rheed/);
   await browser.screenshot('docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/older-rheed.png');
   await assertHidePreservesPortraits(browser,[60],'docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/older-rheed-hide.png');
   assert.equal(before.state.sequence, 1);
   assert.deepEqual(before.state.seenPassageIds, []);
   assert.deepEqual(await browser.evaluate('({map:$gameMap._interpreter._mapId,event:$gameMap._interpreter._eventId,child:Boolean($gameMap._interpreter._childInterpreter)})'), {map:2,event:1,child:false});
-  for (const marker of prologueMarkers.slice(0, 3)) {
+  for (const marker of prologueMarkers.slice(0, 2)) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign.seenPassageIds'), [], 'Partial narrator passage stays unread');
     await browser.press('Enter', 13);
   }
-  await browser.waitFor("$gameMessage.allText().includes('Os papéis eram de Irati') && SceneManager._scene._messageWindow.pause");
+  await browser.waitFor("$gameMessage.allText().includes('Irati era a mãe dele.') && SceneManager._scene._messageWindow.pause");
   const after = await browser.evaluate('$gameSystem._dryland.campaign');
   assert.equal(after.sequence, 2);
   assert.deepEqual(after.seenPassageIds, ['prologue.rheed.01']);
   assert.equal(after.reading.index, 1);
   assert.equal(after.history.filter(action => action.passageId === 'prologue.rheed.01').length, 1);
-  for (const marker of prologueMarkers.slice(3)) {
+  for (const marker of prologueMarkers.slice(2)) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
     const dialogue = marker.startsWith('Você') || marker.startsWith('Minha família') || marker.startsWith('Os detalhes');
     const expectedBust = dialogue ? 'Reed-novo' : 'Reed final';
@@ -101,7 +161,7 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   await startServer(t, directory);
   const browser = await openChrome(t);
   await firstPrologue(browser);
-  assert.match(await browser.evaluate('$gameMessage.allText()'), /Meu nome é Rheed/);
+  assert.match(await browser.evaluate('$gameMessage.allText()'), /Boa noite\. Pode se acomodar/);
   const pluginFile = path.join(project, 'js/plugins/Dryland_EventBridge.js');
   const pluginHash = hash(await readFile(pluginFile));
   const mapFile = path.join(directory, 'data/Map002.json');
@@ -109,7 +169,7 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   edited.events[1].pages[0].list.find(c => c.code === 401).parameters[0] = 'Texto salvo no evento nativo para verificar a releitura.';
   await writeFile(mapFile, JSON.stringify(edited));
   await browser.call('Page.reload', { ignoreCache: true });
-  await firstPrologue(browser, 'Novo jogo');
+  await firstPrologue(browser);
   assert.equal(await browser.evaluate('$gameMessage.allText()'), 'Texto salvo no evento nativo para verificar a releitura.\ncontragosto de Irati. ');
   assert.equal(hash(await readFile(pluginFile)), pluginHash);
   await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-02/IT-035/edited-native-text.png');
@@ -164,7 +224,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  // without introducing a player save command.
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("$gameMap.mapId()===1&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  assert.equal(await browser.evaluate('$gameMessage.allText()'),'Caixa técnica inserida — mesma autoria.');
  await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===39.6');
@@ -172,7 +232,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),before);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("$gameMap.mapId()===1&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===80');
  assert.equal(await browser.evaluate('$gameMessage.speakerName()'),'Elowen');
@@ -247,7 +307,7 @@ canonicalCase('IT-069','artist parameters and additional native effects survive 
  assert.deepEqual(await snapshot(),before,'Options retains native picture state');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');await browser.reopen();
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&($gameMessage?._drylandChoiceFocus?.key === 'title')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);await browser.waitFor(settled);
  assert.deepEqual(await snapshot(),before,'Native Continue retains saved picture state');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);
