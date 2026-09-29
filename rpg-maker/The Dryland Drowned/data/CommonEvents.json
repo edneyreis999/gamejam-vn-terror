@@ -1650,9 +1650,8 @@
                     [
                         "\\V[171]<Bind Picture: 16><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>",
                         "\\V[172]<Bind Picture: 17><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>",
-                        "$[choice.tavern.destinations]<Bind Picture: 41>",
-                        "$[choice.tavern.cast]<Bind Picture: 42>",
-                        "$[choice.tavern.depart]<Bind Picture: 43><Enable Switch: 29>"
+                        "$[choice.tavern.depart]<Bind Picture: 43><Enable Switch: 29>",
+                        "☰<Bind Picture: 42>"
                     ],
                     -1,
                     -1,
@@ -2047,60 +2046,6 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "$[choice.tavern.destinations]<Bind Picture: 41>"
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 1,
-                "parameters": [
-                    349
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 1,
-                "parameters": [
-                    39
-                ]
-            },
-            {
-                "code": 0,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 402,
-                "indent": 0,
-                "parameters": [
-                    3,
-                    "$[choice.tavern.cast]<Bind Picture: 42>"
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 1,
-                "parameters": [
-                    349
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 1,
-                "parameters": [
-                    117
-                ]
-            },
-            {
-                "code": 0,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 402,
-                "indent": 0,
-                "parameters": [
-                    4,
                     "$[choice.tavern.depart]<Bind Picture: 43><Enable Switch: 29>"
                 ]
             },
@@ -2112,30 +2057,17 @@
                 ]
             },
             {
-                "code": 108,
+                "code": 117,
                 "indent": 1,
                 "parameters": [
-                    "Solicita iniciar a expedição com o grupo e a rota selecionados. As regras"
+                    354
                 ]
             },
             {
-                "code": 408,
+                "code": 117,
                 "indent": 1,
                 "parameters": [
-                    "validam a ação; a variável 24 recebe “ok” ou o motivo da recusa."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_EventBridge",
-                    "Action",
-                    "Action",
-                    {
-                        "action": "DEPART",
-                        "value": ""
-                    }
+                    39
                 ]
             },
             {
@@ -2143,63 +2075,7 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "$gameVariables.value(24) === 'ok'"
-                ]
-            },
-            {
-                "code": 108,
-                "indent": 2,
-                "parameters": [
-                    "Valida o ponto de salvamento: partida. Se necessário, solicita o autosave ao"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 2,
-                "parameters": [
-                    "SaveCore no arquivo atual e espera a gravação; evita repetir o mesmo ponto já"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 2,
-                "parameters": [
-                    "salvo."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "Dryland_EventBridge",
-                    "Checkpoint",
-                    "Checkpoint",
-                    {
-                        "reason": "departure"
-                    }
-                ]
-            },
-            {
-                "code": 122,
-                "indent": 2,
-                "parameters": [
-                    46,
-                    46,
-                    0,
-                    4,
-                    "\"\""
-                ]
-            },
-            {
-                "code": 201,
-                "indent": 2,
-                "parameters": [
-                    0,
-                    4,
-                    10,
-                    7,
-                    2,
-                    0
+                    "$gameMap.mapId() !== 3"
                 ]
             },
             {
@@ -2209,6 +2085,24 @@
             },
             {
                 "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 0,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    3,
+                    "☰<Bind Picture: 42>"
+                ]
+            },
+            {
+                "code": 351,
                 "indent": 1,
                 "parameters": []
             },
@@ -4146,6 +4040,34 @@
                 ]
             },
             {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Seguir só habilita com a equipe completa: selecionados = necessários."
+                ]
+            },
+            {
+                "code": 355,
+                "indent": 0,
+                "parameters": [
+                    "const ready = $gameVariables.value(150) > 0 && $gameVariables.value(150) === $gameVariables.value(151);"
+                ]
+            },
+            {
+                "code": 655,
+                "indent": 0,
+                "parameters": [
+                    "$gameVariables.setValue(25, ready);"
+                ]
+            },
+            {
+                "code": 655,
+                "indent": 0,
+                "parameters": [
+                    "$gameSwitches.setValue(29, ready);"
+                ]
+            },
+            {
                 "code": 357,
                 "indent": 0,
                 "parameters": [
@@ -4623,57 +4545,14 @@
                 "code": 231,
                 "indent": 0,
                 "parameters": [
-                    41,
-                    "Dryland_Button",
-                    1,
-                    0,
-                    928,
-                    56,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 108,
-                "indent": 0,
-                "parameters": [
-                    "Identifica a imagem 41 como interface: “Taverna — Palco — 41”. Ela acompanha o"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 0,
-                "parameters": [
-                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "Dryland_Presentation",
-                    "BindInterfacePicture",
-                    "BindInterfacePicture",
-                    {
-                        "picture": "41",
-                        "name": "Taverna — Palco — 41"
-                    }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
                     42,
                     "Dryland_Button",
                     1,
                     0,
-                    1144,
-                    56,
-                    100,
-                    100,
+                    1206,
+                    36,
+                    60,
+                    60,
                     255,
                     0
                 ]
@@ -4745,49 +4624,6 @@
                     {
                         "picture": "43",
                         "name": "Taverna — Palco — 43"
-                    }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    44,
-                    "Dryland_DestinationLabel",
-                    1,
-                    0,
-                    216,
-                    56,
-                    100,
-                    100,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 108,
-                "indent": 0,
-                "parameters": [
-                    "Identifica a imagem 44 como interface: “Taverna — Palco — 44”. Ela acompanha o"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 0,
-                "parameters": [
-                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "Dryland_Presentation",
-                    "BindInterfacePicture",
-                    "BindInterfacePicture",
-                    {
-                        "picture": "44",
-                        "name": "Taverna — Palco — 44"
                     }
                 ]
             },
@@ -4922,7 +4758,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[165] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[165] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -4949,7 +4785,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[165]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[165]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5131,7 +4967,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[166] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[166] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5158,7 +4994,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[166]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[166]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5340,7 +5176,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[167] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[167] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5367,7 +5203,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[167]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[167]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5549,7 +5385,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[168] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[168] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5576,7 +5412,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[168]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[168]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5758,7 +5594,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[169] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[169] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5785,7 +5621,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[169]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[169]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5967,7 +5803,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[170] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[170] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5994,7 +5830,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[170]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[170]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6176,7 +6012,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[171] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[171] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6203,7 +6039,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[171]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[171]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6385,7 +6221,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[172] ✓\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[172] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6412,7 +6248,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[172]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[172]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6485,7 +6321,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151] · Auto\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151] · Auto\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6512,7 +6348,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6533,49 +6369,13 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[\"41\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]$[choice.tavern.destinations]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[\"41\"]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
                         "PictureIDs:arraynum": "[\"42\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]$[choice.tavern.cast]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[40]☰\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6611,7 +6411,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]$[choice.tavern.depart]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[22]$[choice.tavern.depart]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6632,220 +6432,6 @@
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
                 ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"44\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]$[ui.tavern.no_destination]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(30) === 'physical'"
-                ]
-            },
-            {
-                "code": 108,
-                "indent": 1,
-                "parameters": [
-                    "Consulta o nome público da rota. Identidade: physical. Grava em variável 185;"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "preserva os fatos da campanha."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_EventBridge",
-                    "Query",
-                    "Query",
-                    {
-                        "kind": "routeName",
-                        "id": "physical",
-                        "variable": "185",
-                        "switch": "0"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"44\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[185]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(30) === 'supernatural'"
-                ]
-            },
-            {
-                "code": 108,
-                "indent": 1,
-                "parameters": [
-                    "Consulta o nome público da rota. Identidade: supernatural. Grava em variável"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "185; preserva os fatos da campanha."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_EventBridge",
-                    "Query",
-                    "Query",
-                    {
-                        "kind": "routeName",
-                        "id": "supernatural",
-                        "variable": "185",
-                        "switch": "0"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"44\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[185]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(30) === 'final'"
-                ]
-            },
-            {
-                "code": 108,
-                "indent": 1,
-                "parameters": [
-                    "Consulta o nome público da rota. Identidade: final. Grava em variável 185;"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "preserva os fatos da campanha."
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_EventBridge",
-                    "Query",
-                    "Query",
-                    {
-                        "kind": "routeName",
-                        "id": "final",
-                        "variable": "185",
-                        "switch": "0"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"44\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]\\\\V[185]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
             },
             {
                 "code": 111,
@@ -7225,7 +6811,7 @@
                     {
                         "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"\\\\FS[28]$[ui.dest.title]\"",
+                        "upperleft:json": "\"\\\\HexColor<#ffffff>\\\\FS[28]$[ui.dest.title]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7333,7 +6919,7 @@
                     {
                         "PictureIDs:arraynum": "[\"75\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[21]\\\\V[173]<br><br>\\\\FS[19]$[dest.physical.desc]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[21]\\\\V[173]<br><br>\\\\FS[19]$[dest.physical.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7484,7 +7070,7 @@
                     {
                         "PictureIDs:arraynum": "[\"76\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[21]\\\\V[174]<br><br>\\\\FS[19]$[dest.supernatural.desc]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[21]\\\\V[174]<br><br>\\\\FS[19]$[dest.supernatural.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7635,7 +7221,7 @@
                     {
                         "PictureIDs:arraynum": "[\"77\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[21]\\\\V[175]<br><br>\\\\FS[19]$[dest.final.desc]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[21]\\\\V[175]<br><br>\\\\FS[19]$[dest.final.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7747,7 +7333,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]$[choice.dest.close]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[22]$[choice.dest.close]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7981,7 +7567,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]\\\\V[179]/\\\\V[182] · \\\\V[176]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]\\\\V[179]/\\\\V[182] · \\\\V[176]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8229,7 +7815,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]\\\\V[180]/\\\\V[183] · \\\\V[177]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]\\\\V[180]/\\\\V[183] · \\\\V[177]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8477,7 +8063,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]\\\\V[181]/\\\\V[184] · \\\\V[178]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]\\\\V[181]/\\\\V[184] · \\\\V[178]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8631,6 +8217,144 @@
                 ]
             },
             {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 2,
+                "parameters": [
+                    349
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 2,
+                "parameters": [
+                    "Renova o contexto capturado: a escolha do destino acabou de mudar o estado da campanha."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "CaptureContext",
+                    "CaptureContext",
+                    {}
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 2,
+                "parameters": [
+                    "Solicita iniciar a expedição com o grupo e a rota selecionados. As regras"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 2,
+                "parameters": [
+                    "validam a ação; a variável 24 recebe “ok” ou o motivo da recusa."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Action",
+                    "Action",
+                    {
+                        "action": "DEPART",
+                        "value": ""
+                    }
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 2,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 3,
+                "parameters": [
+                    "Valida o ponto de salvamento: partida. Se necessário, solicita o autosave ao"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 3,
+                "parameters": [
+                    "SaveCore no arquivo atual e espera a gravação; evita repetir o mesmo ponto já"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 3,
+                "parameters": [
+                    "salvo."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 3,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Checkpoint",
+                    "Checkpoint",
+                    {
+                        "reason": "departure"
+                    }
+                ]
+            },
+            {
+                "code": 122,
+                "indent": 3,
+                "parameters": [
+                    46,
+                    46,
+                    0,
+                    4,
+                    "\"\""
+                ]
+            },
+            {
+                "code": 201,
+                "indent": 3,
+                "parameters": [
+                    0,
+                    4,
+                    10,
+                    7,
+                    2,
+                    0
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 3,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
                 "code": 0,
                 "indent": 1,
                 "parameters": []
@@ -8671,6 +8395,144 @@
                 ]
             },
             {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 2,
+                "parameters": [
+                    349
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 2,
+                "parameters": [
+                    "Renova o contexto capturado: a escolha do destino acabou de mudar o estado da campanha."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "CaptureContext",
+                    "CaptureContext",
+                    {}
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 2,
+                "parameters": [
+                    "Solicita iniciar a expedição com o grupo e a rota selecionados. As regras"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 2,
+                "parameters": [
+                    "validam a ação; a variável 24 recebe “ok” ou o motivo da recusa."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Action",
+                    "Action",
+                    {
+                        "action": "DEPART",
+                        "value": ""
+                    }
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 2,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 3,
+                "parameters": [
+                    "Valida o ponto de salvamento: partida. Se necessário, solicita o autosave ao"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 3,
+                "parameters": [
+                    "SaveCore no arquivo atual e espera a gravação; evita repetir o mesmo ponto já"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 3,
+                "parameters": [
+                    "salvo."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 3,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Checkpoint",
+                    "Checkpoint",
+                    {
+                        "reason": "departure"
+                    }
+                ]
+            },
+            {
+                "code": 122,
+                "indent": 3,
+                "parameters": [
+                    46,
+                    46,
+                    0,
+                    4,
+                    "\"\""
+                ]
+            },
+            {
+                "code": 201,
+                "indent": 3,
+                "parameters": [
+                    0,
+                    4,
+                    10,
+                    7,
+                    2,
+                    0
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 3,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
                 "code": 0,
                 "indent": 1,
                 "parameters": []
@@ -8709,6 +8571,144 @@
                         "value": "final"
                     }
                 ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 2,
+                "parameters": [
+                    349
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 2,
+                "parameters": [
+                    "Renova o contexto capturado: a escolha do destino acabou de mudar o estado da campanha."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "CaptureContext",
+                    "CaptureContext",
+                    {}
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 2,
+                "parameters": [
+                    "Solicita iniciar a expedição com o grupo e a rota selecionados. As regras"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 2,
+                "parameters": [
+                    "validam a ação; a variável 24 recebe “ok” ou o motivo da recusa."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Action",
+                    "Action",
+                    {
+                        "action": "DEPART",
+                        "value": ""
+                    }
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 2,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 3,
+                "parameters": [
+                    "Valida o ponto de salvamento: partida. Se necessário, solicita o autosave ao"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 3,
+                "parameters": [
+                    "SaveCore no arquivo atual e espera a gravação; evita repetir o mesmo ponto já"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 3,
+                "parameters": [
+                    "salvo."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 3,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Checkpoint",
+                    "Checkpoint",
+                    {
+                        "reason": "departure"
+                    }
+                ]
+            },
+            {
+                "code": 122,
+                "indent": 3,
+                "parameters": [
+                    46,
+                    46,
+                    0,
+                    4,
+                    "\"\""
+                ]
+            },
+            {
+                "code": 201,
+                "indent": 3,
+                "parameters": [
+                    0,
+                    4,
+                    10,
+                    7,
+                    2,
+                    0
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 3,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 0,
@@ -10599,7 +10599,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[choice.sacrifice] \\\\V[189]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.sacrifice] \\\\V[189]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -10648,7 +10648,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[choice.sacrifice] \\\\V[190]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.sacrifice] \\\\V[190]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -10697,7 +10697,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[choice.sacrifice] \\\\V[191]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.sacrifice] \\\\V[191]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -11190,7 +11190,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]$[ui.sacrifice.title]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[26]$[ui.sacrifice.title]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -17966,7 +17966,7 @@
                     {
                         "PictureIDs:arraynum": "[\"30\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[165]<br>\\\\FS[20]\\\\V[192]<br>\\\\FS[18]\\\\V[200]<br>\\\\V[208]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[165]<br>\\\\FS[20]\\\\V[192]<br>\\\\FS[18]\\\\V[200]<br>\\\\V[208]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -18397,7 +18397,7 @@
                     {
                         "PictureIDs:arraynum": "[\"31\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[166]<br>\\\\FS[20]\\\\V[193]<br>\\\\FS[18]\\\\V[201]<br>\\\\V[209]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[166]<br>\\\\FS[20]\\\\V[193]<br>\\\\FS[18]\\\\V[201]<br>\\\\V[209]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -18828,7 +18828,7 @@
                     {
                         "PictureIDs:arraynum": "[\"32\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[167]<br>\\\\FS[20]\\\\V[194]<br>\\\\FS[18]\\\\V[202]<br>\\\\V[210]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[167]<br>\\\\FS[20]\\\\V[194]<br>\\\\FS[18]\\\\V[202]<br>\\\\V[210]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -19259,7 +19259,7 @@
                     {
                         "PictureIDs:arraynum": "[\"33\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[168]<br>\\\\FS[20]\\\\V[195]<br>\\\\FS[18]\\\\V[203]<br>\\\\V[211]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[168]<br>\\\\FS[20]\\\\V[195]<br>\\\\FS[18]\\\\V[203]<br>\\\\V[211]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -19690,7 +19690,7 @@
                     {
                         "PictureIDs:arraynum": "[\"34\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[169]<br>\\\\FS[20]\\\\V[196]<br>\\\\FS[18]\\\\V[204]<br>\\\\V[212]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[169]<br>\\\\FS[20]\\\\V[196]<br>\\\\FS[18]\\\\V[204]<br>\\\\V[212]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -20121,7 +20121,7 @@
                     {
                         "PictureIDs:arraynum": "[\"35\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[170]<br>\\\\FS[20]\\\\V[197]<br>\\\\FS[18]\\\\V[205]<br>\\\\V[213]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[170]<br>\\\\FS[20]\\\\V[197]<br>\\\\FS[18]\\\\V[205]<br>\\\\V[213]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -20552,7 +20552,7 @@
                     {
                         "PictureIDs:arraynum": "[\"36\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[171]<br>\\\\FS[20]\\\\V[198]<br>\\\\FS[18]\\\\V[206]<br>\\\\V[214]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[171]<br>\\\\FS[20]\\\\V[198]<br>\\\\FS[18]\\\\V[206]<br>\\\\V[214]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -20983,7 +20983,7 @@
                     {
                         "PictureIDs:arraynum": "[\"37\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[172]<br>\\\\FS[20]\\\\V[199]<br>\\\\FS[18]\\\\V[207]<br>\\\\V[215]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[172]<br>\\\\FS[20]\\\\V[199]<br>\\\\FS[18]\\\\V[207]<br>\\\\V[215]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -23914,7 +23914,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[16]$[ui.credits.skip]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[16]$[ui.credits.skip]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -50041,7 +50041,7 @@
                     {
                         "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\FS[28]$[ui.cast.title]<br><br>\\\\FS[22]\\\\V[157]<br>\\\\V[158]<br>\\\\V[159]<br>\\\\V[160]<br>\\\\V[161]<br>\\\\V[162]<br>\\\\V[163]<br>\\\\V[164]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[28]$[ui.cast.title]<br><br>\\\\FS[22]\\\\V[157]<br>\\\\V[158]<br>\\\\V[159]<br>\\\\V[160]<br>\\\\V[161]<br>\\\\V[162]<br>\\\\V[163]<br>\\\\V[164]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -63036,7 +63036,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]$[ui.encounter.label] \\\\V[187]/\\\\V[188] — \\\\V[186]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[22]$[ui.encounter.label] \\\\V[187]/\\\\V[188] — \\\\V[186]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -63108,7 +63108,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[choice.encounter.reread]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.encounter.reread]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -63202,7 +63202,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]$[choice.encounter.retreat]\"",
+                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.encounter.retreat]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -67482,6 +67482,125 @@
                     "ReadingComplete",
                     {}
                 ]
+            },
+            {
+                "code": 0,
+                "indent": 0,
+                "parameters": []
+            }
+        ]
+    },
+    {
+        "id": 354,
+        "name": "Taverna — Introdução de Ivaí",
+        "trigger": 0,
+        "switchId": 1,
+        "list": [
+            {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Fala do Ivaí ao preparar a rota; só na primeira vez da campanha. A leitura marcada"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 0,
+                "parameters": [
+                    "como lida pelo ObservationComplete fica no save; a switch 48 recebe “já lida”."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "ObservationBegin",
+                    "ObservationBegin",
+                    {
+                        "unit": "354",
+                        "switch": "48"
+                    }
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "!$gameSwitches.value(48)"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Basic_EnterBust",
+                    "Basic_EnterBust",
+                    {
+                        "PictureID:eval": "63",
+                        "PictureName:str": "Dryland_ivai",
+                        "Origin:str": "Bust",
+                        "Position:num": "8",
+                        "StartOffsetX:eval": "0",
+                        "StartOffsetY:eval": "0",
+                        "EasingType:str": "OutSine",
+                        "HorzMirror:str": "None",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
+                "code": 101,
+                "indent": 1,
+                "parameters": [
+                    "",
+                    0,
+                    0,
+                    2,
+                    "Ivaí"
+                ]
+            },
+            {
+                "code": 401,
+                "indent": 1,
+                "parameters": [
+                    "$[tavern.prep.ivai]"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Basic_ExitBusts",
+                    "Basic_ExitBusts",
+                    {
+                        "PictureID:arrayeval": "[\"63\"]",
+                        "EndOffsetX:eval": "0",
+                        "EndOffsetY:eval": "0",
+                        "EasingType:str": "InSine",
+                        "FlipDirection:str": "None",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20",
+                        "AutoErase:eval": "true"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "ObservationComplete",
+                    "ObservationComplete",
+                    {}
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 0,
