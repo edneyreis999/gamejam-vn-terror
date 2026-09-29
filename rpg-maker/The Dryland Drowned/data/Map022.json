@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Apagar o desenho da porta antes que ele fique completo e\\npermita a entrada da criatura.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b8.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Ignorar as vozes das crianças e não responder aos pedidos vindos\\ndas paredes.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b8.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Subir pelas vigas de madeira até a abertura sob o telhado,\\nantes que as portas falsas destruam os cômodos.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b8.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Apagar o desenho da porta antes que ele fique completo e permita a entrada da criatura.<Bind Picture: 50><Hide Choice Window>",
-                  "Ignorar as vozes das crianças e não responder aos pedidos vindos das paredes.<Bind Picture: 51><Hide Choice Window>",
-                  "Subir pelas vigas de madeira até a abertura sob o telhado, antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b8.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b8.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b8.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Apagar o desenho da porta antes que ele fique completo e permita a entrada da criatura.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b8.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Ignorar as vozes das crianças e não responder aos pedidos vindos das paredes.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b8.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Subir pelas vigas de madeira até a abertura sob o telhado, antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b8.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O desenho da porta na parede é apagado antes que seu último traço apareça. Esse desenho funciona como um convite para a criatura, e sem ele completo ela não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta. Com os cômodos parados, o grupo consegue alcançar a abertura sob o telhado e sair."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b8.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A marca de convite se completa antes de ser fechada, abrindo uma boca dentada na parede."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b8.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A criatura imita vozes de crianças perdidas, mas ninguém responde. Sem receber uma resposta, ela não consegue criar novas portas. As vozes ficam cada vez mais fracas, os dentes caem da parede e a criatura vai embora com fome. O grupo aproveita o silêncio para alcançar a abertura sob o telhado e deixar a casa."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b8.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Uma voz infantil imita um pedido conhecido e recebe resposta, criando novas portas ao redor."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b8.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo entra no espaço estreito entre as vigas e avança enquanto as portas falsas devoram os cômodos. A criatura tenta alcançar todos pelas paredes, mas não cabe entre os pedaços de madeira. O grupo alcança a abertura sob o telhado e sai antes que a casa desabe."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b8.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O madeiramento termina numa entrada falsa, cujos dentes fecham o cômodo atrás do grupo."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b8.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo está preso dentro de uma casa sem portas. Do lado de fora, uma criatura com cascos caminha ao redor das paredes e chama pelos heróis usando vozes de crianças perdidas."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b8.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Cada vez que alguém responde, o desenho de uma porta surge na parede. Dentes começam a crescer ao redor da passagem, e a criatura fica mais perto de entrar. Quanto mais portas aparecem, menores ficam os cômodos da casa. No alto, parte do reboco caiu e deixou à mostra as vigas e uma abertura sob o telhado."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b8.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

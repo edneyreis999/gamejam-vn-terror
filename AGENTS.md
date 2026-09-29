@@ -14,7 +14,7 @@
 # Implementação e execução
 
 - Use `rpg-maker/The Dryland Drowned/` como única implementação do jogo, sem build; consulte seus dados, plugins e assets.
-- Mantenha conteúdo nos eventos nativos, regras nos plugins de domínio e testes em `rpg-maker/tests/`, conforme os contratos MZ aprovados.
+- Mantenha a estrutura das cenas nos eventos nativos, o texto do jogador em PT/EN em `<jogo>/Languages.tsv` (eventos só com `$[chave]`), regras nos plugins de domínio e testes em `rpg-maker/tests/`, conforme os contratos MZ aprovados.
 - Para abrir o jogo no Windows ou macOS com Node 22+ e Chrome, execute `npm start` na raiz; leia `docs/_memory/local-game-run.md` antes de iniciar ou reutilizar o servidor.
 
 # Planejamento e entregas

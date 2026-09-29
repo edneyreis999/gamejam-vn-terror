@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desatar com cuidado os nós dos cipós sem acionar as estacas.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a2.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Ignorar as pegadas e encontrar o caminho usando o vento, o\\nterreno e a vegetação.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a2.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Usar o conhecimento sobre pés virados para descobrir qual rastro\\nindica o caminho verdadeiro.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a2.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Desatar com cuidado os nós dos cipós sem acionar as estacas.<Bind Picture: 50><Hide Choice Window>",
-                  "Ignorar as pegadas e encontrar o caminho usando o vento, o terreno e a vegetação.<Bind Picture: 51><Hide Choice Window>",
-                  "Usar o conhecimento sobre pés virados para descobrir qual rastro indica o caminho verdadeiro.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.a2.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.a2.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.a2.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Desatar com cuidado os nós dos cipós sem acionar as estacas.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.a2.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Ignorar as pegadas e encontrar o caminho usando o vento, o terreno e a vegetação.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.a2.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Usar o conhecimento sobre pés virados para descobrir qual rastro indica o caminho verdadeiro.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.a2.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os nós são desfeitos com cuidado, sem puxar os cipós que controlam a armadilha. As estacas voltam devagar para dentro da terra. Quando o último nó é solto, os cipós caem no chão e deixam uma passagem segura entre as árvores."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a2.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Um nó errado libera a tensão das estacas, que fecham o corredor atrás dos cipós."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a2.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As pegadas apontam para caminhos diferentes, mas o grupo se orienta pelo vento, pela inclinação do terreno e pelas plantas. Seguindo esses sinais, evita os cipós e as estacas escondidas. As pegadas falsas ficam para trás."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a2.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O vento muda sob a copa fechada, conduzindo o grupo ao corredor de estacas ocultas."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a2.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo reconhece o truque dos pés virados: a direção dos dedos engana quem tenta seguir os rastros. Ao reconstruir o trajeto no sentido contrário, encontra uma sequência de pegadas que contorna os cipós. As árvores permanecem paradas e todos conseguem atravessar em segurança."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a2.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A regra reconstruída repete a mentira dos pés virados, e árvores tombadas isolam a única saída."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a2.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Uma trilha de terra atravessa a mata que cresceu para dentro da construção. Pelo caminho, várias pegadas apontam para direções diferentes. Há algo estranho nelas: os calcanhares estão voltados para a frente, como se quem deixou os rastros caminhasse na direção contrária."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a2.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Cipós esticados cruzam a trilha e estão ligados a estacas escondidas entre as plantas. Um passo no caminho errado ou um toque em um cipó pode ativar a armadilha."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a2.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve atravessar a trilha?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a2.intro.3]"]},
             {
               "code": 108,
               "indent": 0,

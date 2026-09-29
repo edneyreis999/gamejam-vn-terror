@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Distribuir o peso entre as vigas mais fortes e criar apoios para\\nsegurar o teto.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a8.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Rastejar entre as vigas menores antes que a criatura dê o próximo\\npasso.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a8.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Separar os passos verdadeiros dos ecos e encontrar a parte do\\ntelhado que não será pisada.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a8.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Distribuir o peso entre as vigas mais fortes e criar apoios para segurar o teto.<Bind Picture: 50><Hide Choice Window>",
-                  "Rastejar entre as vigas menores antes que a criatura dê o próximo passo.<Bind Picture: 51><Hide Choice Window>",
-                  "Separar os passos verdadeiros dos ecos e encontrar a parte do telhado que não será pisada.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.a8.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.a8.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.a8.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Distribuir o peso entre as vigas mais fortes e criar apoios para segurar o teto.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.a8.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Rastejar entre as vigas menores antes que a criatura dê o próximo passo.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.a8.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Separar os passos verdadeiros dos ecos e encontrar a parte do telhado que não será pisada.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.a8.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Pedaços de madeira são colocados sob as vigas mais fortes. Os apoios dividem o peso e impedem que o teto continue descendo. A cada passo da criatura, a casa inteira treme, mas o grupo consegue atravessar antes que os apoios se quebrem."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a8.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os apoios se apoiam numa viga podre, que transfere todo o peso para o centro do forro."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a8.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo avança depressa pelos espaços estreitos do telhado. Logo depois, um pé ossudo pisa no lugar que todos acabaram de deixar. A última parte do teto desaba quando o grupo já alcançou a saída."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a8.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A passada chega antes da travessia, quebrando os caibros e encurtando a passagem."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a8.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Muitos passos são apenas ecos, mas os verdadeiros fazem o pó cair antes de cada pisada. Observando esse sinal, o grupo encontra uma faixa do telhado que nunca é atingida. Todos seguem por ela enquanto os pés esmagam as telhas dos dois lados."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a8.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Um eco é tomado por passo real; o grupo entra justamente na faixa onde o teto desaba."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a8.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo entra no forro baixo de um casarão. Acima deles, passos pesados atravessam o telhado. A cada passada, as telhas e as vigas descem um pouco mais, deixando menos espaço para o grupo se mover."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a8.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "A criatura nunca aparece por inteiro. Apenas marcas de pés ossudos surgem no reboco, como se algo enorme caminhasse sobre a casa. Há tábuas soltas entre as vigas e uma abertura na outra ponta do forro. Se o teto continuar baixando, o grupo ficará preso antes de alcançá-la."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a8.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

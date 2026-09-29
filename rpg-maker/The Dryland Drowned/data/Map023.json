@@ -3025,13 +3025,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "“No cofre, encontramos a segunda metade do medalhão e um registro de Palotina. Quando aproximamos as duas peças para examiná-las, Ivaí perdeu a compostura.”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.rheed.1]"]},
             {
               "code": 357,
               "indent": 2,
@@ -3402,13 +3396,7 @@
                 "Ivaí"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "“Não juntem! Se restaurarem o medalhão, eu morro!”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.ivai.1]"]},
             {
               "code": 357,
               "indent": 2,
@@ -3789,13 +3777,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "“Ele percebeu o que tinha dito. Mas já era tarde. O registro confirmou: reunir as metades libertaria Floraí e Pérola, ao custo da vida de Ivaí. Destruí-las salvaria o bardo, mas entregaria os amantes e suas memórias a Andirá.”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.rheed.2]"]},
             {
               "code": 357,
               "indent": 2,
@@ -4176,13 +4158,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações, perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que tinha escondido a verdade?”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.rheed.3]"]},
             {
               "code": 357,
               "indent": 2,
@@ -4563,13 +4539,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "“Quem chegou até ali com ele exigiu uma explicação. Ivaí ouviu acusações, perguntas sobre a recompensa e uma cobrança que não conseguiu evitar: por que tinha escondido a verdade?”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.rheed.3]"]},
             {
               "code": 357,
               "indent": 2,
@@ -4940,13 +4910,7 @@
                 "Ivaí"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "“Eu já conhecia a maldição. Pretendia destruir o medalhão desde o início. Tive medo de que ninguém viesse se soubesse.”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.ivai.2]"]},
             {
               "code": 357,
               "indent": 2,
@@ -5140,13 +5104,7 @@
                 "Andirá"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Na água parada, uma silhueta de asas escuras sorri sem sair do reflexo: “Agora escolha livremente.”"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.andira]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5439,13 +5397,7 @@
                 "Gorvak"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Olhe para nós, Ivaí. Você nos trouxe até aqui sem contar a verdade. Fez todos nós corrermos um risco que nem conhecíamos. Você precisa responder por cada vida perdida."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.gorvak.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -5457,13 +5409,7 @@
                 "Gorvak"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Reúna o medalhão e liberte Floraí e Pérola. Sei que isso vai custar sua vida. Mas não é justo entregar os dois a Andirá para se salvar. Desta vez, cabe a você pagar o preço da sua escolha."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.gorvak.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5756,13 +5702,7 @@
                 "Elowen"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Você sabia, Ivaí! E deixou a gente seguir sem contar nada? Como eu ia proteger alguém de um perigo que você escondeu?"
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.elowen.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -5774,13 +5714,7 @@
                 "Elowen"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Destrua o medalhão. Sei que Andirá vai absorver Floraí e Pérola, até as lembranças que têm um do outro. Ainda assim, quero você vivo para responder pelo que fez e reparar o que puder. E não confunda isso com perdão."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.elowen.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -6073,13 +6007,7 @@
                 "Griznik"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Espere, Ivaí. Você já tinha metade do medalhão, sabia da maldição e queria encontrar a outra metade para destruir o artefato. Mas, para nós, falou só do tesouro. Cada vez que a gente decidia seguir, faltava uma parte da história."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.griznik.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -6091,13 +6019,7 @@
                 "Griznik"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Destrua o medalhão. Sei que Andirá vai absorver Floraí e Pérola e as lembranças que têm um do outro. Não tenho como consertar isso. Mas quero que as mortes causadas pela maldição da sua linhagem terminem aqui. Você vai viver, contar a verdade e reparar o que ainda puder. Comece sem esconder nada de ninguém."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.griznik.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -6390,13 +6312,7 @@
                 "Seraphina"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Você sabia da maldição, Ivaí. Nós não. Aceitamos procurar um tesouro. Você escondeu os riscos e decidiu por nós. Ainda quero ajudar você, mas isso não desculpa o que fez."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.seraphina.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -6408,13 +6324,7 @@
                 "Seraphina"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Reúna o medalhão e liberte Floraí e Pérola. O juramento foi uma escolha dos dois. Eles têm o direito de ficar juntos. Sei que restaurá-lo vai custar sua vida, e me dói pedir isso. Mas não posso recomendar que você entregue os dois a Andirá para se salvar."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.seraphina.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -6707,13 +6617,7 @@
                 "Bimbren"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A missão que você nos apresentou era uma fraude, Ivaí. Prometi ajudar a buscar o tesouro da sua família. Você escondeu a maldição e nos levou a trabalhar pela sua salvação. Não pode cobrar de nós um compromisso que nunca aceitamos."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.bimbren.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -6725,13 +6629,7 @@
                 "Bimbren"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Reúna o medalhão e liberte Floraí e Pérola. Os dois fizeram seu juramento por vontade própria. Esse compromisso deve ser respeitado. Sei que restaurar o juramento vai custar sua vida, mas entregar os dois a Andirá para se salvar prolongaria a injustiça que sofreram."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.bimbren.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -7024,13 +6922,7 @@
                 "Liora"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Havia referências nos registros que não apareciam no que você nos contou, Ivaí. Eu percebi. Devia ter falado, mas escondi minhas dúvidas para não parecer que estava perdida outra vez. Você sabia o que estava omitindo. Eu suspeitava e fiquei calada."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.liora.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -7042,13 +6934,7 @@
                 "Liora"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Destrua o medalhão. Sei que isso entrega Floraí, Pérola e as lembranças dos dois a Andirá. Ainda assim, quero você vivo para responder pelo que fez e registrar a verdade. Vou contar também o que calei. Quem ouvir essa história precisa saber em que errou cada um de nós."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.liora.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -7341,13 +7227,7 @@
                 "Vaelith"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Então foi por isso que os registros chegaram incompletos às minhas mãos. Você retirou justamente o que precisávamos saber, Ivaí. Queria destruir o medalhão antes que entendêssemos o que ele protegia. Eu poderia ter estudado as advertências. Você decidiu que eu não devia lê-las."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.vaelith.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -7359,13 +7239,7 @@
                 "Vaelith"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Reúna o medalhão. Restaure o juramento e liberte Floraí e Pérola. Sei que a maldição vai cobrar sua vida. Ainda assim, destruir a proteção dos dois para se salvar seria condená-los. Preserve o artefato e os registros. Precisamos de provas do que aconteceu para que ninguém volte a esconder essa história."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.vaelith.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -7658,13 +7532,7 @@
                 "Draska"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Você prometeu uma parte do tesouro, Ivaí. Escondeu a maldição e o que pretendia fazer com o medalhão. Não tínhamos como avaliar o risco. Podíamos conferir cada passagem e ainda assim morrer por algo que você já sabia."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.draska.1]"]},
             {
               "code": 101,
               "indent": 2,
@@ -7676,13 +7544,7 @@
                 "Draska"
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Destrua o medalhão. Andirá vai absorver Floraí, Pérola e as lembranças dos dois. Sei o que estou pedindo. Mas vou escolher manter você vivo e encerrar a maldição da sua linhagem. É o menor dano que consigo aceitar agora. Depois, você terá de responder pelo que fez e ajudar quem prejudicou. Não vou deixar que trate a própria sobrevivência como recompensa."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.draska.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -7972,13 +7834,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O último excerto de Irati confirma que a escolha só pode ser voluntária e que nenhuma das duas consequências pode ser evitada."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[council.irati.narrator]"]},
             {
               "code": 108,
               "indent": 2,
@@ -8121,10 +7977,7 @@
               "code": 102,
               "indent": 0,
               "parameters": [
-                [
-                  "Reunir o medalhão — libertar os amantes e morrer",
-                  "Destruir o medalhão — sobreviver e entregá-los a Andirá"
-                ],
+                ["$[council.choice.restore]","$[council.choice.destroy]"],
                 -1,
                 0,
                 2,
@@ -8136,7 +7989,7 @@
               "indent": 0,
               "parameters": [
                 0,
-                "Reunir o medalhão — libertar os amantes e morrer"
+                "$[council.choice.restore]"
               ]
             },
             {
@@ -8233,7 +8086,7 @@
               "indent": 0,
               "parameters": [
                 1,
-                "Destruir o medalhão — sobreviver e entregá-los a Andirá"
+                "$[council.choice.destroy]"
               ]
             },
             {

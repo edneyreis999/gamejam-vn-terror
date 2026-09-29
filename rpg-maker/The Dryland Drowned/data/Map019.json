@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Juntar as datas, os nomes e as marcas nas portas para descobrir\\ncomo a aparição foi chamada pela primeira vez.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b5.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Recusar o reflexo perfeito que promete trazer pessoas mortas de\\nvolta e apagar antigas culpas.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b5.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar o espelho mais antigo da parede e virá-lo contra os\\noutros.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b5.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Juntar as datas, os nomes e as marcas nas portas para descobrir como a aparição foi chamada pela primeira vez.<Bind Picture: 50><Hide Choice Window>",
-                  "Recusar o reflexo perfeito que promete trazer pessoas mortas de volta e apagar antigas culpas.<Bind Picture: 51><Hide Choice Window>",
-                  "Arrancar o espelho mais antigo da parede e virá-lo contra os outros.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b5.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b5.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b5.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Juntar as datas, os nomes e as marcas nas portas para descobrir como a aparição foi chamada pela primeira vez.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b5.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Recusar o reflexo perfeito que promete trazer pessoas mortas de volta e apagar antigas culpas.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b5.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Arrancar o espelho mais antigo da parede e virá-lo contra os outros.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b5.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As datas, os nomes e os riscos nas portas formam uma sequência. O grupo descobre qual foi a ordem usada para chamar a figura do espelho. Entre os riscos, o grupo encontra a última frase usada para chamar a figura e a apaga. Isso desfaz o chamado. A figura desaparece e os reflexos voltam a acompanhar os gestos dos heróis sem atraso."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b5.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A convocação reconstruída usa a data errada, e o espelho mais antigo troca o rosto de quem lê."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b5.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O espelho mostra pessoas perdidas e uma vida sem culpa, mas essas imagens não são verdadeiras. O grupo recusa a troca e não aceita os reflexos como parte do mundo real. Sem conseguir enganar ninguém, a figura fica presa no vidro e desaparece."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b5.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O reflexo corrigido encontra uma culpa não admitida e ocupa o lugar de quem desviou os olhos."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b5.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O espelho mais antigo é retirado da parede e virado para os demais. A figura aparece em vários reflexos ao mesmo tempo e acaba presa entre eles. Os vidros escurecem, a aparição desaparece e o grupo pode sair."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b5.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O vidro se parte voltado para os demais, multiplicando a figura loira por todo o banheiro."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b5.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo entra em um banheiro escolar abandonado. Vários espelhos cobrem as paredes. Quando os heróis se movem juntos, seus reflexos não repetem os gestos ao mesmo tempo."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b5.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Nomes, datas e riscos cobrem as portas. Uma figura loira aparece sempre no espelho mais antigo. Aos poucos, ela troca de lugar com quem a observa: primeiro copia a roupa, depois toma seu rosto e, por fim, tenta sair do espelho em seu lugar."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b5.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

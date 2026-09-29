@@ -101,18 +101,14 @@
                 "code": 401,
                 "indent": 1,
                 "parameters": [
-                    "Afogados em Terra Seca\nClassificação pretendida: 16 anos.\nHorror psicológico, morte permanente, afogamento e escolhas sob pressão."
+                    "$[title.warning]"
                 ]
             },
             {
                 "code": 102,
                 "indent": 1,
                 "parameters": [
-                    [
-                        "Continuar",
-                        "Novo jogo",
-                        "Configurações"
-                    ],
+                    ["$[choice.title.continue]","$[choice.title.new_game]","$[choice.title.options]"],
                     -1,
                     0,
                     2,
@@ -124,7 +120,7 @@
                 "indent": 1,
                 "parameters": [
                     0,
-                    "Continuar"
+                    "$[choice.title.continue]"
                 ]
             },
             {
@@ -149,7 +145,7 @@
                 "indent": 1,
                 "parameters": [
                     1,
-                    "Novo jogo"
+                    "$[choice.title.new_game]"
                 ]
             },
             {
@@ -174,7 +170,7 @@
                 "indent": 1,
                 "parameters": [
                     2,
-                    "Configurações"
+                    "$[choice.title.options]"
                 ]
             },
             {
@@ -219,17 +215,14 @@
                 "code": 401,
                 "indent": 1,
                 "parameters": [
-                    "Afogados em Terra Seca\nClassificação pretendida: 16 anos.\nHorror psicológico, morte permanente, afogamento e escolhas sob pressão."
+                    "$[title.warning]"
                 ]
             },
             {
                 "code": 102,
                 "indent": 1,
                 "parameters": [
-                    [
-                        "Jogar",
-                        "Configurações"
-                    ],
+                    ["$[choice.title.play]","$[choice.title.options]"],
                     -1,
                     0,
                     2,
@@ -241,7 +234,7 @@
                 "indent": 1,
                 "parameters": [
                     0,
-                    "Jogar"
+                    "$[choice.title.play]"
                 ]
             },
             {
@@ -266,7 +259,7 @@
                 "indent": 1,
                 "parameters": [
                     1,
-                    "Configurações"
+                    "$[choice.title.options]"
                 ]
             },
             {
@@ -1593,9 +1586,9 @@
                     [
                         "\\V[171]<Bind Picture: 16><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>",
                         "\\V[172]<Bind Picture: 17><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>",
-                        "Destinos<Bind Picture: 41>",
-                        "Elenco<Bind Picture: 42>",
-                        "Partir<Bind Picture: 43><Enable Switch: 29>"
+                        "$[choice.tavern.destinations]<Bind Picture: 41>",
+                        "$[choice.tavern.cast]<Bind Picture: 42>",
+                        "$[choice.tavern.depart]<Bind Picture: 43><Enable Switch: 29>"
                     ],
                     -1,
                     -1,
@@ -1990,7 +1983,7 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "Destinos<Bind Picture: 41>"
+                    "$[choice.tavern.destinations]<Bind Picture: 41>"
                 ]
             },
             {
@@ -2017,7 +2010,7 @@
                 "indent": 0,
                 "parameters": [
                     3,
-                    "Elenco<Bind Picture: 42>"
+                    "$[choice.tavern.cast]<Bind Picture: 42>"
                 ]
             },
             {
@@ -2044,7 +2037,7 @@
                 "indent": 0,
                 "parameters": [
                     4,
-                    "Partir<Bind Picture: 43><Enable Switch: 29>"
+                    "$[choice.tavern.depart]<Bind Picture: 43><Enable Switch: 29>"
                 ]
             },
             {
@@ -2424,7 +2417,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A1",
-                        "name": "O Redemoinho do Saci Engarrafado"
+                        "name": "$[enc.a1.name]"
                     }
                 ]
             },
@@ -2451,7 +2444,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A2",
-                        "name": "A Trilha de Pés Virados"
+                        "name": "$[enc.a2.name]"
                     }
                 ]
             },
@@ -2478,7 +2471,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A3",
-                        "name": "O Pilão da Cuca"
+                        "name": "$[enc.a3.name]"
                     }
                 ]
             },
@@ -2505,7 +2498,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A4",
-                        "name": "A Jaula do Mapinguari"
+                        "name": "$[enc.a4.name]"
                     }
                 ]
             },
@@ -2532,7 +2525,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A5",
-                        "name": "A Cavalariça da Mula-sem-Cabeça"
+                        "name": "$[enc.a5.name]"
                     }
                 ]
             },
@@ -2559,7 +2552,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A6",
-                        "name": "O Pomar do Corpo-Seco"
+                        "name": "$[enc.a6.name]"
                     }
                 ]
             },
@@ -2586,7 +2579,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A7",
-                        "name": "O Depósito do Homem do Saco"
+                        "name": "$[enc.a7.name]"
                     }
                 ]
             },
@@ -2613,7 +2606,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "A8",
-                        "name": "O Telhado da Pisadeira"
+                        "name": "$[enc.a8.name]"
                     }
                 ]
             },
@@ -2640,7 +2633,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B1",
-                        "name": "O Assobio da Matinta"
+                        "name": "$[enc.b1.name]"
                     }
                 ]
             },
@@ -2667,7 +2660,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B2",
-                        "name": "A Procissão das Almas"
+                        "name": "$[enc.b2.name]"
                     }
                 ]
             },
@@ -2694,7 +2687,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B3",
-                        "name": "Os Olhos do Boitatá"
+                        "name": "$[enc.b3.name]"
                     }
                 ]
             },
@@ -2721,7 +2714,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B4",
-                        "name": "A Promessa Falsificada à Comadre Fulozinha"
+                        "name": "$[enc.b4.name]"
                     }
                 ]
             },
@@ -2748,7 +2741,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B5",
-                        "name": "O Espelho da Loira do Banheiro"
+                        "name": "$[enc.b5.name]"
                     }
                 ]
             },
@@ -2775,7 +2768,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B6",
-                        "name": "O Canto da Iara no Poço Seco"
+                        "name": "$[enc.b6.name]"
                     }
                 ]
             },
@@ -2802,7 +2795,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B7",
-                        "name": "A Mortalha da Rasga-Mortalha"
+                        "name": "$[enc.b7.name]"
                     }
                 ]
             },
@@ -2829,7 +2822,7 @@
                     "ConfigureEncounter",
                     {
                         "id": "B8",
-                        "name": "A Fome da Cabra-Cabriola"
+                        "name": "$[enc.b8.name]"
                     }
                 ]
             },
@@ -2856,7 +2849,7 @@
                     "ConfigureRoute",
                     {
                         "id": "physical",
-                        "name": "Caminho da Igreja"
+                        "name": "$[route.physical.name]"
                     }
                 ]
             },
@@ -2883,7 +2876,7 @@
                     "ConfigureRoute",
                     {
                         "id": "supernatural",
-                        "name": "Parque das Águas Assombradas"
+                        "name": "$[route.supernatural.name]"
                     }
                 ]
             },
@@ -2910,7 +2903,7 @@
                     "ConfigureRoute",
                     {
                         "id": "final",
-                        "name": "Vilarejo Partido"
+                        "name": "$[route.final.name]"
                     }
                 ]
             },
@@ -6428,7 +6421,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Grupo \\\\V[150]/\\\\V[151] · Auto\"",
+                        "center:json": "\"\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151] · Auto\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6455,7 +6448,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Grupo \\\\V[150]/\\\\V[151]\"",
+                        "center:json": "\"\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6482,7 +6475,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]Destinos\"",
+                        "center:json": "\"\\\\FS[22]$[choice.tavern.destinations]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6518,7 +6511,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]Elenco\"",
+                        "center:json": "\"\\\\FS[22]$[choice.tavern.cast]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6554,7 +6547,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]Partir\"",
+                        "center:json": "\"\\\\FS[22]$[choice.tavern.depart]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6590,7 +6583,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[18]Destino não escolhido\"",
+                        "center:json": "\"\\\\FS[18]$[ui.tavern.no_destination]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7168,7 +7161,7 @@
                     {
                         "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"\\\\FS[28]Destinos\"",
+                        "upperleft:json": "\"\\\\FS[28]$[ui.dest.title]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7276,7 +7269,7 @@
                     {
                         "PictureIDs:arraynum": "[\"75\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"\\\\FS[21]\\\\V[173]\\n\\n\\\\FS[19]Sob a igreja tomada pela mata,\\numa prisioneira de pedra\\nguarda parte do caminho.\"",
+                        "upperleft:json": "\"<WordWrap>\\\\FS[21]\\\\V[173]<br><br>\\\\FS[19]$[dest.physical.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7427,7 +7420,7 @@
                     {
                         "PictureIDs:arraynum": "[\"76\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"\\\\FS[21]\\\\V[174]\\n\\n\\\\FS[19]Nas atrações abandonadas, uma\\nfigueira aprisiona uma voz que\\nconhece o mapa.\"",
+                        "upperleft:json": "\"<WordWrap>\\\\FS[21]\\\\V[174]<br><br>\\\\FS[19]$[dest.supernatural.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7578,7 +7571,7 @@
                     {
                         "PictureIDs:arraynum": "[\"77\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"\\\\FS[21]\\\\V[175]\\n\\n\\\\FS[19]As duas peças sobrepostas\\nrevelam o vilarejo onde a\\nverdade foi enterrada.\"",
+                        "upperleft:json": "\"<WordWrap>\\\\FS[21]\\\\V[175]<br><br>\\\\FS[19]$[dest.final.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -7690,7 +7683,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]Fechar\"",
+                        "center:json": "\"\\\\FS[22]$[choice.dest.close]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7819,7 +7812,7 @@
                     176,
                     0,
                     4,
-                    "\"Disponível\""
+                    "\"$[dest.status.available]\""
                 ]
             },
             {
@@ -7838,7 +7831,7 @@
                     176,
                     0,
                     4,
-                    "\"Selecionado\""
+                    "\"$[dest.status.selected]\""
                 ]
             },
             {
@@ -7881,7 +7874,7 @@
                     176,
                     0,
                     4,
-                    "\"Bloqueado\""
+                    "\"$[dest.status.locked]\""
                 ]
             },
             {
@@ -7897,7 +7890,7 @@
                     176,
                     0,
                     4,
-                    "\"Concluído\""
+                    "\"$[dest.status.completed]\""
                 ]
             },
             {
@@ -8067,7 +8060,7 @@
                     177,
                     0,
                     4,
-                    "\"Disponível\""
+                    "\"$[dest.status.available]\""
                 ]
             },
             {
@@ -8086,7 +8079,7 @@
                     177,
                     0,
                     4,
-                    "\"Selecionado\""
+                    "\"$[dest.status.selected]\""
                 ]
             },
             {
@@ -8129,7 +8122,7 @@
                     177,
                     0,
                     4,
-                    "\"Bloqueado\""
+                    "\"$[dest.status.locked]\""
                 ]
             },
             {
@@ -8145,7 +8138,7 @@
                     177,
                     0,
                     4,
-                    "\"Concluído\""
+                    "\"$[dest.status.completed]\""
                 ]
             },
             {
@@ -8315,7 +8308,7 @@
                     178,
                     0,
                     4,
-                    "\"Disponível\""
+                    "\"$[dest.status.available]\""
                 ]
             },
             {
@@ -8334,7 +8327,7 @@
                     178,
                     0,
                     4,
-                    "\"Selecionado\""
+                    "\"$[dest.status.selected]\""
                 ]
             },
             {
@@ -8377,7 +8370,7 @@
                     178,
                     0,
                     4,
-                    "\"Bloqueado\""
+                    "\"$[dest.status.locked]\""
                 ]
             },
             {
@@ -8393,7 +8386,7 @@
                     178,
                     0,
                     4,
-                    "\"Concluído\""
+                    "\"$[dest.status.completed]\""
                 ]
             },
             {
@@ -8530,7 +8523,7 @@
                         "\\V[173]<Bind Picture: 72><Enable Switch: 31><Hide Choice Window>",
                         "\\V[174]<Bind Picture: 73><Enable Switch: 32><Hide Choice Window>",
                         "\\V[175]<Bind Picture: 74><Enable Switch: 33><Hide Choice Window>",
-                        "Fechar<Bind Picture: 81>"
+                        "$[choice.dest.close]<Bind Picture: 81>"
                     ],
                     -2,
                     0,
@@ -8543,7 +8536,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "Caminho da Igreja<Bind Picture: 72><Enable Switch: 31><Hide Choice Window>"
+                    "\\V[173]<Bind Picture: 72><Enable Switch: 31><Hide Choice Window>"
                 ]
             },
             {
@@ -8583,7 +8576,7 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "Parque das Águas Assombradas<Bind Picture: 73><Enable Switch: 32><Hide Choice Window>"
+                    "\\V[174]<Bind Picture: 73><Enable Switch: 32><Hide Choice Window>"
                 ]
             },
             {
@@ -8623,7 +8616,7 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "Vilarejo Partido<Bind Picture: 74><Enable Switch: 33><Hide Choice Window>"
+                    "\\V[175]<Bind Picture: 74><Enable Switch: 33><Hide Choice Window>"
                 ]
             },
             {
@@ -8663,7 +8656,7 @@
                 "indent": 0,
                 "parameters": [
                     3,
-                    "Fechar<Bind Picture: 81>"
+                    "$[choice.dest.close]<Bind Picture: 81>"
                 ]
             },
             {
@@ -10479,7 +10472,7 @@
                 "code": 401,
                 "indent": 0,
                 "parameters": [
-                    "A escolha é irreversível.\nA primeira pessoa ativada morrerá imediatamente para abrir a passagem.\nNão haverá confirmação ou retorno."
+                    "$[sacrifice.warning]"
                 ]
             },
             {
@@ -10542,7 +10535,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Sacrificar \\\\V[189]\"",
+                        "center:json": "\"\\\\FS[20]$[choice.sacrifice] \\\\V[189]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -10591,7 +10584,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Sacrificar \\\\V[190]\"",
+                        "center:json": "\"\\\\FS[20]$[choice.sacrifice] \\\\V[190]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -10640,7 +10633,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Sacrificar \\\\V[191]\"",
+                        "center:json": "\"\\\\FS[20]$[choice.sacrifice] \\\\V[191]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -10699,11 +10692,7 @@
                 "code": 102,
                 "indent": 0,
                 "parameters": [
-                    [
-                        "Sacrificar \\V[189]<Bind Picture: 50><Show Switch: 35><Hide Choice Window>",
-                        "Sacrificar \\V[190]<Bind Picture: 51><Show Switch: 36><Hide Choice Window>",
-                        "Sacrificar \\V[191]<Bind Picture: 52><Show Switch: 37><Hide Choice Window>"
-                    ],
+                    ["$[choice.sacrifice] \\V[189]<Bind Picture: 50><Show Switch: 35><Hide Choice Window>","$[choice.sacrifice] \\V[190]<Bind Picture: 51><Show Switch: 36><Hide Choice Window>","$[choice.sacrifice] \\V[191]<Bind Picture: 52><Show Switch: 37><Hide Choice Window>"],
                     -1,
                     0,
                     2,
@@ -10715,7 +10704,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "Sacrificar \\V[189]<Bind Picture: 50><Show Switch: 35><Hide Choice Window>"
+                    "$[choice.sacrifice] \\V[189]<Bind Picture: 50><Show Switch: 35><Hide Choice Window>"
                 ]
             },
             {
@@ -10830,7 +10819,7 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "Sacrificar \\V[190]<Bind Picture: 51><Show Switch: 36><Hide Choice Window>"
+                    "$[choice.sacrifice] \\V[190]<Bind Picture: 51><Show Switch: 36><Hide Choice Window>"
                 ]
             },
             {
@@ -10945,7 +10934,7 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "Sacrificar \\V[191]<Bind Picture: 52><Show Switch: 37><Hide Choice Window>"
+                    "$[choice.sacrifice] \\V[191]<Bind Picture: 52><Show Switch: 37><Hide Choice Window>"
                 ]
             },
             {
@@ -11137,7 +11126,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[26]A escolha é irreversível\"",
+                        "center:json": "\"\\\\FS[26]$[ui.sacrifice.title]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -23861,7 +23850,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[16]Pular créditos · Esc\"",
+                        "center:json": "\"\\\\FS[16]$[ui.credits.skip]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -24593,7 +24582,7 @@
                 "code": 405,
                 "indent": 0,
                 "parameters": [
-                    "<center>\\FS[32]Afogados em Terra Seca"
+                    "<center>\\FS[32]$[credits.title]"
                 ]
             },
             {
@@ -24628,7 +24617,7 @@
                 "code": 405,
                 "indent": 0,
                 "parameters": [
-                    "<center>Plugins: VisuStella"
+                    "<center>$[credits.plugins]"
                 ]
             },
             {
@@ -48756,7 +48745,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -48772,7 +48761,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -48825,7 +48814,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -48918,7 +48907,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -48934,7 +48923,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -48987,7 +48976,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49080,7 +49069,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -49096,7 +49085,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -49149,7 +49138,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49242,7 +49231,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -49258,7 +49247,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -49311,7 +49300,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49404,7 +49393,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -49420,7 +49409,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -49473,7 +49462,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49566,7 +49555,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -49582,7 +49571,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -49635,7 +49624,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49728,7 +49717,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -49744,7 +49733,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -49797,7 +49786,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49890,7 +49879,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente\""
+                    "\"$[cast.status.present]\""
                 ]
             },
             {
@@ -49906,7 +49895,7 @@
                     153,
                     0,
                     4,
-                    "\"Morto\""
+                    "\"$[cast.status.dead]\""
                 ]
             },
             {
@@ -49959,7 +49948,7 @@
                     153,
                     0,
                     4,
-                    "\"Presente · No grupo\""
+                    "\"$[cast.status.in_party]\""
                 ]
             },
             {
@@ -49988,7 +49977,7 @@
                     {
                         "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"\\\\FS[28]Elenco\\n\\n\\\\FS[22]\\\\V[157]\\n\\\\V[158]\\n\\\\V[159]\\n\\\\V[160]\\n\\\\V[161]\\n\\\\V[162]\\n\\\\V[163]\\n\\\\V[164]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\FS[28]$[ui.cast.title]<br><br>\\\\FS[22]\\\\V[157]<br>\\\\V[158]<br>\\\\V[159]<br>\\\\V[160]<br>\\\\V[161]<br>\\\\V[162]<br>\\\\V[163]<br>\\\\V[164]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -50040,7 +50029,7 @@
                 "indent": 0,
                 "parameters": [
                     [
-                        "Fechar"
+                        "$[choice.cast.close]"
                     ],
                     -2,
                     0,
@@ -50053,7 +50042,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "Fechar"
+                    "$[choice.cast.close]"
                 ]
             },
             {
@@ -50188,7 +50177,7 @@
                     152,
                     0,
                     4,
-                    "\"Desapareceu no redemoinho enquanto mantinha a janela aberta.\""
+                    "\"$[memorial.cause.a1]\""
                 ]
             },
             {
@@ -50316,7 +50305,7 @@
                     152,
                     0,
                     4,
-                    "\"Sustentou o último tronco<br>para abrir a passagem.\""
+                    "\"$[memorial.cause.a2]\""
                 ]
             },
             {
@@ -50444,7 +50433,7 @@
                     152,
                     0,
                     4,
-                    "\"Recebeu o impacto que<br>deteve o socador.\""
+                    "\"$[memorial.cause.a3]\""
                 ]
             },
             {
@@ -50572,7 +50561,7 @@
                     152,
                     0,
                     4,
-                    "\"Morreu na compressão das<br>costelas da passagem.\""
+                    "\"$[memorial.cause.a4]\""
                 ]
             },
             {
@@ -50700,7 +50689,7 @@
                     152,
                     0,
                     4,
-                    "\"Morreu nas chamas ao manter o registro de água aberto para os outros passarem.\""
+                    "\"$[memorial.cause.a5]\""
                 ]
             },
             {
@@ -50828,7 +50817,7 @@
                     152,
                     0,
                     4,
-                    "\"Uniu-se ao tronco para<br>libertar o grupo.\""
+                    "\"$[memorial.cause.a6]\""
                 ]
             },
             {
@@ -50956,7 +50945,7 @@
                     152,
                     0,
                     4,
-                    "\"Seguiu num saco até a<br>prensa para abrir a saída.\""
+                    "\"$[memorial.cause.a7]\""
                 ]
             },
             {
@@ -51084,7 +51073,7 @@
                     152,
                     0,
                     4,
-                    "\"Sustentou a viga sob o<br>telhado que desabava.\""
+                    "\"$[memorial.cause.a8]\""
                 ]
             },
             {
@@ -51212,7 +51201,7 @@
                     152,
                     0,
                     4,
-                    "\"Entregou o próprio nome e<br>virou a voz da casa.\""
+                    "\"$[memorial.cause.b1]\""
                 ]
             },
             {
@@ -51340,7 +51329,7 @@
                     152,
                     0,
                     4,
-                    "\"Levou a vela da frente e<br>partiu com os mortos.\""
+                    "\"$[memorial.cause.b2]\""
                 ]
             },
             {
@@ -51468,7 +51457,7 @@
                     152,
                     0,
                     4,
-                    "\"Ficou na lembrança que<br>tomou para si.\""
+                    "\"$[memorial.cause.b3]\""
                 ]
             },
             {
@@ -51596,7 +51585,7 @@
                     152,
                     0,
                     4,
-                    "\"Assumiu a promessa e<br>desapareceu na floresta.\""
+                    "\"$[memorial.cause.b4]\""
                 ]
             },
             {
@@ -51724,7 +51713,7 @@
                     152,
                     0,
                     4,
-                    "\"Entrou no espelho para<br>ocupar o lugar vazio.\""
+                    "\"$[memorial.cause.b5]\""
                 ]
             },
             {
@@ -51852,7 +51841,7 @@
                     152,
                     0,
                     4,
-                    "\"Desceu ao poço e respondeu<br>ao canto no fundo.\""
+                    "\"$[memorial.cause.b6]\""
                 ]
             },
             {
@@ -51980,7 +51969,7 @@
                     152,
                     0,
                     4,
-                    "\"Escreveu o nome na<br>mortalha e aceitou o<br>presságio.\""
+                    "\"$[memorial.cause.b7]\""
                 ]
             },
             {
@@ -52108,7 +52097,7 @@
                     152,
                     0,
                     4,
-                    "\"Atendeu ao chamado e<br>atravessou a boca da casa.\""
+                    "\"$[memorial.cause.b8]\""
                 ]
             },
             {
@@ -52310,13 +52299,7 @@
                     "Ivaí"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "A igreja se inclina sobre raízes antigas. O caminho segue sob o altar, onde a pedra parece respirar."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[threshold.physical.ivai]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -52571,13 +52554,7 @@
                     "Ivaí"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "As atrações do parque rangem sem vento. Uma voz chama de dentro da figueira mais velha."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[threshold.supernatural.ivai]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -52832,13 +52809,7 @@
                     "Ivaí"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "As peças sobrepostas conduzem às ruínas do Vilarejo Partido e à Casa do Conselho."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[threshold.final.ivai]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53041,13 +53012,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "as outras garrafas se abrem e os redemoinhos se juntam. Uma parede de vento e vidro bloqueia a saída. Para abrir uma passagem, um dos heróis precisa segurar a janela por dentro. O restante do grupo consegue escapar, mas o herói é arrancado do chão e levado pelo redemoinho."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a1.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53193,13 +53158,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "os cipós são acionados e várias árvores tombam, bloqueando os caminhos. O grupo é empurrado para uma passagem cercada por estacas. Para que os outros escapem, um dos heróis precisa ficar para trás e segurar o último tronco. Quando os companheiros passam, seus braços cedem e o tronco o esmaga contra as estacas."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a2.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53345,13 +53304,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "o socador se solta dos trilhos e começa a perseguir o grupo. Para impedir que ele alcance os outros, um dos heróis precisa atraí-lo até o pilão central e ficar sob o socador quando ele descer. O golpe prende o socador e permite que o restante do grupo escape."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a3.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53497,13 +53450,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "as barras se fecham de uma vez. Para manter a última passagem aberta, um dos heróis precisa ficar no centro da jaula e suportar a pressão. Os outros conseguem escapar. Assim que passam, as barras esmagam o herói que ficou para trás."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a4.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53649,13 +53596,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "a mula dispara pelo corredor e cerca o grupo com fogo. O registro cede, mas só deixa a água passar enquanto alguém o segura aberto. Um dos heróis precisa ficar junto dele para manter as chamas baixas enquanto os outros atravessam. Quando o restante do grupo chega à saída, a cisterna esvazia. A água para, e o fogo alcança o herói antes que ele consiga sair."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a5.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53801,13 +53742,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "as raízes se enrolam ao redor do grupo e formam um nó. Para libertar os companheiros, um dos heróis precisa se deixar prender pelo tronco. A planta solta os demais, mas o herói fica preso e se torna parte da árvore."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a6.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -53953,13 +53888,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "os ganchos puxam todos os sacos para o centro e bloqueiam o corredor. Para liberar a saída, um dos heróis precisa entrar em um saco e servir de contrapeso. A passagem se abre para os outros, mas o saco com o herói é levado até a prensa e esmagado."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a7.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -54105,13 +54034,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "dois pés atingem a mesma viga, e o telhado começa a desabar. Para impedir que tudo caia de uma vez, um dos heróis precisa ficar sob a viga principal e sustentar o impacto. Os outros conseguem escapar, mas o teto desaba sobre quem ficou para trás."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.a8.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -54257,13 +54180,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "o assobio começa a apagar as vozes do grupo. Para afastar a presença, um dos heróis precisa dizer o próprio nome antes que sua voz desapareça. A casa toma essa voz para si e esquece os demais, que conseguem escapar. O herói passa a ser a nova voz presa no casarão."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b1.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -54409,13 +54326,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "todas as velas se apagam, e as almas passam a tratar os heróis como se eles também fossem mortos da procissão. Para afastar as almas, um dos heróis precisa tomar a vela da frente e seguir com os mortos. A procissão vai embora levando o herói, enquanto os outros conseguem escapar."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b2.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -54561,13 +54472,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "todos os olhos se voltam para uma lembrança que pertence ao grupo inteiro. Para libertar os outros, um dos heróis precisa aceitar aquela lembrança como se fosse somente sua. Os companheiros recuperam o próprio passado, mas o herói fica preso para sempre dentro da lembrança."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b3.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -54713,13 +54618,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "os troncos passam a repetir a mesma cobrança, e a mata se fecha por completo. A promessa falsa agora prende todo o grupo. Para abrir o caminho, um dos heróis precisa assumir o acordo sozinho e seguir a voz para dentro da floresta. As raízes se afastam para deixar os outros sair, mas as árvores se fecham atrás do herói, que desaparece na mata e não retorna."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b4.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -54865,13 +54764,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "os reflexos param de imitar o grupo e começam a sair dos espelhos. Para obrigá-los a voltar, um dos heróis precisa entrar no único vidro que ficou vazio e ocupar o lugar da figura loira. Os outros escapam, mas o herói permanece preso no espelho."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b5.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -55017,13 +54910,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "a água invisível enche os pulmões de todo o grupo. Para que os outros voltem a respirar, um dos heróis precisa descer pela mecha de cabelo que chega ao fundo do poço e responder ao canto. A canção se cala, mas o herói não retorna."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b6.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -55169,13 +55056,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "a data atual aparece por inteiro, e a mortalha cai sobre o grupo. Para abrir uma saída, um dos heróis precisa escrever o próprio nome no tecido e aceitar o presságio. A mortalha se rasga e liberta os outros, mas se fecha ao redor de quem escreveu o nome."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b7.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -55321,13 +55202,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "todas as portas se abrem ao mesmo tempo e formam uma única boca enorme. Para fazer a casa voltar ao normal, um dos heróis precisa responder ao chamado e atravessar a passagem. A boca se fecha sobre o herói e desaparece com ele. As paredes param de avançar, permitindo que os outros alcancem a abertura sob o telhado."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[death.b8.context]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -55576,13 +55451,7 @@
                     "Gorvak"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Eu fico aqui. Vou dar a vocês tempo para passar. Não desperdicem esse tempo."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h1.gorvak]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -55838,13 +55707,7 @@
                     "Elowen"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Quando eu correr, não olhem para trás.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h2.elowen]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -56100,13 +55963,7 @@
                     "Griznik"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Eu seguro a estrutura. Vocês aproveitem a saída.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h3.griznik]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -56362,13 +56219,7 @@
                     "Seraphina"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Vivam. Depois decidam o que esta morte significa.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h4.seraphina]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -56624,13 +56475,7 @@
                     "Bimbren"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Minha rota termina aqui. A de vocês, não.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h5.bimbren]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -56886,13 +56731,7 @@
                     "Liora"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“O caminho está marcado. Não deixem que termine comigo.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h6.liora]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -57148,13 +56987,7 @@
                     "Vaelith"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Levem as páginas. Façam minha última linha valer.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h7.vaelith]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -57410,13 +57243,7 @@
                     "Draska"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Eu marco o caminho. Vocês terminam de percorrê-lo.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[farewell.h8.draska]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -57569,13 +57396,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Sem ninguém na expedição para continuar, Ivaí retorna à taverna. Os sobreviventes que ficaram na cidade poderão formar um novo grupo."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[campaign.automatic_retreat.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -59609,13 +59430,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Sob o altar, Pérola permanece incorporada à pedra, consciente e protegida por uma metade quebrada do juramento."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[lover.physical.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -59864,13 +59679,7 @@
                     "Pérola"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "A outra margem guarda o caminho. Não confiem numa promessa que omite o preço."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[lover.physical.warning.perola]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -60023,13 +59832,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Você recebeu a peça anã do mapa."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[reward.physical.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -60278,13 +60081,7 @@
                     "Pérola"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Se Floraí já entregou a peça dele, então Andirá conduziu vocês até a escolha que deseja."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[lover.physical.second.perola]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -60437,13 +60234,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Floraí fala entre as raízes da figueira que o mantém prisioneiro, ainda separado de Pérola."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[lover.supernatural.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -60692,13 +60483,7 @@
                     "Floraí"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Procurem a outra peça. E desconfiem de toda voz que diga haver apenas uma saída."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[lover.supernatural.warning.florai]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -60851,13 +60636,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Você recebeu a peça élfica do mapa."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[reward.supernatural.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -61106,13 +60885,7 @@
                     "Floraí"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Se Pérola falou primeiro, então alguém conhece a ordem dos nossos passos e espera pelo reencontro."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[lover.supernatural.second.florai]"]},
             {
                 "code": 117,
                 "indent": 0,
@@ -61265,13 +61038,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "No verso da primeira peça, Ivaí reconhece outro trecho de Irati: “O mapa encontra a segunda metade; ele não decide o destino do medalhão.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[campaign.irati_02_01.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -61417,13 +61184,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "As duas peças do mapa se sobrepõem. Linhas antes incompletas revelam a entrada do Vilarejo Partido."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[campaign.map_reveal_01.narrator]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -61621,13 +61382,7 @@
                     "Ivaí"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "É lá que encontraremos a outra metade do medalhão — e a verdade que eu devia ter contado antes."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[campaign.map_reveal_02.ivai]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -63217,7 +62972,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[22]Encontro \\\\V[187]/\\\\V[188] — \\\\V[186]\"",
+                        "center:json": "\"\\\\FS[22]$[ui.encounter.label] \\\\V[187]/\\\\V[188] — \\\\V[186]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -63289,7 +63044,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Rever descrição\"",
+                        "center:json": "\"\\\\FS[20]$[choice.encounter.reread]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -63383,7 +63138,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\FS[20]Recuar\"",
+                        "center:json": "\"\\\\FS[20]$[choice.encounter.retreat]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -64494,13 +64249,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Gorvak não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h1]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -64613,13 +64362,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Elowen não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h2]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -64732,13 +64475,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Griznik não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h3]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -64851,13 +64588,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Seraphina não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h4]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -64970,13 +64701,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Bimbren não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h5]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -65089,13 +64814,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Liora não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h6]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -65208,13 +64927,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Vaelith não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h7]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -65327,13 +65040,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Draska não voltou da expedição."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.h8]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -65446,13 +65153,7 @@
                     ""
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "Antes de partir, os sobreviventes dizem os nomes daqueles que a expedição perdeu."
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[memorial.intro]"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -67394,13 +67095,7 @@
                     "Rheed"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Finalmente, uma parte do mapa estava em nossas mãos. Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir. Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a outra metade. Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como enfrentar o que vinha pela frente.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[closure.first.rheed]"]},
             {
                 "code": 235,
                 "indent": 0,
@@ -67684,13 +67379,7 @@
                     "Rheed"
                 ]
             },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "“Ali estava a parte que faltava. Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna, abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam. Foi quando me dei conta: tínhamos encontrado o mapa. Mas ainda precisaríamos seguir o caminho.”"
-                ]
-            },
+            {"code":401,"indent":0,"parameters":["$[closure.second.rheed]"]},
             {
                 "code": 235,
                 "indent": 0,

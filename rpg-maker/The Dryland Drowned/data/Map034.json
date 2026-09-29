@@ -2794,27 +2794,7 @@
                 "Liora"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Liora finalmente conclui seu atlas. Espalha sobre a mesa os mapas da expedição<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "e passa meses comparando anotações, corrigindo distâncias e separando o que<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "testemunhou daquilo que apenas suspeita."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.liora.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2826,20 +2806,7 @@
                 "Liora"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Quando a obra é publicada, algumas páginas trazem rotas interrompidas,<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "advertências e espaços em branco."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.liora.2]"]},
             {
               "code": 357,
               "indent": 0,

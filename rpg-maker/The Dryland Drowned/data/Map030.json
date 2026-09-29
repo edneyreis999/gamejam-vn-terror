@@ -2794,20 +2794,7 @@
                 "Elowen"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Elowen usa sua recompensa para garantir que a mata de sua comunidade permaneça<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "protegida. Os primeiros dias de volta são passados percorrendo as trilhas"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.elowen.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2819,20 +2806,7 @@
                 "Elowen"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "conhecidas. Em algumas curvas, ainda se vira para comentar algo com quem já<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "não está atrás dela."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.elowen.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2844,20 +2818,7 @@
                 "Elowen"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Logo começa a treinar novos batedores. Ensina a atravessar rios, reconhecer<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "armadilhas e encontrar apoio onde parece não existir passagem. Continua"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.elowen.3]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2869,20 +2830,7 @@
                 "Elowen"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "provocadora e quase impossível de alcançar numa corrida, mas agora interrompe<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "a marcha para conferir se todos acompanham."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.elowen.4]"]},
             {
               "code": 357,
               "indent": 0,

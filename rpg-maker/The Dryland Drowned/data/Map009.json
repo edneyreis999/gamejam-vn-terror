@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Usar madeira, fibras e cascas para criar obstáculos e desviar o\\nsocador.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a3.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Avançar entre os pilões menores, acompanhando o ritmo dos\\nimpactos.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a3.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Encontrar e apagar o verso que liga a cantiga ao socador.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a3.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Usar madeira, fibras e cascas para criar obstáculos e desviar o socador.<Bind Picture: 50><Hide Choice Window>",
-                  "Avançar entre os pilões menores, acompanhando o ritmo dos impactos.<Bind Picture: 51><Hide Choice Window>",
-                  "Encontrar e apagar o verso que liga a cantiga ao socador.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.a3.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.a3.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.a3.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Usar madeira, fibras e cascas para criar obstáculos e desviar o socador.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.a3.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Avançar entre os pilões menores, acompanhando o ritmo dos impactos.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.a3.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Encontrar e apagar o verso que liga a cantiga ao socador.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.a3.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Pedaços de madeira e fibras são presos nos trilhos do teto. Quando o socador bate neles, muda de direção e cai dentro de um pilão vazio. O socador fica preso no pilão, o mecanismo para e o grupo consegue atravessar a cozinha."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a3.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As cunhas se partem sob o primeiro impacto, deixando o socador livre para perseguir o grupo."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a3.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A cantiga avisa quando cada golpe vai acontecer. O grupo avança nos pequenos intervalos entre uma batida e outra, saltando sobre os pilões menores. O último golpe atinge o chão quando todos já alcançaram a saída."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a3.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O ritmo muda no meio da travessia, e os pilões menores empurram o grupo para o centro."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a3.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Uma frase escrita na caixa mantém a cantiga e o socador ligados. Quando esse verso é apagado, a música perde o ritmo e começa a repetir as mesmas notas. A ligação se rompe, e o socador fica imóvel nos trilhos, deixando o caminho livre."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a3.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O verso apagado reaparece na caixa sem corda, acelerando o socador até ele abandonar os trilhos."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a3.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo entra na cozinha de um antigo engenho. No centro há um pilão enorme, grande o bastante para prender uma pessoa. Pilões menores ocupam o restante da cozinha. Acima deles, um pesado socador se move por trilhos presos ao teto. Pedaços de madeira, fibras e cascas estão espalhados pelo chão."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a3.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Uma caixa com versos escritos na superfície começa a tocar uma cantiga de ninar sozinha. A cada verso, o socador muda de direção e atinge um pilão diferente. O único caminho para a saída passa entre os golpes."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a3.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve atravessar a cozinha?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a3.intro.3]"]},
             {
               "code": 108,
               "indent": 0,

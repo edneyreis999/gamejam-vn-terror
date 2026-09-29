@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar as raízes principais antes que bloqueiem a passagem.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a6.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Encontrar as partes mortas da planta, onde a seiva não circula, e\\nabrir um túnel entre elas.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a6.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Quebrar a ligação sobrenatural entre o corpo e a terra.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a6.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Arrancar as raízes principais antes que bloqueiem a passagem.<Bind Picture: 50><Hide Choice Window>",
-                  "Encontrar as partes mortas da planta, onde a seiva não circula, e abrir um túnel entre elas.<Bind Picture: 51><Hide Choice Window>",
-                  "Quebrar a ligação sobrenatural entre o corpo e a terra.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.a6.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.a6.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.a6.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Arrancar as raízes principais antes que bloqueiem a passagem.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.a6.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Encontrar as partes mortas da planta, onde a seiva não circula, e abrir um túnel entre elas.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.a6.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Quebrar a ligação sobrenatural entre o corpo e a terra.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.a6.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As raízes mais grossas são arrancadas antes de cercarem o grupo. Sem essas raízes para sustentá-lo, o tronco central se inclina e puxa as raízes menores para longe do corredor. Os frutos cheios de dentes caem ao lado."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a6.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As raízes arrancadas se dividem em fibras menores e apertam o corredor por todos os lados."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a6.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Algumas raízes estão secas e não se movem como as outras. O grupo as afasta e usa galhos para mantê-las no lugar, formando um pequeno túnel. As raízes vivas continuam se fechando sobre o corredor principal. O túnel entre as partes secas permanece aberto por tempo suficiente para todos passarem."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a6.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O túnel alcança tecido ainda vivo, que se fecha ao redor do grupo como uma cicatriz."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a6.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo identifica, nas marcas do tronco, o nome que prende o cadáver ao pomar. Quando essa ligação é quebrada, o corpo se solta da árvore e as raízes param de se mover. O pomar seca rapidamente, abrindo uma passagem entre os troncos."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a6.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O nome rompido pertence a outro morto; o vínculo do Corpo-Seco se fortalece e reúne as raízes."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a6.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo entra em um pomar escondido no subsolo. No centro há uma árvore enorme, com um corpo ressecado preso ao tronco. Um nome está marcado na casca ao redor do corpo. As raízes da árvore atravessam o chão e se espalham por todo o lugar."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a6.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Quando os heróis se aproximam, as raízes se dobram como dedos e começam a fechar o corredor. Frutos duros caem dos galhos e se abrem no chão, mostrando fileiras de dentes. A passagem fica cada vez mais estreita."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a6.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

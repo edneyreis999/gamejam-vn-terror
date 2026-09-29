@@ -2794,20 +2794,7 @@
                 "Vaelith"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Vaelith retorna com os registros da expedição e começa a reconstruir o arquivo<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "que buscava. Reúne cópias dispersas, recupera relatos esquecidos e organiza"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.vaelith.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2819,20 +2806,7 @@
                 "Vaelith"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "advertências para que outros reconheçam os perigos que seu grupo enfrentou.<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Alguns textos ficam sob acesso restrito."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.vaelith.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2844,20 +2818,7 @@
                 "Vaelith"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Nos catálogos, ele explica o risco e indica o preparo necessário para<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "estudá-los."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.vaelith.3]"]},
             {
               "code": 357,
               "indent": 0,

@@ -2794,20 +2794,7 @@
                 "Seraphina"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Seraphina inaugura uma pequena casa de cura para receber aqueles que não<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "encontraram ajuda em outro lugar. As prateleiras se enchem de ervas,"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.seraphina.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2819,20 +2806,7 @@
                 "Seraphina"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "instrumentos e registros sobre males que muitos preferem ignorar. À noite,<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "organiza o conhecimento trazido da expedição."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.seraphina.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2844,20 +2818,7 @@
                 "Seraphina"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Escreve os tratamentos que funcionaram e demora mais nas páginas dedicadas aos<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "próprios erros."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.seraphina.3]"]},
             {
               "code": 357,
               "indent": 0,

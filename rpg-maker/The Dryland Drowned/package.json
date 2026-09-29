@@ -3,7 +3,7 @@
     "main": "index.html",
     "chromium-args": "--force-color-profile=srgb",
     "window": {
-        "title": "Afogados em Terra Seca",
+        "title": "The Dryland Drowned",
         "width": 1280,
         "height": 720,
         "position": "center",
