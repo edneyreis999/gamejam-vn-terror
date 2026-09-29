@@ -29,12 +29,25 @@ Abra `The Dryland Drowned/game.rmmzproject` no MZ. A árvore contém título (1)
 Para mudar Gorvak:
 
 1. Na árvore, expanda **Taverna** e abra **Conversa — Gorvak**, Map037.
-2. Abra o evento001. O próprio evento contém menu, conversa iniciada por Ivaí, respostas de seleção e retorno; edite **Mostrar texto** no ramo desejado.
+2. Abra o evento001. O próprio evento contém menu, conversa iniciada por Ivaí, respostas de seleção e retorno. Cada **Mostrar texto** guarda só uma chave `$[conv.gorvak.…]`; edite a fala em `Languages.tsv` (veja [Idiomas e textos](#idiomas-e-textos)).
 3. Edite imagens, posição, escala, tom, duração e saída nos comandos nativos/VNPictureBusts do evento correspondente. Salve pelo editor e inicie uma sessão de teste para ver o resultado.
 
-Prólogo, encontros, Conselho, finais e epílogos têm seus textos e escolhas no evento001 dos respectivos mapas. Maps037–044 correspondem a Gorvak, Elowen, Griznik, Seraphina, Bimbren, Liora, Vaelith e Draska. CE040 encaminha cenas da campanha e conserva as responsabilidades compartilhadas ainda necessárias. Sacrifícios, despedidas, descobertas, memorial, configuração, preload e créditos continuam usando Common Events funcionais. Os42 atalhos editoriais foram removidos; a entrada de autoria é o evento que o jogo executa.
+Prólogo, encontros, Conselho, finais e epílogos têm suas chaves de texto e escolhas no evento001 dos respectivos mapas. Maps037–044 correspondem a Gorvak, Elowen, Griznik, Seraphina, Bimbren, Liora, Vaelith e Draska. CE040 encaminha cenas da campanha e conserva as responsabilidades compartilhadas ainda necessárias. Sacrifícios, despedidas, descobertas, memorial, configuração, preload e créditos continuam usando Common Events funcionais. Os42 atalhos editoriais foram removidos; a entrada de autoria é o evento que o jogo executa.
 
 Não é necessário adicionar comentários de identidade ou executar uma CLI para habilitar comandos suportados pelo MZ/provedor. Os comentários históricos de fonte e status podem continuar úteis aos autores. Preserve a distinção criativa do [GDD canônico](../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md); uma edição técnica não aprova texto ou arte provisórios.
+
+### Idiomas e textos
+
+O jogo tem português e inglês; o inglês é o padrão sem preferência salva, e o jogador troca em Opções → Geral → Idioma. Todo texto do jogador fica em `The Dryland Drowned/Languages.tsv` (UTF-8, separado por tabulação, colunas exatas `Key`, `English`, `Portuguese`). Os eventos guardam a estrutura, os controles e a chave `$[chave]`: um **Mostrar texto** por chave, escolhas como `$[chave]<Bind Picture: 50><Hide Choice Window>`, rótulos de imagem como `\FS[22]<WordWrap>$[chave]`, e variáveis de texto (Controlar variáveis → Script) com a chave entre aspas.
+
+Para mudar um texto:
+
+1. Encontre a chave no evento (ou em `planos/tasks/coreto-english-localization/source-map.md`) e edite as duas colunas no arquivo.
+2. Não use tabulação nem aspas retas `"` nas células: uma aspa solta impede o carregamento da tabela e o jogo não inicia. Use `<I>…</I>` para vozes e inscrições e `<br>` só para quebras intencionais; mantenha nas duas colunas os mesmos `\V[n]`, `<I>` e `\EFFECT`.
+3. Valide: `node coreto/tools/coreto/cli.mjs --project 'rpg-maker/The Dryland Drowned' message language validate --format tsv --json`.
+4. Recarregue o jogo: a tabela é lida na inicialização.
+
+Chave ausente aparece como `undefined`, célula vazia como `UNDEFINED!`; não há volta automática para o outro idioma. Regras de estilo e o glossário estão em `planos/tasks/coreto-english-localization/translator-guide.md` e `glossary.md`.
 
 ### Nomes e consultas da campanha
 
@@ -68,7 +81,7 @@ CE61 contém o palco e a imagem **Pular créditos · Esc**. CE63 contém **Mostr
 
 ### Áudio
 
-Options oferece Música, Ambiente, Temas e Efeitos, inicialmente em 40%, persistidos como preferências. Presentation mantém o descritor do ME ativo para que Temas altere o buffer atual, inclusive volume zero, sem reiniciá-lo. Os eventos continuam escolhendo as faixas. Consulte [proveniência e observações de áudio](asset-provenance/audio.md) para separar aceites anteriores, testes de buffer e audição desta mudança.
+Opções → Áudio oferece Música, Ambiente, Temas e Efeitos (Music, Ambience, Jingles, Sound Effects), inicialmente em 40%, persistidos como preferências. Presentation mantém o descritor do ME ativo para que Temas altere o buffer atual, inclusive volume zero, sem reiniciá-lo. Os eventos continuam escolhendo as faixas. Consulte [proveniência e observações de áudio](asset-provenance/audio.md) para separar aceites anteriores, testes de buffer e audição desta mudança.
 
 ## Verificar alterações
 

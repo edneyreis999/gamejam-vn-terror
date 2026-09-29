@@ -2926,7 +2926,7 @@
                                 153,
                                 0,
                                 4,
-                                "\"Selecionar\""
+                                "\"$[conv.select]\""
                             ]
                         },
                         {
@@ -2946,7 +2946,7 @@
                                 153,
                                 0,
                                 4,
-                                "\"Retirar do grupo\""
+                                "\"$[conv.remove]\""
                             ]
                         },
                         {
@@ -3056,21 +3056,15 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 0,
-                            "parameters": [
-                                "Grupo: \\V[150]/\\V[151]"
-                            ]
-                        },
+                        {"code":401,"indent":0,"parameters":["$[conv.party_count]"]},
                         {
                             "code": 102,
                             "indent": 0,
                             "parameters": [
                                 [
-                                    "Conversar",
+                                    "$[choice.conv.talk]",
                                     "\\V[153]<Enable Switch: 30>",
-                                    "Voltar à taverna"
+                                    "$[choice.conv.back]"
                                 ],
                                 2,
                                 0,
@@ -3083,7 +3077,7 @@
                             "indent": 0,
                             "parameters": [
                                 0,
-                                "Conversar"
+                                "$[choice.conv.talk]"
                             ],
                             "collapsed": true
                         },
@@ -3295,13 +3289,7 @@
                                 "Ivaí"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Por que decidiu participar da expedição, Gorvak?"
-                            ]
-                        },
+                        {"code":401,"indent":1,"parameters":["$[conv.gorvak.ivai_why]"]},
                         {
                             "code": 111,
                             "indent": 1,
@@ -3454,13 +3442,7 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Minha oficina pegou fogo. Quero usar minha parte do tesouro para reconstruí-la e trazer meus aprendizes de volta ao trabalho."
-                            ]
-                        },
+                        {"code":401,"indent":1,"parameters":["$[conv.gorvak.why]"]},
                         {
                             "code": 111,
                             "indent": 1,
@@ -3613,13 +3595,7 @@
                                 "Ivaí"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "E durante a viagem? Como pode nos ajudar?"
-                            ]
-                        },
+                        {"code":401,"indent":1,"parameters":["$[conv.ivai.help]"]},
                         {
                             "code": 111,
                             "indent": 1,
@@ -3772,13 +3748,7 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Se uma porta pesada bloquear o caminho, posso abri-la. Se uma viga ceder, posso sustentá-la enquanto vocês passam. Foi assim que ajudei meus aprendizes a escapar do incêndio."
-                            ]
-                        },
+                        {"code":401,"indent":1,"parameters":["$[conv.gorvak.help1]"]},
                         {
                             "code": 111,
                             "indent": 1,
@@ -3931,13 +3901,7 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "E, se o medo apertar, fico por perto. Mesmo com o teto desabando, consegui voltar para buscar meu último aprendiz."
-                            ]
-                        },
+                        {"code":401,"indent":1,"parameters":["$[conv.gorvak.help2]"]},
                         {
                             "code": 101,
                             "indent": 1,
@@ -3949,13 +3913,7 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Mas prestem atenção aos estalos. Madeira velha pode estar avisando que vai ceder."
-                            ]
-                        },
+                        {"code":401,"indent":1,"parameters":["$[conv.gorvak.note]"]},
                         {
                             "code": 108,
                             "indent": 1,
@@ -4054,7 +4012,7 @@
                             "indent": 0,
                             "parameters": [
                                 1,
-                                "Selecionar / Retirar do grupo"
+                                "\\V[153]<Enable Switch: 30>"
                             ],
                             "collapsed": true
                         },
@@ -4293,13 +4251,7 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 2,
-                            "parameters": [
-                                "Pode contar comigo, Ivaí. Vou conferir nosso equipamento antes de sairmos."
-                            ]
-                        },
+                        {"code":401,"indent":2,"parameters":["$[conv.gorvak.selected]"]},
                         {
                             "code": 108,
                             "indent": 2,
@@ -4505,13 +4457,7 @@
                                 "Gorvak"
                             ]
                         },
-                        {
-                            "code": 401,
-                            "indent": 2,
-                            "parameters": [
-                                "Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir."
-                            ]
-                        },
+                        {"code":401,"indent":2,"parameters":["$[conv.gorvak.full]"]},
                         {
                             "code": 108,
                             "indent": 2,
@@ -4615,7 +4561,7 @@
                             "indent": 0,
                             "parameters": [
                                 2,
-                                "Voltar à taverna"
+                                "$[choice.conv.back]"
                             ],
                             "collapsed": true
                         },

@@ -2691,13 +2691,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Comparar cada grito com seu eco e encontrar o som que se repete\\nao contrário.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b7.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,13 +2770,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Examinar a ordem das datas e descobrir qual morte não pertence ao\\ngrupo.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b7.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,13 +2849,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Seguir as penas e as correntes de ar até uma passagem fora do\\nalcance do tecido.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b7.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Comparar cada grito com seu eco e encontrar o som que se repete ao contrário.<Bind Picture: 50><Hide Choice Window>",
-                  "Examinar a ordem das datas e descobrir qual morte não pertence ao grupo.<Bind Picture: 51><Hide Choice Window>",
-                  "Seguir as penas e as correntes de ar até uma passagem fora do alcance do tecido.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b7.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b7.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b7.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Comparar cada grito com seu eco e encontrar o som que se repete ao contrário.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b7.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Examinar a ordem das datas e descobrir qual morte não pertence ao grupo.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b7.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Seguir as penas e as correntes de ar até uma passagem fora do alcance do tecido.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b7.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Todos os gritos produzem ecos, mas um deles repete o som de trás para a frente. Seguindo esse eco estranho, o grupo encontra o ponto onde o tecido branco está sendo formado. Ali, uma dobra do tecido vibra a cada grito. O grupo a prende contra a parede, abafando o eco invertido. As datas deixam de mudar, e a faixa cai no chão."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b7.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O eco invertido é apenas atraso do salão; o grito verdadeiro aproxima todas as datas do presente."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b7.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo compara as datas e percebe que uma delas recua de maneira diferente. Sob seus números, surge um nome que não pertence a nenhum dos presentes, escrito antes dos demais. Ao ler esse nome, o grupo revela que o tecido branco está repetindo a previsão de morte de outra pessoa. Os nomes dos heróis desaparecem e o tecido volta para o teto."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b7.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A morte apontada como estranha traz o nome de um herói, que termina de surgir no tecido branco."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b7.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As penas no chão são empurradas por uma corrente de ar que o tecido branco não consegue alcançar. O grupo segue esse caminho estreito enquanto o tecido desce ao redor. O tecido branco se estica atrás dos heróis, mas não alcança a passagem. Todos conseguem chegar ao outro lado."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b7.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As penas conduzem a uma corrente de ar fechada pelo tecido, que envolve a saída por inteiro."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b7.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grito de uma ave invisível corta o silêncio e abre um rasgo no teto. Uma longa faixa de tecido branco cai pela abertura, coberta por datas que ainda não aconteceram."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b7.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "A cada novo grito, uma das datas muda e se aproxima do dia atual. Ao mesmo tempo, o nome de um dos heróis começa a aparecer no tecido. Quando a data no tecido for a de hoje, a previsão de morte vai se cumprir. Penas caídas se arrastam pelo chão, levadas por uma corrente de ar."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b7.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

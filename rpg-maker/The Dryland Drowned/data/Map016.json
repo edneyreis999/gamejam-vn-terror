@@ -2691,13 +2691,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Encontrar a única figura cuja sombra se volta para a própria\\nvela.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b2.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,13 +2770,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Romper o feitiço que liga os nomes bordados nos panos aos heróis.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b2.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,13 +2849,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desmanchar a costura de cada nome sem rasgar os panos da\\nprocissão.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b2.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Encontrar a única figura cuja sombra se volta para a própria vela.<Bind Picture: 50><Hide Choice Window>",
-                  "Romper o feitiço que liga os nomes bordados nos panos aos heróis.<Bind Picture: 51><Hide Choice Window>",
-                  "Desmanchar a costura de cada nome sem rasgar os panos da procissão.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b2.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b2.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b2.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Encontrar a única figura cuja sombra se volta para a própria vela.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b2.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Romper o feitiço que liga os nomes bordados nos panos aos heróis.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b2.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Desmanchar a costura de cada nome sem rasgar os panos da procissão.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b2.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As sombras se alongam para longe das velas, menos uma, que se volta para a própria chama. Essa sombra mostra qual figura está guiando a procissão. O grupo passa pelo lado oposto. As outras almas seguem a guia, deixando livre uma passagem pelo corredor. Ao se afastarem das velas, os heróis recuperam as lembranças uns dos outros."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b2.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A sombra escolhida pertence a um morto comum; a figura da frente apaga as velas dos vivos."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b2.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O encantamento que liga os nomes bordados aos heróis é rompido. As letras perdem a forma, até restarem apenas fios soltos no tecido. Sem essa ligação, as almas deixam de reconhecer o grupo como parte da procissão. Elas seguem pelo corredor carregando panos vazios até desaparecerem na escuridão."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b2.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O vínculo resiste nos panos e troca os nomes bordados, incorporando o grupo ao cortejo."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b2.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os pontos de cada nome são soltos com cuidado, sem rasgar os panos. As letras se desfazem antes que as velas se apaguem. Sem nomes para levar, as almas abrem espaço no meio da procissão e deixam o grupo passar."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b2.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A costura se rompe junto com o tecido funerário, e as almas reconhecem os nomes expostos."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b2.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Uma procissão de figuras cobertas atravessa o corredor sem mover os pés. Cada uma carrega uma vela acesa e um pano bordado com o nome de um dos heróis."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b2.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Quando uma chama se apaga, o herói ligado àquela vela começa a desaparecer das lembranças dos companheiros. Se todas se apagarem, ninguém no grupo conseguirá lembrar quem esteve ali.<br>Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b2.intro.2]"]},
             {
               "code": 108,
               "indent": 0,

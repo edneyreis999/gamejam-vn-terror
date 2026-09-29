@@ -2830,20 +2830,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Meu nome é Rheed. Fui eu quem espalhou os anúncios da expedição, a mando de Ivaí e a"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "contragosto de Irati. "
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2855,27 +2842,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Naqueles dias, eu cuidava dos pequenos afazeres de Ivaí. Mesmo que sua mãe tenha"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "deixado um aviso para não levar outros na missão, Ivaí insistiu que eu recrutasse"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "mercenários para nos acompanhar. "
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2887,20 +2854,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Quando os oito chegaram à taverna, Ivaí transbordou de satisfação, abrindo os"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "registros de sua família para começar a passar as informações ao grupo."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.3]"]},
             {
               "code": 108,
               "indent": 0,
@@ -3048,27 +3002,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Os papéis eram de Irati, mãe dele. Entre as anotações, havia lembranças da família,"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "a descrição de uma tradição passada por gerações e referências àquele lugar que"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "procurávamos."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.4]"]},
             {
               "code": 108,
               "indent": 0,
@@ -3216,20 +3150,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Os mapas estavam incompletos. Ivaí admitiu isso assim que os abriu. Ainda havia"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "caminho por descobrir. "
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.5]"]},
             {
               "code": 101,
               "indent": 0,
@@ -3241,20 +3162,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Do tesouro, falou pouco. Disse que pertencia à família. Mostrou as anotações da mãe,"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "explicou a ligação com o lugar e olhou para os oito."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.6]"]},
             {
               "code": 108,
               "indent": 0,
@@ -3621,20 +3529,7 @@
                 "Ivaí"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Minha família deixou as pistas. Vocês trazem a experiência para seguirmos por elas."
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O que encontrarmos, repartiremos entre nós."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.ivai.1]"]},
             {
               "code": 108,
               "indent": 0,
@@ -3886,13 +3781,7 @@
                 "Rheed"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Você não está esquecendo de nenhuma informação, mestre?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.rheed.7]"]},
             {
               "code": 108,
               "indent": 0,
@@ -4144,13 +4033,7 @@
                 "Ivaí"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Os detalhes serão adicionados ao longo do caminho."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[prologue.tavern.ivai.2]"]},
             {
               "code": 108,
               "indent": 0,

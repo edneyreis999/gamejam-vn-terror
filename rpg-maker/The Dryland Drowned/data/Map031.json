@@ -2794,20 +2794,7 @@
                 "Griznik"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Griznik abre a oficina que sempre desejou. Na parede atrás da bancada,<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "organiza as lascas recolhidas durante a expedição. Sob cada uma, escreve o"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.griznik.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2819,20 +2806,7 @@
                 "Griznik"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "nome de um companheiro e uma pequena lembrança: uma piada, uma discussão, um<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "gesto que ninguém mais teria motivo para registrar."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.griznik.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2844,20 +2818,7 @@
                 "Griznik"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Sua oficina fica conhecida pelas construções seguras e pelos orçamentos que<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "ele se recusa a reduzir quando isso exige retirar um apoio necessário"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.griznik.3]"]},
             {
               "code": 357,
               "indent": 0,

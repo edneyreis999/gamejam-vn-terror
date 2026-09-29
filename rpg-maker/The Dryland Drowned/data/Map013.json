@@ -2691,13 +2691,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Destravar os ganchos certos e abrir uma passagem entre os sacos.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a7.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,13 +2770,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Balançar pelas correntes e alcançar a saída antes que a prensa\\nseja ativada.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a7.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,13 +2849,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.a7.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Destravar os ganchos certos e abrir uma passagem entre os sacos.<Bind Picture: 50><Hide Choice Window>",
-                  "Balançar pelas correntes e alcançar a saída antes que a prensa seja ativada.<Bind Picture: 51><Hide Choice Window>",
-                  "Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.a7.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.a7.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.a7.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Destravar os ganchos certos e abrir uma passagem entre os sacos.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.a7.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Balançar pelas correntes e alcançar a saída antes que a prensa seja ativada.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.a7.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Ignorar as vozes conhecidas e não abrir os sacos que pedem ajuda.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.a7.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os ganchos certos são soltos um após o outro. Os sacos presos a esses ganchos caem fora da passagem, deixando um corredor livre no meio do depósito. As vozes continuam pedindo ajuda, mas ficam cada vez mais distantes enquanto o grupo avança."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a7.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os ganchos destravados descem juntos e amontoam os sacos diante da saída."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a7.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo usa as correntes para passar por cima dos sacos e dos ganchos. Cada balanço leva todos para mais perto da saída e para longe da prensa. Quando a máquina esmaga os sacos, o grupo já está em segurança do outro lado."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a7.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Uma corrente cede durante o balanço. O grupo cai entre os sacos, e os ganchos fecham o caminho até a saída."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a7.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As vozes imitam pessoas conhecidas e pedem ajuda, mas ninguém responde. Sem conseguir enganar o grupo, elas começam a se confundir e a chamar por nomes errados. Os sacos seguem para a prensa, enquanto o caminho até a saída permanece aberto."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a7.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Uma voz reconhecida recebe resposta; os sacos se agitam e seus ganchos fecham o corredor."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.a7.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo entra em um depósito sem janelas. Dezenas de sacos pendem de ganchos presos a correntes que se movem pelo teto. Alguns parecem conter apenas areia. Outros se debatem e chamam os heróis com vozes de pessoas conhecidas."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a7.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Os ganchos levam todos os sacos até uma enorme prensa no fim do corredor. Ainda resta uma faixa estreita junto à parede para alcançar a saída. Sempre que alguém se aproxima de um saco que pede ajuda, os ganchos se voltam para essa passagem e começam a bloqueá-la."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.a7.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

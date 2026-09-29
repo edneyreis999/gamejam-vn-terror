@@ -2794,20 +2794,7 @@
                 "Bimbren"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Bimbren usa a recompensa para reabrir o serviço de mensagens entre as<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "comunidades isoladas. Recupera postos de descanso, organiza os trajetos e"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.bimbren.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2819,20 +2806,7 @@
                 "Bimbren"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "contrata novos mensageiros. Na primeira página de seu livro de rotas, registra<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "os nomes dos companheiros que não voltaram."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.bimbren.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2844,27 +2818,7 @@
                 "Bimbren"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Durante algum tempo, ainda promete prazos difíceis e confere o relógio sempre<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "que alguém se atrasa. Até que um jovem mensageiro retorna com a bolsa cheia: a<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "ponte estava cedendo, e ele decidiu interromper a viagem"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.bimbren.3]"]},
             {
               "code": 357,
               "indent": 0,

@@ -141,7 +141,7 @@
         "Corpo",
         "Acessório"
     ],
-    "gameTitle": "Afogados em Terra Seca",
+    "gameTitle": "The Dryland Drowned",
     "gameoverMe": {
         "name": "Gameover1",
         "pan": 0,
@@ -459,10 +459,10 @@
             "possession": "Posse",
             "expTotal": "Atual %1",
             "expNext": "Para o Próximo %1",
-            "saveMessage": "Salvar em qual arquivo?",
-            "loadMessage": "Carregar qual arquivo?",
-            "file": "Arquivo",
-            "autosave": "Autossalvar",
+            "saveMessage": "$[sys.save_message]",
+            "loadMessage": "$[sys.load_message]",
+            "file": "$[sys.file]",
+            "autosave": "$[sys.autosave]",
             "partyName": "Equipe de %1",
             "emerge": "%1 emergiu!",
             "preemptive": "%1 conseguiu a iniciativa!",

@@ -1,0 +1,32 @@
+{
+  "captured": "2026-09-29",
+  "viewport": "1280x720 DPR1, Chrome via Playwright",
+  "pixels": "unaltered",
+  "images": [
+    {
+      "file": "images/council-choice-en.png",
+      "sha256": "a7fb0b4e0f25496ccba450b87c80ec2898b75393435245244d823111c3280980",
+      "source": "evidence/coreto-english-localization/C/C-44-council-choice.png"
+    },
+    {
+      "file": "images/encounter-choice-en.png",
+      "sha256": "c990a368fab128ea19ec060a6781b9b4472197d98646c90118330b81bd2c45f4",
+      "source": "task-04 smoke (A6 encounter after reload); copy kept in the local archive"
+    },
+    {
+      "file": "images/language-option-en.png",
+      "sha256": "fbe276ca4fbb7d86dacf43124912cfb1ace454f61fb29bfb64d3e4cb050621ed",
+      "source": "evidence/coreto-english-localization/A/A-02-options-en.png"
+    },
+    {
+      "file": "images/prologue-en.png",
+      "sha256": "db64e7c7d88af94a3b2d615a5beb189af0dec4ba5e4007c3222e0a81d1c72fe9",
+      "source": "evidence/coreto-english-localization/A/A-12-prologue-en-again.png"
+    },
+    {
+      "file": "images/prologue-pt.png",
+      "sha256": "2e856e4d1f18a91d53c61d75218df2b4ded48598765af9dea7cb690c56c88f63",
+      "source": "evidence/coreto-english-localization/A/A-11-prologue-pt-same-block.png"
+    }
+  ]
+}

@@ -2691,13 +2691,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Comparar as exigências nos troncos e mostrar que elas não podem\\nfazer parte da mesma promessa.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b4.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,13 +2770,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Quebrar o feitiço que permite à presença usar o nome da\\nComadre Fulozinha e fingir ser a guardiã da mata.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b4.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,13 +2849,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Subir pelas árvores e atravessar as copas antes que os galhos\\nfechem a passagem.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b4.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Comparar as exigências nos troncos e mostrar que elas não podem fazer parte da mesma promessa.<Bind Picture: 50><Hide Choice Window>",
-                  "Quebrar o feitiço que permite à presença usar o nome da Comadre Fulozinha e fingir ser a guardiã da mata.<Bind Picture: 51><Hide Choice Window>",
-                  "Subir pelas árvores e atravessar as copas antes que os galhos fechem a passagem.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b4.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b4.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b4.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Comparar as exigências nos troncos e mostrar que elas não podem fazer parte da mesma promessa.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b4.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Quebrar o feitiço que permite à presença usar o nome da Comadre Fulozinha e fingir ser a guardiã da mata.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b4.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Subir pelas árvores e atravessar as copas antes que os galhos fechem a passagem.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b4.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo compara as inscrições e reúne as exigências que se contradizem. Não seria possível cumprir uma sem quebrar a outra. Quando a contradição é dita em voz alta, a presença tenta mudar sua história, mas as frases continuam visíveis nos troncos. A cobrança perde a força, e as raízes se afastam da trilha."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_1.success]"]},
             {
               "code": 101,
               "indent": 2,
@@ -3843,13 +3831,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo sai enquanto a voz ainda tenta inventar uma nova versão."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_1.success.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4050,13 +4032,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As exigências parecem compatíveis porque a imitadora altera os troncos durante a comparação."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4257,13 +4233,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo reconhece o encantamento nas marcas feitas umas por cima das outras: a presença usa o nome da Comadre Fulozinha para dar força às suas ordens. Quando os heróis desfazem essa ligação, a voz perde o disfarce e se transforma em um murmúrio que já não consegue comandar as árvores. As inscrições desaparecem, os galhos se abrem e o grupo atravessa a mata."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4464,13 +4434,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O nome desfeito pertence à guardiã verdadeira, ampliando a voz roubada entre as árvores."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4671,13 +4635,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo sobe pelos troncos e passa de galho em galho, acima das raízes que bloqueiam a trilha. A voz continua cobrando a promessa, mas os heróis seguem sem responder. Todos alcançam o outro lado do cerco antes que as copas se juntem. Ao descerem fora do círculo, deixam a presença para trás."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4878,13 +4836,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "As copas completam o círculo antes da travessia, dobrando os galhos de volta ao mesmo ponto."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b4.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5035,21 +4987,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5061,7 +5004,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5165,7 +5108,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo entra em um trecho de mata fechada. Uma voz entre as árvores diz ser a Comadre Fulozinha e cobra uma promessa que ninguém se lembra de ter feito. Nos troncos, surgem frases dizendo que os heróis fizeram aquela promessa, mas cada árvore conta uma versão diferente. Uma exige que levem uma oferenda para dentro da mata; outra proíbe que tragam qualquer coisa."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b4.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "A voz insiste para que alguém aceite a cobrança. Sempre que uma exigência é repetida, raízes fecham a trilha e galhos se aproximam acima do grupo. O nome da guardiã aparece gravado sobre marcas mais antigas, como se alguém tentasse esconder outra identidade. No alto, ainda há espaço entre as copas para passar."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b4.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5544,13 +5475,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

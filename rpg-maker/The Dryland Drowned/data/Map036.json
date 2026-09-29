@@ -2794,27 +2794,7 @@
                 "Draska"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Após sobreviver à campanha, ela usa sua parte da recompensa para adquirir a<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "mina abandonada e fundar a cooperativa que sempre planejou. Leva meses até que<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "o primeiro túnel seja considerado seguro."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.draska.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2826,20 +2806,7 @@
                 "Draska"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Nesse tempo, trabalha ao lado dos novos companheiros, recuperando ferramentas,<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "reforçando passagens e aprendendo a dividir as decisões que antes tomava"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.draska.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2851,20 +2818,7 @@
                 "Draska"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "sozinha. Na entrada da mina, uma placa guarda os nomes daqueles que não<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "voltaram."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.draska.3]"]},
             {
               "code": 101,
               "indent": 0,
@@ -2876,20 +2830,7 @@
                 "Draska"
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Ela acompanha a gravação de cada nome e deixa espaço para uma frase: “Nenhuma<br>"
-              ]
-            },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "recompensa vale esconder um risco da equipe.”"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[epilogue.draska.4]"]},
             {
               "code": 357,
               "indent": 0,

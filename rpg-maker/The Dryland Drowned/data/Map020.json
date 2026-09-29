@@ -2691,13 +2691,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Devolver ao poço o nome roubado pela canção e quebrar o\\nencantamento.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b6.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,13 +2770,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Controlar a respiração, resistir à sensação de afogamento e\\nnão responder à canção.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b6.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,13 +2849,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desfazer a trança de cabelos sem arrebentar a mecha de\\ncabelo que sustenta a passarela.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b6.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Devolver ao poço o nome roubado pela canção e quebrar o encantamento.<Bind Picture: 50><Hide Choice Window>",
-                  "Controlar a respiração, resistir à sensação de afogamento e não responder à canção.<Bind Picture: 51><Hide Choice Window>",
-                  "Desfazer a trança de cabelos sem arrebentar a mecha de cabelo que sustenta a passarela.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b6.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b6.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b6.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Devolver ao poço o nome roubado pela canção e quebrar o encantamento.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b6.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Controlar a respiração, resistir à sensação de afogamento e não responder à canção.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b6.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Desfazer a trança de cabelos sem arrebentar a mecha de cabelo que sustenta a passarela.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b6.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O grupo percebe que o nome repetido permite à canção roubar outras vozes. Ao pronunciá-lo de volta para o fundo do poço, desfaz o encantamento. O poço deixa de imitar as vozes do grupo e responde apenas com um som vindo das pedras. Sem o nome roubado para chamar novas vítimas, a música desaparece e os cabelos param de subir pelas paredes."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_1.success]"]},
             {
               "code": 101,
               "indent": 2,
@@ -3843,13 +3831,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A trança fica imóvel sob as tábuas, permitindo que o grupo atravesse."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_1.success.2]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4050,13 +4032,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O nome restituído pertence a outro poço, e a canção sobe pelas pedras com a voz do grupo."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4257,13 +4233,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Mesmo sentindo como se estivesse debaixo d’água, o grupo respira devagar e não acompanha a canção. O verso seguinte fica sem resposta, e a sensação de afogamento começa a diminuir. Quando o canto termina, todos conseguem respirar normalmente outra vez e atravessam a passarela."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4464,13 +4434,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O próximo verso interrompe a respiração, tornando o chão seco tão sufocante quanto água profunda."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4671,13 +4635,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os nós que se apertam ao ritmo da canção são soltos um de cada vez, sem romper a mecha que sustenta as tábuas. Quando o último nó é aberto, os cabelos deixam de se mover e a canção perde a força. A mecha de sustentação permanece firme, e o grupo atravessa a passarela."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4878,13 +4836,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Os nós se apertam antes que o grupo consiga soltá-los. A canção se intensifica, e a sensação de afogamento impede a travessia."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b6.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5035,21 +4987,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5061,7 +5004,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5165,7 +5108,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "O grupo encontra um poço fundo, mas completamente seco. Uma passarela estreita cruza sua abertura até a saída. Quando alguém olha para baixo, uma canção sobe usando sua voz e repete um nome que ninguém reconhece."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b6.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Cabelos molhados sobem do poço, prendem-se às duas margens e se trançam sob as tábuas quebradas da passarela. Uma mecha grossa sustenta a travessia e continua até o fundo como uma corda; as outras se apertam em nós a cada verso. Os heróis sentem água entrando em seus pulmões, mesmo sem haver uma única gota ao redor."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b6.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5544,13 +5475,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,

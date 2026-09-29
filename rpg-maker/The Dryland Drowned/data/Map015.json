@@ -2691,13 +2691,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Comparar o assobio com os ecos e encontrar a fresta que responde\\nantes do som.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b1.approach_1]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,13 +2770,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Examinar as promessas escritas nas paredes e descobrir qual delas\\nnunca foi feita.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b1.approach_2]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,13 +2849,13 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar a pequena janela onde o assobio se esconde e\\njogá-la para fora do casarão.\"",
+                  "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b1.approach_3]\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2916,13 +2916,7 @@
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Comparar o assobio com os ecos e encontrar a fresta que responde antes do som.<Bind Picture: 50><Hide Choice Window>",
-                  "Examinar as promessas escritas nas paredes e descobrir qual delas nunca foi feita.<Bind Picture: 51><Hide Choice Window>",
-                  "Arrancar a pequena janela onde o assobio se esconde e jogá-la para fora do casarão.<Bind Picture: 52><Hide Choice Window>",
-                  "Rever descrição<Bind Picture: 41>",
-                  "Recuar<Bind Picture: 42><Show Switch: 34>"
-                ],
+                ["$[choice.b1.approach_1]<Bind Picture: 50><Hide Choice Window>","$[choice.b1.approach_2]<Bind Picture: 51><Hide Choice Window>","$[choice.b1.approach_3]<Bind Picture: 52><Hide Choice Window>","$[choice.encounter.reread]<Bind Picture: 41>","$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"],
                 -1,
                 0,
                 2,
@@ -2934,7 +2928,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Comparar o assobio com os ecos e encontrar a fresta que responde antes do som.<Bind Picture: 50><Hide Choice Window>"
+                "$[choice.b1.approach_1]<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2958,7 +2952,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Examinar as promessas escritas nas paredes e descobrir qual delas nunca foi feita.<Bind Picture: 51><Hide Choice Window>"
+                "$[choice.b1.approach_2]<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2976,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Arrancar a pequena janela onde o assobio se esconde e jogá-la para fora do casarão.<Bind Picture: 52><Hide Choice Window>"
+                "$[choice.b1.approach_3]<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3006,7 +3000,7 @@
               "indent": 1,
               "parameters": [
                 3,
-                "Rever descrição<Bind Picture: 41>"
+                "$[choice.encounter.reread]<Bind Picture: 41>"
               ]
             },
             {
@@ -3030,7 +3024,7 @@
               "indent": 1,
               "parameters": [
                 4,
-                "Recuar<Bind Picture: 42><Show Switch: 34>"
+                "$[choice.encounter.retreat]<Bind Picture: 42><Show Switch: 34>"
               ]
             },
             {
@@ -3825,13 +3819,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Quase todos os ecos surgem depois do assobio. Apenas um aparece antes e revela a fresta onde a presença está escondida. Quando a abertura é fechada, o som volta contra si mesmo, perde as vozes roubadas e desaparece."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b1.result_1.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4032,13 +4020,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O eco escolhido responde depois do assobio, e a casa fecha suas frestas ao redor das vozes."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b1.result_1.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4239,13 +4221,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "Ao comparar as promessas com os nomes e as datas, o grupo encontra a assinatura de alguém que já havia morrido quando o acordo teria sido feito. A contradição revela a promessa inventada pela presença. Quando a mentira é apontada, suas palavras desaparecem da madeira. As lembranças roubadas voltam, e a casa já não consegue imitar as vozes do grupo."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b1.result_2.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4446,13 +4422,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A promessa apontada como falsa pertence a um dos heróis, e a Matinta apaga seu nome das paredes."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b1.result_2.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4653,13 +4623,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "A pequena janela é arrancada junto com a presença escondida em sua madeira. Do lado de fora, o assobio se mistura com o vento e perde a força. As portas e janelas param de se mover, e o grupo consegue deixar o casarão."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b1.result_3.success]"]},
             {
               "code": 108,
               "indent": 2,
@@ -4860,13 +4824,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 2,
-              "parameters": [
-                "O assobio abandona o postigo antes que ele seja arrancado e ocupa todas as janelas da casa."
-              ]
-            },
+            {"code":401,"indent":2,"parameters":["$[enc.b1.result_3.failure]"]},
             {
               "code": 108,
               "indent": 2,
@@ -5017,21 +4975,12 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 1,
-              "parameters": [
-                "Recuar preserva o que o grupo descobriu. Voltar para a taverna?"
-              ]
-            },
+            {"code":401,"indent":1,"parameters":["$[enc.common.retreat_prompt]"]},
             {
               "code": 102,
               "indent": 1,
               "parameters": [
-                [
-                  "Recuar",
-                  "Continuar expedição"
-                ],
+                ["$[choice.retreat.confirm]","$[choice.retreat.continue]"],
                 -2,
                 0,
                 2,
@@ -5043,7 +4992,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Recuar"
+                "$[choice.retreat.confirm]"
               ]
             },
             {
@@ -5147,7 +5096,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Continuar expedição"
+                "$[choice.retreat.continue]"
               ]
             },
             {
@@ -5490,13 +5439,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Um assobio atravessa as frestas de um casarão abandonado. Logo depois, o som responde usando a voz do último herói que falou."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b1.intro.1]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5508,13 +5451,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Cada vez que alguém responde ao assobio, uma palavra desaparece das lembranças do grupo. As portas e janelas começam a se mover como bocas, tentando repetir os nomes dos heróis antes que eles sejam esquecidos. Nas paredes, promessas riscadas na madeira se misturam a nomes e datas de antigos moradores."
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.b1.intro.2]"]},
             {
               "code": 101,
               "indent": 0,
@@ -5526,13 +5463,7 @@
                 ""
               ]
             },
-            {
-              "code": 401,
-              "indent": 0,
-              "parameters": [
-                "Como o grupo deve escapar?"
-              ]
-            },
+            {"code":401,"indent":0,"parameters":["$[enc.common.prompt_escape]"]},
             {
               "code": 108,
               "indent": 0,
