@@ -28,9 +28,13 @@ canonicalCase('IT-026','hidden approach and sacrifice pictures cannot change foc
   await choices(browser,kind);await browser.press('ArrowDown',40);
   const before=await state(browser),focus=await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
   await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,[40,41,42,50,51,52]);
-  await browser.press('ArrowDown',40);await browser.press('ArrowRight',39);await browser.press('Enter',13);
+  await browser.press('ArrowDown',40);await browser.press('ArrowRight',39);
   assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),focus);await hidden(browser,true);
   await browser.screenshot(`${evidence('IT-026')}/${kind}-hidden.png`);
+  // MessageVisibility restores on OK without confirming the focused choice.
+  await browser.press('Enter',13);await hidden(browser,false);await choices(browser,kind);
+  assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),focus);
+  await browser.press('Tab',9);await hidden(browser,true);
   await click(browser,640,585);await hidden(browser,false);await choices(browser,kind);
   assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),focus);
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.scale.x'),0,`${kind}: HIDE restoration must retain the picture-only choice presentation`);

@@ -1,9 +1,7 @@
 Window_ChoiceList.prototype.applyHideChoiceWindow = function() {
-    this._pictureChoicesHidden = false;
-    for (const command of this._list) command.name = command.name.replace(/<HIDE CHOICE WINDOW>/gi, () => {
-        this._pictureChoicesHidden = true;
-        return '';
-    }).trim();
+    // Decide from the unmodified message choices so repeated calls keep the list hidden after its names are stripped.
+    this._pictureChoicesHidden = $gameMessage.choices().some(choice => /<HIDE CHOICE WINDOW>/i.test(choice));
+    for (const command of this._list) command.name = command.name.replace(/<HIDE CHOICE WINDOW>/gi, '').trim();
     this.scale.set(this._pictureChoicesHidden ? 0 : 1);
 };
 Window_ChoiceList.prototype.applyPictureChoiceBindings = function() {

@@ -177,8 +177,10 @@ function decodeValue(schema, raw, path) {
         if (!Array.isArray(encoded)) valueError(schema, encoded, path);
         value = encoded.map((item, index) => decodeValue(schema.items, item, `${path}/${index}`));
     } else if (schema.type === "number") {
-        if (typeof raw !== "string" || raw.trim() === "") valueError(schema, raw, path);
-        value = Number(raw);
+        // Hand-written arrays such as "[5]" hold JSON numbers where the editor writes "[\"5\"]"; the original plugins accept both.
+        if (typeof raw === "number") value = raw;
+        else if (typeof raw !== "string" || raw.trim() === "") valueError(schema, raw, path);
+        else value = Number(raw);
     } else if (schema.type === "boolean") {
         if (raw !== "true" && raw !== "false") valueError(schema, raw, path);
         value = raw === "true";

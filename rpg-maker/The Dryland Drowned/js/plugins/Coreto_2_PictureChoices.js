@@ -323,8 +323,10 @@ function decodeValue(schema, raw, path) {
         if (!Array.isArray(encoded)) valueError(schema, encoded, path);
         value = encoded.map((item, index) => decodeValue(schema.items, item, `${path}/${index}`));
     } else if (schema.type === "number") {
-        if (typeof raw !== "string" || raw.trim() === "") valueError(schema, raw, path);
-        value = Number(raw);
+        // Hand-written arrays such as "[5]" hold JSON numbers where the editor writes "[\"5\"]"; the original plugins accept both.
+        if (typeof raw === "number") value = raw;
+        else if (typeof raw !== "string" || raw.trim() === "") valueError(schema, raw, path);
+        else value = Number(raw);
     } else if (schema.type === "boolean") {
         if (raw !== "true" && raw !== "false") valueError(schema, raw, path);
         value = raw === "true";
@@ -580,11 +582,9 @@ for (const namespace of [catalog.pluginId, catalog.reference.pluginId]) {
 }
 
 Window_ChoiceList.prototype.applyHideChoiceWindow = function() {
-    this._pictureChoicesHidden = false;
-    for (const command of this._list) command.name = command.name.replace(/<HIDE CHOICE WINDOW>/gi, () => {
-        this._pictureChoicesHidden = true;
-        return '';
-    }).trim();
+    // Decide from the unmodified message choices so repeated calls keep the list hidden after its names are stripped.
+    this._pictureChoicesHidden = $gameMessage.choices().some(choice => /<HIDE CHOICE WINDOW>/i.test(choice));
+    for (const command of this._list) command.name = command.name.replace(/<HIDE CHOICE WINDOW>/gi, '').trim();
     this.scale.set(this._pictureChoicesHidden ? 0 : 1);
 };
 Window_ChoiceList.prototype.applyPictureChoiceBindings = function() {

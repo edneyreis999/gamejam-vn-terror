@@ -4859,7 +4859,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[30]",
+                        "PictureIDs:arraynum": "[\"30\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -4886,7 +4886,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[30]",
+                        "PictureIDs:arraynum": "[\"30\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -4913,7 +4913,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[10]",
+                        "PictureIDs:arraynum": "[\"10\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5068,7 +5068,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[31]",
+                        "PictureIDs:arraynum": "[\"31\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5095,7 +5095,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[31]",
+                        "PictureIDs:arraynum": "[\"31\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5122,7 +5122,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[11]",
+                        "PictureIDs:arraynum": "[\"11\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5277,7 +5277,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[32]",
+                        "PictureIDs:arraynum": "[\"32\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5304,7 +5304,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[32]",
+                        "PictureIDs:arraynum": "[\"32\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5331,7 +5331,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[12]",
+                        "PictureIDs:arraynum": "[\"12\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5486,7 +5486,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[33]",
+                        "PictureIDs:arraynum": "[\"33\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5513,7 +5513,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[33]",
+                        "PictureIDs:arraynum": "[\"33\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5540,7 +5540,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[13]",
+                        "PictureIDs:arraynum": "[\"13\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5695,7 +5695,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[34]",
+                        "PictureIDs:arraynum": "[\"34\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5722,7 +5722,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[34]",
+                        "PictureIDs:arraynum": "[\"34\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5749,7 +5749,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[14]",
+                        "PictureIDs:arraynum": "[\"14\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5904,7 +5904,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[35]",
+                        "PictureIDs:arraynum": "[\"35\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5931,7 +5931,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[35]",
+                        "PictureIDs:arraynum": "[\"35\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -5958,7 +5958,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[15]",
+                        "PictureIDs:arraynum": "[\"15\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6113,7 +6113,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[36]",
+                        "PictureIDs:arraynum": "[\"36\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6140,7 +6140,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[36]",
+                        "PictureIDs:arraynum": "[\"36\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6167,7 +6167,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[16]",
+                        "PictureIDs:arraynum": "[\"16\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6322,7 +6322,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[37]",
+                        "PictureIDs:arraynum": "[\"37\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6349,7 +6349,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[37]",
+                        "PictureIDs:arraynum": "[\"37\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6376,7 +6376,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[17]",
+                        "PictureIDs:arraynum": "[\"17\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6422,7 +6422,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[40]",
+                        "PictureIDs:arraynum": "[\"40\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6449,7 +6449,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[40]",
+                        "PictureIDs:arraynum": "[\"40\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6476,7 +6476,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[41]",
+                        "PictureIDs:arraynum": "[\"41\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6498,7 +6498,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[41]",
+                        "PictureIDs:arraynum": "[\"41\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6512,7 +6512,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[42]",
+                        "PictureIDs:arraynum": "[\"42\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6534,7 +6534,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[42]",
+                        "PictureIDs:arraynum": "[\"42\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6548,7 +6548,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[43]",
+                        "PictureIDs:arraynum": "[\"43\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6570,7 +6570,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[43]",
+                        "PictureIDs:arraynum": "[\"43\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6584,7 +6584,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[44]",
+                        "PictureIDs:arraynum": "[\"44\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6643,7 +6643,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[44]",
+                        "PictureIDs:arraynum": "[\"44\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6707,7 +6707,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[44]",
+                        "PictureIDs:arraynum": "[\"44\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -6771,7 +6771,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[44]",
+                        "PictureIDs:arraynum": "[\"44\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -7166,7 +7166,7 @@
                     "PictureTextChange",
                     "Texto nativo do painel",
                     {
-                        "PictureIDs:arraynum": "[71]",
+                        "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "12",
                         "upperleft:json": "\"\\\\FS[28]Destinos\"",
                         "up:json": "\"\"",
@@ -7274,7 +7274,7 @@
                     "PictureTextChange",
                     "Texto nativo do painel",
                     {
-                        "PictureIDs:arraynum": "[75]",
+                        "PictureIDs:arraynum": "[\"75\"]",
                         "Padding:eval": "12",
                         "upperleft:json": "\"\\\\FS[21]\\\\V[173]\\n\\n\\\\FS[19]Sob a igreja tomada pela mata,\\numa prisioneira de pedra\\nguarda parte do caminho.\"",
                         "up:json": "\"\"",
@@ -7425,7 +7425,7 @@
                     "PictureTextChange",
                     "Texto nativo do painel",
                     {
-                        "PictureIDs:arraynum": "[76]",
+                        "PictureIDs:arraynum": "[\"76\"]",
                         "Padding:eval": "12",
                         "upperleft:json": "\"\\\\FS[21]\\\\V[174]\\n\\n\\\\FS[19]Nas atrações abandonadas, uma\\nfigueira aprisiona uma voz que\\nconhece o mapa.\"",
                         "up:json": "\"\"",
@@ -7576,7 +7576,7 @@
                     "PictureTextChange",
                     "Texto nativo do painel",
                     {
-                        "PictureIDs:arraynum": "[77]",
+                        "PictureIDs:arraynum": "[\"77\"]",
                         "Padding:eval": "12",
                         "upperleft:json": "\"\\\\FS[21]\\\\V[175]\\n\\n\\\\FS[19]As duas peças sobrepostas\\nrevelam o vilarejo onde a\\nverdade foi enterrada.\"",
                         "up:json": "\"\"",
@@ -7684,7 +7684,7 @@
                     "PictureTextChange",
                     "Texto nativo do painel",
                     {
-                        "PictureIDs:arraynum": "[81]",
+                        "PictureIDs:arraynum": "[\"81\"]",
                         "Padding:eval": "12",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -7918,7 +7918,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[78]",
+                        "PictureIDs:arraynum": "[\"78\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -7940,7 +7940,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[72]",
+                        "PictureIDs:arraynum": "[\"72\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -8166,7 +8166,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[79]",
+                        "PictureIDs:arraynum": "[\"79\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -8188,7 +8188,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[73]",
+                        "PictureIDs:arraynum": "[\"73\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -8414,7 +8414,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[80]",
+                        "PictureIDs:arraynum": "[\"80\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -8436,7 +8436,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[74]",
+                        "PictureIDs:arraynum": "[\"74\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -8450,7 +8450,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[81]",
+                        "PictureIDs:arraynum": "[\"81\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -10536,7 +10536,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[50]",
+                        "PictureIDs:arraynum": "[\"50\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -10558,7 +10558,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[50]",
+                        "PictureIDs:arraynum": "[\"50\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -10585,7 +10585,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[51]",
+                        "PictureIDs:arraynum": "[\"51\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -10607,7 +10607,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[51]",
+                        "PictureIDs:arraynum": "[\"51\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -10634,7 +10634,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[52]",
+                        "PictureIDs:arraynum": "[\"52\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -10656,7 +10656,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[52]",
+                        "PictureIDs:arraynum": "[\"52\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -11131,7 +11131,7 @@
                     "PictureTextChange",
                     "Texto nativo da imagem",
                     {
-                        "PictureIDs:arraynum": "[40]",
+                        "PictureIDs:arraynum": "[\"40\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -17911,7 +17911,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[30]",
+                        "PictureIDs:arraynum": "[\"30\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[165]<br>\\\\FS[20]\\\\V[192]<br>\\\\FS[18]\\\\V[200]<br>\\\\V[208]\"",
                         "up:json": "\"\"",
@@ -18342,7 +18342,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[31]",
+                        "PictureIDs:arraynum": "[\"31\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[166]<br>\\\\FS[20]\\\\V[193]<br>\\\\FS[18]\\\\V[201]<br>\\\\V[209]\"",
                         "up:json": "\"\"",
@@ -18773,7 +18773,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[32]",
+                        "PictureIDs:arraynum": "[\"32\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[167]<br>\\\\FS[20]\\\\V[194]<br>\\\\FS[18]\\\\V[202]<br>\\\\V[210]\"",
                         "up:json": "\"\"",
@@ -19204,7 +19204,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[33]",
+                        "PictureIDs:arraynum": "[\"33\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[168]<br>\\\\FS[20]\\\\V[195]<br>\\\\FS[18]\\\\V[203]<br>\\\\V[211]\"",
                         "up:json": "\"\"",
@@ -19635,7 +19635,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[34]",
+                        "PictureIDs:arraynum": "[\"34\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[169]<br>\\\\FS[20]\\\\V[196]<br>\\\\FS[18]\\\\V[204]<br>\\\\V[212]\"",
                         "up:json": "\"\"",
@@ -20066,7 +20066,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[35]",
+                        "PictureIDs:arraynum": "[\"35\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[170]<br>\\\\FS[20]\\\\V[197]<br>\\\\FS[18]\\\\V[205]<br>\\\\V[213]\"",
                         "up:json": "\"\"",
@@ -20497,7 +20497,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[36]",
+                        "PictureIDs:arraynum": "[\"36\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[171]<br>\\\\FS[20]\\\\V[198]<br>\\\\FS[18]\\\\V[206]<br>\\\\V[214]\"",
                         "up:json": "\"\"",
@@ -20928,7 +20928,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[37]",
+                        "PictureIDs:arraynum": "[\"37\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"<WordWrap>\\\\FS[24]\\\\V[172]<br>\\\\FS[20]\\\\V[199]<br>\\\\FS[18]\\\\V[207]<br>\\\\V[215]\"",
                         "up:json": "\"\"",
@@ -23855,7 +23855,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[41]",
+                        "PictureIDs:arraynum": "[\"41\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -49986,7 +49986,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[71]",
+                        "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\\\\FS[28]Elenco\\n\\n\\\\FS[22]\\\\V[157]\\n\\\\V[158]\\n\\\\V[159]\\n\\\\V[160]\\n\\\\V[161]\\n\\\\V[162]\\n\\\\V[163]\\n\\\\V[164]\"",
                         "up:json": "\"\"",
@@ -63211,7 +63211,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[40]",
+                        "PictureIDs:arraynum": "[\"40\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -63283,7 +63283,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[41]",
+                        "PictureIDs:arraynum": "[\"41\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -63305,7 +63305,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[41]",
+                        "PictureIDs:arraynum": "[\"41\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -63377,7 +63377,7 @@
                     "PictureTextChange",
                     "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[42]",
+                        "PictureIDs:arraynum": "[\"42\"]",
                         "Padding:eval": "8",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
@@ -63399,7 +63399,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[42]",
+                        "PictureIDs:arraynum": "[\"42\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -67031,7 +67031,7 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
-                    "VisuMZ_0_CoreEngine",
+                    "Coreto_0_CoreEngine",
                     "SystemLoadImages",
                     "SystemLoadImages",
                     {
@@ -67050,6 +67050,104 @@
                         "titles1:arraystr": "[]",
                         "titles2:arraystr": "[]"
                     }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/animations/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks2/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/characters/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/faces/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/parallaxes/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/pictures/ = [\"Dryland_Taverna\",\"Dryland_Tavern_H1\",\"Dryland_Tavern_H2\",\"Dryland_Tavern_H3\",\"Dryland_Tavern_H4\",\"Dryland_Tavern_H5\",\"Dryland_Tavern_H6\",\"Dryland_Tavern_H7\",\"Dryland_Tavern_H8\",\"Dryland_H1\",\"Dryland_H2\",\"Dryland_H3\",\"Dryland_H4\",\"Dryland_H5\",\"Dryland_H6\",\"Dryland_H7\",\"Dryland_H8\",\"Dryland_ivai\",\"Dryland_Button\",\"Dryland_Tag\",\"Dryland_Panel\",\"Dryland_DestinationCard\",\"Dryland_DestinationLabel\",\"Dryland_Destination_physical\",\"Dryland_Destination_supernatural\",\"Dryland_Destination_final\",\"Dryland_MapDwarven\",\"Dryland_MapElven\",\"Dryland_MapComplete\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_actors/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/system/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/tilesets/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles2/ = []"
                 ]
             },
             {

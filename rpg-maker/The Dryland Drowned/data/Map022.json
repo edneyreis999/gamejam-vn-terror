@@ -2691,7 +2691,7 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
@@ -2713,7 +2713,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[50]",
+                  "PictureIDs:arraynum": "[\"50\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2770,7 +2770,7 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
@@ -2792,7 +2792,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[51]",
+                  "PictureIDs:arraynum": "[\"51\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }
@@ -2849,7 +2849,7 @@
                 "PictureTextChange",
                 "PictureTextChange",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "Padding:eval": "8",
                   "upperleft:json": "\"\"",
                   "up:json": "\"\"",
@@ -2871,7 +2871,7 @@
                 "ChangePictureChoiceSettingsOne",
                 "ChangePictureChoiceSettingsOne",
                 {
-                  "PictureIDs:arraynum": "[52]",
+                  "PictureIDs:arraynum": "[\"52\"]",
                   "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                   "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                 }

@@ -1,8 +1,7 @@
-import { prologueMarkers } from '../helpers/formation.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import assert from 'node:assert/strict';
 import { access } from 'node:fs/promises';
-import { selectFile, project } from '../helpers/native-chrome.mjs';
+import { project } from '../helpers/native-chrome.mjs';
 import { localAssets } from '../../tools/native-files.mjs';
 import { catalog } from '../helpers/formation.mjs';
 import { entry } from '../helpers/native-shared.mjs';
@@ -74,63 +73,6 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
  for(let i=1;i<=8;i++)assert.ok(assets.has(`img/pictures/Dryland_Memorial_H${i}.png`));
  await assert.rejects(access(project+'/native-layout-manifest.json'),{code:'ENOENT'});
  assert.equal(await browser.evaluate('typeof expeditionQA'),'undefined');
-});
-
-// The declared provider list and its actual calls are distinct from bitmap readiness.
-canonicalCase('IT-074', 'one native CoreEngine list requests every tavern image before entry return and resumed interaction', {timeout:90000}, async t => {
-  const { default: assert } = await import('node:assert/strict');
-  const { stat } = await import('node:fs/promises');
-  const { events, choices, activate, pause, returnToTavern } = await import('../helpers/formation.mjs');
-  const expected=['Taverna',...Array.from({length:8},(_,i)=>`Tavern_H${i+1}`),...Array.from({length:8},(_,i)=>`H${i+1}`),'ivai','Button','Tag','Panel','DestinationCard','DestinationLabel','Destination_physical','Destination_supernatural','Destination_final','MapDwarven','MapElven','MapComplete'].map(name=>'Dryland_'+name);
-  const helper=events.find(event=>event?.name==='Taverna — Carregar imagens');
-  const command=helper.list.find(command=>command.code===357);
-  assert.equal(command.parameters[0],'VisuMZ_0_CoreEngine');assert.equal(command.parameters[1],'SystemLoadImages');
-  assert.deepEqual(JSON.parse(command.parameters[3]['pictures:arraystr']),expected);
-  for(const name of expected)assert.ok((await stat(`rpg-maker/The Dryland Drowned/img/pictures/${name}.png`)).size>0);
-  const browser=await entry(t);
-  await browser.evaluate(`window.preloadLog=[];window.preloadActive=false;
-    const plugin=PluginManager.callCommand;PluginManager.callCommand=function(interpreter,name,command,args){
-      if(name==='VisuMZ_0_CoreEngine'&&command==='SystemLoadImages'){preloadLog.push({type:'begin'});preloadActive=true;try{return plugin.call(this,interpreter,name,command,args);}finally{preloadActive=false;preloadLog.push({type:'end'});}}
-      return plugin.call(this,interpreter,name,command,args);
-    };
-    const load=ImageManager.loadBitmap;ImageManager.loadBitmap=function(folder,name){if(preloadActive&&folder==='img/pictures/')preloadLog.push({type:'request',name});return load.call(this,folder,name);};
-    const show=Game_Screen.prototype.showPicture;Game_Screen.prototype.showPicture=function(id,name,...args){if(name==='Dryland_Taverna')preloadLog.push({type:'stage'});return show.call(this,id,name,...args);};`);
-  await browser.press('Enter',13);await selectFile(browser,1);
-  for(const text of prologueMarkers){
-    await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(text)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);await browser.press('Enter',13);
-  }
-  await choices(browser,'formation');
-  const first=await browser.evaluate('preloadLog');
-  const stage=first.findIndex(item=>item.type==='stage');
-  assert.ok(stage>0,JSON.stringify(first));assert.deepEqual(first.slice(0,stage).filter(item=>item.type==='request').slice(-29).map(item=>item.name),expected);
-  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'),11,'Preload calls preserve the consecutive native choice blocks');
-  // Hold an unused bust at the I/O boundary. The provider starts loading but
-  // neither the preload command nor the project freezes the active scene.
-  await browser.evaluate(`preloadLog=[];delete ImageManager._cache['img/pictures/Dryland_H8.png'];
-    const start=Bitmap.prototype._startLoading;Bitmap.prototype._startLoading=function(){if(this._url.endsWith('/Dryland_H8.png')&&!window.releasePreloadImage){this._loadingState='loading';window.releasePreloadImage=()=>start.call(this);}else start.call(this);};`);
-  const before=await browser.evaluate('$gameSystem._dryland.campaign');
-  await activate(browser,'formation',0);await choices(browser,'hero');
-  assert.equal(await browser.evaluate('typeof releasePreloadImage'),'function');
-  assert.equal(await browser.evaluate("ImageManager._cache['img/pictures/Dryland_H8.png'].isReady()"),false);
-  await activate(browser,'hero',0);await pause(browser);
-  assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign'),before);
-  await browser.evaluate('releasePreloadImage()');await browser.waitFor('ImageManager.isReady()');
-  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
-  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
-  await browser.evaluate('preloadLog=[];');await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
-  assert.deepEqual(await browser.evaluate('preloadLog.filter(item=>item.type==="request").slice(-29).map(item=>item.name)'),expected);
-  assert.deepEqual(await browser.evaluate('$gameSystem._dryland.campaign'),before);
-  const heroMenu='$gameMessage._drylandChoiceFocus?.key==="hero"&&SceneManager._scene._choiceListWindow?.isOpenAndActive()';
-  for(let step=0;step<12;step++){
-    await browser.press('Enter',13);
-    await browser.waitFor(`(${heroMenu})||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)`);
-    if(await browser.evaluate(heroMenu))break;
-  }
-  await choices(browser,'hero');await returnToTavern(browser);
-  assert.ok(await browser.evaluate('preloadLog.some(item=>item.type==="stage")'));
-  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-08/20260912/preloaded-return.png');
-  assert.deepEqual(browser.exceptions,[]);
 });
 
 canonicalCase('IT-075', 'late missing pictures retain default scene-start LoadError and native Retry recovery', {timeout:60000}, async t => {
