@@ -4,7 +4,7 @@ slug: coreto-english-localization
 stage: ready-for-tasks
 product_consolidation: approved-2026-09-28
 technical_approval: approved-2026-09-29
-amended: 2026-09-29 (D-016–D-022; peer review rounds 01–03)
+amended: 2026-09-29 (D-016–D-023; peer review rounds 01–04)
 ---
 
 # Whole-game English localization with Coreto
@@ -16,11 +16,12 @@ Portuguese. English is the initial default. Preserve the story's information,
 character identities, player choices and horror atmosphere.
 
 The user requested local specification through issue-to-spec and grill-me.
-Product decisions D-001–008 and technical decisions D-009–021 are recorded in
+Product decisions D-001–008 and technical decisions D-009–023 are recorded in
 the [interview](entrevista.md). The technical design was approved on 2026-09-29
-(D-015) and amended the same day by D-016–D-022 after peer review rounds
-[01](review-01.md) and [02](review-02.md). Translation implementation and its
-verification remain pending.
+(D-015) and amended the same day by D-016–D-023 after peer review rounds
+[01](review-01.md), [02](review-02.md), [03](review-03.md) and
+[04](review-04.md). Translation implementation and its verification remain
+pending.
 
 ## Scope
 
@@ -112,10 +113,10 @@ review; neither it nor technical validation substitutes for Edney's judgment.
 | Source | Owner/status | Governs | Change |
 | --- | --- | --- | --- |
 | [Interview](entrevista.md) D-001–007 | User decisions; confirmed individually | Languages, default, native behavior, style, reviewer roles | New product scope |
-| [Canonical GDD](../../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md) §3.5, §22 | Confirmed design | Language boundary and preserved narrative/game rules | Replace PT-BR-only exclusion with approved bilingual direction |
+| [Canonical GDD](../../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md) §1.1, §3.5, §22, §26 | Confirmed design | Language boundary, reduced motion, authoring owner and preserved narrative/game rules | Replace PT-BR-only exclusion with approved bilingual direction; scope animated text out of reduced motion now (D-023d); record table prose ownership in task-07 (D-023e) |
 | [ADR-001](adrs/adr-001-bilingual-product.md) | Accepted individual product decisions | Scoped supersession of monolingual baseline | New record |
-| [ADR-002](adrs/adr-002-native-table-and-provider-integration.md) | Accepted 2026-09-29 (D-015), amended by D-017–D-021 | Table ownership of bilingual prose; key/markup model; Coreto baseline boundary | New record |
-| [Peer review 01](review-01.md), [02](review-02.md) | Findings decided 2026-09-29 | Evidence behind D-017–D-022 | Historical once incorporated |
+| [ADR-002](adrs/adr-002-native-table-and-provider-integration.md) | Accepted 2026-09-29 (D-015), amended by D-017–D-023 | Table ownership of bilingual prose; key/markup model; Coreto baseline boundary | New record |
+| [Peer review 01](review-01.md), [02](review-02.md), [03](review-03.md), [04](review-04.md) | Findings decided 2026-09-29 | Evidence behind D-017–D-023 | Historical once incorporated |
 | [Standing directives](../../../docs/_memory/standing_directives.md), [ADRs](../../../docs/adrs/README.md) | Accepted | Evidence, own saves, risk grouping, immutable baselines | Preserve except explicit bilingual player-copy boundary |
 | [Coreto authoring](../../../coreto/docs/autoria.md), [extensions](../../../coreto/docs/extensoes.md) | Installed capability contracts | Discovery, native configuration, read-only bundles | Preserve |
 | [Updated narrative copy](../updated-narrative-copy/spec.md) and current native events | Existing narrative baseline | Source meaning and scene ownership | Translate; do not rewrite historical approvals |
@@ -213,8 +214,9 @@ This explicitly changes the earlier rule that prose is edited only inside MZ
 events. Native events remain scene owners, while bilingual copy has one editable
 table. Do not maintain independent PT prose in both events and the table. The
 [authoring ADR](adrs/adr-002-native-table-and-provider-integration.md), accepted
-under D-015, partially supersedes that rule; record it in the GDD when the
-table lands.
+under D-015, partially supersedes that rule (GDD §1.1 "Autoria de cenas" and
+§26 "Autoria pelo editor", and `AGENTS.md:17`). Task-07 records the
+supersession in those three places when the table lands, not before (D-023e).
 
 Create a reviewable source mapping beside the spec during implementation: key,
 native owner/field, PT source, source hash, intended context and editorial state.
@@ -235,16 +237,36 @@ Provide translator guidance and a term glossary with the completed translation.
   so later rendering uses the current locale; never localize domain identifiers.
   Variable expansion precedes the native localization hook in the text pipeline;
   verify variable-to-key consumers in real rendering. Preserve hero proper names.
+- Control Variables (Script) literals shown through `\V[n]` (D-023a): 68
+  assignments of 25 distinct strings. They are the memorial cause in `V152` in
+  the 16 `memorial_cause.*` Common Events (CE125–CE260, every ninth ID), copied by
+  CE059 into `V192–V199`; the destination status in CE039 `V176–V178`; the
+  cast status in CE117 `V153`, concatenated into `V157–V164`; and the hero
+  visit choice label in Map037–044 `V153`. Assign the unresolved key as the
+  value, for example `"$[memorial.cause.a2]"`, by native data editing. The CLI
+  text operations do not target code 122. Keys resolve after variable
+  expansion, including inside concatenations, and stay unresolved in saves.
+  A `\V[n]` choice or picture payload stays as it is when every value assigned
+  to `V[n]` is a key, a preserved proper name or a composition of them. The
+  memorial cause is a factual caption: it gets no `<I>` (D-023b).
 - Reachable System terms, database display names and plugin text parameters,
   set to `$[key]` (D-017). Known fields:
   - Save: `Save.VocabLockedSaveSlot`, `SaveConfirm.VocabSaveFailure`,
     `SaveConfirm.VocabLoadFailure`, `AutosaveConfirm.VocabAutosaveSuccess`,
-    `AutosaveConfirm.VocabAutosaveFailure`.
+    `AutosaveConfirm.VocabAutosaveFailure`, `SaveMenu.LatestText` (`NEW!`,
+    D-023f). `SaveConfirm.VocabSaveSuccess` is inventoried as unreachable,
+    because the game has no manual-save route.
   - ExtMessageFunc: `Buttons.Options`.
   - Options: `OptionsSettings.buttonAssistCategory`, category `Name` and row
     `TextStr`.
   - Message: `Localization.Name`, which labels the language row.
   - AniMsgTextEffects: `Options.Name`.
+
+  Intentional exceptions (D-023f): the Text Effects row's `ON`/`OFF`, which
+  its catalog `DrawJS` draws, and the message-console labels `FAST`
+  (ExtMessageFunc `Buttons.FastFwd`) and `HIDE` (MessageVisibility
+  `ButtonName`) stay as language-neutral control labels in both languages.
+  No callback changes for them.
 
   Other visible string fields found during task-02 are recorded, then keyed.
   Prefer string fields (`TextStr` wins over `TextJS` in Options rows) and native
@@ -282,7 +304,10 @@ and AniMsgTextEffects `Options.AddOption` set to `true`, because the catalog
 rows' `ShowJS` requires them. Text Effects starts on: AniMsgTextEffects forces
 it on when no preference is stored, and its `applyData` runs after OptionsCore,
 so no reduced-motion default is possible natively (D-022). Players turn it off
-in the row, and the stored choice persists.
+in the row, and the stored choice persists. Animated text therefore ignores
+the system reduced-motion preference. GDD §1.1 and its QA policy record this
+exception for animated text only (D-023d). Every other motion still follows
+`V47` (`MotionPreference`).
 Language validation, persistence, refresh and unsupported-preference behavior
 remain native.
 The title CE002 already opens Options; the existing message console provides
@@ -319,7 +344,9 @@ same meaning in both languages:
   voices or visions in Show Text (other windows strip it). Use subdued existing
   presets (for example `SoftShiver`, `Flicker`, `Candle`, `Fade`), end with
   `<CLEAR EFFECTS>`, and use the same placement in both columns. Selection resets
-  each page. Players can disable animation with the Text Effects row.
+  each page. Players can disable animation with the Text Effects row. Effects
+  keep the plugin's standard behavior, outside the reduced-motion rule
+  (D-023d).
 - **Casing:** `<CAPS>`/`<CHAOS>` only for a possessed or creature voice, in both
   columns.
 - **Not used:** text macros inside cells, because Message Core expands macros
@@ -390,6 +417,51 @@ separate-agent evaluation, representative runtime paths and human acceptance.
 Update `rpg-maker/README.md` with the final native table-editing workflow at
 implementation. Do not run obsolete whole-map generators.
 
+### QA scope reduction (D-024)
+
+On 2026-09-29, during task-09, Edney reduced the runtime QA of this
+increment: “sobre a task 9, teste somente os 30% mais importantes. eu assumo
+os riscos. Mas tente mitigar o maximo que conseguir”. The static sensors
+(V-001, V-006) and Edney's editorial decision (V-005) were not reduced.
+
+**Selection rationale.** Each runtime check in L10–L15 was ranked by three
+questions, and a check stayed only if it scored high on the first two:
+
+1. *Can a defect here break the game or lose player progress?* Language
+   preference, live switching and Continue in the other language touch
+   configuration, saves and the running interpreter; a defect there breaks
+   every session, not one passage.
+2. *Is the surface still unobserved at runtime?* Tasks 01–04 had already
+   seen the title, Options, Save/Load, prologue, tavern panels, cast list,
+   encounter labels, sacrifice screen, a death and a farewell. Council,
+   closings, memorial cards, epilogues, credits and the only animated line
+   (Andirá) had never been seen; static checks cannot show layout or
+   animation.
+3. *Is it already mitigated by another sensor or by equivalence?* V-001
+   checks every key and payload of the whole corpus statically; the three
+   closings, the PT column and larger resolutions reuse the same windows,
+   wrapping and scaling as the observed paths.
+
+**Kept (the most important ~30%).** L10 and L11 (first boot in English,
+Options, preference persistence, Text Effects, switching mid-dialogue); L12
+(Continue in the other language after a committed death); one English L13
+campaign to an ending covering council, Andirá with Text Effects on and off,
+the Reunite closing, memorial, an epilogue and credits; L15 reduced to a
+fresh agent's read-only review of the whole English corpus, since reading
+quality (RQ-003) is the part no technical check covers.
+
+**Cut, risk accepted by Edney.** The PT comparison sequence, the 1920×1080
+path, the Destroy and Total loss closings, the L15 played route and a
+re-evaluation of keys changed after L15.
+
+**Mitigation applied.** V-001 was rerun after every table change; the
+reduced run still found and fixed two presentation defects (Andirá's preset
+faded the text; four memorial causes overflowed their card); 12 of 16 L15
+findings were fixed in the English column; the memorial fix, not replayed,
+is backed by an equivalent card that renders whole. Details:
+[task-09](task-09.md) and the
+[QA report](../../../docs/qa/reports/2026-09-29-coreto-english-localization.md).
+
 ## Follow-ups outside this spec
 
 - **Coreto Message Core (upstream):** AutoColor builds `\b${name}\b` without the
@@ -416,7 +488,8 @@ implementation. Do not run obsolete whole-map generators.
 Show the native language option, an English scene and its Portuguese counterpart,
 then a meaningful English choice. Suggested captures: language option, an
 atmospheric dialogue and a long choice panel. Collect during actual candidate
-play; prepared mockups do not constitute runtime evidence.
+play; prepared mockups do not constitute runtime evidence. Task-09 selects the
+captures after Edney's editorial acceptance (V-005, D-023e).
 
 ## Decisions and approval
 
@@ -427,8 +500,14 @@ approves the technical design; D-016 allows chained CLI calls after a pilot.
 Peer review round 01 produced D-017 (open Coreto parameters, tags and callbacks,
 native first), D-018 (key and markup model), D-019 (static English browser
 title), D-020 (frozen baseline and isolated runtime) and D-021 (native text
-treatment). No product or technical decision remains open, except the D-018 A1
-pilot condition. If runtime evidence reveals a provider/API limitation, first
+treatment). Round 02 produced D-022 (Text Effects default, AutoColor removal,
+`<br>` in picture wrappers, window title, credits and port 18737). Round 03
+corrected executability without a new decision. Round 04 produced D-023
+(variable-held text, reduced-motion exception for animated text, authority
+updates at task-07, ON/OFF and Save fields). During execution, D-024 reduced
+the task-09 runtime QA with the risk accepted by Edney (see “QA scope
+reduction”). No product or technical decision
+remains open, except the D-018 A1 pilot condition. If runtime evidence reveals a provider/API limitation, first
 look for a Coreto parameter or tag. Otherwise record it, hand it to the
 migration owner and amend the affected design, without editing Coreto sources or
 bundles.

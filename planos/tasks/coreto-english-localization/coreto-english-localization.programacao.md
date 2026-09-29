@@ -12,9 +12,9 @@ owned by separate work (D-013, D-014), frozen at the recorded D-020 baseline
 commit.
 
 Allowed production surfaces: any parameter of the active Coreto plugins in
-`js/plugins.js` (D-017), native database and event data, `System.json` and the
-`index.html` title (D-019), `Languages.tsv`, and localized assets where
-required. All engine, Coreto, VisuMZ and Dryland plugin source bytes remain
+`js/plugins.js` (D-017), native database and event data, `System.json`, the
+`index.html` title (D-019), the `package.json` window title (D-022d),
+`Languages.tsv`, and localized assets where required. All engine, Coreto, VisuMZ and Dryland plugin source bytes remain
 unchanged. No new plugin, helper, test adapter, runner or generator is authored,
 and the plugin registry is not reordered. Prefer string fields and tags. Change
 a callback parameter only when no string field or tag covers the need, and
@@ -41,7 +41,9 @@ command IDs, branch indices, picture bindings, domain identities, observed
 reading IDs and autosave checkpoints. Route/encounter
 display names may become unresolved translation keys; rules still use original
 IDs. Native renderer owns localization after variable expansion. Verify those
-paths rather than modifying the domain plugins.
+paths rather than modifying the domain plugins. Player-facing literals assigned
+by Control Variables (Script) hold the unresolved key as their value, edited as
+native data; the source map records each variable and its assigners (D-023a/c).
 
 Do not rewrite personal saves or claim old-save migration. Use only candidate
 campaigns and their own generated saves for QA, always served from the worktree

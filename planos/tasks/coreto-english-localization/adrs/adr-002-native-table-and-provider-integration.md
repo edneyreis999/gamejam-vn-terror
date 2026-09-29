@@ -2,7 +2,9 @@
 
 Status: accepted 2026-09-29 (D-015). Provider scope amended by D-013/D-014;
 integration boundary, key model and text treatment amended by D-017–D-021
-([peer review 01](../review-01.md)).
+([peer review 01](../review-01.md)); variable-held text, the reduced-motion
+exception for animated text and the timing of the GDD/`AGENTS.md` records
+amended by D-023 ([peer review 04](../review-04.md)).
 
 ## Decision
 
@@ -38,9 +40,16 @@ D-021. Choice-focus behavior remains native.
   moves prose editing out of Show Text fields. Native events still own the scene.
 
 On approval, partially supersede only the native-event-exclusive prose editing
-rule in GDD §1.1 and init-rpg-maker-mz ADR-006, as referenced there. Record the
-reciprocal GDD link when the table lands; do not edit an unavailable historical
-artifact or imply its implementation evidence applies here.
+rule in GDD §1.1 (“Autoria de cenas”), §26 (“Autoria pelo editor”),
+init-rpg-maker-mz ADR-006 as referenced there, and `AGENTS.md:17`. Task-07
+records the reciprocal GDD link and the `AGENTS.md` line when the table lands
+(D-023e); do not edit an unavailable historical artifact or imply its
+implementation evidence applies here.
+
+Recorded 2026-09-29 (task-07): the partial supersession notes now sit in
+[GDD §1.1 “Autoria de cenas” and §26 “Autoria pelo editor”](../../../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md),
+each linking back here, and the `AGENTS.md` content line names
+`Languages.tsv` as the owner of player prose.
 
 No save migration or provider compatibility is asserted by this design. Localized
 options, reading, pictures, autosave and Continue require fresh verification.

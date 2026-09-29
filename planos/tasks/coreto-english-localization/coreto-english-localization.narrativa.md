@@ -32,7 +32,11 @@ use `<I>…</I>` in both columns instead of quotation marks. Never use straight 
 in a cell; use typographic “ ” only where the prose needs quotes. Animated
 `\EFFECT` beats and `<CAPS>`/`<CHAOS>` casing are rare and reserved for
 supernatural voices or visions. The same treatment appears in both columns, and
-each use is listed for Edney. Names get no automatic color (D-022).
+each use is listed for Edney. Names get no automatic color (D-022). The memorial
+cause line is a factual caption, not a quoted inscription, and gets no `<I>`
+(D-023b). Memorial causes, destination and cast statuses, and the hero-visit
+choice label come from variables and are translated as keys like any other
+prose (D-023a).
 Credits are keyed per translatable line; the plugin line keeps “Plugins:
 VisuStella” unchanged (D-022). Dialogue length may change but cannot silently merge speaking
 turns, skip acknowledgements or change commitment boundaries.

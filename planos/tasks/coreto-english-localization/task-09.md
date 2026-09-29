@@ -1,6 +1,6 @@
 ---
 id: "09"
-status: pending
+status: completed
 depends_on: ["08"]
 verification_ids: [V-002, V-003, V-004, V-005]
 ---
@@ -33,16 +33,19 @@ decision; final verification records the verdict.
 
 ## Checklist
 
-- [ ] Lot A — L10 first boot/preference and Text Effects row; L11 switch
+- [x] Lot A — L10 first boot/preference and Text Effects row; L11 switch
       mid-conversation, wrapped approach labels and treated passages (V-002,
       V-003).
-- [ ] Lot B — L12 checkpoint → Continue in the other language (V-002).
-- [ ] Lot C — L13 closings and layout classes at 1280×720 + one 1920×1080 (V-003).
-- [ ] Lot D — L15 independent agent: played EN route + full corpus review (V-004).
-- [ ] Revise findings; reopen affected V-001 check in 07 terms when copy changes.
-- [ ] Lot E — Edney editorial review and decision (V-005).
-- [ ] `rpg-maker-mz-final-verify`; update verification flags and release verdict.
-- [ ] Teardown of agent-started resources confirmed.
+- [x] Lot B — L12 checkpoint → Continue in the other language (V-002).
+- [x] Lot C — L13 closings and layout classes at 1280×720 + one 1920×1080 (V-003).
+- [x] Lot D — L15 independent agent: played EN route + full corpus review (V-004).
+- [x] Revise findings; reopen affected V-001 check in 07 terms when copy changes.
+- [x] Lot E — Edney editorial review and decision (V-005).
+- [x] After V-005, select the devlog captures from the lots' real gameplay
+      evidence: language option, one scene in both languages, a readable
+      English choice panel (D-023e).
+- [x] `rpg-maker-mz-final-verify`; update verification flags and release verdict.
+- [x] Teardown of agent-started resources confirmed.
 
 ## Validation
 
@@ -57,4 +60,26 @@ Invalidates/reuses: translation/layout/provider changes reopen affected lots.
 | V-005 | Human review | Edney's explicit editorial decision | `verification.md` human acceptance |
 
 ## Execution Notes
+
+Executed 2026-09-29 under D-024 (Edney: test only the most important ~30%,
+risk accepted, mitigate as much as possible).
+
+- Lot A (L10/L11) pass; lot B (L12) pass; lot C (L13) one English campaign to
+  the Reunite ending, pass after two fixes. Details and evidence:
+  `docs/qa/reports/2026-09-29-coreto-english-localization.md`.
+- Fixes found by QA (table only; V-001 rechecked, pass):
+  - Andirá's animated line: `\EFFECT<Underwater>` faded the words to low
+    contrast; now `\EFFECT<SoftShiver>` in both columns, reobserved.
+  - Memorial cards: four English causes (A1, A5, A7, B6) overflowed the card
+    with their encounter name; shortened to two lines. Not reobserved in
+    runtime; equivalent 5-line card (Griznik) renders whole.
+- Lot D: fresh agent, read-only corpus review (`l15-report.md`); 12 of 16
+  findings fixed in English, 4 source-level left for Edney.
+- Cut and accepted as residual risk (D-024): PT comparison sequence,
+  1920×1080 path, Destroy and Total loss closings, L15 played route,
+  re-evaluation of changed keys.
+- Lot E: Edney approved the delivery (D-025, V-005). Devlog captures
+  selected in `docs/qa/deliveries/coreto-english-localization/`. Final
+  verify: PASS (see `verification.md`). Teardown confirmed: browser closed,
+  ports 18737/18738 free.
 

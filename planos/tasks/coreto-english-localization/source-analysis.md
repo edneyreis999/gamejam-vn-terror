@@ -83,6 +83,25 @@ still disabled there: `Localization:struct` has `Enable=false` with the default
 
 
 
+## Addendum — 2026-09-29 (peer review 04)
+
+The inventory above counts only Show Text, choices, scroll text and
+PictureTextChange. A read-only traversal at the D-020 baseline d17d886 also
+finds 68 player-facing assignments of 25 distinct Portuguese strings, made by
+Control Variables (Script) and shown through `\V[n]`:
+
+- 16 memorial causes (`V152`) in `memorial_cause.A1`–`B8` (CE125–CE260, every
+  ninth ID), dispatched by CE347 and copied by CE059 into `V192–V199`.
+- 12 destination-status assignments in CE039 (`V176–V178` × “Disponível”,
+  “Selecionado”, “Bloqueado”, “Concluído”).
+- 24 cast-status assignments in CE117 (`V153` × “Presente”, “Morto”,
+  “Presente · No grupo”, once per hero), concatenated into `V157–V164`.
+- 16 assignments in Map037–044 (`V153`: “Selecionar” / “Retirar do grupo”),
+  used by the choice `\V[153]<Enable Switch: 30>`.
+
+No script condition compares these literals. D-023 routes them through keys
+stored as variable values.
+
 The full keyed source map and visual image-text audit belong to implementation.
 No table keys, translations, specialist code or test cases exist yet. Preserve
 the distinction between inspected capabilities and executed candidate behavior.

@@ -11,7 +11,10 @@ language row and the delivered Text Effects row (D-021). Retain Audio and its
 four controls, with keyed labels. Show language names in their own language:
 English and Português. Key the row labels through `Localization.Name` and
 AniMsgTextEffects `Options.Name`. Text Effects starts on, which is native; the
-player can turn it off (D-022). Keep native option cycling, persistence,
+player can turn it off (D-022). Animated text ignores the system reduced-motion
+preference, as the GDD §1.1 exception records; every other motion keeps
+following `V47` (D-023d). The row's `ON`/`OFF`, like `FAST` and `HIDE`, stays
+as an intentional control label in both languages (D-023f). Keep native option cycling, persistence,
 refresh and title/in-game entry points. No custom selector, restart prompt or
 additional navigation. First-time English must allow finding the Portuguese
 option through the normal Options route.
@@ -26,8 +29,9 @@ or existing editable layout parameters, with visual evidence of the affected
 surface. Do not globally shrink text or invent a new pagination engine.
 
 Inspect dialogue/name boxes, long choices, picture overlays, destination labels,
-memorial inscriptions, scrolling credits, content warnings, Options and Save/Load
-in both languages. Also inspect the D-021 treatments: italic voices and animated
+memorial cards (including the cause line), destination statuses, the cast
+list, scrolling credits, content warnings, Options and Save/Load in both
+languages. Also inspect the D-021 treatments: italic voices and animated
 beats with Text Effects on and off, plus CE039 cards whose `<br>` keeps the name
 apart from the description. Credits keep their per-line layout. The browser
 tab and desktop window show the static title “The Dryland Drowned” (D-019,

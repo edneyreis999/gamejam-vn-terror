@@ -2,15 +2,15 @@
 status: approved
 slug: coreto-english-localization
 spec_approved_on: 2026-09-29
-amended_on: 2026-09-29 (D-017–D-022, peer reviews 01–03)
+amended_on: 2026-09-29 (D-017–D-023, peer reviews 01–04)
 localization_baseline: d17d88640b4c747f4aa0605318987378d2ba68ba (migration commit, recorded 2026-09-29, D-020)
 ---
 
 # Tasks — Whole-game English localization with Coreto
 
 Authority: approved [spec](spec.md) and [verification](verification.md) (D-015),
-amended by D-017–D-022 after peer reviews [01](review-01.md),
-[02](review-02.md) and [03](review-03.md). Decisions live in
+amended by D-017–D-023 after peer reviews [01](review-01.md),
+[02](review-02.md), [03](review-03.md) and [04](review-04.md). Decisions live in
 the [interview](entrevista.md). The Coreto provider stack is a prerequisite owned
 by separate work (D-013, D-014), frozen at the `localization_baseline` commit
 (D-020).
@@ -19,15 +19,15 @@ by separate work (D-013, D-014), frozen at the `localization_baseline` commit
 
 | ID | Task | Depends on | Primary verification IDs | Status |
 | --- | --- | --- | --- | --- |
-| 01 | [Enable the native language option and table](task-01.md) | — | V-006 | pending |
-| 02 | [Localize interface, system and title flow](task-02.md) | 01 | — | pending |
-| 03 | [Localize prologue, preparation and campaign feedback](task-03.md) | 01 | — | pending |
-| 04 | [Localize the sixteen encounters and their deaths](task-04.md) | 01, 03 | — | pending |
-| 05 | [Localize council, closings, epilogues and conversations](task-05.md) | 01, 03 | — | pending |
-| 06 | [Audit image text and deliver localized variants](task-06.md) | 01 | — | pending |
-| 07 | [Close corpus coverage and translator handoff](task-07.md) | 02, 03, 04, 05, 06 | V-001 | pending |
-| 08 | [Plan localization QA](task-08.md) | 07 | — | pending |
-| 09 | [Execute QA, independent evaluation and editorial acceptance](task-09.md) | 08 | V-002, V-003, V-004, V-005 | pending |
+| 01 | [Enable the native language option and table](task-01.md) | — | V-006 | completed |
+| 02 | [Localize interface, system and title flow](task-02.md) | 01 | — | completed |
+| 03 | [Localize prologue, preparation and campaign feedback](task-03.md) | 01 | — | completed |
+| 04 | [Localize the sixteen encounters and their deaths](task-04.md) | 01, 03 | — | completed |
+| 05 | [Localize council, closings, epilogues and conversations](task-05.md) | 01, 03 | — | completed |
+| 06 | [Audit image text and deliver localized variants](task-06.md) | 01 | — | completed |
+| 07 | [Close corpus coverage and translator handoff](task-07.md) | 02, 03, 04, 05, 06 | V-001 | completed |
+| 08 | [Plan localization QA](task-08.md) | 07 | — | completed |
+| 09 | [Execute QA, independent evaluation and editorial acceptance](task-09.md) | 08 | V-002, V-003, V-004, V-005 | completed |
 
 Tasks 02–06 are independent once 01 lands, except that 04 and 05 reuse the
 glossary and the CE004 display-name keys created
@@ -51,8 +51,8 @@ whole corpus, in 07.
 - **Baseline gate (D-020):** before task-01, the migration session commits its
   changes on this branch, and its hash is recorded as `localization_baseline` in
   the front matter. No task edits `js/plugins.js`, `System.json`, `index.html`,
-  `data/Map*.json`, `data/CommonEvents.json` or assets while that field is
-  pending. Never overwrite, revert or reformat the migration's changes, such as
+  `package.json`, `Languages.tsv`, `data/Map*.json`, `data/CommonEvents.json`
+  or assets while that field is pending. Never overwrite, revert or reformat the migration's changes, such as
   `PictureIDs` serialization. A later migration commit reopens V-006 and repeats
   the A1 pilot.
 - **Native first (D-009, D-017):** Coreto CLI operations (`message text`,
@@ -74,7 +74,9 @@ whole corpus, in 07.
   Keys are semantic (scene, speaker/passage, approach/outcome), never command
   offsets. Use one key per Show Text block. Repeated representations of the same
   choice share one key. Multi-line picture text uses `<WordWrap>` in the
-  wrapper, not `\n` in cells.
+  wrapper, not `\n` in cells. Player-facing literals assigned by Control
+  Variables (Script) hold the unresolved key as their value, edited as native
+  data; `\V[n]` payloads stay in the event (D-023a/c).
 - **Cells (D-021):** no tabs and no straight `"`. Voices and inscriptions use
   `<I>…</I>` in both columns. `\EFFECT`/casing only for supernatural beats, with
   the same placement in both columns. Run `message language validate --format tsv`
@@ -98,4 +100,4 @@ whole corpus, in 07.
 
 ## Next Ready Task
 
-`task-01.md` (baseline recorded; D-020 gate satisfied).
+None: all tasks completed 2026-09-29; final verify PASS.

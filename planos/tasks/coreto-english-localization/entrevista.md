@@ -1,7 +1,7 @@
 # Coreto English localization — design interview
 
 Status: product and technical design approved (D-008, D-015), amended by the
-peer-review decisions D-017–D-021. Translation implementation is pending on a
+peer-review decisions D-017–D-023. Translation implementation is pending on a
 Coreto provider baseline delivered separately (D-013, D-014) and frozen by D-020.
 
 ## Request
@@ -171,6 +171,41 @@ Decisions D-017–D-021 come from the peer-review interview on the
   User chose each recommended option, except (f), where the user answered
   “Manter Plugins: VisuStella”.
 
+- **D-023 — Peer review round 04 decisions (2026-09-29):** decisions on the
+  [round 04](review-04.md) findings, taken in a grill-me interview.
+  - (a) Player-facing literals assigned by Control Variables (Script) hold
+    unresolved keys as their values, for example `"$[memorial.cause.a2]"`.
+    This is the same route as the CE004 display names, and it uses native
+    data editing, because the CLI does not target code 122. The CE039 and
+    CE117 literals go to task-03. The 16 `memorial_cause` Common Events and
+    the Map037–044 literals go to task-05.
+  - (b) The memorial cause line is a factual caption, not a quoted
+    inscription: no `<I>`. Its Portuguese `<br>` follow the D-018 rule.
+  - (c) V-001 also scans code-122 string literals. A `\V[n]` choice or picture
+    payload is valid when every value assigned to that variable is a key, a
+    preserved proper name or a composition of them. The source map records the
+    variable and its assigners.
+  - (d) Animated text effects keep the plugin's standard behavior: on at start,
+    and the player switches them off in the Text Effects row (D-022a stands).
+    The GDD gets an exception scoped to animated text in §1.1 and the QA
+    policy. Reduced motion (`V47`) keeps applying to busts, the tavern, the
+    memorial and the map. User: “Mantenha os textos animados com o
+    comportamento padrão do plugin. remova/atualize essa sessão no GDD”, then
+    chose the text-only exception.
+  - (e) Task-07 records the table's prose ownership in GDD §1.1/§26, with the
+    reciprocal ADR-002 link, and updates `AGENTS.md:17`. It does this when the
+    table lands, not before. Task-09 collects the devlog captures after V-005.
+  - (f) The Text Effects row keeps the plugin's `ON`/`OFF`, as an intentional
+    control label like FAST and HIDE; no callback changes. SaveCore
+    `SaveMenu.LatestText` (`NEW!`) is keyed.
+    `SaveConfirm.VocabSaveSuccess` is inventoried as unreachable: the game has
+    no manual-save route.
+  - (g) Stale statements in the spec, verification, programming contract,
+    tasks and V-006 are corrected, with no behavior change.
+
+  User chose the recommended option for (a), (b), (c) and (e), and answered
+  “Manter ON/OFF” for (f).
+
 ## Inspected baseline
 
 - The canonical [GDD](../../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md),
@@ -205,5 +240,21 @@ Decisions D-017–D-021 come from the peer-review interview on the
 
 ## Next phases
 
-Record the migration baseline commit (D-020), then execute the amended task
+The migration baseline commit is recorded (D-020). Execute the amended task
 graph from task-01 on top of it. Apply ADR-G004–G006 and SD-015.
+
+- **D-024 — Reduced task-09 QA scope, risk accepted (2026-09-29):** Edney:
+  “sobre a task 9, teste somente os 30% mais importantes. eu assumo os
+  riscos. Mas tente mitigar o maximo que conseguir”. Kept: L10/L11 (lot A),
+  L12 (Continue in the other language), one English L13 campaign to an ending
+  covering council, Andirá's animated line with Text Effects on/off, a
+  closing, memorial, an epilogue and credits; L15 reduced to a fresh agent's
+  read-only corpus review. Cut, accepted as residual risk: PT comparison
+  sequence, 1920×1080 path, the other two closings, the L15 played route.
+  Mitigation: V-001 full-corpus static check, shared rendering classes,
+  task-03/04 smoke evidence. V-005 (Edney's editorial decision) unchanged.
+
+- **D-025 — Delivery approved (2026-09-29):** Edney: “aahh já ia me esquecendo. essa spec está aprovada. pode executar o final verify.” Recorded as the
+  V-005 editorial decision on the translation as delivered after task-09.
+  The four source-level L15 items (F03, F10, F12, F14) and the flagged
+  choices in `editorial-packet.md` stay as delivered, open as follow-ups.
