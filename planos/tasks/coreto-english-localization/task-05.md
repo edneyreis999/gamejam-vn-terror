@@ -38,7 +38,12 @@ selected language.
 
 - [ ] Pass the D-020 baseline gate.
 - [ ] Map sources and hashes; translate per glossary and translator guide.
-- [ ] Apply keys (`--dry-run` first); credits use `<br>` in cells.
+- [ ] Apply keys (`--dry-run` first) to Show Text and choices.
+- [ ] CE063 credits: no CLI text operation exists for 105/405, so edit only the
+      title and plugin 405 lines with native data editing. The title line becomes
+      `<center>\FS[32]$[credits.title]` and the plugin line
+      `<center>$[credits.plugins]` (“Plugins: VisuStella” in both columns). Other
+      lines stay literal. Validate the JSON and review the diff.
 - [ ] CLI validate, JSON parse, focused diff.
 - [ ] Smoke credits and one epilogue in English on port 18737.
 

@@ -2,15 +2,15 @@
 status: approved
 slug: coreto-english-localization
 spec_approved_on: 2026-09-29
-amended_on: 2026-09-29 (D-017–D-022, peer reviews 01–02)
+amended_on: 2026-09-29 (D-017–D-022, peer reviews 01–03)
 localization_baseline: d17d88640b4c747f4aa0605318987378d2ba68ba (migration commit, recorded 2026-09-29, D-020)
 ---
 
 # Tasks — Whole-game English localization with Coreto
 
 Authority: approved [spec](spec.md) and [verification](verification.md) (D-015),
-amended by D-017–D-022 after peer reviews [01](review-01.md) and
-[02](review-02.md). Decisions live in
+amended by D-017–D-022 after peer reviews [01](review-01.md),
+[02](review-02.md) and [03](review-03.md). Decisions live in
 the [interview](entrevista.md). The Coreto provider stack is a prerequisite owned
 by separate work (D-013, D-014), frozen at the `localization_baseline` commit
 (D-020).

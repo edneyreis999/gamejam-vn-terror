@@ -56,8 +56,19 @@ model, glossary and source-map skeleton are ready for the translation tasks.
       `Options.Name=$[ui.options.text_effects]`.
 - [ ] Key the Áudio category `Name` and its four rows' `TextStr` (which wins over
       `TextJS`); leave the rows' behavior unchanged.
-- [ ] Create `Languages.tsv` via CLI; add the Options label keys so the table is
-      not empty; run `message language validate --format tsv`.
+- [ ] Options procedure (no list-insert operation exists): read the current
+      `/Categories` (`options parameters get --path /Categories --json`, noting
+      its hash). Take the `textLocale` and `textEffects` rows from the plugin
+      defaults (`options api describe /Categories --json`). Build the new array
+      in a JSON data file in the session scratchpad, never in the repository
+      (D-016), then write it with `options parameters set --path /Categories
+      --input <file> --expected-hash <hash>` (`--dry-run` first). Confirm that
+      the Áudio rows differ only in `Name`/`TextStr`.
+- [ ] Create `Languages.tsv` via CLI. It holds the 28-language template: reduce
+      the header to exactly `Key`, `English`, `Portuguese` and delete the sample
+      rows `Greeting`, `Farewell` and `Wow`. Add the Options label keys, then run
+      `message language validate --format tsv` and confirm `languages` is
+      `["English","Portuguese"]`.
 - [ ] Write into the three docs: the key convention
       (`<area>.<scene>.<speaker|passage>.<n>`, `ui.*`, `sys.*`, `choice.*`), the
       D-018 markup model, the D-021 cell rules (no tabs or straight quotes,

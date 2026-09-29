@@ -34,8 +34,10 @@ guide, README workflow) is ready for independent evaluation and editorial review
 - [ ] Read-only review: every `101/401/102/402/105/405` payload and
       PictureTextChange is a key plus native control tags and block wrappers, a
       preserved proper name, or documented non-player text (D-018). Show Text is
-      keyed per block. Every key exists and no cell is empty. Both columns carry
-      the same inline tokens (`\V`, `<I>`, `\EFFECT`, casing, intentional `<br>`).
+      keyed per block. Every key exists and no cell is empty. The table header is
+      exactly `Key`, `English`, `Portuguese`, with no template sample key. Both
+      columns of a key carry the same set of `\V[n]`, `<I>`,
+      `\EFFECT`/`<CLEAR EFFECTS>` and casing tags; `<br>` is free per language.
       No cell has a tab or straight `"`. No `\n` remains in picture text.
 - [ ] Recheck V-006 against `localization_baseline`: all changed parameter
       paths are listed; the registry, Coreto sources and bundles are unchanged.

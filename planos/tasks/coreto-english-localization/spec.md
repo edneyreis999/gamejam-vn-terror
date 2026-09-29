@@ -4,7 +4,7 @@ slug: coreto-english-localization
 stage: ready-for-tasks
 product_consolidation: approved-2026-09-28
 technical_approval: approved-2026-09-29
-amended: 2026-09-29 (D-016–D-022; peer review rounds 01–02)
+amended: 2026-09-29 (D-016–D-022; peer review rounds 01–03)
 ---
 
 # Whole-game English localization with Coreto
@@ -185,7 +185,11 @@ Key and markup model (D-018):
   `<Hide Choice Window>` from the raw choice text. Block-level wrappers
   (`\FS[n]` for a whole label, `<center>`, `<WordWrap>`) also stay in the event.
 - **Cells hold prose and inline markup only:** `\V[n]`, inline emphasis (D-021)
-  and intentional `<br>`. Both columns carry the same inline tokens.
+  and intentional `<br>`. Both columns of a key carry the same set of `\V[n]`,
+  `<I>`, `\EFFECT<…>`/`<CLEAR EFFECTS>` and casing tags; their order may follow
+  each language's syntax. `<br>` is free per language: PT keeps its existing
+  layout breaks, EN keeps only intentional ones, and V-003 judges both
+  visually.
 - **Picture text:** every multi-line picture text uses `<WordWrap>` in the event
   wrapper, following the existing CE059 memorial. With word wrap on, a raw `\n`
   becomes a space, so structural breaks in the wrapper (name / blank line /
@@ -289,8 +293,13 @@ choice focus behavior, including its transient name-based cache, unchanged.
 Observe focus after switching as a regression risk; do not add cache hooks.
 No new campaign state, translations in JavaScript or mirrored language store.
 CLI lacks a generic language-cell editing operation: create/validate through the
-CLI, edit the TSV as data, then validate again. For fields without a CLI operation,
-use native editor/data authoring, never a new generator or conversion script.
+CLI, edit the TSV as data, then validate again. `message language create`
+writes the built-in 28-language template with sample rows (`Greeting`,
+`Farewell`, `Wow`). Reduce it to exactly `Key`, `English`, `Portuguese` and
+delete the sample rows before adding keys; `validate` checks structure, not the
+column set. For fields without a CLI operation (including scrolling text
+105/405), use native editor/data authoring, never a new generator or
+conversion script.
 
 ### Native text treatment (D-021)
 
