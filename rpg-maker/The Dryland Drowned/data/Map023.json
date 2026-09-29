@@ -4930,6 +4930,18 @@
               ]
             },
             {
+              "code": 250,
+              "indent": 2,
+              "parameters": [
+                {
+                  "name": "Darkness1",
+                  "volume": 13,
+                  "pitch": 80,
+                  "pan": 0
+                }
+              ]
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -8208,6 +8220,37 @@
               ]
             },
             {
+              "code": 241,
+              "indent": 2,
+              "parameters": [
+                {
+                  "name": "",
+                  "volume": 0,
+                  "pitch": 100,
+                  "pan": 0
+                }
+              ]
+            },
+            {
+              "code": 245,
+              "indent": 2,
+              "parameters": [
+                {
+                  "name": "",
+                  "volume": 0,
+                  "pitch": 100,
+                  "pan": 0
+                }
+              ]
+            },
+            {
+              "code": 230,
+              "indent": 2,
+              "parameters": [
+                30
+              ]
+            },
+            {
               "code": 122,
               "indent": 2,
               "parameters": [
@@ -8302,6 +8345,37 @@
                 {
                   "reason": "ending"
                 }
+              ]
+            },
+            {
+              "code": 241,
+              "indent": 2,
+              "parameters": [
+                {
+                  "name": "",
+                  "volume": 0,
+                  "pitch": 100,
+                  "pan": 0
+                }
+              ]
+            },
+            {
+              "code": 245,
+              "indent": 2,
+              "parameters": [
+                {
+                  "name": "",
+                  "volume": 0,
+                  "pitch": 100,
+                  "pan": 0
+                }
+              ]
+            },
+            {
+              "code": 230,
+              "indent": 2,
+              "parameters": [
+                30
               ]
             },
             {

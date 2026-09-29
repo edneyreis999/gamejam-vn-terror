@@ -200,25 +200,25 @@
             "name": "Cursor3",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 54
         },
         {
             "name": "Decision2",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 54
         },
         {
             "name": "Cancel2",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 54
         },
         {
             "name": "Buzzer1",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 54
         },
         {
             "name": "Equip1",
@@ -230,13 +230,13 @@
             "name": "Save2",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 54
         },
         {
             "name": "Load2",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 54
         },
         {
             "name": "Battle1",

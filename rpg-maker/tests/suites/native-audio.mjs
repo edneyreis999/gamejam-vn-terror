@@ -27,13 +27,13 @@ canonicalCase('IT-028','native audio preferences begin at40 clamp through keyboa
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);assert.deepEqual(await volumes(browser),configured);
 });
 canonicalCase('IT-029','native ambience replacement and ending themes decode without stacking and zero volume leaves controls usable',{timeout:150000},async t=>{
- const observations=[];const browser=await entry(t);assert.equal(await browser.evaluate('Boolean(AudioManager._bgmBuffer||AudioManager._bgsBuffer||AudioManager._meBuffer)'),false);
+ const observations=[];const browser=await entry(t);await browser.waitFor("AudioManager._currentBgm?.name==='Dryland_TheWell'&&AudioManager._bgmBuffer.isReady()");assert.equal(await browser.evaluate('Boolean(AudioManager._bgsBuffer||AudioManager._meBuffer)'),false);
  await browser.evaluate(`window.audioBuffers=[];const create=AudioManager.createBuffer;AudioManager.createBuffer=function(folder,name){const b=create.call(this,folder,name);audioBuffers.push({folder,name,buffer:b});return b;};`);
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
- await browser.waitFor("AudioManager._currentBgm?.name==='Town1'&&AudioManager._currentBgs?.name==='People2'&&AudioManager._bgmBuffer.isReady()&&AudioManager._bgsBuffer.isReady()");
+ await browser.waitFor("AudioManager._currentBgm?.name==='Dryland_ManMadeWings'&&AudioManager._currentBgs?.name==='People2'&&AudioManager._bgmBuffer.isReady()&&AudioManager._bgsBuffer.isReady()");
  const current=await state(browser);assert.equal(current.phase,'intro');
  const welcome=await browser.evaluate('({music:AudioManager._currentBgm,ambience:AudioManager._currentBgs,applause:audioBuffers.filter(x=>x.name==="Applause1").length})');
- assert.equal(welcome.music.volume,45);assert.equal(welcome.ambience.volume,25);assert.equal(welcome.applause,1);
+ assert.equal(welcome.music.volume,21);assert.equal(welcome.ambience.volume,15);assert.equal(welcome.applause,1);
  await browser.press('Tab',9);await hidden(browser,true);await browser.press('Tab',9);await hidden(browser,false);
  assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.name==="Applause1").length'),1,'HIDE does not repeat the welcome');
  for(const marker of prologueMarkers.slice(0,6)){
@@ -41,9 +41,10 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
   await browser.press('Enter',13);
  }
  await pause(browser);
- await browser.waitFor("AudioManager._currentBgm?.name==='Town3'&&AudioManager._currentBgs?.name==='People1'&&AudioManager._bgmBuffer.isReady()&&AudioManager._bgsBuffer.isReady()");
+ await browser.waitFor("AudioManager._currentBgm?.name==='Dryland_ManMadeWings'&&AudioManager._currentBgs?.name==='People1'&&AudioManager._bgmBuffer.isReady()&&AudioManager._bgsBuffer.isReady()");
  assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.folder==="bgm/"&&x.buffer.isPlaying()).length'),1);
  assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.name==="Applause1").length'),1);
+ assert.equal(await browser.evaluate("audioBuffers.filter(x=>x.folder==='bgm/'&&x.name==='Dryland_ManMadeWings').length"),1,'Prologue and tavern retain the same music buffer');
  observations.push({kind:'authored-temporal-opening',welcome,past:await browser.evaluate('({music:AudioManager._currentBgm,ambience:AudioManager._currentBgs})')});
  for(const [route,name]of [['physical','Drips'],['supernatural','Wind1'],['final','Darkness']]){
   // Valid prepared route states exercise the installed native audio event.
@@ -53,7 +54,7 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
   }
   await installPhase(browser,prepared);
   await browser.waitFor(`AudioManager._currentBgs?.name===${JSON.stringify(name)}&&AudioManager._bgsBuffer.isReady()`);
-  assert.equal(await browser.evaluate('AudioManager._currentBgm.name'),'Dungeon2');
+  assert.equal(await browser.evaluate('AudioManager._currentBgm.name'),{physical:'Dryland_Danger',supernatural:'Dryland_ValleyOfGhosts',final:'Dryland_VilarejoMix'}[route]);
   assert.equal(await browser.evaluate("audioBuffers.filter(x=>x.folder==='bgs/'&&x.buffer.isPlaying()).length"),1);
  }
  for(const [ending,name]of [['reunite','Musical1'],['destroy','Organ']]){

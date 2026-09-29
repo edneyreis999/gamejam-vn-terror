@@ -1,0 +1,32 @@
+{
+  "base": "e55783f864a9ff89582491c1115f29f83bd8d9a0",
+  "sha256": {
+    "docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md": "7aa56ea445495c9c1e05d2f909717b2950ce88f879915507ebc8f6588c61d65e",
+    "planos/tasks/selected-campaign-music/adrs/adr-001-selected-music.md": "5d3db7ce875a5c0a5c67aed462999c8e13dcb55ece63b9e352eda315f8087bf5",
+    "planos/tasks/selected-campaign-music/apply-music.py": "085a48744da543a56a750e68d36189ba5a7d5a6120315112f2d6c34ca16b0a40",
+    "planos/tasks/selected-campaign-music/assets.json": "be4033e85f59cbb067754235e6772c696e601efe34a4c9595d40242379425ce7",
+    "planos/tasks/selected-campaign-music/lower-reading-mix.py": "4bcd6d54fd673a6654be195dc6bfff20f4f656c30b753833c4310a997ff23482",
+    "planos/tasks/selected-campaign-music/reading-mix.json": "7724f4b3156d177b4202c7e02fa6cc3e6f84ec69942e83cb6038052e25375ea3",
+    "planos/tasks/selected-campaign-music/retain-route-audio.py": "a4314e3d3cf03c312538c8c686ad913d952aba2158bc74b42ae08664714456de",
+    "planos/tasks/selected-campaign-music/spec.md": "03db866a9bca7008018be07b8754e7136d4fd96e850f3fce089930c5afbd8699",
+    "planos/tasks/selected-campaign-music/stage-council-audio.py": "12ae7f7221084f164c35dd33af27d5fbc816468dd7c18dbf5e4734304bc35e97",
+    "planos/tasks/selected-campaign-music/strengthen-final-choice.py": "8d8ce2b83e6b00fab69086569d97323a0e9f09392c2dda812de588e03ccc39db",
+    "planos/tasks/selected-campaign-music/tasks.md": "ea2615fe8b84867b5b7bff7f70feb79a4c96d695ce084ff1990ff86784bd6952",
+    "planos/tasks/selected-campaign-music/verification.md": "358dd77fae16fbb6c08b08bfacfb83056e9054640619d881d466a27f2f1cfbd1",
+    "rpg-maker/The Dryland Drowned/audio/bgm/Dryland_Danger.ogg": "ea9e67939e81e4555eae1deec75d61688210a226370ff297b1f938235f6714ce",
+    "rpg-maker/The Dryland Drowned/audio/bgm/Dryland_ManMadeWings.ogg": "f35fccaa12470a5308c0072775077dfe376ff8f5f6b7914ccfab04e98b392997",
+    "rpg-maker/The Dryland Drowned/audio/bgm/Dryland_TheWell.ogg": "810e07ba68b761447bd74a27c52dd2ee77f681fa57ef2d1212620a2ff034cc99",
+    "rpg-maker/The Dryland Drowned/audio/bgm/Dryland_ValleyOfGhosts.ogg": "332edadfc6d6acf158b71404af34786b866b65b326622697f8959b9b0af84049",
+    "rpg-maker/The Dryland Drowned/audio/bgm/Dryland_VilarejoMix.ogg": "4ecf12f164d4494a2c2deb277baf5d8ae41001caeffbcc5775d917e8cda9f91e",
+    "rpg-maker/The Dryland Drowned/audio/se/Darkness1.ogg": "96694ea611a587000748b104962e29cc916163cf517315594d8bd9f1542b086e",
+    "rpg-maker/The Dryland Drowned/data/CommonEvents.json": "d764301fae6c2f8345518bfb7ce58dfc8e4839f57f4096066a8ca8dccc95e639",
+    "rpg-maker/The Dryland Drowned/data/Map002.json": "ee3b3879e6d87229eb3de40f90e41c0a7ca6b4fbd15d0a7d5b7f95ef3081a05a",
+    "rpg-maker/The Dryland Drowned/data/Map023.json": "72fa86dba12629e12b8ff5a80ba8e1e03b38f591cab8ad3d53997ca867fc2449",
+    "rpg-maker/The Dryland Drowned/data/System.json": "8e3448823181fff3ff46ea4e8c47ae95200fdc34546a9c37f1f3b367640fc75d",
+    "rpg-maker/asset-provenance/audio.md": "1d5644caec9a423c1af25435aeb1b68229504785753e1ff6279d1abbf1d6ff62",
+    "rpg-maker/tests/suites/content.mjs": "aba1f9b2a7bf7420cbdca969addf7d3455433888dcfcdc890797159cad203c1c",
+    "rpg-maker/tests/suites/discovery.mjs": "8a761fe45e022c3eed78b0028e57241e0d19959661dfd587cc4b9befb36588d7",
+    "rpg-maker/tests/suites/endings.mjs": "3e9f4e4eb2c89a2d145de9d95ca0d10f65d48df32dc05f53f505f88e022d8303",
+    "rpg-maker/tests/suites/native-audio.mjs": "82b2c2359d8267af637df28a9d651b6c520847d865cb430bb4acc48a38c05829"
+  }
+}

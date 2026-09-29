@@ -30,3 +30,13 @@ A seleção e o disparo de cues permanecem nos eventos nativos, com CE67 consult
 IT028/029 passaram com as quatro categorias, preferências preservadas após seleção de arquivo/Novo jogo, ME ativo, substituído, parado e terminado naturalmente, volume não zero→zero→não zero e HIDE sem replay. Evidência técnica: `docs/qa/evidence/eventbridge-minimal-runtime/task-12/20260912/`. Nenhum arquivo de áudio mudou. Este resultado não transfere o aceite humano histórico para o incremento atual.
 
 Para a escuta da task16: confirmar silêncio no título; People1 no prólogo/taverna; Drips, Wind1 e Darkness nos respectivos contextos; Musical1/Organ nos finais; os dez efeitos da tabela histórica; independência das quatro categorias e Temas durante reprodução, incluindo mute e retorno de Options. Verificar HIDE, leitura AUTO/FAST elegível e Continue sem duplicação de cues fora das repetições nativas previstas do final. Balanço percebido e adequação artística permanecem pendentes de escuta e julgamento humano.
+
+## Seleção local — 2026-09-29
+
+A seleção atual de abertura, prólogo/taverna e rotas está em [selected-campaign-music](../../planos/tasks/selected-campaign-music/spec.md), substituindo as faixas correspondentes do histórico acima. As cinco saídas `audio/bgm/Dryland_*.ogg` são Ogg/Vorbis, convertidas dos WAV locais com FFmpeg 9.0.2 (`-c:a libvorbis -q:a 5`), sem normalização ou alteração dos originais. [Manifesto](../../planos/tasks/selected-campaign-music/assets.json) registra fontes, destinos e SHA-256.
+
+A mistura do Vilarejo usa as duas fontes simultaneamente com ganho 0,45 por faixa, limitada à duração de Danger, entrada de 1s e saída de 3s. Sua versão OGG preserva a prévia selecionada; a pausa percebida na repetição permanece para avaliação humana. Fonte local fornecida pelo usuário: Yet Another Atmospheric Horror Music Pack (WAV). Não foi encontrado documento de licença nesse diretório; a licença/atribuição para distribuição pública ainda precisa ser documentada. Nenhum efeito do GOTHIC_UI_FULL foi incorporado.
+
+Ajuste confirmado na mesma sessão: as narrações da expedição e do Conselho conservam BGM/BGS da rota; People2 permanece no prólogo e People1 nas cenas de taverna. Nenhum novo arquivo foi necessário.
+
+Refinamento do Conselho: reutilizado `audio/se/Darkness1.ogg` do pacote nativo já presente, sem edição do arquivo, como cue de confissão (volume 22, pitch 80). Duração original aferida: 1,625397 s; não houve audição pelo agente.

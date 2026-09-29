@@ -1,0 +1,37 @@
+[
+  {
+    "source": "docs\\sons\\Yet Another Atmospheric Horror Music Pack (WAV)\\(Chillout) The Well.wav",
+    "output": "rpg-maker\\The Dryland Drowned\\audio\\bgm\\Dryland_TheWell.ogg",
+    "source_sha256": "e87eb327c88772135d0e8105e3feffdeb10f3e4680192add75838e140d08faf4",
+    "output_sha256": "810e07ba68b761447bd74a27c52dd2ee77f681fa57ef2d1212620a2ff034cc99",
+    "bytes": 301471
+  },
+  {
+    "source": "docs\\sons\\Yet Another Atmospheric Horror Music Pack (WAV)\\(Chillout) Man Made Wings.wav",
+    "output": "rpg-maker\\The Dryland Drowned\\audio\\bgm\\Dryland_ManMadeWings.ogg",
+    "source_sha256": "9411a2c7e87702b59428453327b027f712d2e3842b750f76ad61324c22e4ff96",
+    "output_sha256": "f35fccaa12470a5308c0072775077dfe376ff8f5f6b7914ccfab04e98b392997",
+    "bytes": 844786
+  },
+  {
+    "source": "docs\\sons\\Yet Another Atmospheric Horror Music Pack (WAV)\\(Tense) Danger.wav",
+    "output": "rpg-maker\\The Dryland Drowned\\audio\\bgm\\Dryland_Danger.ogg",
+    "source_sha256": "a793d2d32fb87db518470b743fba681ffc3a423c3116468bc8700aa765bd00e2",
+    "output_sha256": "ea9e67939e81e4555eae1deec75d61688210a226370ff297b1f938235f6714ce",
+    "bytes": 2678605
+  },
+  {
+    "source": "docs\\sons\\Yet Another Atmospheric Horror Music Pack (WAV)\\(Ambience) The Valley of Ghosts Origin.wav",
+    "output": "rpg-maker\\The Dryland Drowned\\audio\\bgm\\Dryland_ValleyOfGhosts.ogg",
+    "source_sha256": "96a82b834317e1e9e249ef6a9e72ff78cc4103b85fad67978aeff278c521a598",
+    "output_sha256": "332edadfc6d6acf158b71404af34786b866b65b326622697f8959b9b0af84049",
+    "bytes": 2543837
+  },
+  {
+    "source": "docs\\sons\\previas\\vilarejo-danger-e-valley-mistura.wav",
+    "output": "rpg-maker\\The Dryland Drowned\\audio\\bgm\\Dryland_VilarejoMix.ogg",
+    "source_sha256": "78f560d3d9473e5c3ab6757d70c5881732cb38d27131469cf82095b7ff7e3ccc",
+    "output_sha256": "4ecf12f164d4494a2c2deb277baf5d8ae41001caeffbcc5775d917e8cda9f91e",
+    "bytes": 2437278
+  }
+]

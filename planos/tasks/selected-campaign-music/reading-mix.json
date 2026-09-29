@@ -1,0 +1,200 @@
+[
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_TheWell",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Item3",
+    "before": 80,
+    "after": 48
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Item3",
+    "before": 80,
+    "after": 48
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Item3",
+    "before": 80,
+    "after": 48
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_ManMadeWings",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "People2",
+    "before": 25,
+    "after": 15
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_ManMadeWings",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "People1",
+    "before": 60,
+    "after": 36
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_Danger",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Drips",
+    "before": 60,
+    "after": 36
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_ValleyOfGhosts",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Wind1",
+    "before": 60,
+    "after": 36
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_VilarejoMix",
+    "before": 18,
+    "after": 11
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Darkness",
+    "before": 20,
+    "after": 12
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_VilarejoMix",
+    "before": 15,
+    "after": 9
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Darkness",
+    "before": 18,
+    "after": 11
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_VilarejoMix",
+    "before": 24,
+    "after": 14
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Darkness",
+    "before": 30,
+    "after": 18
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Dryland_VilarejoMix",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Darkness",
+    "before": 60,
+    "after": 36
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Musical1",
+    "before": 65,
+    "after": 39
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Organ",
+    "before": 65,
+    "after": 39
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Door1",
+    "before": 45,
+    "after": 27
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Collapse1",
+    "before": 45,
+    "after": 27
+  },
+  {
+    "file": "CommonEvents.json",
+    "name": "Water1",
+    "before": 45,
+    "after": 27
+  },
+  {
+    "file": "Map002.json",
+    "name": "Applause1",
+    "before": 35,
+    "after": 21
+  },
+  {
+    "file": "Map023.json",
+    "name": "Darkness1",
+    "before": 22,
+    "after": 13
+  },
+  {
+    "file": "System.json",
+    "name": "Cursor3",
+    "before": 90,
+    "after": 54
+  },
+  {
+    "file": "System.json",
+    "name": "Decision2",
+    "before": 90,
+    "after": 54
+  },
+  {
+    "file": "System.json",
+    "name": "Cancel2",
+    "before": 90,
+    "after": 54
+  },
+  {
+    "file": "System.json",
+    "name": "Buzzer1",
+    "before": 90,
+    "after": 54
+  },
+  {
+    "file": "System.json",
+    "name": "Save2",
+    "before": 90,
+    "after": 54
+  },
+  {
+    "file": "System.json",
+    "name": "Load2",
+    "before": 90,
+    "after": 54
+  }
+]

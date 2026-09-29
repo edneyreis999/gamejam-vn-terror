@@ -95,7 +95,7 @@ async function readCouncil(browser,testId='IT-054'){
     assert.deepEqual(await browser.evaluate('[144,145,146].map(id=>$gameVariables.value(id))'),Array.from({length:3},(_,i)=>heroes[i]?Number(heroes[i].slice(1)):0));
     assert.equal(await browser.evaluate('$gameScreen.picture(18)==null'),true);
     assert.equal(await browser.evaluate('$gameScreen.picture(1)?.name()||null'),narrated?null:'Dryland_Council');
-    assert.deepEqual(await browser.evaluate('({bgm:AudioManager._currentBgm?.name,bgs:AudioManager._currentBgs?.name})'),narrated?{bgm:'Town1',bgs:'People2'}:{bgm:'Dungeon2',bgs:'Darkness'});
+    assert.deepEqual(await browser.evaluate('({bgm:AudioManager._currentBgm?.name,bgs:AudioManager._currentBgs?.name})'),{bgm:'Dryland_VilarejoMix',bgs:'Darkness'});
     if(speaker==='Andirá'){
      const reflection=await browser.evaluate('(()=>{const p=$gameScreen.picture(65);return {x:p.x(),y:p.y(),scale:p.scaleX()};})()');
      assert.ok(reflection.x<640&&reflection.y>0&&reflection.scale>0,'Andirá stays in the left reflection, using the existing undistorted asset.');

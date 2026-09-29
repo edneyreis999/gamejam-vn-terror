@@ -85,7 +85,7 @@ async function readClosure(browser, order) {
     assert.equal(await browser.evaluate('$gameMessage.allText()'), text);
     assert.deepEqual(await snapshot(browser), before, 'No paragraph may complete the closure early');
     assert.equal(await browser.evaluate('$gameScreen.picture(1) == null && $gameScreen.picture(60)?.name() === "Reed final"'), true);
-    assert.deepEqual(await browser.evaluate('({bgm:AudioManager._currentBgm?.name,bgs:AudioManager._currentBgs?.name})'), {bgm:'Town1',bgs:'People2'});
+    assert.deepEqual(await browser.evaluate('({bgm:AudioManager._currentBgm?.name,bgs:AudioManager._currentBgs?.name})'), before.dungeonId === 'physical' ? {bgm:'Dryland_Danger',bgs:'Drips'} : {bgm:'Dryland_ValleyOfGhosts',bgs:'Wind1'});
     if(index===0)await assertHidePreservesPortraits(browser,[60],`${evidence('IT-052')}/closure-${order}-hide.png`);
     await browser.screenshot(`${evidence('IT-052')}/closure-${order}-${index}.png`);
     await browser.press('Enter', 13);
