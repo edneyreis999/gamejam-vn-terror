@@ -2697,7 +2697,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Apagar a marca do convite antes que a criatura consiga completar\\numa porta.\"",
+                  "center:json": "\"\\\\FS[22]Apagar o desenho da porta antes que ele fique completo e\\npermita a entrada da criatura.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Escalar a estrutura de madeira da casa antes que as portas falsas\\ndestruam os cômodos.\"",
+                  "center:json": "\"\\\\FS[22]Subir pelas vigas de madeira até a abertura sob o telhado,\\nantes que as portas falsas destruam os cômodos.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2917,9 +2917,9 @@
               "indent": 1,
               "parameters": [
                 [
-                  "Apagar a marca do convite antes que a criatura consiga completar uma porta.<Bind Picture: 50><Hide Choice Window>",
+                  "Apagar o desenho da porta antes que ele fique completo e permita a entrada da criatura.<Bind Picture: 50><Hide Choice Window>",
                   "Ignorar as vozes das crianças e não responder aos pedidos vindos das paredes.<Bind Picture: 51><Hide Choice Window>",
-                  "Escalar a estrutura de madeira da casa antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>",
+                  "Subir pelas vigas de madeira até a abertura sob o telhado, antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2934,7 +2934,7 @@
               "indent": 1,
               "parameters": [
                 0,
-                "Apagar a marca do convite antes que a criatura consiga completar uma porta.<Bind Picture: 50><Hide Choice Window>"
+                "Apagar o desenho da porta antes que ele fique completo e permita a entrada da criatura.<Bind Picture: 50><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Escalar a estrutura de madeira da casa antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>"
+                "Subir pelas vigas de madeira até a abertura sob o telhado, antes que as portas falsas destruam os cômodos.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -3829,7 +3829,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A marca na parede é apagada antes que o último traço da porta apareça. Sem um convite completo, a criatura não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta. Com os cômodos parados, o grupo consegue alcançar a abertura sob o telhado e sair."
+                "O desenho da porta na parede é apagado antes que seu último traço apareça. Esse desenho funciona como um convite para a criatura, e sem ele completo ela não consegue entrar. Os dentes ao redor da passagem se quebram, a parede volta ao normal e o som dos cascos se afasta. Com os cômodos parados, o grupo consegue alcançar a abertura sob o telhado e sair."
               ]
             },
             {

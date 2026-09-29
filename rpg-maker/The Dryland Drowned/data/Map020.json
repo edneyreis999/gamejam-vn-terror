@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Controlar a respiração, resistir à sensação de afogamento e\\nrecusar o próximo verso.\"",
+                  "center:json": "\"\\\\FS[22]Controlar a respiração, resistir à sensação de afogamento e\\nnão responder à canção.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desfazer a trança de cabelos sem romper o fio que mantém a\\npassagem aberta.\"",
+                  "center:json": "\"\\\\FS[22]Desfazer a trança de cabelos sem arrebentar a mecha de\\ncabelo que sustenta a passarela.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2918,8 +2918,8 @@
               "parameters": [
                 [
                   "Devolver ao poço o nome roubado pela canção e quebrar o encantamento.<Bind Picture: 50><Hide Choice Window>",
-                  "Controlar a respiração, resistir à sensação de afogamento e recusar o próximo verso.<Bind Picture: 51><Hide Choice Window>",
-                  "Desfazer a trança de cabelos sem romper o fio que mantém a passagem aberta.<Bind Picture: 52><Hide Choice Window>",
+                  "Controlar a respiração, resistir à sensação de afogamento e não responder à canção.<Bind Picture: 51><Hide Choice Window>",
+                  "Desfazer a trança de cabelos sem arrebentar a mecha de cabelo que sustenta a passarela.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Controlar a respiração, resistir à sensação de afogamento e recusar o próximo verso.<Bind Picture: 51><Hide Choice Window>"
+                "Controlar a respiração, resistir à sensação de afogamento e não responder à canção.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Desfazer a trança de cabelos sem romper o fio que mantém a passagem aberta.<Bind Picture: 52><Hide Choice Window>"
+                "Desfazer a trança de cabelos sem arrebentar a mecha de cabelo que sustenta a passarela.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {

@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Arrancar o postigo (a pequena janela onde o assobio se esconde) e\\njogá-lo para fora do casarão.\"",
+                  "center:json": "\"\\\\FS[22]Arrancar a pequena janela onde o assobio se esconde e\\njogá-la para fora do casarão.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2919,7 +2919,7 @@
                 [
                   "Comparar o assobio com os ecos e encontrar a fresta que responde antes do som.<Bind Picture: 50><Hide Choice Window>",
                   "Examinar as promessas escritas nas paredes e descobrir qual delas nunca foi feita.<Bind Picture: 51><Hide Choice Window>",
-                  "Arrancar o postigo (a pequena janela onde o assobio se esconde) e jogá-lo para fora do casarão.<Bind Picture: 52><Hide Choice Window>",
+                  "Arrancar a pequena janela onde o assobio se esconde e jogá-la para fora do casarão.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Arrancar o postigo (a pequena janela onde o assobio se esconde) e jogá-lo para fora do casarão.<Bind Picture: 52><Hide Choice Window>"
+                "Arrancar a pequena janela onde o assobio se esconde e jogá-la para fora do casarão.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
