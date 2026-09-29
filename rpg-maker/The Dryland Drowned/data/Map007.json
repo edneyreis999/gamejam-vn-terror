@@ -2855,7 +2855,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Observar o caminho da fuligem e dos cacos para encontrar o centro\\ncalmo do redemoinho.\"",
+                  "center:json": "\"\\\\FS[22]Observar o movimento da poeira e dos cacos para descobrir o\\nmomento seguro de alcançar a saída.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2919,7 +2919,7 @@
                 [
                   "Forçar a janela até mudar a direção do redemoinho.<Bind Picture: 50><Hide Choice Window>",
                   "Fechar rapidamente as presilhas das garrafas que ainda estão inteiras.<Bind Picture: 51><Hide Choice Window>",
-                  "Observar o caminho da fuligem e dos cacos para encontrar o centro calmo do redemoinho.<Bind Picture: 52><Hide Choice Window>",
+                  "Observar o movimento da poeira e dos cacos para descobrir o momento seguro de alcançar a saída.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
                 ],
@@ -2982,7 +2982,7 @@
               "indent": 1,
               "parameters": [
                 2,
-                "Observar o caminho da fuligem e dos cacos para encontrar o centro calmo do redemoinho.<Bind Picture: 52><Hide Choice Window>"
+                "Observar o movimento da poeira e dos cacos para descobrir o momento seguro de alcançar a saída.<Bind Picture: 52><Hide Choice Window>"
               ]
             },
             {
@@ -4657,7 +4657,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "A fuligem revela um espaço calmo no centro do redemoinho. O grupo entra nesse espaço e acompanha seu deslocamento pela oficina, protegido do vidro que gira ao redor. Quando o centro passa diante da saída, todos conseguem atravessar."
+                "Observando a poeira e os cacos no ar, o grupo percebe que o redemoinho repete o mesmo percurso pela oficina. Sempre que se afasta da porta, leva os cacos consigo e deixa a passagem livre por alguns instantes. O grupo espera esse momento e corre para fora antes que o vento volte."
               ]
             },
             {

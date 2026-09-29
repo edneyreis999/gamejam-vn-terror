@@ -2776,7 +2776,7 @@
                   "up:json": "\"\"",
                   "upperright:json": "\"\"",
                   "left:json": "\"\"",
-                  "center:json": "\"\\\\FS[22]Desfazer o nome roubado que permite à presença se passar pela\\nguardiã da mata.\"",
+                  "center:json": "\"\\\\FS[22]Quebrar o feitiço que permite à presença usar o nome da\\nComadre Fulozinha e fingir ser a guardiã da mata.\"",
                   "right:json": "\"\"",
                   "lowerleft:json": "\"\"",
                   "down:json": "\"\"",
@@ -2918,7 +2918,7 @@
               "parameters": [
                 [
                   "Comparar as exigências nos troncos e mostrar que elas não podem fazer parte da mesma promessa.<Bind Picture: 50><Hide Choice Window>",
-                  "Desfazer o nome roubado que permite à presença se passar pela guardiã da mata.<Bind Picture: 51><Hide Choice Window>",
+                  "Quebrar o feitiço que permite à presença usar o nome da Comadre Fulozinha e fingir ser a guardiã da mata.<Bind Picture: 51><Hide Choice Window>",
                   "Subir pelas árvores e atravessar as copas antes que os galhos fechem a passagem.<Bind Picture: 52><Hide Choice Window>",
                   "Rever descrição<Bind Picture: 41>",
                   "Recuar<Bind Picture: 42><Show Switch: 34>"
@@ -2958,7 +2958,7 @@
               "indent": 1,
               "parameters": [
                 1,
-                "Desfazer o nome roubado que permite à presença se passar pela guardiã da mata.<Bind Picture: 51><Hide Choice Window>"
+                "Quebrar o feitiço que permite à presença usar o nome da Comadre Fulozinha e fingir ser a guardiã da mata.<Bind Picture: 51><Hide Choice Window>"
               ]
             },
             {
@@ -4261,7 +4261,7 @@
               "code": 401,
               "indent": 2,
               "parameters": [
-                "O grupo reconhece o encantamento nas marcas sobrepostas: a presença usa o nome da Comadre Fulozinha para dar força às suas ordens. Quando os heróis desfazem essa ligação, a voz perde o disfarce e se transforma em um murmúrio que já não consegue comandar as árvores. As inscrições desaparecem, os galhos se abrem e o grupo atravessa a mata."
+                "O grupo reconhece o encantamento nas marcas feitas umas por cima das outras: a presença usa o nome da Comadre Fulozinha para dar força às suas ordens. Quando os heróis desfazem essa ligação, a voz perde o disfarce e se transforma em um murmúrio que já não consegue comandar as árvores. As inscrições desaparecem, os galhos se abrem e o grupo atravessa a mata."
               ]
             },
             {
@@ -5512,7 +5512,7 @@
               "code": 401,
               "indent": 0,
               "parameters": [
-                "O grupo entra em um trecho de mata fechada. Uma voz entre as árvores diz ser a Comadre Fulozinha e cobra uma promessa que ninguém se lembra de ter feito. Nos troncos, surgem frases que atribuem o acordo aos heróis, mas cada árvore conta uma versão diferente. Uma exige que levem uma oferenda para dentro da mata; outra proíbe que tragam qualquer coisa."
+                "O grupo entra em um trecho de mata fechada. Uma voz entre as árvores diz ser a Comadre Fulozinha e cobra uma promessa que ninguém se lembra de ter feito. Nos troncos, surgem frases dizendo que os heróis fizeram aquela promessa, mas cada árvore conta uma versão diferente. Uma exige que levem uma oferenda para dentro da mata; outra proíbe que tragam qualquer coisa."
               ]
             },
             {
