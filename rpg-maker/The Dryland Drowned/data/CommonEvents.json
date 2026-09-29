@@ -15,7 +15,7 @@
     },
     {
         "id": 2,
-        "name": "Interface — Avisos e entrada",
+        "name": "Interface — Título",
         "trigger": 0,
         "switchId": 1,
         "list": [
@@ -56,22 +56,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Taverna",
-                    1,
-                    0,
-                    640,
-                    360,
-                    101.026045777427,
-                    101.026045777427,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 118,
                 "indent": 0,
                 "parameters": [
@@ -79,53 +63,215 @@
                 ]
             },
             {
-                "code": 111,
+                "code": 231,
                 "indent": 0,
                 "parameters": [
-                    12,
-                    "DataManager.isAnySavefileExists()"
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 1,
-                "parameters": [
-                    "",
+                    1,
+                    "Dryland_Taverna",
                     0,
                     0,
-                    2,
-                    ""
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 1,
-                "parameters": [
-                    "$[title.warning]"
-                ]
-            },
-            {
-                "code": 102,
-                "indent": 1,
-                "parameters": [
-                    ["$[choice.title.continue]","$[choice.title.new_game]","$[choice.title.options]"],
-                    -1,
                     0,
-                    2,
+                    0,
+                    101.026045777427,
+                    101.026045777427,
+                    255,
                     0
                 ]
             },
             {
-                "code": 402,
-                "indent": 1,
+                "code": 234,
+                "indent": 0,
                 "parameters": [
+                    1,
+                    [
+                        -100,
+                        -100,
+                        -100,
+                        0
+                    ],
                     0,
-                    "$[choice.title.continue]"
+                    false
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    2,
+                    "Dryland_TitleText",
+                    0,
+                    0,
+                    240,
+                    128,
+                    100,
+                    100,
+                    255,
+                    0
                 ]
             },
             {
                 "code": 357,
-                "indent": 2,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[2]",
+                        "Padding:eval": "12",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\\\\FS[48]$[title.name]\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\"",
+                        "lowerright:json": "\"\""
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    6,
+                    "Dryland_AgeMark",
+                    0,
+                    0,
+                    1184,
+                    640,
+                    100,
+                    100,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[6]",
+                        "Padding:eval": "0",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\\\\FS[26]16+\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\"",
+                        "lowerright:json": "\"\""
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_1_MessageCore",
+                    "ChoiceWindowDistance",
+                    "ChoiceWindowDistance",
+                    {
+                        "Distance:eval": "Graphics.boxHeight / 2 - SceneManager._scene._messageWindow.height"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "ChoiceWindowProperties",
+                    "ChoiceWindowProperties",
+                    {
+                        "LineHeight:num": "0",
+                        "MinWidth:num": "96",
+                        "MaxRows:num": "0",
+                        "MaxCols:num": "0",
+                        "TextAlign:str": "center"
+                    }
+                ]
+            },
+            {
+                "code": 102,
+                "indent": 0,
+                "parameters": [
+                    [
+                        "$[choice.title.new_game]<Choice Width: 352>",
+                        "$[choice.title.continue]<Continue>",
+                        "$[choice.title.options]",
+                        "$[choice.title.quit]"
+                    ],
+                    -1,
+                    0,
+                    1,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_1_MessageCore",
+                    "ChoiceWindowDistance",
+                    "ChoiceWindowDistance",
+                    {
+                        "Distance:eval": "0"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "ChoiceWindowProperties",
+                    "ChoiceWindowProperties",
+                    {
+                        "LineHeight:num": "0",
+                        "MinWidth:num": "96",
+                        "MaxRows:num": "0",
+                        "MaxCols:num": "0",
+                        "TextAlign:str": "default"
+                    }
+                ]
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    0,
+                    "$[choice.title.new_game]<Choice Width: 352>"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_EventTitleScene",
+                    "NewGame",
+                    "NewGame",
+                    {
+                        "SlowFade": "false"
+                    }
+                ]
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    1,
+                    "$[choice.title.continue]<Continue>"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
                 "parameters": [
                     "VisuMZ_4_EventTitleScene",
                     "LoadScreen",
@@ -136,135 +282,16 @@
                 ]
             },
             {
-                "code": 0,
-                "indent": 2,
-                "parameters": []
-            },
-            {
                 "code": 402,
-                "indent": 1,
-                "parameters": [
-                    1,
-                    "$[choice.title.new_game]"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "VisuMZ_4_EventTitleScene",
-                    "NewGame",
-                    "NewGame",
-                    {
-                        "SlowFade": "false"
-                    }
-                ]
-            },
-            {
-                "code": 0,
-                "indent": 2,
-                "parameters": []
-            },
-            {
-                "code": 402,
-                "indent": 1,
-                "parameters": [
-                    2,
-                    "$[choice.title.options]"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "VisuMZ_4_EventTitleScene",
-                    "Options",
-                    "Options",
-                    {
-                        "SlowFade": "false"
-                    }
-                ]
-            },
-            {
-                "code": 0,
-                "indent": 2,
-                "parameters": []
-            },
-            {
-                "code": 404,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 411,
                 "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 101,
-                "indent": 1,
                 "parameters": [
-                    "",
-                    0,
-                    0,
                     2,
-                    ""
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 1,
-                "parameters": [
-                    "$[title.warning]"
-                ]
-            },
-            {
-                "code": 102,
-                "indent": 1,
-                "parameters": [
-                    ["$[choice.title.play]","$[choice.title.options]"],
-                    -1,
-                    0,
-                    2,
-                    0
-                ]
-            },
-            {
-                "code": 402,
-                "indent": 1,
-                "parameters": [
-                    0,
-                    "$[choice.title.play]"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "VisuMZ_4_EventTitleScene",
-                    "NewGame",
-                    "NewGame",
-                    {
-                        "SlowFade": "false"
-                    }
-                ]
-            },
-            {
-                "code": 0,
-                "indent": 2,
-                "parameters": []
-            },
-            {
-                "code": 402,
-                "indent": 1,
-                "parameters": [
-                    1,
                     "$[choice.title.options]"
                 ]
             },
             {
                 "code": 357,
-                "indent": 2,
+                "indent": 1,
                 "parameters": [
                     "VisuMZ_4_EventTitleScene",
                     "Options",
@@ -275,17 +302,22 @@
                 ]
             },
             {
-                "code": 0,
-                "indent": 2,
-                "parameters": []
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    3,
+                    "$[choice.title.quit]"
+                ]
+            },
+            {
+                "code": 355,
+                "indent": 1,
+                "parameters": [
+                    "SceneManager.exit();"
+                ]
             },
             {
                 "code": 404,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 412,
                 "indent": 0,
                 "parameters": []
             },

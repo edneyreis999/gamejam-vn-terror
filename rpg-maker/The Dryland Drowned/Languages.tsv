@@ -21,11 +21,11 @@ ui.console.options	Options	Configurações
 ui.assist.switch_category	Switch category	Trocar categoria
 ui.assist.ok	Select	Selecionar
 ui.assist.cancel	Back	Voltar
-title.warning	The Dryland Drowned<br>Intended age rating: 16+. Psychological horror, permanent death, drowning and choices under pressure.	Afogados em Terra Seca Classificação pretendida: 16 anos. Horror psicológico, morte permanente, afogamento e escolhas sob pressão.
 choice.title.continue	Continue	Continuar
 choice.title.new_game	New Game	Novo jogo
+title.name	The Dryland Drowned	Afogados em Terra Seca
 choice.title.options	Options	Configurações
-choice.title.play	Play	Jogar
+choice.title.quit	Quit	Sair
 prologue.tavern.rheed.1	My name is Rheed. I was the one who spread word of the expedition, on Ivaí's orders and against Irati's wishes.	Meu nome é Rheed. Fui eu quem espalhou os anúncios da expedição, a mando de Ivaí e a contragosto de Irati.
 route.physical.name	The Church Path	Caminho da Igreja
 dest.physical.desc	Beneath the church swallowed by the forest, a prisoner of stone guards part of the path.	Sob a igreja tomada pela mata, uma prisioneira de pedra guarda parte do caminho.
