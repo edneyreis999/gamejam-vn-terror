@@ -10,7 +10,8 @@ release_ready: false
 # Verification — Coreto English localization
 
 This verification contract was approved with the technical design on
-2026-09-29 (D-015). It verifies the localized game on top of the Coreto provider
+2026-09-29 (D-015) and amended the same day by D-017–D-022 (peer review
+rounds 01–02). It verifies the localized game on top of the Coreto provider
 baseline delivered by separate work (D-013, D-014); it does not validate that
 migration. No game validation or player evaluation has been executed. Source
 inspection and documentation validation are not runtime evidence.
@@ -19,12 +20,12 @@ inspection and documentation validation are not runtime evidence.
 
 | ID | Requirement | Sensor | Setup/inputs | Expected observable | Evidence | Freshness owner | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| V-001 | RQ-001/004 | Native CLI validation and read-only source review | Full keyed inventory of player-facing sources/consumers; both table columns | Every source mapped or explicitly non-player/proper-name; no missing/empty cells or keys; correct tokens and choices | pending | Source copy, table, assets and consumers | pending |
+| V-001 | RQ-001/004 | Native CLI validation and read-only source review | Full keyed inventory of player-facing sources/consumers; both table columns; D-020 baseline | Every source mapped or explicitly non-player/proper-name. No missing or empty cells or keys. Payloads are a key plus native control tags and block wrappers (D-018). Show Text is keyed per block. Both columns carry the same inline tokens (`\V`, `<I>`, `\EFFECT`, casing, intentional `<br>`). No straight `"` or tabs in cells | pending | Source copy, table, assets and consumers | pending |
 | V-002 | RQ-001/002 | Live browser observation, plus existing game tests only where relevant | Candidate-created campaign and its own saves; native language option | Initial English, retained supported preference, native switching and campaign continuity | pending | Providers, configuration, scenes, events and save behavior | pending |
-| V-003 | RQ-004 | Visual inspection in directed play | All layout classes and risk-selected long entries | Complete readable text, including graphics, options and variables, in both languages | pending | Text, fonts, geometry and assets | pending |
+| V-003 | RQ-004 | Visual inspection in directed play | All layout classes and risk-selected long entries | Complete readable text, including graphics, options and variables, in both languages. `<WordWrap>` picture labels fit their pictures. Italic and animated beats stay readable; Text Effects starts on and animation stops when it is turned off; structural `<br>` breaks keep destination names apart from descriptions | pending | Text, fonts, geometry, assets and text treatment | pending |
 | V-004 | RQ-003/004/005 | Separate agent's readability review and directed player-role session | Fresh agent uninvolved in translation/development; frozen candidate | Specific complexity, comprehension and atmosphere findings with passage/context evidence | pending | English copy and actual runtime presentation | pending |
 | V-005 | RQ-003/006 | Human editorial review | Translation and separate-agent findings supplied to Edney | Explicit editorial decision; unresolved concerns remain visible | pending | Source/translation and subsequent editorial changes | pending |
-| V-006 | RQ-001/002/004 | Read-only inspection of localization configuration | Message Localization/LanguageImages, Options categories, source hashes | Localization enabled with `[English, Portuguese]`, TSV file and English default; language row beside the four Audio rows; no other provider parameter or plugin source changed by this increment | pending | Localization parameters and Options categories | pending |
+| V-006 | RQ-001/002/004 | Read-only inspection of configuration against the D-020 baseline commit | Coreto plugin parameters, `System.json`, `index.html`, plugin registry and source/bundle hashes | Localization is enabled with `[English, Portuguese]`, the TSV file and English as default. The General category holds the language and Text Effects rows, with keyed labels and `AddOption=true`, beside the four keyed Áudio rows. Every changed parameter path is listed with its reason (D-017). No plugin was added, removed or reordered. Coreto sources and bundles are unchanged. `gameTitle`, `<title>` and `package.json` `window.title` read “The Dryland Drowned” and are not keyed (D-019, D-022) | pending | Changed parameters, registry and title | pending |
 
 ## Independent agent evaluation contract
 
@@ -63,7 +64,7 @@ increment (D-014).
 | Validate native table | `node coreto/tools/coreto/cli.mjs --project 'rpg-maker/The Dryland Drowned' message language validate --format tsv --json` | pending |
 | Validate changed data | `node coreto/tools/coreto/cli.mjs --project 'rpg-maker/The Dryland Drowned' core validate --json` | pending; inspect diagnostics for localization edits; provider-baseline diagnostics go to the migration owner |
 | Existing game tests, only if relevant | Select existing IDs in `rpg-maker/tests/test-manifest.json` using the documented Node runner; no plugin-qualification suite | pending risk selection; not a full-suite gate |
-| Supported play surface | `npm start` after reading `docs/_memory/local-game-run.md` | pending; preserve preexisting server/session |
+| Supported play surface | `npm start -- --port 18737` from the worktree root, after reading `docs/_memory/local-game-run.md` | pending; never use or clear the user's `127.0.0.1:18726` origin (D-020); preserve preexisting servers/sessions |
 
 CLI table validation verifies structure, not full player-text coverage or English
 quality. Review every table cell/reference and reachable source against the keyed
@@ -81,8 +82,8 @@ invent new runner code or inject campaign state. The native QA charter is
 
 | Scenario | Starting state | Steps | Expected result | Evidence | Execution mode | Reason/requirement | Required variants | Evidence to reuse | Invalidation dependencies |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| L10 | Isolated fresh candidate profile, no personal saves | Open title → Options → choose PT → return → reopen → choose EN → New Game | Initial EN, native option visible, stored preference retained, warnings/menus/prologue localized | pending | directed-browser | RQ-001/002, native categories/persistence | First profile; returning supported PT/EN preference; keyboard and mouse across path | Same session for configuration/entry | Registry, table, CE002, Options callbacks |
-| L11 | Own candidate campaign | Conversation → Options switch → return; inspect choice/picture text, variable names, reread and controls | Native refresh, readable text, no unwanted action, lost campaign decision or broken controls | pending | directed-browser + visual | RQ-002/004; redraw and event lifecycle | Both directions; dialogue, long approach, variable-to-key name, menu | L10 campaign | Events, table, providers, font/layout |
+| L10 | Candidate served on `127.0.0.1:18737`; before clearing that origin's storage, the executor confirms with `lsof` that the listener is its own server; no personal saves | Open title → Options → choose PT → return → reopen → choose EN → toggle Text Effects off/on → New Game | Initial EN; language and Text Effects rows visible with localized labels; stored preference retained; warnings, menus and prologue localized; browser tab reads “The Dryland Drowned” | pending | directed-browser | RQ-001/002, native categories/persistence | First run on the clean 18737 origin; returning supported PT/EN preference; keyboard and mouse across path | Same session for configuration/entry | Registry, table, CE002, Options parameters |
+| L11 | Own candidate campaign | Conversation → Options switch → return; inspect choice/picture text, variable names, reread and controls; reach one encounter's approach picture labels and one treated passage (italic or animated) | Native refresh, readable text, no unwanted action, lost campaign decision or broken controls; hidden choice window stays hidden; wrapped labels fit | pending | directed-browser + visual | RQ-002/004; redraw, event lifecycle and D-018/D-021 markup | Both directions; dialogue, long approach, variable-to-key name, menu, Text Effects off | L10 campaign | Events, table, providers, font/layout, text treatment |
 | L12 | Own candidate campaign and normally selected file | Reach a semantic checkpoint → reopen → Continue in other selected language → play forward | Current-slot save retained; same progress/deaths; no duplicate consequence/checkpoint or obsolete visible language | pending | directed-browser + read-only state | RQ-002; Save continuity on the Coreto baseline | One reading checkpoint and one committed consequence; no old/external saves | L11/L13 saves with provenance | Provider baseline, Bridge, authored lists |
 | L13 | Fresh candidate campaigns; branch only through normal choices | Play EN to an ending with a loss; cover the other structurally distinct closing paths and long-layout classes through candidate play | Accessible EN journey, localized choice/outcome/closing/credits and preserved progression/pictures/audio controls | pending | directed-browser + visual | RQ-001/004; unique closing text paths | Reunite, destroy, total loss; representative EN success/failure/retreat; one PT comparison sequence; 1280×720 and representative 1920×1080 | Share own compatible saves only; paired with full corpus V-001/004 | Provider set, native campaign/closing events, table/assets |
 | L15 | Frozen candidate and fresh agent with no development participation | Agent plays an EN campaign by normal input; records understanding; afterward reviews all remaining keyed EN copy with context | Evidenced readability/atmosphere report, complete corpus coverage distinct from visited runtime coverage | pending | directed-browser, then independent read-only editorial evaluation | RQ-003/005 | All corpus keys; representative played route, dialogue, failure/loss and closing | Its own played campaign only | English copy, translation context, runtime presentation |
@@ -105,9 +106,11 @@ and editorial findings. No inherited E2E waiver.
 ## Evidence and cleanup
 
 All execution and candidate changes belong to the dedicated branch
-`spec/coreto-english-localization` and its managed worktree. Do not start the
-original checkout's runtime as if it were this candidate. Runtime profiles and
-saves are created for this worktree's candidate, preserving the user's originals.
+`spec/coreto-english-localization` and its managed worktree, on top of the
+recorded D-020 baseline commit. Do not start the original checkout's runtime as
+if it were this candidate. The candidate is always served on port 18737, so its
+configuration and saves live only in the `127.0.0.1:18737` origin. The user's
+18726 origin, personal saves and settings are never read, written or cleared.
 
 Each result records candidate/source hashes, native version, real inputs,
 observations, captures, reviewer and affected keys. Preserve first failures and
@@ -134,7 +137,8 @@ acceptance are pending. This is a spec delivery, not a localized game release.
 ## Specification candidate audit
 
 Keep the spec, verification, stories, interview and two ADRs: each owns a distinct
-contract or user decision. Keep the four discipline contracts for affected text,
+contract or user decision. Peer reviews (`review-NN.md`) keep the evidence behind
+D-017–D-021 and become historical once incorporated. Keep the four discipline contracts for affected text,
 UI, configuration and image-text responsibility. Keep source-analysis as dated
 repository evidence, not a second live status store. Keep the QA charter linked
 from the existing creative-review journey. Keep the GDD and two memory edits

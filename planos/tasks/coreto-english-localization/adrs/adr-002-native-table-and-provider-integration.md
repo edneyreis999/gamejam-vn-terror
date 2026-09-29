@@ -1,6 +1,8 @@
 # ADR-002 — Native translation table on the Coreto provider baseline
 
-Status: accepted 2026-09-29 (D-015). Provider scope amended by D-013/D-014.
+Status: accepted 2026-09-29 (D-015). Provider scope amended by D-013/D-014;
+integration boundary, key model and text treatment amended by D-017–D-021
+([peer review 01](../review-01.md)).
 
 ## Decision
 
@@ -11,11 +13,18 @@ startup version constraint documented in [source analysis](../source-analysis.md
 justified four providers; the wider migration is Edney's choice.
 
 Use the native `Languages.tsv` as the single editable owner of PT/EN prose, with
-stable references in native events. Keep scene flow, speaker attribution and
-rules in their current owners. Add the native `textLocale` row to the existing
+stable references in native events. Keep scene flow, speaker attribution,
+control tags, block wrappers and rules in their current owners. Show Text is
+keyed per block, and multi-line picture text uses native `<WordWrap>`
+(D-018). Add the native `textLocale` and `textEffects` rows to the existing
 Options configuration. Use Coreto CLI where available, otherwise edit data with
-native authoring tools. No new plugin, executable code, callback rewrite, helper
-script or workaround. Browser-title and choice-focus behavior remain native.
+native authoring tools.
+
+Any parameter, tag or callback parameter of the active Coreto plugins may
+change, preferring parameters and tags over JavaScript (D-017). No new plugin,
+helper script, Coreto source or bundle edit, or workaround. The browser title is
+the static English title, never keyed (D-019). Native text treatment follows
+D-021. Choice-focus behavior remains native.
 
 ## Alternatives and consequences
 

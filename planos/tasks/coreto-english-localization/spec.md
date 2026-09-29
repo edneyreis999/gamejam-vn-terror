@@ -4,6 +4,7 @@ slug: coreto-english-localization
 stage: ready-for-tasks
 product_consolidation: approved-2026-09-28
 technical_approval: approved-2026-09-29
+amended: 2026-09-29 (D-016–D-022; peer review rounds 01–02)
 ---
 
 # Whole-game English localization with Coreto
@@ -15,9 +16,11 @@ Portuguese. English is the initial default. Preserve the story's information,
 character identities, player choices and horror atmosphere.
 
 The user requested local specification through issue-to-spec and grill-me.
-Product decisions D-001–008 and technical decisions D-009–015 are recorded in
+Product decisions D-001–008 and technical decisions D-009–021 are recorded in
 the [interview](entrevista.md). The technical design was approved on 2026-09-29
-(D-015). Translation implementation and its verification remain pending.
+(D-015) and amended the same day by D-016–D-022 after peer review rounds
+[01](review-01.md) and [02](review-02.md). Translation implementation and its
+verification remain pending.
 
 ## Scope
 
@@ -31,18 +34,23 @@ the [interview](entrevista.md). The technical design was approved on 2026-09-29
   switching/persistence behavior; English is the default without a stored choice.
 - Agent-produced translation, an evaluation by a separate agent uninvolved in
   development, and final editorial review by Edney.
-- Localization configuration of the already active Coreto providers: Message
-  Localization and LanguageImages parameters, and the Options category that
-  hosts the native language row.
+- Configuration of the already active Coreto plugins: any parameter, tag or
+  callback parameter they expose (D-017). This includes Message Localization and
+  LanguageImages, the Options categories, and the player-facing
+  text fields of Save, ExtMessageFunc, Options and AniMsgTextEffects.
+- Native text treatment of the localized copy (D-021, D-022): italics for voices
+  and inscriptions, sparse animated text effects and the native Text Effects
+  option.
 
 ## Exclusions
 
 Additional languages, new story content, altered campaign rules, translation of
 internal code or repository documentation, remote runtime translation services,
 new distribution platforms and a custom language-selection flow. D-009 excludes
-new plugins, custom code, helper scripts, rewritten callbacks and workarounds;
-all localization uses installed plugin capabilities. No engine or existing plugin
-source/bundle modification.
+new plugins, helper scripts, generators, runners, adapters and workarounds. All
+localization uses installed plugin capabilities, preferring parameters and tags
+over JavaScript (D-017). No engine or existing plugin source/bundle
+modification.
 
 The VisuStella → Coreto provider migration is a delivered prerequisite owned by
 separate work (D-013, D-014): installing, validating, repairing or requalifying
@@ -106,7 +114,8 @@ review; neither it nor technical validation substitutes for Edney's judgment.
 | [Interview](entrevista.md) D-001–007 | User decisions; confirmed individually | Languages, default, native behavior, style, reviewer roles | New product scope |
 | [Canonical GDD](../../../docs/GDD_Visual_Novel_Expedicao_e_Sacrificio.md) §3.5, §22 | Confirmed design | Language boundary and preserved narrative/game rules | Replace PT-BR-only exclusion with approved bilingual direction |
 | [ADR-001](adrs/adr-001-bilingual-product.md) | Accepted individual product decisions | Scoped supersession of monolingual baseline | New record |
-| [ADR-002](adrs/adr-002-native-table-and-provider-integration.md) | Accepted 2026-09-29 (D-015) | Table ownership of bilingual prose; Coreto baseline boundary | New record |
+| [ADR-002](adrs/adr-002-native-table-and-provider-integration.md) | Accepted 2026-09-29 (D-015), amended by D-017–D-021 | Table ownership of bilingual prose; key/markup model; Coreto baseline boundary | New record |
+| [Peer review 01](review-01.md), [02](review-02.md) | Findings decided 2026-09-29 | Evidence behind D-017–D-022 | Historical once incorporated |
 | [Standing directives](../../../docs/_memory/standing_directives.md), [ADRs](../../../docs/adrs/README.md) | Accepted | Evidence, own saves, risk grouping, immutable baselines | Preserve except explicit bilingual player-copy boundary |
 | [Coreto authoring](../../../coreto/docs/autoria.md), [extensions](../../../coreto/docs/extensoes.md) | Installed capability contracts | Discovery, native configuration, read-only bundles | Preserve |
 | [Updated narrative copy](../updated-narrative-copy/spec.md) and current native events | Existing narrative baseline | Source meaning and scene ownership | Translate; do not rewrite historical approvals |
@@ -133,12 +142,20 @@ Every VisuStella plugin stays registered and disabled with its files retained.
 
 This registry is a prerequisite delivered and validated by separate work
 (D-014); Edney reports the game is functional for translation testing. This spec
-does not install, reorder, requalify or repair providers, and does not touch
-migration-side data edits. Localization edits only the provider parameters it
-owns: Message `Localization:struct` and `LanguageImages:struct`, and the Options
-`Categories:arraystruct` entry for the language row. Use the Coreto CLI where it
-exposes the operation. If the baseline blocks a localized surface, record it and
-hand it to the migration owner instead of patching it here.
+does not install, reorder, requalify or repair providers. It does not revert or
+reformat the migration's own changes, such as the CLI's `PictureIDs`
+serialization. Before task-01, the migration commits its changes on this branch,
+and that commit is recorded in `tasks.md` as the localization baseline (D-020).
+Every diff, V-006 and the existing-test classification measure against that
+hash. A later migration commit reopens V-006 and repeats the A1 pilot.
+
+Under D-017, localization may change any parameter, tag or callback parameter of
+the active Coreto plugins, preferring plain text fields and tags over JavaScript.
+It creates no plugin and never edits Coreto sources or bundles. Record every
+changed parameter path (plugin, path, before, after, reason) in the task's
+Execution Notes. Use the Coreto CLI where it exposes the operation. If the
+baseline blocks a localized surface and no parameter or tag resolves it, record
+the limitation and hand it to the migration owner.
 
 ### Translation data and authoring ownership
 
@@ -153,9 +170,40 @@ reading-unit IDs. Replace translatable payloads with `$[stable.key]`; the table
 owns the PT source and corresponding EN copy. Use semantic context in keys
 (scene, speaker/passage, approach/outcome), not mutable command offsets. Do not
 merge different meanings merely because their Portuguese strings match.
-Repeated representations of the same choice share one key. Preserve presentation
-escapes, placeholders and native control tags; table cells use `<br>` instead of
-physical newlines. Language-key lookup is case-insensitive; columns are exact.
+Repeated representations of the same choice share one key. Language-key lookup
+is case-insensitive; columns are exact.
+
+Key and markup model (D-018):
+
+- **Show Text:** one key per block (the 101 header and its 401 lines). The 101
+  header keeps face, bust and speaker metadata. The PT cell joins the 401 lines
+  with a space and keeps the existing explicit `<br>`, which reproduces the
+  current word-wrapped rendering (`LineBreakSpace=true`). EN uses `<br>` only for
+  intentional pauses or paragraphs, never to copy PT line lengths.
+- **Control tags stay in the event, outside the key.** Choice payloads become
+  `$[key]<Bind Picture: 50><Hide Choice Window>`, because PictureChoices reads
+  `<Hide Choice Window>` from the raw choice text. Block-level wrappers
+  (`\FS[n]` for a whole label, `<center>`, `<WordWrap>`) also stay in the event.
+- **Cells hold prose and inline markup only:** `\V[n]`, inline emphasis (D-021)
+  and intentional `<br>`. Both columns carry the same inline tokens.
+- **Picture text:** every multi-line picture text uses `<WordWrap>` in the event
+  wrapper, following the existing CE059 memorial. With word wrap on, a raw `\n`
+  becomes a space, so structural breaks in the wrapper (name / blank line /
+  description) become `<br>` (D-022), for example
+  `<WordWrap>\FS[21]\V[173]<br><br>\FS[19]$[dest.a.desc]`. Approach labels share the
+  choice key as `\FS[22]<WordWrap>$[key]`. Line breaks come from native wrapping,
+  not from `\n` in cells. The A1 pilot must show that the labels fit in both
+  languages. If they do not, stop and return the decision to Edney (no fallback
+  is pre-approved).
+- **Cells:** UTF-8, no tabs and no straight double quotes (`"`). The TSV parser
+  rejects a stray `"`, and a table load error blocks boot in both languages.
+  Run `message language validate` after every table edit.
+- **Scrolling text (105/405):** the scroll window does not word-wrap, and each
+  405 line has its own `<center>`/`\FS` wrapper. Key per line, and only the
+  translatable lines, with wrappers kept in the event (D-022). For the credits,
+  that means only the title (`<center>\FS[32]$[credits.title]`) and the plugin
+  line. The plugin line keeps its content, “Plugins: VisuStella”, in both
+  columns (D-022). Proper-name lines stay literal.
 
 This explicitly changes the earlier rule that prose is edited only inside MZ
 events. Native events remain scene owners, while bilingual copy has one editable
@@ -176,26 +224,41 @@ Provide translator guidance and a term glossary with the completed translation.
   captions `402`, scrolling credits `105/405`, names and relevant display fields.
 - All 98 PictureTextChange calls, including approach labels, encounter titles,
   party/destination feedback and memorial. Preserve alignment, picture IDs,
-  bindings, font escapes and ordered approach IDs.
+  bindings, font escapes and ordered approach IDs. Replace the 38 manual `\n`
+  breaks (34 approach labels, 3 CE039 destinations, 1 CE117) with `<WordWrap>`
+  in the wrapper (D-018).
 - CE004 ConfigureRoute/ConfigureEncounter display names: store unresolved keys
   so later rendering uses the current locale; never localize domain identifiers.
   Variable expansion precedes the native localization hook in the text pipeline;
   verify variable-to-key consumers in real rendering. Preserve hero proper names.
-- Reachable System terms, database display names and plugin text parameters:
-  Options categories/help, Save/Load prompts, message-console controls, warnings
-  and text consumed by existing callbacks. Prefer existing text/string fields
-  and native implicit key matching where needed. Do not author or rewrite JS
-  callbacks, symbols, filenames, command names or rejected-action codes. If a
-  visible string cannot be localized by a native supported route, record that
-  gap for resolution rather than injecting code.
-- Game title: preserve the approved pair “Afogados em Terra Seca” / “The Dryland
-  Drowned” in localized in-game copy. Browser/document-title metadata follows
-  existing native behavior; dynamic browser-title switching is not a requirement
-  and no hook is introduced to implement it.
+- Reachable System terms, database display names and plugin text parameters,
+  set to `$[key]` (D-017). Known fields:
+  - Save: `Save.VocabLockedSaveSlot`, `SaveConfirm.VocabSaveFailure`,
+    `SaveConfirm.VocabLoadFailure`, `AutosaveConfirm.VocabAutosaveSuccess`,
+    `AutosaveConfirm.VocabAutosaveFailure`.
+  - ExtMessageFunc: `Buttons.Options`.
+  - Options: `OptionsSettings.buttonAssistCategory`, category `Name` and row
+    `TextStr`.
+  - Message: `Localization.Name`, which labels the language row.
+  - AniMsgTextEffects: `Options.Name`.
+
+  Other visible string fields found during task-02 are recorded, then keyed.
+  Prefer string fields (`TextStr` wins over `TextJS` in Options rows) and native
+  implicit key matching. Callback parameters may change under D-017 when no
+  string field or tag covers the need. Never rename symbols, filenames, command
+  names or rejected-action codes.
+- Game title (D-019, D-022): `System.gameTitle`, the `index.html` `<title>` and
+  the `package.json` `window.title` become the static English title “The Dryland
+  Drowned”. `gameTitle` is never keyed: it
+  feeds `document.title` and savefile info outside the localization hooks. In-game
+  copy keeps the approved pair “Afogados em Terra Seca” / “The Dryland Drowned”.
 - Inspect referenced images for baked-in text; filename or extraction searches
   cannot prove its absence. Reuse text-free art. Where text exists, provide final
-  localized assets with the native `[XX]` substitution and `ConvertDefault=true`
-  so both languages resolve explicitly. No placeholders at delivery.
+  localized assets with the native `[XX]` substitution: set distinct
+  `LanguageImages` tokens per language (for example `English=[EN]`,
+  `Portuguese=[PT]`, because the shipped value `[XX]` makes substitution a
+  no-op), plus `ConvertDefault=true` and matching files. No placeholders at
+  delivery.
 
 Unused stock combat/database text is inventoried and identified as unreachable;
 it does not authorize a new gameplay surface. Shared terms used by reachable
@@ -203,24 +266,59 @@ windows are in scope even if originally introduced by engine defaults.
 
 ### Native option and configuration-only integration
 
-The Coreto Options configuration inherited only the Áudio category. Add the
-delivered native `textLocale` row in a localized General category, retaining
-the four Audio rows.
+The Coreto Options configuration inherited only the Áudio category. Add a
+localized General category with two delivered catalog rows: `textLocale`
+(language) and `textEffects` (animated text on/off, D-021). Retain the four
+Áudio rows and key their category `Name` and row `TextStr` fields.
 Use the catalog's standard callbacks and native `changeVisuMzTextLocale`/refresh
 methods; do not invent a selector, confirmation dialog or restart requirement.
-Reuse the delivered native row unchanged in its executable callback logic.
+The language row's label comes from `Localization.Name` and the effects row's
+from AniMsgTextEffects `Options.Name`; key both. Keep `Localization.AddOption`
+and AniMsgTextEffects `Options.AddOption` set to `true`, because the catalog
+rows' `ShowJS` requires them. Text Effects starts on: AniMsgTextEffects forces
+it on when no preference is stored, and its `applyData` runs after OptionsCore,
+so no reduced-motion default is possible natively (D-022). Players turn it off
+in the row, and the stored choice persists.
 Language validation, persistence, refresh and unsupported-preference behavior
-remain native; no custom callback is introduced.
+remain native.
 The title CE002 already opens Options; the existing message console provides
 the in-game entry. Validate both, without adding another entry point.
 
-There is no new game specialist or other custom executable code. Keep existing
+There is no new plugin, game specialist or helper script. Keep existing
 choice focus behavior, including its transient name-based cache, unchanged.
 Observe focus after switching as a regression risk; do not add cache hooks.
 No new campaign state, translations in JavaScript or mirrored language store.
 CLI lacks a generic language-cell editing operation: create/validate through the
 CLI, edit the TSV as data, then validate again. For fields without a CLI operation,
 use native editor/data authoring, never a new generator or conversion script.
+
+### Native text treatment (D-021)
+
+Use native Message Core and AniMsgTextEffects features, with restraint and the
+same meaning in both languages:
+
+- **Voices and inscriptions:** quoted voices, remembered speech, songs and
+  written inscriptions use `<I>…</I>` in both columns instead of quotation
+  marks. Typographic quotes “ ” are used only where the prose needs them; straight
+  `"` is never used in cells. `<I>` is measured and drawn in the same style, so
+  word wrap stays correct in all windows, including picture text.
+- **No AutoColor (D-022):** names get no automatic color. Coreto's AutoColor
+  whole-word rule uses ASCII-only `\b` (`text-pipeline.js:111`), so accented
+  names such as Ivaí, Andirá, Floraí and Boitatá never match. See the Coreto
+  follow-up below.
+- **Animated beats:** `\EFFECT<Preset>` appears sparingly, only on supernatural
+  voices or visions in Show Text (other windows strip it). Use subdued existing
+  presets (for example `SoftShiver`, `Flicker`, `Candle`, `Fade`), end with
+  `<CLEAR EFFECTS>`, and use the same placement in both columns. Selection resets
+  each page. Players can disable animation with the Text Effects row.
+- **Casing:** `<CAPS>`/`<CHAOS>` only for a possessed or creature voice, in both
+  columns.
+- **Not used:** text macros inside cells, because Message Core expands macros
+  before resolving keys, so macros in cells only work through a fragile second
+  Show Text pass.
+
+The translator guide lists every treated key. The editorial packet shows each
+use to Edney (V-005). The source map records the treatment in the key's context.
 
 ### Lifecycle and invariants
 
@@ -244,7 +342,8 @@ saves must resume correctly in either language. Leave personal saves untouched.
 ### Failure, validation and packaging
 
 Native missing keys can render `undefined`, empty cells `UNDEFINED!`; they do not
-fall back to English. Preserve the native failure contract and prevent these
+fall back to English. A straight `"` inside an unquoted cell makes the whole
+table fail to load, which blocks boot. Preserve the native failure contract and prevent these
 defects through exhaustive coverage checks before delivery. Do not hide missing
 translations with PT fallback. A malformed/unavailable table blocks native
 database readiness with a retryable load error. This is a documented native
@@ -252,7 +351,10 @@ contract, not a request to retest the plugin's loader/failure matrix (D-011).
 Normal boot must never create or rewrite the table.
 
 Ship TSV and localized assets in the existing build-free package. Confirm actual
-table retrieval and asset resolution using the supported local Chrome surface.
+table retrieval and asset resolution using the supported local Chrome surface,
+served from this worktree with `npm start -- --port 18737` (D-020). The user's
+`127.0.0.1:18726` origin, with its saves and configuration, is never used by
+this increment.
 No runtime translation API or external service. Keep source engine/Coreto hashes
 unchanged. Test-resource teardown follows G006 and preserves user resources.
 
@@ -268,8 +370,8 @@ contract: audio content is unchanged; provider regressions belong to the migrati
 Use only applicable existing game tests under `rpg-maker/tests/`, native CLI
 checks of changed data, read-only content review and actual browser inputs.
 Do not retest plugin internals or qualify the provider baseline (D-011, D-014).
-Do not create new test code,
-adapters, runners or generators under D-009. A historical test asserting literal
+Do not create new test code, adapters, runners or generators under D-009. Test
+files belong to the D-020 baseline revision. A historical test asserting literal
 PT event strings or old provider identities is reviewed against the new source
 mapping; do not edit it into a pass or silently omit its failure. Report obsolete
 assertions separately from real regressions and supply native/observed evidence.
@@ -278,6 +380,16 @@ The [verification contract](verification.md) and
 separate-agent evaluation, representative runtime paths and human acceptance.
 Update `rpg-maker/README.md` with the final native table-editing workflow at
 implementation. Do not run obsolete whole-map generators.
+
+## Follow-ups outside this spec
+
+- **Coreto Message Core (upstream):** AutoColor builds `\b${name}\b` without the
+  Unicode flag (`coreto/src/message-core/text-pipeline.js:111`), so words that
+  start or end with an accented letter are never colored. A likely fix is
+  Unicode-aware boundaries (`(?<![\p{L}\p{N}_])…(?![\p{L}\p{N}_])` with the `u`
+  flag), plus a test with accented names. It belongs to the Coreto project (code
+  freeze here). A redelivered bundle would change the D-020 baseline, reopen
+  V-006, repeat the A1 pilot, and reopen D-022(b) if it arrives before task-03.
 
 ## Acceptance summary
 
@@ -302,7 +414,12 @@ play; prepared mockups do not constitute runtime evidence.
 Stage 1 is approved under D-008. D-009–012 set the native-only constraint, CLI
 use, game-focused QA and isolated workspace; D-013 widens the provider baseline
 to the full Coreto stack; D-014 moves that baseline outside this spec; D-015
-approves the technical design. No product or technical decision remains open.
-If runtime evidence reveals a provider/API limitation, record it, hand it to
-the migration owner and amend the affected design rather than editing Coreto
-or patching around it.
+approves the technical design; D-016 allows chained CLI calls after a pilot.
+Peer review round 01 produced D-017 (open Coreto parameters, tags and callbacks,
+native first), D-018 (key and markup model), D-019 (static English browser
+title), D-020 (frozen baseline and isolated runtime) and D-021 (native text
+treatment). No product or technical decision remains open, except the D-018 A1
+pilot condition. If runtime evidence reveals a provider/API limitation, first
+look for a Coreto parameter or tag. Otherwise record it, hand it to the
+migration owner and amend the affected design, without editing Coreto sources or
+bundles.

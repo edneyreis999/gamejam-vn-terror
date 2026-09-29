@@ -5,7 +5,7 @@ title: Avaliar localização integral e clareza do horror em inglês
 persona: Jogador de língua inglesa, representado por agente sem participação no desenvolvimento
 journey: J-mz-creative-review
 expected: Experiência integral localizada, funcionamento nativo e parecer específico sobre compreensão e atmosfera
-entry_points: npm start; entrada nativa do jogo
+entry_points: npm start -- --port 18737 no worktree; entrada nativa do jogo
 qa_status: untested
 bug_ids:
 fix_status:
@@ -18,7 +18,8 @@ overlaps: LOC-mz-session-recovery-export; FOR-mz-formation-roster; ENC-mz-encoun
 
 Plano aprovado em 2026-09-29 (D-015). Autoridade: [spec](../../../planos/tasks/coreto-english-localization/spec.md),
 [verificação L10–L15](../../../planos/tasks/coreto-english-localization/verification.md)
-e decisões D-001–015. Nenhum teste foi executado para este incremento.
+e decisões D-001–022 (D-017–022 vêm das revisões par 01 e 02). Nenhum teste foi
+executado para este incremento.
 
 ## Missão e preparação
 
@@ -26,9 +27,15 @@ Percorrer o jogo sobre a base Coreto já migrada (D-013), com inglês inicial e
 opção nativa PT/EN. A validação da migração é de outra frente (D-014); defeitos
 dela encontrados aqui vão para essa frente, sem correção neste incremento. Confirmar idioma lembrado, continuidade da campanha e legibilidade
 dos diálogos, escolhas gráficas, nomes dinâmicos, Options, Save/Load e créditos.
-Usar Chrome desktop, teclado/mouse e tabelas/assets locais. Fazer a descoberta
-das ferramentas existentes antes da execução; não escrever plugin, callback,
-runner, adapter, gerador ou teste novo para contornar suas limitações.
+Observar também: linha Text Effects na categoria Geral (desligada, a animação
+para), rótulos de abordagem com quebra automática, janela de escolha oculta
+nos encontros, falas em itálico, cartões de destino com nome separado da
+descrição, créditos com layout por linha e aba/janela com o título “The Dryland
+Drowned”. Text Effects começa ligado. Usar Chrome desktop, teclado/mouse e tabelas/assets
+locais, sempre com o candidato servido do worktree em `127.0.0.1:18737` (D-020).
+Nunca usar nem limpar a origem 18726 do usuário. Fazer a descoberta das
+ferramentas existentes antes da execução; não escrever plugin, runner, adapter,
+gerador ou teste novo para contornar suas limitações.
 
 Executar os lotes L10–L13 conforme sua matriz, agrupando configurações e provas
 compatíveis. O jogo começa do estado inicial real: cada executor cria sua própria

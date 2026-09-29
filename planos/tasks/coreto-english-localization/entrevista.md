@@ -1,7 +1,8 @@
 # Coreto English localization — design interview
 
-Status: product and technical design approved (D-008, D-015). Translation
-implementation pending on a Coreto provider baseline delivered separately (D-013, D-014).
+Status: product and technical design approved (D-008, D-015), amended by the
+peer-review decisions D-017–D-021. Translation implementation is pending on a
+Coreto provider baseline delivered separately (D-013, D-014) and frozen by D-020.
 
 ## Request
 
@@ -94,6 +95,81 @@ specification locally; implementation and task decomposition are later phases.
 - **D-015 — Technical design approved (2026-09-29):** user answered “Sim, aprovo
   os 3 pontos”: `Languages.tsv` as the single bilingual prose owner (ADR-002),
   the four discipline contracts and the verification plan.
+- **D-016 — Chained CLI calls with a pilot first (2026-09-29):** running Coreto
+  CLI calls in sequence from the terminal, with no script file saved in the
+  repository, is within D-009. User: “Sim, pode encadear. mas faça de forma
+  inteligente. Faça uma pequena parte primeiro [...] teste e garanta que
+  funcionou. depois faça o resto.” Task graph approved (“Aprovado”).
+
+Decisions D-017–D-021 come from the peer-review interview on the
+[review round 01](review-01.md) findings (2026-09-29).
+
+- **D-017 — Coreto parameters, tags and callbacks are open; native first
+  (2026-09-29):** as long as no new plugin is created, changing any parameter of
+  the active Coreto plugins and using their tags is fully allowed. This includes
+  callback parameters (`:func`/`:eval`). User: “está completamente liberado
+  alterar parametros e usar as tags dos plugins da Coreto [...] PRIORIZAR alterar
+  parametros e usar tags dos plugins Coreto antes de tentar fazer qlqr gambiarra
+  em javascript”, and “Liberados como qualquer parâmetro” for callbacks. Any
+  native presentation feature of the plugins may be used at the implementer's
+  judgment (“Você está liberado para usar qualquer recurso que julgar cabível,
+  desde que ele seja nativo dos plugins”). This supersedes D-014's
+  three-parameter limit and D-009's callback restriction. D-009 still forbids new
+  plugins, helper scripts, generators, runners and adapters, and any edit to
+  Coreto sources or bundles. Each parameter change is recorded for review.
+- **D-018 — Key and markup model (2026-09-29):** (a) native control tags
+  (`<Bind Picture>`, `<Hide Choice Window>`, `<Show Switch>` and similar) stay
+  in the event payload around the key, because `<Hide Choice Window>` is read
+  from the raw choice text. (b) Every multi-line picture text uses
+  `<WordWrap>` in the event wrapper, outside the key, following the existing
+  CE059 memorial. Approach labels share the choice key as
+  `\FS[22]<WordWrap>$[key]`; if the A1 pilot shows this does not fit, stop and
+  return the decision to Edney (no fallback). (c) Use one key per Show Text
+  block. The PT cell joins 401 lines with a space and keeps explicit `<br>`; EN
+  uses `<br>` only for intentional breaks. Block-level wrappers stay in the
+  event; `\V[n]` and inline emphasis stay in the cell.
+- **D-019 — Static English browser title (2026-09-29):** `System.gameTitle` and
+  the `index.html` `<title>` become “The Dryland Drowned”. `gameTitle` is never
+  keyed, because it feeds `document.title` and savefile info outside the
+  localization hooks. In-game copy keeps the approved title pair. D-022 extends
+  this to the `package.json` window title.
+- **D-020 — Frozen baseline and isolated runtime (2026-09-29):** the migration
+  session commits its changes on this branch before task-01. That hash is
+  recorded in `tasks.md` as the localization baseline, and all diffs, V-006 and
+  the existing-test classification measure against it. A later migration commit
+  reopens V-006 and repeats the A1 pilot. Every candidate smoke and QA run uses
+  `npm start -- --port 18737` from the worktree (port amended by D-022), and the
+  user's 18726 origin is never used.
+- **D-021 — Native text treatment (2026-09-29):** the table forbids straight
+  double quotes and tabs in cells. Quoted voices, inscriptions and remembered
+  speech use `<I>…</I>` in both columns; typographic quotes “ ” are used only
+  where the prose needs them. Native presentation features are used under
+  D-017 with restraint: AutoColor for glossary folklore names (removed by
+  D-022), sparse
+  `\EFFECT<…>` on Show Text supernatural beats, and the native Text Effects
+  Options row so players can switch animation off. Each use is listed for
+  Edney's editorial review (V-005). Text macros are not used inside cells.
+- **D-022 — Peer review round 02 decisions (2026-09-29):** decisions on the
+  [round 02](review-02.md) findings.
+  - (a) Text Effects starts on, which is the native behavior (AniMsg forces it
+    on when no preference is stored), and players switch it off in the Options
+    row. There is no reduced-motion default.
+  - (b) AutoColor is removed. Its whole-word rule uses ASCII-only `\b`, so names
+    such as Ivaí, Andirá, Floraí and Boitatá never match. The bug is recorded as
+    a Coreto follow-up. If a fixed Message Core arrives before task-03, the
+    decision reopens.
+  - (c) Structural breaks inside `<WordWrap>` picture wrappers become `<br>`, as
+    in CE059.
+  - (d) The `package.json` `window.title` also becomes “The Dryland Drowned”.
+  - (e) Scrolling credits are keyed per line, and only on translatable lines
+    (title and plugin line), with wrappers kept in the event.
+  - (f) The credits plugin line stays “Plugins: VisuStella”; it is translated
+    faithfully and its content is not changed.
+  - (g) The candidate uses the exclusive port 18737. Before clearing its origin,
+    confirm with `lsof` that it belongs to the executor.
+
+  User chose each recommended option, except (f), where the user answered
+  “Manter Plugins: VisuStella”.
 
 ## Inspected baseline
 
@@ -119,12 +195,15 @@ specification locally; implementation and task decomposition are later phases.
 
 ## Remaining discovery and approval
 
-- No product or technical decision remains open.
+- No product or technical decision remains open. The only conditional is the
+  D-018 A1 pilot: if the wrapped approach label does not fit, the decision
+  returns to Edney.
 - The full keyed source map and image-text audit belong to implementation.
-- A new conflict discovered during implementation needs a recorded amendment,
-  not a silent workaround or an edit to the provider baseline (D-014).
+- A new conflict discovered during implementation needs a recorded amendment.
+  Prefer a Coreto parameter or tag (D-017); never edit Coreto sources, bundles or
+  the migration's own changes (D-014).
 
 ## Next phases
 
-Decompose the approved spec into tasks, then implement the translation on top
-of the delivered Coreto baseline. Apply ADR-G004–G006 and SD-015.
+Record the migration baseline commit (D-020), then execute the amended task
+graph from task-01 on top of it. Apply ADR-G004–G006 and SD-015.

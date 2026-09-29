@@ -22,8 +22,19 @@ descriptive words consistently using a reviewed glossary. Preserve the approved
 English game title. No invented lore, explanatory additions or abridged outcomes.
 
 Review the entire corpus, including all branches, menus and notices. Repeated
-choice representations share meaning and key. Preserve all interpolation and
-control tokens. Dialogue length may change but cannot silently merge speaking
+choice representations share meaning and key. Key each Show Text block as one
+unit, so English sentences are not forced into Portuguese line splits (D-018).
+Preserve all interpolation and control tokens; control tags stay in the event,
+outside the cell.
+
+Text treatment (D-021): quoted voices, remembered speech, songs and inscriptions
+use `<I>…</I>` in both columns instead of quotation marks. Never use straight `"`
+in a cell; use typographic “ ” only where the prose needs quotes. Animated
+`\EFFECT` beats and `<CAPS>`/`<CHAOS>` casing are rare and reserved for
+supernatural voices or visions. The same treatment appears in both columns, and
+each use is listed for Edney. Names get no automatic color (D-022).
+Credits are keyed per translatable line; the plugin line keeps “Plugins:
+VisuStella” unchanged (D-022). Dialogue length may change but cannot silently merge speaking
 turns, skip acknowledgements or change commitment boundaries.
 
 The separate-agent evaluation has two portions: a genuine observed browser
