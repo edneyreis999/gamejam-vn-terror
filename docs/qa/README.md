@@ -18,7 +18,11 @@ Após o aceite, preservar os registros brutos em arquivo local com manifesto e h
 
 O [incremento MZ aceito](deliveries/init-rpg-maker-mz/README.md) tem resumo, aceite, manifesto do runtime e cinco capturas independentes, incluindo o desaparecimento de Gorvak e a visita posterior. Não exige os milhares de arquivos brutos para compor seu devlog. Os181 arquivos de ciclos anteriores em evidence foram retirados do versionamento no commit e888338, por orientação do usuário, com cópias locais e hashes preservados. Links desses ciclos continuam como referência ao acervo local.
 
-## Ciclo corrente — integração narrativa aprovada
+## Ciclo corrente — localização PT-BR/EN-US
+
+[Guia](guides/coreto-english-localization.md) · [charter](charters/CH-coreto-english-localization.md) · [verificação](../../planos/tasks/coreto-english-localization/verification.md). Worktree `coreto-english-localization`, servidor do executor em 18737. Implementação e V-001/V-006 concluídos; lotes A–E planejados, nenhum executado.
+
+## Ciclo anterior — integração narrativa aprovada
 
 [Guia](guides/approved-narrative-dialogue-staging.md) · [charter](charters/CH-approved-narrative-dialogue-staging.md) · [verificação](../../planos/tasks/approved-narrative-dialogue-staging/verification.md). Implementação e testes focados coletados; agregado e QA final em execução. Nenhum PASS audiovisual/humano é herdado.
 

@@ -18,8 +18,9 @@ overlaps: LOC-mz-session-recovery-export; FOR-mz-formation-roster; ENC-mz-encoun
 
 Plano aprovado em 2026-09-29 (D-015). Autoridade: [spec](../../../planos/tasks/coreto-english-localization/spec.md),
 [verificação L10–L15](../../../planos/tasks/coreto-english-localization/verification.md)
-e decisões D-001–022 (D-017–022 vêm das revisões par 01 e 02). Nenhum teste foi
-executado para este incremento.
+e decisões D-001–023 (D-017–023 vêm das revisões par 01, 02 e 04). Nenhum teste foi
+executado para este incremento. Plano executável (lotes A–E, entradas, esperado, evidência):
+[guia do ciclo](../guides/coreto-english-localization.md), task-08, 2026-09-29.
 
 ## Missão e preparação
 
@@ -30,8 +31,11 @@ dos diálogos, escolhas gráficas, nomes dinâmicos, Options, Save/Load e crédi
 Observar também: linha Text Effects na categoria Geral (desligada, a animação
 para), rótulos de abordagem com quebra automática, janela de escolha oculta
 nos encontros, falas em itálico, cartões de destino com nome separado da
-descrição, créditos com layout por linha e aba/janela com o título “The Dryland
-Drowned”. Text Effects começa ligado. Usar Chrome desktop, teclado/mouse e tabelas/assets
+descrição, status de destino e do elenco, linha de causa nos cartões do memorial, créditos com layout por linha e aba/janela com o título “The Dryland
+Drowned”. Text Effects começa ligado e não segue a preferência de movimento
+reduzido do sistema, por exceção registrada no GDD (D-023d); os demais
+movimentos seguem `V47`. `ON`/`OFF`, `FAST` e `HIDE` são rótulos intencionais
+nos dois idiomas (D-023f). Usar Chrome desktop, teclado/mouse e tabelas/assets
 locais, sempre com o candidato servido do worktree em `127.0.0.1:18737` (D-020).
 Nunca usar nem limpar a origem 18726 do usuário. Fazer a descoberta das
 ferramentas existentes antes da execução; não escrever plugin, runner, adapter,
