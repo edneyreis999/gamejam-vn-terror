@@ -26,6 +26,10 @@
  * @arg height
  * @type number
  * @default 0
+ * @arg ink
+ * @text Cor clara para fundos escuros
+ * @type boolean
+ * @default false
  * @param DisableEventAcceleration
  * @text Bloquear aceleração comum de eventos
  * @type boolean
@@ -134,6 +138,7 @@
 (() => {
   'use strict';
   const dialogueInk = '#211c14';
+  const contrastInk = '#ffffff';
   ColorManager.drylandDialogueInk = () => dialogueInk;
   const resetDialogueFont = Window_Message.prototype.resetFontSettings;
   Window_Message.prototype.resetFontSettings = function() {
@@ -145,19 +150,26 @@
   Window_Base.prototype.resetFontSettings = function() {
     resetWindowFont.call(this);
     if (this._drylandWindowInk || this instanceof Window_NameBox || this instanceof Window_ChoiceList) {
-      this.changeTextColor(ColorManager.drylandDialogueInk());
+      const useLightInk = this._drylandWindowInk === 'light' || this instanceof Window_ChoiceList;
+      this.changeTextColor(useLightInk ? contrastInk : ColorManager.drylandDialogueInk());
       this.contents.outlineWidth = 0;
     }
   };
   const consoleTextColor = Window_ButtonConsole.prototype.changeTextColor;
   Window_ButtonConsole.prototype.changeTextColor = function(color) {
-    consoleTextColor.call(this, ['options', 'hide'].includes(this._type) ? ColorManager.drylandDialogueInk() : color);
-    if (['options', 'hide'].includes(this._type)) this.contents.outlineWidth = 0;
+    consoleTextColor.call(this, ['options', 'hide', 'fastfwd'].includes(this._type) ? ColorManager.drylandDialogueInk() : color);
+    if (['options', 'hide', 'fastfwd'].includes(this._type)) this.contents.outlineWidth = 0;
+  };
+  const resetConsoleFont = Window_ButtonConsole.prototype.resetFontSettings;
+  Window_ButtonConsole.prototype.resetFontSettings = function() {
+    resetConsoleFont.call(this);
+    if (this._type === 'fastfwd') this.contents.outlineWidth = 0;
   };
   PluginManager.registerCommand('Dryland_Presentation', 'WindowPicture', function(args) {
     const picture = $gameScreen.picture(Number(args.picture));
     if (picture) picture._drylandWindowStyle = {
-      focusPicture: Number(args.focusPicture), width: Number(args.width), height: Number(args.height)
+      focusPicture: Number(args.focusPicture), width: Number(args.width), height: Number(args.height),
+      ink: args.ink === 'true' ? 'light' : 'dialogue'
     };
   });
   PluginManager.registerCommand('Dryland_Presentation', 'ChoiceProgress', function(args) {
@@ -174,8 +186,9 @@
   const updatePictureText = Sprite_Picture.prototype.updatePictureText;
   Sprite_Picture.prototype.updatePictureText = function() {
     const style = this.picture()?._drylandWindowStyle;
-    if (this._pictureTextWindow && this._pictureTextWindow._drylandWindowInk !== Boolean(style)) {
-      this._pictureTextWindow._drylandWindowInk = Boolean(style);
+    const windowInk = style ? (style.ink || 'dialogue') : false;
+    if (this._pictureTextWindow && this._pictureTextWindow._drylandWindowInk !== windowInk) {
+      this._pictureTextWindow._drylandWindowInk = windowInk;
       this._pictureTextCache = {};
     }
     if (style && this.bitmap?.isReady()) {
@@ -184,7 +197,7 @@
         this.bitmap = this._drylandWindowBitmap;
       }
       this.createPictureText();
-      this._pictureTextWindow._drylandWindowInk = true;
+      this._pictureTextWindow._drylandWindowInk = windowInk;
     }
     updatePictureText.call(this);
     const window = this._pictureTextWindow;
@@ -208,9 +221,21 @@
     window.y = -this.anchor.y * this.bitmap.height;
     const choices = SceneManager._scene._choiceListWindow;
     const choice = choices?._list[choices.index()];
-    const binding = choice && /<Bind Picture: (\d+)>/.exec($gameMessage.choices()[choice.ext]);
-    const focused = choices?.isOpenAndActive() && binding && Number(binding[1]) === style.focusPicture;
+    const menuChoices = $gameMessage.choices();
+    const binding = choice && /<Bind Picture: (\d+)>/.exec(menuChoices[choice.ext]);
+    const scrollSkipFocused = style.focusPicture > 0 &&
+      this.picture()?._drylandScrollSkipKey && SceneManager._scene._scrollTextWindow?._text;
+    const focused = (choices?.isOpenAndActive() && binding && Number(binding[1]) === style.focusPicture) ||
+      scrollSkipFocused;
+    const boundChoiceIndex = menuChoices.findIndex(text => {
+      const match = /<Bind Picture: (\d+)>/.exec(text);
+      return match && Number(match[1]) === style.focusPicture;
+    });
+    const boundChoice = boundChoiceIndex < 0 ? null : choices?._list.find(item => item.ext === boundChoiceIndex);
+    const enabled = boundChoiceIndex < 0 || boundChoice?.enabled !== false;
     window.active = Boolean(focused);
+    window.contentsOpacity = enabled ? 255 : 110;
+    window.backOpacity = enabled ? 255 : 150;
     window.setCursorRect(4, 4, focused ? window.width - 8 : 0, focused ? window.height - 8 : 0);
   };
   const destroyPicture = Sprite_Picture.prototype.destroy;
@@ -224,7 +249,46 @@
   };
   const choiceHeight = Window_ChoiceList.prototype.itemHeight;
   Window_ChoiceList.prototype.itemHeight = function() {
-    return $gameMessage._drylandChoiceFocus?.key === 'formation-menu' ? 108 : choiceHeight.call(this);
+    return $gameMessage._drylandChoiceFocus?.key === 'formation-menu' ? 66 : choiceHeight.call(this);
+  };
+  const choiceRows = Window_ChoiceList.prototype.numVisibleRows;
+  Window_ChoiceList.prototype.numVisibleRows = function() {
+    return $gameMessage._drylandChoiceFocus?.key === 'formation-menu' ? 4 : choiceRows.call(this);
+  };
+  Window_ChoiceList.prototype.drawItem = function(index) {
+    const rect = this.itemLineRect(index);
+    const text = this.commandName(index);
+    const width = this.textSizeEx(text).width;
+    const x = rect.x + Math.max(0, (rect.width - width) / 2);
+    this.resetTextColor();
+    this.changeTextColor(contrastInk);
+    this.changePaintOpacity(this.isCommandEnabled(index));
+    this.drawTextEx(text, x, rect.y, Math.max(width, rect.width - (x - rect.x)));
+    this.changePaintOpacity(true);
+  };
+  const refreshChoiceCursor = Window_ChoiceList.prototype.refreshCursor;
+  Window_ChoiceList.prototype.refreshCursor = function() {
+    if ($gameMessage._drylandChoiceFocus?.key === 'formation-menu' && this.index() === 4) {
+      this.setCursorRect(0, 0, 0, 0);
+      return;
+    }
+    refreshChoiceCursor.call(this);
+  };
+  const moveChoiceCursorDown = Window_ChoiceList.prototype.cursorDown;
+  Window_ChoiceList.prototype.cursorDown = function(wrap) {
+    if ($gameMessage._drylandChoiceFocus?.key === 'formation-menu' && this.index() === 3) {
+      this.smoothSelect(0);
+      return;
+    }
+    moveChoiceCursorDown.call(this, wrap);
+  };
+  const moveChoiceCursorUp = Window_ChoiceList.prototype.cursorUp;
+  Window_ChoiceList.prototype.cursorUp = function(wrap) {
+    if ($gameMessage._drylandChoiceFocus?.key === 'formation-menu' && this.index() === 0) {
+      this.smoothSelect(3);
+      return;
+    }
+    moveChoiceCursorUp.call(this, wrap);
   };
   const placeChoices = Window_ChoiceList.prototype.updatePlacement;
   Window_ChoiceList.prototype.updatePlacement = function() {
@@ -232,6 +296,8 @@
     if ($gameMessage._drylandChoiceFocus?.key === 'formation-menu') {
       this.x = Graphics.boxWidth - this.width - 8;
       this.y = 80;
+      this.setBackgroundType(0);
+      this.backOpacity = 255;
     }
     if ($gameMessage._drylandChoiceFocus?.key === 'age-notice') this.y = 400;
   };

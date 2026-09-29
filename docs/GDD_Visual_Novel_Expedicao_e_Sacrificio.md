@@ -1563,4 +1563,22 @@ Permanecem morte permanente, competências ocultas, sorteio, progressão, regras
 
 **Confirmado por solicitação explícita do usuário:** reunir Quadro, Configurações e Salvar campanha atual em um menu aberto por botão hambúrguer no canto superior direito da taverna. Substitui somente a apresentação dos acessos independentes da seção 28; preservar suas funções, fechamento intuitivo e navegação pelos inputs existentes. As imagens dos heróis conservam posição, tamanho, escala e proporção; Seguir conserva sua posição.
 
+**Refinamento visual em 2026-09-29:** o menu mantém `Window_ChoiceList` como seu único controle de interação, usando a windowskin opaca do jogo, fonte do sistema de janelas e uma coluna compacta. Os rótulos exibidos são **Obtuário**, **Configurações**, **Salvar** e **Sair**. Sair retorna à tela de título pelo fluxo de encerramento de sessão do MZ; Sair na própria tela de título continua encerrando o jogo. O ícone hambúrguer fecha o menu quando acionado novamente; Escape/cancelamento também fecha pelo teclado e controle. A opção de fechamento fica vinculada ao ícone e não aparece como uma linha do menu.
+
 Aplicar a ADR-G007 aos controles existentes, sem duplicação: listas compatíveis usam Window_ChoiceList; controles espaciais usam as exceções previstas. Remover o cursor personalizado de losango verde das mensagens e reutilizar a cor efetiva do texto principal para título, nomes de falantes, Configurações e Hide. A [spec incremental](../planos/tasks/interface-g007-refinement/spec.md) e sua [ADR-001](../planos/tasks/interface-g007-refinement/adrs/adr-001-tavern-menu.md) registram o recorte; aprovação do pedido não equivale a aceite visual da implementação.
+
+## 30. Contraste e consistência dos controles — 2026-09-29
+
+**Confirmado por solicitação explícita do usuário:** usar texto branco nos botões do título, aviso etário e escolha de heróis, e em outros controles apoiados em superfícies pretas ou fumê; centralizar os rótulos e remover o contorno de letras do botão FAST. O texto do título permanece sem container. Acrescentar Sair à escolha inicial do título, encerrando pelo fluxo padrão do MZ.
+
+Na escolha do destino, abordagens das armadilhas e palco de sacrifício, reaproveitar cada alvo espacial e a janela de apresentação nativa já usada pelos nomes dos heróis, sem alterar alvos, coordenadas ou escalas das imagens. O estado visual desabilitado de Vilarejo Partido acompanha o mesmo estado habilitado da escolha que já rege sua disponibilidade; a condição de desbloqueio da seção 5.2 não muda. Os controles de lista permanecem Window_ChoiceList conforme ADR-G007.
+
+Na primeira fala de preparação que sucede Seguir, mostrar o busto existente de Ivaí e removê-lo após a fala. Não alterar sua redação, avanço pelo jogador ou registro de conclusão. O incremento atualiza a [nota de implementação e demonstração](../planos/tasks/interface-g007-refinement/menu-visual-polish.md); evidência visual em runtime e aceite de apresentação permanecem pendentes.
+
+**Momento demonstrável e captura sugerida para o devlog:** título com Sair e sem placa atrás do nome; aviso etário e menu de heróis com rótulos brancos centralizados, incluindo o menu hambúrguer aberto com a opção Sair; tela de destinos mostrando Vilarejo Partido bloqueado e, após obter as duas peças, ativo; cena de armadilha e palco de sacrifício com os mesmos containers de janela; fala de Ivaí ao abrir o mapa. Registrar uma captura por tela em 1280×720 após percorrer o fluxo real.
+
+## 31. Superfícies de apresentação em janela — 2026-09-29
+
+**Confirmado por solicitação explícita do usuário:** reaproveitar o renderer `WindowPicture` e a skin nativa já aplicada aos nomes dos heróis na taverna para o quadro descritivo do destino, os botões Recuar e Rever descrição nas armadilhas, as lápides com nome e local da morte e o botão interativo de pular créditos. Preservar texto e hierarquia dos painéis longos; só controles interativos recebem cursor de foco. Manter posições, conteúdo, ações e estados de interação existentes.
+
+**Momento demonstrável e captura sugerida para o devlog:** selecionar um destino e mostrar o quadro com título, descrição e progresso; abrir uma armadilha e mostrar Recuar/Rever descrição com foco; alcançar o memorial para mostrar nome e local de morte nas lápides; durante a rolagem de créditos, mostrar o botão Pular créditos focado e depois confirmar o salto. Capturar as quatro superfícies em 1280×720 após percorrer o fluxo real; não compor a captura de diferentes momentos.

@@ -184,21 +184,6 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_Presentation",
-                    "WindowPicture",
-                    "WindowPicture",
-                    {
-                        "picture": "2",
-                        "focusPicture": "0",
-                        "width": "0",
-                        "height": "0"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -296,7 +281,8 @@
                     [
                         "Novo jogo<Choice Width: 352>",
                         "Continuar",
-                        "Configurações"
+                        "Configurações",
+                        "Sair"
                     ],
                     -1,
                     1,
@@ -702,6 +688,22 @@
                 "parameters": []
             },
             {
+                "code": 402,
+                "indent": 1,
+                "parameters": [
+                    3,
+                    "Sair",
+                    0
+                ]
+            },
+            {
+                "code": 355,
+                "indent": 2,
+                "parameters": [
+                    "SceneManager.exit();"
+                ]
+            },
+            {
                 "code": 404,
                 "indent": 1,
                 "parameters": []
@@ -744,7 +746,8 @@
                     [
                         "Novo jogo<Choice Width: 352>",
                         "Continuar<Disable>",
-                        "Configurações"
+                        "Configurações",
+                        "Sair"
                     ],
                     -1,
                     0,
@@ -981,6 +984,22 @@
                 "code": 0,
                 "indent": 2,
                 "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 1,
+                "parameters": [
+                    3,
+                    "Sair",
+                    0
+                ]
+            },
+            {
+                "code": 355,
+                "indent": 2,
+                "parameters": [
+                    "SceneManager.exit();"
+                ]
             },
             {
                 "code": 404,
@@ -4772,18 +4791,6 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ClearPictureID",
-                    "ClearPictureID",
-                    {
-                        "PictureIDs:arraynum": "[42]"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
                     "Dryland_Presentation",
                     "ChoiceFocus",
                     "ChoiceFocus",
@@ -4799,12 +4806,13 @@
                 "indent": 1,
                 "parameters": [
                     [
-                        "\\FS[18]Quadro",
-                        "\\FS[18]Configurações",
-                        "\\FS[18]Salvar\ncampanha\natual",
-                        "\\FS[18]Fechar menu"
+                        "\\FS[16]Obtuário",
+                        "\\FS[16]Configurações",
+                        "\\FS[16]Salvar",
+                        "\\FS[16]Sair",
+                        "<Bind Picture: 42>"
                     ],
-                    3,
+                    4,
                     0,
                     2,
                     0
@@ -4815,7 +4823,7 @@
                 "indent": 1,
                 "parameters": [
                     0,
-                    "\\FS[18]Quadro"
+                    "\\FS[16]Obtuário"
                 ]
             },
             {
@@ -4842,7 +4850,7 @@
                 "indent": 1,
                 "parameters": [
                     1,
-                    "\\FS[18]Configurações"
+                    "\\FS[16]Configurações"
                 ]
             },
             {
@@ -4867,7 +4875,7 @@
                 "indent": 1,
                 "parameters": [
                     2,
-                    "\\FS[18]Salvar\ncampanha\natual"
+                    "\\FS[16]Salvar"
                 ]
             },
             {
@@ -4916,7 +4924,27 @@
                 "indent": 1,
                 "parameters": [
                     3,
-                    "\\FS[18]Fechar menu"
+                    "\\FS[16]Sair"
+                ]
+            },
+            {
+                "code": 355,
+                "indent": 2,
+                "parameters": [
+                    "SceneManager._scene.fadeOutAll(); SceneManager.goto(Scene_Title); Window_TitleCommand.initCommandPosition();"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 1,
+                "parameters": [
+                    4,
+                    "<Bind Picture: 42>"
                 ]
             },
             {
@@ -7595,7 +7623,8 @@
                         "picture": "41",
                         "focusPicture": "41",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -7788,7 +7817,8 @@
                         "picture": "30",
                         "focusPicture": "10",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -8037,7 +8067,8 @@
                         "picture": "31",
                         "focusPicture": "12",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -8286,7 +8317,8 @@
                         "picture": "32",
                         "focusPicture": "11",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -8535,7 +8567,8 @@
                         "picture": "33",
                         "focusPicture": "13",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -8784,7 +8817,8 @@
                         "picture": "34",
                         "focusPicture": "14",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -9033,7 +9067,8 @@
                         "picture": "35",
                         "focusPicture": "15",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -9282,7 +9317,8 @@
                         "picture": "36",
                         "focusPicture": "16",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -9531,7 +9567,8 @@
                         "picture": "37",
                         "focusPicture": "17",
                         "width": "0",
-                        "height": "0"
+                        "height": "0",
+                        "ink": "false"
                     }
                 ]
             },
@@ -10549,6 +10586,22 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "75",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -10689,6 +10742,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "72",
+                        "focusPicture": "72",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -10931,6 +11000,22 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "73",
+                        "focusPicture": "73",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -11167,6 +11252,22 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "74",
+                        "focusPicture": "74",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -11325,6 +11426,22 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "81",
+                        "focusPicture": "81",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -11371,6 +11488,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "82",
+                        "focusPicture": "82",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -14507,6 +14640,22 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "40",
+                        "focusPicture": "40",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 0,
                 "parameters": [
@@ -14606,6 +14755,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "50",
+                        "focusPicture": "50",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -15152,6 +15317,22 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "51",
+                        "focusPicture": "51",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -15686,6 +15867,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "52",
+                        "focusPicture": "52",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -21131,6 +21328,22 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "30",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 1,
                 "parameters": [
@@ -21559,6 +21772,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "31",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -21993,6 +22222,22 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "32",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 1,
                 "parameters": [
@@ -22421,6 +22666,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "33",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -22855,6 +23116,22 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "34",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 1,
                 "parameters": [
@@ -23283,6 +23560,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "35",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -23717,6 +24010,22 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "36",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 1,
                 "parameters": [
@@ -24145,6 +24454,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "37",
+                        "focusPicture": "0",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -27123,6 +27448,22 @@
                     140,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "41",
+                        "focusPicture": "41",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -53095,6 +53436,22 @@
                 "code": 357,
                 "indent": 0,
                 "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "81",
+                        "focusPicture": "81",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "true"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
                     "PictureTextChange",
@@ -66851,6 +67208,22 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "40",
+                        "focusPicture": "40",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
+                ]
+            },
+            {
                 "code": 108,
                 "indent": 1,
                 "parameters": [
@@ -66920,6 +67293,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "41",
+                        "focusPicture": "41",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -67014,6 +67403,22 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "WindowPicture",
+                    "WindowPicture",
+                    {
+                        "picture": "42",
+                        "focusPicture": "42",
+                        "width": "0",
+                        "height": "0",
+                        "ink": "false"
+                    }
                 ]
             },
             {
@@ -71399,6 +71804,26 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Basic_EnterBust",
+                    "Basic_EnterBust",
+                    {
+                        "PictureID:eval": "63",
+                        "PictureName:str": "Dryland_ivai",
+                        "Origin:str": "Bust",
+                        "Position:num": "8",
+                        "StartOffsetX:eval": "0",
+                        "StartOffsetY:eval": "0",
+                        "EasingType:str": "OutSine",
+                        "HorzMirror:str": "None",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
                 "code": 101,
                 "indent": 1,
                 "parameters": [
@@ -71414,6 +71839,24 @@
                 "indent": 1,
                 "parameters": [
                     "Bem, agora que nossa equipe está completa, vamos traçar nossa rota!"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Basic_ExitBusts",
+                    "Basic_ExitBusts",
+                    {
+                        "PictureID:arrayeval": "[\"63\"]",
+                        "EndOffsetX:eval": "0",
+                        "EndOffsetY:eval": "0",
+                        "EasingType:str": "InSine",
+                        "FlipDirection:str": "None",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20",
+                        "AutoErase:eval": "true"
+                    }
                 ]
             },
             {

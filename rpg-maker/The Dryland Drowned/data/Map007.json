@@ -2657,6 +2657,22 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "WindowPicture",
+                "WindowPicture",
+                {
+                  "picture": "50",
+                  "focusPicture": "50",
+                  "width": "0",
+                  "height": "0",
+                  "ink": "false"
+                }
+              ]
+            },
+            {
               "code": 108,
               "indent": 1,
               "parameters": [
@@ -2736,6 +2752,22 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "WindowPicture",
+                "WindowPicture",
+                {
+                  "picture": "51",
+                  "focusPicture": "51",
+                  "width": "0",
+                  "height": "0",
+                  "ink": "false"
+                }
+              ]
+            },
+            {
               "code": 108,
               "indent": 1,
               "parameters": [
@@ -2812,6 +2844,22 @@
                 100,
                 255,
                 0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "WindowPicture",
+                "WindowPicture",
+                {
+                  "picture": "52",
+                  "focusPicture": "52",
+                  "width": "0",
+                  "height": "0",
+                  "ink": "false"
+                }
               ]
             },
             {
@@ -5027,6 +5075,22 @@
               "indent": 1,
               "parameters": [
                 "Dryland_Presentation",
+                "WindowPicture",
+                "WindowPicture",
+                {
+                  "picture": "50",
+                  "focusPicture": "50",
+                  "width": "0",
+                  "height": "0",
+                  "ink": "true"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
                 "BindInterfacePicture",
                 "BindInterfacePicture",
                 {
@@ -5085,6 +5149,22 @@
                 100,
                 255,
                 0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 1,
+              "parameters": [
+                "Dryland_Presentation",
+                "WindowPicture",
+                "WindowPicture",
+                {
+                  "picture": "51",
+                  "focusPicture": "51",
+                  "width": "0",
+                  "height": "0",
+                  "ink": "true"
+                }
               ]
             },
             {

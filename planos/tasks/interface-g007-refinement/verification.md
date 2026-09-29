@@ -2,6 +2,10 @@
 
 Technical verdict: **PASS for the requested interface increment**, 2026-09-28. Human artistic acceptance is not inferred. No commit or staging operation was performed.
 
+## Subsequent visual scope — 2026-09-29
+
+The PASS below is historical and covers only the 2026-09-28 scope listed in `spec.md`; it does not verify later edits. The subsequent request updated title/gate/hero-menu contrast and centering, title backing, FAST outline, title exit, destination state rendering, trap/sacrifice panels and the Ivaí preparation bust. Its implementation and static-check result are recorded in [menu-visual-polish.md](menu-visual-polish.md). Runtime playthrough, visual captures and acceptance for this scope remain pending.
+
 ## Executed evidence
 
 Final real-game run: [final-06/report.json](../../../docs/qa/evidence/interface-g007-refinement/final-06/report.json). The game was served by `npm start -- --no-open` from the project root and traversed in an isolated Chrome context at 1280×720. Only public keyboard/pointer actions changed the campaign; observations were read-only. A new campaign produced its own manual save, subsequently loaded through Continue. No preexisting save was used. The runtime matched `.artifacts/interface-g007-final06` byte-for-byte.
