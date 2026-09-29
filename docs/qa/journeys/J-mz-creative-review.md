@@ -1,5 +1,11 @@
 # Revisar a apresentação audiovisual e registrar o aceite humano
 
+Localização PT-BR/EN-US: o [charter específico](../charters/CH-coreto-english-localization.md)
+acrescenta avaliação por agente sem participação no desenvolvimento e revisão
+editorial de Edney. Estado: plano aprovado em 2026-09-29, sem testes executados.
+As decisões D-009–015 exigem recursos nativos, QA do jogo, branch/worktree
+próprios e a base Coreto entregue por outra frente.
+
 ```mermaid
 flowchart TD
 A["Abrir o pacote local depois de Jogar"] --> B

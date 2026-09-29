@@ -28,7 +28,7 @@ Never silently reinterpret a confirmed GDD rule. When a requested feature confli
 2. Grill only observable product decisions: player choice, feedback, locking, recovery, accessibility, and scope.
 3. Record a product ADR when a confirmed GDD rule is replaced or a durable player-facing trade-off is selected.
 4. Update the canonical GDD only after the replacement rule and its status are explicit.
-5. Write `_user_stories.md` and Part I of `_spec.md` in English; keep runtime player copy in Brazilian Portuguese.
+5. Write `_user_stories.md` and Part I of the canonical `spec.md` in English. Follow SD-004 for runtime languages; the 2026-09-28 bilingual decision replaces the former PT-BR-only boundary. Historical `_spec.md` files remain baselines.
 6. Run the Part I leakage check and obtain the user's Stage 1 confirmation before opening Stage 2.
 
 ## Stage 2 — Surface and Technical Design
@@ -47,7 +47,7 @@ Never silently reinterpret a confirmed GDD rule. When a requested feature confli
 - Supported surface: current stable desktop Chrome through the documented local server.
 - Persistence: native SaveCore file selection and current-file autosave; Continue uses native objects without a content-revision gate. Structural save compatibility is evaluated separately.
 - Audio: approved local native audio; retain its acceptance status.
-- Player copy: Brazilian Portuguese.
+- Player copy: Brazilian Portuguese and American English, with English as the initial default, under the product decision of 2026-09-28. Localization implementation remains tracked separately in `coreto-english-localization`.
 - Normal UI: no internal pool IDs, competency mappings, seeds, or QA controls.
 - QA: read-only observations of native MZ objects, `rpg-maker/tests/`, and the current native QA plan. Player inputs alone mutate directed campaigns; no shipped QA console or seed setter. Each increment selects its required sensors.
 

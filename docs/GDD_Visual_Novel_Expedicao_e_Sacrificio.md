@@ -4,10 +4,10 @@
 **Título internacional para metadados:** The Dryland Drowned\
 **Versão-base:** 4.0, com atualizações incrementais\
 **Data da consolidação-base:** 4 de setembro de 2026\
-**Última atualização:** 25 de setembro de 2026\
+**Última atualização:** 28 de setembro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
-**Idioma jogável:** PT-BR\
+**Idiomas jogáveis:** PT-BR e EN-US; inglês como padrão inicial (localização aprovada, implementação pendente)\
 **Duração-alvo:** 60 a 75 minutos na primeira campanha completa; 35 a 50 minutos em repetição\
 **Autoridade:** este é o único GDD vigente. As versões numeradas anteriores estão preservadas no histórico do Git; não são documentos complementares nem devem ser combinadas com as regras atuais.
 
@@ -189,7 +189,7 @@ Cada encontro possui um único texto de sucesso por abordagem e um único texto 
 - Classificação pretendida no Brasil: 16 anos, sujeita à autoclassificação e à classificação oficial aplicável.
 - Avisos de conteúdo: morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre raças fantásticas e horror psicológico.
 - Conteúdo excluído: gore explícito, violência sexual, drogas, apostas, compras e interação entre usuários.
-- Idioma jogável: somente PT-BR. O título em inglês serve apenas a metadados, apresentação e devlog.
+- **Idiomas — Confirmado em 2026-09-28:** PT-BR e EN-US em toda a experiência jogável, com inglês como padrão inicial e seleção/comportamento nativos do plugin. Preservar a preferência escolhida pelo jogador. A localização inclui narrativa, escolhas, interface, avisos, créditos e textos em imagens. O agente produz a tradução em inglês americano natural e acessível, preservando informações, nomes de personagens e criaturas do folclore, voz e clima de horror. Outro agente, sem participação no desenvolvimento, avalia a clareza como jogador; Edney é responsável pela revisão editorial. Produto aprovado; projeto técnico e implementação seguem os estados da [spec incremental](../planos/tasks/coreto-english-localization/spec.md) e da [verificação](../planos/tasks/coreto-english-localization/verification.md). A [ADR-001](../planos/tasks/coreto-english-localization/adrs/adr-001-bilingual-product.md) registra a substituição do limite anterior de PT-BR.
 - Primeira campanha: 60 a 75 minutos; repetição: 35 a 50 minutos.
 - Distribuição de tempo: introdução e preparação até 8 minutos; cada rota inicial entre 15 e 20; Vilarejo e clímax entre 20 e 25; memorial e epílogos até 5.
 - Avanço rápido: somente texto já visto na campanha atual. Pular texto inédito fica fora do escopo porque exigiria novas regras de segurança narrativa e QA.
@@ -1353,7 +1353,7 @@ Balanceamento numérico, ajustes de texto e mudanças de ritmo só podem ser esc
 | Cronograma, ordem, dependências e responsáveis por tarefas | Pertencem exclusivamente ao Trello |
 | Implementação da migração para RPG Maker MZ | O recorte e as exceções de `init-rpg-maker-mz` estão confirmados neste GDD; a execução requer a spec incremental aprovada e comprovação da paridade acordada |
 | Versão pública para download | A distribuição aprovada é somente o jogo incorporado no itch.io |
-| Localização jogável EN-US | Requer tradução, revisão, adaptação de layout e QA próprios |
+| Idiomas além de PT-BR e EN-US | A localização EN-US foi aprovada em 2026-09-28, conforme §3.5; outros idiomas exigem novo escopo |
 | Celular e controles por toque | Requer desenho de interação e matriz de dispositivos |
 | Conta, nuvem ou sincronização de saves | Permanecem fora do escopo. Arquivos locais separados por campanha foram aprovados na seção 26, sem serviços remotos. |
 | Leitura livre dos registros, inventário documental ou códice | Requer interface e conteúdo adicionais |

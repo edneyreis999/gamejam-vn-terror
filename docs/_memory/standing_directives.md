@@ -14,7 +14,11 @@ Treat a Phase-E spec as an immutable baseline. Put later behavior changes in a n
 
 ## SD-004 — Language Ownership
 
-Write Compozy artifacts in English and player-facing runtime copy in Brazilian Portuguese.
+Write Compozy artifacts in English. The bilingual product decision of 2026-09-28
+supersedes the PT-BR-only runtime boundary: the entire game supports PT-BR and
+EN-US, with English as the initial default. Follow the native language option;
+Edney owns editorial review. See [the localization ADR](../../planos/tasks/coreto-english-localization/adrs/adr-001-bilingual-product.md).
+Technical design and implementation remain separate approval/evidence states.
 
 ## SD-005 — Local Runtime
 
