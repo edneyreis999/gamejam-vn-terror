@@ -54651,7 +54651,13 @@
                     "Ivaí"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[threshold.physical.ivai]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[threshold.physical.ivai]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -54906,7 +54912,13 @@
                     "Ivaí"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[threshold.supernatural.ivai]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[threshold.supernatural.ivai]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -55161,7 +55173,13 @@
                     "Ivaí"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[threshold.final.ivai]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[threshold.final.ivai]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -55364,7 +55382,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a1.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a1.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -55510,7 +55534,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a2.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a2.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -55656,7 +55686,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a3.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a3.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -55802,7 +55838,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a4.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a4.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -55948,7 +55990,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a5.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a5.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56094,7 +56142,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a6.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a6.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56240,7 +56294,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a7.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a7.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56386,7 +56446,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.a8.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.a8.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56532,7 +56598,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b1.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b1.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56678,7 +56750,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b2.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b2.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56824,7 +56902,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b3.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b3.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -56970,7 +57054,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b4.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b4.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -57116,7 +57206,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b5.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b5.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -57262,7 +57358,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b6.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b6.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -57408,7 +57510,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b7.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b7.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -57554,7 +57662,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[death.b8.context]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[death.b8.context]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -57803,7 +57917,13 @@
                     "Gorvak"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h1.gorvak]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h1.gorvak]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -58059,7 +58179,13 @@
                     "Elowen"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h2.elowen]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h2.elowen]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -58315,7 +58441,13 @@
                     "Griznik"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h3.griznik]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h3.griznik]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -58571,7 +58703,13 @@
                     "Seraphina"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h4.seraphina]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h4.seraphina]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -58827,7 +58965,13 @@
                     "Bimbren"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h5.bimbren]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h5.bimbren]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -59083,7 +59227,13 @@
                     "Liora"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h6.liora]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h6.liora]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -59339,7 +59489,13 @@
                     "Vaelith"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h7.vaelith]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h7.vaelith]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -59595,7 +59751,13 @@
                     "Draska"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[farewell.h8.draska]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[farewell.h8.draska]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -59748,7 +59910,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[campaign.automatic_retreat.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[campaign.automatic_retreat.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -61782,7 +61950,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[lover.physical.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[lover.physical.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -62031,7 +62205,13 @@
                     "Pérola"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[lover.physical.warning.perola]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[lover.physical.warning.perola]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -62184,7 +62364,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[reward.physical.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[reward.physical.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -62433,7 +62619,13 @@
                     "Pérola"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[lover.physical.second.perola]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[lover.physical.second.perola]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -62586,7 +62778,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[lover.supernatural.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[lover.supernatural.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -62835,7 +63033,13 @@
                     "Floraí"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[lover.supernatural.warning.florai]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[lover.supernatural.warning.florai]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -62988,7 +63192,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[reward.supernatural.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[reward.supernatural.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -63237,7 +63447,13 @@
                     "Floraí"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[lover.supernatural.second.florai]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[lover.supernatural.second.florai]"
+                ]
+            },
             {
                 "code": 117,
                 "indent": 0,
@@ -63390,7 +63606,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[campaign.irati_02_01.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[campaign.irati_02_01.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -63536,7 +63758,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[campaign.map_reveal_01.narrator]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[campaign.map_reveal_01.narrator]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -63734,7 +63962,13 @@
                     "Ivaí"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[campaign.map_reveal_02.ivai]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[campaign.map_reveal_02.ivai]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -66749,7 +66983,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h1]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h1]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -66862,7 +67102,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h2]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h2]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -66975,7 +67221,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h3]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h3]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -67088,7 +67340,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h4]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h4]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -67201,7 +67459,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h5]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h5]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -67314,7 +67578,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h6]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h6]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -67427,7 +67697,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h7]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h7]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -67540,7 +67816,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.h8]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.h8]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -67653,7 +67935,13 @@
                     ""
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[memorial.intro]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[memorial.intro]"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -69747,7 +70035,13 @@
                     "Rheed"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[closure.first.rheed]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[closure.first.rheed]"
+                ]
+            },
             {
                 "code": 235,
                 "indent": 0,
@@ -70031,7 +70325,13 @@
                     "Rheed"
                 ]
             },
-            {"code":401,"indent":0,"parameters":["$[closure.second.rheed]"]},
+            {
+                "code": 401,
+                "indent": 0,
+                "parameters": [
+                    "$[closure.second.rheed]"
+                ]
+            },
             {
                 "code": 235,
                 "indent": 0,

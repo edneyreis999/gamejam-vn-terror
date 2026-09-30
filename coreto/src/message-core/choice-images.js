@@ -15,10 +15,10 @@ function installChoiceImages() {
         if (!gradients.length && !singles.length) return;
         let first, second;
         if (gradients.length) {
-            const match = gradients.at(-1);
+            const match = gradients[gradients.length - 1];
             first = ColorManager.getColor(match[1]).trim(); second = ColorManager.getColor(match[2]).trim();
         } else {
-            const name = singles.at(-1)[1].toLowerCase().trim();
+            const name = singles[singles.length - 1][1].toLowerCase().trim();
             const dynamic = {yes:'powerUpColor',no:'powerDownColor',system:'systemColor',crisis:'crisisColor'}[name];
             first = second = colors[name] ?? (dynamic ? ColorManager[dynamic]() : ColorManager.getColor(name));
         }

@@ -1,7 +1,7 @@
 export function decodeOptionsSaveParameters(raw,scope,code,target={},source=raw){
     function convert(values,path,output,authored=values){
         for(const storageKey of Object.keys(values)){
-            const value=Object.hasOwn(authored,storageKey)?authored[storageKey]:values[storageKey];
+            const value=Object.prototype.hasOwnProperty.call(authored,storageKey)?authored[storageKey]:values[storageKey];
             const [key,type]=storageKey.split(':');
             if(!type)continue;
             const at=`${path}/${storageKey}`;
@@ -41,7 +41,7 @@ export function prepareOptionsSaveSettings(configuration,scope,version,code,vali
     const namespace=VisuMZ[key]||{},settings=namespace.Settings||{};
     const namespaceProperties=Object.getOwnPropertyDescriptors(namespace),settingsProperties=Object.getOwnPropertyDescriptors(settings);
     function restore(object,properties){
-        for(const key of Reflect.ownKeys(object))if(!Object.hasOwn(properties,key))delete object[key];
+        for(const key of Reflect.ownKeys(object))if(!Object.prototype.hasOwnProperty.call(properties,key))delete object[key];
         Object.defineProperties(object,properties);
     }
     try{

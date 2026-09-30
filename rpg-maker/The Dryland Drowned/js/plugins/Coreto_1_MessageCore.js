@@ -5478,11 +5478,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -5490,7 +5490,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {
@@ -5545,7 +5545,7 @@ function validateValue(schema, value, path) {
             validateValue(field, value[key], `${path}/${key}`);
         }
         for (const field of schema.fields) {
-            if (!Object.hasOwn(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
+            if (!Object.prototype.hasOwnProperty.call(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
         }
     } else if (schema.type === "array") {
         if (!Array.isArray(value)) valueError(schema, value, path);
@@ -6512,7 +6512,7 @@ function installMessageMapName() {
             if(position>=0)this[axis]=Math.floor((viewport-size)*position/2);
             text=text.replace(new RegExp('<\\/?(?:'+tags.join('|')+')>','gi'),'');
             const offsets=new RegExp('<'+axis+': ([+-]\\d+)>','gi');
-            const last=Array.from(text.matchAll(offsets)).at(-1);
+            const offsetMatches=Array.from(text.matchAll(offsets)),last=offsetMatches[offsetMatches.length-1];
             if(last)this[axis]+=Number(last[1]);
             text=text.replace(offsets,'');
         }
@@ -6966,7 +6966,7 @@ function installMessageChoices() {
     };
     const cancelBranch = interpreter.command403;
     interpreter.command403 = function(...args) {
-        if (!Object.hasOwn(this._branch, this._indent)) {
+        if (!Object.prototype.hasOwnProperty.call(this._branch, this._indent)) {
             this.skipBranch();
             return true;
         }
@@ -7113,7 +7113,7 @@ function installMessageChoices() {
         for (const text of $gameMessage.choices()) for (const match of text.matchAll(/<CHOICE WIDTH: (\d+)>/gi)) width = Math.max(width, Number(match[1]));
         return Math.max(1, width);
     };
-    window.getChoiceIndent = function(text) { return Number([...text.matchAll(/<(?:CHOICE|CHOICE |)INDENT: (\d+)>/gi)].at(-1)?.[1]) || 0; };
+    window.getChoiceIndent = function(text) { const indents = [...text.matchAll(/<(?:CHOICE|CHOICE |)INDENT: (\d+)>/gi)]; return Number(indents[indents.length - 1]?.[1]) || 0; };
     window.maxChoiceWidth = function() {
         return this._list.reduce((width, item) => Math.max(width, Math.ceil(this.textSizeEx(item.name).width+this.getChoiceIndent(item.name))+this.itemPadding()*2), this.getStartingChoiceWidth());
     };
@@ -7190,10 +7190,10 @@ function installChoiceImages() {
         if (!gradients.length && !singles.length) return;
         let first, second;
         if (gradients.length) {
-            const match = gradients.at(-1);
+            const match = gradients[gradients.length - 1];
             first = ColorManager.getColor(match[1]).trim(); second = ColorManager.getColor(match[2]).trim();
         } else {
-            const name = singles.at(-1)[1].toLowerCase().trim();
+            const name = singles[singles.length - 1][1].toLowerCase().trim();
             const dynamic = {yes:'powerUpColor',no:'powerDownColor',system:'systemColor',crisis:'crisisColor'}[name];
             first = second = colors[name] ?? (dynamic ? ColorManager[dynamic]() : ColorManager.getColor(name));
         }

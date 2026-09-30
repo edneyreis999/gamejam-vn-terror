@@ -16,7 +16,7 @@ export function resolveOptionsSaveConfiguration(catalog,plugins){
         for(const field of fields){
             if(field.key==='CoretoConfigSource')continue;
             const key=field.storageKey,at=`${path}/${key}`;
-            const value=Object.hasOwn(raw,key)?raw[key]:field.nativeDefault;
+            const value=Object.prototype.hasOwnProperty.call(raw,key)?raw[key]:field.nativeDefault;
             if(typeof value!=='string')fail(at,'Expected native string');
             if(value===''){output[key]=value;continue;}
             if(field.type==='struct')output[key]=JSON.stringify(complete(field.fields,value===''?{}:json(value,at),at));
@@ -48,7 +48,7 @@ export function validateOptionsSaveProviders(catalog,plugins,globals){
     const active=plugins.filter(p=>p.status),own=active.find(p=>p.name===catalog.pluginId);
     if(active.filter(p=>[catalog.pluginId,catalog.reference.pluginId].includes(p.name)).length!==1||!own)fail('DUPLICATE_PROVIDER','Enable exactly one provider for '+catalog.pluginId+'.');
     for(const [service,supported] of Object.entries(catalog.dependencies)){
-        const entries=active.filter(p=>Object.hasOwn(supported,p.name));
+        const entries=active.filter(p=>Object.prototype.hasOwnProperty.call(supported,p.name));
         if(entries.length>1||service==='cores'&&entries.length!==1)fail('DEPENDENCY',`Use one supported ${service} provider.`);
         if(!entries.length)continue;
         const entry=entries[0];

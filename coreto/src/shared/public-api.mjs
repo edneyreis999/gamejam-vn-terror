@@ -42,7 +42,7 @@ function record(input, fields, namespace, id, path, transform) {
     }
     const result = {};
     for (const key of fields) {
-        if (Object.hasOwn(input, key) && input[key] !== undefined) result[key] = transform(input[key], key);
+        if (Object.prototype.hasOwnProperty.call(input, key) && input[key] !== undefined) result[key] = transform(input[key], key);
     }
     return result;
 }

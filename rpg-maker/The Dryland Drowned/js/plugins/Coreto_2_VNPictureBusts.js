@@ -9200,11 +9200,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -9212,7 +9212,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {

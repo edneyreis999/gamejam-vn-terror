@@ -17,7 +17,7 @@ function installNumberInput(settings) {
         else if (Input._inputSpecialKeyCode === 35) this.processKeyboardEnd();
         else processDigitChange.call(this);
     };
-    const processCursorMove = Object.hasOwn(input, 'processCursorMove') ? input.processCursorMove : null;
+    const processCursorMove = Object.prototype.hasOwnProperty.call(input, 'processCursorMove') ? input.processCursorMove : null;
     input.processCursorMove = function() {
         if (!this.isOpenAndActive()) return;
         if (Input.isNumpadPressed()) this.processKeyboardDigitChange();

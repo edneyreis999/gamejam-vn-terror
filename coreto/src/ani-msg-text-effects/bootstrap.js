@@ -5,7 +5,7 @@ function installAniMessage(){
     if(providers.length!==1||providers[0].name!==catalog.pluginId||globalThis.Coreto?.AniMsgTextEffects)fail('ANI_DUPLICATE_PROVIDER','Enable exactly one Ani provider.');
     const own=providers[0];
     for(const [service,supported]of Object.entries({core:catalog.dependencies.cores,message:catalog.dependencies.messages})){
-        const entries=active.filter(p=>Object.hasOwn(supported,p.name));
+        const entries=active.filter(p=>Object.prototype.hasOwnProperty.call(supported,p.name));
         if(entries.length!==1)fail('ANI_DEPENDENCY',`Enable exactly one ${service} provider.`);
         const entry=entries[0];
         if(active.indexOf(entry)>=active.indexOf(own))fail('ANI_PLUGIN_ORDER',`Place ${entry.name} before Ani.`);
@@ -17,7 +17,7 @@ function installAniMessage(){
         const entries=active.filter(p=>p.name===name);
         if(entries.length>1)fail('ANI_DEPENDENCY_DUPLICATE',`Duplicate ${name}.`);
         if(entries.length&&!entries[0].description.includes(`[Version ${version}]`))fail('ANI_DEPENDENCY_VERSION',`Use ${name} ${version}.`);
-        if(entries.length&&Object.hasOwn(catalog.dependencies.before,name)&&active.indexOf(entries[0])>active.indexOf(own))fail('ANI_PLUGIN_ORDER',`Place ${name} before Ani.`);
+        if(entries.length&&Object.prototype.hasOwnProperty.call(catalog.dependencies.before,name)&&active.indexOf(entries[0])>active.indexOf(own))fail('ANI_PLUGIN_ORDER',`Place ${name} before Ani.`);
     }
     if(active.some(p=>/^VisuMZ_3_/.test(p.name)&&active.indexOf(p)<active.indexOf(own)))fail('ANI_PLUGIN_ORDER','Place Ani before tier 3 consumers.');
     const filename=decodeURIComponent(document.currentScript.src.split('?')[0].split('/').pop());

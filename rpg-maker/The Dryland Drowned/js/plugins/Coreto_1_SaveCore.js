@@ -773,11 +773,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -785,7 +785,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {
@@ -832,7 +832,7 @@ function resolveOptionsSaveConfiguration(catalog,plugins){
         for(const field of fields){
             if(field.key==='CoretoConfigSource')continue;
             const key=field.storageKey,at=`${path}/${key}`;
-            const value=Object.hasOwn(raw,key)?raw[key]:field.nativeDefault;
+            const value=Object.prototype.hasOwnProperty.call(raw,key)?raw[key]:field.nativeDefault;
             if(typeof value!=='string')fail(at,'Expected native string');
             if(value===''){output[key]=value;continue;}
             if(field.type==='struct')output[key]=JSON.stringify(complete(field.fields,value===''?{}:json(value,at),at));
@@ -864,7 +864,7 @@ function validateOptionsSaveProviders(catalog,plugins,globals){
     const active=plugins.filter(p=>p.status),own=active.find(p=>p.name===catalog.pluginId);
     if(active.filter(p=>[catalog.pluginId,catalog.reference.pluginId].includes(p.name)).length!==1||!own)fail('DUPLICATE_PROVIDER','Enable exactly one provider for '+catalog.pluginId+'.');
     for(const [service,supported] of Object.entries(catalog.dependencies)){
-        const entries=active.filter(p=>Object.hasOwn(supported,p.name));
+        const entries=active.filter(p=>Object.prototype.hasOwnProperty.call(supported,p.name));
         if(entries.length>1||service==='cores'&&entries.length!==1)fail('DEPENDENCY',`Use one supported ${service} provider.`);
         if(!entries.length)continue;
         const entry=entries[0];
@@ -879,7 +879,7 @@ function validateOptionsSaveProviders(catalog,plugins,globals){
 function decodeOptionsSaveParameters(raw,scope,code,target={},source=raw){
     function convert(values,path,output,authored=values){
         for(const storageKey of Object.keys(values)){
-            const value=Object.hasOwn(authored,storageKey)?authored[storageKey]:values[storageKey];
+            const value=Object.prototype.hasOwnProperty.call(authored,storageKey)?authored[storageKey]:values[storageKey];
             const [key,type]=storageKey.split(':');
             if(!type)continue;
             const at=`${path}/${storageKey}`;
@@ -919,7 +919,7 @@ function prepareOptionsSaveSettings(configuration,scope,version,code,validate){
     const namespace=VisuMZ[key]||{},settings=namespace.Settings||{};
     const namespaceProperties=Object.getOwnPropertyDescriptors(namespace),settingsProperties=Object.getOwnPropertyDescriptors(settings);
     function restore(object,properties){
-        for(const key of Reflect.ownKeys(object))if(!Object.hasOwn(properties,key))delete object[key];
+        for(const key of Reflect.ownKeys(object))if(!Object.prototype.hasOwnProperty.call(properties,key))delete object[key];
         Object.defineProperties(object,properties);
     }
     try{
@@ -948,10 +948,10 @@ function validateSaveSettings(settings){
     for(const prefix of ['List','Vert','Box','Large'])for(const suffix of ['Rows','Cols']){
         const key=prefix+suffix;check(settings.SaveMenu?.[key],value=>Number.isInteger(value)&&value>=1,`SaveMenu.${key}`,'Expected at least one row or column');
     }
-    if(settings.SaveConfirm.Enable||Object.hasOwn(settings.SaveConfirm,'Duration'))check(settings.SaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'SaveConfirm.Duration','Expected a nonnegative duration');
-    if(Object.hasOwn(settings.Autosave,'AutosaveType'))check(settings.Autosave.AutosaveType,value=>['file0','current','both'].includes(value),'Autosave.AutosaveType','Unknown autosave destination');
-    if(settings.AutosaveConfirm.Enable||Object.hasOwn(settings.AutosaveConfirm,'Duration'))check(settings.AutosaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'AutosaveConfirm.Duration','Expected a nonnegative duration');
-    if(settings.AutosaveConfirm.Enable||Object.hasOwn(settings.AutosaveConfirm,'ScreenPosition'))check(settings.AutosaveConfirm.ScreenPosition,value=>/^(lower|middle|upper) (left|center|right)$/.test(value),'AutosaveConfirm.ScreenPosition','Unknown autosave confirmation position');
+    if(settings.SaveConfirm.Enable||Object.prototype.hasOwnProperty.call(settings.SaveConfirm,'Duration'))check(settings.SaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'SaveConfirm.Duration','Expected a nonnegative duration');
+    if(Object.prototype.hasOwnProperty.call(settings.Autosave,'AutosaveType'))check(settings.Autosave.AutosaveType,value=>['file0','current','both'].includes(value),'Autosave.AutosaveType','Unknown autosave destination');
+    if(settings.AutosaveConfirm.Enable||Object.prototype.hasOwnProperty.call(settings.AutosaveConfirm,'Duration'))check(settings.AutosaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'AutosaveConfirm.Duration','Expected a nonnegative duration');
+    if(settings.AutosaveConfirm.Enable||Object.prototype.hasOwnProperty.call(settings.AutosaveConfirm,'ScreenPosition'))check(settings.AutosaveConfirm.ScreenPosition,value=>/^(lower|middle|upper) (left|center|right)$/.test(value),'AutosaveConfirm.ScreenPosition','Unknown autosave confirmation position');
 }
 
 function saveCallback(settings,path,receiver,...args){
@@ -966,7 +966,7 @@ function installSaveState(settings){
     Game_System.prototype.initSaveCore=function(){
         this._SaveCoreSettings??={};
         const defaults={autosaveEnabled:true,saveDescription:'',savePicture:''};
-        for(const [key,value]of Object.entries(defaults))if(!Object.hasOwn(this._SaveCoreSettings,key))this._SaveCoreSettings[key]=value;
+        for(const [key,value]of Object.entries(defaults))if(!Object.prototype.hasOwnProperty.call(this._SaveCoreSettings,key))this._SaveCoreSettings[key]=value;
     };
     Game_System.prototype.getSaveDescription=function(){this.initSaveCore();return this._SaveCoreSettings.saveDescription;};
     Game_System.prototype.getSavePicture=function(){this.initSaveCore();return this._SaveCoreSettings.savePicture;};

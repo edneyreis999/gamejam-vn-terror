@@ -129,7 +129,7 @@ function validateValue(schema, value, path) {
             validateValue(field, value[key], `${path}/${key}`);
         }
         for (const field of schema.fields) {
-            if (!Object.hasOwn(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
+            if (!Object.prototype.hasOwnProperty.call(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
         }
     } else if (schema.type === "array") {
         if (!Array.isArray(value)) valueError(schema, value, path);
@@ -240,11 +240,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -252,7 +252,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {
@@ -292,7 +292,7 @@ function installComplement(catalog, apiName, errorPrefix) {
     for (const alternatives of catalog.dependencies.required) if (!active.some(plugin => alternatives.includes(plugin.name))) fail('DEPENDENCY_MISSING', 'Enable a supported provider: '+alternatives.join(' or ')+'.');
     if (active.some(plugin => catalog.orderAfter.includes(plugin.name) && active.indexOf(plugin) > active.indexOf(own))) fail('PLUGIN_ORDER', 'Place '+catalog.namespace+' after its dependencies.');
     for (const supported of [catalog.dependencies.cores, catalog.dependencies.messages]) {
-        const entries = active.filter(plugin => Object.hasOwn(supported, plugin.name));
+        const entries = active.filter(plugin => Object.prototype.hasOwnProperty.call(supported, plugin.name));
         if (entries.length > 1) fail('DEPENDENCY_DUPLICATE', 'Enable at most one provider per dependency.');
         for (const entry of entries) {
             if (active.indexOf(entry) > active.indexOf(own)) fail('PLUGIN_ORDER', 'Place '+entry.name+' before '+catalog.namespace+'.');
