@@ -3396,8 +3396,8 @@
                 {
                   "PictureID:eval": "60",
                   "PictureName:str": "Reed-novo",
-                  "Origin:str": "Upper Left",
-                  "Position:num": "5",
+                  "Origin:str": "Bust",
+                  "Position:num": "8",
                   "StartOffsetX:eval": "0",
                   "StartOffsetY:eval": "0",
                   "EasingType:str": "OutSine",
@@ -3416,8 +3416,8 @@
                 {
                   "PictureID:eval": "61",
                   "PictureName:str": "Dryland_ivai",
-                  "Origin:str": "Upper Left",
-                  "Position:num": "5",
+                  "Origin:str": "Bust",
+                  "Position:num": "2",
                   "StartOffsetX:eval": "0",
                   "StartOffsetY:eval": "0",
                   "EasingType:str": "OutSine",
@@ -3435,8 +3435,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "28.409090909090907",
-                  "TargetScaleY:str": "28.409090909090907",
+                  "TargetScaleX:str": "51",
+                  "TargetScaleY:str": "51",
                   "Duration:eval": "0"
                 }
               ]
@@ -3450,8 +3450,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "Graphics.boxWidth * 0.27 - 145.45454545454544",
-                  "TargetY:str": "75.6363636363637",
+                  "TargetX:str": "960",
+                  "TargetY:str": "700",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -3467,8 +3467,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"61\"]",
-                  "TargetScaleX:str": "31.25",
-                  "TargetScaleY:str": "31.25",
+                  "TargetScaleX:str": "59",
+                  "TargetScaleY:str": "59",
                   "Duration:eval": "0"
                 }
               ]
@@ -3482,8 +3482,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"61\"]",
-                  "TargetX:str": "Graphics.boxWidth * 0.73 - 160",
-                  "TargetY:str": "32",
+                  "TargetX:str": "320",
+                  "TargetY:str": "732",
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -3687,8 +3687,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "31.25",
-                  "TargetScaleY:str": "31.25",
+                  "TargetScaleX:str": "57",
+                  "TargetScaleY:str": "57",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                 }
               ]
@@ -3702,8 +3702,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "Graphics.boxWidth * 0.27 - 160",
-                  "TargetY:str": "32",
+                  "TargetX:str": "960",
+                  "TargetY:str": "700",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
@@ -3719,8 +3719,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"61\"]",
-                  "TargetScaleX:str": "28.409090909090907",
-                  "TargetScaleY:str": "28.409090909090907",
+                  "TargetScaleX:str": "53",
+                  "TargetScaleY:str": "53",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                 }
               ]
@@ -3734,8 +3734,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"61\"]",
-                  "TargetX:str": "Graphics.boxWidth * 0.73 - 145.45454545454544",
-                  "TargetY:str": "75.6363636363637",
+                  "TargetX:str": "320",
+                  "TargetY:str": "732",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
@@ -3939,8 +3939,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetScaleX:str": "28.409090909090907",
-                  "TargetScaleY:str": "28.409090909090907",
+                  "TargetScaleX:str": "51",
+                  "TargetScaleY:str": "51",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                 }
               ]
@@ -3954,8 +3954,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"60\"]",
-                  "TargetX:str": "Graphics.boxWidth * 0.27 - 145.45454545454544",
-                  "TargetY:str": "75.6363636363637",
+                  "TargetX:str": "960",
+                  "TargetY:str": "700",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
@@ -3971,8 +3971,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"61\"]",
-                  "TargetScaleX:str": "31.25",
-                  "TargetScaleY:str": "31.25",
+                  "TargetScaleX:str": "59",
+                  "TargetScaleY:str": "59",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                 }
               ]
@@ -3986,8 +3986,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"61\"]",
-                  "TargetX:str": "Graphics.boxWidth * 0.73 - 160",
-                  "TargetY:str": "32",
+                  "TargetX:str": "320",
+                  "TargetY:str": "732",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
