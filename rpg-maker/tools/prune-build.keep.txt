@@ -1,0 +1,6 @@
+# Arquivos que o prune-build nunca remove do build, mesmo sem referência no jogo.
+# Um caminho por linha, relativo ao build (ex.: img/pictures/Foo.png). Uma linha que
+# termina em / protege a pasta inteira. Linhas com # são comentários.
+
+# Logo do estúdio, previsto para entrar no jogo em breve.
+img/pictures/Dryland_Coreto.png

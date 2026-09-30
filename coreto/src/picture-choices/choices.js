@@ -36,7 +36,7 @@ Window_ChoiceList.prototype.onSelectPictureChoices = function(index) {
         else $gameScreen.applyPictureChoiceDeselectSettings(id, this._instantPictureChoiceSelect);
     }
 };
-const selectPictureChoice = Object.hasOwn(Window_ChoiceList.prototype, 'select') ? Window_ChoiceList.prototype.select : null;
+const selectPictureChoice = Object.prototype.hasOwnProperty.call(Window_ChoiceList.prototype, 'select') ? Window_ChoiceList.prototype.select : null;
 Window_ChoiceList.prototype.select = function(index) {
     // Keep inherited dispatch live: later consumers extend Window_Selectable.select.
     const result = (selectPictureChoice ?? Window_Command.prototype.select).call(this, index);

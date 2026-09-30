@@ -95,4 +95,14 @@ Ela usa engine/plugins reais e perfis temporários, serialmente na porta 18726. 
 
 O runtime não expõe console de QA nem preset de seed. No QA dirigido, observações de objetos nativos são somente leitura; decisões passam por teclado/mouse. O [índice de QA](../docs/qa/README.md) aponta o plano corrente. `qa/directed-adapter.mjs` prepara cópias isoladas; `qa/native-save-archive.mjs` captura o arquivo selecionado e seu índice somente após gravação confirmada. Uma ramificação usa uma cópia inalterada do checkpoint antes de abrir o jogo e entra por Continue. Hashes de origem, fontes, payload e índice pertencem à preparação de QA, sem gate de revisão no runtime.
 
-Não há `validate-content`, `revise-layout` nem manifesto obrigatório de layout. Preserve arquivos nativos, imports e todos os assets dinâmicos no pacote local. Engine e plugins VisuStella devem permanecer intactos. Os scripts em `planos/tasks/eventbridge-minimal-runtime/` registram transformações pontuais desta migração; não são comandos de autoria nem devem ser reexecutados sobre conteúdo editado.
+Não há `validate-content`, `revise-layout` nem manifesto obrigatório de layout. Preserve arquivos nativos, imports e todos os assets dinâmicos no pacote local (o build publicado é podado pelo passo 2 de [Publicar no itch.io](#publicar-no-itchio)). Engine e plugins VisuStella devem permanecer intactos. Os scripts em `planos/tasks/eventbridge-minimal-runtime/` registram transformações pontuais desta migração; não são comandos de autoria nem devem ser reexecutados sobre conteúdo editado.
+
+## Publicar no itch.io
+
+O itch.io rejeita zips com mais de 1000 entradas, e o deploy do editor exporta o RTP inteiro (mais de 1500 arquivos). Por isso o pacote publicado é podado e testado antes de virar zip. O projeto em `The Dryland Drowned/` nunca é podado: o editor continua com todos os assets.
+
+1. **Deploy pelo editor.** Abra no MZ o `The Dryland Drowned/game.rmmzproject` deste checkout, não o de outro worktree, e use Arquivo → Implantação (Deployment) para Navegadores Web, com saída em `dist/` na raiz. O resultado é `dist/The Dryland Drowned/`.
+2. **Limpeza.** `npm run prune-build` mostra o que sairia; `npm run prune-build -- --apply` apaga do `dist` os assets sem referência, os dados e efeitos de batalha inalcançáveis e os plugins desligados.
+3. **Testes e2e e zip.** `npm run verify-build` confere que o `dist` veio deste checkout, roda a suíte canônica contra ele e, só com a suíte verde, gera `dist/The Dryland Drowned.zip`. Suba esse zip. Não zipe pelo Finder: ele adiciona uma entrada `__MACOSX/._*` por arquivo e dobra a contagem.
+
+Repita os três passos a cada publicação: o `verify-build` recusa um `dist` que não bate com o projeto.

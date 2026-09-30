@@ -12,7 +12,7 @@ function installTextPopups(settings) {
     };
     Window_TextPopup.prototype.isAutoColorAffected = function() { return true; };
     Window_TextPopup.prototype.addQueue = function(text) {
-        if (this._queue.at(-1) !== text) this._queue.push(text);
+        if (this._queue[this._queue.length - 1] !== text) this._queue.push(text);
         if (this.parent) this.parent.addChild(this);
     };
     Window_TextPopup.prototype.update = function() {

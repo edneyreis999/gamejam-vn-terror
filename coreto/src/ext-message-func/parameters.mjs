@@ -8,7 +8,7 @@ export function resolveExtendedSource(catalog, plugins) {
         const result = {...raw};
         for (const field of fields) {
             if (field.key === 'CoretoConfigSource') continue;
-            const value = Object.hasOwn(result, field.storageKey) ? result[field.storageKey] : field.nativeDefault;
+            const value = Object.prototype.hasOwnProperty.call(result, field.storageKey) ? result[field.storageKey] : field.nativeDefault;
             if (field.type === 'array' && value !== '') {
                 let array;
                 try { array = JSON.parse(value); } catch { throw new CoreError('EXT_CONFIG_ENCODING', `Invalid array ${field.storageKey} in ${source.name}.`); }

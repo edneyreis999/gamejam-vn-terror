@@ -1084,11 +1084,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -1096,7 +1096,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {
@@ -1143,7 +1143,7 @@ function resolveOptionsSaveConfiguration(catalog,plugins){
         for(const field of fields){
             if(field.key==='CoretoConfigSource')continue;
             const key=field.storageKey,at=`${path}/${key}`;
-            const value=Object.hasOwn(raw,key)?raw[key]:field.nativeDefault;
+            const value=Object.prototype.hasOwnProperty.call(raw,key)?raw[key]:field.nativeDefault;
             if(typeof value!=='string')fail(at,'Expected native string');
             if(value===''){output[key]=value;continue;}
             if(field.type==='struct')output[key]=JSON.stringify(complete(field.fields,value===''?{}:json(value,at),at));
@@ -1175,7 +1175,7 @@ function validateOptionsSaveProviders(catalog,plugins,globals){
     const active=plugins.filter(p=>p.status),own=active.find(p=>p.name===catalog.pluginId);
     if(active.filter(p=>[catalog.pluginId,catalog.reference.pluginId].includes(p.name)).length!==1||!own)fail('DUPLICATE_PROVIDER','Enable exactly one provider for '+catalog.pluginId+'.');
     for(const [service,supported] of Object.entries(catalog.dependencies)){
-        const entries=active.filter(p=>Object.hasOwn(supported,p.name));
+        const entries=active.filter(p=>Object.prototype.hasOwnProperty.call(supported,p.name));
         if(entries.length>1||service==='cores'&&entries.length!==1)fail('DEPENDENCY',`Use one supported ${service} provider.`);
         if(!entries.length)continue;
         const entry=entries[0];
@@ -1190,7 +1190,7 @@ function validateOptionsSaveProviders(catalog,plugins,globals){
 function decodeOptionsSaveParameters(raw,scope,code,target={},source=raw){
     function convert(values,path,output,authored=values){
         for(const storageKey of Object.keys(values)){
-            const value=Object.hasOwn(authored,storageKey)?authored[storageKey]:values[storageKey];
+            const value=Object.prototype.hasOwnProperty.call(authored,storageKey)?authored[storageKey]:values[storageKey];
             const [key,type]=storageKey.split(':');
             if(!type)continue;
             const at=`${path}/${storageKey}`;
@@ -1230,7 +1230,7 @@ function prepareOptionsSaveSettings(configuration,scope,version,code,validate){
     const namespace=VisuMZ[key]||{},settings=namespace.Settings||{};
     const namespaceProperties=Object.getOwnPropertyDescriptors(namespace),settingsProperties=Object.getOwnPropertyDescriptors(settings);
     function restore(object,properties){
-        for(const key of Reflect.ownKeys(object))if(!Object.hasOwn(properties,key))delete object[key];
+        for(const key of Reflect.ownKeys(object))if(!Object.prototype.hasOwnProperty.call(properties,key))delete object[key];
         Object.defineProperties(object,properties);
     }
     try{

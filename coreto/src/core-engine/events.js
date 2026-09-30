@@ -1,7 +1,7 @@
 function convertEventArguments(command, raw) {
     function convertObject(fields, input, path, shared) {
         const result = shared ? { ...input } : {};
-        const ordered = [...Object.keys(input), ...fields.map(field => field.storageKey).filter(key => !Object.hasOwn(input, key))];
+        const ordered = [...Object.keys(input), ...fields.map(field => field.storageKey).filter(key => !Object.prototype.hasOwnProperty.call(input, key))];
         for (const key of ordered) {
             const field = fields.find(field => field.storageKey === key);
             if (!field) {
