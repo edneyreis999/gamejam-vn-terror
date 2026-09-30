@@ -1289,6 +1289,8 @@ Na versão descrita, essa história aparece somente por uma ou duas referências
 
 ### 19.4 Áudio
 
+**Após a escolha final — Confirmado em 2026-09-30:** retirar os temas curtos de vitória/desfecho das opções Reunir e Destruir e iniciar `(Chillout) The Well` imediatamente após a escolha, no volume de evento 35. Manter a música ao longo do desfecho, memorial quando houver, epílogos e créditos, sem reiniciar entre esses trechos. Substitui a preservação anterior desses temas; não altera a perda total. Ver [spec incremental](../planos/tasks/ending-the-well/spec.md).
+
 **Epílogos e créditos — Confirmado em 2026-09-30:** ao começar os epílogos narrados por Rheed, encerrar qualquer tema do desfecho ainda tocando e iniciar `(Chillout) The Well` em repetição, no volume de evento 35. Manter a faixa entre os epílogos e durante os créditos, respeitando o volume do jogador. Ver [spec incremental](../planos/tasks/epilogues-the-well/spec.md).
 
 **Música da escolha final — Confirmado em 2026-09-30:** usar uma música de tensão e pressão enquanto o jogador decide, sem acrescentar limite de tempo. A seleção delegada é `(Tense) Undead Killing Spree`, em repetição, com entrada suave e volume controlado. Resolve a pendência de música da escolha indicada abaixo; preservar The Last Key na revelação e os temas dos desfechos. Ver [spec incremental](../planos/tasks/final-choice-pressure/spec.md).

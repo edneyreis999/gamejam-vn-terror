@@ -27430,8 +27430,45 @@
                 ]
             },
             {
-                "code": 241,
+                "code": 249,
                 "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 65,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "['reunite', 'destroy'].includes($gameVariables.value(59))"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
+                    {
+                        "name": "Dryland_Opening_TheWell",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 2,
                 "parameters": [
                     {
                         "name": "",
@@ -27440,6 +27477,11 @@
                         "pan": 0
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 245,
@@ -27454,66 +27496,8 @@
                 ]
             },
             {
-                "code": 111,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(64) !== $gameVariables.value(59)"
-                ]
-            },
-            {
-                "code": 111,
-                "indent": 2,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(59) === 'reunite'"
-                ]
-            },
-            {
-                "code": 249,
-                "indent": 3,
-                "parameters": [
-                    {
-                        "name": "Musical1",
-                        "volume": 65,
-                        "pitch": 100,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 2,
-                "parameters": []
-            },
-            {
-                "code": 111,
-                "indent": 2,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(59) === 'destroy'"
-                ]
-            },
-            {
-                "code": 249,
-                "indent": 3,
-                "parameters": [
-                    {
-                        "name": "Organ",
-                        "volume": 65,
-                        "pitch": 100,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 2,
-                "parameters": []
-            },
-            {
                 "code": 122,
-                "indent": 2,
+                "indent": 1,
                 "parameters": [
                     64,
                     64,
@@ -27521,11 +27505,6 @@
                     4,
                     "$gameVariables.value(59)"
                 ]
-            },
-            {
-                "code": 412,
-                "indent": 1,
-                "parameters": []
             },
             {
                 "code": 412,
