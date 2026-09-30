@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { selectFile } from '../helpers/native-chrome.mjs';
+import { chooseTitle, selectFile } from '../helpers/native-chrome.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause, prologueMarkers } from '../helpers/formation.mjs';
+import { activate, choices, pause, prologueMarkers, readUntilChoices } from '../helpers/formation.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
 import { accepted } from '../helpers/campaign.mjs';
@@ -11,17 +11,21 @@ const fixtures=phaseFixtures(),keys=['bgmVolume','bgsVolume','meVolume','seVolum
 const volumes=browser=>browser.evaluate('Object.fromEntries(["bgmVolume","bgsVolume","meVolume","seVolume"].map(k=>[k,ConfigManager[k]]))');
 canonicalCase('IT-028','native audio preferences begin at40 clamp through keyboard input and survive a new campaign',{timeout:120000},async t=>{
  const browser=await entry(t);assert.deepEqual(await volumes(browser),Object.fromEntries(keys.map(k=>[k,40])));
- await browser.press('ArrowDown',40);await browser.press('Enter',13);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&SceneManager._scene._optionsWindow?.isOpenAndActive()");
- assert.deepEqual(await browser.evaluate('SceneManager._scene._optionsWindow._list.map(c=>({name:c.name,symbol:c.symbol}))'),keys.map((symbol,i)=>({symbol,name:'\\I[80]'+['Música','Ambiente','Temas','Efeitos'][i]})));
+ await chooseTitle(browser,'choice.title.options');await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&SceneManager._scene._optionsWindow?.isOpenAndActive()");
+ // As opções de idioma e efeitos de texto vêm antes do áudio; o rótulo é traduzido, então se procura pelo símbolo.
+ await browser.press('PageDown',34);await browser.waitFor("SceneManager._scene._optionsWindow._list.some(c=>c.symbol==='bgmVolume')");
+ const symbols=await browser.evaluate('SceneManager._scene._optionsWindow._list.map(c=>c.symbol)');
+ assert.deepEqual(symbols.filter(symbol=>keys.includes(symbol)),keys);
  for(const [index,key]of keys.entries()){
-  if(index)await browser.press('ArrowDown',40);
+  const target=symbols.indexOf(key);
+  for(let step=0;step<symbols.length;step++){const current=await browser.evaluate('SceneManager._scene._optionsWindow.index()');if(current===target)break;await browser.press(current<target?'ArrowDown':'ArrowUp',current<target?40:38);}
   for(let step=0;step<6;step++)await browser.press('ArrowLeft',37);assert.equal((await volumes(browser))[key],0);
   for(let step=0;step<12;step++)await browser.press('ArrowRight',39);assert.equal((await volumes(browser))[key],100);
   for(let step=0;step<index+1;step++)await browser.press('ArrowLeft',37);
  }
  const configured=await volumes(browser);assert.deepEqual(configured,{bgmVolume:90,bgsVolume:80,meVolume:70,seVolume:60});
  await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-11/IT-028/audio-options.png');
- await browser.press('Escape',27);await browser.waitFor("SceneManager._scene instanceof Scene_Map&&$gameMap.mapId()===1&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.press('Escape',27);await browser.waitFor("SceneManager._scene instanceof Scene_Map&&$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  const stored=await browser.evaluate("StorageManager.loadObject('config')");for(const key of keys)assert.equal(stored[key],configured[key]);
  if(await browser.evaluate('SceneManager._scene._choiceListWindow.index()')!==0)await browser.press('ArrowUp',38);
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);assert.deepEqual(await volumes(browser),configured);
@@ -123,7 +127,7 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  assert.deepEqual(await state(browser),beforeAudio);
  await browser.evaluate('for(const k of ["bgmVolume","bgsVolume","meVolume","seVolume"])ConfigManager[k]=0;');
  await installPhase(browser,fixtures.encounter_choice);await choices(browser,'approaches');const before=await state(browser);
- await activate(browser,'approaches',3);await pause(browser);await browser.press('Enter',13);await choices(browser,'approaches');assert.deepEqual(await state(browser),before);
+ await activate(browser,'approaches',3);await pause(browser);await readUntilChoices(browser,'approaches');assert.deepEqual(await state(browser),before);
  assert.equal(await browser.evaluate('AudioManager._bgsBuffer.volume'),0);
  assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness','me/Musical1','me/Organ'].map(k=>[k,true])));
  const effects=await browser.evaluate('[...new Set([...$dataCommonEvents.filter(Boolean).flatMap(e=>e.list.filter(c=>c.code===250).map(c=>c.parameters[0].name)),...[0,1,2,3,5,6].map(i=>$dataSystem.sounds[i].name)])].sort()');

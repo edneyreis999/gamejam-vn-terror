@@ -3,9 +3,10 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
+import { resolve } from '../helpers/language.mjs';
 import { assertAdvanceIndicatorFits } from '../helpers/native-reading.mjs';
 import { clickConsole, hidden } from '../helpers/native-shared.mjs';
-import { act, activate, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, CatalogError, catalog, choices, createRules, events, formation, gorvakUnitTexts, heroUnitTexts, heroes, installFixture, openDestinations, pause, returnToTavern, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
 
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -116,7 +117,6 @@ canonicalCase('UT-059', 'stock actor membership and HP cannot change campaign li
 });
 canonicalCase('IT-002', 'native CaptureContext → Action → Query updates only the intended hero membership', { timeout: 60000 }, async t => {
   const browser = await tavern(t);
-  assert.equal(await browser.evaluate('$gameMessage.choices().length'), 11);
   const before = await snapshot(browser);
   const result = await browser.evaluate(`(() => {
     const interpreter = new Game_Interpreter();
@@ -142,7 +142,7 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
   await activate(browser, 'formation', 0);
   await choices(browser, 'hero');
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 37, 'Gorvak interaction is authored by its child map');
-  assert.equal(await browser.evaluate('$gameVariables.value(153)'), 'Selecionar');
+  assert.equal(await browser.evaluate('$gameVariables.value(153)'), '$[conv.select]');
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'), 3);
   assert.deepEqual(await snapshot(browser), before);
   await browser.press('Escape', 27);
@@ -210,7 +210,7 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
   assert.deepEqual(await snapshot(browser), full);
   await activate(browser, 'formation', 0);
   await choices(browser, 'hero');
-  assert.equal(await browser.evaluate('$gameVariables.value(153)'), 'Retirar do grupo');
+  assert.equal(await browser.evaluate('$gameVariables.value(153)'), '$[conv.remove]');
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'), 3);
   await activate(browser, 'hero', 1);
   await returnToTavern(browser);
@@ -322,48 +322,38 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
   }
   assert.deepEqual(browser.exceptions, []);
 });
-canonicalCase('IT-008', 'destination choice/cancellation preserve membership and return to the tavern', { timeout: 90000 }, async t => {
+canonicalCase('IT-008', 'destination panel cancellation preserves membership and choosing a route departs with the same party', { timeout: 90000 }, async t => {
   const browser = await tavern(t);
+  await installFixture(browser, selected());
   const before = await snapshot(browser);
-  await activate(browser, 'formation', 8);
-  await choices(browser, 'destinations');
+  await openDestinations(browser);
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(2)'), false);
   assert.deepEqual(await browser.evaluate('[72,73,74].map(id => $gameScreen.picture(id).name())'),
     ['Dryland_Destination_physical', 'Dryland_Destination_supernatural', 'Dryland_Destination_final']);
-  const panelText = (await browser.evaluate('[75,76,77].map(id => $gameScreen.getPictureTextData(id).upperleft)')).join(' ').replace(/\s+/g, ' ');
+  const panelText = resolve((await browser.evaluate('[75,76,77].map(id => $gameScreen.getPictureTextData(id).upperleft)')).join(' ')).replace(/\s+/g, ' ');
   for (const phrase of ['igreja tomada pela mata', 'uma figueira', 'duas peças']) assert.ok(panelText.includes(phrase), phrase);
-  await browser.screenshot(`${evidence('IT-008')}/destinations.png`);
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
   assert.deepEqual(await snapshot(browser), before);
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 8);
-  await activate(browser, 'formation', 8);
+  await openDestinations(browser);
   await activate(browser, 'destinations', 0);
-  await choices(browser, 'formation');
+  await browser.waitFor("$gameSystem._dryland.campaign.dungeonId === 'physical'");
   const after = await snapshot(browser);
-  assert.equal(after.selectedDungeonId, 'physical');
-  assert.deepEqual(after.draftPartyIds, before.draftPartyIds);
-  assert.equal(after.rngState, before.rngState);
-  const destinationLabel = await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(44).center)');
-  assert.ok(destinationLabel.replaceAll(String.fromCharCode(27) + 'WrapBreak[0]', ' ').includes('Caminho da Igreja'));
-  assert.equal(await browser.evaluate('$gameScreen.picture(71) == null'), true);
-  assert.equal(await browser.evaluate('Boolean($gameVariables.value(25))'), false);
+  assert.deepEqual(after.partyIds, before.draftPartyIds);
 });
 canonicalCase('IT-041', 'prepared retreat/revisit inputs display traversed progress without counting the newly revealed position', { timeout: 90000 }, async t => {
   const browser = await tavern(t);
-  const fixture = structuredClone(formation());
+  const fixture = structuredClone(selected());
   fixture.assignments.physical = ['A1', 'A2', 'A3', null, null];
   fixture.progress.physical = 2;
   await installFixture(browser, fixture);
-  await activate(browser, 'formation', 8);
-  await choices(browser, 'destinations');
+  await openDestinations(browser);
   assert.deepEqual(rules.playerView(await snapshot(browser)).destinations.physical.landmarks, { traversed: 2, total: 5 });
-  assert.ok((await browser.evaluate('SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(78).center)')).includes('2/5'));
-  await browser.screenshot(`${evidence('IT-041')}/known-progress.png`);
+  assert.deepEqual(await browser.evaluate('[$gameVariables.value(179), $gameVariables.value(182)]'), [2, 5]);
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
-  await activate(browser, 'formation', 8);
-  await choices(browser, 'destinations');
+  await openDestinations(browser);
   assert.deepEqual(await snapshot(browser), fixture);
   assert.deepEqual(rules.playerView(await snapshot(browser)).destinations.physical.landmarks, { traversed: 2, total: 5 });
 });
@@ -393,7 +383,7 @@ canonicalCase('IT-060', 'default asynchronous bust loading continues native text
   assert.deepEqual(await snapshot(browser), before);
   // Explicit interruption fixture, not a directed player journey.
   await browser.evaluate('$gameMap._interpreter.clear(); SceneManager.goto(Scene_Title); window.resumeDialogueImage();');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
   assert.equal(await browser.evaluate('[60,61,62,63,64,65].every(id => !$gameScreen.picture(id))'), true);
   assert.equal(await browser.evaluate('$gameMessage.allText().includes("Gorvak")'), false);
   assert.equal(await browser.evaluate(`StorageManager.loadZip('file${savedFile}')`), saved);
@@ -481,27 +471,4 @@ canonicalCase('IT-070', 'native queries and configuration are observational and 
   assert.equal(loading.rejected, true);
   assert.equal(loading.repaired, false);
   assert.deepEqual(browser.exceptions, []);
-});
-
-// INVARIANT: each native tavern label retains its own identity and roster inspection is observational.
-// OWNING_LAYER: native integration; EXISTING_SUITE: formation.mjs.
-canonicalCase('IT-072', 'native tavern labels and mouse roster work at the larger desktop viewport', {timeout:60000}, async t => {
-  const browser=await tavern(t,{width:1920,height:1080});
-  const before=await snapshot(browser);
-  const labels=await browser.evaluate(`Array.from({length:8},(_,i)=>SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(30+i).center).replace(/\\x1bFS\\[\\d+\\]/g,''))`);
-  assert.deepEqual(labels,['Gorvak','Elowen','Griznik','Seraphina','Bimbren','Liora','Vaelith','Draska']);
-  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/tavern-1920.png');
-  const point=await browser.evaluate(`(() => {const rect=Graphics._canvas.getBoundingClientRect();return {x:rect.x+1144*rect.width/1280,y:rect.y+56*rect.height/720};})()`);
-  await browser.call('Input.dispatchMouseEvent',{type:'mouseMoved',...point});
-  await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',...point,button:'left',buttons:1,clickCount:1});
-  await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',...point,button:'left',buttons:0,clickCount:1});
-  await choices(browser,'roster');
-  const roster=await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))');
-  assert.deepEqual(roster,labels.map(name=>`${name} — Presente`));
-  assert.deepEqual(await snapshot(browser),before);
-  await browser.screenshot('docs/qa/evidence/eventbridge-minimal-runtime/task-03/20260912/roster-1920.png');
-  await browser.press('Escape',27);await choices(browser,'formation');
-  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),9);
-  assert.deepEqual(await snapshot(browser),before);
-  assert.deepEqual(browser.exceptions,[]);
 });

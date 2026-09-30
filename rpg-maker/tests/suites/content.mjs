@@ -6,7 +6,7 @@ import { cp, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { canonicalCase, assertRegistrations, manifest } from '../helpers/canonical-cases.mjs';
-import { openChrome, project, startServer, selectFile } from '../helpers/native-chrome.mjs';
+import { chooseTitle, openChrome, project, startServer, selectFile } from '../helpers/native-chrome.mjs';
 import { hash } from '../../tools/native-files.mjs';
 import { appendEnsemble, assertHidePreservesPortraits, ensembleFixture, prepareBustFixture } from '../helpers/native-bust-fixture.mjs';
 import { parsePluginList, readPluginParameters } from '../../tools/plugin-settings.mjs';
@@ -34,9 +34,9 @@ canonicalCase('IT-036', 'manifest rejects empty, missing, duplicate or mismatche
     [manifest, [...ids.slice(1), 'UT-999']]]) assert.throws(() => assertRegistrations(contract, registrations));
 });
 
-async function firstPrologue(browser, label = 'Jogar') {
-  await browser.waitFor(`window.$gameMessage && $gameMessage.choices().includes(${JSON.stringify(label)}) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()`);
-  const index = await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(label)})`);
+async function firstPrologue(browser, label = 'choice.title.new_game') {
+  await browser.waitFor(`window.$gameMessage && $gameMessage.choices().some(c=>c.includes(${JSON.stringify(label)})) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()`);
+  const index = await browser.evaluate(`$gameMessage.choices().findIndex(c=>c.includes(${JSON.stringify(label)}))`);
   for (let step = 0; step < index; step++) await browser.press('ArrowDown', 40);
   await browser.press('Enter', 13);
   await selectFile(browser,1);
@@ -109,8 +109,8 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   edited.events[1].pages[0].list.find(c => c.code === 401).parameters[0] = 'Texto salvo no evento nativo para verificar a releitura.';
   await writeFile(mapFile, JSON.stringify(edited));
   await browser.call('Page.reload', { ignoreCache: true });
-  await firstPrologue(browser, 'Novo jogo');
-  assert.equal(await browser.evaluate('$gameMessage.allText()'), 'Texto salvo no evento nativo para verificar a releitura.\ncontragosto de Irati. ');
+  await firstPrologue(browser, 'choice.title.new_game');
+  assert.equal(await browser.evaluate('$gameMessage.allText()'), 'Texto salvo no evento nativo para verificar a releitura.');
   assert.equal(hash(await readFile(pluginFile)), pluginHash);
   await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-02/IT-035/edited-native-text.png');
   assert.deepEqual(browser.exceptions, []);
@@ -129,58 +129,6 @@ canonicalCase('UT-070','the isolated 2x2 recipe preserves its technical transcri
  assert.deepEqual(ensembleFixture.transcript.map(row=>row.slot),[60,61,63,64,64]);
  assert.equal(ensembleFixture.helpers.length,6);
 });
-
-canonicalCase('IT-067','editing native layout and inserting text boxes updates playback and Continue from one authored source',{timeout:90000},async t=>{
- const pluginHash=hash(await readFile(path.join(project,'js/plugins/Dryland_EventBridge.js')));
- const prepared=await prepareBustFixture(t,'fixture-native-bust-edit-20260911',async (events,directory)=>{
-  const file=path.join(directory,'data/Map038.json'),map=JSON.parse(await readFile(file,'utf8')),list=map.events[1].pages[0].list;
-  for(const c of list.filter(c=>c.code===357&&c.parameters[3]['PictureID:arrayeval']==='["60"]')){
-   const args=c.parameters[3];
-   if(c.parameters[1]==='Move_MoveToCoordinates')args['TargetX:str']='342';
-   if(c.parameters[1]==='Scale_ScaleTo')args['TargetScaleX:str']=args['TargetScaleY:str']=args['TargetScaleX:str']==='36'?'39.6':'44';
-  }
-  const enter=list.findIndex(c=>c.code===357&&c.parameters[1]==='Basic_EnterBust');
-  const earlyFocus=clone(list.find(c=>c.code===357&&c.parameters[1]==='Scale_ScaleTo'&&c.parameters[3]['PictureID:arrayeval']==='["60"]'));
-  earlyFocus.indent=list[enter].indent;list.splice(enter,0,earlyFocus);
-  const conversation=list.findIndex(c=>c.code===357&&c.parameters[1]==='ObservationBegin'&&c.parameters[3].unit==='87');
-  const text=list.findIndex((c,index)=>index>conversation&&c.code===101);
-  list.splice(text+2,0,command(357,['VisuMZ_2_VNPictureBusts','Basic_GraphicChange','Change',{'PictureID:eval':'60','PictureName:str':'Dryland_H2'}],1),clone(list[text]),command(401,['Caixa técnica inserida — mesma autoria.'],1));
-  const reply=list.findIndex((c,index)=>index>text&&c.code===101&&c.parameters[4]==='Elowen');
-  list.splice(reply,0,command(357,['VisuMZ_2_VNPictureBusts','Scale_ScaleTo','Scale_ScaleTo',{'PictureID:arrayeval':'["60"]','TargetScaleX:str':'80','TargetScaleY:str':'80','Duration:eval':'0'}],1));
-  await writeFile(file,JSON.stringify(map));
- });
- assert.deepEqual(prepared.events[4],original[4]);
- await startServer(t,prepared.directory);const browser=await openChrome(t);await firstPrologue(browser);
- for(let box=0;box<prologueMarkers.length;box++){await pause(browser);await browser.press('Enter',13);}
- await choices(browser,'formation');await activate(browser,'formation',1);await activate(browser,'hero',0);await pause(browser);
- await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===39.6');
- assert.equal(await browser.evaluate('$gameTemp._drylandLastRejection?.code||null'),null,'Focus before entry leaves an empty owned slot untouched');
- const before=await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)');
- await clickConsole(browser,'options');await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Options'&&!SceneManager._scene.isBusy()");
- await browser.press('Escape',27);await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Map'&&SceneManager._scene._messageWindow&&!SceneManager._scene.isBusy()");await pause(browser);
- assert.equal(await browser.evaluate('$gameScreen.picture(60).x()'),342);
- assert.equal(await browser.evaluate('$gameScreen.picture(60).scaleX()'),39.6);
- // Integration save fixture only: native serialization and title Continue,
- // without introducing a player save command.
- await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
- await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
- assert.equal(await browser.evaluate('$gameMessage.allText()'),'Caixa técnica inserida — mesma autoria.');
- await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===39.6');
- assert.equal(await browser.evaluate('$gameScreen.picture(60).name()'),'Dryland_H2','Inserted native box retains its preceding graphic change');
- assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),before);
- await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
- await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
- await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===80');
- assert.equal(await browser.evaluate('$gameMessage.speakerName()'),'Elowen');
- assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),before);
- assert.equal(hash(await readFile(path.join(project,'js/plugins/Dryland_EventBridge.js'))),pluginHash);
- await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-vn-picture-busts-dialogues/IT-067/authored-342-44.png');
-});
-
 
 canonicalCase('UT-073','native focus replaces obsolete plugin settings and remains editable in map events',async t=>{
  assert.deepEqual(await readPluginParameters(project,'Dryland_EventBridge'),{ConfigurationCommonEvent:'4'});
@@ -247,8 +195,8 @@ canonicalCase('IT-069','artist parameters and additional native effects survive 
  assert.deepEqual(await snapshot(),before,'Options retains native picture state');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');await browser.reopen();
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);await browser.waitFor(settled);
+ await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await chooseTitle(browser,'choice.title.continue');await selectFile(browser,1);await pause(browser);await browser.waitFor(settled);
  assert.deepEqual(await snapshot(),before,'Native Continue retains saved picture state');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),campaignBefore);

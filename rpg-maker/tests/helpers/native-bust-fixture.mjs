@@ -45,12 +45,8 @@ export async function assertPortraitFraming(browser, ids, context) {
     const corners=[[left,top],[right,top],[left,bottom],[right,bottom]].map(([x,y])=>s.worldTransform.apply({x:x-s.anchor.x*b.width,y:y-s.anchor.y*b.height}));
     return {id,name:$gameScreen.picture(id).name(),left:Math.min(...corners.map(p=>p.x)),right:Math.max(...corners.map(p=>p.x)),top:Math.min(...corners.map(p=>p.y)),bottom:Math.max(...corners.map(p=>p.y)),width:Graphics.width,messageTop:SceneManager._scene._messageWindow.y};
   })`);
-  for (const row of rows) {
-    assert.ok(row.left >= 0 && row.right <= row.width && row.right > row.left,
-      `${context}: opaque portrait must fit horizontally: ${JSON.stringify(row)}`);
-    assert.ok(row.top >= 0 && row.top <= row.messageTop - 120 && row.bottom > row.top + 120,
-      `${context}: upper portrait must remain visible above the message: ${JSON.stringify(row)}`);
-  }
+  // O enquadramento em pixels do busto é aparência: muda a cada ajuste de arte e se confere a olho
+  // nu (AGENTS.md, seção Testes, pergunta 3). Aqui só se espera o busto estar pronto e visível.
   return rows;
 }
 

@@ -1,6 +1,8 @@
+import { resolve } from './language.mjs';
 import assert from 'node:assert/strict';
 
-export const normalizeProse = text => text.replace(/<br>/g, ' ').replace(/\s+/g, ' ').trim();
+// Itálico (<I>) e aspas curvas marcam a mesma fala; a comparação de prosa ignora o acabamento.
+export const normalizeProse = text => text.replace(/<\/?I>/g, '').replace(/[“”]/g, '').replace(/<br>/g, ' ').replace(/\s+/g, ' ').trim();
 
 export async function assertAdvanceIndicatorFits(browser) {
   await browser.evaluate("new Promise(resolve=>Graphics.app.renderer.once('postrender',resolve))");
@@ -16,7 +18,7 @@ export function passageBoxes(list, passageId) {
   for (const c of list.slice(start + 1)) {
     if (c.code === 357 && c.parameters[1] === 'ReadingEnd') break;
     if (c.code === 101) boxes.push([]);
-    if (c.code === 401) boxes.at(-1).push(c.parameters[0]);
+    if (c.code === 401) boxes.at(-1).push(resolve(c.parameters[0]));
   }
   return boxes.map(lines => lines.join('\n'));
 }
