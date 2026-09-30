@@ -11,7 +11,7 @@ function completeAniFields(fields,raw,path){
     for(const field of fields){
         if(field.key==='CoretoConfigSource')continue;
         const key=field.storageKey,at=`${path}/${key}`;
-        const value=Object.hasOwn(raw,key)?raw[key]:field.nativeDefault;
+        const value=Object.prototype.hasOwnProperty.call(raw,key)?raw[key]:field.nativeDefault;
         if(typeof value!=='string')aniEncoding(`Expected native string at ${at}.`,at);
         if(value===''){output[key]=value;continue;}
         if(field.type==='struct')output[key]=JSON.stringify(completeAniFields(field.fields,aniJson(value,at),at));

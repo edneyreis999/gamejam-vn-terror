@@ -10,7 +10,7 @@ function installSaveState(settings){
     Game_System.prototype.initSaveCore=function(){
         this._SaveCoreSettings??={};
         const defaults={autosaveEnabled:true,saveDescription:'',savePicture:''};
-        for(const [key,value]of Object.entries(defaults))if(!Object.hasOwn(this._SaveCoreSettings,key))this._SaveCoreSettings[key]=value;
+        for(const [key,value]of Object.entries(defaults))if(!Object.prototype.hasOwnProperty.call(this._SaveCoreSettings,key))this._SaveCoreSettings[key]=value;
     };
     Game_System.prototype.getSaveDescription=function(){this.initSaveCore();return this._SaveCoreSettings.saveDescription;};
     Game_System.prototype.getSavePicture=function(){this.initSaveCore();return this._SaveCoreSettings.savePicture;};

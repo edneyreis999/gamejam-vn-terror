@@ -212,7 +212,7 @@ function installMessageMapName() {
             if(position>=0)this[axis]=Math.floor((viewport-size)*position/2);
             text=text.replace(new RegExp('<\\/?(?:'+tags.join('|')+')>','gi'),'');
             const offsets=new RegExp('<'+axis+': ([+-]\\d+)>','gi');
-            const last=Array.from(text.matchAll(offsets)).at(-1);
+            const offsetMatches=Array.from(text.matchAll(offsets)),last=offsetMatches[offsetMatches.length-1];
             if(last)this[axis]+=Number(last[1]);
             text=text.replace(offsets,'');
         }

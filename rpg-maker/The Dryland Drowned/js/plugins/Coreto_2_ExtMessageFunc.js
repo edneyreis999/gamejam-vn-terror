@@ -2611,11 +2611,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -2623,7 +2623,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {
@@ -2678,7 +2678,7 @@ function validateValue(schema, value, path) {
             validateValue(field, value[key], `${path}/${key}`);
         }
         for (const field of schema.fields) {
-            if (!Object.hasOwn(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
+            if (!Object.prototype.hasOwnProperty.call(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
         }
     } else if (schema.type === "array") {
         if (!Array.isArray(value)) valueError(schema, value, path);
@@ -2782,7 +2782,7 @@ function resolveExtendedSource(catalog, plugins) {
         const result = {...raw};
         for (const field of fields) {
             if (field.key === 'CoretoConfigSource') continue;
-            const value = Object.hasOwn(result, field.storageKey) ? result[field.storageKey] : field.nativeDefault;
+            const value = Object.prototype.hasOwnProperty.call(result, field.storageKey) ? result[field.storageKey] : field.nativeDefault;
             if (field.type === 'array' && value !== '') {
                 let array;
                 try { array = JSON.parse(value); } catch { throw new CoreError('EXT_CONFIG_ENCODING', `Invalid array ${field.storageKey} in ${source.name}.`); }

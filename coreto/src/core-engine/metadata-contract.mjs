@@ -15,7 +15,7 @@ function metadataInvalid(message) {
 
 function metadataObject(value, keys) {
     if (!value || typeof value !== 'object' || Array.isArray(value) ||
-        Object.keys(value).length !== keys.length || keys.some(key => !Object.hasOwn(value, key))) {
+        Object.keys(value).length !== keys.length || keys.some(key => !Object.prototype.hasOwnProperty.call(value, key))) {
         metadataInvalid(`Expected only these fields: ${keys.join(', ')}.`);
     }
 }
@@ -61,7 +61,7 @@ export function validateMetadataDocument(document) {
         if (type === 'ExportAllMapText') required.push('MapInfos.json');
         else if (type === 'ExportCurMapText') required.push(`Map${String(context.id).padStart(3, '0')}.json`);
         else required.push('Troops.json');
-        if (required.some(name => !Object.hasOwn(sources, name))) metadataInvalid('The export is missing required source hashes.');
+        if (required.some(name => !Object.prototype.hasOwnProperty.call(sources, name))) metadataInvalid('The export is missing required source hashes.');
         if (type !== 'ExportAllMapText' && Object.keys(sources).length !== required.length) metadataInvalid('Unexpected source for this export.');
     }
     return document;

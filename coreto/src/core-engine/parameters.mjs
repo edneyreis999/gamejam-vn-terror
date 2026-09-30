@@ -23,7 +23,7 @@ export function validateValue(schema, value, path) {
             validateValue(field, value[key], `${path}/${key}`);
         }
         for (const field of schema.fields) {
-            if (!Object.hasOwn(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
+            if (!Object.prototype.hasOwnProperty.call(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
         }
     } else if (schema.type === "array") {
         if (!Array.isArray(value)) valueError(schema, value, path);

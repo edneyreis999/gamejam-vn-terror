@@ -8,7 +8,7 @@ function installComplement(catalog, apiName, errorPrefix) {
     for (const alternatives of catalog.dependencies.required) if (!active.some(plugin => alternatives.includes(plugin.name))) fail('DEPENDENCY_MISSING', 'Enable a supported provider: '+alternatives.join(' or ')+'.');
     if (active.some(plugin => catalog.orderAfter.includes(plugin.name) && active.indexOf(plugin) > active.indexOf(own))) fail('PLUGIN_ORDER', 'Place '+catalog.namespace+' after its dependencies.');
     for (const supported of [catalog.dependencies.cores, catalog.dependencies.messages]) {
-        const entries = active.filter(plugin => Object.hasOwn(supported, plugin.name));
+        const entries = active.filter(plugin => Object.prototype.hasOwnProperty.call(supported, plugin.name));
         if (entries.length > 1) fail('DEPENDENCY_DUPLICATE', 'Enable at most one provider per dependency.');
         for (const entry of entries) {
             if (active.indexOf(entry) > active.indexOf(own)) fail('PLUGIN_ORDER', 'Place '+entry.name+' before '+catalog.namespace+'.');

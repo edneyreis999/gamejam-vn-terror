@@ -14345,11 +14345,11 @@ const configurationSourceField = {
 };
 
 function configurationSelection(catalog, parameters) {
-    if (Object.hasOwn(parameters, 'CoretoConfigSource')) {
+    if (Object.prototype.hasOwnProperty.call(parameters, 'CoretoConfigSource')) {
         return {configuredSource: parameters.CoretoConfigSource, format: 'canonical', migrationRequired: false};
     }
     const oldVn = catalog.pluginId === 'Coreto_2_VNPictureBusts';
-    if (oldVn && Object.hasOwn(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
+    if (oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') && !['own', 'legacy-if-present'].includes(parameters.ConfigurationSource)) {
         const error = new Error('Use own or legacy-if-present for the historical VN selector.');
         error.code = 'INVALID_CONFIGURATION_SOURCE';
         error.exitCode = 2;
@@ -14357,7 +14357,7 @@ function configurationSelection(catalog, parameters) {
     }
     const configuredSource = oldVn && parameters.ConfigurationSource === 'own' ? 'own'
         : ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId) ? 'own' : 'inherit';
-    return {configuredSource, format: oldVn && Object.hasOwn(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
+    return {configuredSource, format: oldVn && Object.prototype.hasOwnProperty.call(parameters, 'ConfigurationSource') ? 'vn-legacy' : 'implicit', migrationRequired: true};
 }
 
 function resolvePluginConfiguration(catalog, plugins, {errorPrefix = 'CORETO', allowMissingOwn = false} = {}) {
@@ -14431,7 +14431,7 @@ function record(input, fields, namespace, id, path, transform) {
     }
     const result = {};
     for (const key of fields) {
-        if (Object.hasOwn(input, key) && input[key] !== undefined) result[key] = transform(input[key], key);
+        if (Object.prototype.hasOwnProperty.call(input, key) && input[key] !== undefined) result[key] = transform(input[key], key);
     }
     return result;
 }
@@ -14627,7 +14627,7 @@ function validateValue(schema, value, path) {
             validateValue(field, value[key], `${path}/${key}`);
         }
         for (const field of schema.fields) {
-            if (!Object.hasOwn(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
+            if (!Object.prototype.hasOwnProperty.call(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
         }
     } else if (schema.type === "array") {
         if (!Array.isArray(value)) valueError(schema, value, path);
@@ -14810,7 +14810,7 @@ function installQuickFunctions(settings) {
 function convertEventArguments(command, raw) {
     function convertObject(fields, input, path, shared) {
         const result = shared ? { ...input } : {};
-        const ordered = [...Object.keys(input), ...fields.map(field => field.storageKey).filter(key => !Object.hasOwn(input, key))];
+        const ordered = [...Object.keys(input), ...fields.map(field => field.storageKey).filter(key => !Object.prototype.hasOwnProperty.call(input, key))];
         for (const key of ordered) {
             const field = fields.find(field => field.storageKey === key);
             if (!field) {
@@ -16283,7 +16283,7 @@ function installTextPopups(settings) {
     };
     Window_TextPopup.prototype.isAutoColorAffected = function() { return true; };
     Window_TextPopup.prototype.addQueue = function(text) {
-        if (this._queue.at(-1) !== text) this._queue.push(text);
+        if (this._queue[this._queue.length - 1] !== text) this._queue.push(text);
         if (this.parent) this.parent.addChild(this);
     };
     Window_TextPopup.prototype.update = function() {
@@ -17737,7 +17737,7 @@ function installNumberInput(settings) {
         else if (Input._inputSpecialKeyCode === 35) this.processKeyboardEnd();
         else processDigitChange.call(this);
     };
-    const processCursorMove = Object.hasOwn(input, 'processCursorMove') ? input.processCursorMove : null;
+    const processCursorMove = Object.prototype.hasOwnProperty.call(input, 'processCursorMove') ? input.processCursorMove : null;
     input.processCursorMove = function() {
         if (!this.isOpenAndActive()) return;
         if (Input.isNumpadPressed()) this.processKeyboardDigitChange();
@@ -17852,7 +17852,7 @@ function installBattleRules() {
 function coreBattleSystemId(value, database) {
     const normalized = String(value || "database").toUpperCase().trim();
     const supported = {DTB: 0, "TPB ACTIVE": 1, "TPB WAIT": 2};
-    if (Object.hasOwn(supported, normalized)) return supported[normalized];
+    if (Object.prototype.hasOwnProperty.call(supported, normalized)) return supported[normalized];
     if (/^(?:BTB|CTB|ETB|FTB|OTB|PTB|STB|GRID)$/.test(normalized)) {
         throw new CoreError("CAPABILITY_UNAVAILABLE", `Battle system ${normalized} requires an external plugin.`, {field: "/BattleSystem", received: value}, 6);
     }
@@ -18082,7 +18082,7 @@ function metadataInvalid(message) {
 
 function metadataObject(value, keys) {
     if (!value || typeof value !== 'object' || Array.isArray(value) ||
-        Object.keys(value).length !== keys.length || keys.some(key => !Object.hasOwn(value, key))) {
+        Object.keys(value).length !== keys.length || keys.some(key => !Object.prototype.hasOwnProperty.call(value, key))) {
         metadataInvalid(`Expected only these fields: ${keys.join(', ')}.`);
     }
 }
@@ -18128,7 +18128,7 @@ function validateMetadataDocument(document) {
         if (type === 'ExportAllMapText') required.push('MapInfos.json');
         else if (type === 'ExportCurMapText') required.push(`Map${String(context.id).padStart(3, '0')}.json`);
         else required.push('Troops.json');
-        if (required.some(name => !Object.hasOwn(sources, name))) metadataInvalid('The export is missing required source hashes.');
+        if (required.some(name => !Object.prototype.hasOwnProperty.call(sources, name))) metadataInvalid('The export is missing required source hashes.');
         if (type !== 'ExportAllMapText' && Object.keys(sources).length !== required.length) metadataInvalid('Unexpected source for this export.');
     }
     return document;
@@ -18172,7 +18172,7 @@ function metadataEventText(list, commonEvents, lines) {
     const frames = [{list, index: 0, commonId: null}];
     const active = new Set();
     while (frames.length) {
-        const frame = frames.at(-1);
+        const frame = frames[frames.length - 1];
         if (!Array.isArray(frame.list)) metadataDataError('An event page has no command list.');
         if (frame.index === frame.list.length) {
             frames.pop();
@@ -18234,7 +18234,7 @@ function extractMetadataText({type, context, data}) {
             pageText(troop.pages);
         }
     } else metadataDataError('This document type does not extract event text.');
-    return lines.join('\n') + (lines.length && lines.at(-1) !== '' ? '\n' : '');
+    return lines.join('\n') + (lines.length && lines[lines.length - 1] !== '' ? '\n' : '');
 }
 
 function installMetadataOperations() {

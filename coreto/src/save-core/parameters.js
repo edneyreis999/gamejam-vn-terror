@@ -9,8 +9,8 @@ function validateSaveSettings(settings){
     for(const prefix of ['List','Vert','Box','Large'])for(const suffix of ['Rows','Cols']){
         const key=prefix+suffix;check(settings.SaveMenu?.[key],value=>Number.isInteger(value)&&value>=1,`SaveMenu.${key}`,'Expected at least one row or column');
     }
-    if(settings.SaveConfirm.Enable||Object.hasOwn(settings.SaveConfirm,'Duration'))check(settings.SaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'SaveConfirm.Duration','Expected a nonnegative duration');
-    if(Object.hasOwn(settings.Autosave,'AutosaveType'))check(settings.Autosave.AutosaveType,value=>['file0','current','both'].includes(value),'Autosave.AutosaveType','Unknown autosave destination');
-    if(settings.AutosaveConfirm.Enable||Object.hasOwn(settings.AutosaveConfirm,'Duration'))check(settings.AutosaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'AutosaveConfirm.Duration','Expected a nonnegative duration');
-    if(settings.AutosaveConfirm.Enable||Object.hasOwn(settings.AutosaveConfirm,'ScreenPosition'))check(settings.AutosaveConfirm.ScreenPosition,value=>/^(lower|middle|upper) (left|center|right)$/.test(value),'AutosaveConfirm.ScreenPosition','Unknown autosave confirmation position');
+    if(settings.SaveConfirm.Enable||Object.prototype.hasOwnProperty.call(settings.SaveConfirm,'Duration'))check(settings.SaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'SaveConfirm.Duration','Expected a nonnegative duration');
+    if(Object.prototype.hasOwnProperty.call(settings.Autosave,'AutosaveType'))check(settings.Autosave.AutosaveType,value=>['file0','current','both'].includes(value),'Autosave.AutosaveType','Unknown autosave destination');
+    if(settings.AutosaveConfirm.Enable||Object.prototype.hasOwnProperty.call(settings.AutosaveConfirm,'Duration'))check(settings.AutosaveConfirm.Duration,value=>Number.isFinite(value)&&value>=0,'AutosaveConfirm.Duration','Expected a nonnegative duration');
+    if(settings.AutosaveConfirm.Enable||Object.prototype.hasOwnProperty.call(settings.AutosaveConfirm,'ScreenPosition'))check(settings.AutosaveConfirm.ScreenPosition,value=>/^(lower|middle|upper) (left|center|right)$/.test(value),'AutosaveConfirm.ScreenPosition','Unknown autosave confirmation position');
 }

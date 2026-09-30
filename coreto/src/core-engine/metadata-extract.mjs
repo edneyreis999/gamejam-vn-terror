@@ -24,7 +24,7 @@ function metadataEventText(list, commonEvents, lines) {
     const frames = [{list, index: 0, commonId: null}];
     const active = new Set();
     while (frames.length) {
-        const frame = frames.at(-1);
+        const frame = frames[frames.length - 1];
         if (!Array.isArray(frame.list)) metadataDataError('An event page has no command list.');
         if (frame.index === frame.list.length) {
             frames.pop();
@@ -86,5 +86,5 @@ export function extractMetadataText({type, context, data}) {
             pageText(troop.pages);
         }
     } else metadataDataError('This document type does not extract event text.');
-    return lines.join('\n') + (lines.length && lines.at(-1) !== '' ? '\n' : '');
+    return lines.join('\n') + (lines.length && lines[lines.length - 1] !== '' ? '\n' : '');
 }

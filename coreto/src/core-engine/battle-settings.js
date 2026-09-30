@@ -1,7 +1,7 @@
 function coreBattleSystemId(value, database) {
     const normalized = String(value || "database").toUpperCase().trim();
     const supported = {DTB: 0, "TPB ACTIVE": 1, "TPB WAIT": 2};
-    if (Object.hasOwn(supported, normalized)) return supported[normalized];
+    if (Object.prototype.hasOwnProperty.call(supported, normalized)) return supported[normalized];
     if (/^(?:BTB|CTB|ETB|FTB|OTB|PTB|STB|GRID)$/.test(normalized)) {
         throw new CoreError("CAPABILITY_UNAVAILABLE", `Battle system ${normalized} requires an external plugin.`, {field: "/BattleSystem", received: value}, 6);
     }

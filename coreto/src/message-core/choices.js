@@ -30,7 +30,7 @@ function installMessageChoices() {
     };
     const cancelBranch = interpreter.command403;
     interpreter.command403 = function(...args) {
-        if (!Object.hasOwn(this._branch, this._indent)) {
+        if (!Object.prototype.hasOwnProperty.call(this._branch, this._indent)) {
             this.skipBranch();
             return true;
         }
@@ -177,7 +177,7 @@ function installMessageChoices() {
         for (const text of $gameMessage.choices()) for (const match of text.matchAll(/<CHOICE WIDTH: (\d+)>/gi)) width = Math.max(width, Number(match[1]));
         return Math.max(1, width);
     };
-    window.getChoiceIndent = function(text) { return Number([...text.matchAll(/<(?:CHOICE|CHOICE |)INDENT: (\d+)>/gi)].at(-1)?.[1]) || 0; };
+    window.getChoiceIndent = function(text) { const indents = [...text.matchAll(/<(?:CHOICE|CHOICE |)INDENT: (\d+)>/gi)]; return Number(indents[indents.length - 1]?.[1]) || 0; };
     window.maxChoiceWidth = function() {
         return this._list.reduce((width, item) => Math.max(width, Math.ceil(this.textSizeEx(item.name).width+this.getChoiceIndent(item.name))+this.itemPadding()*2), this.getStartingChoiceWidth());
     };
