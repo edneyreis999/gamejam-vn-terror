@@ -7,12 +7,13 @@ import path from 'node:path';
 import { deflateSync } from 'node:zlib';
 import { validateNativeArchive, sha256 } from '../../qa/native-save-archive.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, openDestinations, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
 import { councilState } from '../helpers/closing.mjs';
 import { installPhase, clickConsole } from '../helpers/native-shared.mjs';
 import { endingWithHeroes } from '../helpers/closing-presentation.mjs';
-import { openChrome, origin, project, selectFile, startServer } from '../helpers/native-chrome.mjs';
+import { dismissAgeNotice, openChrome, origin, project, selectFile, startServer } from '../helpers/native-chrome.mjs';
+import { resolve } from '../helpers/language.mjs';
 const require = createRequire(import.meta.url);
 const { validateCheckpoint } = require('../../The Dryland Drowned/js/plugins/Dryland_EventBridge.js');
 const envelope = campaign => ({ campaign });
@@ -24,10 +25,10 @@ async function savedCampaign(browser) { return browser.evaluate("StorageManager.
 async function savedBytes(browser) { return browser.evaluate("StorageManager.loadZip('file'+$gameSystem.savefileId())"); }
 async function toTitle(browser) {
   await browser.evaluate('$gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
 }
 async function titleChoice(browser, label, fileId) {
-  const index = await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(label)})`);
+  const index = await browser.evaluate(`$gameMessage.choices().findIndex(c=>c.includes(${JSON.stringify(label)}))`);
   assert.ok(index >= 0);
   for (let step = 0; step < 4; step++) {
     const current = await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
@@ -35,7 +36,7 @@ async function titleChoice(browser, label, fileId) {
     await browser.press(current < index ? 'ArrowDown' : 'ArrowUp', current < index ? 40 : 38);
   }
   await browser.press('Enter', 13);
-  if(label==='Continuar')await selectFile(browser,fileId);
+  if(label==='choice.title.continue')await selectFile(browser,fileId);
 }
 async function prepareSacrifice(browser, count = 3) {
   const state = failureWithCount(count), encounter = state.pendingOutcome.encounterId, mapId = 6 + Number(encounter.slice(1));
@@ -60,7 +61,7 @@ async function observeLoadInstallation(browser) {
 async function awaitLoadFailure(browser) {
   await browser.waitFor("nativeTextLog.some(text => text.includes('Esta campanha não pode ser carregada.'))");
   assert.deepEqual(await browser.evaluate('loadInstallation'), { create: 0, extract: 0, after: 0, reload: 0 });
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
 }
 canonicalCase('UT-042', 'terminal New Game clears every prior campaign fact', () => {
   const terminal = replayUntil('final-sixth-total-loss', state => state.phase === 'campaign_complete');
@@ -139,7 +140,7 @@ canonicalCase('IT-015', 'the saved checkpoint command replays without repeating 
   assert.equal(stack.at(-1).wait, 'dryland-save');
   const bytes = await savedBytes(browser);
   await toTitle(browser);
-  await titleChoice(browser, 'Continuar');
+  await titleChoice(browser, 'choice.title.continue');
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   assert.deepEqual(await snapshot(browser), after);
   assert.equal(await savedBytes(browser), bytes, 'Exact replay performs no redundant storage write.');
@@ -162,7 +163,7 @@ canonicalCase('IT-016', 'a map-owned encounter restores its shared sacrifice int
   assert.equal(savedOwner.command.parameters[1],'Checkpoint');
   assert.equal(savedOwner.command.parameters[3].reason,'sacrifice');
   assert.equal(savedOwner.wait,'dryland-save');
-  await toTitle(browser); await titleChoice(browser, 'Continuar');
+  await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   await browser.press('Enter', 13); await pause(browser);
   assert.equal((await snapshot(browser)).reading.index, 1);
@@ -204,19 +205,19 @@ canonicalCase('IT-018', 'a write failure releases native waiting and preserves t
   await browser.waitFor("$gameTemp._drylandPersistence.status === 'failed' && $gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.hasText()");
   assert.deepEqual(await diagnostic(browser), { status: 'failed', lastSuccessfulSequence: previous.lastSuccessfulSequence, lastError: { code: 'save_failed' } });
   assert.equal(await savedBytes(browser), bytes);
-  await browser.waitFor("nativeTextLog.some(text => text.includes('Não foi possível salvar.'))");
+  await browser.waitFor("nativeTextLog.some(text => text.includes('save_failure'))");
   await browser.screenshot(`${evidence('IT-018')}/native-write-failure.png`);
 });
 canonicalCase('IT-019', 'the first failed autosave never claims a resumable new campaign', { timeout: 60000 }, async t => {
   await startServer(t); const browser = await openChrome(t);
-  await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("window.$gameMessage && $gameMessage.choices().some(c=>c.includes('choice.title.new_game')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   await observeNativeText(browser);
   await browser.evaluate(`const nativeSave=StorageManager.saveObject;StorageManager.saveObject=function(name,contents){return name==='file'+$gameSystem.savefileId()?Promise.reject(new Error('injected first-write failure')):nativeSave.call(this,name,contents);};`);
   await browser.press('Enter', 13);await selectFile(browser,1);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'intro' && $gameTemp._drylandPersistence?.status === 'failed' && $gameMessage.hasText()");
   assert.deepEqual(await diagnostic(browser), { status: 'failed', lastSuccessfulSequence: null, lastError: { code: 'save_failed' } });
   assert.equal(await browser.evaluate('DataManager.savefileExists($gameSystem.savefileId())'), false);
-  await browser.waitFor("nativeTextLog.some(text => text.includes('Não foi possível salvar.'))");
+  await browser.waitFor("nativeTextLog.some(text => text.includes('save_failure'))");
 });
 canonicalCase('IT-020', 'invalid checkpoint reasons do not reach native storage', { timeout: 60000 }, async t => {
   const browser = await tavern(t), before = await snapshot(browser), bytes = await savedBytes(browser);
@@ -234,10 +235,10 @@ canonicalCase('IT-021', 'native load failure distinguishes unreadable bytes from
   if(variant==='unreadable')await browser.evaluate(`StorageManager.saveZip('file'+${file},'not-a-native-compressed-save')`);
   else await browser.evaluate(`StorageManager.loadObject('file'+${file}).then(c=>{delete c.system._dryland;return StorageManager.saveObject('file'+${file},c);})`);
   const bytes=await browser.evaluate(`StorageManager.loadZip('file'+${file})`);
-  await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+  await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
   await observeLoadInstallation(browser);
   await browser.evaluate('window.nativeLoadFailures=0;const failed=Scene_Load.prototype.onLoadFailure;Scene_Load.prototype.onLoadFailure=function(){nativeLoadFailures++;return failed.call(this);};');
-  await titleChoice(browser,'Continuar',file);
+  await titleChoice(browser, 'choice.title.continue',file);
   await browser.waitFor('nativeLoadFailures===1&&SceneManager._scene instanceof Scene_Load&&SceneManager._scene._listWindow.isOpenAndActive()');
   const installation=await browser.evaluate('loadInstallation');
   if(variant==='unreadable')assert.deepEqual(installation,{create:0,extract:0,after:0,reload:0});
@@ -250,7 +251,7 @@ canonicalCase('IT-021', 'native load failure distinguishes unreadable bytes from
 });
 canonicalCase('IT-023', 'native title Continue loads the existing state and leaves save bytes unchanged', { timeout: 60000 }, async t => {
   const browser = await tavern(t), { after } = await commitSacrifice(browser), bytes = await savedBytes(browser);
-  await toTitle(browser); await titleChoice(browser, 'Continuar');
+  await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause");
   assert.deepEqual(await snapshot(browser), after);
   assert.equal(await savedBytes(browser), bytes);
@@ -260,8 +261,8 @@ canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns
  const browser=await tavern(t),records=[];
  async function finishTavernUnit(){
   for(let box=0;box<16;box++){
-   await browser.waitFor("($gameMessage._drylandChoiceFocus?.key==='formation'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&!$gameMessage.hasText())||($gameMessage._drylandChoiceFocus?.key==='hero'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&$gameMessage.choices().includes('Voltar à taverna'))||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)");
-   if(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key==='hero'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&$gameMessage.choices().includes('Voltar à taverna')")){await returnToTavern(browser);return;}
+   await browser.waitFor("($gameMessage._drylandChoiceFocus?.key==='formation'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&!$gameMessage.hasText())||($gameMessage._drylandChoiceFocus?.key==='hero'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&$gameMessage.choices().some(c=>c.includes('choice.conv.back')))||($gameMessage.hasText()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0)");
+   if(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key==='hero'&&SceneManager._scene._choiceListWindow.isOpenAndActive()&&$gameMessage.choices().some(c=>c.includes('choice.conv.back'))")){await returnToTavern(browser);return;}
    if(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key==='formation'&&!$gameMessage.hasText()"))return;
    await browser.press('Enter',13);
   }
@@ -271,35 +272,34 @@ canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns
   assert.equal(await browser.evaluate('$gameSystem.savefileId()'),file);
   await activate(browser,'formation',hero);await activate(browser,'hero',0);await finishTavernUnit();
   for(const index of party){await activate(browser,'formation',index);await activate(browser,'hero',1);await finishTavernUnit();}
-  await activate(browser,'formation',8);await activate(browser,'destinations',route);await choices(browser,'formation');
-  await activate(browser,'formation',10);
+  await openDestinations(browser);await activate(browser,'destinations',route);
   await browser.waitFor("$gameSystem._dryland.campaign.phase==='dungeon_intro'&&$gameTemp._drylandPersistence.status==='saved'&&$gameMessage.hasText()&&SceneManager._scene._messageWindow.pause");
   const record=await browser.evaluate(`StorageManager.loadObject('file'+${file}).then(c=>({file:${file},campaign:c.system._dryland.campaign,ui:c.system._drylandReadUnits,permission:c.system.isExtendedFastForwardDisallowed(),stack:(()=>{const rows=[];for(let i=c.map._interpreter;i;i=i._childInterpreter)rows.push({index:i._index,code:i.currentCommand()?.code});return rows;})()}))`);
   records.push(record);return record;
  }
  const a=await earnDeparture(1,0,[0,1,2],0),aBytes=await savedBytes(browser);
- assert.ok(a.ui.includes(82)&&a.ui.includes(83));
+ assert.ok(a.ui.includes(83)&&a.ui.includes(84),JSON.stringify(a.ui));
  await browser.reopen();
- await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await titleChoice(browser,'Novo jogo');
+ await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await titleChoice(browser, 'choice.title.new_game');await dismissAgeNotice(browser);
  await browser.waitFor('SceneManager._scene instanceof Scene_File&&SceneManager._scene._listWindow.isOpenAndActive()&&!SceneManager._scene.isBusy()');
  assert.equal(await browser.evaluate('SceneManager._scene._listWindow.maxItems()'),20);
  await browser.press('Escape',27);
- await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  assert.equal(await browser.evaluate("StorageManager.loadZip('file1')"),aBytes,'Cancelling the occupied-file selection preserves A');
- await titleChoice(browser,'Novo jogo');await selectFile(browser,2);await pause(browser);
+ await titleChoice(browser, 'choice.title.new_game');await selectFile(browser,2);await pause(browser);
  assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'),[]);
  for(const marker of prologueMarkers){
   await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)})&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0`);
   await browser.press('Enter',13);
  }
  await choices(browser,'formation');const b=await earnDeparture(2,1,[3,4,5],1),bBytes=await savedBytes(browser);
- assert.ok(b.ui.includes(86)&&b.ui.includes(87));assert.equal(b.ui.includes(82),false);
+ assert.ok(b.ui.includes(87)&&b.ui.includes(96),JSON.stringify(b.ui));assert.equal(b.ui.includes(83),false);
  assert.equal(await browser.evaluate("StorageManager.loadZip('file1')"),aBytes);
  assert.notDeepEqual(a.campaign.partyIds,b.campaign.partyIds);
  for(const record of [a,b]){
-  await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
-  await titleChoice(browser,'Continuar',record.file);await pause(browser);
+  await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+  await titleChoice(browser, 'choice.title.continue',record.file);await pause(browser);
   assert.equal(await browser.evaluate('$gameSystem.savefileId()'),record.file);
   assert.deepEqual(await snapshot(browser),record.campaign);
   assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'),record.ui);
@@ -314,7 +314,7 @@ canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns
 canonicalCase('IT-039', 'a restored checkpoint wait with no live Promise resumes normally', { timeout: 60000 }, async t => {
   const browser = await tavern(t); await commitSacrifice(browser);
   assert.equal(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(contents=>{let i=contents.map._interpreter;while(i._childInterpreter)i=i._childInterpreter;return i._waitMode;})"), 'dryland-save');
-  await toTitle(browser); await titleChoice(browser, 'Continuar');
+  await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.hasText() && SceneManager._scene._messageWindow.pause");
   assert.equal(await browser.evaluate("(()=>{for(let i=$gameMap._interpreter;i;i=i._childInterpreter)if(i._waitMode==='dryland-save')return false;return true;})()"), true);
 });
@@ -323,15 +323,15 @@ canonicalCase('IT-044', 'Continue preserves a revealed assignment and RNG instea
   await browser.press('Enter', 13); await pause(browser); await browser.press('Enter', 13);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameSystem._dryland.campaign.position === 2 && $gameTemp._drylandPersistence.status === 'saved' && SceneManager._scene._messageWindow?.pause");
   const state = await snapshot(browser), bytes = await savedBytes(browser);
-  await toTitle(browser); await titleChoice(browser, 'Continuar');
+  await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameSystem._dryland.campaign.position === 2 && SceneManager._scene._messageWindow?.pause");
   assert.deepEqual(await snapshot(browser), state);
   assert.equal(await savedBytes(browser), bytes);
 });
 canonicalCase('IT-045', 'SaveCore replaces an explicitly selected occupied file and cancellation leaves unindexed native bytes intact', { timeout:90000 }, async t => {
  const browser=await tavern(t),oldBytes=await savedBytes(browser),file=await browser.evaluate('$gameSystem.savefileId()');
- await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await titleChoice(browser,'Novo jogo');await selectFile(browser,file);await pause(browser);
+ await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await titleChoice(browser, 'choice.title.new_game');await selectFile(browser,file);await pause(browser);
  await browser.waitFor("$gameMap.mapId()===2&&$gameTemp._drylandPersistence.status==='saved'");
  assert.equal(await browser.evaluate('$gameSystem.savefileId()'),file);
  assert.notEqual(await savedBytes(browser),oldBytes);
@@ -339,9 +339,9 @@ canonicalCase('IT-045', 'SaveCore replaces an explicitly selected occupied file 
  const bytes=await savedBytes(browser);
  // Isolated native-index fault: the provider only advertises its existing index.
  await browser.evaluate("DataManager._globalInfo=[];StorageManager.saveObject('global',[])");
- await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await browser.press('Enter',13);await browser.waitFor('SceneManager._scene instanceof Scene_Save&&SceneManager._scene._listWindow.isOpenAndActive()&&!SceneManager._scene.isBusy()');
- await browser.press('Escape',27);await browser.waitFor("window.$gameMessage?.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.press('Enter',13);await dismissAgeNotice(browser);await browser.waitFor('SceneManager._scene instanceof Scene_Save&&SceneManager._scene._listWindow.isOpenAndActive()&&!SceneManager._scene.isBusy()');
+ await browser.press('Escape',27);await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  assert.equal(await browser.evaluate(`StorageManager.loadZip('file'+${file})`),bytes);
  await browser.screenshot(`${evidence('IT-045')}/cancelled-unindexed-file.png`);
 });
@@ -353,7 +353,7 @@ canonicalCase('IT-059', 'native saves retain serialized map text despite revisio
   if(entry.isDirectory()&&entry.name!=='data')await symlink(source,target);else await cp(source,target,{recursive:true});
  }
  await startServer(t,directory);const browser=await openChrome(t);
- await browser.waitFor("window.$gameMessage?.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  const before=await snapshot(browser);
  // Isolated I/O fixture adds old labels to otherwise current native objects.
@@ -367,16 +367,16 @@ canonicalCase('IT-059', 'native saves retain serialized map text despite revisio
  assert.notEqual(original,revised);
  secondText.parameters[0]=revised;
  await writeFile(eventFile,JSON.stringify(edited));
- await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await titleChoice(browser,'Continuar',1);await pause(browser);
+ await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await titleChoice(browser, 'choice.title.continue',1);await pause(browser);
  assert.deepEqual(await snapshot(browser),before);
  assert.equal(await savedBytes(browser),bytes);
  await browser.press('Enter',13);
- await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(original)})&&SceneManager._scene._messageWindow.pause`);
+ await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(resolve(original))})&&SceneManager._scene._messageWindow.pause`);
  assert.deepEqual(await snapshot(browser),before,'The second box still belongs to the incomplete first prologue passage.');
  assert.equal(await savedBytes(browser),bytes);
  await browser.screenshot(`${evidence('IT-059')}/continued-serialized-map-text.png`);
- await toTitle(browser);await titleChoice(browser,'Novo jogo');await selectFile(browser,2);await pause(browser);
+ await toTitle(browser);await titleChoice(browser, 'choice.title.new_game');await selectFile(browser,2);await pause(browser);
  await browser.press('Enter',13);
  await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(revised)})&&SceneManager._scene._messageWindow.pause`);
  assert.equal(await browser.evaluate('$gameSystem.savefileId()'),2);
@@ -385,8 +385,8 @@ canonicalCase('IT-059', 'native saves retain serialized map text despite revisio
  // An unavailable historical map is an unsupported native structure, not a revision-label rejection.
  await browser.evaluate("StorageManager.loadObject('file1').then(c=>{c.map._mapId=999;return StorageManager.saveObject('file1',c);})");
  const unsupported=await browser.evaluate("StorageManager.loadZip('file1')");
- await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
- await titleChoice(browser,'Continuar',1);
+ await browser.reopen();await browser.waitFor("window.$gameMessage?.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await titleChoice(browser, 'choice.title.continue',1);
  await assert.rejects(browser.waitFor('$gameMap.mapId()===999&&SceneManager._scene.constructor===Scene_Map&&SceneManager._scene.isStarted()&&!SceneManager._scene.isBusy()'),/Map999/);
  assert.equal(await browser.evaluate("StorageManager.loadZip('file1')"),unsupported);
  assert.match(await browser.evaluate('Graphics._errorPrinter.textContent'),/Map999/);
@@ -425,7 +425,7 @@ canonicalCase('IT-062','native Options and saved interpreters retain tavern Coun
   // to inspect the serialized screen/interpreter before ordinary continuation.
   const savedChain=await browser.evaluate(`(()=>{const rows=[];for(let i=$gameMap._interpreter;i;i=i._childInterpreter)rows.push({mapId:i._mapId,eventId:i._eventId,index:i._index});return rows})()`);
   await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');const bytes=await savedBytes(browser);
-  await toTitle(browser);await browser.evaluate('continuityLoaded=false;continuityHold=true;');await titleChoice(browser,'Continuar');
+  await toTitle(browser);await browser.evaluate('continuityLoaded=false;continuityHold=true;');await titleChoice(browser, 'choice.title.continue');
   await browser.waitFor("continuityLoaded&&SceneManager._scene.constructor.name==='Scene_Map'&&SceneManager._scene._messageWindow&&!SceneManager._scene.isBusy()");
   assert.deepEqual(await pictures(),shown,kind+' Continue');assert.deepEqual(await snapshot(browser),before);assert.equal(await savedBytes(browser),bytes);
   const chain=await browser.evaluate(`(()=>{const rows=[];for(let i=$gameMap._interpreter;i;i=i._childInterpreter)rows.push({mapId:i._mapId,eventId:i._eventId,index:i._index});return rows})()`);
@@ -487,14 +487,14 @@ canonicalCase('IT-066','cold native Continue retains saved pictures and cancelli
  await toTitle(browser);
  await browser.evaluate(`ImageManager.clear();
   const start=Bitmap.prototype._startLoading;Bitmap.prototype._startLoading=function(){if(this._url.endsWith('/Dryland_H1.png')&&!window.resumeSavedImage){this._loadingState='loading';window.resumeSavedImage=()=>start.call(this);}else start.call(this);};`);
- await titleChoice(browser,'Continuar');await browser.waitFor('typeof resumeSavedImage==="function"&&$gameMap.mapId()===37');
+ await titleChoice(browser, 'choice.title.continue');await browser.waitFor('typeof resumeSavedImage==="function"&&$gameMap.mapId()===37');
  assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'),'Dryland_H1');
  assert.equal(await browser.evaluate('$gameScreen.picture(92)?.opacity()'),181);
  assert.equal(await browser.evaluate(`StorageManager.loadZip('file${fileId}')`),bytes);
  // Isolated cancellation at the native scene/loading boundary. Nothing rebuilds
  // a visual prefix or schedules a story command when the bitmap later resolves.
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);resumeSavedImage();');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()");
+ await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()");
  assert.equal(await browser.evaluate('$gameMessage.allText().includes("Gorvak")'),false);
  assert.equal(await browser.evaluate(`StorageManager.loadZip('file${fileId}')`),bytes);
  await browser.screenshot(`${evidence('IT-066')}/cancelled-native-load.png`);

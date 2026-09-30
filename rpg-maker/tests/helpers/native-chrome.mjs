@@ -7,6 +7,21 @@ import { setTimeout as delay } from 'node:timers/promises';
 
 const port = process.env.DRYLAND_QA_PORT || '18726';
 if (!/^\d+$/.test(port) || Number(port) < 1024 || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
+// O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir, no idioma escolhido
+// pelo jogador (inglês por padrão). Os testes de conteúdo comparam a prosa em português, então o
+// navegador de teste fixa o idioma em Portuguese e devolve o texto já resolvido por allText(),
+// com a mesma função de tradução do jogo.
+const portugueseMessageText = `(() => {
+  const timer = setInterval(() => {
+    if (!window.Game_Message || !window.TextManager || !TextManager.parseLocalizedText || !window.ConfigManager) return;
+    clearInterval(timer);
+    Object.defineProperty(ConfigManager, 'textLocale', { get: () => 'Portuguese', set: () => {}, configurable: true });
+    const raw = Game_Message.prototype.allText;
+    Game_Message.prototype.allText = function () { return TextManager.parseLocalizedText(raw.call(this)); };
+  }, 5);
+})();`;
+
+const waitMs = Number(process.env.DRYLAND_QA_WAIT_MS) || 20000;
 export const origin = `http://127.0.0.1:${port}/`;
 export const project = path.resolve('rpg-maker/The Dryland Drowned');
 
@@ -110,6 +125,7 @@ export async function openChrome(t, options = {}) {
     await call('Page.enable');
     await call('Network.enable');
     await call('Network.setCacheDisabled', { cacheDisabled: true });
+    await call('Page.addScriptToEvaluateOnNewDocument', { source: portugueseMessageText });
     await call('Emulation.setDeviceMetricsOverride', { width: options.width || 1280, height: options.height || 720, deviceScaleFactor: 1, mobile: false });
     if (typeof options.reduced === 'boolean') await call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: options.reduced ? 'reduce' : 'no-preference' }] });
   }
@@ -120,7 +136,7 @@ export async function openChrome(t, options = {}) {
     return response.result.value;
   }
   async function waitFor(expression) {
-    const deadline = Date.now() + 20000;
+    const deadline = Date.now() + waitMs;
     while (Date.now() < deadline) {
       if (exceptions.length) throw new Error(JSON.stringify(exceptions));
       const nativeError = await evaluate('window.Graphics?._errorPrinter?.textContent || ""');
@@ -152,8 +168,30 @@ export async function openChrome(t, options = {}) {
   return { evaluate, waitFor, press, screenshot, version, exceptions, requests, responses, call, reopen };
 }
 
+const fileList = 'SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()';
+const ageNotice = "window.$gameMap?.mapId() === 1 && $gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0";
+
+// Novo jogo mostra o aviso de idade antes da lista de arquivos; Continuar vai direto para a lista.
+export async function dismissAgeNotice(browser) {
+  await browser.waitFor(`(${fileList}) || (${ageNotice})`);
+  if (await browser.evaluate(ageNotice)) await browser.press('Enter', 13);
+}
+
+// Escolhe uma entrada do menu do título pela chave (choice.title.*). O cursor começa em Novo jogo.
+export async function chooseTitle(browser, key) {
+  const index = await browser.evaluate(`$gameMessage.choices().findIndex(c => c.includes(${JSON.stringify(key)}))`);
+  if (index < 0) throw new Error(`Title has no ${key}`);
+  for (let step = 0; step < 6; step++) {
+    const current = await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
+    if (current === index) break;
+    await browser.press(current < index ? 'ArrowDown' : 'ArrowUp', current < index ? 40 : 38);
+  }
+  await browser.press('Enter', 13);
+}
+
 export async function selectFile(browser, fileId) {
-  await browser.waitFor('SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+  await dismissAgeNotice(browser);
+  await browser.waitFor(fileList);
   if (fileId !== undefined) {
     for (let step = 0; step < 25; step++) {
       const current = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');

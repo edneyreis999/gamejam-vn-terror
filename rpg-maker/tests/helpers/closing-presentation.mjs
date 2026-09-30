@@ -93,7 +93,7 @@ export async function creditsReady(browser) {
   assert.equal((await campaignSnapshot(browser)).phase,'campaign_complete');
 }
 export async function titleReady(browser) {
-  await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+  await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
 }
 export async function frames(browser, count) {
   await browser.evaluate(`new Promise(resolve=>{let n=${count};const tick=()=>--n<=0?resolve():requestAnimationFrame(tick);requestAnimationFrame(tick);})`);
