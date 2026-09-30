@@ -23,7 +23,8 @@ const portugueseMessageText = `(() => {
 
 const waitMs = Number(process.env.DRYLAND_QA_WAIT_MS) || 20000;
 export const origin = `http://127.0.0.1:${port}/`;
-export const project = path.resolve('rpg-maker/The Dryland Drowned');
+// DRYLAND_QA_PROJECT aponta a suíte para um build exportado (ex.: dist/ podado por prune-build).
+export const project = path.resolve(process.env.DRYLAND_QA_PROJECT || 'rpg-maker/The Dryland Drowned');
 
 export async function startServer(t, directory = project) {
   const server = spawn('python3', ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { stdio: ['ignore', 'pipe', 'pipe'] });

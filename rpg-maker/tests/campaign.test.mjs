@@ -1,5 +1,4 @@
 // One entry keeps native suites serial on the documented, stable local origin.
-import './suites/native-boot.mjs';
 import './suites/content.mjs';
 import './suites/formation.mjs';
 import './suites/encounters.mjs';

@@ -2,6 +2,8 @@
   "name": "gamejam-vn-terror",
   "private": true,
   "scripts": {
-    "start": "node rpg-maker/tools/start-game.mjs"
+    "start": "node rpg-maker/tools/start-game.mjs",
+    "prune-build": "node rpg-maker/tools/prune-build.mjs",
+    "verify-build": "node rpg-maker/tools/verify-build.mjs"
   }
 }

@@ -31,6 +31,7 @@
   8. Quem conserta quando quebrar, e em quanto tempo?
 - Testes não comparam texto traduzido: usam a chave (`$[chave]`) ou o valor lido de `Languages.tsv`. `$gameMessage.choices()` guarda a chave crua, não o texto exibido.
 - Teste vermelho: descubra a causa antes de agir. Se o jogo está certo e o teste está desatualizado, corrija o teste quando ele protege regra ou persistência. Exclua apenas o que reprova as perguntas acima (aparência, posição, texto de botão, layout em iteração) e diga no commit qual pergunta reprovou. Nunca exclua só porque está vermelho.
+- Teste só lê o que o jogo carrega: nada de plugin desligado, asset sem uso ou arquivo de editor, porque o build publicado é podado (`npm run prune-build`) e a suíte roda contra ele (`npm run verify-build`). Teste que só prova a infraestrutura de teste (servidor, navegador) não protege o jogo: toda a suíte já falha se ela quebrar.
 - Rode a suíte com `node --test --test-concurrency=1 "rpg-maker/tests/**/*.test.mjs"`: todos os arquivos usam a porta 18726, então rodar em paralelo falha com "Address already in use". Se sobrar um `http.server` órfão, encerre-o antes de rodar de novo.
 
 # Planejamento e entregas
