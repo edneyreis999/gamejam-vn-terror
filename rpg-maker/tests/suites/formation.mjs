@@ -393,7 +393,7 @@ canonicalCase('IT-060', 'default asynchronous bust loading continues native text
   assert.deepEqual(await snapshot(browser), before);
   // Explicit interruption fixture, not a directed player journey.
   await browser.evaluate('$gameMap._interpreter.clear(); SceneManager.goto(Scene_Title); window.resumeDialogueImage();');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && ImageManager.isReady()");
   assert.equal(await browser.evaluate('[60,61,62,63,64,65].every(id => !$gameScreen.picture(id))'), true);
   assert.equal(await browser.evaluate('$gameMessage.allText().includes("Gorvak")'), false);
   assert.equal(await browser.evaluate(`StorageManager.loadZip('file${savedFile}')`), saved);

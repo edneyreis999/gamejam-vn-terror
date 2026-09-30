@@ -77,7 +77,7 @@ export async function pause(browser) {
 export async function tavern(t, options = {}) {
   await startServer(t);
   const browser = await openChrome(t, options);
-  await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("window.$gameMessage && $gameMessage.choices().some(c=>c.includes('choice.title.new_game')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   await browser.press('Enter', 13);await selectFile(browser,1);
   for (const marker of prologueMarkers) {
     await browser.waitFor(`$gameMessage.allText().includes(${JSON.stringify(marker)}) && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0`);

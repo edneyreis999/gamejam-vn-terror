@@ -42,8 +42,8 @@ export async function passage(browser, id) {
 export async function continueSave(browser) {
   await browser.waitFor("$gameTemp._drylandPersistence?.status === 'saved'");
   await browser.evaluate('$gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  assert.equal(await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()]'), 'Continuar');
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  assert.ok(await browser.evaluate("$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()].includes('choice.title.continue')"));
   await browser.press('Enter', 13);await selectFile(browser);
 }
 export async function observeDiscovery(browser) {

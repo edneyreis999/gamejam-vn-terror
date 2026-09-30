@@ -34,9 +34,9 @@ canonicalCase('IT-036', 'manifest rejects empty, missing, duplicate or mismatche
     [manifest, [...ids.slice(1), 'UT-999']]]) assert.throws(() => assertRegistrations(contract, registrations));
 });
 
-async function firstPrologue(browser, label = 'Jogar') {
-  await browser.waitFor(`window.$gameMessage && $gameMessage.choices().includes(${JSON.stringify(label)}) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()`);
-  const index = await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(label)})`);
+async function firstPrologue(browser, label = 'choice.title.new_game') {
+  await browser.waitFor(`window.$gameMessage && $gameMessage.choices().some(c=>c.includes(${JSON.stringify(label)})) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()`);
+  const index = await browser.evaluate(`$gameMessage.choices().findIndex(c=>c.includes(${JSON.stringify(label)}))`);
   for (let step = 0; step < index; step++) await browser.press('ArrowDown', 40);
   await browser.press('Enter', 13);
   await selectFile(browser,1);
@@ -109,7 +109,7 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   edited.events[1].pages[0].list.find(c => c.code === 401).parameters[0] = 'Texto salvo no evento nativo para verificar a releitura.';
   await writeFile(mapFile, JSON.stringify(edited));
   await browser.call('Page.reload', { ignoreCache: true });
-  await firstPrologue(browser, 'Novo jogo');
+  await firstPrologue(browser, 'choice.title.new_game');
   assert.equal(await browser.evaluate('$gameMessage.allText()'), 'Texto salvo no evento nativo para verificar a releitura.\ncontragosto de Irati. ');
   assert.equal(hash(await readFile(pluginFile)), pluginHash);
   await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-02/IT-035/edited-native-text.png');
@@ -164,7 +164,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  // without introducing a player save command.
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  assert.equal(await browser.evaluate('$gameMessage.allText()'),'Caixa técnica inserida — mesma autoria.');
  await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===39.6');
@@ -172,7 +172,7 @@ canonicalCase('IT-067','editing native layout and inserting text boxes updates p
  assert.equal(await browser.evaluate('JSON.stringify($gameSystem._dryland.campaign)'),before);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title)');
- await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  await browser.waitFor('$gameScreen.picture(60)?.x()===342&&$gameScreen.picture(60)?.scaleX()===80');
  assert.equal(await browser.evaluate('$gameMessage.speakerName()'),'Elowen');
@@ -247,7 +247,7 @@ canonicalCase('IT-069','artist parameters and additional native effects survive 
  assert.deepEqual(await snapshot(),before,'Options retains native picture state');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);
  await browser.evaluate('DataManager.saveGame($gameSystem.savefileId())');await browser.reopen();
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Continuar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);await browser.waitFor(settled);
  assert.deepEqual(await snapshot(),before,'Native Continue retains saved picture state');
  assert.equal(await browser.evaluate('JsonEx.stringify($gameScreen.picture(92))'),extra);

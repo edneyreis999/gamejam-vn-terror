@@ -148,7 +148,7 @@ canonicalCase('IT-010', 'interrupting the first return consumes absence and neve
   // The accepted return already saved the native absence switches.
   // Continue at that checkpoint shows empty places, without a second fade.
   await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   await browser.press('Enter', 13); await selectFile(browser,1); await choices(browser, 'formation');
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);

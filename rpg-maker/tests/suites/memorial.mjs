@@ -189,7 +189,7 @@ canonicalCase('IT-022','native terminal Continue repeatedly replays the saved ou
     const count=await browser.evaluate('closingLog.saves.length');
     for(let repeat=0;repeat<2;repeat++){
       await titleReady(browser);
-      assert.equal(await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()]'),'Continuar');
+      assert.ok(await browser.evaluate("$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()].includes('choice.title.continue')"));
       await browser.press('Enter',13);await selectFile(browser,fileId);await closingReady(browser);
       assert.deepEqual(await campaignSnapshot(browser),terminal);
       const replay=await finishNativeClosing(browser);await creditsReady(browser);

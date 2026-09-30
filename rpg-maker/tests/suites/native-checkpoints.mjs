@@ -62,7 +62,7 @@ canonicalCase('IT-014','all nine authored semantic checkpoints save and install 
  let firstFileBytes;
  for(const file of [1,2]){
  if(file===2){await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');await titleReady(browser);}
- const newGameIndex=await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(file===1?'Jogar':'Novo jogo')})`);assert.ok(newGameIndex>=0);
+ const newGameIndex=await browser.evaluate(`$gameMessage.choices().findIndex(c=>c.includes('choice.title.new_game'))`);assert.ok(newGameIndex>=0);
  while(await browser.evaluate('SceneManager._scene._choiceListWindow.index()')!==newGameIndex)await browser.press('ArrowDown',40);
  await arm(browser,'new_campaign');await browser.press('Enter',13);await selectFile(browser,file);evidence.push(await roundTrip(browser,'new_campaign',{advance:true}));
  let prepared=fixtures.formation;for(const heroId of ['H1','H2','H3'])prepared=accepted(prepared,'TOGGLE_HERO',{heroId});prepared=accepted(prepared,'SELECT_DESTINATION',{dungeonId:'physical'});

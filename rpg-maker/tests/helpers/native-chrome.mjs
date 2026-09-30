@@ -7,6 +7,23 @@ import { setTimeout as delay } from 'node:timers/promises';
 
 const port = process.env.DRYLAND_QA_PORT || '18726';
 if (!/^\d+$/.test(port) || Number(port) < 1024 || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
+// O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir. Os testes de conteúdo
+// comparam a prosa em português, então o navegador de teste devolve o texto já resolvido em PT
+// por allText(), com a mesma função de tradução do jogo. Não altera o idioma do jogador.
+const portugueseMessageText = `(() => {
+  const timer = setInterval(() => {
+    if (!window.Game_Message || !window.TextManager || !TextManager.parseLocalizedText || !window.ConfigManager) return;
+    clearInterval(timer);
+    const raw = Game_Message.prototype.allText;
+    Game_Message.prototype.allText = function () {
+      const previous = ConfigManager.textLocale;
+      ConfigManager.textLocale = 'Portuguese';
+      try { return TextManager.parseLocalizedText(raw.call(this)); } finally { ConfigManager.textLocale = previous; }
+    };
+  }, 5);
+})();`;
+
+const waitMs = Number(process.env.DRYLAND_QA_WAIT_MS) || 20000;
 export const origin = `http://127.0.0.1:${port}/`;
 export const project = path.resolve('rpg-maker/The Dryland Drowned');
 
@@ -110,6 +127,7 @@ export async function openChrome(t, options = {}) {
     await call('Page.enable');
     await call('Network.enable');
     await call('Network.setCacheDisabled', { cacheDisabled: true });
+    await call('Page.addScriptToEvaluateOnNewDocument', { source: portugueseMessageText });
     await call('Emulation.setDeviceMetricsOverride', { width: options.width || 1280, height: options.height || 720, deviceScaleFactor: 1, mobile: false });
     if (typeof options.reduced === 'boolean') await call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: options.reduced ? 'reduce' : 'no-preference' }] });
   }
@@ -120,7 +138,7 @@ export async function openChrome(t, options = {}) {
     return response.result.value;
   }
   async function waitFor(expression) {
-    const deadline = Date.now() + 20000;
+    const deadline = Date.now() + waitMs;
     while (Date.now() < deadline) {
       if (exceptions.length) throw new Error(JSON.stringify(exceptions));
       const nativeError = await evaluate('window.Graphics?._errorPrinter?.textContent || ""');
@@ -152,8 +170,14 @@ export async function openChrome(t, options = {}) {
   return { evaluate, waitFor, press, screenshot, version, exceptions, requests, responses, call, reopen };
 }
 
+const fileList = 'SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()';
+const ageNotice = "window.$gameMap?.mapId() === 1 && $gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0";
+
 export async function selectFile(browser, fileId) {
-  await browser.waitFor('SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()');
+  // Novo jogo mostra o aviso de idade antes da lista de arquivos; Continuar vai direto para a lista.
+  await browser.waitFor(`(${fileList}) || (${ageNotice})`);
+  if (await browser.evaluate(ageNotice)) await browser.press('Enter', 13);
+  await browser.waitFor(fileList);
   if (fileId !== undefined) {
     for (let step = 0; step < 25; step++) {
       const current = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');

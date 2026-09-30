@@ -21,7 +21,7 @@ canonicalCase('IT-028','native audio preferences begin at40 clamp through keyboa
  }
  const configured=await volumes(browser);assert.deepEqual(configured,{bgmVolume:90,bgsVolume:80,meVolume:70,seVolume:60});
  await browser.screenshot('docs/qa/evidence/init-rpg-maker-mz/task-11/IT-028/audio-options.png');
- await browser.press('Escape',27);await browser.waitFor("SceneManager._scene instanceof Scene_Map&&$gameMap.mapId()===1&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.press('Escape',27);await browser.waitFor("SceneManager._scene instanceof Scene_Map&&$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  const stored=await browser.evaluate("StorageManager.loadObject('config')");for(const key of keys)assert.equal(stored[key],configured[key]);
  if(await browser.evaluate('SceneManager._scene._choiceListWindow.index()')!==0)await browser.press('ArrowUp',38);
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);assert.deepEqual(await volumes(browser),configured);

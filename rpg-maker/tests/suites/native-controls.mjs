@@ -188,7 +188,7 @@ canonicalCase('IT-065','installed FAST completes authored Council units and revo
 canonicalCase('IT-068','the authored 2x2 fixture uses native calls, individual focus, HIDE and clean exit/repeat',{timeout:180000},async t=>{
  const prepared=await prepareBustFixture(t,'fixture-native-2x2-20260911',appendEnsemble);
  await startServer(t,prepared.directory);const browser=await openChrome(t);
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);await installClosing(browser,councilState());await pause(browser);
  // Prepared integration input: disable only new map autoruns, then run the
  // authored native common event on the real map interpreter. No story commit.
@@ -256,7 +256,7 @@ canonicalCase('IT-077','FAST-only console executes native text and waits, with c
   ]});return id;
  });
  await startServer(t,prepared.directory);const browser=await openChrome(t);
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  // Prepared isolated native interpreter: no campaign transition is invoked.
  await browser.evaluate('Game_Map.prototype.setupStartingEvent=function(){return false;};$gameMap._interpreter.clear();SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();');
@@ -356,7 +356,7 @@ canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appea
  for(const variant of [{width:1280,height:720,reduced:false},{width:1920,height:1080,reduced:true}]){
   await t.test(JSON.stringify(variant),async t=>{
    const browser=await openChrome(t,variant);
-   await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+   await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
    const screen=await browser.evaluate('({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,scale:visualViewport.scale,canvas:Graphics.app.view.getBoundingClientRect().toJSON(),motion:matchMedia("(prefers-reduced-motion: reduce)").matches})');
    assert.ok(screen.width>=1280&&screen.height>=720,JSON.stringify(screen));
    assert.equal(screen.dpr,1,'The desktop fixture uses its declared raster scale');
