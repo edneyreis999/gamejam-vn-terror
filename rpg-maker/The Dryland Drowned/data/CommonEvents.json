@@ -27132,8 +27132,33 @@
                 ]
             },
             {
-                "code": 241,
+                "code": 111,
                 "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(34) === 'physical'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
+                    {
+                        "name": "Dryland_Church_Danger",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 2,
                 "parameters": [
                     {
                         "name": "Dungeon2",
@@ -27142,6 +27167,11 @@
                         "pan": 0
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 111,
