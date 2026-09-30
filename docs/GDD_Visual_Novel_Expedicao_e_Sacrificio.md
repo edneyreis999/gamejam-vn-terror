@@ -1289,6 +1289,8 @@ Na versão descrita, essa história aparece somente por uma ou duas referências
 
 ### 19.4 Áudio
 
+**Epílogos e créditos — Confirmado em 2026-09-30:** ao começar os epílogos narrados por Rheed, encerrar qualquer tema do desfecho ainda tocando e iniciar `(Chillout) The Well` em repetição, no volume de evento 35. Manter a faixa entre os epílogos e durante os créditos, respeitando o volume do jogador. Ver [spec incremental](../planos/tasks/epilogues-the-well/spec.md).
+
 **Música da escolha final — Confirmado em 2026-09-30:** usar uma música de tensão e pressão enquanto o jogador decide, sem acrescentar limite de tempo. A seleção delegada é `(Tense) Undead Killing Spree`, em repetição, com entrada suave e volume controlado. Resolve a pendência de música da escolha indicada abaixo; preservar The Last Key na revelação e os temas dos desfechos. Ver [spec incremental](../planos/tasks/final-choice-pressure/spec.md).
 
 **Revelação após o Vilarejo — Confirmado em 2026-09-30:** após resolver a última armadilha, usar uma faixa de tensão durante toda a revelação/Conselho, até aparecer a escolha final. A seleção delegada é `(Tense) The Last Key`, em repetição; substitui também The Well nas narrações desse trecho. A faixa da revelação termina nessa tela e dá lugar à música da escolha definida na atualização acima. Preservar as trilhas dos desfechos. Ver [spec incremental](../planos/tasks/revelation-last-key/spec.md).

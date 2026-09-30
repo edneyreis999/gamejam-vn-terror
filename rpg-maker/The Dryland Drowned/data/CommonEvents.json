@@ -27024,6 +27024,60 @@
                 "indent": 0,
                 "parameters": [
                     12,
+                    "$gameVariables.value(31) === 'epilogue'"
+                ]
+            },
+            {
+                "code": 249,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 65,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "Dryland_Opening_TheWell",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 245,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 60,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
                     "$gameVariables.value(31) === 'council'"
                 ]
             },
