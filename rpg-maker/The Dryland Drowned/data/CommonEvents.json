@@ -4802,7 +4802,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"10\",\"11\",\"12\"]"
+                        "PictureID:arraynum": "[\"10\",\"11\",\"12\",\"72\",\"73\",\"74\",\"75\",\"76\",\"77\",\"78\",\"79\",\"80\"]"
                     }
                 ]
             },
@@ -7817,7 +7817,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"20\",\"21\",\"22\",\"23\",\"24\",\"25\",\"26\",\"27\",\"30\",\"31\",\"32\",\"33\",\"34\",\"35\",\"36\",\"37\"]"
+                        "PictureID:arraynum": "[\"20\",\"21\",\"22\",\"23\",\"24\",\"25\",\"26\",\"27\",\"30\",\"31\",\"32\",\"33\",\"34\",\"35\",\"36\",\"37\",\"72\",\"73\",\"74\",\"75\",\"76\",\"77\",\"78\",\"79\",\"80\"]"
                     }
                 ]
             },
@@ -7939,16 +7939,158 @@
                 "code": 231,
                 "indent": 0,
                 "parameters": [
-                    72,
-                    "Dryland_Destination_physical",
+                    82,
+                    "Dryland_DestinationGroup",
                     0,
                     0,
                     110,
                     120,
-                    21.484375,
-                    18.06640625,
+                    100,
+                    100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Identifica a imagem 82 como interface: “Destinos — Painel — 82”. Ela acompanha"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 0,
+                "parameters": [
+                    "o HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "BindInterfacePicture",
+                    "BindInterfacePicture",
+                    {
+                        "picture": "82",
+                        "name": "Destinos — Painel — 82"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    83,
+                    "Dryland_DestinationGroup",
+                    0,
+                    0,
+                    475,
+                    120,
+                    100,
+                    100,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Identifica a imagem 83 como interface: “Destinos — Painel — 83”. Ela acompanha"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 0,
+                "parameters": [
+                    "o HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "BindInterfacePicture",
+                    "BindInterfacePicture",
+                    {
+                        "picture": "83",
+                        "name": "Destinos — Painel — 83"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    84,
+                    "Dryland_DestinationGroup",
+                    0,
+                    0,
+                    840,
+                    120,
+                    100,
+                    100,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Identifica a imagem 84 como interface: “Destinos — Painel — 84”. Ela acompanha"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 0,
+                "parameters": [
+                    "o HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "BindInterfacePicture",
+                    "BindInterfacePicture",
+                    {
+                        "picture": "84",
+                        "name": "Destinos — Painel — 84"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    72,
+                    "Dryland_Destination_physical",
+                    0,
+                    0,
+                    0,
+                    0,
+                    20.625,
+                    20.625,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"72\"]",
+                        "TargetID:num": "82"
+                    }
                 ]
             },
             {
@@ -7986,12 +8128,25 @@
                     "Dryland_DestinationCard",
                     0,
                     0,
-                    110,
-                    320,
+                    0,
+                    200,
                     100,
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"75\"]",
+                        "TargetID:num": "82"
+                    }
                 ]
             },
             {
@@ -8051,12 +8206,25 @@
                     "Dryland_DestinationLabel",
                     0,
                     0,
-                    110,
-                    546,
+                    0,
+                    426,
                     100,
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"78\"]",
+                        "TargetID:num": "82"
+                    }
                 ]
             },
             {
@@ -8094,12 +8262,25 @@
                     "Dryland_Destination_supernatural",
                     0,
                     0,
-                    475,
-                    120,
-                    21.484375,
-                    18.06640625,
+                    0,
+                    0,
+                    20.625,
+                    20.625,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"73\"]",
+                        "TargetID:num": "83"
+                    }
                 ]
             },
             {
@@ -8137,12 +8318,25 @@
                     "Dryland_DestinationCard",
                     0,
                     0,
-                    475,
-                    320,
+                    0,
+                    200,
                     100,
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"76\"]",
+                        "TargetID:num": "83"
+                    }
                 ]
             },
             {
@@ -8202,12 +8396,25 @@
                     "Dryland_DestinationLabel",
                     0,
                     0,
-                    475,
-                    546,
+                    0,
+                    426,
                     100,
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"79\"]",
+                        "TargetID:num": "83"
+                    }
                 ]
             },
             {
@@ -8245,12 +8452,25 @@
                     "Dryland_Destination_final",
                     0,
                     0,
-                    840,
-                    120,
-                    21.484375,
-                    18.06640625,
+                    0,
+                    0,
+                    20.625,
+                    20.625,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"74\"]",
+                        "TargetID:num": "84"
+                    }
                 ]
             },
             {
@@ -8288,12 +8508,25 @@
                     "Dryland_DestinationCard",
                     0,
                     0,
-                    840,
-                    320,
+                    0,
+                    200,
                     100,
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"77\"]",
+                        "TargetID:num": "84"
+                    }
                 ]
             },
             {
@@ -8353,12 +8586,25 @@
                     "Dryland_DestinationLabel",
                     0,
                     0,
-                    840,
-                    546,
+                    0,
+                    426,
                     100,
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"80\"]",
+                        "TargetID:num": "84"
+                    }
                 ]
             },
             {
@@ -8695,7 +8941,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"72\"]",
+                        "PictureIDs:arraynum": "[\"82\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -8943,7 +9189,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"73\"]",
+                        "PictureIDs:arraynum": "[\"83\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -9191,7 +9437,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"74\"]",
+                        "PictureIDs:arraynum": "[\"84\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -9282,9 +9528,9 @@
                 "indent": 0,
                 "parameters": [
                     [
-                        "\\V[173]<Bind Picture: 72><Enable Switch: 31><Hide Choice Window>",
-                        "\\V[174]<Bind Picture: 73><Enable Switch: 32><Hide Choice Window>",
-                        "\\V[175]<Bind Picture: 74><Enable Switch: 33><Hide Choice Window>",
+                        "\\V[173]<Bind Picture: 82><Enable Switch: 31><Hide Choice Window>",
+                        "\\V[174]<Bind Picture: 83><Enable Switch: 32><Hide Choice Window>",
+                        "\\V[175]<Bind Picture: 84><Enable Switch: 33><Hide Choice Window>",
                         "$[choice.dest.close]<Bind Picture: 81>"
                     ],
                     -2,
@@ -9298,7 +9544,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "\\V[173]<Bind Picture: 72><Enable Switch: 31><Hide Choice Window>"
+                    "\\V[173]<Bind Picture: 82><Enable Switch: 31><Hide Choice Window>"
                 ]
             },
             {
@@ -9476,7 +9722,7 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "\\V[174]<Bind Picture: 73><Enable Switch: 32><Hide Choice Window>"
+                    "\\V[174]<Bind Picture: 83><Enable Switch: 32><Hide Choice Window>"
                 ]
             },
             {
@@ -9654,7 +9900,7 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "\\V[175]<Bind Picture: 74><Enable Switch: 33><Hide Choice Window>"
+                    "\\V[175]<Bind Picture: 84><Enable Switch: 33><Hide Choice Window>"
                 ]
             },
             {
