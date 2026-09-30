@@ -304,7 +304,7 @@ lover.supernatural.warning.florai	Look for the other piece. And distrust any voi
 reward.supernatural.narrator	You received the elven piece of the map.	Você recebeu a peça élfica do mapa.
 lover.supernatural.second.florai	If Pérola spoke first, then someone knows the order of our steps and is waiting for the reunion.	Se Pérola falou primeiro, então alguém conhece a ordem dos nossos passos e espera pelo reencontro.
 sacrifice.warning	This choice cannot be undone.<br>The first person you select will die at once to open the passage.<br>There will be no confirmation and no turning back.	A escolha é irreversível. A primeira pessoa ativada morrerá imediatamente para abrir a passagem. Não haverá confirmação ou retorno.
-ui.sacrifice.title	This choice cannot be undone	A escolha é irreversível
+ui.sacrifice.title	Choose a hero to save the group	Escolha um herói para salvar o grupo
 choice.sacrifice	Sacrifice	Sacrificar
 conv.select	Select	Selecionar
 conv.remove	Remove from party	Retirar do grupo

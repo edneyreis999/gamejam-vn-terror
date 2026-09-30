@@ -4795,6 +4795,18 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
+                    {
+                        "PictureID:arraynum": "[\"10\",\"11\",\"12\"]"
+                    }
+                ]
+            },
+            {
                 "code": 231,
                 "indent": 0,
                 "parameters": [
@@ -11689,28 +11701,6 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"50\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.sacrifice] \\\\V[189]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
                     "VisuMZ_2_PictureChoices",
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
@@ -11738,28 +11728,6 @@
                 "code": 357,
                 "indent": 1,
                 "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"51\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.sacrifice] \\\\V[190]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
                     "VisuMZ_2_PictureChoices",
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
@@ -11781,28 +11749,6 @@
                 "parameters": [
                     12,
                     "$gameSwitches.value(37)"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "VisuMZ_1_MessageCore",
-                    "PictureTextChange",
-                    "PictureTextChange",
-                    {
-                        "PictureIDs:arraynum": "[\"52\"]",
-                        "Padding:eval": "8",
-                        "upperleft:json": "\"\"",
-                        "up:json": "\"\"",
-                        "upperright:json": "\"\"",
-                        "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.sacrifice] \\\\V[191]\"",
-                        "right:json": "\"\"",
-                        "lowerleft:json": "\"\"",
-                        "down:json": "\"\"",
-                        "lowerright:json": "\"\""
-                    }
                 ]
             },
             {
@@ -11856,7 +11802,11 @@
                 "code": 102,
                 "indent": 0,
                 "parameters": [
-                    ["$[choice.sacrifice] \\V[189]<Bind Picture: 50><Show Switch: 35><Hide Choice Window>","$[choice.sacrifice] \\V[190]<Bind Picture: 51><Show Switch: 36><Hide Choice Window>","$[choice.sacrifice] \\V[191]<Bind Picture: 52><Show Switch: 37><Hide Choice Window>"],
+                    [
+                        "$[choice.sacrifice] \\V[189]<Bind Picture: 50><Show Switch: 35><Hide Choice Window>",
+                        "$[choice.sacrifice] \\V[190]<Bind Picture: 51><Show Switch: 36><Hide Choice Window>",
+                        "$[choice.sacrifice] \\V[191]<Bind Picture: 52><Show Switch: 37><Hide Choice Window>"
+                    ],
                     -1,
                     0,
                     2,
@@ -12214,6 +12164,74 @@
                 "parameters": []
             },
             {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Encerra o palco: o desfoque, os cartões e os heróis anexados saem antes da próxima etapa."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
+                    {
+                        "PictureID:arraynum": "[\"10\",\"11\",\"12\"]"
+                    }
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    2
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    10
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    11
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    12
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    50
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    51
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 0,
+                "parameters": [
+                    52
+                ]
+            },
+            {
                 "code": 0,
                 "indent": 0,
                 "parameters": []
@@ -12299,6 +12317,511 @@
                 ]
             },
             {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Fundo desfocado: cópia borrada da ilustração do encontro atual (variável 32),"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 0,
+                "parameters": [
+                    "por cima da imagem 1. O HIDE a oculta e mostra a ilustração nítida."
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A1'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A1_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A2'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A2_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A3'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A3_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A4'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A4_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A5'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A5_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A6'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A6_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A7'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A7_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'A8'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_A8_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B1'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B1_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B2'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B2_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B3'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B3_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B4'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B4_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B5'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B5_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B6'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B6_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B7'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B7_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(32) === 'B8'"
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    2,
+                    "Dryland_Encounter_B8_blur",
+                    1,
+                    0,
+                    640,
+                    360,
+                    160,
+                    160,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 108,
+                "indent": 0,
+                "parameters": [
+                    "Identifica a imagem 2 como interface: “Sacrifício — Palco de candidatos — 2”. Ela acompanha o"
+                ]
+            },
+            {
+                "code": 408,
+                "indent": 0,
+                "parameters": [
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_Presentation",
+                    "BindInterfacePicture",
+                    "BindInterfacePicture",
+                    {
+                        "picture": "2",
+                        "name": "Sacrifício — Palco de candidatos — 2"
+                    }
+                ]
+            },
+            {
                 "code": 111,
                 "indent": 0,
                 "parameters": [
@@ -12314,7 +12837,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + 3.3547351524879616"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12324,24 +12847,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -3.3547351524879616"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H1",
-                    1,
-                    1,
-                    44,
-                    45,
-                    20.331728196896737,
-                    20.331728196896737,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12349,12 +12856,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12364,21 +12871,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12391,6 +12891,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H1",
+                    1,
+                    0,
+                    5,
+                    90,
+                    30.09,
+                    30.09,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -12415,7 +12944,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + -33.42893835616439"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12425,24 +12954,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 30.58219178082192"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H2",
-                    1,
-                    1,
-                    44,
-                    45,
-                    16.267123287671232,
-                    16.267123287671232,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12450,12 +12963,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12465,21 +12978,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12492,6 +12998,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H2",
+                    1,
+                    0,
+                    1,
+                    182,
+                    34.45,
+                    34.45,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -12516,7 +13051,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + -1.5526046986721145"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12526,24 +13061,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 6.695607763023494"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H3",
-                    1,
-                    1,
-                    44,
-                    45,
-                    19.40755873340143,
-                    19.40755873340143,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12551,12 +13070,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12566,21 +13085,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12593,6 +13105,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H3",
+                    1,
+                    0,
+                    0,
+                    165,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -12617,7 +13158,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + 12.556281771968045"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12627,24 +13168,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -28.838053740014523"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H4",
-                    1,
-                    1,
-                    44,
-                    45,
-                    13.798111837327523,
-                    13.798111837327523,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12652,12 +13177,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12667,21 +13192,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12694,6 +13212,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H4",
+                    1,
+                    0,
+                    0,
+                    306,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -12718,7 +13265,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + 8.943239501615137"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12728,24 +13275,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 0.9644670050761421"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H5",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.53576372865713,
-                    17.53576372865713,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12753,12 +13284,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12768,21 +13299,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12795,6 +13319,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H5",
+                    1,
+                    0,
+                    1,
+                    171,
+                    33.72,
+                    33.72,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -12819,7 +13372,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + 8.105504587155965"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12829,24 +13382,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -4.096330275229358"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H6",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.431192660550458,
-                    17.431192660550458,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12854,12 +13391,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12869,21 +13406,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12896,6 +13426,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H6",
+                    1,
+                    0,
+                    1,
+                    166,
+                    34.23,
+                    34.23,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -12920,7 +13479,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + 24.969921332716332"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -12930,24 +13489,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 60.57843590930125"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H7",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.58445164275798,
-                    17.58445164275798,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -12955,12 +13498,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -12970,21 +13513,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -12997,6 +13533,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H7",
+                    1,
+                    0,
+                    -1,
+                    182,
+                    34.27,
+                    34.27,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -13021,7 +13586,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(39) + -14.262210796915166"
+                    "640 + (0 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13031,24 +13596,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 3.4190231362467864"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    10,
-                    "Dryland_H8",
-                    1,
-                    1,
-                    44,
-                    45,
-                    19.53727506426735,
-                    19.53727506426735,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13056,12 +13605,12 @@
                 "indent": 1,
                 "parameters": [
                     50,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    39,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13071,21 +13620,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 50 como interface: “Sacrifício — Palco de candidatos — 50”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "50”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13098,6 +13640,35 @@
                     {
                         "picture": "50",
                         "name": "Sacrifício — Palco de candidatos — 50"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    10,
+                    "Dryland_H8",
+                    1,
+                    0,
+                    -7,
+                    164,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"10\"]",
+                        "TargetID:num": "50"
                     }
                 ]
             },
@@ -13122,7 +13693,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + 3.3547351524879616"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13132,24 +13703,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -3.3547351524879616"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H1",
-                    1,
-                    1,
-                    44,
-                    45,
-                    20.331728196896737,
-                    20.331728196896737,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13157,12 +13712,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13172,21 +13727,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13199,6 +13747,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H1",
+                    1,
+                    0,
+                    5,
+                    90,
+                    30.09,
+                    30.09,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13223,7 +13800,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + -33.42893835616439"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13233,24 +13810,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 30.58219178082192"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H2",
-                    1,
-                    1,
-                    44,
-                    45,
-                    16.267123287671232,
-                    16.267123287671232,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13258,12 +13819,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13273,21 +13834,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13300,6 +13854,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H2",
+                    1,
+                    0,
+                    1,
+                    182,
+                    34.45,
+                    34.45,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13324,7 +13907,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + -1.5526046986721145"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13334,24 +13917,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 6.695607763023494"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H3",
-                    1,
-                    1,
-                    44,
-                    45,
-                    19.40755873340143,
-                    19.40755873340143,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13359,12 +13926,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13374,21 +13941,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13401,6 +13961,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H3",
+                    1,
+                    0,
+                    0,
+                    165,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13425,7 +14014,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + 12.556281771968045"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13435,24 +14024,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -28.838053740014523"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H4",
-                    1,
-                    1,
-                    44,
-                    45,
-                    13.798111837327523,
-                    13.798111837327523,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13460,12 +14033,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13475,21 +14048,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13502,6 +14068,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H4",
+                    1,
+                    0,
+                    0,
+                    306,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13526,7 +14121,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + 8.943239501615137"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13536,24 +14131,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 0.9644670050761421"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H5",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.53576372865713,
-                    17.53576372865713,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13561,12 +14140,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13576,21 +14155,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13603,6 +14175,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H5",
+                    1,
+                    0,
+                    1,
+                    171,
+                    33.72,
+                    33.72,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13627,7 +14228,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + 8.105504587155965"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13637,24 +14238,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -4.096330275229358"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H6",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.431192660550458,
-                    17.431192660550458,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13662,12 +14247,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13677,21 +14262,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13704,6 +14282,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H6",
+                    1,
+                    0,
+                    1,
+                    166,
+                    34.23,
+                    34.23,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13728,7 +14335,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + 24.969921332716332"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13738,24 +14345,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 60.57843590930125"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H7",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.58445164275798,
-                    17.58445164275798,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13763,12 +14354,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13778,21 +14369,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13805,6 +14389,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H7",
+                    1,
+                    0,
+                    -1,
+                    182,
+                    34.27,
+                    34.27,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13829,7 +14442,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(40) + -14.262210796915166"
+                    "640 + (1 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13839,24 +14452,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 3.4190231362467864"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    11,
-                    "Dryland_H8",
-                    1,
-                    1,
-                    44,
-                    45,
-                    19.53727506426735,
-                    19.53727506426735,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13864,12 +14461,12 @@
                 "indent": 1,
                 "parameters": [
                     51,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    40,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13879,21 +14476,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 51 como interface: “Sacrifício — Palco de candidatos — 51”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "51”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -13906,6 +14496,35 @@
                     {
                         "picture": "51",
                         "name": "Sacrifício — Palco de candidatos — 51"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    11,
+                    "Dryland_H8",
+                    1,
+                    0,
+                    -7,
+                    164,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"11\"]",
+                        "TargetID:num": "51"
                     }
                 ]
             },
@@ -13930,7 +14549,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + 3.3547351524879616"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -13940,24 +14559,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -3.3547351524879616"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H1",
-                    1,
-                    1,
-                    44,
-                    45,
-                    20.331728196896737,
-                    20.331728196896737,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -13965,12 +14568,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -13980,21 +14583,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14007,6 +14603,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H1",
+                    1,
+                    0,
+                    5,
+                    90,
+                    30.09,
+                    30.09,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14031,7 +14656,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + -33.42893835616439"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14041,24 +14666,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 30.58219178082192"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H2",
-                    1,
-                    1,
-                    44,
-                    45,
-                    16.267123287671232,
-                    16.267123287671232,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14066,12 +14675,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14081,21 +14690,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14108,6 +14710,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H2",
+                    1,
+                    0,
+                    1,
+                    182,
+                    34.45,
+                    34.45,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14132,7 +14763,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + -1.5526046986721145"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14142,24 +14773,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 6.695607763023494"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H3",
-                    1,
-                    1,
-                    44,
-                    45,
-                    19.40755873340143,
-                    19.40755873340143,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14167,12 +14782,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14182,21 +14797,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14209,6 +14817,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H3",
+                    1,
+                    0,
+                    0,
+                    165,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14233,7 +14870,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + 12.556281771968045"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14243,24 +14880,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -28.838053740014523"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H4",
-                    1,
-                    1,
-                    44,
-                    45,
-                    13.798111837327523,
-                    13.798111837327523,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14268,12 +14889,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14283,21 +14904,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14310,6 +14924,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H4",
+                    1,
+                    0,
+                    0,
+                    306,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14334,7 +14977,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + 8.943239501615137"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14344,24 +14987,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 0.9644670050761421"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H5",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.53576372865713,
-                    17.53576372865713,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14369,12 +14996,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14384,21 +15011,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14411,6 +15031,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H5",
+                    1,
+                    0,
+                    1,
+                    171,
+                    33.72,
+                    33.72,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14435,7 +15084,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + 8.105504587155965"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14445,24 +15094,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + -4.096330275229358"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H6",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.431192660550458,
-                    17.431192660550458,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14470,12 +15103,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14485,21 +15118,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14512,6 +15138,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H6",
+                    1,
+                    0,
+                    1,
+                    166,
+                    34.23,
+                    34.23,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14536,7 +15191,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + 24.969921332716332"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14546,24 +15201,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 60.57843590930125"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H7",
-                    1,
-                    1,
-                    44,
-                    45,
-                    17.58445164275798,
-                    17.58445164275798,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14571,12 +15210,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14586,21 +15225,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14613,6 +15245,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H7",
+                    1,
+                    0,
+                    -1,
+                    182,
+                    34.27,
+                    34.27,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -14637,7 +15298,7 @@
                     44,
                     0,
                     4,
-                    "$gameVariables.value(41) + -14.262210796915166"
+                    "640 + (2 - ($gameVariables.value(35) - 1) / 2) * 420"
                 ]
             },
             {
@@ -14647,24 +15308,8 @@
                     45,
                     45,
                     0,
-                    4,
-                    "$gameVariables.value(42) + 3.4190231362467864"
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "Dryland_H8",
-                    1,
-                    1,
-                    44,
-                    45,
-                    19.53727506426735,
-                    19.53727506426735,
-                    255,
-                    0
+                    0,
+                    500
                 ]
             },
             {
@@ -14672,12 +15317,12 @@
                 "indent": 1,
                 "parameters": [
                     52,
-                    "Dryland_Button",
+                    "Dryland_SacrificeCard",
                     1,
                     1,
-                    41,
-                    43,
-                    140,
+                    44,
+                    45,
+                    100,
                     100,
                     255,
                     0
@@ -14687,21 +15332,14 @@
                 "code": 108,
                 "indent": 1,
                 "parameters": [
-                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos —"
+                    "Identifica a imagem 52 como interface: “Sacrifício — Palco de candidatos — 52”. Ela acompanha o"
                 ]
             },
             {
                 "code": 408,
                 "indent": 1,
                 "parameters": [
-                    "52”. Ela acompanha o HIDE; ocultá-la preserva sua opacidade e posição"
-                ]
-            },
-            {
-                "code": 408,
-                "indent": 1,
-                "parameters": [
-                    "autoradas."
+                    "HIDE; ocultá-la preserva sua opacidade e posição autoradas."
                 ]
             },
             {
@@ -14714,6 +15352,35 @@
                     {
                         "picture": "52",
                         "name": "Sacrifício — Palco de candidatos — 52"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "Dryland_H8",
+                    1,
+                    0,
+                    -7,
+                    164,
+                    36,
+                    36,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureAddPicture",
+                    "PictureAddPicture",
+                    {
+                        "PictureID:arraynum": "[\"12\"]",
+                        "TargetID:num": "52"
                     }
                 ]
             },
@@ -65130,6 +65797,18 @@
                 "indent": 0,
                 "parameters": [
                     12
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_4_AttachedPictures",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
+                    {
+                        "PictureID:arraynum": "[\"10\",\"11\",\"12\"]"
+                    }
                 ]
             },
             {
