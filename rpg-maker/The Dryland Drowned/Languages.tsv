@@ -91,9 +91,6 @@ enc.a1.result_3.failure	The soot points to a false center; the group steps into 
 enc.a1.intro.1	The abandoned workshop is full of dark bottles, sealed with brass clasps. They say each one holds a whirlwind made by the Saci.	A oficina abandonada está cheia de garrafas escuras, fechadas com presilhas de latão. Dizem que cada uma aprisiona um redemoinho criado pelo Saci.
 enc.a1.intro.2	As soon as the group steps inside, a bottle falls and shatters. A violent wind fills the room, tears chunks from the walls and flings shards of glass through the air. A window bangs against the far wall. Other bottles start to shake, leaking wind through their loose lids. If they open too, the whirlwinds will join together and block the only exit.	Assim que o grupo entra, uma garrafa cai e se quebra. Um vento violento toma conta da sala, arranca pedaços das paredes e lança cacos de vidro pelo ar. Uma janela bate na parede ao fundo. Outras garrafas começam a tremer, soltando vento pelas tampas frouxas. Se elas também se abrirem, os redemoinhos vão se juntar e bloquear a única saída.
 enc.a1.intro.3	How should the group face the trap?	Como o grupo deve enfrentar a armadilha?
-choice.retreat.confirm	Retreat	Recuar
-choice.retreat.continue	Continue the expedition	Continuar expedição
-enc.common.retreat_prompt	Retreating keeps what the group has discovered. Return to the tavern?	Recuar preserva o que o grupo descobriu. Voltar para a taverna?
 choice.a1.approach_1	Force the window until the whirlwind changes direction.	Forçar a janela até mudar a direção do redemoinho.
 choice.a1.approach_2	Quickly fasten the clasps on the bottles that are still intact.	Fechar rapidamente as presilhas das garrafas que ainda estão inteiras.
 choice.a1.approach_3	Watch how the dust and shards move to find the safe moment to reach the exit.	Observar o movimento da poeira e dos cacos para descobrir o momento seguro de alcançar a saída.
