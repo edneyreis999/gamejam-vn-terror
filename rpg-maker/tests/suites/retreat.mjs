@@ -165,16 +165,10 @@ canonicalCase('IT-011', 'native reduced motion immediately removes new losses wh
   for (const name of ['Gorvak', 'Elowen', 'Griznik']) assert.ok(panel.replace(/\x1bWrapBreak\[0\]/g,' ').includes(`${name} — Morto`), JSON.stringify({name,panel,rows:await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))')}));
   await browser.screenshot(`${evidence('IT-011')}/reduced-motion-roster.png`);
 });
-canonicalCase('IT-013', 'native retreat cancellation restores choices, confirmation returns safely and commitment removes retreat', { timeout: 120000 }, async t => {
+canonicalCase('IT-013', 'native retreat returns to the tavern without confirmation and commitment removes retreat', { timeout: 120000 }, async t => {
   const browser = await tavern(t), before = interrupted();
   await installRoute(browser, before); await choices(browser, 'approaches');
-  await activate(browser, 'approaches', 4); await choices(browser, 'retreat');
-  await activate(browser, 'retreat', 1); await choices(browser, 'approaches');
-  const cancelled = await snapshot(browser);
-  assert.equal(cancelled.phase, before.phase);
-  for (const key of ['assignments','progress','rngState','deadHeroIds','deathLocations','reading']) assert.deepEqual(cancelled[key], before[key], key);
-  await activate(browser, 'approaches', 4); await choices(browser, 'retreat');
-  await activate(browser, 'retreat', 0); await choices(browser, 'formation');
+  await activate(browser, 'approaches', 4); await choices(browser, 'formation');
   const returned = await snapshot(browser);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.equal(returned.position, null);

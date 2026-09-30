@@ -164,7 +164,7 @@
         false,
         false,
         false,
-        false
+        true
     ],
     "optAutosave": true,
     "optDisplayTp": true,
@@ -418,9 +418,9 @@
             "Equipar",
             "Status",
             "Formação",
-            "Salvar",
-            "Fim de Jogo",
-            "Configurações",
+            "$[ui.menu.save]",
+            "$[choice.title.quit]",
+            "$[choice.title.options]",
             "Arma",
             "Equipamento",
             "Item Especial",
