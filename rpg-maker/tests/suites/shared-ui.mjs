@@ -1,7 +1,8 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
+import { activate, choices, openDestinations, pause, prologueMarkers, tavern } from '../helpers/formation.mjs';
+import { accepted } from '../helpers/campaign.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -43,8 +44,11 @@ canonicalCase('IT-026','hidden approach and sacrifice pictures cannot change foc
 });
 canonicalCase('IT-027','HIDE removes consultation overlays and targets while retaining character art and returning focus',{timeout:120000},async t=>{
  const browser=await tavern(t);
- for(const[kind,index]of [['destinations',8],['roster',9]]){
-  await activate(browser,'formation',index);await choices(browser,kind);
+ let ready=fixtures.formation;
+ for(const heroId of ['H1','H2','H3'])if(!ready.draftPartyIds.includes(heroId))ready=accepted(ready,'TOGGLE_HERO',{heroId});
+ await installPhase(browser,ready);
+ for(const kind of ['destinations']){
+  await openDestinations(browser);
   const before=await state(browser),focus=await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
   await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,Array.from({length:19},(_,i)=>71+i));
   await click(browser,200,240);await hidden(browser,false);await choices(browser,kind);

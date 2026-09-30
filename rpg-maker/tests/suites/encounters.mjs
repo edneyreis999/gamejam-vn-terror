@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { passageBoxes } from '../helpers/native-reading.mjs';
 import { installPhase } from '../helpers/native-shared.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, formation, heroes, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
+import { act, activate, choices, formation, heroes, openDestinations, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
 const evidence = id => `docs/qa/evidence/init-rpg-maker-mz/task-04/${id}`;
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
@@ -136,9 +136,8 @@ async function nativeEncounter(t, options = {}) {
     await browser.press('Enter', 13);
     await returnToTavern(browser);
   }
-  await activate(browser, 'formation', 8);
+  await openDestinations(browser);
   await activate(browser, 'destinations', 0);
-  await activate(browser, 'formation', 10);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'dungeon_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   await browser.press('Enter', 13);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMap.mapId() >= 7 && $gameMap.mapId() <= 14 && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
@@ -290,15 +289,10 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
         await choices(browser,'approaches');
         assert.deepEqual(await browser.evaluate('$gameMessage.choices()'),labels);
         assert.deepEqual(await snapshot(browser),choice,'Reread is observational');
-        await activate(browser,'approaches',4);await choices(browser,'retreat');
-        const confirmation=accepted(choice,'REQUEST_RETREAT');
-        assert.deepEqual(await snapshot(browser),confirmation);
-        await activate(browser,'retreat',1);await choices(browser,'approaches');
-        const cancelled=accepted(confirmation,'CANCEL_RETREAT');
-        assert.deepEqual(await snapshot(browser),cancelled);
-        await activate(browser,'approaches',4);await activate(browser,'retreat',0);
+        // Recuar não pede confirmação: volta direto à taverna.
+        await activate(browser,'approaches',4);
         await choices(browser,'formation');
-        assert.deepEqual(await snapshot(browser),accepted(accepted(cancelled,'REQUEST_RETREAT'),'CONFIRM_RETREAT'));
+        assert.deepEqual(await snapshot(browser),accepted(accepted(choice,'REQUEST_RETREAT'),'CONFIRM_RETREAT'));
         await installPhase(browser,choice);await choices(browser,'approaches');
       }
       const writesBefore=await browser.evaluate('encounterWrites.length');

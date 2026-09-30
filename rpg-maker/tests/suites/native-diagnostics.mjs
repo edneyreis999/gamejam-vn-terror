@@ -9,7 +9,7 @@ export async function toTitle(browser) {
  await titleReady(browser);
 }
 export async function titleAction(browser,label) {
- const index=await browser.evaluate(`$gameMessage.choices().indexOf(${JSON.stringify(label)})`);assert.ok(index>=0);
+ const index=await browser.evaluate(`$gameMessage.choices().findIndex(c=>c.includes(${JSON.stringify(label)}))`);assert.ok(index>=0);
  for(let step=0;step<5;step++){
   const current=await browser.evaluate('SceneManager._scene._choiceListWindow.index()');if(current===index)break;
   await browser.press(current<index?'ArrowDown':'ArrowUp',current<index?40:38);

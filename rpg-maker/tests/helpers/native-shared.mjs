@@ -6,7 +6,7 @@ export const state = browser => browser.evaluate('$gameSystem._dryland.campaign'
 export const saveBytes = browser => browser.evaluate("StorageManager.loadZip('file'+$gameSystem.savefileId())");
 export async function entry(t) {
  await startServer(t);const browser=await openChrome(t);
- await browser.waitFor("window.$gameMessage&&$gameMessage.choices().includes('Jogar')&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+ await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
  return browser;
 }
 export async function click(browser,x,y){

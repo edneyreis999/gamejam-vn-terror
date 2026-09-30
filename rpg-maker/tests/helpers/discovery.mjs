@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { selectFile } from './native-chrome.mjs';
+import { chooseTitle, selectFile } from './native-chrome.mjs';
 import { readFile } from 'node:fs/promises';
 import { formation, rules } from './formation.mjs';
 import { accepted, complete, finishReading } from './campaign.mjs';
@@ -42,9 +42,8 @@ export async function passage(browser, id) {
 export async function continueSave(browser) {
   await browser.waitFor("$gameTemp._drylandPersistence?.status === 'saved'");
   await browser.evaluate('$gameMap._interpreter.clear(); $gameMessage.clear(); SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  assert.equal(await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()]'), 'Continuar');
-  await browser.press('Enter', 13);await selectFile(browser);
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await chooseTitle(browser, 'choice.title.continue');await selectFile(browser);
 }
 export async function observeDiscovery(browser) {
   await browser.evaluate(`(() => {

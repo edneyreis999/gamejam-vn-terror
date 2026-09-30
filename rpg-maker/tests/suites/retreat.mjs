@@ -1,4 +1,4 @@
-import { selectFile } from '../helpers/native-chrome.mjs';
+import { chooseTitle, selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, choices, formation, heroes, pause, rosterFixture, rules, tavern } from '../helpers/formation.mjs';
@@ -148,22 +148,18 @@ canonicalCase('IT-010', 'interrupting the first return consumes absence and neve
   // The accepted return already saved the native absence switches.
   // Continue at that checkpoint shows empty places, without a second fade.
   await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');
-  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().includes('Continuar') && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  await browser.press('Enter', 13); await selectFile(browser,1); await choices(browser, 'formation');
+  await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
+  await chooseTitle(browser, 'choice.title.continue'); await selectFile(browser,1); await choices(browser, 'formation');
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
   assert.deepEqual(await snapshot(browser), before);
 });
-canonicalCase('IT-011', 'native reduced motion immediately removes new losses while roster text preserves them', { timeout: 90000 }, async t => {
+canonicalCase('IT-011', 'native reduced motion immediately removes new losses', { timeout: 90000 }, async t => {
   const { browser, before } = await beginReturn(t, true);
   assert.deepEqual(await snapshot(browser), finishReading(before));
   assert.equal(await browser.evaluate('absenceMoves.length'), 0);
   assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  const index = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(entry=>entry.name.startsWith('Elenco'))");
-  await activate(browser, 'formation', index); await choices(browser, 'roster');
-  const panel = await browser.evaluate(`SceneManager._scene._messageWindow.convertEscapeCharacters($gameScreen.getPictureTextData(71).upperleft)`);
-  for (const name of ['Gorvak', 'Elowen', 'Griznik']) assert.ok(panel.replace(/\x1bWrapBreak\[0\]/g,' ').includes(`${name} — Morto`), JSON.stringify({name,panel,rows:await browser.evaluate('Array.from({length:8},(_,i)=>$gameVariables.value(157+i))')}));
-  await browser.screenshot(`${evidence('IT-011')}/reduced-motion-roster.png`);
+  // O botão Elenco (lista de presentes/mortos) saiu da taverna; a regra de ausência fica coberta acima.
 });
 canonicalCase('IT-013', 'native retreat returns to the tavern without confirmation and commitment removes retreat', { timeout: 120000 }, async t => {
   const browser = await tavern(t), before = interrupted();

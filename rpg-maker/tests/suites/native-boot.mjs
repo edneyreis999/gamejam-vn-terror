@@ -30,7 +30,7 @@ async function record(id, result) {
 canonicalCase('IT-037', 'documented loopback command serves the native entry in Chrome and stops on SIGINT', { timeout: 45000 }, async t => {
   const server = await startServer(t);
   const browser = await openChrome(t);
-  await browser.waitFor("window.$gameMessage && $gameMessage.choices().includes('Jogar')");
+  await browser.waitFor("window.$gameMessage && $gameMessage.choices().some(c=>c.includes('choice.title.new_game'))");
   assert.equal(await browser.evaluate('location.href'), origin);
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 1);
   await server.stop();
