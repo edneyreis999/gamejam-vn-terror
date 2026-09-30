@@ -1289,6 +1289,10 @@ Na versão descrita, essa história aparece somente por uma ou duas referências
 
 ### 19.4 Áudio
 
+**Música das narrações de Rheed — Confirmado em 2026-09-30:** usar `(Chillout) The Well`, a mesma faixa da abertura, quando Rheed mais velho narra no presente, inclusive no prólogo, nos fechamentos das rotas e no Conselho. Substitui as seleções anteriores de música nesses trechos; as conversas do passado mantêm a música da cena. Ver [spec incremental](../planos/tasks/rheed-the-well/spec.md).
+
+**Música do Parque das Águas Assombradas — Confirmado em 2026-09-30:** usar `(Ambience) The Valley of Ghosts Origin` como música em repetição durante o percurso e suas armadilhas até a conclusão da rota, com a mesma entrada gradual de dois segundos aplicada à igreja. Preservar as demais músicas e os efeitos desativados. Substitui a faixa provisória do parque conforme a [spec incremental](../planos/tasks/park-valley-of-ghosts/spec.md).
+
 **Música do Caminho da Igreja — Confirmado em 2026-09-30:** usar `(Tense) Danger` em repetição durante o percurso e suas armadilhas até a conclusão da rota. Suavizar a entrada, preservando a tensão da composição. A versão local aplica uma entrada gradual de dois segundos; manter as músicas de retorno à taverna e das narrações posteriores. Substitui a faixa provisória dessa rota conforme a [spec incremental](../planos/tasks/church-danger/spec.md).
 
 **Somente música — Confirmado em 2026-09-30:** retirar os ambientes e efeitos sonoros provisórios, incluindo aplausos, plateia, sons contextuais e bipes dos menus. Preservar as músicas e os temas musicais dos finais. Esta decisão posterior substitui os requisitos de BGS/SE e de preservação desses efeitos nos recortes anteriores; ver [decisão e implementação incremental](../planos/tasks/music-only/spec.md#decision-and-supersession).

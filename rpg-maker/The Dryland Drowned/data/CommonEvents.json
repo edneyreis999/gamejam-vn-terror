@@ -27040,7 +27040,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Dryland_PrologueTavern_ManMadeWings",
+                        "name": "Dryland_Opening_TheWell",
                         "volume": 35,
                         "pitch": 100,
                         "pan": 0
@@ -27057,7 +27057,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Town1",
+                        "name": "Dryland_Opening_TheWell",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
@@ -27157,8 +27157,33 @@
                 "parameters": []
             },
             {
-                "code": 241,
+                "code": 111,
                 "indent": 2,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(34) === 'supernatural'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 3,
+                "parameters": [
+                    {
+                        "name": "Dryland_Park_ValleyOfGhosts",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 3,
                 "parameters": [
                     {
                         "name": "Dungeon2",
@@ -27167,6 +27192,11 @@
                         "pan": 0
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 2,
+                "parameters": []
             },
             {
                 "code": 412,
