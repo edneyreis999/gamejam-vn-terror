@@ -4284,6 +4284,13 @@
                             ]
                         },
                         {
+                            "code": 119,
+                            "indent": 2,
+                            "parameters": [
+                                "return"
+                            ]
+                        },
+                        {
                             "code": 412,
                             "indent": 1,
                             "parameters": []
