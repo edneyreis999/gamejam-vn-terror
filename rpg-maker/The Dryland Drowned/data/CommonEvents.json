@@ -479,12 +479,12 @@
                 "indent": 0,
                 "parameters": [
                     [
-                        "\\V[165]<Bind Picture: 10><Choice Common Event: 30><Show Switch: 21><Hide Choice Window>",
-                        "\\V[166]<Bind Picture: 11><Choice Common Event: 31><Show Switch: 22><Hide Choice Window>",
-                        "\\V[167]<Bind Picture: 12><Choice Common Event: 32><Show Switch: 23><Hide Choice Window>",
-                        "\\V[168]<Bind Picture: 13><Choice Common Event: 33><Show Switch: 24><Hide Choice Window>",
-                        "\\V[169]<Bind Picture: 14><Choice Common Event: 34><Show Switch: 25><Hide Choice Window>",
-                        "\\V[170]<Bind Picture: 15><Choice Common Event: 35><Show Switch: 26><Hide Choice Window>"
+                        "\\V[165]<Bind Picture: 12><Bind Picture: 30><Choice Common Event: 30><Show Switch: 21><Hide Choice Window>",
+                        "\\V[166]<Bind Picture: 13><Bind Picture: 31><Choice Common Event: 31><Show Switch: 22><Hide Choice Window>",
+                        "\\V[167]<Bind Picture: 16><Bind Picture: 32><Choice Common Event: 32><Show Switch: 23><Hide Choice Window>",
+                        "\\V[168]<Bind Picture: 15><Bind Picture: 33><Choice Common Event: 33><Show Switch: 24><Hide Choice Window>",
+                        "\\V[169]<Bind Picture: 11><Bind Picture: 34><Choice Common Event: 34><Show Switch: 25><Hide Choice Window>",
+                        "\\V[170]<Bind Picture: 10><Bind Picture: 35><Choice Common Event: 35><Show Switch: 26><Hide Choice Window>"
                     ],
                     -1,
                     0,
@@ -497,7 +497,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "Gorvak<Bind Picture: 10><Choice Common Event: 30><Show Switch: 21><Hide Choice Window>"
+                    "Gorvak<Bind Picture: 12><Bind Picture: 30><Choice Common Event: 30><Show Switch: 21><Hide Choice Window>"
                 ]
             },
             {
@@ -756,7 +756,7 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "Elowen<Bind Picture: 11><Choice Common Event: 31><Show Switch: 22><Hide Choice Window>"
+                    "Elowen<Bind Picture: 13><Bind Picture: 31><Choice Common Event: 31><Show Switch: 22><Hide Choice Window>"
                 ]
             },
             {
@@ -1015,7 +1015,7 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "Griznik<Bind Picture: 12><Choice Common Event: 32><Show Switch: 23><Hide Choice Window>"
+                    "Griznik<Bind Picture: 16><Bind Picture: 32><Choice Common Event: 32><Show Switch: 23><Hide Choice Window>"
                 ]
             },
             {
@@ -1274,7 +1274,7 @@
                 "indent": 0,
                 "parameters": [
                     3,
-                    "Seraphina<Bind Picture: 13><Choice Common Event: 33><Show Switch: 24><Hide Choice Window>"
+                    "Seraphina<Bind Picture: 15><Bind Picture: 33><Choice Common Event: 33><Show Switch: 24><Hide Choice Window>"
                 ]
             },
             {
@@ -1533,7 +1533,7 @@
                 "indent": 0,
                 "parameters": [
                     4,
-                    "Bimbren<Bind Picture: 14><Choice Common Event: 34><Show Switch: 25><Hide Choice Window>"
+                    "Bimbren<Bind Picture: 11><Bind Picture: 34><Choice Common Event: 34><Show Switch: 25><Hide Choice Window>"
                 ]
             },
             {
@@ -1792,7 +1792,7 @@
                 "indent": 0,
                 "parameters": [
                     5,
-                    "Liora<Bind Picture: 15><Choice Common Event: 35><Show Switch: 26><Hide Choice Window>"
+                    "Liora<Bind Picture: 10><Bind Picture: 35><Choice Common Event: 35><Show Switch: 26><Hide Choice Window>"
                 ]
             },
             {
@@ -2056,8 +2056,8 @@
                 "indent": 0,
                 "parameters": [
                     [
-                        "\\V[171]<Bind Picture: 16><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>",
-                        "\\V[172]<Bind Picture: 17><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>",
+                        "\\V[171]<Bind Picture: 14><Bind Picture: 36><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>",
+                        "\\V[172]<Bind Picture: 17><Bind Picture: 37><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>",
                         "$[choice.tavern.depart]<Bind Picture: 43><Enable Switch: 29>",
                         "☰<Bind Picture: 42>"
                     ],
@@ -2072,7 +2072,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "Vaelith<Bind Picture: 16><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>"
+                    "Vaelith<Bind Picture: 14><Bind Picture: 36><Choice Common Event: 36><Show Switch: 27><Hide Choice Window>"
                 ]
             },
             {
@@ -2331,7 +2331,7 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "Draska<Bind Picture: 17><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>"
+                    "Draska<Bind Picture: 17><Bind Picture: 37><Choice Common Event: 37><Show Switch: 28><Hide Choice Window>"
                 ]
             },
             {
@@ -4827,19 +4827,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(10)"
+                    "!$gameScreen.picture(12)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    10,
+                    12,
                     "Dryland_HeroGroup_H1",
                     1,
                     0,
                     344,
-                    520,
+                    528,
                     100,
                     100,
                     255,
@@ -4864,15 +4864,29 @@
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
-                    "PictureAddPicture",
+                    "Picture: Attach Picture(s)",
                     {
                         "PictureID:arraynum": "[\"20\"]",
-                        "TargetID:num": "10"
+                        "TargetID:num": "12"
                     }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Attach Picture ID(s) = [\"20\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Target Picture ID = 12"
                 ]
             },
             {
@@ -4885,19 +4899,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(11)"
+                    "!$gameScreen.picture(13)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    11,
+                    13,
                     "Dryland_HeroGroup_H2",
                     1,
                     0,
-                    840,
-                    176,
+                    864,
+                    232,
                     100,
                     100,
                     255,
@@ -4922,15 +4936,29 @@
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
                     "PictureAddPicture",
-                    "PictureAddPicture",
+                    "Picture: Attach Picture(s)",
                     {
                         "PictureID:arraynum": "[\"21\"]",
-                        "TargetID:num": "11"
+                        "TargetID:num": "13"
                     }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Attach Picture ID(s) = [\"21\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Target Picture ID = 13"
                 ]
             },
             {
@@ -4943,19 +4971,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(12)"
+                    "!$gameScreen.picture(16)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    12,
+                    16,
                     "Dryland_HeroGroup_H3",
                     1,
                     0,
                     760,
-                    497,
+                    512,
                     100,
                     100,
                     255,
@@ -4987,7 +5015,7 @@
                     "PictureAddPicture",
                     {
                         "PictureID:arraynum": "[\"22\"]",
-                        "TargetID:num": "12"
+                        "TargetID:num": "16"
                     }
                 ]
             },
@@ -5001,19 +5029,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(13)"
+                    "!$gameScreen.picture(15)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    13,
+                    15,
                     "Dryland_HeroGroup_H4",
                     1,
                     0,
-                    1000,
-                    448,
+                    976,
+                    472,
                     100,
                     100,
                     255,
@@ -5045,7 +5073,7 @@
                     "PictureAddPicture",
                     {
                         "PictureID:arraynum": "[\"23\"]",
-                        "TargetID:num": "13"
+                        "TargetID:num": "15"
                     }
                 ]
             },
@@ -5059,19 +5087,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(14)"
+                    "!$gameScreen.picture(11)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    14,
+                    11,
                     "Dryland_HeroGroup_H5",
                     1,
                     0,
-                    528,
-                    336,
+                    544,
+                    328,
                     100,
                     100,
                     255,
@@ -5103,7 +5131,7 @@
                     "PictureAddPicture",
                     {
                         "PictureID:arraynum": "[\"24\"]",
-                        "TargetID:num": "14"
+                        "TargetID:num": "11"
                     }
                 ]
             },
@@ -5117,19 +5145,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(15)"
+                    "!$gameScreen.picture(10)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    15,
+                    10,
                     "Dryland_HeroGroup_H6",
                     1,
                     0,
-                    368,
-                    160,
+                    352,
+                    224,
                     100,
                     100,
                     255,
@@ -5161,7 +5189,7 @@
                     "PictureAddPicture",
                     {
                         "PictureID:arraynum": "[\"25\"]",
-                        "TargetID:num": "15"
+                        "TargetID:num": "10"
                     }
                 ]
             },
@@ -5175,19 +5203,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "!$gameScreen.picture(16)"
+                    "!$gameScreen.picture(14)"
                 ]
             },
             {
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    16,
+                    14,
                     "Dryland_HeroGroup_H7",
                     1,
                     0,
-                    1032,
-                    224,
+                    1024,
+                    280,
                     100,
                     100,
                     255,
@@ -5219,7 +5247,7 @@
                     "PictureAddPicture",
                     {
                         "PictureID:arraynum": "[\"26\"]",
-                        "TargetID:num": "16"
+                        "TargetID:num": "14"
                     }
                 ]
             },
@@ -5244,7 +5272,7 @@
                     "Dryland_HeroGroup_H8",
                     1,
                     0,
-                    176,
+                    160,
                     264,
                     100,
                     100,
@@ -5489,8 +5517,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    344,
+                    679,
                     100,
                     100,
                     255,
@@ -5502,11 +5530,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"30\"]",
-                        "TargetID:num": "10"
+                        "PictureID:arraynum": "[\"30\"]"
                     }
                 ]
             },
@@ -5607,7 +5634,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"10\"]",
+                        "PictureIDs:arraynum": "[\"12\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5622,7 +5649,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    10
+                    12
                 ]
             },
             {
@@ -5647,7 +5674,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"20\",\"30\"]"
+                        "PictureID:arraynum": "[\"20\"]"
                     }
                 ]
             },
@@ -5730,8 +5757,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    864,
+                    383,
                     100,
                     100,
                     255,
@@ -5743,11 +5770,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"31\"]",
-                        "TargetID:num": "11"
+                        "PictureID:arraynum": "[\"31\"]"
                     }
                 ]
             },
@@ -5848,7 +5874,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"11\"]",
+                        "PictureIDs:arraynum": "[\"13\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -5863,7 +5889,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    11
+                    13
                 ]
             },
             {
@@ -5888,7 +5914,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"21\",\"31\"]"
+                        "PictureID:arraynum": "[\"21\"]"
                     }
                 ]
             },
@@ -5971,8 +5997,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    760,
+                    663,
                     100,
                     100,
                     255,
@@ -5984,11 +6010,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"32\"]",
-                        "TargetID:num": "12"
+                        "PictureID:arraynum": "[\"32\"]"
                     }
                 ]
             },
@@ -6089,7 +6114,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"12\"]",
+                        "PictureIDs:arraynum": "[\"16\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6104,7 +6129,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    12
+                    16
                 ]
             },
             {
@@ -6129,7 +6154,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"22\",\"32\"]"
+                        "PictureID:arraynum": "[\"22\"]"
                     }
                 ]
             },
@@ -6212,8 +6237,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    976,
+                    623,
                     100,
                     100,
                     255,
@@ -6225,11 +6250,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"33\"]",
-                        "TargetID:num": "13"
+                        "PictureID:arraynum": "[\"33\"]"
                     }
                 ]
             },
@@ -6330,7 +6354,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"13\"]",
+                        "PictureIDs:arraynum": "[\"15\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6345,7 +6369,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    13
+                    15
                 ]
             },
             {
@@ -6370,7 +6394,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"23\",\"33\"]"
+                        "PictureID:arraynum": "[\"23\"]"
                     }
                 ]
             },
@@ -6453,8 +6477,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    544,
+                    479,
                     100,
                     100,
                     255,
@@ -6466,11 +6490,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"34\"]",
-                        "TargetID:num": "14"
+                        "PictureID:arraynum": "[\"34\"]"
                     }
                 ]
             },
@@ -6571,7 +6594,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"14\"]",
+                        "PictureIDs:arraynum": "[\"11\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6586,7 +6609,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    14
+                    11
                 ]
             },
             {
@@ -6611,7 +6634,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"24\",\"34\"]"
+                        "PictureID:arraynum": "[\"24\"]"
                     }
                 ]
             },
@@ -6694,8 +6717,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    352,
+                    375,
                     100,
                     100,
                     255,
@@ -6707,11 +6730,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"35\"]",
-                        "TargetID:num": "15"
+                        "PictureID:arraynum": "[\"35\"]"
                     }
                 ]
             },
@@ -6812,7 +6834,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"15\"]",
+                        "PictureIDs:arraynum": "[\"10\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -6827,7 +6849,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    15
+                    10
                 ]
             },
             {
@@ -6852,7 +6874,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"25\",\"35\"]"
+                        "PictureID:arraynum": "[\"25\"]"
                     }
                 ]
             },
@@ -6935,8 +6957,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    1024,
+                    431,
                     100,
                     100,
                     255,
@@ -6948,11 +6970,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"36\"]",
-                        "TargetID:num": "16"
+                        "PictureID:arraynum": "[\"36\"]"
                     }
                 ]
             },
@@ -7053,7 +7074,7 @@
                     "ChangePictureChoiceSettingsOne",
                     "ChangePictureChoiceSettingsOne",
                     {
-                        "PictureIDs:arraynum": "[\"16\"]",
+                        "PictureIDs:arraynum": "[\"14\"]",
                         "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
                         "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
                     }
@@ -7068,7 +7089,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    16
+                    14
                 ]
             },
             {
@@ -7093,7 +7114,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"26\",\"36\"]"
+                        "PictureID:arraynum": "[\"26\"]"
                     }
                 ]
             },
@@ -7176,8 +7197,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    0,
-                    151,
+                    160,
+                    415,
                     100,
                     100,
                     255,
@@ -7189,11 +7210,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"37\"]",
-                        "TargetID:num": "17"
+                        "PictureID:arraynum": "[\"37\"]"
                     }
                 ]
             },
@@ -7334,7 +7354,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"27\",\"37\"]"
+                        "PictureID:arraynum": "[\"27\"]"
                     }
                 ]
             },
@@ -16242,7 +16262,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    10
+                    12
                 ]
             },
             {
@@ -16254,7 +16274,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    10,
+                    12,
                     "Dryland_Tavern_H1",
                     1,
                     0,
@@ -16270,7 +16290,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    10,
+                    12,
                     0,
                     1,
                     0,
@@ -16358,7 +16378,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    11
+                    13
                 ]
             },
             {
@@ -16370,7 +16390,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    11,
+                    13,
                     "Dryland_Tavern_H2",
                     1,
                     0,
@@ -16386,7 +16406,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    11,
+                    13,
                     0,
                     1,
                     0,
@@ -16474,7 +16494,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    12
+                    16
                 ]
             },
             {
@@ -16486,7 +16506,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    12,
+                    16,
                     "Dryland_Tavern_H3",
                     1,
                     0,
@@ -16502,7 +16522,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    12,
+                    16,
                     0,
                     1,
                     0,
@@ -16590,7 +16610,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    13
+                    15
                 ]
             },
             {
@@ -16602,7 +16622,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    13,
+                    15,
                     "Dryland_Tavern_H4",
                     1,
                     0,
@@ -16618,7 +16638,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    13,
+                    15,
                     0,
                     1,
                     0,
@@ -16706,7 +16726,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    14
+                    11
                 ]
             },
             {
@@ -16718,7 +16738,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    14,
+                    11,
                     "Dryland_Tavern_H5",
                     1,
                     0,
@@ -16734,7 +16754,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    14,
+                    11,
                     0,
                     1,
                     0,
@@ -16822,7 +16842,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    15
+                    10
                 ]
             },
             {
@@ -16834,7 +16854,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    15,
+                    10,
                     "Dryland_Tavern_H6",
                     1,
                     0,
@@ -16850,7 +16870,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    15,
+                    10,
                     0,
                     1,
                     0,
@@ -16938,7 +16958,7 @@
                 "code": 235,
                 "indent": 2,
                 "parameters": [
-                    16
+                    14
                 ]
             },
             {
@@ -16950,7 +16970,7 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    16,
+                    14,
                     "Dryland_Tavern_H7",
                     1,
                     0,
@@ -16966,7 +16986,7 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    16,
+                    14,
                     0,
                     1,
                     0,
