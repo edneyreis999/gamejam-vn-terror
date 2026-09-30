@@ -1289,6 +1289,10 @@ Na versão descrita, essa história aparece somente por uma ou duas referências
 
 ### 19.4 Áudio
 
+**Somente música — Confirmado em 2026-09-30:** retirar os ambientes e efeitos sonoros provisórios, incluindo aplausos, plateia, sons contextuais e bipes dos menus. Preservar as músicas e os temas musicais dos finais. Esta decisão posterior substitui os requisitos de BGS/SE e de preservação desses efeitos nos recortes anteriores; ver [decisão e implementação incremental](../planos/tasks/music-only/spec.md#decision-and-supersession).
+
+**Música do prólogo e da taverna — Confirmado em 2026-09-30:** usar a faixa fornecida `(Chillout) Man Made Wings` em repetição nos dois momentos, inclusive na narração inicial de Rheed e na conversa do passado. Esta decisão substitui somente a distinção de BGM entre presente e passado dentro do prólogo; preservar os ambientes, efeitos e músicas das demais cenas. Ver a [spec incremental](../planos/tasks/prologue-tavern-man-made-wings/spec.md) e sua [decisão de áudio](../planos/tasks/prologue-tavern-man-made-wings/adr-001-shared-prologue-tavern-music.md).
+
 **Música da abertura — Confirmado em 2026-09-30:** a faixa fornecida `(Chillout) The Well` toca em repetição na tela inicial, incluindo a classificação e os avisos, até a entrada na história. Preservar o controle de volume e as músicas das cenas seguintes. Implementação e verificação na [spec incremental](../planos/tasks/opening-the-well/spec.md).
 
 **Recorte confirmado para `init-rpg-maker-mz`:** áudio entra no primeiro incremento. **Baseline de protótipo:** usar os áudios nativos já presentes no projeto MZ, selecionados conforme a adequação a cada cena, com seleção delegada ao agente e ajuste posterior pela equipe, conforme o ADR-004. Essa autorização não constitui aprovação artística final das faixas e efeitos escolhidos. Mantêm-se as fronteiras de áudio abaixo; não é necessário aguardar produção de áudio final para integrar esta versão.

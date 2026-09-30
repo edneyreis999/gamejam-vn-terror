@@ -17539,7 +17539,7 @@
                 "indent": 0,
                 "parameters": [
                     {
-                        "name": "Item3",
+                        "name": "",
                         "volume": 80,
                         "pitch": 100,
                         "pan": 0
@@ -17616,7 +17616,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Item3",
+                        "name": "",
                         "volume": 80,
                         "pitch": 100,
                         "pan": 0
@@ -17727,7 +17727,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Item3",
+                        "name": "",
                         "volume": 80,
                         "pitch": 100,
                         "pan": 0
@@ -27028,8 +27028,33 @@
                 ]
             },
             {
-                "code": 241,
+                "code": 111,
                 "indent": 1,
+                "parameters": [
+                    12,
+                    "['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03'].includes($gameVariables.value(56))"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
+                    {
+                        "name": "Dryland_PrologueTavern_ManMadeWings",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 2,
                 "parameters": [
                     {
                         "name": "Town1",
@@ -27040,11 +27065,16 @@
                 ]
             },
             {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
                 "code": 245,
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "People2",
+                        "name": "",
                         "volume": 25,
                         "pitch": 100,
                         "pan": 0
@@ -27069,7 +27099,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Town3",
+                        "name": "Dryland_PrologueTavern_ManMadeWings",
                         "volume": 35,
                         "pitch": 100,
                         "pan": 0
@@ -27081,7 +27111,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "People1",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27126,7 +27156,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Drips",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27151,7 +27181,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Wind1",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27176,7 +27206,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Darkness",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27317,7 +27347,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Door1",
+                        "name": "",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
@@ -27342,7 +27372,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Collapse1",
+                        "name": "",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
@@ -27367,7 +27397,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Water1",
+                        "name": "",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
