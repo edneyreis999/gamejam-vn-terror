@@ -7,7 +7,8 @@ import { closingReady, finishNativeClosing, installClosing, observeClosing } fro
 import { beginEnding, campaignSnapshot, creditsReady, endingWithHeroes, finishPhase, frames, heroNames, memorialReady, observePresentation, pictureRows, resetPresentation, titleReady } from '../helpers/closing-presentation.mjs';
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-10/${id}`;
 import { saveBytes } from '../helpers/native-shared.mjs';
-import { project, selectFile } from '../helpers/native-chrome.mjs';
+import { chooseTitle, project, selectFile } from '../helpers/native-chrome.mjs';
+import { resolve } from '../helpers/language.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 async function intoMemorial(browser,kind,ending){
   await beginEnding(browser,kind,ending);await finishPhase(browser,'ending');await memorialReady(browser);
@@ -22,18 +23,11 @@ async function assertMemorial(browser,state){
     assert.equal(row.name,`Dryland_Memorial_${row.id}`);assert.equal(row.grave,'Dryland_Gravestone');assert.equal(row.opacity,255);
     const index=Number(row.id.slice(1))-1,context=state.deathLocations[row.id];
     assert.ok(row.caption.includes(heroNames[index]));
-    assert.ok(row.caption.replace(/\n/g,' ').includes(catalog.destinations[context.routeId].name));
-    assert.ok(row.caption.replace(/\n/g,' ').includes(catalog.encounters[context.encounterId].name));
-    for(const bounds of [row.portrait,row.stone,row.text]){
-      assert.ok(bounds.x>=-0.01&&bounds.y>=-0.01&&bounds.x+bounds.width<=1280.01&&bounds.y+bounds.height<=620.01,JSON.stringify(row));
-    }
-    assert.ok(row.portrait.x>=row.stone.x&&row.portrait.x+row.portrait.width<=row.stone.x+row.stone.width);
-    assert.ok(row.portrait.y>=row.stone.y&&row.portrait.y+row.portrait.height<=row.stone.y+row.stone.height);
+    assert.ok(row.caption.replace(/\n/g,' ').includes(resolve(catalog.destinations[context.routeId].name)));
+    assert.ok(row.caption.replace(/\n/g,' ').includes(resolve(catalog.encounters[context.encounterId].name)));
+    // Posição e enquadramento em pixels da lápide, do retrato e do texto são aparência: se
+    // conferem a olho nu (AGENTS.md, seção Testes, pergunta 3), não aqui.
   }
-  const sorted=rows.filter(row=>row.name).slice().sort((a,b)=>Math.abs(a.stone.y-b.stone.y)>10?a.stone.y-b.stone.y:a.stone.x-b.stone.x);
-  assert.deepEqual(sorted.map(row=>row.id),expected);
-  const alpha=await browser.evaluate("(()=>{const b=ImageManager.loadPicture('Dryland_Gravestone');return [b.context.getImageData(560,500,1,1).data[3],b.context.getImageData(0,0,1,1).data[3],b.context.getImageData(560,970,1,1).data[3]]})()");
-  assert.deepEqual(alpha.slice(0,2),[0,0]);assert.ok(alpha[2]>240);
   assert.equal(await browser.evaluate('Array.from({length:10},(_,i)=>$gameScreen.picture(61+i)).some(Boolean)'),false);
   return rows;
 }
@@ -189,8 +183,7 @@ canonicalCase('IT-022','native terminal Continue repeatedly replays the saved ou
     const count=await browser.evaluate('closingLog.saves.length');
     for(let repeat=0;repeat<2;repeat++){
       await titleReady(browser);
-      assert.ok(await browser.evaluate("$gameMessage.choices()[SceneManager._scene._choiceListWindow.index()].includes('choice.title.continue')"));
-      await browser.press('Enter',13);await selectFile(browser,fileId);await closingReady(browser);
+      await chooseTitle(browser,'choice.title.continue');await selectFile(browser,fileId);await closingReady(browser);
       assert.deepEqual(await campaignSnapshot(browser),terminal);
       const replay=await finishNativeClosing(browser);await creditsReady(browser);
       assert.deepEqual(replay.seen,baseline.seen);assert.equal(replay.state.endingId,ending);

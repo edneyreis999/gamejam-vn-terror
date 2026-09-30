@@ -1,3 +1,4 @@
+import { resolve } from './language.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
@@ -55,7 +56,7 @@ export function heroUnitTexts(unit) {
   assert.ok(start >= 0, `Missing hero reading unit ${unit}`);
   const end = list.findIndex((command, index) => index > start && presentation(command, 'ObservationComplete'));
   assert.ok(end > start, `Missing completion for hero unit ${unit}`);
-  return list.slice(start, end).filter(command => command.code === 401).map(command => command.parameters[0]);
+  return list.slice(start, end).filter(command => command.code === 401).map(command => resolve(command.parameters[0]));
 }
 
 export async function choices(browser, kind) {
@@ -104,4 +105,22 @@ export async function installFixture(browser, state) {
     SceneManager.goto(Scene_Map);
   })()`);
   await choices(browser, 'formation');
+}
+
+// Seguir: com a equipe completa o Ivaí fala uma vez e abre o painel de destinos.
+export async function openDestinations(browser) {
+  await activate(browser, 'formation', 8);
+  await browser.waitFor("($gameMessage._drylandChoiceFocus?.key === 'destinations' && SceneManager._scene._choiceListWindow?.isOpenAndActive()) || ($gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0)");
+  if (await browser.evaluate('$gameMessage.hasText()')) await browser.press('Enter', 13);
+  await choices(browser, 'destinations');
+}
+
+// A descrição de um encontro tem várias caixas: avança até as escolhas de `kind` voltarem.
+export async function readUntilChoices(browser, kind) {
+  for (let step = 0; step < 8; step++) {
+    await browser.waitFor(`($gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !$gameMessage.hasText()) || ($gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0)`);
+    if (!await browser.evaluate('$gameMessage.hasText()')) break;
+    await browser.press('Enter', 13);
+  }
+  await choices(browser, kind);
 }

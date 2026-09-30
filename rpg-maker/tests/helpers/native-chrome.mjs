@@ -7,19 +7,17 @@ import { setTimeout as delay } from 'node:timers/promises';
 
 const port = process.env.DRYLAND_QA_PORT || '18726';
 if (!/^\d+$/.test(port) || Number(port) < 1024 || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
-// O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir. Os testes de conteúdo
-// comparam a prosa em português, então o navegador de teste devolve o texto já resolvido em PT
-// por allText(), com a mesma função de tradução do jogo. Não altera o idioma do jogador.
+// O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir, no idioma escolhido
+// pelo jogador (inglês por padrão). Os testes de conteúdo comparam a prosa em português, então o
+// navegador de teste fixa o idioma em Portuguese e devolve o texto já resolvido por allText(),
+// com a mesma função de tradução do jogo.
 const portugueseMessageText = `(() => {
   const timer = setInterval(() => {
     if (!window.Game_Message || !window.TextManager || !TextManager.parseLocalizedText || !window.ConfigManager) return;
     clearInterval(timer);
+    Object.defineProperty(ConfigManager, 'textLocale', { get: () => 'Portuguese', set: () => {}, configurable: true });
     const raw = Game_Message.prototype.allText;
-    Game_Message.prototype.allText = function () {
-      const previous = ConfigManager.textLocale;
-      ConfigManager.textLocale = 'Portuguese';
-      try { return TextManager.parseLocalizedText(raw.call(this)); } finally { ConfigManager.textLocale = previous; }
-    };
+    Game_Message.prototype.allText = function () { return TextManager.parseLocalizedText(raw.call(this)); };
   }, 5);
 })();`;
 
@@ -173,10 +171,26 @@ export async function openChrome(t, options = {}) {
 const fileList = 'SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()';
 const ageNotice = "window.$gameMap?.mapId() === 1 && $gameMessage.hasText() && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0";
 
-export async function selectFile(browser, fileId) {
-  // Novo jogo mostra o aviso de idade antes da lista de arquivos; Continuar vai direto para a lista.
+// Novo jogo mostra o aviso de idade antes da lista de arquivos; Continuar vai direto para a lista.
+export async function dismissAgeNotice(browser) {
   await browser.waitFor(`(${fileList}) || (${ageNotice})`);
   if (await browser.evaluate(ageNotice)) await browser.press('Enter', 13);
+}
+
+// Escolhe uma entrada do menu do título pela chave (choice.title.*). O cursor começa em Novo jogo.
+export async function chooseTitle(browser, key) {
+  const index = await browser.evaluate(`$gameMessage.choices().findIndex(c => c.includes(${JSON.stringify(key)}))`);
+  if (index < 0) throw new Error(`Title has no ${key}`);
+  for (let step = 0; step < 6; step++) {
+    const current = await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
+    if (current === index) break;
+    await browser.press(current < index ? 'ArrowDown' : 'ArrowUp', current < index ? 40 : 38);
+  }
+  await browser.press('Enter', 13);
+}
+
+export async function selectFile(browser, fileId) {
+  await dismissAgeNotice(browser);
   await browser.waitFor(fileList);
   if (fileId !== undefined) {
     for (let step = 0; step < 25; step++) {

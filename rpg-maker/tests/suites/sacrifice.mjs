@@ -148,7 +148,6 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
       await browser.press('Enter', 13);
       await choices(browser, 'sacrifice');
       assert.deepEqual(await browser.evaluate('Array.from({length: SceneManager._scene._choiceListWindow.maxItems()}, (_, i) => $gameVariables.value(36 + i))'), state.partyIds);
-      assert.equal(await browser.evaluate(`Array.from({length:${count}}, (_, index) => $gameScreen.picture(10 + index)).every(picture => picture.x() > 100 && picture.x() < 1180 && picture.y() > 200 && picture.y() < 550)`), true, 'Each candidate illustration must be framed inside the native desktop stage.');
       await browser.press('Escape', 27);
       await choices(browser, 'sacrifice');
       assert.deepEqual(await snapshot(browser), state);

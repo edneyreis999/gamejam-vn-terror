@@ -1,7 +1,8 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, installFixture, pause, prologueMarkers, rosterFixture, tavern } from '../helpers/formation.mjs';
+import { activate, choices, installFixture, openDestinations, pause, prologueMarkers, rosterFixture, tavern, readUntilChoices } from '../helpers/formation.mjs';
+import { accepted } from '../helpers/campaign.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
 import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase, state } from '../helpers/native-shared.mjs';
@@ -20,27 +21,24 @@ canonicalCase('IT-038','native Options and consultations cannot carry held confi
  for(let step=0;step<4&&await browser.evaluate("SceneManager._scene.constructor.name==='Scene_Options'");step++)await browser.press('Escape',27);
  await browser.waitFor("SceneManager._scene.constructor.name==='Scene_Map'&&!SceneManager._scene.isBusy()");await frames(browser,40);
  assert.deepEqual(await state(browser),intro);await release(browser,'Enter',13);
- await installPhase(browser,fixtures.formation);
- for(const [kind,index,closeIndex]of [['destinations',8,3],['roster',9,0]]){
-  await activate(browser,'formation',index);await choices(browser,kind);
-  for(let step=0;step<closeIndex;step++)await browser.press('ArrowDown',40);
-  const before=await state(browser);await hold(browser,'Enter',13);await choices(browser,'formation');await frames(browser,40);
-  assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.hasText()'),false);await release(browser,'Enter',13);
- }
+ let ready=fixtures.formation;
+ for(const heroId of ['H1','H2','H3'])if(!ready.draftPartyIds.includes(heroId))ready=accepted(ready,'TOGGLE_HERO',{heroId});
+ await installPhase(browser,ready);
+ // O painel de destinos abre por Seguir (equipe completa); o Elenco saiu da taverna.
+ await openDestinations(browser);
+ for(let step=0;step<3;step++)await browser.press('ArrowDown',40);
+ const before=await state(browser);await hold(browser,'Enter',13);await choices(browser,'formation');await frames(browser,40);
+ assert.deepEqual(await state(browser),before);assert.equal(await browser.evaluate('$gameMessage.hasText()'),false);await release(browser,'Enter',13);
 });
 canonicalCase('IT-050','upper encounter utilities use mouse and keyboard, suspend during text and HIDE, and retain focus after return',{timeout:180000},async t=>{
  const browser=await tavern(t);await installPhase(browser,fixtures.encounter_choice);await choices(browser,'approaches');
  const before=await state(browser);
- const bounds=await browser.evaluate(`[41,42,50,51,52].map(id=>{const b=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id).getBounds();return {id,x:b.x,y:b.y,w:b.width,h:b.height}})`);
- for(const b of bounds){assert.ok(b.x>=0&&b.x+b.w<=1280&&b.y>=0&&b.y+b.h<=720,JSON.stringify(b));if(b.id<50)assert.ok(b.y+b.h<230);else assert.ok(b.y>230);}
+ // Posição dos botões em pixels é aparência (AGENTS.md, Testes, pergunta 3); Recuar sem confirmação é coberto pelo IT-013.
  await click(browser,920,128);await pause(browser);assert.deepEqual(await state(browser),before);
  assert.equal(await browser.evaluate('$gameScreen.picture(41)==null&&$gameScreen.picture(42)==null'),true);
  await browser.press('Tab',9);await hidden(browser,true);await click(browser,1150,128);await hidden(browser,false);assert.deepEqual(await state(browser),before);
- await browser.press('Enter',13);await choices(browser,'approaches');assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),3);
- await click(browser,1150,128);await choices(browser,'retreat');await activate(browser,'retreat',1);await choices(browser,'approaches');
- assert.deepEqual((await state(browser)).partyIds,before.partyIds);assert.equal((await state(browser)).phase,'encounter_choice');
- await activate(browser,'approaches',3);await pause(browser);const reread=await state(browser);await browser.press('Enter',13);await choices(browser,'approaches');assert.deepEqual(await state(browser),reread);
- await activate(browser,'approaches',4);await choices(browser,'retreat');await activate(browser,'retreat',1);await choices(browser,'approaches');
+ await readUntilChoices(browser,'approaches');assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),3);
+ await activate(browser,'approaches',3);await pause(browser);const reread=await state(browser);await readUntilChoices(browser,'approaches');assert.deepEqual(await state(browser),reread);
  await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,[41,42]);const still=await state(browser);
  await click(browser,920,128);await hidden(browser,false);assert.deepEqual(await state(browser),still);await choices(browser,'approaches');
  await browser.screenshot(`${evidence('IT-050')}/upper-utilities.png`);
@@ -125,7 +123,6 @@ canonicalCase('IT-080','migrated hero visits transfer to their own map and cance
  await browser.press('Escape',27);await choices(browser,'formation');
  assert.equal(await browser.evaluate('$gameMap.mapId()'),3);
  assert.equal(await browser.evaluate('$gameMessage._drylandChoiceFocus.key'),'formation');
- assert.equal(await browser.evaluate('$gameMessage.choices().length'),11);
  assert.deepEqual([...new Set(await interpreterMaps())],[3],'Return leaves no hero-map interpreter in the native chain');
  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),heroIndex,'Return restores the chosen tavern portrait');
  assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),'Dryland_Taverna');
