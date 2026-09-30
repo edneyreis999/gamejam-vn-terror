@@ -24,7 +24,7 @@
                 "indent": 0,
                 "parameters": [
                     {
-                        "name": "",
+                        "name": "Dryland_Opening_TheWell",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -17539,7 +17539,7 @@
                 "indent": 0,
                 "parameters": [
                     {
-                        "name": "Item3",
+                        "name": "",
                         "volume": 80,
                         "pitch": 100,
                         "pan": 0
@@ -17616,7 +17616,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Item3",
+                        "name": "",
                         "volume": 80,
                         "pitch": 100,
                         "pan": 0
@@ -17727,7 +17727,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Item3",
+                        "name": "",
                         "volume": 80,
                         "pitch": 100,
                         "pan": 0
@@ -27024,7 +27024,19 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "(['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03','closure.first.01','closure.second.01'].includes($gameVariables.value(56)) || ['council.01','council.03','council.challenge','council.solo'].includes($gameVariables.value(56)))"
+                    "$gameVariables.value(31) === 'epilogue'"
+                ]
+            },
+            {
+                "code": 249,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 65,
+                        "pitch": 100,
+                        "pan": 0
+                    }
                 ]
             },
             {
@@ -27032,8 +27044,8 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Town1",
-                        "volume": 45,
+                        "name": "Dryland_Opening_TheWell",
+                        "volume": 35,
                         "pitch": 100,
                         "pan": 0
                     }
@@ -27044,7 +27056,163 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "People2",
+                        "name": "",
+                        "volume": 60,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(31) === 'council'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "Dryland_Revelation_TheLastKey",
+                        "volume": 25,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 245,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 60,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(31) === 'final_choice'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "Dryland_FinalChoice_UndeadKillingSpree",
+                        "volume": 18,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 245,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 60,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "(['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03','closure.first.01','closure.second.01'].includes($gameVariables.value(56)) || ['council.01','council.03','council.challenge','council.solo'].includes($gameVariables.value(56)))"
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03'].includes($gameVariables.value(56))"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
+                    {
+                        "name": "Dryland_Opening_TheWell",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
+                    {
+                        "name": "Dryland_Opening_TheWell",
+                        "volume": 45,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 245,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
                         "volume": 25,
                         "pitch": 100,
                         "pan": 0
@@ -27069,7 +27237,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Town3",
+                        "name": "Dryland_PrologueTavern_ManMadeWings",
                         "volume": 35,
                         "pitch": 100,
                         "pan": 0
@@ -27081,7 +27249,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "People1",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27102,16 +27270,76 @@
                 ]
             },
             {
-                "code": 241,
+                "code": 111,
                 "indent": 1,
                 "parameters": [
+                    12,
+                    "$gameVariables.value(34) === 'physical'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
                     {
-                        "name": "Dungeon2",
+                        "name": "Dryland_Church_Danger",
                         "volume": 35,
                         "pitch": 100,
                         "pan": 0
                     }
                 ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 2,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(34) === 'supernatural'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 3,
+                "parameters": [
+                    {
+                        "name": "Dryland_Park_ValleyOfGhosts",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 3,
+                "parameters": [
+                    {
+                        "name": "Dryland_Village_Combined",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 111,
@@ -27126,7 +27354,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Drips",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27151,7 +27379,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Wind1",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27176,7 +27404,7 @@
                 "indent": 2,
                 "parameters": [
                     {
-                        "name": "Darkness",
+                        "name": "",
                         "volume": 60,
                         "pitch": 100,
                         "pan": 0
@@ -27202,8 +27430,45 @@
                 ]
             },
             {
-                "code": 241,
+                "code": 249,
                 "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 65,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "['reunite', 'destroy'].includes($gameVariables.value(59))"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 2,
+                "parameters": [
+                    {
+                        "name": "Dryland_Opening_TheWell",
+                        "volume": 35,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 241,
+                "indent": 2,
                 "parameters": [
                     {
                         "name": "",
@@ -27212,6 +27477,11 @@
                         "pan": 0
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 245,
@@ -27226,66 +27496,8 @@
                 ]
             },
             {
-                "code": 111,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(64) !== $gameVariables.value(59)"
-                ]
-            },
-            {
-                "code": 111,
-                "indent": 2,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(59) === 'reunite'"
-                ]
-            },
-            {
-                "code": 249,
-                "indent": 3,
-                "parameters": [
-                    {
-                        "name": "Musical1",
-                        "volume": 65,
-                        "pitch": 100,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 2,
-                "parameters": []
-            },
-            {
-                "code": 111,
-                "indent": 2,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(59) === 'destroy'"
-                ]
-            },
-            {
-                "code": 249,
-                "indent": 3,
-                "parameters": [
-                    {
-                        "name": "Organ",
-                        "volume": 65,
-                        "pitch": 100,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 2,
-                "parameters": []
-            },
-            {
                 "code": 122,
-                "indent": 2,
+                "indent": 1,
                 "parameters": [
                     64,
                     64,
@@ -27293,11 +27505,6 @@
                     4,
                     "$gameVariables.value(59)"
                 ]
-            },
-            {
-                "code": 412,
-                "indent": 1,
-                "parameters": []
             },
             {
                 "code": 412,
@@ -27317,7 +27524,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Door1",
+                        "name": "",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
@@ -27342,7 +27549,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Collapse1",
+                        "name": "",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
@@ -27367,7 +27574,7 @@
                 "indent": 1,
                 "parameters": [
                     {
-                        "name": "Water1",
+                        "name": "",
                         "volume": 45,
                         "pitch": 100,
                         "pan": 0
