@@ -1289,6 +1289,12 @@ Na versão descrita, essa história aparece somente por uma ou duas referências
 
 ### 19.4 Áudio
 
+**Música da escolha final — Confirmado em 2026-09-30:** usar uma música de tensão e pressão enquanto o jogador decide, sem acrescentar limite de tempo. A seleção delegada é `(Tense) Undead Killing Spree`, em repetição, com entrada suave e volume controlado. Resolve a pendência de música da escolha indicada abaixo; preservar The Last Key na revelação e os temas dos desfechos. Ver [spec incremental](../planos/tasks/final-choice-pressure/spec.md).
+
+**Revelação após o Vilarejo — Confirmado em 2026-09-30:** após resolver a última armadilha, usar uma faixa de tensão durante toda a revelação/Conselho, até aparecer a escolha final. A seleção delegada é `(Tense) The Last Key`, em repetição; substitui também The Well nas narrações desse trecho. A faixa da revelação termina nessa tela e dá lugar à música da escolha definida na atualização acima. Preservar as trilhas dos desfechos. Ver [spec incremental](../planos/tasks/revelation-last-key/spec.md).
+
+**Música do Vilarejo Partido — Confirmado em 2026-09-30:** combinar simultaneamente `(Tense) Danger` e `(Ambience) The Valley of Ghosts Origin` em uma única faixa para a rota final, com volumes equilibrados, entrada suave e repetição. Preservar The Well nas narrações de Rheed e os temas dos finais. Substitui a música provisória dessa rota conforme a [spec incremental](../planos/tasks/village-blended-music/spec.md).
+
 **Música das narrações de Rheed — Confirmado em 2026-09-30:** usar `(Chillout) The Well`, a mesma faixa da abertura, quando Rheed mais velho narra no presente, inclusive no prólogo, nos fechamentos das rotas e no Conselho. Substitui as seleções anteriores de música nesses trechos; as conversas do passado mantêm a música da cena. Ver [spec incremental](../planos/tasks/rheed-the-well/spec.md).
 
 **Música do Parque das Águas Assombradas — Confirmado em 2026-09-30:** usar `(Ambience) The Valley of Ghosts Origin` como música em repetição durante o percurso e suas armadilhas até a conclusão da rota, com a mesma entrada gradual de dois segundos aplicada à igreja. Preservar as demais músicas e os efeitos desativados. Substitui a faixa provisória do parque conforme a [spec incremental](../planos/tasks/park-valley-of-ghosts/spec.md).

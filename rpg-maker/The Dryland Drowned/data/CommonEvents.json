@@ -27024,6 +27024,90 @@
                 "indent": 0,
                 "parameters": [
                     12,
+                    "$gameVariables.value(31) === 'council'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "Dryland_Revelation_TheLastKey",
+                        "volume": 25,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 245,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 60,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(31) === 'final_choice'"
+                ]
+            },
+            {
+                "code": 241,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "Dryland_FinalChoice_UndeadKillingSpree",
+                        "volume": 18,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 245,
+                "indent": 1,
+                "parameters": [
+                    {
+                        "name": "",
+                        "volume": 60,
+                        "pitch": 100,
+                        "pan": 0
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
                     "(['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03','closure.first.01','closure.second.01'].includes($gameVariables.value(56)) || ['council.01','council.03','council.challenge','council.solo'].includes($gameVariables.value(56)))"
                 ]
             },
@@ -27186,7 +27270,7 @@
                 "indent": 3,
                 "parameters": [
                     {
-                        "name": "Dungeon2",
+                        "name": "Dryland_Village_Combined",
                         "volume": 35,
                         "pitch": 100,
                         "pan": 0
