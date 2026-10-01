@@ -5269,6 +5269,65 @@
               ]
             },
             {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Mostra o busto do Rheed, narrador da armadilha, durante a introdução."
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Basic_EnterBust",
+                "Basic_EnterBust",
+                {
+                  "PictureID:eval": "60",
+                  "PictureName:str": "Reed final",
+                  "Origin:str": "Bust",
+                  "Position:num": "2",
+                  "StartOffsetX:eval": "0",
+                  "StartOffsetY:eval": "0",
+                  "EasingType:str": "OutSine",
+                  "HorzMirror:str": "None",
+                  "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Scale_ScaleTo",
+                "Scale_ScaleTo",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetScaleX:str": "51",
+                  "TargetScaleY:str": "51",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "VisuMZ_2_VNPictureBusts",
+                "Move_MoveToCoordinates",
+                "Move_MoveToCoordinates",
+                {
+                  "PictureID:arrayeval": "[\"60\"]",
+                  "TargetX:str": "320",
+                  "TargetY:str": "700",
+                  "EasingType:str": "Linear",
+                  "FlipDirection:str": "None",
+                  "Duration:eval": "0"
+                }
+              ]
+            },
+            {
               "code": 101,
               "indent": 0,
               "parameters": [
@@ -5304,6 +5363,20 @@
               ]
             },
             {"code":401,"indent":0,"parameters":["$[enc.a1.intro.3]"]},
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Retira o busto do Rheed antes das abordagens."
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 0,
+              "parameters": [
+                60
+              ]
+            },
             {
               "code": 108,
               "indent": 0,
