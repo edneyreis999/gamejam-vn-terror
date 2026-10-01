@@ -197,145 +197,145 @@
     ],
     "sounds": [
         {
-            "name": "",
+            "name": "Cursor3",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Decision2",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Cancel2",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Buzzer1",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Equip1",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Save2",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Load2",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Battle1",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Run",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Attack3",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Damage4",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Collapse1",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Collapse2",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Collapse3",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Damage5",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Collapse4",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Recovery",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Miss",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Evasion1",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Evasion2",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Reflection",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Shop1",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Item3",
             "pan": 0,
             "pitch": 100,
             "volume": 90
         },
         {
-            "name": "",
+            "name": "Item3",
             "pan": 0,
             "pitch": 100,
             "volume": 90
