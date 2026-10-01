@@ -42545,7 +42545,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -42570,7 +42570,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -42693,7 +42693,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -42718,7 +42718,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -42767,7 +42767,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -42792,7 +42792,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -42841,7 +42841,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -42866,7 +42866,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -43683,7 +43683,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -43708,7 +43708,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -43831,7 +43831,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -43856,7 +43856,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -43905,7 +43905,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -43930,7 +43930,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -43979,7 +43979,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -44004,7 +44004,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -44821,7 +44821,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -44846,7 +44846,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -44969,7 +44969,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -44994,7 +44994,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -45043,7 +45043,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -45068,7 +45068,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -45117,7 +45117,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -45142,7 +45142,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -58370,7 +58370,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -58395,7 +58395,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -58894,7 +58894,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -58919,7 +58919,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -59156,7 +59156,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -59181,7 +59181,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
@@ -59418,7 +59418,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "0"
                     }
                 ]
@@ -59443,7 +59443,7 @@
                         "StartOffsetX:eval": "-32",
                         "StartOffsetY:eval": "0",
                         "EasingType:str": "OutSine",
-                        "HorzMirror:str": "None",
+                        "HorzMirror:str": "Mirror",
                         "Duration:eval": "20"
                     }
                 ]
