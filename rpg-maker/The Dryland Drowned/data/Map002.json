@@ -3257,6 +3257,87 @@
               ]
             },
             {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Cartão de transição: escurece a tela antes de voltar ao passado."
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                1,
+                47,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "code": 223,
+              "indent": 1,
+              "parameters": [
+                [
+                  -255,
+                  -255,
+                  -255,
+                  0
+                ],
+                30,
+                true
+              ]
+            },
+            {
+              "code": 411,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 223,
+              "indent": 1,
+              "parameters": [
+                [
+                  -255,
+                  -255,
+                  -255,
+                  0
+                ],
+                0,
+                false
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                2,
+                1,
+                ""
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "$[prologue.tavern.flashback]"
+              ]
+            },
+            {
+              "code": 108,
+              "indent": 0,
+              "parameters": [
+                "Mostra a Taverna do passado surgindo do escuro."
+              ]
+            },
+            {
               "code": 231,
               "indent": 0,
               "parameters": [
@@ -3268,8 +3349,77 @@
                 360,
                 100,
                 100,
-                255,
+                0,
                 0
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                1,
+                47,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "code": 232,
+              "indent": 1,
+              "parameters": [
+                1,
+                0,
+                1,
+                640,
+                360,
+                100,
+                100,
+                255,
+                0,
+                30,
+                true
+              ]
+            },
+            {
+              "code": 411,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 232,
+              "indent": 1,
+              "parameters": [
+                1,
+                0,
+                1,
+                640,
+                360,
+                100,
+                100,
+                255,
+                0,
+                1,
+                true
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 223,
+              "indent": 0,
+              "parameters": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                false
               ]
             },
             {
