@@ -20,6 +20,13 @@
         "switchId": 1,
         "list": [
             {
+                "code": 117,
+                "indent": 0,
+                "parameters": [
+                    351
+                ]
+            },
+            {
                 "code": 241,
                 "indent": 0,
                 "parameters": [
@@ -9606,6 +9613,13 @@
                 "code": 117,
                 "indent": 2,
                 "parameters": [
+                    355
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 2,
+                "parameters": [
                     349
                 ]
             },
@@ -9778,6 +9792,13 @@
                 "parameters": [
                     12,
                     "$gameVariables.value(24) === 'ok'"
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 2,
+                "parameters": [
+                    356
                 ]
             },
             {
@@ -69095,7 +69116,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    10
+                    12
                 ]
             },
             {
@@ -69165,7 +69186,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    11
+                    13
                 ]
             },
             {
@@ -69235,7 +69256,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    12
+                    16
                 ]
             },
             {
@@ -69305,7 +69326,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    13
+                    15
                 ]
             },
             {
@@ -69375,7 +69396,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    14
+                    11
                 ]
             },
             {
@@ -69445,7 +69466,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    15
+                    10
                 ]
             },
             {
@@ -69515,7 +69536,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    16
+                    14
                 ]
             },
             {
@@ -70509,6 +70530,278 @@
                 "code": 412,
                 "indent": 0,
                 "parameters": []
+            },
+            {
+                "code": 0,
+                "indent": 0,
+                "parameters": []
+            }
+        ]
+    },
+    {
+        "id": 355,
+        "name": "Armadilhas A — Carregar imagens",
+        "trigger": 0,
+        "switchId": 1,
+        "list": [
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Coreto_0_CoreEngine",
+                    "SystemLoadImages",
+                    "SystemLoadImages",
+                    {
+                        "animations:arraystr": "[]",
+                        "battlebacks1:arraystr": "[]",
+                        "battlebacks2:arraystr": "[]",
+                        "characters:arraystr": "[]",
+                        "enemies:arraystr": "[]",
+                        "faces:arraystr": "[]",
+                        "parallaxes:arraystr": "[]",
+                        "pictures:arraystr": "[\"Dryland_Encounter_A1\",\"Dryland_Encounter_A1_blur\",\"Dryland_Encounter_A2\",\"Dryland_Encounter_A2_blur\",\"Dryland_Encounter_A3\",\"Dryland_Encounter_A3_blur\",\"Dryland_Encounter_A4\",\"Dryland_Encounter_A4_blur\",\"Dryland_Encounter_A5\",\"Dryland_Encounter_A5_blur\",\"Dryland_Encounter_A6\",\"Dryland_Encounter_A6_blur\",\"Dryland_Encounter_A7\",\"Dryland_Encounter_A7_blur\",\"Dryland_Encounter_A8\",\"Dryland_Encounter_A8_blur\"]",
+                        "sv_actors:arraystr": "[]",
+                        "sv_enemies:arraystr": "[]",
+                        "system:arraystr": "[]",
+                        "tilesets:arraystr": "[]",
+                        "titles1:arraystr": "[]",
+                        "titles2:arraystr": "[]"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/animations/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks2/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/characters/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/faces/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/parallaxes/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/pictures/ = [\"Dryland_Encounter_A1\",\"Dryland_Encounter_A1_blur\",\"Dryland_Encounter_A2\",\"Dryland_Encounter_A2_blur\",\"Dryland_Encounter_A3\",\"Dryland_Encounter_A3_blur\",\"Dryland_Encounter_A4\",\"Dryland_Encounter_A4_blur\",\"Dryland_Encounter_A5\",\"Dryland_Encounter_A5_blur\",\"Dryland_Encounter_A6\",\"Dryland_Encounter_A6_blur\",\"Dryland_Encounter_A7\",\"Dryland_Encounter_A7_blur\",\"Dryland_Encounter_A8\",\"Dryland_Encounter_A8_blur\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_actors/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/system/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/tilesets/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles2/ = []"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 0,
+                "parameters": []
+            }
+        ]
+    },
+    {
+        "id": 356,
+        "name": "Armadilhas B — Carregar imagens",
+        "trigger": 0,
+        "switchId": 1,
+        "list": [
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Coreto_0_CoreEngine",
+                    "SystemLoadImages",
+                    "SystemLoadImages",
+                    {
+                        "animations:arraystr": "[]",
+                        "battlebacks1:arraystr": "[]",
+                        "battlebacks2:arraystr": "[]",
+                        "characters:arraystr": "[]",
+                        "enemies:arraystr": "[]",
+                        "faces:arraystr": "[]",
+                        "parallaxes:arraystr": "[]",
+                        "pictures:arraystr": "[\"Dryland_Encounter_B1\",\"Dryland_Encounter_B1_blur\",\"Dryland_Encounter_B2\",\"Dryland_Encounter_B2_blur\",\"Dryland_Encounter_B3\",\"Dryland_Encounter_B3_blur\",\"Dryland_Encounter_B4\",\"Dryland_Encounter_B4_blur\",\"Dryland_Encounter_B5\",\"Dryland_Encounter_B5_blur\",\"Dryland_Encounter_B6\",\"Dryland_Encounter_B6_blur\",\"Dryland_Encounter_B7\",\"Dryland_Encounter_B7_blur\",\"Dryland_Encounter_B8\",\"Dryland_Encounter_B8_blur\"]",
+                        "sv_actors:arraystr": "[]",
+                        "sv_enemies:arraystr": "[]",
+                        "system:arraystr": "[]",
+                        "tilesets:arraystr": "[]",
+                        "titles1:arraystr": "[]",
+                        "titles2:arraystr": "[]"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/animations/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks2/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/characters/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/faces/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/parallaxes/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/pictures/ = [\"Dryland_Encounter_B1\",\"Dryland_Encounter_B1_blur\",\"Dryland_Encounter_B2\",\"Dryland_Encounter_B2_blur\",\"Dryland_Encounter_B3\",\"Dryland_Encounter_B3_blur\",\"Dryland_Encounter_B4\",\"Dryland_Encounter_B4_blur\",\"Dryland_Encounter_B5\",\"Dryland_Encounter_B5_blur\",\"Dryland_Encounter_B6\",\"Dryland_Encounter_B6_blur\",\"Dryland_Encounter_B7\",\"Dryland_Encounter_B7_blur\",\"Dryland_Encounter_B8\",\"Dryland_Encounter_B8_blur\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_actors/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/system/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/tilesets/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles2/ = []"
+                ]
             },
             {
                 "code": 0,
