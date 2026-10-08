@@ -70,7 +70,7 @@ canonicalCase('IT-004', 'The native prologue runs its authored passage and commi
     const expectedBust = dialogue ? 'Reed-novo' : 'Reed final';
     assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name() ?? null'), expectedBust);
     assert.equal(await browser.evaluate('$gameScreen.picture(61)?.name() ?? null'), dialogue ? 'Dryland_ivai' : null);
-    assert.deepEqual(await browser.evaluate('[AudioManager._currentBgm?.name || "", AudioManager._currentBgs?.name || ""]'), dialogue ? ['Town3', 'People1'] : ['Town1', 'People2']);
+    assert.deepEqual(await browser.evaluate('[AudioManager._currentBgm?.name || "", AudioManager._currentBgs?.name || ""]'), dialogue ? ['Dryland_PrologueTavern_ManMadeWings', 'People1'] : ['Dryland_Opening_TheWell', 'People2']);
     if (marker.startsWith('Minha família') || marker.startsWith('Você') || marker.startsWith('Os detalhes')) {
       if(marker.startsWith('Você'))await assertHidePreservesPortraits(browser,[60,61],'docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/young-rheed-hide.png');
       await browser.screenshot(`docs/qa/evidence/approved-narrative-dialogue-staging/execution-20260918/task-01/${marker.startsWith('Você') ? 'young-rheed' : marker.startsWith('Minha') ? 'promise' : 'closing'}.png`);

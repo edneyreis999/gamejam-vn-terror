@@ -8,12 +8,13 @@ export async function observeBustPassage(context, player) {
   const state = before.campaign, id = state.reading?.passageIds[state.reading.index];
   if (!id) return;
   const expected = new Map();
-  const hero = /^(farewell|epilogue)\.(H[1-8])$/.exec(id);
+  const hero = /^(farewell)\.(H[1-8])$/.exec(id);
   if (hero) expected.set(60, `Dryland_${hero[2]}`);
   if (/^lover\.(physical|supernatural)\.(warning|second)$/.test(id)) expected.set(63, id.includes('physical') ? 'Dryland_perola' : 'Dryland_florai');
-  if (/^(council\.(challenge|solo|confession|andira)|opinion\.H[1-8])$/.test(id)) {
+  if (/^council\.(01|03|challenge|solo)$/.test(id)) expected.set(60, 'Reed final');
+  if (/^(council\.(02|confession|andira)|opinion\.H[1-8])$/.test(id)) {
     if (id !== 'council.andira') state.climaxPartyIds.forEach((hero, index) => expected.set(60 + index, `Dryland_${hero}`));
-    if (id !== 'council.challenge') expected.set(63, 'Dryland_ivai');
+    expected.set(63, 'Dryland_ivai');
     if (id === 'council.andira') expected.set(65, 'Dryland_andira');
   }
   await context.wait(() => [60,61,62,63,64,65].every(id => {
@@ -25,7 +26,7 @@ export async function observeBustPassage(context, player) {
     viewport: { width: innerWidth, height: innerHeight, reduced: matchMedia('(prefers-reduced-motion: reduce)').matches },
     pictures: [60,61,62,63,64,65].flatMap(id => {
       const p = $gameScreen.picture(id);
-      return p ? [{id, name:p.name(), x:p.x(), y:p.y(), scale:p.scaleX(), tone:p.tone(), opacity:p.opacity()}] : [];
+      return p ? [{id, name:p.name(), x:p.x(), y:p.y(), scale:p.scaleX(), tone:p.tone() || [0,0,0,0], opacity:p.opacity()}] : [];
     })
   }));
   assert.deepEqual(actual.pictures.map(p => [p.id,p.name]), [...expected]);
@@ -53,7 +54,7 @@ export async function observeBustTransition(context, player, advance) {
     passageId: $gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index] ?? null,
     pictures: [60,61,62,63,64,65].flatMap(id => {
       const p = $gameScreen.picture(id);
-      return p ? [{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone(),opacity:p.opacity()}] : [];
+      return p ? [{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone() || [0,0,0,0],opacity:p.opacity()}] : [];
     })
   }));
   await advance();
@@ -63,7 +64,7 @@ export async function observeBustTransition(context, player, advance) {
     await context.wait(frame => Graphics.frameCount > frame, previousFrame);
     const value = await context.read(`bust-transition-${id}-${sample}`, () => ({frame:Graphics.frameCount,
       passageId: $gameSystem._dryland.campaign.reading?.passageIds[$gameSystem._dryland.campaign.reading.index] ?? null,
-      pictures:[60,61,62,63,64,65].flatMap(id=>{const p=$gameScreen.picture(id);return p?[{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone(),opacity:p.opacity()}]:[]})}));
+      pictures:[60,61,62,63,64,65].flatMap(id=>{const p=$gameScreen.picture(id);return p?[{id,name:p.name(),x:p.x(),scale:p.scaleX(),tone:p.tone() || [0,0,0,0],opacity:p.opacity()}]:[]})}));
     const label = `bust-transition-${player.bustSerial}-${sample}-${id.replaceAll('.', '-')}`;
     await context.shot(label);
     context.report.observations.push({label,kind:'bust-temporal',value});

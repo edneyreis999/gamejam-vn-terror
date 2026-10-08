@@ -17,7 +17,7 @@ export class DirectedNativePlayer {
     return this.context.read('native-visible-surface', () => {
       const scene = window.SceneManager?._scene;
       const message = scene?._messageWindow, choices = scene?._choiceListWindow;
-      return { text: window.$gameMessage?.allText() || '',
+      return { text: window.TextManager?.parseLocalizedText(window.$gameMessage?.allText() || '') || '',
         labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
         kind: window.$gameMessage?._drylandChoiceFocus?.key || 'title',
         scrolling: !!scene?._scrollTextWindow?._text,
@@ -41,7 +41,7 @@ export class DirectedNativePlayer {
           (scene._scrollTextWindow?._text || (message.pause && message._waitCount === 0) || choices?.isOpenAndActive()));
         return { error, auto, fast, visible,
           autoForwardCount,
-          value: { text: window.$gameMessage?.allText() || '',
+          value: { text: window.TextManager?.parseLocalizedText(window.$gameMessage?.allText() || '') || '',
             labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
             kind: window.$gameMessage?._drylandChoiceFocus?.key || 'title',
             scrolling: !!scene?._scrollTextWindow?._text,
@@ -139,7 +139,7 @@ export class DirectedNativePlayer {
 
   async dialogueControls(label, expectedSlots) {
     const context=this.context;
-    await context.wait(()=>[60,61,62,63,64,65].every(id=>{const p=$gameScreen.picture(id);return !p||p.tone().every(v=>v===0||v===-24);}));
+    await context.wait(()=>[60,61,62,63,64,65].every(id=>{const p=$gameScreen.picture(id);return !p||(p.tone() || [0,0,0,0]).every(v=>v===0||v===-24);}));
     const composition=()=>context.read(`${label}-composition`,()=>({text:$gameMessage.allText(),speaker:$gameMessage.speakerName(),
       pictures:[60,61,62,63,64,65].map(id=>{const p=$gameScreen.picture(id);return p?{id,name:p.name(),x:p.x(),y:p.y(),scale:p.scaleX(),tone:p.tone()}:null;})}));
     const before=await composition(),campaign=await this.snapshot(`${label}-campaign`);
@@ -157,7 +157,24 @@ export class DirectedNativePlayer {
     }
   }
 
+  async waitFile() {
+    for (let step=0;step<10;step++) {
+      await this.context.wait(()=>SceneManager._scene instanceof Scene_File || ($gameMap.mapId()===1&&SceneManager._scene._messageWindow?.pause));
+      if (await this.context.read('file-scene',()=>SceneManager._scene instanceof Scene_File)) return;
+      await this.context.shot(`age-notice-${++this.serial}`);
+      await this.context.input.key('Enter');
+    }
+    throw Error('File selection not reached through opening notice');
+  }
+
+  async openDestinations() {
+    await this.until('formation');
+    await this.choose('Partir');
+    return this.until('destinations');
+  }
+
   async file(fileId) {
+    await this.waitFile();
     await this.context.wait(()=>SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy());
     for(let step=0;step<20;step++){
       const current=await this.context.read('selected-native-file',()=>{const w=SceneManager._scene._listWindow;return w.indexToSavefileId(w.index());});
@@ -169,14 +186,16 @@ export class DirectedNativePlayer {
   }
 
   async returnToTavern() {
-    const surface = await this.ready();
-    if ([37, 38, 39, 40, 41, 42, 43, 44].includes(surface.map)) {
-      await this.until('hero');
-      await this.choose('Voltar à taverna');
+    for(let step=0;step<100;step++) {
+      const surface=await this.ready();
+      if(surface.active&&surface.kind==='formation') {assert.equal(surface.map,3);return surface;}
+      if(surface.active&&surface.kind==='hero') {await this.choose('Voltar à taverna');continue;}
+      assert.ok(surface.paused,`Expected tavern reading or hero menu: ${JSON.stringify(surface)}`);
+      if(this.onPassage)await this.onPassage(this,surface);
+      await this.context.shot(`passage-${++this.serial}`);await this.context.input.key('Enter');
+      if(this.onAdvance)await this.onAdvance(this,surface);
     }
-    const tavern = await this.until('formation');
-    assert.equal(tavern.map, 3);
-    return tavern;
+    throw Error('Too many passages before tavern');
   }
 
   async until(kind) {

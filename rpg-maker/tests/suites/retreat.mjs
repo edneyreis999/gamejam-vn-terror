@@ -97,7 +97,7 @@ canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed po
   assert.deepEqual(await browser.evaluate('[38,39,40].map(id=>$gameSwitches.value(id))'), [true,true,true]);
   assert.equal(returned.history.filter(action => action.passageId?.startsWith('prologue.')).length, before.history.filter(action => action.passageId?.startsWith('prologue.')).length);
   const moves = await browser.evaluate('absenceMoves');
-  assert.deepEqual(moves.map(move => move.args[0]), [10, 11, 12]);
+  assert.deepEqual(moves.map(move => move.args[0]), [12, 13, 16]);
   assert.equal(new Set(moves.map(move => move.frame)).size, 1);
   assert.deepEqual(moves.map(move => move.args.slice(2, 4)), [[344, 520], [840, 176], [760, 497]]);
   await browser.waitFor('absenceFrames.length === 65');
@@ -127,8 +127,8 @@ canonicalCase('IT-009', 'native return fades simultaneous new losses at fixed po
 canonicalCase('IT-010', 'interrupting the first return consumes absence and never restores dead interaction targets', { timeout: 90000 }, async t => {
   const { browser } = await beginReturn(t);
   const before = await snapshot(browser);
-  assert.ok(await browser.evaluate('[10,11,12].some(id=>$gameScreen.picture(id)?.opacity()>0)'), 'Interruption occurs before the native fade completes.');
-  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))"), false);
+  assert.ok(await browser.evaluate('[12,13,16].some(id=>$gameScreen.picture(id)?.opacity()>0)'), 'Interruption occurs before the native fade completes.');
+  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (12|13|16)>/.test(entry.name))"), false);
   await browser.call('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 344, y: 520 });
   await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', x: 344, y: 520, button: 'left', clickCount: 1 });
   await browser.evaluate('new Promise(resolve => requestAnimationFrame(resolve))');
@@ -142,8 +142,8 @@ canonicalCase('IT-010', 'interrupting the first return consumes absence and neve
   await choices(browser, 'formation');
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 3);
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
-  assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
-  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (10|11|12)>/.test(entry.name))"), false);
+  assert.deepEqual(await browser.evaluate('[12,13,16].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
+  assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(entry=>/Bind Picture: (12|13|16)>/.test(entry.name))"), false);
   assert.deepEqual(await snapshot(browser), before);
   // The accepted return already saved the native absence switches.
   // Continue at that checkpoint shows empty places, without a second fade.
@@ -151,14 +151,14 @@ canonicalCase('IT-010', 'interrupting the first return consumes absence and neve
   await browser.waitFor("$gameMap.mapId() === 1 && $gameMessage.choices().some(c=>c.includes('choice.title.continue')) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
   await chooseTitle(browser, 'choice.title.continue'); await selectFile(browser,1); await choices(browser, 'formation');
   assert.equal(await browser.evaluate('absenceMoves.length'), 3);
-  assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
+  assert.deepEqual(await browser.evaluate('[12,13,16].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
   assert.deepEqual(await snapshot(browser), before);
 });
 canonicalCase('IT-011', 'native reduced motion immediately removes new losses', { timeout: 90000 }, async t => {
   const { browser, before } = await beginReturn(t, true);
   assert.deepEqual(await snapshot(browser), finishReading(before));
   assert.equal(await browser.evaluate('absenceMoves.length'), 0);
-  assert.deepEqual(await browser.evaluate('[10,11,12].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
+  assert.deepEqual(await browser.evaluate('[12,13,16].map(id=>Boolean($gameScreen.picture(id)))'), [false,false,false]);
   // O botão Elenco (lista de presentes/mortos) saiu da taverna; a regra de ausência fica coberta acima.
 });
 canonicalCase('IT-013', 'native retreat returns to the tavern without confirmation and commitment removes retreat', { timeout: 120000 }, async t => {

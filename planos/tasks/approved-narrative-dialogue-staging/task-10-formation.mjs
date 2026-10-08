@@ -25,10 +25,10 @@ export async function execute(context) {
     transcript.push({label,...frame});
   }
   const player = new DirectedNativePlayer(context,{onPassage:async()=>capture('reading-'+(++serial))});
-  await player.choose('Jogar'); await player.file(1); await player.returnToTavern();
+  await player.choose('Novo jogo'); await player.file(1); await player.returnToTavern();
   for (const name of names) {
     await player.choose(name,{mouse:reduced}); await player.choose('Conversar'); await player.until('hero');
-    await player.choose('Selecionar'); await player.until('hero'); await capture('selected-'+name);
+    await player.choose('Selecionar'); await player.returnToTavern();await player.choose(name); await player.until('hero'); await capture('selected-'+name);
     assert.deepEqual((await player.snapshot('selected-state-'+name)).campaign.draftPartyIds,['H'+(names.indexOf(name)+1)]);
     await player.choose('Retirar do grupo'); await player.until('hero'); await capture('removed-'+name);
     assert.deepEqual((await player.snapshot('removed-state-'+name)).campaign.draftPartyIds,[]);

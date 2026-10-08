@@ -6,7 +6,7 @@ import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 
 const port = process.env.DRYLAND_QA_PORT || '18726';
-if (!/^\d+$/.test(port) || Number(port) < 1024 || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
+if (!/^\d+$/.test(port) || (Number(port) !== 0 && Number(port) < 1024) || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
 // O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir, no idioma escolhido
 // pelo jogador (inglês por padrão). Os testes de conteúdo comparam a prosa em português, então o
 // navegador de teste fixa o idioma em Portuguese e devolve o texto já resolvido por allText(),
@@ -22,7 +22,7 @@ const portugueseMessageText = `(() => {
 })();`;
 
 const waitMs = Number(process.env.DRYLAND_QA_WAIT_MS) || 20000;
-export const origin = `http://127.0.0.1:${port}/`;
+export let origin = `http://127.0.0.1:${port}/`;
 // DRYLAND_QA_PROJECT aponta a suíte para um build exportado (ex.: dist/ podado por prune-build).
 export const project = path.resolve(process.env.DRYLAND_QA_PROJECT || 'rpg-maker/The Dryland Drowned');
 
@@ -47,10 +47,17 @@ export async function startServer(t, directory = project) {
     if (server.exitCode !== null || server.signalCode !== null || attempt >= 100) throw new Error(`Loopback server failed: ${log}`);
     await delay(50);
   }
+  const bound = /port (\d+)/.exec(log);
+  if (!bound) throw new Error('Cannot identify owned server port: ' + log);
+  origin = `http://127.0.0.1:${bound[1]}/`;
   return { stop, log: () => log };
 }
 
 export async function openChrome(t, options = {}) {
+  const broker = process.env.DRYLAND_BROWSER_BROKER;
+  const reserve = broker ? await fetch(broker + '/reserve', {method:'POST',body:process.env.DRYLAND_JOB_ID}).then(async r => {if(!r.ok)throw new Error(await r.text());return r.text();}) : null;
+  let released = false;
+  async function release() { if (reserve && !released) { released=true; await fetch(broker+'/release',{method:'POST',body:reserve}); } }
   const profile = await mkdtemp(path.join(tmpdir(), 'dryland-native-'));
   if (options.zoom && options.zoom !== 1) {
     await mkdir(path.join(profile, 'Default'));
@@ -62,9 +69,11 @@ export async function openChrome(t, options = {}) {
   const executable = process.env.DRYLAND_CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
   const chrome = spawn(executable, [
     '--headless=new', '--remote-debugging-pipe', '--no-first-run', '--no-default-browser-check',
-    '--disable-background-networking', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
+    '--disable-background-networking', `--use-angle=${process.env.DRYLAND_QA_ANGLE || 'metal'}`, ...(process.env.DRYLAND_QA_ANGLE === 'swiftshader' ? ['--enable-unsafe-swiftshader'] : []),
     `--user-data-dir=${profile}`, 'about:blank'
   ], { stdio: ['ignore', 'ignore', 'pipe', 'pipe', 'pipe'] });
+  if (broker) await fetch(broker+'/started',{method:'POST',body:JSON.stringify({token:reserve,pid:chrome.pid})});
+  chrome.once('exit', () => { release().catch(error => {console.error(error);process.exitCode=1;}); });
   let nextId = 0;
   let buffer = '';
   let stderr = '';
@@ -116,6 +125,7 @@ export async function openChrome(t, options = {}) {
     await rm(profile, { recursive: true, force: true });
   });
   const version = await send('Browser.getVersion');
+  if (process.env.DRYLAND_JOB_ID) await writeFile('browser-environment.json',JSON.stringify({version,gpu:await send('SystemInfo.getInfo'),origin,renderer:process.env.DRYLAND_QA_ANGLE||'metal'},null,2));
   let targetId;
   let sessionId;
   const call = (method, params) => send(method, params, sessionId);

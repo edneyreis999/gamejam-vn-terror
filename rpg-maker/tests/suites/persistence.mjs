@@ -144,6 +144,7 @@ canonicalCase('IT-015', 'the saved checkpoint command replays without repeating 
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   assert.deepEqual(await snapshot(browser), after);
   assert.equal(await savedBytes(browser), bytes, 'Exact replay performs no redundant storage write.');
+  assert.equal((await diagnostic(browser)).lastSuccessfulSequence, after.sequence);
   await browser.screenshot(`${evidence('IT-015')}/continued-farewell.png`);
 });
 canonicalCase('IT-016', 'a map-owned encounter restores its shared sacrifice interpreter and finishes each consequence once', { timeout: 90000 }, async t => {
@@ -248,14 +249,6 @@ canonicalCase('IT-021', 'native load failure distinguishes unreadable bytes from
   await browser.screenshot(`${evidence('IT-021')}/${variant}-native-failure.png`);
  }
  await writeFile(`${evidence('IT-021')}/native-failure-boundaries.json`,JSON.stringify(observations,null,2)+'\n');
-});
-canonicalCase('IT-023', 'native title Continue loads the existing state and leaves save bytes unchanged', { timeout: 60000 }, async t => {
-  const browser = await tavern(t), { after } = await commitSacrifice(browser), bytes = await savedBytes(browser);
-  await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
-  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause");
-  assert.deepEqual(await snapshot(browser), after);
-  assert.equal(await savedBytes(browser), bytes);
-  assert.equal((await diagnostic(browser)).lastSuccessfulSequence, after.sequence);
 });
 canonicalCase('IT-024', 'player-selected A and B files retain separate campaigns and UI reading histories across cancellation and Continue', { timeout:240000 }, async t => {
  const browser=await tavern(t),records=[];

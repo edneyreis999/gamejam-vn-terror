@@ -300,7 +300,10 @@ canonicalCase('IT-081', 'All eight heroes retain independent reading and formati
     await activate(browser, 'formation', heroIndex); await activate(browser, 'hero', 1); await pause(browser);
     assert.equal(await browser.evaluate('$gameMessage.allText()'), heroUnitTexts(unit + 2)[0]);
     assert.deepEqual((await snapshot(browser)).draftPartyIds, [heroId]);
-    await browser.press('Enter', 13); await choices(browser, 'hero');
+    await browser.press('Enter', 13);
+    // d014c34 and f1e139d intentionally return all heroes after successful addition.
+    await choices(browser, 'formation'); await activate(browser, 'formation', heroIndex);
+    await choices(browser, 'hero');
     await activate(browser, 'hero', 1); await choices(browser, 'hero');
     assert.deepEqual((await snapshot(browser)).draftPartyIds, []);
     await returnToTavern(browser);

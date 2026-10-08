@@ -46,7 +46,7 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
  const lists=[...events.filter(Boolean).map(event=>({owner:'CE'+event.id,list:event.list})),...maps.flatMap(map=>map.pages.map(page=>({owner:`Map${String(map.id).padStart(3,'0')}/event${page.eventId}/page${page.page}`,mapId:map.id,list:page.list}))),...troops.filter(Boolean).flatMap(troop=>troop.pages.map(page=>({owner:'Troop'+troop.id,list:page.list})))];
  for(const id of memorialUnits){assert.ok(events[id],'Memorial unit remains live');assert.ok(events[347].list.some(command=>command.code===117&&command.parameters[0]===id),'CE347 retains its inscription selector');}
  const prologue=mapById.get(2).pages.flatMap(page=>page.list);
- assert.equal(prologue.filter(command=>command.code===101).length,9,'Map002 owns all nine source prologue text boxes');
+ assert.equal(prologue.filter(command=>command.code===401&&command.parameters[0]!=='$[prologue.tavern.flashback]').length,9,'Map002 owns nine narrative boxes in addition to the localized flashback transition');
  assert.equal(prologue.filter(command=>command.code===357&&command.parameters[0]==='Dryland_EventBridge'&&command.parameters[1]==='ReadingComplete').length,6,'Map002 owns six semantic completions; IT-004 proves order and identity');
  for(const id of Object.keys(catalog.passages)){
   let mapId;const hero=/^epilogue\.H([1-8])$/.exec(id),encounter=/^(?:encounter|result)\.([AB])([1-8])(?:\.|-)/.exec(id),ending=/^ending\.(reunite|destroy|bad)\./.exec(id);
@@ -59,6 +59,7 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
    assert.deepEqual(owners,[mapId],id+' has one map-authored source');
   }
  }
+ const registeredCommands = new Set(await browser.evaluate('Object.keys(PluginManager._commands).filter(key=>typeof PluginManager._commands[key]==="function")'));
  for(const {owner,list} of lists)for(const command of list){
   if(command.code===117){
    assert.ok(events[command.parameters[0]],`${owner} -> CE${command.parameters[0]}`);
@@ -66,7 +67,7 @@ canonicalCase('IT-047', 'the native package contains every authored picture and 
   }
   if(command.code===231&&command.parameters[1])assert.ok(assets.has('img/pictures/'+command.parameters[1]+'.png'),`${owner}: ${command.parameters[1]}`);
   if(command.code===357){const [plugin,name,,args]=command.parameters;
-   assert.equal(await browser.evaluate(`typeof PluginManager._commands[${JSON.stringify(plugin+':'+name)}]`),'function',`${owner}: ${plugin}:${name}`);
+   assert.ok(registeredCommands.has(plugin+':'+name),`${owner}: ${plugin}:${name}`);
    if(plugin==='VisuMZ_2_VNPictureBusts'&&args['PictureName:str'])assert.ok(assets.has('img/pictures/'+args['PictureName:str']+'.png'),`${owner}: ${args['PictureName:str']}`);
   }
  }

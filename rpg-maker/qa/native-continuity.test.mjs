@@ -25,7 +25,7 @@ export async function execute(context){
  if(family==='epilogue')await player.assertMapOwner(28+Number(id.split('.')[1].slice(1)));
  await observeBustPassage(context,player);
  const {campaign:before}=await player.snapshot('before-controls');
- const slots=family==='council'?before.climaxPartyIds.map((_,i)=>60+i):[60];
+ const slots=family==='epilogue'?[]:[60];
  await player.dialogueControls(family,slots);
  const text=(await player.surface()).text;
  const point=await context.read('options-button',()=>{

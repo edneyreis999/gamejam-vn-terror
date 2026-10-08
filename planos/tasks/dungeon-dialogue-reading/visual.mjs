@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { resolve as translated } from '../../../rpg-maker/tests/helpers/language.mjs';
 import { DirectedNativePlayer } from '../../../rpg-maker/qa/native-player.mjs';
 import { captureNativeSave } from '../../../rpg-maker/qa/native-save-archive.mjs';
 
@@ -8,8 +9,27 @@ const names = ['Gorvak', 'Elowen', 'Griznik', 'Seraphina', 'Bimbren', 'Liora', '
 const matrixURL = new URL('../../../rpg-maker/tests/fixtures/gdd-competencies.json', import.meta.url);
 const pagesURL = new URL('./reading-pages.json', import.meta.url);
 const gdd = JSON.parse(await readFile(matrixURL));
-const authored = JSON.parse(await readFile(pagesURL));
-export const sourceFiles = [new URL('../../../rpg-maker/qa/native-player.mjs', import.meta.url), new URL('../../../rpg-maker/qa/native-save-archive.mjs', import.meta.url), matrixURL, pagesURL];
+const historicalPages = JSON.parse(await readFile(pagesURL));
+const currentSources = [...new Set(historicalPages.map(page => page.owner.split(':')[0]))].map(file => new URL('../../../rpg-maker/The Dryland Drowned/data/' + file, import.meta.url));
+const sources = new Map(await Promise.all(currentSources.map(async url => [url.pathname.split('/').at(-1), JSON.parse(await readFile(url))])));
+const authored = [];
+for (const owner of new Set(historicalPages.map(page => page.owner))) {
+  const [file, part] = owner.split(':'), data = sources.get(file);
+  const list = part.startsWith('CE') ? data[Number(part.slice(2))].list : data.events[Number(part.slice(5))].pages[0].list;
+  const readings = new Set(historicalPages.filter(page => page.owner === owner).map(page => page.reading));
+  let reading, page;
+  for (const command of list) {
+    if (command.code === 357 && command.parameters[1] === 'Query') reading = command.parameters[3].id;
+    if (command.code === 357 && command.parameters[1] === 'ReadingEnd') { reading = null; page = null; }
+    if (command.code === 101) {
+      page = readings.has(reading) ? { owner, reading, text: '', speaker: command.parameters[4] } : null;
+      if (page) authored.push(page);
+    }
+    if (command.code === 401 && page) page.text += (page.text ? '\n' : '') + translated(command.parameters[0]);
+  }
+  for (const reading of readings) assert.ok(authored.some(page => page.owner === owner && page.reading === reading), 'Current layout source missing: ' + owner + ':' + reading);
+}
+export const sourceFiles = [new URL('../../../rpg-maker/qa/native-player.mjs', import.meta.url), new URL('../../../rpg-maker/qa/native-save-archive.mjs', import.meta.url), matrixURL, pagesURL, ...currentSources, new URL('../../../rpg-maker/The Dryland Drowned/Languages.tsv', import.meta.url), new URL('../../../rpg-maker/tests/helpers/language.mjs', import.meta.url)];
 export const scenario = {
   id: 'dungeon-dialogue-reading',
   criteria: [{ id: 'DUNGEON-READING', variant: '1280x720', expectedRef: ref }],
@@ -24,6 +44,14 @@ export async function execute(context) {
     const state = (await player.snapshot('reading-position')).campaign;
     const id = state.reading?.passageIds[state.reading.index] || '';
     if (!/^(encounter\.|result\.|death\.|farewell\.|closure\.|council\.|opinion\.|ending\.|threshold\.|lover\.|reward\.|map\.reveal|irati\.)/.test(id)) return;
+    const fit = await context.read('current-reading-fit', () => {
+      const w = SceneManager._scene._messageWindow, t = w._textState;
+      return { state: t && { index: t.index, length: t.text.length, y: t.y, height: t.height }, innerHeight: w.innerHeight };
+    });
+    if (fit.state) {
+      assert.equal(fit.state.index, fit.state.length, id + ': unexpected overflow page');
+      assert.ok(fit.state.y + fit.state.height <= fit.innerHeight, id + ': vertical overflow');
+    }
     const key = id + ':' + surface.text;
     if (observed.has(key)) return;
     observed.set(key, { id, text: surface.text, speaker: await context.read('visible-speaker', () => $gameMessage.speakerName()) });
@@ -44,7 +72,7 @@ export async function execute(context) {
         return { font: w.contents.fontFace, fontSize: w.contents.fontSize, available,
           pages: pages.map(page => {
             const lines = [];
-            for (const paragraph of page.text.split(/<br>|\n/)) {
+            for (const paragraph of page.text.replace(/<\/?(?:I|CAPS|CHAOS)>/g, '').split(/<br>|\n/)) {
               let line = '';
               for (const word of paragraph.trim().split(/\s+/)) {
                 const next = line ? line + ' ' + word : word;
@@ -65,7 +93,7 @@ export async function execute(context) {
     }
   }
   const player = new DirectedNativePlayer(context, { onPassage: observe });
-  await player.choose('Jogar'); await player.file(1); await player.returnToTavern();
+  await player.choose('Novo jogo'); await player.file(1); await player.returnToTavern();
   for (let step = 0; step < 600; step++) {
     const surface = await player.ready();
     const state = (await player.snapshot('navigation-' + step)).campaign;
@@ -80,12 +108,12 @@ export async function execute(context) {
       }
       const route = ['physical', 'supernatural', 'final'].find(id => !state.completedDungeonIds.includes(id));
       assert.ok(route);
-      await player.choose('Destinos'); const destinations = await player.until('destinations');
-      const label = await context.read('route-label', id => $dataCommonEvents[4].list.find(c => c.code === 357 && c.parameters[1] === 'ConfigureRoute' && c.parameters[3].id === id).parameters[3].name, route);
-      await player.choose(destinations.labels.find(text => text.includes(label))); await player.choose('Partir');
+      await player.openDestinations(); const destinations = await player.until('destinations');
+      const label = await context.read('route-label', id => TextManager.parseLocalizedText($dataCommonEvents[4].list.find(c => c.code === 357 && c.parameters[1] === 'ConfigureRoute' && c.parameters[3].id === id).parameters[3].name), route);
+      await player.choose(destinations.labels.find(text => text.includes(label)));
     } else if (surface.active && surface.kind === 'approaches') {
       const encounter = state.assignments[state.dungeonId][state.position - 1];
-      assert.equal([...observed.values()].filter(x => x.id === `encounter.${encounter}.01`).length, 2);
+      assert.deepEqual([...observed.values()].filter(x => x.id === `encounter.${encounter}.01`).map(x => x.text), authored.filter(x => x.reading === `encounter.${encounter}.01`).map(x => x.text), 'Every authored introduction page must precede approach choices');
       if (!reread) { await player.choose('Rever descrição'); await player.until('approaches'); reread = true; }
       if (!resumed) {
         await captureNativeSave(context, 'own-first-description');
@@ -98,7 +126,7 @@ export async function execute(context) {
       if (!deathTaken && encounter.startsWith('A') && missing >= 0) { choice = missing; deathTaken = true; }
       else if (encounter === 'B3') { assert.ok(viable[2]); choice = 2; }
       if (choice < 0) {
-        await player.choose('Recuar'); const retreat = await player.until('retreat'); await player.choose(retreat.labels[0]); await player.returnToTavern();
+        await player.choose('Recuar');  await player.returnToTavern();
         continue;
       }
       await player.choose(surface.labels[choice]);

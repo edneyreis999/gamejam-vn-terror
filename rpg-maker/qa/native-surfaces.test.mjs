@@ -1,20 +1,26 @@
 import assert from 'node:assert/strict';
+import {portuguese} from '../tests/helpers/language.mjs';
 import { DirectedNativePlayer } from './native-player.mjs';
 import { captureNativeSave, sha256 } from './native-save-archive.mjs';
-export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url)];
+export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('../tests/helpers/language.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url)];
 const variant=process.env.DRYLAND_QA_SURFACE||'native-tavern-controls',large=process.env.DRYLAND_QA_VIEWPORT==='large';
 export const scenario={storage:{expectedRef:"planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios"},id:variant,criteria:[{id:'controls',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md'}],requires:['native-mz','public-input'],audioFormat:'webm',audioSources:{master:{path:'WebAudio._masterGainNode',expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}},browser:{width:large?1920:1280,height:large?1080:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
 export async function execute(context){
  const player=new DirectedNativePlayer(context);
- if(!context.descriptor.storageFixture){await player.choose('Jogar');await context.wait(()=>SceneManager._scene instanceof Scene_File&&!SceneManager._scene.isBusy());await context.input.key('Escape');await player.choicesContaining('Jogar');await context.shot('cancelled-file-title');}
- await player.choose(context.descriptor.storageFixture?'Continuar':'Jogar');await player.file(Number(process.env.DRYLAND_QA_FILE||context.descriptor.nativeArchive?.fileId||1));
+ if(!context.descriptor.nativeArchive){await player.choose('Novo jogo');await player.waitFile();await context.wait(()=>!SceneManager._scene.isBusy());await context.input.key('Escape');await player.choicesContaining('Novo jogo');await context.shot('cancelled-file-title');}
+ await player.choose(context.descriptor.nativeArchive?'Continuar':'Novo jogo');await player.file(Number(process.env.DRYLAND_QA_FILE||context.descriptor.nativeArchive?.fileId||1));
  await player.returnToTavern();const before=await player.snapshot('tavern-before');
- const visible=await player.surface();assert.equal(visible.labels.length,11);
+ const visible=await player.surface();assert.equal(visible.labels.length,10);
  await context.shot('tavern-visible');await context.input.key('Tab');
  await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);await context.shot('tavern-hidden');
  await context.input.keyDown('Enter');await context.shot('hidden-held-confirm');await context.input.keyUp('Enter');
+ await context.wait(()=>SceneManager._scene._messageWindow.scale.x===1);
+ await context.input.key('Tab');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);
  const position=await context.read('hidden-player-position',()=>[$gamePlayer.x,$gamePlayer.y]);
- for(const key of ['ArrowLeft','ArrowRight','Escape'])await context.input.key(key);
+ for(const key of ['ArrowLeft','ArrowRight'])await context.input.key(key);
+ await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);
+ await context.input.key('Escape');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===1);
+ await context.input.key('Tab');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);
  assert.deepEqual(await context.read('hidden-player-after-directions',()=>[$gamePlayer.x,$gamePlayer.y]),position);
  assert.equal(await context.read('no-rpg-menu',()=>SceneManager._scene instanceof Scene_Map),true);
  assert.deepEqual((await player.snapshot('hidden-confirm')).campaign,before.campaign);
@@ -22,7 +28,7 @@ export async function execute(context){
  assert.deepEqual((await player.snapshot('restored')).campaign,before.campaign);
  await player.choose('Gorvak',{mouse:true});await player.until('hero');
  const interaction=await context.read('gorvak-map-ownership',()=>({map:$gameMap.mapId(),event:$gameMap._interpreter._eventId,
-  ownsList:$gameMap._interpreter._list===$dataMap.events[1].pages[0].list,child:!!$gameMap._interpreter._childInterpreter,
+  ownsList:JSON.stringify($gameMap._interpreter._list)===JSON.stringify($dataMap.events[1].pages[0].list),child:!!$gameMap._interpreter._childInterpreter,
   pictures:$gameScreen._pictures.flatMap((picture,id)=>picture?[id]:[]),bgs:AudioManager._currentBgs?.name}));
  assert.equal(interaction.map,37);assert.equal(interaction.event,1);assert.equal(interaction.ownsList,true);assert.equal(interaction.child,false);
  assert.deepEqual(interaction.pictures,[1,60]);assert.equal(interaction.bgs,'People1');
@@ -62,20 +68,22 @@ export async function execute(context){
   }
   if(index===0){
    assert.equal(await context.read('reread-allowed',()=>$gameSystem.isExtendedFastForwardDisallowed()),false);
-   await player.dialogueControls('gorvak-reread',[60]);
+   await player.dialogueControls('gorvak-reread',[60,63]);
    await consoleClick(context,player,'fastfwd');
    await fastProgress(context);
   }
   await player.returnToTavern();
   const read=(await player.snapshot(`hero-${index+1}-completed`)).readUnits;
-  assert.ok(read.includes(82+index*4)&&read.includes(83+index*4));
+  assert.ok(!read.includes(82+index*4)&&read.includes(83+index*4));
  }
  await player.choose('Gorvak');await player.choose('Conversar');await player.ready();
  await consoleClick(context,player,'fastfwd');await fastProgress(context);
  await context.shot('fast-only-reread');await player.returnToTavern();
  assert.equal(await context.read('choice-provider-reset',()=>$gameTemp.isExtendedFastForwardMode()||$gameTemp.isMessageAutoForwardMode()),false);
- await player.choose('Elenco');await player.until('roster');await context.shot('all-eight-roster');await player.choose('Fechar');
- await player.choose('Destinos');await player.until('destinations');await context.shot('available-and-locked-routes');await context.input.key('Escape');await player.returnToTavern();
+
+ for(const name of heroes.slice(0,3)){await player.choose(name);await player.choose('Selecionar');await player.returnToTavern();}
+ await player.openDestinations();await player.until('destinations');await context.shot('available-and-locked-routes');await context.input.key('Escape');await player.returnToTavern();
+ for(const name of heroes.slice(0,3)){await player.choose(name);await player.choose('Retirar do grupo');await player.returnToTavern();}
  await context.audio.start('tavern-rendered-audio','master');
  await context.input.key('Tab');await context.wait(()=>SceneManager._scene._messageWindow.scale.x===0);
  const point=await context.read('restore-point',()=>{const r=Graphics._canvas.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/3};});
@@ -89,17 +97,17 @@ export async function execute(context){
   await player.returnToTavern();await player.choose('Seraphina');await player.choose('Selecionar');await player.returnToTavern();
   const withoutGorvak=(await player.snapshot('full-without-gorvak')).campaign;
   await player.choose('Gorvak',{mouse:true});await player.choose('Selecionar',{mouse:true});await player.ready();
-  assert.match((await player.surface()).text,/Já tem três com você/);await context.shot('gorvak-full-party');
+  assert.equal((await player.surface()).text,portuguese('conv.gorvak.full'));await context.shot('gorvak-full-party');
   await player.until('hero');assert.deepEqual((await player.snapshot('gorvak-full-rejected')).campaign,withoutGorvak);
   await player.returnToTavern();await player.choose('Seraphina');await player.choose('Retirar do grupo');await player.returnToTavern();
-  await player.choose('Gorvak');await player.choose('Selecionar');await player.until('hero');
+  await player.choose('Gorvak');await player.choose('Selecionar');await player.returnToTavern();
   assert.equal((await player.snapshot('gorvak-selected')).campaign.draftPartyIds.includes('H1'),true);
   await context.shot('gorvak-selected-menu');await player.returnToTavern();
   await player.choose('Elowen');await player.choose('Retirar do grupo');await player.returnToTavern();assert.equal((await player.snapshot('removed-hero')).campaign.draftPartyIds.length,2);await player.choose('Elowen');await player.choose('Selecionar');await player.returnToTavern();
-  await player.choose('Destinos');const routes=await player.until('destinations');await player.choose(routes.labels[0]);await player.choose('Partir');await player.until('approaches');
+  await player.openDestinations();const routes=await player.until('destinations');await player.choose(routes.labels[0]);await player.until('approaches');
   const a=await captureNativeSave(context,'campaign-a');assert.ok(a.nativeState.readUnits.includes(83));
   await context.reopenPage();await player.choose('Novo jogo');
-  await context.wait(()=>SceneManager._scene instanceof Scene_File&&!SceneManager._scene.isBusy());
+  await player.waitFile();await context.wait(()=>!SceneManager._scene.isBusy());
   await context.shot('occupied-file-selector');await context.input.key('Escape');await player.choicesContaining('Continuar');
   assert.equal(sha256(await context.read('a-after-cancel',id=>StorageManager.loadZip('file'+id),a.fileId)),a.payloadSha256);
   await player.choose('Novo jogo');

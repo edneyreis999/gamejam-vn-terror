@@ -21,11 +21,14 @@ export async function execute(context) {
     const state = (await player.snapshot('description-position')).campaign;
     const reading = state.reading?.passageIds[state.reading.index] || '';
     if (!/^encounter\.A[1-8]\.01$/.test(reading)) return;
-    const page = surface.text.includes('Como o grupo') ? 2 : 1;
+    const keyText = await context.read('description-key', () => $gameMessage.allText());
+    const match = /^\$\[enc\.a[1-8]\.intro\.([123])\]$/.exec(keyText.trim()) || (keyText.trim() === '$[enc.common.prompt_escape]' ? ['', '3'] : null);
+    assert.ok(match, 'Description must use one of the three ordered introduction keys');
+    const page = Number(match[1]);
     const key = reading.split('.')[1] + '-page-' + page;
     const metrics = await context.read('description-fit', () => {
       const w = SceneManager._scene._messageWindow, t = w._textState;
-      return { text: $gameMessage.allText(), textState: t && { index: t.index, length: t.text.length, x: t.x, y: t.y, height: t.height },
+      return { text: TextManager.parseLocalizedText($gameMessage.allText()), textState: t && { index: t.index, length: t.text.length, x: t.x, y: t.y, height: t.height },
         window: { x: w.x, y: w.y, width: w.width, height: w.height },
         innerHeight: w.innerHeight, fontSize: w.contents.fontSize, lineHeight: w.lineHeight() };
     });
@@ -40,7 +43,7 @@ export async function execute(context) {
     } else assert.equal(surface.text, pages.get(key).text, 'Repeated description differs');
   }
   const player = new DirectedNativePlayer(context, { onPassage: observe });
-  await player.choose('Jogar');
+  await player.choose('Novo jogo');
   await player.file(1);
   await player.returnToTavern();
   for (let step = 0; step < 500; step++) {
@@ -53,15 +56,15 @@ export async function execute(context) {
       }
       const route = ['physical', 'supernatural', 'final'].find(id => !state.completedDungeonIds.includes(id));
       assert.ok(route, 'All A descriptions should have been encountered');
-      await player.choose('Destinos');
+      await player.openDestinations();
       const destinations = await player.until('destinations');
-      const label = await context.read('route-label', id => $dataCommonEvents[4].list.find(c => c.code === 357 && c.parameters[1] === 'ConfigureRoute' && c.parameters[3].id === id).parameters[3].name, route);
+      const label = await context.read('route-label', id => TextManager.parseLocalizedText($dataCommonEvents[4].list.find(c => c.code === 357 && c.parameters[1] === 'ConfigureRoute' && c.parameters[3].id === id).parameters[3].name), route);
       await player.choose(destinations.labels.find(text => text.includes(label)));
-      await player.choose('Partir');
+
     } else if (surface.active && surface.kind === 'approaches') {
       const encounter = state.assignments[state.dungeonId][state.position - 1];
       if (encounter.startsWith('A')) {
-        assert.ok(pages.has(encounter + '-page-1') && pages.has(encounter + '-page-2'), 'Choices appeared before both pages');
+        assert.ok([1,2,3].every(page => pages.has(encounter + '-page-' + page)), 'Choices appeared before the two paragraphs and question');
         if (!encounters.has(encounter)) await context.shot(encounter + '-choices');
         encounters.add(encounter);
         if (!checkedReread) {
@@ -95,7 +98,7 @@ export async function execute(context) {
     }
     assert.ok(step < 499, 'Description navigation did not finish');
   }
-  assert.equal(pages.size, 16);
+  assert.equal(pages.size, 24);
   assert.equal(encounters.size, 8);
   assert.ok(checkedReread && resumed);
   context.report.observations.push({ label: 'description-result', kind: 'description-result', value: { pages: Object.fromEntries(pages), encounters: [...encounters].sort(), checkedReread, resumed } });

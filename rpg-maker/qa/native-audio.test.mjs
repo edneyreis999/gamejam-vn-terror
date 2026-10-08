@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { DirectedNativePlayer } from './native-player.mjs';
 export const sourceFiles=[new URL('./native-player.mjs',import.meta.url)];
-const cue=process.env.DRYLAND_QA_AUDIO||'me';
+const cue=process.env.DRYLAND_QA_AUDIO||'bgm';
 const audioCoverage={
- bgm:{status:'campaign-no-live-cue',canonical:['System.titleBgm.name','CommonEvents[2] command241 blank'],equivalence:'IT-029 isolated command241 with System.battleBgm',humanLimit:'The reference asset proves native decoding only; it does not assign musical direction.'},
+ bgm:{status:'authored-live-cue',canonical:['CommonEvents[2/67] command241; opening/rheed/ending The Well decisions']},
  bgs:{status:'authored-live-cue',canonical:['CommonEvents[67] command245']},
  me:{status:'authored-live-cue',canonical:['CommonEvents[67] command249']},
  se:{status:'authored-and-system-cue',canonical:['CommonEvents[47,48,67] command250','System.sounds']}
@@ -20,6 +20,7 @@ async function options(context,player){
  await player.click(point.x,point.y);await context.wait(()=>SceneManager._scene instanceof Scene_Options&&!SceneManager._scene.isBusy());
 }
 async function select(context,key){
+ if(!await context.read('audio-category-visible',()=>SceneManager._scene._optionsWindow._list.some(c=>c.symbol==='bgmVolume'))){await context.input.key('PageDown');await context.wait(()=>SceneManager._scene._optionsWindow._list.some(c=>c.symbol==='bgmVolume'));}
  const index=await context.read('volume-option-index',k=>SceneManager._scene._optionsWindow._list.findIndex(item=>item.symbol===k),key);assert.ok(index>=0);
  for(let step=0;step<4;step++){const current=await context.read('volume-option-focus',()=>SceneManager._scene._optionsWindow.index());if(current===index)return;await context.input.key(current<index?'ArrowDown':'ArrowUp');}
  assert.equal(await context.read('volume-final-focus',()=>SceneManager._scene._optionsWindow.index()),index);
@@ -82,11 +83,6 @@ async function observeFastInput(context,player,audioKind=null){
 export async function execute(context){
  const player=new DirectedNativePlayer(context),file=context.descriptor.nativeArchive.fileId;
  await player.choose('Continuar');await player.file(file);await player.ready();
- if(cue==='bgm'){
-  const coverage=await context.read('bgm-campaign-coverage',()=>({titleBgm:$dataSystem.titleBgm?.name||'',currentBgm:AudioManager._currentBgm?.name||'',buffer:Boolean(AudioManager._bgmBuffer),phase:$gameSystem._dryland.campaign.phase}));
-  assert.equal(coverage.titleBgm,'');assert.equal(coverage.currentBgm,'');assert.equal(coverage.buffer,false);
-  context.report.observations.push({label:'audio-result',kind:'audio-result',value:{cue,status:'campaign-no-live-cue',coverage,equivalence:audioCoverage.bgm.equivalence}});return;
- }
  let fastInput=null,transition=null;
  if(cue==='bgs'){
   const transitionBefore=await context.read('bgs-transition-before',()=>({frame:Graphics.frameCount,name:AudioManager._currentBgs?.name||'',start:AudioManager._bgsBuffer?._startTime??null}));
