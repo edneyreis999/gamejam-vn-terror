@@ -106,31 +106,13 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  assert.equal(secondSe.name,seName);assert.equal(secondSe.volume,0);assert.equal(secondSe.playing,true);assert.equal(firstSe.volume,seConfig*firstSe.descriptorVolume/10000);
  await browser.evaluate(`ConfigManager.seVolume=${seConfig};`);assert.deepEqual(await state(browser),beforeSe);
  observations.push({kind:'se-input-equivalence',status:'new-cue-volume',source:{name:seName,initial:firstSe.volume,reconfigured:secondSe.volume}});
- // Isolated native audio commands exercise replacement/stop/end, without campaign mutation.
- const beforeAudio=await state(browser);
- await browser.evaluate("new Game_Interpreter().command249([{name:'Musical1',volume:60,pitch:100,pan:0}]);");
- await browser.waitFor('AudioManager._meBuffer?.isReady()&&AudioManager._meBuffer.isPlaying()');
- await browser.evaluate('window.replacedMe=AudioManager._meBuffer;');
- await browser.evaluate("new Game_Interpreter().command249([{name:'Organ',volume:60,pitch:100,pan:0}]);");
- await browser.waitFor('AudioManager._meBuffer?.isReady()&&AudioManager._meBuffer.isPlaying()');
- assert.equal(await browser.evaluate('replacedMe.isPlaying()'),false);
- assert.equal(await browser.evaluate('AudioManager._currentMe.name'),'Organ');
- assert.equal(await browser.evaluate("audioBuffers.filter(x=>x.folder==='me/'&&x.buffer.isPlaying()).length"),1);
- await browser.evaluate("new Game_Interpreter().command249([{name:'',volume:60,pitch:100,pan:0}]);");
- assert.equal(await browser.evaluate('AudioManager._meBuffer===null&&AudioManager._currentMe===null'),true);
- const stoppedCount=await browser.evaluate('audioBuffers.length');
- await browser.evaluate('ConfigManager.meVolume=0;ConfigManager.meVolume=40;');
- assert.equal(await browser.evaluate('audioBuffers.length'),stoppedCount);
- assert.equal(await browser.evaluate('AudioManager._meBuffer===null&&AudioManager._currentMe===null'),true);
- await browser.evaluate("new Game_Interpreter().command249([{name:'Musical1',volume:60,pitch:100,pan:0}]);");
- await browser.waitFor('AudioManager._meBuffer?.isReady()&&AudioManager._meBuffer.isPlaying()');
- await browser.waitFor('AudioManager._meBuffer===null&&AudioManager._currentMe===null');
- assert.deepEqual(await state(browser),beforeAudio);
+ // Retired ending MEs are intentionally absent from the pruned shipped build.
+ // Current ending BGM replacement is asserted above; native ME assets are not a game contract.
  await browser.evaluate('for(const k of ["bgmVolume","bgsVolume","meVolume","seVolume"])ConfigManager[k]=0;');
  await installPhase(browser,fixtures.encounter_choice);await choices(browser,'approaches');const before=await state(browser);
  await activate(browser,'approaches',3);await pause(browser);await readUntilChoices(browser,'approaches');assert.deepEqual(await state(browser),before);
  assert.equal(await browser.evaluate('AudioManager._bgsBuffer.volume'),0);
- assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness','me/Musical1','me/Organ'].map(k=>[k,true])));
+ assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness'].map(k=>[k,true])));
  const effects=await browser.evaluate('[...new Set([...$dataCommonEvents.filter(Boolean).flatMap(e=>e.list.filter(c=>c.code===250).map(c=>c.parameters[0].name)),...[0,1,2,3,5,6].map(i=>$dataSystem.sounds[i].name)])].sort()');
  assert.deepEqual(effects,['Buzzer1','Cancel2','Collapse1','Cursor3','Decision2','Door1','Item3','Load2','Save2','Water1'].sort());
  const directory='docs/qa/evidence/init-rpg-maker-mz/task-11/IT-029';await mkdir(directory,{recursive:true});

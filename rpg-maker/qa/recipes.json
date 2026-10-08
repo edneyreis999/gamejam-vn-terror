@@ -1,0 +1,569 @@
+[
+  {
+    "id": "STAGE-DIR-PHYSICAL-FIRST",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-directed.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_STAGING": "physical-first",
+      "DRYLAND_QA_FILE": "1",
+      "DRYLAND_QA_CREDITS": "natural"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-directed-physical-first-normal.json"
+  },
+  {
+    "id": "STAGE-DIR-SUPERNATURAL-FIRST",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-directed.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_STAGING": "supernatural-first",
+      "DRYLAND_QA_FILE": "2",
+      "DRYLAND_QA_CREDITS": "mouse",
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "dependency": {
+      "id": "STAGE-DIR-PHYSICAL-FIRST",
+      "archive": "opening.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-directed-supernatural-first-reduced.json"
+  },
+  {
+    "id": "STAGE-DIR-BAD",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-directed.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_STAGING": "bad",
+      "DRYLAND_QA_FILE": "1",
+      "DRYLAND_QA_CREDITS": "keyboard",
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-directed-bad-reduced.json"
+  },
+  {
+    "id": "STAGE-DIR-BRANCH-DESTROY",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-directed.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_STAGING": "branch-destroy",
+      "DRYLAND_QA_FILE": "1",
+      "DRYLAND_QA_CREDITS": "keyboard"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "final-choice.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-directed-branch-destroy-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-OPENING",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "opening"
+    },
+    "dependency": {
+      "id": "STAGE-DIR-PHYSICAL-FIRST",
+      "archive": "opening.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-opening-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-RESULT",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "result"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "result.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-result-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-CLOSURE-FIRST",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "closure-first-01"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "closure-first-01.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-closure-first-01-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-CLOSURE-SECOND",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "closure-second-01"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "closure-second-01.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-closure-second-01-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-MEDALLION",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "medallion"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "medallion.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-medallion-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-ENDING",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "ending"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "ending.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-ending-normal.json"
+  },
+  {
+    "id": "STAGE-CONTINUE-TWO-FILES",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-continue.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_BOUNDARY": "two-files"
+    },
+    "dependency": {
+      "id": "STAGE-DIR-SUPERNATURAL-FIRST",
+      "archive": "opening.archive.json"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-final-continue-two-files-normal.json"
+  },
+  {
+    "id": "STAGING-FORMATION-NORMAL",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-formation.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {},
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-formation-normal.json"
+  },
+  {
+    "id": "UPDATED-COPY-1280",
+    "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+    "spec": "planos/tasks/updated-narrative-copy/spec.md",
+    "env": {
+      "DRYLAND_COPY_MODE": "full"
+    },
+    "request": "planos/tasks/updated-narrative-copy/qa-request.json"
+  },
+  {
+    "id": "UPDATED-COPY-REDUCED",
+    "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+    "spec": "planos/tasks/updated-narrative-copy/spec.md",
+    "env": {
+      "DRYLAND_COPY_MODE": "reduced",
+      "DRYLAND_COPY_WIDTH": "1920"
+    },
+    "request": "planos/tasks/updated-narrative-copy/qa-request-reduced.json"
+  },
+  {
+    "id": "UPDATED-COPY-WIDE",
+    "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+    "spec": "planos/tasks/updated-narrative-copy/spec.md",
+    "env": {
+      "DRYLAND_COPY_MODE": "wide",
+      "DRYLAND_COPY_WIDTH": "1920"
+    },
+    "request": "planos/tasks/updated-narrative-copy/qa-request-wide.json"
+  },
+  {
+    "id": "UPDATED-COPY-MEMORIAL",
+    "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+    "spec": "planos/tasks/updated-narrative-copy/spec.md",
+    "env": {
+      "DRYLAND_COPY_MODE": "memorial"
+    },
+    "request": "planos/tasks/updated-narrative-copy/qa-request-memorial.json"
+  },
+  {
+    "id": "UPDATED-COPY-MEMORIAL-WIDE",
+    "case": "planos/tasks/updated-narrative-copy/verify-playthrough.mjs",
+    "spec": "planos/tasks/updated-narrative-copy/spec.md",
+    "env": {
+      "DRYLAND_COPY_MODE": "memorial-resume",
+      "DRYLAND_COPY_WIDTH": "1920"
+    },
+    "request": "planos/tasks/updated-narrative-copy/qa-request-memorial-wide.json"
+  },
+  {
+    "id": "DUNGEON-READING",
+    "case": "planos/tasks/dungeon-dialogue-reading/visual.mjs",
+    "spec": "planos/tasks/dungeon-dialogue-reading/spec.md",
+    "env": {},
+    "request": "planos/tasks/dungeon-dialogue-reading/request.json"
+  },
+  {
+    "id": "TRAP-A-READING",
+    "case": "planos/tasks/trap-a-description-reading/visual.mjs",
+    "spec": "planos/tasks/trap-a-description-reading/spec.md",
+    "env": {},
+    "request": "planos/tasks/trap-a-description-reading/request.json"
+  },
+  {
+    "id": "REVISED-TRAP-FIT",
+    "case": "planos/tasks/revised-trap-prose-integration/task-05-visual.mjs",
+    "spec": "planos/tasks/revised-trap-prose-integration/spec.md",
+    "env": {},
+    "request": "planos/tasks/revised-trap-prose-integration/task-05-request.json"
+  },
+  {
+    "id": "OPENING-THE-WELL-AUDIO",
+    "case": "planos/tasks/opening-the-well/qa.mjs",
+    "spec": "planos/tasks/opening-the-well/spec.md",
+    "env": {}
+  },
+  {
+    "id": "JOURNEY-physical-first-reunite",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_JOURNEY": "physical-first-reunite",
+      "DRYLAND_QA_MOTION": "no-preference"
+    }
+  },
+  {
+    "id": "JOURNEY-supernatural-first-destroy",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_JOURNEY": "supernatural-first-destroy",
+      "DRYLAND_QA_MOTION": "reduce"
+    }
+  },
+  {
+    "id": "JOURNEY-bad",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_JOURNEY": "bad",
+      "DRYLAND_QA_MOTION": "reduce"
+    }
+  },
+  {
+    "id": "CREDITS-natural",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CREDITS": "natural"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "CREDITS-accelerated",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CREDITS": "accelerated"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "CREDITS-keyboard",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CREDITS": "keyboard"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "CREDITS-mouse",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CREDITS": "mouse"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "CREDITS-late-keyboard",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CREDITS": "late-keyboard"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "CREDITS-late-mouse",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CREDITS": "late-mouse"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "SURFACES-normal",
+    "case": "rpg-maker/qa/native-surfaces.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_FILES": "1",
+      "DRYLAND_QA_MOTION": "no-preference",
+      "DRYLAND_QA_VIEWPORT": "normal"
+    }
+  },
+  {
+    "id": "SURFACES-reduced",
+    "case": "rpg-maker/qa/native-surfaces.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_FILES": "1",
+      "DRYLAND_QA_MOTION": "reduce",
+      "DRYLAND_QA_VIEWPORT": "large"
+    }
+  },
+  {
+    "id": "CONTINUITY-farewell-normal",
+    "case": "rpg-maker/qa/native-continuity.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CONTEXT": "farewell",
+      "DRYLAND_QA_MOTION": "no-preference"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^committed-death-H.*archive.json$"
+    }
+  },
+  {
+    "id": "CONTINUITY-farewell-reduced",
+    "case": "rpg-maker/qa/native-continuity.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CONTEXT": "farewell",
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^committed-death-H.*archive.json$"
+    }
+  },
+  {
+    "id": "CONTINUITY-council-normal",
+    "case": "rpg-maker/qa/native-continuity.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CONTEXT": "council",
+      "DRYLAND_QA_MOTION": "no-preference"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "council-entry.archive.json"
+    }
+  },
+  {
+    "id": "CONTINUITY-council-reduced",
+    "case": "rpg-maker/qa/native-continuity.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CONTEXT": "council",
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "council-entry.archive.json"
+    }
+  },
+  {
+    "id": "CONTINUITY-epilogue-normal",
+    "case": "rpg-maker/qa/native-continuity.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CONTEXT": "epilogue",
+      "DRYLAND_QA_MOTION": "no-preference"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "CONTINUITY-epilogue-reduced",
+    "case": "rpg-maker/qa/native-continuity.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_CONTEXT": "epilogue",
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "terminal.archive.json"
+    }
+  },
+  {
+    "id": "AUDIO-bgs",
+    "case": "rpg-maker/qa/native-audio.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_AUDIO": "bgs"
+    },
+    "dependency": {
+      "id": "SURFACES-normal",
+      "archive": "earned-tavern-prefix.archive.json"
+    }
+  },
+  {
+    "id": "AUDIO-se",
+    "case": "rpg-maker/qa/native-audio.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_AUDIO": "se"
+    },
+    "dependency": {
+      "id": "SURFACES-normal",
+      "archive": "earned-tavern-prefix.archive.json"
+    }
+  },
+  {
+    "id": "STAGING-FORMATION-REDUCED",
+    "case": "planos/tasks/approved-narrative-dialogue-staging/task-10-formation.mjs",
+    "spec": "planos/tasks/approved-narrative-dialogue-staging/spec.md",
+    "env": {
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "request": "planos/tasks/approved-narrative-dialogue-staging/task-10-request-formation-normal.json"
+  },
+  {
+    "id": "AUDIO-bgm",
+    "case": "rpg-maker/qa/native-audio.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_AUDIO": "bgm"
+    },
+    "dependency": {
+      "id": "SURFACES-normal",
+      "archive": "earned-tavern-prefix.archive.json"
+    }
+  },
+  {
+    "id": "BRANCH-approach-1",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_BRANCH_ONLY": "1"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "regex:^reveal-.*archive.json$",
+      "inputKind": "approach",
+      "inputIndex": 0
+    }
+  },
+  {
+    "id": "BRANCH-approach-2",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_BRANCH_ONLY": "1"
+    },
+    "dependency": {
+      "id": "JOURNEY-physical-first-reunite",
+      "archive": "regex:^reveal-.*archive.json$",
+      "inputKind": "approach",
+      "inputIndex": 1
+    }
+  },
+  {
+    "id": "BRANCH-victim-1",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_BRANCH_ONLY": "1"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^victim-.*archive.json$",
+      "inputKind": "victim",
+      "inputIndex": 0
+    }
+  },
+  {
+    "id": "BRANCH-victim-2",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_BRANCH_ONLY": "1"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^victim-.*archive.json$",
+      "inputKind": "victim",
+      "inputIndex": 1
+    }
+  },
+  {
+    "id": "RETURN-normal",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_RETURN_ONLY": "1",
+      "DRYLAND_QA_MOTION": "no-preference",
+      "DRYLAND_QA_LEAVE_FADE": "0"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^committed-death-H.*archive.json$"
+    }
+  },
+  {
+    "id": "RETURN-reduced",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_RETURN_ONLY": "1",
+      "DRYLAND_QA_MOTION": "reduce",
+      "DRYLAND_QA_LEAVE_FADE": "0"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^committed-death-H.*archive.json$"
+    }
+  },
+  {
+    "id": "RETURN-leave-normal",
+    "case": "rpg-maker/qa/native-journeys.test.mjs",
+    "spec": "planos/tasks/eventbridge-minimal-runtime/spec.md",
+    "env": {
+      "DRYLAND_QA_RETURN_ONLY": "1",
+      "DRYLAND_QA_MOTION": "no-preference",
+      "DRYLAND_QA_LEAVE_FADE": "1"
+    },
+    "dependency": {
+      "id": "JOURNEY-bad",
+      "archive": "regex:^committed-death-H.*archive.json$"
+    }
+  }
+]

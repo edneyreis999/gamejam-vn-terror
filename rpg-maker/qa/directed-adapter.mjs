@@ -13,11 +13,12 @@ export async function prepare({ project, output, archivePath = process.env.DRYLA
   if (output) await mkdir(directory);
   const fixture = output ? directory : join(directory, 'game');
   try {
-    await cp(resolve(project, 'rpg-maker/The Dryland Drowned'), fixture, { recursive: true });
+    await cp(resolve(project, 'rpg-maker/The Dryland Drowned'), fixture, { recursive: true,filter:p=>!['save','game.rmmzproject'].includes(p.split('/').at(-1)) });
+    execFileSync(process.execPath,[resolve(project,'rpg-maker/tools/prune-build.mjs'),'--build',fixture,'--apply'],{stdio:'pipe'});
     if (archivePath) {
       const archive = JSON.parse(await readFile(resolve(archivePath), 'utf8'));
       const current = await describe({ project, fixture });
-      validateNativeArchive(archive, current.files, new URL(origin).origin);
+      validateNativeArchive(archive, current.files, archive.origin);
       await writeFile(join(fixture, archiveFiles.archive), JSON.stringify(archive) + '\n', { flag: 'wx' });
       await writeFile(join(fixture, archiveFiles.storage), JSON.stringify(archive.storageState) + '\n', { flag: 'wx' });
       return { fixture, omittedNavigation: [{ producer: archive.producer, campaign: archive.campaign }], storage: 'native checkpoint copy restored before first page' };
@@ -42,9 +43,9 @@ export async function describe({ project, fixture }) {
   await visit();
   const storageFile = files.find(entry => entry.path === archiveFiles.storage);
   const archive = storageFile ? JSON.parse(await readFile(join(fixture, archiveFiles.archive), 'utf8')) : null;
-  if (archive) validateNativeArchive(archive, files, new URL(origin).origin);
-  return { files, mutablePaths: [], capabilities: ['native-mz', 'public-input'],
-    ...(archive ? { storageFixture: storageFile, nativeArchive: {fileId:archive.fileId,payloadSha256:archive.payloadSha256,identitySha256:archive.identitySha256,producer:archive.producer}, omittedNavigation: [{ producer: archive.producer, campaign: archive.campaign }] } : {}),
+  if (archive) validateNativeArchive(archive, files, archive.origin);
+  return { files, mutablePaths: [], capabilities: ['native-mz', 'browser', 'public-input'],
+    ...(archive ? { storageImport: {...storageFile,sourceOrigin:archive.origin}, nativeArchive: {fileId:archive.fileId,payloadSha256:archive.payloadSha256,identitySha256:archive.identitySha256,producer:archive.producer}, omittedNavigation: [{ producer: archive.producer, campaign: archive.campaign }] } : {}),
     git: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: project, encoding: 'utf8' }).trim(),
     command: [process.execPath, ...process.argv.slice(1)], storage: archive ? 'native checkpoint copy; pre-boot restore; Continue required' : 'isolated browser context; no preinstalled campaign' };
 }

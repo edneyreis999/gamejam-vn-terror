@@ -17,6 +17,7 @@ async function consolePoint(context,type){
 }
 
 async function allVolumes(context,target){
+ if(!await context.read('audio-category-visible',()=>SceneManager._scene._optionsWindow._list.some(c=>c.symbol==='bgmVolume'))){await context.input.key('PageDown');await context.wait(()=>SceneManager._scene._optionsWindow._list.some(c=>c.symbol==='bgmVolume'));}
  for(const key of ['bgmVolume','bgsVolume','meVolume','seVolume']){
   const index=await context.read('volume-index',key=>SceneManager._scene._optionsWindow._list.findIndex(c=>c.symbol===key),key);
   assert.ok(index>=0);
@@ -30,7 +31,7 @@ async function allVolumes(context,target){
 }
 
 export async function execute(context){
- let serial=0,audioContext=null;
+ let serial=0,audioContext=null,audioStarted=0;
  const transcript=[],controlled=new Set(),archives=[];
  const branch=variant==='branch-destroy',bad=variant==='bad';
  const file=branch?context.descriptor.nativeArchive.fileId:Number(process.env.DRYLAND_QA_FILE||1);
@@ -38,20 +39,23 @@ export async function execute(context){
   const before=await player.snapshot('reading-'+(++serial));
   const state=before.campaign,id=state.reading?.passageIds[state.reading.index]||`hero.${surface.map}`;
   const contextId=id.startsWith('prologue.rheed.')?Number(id.slice(-2))<=3?'present':'past-tavern':id.startsWith('closure.')||['council.01','council.03','council.challenge','council.solo'].includes(id)?'present':state.phase==='formation'?'past-tavern':state.phase==='ending'?'ending-'+state.endingId:state.phase==='epilogue'?'epilogue':'past-'+state.dungeonId;
-  if(audioContext!==contextId){if(audioContext!==null)await context.audio.stop();await context.audio.start(`sound-${serial}-${contextId}`,'master');audioContext=contextId;}
+  // Segment the recorder only; native BGM/BGS playback is uninterrupted.
+  if(audioContext!==contextId||Date.now()-audioStarted>=15000){if(audioContext!==null)await context.audio.stop();await context.audio.start(`sound-${serial}-${contextId}`,'master');audioContext=contextId;audioStarted=Date.now();}
+  await context.read('portrait-settle-input-'+serial,()=>({speaker:$gameMessage.speakerName(),nameBox:SceneManager._scene._nameBoxWindow?.openness,pictures:Array.from({length:11},(_,i)=>60+i).flatMap(id=>{const p=$gameScreen.picture(id);return p?[{id,name:p.name(),duration:p._duration,toneDuration:p._toneDuration,opacity:p.opacity()}]:[]})}));
   await context.wait(()=>{
    if($gameTemp.isExtendedFastForwardMode())return true;
    const scene=SceneManager._scene;
    return Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)).filter(Boolean).every(p=>p._duration===0&&p._toneDuration===0&&Math.abs(p.opacity()-255)<1e-6)&&(!$gameMessage.speakerName()||scene._nameBoxWindow.openness===255);
   });
   const shown=await context.read('staging-'+serial,()=>({text:$gameMessage.allText(),speaker:$gameMessage.speakerName(),pictures:Array.from({length:100},(_,id)=>{const p=$gameScreen.picture(id);return p?{id,name:p.name(),x:p.x(),y:p.y(),sx:p.scaleX(),sy:p.scaleY(),opacity:p.opacity()}:null;}).filter(Boolean),bgm:AudioManager._currentBgm,bgs:AudioManager._currentBgs,me:AudioManager._currentMe,logical:[Graphics.width,Graphics.height]}));
-  if(['encounter_intro','approach_result'].includes(state.phase))assert.equal(shown.pictures.some(p=>p.id>=60&&p.id<=70),false,'Threshold portraits must leave before the encounter art and result.');
+  if(state.phase==='encounter_intro')assert.deepEqual(shown.pictures.filter(p=>p.id>=60&&p.id<=70).map(p=>p.name),['Reed final']);
+  if(state.phase==='approach_result')assert.equal(shown.pictures.some(p=>p.id>=60&&p.id<=70),false,'Narrator and threshold portraits must leave before the result.');
   if(id.startsWith('farewell.'))assert.deepEqual(shown.pictures.filter(p=>p.id>=60&&p.id<=70).map(p=>p.id),[60],'Only the farewell speaker remains.');
   transcript.push({serial,id,phase:state.phase,sequence:state.sequence,...shown});
   if(contextId==='present'){
    assert.equal(shown.pictures.find(p=>p.id===1),undefined);
    assert.deepEqual(shown.pictures.filter(p=>p.id>=60&&p.id<=70).map(p=>p.name),['Reed final']);
-   assert.equal(shown.bgm.name,'Town1');assert.equal(shown.bgs.name,'People2');
+   assert.equal(shown.bgm.name,id.startsWith('council.')?'Dryland_Revelation_TheLastKey':'Dryland_Opening_TheWell');assert.equal(shown.bgs.name,id.startsWith('council.')?'':'People2');
   }
   const group=id.startsWith('prologue.')?contextId:id.startsWith('closure.')?'closure':id.startsWith('council.')?'council':state.phase;
   if(!controlled.has(group)&&['present','past-tavern','closure','council','approach_result','ending','epilogue'].includes(group)){
@@ -78,9 +82,9 @@ export async function execute(context){
   await context.shot('staged-'+serial);
  }
  const player=new DirectedNativePlayer(context,{onPassage:observe});
- const preserved=context.descriptor.storageFixture?await context.read('imported-file-bytes',id=>StorageManager.loadZip('file'+id),context.descriptor.nativeArchive.fileId):null;
+ const preserved=context.descriptor.nativeArchive?await context.read('imported-file-bytes',id=>StorageManager.loadZip('file'+id),context.descriptor.nativeArchive.fileId):null;
  if(reduced&&!branch){await player.choose('Configurações');await context.wait(()=>SceneManager._scene instanceof Scene_Options&&!SceneManager._scene.isBusy());await allVolumes(context,0);await context.input.key('Escape');}
- await player.choose(branch?'Continuar':preserved?'Novo jogo':'Jogar');
+ await player.choose(branch?'Continuar':preserved?'Novo jogo':'Novo jogo');
  await context.audio.start('welcome-or-continue','master');audioContext='opening';
  await player.file(file);await player.ready();
  if(!branch){
@@ -97,7 +101,7 @@ export async function execute(context){
      const fast=await consolePoint(context,'fastfwd');await player.click(fast.x,fast.y);await player.until('hero');
      assert.equal(await context.read('seen-fast-stopped',()=>$gameTemp.isExtendedFastForwardMode()),false);
     }
-    await player.choose('Selecionar');await player.until('hero');await player.choose('Retirar do grupo');await player.returnToTavern();
+    await player.choose('Selecionar');await player.returnToTavern();await player.choose(name);await player.until('hero');await player.choose('Retirar do grupo');await player.returnToTavern();
    }
    for(const name of names.slice(0,3)){await player.choose(name);await player.choose('Selecionar');await player.returnToTavern();}
    for(const target of names){
@@ -137,9 +141,9 @@ export async function execute(context){
     for(const id of desired.filter(id=>!state.draftPartyIds.includes(id))){await player.choose(names[Number(id.slice(1))-1]);await player.choose('Selecionar');await player.returnToTavern();}
    }
    const route=routeOrder.find(id=>!state.completedDungeonIds.includes(id));
-   await player.choose('Destinos');const destinations=await player.until('destinations');
-   const label=await context.read('route-label',id=>$dataCommonEvents[4].list.find(c=>c.code===357&&c.parameters[1]==='ConfigureRoute'&&c.parameters[3].id===id).parameters[3].name,route);
-   await player.choose(destinations.labels.find(text=>text.includes(label)));await player.choose('Partir');
+   await player.openDestinations();const destinations=await player.until('destinations');
+   const label=await context.read('route-label',id=>TextManager.parseLocalizedText($dataCommonEvents[4].list.find(c=>c.code===357&&c.parameters[1]==='ConfigureRoute'&&c.parameters[3].id===id).parameters[3].name),route);
+   await player.choose(destinations.labels.find(text=>text.includes(label)));
   }else if(surface.active&&surface.kind==='approaches'){
    const encounter=state.assignments[state.dungeonId][state.position-1];
    const viable=gdd.encounterPairs[encounter].map(c=>state.partyIds.some(h=>gdd.heroPairs[h].includes(c)));

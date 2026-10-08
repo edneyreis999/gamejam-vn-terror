@@ -41,7 +41,7 @@ export async function execute(context) {
     }
   }
   const player = new DirectedNativePlayer(context, { onPassage: observe });
-  await player.choose(context.descriptor.nativeArchive ? 'Continuar' : 'Jogar');
+  await player.choose(context.descriptor.nativeArchive ? 'Continuar' : 'Novo jogo');
   await player.file(1);
   if (!context.descriptor.nativeArchive) await player.returnToTavern();
   for (let step = 0; step < 500; step++) {
@@ -58,11 +58,11 @@ export async function execute(context) {
         await player.choose(names[Number(id.slice(1)) - 1]); await player.choose('Selecionar'); await player.returnToTavern();
       }
       const route = ['physical', 'supernatural', 'final'].find(id => !state.completedDungeonIds.includes(id));
-      await player.choose('Destinos');
+      await player.openDestinations();
       const destinations = await player.until('destinations');
-      const label = await context.read('route-label', id => $dataCommonEvents[4].list.find(c => c.code === 357 && c.parameters[1] === 'ConfigureRoute' && c.parameters[3].id === id).parameters[3].name, route);
+      const label = await context.read('route-label', id => TextManager.parseLocalizedText($dataCommonEvents[4].list.find(c => c.code === 357 && c.parameters[1] === 'ConfigureRoute' && c.parameters[3].id === id).parameters[3].name), route);
       await player.choose(destinations.labels.find(text => text.includes(label)));
-      await player.choose('Partir');
+
     } else if (surface.active && surface.kind === 'approaches') {
       const encounter = state.assignments[state.dungeonId][state.position - 1];
       if (!choices.has(encounter)) {

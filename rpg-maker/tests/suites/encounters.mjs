@@ -163,7 +163,7 @@ async function frames(browser, count = 4) {
 canonicalCase('IT-005', 'real transfer and final-description held/double input never commit a newly opened approach', { timeout: 180000 }, async t => {
   for (const reduced of [false, true]) await t.test(reduced ? 'reduced' : 'normal', async t => {
     const browser = await nativeEncounter(t, { reduced });
-    assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'), [], 'The threshold releases every owned portrait before the encounter');
+    assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'), ['Reed final'], 'The approved narrator alone owns the encounter introduction');
     const before = await snapshot(browser), id = before.assignments.physical[0];
     assert.equal(await browser.evaluate('$gameMap.mapId()'), Number(id.slice(1)) + 6);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${id}`);
@@ -177,6 +177,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
     assert.deepEqual(after.assignments, before.assignments);
     await browser.call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
     await choices(browser, 'approaches');
+    assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'), [], 'Narrator exits before approach choices');
     assert.equal(await browser.evaluate('$gameMessage.choices().filter(label => /<Bind Picture: 5[0-2]>/.test(label)).length'), 3);
     await browser.screenshot(`${evidence('IT-005')}/${reduced ? 'reduced' : 'normal'}-approaches.png`);
     // Restore the same native pre-description input to exercise the mouse boundary.
