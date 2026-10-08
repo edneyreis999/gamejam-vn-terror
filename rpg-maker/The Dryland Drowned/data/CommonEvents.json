@@ -26747,7 +26747,7 @@
                 "code": 405,
                 "indent": 0,
                 "parameters": [
-                    "<center>\\FS[32]$[credits.title]"
+                    "<center>\\C[21]\\FS[32]$[credits.title]"
                 ]
             },
             {
