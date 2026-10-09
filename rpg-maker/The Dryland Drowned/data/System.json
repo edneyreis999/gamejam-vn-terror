@@ -5,10 +5,10 @@
         "screenHeight": 720,
         "uiAreaWidth": 1280,
         "uiAreaHeight": 720,
-        "numberFontFilename": "mplus-2p-bold-sub.woff",
-        "fallbackFonts": "Verdana, sans-serif",
+        "numberFontFilename": "Cinzel-Black.ttf",
+        "fallbackFonts": "Verdana",
         "fontSize": 26,
-        "mainFontFilename": "mplus-1m-regular.woff",
+        "mainFontFilename": "Alegreya-Regular.ttf",
         "screenScale": 1,
         "windowOpacity": 192,
         "picturesUpperLimit": 100
@@ -120,7 +120,7 @@
         "pitch": 100,
         "volume": 90
     },
-    "editMapId": 37,
+    "editMapId": 3,
     "elements": [
         "",
         "Físico",
@@ -782,7 +782,7 @@
         "Memorial — Encontro H7",
         "Memorial — Encontro H8"
     ],
-    "versionId": 81951838,
+    "versionId": 15786577,
     "victoryMe": {
         "name": "Victory1",
         "pan": 0,

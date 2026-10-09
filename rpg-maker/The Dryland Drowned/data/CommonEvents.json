@@ -74,13 +74,13 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "Dryland_Taverna",
+                    "Dryland_Title",
                     0,
                     0,
                     0,
                     0,
-                    101.026045777427,
-                    101.026045777427,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -122,20 +122,105 @@
                 "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
-                    "PictureTextChange",
+                    "Picture: Change Text",
                     {
                         "PictureIDs:arraynum": "[2]",
                         "Padding:eval": "12",
+                        "Text": "",
                         "upperleft:json": "\"\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[48]$[title.name]\"",
+                        "center:json": "\"\\\\FontChange<Cinzel>\\\\HexColor<#ffffff>\\\\FS[58]$[title.name]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
                         "lowerright:json": "\"\""
                     }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Picture ID(s) = [2]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Padding = 12"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Text = "
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Upper Left = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Upper Center = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Upper Right = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Middle Left = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Middle Center = \"\\\\FontChange<Cinzel>\\\\HexColor<#ffffff>\\\\F…"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Middle Right = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Lower Left = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Lower Center = \"\""
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Lower Right = \"\""
                 ]
             },
             {
@@ -209,16 +294,73 @@
                 "indent": 0,
                 "parameters": [
                     [
-                        "$[choice.title.new_game]<Choice Width: 352>",
-                        "$[choice.title.continue]<Continue>",
-                        "$[choice.title.options]",
-                        "$[choice.title.quit]"
+                        "\\FontChange<Alegreya>$[choice.title.new_game]<Choice Width: 352>",
+                        "\\FontChange<Alegreya>$[choice.title.continue]<Continue>",
+                        "\\FontChange<Alegreya>$[choice.title.options]",
+                        "\\FontChange<Alegreya>$[choice.title.quit]"
                     ],
                     -1,
                     0,
                     1,
                     0
                 ]
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    0,
+                    "\\FontChange<Alegreya>$[choice.title.new_game]<Choice Width: 352>"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    1,
+                    "\\FontChange<Alegreya>$[choice.title.continue]<Continue>"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    2,
+                    "\\FontChange<Alegreya>$[choice.title.options]"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 402,
+                "indent": 0,
+                "parameters": [
+                    3,
+                    "\\FontChange<Alegreya>$[choice.title.quit]"
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 404,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 357,
@@ -254,7 +396,8 @@
                 "parameters": [
                     0,
                     "$[choice.title.new_game]<Choice Width: 352>"
-                ]
+                ],
+                "collapsed": true
             },
             {
                 "code": 235,
@@ -306,7 +449,8 @@
                 "parameters": [
                     1,
                     "$[choice.title.continue]<Continue>"
-                ]
+                ],
+                "collapsed": true
             },
             {
                 "code": 357,
@@ -326,7 +470,8 @@
                 "parameters": [
                     2,
                     "$[choice.title.options]"
-                ]
+                ],
+                "collapsed": true
             },
             {
                 "code": 357,
@@ -346,7 +491,8 @@
                 "parameters": [
                     3,
                     "$[choice.title.quit]"
-                ]
+                ],
+                "collapsed": true
             },
             {
                 "code": 355,
@@ -4823,8 +4969,8 @@
                     0,
                     640,
                     360,
-                    100,
-                    100,
+                    80,
+                    80,
                     255,
                     0
                 ]
