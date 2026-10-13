@@ -4991,10 +4991,10 @@
                     "Dryland_HeroGroup_H1",
                     1,
                     0,
-                    344,
-                    528,
-                    100,
-                    100,
+                    349.6,
+                    492,
+                    123.49,
+                    120.32,
                     255,
                     0
                 ]
@@ -5003,14 +5003,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    20,
+                    26,
                     "Dryland_Tavern_H1",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5020,11 +5020,10 @@
                 "indent": 0,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "Picture: Attach Picture(s)",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"20\"]",
-                        "TargetID:num": "12"
+                        "PictureID:arraynum": "[\"26\"]"
                     }
                 ]
             },
@@ -5032,14 +5031,7 @@
                 "code": 657,
                 "indent": 0,
                 "parameters": [
-                    "Attach Picture ID(s) = [\"20\"]"
-                ]
-            },
-            {
-                "code": 657,
-                "indent": 0,
-                "parameters": [
-                    "Target Picture ID = 12"
+                    "Detach Picture ID(s) = [\"26\"]"
                 ]
             },
             {
@@ -5063,10 +5055,10 @@
                     "Dryland_HeroGroup_H2",
                     1,
                     0,
-                    864,
+                    826.8,
                     232,
-                    100,
-                    100,
+                    110,
+                    97.25,
                     255,
                     0
                 ]
@@ -5075,14 +5067,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    21,
+                    22,
                     "Dryland_Tavern_H2",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5092,11 +5084,10 @@
                 "indent": 0,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "Picture: Attach Picture(s)",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"21\"]",
-                        "TargetID:num": "13"
+                        "PictureID:arraynum": "[\"22\"]"
                     }
                 ]
             },
@@ -5104,14 +5095,7 @@
                 "code": 657,
                 "indent": 0,
                 "parameters": [
-                    "Attach Picture ID(s) = [\"21\"]"
-                ]
-            },
-            {
-                "code": 657,
-                "indent": 0,
-                "parameters": [
-                    "Target Picture ID = 13"
+                    "Detach Picture ID(s) = [\"22\"]"
                 ]
             },
             {
@@ -5135,10 +5119,10 @@
                     "Dryland_HeroGroup_H3",
                     1,
                     0,
-                    760,
-                    512,
-                    100,
-                    100,
+                    755.6,
+                    490.4,
+                    112.93,
+                    111.19,
                     255,
                     0
                 ]
@@ -5147,14 +5131,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    22,
+                    27,
                     "Dryland_Tavern_H3",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5164,11 +5148,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"22\"]",
-                        "TargetID:num": "16"
+                        "PictureID:arraynum": "[\"27\"]"
                     }
                 ]
             },
@@ -5193,10 +5176,10 @@
                     "Dryland_HeroGroup_H4",
                     1,
                     0,
-                    976,
-                    472,
-                    100,
-                    100,
+                    967.2,
+                    478.8,
+                    141.97,
+                    120.21,
                     255,
                     0
                 ]
@@ -5205,14 +5188,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    23,
+                    25,
                     "Dryland_Tavern_H4",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5222,11 +5205,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"23\"]",
-                        "TargetID:num": "15"
+                        "PictureID:arraynum": "[\"25\"]"
                     }
                 ]
             },
@@ -5251,10 +5233,10 @@
                     "Dryland_HeroGroup_H5",
                     1,
                     0,
-                    544,
-                    328,
-                    100,
-                    100,
+                    540.4,
+                    310,
+                    130.7,
+                    80.72,
                     255,
                     0
                 ]
@@ -5267,10 +5249,10 @@
                     "Dryland_Tavern_H5",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5280,11 +5262,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"24\"]",
-                        "TargetID:num": "11"
+                        "PictureID:arraynum": "[\"24\"]"
                     }
                 ]
             },
@@ -5309,10 +5290,10 @@
                     "Dryland_HeroGroup_H6",
                     1,
                     0,
-                    352,
-                    224,
-                    100,
-                    100,
+                    356.4,
+                    220.8,
+                    95.63,
+                    88.62,
                     255,
                     0
                 ]
@@ -5321,14 +5302,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    25,
+                    21,
                     "Dryland_Tavern_H6",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5338,11 +5319,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"25\"]",
-                        "TargetID:num": "10"
+                        "PictureID:arraynum": "[\"21\"]"
                     }
                 ]
             },
@@ -5367,10 +5347,10 @@
                     "Dryland_HeroGroup_H7",
                     1,
                     0,
-                    1024,
-                    280,
-                    100,
-                    100,
+                    1057.2,
+                    286,
+                    110.81,
+                    112.81,
                     255,
                     0
                 ]
@@ -5379,14 +5359,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    26,
+                    23,
                     "Dryland_Tavern_H7",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5396,11 +5376,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"26\"]",
-                        "TargetID:num": "14"
+                        "PictureID:arraynum": "[\"23\"]"
                     }
                 ]
             },
@@ -5425,10 +5404,10 @@
                     "Dryland_HeroGroup_H8",
                     1,
                     0,
-                    160,
-                    264,
-                    100,
-                    100,
+                    147.2,
+                    250.8,
+                    118.31,
+                    106.11,
                     255,
                     0
                 ]
@@ -5437,14 +5416,14 @@
                 "code": 231,
                 "indent": 1,
                 "parameters": [
-                    27,
+                    20,
                     "Dryland_Tavern_H8",
                     1,
                     0,
-                    0,
-                    0,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -5454,11 +5433,10 @@
                 "indent": 1,
                 "parameters": [
                     "VisuMZ_4_AttachedPictures",
-                    "PictureAddPicture",
-                    "PictureAddPicture",
+                    "PictureRemovePicture",
+                    "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"27\"]",
-                        "TargetID:num": "17"
+                        "PictureID:arraynum": "[\"20\"]"
                     }
                 ]
             },
@@ -5475,7 +5453,7 @@
                     "Dryland_Button",
                     1,
                     0,
-                    712,
+                    640,
                     56,
                     100,
                     100,
@@ -5670,8 +5648,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    344,
-                    679,
+                    349.6,
+                    250,
                     100,
                     100,
                     255,
@@ -5809,7 +5787,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    20
+                    26
                 ]
             },
             {
@@ -5827,7 +5805,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"20\"]"
+                        "PictureID:arraynum": "[\"26\"]"
                     }
                 ]
             },
@@ -5910,8 +5888,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    864,
-                    383,
+                    826.8,
+                    55.6,
                     100,
                     100,
                     255,
@@ -6049,7 +6027,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    21
+                    22
                 ]
             },
             {
@@ -6067,7 +6045,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"21\"]"
+                        "PictureID:arraynum": "[\"22\"]"
                     }
                 ]
             },
@@ -6150,8 +6128,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    760,
-                    663,
+                    755.6,
+                    246.8,
                     100,
                     100,
                     255,
@@ -6289,7 +6267,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    22
+                    27
                 ]
             },
             {
@@ -6307,7 +6285,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"22\"]"
+                        "PictureID:arraynum": "[\"27\"]"
                     }
                 ]
             },
@@ -6390,8 +6368,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    976,
-                    623,
+                    967.2,
+                    236.4,
                     100,
                     100,
                     255,
@@ -6529,7 +6507,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    23
+                    25
                 ]
             },
             {
@@ -6547,7 +6525,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"23\"]"
+                        "PictureID:arraynum": "[\"25\"]"
                     }
                 ]
             },
@@ -6630,8 +6608,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    544,
-                    479,
+                    540.4,
+                    161.2,
                     100,
                     100,
                     255,
@@ -6870,8 +6848,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    352,
-                    375,
+                    356.4,
+                    58.8,
                     100,
                     100,
                     255,
@@ -7009,7 +6987,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    25
+                    21
                 ]
             },
             {
@@ -7027,7 +7005,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"25\"]"
+                        "PictureID:arraynum": "[\"21\"]"
                     }
                 ]
             },
@@ -7110,8 +7088,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    1024,
-                    431,
+                    1057.2,
+                    83.6,
                     100,
                     100,
                     255,
@@ -7249,7 +7227,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    26
+                    23
                 ]
             },
             {
@@ -7267,7 +7245,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"26\"]"
+                        "PictureID:arraynum": "[\"23\"]"
                     }
                 ]
             },
@@ -7350,8 +7328,8 @@
                     "Dryland_Tag",
                     1,
                     0,
-                    160,
-                    415,
+                    147.2,
+                    59.6,
                     100,
                     100,
                     255,
@@ -7489,7 +7467,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    27
+                    20
                 ]
             },
             {
@@ -7507,7 +7485,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"27\"]"
+                        "PictureID:arraynum": "[\"20\"]"
                     }
                 ]
             },
@@ -16441,14 +16419,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    12,
+                    26,
                     "Dryland_Tavern_H1",
                     1,
                     0,
-                    344,
-                    520,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -16457,14 +16435,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    12,
+                    26,
                     0,
                     1,
                     0,
-                    344,
-                    520,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -16557,14 +16535,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    13,
+                    22,
                     "Dryland_Tavern_H2",
                     1,
                     0,
-                    840,
-                    176,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -16573,14 +16551,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    13,
+                    22,
                     0,
                     1,
                     0,
-                    840,
-                    176,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -16673,14 +16651,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    16,
+                    27,
                     "Dryland_Tavern_H3",
                     1,
                     0,
-                    760,
-                    497,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -16689,14 +16667,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    16,
+                    27,
                     0,
                     1,
                     0,
-                    760,
-                    497,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -16789,14 +16767,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    15,
+                    25,
                     "Dryland_Tavern_H4",
                     1,
                     0,
-                    1000,
-                    448,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -16805,14 +16783,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    15,
+                    25,
                     0,
                     1,
                     0,
-                    1000,
-                    448,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -16905,14 +16883,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    11,
+                    24,
                     "Dryland_Tavern_H5",
                     1,
                     0,
-                    528,
-                    336,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -16921,14 +16899,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    11,
+                    24,
                     0,
                     1,
                     0,
-                    528,
-                    336,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -17021,14 +16999,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    10,
+                    21,
                     "Dryland_Tavern_H6",
                     1,
                     0,
-                    368,
-                    160,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -17037,14 +17015,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    10,
+                    21,
                     0,
                     1,
                     0,
-                    368,
-                    160,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -17137,14 +17115,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    14,
+                    23,
                     "Dryland_Tavern_H7",
                     1,
                     0,
-                    1032,
-                    224,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -17153,14 +17131,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    14,
+                    23,
                     0,
                     1,
                     0,
-                    1032,
-                    224,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -17253,14 +17231,14 @@
                 "code": 231,
                 "indent": 2,
                 "parameters": [
-                    17,
+                    20,
                     "Dryland_Tavern_H8",
                     1,
                     0,
-                    176,
-                    264,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     255,
                     0
                 ]
@@ -17269,14 +17247,14 @@
                 "code": 232,
                 "indent": 2,
                 "parameters": [
-                    17,
+                    20,
                     0,
                     1,
                     0,
-                    176,
-                    264,
-                    35,
-                    35,
+                    640,
+                    360,
+                    80,
+                    80,
                     0,
                     0,
                     60,
@@ -69269,7 +69247,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    20
+                    26
                 ]
             },
             {
@@ -69280,7 +69258,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"20\",\"30\"]"
+                        "PictureID:arraynum": "[\"26\",\"30\"]"
                     }
                 ]
             },
@@ -69339,7 +69317,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    21
+                    22
                 ]
             },
             {
@@ -69350,7 +69328,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"21\",\"31\"]"
+                        "PictureID:arraynum": "[\"22\",\"31\"]"
                     }
                 ]
             },
@@ -69409,7 +69387,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    22
+                    27
                 ]
             },
             {
@@ -69420,7 +69398,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"22\",\"32\"]"
+                        "PictureID:arraynum": "[\"27\",\"32\"]"
                     }
                 ]
             },
@@ -69479,7 +69457,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    23
+                    25
                 ]
             },
             {
@@ -69490,7 +69468,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"23\",\"33\"]"
+                        "PictureID:arraynum": "[\"25\",\"33\"]"
                     }
                 ]
             },
@@ -69619,7 +69597,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    25
+                    21
                 ]
             },
             {
@@ -69630,7 +69608,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"25\",\"35\"]"
+                        "PictureID:arraynum": "[\"21\",\"35\"]"
                     }
                 ]
             },
@@ -69689,7 +69667,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    26
+                    23
                 ]
             },
             {
@@ -69700,7 +69678,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"26\",\"36\"]"
+                        "PictureID:arraynum": "[\"23\",\"36\"]"
                     }
                 ]
             },
@@ -69759,7 +69737,7 @@
                 "code": 235,
                 "indent": 1,
                 "parameters": [
-                    27
+                    20
                 ]
             },
             {
@@ -69770,7 +69748,7 @@
                     "PictureRemovePicture",
                     "PictureRemovePicture",
                     {
-                        "PictureID:arraynum": "[\"27\",\"37\"]"
+                        "PictureID:arraynum": "[\"20\",\"37\"]"
                     }
                 ]
             },
