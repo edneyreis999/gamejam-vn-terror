@@ -31,7 +31,7 @@
         "id": 4,
         "expanded": false,
         "name": "História — Palco",
-        "order": 4,
+        "order": 12,
         "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
@@ -40,7 +40,7 @@
         "id": 5,
         "expanded": true,
         "name": "Armadilhas físicas",
-        "order": 5,
+        "order": 13,
         "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
@@ -49,7 +49,7 @@
         "id": 6,
         "expanded": true,
         "name": "Armadilhas sobrenaturais",
-        "order": 6,
+        "order": 22,
         "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
@@ -58,7 +58,7 @@
         "id": 7,
         "expanded": false,
         "name": "A1",
-        "order": 7,
+        "order": 14,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -67,7 +67,7 @@
         "id": 8,
         "expanded": false,
         "name": "A2",
-        "order": 8,
+        "order": 15,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -76,7 +76,7 @@
         "id": 9,
         "expanded": false,
         "name": "A3",
-        "order": 9,
+        "order": 16,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -85,7 +85,7 @@
         "id": 10,
         "expanded": false,
         "name": "A4",
-        "order": 10,
+        "order": 17,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -94,7 +94,7 @@
         "id": 11,
         "expanded": false,
         "name": "A5",
-        "order": 11,
+        "order": 18,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -103,7 +103,7 @@
         "id": 12,
         "expanded": false,
         "name": "A6",
-        "order": 12,
+        "order": 19,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -112,7 +112,7 @@
         "id": 13,
         "expanded": false,
         "name": "A7",
-        "order": 13,
+        "order": 20,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -121,7 +121,7 @@
         "id": 14,
         "expanded": false,
         "name": "A8",
-        "order": 14,
+        "order": 21,
         "parentId": 5,
         "scrollX": 0,
         "scrollY": 0
@@ -130,7 +130,7 @@
         "id": 15,
         "expanded": false,
         "name": "B1",
-        "order": 15,
+        "order": 23,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -139,7 +139,7 @@
         "id": 16,
         "expanded": false,
         "name": "B2",
-        "order": 16,
+        "order": 24,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -148,7 +148,7 @@
         "id": 17,
         "expanded": false,
         "name": "B3",
-        "order": 17,
+        "order": 25,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -157,7 +157,7 @@
         "id": 18,
         "expanded": false,
         "name": "B4",
-        "order": 18,
+        "order": 26,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -166,7 +166,7 @@
         "id": 19,
         "expanded": false,
         "name": "B5",
-        "order": 19,
+        "order": 27,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -175,7 +175,7 @@
         "id": 20,
         "expanded": false,
         "name": "B6",
-        "order": 20,
+        "order": 28,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -184,7 +184,7 @@
         "id": 21,
         "expanded": false,
         "name": "B7",
-        "order": 21,
+        "order": 29,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -193,7 +193,7 @@
         "id": 22,
         "expanded": false,
         "name": "B8",
-        "order": 22,
+        "order": 30,
         "parentId": 6,
         "scrollX": 0,
         "scrollY": 0
@@ -202,7 +202,7 @@
         "id": 23,
         "expanded": false,
         "name": "Conselho",
-        "order": 23,
+        "order": 31,
         "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
@@ -211,7 +211,7 @@
         "id": 24,
         "expanded": true,
         "name": "Finais",
-        "order": 24,
+        "order": 32,
         "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
@@ -220,7 +220,7 @@
         "id": 25,
         "expanded": false,
         "name": "Reunir",
-        "order": 25,
+        "order": 33,
         "parentId": 24,
         "scrollX": 0,
         "scrollY": 0
@@ -229,7 +229,7 @@
         "id": 26,
         "expanded": false,
         "name": "Destruir",
-        "order": 26,
+        "order": 34,
         "parentId": 24,
         "scrollX": 0,
         "scrollY": 0
@@ -238,16 +238,16 @@
         "id": 27,
         "expanded": false,
         "name": "Perda total",
-        "order": 27,
+        "order": 35,
         "parentId": 24,
         "scrollX": 0,
         "scrollY": 0
     },
     {
         "id": 28,
-        "expanded": true,
+        "expanded": false,
         "name": "Memorial e Epílogos",
-        "order": 28,
+        "order": 36,
         "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
@@ -256,7 +256,7 @@
         "id": 29,
         "expanded": false,
         "name": "Epílogo — Gorvak",
-        "order": 29,
+        "order": 37,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -265,7 +265,7 @@
         "id": 30,
         "expanded": false,
         "name": "Epílogo — Elowen",
-        "order": 30,
+        "order": 38,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -274,7 +274,7 @@
         "id": 31,
         "expanded": false,
         "name": "Epílogo — Griznik",
-        "order": 31,
+        "order": 39,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -283,7 +283,7 @@
         "id": 32,
         "expanded": false,
         "name": "Epílogo — Seraphina",
-        "order": 32,
+        "order": 40,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -292,7 +292,7 @@
         "id": 33,
         "expanded": false,
         "name": "Epílogo — Bimbren",
-        "order": 33,
+        "order": 41,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -301,7 +301,7 @@
         "id": 34,
         "expanded": false,
         "name": "Epílogo — Liora",
-        "order": 34,
+        "order": 42,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -310,7 +310,7 @@
         "id": 35,
         "expanded": false,
         "name": "Epílogo — Vaelith",
-        "order": 35,
+        "order": 43,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -319,7 +319,7 @@
         "id": 36,
         "expanded": false,
         "name": "Epílogo — Draska",
-        "order": 36,
+        "order": 44,
         "parentId": 28,
         "scrollX": 0,
         "scrollY": 0
@@ -328,7 +328,7 @@
         "id": 37,
         "expanded": false,
         "name": "Conversa — Gorvak",
-        "order": 37,
+        "order": 4,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -337,7 +337,7 @@
         "id": 38,
         "expanded": false,
         "name": "Conversa — Elowen",
-        "order": 38,
+        "order": 5,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -346,7 +346,7 @@
         "id": 39,
         "expanded": false,
         "name": "Conversa — Griznik",
-        "order": 39,
+        "order": 6,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -355,7 +355,7 @@
         "id": 40,
         "expanded": false,
         "name": "Conversa — Seraphina",
-        "order": 40,
+        "order": 7,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -364,7 +364,7 @@
         "id": 41,
         "expanded": false,
         "name": "Conversa — Bimbren",
-        "order": 41,
+        "order": 8,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -373,7 +373,7 @@
         "id": 42,
         "expanded": false,
         "name": "Conversa — Liora",
-        "order": 42,
+        "order": 9,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -382,7 +382,7 @@
         "id": 43,
         "expanded": false,
         "name": "Conversa — Vaelith",
-        "order": 43,
+        "order": 10,
         "parentId": 3,
         "scrollX": 0,
         "scrollY": 0
@@ -391,8 +391,27 @@
         "id": 44,
         "expanded": false,
         "name": "Conversa — Draska",
-        "order": 44,
+        "order": 11,
         "parentId": 3,
+        "scrollX": 0,
+        "scrollY": 0
+    },
+    {
+        "id": 45,
+        "expanded": false,
+        "name": "Acampamento",
+        "order": 45,
+        "parentId": 0,
+        "scrollX": 0,
+        "scrollY": 0,
+        "quick": false
+    },
+    {
+        "id": 46,
+        "expanded": false,
+        "name": "Créditos",
+        "order": 46,
+        "parentId": 0,
         "scrollX": 0,
         "scrollY": 0
     }
