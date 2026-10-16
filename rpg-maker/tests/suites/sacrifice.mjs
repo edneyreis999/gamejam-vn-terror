@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { act, activate, catalog, choices, heroes, pause, rules, tavern } from '../helpers/formation.mjs';
-import { accepted, complete, failureWithCount, finishReading, rejectUnchanged, replayUntil } from '../helpers/campaign.mjs';
+import { accepted, complete, failureWithCount, finishReading, passCamp, rejectUnchanged, replayUntil } from '../helpers/campaign.mjs';
 import { assertPortraitFraming } from '../helpers/native-bust-fixture.mjs';
 const snapshot = browser => browser.evaluate('$gameSystem._dryland.campaign');
 const evidence = 'docs/qa/evidence/init-rpg-maker-mz/task-05/IT-012';
@@ -15,6 +15,7 @@ canonicalCase('UT-021', 'one victim activation is irreversible and its original 
   assert.deepEqual(dead.deadHeroIds, ['H1']);
   assert.equal(dead.sequence, before.sequence + 1);
   assert.deepEqual(dead.partyIds, ['H2', 'H3']);
+  assert.deepEqual(dead.deathLocations.H1.witnessHeroIds, ['H2', 'H3']);
   assert.equal(dead.phase, 'death_result');
   const repeated = rules.dispatch(dead, action);
   assert.equal(repeated.error.code, 'stale_action');
@@ -28,6 +29,7 @@ canonicalCase('UT-022', 'protagonist, reserve, unknown and dead victims are reje
 });
 canonicalCase('UT-023', 'the sole remaining H2 still requires an explicit victim activation', () => {
   let state = finishReading(accepted(failureWithCount(2), 'SELECT_VICTIM', { heroId: 'H3' }));
+  if (state.phase === 'camp_arrival') state = passCamp(state);
   state = complete(accepted(state, 'ENTER_DUNGEON'));
   state = complete(accepted(state, 'CHOOSE_APPROACH', { approachId: 'A1-1' }));
   assert.equal(state.phase, 'sacrifice_choice');
@@ -39,8 +41,10 @@ canonicalCase('UT-023', 'the sole remaining H2 still requires an explicit victim
 });
 canonicalCase('UT-024', 'a death leaving H2 continues with H2 and cannot recruit reserves mid-route', () => {
   let state = finishReading(accepted(failureWithCount(3), 'SELECT_VICTIM', { heroId: 'H3' }));
+  if (state.phase === 'camp_arrival') state = passCamp(state);
   state = complete(accepted(state, 'ENTER_DUNGEON'));
   state = complete(accepted(state, 'CHOOSE_APPROACH', { approachId: 'A7-1' }));
+  if (state.phase === 'camp_arrival') state = passCamp(state);
   state = complete(accepted(state, 'ENTER_DUNGEON'));
   state = complete(accepted(state, 'CHOOSE_APPROACH', { approachId: 'A1-3' }));
   assert.deepEqual(state.partyIds, ['H1', 'H2']);
@@ -102,7 +106,7 @@ canonicalCase('UT-056', 'zero living heroes cannot depart and the terminal endin
 canonicalCase('UT-066', 'death context is atomic, immutable, strictly validated and cleared by New Game', () => {
   const before = replayUntil('final-sixth-solo-council', state => state.phase === 'sacrifice_choice' && state.position === 6);
   const state = accepted(before, 'SELECT_VICTIM', { heroId: 'H8' });
-  assert.deepEqual(state.deathLocations.H8, { routeId: 'final', encounterId: 'B5', encounterPosition: 6, approachId: 'B5-1' });
+  assert.deepEqual(state.deathLocations.H8, { routeId: 'final', encounterId: 'B5', encounterPosition: 6, approachId: 'B5-1', witnessHeroIds: [] });
   assert.deepEqual(Object.keys(state.deathLocations).sort(), [...state.deadHeroIds].sort());
   const stale = rules.dispatch(state, { type: 'SELECT_VICTIM', heroId: 'H8', expectedSequence: before.sequence });
   assert.equal(stale.error.code, 'stale_action');

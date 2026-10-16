@@ -393,7 +393,29 @@
         "Ausência H8 apresentada",
         "Memorial pronto",
         "Ausências em animação",
-        "Unidade de campanha já lida"
+        "Unidade de campanha já lida",
+        "Social — unit already read",
+        "Social — topic eligible",
+        "Camp — participant",
+        "Camp — dead portrait",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "Camp — selectable H1",
+        "Camp — selectable H2",
+        "Camp — selectable H3",
+        "Camp — selectable H4",
+        "Camp — selectable H5",
+        "Camp — selectable H6",
+        "Camp — selectable H7",
+        "Camp — selectable H8",
+        "Social — About option 1",
+        "Social — About option 2"
     ],
     "terms": {
         "basic": [
@@ -780,7 +802,12 @@
         "Memorial — Encontro H5",
         "Memorial — Encontro H6",
         "Memorial — Encontro H7",
-        "Memorial — Encontro H8"
+        "Memorial — Encontro H8",
+        "Social — hero return context",
+        "Social — active topic",
+        "Social — displayed unit",
+        "Camp — next grief",
+        "Camp — tone"
     ],
     "versionId": 15786577,
     "victoryMe": {

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-presentation-losses-20261016-02",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-presentation-losses.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-presentation-losses",
+    "profile": "chrome-desktop",
+    "variant": "loss-about",
+    "configuration": "1920x1080-en-normal"
+  },
+  "claims": [
+    {
+      "id": "presentation-continuity",
+      "variant": "loss-about",
+      "sensor": "directed-browser",
+      "group": "presentation",
+      "source": {
+        "id": "presentation-continuity",
+        "variant": "loss-about"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Presentation refinement"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Approved nameplates, three-second absences and stable native conversation composition."
+  }
+}

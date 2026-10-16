@@ -2,6 +2,7 @@
 // OUT: staged sacrifice, semantic saving and later discovery/ending surfaces.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { passCamp, finishCamp } from '../helpers/campaign.mjs';
 import { passageBoxes } from '../helpers/native-reading.mjs';
 import { installPhase } from '../helpers/native-shared.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
@@ -55,19 +56,30 @@ canonicalCase('UT-005', 'first reveal assigns only the current position, without
   assert.equal(after.progress.physical, 0);
 });
 canonicalCase('UT-006', 'real retreat/departure/reveal transitions reuse the saved position and RNG', () => {
-  const first = accepted(depart(), 'ENTER_DUNGEON');
-  let state = accepted(first, 'REQUEST_RETREAT');
-  state = accepted(state, 'CONFIRM_RETREAT');
+  let first = depart();
+  for (let n = 0; n < 2; n++) {
+    first = readAll(accepted(first, 'ENTER_DUNGEON'));
+    const approach = rules.deriveViability(first.partyIds, first.assignments.physical[first.position - 1]).approaches.find(a => a.viable);
+    first = complete(accepted(first, 'CHOOSE_APPROACH', { approachId: approach.id }));
+  }
+  first = finishCamp(first);
+  let state = accepted(accepted(first, 'REQUEST_RETREAT'), 'CONFIRM_RETREAT');
   state = accepted(depart(state), 'ENTER_DUNGEON');
   assert.deepEqual(state.assignments, first.assignments);
   assert.equal(state.rngState, first.rngState);
-  assert.equal(state.progress.physical, 0);
+  assert.equal(state.progress.physical, 2);
 });
 canonicalCase('UT-007', 'the final route consumes exactly the three leftovers from each initial pool', () => {
   let state = formation(0);
   for (const route of ['physical', 'supernatural']) {
     state = depart(state, route);
     for (let position = 1; position <= 5; position++) {
+      if (state.phase === 'camp_arrival') {
+        assert.equal(state.position, position - 1);
+        assert.equal(state.assignments[state.dungeonId][position - 1], null);
+        state = passCamp(state);
+        assert.equal(state.position, position);
+      }
       state = complete(accepted(state, 'ENTER_DUNGEON'));
       const id = state.assignments[route][position - 1];
       const index = gdd.encounterPairs[id].findIndex(competency => state.partyIds.some(hero => gdd.heroPairs[hero].includes(competency)));
@@ -81,6 +93,7 @@ canonicalCase('UT-007', 'the final route consumes exactly the three leftovers fr
   for (const pool of ['A', 'B']) assert.equal(candidates.filter(id => id[0] === pool).length, 3);
   state = depart(state, 'final');
   for (let position = 1; position <= 6; position++) {
+    if (state.phase === 'camp_arrival') state = passCamp(state);
     state = complete(accepted(state, 'ENTER_DUNGEON'));
     const id = state.assignments.final[position - 1];
     const index = gdd.encounterPairs[id].findIndex(competency => state.partyIds.some(hero => gdd.heroPairs[hero].includes(competency)));

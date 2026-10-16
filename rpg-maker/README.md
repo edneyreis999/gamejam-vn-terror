@@ -106,3 +106,15 @@ O itch.io rejeita zips com mais de 1000 entradas, e o deploy do editor exporta o
 3. **Testes e2e e zip.** `npm run verify-build` confere que o `dist` veio deste checkout, roda a suíte canônica contra ele e, só com a suíte verde, gera `dist/The Dryland Drowned.zip`. Suba esse zip. Não zipe pelo Finder: ele adiciona uma entrada `__MACOSX/._*` por arquivo e dobra a contagem.
 
 Repita os três passos a cada publicação: o `verify-build` recusa um `dist` que não bate com o projeto.
+
+## Fogueiras e conversas de companheiros
+
+Map045 recebe a expedição após os encontros 2 e 4. Continuar avança uma posição; Voltar à taverna preserva progresso, encontros sorteados e mortes. A retirada voluntária não aparece nas armadilhas. Perda do último participante e conclusão da rota mantêm seus próprios fluxos.
+
+Maps037–044 compartilham os menus dos heróis entre taverna e fogueira pelo contexto nativo216. Os diálogos estão nos eventos e em `Languages.tsv`; regras e elegibilidade estão em CampaignRules. CE357–359 narram a chegada e CE360–375 contêm o luto direcional. O fade da fogueira inclui todos os mortos a cada chegada; ele não consome os switches de primeira ausência da taverna.
+
+Uma conversa nova chama `START_SOCIAL_TOPIC`, apresenta suas unidades elegíveis, encerra a leitura e chama `COMPLETE_SOCIAL_TOPIC` antes de `social_complete`. Os outros checkpoints são `camp_entry`, `camp_arrival_complete` e `camp_exit`. A unidade base, a interjeição e as partes contextuais de Sobre têm identidades distintas: uma parte recém-disponível pode renovar NEW. O plugin `Dryland_2_ConversationIndicators` apenas consulta esses fatos e o Talk legado; foco e abertura não concluem leitura.
+
+Este incremento exige nova campanha (schema2), sem migração nem remoção de arquivos antigos. O Talk legado mantém o risco aceito F-001: sua marca observacional pode voltar ao estado do último save se houver reload antes de outra gravação normal. As conversas sociais novas e o luto têm checkpoints próprios. [QA, fontes e limitações do candidato](../planos/tasks/campfire-hero-bonds/verification.md).
+
+As transformações Python em `planos/tasks/campfire-hero-bonds/` registram a aplicação pontual do plano; não são comandos de autoria contínua e não devem ser reexecutadas sobre os eventos editados.

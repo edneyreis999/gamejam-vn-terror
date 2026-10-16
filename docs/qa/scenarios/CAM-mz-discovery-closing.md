@@ -53,3 +53,7 @@ Planejado, execução dirigida ainda não observada. Cobertura: S-05/06/07/08/09
 ## Textos atualizados — 2026-09-25
 
 Conselho com participantes vivos, opinião em dois parágrafos e final Reunir executados. Memoriais reais de A5/H1 e A1/H3 mostram causas aprovadas e localização gravada, completos em 1280×720 e 1920×1080. Opiniões não visitadas têm comparação estática e equivalência de apresentação, sem alegação de execução individual. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.
+
+## Incremento campfire-hero-bonds — 2026-10-16
+
+[Guia dos lotes e variantes](../guides/campfire-hero-bonds.md) e [relatório corrente](../reports/2026-10-16-campfire-hero-bonds.md). A retirada voluntária passa a existir somente na fogueira após as posições 2/4, inclusive com grupo reduzido. Conversas e reações têm unidades próprias de leitura e checkpoints. Resultados históricos acima não aprovam este candidato; o relatório separa execução, inspeção e aceite humano.

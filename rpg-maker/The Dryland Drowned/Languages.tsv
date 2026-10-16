@@ -463,3 +463,420 @@ conv.draska.selected	Right, Ivaí. I'll bring spare water and food. Before we go
 conv.draska.full	There are already three people in the party, Ivaí. You'll have to take someone out before adding me. Check who's going before we leave.	Já são três pessoas no grupo, Ivaí. Precisa tirar alguém antes de me incluir. Confira quem vai antes de sairmos.
 council.choice.restore	Restore the medallion — free the lovers and die	Reunir o medalhão — libertar os amantes e morrer
 council.choice.destroy	Destroy the medallion — survive and hand them to Andirá	Destruir o medalhão — sobreviver e entregá-los a Andirá
+camp.h1.church.a.01	Whenever I think about reaching the church, I end up thinking about my workshop. The first day after rebuilding it. I don't even have the money yet, and I'm already choosing where the workbench goes.	Quando penso em chegar à igreja, acabo pensando na minha oficina. No primeiro dia depois da reconstrução. Ainda nem tenho o dinheiro, e já estou escolhendo onde pôr a bancada.
+camp.h1.church.a.02	Where it used to be?	No mesmo lugar de antes?
+camp.h1.church.a.03	Closer to the door. My apprentices will complain about the draft.	Mais perto da porta. Meus aprendizes vão reclamar da corrente de ar.
+camp.h1.church.a.04	Will you change your mind?	E o senhor vai mudar de ideia?
+camp.h1.church.a.05	Not about that. They can argue about the color of the door all they like.	Sobre isso, não. Sobre a cor da porta, podem discutir à vontade.
+camp.h1.church.b.01	Ivaí, when we reach the church, you're coming up front with me. I want to hear what you expect to find before I touch anything.	Ivaí, quando chegarmos à igreja, você vai à frente comigo. Quero ouvir o que espera encontrar antes de pôr a mão em qualquer coisa.
+camp.h1.church.b.02	The records don't explain everything. I need to see the place for myself.	Os registros não explicam tudo. Preciso reconhecer o lugar.
+camp.h1.church.b.03	Then say you don't know. I can work with that.	Então diga que não sabe. Posso trabalhar com isso.
+camp.h1.church.b.04	I don't know everything that's waiting for us.	Eu não sei tudo o que nos espera.
+camp.h1.church.b.05	Good. Remember that sentence. It may be the most useful one when we get there.	Ótimo. Guarde essa frase. Pode ser a mais útil quando chegarmos.
+camp.h1.park.a.01	You still touch that nail when you're worried.	O senhor ainda toca nesse prego quando fica preocupado.
+camp.h1.park.a.02	It's from the forge. Sometimes I don't notice I'm holding it until my hand starts to hurt.	É da forja. Às vezes só percebo que estou segurando quando a mão começa a doer.
+camp.h1.park.a.03	Do you think we'll make it to the park?	Acha que vamos conseguir chegar ao parque?
+camp.h1.park.a.04	I think we need to rest before we try. I don't like sitting still when people are counting on me. But getting up just to look steady won't help anyone.	Acho que precisamos descansar antes de tentar. Não gosto de ficar parado com gente esperando por mim. Mas levantar agora só para parecer firme não ajuda ninguém.
+camp.h1.park.b.01	At the workshop, I was always the one who decided when work was over. My apprentices started hiding my tools at mealtimes.	Na oficina, sempre era eu quem dizia quando o trabalho terminava. Meus aprendizes começaram a esconder minhas ferramentas na hora de comer.
+camp.h1.park.b.02	Did it work?	Funcionava?
+camp.h1.park.b.03	I'd pretend to look. They'd pretend they weren't laughing.	Eu fingia procurar. Eles fingiam que não estavam rindo.
+camp.h1.park.b.04	Are you thinking about them?	Está pensando neles?
+camp.h1.park.b.05	Ever since we left. I want to reach the park. But I want even more to get home and look for that hammer under the table.	Desde que saímos. Quero chegar ao parque. Mas quero ainda mais voltar e procurar aquele martelo debaixo da mesa.
+camp.h1.village.a.01	Rheed, if we get back, don't write that I was never afraid.	Rheed, se voltarmos, não escreva que eu nunca tive medo.
+camp.h1.village.a.02	I wasn't going to.	Eu não ia escrever isso.
+camp.h1.village.a.03	Good. People believe those stories and then feel ashamed to ask for help.	Ainda bem. Tem gente que acredita nessas histórias e depois acha vergonha pedir ajuda.
+camp.h1.village.a.04	Do you ask?	E o senhor pede?
+camp.h1.village.a.05	I'm trying. If I get up before I've rested, tell me to sit down. You don't have to be gentle about it.	Estou tentando. Se eu quiser levantar antes de descansar, diga para eu sentar. Não precisa falar com delicadeza.
+camp.h1.village.b.01	I keep trying to picture coming back from the village. What I'll tell my apprentices when they ask why I took so long.	Fico tentando imaginar a volta do vilarejo. O que vou dizer aos aprendizes quando perguntarem por que demorei.
+camp.h1.village.b.02	Would you like me to speak to them?	Você quer que eu fale com eles?
+camp.h1.village.b.03	No. I want you there to listen.	Não. Quero que você esteja lá para ouvir.
+camp.h1.village.b.04	I understand.	Entendo.
+camp.h1.village.b.05	I hope you do. I'm not making plans just to have a forge. I want people waiting for me again.	Espero que sim. Não estou fazendo planos só para ter uma forja. Quero voltar a ter gente me esperando.
+camp.h2.church.a.01	If the church were just over there, I'd have gone to look already. Not knowing how much farther we have to go bothers me more than the walking.	Se a igreja estivesse logo ali, eu já teria ido olhar. Essa parte de não saber quanto falta me deixa pior do que a caminhada.
+camp.h2.church.a.02	Do you always want to get there first?	Você sempre quer chegar primeiro?
+camp.h2.church.a.03	Back home, getting there first means helping carry what everyone else brought. I found that out after winning a few races.	Na minha comunidade, chegar primeiro significa ajudar a carregar o que os outros trouxeram. Descobri isso depois de ganhar umas corridas.
+camp.h2.church.a.04	Did you stop racing?	Parou de correr?
+camp.h2.church.a.05	No. I started complaining while I carried things. You can do both.	Não. Passei a reclamar durante a carga. Uma coisa não impede a outra.
+camp.h2.church.b.01	"Ivaí, you say ""when we get there"" a little too easily for my liking."	Ivaí, você diz “quando chegarmos” com uma facilidade que me incomoda.
+camp.h2.church.b.02	"Would you rather I said ""if""?"	Prefere que eu diga “se”?
+camp.h2.church.b.03	I'd rather you told me when you're guessing.	Prefiro que me diga quando estiver adivinhando.
+camp.h2.church.b.04	I can't promise what we'll find.	Não posso prometer o que vamos encontrar.
+camp.h2.church.b.05	Then start there. I can keep walking with doubts. What I can't stand is finding out someone hid theirs from me.	Então comece por aí. Eu consigo andar com dúvida. O que não consigo é saber que alguém escondeu a dúvida de mim.
+camp.h2.park.a.01	When I buy the forest, the first thing will be deciding who handles the arguments. I don't want to spend all day listening to disputes over boundaries.	Quando eu comprar a mata, a primeira coisa vai ser decidir quem fica responsável pelas discussões. Não quero passar o dia inteiro ouvindo briga por limite de terreno.
+camp.h2.park.a.02	I thought you liked arguing.	Achei que você gostasse de discutir.
+camp.h2.park.a.03	I like finishing an argument and leaving. That's different.	Gosto de terminar a discussão e ir embora. É diferente.
+camp.h2.park.a.04	Why are you thinking about it now?	E por que pensou nisso agora?
+camp.h2.park.a.05	Because it's easier to want something before you imagine all the work. I want to reach the park still wanting all of it. Even the arguments.	Porque é mais fácil desejar uma coisa antes de imaginar o trabalho que ela dá. Quero chegar ao parque ainda querendo tudo isso. Até as brigas.
+camp.h2.park.b.01	I've taught people to jump a ditch. There was always someone staring at the other side, saying they couldn't make it.	Já ensinei gente a saltar uma vala. Sempre tinha quem olhasse para o outro lado e dissesse que não ia conseguir.
+camp.h2.park.b.02	What did you tell them?	O que você dizia?
+camp.h2.park.b.03	That they could try a smaller one. I was a good teacher when I remembered not everyone had to learn at my pace.	Que podiam tentar uma menor. Eu era boa professora quando lembrava que nem todo mundo precisava aprender no meu ritmo.
+camp.h2.park.b.04	And now?	E agora?
+camp.h2.park.b.05	Now I want someone to tell me how much farther it is to the park. And I'm trying not to take it out on people who don't know either.	Agora quero alguém que me diga quanto falta para o parque. E estou tentando não descontar em quem também não sabe.
+camp.h2.village.a.01	You don't have to put the food away so quickly, Rheed. I didn't say I wanted to leave.	Não precisa guardar a comida tão depressa, Rheed. Eu não disse que queria partir.
+camp.h2.village.a.02	You were looking toward the path.	Você estava olhando para o caminho.
+camp.h2.village.a.03	I'm trying to imagine reaching the village. My head's been there about ten times already. My legs can wait.	Estou tentando imaginar a chegada ao vilarejo. Minha cabeça já foi umas dez vezes. As pernas ainda podem esperar.
+camp.h2.village.a.04	So I can finish eating?	Posso terminar, então?
+camp.h2.village.a.05	You can. Pass me a piece, too. Whoever looks toward the path first cleans up.	Pode. E me passa um pedaço. Quem olhar para o caminho primeiro lava o que sujou.
+camp.h2.village.b.01	If we get back, I want one whole day without anyone asking me what comes next.	Se a gente voltar, quero passar um dia sem ninguém me perguntar o que vem depois.
+camp.h2.village.b.02	Could you stay still for a whole day?	Você conseguiria ficar parada um dia inteiro?
+camp.h2.village.b.03	I said no questions. I can walk as much as I like.	Eu disse sem perguntas. Posso andar quanto quiser.
+camp.h2.village.b.04	That's a fair request.	É um pedido justo.
+camp.h2.village.b.05	Then save yours. When we reach the village, it'll be my turn to ask.	Então guarde os seus. Quando chegarmos ao vilarejo, vai ser a minha vez de perguntar.
+camp.h3.church.a.01	I'm trying not to invent a whole workshop before we reach the church. I've already moved the door three times in my head.	Estou tentando não inventar uma oficina inteira antes de chegarmos à igreja. Já mudei a porta três vezes na cabeça.
+camp.h3.church.a.02	Why?	Por quê?
+camp.h3.church.a.03	Because I imagined a customer coming in and complaining about everything. I want a good door to show him out through.	Porque imaginei um cliente entrando e reclamando de tudo. Quero uma porta boa para mandar esse sujeito embora.
+camp.h3.church.a.04	Do you know who the customer is?	Você já sabe quem é o cliente?
+camp.h3.church.a.05	No. That's the worrying part. I don't even have a workshop and I'm already taking bad jobs.	Não. Essa é a parte preocupante. Nem tenho oficina e já estou aceitando serviço ruim.
+camp.h3.church.b.01	My first customer came back the next day with the box I had made. I started explaining the wood, the lid, everything, before he could say a word.	Meu primeiro cliente voltou no dia seguinte com a caixa que eu tinha feito. Fui explicando a madeira, a tampa, tudo antes de ele abrir a boca.
+camp.h3.church.b.02	What was wrong with it?	O que estava errado?
+camp.h3.church.b.03	Nothing. He wanted another one. I need to remember that part before we reach the church and I start defending myself against a question nobody asked.	Nada. Ele queria outra. Preciso lembrar dessa parte antes de chegar à igreja e começar a me defender de uma pergunta que ninguém fez.
+camp.h3.church.b.04	Would you like me to tell you?	Quer que eu avise?
+camp.h3.church.b.05	"Yes. Just don't say ""calm down."" I have very long explanations for why I am perfectly calm."	Quero. Só não diga “calma”. Eu tenho explicações muito compridas sobre por que estou perfeitamente calmo.
+camp.h3.park.a.01	You've been fiddling with that strap for ages.	Você está mexendo nessa tira há um tempão.
+camp.h3.park.a.02	It's fine. I'm the one who hasn't accepted that yet.	Ela está boa. Eu é que ainda não aceitei.
+camp.h3.park.a.03	Are you afraid we won't reach the park?	Está com medo de não chegar ao parque?
+camp.h3.park.a.04	I am. Fixing something helps when I don't have an answer. I just need to learn to stop before I ruin a perfectly good strap.	Estou. Consertar alguma coisa ajuda quando não tenho resposta. Só preciso aprender a parar antes de estragar uma tira que estava boa.
+camp.h3.park.b.01	In my workshop, I'll have a drawer just for things that don't seem useful anymore.	Na minha oficina, vou ter uma gaveta só para coisas que parecem não servir mais.
+camp.h3.park.b.02	Just one?	Uma só?
+camp.h3.park.b.03	You know me too well already. Three. But they'll all have labels.	Você já me conhece demais. Três. Mas todas com etiqueta.
+camp.h3.park.b.04	What will the labels say?	O que vai escrever nelas?
+camp.h3.park.b.05	"""I don't know yet."" I want to reach the park, get home and have time to find out. I miss being able to not know something without anyone being in danger."	“Ainda não sei.” Quero chegar ao parque, voltar para casa e ter tempo de descobrir. Faz falta poder não saber uma coisa sem alguém estar correndo perigo.
+camp.h3.village.a.01	When this is over, I'm going to make a chair. An ordinary chair. Nobody's life will depend on it.	Quando tudo isso acabar, vou fazer uma cadeira. Uma cadeira comum. Ninguém vai depender dela para sobreviver.
+camp.h3.village.a.02	Will it be a good one?	E vai ficar boa?
+camp.h3.village.a.03	It'll creak. I might leave it that way. Just to remember that not every noise means I have to jump up.	Vai ranger. Estou pensando em deixar. Só para lembrar que nem todo barulho exige que eu levante correndo.
+camp.h3.village.a.04	You won't be able to stand it.	Você não vai aguentar.
+camp.h3.village.a.05	Probably not. But I want the chance to find out.	Provavelmente não. Mas quero ter a chance de descobrir.
+camp.h3.village.b.01	Ivaí, I've been imagining what I'd say when we reached the village. A proper complaint, with a beginning and an end.	Ivaí, eu vinha imaginando o que diria quando chegássemos ao vilarejo. Uma reclamação bem feita, com começo e fim.
+camp.h3.village.b.02	Have you found the words?	E encontrou as palavras?
+camp.h3.village.b.03	"Just the first few. ""Sit down and explain it to me."""	Só as primeiras. “Senta aqui e me explica.”
+camp.h3.village.b.04	There are things I need to confirm there.	Há coisas que preciso confirmar lá.
+camp.h3.village.b.05	Then save me a seat when you do. I'm tired of only being called over when it's time to fix the problem.	Então guarde lugar para mim quando confirmar. Cansei de ser chamado só na hora de resolver o problema.
+camp.h4.church.a.01	"I used to ask patients a bad question: ""Why did you take so long to come?"""	Eu costumava fazer uma pergunta ruim aos pacientes: “Por que demorou tanto para vir?”
+camp.h4.church.a.02	Why was it bad?	Por que era ruim?
+camp.h4.church.a.03	Because I didn't yet know who had turned them away before. Sometimes asking for help again was the hardest part.	Porque eu ainda não sabia quem os tinha mandado embora antes. Às vezes, pedir ajuda outra vez era a parte mais difícil.
+camp.h4.church.a.04	What do you ask now?	E o que pergunta agora?
+camp.h4.church.a.05	Where they'd like to begin. I hope I remember that when we reach the church. Wanting answers can make us unwilling to listen.	Por onde querem começar. Espero lembrar disso quando chegarmos à igreja. A vontade de encontrar respostas pode nos deixar pouco dispostos a escutar.
+camp.h4.church.b.01	Ivaí, you answer quickly when I ask whether you're well. You take longer when I ask what you expect from the church.	Ivaí, você responde depressa quando pergunto se está bem. Demora mais quando pergunto o que espera da igreja.
+camp.h4.church.b.02	I don't want to raise expectations I can't meet.	Não quero criar uma expectativa que não possa cumprir.
+camp.h4.church.b.03	That would be considerate if you were also willing to say what you don't know.	Isso seria cuidadoso se você também aceitasse dizer o que não sabe.
+camp.h4.church.b.04	Some things are still uncertain.	Ainda há coisas incertas.
+camp.h4.church.b.05	Then let me share that uncertainty. You don't have to give me a finished answer.	Então deixe que eu participe da incerteza. Não precisa me entregar uma resposta pronta.
+camp.h4.park.a.01	Do you keep thinking about the treatise you want to find?	Você fica pensando no tratado que quer encontrar?
+camp.h4.park.a.02	I keep thinking about how I'll react if there's nothing that can help me. It's a less pleasant question.	Fico pensando em como vou reagir se não houver nada que me ajude. É uma pergunta menos agradável.
+camp.h4.park.a.03	Would the journey have been pointless?	A viagem teria sido inútil?
+camp.h4.park.a.04	I don't want to decide that before we reach the park. But I don't want to call every discovery an answer just because it cost us so much to find it.	Não quero decidir isso antes de chegar ao parque. Mas também não quero chamar qualquer descoberta de resposta só porque custou muito encontrá-la.
+camp.h4.park.b.01	At the house of healing, I want a table where people can eat without discussing symptoms.	Na casa de cura, quero uma mesa onde se possa comer sem falar de sintomas.
+camp.h4.park.b.02	Could you manage that?	Você conseguiria?
+camp.h4.park.b.03	With difficulty. I've already been told that asking about sleep still counts.	Com dificuldade. Já me avisaram que perguntar sobre o sono ainda conta.
+camp.h4.park.b.04	Can I ask what there'll be to eat?	Posso perguntar o que vai ter para comer?
+camp.h4.park.b.05	You can. And I can admit I haven't thought about it yet. Reaching the park seems to take up all the room in my head. Thank you for making a little space for something else.	Pode. E eu posso admitir que ainda não pensei nisso. Chegar ao parque parece ocupar todo o espaço. Obrigada por abrir um pouco para outra coisa.
+camp.h4.village.a.01	I've been practicing a sentence since we set out for the village.	Tenho ensaiado uma frase desde que partimos para o vilarejo.
+camp.h4.village.a.02	Which one?	Qual?
+camp.h4.village.a.03	"""I don't know whether I can help."" I should be able to say it without feeling as though I'm abandoning someone."	“Não sei se posso ajudar.” Eu deveria conseguir dizê-la sem sentir que estou abandonando alguém.
+camp.h4.village.a.04	That sounds hard.	Parece difícil.
+camp.h4.village.a.05	It is. But I'd rather people knew the limits of what I offer. Needing help doesn't oblige anyone to accept just anything.	É. Mas prefiro que saibam o limite do que ofereço. Precisar de ajuda não torna ninguém obrigado a aceitar qualquer coisa.
+camp.h4.village.b.01	Ivaí, when we get there, don't answer for me.	Ivaí, quando chegarmos, não responda por mim.
+camp.h4.village.b.02	I didn't intend to.	Não era minha intenção.
+camp.h4.village.b.03	Sometimes we do it believing we're sparing someone. I've done it. It's very easy to confuse caring with the right to decide.	Às vezes fazemos isso acreditando que poupamos alguém. Eu já fiz. É muito fácil confundir cuidado com o direito de decidir.
+camp.h4.village.b.04	You'll have your say.	Você terá sua voz.
+camp.h4.village.b.05	I also want the information I need to use it. Think about that while we rest.	Quero também as informações para usá-la. Pense nisso enquanto descansamos.
+camp.h5.church.a.01	When the message service starts again, I'll set aside room for letters that aren't urgent at all.	Quando o serviço de mensagens voltar, vou reservar espaço para cartas que não tenham urgência nenhuma.
+camp.h5.church.a.02	What do you mean?	Como assim?
+camp.h5.church.a.03	News about a garden. A question about a recipe. People writing because they thought of someone, without having to announce a disaster.	Notícias de uma horta. Uma pergunta sobre uma receita. Gente escrevendo porque lembrou de alguém, sem precisar anunciar uma desgraça.
+camp.h5.church.a.04	And you'll carry all of them?	E você vai carregar tudo isso?
+camp.h5.church.a.05	Gladly. It's one of the things that makes me want to reach the church and come home. I miss delivering small pieces of news.	Com prazer. É uma das coisas que me fazem querer chegar à igreja e voltar. Tenho saudade de entregar uma notícia pequena.
+camp.h5.church.b.01	Once, I delivered a parcel to a house where they had set a place for me. I thought I had missed a signature.	Uma vez, entreguei uma encomenda numa casa onde tinham posto um prato para mim. Achei que faltava alguma assinatura.
+camp.h5.church.b.02	Had you?	E faltava?
+camp.h5.church.b.03	No. I went there every month. They knew when I arrived and what I liked to eat. It had never occurred to me that they noticed me too.	Não. Eu passava ali todo mês. Sabiam a hora em que eu chegava e o que eu gostava de comer. Nunca tinha pensado que também reparavam em mim.
+camp.h5.church.b.04	Did you stay for the meal?	Ficou para comer?
+camp.h5.church.b.05	I did. Today, while trying to work out how far we are from the church, I remembered that plate. If I start packing before you have finished, you may complain.	Fiquei. Hoje, tentando calcular quanto falta para a igreja, lembrei do prato. Se eu começar a guardar tudo antes de você terminar, pode reclamar.
+camp.h5.park.a.01	I once spent a whole day traveling without opening the letter I was carrying. At the end, the recipient invited me to hear it read aloud.	Eu já atravessei um dia inteiro sem abrir uma carta que estava levando. No fim, a destinatária me chamou para ouvir a leitura.
+camp.h5.park.a.02	Weren't you curious before then?	Não ficou curioso antes?
+camp.h5.park.a.03	Very. But she invited me. That's what made hearing it pleasant.	Muito. Mas ela me convidou. Foi isso que tornou a leitura agradável.
+camp.h5.park.a.04	Are you thinking about what we'll find at the park?	Está pensando no que vamos encontrar no parque?
+camp.h5.park.a.05	I'm thinking that reaching a place doesn't make everything in it ours.	Estou pensando que chegar a algum lugar não nos torna donos de tudo o que há nele.
+camp.h5.park.b.01	You counted the bundles again.	Você contou os volumes outra vez.
+camp.h5.park.b.02	It's easier than working out how much farther it is to the park. The bundles are courteous enough to stay where I left them.	É mais fácil do que calcular quanto falta para o parque. Os volumes têm a cortesia de ficar onde eu os deixei.
+camp.h5.park.b.03	Can I help?	Posso ajudar?
+camp.h5.park.b.04	You can hold this one while I retie it. Then remind me to eat.	Pode segurar este enquanto refaço a amarra. Depois, me lembre de comer.
+camp.h5.park.b.05	Does that count as a delivery too?	Isso também é uma entrega?
+camp.h5.park.b.06	No. It's a favor I'm learning to ask for before I need it too badly.	Não. É um favor que estou aprendendo a pedir antes de precisar demais dele.
+camp.h5.village.a.01	When a journey ran late, I used to rehearse an excuse before I arrived.	Quando uma viagem atrasava, eu costumava ensaiar uma desculpa antes de chegar.
+camp.h5.village.a.02	Did it work?	E funcionava?
+camp.h5.village.a.03	Sometimes nobody wanted the excuse. They wanted to know whether I'd eaten. It took me a while to understand the difference.	Às vezes ninguém queria a desculpa. Queriam saber se eu tinha comido. Eu demorava a entender a diferença.
+camp.h5.village.a.04	Are you rehearsing one now?	Está ensaiando alguma agora?
+camp.h5.village.a.05	No. I want to reach the village without pretending a deadline matters more than the people trying to meet it.	Não. Quero chegar ao vilarejo sem fingir que um prazo importa mais do que quem está tentando cumpri-lo.
+camp.h5.village.b.01	I have a request for when we arrive, Ivaí. If the objective changes, tell me before asking me to proceed.	Tenho uma solicitação para quando chegarmos, Ivaí. Se o objetivo mudar, diga antes de pedir que eu prossiga.
+camp.h5.village.b.02	We're close to finding the missing answers.	Estamos perto de esclarecer o que falta.
+camp.h5.village.b.03	I didn't ask for an estimate. I asked you to tell me.	Não pedi uma estimativa. Pedi que me avise.
+camp.h5.village.b.04	I heard you.	Eu ouvi.
+camp.h5.village.b.05	Thank you. I want to choose what I promise. That's how a promise keeps its value.	Obrigado. Quero poder escolher o que prometo. É assim que uma promessa continua tendo valor.
+camp.h6.church.a.01	When someone asks how much farther we have to go, my first impulse is to give an exact answer. Even when I only have an estimate.	Quando alguém pergunta quanto falta, minha primeira vontade é dar uma resposta exata. Mesmo quando só tenho uma estimativa.
+camp.h6.church.a.02	So we won't worry?	Para a gente não ficar preocupado?
+camp.h6.church.a.03	So I won't look lost. It's less generous than you thought.	Para eu não parecer perdida. É menos generoso do que você pensou.
+camp.h6.church.a.04	Then how much farther is it to the church?	Então quanto falta para a igreja?
+camp.h6.church.a.05	I don't know exactly. You can ask again later. I'm trying to get used to answering that way.	Não sei com precisão. Pode perguntar de novo depois. Estou tentando me acostumar a responder isso.
+camp.h6.church.b.01	Once, I marked a place that served terrible stew on a map. I wrote down the distance, the direction and a very clear warning.	Uma vez, marquei num mapa o lugar onde serviam um ensopado horrível. Anotei a distância, a direção e uma advertência bem clara.
+camp.h6.church.b.02	So nobody would go there?	Para ninguém ir lá?
+camp.h6.church.b.03	I went back three times. It was cheap, and they let travelers dry their things by the fire. The map was accurate. It just did not tell the whole story.	Voltei três vezes. Era barato e deixavam os viajantes secarem as coisas junto ao fogo. O mapa estava correto. Só não dizia tudo.
+camp.h6.church.b.04	Do you think the church will be like that?	Acha que a igreja vai ser assim?
+camp.h6.church.b.05	I hope it does not have the stew. As for the rest, I need to get there before I can know what was missing from the page.	Espero que não tenha o ensopado. Quanto ao resto, preciso chegar antes de saber o que faltava no papel.
+camp.h6.park.a.01	After the ship disappeared, I started checking every note as though a badly written word could explain everything.	Depois do desaparecimento da embarcação, comecei a revisar cada anotação como se uma palavra mal escrita pudesse explicar tudo.
+camp.h6.park.a.02	Did you find anything?	Encontrou alguma coisa?
+camp.h6.park.a.03	I found pages I could no longer read because I'd corrected them so often. I stopped keeping the first version. That was a mistake.	Encontrei páginas que já não conseguia ler de tanto corrigir. Parei de guardar a primeira versão. Foi um erro.
+camp.h6.park.a.04	Will you do things differently at the park?	Vai fazer diferente no parque?
+camp.h6.park.a.05	If we reach it, I'll separate what I saw from what I want to prove. I want an answer. I don't want to manufacture one.	Se chegarmos, vou separar o que vi do que desejo provar. Quero uma resposta. Não quero fabricar uma.
+camp.h6.park.b.01	If you could draw a map just for yourself, what would you put on it?	Se pudesse desenhar um mapa só para você, o que colocaria nele?
+camp.h6.park.b.02	Places where people let me stay without asking when I'd leave.	Lugares onde me deixaram ficar sem perguntar quando eu partiria.
+camp.h6.park.b.03	That doesn't sound very useful for a navigator.	Não parece muito útil para uma navegadora.
+camp.h6.park.b.04	Not everything needs to prove I'm good at my job. I'd like to remember that before we reach the park.	Nem tudo precisa provar que sou boa no trabalho. Gostaria de lembrar disso antes de chegar ao parque.
+camp.h6.park.b.05	Could you mark this stop?	Pode marcar esta pausa?
+camp.h6.park.b.06	I can. But you'll have to stop asking how much farther it is for a few minutes.	Posso. Mas você vai ter que parar de perguntar quanto falta por alguns minutos.
+camp.h6.village.a.01	My atlas will have unfinished pages. I used to find that shameful.	Meu atlas vai ter páginas incompletas. Eu costumava achar isso vergonhoso.
+camp.h6.village.a.02	Won't people who buy it complain?	Quem comprar não vai reclamar?
+camp.h6.village.a.03	They might. I'd rather explain a gap than send someone down a route I invented to avoid leaving a blank space.	Pode reclamar. Prefiro explicar uma lacuna a mandar alguém por um caminho que eu inventei para não deixar espaço em branco.
+camp.h6.village.a.04	And the village?	E o vilarejo?
+camp.h6.village.a.05	It's still a question. For now, that's how I'll write it.	Ainda é uma pergunta. Por enquanto, vou escrevê-lo assim.
+camp.h6.village.b.01	I'm afraid of arriving, Ivaí. Not just of failing to get there.	Estou com medo de chegar, Ivaí. Não só de não conseguir.
+camp.h6.village.b.02	You're not the only one.	Você não é a única.
+camp.h6.village.b.03	Then we can start an honest conversation there.	Então podemos começar uma conversa honesta por aí.
+camp.h6.village.b.04	There are things I can't explain yet.	Há coisas que ainda não consigo explicar.
+camp.h6.village.b.05	I didn't ask for every explanation right now. I asked you not to leave me alone in that sentence.	Eu não pedi todas as explicações agora. Pedi que você não me deixasse sozinha nessa frase.
+camp.h7.church.a.01	When I started copying texts, I thought beautiful handwriting made a statement seem more reliable.	Quando comecei a copiar textos, achava que uma letra bonita fazia uma afirmação parecer mais confiável.
+camp.h7.church.a.02	Did it?	Fazia?
+camp.h7.church.a.03	It did. That was the problem. I started checking sources twice as carefully.	Fazia. Esse era o problema. Passei a conferir as fontes com o dobro do cuidado.
+camp.h7.church.a.04	What do you expect to find at the church?	E o que espera encontrar na igreja?
+camp.h7.church.a.05	Something I can examine without having to take the word of the person who brought me there. Legible handwriting would also be welcome. I'm not demanding about everything.	Algo que eu possa examinar sem precisar acreditar só em quem me trouxe até lá. Também aceito uma caligrafia legível. Não sou exigente em tudo.
+camp.h7.church.b.01	Ivaí, there's a question I intend to ask when we reach the church: who decided what was worth keeping?	Ivaí, há uma pergunta que pretendo fazer quando chegarmos à igreja: quem decidiu o que merecia ser guardado?
+camp.h7.church.b.02	The records may not say.	Talvez os registros não digam.
+camp.h7.church.b.03	An absence deserves a note too. Not so we can fill it with a convenient story.	A ausência também merece uma anotação. Não para preenchê-la com uma história conveniente.
+camp.h7.church.b.04	Do you suspect everything that's incomplete?	Você suspeita de tudo o que está incompleto?
+camp.h7.church.b.05	No. I get suspicious when someone demands my trust before letting me look.	Não. Suspeito quando alguém exige confiança antes de me deixar olhar.
+camp.h7.park.a.01	Don't you get tired of writing things down?	Você não se cansa de anotar?
+camp.h7.park.a.02	"I do. Sometimes I write ""remember later."" It's an elegant way to lose information."	Canso. Às vezes escrevo “lembrar depois”. É uma maneira elegante de perder uma informação.
+camp.h7.park.a.03	Do you have a note like that about the park?	Tem alguma anotação assim sobre o parque?
+camp.h7.park.a.04	I have one about what to do if I get so interested in something that I forget to come back.	Tenho uma sobre o que fazer se eu ficar tão interessado em alguma coisa que esquecer de voltar.
+camp.h7.park.a.05	What does it say?	O que diz?
+camp.h7.park.a.06	"""Listen when they tell you to leave."" You can hold me to that. Preferably before you have to shout."	“Escute quando mandarem sair.” Pode me cobrar. De preferência antes de precisar gritar.
+camp.h7.park.b.01	When my archive is ready, I want to leave a table for people who can't write.	Quando meu arquivo estiver pronto, quero deixar uma mesa para quem não sabe escrever.
+camp.h7.park.b.02	So someone can write down what they tell you?	Para alguém copiar o que eles contarem?
+camp.h7.park.b.03	And read it back. I've seen accounts change so much in copying that the person telling the story barely recognized their own words.	E ler de volta. Já vi relato mudar tanto na cópia que o dono da história mal reconhecia o que tinha dito.
+camp.h7.park.b.04	Would you do that for me?	Você faria isso comigo?
+camp.h7.park.b.05	I'll do it now, if you like. The park can wait until we've finished resting. Your handwriting gets worse when you're worried.	Faço agora, se quiser. O parque pode esperar até terminarmos de descansar. Sua letra piora quando você está preocupado.
+camp.h7.village.a.01	If I come back with pages nobody can understand, I'll have done a lot of work for very little help.	Se eu voltar com páginas que ninguém consegue entender, vou ter trabalhado muito para ajudar pouco.
+camp.h7.village.a.02	You can explain them.	Você pode explicar.
+camp.h7.village.a.03	I can. And people can ask questions. That second part usually gives me more trouble.	Posso. E podem fazer perguntas. Essa segunda parte costuma me dar mais trabalho.
+camp.h7.village.a.04	Why?	Por quê?
+camp.h7.village.a.05	Because it reveals what I still haven't understood. I want to reach the village willing to admit that. Without that willingness, curiosity is just stubbornness in good clothes.	Porque revela o que eu ainda não entendi. Quero chegar ao vilarejo disposto a admitir isso. Curiosidade sem essa disposição vira só teimosia bem vestida.
+camp.h7.village.b.01	Rheed, if you write about this journey, leave room to correct what I say.	Rheed, se escrever sobre esta viagem, deixe espaço para corrigir o que eu disser.
+camp.h7.village.b.02	Do you think you'll be wrong?	Você acha que vai errar?
+camp.h7.village.b.03	I probably have been already. The important thing is not to have your first impression bound into a book.	Já devo ter errado. O importante é não mandar encadernar a primeira impressão.
+camp.h7.village.b.04	What if the correction doesn't look nice?	E se a correção não ficar bonita?
+camp.h7.village.b.05	Let it show. If we reach the village and I learn something different, I want to change my mind without pretending I knew it all along.	Que fique visível. Se chegarmos ao vilarejo e eu descobrir outra coisa, quero poder mudar de ideia sem fingir que sempre soube.
+camp.h8.church.a.01	When I talk about starting a cooperative, people always ask who'll be in charge. I'm still learning not to answer too quickly.	Quando falo em abrir uma cooperativa, sempre perguntam quem vai mandar. Eu ainda estou aprendendo a não responder depressa demais.
+camp.h8.church.a.02	Don't you want to be in charge?	Você não quer mandar?
+camp.h8.church.a.03	I want nobody to hide a risk. That's not quite the same thing, though I sometimes act as if it were.	Quero que ninguém esconda um risco. Não é exatamente a mesma coisa, embora eu às vezes me comporte como se fosse.
+camp.h8.church.a.04	Are you worried about the church?	Está preocupada com a igreja?
+camp.h8.church.a.05	About getting there and thinking I have to decide everything alone. You can remind me of this conversation if I start.	Com chegar lá e achar que preciso decidir tudo sozinha. Pode me lembrar desta conversa se eu começar.
+camp.h8.church.b.01	You run your fingers over those beads when you are quiet. Are you counting something?	Você passa os dedos nessas contas quando fica quieta. Está contando alguma coisa?
+camp.h8.church.b.02	My breaths. I learned after the cave-in. Sometimes I lose count because I start thinking about what still needs doing.	A respiração. Aprendi depois do desabamento. Às vezes perco a conta porque começo a pensar no que ainda falta fazer.
+camp.h8.church.b.03	Would you like me to count?	Quer que eu conte?
+camp.h8.church.b.04	I would like you to tell me something. It can be small. My mind has been trying to reach the church on its own all day.	Quero que me conte alguma coisa. Pode ser pequena. Minha cabeça já tentou chegar à igreja sozinha o dia inteiro.
+camp.h8.church.b.05	I had a song ready for when we came back. Now I can only remember the first line. I can start with that.	Eu tinha uma música pronta para quando voltássemos. Agora só lembro a primeira frase. Posso começar por ela.
+camp.h8.park.a.01	Did you bring extra food on purpose?	Você trouxe comida a mais de propósito?
+camp.h8.park.a.02	I did. There's always someone who says they aren't hungry when they're worried.	Trouxe. Tem sempre alguém que diz que não está com fome quando está preocupado.
+camp.h8.park.a.03	What if there's some left over?	E se sobrar?
+camp.h8.park.a.04	I hope there is. It would be good to reach the park and find out I overprepared, at least once.	Espero que sobre. Seria bom chegar ao parque e descobrir que me preparei além do necessário, pelo menos uma vez.
+camp.h8.park.a.05	Can I have some?	Posso pegar um pouco?
+camp.h8.park.a.06	You can. You don't need to come up with a reason. I brought it to share.	Pode. Não precisa inventar uma justificativa. Eu trouxe para dividir.
+camp.h8.park.b.01	After that cave-in, it took me a long time to rest anywhere without knowing the way out.	Depois daquele desabamento, demorei a conseguir descansar num lugar onde não conhecia a saída.
+camp.h8.park.b.02	Can you now?	E agora consegue?
+camp.h8.park.b.03	Sometimes. It's easier when someone checks with me and I accept their answer.	Às vezes. Melhor quando outra pessoa confere comigo e eu aceito a resposta dela.
+camp.h8.park.b.04	Would you like me to check anything?	Quer que eu confira alguma coisa?
+camp.h8.park.b.05	I want you to finish eating. Then help me pack things away. Thinking about the park is easier when I'm not doing everything alone.	Quero que termine de comer. Depois me ajude a guardar as coisas. Pensar no parque fica mais suportável quando não estou fazendo tudo sozinha.
+camp.h8.village.a.01	I'm trying to decide what we'll do on the cooperative's first day. No digging.	Estou tentando escolher o que vou fazer no primeiro dia da cooperativa. Nenhuma escavação.
+camp.h8.village.a.02	What, then?	Então o quê?
+camp.h8.village.a.03	Sit down with everyone and hear what they don't want repeated from their old jobs. It'll take a while.	Sentar com todo mundo e ouvir o que cada um não quer repetir do trabalho anterior. Vai demorar.
+camp.h8.village.a.04	Will you be patient enough?	Você vai ter paciência?
+camp.h8.village.a.05	I'll have to be. I want to come back from the village to work with people, not just to own a mine.	Vou precisar. Quero voltar do vilarejo para trabalhar com gente, não só para possuir uma mina.
+camp.h8.village.b.01	Ivaí, you want to get there badly. So do I. That won't make the next decision a good one on its own.	Ivaí, você quer muito chegar. Eu também. Isso não torna a próxima decisão boa por si só.
+camp.h8.village.b.02	What are you asking me?	O que você está me pedindo?
+camp.h8.village.b.03	To stop and listen when someone says they're afraid. Including yourself.	Que pare para ouvir quando alguém disser que tem medo. Inclusive você.
+camp.h8.village.b.04	It's not easy to say that now.	Não é fácil dizer isso agora.
+camp.h8.village.b.05	I didn't ask for easy. I asked you not to leave it until someone pays for the hurry.	Não pedi facilidade. Pedi que não deixasse para depois de alguém pagar pela pressa.
+interject.h1.h5.01	When the workshop opens, I can carry the first orders. If I have to travel through the night, I will.	Quando a oficina abrir, posso levar as primeiras encomendas. Se for preciso atravessar a noite, atravesso.
+interject.h1.h5.02	You can sleep there and leave in the morning. I'm not rebuilding the forge just to start demanding that of a friend.	Você pode dormir lá e partir de manhã. Não vou reconstruir a forja para começar exigindo isso de um amigo.
+interject.h1.h8.01	I can look after your things while you rest. You don't need to keep checking whether I can manage.	Posso guardar suas coisas enquanto descansa. Não precisa ficar vigiando se dou conta.
+interject.h1.h8.02	I was going to say I wasn't checking. But you already know when I'm lying.	Eu ia dizer que não estava vigiando. Mas você já sabe quando estou mentindo.
+interject.h2.h6.01	I can give you an estimate when we've finished resting. No guarantees, and no rushing me halfway through the calculation.	Posso lhe dar uma estimativa quando terminarmos de descansar. Sem garantia e sem você me apressar no meio da conta.
+interject.h2.h6.02	Agreed. But I'll look very impatient. I have to keep one of my talents.	Combinado. Mas vou fazer uma cara muito impaciente. Preciso guardar algum talento.
+interject.h7.h2.01	If I tell you to leave, you can argue with me afterward. While you're running.	Se eu mandar sair, você pode discutir comigo depois. Enquanto corre.
+interject.h7.h2.02	An argument on the move. Finally, a kind where I might not get to write the last word.	Uma discussão em movimento. Finalmente uma modalidade em que talvez eu não consiga escrever a última palavra.
+interject.h3.h8.01	If that customer asks you to save money on supports, I'll help open the door.	Se esse cliente pedir para economizar nos apoios, eu ajudo a abrir a porta.
+interject.h3.h8.02	Open it. Not pull it off. I want to throw the customer out without turning the job into another repair.	Abrir. Não arrancar. Quero expulsar o cliente sem transformar o serviço em mais um reparo.
+interject.h6.h3.01	I can count the steps. You make the map, I'll take the repetitive part.	Eu posso contar os passos. Você faz o mapa, eu fico com a parte repetitiva.
+interject.h6.h3.02	"You can. But don't invent a new measurement halfway through. The last time you said ""more or less,"" you started an explanation that never ended."	Pode. Mas não invente uma medida nova no meio. Da última vez que falou em “mais ou menos”, começou uma explicação que não acabava.
+interject.h5.h4.01	I can remind you of that when you start apologizing for needing rest.	Posso lembrar você disso quando começar a pedir desculpa por precisar descansar.
+interject.h5.h4.02	Please do. I'll try not to turn the reminder into another duty I have to perform perfectly.	Pode. Eu tentarei não transformar o lembrete em mais uma obrigação que preciso cumprir perfeitamente.
+interject.h4.h7.01	A discovery without an immediate use may still deserve to be recorded.	Uma descoberta sem utilidade imediata ainda pode merecer registro.
+interject.h4.h7.02	It may. I just don't want the desire to record something deciding, all by itself, how much risk someone else should take.	Pode. Só não quero que a vontade de registrar alguma coisa decida sozinha quanto risco outra pessoa deve correr.
+arrival.none.01	During those stops, I still made small plans. Finish my food. Rest my feet. Reach our destination and have something good to tell. Ivaí watched the path; I tried to get the others talking. We hadn't lost anyone yet. For a few minutes, it was possible to think about coming home without having to stop myself.	Naquelas pausas, eu ainda fazia planos pequenos. Terminar a comida. Descansar os pés. Chegar ao destino e ter alguma coisa boa para contar. Ivaí olhava para o caminho; eu tentava fazer os outros conversarem. Ainda não tínhamos perdido ninguém. Por alguns minutos, era possível pensar na volta sem precisar interromper o pensamento.
+arrival.recent.01	At that stop, people were missing. I kept busy with the food so I wouldn't have to start the conversation. Ivaí seemed to be waiting for someone else to speak too. We wanted to reach our destination, but we could no longer talk about the journey without thinking of those who were gone. We stayed close to the fire. It took a while for someone to find words.	Naquela pausa, faltava gente. Eu me ocupava com a comida para não precisar começar a conversa. Ivaí também parecia esperar que outra pessoa dissesse alguma coisa. Queríamos chegar, mas já não conseguíamos falar da viagem sem pensar em quem não estava mais ali. Ficamos perto do fogo. Demorou até alguém encontrar o que dizer.
+arrival.prior.01	We lost no one else on that stretch of the journey. I felt relieved, but the earlier losses were still with us. There were names that made me hesitate before speaking. Ivaí sat down, the others tended to their things, and conversation slowly returned. We still wanted to arrive. We just knew coming home wouldn't be the way we'd imagined.	Naquele trecho, não perdemos mais ninguém. Eu sentia alívio, mas as perdas anteriores continuavam conosco. Já havia nomes que me faziam hesitar antes de falar. Ivaí se sentava, os outros cuidavam das próprias coisas, e aos poucos a conversa voltava. Ainda queríamos chegar. Só já sabíamos que voltar não seria como tínhamos imaginado.
+grief.h1.h5.01	I went to set a bundle aside for Bimbren. He always asked which was heaviest before I was finished. Today I was going to offer him the lightest.	Fui separar um volume para o Bimbren. Ele sempre perguntava qual era o mais pesado antes de eu terminar. Hoje eu ia oferecer o mais leve.
+grief.h1.h5.02	I'll help carry things. You don't have to take all of it.	Eu ajudo a carregar. Não precisa ficar tudo com o senhor.
+grief.h1.h8.01	Draska made me sit down before I'd admit I was tired. I just looked for her. I still do that.	A Draska me fazia sentar antes de eu admitir que estava cansado. Acabei de procurar o olhar dela. Ainda faço isso.
+grief.h1.h8.02	Then sit for a while. I'll stay here.	Então senta um pouco. Eu fico aqui.
+grief.h2.h6.01	I was about to say Liora was taking too long. I hadn't even looked beside me. I didn't know I could miss someone telling me to wait.	Eu ia dizer que a Liora estava demorando. Nem tinha olhado para o lado. Não sabia que podia sentir falta de ouvir alguém me mandar esperar.
+grief.h2.h6.02	You don't have to get up yet.	Não precisa levantar agora.
+grief.h2.h7.01	I kept telling Vaelith I'd leave him talking to himself. It was a lie. I always stayed to hear the rest.	Eu vivia dizendo que ia deixar o Vaelith falando sozinho. Era mentira. Sempre ficava para ouvir o resto.
+grief.h2.h7.02	If you remember something he told you, I'd like to hear it.	Se lembrar de alguma coisa que ele contou, eu quero ouvir.
+grief.h3.h8.01	I've checked this twice. I'm waiting for Draska to point out what I missed. I complained, but I liked not being the only one looking.	Já conferi isso duas vezes. Estou esperando a Draska apontar o que faltou. Eu reclamava, mas gostava de não ser o único olhando.
+grief.h3.h8.02	I can look with you. You'll have to explain it slowly.	Posso olhar com você. Vai ter que me explicar devagar.
+grief.h3.h6.01	Liora knew how to make me finish an explanation. I'd start with the wrong detail, and she'd ask what I was getting at. Now I don't even know how to finish this sentence.	A Liora sabia me fazer terminar uma explicação. Eu começava pelo detalhe errado, ela perguntava aonde eu queria chegar. Agora eu nem sei como encerrar esta frase.
+grief.h3.h6.02	You can leave it there for now.	Pode deixar assim por enquanto.
+grief.h4.h5.01	I was going to ask Bimbren whether he'd eaten. I always had to ask twice, until he stopped talking about what he still needed to deliver.	Eu ia perguntar ao Bimbren se tinha comido. Era sempre preciso perguntar duas vezes, até ele parar de falar do que ainda precisava entregar.
+grief.h4.h5.02	I've eaten. You don't have to ask me twice.	Eu comi. Não precisa perguntar duas vezes para mim.
+grief.h4.h7.01	Vaelith irritated me when he asked another question after I'd urged caution. Today I'm thinking about the questions I wanted to ask him.	O Vaelith me irritava quando fazia outra pergunta depois de eu pedir cautela. Hoje estou pensando nas perguntas que eu queria fazer a ele.
+grief.h4.h7.02	We can keep some of them. Even without the answers.	Podemos guardar algumas. Mesmo sem a resposta.
+grief.h5.h1.01	Gorvak didn't wait for me to ask for help. Sometimes he took the other end of the load and said nothing. I miss that silence.	O Gorvak não esperava que eu pedisse ajuda. Às vezes pegava o outro lado da carga e ficava quieto. Estou sentindo falta desse silêncio.
+grief.h5.h1.02	Would you like some company here?	Quer companhia aqui?
+grief.h5.h4.01	"Seraphina could ask whether I was well in a way that wouldn't accept ""I'm on schedule"" as an answer. I still don't have a better one."	A Seraphina conseguia me perguntar se eu estava bem de um jeito que não aceitava “estou em dia” como resposta. Ainda não tenho uma resposta melhor.
+grief.h5.h4.02	You don't need to have one now.	Não precisa ter agora.
+grief.h6.h2.01	I used to pretend not to hear Elowen hurrying me along. I always heard. Now every movement makes me look to see whether it's her.	Eu costumava fingir que não ouvia quando a Elowen me apressava. Ouvia sempre. Agora qualquer movimento me faz olhar para ver se é ela.
+grief.h6.h2.02	I can tell you before I get up.	Eu posso avisar antes de me levantar.
+grief.h6.h3.01	Griznik asked questions about details I'd set aside. I thought they were interruptions. Some were exactly what I needed to hear.	O Griznik fazia perguntas sobre detalhes que eu tinha deixado de lado. Eu achava que eram interrupções. Algumas eram exatamente o que eu precisava ouvir.
+grief.h6.h3.02	If I ask too many questions, you can tell me.	Se eu perguntar demais, pode me dizer.
+grief.h7.h2.01	Elowen said my explanations were long. I'd shorten them a little when she complained. Not as much as I could have. I wanted her to stay another minute.	A Elowen dizia que minhas explicações eram compridas. Eu encurtava um pouco quando ela reclamava. Não tanto quanto podia. Queria que ela ficasse mais um minuto.
+grief.h7.h2.02	You can take as much time as you need now.	Pode levar o tempo que precisar agora.
+grief.h7.h4.01	I'm trying to remember a conversation with Seraphina without turning it into an argument I still want to win. She deserves better than that.	Estou tentando lembrar uma conversa com a Seraphina sem transformar a lembrança numa discussão que eu ainda quero ganhar. Ela merece mais do que isso.
+grief.h7.h4.02	You could start with something you agreed on.	Pode começar por alguma coisa em que concordaram.
+grief.h8.h1.01	Nobody argued with me today about who should carry more weight. I'd rather we'd argued. At least I could have told Gorvak to sit beside me afterward.	Hoje ninguém discutiu comigo sobre quem devia carregar mais peso. Preferia ter discutido. Pelo menos eu podia mandar o Gorvak sentar ao meu lado depois.
+grief.h8.h1.02	Can I sit there?	Posso sentar aí?
+grief.h8.h3.01	Griznik would have wanted to change something before resting. I'd have said it was good enough. It was a small argument. I didn't think I'd miss it this much.	O Griznik ia querer mudar alguma coisa antes de descansar. Eu ia dizer que já estava bom. Era uma discussão pequena. Não achei que fosse sentir tanta falta.
+grief.h8.h3.02	We can still rest. I'll stay close.	A gente pode descansar mesmo assim. Eu fico perto.
+tavern.h1.h5.witness	I was there when Bimbren died, Ivaí. I still keep thinking about what I could have said beforehand.	Eu estava lá quando o Bimbren morreu, Ivaí. Ainda fico pensando no que poderia ter dito antes.
+tavern.h1.h5.away	You came back without Bimbren. I stayed here, and now I'm trying to understand that I won't see him walk in carrying his things.	Você voltou sem o Bimbren. Eu fiquei aqui, e agora estou tentando entender que não vou vê-lo entrar com as coisas nos braços.
+tavern.h1.h5.after	At the fire, I spoke about the load I was going to set aside for him. Here it's worse: I look at the place where he waited for the next journey.	Na fogueira, falei da carga que ia separar para ele. Aqui é pior: olho para o lugar onde ele esperava a próxima viagem.
+tavern.h1.h5.first	It's strange to want to offer help when there's no one left to accept it.	É estranho querer oferecer ajuda quando já não existe ninguém para recebê-la.
+tavern.h1.h5.body.01	I wanted him to see my rebuilt forge. I was going to leave a chair near the workbench so he could stop by without inventing a delivery.	Eu queria que ele conhecesse minha forja reconstruída. Ia deixar uma cadeira perto da bancada, para ele parar sem precisar inventar uma entrega.
+tavern.h1.h5.body.02	May I keep that memory?	Posso guardar essa lembrança?
+tavern.h1.h5.body.03	You may. But remember he was my friend, too. Not just someone who carried what other people needed.	Pode. Mas guarde também que ele era meu amigo. Não só alguém que carregava o que os outros precisavam.
+tavern.h1.h8.witness	I saw Draska die. I'm used to putting my hands to something and helping. I can't stop thinking about my empty hands.	Eu vi a Draska morrer. Estou acostumado a pôr a mão em alguma coisa e ajudar. Não consigo parar de pensar nas minhas mãos vazias.
+tavern.h1.h8.away	Draska didn't return, and I wasn't even there. I won't pretend I know what it was like. I only know what it's like to wait for a voice that isn't coming.	A Draska não voltou, e eu nem estava lá. Não vou fingir que sei como foi. Só sei como está sendo esperar por uma voz que não vem.
+tavern.h1.h8.after	At the fire, I missed her telling me to rest. Here, nobody's going to disagree when I say I can manage more.	Na fogueira, senti falta de ela me mandar descansar. Aqui, ninguém vai discordar quando eu disser que aguento mais.
+tavern.h1.h8.first	She noticed I was tired before I accepted it. I didn't make it easy.	Ela percebia quando eu estava cansado antes de eu aceitar. Eu não facilitava.
+tavern.h1.h8.body.01	I'll have to learn to stop on my own. Not because she's gone, but because she was right even when she was here.	Vou precisar aprender a parar sozinho. Não porque ela se foi, mas porque ela tinha razão mesmo quando estava aqui.
+tavern.h1.h8.body.02	Can I bring you anything?	Posso lhe trazer alguma coisa?
+tavern.h1.h8.body.03	Water. And a few minutes without trying to make what I'm saying feel better.	Água. E uns minutos sem tentar melhorar o que estou dizendo.
+tavern.h2.h6.witness	I was there. I saw Liora die. I don't want to hear that I need to move on now, Ivaí.	Eu estava lá. Vi a Liora morrer. Não quero ouvir que agora preciso seguir em frente, Ivaí.
+tavern.h2.h6.away	When you returned, I looked for Liora behind you. It seemed obvious she'd be checking something. It took me a while to understand.	Quando você voltou, procurei a Liora atrás de você. Parecia óbvio que ela vinha conferindo alguma coisa. Demorei a entender.
+tavern.h2.h6.after	I already spoke about her at the fire. I thought talking would make that empty place feel less absurd. It didn't.	Já falei dela na fogueira. Achei que falar ia tornar esse lugar vazio menos absurdo. Não tornou.
+tavern.h2.h6.first	I used to tease her for taking so long. Now I'm in no hurry to leave this place.	Eu implicava com a demora dela. Agora estou sem pressa de sair daqui.
+tavern.h2.h6.body.01	"She could say ""wait"" without making it sound like she wanted to hold me back. I knew she was trying to get me home in one piece."	Ela conseguia dizer “espere” sem parecer que queria me prender. Eu sabia que ela estava tentando me trazer de volta inteira.
+tavern.h2.h6.body.02	Would you like me to stay?	Quer que eu fique?
+tavern.h2.h6.body.03	I would. You don't have to fill every silence. I know how to wait too.	Quero. E não precisa preencher todo silêncio. Eu também sei esperar.
+tavern.h2.h7.witness	I saw Vaelith die. And I still catch myself wanting to tell him something, just to hear the explanation he'd come up with.	Eu vi o Vaelith morrer. E ainda me pego querendo contar uma coisa para ele, só para ver a explicação que inventaria.
+tavern.h2.h7.away	You told me Vaelith died. My first reaction was to wait for him to appear and correct some detail. It was ridiculous. I know.	Você me disse que o Vaelith morreu. Minha primeira reação foi esperar que ele aparecesse para corrigir algum detalhe. Foi ridículo. Eu sei.
+tavern.h2.h7.after	At the fire, I said I always stayed to listen. I wish I'd told him that without turning it into a joke at his expense.	Na fogueira eu disse que sempre ficava para ouvir. Queria ter dito isso para ele, sem transformar em provocação.
+tavern.h2.h7.first	It wasn't just irritation when I told him to stop talking. Sometimes I was worried. I hid it badly.	Não era só irritação quando eu mandava ele parar de falar. Às vezes era preocupação. Eu disfarçava mal.
+tavern.h2.h7.body.01	If you find a note of his that's hard to understand, keep it. I don't want it thrown away just because he used too many words.	Se encontrar uma anotação dele difícil de entender, guarde. Não quero que joguem fora só porque ele usou palavras demais.
+tavern.h2.h7.body.02	I can try to read it with you.	Eu posso tentar ler com você.
+tavern.h2.h7.body.03	You can. And we can complain about his handwriting. He wouldn't want me agreeing with everything just because I miss him.	Pode. E podemos reclamar da letra. Ele não ia querer que eu concordasse com tudo só porque sinto falta dele.
+tavern.h3.h8.witness	I was there when Draska died. I keep going over everything, looking for something I didn't notice.	Eu estava lá quando a Draska morreu. Continuo revendo tudo, procurando uma coisa que não percebi.
+tavern.h3.h8.away	I stayed here while Draska went out. Now I'm finding faults in everything I see, as though fixing something could change the news.	Eu fiquei aqui enquanto a Draska saía. Agora estou procurando defeito em tudo que vejo, como se consertar alguma coisa pudesse mudar a notícia.
+tavern.h3.h8.after	At the fire, I waited for her to point out what I'd forgotten. Here, I'm trying to remember the times she said it was good enough.	Na fogueira, esperei que ela apontasse o que eu tinha esquecido. Aqui, estou tentando lembrar as vezes em que ela disse que estava bom.
+tavern.h3.h8.first	I trusted her judgment more than I admitted. It was easier to argue than to say so.	Eu confiava na avaliação dela mais do que admitia. Era mais fácil discutir do que dizer isso.
+tavern.h3.h8.body.01	We disagreed about where to start. She wanted to secure the way out. I'd already be working on everything else. With her around, I had to stop and explain.	A gente discordava sobre por onde começar. Ela queria garantir a saída. Eu já estava mexendo no resto. Com ela por perto, eu tinha que parar e explicar.
+tavern.h3.h8.body.02	You can still explain things to us.	Você ainda pode explicar para nós.
+tavern.h3.h8.body.03	I can. But don't say that as though it's the same thing.	Posso. Mas não diga isso como se fosse a mesma coisa.
+tavern.h3.h6.witness	I saw Liora die. Part of me keeps waiting for a correction. Some piece of information that changes what happened.	Eu vi a Liora morrer. Tem uma parte de mim que continua esperando uma correção. Uma informação que mude o que aconteceu.
+tavern.h3.h6.away	Liora left this place and didn't return. I only know the news. My head tries to fill in the rest, and it almost never helps.	A Liora saiu daqui e não voltou. Eu só conheço a notícia. O resto, minha cabeça tenta preencher, e quase nunca ajuda.
+tavern.h3.h6.after	I already spoke about her by the fire. Today I wanted to remember a conversation that didn't end with how much I miss her.	Já falei dela perto do fogo. Hoje queria lembrar de uma conversa que não terminasse com a falta que ela faz.
+tavern.h3.h6.first	I liked it when she asked me to show something on the map. It was a way of taking my observations seriously.	Eu gostava quando ela pedia que eu mostrasse uma coisa no mapa. Era um jeito de levar minhas observações a sério.
+tavern.h3.h6.body.01	She saw the whole route. I saw what was close by. Sometimes we argued for ages before realizing we weren't talking about the same distance.	Ela via o caminho inteiro. Eu via o que estava bem perto. Às vezes passávamos um tempão discordando antes de perceber que não estávamos falando da mesma distância.
+tavern.h3.h6.body.02	May I write that down?	Posso escrever isso?
+tavern.h3.h6.body.03	You may. But leave some space. If I remember it better, I want to explain it again.	Pode. Mas deixe um espaço. Se eu lembrar melhor, quero poder explicar de novo.
+tavern.h4.h5.witness	I was present when Bimbren died. I know what happened. Knowing doesn't stop me looking for a different answer.	Eu estava presente quando o Bimbren morreu. Sei o que aconteceu. Saber não impede que eu procure outra resposta.
+tavern.h4.h5.away	You brought news of Bimbren's death. I need time to understand an absence I didn't witness.	Você trouxe a notícia da morte do Bimbren. Eu preciso de tempo para entender uma ausência que não presenciei.
+tavern.h4.h5.after	At the fire, I spoke about asking whether he'd eaten. Now I think about how often I asked without waiting for the whole answer.	Na fogueira, falei de perguntar se ele tinha comido. Agora penso em quantas vezes fiz a pergunta sem esperar a resposta inteira.
+tavern.h4.h5.first	He always had something to finish before taking care of himself. I recognized that habit more than I liked to admit.	Ele sempre tinha algo a terminar antes de cuidar de si. Eu reconhecia esse hábito mais do que gostava de admitir.
+tavern.h4.h5.body.01	I wanted him to visit the house of healing without bringing anything. No message, no medicine, no favor for someone. Just a visit.	Eu queria que ele viesse à casa de cura sem trazer nada. Sem mensagem, sem remédio, sem um favor para alguém. Só uma visita.
+tavern.h4.h5.body.02	Do you think he could have?	Acha que ele conseguiria?
+tavern.h4.h5.body.03	It might have taken time. I wish I'd had that time with him.	Talvez levasse tempo. Eu gostaria de ter tido esse tempo com ele.
+tavern.h4.h7.witness	I saw Vaelith die, Ivaí. I'm trying not to turn every memory into a list of what I should have done.	Eu vi o Vaelith morrer, Ivaí. Estou tentando não transformar cada lembrança numa lista do que deveria ter feito.
+tavern.h4.h7.away	Vaelith died while I was here. I won't invent an explanation for a scene I didn't see.	O Vaelith morreu enquanto eu estava aqui. Não vou inventar uma explicação para uma cena que não vi.
+tavern.h4.h7.after	By the fire, I missed his questions. Here, I remember the times a question made me reconsider something I was certain of.	Perto do fogo, senti falta das perguntas dele. Aqui, lembro das vezes em que uma pergunta me fez rever uma certeza.
+tavern.h4.h7.first	We disagreed about the limits of an investigation. Sometimes I spoke as though he didn't care about anyone. That wasn't true.	Nós discordávamos dos limites de uma investigação. Às vezes eu falava como se ele não se importasse com ninguém. Não era verdade.
+tavern.h4.h7.body.01	He wanted to preserve whatever might keep someone else from suffering. I wanted to be sure nobody would suffer to produce that record. I still think we needed each other in that conversation.	Ele queria guardar o que pudesse impedir outra pessoa de sofrer. Eu queria ter certeza de que ninguém sofreria para produzir esse registro. Ainda acho que precisávamos um do outro nessa conversa.
+tavern.h4.h7.body.02	Do you want his records preserved?	Você quer que os registros dele sejam preservados?
+tavern.h4.h7.body.03	I want them read carefully. Don't turn my grief into approval of everything he would have done.	Quero que sejam lidos com cuidado. Não transforme minha saudade numa aprovação de tudo o que ele faria.
+tavern.h5.h1.witness	I was there when Gorvak died. Since then, every task feels like something I should manage without asking for help.	Eu estava lá quando o Gorvak morreu. Desde então, toda tarefa parece uma coisa que eu deveria conseguir fazer sem pedir ajuda.
+tavern.h5.h1.away	Gorvak didn't return with you. I stayed here, and now I catch myself calculating what would have changed if I'd gone. I have no way of knowing.	O Gorvak não voltou com vocês. Fiquei aqui, e agora me pego calculando o que teria mudado se eu tivesse ido. Não tenho como saber.
+tavern.h5.h1.after	At the fire, I spoke about his silence. In this room, I even miss the sound of the things he repaired.	Na fogueira, falei do silêncio dele. Nesta sala, sinto falta até do barulho das coisas que ele consertava.
+tavern.h5.h1.first	He helped me without turning that help into a debt. I didn't always know how to accept it.	Ele me ajudava sem transformar a ajuda numa dívida. Eu nem sempre sabia aceitar.
+tavern.h5.h1.body.01	If I ever reopen the message service, I'll teach the carriers to share the weight before anyone gets hurt. And I'll try to do the same myself.	Se um dia eu reabrir o serviço de mensagens, vou ensinar os carregadores a dividir o peso antes de alguém se machucar. E vou tentar fazer o mesmo.
+tavern.h5.h1.body.02	Gorvak would have liked that.	O Gorvak gostaria disso.
+tavern.h5.h1.body.03	I think so. Then he'd check whether I was doing it. I'll miss being checked on.	Acho que sim. Depois ia conferir se eu estava cumprindo. Vou sentir falta dessa conferência.
+tavern.h5.h4.witness	I saw Seraphina die. I'm used to looking for what can still be done. With this, I can't find a task that will solve it.	Eu vi a Seraphina morrer. Estou acostumado a procurar o que ainda pode ser feito. Neste assunto, não encontro uma tarefa que resolva.
+tavern.h5.h4.away	You gave me the news of Seraphina's death. I've delivered difficult news. I've never found a right way to be on the receiving end.	Recebi de você a notícia da morte da Seraphina. Já entreguei notícias difíceis. Nunca achei uma maneira correta de ficar do outro lado.
+tavern.h5.h4.after	At the fire, I didn't know how to answer when asked how I was. I still don't. At least I've stopped answering with what remains to be done.	Na fogueira, eu não sabia responder como estava. Ainda não sei. Pelo menos já parei de responder com o que falta fazer.
+tavern.h5.h4.first	She noticed when I used a duty to avoid a simple question.	Ela percebia quando eu usava uma obrigação para fugir de uma pergunta simples.
+tavern.h5.h4.body.01	The house of healing she wanted wasn't just a building. She talked about people who'd been turned away elsewhere. I liked hearing her talk about them.	A casa de cura que ela queria não era só um prédio. Ela falava das pessoas que tinham sido mandadas embora de outros lugares. Eu gostava de ouvi-la falar delas.
+tavern.h5.h4.body.02	Would you like to continue that work?	Você gostaria de continuar esse trabalho?
+tavern.h5.h4.body.03	Don't ask me for another promise right now. Today I just want to be allowed to miss her.	Não me peça outra promessa agora. Hoje eu só quero poder sentir falta dela.
+tavern.h6.h2.witness	I was there when Elowen died. I keep looking for a sequence that could have ended differently.	Eu estava lá quando a Elowen morreu. Continuo procurando uma sequência que pudesse ter terminado de outro modo.
+tavern.h6.h2.away	You returned without Elowen. I didn't see what happened. It's hard to accept that such an important part of the story only reached me as news.	Você voltou sem a Elowen. Eu não vi o que aconteceu. É difícil aceitar que uma parte tão importante da história só chegou a mim como notícia.
+tavern.h6.h2.after	At the fire, I looked at every movement, expecting to see her. Here, I look at the door. The habit has only changed places.	Na fogueira, eu olhava para cada movimento esperando vê-la. Aqui, olho para a porta. O hábito só mudou de lugar.
+tavern.h6.h2.first	She asked about my maps as though she were challenging me. Sometimes she was. Other times she just wanted me to show I trusted her.	Ela fazia perguntas sobre meus mapas como se estivesse me desafiando. Às vezes estava. Outras vezes só queria que eu mostrasse confiança nela.
+tavern.h6.h2.body.01	I wish I'd said more clearly that I respected her way of doing things. It wasn't mine, and I used that as an excuse to disagree too quickly.	Eu gostaria de ter dito com mais clareza que respeitava o jeito dela. Não era o meu, e eu usava isso como desculpa para discordar depressa.
+tavern.h6.h2.body.02	May I remember that when I tell people about you two?	Posso lembrar disso quando contar sobre vocês?
+tavern.h6.h2.body.03	You may. But tell them she sometimes made me laugh before I could finish complaining.	Pode. Mas conte também que às vezes ela me fazia rir antes de eu conseguir terminar a reclamação.
+tavern.h6.h3.witness	I saw Griznik die. I can't organize that memory the way I organize a route. And I'm angry with myself for trying.	Eu vi o Griznik morrer. Não consigo organizar essa lembrança como organizo uma rota. E me irrito por tentar.
+tavern.h6.h3.away	The news about Griznik came back with you. I was here making plans that still included him.	A notícia sobre o Griznik chegou com vocês. Eu estava aqui fazendo planos que ainda incluíam ele.
+tavern.h6.h3.after	At the fire, I remembered his questions. Today I thought of an answer I'd have liked to give. There's no longer any hurry to finish it.	Na fogueira, lembrei das perguntas dele. Hoje pensei em uma resposta que teria gostado de dar. Não existe mais pressa para terminar.
+tavern.h6.h3.first	He could take an interest in something I'd noticed without immediately turning it into a contest. I didn't always do the same.	Ele conseguia se interessar por uma observação minha sem transformá-la imediatamente numa disputa. Eu nem sempre fazia o mesmo.
+tavern.h6.h3.body.01	He wanted a workshop where he could refuse a bad job. I understood that. Having the freedom to say something isn't safe, even when someone's paying.	Ele queria uma oficina onde pudesse recusar um serviço ruim. Eu entendia isso. Ter a liberdade de dizer que uma coisa não é segura, mesmo quando alguém está pagando.
+tavern.h6.h3.body.02	He believed he could build something better.	Ele acreditava que podia construir algo melhor.
+tavern.h6.h3.body.03	Yes. Don't say that as though it were naïve. It was a reason to like him.	Sim. Não diga isso como se fosse ingenuidade. Era uma razão para gostar dele.
+tavern.h7.h2.witness	I was there when Elowen died. I have words to record the event. None of them seem useful for talking about her.	Eu estava lá quando a Elowen morreu. Tenho palavras para registrar o acontecimento. Nenhuma parece servir para conversar sobre ela.
+tavern.h7.h2.away	You told me Elowen died. Since then, I keep remembering the last thing I said to her here. It was a small tease.	Você me contou que a Elowen morreu. Desde então, fico lembrando da última coisa que disse a ela aqui. Era uma provocação pequena.
+tavern.h7.h2.after	At the fire, I spoke about wanting her to stay another minute. I'm trying not to measure every memory by the time we didn't have.	Na fogueira, falei de querer que ela ficasse mais um minuto. Estou tentando não medir todas as lembranças pelo tempo que faltou.
+tavern.h7.h2.first	I liked getting her to argue. That's less elegant than saying I admired her honesty, but both are true.	Eu gostava de fazê-la discutir. Isso é menos elegante do que dizer que admirava sua franqueza, mas as duas coisas são verdade.
+tavern.h7.h2.body.01	If I write about her, I won't turn every impatient moment into courage. She could be unfair when she was in a hurry. And she could realize it later. I want to remember the whole person.	Se eu escrever sobre ela, não vou transformar toda impaciência em coragem. Ela podia ser injusta quando estava com pressa. E podia perceber depois. Quero lembrar da pessoa inteira.
+tavern.h7.h2.body.02	Do you think she'd agree with it?	Acha que ela concordaria com o texto?
+tavern.h7.h2.body.03	No. And I'd very much like to hear the complaint.	Não. E eu gostaria muito de ouvir a reclamação.
+tavern.h7.h4.witness	I saw Seraphina die. I still catch myself preparing a question as though she'd have the patience to answer me again.	Eu vi a Seraphina morrer. Ainda me pego preparando uma pergunta como se ela fosse ter paciência para me responder outra vez.
+tavern.h7.h4.away	Seraphina didn't return. I was here, and hearing the news doesn't give me the right to invent her final thoughts.	A Seraphina não voltou. Eu estava aqui, e a notícia não me dá o direito de inventar os últimos pensamentos dela.
+tavern.h7.h4.after	At the fire, I tried to remember a conversation without wanting to win it. I remembered one where she made me listen to someone else.	Na fogueira, tentei lembrar uma conversa sem querer vencê-la. Consegui lembrar de uma em que ela me fez escutar outra pessoa.
+tavern.h7.h4.first	She asked me whom the knowledge I sought would serve. I answered too quickly.	Ela me perguntava para quem serviria o conhecimento que eu procurava. Eu respondia depressa demais.
+tavern.h7.h4.body.01	"I'd say ""everyone."" It was a comfortable answer. She wanted names, needs, someone who could tell me whether I was helping or merely pleased with myself."	Eu dizia “para todo mundo”. Era uma resposta confortável. Ela queria nomes, necessidades, alguém que pudesse dizer se eu estava ajudando ou só satisfeito comigo mesmo.
+tavern.h7.h4.body.02	Do you think she changed your work?	Você acha que ela mudou seu trabalho?
+tavern.h7.h4.body.03	I think she still will. I'll keep hearing that question when I open my notebooks.	Acho que ainda vai mudar. Vou continuar ouvindo essa pergunta quando abrir meus cadernos.
+tavern.h8.h1.witness	I was there when Gorvak died. I don't want you calling it fate, Ivaí. I'm still trying to understand the choices.	Eu estava lá quando o Gorvak morreu. Não quero que você chame isso de destino, Ivaí. Ainda estou tentando entender as escolhas.
+tavern.h8.h1.away	You came back without Gorvak. I stayed here. I won't pretend I could have prevented it, but I can't stop thinking about it either.	Você voltou sem o Gorvak. Eu fiquei aqui. Não vou inventar que poderia ter impedido, mas também não consigo parar de pensar nisso.
+tavern.h8.h1.after	At the fire, I missed arguing with him. Here, I miss not having to explain why I'm checking everything again.	Na fogueira, senti falta de discutir com ele. Aqui, sinto falta de não precisar explicar por que estou conferindo tudo de novo.
+tavern.h8.h1.first	He understood the worry even when he disagreed with what I wanted to do. That wasn't a small thing.	Ele entendia a preocupação mesmo quando discordava do que eu queria fazer. Isso não era pouca coisa.
+tavern.h8.h1.body.01	I wanted to see that forge working. I wanted to turn up just to say he'd put too many things near the door. And stay to talk afterward.	Eu queria ver aquela forja funcionando. Queria aparecer só para dizer que ele tinha posto coisa demais perto da porta. E ficar para conversar depois.
+tavern.h8.h1.body.02	May I stay here with you for a while?	Posso ficar um pouco aqui com você?
+tavern.h8.h1.body.03	You may. Just don't try to convince me it's time to stop feeling this.	Pode. Só não tente me convencer de que já está na hora de parar de sentir isso.
+tavern.h8.h3.witness	I saw Griznik die. I keep thinking about checks, warnings, everything that looks simple afterward. It's not good company when you're trying to rest.	Eu vi o Griznik morrer. Continuo pensando em verificações, em avisos, em tudo que parece simples depois. Não é uma boa companhia para descansar.
+tavern.h8.h3.away	Griznik died while I was here. I've heard the news, but my head still expects to hear him working on something.	O Griznik morreu enquanto eu estava aqui. Eu recebi a notícia, mas minha cabeça ainda espera ouvir ele mexendo em alguma coisa.
+tavern.h8.h3.after	At the fire, I spoke about our small arguments. Here, I remember how he stopped to show me what he was doing when I asked.	Na fogueira, falei das nossas discussões pequenas. Aqui, lembro de como ele parava para mostrar o que estava fazendo quando eu perguntava.
+tavern.h8.h3.first	He could talk too much. But he never treated me as a nuisance for wanting to understand what held something up.	Ele podia falar demais. Mas nunca me tratou como um incômodo por querer entender o que sustentava uma coisa.
+tavern.h8.h3.body.01	If I manage to open the cooperative, I'll want people who ask questions like that. It'll make more work. Better than learning to keep quiet so the job won't fall behind.	Se eu conseguir abrir a cooperativa, vou querer gente que faça perguntas assim. Vai dar trabalho. Melhor do que aprender a ficar calado para não atrasar o serviço.
+tavern.h8.h3.body.02	Do you want to take something of his with you?	Você quer levar alguma coisa dele consigo?
+tavern.h8.h3.body.03	I don't know yet. Don't turn this into a task I have to settle right now.	Ainda não sei. Não transforme isso numa tarefa para eu resolver agora.
+ui.camp.continue	Continue	Continuar
+ui.camp.retreat	Return to tavern	Voltar à taverna
+ui.social.new	NEW!	NOVO!
+ui.social.unread	New conversation	Nova conversa
+ui.social.about.h1	About Gorvak	Sobre Gorvak
+ui.social.about.h2	About Elowen	Sobre Elowen
+ui.social.about.h3	About Griznik	Sobre Griznik
+ui.social.about.h4	About Seraphina	Sobre Seraphina
+ui.social.about.h5	About Bimbren	Sobre Bimbren
+ui.social.about.h6	About Liora	Sobre Liora
+ui.social.about.h7	About Vaelith	Sobre Vaelith
+ui.social.about.h8	About Draska	Sobre Draska
+ui.camp.back	Back	Voltar

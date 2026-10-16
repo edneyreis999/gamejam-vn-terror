@@ -92,3 +92,7 @@ Jogar/arquivo → prólogo Map002 → formação → herói em Map037–044 → 
 ## Integração narrativa aprovada — 2026-09-18
 
 Planejado, execução dirigida ainda não observada. Cobertura: S-01/02/04/05/07/08; A–D. [Guia corrente](../guides/approved-narrative-dialogue-staging.md) e [charter](../charters/CH-approved-narrative-dialogue-staging.md). Preservar os vereditos históricos acima; fonte aprovada não aprova render/escuta do candidato. Sem zoom/gamepad. Prisões ausentes continuam no bug existente; prosa/arte aceitas e refinamento do memorial não são reabertos.
+
+## Incremento campfire-hero-bonds — 2026-10-16
+
+[Guia dos lotes e variantes](../guides/campfire-hero-bonds.md) e [relatório corrente](../reports/2026-10-16-campfire-hero-bonds.md). A retirada voluntária passa a existir somente na fogueira após as posições 2/4, inclusive com grupo reduzido. Conversas e reações têm unidades próprias de leitura e checkpoints. Resultados históricos acima não aprovam este candidato; o relatório separa execução, inspeção e aceite humano.

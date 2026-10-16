@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-presentation-reduced-20261016-02",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-presentation-reduced.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-presentation-reduced",
+    "profile": "chrome-desktop",
+    "variant": "portuguese-reduced",
+    "configuration": "1280x720-pt-reduced"
+  },
+  "claims": [
+    {
+      "id": "presentation-continuity",
+      "variant": "portuguese-reduced",
+      "sensor": "directed-browser",
+      "group": "presentation",
+      "source": {
+        "id": "presentation-continuity",
+        "variant": "portuguese-reduced"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Presentation refinement"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Approved nameplates, three-second absences and stable native conversation composition."
+  }
+}

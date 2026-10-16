@@ -53,3 +53,7 @@ Planejado, execução dirigida ainda não observada. Cobertura: S-03/04/06; B/D.
 ## Textos atualizados — 2026-09-25
 
 Campanha dirigida cobriu os 16 encontros e 48 rótulos, releitura A/B, recuo/reformação, falha A5-3, despedida de Gorvak e mortes A5/A1. Continue preservou fatos confirmados de abordagem e vítima. B4-1/B6-1 tiveram apenas paginação ajustada entre frases, validada em novo percurso. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.
+
+## Incremento campfire-hero-bonds — 2026-10-16
+
+[Guia dos lotes e variantes](../guides/campfire-hero-bonds.md) e [relatório corrente](../reports/2026-10-16-campfire-hero-bonds.md). A retirada voluntária passa a existir somente na fogueira após as posições 2/4, inclusive com grupo reduzido. Conversas e reações têm unidades próprias de leitura e checkpoints. Resultados históricos acima não aprovam este candidato; o relatório separa execução, inspeção e aceite humano.

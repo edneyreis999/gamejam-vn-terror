@@ -36,7 +36,7 @@ export function rosterFixture(deadHeroIds) {
     const encounterId = (index < 5 ? 'A' : 'B') + position;
     state.assignments[routeId][position - 1] = encounterId;
     state.progress[routeId] = position;
-    state.deathLocations[id] = { routeId, encounterId, encounterPosition: position, approachId: `${encounterId}-1` };
+    state.deathLocations[id] = { routeId, encounterId, encounterPosition: position, approachId: `${encounterId}-1`, witnessHeroIds: [] };
   }
   if (state.progress.physical === 5) { state.completedDungeonIds = ['physical']; state.mapPieceIds = ['physical']; }
   const living = heroes.filter(id => !deadHeroIds.includes(id));
@@ -60,10 +60,16 @@ export function heroUnitTexts(unit) {
 }
 
 export async function choices(browser, kind) {
+  if (kind === 'hero') {
+    await browser.waitFor("($gameMessage._drylandChoiceFocus?.key === 'hero' && SceneManager._scene._choiceListWindow?.isOpenAndActive()) || ($gameMessage._texts.includes('$[conv.party_count]') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0)");
+    if (await browser.evaluate("$gameMessage._texts.includes('$[conv.party_count]') && !SceneManager._scene._choiceListWindow.isOpenAndActive()")) await browser.press('Enter', 13);
+  }
   await browser.waitFor(`$gameMessage._drylandChoiceFocus?.key === ${JSON.stringify(kind)} && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy() && (${JSON.stringify(kind)} === 'hero' || ${JSON.stringify(kind)} === 'retreat' || !$gameMessage.hasText())`);
 }
 export async function activate(browser, kind, index) {
   await choices(browser, kind);
+  if (typeof index === 'string') index = await browser.evaluate(`SceneManager._scene._choiceListWindow._list.findIndex(item => $gameMessage.choices()[item.ext].includes(${JSON.stringify(index)}))`);
+  assert.ok(index >= 0, 'Requested choice must be available');
   for (let count = 0; count < 16; count++) {
     const current = await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
     if (current === index) break;
@@ -89,8 +95,8 @@ export async function tavern(t, options = {}) {
 }
 
 export async function returnToTavern(browser) {
-  await browser.waitFor("['hero','formation'].includes($gameMessage._drylandChoiceFocus?.key) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()");
-  if (await browser.evaluate("$gameMessage._drylandChoiceFocus.key === 'hero'")) await activate(browser, 'hero', 2);
+  await browser.waitFor("(['hero','formation'].includes($gameMessage._drylandChoiceFocus?.key) && SceneManager._scene._choiceListWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()) || ($gameMessage._texts.includes('$[conv.party_count]') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0)");
+  if (await browser.evaluate("$gameMessage._texts.includes('$[conv.party_count]') || $gameMessage._drylandChoiceFocus?.key === 'hero'")) await activate(browser, 'hero', '$[choice.conv.back]');
   await choices(browser, 'formation');
 }
 

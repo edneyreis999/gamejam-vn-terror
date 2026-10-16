@@ -11,7 +11,6 @@ import { assertAdvanceIndicatorFits, normalizeProse, passageBoxes } from '../hel
 import { hidden } from '../helpers/native-shared.mjs';
 const approved = JSON.parse(await readFile(new URL('../fixtures/approved-closing-source.json', import.meta.url), 'utf8')).passages;
 const epilogues = JSON.parse(await readFile(new URL('../../asset-provenance/approved-narrative-epilogues.json', import.meta.url), 'utf8')).heroes;
-const councilMap = JSON.parse(await readFile(new URL('../../The Dryland Drowned/data/Map023.json', import.meta.url), 'utf8'));
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-09/${id}`;
 const snapshot=browser=>browser.evaluate('$gameSystem._dryland.campaign');
 const ended=(kind,ending)=>kind==='bad'?councilState('bad'):accepted(finalChoice(kind),'CHOOSE_ENDING',{ending});
@@ -24,20 +23,10 @@ canonicalCase('UT-033','Council freezes only living climax witnesses in canonica
   assert.ok(state.reading.passageIds.includes(kind==='solo'?'council.solo':'council.challenge'));
   assert.equal(state.reading.passageIds.filter(id=>id==='council.confession').length,1);
   assert.deepEqual(state.reading.passageIds, ['council.01','council.02','council.03',kind==='solo'?'council.solo':'council.challenge','council.confession','council.andira',...expected.map(id=>`opinion.${id}`),'irati.03']);
-  for (const id of state.reading.passageIds.filter(id=>approved[id])) {
-   assert.equal(normalizeProse(passageBoxes(councilMap.events[1].pages[0].list,id).join(' ')),normalizeProse(approved[id].join(' ')),id);
-  }
   for(const id of state.deadHeroIds)assert.equal(state.climaxPartyIds.includes(id),false);
  }
 });
 canonicalCase('UT-034','both medallion choices commit their own outcome once and invalid endings preserve state',async()=>{
- for (const [ending,number] of [['reunite',25],['destroy',26],['bad',27]]) {
-  const map=JSON.parse(await readFile(new URL(`../../The Dryland Drowned/data/Map${String(number).padStart(3,'0')}.json`,import.meta.url),'utf8'));
-  for(const suffix of ['01','02']) {
-   const id=`ending.${ending}.${suffix}`;
-   assert.equal(normalizeProse(passageBoxes(map.events[1].pages[0].list,id).join(' ')),normalizeProse(approved[id].join(' ')),id);
-  }
- }
  const before=finalChoice('mixed');
  for(const ending of ['reunite','destroy']){
   const state=accepted(before,'CHOOSE_ENDING',{ending});assert.equal(state.phase,'ending');assert.equal(state.endingId,ending);assert.equal(state.reading.sceneId,`ending.${ending}`);

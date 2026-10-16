@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "native-icon-en-US-20261016-01",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-native-icon.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-native-icon",
+    "profile": "chrome-desktop",
+    "variant": "en-US",
+    "configuration": "1280x720-en-US"
+  },
+  "claims": [
+    {
+      "id": "native-icon",
+      "variant": "en-US",
+      "sensor": "directed-browser",
+      "group": "native-icon",
+      "source": {
+        "id": "native-icon",
+        "variant": "en-US"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Native icon above nameplates"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Native IconSet marker above centered nameplates."
+  }
+}

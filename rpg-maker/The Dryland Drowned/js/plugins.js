@@ -656,5 +656,11 @@ var $plugins =
         "status": true,
         "description": "Native Dim credits inside Reed’s parchment",
         "parameters": {}
+    },
+    {
+        "name": "Dryland_2_ConversationIndicators",
+        "status": true,
+        "description": "Available unread conversation indicators",
+        "parameters": {}
     }
 ];

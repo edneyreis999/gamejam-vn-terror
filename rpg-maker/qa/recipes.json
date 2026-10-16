@@ -565,5 +565,53 @@
       "id": "JOURNEY-bad",
       "archive": "regex:^committed-death-H.*archive.json$"
     }
+  },
+  {
+    "id": "CAMPFIRE-DIR-FIRST",
+    "case": "planos/tasks/campfire-hero-bonds/directed-campfire.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-first.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-LOSSES",
+    "case": "planos/tasks/campfire-hero-bonds/directed-losses.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-losses.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-ROUTES",
+    "case": "planos/tasks/campfire-hero-bonds/directed-routes.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-routes.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-LOW-ROSTER",
+    "case": "planos/tasks/campfire-hero-bonds/directed-low-roster.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-low-roster.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-AUTOMATIC-RETURN",
+    "case": "planos/tasks/campfire-hero-bonds/directed-automatic-return.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-automatic-return.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-PRESENTATION-FIRST",
+    "case": "planos/tasks/campfire-hero-bonds/directed-presentation-first.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-presentation-first.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-PRESENTATION-LOSSES",
+    "case": "planos/tasks/campfire-hero-bonds/directed-presentation-losses.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-presentation-losses.json"
+  },
+  {
+    "id": "CAMPFIRE-DIR-PRESENTATION-REDUCED",
+    "case": "planos/tasks/campfire-hero-bonds/directed-presentation-reduced.mjs",
+    "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+    "request": "planos/tasks/campfire-hero-bonds/request-presentation-reduced.json"
   }
 ]

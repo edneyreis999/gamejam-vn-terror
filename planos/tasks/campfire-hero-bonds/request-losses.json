@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-losses-20261016-04",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-losses.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-losses",
+    "profile": "chrome-desktop",
+    "variant": "witness-and-away",
+    "configuration": "1280x720-en-normal"
+  },
+  "claims": [
+    {
+      "id": "loss-grief-about-resume",
+      "variant": "witness-and-away",
+      "sensor": "directed-browser",
+      "group": "camp-sequence",
+      "source": {
+        "id": "loss-grief-about-resume",
+        "variant": "witness-and-away"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Collect simultaneous normal-motion camp absence temporal samples and mid-fade captures across repeated arrivals."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-routes-20261016-04",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-routes.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-routes-audio",
+    "profile": "chrome-desktop",
+    "variant": "all-routes",
+    "configuration": "1280x720-pt-en-normal"
+  },
+  "claims": [
+    {
+      "id": "routes-novelty-audio",
+      "variant": "all-routes",
+      "sensor": "directed-browser",
+      "group": "camp-sequence",
+      "source": {
+        "id": "routes-novelty-audio",
+        "variant": "all-routes"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Camp Options now calls Scene_Options directly; native command351 opened general Menu."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-low-roster-20261016-01",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-low-roster.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-low-roster",
+    "profile": "chrome-desktop",
+    "variant": "reduced-large",
+    "configuration": "1920x1080-en-reduced"
+  },
+  "claims": [
+    {
+      "id": "low-roster-retreat-total-loss",
+      "variant": "reduced-large",
+      "sensor": "directed-browser",
+      "group": "camp-sequence",
+      "source": {
+        "id": "low-roster-retreat-total-loss",
+        "variant": "reduced-large"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Public earned one/two total survivors, total loss and reduced motion large viewport."
+  }
+}

@@ -7,8 +7,8 @@ import path from 'node:path';
 import { deflateSync } from 'node:zlib';
 import { validateNativeArchive, sha256 } from '../../qa/native-save-archive.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { act, activate, choices, openDestinations, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
-import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
+import { act, activate, formation, choices, openDestinations, pause, returnToTavern, rules, tavern } from '../helpers/formation.mjs';
+import { accepted, complete, failureWithCount, replayUntil, socialCamp } from '../helpers/campaign.mjs';
 import { councilState } from '../helpers/closing.mjs';
 import { installPhase, clickConsole } from '../helpers/native-shared.mjs';
 import { endingWithHeroes } from '../helpers/closing-presentation.mjs';
@@ -491,4 +491,25 @@ canonicalCase('IT-066','cold native Continue retains saved pictures and cancelli
  assert.equal(await browser.evaluate('$gameMessage.allText().includes("Gorvak")'),false);
  assert.equal(await browser.evaluate(`StorageManager.loadZip('file${fileId}')`),bytes);
  await browser.screenshot(`${evidence('IT-066')}/cancelled-native-load.png`);
+});
+
+canonicalCase('UT-078', 'social checkpoints retain completed units and reject busy or unfinished topic boundaries', () => {
+  let state = socialCamp(formation(), ['H1','H5','H8']);
+  const topicId = 'camp.h1.church.a';
+  state = accepted(state,'START_SOCIAL_TOPIC',{topicId});
+  assert.equal(validateCheckpoint('social_complete',state,safe).ok,false);
+  const unfinished = JSON.parse(JSON.stringify(state));
+  assert.deepEqual(unfinished.completedSocialUnitIds,[]);
+  assert.equal(rules.validateState(unfinished).ok,true);
+  state = accepted(state,'COMPLETE_SOCIAL_TOPIC',{topicId});
+  assert.equal(validateCheckpoint('social_complete',state,safe).ok,true);
+  const restored = JSON.parse(JSON.stringify(state));
+  assert.equal(rules.validateState(restored).ok,true);
+  assert.deepEqual(restored.completedSocialUnitIds,['camp.h1.church.a','interject.h1.h5']);
+  assert.equal(restored.activeSocialTopicId,null);
+  assert.equal(rules.topicUnread(restored,topicId),false);
+  assert.equal(validateCheckpoint('social_complete',restored,{...safe,messageBusy:true}).ok,false);
+  assert.equal(rules.validateState({...restored,completedSocialUnitIds:['camp.h1.unknown.a']}).ok,false);
+  assert.equal(rules.validateState({...restored,activeSocialTopicId:'camp.h8.church.b'}).ok,false);
+  assert.equal(rules.validateState({...restored,version:1}).ok,false);
 });

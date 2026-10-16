@@ -1,3 +1,4 @@
+import { passCamp } from './campaign.mjs';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { activate, choices, formation, heroes } from './formation.mjs';
@@ -109,6 +110,7 @@ export function councilWithHeroes(party) {
     state=finishReading(accepted(accepted(state,'SELECT_DESTINATION',{dungeonId:'final'}),'DEPART'));
     let valid=true;
     for(let pos=1;pos<=6;pos++){
+      if(state.phase==='camp_arrival')state=passCamp(state);
       state=complete(accepted(state,'ENTER_DUNGEON'));
       const id=state.assignments.final[pos-1],index=gdd.encounterPairs[id].findIndex(c=>state.partyIds.some(h=>gdd.heroPairs[h].includes(c)));
       if(index<0){valid=false;break;}
@@ -138,6 +140,7 @@ export function councilAfterLosses(survivors) {
   for(const heroId of ['H6','H7','H8'])state=accepted(state,'TOGGLE_HERO',{heroId});
   state=finishReading(accepted(accepted(state,'SELECT_DESTINATION',{dungeonId:'final'}),'DEPART'));
   for(const [approachId,victim] of recipe){
+    if(state.phase==='camp_arrival')state=passCamp(state);
     state=complete(accepted(state,'ENTER_DUNGEON'));
     state=complete(accepted(state,'CHOOSE_APPROACH',{approachId}));
     if(victim)state=finishReading(accepted(state,'SELECT_VICTIM',{heroId:victim}));

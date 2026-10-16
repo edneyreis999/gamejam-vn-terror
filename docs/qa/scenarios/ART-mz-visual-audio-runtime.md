@@ -54,3 +54,7 @@ blocked-verify: enquadramento do Conselho reprovado; epílogos corrigidos; áudi
 ## Integração narrativa aprovada — 2026-09-18
 
 Execução técnica concluída. A prisão rústica foi corrigida após direção explícita do usuário; IT-052/053 e inspeção de runtime passam nas duas resoluções/perfis, com HIDE. Audição e captura do editor foram dispensadas por D-020/021; não são sensores executados. Aceite humano final registrado após o “Perfeito” do usuário em2026-09-18. [Verificação atual](../../../planos/tasks/approved-narrative-dialogue-staging/verification.md) e [relatório](../reports/2026-09-18-approved-narrative-dialogue-staging.md). Vereditos históricos acima não são reescritos.
+
+## Incremento campfire-hero-bonds — 2026-10-16
+
+[Guia dos lotes e variantes](../guides/campfire-hero-bonds.md) e [relatório corrente](../reports/2026-10-16-campfire-hero-bonds.md). A retirada voluntária passa a existir somente na fogueira após as posições 2/4, inclusive com grupo reduzido. Conversas e reações têm unidades próprias de leitura e checkpoints. Resultados históricos acima não aprovam este candidato; o relatório separa execução, inspeção e aceite humano.
