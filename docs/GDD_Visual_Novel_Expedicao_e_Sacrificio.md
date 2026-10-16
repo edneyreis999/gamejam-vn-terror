@@ -1518,6 +1518,8 @@ Remover os corpos de Common Events deslocados somente após migrar todos os cons
 
 **Follow-up de prioridade menor:** orquestração da própria taverna no Map003 e mapa exclusivo de créditos ficam fora das tasks deste incremento. As verificações técnicas, dirigidas e humanas serão atualizadas no par de QA existente; os aceites anteriores conservam seu escopo.
 
+**Mapa exclusivo de créditos — Confirmado em 2026-10-14:** por solicitação do usuário, os créditos passam a ter autoria em um mapa próprio, separado do memorial e dos epílogos. Usar texto rolante com fundo transparente, contido no pergaminho de Reed da arte existente. Preservar rolagem nativa, aceleração, pular créditos e retorno ao título, sem modificar o final salvo. A [spec incremental](../planos/tasks/dedicated-credits-map/spec.md) registra a mudança de autoria e encaminhamento; a verificação técnica permanece distinta do percurso dirigido no jogo.
+
 ## 27. Prólogo de Rheed e integração narrativa dos PRs #15–19
 
 **Produto e projeto técnico confirmados; integração ainda não implementada:** incorporar o prólogo e os dois retratos entregues pelo [PR #19](https://github.com/edneyreis999/gamejam-vn-terror/pull/19), preservando a [spec de origem concluída](https://github.com/edneyreis999/gamejam-vn-terror/blob/daa4f7cf0d0d074135d12dc96bbe3f77dd749ea8/planos/tasks/prologo-rheed/spec.md) e o snapshot GDD v5.0 como história daquela entrega. Os resultados de QA da origem não certificam a integração. A [spec incremental atual](../planos/tasks/approved-narrative-dialogue-staging/spec.md) reúne as substituições posteriores de apresentação, áudio e alcance da narração, sem reabrir as falas aprovadas.
