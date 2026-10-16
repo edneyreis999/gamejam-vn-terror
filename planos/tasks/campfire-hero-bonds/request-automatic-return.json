@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-auto-20261016-01",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-automatic-return.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-automatic-return",
+    "profile": "chrome-desktop",
+    "variant": "reserves-present",
+    "configuration": "1280x720-en-normal"
+  },
+  "claims": [
+    {
+      "id": "last-participant-return",
+      "variant": "reserves-present",
+      "sensor": "directed-browser",
+      "group": "camp-sequence",
+      "source": {
+        "id": "last-participant-return",
+        "variant": "reserves-present"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Distinct automatic-return path with reserves after last present member dies."
+  }
+}

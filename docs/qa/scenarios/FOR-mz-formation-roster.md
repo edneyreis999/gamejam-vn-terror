@@ -57,3 +57,7 @@ Planejado, execução dirigida ainda não observada. Cobertura: S-02; A. [Guia c
 ## Textos atualizados — 2026-09-25
 
 Oito heróis passaram por Conversar (seis falas, entrada direta de Ivaí), seleção e resposta de grupo cheio, com igualdade da campanha durante consulta/grupo cheio. HIDE, Options/retorno e FAST após leitura completa passaram; testes canônicos mantêm autoria e Continue. Unidades de perfil retiradas; três unidades conservadas por herói. **PASS no escopo do incremento; implementação e conforto de leitura aceitos pelo usuário em 2026-09-26.** [Verificação, execuções, capturas e limites](../../../planos/tasks/updated-narrative-copy/verification.md). Os resultados históricos acima e aceites criativos independentes permanecem com seus próprios escopos.
+
+## Incremento campfire-hero-bonds — 2026-10-16
+
+[Guia dos lotes e variantes](../guides/campfire-hero-bonds.md) e [relatório corrente](../reports/2026-10-16-campfire-hero-bonds.md). A retirada voluntária passa a existir somente na fogueira após as posições 2/4, inclusive com grupo reduzido. Conversas e reações têm unidades próprias de leitura e checkpoints. Resultados históricos acima não aprovam este candidato; o relatório separa execução, inspeção e aceite humano.

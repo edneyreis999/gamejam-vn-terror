@@ -1,3 +1,4 @@
+import { accepted, finishCamp, rejectUnchanged, socialCamp } from '../helpers/campaign.mjs';
 // IN: independent GDD transcription, pure rules, real MZ/vendor windows in Chrome.
 // OUT: complete death/retreat journeys; roster/progress boundaries use explicit fixtures.
 import assert from 'node:assert/strict';
@@ -184,9 +185,30 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
 });
 canonicalCase('IT-007', 'native selection, removal, full-party feedback and mandatory automatic rosters obey their gates', { timeout: 180000 }, async t => {
   const browser = await tavern(t);
+  async function cancelHeroMenu(input) {
+    await choices(browser, 'hero');
+    const before = await snapshot(browser);
+    const readUnits = await browser.evaluate('$gameSystem._drylandReadUnits');
+    if (input === 'keyboard') await browser.press('Escape', 27);
+    else {
+      await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', x: 10, y: 10, button: 'right', buttons: 2, clickCount: 1 });
+      await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', x: 10, y: 10, button: 'right', buttons: 0, clickCount: 1 });
+    }
+    await browser.waitFor("($gameMessage._drylandChoiceFocus?.key === 'formation' && SceneManager._scene._choiceListWindow?.isOpenAndActive()) || ($gameMessage.hasText() && SceneManager._scene._messageWindow?.pause)");
+    assert.equal(await browser.evaluate('$gameMap.mapId()'), 3, 'Cancelling must return to the tavern, not start a grief conversation');
+    assert.deepEqual(await snapshot(browser), before);
+    assert.deepEqual(await browser.evaluate('$gameSystem._drylandReadUnits'), readUnits);
+    assert.equal(await browser.evaluate('$gameMessage.hasText()'), false);
+  }
+  for (const input of ['keyboard', 'mouse']) {
+    await activate(browser, 'formation', 0);
+    await choices(browser, 'hero');
+    assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.some(item => $gameMessage.choices()[item.ext].includes('ui.social.about'))"), false);
+    await cancelHeroMenu(input);
+  }
   for (let hero = 0; hero < 3; hero++) {
     await activate(browser, 'formation', hero);
-    await activate(browser, 'hero', 1);
+    await activate(browser, 'hero', '\\V[153]');
     await pause(browser);
     assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'), `Dryland_H${hero + 1}`);
     assert.deepEqual((await snapshot(browser)).draftPartyIds, heroes.slice(0, hero + 1));
@@ -199,7 +221,7 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
   }
   const full = await snapshot(browser);
   await activate(browser, 'formation', 3);
-  await activate(browser, 'hero', 1);
+  await activate(browser, 'hero', '\\V[153]');
   await pause(browser);
   assert.equal(await browser.evaluate('$gameScreen.picture(60)?.name()'), 'Dryland_H4');
   assert.equal(await browser.evaluate('$gameMessage.allText()'), heroUnitTexts(97)[0]);
@@ -212,7 +234,7 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
   await choices(browser, 'hero');
   assert.equal(await browser.evaluate('$gameVariables.value(153)'), '$[conv.remove]');
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'), 3);
-  await activate(browser, 'hero', 1);
+  await activate(browser, 'hero', '\\V[153]');
   await returnToTavern(browser);
   assert.deepEqual((await snapshot(browser)).draftPartyIds, ['H2', 'H3']);
   assert.equal(await browser.evaluate('Boolean($gameVariables.value(25))'), false);
@@ -225,20 +247,31 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
     assert.equal(await browser.evaluate('$gameVariables.value(25)'), true);
     await activate(browser, 'formation', 0);
     await choices(browser, 'hero');
-    assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(1)'), count === 4);
+    if (count === 4) {
+      assert.equal(await browser.evaluate("SceneManager._scene._choiceListWindow._list.filter(item => $gameMessage.choices()[item.ext].includes('ui.social.about')).length"), 2);
+      for (const input of ['keyboard', 'mouse']) {
+        await cancelHeroMenu(input);
+        await activate(browser, 'formation', 0);
+        await choices(browser, 'hero');
+      }
+    }
+    const memberIndex = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(item => $gameMessage.choices()[item.ext].includes('\\\\V[153]'))");
+    assert.ok(memberIndex >= 0);
+    assert.equal(await browser.evaluate(`SceneManager._scene._choiceListWindow.isCommandEnabled(${memberIndex})`), count === 4);
     if (count <= 3) {
       const before = await snapshot(browser);
-      await activate(browser, 'hero', 1);
+      await activate(browser, 'hero', '\\V[153]');
       await choices(browser, 'hero');
       assert.deepEqual(await snapshot(browser), before);
       await browser.press('Escape', 27);
       await choices(browser, 'formation');
     } else {
-      await activate(browser, 'hero', 1);
+      await activate(browser, 'hero', '\\V[153]');
       await returnToTavern(browser);
       assert.equal(await browser.evaluate('Boolean($gameVariables.value(25))'), false);
     }
   }
+  assert.deepEqual(browser.exceptions, []);
 });
 
 // INVARIANT: each migrated visit owns its text/read identity and preserves native
@@ -474,4 +507,47 @@ canonicalCase('IT-070', 'native queries and configuration are observational and 
   assert.equal(loading.rejected, true);
   assert.equal(loading.repaired, false);
   assert.deepEqual(browser.exceptions, []);
+});
+
+canonicalCase('UT-076', 'a newly present companion renews only the unread suffix and active topics lock campaign actions', () => {
+  let state = socialCamp(formation(), ['H1','H2','H3']);
+  const topicId = 'camp.h1.church.a';
+  state = accepted(state, 'START_SOCIAL_TOPIC', {topicId});
+  for (const [type, fields] of [['CONTINUE_FROM_CAMP',{}],['REQUEST_RETREAT',{}],['TOGGLE_HERO',{heroId:'H1'}],['START_SOCIAL_TOPIC',{topicId:'camp.h2.church.a'}]]) {
+    rejectUnchanged(state,type,fields,'invalid_transition');
+  }
+  rejectUnchanged(state,'COMPLETE_SOCIAL_TOPIC',{topicId:'camp.h2.church.a'},'invalid_transition');
+  state = accepted(state,'COMPLETE_SOCIAL_TOPIC',{topicId});
+  assert.deepEqual(state.completedSocialUnitIds,[topicId]);
+  assert.equal(rules.topicUnread(state,topicId),false);
+  state = accepted(accepted(state,'REQUEST_RETREAT'),'CONFIRM_RETREAT');
+  state = socialCamp(state,['H1','H5','H8']);
+  assert.deepEqual(rules.topicUnits(state,topicId),[topicId,'interject.h1.h5']);
+  assert.equal(rules.topicUnread(state,topicId),true);
+  state = accepted(accepted(state,'START_SOCIAL_TOPIC',{topicId}),'COMPLETE_SOCIAL_TOPIC',{topicId});
+  assert.equal(rules.topicUnread(state,topicId),false);
+  rejectUnchanged(state,'COMPLETE_SOCIAL_TOPIC',{topicId},'invalid_transition');
+  rejectUnchanged(state,'START_SOCIAL_TOPIC',{topicId:'camp.h2.church.a'},'invalid_transition');
+  rejectUnchanged(state,'START_SOCIAL_TOPIC',{topicId:'camp.h1.church.b'},'invalid_transition');
+});
+canonicalCase('UT-077', 'directional grief is ordered, consumed separately, and renews the contextual tavern bridge', () => {
+  let town = rosterFixture(['H5','H8']);
+  const topicId = 'tavern.h1.h5';
+  assert.deepEqual(rules.topicUnits(town,topicId),[`${topicId}.away`,`${topicId}.first`,`${topicId}.body`]);
+  town = accepted(accepted(town,'START_SOCIAL_TOPIC',{topicId}),'COMPLETE_SOCIAL_TOPIC',{topicId});
+  let state = structuredClone(socialCamp(town,['H3','H1','H4'])); state.phase='camp_arrival';
+  assert.deepEqual(rules.pendingGrief(state),['grief.h1.h5','grief.h1.h8','grief.h3.h8','grief.h4.h5']);
+  rejectUnchanged(state,'FINISH_CAMP_ARRIVAL',{},'invalid_transition');
+  rejectUnchanged(state,'START_SOCIAL_TOPIC',{topicId:'grief.h3.h8'},'invalid_transition');
+  state=accepted(accepted(state,'START_SOCIAL_TOPIC',{topicId:'grief.h1.h5'}),'COMPLETE_SOCIAL_TOPIC',{topicId:'grief.h1.h5'});
+  assert.deepEqual(rules.pendingGrief(state),['grief.h1.h8','grief.h3.h8','grief.h4.h5']);
+  state=finishCamp(state);
+  town=accepted(accepted(state,'REQUEST_RETREAT'),'CONFIRM_RETREAT');
+  assert.deepEqual(rules.topicUnits(town,topicId),[`${topicId}.away`,`${topicId}.after`,`${topicId}.body`]);
+  assert.equal(rules.topicUnread(town,topicId),true);
+  town=accepted(accepted(town,'START_SOCIAL_TOPIC',{topicId}),'COMPLETE_SOCIAL_TOPIC',{topicId});
+  assert.equal(rules.topicUnread(town,topicId),false);
+  assert.ok(rules.eligibleTopics(town,'H1').includes(topicId));
+  assert.deepEqual(rules.eligibleTopics(town,'H5'),[]);
+  assert.deepEqual(rules.pendingGrief(socialCamp(town,['H1','H3','H4'])),[]);
 });

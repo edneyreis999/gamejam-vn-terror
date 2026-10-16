@@ -4,7 +4,7 @@
 **Título internacional para metadados:** The Dryland Drowned\
 **Versão-base:** 4.0, com atualizações incrementais\
 **Data da consolidação-base:** 4 de setembro de 2026\
-**Última atualização:** 29 de setembro de 2026\
+**Última atualização:** 16 de outubro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Idiomas jogáveis:** PT-BR e EN-US; inglês como padrão inicial (localização aprovada, implementação pendente)\
@@ -20,6 +20,8 @@ Este GDD consolida as regras mecânicas do antigo documento canônico v0.7, reap
 **Atualização confirmada em 2026-09-12:** a seção 26 registra as decisões da entrevista de simplificação do EventBridge. Ela substitui as regras anteriores conflitantes de autoria, restauração visual, arquivos de campanha, revisão de saves, controles de leitura e créditos. A implementação permanece pendente; a spec consolidada e suas propostas técnicas foram aprovadas pelo usuário.
 
 **Atualização confirmada em 2026-09-17/18:** a integração dos PRs #15–19 tem escopo de produto aprovado na [spec incremental](../planos/tasks/approved-narrative-dialogue-staging/spec.md). As seções 12.1, 15, 18.2, 19 e 27 registram os recortes substituídos. O conjunto completo da spec e seu projeto técnico foram aprovados em 18/09/2026 após validação; essa aprovação não declara a integração implementada ou verificada. A seção 27 incorpora o enquadramento do prólogo aprovado no PR #19, distinguindo sua entrega de origem das mudanças desta integração.
+
+**Atualização confirmada em 2026-10-16:** a seção 28 e os [GDDRs de fogueiras e vínculos](gddrs/AGENTS.md) registram as pausas nas três rotas, a restrição do recuo voluntário às fogueiras, o novo conteúdo de personagem, o reconhecimento das perdas e os indicadores de conversa inédita. Design aceito, incluindo os esclarecimentos da entrevista da spec. A [spec incremental](../planos/tasks/campfire-hero-bonds/spec.md) e o projeto técnico foram aprovados; o incremento está implementado, com as verificações técnicas e correções registradas na [verificação](../planos/tasks/campfire-hero-bonds/verification.md). Os aceites humanos de texto PT/EN, apresentação e áudio permanecem pendentes.
 
 Histórico de origem, preservado no Git:
 
@@ -50,7 +52,7 @@ O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`
 
 **Sucesso de abordagem em `init-rpg-maker-mz` — Confirmado:** apresentar a consequência por texto nativo do RPG Maker, sem herói nem busto na cena. Reutilizar a mesma imagem de fundo da armadilha, sem ilustração adicional de sucesso. Manter autoria em eventos, leitura no ritmo do jogador e regras de progresso e autosave (ADR-027).
 
-**Controles de encontro em `init-rpg-maker-mz` — Confirmado:** posicionar **Rever descrição** e **Recuar** na parte superior da interface, separados dos diálogos inferiores e das três abordagens. Manter as regras de disponibilidade de cada ação e acesso por mouse e teclado (ADR-026).
+**Controles de encontro em `init-rpg-maker-mz` — baseline histórico, parcialmente substituído em 2026-10-16:** posicionar **Rever descrição** e **Recuar** na parte superior da interface, separados dos diálogos inferiores e das três abordagens. Manter as regras de disponibilidade de cada ação e acesso por mouse e teclado (ADR-026). O [GDDR-001](gddrs/gddr-001-fogueiras-e-ritmo-da-expedicao.md) substitui a oferta de Recuar nos encontros pela oferta nas fogueiras; Rever descrição permanece vigente.
 
 **Releitura de armadilha em `init-rpg-maker-mz` — Confirmado:** antes de escolher uma abordagem, oferecer **Rever descrição** junto das três opções, como ação auxiliar. Reapresentar somente a descrição do encontro atual na janela inferior e retornar às mesmas escolhas, sem alterar sorteio, progresso ou decisões. Não constitui histórico geral nem desfaz uma abordagem já escolhida (ADR-025).
 
@@ -404,8 +406,8 @@ Na falha, o jogador atua como Ivaí e indica quem executará a ação fatal inev
 8. Ivaí acompanha automaticamente.
 9. O jogo prepara cinco posições na rota inicial ou seis no Vilarejo, preservando posições reveladas.
 10. Cada encontro exibe três abordagens, sem indicar viabilidade ou executor.
-11. Antes da escolha, o jogador pode recuar quando o elenco total possui ao menos três vivos.
-12. A escolha de abordagem bloqueia o recuo até a consequência terminar.
+11. Durante a expedição, o recuo voluntário é oferecido somente nas fogueiras após a segunda e a quarta armadilha, com qualquer quantidade de integrantes vivos, inclusive um ou dois. A condição anterior de ao menos três vivos no elenco total foi substituída pelo GDDR-005 (seção 28.1).
+12. Nas armadilhas, não oferecer recuo antes da escolha nem durante a consequência. Nas fogueiras, as conversas são opcionais e o jogador pode seguir sem esgotá-las.
 13. O sistema verifica coletivamente os heróis presentes.
 14. Se a competência interna correspondente estiver presente, ocorre sucesso.
 15. Se estiver ausente, ocorre falha letal.
@@ -912,15 +914,15 @@ A estrutura técnica pode ser reutilizada. Cada abordagem possui um texto de fal
 
 Depois de uma morte, três heróis tornam-se dois e a cobertura máxima cai para quatro competências. Depois de uma segunda morte, resta um herói com duas competências. A expedição prossegue normalmente com esse único herói.
 
-Uma nova expedição permite escolher exatamente três heróis quando o elenco possui quatro ou mais sobreviventes. Com um, dois ou três, todos os sobreviventes formam a expedição automaticamente. O recuo voluntário fica indisponível somente quando restarem menos de três heróis no elenco total.
+Uma nova expedição permite escolher exatamente três heróis quando o elenco possui quatro ou mais sobreviventes. Com um, dois ou três, todos os sobreviventes formam a expedição automaticamente. O recuo voluntário fica disponível nas fogueiras mesmo com apenas um ou dois heróis vivos no elenco total, conforme o GDDR-005 (seção 28.1).
 
 O efeito bola de neve é intencional como tensão, mas precisa de validação para não tornar a continuação uma sequência automática de mortes.
 
 ### 13.5 Recuo e troca de formação
 
-- O jogador pode recuar voluntariamente quando, somando quem está na expedição e quem está na cidade, o elenco total ainda possui ao menos três heróis vivos.
-- O recuo pode ocorrer durante a preparação, entre encontros ou depois de uma armadilha e suas três abordagens serem reveladas.
-- Escolher uma abordagem é o ponto de compromisso: dessa escolha até a resolução completa do sucesso ou do sacrifício, recuar fica indisponível.
+- **Confirmado em 2026-10-16:** durante a expedição, oferecer recuo voluntário somente nas fogueiras após a segunda e a quarta armadilha, conforme o [GDDR-001](gddrs/gddr-001-fogueiras-e-ritmo-da-expedicao.md). Isso substitui a oferta entre encontros e depois de revelar uma armadilha.
+- **Confirmado em 2026-10-16:** permitir recuo na fogueira com qualquer quantidade de integrantes vivos; o [GDDR-005](gddrs/gddr-005-recuo-na-fogueira-com-qualquer-grupo.md) substitui a condição anterior de três vivos no elenco total. Preservar a interação imediata, sem acrescentar confirmação.
+- A preparação continua permitindo organizar a formação antes de partir. Nas armadilhas, recuar fica indisponível antes e depois da escolha de abordagem; retornos automáticos conservam suas regras.
 - Todo recuo reinicia a masmorra na primeira posição.
 - Mortes e atribuições de encontros já reveladas permanecem.
 - Não existe custo, recurso consumido, limite de usos nem punição adicional por recuar.
@@ -1194,6 +1196,8 @@ Os outros vinte pares podem participar de diálogo coletivo, mas não recebem ar
 
 Campos das fichas sobre “querer desistir” são gatilhos dramáticos para confronto e voz, não uma regra de deserção. Heróis vivos só deixam o elenco por sacrifício; não abandonam a campanha por afinidade ou reação narrativa.
 
+**Expansão confirmada em 2026-10-16:** as relações acima orientam intervenções opcionais na fogueira e novos assuntos sobre companheiros mortos na taverna. As 48 conversas-base, sua progressão por pausa e as fronteiras editoriais constam na [seção 28.2](#fogueiras-conversas) e no [GDDR-002](gddrs/gddr-002-conversas-e-vinculos-dos-herois.md); a escrita final permanece pendente.
+
 ### 18.2 Regra dos epílogos
 
 Cada ficha define um único epílogo de sobrevivência, independente da escolha final. Esse texto é conteúdo autoral fixo, não recompensa calculada. Ele só é mostrado se o herói estiver vivo e presente na formação do clímax. A ficha também define uma única despedida, usada em qualquer sacrifício.
@@ -1233,15 +1237,17 @@ Cada ficha define um único epílogo de sobrevivência, independente da escolha 
 - Na formação manual, clicar no herói ou pressionar Enter/Espaço sobre o herói em foco inclui ou retira sua participação. As setas navegam e mostram as falas, preservando a formação escolhida.
 - Heróis escolhidos para a expedição recebem um contorno dourado discreto e ficam um pouco maiores enquanto estiverem selecionados. O destaque persiste quando o jogador consulta outro herói e permanece distinto do foco de navegação. A ampliação preserva o lugar do herói na composição e a leitura da ficha e da fala. Com até três sobreviventes, continua valendo a formação automática e o mesmo destaque para os integrantes.
 - Heróis mortos deixam seus lugares vazios na taverna; os sobreviventes mantêm suas posições na composição. Os mortos continuam identificados como **Morto** na consulta ao elenco e aparecem no memorial final.
-- No primeiro retorno à taverna após a morte de um herói, sua imagem desaparece gradualmente durante **um segundo**. Nos retornos seguintes, seu lugar já está vazio.
-- Se vários heróis morrerem antes do mesmo retorno à taverna, suas imagens desaparecem **simultaneamente**, durante o mesmo intervalo de **um segundo**; os sobreviventes mantêm seus lugares.
-- A preparação permanece disponível durante esse segundo. Se o jogador sair da taverna antes do fim, o efeito termina e não se repete no próximo retorno; os lugares já aparecem vazios.
+- No primeiro retorno à taverna após a morte de um herói, sua imagem desaparece gradualmente durante **três segundos**, independentemente de ter aparecido nas fogueiras. Nos retornos seguintes, seu lugar já está vazio. O efeito de cada local tem o alcance definido na seção 28.3.
+- Se vários heróis morrerem antes do mesmo retorno à taverna, suas imagens desaparecem **simultaneamente**, durante o mesmo intervalo de **três segundos**; os sobreviventes mantêm seus lugares.
+- A preparação permanece disponível durante esses três segundos. Se o jogador sair da taverna antes do fim, o efeito termina e não se repete no próximo retorno; os lugares já aparecem vazios.
 - Com a preferência de redução de movimento do sistema ativada, os lugares aparecem vazios imediatamente, preservando a informação textual das mortes.
 - Esse desaparecimento representa a perda na interface. A morte já ocorreu na expedição e continua permanente durante todo o efeito; a imagem em desaparecimento não permite selecionar o herói nem consultar sua fala como se estivesse vivo.
 
 **Recurso auxiliar de apresentação para `init-rpg-maker-mz` — Confirmado:** incluir HIDE para ocultar temporariamente a interface e contemplar a cena. **Fora do escopo deste incremento:** histórico público de diálogos (LOG), conforme o ADR-005. HIDE não cria investigação por pistas ocultas nem muda decisões da campanha. HIDE ou Tab oculta; Tab ou clique esquerdo restaura sem avançar nem escolher uma opção. Esta decisão não aprova AUTO nem avanço rápido de texto inédito.
 
 **Falha de ilustração em `init-rpg-maker-mz` — Confirmado:** usar o tratamento nativo de erro de carregamento e nova tentativa do RPG Maker, conforme o ADR-009. Não implementar continuação própria somente com texto quando uma ilustração falhar. A apresentação textual continua obrigatória para a informação narrativa durante a partida normal; a decisão não autoriza assets ausentes no pacote entregue.
+
+**Expansão confirmada em 2026-10-16:** acrescentar assuntos `Sobre <herói>` / `About <hero>` para sobreviventes com vínculo com um companheiro morto. Indicadores no herói e etiquetas separadas `NOVO!` / `NEW!` distinguem conteúdo disponível não lido. A extensão do desaparecimento à fogueira, a narração de chegada e as regras de leitura constam na [seção 28](#fogueiras-vinculos); cada chegada real à fogueira apresenta todos os mortos, enquanto a taverna apresenta cada nova perda apenas no primeiro retorno. A apresentação de um local não consome a do outro.
 
 #### 19.1.2 Leitura das cenas
 
@@ -1362,7 +1368,8 @@ As hipóteses abaixo exigem simulação, playtest ou revisão. Um resultado não
 | A sobreposição de competências conserva valor depois de mortes | Simulação após a perda de um e dois heróis |
 | O recuo sem custo não reduz o risco a reconhecimento gratuito | Observação do uso de recuo em campanhas |
 | A mistura dos pools dá identidade suficiente ao Vilarejo | Playtest do terceiro destino completo |
-| A duração cabe em 60 a 75 minutos | Medição de campanhas sem avanço rápido |
+| A duração cabe em 60 a 75 minutos | Medição de campanhas sem avanço rápido, incluindo as conversas opcionais das fogueiras |
+| As conversas aproximam o jogador dos heróis | No playtest, observar se o jogador explica seu interesse por um herói além da utilidade nas armadilhas; julgamento emocional separado da verificação técnica |
 | O clique único de sacrifício não produz frustração inaceitável | Observação de erros de clique e compreensão prévia |
 | O salvamento restaura estado e sorteio sem alterar decisões | Testes de recarga em todos os checkpoints |
 
@@ -1394,7 +1401,7 @@ Balanceamento numérico, ajustes de texto e mudanças de ritmo só podem ser esc
 | Epílogos gerados, adaptados ao final ou para heróis fora do clímax | Requer escrita combinatória e nova regra de elegibilidade |
 | História detalhada da companhia do parque | Requer conteúdo narrativo sem função atual |
 | Técnica e níveis de acabamento por asset | Requer planejamento de Technical Art conforme disponibilidade de Lucas |
-| Animação, lip sync, expressões múltiplas e CGs exclusivos | Requer produção artística adicional; a única exceção aqui aprovada é a transição de desaparecimento de um segundo na taverna, descrita na seção 19.1.1, usando a imagem estática |
+| Animação, lip sync, expressões múltiplas e CGs exclusivos | Requer produção artística adicional; a exceção de desaparecimento de três segundos usando a imagem estática abrange a taverna (seção 19.1.1) e, por decisão de 2026-10-16, a fogueira (seção 28.3); não aprova novas animações de personagem |
 | Vozes, temas por herói, áudio binaural e SFX exclusivo por encontro | Requer produção e QA de áudio adicionais |
 | Assets remotos, código de runtime de terceiros ou comunicação de rede durante a partida | Requer mudança de arquitetura e avaliação de segurança |
 | Aparência final das duas peças do mapa | Requer direção conjunta de UI/UX e Technical Art; funcionalmente, uma é anã, outra é élfica e a sobreposição revela o Vilarejo |
@@ -1446,13 +1453,13 @@ Com quatro ou mais sobreviventes, o jogador escolhe três; com até três, todos
 
 Cada encontro apresenta três abordagens. Uma competência presente garante sucesso; uma ausente produz falha letal. Competências nunca são nomeadas ao jogador. Na falha, um único clique escolhe a vítima presente, sem confirmação ou desfazer; a morte e o estado são salvos imediatamente.
 
-Caminho da Igreja e Parque das Águas Assombradas usam cinco encontros sorteados de pools distintos. O Vilarejo usa os seis restantes. Posições reveladas e mortes persistem; recuar reinicia a rota. As peças anã e élfica do mapa liberam o Vilarejo, onde a outra metade do medalhão e o registro de Palotina revelam os dois resultados.
+Caminho da Igreja e Parque das Águas Assombradas usam cinco encontros sorteados de pools distintos. O Vilarejo usa os seis restantes. Cada rota tem fogueiras após o segundo e o quarto encontro; somente nelas é oferecido recuo voluntário durante a expedição, mesmo com um ou dois sobreviventes, conforme a seção 28.1. Posições reveladas e mortes persistem; recuar reinicia a rota. As peças anã e élfica do mapa liberam o Vilarejo, onde a outra metade do medalhão e o registro de Palotina revelam os dois resultados.
 
 Somente heróis vivos presentes após o sexto encontro opinam e têm seu epílogo predefinido exibido, usando a fonte atualizada da seção 15.1. Mortos aparecem no memorial; vivos na cidade não participam. Reunir o medalhão liberta Floraí e Pérola e mata Ivaí. Destruí-lo salva Ivaí e encerra a maldição, mas permite que Andirá absorva os amantes e suas memórias. Se os oito heróis morrerem, Ivaí morre antes da escolha.
 
 O GDD v4.0 define a visão completa. O recorte de cada incremento do protótipo v2.0 será decidido posteriormente em specs e no Trello.
 
-**Complemento confirmado do ADR-026 para `init-rpg-maker-mz`:** Rever descrição e Recuar no topo ficam acionáveis na fase de escolha das abordagens, conforme suas regras, por PictureChoices. Não ficam ativos durante a apresentação textual; retornam ao terminar a releitura.
+**Complemento do ADR-026 para `init-rpg-maker-mz` — parcialmente substituído em 2026-10-16:** o baseline disponibilizava Rever descrição e Recuar no topo na fase de escolha das abordagens, por PictureChoices, fora da apresentação textual. O [GDDR-001](gddrs/gddr-001-fogueiras-e-ritmo-da-expedicao.md) retira Recuar dos encontros e concentra sua oferta nas fogueiras. Rever descrição conserva seu funcionamento e retorna ao terminar a releitura.
 
 **Recebimento das peças em `init-rpg-maker-mz` — Confirmado:** retirar o busto, manter o cenário e apresentar a peça no centro com aparecimento gradual, som curto e mensagem inferior nativa identificando a peça recebida. A imagem permanece até o avanço do jogador. Usar comandos nativos de eventos; manter o orçamento de efeitos e a alternativa sem animação para movimento reduzido (ADR-028).
 
@@ -1540,10 +1547,99 @@ As seções 19.2/19.4 e a [ADR-001 incremental](../planos/tasks/approved-narrati
 
 A cena presente é a Noite da História numa cidade, diante de centenas de criaturas incluindo o jogador. Rheed tornou-se o melhor contador de histórias de Daratrine. Nome da cidade, desenho do local e nova arte continuam fora do incremento. Não acrescentar personagem controlável, plateia desenhada, falas extras ou mecânica de participação do público.
 
-A exclusão original de narração fora do prólogo é ampliada somente para os novos trechos narrados das rotas e do Conselho no PR #16. Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação.
+A exclusão original de narração fora do prólogo foi ampliada, no incremento dos PRs #15–19, somente para os novos trechos narrados das rotas e do Conselho no PR #16. A decisão posterior de 2026-10-16 acrescenta as três aberturas compartilhadas das fogueiras, conforme a [seção 28.3](#fogueiras-perdas) e o [GDDR-003](gddrs/gddr-003-reconhecimento-das-perdas.md). Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação.
 
 ### 27.3 Leitura, entrega e limites
 
 Preservar mapa exclusivo, ritmo do jogador, controles nativos, transferência única à preparação e ausência de repetição em retornos normais à taverna. A leitura usa os checkpoints semânticos existentes, sem acrescentar autosave a cada caixa. Continue parte do último checkpoint bem-sucedido, que pode anteceder uma leitura não salva.
 
 O PR #19 aprovou validar jogos novos e saves produzidos por sua própria versão, sem migrar saves anteriores. O projeto técnico da integração, aprovado pelo usuário em 18/09/2026 após a validação da spec, preserva essa limitação, mantendo arquivos pessoais intocados e sem bloqueio de revisão. O conjunto técnico e o plano de verificação estão aprovados; implementação e evidência do jogo integrado continuam pendentes, separadas dos aceites de produto e da entrega de origem.
+
+---
+
+<a id="fogueiras-vinculos"></a>
+
+## 28. Fogueiras e vínculos entre heróis — 2026-10-16
+
+**Confirmado — design e projeto técnico aprovados; incremento implementado, com verificações técnicas registradas. Aceites humanos de texto, apresentação e áudio pendentes.** As decisões e motivações estão nos [GDDRs](gddrs/AGENTS.md). A [spec incremental](../planos/tasks/campfire-hero-bonds/spec.md) reúne o projeto e a proposta completa dos diálogos PT/EN; a [verificação](../planos/tasks/campfire-hero-bonds/verification.md) registra as evidências, correções e pendências da entrega. A aprovação do design busca aproximar o jogador dos personagens e dar peso às perdas usando uma única ilustração de acampamento; não declara que o efeito emocional já foi comprovado.
+
+<a id="fogueiras-ritmo"></a>
+
+### 28.1 Cadência, escolhas e recuo
+
+| Rotas | Sequência |
+| --- | --- |
+| Caminho da Igreja e Parque das Águas Assombradas | 2 armadilhas → fogueira → 2 armadilhas → fogueira → 1 armadilha → chegada ao destino |
+| Vilarejo Partido | 2 armadilhas → fogueira → 2 armadilhas → fogueira → 2 armadilhas → Conselho |
+
+Em cada fogueira, o jogador pode conversar com todos, alguns ou nenhum dos heróis vivos presentes. A leitura opcional não impede continuar ou recuar. As pausas usam `Dryland_Camp.png`, sem exigir nova ilustração por rota. Não acrescentam armadilhas nem alteram o sorteio; a próxima armadilha só é revelada depois de continuar.
+
+O recuo voluntário durante a expedição é oferecido somente nessas pausas, com qualquer quantidade de integrantes vivos, mesmo um ou dois no elenco total. Preservar a interação imediata, sem confirmação adicional. Permanecem as consequências do recuo e as regras de retorno automático ou bad ending por perda do último integrante. O acampamento não autoriza trocar integrantes durante a tentativa.
+
+A ambiência do acampamento contém apenas fogo, sem música. A implementação usa o áudio existente Fire1, conforme o contrato de áudio da spec; a mixagem e as transições permanecem sujeitas ao aceite de escuta. Ao sair, restaurar o contexto de áudio da rota ou da taverna.
+
+Fontes: [GDDR-001](gddrs/gddr-001-fogueiras-e-ritmo-da-expedicao.md), parcialmente substituído na elegibilidade pelo [GDDR-005](gddrs/gddr-005-recuo-na-fogueira-com-qualquer-grupo.md); entrevista da spec para a ambiência.
+
+<a id="fogueiras-conversas"></a>
+
+### 28.2 Conteúdo e fronteira editorial
+
+O conjunto da spec contém 48 conversas-base (8 heróis × 3 destinos × 2 pausas), oito intervenções condicionais dos pares, 16 reações direcionais às perdas, 16 novos assuntos na taverna com aberturas contextuais e as três narrações de chegada, todos em PT-BR/EN-US. A [proposta narrativa completa](../planos/tasks/campfire-hero-bonds/campfire-hero-bonds.narrativa.md) aguarda revisão editorial; sua existência não aprova cada fala nem converte novos detalhes biográficos em fatos canônicos.
+
+A primeira pausa oferece a conversa A da rota; a segunda oferece B, sem sorteio entre elas. B funciona sem leitura prévia de A; não enfileirar uma A perdida na segunda fogueira. Repetir uma tentativa oferece os mesmos assuntos e preserva seu histórico de leitura. A conversa não ouvida pode ser encontrada em outra tentativa na pausa correspondente.
+
+Cada conversa deve acrescentar algo à apresentação da taverna e variar cuidado, humor, desejo, medo e conflito. O passado surge por convivência e personalidade, sem fazer de toda conversa um depoimento sobre trauma. O contexto da rota é a ansiedade de chegar ou não ao destino e a expectativa sobre o que encontrarão. Não apresentar como vivenciados detalhes de locais ainda não mostrados, nem presumir encontros específicos do sorteio.
+
+A conversa-base funciona com o herói central e Rheed jovem e/ou Ivaí. Ambos não precisam responder sempre; os três blocos intercalados são referência, não molde obrigatório. O herói pode questionar Ivaí, cuja evasividade deve preservar as revelações do Conselho e a ordem variável das rotas.
+
+Intervenções curtas dos oito pares da seção 18.1 dependem de o companheiro estar vivo e presente. Sem ele, a conversa-base continua natural. Não criar arcos bilaterais para os demais pares.
+
+Fonte: [GDDR-002](gddrs/gddr-002-conversas-e-vinculos-dos-herois.md), complementado pela entrevista e pela proposta da spec.
+
+<a id="fogueiras-perdas"></a>
+
+### 28.3 Chegada, ausência e luto
+
+Antes da cena da fogueira, Rheed mais velho em cores apresenta uma de exatamente três narrações compartilhadas, na apresentação já usada nas narrações do jogo:
+
+| Estado da campanha e da tentativa atual | Tom da abertura |
+| --- | --- |
+| Nenhuma morte na campanha | Alívio e esperança cautelosa |
+| Morte desde a partida ou a fogueira anterior da tentativa atual | Melancolia e ausência recente |
+| Perdas anteriores, sem morte nova nesse intervalo | Continuidade apesar das ausências |
+
+Partir novamente redefine apenas o intervalo de morte recente; não apaga o luto. Não criar variantes desses textos por rota, vítima ou composição. Eles podem se referir ao grupo sem citar nomes.
+
+Após a narração, mostrar o acampamento. Em **toda chegada real**, todos os heróis mortos da campanha aparecem brevemente e desaparecem **juntos em três segundos**, inclusive mortos em expedições anteriores. Vivos fora do grupo atual não aparecem. Com redução de movimento, os lugares dos mortos já estão vazios. O morto nunca fala nem se torna selecionável. Retornar de conversa, menu ou Options não é nova chegada e não repete o efeito.
+
+Em seguida, cada sobrevivente vivo presente com vínculo canônico com um morto recebe sua reação curta automática, **uma vez por direção sobrevivente → morto por campanha**. A morte pode ser de outra expedição e não precisa ter sido testemunhada. Apresentar todas as reações pendentes em ordem de sobrevivente H1–H8 e depois de companheiro H1–H8, sem repetir a abertura de Rheed. Concluir uma reação consome somente aquela reação. As conversas opcionais ficam disponíveis depois. Quando nenhum herói permanece, seguir retorno automático ou bad ending, sem fogueira vazia.
+
+Na taverna, cada nova morte recebe o desaparecimento no primeiro retorno, mesmo que já tenha aparecido nas fogueiras; nos retornos seguintes, o lugar permanece vazio. A apresentação de um local não consome a do outro.
+
+Os sobreviventes com vínculo recebem assuntos opcionais sobre companheiros mortos. Quem ficou na cidade não fala como testemunha; quem já reagiu na fogueira desenvolve o sentimento em vez de repetir a reação. Ler esse assunto não consome a reação futura da fogueira. Nomes preparados para as caixas de texto derivam dos fatos da campanha, sem uma lista independente de mortes.
+
+Fontes: [GDDR-003](gddrs/gddr-003-reconhecimento-das-perdas.md), parcialmente substituído pelo [GDDR-006](gddrs/gddr-006-memoria-das-perdas-entre-expedicoes.md).
+
+<a id="fogueiras-novidades"></a>
+
+### 28.4 Assuntos e indicadores de novidade
+
+**Refinamento confirmado em 2026-10-16:** nas duas cenas, usar o ícone 04 do IconSet instalado (balão branco com reticências), estático em 32×32 e centralizado 4 px acima da placa do nome; restaurar o nome centralizado em 18 px, preservando ✓. Esta atualização substitui a versão anterior com desenho dentro da placa; a fogueira passa a ter nomes acima da cabeça, como a taverna. Retirar a caixa inferior de nova conversa e preservar `NOVO!` / `NEW!` nas opções. O desaparecimento dura três segundos no total em ambos os locais. Nas novas conversas, seguir o enquadramento individual do Talk, mostrar o interlocutor desde a primeira fala e preservar os bustos entre trechos da mesma conversa. Esta decisão atualiza os detalhes de apresentação dos GDDR-003/004/006, sem alterar suas regras de disponibilidade, morte ou leitura.
+
+Na taverna e na fogueira, sinalizar no herói quando existe algum assunto disponível ainda não lido, distinguindo o indicador do destaque de seleção e preservando navegação por teclado. No menu da taverna, manter `Conversar` / `Talk` e apresentar os assuntos elegíveis `Sobre <herói>` / `About <hero>`, com uma opção por companheiro.
+
+Usar etiqueta visual separada, estática e localizada `NOVO!` / `NEW!`, sem concatená-la ao rótulo do botão. O recurso `NEW! Labels` do Items and Equips Core é referência visual; sua consulta não autoriza ativação ou dependência desse plugin nem presume suporte direto às escolhas de diálogo. A composição visual proposta está no contrato de UI/UX da spec e aguarda aceite próprio.
+
+Concluir a conversa consome os trechos efetivamente apresentados. Focar o herói ou abrir seu menu não consome. Assuntos sobre mortos continuam acessíveis depois da leitura; o indicador externo permanece enquanto houver qualquer outro conteúdo disponível não lido. Uma intervenção de companheiro ou ponte de luto que se torne disponível depois pode produzir novidade em um assunto cujo corpo já foi lido. Não sinalizar conversas futuras ou indisponíveis.
+
+O histórico acompanha o save da campanha, independe do idioma e começa novamente em uma campanha nova. **Confirmado na entrevista:** este incremento exige nova campanha, sem migração de saves anteriores, sem apagar arquivos pessoais e sem acrescentar bloqueio por revisão de conteúdo. Os checkpoints de entrada, conclusão de chegada, conversa/reação concluída e saída estão implementados conforme o contrato de programação; não há gravação a cada caixa de texto. As evidências de restauração nativa e seus limites constam na [verificação](../planos/tasks/campfire-hero-bonds/verification.md).
+
+**Exceção Confirmada em 2026-10-16, após o review:** o `Conversar` / `Talk` já existente na taverna mantém a persistência atual; sua leitura é incluída no próximo salvamento normal bem-sucedido. Recarregar antes disso pode fazer `NOVO!` reaparecer e retirar a permissão de FAST daquela conversa. O usuário considera o cenário improvável e o impacto pequeno, e escolheu aceitar esse risco sem acrescentar mecanismo de persistência ou teste dedicado. A exceção não altera os checkpoints dos novos assuntos, reações de luto, mortes e progresso. Decisão registrada na [disposição do F-001](../planos/tasks/campfire-hero-bonds/review-01.md#user-disposition--2026-10-16).
+
+Fonte: [GDDR-004](gddrs/gddr-004-descoberta-de-conversas-ineditas.md), entrevista da spec e decisão posterior ao review acima.
+
+### 28.5 Evidência e apresentação para devlog
+
+O usuário relatou que seus playtests sustentam restringir o recuo às fogueiras. Esse relato não é evidência independente de execução ou balanceamento do novo fluxo. A eficácia emocional deve ser observada no playtest, incluindo se o jogador consegue explicar seu interesse por um herói além da utilidade nas armadilhas. Duração e repetição também exigem revisão.
+
+Momento demonstrável proposto para a futura entrega: entrada na fogueira após uma perda, ausência visual e reação de um sobrevivente; no retorno à taverna, descoberta de um assunto sobre o morto. Captura sugerida: menu do sobrevivente com a etiqueta separada de novidade. São alvos futuros de demonstração, não capturas ou validações já realizadas.

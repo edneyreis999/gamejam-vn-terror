@@ -63,6 +63,17 @@
  * @arg kind
  * @text Dado
  * @type select
+ * @option campTone
+ * @option campTopic
+ * @option campParticipant
+ * @option socialTopic
+ * @option socialTopicCount
+ * @option socialTopicEligible
+ * @option socialTopicUnread
+ * @option socialUnit
+ * @option socialUnitRead
+ * @option pendingGrief
+ * @option deathWitness
  * @option phase
  * @option sequence
  * @option dungeonId
@@ -133,6 +144,10 @@
  * @text Ação da campanha
  * @arg action
  * @type select
+ * @option START_SOCIAL_TOPIC
+ * @option COMPLETE_SOCIAL_TOPIC
+ * @option FINISH_CAMP_ARRIVAL
+ * @option CONTINUE_FROM_CAMP
  * @option BEGIN
  * @option TOGGLE_HERO
  * @option SELECT_DESTINATION
@@ -147,7 +162,7 @@
  * @option NEW_CAMPAIGN
  * @arg value
  * @text Identidade
- * @type select
+ * @type combo
  * @option (nenhuma)
  * @value
  * @option H1
@@ -223,6 +238,10 @@
  * @text Salvar ponto da campanha
  * @arg reason
  * @type select
+ * @option camp_entry
+ * @option camp_arrival_complete
+ * @option social_complete
+ * @option camp_exit
  * @option new_campaign
  * @option departure
  * @option reveal
@@ -254,6 +273,7 @@
   }
   function validateCheckpoint(reason, state, context) {
     const phases = {
+      camp_entry: ['camp_arrival'], camp_arrival_complete: ['camp'], social_complete: ['formation','camp','camp_arrival'], camp_exit: ['formation','dungeon_intro'],
       new_campaign: ['intro'], departure: ['dungeon_intro'], reveal: ['encounter_intro'], approach: ['approach_result'],
       sacrifice: ['death_result'], consequence: ['dungeon_intro', 'sacrifice_choice', 'automatic_retreat', 'dungeon_complete', 'formation'],
       reward: ['dungeon_complete', 'council'], council: ['council'], ending: ['ending']
@@ -262,7 +282,7 @@
       context.messageBusy === false;
     const phaseMatches = phases[reason]?.includes(state?.phase);
     const cursorSafe = !state?.reading || state.reading.index === 0 || reason === 'reward';
-    if (!safe || !phaseMatches || !cursorSafe || (reason === 'departure' && state.reading?.sceneId !== `threshold.${state.dungeonId}`)) {
+    if (!safe || !phaseMatches || !cursorSafe || (['camp_arrival_complete','social_complete','camp_exit'].includes(reason) && (state?.activeSocialTopicId || state?.reading)) || (reason === 'departure' && state.reading?.sceneId !== `threshold.${state.dungeonId}`)) {
       return { ok: false, error: { code: 'invalid_checkpoint', message: 'O ponto de salvamento é inválido.' } };
     }
     return { ok: true };
@@ -278,7 +298,7 @@
   const actionFields = freeze({ BEGIN: null, TOGGLE_HERO: 'heroId', SELECT_DESTINATION: 'dungeonId',
     DEPART: null, ENTER_DUNGEON: null, CHOOSE_APPROACH: 'approachId', SELECT_VICTIM: 'heroId',
     REQUEST_RETREAT: null, CANCEL_RETREAT: null, CONFIRM_RETREAT: null, CHOOSE_ENDING: 'ending',
-    NEW_CAMPAIGN: null });
+    NEW_CAMPAIGN: null, START_SOCIAL_TOPIC: 'topicId', COMPLETE_SOCIAL_TOPIC: 'topicId', FINISH_CAMP_ARRIVAL: null, CONTINUE_FROM_CAMP: null });
   function validateBridgeAction(args, readVariable, variableCount) {
     if (!args || typeof args !== 'object' || !hasOwn(actionFields, args.action) ||
         Object.keys(args).some(key => !['action', 'value', 'valueVariable', 'resultVariable'].includes(key)) ||
@@ -289,7 +309,7 @@
     const field = actionFields[args.action];
     const matches = !field ? value === '' : typeof value === 'string' &&
       (field === 'heroId' ? /^H[1-8]$/.test(value) : field === 'dungeonId' ? ['physical','supernatural','final'].includes(value) :
-        field === 'approachId' ? /^[AB][1-8]-[1-3]$/.test(value) : ['reunite','destroy'].includes(value));
+        field === 'topicId' ? /^(camp\.h[1-8]\.(church|park|village)\.[ab]|(grief|tavern)\.h[1-8]\.h[1-8])$/.test(value) : field === 'approachId' ? /^[AB][1-8]-[1-3]$/.test(value) : ['reunite','destroy'].includes(value));
     return matches ? { ok: true, field, value } : commandError('invalid_action');
   }
   function validateCapturedContext(value) {
@@ -318,6 +338,17 @@
       return table[identity];
     };
     switch (kind) {
+      case 'campTone': return rules.campTone(state);
+      case 'campTopic': return rules.campTopic(state, id);
+      case 'campParticipant': return state.partyIds.includes(id) && !state.deadHeroIds.includes(id);
+      case 'socialTopic': return rules.eligibleTopics(state, id)[index] || '';
+      case 'socialTopicCount': return rules.eligibleTopics(state, id).length;
+      case 'socialTopicEligible': return rules.eligibleTopics(state, id.split('.')[1]?.toUpperCase() || '').includes(id);
+      case 'socialTopicUnread': return rules.topicUnread(state, id);
+      case 'socialUnit': return rules.topicUnits(state, id)[index] || '';
+      case 'socialUnitRead': return state.completedSocialUnitIds.includes(id);
+      case 'pendingGrief': return rules.pendingGrief(state)[index] || '';
+      case 'deathWitness': return state.deathLocations[id]?.witnessHeroIds[index] || '';
       case 'phase': case 'sequence': return state[kind];
       case 'dungeonId': case 'selectedDungeonId': case 'endingId': return state[kind] || '';
       case 'position': return state.position || 0;
@@ -360,7 +391,11 @@
     }
   }
 
-  const api = freeze({ readConfiguration, query, validateCheckpoint, validateBridgeAction, validateCapturedContext });
+  const api = freeze({ readConfiguration, query, validateCheckpoint, validateBridgeAction, validateCapturedContext,
+    socialTopicUnread: id => rules.eligibleTopics(campaign(), id.split('.')[1]?.toUpperCase() || '').includes(id) && rules.topicUnread(campaign(), id),
+    heroUnread: id => rules.eligibleTopics(campaign(), id).some(topic => rules.topicUnread(campaign(), topic)) ||
+      (campaign().phase === 'formation' && !campaign().deadHeroIds.includes(id) && !$gameSystem._drylandReadUnits.includes(83 + (Number(id.slice(1)) - 1) * 4))
+  });
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.DrylandEventBridge = api;
   if (typeof DataManager === 'undefined') return;
@@ -430,7 +465,10 @@
     });
   };
   function nextCheckpoint(before, after, action) {
-    if (action.type === 'CONFIRM_RETREAT') return 'consequence';
+    if (action.type === 'CONFIRM_RETREAT' || action.type === 'CONTINUE_FROM_CAMP') return 'camp_exit';
+    if (action.type === 'FINISH_CAMP_ARRIVAL') return 'camp_arrival_complete';
+    if (action.type === 'COMPLETE_SOCIAL_TOPIC') return 'social_complete';
+    if (before.phase !== 'camp_arrival' && after.phase === 'camp_arrival') return 'camp_entry';
     const reasons = { BEGIN: 'new_campaign', DEPART: 'departure', ENTER_DUNGEON: 'reveal', CHOOSE_APPROACH: 'approach', SELECT_VICTIM: 'sacrifice', CHOOSE_ENDING: 'ending' };
     if (reasons[action.type]) return reasons[action.type];
     if (action.type !== 'COMPLETE_PASSAGE') return '';

@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { chooseTitle, selectFile } from '../helpers/native-chrome.mjs';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
 import { activate, choices, openDestinations, pause, catalog, readUntilChoices } from '../helpers/formation.mjs';
-import { accepted, complete, failureWithCount } from '../helpers/campaign.mjs';
+import { accepted, complete, failureWithCount, replayUntil } from '../helpers/campaign.mjs';
 import { councilBoundary, finalChoice } from '../helpers/closing.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { discoveryBoundary } from '../helpers/discovery.mjs';
@@ -54,7 +54,7 @@ async function roundTrip(browser,reason,{advance=false}={}){
  const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
  return {reason,file:record.file,sequence:record.state.sequence,phase:record.state.phase,payloadSha256:hash(bytes),indexSha256:hash(indexBytes),nextInput,deathLocations:record.state.deathLocations,stack,reading:record.state.reading,lastAction:record.state.history.at(-1),decisionPending:reason==='reveal'?'CHOOSE_APPROACH':reason==='consequence'&&record.state.phase==='sacrifice_choice'?'SELECT_VICTIM':reason==='council'?'CHOOSE_ENDING':null};
 }
-canonicalCase('IT-014','all nine authored semantic checkpoints save and install exactly their committed campaign through native Continue',{timeout:480000},async t=>{
+canonicalCase('IT-014','authored campaign and camp checkpoints restore their committed state through native Continue',{timeout:480000},async t=>{
  const browser=await entry(t),evidence=[];
  t.after(async()=>{const directory='docs/qa/evidence/init-rpg-maker-mz/task-11/IT-014';await mkdir(directory,{recursive:true});await writeFile(`${directory}/boundaries.json`,JSON.stringify(evidence,null,2)+'\n');});
  // Pause interpreter execution only at completed I/O boundaries so a following
@@ -79,11 +79,23 @@ canonicalCase('IT-014','all nine authored semantic checkpoints save and install 
  await installPhase(browser,failureWithCount(3));await pause(browser);await browser.press('Enter',13);await choices(browser,'sacrifice');
  await arm(browser,'sacrifice');await activate(browser,'sacrifice',0);evidence.push(await roundTrip(browser,'sacrifice'));
  await arm(browser,'consequence');await advanceUntilSaved(browser,'consequence');evidence.push(await roundTrip(browser,'consequence'));
+ if(file===1){
+ await arm(browser,'camp_entry');await installPhase(browser,replayUntil('final-sixth-solo-council',s=>s.position===2&&s.phase==='approach_result'));
+ await advanceUntilSaved(browser,'camp_entry');evidence.push(await roundTrip(browser,'camp_entry'));
+ await arm(browser,'camp_arrival_complete');await advanceUntilSaved(browser,'camp_arrival_complete');evidence.push(await roundTrip(browser,'camp_arrival_complete'));
+ await choices(browser,'camp');await activate(browser,'camp',0);await choices(browser,'hero');
+ await arm(browser,'social_complete');await activate(browser,'hero',0);await advanceUntilSaved(browser,'social_complete');evidence.push(await roundTrip(browser,'social_complete'));
+ assert.ok((await state(browser)).completedSocialUnitIds.includes('camp.h1.church.a'));
+ await choices(browser,'hero');await activate(browser,'hero',1);await choices(browser,'camp');
+ const next=await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(item=>$gameMessage.choices()[item.ext].includes('ui.camp.continue'))");
+ await arm(browser,'camp_exit');await activate(browser,'camp',next);evidence.push(await roundTrip(browser,'camp_exit'));
+ assert.equal((await state(browser)).position,3);
+ }
  await installPhase(browser,discoveryBoundary(file===1?['physical','supernatural']:['supernatural','physical']));await arm(browser,'reward');await advanceUntilSaved(browser,'reward');evidence.push(await roundTrip(browser,'reward',{advance:true}));
  await installPhase(browser,councilBoundary());await arm(browser,'council');await advanceUntilSaved(browser,'council');evidence.push(await roundTrip(browser,'council'));
  await arm(browser,'reward');await advanceUntilSaved(browser,'reward');const medallion=await roundTrip(browser,'reward',{advance:true});assert.equal(medallion.phase,'council');assert.equal(medallion.reading.passageIds[medallion.reading.index],'council.02');evidence.push(medallion);
  await installPhase(browser,finalChoice());await choices(browser,'ending');await arm(browser,'ending');await activate(browser,'ending',file-1);evidence.push(await roundTrip(browser,'ending',{advance:true}));
- assert.deepEqual(evidence.filter(r=>r.file===file).map(r=>r.reason),['new_campaign','departure','reveal','approach','sacrifice','consequence','reward','council','reward','ending']);
+ assert.deepEqual(evidence.filter(r=>r.file===file).map(r=>r.reason),['new_campaign','departure','reveal','approach','sacrifice','consequence',...(file===1?['camp_entry','camp_arrival_complete','social_complete','camp_exit']:[]),'reward','council','reward','ending']);
  const original=await browser.evaluate("StorageManager.loadZip('file1')");if(file===1)firstFileBytes=original;else assert.equal(original,firstFileBytes,'File 2 cannot rewrite file 1 or its reading history');
  }
 });

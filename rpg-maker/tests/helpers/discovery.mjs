@@ -1,3 +1,4 @@
+import { passCamp } from './campaign.mjs';
 import assert from 'node:assert/strict';
 import { chooseTitle, selectFile } from './native-chrome.mjs';
 import { readFile } from 'node:fs/promises';
@@ -10,6 +11,7 @@ export function successfulRoute(state, route) {
   state = accepted(state, 'SELECT_DESTINATION', { dungeonId: route });
   state = finishReading(accepted(state, 'DEPART'));
   for (let position = 1; position <= (route === 'final' ? 6 : 5); position++) {
+    if (state.phase === 'camp_arrival') state = passCamp(state);
     state = complete(accepted(state, 'ENTER_DUNGEON'));
     const id = state.assignments[route][position - 1];
     const index = gdd.encounterPairs[id].findIndex(competency => state.partyIds.some(hero => gdd.heroPairs[hero].includes(competency)));

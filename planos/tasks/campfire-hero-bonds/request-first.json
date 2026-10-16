@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "spec": "planos/tasks/campfire-hero-bonds/spec.md",
+  "requestId": "campfire-first-20261016-02",
+  "consumer": "campfire-hero-bonds",
+  "case": "planos/tasks/campfire-hero-bonds/directed-campfire.mjs",
+  "adapter": "rpg-maker/qa/directed-adapter.mjs",
+  "scenario": {
+    "id": "campfire-first-candidate",
+    "profile": "chrome-desktop",
+    "variant": "physical-first",
+    "configuration": "1280x720-en-normal"
+  },
+  "claims": [
+    {
+      "id": "camp-progression-social-resume",
+      "variant": "physical-first",
+      "sensor": "directed-browser",
+      "group": "camp-sequence",
+      "source": {
+        "id": "camp-progression-social-resume",
+        "variant": "physical-first"
+      },
+      "expected": {
+        "path": "planos/tasks/campfire-hero-bonds/verification.md",
+        "heading": "Runtime scenarios"
+      }
+    }
+  ],
+  "freshness": {
+    "mode": "fresh",
+    "reason": "Recheck compact focused hint and control contrast; raster scale explicitly set."
+  }
+}

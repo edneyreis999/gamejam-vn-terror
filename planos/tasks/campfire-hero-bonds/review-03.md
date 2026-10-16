@@ -1,0 +1,11 @@
+# Review 03 — Presentation refinement, 2026-10-16
+
+Scope: game data delta from local `.artifacts/campfire-presentation-before/`, game-owned conversation indicator, absence suite, directed observer/cases and updated contracts; base/head `e920095`, branch `feat/campfire-hero-bonds`, unstaged working tree. Frozen paths and hashes: `.artifacts/campfire-refinement-candidate-inventory.json` (local evidence). Engine/Coreto and inactive ItemsEquipsCore are excluded and untouched. Original spec implementation remains separately owned by review02.
+
+Independent native review by `/root/refinement_contract_inventory` found no confirmed native defect in Talk framing/mirroring, continuing participants, guest placement, nameplate cleanup, indicator lifecycle or 180-frame wait ownership. It found that old IT-010/011 removal checks covered hitboxes but not current art. Corrected: removal checks cover both [12,13,16] and [26,22,27], while interaction assertions still correctly target the former. IT-009/010/011 pass again in `.artifacts/campfire-refinement-absence-02`.
+
+Parent review/deslop: removed obsolete help override; reused existing native nameplate asset and provider command; no new dependency, renderer, save schema or campaign state. Structured script preserves text, actions, read units and choice order. Reduced-motion and cleanup ownership remain native. No new appearance test; positional assertions removed under project question3, while duration/irreversible loss/reload checks remain. Optional PT setup in the QA observer does not change the default EN path previously collected.
+
+Candidate dispositions: keep runtime data/plugin, canonical behavior tests and registered QA cases/requests; keep current delivery contracts/results. Preserve the one-time transformation as provenance until final acceptance, then consider archival with the other one-time authorship scripts. Raw run material and temporary inventories stay local/ignored. No archive, commit, staging or publication performed.
+
+**Verdict: SHIP for the scoped technical refinement.** PT/reduced run f3ecd89d passed and the plates/three-person composition were visually inspected. The independent review’s test finding is resolved by the refreshed IT-009/010/011 receipt. Human visual/editorial/audio acceptance remains separate.

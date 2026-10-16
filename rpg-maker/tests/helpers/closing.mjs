@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { formation, rules } from './formation.mjs';
-import { accepted, complete, finishReading, replayUntil } from './campaign.mjs';
+import { accepted, complete, finishReading, replayUntil, finishCamp, passCamp } from './campaign.mjs';
 import { successfulRoute } from './discovery.mjs';
 import { readFile } from 'node:fs/promises';
 const gdd = JSON.parse(await readFile(new URL('../fixtures/gdd-competencies.json', import.meta.url), 'utf8'));
@@ -20,6 +20,7 @@ export function councilBoundary(kind = 'collective') {
         state = accepted(state, 'CHOOSE_APPROACH', { approachId: `${id}-${Math.max(index, 0) + 1}` });
         assert.equal(state.pendingOutcome.success, index < 0);
       } else if (state.phase === 'sacrifice_choice') state = accepted(state, 'SELECT_VICTIM', { heroId: state.partyIds[0] });
+      else if (state.phase === 'camp_arrival' || state.phase === 'camp') state = passCamp(state);
       else if (state.reading) state = complete(state);
       else state = accepted(state, 'ENTER_DUNGEON');
     }
@@ -31,7 +32,11 @@ export function councilBoundary(kind = 'collective') {
     state = complete(accepted(finishReading(accepted(state, 'DEPART')), 'ENTER_DUNGEON'));
     state = complete(accepted(state, 'CHOOSE_APPROACH', { approachId: 'A3-1' }));
     state = finishReading(accepted(state, 'SELECT_VICTIM', { heroId: 'H4' }));
-    state = accepted(accepted(state, 'REQUEST_RETREAT'), 'CONFIRM_RETREAT');
+    state = complete(accepted(state, 'ENTER_DUNGEON'));
+    const encounter = state.assignments.physical[state.position - 1];
+    const approach = rules.deriveViability(state.partyIds, encounter).approaches.find(a => a.viable);
+    state = complete(accepted(state, 'CHOOSE_APPROACH', { approachId: approach.id }));
+    state = accepted(accepted(finishCamp(state), 'REQUEST_RETREAT'), 'CONFIRM_RETREAT');
   }
   for (const route of ['physical','supernatural']) state = finishReading(successfulRoute(state, route));
   for (const heroId of ['H1','H2','H3']) state = accepted(state, 'TOGGLE_HERO', { heroId });
