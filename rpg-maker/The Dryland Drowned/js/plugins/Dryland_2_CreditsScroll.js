@@ -14,6 +14,11 @@
 (() => {
     'use strict';
     const isCredits = () => $dataMap && /<drylandCreditsScroll>/.test($dataMap.note);
+    // Surface semantics belong to the composition, independently of a theme.
+    const previousTextSurface = Window_ScrollText.prototype.textSurface;
+    Window_ScrollText.prototype.textSurface = function() {
+        return isCredits() ? 'paper' : (previousTextSurface?.call(this) || 'scene');
+    };
     const scrollRect = Scene_Message.prototype.scrollTextWindowRect;
     Scene_Message.prototype.scrollTextWindowRect = function() {
         if (this instanceof Scene_Map && isCredits()) {

@@ -7,10 +7,10 @@
         "uiAreaHeight": 720,
         "numberFontFilename": "Cinzel-Black.ttf",
         "fallbackFonts": "Verdana",
-        "fontSize": 26,
-        "mainFontFilename": "Alegreya-Regular.ttf",
+        "fontSize": 20,
+        "mainFontFilename": "Outfit.ttf",
         "screenScale": 1,
-        "windowOpacity": 192,
+        "windowOpacity": 255,
         "picturesUpperLimit": 100
     },
     "airship": {

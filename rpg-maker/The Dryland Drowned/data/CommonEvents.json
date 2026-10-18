@@ -281,11 +281,11 @@
                     "ChoiceWindowProperties",
                     "ChoiceWindowProperties",
                     {
-                        "LineHeight:num": "0",
+                        "LineHeight:num": "44",
                         "MinWidth:num": "96",
                         "MaxRows:num": "0",
                         "MaxCols:num": "0",
-                        "TextAlign:str": "center"
+                        "TextAlign:str": "left"
                     }
                 ]
             },
@@ -294,10 +294,10 @@
                 "indent": 0,
                 "parameters": [
                     [
-                        "\\FontChange<Alegreya>$[choice.title.new_game]<Choice Width: 352>",
-                        "\\FontChange<Alegreya>$[choice.title.continue]<Continue>",
-                        "\\FontChange<Alegreya>$[choice.title.options]",
-                        "\\FontChange<Alegreya>$[choice.title.quit]"
+                        "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.new_game]<Choice Width: 352>",
+                        "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.continue]<Continue>",
+                        "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.options]",
+                        "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.quit]"
                     ],
                     -1,
                     0,
@@ -310,7 +310,7 @@
                 "indent": 0,
                 "parameters": [
                     0,
-                    "\\FontChange<Alegreya>$[choice.title.new_game]<Choice Width: 352>"
+                    "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.new_game]<Choice Width: 352>"
                 ]
             },
             {
@@ -323,7 +323,7 @@
                 "indent": 0,
                 "parameters": [
                     1,
-                    "\\FontChange<Alegreya>$[choice.title.continue]<Continue>"
+                    "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.continue]<Continue>"
                 ]
             },
             {
@@ -336,7 +336,7 @@
                 "indent": 0,
                 "parameters": [
                     2,
-                    "\\FontChange<Alegreya>$[choice.title.options]"
+                    "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.options]"
                 ]
             },
             {
@@ -349,7 +349,7 @@
                 "indent": 0,
                 "parameters": [
                     3,
-                    "\\FontChange<Alegreya>$[choice.title.quit]"
+                    "\\FS[22]\\FontChange<CoretoOutfitMedium>$[choice.title.quit]"
                 ]
             },
             {
@@ -382,7 +382,7 @@
                     "ChoiceWindowProperties",
                     "ChoiceWindowProperties",
                     {
-                        "LineHeight:num": "0",
+                        "LineHeight:num": "24",
                         "MinWidth:num": "96",
                         "MaxRows:num": "0",
                         "MaxCols:num": "0",
@@ -5461,7 +5461,7 @@
                 "indent": 0,
                 "parameters": [
                     40,
-                    "Dryland_Button",
+                    "Coreto_PartyCard",
                     1,
                     0,
                     144,
@@ -5741,7 +5741,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[165] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[165] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5768,7 +5768,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[165]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[165]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -5994,7 +5994,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[166] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[166] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6021,7 +6021,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[166]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[166]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6247,7 +6247,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[167] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[167] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6274,7 +6274,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[167]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[167]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6500,7 +6500,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[168] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[168] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6527,7 +6527,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[168]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[168]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6753,7 +6753,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[169] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[169] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -6780,7 +6780,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[169]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[169]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7006,7 +7006,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[170] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[170] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7033,7 +7033,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[170]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[170]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7259,7 +7259,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[171] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[171] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7286,7 +7286,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[171]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[171]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7512,7 +7512,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[172] ✓\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[172] ✓\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7539,7 +7539,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[18]\\\\V[172]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[18]\\\\V[172]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7631,7 +7631,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151] · Auto\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151] · Auto\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7658,7 +7658,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]$[ui.tavern.party] \\\\V[150]/\\\\V[151]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7685,7 +7685,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[40]☰\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[40]☰\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -7721,7 +7721,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[22]$[choice.tavern.depart]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[22]$[choice.tavern.depart]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -8137,6 +8137,146 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_EventBridge",
+                    "Query",
+                    "Query",
+                    {
+                        "kind": "routeStatus",
+                        "id": "final",
+                        "variable": "178",
+                        "switch": "0"
+                    }
+                ]
+            },
+            {
+                "code": 121,
+                "indent": 0,
+                "parameters": [
+                    33,
+                    33,
+                    1
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(178) === 'available'"
+                ]
+            },
+            {
+                "code": 121,
+                "indent": 1,
+                "parameters": [
+                    33,
+                    33,
+                    0
+                ]
+            },
+            {
+                "code": 122,
+                "indent": 1,
+                "parameters": [
+                    178,
+                    178,
+                    0,
+                    4,
+                    "\"$[dest.status.available]\""
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(30) === 'final'"
+                ]
+            },
+            {
+                "code": 122,
+                "indent": 2,
+                "parameters": [
+                    178,
+                    178,
+                    0,
+                    4,
+                    "\"$[dest.status.selected]\""
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 411,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 234,
+                "indent": 1,
+                "parameters": [
+                    74,
+                    [
+                        -70,
+                        -70,
+                        -70,
+                        180
+                    ],
+                    0
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(178) === 'locked'"
+                ]
+            },
+            {
+                "code": 122,
+                "indent": 2,
+                "parameters": [
+                    178,
+                    178,
+                    0,
+                    4,
+                    "\"$[dest.status.locked]\""
+                ]
+            },
+            {
+                "code": 411,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 122,
+                "indent": 2,
+                "parameters": [
+                    178,
+                    178,
+                    0,
+                    4,
+                    "\"$[dest.status.completed]\""
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
                 "code": 231,
                 "indent": 0,
                 "parameters": [
@@ -8189,7 +8329,7 @@
                     {
                         "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"\\\\HexColor<#ffffff>\\\\FS[28]$[ui.dest.title]\"",
+                        "upperleft:json": "\"\\\\HexColor<#360a0b>\\\\FS[28]$[ui.dest.title]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -8452,7 +8592,7 @@
                     {
                         "PictureIDs:arraynum": "[\"75\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[21]\\\\V[173]<br><br>\\\\FS[19]$[dest.physical.desc]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[21]\\\\V[173]<br><br>\\\\FS[19]$[dest.physical.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -8642,7 +8782,7 @@
                     {
                         "PictureIDs:arraynum": "[\"76\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[21]\\\\V[174]<br><br>\\\\FS[19]$[dest.supernatural.desc]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[21]\\\\V[174]<br><br>\\\\FS[19]$[dest.supernatural.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -8711,8 +8851,17 @@
                 ]
             },
             {
-                "code": 231,
+                "code": 111,
                 "indent": 0,
+                "parameters": [
+                    0,
+                    33,
+                    0
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 1,
                 "parameters": [
                     74,
                     "Dryland_Destination_final",
@@ -8725,6 +8874,32 @@
                     255,
                     0
                 ]
+            },
+            {
+                "code": 411,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 231,
+                "indent": 1,
+                "parameters": [
+                    74,
+                    "Coreto_ConcealedMap",
+                    0,
+                    0,
+                    0,
+                    0,
+                    100,
+                    100,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 357,
@@ -8823,8 +8998,17 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 111,
                 "indent": 0,
+                "parameters": [
+                    0,
+                    33,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
                 "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
@@ -8832,7 +9016,7 @@
                     {
                         "PictureIDs:arraynum": "[\"77\"]",
                         "Padding:eval": "12",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[21]\\\\V[175]<br><br>\\\\FS[19]$[dest.final.desc]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[21]\\\\V[175]<br><br>\\\\FS[19]$[dest.final.desc]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -8843,6 +9027,38 @@
                         "lowerright:json": "\"\""
                     }
                 ]
+            },
+            {
+                "code": 411,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "VisuMZ_1_MessageCore",
+                    "PictureTextChange",
+                    "Texto nativo do painel",
+                    {
+                        "PictureIDs:arraynum": "[\"77\"]",
+                        "Padding:eval": "12",
+                        "upperleft:json": "\"\\\\HexColor<#360a0b>\\\\FS[21]$[dest.status.unknown]\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\"",
+                        "lowerright:json": "\"\""
+                    }
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 231,
@@ -8957,7 +9173,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[22]$[choice.dest.close]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[22]$[choice.dest.close]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9191,7 +9407,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]\\\\V[179]/\\\\V[182] · \\\\V[176]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]\\\\V[179]/\\\\V[182] · \\\\V[176]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9199,20 +9415,7 @@
                     }
                 ]
             },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[\"82\"]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
+            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"82\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"82\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -9439,7 +9642,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]\\\\V[180]/\\\\V[183] · \\\\V[177]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]\\\\V[180]/\\\\V[183] · \\\\V[177]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9447,20 +9650,7 @@
                     }
                 ]
             },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[\"83\"]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
-            },
+            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"83\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"83\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -9534,148 +9724,17 @@
                 ]
             },
             {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "Dryland_EventBridge",
-                    "Query",
-                    "Query",
-                    {
-                        "kind": "routeStatus",
-                        "id": "final",
-                        "variable": "178",
-                        "switch": "0"
-                    }
-                ]
-            },
-            {
-                "code": 121,
-                "indent": 0,
-                "parameters": [
-                    33,
-                    33,
-                    1
-                ]
-            },
-            {
                 "code": 111,
                 "indent": 0,
                 "parameters": [
-                    12,
-                    "$gameVariables.value(178) === 'available'"
-                ]
-            },
-            {
-                "code": 121,
-                "indent": 1,
-                "parameters": [
-                    33,
+                    0,
                     33,
                     0
                 ]
             },
             {
-                "code": 122,
-                "indent": 1,
-                "parameters": [
-                    178,
-                    178,
-                    0,
-                    4,
-                    "\"$[dest.status.available]\""
-                ]
-            },
-            {
-                "code": 111,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(30) === 'final'"
-                ]
-            },
-            {
-                "code": 122,
-                "indent": 2,
-                "parameters": [
-                    178,
-                    178,
-                    0,
-                    4,
-                    "\"$[dest.status.selected]\""
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 411,
-                "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 234,
-                "indent": 1,
-                "parameters": [
-                    74,
-                    [
-                        -70,
-                        -70,
-                        -70,
-                        180
-                    ],
-                    0
-                ]
-            },
-            {
-                "code": 111,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(178) === 'locked'"
-                ]
-            },
-            {
-                "code": 122,
-                "indent": 2,
-                "parameters": [
-                    178,
-                    178,
-                    0,
-                    4,
-                    "\"$[dest.status.locked]\""
-                ]
-            },
-            {
-                "code": 411,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 122,
-                "indent": 2,
-                "parameters": [
-                    178,
-                    178,
-                    0,
-                    4,
-                    "\"$[dest.status.completed]\""
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 1,
-                "parameters": []
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
-            },
-            {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "VisuMZ_1_MessageCore",
                     "PictureTextChange",
@@ -9687,7 +9746,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]\\\\V[181]/\\\\V[184] · \\\\V[178]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]\\\\V[181]/\\\\V[184] · \\\\V[178]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -9696,33 +9755,39 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 411,
                 "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 357,
+                "indent": 1,
                 "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
+                    "VisuMZ_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
                     {
-                        "PictureIDs:arraynum": "[\"84\"]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                        "PictureIDs:arraynum": "[\"80\"]",
+                        "Padding:eval": "8",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]$[dest.status.locked]\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\"",
+                        "lowerright:json": "\"\""
                     }
                 ]
             },
             {
-                "code": 357,
+                "code": 412,
                 "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_PictureChoices",
-                    "ChangePictureChoiceSettingsOne",
-                    "ChangePictureChoiceSettingsOne",
-                    {
-                        "PictureIDs:arraynum": "[\"81\"]",
-                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"65\",\"TargetToneGreen:str\":\"65\",\"TargetToneBlue:str\":\"65\",\"TargetToneGray:str\":\"0\"}",
-                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
-                    }
-                ]
+                "parameters": []
             },
+            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"84\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"84\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
+            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"81\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"81\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
             {
                 "code": 108,
                 "indent": 0,
@@ -12857,7 +12922,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[26]$[ui.sacrifice.title]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[26]$[ui.sacrifice.title]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -20385,7 +20450,7 @@
                 "indent": 1,
                 "parameters": [
                     30,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     112,
@@ -20433,7 +20498,7 @@
                     {
                         "PictureIDs:arraynum": "[\"30\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[165]<br>\\\\FS[20]\\\\V[192]<br>\\\\FS[18]\\\\V[200]<br>\\\\V[208]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[165]<br>\\\\FS[20]\\\\V[192]<br>\\\\FS[18]\\\\V[200]<br>\\\\V[208]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -20816,7 +20881,7 @@
                 "indent": 1,
                 "parameters": [
                     31,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     113,
@@ -20864,7 +20929,7 @@
                     {
                         "PictureIDs:arraynum": "[\"31\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[166]<br>\\\\FS[20]\\\\V[193]<br>\\\\FS[18]\\\\V[201]<br>\\\\V[209]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[166]<br>\\\\FS[20]\\\\V[193]<br>\\\\FS[18]\\\\V[201]<br>\\\\V[209]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -21247,7 +21312,7 @@
                 "indent": 1,
                 "parameters": [
                     32,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     114,
@@ -21295,7 +21360,7 @@
                     {
                         "PictureIDs:arraynum": "[\"32\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[167]<br>\\\\FS[20]\\\\V[194]<br>\\\\FS[18]\\\\V[202]<br>\\\\V[210]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[167]<br>\\\\FS[20]\\\\V[194]<br>\\\\FS[18]\\\\V[202]<br>\\\\V[210]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -21678,7 +21743,7 @@
                 "indent": 1,
                 "parameters": [
                     33,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     115,
@@ -21726,7 +21791,7 @@
                     {
                         "PictureIDs:arraynum": "[\"33\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[168]<br>\\\\FS[20]\\\\V[195]<br>\\\\FS[18]\\\\V[203]<br>\\\\V[211]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[168]<br>\\\\FS[20]\\\\V[195]<br>\\\\FS[18]\\\\V[203]<br>\\\\V[211]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -22109,7 +22174,7 @@
                 "indent": 1,
                 "parameters": [
                     34,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     116,
@@ -22157,7 +22222,7 @@
                     {
                         "PictureIDs:arraynum": "[\"34\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[169]<br>\\\\FS[20]\\\\V[196]<br>\\\\FS[18]\\\\V[204]<br>\\\\V[212]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[169]<br>\\\\FS[20]\\\\V[196]<br>\\\\FS[18]\\\\V[204]<br>\\\\V[212]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -22540,7 +22605,7 @@
                 "indent": 1,
                 "parameters": [
                     35,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     117,
@@ -22588,7 +22653,7 @@
                     {
                         "PictureIDs:arraynum": "[\"35\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[170]<br>\\\\FS[20]\\\\V[197]<br>\\\\FS[18]\\\\V[205]<br>\\\\V[213]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[170]<br>\\\\FS[20]\\\\V[197]<br>\\\\FS[18]\\\\V[205]<br>\\\\V[213]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -22971,7 +23036,7 @@
                 "indent": 1,
                 "parameters": [
                     36,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     118,
@@ -23019,7 +23084,7 @@
                     {
                         "PictureIDs:arraynum": "[\"36\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[171]<br>\\\\FS[20]\\\\V[198]<br>\\\\FS[18]\\\\V[206]<br>\\\\V[214]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[171]<br>\\\\FS[20]\\\\V[198]<br>\\\\FS[18]\\\\V[206]<br>\\\\V[214]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -23402,7 +23467,7 @@
                 "indent": 1,
                 "parameters": [
                     37,
-                    "Dryland_DestinationCard",
+                    "Coreto_MemorialCard",
                     0,
                     1,
                     119,
@@ -23450,7 +23515,7 @@
                     {
                         "PictureIDs:arraynum": "[\"37\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[24]\\\\V[172]<br>\\\\FS[20]\\\\V[199]<br>\\\\FS[18]\\\\V[207]<br>\\\\V[215]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[24]\\\\V[172]<br>\\\\FS[20]\\\\V[199]<br>\\\\FS[18]\\\\V[207]<br>\\\\V[215]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -52014,7 +52079,7 @@
                     {
                         "PictureIDs:arraynum": "[\"71\"]",
                         "Padding:eval": "8",
-                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#ffffff>\\\\FS[28]$[ui.cast.title]<br><br>\\\\FS[22]\\\\V[157]<br>\\\\V[158]<br>\\\\V[159]<br>\\\\V[160]<br>\\\\V[161]<br>\\\\V[162]<br>\\\\V[163]<br>\\\\V[164]\"",
+                        "upperleft:json": "\"<WordWrap>\\\\HexColor<#360a0b>\\\\FS[28]$[ui.cast.title]<br><br>\\\\FS[22]\\\\V[157]<br>\\\\V[158]<br>\\\\V[159]<br>\\\\V[160]<br>\\\\V[161]<br>\\\\V[162]<br>\\\\V[163]<br>\\\\V[164]\"",
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
@@ -65311,7 +65376,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[22]$[ui.encounter.label] \\\\V[187]/\\\\V[188] — \\\\V[186]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[22]$[ui.encounter.label] \\\\V[187]/\\\\V[188] — \\\\V[186]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -65383,7 +65448,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.encounter.reread]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]$[choice.encounter.reread]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
@@ -65477,7 +65542,7 @@
                         "up:json": "\"\"",
                         "upperright:json": "\"\"",
                         "left:json": "\"\"",
-                        "center:json": "\"\\\\HexColor<#ffffff>\\\\FS[20]$[choice.encounter.retreat]\"",
+                        "center:json": "\"\\\\HexColor<#360a0b>\\\\FS[20]$[choice.encounter.retreat]\"",
                         "right:json": "\"\"",
                         "lowerleft:json": "\"\"",
                         "down:json": "\"\"",
