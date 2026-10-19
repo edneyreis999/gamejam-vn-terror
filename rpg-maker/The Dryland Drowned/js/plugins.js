@@ -666,6 +666,12 @@ var $plugins =
         }
     },
     {
+        "name": "Dryland_3_CampPortraits",
+        "status": true,
+        "description": "Pixel-aware pointer selection for the layered camp portraits.",
+        "parameters": {}
+    },
+    {
         "name": "Coreto_5_DesignSystem",
         "status": true,
         "description": "[Coreto] Design System 1.0.0",
