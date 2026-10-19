@@ -5,6 +5,12 @@
  * @orderAfter Coreto_1_MessageCore
  * @orderAfter Dryland_Presentation
  * @orderAfter Dryland_EventBridge
+ * @param IndicatorImage
+ * @text Imagem do indicador de conversa
+ * @type file
+ * @dir img/system/
+ * @default
+ * @desc Vazio usa o ícone 4 do IconSet nativo.
  * @command Menu
  * @text Configure conversation choices
  * @arg topics
@@ -26,6 +32,11 @@
   const plugin = 'Dryland_2_ConversationIndicators';
   const hidden = () => Boolean($gameTemp._drylandInterfaceHidden || SceneManager._scene?._messageWindow?.scale.x === 0);
   const label = () => TextManager.getLocalizedText('ui.social.new');
+  const indicatorImage = PluginManager.parameters(plugin).IndicatorImage || '';
+  // Width owned by the adornment, available to any compatible text renderer.
+  Window_ChoiceList.prototype.choiceAdornmentWidth = function() {
+    return $gameMessage._drylandSocialChoices ? this.textWidth(label()) + this.itemPadding() * 3 : 0;
+  };
   function unread(topic) {
     if (!topic) return false;
     if (topic.startsWith('talk:')) return !$gameSystem._drylandReadUnits.includes(Number(topic.slice(5)));
@@ -54,12 +65,12 @@
   }
   const width = Window_ChoiceList.prototype.maxChoiceWidth;
   Window_ChoiceList.prototype.maxChoiceWidth = function() {
-    return width.call(this) + ($gameMessage._drylandSocialChoices ? this.textWidth(label()) + this.itemPadding() * 3 : 0);
+    return width.call(this) + this.choiceAdornmentWidth();
   };
   const itemRect = Window_ChoiceList.prototype.itemRectWithPadding;
   Window_ChoiceList.prototype.itemRectWithPadding = function(index) {
     const rect = itemRect.call(this, index);
-    if ($gameMessage._drylandSocialChoices) rect.width -= this.textWidth(label()) + this.itemPadding() * 3;
+    rect.width -= this.choiceAdornmentWidth();
     return rect;
   };
   const draw = Window_ChoiceList.prototype.drawItemContents;
@@ -87,8 +98,9 @@
     const picture = this.picture();
     const hero = picture?.name() === 'Dryland_Tag' ? picture._drylandConversationHero : null;
     if (hero && !this._drylandConversationBubble) {
-      const bubble = new Sprite(ImageManager.loadSystem('IconSet'));
-      bubble.setFrame(4 * ImageManager.iconWidth, 0, ImageManager.iconWidth, ImageManager.iconHeight);
+      const bubble = new Sprite(ImageManager.loadSystem(indicatorImage || 'IconSet'));
+      if (indicatorImage) bubble.setFrame(0, 0, 32, 32);
+      else bubble.setFrame(4 * ImageManager.iconWidth, 0, ImageManager.iconWidth, ImageManager.iconHeight);
       bubble.anchor.set(0.5, 1);
       this._drylandConversationBubble = bubble;
       this.addChild(bubble);

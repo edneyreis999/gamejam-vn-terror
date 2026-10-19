@@ -7,10 +7,10 @@
         "uiAreaHeight": 720,
         "numberFontFilename": "Cinzel-Black.ttf",
         "fallbackFonts": "Verdana",
-        "fontSize": 26,
-        "mainFontFilename": "Alegreya-Regular.ttf",
+        "fontSize": 20,
+        "mainFontFilename": "Outfit.ttf",
         "screenScale": 1,
-        "windowOpacity": 192,
+        "windowOpacity": 255,
         "picturesUpperLimit": 100
     },
     "airship": {
@@ -809,7 +809,7 @@
         "Camp — next grief",
         "Camp — tone"
     ],
-    "versionId": 15786577,
+    "versionId": 85922657,
     "victoryMe": {
         "name": "Victory1",
         "pan": 0,

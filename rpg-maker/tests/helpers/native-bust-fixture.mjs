@@ -18,10 +18,15 @@ export function appendEnsemble(events) {
 }
 export async function prepareBustFixture(t, label, edit) {
   const directory = await mkdtemp(path.join(tmpdir(), label+'-'));
-  t.after(() => rm(directory, { recursive: true, force: true }));
+  t.after(() => {
+    assert.equal(path.dirname(directory), path.resolve(tmpdir()));
+    return rm(directory, { recursive: true, force: true });
+  });
   for (const entry of await readdir(project, { withFileTypes: true })) {
     const source = path.join(project, entry.name), target = path.join(directory, entry.name);
-    if (entry.isDirectory() && entry.name !== 'data') await symlink(source, target);
+    // Directory junctions preserve the shared read-only assets on Windows
+    // without requiring the privilege used by file/directory symbolic links.
+    if (entry.isDirectory() && entry.name !== 'data') await symlink(source, target, process.platform === 'win32' ? 'junction' : 'dir');
     else await cp(source, target, { recursive: true });
   }
   const file = path.join(directory, 'data/CommonEvents.json');

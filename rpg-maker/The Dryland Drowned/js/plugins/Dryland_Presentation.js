@@ -323,6 +323,11 @@
     const picture = $gameScreen.picture(Number(args.picture));
     if (picture) picture._drylandScrollSkipKey = args.key;
   });
+  // Presentation reports activity; renderers only represent this state.
+  const previousUiActionActive = Sprite_Picture.prototype.uiActionActive;
+  Sprite_Picture.prototype.uiActionActive = function() {
+    return (!!this.picture()?._drylandScrollSkipKey && !!SceneManager._scene?._scrollTextWindow?._text) || !!previousUiActionActive?.call(this);
+  };
   const pictureUiUpdate = Sprite_Picture.prototype.update;
   Sprite_Picture.prototype.update = function() {
     pictureUiUpdate.call(this);
