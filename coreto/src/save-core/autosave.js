@@ -74,6 +74,15 @@ function installAutosave(settings){
     installAutosaveConfirmation(settings);
 }
 function installAutosaveConfirmation(settings){
+    const snapshot=SceneManager.snapForBackground;
+    SceneManager.snapForBackground=function(){
+        const confirmation=this._scene?._autosaveConfirmWindow;
+        if(!confirmation)return snapshot.call(this);
+        const visible=confirmation.visible;
+        confirmation.visible=false;
+        try{return snapshot.call(this);}
+        finally{confirmation.visible=visible;}
+    };
     class Window_AutosaveConfirm extends Window_Base{
         initialize(rect){this._fadeSpeed=0;super.initialize(rect);this.opacity=0;this.contentsOpacity=0;}
         getScreenPosition(){return settings.AutosaveConfirm.ScreenPosition;}

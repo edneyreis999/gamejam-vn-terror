@@ -57,7 +57,8 @@ const convertAniNative = new Function(`return function convert(target,raw){
                 case 'ARRAYFUNC':target[name]=(value===''?[]:JSON.parse(value)).map(code=>new Function(JSON.parse(code)));break;
             }
         }catch(cause){
-            const error=new Error('Cannot evaluate Ani parameter '+storageKey+'.',{cause});
+            const error=new Error('Cannot evaluate Ani parameter '+storageKey+'.');
+            Object.defineProperty(error,'cause',{value:cause,writable:true,configurable:true});
             error.field=storageKey;throw error;
         }
     }

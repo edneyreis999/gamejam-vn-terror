@@ -99,7 +99,7 @@
  * @type note
  * @desc Code to determine used to calculate the X coordinate
  * for each screen position.
- * @default "// Declare Arguments\nconst position = arguments[0].clamp(0, 10);\n\n// Declare Variables\nconst bufferX = 200;\nconst width = Graphics.width - (bufferX * 2);\n\n// Calculate X Position\nx = Math.round(position * width / 10) + bufferX;\nx = x.clamp(bufferX, Graphics.width - bufferX);\n\n// Return X Value\nreturn x;"
+ * @default "// Declare Arguments\nconst position = arguments[0].clamp(0, 10);\n\n// Declare Variables\nconst bufferX = 200;\nconst width = Graphics.width - (bufferX * 2);\n\n// Calculate X Position\nlet x = Math.round(position * width / 10) + bufferX;\nx = x.clamp(bufferX, Graphics.width - bufferX);\n\n// Return X Value\nreturn x;"
  *
  * @param ScreenY:func
  * @text JS: Position Y
@@ -386,7 +386,7 @@
  *
  * @arg Origin:str
  * @text Origin
- * @parent PictureID:eval
+ * @parent PictureID:arrayeval
  * @type select
  * @option Upper Left
  * @option Center
@@ -1463,7 +1463,7 @@ const catalog = {
       "label": "JS: Position X",
       "description": "Code to determine used to calculate the X coordinate\nfor each screen position.",
       "encoding": "func",
-      "nativeDefault": "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nx = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\"",
+      "nativeDefault": "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nlet x = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\"",
       "metadata": {
         "text": [
           "JS: Position X"
@@ -1478,7 +1478,7 @@ const catalog = {
           "Code to determine used to calculate the X coordinate\nfor each screen position."
         ],
         "default": [
-          "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nx = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\""
+          "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nlet x = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\""
         ]
       },
       "context": "JavaScript function body called as Coreto.VNPictureBusts.Settings.ScreenX(position), with this=Settings and arguments[0]=an integer 0..10. Return a finite pixel coordinate; browser/MZ globals such as Graphics are available, but no local x/y variable is supplied. Declare your own local variables. Enter the raw function body in the MZ note editor; for the CLI, provide one JSON string containing that body, without manually double-encoding the native note. All11 coordinates are evaluated, rounded and cached together on first lookup. Changing Settings later does not invalidate that cache; restart the game after parameter edits.",
@@ -2909,7 +2909,7 @@ const catalog = {
           "Change the origin/anchor for bust(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "map/common-event/troop interpreter Bust uses plugin parameters AnchorX (vn api describe VN-P01) and AnchorY (vn api describe VN-P02): fractional image anchors, X 0=left, 0.5=center, 1=right; Y 0=top, 0.5=middle, 1=bottom. Configure these in the Coreto VN Picture Busts Plugin Manager entry using CoretoConfigSource=own, then restart playtest. For example AnchorX=0.5 and AnchorY=1 anchors the bottom center. Center uses (0.5,0.5); Upper Left uses (0,0), independent of those parameters. This command changes the selected existing pictures over Duration frames; it does not edit global Anchor parameters.",
       "availability": "implemented",
       "examples": [
         {
@@ -2971,7 +2971,7 @@ const catalog = {
               "Origin"
             ],
             "parent": [
-              "PictureID:eval"
+              "PictureID:arrayeval"
             ],
             "type": [
               "select"
@@ -2988,7 +2988,7 @@ const catalog = {
               "Bust"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "map/common-event/troop interpreter Bust uses plugin parameters AnchorX (vn api describe VN-P01) and AnchorY (vn api describe VN-P02): fractional image anchors, X 0=left, 0.5=center, 1=right; Y 0=top, 0.5=middle, 1=bottom. Configure these in the Coreto VN Picture Busts Plugin Manager entry using CoretoConfigSource=own, then restart playtest. For example AnchorX=0.5 and AnchorY=1 anchors the bottom center. Center uses (0.5,0.5); Upper Left uses (0,0), independent of those parameters. This command changes the selected existing pictures over Duration frames; it does not edit global Anchor parameters.",
           "availability": "implemented",
           "examples": [
             "Bust"
@@ -3046,7 +3046,7 @@ const catalog = {
               "Origin"
             ],
             "parent": [
-              "PictureID:eval"
+              "PictureID:arrayeval"
             ],
             "type": [
               "select"
@@ -4773,7 +4773,7 @@ const catalog = {
           "MOVE: Move Bust(s) By Coordinates"
         ],
         "desc": [
-          "Move bust(s) relative to current coordinates(s)."
+          "Move busts by pixel offsets from their pending target while moving, or from current coordinates while stationary."
         ]
       },
       "context": "map/common-event/troop interpreter Pixel offset: while picture._duration>0 it adds to the pending target for that axis; otherwise it adds to the current coordinate. Thus consecutive commands can accumulate on an unfinished target. The string Unchanged skips that axis (case-insensitive after trimming). JavaScript source is evaluated per axis; use a finite numeric completion value. Duration starts a new transition and FlipDirection affects horizontal scale, not the offset sign.",
@@ -8573,7 +8573,7 @@ const catalog = {
           "Code to determine used to calculate the X coordinate\nfor each screen position."
         ],
         "default": [
-          "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nx = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\""
+          "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nlet x = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\""
         ]
       },
       "id": "VN-P06"

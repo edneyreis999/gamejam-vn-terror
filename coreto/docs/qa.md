@@ -8,29 +8,30 @@ Na raiz deste projeto, com Node 22.23.2+, use `<jogo>` informado no [índice](..
 
 ```sh
 npm ci --prefix coreto/tools/qa/runner
+node coreto/tools/qa/runner/node_modules/playwright/cli.js install chromium ffmpeg
 node coreto/tools/qa/game-adapter.mjs --project "<jogo>" --output .artifacts/game-qa/ensaio-01
 ```
 
-Prepare Chrome separadamente; ele é o canal padrão. Vídeo exige o FFmpeg do Playwright, instalável com `node coreto/tools/qa/runner/node_modules/playwright/cli.js install ffmpeg`. Não altere os manifests entregues para configurar o seu jogo.
+O padrão é o Chromium completo do Playwright em headless, preparado pelo comando acima. Não altere os manifests entregues para configurar o seu jogo.
 
 O preparador copia o runtime, dados, registry, assets usuais e tabelas CSV/TSV da raiz, preservando eventos e posição inicial. Exclui saves e metadados de sessão. Use um destino novo, fora do jogo. Se o jogo usa assets fora das árvores usuais, crie um adapter próprio fora de `coreto/`; o código entregue continua congelado.
 
 ## Criar um caso
 
-O caso é um módulo `.mjs` com `scenario`, `execute(context)` e `verify(context)`. Este exemplo percorre Novo Jogo e deixa a composição visual pendente de inspeção. Adapte a jornada se seu jogo usa outra tela inicial. Salve como `docs/qa/cases/novo-jogo.mjs` e descreva o esperado em `docs/qa/scenarios/novo-jogo.md`, na seção `Resultado esperado`.
+O caso é um módulo `.mjs` com `scenario`, `execute(context)` e `verify(context)`. Este exemplo verifica o mapa inicial depois de Novo Jogo. A composição visual tem roteiro e resultado de playtest próprios. Adapte a jornada se seu jogo usa outra tela inicial. Salve como `docs/qa/cases/novo-jogo.mjs` e descreva o esperado em `docs/qa/scenarios/novo-jogo.md`, na seção `Resultado esperado`.
 
 ```js
 import assert from 'node:assert/strict';
 
 export const scenario = {
   id: 'novo-jogo',
-  browser: {width: 1280, height: 900, dpr: 1, locale: 'pt-BR', channel: 'chrome'},
+  browser: {width: 1280, height: 900, dpr: 1, locale: 'pt-BR', channel: 'chromium', headless: true},
   requires: ['browser', 'visual', 'public-input'],
   criteria: [{id: 'entrada', variant: 'principal',
     expectedRef: 'docs/qa/scenarios/novo-jogo.md#resultado-esperado'}]
 };
 
-export async function execute({wait, read, input, shot, descriptor}) {
+export async function execute({wait, read, input, captureState, descriptor}) {
   await wait(() => SceneManager._scene?.constructor.name === 'Scene_Title' &&
     SceneManager._scene._commandWindow?.isOpenAndActive());
   await input.key('Enter');
@@ -39,15 +40,15 @@ export async function execute({wait, read, input, shot, descriptor}) {
     SceneManager._scene._fadeDuration === 0 && ImageManager.isReady());
   const mapId = await read('mapa-inicial', () => $gameMap.mapId());
   assert.equal(mapId, descriptor.startState.mapId);
-  await shot('entrada');
+  await captureState('entrada');
 }
 
 export async function verify({artifacts}) {
   return {
-    criteria: [{...scenario.criteria[0], status: 'executed-awaiting-review',
+    criteria: [{...scenario.criteria[0], status: 'pass',
       evidence: artifacts.filter(item => item.id === 'entrada').map(item => item.path),
-      limits: ['Inspecionar composição e legibilidade; sem avaliação de áudio.']}],
-    pendingReviews: ['Comparar entrada.png ao resultado esperado do cenário.']
+      limits: ['Comprova o mapa inicial após Novo Jogo; composição e áudio têm playtest separado.']}],
+    pendingReviews: []
   };
 }
 ```
@@ -65,7 +66,7 @@ No runner, `--project .` indica a raiz externa deste projeto (a pasta que conté
 
 Leia `report.json`, inclusive `status`, `criteria`, `pendingReviews`, `errors`, `network` e `cleanup`. Código de saída 0 pode significar coleta concluída com inspeção pendente. Erros inesperados e falhas de limpeza precisam ser diagnosticados. Preserve a primeira execução falha e produza uma nova coleta somente depois de mudar uma hipótese, correção ou input relevante.
 
-Inspecione imagens/vídeos reais, registre o observado e vincule os artefatos ao cenário do jogo. Áudio exige gravação e audição; ritmo, conforto e intenção artística podem exigir julgamento humano. Não atribua aceite a uma coleta ainda não inspecionada.
+Avalie composição, ritmo, conforto e intenção artística em playtest separado. Asserções automáticas aprovadas não atribuem aceite humano. Para uma investigação visual explícita, passe `--diagnostic "motivo"` e use `shot(id)`; remova as imagens quando resolver o problema. A rotina não persiste screenshots.
 
 ## Recursos do contexto
 
@@ -76,14 +77,15 @@ Inspecione imagens/vídeos reais, registre o observado e vincule os artefatos ao
 | `input.touch.start/move/end` | Toque; exige `browser.hasTouch: true` |
 | `wait(fn, arg)` | Aguarda condição de leitura a cada frame, com timeout |
 | `read(label, fn, arg)` | Registra observação auxiliar; funções são executadas no browser sem closure Node |
-| `shot(id)` | Captura PNG com hash e identidade do documento; IDs únicos por run |
+| `captureState(id)` | Registra observações e inputs em JSON; IDs únicos por run |
+| `shot(id)` | PNG temporário; exige motivo explícito em `--diagnostic` |
 | `reopenPage()` | Nova página no mesmo contexto |
 | `reopenContext()` | Novo contexto preservando o storage capturado; depois faça Load pela UI |
 | `storage.capture(id)` | Captura storage real; exige `scenario.storage.expectedRef` |
 | `audio.start(id, sourceId)`, `audio.stop()` | Grava fonte declarada; ver preparação abaixo |
 | `report`, `descriptor` | Resultados e inventário do jogo, incluindo posição inicial |
 
-`browser.recordVideo: true` registra vídeo sem áudio. `browser.timeoutMs`, `executionTimeoutMs` e `cleanupTimeoutMs` controlam limites de observação, jornada e limpeza; escolha valores pelo comportamento esperado, não para esconder travamentos.
+`browser.recordVideo: true` registra vídeo sem áudio quando o diagnóstico ou playtest o exige. O headless usa saída virtual de áudio do Chromium, preservando WebAudio e captura de amostras; o relatório identifica `audioOutput: virtual`. Declare `browser.audioOutput: 'system'` quando o sensor exigir o dispositivo físico; esse é o padrão em headed. `browser.timeoutMs`, `executionTimeoutMs` e `cleanupTimeoutMs` controlam limites de observação, jornada e limpeza; escolha valores pelo comportamento esperado, não para esconder travamentos.
 
 Para áudio, declare `scenario.audioSources` como um objeto por ID, por exemplo `{master: {path: "WebAudio._masterGainNode", expectedRef: "docs/qa/scenarios/audio.md#esperado"}}`, apontando para um AudioNode existente. Use `audio.start("trecho-01", "master")`. Declare `requires: ['audio-capture', ...]` e use um adapter do jogo que confirme essa capacidade em `describe`; o adapter básico declara somente browser, visual e input público. `audioFormat: 'webm'` usa MediaRecorder; o padrão é WAV. A fonte deve existir depois de uma ação pública que desbloqueie o áudio. Grave, encerre, ouça e registre a avaliação.
 
@@ -98,3 +100,9 @@ Importar checkpoints anteriores exige verificar sua origem e identidade antes do
 Casos avançados podem declarar `scenario.publicCommands` e usar `input.publicCommand(path, args)` para APIs públicas; isso não comprova que a mesma operação é alcançável pela interface. Falhas de I/O controladas usam `scenario.faultIds`, `faults[id]` com `expectedRef` e `fault(id, enabled)`, somente na cópia isolada e com restauração. Consulte os fontes do runner apenas para a interface avançada necessária, sem editá-los.
 
 Para a cobertura do jogo, priorize entrada e continuidade de eventos, escolhas, transferências, extensões locais, save/load e a apresentação atingida pela mudança. Registre cenários, bugs e testes do jogo em sua estrutura própria. Browser não substitui editor, NW.js ou dispositivos físicos quando esses forem o alvo da entrega.
+
+## Eventos, movimento e saves
+
+Ao usar Events & Movement, teste dois eventos que compartilham um nome Self, uma rota com espera, transferência e retorno ao mapa. Confira condições de escolhas, anexos e consumidores ativados durante a mesma jornada. Salve pelo menu, feche o jogo e use Continue antes de repetir a interação; Novo Jogo deve começar com dados próprios novos.
+
+Execute rotas personalizadas no Playtest: a prévia de rotas do editor não interpreta essa gramática. Para doodads, use o Playtest iniciado pelo MZ, F10 e Save and Close; depois reabra o editor e confirme o layout persistido. Colisão por região e decoração são verificações separadas. Faça essas edições em uma cópia descartável e feche o editor antes de alterar seus dados por CLI.

@@ -10,14 +10,16 @@ function installMessageChoices() {
             if (command.indent !== indent) continue;
             if (command.code === 402) command.parameters[0] = branches++;
             if (command.code !== 404) continue;
-            const next = this._list[cursor+1];
+            let nextIndex = cursor + 1;
+            while (this._list[nextIndex]?.indent === indent && [108, 408].includes(this._list[nextIndex].code)) nextIndex++;
+            const next = this._list[nextIndex];
             if (next?.code !== 102 || next.indent !== indent) break;
             const target = this._list[root].parameters;
             if (next.parameters[2] >= 0) target[2] = next.parameters[2]+branches;
             if (next.parameters[1] >= 0) target[1] = next.parameters[1]+branches;
             else if (next.parameters[1] === -2) target[1] = -2;
             target[0].push(...next.parameters[0]);
-            this._list.splice(cursor, 2);
+            this._list.splice(cursor, nextIndex - cursor + 1);
             cursor--;
         }
         return this._list[root].parameters;
@@ -78,6 +80,7 @@ function installMessageChoices() {
             .replace(/<(?:FG|BG)(?:IMG|IMAGE|PIC|PICTURE) *(.*?): (.*?)>/gi, '');
     };
     function passesGates(text, positive, negative, switchNames) {
+        if (globalThis.Imported?.VisuMZ_1_EventsMoveCore) $gameMessage.registerSelfEvent();
         if (new RegExp(`<${negative}>`, 'i').test(text)) return false;
         if (new RegExp(`<${positive}>`, 'i').test(text)) return true;
         for (const [word, any, rejectOn] of [[positive,false,false],[positive,true,false],[negative,false,true],[negative,true,true]]) {

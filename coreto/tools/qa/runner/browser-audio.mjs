@@ -1,6 +1,12 @@
 import {writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
+export function audioOutput(config) {
+  const sink = config.audioOutput ?? (config.headless === false ? 'system' : 'virtual');
+  if (!['system', 'virtual'].includes(sink)) throw new Error('audioOutput must be system or virtual');
+  return {sink, args: sink === 'virtual' ? ['--disable-audio-output', '--use-fake-device-for-media-stream'] : []};
+}
+
 export function createAudioCapture({getPage, identity, report, root, digest, scenario, usedIds = new Set(), register = artifact => report.checkpoints.push(artifact)}) {
   let active;
   const start = async (id, sourceId) => {

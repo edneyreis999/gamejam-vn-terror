@@ -30,7 +30,7 @@
       "key": "AngleEffects",
       "storageKey": "AngleEffects:arraystruct",
       "label": "Angle Effects",
-      "description": "Named angle-effect presets for message glyphs: pendulum amplitudes are degrees, cosine speeds are radians per frame, offsets are frames per glyph, and continuous rotation is degrees per frame. Configure each preset using the fields below.",
+      "description": "Named angle-effect presets for message glyphs: pendulum amplitudes are degrees, cosine speeds are radians per frame, pendulum offsets are frames per glyph and rotation offsets are degrees per glyph, and continuous rotation is degrees per frame. Configure each preset using the fields below.",
       "editorType": "struct<AngleEffect>[]",
       "nativeDefault": "[\"{\\\"Name:str\\\":\\\"Swing\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.25\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowSwing\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.10\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastSwing\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.40\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"Wag\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.25\\\",\\\"PendulumOffset:num\\\":\\\"8\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowWag\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.10\\\",\\\"PendulumOffset:num\\\":\\\"8\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastWag\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.40\\\",\\\"PendulumOffset:num\\\":\\\"8\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"Jelly\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.25\\\",\\\"PendulumOffset:num\\\":\\\"15\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowJelly\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.10\\\",\\\"PendulumOffset:num\\\":\\\"15\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastJelly\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.40\\\",\\\"PendulumOffset:num\\\":\\\"12\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SpinCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-2.4\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowSpinCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-1.8\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastSpinCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-3.6\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SpinCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+2.4\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowSpinCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+1.8\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastSpinCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+3.6\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"RollCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-2.4\\\",\\\"RotationOffset:num\\\":\\\"-12\\\"}\",\"{\\\"Name:str\\\":\\\"SlowRollCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-1.8\\\",\\\"RotationOffset:num\\\":\\\"-9\\\"}\",\"{\\\"Name:str\\\":\\\"FastRollCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-3.6\\\",\\\"RotationOffset:num\\\":\\\"-15\\\"}\",\"{\\\"Name:str\\\":\\\"RollCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+2.4\\\",\\\"RotationOffset:num\\\":\\\"12\\\"}\",\"{\\\"Name:str\\\":\\\"SlowRollCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+1.8\\\",\\\"RotationOffset:num\\\":\\\"9\\\"}\",\"{\\\"Name:str\\\":\\\"FastRollCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+3.6\\\",\\\"RotationOffset:num\\\":\\\"15\\\"}\"]",
       "type": "array",
@@ -2079,7 +2079,7 @@
           "key": "AdjustRect",
           "storageKey": "AdjustRect:eval",
           "label": "Adjust Window Height",
-          "description": "Preserved setting; Ani 1.05 does not use it to change the Options rectangle.",
+          "description": "Preserved compatibility setting. Ani 1.05 parses this value but does not change the Options window height or rectangle.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
@@ -2140,13 +2140,13 @@
           "struct<AngleEffect>[]"
         ],
         "desc": [
-          "Named angle-effect presets for message glyphs: pendulum amplitudes are degrees, cosine speeds are radians per frame, offsets are frames per glyph, and continuous rotation is degrees per frame. Configure each preset using the fields below."
+          "Named angle-effect presets for message glyphs: pendulum amplitudes are degrees, cosine speeds are radians per frame, pendulum offsets are frames per glyph and rotation offsets are degrees per glyph, and continuous rotation is degrees per frame. Configure each preset using the fields below."
         ],
         "default": [
           "[\"{\\\"Name:str\\\":\\\"Swing\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.25\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowSwing\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.10\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastSwing\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.40\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"Wag\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.25\\\",\\\"PendulumOffset:num\\\":\\\"8\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowWag\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.10\\\",\\\"PendulumOffset:num\\\":\\\"8\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastWag\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.40\\\",\\\"PendulumOffset:num\\\":\\\"8\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"Jelly\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.25\\\",\\\"PendulumOffset:num\\\":\\\"15\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowJelly\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.10\\\",\\\"PendulumOffset:num\\\":\\\"15\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastJelly\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"15\\\",\\\"PendulumSpeed:num\\\":\\\"0.40\\\",\\\"PendulumOffset:num\\\":\\\"12\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"0\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SpinCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-2.4\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowSpinCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-1.8\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastSpinCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-3.6\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SpinCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+2.4\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"SlowSpinCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+1.8\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"FastSpinCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+3.6\\\",\\\"RotationOffset:num\\\":\\\"0\\\"}\",\"{\\\"Name:str\\\":\\\"RollCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-2.4\\\",\\\"RotationOffset:num\\\":\\\"-12\\\"}\",\"{\\\"Name:str\\\":\\\"SlowRollCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-1.8\\\",\\\"RotationOffset:num\\\":\\\"-9\\\"}\",\"{\\\"Name:str\\\":\\\"FastRollCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"-3.6\\\",\\\"RotationOffset:num\\\":\\\"-15\\\"}\",\"{\\\"Name:str\\\":\\\"RollCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+2.4\\\",\\\"RotationOffset:num\\\":\\\"12\\\"}\",\"{\\\"Name:str\\\":\\\"SlowRollCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+1.8\\\",\\\"RotationOffset:num\\\":\\\"9\\\"}\",\"{\\\"Name:str\\\":\\\"FastRollCCW\\\",\\\"Angles\\\":\\\"\\\",\\\"Pendulum\\\":\\\"\\\",\\\"PendulumArc:num\\\":\\\"0\\\",\\\"PendulumSpeed:num\\\":\\\"0\\\",\\\"PendulumOffset:num\\\":\\\"0\\\",\\\"Rotation\\\":\\\"\\\",\\\"RotationSpeed:num\\\":\\\"+3.6\\\",\\\"RotationOffset:num\\\":\\\"15\\\"}\"]"
         ]
       },
-      "description": "Named angle-effect presets for message glyphs: pendulum amplitudes are degrees, cosine speeds are radians per frame, offsets are frames per glyph, and continuous rotation is degrees per frame. Configure each preset using the fields below."
+      "description": "Named angle-effect presets for message glyphs: pendulum amplitudes are degrees, cosine speeds are radians per frame, pendulum offsets are frames per glyph and rotation offsets are degrees per glyph, and continuous rotation is degrees per frame. Configure each preset using the fields below."
     },
     {
       "id": "ANI-M-007",
@@ -4050,13 +4050,13 @@
           "Don't"
         ],
         "desc": [
-          "Automatically adjust the options window height?"
+          "Preserved compatibility setting. Ani 1.05 parses this value but does not change the Options window height or rectangle."
         ],
         "default": [
           "true"
         ]
       },
-      "description": "Automatically adjust the options window height?"
+      "description": "Preserved compatibility setting. Ani 1.05 parses this value but does not change the Options window height or rectangle."
     },
     {
       "id": "ANI-M-078",
@@ -4966,14 +4966,14 @@
       "examples": [
         {
           "input": "In an MZ Show Text command: \\EFFECT<Red>Animated text<CLEAR EFFECTS> Normal text",
-          "expected": "With Red configured and Text Effects enabled, subsequent letters/icons animate until the clear tag; earlier glyphs retain their assigned effect."
+          "expected": "With this preset configured and Text Effects enabled, subsequent glyphs/icons receive its constant tone until the clear tag. Earlier glyphs retain their assigned effect; a new page resets the active effect. There is no temporal color cycle in this shipped profile."
         }
       ],
       "diagnostics": {
         "context": "Show Text letters and icons; Text Effects must be enabled. Preset names resolve against the effective configuration at boot.",
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
-      "description": "Shipped ColorEffects preset Red. Use it to animate subsequent Show Text letters and icons. The shipped profile is {\"Name\": \"Red\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[255, 0, 0, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
+      "description": "Shipped ColorEffects preset Red. Applies a constant tone to subsequent Show Text letters and icons: HueShift is 0 and this profile has one tone, so it does not cycle colors over time. The shipped profile is {\"Name\": \"Red\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[255, 0, 0, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
       "writing": "Enable Coreto_0_CoreEngine 0.1.0, Coreto_1_MessageCore 0.1.0 and Coreto_2_AniMsgTextEffects 0.1.0 in that order. Run ani-message effects list --family ColorEffects --json to locate Name=Red in the effective configuration. Its returned index is zero-based and can differ after edits. Update only the desired keys with ani-message effects update --family ColorEffects --index INDEX --value JSON --expected-hash HASH_FROM_LIST --json, replacing HASH_FROM_LIST with result.fileHash from that fresh effects list/get response. A missing or stale hash rejects the mutation. Omitted keys remain unchanged. Run the CLI with --project pointing to the game. Reload the editor after writes and restart the game to load changed presets. The first functional write from inherit materializes own configuration."
     },
     {
@@ -5041,14 +5041,14 @@
       "examples": [
         {
           "input": "In an MZ Show Text command: \\EFFECT<Green>Animated text<CLEAR EFFECTS> Normal text",
-          "expected": "With Green configured and Text Effects enabled, subsequent letters/icons animate until the clear tag; earlier glyphs retain their assigned effect."
+          "expected": "With this preset configured and Text Effects enabled, subsequent glyphs/icons receive its constant tone until the clear tag. Earlier glyphs retain their assigned effect; a new page resets the active effect. There is no temporal color cycle in this shipped profile."
         }
       ],
       "diagnostics": {
         "context": "Show Text letters and icons; Text Effects must be enabled. Preset names resolve against the effective configuration at boot.",
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
-      "description": "Shipped ColorEffects preset Green. Use it to animate subsequent Show Text letters and icons. The shipped profile is {\"Name\": \"Green\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[0, 255, 0, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
+      "description": "Shipped ColorEffects preset Green. Applies a constant tone to subsequent Show Text letters and icons: HueShift is 0 and this profile has one tone, so it does not cycle colors over time. The shipped profile is {\"Name\": \"Green\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[0, 255, 0, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
       "writing": "Enable Coreto_0_CoreEngine 0.1.0, Coreto_1_MessageCore 0.1.0 and Coreto_2_AniMsgTextEffects 0.1.0 in that order. Run ani-message effects list --family ColorEffects --json to locate Name=Green in the effective configuration. Its returned index is zero-based and can differ after edits. Update only the desired keys with ani-message effects update --family ColorEffects --index INDEX --value JSON --expected-hash HASH_FROM_LIST --json, replacing HASH_FROM_LIST with result.fileHash from that fresh effects list/get response. A missing or stale hash rejects the mutation. Omitted keys remain unchanged. Run the CLI with --project pointing to the game. Reload the editor after writes and restart the game to load changed presets. The first functional write from inherit materializes own configuration."
     },
     {
@@ -5116,14 +5116,14 @@
       "examples": [
         {
           "input": "In an MZ Show Text command: \\EFFECT<Blue>Animated text<CLEAR EFFECTS> Normal text",
-          "expected": "With Blue configured and Text Effects enabled, subsequent letters/icons animate until the clear tag; earlier glyphs retain their assigned effect."
+          "expected": "With this preset configured and Text Effects enabled, subsequent glyphs/icons receive its constant tone until the clear tag. Earlier glyphs retain their assigned effect; a new page resets the active effect. There is no temporal color cycle in this shipped profile."
         }
       ],
       "diagnostics": {
         "context": "Show Text letters and icons; Text Effects must be enabled. Preset names resolve against the effective configuration at boot.",
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
-      "description": "Shipped ColorEffects preset Blue. Use it to animate subsequent Show Text letters and icons. The shipped profile is {\"Name\": \"Blue\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[0, 0, 255, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
+      "description": "Shipped ColorEffects preset Blue. Applies a constant tone to subsequent Show Text letters and icons: HueShift is 0 and this profile has one tone, so it does not cycle colors over time. The shipped profile is {\"Name\": \"Blue\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[0, 0, 255, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
       "writing": "Enable Coreto_0_CoreEngine 0.1.0, Coreto_1_MessageCore 0.1.0 and Coreto_2_AniMsgTextEffects 0.1.0 in that order. Run ani-message effects list --family ColorEffects --json to locate Name=Blue in the effective configuration. Its returned index is zero-based and can differ after edits. Update only the desired keys with ani-message effects update --family ColorEffects --index INDEX --value JSON --expected-hash HASH_FROM_LIST --json, replacing HASH_FROM_LIST with result.fileHash from that fresh effects list/get response. A missing or stale hash rejects the mutation. Omitted keys remain unchanged. Run the CLI with --project pointing to the game. Reload the editor after writes and restart the game to load changed presets. The first functional write from inherit materializes own configuration."
     },
     {
@@ -5191,14 +5191,14 @@
       "examples": [
         {
           "input": "In an MZ Show Text command: \\EFFECT<Yellow>Animated text<CLEAR EFFECTS> Normal text",
-          "expected": "With Yellow configured and Text Effects enabled, subsequent letters/icons animate until the clear tag; earlier glyphs retain their assigned effect."
+          "expected": "With this preset configured and Text Effects enabled, subsequent glyphs/icons receive its constant tone until the clear tag. Earlier glyphs retain their assigned effect; a new page resets the active effect. There is no temporal color cycle in this shipped profile."
         }
       ],
       "diagnostics": {
         "context": "Show Text letters and icons; Text Effects must be enabled. Preset names resolve against the effective configuration at boot.",
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
-      "description": "Shipped ColorEffects preset Yellow. Use it to animate subsequent Show Text letters and icons. The shipped profile is {\"Name\": \"Yellow\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[255, 255, 0, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
+      "description": "Shipped ColorEffects preset Yellow. Applies a constant tone to subsequent Show Text letters and icons: HueShift is 0 and this profile has one tone, so it does not cycle colors over time. The shipped profile is {\"Name\": \"Yellow\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[255, 255, 0, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
       "writing": "Enable Coreto_0_CoreEngine 0.1.0, Coreto_1_MessageCore 0.1.0 and Coreto_2_AniMsgTextEffects 0.1.0 in that order. Run ani-message effects list --family ColorEffects --json to locate Name=Yellow in the effective configuration. Its returned index is zero-based and can differ after edits. Update only the desired keys with ani-message effects update --family ColorEffects --index INDEX --value JSON --expected-hash HASH_FROM_LIST --json, replacing HASH_FROM_LIST with result.fileHash from that fresh effects list/get response. A missing or stale hash rejects the mutation. Omitted keys remain unchanged. Run the CLI with --project pointing to the game. Reload the editor after writes and restart the game to load changed presets. The first functional write from inherit materializes own configuration."
     },
     {
@@ -5266,14 +5266,14 @@
       "examples": [
         {
           "input": "In an MZ Show Text command: \\EFFECT<Cyan>Animated text<CLEAR EFFECTS> Normal text",
-          "expected": "With Cyan configured and Text Effects enabled, subsequent letters/icons animate until the clear tag; earlier glyphs retain their assigned effect."
+          "expected": "With this preset configured and Text Effects enabled, subsequent glyphs/icons receive its constant tone until the clear tag. Earlier glyphs retain their assigned effect; a new page resets the active effect. There is no temporal color cycle in this shipped profile."
         }
       ],
       "diagnostics": {
         "context": "Show Text letters and icons; Text Effects must be enabled. Preset names resolve against the effective configuration at boot.",
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
-      "description": "Shipped ColorEffects preset Cyan. Use it to animate subsequent Show Text letters and icons. The shipped profile is {\"Name\": \"Cyan\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[0, 255, 255, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
+      "description": "Shipped ColorEffects preset Cyan. Applies a constant tone to subsequent Show Text letters and icons: HueShift is 0 and this profile has one tone, so it does not cycle colors over time. The shipped profile is {\"Name\": \"Cyan\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[0, 255, 255, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
       "writing": "Enable Coreto_0_CoreEngine 0.1.0, Coreto_1_MessageCore 0.1.0 and Coreto_2_AniMsgTextEffects 0.1.0 in that order. Run ani-message effects list --family ColorEffects --json to locate Name=Cyan in the effective configuration. Its returned index is zero-based and can differ after edits. Update only the desired keys with ani-message effects update --family ColorEffects --index INDEX --value JSON --expected-hash HASH_FROM_LIST --json, replacing HASH_FROM_LIST with result.fileHash from that fresh effects list/get response. A missing or stale hash rejects the mutation. Omitted keys remain unchanged. Run the CLI with --project pointing to the game. Reload the editor after writes and restart the game to load changed presets. The first functional write from inherit materializes own configuration."
     },
     {
@@ -5341,14 +5341,14 @@
       "examples": [
         {
           "input": "In an MZ Show Text command: \\EFFECT<Magenta>Animated text<CLEAR EFFECTS> Normal text",
-          "expected": "With Magenta configured and Text Effects enabled, subsequent letters/icons animate until the clear tag; earlier glyphs retain their assigned effect."
+          "expected": "With this preset configured and Text Effects enabled, subsequent glyphs/icons receive its constant tone until the clear tag. Earlier glyphs retain their assigned effect; a new page resets the active effect. There is no temporal color cycle in this shipped profile."
         }
       ],
       "diagnostics": {
         "context": "Show Text letters and icons; Text Effects must be enabled. Preset names resolve against the effective configuration at boot.",
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
-      "description": "Shipped ColorEffects preset Magenta. Use it to animate subsequent Show Text letters and icons. The shipped profile is {\"Name\": \"Magenta\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[255, 0, 255, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
+      "description": "Shipped ColorEffects preset Magenta. Applies a constant tone to subsequent Show Text letters and icons: HueShift is 0 and this profile has one tone, so it does not cycle colors over time. The shipped profile is {\"Name\": \"Magenta\", \"ForcedColor\": \"\", \"HueShift\": 0, \"InitialHueOffset\": 0, \"colorTones\": [\"[255, 0, 255, 0]\"], \"toneDelay\": 30, \"InitialToneOffset\": 0, \"SmoothToneChange\": \"false\"}. The effective project configuration may change or remove this profile.",
       "writing": "Enable Coreto_0_CoreEngine 0.1.0, Coreto_1_MessageCore 0.1.0 and Coreto_2_AniMsgTextEffects 0.1.0 in that order. Run ani-message effects list --family ColorEffects --json to locate Name=Magenta in the effective configuration. Its returned index is zero-based and can differ after edits. Update only the desired keys with ani-message effects update --family ColorEffects --index INDEX --value JSON --expected-hash HASH_FROM_LIST --json, replacing HASH_FROM_LIST with result.fileHash from that fresh effects list/get response. A missing or stale hash rejects the mutation. Omitted keys remain unchanged. Run the CLI with --project pointing to the game. Reload the editor after writes and restart the game to load changed presets. The first functional write from inherit materializes own configuration."
     },
     {
@@ -7308,7 +7308,7 @@
     },
     "messages": {
       "Coreto_1_MessageCore": "0.1.0",
-      "VisuMZ_1_MessageCore": "1.54"
+      "VisuMZ_1_MessageCore": "1.57"
     },
     "before": {
       "Coreto_2_ExtMessageFunc": "0.1.0",
@@ -7316,8 +7316,8 @@
       "Coreto_2_VNPictureBusts": "0.1.0"
     },
     "integrations": {
-      "VisuMZ_1_OptionsCore": "1.27",
-      "VisuMZ_1_SaveCore": "1.13",
+      "VisuMZ_1_OptionsCore": "1.28",
+      "VisuMZ_1_SaveCore": "1.14",
       "VisuMZ_3_MessageLog": "1.08",
       "VisuMZ_3_MsgLetterSounds": "1.03"
     }

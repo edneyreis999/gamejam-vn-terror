@@ -67,8 +67,11 @@ function installOptionsGameplay(){
         battleUpdate.call(this);
         this.updateOptionsCoreBattleAniSpeed();
     };
+    Scene_Battle.prototype.allowUpdateBattleAniSpeed=function(){
+        return !this._battleAniSpeedLooping&&!BattleManager.isInputting()&&!$gameMessage.isBusy();
+    };
     Scene_Battle.prototype.updateOptionsCoreBattleAniSpeed=function(){
-        if(this._battleAniSpeedLooping||BattleManager.isInputting()||$gameMessage.isBusy())return;
+        if(!this.allowUpdateBattleAniSpeed())return;
         this._battleAniSpeedLooping=true;
         for(let i=0;i<ConfigManager.battleAniSpeed;i++){
             this.update();

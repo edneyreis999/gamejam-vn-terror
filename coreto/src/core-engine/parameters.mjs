@@ -10,7 +10,7 @@ export class CoreError extends Error {
 function valueError(schema, value, path, expected = schema.type) {
     throw new CoreError("INVALID_VALUE", `Invalid value at ${path}; expected ${expected}.`, {
         field: path, received: value, expected,
-        hint: schema.id ? `Use core api describe ${schema.id} to inspect accepted values and defaults.` : "Use core api list to inspect accepted parameter values."
+        discovery: schema.id ? {id:schema.id} : {}
     });
 }
 

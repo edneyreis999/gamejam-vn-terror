@@ -12,7 +12,7 @@ import {parameterOperation} from './parameters.mjs';
 import {join} from 'node:path';
 
 export const sourceFacts=({configuredSource,effectiveSource,materialized})=>({configuredSource,effectiveSource,materialized});
-const prefix=catalog=>({'Coreto_2_ExtMessageFunc':'EXT','Coreto_2_AniMsgTextEffects':'ANI','Coreto_2_VNPictureBusts':'VN','Coreto_1_OptionsCore':'OPT','Coreto_1_SaveCore':'SAV'}[catalog.pluginId]??'CORETO');
+const prefix=catalog=>({'Coreto_1_EventsMoveCore':'EV','Coreto_1_BattleCore':'BATTLE','Coreto_2_ExtMessageFunc':'EXT','Coreto_2_AniMsgTextEffects':'ANI','Coreto_2_VNPictureBusts':'VN','Coreto_1_OptionsCore':'OPT','Coreto_1_SaveCore':'SAV'}[catalog.pluginId]??'CORETO');
 function completeField(field,raw,path){
     if(raw===undefined)return encodeAuthoredValue(field,field.default,path);
     decodeAuthoredValue(field,raw,path);

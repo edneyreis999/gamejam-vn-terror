@@ -8,7 +8,7 @@ import { tagTarget, tagFields } from "./tag-target.mjs";
 
 function descriptor(catalog, key) {
     const tag = catalog.tags.find(tag => tag.key === key || tag.id === key || tag.aliases?.includes(key));
-    if (!tag) throw new CoreError("UNKNOWN_TAG", `Unknown Core tag: ${key}.`, {field: "tag", received: key, hint: "Use core api list to find the supported tag families."}, 3);
+    if (!tag) throw new CoreError("UNKNOWN_TAG", `Unknown tag: ${key}.`, {field: "tag", received: key, discovery:{}}, 3);
     return tag;
 }
 
@@ -40,6 +40,7 @@ function javascriptSpan(tag, match) {
 }
 
 function identity(tag, text) {
+    if (tag.encoding === "block") return text.slice(1, text.indexOf(">")).toUpperCase();
     const heading = text.slice(1, text.indexOf(":") < 0 ? -1 : text.indexOf(":")).toUpperCase();
     if (tag.javascript || tag.key === "enemy-base" || tag.key === "animation-offset") return heading;
     if (/^(?:param|xparam|sparam)-(?:plus|rate|flat|max)$/.test(tag.key)) return heading + (/[%％]>$/.test(text) ? "/percent" : "/number");
@@ -56,7 +57,7 @@ function occurrences(field, tags) {
         const expression = new RegExp(tag.pattern, "gi");
         let match;
         while ((match = expression.exec(field.text))) {
-            const span = tag.javascript ? javascriptSpan(tag, match) : {text: match[0], ambiguous: false};
+            const span = tag.javascript && tag.encoding !== "block" ? javascriptSpan(tag, match) : {text: match[0], ambiguous: false};
             expression.lastIndex = match.index + span.text.length;
             const previous = field.text.slice(0, match.index);
             const line = previous.split("\n").length - 1;
@@ -85,7 +86,7 @@ function encodeTag(tag, value) {
         text = tag.template.replace("{value}", String(value));
     }
     const match = typeof text === "string" && new RegExp(`^(?:${tag.pattern})$`, "i").exec(text);
-    if (!match || /[\r\n]/.test(text)) throw new CoreError("INVALID_TAG_VALUE", "The value must match one complete supported tag format.", {field: "value", received: value, expected: tag.examples, hint: `Run core api describe ${tag.id} --json to inspect formats.`});
+    if (!match || tag.encoding !== "block" && /[\r\n]/.test(text)) throw new CoreError("INVALID_TAG_VALUE", "The value must match one complete supported tag format.", {field: "value", received: value, expected: tag.examples, discovery:{id:tag.id}});
     if (tag.javascript) validateAuthoredCode({javascript: tag.javascript}, match[tag.javascript.capture], tag.id);
     return text;
 }
@@ -97,7 +98,7 @@ function replaceString(document, path, value) {
 
 function writeField(document, field, text) {
     if (field.textTarget) return parseJsonDocument(textOperation(document.source, field.textTarget, {operation: "set", index: field.textIndex, path: field.textPath, value: text}).source);
-    if (field.type !== "troop-comment") return replaceString(document, field.path, text);
+    if (!['troop-comment', 'event-comment', 'common-event-comment'].includes(field.type)) return replaceString(document, field.path, text);
     const lines = text.split("\n");
     // Tags are single-line; retaining the comment's line count preserves every native command index.
     if (lines.length !== field.parts.length) throw new CoreError("INVALID_COMMENT_CHANGE", "A tag edit must preserve native comment line boundaries.");
@@ -133,7 +134,7 @@ export function tagOperation(source, catalog, target, {operation, tag: key, occu
     const end = selected?.end ?? start;
     const before = field.text.slice(0, start);
     const after = field.text.slice(end);
-    const isNote = field.path?.at(-1) === "note";
+    const isNote = field.path?.at(-1) === "note" && field.type !== 'event-note';
     let prefix = "", suffix = "";
     if (!selected && before.length) prefix = isNote ? (/\n$/.test(before) ? "" : "\n") : (/\s$/.test(before) ? "" : " ");
     if (tag.javascript && operation === "set") {
@@ -141,6 +142,7 @@ export function tagOperation(source, catalog, target, {operation, tag: key, occu
         if (after.length && !/^[\r\n]/.test(after)) suffix = "\n";
     }
     const text = before + prefix + encoded + suffix + after;
+    if (operation === 'set' && field.type === 'event-note' && /[\r\n]/.test(text)) throw new CoreError('INVALID_VALUE', 'The MZ event Note is single-line; the editor truncates text after a line break.', {field: 'note', hint: 'Keep event Note tags on one line. Use an existing page Comment block for multiline labels; preserve its 108/408 line boundaries.'});
     const written = writeField(document, field, text);
     const writtenField = tagFields(written, target, selector)[0];
     if (writtenField.text !== text) throw new CoreError("INVALID_POSTCONDITION", "The written tag field differs from the requested edit.", {}, 5);

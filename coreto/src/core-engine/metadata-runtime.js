@@ -56,17 +56,23 @@ function installMetadataOperations() {
     }
     async function request(record, url, options = {}) {
         const controller = new AbortController();
-        const cancel = () => controller.abort(new MetadataError('METADATA_OPERATION_CANCELLED', 'The originating event or scene has ended.'));
+        let cancellationReason;
+        function abort(reason) {
+            if (controller.signal.aborted) return;
+            cancellationReason = reason;
+            controller.abort();
+        }
+        const cancel = () => abort(new MetadataError('METADATA_OPERATION_CANCELLED', 'The originating event or scene has ended.'));
         record.controller.signal.addEventListener('abort', cancel, {once: true});
         if (record.controller.signal.aborted) cancel();
-        const timer = setTimeout(() => controller.abort(new MetadataError('METADATA_TRANSPORT_TIMEOUT', 'The metadata service did not respond within the transport limit.')), record.session.timeoutMs);
+        const timer = setTimeout(() => abort(new MetadataError('METADATA_TRANSPORT_TIMEOUT', 'The metadata service did not respond within the transport limit.')), record.session.timeoutMs);
         try {
             const response = await fetch(url, {...options, signal: controller.signal, cache: 'no-store'});
             // Consume the body before releasing the deadline: headers alone do not complete a read.
             const text = await response.text();
             return {response, text};
         } catch (error) {
-            if (controller.signal.aborted) throw controller.signal.reason;
+            if (controller.signal.aborted) throw cancellationReason;
             throw error;
         } finally {
             clearTimeout(timer);
@@ -150,8 +156,12 @@ function installMetadataOperations() {
         let capability, requestId;
         try {
             capability = session();
-            if (typeof globalThis.crypto?.randomUUID !== 'function' || typeof crypto.subtle?.digest !== 'function') throw new MetadataError('METADATA_BROWSER_CAPABILITY', 'This browser cannot identify and verify a metadata request.');
-            requestId = crypto.randomUUID();
+            if (typeof globalThis.crypto?.getRandomValues !== 'function' || typeof crypto.subtle?.digest !== 'function') throw new MetadataError('METADATA_BROWSER_CAPABILITY', 'This browser cannot identify and verify a metadata request.');
+            const bytes = crypto.getRandomValues(new Uint8Array(16));
+            bytes[6] = (bytes[6] & 0x0f) | 0x40;
+            bytes[8] = (bytes[8] & 0x3f) | 0x80;
+            const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+            requestId = `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
         } catch (error) {
             showFeedback(`Exportação falhou: ${error.message}`);
             console.error(`[${error.code || 'METADATA_SERVICE_REQUIRED'}] ${error.message}`);

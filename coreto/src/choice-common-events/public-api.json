@@ -20,7 +20,7 @@
     },
     "messages": {
       "Coreto_1_MessageCore": "0.1.0",
-      "VisuMZ_1_MessageCore": "1.54"
+      "VisuMZ_1_MessageCore": "1.57"
     }
   },
   "orderAfter": [
@@ -74,8 +74,10 @@
         "choice-text"
       ],
       "availability": "supported",
-      "scopeLimit": "Choose an existing ID in Database > Common Events. ID 0 does nothing; with Coreto Message, a missing ID is ignored. Runs as a separate message Common Event interpreter while choices remain open, on Scene_Map or the event-title map scene; battle choices are not supported. If a label has multiple tags, the last ID wins. The tag is removed from the displayed label.",
-      "dependencies": ["Enable Coreto_3_ChoiceCmnEvts after a Message provider (Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.54); do not enable both Message providers."],
+      "scopeLimit": "Choose an existing ID in Database > Common Events. ID 0 does nothing; with Coreto Message, a missing ID is ignored. Runs as a separate message Common Event interpreter while choices remain open, on Scene_Map or the event-title map scene; battle choices are not supported. If a label has multiple tags, the last ID wins. The tag is removed from the displayed label. Matching is case-insensitive (global, case-insensitive regex flags); <Choice Common Event: 1> and <CHOICE COMMON EVENT: 1> are equivalent. The pattern field shows the regex body without its flags.",
+      "dependencies": [
+        "Enable Coreto_3_ChoiceCmnEvts after a Message provider (Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57); do not enable both Message providers."
+      ],
       "examples": [
         "<Choice Common Event: 1>"
       ]

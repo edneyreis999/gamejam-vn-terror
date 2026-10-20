@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { readFile, realpath, stat } from "node:fs/promises";
-import { extname, join, relative } from "node:path";
+import * as fs from "node:fs/promises";
+import { extname, join, relative, sep } from "node:path";
 import { parseArgs } from "node:util";
 import { createHash, randomBytes } from "node:crypto";
 import { isMainModule, projectRoot, isWithin, nodeCommand } from "../project.mjs";
@@ -56,13 +57,16 @@ function jsonResponse(response, status, value) {
     response.end(JSON.stringify(value));
 }
 
-export async function serveProject({ root: inputRoot, port = 0, fileSystem, basePath='/' }) {
+export async function serveProject({ root: inputRoot, port = 0, fileSystem = fs, basePath='/' }) {
     const root = await projectRoot(inputRoot);
     if(!/^\/(?:[A-Za-z0-9_-]+\/)*$/.test(basePath))throw new Error('Use a basePath beginning and ending with /, with simple path segments.');
     const languageFile=await configuredLanguageFile(root);
     const metadata = createMetadataStore(root, { fileSystem });
     const token = randomBytes(32).toString("hex");
+    const pendingRequests = new Set();
     const server = createServer(async (request, response) => {
+        const completed = Promise.withResolvers();
+        pendingRequests.add(completed.promise);
         try {
             if (request.headers.host !== `127.0.0.1:${server.address().port}`) {
                 response.writeHead(403).end("Invalid host.");
@@ -93,11 +97,11 @@ export async function serveProject({ root: inputRoot, port = 0, fileSystem, base
                 return;
             }
             const target = await realpath(join(root, ...(parts.length ? parts : ["index.html"])));
-            if (!isWithin(root, target) || !isPublicPath(relative(root, target).split("/"),languageFile) || !(await stat(target)).isFile()) {
+            if (!isWithin(root, target) || !isPublicPath(relative(root, target).split(sep),languageFile) || !(await stat(target)).isFile()) {
                 response.writeHead(404).end("Not found.");
                 return;
             }
-            let body = await readFile(target);
+            let body = await fileSystem.readFile(target);
             if (target === join(root, "index.html")) {
                 const session = { schemaVersion: 1, endpoint: basePath+"__coreto/metadata/write", receiptEndpoint: basePath+"__coreto/metadata/receipt", token, timeoutMs: 30000 };
                 const script = `<script>globalThis.CoretoMetadataSession=Object.freeze(${JSON.stringify(session)});</script>`;
@@ -117,6 +121,9 @@ export async function serveProject({ root: inputRoot, port = 0, fileSystem, base
             if (error instanceof MetadataError) { jsonResponse(response, error.status, { status: "failure", error: { code: error.code, message: error.message } }); return; }
             const status = error instanceof URIError ? 400 : ["ENOENT", "ENOTDIR"].includes(error.code) ? 404 : 500;
             response.writeHead(status).end(status === 500 ? "Unable to read project asset." : "Invalid or missing asset.");
+        } finally {
+            pendingRequests.delete(completed.promise);
+            completed.resolve();
         }
     });
     await new Promise((fulfill, reject) => {
@@ -132,7 +139,8 @@ export async function serveProject({ root: inputRoot, port = 0, fileSystem, base
             const stopped = metadata.close();
             const closing = new Promise((fulfill, reject) => server.close(error => error ? reject(error) : fulfill()));
             server.closeAllConnections();
-            await Promise.all([closing, stopped]);
+            try { await Promise.all([closing, stopped]); }
+            finally { await Promise.all([...pendingRequests]); }
         }
     };
 }

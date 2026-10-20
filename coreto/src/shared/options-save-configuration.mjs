@@ -52,9 +52,9 @@ export function validateOptionsSaveProviders(catalog,plugins,globals){
         if(entries.length>1||service==='cores'&&entries.length!==1)fail('DEPENDENCY',`Use one supported ${service} provider.`);
         if(!entries.length)continue;
         const entry=entries[0];
+        if(service!=='cores')continue;
         if(active.indexOf(entry)>=active.indexOf(own))fail('PLUGIN_ORDER',`Place ${entry.name} before ${catalog.pluginId}.`);
-        const apiName=service==='cores'?'CoreEngine':'MessageCore';
-        const version=entry.name.startsWith('Coreto_')?globals.Coreto?.[apiName]?.version:globals.VisuMZ?.[apiName]?.version;
+        const version=entry.name.startsWith('Coreto_')?globals.Coreto?.CoreEngine?.version:globals.VisuMZ?.CoreEngine?.version;
         if(entry.name.startsWith('Coreto_')?version!==supported[entry.name]:version!==Number(supported[entry.name]))fail('DEPENDENCY_VERSION',`Load ${entry.name} ${supported[entry.name]} before ${catalog.pluginId}.`);
     }
     if(active.some(p=>/^(?:Coreto|VisuMZ)_[23]_/.test(p.name)&&active.indexOf(p)<active.indexOf(own)))fail('PLUGIN_ORDER',`Place ${catalog.pluginId} before tier 2/3 consumers.`);

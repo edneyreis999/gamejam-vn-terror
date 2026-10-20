@@ -10,7 +10,7 @@ import { readSnapshot, writeSnapshot, hash } from "./files.mjs";
 
 function commandSchema(catalog, key) {
     const command = catalog.commands.find(command => command.key === key);
-    if (!command) throw new CoreError("UNKNOWN_COMMAND", `Unknown Core command: ${key}.`, { field: "command", received: key, hint: "Use core api list to see published commands." }, 3);
+    if (!command) throw new CoreError("UNKNOWN_COMMAND", `Unknown command: ${key}.`, { field: "command", received: key, discovery:{} }, 3);
     return command;
 }
 

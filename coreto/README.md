@@ -3,7 +3,7 @@
 O jogo está em <code>rpg-maker/The Dryland Drowned</code>, relativo à raiz que contém `coreto/`.
 Neste guia, `<jogo>` significa esse caminho.
 
-A Coreto instalada está em **code freeze**. `coreto/` contém os fontes completos dos plugins, catálogos e ferramentas para consulta e execução; os bundles ficam em `<jogo>/js/plugins/Coreto_*.js`. A IA não deve editar, regenerar ou recompilar nenhum deles. Exceção de 2026-09-30, autorizada pelo dono do projeto: `Object.hasOwn` e `Array.prototype.at` foram trocados por equivalentes em `src/` e nos bundles, porque o Chromium 88 do NW.js do editor MZ 1.10.0 não os tem (veja o postmortem no repositório Coreto). Desenvolva código exclusivo do jogo conforme [extensões](docs/extensoes.md).
+A Coreto instalada está em **code freeze**. `coreto/` contém os fontes completos dos plugins, catálogos e ferramentas para consulta e execução; os bundles ficam em `<jogo>/js/plugins/Coreto_*.js`. A IA não deve editar, regenerar ou recompilar nenhum deles. Desenvolva código exclusivo do jogo conforme [extensões](docs/extensoes.md).
 
 ## Começar
 
@@ -30,7 +30,7 @@ Leia somente o guia pertinente. Consulte a API por namespace e descritor; carreg
 
 ## Ativar os plugins
 
-Em jogo existente, a instalação preserva dados, assets, saves e `js/plugins.js`; copiar um bundle não o ativa. Uma base nova registra Core e Message desativados. Os demais bundles ficam disponíveis para instalação explícita pela CLI, que ativa apenas o plugin solicitado.
+Em jogo existente, a instalação preserva dados, assets, saves e `js/plugins.js`; copiar um bundle não o ativa. Battle também é instalado explicitamente pelo namespace `battle`; filtros e licença acompanham o pacote para os consumidores que os exigem. Uma base nova registra Core e Message desativados. Os demais bundles ficam disponíveis para instalação explícita pela CLI, que ativa apenas o plugin solicitado.
 
 A configuração do jogo é editável: parâmetros, ativação, ordem do registry, eventos e assets. Toda extensão de código fica fora de `coreto/`. Preparar as dependências do runner pelo lock entregue é permitido conforme o guia de QA, sem editar fontes ou manifests.
 

@@ -134,6 +134,10 @@ function installMessageWindow(settings) {
         if(message){message.updatePlacement();message.createContents();}
     });
     messageApi.registerCommand('MessageWindowXyOffsets',function(args){return $gameSystem.setMessageWindowXyOffsets(args.OffsetX,args.OffsetY);});
+    messageApi.registerCommand('MessageRandomize', function(args) {
+        if (!args.messages.length || !args.varID) return;
+        $gameVariables.setValue(args.varID, args.messages[Math.randomInt(args.messages.length)]);
+    });
 }
 installMessageWindow(messageApi.settings);
 

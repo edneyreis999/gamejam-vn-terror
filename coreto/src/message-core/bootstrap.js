@@ -20,22 +20,7 @@ function installMessage() {
     }
     const filename = decodeURIComponent(document.currentScript.src.split('?')[0].split('/').pop());
     if (filename !== `${catalog.pluginId}.js`) messageInstallationError('MESSAGE_FILENAME', `Keep the filename ${catalog.pluginId}.js.`);
-    for (const [name, version] of Object.entries({...catalog.dependencies.consumers, ...catalog.dependencies.integrations})) {
-        const entries = active.filter(plugin => plugin.name === name);
-        if (entries.length > 1) messageInstallationError('MESSAGE_DEPENDENCY_DUPLICATE', `Duplicate plugin: ${name}.`);
-        if (!entries.length) continue;
-        if (!entries[0].description.includes(`[Version ${version}]`)) messageInstallationError('MESSAGE_DEPENDENCY_VERSION', `Use ${name} ${version}.`);
-        if (name in catalog.dependencies.consumers && active.indexOf(entries[0]) < active.indexOf(own)) {
-            messageInstallationError('MESSAGE_CONSUMER_ORDER', `Place ${name} after Message.`);
-        }
-    }
-    if (active.some(plugin => plugin.name === 'VisuMZ_3_StateTooltips')) {
-        for (const name of ['VisuMZ_1_BattleCore', 'VisuMZ_1_SkillsStatesCore']) {
-            const index = active.findIndex(plugin => plugin.name === name);
-            const consumer = active.findIndex(plugin => plugin.name === 'VisuMZ_3_StateTooltips');
-            if (index < 0 || index > consumer) messageInstallationError('MESSAGE_TOOLTIP_DEPENDENCY', `Place ${name} before StateTooltips.`);
-        }
-    }
+    validateMessageDependencies(active, own, catalog.dependencies, messageInstallationError);
     const raw = resolvePluginConfiguration(catalog, $plugins).rawParameters;
     const settings = resolveMessageSettings(catalog.parameters, raw, null);
     const registered = new Set();
@@ -61,7 +46,7 @@ function installMessage() {
     globalThis.Imported.Coreto_1_MessageCore = true;
     globalThis.Imported.VisuMZ_1_MessageCore = true;
     globalThis.VisuMZ ??= {};
-    globalThis.VisuMZ.MessageCore = {version: 1.54, Settings: settings};
+    globalThis.VisuMZ.MessageCore = {version: 1.57, Settings: settings};
     return api;
 }
 

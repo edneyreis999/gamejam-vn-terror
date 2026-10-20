@@ -1,0 +1,58 @@
+function installBattleCore(){
+    const fail=(code,message)=>{throw new CoreError('BATTLE_'+code,message);};
+    if(Utils.RPGMAKER_NAME!=='MZ'||Utils.RPGMAKER_VERSION!==catalog.engine.version)fail('ENGINE_VERSION','Use RPG Maker MZ '+catalog.engine.version+'.');
+    const filename=decodeURIComponent(document.currentScript.src.split('?')[0].split('/').pop());
+    if(filename!==catalog.pluginId+'.js')fail('FILENAME','Keep the filename '+catalog.pluginId+'.js.');
+    const active=$plugins.filter(plugin=>plugin.status);
+    const providers=active.filter(plugin=>[catalog.pluginId,catalog.reference.pluginId].includes(plugin.name));
+    if(providers.length!==1||providers[0].name!==catalog.pluginId||globalThis.Coreto?.BattleCore||globalThis.Imported?.VisuMZ_1_BattleCore)fail('DUPLICATE_PROVIDER','Enable only Coreto_1_BattleCore; the original must not execute.');
+    const own=providers[0],core=active.filter(plugin=>['Coreto_0_CoreEngine','VisuMZ_0_CoreEngine'].includes(plugin.name));
+    if(core.length!==1||core[0].name!=='Coreto_0_CoreEngine'||globalThis.Coreto?.CoreEngine?.version!==catalog.dependencies.cores.Coreto_0_CoreEngine)fail('CORE_REQUIRED','Load Coreto_0_CoreEngine '+catalog.dependencies.cores.Coreto_0_CoreEngine+' before Battle.');
+    if(active.indexOf(core[0])>=active.indexOf(own)||active.some(plugin=>plugin!==own&&/^(Coreto|VisuMZ)_[23]_/.test(plugin.name)&&active.indexOf(plugin)<active.indexOf(own)))fail('PLUGIN_ORDER','Place Battle after Core and before its tier 2/3 consumers.');
+    if(!own.description.includes('[BattleCore]')||!own.description.includes(`[Version ${catalog.version}]`))fail('DESCRIPTION','Refresh the Battle plugin description in the Editor.');
+    for(const plugin of active.filter(plugin=>Object.prototype.hasOwnProperty.call(catalog.dependencies.consumers,plugin.name))) {
+        const version=catalog.dependencies.consumers[plugin.name];
+        if(!plugin.description.includes('[Version '+version+']'))fail('CONSUMER_VERSION','Use '+plugin.name+' '+version+'.');
+    }
+    const {configuration,settings}=resolveBattleConfiguration(catalog,$plugins);
+    const api={pluginId:catalog.pluginId,version:catalog.version,targetVersion:catalog.reference.version,configuration,settings,capabilities:['configuration','mechanics','action-sequences','battle-presentation','public-interfaces']};
+    installBattlePublicInterfaces();
+    installBattleTargets();
+    installBattleArmor();
+    installBattleDamage(settings);
+    installBattleDamageCaps(settings);
+    installBattleLifeSteal();
+    const sequences=installBattleSequenceRuntime(settings);
+    installBattleActionEffects(settings);
+    installBattleFlinch();
+    const baseEquips=Game_Actor.prototype.equips;
+    installBattleMultiWield(sequences);
+    installBattleLifecycle(settings);
+    installBattleAutoBattle(settings);
+    installBattleFormulaValidation(settings);
+    installBattleEvents(settings);
+    installBattleSpriteLayers();
+    installBattlerPresentation(settings);
+    installBattleSideviewEnemies(settings);
+    installBattleEnvironment(settings);
+    installBattleAnimations(settings);
+    installBattleGauges(settings);
+    installBattleDamagePopups(settings);
+    installBattleLog(settings);
+    installBattleCommands(settings);
+    installBattleOptions(settings);
+    installInBattleStatus(settings);
+    installBattleCombo(settings);
+    installBattleSelection(settings);
+    installBattleLayout(settings);
+    installBattleEnemyNames(settings);
+    installBattleEnemyAspects(settings);
+    const commands=installBattleSequenceCommands(sequences,settings);
+    installBattleAutomaticSequences(settings,sequences,commands);
+    api.CheckDamageFormulaForMechanics=checkBattleFormulaForMechanics;
+    Coreto.BattleCore=api;
+    VisuMZ.BattleCore={version:Number(catalog.reference.version),Settings:settings,CheckDamageFormulaForMechanics:checkBattleFormulaForMechanics,Game_Actor_equips:baseEquips};
+    globalThis.Imported??={};Imported[catalog.pluginId]=true;Imported[catalog.reference.pluginId]=true;
+    return api;
+}
+const battleApi=installBattleCore();

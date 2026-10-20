@@ -1,7 +1,11 @@
 function saveCallback(settings,path,receiver,...args){
     const [group,key]=path.split('.');
     try{return settings[group][key].apply(receiver,args);}
-    catch(cause){throw Object.assign(new Error(`Save callback ${path} failed: ${cause.message}`,{cause}),{code:'SAV_CALLBACK_FAILED',field:path});}
+    catch(cause){
+        const error=new Error(`Save callback ${path} failed: ${cause.message}`);
+        Object.defineProperty(error,'cause',{value:cause,writable:true,configurable:true});
+        throw Object.assign(error,{code:'SAV_CALLBACK_FAILED',field:path});
+    }
 }
 
 function installSaveState(settings){

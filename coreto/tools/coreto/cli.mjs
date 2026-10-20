@@ -1,3 +1,6 @@
+import {battleHelp,executeBattleCli} from './battle-cli.mjs';
+import {mainMenuHelp,executeMainMenuCli} from './main-menu-cli.mjs';
+import {eventsMoveHelp,executeEventsMoveCli} from './events-move-cli.mjs';
 import {eventTitleSceneHelp,executeEventTitleSceneCli} from './event-title-scene-cli.mjs';
 import {messageVisibilityHelp,executeMessageVisibilityCli} from './message-visibility-cli.mjs';
 import {attachedPicturesHelp,executeAttachedPicturesCli} from './attached-pictures-cli.mjs';
@@ -47,7 +50,10 @@ async function locateProject(explicit) {
     }
 }
 
-function help(positionals = []) {
+function helpFor(positionals = []) {
+    if(positionals[0]==='main-menu')return mainMenuHelp();
+    if(positionals[0]==='battle')return battleHelp();
+    if(positionals[0]==='events-move')return eventsMoveHelp();
     if(['options','save'].includes(positionals[0]))return optionsSaveHelp(positionals);
     if(positionals[0]==='config') {
         if(positionals.length>2||positionals[1]&&positionals[1]!=='migrate')throw new CoreError('INVALID_USAGE','Use config migrate --help.');
@@ -91,7 +97,7 @@ function help(positionals = []) {
         return messageHelp();
     }
     const result = {
-        namespaces:['event-title-scene','message-visibility','attached-pictures','choice-common-events','picture-choices','core','message','vn','ext-message','ani-message','options','save','config'],
+        namespaces:['main-menu','events-move','battle','event-title-scene','message-visibility','attached-pictures','choice-common-events','picture-choices','core','message','vn','ext-message','ani-message','options','save','config'],
         usage: "node tools/coreto/cli.mjs [--project <root>] core parameters get|set|reset --path <path> [--value <json> | --input <file>] [--dry-run] [--json]",
         discovery: "core api list | core api describe <id>",
         install: "core install [--dry-run] [--json] (uses an already delivered bundle)",
@@ -146,6 +152,23 @@ function help(positionals = []) {
     return result;
 }
 
+function help(positionals = []) {
+    if (!positionals.length) return helpFor();
+    const [namespace, group, operation, id, ...rest] = positionals;
+    const info = helpFor([namespace]);
+    const topics = Array.isArray(info.implemented)
+        ? info.implemented.map(topic => topic.startsWith(namespace+' ') ? topic.slice(namespace.length+1) : topic)
+        : Object.entries(info.implemented).flatMap(([name, operations]) => operations.length
+            ? operations.map(operation => name+' '+operation) : name === 'install' ? [name] : []);
+    const topic = [group, operation].filter(Boolean).join(' ');
+    if (group && !topics.some(value => value === topic || !operation && value.startsWith(topic+' ')) ||
+        id !== undefined && !(group === 'api' && operation === 'describe') || rest.length) {
+        throw new CoreError('INVALID_USAGE', `Unknown help topic: ${positionals.join(' ')}.`, {hint:`Run ${namespace} --help to list published operations.`});
+    }
+    // Core has operation-specific examples; other providers publish their complete help.
+    return namespace === 'core' ? helpFor(positionals.slice(0,3)) : info;
+}
+
 function locatedHelp(value) {
     if (typeof value === 'string') return value.replace(/node tools\/(?:coreto\/cli|dev\/server)\.mjs/g, command =>
         nodeCommand(command === 'node tools/coreto/cli.mjs' ? import.meta.url : new URL('../dev/server.mjs', import.meta.url)));
@@ -166,7 +189,7 @@ async function executeCli(args, context) {
     } });
     context.operation = positionals.slice(0, 3).join(" ") || "help";
     context.target = values.target ?? values.path ?? positionals[3] ?? null;
-    if (values.help || !positionals.length) return { operation: "help", result: locatedHelp(help(positionals)) };
+    if (values.help || !positionals.length) return { operation: "help", result: locatedHelp({...help(positionals), discoveryGuide: "Choose the relevant namespace, then use api list without --json for a compact complete index. Use api describe <id> for full documentation. api list --json retains all expanded descriptors and can exceed terminal/tool output limits; use the text index if that response is truncated."}) };
     const [namespace, group, operation, id, ...rest] = positionals;
     if(namespace==='message-visibility')return executeMessageVisibilityCli(positionals,values,locateProject);
     if(namespace==='event-title-scene')return executeEventTitleSceneCli(positionals,values,locateProject);
@@ -184,6 +207,9 @@ async function executeCli(args, context) {
         const catalog=namespace==='vn'?vnAuthoringCatalog(raw):namespace==='message'?messageAuthoringCatalog(raw):namespace==='ext-message'?extendedAuthoringCatalog:raw;
         return {operation:namespace+' install',result:await (namespace==='vn'?installVn:installConfiguredPlugin)(await locateProject(values.project),catalog,{dryRun:values['dry-run']})};
     }
+    if(namespace==='battle')return executeBattleCli(positionals,values,locateProject);
+    if(namespace==='main-menu')return executeMainMenuCli(positionals,values,locateProject);
+    if(namespace==='events-move')return executeEventsMoveCli(positionals,values,locateProject);
     if(['options','save'].includes(namespace))return executeOptionsSaveCli(positionals,values,locateProject);
     if(namespace==='ani-message')return executeAniCli(positionals,values,locateProject);
     if(values.family!==undefined||values.to!==undefined||values['expected-hash']!==undefined)throw new CoreError('INVALID_USAGE','Family, destination and expected hash belong to ani-message.');
@@ -334,25 +360,64 @@ async function executeCli(args, context) {
     return { operation: `${namespace} parameters ${operation}`, target: values.path, result };
 }
 
+function errorDetails(details, namespace) {
+    const {discovery, diagnostics, ...rest} = details;
+    const known = helpFor().namespaces.includes(namespace);
+    const hint = discovery
+        ? `Use ${namespace} api ${discovery.id ? 'describe '+discovery.id : 'list'} to inspect supported inputs.`
+        : known && namespace !== 'config'
+            ? `Run ${namespace} --help or ${namespace} api list to inspect supported targets and input.`
+            : 'Run --help to inspect supported namespaces and input.';
+    return {...rest, ...(diagnostics ? {diagnostics:diagnostics.map(item=>errorDetails(item,namespace))} : {}), hint:rest.hint ?? hint};
+}
+
 export async function runCli(args) {
     const context = { operation: null, target: null };
     try {
         const result = await executeCli(args, context);
+        const namespace = context.operation.split(' ')[0];
+        if (result.operation === namespace+' validate') result.result.diagnostics = result.result.diagnostics.map(item=>errorDetails(item,namespace));
+        if ([namespace+' commands list',namespace+' commands get'].includes(result.operation) && Object.hasOwn(result.result,'units')) {
+            result.result.units = result.result.units.map(unit=>unit.error ? {...unit,error:errorDetails(unit.error,namespace)} : unit);
+        }
         return { ...context, ...result };
     } catch (error) {
         Object.assign(error, context);
+        if (error instanceof CoreError) {
+            error.details = errorDetails(error.details, context.operation?.split(' ')[0]);
+        }
         throw error;
     }
 }
 
-function formatText(output) {
+function textField(key, value) {
+    if (value === undefined) return [];
+    if (key === 'namespaces') return ['Namespaces:', ...value.map(namespace => `  ${namespace} --help`)];
+    if (typeof value === 'string') return [`${key}: ${value}`];
+    if (Array.isArray(value)) return [`${key}:`, ...value.map(item => '  - '+(typeof item === 'string' ? item : JSON.stringify(item, null, 2)))];
+    return [`${key}: ${JSON.stringify(value, null, 2)}`];
+}
+
+export function formatText(output) {
     if (!output.ok) {
-        return `${output.error.code}: ${output.error.message}\n${output.target ? `Target: ${output.target}\n` : ""}${output.error.hint}`;
+        const {code, message, hint, ...details} = output.error;
+        return [`${code}: ${message}`, ...textField('Target', output.target ?? undefined),
+            ...Object.entries(details).flatMap(([key,value]) => textField(key,value)), hint].filter(value=>value!==undefined).join('\n');
     }
     if (output.operation === "help") {
-        const info = output.result;
-        return [info.usage, info.install, info.commands, info.parameters, info.text, info.language, info.tags, info.discovery, info.validate, "", ...info.examples, "", info.writing, info.metadata, info.positions, info.reset, info.compatibility, info.configuration, info.limits,
-            `Exit codes: ${Object.entries(info.exitCodes).map(([code, meaning]) => `${code} ${meaning}`).join("; ")}`].filter(value => value !== undefined).join("\n");
+        return Object.entries(output.result).flatMap(([key,value]) => textField(key,value)).join('\n');
+    }
+    if (/^\S+ api list$/.test(output.operation) && Array.isArray(output.result)) {
+        const namespace = output.operation.split(' ')[0];
+        const surfaces = ['method', 'command', 'tag', 'parameter'];
+        const rank = entry => surfaces.includes(entry.surface) ? surfaces.indexOf(entry.surface) : surfaces.length;
+        const entries = [...output.result].sort((left, right) => rank(left) - rank(right));
+        const rows = entries.map(entry => [entry.surface, entry.id, entry.label ?? entry.key,
+            entry.usages?.find(usage => usage.path)?.path, entry.availability]
+            .map(value => String(value ?? '').replace(/\s+/g, ' ')).join('\t'));
+        return [`${output.operation} (${entries.length} entries)`,
+            `Use ${namespace} api describe <id> for full documentation; --json preserves the complete catalog.`,
+            'surface\tid\tname\tpath\tavailability', ...rows].join('\n');
     }
     return `${output.operation}${output.target ? ` ${output.target}` : ""}\n${JSON.stringify(output.result, null, 2)}`;
 }
@@ -373,7 +438,7 @@ if (await isMainModule(import.meta.url)) {
             code: error.exitCode ? code : missing ? "TARGET_NOT_FOUND" : denied ? "PERMISSION_DENIED" : invalidUsage ? "INVALID_USAGE" : "IO_FAILURE",
             message: error.message, ...error.details,
             ...(!error.exitCode && !invalidUsage ? { cause: code } : {}),
-            hint: error.details?.hint ?? (process.exitCode === 5 ? "Check the file path and permissions. Read the target before retrying an interrupted write." : "Run --help or core api list to inspect supported targets and input."),
+            hint: error.details?.hint ?? (process.exitCode === 5 ? "Check the file path and permissions. Read the target before retrying an interrupted write." : "Run --help to inspect supported namespaces and input."),
             ...(error.path ? { file: error.path } : {})
         } };
         (json ? console.log : console.error)(json ? JSON.stringify(result) : formatText(result));

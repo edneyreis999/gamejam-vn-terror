@@ -13,6 +13,17 @@ function installActorPresentation(settings, parameterIcon) {
         this.contents.fillRect(x, gaugeY, width, height, ColorManager.gaugeBackColor());
         this.contents.gradientFillRect(x + 1, gaugeY + 1, Math.floor((width - 2) * rate), height - 2, color1, color2);
     };
+    Window_StatusBase.prototype.drawActorIcons = function(actor, x, y, width = 144) {
+        const cellWidth = ImageManager.standardIconWidth || 32;
+        const cellHeight = ImageManager.standardIconHeight || 32;
+        const icons = actor.allIcons().slice(0, Math.floor((width || 144) / cellWidth));
+        const iconY = y + Math.ceil((cellHeight - ImageManager.iconHeight) / 2);
+        let iconX = x + Math.ceil((cellWidth - ImageManager.iconWidth) / 2);
+        for (const icon of icons) {
+            this.drawIcon(icon, iconX, iconY);
+            iconX += cellWidth;
+        }
+    };
     Window_StatusBase.prototype.smallParamFontSize = function() { return $gameSystem.mainFontSize() - 8; };
     Window_StatusBase.prototype.drawActorClass = function(actor, x, y, width = 168) {
         this.resetTextColor();

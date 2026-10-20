@@ -119,6 +119,21 @@
  * @option false
  * @value false
  *
+ * @command MessageRandomize
+ * @text Message: Randomize Text
+ * @desc Select one message and store it in a game variable. Display it with \V[x]; displaying or loading does not draw again.
+ * @arg messages:arrayjson
+ * @text Random Messages
+ * @type note[]
+ * @desc A list of random messages. Text codes and line breaks are preserved. An empty list changes nothing.
+ * @default ["\"This plugin command selects a message at random.\\nIsn't that neat?\"","\"Insert more messages here to increase the randomization.\\nCool, huh?\"","\"The larger the random pool, the more variety in messages.\\nIt'll be more interesting that way!\""]
+ *
+ * @arg varID:eval
+ * @text Variable ID
+ * @type variable
+ * @desc Variable receiving the selected text. Zero changes nothing. Expressions run only when the command executes.
+ * @default 1
+ *
  * @command MessageWindowXyOffsets
  * @text Message: X/Y Offsets
  * @desc Change the X and Y Offsets of the Message Window.
@@ -377,7 +392,7 @@
  * @param MessageTextDelay:num
  * @text Text Delay
  * @type number
- * @desc How many frames to wait between characters drawn?
+ * @desc Base message text delay in frames, scaled by the player text-speed option.
  * @default 1
  * @min 0
  *
@@ -1629,7 +1644,7 @@ const catalog = {
   "version": "0.1.0",
   "reference": {
     "pluginId": "VisuMZ_1_MessageCore",
-    "version": "1.54"
+    "version": "1.57"
   },
   "parameters": [
     {
@@ -1707,12 +1722,13 @@ const catalog = {
           "key": "MessageTextDelay",
           "storageKey": "MessageTextDelay:num",
           "label": "Text Delay",
-          "description": "How many frames to wait between characters drawn?",
+          "description": "Base message text delay in frames, scaled by the player text-speed option.",
           "editorType": "number",
           "nativeDefault": "1",
           "type": "number",
           "min": 0,
-          "default": 1
+          "default": 1,
+          "expected": "The effective delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames between drawn characters. Text speed 11 (Instant) makes the delay zero."
         },
         {
           "id": "MSG-M-071",
@@ -3450,7 +3466,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "boolean",
-          "default": true
+          "default": true,
+          "expected": "The Language option appears only when AddOption=true, /Localization/Enable=true and the configured language table is valid. AddOption=false omits it; enabling AddOption alone is insufficient."
         },
         {
           "id": "MSG-M-153",
@@ -4959,6 +4976,53 @@ const catalog = {
       ]
     },
     {
+      "id": "MSG-M-257",
+      "key": "MessageRandomize",
+      "label": "Message: Randomize Text",
+      "description": "Select one message and store it in a game variable. Display it with \\V[x]; displaying or loading does not draw again.",
+      "args": [
+        {
+          "id": "MSG-M-258",
+          "key": "messages",
+          "storageKey": "messages:arrayjson",
+          "label": "Random Messages",
+          "description": "A list of random messages. Text codes and line breaks are preserved. An empty list changes nothing.",
+          "editorType": "note[]",
+          "nativeDefault": "[\"\\\"This plugin command selects a message at random.\\\\nIsn't that neat?\\\"\",\"\\\"Insert more messages here to increase the randomization.\\\\nCool, huh?\\\"\",\"\\\"The larger the random pool, the more variety in messages.\\\\nIt'll be more interesting that way!\\\"\"]",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "encoding": "json",
+            "editorType": "note",
+            "default": ""
+          },
+          "default": [
+            "This plugin command selects a message at random.\nIsn't that neat?",
+            "Insert more messages here to increase the randomization.\nCool, huh?",
+            "The larger the random pool, the more variety in messages.\nIt'll be more interesting that way!"
+          ]
+        },
+        {
+          "id": "MSG-M-259",
+          "key": "varID",
+          "storageKey": "varID:eval",
+          "label": "Variable ID",
+          "description": "Variable receiving the selected text. Zero changes nothing. Expressions run only when the command executes.",
+          "editorType": "variable",
+          "type": "string",
+          "javascript": "expression",
+          "nativeDefault": "1",
+          "default": "1",
+          "allowZero": true
+        }
+      ],
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ]
+    },
+    {
       "id": "MSG-M-006",
       "key": "MessageWindowXyOffsets",
       "label": "Message: X/Y Offsets",
@@ -5019,7 +5083,8 @@ const catalog = {
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "Run before Show Choices through a map, Common Event or troop event. Distance is a JavaScript expression evaluated to pixels:12 sets a12px gap from the message window;0 removes the extra gap. It replaces the previous distance rather than adding to it. Positive distance moves choices away from the message (up when the message is below, down when above), then screen placement is clamped. A negative value selects automatic centering in the available space instead of a negative pixel gap. The value is stored in Game_System, persists across subsequent messages and save/load, and remains until this command changes it; new games start at0. Example: Distance=\"12\" before a dialogue, then Distance=\"0\" afterward to restore the default gap."
     },
     {
       "id": "MSG-M-012",
@@ -5097,7 +5162,8 @@ const catalog = {
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "Run before Show Choices. LineHeight and MinWidth are pixels; MaxRows and MaxCols are counts. A positive LineHeight replaces the saved base line height (36 produces itemHeight44 including8px spacing); zero preserves the prior LineHeight. Positive MaxRows/MaxCols replace their saved limits; zero preserves the previous value. MinWidth always replaces the saved width floor, including0: actual width still fits measured text, padding and at least1px, so0 does not hide choices. TextAlign always replaces alignment; default leaves normal escape-code alignment, or choose left/center/right. Values persist in Game_System across messages and save/load until another command changes them. Example: LineHeight36,MinWidth96,MaxRows8,MaxCols1,TextAlign=\"default\" restores those explicit values, not necessarily a project custom default."
     },
     {
       "id": "MSG-M-019",
@@ -5244,7 +5310,7 @@ const catalog = {
         "common-event",
         "troop"
       ],
-      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.48 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone."
+      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.58 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone."
     },
     {
       "id": "MSG-M-031",
@@ -5456,10 +5522,11 @@ const catalog = {
       "VisuMZ_3_StateTooltips": "1.10"
     },
     "integrations": {
-      "VisuMZ_1_BattleCore": "1.85",
-      "VisuMZ_1_SkillsStatesCore": "1.48",
-      "VisuMZ_1_SaveCore": "1.13",
-      "VisuMZ_1_OptionsCore": "1.27"
+      "VisuMZ_1_BattleCore": "1.90",
+      "VisuMZ_1_SkillsStatesCore": "1.58",
+      "VisuMZ_1_SaveCore": "1.14",
+      "VisuMZ_1_OptionsCore": "1.28",
+      "Coreto_1_BattleCore": "0.1.0"
     }
   }
 };
@@ -5532,7 +5599,7 @@ class CoreError extends Error {
 function valueError(schema, value, path, expected = schema.type) {
     throw new CoreError("INVALID_VALUE", `Invalid value at ${path}; expected ${expected}.`, {
         field: path, received: value, expected,
-        hint: schema.id ? `Use core api describe ${schema.id} to inspect accepted values and defaults.` : "Use core api list to inspect accepted parameter values."
+        discovery: schema.id ? {id:schema.id} : {}
     });
 }
 
@@ -5855,6 +5922,27 @@ const languageTemplate = [
     ]
 ];
 
+function validateMessageDependencies(active, own, dependencies, fail) {
+    for (const [name, version] of Object.entries({...dependencies.consumers, ...dependencies.integrations})) {
+        const entries = active.filter(plugin => plugin.name === name);
+        if (entries.length > 1) fail('MESSAGE_DEPENDENCY_DUPLICATE', `Duplicate plugin: ${name}.`);
+        if (!entries.length) continue;
+        if (!entries[0].description.includes(`[Version ${version}]`)) fail('MESSAGE_DEPENDENCY_VERSION', `Use ${name} ${version}.`);
+        if (name in dependencies.consumers && active.indexOf(entries[0]) < active.indexOf(own)) {
+            fail('MESSAGE_CONSUMER_ORDER', `Place ${name} after Message.`);
+        }
+    }
+    const tooltip = active.findIndex(plugin => plugin.name === 'VisuMZ_3_StateTooltips');
+    if (tooltip >= 0) {
+        for (const alternatives of [['VisuMZ_1_BattleCore', 'Coreto_1_BattleCore'], ['VisuMZ_1_SkillsStatesCore']]) {
+            const providers = active.filter(plugin => alternatives.includes(plugin.name));
+            if (providers.length !== 1 || active.indexOf(providers[0]) > tooltip) {
+                fail('MESSAGE_TOOLTIP_DEPENDENCY', `Place exactly one ${alternatives.join(' or ')} before StateTooltips.`);
+            }
+        }
+    }
+}
+
 function messageInstallationError(code, message) {
     throw new CoreError(code, message);
 }
@@ -5877,22 +5965,7 @@ function installMessage() {
     }
     const filename = decodeURIComponent(document.currentScript.src.split('?')[0].split('/').pop());
     if (filename !== `${catalog.pluginId}.js`) messageInstallationError('MESSAGE_FILENAME', `Keep the filename ${catalog.pluginId}.js.`);
-    for (const [name, version] of Object.entries({...catalog.dependencies.consumers, ...catalog.dependencies.integrations})) {
-        const entries = active.filter(plugin => plugin.name === name);
-        if (entries.length > 1) messageInstallationError('MESSAGE_DEPENDENCY_DUPLICATE', `Duplicate plugin: ${name}.`);
-        if (!entries.length) continue;
-        if (!entries[0].description.includes(`[Version ${version}]`)) messageInstallationError('MESSAGE_DEPENDENCY_VERSION', `Use ${name} ${version}.`);
-        if (name in catalog.dependencies.consumers && active.indexOf(entries[0]) < active.indexOf(own)) {
-            messageInstallationError('MESSAGE_CONSUMER_ORDER', `Place ${name} after Message.`);
-        }
-    }
-    if (active.some(plugin => plugin.name === 'VisuMZ_3_StateTooltips')) {
-        for (const name of ['VisuMZ_1_BattleCore', 'VisuMZ_1_SkillsStatesCore']) {
-            const index = active.findIndex(plugin => plugin.name === name);
-            const consumer = active.findIndex(plugin => plugin.name === 'VisuMZ_3_StateTooltips');
-            if (index < 0 || index > consumer) messageInstallationError('MESSAGE_TOOLTIP_DEPENDENCY', `Place ${name} before StateTooltips.`);
-        }
-    }
+    validateMessageDependencies(active, own, catalog.dependencies, messageInstallationError);
     const raw = resolvePluginConfiguration(catalog, $plugins).rawParameters;
     const settings = resolveMessageSettings(catalog.parameters, raw, null);
     const registered = new Set();
@@ -5918,7 +5991,7 @@ function installMessage() {
     globalThis.Imported.Coreto_1_MessageCore = true;
     globalThis.Imported.VisuMZ_1_MessageCore = true;
     globalThis.VisuMZ ??= {};
-    globalThis.VisuMZ.MessageCore = {version: 1.54, Settings: settings};
+    globalThis.VisuMZ.MessageCore = {version: 1.57, Settings: settings};
     return api;
 }
 
@@ -6665,6 +6738,10 @@ function installMessageWindow(settings) {
         if(message){message.updatePlacement();message.createContents();}
     });
     messageApi.registerCommand('MessageWindowXyOffsets',function(args){return $gameSystem.setMessageWindowXyOffsets(args.OffsetX,args.OffsetY);});
+    messageApi.registerCommand('MessageRandomize', function(args) {
+        if (!args.messages.length || !args.varID) return;
+        $gameVariables.setValue(args.varID, args.messages[Math.randomInt(args.messages.length)]);
+    });
 }
 installMessageWindow(messageApi.settings);
 
@@ -6946,14 +7023,16 @@ function installMessageChoices() {
             if (command.indent !== indent) continue;
             if (command.code === 402) command.parameters[0] = branches++;
             if (command.code !== 404) continue;
-            const next = this._list[cursor+1];
+            let nextIndex = cursor + 1;
+            while (this._list[nextIndex]?.indent === indent && [108, 408].includes(this._list[nextIndex].code)) nextIndex++;
+            const next = this._list[nextIndex];
             if (next?.code !== 102 || next.indent !== indent) break;
             const target = this._list[root].parameters;
             if (next.parameters[2] >= 0) target[2] = next.parameters[2]+branches;
             if (next.parameters[1] >= 0) target[1] = next.parameters[1]+branches;
             else if (next.parameters[1] === -2) target[1] = -2;
             target[0].push(...next.parameters[0]);
-            this._list.splice(cursor, 2);
+            this._list.splice(cursor, nextIndex - cursor + 1);
             cursor--;
         }
         return this._list[root].parameters;
@@ -7014,6 +7093,7 @@ function installMessageChoices() {
             .replace(/<(?:FG|BG)(?:IMG|IMAGE|PIC|PICTURE) *(.*?): (.*?)>/gi, '');
     };
     function passesGates(text, positive, negative, switchNames) {
+        if (globalThis.Imported?.VisuMZ_1_EventsMoveCore) $gameMessage.registerSelfEvent();
         if (new RegExp(`<${negative}>`, 'i').test(text)) return false;
         if (new RegExp(`<${positive}>`, 'i').test(text)) return true;
         for (const [word, any, rejectOn] of [[positive,false,false],[positive,true,false],[negative,false,true],[negative,true,true]]) {

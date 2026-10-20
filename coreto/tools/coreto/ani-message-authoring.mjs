@@ -14,7 +14,7 @@ function resolveAuthoringSource(plugins){return effectiveConfiguration(catalog,p
 
 export function describeAniApi(){
     validateOperationalCatalog(catalog);
-    const schemas=new Map(describeCoreApi(aniAuthoringCatalog).map(entry=>[entry.id,entry]));
+    const schemas=new Map(describeCoreApi(aniAuthoringCatalog,{commandExpectedHash:true}).map(entry=>[entry.id,entry]));
     const entries=catalog.entries.map(reference=>{
         const schema=schemas.get(reference.id);
         return {...reference,...schema,plugin:catalog.pluginId,version:catalog.version,

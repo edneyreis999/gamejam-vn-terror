@@ -26,7 +26,9 @@ function installComplement(catalog, apiName, errorPrefix) {
             settings[field.key] = decodeValue(field, source.rawParameters[field.storageKey], field.storageKey);
         } catch (error) {
             if (!(error instanceof CoreError)) throw error;
-            throw Object.assign(new Error(error.message, {cause:error}), {code:errorPrefix+'_CONFIG_VALUE',field:field.storageKey});
+            const wrapped = new Error(error.message);
+            Object.defineProperty(wrapped, 'cause', {value:error, writable:true, configurable:true});
+            throw Object.assign(wrapped, {code:errorPrefix+'_CONFIG_VALUE',field:field.storageKey});
         }
     }
     const api = {pluginId:catalog.pluginId,version:catalog.version,...source,settings};

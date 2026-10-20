@@ -43,9 +43,9 @@
  * @default {"ConvertToBase:eval":"true","CrisisRate:num":"0.25","BasicParameterFormula:func":"\"const id = arguments[0];\\nconst raw = (this.paramBase(id) + this.paramPlus(id)) * this.paramRate(id) * this.paramBuffRate(id) + this.paramFlatBonus(id);\\nconst ceiling = this.paramMax(id);\\nconst floor = this.paramMin(id);\\nreturn Math.round(Math.min(Math.max(raw, floor), ceiling));\"","XParameterFormula:func":"\"const id = arguments[0];\\nreturn (this.traitsSum(Game_BattlerBase.TRAIT_XPARAM, id) + this.xparamPlus(id)) * this.xparamRate(id) + this.xparamFlatBonus(id);\"","SParameterFormula:func":"\"const id = arguments[0];\\nreturn (this.traitsPi(Game_BattlerBase.TRAIT_SPARAM, id) + this.sparamPlus(id)) * this.sparamRate(id) + this.sparamFlatBonus(id);\"","BasicActorParamMax0:str":"9999","BasicActorParamMax1:str":"9999","BasicActorParamMax2:str":"999","BasicActorParamMax3:str":"999","BasicActorParamMax4:str":"999","BasicActorParamMax5:str":"999","BasicActorParamMax6:str":"999","BasicActorParamMax7:str":"999","BasicEnemyParamMax0:str":"999999","BasicEnemyParamMax1:str":"9999","BasicEnemyParamMax2:str":"999","BasicEnemyParamMax3:str":"999","BasicEnemyParamMax4:str":"999","BasicEnemyParamMax5:str":"999","BasicEnemyParamMax6:str":"999","BasicEnemyParamMax7:str":"999","XParamVocab0:str":"Hit","XParamVocab1:str":"Evasion","XParamVocab2:str":"Critical Rate","XParamVocab3:str":"Critical Evade","XParamVocab4:str":"Magic Evade","XParamVocab5:str":"Magic Reflect","XParamVocab6:str":"Counter","XParamVocab7:str":"HP Regen","XParamVocab8:str":"MP Regen","XParamVocab9:str":"TP Regen","SParamVocab0:str":"Aggro","SParamVocab1:str":"Guard","SParamVocab2:str":"Recovery","SParamVocab3:str":"Item Effect","SParamVocab4:str":"MP Cost","SParamVocab5:str":"TP Charge","SParamVocab6:str":"Physical DMG","SParamVocab7:str":"Magical DMG","SParamVocab8:str":"Floor DMG","SParamVocab9:str":"EXP Gain","IconParam0:str":"84","IconParam1:str":"165","IconParam2:str":"76","IconParam3:str":"81","IconParam4:str":"101","IconParam5:str":"133","IconParam6:str":"140","IconParam7:str":"87","IconXParam0:str":"102","IconXParam1:str":"82","IconXParam2:str":"78","IconXParam3:str":"82","IconXParam4:str":"171","IconXParam5:str":"222","IconXParam6:str":"77","IconXParam7:str":"72","IconXParam8:str":"72","IconXParam9:str":"72","IconSParam0:str":"5","IconSParam1:str":"128","IconSParam2:str":"72","IconSParam3:str":"176","IconSParam4:str":"165","IconSParam5:str":"164","IconSParam6:str":"76","IconSParam7:str":"79","IconSParam8:str":"141","IconSParam9:str":"73","DisplayedParams:arraystr":"[\"ATK\",\"DEF\",\"MAT\",\"MDF\",\"AGI\",\"LUK\"]","ExtDisplayedParams:arraystr":"[\"MaxHP\",\"MaxMP\",\"ATK\",\"DEF\",\"MAT\",\"MDF\",\"AGI\",\"LUK\"]","ShowActorLevel:eval":"true","DrawIcons:eval":"true"}
  *
  * @param ScreenResolution:struct
- * @text Map Camera
+ * @text Map Camera and Battle Positioning
  * @type struct<ScreenResolution>
- * @desc Camera locking for fractional viewports and map note overrides.
+ * @desc Map camera locks in tiles, plus independent battle sprite positioning for the configured screen and UI sizes.
  * @default {"AutoScrollLockX:eval":"true","AutoScrollLockY:eval":"true","DisplayLockX:num":"0.15625","DisplayLockY:num":"0","RepositionActors:eval":"true","RepositionEnemies:eval":"true","RepositionEnemies130:eval":"false"}
  *
  * @param ScreenShake:struct
@@ -797,7 +797,7 @@
  *
  * @command SystemLoadImages
  * @text SystemLoadImages
- * @desc Preload resource lists without playing them. Map/common-event only; a running battle returns before argument conversion. Audio errors use the native retry screen.
+ * @desc Preload resource lists without playing them. Map/common-event only; a running battle returns before argument conversion. Image errors use the native retry screen.
  *
  * @arg animations:arraystr
  * @text img/animations/
@@ -1470,121 +1470,121 @@
  * @param XParamVocab0:str
  * @text XParamVocab0
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for HIT (hit rate), xparam index 0. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Hit
  *
  * @param XParamVocab1:str
  * @text XParamVocab1
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for EVA (evasion rate), xparam index 1. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Evasion
  *
  * @param XParamVocab2:str
  * @text XParamVocab2
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for CRI (critical rate), xparam index 2. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Crit.Rate
  *
  * @param XParamVocab3:str
  * @text XParamVocab3
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for CEV (critical evasion rate), xparam index 3. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Crit.Evade
  *
  * @param XParamVocab4:str
  * @text XParamVocab4
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for MEV (magic evasion rate), xparam index 4. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Magic Evade
  *
  * @param XParamVocab5:str
  * @text XParamVocab5
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for MRF (magic reflection rate), xparam index 5. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Magic Reflect
  *
  * @param XParamVocab6:str
  * @text XParamVocab6
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for CNT (counterattack rate), xparam index 6. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Counter
  *
  * @param XParamVocab7:str
  * @text XParamVocab7
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for HRG (HP regeneration rate), xparam index 7. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default HP Regen
  *
  * @param XParamVocab8:str
  * @text XParamVocab8
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for MRG (MP regeneration rate), xparam index 8. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default MP Regen
  *
  * @param XParamVocab9:str
  * @text XParamVocab9
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for TRG (TP regeneration rate), xparam index 9. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default TP Regen
  *
  * @param SParamVocab0:str
  * @text SParamVocab0
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for TGR (target rate), sparam index 0. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Aggro
  *
  * @param SParamVocab1:str
  * @text SParamVocab1
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for GRD (guard effect rate), sparam index 1. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Guard
  *
  * @param SParamVocab2:str
  * @text SParamVocab2
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for REC (recovery effect rate), sparam index 2. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Recovery
  *
  * @param SParamVocab3:str
  * @text SParamVocab3
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for PHA (pharmacology/item recovery rate), sparam index 3. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Item Effect
  *
  * @param SParamVocab4:str
  * @text SParamVocab4
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for MCR (MP cost rate), sparam index 4. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default MP Cost
  *
  * @param SParamVocab5:str
  * @text SParamVocab5
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for TCR (TP charge rate), sparam index 5. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default TP Charge
  *
  * @param SParamVocab6:str
  * @text SParamVocab6
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for PDR (physical damage rate), sparam index 6. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Physical DMG
  *
  * @param SParamVocab7:str
  * @text SParamVocab7
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for MDR (magical damage rate), sparam index 7. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Magical DMG
  *
  * @param SParamVocab8:str
  * @text SParamVocab8
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for FDR (floor damage rate), sparam index 8. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default Floor DMG
  *
  * @param SParamVocab9:str
  * @text SParamVocab9
  * @type text
- * @desc Configured parameter name.
+ * @desc Display label for EXR (experience rate), sparam index 9. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.
  * @default EXP Gain
  *
  * @param IconParam0:str
@@ -1871,55 +1871,55 @@
  * @param ColorNormal:str
  * @text ColorNormal
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for ordinary text (normalColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 0
  *
  * @param ColorSystem:str
  * @text ColorSystem
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for system labels and currency unit (systemColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 16
  *
  * @param ColorCrisis:str
  * @text ColorCrisis
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for critical/low-HP text (crisisColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 17
  *
  * @param ColorDeath:str
  * @text ColorDeath
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for dead actor text (deathColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 18
  *
  * @param ColorGaugeBack:str
  * @text ColorGaugeBack
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for gauge background (gaugeBackColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 19
  *
  * @param ColorHPGauge1:str
  * @text ColorHPGauge1
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for first gradient endpoint of the HP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 20
  *
  * @param ColorHPGauge2:str
  * @text ColorHPGauge2
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for second gradient endpoint of the HP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 21
  *
  * @param ColorMPGauge1:str
  * @text ColorMPGauge1
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for first gradient endpoint of the MP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 22
  *
  * @param ColorMPGauge2:str
  * @text ColorMPGauge2
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for second gradient endpoint of the MP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 23
  *
  * @param ColorMPCost:str
@@ -1931,13 +1931,13 @@
  * @param ColorPowerUp:str
  * @text ColorPowerUp
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for positive parameter changes (powerUpColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 24
  *
  * @param ColorPowerDown:str
  * @text ColorPowerDown
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for negative parameter changes (powerDownColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 25
  *
  * @param ColorCTGauge1:str
@@ -1955,19 +1955,19 @@
  * @param ColorTPGauge1:str
  * @text ColorTPGauge1
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for first gradient endpoint of the TP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 28
  *
  * @param ColorTPGauge2:str
  * @text ColorTPGauge2
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for second gradient endpoint of the TP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 29
  *
  * @param ColorTPCost:str
  * @text ColorTPCost
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for TP cost text and pending selection color (tpCostColor and pendingColor). Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 29
  *
  * @param ColorPending:str
@@ -1979,37 +1979,37 @@
  * @param ColorExpGauge1:str
  * @text ColorExpGauge1
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for first gradient endpoint of the Exp gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 30
  *
  * @param ColorExpGauge2:str
  * @text ColorExpGauge2
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for second gradient endpoint of the Exp gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 31
  *
  * @param ColorMaxLvGauge1:str
  * @text ColorMaxLvGauge1
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for first gradient endpoint of the MaxLv gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 14
  *
  * @param ColorMaxLvGauge2:str
  * @text ColorMaxLvGauge2
  * @type text
- * @desc Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.
+ * @desc Color for second gradient endpoint of the MaxLv gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. "16") or a hex color (e.g. "#ff8800"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.
  * @default 6
  *
  * @param OutlineColor:str
  * @text OutlineColor
  * @type text
- * @desc CSS color including alpha, passed directly to the drawing context.
+ * @desc CSS color string for the general text outline, e.g. "rgba(0, 0, 0, 0.5)" or "#202020". This field is passed directly to drawing; do not use a numeric palette index.
  * @default rgba(0, 0, 0, 0.6)
  *
  * @param OutlineColorGauge:str
  * @text OutlineColorGauge
  * @type text
- * @desc CSS color including alpha, passed directly to the drawing context.
+ * @desc CSS color string for the gauge value text outline, e.g. "rgba(0, 0, 0, 0.5)" or "#202020". This field is passed directly to drawing; do not use a numeric palette index.
  * @default rgba(0, 0, 0, 1.0)
  *
  * @param DimColor1:str
@@ -2027,37 +2027,37 @@
  * @param ItemBackColor1:str
  * @text ItemBackColor1
  * @type text
- * @desc CSS color including alpha, passed directly to the drawing context.
+ * @desc CSS color string for the first gradient endpoint of selectable item backgrounds, e.g. "rgba(0, 0, 0, 0.5)" or "#202020". This field is passed directly to drawing; do not use a numeric palette index.
  * @default rgba(32, 32, 32, 0.5)
  *
  * @param ItemBackColor2:str
  * @text ItemBackColor2
  * @type text
- * @desc CSS color including alpha, passed directly to the drawing context.
+ * @desc CSS color string for the second gradient endpoint of selectable item backgrounds, e.g. "rgba(0, 0, 0, 0.5)" or "#202020". This field is passed directly to drawing; do not use a numeric palette index.
  * @default rgba(0, 0, 0, 0.5)
  *
  * @param ActorHPColor:func
  * @text ActorHPColor
  * @type note
- * @desc Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.
+ * @desc JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the actor. The default returns deathColor for a dead actor, crisisColor for dying, otherwise normalColor.
  * @default "const actor = arguments[0];\nif (!actor) return this.normalColor();\nif (actor.isDead()) return this.deathColor();\nreturn actor.isDying() ? this.crisisColor() : this.normalColor();"
  *
  * @param ActorMPColor:func
  * @text ActorMPColor
  * @type note
- * @desc Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.
+ * @desc JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the actor. The default returns crisisColor below 25% MP, otherwise normalColor.
  * @default "const actor = arguments[0];\nreturn actor && actor.mpRate() < 0.25 ? this.crisisColor() : this.normalColor();"
  *
  * @param ActorTPColor:func
  * @text ActorTPColor
  * @type note
- * @desc Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.
+ * @desc JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the actor. The default returns crisisColor below 25% TP, otherwise normalColor.
  * @default "const actor = arguments[0];\nreturn actor && actor.tpRate() < 0.25 ? this.crisisColor() : this.normalColor();"
  *
  * @param ParamChange:func
  * @text ParamChange
  * @type note
- * @desc Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.
+ * @desc JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the signed numeric parameter change. The default returns powerUpColor for positive, powerDownColor for negative and normalColor for zero.
  * @default "const change = arguments[0];\nreturn change > 0 ? this.powerUpColor() : change < 0 ? this.powerDownColor() : this.normalColor();"
  *
  * @param DamageColor:func
@@ -4673,7 +4673,8 @@ const catalog = {
                         "label": "FunctionName",
                         "description": "Global function name; ASCII spaces are removed. Existing globals are preserved.",
                         "id": "CE-P-jsQuickFunc.FunctionName:str",
-                        "availability": "supported"
+                        "availability": "supported",
+                        "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception is logged and returns 0. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
                     },
                     {
                         "key": "CodeJS",
@@ -4692,11 +4693,13 @@ const catalog = {
                             ],
                             "onError": "return 0; log in playtest"
                         },
-                        "availability": "supported"
+                        "availability": "supported",
+                        "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception is logged and returns 0. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
                     }
                 ]
             },
-            "availability": "supported"
+            "availability": "supported",
+            "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception is logged and returns 0. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
         },
         {
             "id": "CE-P-plugin.Param:struct",
@@ -5209,7 +5212,7 @@ const catalog = {
                     "key": "XParamVocab0",
                     "storageKey": "XParamVocab0:str",
                     "label": "XParamVocab0",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for HIT (hit rate), xparam index 0. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Hit",
                     "availability": "supported"
@@ -5219,7 +5222,7 @@ const catalog = {
                     "key": "XParamVocab1",
                     "storageKey": "XParamVocab1:str",
                     "label": "XParamVocab1",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for EVA (evasion rate), xparam index 1. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Evasion",
                     "availability": "supported"
@@ -5229,7 +5232,7 @@ const catalog = {
                     "key": "XParamVocab2",
                     "storageKey": "XParamVocab2:str",
                     "label": "XParamVocab2",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for CRI (critical rate), xparam index 2. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Crit.Rate",
                     "availability": "supported"
@@ -5239,7 +5242,7 @@ const catalog = {
                     "key": "XParamVocab3",
                     "storageKey": "XParamVocab3:str",
                     "label": "XParamVocab3",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for CEV (critical evasion rate), xparam index 3. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Crit.Evade",
                     "availability": "supported"
@@ -5249,7 +5252,7 @@ const catalog = {
                     "key": "XParamVocab4",
                     "storageKey": "XParamVocab4:str",
                     "label": "XParamVocab4",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for MEV (magic evasion rate), xparam index 4. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Magic Evade",
                     "availability": "supported"
@@ -5259,7 +5262,7 @@ const catalog = {
                     "key": "XParamVocab5",
                     "storageKey": "XParamVocab5:str",
                     "label": "XParamVocab5",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for MRF (magic reflection rate), xparam index 5. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Magic Reflect",
                     "availability": "supported"
@@ -5269,7 +5272,7 @@ const catalog = {
                     "key": "XParamVocab6",
                     "storageKey": "XParamVocab6:str",
                     "label": "XParamVocab6",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for CNT (counterattack rate), xparam index 6. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Counter",
                     "availability": "supported"
@@ -5279,7 +5282,7 @@ const catalog = {
                     "key": "XParamVocab7",
                     "storageKey": "XParamVocab7:str",
                     "label": "XParamVocab7",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for HRG (HP regeneration rate), xparam index 7. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "HP Regen",
                     "availability": "supported"
@@ -5289,7 +5292,7 @@ const catalog = {
                     "key": "XParamVocab8",
                     "storageKey": "XParamVocab8:str",
                     "label": "XParamVocab8",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for MRG (MP regeneration rate), xparam index 8. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "MP Regen",
                     "availability": "supported"
@@ -5299,7 +5302,7 @@ const catalog = {
                     "key": "XParamVocab9",
                     "storageKey": "XParamVocab9:str",
                     "label": "XParamVocab9",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for TRG (TP regeneration rate), xparam index 9. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "TP Regen",
                     "availability": "supported"
@@ -5309,7 +5312,7 @@ const catalog = {
                     "key": "SParamVocab0",
                     "storageKey": "SParamVocab0:str",
                     "label": "SParamVocab0",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for TGR (target rate), sparam index 0. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Aggro",
                     "availability": "supported"
@@ -5319,7 +5322,7 @@ const catalog = {
                     "key": "SParamVocab1",
                     "storageKey": "SParamVocab1:str",
                     "label": "SParamVocab1",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for GRD (guard effect rate), sparam index 1. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Guard",
                     "availability": "supported"
@@ -5329,7 +5332,7 @@ const catalog = {
                     "key": "SParamVocab2",
                     "storageKey": "SParamVocab2:str",
                     "label": "SParamVocab2",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for REC (recovery effect rate), sparam index 2. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Recovery",
                     "availability": "supported"
@@ -5339,7 +5342,7 @@ const catalog = {
                     "key": "SParamVocab3",
                     "storageKey": "SParamVocab3:str",
                     "label": "SParamVocab3",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for PHA (pharmacology/item recovery rate), sparam index 3. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Item Effect",
                     "availability": "supported"
@@ -5349,7 +5352,7 @@ const catalog = {
                     "key": "SParamVocab4",
                     "storageKey": "SParamVocab4:str",
                     "label": "SParamVocab4",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for MCR (MP cost rate), sparam index 4. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "MP Cost",
                     "availability": "supported"
@@ -5359,7 +5362,7 @@ const catalog = {
                     "key": "SParamVocab5",
                     "storageKey": "SParamVocab5:str",
                     "label": "SParamVocab5",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for TCR (TP charge rate), sparam index 5. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "TP Charge",
                     "availability": "supported"
@@ -5369,7 +5372,7 @@ const catalog = {
                     "key": "SParamVocab6",
                     "storageKey": "SParamVocab6:str",
                     "label": "SParamVocab6",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for PDR (physical damage rate), sparam index 6. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Physical DMG",
                     "availability": "supported"
@@ -5379,7 +5382,7 @@ const catalog = {
                     "key": "SParamVocab7",
                     "storageKey": "SParamVocab7:str",
                     "label": "SParamVocab7",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for MDR (magical damage rate), sparam index 7. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Magical DMG",
                     "availability": "supported"
@@ -5389,7 +5392,7 @@ const catalog = {
                     "key": "SParamVocab8",
                     "storageKey": "SParamVocab8:str",
                     "label": "SParamVocab8",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for FDR (floor damage rate), sparam index 8. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Floor DMG",
                     "availability": "supported"
@@ -5399,7 +5402,7 @@ const catalog = {
                     "key": "SParamVocab9",
                     "storageKey": "SParamVocab9:str",
                     "label": "SParamVocab9",
-                    "description": "Configured parameter name.",
+                    "description": "Display label for EXR (experience rate), sparam index 9. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "EXP Gain",
                     "availability": "supported"
@@ -5785,8 +5788,8 @@ const catalog = {
             "type": "struct",
             "structName": "ScreenResolution",
             "id": "CE-P-plugin.ScreenResolution:struct",
-            "label": "Map Camera",
-            "description": "Camera locking for fractional viewports and map note overrides.",
+            "label": "Map Camera and Battle Positioning",
+            "description": "Map camera locks in tiles, plus independent battle sprite positioning for the configured screen and UI sizes.",
             "default": {
                 "AutoScrollLockX": true,
                 "AutoScrollLockY": true,
@@ -5851,7 +5854,8 @@ const catalog = {
                     "description": "Adjust battle sprite positions for the configured screen size.",
                     "type": "boolean",
                     "default": true,
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " When true, recalculate actor battle homes from Graphics.width/height, boxWidth/boxHeight, party size and actor index. False retains the engine placement. This changes displayed actor battle positions, not map coordinates or database records."
                 },
                 {
                     "id": "CE-P-ScreenResolution.RepositionEnemies:eval",
@@ -5861,7 +5865,8 @@ const catalog = {
                     "description": "Adjust battle sprite positions for the configured screen size.",
                     "type": "boolean",
                     "default": true,
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Both RepositionEnemies and RepositionEnemies130 must be true. Then enemy screen coordinate getters apply screen/UI-size offsets; false in either retains native getters. Troop database coordinates are never rewritten. This is battle projection, separate from map camera locks."
                 },
                 {
                     "id": "CE-P-ScreenResolution.RepositionEnemies130:eval",
@@ -5927,7 +5932,8 @@ const catalog = {
                         ],
                         "onError": "throw localized configuration error"
                     },
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Function body selected by ScreenShake/Type for horizontal native shake. Runs once per update frame while $gameScreen._shakeDuration > 0, after native zoom; this is Spriteset_Base and no arguments are passed. Modify this.x/this.y to add pixel displacement; return value is ignored. Runtime globals include $gameScreen. The published default is an editable working body; the CLI does not execute it."
                 },
                 {
                     "key": "randomJS",
@@ -5947,7 +5953,8 @@ const catalog = {
                         ],
                         "onError": "throw localized configuration error"
                     },
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Function body selected by ScreenShake/Type for random horizontal and vertical shake. Runs once per update frame while $gameScreen._shakeDuration > 0, after native zoom; this is Spriteset_Base and no arguments are passed. Modify this.x/this.y to add pixel displacement; return value is ignored. Runtime globals include $gameScreen. The published default is an editable working body; the CLI does not execute it."
                 },
                 {
                     "key": "horzJS",
@@ -5967,7 +5974,8 @@ const catalog = {
                         ],
                         "onError": "throw localized configuration error"
                     },
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Function body selected by ScreenShake/Type for horizontal shake only. Runs once per update frame while $gameScreen._shakeDuration > 0, after native zoom; this is Spriteset_Base and no arguments are passed. Modify this.x/this.y to add pixel displacement; return value is ignored. Runtime globals include $gameScreen. The published default is an editable working body; the CLI does not execute it."
                 },
                 {
                     "key": "vertJS",
@@ -5987,7 +5995,8 @@ const catalog = {
                         ],
                         "onError": "throw localized configuration error"
                     },
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Function body selected by ScreenShake/Type for vertical shake only. Runs once per update frame while $gameScreen._shakeDuration > 0, after native zoom; this is Spriteset_Base and no arguments are passed. Modify this.x/this.y to add pixel displacement; return value is ignored. Runtime globals include $gameScreen. The published default is an editable working body; the CLI does not execute it."
                 }
             ],
             "label": "Screen Shake",
@@ -6044,7 +6053,7 @@ const catalog = {
                     "key": "ColorNormal",
                     "storageKey": "ColorNormal:str",
                     "label": "ColorNormal",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for ordinary text (normalColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "0",
                     "availability": "supported"
@@ -6054,7 +6063,7 @@ const catalog = {
                     "key": "ColorSystem",
                     "storageKey": "ColorSystem:str",
                     "label": "ColorSystem",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for system labels and currency unit (systemColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "16",
                     "availability": "supported"
@@ -6064,7 +6073,7 @@ const catalog = {
                     "key": "ColorCrisis",
                     "storageKey": "ColorCrisis:str",
                     "label": "ColorCrisis",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for critical/low-HP text (crisisColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "17",
                     "availability": "supported"
@@ -6074,7 +6083,7 @@ const catalog = {
                     "key": "ColorDeath",
                     "storageKey": "ColorDeath:str",
                     "label": "ColorDeath",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for dead actor text (deathColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "18",
                     "availability": "supported"
@@ -6084,7 +6093,7 @@ const catalog = {
                     "key": "ColorGaugeBack",
                     "storageKey": "ColorGaugeBack:str",
                     "label": "ColorGaugeBack",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for gauge background (gaugeBackColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "19",
                     "availability": "supported"
@@ -6094,7 +6103,7 @@ const catalog = {
                     "key": "ColorHPGauge1",
                     "storageKey": "ColorHPGauge1:str",
                     "label": "ColorHPGauge1",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for first gradient endpoint of the HP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "20",
                     "availability": "supported"
@@ -6104,7 +6113,7 @@ const catalog = {
                     "key": "ColorHPGauge2",
                     "storageKey": "ColorHPGauge2:str",
                     "label": "ColorHPGauge2",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for second gradient endpoint of the HP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "21",
                     "availability": "supported"
@@ -6114,7 +6123,7 @@ const catalog = {
                     "key": "ColorMPGauge1",
                     "storageKey": "ColorMPGauge1:str",
                     "label": "ColorMPGauge1",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for first gradient endpoint of the MP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "22",
                     "availability": "supported"
@@ -6124,7 +6133,7 @@ const catalog = {
                     "key": "ColorMPGauge2",
                     "storageKey": "ColorMPGauge2:str",
                     "label": "ColorMPGauge2",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for second gradient endpoint of the MP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "23",
                     "availability": "supported"
@@ -6144,7 +6153,7 @@ const catalog = {
                     "key": "ColorPowerUp",
                     "storageKey": "ColorPowerUp:str",
                     "label": "ColorPowerUp",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for positive parameter changes (powerUpColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "24",
                     "availability": "supported"
@@ -6154,7 +6163,7 @@ const catalog = {
                     "key": "ColorPowerDown",
                     "storageKey": "ColorPowerDown:str",
                     "label": "ColorPowerDown",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for negative parameter changes (powerDownColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "25",
                     "availability": "supported"
@@ -6186,7 +6195,7 @@ const catalog = {
                     "key": "ColorTPGauge1",
                     "storageKey": "ColorTPGauge1:str",
                     "label": "ColorTPGauge1",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for first gradient endpoint of the TP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "28",
                     "availability": "supported"
@@ -6196,7 +6205,7 @@ const catalog = {
                     "key": "ColorTPGauge2",
                     "storageKey": "ColorTPGauge2:str",
                     "label": "ColorTPGauge2",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for second gradient endpoint of the TP gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "29",
                     "availability": "supported"
@@ -6206,7 +6215,7 @@ const catalog = {
                     "key": "ColorTPCost",
                     "storageKey": "ColorTPCost:str",
                     "label": "ColorTPCost",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for TP cost text and pending selection color (tpCostColor and pendingColor). Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "29",
                     "availability": "supported"
@@ -6226,7 +6235,7 @@ const catalog = {
                     "key": "ColorExpGauge1",
                     "storageKey": "ColorExpGauge1:str",
                     "label": "ColorExpGauge1",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for first gradient endpoint of the Exp gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "30",
                     "availability": "supported"
@@ -6236,7 +6245,7 @@ const catalog = {
                     "key": "ColorExpGauge2",
                     "storageKey": "ColorExpGauge2:str",
                     "label": "ColorExpGauge2",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for second gradient endpoint of the Exp gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "31",
                     "availability": "supported"
@@ -6246,7 +6255,7 @@ const catalog = {
                     "key": "ColorMaxLvGauge1",
                     "storageKey": "ColorMaxLvGauge1:str",
                     "label": "ColorMaxLvGauge1",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for first gradient endpoint of the MaxLv gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "14",
                     "availability": "supported"
@@ -6256,7 +6265,7 @@ const catalog = {
                     "key": "ColorMaxLvGauge2",
                     "storageKey": "ColorMaxLvGauge2:str",
                     "label": "ColorMaxLvGauge2",
-                    "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
+                    "description": "Color for second gradient endpoint of the MaxLv gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "6",
                     "availability": "supported"
@@ -6266,7 +6275,7 @@ const catalog = {
                     "key": "OutlineColor",
                     "storageKey": "OutlineColor:str",
                     "label": "OutlineColor",
-                    "description": "CSS color including alpha, passed directly to the drawing context.",
+                    "description": "CSS color string for the general text outline, e.g. \"rgba(0, 0, 0, 0.5)\" or \"#202020\". This field is passed directly to drawing; do not use a numeric palette index.",
                     "type": "string",
                     "default": "rgba(0, 0, 0, 0.6)",
                     "availability": "supported"
@@ -6276,7 +6285,7 @@ const catalog = {
                     "key": "OutlineColorGauge",
                     "storageKey": "OutlineColorGauge:str",
                     "label": "OutlineColorGauge",
-                    "description": "CSS color including alpha, passed directly to the drawing context.",
+                    "description": "CSS color string for the gauge value text outline, e.g. \"rgba(0, 0, 0, 0.5)\" or \"#202020\". This field is passed directly to drawing; do not use a numeric palette index.",
                     "type": "string",
                     "default": "rgba(0, 0, 0, 1.0)",
                     "availability": "supported"
@@ -6308,7 +6317,7 @@ const catalog = {
                     "key": "ItemBackColor1",
                     "storageKey": "ItemBackColor1:str",
                     "label": "ItemBackColor1",
-                    "description": "CSS color including alpha, passed directly to the drawing context.",
+                    "description": "CSS color string for the first gradient endpoint of selectable item backgrounds, e.g. \"rgba(0, 0, 0, 0.5)\" or \"#202020\". This field is passed directly to drawing; do not use a numeric palette index.",
                     "type": "string",
                     "default": "rgba(32, 32, 32, 0.5)",
                     "availability": "supported"
@@ -6318,7 +6327,7 @@ const catalog = {
                     "key": "ItemBackColor2",
                     "storageKey": "ItemBackColor2:str",
                     "label": "ItemBackColor2",
-                    "description": "CSS color including alpha, passed directly to the drawing context.",
+                    "description": "CSS color string for the second gradient endpoint of selectable item backgrounds, e.g. \"rgba(0, 0, 0, 0.5)\" or \"#202020\". This field is passed directly to drawing; do not use a numeric palette index.",
                     "type": "string",
                     "default": "rgba(0, 0, 0, 0.5)",
                     "availability": "supported"
@@ -6328,7 +6337,7 @@ const catalog = {
                     "key": "ActorHPColor",
                     "storageKey": "ActorHPColor:func",
                     "label": "ActorHPColor",
-                    "description": "Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.",
+                    "description": "JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the actor. The default returns deathColor for a dead actor, crisisColor for dying, otherwise normalColor.",
                     "type": "string",
                     "default": "const actor = arguments[0];\nif (!actor) return this.normalColor();\nif (actor.isDead()) return this.deathColor();\nreturn actor.isDying() ? this.crisisColor() : this.normalColor();",
                     "availability": "supported",
@@ -6340,14 +6349,15 @@ const catalog = {
                             "actor"
                         ],
                         "failure": "AUTHORED_CODE_FAILED with field context"
-                    }
+                    },
+                    "context": "The CLI stores the body without executing it. Use the published default as a complete example; callback errors are reported with the field context. This chooses display color, not the underlying actor statistic."
                 },
                 {
                     "id": "CE-P-Color.ActorMPColor:func",
                     "key": "ActorMPColor",
                     "storageKey": "ActorMPColor:func",
                     "label": "ActorMPColor",
-                    "description": "Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.",
+                    "description": "JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the actor. The default returns crisisColor below 25% MP, otherwise normalColor.",
                     "type": "string",
                     "default": "const actor = arguments[0];\nreturn actor && actor.mpRate() < 0.25 ? this.crisisColor() : this.normalColor();",
                     "availability": "supported",
@@ -6359,14 +6369,15 @@ const catalog = {
                             "actor"
                         ],
                         "failure": "AUTHORED_CODE_FAILED with field context"
-                    }
+                    },
+                    "context": "The CLI stores the body without executing it. Use the published default as a complete example; callback errors are reported with the field context. This chooses display color, not the underlying actor statistic."
                 },
                 {
                     "id": "CE-P-Color.ActorTPColor:func",
                     "key": "ActorTPColor",
                     "storageKey": "ActorTPColor:func",
                     "label": "ActorTPColor",
-                    "description": "Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.",
+                    "description": "JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the actor. The default returns crisisColor below 25% TP, otherwise normalColor.",
                     "type": "string",
                     "default": "const actor = arguments[0];\nreturn actor && actor.tpRate() < 0.25 ? this.crisisColor() : this.normalColor();",
                     "availability": "supported",
@@ -6378,14 +6389,15 @@ const catalog = {
                             "actor"
                         ],
                         "failure": "AUTHORED_CODE_FAILED with field context"
-                    }
+                    },
+                    "context": "The CLI stores the body without executing it. Use the published default as a complete example; callback errors are reported with the field context. This chooses display color, not the underlying actor statistic."
                 },
                 {
                     "id": "CE-P-Color.ParamChange:func",
                     "key": "ParamChange",
                     "storageKey": "ParamChange:func",
                     "label": "ParamChange",
-                    "description": "Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.",
+                    "description": "JavaScript body called with this=ColorManager; return a drawing color string. arguments[0] is the signed numeric parameter change. The default returns powerUpColor for positive, powerDownColor for negative and normalColor for zero.",
                     "type": "string",
                     "default": "const change = arguments[0];\nreturn change > 0 ? this.powerUpColor() : change < 0 ? this.powerDownColor() : this.normalColor();",
                     "availability": "supported",
@@ -6397,7 +6409,8 @@ const catalog = {
                             "change"
                         ],
                         "failure": "AUTHORED_CODE_FAILED with field context"
-                    }
+                    },
+                    "context": "The CLI stores the body without executing it. Use the published default as a complete example; callback errors are reported with the field context. This chooses display color, not the underlying actor statistic."
                 },
                 {
                     "id": "CE-P-Color.DamageColor:func",
@@ -6420,7 +6433,7 @@ const catalog = {
                     "context": "JavaScript function body called with this=ColorManager and arguments[0]=colorType: 0 HP damage, 1 HP recovery, 2 MP damage, 3 MP recovery. Return a CSS color string and include a fallback for other codes. Used for damage-number coloring, not the actor HP/MP gauge colors."
                 }
             ],
-            "context": "Palette/hex colors are cached on first lookup. Restart the game after editing plugin parameters. Runtime extension code that changes the settings can call ColorManager.clearCachedKeys() before requesting them again; this clears cached lookups but does not change settings. DamageColor arguments[0] codes: 0=HP damage, 1=HP recovery, 2=MP damage, 3=MP recovery. Return a CSS color string; handle other codes with a fallback. DimColor1/2 are CSS colors for the window dimmer interior/edge gradient. CT gauge colors apply to the native TPB time/charge gauge."
+            "context": "Palette/hex colors are cached on first lookup. Restart the game after editing plugin parameters. Runtime extension code that changes the settings can call ColorManager.clearCachedKeys() before requesting them again; this clears cached lookups but does not change settings. DamageColor arguments[0] codes: 0=HP damage, 1=HP recovery, 2=MP damage, 3=MP recovery. Return a CSS color string; handle other codes with a fallback. DimColor1/2 are CSS colors for the window dimmer interior/edge gradient. CT gauge colors apply to the native TPB time/charge gauge. Each named field configures a distinct ColorManager drawing role; inspect its leaf for that role. Indexed Color* fields accept palette indices as text or hex colors; outline/item-background fields instead accept direct CSS color strings. Actor*Color and ParamChange are callbacks returning a color; they do not change statistics."
         },
         {
             "id": "CE-P-plugin.Window:struct",
@@ -6568,7 +6581,8 @@ const catalog = {
                     "description": "Show Scroll Bar?",
                     "type": "boolean",
                     "default": true,
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " True enables scrollbar rendering for scrollable windows only when content overflows and BarThickness > 0; false suppresses it. It does not force a bar on content that already fits."
                 },
                 {
                     "id": "CE-P-Window.BarThickness:num",
@@ -6639,7 +6653,8 @@ const catalog = {
                     "description": "Show Background?",
                     "type": "boolean",
                     "default": true,
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Controls the individual row background drawn by Window_Selectable.drawBackgroundRect, not the whole window frame or scene background. True invokes DrawItemBackgroundJS for each row background; false skips that draw."
                 },
                 {
                     "id": "CE-P-Window.ItemHeight:num",
@@ -6671,7 +6686,8 @@ const catalog = {
                             "rect"
                         ],
                         "failure": "AUTHORED_CODE_FAILED with field context"
-                    }
+                    },
+                    "context": " Called only when ShowItemBackground is true. this=Window_Selectable, arguments[0]=the row Rectangle in content pixels; return value is ignored. Draw into this.contentsBack using the rectangle, as in the default body. No argument named rect exists until the body declares it."
                 },
                 {
                     "id": "CE-P-Window.DurationPerChat:num",
@@ -11226,7 +11242,12 @@ const catalog = {
                     "id": "CE-A-plugin.MapOnceParallel.CommonEventID:num",
                     "availability": "supported"
                 }
-            ]
+            ],
+            "examples": [
+                "core commands list --target common-event:1 --json",
+                "core commands insert --target common-event:1 --before 0 --command MapOnceParallel --value '{\"CommonEventID\":2}'"
+            ],
+            "context": " Example requires distinct existing Common Events 1 and 2: event 1 calls event 2. Choose an allowed insertion index from commands list. Do not select the caller itself; each invocation starts a separate child and self-invocation can repeatedly enqueue work."
         },
         {
             "id": "CE-C-SwitchRandomizeOne",
@@ -12108,7 +12129,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.AnimationPoint.pointX:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
                 },
                 {
                     "key": "pointY",
@@ -12126,7 +12148,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.AnimationPoint.pointY:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
                 },
                 {
                     "key": "Mirror",
@@ -12136,7 +12159,8 @@ const catalog = {
                     "type": "boolean",
                     "default": false,
                     "id": "CE-A-plugin.AnimationPoint.Mirror:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
                 },
                 {
                     "key": "Mute",
@@ -12148,7 +12172,8 @@ const catalog = {
                     "id": "CE-A-plugin.AnimationPoint.Mute:eval",
                     "availability": "supported"
                 }
-            ]
+            ],
+            "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
         },
         {
             "id": "CE-C-PictureShowIcon",
@@ -12687,7 +12712,7 @@ const catalog = {
             "id": "CE-C-SystemLoadImages",
             "key": "SystemLoadImages",
             "label": "SystemLoadImages",
-            "description": "Preload resource lists without playing them. Map/common-event only; a running battle returns before argument conversion. Audio errors use the native retry screen.",
+            "description": "Preload resource lists without playing them. Map/common-event only; a running battle returns before argument conversion. Image errors use the native retry screen.",
             "availability": "supported",
             "targets": [
                 "map",
@@ -12935,7 +12960,8 @@ const catalog = {
                 "tilesets": [],
                 "titles1": [],
                 "titles2": []
-            }
+            },
+            "context": "Runs from a map/common-event interpreter and starts asynchronous ImageManager requests. It does not install an interpreter wait or guarantee that the next event command sees loaded images. A runtime consumer can check ImageManager.isReady() (all cached images) or the returned Bitmap readiness through its own loading flow; the CLI never waits for browser assets. Native non-system image cache entries survive until ImageManager.clear(), including map transfers; system images use the separate system cache. This is a preload request, not permanent resource retention. Use existing basenames without extensions; for example, pictures=[\"SceneIntro\"] requests img/pictures/SceneIntro.png, which must already exist."
         },
         {
             "id": "CE-C-SystemLoadAudio",
@@ -13245,7 +13271,7 @@ const catalog = {
             "args": [],
             "example": {},
             "reason": "Authored offline. Execution writes through the same-origin local development service in playtest.",
-            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server."
+            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. Execute this command only during an active battle, when $gameParty.inBattle() is true and a current troop ID exists. A troop event or a Common Event invoked by that battle can run it. The targets list identifies where an event command may be stored, not a promise that map execution has a current troop. Outside battle the runtime supplies troop ID0, which fails context validation; no export is produced. To export troop text outside battle, use ExportAllTroopText instead."
         },
         {
             "id": "CE-C-PictureCoordinatesMode",
@@ -13567,7 +13593,7 @@ const catalog = {
             "examples": [
                 "<No Mirror Offset X>"
             ],
-            "context": "Author in Database Animations > Name (Animations.json name). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Database Animations > Name (Animations.json name). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. These tags control only whether offsetX changes sign when an animation is already mirrored; they do not request mirroring. <MIRROR OFFSET X> enables that inversion, <NO MIRROR OFFSET X> disables it, and the AnimationMirrorOffset setting applies when neither is present.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "selection": "set matches the parameter/stage/axis variant, including percent versus numeric trait formats. Distinct variants can coexist. --occurrence selects a physical family occurrence explicitly; remove needs it when multiple family occurrences exist."
@@ -14318,16 +14344,101 @@ const catalog = {
             "example": "$onceParallel(1)",
             "description": "Run an existing Common Event once on the current map scene. Requires /QoL/ShortcutScripts=true; its scene owns cleanup.",
             "availability": "supported"
+        },
+        {
+            "id": "Sprite_Battler.setMoveEasingType",
+            "description": "Choose the easing curve for the current native battler sprite movement.",
+            "arguments": [
+                {
+                    "name": "type",
+                    "type": "string"
+                }
+            ],
+            "returns": "void",
+            "example": "sprite.startMove(100, 0, 30); sprite.setMoveEasingType('InOutQuad')",
+            "availability": "supported",
+            "context": "Call on a live Sprite_Battler after startMove. A new target resets the curve to Linear and records the full duration; an unchanged target preserves the current movement. Native sprite updates advance offsets and invoke onMoveEnd. Uses the same named curves as Coreto.CoreEngine.applyEasing."
+        },
+        {
+            "id": "Sprite_Battler.applyEasing",
+            "description": "Calculate the next movement coordinate from the current coordinate and remaining duration.",
+            "arguments": [
+                {
+                    "name": "current",
+                    "type": "number"
+                },
+                {
+                    "name": "target",
+                    "type": "number"
+                },
+                {
+                    "name": "duration",
+                    "type": "number"
+                },
+                {
+                    "name": "wholeDuration",
+                    "type": "number"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                },
+                {
+                    "name": "origin",
+                    "type": "number (optional)"
+                }
+            ],
+            "returns": "number",
+            "example": "sprite.applyEasing(40, 40, 3, 11, 'OutBounce', 0) // 37.5; original coordinate was 0",
+            "availability": "supported",
+            "context": "Runtime helper used by Sprite_Battler.updateMove. current, target and origin are coordinates in pixels. duration is the remaining positive integer frame count (1 through wholeDuration); wholeDuration is the positive integer full frame count. type accepts the same named curves as Coreto.CoreEngine.applyEasing. Returns the coordinate after one update without changing the sprite or clamping overshoot. With five arguments it reconstructs the origin from current progress; if the curve already equals 1, that origin is mathematically undetermined and it throws EASING_ORIGIN_REQUIRED. Supply the sixth argument origin consistently to support these curves. Native startMove/updateMove captures and supplies origin automatically."
+        },
+        {
+            "id": "Spriteset_Base.addAnimationSpriteToContainer",
+            "description": "Insere uma animação na camada escolhida pelo spriteset; Battle pode especializar a camada.",
+            "arguments": [
+                {
+                    "name": "sprite",
+                    "type": "Sprite_Animation|Sprite_AnimationMV"
+                }
+            ],
+            "returns": "void",
+            "example": "Em um plugin que especializa uma camada, o ciclo chama spriteset.addAnimationSpriteToContainer(sprite) com a animação já configurada. Fora dessa especialização, para exibir a animação de ID1 em um evento de mapa: $gameTemp.requestFauxAnimation([$gamePlayer], 1); (ID1 ilustrativo, deve existir em Animations).",
+            "availability": "supported",
+            "context": "Hook automático do ciclo de animações faux/point, útil a plugins do jogo que especializam camadas de desenho. O receptor é o Spriteset_Map ou Spriteset_Battle ativo, obtido de SceneManager._scene._spriteset após a criação da cena; sprite é a instância Sprite_Animation ou Sprite_AnimationMV que o ciclo já criou e configurou. A chamada só insere o sprite na camada; não cria animação nem a registra para atualização/destruição. Ao especializar o hook em um plugin, preserve o dono e deixe o ciclo remover e destruir a instância. Para tocar um efeito autorado normalmente, use os comandos de animação ou requestFauxAnimation/requestPointAnimation em vez de criar/chamar este hook em um evento. Não use durante criação incompleta ou depois da terminação da cena."
+        },
+        {
+            "id": "Spriteset_Base.removeAnimationFromContainer",
+            "description": "Destaca a animação do container atual; a liberação de recursos pertence ao ciclo que chamou este hook.",
+            "arguments": [
+                {
+                    "name": "sprite",
+                    "type": "Sprite_Animation|Sprite_AnimationMV"
+                }
+            ],
+            "returns": "void",
+            "example": "Em uma especialização do ciclo de remoção: spriteset.removeAnimationFromContainer(sprite), com sprite fornecido pelo ciclo e spriteset ainda válido. O chamador do ciclo continua com limpeza dos alvos e sprite.destroy(); não acrescente uma segunda destruição ao hook.",
+            "availability": "supported",
+            "context": "Hook automático de remoção das animações faux/point, destinado a plugins que especializam containers. O ciclo fornece this como spriteset dono da cena e sprite como a instância já registrada naquele ciclo, quando ela termina ou a cena libera seus efeitos. Pode acessar o spriteset ativo por SceneManager._scene._spriteset somente depois da criação da cena. Este método apenas remove sprite.parent; não destrói a instância, não remove registros de atualização e não encerra animações nos alvos. removeFauxAnimation/removePointAnimation fazem essas etapas e destroem o sprite após este hook. Uma extensão de camada deve preservar essa ordem e nunca destruir o sprite aqui pela segunda vez. Autoria comum usa comandos/requisições de animação, cujo término já aciona o ciclo; não chame este hook manualmente para cancelar um efeito."
         }
     ],
     "compatibility": {
         "messagePluginId": "VisuMZ_1_MessageCore",
-        "messageVersion": "1.54",
-        "messageSha256": "841c14879096e4568fff64f9c3c74263ffd6c8693f960c45c734670821f213bb",
+        "messageVersion": "1.57",
+        "messageSha256": "9398079b9925b35d359e70ca4ae7d9be3b20d74fac531bc16d3706dcf335b0c5",
         "originalCoreId": "VisuMZ_0_CoreEngine",
-        "policy": "Coreto precedes the original Message; disable the original Core."
+        "policy": "Coreto precedes Message, Victory and equipment consumers; disable the original Core. Qualified consumers receive the real Core settings, digit formatter and input/parameter/color interfaces. With Message or EquipSetBonuses active, the shared note dispatcher reaches unchanged actor and equipment parsers. EquipSetBonuses does not require Message to activate the implemented Core interface. Actor state icons retain native standard-cell alignment for SkillsStates overlays."
     },
-    "namespace": "core"
+    "namespace": "core",
+    "dependencies": {
+        "consumers": {
+            "VisuMZ_3_VictoryAftermath": "1.23",
+            "VisuMZ_2_ClassChangeSystem": "1.20",
+            "VisuMZ_1_SkillsStatesCore": "1.58",
+            "VisuMZ_1_ItemsEquipsCore": "1.61",
+            "VisuMZ_2_EquipSetBonuses": "1.05"
+        }
+    }
 };
 
 const configurationSourceField = {
@@ -14614,7 +14725,7 @@ class CoreError extends Error {
 function valueError(schema, value, path, expected = schema.type) {
     throw new CoreError("INVALID_VALUE", `Invalid value at ${path}; expected ${expected}.`, {
         field: path, received: value, expected,
-        hint: schema.id ? `Use core api describe ${schema.id} to inspect accepted values and defaults.` : "Use core api list to inspect accepted parameter values."
+        discovery: schema.id ? {id:schema.id} : {}
     });
 }
 
@@ -14724,11 +14835,12 @@ function decodeParameters(parameters, raw) {
 }
 
 
-function describeCoreApi(catalog) {
+function describeCoreApi(catalog, {commandExpectedHash = false} = {}) {
     validateOperationalCatalog(catalog);
     const entries = new Map(), signatures = new Map();
     const namespace = catalog.namespace ?? 'core';
     const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
+    const pathToken = value => /^[A-Za-z0-9_./:-]+$/.test(value) ? value : quote(value);
     function add(descriptor, usage, source) {
         const signature = JSON.stringify(source);
         if (signatures.has(descriptor.id) && signatures.get(descriptor.id) !== signature) throw new Error(`${catalog.namespace}/${descriptor.id}: conflicting descriptors share an ID`);
@@ -14741,10 +14853,10 @@ function describeCoreApi(catalog) {
         for (const field of list) {
             const path = `${parent}/${field.key}`;
             const example = surface === 'parameter'
-                ? `${namespace} parameters get --path ${path.replaceAll('{index}', '0')} --json`
+                ? `${namespace} parameters get --path ${pathToken(path.replaceAll('{index}', '0'))} --json`
                 : `${namespace} api describe ${command} --json`;
             const operational = configurationPublicField(field, catalog);
-            const writing = surface === 'parameter' ? `${namespace} parameters set --path ${path.replaceAll('{index}', '0')} --value <JSON> [--dry-run] [--json]. Use the field type, default and limits to choose the JSON value. Run the CLI with --project pointing to the MZ game folder; the plugin entry must exist in js/plugins.js. Reload the editor after writing.` : undefined;
+            const writing = surface === 'parameter' ? `${namespace} parameters set --path ${pathToken(path.replaceAll('{index}', '0'))} --value <JSON> [--dry-run] [--json]. Use the field type, default and limits to choose the JSON value. Run the CLI with --project pointing to the MZ game folder; the plugin entry must exist in js/plugins.js. Reload the editor after writing.` : undefined;
             add({...operational, surface, context: operational.context ?? 'browser runtime; authoring is offline',
                 ...(writing ? {writing:operational.writing ?? writing} : {}), examples: operational.examples ?? [example]}, {surface, path, ...(command ? {command} : {})}, field);
             if (field.type === 'struct') fields(field.fields, path, surface, command);
@@ -14754,8 +14866,8 @@ function describeCoreApi(catalog) {
     fields(catalog.parameters, '', 'parameter');
     for (const command of catalog.commands) {
         add({...command, surface: 'command', context: command.context ?? command.environment ?? 'browser runtime',
-            writing: command.writing ?? 'Use an existing target and insertion index from commands list; pass its result.fileHash as --expected-hash. Run the CLI with --project pointing to the MZ game folder. The command executes later when the game interpreter reaches it; authoring does not run it.',
-            examples: command.examples ?? [`${namespace} commands list --target common-event:1 --json`, `${namespace} commands insert --target common-event:1 --before 0 --command ${command.key} --value ${quote(JSON.stringify(Object.fromEntries(command.args.map(field => [field.key, field.default]))))} --expected-hash HASH_FROM_LIST`]},
+            writing: command.writing ?? `Use an existing target and insertion index from commands list${commandExpectedHash ? '; pass its result.fileHash as --expected-hash. ' : '. This command interface does not accept --expected-hash; each edit checks the file snapshot read by that operation. '}Run the CLI with --project pointing to the MZ game folder. The command executes later when the game interpreter reaches it; authoring does not run it.`,
+            examples: command.examples ?? [`${namespace} commands list --target common-event:1 --json`, `${namespace} commands insert --target common-event:1 --before 0 --command ${command.key} --value ${quote(JSON.stringify(Object.fromEntries(command.args.map(field => [field.key, field.default]))))}${commandExpectedHash ? ' --expected-hash HASH_FROM_LIST' : ''}`]},
         {surface: 'command', path: `/commands/${command.key}`}, command);
         fields(command.args, `/commands/${command.key}`, 'command-argument', command.key);
     }
@@ -15279,8 +15391,11 @@ function installMapRules(settings) {
         this._encounterCount = Math.randomInt(step) + Math.randomInt(step) + this.encounterStepsMinimum();
     };
     const collision = Game_Event.prototype.isCollidedWithEvents;
+    Game_Event.prototype.isSmartEventCollisionOn = function() {
+        return options.SmartEventCollisionPriority;
+    };
     Game_Event.prototype.isCollidedWithEvents = function(x, y) {
-        if (!options.SmartEventCollisionPriority) return collision.call(this, x, y);
+        if (!this.isSmartEventCollisionOn()) return collision.call(this, x, y);
         return this.isNormalPriority() && $gameMap.eventsXyNt(x, y).some(event => event.isNormalPriority());
     };
 
@@ -15883,12 +15998,14 @@ function installAnimationLifecycle() {
         this._pointAnimationSprites = [];
         return initializeSpriteset.apply(this, args);
     };
+    Spriteset_Base.prototype.addAnimationSpriteToContainer = function(sprite) { this._effectsContainer.addChild(sprite); };
+    Spriteset_Base.prototype.removeAnimationFromContainer = function(sprite) { sprite.parent?.removeChild(sprite); };
     function animationSprite(owner, targets, targetSprites, animation, mirror, delay, mute) {
         const sprite = new (owner.isMVAnimation(animation) ? Sprite_AnimationMV : Sprite_Animation)();
         sprite.targetObjects = targets;
         sprite.setup(targetSprites, animation, mirror, delay);
         sprite.setMute(mute);
-        owner._effectsContainer.addChild(sprite);
+        owner.addAnimationSpriteToContainer(sprite);
         return sprite;
     }
     Spriteset_Base.prototype.createFauxAnimation = function(request) {
@@ -15916,7 +16033,7 @@ function installAnimationLifecycle() {
         const collection = `_${kind.toLowerCase()}AnimationSprites`;
         Spriteset_Base.prototype[`remove${kind}Animation`] = function(sprite) {
             this[collection].remove(sprite);
-            this._effectsContainer.removeChild(sprite);
+            this.removeAnimationFromContainer(sprite);
             for (const target of sprite.targetObjects) {
                 if (kind === "Point") {
                     target.parent?.removeChild(target);
@@ -16972,6 +17089,17 @@ function installActorPresentation(settings, parameterIcon) {
         const gaugeY = y + this.lineHeight() - height - 2;
         this.contents.fillRect(x, gaugeY, width, height, ColorManager.gaugeBackColor());
         this.contents.gradientFillRect(x + 1, gaugeY + 1, Math.floor((width - 2) * rate), height - 2, color1, color2);
+    };
+    Window_StatusBase.prototype.drawActorIcons = function(actor, x, y, width = 144) {
+        const cellWidth = ImageManager.standardIconWidth || 32;
+        const cellHeight = ImageManager.standardIconHeight || 32;
+        const icons = actor.allIcons().slice(0, Math.floor((width || 144) / cellWidth));
+        const iconY = y + Math.ceil((cellHeight - ImageManager.iconHeight) / 2);
+        let iconX = x + Math.ceil((cellWidth - ImageManager.iconWidth) / 2);
+        for (const icon of icons) {
+            this.drawIcon(icon, iconX, iconY);
+            iconX += cellWidth;
+        }
     };
     Window_StatusBase.prototype.smallParamFontSize = function() { return $gameSystem.mainFontSize() - 8; };
     Window_StatusBase.prototype.drawActorClass = function(actor, x, y, width = 168) {
@@ -18039,6 +18167,36 @@ function installBattleQuality(settings) {
 }
 
 function installBattlePositions(settings) {
+    const startMove = Sprite_Battler.prototype.startMove;
+    Sprite_Battler.prototype.startMove = function(x, y, duration) {
+        const changed = this._targetOffsetX !== x || this._targetOffsetY !== y;
+        const originX = this._offsetX, originY = this._offsetY;
+        const result = startMove.call(this, x, y, duration);
+        if (changed) {
+            this._movementOriginX = originX;
+            this._movementOriginY = originY;
+            this._movementWholeDuration = duration;
+            this._moveEasingType = 'Linear';
+        }
+        return result;
+    };
+    Sprite_Battler.prototype.setMoveEasingType = function(type) { this._moveEasingType = type; };
+    Sprite_Battler.prototype.applyEasing = function(current, target, duration, wholeDuration, type, origin) {
+        const before = applyEasing((wholeDuration - duration) / wholeDuration, type || 'Linear');
+        const after = applyEasing((wholeDuration - duration + 1) / wholeDuration, type || 'Linear');
+        if (origin === undefined) {
+            if (before === 1) throw new CoreError('EASING_ORIGIN_REQUIRED', 'This curve has already reached its target; provide the original coordinate as the sixth argument.');
+            origin = (current - target * before) / (1 - before);
+        }
+        return origin + (target - origin) * after;
+    };
+    Sprite_Battler.prototype.updateMove = function() {
+        if (this._movementDuration <= 0) return;
+        this._offsetX = this.applyEasing(this._offsetX, this._targetOffsetX, this._movementDuration, this._movementWholeDuration, this._moveEasingType, this._movementOriginX);
+        this._offsetY = this.applyEasing(this._offsetY, this._targetOffsetY, this._movementDuration, this._movementWholeDuration, this._moveEasingType, this._movementOriginY);
+        this._movementDuration--;
+        if (this._movementDuration === 0) this.onMoveEnd();
+    };
     const resolution = settings.ScreenResolution;
     const setActorHome = Sprite_Actor.prototype.setActorHome;
     Sprite_Actor.prototype.setActorHome = function(index) {
@@ -18295,17 +18453,23 @@ function installMetadataOperations() {
     }
     async function request(record, url, options = {}) {
         const controller = new AbortController();
-        const cancel = () => controller.abort(new MetadataError('METADATA_OPERATION_CANCELLED', 'The originating event or scene has ended.'));
+        let cancellationReason;
+        function abort(reason) {
+            if (controller.signal.aborted) return;
+            cancellationReason = reason;
+            controller.abort();
+        }
+        const cancel = () => abort(new MetadataError('METADATA_OPERATION_CANCELLED', 'The originating event or scene has ended.'));
         record.controller.signal.addEventListener('abort', cancel, {once: true});
         if (record.controller.signal.aborted) cancel();
-        const timer = setTimeout(() => controller.abort(new MetadataError('METADATA_TRANSPORT_TIMEOUT', 'The metadata service did not respond within the transport limit.')), record.session.timeoutMs);
+        const timer = setTimeout(() => abort(new MetadataError('METADATA_TRANSPORT_TIMEOUT', 'The metadata service did not respond within the transport limit.')), record.session.timeoutMs);
         try {
             const response = await fetch(url, {...options, signal: controller.signal, cache: 'no-store'});
             // Consume the body before releasing the deadline: headers alone do not complete a read.
             const text = await response.text();
             return {response, text};
         } catch (error) {
-            if (controller.signal.aborted) throw controller.signal.reason;
+            if (controller.signal.aborted) throw cancellationReason;
             throw error;
         } finally {
             clearTimeout(timer);
@@ -18389,8 +18553,12 @@ function installMetadataOperations() {
         let capability, requestId;
         try {
             capability = session();
-            if (typeof globalThis.crypto?.randomUUID !== 'function' || typeof crypto.subtle?.digest !== 'function') throw new MetadataError('METADATA_BROWSER_CAPABILITY', 'This browser cannot identify and verify a metadata request.');
-            requestId = crypto.randomUUID();
+            if (typeof globalThis.crypto?.getRandomValues !== 'function' || typeof crypto.subtle?.digest !== 'function') throw new MetadataError('METADATA_BROWSER_CAPABILITY', 'This browser cannot identify and verify a metadata request.');
+            const bytes = crypto.getRandomValues(new Uint8Array(16));
+            bytes[6] = (bytes[6] & 0x0f) | 0x40;
+            bytes[8] = (bytes[8] & 0x3f) | 0x80;
+            const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+            requestId = `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
         } catch (error) {
             showFeedback(`Exportação falhou: ${error.message}`);
             console.error(`[${error.code || 'METADATA_SERVICE_REQUIRED'}] ${error.message}`);
@@ -18626,30 +18794,8 @@ function installMessageCompatibility(active, settings, formatDigits, parameterIc
     const compatibility = globalThis.VisuMZ ??= {};
     if (compatibility.coretoMessageBridge) installationError("CORE_MESSAGE_BRIDGE_DUPLICATE", "Message bridge already installed.");
     compatibility.coretoMessageBridge = true;
-    // Legacy consumers use the reference API version to select implemented Core hooks.
-    // Settings is the actual Core state, so rebinding and presentation read the same values.
-    compatibility.CoreEngine = {version: 1.90, Settings: settings};
-    const imported = globalThis.Imported ??= {};
-    const categories = ["Class", "Skill", "Item", "Weapon", "Armor", "Enemy", "State"];
-    // Message wraps these extension points before the database-ready dispatcher invokes them.
-    for (const category of categories) compatibility[`Parse${category}Notetags`] ??= function() {};
-    compatibility.ParseAllNotetags = function() {
-        const groups = [$dataClasses, $dataSkills, $dataItems, $dataWeapons, $dataArmors, $dataEnemies, $dataStates];
-        for (const [index, group] of groups.entries()) {
-            for (const record of group) {
-                if (record) compatibility[`Parse${categories[index]}Notetags`].call(this, record);
-            }
-        }
-    };
-    const onDatabaseLoaded = Scene_Boot.prototype.onDatabaseLoaded;
-    Scene_Boot.prototype.onDatabaseLoaded = function(...args) {
-        const result = onDatabaseLoaded.apply(this, args);
-        compatibility.ParseAllNotetags();
-        return result;
-    };
-    compatibility.ApplyEasing = applyEasing;
-    compatibility.GroupDigits = formatDigits;
-    compatibility.GetParamIcon = parameterIcon;
+    installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    installLegacyCoreNotetags();
     compatibility.applyMoveEasing = applyEasing;
     for (const method of ["easeIn", "easeOut", "easeInOut"]) {
         Window_Base.prototype[method] = Game_Picture.prototype[method];
@@ -18665,7 +18811,49 @@ function installMessageCompatibility(active, settings, formatDigits, parameterIc
             this._pictureTextWindow = null;
         }
     };
-    imported.VisuMZ_0_CoreEngine = true;
+}
+
+function installLegacyCoreInterface(settings, formatDigits, parameterIcon) {
+    const compatibility = globalThis.VisuMZ ??= {};
+    compatibility.CoreEngine = {version: 1.90, Settings: settings};
+    compatibility.ApplyEasing = applyEasing;
+    compatibility.GroupDigits = formatDigits;
+    compatibility.GetParamIcon = parameterIcon;
+    globalThis.Imported ??= {};
+    Imported.VisuMZ_0_CoreEngine = true;
+}
+
+function installVictoryCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (active.some(plugin => plugin.name === "VisuMZ_3_VictoryAftermath")) {
+        installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    }
+}
+
+function installLegacyCoreNotetags() {
+    const compatibility = globalThis.VisuMZ;
+    const categories = ["Actor", "Class", "Skill", "Item", "Weapon", "Armor", "Enemy", "State"];
+    // Consumers wrap these extension points before the database-ready dispatcher invokes them.
+    for (const category of categories) compatibility[`Parse${category}Notetags`] ??= function() {};
+    compatibility.ParseAllNotetags = function() {
+        const groups = [$dataActors, $dataClasses, $dataSkills, $dataItems, $dataWeapons, $dataArmors, $dataEnemies, $dataStates];
+        for (const [index, group] of groups.entries()) {
+            for (const record of group) {
+                if (record) compatibility[`Parse${categories[index]}Notetags`].call(this, record);
+            }
+        }
+    };
+    const onDatabaseLoaded = Scene_Boot.prototype.onDatabaseLoaded;
+    Scene_Boot.prototype.onDatabaseLoaded = function(...args) {
+        const result = onDatabaseLoaded.apply(this, args);
+        compatibility.ParseAllNotetags();
+        return result;
+    };
+}
+
+function installEquipCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (!active.some(plugin => plugin.name === "VisuMZ_2_EquipSetBonuses")) return;
+    installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    if (!VisuMZ.coretoMessageBridge) installLegacyCoreNotetags();
 }
 
 function installSaveLifecycle({normalizeSystem, normalizeBattle, normalizePicture}) {
@@ -18806,6 +18994,8 @@ function installCore() {
     installGoldPresentation(settings, formatDigits);
     installPictureCoordinates(installMetadataOperations());
     installMessageCompatibility(active, settings, formatDigits, parameterIcon);
+    installVictoryCoreCompatibility(active, settings, formatDigits, parameterIcon);
+    installEquipCoreCompatibility(active, settings, formatDigits, parameterIcon);
     installSaveLifecycle({normalizeSystem, normalizeBattle, normalizePicture});
     installNewGameSettings(settings);
 
@@ -18830,7 +19020,8 @@ function installCore() {
                 tags: catalog.tags,
                 methods: catalog.methods,
                 entries: describeCoreApi(catalog),
-                compatibility: catalog.compatibility
+                compatibility: catalog.compatibility,
+                dependencies: catalog.dependencies
             }));
         }
     };

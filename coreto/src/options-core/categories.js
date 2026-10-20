@@ -4,7 +4,8 @@ function installOptionsCategories(settings){
     function invoke(option,key,receiver,...args){
         try{return option[key].apply(receiver,args);}
         catch(cause){
-            const error=new Error(`Options ${key} (${option.Symbol??option.Name}): ${cause.message}`,{cause});
+            const error=new Error(`Options ${key} (${option.Symbol??option.Name}): ${cause.message}`);
+            Object.defineProperty(error,'cause',{value:cause,writable:true,configurable:true});
             error.code='OPT_CALLBACK_FAILED';error.callback=key;throw error;
         }
     }
@@ -74,7 +75,7 @@ function installOptionsCategories(settings){
                 this.drawIcon(icon,rect.x+(rect.width-ImageManager.iconWidth)/2,rect.y+(this.lineHeight()-ImageManager.iconHeight)/2);
             }else{
                 const remaining=rect.width-this.textSizeEx(name).width,align=this.itemTextAlign();
-                const x=rect.x+(align==='center'?remaining/2:align==='right'?remaining:0);
+                const x=rect.x+(align==='center'?Math.floor(remaining/2):align==='right'?remaining:0);
                 this.drawTextEx(name,x,rect.y,rect.width);
             }
         }

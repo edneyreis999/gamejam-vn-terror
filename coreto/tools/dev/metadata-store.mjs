@@ -84,7 +84,8 @@ export function createMetadataStore(root,{fileSystem=fs}={}) {
             if(Boolean(before)!==Boolean(current)||before&&(before.hash!==current.hash||before.info.ino!==current.info.ino||before.info.dev!==current.info.dev))throw new MetadataError('METADATA_TARGET_CONFLICT','The destination changed before commit. Inspect it before retrying.',409);
             shutdown.signal.throwIfAborted();
             await io.rename(temporary,target);renamed=true;
-            const parent=await io.open(directory,'r');try {await parent.sync();}finally {await parent.close();}
+            // Windows cannot fsync directories through fs.open; flush the renamed file there.
+            const committed=await io.open(process.platform==='win32'?target:directory,process.platform==='win32'?'r+':'r');try {await committed.sync();}finally {await committed.close();}
             await validateSources(document);
             const confirmed=await regularFile(target);
             if(confirmed.hash!==sha256(content))throw new MetadataError('METADATA_WRITE_UNCONFIRMED','Replacement occurred but the file could not be confirmed. Inspect the destination before retrying.',409);

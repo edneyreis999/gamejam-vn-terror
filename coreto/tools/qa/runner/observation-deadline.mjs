@@ -28,3 +28,17 @@ export async function readObservation(page, label, fn, arg, milliseconds) {
     throw error;
   }
 }
+
+export async function closeWithDeadline(close, milliseconds, label) {
+  const closing = Promise.resolve().then(close);
+  const [observed, completed] = await Promise.allSettled([
+    withDeadline(() => closing, milliseconds, label), closing
+  ]);
+  if (observed.status === 'rejected') {
+    if (completed.status === 'rejected' && completed.reason !== observed.reason) {
+      throw new AggregateError([observed.reason, completed.reason], `${observed.reason.message} ${completed.reason.message}`);
+    }
+    throw observed.reason;
+  }
+  return completed.value;
+}

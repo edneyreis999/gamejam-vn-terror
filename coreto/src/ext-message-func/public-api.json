@@ -108,12 +108,13 @@
           "key": "Speed",
           "storageKey": "Speed:num",
           "label": "Speed",
-          "description": "What is the speed at which Extended Fast Forward works at?",
+          "description": "Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds.",
           "editorType": "number",
           "nativeDefault": "8",
           "type": "number",
           "min": 2,
-          "default": 8
+          "default": 8,
+          "expected": "With extended fast-forward active on the map, an update runs the configured number of map update cycles. Battle returns false for this mode and is not accelerated."
         },
         {
           "id": "EXT-M-029",
@@ -132,7 +133,8 @@
         "Enable": "true",
         "Speed": 8,
         "SceneChangeReset": "true"
-      }
+      },
+      "context": " Activate on the map while an event is running by holding the Message Core General > Fast Forward Key (FastForwardKey, default pagedown), or toggle the Fast Forward console button when that console is enabled. Releasing the held key ends that activation; Cancel/right-click clears the toggled mode. Enable must be true, ExtFastFwdDisallow must allow it, and active choice/number/item input windows suspend it. Configure defaults in MZ Plugin Manager and restart playtest; SceneChangeReset clears toggled mode when message windows are recreated. Battle does not use extended fast-forward."
     },
     {
       "id": "EXT-M-015",
@@ -768,7 +770,8 @@
           "editorType": "text",
           "nativeDefault": "188",
           "type": "string",
-          "default": "188"
+          "default": "188",
+          "context": " Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename."
         },
         {
           "id": "EXT-M-078",
@@ -860,7 +863,8 @@
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": " Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
         },
         {
           "id": "EXT-M-088",
@@ -871,7 +875,8 @@
           "editorType": "text",
           "nativeDefault": "-8",
           "type": "number",
-          "default": -8
+          "default": -8,
+          "context": " Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
         }
       ],
       "default": {
@@ -1388,7 +1393,8 @@
               "editorType": "text",
               "nativeDefault": "188",
               "type": "string",
-              "default": "188"
+              "default": "188",
+              "context": " Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename."
             },
             {
               "id": "EXT-M-078",
@@ -1480,7 +1486,8 @@
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": " Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
             },
             {
               "id": "EXT-M-088",
@@ -1491,7 +1498,8 @@
               "editorType": "text",
               "nativeDefault": "-8",
               "type": "number",
-              "default": -8
+              "default": -8,
+              "context": " Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
             }
           ],
           "default": {
@@ -2204,7 +2212,7 @@
       "id": "EXT-M-014",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "plugin/FastFwd:struct",
-      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa",
+      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa Activate on the map while an event is running by holding the Message Core General > Fast Forward Key (FastForwardKey, default pagedown), or toggle the Fast Forward console button when that console is enabled. Releasing the held key ends that activation; Cancel/right-click clears the toggled mode. Enable must be true, ExtFastFwdDisallow must allow it, and active choice/number/item input windows suspend it. Configure defaults in MZ Plugin Manager and restart playtest; SceneChangeReset clears toggled mode when message windows are recreated. Battle does not use extended fast-forward.",
       "expected": "Estrutura FastFwd aplica os campos filhos mapeados individualmente; array conserva ordem, nomes e defaults de cada entrada.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
@@ -2615,7 +2623,7 @@
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "struct:FastFwd/Speed:num",
       "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa",
-      "expected": "Multiplicador do fast-forward acelera atualização do evento nos contextos suportados.",
+      "expected": "With extended fast-forward active on the map, an update runs the configured number of map update cycles. Battle returns false for this mode and is not accelerated.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "0.1.0",
@@ -2625,7 +2633,7 @@
       "examples": [
         {
           "input": "8",
-          "expected": "Multiplicador do fast-forward acelera atualização do evento nos contextos suportados."
+          "expected": "With extended fast-forward active on the map, an update runs the configured number of map update cycles. Battle returns false for this mode and is not accelerated."
         }
       ],
       "diagnostics": {
@@ -2646,13 +2654,13 @@
           "2"
         ],
         "desc": [
-          "What is the speed at which Extended Fast Forward works at?"
+          "Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds."
         ],
         "default": [
           "8"
         ]
       },
-      "description": "What is the speed at which Extended Fast Forward works at?"
+      "description": "Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds."
     },
     {
       "id": "EXT-M-029",
@@ -4290,7 +4298,7 @@
       "id": "EXT-M-077",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "struct:MsgCursor/IconIndex:str",
-      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa",
+      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename.",
       "expected": "Ícone configurado aparece como cursor de pausa.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
@@ -4621,7 +4629,7 @@
       "id": "EXT-M-087",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "struct:MsgCursor/OffsetX:num",
-      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa",
+      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds.",
       "expected": "Offset horizontal é aplicado à posição calculada do componente.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
@@ -4659,7 +4667,7 @@
       "id": "EXT-M-088",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "struct:MsgCursor/OffsetY:num",
-      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa",
+      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds.",
       "expected": "Offset vertical é aplicado à posição calculada do componente.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
@@ -5851,7 +5859,7 @@
       "id": "EXT-RX-001",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "/<HIDE (?:BUTTON CONSOLE|CONSOLE|BUTTONS)>/gi",
-      "context": "Console no mapa",
+      "context": "Console no mapa Write <HIDE BUTTON CONSOLE> in the body of a line in the native Show Text event command on the map. It is a text tag, not a database Note or a Plugin Command argument.",
       "expected": "Todos aliases ocultam o console somente na mensagem atual; próxima mensagem restaura regra global.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -6169,7 +6177,7 @@
       "id": "EXT-BEH-console-save",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "console-save",
-      "context": "Configure /Buttons/List with a JSON array of button names; it replaces the list, so include every button you want to retain. Set /MsgButtonConsole/ShowDefault to the JavaScript source string \"true\" for new-game visibility, or use the MsgButtonConsole plugin command with Visible=\"true\" for current saved state. Buttons are shown with map messages, follow window openness, and accept clicks/touch only when visible and fully open. AutoSizeHide and <HIDE BUTTON CONSOLE> can hide them. Use ext-message parameters set with --project pointing to the game, reload the editor and restart the game after parameter writes.",
+      "context": "Configure /Buttons/List with a JSON array of button names; it replaces the list, so include every button you want to retain. Set /MsgButtonConsole/ShowDefault to the JavaScript source string \"true\" for new-game visibility, or use the MsgButtonConsole plugin command with Visible=\"true\" for current saved state. Buttons are shown with map messages, follow window openness, and accept clicks/touch only when visible and fully open. AutoSizeHide and <HIDE BUTTON CONSOLE> can hide them. Use ext-message parameters set with --project pointing to the game, reload the editor and restart the game after parameter writes. The supplied compatible provider is Coreto_1_SaveCore 0.1.0; configure it and its Core dependency in the project. Without an active Save Core provider alias the button is omitted. Keep the button name in /Buttons/List and satisfy the map/visibility prerequisites above.",
       "expected": "Abre Scene_SaveButtonConsole somente no mapa com save habilitado; caso contrário buzzer.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -6193,7 +6201,7 @@
       "id": "EXT-BEH-console-load",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "console-load",
-      "context": "Configure /Buttons/List with a JSON array of button names; it replaces the list, so include every button you want to retain. Set /MsgButtonConsole/ShowDefault to the JavaScript source string \"true\" for new-game visibility, or use the MsgButtonConsole plugin command with Visible=\"true\" for current saved state. Buttons are shown with map messages, follow window openness, and accept clicks/touch only when visible and fully open. AutoSizeHide and <HIDE BUTTON CONSOLE> can hide them. Use ext-message parameters set with --project pointing to the game, reload the editor and restart the game after parameter writes.",
+      "context": "Configure /Buttons/List with a JSON array of button names; it replaces the list, so include every button you want to retain. Set /MsgButtonConsole/ShowDefault to the JavaScript source string \"true\" for new-game visibility, or use the MsgButtonConsole plugin command with Visible=\"true\" for current saved state. Buttons are shown with map messages, follow window openness, and accept clicks/touch only when visible and fully open. AutoSizeHide and <HIDE BUTTON CONSOLE> can hide them. Use ext-message parameters set with --project pointing to the game, reload the editor and restart the game after parameter writes. The supplied compatible provider is Coreto_1_SaveCore 0.1.0; configure it and its Core dependency in the project. Without an active Save Core provider alias the button is omitted. Keep the button name in /Buttons/List and satisfy the map/visibility prerequisites above.",
       "expected": "Abre Scene_Load somente no mapa com save existente; caso contrário buzzer.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -6217,7 +6225,7 @@
       "id": "EXT-BEH-console-options",
       "plugin": "Coreto_2_ExtMessageFunc",
       "title": "console-options",
-      "context": "Configure /Buttons/List with a JSON array of button names; it replaces the list, so include every button you want to retain. Set /MsgButtonConsole/ShowDefault to the JavaScript source string \"true\" for new-game visibility, or use the MsgButtonConsole plugin command with Visible=\"true\" for current saved state. Buttons are shown with map messages, follow window openness, and accept clicks/touch only when visible and fully open. AutoSizeHide and <HIDE BUTTON CONSOLE> can hide them. Use ext-message parameters set with --project pointing to the game, reload the editor and restart the game after parameter writes.",
+      "context": "Configure /Buttons/List with a JSON array of button names; it replaces the list, so include every button you want to retain. Set /MsgButtonConsole/ShowDefault to the JavaScript source string \"true\" for new-game visibility, or use the MsgButtonConsole plugin command with Visible=\"true\" for current saved state. Buttons are shown with map messages, follow window openness, and accept clicks/touch only when visible and fully open. AutoSizeHide and <HIDE BUTTON CONSOLE> can hide them. Use ext-message parameters set with --project pointing to the game, reload the editor and restart the game after parameter writes. The supplied compatible provider is Coreto_1_OptionsCore 0.1.0; configure it and its Core dependency in the project. Without an active Options Core provider alias the button is omitted. Keep options in /Buttons/List and use it from a fully open map message.",
       "expected": "Abre Scene_Options somente no mapa; caso contrário buzzer.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -6365,11 +6373,11 @@
     },
     "messages": {
       "Coreto_1_MessageCore": "0.1.0",
-      "VisuMZ_1_MessageCore": "1.54"
+      "VisuMZ_1_MessageCore": "1.57"
     },
     "integrations": {
-      "VisuMZ_1_SaveCore": "1.13",
-      "VisuMZ_1_OptionsCore": "1.27",
+      "VisuMZ_1_SaveCore": "1.14",
+      "VisuMZ_1_OptionsCore": "1.28",
       "VisuMZ_3_MessageLog": "1.08"
     }
   },

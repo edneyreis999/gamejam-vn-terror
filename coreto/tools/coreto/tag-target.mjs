@@ -4,7 +4,7 @@ import { textField } from "./texts.mjs";
 import { eventTarget, valueAt } from "./event-target.mjs";
 import { eventUnits } from "./event-list.mjs";
 
-const databases = {actors: "Actors", classes: "Classes", enemies: "Enemies", weapons: "Weapons", armors: "Armors", states: "States", tilesets: "Tilesets"};
+const databases = {actors: "Actors", classes: "Classes", enemies: "Enemies", weapons: "Weapons", armors: "Armors", states: "States", tilesets: "Tilesets", skills: "Skills", items: "Items"};
 function numbers(match) {
     const values = match.map(Number);
     if (!values.every(Number.isSafeInteger)) throw new CoreError("INVALID_TARGET", "Target IDs and indices must be safe integers.", {field: "target"});
@@ -13,6 +13,19 @@ function numbers(match) {
 
 export function tagTarget(root, selector) {
     let match;
+    if ((match = /^common-event:([1-9]\d*)\/comment:(0|[1-9]\d*)$/.exec(selector ?? ''))) {
+        const [id, index] = numbers(match.slice(1));
+        return {file: join(root, 'data/CommonEvents.json'), id, index, type: 'common-event-comment', recordPath: [id], listPath: [id, 'list']};
+    }
+    if ((match = /^map:([1-9]\d*)\/event:([1-9]\d*)(?:\/note|\/page:([1-9]\d*)\/comment:(0|[1-9]\d*))?$/.exec(selector ?? ''))) {
+        const [map, id] = numbers(match.slice(1, 3));
+        const base = {file: join(root, 'data', `Map${String(map).padStart(3, '0')}.json`), id, recordPath: ['events', id]};
+        if (match[3] !== undefined) {
+            const [page, index] = numbers(match.slice(3));
+            return {...base, type: 'event-comment', page, index, listPath: ['events', id, 'pages', page - 1, 'list']};
+        }
+        return {...base, type: 'event-note', path: ['events', id, 'note']};
+    }
     if((match=/^system:(switch|variable):([1-9]\d*)$/.exec(selector??''))){
         const [id]=numbers([match[2]]);
         return {file:join(root,'data/System.json'),type:'system-'+match[1],id,path:[match[1]==='switch'?'switches':'variables',id]};
@@ -25,7 +38,7 @@ export function tagTarget(root, selector) {
         const [id] = numbers(match.slice(1));
         return {file: join(root, "data", `Map${String(id).padStart(3, "0")}.json`), type: "map-name", id, path: ["displayName"]};
     }
-    if ((match = /^(actors|classes|enemies|weapons|armors|states|tilesets):([1-9]\d*)$/.exec(selector ?? ""))) {
+    if ((match = /^(actors|classes|enemies|weapons|armors|states|tilesets|skills|items):([1-9]\d*)$/.exec(selector ?? ""))) {
         const [id] = numbers([match[2]]);
         return {file: join(root, "data", databases[match[1]] + ".json"), type: match[1], id, recordPath: [id], path: [id, "note"]};
     }
@@ -51,7 +64,7 @@ export function tagTarget(root, selector) {
         }
         return {...base, type: "troop"};
     }
-    throw new CoreError("INVALID_TARGET", "Use actors:A, classes:C, enemies:E, weapons:W, armors:A, states:S, tilesets:T, map:M, class:C/learning:L, animation:A, troop:T/name or troop:T/page:P/comment:I. troop:T lists all fields.", {field: "target", received: selector});
+    throw new CoreError("INVALID_TARGET", "Use actors:A, classes:C, enemies:E, weapons:W, armors:A, states:S, skills:S, items:I, tilesets:T, map:M, map:M/event:E, map:M/event:E/page:P/comment:I, common-event:E/comment:I, class:C/learning:L, animation:A, troop:T/name or troop:T/page:P/comment:I. troop:T lists all fields.", {field: "target", received: selector});
 }
 
 export function tagFields(document, target, selector) {
@@ -75,7 +88,7 @@ export function tagFields(document, target, selector) {
         }
         return fields;
     }
-    if (target.type === "troop-comment") {
+    if (['troop-comment', 'event-comment', 'common-event-comment'].includes(target.type)) {
         const list = valueAt(document.value, target.listPath);
         const unit = eventUnits(list).find(unit => unit.index === target.index);
         if (!unit || list[target.index].code !== 108) throw new CoreError("INVALID_COMMENT_TARGET", "Select the index of an existing 108 comment header, not a 408 continuation.", {field: "comment", received: target.index});

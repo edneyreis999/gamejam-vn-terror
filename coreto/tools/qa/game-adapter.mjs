@@ -1,5 +1,5 @@
 import {cp, lstat, mkdir, readdir, readFile, realpath} from 'node:fs/promises';
-import {join, resolve, dirname, basename} from 'node:path';
+import {join, resolve, dirname, basename, sep} from 'node:path';
 import {createHash} from 'node:crypto';
 import {parseArgs} from 'node:util';
 import {defaultGameRoot, projectRoot, isWithin, isMainModule, nodeCommand} from '../project.mjs';
@@ -23,7 +23,7 @@ export async function prepare({project, output}) {
     await mkdir(dirname(root), {recursive: true});
     await mkdir(root);
     await cp(source, root, {recursive: true, filter: async path => {
-        const name = path.slice(source.length + 1).split('/')[0];
+        const name = path.slice(source.length + 1).split(sep)[0];
         if (path !== source && !['game.rmmzproject', 'index.html', 'package.json', 'js', 'data', 'img', 'audio', 'effects', 'fonts', 'css', 'icon', 'movies'].includes(name) && !/\.(csv|tsv)$/.test(name)) return false;
         if ((await lstat(path)).isSymbolicLink()) throw new Error(`Game fixture input must not be a symlink: ${path}`);
         return true;
@@ -37,7 +37,7 @@ export async function describe({fixture}) {
     async function inventory(directory, prefix = '') {
         for (const name of (await readdir(directory)).sort()) {
             if (!prefix && ['save', '.RPGMakerMZ-metadata'].includes(name)) continue;
-            const path = join(directory, name), relative = join(prefix, name), info = await lstat(path);
+            const path = join(directory, name), relative = prefix ? prefix+'/'+name : name, info = await lstat(path);
             if (info.isDirectory()) await inventory(path, relative);
             else if (info.isFile()) files.push({path: relative, sha256: createHash('sha256').update(await readFile(path)).digest('hex')});
             else throw new Error(`Unsupported game fixture input: ${path}`);

@@ -136,7 +136,7 @@
  * @param Speed:num
  * @text Speed
  * @type number
- * @desc What is the speed at which Extended Fast Forward works at?
+ * @desc Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds.
  * @default 8
  * @min 2
  *
@@ -825,12 +825,13 @@ const catalog = {
           "key": "Speed",
           "storageKey": "Speed:num",
           "label": "Speed",
-          "description": "What is the speed at which Extended Fast Forward works at?",
+          "description": "Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds.",
           "editorType": "number",
           "nativeDefault": "8",
           "type": "number",
           "min": 2,
-          "default": 8
+          "default": 8,
+          "expected": "With extended fast-forward active on the map, an update runs the configured number of map update cycles. Battle returns false for this mode and is not accelerated."
         },
         {
           "id": "EXT-M-029",
@@ -849,7 +850,8 @@ const catalog = {
         "Enable": "true",
         "Speed": 8,
         "SceneChangeReset": "true"
-      }
+      },
+      "context": " Activate on the map while an event is running by holding the Message Core General > Fast Forward Key (FastForwardKey, default pagedown), or toggle the Fast Forward console button when that console is enabled. Releasing the held key ends that activation; Cancel/right-click clears the toggled mode. Enable must be true, ExtFastFwdDisallow must allow it, and active choice/number/item input windows suspend it. Configure defaults in MZ Plugin Manager and restart playtest; SceneChangeReset clears toggled mode when message windows are recreated. Battle does not use extended fast-forward."
     },
     {
       "id": "EXT-M-015",
@@ -1485,7 +1487,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "188",
           "type": "string",
-          "default": "188"
+          "default": "188",
+          "context": " Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename."
         },
         {
           "id": "EXT-M-078",
@@ -1577,7 +1580,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": " Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
         },
         {
           "id": "EXT-M-088",
@@ -1588,7 +1592,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "-8",
           "type": "number",
-          "default": -8
+          "default": -8,
+          "context": " Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
         }
       ],
       "default": {
@@ -2105,7 +2110,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "188",
               "type": "string",
-              "default": "188"
+              "default": "188",
+              "context": " Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename."
             },
             {
               "id": "EXT-M-078",
@@ -2197,7 +2203,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": " Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
             },
             {
               "id": "EXT-M-088",
@@ -2208,7 +2215,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "-8",
               "type": "number",
-              "default": -8
+              "default": -8,
+              "context": " Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
             }
           ],
           "default": {
@@ -2587,11 +2595,11 @@ const catalog = {
     },
     "messages": {
       "Coreto_1_MessageCore": "0.1.0",
-      "VisuMZ_1_MessageCore": "1.54"
+      "VisuMZ_1_MessageCore": "1.57"
     },
     "integrations": {
-      "VisuMZ_1_SaveCore": "1.13",
-      "VisuMZ_1_OptionsCore": "1.27",
+      "VisuMZ_1_SaveCore": "1.14",
+      "VisuMZ_1_OptionsCore": "1.28",
       "VisuMZ_3_MessageLog": "1.08"
     }
   }
@@ -2665,7 +2673,7 @@ class CoreError extends Error {
 function valueError(schema, value, path, expected = schema.type) {
     throw new CoreError("INVALID_VALUE", `Invalid value at ${path}; expected ${expected}.`, {
         field: path, received: value, expected,
-        hint: schema.id ? `Use core api describe ${schema.id} to inspect accepted values and defaults.` : "Use core api list to inspect accepted parameter values."
+        discovery: schema.id ? {id:schema.id} : {}
     });
 }
 

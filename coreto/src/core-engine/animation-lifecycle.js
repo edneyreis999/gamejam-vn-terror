@@ -38,12 +38,14 @@ function installAnimationLifecycle() {
         this._pointAnimationSprites = [];
         return initializeSpriteset.apply(this, args);
     };
+    Spriteset_Base.prototype.addAnimationSpriteToContainer = function(sprite) { this._effectsContainer.addChild(sprite); };
+    Spriteset_Base.prototype.removeAnimationFromContainer = function(sprite) { sprite.parent?.removeChild(sprite); };
     function animationSprite(owner, targets, targetSprites, animation, mirror, delay, mute) {
         const sprite = new (owner.isMVAnimation(animation) ? Sprite_AnimationMV : Sprite_Animation)();
         sprite.targetObjects = targets;
         sprite.setup(targetSprites, animation, mirror, delay);
         sprite.setMute(mute);
-        owner._effectsContainer.addChild(sprite);
+        owner.addAnimationSpriteToContainer(sprite);
         return sprite;
     }
     Spriteset_Base.prototype.createFauxAnimation = function(request) {
@@ -71,7 +73,7 @@ function installAnimationLifecycle() {
         const collection = `_${kind.toLowerCase()}AnimationSprites`;
         Spriteset_Base.prototype[`remove${kind}Animation`] = function(sprite) {
             this[collection].remove(sprite);
-            this._effectsContainer.removeChild(sprite);
+            this.removeAnimationFromContainer(sprite);
             for (const target of sprite.targetObjects) {
                 if (kind === "Point") {
                     target.parent?.removeChild(target);

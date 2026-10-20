@@ -5,7 +5,7 @@
   "engine": "RPG Maker MZ 1.10.0",
   "reference": {
     "pluginId": "VisuMZ_1_MessageCore",
-    "version": "1.54"
+    "version": "1.57"
   },
   "description": "Message próprio para navegador: catálogo público de autoria e integração.",
   "parameters": [
@@ -84,12 +84,13 @@
           "key": "MessageTextDelay",
           "storageKey": "MessageTextDelay:num",
           "label": "Text Delay",
-          "description": "How many frames to wait between characters drawn?",
+          "description": "Base message text delay in frames, scaled by the player text-speed option.",
           "editorType": "number",
           "nativeDefault": "1",
           "type": "number",
           "min": 0.0,
-          "default": 1.0
+          "default": 1.0,
+          "expected": "The effective delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames between drawn characters. Text speed 11 (Instant) makes the delay zero."
         },
         {
           "id": "MSG-M-071",
@@ -1827,7 +1828,8 @@
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "boolean",
-          "default": true
+          "default": true,
+          "expected": "The Language option appears only when AddOption=true, /Localization/Enable=true and the configured language table is valid. AddOption=false omits it; enabling AddOption alone is insufficient."
         },
         {
           "id": "MSG-M-153",
@@ -3336,6 +3338,53 @@
       ]
     },
     {
+      "id": "MSG-M-257",
+      "key": "MessageRandomize",
+      "label": "Message: Randomize Text",
+      "description": "Select one message and store it in a game variable. Display it with \\V[x]; displaying or loading does not draw again.",
+      "args": [
+        {
+          "id": "MSG-M-258",
+          "key": "messages",
+          "storageKey": "messages:arrayjson",
+          "label": "Random Messages",
+          "description": "A list of random messages. Text codes and line breaks are preserved. An empty list changes nothing.",
+          "editorType": "note[]",
+          "nativeDefault": "[\"\\\"This plugin command selects a message at random.\\\\nIsn't that neat?\\\"\",\"\\\"Insert more messages here to increase the randomization.\\\\nCool, huh?\\\"\",\"\\\"The larger the random pool, the more variety in messages.\\\\nIt'll be more interesting that way!\\\"\"]",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "encoding": "json",
+            "editorType": "note",
+            "default": ""
+          },
+          "default": [
+            "This plugin command selects a message at random.\nIsn't that neat?",
+            "Insert more messages here to increase the randomization.\nCool, huh?",
+            "The larger the random pool, the more variety in messages.\nIt'll be more interesting that way!"
+          ]
+        },
+        {
+          "id": "MSG-M-259",
+          "key": "varID",
+          "storageKey": "varID:eval",
+          "label": "Variable ID",
+          "description": "Variable receiving the selected text. Zero changes nothing. Expressions run only when the command executes.",
+          "editorType": "variable",
+          "type": "string",
+          "javascript": "expression",
+          "nativeDefault": "1",
+          "default": "1",
+          "allowZero": true
+        }
+      ],
+      "targets": [
+        "map",
+        "common-event",
+        "troop"
+      ]
+    },
+    {
       "id": "MSG-M-006",
       "key": "MessageWindowXyOffsets",
       "label": "Message: X/Y Offsets",
@@ -3396,7 +3445,8 @@
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "Run before Show Choices through a map, Common Event or troop event. Distance is a JavaScript expression evaluated to pixels:12 sets a12px gap from the message window;0 removes the extra gap. It replaces the previous distance rather than adding to it. Positive distance moves choices away from the message (up when the message is below, down when above), then screen placement is clamped. A negative value selects automatic centering in the available space instead of a negative pixel gap. The value is stored in Game_System, persists across subsequent messages and save/load, and remains until this command changes it; new games start at0. Example: Distance=\"12\" before a dialogue, then Distance=\"0\" afterward to restore the default gap."
     },
     {
       "id": "MSG-M-012",
@@ -3474,7 +3524,8 @@
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "Run before Show Choices. LineHeight and MinWidth are pixels; MaxRows and MaxCols are counts. A positive LineHeight replaces the saved base line height (36 produces itemHeight44 including8px spacing); zero preserves the prior LineHeight. Positive MaxRows/MaxCols replace their saved limits; zero preserves the previous value. MinWidth always replaces the saved width floor, including0: actual width still fits measured text, padding and at least1px, so0 does not hide choices. TextAlign always replaces alignment; default leaves normal escape-code alignment, or choose left/center/right. Values persist in Game_System across messages and save/load until another command changes them. Example: LineHeight36,MinWidth96,MaxRows8,MaxCols1,TextAlign=\"default\" restores those explicit values, not necessarily a project custom default."
     },
     {
       "id": "MSG-M-019",
@@ -3621,7 +3672,7 @@
         "common-event",
         "troop"
       ],
-      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.48 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone."
+      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.58 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone."
     },
     {
       "id": "MSG-M-031",
@@ -4696,7 +4747,7 @@
       "id": "MSG-M-026",
       "plugin": "Coreto_1_MessageCore",
       "title": "SelectSkill",
-      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.48 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone.",
+      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.58 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone.",
       "expected": "Lista skills reais do ator com SkillsStates; oculta indisponíveis; resultado/cancel retoma chamador.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "command",
@@ -5998,7 +6049,7 @@
       "plugin": "Coreto_1_MessageCore",
       "title": "struct:General/MessageTextDelay:num",
       "context": "mensagem e janelas de texto conforme tipo/campo",
-      "expected": "Espera o número configurado de frames entre caracteres efetivamente desenhados.",
+      "expected": "The effective delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames between drawn characters. Text speed 11 (Instant) makes the delay zero.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "0.1.0",
@@ -6008,7 +6059,7 @@
       "examples": [
         {
           "input": "1",
-          "expected": "Espera o número configurado de frames entre caracteres efetivamente desenhados."
+          "expected": "The effective delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames between drawn characters. Text speed 11 (Instant) makes the delay zero."
         }
       ],
       "diagnostics": {
@@ -6029,13 +6080,13 @@
           "0"
         ],
         "desc": [
-          "How many frames to wait between characters drawn?"
+          "Base message text delay in frames, scaled by the player text-speed option."
         ],
         "default": [
           "1"
         ]
       },
-      "description": "How many frames to wait between characters drawn?"
+      "description": "Base message text delay in frames, scaled by the player text-speed option."
     },
     {
       "id": "MSG-M-071",
@@ -9131,7 +9182,7 @@
       "plugin": "Coreto_1_MessageCore",
       "title": "struct:Localization/AddOption:eval",
       "context": "mensagem e janelas de texto conforme tipo/campo",
-      "expected": "Opção correspondente aparece uma única vez quando true e é omitida quando false.",
+      "expected": "The Language option appears only when AddOption=true, /Localization/Enable=true and the configured language table is valid. AddOption=false omits it; enabling AddOption alone is insufficient.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "0.1.0",
@@ -9141,7 +9192,7 @@
       "examples": [
         {
           "input": "true",
-          "expected": "Opção correspondente aparece uma única vez quando true e é omitida quando false."
+          "expected": "The Language option appears only when AddOption=true, /Localization/Enable=true and the configured language table is valid. AddOption=false omits it; enabling AddOption alone is insufficient."
         }
       ],
       "diagnostics": {
@@ -15354,8 +15405,8 @@
       "id": "LOG-M-049",
       "plugin": "VisuMZ_3_MessageLog",
       "title": "struct:Window/ColorLockChoice:eval",
-      "context": "histórico/menu e mensagem no mapa",
-      "expected": "Cor do registro de escolha ignora mudanças posteriores de códigos quando lock ativo.",
+      "context": "histórico/menu e mensagem no mapa In MZ Plugin Manager, enable the external MessageLog provider identified by plugin/version after Coreto_0_CoreEngine and Coreto_1_MessageCore; open its Window Settings (Window:struct), then ColorLockChoice:eval under ColorLock, and select true or false. Restart playtest to load edited defaults. This is external editor integration exposed for discovery; no Coreto CLI write endpoint is provided.",
+      "expected": "With the external history provider active and this setting true, captured text is wrapped in ColorLock. During history replay, internal color codes cannot change that locked color. The original event text is unchanged. False leaves those color codes active in replay.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "1.08",
@@ -15365,7 +15416,7 @@
       "examples": [
         {
           "input": "false",
-          "expected": "Cor do registro de escolha ignora mudanças posteriores de códigos quando lock ativo."
+          "expected": "With the external history provider active and this setting true, captured text is wrapped in ColorLock. During history replay, internal color codes cannot change that locked color. The original event text is unchanged. False leaves those color codes active in replay."
         }
       ],
       "diagnostics": {
@@ -15389,20 +15440,20 @@
           "Don't Color Lock"
         ],
         "desc": [
-          "Color lock the logged choices?"
+          "Wrap captured choice history text in ColorLock when this setting is true."
         ],
         "default": [
           "false"
         ]
       },
-      "description": "Color lock the logged choices?"
+      "description": "Wrap captured choice history text in ColorLock when this setting is true."
     },
     {
       "id": "LOG-M-050",
       "plugin": "VisuMZ_3_MessageLog",
       "title": "struct:Window/ColorLockNumber:eval",
-      "context": "histórico/menu e mensagem no mapa",
-      "expected": "Cor do registro numérico ignora mudanças posteriores de códigos quando lock ativo.",
+      "context": "histórico/menu e mensagem no mapa In MZ Plugin Manager, enable the external MessageLog provider identified by plugin/version after Coreto_0_CoreEngine and Coreto_1_MessageCore; open its Window Settings (Window:struct), then ColorLockNumber:eval under ColorLock, and select true or false. Restart playtest to load edited defaults. This is external editor integration exposed for discovery; no Coreto CLI write endpoint is provided.",
+      "expected": "With the external history provider active and this setting true, captured text is wrapped in ColorLock. During history replay, internal color codes cannot change that locked color. The original event text is unchanged. False leaves those color codes active in replay.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "1.08",
@@ -15412,7 +15463,7 @@
       "examples": [
         {
           "input": "true",
-          "expected": "Cor do registro numérico ignora mudanças posteriores de códigos quando lock ativo."
+          "expected": "With the external history provider active and this setting true, captured text is wrapped in ColorLock. During history replay, internal color codes cannot change that locked color. The original event text is unchanged. False leaves those color codes active in replay."
         }
       ],
       "diagnostics": {
@@ -15436,20 +15487,20 @@
           "Don't Color Lock"
         ],
         "desc": [
-          "Color lock the logged Number Inputs?"
+          "Wrap captured number input history text in ColorLock when this setting is true."
         ],
         "default": [
           "true"
         ]
       },
-      "description": "Color lock the logged Number Inputs?"
+      "description": "Wrap captured number input history text in ColorLock when this setting is true."
     },
     {
       "id": "LOG-M-051",
       "plugin": "VisuMZ_3_MessageLog",
       "title": "struct:Window/ColorLockItem:eval",
-      "context": "histórico/menu e mensagem no mapa",
-      "expected": "Cor do registro de item ignora mudanças posteriores de códigos quando lock ativo.",
+      "context": "histórico/menu e mensagem no mapa In MZ Plugin Manager, enable the external MessageLog provider identified by plugin/version after Coreto_0_CoreEngine and Coreto_1_MessageCore; open its Window Settings (Window:struct), then ColorLockItem:eval under ColorLock, and select true or false. Restart playtest to load edited defaults. This is external editor integration exposed for discovery; no Coreto CLI write endpoint is provided.",
+      "expected": "With the external history provider active and this setting true, captured text is wrapped in ColorLock. During history replay, internal color codes cannot change that locked color. The original event text is unchanged. False leaves those color codes active in replay.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "1.08",
@@ -15459,7 +15510,7 @@
       "examples": [
         {
           "input": "true",
-          "expected": "Cor do registro de item ignora mudanças posteriores de códigos quando lock ativo."
+          "expected": "With the external history provider active and this setting true, captured text is wrapped in ColorLock. During history replay, internal color codes cannot change that locked color. The original event text is unchanged. False leaves those color codes active in replay."
         }
       ],
       "diagnostics": {
@@ -15483,13 +15534,13 @@
           "Don't Color Lock"
         ],
         "desc": [
-          "Color lock the logged selected Event Item?"
+          "Wrap captured selected item history text in ColorLock when this setting is true."
         ],
         "default": [
           "true"
         ]
       },
-      "description": "Color lock the logged selected Event Item?"
+      "description": "Wrap captured selected item history text in ColorLock when this setting is true."
     },
     {
       "id": "LOG-M-054",
@@ -15748,7 +15799,7 @@
       "plugin": "VisuMZ_3_MsgLetterSounds",
       "title": "command:MsgSoundChangeMessageSound/Interval:num",
       "context": "Requires the external MsgLetterSounds provider identified by this entry plugin/version after its Message dependency, with message sounds enabled. Boot defaults are edited in the MZ Plugin Manager; current game settings use its Plugin Commands and are saved with game-system state. Options msgLetterSound can additionally suppress playback when that option is defined. This is editor integration, not a Coreto CLI write endpoint. Set Interval:num in MsgSoundChangeMessageSound (current saved state) or the provider Plugin Manager defaults (new-game settings).",
-      "expected": "Som se repete apenas após intervalo configurado de caracteres elegíveis.",
+      "expected": "After playback, the configured count of later eligible sound-gate/text-flush checks is suppressed. This counts checks, not characters; a fast flush may contain multiple characters.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "command-argument",
       "version": "1.03",
@@ -15758,7 +15809,7 @@
       "examples": [
         {
           "input": "Set Interval:num=\"2\" with the other desired MsgSoundChangeMessageSound arguments; the next loaded interval skips two later sound-gate attempts.",
-          "expected": "Som se repete apenas após intervalo configurado de caracteres elegíveis."
+          "expected": "After playback, the configured count of later eligible sound-gate/text-flush checks is suppressed. This counts checks, not characters; a fast flush may contain multiple characters."
         }
       ],
       "diagnostics": {
@@ -15776,7 +15827,7 @@
           "number"
         ],
         "desc": [
-          "Interval the sound effect from being played between how many characters?"
+          "Number of eligible sound-gate/text-flush checks suppressed after playback; not a character count."
         ],
         "default": [
           "2"
@@ -15833,7 +15884,7 @@
       "plugin": "VisuMZ_3_MsgLetterSounds",
       "title": "command:MsgSoundChangeMessageSound/VolVariance:num",
       "context": "Requires the external MsgLetterSounds provider identified by this entry plugin/version after its Message dependency, with message sounds enabled. Boot defaults are edited in the MZ Plugin Manager; current game settings use its Plugin Commands and are saved with game-system state. Options msgLetterSound can additionally suppress playback when that option is defined. This is editor integration, not a Coreto CLI write endpoint. In an event Plugin Command, select MsgLetterSounds → MsgSoundChangeMessageSound and fill VolVariance:num; retain the desired values of the other command arguments.",
-      "expected": "Volume sorteado permanece na faixa de variância do original em torno do valor base.",
+      "expected": "For variance V>0, the effective added volume offset is 0..V-1; negative random draws become zero. It keeps or raises the base volume, never lowers it. V=0 disables variation.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "command-argument",
       "version": "1.03",
@@ -15843,7 +15894,7 @@
       "examples": [
         {
           "input": "In an event Plugin Command, select MsgLetterSounds → MsgSoundChangeMessageSound and fill VolVariance:num; retain the desired values of the other command arguments. Illustrative value for VolVariance:num: 10.",
-          "expected": "The configured message sound uses that field when a letter-sound playback is permitted; this example does not play audio through the CLI."
+          "expected": "For variance V>0, the effective added volume offset is 0..V-1; negative random draws become zero. It keeps or raises the base volume, never lowers it. V=0 disables variation."
         }
       ],
       "diagnostics": {
@@ -15915,7 +15966,7 @@
       "plugin": "VisuMZ_3_MsgLetterSounds",
       "title": "command:MsgSoundChangeMessageSound/PitchVariance:num",
       "context": "Requires the external MsgLetterSounds provider identified by this entry plugin/version after its Message dependency, with message sounds enabled. Boot defaults are edited in the MZ Plugin Manager; current game settings use its Plugin Commands and are saved with game-system state. Options msgLetterSound can additionally suppress playback when that option is defined. This is editor integration, not a Coreto CLI write endpoint. In an event Plugin Command, select MsgLetterSounds → MsgSoundChangeMessageSound and fill PitchVariance:num; retain the desired values of the other command arguments.",
-      "expected": "Pitch sorteado permanece na faixa de variância do original em torno do valor base.",
+      "expected": "For variance V>0, the effective added pitch offset is 0..V-1; negative random draws become zero. It keeps or raises the base pitch, never lowers it. V=0 disables variation.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "command-argument",
       "version": "1.03",
@@ -15925,7 +15976,7 @@
       "examples": [
         {
           "input": "In an event Plugin Command, select MsgLetterSounds → MsgSoundChangeMessageSound and fill PitchVariance:num; retain the desired values of the other command arguments. Illustrative value for PitchVariance:num: 20.",
-          "expected": "The configured message sound uses that field when a letter-sound playback is permitted; this example does not play audio through the CLI."
+          "expected": "For variance V>0, the effective added pitch offset is 0..V-1; negative random draws become zero. It keeps or raises the base pitch, never lowers it. V=0 disables variation."
         }
       ],
       "diagnostics": {
@@ -16275,7 +16326,7 @@
       "plugin": "VisuMZ_3_MsgLetterSounds",
       "title": "plugin/Interval:num",
       "context": "Requires the external MsgLetterSounds provider identified by this entry plugin/version after its Message dependency, with message sounds enabled. Boot defaults are edited in the MZ Plugin Manager; current game settings use its Plugin Commands and are saved with game-system state. Options msgLetterSound can additionally suppress playback when that option is defined. This is editor integration, not a Coreto CLI write endpoint. Set Interval:num in MsgSoundChangeMessageSound (current saved state) or the provider Plugin Manager defaults (new-game settings).",
-      "expected": "Som se repete apenas após intervalo configurado de caracteres elegíveis.",
+      "expected": "After playback, the configured count of later eligible sound-gate/text-flush checks is suppressed. This counts checks, not characters; a fast flush may contain multiple characters.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "1.03",
@@ -16285,7 +16336,7 @@
       "examples": [
         {
           "input": "Set Interval:num=\"2\" with the other desired MsgSoundChangeMessageSound arguments; the next loaded interval skips two later sound-gate attempts.",
-          "expected": "Som se repete apenas após intervalo configurado de caracteres elegíveis."
+          "expected": "After playback, the configured count of later eligible sound-gate/text-flush checks is suppressed. This counts checks, not characters; a fast flush may contain multiple characters."
         }
       ],
       "diagnostics": {
@@ -16303,7 +16354,7 @@
           "number"
         ],
         "desc": [
-          "Interval the sound effect from being played between how many characters?"
+          "Number of eligible sound-gate/text-flush checks suppressed after playback; not a character count."
         ],
         "default": [
           "2"
@@ -16360,7 +16411,7 @@
       "plugin": "VisuMZ_3_MsgLetterSounds",
       "title": "plugin/VolVariance:num",
       "context": "Requires the external MsgLetterSounds provider identified by this entry plugin/version after its Message dependency, with message sounds enabled. Boot defaults are edited in the MZ Plugin Manager; current game settings use its Plugin Commands and are saved with game-system state. Options msgLetterSound can additionally suppress playback when that option is defined. This is editor integration, not a Coreto CLI write endpoint. Edit the provider plugin parameter VolVariance:num, then restart the game for boot defaults.",
-      "expected": "Volume sorteado permanece na faixa de variância do original em torno do valor base.",
+      "expected": "For variance V>0, the effective added volume offset is 0..V-1; negative random draws become zero. It keeps or raises the base volume, never lowers it. V=0 disables variation.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "1.03",
@@ -16370,7 +16421,7 @@
       "examples": [
         {
           "input": "Edit the provider plugin parameter VolVariance:num, then restart the game for boot defaults. Illustrative value for VolVariance:num: 10.",
-          "expected": "The configured message sound uses that field when a letter-sound playback is permitted; this example does not play audio through the CLI."
+          "expected": "For variance V>0, the effective added volume offset is 0..V-1; negative random draws become zero. It keeps or raises the base volume, never lowers it. V=0 disables variation."
         }
       ],
       "diagnostics": {
@@ -16442,7 +16493,7 @@
       "plugin": "VisuMZ_3_MsgLetterSounds",
       "title": "plugin/PitchVariance:num",
       "context": "Requires the external MsgLetterSounds provider identified by this entry plugin/version after its Message dependency, with message sounds enabled. Boot defaults are edited in the MZ Plugin Manager; current game settings use its Plugin Commands and are saved with game-system state. Options msgLetterSound can additionally suppress playback when that option is defined. This is editor integration, not a Coreto CLI write endpoint. Edit the provider plugin parameter PitchVariance:num, then restart the game for boot defaults.",
-      "expected": "Pitch sorteado permanece na faixa de variância do original em torno do valor base.",
+      "expected": "For variance V>0, the effective added pitch offset is 0..V-1; negative random draws become zero. It keeps or raises the base pitch, never lowers it. V=0 disables variation.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
       "version": "1.03",
@@ -16452,7 +16503,7 @@
       "examples": [
         {
           "input": "Edit the provider plugin parameter PitchVariance:num, then restart the game for boot defaults. Illustrative value for PitchVariance:num: 20.",
-          "expected": "The configured message sound uses that field when a letter-sound playback is permitted; this example does not play audio through the CLI."
+          "expected": "For variance V>0, the effective added pitch offset is 0..V-1; negative random draws become zero. It keeps or raises the base pitch, never lowers it. V=0 disables variation."
         }
       ],
       "diagnostics": {
@@ -17861,7 +17912,7 @@
       "id": "TIP-M-046",
       "plugin": "VisuMZ_3_StateTooltips",
       "title": "struct:Window/Window_MenuStatus:eval",
-      "context": "tooltip de estado em menus/batalha",
+      "context": "tooltip de estado em menus/batalha Enable the external StateTooltips provider identified by plugin/version after Coreto_0_CoreEngine and Coreto_1_BattleCore in MZ Plugin Manager. Open its Window Settings (Window:struct), then Window_MenuStatus:eval and choose true or false; the editor is boolean and :eval is its serialized expression encoding. Restart playtest after editing. True permits tooltips on state icons in the actor status window of the main menu; false disables them there. This namespace documents an external integration, not a Coreto CLI setter or bundled provider.",
       "expected": "Tooltip em Window_MenuStatus aparece quando true e o contexto existe; false o suprime nesse contexto apenas.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "parameter",
@@ -18065,7 +18116,7 @@
       "id": "CCE-RX-001",
       "plugin": "Coreto_3_ChoiceCmnEvts",
       "title": "/<(?:CHOICE|SELECT) (?:COMMON EVENT|EVENT|COMMONEVENT):[ ](\\d+)>/gi",
-      "context": "Escolha destacada no mapa",
+      "context": "Escolha destacada no mapa Write the tag in the text of an individual option in the native Show Choices event command on a map. It is choice-label syntax, not a Plugin Command argument or a database Note.",
       "expected": "Cada alias inicia o CE indicado apenas quando o índice selecionado muda; confirmar não é necessário, pai continua, selecionar mesmo índice não repete.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -18246,7 +18297,7 @@
       "id": "LOG-RX-006",
       "plugin": "VisuMZ_3_MessageLog",
       "title": "/\\\\LastGainObjQuantity/gi",
-      "context": "Requires the external MessageLog provider identified by this entry plugin/version, enabled after its Message dependency. Configure its fields in the RPG Maker MZ Plugin Manager and restart the game. This catalog entry is an editor integration, not a Coreto CLI mutation endpoint. This entry describes automatic history capture. Author text in the body of an MZ Show Text command on the map; it is not a command to invoke through the CLI. The title is regex inspection notation; aliases and the example show authored text with one backslash for escape codes. Replace alias placeholders with project values as illustrated below. The illustrative numeric identifier 1 must resolve in the project: V uses a variable, Item/Weapon/ArmorQuantity a database object, ActorFace an actor, and PartyFace the one-based party position. LastGainObj forms use the provider last-gained-object state. These forms preserve a recorded snapshot rather than reevaluating it every time history opens. ",
+      "context": "Requires the external MessageLog provider identified by this entry plugin/version, enabled after its Message dependency. Configure its fields in the RPG Maker MZ Plugin Manager and restart the game. This catalog entry is an editor integration, not a Coreto CLI mutation endpoint. This entry describes automatic history capture. Author text in the body of an MZ Show Text command on the map; it is not a command to invoke through the CLI. The title is regex inspection notation; aliases and the example show authored text with one backslash for escape codes. Replace alias placeholders with project values as illustrated below. The illustrative numeric identifier 1 must resolve in the project: V uses a variable, Item/Weapon/ArmorQuantity a database object, ActorFace an actor, and PartyFace the one-based party position. LastGainObj forms use the provider last-gained-object state. These forms preserve a recorded snapshot rather than reevaluating it every time history opens.  Write the escape code in the body of a Show Text command on a map. First run an event Change Items/Weapons/Armors command that grants a positive quantity of the desired item; gainItem captures the last gained record used by this code. Reading the code does not itself grant anything.",
       "expected": "Substitui LastGainObjQuantity pelo resultado de lastGainedObjectQuantity no registro.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -18272,7 +18323,7 @@
       "id": "LOG-RX-007",
       "plugin": "VisuMZ_3_MessageLog",
       "title": "/\\\\LastGainObjName/gi",
-      "context": "Requires the external MessageLog provider identified by this entry plugin/version, enabled after its Message dependency. Configure its fields in the RPG Maker MZ Plugin Manager and restart the game. This catalog entry is an editor integration, not a Coreto CLI mutation endpoint. This entry describes automatic history capture. Author text in the body of an MZ Show Text command on the map; it is not a command to invoke through the CLI. The title is regex inspection notation; aliases and the example show authored text with one backslash for escape codes. Replace alias placeholders with project values as illustrated below. The illustrative numeric identifier 1 must resolve in the project: V uses a variable, Item/Weapon/ArmorQuantity a database object, ActorFace an actor, and PartyFace the one-based party position. LastGainObj forms use the provider last-gained-object state. These forms preserve a recorded snapshot rather than reevaluating it every time history opens. ",
+      "context": "Requires the external MessageLog provider identified by this entry plugin/version, enabled after its Message dependency. Configure its fields in the RPG Maker MZ Plugin Manager and restart the game. This catalog entry is an editor integration, not a Coreto CLI mutation endpoint. This entry describes automatic history capture. Author text in the body of an MZ Show Text command on the map; it is not a command to invoke through the CLI. The title is regex inspection notation; aliases and the example show authored text with one backslash for escape codes. Replace alias placeholders with project values as illustrated below. The illustrative numeric identifier 1 must resolve in the project: V uses a variable, Item/Weapon/ArmorQuantity a database object, ActorFace an actor, and PartyFace the one-based party position. LastGainObj forms use the provider last-gained-object state. These forms preserve a recorded snapshot rather than reevaluating it every time history opens.  Write the escape code in the body of a Show Text command on a map. First run an event Change Items/Weapons/Armors command that grants a positive quantity of the desired weapon; gainItem captures the last gained record used by this code. Reading the code does not itself grant anything.",
       "expected": "Substitui LastGainObjName pelo resultado de lastGainedObjectName(false), sem ícone, no registro.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -18298,7 +18349,7 @@
       "id": "LOG-RX-008",
       "plugin": "VisuMZ_3_MessageLog",
       "title": "/\\\\LastGainObj/gi",
-      "context": "Requires the external MessageLog provider identified by this entry plugin/version, enabled after its Message dependency. Configure its fields in the RPG Maker MZ Plugin Manager and restart the game. This catalog entry is an editor integration, not a Coreto CLI mutation endpoint. This entry describes automatic history capture. Author text in the body of an MZ Show Text command on the map; it is not a command to invoke through the CLI. The title is regex inspection notation; aliases and the example show authored text with one backslash for escape codes. Replace alias placeholders with project values as illustrated below. The illustrative numeric identifier 1 must resolve in the project: V uses a variable, Item/Weapon/ArmorQuantity a database object, ActorFace an actor, and PartyFace the one-based party position. LastGainObj forms use the provider last-gained-object state. These forms preserve a recorded snapshot rather than reevaluating it every time history opens. ",
+      "context": "Requires the external MessageLog provider identified by this entry plugin/version, enabled after its Message dependency. Configure its fields in the RPG Maker MZ Plugin Manager and restart the game. This catalog entry is an editor integration, not a Coreto CLI mutation endpoint. This entry describes automatic history capture. Author text in the body of an MZ Show Text command on the map; it is not a command to invoke through the CLI. The title is regex inspection notation; aliases and the example show authored text with one backslash for escape codes. Replace alias placeholders with project values as illustrated below. The illustrative numeric identifier 1 must resolve in the project: V uses a variable, Item/Weapon/ArmorQuantity a database object, ActorFace an actor, and PartyFace the one-based party position. LastGainObj forms use the provider last-gained-object state. These forms preserve a recorded snapshot rather than reevaluating it every time history opens.  Write the escape code in the body of a Show Text command on a map. First run an event Change Items/Weapons/Armors command that grants a positive quantity of the desired armor; gainItem captures the last gained record used by this code. Reading the code does not itself grant anything.",
       "expected": "Substitui LastGainObj pelo resultado de lastGainedObjectName(true), com ícone, no registro.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -20544,7 +20595,7 @@
       "id": "TIP-RX-004",
       "plugin": "VisuMZ_3_StateTooltips",
       "title": "/\\\\C\\[#(.*?)\\]/g",
-      "context": "Texto do tooltip",
+      "context": "Texto do tooltip Write one literal backslash in tooltip text, for example \\C[#ffffff]. NONWHITE_COLOR names an internal constant of the external tooltip provider, not an editable project parameter or a file you must locate. Author the literal code in Database > States > the chosen state > Note, inside <State Tooltip Description> ... </State Tooltip Description>, for example <State Tooltip Description>\\C[#ff0000]Burn</State Tooltip Description>. It colors the state tooltip text when the external StateTooltips provider identified by plugin/version is enabled after Coreto Core and Battle; it is not a Show Text field.",
       "expected": "Converte exatamente \\C[#hex] em \\HEXCOLOR<#hex>. Somente conteúdo ffffff minúsculo recebe NONWHITE_COLOR; FFFFFF permanece hex branco. Desenho respeita colorlock e drawing.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -20552,7 +20603,7 @@
       "availability": "supported",
       "authoring": "editor-integration",
       "aliases": [
-        "\\\\C[#{texto}]"
+        "\\C[#{texto}]"
       ],
       "examples": [
         {
@@ -20842,7 +20893,7 @@
       "id": "MSG-RX-007",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<SHUFFLE>/gi",
-      "context": "Choices",
+      "context": "Choices Place the tag in the text/label of a Show Choices option in the event editor. VAR n reads the current game variable with ID n; use an existing variable. The shuffle tag is removed before the option is drawn.",
       "expected": "Shuffle altera ordem dos índices, limita por número ou valor da variável, conta apenas choices visíveis e conserva branch; cancel diferente de Branch é desabilitado.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -20868,7 +20919,7 @@
       "id": "MSG-RX-008",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<SHUFFLE:[ ](\\d+)>/gi",
-      "context": "Choices",
+      "context": "Choices Place the tag in the text/label of a Show Choices option in the event editor. VAR n reads the current game variable with ID n; use an existing variable. The shuffle tag is removed before the option is drawn.",
       "expected": "Shuffle altera ordem dos índices, limita por número ou valor da variável, conta apenas choices visíveis e conserva branch; cancel diferente de Branch é desabilitado.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -20894,7 +20945,7 @@
       "id": "MSG-RX-009",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<SHUFFLE: VAR[ ](\\d+)>/gi",
-      "context": "Choices",
+      "context": "Choices Place the tag in the text/label of a Show Choices option in the event editor. VAR n reads the current game variable with ID n; use an existing variable. The shuffle tag is removed before the option is drawn.",
       "expected": "Shuffle altera ordem dos índices, limita por número ou valor da variável, conta apenas choices visíveis e conserva branch; cancel diferente de Branch é desabilitado.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -20920,7 +20971,7 @@
       "id": "MSG-RX-010",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<SHUFFLE:[ ]VAR (\\d+)>/gi",
-      "context": "Choices",
+      "context": "Choices Place the tag in the text/label of a Show Choices option in the event editor. VAR n reads the current game variable with ID n; use an existing variable. The shuffle tag is removed before the option is drawn.",
       "expected": "Shuffle altera ordem dos índices, limita por número ou valor da variável, conta apenas choices visíveis e conserva branch; cancel diferente de Branch é desabilitado.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21095,7 +21146,7 @@
       "id": "MSG-RX-015",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Up (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21126,7 +21177,7 @@
       "id": "MSG-RX-016",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Left (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21157,7 +21208,7 @@
       "id": "MSG-RX-017",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Right (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21188,7 +21239,7 @@
       "id": "MSG-RX-018",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Down (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21219,7 +21270,7 @@
       "id": "MSG-RX-019",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Ok (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21250,7 +21301,7 @@
       "id": "MSG-RX-020",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Cancel (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21281,7 +21332,7 @@
       "id": "MSG-RX-021",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Menu (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21312,7 +21363,7 @@
       "id": "MSG-RX-022",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<Shift (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21343,7 +21394,7 @@
       "id": "MSG-RX-023",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:PAGEUP|PAGE UP) (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21384,7 +21435,7 @@
       "id": "MSG-RX-024",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:PAGEDOWN|PAGEDN|PAGE DOWN) (?:KEY|BUTTON)>/gi",
-      "context": "Texto com Coreto",
+      "context": "Texto com Coreto Write the tag in a body line of Show Text in the event editor, or in another text field processed by MessageCore conversion. It resolves the configured keyboard/gamepad button label; it does not bind a new key.",
       "expected": "Alias KEY/BUTTON resolve label do dispositivo/botão correto via Coreto; PageUp/PageDown variantes conservam ação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21435,7 +21486,7 @@
       "id": "MSG-RX-025",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:SHOW|HIDE|DISABLE|ENABLE)>/gi",
-      "context": "Window_Base.convertShowChoiceEscapeCodes; também texto fora da choice",
+      "context": "Window_Base.convertShowChoiceEscapeCodes; também texto fora da choice Write this tag in the text of a Show Choices option. Choice-window conversion removes it from the drawn label; the associated visibility/enabling gates determine whether the option can be seen or chosen.",
       "expected": "Remove do texto desenhado as tags SHOW/HIDE/ENABLE/DISABLE reconhecidas por este matcher. A decisão de visibilidade/habilitação pertence a isChoiceVisible/isChoiceEnabled; remoção não executa gates.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21703,7 +21754,7 @@
       "id": "MSG-RX-033",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<B>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "B alterna negrito; fechamento restaura; medição e desenho usam mesmo estilo.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21729,7 +21780,7 @@
       "id": "MSG-RX-034",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/B>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "B alterna negrito; fechamento restaura; medição e desenho usam mesmo estilo.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21755,7 +21806,7 @@
       "id": "MSG-RX-035",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<I>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "I alterna itálico; fechamento restaura; medição e desenho usam mesmo estilo.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21781,7 +21832,7 @@
       "id": "MSG-RX-036",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/I>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "I alterna itálico; fechamento restaura; medição e desenho usam mesmo estilo.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21807,7 +21858,7 @@
       "id": "MSG-RX-037",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<LEFT>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field. For Show Text, put the opening tag at the start of the line: <CENTER>Hello</CENTER>. Closing LEFT/CENTER/RIGHT sets alignment to default (normal start position; it does not pop a nested alignment). Subsequent lines use default until another opening tag; avoid wrap. Map Display Name instead uses these tags to place the whole map-name window.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21819,7 +21870,7 @@
       ],
       "examples": [
         {
-          "input": "<LEFT>",
+          "input": "<LEFT>Hello</LEFT>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         }
       ],
@@ -21833,7 +21884,7 @@
       "id": "MSG-RX-038",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/LEFT>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21859,7 +21910,7 @@
       "id": "MSG-RX-039",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<CENTER>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field. For Show Text, put the opening tag at the start of the line: <CENTER>Hello</CENTER>. Closing LEFT/CENTER/RIGHT sets alignment to default (normal start position; it does not pop a nested alignment). Subsequent lines use default until another opening tag; avoid wrap. Map Display Name instead uses these tags to place the whole map-name window.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21871,7 +21922,7 @@
       ],
       "examples": [
         {
-          "input": "<CENTER>",
+          "input": "<CENTER>Hello</CENTER>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         }
       ],
@@ -21885,7 +21936,7 @@
       "id": "MSG-RX-040",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/CENTER>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21911,7 +21962,7 @@
       "id": "MSG-RX-041",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<RIGHT>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field. For Show Text, put the opening tag at the start of the line: <CENTER>Hello</CENTER>. Closing LEFT/CENTER/RIGHT sets alignment to default (normal start position; it does not pop a nested alignment). Subsequent lines use default until another opening tag; avoid wrap. Map Display Name instead uses these tags to place the whole map-name window.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21923,7 +21974,7 @@
       ],
       "examples": [
         {
-          "input": "<RIGHT>",
+          "input": "<RIGHT>Hello</RIGHT>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         }
       ],
@@ -21937,7 +21988,7 @@
       "id": "MSG-RX-042",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/RIGHT>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21963,7 +22014,7 @@
       "id": "MSG-RX-043",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<COLORLOCK>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "ColorLock ou ((( impede mudanças de cor; fechamento ou ))) restaura possibilidade de mudar, sem alterar a cor indevidamente.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -21989,7 +22040,7 @@
       "id": "MSG-RX-044",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/COLORLOCK>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "ColorLock ou ((( impede mudanças de cor; fechamento ou ))) restaura possibilidade de mudar, sem alterar a cor indevidamente.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22015,7 +22066,7 @@
       "id": "MSG-RX-045",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\(\\(\\(/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "ColorLock ou ((( impede mudanças de cor; fechamento ou ))) restaura possibilidade de mudar, sem alterar a cor indevidamente.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22041,7 +22092,7 @@
       "id": "MSG-RX-046",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\)\\)\\)/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "ColorLock ou ((( impede mudanças de cor; fechamento ou ))) restaura possibilidade de mudar, sem alterar a cor indevidamente.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22067,7 +22118,7 @@
       "id": "MSG-RX-047",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:LC|LOWERCASE|LOWER CASE|LOWER)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Converts every printable character to lowercase; <LC>HeLLo WORLD</LC> renders hello world. The opening tag applies until a closing casing tag or text-state reset; closing disables casing conversion rather than restoring a nested mode.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22082,7 +22133,7 @@
       ],
       "examples": [
         {
-          "input": "<LC>",
+          "input": "<LC>Hello world</LC>",
           "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph."
         },
         {
@@ -22108,7 +22159,7 @@
       "id": "MSG-RX-048",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:LC|LOWERCASE|LOWER CASE|LOWER)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22149,7 +22200,7 @@
       "id": "MSG-RX-049",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:UC|UPPERCASE|UPPER CASE|UPPER)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Uppercases the first printable character after activation and after each whitespace; other characters keep their original case. <UC>hello WORLD</UC> renders Hello WORLD. Unlike CAPS, it does not uppercase every character. The opening tag applies until a closing casing tag or text-state reset; closing disables casing conversion rather than restoring a nested mode.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22164,7 +22215,7 @@
       ],
       "examples": [
         {
-          "input": "<UC>",
+          "input": "<UC>Hello world</UC>",
           "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph."
         },
         {
@@ -22190,7 +22241,7 @@
       "id": "MSG-RX-050",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:UC|UPPERCASE|UPPER CASE|UPPER)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22231,7 +22282,7 @@
       "id": "MSG-RX-051",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:CAPS|CAPSLOCK|CAPS LOCK|CAP)>/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in Show Text. This differs from UPPER/UC, which uppercases the first character and characters after whitespace while leaving other characters as supplied. Any casing closing tag switches the casing mode off; it does not restore a nested prior mode.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in Show Text. This differs from UPPER/UC, which uppercases the first character and characters after whitespace while leaving other characters as supplied. Any casing closing tag switches the casing mode off; it does not restore a nested prior mode. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays HELLO FRIEND followed by unchanged normal text.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22260,7 +22311,7 @@
       "id": "MSG-RX-052",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:CAPS|CAPSLOCK|CAPS LOCK|CAP)>/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in MZ Show Text processed by Message. For an opening form see message api describe MSG-RX-051 --json: <CAPS> makes subsequent letters uppercase. The closing form sets casing to normal, regardless of which casing mode was active; it does not restore a nested prior mode. Matching is case-insensitive. The closing markup itself is not displayed.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in MZ Show Text processed by Message. For an opening form see message api describe MSG-RX-051 --json: <CAPS> makes subsequent letters uppercase. The closing form sets casing to normal, regardless of which casing mode was active; it does not restore a nested prior mode. Matching is case-insensitive. The closing markup itself is not displayed. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays HELLO FRIEND followed by Normal text with its authored casing; neither tag is displayed.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22289,7 +22340,7 @@
       "id": "MSG-RX-053",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:ALT|ALTERNATE|ALT CASE)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Alternates uppercase then lowercase per printable character, starting uppercase at each opening tag. Spaces and punctuation consume a phase even when their appearance is unchanged; control characters below code point 32 do not. <ALT>abc de</ALT> renders AbC De. The opening tag applies until a closing casing tag or text-state reset; closing disables casing conversion rather than restoring a nested mode.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22303,7 +22354,7 @@
       ],
       "examples": [
         {
-          "input": "<ALT CASE>",
+          "input": "<ALT>Hello world</ALT>",
           "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph."
         },
         {
@@ -22325,7 +22376,7 @@
       "id": "MSG-RX-054",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:ALT|ALTERNATE|ALT CASE)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22361,7 +22412,7 @@
       "id": "MSG-RX-055",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:CHAOS|CHAOSCASE|CHAOS CASE)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Independently chooses upper or lower case with probability 0.5 for each printable character. <CHAOS>Hello</CHAOS> has no deterministic casing result; whitespace/punctuation may appear unchanged. Measurement preserves stored casing phase but does not seed or freeze random outcomes. The opening tag applies until a closing casing tag or text-state reset; closing disables casing conversion rather than restoring a nested mode.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22375,7 +22426,7 @@
       ],
       "examples": [
         {
-          "input": "<CHAOS CASE>",
+          "input": "<CHAOS>Hello world</CHAOS>",
           "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph."
         },
         {
@@ -22397,7 +22448,7 @@
       "id": "MSG-RX-056",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:CHAOS|CHAOSCASE|CHAOS CASE)>/gi",
-      "context": "Texto global",
+      "context": "Texto global Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Abertura ativa modo de capitalização correspondente; qualquer fechamento de casing o encerra; lower/upper/caps/alternado/aleatório preservam texto e fase por glyph.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22433,7 +22484,7 @@
       "id": "MSG-RX-057",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\x1bN\\[(\\d+)\\]/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. n is a database actor ID, not a party position. Missing actor data yields an empty name.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. n is a database actor ID, not a party position. Missing actor data yields an empty name. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays the current resolved name in the sentence, or an empty name if no matching actor/member exists.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22459,7 +22510,7 @@
       "id": "MSG-RX-058",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\x1bP\\[(\\d+)\\]/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. n is the one-based current party position, not an actor ID. Missing party member yields an empty name.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. n is the one-based current party position, not an actor ID. Missing party member yields an empty name. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays the current resolved name in the sentence, or an empty name if no matching actor/member exists.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22485,7 +22536,7 @@
       "id": "MSG-RX-059",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\x1bG/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Configure the currency unit in the MZ database System terms. This inserts the unit label, not the party gold amount.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Configure the currency unit in the MZ database System terms. This inserts the unit label, not the party gold amount. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays 10 followed by the configured currency-unit label.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22511,7 +22562,7 @@
       "id": "MSG-RX-060",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\<(?:BATTLE|CURRENT BATTLE) TARGET\\>/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in text drawn by a Message-capable text window during battle. The result is a name string, not an icon, object or ID. Outside battle, or without the relevant battler, it is empty. CURRENT BATTLE and SUBJECT aliases follow the same matching rule for their corresponding entry.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in text drawn by a Message-capable text window during battle. The result is a name string, not an icon, object or ID. Outside battle, or without the relevant battler, it is empty. CURRENT BATTLE and SUBJECT aliases follow the same matching rule for their corresponding entry. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays the resolved battler name in the sentence, or an empty name when no battler is available.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22538,7 +22589,7 @@
       "id": "MSG-RX-061",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\<(?:BATTLE|CURRENT BATTLE) (?:USER|SUBJECT)\\>/gi",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in text drawn by a Message-capable text window during battle. The result is a name string, not an icon, object or ID. Outside battle, or without the relevant battler, it is empty. CURRENT BATTLE and SUBJECT aliases follow the same matching rule for their corresponding entry.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Enter the shown text in the MZ event field specified below, using one authored backslash for escape codes. This is text authoring, not a CLI operation. The regex title describes a pipeline match; authors do not enter an ESC control character. Use in text drawn by a Message-capable text window during battle. The result is a name string, not an icon, object or ID. Outside battle, or without the relevant battler, it is empty. CURRENT BATTLE and SUBJECT aliases follow the same matching rule for their corresponding entry. Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes.",
       "expected": "Displays the resolved battler name in the sentence, or an empty name when no battler is available.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22567,7 +22618,7 @@
       "id": "MSG-RX-062",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\<(?:BATTLE|CURRENT BATTLE) (?:ITEM|SKILL|ACTION)\\>/gi",
-      "context": "Texto em batalha",
+      "context": "Texto em batalha Write the tag in the body of Show Text in a battle event. It reads the current battle action, or inputtingAction while inputting; without an available action/item it becomes empty. A map message cannot supply this battle context.",
       "expected": "Em batalha usa BattleManager._action; se ausente, consulta inputtingAction() somente quando BattleManager.isInputting() é true. Obtém item da ação. Forma NAME mostra só nome; demais combinam ícone e nome. Sem ação/item, sem modo input para fallback ou fora de batalha retorna vazio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22618,7 +22669,7 @@
       "id": "MSG-RX-063",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\<(?:BATTLE|CURRENT BATTLE) (?:ITEM|SKILL|ACTION) NAME\\>/gi",
-      "context": "Texto em batalha",
+      "context": "Texto em batalha Write the tag in the body of Show Text in a battle event. It reads the current battle action, or inputtingAction while inputting; without an available action/item it becomes empty. A map message cannot supply this battle context.",
       "expected": "Em batalha usa BattleManager._action; se ausente, consulta inputtingAction() somente quando BattleManager.isInputting() é true. Obtém item da ação. Forma NAME mostra só nome; demais combinam ícone e nome. Sem ação/item, sem modo input para fallback ou fora de batalha retorna vazio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22669,7 +22720,7 @@
       "id": "MSG-RX-064",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:BR|LINEBREAK)>/gi",
-      "context": "Message/Help; choice para br",
+      "context": "Message/Help; choice para br For a literal choice line break, put <BR> between lines in the label of one Show Choices option. For messages, place it in the Show Text body; for Help, use the description field shown by that help window. Message/Help processing also depends on their wrap configuration.",
       "expected": "Tags controlam wrap e quebras. BR/LINEBREAK cria newline na choice sem habilitar word-wrap; Message/Help obedecem configuração; alinhamento desabilita wrap.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -22860,7 +22911,7 @@
       "id": "MSG-RX-071",
       "plugin": "Coreto_1_MessageCore",
       "title": "/\\x1b!/g",
-      "context": "Window_Base.textSizeExTextAlignment",
+      "context": "Window_Base.textSizeExTextAlignment Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. The \\! pause marker is removed only for measurement. In actual Show Text drawing it still pauses for input.",
       "expected": "Remove apenas este controle de pausa/wait antes de medir alinhamento; a medição calcula largura/altura sem suspender evento e restaura fontes. O controle no texto realmente desenhado conserva sua ação nativa.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "internal-scanner",
@@ -22990,7 +23041,7 @@
       "id": "MSG-RX-076",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<DIMENSIONS:[ ]*(.*?)>/gi",
-      "context": "Window_Message.prepareForcedMessagePositionEscapeCharacters; ajuda Forced Message Positioning",
+      "context": "Window_Message.prepareForcedMessagePositionEscapeCharacters; ajuda Forced Message Positioning Write <DIMENSIONS: 320,160> in a body line of Show Text with /WordWrap/MessageWindow=false. Width and height are pixels, limited to the game graphics area; enabling wrap prevents this forced-size tag from applying.",
       "expected": "DIMENSIONS width,height define a largura e a altura pelos dois componentes numéricos, limitadas à área gráfica do jogo. Com wrap ativo, o parser não aplica a tag.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23354,7 +23405,7 @@
       "id": "MSG-RX-089",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<HIDE>/i",
-      "context": "Choices",
+      "context": "Choices Write this gate in the label of an individual Show Choices option. IDs refer to game switches in the MZ database: ALL requires every listed switch ON; ANY requires at least one ON. The gate is evaluated while constructing the choice list, then removed from the visible label.",
       "expected": "Visibilidade/habilitação seguem gates: HIDE/DISABLE explícitos têm precedência; ALL exige todos switches ON, ANY exige ao menos um; índices originais são preservados. SW só é aceito onde o regex de visibilidade o reconhece, não como alias de habilitação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23380,7 +23431,7 @@
       "id": "MSG-RX-090",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<SHOW>/i",
-      "context": "Choices",
+      "context": "Choices Write this gate in the label of an individual Show Choices option. IDs refer to game switches in the MZ database: ALL requires every listed switch ON; ANY requires at least one ON. The gate is evaluated while constructing the choice list, then removed from the visible label. A bare <HIDE> wins first. Otherwise bare <SHOW> immediately returns true and bypasses all switch gates for this decision, including unsatisfied ALL/ANY gates. Without either bare tag, evaluate the switch gates; without gates the decision defaults to true. Author in the label of a Show Choices option; for example <SHOW>Continue forces this decision true unless <HIDE> is also present.",
       "expected": "Visibilidade/habilitação seguem gates: HIDE/DISABLE explícitos têm precedência; ALL exige todos switches ON, ANY exige ao menos um; índices originais são preservados. SW só é aceito onde o regex de visibilidade o reconhece, não como alias de habilitação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23524,7 +23575,7 @@
       "id": "MSG-RX-095",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<DISABLE>/i",
-      "context": "Choices",
+      "context": "Choices Write this gate in the label of an individual Show Choices option. IDs refer to game switches in the MZ database: ALL requires every listed switch ON; ANY requires at least one ON. The gate is evaluated while constructing the choice list, then removed from the visible label.",
       "expected": "Visibilidade/habilitação seguem gates: HIDE/DISABLE explícitos têm precedência; ALL exige todos switches ON, ANY exige ao menos um; índices originais são preservados. SW só é aceito onde o regex de visibilidade o reconhece, não como alias de habilitação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23550,7 +23601,7 @@
       "id": "MSG-RX-096",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<ENABLE>/i",
-      "context": "Choices",
+      "context": "Choices Write this gate in the label of an individual Show Choices option. IDs refer to game switches in the MZ database: ALL requires every listed switch ON; ANY requires at least one ON. The gate is evaluated while constructing the choice list, then removed from the visible label. A bare <DISABLE> wins first. Otherwise bare <ENABLE> immediately returns true and bypasses all switch gates for this decision, including unsatisfied ALL/ANY gates. Without either bare tag, evaluate the switch gates; without gates the decision defaults to true. Author in the label of a Show Choices option; for example <ENABLE>Continue forces this decision true unless <DISABLE> is also present.",
       "expected": "Visibilidade/habilitação seguem gates: HIDE/DISABLE explícitos têm precedência; ALL exige todos switches ON, ANY exige ao menos um; índices originais são preservados. SW só é aceito onde o regex de visibilidade o reconhece, não como alias de habilitação.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23941,7 +23992,7 @@
       "id": "MSG-RX-108",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:LEFT|CENTER|RIGHT)>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field. For Show Text, put the opening tag at the start of the line: <CENTER>Hello</CENTER>. Closing LEFT/CENTER/RIGHT sets alignment to default (normal start position; it does not pop a nested alignment). Subsequent lines use default until another opening tag; avoid wrap. Map Display Name instead uses these tags to place the whole map-name window.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23955,15 +24006,15 @@
       ],
       "examples": [
         {
-          "input": "<CENTER>",
+          "input": "<CENTER>Hello</CENTER>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         },
         {
-          "input": "<LEFT>",
+          "input": "<LEFT>Hello</LEFT>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         },
         {
-          "input": "<RIGHT>",
+          "input": "<RIGHT>Hello</RIGHT>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         }
       ],
@@ -23977,7 +24028,7 @@
       "id": "MSG-RX-109",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:LEFT|CENTER|RIGHT)>/gi",
-      "context": "Texto/MapName; Log possui remoção própria",
+      "context": "Texto/MapName; Log possui remoção própria Write the literal escape/tag in a body line of the native Show Text event command. In that editor field use one backslash, not a JavaScript string with doubled backslashes. Map Display Name text also goes through Window_MapName when that map-name integration is the intended destination; it is a separate authoring field. For Show Text, put the opening tag at the start of the line: <CENTER>Hello</CENTER>. Closing LEFT/CENTER/RIGHT sets alignment to default (normal start position; it does not pop a nested alignment). Subsequent lines use default until another opening tag; avoid wrap. Map Display Name instead uses these tags to place the whole map-name window.",
       "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -23991,15 +24042,15 @@
       ],
       "examples": [
         {
-          "input": "</CENTER>",
+          "input": "<CENTER>Hello</CENTER>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         },
         {
-          "input": "</LEFT>",
+          "input": "<LEFT>Hello</LEFT>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         },
         {
-          "input": "</RIGHT>",
+          "input": "<RIGHT>Hello</RIGHT>",
           "expected": "Abertura define alinhamento; fechamento restaura; iniciar no começo da linha e não combinar com wrap; MapName usa posicionamento próprio."
         }
       ],
@@ -24013,7 +24064,7 @@
       "id": "MSG-RX-110",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<TOP>/gi",
-      "context": "MapName com Coreto",
+      "context": "MapName com Coreto Author this tag in Display Name in the map properties dialog. It is processed by Window_MapName for that map title; do not place this map-title directive in a Show Text body. Enable Coreto_0_CoreEngine before Coreto_1_MessageCore. In Coreto Core Plugin Manager parameters, QoLSettings > MapNameTextCode must be true (restart playtest after editing). TOP sets window y=0, MIDDLE sets y=floor((Graphics.boxHeight-window.height)/2), BOTTOM sets y=Graphics.boxHeight-window.height. These position the entire map-name window in UI-box pixels, not individual text glyphs. Example map Display Name: <TOP>Town.",
       "expected": "Tags de MapName alinham verticalmente e aplicam offsets X/Y com sinal; dependem de Map Name Text Code no Coreto.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -24039,7 +24090,7 @@
       "id": "MSG-RX-111",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<MIDDLE>/gi",
-      "context": "MapName com Coreto",
+      "context": "MapName com Coreto Author this tag in Display Name in the map properties dialog. It is processed by Window_MapName for that map title; do not place this map-title directive in a Show Text body. Enable Coreto_0_CoreEngine before Coreto_1_MessageCore. In Coreto Core Plugin Manager parameters, QoLSettings > MapNameTextCode must be true (restart playtest after editing). TOP sets window y=0, MIDDLE sets y=floor((Graphics.boxHeight-window.height)/2), BOTTOM sets y=Graphics.boxHeight-window.height. These position the entire map-name window in UI-box pixels, not individual text glyphs. Example map Display Name: <TOP>Town.",
       "expected": "Tags de MapName alinham verticalmente e aplicam offsets X/Y com sinal; dependem de Map Name Text Code no Coreto.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -24065,7 +24116,7 @@
       "id": "MSG-RX-112",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<BOTTOM>/gi",
-      "context": "MapName com Coreto",
+      "context": "MapName com Coreto Author this tag in Display Name in the map properties dialog. It is processed by Window_MapName for that map title; do not place this map-title directive in a Show Text body. Enable Coreto_0_CoreEngine before Coreto_1_MessageCore. In Coreto Core Plugin Manager parameters, QoLSettings > MapNameTextCode must be true (restart playtest after editing). TOP sets window y=0, MIDDLE sets y=floor((Graphics.boxHeight-window.height)/2), BOTTOM sets y=Graphics.boxHeight-window.height. These position the entire map-name window in UI-box pixels, not individual text glyphs. Example map Display Name: <TOP>Town.",
       "expected": "Tags de MapName alinham verticalmente e aplicam offsets X/Y com sinal; dependem de Map Name Text Code no Coreto.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -24091,7 +24142,7 @@
       "id": "MSG-RX-113",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<(?:TOP|MIDDLE|BOTTOM)>/gi",
-      "context": "Window_MapName.realignMapName com suporte de texto do Core",
+      "context": "Window_MapName.realignMapName com suporte de texto do Core Author this tag in Display Name in the map properties dialog. It is processed by Window_MapName for that map title; do not place this map-title directive in a Show Text body.",
       "expected": "Remove marcas de alinhamento vertical do nome do mapa após calcular sua posição. Aberturas TOP/MIDDLE/BOTTOM selecionam Y; fechamentos são removidos sem restaurar uma posição anterior.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -24127,7 +24178,7 @@
       "id": "MSG-RX-114",
       "plugin": "Coreto_1_MessageCore",
       "title": "/<\\/(?:TOP|MIDDLE|BOTTOM)>/gi",
-      "context": "Window_MapName.realignMapName com suporte de texto do Core",
+      "context": "Window_MapName.realignMapName com suporte de texto do Core Author this tag in Display Name in the map properties dialog. It is processed by Window_MapName for that map title; do not place this map-title directive in a Show Text body.",
       "expected": "Remove marcas de alinhamento vertical do nome do mapa após calcular sua posição. Aberturas TOP/MIDDLE/BOTTOM selecionam Y; fechamentos são removidos sem restaurar uma posição anterior.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "text-grammar",
@@ -24345,7 +24396,7 @@
       "id": "MSG-DEF-TextCodeActions-001",
       "plugin": "Coreto_1_MessageCore",
       "title": "TextCodeActions/ChangeFace",
-      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Use the shown escape with one backslash inside an MZ Show Text command. The row must still exist in the effective /TextCodeActions configuration. The default object here is the complete shipped row, including its function body; custom authoring can replace it. The callback receives this=the text window and arguments[0]=textState; its own drawing/window guards determine effects. The CLI describes/edits the row without executing its JavaScript. Changes the current message face using an img/faces basename without extension and a zero-based face index (0..7 on a standard sheet, four columns by two rows). Actor1 is illustrative and must exist as img/faces/Actor1.png; it is not an actor ID. Omitted index defaults to0. Runs only during Window_Message drawing, clears the existing face region and draws after the bitmap loads. A later Show Text command supplies its own face again.",
+      "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Use the shown escape with one backslash inside an MZ Show Text command. The row must still exist in the effective /TextCodeActions configuration. The default object here is the complete shipped row, including its function body; custom authoring can replace it. The callback receives this=the text window and arguments[0]=textState; its own drawing/window guards determine effects. The CLI describes/edits the row without executing its JavaScript. Changes the current message face using an img/faces basename without extension and a zero-based face index (0..7 on a standard sheet, four columns by two rows). Actor1 is illustrative and must exist as img/faces/Actor1.png; it is not an actor ID. Omitted index defaults to0. Runs only during Window_Message drawing, clears the existing face region and draws after the bitmap loads. A later Show Text command supplies its own face again. Set an initial face in Show Text before using ChangeFace; it replaces that face and does not create a new face margin in faceless text.",
       "expected": "Altera face/nome de recurso/índice conforme ator/party explícito; ChangeFace pressupõe face prévia e não cria recuo de face em mensagem sem face.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "preset",
@@ -28137,7 +28188,7 @@
       "plugin": "Coreto_1_MessageCore",
       "title": "pipeline-precedencia",
       "context": "Requires Coreto_0_CoreEngine followed by Coreto_1_MessageCore. Use the MZ event editor for event commands and text; configure plugin defaults through the Coreto parameter authoring interface. Illustrative variable/event/asset IDs must exist in the project. Order: macros/localization; backslash normalization; recursive variable expansion; button assist; preConvertEscapeCharacters; bold/italic; choice tags; alignment; color lock; casing; actor/party/currency; hardcoded battle replacements; action-code normalization; configured replacements; postConvertEscapeCharacters; another variable expansion; automatic color. Hooks and replacement TextJS receive this=the Window_Base-derived window. Replacement TextJS also receives String.replace match/captures/offset/source arguments; configured replacement rules run longest Match first and expand variables after each rule. Macro TextJS is similarly bound; replacement TextStr wins when nonempty and not Undefined. Cyclic variables/100 expansion iterations throw MESSAGE_TEXT_RECURSION. Callback failures report MESSAGE_TEXT_SCRIPT, not silent fallback. Later layout performs wrap/position processing; new-page macros can expand again and reprepare wrap.",
-      "expected": "Macros, barras, variáveis, localização, hooks pre/post, códigos e autocolor conservam ordem e contexto; efeitos não duplicam em medição.",
+      "expected": "Conversion hooks and replacement/macro TextJS may run during measurement as well as drawing. They receive text or String.replace arguments, not a drawing-state argument: keep them pure text transformations without external side effects. Only ActionJS callbacks that receive a text state can guard side effects with arguments[0].drawing. The engine does not deduplicate arbitrary custom side effects.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
       "version": "0.1.0",
@@ -28147,7 +28198,7 @@
       "examples": [
         {
           "input": "Set variable 1 to \"Ready\", configure TextCodeReplace row Match=\"STATUS\", Type=\"\", TextStr=\"\\V[1]\", then Show Text: \\STATUS. Consult message api describe MSG-M-056 --json for the replacement-row schema.",
-          "expected": "The replacement inserts a variable escape and the subsequent expansion produces Ready; callbacks run with the actual text window as receiver."
+          "expected": "Conversion hooks and replacement/macro TextJS may run during measurement as well as drawing. They receive text or String.replace arguments, not a drawing-state argument: keep them pure text transformations without external side effects. Only ActionJS callbacks that receive a text state can guard side effects with arguments[0].drawing. The engine does not deduplicate arbitrary custom side effects."
         }
       ],
       "diagnostics": {
@@ -28185,7 +28236,7 @@
       "plugin": "Coreto_1_MessageCore",
       "title": "wrap-linguas",
       "context": "Requires Coreto_0_CoreEngine followed by Coreto_1_MessageCore. Use the MZ event editor for event commands and text; configure plugin defaults through the Coreto parameter authoring interface. Illustrative variable/event/asset IDs must exist in the project. Configure /WordWrap/MessageWindow and HelpWindow for defaults, LineBreakSpace to join physical line breaks into spaces, EndPadding in pixels for the right reserve, and TightWrap for face-width adjustment. <WORDWRAP> enables a converted string, <NOWORDWRAP> or </WORDWRAP> disables it; these are whole-string scans, not nested scopes. Choices, alignment and auto-size/auto-target tags force wrap off. Conversion inserts space boundaries and boundaries after Japanese kana/CJK ideographs. A boundary measures the next segment and inserts a newline if it exceeds available width. An unbroken long Latin word is not split internally and may overflow; RTL/measurement skip insertion. <BR> always gives an explicit break. A later conversion reloads its window default.",
-      "expected": "Medição e desenho concordam em quebras, recuo da face, estilos, ícones e CJK.",
+      "expected": "Measurement calculates the next segment width; only the drawing phase inserts an automatic newline at a supported boundary. RTL and measurement skip automatic newline insertion. Styles and face/padding settings determine available width; do not assume measurement mutates the text identically to drawing.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
       "version": "0.1.0",
@@ -28195,7 +28246,7 @@
       "examples": [
         {
           "input": "Show Text: <WORDWRAP>First word second word<BR>日本語。 Use a narrow message window to exercise automatic boundaries.",
-          "expected": "Spaces and supported CJK boundaries permit wrapping; BR explicitly starts a line, and an unbroken oversized Latin word is not hyphenated."
+          "expected": "Measurement calculates the next segment width; only the drawing phase inserts an automatic newline at a supported boundary. RTL and measurement skip automatic newline insertion. Styles and face/padding settings determine available width; do not assume measurement mutates the text identically to drawing."
         }
       ],
       "diagnostics": {
@@ -28209,7 +28260,7 @@
       "plugin": "Coreto_1_MessageCore",
       "title": "medicao-estilos",
       "context": "Requires Coreto_0_CoreEngine followed by Coreto_1_MessageCore. Use the MZ event editor for event commands and text; configure plugin defaults through the Coreto parameter authoring interface. Illustrative variable/event/asset IDs must exist in the project. Runtime extension call: window.textSizeEx(text) returns an object with width/height in pixels. window must be a live Window_Base-derived instance; this is not an offline CLI command. Measurement preserves font face/size/bold/italic/text and outline colors/width/opacity plus casing/color-lock/color stack/wrap/alignment state. Native waits and Common Events are not triggered. Custom action callbacks run in measurement too: guard external side effects with arguments[0].drawing. Resource pictures do not draw during measurement. A callback exception still propagates as MESSAGE_TEXT_SCRIPT.",
-      "expected": "textSizeEx conserva/restaura família, tamanho, negrito, itálico, outline, cor e lock sem mover janela nem produzir efeito.",
+      "expected": "Measurement restores internal styles and layout state and triggers no native waits or Common Events. Custom callbacks still run and must check arguments[0].drawing before causing external side effects.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
       "version": "0.1.0",
@@ -28219,7 +28270,7 @@
       "examples": [
         {
           "input": "In a window method: const size = this.textSizeEx(\"\\\\BOLD[1]Hello\\\\BOLD[0]\"); use size.width and size.height. JavaScript strings need doubled backslashes; Show Text does not.",
-          "expected": "The call returns formatted dimensions in pixels and restores the prior window styles, without pausing or launching a Common Event."
+          "expected": "Measurement restores internal styles and layout state and triggers no native waits or Common Events. Custom callbacks still run and must check arguments[0].drawing before causing external side effects."
         }
       ],
       "diagnostics": {
@@ -29102,7 +29153,7 @@
       "expected": "APIs de state display, passiveStates, stateTurns, buffTurns e cores alimentam tooltip original sem migrar sistema de estados.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "integration",
-      "version": "1.48",
+      "version": "1.58",
       "availability": "supported",
       "authoring": "editor-integration",
       "aliases": [],
@@ -29322,7 +29373,7 @@
       "id": "MSG-BEH-choice-color-red",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-red",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome red resulta em #f26c4f no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29346,7 +29397,7 @@
       "id": "MSG-BEH-choice-color-orange",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-orange",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome orange resulta em #fbaf5d no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29370,7 +29421,7 @@
       "id": "MSG-BEH-choice-color-yellow",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-yellow",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome yellow resulta em #fff799 no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29394,7 +29445,7 @@
       "id": "MSG-BEH-choice-color-green",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-green",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome green resulta em #7cc576 no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29418,7 +29469,7 @@
       "id": "MSG-BEH-choice-color-blue",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-blue",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome blue resulta em #6dcff6 no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29442,7 +29493,7 @@
       "id": "MSG-BEH-choice-color-purple",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-purple",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome purple resulta em #a186be no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29466,7 +29517,7 @@
       "id": "MSG-BEH-choice-color-violet",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-violet",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome violet resulta em #a186be no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29490,7 +29541,7 @@
       "id": "MSG-BEH-choice-color-brown",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-brown",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome brown resulta em #c69c6d no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29514,7 +29565,7 @@
       "id": "MSG-BEH-choice-color-pink",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-pink",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome pink resulta em #ffc8e0 no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29538,7 +29589,7 @@
       "id": "MSG-BEH-choice-color-white",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-white",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome white resulta em #ffffff no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29562,7 +29613,7 @@
       "id": "MSG-BEH-choice-color-gray",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-gray",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome gray resulta em #acacac no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29586,7 +29637,7 @@
       "id": "MSG-BEH-choice-color-grey",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-grey",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome grey resulta em #acacac no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29610,7 +29661,7 @@
       "id": "MSG-BEH-choice-color-black",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-black",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome black resulta em #707070 no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29634,7 +29685,7 @@
       "id": "MSG-BEH-choice-color-yes",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-yes",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome yes resulta em ColorManager.powerUpColor() no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29658,7 +29709,7 @@
       "id": "MSG-BEH-choice-color-no",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-no",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome no resulta em ColorManager.powerDownColor() no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29682,7 +29733,7 @@
       "id": "MSG-BEH-choice-color-system",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-system",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome system resulta em ColorManager.systemColor() no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29706,7 +29757,7 @@
       "id": "MSG-BEH-choice-color-crisis",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-crisis",
-      "context": "Choice background com Core próprio",
+      "context": "Choice background com Core próprio Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Nome crisis resulta em ColorManager.crisisColor() no fundo da escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29730,7 +29781,7 @@
       "id": "MSG-BEH-choice-color-gradient",
       "plugin": "Coreto_1_MessageCore",
       "title": "choice-color-gradient",
-      "context": "Enable Coreto Message and enter <BG COLOR: #334455,#667788>Buy in a Show Choices option. The first color is the top and the second is the bottom of a vertical gradient. The last matching gradient takes precedence over single-color tags. Colors accept #rrggbb or windowskin palette indices. Normal item-border drawing remains; the tag is removed from the label. This changes appearance, not choice conditions or event branches.",
+      "context": "Enable Coreto Message and enter <BG COLOR: #334455,#667788>Buy in a Show Choices option. The first color is the top and the second is the bottom of a vertical gradient. The last matching gradient takes precedence over single-color tags. Colors accept #rrggbb or windowskin palette indices. Normal item-border drawing remains; the tag is removed from the label. This changes appearance, not choice conditions or event branches. Write the color tag in the text of an individual option in the native Show Choices command in the event editor. It colors that choice label; it is not a database Note or a plugin parameter.",
       "expected": "Cor única usa preenchimento correspondente; par de cores usa gradiente e restaura fundo normal na próxima escolha.",
       "availabilityReason": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto.",
       "surface": "behavior",
@@ -29932,6 +29983,114 @@
         "unavailable": "Ative o plugin indicado e suas dependências no jogo. Disponibilidade descreve a capacidade, não verifica a configuração do projeto."
       },
       "description": "Use the delivered Core and Message bootstrap/extension interfaces with one active provider."
+    },
+    {
+      "id": "MSG-M-257",
+      "plugin": "Coreto_1_MessageCore",
+      "title": "MessageRandomize",
+      "description": "Select one message and store it in a game variable. Display it with \\V[x]; displaying or loading does not draw again.",
+      "context": "Enable Coreto Core then Message. Execute native command357 in a map, Common Event or troop; show the stored text with \\V[1].",
+      "expected": "Select one message and store it in a game variable. Display it with \\V[x]; displaying or loading does not draw again.",
+      "surface": "command",
+      "version": "0.1.0",
+      "availability": "supported",
+      "availabilityReason": "Requires the active Message provider.",
+      "authoring": "native-cli-and-editor",
+      "aliases": [],
+      "examples": [
+        {
+          "input": "MessageRandomize: messages=[\"First\\nSecond\", \"Alternative\"], varID=\"1\"",
+          "expected": "Variable1 holds one selected string until another event changes it."
+        }
+      ],
+      "diagnostics": {
+        "context": "Native command357; no offline JavaScript evaluation.",
+        "unavailable": "Enable the Message provider after Core."
+      },
+      "metadata": {
+        "text": [
+          "Message: Randomize Text"
+        ],
+        "desc": [
+          "Select one message and store it in a game variable. Display it with \\V[x]; displaying or loading does not draw again."
+        ]
+      }
+    },
+    {
+      "id": "MSG-M-258",
+      "plugin": "Coreto_1_MessageCore",
+      "title": "command:MessageRandomize/messages:arrayjson",
+      "description": "A list of random messages. Text codes and line breaks are preserved. An empty list changes nothing.",
+      "context": "Enable Coreto Core then Message. Execute native command357 in a map, Common Event or troop; show the stored text with \\V[1].",
+      "expected": "A list of random messages. Text codes and line breaks are preserved. An empty list changes nothing.",
+      "surface": "command-argument",
+      "version": "0.1.0",
+      "availability": "supported",
+      "availabilityReason": "Requires the active Message provider.",
+      "authoring": "native-cli-and-editor",
+      "aliases": [],
+      "examples": [
+        {
+          "input": "MessageRandomize: messages=[\"First\\nSecond\", \"Alternative\"], varID=\"1\"",
+          "expected": "Variable1 holds one selected string until another event changes it."
+        }
+      ],
+      "diagnostics": {
+        "context": "Native command357; no offline JavaScript evaluation.",
+        "unavailable": "Enable the Message provider after Core."
+      },
+      "metadata": {
+        "text": [
+          "Random Messages"
+        ],
+        "desc": [
+          "A list of random messages. Text codes and line breaks are preserved. An empty list changes nothing."
+        ],
+        "type": [
+          "note[]"
+        ],
+        "default": [
+          "[\"\\\"This plugin command selects a message at random.\\\\nIsn't that neat?\\\"\",\"\\\"Insert more messages here to increase the randomization.\\\\nCool, huh?\\\"\",\"\\\"The larger the random pool, the more variety in messages.\\\\nIt'll be more interesting that way!\\\"\"]"
+        ]
+      }
+    },
+    {
+      "id": "MSG-M-259",
+      "plugin": "Coreto_1_MessageCore",
+      "title": "command:MessageRandomize/varID:eval",
+      "description": "Variable receiving the selected text. Zero changes nothing. Expressions run only when the command executes.",
+      "context": "Enable Coreto Core then Message. Execute native command357 in a map, Common Event or troop; show the stored text with \\V[1].",
+      "expected": "Variable receiving the selected text. Zero changes nothing. Expressions run only when the command executes.",
+      "surface": "command-argument",
+      "version": "0.1.0",
+      "availability": "supported",
+      "availabilityReason": "Requires the active Message provider.",
+      "authoring": "native-cli-and-editor",
+      "aliases": [],
+      "examples": [
+        {
+          "input": "MessageRandomize: messages=[\"First\\nSecond\", \"Alternative\"], varID=\"1\"",
+          "expected": "Variable1 holds one selected string until another event changes it."
+        }
+      ],
+      "diagnostics": {
+        "context": "Native command357; no offline JavaScript evaluation.",
+        "unavailable": "Enable the Message provider after Core."
+      },
+      "metadata": {
+        "text": [
+          "Variable ID"
+        ],
+        "desc": [
+          "Variable receiving the selected text. Zero changes nothing. Expressions run only when the command executes."
+        ],
+        "type": [
+          "variable"
+        ],
+        "default": [
+          "1"
+        ]
+      }
     }
   ],
   "dependencies": {
@@ -29945,10 +30104,11 @@
       "VisuMZ_3_StateTooltips": "1.10"
     },
     "integrations": {
-      "VisuMZ_1_BattleCore": "1.85",
-      "VisuMZ_1_SkillsStatesCore": "1.48",
-      "VisuMZ_1_SaveCore": "1.13",
-      "VisuMZ_1_OptionsCore": "1.27"
+      "VisuMZ_1_BattleCore": "1.90",
+      "VisuMZ_1_SkillsStatesCore": "1.58",
+      "VisuMZ_1_SaveCore": "1.14",
+      "VisuMZ_1_OptionsCore": "1.28",
+      "Coreto_1_BattleCore": "0.1.0"
     }
   },
   "namespace": "message"

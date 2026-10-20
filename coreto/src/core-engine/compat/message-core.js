@@ -9,30 +9,8 @@ function installMessageCompatibility(active, settings, formatDigits, parameterIc
     const compatibility = globalThis.VisuMZ ??= {};
     if (compatibility.coretoMessageBridge) installationError("CORE_MESSAGE_BRIDGE_DUPLICATE", "Message bridge already installed.");
     compatibility.coretoMessageBridge = true;
-    // Legacy consumers use the reference API version to select implemented Core hooks.
-    // Settings is the actual Core state, so rebinding and presentation read the same values.
-    compatibility.CoreEngine = {version: 1.90, Settings: settings};
-    const imported = globalThis.Imported ??= {};
-    const categories = ["Class", "Skill", "Item", "Weapon", "Armor", "Enemy", "State"];
-    // Message wraps these extension points before the database-ready dispatcher invokes them.
-    for (const category of categories) compatibility[`Parse${category}Notetags`] ??= function() {};
-    compatibility.ParseAllNotetags = function() {
-        const groups = [$dataClasses, $dataSkills, $dataItems, $dataWeapons, $dataArmors, $dataEnemies, $dataStates];
-        for (const [index, group] of groups.entries()) {
-            for (const record of group) {
-                if (record) compatibility[`Parse${categories[index]}Notetags`].call(this, record);
-            }
-        }
-    };
-    const onDatabaseLoaded = Scene_Boot.prototype.onDatabaseLoaded;
-    Scene_Boot.prototype.onDatabaseLoaded = function(...args) {
-        const result = onDatabaseLoaded.apply(this, args);
-        compatibility.ParseAllNotetags();
-        return result;
-    };
-    compatibility.ApplyEasing = applyEasing;
-    compatibility.GroupDigits = formatDigits;
-    compatibility.GetParamIcon = parameterIcon;
+    installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    installLegacyCoreNotetags();
     compatibility.applyMoveEasing = applyEasing;
     for (const method of ["easeIn", "easeOut", "easeInOut"]) {
         Window_Base.prototype[method] = Game_Picture.prototype[method];
@@ -48,5 +26,47 @@ function installMessageCompatibility(active, settings, formatDigits, parameterIc
             this._pictureTextWindow = null;
         }
     };
-    imported.VisuMZ_0_CoreEngine = true;
+}
+
+function installLegacyCoreInterface(settings, formatDigits, parameterIcon) {
+    const compatibility = globalThis.VisuMZ ??= {};
+    compatibility.CoreEngine = {version: 1.90, Settings: settings};
+    compatibility.ApplyEasing = applyEasing;
+    compatibility.GroupDigits = formatDigits;
+    compatibility.GetParamIcon = parameterIcon;
+    globalThis.Imported ??= {};
+    Imported.VisuMZ_0_CoreEngine = true;
+}
+
+function installVictoryCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (active.some(plugin => plugin.name === "VisuMZ_3_VictoryAftermath")) {
+        installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    }
+}
+
+function installLegacyCoreNotetags() {
+    const compatibility = globalThis.VisuMZ;
+    const categories = ["Actor", "Class", "Skill", "Item", "Weapon", "Armor", "Enemy", "State"];
+    // Consumers wrap these extension points before the database-ready dispatcher invokes them.
+    for (const category of categories) compatibility[`Parse${category}Notetags`] ??= function() {};
+    compatibility.ParseAllNotetags = function() {
+        const groups = [$dataActors, $dataClasses, $dataSkills, $dataItems, $dataWeapons, $dataArmors, $dataEnemies, $dataStates];
+        for (const [index, group] of groups.entries()) {
+            for (const record of group) {
+                if (record) compatibility[`Parse${categories[index]}Notetags`].call(this, record);
+            }
+        }
+    };
+    const onDatabaseLoaded = Scene_Boot.prototype.onDatabaseLoaded;
+    Scene_Boot.prototype.onDatabaseLoaded = function(...args) {
+        const result = onDatabaseLoaded.apply(this, args);
+        compatibility.ParseAllNotetags();
+        return result;
+    };
+}
+
+function installEquipCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (!active.some(plugin => plugin.name === "VisuMZ_2_EquipSetBonuses")) return;
+    installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    if (!VisuMZ.coretoMessageBridge) installLegacyCoreNotetags();
 }

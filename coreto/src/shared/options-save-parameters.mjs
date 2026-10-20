@@ -24,7 +24,8 @@ export function decodeOptionsSaveParameters(raw,scope,code,target={},source=raw)
                 else if(type==='arraystr')output[key]=value===''?[]:JSON.parse(value);
             }catch(cause){
                 if(cause.code===code)throw cause;
-                const error=new Error(`Cannot decode ${at}: ${cause.message}`,{cause});
+                const error=new Error(`Cannot decode ${at}: ${cause.message}`);
+                Object.defineProperty(error,'cause',{value:cause,writable:true,configurable:true});
                 error.code=code;error.field=at;throw error;
             }
         }

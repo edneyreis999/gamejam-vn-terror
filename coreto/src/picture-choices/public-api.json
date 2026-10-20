@@ -15,7 +15,7 @@
     },
     "messages": {
       "Coreto_1_MessageCore": "0.1.0",
-      "VisuMZ_1_MessageCore": "1.54"
+      "VisuMZ_1_MessageCore": "1.57"
     },
     "before": {},
     "integrations": {}
@@ -274,7 +274,8 @@
                 "InBounce",
                 "OutBounce",
                 "InOutBounce"
-              ]
+              ],
+              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
@@ -530,7 +531,8 @@
                 "InBounce",
                 "OutBounce",
                 "InOutBounce"
-              ]
+              ],
+              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
@@ -831,7 +833,8 @@
                 "InBounce",
                 "OutBounce",
                 "InOutBounce"
-              ]
+              ],
+              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
@@ -1087,7 +1090,8 @@
                 "InBounce",
                 "OutBounce",
                 "InOutBounce"
-              ]
+              ],
+              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
             },
             {
               "id": "PC-PICTURE-TargetX:str",

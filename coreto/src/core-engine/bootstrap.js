@@ -83,6 +83,8 @@ function installCore() {
     installGoldPresentation(settings, formatDigits);
     installPictureCoordinates(installMetadataOperations());
     installMessageCompatibility(active, settings, formatDigits, parameterIcon);
+    installVictoryCoreCompatibility(active, settings, formatDigits, parameterIcon);
+    installEquipCoreCompatibility(active, settings, formatDigits, parameterIcon);
     installSaveLifecycle({normalizeSystem, normalizeBattle, normalizePicture});
     installNewGameSettings(settings);
 
@@ -107,7 +109,8 @@ function installCore() {
                 tags: catalog.tags,
                 methods: catalog.methods,
                 entries: describeCoreApi(catalog),
-                compatibility: catalog.compatibility
+                compatibility: catalog.compatibility,
+                dependencies: catalog.dependencies
             }));
         }
     };

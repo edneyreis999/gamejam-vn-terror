@@ -1,16 +1,84 @@
 import { chromium } from 'playwright';
 import {createAudioCapture, audioCapture} from './audio-capture.mjs';
-import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
-import { resolve, join, relative, isAbsolute, dirname, basename } from 'node:path';
+import { mkdir, readFile, writeFile, realpath, appendFile } from 'node:fs/promises';
+import { resolve, join, relative, isAbsolute, dirname, basename, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import {loadStorageFixture, storageCapture} from './browser-storage.mjs';
 import os from 'node:os';
-import {withDeadline,readObservation} from './observation-deadline.mjs';
+import {withDeadline,readObservation,closeWithDeadline} from './observation-deadline.mjs';
+import {audioOutput} from './browser-audio.mjs';
+import {browserLaunchArguments} from './browser-launch.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const errorInfo = error => ({ name: error.name, message: error.message, stack: error.stack, ...(error.partialObservation?{partialObservation:error.partialObservation}:{}), ...(error.partialObservationUnavailable?{partialObservationUnavailable:error.partialObservationUnavailable}:{}) });
-const inside = (root, file) => { const rel = relative(root, file); return rel !== '..' && !rel.startsWith('../') && !isAbsolute(rel); };
+const inside = (root, file) => { const rel = relative(root, file); return rel !== '..' && !rel.startsWith('..'+sep) && !isAbsolute(rel); };
 const safeId = id => typeof id === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}$/.test(id);
+let reservedBrowsers = 0;
+
+async function browserEvent(type, extra = {}) {
+  if (process.env.LOKI_BROWSER_EVENTS) await appendFile(process.env.LOKI_BROWSER_EVENTS,
+    JSON.stringify({type, job:process.env.LOKI_JOB_ID, pid:process.pid, atNs:String(process.hrtime.bigint()), ...extra}) + '\n');
+}
+
+export async function launchBrowser(config, {handleSignals = true} = {}) {
+  if (process.env.LOKI_BROWSER_RESERVATION !== undefined) {
+    const capacity = Number(process.env.LOKI_BROWSER_RESERVATION);
+    if (!Number.isSafeInteger(capacity) || capacity <= reservedBrowsers) throw new Error('Browser launch exceeds this job reservation');
+  }
+  const destination = audioOutput(config);
+  const args = browserLaunchArguments(config);
+  reservedBrowsers++;
+  let browser;
+  try {
+    const options = {channel:config.channel??'chromium',headless:config.headless??true,args,handleSIGINT:handleSignals,handleSIGTERM:handleSignals,handleSIGHUP:handleSignals};
+    browser = await chromium.launch(options);
+  }
+  catch (error) { reservedBrowsers--; throw error; }
+  let closing;
+  const close = () => closing ??= (async () => {
+    const started=process.hrtime.bigint();
+    await browserEvent('closing');
+    try {
+      await browser.close();
+    }
+    catch (error) {
+      await browserEvent('close-failed',{closeMs:Number(process.hrtime.bigint()-started)/1e6,error:error.message});
+      throw error;
+    }
+    reservedBrowsers--;
+    await browserEvent('closed',{closeMs:Number(process.hrtime.bigint()-started)/1e6});
+  })();
+  try { await browserEvent('opened', {version:browser.version(),headless:config.headless??true,args,audioOutput:destination.sink}); }
+  catch (error) { await close(); throw error; }
+  return {browser, close};
+}
+
+export function frameKeyboard(page, timeout = 15000) {
+  const held = new Map();
+  const wait = async frame => {
+    if (frame !== null && frame !== undefined) await page.waitForFunction(frame => Graphics.frameCount < frame || Graphics.frameCount >= frame + 2, frame, {timeout, polling: 'raf'});
+  };
+  const settle = async () => wait(await page.evaluate(() => globalThis.Graphics?.frameCount ?? null));
+  return {
+    settle,
+    async down(key) {
+      await page.keyboard.down(key);
+      try { held.set(key, await page.evaluate(() => globalThis.Graphics?.frameCount ?? null)); }
+      catch (error) {
+        try { await page.keyboard.up(key); }
+        catch (releaseError) { error.releaseError = releaseError; }
+        throw error;
+      }
+    },
+    async up(key) {
+      const frame = held.get(key); held.delete(key);
+      if (['F2', 'F3', 'F4'].includes(key)) { await page.keyboard.up(key); return; }
+      try { await wait(frame); }
+      finally { await page.keyboard.up(key); }
+      await settle();
+    }
+  };
+}
 
 async function resolveDestination(file) {
   const segments = [];
@@ -24,7 +92,16 @@ async function resolveDestination(file) {
   }
 }
 
-export async function run({ project, fixture, output, adapter, caseModule, sources = [] }) {
+export async function run(options) {
+  return executeScenario(options);
+}
+
+export async function runWithBrowser(browser, options) {
+  if (!browser.isConnected()) throw new Error('The fixture-owned browser is disconnected.');
+  return executeScenario(options, browser);
+}
+
+async function executeScenario({ project, fixture, output, adapter, caseModule, sources = [], diagnostic, onCancellationReady, onContext, signal }, fixtureBrowser) {
   project = await realpath(project);
   fixture = await realpath(fixture);
   if (project === fixture) throw new Error('Prepare an isolated fixture before execution.');
@@ -33,27 +110,51 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
   const scenario = caseModule.scenario;
   if (!safeId(scenario?.id) || !Array.isArray(scenario.criteria) || !scenario.criteria.length) throw new Error('Scenario ID and required criteria are mandatory.');
   const config = scenario.browser;
+  const eventWrites = [];
   if (!config || !Number.isInteger(config.width) || config.width <= 0 || !Number.isInteger(config.height) || config.height <= 0 || !(config.dpr > 0) || !config.locale) throw new Error('Explicit width, height, DPR and locale required.');
+  const audioDestination = audioOutput(config);
+  const launchArgs = browserLaunchArguments(config);
   if ('nativeZoom' in config) throw new Error('nativeZoom was removed; migrate this case to ordinary browser configuration.');
   if (config.recordVideo !== undefined && typeof config.recordVideo !== 'boolean') throw new Error('recordVideo must be boolean.');
   if (scenario.audioFormat !== undefined && !['webm', 'wav'].includes(scenario.audioFormat)) throw new Error('audioFormat must be webm or wav.');
   if (config.video !== undefined && typeof config.video !== 'boolean') throw new Error('video must be boolean.');
   if (config.video && config.recordVideo) throw new Error('Choose video or recordVideo, not both.');
   const timeout = config.timeoutMs ?? 15000;
+  if (config.keyReleaseMs !== undefined && (!Number.isSafeInteger(config.keyReleaseMs) || config.keyReleaseMs < 0)) throw new Error('keyReleaseMs must be a nonnegative integer');
   const executionTimeout = config.executionTimeoutMs ?? 600000, cleanupTimeout = config.cleanupTimeoutMs ?? 15000;
+  const browserCleanupTimeout = config.cleanupTimeoutMs ?? (process.platform === 'win32' ? 120000 : 15000);
   if (![timeout,executionTimeout,cleanupTimeout].every(value=>Number.isSafeInteger(value)&&value>0)) throw new Error('Browser deadlines must be positive integer milliseconds.');
   const root = await resolveDestination(output);
   if (inside(fixture, root)) throw new Error('Evidence output must be outside the served fixture.');
   await mkdir(root);
-  const report = { mode: 'directed-browser', scenario: scenario.id, startedAt: new Date().toISOString(), fixture, criteria: [], checkpoints: [], inputs: [], observations: [], errors: [], cleanup: [], sources: [], status: 'in_progress' };
-  let browser, context, page, session, service, lease, audio, terminal = false, touchActive = false;
+  const report = { mode: 'directed-browser', browserOwner: fixtureBrowser ? 'playwright' : 'standalone', scenario: scenario.id, startedAt: new Date().toISOString(), fixture, criteria: [], checkpoints: [], inputs: [], observations: [], errors: [], cleanup: [], sources: [], status: 'in_progress' };
+  let browser, browserOwner, context, page, session, service, lease, audio, keyboard, terminal = false, touchActive = false;
   const videos = [], audioIds = new Set();
   const activeFaults = new Map();
   let video;
   const heldKeys = new Set(), heldButtons = new Set();
+  let interruption, interruptExecution;
+  const interrupted = signal => {
+    terminal = true;
+    interruption = new Error(`QA interrupted by ${signal}`);
+    interruptExecution?.(interruption);
+  };
+  const onInterrupt = () => interrupted('SIGINT'), onTerminate = () => interrupted('SIGTERM'), onHangup = () => interrupted('SIGHUP');
+  const onAbort = () => interrupted(signal.reason?.message ?? 'AbortSignal');
+  const onMessage = message => { if (message?.type === 'qa:cancel') interrupted('IPC cancellation'); };
+  process.on('SIGINT', onInterrupt); process.on('SIGTERM', onTerminate); process.on('SIGHUP', onHangup);
+  process.on('message', onMessage);
+  signal?.addEventListener('abort', onAbort, {once:true});
+  if (signal?.aborted) onAbort();
+  onCancellationReady?.();
+  process.send?.({type:'qa:ready'});
   const failure = (phase, error) => { report.errors.push({ phase, ...errorInfo(error) }); report.failure ??= { phase, ...errorInfo(error) }; report.status = 'fail'; };
   const owned = async (resource, close) => {
-    try { await withDeadline(close, cleanupTimeout, `cleanup:${resource}`); report.cleanup.push({ resource, status: 'closed' }); }
+    try {
+      if (resource === 'browser') await closeWithDeadline(close, browserCleanupTimeout, 'cleanup:browser');
+      else await withDeadline(close, cleanupTimeout, `cleanup:${resource}`);
+      report.cleanup.push({ resource, status: 'closed' });
+    }
     catch (error) { failure(`cleanup:${resource}`, error); report.cleanup.push({ resource, status: 'failed', message: error.message }); }
   };
   const releaseTouch = async () => {
@@ -73,7 +174,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     return actual;
   };
   try {
-    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./audio-capture.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./browser-storage.mjs', import.meta.url), new URL('./observation-deadline.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
+    for (const [index, file] of [...sources, ...(caseModule.sourceFiles ?? []), ...(adapter.sourceFiles ?? []), new URL('./browser-runtime.mjs', import.meta.url), new URL('./browser-launch.mjs', import.meta.url), new URL('./audio-capture.mjs', import.meta.url), new URL('./browser-audio.mjs', import.meta.url), new URL('./browser-storage.mjs', import.meta.url), new URL('./observation-deadline.mjs', import.meta.url), new URL('./package-lock.json', import.meta.url), new URL('./package.json', import.meta.url), new URL('./directed-browser.mjs', import.meta.url)].entries()) {
       const bytes = await readFile(file); const name = `source-${index}${String(file).endsWith('.json') ? '.json' : '.mjs'}`;
       await writeFile(join(root, name), bytes, { flag: 'wx' }); report.sources.push({ path: name, originalPath: await realpath(file), sha256: digest(bytes) });
     }
@@ -103,9 +204,14 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       report.storagePreparation = {phase: 'before-first-page', ...source, origin: baseUrl.origin};
       report.storageImport = {...source, targetOrigin: baseUrl.origin, mappedSha256: digest(bytes)};
     }
-    browser = await chromium.launch({ channel: config.channel ?? 'chrome', headless: false, args: config.launchArgs ?? [] });
+    if (fixtureBrowser) browser = fixtureBrowser;
+    else {
+      browserOwner = await launchBrowser(config, {handleSignals:false});
+      browser = browserOwner.browser;
+    }
     const openPage = async () => {
       page = await context.newPage(); page.setDefaultTimeout(timeout);
+      keyboard = frameKeyboard(page, timeout);
       if (config.video) video = page.video();
       const recording = config.recordVideo ? { handle: page.video(), startedAt: Date.now() } : undefined;
       if (recording) videos.push(recording);
@@ -113,7 +219,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       page.on('console', m => { if (m.type() === 'error') report.errors.push({ phase: 'console', message: m.text() }); });
       await page.addInitScript(() => {
         globalThis.__qaTelemetry = { inputs: [] };
-        for (const type of ['keydown', 'keyup', 'pointerdown', 'pointerup', 'wheel']) addEventListener(type, e => __qaTelemetry.inputs.push({ type, key: e.key, x: e.clientX, y: e.clientY, deltaX: e.deltaX, deltaY: e.deltaY, deltaMode: e.deltaMode, trusted: e.isTrusted, at: performance.now() }), true);
+        for (const type of ['keydown', 'keyup', 'pointerdown', 'pointerup', 'wheel']) addEventListener(type, e => __qaTelemetry.inputs.push({ type, key: e.key, x: e.clientX, y: e.clientY, deltaX: e.deltaX, deltaY: e.deltaY, deltaMode: e.deltaMode, trusted: e.isTrusted, at: performance.now(), frame: globalThis.Graphics?.frameCount }), true);
         for (const type of ['touchstart', 'touchmove', 'touchend', 'touchcancel']) {
           addEventListener(type, event => __qaTelemetry.inputs.push({type,
             touches: [...event.touches].map(touch => ({id: touch.identifier, x: touch.clientX, y: touch.clientY})),
@@ -133,6 +239,9 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
         deviceScaleFactor: config.dpr, locale: config.locale, hasTouch: config.hasTouch ?? false,
         reducedMotion: config.reducedMotion ?? 'no-preference', storageState,
         ...((config.recordVideo || config.video) ? {recordVideo: {dir: join(root, 'video'), size: {width: config.width, height: config.height}}} : {})});
+      await onContext?.(context);
+      await browserEvent('context-opened');
+      context.once('close',()=>{eventWrites.push(browserEvent('context-closed').catch(error=>failure('browser-events',error)));});
       report.network ??= [];
       context.on('request', request => report.network.push({event: 'request', url: request.url(), method: request.method(), at: Date.now()}));
       context.on('response', response => report.network.push({event: 'response', url: response.url(), status: response.status(), at: Date.now()}));
@@ -140,7 +249,14 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       await openPage();
     };
     await openContext(storageState);
-    report.environment = { ...lease, browser: browser.version(), node: process.version, platform: process.platform, release: os.release(), arch: process.arch };
+    if (interruption) throw interruption;
+    report.environment = { ...lease, browser: browser.version(), headless: config.headless ?? true, channel: config.channel ?? 'chromium', launchArgs, audioOutput:audioDestination.sink, node: process.version, platform: process.platform, release: os.release(), arch: process.arch };
+    report.environment.renderer = await page.evaluate(() => {
+      const gl = globalThis.Graphics?.app?.renderer?.gl;
+      if (!gl) return null;
+      const debug = gl.getExtension('WEBGL_debug_renderer_info');
+      return {vendor: gl.getParameter(gl.VENDOR), renderer: gl.getParameter(gl.RENDERER), unmaskedRenderer: debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : null};
+    });
     const wait = async (fn, arg) => { await identity(); const handle = await page.waitForFunction(fn, arg, { timeout, polling: 'raf' }); await handle.dispose(); await identity(); };
     const read = async (label, fn, arg) => { await identity(); const value = await readObservation(page, label, fn, arg, timeout); await identity(); report.observations.push({ label, kind: 'auxiliary-read', at: Date.now(), value }); return value; };
     const input = async (type, detail, action) => {
@@ -148,9 +264,38 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       try { await identity(); const at = Date.now(); await action(); report.inputs.push({ type, ...detail, at }); }
       catch (error) { terminal = true; throw error; }
     };
-    const keyDown = key => input('key-down', { key }, async () => { heldKeys.add(key); await page.keyboard.down(key); });
-    const keyUp = key => input('key-up', { key }, async () => { await page.keyboard.up(key); heldKeys.delete(key); });
-    const key = async (value, holdMs = 70) => { await keyDown(value); try { await new Promise(r => setTimeout(r, holdMs)); } finally { await page.keyboard.up(value); heldKeys.delete(value); report.inputs.push({ type: 'key-up', key: value, at: Date.now() }); } await new Promise(r => setTimeout(r, config.keyReleaseMs ?? 35)); };
+    const keyDown = key => input('key-down', { key }, async () => {
+      heldKeys.add(key); await keyboard.down(key);
+    });
+    const keyUp = key => input('key-up', { key }, async () => {
+      try { await keyboard.up(key); }
+      finally { heldKeys.delete(key); }
+    });
+    const key = async (value, holdMs) => {
+      if (holdMs !== undefined && (!Number.isSafeInteger(holdMs) || holdMs < 0)) throw new Error('Key hold duration must be a nonnegative integer');
+      if (terminal) throw new Error('Input stopped after uncertain operation; start a new run from a reliable reset.');
+      await identity();
+      heldKeys.add(value);
+      try {
+        const downAt = Date.now();
+        if (holdMs === undefined) {
+          await keyboard.down(value);
+          await keyboard.up(value);
+        } else await page.keyboard.press(value, {delay:holdMs});
+        heldKeys.delete(value);
+        report.inputs.push({type:'key-down', key:value, at:downAt}, {type:'key-up', key:value, at:Date.now()});
+        if (holdMs !== undefined) await keyboard.settle();
+        await identity();
+      } catch (error) {
+        terminal = true;
+        if (heldKeys.has(value)) {
+          try { await page.keyboard.up(value); heldKeys.delete(value); }
+          catch (releaseError) { error.releaseError = releaseError; }
+        }
+        throw error;
+      }
+      if (config.keyReleaseMs) await new Promise(done=>setTimeout(done,config.keyReleaseMs));
+    };
     const pointer = {
       move: (x, y) => input('pointer-move', { x, y }, () => page.mouse.move(x, y)),
       down: (button = 'left') => input('pointer-down', { button }, async () => { heldButtons.add(button); await page.mouse.down({ button }); }),
@@ -175,6 +320,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       })
     };
     const shot = async id => {
+      if (typeof diagnostic !== 'string' || !diagnostic.trim()) throw new Error('Screenshots require an explicit diagnostic reason. Use captureState for routine observations.');
       if (!safeId(id)) throw new Error('Invalid capture ID.');
       const before = await identity();
       const png = await session.send('Page.captureScreenshot', { format: 'png', fromSurface: true, captureBeyondViewport: false });
@@ -183,6 +329,14 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
 
       const path = `${id}.png`; await writeFile(join(root, path), bytes, { flag: 'wx' });
       report.checkpoints.push({ id, path, sha256: digest(bytes), at: Date.now(), capture: { before, after } });
+    };
+    const captureState = async id => {
+      if (!safeId(id)) throw new Error('Invalid checkpoint ID.');
+      const document = await identity();
+      const path = `${id}.json`;
+      const bytes = Buffer.from(JSON.stringify({id, document, observations: report.observations, inputs: report.inputs}, null, 2) + '\n');
+      await writeFile(join(root, path), bytes, {flag: 'wx'});
+      report.checkpoints.push({id, kind: 'observations', path, sha256: digest(bytes), at: Date.now()});
     };
     const reload = async () => {
       await identity();
@@ -285,7 +439,10 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
         expectedRef: scenario.storage.expectedRef})(id);
     }};
     const executionStarted = Date.now();
-    await withDeadline(() => caseModule.execute({ input: { key, keyDown, keyUp, pointer, touch, publicCommand }, wait, read, shot, reload, reopen, reopenContext: reopen, reopenPage, get audio() { return audio; }, fault, storage, report, fixture, output: root, descriptor }), executionTimeout, 'case execution');
+    await withDeadline(() => Promise.race([
+      caseModule.execute({ input: { key, keyDown, keyUp, pointer, touch, publicCommand }, wait, read, shot, captureState, reload, reopen, reopenContext: reopen, reopenPage, get audio() { return audio; }, fault, storage, report, fixture, output: root, descriptor }),
+      new Promise((_, reject) => { interruptExecution = reject; })
+    ]), executionTimeout, 'case execution');
     report.executionMs = Date.now() - executionStarted;
     const result = await caseModule.verify({ observations: report.observations, artifacts: report.checkpoints, expected: scenario.criteria, report });
     if (!Array.isArray(result?.criteria) || !Array.isArray(result.pendingReviews)) throw new Error('verify must return criteria and pendingReviews arrays.');
@@ -300,7 +457,8 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     }
     for (const expected of scenario.criteria) if (!seen.has(`${expected.id}:${expected.variant}`)) result.criteria.push({ ...expected, status: 'pending', evidence: [], limits: ['Missing result'] });
     report.criteria = result.criteria; report.pendingReviews = result.pendingReviews;
-    report.status = result.criteria.some(c => c.status === 'fail') ? 'fail' : result.criteria.every(c => c.status === 'pass') && !result.pendingReviews.length ? 'pass' : 'executed-awaiting-review';
+    report.unverifiedObservations = result.unverifiedObservations ?? [];
+    report.status = result.criteria.every(c => c.status === 'pass') ? 'pass' : 'fail';
     const acceptedErrors = new Set();
     for (const expectedError of result.expectedErrors ?? []) {
       if (!Number.isInteger(expectedError.index) || !report.errors[expectedError.index] || !expectedError.expectedRef || !expectedError.reason) throw new Error('Expected browser error requires an existing index, contract reference and reason.');
@@ -311,6 +469,7 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     for (const artifact of report.checkpoints) if (digest(await readFile(join(root, artifact.path))) !== artifact.sha256) throw new Error(`Artifact integrity failure: ${artifact.path}`);
   } catch (error) { terminal = true; failure('execution', error); }
   finally {
+    interruptExecution = undefined;
     if (page && !page.isClosed()) {
       for (const [id, definition] of [...activeFaults].reverse()) await owned('fault:' + id, async () => {
         if (definition.type === 'network') await context.unroute(definition.pattern, definition.handler);
@@ -325,10 +484,16 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
     if(audio)await owned('audio-capture',()=>audio.close());
     if (session) await owned('capture-session', () => session.detach());
     if (context) await owned('context', () => context.close());
-    if(video)await owned('video',async()=>{const path='playthrough.webm';await video.saveAs(join(root,path));const original=await video.path();if(original!==join(root,path))await video.delete();const bytes=await readFile(join(root,path));report.video={path,sha256:digest(bytes),width:config.width,height:config.height};});
-    if (browser) await owned('browser', () => browser.close());
+    if(video)await owned('video',async()=>{const path='playthrough.webm';await video.saveAs(join(root,path));if(fixtureBrowser||await video.path()!==join(root,path))await video.delete();const bytes=await readFile(join(root,path));report.video={path,sha256:digest(bytes),width:config.width,height:config.height};});
+    if(fixtureBrowser)for(const [index,recording] of videos.entries())await owned('video-export:'+index,async()=>{
+      recording.exportedPath=join(root,'gameplay-'+(index+1)+'.webm');
+      await recording.handle.saveAs(recording.exportedPath);await recording.handle.delete();
+    });
+    if (browserOwner) {
+      await owned('browser', browserOwner.close);
+    }
     for (const [index, recording] of videos.entries()) await owned(`video:${index + 1}`, async () => {
-      const file = await realpath(await recording.handle.path());
+      const file = await realpath(recording.exportedPath??await recording.handle.path());
       if (!inside(root, file)) throw new Error('Video output escaped the owned run.');
       const bytes = await readFile(file);
       if (bytes.length < 4 || bytes.readUInt32BE(0) !== 0x1a45dfa3) throw new Error('Video capture did not produce WebM bytes.');
@@ -337,6 +502,10 @@ export async function run({ project, fixture, output, adapter, caseModule, sourc
       report.videos ??= []; report.videos.push(artifact);
     });
     if (service?.close) await owned('service', () => service.close());
+    await Promise.all(eventWrites);
+    process.off('SIGINT', onInterrupt); process.off('SIGTERM', onTerminate); process.off('SIGHUP', onHangup);
+    process.off('message', onMessage);
+    signal?.removeEventListener('abort', onAbort);
     report.finishedAt = new Date().toISOString(); report.durationMs = Date.parse(report.finishedAt) - Date.parse(report.startedAt);
     report.infrastructureMs = report.durationMs - (report.executionMs ?? 0);
     try { await writeFile(join(root, 'report.json'), JSON.stringify(report, null, 2) + '\n', { flag: 'wx' }); }

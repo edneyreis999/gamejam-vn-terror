@@ -7,7 +7,8 @@ import {extendedAuthoringSchema} from '../ext-message-func/authoring-catalog.mjs
 export function describeMessageApi(catalog) {
     validateOperationalCatalog(catalog);
     const schemaMap = owner => new Map(describeCoreApi(owner === extendedCatalog
-        ? extendedAuthoringSchema(owner) : {...owner,tags:[],methods:[]}).map(entry => [entry.id,entry]));
+        ? extendedAuthoringSchema(owner) : {...owner,tags:[],methods:[]},
+        {commandExpectedHash:owner===aniCatalog}).map(entry => [entry.id,entry]));
     const schemas = schemaMap(catalog);
     const delegatedSchemas = new Map();
     const entries = catalog.entries.map(entry => {

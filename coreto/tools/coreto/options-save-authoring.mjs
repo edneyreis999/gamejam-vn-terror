@@ -33,7 +33,7 @@ export function describeOptionsSave(namespace){
         `Message is optional; when enabled, use exactly one provider before this plugin: ${versions(catalog.dependencies.messages)}.`,
         'Load this plugin before tier 2/3 plugins. Offline CLI authoring does not execute or activate these dependencies.'
     ];
-    return validatePublicEntries(namespace, [...describeCoreApi(catalog).map(entry=>({...entry,
+    return validatePublicEntries(namespace, [...describeCoreApi(catalog,{commandExpectedHash:true}).map(entry=>({...entry,
         ...(entry.availability === 'editorial' ? {
             context: entry.context === 'browser runtime; authoring is offline'
                 ? 'Plugin Manager section label or separator; no runtime effect. Preserve its native value.' : entry.context,

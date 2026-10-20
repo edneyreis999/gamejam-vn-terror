@@ -47,8 +47,11 @@ function installMapRules(settings) {
         this._encounterCount = Math.randomInt(step) + Math.randomInt(step) + this.encounterStepsMinimum();
     };
     const collision = Game_Event.prototype.isCollidedWithEvents;
+    Game_Event.prototype.isSmartEventCollisionOn = function() {
+        return options.SmartEventCollisionPriority;
+    };
     Game_Event.prototype.isCollidedWithEvents = function(x, y) {
-        if (!options.SmartEventCollisionPriority) return collision.call(this, x, y);
+        if (!this.isSmartEventCollisionOn()) return collision.call(this, x, y);
         return this.isNormalPriority() && $gameMap.eventsXyNt(x, y).some(event => event.isNormalPriority());
     };
 
