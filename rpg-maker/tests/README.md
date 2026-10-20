@@ -20,3 +20,11 @@ Each canonical child has isolated output and temporary directories; ephemeral se
 Canonical `--pruned` and directed preparation build disposable pruned game copies. Imported saves use the supported `storageImport` contract to restore original native payload/index bytes on a new loopback origin after source/provenance validation. No source game, installed skill, engine or plugin is modified. Browser results do not establish NW.js/editor/export or listening acceptance.
 
 IT-023's diagnostic sequence assertion now belongs to IT-015, which already performs the same native sacrifice checkpoint, title Continue, exact campaign and save-byte checks. The other checkpoint/interpreter cases remain distinct. Historical references to IT-023 should be read through IT-015 for current coverage.
+
+The portable design-system authoring tools have a separate Node suite because their invariant is preservation of project configuration/assets through real CLI writes, not campaign behavior:
+
+```sh
+node --test rpg-maker/tests/design-system-cli.test.mjs
+```
+
+It creates disposable registries from the active installed providers, applies the portable preset, rejects stale/invalid writes and restore conflicts, and checks recovery/idempotency. It owns no appearance assertions. The one-time migration's directed visual journey and before/after evidence are recorded in `planos/tasks/coreto-design-system-preset/verification.md`.

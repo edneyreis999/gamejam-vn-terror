@@ -1,0 +1,26 @@
+  function saveInk(w,id){return globalThis.CoretoDesignSystem&&w.isEnabled(id)&&w.index()===w.savefileIdToIndex(id)?colors.onAccent:colors.text;}
+  function drawSaveContents(info,r){
+    const b=this.contents,foreground=saveInk(this,info.savefileId);b.paintOpacity=255;
+    const x=r.x+20,width=r.width-40;
+    // Keep authored save artwork in its own region, clear of all metadata.
+    const previewHeight=Math.max(0,r.height-config.Controls.SaveHeader-config.Controls.SaveFooter);
+    const hasActors=info.faces?.length||info.characters?.length||info.svbattlers?.length;
+    const artWidth=info.description?Math.min(96,width*.35):width;
+    if(info.picture)this.drawCenteredPicture(info.picture,x,r.y+config.Controls.SaveHeader,artWidth,previewHeight,true);
+    if(hasActors)this.drawActors(info,x,r.y+config.Controls.SaveHeader,artWidth,previewHeight);
+    textStyle(b,fonts.body,18,foreground);
+    const time=info.timestamp?new Date(info.timestamp).toLocaleString(ConfigManager.textLocale==='Portuguese'?'pt-BR':'en-US',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+    b.drawText(time,x,r.y+r.height-91,width,28,'left');
+    menuIcon(b,'Clock',x,r.y+r.height-57,24,foreground);
+    b.drawText(info.playtime||'',x+36,r.y+r.height-60,width-36,32,'left');
+    if(info.description){
+      textStyle(b,fonts.body,18,foreground);
+      // Keep the native escape/localization pipeline for authored descriptions.
+      const dx=info.picture||hasActors?artWidth+12:0,wrapBefore=this._wordWrap;
+      const ctx=b.context;ctx.save();ctx.beginPath();ctx.rect(x+dx,r.y+config.Controls.SaveHeader,width-dx,previewHeight);ctx.clip();
+      this.setWordWrap(true);
+      try{this.drawTextEx(info.description,x+dx,r.y+config.Controls.SaveHeader,width-dx);}
+      finally{this.setWordWrap(wrapBefore);ctx.restore();}
+    }
+  }
+return drawSaveContents.apply(this,arguments);

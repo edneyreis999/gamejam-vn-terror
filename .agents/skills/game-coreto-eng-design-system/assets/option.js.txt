@@ -1,0 +1,35 @@
+    const optionIcons={textLocale:'Language',textEffects:'TextEffects',bgmVolume:'Music',bgsVolume:'Ambience',meVolume:'Jingle',seVolume:'SoundEffects'};
+  // Called by the existing OptionsCore DrawJS configuration. Input callbacks,
+  // values, localization and persistence remain owned by OptionsCore.
+  function drawOption(symbol,index){
+    const r=this.itemRect(index),b=this.contents,selected=!!globalThis.CoretoDesignSystem&&index===this.index();
+    const foreground=selected?colors.onAccent:colors.text;
+    b.paintOpacity=255;textStyle(b,config.Menu.Face,config.Menu.Size,foreground);
+    menuIcon(b,integrations.optionIcon(symbol)||optionIcons[symbol],r.x+16,r.y+(r.height-32)/2,32,foreground);
+    const label=this.commandName(index).replace(/^\\I\[\d+\]/,'');
+    this.drawTextEx(label,r.x+64,r.y+(r.height-this.lineHeight())/2,r.width*.43-64);
+    const x=r.x+r.width*config.Controls.ValueRatio/100,w=r.width*(1-config.Controls.ValueRatio/100)-20,y=r.y+(r.height-40)/2;
+    const chip=(text,offset,width,current)=>{
+      box(b,offset,y,width,40,current?(selected?colors.panel:colors.primary):null,
+        selected?colors.onAccent:colors.border,6,1);
+      textStyle(b,config.Action.Face,config.Action.Size,current?(selected?colors.text:colors.onAccent):foreground);
+      b.drawText(text,offset+8,y,width-16,40,'center');
+    };
+    if(symbol==='textLocale'){
+      const languages=(globalThis.VisuMZ?.MessageCore?.Settings?.Localization?.Languages || []);
+      const gap=12,cw=(w-gap*(languages.length-1))/languages.length;
+      languages.forEach((language,i)=>chip(TextManager.getLanguageName(language),x+i*(cw+gap),cw,language===ConfigManager.textLocale));
+    }else if(symbol==='textEffects'){
+      const value=this.getConfigValue(symbol),cw=(w-12)/2;
+      chip(this.booleanStatusText(false),x,cw,!value);chip(this.booleanStatusText(true),x+cw+12,cw,value);
+    }else{
+      const value=this.getConfigValue(symbol),trackWidth=w-96,trackY=y+16;
+      box(b,x,trackY,trackWidth,config.Controls.TrackHeight,selected?colors.pressed:colors.disabled,selected?colors.panel:colors.border,4);
+      const fill=Math.max(0,Math.min(1,value/100))*trackWidth;
+      if(fill>0)box(b,x,trackY,fill,config.Controls.TrackHeight,selected?colors.gold:colors.primary,null,4);
+      box(b,x+Math.max(0,Math.min(trackWidth-10,fill-5)),trackY-5,config.Controls.ThumbWidth,config.Controls.ThumbHeight,selected?colors.gold:colors.primary,selected?colors.primary:colors.panel,4);
+      textStyle(b,config.Menu.Face,config.Menu.Size,foreground);b.drawText(value+'%',x+trackWidth+16,y,80,40,'right');
+    }
+    b.paintOpacity=255;
+  }
+return drawOption.apply(this,arguments);

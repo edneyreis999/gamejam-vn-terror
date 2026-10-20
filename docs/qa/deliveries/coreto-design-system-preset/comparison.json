@@ -1,0 +1,207 @@
+{
+  "reference": "Coreto DesignSystem 1.2.0",
+  "candidate": "1.3.0",
+  "viewport": [
+    1280,
+    720
+  ],
+  "dpr": 1,
+  "locale": "en-US",
+  "method": "RGB ImageChops difference over entire decoded screenshots; no masks or timestamp edits",
+  "pairs": [
+    {
+      "name": "age-notice",
+      "beforeSha256": "645b8feb863fbe581e77c89768bb398c584f578787cc80955940a54a1aefa1d0",
+      "afterSha256": "645b8feb863fbe581e77c89768bb398c584f578787cc80955940a54a1aefa1d0",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "continue-action",
+      "beforeSha256": "44bf77bdd8175c69c5dd6e8fecafb7b3654e221575396c7bff0f399c2aae1efc",
+      "afterSha256": "44bf77bdd8175c69c5dd6e8fecafb7b3654e221575396c7bff0f399c2aae1efc",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "dialogue-speaker",
+      "beforeSha256": "b1e20f9536591219454e0a6d91343070b0ee7edc59d5654c27c66b3eb9c4092b",
+      "afterSha256": "b1e20f9536591219454e0a6d91343070b0ee7edc59d5654c27c66b3eb9c4092b",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "filled-save",
+      "beforeSha256": "44bf77bdd8175c69c5dd6e8fecafb7b3654e221575396c7bff0f399c2aae1efc",
+      "afterSha256": "44bf77bdd8175c69c5dd6e8fecafb7b3654e221575396c7bff0f399c2aae1efc",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "formation",
+      "beforeSha256": "8c8fe7e4a4c8dbdccd02a21c65350556c362852d5d5a8b9466e172f80147111d",
+      "afterSha256": "8c8fe7e4a4c8dbdccd02a21c65350556c362852d5d5a8b9466e172f80147111d",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "loaded-formation",
+      "beforeSha256": "8c8fe7e4a4c8dbdccd02a21c65350556c362852d5d5a8b9466e172f80147111d",
+      "afterSha256": "8c8fe7e4a4c8dbdccd02a21c65350556c362852d5d5a8b9466e172f80147111d",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "new-game",
+      "beforeSha256": "dc7b6dd6a12ccec3b7d3b718fbfa4a90b46b082309676c12039b1a4bbab55e77",
+      "afterSha256": "dc7b6dd6a12ccec3b7d3b718fbfa4a90b46b082309676c12039b1a4bbab55e77",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "options-audio",
+      "beforeSha256": "7edc38b66ec29a6d6ab1e14d1b21adaf7c54cd542c1e935583354e1d7092a081",
+      "afterSha256": "7edc38b66ec29a6d6ab1e14d1b21adaf7c54cd542c1e935583354e1d7092a081",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "options-general",
+      "beforeSha256": "e488bd9a2300e2e720c8cf24a76fe50ff75920b6517a07401234bd5a5b5911cd",
+      "afterSha256": "e488bd9a2300e2e720c8cf24a76fe50ff75920b6517a07401234bd5a5b5911cd",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "options-hover",
+      "beforeSha256": "b89e873b95625e915092cc910d9fb986357f2db99acd58e60cced015bf89b9cc",
+      "afterSha256": "b89e873b95625e915092cc910d9fb986357f2db99acd58e60cced015bf89b9cc",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "options-pressed",
+      "beforeSha256": "f79955f927a1fbd7c997b1ec4c4e7eb826d773f089962e5659a8e5844359e077",
+      "afterSha256": "f79955f927a1fbd7c997b1ec4c4e7eb826d773f089962e5659a8e5844359e077",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "options-volume-changed",
+      "beforeSha256": "aa25c14478ff39fb50e3287b1f4ac31d899b9de06dff156e7ab2d5231a6dad2e",
+      "afterSha256": "aa25c14478ff39fb50e3287b1f4ac31d899b9de06dff156e7ab2d5231a6dad2e",
+      "differentPixels": 0,
+      "boundingBox": null
+    },
+    {
+      "name": "title",
+      "beforeSha256": "ef34ad6ee1b7cb4103d4a4dc8f53cdcebb90065f8e3512676958044a090e1fce",
+      "afterSha256": "ef34ad6ee1b7cb4103d4a4dc8f53cdcebb90065f8e3512676958044a090e1fce",
+      "differentPixels": 0,
+      "boundingBox": null
+    }
+  ],
+  "before": {
+    "run": ".artifacts/design-system/runs/before-final",
+    "status": "pass",
+    "reportSha256": "8f7a4fab6e57654c8f6287a1063be4ba4a5d34920edaeca56fad4269450e9517",
+    "environment": {
+      "url": "http://127.0.0.1:62364/?test",
+      "timeOrigin": 1792463610760.2,
+      "locale": "en-US",
+      "focused": true,
+      "visibility": "visible",
+      "targetId": "4E7E987E106632EDCCB618F05B7BB5B8",
+      "contextId": "194C915057A18EE827BC989B3D35AFE3",
+      "browser": "155.0.8059.80",
+      "headless": true,
+      "channel": "chrome",
+      "launchArgs": [
+        "--disable-audio-output",
+        "--use-fake-device-for-media-stream"
+      ],
+      "audioOutput": "virtual",
+      "node": "v22.23.2",
+      "platform": "darwin",
+      "release": "25.5.0",
+      "arch": "arm64",
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "WebKit WebGL",
+        "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version)"
+      }
+    },
+    "startedAt": "2026-10-20T02:33:29.630Z",
+    "durationMs": 31761
+  },
+  "after": {
+    "run": ".artifacts/design-system/runs/after-final",
+    "status": "pass",
+    "reportSha256": "6601cf162193983e7c7a42a73e796f9c069b677e07a9851cc4e4278fe2d783bb",
+    "environment": {
+      "url": "http://127.0.0.1:62363/?test",
+      "timeOrigin": 1792463610580.1,
+      "locale": "en-US",
+      "focused": true,
+      "visibility": "visible",
+      "targetId": "4431314FB20C50F566B5351A3355504B",
+      "contextId": "1A16ADA0BF5225945B0A99457BBB758A",
+      "browser": "155.0.8059.80",
+      "headless": true,
+      "channel": "chrome",
+      "launchArgs": [
+        "--disable-audio-output",
+        "--use-fake-device-for-media-stream"
+      ],
+      "audioOutput": "virtual",
+      "node": "v22.23.2",
+      "platform": "darwin",
+      "release": "25.5.0",
+      "arch": "arm64",
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "WebKit WebGL",
+        "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version)"
+      }
+    },
+    "startedAt": "2026-10-20T02:33:29.629Z",
+    "durationMs": 31481
+  },
+  "portable": {
+    "run": ".artifacts/design-system/runs/portable-01",
+    "status": "pass",
+    "reportSha256": "11f361d663887d6386312ea93eaf3e3554bb48f8cc6410c264908355c107dfd0",
+    "environment": {
+      "url": "http://127.0.0.1:62167/?test",
+      "timeOrigin": 1792463371074.3,
+      "locale": "en-US",
+      "focused": true,
+      "visibility": "visible",
+      "targetId": "C6A35036337CD57468431123CB9E97E2",
+      "contextId": "5240AF54BFDE87E231B967E1C1268E96",
+      "browser": "155.0.8059.80",
+      "headless": true,
+      "channel": "chrome",
+      "launchArgs": [
+        "--disable-audio-output",
+        "--use-fake-device-for-media-stream"
+      ],
+      "audioOutput": "virtual",
+      "node": "v22.23.2",
+      "platform": "darwin",
+      "release": "25.5.0",
+      "arch": "arm64",
+      "renderer": {
+        "vendor": "WebKit",
+        "renderer": "WebKit WebGL",
+        "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version)"
+      }
+    },
+    "startedAt": "2026-10-20T02:29:29.901Z",
+    "durationMs": 31697
+  },
+  "candidateInputs": {
+    "rpg-maker/The Dryland Drowned/js/plugins.js": "430b7a2946bdd1f32e45c20ac167fad99841a7b72ecc68a8de3beccc5e6f143f",
+    "rpg-maker/The Dryland Drowned/js/plugins/Coreto_5_DesignSystem.js": "efd653cefb83a8de0646e29e3ea824574e251670c0886e99203ffda3f1dff63d"
+  }
+}

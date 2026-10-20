@@ -1,0 +1,11 @@
+# Deny all by default — session artifacts must not leak to git.
+*
+
+# Allow only this file for local deny-by-default semantics.
+!.gitignore
+
+# Portable design-system skill is a maintained project deliverable.
+!skills/
+skills/*
+!skills/game-coreto-eng-design-system/
+!skills/game-coreto-eng-design-system/**

@@ -1,0 +1,27 @@
+  function path(ctx,x,y,width,height,radius) {
+    const r = Math.min(radius,width/2,height/2);
+    ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+width-r,y);
+    ctx.quadraticCurveTo(x+width,y,x+width,y+r); ctx.lineTo(x+width,y+height-r);
+    ctx.quadraticCurveTo(x+width,y+height,x+width-r,y+height); ctx.lineTo(x+r,y+height);
+    ctx.quadraticCurveTo(x,y+height,x,y+height-r); ctx.lineTo(x,y+r);
+    ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+  }
+  function box(bitmap,x,y,width,height,fill,stroke,radius=6,line=1) {
+    if (width<=line || height<=line) return;
+    const ctx=bitmap.context;
+    ctx.save(); path(ctx,x+line/2,y+line/2,width-line,height-line,radius);
+    if(fill){ctx.fillStyle=fill;ctx.fill();}
+    if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=line;ctx.stroke();}
+    ctx.restore(); bitmap.baseTexture.update();
+  }
+  function textStyle(bitmap,face,size,color) {
+    bitmap.fontFace=face;bitmap.fontSize=size;bitmap.fontBold=false;
+    bitmap.fontItalic=false;bitmap.outlineWidth=0;bitmap.outlineColor='rgba(0,0,0,0)';bitmap.textColor=color;
+  }
+    function menuIcon(bitmap,name,x,y,size,color){
+      const source=ImageManager.loadSystem(config.Icons[name]||('CoretoTheme_'+name));
+      if(!source.isReady()){source.addLoadListener(()=>{if(!owner._destroyed&&owner.contents===bitmap)owner.refresh();});return;}
+      const temp=new Bitmap(source.width,source.height);temp.blt(source,0,0,source.width,source.height,0,0);
+      const ctx=temp.context;ctx.globalCompositeOperation='source-in';ctx.fillStyle=color;ctx.fillRect(0,0,temp.width,temp.height);ctx.globalCompositeOperation='source-over';temp.baseTexture.update();
+      bitmap.blt(temp,0,0,temp.width,temp.height,x,y,size,size);temp.destroy();
+    }

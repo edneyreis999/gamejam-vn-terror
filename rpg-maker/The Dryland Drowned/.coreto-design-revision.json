@@ -1,6 +1,17 @@
 {
   "designRevision": "coreto-approved-2026-10-17-r2",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "preset": "dryland",
-  "migratedParameters": {}
+  "migratedParameters": {
+    "Coreto_0_CoreEngine": [
+      "/Window/DrawItemBackgroundJS"
+    ],
+    "Coreto_1_OptionsCore": [
+      "/Categories/*/List/*/DrawJS (textLocale, textEffects and four volume symbols)"
+    ],
+    "Coreto_1_SaveCore": [
+      "/SaveMenu/BoxContentsJS",
+      "/SaveMenu/BoxFileDataJS"
+    ]
+  }
 }

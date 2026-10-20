@@ -1,0 +1,17 @@
+  function saveInk(w,id){return globalThis.CoretoDesignSystem&&w.isEnabled(id)&&w.index()===w.savefileIdToIndex(id)?colors.onAccent:colors.text;}
+  function drawSaveFile(id,r){
+    const b=this.contents,foreground=saveInk(this,id);b.paintOpacity=255;
+    textStyle(b,config.Speaker.Face,config.Speaker.Size,foreground);menuIcon(b,'Save',r.x+16,r.y+16,32,foreground);
+    const label=id===0?TextManager.autosave:TextManager.file+' '+id;
+    b.drawText(label,r.x+60,r.y+12,r.width-156,40,'left');
+    if(id>0&&id===DataManager.latestSavefileId()){
+      const latest=TextManager.parseLocalizedText(TextManager.latestSave);
+      box(b,r.x+r.width-88,r.y+18,72,28,colors.panel,colors.border,6);
+      textStyle(b,config.Label.Face,config.Label.Size,ColorManager.latestSavefile?.()||colors.text);b.drawText(latest,r.x+r.width-84,r.y+18,64,28,'center');
+    }
+    if(!DataManager.savefileInfo(id)){
+      // Empty slots retain the same native availability and click targets.
+      menuIcon(b,'Save',r.x+(r.width-32)/2,r.y+(r.height-32)/2+12,32,foreground);
+    }
+  }
+return drawSaveFile.apply(this,arguments);
