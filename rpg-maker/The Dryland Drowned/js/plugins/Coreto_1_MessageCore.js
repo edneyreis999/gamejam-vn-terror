@@ -249,7 +249,7 @@
  *
  * @command SelectSkill
  * @text Select: Skill
- * @desc Opens the Event Select Item Window to let the player
+ * @desc Select an eligible skill for the specified actor and store its database ID; cancellation stores 0.
  * @arg VariableID:num
  * @text Variable ID
  * @type number
@@ -424,13 +424,13 @@
  * @param EachMessageStart:json
  * @text Each Message Start
  * @type note
- * @desc This is text that is added at the start of each message.
+ * @desc Text prepended to each native Show Text line (command 401), before random-text preparation and later text conversion.
  * @default ""
  *
  * @param EachMessageEnd:json
  * @text Each Message End
  * @type note
- * @desc This is text that is added at the end of each message.
+ * @desc Text appended to each native Show Text line (command 401), before random-text preparation and later text conversion.
  * @default ""
  *
  * @param NameBoxWindowDefaultColor:num
@@ -889,7 +889,7 @@
  * @param LangFiletype:str
  * @text File Type
  * @type select
- * @desc Which file type do you wish to use?
+ * @desc Select csv for semicolon-separated CsvFilename or tsv for tab-separated TsvFilename at the game root.
  * @default tsv
  * @option csv
  * @value csv
@@ -991,7 +991,7 @@
  * @param Languages:arraystr
  * @text Supported Languages
  * @type text[]
- * @desc What are all the supported languages supported by this
+ * @desc Ordered array of language keys offered in Options and matched to localization table columns.
  * @default ["Bengali","Chinese(Simplified)","Chinese(Traditional)","Czech","Danish","Dutch","English","Finnish","French","German","Greek","Hindi","Hungarian","Indonesian","Italian","Japanese","Korean","Norwegian","Polish","Portuguese","Romanian","Russian","Slovak","Spanish","Swedish","Tamil","Thai","Turkish"]
  * @option Bengali
  * @value Bengali
@@ -1684,7 +1684,8 @@ const catalog = {
           "nativeDefault": "4",
           "type": "number",
           "min": 1,
-          "default": 4
+          "default": 4,
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state). Use whole row counts; the number schema also accepts fractions and does not round them. Above four rows, matching adjacent Show Text commands can combine; see MSG-BEH-sequencia-texto."
         },
         {
           "id": "MSG-M-068",
@@ -1696,7 +1697,8 @@ const catalog = {
           "nativeDefault": "816",
           "type": "number",
           "min": 1,
-          "default": 816
+          "default": 816,
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state). Width is measured in pixels before the window extra-width setting and is capped to Graphics.width. It does not resize the render canvas."
         },
         {
           "id": "MSG-M-069",
@@ -1715,7 +1717,8 @@ const catalog = {
             "pageup",
             "pagedown"
           ],
-          "default": "pagedown"
+          "default": "pagedown",
+          "context": "mensagem e janelas de texto conforme tipo/campo Choose an MZ Input symbol: tab, shift, control, pageup or pagedown. Holding that input accelerates message text; none disables this additional key. This does not enable the Extended map-event fast-forward mode (EXT-M-014)."
         },
         {
           "id": "MSG-M-070",
@@ -1728,7 +1731,8 @@ const catalog = {
           "type": "number",
           "min": 0,
           "default": 1,
-          "expected": "The effective delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames between drawn characters. Text speed 11 (Instant) makes the delay zero."
+          "expected": "The effective delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames between drawn characters. Text speed 11 (Instant) makes the delay zero.",
+          "context": "mensagem e janelas de texto conforme tipo/campo At message start the per-character delay is Math.round(MessageTextDelay * (11 - ConfigManager.textSpeed)) update frames. Zero or textSpeed 11 adds no character delay. Explicit wait escapes retain their own behavior."
         },
         {
           "id": "MSG-M-071",
@@ -1740,7 +1744,7 @@ const catalog = {
           "nativeDefault": "+0",
           "type": "number",
           "default": 0,
-          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/MsgWindowOffsetX as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes the saved game-system x offset. Normal placement starts from horizontal centering in the game box and adds it, then clamps to the full game screen/box margins. Auto-target placement also adds it; an explicit forced x overrides ordinary placement. Existing saves retain their stored offset; use MessageWindowXyOffsets to change current game state.",
+          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/MsgWindowOffsetX as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes the saved game-system x offset. Normal placement starts from horizontal centering in the game box and adds it, then clamps to the full game screen/box margins. Auto-target placement also adds it; an explicit forced x overrides ordinary placement. Existing saves retain their stored offset; use MessageWindowXyOffsets to change current game state. These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state).",
           "examples": [
             {
               "input": "message parameters set --path /General/MsgWindowOffsetX --value 12 --dry-run --json",
@@ -1758,7 +1762,7 @@ const catalog = {
           "nativeDefault": "+0",
           "type": "number",
           "default": 0,
-          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/MsgWindowOffsetY as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes the saved game-system y offset. Normal placement starts from the Show Text top/middle/bottom position and adds it, then clamps to the full game screen/box margins. Auto-target placement also adds it; an explicit forced y overrides ordinary placement. Existing saves retain their stored offset; use MessageWindowXyOffsets to change current game state.",
+          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/MsgWindowOffsetY as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes the saved game-system y offset. Normal placement starts from the Show Text top/middle/bottom position and adds it, then clamps to the full game screen/box margins. Auto-target placement also adds it; an explicit forced y overrides ordinary placement. Existing saves retain their stored offset; use MessageWindowXyOffsets to change current game state. These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state).",
           "examples": [
             {
               "input": "message parameters set --path /General/MsgWindowOffsetY --value -8 --dry-run --json",
@@ -1794,24 +1798,26 @@ const catalog = {
           "key": "EachMessageStart",
           "storageKey": "EachMessageStart:json",
           "label": "Each Message Start",
-          "description": "This is text that is added at the start of each message.",
+          "description": "Text prepended to each native Show Text line (command 401), before random-text preparation and later text conversion.",
           "editorType": "note",
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Use literal Message text codes; an empty string adds nothing. This applies once per 401 line, including combined messages, rather than once per whole window. Direct Game_Message.add and Help text do not receive it."
         },
         {
           "id": "MSG-M-076",
           "key": "EachMessageEnd",
           "storageKey": "EachMessageEnd:json",
           "label": "Each Message End",
-          "description": "This is text that is added at the end of each message.",
+          "description": "Text appended to each native Show Text line (command 401), before random-text preparation and later text conversion.",
           "editorType": "note",
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Use literal Message text codes; an empty string adds nothing. This applies once per 401 line, including combined messages, rather than once per whole window. Direct Game_Message.add and Help text do not receive it."
         },
         {
           "id": "MSG-M-078",
@@ -1874,7 +1880,7 @@ const catalog = {
           "type": "number",
           "min": 1,
           "default": 36,
-          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/ChoiceWindowLineHeight as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes the saved choice line-height setting. A value of 36 yields itemHeight=44. Use a finite positive value large enough for the text/icons; no extra clamp is added by the getter. Multiple lines and font sizes still determine drawn text height. Change current-game setting with ChoiceWindowProperties LineHeight; existing saves retain their value.",
+          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/ChoiceWindowLineHeight as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes the saved choice line-height setting. A value of 36 yields itemHeight=44. Use a finite positive value large enough for the text/icons; no extra clamp is added by the getter. Multiple lines and font sizes still determine drawn text height. Change current-game setting with ChoiceWindowProperties LineHeight; existing saves retain their value. These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state).",
           "examples": [
             {
               "input": "message parameters set --path /General/ChoiceWindowLineHeight --value 36 --dry-run --json",
@@ -1893,7 +1899,7 @@ const catalog = {
           "type": "number",
           "min": 0,
           "default": 96,
-          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/ChoiceWindowMinWidth as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes a saved width floor. The renderer uses at least 1 pixel, any larger CHOICE WIDTH tag, and measured text plus item padding. Column count/spacing/window padding then contribute to window width, capped to Graphics.width. Use a finite nonnegative value; this is not a fixed overall window width. ChoiceWindowProperties MinWidth changes current game state.",
+          "context": "Enable Coreto_0_CoreEngine then Coreto_1_MessageCore. Configure /General/ChoiceWindowMinWidth as a JSON number through message parameters set, selecting the intended MZ game with --project. Reload the editor/restart after parameter edits. Initializes a saved width floor. The renderer uses at least 1 pixel, any larger CHOICE WIDTH tag, and measured text plus item padding. Column count/spacing/window padding then contribute to window width, capped to Graphics.width. Use a finite nonnegative value; this is not a fixed overall window width. ChoiceWindowProperties MinWidth changes current game state. These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state).",
           "examples": [
             {
               "input": "message parameters set --path /General/ChoiceWindowMinWidth --value 160 --dry-run --json",
@@ -1911,7 +1917,8 @@ const catalog = {
           "nativeDefault": "8",
           "type": "number",
           "min": 1,
-          "default": 8
+          "default": 8,
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state). Use a whole row count. If the message overlaps the screen midpoint the row limit becomes four, regardless of this configured maximum; otherwise the configured maximum applies."
         },
         {
           "id": "MSG-M-085",
@@ -1923,7 +1930,8 @@ const catalog = {
           "nativeDefault": "1",
           "type": "number",
           "min": 1,
-          "default": 1
+          "default": 1,
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state). Use a whole column count. More columns share available width and multiply the per-choice minimum; the window remains capped to Graphics.width."
         },
         {
           "id": "MSG-M-086",
@@ -1941,7 +1949,8 @@ const catalog = {
             "right"
           ],
           "default": "default",
-          "defaultReason": "Original field metadata uses rmmz-mainfont outside its own enum; effective General group default is default."
+          "defaultReason": "Original field metadata uses rmmz-mainfont outside its own enum; effective General group default is default.",
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state)."
         },
         {
           "id": "MSG-M-088",
@@ -1965,7 +1974,8 @@ const catalog = {
           "type": "string",
           "javascript": "expression",
           "min": 1,
-          "default": "108"
+          "default": "108",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated once when Message parameters load at boot, using a generated function called with null (non-strict this resolves to the global object), with no arguments. Return a finite numeric pixel size/step; CLI checks expression syntax but does not evaluate its result or enforce the editor numeric hints on this string field. Keep FontSmallerCap <= FontBiggerCap and a positive FontChangeValue."
         },
         {
           "id": "MSG-M-090",
@@ -1978,7 +1988,8 @@ const catalog = {
           "type": "string",
           "javascript": "expression",
           "min": 1,
-          "default": "12"
+          "default": "12",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated once when Message parameters load at boot, using a generated function called with null (non-strict this resolves to the global object), with no arguments. Return a finite numeric pixel size/step; CLI checks expression syntax but does not evaluate its result or enforce the editor numeric hints on this string field. Keep FontSmallerCap <= FontBiggerCap and a positive FontChangeValue."
         },
         {
           "id": "MSG-M-091",
@@ -1991,7 +2002,8 @@ const catalog = {
           "type": "string",
           "javascript": "expression",
           "min": 1,
-          "default": "12"
+          "default": "12",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated once when Message parameters load at boot, using a generated function called with null (non-strict this resolves to the global object), with no arguments. Return a finite numeric pixel size/step; CLI checks expression syntax but does not evaluate its result or enforce the editor numeric hints on this string field. Keep FontSmallerCap <= FontBiggerCap and a positive FontChangeValue."
         }
       ],
       "default": {
@@ -2018,7 +2030,7 @@ const catalog = {
         "FontSmallerCap": "12",
         "FontChangeValue": "12"
       },
-      "context": "Configure startup message and window settings. CLI parameters get returns decoded JSON. Setting /General requires the complete object, including all defined fields; it does not merge a partial object. To preserve sibling values, set one child path such as /General/MessageRows instead. Reload the editor after a CLI write and restart the game to reload plugin settings."
+      "context": "Configure startup message and window settings. CLI parameters get returns decoded JSON. Setting /General requires the complete object, including all defined fields; it does not merge a partial object. To preserve sibling values, set one child path such as /General/MessageRows instead. Reload the editor after a CLI write and restart the game to reload plugin settings.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-053",
@@ -2836,7 +2848,7 @@ const catalog = {
         "TextColor30": [],
         "TextColor31": []
       },
-      "context": "Applies to message, help and choice windows (and an available text-popup window). TextColor1 through TextColor31 are literal keyword lists; color 0 disables database highlighting. Latin keywords use case-sensitive whole-word matching and replace every match. Keywords containing CJK or the supported symbol ranges use case-insensitive substring matching of the first occurrence. Lists run in ascending color order, with longer names first within a list; later rules can match text already colored. Avoid duplicate or overlapping keywords when choosing a single color. Actor names are processed afterwards. Set a child path to preserve other lists; replacing /AutoColor requires the complete object."
+      "context": "Applies to message, help and choice windows (and an available text-popup window). TextColor1 through TextColor31 are literal keyword lists; color 0 disables database highlighting. Latin keywords use case-sensitive whole-word matching and replace every match. Keywords containing CJK or the supported symbol ranges use case-insensitive substring matching of the first occurrence. Lists run in ascending color order, with longer names first within a list; later rules can match text already colored. Avoid duplicate or overlapping keywords when choosing a single color. Actor names are processed afterwards. Set a child path to preserve other lists; replacing /AutoColor requires the complete object.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-054",
@@ -2878,7 +2890,7 @@ const catalog = {
         ]
       },
       "default": [],
-      "context": "Add a complete {\"FontFamily\":\"StoryFont\",\"Filename\":\"StoryFont.ttf\"} item to CustomFonts and place that actual font file in fonts/. The filename includes its extension. Loading uses the runtime FontFace implementation, so use a font format it can decode (for example a valid .ttf); the plugin does not convert fonts. Blank or Unnamed families and the placeholder Unnamed.ttf are skipped. Registration alone does not change the text font. With the default FontChange action retained, Show Text: \\FontChange<StoryFont>Hello\\ResetFont. Restart the game after editing the list."
+      "context": "Add a complete {\"FontFamily\":\"StoryFont\",\"Filename\":\"StoryFont.ttf\"} item to CustomFonts and place that actual font file in fonts/. The filename includes its extension. Loading uses the runtime FontFace implementation, so use a font format it can decode (for example a valid .ttf); the plugin does not convert fonts. Blank or Unnamed families and the placeholder Unnamed.ttf are skipped. Registration alone does not change the text font. With the default FontChange action retained, Show Text: \\FontChange<StoryFont>Hello\\ResetFont. Restart the game after editing the list.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-055",
@@ -2903,7 +2915,7 @@ const catalog = {
             "nativeDefault": "Key",
             "type": "string",
             "default": "Key",
-            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event."
+            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event. ActionJS return values are ignored; effects come from changes to the window/text state or guarded game actions."
           },
           {
             "id": "MSG-M-136",
@@ -2920,7 +2932,7 @@ const catalog = {
               "\\<(.*?)\\>"
             ],
             "default": "",
-            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event."
+            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event. ActionJS return values are ignored; effects come from changes to the window/text state or guarded game actions."
           },
           {
             "id": "MSG-M-137",
@@ -2932,7 +2944,7 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event."
+            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event. ActionJS return values are ignored; effects come from changes to the window/text state or guarded game actions."
           },
           {
             "id": "MSG-M-138",
@@ -2946,7 +2958,7 @@ const catalog = {
             "encoding": "json",
             "javascript": "body",
             "default": "const textState = arguments[0];",
-            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event."
+            "context": "Configure one /TextCodeActions row with Match=\"MARK\", Type=\"\", CommonEvent=0 and ActionJS=\"const state=arguments[0]; this.contents.fontBold=true;\". In Show Text use \\MARKBold text. Match is regex source after the escape marker, case-insensitive; prefer an alphabetic name without regex metacharacters or a built-in escape name. Rules normalize longest Match first, while dispatch compares the uppercased Match to the parsed code. Type empty adds a synthetic [0] that the dispatcher consumes. For a numeric argument use nonempty Type and text \\MARK[3]; ActionJS can call this.obtainEscapeParam(state), which consumes the bracketed integer and returns an empty string if absent. For a string use \\MARK<hello> and this.obtainEscapeString(state), which consumes the angle-bracket string and returns empty if absent. Action Type does not append its regex to the conversion matcher. ActionJS is a function body with this=the text window and arguments[0]=textState (text,index,x,y,startX,startY,drawing,buffer among its fields). It runs during drawing and measurement; guard side effects with state.drawing. CommonEvent runs only during real Window_Message drawing on a map, not measurement or battle, requires an existing event ID, and starts a separate map-updated interpreter without blocking the message. Multiple triggers can overlap; map initialization/setupEvents clears them and completion removes finished interpreters; loading preserves a serialized array and initializes it only if absent. Zero disables the event. ActionJS return values are ignored; effects come from changes to the window/text state or guarded game actions."
           }
         ]
       },
@@ -3054,7 +3066,7 @@ const catalog = {
           "ActionJS": "const textState = arguments[0];\nconst index = this.obtainEscapeParam(textState);"
         }
       ],
-      "context": "Register complete action records, then invoke their Match as an escape code in Show Text. Example item: {\"Match\":\"Signal\",\"Type\":\"\",\"CommonEvent\":1,\"ActionJS\":\"const state = arguments[0];\"}; use \\Signal to run existing Common Event 1. CommonEvent 0 disables launch. ActionJS runs first with this bound to the text window and arguments[0] equal to its text state; it can run during measurement, so guard game side effects with state.drawing. After ActionJS, CommonEvent launches only while drawing in an exact Window_Message, outside battle using a parallel map interpreter; a missing common event is ignored. Type empty needs no authored argument; for parameterized actions consume the argument from the text state yourself. Match is case-insensitive; actions sharing a Match all run in array order and may consume the same state sequentially. Built-in handled codes take precedence; use a distinct alphabetic Match. Setting the whole array replaces it: read, append complete records, then set to preserve the existing actions."
+      "context": "Register complete action records, then invoke their Match as an escape code in Show Text. Example item: {\"Match\":\"Signal\",\"Type\":\"\",\"CommonEvent\":1,\"ActionJS\":\"const state = arguments[0];\"}; use \\Signal to run existing Common Event 1. CommonEvent 0 disables launch. ActionJS runs first with this bound to the text window and arguments[0] equal to its text state; it can run during measurement, so guard game side effects with state.drawing. After ActionJS, CommonEvent launches only while drawing in an exact Window_Message, outside battle using a parallel map interpreter; a missing common event is ignored. Type empty needs no authored argument; for parameterized actions consume the argument from the text state yourself. Match is case-insensitive; actions sharing a Match all run in array order and may consume the same state sequentially. Built-in handled codes take precedence; use a distinct alphabetic Match. Setting the whole array replaces it: read, append complete records, then set to preserve the existing actions. ActionJS return values are ignored; effects come from changes to the window/text state or guarded game actions.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-056",
@@ -3326,7 +3338,7 @@ const catalog = {
           "TextJS": "if (!$gameParty.inBattle()) return \"\";\nconst index = (parseInt(arguments[1]) - 1) || 0;\nconst member = $gameTroop.members()[index];\nconst database = $dataEnemies;\nconst id = member ? member.enemyId() : 0;\nconst icon = false;\nreturn this.databaseObjectName(database, id, icon);"
         }
       ],
-      "context": "Register replacement records and invoke them with a backslash in text. Example item: {\"Match\":\"Greeting\",\"Type\":\"\",\"TextStr\":\"Hello!\",\"TextJS\":\"return 'Fallback';\"}; Show Text \\Greeting yields Hello!. A nonempty TextStr other than the exact sentinel Undefined wins; only otherwise is TextJS called. In TextJS, this is the converting window; arguments are the String.replace callback arguments (full match, captures, offset, input, plus named groups if present). Match and Type form a case-insensitive global regular expression; escape regex metacharacters when a literal is intended. Rules run by descending Match-string length, preserving input order for equal lengths; later rules can process earlier output. JavaScript can be called during measurement too, so use it to return text without game side effects. Setting the whole array replaces it: read, append complete records, then set to preserve prior rules."
+      "context": "Register replacement records and invoke them with a backslash in text. Example item: {\"Match\":\"Greeting\",\"Type\":\"\",\"TextStr\":\"Hello!\",\"TextJS\":\"return 'Fallback';\"}; Show Text \\Greeting yields Hello!. A nonempty TextStr other than the exact sentinel Undefined wins; only otherwise is TextJS called. In TextJS, this is the converting window; arguments are the String.replace callback arguments (full match, captures, offset, input, plus named groups if present). Match and Type form a case-insensitive global regular expression; escape regex metacharacters when a literal is intended. Rules run by descending Match-string length, preserving input order for equal lengths; later rules can process earlier output. JavaScript can be called during measurement too, so use it to return text without game side effects. Setting the whole array replaces it: read, append complete records, then set to preserve prior rules.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-057",
@@ -3351,7 +3363,7 @@ const catalog = {
             "nativeDefault": "Key",
             "type": "string",
             "default": "Key",
-            "context": "Configure one /TextMacros row with Match=\"GREETING\", TextStr=\"Hello\" and TextJS=\"return 'Hello';\". Use [GREETING] in Show Text; no backslash is required. Match is embedded as regex source inside literal square brackets, global/case-insensitive, so choose a unique name without regex metacharacters. Entries run in configured order. TextStr overrides TextJS unless empty or exactly \"Undefined\"; clear it to use the script. TextJS is a function body with this=the text window and String.replace arguments: full match, any capture groups, offset, full input (plus named groups if defined). For example Match=\"VALUE(\\\\d+)\" and TextJS=\"return arguments[1];\" reads a captured number from [VALUE3]. Macro conversion may run in measurement; avoid gameplay side effects. It is a text substitution, not a plugin command."
+            "context": "Configure one /TextMacros row with Match=\"GREETING\", TextStr=\"Hello\" and TextJS=\"return 'Hello';\". Use [GREETING] in Show Text; no backslash is required. Match is embedded as regex source inside literal square brackets, global/case-insensitive, so choose a unique name without regex metacharacters. Entries run in configured order. TextStr overrides TextJS unless empty or exactly \"Undefined\"; clear it to use the script. TextJS is a function body with this=the text window and String.replace arguments: full match, any capture groups, offset, full input (plus named groups if defined). For example Match=\"VALUE(\\\\d+)\" and TextJS=\"return arguments[1];\" reads a captured number from [VALUE3]. Macro conversion may run in measurement; avoid gameplay side effects. It is a text substitution, not a plugin command. When the external Message Log provider captures a macro, TextJS instead receives this=Game_System with the same String.replace arguments. Avoid window-only methods in macros used by logged messages."
           },
           {
             "id": "MSG-M-144",
@@ -3363,7 +3375,7 @@ const catalog = {
             "nativeDefault": "Undefined",
             "type": "string",
             "default": "Undefined",
-            "context": "Configure one /TextMacros row with Match=\"GREETING\", TextStr=\"Hello\" and TextJS=\"return 'Hello';\". Use [GREETING] in Show Text; no backslash is required. Match is embedded as regex source inside literal square brackets, global/case-insensitive, so choose a unique name without regex metacharacters. Entries run in configured order. TextStr overrides TextJS unless empty or exactly \"Undefined\"; clear it to use the script. TextJS is a function body with this=the text window and String.replace arguments: full match, any capture groups, offset, full input (plus named groups if defined). For example Match=\"VALUE(\\\\d+)\" and TextJS=\"return arguments[1];\" reads a captured number from [VALUE3]. Macro conversion may run in measurement; avoid gameplay side effects. It is a text substitution, not a plugin command."
+            "context": "Configure one /TextMacros row with Match=\"GREETING\", TextStr=\"Hello\" and TextJS=\"return 'Hello';\". Use [GREETING] in Show Text; no backslash is required. Match is embedded as regex source inside literal square brackets, global/case-insensitive, so choose a unique name without regex metacharacters. Entries run in configured order. TextStr overrides TextJS unless empty or exactly \"Undefined\"; clear it to use the script. TextJS is a function body with this=the text window and String.replace arguments: full match, any capture groups, offset, full input (plus named groups if defined). For example Match=\"VALUE(\\\\d+)\" and TextJS=\"return arguments[1];\" reads a captured number from [VALUE3]. Macro conversion may run in measurement; avoid gameplay side effects. It is a text substitution, not a plugin command. When the external Message Log provider captures a macro, TextJS instead receives this=Game_System with the same String.replace arguments. Avoid window-only methods in macros used by logged messages."
           },
           {
             "id": "MSG-M-145",
@@ -3377,7 +3389,7 @@ const catalog = {
             "encoding": "json",
             "javascript": "body",
             "default": "return 'Text';",
-            "context": "Configure one /TextMacros row with Match=\"GREETING\", TextStr=\"Hello\" and TextJS=\"return 'Hello';\". Use [GREETING] in Show Text; no backslash is required. Match is embedded as regex source inside literal square brackets, global/case-insensitive, so choose a unique name without regex metacharacters. Entries run in configured order. TextStr overrides TextJS unless empty or exactly \"Undefined\"; clear it to use the script. TextJS is a function body with this=the text window and String.replace arguments: full match, any capture groups, offset, full input (plus named groups if defined). For example Match=\"VALUE(\\\\d+)\" and TextJS=\"return arguments[1];\" reads a captured number from [VALUE3]. Macro conversion may run in measurement; avoid gameplay side effects. It is a text substitution, not a plugin command."
+            "context": "Configure one /TextMacros row with Match=\"GREETING\", TextStr=\"Hello\" and TextJS=\"return 'Hello';\". Use [GREETING] in Show Text; no backslash is required. Match is embedded as regex source inside literal square brackets, global/case-insensitive, so choose a unique name without regex metacharacters. Entries run in configured order. TextStr overrides TextJS unless empty or exactly \"Undefined\"; clear it to use the script. TextJS is a function body with this=the text window and String.replace arguments: full match, any capture groups, offset, full input (plus named groups if defined). For example Match=\"VALUE(\\\\d+)\" and TextJS=\"return arguments[1];\" reads a captured number from [VALUE3]. Macro conversion may run in measurement; avoid gameplay side effects. It is a text substitution, not a plugin command. When the external Message Log provider captures a macro, it also calls TextJS with this=Game_System and the same String.replace arguments. Do not assume a window-only method is available in macros used by logged messages. TextStr still takes precedence."
           }
         ]
       },
@@ -3393,7 +3405,7 @@ const catalog = {
           "TextJS": "return 'Text';"
         }
       ],
-      "context": "Register macro records, then use [Match] without a backslash. Example item: {\"Match\":\"Greeting\",\"TextStr\":\"Hello!\",\"TextJS\":\"return 'Fallback';\"}; Show Text [Greeting] yields Hello!. A nonempty TextStr other than the exact sentinel Undefined wins; otherwise TextJS supplies the text. In TextJS, this is the converting window; arguments are the String.replace callback arguments (full match, captures, offset, input, plus named groups if present). Match is embedded in a case-insensitive global regular expression within literal brackets, so avoid regex metacharacters for simple names. Macros run in array order; later macros can process earlier output and duplicate matches may already have been replaced. JavaScript can run during measurement, so keep it free of game side effects. Setting the whole array replaces it: read, append complete records, then set to preserve existing macros."
+      "context": "Register macro records, then use [Match] without a backslash. Example item: {\"Match\":\"Greeting\",\"TextStr\":\"Hello!\",\"TextJS\":\"return 'Fallback';\"}; Show Text [Greeting] yields Hello!. A nonempty TextStr other than the exact sentinel Undefined wins; otherwise TextJS supplies the text. In TextJS, this is the converting window; arguments are the String.replace callback arguments (full match, captures, offset, input, plus named groups if present). Match is embedded in a case-insensitive global regular expression within literal brackets, so avoid regex metacharacters for simple names. Macros run in array order; later macros can process earlier output and duplicate matches may already have been replaced. JavaScript can run during measurement, so keep it free of game side effects. Setting the whole array replaces it: read, append complete records, then set to preserve existing macros. When the external Message Log provider captures a macro, it also calls TextJS with this=Game_System and the same String.replace arguments. Do not assume a window-only method is available in macros used by logged messages. TextStr still takes precedence.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-058",
@@ -3423,7 +3435,7 @@ const catalog = {
           "key": "LangFiletype",
           "storageKey": "LangFiletype:str",
           "label": "File Type",
-          "description": "Which file type do you wish to use?",
+          "description": "Select csv for semicolon-separated CsvFilename or tsv for tab-separated TsvFilename at the game root.",
           "editorType": "select",
           "nativeDefault": "tsv",
           "type": "string",
@@ -3431,7 +3443,9 @@ const catalog = {
             "csv",
             "tsv"
           ],
-          "default": "tsv"
+          "default": "tsv",
+          "context": "Requires Localization.Enable and a nonempty Languages list. See MSG-M-058 for filenames, table structure, lookup and failure rules. Changing the selection does not convert or create files; use MSG-BEH-language-write-boundary.",
+          "expected": "csv reads CsvFilename with semicolons; tsv reads TsvFilename with tabs. The published default is tsv."
         },
         {
           "id": "MSG-M-149",
@@ -3467,7 +3481,8 @@ const catalog = {
           "nativeDefault": "true",
           "type": "boolean",
           "default": true,
-          "expected": "The Language option appears only when AddOption=true, /Localization/Enable=true and the configured language table is valid. AddOption=false omits it; enabling AddOption alone is insufficient."
+          "expected": "The Language option appears only when AddOption=true, /Localization/Enable=true and the configured language table is valid. AddOption=false omits it; enabling AddOption alone is insufficient.",
+          "context": "True adds the Language (textLocale) Options row; false omits it. Localization.Enable must also be true. An existing row with the same symbol is not duplicated. Player choices are ConfigManager preferences, saved separately from game slots; see MSG-INTEGRATION-message-settings."
         },
         {
           "id": "MSG-M-153",
@@ -3478,7 +3493,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "boolean",
-          "default": true
+          "default": true,
+          "context": "When true and Localization.AddOption is enabled with Localization.Enable, add one command row to the native Options height calculation. False leaves that height unchanged. This does not create the option; custom Options providers can own their own layout."
         },
         {
           "id": "MSG-M-154",
@@ -3489,7 +3505,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Text Language",
           "type": "string",
-          "default": "Text Language"
+          "default": "Text Language",
+          "context": "Display label for the textLocale Options command, drawn as ordinary command text (localization can translate a matching key). An empty label is allowed and gives an unnamed row; it does not hide or disable the setting. See MSG-INTEGRATION-message-settings."
         },
         {
           "id": "MSG-M-156",
@@ -3538,7 +3555,7 @@ const catalog = {
           "key": "Languages",
           "storageKey": "Languages:arraystr",
           "label": "Supported Languages",
-          "description": "What are all the supported languages supported by this",
+          "description": "Ordered array of language keys offered in Options and matched to localization table columns.",
           "editorType": "select[]",
           "nativeDefault": "[\"Bengali\",\"Chinese(Simplified)\",\"Chinese(Traditional)\",\"Czech\",\"Danish\",\"Dutch\",\"English\",\"Finnish\",\"French\",\"German\",\"Greek\",\"Hindi\",\"Hungarian\",\"Indonesian\",\"Italian\",\"Japanese\",\"Korean\",\"Norwegian\",\"Polish\",\"Portuguese\",\"Romanian\",\"Russian\",\"Slovak\",\"Spanish\",\"Swedish\",\"Tamil\",\"Thai\",\"Turkish\"]",
           "type": "array",
@@ -3604,7 +3621,8 @@ const catalog = {
             "Tamil",
             "Thai",
             "Turkish"
-          ]
+          ],
+          "context": "Use exact language column names, such as [\"English\",\"Portuguese\"], matching the loaded table after header trimming. An empty array disables table loading. The per-language Localization labels change display names only; they do not rename these keys. See MSG-M-058 for the table format and MSG-M-156 for the initial locale."
         },
         {
           "id": "MSG-M-159",
@@ -3615,7 +3633,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "বাংলা",
           "type": "string",
-          "default": "বাংলা"
+          "default": "বাংলা",
+          "context": "Label shown in Options for the language key \"Bengali\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-160",
@@ -3626,7 +3645,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "简体中文",
           "type": "string",
-          "default": "简体中文"
+          "default": "简体中文",
+          "context": "Label shown in Options for the language key \"Chinese(Simplified)\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-161",
@@ -3637,7 +3657,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "繁體中文",
           "type": "string",
-          "default": "繁體中文"
+          "default": "繁體中文",
+          "context": "Label shown in Options for the language key \"Chinese(Traditional)\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-162",
@@ -3648,7 +3669,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Čeština",
           "type": "string",
-          "default": "Čeština"
+          "default": "Čeština",
+          "context": "Label shown in Options for the language key \"Czech\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-163",
@@ -3659,7 +3681,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Dansk",
           "type": "string",
-          "default": "Dansk"
+          "default": "Dansk",
+          "context": "Label shown in Options for the language key \"Danish\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-164",
@@ -3670,7 +3693,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Nederlands",
           "type": "string",
-          "default": "Nederlands"
+          "default": "Nederlands",
+          "context": "Label shown in Options for the language key \"Dutch\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-165",
@@ -3681,7 +3705,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "English",
           "type": "string",
-          "default": "English"
+          "default": "English",
+          "context": "Label shown in Options for the language key \"English\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-166",
@@ -3692,7 +3717,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Suomi",
           "type": "string",
-          "default": "Suomi"
+          "default": "Suomi",
+          "context": "Label shown in Options for the language key \"Finnish\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-167",
@@ -3703,7 +3729,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Français",
           "type": "string",
-          "default": "Français"
+          "default": "Français",
+          "context": "Label shown in Options for the language key \"French\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-168",
@@ -3714,7 +3741,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Deutsch",
           "type": "string",
-          "default": "Deutsch"
+          "default": "Deutsch",
+          "context": "Label shown in Options for the language key \"German\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-169",
@@ -3725,7 +3753,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Ελληνικά",
           "type": "string",
-          "default": "Ελληνικά"
+          "default": "Ελληνικά",
+          "context": "Label shown in Options for the language key \"Greek\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-170",
@@ -3736,7 +3765,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "हिन्दी",
           "type": "string",
-          "default": "हिन्दी"
+          "default": "हिन्दी",
+          "context": "Label shown in Options for the language key \"Hindi\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-171",
@@ -3747,7 +3777,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Magyar",
           "type": "string",
-          "default": "Magyar"
+          "default": "Magyar",
+          "context": "Label shown in Options for the language key \"Hungarian\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-172",
@@ -3758,7 +3789,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Bahasa Indo",
           "type": "string",
-          "default": "Bahasa Indo"
+          "default": "Bahasa Indo",
+          "context": "Label shown in Options for the language key \"Indonesian\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-173",
@@ -3769,7 +3801,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Italiano",
           "type": "string",
-          "default": "Italiano"
+          "default": "Italiano",
+          "context": "Label shown in Options for the language key \"Italian\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-174",
@@ -3780,7 +3813,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "日本語",
           "type": "string",
-          "default": "日本語"
+          "default": "日本語",
+          "context": "Label shown in Options for the language key \"Japanese\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-175",
@@ -3791,7 +3825,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "한국어",
           "type": "string",
-          "default": "한국어"
+          "default": "한국어",
+          "context": "Label shown in Options for the language key \"Korean\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-176",
@@ -3802,7 +3837,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Norsk",
           "type": "string",
-          "default": "Norsk"
+          "default": "Norsk",
+          "context": "Label shown in Options for the language key \"Norwegian\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-177",
@@ -3813,7 +3849,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Polski",
           "type": "string",
-          "default": "Polski"
+          "default": "Polski",
+          "context": "Label shown in Options for the language key \"Polish\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-178",
@@ -3824,7 +3861,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Português",
           "type": "string",
-          "default": "Português"
+          "default": "Português",
+          "context": "Label shown in Options for the language key \"Portuguese\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-179",
@@ -3835,7 +3873,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Română",
           "type": "string",
-          "default": "Română"
+          "default": "Română",
+          "context": "Label shown in Options for the language key \"Romanian\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-180",
@@ -3846,7 +3885,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Русский",
           "type": "string",
-          "default": "Русский"
+          "default": "Русский",
+          "context": "Label shown in Options for the language key \"Russian\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-181",
@@ -3857,7 +3897,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Slovenčina",
           "type": "string",
-          "default": "Slovenčina"
+          "default": "Slovenčina",
+          "context": "Label shown in Options for the language key \"Slovak\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-182",
@@ -3868,7 +3909,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Español",
           "type": "string",
-          "default": "Español"
+          "default": "Español",
+          "context": "Label shown in Options for the language key \"Spanish\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-183",
@@ -3879,7 +3921,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Svenska",
           "type": "string",
-          "default": "Svenska"
+          "default": "Svenska",
+          "context": "Label shown in Options for the language key \"Swedish\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-184",
@@ -3890,7 +3933,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "தமிழ்",
           "type": "string",
-          "default": "தமிழ்"
+          "default": "தமிழ்",
+          "context": "Label shown in Options for the language key \"Tamil\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-185",
@@ -3901,7 +3945,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "ไทย",
           "type": "string",
-          "default": "ไทย"
+          "default": "ไทย",
+          "context": "Label shown in Options for the language key \"Thai\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         },
         {
           "id": "MSG-M-186",
@@ -3912,7 +3957,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Türkçe",
           "type": "string",
-          "default": "Türkçe"
+          "default": "Türkçe",
+          "context": "Label shown in Options for the language key \"Turkish\". It does not translate dialogue or change the key in Languages/table headers. The row requires Localization.Enable, AddOption and this key in Languages; see MSG-M-058. An empty label displays an empty status label; it does not fall back to the language key."
         }
       ],
       "default": {
@@ -3983,7 +4029,7 @@ const catalog = {
         "Thai": "ไทย",
         "Turkish": "Türkçe"
       },
-      "context": "Requires /Localization/Enable=true and a nonempty Languages array. Place the configured basename Languages.csv or Languages.tsv in the game root, beside index.html, not data/. CSV uses semicolons; TSV uses tabs. UTF-8 header starts Key followed by language column names such as English and Portuguese. Each row must have the same number of cells; keys and column names must be nonempty and unique after case/whitespace normalization. Use <br> inside cells instead of physical newlines. Example CSV: Key;English;Portuguese followed by a new row Greeting;Hello;Ola. Author Show Text as $[Greeting] or \\KEY[Greeting]. Key lookup ignores case/outer whitespace, but language-column lookup uses the exact configured locale spelling after trimming the header. A missing key returns undefined (explicit replacement can render \"undefined\"); a missing/empty language cell renders UNDEFINED!, not an English fallback. HTTP/parse failure stops database readiness with a load error; no file is created by the runtime. See MSG-BEH-language-write-boundary for CLI create/convert/validate commands."
+      "context": "Requires /Localization/Enable=true and a nonempty Languages array. Place the configured basename Languages.csv or Languages.tsv in the game root, beside index.html, not data/. CSV uses semicolons; TSV uses tabs. UTF-8 header starts Key followed by language column names such as English and Portuguese. Each row must have the same number of cells; keys and column names must be nonempty and unique after case/whitespace normalization. Use <br> inside cells instead of physical newlines. Example CSV: Key;English;Portuguese followed by a new row Greeting;Hello;Ola. Author Show Text as $[Greeting] or \\KEY[Greeting]. Key lookup ignores case/outer whitespace, but language-column lookup uses the exact configured locale spelling after trimming the header. A missing key returns undefined (explicit replacement can render \"undefined\"); a missing/empty language cell renders UNDEFINED!, not an English fallback. HTTP/parse failure stops database readiness with a load error; no file is created by the runtime. See MSG-BEH-language-write-boundary for CLI create/convert/validate commands.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-059",
@@ -4363,7 +4409,7 @@ const catalog = {
         "Thai": "rmmz-mainfont",
         "Turkish": "rmmz-mainfont"
       },
-      "context": "Requires localization enabled. The selected locale uses this configured CSS/font family unless ConfigManager.textFont is truthy (an Options font choice then takes precedence). This field does not load a font file. To add one, configure /CustomFonts with FontFamily and an existing Filename in fonts/, for example family \"MyFont\" and file \"MyFont.ttf\", then use MyFont here. Boot loads that file through FontManager; a load failure is an engine loading error. Empty/unconfigured language family uses rmmz-mainfont; the Database advanced fallbackFonts list is appended to the chosen family for unavailable glyphs/browser font fallback. The same main font face supplies measurement and drawing."
+      "context": "Requires localization enabled. The selected locale uses this configured CSS/font family unless ConfigManager.textFont is truthy (an Options font choice then takes precedence). This field does not load a font file. To add one, configure /CustomFonts with FontFamily and an existing Filename in fonts/, for example family \"MyFont\" and file \"MyFont.ttf\", then use MyFont here. Boot loads that file through FontManager; a load failure is an engine loading error. Empty/unconfigured language family uses rmmz-mainfont; the Database advanced fallbackFonts list is appended to the chosen family for unavailable glyphs/browser font fallback. The same main font face supplies measurement and drawing.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-060",
@@ -4386,7 +4432,7 @@ const catalog = {
           "nativeDefault": "false",
           "type": "boolean",
           "default": false,
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-217",
@@ -4398,7 +4444,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-218",
@@ -4410,7 +4456,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-219",
@@ -4422,7 +4468,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-220",
@@ -4434,7 +4480,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-221",
@@ -4446,7 +4492,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-222",
@@ -4458,7 +4504,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-223",
@@ -4470,7 +4516,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-224",
@@ -4482,7 +4528,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-225",
@@ -4494,7 +4540,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-226",
@@ -4506,7 +4552,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-227",
@@ -4518,7 +4564,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-228",
@@ -4530,7 +4576,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-229",
@@ -4542,7 +4588,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-230",
@@ -4554,7 +4600,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-231",
@@ -4566,7 +4612,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-232",
@@ -4578,7 +4624,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-233",
@@ -4590,7 +4636,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-234",
@@ -4602,7 +4648,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-235",
@@ -4614,7 +4660,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-236",
@@ -4626,7 +4672,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-237",
@@ -4638,7 +4684,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-238",
@@ -4650,7 +4696,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-239",
@@ -4662,7 +4708,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-240",
@@ -4674,7 +4720,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-241",
@@ -4686,7 +4732,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-242",
@@ -4698,7 +4744,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-243",
@@ -4710,7 +4756,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         },
         {
           "id": "MSG-M-244",
@@ -4722,7 +4768,7 @@ const catalog = {
           "nativeDefault": "[XX]",
           "type": "string",
           "default": "[XX]",
-          "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+          "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
         }
       ],
       "default": {
@@ -4756,7 +4802,7 @@ const catalog = {
         "Thai": "[XX]",
         "Turkish": "[XX]"
       },
-      "context": "Requires localization enabled. ImageManager.loadBitmap replaces the exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files."
+      "context": "Requires localization enabled. ImageManager.loadBitmap replaces every exact uppercase marker [XX] in its filename argument (which may include subfolders), not in its separate folder argument. It substitutes the selected language string when ConvertDefault=true or the current locale differs from DefaultLocale. Example: show picture \"Title_[XX]\", set /LanguageImages/Portuguese=\"pt\", and select Portuguese; img/pictures/Title_pt.png must exist. A marker in a filename subpath such as \"[XX]/Title\" resolves img/pictures/pt/Title.png. Empty/missing mapping leaves [XX] unchanged. There is no automatic fallback to the default-language asset if a resolved file is missing; normal image-load failure applies. Install all required assets. This does not translate image pixels or generate files.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-061",
@@ -4778,7 +4824,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "boolean",
-          "default": true
+          "default": true,
+          "context": "True adds the Text Speed (textSpeed) Options row; false omits it. An existing row with the same symbol is not duplicated. Player choices are ConfigManager preferences, saved separately from game slots; see MSG-INTEGRATION-message-settings."
         },
         {
           "id": "MSG-M-246",
@@ -4789,7 +4836,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "boolean",
-          "default": true
+          "default": true,
+          "context": "When true and TextSpeed.AddOption is enabled, add one command row to the native Options height calculation. False leaves that height unchanged. This does not create the option; custom Options providers can own their own layout."
         },
         {
           "id": "MSG-M-247",
@@ -4800,7 +4848,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "Text Speed",
           "type": "string",
-          "default": "Text Speed"
+          "default": "Text Speed",
+          "context": "Display label for the textSpeed Options command, drawn as ordinary command text (localization can translate a matching key). An empty label is allowed and gives an unnamed row; it does not hide or disable the setting. See MSG-INTEGRATION-message-settings."
         },
         {
           "id": "MSG-M-248",
@@ -4836,7 +4885,7 @@ const catalog = {
         "Default": 10,
         "Instant": "Instant"
       },
-      "context": "Player text speed uses 1..10 from slowest to fastest; 11 is Instant. The runtime delay multiplier is 11-ConfigManager.textSpeed, so 11 gives zero added per-character delay; explicit event/message wait commands are separate. The configured Default initializes the setting; loading a finite stored number/string clamps it to 1..11, and invalid/missing values fall back to Default. Options presents 11 with the Instant label."
+      "context": "Player text speed uses 1..10 from slowest to fastest; 11 is Instant. The runtime delay multiplier is 11-ConfigManager.textSpeed, so 11 gives zero added per-character delay; explicit event/message wait commands are separate. The configured Default initializes the setting; loading a finite stored number/string clamps it to 1..11, and invalid/missing values fall back to Default. Options presents 11 with the Instant label.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     },
     {
       "id": "MSG-M-062",
@@ -4858,7 +4907,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "false",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state)."
         },
         {
           "id": "MSG-M-252",
@@ -4869,7 +4919,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "false",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "context": "mensagem e janelas de texto conforme tipo/campo These defaults initialize new games and fill missing saved fields; existing saved values remain. MessageWindowProperties/ChoiceWindowProperties can replace the corresponding game settings later (MSG-BEH-save-state)."
         },
         {
           "id": "MSG-M-254",
@@ -4880,7 +4931,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "boolean",
-          "default": true
+          "default": true,
+          "context": "mensagem e janelas de texto conforme tipo/campo True replaces ordinary physical line breaks with spaces when wrap is active; false retains them. <BR> remains an explicit break either way. This does not combine separate Show Text commands by itself."
         },
         {
           "id": "MSG-M-255",
@@ -4891,7 +4943,8 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "false",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "context": "mensagem e janelas de texto conforme tipo/campo When a message has a face, true subtracts two face-width allowances (face width + 20px each) from the wrap boundary; false subtracts one. It does not resize the face. Without active wrap or a face this flag has no effect."
         },
         {
           "id": "MSG-M-256",
@@ -4918,7 +4971,8 @@ const catalog = {
         "LineBreakSpace": true,
         "TightWrap": false,
         "EndPadding": 0
-      }
+      },
+      "context": "Configure Message and Help wrapping defaults and boundary calculation. True enables the indicated behavior; false disables it. See MSG-BEH-wrap-linguas for whole-string tags, precedence and overflow limits. Setting the whole object requires all published fields; a child-path write preserves siblings. Registry reset reloads the catalog default, not existing saved wrap state.  A missing native field uses its published default; an explicit empty array remains empty. A blank native JSON structure is invalid, not a reset. Use parameters reset for catalog defaults; set a child path to retain siblings."
     }
   ],
   "commands": [
@@ -4938,7 +4992,8 @@ const catalog = {
           "nativeDefault": "4",
           "type": "number",
           "min": 0,
-          "default": 4
+          "default": 4,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of MessageWindowProperties; consult message api describe MSG-M-002 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-004",
@@ -4950,7 +5005,8 @@ const catalog = {
           "nativeDefault": "816",
           "type": "number",
           "min": 0,
-          "default": 816
+          "default": 816,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of MessageWindowProperties; consult message api describe MSG-M-002 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-005",
@@ -4966,14 +5022,16 @@ const catalog = {
             "true",
             "false"
           ],
-          "default": "No Change"
+          "default": "No Change",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of MessageWindowProperties; consult message api describe MSG-M-002 --json for the full command, defaults, activation and result. "
         }
       ],
       "targets": [
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "mensagem e janelas de texto conforme tipo/campo Rows and Width greater than zero replace saved settings; zero preserves the current value. Width is rounded upward to an even pixel count. WordWrap=\"No Change\" preserves wrap, \"true\" enables and \"false\" disables it. Changes persist in Game_System through maps/save-load; the active message window refreshes placement and contents. Removing this event command does not undo already saved settings."
     },
     {
       "id": "MSG-M-257",
@@ -5000,7 +5058,8 @@ const catalog = {
             "This plugin command selects a message at random.\nIsn't that neat?",
             "Insert more messages here to increase the randomization.\nCool, huh?",
             "The larger the random pool, the more variety in messages.\nIt'll be more interesting that way!"
-          ]
+          ],
+          "context": "Enable Coreto Core then Message. Execute native command357 in a map, Common Event or troop; show the stored text with \\V[1]. Argument of MessageRandomize; consult message api describe MSG-M-257 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-259",
@@ -5013,7 +5072,8 @@ const catalog = {
           "javascript": "expression",
           "nativeDefault": "1",
           "default": "1",
-          "allowZero": true
+          "allowZero": true,
+          "context": "Enable Coreto Core then Message. Execute native command357 in a map, Common Event or troop; show the stored text with \\V[1]. JavaScript expression evaluated when MessageRandomize executes, with this=the current Game_Interpreter and no function arguments. The return value supplies varID; CLI validates syntax without executing it. See MSG-M-257 for activation, persistence and other arguments."
         }
       ],
       "targets": [
@@ -5038,7 +5098,8 @@ const catalog = {
           "nativeDefault": "+0",
           "type": "string",
           "javascript": "expression",
-          "default": "+0"
+          "default": "+0",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated when MessageWindowXyOffsets executes, with this=the current Game_Interpreter and no function arguments. The return value supplies OffsetX; CLI validates syntax without executing it. See MSG-M-006 for activation, persistence and other arguments."
         },
         {
           "id": "MSG-M-008",
@@ -5050,7 +5111,8 @@ const catalog = {
           "nativeDefault": "+0",
           "type": "string",
           "javascript": "expression",
-          "default": "+0"
+          "default": "+0",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated when MessageWindowXyOffsets executes, with this=the current Game_Interpreter and no function arguments. The return value supplies OffsetY; CLI validates syntax without executing it. See MSG-M-006 for activation, persistence and other arguments."
         }
       ],
       "targets": [
@@ -5076,7 +5138,8 @@ const catalog = {
           "nativeDefault": "+0",
           "type": "string",
           "javascript": "expression",
-          "default": "+0"
+          "default": "+0",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated when ChoiceWindowDistance executes, with this=the current Game_Interpreter and no function arguments. The return value supplies Distance; CLI validates syntax without executing it. See MSG-M-010 for activation, persistence and other arguments."
         }
       ],
       "targets": [
@@ -5102,7 +5165,8 @@ const catalog = {
           "nativeDefault": "36",
           "type": "number",
           "min": 0,
-          "default": 36
+          "default": 36,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of ChoiceWindowProperties; consult message api describe MSG-M-012 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-014",
@@ -5114,7 +5178,8 @@ const catalog = {
           "nativeDefault": "96",
           "type": "number",
           "min": 0,
-          "default": 96
+          "default": 96,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of ChoiceWindowProperties; consult message api describe MSG-M-012 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-015",
@@ -5126,7 +5191,8 @@ const catalog = {
           "nativeDefault": "8",
           "type": "number",
           "min": 0,
-          "default": 8
+          "default": 8,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of ChoiceWindowProperties; consult message api describe MSG-M-012 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-016",
@@ -5138,7 +5204,8 @@ const catalog = {
           "nativeDefault": "1",
           "type": "number",
           "min": 0,
-          "default": 1
+          "default": 1,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of ChoiceWindowProperties; consult message api describe MSG-M-012 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-017",
@@ -5155,7 +5222,8 @@ const catalog = {
             "center",
             "right"
           ],
-          "default": "default"
+          "default": "default",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of ChoiceWindowProperties; consult message api describe MSG-M-012 --json for the full command, defaults, activation and result. "
         }
       ],
       "targets": [
@@ -5196,7 +5264,8 @@ const catalog = {
           "type": "number",
           "min": 0,
           "max": 100,
-          "default": 0
+          "default": 0,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of SelectWeapon; consult message api describe MSG-M-019 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         }
       ],
       "targets": [
@@ -5237,7 +5306,8 @@ const catalog = {
           "type": "number",
           "min": 0,
           "max": 100,
-          "default": 0
+          "default": 0,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of SelectArmor; consult message api describe MSG-M-022 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-025",
@@ -5250,7 +5320,8 @@ const catalog = {
           "type": "number",
           "min": 0,
           "max": 100,
-          "default": 0
+          "default": 0,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of SelectArmor; consult message api describe MSG-M-022 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         }
       ],
       "targets": [
@@ -5264,7 +5335,7 @@ const catalog = {
       "id": "MSG-M-026",
       "key": "SelectSkill",
       "label": "Select: Skill",
-      "description": "Opens the Event Select Item Window to let the player",
+      "description": "Select an eligible skill for the specified actor and store its database ID; cancellation stores 0.",
       "args": [
         {
           "id": "MSG-M-027",
@@ -5289,7 +5360,8 @@ const catalog = {
           "editorType": "actor",
           "nativeDefault": "0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of SelectSkill; consult message api describe MSG-M-026 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         },
         {
           "id": "MSG-M-029",
@@ -5302,7 +5374,8 @@ const catalog = {
           "type": "number",
           "min": 0,
           "max": 100,
-          "default": 0
+          "default": 0,
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of SelectSkill; consult message api describe MSG-M-026 --json for the full command, defaults, activation and result. Supply a JSON number within the published limits."
         }
       ],
       "targets": [
@@ -5310,7 +5383,7 @@ const catalog = {
         "common-event",
         "troop"
       ],
-      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and VisuMZ_1_SkillsStatesCore version 1.58 active before this command is used. The list uses the selected actor's learned skills; ActorID 0 or an unresolved actor falls back to the party leader. No actor gives an empty list. Skills must pass the integration's isSkillHidden and isSkillTypeMatchForUse checks; SkillTypeID 0 accepts every type, otherwise getSkillTypes must include it. The selected database skill ID is stored in VariableID; cancel stores 0. Can follow Show Text or run standalone."
+      "context": "Requires Coreto_0_CoreEngine before Coreto_1_MessageCore and exactly one compatible SkillsStates provider before Message: VisuMZ_1_SkillsStatesCore 1.58 or Coreto_1_SkillsStatesCore 0.1.0. The list uses the selected actor's skills; ActorID 0 or an unresolved actor falls back to the party leader. An explicit actor may be outside the party; no actor gives an empty list. Skills must pass isSkillHidden and isSkillTypeMatchForUse; SkillTypeID 0 accepts every accessible type, otherwise getSkillTypes must include it. Confirmation stores the database skill ID in a positive VariableID without using the skill or paying its cost. Cancel, including an empty list, stores 0. The event resumes once. The command may run standalone or immediately after Show Text, joining that message interaction."
     },
     {
       "id": "MSG-M-031",
@@ -5347,7 +5420,8 @@ const catalog = {
           "nativeDefault": "$gameSystem.windowPadding()",
           "type": "string",
           "javascript": "expression",
-          "default": "$gameSystem.windowPadding()"
+          "default": "$gameSystem.windowPadding()",
+          "context": "mensagem e janelas de texto conforme tipo/campo JavaScript expression evaluated when PictureTextChange executes, with this=the current Game_Interpreter and no function arguments. The return value supplies Padding in pixels (negative results clamp to zero); CLI validates syntax without executing it. See MSG-M-031 for activation, persistence and other arguments."
         },
         {
           "id": "MSG-M-035",
@@ -5359,7 +5433,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-036",
@@ -5371,7 +5446,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-037",
@@ -5383,7 +5459,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-038",
@@ -5395,7 +5472,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-039",
@@ -5407,7 +5485,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-040",
@@ -5419,7 +5498,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-041",
@@ -5431,7 +5511,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-042",
@@ -5443,7 +5524,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         },
         {
           "id": "MSG-M-043",
@@ -5455,7 +5537,8 @@ const catalog = {
           "nativeDefault": "\"\"",
           "type": "string",
           "encoding": "json",
-          "default": ""
+          "default": "",
+          "context": "mensagem e janelas de texto conforme tipo/campo Argument of PictureTextChange; consult message api describe MSG-M-031 --json for the full command, defaults, activation and result. "
         }
       ],
       "targets": [
@@ -5463,7 +5546,7 @@ const catalog = {
         "common-event",
         "troop"
       ],
-      "context": "Assign text to picture slots before or after Show Picture; assignment stores data and requests redraw but does not show an image. Text becomes visible while the picture sprite is visible. Every supplied zone replaces that slot's zone text; an empty string clears it. Erase Picture also clears text and padding. Variable-driven text is redrawn on picture-text change, map refresh or PictureTextRefresh; it is not reevaluated on every frame."
+      "context": "Assign text to picture slots before or after Show Picture; assignment stores data and requests redraw but does not show an image. Text becomes visible while the picture sprite is visible. Execution replaces all nine zone strings; omitted native arguments use catalog defaults, so they do not preserve prior zone text; an empty string clears it. Erase Picture also clears text and padding. Variable-driven text is redrawn on picture-text change, map refresh or PictureTextRefresh; it is not reevaluated on every frame. Show Picture on an occupied ID preserves this text; Erase Picture clears it. The CLI commands update operation preserves arguments you omit from that edit, which is a separate authoring rule."
     },
     {
       "id": "MSG-M-044",
@@ -5495,7 +5578,8 @@ const catalog = {
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "For each public picture ID in the current map/battle space, clear all nine text zones and set padding to zero. The image remains. Saved text data changes immediately; its visible sprite redraws on update. This does not erase the picture or reset other picture settings. See MSG-BEH-picture-text."
     },
     {
       "id": "MSG-M-046",
@@ -5526,7 +5610,8 @@ const catalog = {
       "VisuMZ_1_SkillsStatesCore": "1.58",
       "VisuMZ_1_SaveCore": "1.14",
       "VisuMZ_1_OptionsCore": "1.28",
-      "Coreto_1_BattleCore": "0.1.0"
+      "Coreto_1_BattleCore": "0.1.0",
+      "Coreto_1_SkillsStatesCore": "0.1.0"
     }
   }
 };
@@ -5686,6 +5771,8 @@ function encodeValue(schema, value, path, previous) {
         const encoded = previous === undefined ? [] : parseLayer(previous, path);
         return JSON.stringify(value.map((item, index) => encodeValue(schema.items, item, `${path}/${index}`, encoded[index])));
     }
+    // A whole-object edit must not reformat an untouched native numeric field.
+    if (schema.type === "number" && typeof previous === "string" && previous.trim() !== "" && Number(previous) === value) return previous;
     return schema.encoding === "json" ? JSON.stringify(value) : String(value);
 }
 
@@ -5934,7 +6021,7 @@ function validateMessageDependencies(active, own, dependencies, fail) {
     }
     const tooltip = active.findIndex(plugin => plugin.name === 'VisuMZ_3_StateTooltips');
     if (tooltip >= 0) {
-        for (const alternatives of [['VisuMZ_1_BattleCore', 'Coreto_1_BattleCore'], ['VisuMZ_1_SkillsStatesCore']]) {
+        for (const alternatives of [['VisuMZ_1_BattleCore', 'Coreto_1_BattleCore'], ['VisuMZ_1_SkillsStatesCore', 'Coreto_1_SkillsStatesCore']]) {
             const providers = active.filter(plugin => alternatives.includes(plugin.name));
             if (providers.length !== 1 || active.indexOf(providers[0]) > tooltip) {
                 fail('MESSAGE_TOOLTIP_DEPENDENCY', `Place exactly one ${alternatives.join(' or ')} before StateTooltips.`);

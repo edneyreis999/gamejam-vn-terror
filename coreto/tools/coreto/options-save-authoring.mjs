@@ -33,13 +33,18 @@ export function describeOptionsSave(namespace){
         `Message is optional; when enabled, use exactly one provider before this plugin: ${versions(catalog.dependencies.messages)}.`,
         'Load this plugin before tier 2/3 plugins. Offline CLI authoring does not execute or activate these dependencies.'
     ];
-    return validatePublicEntries(namespace, [...describeCoreApi(catalog,{commandExpectedHash:true}).map(entry=>({...entry,
+    return validatePublicEntries(namespace, [...describeCoreApi(catalog,{commandExpectedHash:'optional'}).map(entry=>({...entry,
         ...(entry.availability === 'editorial' ? {
             context: entry.context === 'browser runtime; authoring is offline'
                 ? 'Plugin Manager section label or separator; no runtime effect. Preserve its native value.' : entry.context,
             writing: 'Read-only discovery of an editor label. The CLI excludes this entry from parameter writes; any shared path selects the functional field instead.',
             examples: [`${namespace} api describe ${entry.id} --json`]
-        } : {examples:entry.examples?.map(example=>example.replaceAll('core ',namespace+' '))})})),...catalog.optionItems.map(item=>({...item,surface:'option-item',key:item.symbol,context:item.context??'Conditional browser consumer; metadata remains authorable when its provider is absent.',usages:[{surface:'parameter',path:`/Categories/${item.categoryIndex}/List/${item.optionIndex}`}],examples:item.examples??[`options lists get --path /Categories/${item.categoryIndex}/List --index ${item.optionIndex}`]}))].map(entry=>publicDescriptor({...entry,plugin:catalog.pluginId,dependencies:[...dependencies,...(entry.dependencies??[])]}, namespace)));
+        } : {
+            ...(namespace === 'options' && entry.surface === 'parameter' && entry.usages.some(usage => usage.path.includes('{index}')) ? {
+                writing: `${entry.writing} This indexed path requires --expected-hash on every set/reset. Read parameters get (or lists list/get for the containing list) and pass result.fileHash; reread after each write. Replace the example index with the existing row selected from that read.`
+            } : {}),
+            examples:entry.examples?.map(example=>example.replaceAll('core ',namespace+' '))
+        })})),...catalog.optionItems.map(item=>({...item,surface:'option-item',key:item.symbol,context:item.context??'Conditional browser consumer; metadata remains authorable when its provider is absent.',usages:[{surface:'parameter',path:`/Categories/${item.categoryIndex}/List/${item.optionIndex}`}],examples:item.examples??[`options lists get --path /Categories/${item.categoryIndex}/List --index ${item.optionIndex}`]}))].map(entry=>publicDescriptor({...entry,plugin:catalog.pluginId,dependencies:[...dependencies,...(entry.dependencies??[])]}, namespace)));
 }
 function decode(schema,raw){
     if(raw===undefined)return structuredClone(schema.default);

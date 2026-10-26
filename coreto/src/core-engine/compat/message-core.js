@@ -30,7 +30,18 @@ function installMessageCompatibility(active, settings, formatDigits, parameterIc
 
 function installLegacyCoreInterface(settings, formatDigits, parameterIcon) {
     const compatibility = globalThis.VisuMZ ??= {};
-    compatibility.CoreEngine = {version: 1.90, Settings: settings};
+    const entries = settings.CustomParam.map(data => [String(data.Abbreviation).toUpperCase().trim(), data]);
+    compatibility.CoreEngine = {version: 1.90, Settings: settings,
+        CustomParamNames: Object.fromEntries(entries.map(([name, data]) => [name, data.ParamName])),
+        CustomParamAbb: Object.fromEntries(entries.map(([name, data]) => [name, data.Abbreviation])),
+        CustomParamType: Object.fromEntries(entries.map(([name, data]) => [name, data.Type]))};
+    compatibility.ConvertNumberToString = function(value, decimals, parameter) {
+        if (parameter === undefined && value % 1 === 0) return value;
+        if (parameter !== undefined && basicParameterNames.includes(String(parameter).toUpperCase().trim())) return value;
+        const core = compatibility.CoreEngine;
+        if (core.CustomParamAbb[parameter] && core.CustomParamType[parameter] === "integer") return value;
+        return String((value * 100).toFixed(decimals || 0)) + "%";
+    };
     compatibility.ApplyEasing = applyEasing;
     compatibility.GroupDigits = formatDigits;
     compatibility.GetParamIcon = parameterIcon;
@@ -69,4 +80,16 @@ function installEquipCoreCompatibility(active, settings, formatDigits, parameter
     if (!active.some(plugin => plugin.name === "VisuMZ_2_EquipSetBonuses")) return;
     installLegacyCoreInterface(settings, formatDigits, parameterIcon);
     if (!VisuMZ.coretoMessageBridge) installLegacyCoreNotetags();
+}
+
+function installOptionsCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (active.some(plugin => ["VisuMZ_1_OptionsCore", "Coreto_1_OptionsCore"].includes(plugin.name))) {
+        installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    }
+}
+
+function installItemsCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (active.some(plugin => ["VisuMZ_1_ItemsEquipsCore", "Coreto_1_ItemsEquipsCore"].includes(plugin.name))) {
+        installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    }
 }

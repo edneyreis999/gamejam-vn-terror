@@ -1,0 +1,32 @@
+function installItemsEquipsCore() {
+    if (globalThis.Imported?.VisuMZ_1_ItemsEquipsCore) throw new CoreError('IE_DUPLICATE_PROVIDER', 'Enable one Items provider; the original already executed.');
+    globalThis.VisuMZ ??= {};
+    const api = installComplement(catalog, 'ItemsEquipsCore', 'IE');
+    installItemsInventory(api);
+    installItemsCategories(api);
+    installItemsDisplay(api);
+    installItemsEquipment(api);
+    installItemsEquipSlots();
+    installItemsParameters(api);
+    installItemsArtifacts(api);
+    installItemsCurses(api);
+    installItemsShop(api);
+    installItemsStatusWindow(api);
+    installItemsStatusPictures();
+    installItemsStatusEquipment(api);
+    installItemsStatusData(api);
+    installItemsStatusScene(api);
+    installItemsPresentationLayouts(api);
+    installItemsEquipStatus(api);
+    installItemsPresentationCommands(api);
+    installItemsListNavigation(api);
+    installItemsEquipNavigation(api);
+    installItemsShopNavigation(api);
+    installItemsProxies();
+    globalThis.Imported ??= {};
+    Imported.Coreto_1_ItemsEquipsCore = true;
+    api.capabilities = ['configuration', 'actor-equipment-slot-commands', 'item-list-columns', 'inventory-limits', 'item-availability', 'item-conservation', 'item-categories', 'item-labels', 'class-equipment-slots', 'equipment-restrictions', 'equipment-optimization', 'shop-transactions', 'batch-shops', 'item-details', 'equipment-parameters', 'inventory-artifacts', 'cursed-equipment', 'purification'];
+    installItemsConsumerInterface(api);
+    return api;
+}
+installItemsEquipsCore();

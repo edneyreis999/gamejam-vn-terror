@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "skills": [
+    {
+      "name": "game-coreto-eng-design-system",
+      "version": "1.3.0",
+      "description": "Apply and recover the shared Coreto visual theme; configure DesignSystem parameters.",
+      "directory": "game-coreto-eng-design-system",
+      "dependencies": [
+        "Coreto_0_CoreEngine",
+        "Coreto_1_MessageCore",
+        "Coreto_1_OptionsCore",
+        "Coreto_1_SaveCore",
+        "Coreto_2_ExtMessageFunc",
+        "Coreto_5_DesignSystem"
+      ]
+    }
+  ]
+}

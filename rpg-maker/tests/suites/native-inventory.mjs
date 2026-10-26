@@ -23,7 +23,10 @@ const retiredMapShortcuts = [
 ];
 
 canonicalCase('IT-047', 'the native package contains every authored picture and live common-event target across CE and map lists without a revision registry', {timeout:60000}, async t => {
- const browser=await entry(t),events=await browser.evaluate('$dataCommonEvents'),maps=await browser.evaluate(`Promise.all($dataMapInfos.filter(Boolean).map(async info=>{
+ const browser=await entry(t),events=await browser.evaluate(`fetch('data/CommonEvents.json').then(response=>{
+  if(!response.ok)throw new Error('Missing CommonEvents');
+  return response.json();
+ })`),maps=await browser.evaluate(`Promise.all($dataMapInfos.filter(Boolean).map(async info=>{
   const response=await fetch('data/Map'+String(info.id).padStart(3,'0')+'.json');
   if(!response.ok)throw new Error('Missing map '+info.id);
   const map=await response.json();

@@ -1,10 +1,9 @@
 import {readFile, writeFile, mkdir, copyFile, access, rm, lstat} from 'node:fs/promises';
 import {join, resolve, dirname} from 'node:path';
 import {parseArgs} from 'node:util';
-import {preset, pluginId, skillRoot, coretoRoot, coretoModules, invoke, hash, errorResult} from './shared.mjs';
+import {loadPreset, pluginId, skillRoot, coretoRoot, coretoModules, invoke, hash, errorResult} from './shared.mjs';
 import {recipe, backgroundRecipe} from './recipes.mjs';
 
-const ownCli=join(skillRoot,'scripts/design-system-cli.mjs');
 const ids={core:'Coreto_0_CoreEngine',message:'Coreto_1_MessageCore',options:'Coreto_1_OptionsCore',save:'Coreto_1_SaveCore','ext-message':'Coreto_2_ExtMessageFunc','design-system':pluginId};
 const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 
@@ -13,13 +12,14 @@ async function main() {
   if(values.help){console.log('Usage: node <skill>/scripts/apply-design-system.mjs --project <game> [--coreto <coreto>] [--profile coreto|dryland] [--dry-run] [--backup <new-directory>] [--restore <backup.json>] [--json]\nRequires installed enabled plugins; never installs plugins or writes their source. Restores only managed visual settings.');return;}
   if(!values.project)throw new Error('Supply --project <game>.');
   const project=resolve(values.project), root=await coretoRoot(project,values.coreto), cli=join(root,'tools/coreto/cli.mjs');
+  const preset=await loadPreset(root);
   if(!preset.profiles[values.profile])throw new Error('Unknown profile. Choose coreto or dryland.');
   const {parsePluginsFile}=await coretoModules(root), registry=join(project,'js/plugins.js');
   const original=await readFile(registry), plugins=parsePluginsFile(original.toString('utf8')).plugins;
   let expectedHash=hash(original);
-  const command=(ns,group,op,extra=[])=>invoke(ns==='design-system'?ownCli:cli,[...(ns==='design-system'?['--coreto',root]:[ns]),'--project',project,group,...(op?[op]:[]),...extra]);
+  const command=(ns,group,op,extra=[])=>invoke(cli,[ns,'--project',project,group,...(op?[op]:[]),...extra]);
   const get=(ns,path)=>command(ns,'parameters','get',['--path',path]);
-  const set=(ns,path,value,dryRun=false)=>command(ns,'parameters','set',['--path',path,'--value',JSON.stringify(value),...(['options','save','design-system'].includes(ns)?['--expected-hash',hashCache]:[]),...(dryRun?['--dry-run']:[])]);
+  const set=(ns,path,value,dryRun=false)=>command(ns,'parameters','set',['--path',path,'--value='+JSON.stringify(value),...(['options','save','design-system'].includes(ns)?['--expected-hash',hashCache]:[]),...(dryRun?['--dry-run']:[])]);
   let hashCache=expectedHash;
   const assertUnchanged=async()=>{
     hashCache=hash(await readFile(registry));
@@ -77,15 +77,15 @@ async function main() {
     const mergedFonts=fonts.map(f=>preset.fonts.find(p=>p.FontFamily===f.FontFamily)||f);
     for(const f of preset.fonts)if(!fonts.some(p=>p.FontFamily===f.FontFamily))mergedFonts.push(f);
     await queue('message','/CustomFonts',mergedFonts);
-    await queue('core','/Window/DrawItemBackgroundJS',backgroundRecipe());
+    await queue('core','/Window/DrawItemBackgroundJS',backgroundRecipe(preset));
     const categories=get('options','/Categories').value;
     const supported=new Set(['textLocale','textEffects','bgmVolume','bgsVolume','meVolume','seVolume']);
     for(const [i,category]of categories.entries())for(const [j,row]of category.List.entries()){
-      if(supported.has(row.Symbol))await queue('options',`/Categories/${i}/List/${j}/DrawJS`,await recipe('option'));
+      if(supported.has(row.Symbol))await queue('options',`/Categories/${i}/List/${j}/DrawJS`,await recipe('option',preset));
       else skipped.push(row.Symbol);
     }
-    await queue('save','/SaveMenu/BoxContentsJS',await recipe('save-contents'));
-    await queue('save','/SaveMenu/BoxFileDataJS',await recipe('save-file'));
+    await queue('save','/SaveMenu/BoxContentsJS',await recipe('save-contents',preset));
+    await queue('save','/SaveMenu/BoxFileDataJS',await recipe('save-file',preset));
     const ds=structuredClone(preset.defaults);
     const existing=get('design-system','/PictureRoles').value;
     const roles=preset.profiles[values.profile].PictureRoles;

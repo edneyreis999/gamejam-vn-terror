@@ -124,10 +124,15 @@ export function configurationPublicField(field, catalog) {
     if (field.key !== 'CoretoConfigSource') return field;
     const namespace = catalog.namespace;
     const original = catalog.reference?.pluginId ?? catalog.compatibility?.originalCoreId;
+    const missingSelector = ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId)
+        ? 'An old entry without CoretoConfigSource uses own.'
+        : catalog.pluginId === 'Coreto_2_VNPictureBusts'
+            ? 'Without CoretoConfigSource, the historical ConfigurationSource=own selects own; legacy-if-present or an absent historical selector selects inherit.'
+            : 'An old entry without CoretoConfigSource uses inherit.';
     return {...field, plugin:catalog.pluginId,
-        description:`Configuration source in the game's js/plugins.js: inherit reads parameters from ${original}, even if inactive; when that entry is absent, it reads ${catalog.pluginId}. own always reads ${catalog.pluginId}. Switching the selector does not copy values.`,
-        context:`Edit the CoretoConfigSource parameter of ${catalog.pluginId} in the MZ Plugin Manager or through the CLI. The plugin entry must exist in js/plugins.js.`,
-        writing:`Run the CLI with --project pointing to the MZ game folder. ${namespace} parameters set changes the selector only; install or the first edit of a functional parameter in inherit materializes own values. Reload the editor after a CLI write.`,
+        description:`Configuration source in the game's js/plugins.js: inherit reads parameters from ${original}, even if inactive; when that entry is absent, it reads ${catalog.pluginId}. own always reads ${catalog.pluginId}. Switching the selector does not copy values. The published default and parameters reset select inherit. ${missingSelector}`,
+        context:`Edit the CoretoConfigSource parameter of ${catalog.pluginId} in the MZ Plugin Manager or through the CLI. The plugin entry must exist in js/plugins.js. The selection persists in that file, independently of game saves. Enable the provider and its dependencies to use it in the game; restart after configuration changes.`,
+        writing:`Run the CLI with --project pointing to the MZ game folder. ${namespace} parameters set or reset changes the selector only; install or the first edit of a functional parameter in inherit materializes own values. parameters get reports configuredSource and effectiveSource. Reload the editor after a CLI write.`,
         examples:[`${namespace} parameters get --path /CoretoConfigSource --json`,`${namespace} parameters set --path /CoretoConfigSource --value '\"own\"' --json`]};
 }
 

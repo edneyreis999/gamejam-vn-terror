@@ -1,3 +1,4 @@
+import {configureContext, failureDiagnostics} from './browser-protection.mjs';
 import { chromium } from 'playwright';
 import {createAudioCapture, audioCapture} from './audio-capture.mjs';
 import { mkdir, readFile, writeFile, realpath, appendFile } from 'node:fs/promises';
@@ -101,7 +102,7 @@ export async function runWithBrowser(browser, options) {
   return executeScenario(options, browser);
 }
 
-async function executeScenario({ project, fixture, output, adapter, caseModule, sources = [], diagnostic, onCancellationReady, onContext, signal }, fixtureBrowser) {
+async function executeScenario({ project, fixture, output, adapter, caseModule, sources = [], diagnostic, onCancellationReady, onContext, signal, diagnostics }, fixtureBrowser) {
   project = await realpath(project);
   fixture = await realpath(fixture);
   if (project === fixture) throw new Error('Prepare an isolated fixture before execution.');
@@ -124,6 +125,8 @@ async function executeScenario({ project, fixture, output, adapter, caseModule, 
   const executionTimeout = config.executionTimeoutMs ?? 600000, cleanupTimeout = config.cleanupTimeoutMs ?? 15000;
   const browserCleanupTimeout = config.cleanupTimeoutMs ?? (process.platform === 'win32' ? 120000 : 15000);
   if (![timeout,executionTimeout,cleanupTimeout].every(value=>Number.isSafeInteger(value)&&value>0)) throw new Error('Browser deadlines must be positive integer milliseconds.');
+  const ownsDiagnostics = !diagnostics;
+  diagnostics ??= failureDiagnostics({identity:{scenario:scenario.id}});
   const root = await resolveDestination(output);
   if (inside(fixture, root)) throw new Error('Evidence output must be outside the served fixture.');
   await mkdir(root);
@@ -239,6 +242,7 @@ async function executeScenario({ project, fixture, output, adapter, caseModule, 
         deviceScaleFactor: config.dpr, locale: config.locale, hasTouch: config.hasTouch ?? false,
         reducedMotion: config.reducedMotion ?? 'no-preference', storageState,
         ...((config.recordVideo || config.video) ? {recordVideo: {dir: join(root, 'video'), size: {width: config.width, height: config.height}}} : {})});
+      configureContext(context, {timeout, diagnostics});
       await onContext?.(context);
       await browserEvent('context-opened');
       context.once('close',()=>{eventWrites.push(browserEvent('context-closed').catch(error=>failure('browser-events',error)));});
@@ -469,6 +473,16 @@ async function executeScenario({ project, fixture, output, adapter, caseModule, 
     for (const artifact of report.checkpoints) if (digest(await readFile(join(root, artifact.path))) !== artifact.sha256) throw new Error(`Artifact integrity failure: ${artifact.path}`);
   } catch (error) { terminal = true; failure('execution', error); }
   finally {
+    if (report.failure) {
+      const evidence = await diagnostics.capture([report.failure]);
+      if (ownsDiagnostics) {
+        report.failureDiagnostics = evidence;
+        for (const {name, bytes} of diagnostics.screenshots) {
+          try { await writeFile(join(root, name), bytes); }
+          catch (error) { (report.failureDiagnostics.artifactErrors ??= []).push({name, message:error.message}); }
+        }
+      }
+    }
     interruptExecution = undefined;
     if (page && !page.isClosed()) {
       for (const [id, definition] of [...activeFaults].reverse()) await owned('fault:' + id, async () => {

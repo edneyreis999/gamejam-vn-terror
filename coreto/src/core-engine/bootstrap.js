@@ -58,6 +58,7 @@ function installCore() {
     installAudioCommands();
     installResourceLoading(settings);
     const openURL = installOpenUrl();
+    installBattlerConsumerCache();
     installBattlerParameters(settings);
     installBattlerLevels();
     installCoreDatabaseNotes();
@@ -85,6 +86,8 @@ function installCore() {
     installMessageCompatibility(active, settings, formatDigits, parameterIcon);
     installVictoryCoreCompatibility(active, settings, formatDigits, parameterIcon);
     installEquipCoreCompatibility(active, settings, formatDigits, parameterIcon);
+    installOptionsCoreCompatibility(active, settings, formatDigits, parameterIcon);
+    installItemsCoreCompatibility(active, settings, formatDigits, parameterIcon);
     installSaveLifecycle({normalizeSystem, normalizeBattle, normalizePicture});
     installNewGameSettings(settings);
 

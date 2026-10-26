@@ -1,3 +1,4 @@
+import {tooltipAuthoringCatalog} from './tooltip-authoring.mjs';
 import {configurationPublicField, publicDescriptor, validatePublicEntries, validateOperationalCatalog} from '../shared/public-api.mjs';
 import aniCatalog from '../ani-msg-text-effects/public-api.json' with {type:'json'};
 import extendedCatalog from '../ext-message-func/public-api.json' with {type:'json'};
@@ -10,14 +11,20 @@ export function describeMessageApi(catalog) {
         ? extendedAuthoringSchema(owner) : {...owner,tags:[],methods:[]},
         {commandExpectedHash:owner===aniCatalog}).map(entry => [entry.id,entry]));
     const schemas = schemaMap(catalog);
+    const tooltipSchemas = new Map(describeCoreApi(tooltipAuthoringCatalog(catalog)).map(entry=>[entry.id,entry]));
+    const tooltipAvailability = new Map(catalog.entries.map(entry=>[entry.id,entry.availability]));
+    for (const schema of tooltipSchemas.values()) {
+        for (const field of schema.fields ?? []) field.availability = tooltipAvailability.get(field.id) ?? field.availability;
+    }
     const delegatedSchemas = new Map();
     const entries = catalog.entries.map(entry => {
         const owner = entry.delegate ? (entry.delegate.catalog==='../ani-msg-text-effects/public-api.json'?aniCatalog:extendedCatalog) : catalog;
         const source = entry.delegate ? owner.entries.find(item => item.id === entry.id) : entry;
         if (!source) throw new Error(`Missing delegated descriptor: ${entry.id}`);
         if (entry.delegate && !delegatedSchemas.has(owner)) delegatedSchemas.set(owner,schemaMap(owner));
-        const schema = (entry.delegate ? delegatedSchemas.get(owner) : schemas).get(entry.id);
+        const schema = tooltipSchemas.get(entry.id) ?? (entry.delegate ? delegatedSchemas.get(owner) : schemas).get(entry.id);
         return publicDescriptor(configurationPublicField({...source,...schema,
+            ...(tooltipSchemas.has(entry.id)?{availability:source.availability,authoring:'cli-and-editor'}:{}),
             context: schema?.context === 'browser runtime' || schema?.context === 'browser runtime; authoring is offline'
                 ? source.context : schema?.context ?? source.context}, owner), 'message');
     });
@@ -35,9 +42,10 @@ export function messageHelp() {
         configuration: 'CoretoConfigSource: inherit lê toda a entrada original, mesmo desativada; own usa os parâmetros próprios. Install e a primeira edição funcional em inherit materializam own. Editar apenas o seletor não copia valores.',
         usage: 'node tools/coreto/cli.mjs message api list | message api describe <id|name|path> [--json]',
         discovery: 'message api list | message api describe <id|name|path>',
-        implemented: ['install', 'api list', 'api describe', 'language create', 'language convert', 'language validate', 'parameters get', 'parameters set', 'parameters reset', 'commands list', 'commands insert', 'commands update', 'commands remove', 'text get', 'text set', 'text validate', 'tags list', 'tags set', 'tags remove'],
+        implemented: ['install', 'api list', 'api describe', 'language create', 'language convert', 'language validate', 'parameters get', 'parameters set', 'parameters reset', 'commands list', 'commands insert', 'commands update', 'commands remove', 'text get', 'text set', 'text validate', 'tags list', 'tags set', 'tags remove', 'tooltips parameters get', 'tooltips parameters set', 'tooltips parameters reset', 'tooltips tags list', 'tooltips tags set', 'tooltips tags remove'],
         commands: 'message commands list|insert|update|remove --target <event selector> --command <ID> --index I|--before I [--value <json>] [--dry-run]',
         language: 'message language create|convert|validate [--format csv|tsv] [--name basename] [--from source.csv]',
+        tooltips: 'message tooltips --help: edit existing StateTooltips parameters and States notes without changing the original plugin.',
         parameters: 'message parameters get|set|reset --path /Group/Field [--value <json>] [--dry-run]',
         text: 'message text get|set|validate --target map:M/event:E/page:P --index I [--path text|speaker|choices|choice:N|zone] [--value <json>] [--dry-run]',
         tags: 'message tags list|set|remove --target map:M/event:E/page:P/text:I/text --tag MSG-RX-NNN [--value <json>] [--occurrence N] [--dry-run]',

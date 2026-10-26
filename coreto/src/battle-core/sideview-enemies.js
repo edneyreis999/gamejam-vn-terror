@@ -1,5 +1,4 @@
 function installBattleSideviewEnemies(settings) {
-    const data=new WeakMap();
     function choice(note,singular,plural,fallback) {
         const single=note.match(new RegExp('<'+singular+': ([^>]+)>','i'));
         if(single)return single[1];
@@ -12,21 +11,21 @@ function installBattleSideviewEnemies(settings) {
         for(const item of values){roll-=item.weight;if(roll<0)return item.value;}
         return fallback;
     }
-    Game_Enemy.prototype.clearBattleCoreData=function(){data.delete(this);};
+    Game_Enemy.prototype.clearBattleCoreData=function(){this._svBattlerData={};};
     Game_Enemy.prototype.setupBattleCoreData=function(){
         const note=this.enemy().note,config=settings.Enemy;
         const weapon=choice(note,'SIDEVIEW WEAPON','SIDEVIEW WEAPONS',null);
         const size=note.match(/<SIDEVIEW SIZE: (\d+), (\d+)>/i);
-        data.set(this,{
+        this._svBattlerData={
             name:choice(note,'SIDEVIEW BATTLER','SIDEVIEW BATTLERS',''),
             motionIdle:choice(note,'SIDEVIEW IDLE MOTION','SIDEVIEW IDLE MOTIONS',config.MotionIdle),
             wtypeId:weapon===null?config.WtypeId:Math.max(0,$dataSystem.weaponTypes.findIndex(name=>name.replace(/\\I\[\d+\]/gi,'').trim().toUpperCase()===weapon.toUpperCase())),
             collapse:/<SIDEVIEW NO COLLAPSE>/i.test(note)?false:/<SIDEVIEW COLLAPSE>/i.test(note)||config.AllowCollapse,
             width:size?Number(size[1]):config.Width,height:size?Number(size[2]):config.Height,
             anchorX:this.svBattlerAnchorX(),anchorY:this.svBattlerAnchorY(),shadow:this.svBattlerShadowVisible()
-        });
+        };
     };
-    Game_Enemy.prototype.svBattlerData=function(){if(!data.has(this))this.setupBattleCoreData();return data.get(this);};
+    Game_Enemy.prototype.svBattlerData=function(){if(this._svBattlerData===undefined)this.setupBattleCoreData();return this._svBattlerData;};
     Game_Enemy.prototype.hasSvBattler=function(){return !!this.svBattlerData().name;};
     Game_Enemy.prototype.svBattlerName=function(){return this.svBattlerData().name;};
     Game_Enemy.prototype.allowCollapse=function(){return !this.hasSvBattler()||this.svBattlerData().collapse;};
@@ -44,12 +43,12 @@ function installBattleSideviewEnemies(settings) {
         }
     };
     const transform=Game_Enemy.prototype.transform;
-    Game_Enemy.prototype.transform=function(...args){data.delete(this);return transform.apply(this,args);};
+    Game_Enemy.prototype.transform=function(...args){const result=transform.apply(this,args);this.setupBattleCoreData();return result;};
     const setup=Game_Enemy.prototype.setup;
     Game_Enemy.prototype.setup=function(id,x,y){
         const source=$dataEnemies[id],name=choice(source.note,'SWAP ENEMY','SWAP ENEMIES',null);
         const replacement=name&&$dataEnemies.find(enemy=>enemy&&enemy.name.toUpperCase()===name.toUpperCase());
-        data.delete(this);setup.call(this,replacement?replacement.id:id,x,y);
+        setup.call(this,replacement?replacement.id:id,x,y);this.setupBattleCoreData();
     };
     class Sprite_SvEnemy extends Sprite_Actor {
         setBattler(enemy){

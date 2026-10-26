@@ -11,7 +11,7 @@ Require one enabled entry and an installed source file for each provider, in thi
 5. Coreto_2_ExtMessageFunc
 6. Coreto_5_DesignSystem **1.3.0**
 
-Other plugins may appear between them. The applicator validates published parameter descriptors and previews every write before mutation. It uses the installed Coreto CLI and parser; it does not install, enable, reorder, regenerate or edit plugin sources. Install the matching DesignSystem plugin separately before applying the preset. A Coreto distribution containing `tools/coreto/cli.mjs` is required; `--coreto` makes cross-repository use explicit.
+Other plugins may appear between them. The applicator validates published parameter descriptors and previews every write before mutation. It uses the installed Coreto CLI and parser; it does not install, enable, reorder, regenerate or edit plugin sources. Use `node "<coreto>/tools/coreto/cli.mjs" design-system install --project "<game>" --dry-run --json`, then omit `--dry-run` to enable the delivered plugin after its dependencies. Apply the preset afterwards. A Coreto distribution containing `tools/coreto/cli.mjs` is required; `--coreto` makes cross-repository use explicit.
 
 Use `--profile coreto` for another game. Use `--profile dryland` for The Dryland Drowned's picture-role mappings. Both preserve additional existing picture roles, custom font families, languages, categories, option symbols, handlers and unrelated parameters. Reapplication deliberately restores every managed visual value. It replaces the drawing callback for the six recognized options: textLocale, textEffects, bgmVolume, bgsVolume, meVolume and seVolume. Unknown options retain their drawing code and are reported as `preservedCustomOptions`.
 
@@ -48,4 +48,4 @@ Restore accepts only values matching the original or applied values, validates a
 - `parameters set --path /Group/Field --value <JSON>`: set a field; object writes merge named fields. `--input <JSON-file>` avoids shell quoting for larger values.
 - `parameters reset --path /Group`: restore that group's default.
 
-Use `--dry-run` to preview writes and `--expected-hash <hash>` to guard a planned write. Restart playtest to reload parameters. Provider callbacks contain a snapshot of their managed preset values: changing a DesignSystem token alone does not rewrite those callbacks. For a shared-theme change, update the preset and reapply it.
+Use `--dry-run` to preview writes and `--expected-hash <hash>` to guard a planned write. Restart playtest to reload parameters. Provider callbacks contain a snapshot of their managed preset values: changing a DesignSystem token alone does not rewrite those callbacks. For a shared-theme default change, update the canonical catalog in the engine origin, distribute its matching plugin and skill, then reapply the preset. A preserved local skill with an incompatible catalog version fails before writes.

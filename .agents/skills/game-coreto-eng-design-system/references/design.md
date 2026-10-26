@@ -4,7 +4,7 @@
 
 Use warm parchment surfaces, dark brown text, purple for selection/action, gold for emphasis and red for errors. Preserve visible keyboard focus, hover, pressed and disabled states. The diamond identifies the focused choice; rounded surfaces retain native window clipping, openness and hit areas. Avoid adding decoration that competes with dialogue or portraits.
 
-Read exact colors, dimensions and typography from `../assets/preset.json`; keep that file authoritative for portable configuration. Cinzel Decorative carries titles, Averia Libre carries headings/speakers, Outfit carries body/input/helper text and Outfit Medium carries actions/menu/labels. Body text defaults to 20px; authored text escapes may override it. The reference composition is 1280×720. Longer localized choices wrap and grow rather than clip.
+Read exact colors, dimensions and typography with `design-system api describe /` through the installed Coreto CLI. Provider settings, profiles and the asset manifest live in `../assets/preset.json`. Cinzel Decorative carries titles, Averia Libre carries headings/speakers, Outfit carries body/input/helper text and Outfit Medium carries actions/menu/labels. Body text defaults to 20px; authored text escapes may override it. The reference composition is 1280×720. Longer localized choices wrap and grow rather than clip.
 
 ## Responsibility map
 
@@ -25,6 +25,6 @@ The provider callbacks are supported JavaScript parameters. Delegation here mean
 
 `../assets/drawing.js.txt` provides the common path/box/text/icon primitives. `../assets/option.js.txt`, `../assets/save-file.js.txt` and `../assets/save-contents.js.txt` supply focused callback bodies, composed by `../scripts/recipes.mjs`. Preserve native option getters, volume changes, save eligibility, localization and authored save descriptions. The templates consume provider-supplied `this`/arguments; avoid campaign mutation in presentation callbacks.
 
-The `assets` array in `../assets/preset.json` enumerates every bundled image/font/license, its destination and checksum. A changed asset requires updating its hash. The `fonts` array owns registrations; `settings` owns provider values; `defaults` owns DesignSystem defaults; `profiles` owns project-specific picture mappings. Keep plugin built-in defaults and metadata aligned when changing the default contract.
+The `assets` array in `../assets/preset.json` enumerates every bundled image/font/license, its destination and checksum. A changed asset requires updating its hash. The `fonts` array owns registrations; `settings` owns provider values; the installed DesignSystem catalog owns defaults; `profiles` owns project-specific picture mappings. Change the default contract in the engine source and regenerate its bundle; the installed engine remains frozen.
 
 For another game's custom pictures, set `/PictureRoles` to `{Image, Role}` entries using the dedicated CLI; valid roles are secondary, primary, card and panel. Image names refer to already installed `img/pictures` assets without extension. Preserve that game's existing mappings. Add a profile only when those mappings are meant to be reusable.

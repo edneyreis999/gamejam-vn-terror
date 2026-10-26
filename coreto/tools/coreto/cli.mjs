@@ -1,5 +1,10 @@
+import {stateTooltipsHelp,executeStateTooltipsCli} from './state-tooltips-cli.mjs';
+import {skillsStatesHelp,executeSkillsStatesCli} from './skills-states-cli.mjs';
+import {designSystemHelp,executeDesignSystemCli} from './design-system-cli.mjs';
+import {skillsHelp,executeSkillsCli} from './skills-cli.mjs';
 import {battleHelp,executeBattleCli} from './battle-cli.mjs';
 import {mainMenuHelp,executeMainMenuCli} from './main-menu-cli.mjs';
+import {itemsEquipsHelp,executeItemsEquipsCli} from './items-equips-cli.mjs';
 import {eventsMoveHelp,executeEventsMoveCli} from './events-move-cli.mjs';
 import {eventTitleSceneHelp,executeEventTitleSceneCli} from './event-title-scene-cli.mjs';
 import {messageVisibilityHelp,executeMessageVisibilityCli} from './message-visibility-cli.mjs';
@@ -10,7 +15,7 @@ import {optionsSaveHelp,executeOptionsSaveCli} from './options-save-cli.mjs';
 import {aniHelp,executeAniCli} from './ani-message-cli.mjs';
 import {installVn} from './vn-install.mjs';
 import {installConfiguredPlugin,configurationParameterOperation} from './configuration-authoring.mjs';
-import {migrateConfiguration} from './configuration-migrate.mjs';
+import {migrateConfiguration,configurationPlugins} from './configuration-migrate.mjs';
 import {vnAuthoringCatalog,vnParameterOperation} from './vn-authoring.mjs';
 import {validateVnProject} from './vn-validate.mjs';
 import {describeVnApi, vnHelp} from '../../src/vn-picture-busts/api-descriptors.mjs';
@@ -51,7 +56,11 @@ async function locateProject(explicit) {
 }
 
 function helpFor(positionals = []) {
+    if(positionals[0]==='design-system')return designSystemHelp();
+    if(positionals[0]==='skills')return skillsHelp();
     if(positionals[0]==='main-menu')return mainMenuHelp();
+    if(positionals[0]==='skills-states')return skillsStatesHelp();
+    if(positionals[0]==='items-equips')return itemsEquipsHelp();
     if(positionals[0]==='battle')return battleHelp();
     if(positionals[0]==='events-move')return eventsMoveHelp();
     if(['options','save'].includes(positionals[0]))return optionsSaveHelp(positionals);
@@ -59,7 +68,8 @@ function helpFor(positionals = []) {
         if(positionals.length>2||positionals[1]&&positionals[1]!=='migrate')throw new CoreError('INVALID_USAGE','Use config migrate --help.');
         return {usage:'node tools/coreto/cli.mjs [--project <root>] config migrate [--dry-run] [--json]',
             examples:['node tools/coreto/cli.mjs --project . config migrate --dry-run --json','node tools/coreto/cli.mjs --project rpg-maker-mz config migrate --json'],
-            writing:'Normalizes selectors of existing Coreto entries in one registry publication. Preserves functional parameters, flags and order. Dry-run and an already normalized registry do not write. Reload the editor afterwards.',
+            writing:'Normalizes missing or historical configuration selectors for the existing entries named in supportedProviders, in one registry publication. Other providers are left unchanged. Preserves functional parameters, flags, order and effective source selection. Dry-run and an already normalized registry do not write. Reload the editor afterwards.',
+            supportedProviders:configurationPlugins,
             implemented:['config migrate'],exitCodes:{0:'success',2:'invalid input',3:'missing target',4:'conflict; re-read before retrying',5:'IO failure'}};
     }
     if(positionals[0]==='ani-message')return aniHelp(positionals);
@@ -88,6 +98,7 @@ function helpFor(positionals = []) {
             writing:'A autoria escreve diretamente, salvo --dry-run. Recarregue o projeto no editor após escrever. Código JS é validado sem execução.',
             compatibility:'inherit lê a entrada legada, inclusive desativada. Install e a primeira edição funcional materializam own. Editar o seletor não copia valores. Recarregue no editor após escrever. O runtime exige os providers; a CLI permite preparar sua instalação.'};
     }
+    if (positionals[0] === 'message' && positionals[1] === 'tooltips') return stateTooltipsHelp();
     if (positionals[0] === 'message') {
         const [, group, operation, ...rest] = positionals;
         const operations = {install: [], api: ['list', 'describe'], language: ['create', 'convert', 'validate'], parameters: ['get', 'set', 'reset'], commands: ['list', 'insert', 'update', 'remove'], text: ['get', 'set', 'validate'], tags: ['list', 'set', 'remove']};
@@ -97,7 +108,7 @@ function helpFor(positionals = []) {
         return messageHelp();
     }
     const result = {
-        namespaces:['main-menu','events-move','battle','event-title-scene','message-visibility','attached-pictures','choice-common-events','picture-choices','core','message','vn','ext-message','ani-message','options','save','config'],
+        namespaces:['skills-states','design-system','skills','main-menu','items-equips','events-move','battle','event-title-scene','message-visibility','attached-pictures','choice-common-events','picture-choices','core','message','vn','ext-message','ani-message','options','save','config'],
         usage: "node tools/coreto/cli.mjs [--project <root>] core parameters get|set|reset --path <path> [--value <json> | --input <file>] [--dry-run] [--json]",
         discovery: "core api list | core api describe <id>",
         install: "core install [--dry-run] [--json] (uses an already delivered bundle)",
@@ -127,6 +138,7 @@ function helpFor(positionals = []) {
     result.metadata += " PictureCoordinatesMode also authors offline; exit saves the last displayed native position through the same service.";
     result.validate = "core validate --json (read-only diagnostics; no game execution)";
     result.implemented.push("validate", "install");
+    if (!positionals.length) result.integrations = 'StateTooltips (state tooltip appearance, position, vocabulary and supported windows): message api list, message api describe <id>, message tooltips --help. Authors can edit the existing external provider through message tooltips parameters and state descriptions through message tooltips tags.';
     if (!positionals.length) result.discovery += ' | config migrate [--dry-run] [--json] | message api list | message api describe <id> | vn api list | vn api describe <id> | ext-message api list | ext-message api describe <id> | ani-message api list | ani-message api describe <id>';
     const group = positionals[0] === "core" ? positionals[1] : undefined;
     const operation = positionals[2];
@@ -155,11 +167,20 @@ function helpFor(positionals = []) {
 function help(positionals = []) {
     if (!positionals.length) return helpFor();
     const [namespace, group, operation, id, ...rest] = positionals;
+    if(namespace==='message'&&group==='tooltips'){
+        const operations={parameters:['get','set','reset'],tags:['list','set','remove']};
+        if(rest.length||operation&&!operations[operation]||id&&!operations[operation]?.includes(id))throw new CoreError('INVALID_USAGE','Use message tooltips --help.');
+        return stateTooltipsHelp();
+    }
     const info = helpFor([namespace]);
+    if(namespace==='skills'){
+        if(positionals.length>3||group&&!['list','describe'].includes(group)||operation&&group!=='describe')throw new CoreError('INVALID_USAGE','Use skills --help.');
+        return info;
+    }
     const topics = Array.isArray(info.implemented)
         ? info.implemented.map(topic => topic.startsWith(namespace+' ') ? topic.slice(namespace.length+1) : topic)
         : Object.entries(info.implemented).flatMap(([name, operations]) => operations.length
-            ? operations.map(operation => name+' '+operation) : name === 'install' ? [name] : []);
+            ? operations.map(operation => name+' '+operation) : ['install', 'validate'].includes(name) ? [name] : []);
     const topic = [group, operation].filter(Boolean).join(' ');
     if (group && !topics.some(value => value === topic || !operation && value.startsWith(topic+' ')) ||
         id !== undefined && !(group === 'api' && operation === 'describe') || rest.length) {
@@ -189,8 +210,18 @@ async function executeCli(args, context) {
     } });
     context.operation = positionals.slice(0, 3).join(" ") || "help";
     context.target = values.target ?? values.path ?? positionals[3] ?? null;
-    if (values.help || !positionals.length) return { operation: "help", result: locatedHelp({...help(positionals), discoveryGuide: "Choose the relevant namespace, then use api list without --json for a compact complete index. Use api describe <id> for full documentation. api list --json retains all expanded descriptors and can exceed terminal/tool output limits; use the text index if that response is truncated."}) };
+    if (values.help || !positionals.length) {
+        const discoveryGuide = positionals[0] === 'skills'
+            ? 'Use skills list, then skills describe <name>. These operations inspect the installed package and do not accept --project; read the returned instructions path before applying a skill.'
+            : positionals[0] === 'config'
+                ? 'Use config migrate --help for supportedProviders and config migrate --dry-run --json with --project pointing to the game to inspect proposed selector changes.'
+                : 'Choose the relevant namespace, then use api list without --json for a compact complete index. Use api describe <id> for full documentation. api list --json retains all expanded descriptors and can exceed terminal/tool output limits; use the text index if that response is truncated.';
+        return {operation: 'help', result: locatedHelp({...help(positionals), discoveryGuide})};
+    }
     const [namespace, group, operation, id, ...rest] = positionals;
+    if(namespace==='message'&&group==='tooltips')return executeStateTooltipsCli(positionals,values,locateProject);
+    if(namespace==='design-system')return executeDesignSystemCli(positionals,values,locateProject);
+    if(namespace==='skills')return executeSkillsCli(positionals,values);
     if(namespace==='message-visibility')return executeMessageVisibilityCli(positionals,values,locateProject);
     if(namespace==='event-title-scene')return executeEventTitleSceneCli(positionals,values,locateProject);
     if(namespace==='attached-pictures')return executeAttachedPicturesCli(positionals,values,locateProject);
@@ -209,6 +240,8 @@ async function executeCli(args, context) {
     }
     if(namespace==='battle')return executeBattleCli(positionals,values,locateProject);
     if(namespace==='main-menu')return executeMainMenuCli(positionals,values,locateProject);
+    if(namespace==='skills-states')return executeSkillsStatesCli(positionals,values,locateProject);
+    if(namespace==='items-equips')return executeItemsEquipsCli(positionals,values,locateProject);
     if(namespace==='events-move')return executeEventsMoveCli(positionals,values,locateProject);
     if(['options','save'].includes(namespace))return executeOptionsSaveCli(positionals,values,locateProject);
     if(namespace==='ani-message')return executeAniCli(positionals,values,locateProject);
@@ -265,7 +298,7 @@ async function executeCli(args, context) {
     }
     if(values.replace)throw new CoreError('INVALID_USAGE','--replace belongs to vn install.');
     if (values.format || values.name || values.from) throw new CoreError('INVALID_USAGE', 'Language options require message language.');
-    if (!["core", "message", "vn", "ext-message"].includes(namespace) || rest.length) throw new CoreError("INVALID_USAGE", "Use the core namespace. Run --help for examples.");
+    if (!["core", "message", "vn", "ext-message"].includes(namespace) || rest.length) throw new CoreError("INVALID_USAGE", "Place the plugin namespace before api: <namespace> api list or <namespace> api describe <id>. Replace <namespace> with the plugin you want; do not add a core prefix for another plugin.");
     if (group === "api" && ["list", "describe"].includes(operation)) {
         const entries = describeCoreApi(catalog);
         if (operation === "list" && !id) return { operation: "core api list", result: entries };
@@ -365,7 +398,7 @@ function errorDetails(details, namespace) {
     const known = helpFor().namespaces.includes(namespace);
     const hint = discovery
         ? `Use ${namespace} api ${discovery.id ? 'describe '+discovery.id : 'list'} to inspect supported inputs.`
-        : known && namespace !== 'config'
+        : known && !['config','skills'].includes(namespace)
             ? `Run ${namespace} --help or ${namespace} api list to inspect supported targets and input.`
             : 'Run --help to inspect supported namespaces and input.';
     return {...rest, ...(diagnostics ? {diagnostics:diagnostics.map(item=>errorDetails(item,namespace))} : {}), hint:rest.hint ?? hint};
@@ -383,6 +416,9 @@ export async function runCli(args) {
         return { ...context, ...result };
     } catch (error) {
         Object.assign(error, context);
+        if (error.code === 'ERR_PARSE_ARGS_UNKNOWN_OPTION' && args.includes('--namespace')) {
+            error.details = {hint: 'Namespace is a positional argument before api, not a flag. Use <namespace> api list or <namespace> api describe <id>.'};
+        }
         if (error instanceof CoreError) {
             error.details = errorDetails(error.details, context.operation?.split(' ')[0]);
         }

@@ -59,7 +59,7 @@
  * @param Options:struct
  * @text Options Settings
  * @type struct<Options>
- * @desc Options settings for Animated Message Text Effects.
+ * @desc Controls the automatic Text Effects option entry and its label; the player toggle uses ConfigManager.textEffects, defaults to true when absent, and is persisted with game options rather than game saves. AdjustRect is parsed compatibility data with no geometry effect.
  * @default {"Options":"","AddOption:eval":"true","AdjustRect:eval":"true","Name:str":"Text Effects"}
  *
  */
@@ -113,7 +113,7 @@
  * @param ForcedColor:str
  * @text Forced Color
  * @type text
- * @desc Forced glyph text color: use a string containing an MZ text-color palette number, such as "2", or a CSS color such as "#ff0000". An empty string keeps the normal message color.
+ * @desc Forced text-glyph color: use a string containing an MZ text-color palette number, such as "2", or a CSS color such as "#ff0000". An empty string keeps the normal message color. This affects letter bitmap drawing, not IconSet icon pixels; hue and tone can still affect both letters and icons.
  * @default 
  *
  * @param HueShift:num
@@ -137,19 +137,19 @@
  * @param toneDelay:num
  * @text Frame Delay
  * @type number
- * @desc Delay in game update frames between tone changes. The effective delay is max(value, 1), so the published default 0 advances every frame. Use whole frame counts; an empty tone sequence ignores this field.
+ * @desc Delay in game update frames between tone changes, aligned to global Graphics.frameCount multiples of max(value, 1). The published default 0 therefore advances every frame; a newly created glyph joins the global phase rather than waiting a full private delay. Use whole frame counts; an empty tone sequence ignores this field.
  * @default 0
  *
  * @param InitialToneOffset:num
  * @text Offset Modifier
  * @type text
- * @desc Initial tone-sequence offset in whole tone entries per glyph. Initial index is (offset * glyphIndex + floor(Graphics.frameCount / max(toneDelay, 1))) wrapped to the sequence length; negative offsets wrap too. Zero starts glyphs together. Use whole numbers to avoid a missing array entry; an empty tone sequence ignores this field.
+ * @desc Initial tone-sequence offset in whole tone entries per glyph. Initial index is (offset * glyphIndex + floor(Graphics.frameCount / max(toneDelay, 1))) wrapped to the sequence length; negative offsets wrap too. Zero adds no per-glyph offset; the initial tone still follows the global frame phase. Use whole numbers to avoid a missing array entry; an empty tone sequence ignores this field.
  * @default 0
  *
  * @param SmoothToneChange:eval
  * @text Smooth Transition?
  * @type boolean
- * @desc Make a smooth transition for tone changes?
+ * @desc JavaScript script string evaluated once at configuration loading. A truthy completion value smoothly interpolates channels toward the next tone between global toneDelay boundaries; false jumps at each boundary. Requires at least two colorTones and an effective delay greater than one for visible interpolation. This does not interpolate hue or forced text color.
  * @default false
  *
  */
@@ -194,13 +194,13 @@
  * @param patternDelay:num
  * @text Frame Delay
  * @type number
- * @desc Delay in game update frames between opacity-pattern steps. The effective delay is max(value, 1), so the published default 0 advances every frame. Use whole frame counts; an empty pattern ignores this field.
+ * @desc Delay in game update frames between opacity-pattern steps. The effective delay is max(value, 1), so the published default 0 advances every frame. Steps occur when Graphics.frameCount is divisible by that delay, not after a private per-glyph countdown; the first step can occur sooner than a full delay. Use whole frame counts; an empty pattern ignores this field.
  * @default 0
  *
  * @param patternOffset:num
  * @text Offset Modifier
  * @type text
- * @desc Initial pattern position in characters per glyph: index = patternOffset * glyphIndex, wrapped to the pattern length, including negative values. Use whole numbers; character lookup truncates any fractional index. Each update step advances one character and wraps. Zero synchronizes glyphs; an empty pattern ignores this field.
+ * @desc Initial pattern position in characters per glyph: index = patternOffset * glyphIndex, wrapped to the pattern length, including negative values. Use whole numbers; character lookup truncates fractional indices. Each update step advances one character and wraps. Zero starts every new glyph at the first character, but glyphs created at different times need not remain synchronized. An empty pattern ignores this field.
  * @default 0
  *
  */
@@ -296,7 +296,7 @@
  * @param PulseGrowthX:num
  * @text Growth
  * @type text
- * @desc X-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, applied with the flip and message-window scale. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.
+ * @desc X-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, multiplied by the flip and max(messageWindow.scale.x, messageWindow.scale.y) on both axes. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.
  * @default 0
  *
  * @param PulseSpeedX:num
@@ -314,7 +314,7 @@
  * @param PulseGrowthY:num
  * @text Growth
  * @type text
- * @desc Y-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, applied with the flip and message-window scale. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.
+ * @desc Y-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, multiplied by the flip and max(messageWindow.scale.x, messageWindow.scale.y) on both axes. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.
  * @default 0
  *
  * @param PulseSpeedY:num
@@ -335,7 +335,7 @@
  * @param AddOption:eval
  * @text Add Option?
  * @type boolean
- * @desc Add the 'Text Effects' option to the Options menu?
+ * @desc JavaScript script string evaluated at boot: a truthy completion value appends the textEffects toggle to the native General Options command list; false omits that automatic entry. It does not enable or disable effects itself. The saved ConfigManager.textEffects value controls selection; absent configuration defaults to true. Custom Options Core menus may expose the same symbol independently.
  * @default true
  *
  * @param AdjustRect:eval
@@ -347,7 +347,7 @@
  * @param Name:str
  * @text Option Name
  * @type text
- * @desc Command name of the option.
+ * @desc Plain label for the textEffects option. An empty string leaves the option unlabeled rather than disabling it; AddOption controls automatic insertion. The player toggle is stored as ConfigManager.textEffects, independently of this label and game save files.
  * @default Text Effects
  *
  */
@@ -402,7 +402,8 @@ const catalog = {
             "nativeDefault": "Untitled",
             "type": "string",
             "default": "Untitled",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-006.",
+            "writing": "Use ani-message effects list --family AngleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /AngleEffects/I/Name --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-018",
@@ -414,7 +415,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-006.",
+            "writing": "Use ani-message effects list --family AngleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /AngleEffects/I/PendulumArc --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-019",
@@ -426,7 +428,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-006.",
+            "writing": "Use ani-message effects list --family AngleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /AngleEffects/I/PendulumSpeed --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-020",
@@ -438,7 +441,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-006.",
+            "writing": "Use ani-message effects list --family AngleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /AngleEffects/I/PendulumOffset --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-022",
@@ -450,7 +454,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-006.",
+            "writing": "Use ani-message effects list --family AngleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /AngleEffects/I/RotationSpeed --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-023",
@@ -462,7 +467,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-006.",
+            "writing": "Use ani-message effects list --family AngleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /AngleEffects/I/RotationOffset --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           }
         ],
         "default": {
@@ -644,7 +650,12 @@ const catalog = {
           "RotationOffset": 15
         }
       ],
-      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. parameters set of this family requires the complete replacement array of complete logical preset objects. effects insert accepts partial fields and fills item defaults; effects update merges supplied fields with the selected preset. Use effects list --family AngleEffects to obtain effective indices and result.fileHash. [] removes every configured preset in this family. The published family default is the shipped list, while items.default is the neutral Untitled template for a newly inserted item.",
+      "examples": [
+        "ani-message effects list --family AngleEffects --json",
+        "ani-message effects update --family AngleEffects --index 0 --value '{\"Name\":\"MyEffect\"}' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "writing": "Use ani-message effects list --family AngleEffects --json and select a current zero-based index/fileHash. effects insert/update accept a partial logical object; parameters set of /AngleEffects or a whole item requires complete objects. Indexed preset writes require --expected-hash HASH_FROM_LIST. Examples use illustrative index 0; renaming does not rewrite texts. CLI writes configuration for the next game boot."
     },
     {
       "id": "ANI-M-007",
@@ -669,19 +680,21 @@ const catalog = {
             "nativeDefault": "Untitled",
             "type": "string",
             "default": "Untitled",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/Name --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-026",
             "key": "ForcedColor",
             "storageKey": "ForcedColor:str",
             "label": "Forced Color",
-            "description": "Forced glyph text color: use a string containing an MZ text-color palette number, such as \"2\", or a CSS color such as \"#ff0000\". An empty string keeps the normal message color.",
+            "description": "Forced text-glyph color: use a string containing an MZ text-color palette number, such as \"2\", or a CSS color such as \"#ff0000\". An empty string keeps the normal message color. This affects letter bitmap drawing, not IconSet icon pixels; hue and tone can still affect both letters and icons.",
             "editorType": "text",
             "nativeDefault": "",
             "type": "string",
             "default": "",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/ForcedColor --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-028",
@@ -693,7 +706,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/HueShift --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-029",
@@ -705,7 +719,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/InitialHueOffset --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-031",
@@ -718,49 +733,65 @@ const catalog = {
             "type": "array",
             "items": {
               "type": "string",
-              "javascript": "script",
+              "javascript": {
+                "kind": "script",
+                "receiver": "VisuMZ namespace object during parameter conversion",
+                "arguments": [],
+                "returnType": "array of four finite numbers [red,green,blue,gray]",
+                "context": "Executed once at plugin boot by a non-strict direct eval in the native parameter converter. this is VisuMZ; no callback arguments are provided. Use a script whose final completion value is the required value, such as true or [40,0,0,0], without a top-level return. Game objects such as $gameVariables may not exist at boot. The CLI validates syntax without executing it; evaluation errors prevent plugin initialization."
+              },
               "default": "",
               "editorType": "text"
             },
             "default": [],
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007. Each tone source string uses the boot-time script contract in items.javascript; the returned array is consumed as a color tone.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/colorTones --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-032",
             "key": "toneDelay",
             "storageKey": "toneDelay:num",
             "label": "Frame Delay",
-            "description": "Delay in game update frames between tone changes. The effective delay is max(value, 1), so the published default 0 advances every frame. Use whole frame counts; an empty tone sequence ignores this field.",
+            "description": "Delay in game update frames between tone changes, aligned to global Graphics.frameCount multiples of max(value, 1). The published default 0 therefore advances every frame; a newly created glyph joins the global phase rather than waiting a full private delay. Use whole frame counts; an empty tone sequence ignores this field.",
             "editorType": "number",
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/toneDelay --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-033",
             "key": "InitialToneOffset",
             "storageKey": "InitialToneOffset:num",
             "label": "Offset Modifier",
-            "description": "Initial tone-sequence offset in whole tone entries per glyph. Initial index is (offset * glyphIndex + floor(Graphics.frameCount / max(toneDelay, 1))) wrapped to the sequence length; negative offsets wrap too. Zero starts glyphs together. Use whole numbers to avoid a missing array entry; an empty tone sequence ignores this field.",
+            "description": "Initial tone-sequence offset in whole tone entries per glyph. Initial index is (offset * glyphIndex + floor(Graphics.frameCount / max(toneDelay, 1))) wrapped to the sequence length; negative offsets wrap too. Zero adds no per-glyph offset; the initial tone still follows the global frame phase. Use whole numbers to avoid a missing array entry; an empty tone sequence ignores this field.",
             "editorType": "text",
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/InitialToneOffset --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-034",
             "key": "SmoothToneChange",
             "storageKey": "SmoothToneChange:eval",
             "label": "Smooth Transition?",
-            "description": "Make a smooth transition for tone changes?",
+            "description": "JavaScript script string evaluated once at configuration loading. A truthy completion value smoothly interpolates channels toward the next tone between global toneDelay boundaries; false jumps at each boundary. Requires at least two colorTones and an effective delay greater than one for visible interpolation. This does not interpolate hue or forced text color.",
             "editorType": "boolean",
             "nativeDefault": "false",
             "type": "string",
-            "javascript": "script",
+            "javascript": {
+              "kind": "script",
+              "receiver": "VisuMZ namespace object during parameter conversion",
+              "arguments": [],
+              "returnType": "boolean-like completion value",
+              "context": "Executed once at plugin boot by a non-strict direct eval in the native parameter converter. this is VisuMZ; no callback arguments are provided. Use a script whose final completion value is the required value, such as true or [40,0,0,0], without a top-level return. Game objects such as $gameVariables may not exist at boot. The CLI validates syntax without executing it; evaluation errors prevent plugin initialization."
+            },
             "default": "false",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-007.",
+            "writing": "Use ani-message effects list --family ColorEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ColorEffects/I/SmoothToneChange --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           }
         ],
         "default": {
@@ -1226,7 +1257,12 @@ const catalog = {
           "SmoothToneChange": "true"
         }
       ],
-      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. parameters set of this family requires the complete replacement array of complete logical preset objects. effects insert accepts partial fields and fills item defaults; effects update merges supplied fields with the selected preset. Use effects list --family ColorEffects to obtain effective indices and result.fileHash. [] removes every configured preset in this family. The published family default is the shipped list, while items.default is the neutral Untitled template for a newly inserted item.",
+      "examples": [
+        "ani-message effects list --family ColorEffects --json",
+        "ani-message effects update --family ColorEffects --index 0 --value '{\"Name\":\"MyEffect\"}' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "writing": "Use ani-message effects list --family ColorEffects --json and select a current zero-based index/fileHash. effects insert/update accept a partial logical object; parameters set of /ColorEffects or a whole item requires complete objects. Indexed preset writes require --expected-hash HASH_FROM_LIST. Examples use illustrative index 0; renaming does not rewrite texts. CLI writes configuration for the next game boot."
     },
     {
       "id": "ANI-M-008",
@@ -1251,7 +1287,8 @@ const catalog = {
             "nativeDefault": "Untitled",
             "type": "string",
             "default": "Untitled",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/Name --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-037",
@@ -1263,7 +1300,8 @@ const catalog = {
             "nativeDefault": "255",
             "type": "number",
             "default": 255,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/InitialOpacity --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-039",
@@ -1275,7 +1313,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/glowRate --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-040",
@@ -1287,7 +1326,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/glowSpeed --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-041",
@@ -1299,7 +1339,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/glowOffset --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-043",
@@ -1311,31 +1352,34 @@ const catalog = {
             "nativeDefault": "",
             "type": "string",
             "default": "",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/pattern --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-044",
             "key": "patternDelay",
             "storageKey": "patternDelay:num",
             "label": "Frame Delay",
-            "description": "Delay in game update frames between opacity-pattern steps. The effective delay is max(value, 1), so the published default 0 advances every frame. Use whole frame counts; an empty pattern ignores this field.",
+            "description": "Delay in game update frames between opacity-pattern steps. The effective delay is max(value, 1), so the published default 0 advances every frame. Steps occur when Graphics.frameCount is divisible by that delay, not after a private per-glyph countdown; the first step can occur sooner than a full delay. Use whole frame counts; an empty pattern ignores this field.",
             "editorType": "number",
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/patternDelay --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-045",
             "key": "patternOffset",
             "storageKey": "patternOffset:num",
             "label": "Offset Modifier",
-            "description": "Initial pattern position in characters per glyph: index = patternOffset * glyphIndex, wrapped to the pattern length, including negative values. Use whole numbers; character lookup truncates any fractional index. Each update step advances one character and wraps. Zero synchronizes glyphs; an empty pattern ignores this field.",
+            "description": "Initial pattern position in characters per glyph: index = patternOffset * glyphIndex, wrapped to the pattern length, including negative values. Use whole numbers; character lookup truncates fractional indices. Each update step advances one character and wraps. Zero starts every new glyph at the first character, but glyphs created at different times need not remain synchronized. An empty pattern ignores this field.",
             "editorType": "text",
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-008.",
+            "writing": "Use ani-message effects list --family OpacityEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /OpacityEffects/I/patternOffset --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           }
         ],
         "default": {
@@ -1531,7 +1575,12 @@ const catalog = {
           "patternOffset": 0
         }
       ],
-      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. parameters set of this family requires the complete replacement array of complete logical preset objects. effects insert accepts partial fields and fills item defaults; effects update merges supplied fields with the selected preset. Use effects list --family OpacityEffects to obtain effective indices and result.fileHash. [] removes every configured preset in this family. The published family default is the shipped list, while items.default is the neutral Untitled template for a newly inserted item.",
+      "examples": [
+        "ani-message effects list --family OpacityEffects --json",
+        "ani-message effects update --family OpacityEffects --index 0 --value '{\"Name\":\"MyEffect\"}' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "writing": "Use ani-message effects list --family OpacityEffects --json and select a current zero-based index/fileHash. effects insert/update accept a partial logical object; parameters set of /OpacityEffects or a whole item requires complete objects. Indexed preset writes require --expected-hash HASH_FROM_LIST. Examples use illustrative index 0; renaming does not rewrite texts. CLI writes configuration for the next game boot."
     },
     {
       "id": "ANI-M-009",
@@ -1556,7 +1605,8 @@ const catalog = {
             "nativeDefault": "Untitled",
             "type": "string",
             "default": "Untitled",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/Name --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-049",
@@ -1568,7 +1618,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/ShakeStrengthHorz --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-050",
@@ -1580,7 +1631,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/ShakeStrengthVert --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-052",
@@ -1592,7 +1644,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/WaveDistanceX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-053",
@@ -1604,7 +1657,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/WaveSpeedX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-054",
@@ -1616,7 +1670,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/WaveOffsetX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-056",
@@ -1628,7 +1683,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/WaveDistanceY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-057",
@@ -1640,7 +1696,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/WaveSpeedY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-058",
@@ -1652,7 +1709,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-009.",
+            "writing": "Use ani-message effects list --family PositionEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /PositionEffects/I/WaveOffsetY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           }
         ],
         "default": {
@@ -1966,7 +2024,12 @@ const catalog = {
           "WaveOffsetY": 2
         }
       ],
-      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. parameters set of this family requires the complete replacement array of complete logical preset objects. effects insert accepts partial fields and fills item defaults; effects update merges supplied fields with the selected preset. Use effects list --family PositionEffects to obtain effective indices and result.fileHash. [] removes every configured preset in this family. The published family default is the shipped list, while items.default is the neutral Untitled template for a newly inserted item.",
+      "examples": [
+        "ani-message effects list --family PositionEffects --json",
+        "ani-message effects update --family PositionEffects --index 0 --value '{\"Name\":\"MyEffect\"}' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "writing": "Use ani-message effects list --family PositionEffects --json and select a current zero-based index/fileHash. effects insert/update accept a partial logical object; parameters set of /PositionEffects or a whole item requires complete objects. Indexed preset writes require --expected-hash HASH_FROM_LIST. Examples use illustrative index 0; renaming does not rewrite texts. CLI writes configuration for the next game boot."
     },
     {
       "id": "ANI-M-010",
@@ -1991,7 +2054,8 @@ const catalog = {
             "nativeDefault": "Untitled",
             "type": "string",
             "default": "Untitled",
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/Name --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-062",
@@ -2003,7 +2067,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/FlipSpeedX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-063",
@@ -2015,7 +2080,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/FlipOffsetX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-065",
@@ -2027,7 +2093,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/FlipSpeedY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-066",
@@ -2039,19 +2106,21 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/FlipOffsetY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-068",
             "key": "PulseGrowthX",
             "storageKey": "PulseGrowthX:num",
             "label": "Growth",
-            "description": "X-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, applied with the flip and message-window scale. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.",
+            "description": "X-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, multiplied by the flip and max(messageWindow.scale.x, messageWindow.scale.y) on both axes. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.",
             "editorType": "text",
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/PulseGrowthX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-069",
@@ -2063,7 +2132,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/PulseSpeedX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-070",
@@ -2075,19 +2145,21 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/PulseOffsetX --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-072",
             "key": "PulseGrowthY",
             "storageKey": "PulseGrowthY:num",
             "label": "Growth",
-            "description": "Y-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, applied with the flip and message-window scale. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.",
+            "description": "Y-axis pulse growth factor: multiplier = 1 + cos(phase) * growth/2, multiplied by the flip and max(messageWindow.scale.x, messageWindow.scale.y) on both axes. Zero disables pulsing. For growth 1, scale ranges from 0.5 to 1.5 times the base; negative growth reverses the pulse. Values with abs(growth)>2 can mirror the glyph. Use finite values; no additional clamp.",
             "editorType": "text",
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/PulseGrowthY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-073",
@@ -2099,7 +2171,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/PulseSpeedY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           },
           {
             "id": "ANI-M-074",
@@ -2111,7 +2184,8 @@ const catalog = {
             "nativeDefault": "0",
             "type": "number",
             "default": 0,
-            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+            "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. For defaults, whole-object writes and preset operations, see ani-message api describe ANI-M-010.",
+            "writing": "Use ani-message effects list --family ScaleEffects --json to choose index I and result.fileHash, then ani-message parameters set --path /ScaleEffects/I/PulseOffsetY --value <JSON> --expected-hash HASH_FROM_LIST [--dry-run]. The illustrative index 0 in the read example must exist; whole-item writes require every field."
           }
         ],
         "default": {
@@ -2403,14 +2477,19 @@ const catalog = {
           "PulseOffsetY": 33
         }
       ],
-      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect."
+      "context": "Edit a named preset in this family. In Show Text, use \\EFFECT<MyEffect>animated text<CLEAR EFFECTS>, with MyEffect replaced by your preset Name. Names are case-insensitive; blank and Untitled names are ignored. Text Effects must be enabled in game options. Effects apply to subsequent message glyphs/icons and reset at a new page; other windows do not animate this text. Numeric animation units use game update frames, normally about 60 per second. Selection splits preset names on commas and combines them in the specified order; later selected fields override earlier ones. During loading, duplicate normalized names merge in array order, then in family order Angle, Color, Opacity, Position, Scale; later fields win. Avoid commas in names and reserve normal for clearing the active effect. For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. parameters set of this family requires the complete replacement array of complete logical preset objects. effects insert accepts partial fields and fills item defaults; effects update merges supplied fields with the selected preset. Use effects list --family ScaleEffects to obtain effective indices and result.fileHash. [] removes every configured preset in this family. The published family default is the shipped list, while items.default is the neutral Untitled template for a newly inserted item.",
+      "examples": [
+        "ani-message effects list --family ScaleEffects --json",
+        "ani-message effects update --family ScaleEffects --index 0 --value '{\"Name\":\"MyEffect\"}' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "writing": "Use ani-message effects list --family ScaleEffects --json and select a current zero-based index/fileHash. effects insert/update accept a partial logical object; parameters set of /ScaleEffects or a whole item requires complete objects. Indexed preset writes require --expected-hash HASH_FROM_LIST. Examples use illustrative index 0; renaming does not rewrite texts. CLI writes configuration for the next game boot."
     },
     {
       "id": "ANI-M-011",
       "key": "Options",
       "storageKey": "Options:struct",
       "label": "Options Settings",
-      "description": "Options settings for Animated Message Text Effects.",
+      "description": "Controls the automatic Text Effects option entry and its label; the player toggle uses ConfigManager.textEffects, defaults to true when absent, and is persisted with game options rather than game saves. AdjustRect is parsed compatibility data with no geometry effect.",
       "editorType": "struct<Options>",
       "nativeDefault": "{\"Options\":\"\",\"AddOption:eval\":\"true\",\"AdjustRect:eval\":\"true\",\"Name:str\":\"Text Effects\"}",
       "type": "struct",
@@ -2421,12 +2500,19 @@ const catalog = {
           "key": "AddOption",
           "storageKey": "AddOption:eval",
           "label": "Add Option?",
-          "description": "Add the 'Text Effects' option to the Options menu?",
+          "description": "JavaScript script string evaluated at boot: a truthy completion value appends the textEffects toggle to the native General Options command list; false omits that automatic entry. It does not enable or disable effects itself. The saved ConfigManager.textEffects value controls selection; absent configuration defaults to true. Custom Options Core menus may expose the same symbol independently.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "script",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object during parameter conversion",
+            "arguments": [],
+            "returnType": "boolean-like completion value",
+            "context": "Executed once at plugin boot by a non-strict direct eval in the native parameter converter. this is VisuMZ; no callback arguments are provided. Use a script whose final completion value is the required value, such as true or [40,0,0,0], without a top-level return. Game objects such as $gameVariables may not exist at boot. The CLI validates syntax without executing it; evaluation errors prevent plugin initialization."
+          },
+          "default": "true",
+          "context": "For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. See ani-message api describe ANI-M-011 for option state, whole-object default and persistence. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. "
         },
         {
           "id": "ANI-M-077",
@@ -2437,26 +2523,35 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "script",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object during parameter conversion",
+            "arguments": [],
+            "returnType": "ignored compatibility value",
+            "context": "Executed once at plugin boot by a non-strict direct eval in the native parameter converter. this is VisuMZ; no callback arguments are provided. Use a script whose final completion value is the required value, such as true or [40,0,0,0], without a top-level return. Game objects such as $gameVariables may not exist at boot. The CLI validates syntax without executing it; evaluation errors prevent plugin initialization."
+          },
+          "default": "true",
+          "context": "For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. See ani-message api describe ANI-M-011 for option state, whole-object default and persistence. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. "
         },
         {
           "id": "ANI-M-078",
           "key": "Name",
           "storageKey": "Name:str",
           "label": "Option Name",
-          "description": "Command name of the option.",
+          "description": "Plain label for the textEffects option. An empty string leaves the option unlabeled rather than disabling it; AddOption controls automatic insertion. The player toggle is stored as ConfigManager.textEffects, independently of this label and game save files.",
           "editorType": "text",
           "nativeDefault": "Text Effects",
           "type": "string",
-          "default": "Text Effects"
+          "default": "Text Effects",
+          "context": "For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. See ani-message api describe ANI-M-011 for option state, whole-object default and persistence. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. "
         }
       ],
       "default": {
         "AddOption": "true",
         "AdjustRect": "true",
         "Name": "Text Effects"
-      }
+      },
+      "context": " For activation and runtime lifetime, see ani-message api describe ANI-BEH-glyph-lifecycle. The CLI stores native values in js/plugins.js without evaluating code; restart the game to rebuild the preset lookup. Missing native fields use their published field defaults; empty native containers remain empty. Resetting a whole family restores its shipped preset list, while resetting a leaf uses that leaf default. Renaming/removing a preset does not update Show Text references. "
     }
   ],
   "commands": [],
@@ -2638,6 +2733,8 @@ function encodeValue(schema, value, path, previous) {
         const encoded = previous === undefined ? [] : parseLayer(previous, path);
         return JSON.stringify(value.map((item, index) => encodeValue(schema.items, item, `${path}/${index}`, encoded[index])));
     }
+    // A whole-object edit must not reformat an untouched native numeric field.
+    if (schema.type === "number" && typeof previous === "string" && previous.trim() !== "" && Number(previous) === value) return previous;
     return schema.encoding === "json" ? JSON.stringify(value) : String(value);
 }
 

@@ -4,6 +4,7 @@ import {parsePluginsFile,replacePlugin} from './plugins-file.mjs';
 import {readSnapshot,writeSnapshot,hash} from './files.mjs';
 
 export const configurationPlugins = [
+    'Coreto_1_ItemsEquipsCore',
     'Coreto_0_CoreEngine', 'Coreto_1_BattleCore', 'Coreto_1_MessageCore', 'Coreto_2_VNPictureBusts',
     'Coreto_2_ExtMessageFunc', 'Coreto_2_AniMsgTextEffects',
     'Coreto_1_OptionsCore', 'Coreto_1_SaveCore', 'Coreto_2_PictureChoices', 'Coreto_3_ChoiceCmnEvts', 'Coreto_4_EventTitleScene', 'Coreto_4_AttachedPictures', 'Coreto_4_MessageVisibility'

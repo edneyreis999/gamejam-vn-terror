@@ -21,7 +21,7 @@ export function describeCoreApi(catalog, {commandExpectedHash = false} = {}) {
                 ? `${namespace} parameters get --path ${pathToken(path.replaceAll('{index}', '0'))} --json`
                 : `${namespace} api describe ${command} --json`;
             const operational = configurationPublicField(field, catalog);
-            const writing = surface === 'parameter' ? `${namespace} parameters set --path ${pathToken(path.replaceAll('{index}', '0'))} --value <JSON> [--dry-run] [--json]. Use the field type, default and limits to choose the JSON value. Run the CLI with --project pointing to the MZ game folder; the plugin entry must exist in js/plugins.js. Reload the editor after writing.` : undefined;
+            const writing = surface === 'parameter' ? `${namespace} parameters set --path ${pathToken(path.replaceAll('{index}', '0'))} --value <JSON> [--dry-run] [--json]. Use the field type, default and limits to choose the JSON value. Run the CLI with --project pointing to the MZ game folder; the plugin entry must exist in js/plugins.js. These registry settings persist independently of game saves and are read at boot. Reload the editor after writing and restart the game to use the new configuration.` : undefined;
             add({...operational, surface, context: operational.context ?? 'browser runtime; authoring is offline',
                 ...(writing ? {writing:operational.writing ?? writing} : {}), examples: operational.examples ?? [example]}, {surface, path, ...(command ? {command} : {})}, field);
             if (field.type === 'struct') fields(field.fields, path, surface, command);
@@ -31,12 +31,12 @@ export function describeCoreApi(catalog, {commandExpectedHash = false} = {}) {
     fields(catalog.parameters, '', 'parameter');
     for (const command of catalog.commands) {
         add({...command, surface: 'command', context: command.context ?? command.environment ?? 'browser runtime',
-            writing: command.writing ?? `Use an existing target and insertion index from commands list${commandExpectedHash ? '; pass its result.fileHash as --expected-hash. ' : '. This command interface does not accept --expected-hash; each edit checks the file snapshot read by that operation. '}Run the CLI with --project pointing to the MZ game folder. The command executes later when the game interpreter reaches it; authoring does not run it.`,
+            writing: command.writing ?? `Use an existing target and insertion index from commands list${commandExpectedHash === 'optional' ? '; its result.fileHash can be passed as optional --expected-hash to reject a stale selection. ' : commandExpectedHash ? '; pass its result.fileHash as required --expected-hash. ' : '. This command interface does not accept --expected-hash; each edit checks the file snapshot read by that operation. '}Run the CLI with --project pointing to the MZ game folder. The command executes later when the game interpreter reaches it; authoring does not run it.`,
             examples: command.examples ?? [`${namespace} commands list --target common-event:1 --json`, `${namespace} commands insert --target common-event:1 --before 0 --command ${command.key} --value ${quote(JSON.stringify(Object.fromEntries(command.args.map(field => [field.key, field.default]))))}${commandExpectedHash ? ' --expected-hash HASH_FROM_LIST' : ''}`]},
         {surface: 'command', path: `/commands/${command.key}`}, command);
         fields(command.args, `/commands/${command.key}`, 'command-argument', command.key);
     }
     for (const tag of catalog.tags) add({...tag, surface: 'tag', context: tag.context ?? 'native authoring field; interpreted by browser runtime'}, {surface: 'tag', path: `/tags/${tag.key}`}, tag);
-    for (const method of catalog.methods) add({...method, surface: 'method', context: method.context ?? 'browser runtime only; CLI describes but never invokes this method', examples: [method.example]}, {surface: 'method', path: `/methods/${method.id}`}, method);
+    for (const method of catalog.methods) add({...method, surface: 'method', context: method.context ?? 'browser runtime only; CLI describes but never invokes this method', examples: method.examples ?? [method.example]}, {surface: 'method', path: `/methods/${method.id}`}, method);
     return validatePublicEntries(catalog.namespace ?? catalog.pluginId, [...entries.values()]);
 }

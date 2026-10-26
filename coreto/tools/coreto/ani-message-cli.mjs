@@ -20,7 +20,7 @@ export function aniHelp(positionals){
         language:undefined,tags:undefined,validate:undefined,
         configuration:'install materializa a fonte efetiva em own e ativa somente Ani. A primeira edição funcional em inherit materializa e edita em uma escrita.',
         limits:'effects list|get|insert|update|remove|move --family '+aniFamilies.join('|')+'; get/update/remove usam --index I; insert usa --index I e --value; move usa --from I --to J. Mutações de presets, incluindo parameters set/reset em /Family/índice, exigem --expected-hash <fileHash> obtido na leitura.',
-        examples:['ani-message install --dry-run --json','ani-message effects list --family AngleEffects --json','ani-message effects update --family AngleEffects --index 0 --expected-hash <hash> --value \'{"Name":"Balanço"}\'','ani-message parameters set --path /Options/Name --value \'"Efeitos do texto"\''],
+        examples:['ani-message install --dry-run --json','ani-message effects list --family AngleEffects --json','ani-message effects update --family AngleEffects --index 0 --expected-hash "<hash>" --value \'{"Name":"Balanço"}\'','ani-message parameters set --path /Options/Name --value \'"Efeitos do texto"\''],
         writing:'Toda escrita aceita --dry-run; --expected-hash também é opcional nas demais mutações. Reabra o projeto no editor após a CLI. Scripts são validados sem execução.',
         compatibility:'inherit usa todo o legado, mesmo desativado; own usa o próprio. Trocar o seletor não copia. Nomes podem repetir; renomear/remover não procura nem altera referências nos textos.'};
 }

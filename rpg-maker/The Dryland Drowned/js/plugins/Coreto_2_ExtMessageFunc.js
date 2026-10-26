@@ -70,7 +70,7 @@
  * @arg Allow:eval
  * @text Allow?
  * @type boolean
- * @desc Allow or disallow the Extended Fast Forward feature?
+ * @desc JavaScript script completion: truthy allows extended fast-forward; false forbids it. The command stores the opposite as its saved disallow flag.
  * @default true
  *
  * @command MsgButtonConsole
@@ -79,7 +79,7 @@
  * @arg Visible:eval
  * @text Visible?
  * @type boolean
- * @desc Show or hide the Message Button Console feature?
+ * @desc JavaScript script completion: truthy permits console visibility; false hides it. Per-message hide conditions still apply.
  * @default true
  *
  * @command MessageCursorSettings
@@ -106,14 +106,14 @@
  * @param WaitPerChar:num
  * @text Wait per Character
  * @type number
- * @desc How many frames should the game wait per character?
+ * @desc Game-frame counter added per flushed text-buffer character for auto-forward. The page counter starts at zero, accumulates buffer.length * WaitPerChar, and is decremented when auto confirmation is polled during a pause. Use a number >=1; fractional values are accepted, but this is an update counter, not wall-clock seconds. See EXT-BEH-autoforward for enabling AUTO and minimum delay.
  * @default 6
  * @min 1
  *
  * @param MinimumWait:num
  * @text Minimum Wait
  * @type number
- * @desc What is the minimum amount of frames to wait?
+ * @desc Minimum auto-forward counter applied at each pause: max(accumulated character delay, MinimumWait). It is not an extra delay added to WaitPerChar. Use a number >=1, in game-update polls; ordinary confirmation cancels AUTO and advances immediately. At a zero counter, the next auto-confirm poll advances. See EXT-BEH-autoforward.
  * @default 300
  * @min 1
  *
@@ -130,20 +130,20 @@
  * @param Enable:eval
  * @text Enable?
  * @type boolean
- * @desc Enable or disable the Extended Fast Forward feature?
+ * @desc Boot script: truthy enables the extended map fast-forward feature; false disables it without disabling Message Core ordinary fast text. Activation still requires a running map event, no active choice/number/item input, and permission from EXT-M-001.
  * @default true
  *
  * @param Speed:num
  * @text Speed
  * @type number
- * @desc Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds.
+ * @desc Maximum Scene_Map.updateMain loop count per extended fast-forward update. The loop replaces the normal map update multiplier and stops when the event ends, an input window activates or cancel interrupts it. 8 requests up to eight cycles, not eight additional cycles or milliseconds. The CLI accepts a number >=1; use whole counts (a fractional positive bound allows ceil(value) iterations). Battle does not use this mode.
  * @default 8
  * @min 2
  *
  * @param SceneChangeReset:eval
  * @text Reset on Scene Change?
  * @type boolean
- * @desc Reset Fast Forward setting on scene changes (ie battle, menu, or map transfers)?
+ * @desc Boot script: truthy clears the toggled extended fast-forward mode when Scene_Message creates its message windows. False preserves that toggle at this step only; the no-running-event and new-game/load resets still apply. This is not a guarantee of a reset on every map transfer. A held FastForwardKey can still activate the mode after a toggle reset.
  * @default true
  *
  */
@@ -152,13 +152,13 @@
  * @param ShowDefault:eval
  * @text Show by Default?
  * @type boolean
- * @desc Show or hide the Message Button Console by default?
+ * @desc Boot script supplying the initial Game_System console visibility: truthy shows the console on map messages, false hides it. Loaded saves keep their existing visibility; change current state with the MsgButtonConsole command EXT-M-003. Per-page hide tags and AutoSizeHide can suppress a globally visible console.
  * @default true
  *
  * @param Position:str
  * @text Position
  * @type select
- * @desc Where do you wish to display the Message Button Console?
+ * @desc Console position: top places buttons at the upper ButtonBuffer and moves message contents down by ButtonHeight + ButtonOffsetY; bottom places the row at window height - ButtonHeight - ButtonBuffer + ButtonOffsetY. Both center the row horizontally plus ButtonOffsetX and reserve ButtonHeight when the console is visible. This console is displayed only on the exact native Scene_Map, not battle or Evented Title.
  * @default bottom
  * @option top
  * @value top
@@ -305,7 +305,7 @@
  * @param List:arraystr
  * @text List
  * @type combo[]
- * @desc Which buttons appear and in what order?
+ * @desc Ordered JSON array of button symbols, for example ["auto", "fastfwd", "save"]. Symbols are trimmed and case-insensitive; duplicates create repeated buttons, [] creates none. Supported actions are auto, fastfwd, save, load, options, gameend, hide, log and backlog; skip is inert in this version and requires FastFwd.Enable. Unknown symbols create an inert labelled button. Consult EXT-BEH-console-<symbol> for each action and its provider requirements.
  * @default ["auto","fastFwd","log","hide","save","load","options","gameEnd"]
  * @option auto
  * @value auto
@@ -327,7 +327,7 @@
  * @param AutoKey:str
  * @text Auto-Forward Key
  * @type combo
- * @desc This is the key used for auto-forwarding messages.
+ * @desc MZ input symbol whose trigger toggles auto-forward during message input. It does not select an answer or change normal text speed. none is unassigned in standard MZ; tab, shift, control, pageup and pagedown map to Tab, Shift, Ctrl/Alt, PageUp/Q and PageDown/W unless the project remaps Input.
  * @default none
  * @option none
  * @value none
@@ -345,7 +345,7 @@
  * @param SaveKey:str
  * @text Save Key
  * @type combo
- * @desc This is the key used for quick saving.
+ * @desc MZ input symbol whose trigger opens the save menu during a map message, when saving is enabled. It does not save a slot automatically. See EXT-M-061 for supported input symbols and EXT-BEH-console-save for saved-message behavior.
  * @default none
  * @option none
  * @value none
@@ -363,7 +363,7 @@
  * @param LoadKey:str
  * @text Load Key
  * @type combo
- * @desc This is the key used for quick load.
+ * @desc MZ input symbol whose trigger opens the load menu during a map message when a save exists. It does not choose/load a slot automatically. See EXT-M-061 for input symbols and EXT-BEH-console-load for prerequisites.
  * @default none
  * @option none
  * @value none
@@ -381,7 +381,7 @@
  * @param OptionsKey:str
  * @text Options Key
  * @type combo
- * @desc This is the key used for opening options.
+ * @desc MZ input symbol whose trigger opens the options menu during a map message. See EXT-M-061 for input symbols and EXT-BEH-console-options for the optional console-button provider.
  * @default none
  * @option none
  * @value none
@@ -399,7 +399,7 @@
  * @param GameEndKey:str
  * @text Game End Key
  * @type combo
- * @desc This is the key used for ending the game.
+ * @desc MZ input symbol whose trigger opens the game-end menu during a map message. It does not immediately exit or return to the title. See EXT-M-061 for input symbols.
  * @default none
  * @option none
  * @value none
@@ -417,37 +417,37 @@
  * @param Auto:str
  * @text Auto-Forward
  * @type text
- * @desc How is this option's text displayed in-game?
+ * @desc Plain text label for the auto console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (AUTO); it does not remove or disable the button. Select buttons through /Buttons/List.
  * @default AUTO
  *
  * @param FastFwd:str
  * @text Fast Forward
  * @type text
- * @desc How is this option's text displayed in-game?
+ * @desc Plain text label for the fastfwd console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (FASTFWD); it does not remove or disable the button. Select buttons through /Buttons/List.
  * @default FAST
  *
  * @param Save:str
  * @text Save Game
  * @type text
- * @desc How is this option's text displayed in-game?
+ * @desc Plain text label for the save console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (SAVE); it does not remove or disable the button. Select buttons through /Buttons/List.
  * @default SAVE
  *
  * @param Load:str
  * @text Load Game
  * @type text
- * @desc How is this option's text displayed in-game?
+ * @desc Plain text label for the load console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (LOAD); it does not remove or disable the button. Select buttons through /Buttons/List.
  * @default LOAD
  *
  * @param Options:str
  * @text Options
  * @type text
- * @desc How is this option's text displayed in-game?
+ * @desc Plain text label for the options console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (OPTIONS); it does not remove or disable the button. Select buttons through /Buttons/List.
  * @default CONFIG
  *
  * @param GameEnd:str
  * @text Game End
  * @type text
- * @desc How is this option's text displayed in-game?
+ * @desc Plain text label for the gameend console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (GAMEEND); it does not remove or disable the button. Select buttons through /Buttons/List.
  * @default TITLE
  *
  */
@@ -456,13 +456,13 @@
  * @param Enable:eval
  * @text Enable?
  * @type boolean
- * @desc Enable or disable the message cursor?
+ * @desc Script completion: truthy uses the configured custom cursor; false uses the native message pause sign. Image/icon custom cursors follow the open message window, not just pauses; active input subwindows or closing make them transparent. See EXT-M-017 for current-game commands and saved settings.
  * @default true
  *
  * @param GraphicType:str
  * @text Graphic Type
  * @type select
- * @desc What is the cursor's graphic type?
+ * @desc Graphic source: icon uses IconIndex from img/system/IconSet.png and FlipMultiplier; image uses Filename divided into Rows by Cols with FrameDelay; windowskin uses the message window current skin and its native pause animation. Enable must evaluate truthy. The console WindowSkin does not select the cursor windowskin.
  * @default icon
  * @option icon
  * @value icon
@@ -493,21 +493,21 @@
  * @param Rows:num
  * @text Image Rows
  * @type number
- * @desc How many rows are there for the image?
+ * @desc Number of equal image-sheet rows, used with GraphicType=image. Use a positive whole count and an image height divisible by it; runtime floors cell height. CLI accepts any finite number >=1, so fractional counts are not rejected but do not describe a regular sheet. Rows * Cols also contributes to the animation counter duration.
  * @default 1
  * @min 1
  *
  * @param Cols:num
  * @text Image Columns
  * @type number
- * @desc How many columns are there for the image?
+ * @desc Number of equal image-sheet columns, used with GraphicType=image. Frames run left to right, then top to bottom. Use a positive whole count and an image width divisible by it; runtime floors cell width. CLI accepts any finite number >=1, including fractional counts. Rows * Cols contributes to animation duration.
  * @default 1
  * @min 1
  *
  * @param FrameDelay:num
  * @text Frame Delay
  * @type number
- * @desc How many frames delayed are there per animated cell?
+ * @desc Game-update frames per image cell. Use a positive whole count; the CLI accepts finite numbers >=1. The cycle lasts Rows * Cols * FrameDelay updates and runs at most once per Graphics.frameCount. It pauses while the image is unavailable, an input subwindow is active or the message closes. Windowskin uses its native animation instead.
  * @default 4
  * @min 1
  *
@@ -526,13 +526,13 @@
  * @param OffsetX:num
  * @text Offset X
  * @type number
- * @desc Offset the Message Cursor's X position by how many pixels?
+ * @desc Horizontal cursor offset in pixels, positive right and negative left. Added to the text cursor X + message padding + contents-sprite X + half the cursor sprite width. The resulting anchor X is rounded and clamped from padding to full window width; this does not guarantee the whole graphic remains inside the contents.
  * @default +0
  *
  * @param OffsetY:num
  * @text Offset Y
  * @type number
- * @desc Offset the Message Cursor's Y position by how many pixels?
+ * @desc Vertical cursor offset in pixels, positive down and negative up. Added to the text line Y + line height + message padding + contents-sprite Y. The resulting anchor Y is rounded and clamped from padding to window height minus padding; the graphic can extend beyond that anchor. Complete MsgCursor default uses -4; resetting this leaf uses -8.
  * @default -8
  *
  */
@@ -547,13 +547,13 @@
  * @param autoPositionLeft:eval
  * @text Face Left?
  * @type boolean
- * @desc Which direction does the Message Tail point to?
+ * @desc Script completion selecting the automatic lower tail artwork: truthy uses bottomLeftFilename and its anchors/offsets; false uses bottomRightFilename and its settings. It does not mirror an image. Only automatic positioning uses this choice; explicit TAIL tags select their own direction.
  * @default true
  *
  * @param autoCorrectX:eval
  * @text Auto-Correct X
  * @type boolean
- * @desc When true, shift an automatic message tail horizontally to compensate when the auto-positioned message window is clamped at the screen edge. Applies when the tail uses its automatic X position; explicit <Tail BL: 100> coordinates are not corrected. False leaves the tail at the window center plus its configured offset.
+ * @desc When true, shift an automatic message tail horizontally to compensate when the auto-positioned message window is clamped at the screen edge. Applies when the tail uses its automatic X position; explicit <Tail BL: 100> coordinates are not corrected. False leaves the tail at the window center plus its configured offset. Missing or null current-game autoCorrectX falls back to true; an explicit false disables correction.
  * @default true
  *
  * @param autoPositionOffsetX:num
@@ -571,7 +571,7 @@
  * @param bottomLeftFilename:str
  * @text Filename
  * @type file
- * @desc Image basename for the bottomLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
+ * @desc Image basename for the bottomLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
  * @default 
  * @dir img/system/
  *
@@ -602,7 +602,7 @@
  * @param bottomRightFilename:str
  * @text Filename
  * @type file
- * @desc Image basename for the bottomRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
+ * @desc Image basename for the bottomRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
  * @default 
  * @dir img/system/
  *
@@ -633,7 +633,7 @@
  * @param upperLeftFilename:str
  * @text Filename
  * @type file
- * @desc Image basename for the upperLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
+ * @desc Image basename for the upperLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
  * @default 
  * @dir img/system/
  *
@@ -664,7 +664,7 @@
  * @param upperRightFilename:str
  * @text Filename
  * @type file
- * @desc Image basename for the upperRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
+ * @desc Image basename for the upperRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.
  * @default 
  * @dir img/system/
  *
@@ -704,13 +704,13 @@
  * @param ScrollDownNext:eval
  * @text Scroll Down: Next?
  * @type boolean
- * @desc Set "Scroll Down" to "Next"?
+ * @desc Boot script: truthy makes a downward wheel delta of at least 20 confirm message input after other trigger handling returns false. False disables this wheel action. ScrollWheel.Enable must be truthy; the console visibility setting does not gate this handler.
  * @default true
  *
  * @param ScrollUpMsgLog:eval
  * @text Scroll Up: Log?
  * @type boolean
- * @desc Allow the upward mouse-wheel shortcut to open the optional MessageLog during a map message.
+ * @desc Allow the upward mouse-wheel shortcut to open the optional MessageLog through the message input handler.
  * @default true
  *
  */
@@ -758,24 +758,26 @@ const catalog = {
           "key": "WaitPerChar",
           "storageKey": "WaitPerChar:num",
           "label": "Wait per Character",
-          "description": "How many frames should the game wait per character?",
+          "description": "Game-frame counter added per flushed text-buffer character for auto-forward. The page counter starts at zero, accumulates buffer.length * WaitPerChar, and is decremented when auto confirmation is polled during a pause. Use a number >=1; fractional values are accepted, but this is an update counter, not wall-clock seconds. See EXT-BEH-autoforward for enabling AUTO and minimum delay.",
           "editorType": "number",
           "nativeDefault": "6",
           "type": "number",
           "min": 1,
-          "default": 6
+          "default": 6,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-013 --json."
         },
         {
           "id": "EXT-M-024",
           "key": "MinimumWait",
           "storageKey": "MinimumWait:num",
           "label": "Minimum Wait",
-          "description": "What is the minimum amount of frames to wait?",
+          "description": "Minimum auto-forward counter applied at each pause: max(accumulated character delay, MinimumWait). It is not an extra delay added to WaitPerChar. Use a number >=1, in game-update polls; ordinary confirmation cancels AUTO and advances immediately. At a zero counter, the next auto-confirm poll advances. See EXT-BEH-autoforward.",
           "editorType": "number",
           "nativeDefault": "300",
           "type": "number",
           "min": 1,
-          "default": 300
+          "default": 300,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-013 --json."
         },
         {
           "id": "EXT-M-026",
@@ -787,7 +789,8 @@ const catalog = {
           "nativeDefault": "60",
           "type": "number",
           "min": 1,
-          "default": 60
+          "default": 60,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-013 --json."
         }
       ],
       "default": {
@@ -795,7 +798,7 @@ const catalog = {
         "MinimumWait": 300,
         "VoiceActAutoPadding": 60
       },
-      "context": "WaitPerChar and MinimumWait govern the local auto-forward timer. VoiceActAutoPadding is an external voice integration field: without that provider it does not alter the local text timer. Consult ext-message api describe EXT-M-026 --json for its availability and prerequisites."
+      "context": "WaitPerChar and MinimumWait govern the local auto-forward timer. VoiceActAutoPadding is an external voice integration field: without that provider it does not alter the local text timer. Consult ext-message api describe EXT-M-026 --json for its availability and prerequisites. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. See EXT-BEH-autoforward for activation, counter reset and ordinary confirm behavior."
     },
     {
       "id": "EXT-M-014",
@@ -813,37 +816,58 @@ const catalog = {
           "key": "Enable",
           "storageKey": "Enable:eval",
           "label": "Enable?",
-          "description": "Enable or disable the Extended Fast Forward feature?",
+          "description": "Boot script: truthy enables the extended map fast-forward feature; false disables it without disabling Message Core ordinary fast text. Activation still requires a running map event, no active choice/number/item input, and permission from EXT-M-001.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-014 --json."
         },
         {
           "id": "EXT-M-028",
           "key": "Speed",
           "storageKey": "Speed:num",
           "label": "Speed",
-          "description": "Number of Scene_Map.updateMain cycles per extended fast-forward update. 8 requests up to eight map update cycles; this is not a character count or milliseconds.",
+          "description": "Maximum Scene_Map.updateMain loop count per extended fast-forward update. The loop replaces the normal map update multiplier and stops when the event ends, an input window activates or cancel interrupts it. 8 requests up to eight cycles, not eight additional cycles or milliseconds. The CLI accepts a number >=1; use whole counts (a fractional positive bound allows ceil(value) iterations). Battle does not use this mode.",
           "editorType": "number",
           "nativeDefault": "8",
           "type": "number",
           "min": 2,
           "default": 8,
-          "expected": "With extended fast-forward active on the map, an update runs the configured number of map update cycles. Battle returns false for this mode and is not accelerated."
+          "expected": "With extended fast-forward active on the map, an update runs the configured number of map update cycles. Battle returns false for this mode and is not accelerated.",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-014 --json."
         },
         {
           "id": "EXT-M-029",
           "key": "SceneChangeReset",
           "storageKey": "SceneChangeReset:eval",
           "label": "Reset on Scene Change?",
-          "description": "Reset Fast Forward setting on scene changes (ie battle, menu, or map transfers)?",
+          "description": "Boot script: truthy clears the toggled extended fast-forward mode when Scene_Message creates its message windows. False preserves that toggle at this step only; the no-running-event and new-game/load resets still apply. This is not a guarantee of a reset on every map transfer. A held FastForwardKey can still activate the mode after a toggle reset.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-014 --json."
         }
       ],
       "default": {
@@ -851,7 +875,7 @@ const catalog = {
         "Speed": 8,
         "SceneChangeReset": "true"
       },
-      "context": " Activate on the map while an event is running by holding the Message Core General > Fast Forward Key (FastForwardKey, default pagedown), or toggle the Fast Forward console button when that console is enabled. Releasing the held key ends that activation; Cancel/right-click clears the toggled mode. Enable must be true, ExtFastFwdDisallow must allow it, and active choice/number/item input windows suspend it. Configure defaults in MZ Plugin Manager and restart playtest; SceneChangeReset clears toggled mode when message windows are recreated. Battle does not use extended fast-forward."
+      "context": "Activate on the map while an event is running by holding the Message Core General > Fast Forward Key (FastForwardKey, default pagedown), or toggle the Fast Forward console button when that console is enabled. Releasing the held key ends that activation; Cancel/right-click clears the toggled mode. Enable must be true, ExtFastFwdDisallow must allow it, and active choice/number/item input windows suspend it. Configure defaults in MZ Plugin Manager and restart playtest; SceneChangeReset clears toggled mode when message windows are recreated. Battle does not use extended fast-forward. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. The disallow flag persists in Game_System saves; toggled mode is temporary. See EXT-M-001 and EXT-BEH-fastforward."
     },
     {
       "id": "EXT-M-015",
@@ -869,19 +893,29 @@ const catalog = {
           "key": "ShowDefault",
           "storageKey": "ShowDefault:eval",
           "label": "Show by Default?",
-          "description": "Show or hide the Message Button Console by default?",
+          "description": "Boot script supplying the initial Game_System console visibility: truthy shows the console on map messages, false hides it. Loaded saves keep their existing visibility; change current state with the MsgButtonConsole command EXT-M-003. Per-page hide tags and AutoSizeHide can suppress a globally visible console.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-032",
           "key": "Position",
           "storageKey": "Position:str",
           "label": "Position",
-          "description": "Where do you wish to display the Message Button Console?",
+          "description": "Console position: top places buttons at the upper ButtonBuffer and moves message contents down by ButtonHeight + ButtonOffsetY; bottom places the row at window height - ButtonHeight - ButtonBuffer + ButtonOffsetY. Both center the row horizontally plus ButtonOffsetX and reserve ButtonHeight when the console is visible. This console is displayed only on the exact native Scene_Map, not battle or Evented Title.",
           "editorType": "select",
           "nativeDefault": "bottom",
           "type": "string",
@@ -889,7 +923,8 @@ const catalog = {
             "top",
             "bottom"
           ],
-          "default": "bottom"
+          "default": "bottom",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-033",
@@ -900,8 +935,18 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "false",
           "type": "string",
-          "javascript": "expression",
-          "default": "false"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "false",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-035",
@@ -914,7 +959,7 @@ const catalog = {
           "type": "string",
           "directory": "img/system/",
           "default": "Window",
-          "context": "Configure /MsgButtonConsole/WindowSkin as a JSON string and restart the game. This selects the console background/frame skin; it does not replace a shared asset or define the ColorManager text-color palette.",
+          "context": "Configure /MsgButtonConsole/WindowSkin as a JSON string and restart the game. This selects the console background/frame skin; it does not replace a shared asset or define the ColorManager text-color palette. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json.",
           "examples": [
             {
               "input": "ext-message parameters set --path /MsgButtonConsole/WindowSkin --value '\"Window\"' --json; run with --project pointing to the MZ game containing img/system/Window.png.",
@@ -932,7 +977,7 @@ const catalog = {
           "nativeDefault": "Arial",
           "type": "string",
           "default": "Arial",
-          "context": "Font family used by Window_ButtonConsole for message-console button text. Configure /MsgButtonConsole/FontFace, load custom fonts through Message /CustomFonts when needed, and restart the game. The field selects a family without loading it.",
+          "context": "Font family used by Window_ButtonConsole for message-console button text. Configure /MsgButtonConsole/FontFace, load custom fonts through Message /CustomFonts when needed, and restart the game. The field selects a family without loading it. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json.",
           "examples": [
             {
               "input": "Arial",
@@ -950,7 +995,8 @@ const catalog = {
           "nativeDefault": "18",
           "type": "number",
           "min": 1,
-          "default": 18
+          "default": 18,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-039",
@@ -962,7 +1008,7 @@ const catalog = {
           "nativeDefault": "0",
           "type": "string",
           "default": "0",
-          "context": "Configure /MsgButtonConsole/NormalColor and restart the game. Use #rrggbb for an explicit color independent of the palette. Numeric text selects ColorManager.textColor(index); do not use a database ID or assume a fixed named color for a custom windowskin.",
+          "context": "Configure /MsgButtonConsole/NormalColor and restart the game. Use #rrggbb for an explicit color independent of the palette. Numeric text selects ColorManager.textColor(index); do not use a database ID or assume a fixed named color for a custom windowskin. If state background images are configured, distinct color strings also distinguish which image is visible; equal color values can display multiple state images. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json.",
           "examples": [
             {
               "input": "ext-message parameters set --path /MsgButtonConsole/NormalColor --value '\"#ff8800\"' --json; run with --project pointing to the MZ game. The orange value is illustrative.",
@@ -980,7 +1026,7 @@ const catalog = {
           "nativeDefault": "24",
           "type": "string",
           "default": "24",
-          "context": "Configure /MsgButtonConsole/ToggledColor and restart the game. Use #rrggbb for an explicit color independent of the palette. Numeric text selects ColorManager.textColor(index); do not use a database ID or assume a fixed named color for a custom windowskin.",
+          "context": "Configure /MsgButtonConsole/ToggledColor and restart the game. Use #rrggbb for an explicit color independent of the palette. Numeric text selects ColorManager.textColor(index); do not use a database ID or assume a fixed named color for a custom windowskin. If state background images are configured, distinct color strings also distinguish which image is visible; equal color values can display multiple state images. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json.",
           "examples": [
             {
               "input": "ext-message parameters set --path /MsgButtonConsole/ToggledColor --value '\"#ff8800\"' --json; run with --project pointing to the MZ game. The orange value is illustrative.",
@@ -998,7 +1044,7 @@ const catalog = {
           "nativeDefault": "7",
           "type": "string",
           "default": "7",
-          "context": "Configure /MsgButtonConsole/DisabledColor and restart the game. Use #rrggbb for an explicit color independent of the palette. Numeric text selects ColorManager.textColor(index); do not use a database ID or assume a fixed named color for a custom windowskin.",
+          "context": "Configure /MsgButtonConsole/DisabledColor and restart the game. Use #rrggbb for an explicit color independent of the palette. Numeric text selects ColorManager.textColor(index); do not use a database ID or assume a fixed named color for a custom windowskin. If state background images are configured, distinct color strings also distinguish which image is visible; equal color values can display multiple state images. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json.",
           "examples": [
             {
               "input": "ext-message parameters set --path /MsgButtonConsole/DisabledColor --value '\"#ff8800\"' --json; run with --project pointing to the MZ game. The orange value is illustrative.",
@@ -1015,7 +1061,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-044",
@@ -1026,7 +1073,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-045",
@@ -1038,7 +1086,8 @@ const catalog = {
           "nativeDefault": "86",
           "type": "number",
           "min": 1,
-          "default": 86
+          "default": 86,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-046",
@@ -1050,7 +1099,8 @@ const catalog = {
           "nativeDefault": "36",
           "type": "number",
           "min": 1,
-          "default": 36
+          "default": 36,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-047",
@@ -1062,7 +1112,8 @@ const catalog = {
           "nativeDefault": "6",
           "type": "number",
           "min": 1,
-          "default": 6
+          "default": 6,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-049",
@@ -1074,7 +1125,8 @@ const catalog = {
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "Background state is selected by equality with the configured NormalColor/ToggledColor/DisabledColor strings. Keep those three color strings distinct if only one background should appear; equal values can show several backgrounds together. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-050",
@@ -1085,7 +1137,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-051",
@@ -1096,7 +1149,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-052",
@@ -1108,7 +1162,8 @@ const catalog = {
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "Background state is selected by equality with the configured NormalColor/ToggledColor/DisabledColor strings. Keep those three color strings distinct if only one background should appear; equal values can show several backgrounds together. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-053",
@@ -1119,7 +1174,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-054",
@@ -1130,7 +1186,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-055",
@@ -1142,7 +1199,8 @@ const catalog = {
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "Background state is selected by equality with the configured NormalColor/ToggledColor/DisabledColor strings. Keep those three color strings distinct if only one background should appear; equal values can show several backgrounds together. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-056",
@@ -1153,7 +1211,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         },
         {
           "id": "EXT-M-057",
@@ -1164,7 +1223,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-015 --json."
         }
       ],
       "default": {
@@ -1192,11 +1252,11 @@ const catalog = {
         "ImgToggledOffsetX": 0,
         "ImgToggledOffsetY": 0
       },
-      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa One supported setup is RPG Maker MZ 1.10.0 with Coreto_0_CoreEngine 0.1.0, then Coreto_1_MessageCore 0.1.0, then Coreto_2_ExtMessageFunc 0.1.0 active in js/plugins.js. Enable exactly one Core provider and one Message provider before Extended, and only one Extended provider; do not activate their original counterparts concurrently. With --project pointing to the game, core install, message install and ext-message install configure/activate those delivered Coreto plugins individually; installing Extended alone does not activate its dependencies. Reload the editor and restart the game after configuration. CLI whole-group replacement uses the logical object in default/fields, not nativeDefault or native keys with :str/:eval/:num suffixes. Supply all logical fields; native, unknown or missing keys are rejected. Numbers stay JSON numbers; JavaScript-expression fields such as ShowDefault and AutoSizeHide stay source-code strings (for example \"true\" and \"false\"), not JSON booleans. For a partial edit, use the individual /MsgButtonConsole/Field path. To preserve existing settings when replacing the group, first run ext-message parameters get --path /MsgButtonConsole --json, take result.value, edit it and supply that complete object to set.",
+      "context": "mensagem no mapa; fast-forward estendido só no mapa; battle retorna false; console no mapa One supported setup is RPG Maker MZ 1.10.0 with Coreto_0_CoreEngine 0.1.0, then Coreto_1_MessageCore 0.1.0, then Coreto_2_ExtMessageFunc 0.1.0 active in js/plugins.js. Enable exactly one Core provider and one Message provider before Extended, and only one Extended provider; do not activate their original counterparts concurrently. With --project pointing to the game, core install, message install and ext-message install configure/activate those delivered Coreto plugins individually; installing Extended alone does not activate its dependencies. Reload the editor and restart the game after configuration. CLI whole-group replacement uses the logical object in default/fields, not nativeDefault or native keys with :str/:eval/:num suffixes. Supply all logical fields; native, unknown or missing keys are rejected. Numbers stay JSON numbers; JavaScript script fields such as ShowDefault and AutoSizeHide stay source-code strings (for example \"true\" and \"false\"), not JSON booleans. For a partial edit, use the individual /MsgButtonConsole/Field path. To preserve existing settings when replacing the group, first run ext-message parameters get --path /MsgButtonConsole --json, take result.value, edit it and supply that complete object to set. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. Cursor/tail settings and console visibility belong to Game_System: commands survive map changes and save/load, and new games initialize from the current configuration. Old saves missing an entire settings owner initialize it from current defaults; existing partial owners are preserved, not merged. Parameter edits do not replace settings already present in a loaded save. Auto/fast-forward toggles belong to Game_Temp, are not saved, and reset on a new game/load; their additional in-game reset rules are described at EXT-BEH-autoforward and EXT-BEH-fastforward.",
       "examples": [
         {
           "input": "Whole-group CLI example using the documented defaults (illustrative): ext-message parameters set --path /MsgButtonConsole --value '{\"ShowDefault\":\"true\",\"Position\":\"bottom\",\"AutoSizeHide\":\"false\",\"WindowSkin\":\"Window\",\"FontFace\":\"Arial\",\"FontSize\":18,\"NormalColor\":\"0\",\"ToggledColor\":\"24\",\"DisabledColor\":\"7\",\"ButtonOffsetX\":0,\"ButtonOffsetY\":0,\"ButtonWidth\":86,\"ButtonHeight\":36,\"ButtonBuffer\":6,\"ImgDisabled\":\"\",\"ImgDisabledOffsetX\":0,\"ImgDisabledOffsetY\":0,\"ImgEnabled\":\"\",\"ImgEnabledOffsetX\":0,\"ImgEnabledOffsetY\":0,\"ImgToggled\":\"\",\"ImgToggledOffsetX\":0,\"ImgToggledOffsetY\":0}' --json. Run with --project pointing to the configured MZ game. This replaces the complete group; use a field subpath to change only one setting.",
-          "expected": "Estrutura MsgButtonConsole aplica os campos filhos mapeados individualmente; array conserva ordem, nomes e defaults de cada entrada."
+          "expected": "Replaces the complete console layout group for the next game boot; existing saves retain their current console visibility flag."
         }
       ]
     },
@@ -1216,7 +1276,7 @@ const catalog = {
           "key": "List",
           "storageKey": "List:arraystr",
           "label": "List",
-          "description": "Which buttons appear and in what order?",
+          "description": "Ordered JSON array of button symbols, for example [\"auto\", \"fastfwd\", \"save\"]. Symbols are trimmed and case-insensitive; duplicates create repeated buttons, [] creates none. Supported actions are auto, fastfwd, save, load, options, gameend, hide, log and backlog; skip is inert in this version and requires FastFwd.Enable. Unknown symbols create an inert labelled button. Consult EXT-BEH-console-<symbol> for each action and its provider requirements.",
           "editorType": "combo[]",
           "nativeDefault": "[\"auto\",\"fastFwd\",\"log\",\"hide\",\"save\",\"load\",\"options\",\"gameEnd\"]",
           "type": "array",
@@ -1245,14 +1305,14 @@ const catalog = {
             "options",
             "gameEnd"
           ],
-          "context": "Buttons.List selects the console buttons. save/load require an active Save Core provider and options requires Options Core; hide requires Message Visibility; log/backlog require Message Log. Save also needs saving enabled, Load an existing save, and menu actions run on Scene_Map. Hidden or message-suppressed consoles ignore menu/auto shortcuts. If shortcuts collide, the first matching action wins in this order: auto, save, load, options, gameend. Extended fast-forward takes priority over this shortcut loop. Buttons without their required optional provider are omitted from the visible row; the remaining buttons preserve list order. Consult ext-message api describe EXT-M-016 --json for the complete group."
+          "context": "Buttons.List selects the console buttons. save/load require an active Save Core provider and options requires Options Core; hide requires Message Visibility; log/backlog require Message Log. Save also needs saving enabled, Load an existing save, and menu actions run on Scene_Map. Hidden or message-suppressed consoles ignore menu/auto shortcuts. If shortcuts collide, the first matching action wins in this order: auto, save, load, options, gameend. Extended fast-forward takes priority over this shortcut loop. Buttons without their required optional provider are omitted from the visible row; the remaining buttons preserve list order. Consult ext-message api describe EXT-M-016 --json for the complete group. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-061",
           "key": "AutoKey",
           "storageKey": "AutoKey:str",
           "label": "Auto-Forward Key",
-          "description": "This is the key used for auto-forwarding messages.",
+          "description": "MZ input symbol whose trigger toggles auto-forward during message input. It does not select an answer or change normal text speed. none is unassigned in standard MZ; tab, shift, control, pageup and pagedown map to Tab, Shift, Ctrl/Alt, PageUp/Q and PageDown/W unless the project remaps Input.",
           "editorType": "combo",
           "nativeDefault": "none",
           "type": "string",
@@ -1265,14 +1325,14 @@ const catalog = {
             "pagedown"
           ],
           "default": "none",
-          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save."
+          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-062",
           "key": "SaveKey",
           "storageKey": "SaveKey:str",
           "label": "Save Key",
-          "description": "This is the key used for quick saving.",
+          "description": "MZ input symbol whose trigger opens the save menu during a map message, when saving is enabled. It does not save a slot automatically. See EXT-M-061 for supported input symbols and EXT-BEH-console-save for saved-message behavior.",
           "editorType": "combo",
           "nativeDefault": "none",
           "type": "string",
@@ -1285,14 +1345,14 @@ const catalog = {
             "pagedown"
           ],
           "default": "none",
-          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save."
+          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-063",
           "key": "LoadKey",
           "storageKey": "LoadKey:str",
           "label": "Load Key",
-          "description": "This is the key used for quick load.",
+          "description": "MZ input symbol whose trigger opens the load menu during a map message when a save exists. It does not choose/load a slot automatically. See EXT-M-061 for input symbols and EXT-BEH-console-load for prerequisites.",
           "editorType": "combo",
           "nativeDefault": "none",
           "type": "string",
@@ -1305,14 +1365,14 @@ const catalog = {
             "pagedown"
           ],
           "default": "none",
-          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save."
+          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-064",
           "key": "OptionsKey",
           "storageKey": "OptionsKey:str",
           "label": "Options Key",
-          "description": "This is the key used for opening options.",
+          "description": "MZ input symbol whose trigger opens the options menu during a map message. See EXT-M-061 for input symbols and EXT-BEH-console-options for the optional console-button provider.",
           "editorType": "combo",
           "nativeDefault": "none",
           "type": "string",
@@ -1325,14 +1385,14 @@ const catalog = {
             "pagedown"
           ],
           "default": "none",
-          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save."
+          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-065",
           "key": "GameEndKey",
           "storageKey": "GameEndKey:str",
           "label": "Game End Key",
-          "description": "This is the key used for ending the game.",
+          "description": "MZ input symbol whose trigger opens the game-end menu during a map message. It does not immediately exit or return to the title. See EXT-M-061 for input symbols.",
           "editorType": "combo",
           "nativeDefault": "none",
           "type": "string",
@@ -1345,73 +1405,79 @@ const catalog = {
             "pagedown"
           ],
           "default": "none",
-          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save."
+          "context": "The console must be visible and not suppressed for this message; otherwise auto/menu shortcuts do nothing. When keys collide, the first matching action wins in order auto, save, load, options, gameend. Extended fast-forward takes precedence over this loop. Menu actions require Scene_Map; Save also needs saving enabled and Load an existing save. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-067",
           "key": "Auto",
           "storageKey": "Auto:str",
           "label": "Auto-Forward",
-          "description": "How is this option's text displayed in-game?",
+          "description": "Plain text label for the auto console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (AUTO); it does not remove or disable the button. Select buttons through /Buttons/List.",
           "editorType": "text",
           "nativeDefault": "AUTO",
           "type": "string",
-          "default": "AUTO"
+          "default": "AUTO",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-068",
           "key": "FastFwd",
           "storageKey": "FastFwd:str",
           "label": "Fast Forward",
-          "description": "How is this option's text displayed in-game?",
+          "description": "Plain text label for the fastfwd console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (FASTFWD); it does not remove or disable the button. Select buttons through /Buttons/List.",
           "editorType": "text",
           "nativeDefault": "FAST",
           "type": "string",
-          "default": "FAST"
+          "default": "FAST",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-069",
           "key": "Save",
           "storageKey": "Save:str",
           "label": "Save Game",
-          "description": "How is this option's text displayed in-game?",
+          "description": "Plain text label for the save console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (SAVE); it does not remove or disable the button. Select buttons through /Buttons/List.",
           "editorType": "text",
           "nativeDefault": "SAVE",
           "type": "string",
-          "default": "SAVE"
+          "default": "SAVE",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-070",
           "key": "Load",
           "storageKey": "Load:str",
           "label": "Load Game",
-          "description": "How is this option's text displayed in-game?",
+          "description": "Plain text label for the load console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (LOAD); it does not remove or disable the button. Select buttons through /Buttons/List.",
           "editorType": "text",
           "nativeDefault": "LOAD",
           "type": "string",
-          "default": "LOAD"
+          "default": "LOAD",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-071",
           "key": "Options",
           "storageKey": "Options:str",
           "label": "Options",
-          "description": "How is this option's text displayed in-game?",
+          "description": "Plain text label for the options console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (OPTIONS); it does not remove or disable the button. Select buttons through /Buttons/List.",
           "editorType": "text",
           "nativeDefault": "CONFIG",
           "type": "string",
-          "default": "CONFIG"
+          "default": "CONFIG",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         },
         {
           "id": "EXT-M-072",
           "key": "GameEnd",
           "storageKey": "GameEnd:str",
           "label": "Game End",
-          "description": "How is this option's text displayed in-game?",
+          "description": "Plain text label for the gameend console button. Escape codes are not expanded. An empty label falls back to the uppercase button symbol (GAMEEND); it does not remove or disable the button. Select buttons through /Buttons/List.",
           "editorType": "text",
           "nativeDefault": "TITLE",
           "type": "string",
-          "default": "TITLE"
+          "default": "TITLE",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-016 --json."
         }
       ],
       "default": {
@@ -1437,7 +1503,7 @@ const catalog = {
         "Options": "CONFIG",
         "GameEnd": "TITLE"
       },
-      "context": "Buttons.List selects the console buttons. save/load require an active Save Core provider and options requires Options Core; hide requires Message Visibility; log/backlog require Message Log. Save also needs saving enabled, Load an existing save, and menu actions run on Scene_Map. Hidden or message-suppressed consoles ignore menu/auto shortcuts. If shortcuts collide, the first matching action wins in this order: auto, save, load, options, gameend. Extended fast-forward takes priority over this shortcut loop."
+      "context": "Buttons.List selects the console buttons. save/load require an active Save Core provider and options requires Options Core; hide requires Message Visibility; log/backlog require Message Log. Save also needs saving enabled, Load an existing save, and menu actions run on Scene_Map. Hidden or message-suppressed consoles ignore menu/auto shortcuts. If shortcuts collide, the first matching action wins in this order: auto, save, load, options, gameend. Extended fast-forward takes priority over this shortcut loop. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. The shortcut loop does not require its button to be in List or its optional button provider to be active. Matching shortcuts are consumed even when the hidden-console gate blocks their action. See EXT-M-015 for activation and EXT-BEH-console-save/load/options/hide/log/backlog for button dependencies."
     },
     {
       "id": "EXT-M-017",
@@ -1455,19 +1521,29 @@ const catalog = {
           "key": "Enable",
           "storageKey": "Enable:eval",
           "label": "Enable?",
-          "description": "Enable or disable the message cursor?",
+          "description": "Script completion: truthy uses the configured custom cursor; false uses the native message pause sign. Image/icon custom cursors follow the open message window, not just pauses; active input subwindows or closing make them transparent. See EXT-M-017 for current-game commands and saved settings.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-075",
           "key": "GraphicType",
           "storageKey": "GraphicType:str",
           "label": "Graphic Type",
-          "description": "What is the cursor's graphic type?",
+          "description": "Graphic source: icon uses IconIndex from img/system/IconSet.png and FlipMultiplier; image uses Filename divided into Rows by Cols with FrameDelay; windowskin uses the message window current skin and its native pause animation. Enable must evaluate truthy. The console WindowSkin does not select the cursor windowskin.",
           "editorType": "select",
           "nativeDefault": "icon",
           "type": "string",
@@ -1476,7 +1552,8 @@ const catalog = {
             "image",
             "windowskin"
           ],
-          "default": "icon"
+          "default": "icon",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-077",
@@ -1488,7 +1565,7 @@ const catalog = {
           "nativeDefault": "188",
           "type": "string",
           "default": "188",
-          "context": " Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename."
+          "context": "Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-078",
@@ -1499,7 +1576,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "1",
           "type": "string",
-          "default": "1"
+          "default": "1",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-080",
@@ -1511,43 +1589,47 @@ const catalog = {
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-081",
           "key": "Rows",
           "storageKey": "Rows:num",
           "label": "Image Rows",
-          "description": "How many rows are there for the image?",
+          "description": "Number of equal image-sheet rows, used with GraphicType=image. Use a positive whole count and an image height divisible by it; runtime floors cell height. CLI accepts any finite number >=1, so fractional counts are not rejected but do not describe a regular sheet. Rows * Cols also contributes to the animation counter duration.",
           "editorType": "number",
           "nativeDefault": "1",
           "type": "number",
           "min": 1,
-          "default": 1
+          "default": 1,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-082",
           "key": "Cols",
           "storageKey": "Cols:num",
           "label": "Image Columns",
-          "description": "How many columns are there for the image?",
+          "description": "Number of equal image-sheet columns, used with GraphicType=image. Frames run left to right, then top to bottom. Use a positive whole count and an image width divisible by it; runtime floors cell width. CLI accepts any finite number >=1, including fractional counts. Rows * Cols contributes to animation duration.",
           "editorType": "number",
           "nativeDefault": "1",
           "type": "number",
           "min": 1,
-          "default": 1
+          "default": 1,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-083",
           "key": "FrameDelay",
           "storageKey": "FrameDelay:num",
           "label": "Frame Delay",
-          "description": "How many frames delayed are there per animated cell?",
+          "description": "Game-update frames per image cell. Use a positive whole count; the CLI accepts finite numbers >=1. The cycle lasts Rows * Cols * FrameDelay updates and runs at most once per Graphics.frameCount. It pauses while the image is unavailable, an input subwindow is active or the message closes. Windowskin uses its native animation instead.",
           "editorType": "number",
           "nativeDefault": "4",
           "type": "number",
           "min": 1,
-          "default": 4
+          "default": 4,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-085",
@@ -1558,7 +1640,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.5",
           "type": "number",
-          "default": 0.5
+          "default": 0.5,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-086",
@@ -1569,31 +1652,32 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "1",
           "type": "number",
-          "default": 1
+          "default": 1,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-087",
           "key": "OffsetX",
           "storageKey": "OffsetX:num",
           "label": "Offset X",
-          "description": "Offset the Message Cursor's X position by how many pixels?",
+          "description": "Horizontal cursor offset in pixels, positive right and negative left. Added to the text cursor X + message padding + contents-sprite X + half the cursor sprite width. The resulting anchor X is rounded and clamped from padding to full window width; this does not guarantee the whole graphic remains inside the contents.",
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
           "default": 0,
-          "context": " Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         },
         {
           "id": "EXT-M-088",
           "key": "OffsetY",
           "storageKey": "OffsetY:num",
           "label": "Offset Y",
-          "description": "Offset the Message Cursor's Y position by how many pixels?",
+          "description": "Vertical cursor offset in pixels, positive down and negative up. Added to the text line Y + line height + message padding + contents-sprite Y. The resulting anchor Y is rounded and clamped from padding to window height minus padding; the graphic can extend beyond that anchor. Complete MsgCursor default uses -4; resetting this leaf uses -8.",
           "editorType": "text",
           "nativeDefault": "-8",
           "type": "number",
           "default": -8,
-          "context": " Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
         }
       ],
       "default": {
@@ -1610,7 +1694,7 @@ const catalog = {
         "OffsetX": 0,
         "OffsetY": -4
       },
-      "context": "Cursor settings are initialized from the complete MsgCursor preset; explicit object values win over child field defaults. The preset uses FlipMultiplier 0.125 and OffsetY -4, while the individual field defaults are 1 and -8. AnchorX/AnchorY are image fractions: 0 left/top, 0.5 center, 1 right/bottom. Offsets are pixels. When inserting a cursor command, provide the complete argument object shown in its example; a newly inserted partial struct does not automatically acquire missing fields. Existing command updates retain encoded fields not supplied."
+      "context": "Cursor settings are initialized from the complete MsgCursor preset; explicit object values win over child field defaults. The preset uses FlipMultiplier 0.125 and OffsetY -4, while the individual field defaults are 1 and -8. AnchorX/AnchorY are image fractions: 0 left/top, 0.5 center, 1 right/bottom. Offsets are pixels. When inserting a cursor command, provide the complete argument object shown in its example; a newly inserted partial struct does not automatically acquire missing fields. Existing command updates retain encoded fields not supplied. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. Cursor/tail settings and console visibility belong to Game_System: commands survive map changes and save/load, and new games initialize from the current configuration. Old saves missing an entire settings owner initialize it from current defaults; existing partial owners are preserved, not merged. Parameter edits do not replace settings already present in a loaded save. Auto/fast-forward toggles belong to Game_Temp, are not saved, and reset on a new game/load; their additional in-game reset rules are described at EXT-BEH-autoforward and EXT-BEH-fastforward."
     },
     {
       "id": "EXT-M-018",
@@ -1632,9 +1716,18 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
           "default": "true",
-          "context": "Requires a nonempty lower-tail basename in /MsgTail settings and an existing event selected by an auto-position tag such as <AUTO EVENT: 1> in Show Text on the map. See EXT-M-018 for the event-relative tag. The corresponding image must exist in img/system; no image is synthesized by this flag. False leaves automatic positioning active but omits its tail. The tail becomes visible only when the message window is fully open.",
+          "context": "Requires a nonempty lower-tail basename in /MsgTail settings and an existing event selected by an auto-position tag such as <AUTO EVENT: 1> in Show Text on the map. See EXT-M-018 for the event-relative tag. The corresponding image must exist in img/system; no image is synthesized by this flag. False leaves Message automatic positioning active and disables automatic tail selection; an explicit TAIL tag can still show a tail. The tail becomes visible only when the message window is fully open. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json.",
           "examples": [
             {
               "input": "Configure a lower-tail image basename, set /MsgTail/autoPositionTail to true, then use <AUTO EVENT: 1>Hello in Show Text on a map with event 1.",
@@ -1647,24 +1740,44 @@ const catalog = {
           "key": "autoPositionLeft",
           "storageKey": "autoPositionLeft:eval",
           "label": "Face Left?",
-          "description": "Which direction does the Message Tail point to?",
+          "description": "Script completion selecting the automatic lower tail artwork: truthy uses bottomLeftFilename and its anchors/offsets; false uses bottomRightFilename and its settings. It does not mirror an image. Only automatic positioning uses this choice; explicit TAIL tags select their own direction.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-092",
           "key": "autoCorrectX",
           "storageKey": "autoCorrectX:eval",
           "label": "Auto-Correct X",
-          "description": "When true, shift an automatic message tail horizontally to compensate when the auto-positioned message window is clamped at the screen edge. Applies when the tail uses its automatic X position; explicit <Tail BL: 100> coordinates are not corrected. False leaves the tail at the window center plus its configured offset.",
+          "description": "When true, shift an automatic message tail horizontally to compensate when the auto-positioned message window is clamped at the screen edge. Applies when the tail uses its automatic X position; explicit <Tail BL: 100> coordinates are not corrected. False leaves the tail at the window center plus its configured offset. Missing or null current-game autoCorrectX falls back to true; an explicit false disables correction.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-093",
@@ -1675,7 +1788,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-094",
@@ -1686,19 +1800,21 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-097",
           "key": "bottomLeftFilename",
           "storageKey": "bottomLeftFilename:str",
           "label": "Filename",
-          "description": "Image basename for the bottomLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+          "description": "Image basename for the bottomLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
           "editorType": "file",
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-098",
@@ -1709,7 +1825,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.5",
           "type": "number",
-          "default": 0.5
+          "default": 0.5,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-099",
@@ -1720,7 +1837,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-100",
@@ -1731,7 +1849,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-101",
@@ -1742,19 +1861,21 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-103",
           "key": "bottomRightFilename",
           "storageKey": "bottomRightFilename:str",
           "label": "Filename",
-          "description": "Image basename for the bottomRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+          "description": "Image basename for the bottomRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
           "editorType": "file",
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-104",
@@ -1765,7 +1886,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.5",
           "type": "number",
-          "default": 0.5
+          "default": 0.5,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-105",
@@ -1776,7 +1898,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-106",
@@ -1787,7 +1910,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-107",
@@ -1798,19 +1922,21 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-109",
           "key": "upperLeftFilename",
           "storageKey": "upperLeftFilename:str",
           "label": "Filename",
-          "description": "Image basename for the upperLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+          "description": "Image basename for the upperLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
           "editorType": "file",
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-110",
@@ -1821,7 +1947,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.5",
           "type": "number",
-          "default": 0.5
+          "default": 0.5,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-111",
@@ -1832,7 +1959,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "1.0",
           "type": "number",
-          "default": 1
+          "default": 1,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-112",
@@ -1843,7 +1971,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-113",
@@ -1854,19 +1983,21 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-115",
           "key": "upperRightFilename",
           "storageKey": "upperRightFilename:str",
           "label": "Filename",
-          "description": "Image basename for the upperRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+          "description": "Image basename for the upperRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
           "editorType": "file",
           "nativeDefault": "",
           "type": "string",
           "directory": "img/system/",
-          "default": ""
+          "default": "",
+          "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-116",
@@ -1877,7 +2008,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "0.5",
           "type": "number",
-          "default": 0.5
+          "default": 0.5,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-117",
@@ -1888,7 +2020,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "1.0",
           "type": "number",
-          "default": 1
+          "default": 1,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-118",
@@ -1899,7 +2032,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         },
         {
           "id": "EXT-M-119",
@@ -1910,7 +2044,8 @@ const catalog = {
           "editorType": "text",
           "nativeDefault": "+0",
           "type": "number",
-          "default": 0
+          "default": 0,
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
         }
       ],
       "default": {
@@ -1940,7 +2075,7 @@ const catalog = {
         "upperRightOffsetX": 0,
         "upperRightOffsetY": 0
       },
-      "context": "To show a tail, place <Tail BL: 100> in Show Text for an illustrative X of 100 pixels inside the message window, or enable autoPositionTail and use <Auto Event: 1> with an existing event ID 1. Configure a nonempty matching tail image from img/system without .png. Auto-position chooses the configured bottom-left/right image; manual tags choose their named edge. Anchor values are image fractions (0 left/top, 0.5 center, 1 right/bottom); offsets are pixels. autoCorrectX compensates horizontal window clamping only for automatic X placement."
+      "context": "To show a tail, place <Tail BL: 100> in Show Text for an illustrative X of 100 pixels inside the message window, or enable autoPositionTail and use <Auto Event: 1> with an existing event ID 1. Configure a nonempty matching tail image from img/system without .png. Auto-position chooses the configured bottom-left/right image; manual tags choose their named edge. Anchor values are image fractions (0 left/top, 0.5 center, 1 right/bottom); offsets are pixels. autoCorrectX compensates horizontal window clamping only for automatic X placement. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game. Cursor/tail settings and console visibility belong to Game_System: commands survive map changes and save/load, and new games initialize from the current configuration. Old saves missing an entire settings owner initialize it from current defaults; existing partial owners are preserved, not merged. Parameter edits do not replace settings already present in a loaded save. Auto/fast-forward toggles belong to Game_Temp, are not saved, and reset on a new game/load; their additional in-game reset rules are described at EXT-BEH-autoforward and EXT-BEH-fastforward. An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. Multiple TAIL tags are applied by direction-pass order BL, BR, UL, UR; the last tag within the last matching pass wins, not necessarily the last tag in textual order. Automatic positioning can then replace that manual selection."
     },
     {
       "id": "EXT-M-019",
@@ -1962,33 +2097,62 @@ const catalog = {
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-019 --json."
         },
         {
           "id": "EXT-M-121",
           "key": "ScrollDownNext",
           "storageKey": "ScrollDownNext:eval",
           "label": "Scroll Down: Next?",
-          "description": "Set \"Scroll Down\" to \"Next\"?",
+          "description": "Boot script: truthy makes a downward wheel delta of at least 20 confirm message input after other trigger handling returns false. False disables this wheel action. ScrollWheel.Enable must be truthy; the console visibility setting does not gate this handler.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
+          "default": "true",
+          "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-019 --json."
         },
         {
           "id": "EXT-M-122",
           "key": "ScrollUpMsgLog",
           "storageKey": "ScrollUpMsgLog:eval",
           "label": "Scroll Up: Log?",
-          "description": "Allow the upward mouse-wheel shortcut to open the optional MessageLog during a map message.",
+          "description": "Allow the upward mouse-wheel shortcut to open the optional MessageLog through the message input handler.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not the event interpreter",
+            "arguments": [
+              "target: parameter conversion object",
+              "raw: native encoded fields"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Automatically evaluated once while plugin parameters load at boot. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+          },
           "default": "true",
-          "context": "Requires the optional MessageLog provider and its Scene_MessageLog class, /ScrollWheel/Enable=true (EXT-M-120), the message isTriggered update path. This wheel handler does not test the menu-enabled flag or use the console-button visibility gate. This module does not supply that provider. Without it, scrolling cannot open a history scene. Configure the provider before enabling this shortcut; the normal message remains usable when the provider is absent.",
+          "context": "Requires the optional MessageLog provider and its Scene_MessageLog class, /ScrollWheel/Enable=true (EXT-M-120), the message isTriggered update path. This wheel handler does not test the menu-enabled flag or use the console-button visibility gate. This module does not supply that provider. Without it, scrolling cannot open a history scene. Configure the provider before enabling this shortcut; the normal message remains usable when the provider is absent. The handler itself does not restrict Scene_Map or test the mouse pointer against console buttons. The supported integration is VisuMZ_3_MessageLog 1.08, after Extended; consult that provider in the MZ Plugin Manager for its recording configuration. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-019 --json.",
           "examples": [
             {
               "input": "With MessageLog and Scene_MessageLog installed, enable /ScrollWheel/Enable and /ScrollWheel/ScrollUpMsgLog, then scroll upward during a map message while its trigger handling is active.",
@@ -2002,7 +2166,7 @@ const catalog = {
         "ScrollDownNext": "true",
         "ScrollUpMsgLog": "true"
       },
-      "context": "ScrollUpMsgLog requires the optional Message Log integration and its Scene_MessageLog class. Consult ext-message api describe EXT-M-122 --json. These settings are read at boot; changing the registry requires restarting the game."
+      "context": "ScrollUpMsgLog requires the optional Message Log integration and its Scene_MessageLog class. Consult ext-message api describe EXT-M-122 --json. These settings are read at boot; changing the registry requires restarting the game. Configuration persists in js/plugins.js, independently of game saves. Restart after parameter changes. A missing root uses its nativeDefault; a missing field in a nonempty native struct uses that leaf nativeDefault. Explicit empty native structs remain empty, rather than selecting the complete preset. parameters reset restores the selected published default; a group reset restores the whole preset, whereas a leaf reset uses its individual default. Complete parameters set requires every logical field; use a leaf path for a partial edit, or get the group and edit result.value before replacing it. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
     }
   ],
   "commands": [
@@ -2017,19 +2181,30 @@ const catalog = {
           "key": "Allow",
           "storageKey": "Allow:eval",
           "label": "Allow?",
-          "description": "Allow or disallow the Extended Fast Forward feature?",
+          "description": "JavaScript script completion: truthy allows extended fast-forward; false forbids it. The command stores the opposite as its saved disallow flag.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not Game_Interpreter",
+            "arguments": [
+              "target: native argument object",
+              "raw: native argument object"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Evaluated automatically when the interpreter reaches the plugin command, before its handler. Accept a script completion, e.g. \"true\" or \"$gameSwitches.value(1)\"; switch 1 is illustrative. Game globals are available at execution. The CLI stores/checks source without executing it."
+          },
+          "default": "true",
+          "context": "When the interpreter reaches this command, Allow truthy permits extended fast-forward and false forbids it. This permission is saved in Game_System across maps/save/load; new games and old saves missing the flag start allowed. It does not enable FastFwd.Enable or clear the temporary toggle; active input gates still apply. See EXT-M-014. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
         }
       ],
       "targets": [
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "When the interpreter reaches this command, Allow truthy permits extended fast-forward and false forbids it. This permission is saved in Game_System across maps/save/load; new games and old saves missing the flag start allowed. It does not enable FastFwd.Enable or clear the temporary toggle; active input gates still apply. See EXT-M-014. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
     },
     {
       "id": "EXT-M-003",
@@ -2042,19 +2217,30 @@ const catalog = {
           "key": "Visible",
           "storageKey": "Visible:eval",
           "label": "Visible?",
-          "description": "Show or hide the Message Button Console feature?",
+          "description": "JavaScript script completion: truthy permits console visibility; false hides it. Per-message hide conditions still apply.",
           "editorType": "boolean",
           "nativeDefault": "true",
           "type": "string",
-          "javascript": "expression",
-          "default": "true"
+          "javascript": {
+            "kind": "script",
+            "receiver": "VisuMZ namespace object, not Game_Interpreter",
+            "arguments": [
+              "target: native argument object",
+              "raw: native argument object"
+            ],
+            "returnType": "completion value interpreted by truthiness; empty source produces null",
+            "context": "Evaluated automatically when the interpreter reaches the plugin command, before its handler. Accept a script completion, e.g. \"true\" or \"$gameSwitches.value(1)\"; switch 1 is illustrative. Game globals are available at execution. The CLI stores/checks source without executing it."
+          },
+          "default": "true",
+          "context": "When the interpreter reaches this command, Visible truthy permits the map console and false hides it at the next message layout/visibility refresh. It does not forcibly refresh the current layout. The flag persists in Game_System across maps/save/load; new games and old saves missing it use MsgButtonConsole.ShowDefault. Per-page hide/AutoSizeHide still win. See EXT-M-015. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
         }
       ],
       "targets": [
         "map",
         "common-event",
         "troop"
-      ]
+      ],
+      "context": "When the interpreter reaches this command, Visible truthy permits the map console and false hides it at the next message layout/visibility refresh. It does not forcibly refresh the current layout. The flag persists in Game_System across maps/save/load; new games and old saves missing it use MsgButtonConsole.ShowDefault. Per-page hide/AutoSizeHide still win. See EXT-M-015. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
     },
     {
       "id": "EXT-M-005",
@@ -2078,19 +2264,29 @@ const catalog = {
               "key": "Enable",
               "storageKey": "Enable:eval",
               "label": "Enable?",
-              "description": "Enable or disable the message cursor?",
+              "description": "Script completion: truthy uses the configured custom cursor; false uses the native message pause sign. Image/icon custom cursors follow the open message window, not just pauses; active input subwindows or closing make them transparent. See EXT-M-017 for current-game commands and saved settings.",
               "editorType": "boolean",
               "nativeDefault": "true",
               "type": "string",
-              "javascript": "expression",
-              "default": "true"
+              "javascript": {
+                "kind": "script",
+                "receiver": "VisuMZ namespace object, not the event interpreter",
+                "arguments": [
+                  "target: parameter conversion object",
+                  "raw: native encoded fields"
+                ],
+                "returnType": "completion value interpreted by truthiness; empty source produces null",
+                "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+              },
+              "default": "true",
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-075",
               "key": "GraphicType",
               "storageKey": "GraphicType:str",
               "label": "Graphic Type",
-              "description": "What is the cursor's graphic type?",
+              "description": "Graphic source: icon uses IconIndex from img/system/IconSet.png and FlipMultiplier; image uses Filename divided into Rows by Cols with FrameDelay; windowskin uses the message window current skin and its native pause animation. Enable must evaluate truthy. The console WindowSkin does not select the cursor windowskin.",
               "editorType": "select",
               "nativeDefault": "icon",
               "type": "string",
@@ -2099,7 +2295,8 @@ const catalog = {
                 "image",
                 "windowskin"
               ],
-              "default": "icon"
+              "default": "icon",
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-077",
@@ -2111,7 +2308,7 @@ const catalog = {
               "nativeDefault": "188",
               "type": "string",
               "default": "188",
-              "context": " Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename."
+              "context": "Use a zero-based integer cell index in img/system/IconSet.png, with 16 columns per row. Index 188 selects column 12 and row 11. This is an icon cell number, not an image filename. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-078",
@@ -2122,7 +2319,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "1",
               "type": "string",
-              "default": "1"
+              "default": "1",
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-080",
@@ -2134,43 +2332,47 @@ const catalog = {
               "nativeDefault": "",
               "type": "string",
               "directory": "img/system/",
-              "default": ""
+              "default": "",
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-081",
               "key": "Rows",
               "storageKey": "Rows:num",
               "label": "Image Rows",
-              "description": "How many rows are there for the image?",
+              "description": "Number of equal image-sheet rows, used with GraphicType=image. Use a positive whole count and an image height divisible by it; runtime floors cell height. CLI accepts any finite number >=1, so fractional counts are not rejected but do not describe a regular sheet. Rows * Cols also contributes to the animation counter duration.",
               "editorType": "number",
               "nativeDefault": "1",
               "type": "number",
               "min": 1,
-              "default": 1
+              "default": 1,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-082",
               "key": "Cols",
               "storageKey": "Cols:num",
               "label": "Image Columns",
-              "description": "How many columns are there for the image?",
+              "description": "Number of equal image-sheet columns, used with GraphicType=image. Frames run left to right, then top to bottom. Use a positive whole count and an image width divisible by it; runtime floors cell width. CLI accepts any finite number >=1, including fractional counts. Rows * Cols contributes to animation duration.",
               "editorType": "number",
               "nativeDefault": "1",
               "type": "number",
               "min": 1,
-              "default": 1
+              "default": 1,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-083",
               "key": "FrameDelay",
               "storageKey": "FrameDelay:num",
               "label": "Frame Delay",
-              "description": "How many frames delayed are there per animated cell?",
+              "description": "Game-update frames per image cell. Use a positive whole count; the CLI accepts finite numbers >=1. The cycle lasts Rows * Cols * FrameDelay updates and runs at most once per Graphics.frameCount. It pauses while the image is unavailable, an input subwindow is active or the message closes. Windowskin uses its native animation instead.",
               "editorType": "number",
               "nativeDefault": "4",
               "type": "number",
               "min": 1,
-              "default": 4
+              "default": 4,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-085",
@@ -2181,7 +2383,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.5",
               "type": "number",
-              "default": 0.5
+              "default": 0.5,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-086",
@@ -2192,31 +2395,32 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "1",
               "type": "number",
-              "default": 1
+              "default": 1,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-087",
               "key": "OffsetX",
               "storageKey": "OffsetX:num",
               "label": "Offset X",
-              "description": "Offset the Message Cursor's X position by how many pixels?",
+              "description": "Horizontal cursor offset in pixels, positive right and negative left. Added to the text cursor X + message padding + contents-sprite X + half the cursor sprite width. The resulting anchor X is rounded and clamped from padding to full window width; this does not guarantee the whole graphic remains inside the contents.",
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
               "default": 0,
-              "context": " Offset in pixels along X; positive moves right, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             },
             {
               "id": "EXT-M-088",
               "key": "OffsetY",
               "storageKey": "OffsetY:num",
               "label": "Offset Y",
-              "description": "Offset the Message Cursor's Y position by how many pixels?",
+              "description": "Vertical cursor offset in pixels, positive down and negative up. Added to the text line Y + line height + message padding + contents-sprite Y. The resulting anchor Y is rounded and clamped from padding to window height minus padding; the graphic can extend beyond that anchor. Complete MsgCursor default uses -4; resetting this leaf uses -8.",
               "editorType": "text",
               "nativeDefault": "-8",
               "type": "number",
               "default": -8,
-              "context": " Offset in pixels along Y; positive moves down, negative moves the opposite way. It is added to the computed message-cursor position next to the text cursor, then the final position is clamped to the message contents bounds."
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-017 --json."
             }
           ],
           "default": {
@@ -2233,7 +2437,7 @@ const catalog = {
             "OffsetX": 0,
             "OffsetY": -4
           },
-          "context": "Cursor settings are initialized from the complete MsgCursor preset; explicit object values win over child field defaults. The preset uses FlipMultiplier 0.125 and OffsetY -4, while the individual field defaults are 1 and -8. AnchorX/AnchorY are image fractions: 0 left/top, 0.5 center, 1 right/bottom. Offsets are pixels. When inserting a cursor command, provide the complete argument object shown in its example; a newly inserted partial struct does not automatically acquire missing fields. Existing command updates retain encoded fields not supplied."
+          "context": "Replaces the complete current Game_System cursor settings with a deep copy, then recreates/refreshes the cursor for an existing scene message window. It does not merge with the previous runtime object. Settings survive maps/save/load; new games use EXT-M-017. Supply the complete default object when inserting with explicit values: omitted fields in a partial struct are not filled at command execution. CLI update preserves existing encoded fields not supplied. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
         }
       ],
       "targets": [
@@ -2241,7 +2445,7 @@ const catalog = {
         "common-event",
         "troop"
       ],
-      "context": "Cursor settings are initialized from the complete MsgCursor preset; explicit object values win over child field defaults. The preset uses FlipMultiplier 0.125 and OffsetY -4, while the individual field defaults are 1 and -8. AnchorX/AnchorY are image fractions: 0 left/top, 0.5 center, 1 right/bottom. Offsets are pixels. When inserting a cursor command, provide the complete argument object shown in its example; a newly inserted partial struct does not automatically acquire missing fields. Existing command updates retain encoded fields not supplied."
+      "context": "Replaces the complete current Game_System cursor settings with a deep copy, then recreates/refreshes the cursor for an existing scene message window. It does not merge with the previous runtime object. Settings survive maps/save/load; new games use EXT-M-017. Supply the complete default object when inserting with explicit values: omitted fields in a partial struct are not filled at command execution. CLI update preserves existing encoded fields not supplied. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
     },
     {
       "id": "EXT-M-007",
@@ -2269,9 +2473,18 @@ const catalog = {
               "editorType": "boolean",
               "nativeDefault": "true",
               "type": "string",
-              "javascript": "expression",
+              "javascript": {
+                "kind": "script",
+                "receiver": "VisuMZ namespace object, not the event interpreter",
+                "arguments": [
+                  "target: parameter conversion object",
+                  "raw: native encoded fields"
+                ],
+                "returnType": "completion value interpreted by truthiness; empty source produces null",
+                "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+              },
               "default": "true",
-              "context": "Requires a nonempty lower-tail basename in /MsgTail settings and an existing event selected by an auto-position tag such as <AUTO EVENT: 1> in Show Text on the map. See EXT-M-018 for the event-relative tag. The corresponding image must exist in img/system; no image is synthesized by this flag. False leaves automatic positioning active but omits its tail. The tail becomes visible only when the message window is fully open.",
+              "context": "Requires a nonempty lower-tail basename in /MsgTail settings and an existing event selected by an auto-position tag such as <AUTO EVENT: 1> in Show Text on the map. See EXT-M-018 for the event-relative tag. The corresponding image must exist in img/system; no image is synthesized by this flag. False leaves Message automatic positioning active and disables automatic tail selection; an explicit TAIL tag can still show a tail. The tail becomes visible only when the message window is fully open. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json.",
               "examples": [
                 {
                   "input": "Configure a lower-tail image basename, set /MsgTail/autoPositionTail to true, then use <AUTO EVENT: 1>Hello in Show Text on a map with event 1.",
@@ -2284,24 +2497,44 @@ const catalog = {
               "key": "autoPositionLeft",
               "storageKey": "autoPositionLeft:eval",
               "label": "Face Left?",
-              "description": "Which direction does the Message Tail point to?",
+              "description": "Script completion selecting the automatic lower tail artwork: truthy uses bottomLeftFilename and its anchors/offsets; false uses bottomRightFilename and its settings. It does not mirror an image. Only automatic positioning uses this choice; explicit TAIL tags select their own direction.",
               "editorType": "boolean",
               "nativeDefault": "true",
               "type": "string",
-              "javascript": "expression",
-              "default": "true"
+              "javascript": {
+                "kind": "script",
+                "receiver": "VisuMZ namespace object, not the event interpreter",
+                "arguments": [
+                  "target: parameter conversion object",
+                  "raw: native encoded fields"
+                ],
+                "returnType": "completion value interpreted by truthiness; empty source produces null",
+                "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+              },
+              "default": "true",
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-092",
               "key": "autoCorrectX",
               "storageKey": "autoCorrectX:eval",
               "label": "Auto-Correct X",
-              "description": "When true, shift an automatic message tail horizontally to compensate when the auto-positioned message window is clamped at the screen edge. Applies when the tail uses its automatic X position; explicit <Tail BL: 100> coordinates are not corrected. False leaves the tail at the window center plus its configured offset.",
+              "description": "When true, shift an automatic message tail horizontally to compensate when the auto-positioned message window is clamped at the screen edge. Applies when the tail uses its automatic X position; explicit <Tail BL: 100> coordinates are not corrected. False leaves the tail at the window center plus its configured offset. Missing or null current-game autoCorrectX falls back to true; an explicit false disables correction.",
               "editorType": "boolean",
               "nativeDefault": "true",
               "type": "string",
-              "javascript": "expression",
-              "default": "true"
+              "javascript": {
+                "kind": "script",
+                "receiver": "VisuMZ namespace object, not the event interpreter",
+                "arguments": [
+                  "target: parameter conversion object",
+                  "raw: native encoded fields"
+                ],
+                "returnType": "completion value interpreted by truthiness; empty source produces null",
+                "context": "Automatically evaluated at boot for the parameter. This field is also used by its current-game settings command and is reevaluated when that command runs. Accept a JavaScript script with a completion value, such as \"true\" or \"var enabled = true; enabled\"; a return statement is not the eval format. Game objects may be unavailable at boot. The CLI checks syntax and stores the source without evaluating it."
+              },
+              "default": "true",
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-093",
@@ -2312,7 +2545,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-094",
@@ -2323,19 +2557,21 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-097",
               "key": "bottomLeftFilename",
               "storageKey": "bottomLeftFilename:str",
               "label": "Filename",
-              "description": "Image basename for the bottomLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+              "description": "Image basename for the bottomLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
               "editorType": "file",
               "nativeDefault": "",
               "type": "string",
               "directory": "img/system/",
-              "default": ""
+              "default": "",
+              "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-098",
@@ -2346,7 +2582,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.5",
               "type": "number",
-              "default": 0.5
+              "default": 0.5,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-099",
@@ -2357,7 +2594,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-100",
@@ -2368,7 +2606,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-101",
@@ -2379,19 +2618,21 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-103",
               "key": "bottomRightFilename",
               "storageKey": "bottomRightFilename:str",
               "label": "Filename",
-              "description": "Image basename for the bottomRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+              "description": "Image basename for the bottomRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
               "editorType": "file",
               "nativeDefault": "",
               "type": "string",
               "directory": "img/system/",
-              "default": ""
+              "default": "",
+              "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-104",
@@ -2402,7 +2643,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.5",
               "type": "number",
-              "default": 0.5
+              "default": 0.5,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-105",
@@ -2413,7 +2655,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-106",
@@ -2424,7 +2667,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-107",
@@ -2435,19 +2679,21 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-109",
               "key": "upperLeftFilename",
               "storageKey": "upperLeftFilename:str",
               "label": "Filename",
-              "description": "Image basename for the upperLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+              "description": "Image basename for the upperLeft tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
               "editorType": "file",
               "nativeDefault": "",
               "type": "string",
               "directory": "img/system/",
-              "default": ""
+              "default": "",
+              "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-110",
@@ -2458,7 +2704,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.5",
               "type": "number",
-              "default": 0.5
+              "default": 0.5,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-111",
@@ -2469,7 +2716,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "1.0",
               "type": "number",
-              "default": 1
+              "default": 1,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-112",
@@ -2480,7 +2728,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-113",
@@ -2491,19 +2740,21 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-115",
               "key": "upperRightFilename",
               "storageKey": "upperRightFilename:str",
               "label": "Filename",
-              "description": "Image basename for the upperRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. An empty filename gives a blank tail. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
+              "description": "Image basename for the upperRight tail in img/system, without .png; for example Tail loads img/system/Tail.png. Supply artwork for this direction; the runtime does not mirror another direction automatically. Select this direction with its Show Text tail tag; automatic tails use only the configured bottom-left or bottom-right image.",
               "editorType": "file",
               "nativeDefault": "",
               "type": "string",
               "directory": "img/system/",
-              "default": ""
+              "default": "",
+              "context": "An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-116",
@@ -2514,7 +2765,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "0.5",
               "type": "number",
-              "default": 0.5
+              "default": 0.5,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-117",
@@ -2525,7 +2777,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "1.0",
               "type": "number",
-              "default": 1
+              "default": 1,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-118",
@@ -2536,7 +2789,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             },
             {
               "id": "EXT-M-119",
@@ -2547,7 +2801,8 @@ const catalog = {
               "editorType": "text",
               "nativeDefault": "+0",
               "type": "number",
-              "default": 0
+              "default": 0,
+              "context": "For activation, effective configuration, defaults/reset and lifecycle, see ext-message api describe EXT-M-018 --json."
             }
           ],
           "default": {
@@ -2577,7 +2832,7 @@ const catalog = {
             "upperRightOffsetX": 0,
             "upperRightOffsetY": 0
           },
-          "context": "To show a tail, place <Tail BL: 100> in Show Text for an illustrative X of 100 pixels inside the message window, or enable autoPositionTail and use <Auto Event: 1> with an existing event ID 1. Configure a nonempty matching tail image from img/system without .png. Auto-position chooses the configured bottom-left/right image; manual tags choose their named edge. Anchor values are image fractions (0 left/top, 0.5 center, 1 right/bottom); offsets are pixels. autoCorrectX compensates horizontal window clamping only for automatic X placement."
+          "context": "Replaces the complete current Game_System tail settings with a deep copy; subsequent message-window updates read the new settings. It does not merge with the previous runtime object or reset the current page tail selection. Settings survive maps/save/load; new games use EXT-M-018. Supply the complete default object for an explicit insertion; partial structs are not filled at execution. CLI update preserves existing encoded fields not supplied. An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
         }
       ],
       "targets": [
@@ -2585,7 +2840,7 @@ const catalog = {
         "common-event",
         "troop"
       ],
-      "context": "To show a tail, place <Tail BL: 100> in Show Text for an illustrative X of 100 pixels inside the message window, or enable autoPositionTail and use <Auto Event: 1> with an existing event ID 1. Configure a nonempty matching tail image from img/system without .png. Auto-position chooses the configured bottom-left/right image; manual tags choose their named edge. Anchor values are image fractions (0 left/top, 0.5 center, 1 right/bottom); offsets are pixels. autoCorrectX compensates horizontal window clamping only for automatic X placement."
+      "context": "Replaces the complete current Game_System tail settings with a deep copy; subsequent message-window updates read the new settings. It does not merge with the previous runtime object or reset the current page tail selection. Settings survive maps/save/load; new games use EXT-M-018. Supply the complete default object for an explicit insertion; partial structs are not filled at execution. CLI update preserves existing encoded fields not supplied. An empty filename starts without artwork. After an earlier page displayed a tail, clearing the filename at a new page can retain the previous bitmap in this version. To hide tails on subsequent pages, omit explicit TAIL tags and disable autoPositionTail; an empty filename alone is not a reliable removal operation. For providers, activation and whole-group authoring, see ext-message api describe EXT-M-015 --json. The CLI authors data offline; effects occur only in the running game."
     }
   ],
   "dependencies": {
@@ -2760,6 +3015,8 @@ function encodeValue(schema, value, path, previous) {
         const encoded = previous === undefined ? [] : parseLayer(previous, path);
         return JSON.stringify(value.map((item, index) => encodeValue(schema.items, item, `${path}/${index}`, encoded[index])));
     }
+    // A whole-object edit must not reformat an untouched native numeric field.
+    if (schema.type === "number" && typeof previous === "string" && previous.trim() !== "" && Number(previous) === value) return previous;
     return schema.encoding === "json" ? JSON.stringify(value) : String(value);
 }
 

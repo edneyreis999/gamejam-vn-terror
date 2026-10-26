@@ -15,7 +15,10 @@ import { tagTarget } from './tag-target.mjs';
 export async function validateProject(root, catalog) {
     const snapshots = new Map();
     const diagnostics = [];
+    const skillsStates = catalog.namespace === 'skills-states';
     const mainMenu = catalog.namespace === 'main-menu';
+    const itemsEquips = catalog.namespace === 'items-equips';
+    const providerLabel = itemsEquips ? 'Items' : 'MainMenu';
     const counts = {parameters: 0, eventLists: 0, commands: 0, tags: 0};
     const report = (code, message, target, details = {}, severity = 'error') => diagnostics.push({severity, code, message, target, ...details});
     async function inspect(target, action) {
@@ -39,7 +42,7 @@ export async function validateProject(root, catalog) {
         });
     }
     async function parameterReferences(field, value, path) {
-        if (field.availability && !['supported', 'requires-local-service'].includes(field.availability) && !(mainMenu && field.availability === 'editorial')) {
+        if (field.availability && !['supported', 'requires-local-service'].includes(field.availability) && !((mainMenu || itemsEquips || skillsStates) && field.availability === 'editorial')) {
             report('CAPABILITY_UNAVAILABLE', field.reason ?? 'This parameter has no effect in the browser.', path,
                 {availability: field.availability, received: value}, 'warning');
         }
@@ -90,23 +93,74 @@ export async function validateProject(root, catalog) {
             if (doodadEditor >= 0 && (doodadSystem < 0 || doodadSystem > doodadEditor)) report('CONSUMER_DEPENDENCY', 'VisuMZ_3_DoodadsEditor requires VisuMZ_2_DoodadsSystem before it. Both follow Coreto_1_EventsMoveCore.', 'js/plugins.js');
             if (dependency < 0 || dependency > core) report('CORE_LOAD_ORDER', 'Activate Coreto_0_CoreEngine before Events.', 'js/plugins.js');
             if (plugins.some(plugin => plugin.status && [catalog.reference.pluginId, 'VisuMZ_0_CoreEngine'].includes(plugin.name))) report('PROVIDER_CONFLICT', 'Disable the original Core and Events providers.', 'js/plugins.js');
-        } else if (mainMenu) {
+        } else if (skillsStates) {
+            core = plugins.findIndex(plugin => plugin.name === catalog.pluginId && plugin.status);
+            if (core < 0) report('SKILLS_STATES_NOT_ACTIVE', 'Activate '+catalog.pluginId+'.', 'js/plugins.js');
+            if (plugins.some(plugin => plugin.name === catalog.reference.pluginId && plugin.status)) report('PROVIDER_CONFLICT', 'Disable the original SkillsStates provider.', 'js/plugins.js');
+            const known = {...catalog.dependencies.cores, ...catalog.dependencies.integrations, ...catalog.dependencies.consumers};
+            const alternatives = name => {
+                if (name === catalog.reference.pluginId) return [name,catalog.pluginId];
+                const candidate = name.replace(/^VisuMZ_/, 'Coreto_');
+                return Object.hasOwn(known,candidate) ? [name,candidate] : [name];
+            };
+            for (const name of [catalog.pluginId,catalog.reference.pluginId,...Object.keys(known)]) {
+                if (plugins.filter(plugin=>plugin.name===name).length>1) report('DUPLICATE_PLUGIN','Duplicate provider: '+name+'.','js/plugins.js');
+            }
+            const bases = plugins.filter(plugin=>plugin.status&&Object.hasOwn(catalog.dependencies.cores,plugin.name));
+            if (bases.length !== 1) report('CORE_PROVIDER_COUNT','Activate exactly one supported Core Engine provider.','js/plugins.js');
+            for (const base of bases) if (plugins.indexOf(base)>core) report('CORE_LOAD_ORDER','Place Core Engine before SkillsStates.','js/plugins.js');
+            for (const [index,plugin] of plugins.entries()) {
+                if (!plugin.status || !Object.hasOwn(known,plugin.name)) continue;
+                const ids = plugin.name.startsWith('Coreto_') ? alternatives(plugin.name.replace(/^Coreto_/, 'VisuMZ_')) : alternatives(plugin.name);
+                if (plugins.filter(entry=>entry.status&&ids.includes(entry.name)).length>1) report('PROVIDER_CONFLICT','Enable exactly one of '+ids.join(', ')+'.','js/plugins.js');
+                const versionMatches = plugin.name === 'Coreto_0_CoreEngine' ? plugin.description.startsWith('Coreto Core Engine '+known[plugin.name]+' —') : plugin.description.includes('[Version '+known[plugin.name]+']');
+                if (!versionMatches) report('DEPENDENCY_VERSION','Use '+plugin.name+' '+known[plugin.name]+'.','js/plugins.js');
+                await inspect('js/plugins/'+plugin.name+'.js',async()=>{
+                    const text = await source('js/plugins/'+plugin.name+'.js');
+                    for (const match of text.matchAll(/^\s*\* @base (\S+)/gm)) {
+                        const ids = alternatives(match[1]), providers = plugins.filter(entry=>entry.status&&ids.includes(entry.name));
+                        if (providers.length!==1) report('CONSUMER_DEPENDENCY',plugin.name+' requires exactly one of '+ids.join(', ')+'.','js/plugins.js');
+                        for (const provider of providers) if (plugins.indexOf(provider)>index) report('CONSUMER_LOAD_ORDER','Place '+provider.name+' before '+plugin.name+'.','js/plugins.js');
+                    }
+                });
+                if (catalog.orderBefore.includes(plugin.name) && index<core) report('CONSUMER_LOAD_ORDER','Place SkillsStates before '+plugin.name+'.','js/plugins.js');
+                if (plugin.name.startsWith('Coreto_') && !Object.hasOwn(catalog.dependencies.cores,plugin.name) && !bases.some(base=>base.name==='Coreto_0_CoreEngine')) report('CONSUMER_DEPENDENCY',plugin.name+' requires Coreto_0_CoreEngine.','js/plugins.js');
+            }
+        } else if (mainMenu || itemsEquips) {
             const baseIds = catalog.dependencies.required[0];
             for (const name of [catalog.pluginId, catalog.reference.pluginId, ...baseIds]) {
                 if (plugins.filter(plugin => plugin.name === name).length > 1) report('DUPLICATE_PLUGIN', `Duplicate provider: ${name}.`, 'js/plugins.js');
             }
             core = plugins.findIndex(plugin => plugin.name === catalog.pluginId && plugin.status);
-            if (core < 0) report('MAIN_MENU_NOT_ACTIVE', `Activate ${catalog.pluginId}.`, 'js/plugins.js');
-            if (plugins.some(plugin => plugin.name === catalog.reference.pluginId && plugin.status)) report('PROVIDER_CONFLICT', 'Disable the original MainMenu provider.', 'js/plugins.js');
+            if (core < 0) report(itemsEquips ? 'ITEMS_NOT_ACTIVE' : 'MAIN_MENU_NOT_ACTIVE', `Activate ${catalog.pluginId}.`, 'js/plugins.js');
+            if (plugins.some(plugin => plugin.name === catalog.reference.pluginId && plugin.status)) report('PROVIDER_CONFLICT', `Disable the original ${providerLabel} provider.`, 'js/plugins.js');
             const bases = plugins.filter(plugin => plugin.status && baseIds.includes(plugin.name));
             if (bases.length !== 1) report('CORE_PROVIDER_COUNT', 'Activate exactly one supported Core Engine provider.', 'js/plugins.js');
             for (const base of bases) {
-                if (plugins.indexOf(base) > core) report('CORE_LOAD_ORDER', 'Place Core Engine before MainMenu.', 'js/plugins.js');
+                if (plugins.indexOf(base) > core) report('CORE_LOAD_ORDER', `Place Core Engine before ${providerLabel}.`, 'js/plugins.js');
                 await source(`js/plugins/${base.name}.js`);
             }
             for (const [index, consumer] of plugins.entries()) {
-                if (!consumer.status || !Object.hasOwn(catalog.dependencies.consumers, consumer.name)) continue;
-                if (index < core) report('CONSUMER_LOAD_ORDER', `Place ${consumer.name} after MainMenu.`, 'js/plugins.js');
+                if (!consumer.status || !(itemsEquips ? catalog.orderBefore.includes(consumer.name) : Object.hasOwn(catalog.dependencies.consumers, consumer.name))) continue;
+                if (itemsEquips && core < 0 && !['VisuMZ_4_ButtonCmnEvts', 'VisuMZ_4_VisualItemInv'].includes(consumer.name)) report('CONSUMER_DEPENDENCY', `${consumer.name} requires the Items provider. Activate the qualified provider before it or disable the consumer.`, 'js/plugins.js');
+                if (index < core) report('CONSUMER_LOAD_ORDER', `Place ${consumer.name} after ${providerLabel}.`, 'js/plugins.js');
+                if (!Object.hasOwn(catalog.dependencies.consumers, consumer.name)) {
+                    report('CAPABILITY_UNAVAILABLE', `${consumer.name} has not been qualified with this Items build.`, 'js/plugins.js');
+                    continue;
+                }
+
+                const consumerRequirements = itemsEquips && consumer.name === 'VisuMZ_2_WeaponSwapSystem' ? [['Coreto_1_BattleCore', 'VisuMZ_1_BattleCore']] : [];
+                for (const alternatives of consumerRequirements) {
+                    const providers = plugins.filter(plugin => plugin.status && alternatives.includes(plugin.name));
+                    if (providers.length !== 1) report('CONSUMER_DEPENDENCY', `${consumer.name} requires exactly one of ${alternatives.join(', ')} before the Items provider.`, 'js/plugins.js');
+                    for (const provider of providers) {
+                        if (provider.name === 'Coreto_1_BattleCore' && !bases.some(base => base.name === 'Coreto_0_CoreEngine')) report('CONSUMER_DEPENDENCY', 'Coreto_1_BattleCore requires Coreto_0_CoreEngine before it. Use that Core provider or the qualified original Battle provider.', 'js/plugins.js');
+                        if (plugins.indexOf(provider) > core || plugins.indexOf(provider) > index) report('CONSUMER_LOAD_ORDER', `Place ${provider.name} before ${providerLabel} and ${consumer.name}.`, 'js/plugins.js');
+                        const version = catalog.dependencies.integrations?.[provider.name];
+                        if (version && !provider.description.includes(`[Version ${version}]`)) report('CONSUMER_VERSION', `Use ${provider.name} ${version}.`, 'js/plugins.js');
+                        await source(`js/plugins/${provider.name}.js`);
+                    }
+                }
                 if (!consumer.description.includes(`[Version ${catalog.dependencies.consumers[consumer.name]}]`)) report('CONSUMER_VERSION', `Use ${consumer.name} ${catalog.dependencies.consumers[consumer.name]}.`, 'js/plugins.js');
                 await source(`js/plugins/${consumer.name}.js`);
             }
@@ -175,8 +229,19 @@ export async function validateProject(root, catalog) {
                 await inspect(item.target, () => tagOperation(text, catalog, tagTarget(root, item.target), {
                     operation: 'set', selector: item.target, tag: item.tag, occurrence: item.occurrence, value: item.value
                 }));
+                if (itemsEquips && item.tag === 'purify-transform') await inspect(item.target, async () => {
+                    const name = /<PURIFY TRANSFORM: (.*)>/i.exec(item.value)?.[1].trim();
+                    const kind = /^(?:weapon|weapons):/.test(selector) ? 'Weapons' : 'Armors';
+                    const entries = await database(kind + '.json');
+                    const exists = /^\d+$/.test(name) ? !!entries[Number(name)] : entries.some(entry => entry && entry.name.toUpperCase().trim() === name.toUpperCase());
+                    if (!exists) report('INVALID_REFERENCE', `Purify Transform must name an existing ${kind} ID or name.`, item.target, {received:name});
+                });
                 if (mainMenu && item.tag === 'menu-image') await inspect(item.target, async () => {
                     const filename = /<MENU (?:IMAGE|PORTRAIT): (.*)>/i.exec(item.value)?.[1];
+                    if (filename) await validatePictureReference(root, filename, item.target, source);
+                });
+                if (itemsEquips && item.tag === 'shop-picture') await inspect(item.target, async () => {
+                    const filename = /<SHOP (?:PICTURE|IMAGE|PICTURE NAME|PICTURE FILENAME|IMAGE NAME|IMAGE FILENAME): (.*)>/i.exec(item.value)?.[1];
                     if (filename) await validatePictureReference(root, filename, item.target, source);
                 });
                 if (catalog.namespace === 'events-move' && item.tag === 'copy-event') await inspect(item.target, async () => {
@@ -197,8 +262,8 @@ export async function validateProject(root, catalog) {
             const {units} = commandOperation(text, catalog, target, {operation: 'list'}).result;
             counts.eventLists++;
             for (const unit of units.filter(unit => unit.code === 357)) {
-                if (!mainMenu && catalog.namespace !== 'events-move' && unit.pluginId === catalog.compatibility.originalCoreId) report('INACTIVE_COMMAND_PROVIDER', 'This event still targets the disabled original Core. Reauthor it with the published Coreto command.', `${selector}/command:${unit.index}`);
-                if (unit.pluginId !== catalog.pluginId && !(['events-move', 'main-menu'].includes(catalog.namespace) && unit.pluginId === catalog.reference.pluginId)) continue;
+                if (!mainMenu && !itemsEquips && !skillsStates && catalog.namespace !== 'events-move' && unit.pluginId === catalog.compatibility?.originalCoreId) report('INACTIVE_COMMAND_PROVIDER', 'This event still targets the disabled original Core. Reauthor it with the published Coreto command.', `${selector}/command:${unit.index}`);
+                if (unit.pluginId !== catalog.pluginId && !((['events-move', 'main-menu'].includes(catalog.namespace) || itemsEquips || skillsStates) && unit.pluginId === catalog.reference.pluginId)) continue;
                 if (catalog.namespace === 'events-move' && unit.command.startsWith('MsgPopup') && !plugins.some(plugin => plugin.status && ['Coreto_1_MessageCore', 'VisuMZ_1_MessageCore'].includes(plugin.name))) report('CAPABILITY_UNAVAILABLE', 'Event popups require one active MessageCore provider after Events & Movement.', `${selector}/command:${unit.index}`);
                 counts.commands++;
                 await inspect(`${selector}/command:${unit.index}`, async () => {
@@ -213,7 +278,7 @@ export async function validateProject(root, catalog) {
             }
         });
     }
-    for (const name of ['Actors', 'Classes', 'Enemies', 'Weapons', 'Armors', 'States', 'Tilesets', 'Animations', 'Troops', 'CommonEvents', 'MapInfos']) {
+    for (const name of ['Actors', 'Classes', 'Enemies', 'Weapons', 'Armors', 'States', 'Tilesets', 'Animations', 'Troops', 'CommonEvents', 'MapInfos', ...(itemsEquips || skillsStates ? ['Items', 'Skills'] : [])]) {
         await inspect(`data/${name}.json`, async () => {
             for (const record of records(await database(`${name}.json`), name)) {
                 const id = record.id;

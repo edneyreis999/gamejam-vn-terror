@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "skills": {
+    "game-coreto-eng-design-system": {
+      "version": "1.3.0",
+      "files": {
+        "SKILL.md": "9792882865416ee3d348bb62f91f9fa97d5636990916b5a1709fd9384f199138",
+        "assets/AveriaLibre-Regular.ttf": "3dda695e06012f89b39eaccd77fbbcf22133a17b00ce5ddf3e4e9a996546b865",
+        "assets/CinzelDecorative-Regular.ttf": "5b862be329103ad287a10f0a53e27a40e8cc519999253f1a0223e2dc330b10b8",
+        "assets/CoretoConsole_Disabled.png": "4f48361c75d7627793f147b812bc15fb2d0e3d9e14c646726167687d5513c3fa",
+        "assets/CoretoConsole_Enabled.png": "4f48361c75d7627793f147b812bc15fb2d0e3d9e14c646726167687d5513c3fa",
+        "assets/CoretoConsole_Toggled.png": "32fd4c847ead30b301e5b4ae3a727d4fa6c5df710ea778fcf0d17cb61a3b007e",
+        "assets/CoretoTheme_Ambience.png": "6d00d6565aa23d301de2f452fa6c450d77964adbfc7a5ef825064c656e19ff2c",
+        "assets/CoretoTheme_Audio.png": "b6b7cb9ec3124c1f8ab6725e69fa1354ff793f049859f078d671ed2206f1ec60",
+        "assets/CoretoTheme_Back.png": "93d18ab56e47018d71a46adb4da8dbdf4b8e50a7ab850ce8eb8f951b5ae67a72",
+        "assets/CoretoTheme_Clock.png": "95b7795d75d678926656ce9fbe65383f848992b14999f7bd22b3c28f431419e8",
+        "assets/CoretoTheme_Conversation.png": "443152c7b464ef55778c8409808b0d16946c2d68e0cbf3dc49efa43f4fdf4fc0",
+        "assets/CoretoTheme_Jingle.png": "be26cc1e5823fa81f99a880e813137c5d83d3ac615bc3ccaf8a62168e2e64296",
+        "assets/CoretoTheme_Language.png": "102a95af773c81ec1a466c5d063cd43e105ca72700e8c317baaed7c8f7b89c39",
+        "assets/CoretoTheme_Menu.png": "add7f468de7d9e447d9deaa0bcc1eb74e8895c65210d7265232132c4caf604f6",
+        "assets/CoretoTheme_Music.png": "5395d02eb2ce76bd99674183aa15378877e51a0060d71d1aae2d607bcaadc27a",
+        "assets/CoretoTheme_Save.png": "42b6710f60986771c1f83ec612e39dd28f9f2722adf103c793a4ac6e9f523e66",
+        "assets/CoretoTheme_Settings.png": "63ad2a8986396523cb627a90bd1fce07c09c8fe380f219ffd2ec6d314c135db1",
+        "assets/CoretoTheme_SoundEffects.png": "f6b83102819963b35d7e92a457d3ff13c0ff3f763a69518df306432f9d5d175e",
+        "assets/CoretoTheme_TextEffects.png": "ad4dbddb935546d199d8618ca782c933acb74d6a7b3db30f8aa89c12a6f2dcaf",
+        "assets/CoretoTheme_continue.png": "a683985629ba1e9c865378558bf4ef0c2cc031dd0d668866c415ea97fb132559",
+        "assets/CoretoTheme_diamond.png": "112404205c02d29587956e9da701e15bf87a73030973161aa41133c5703de7f5",
+        "assets/CoretoTheme_error.png": "c4d18bcad9fb20b5cf3d6ea119488ae6f8d764440826ed7868e3ea27fd523793",
+        "assets/Outfit-Medium.ttf": "fb2b0751f2c168418de841ceebd8671bfbcb42e8f293e0f1908a43f913297771",
+        "assets/Outfit.ttf": "fc7287273e66929776e2ba54f144fe699080bec29f61bf649d70d871468aeade",
+        "assets/averialibre-OFL.txt": "46239ba6485d28553fd944da4ad32a00d9c403aa1c3e111676b0b96fe458d1d4",
+        "assets/cinzeldecorative-OFL.txt": "1e5d6660366ddcfca4f2fc10e2acfba9fa4d97d40aec80d7dbfd41d730a420ae",
+        "assets/drawing.js.txt": "8503ad95ff1ac5bef06004f528f25e14b8ae0e5ad461225fe20448581a265c21",
+        "assets/option.js.txt": "ee7b416a9b82faa904f332d4d83131d9a075ddb55c12a64b59059454657f76dd",
+        "assets/outfit-OFL.txt": "c676351bf8576b9aba743cd5eaa8c0e7ee0d51f805d720447b4df4ddb6a2e416",
+        "assets/preset.json": "a231f2f231de290a9c10e54a66ac845f9ba9272ec48f142e37fea149d39ca7e8",
+        "assets/save-contents.js.txt": "cf518d8e447edfabe1c0461e6c1f2c15c0deef892080350aac0f378e1ded601d",
+        "assets/save-file.js.txt": "05e800235568ff9b05b1ddfa65d30f28ef3a9fb320de2fbcaf637c3dbad90e52",
+        "references/design.md": "82a9db2b336421e57ce88f92ba5e1a930b2cea77a9394db2c3d740e10d44a25b",
+        "references/operations.md": "2b3bf49d0afe0a4a7234a99e8e630ed8b15f9611181ddfe6a1e25fabb58577a0",
+        "scripts/apply-design-system.mjs": "99733ab87b93dd0879c2e8de290f8bf9965e14c65edaea650795a852a1599928",
+        "scripts/design-system-cli.mjs": "fe904c5a1f40919b84b002f05f0cf6ecfc438ee0fad129e64e3615e9cafcdb2e",
+        "scripts/recipes.mjs": "ad0532178c83888fe99b05d091b6bd3eb9eb2eede0989e39affeccdbe98616c6",
+        "scripts/shared.mjs": "da6c8f4646cb429b13feb8437bdcd51baa1b9929fc75eee0cba38318cdce52bd"
+      }
+    }
+  }
+}

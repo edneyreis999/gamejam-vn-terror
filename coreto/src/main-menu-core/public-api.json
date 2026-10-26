@@ -102,7 +102,7 @@
           "key": "ThinGoldWindow",
           "storageKey": "ThinGoldWindow:eval",
           "label": "Thinner Gold Window",
-          "description": "Make the Gold Window thinner in the Main Menu? Used to match the Playtime and Variable Windows.",
+          "description": "With /CommandWindowStyle=default, true uses the one-line Window_ThinGold; false uses the native Window_Gold. Every other command layout uses the thin window regardless of this flag.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -118,7 +118,7 @@
           "key": "AutoGoldHeight",
           "storageKey": "AutoGoldHeight:eval",
           "label": "Auto Adjust Height",
-          "description": "Automatically adjust the height for the thinner Gold Window?",
+          "description": "For the default layout when the gold window is thin, true changes its rectangle height to one line; false keeps the incoming height. Other layouts calculate their own gold rectangle.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -134,7 +134,7 @@
           "key": "AutoGoldY",
           "storageKey": "AutoGoldY:eval",
           "label": "Auto Adjust Y",
-          "description": "Automatically adjust the Y position for the thinner Gold Window?",
+          "description": "For the default layout when the gold window is thin, true moves its top down by old height minus one-line height, preserving the old bottom edge when AutoGoldHeight is also true. False keeps its Y. Other layouts calculate their own position.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -196,7 +196,7 @@
           "key": "SoloQuick",
           "storageKey": "SoloQuick:eval",
           "label": "Solo Quick Mode",
-          "description": "When selecting \"Skills\", \"Equip\", or \"Status\" with one party member, immediately go to the scene.",
+          "description": "True skips personal actor selection when the party has at most one member and calls the personal handler directly; false opens selection. This applies to commands routed through Scene_Menu.commandPersonal, such as Skills, Equip and Status, not every custom command.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -227,7 +227,7 @@
           "key": "ActorBgMenus",
           "storageKey": "ActorBgMenus:arraystr",
           "label": "Menus with Actor BG's",
-          "description": "A list of the menus that would be compatible with Actor Menu Backgrounds.",
+          "description": "Exact scene class names in which selecting an actor loads that actor's menu picture as a background, for example [\"Scene_Skill\",\"Scene_Equip\"]. Empty array disables actor backgrounds. This does not activate the listed scenes or configure their portraits.",
           "type": "array",
           "editorType": "string[]",
           "nativeDefault": "[\"Scene_Skill\",\"Scene_Equip\",\"Scene_Status\"]",
@@ -270,9 +270,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "this.anchor.x = 0.5;\nconst scale = 1.25;\nthis.scale.x = this.scale.y = scale;\nthis.x = Graphics.width;\nthis.y = Graphics.height - (this.bitmap.height * Math.abs(scale));\nthis._targetX = Graphics.width * 3 / 4;\nthis._targetY = Graphics.height - (this.bitmap.height * Math.abs(scale));\nthis._duration = 10;\nthis.opacity = 0;",
-          "context": "No arguments; the actor picture has loaded in this.bitmap and this._actor identifies its owner. Set anchor, scale, x/y, opacity, _targetX/_targetY and _duration in frames. The return value is ignored. Called again when the selected actor changes in an enabled ActorBgMenus scene; use native scene class names. Runs inside the game; restart after editing plugin parameters.",
+          "context": "No arguments; the actor picture has loaded in this.bitmap and this._actor identifies its owner. Set anchor, scale, x/y, opacity, _targetX/_targetY and _duration in frames. The return value is ignored. Called again when the selected actor changes in an enabled ActorBgMenus scene; use native scene class names. Runs inside the game; restart after editing plugin parameters. Coordinates and target coordinates are screen pixels (positive X right, Y down); scale is a multiplier and opacity uses 0–255. With positive _duration, updates interpolate toward the target and opacity 255; zero leaves the assigned position/opacity unchanged. Return does not select a bitmap.",
           "examples": [
-            "main-menu parameters set --project <game> --path /General/ActorBgMenuJS --value '\"this.anchor.x = 0.5; this.x = this._targetX = Graphics.width / 2; this.y = this._targetY = 0; this._duration = 0; this.opacity = 255;\"'"
+            "main-menu parameters set --project \"<game>\" --path /General/ActorBgMenuJS --value '\"this.anchor.x = 0.5; this.x = this._targetX = Graphics.width / 2; this.y = this._targetY = 0; this._duration = 0; this.opacity = 255;\"'"
           ]
         },
         {
@@ -295,7 +295,7 @@
           "key": "ShowReserve",
           "storageKey": "ShowReserve:eval",
           "label": "Show Reserve Memebers",
-          "description": "Show reserve members while on the Main Menu scene?",
+          "description": "True includes reserve party members in Window_MenuStatus lists. False restricts the list to battle members where HideMainMenuOnly allows; it does not remove actors from the party.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -311,7 +311,7 @@
           "key": "HideMainMenuOnly",
           "storageKey": "HideMainMenuOnly:eval",
           "label": "Hide Main Menu Only",
-          "description": "If reserve members are hidden, hide them only in the main menu or all scenes?",
+          "description": "When ShowReserve is false, true hides reserves only in an exact Scene_Menu; false also hides them in other scenes using Window_MenuStatus. No effect while ShowReserve is true.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -341,7 +341,7 @@
         "ShowReserve": true,
         "HideMainMenuOnly": true
       },
-      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels."
+      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels. Configuration is read at game boot from the selected provider; CLI writes do not change an already running menu. Restart the game after editing. Whole-object reset restores the containing preset; leaf reset uses that field's published default. Read parameters get for the effective value."
     },
     {
       "id": "MM-P-16",
@@ -399,14 +399,14 @@
             "encoding": "plain",
             "availability": "supported",
             "default": 0,
-            "context": "Use the zero-based icon index in img/system/IconSet.png (16 columns, native 32-by-32 cells). A positive index draws that cell; 0 draws no icon. Choose an existing cell within the image; an out-of-sheet index does not provide a usable icon."
+            "context": "Use the zero-based icon index in img/system/IconSet.png (16 columns, native 32-by-32 cells). A positive index draws that cell; 0 draws no icon. Choose an existing cell within the image; an out-of-sheet index does not provide a usable icon. The numeric authoring field accepts finite numbers, but choose a whole icon index. /CustomCmdWin/Style=text suppresses the generated icon escape; icon mode without a positive icon leaves the item drawing empty."
           },
           {
             "id": "MM-P-20",
             "key": "TextStr",
             "storageKey": "TextStr:str",
             "label": "STR: Text",
-            "description": "Displayed text used for this menu command. If this has a value, ignore the JS: Text version.",
+            "description": "Displayed command text. Empty string and the exact Untitled sentinel use TextJS; every other string suppresses TextJS and is displayed directly.",
             "type": "string",
             "editorType": "text",
             "nativeDefault": "Untitled",
@@ -439,9 +439,9 @@
               "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
             },
             "default": "return 'Text';",
-            "context": "No arguments. Return the displayed text; used when TextStr is empty or Untitled. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters.",
+            "context": "No arguments. Return the displayed text; used when TextStr is empty or Untitled. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters. For the example, first set the same row's TextStr to \"\" (MM-P-20); otherwise an explicit label suppresses this callback. Row 0 is illustrative: inspect /CommandList and keep the row's Symbol and handler aligned with its label.",
             "examples": [
-              "main-menu parameters set --project <game> --path /CommandList/0/TextJS --value '\"return TextManager.skill;\"'"
+              "main-menu parameters set --project \"<game>\" --path /CommandList/0/TextJS --value '\"return TextManager.skill;\"'"
             ]
           },
           {
@@ -468,9 +468,9 @@
               "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
             },
             "default": "return true;",
-            "context": "arguments[0] is the case-sensitive authored symbol; arguments[1] is the runtime command definition, with compiled function fields. Return whether the command is visible. Called again during refresh and category visibility checks. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters.",
+            "context": "arguments[0] is the case-sensitive authored symbol; arguments[1] is the runtime command definition, with compiled function fields. Return whether the command is visible. Called again during refresh and category visibility checks. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters. The category filter runs first. Forced Show bypasses this callback for an included command; forced Hide suppresses it. See main-menu api describe MM-C-MenuCommandClear to restore authored conditions.",
             "examples": [
-              "main-menu parameters set --project <game> --path /CommandList/0/ShowJS --value '\"return $gameSwitches.value(1);\"'"
+              "main-menu parameters set --project \"<game>\" --path /CommandList/0/ShowJS --value '\"return $gameSwitches.value(1);\"'"
             ]
           },
           {
@@ -497,9 +497,9 @@
               "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
             },
             "default": "return true;",
-            "context": "arguments[0] is the case-sensitive authored symbol; arguments[1] is the runtime command definition. Return whether activation is allowed. A false result prevents the action from executing. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters.",
+            "context": "arguments[0] is the case-sensitive authored symbol; arguments[1] is the runtime command definition. Return whether activation is allowed. A false result prevents the action from executing. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters. Forced Enable/Disable bypass this callback; Enable wins if both states exist in old data. Visibility is independent. See main-menu api describe MM-C-MenuCommandClear.",
             "examples": [
-              "main-menu parameters set --project <game> --path /CommandList/0/EnableJS --value '\"return this.areMainCommandsEnabled();\"'"
+              "main-menu parameters set --project \"<game>\" --path /CommandList/0/EnableJS --value '\"return this.areMainCommandsEnabled();\"'"
             ]
           },
           {
@@ -528,7 +528,7 @@
             "default": "return null;",
             "context": "No arguments. Return the extension passed to direct and personal actions. A subcategory command returns its case-sensitive category name. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters.",
             "examples": [
-              "main-menu parameters set --project <game> --path /CommandList/0/ExtJS --value '\"return 17;\"'"
+              "main-menu parameters set --project \"<game>\" --path /CommandList/0/ExtJS --value '\"return 17;\"'"
             ]
           },
           {
@@ -555,9 +555,9 @@
               "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
             },
             "default": "const ext = arguments[0];",
-            "context": "One argument: arguments[0] is the evaluated extension. Runs once on keyboard or pointer activation. If the action stays in this window, refresh and activate it explicitly. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters.",
+            "context": "One argument: arguments[0] is the evaluated extension. Runs once on keyboard or pointer activation. If the action stays in this window, refresh and activate it explicitly. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters. Return value is ignored; effects come from the body. The example increments existing variable 1 once and keeps the command window active; choose an existing variable in the project.",
             "examples": [
-              "main-menu parameters set --project <game> --path /CommandList/0/CallHandlerJS --value '\"$gameVariables.setValue(1, $gameVariables.value(1) + 1); this.refresh(); this.activate();\"'"
+              "main-menu parameters set --project \"<game>\" --path /CommandList/0/CallHandlerJS --value '\"$gameVariables.setValue(1, $gameVariables.value(1) + 1); this.refresh(); this.activate();\"'"
             ]
           },
           {
@@ -584,9 +584,10 @@
               "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
             },
             "default": "const ext = arguments[0];",
-            "context": "One argument: arguments[0] is the evaluated extension. Runs after actor confirmation. Read the selected actor with this._statusWindow.actor(this._statusWindow.index()); the native menuActor assignment occurs after this callback. The function body runs in the game global context. Configure prerequisites before entering the menu; restart after editing plugin parameters. This callback runs only after personal actor selection. Its command must start that selection, for example CallHandlerJS: this.callHandler(this.currentSymbol()); (with a native personal symbol such as skill). After the user chooses an actor, PersonalHandlerJS runs with the Scene_Menu receiver and the selected actor available through this._statusWindow.actor(this._statusWindow.index()).",
+            "context": "JavaScript function body with this=Scene_Menu and arguments[0]=the evaluated ExtJS value; return is ignored. Runs when the personal selection is confirmed, or directly in SoloQuick mode. The command must start personal selection, for example a row with Symbol=\"skill\" and CallHandlerJS=\"this.callHandler(this.currentSymbol());\". With normal selection, this._statusWindow.actor(this._statusWindow.index()) is the selected actor; native menuActor assignment happens after this callback. SoloQuick bypasses that selection: use $gameParty.members()[0] there. Configure before entering the menu and restart after parameter edits; the CLI does not execute the body.",
             "examples": [
-              "main-menu parameters set --project <game> --path /CommandList/0/PersonalHandlerJS --value '\"const actor = this._statusWindow.actor(this._statusWindow.index()); SceneManager.push(Scene_Skill);\"'"
+              "main-menu parameters get --project \"<game>\" --path /CommandList --json",
+              "Illustrative body for PersonalHandlerJS on the inspected skill row: const actor = SceneManager._scene.isSoloQuickMode() ? $gameParty.members()[0] : this._statusWindow.actor(this._statusWindow.index()); $gameParty.setMenuActor(actor); SceneManager.push(Scene_Skill); Use the paired Symbol and CallHandlerJS documented above. Enter the menu with at least one party member; confirming the command opens Skills for that actor."
             ]
           }
         ]
@@ -869,7 +870,7 @@
           "PersonalHandlerJS": "const ext = arguments[0];"
         }
       ],
-      "context": "Setting /CommandList replaces the entire list, not an append. Each entry must contain all fields in items.fields. Start from parameters get --path /CommandList, preserve existing entries, and copy a complete entry before changing its identity, text and handlers. A nested set changes just the selected field. No fields are implicitly filled in a new entry."
+      "context": "Setting /CommandList replaces the entire list, not an append. Each entry must contain all fields in items.fields. Start from parameters get --path /CommandList, preserve existing entries, and copy a complete entry before changing its identity, text and handlers. A nested set changes just the selected field. No fields are implicitly filled in a new entry. Configuration is read at game boot from the selected provider; CLI writes do not change an already running menu. Restart the game after editing. Whole-object reset restores the containing preset; leaf reset uses that field's published default. Read parameters get for the effective value."
     },
     {
       "id": "MM-P-27",
@@ -889,7 +890,7 @@
           "key": "Enable",
           "storageKey": "Enable:eval",
           "label": "Use Window",
-          "description": "Use the Playtime Window?",
+          "description": "True creates the playtime window in Scene_Menu and redraws the native playtime text every 60 update frames; false omits it. This does not reset the game playtime counter.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -904,7 +905,7 @@
           "key": "AdjustCommandHeight",
           "storageKey": "AdjustCommandHeight:eval",
           "label": "Adjust Command Window",
-          "description": "Adjust the command window's height to fit in the Playtime Window?",
+          "description": "With Playtime/Enable=true and CommandWindowStyle=default, true subtracts the playtime rectangle height from the command window; false leaves it unchanged. Other layouts compute their own rectangles.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -919,7 +920,7 @@
           "key": "BgType",
           "storageKey": "BgType:num",
           "label": "Background Type",
-          "description": "Select background type for the Playtime window.",
+          "description": "Playtime background: 0 shows the normal windowskin; 1 hides it and uses a dim background; 2 hides both backgrounds while retaining text.",
           "type": "number",
           "editorType": "select",
           "nativeDefault": "0",
@@ -942,7 +943,7 @@
           "key": "FontSize",
           "storageKey": "FontSize:num",
           "label": "Font Size",
-          "description": "Font size for text in the playtime window.",
+          "description": "Playtime text font size in pixels (minimum 1; finite fractional values accepted). The leaf default is 20; the complete Playtime preset uses its own published FontSize.",
           "type": "number",
           "editorType": "number",
           "nativeDefault": "20",
@@ -970,7 +971,7 @@
           "key": "Time",
           "storageKey": "Time:str",
           "label": "Time Text",
-          "description": "Text for the display of 'Time' in the Playtime window.",
+          "description": "Plain label drawn left of the right-aligned playtime value; empty string hides the label. This is drawText text, not an escape-code field.",
           "type": "string",
           "editorType": "text",
           "nativeDefault": "Time",
@@ -1002,9 +1003,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "const rows = 1;\nconst ww = this.mainCommandWidth();\nconst wh = this.calcWindowHeight(rows, false);\nconst wx = this.isRightInputMode() ? Graphics.boxWidth - ww : 0;\nlet wy = this.mainAreaBottom() - wh;\nif (this._goldWindow) wy -= this._goldWindow.height;\nif (this.canCreateVariableWindow()) wy -= this.variableWindowRect().height;\nreturn new Rectangle(wx, wy, ww, wh);",
-          "context": "No arguments. Return a Rectangle in menu coordinates with x, y, width and height. Used by the default command-window layout while this information window is enabled; rearranged layouts calculate their own rectangles. Runs inside the game; restart after editing plugin parameters.",
+          "context": "No arguments. Return a Rectangle in menu pixel coordinates (positive X right and Y down) with x, y, width and height. Used by the default command-window layout while this information window is enabled; rearranged layouts calculate their own rectangles. Runs inside the game; restart after editing plugin parameters.",
           "examples": [
-            "main-menu parameters set --project <game> --path /Playtime/WindowRect --value '\"return new Rectangle(0, this.mainAreaBottom() - this.calcWindowHeight(1, false), this.mainCommandWidth(), this.calcWindowHeight(1, false));\"'"
+            "main-menu parameters set --project \"<game>\" --path /Playtime/WindowRect --value '\"return new Rectangle(0, this.mainAreaBottom() - this.calcWindowHeight(1, false), this.mainCommandWidth(), this.calcWindowHeight(1, false));\"'"
           ]
         }
       ],
@@ -1017,7 +1018,7 @@
         "Time": "Time",
         "WindowRect": "const rows = 1;\nconst ww = this.mainCommandWidth();\nconst wh = this.calcWindowHeight(rows, false);\nconst wx = this.isRightInputMode() ? Graphics.boxWidth - ww : 0;\nlet wy = this.mainAreaBottom() - wh;\nif (this._goldWindow) wy -= this._goldWindow.height;\nif (this.canCreateVariableWindow()) wy -= this.variableWindowRect().height;\nreturn new Rectangle(wx, wy, ww, wh);"
       },
-      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels. The historical nativeDefault preset contains AdjustCommandHeight:func. The supported boolean field uses storageKey AdjustCommandHeight:eval; CLI authoring writes that canonical key. Native preset text is retained as reference metadata, not input to --value."
+      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels. The historical nativeDefault preset contains AdjustCommandHeight:func. The supported boolean field uses storageKey AdjustCommandHeight:eval; CLI authoring writes that canonical key. Native preset text is retained as reference metadata, not input to --value. Configuration is read at game boot from the selected provider; CLI writes do not change an already running menu. Restart the game after editing. Whole-object reset restores the containing preset; leaf reset uses that field's published default. Read parameters get for the effective value."
     },
     {
       "id": "MM-P-35",
@@ -1037,7 +1038,7 @@
           "key": "Enable",
           "storageKey": "Enable:eval",
           "label": "Use Window",
-          "description": "Use the Variable Window?",
+          "description": "True creates the variable display window in Scene_Menu; false omits it. Non-default, non-mobile layouts may create a blank dummy window in its place. Values are drawn on creation/refresh; the window does not poll variables each frame.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "false",
@@ -1052,7 +1053,7 @@
           "key": "AdjustCommandHeight",
           "storageKey": "AdjustCommandHeight:eval",
           "label": "Adjust Command Window",
-          "description": "Adjust the command window's height to fit in the Variable Window?",
+          "description": "With Variable/Enable=true and CommandWindowStyle=default, true subtracts the variable rectangle height from the command window; false leaves it unchanged. Other layouts compute their own rectangles.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -1068,7 +1069,7 @@
           "key": "BgType",
           "storageKey": "BgType:num",
           "label": "Background Type",
-          "description": "Select background type for the Variable window.",
+          "description": "Variable window background: 0 shows the normal windowskin; 1 uses a dim background without the windowskin; 2 hides both backgrounds while retaining text. Also applies to the filler window when one is created.",
           "type": "number",
           "editorType": "select",
           "nativeDefault": "0",
@@ -1091,7 +1092,7 @@
           "key": "FontSize",
           "storageKey": "FontSize:num",
           "label": "Font Size",
-          "description": "Font size for text in the variable window.",
+          "description": "Variable text font size in pixels (minimum 1; finite fractional values accepted). A containing preset may publish a different value from this leaf default.",
           "type": "number",
           "editorType": "number",
           "nativeDefault": "20",
@@ -1120,7 +1121,7 @@
             2,
             3
           ],
-          "context": "Each number is an existing variable ID. For an icon, put the escape text \\i[87] in that variable's name in the native variable database, for example \\i[87] Tokens, not in this numeric array. The index selects a cell in img/system/IconSet.png; positive indexes draw, 0 does not. The CLI does not edit variable names through this parameter."
+          "context": "Each number is an existing variable ID. For an icon, put the escape text \\i[87] in that variable's name in the native variable database, for example \\i[87] Tokens, not in this numeric array. The index selects a cell in img/system/IconSet.png; positive indexes draw, 0 does not. The CLI does not edit variable names through this parameter. The array order is display order; use whole existing positive IDs. Empty array has no rows; nonpositive or unnamed IDs leave blank entries. The default layout uses one column, other layouts one column per configured ID. Only the first icon escape in each name is consumed; other text is drawn literally. Values do not update until the window refreshes."
         },
         {
           "id": "MM-P-41",
@@ -1146,9 +1147,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "const rows = VisuMZ.MainMenuCore.Settings.Variable.VarList.length;\nconst ww = this.mainCommandWidth();\nconst wh = this.calcWindowHeight(rows, false);\nconst wx = this.isRightInputMode() ? Graphics.boxWidth - ww : 0;\nlet wy = this.mainAreaBottom() - wh;\nif (this._goldWindow) wy -= this._goldWindow.height;\nreturn new Rectangle(wx, wy, ww, wh);",
-          "context": "No arguments. Return a Rectangle in menu coordinates with x, y, width and height. Used by the default command-window layout while this information window is enabled; rearranged layouts calculate their own rectangles. Runs inside the game; restart after editing plugin parameters.",
+          "context": "No arguments. Return a Rectangle in menu pixel coordinates (positive X right and Y down) with x, y, width and height. Used by the default command-window layout while this information window is enabled; rearranged layouts calculate their own rectangles. Runs inside the game; restart after editing plugin parameters.",
           "examples": [
-            "main-menu parameters set --project <game> --path /Variable/WindowRect --value '\"return new Rectangle(0, this.mainAreaBottom() - this.calcWindowHeight(1, false), this.mainCommandWidth(), this.calcWindowHeight(1, false));\"'"
+            "main-menu parameters set --project \"<game>\" --path /Variable/WindowRect --value '\"return new Rectangle(0, this.mainAreaBottom() - this.calcWindowHeight(1, false), this.mainCommandWidth(), this.calcWindowHeight(1, false));\"'"
           ]
         }
       ],
@@ -1163,14 +1164,14 @@
         ],
         "WindowRect": "const rows = VisuMZ.MainMenuCore.Settings.Variable.VarList.length;\nconst ww = this.mainCommandWidth();\nconst wh = this.calcWindowHeight(rows, false);\nconst wx = this.isRightInputMode() ? Graphics.boxWidth - ww : 0;\nlet wy = this.mainAreaBottom() - wh;\nif (this._goldWindow) wy -= this._goldWindow.height;\nreturn new Rectangle(wx, wy, ww, wh);"
       },
-      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels. The historical nativeDefault preset contains AdjustCommandHeight:func. The supported boolean field uses storageKey AdjustCommandHeight:eval; CLI authoring writes that canonical key. Native preset text is retained as reference metadata, not input to --value."
+      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels. The historical nativeDefault preset contains AdjustCommandHeight:func. The supported boolean field uses storageKey AdjustCommandHeight:eval; CLI authoring writes that canonical key. Native preset text is retained as reference metadata, not input to --value. Configuration is read at game boot from the selected provider; CLI writes do not change an already running menu. Restart the game after editing. Whole-object reset restores the containing preset; leaf reset uses that field's published default. Read parameters get for the effective value."
     },
     {
       "id": "MM-P-42",
       "key": "CommandWindowStyle",
       "storageKey": "CommandWindowStyle:str",
       "label": "Command Window Style",
-      "description": "Choose the positioning and style of the Main Menu Command Window. This will automatically rearrange windows.",
+      "description": "default keeps the native side command window. top/bottom use a full-width command grid at the top/bottom of the main area; thinTop/thinBottom use one row with one column per command. mobile centers the command window and hides the status window until actor/formation selection. Gold and auxiliary windows move to the opposite edge; mobile uses the bottom edge. The mobile style can be used on desktop.",
       "type": "string",
       "editorType": "select",
       "nativeDefault": "top",
@@ -1233,14 +1234,14 @@
             "auto": "Automatic"
           },
           "default": "auto",
-          "context": "Style auto checks each formatted command name: without an icon escape it draws text; with an icon it draws icon plus text when the measured name fits the item line width, otherwise only the icon. /CommandWindowStyle chooses the overall layout; /CustomCmdWin/Style chooses content drawing inside each command."
+          "context": "Style auto checks each formatted command name: without an icon escape it draws text; with an icon it draws icon plus text when the measured name fits the item line width, otherwise only the icon. /CommandWindowStyle chooses the overall layout; /CustomCmdWin/Style chooses content drawing inside each command. text draws only the name; icon draws its first icon centered and a separate label for the selected command; iconText draws both. These drawing modes apply in the default layout too. An icon-only entry with no icon has an empty item drawing."
         },
         {
           "id": "MM-P-45",
           "key": "TextAlign",
           "storageKey": "TextAlign:str",
           "label": "Text Alignment",
-          "description": "Decide how you want the text to be aligned.",
+          "description": "Horizontal alignment inside the command item: left starts at its left edge, center centers it, right ends at its right edge. Applies to text and iconText; icon-only drawing is centered independently. Use the suggested strings; arbitrary strings are not additional documented styles.",
           "type": "string",
           "editorType": "combo",
           "nativeDefault": "center",
@@ -1266,7 +1267,7 @@
           "availability": "supported",
           "min": 1,
           "default": 2,
-          "context": "Rows affects top and bottom layouts. thinTop and thinBottom always use one row; default uses the native command rectangle. The mobile layout also uses Rows when calculating its centered command-window height."
+          "context": "Rows affects top and bottom layouts. thinTop and thinBottom always use one row; default uses the native command rectangle. The mobile layout also uses Rows when calculating its centered command-window height. Count of rows, not pixels; choose a positive whole count. The CLI accepts finite numbers >=1, including fractions, without rounding them to an integer."
         },
         {
           "id": "MM-P-47",
@@ -1281,7 +1282,7 @@
           "availability": "supported",
           "min": 1,
           "default": 4,
-          "context": "Cols affects top, bottom and mobile layouts. thinTop and thinBottom instead use one column per current command, and default uses the native single column."
+          "context": "Cols affects top, bottom and mobile layouts. thinTop and thinBottom instead use one column per current command, and default uses the native single column. Count of columns, not pixels; choose a positive whole count. The CLI accepts finite numbers >=1, including fractions, without rounding them to an integer."
         },
         {
           "id": "MM-P-48",
@@ -1296,7 +1297,7 @@
           "availability": "supported",
           "min": 1,
           "default": 5,
-          "context": "This is a line-height multiplier, not pixels: mobile command item height is lineHeight() * MobileThickness + 8 pixels (5 with the native 36-pixel line height gives 188 pixels). Applies when /CommandWindowStyle is mobile, on desktop too; it does not detect the device platform."
+          "context": "This is a line-height multiplier, not pixels: mobile command item height is lineHeight() * MobileThickness + 8 pixels (5 with the native 36-pixel line height gives 188 pixels). Applies when /CommandWindowStyle is mobile, on desktop too; it does not detect the device platform. Finite fractional multipliers >=1 are accepted."
         }
       ],
       "default": {
@@ -1306,14 +1307,14 @@
         "Cols": 4,
         "MobileThickness": 5
       },
-      "context": "Style auto checks each formatted command name: without an icon escape it draws text; with an icon it draws icon plus text when the measured name fits the item line width, otherwise only the icon. /CommandWindowStyle chooses the overall layout; /CustomCmdWin/Style chooses content drawing inside each command. MobileThickness affects only the mobile layout; see MM-P-48."
+      "context": "Style auto checks each formatted command name: without an icon escape it draws text; with an icon it draws icon plus text when the measured name fits the item line width, otherwise only the icon. /CommandWindowStyle chooses the overall layout; /CustomCmdWin/Style chooses content drawing inside each command. MobileThickness affects only the mobile layout; see MM-P-48. Configuration is read at game boot from the selected provider; CLI writes do not change an already running menu. Restart the game after editing. Whole-object reset restores the containing preset; leaf reset uses that field's published default. Read parameters get for the effective value."
     },
     {
       "id": "MM-P-49",
       "key": "StatusGraphic",
       "storageKey": "StatusGraphic:str",
       "label": "Status Graphic",
-      "description": "Choose how the actor graphics appear in status-like menus.",
+      "description": "Actor graphic used by status-window drawing helpers: none draws no graphic; face uses the actor face sheet in img/faces; sprite uses its map character sheet in img/characters; svbattler uses the first frame from img/sv_actors (scaled down to fit). Assign those assets on the actor in the database. Portrait/Solo callbacks may draw the separate menu picture instead (MM-NT-menu-image).",
       "type": "string",
       "editorType": "select",
       "nativeDefault": "face",
@@ -1360,7 +1361,8 @@
         "thin": "Thin Horizontal Style",
         "thicker": "Thicker Horizontal Style"
       },
-      "default": "portrait"
+      "default": "portrait",
+      "context": "default uses one column and the native row height; vertical uses one full-height row split into maxBattleMembers columns; portrait uses that geometry with a menu picture, falling back to VerticalStyle if absent; solo uses a full-height single column; thin uses one standard selectable line; thicker uses two line heights plus 8 pixels. Each style calls its corresponding /ListStyles callback. Portrait resources are configured through MM-NT-menu-image; custom callbacks determine the actual content."
     },
     {
       "id": "MM-P-51",
@@ -1390,7 +1392,8 @@
         "thin": "Thin Horizontal Style",
         "thicker": "Thicker Horizontal Style"
       },
-      "default": "default"
+      "default": "default",
+      "context": "default uses one column and the native row height; vertical uses one full-height row split into maxBattleMembers columns; portrait uses that geometry with a menu picture, falling back to VerticalStyle if absent; solo uses a full-height single column; thin uses one standard selectable line; thicker uses two line heights plus 8 pixels. Each style calls its corresponding /ListStyles callback. Portrait resources are configured through MM-NT-menu-image; custom callbacks determine the actual content."
     },
     {
       "id": "MM-P-52",
@@ -1411,7 +1414,7 @@
           "key": "DefaultStyle",
           "storageKey": "DefaultStyle:func",
           "label": "JS: Default",
-          "description": "Code used to draw the data for this particular style.",
+          "description": "Function body that draws one actor row when DefaultStyle is selected by StatusListStyle or InnerMenuListStyle. The supplied actor and rectangle identify the row; replacing the body replaces its drawing.",
           "type": "string",
           "editorType": "note",
           "nativeDefault": "\"// Declare Constants\\nconst actor = arguments[0];\\nconst rect = arguments[1];\\n\\n// Draw Actor Graphic\\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\\nconst gy = rect.y + Math.floor((rect.height - gh) / 2);\\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\\n\\n// Draw Status Stuff\\nconst sx = rect.x + 180;\\nconst sy = rect.y + rect.height / 2 - this.lineHeight() * 1.5;\\nconst lineHeight = this.lineHeight();\\nconst sx2 = sx + 180;\\nthis.drawActorName(actor, sx, sy);\\nthis.drawActorLevel(actor, sx, sy + lineHeight * 1);\\nthis.drawActorIcons(actor, sx, sy + lineHeight * 2);\\nthis.drawActorClass(actor, sx2, sy);\\n\\n// Place Gauges\\nconst sy2 = sy + lineHeight;\\nconst gaugeLineHeight = this.gaugeLineHeight();\\nthis.placeGauge(actor, \\\"hp\\\", sx2, sy2);\\nthis.placeGauge(actor, \\\"mp\\\", sx2, sy2 + gaugeLineHeight);\\nconst roomForTp = (sy2 + gaugeLineHeight * 3) <= rect.y + rect.height;\\nif ($dataSystem.optDisplayTp && roomForTp) {\\n    this.placeGauge(actor, \\\"tp\\\", sx2, sy2 + gaugeLineHeight * 2);\\n}\\n\\n// Following Requires VisuStella MZ's Core Engine\\n// Draw Additional Parameter Data if Enough Room\\nconst sx3 = sx2 + 180;\\nconst sw = rect.width - sx3 - 2;\\nif (Imported.VisuMZ_0_CoreEngine && sw >= 300) {\\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\\n    const pw = Math.floor(sw / 2) - 24;\\n    let px = sx3;\\n    let py = rect.y + Math.floor((rect.height - (Math.ceil(params.length / 2) * gaugeLineHeight)) / 2);\\n    let counter = 0;\\n    for (const param of params) {\\n        this.resetFontSettings();\\n        this.drawParamText(px, py, pw, param, true);\\n        this.resetTextColor();\\n        this.contents.fontSize -= 8;\\n        const paramValue = actor.paramValueByName(param, true);\\n        this.contents.drawText(paramValue, px, py, pw, gaugeLineHeight, 'right');\\n        counter++;\\n        if (counter % 2 === 0) {\\n            px = sx3;\\n            py += gaugeLineHeight;\\n        } else {\\n            px += pw + 24;\\n        }\\n    }\\n}\"",
@@ -1430,9 +1433,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Draw Actor Graphic\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\nconst gy = rect.y + Math.floor((rect.height - gh) / 2);\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\n\n// Draw Status Stuff\nconst sx = rect.x + 180;\nconst sy = rect.y + rect.height / 2 - this.lineHeight() * 1.5;\nconst lineHeight = this.lineHeight();\nconst sx2 = sx + 180;\nthis.drawActorName(actor, sx, sy);\nthis.drawActorLevel(actor, sx, sy + lineHeight * 1);\nthis.drawActorIcons(actor, sx, sy + lineHeight * 2);\nthis.drawActorClass(actor, sx2, sy);\n\n// Place Gauges\nconst sy2 = sy + lineHeight;\nconst gaugeLineHeight = this.gaugeLineHeight();\nthis.placeGauge(actor, \"hp\", sx2, sy2);\nthis.placeGauge(actor, \"mp\", sx2, sy2 + gaugeLineHeight);\nconst roomForTp = (sy2 + gaugeLineHeight * 3) <= rect.y + rect.height;\nif ($dataSystem.optDisplayTp && roomForTp) {\n    this.placeGauge(actor, \"tp\", sx2, sy2 + gaugeLineHeight * 2);\n}\n\n// Following Requires VisuStella MZ's Core Engine\n// Draw Additional Parameter Data if Enough Room\nconst sx3 = sx2 + 180;\nconst sw = rect.width - sx3 - 2;\nif (Imported.VisuMZ_0_CoreEngine && sw >= 300) {\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\n    const pw = Math.floor(sw / 2) - 24;\n    let px = sx3;\n    let py = rect.y + Math.floor((rect.height - (Math.ceil(params.length / 2) * gaugeLineHeight)) / 2);\n    let counter = 0;\n    for (const param of params) {\n        this.resetFontSettings();\n        this.drawParamText(px, py, pw, param, true);\n        this.resetTextColor();\n        this.contents.fontSize -= 8;\n        const paramValue = actor.paramValueByName(param, true);\n        this.contents.drawText(paramValue, px, py, pw, gaugeLineHeight, 'right');\n        counter++;\n        if (counter % 2 === 0) {\n            px = sx3;\n            py += gaugeLineHeight;\n        } else {\n            px += pw + 24;\n        }\n    }\n}",
-          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters.",
+          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters. Rectangle coordinates and dimensions are pixels in the window contents. For the example, select the corresponding style first; it draws only the actor name. DefaultStyle and VerticalStyle can also be used by fallback paths.",
           "examples": [
-            "main-menu parameters set --project <game> --path /ListStyles/DefaultStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
+            "main-menu parameters set --project \"<game>\" --path /ListStyles/DefaultStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
           ]
         },
         {
@@ -1440,7 +1443,7 @@
           "key": "VerticalStyle",
           "storageKey": "VerticalStyle:func",
           "label": "JS: Vertical",
-          "description": "Code used to draw the data for this particular style.",
+          "description": "Function body that draws one actor row when VerticalStyle is selected by StatusListStyle or InnerMenuListStyle. The supplied actor and rectangle identify the row; replacing the body replaces its drawing.",
           "type": "string",
           "editorType": "note",
           "nativeDefault": "\"// Declare Constants\\nconst actor = arguments[0];\\nconst rect = arguments[1];\\n\\n\\nconst lineHeight = this.lineHeight();\\nconst gaugeLineHeight = this.gaugeLineHeight();\\nconst totalHeight = (lineHeight * 4.5) + (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2));\\n\\n// Draw Actor Graphic\\nconst gw = rect.width;\\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\\nconst gx = rect.x;\\nconst gy = Math.max(rect.y, rect.y + (rect.height - totalHeight - gh) / 2);\\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\\n\\n// Draw Actor Name\\nlet sx = rect.x;\\nlet sy = Math.max(gy + gh, rect.y + (rect.height - totalHeight + gh) / 2);\\nlet sw = rect.width;\\nthis.drawText(actor.name(), sx, sy, sw, 'center');\\n\\n// Draw Actor Level\\nsx = rect.x + Math.round((rect.width - 128) / 2);\\nsy += lineHeight;\\nthis.drawActorLevel(actor, sx, sy);\\n\\n// Draw Actor Class\\nconst className = actor.currentClass().name;\\nsx = rect.x + Math.round((rect.width - this.textSizeEx(className).width) / 2);\\nsy += lineHeight;\\nthis.drawTextEx(className, sx, sy, sw);\\n\\n// Draw Actor Icons\\nsx = rect.x + Math.round((rect.width - 128) / 2);\\nsy += lineHeight;\\nthis.drawActorIcons(actor, sx, sy);\\n\\n// Draw Gauges\\nsx = rect.x + Math.round((rect.width - 128) / 2);\\nsy += lineHeight;\\nthis.placeGauge(actor, \\\"hp\\\", sx, sy);\\nsy += gaugeLineHeight;\\nthis.placeGauge(actor, \\\"mp\\\", sx, sy);\\nsy += gaugeLineHeight;\\nif ($dataSystem.optDisplayTp) {\\n    this.placeGauge(actor, \\\"tp\\\", sx, sy);\\n}\"",
@@ -1459,9 +1462,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n\nconst lineHeight = this.lineHeight();\nconst gaugeLineHeight = this.gaugeLineHeight();\nconst totalHeight = (lineHeight * 4.5) + (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2));\n\n// Draw Actor Graphic\nconst gw = rect.width;\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\nconst gx = rect.x;\nconst gy = Math.max(rect.y, rect.y + (rect.height - totalHeight - gh) / 2);\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\n\n// Draw Actor Name\nlet sx = rect.x;\nlet sy = Math.max(gy + gh, rect.y + (rect.height - totalHeight + gh) / 2);\nlet sw = rect.width;\nthis.drawText(actor.name(), sx, sy, sw, 'center');\n\n// Draw Actor Level\nsx = rect.x + Math.round((rect.width - 128) / 2);\nsy += lineHeight;\nthis.drawActorLevel(actor, sx, sy);\n\n// Draw Actor Class\nconst className = actor.currentClass().name;\nsx = rect.x + Math.round((rect.width - this.textSizeEx(className).width) / 2);\nsy += lineHeight;\nthis.drawTextEx(className, sx, sy, sw);\n\n// Draw Actor Icons\nsx = rect.x + Math.round((rect.width - 128) / 2);\nsy += lineHeight;\nthis.drawActorIcons(actor, sx, sy);\n\n// Draw Gauges\nsx = rect.x + Math.round((rect.width - 128) / 2);\nsy += lineHeight;\nthis.placeGauge(actor, \"hp\", sx, sy);\nsy += gaugeLineHeight;\nthis.placeGauge(actor, \"mp\", sx, sy);\nsy += gaugeLineHeight;\nif ($dataSystem.optDisplayTp) {\n    this.placeGauge(actor, \"tp\", sx, sy);\n}",
-          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters.",
+          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters. Rectangle coordinates and dimensions are pixels in the window contents. For the example, select the corresponding style first; it draws only the actor name. DefaultStyle and VerticalStyle can also be used by fallback paths.",
           "examples": [
-            "main-menu parameters set --project <game> --path /ListStyles/VerticalStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
+            "main-menu parameters set --project \"<game>\" --path /ListStyles/VerticalStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
           ]
         },
         {
@@ -1469,7 +1472,7 @@
           "key": "PortraitStyle",
           "storageKey": "PortraitStyle:func",
           "label": "JS: Portrait",
-          "description": "Code used to draw the data for this particular style.",
+          "description": "Function body that draws one actor row when PortraitStyle is selected by StatusListStyle or InnerMenuListStyle. The supplied actor and rectangle identify the row; replacing the body replaces its drawing.",
           "type": "string",
           "editorType": "note",
           "nativeDefault": "\"// Declare Constants\\nconst actor = arguments[0];\\nconst rect = arguments[1];\\n\\n// Make Constants\\nconst lineHeight = this.lineHeight();\\nconst gaugeLineHeight = this.gaugeLineHeight();\\nconst totalHeight = (lineHeight * 4.5) + (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2));\\n\\n// Draw Actor Graphic\\nconst gw = rect.width;\\nconst gh = rect.height;\\nconst gx = rect.x;\\nconst gy = rect.y;\\nthis.drawItemActorMenuImage(actor, gx, gy, gw, gh);\\n\\n// Draw Dark Rectangle\\nlet sx = rect.x;\\nlet sy = Math.max(rect.y, rect.y + (rect.height - totalHeight));\\nlet sw = rect.width;\\nlet sh = rect.y + rect.height - sy;\\nthis.contents.fillRect(sx+1, sy+lineHeight/2, sw-2, sh-1-lineHeight/2, ColorManager.dimColor1());\\nthis.contents.gradientFillRect(sx+1, sy-lineHeight/2, sw-2, lineHeight, ColorManager.dimColor2(), ColorManager.dimColor1(), true);\\n\\n// Draw Actor Name\\nthis.drawText(actor.name(), sx, sy, sw, 'center');\\n\\n// Draw Actor Level\\nsx = rect.x + Math.round((rect.width - 128) / 2);\\nsy += lineHeight;\\nthis.drawActorLevel(actor, sx, sy);\\n\\n// Draw Actor Class\\nconst className = actor.currentClass().name;\\nsx = rect.x + Math.round((rect.width - this.textSizeEx(className).width) / 2);\\nsy += lineHeight;\\nthis.drawTextEx(className, sx, sy, sw);\\n\\n// Draw Actor Icons\\nsx = rect.x + Math.round((rect.width - 128) / 2);\\nsy += lineHeight;\\nthis.drawActorIcons(actor, sx, sy);\\n\\n// Draw Gauges\\nsx = rect.x + Math.round((rect.width - 128) / 2);\\nsy += lineHeight;\\nthis.placeGauge(actor, \\\"hp\\\", sx, sy);\\nsy += gaugeLineHeight;\\nthis.placeGauge(actor, \\\"mp\\\", sx, sy);\\nsy += gaugeLineHeight;\\nif ($dataSystem.optDisplayTp) {\\n    this.placeGauge(actor, \\\"tp\\\", sx, sy);\\n}\"",
@@ -1488,9 +1491,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Make Constants\nconst lineHeight = this.lineHeight();\nconst gaugeLineHeight = this.gaugeLineHeight();\nconst totalHeight = (lineHeight * 4.5) + (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2));\n\n// Draw Actor Graphic\nconst gw = rect.width;\nconst gh = rect.height;\nconst gx = rect.x;\nconst gy = rect.y;\nthis.drawItemActorMenuImage(actor, gx, gy, gw, gh);\n\n// Draw Dark Rectangle\nlet sx = rect.x;\nlet sy = Math.max(rect.y, rect.y + (rect.height - totalHeight));\nlet sw = rect.width;\nlet sh = rect.y + rect.height - sy;\nthis.contents.fillRect(sx+1, sy+lineHeight/2, sw-2, sh-1-lineHeight/2, ColorManager.dimColor1());\nthis.contents.gradientFillRect(sx+1, sy-lineHeight/2, sw-2, lineHeight, ColorManager.dimColor2(), ColorManager.dimColor1(), true);\n\n// Draw Actor Name\nthis.drawText(actor.name(), sx, sy, sw, 'center');\n\n// Draw Actor Level\nsx = rect.x + Math.round((rect.width - 128) / 2);\nsy += lineHeight;\nthis.drawActorLevel(actor, sx, sy);\n\n// Draw Actor Class\nconst className = actor.currentClass().name;\nsx = rect.x + Math.round((rect.width - this.textSizeEx(className).width) / 2);\nsy += lineHeight;\nthis.drawTextEx(className, sx, sy, sw);\n\n// Draw Actor Icons\nsx = rect.x + Math.round((rect.width - 128) / 2);\nsy += lineHeight;\nthis.drawActorIcons(actor, sx, sy);\n\n// Draw Gauges\nsx = rect.x + Math.round((rect.width - 128) / 2);\nsy += lineHeight;\nthis.placeGauge(actor, \"hp\", sx, sy);\nsy += gaugeLineHeight;\nthis.placeGauge(actor, \"mp\", sx, sy);\nsy += gaugeLineHeight;\nif ($dataSystem.optDisplayTp) {\n    this.placeGauge(actor, \"tp\", sx, sy);\n}",
-          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters.",
+          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters. Rectangle coordinates and dimensions are pixels in the window contents. For the example, select the corresponding style first; it draws only the actor name. DefaultStyle and VerticalStyle can also be used by fallback paths.",
           "examples": [
-            "main-menu parameters set --project <game> --path /ListStyles/PortraitStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
+            "main-menu parameters set --project \"<game>\" --path /ListStyles/PortraitStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
           ]
         },
         {
@@ -1498,7 +1501,7 @@
           "key": "SoloStyle",
           "storageKey": "SoloStyle:func",
           "label": "JS: Solo",
-          "description": "Code used to draw the data for this particular style.",
+          "description": "Function body that draws one actor row when SoloStyle is selected by StatusListStyle or InnerMenuListStyle. The supplied actor and rectangle identify the row; replacing the body replaces its drawing.",
           "type": "string",
           "editorType": "note",
           "nativeDefault": "\"// Declare Constants\\nconst actor = arguments[0];\\nconst rect = arguments[1];\\n\\n// Make Constants\\nconst lineHeight = this.lineHeight();\\nconst gaugeLineHeight = this.gaugeLineHeight();\\n\\n// Draw Actor Graphic\\nlet sx = rect.x;\\nlet sy = rect.y;\\nlet sw = rect.width;\\nlet sh = rect.height;\\n\\n// Portrait\\nif (actor.getMenuImage() !== '') {\\n    this.drawItemActorMenuImage(actor, rect.x, rect.y, rect.width, rect.height);\\n\\n// Everything Else\\n} else {\\n    const gx = Math.max(0, rect.x + Math.floor(((rect.width / 2) - ImageManager.faceWidth) / 2));\\n    const gy = Math.max(0, rect.y + rect.height - Math.ceil(lineHeight * 4.5) - ImageManager.faceHeight);\\n    this.drawActorGraphic(actor, gx, gy, ImageManager.faceWidth, ImageManager.faceHeight);\\n}\\n\\n// Draw Dark Rectangle\\nsh = Math.ceil(lineHeight * 4.5);\\nsy = rect.y + rect.height - sh;\\nthis.contents.fillRect(sx+1, sy+lineHeight/2, sw-2, sh-1-lineHeight/2, ColorManager.dimColor1());\\nthis.contents.gradientFillRect(sx+1, sy-lineHeight/2, sw-2, lineHeight, ColorManager.dimColor2(), ColorManager.dimColor1(), true);\\n\\n// Draw Actor Name\\nsw = Math.round(rect.width / 2);\\nthis.drawText(actor.name(), sx, sy, sw, 'center');\\n\\n// Draw Actor Level\\nsx = Math.max(0, rect.x + Math.floor(((rect.width / 2) - 128) / 2));\\nsy += lineHeight;\\nthis.drawActorLevel(actor, sx, sy);\\n\\n// Draw Actor Class\\nconst className = actor.currentClass().name;\\nsx = rect.x + Math.round(((rect.width / 2) - this.textSizeEx(className).width) / 2);\\nsy += lineHeight;\\nthis.drawTextEx(className, sx, sy, sw);\\n\\n// Draw Actor Icons\\nsx = rect.x + Math.round(((rect.width / 2) - 128) / 2);\\nsy += lineHeight;\\nthis.drawActorIcons(actor, sx, sy);\\n\\n// Prepare Stat Coordinates\\nsx = rect.x + Math.floor(rect.width / 2);\\nsw = rect.width / 2;\\nsh = rect.height;\\nconst sx3 = sx;\\nconst cw = rect.width - sx3 - 2;\\n\\n// Prepare Total Content Height to vertically center the content.\\nlet totalHeight = gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2);\\nif (Imported.VisuMZ_0_CoreEngine && cw >= 300) {\\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\\n    totalHeight += lineHeight;\\n    totalHeight += Math.ceil(params.length / 2) * gaugeLineHeight;\\n}\\nconst equips = actor.equips();\\ntotalHeight += lineHeight;\\ntotalHeight += equips.length * lineHeight;\\nsy = Math.max(rect.y, rect.y + Math.floor((rect.height - totalHeight) / 2));\\n\\n// Place Gauges\\nthis.placeGauge(actor, \\\"hp\\\", sx, sy);\\nsy += gaugeLineHeight;\\nthis.placeGauge(actor, \\\"mp\\\", sx, sy);\\nif ($dataSystem.optDisplayTp) {\\n    sy += gaugeLineHeight;\\n    this.placeGauge(actor, \\\"tp\\\", sx, sy);\\n    sy += gaugeLineHeight;\\n}\\nlet ny = sy;\\n\\n// Following Requires VisuStella MZ's Core Engine\\n// Draw Additional Parameter Data if Enough Room\\nif (Imported.VisuMZ_0_CoreEngine && cw >= 300) {\\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\\n    sy += lineHeight;\\n    const pw = Math.floor(cw / 2) - 24;\\n    let px = sx3;\\n    let counter = 0;\\n    for (const param of params) {\\n        this.resetFontSettings();\\n        this.drawParamText(px, sy, pw, param, true);\\n        this.resetTextColor();\\n        this.contents.fontSize -= 8;\\n        const paramValue = actor.paramValueByName(param, true);\\n        this.contents.drawText(paramValue, px, sy, pw, gaugeLineHeight, 'right');\\n        counter++;\\n        if (counter % 2 === 0) {\\n            px = sx3;\\n            sy += gaugeLineHeight;\\n        } else {\\n            px += pw + 24;\\n        }\\n    }\\n    ny += lineHeight;\\n    ny += Math.ceil(params.length / 2) * gaugeLineHeight;\\n}\\n\\n// Draw Actor Equipment\\nthis.resetFontSettings();\\nsx = rect.x + Math.floor(rect.width / 2);\\nsy = ny + lineHeight;\\nsw = rect.width / 2;\\nfor (const equip of equips) {\\n    if (equip) {\\n        this.drawItemName(equip, sx, sy, sw);\\n        sy += lineHeight;\\n        if (sy + lineHeight > rect.y + rect.height) return;\\n    }\\n}\"",
@@ -1517,9 +1520,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Make Constants\nconst lineHeight = this.lineHeight();\nconst gaugeLineHeight = this.gaugeLineHeight();\n\n// Draw Actor Graphic\nlet sx = rect.x;\nlet sy = rect.y;\nlet sw = rect.width;\nlet sh = rect.height;\n\n// Portrait\nif (actor.getMenuImage() !== '') {\n    this.drawItemActorMenuImage(actor, rect.x, rect.y, rect.width, rect.height);\n\n// Everything Else\n} else {\n    const gx = Math.max(0, rect.x + Math.floor(((rect.width / 2) - ImageManager.faceWidth) / 2));\n    const gy = Math.max(0, rect.y + rect.height - Math.ceil(lineHeight * 4.5) - ImageManager.faceHeight);\n    this.drawActorGraphic(actor, gx, gy, ImageManager.faceWidth, ImageManager.faceHeight);\n}\n\n// Draw Dark Rectangle\nsh = Math.ceil(lineHeight * 4.5);\nsy = rect.y + rect.height - sh;\nthis.contents.fillRect(sx+1, sy+lineHeight/2, sw-2, sh-1-lineHeight/2, ColorManager.dimColor1());\nthis.contents.gradientFillRect(sx+1, sy-lineHeight/2, sw-2, lineHeight, ColorManager.dimColor2(), ColorManager.dimColor1(), true);\n\n// Draw Actor Name\nsw = Math.round(rect.width / 2);\nthis.drawText(actor.name(), sx, sy, sw, 'center');\n\n// Draw Actor Level\nsx = Math.max(0, rect.x + Math.floor(((rect.width / 2) - 128) / 2));\nsy += lineHeight;\nthis.drawActorLevel(actor, sx, sy);\n\n// Draw Actor Class\nconst className = actor.currentClass().name;\nsx = rect.x + Math.round(((rect.width / 2) - this.textSizeEx(className).width) / 2);\nsy += lineHeight;\nthis.drawTextEx(className, sx, sy, sw);\n\n// Draw Actor Icons\nsx = rect.x + Math.round(((rect.width / 2) - 128) / 2);\nsy += lineHeight;\nthis.drawActorIcons(actor, sx, sy);\n\n// Prepare Stat Coordinates\nsx = rect.x + Math.floor(rect.width / 2);\nsw = rect.width / 2;\nsh = rect.height;\nconst sx3 = sx;\nconst cw = rect.width - sx3 - 2;\n\n// Prepare Total Content Height to vertically center the content.\nlet totalHeight = gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2);\nif (Imported.VisuMZ_0_CoreEngine && cw >= 300) {\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\n    totalHeight += lineHeight;\n    totalHeight += Math.ceil(params.length / 2) * gaugeLineHeight;\n}\nconst equips = actor.equips();\ntotalHeight += lineHeight;\ntotalHeight += equips.length * lineHeight;\nsy = Math.max(rect.y, rect.y + Math.floor((rect.height - totalHeight) / 2));\n\n// Place Gauges\nthis.placeGauge(actor, \"hp\", sx, sy);\nsy += gaugeLineHeight;\nthis.placeGauge(actor, \"mp\", sx, sy);\nif ($dataSystem.optDisplayTp) {\n    sy += gaugeLineHeight;\n    this.placeGauge(actor, \"tp\", sx, sy);\n    sy += gaugeLineHeight;\n}\nlet ny = sy;\n\n// Following Requires VisuStella MZ's Core Engine\n// Draw Additional Parameter Data if Enough Room\nif (Imported.VisuMZ_0_CoreEngine && cw >= 300) {\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\n    sy += lineHeight;\n    const pw = Math.floor(cw / 2) - 24;\n    let px = sx3;\n    let counter = 0;\n    for (const param of params) {\n        this.resetFontSettings();\n        this.drawParamText(px, sy, pw, param, true);\n        this.resetTextColor();\n        this.contents.fontSize -= 8;\n        const paramValue = actor.paramValueByName(param, true);\n        this.contents.drawText(paramValue, px, sy, pw, gaugeLineHeight, 'right');\n        counter++;\n        if (counter % 2 === 0) {\n            px = sx3;\n            sy += gaugeLineHeight;\n        } else {\n            px += pw + 24;\n        }\n    }\n    ny += lineHeight;\n    ny += Math.ceil(params.length / 2) * gaugeLineHeight;\n}\n\n// Draw Actor Equipment\nthis.resetFontSettings();\nsx = rect.x + Math.floor(rect.width / 2);\nsy = ny + lineHeight;\nsw = rect.width / 2;\nfor (const equip of equips) {\n    if (equip) {\n        this.drawItemName(equip, sx, sy, sw);\n        sy += lineHeight;\n        if (sy + lineHeight > rect.y + rect.height) return;\n    }\n}",
-          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters.",
+          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters. Rectangle coordinates and dimensions are pixels in the window contents. For the example, select the corresponding style first; it draws only the actor name. DefaultStyle and VerticalStyle can also be used by fallback paths.",
           "examples": [
-            "main-menu parameters set --project <game> --path /ListStyles/SoloStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
+            "main-menu parameters set --project \"<game>\" --path /ListStyles/SoloStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
           ]
         },
         {
@@ -1527,7 +1530,7 @@
           "key": "ThinStyle",
           "storageKey": "ThinStyle:func",
           "label": "JS: Thin",
-          "description": "Code used to draw the data for this particular style.",
+          "description": "Function body that draws one actor row when ThinStyle is selected by StatusListStyle or InnerMenuListStyle. The supplied actor and rectangle identify the row; replacing the body replaces its drawing.",
           "type": "string",
           "editorType": "note",
           "nativeDefault": "\"// Declare Constants\\nconst actor = arguments[0];\\nconst rect = arguments[1];\\n\\n// Draw Actor Graphic\\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\\nconst gy = rect.y + (this.graphicType() === 'face' ? 1 : 0);\\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\\n\\n// Draw Status Stuff\\nconst lineHeight = this.lineHeight();\\nlet sx = rect.x + 160;\\nlet sy = rect.y + ((rect.height - lineHeight) / 2) - 2;\\n\\n// Draw Actor Data\\nthis.drawActorName(actor, sx, sy);\\nthis.drawActorLevel(actor, gx+8, rect.y + rect.height - lineHeight +1);\\n\\n// Place Gauges\\nsx += 180;\\nsy += (lineHeight - this.gaugeLineHeight()) / 2;\\nthis.placeGauge(actor, \\\"hp\\\", sx, sy);\\nsx += 140;\\nif ((sx + 128) > rect.x + rect.width) return;\\nthis.placeGauge(actor, \\\"mp\\\", sx, sy);\\nsx += 140;\\nif ((sx + 128) > rect.x + rect.width) return;\\nif ($dataSystem.optDisplayTp) this.placeGauge(actor, \\\"tp\\\", sx, sy);\"",
@@ -1546,9 +1549,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Draw Actor Graphic\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\nconst gy = rect.y + (this.graphicType() === 'face' ? 1 : 0);\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\n\n// Draw Status Stuff\nconst lineHeight = this.lineHeight();\nlet sx = rect.x + 160;\nlet sy = rect.y + ((rect.height - lineHeight) / 2) - 2;\n\n// Draw Actor Data\nthis.drawActorName(actor, sx, sy);\nthis.drawActorLevel(actor, gx+8, rect.y + rect.height - lineHeight +1);\n\n// Place Gauges\nsx += 180;\nsy += (lineHeight - this.gaugeLineHeight()) / 2;\nthis.placeGauge(actor, \"hp\", sx, sy);\nsx += 140;\nif ((sx + 128) > rect.x + rect.width) return;\nthis.placeGauge(actor, \"mp\", sx, sy);\nsx += 140;\nif ((sx + 128) > rect.x + rect.width) return;\nif ($dataSystem.optDisplayTp) this.placeGauge(actor, \"tp\", sx, sy);",
-          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters.",
+          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters. Rectangle coordinates and dimensions are pixels in the window contents. For the example, select the corresponding style first; it draws only the actor name. DefaultStyle and VerticalStyle can also be used by fallback paths.",
           "examples": [
-            "main-menu parameters set --project <game> --path /ListStyles/ThinStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
+            "main-menu parameters set --project \"<game>\" --path /ListStyles/ThinStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
           ]
         },
         {
@@ -1556,7 +1559,7 @@
           "key": "ThickerStyle",
           "storageKey": "ThickerStyle:func",
           "label": "JS: Thicker",
-          "description": "Code used to draw the data for this particular style.",
+          "description": "Function body that draws one actor row when ThickerStyle is selected by StatusListStyle or InnerMenuListStyle. The supplied actor and rectangle identify the row; replacing the body replaces its drawing.",
           "type": "string",
           "editorType": "note",
           "nativeDefault": "\"// Declare Constants\\nconst actor = arguments[0];\\nconst rect = arguments[1];\\n\\n// Draw Actor Graphic\\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\\nconst gy = rect.y + (this.graphicType() === 'face' ? 1 : 0);\\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\\n\\n// Draw Status Stuff\\nconst lineHeight = this.lineHeight();\\nconst gaugeLineHeight = this.gaugeLineHeight();\\nlet sx = rect.x + 160;\\nlet sy = rect.y + ((rect.height - (lineHeight * 2)) / 2) - 2;\\n\\n// Draw Actor Data\\nthis.drawActorLevel(actor, gx+8, rect.y + rect.height - lineHeight +1);\\nthis.drawActorName(actor, sx, sy);\\nthis.drawActorClass(actor, sx, sy + lineHeight);\\n//this.drawActorLevel(actor, sx, sy + lineHeight);\\n\\n// Place Gauges\\nsx += 180;\\nsy = rect.y + ((rect.height - (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2))) / 2) - 2;\\nthis.placeGauge(actor, \\\"hp\\\", sx, sy);\\nthis.placeGauge(actor, \\\"mp\\\", sx, sy + gaugeLineHeight);\\nif ($dataSystem.optDisplayTp) this.placeGauge(actor, \\\"tp\\\", sx, sy + (gaugeLineHeight * 2));\\nsx += 160;\\n\\n// Following Requires VisuStella MZ's Core Engine\\n// Draw Additional Parameter Data if Enough Room\\nconst sx3 = sx;\\nconst sw = rect.width - sx3 - 2;\\nif (Imported.VisuMZ_0_CoreEngine && sw >= 300) {\\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\\n    const pw = Math.floor(sw / 2) - 24;\\n    sy = rect.y + ((rect.height - (gaugeLineHeight * Math.ceil(params.length / 2))) / 2) - 2;\\n    let px = sx3;\\n    let py = rect.y + Math.floor((rect.height - (Math.ceil(params.length / 2) * gaugeLineHeight)) / 2);\\n    let counter = 0;\\n    for (const param of params) {\\n        this.resetFontSettings();\\n        this.drawParamText(px, py, pw, param, true);\\n        this.resetTextColor();\\n        this.contents.fontSize -= 8;\\n        const paramValue = actor.paramValueByName(param, true);\\n        this.contents.drawText(paramValue, px, py, pw, gaugeLineHeight, 'right');\\n        counter++;\\n        if (counter % 2 === 0) {\\n            px = sx3;\\n            py += gaugeLineHeight;\\n        } else {\\n            px += pw + 24;\\n        }\\n    }\\n}\"",
@@ -1575,9 +1578,9 @@
             "onError": "Syntax errors at boot and runtime exceptions propagate to the MZ error handler; offline discovery and editing never execute code."
           },
           "default": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Draw Actor Graphic\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\nconst gy = rect.y + (this.graphicType() === 'face' ? 1 : 0);\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\n\n// Draw Status Stuff\nconst lineHeight = this.lineHeight();\nconst gaugeLineHeight = this.gaugeLineHeight();\nlet sx = rect.x + 160;\nlet sy = rect.y + ((rect.height - (lineHeight * 2)) / 2) - 2;\n\n// Draw Actor Data\nthis.drawActorLevel(actor, gx+8, rect.y + rect.height - lineHeight +1);\nthis.drawActorName(actor, sx, sy);\nthis.drawActorClass(actor, sx, sy + lineHeight);\n//this.drawActorLevel(actor, sx, sy + lineHeight);\n\n// Place Gauges\nsx += 180;\nsy = rect.y + ((rect.height - (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2))) / 2) - 2;\nthis.placeGauge(actor, \"hp\", sx, sy);\nthis.placeGauge(actor, \"mp\", sx, sy + gaugeLineHeight);\nif ($dataSystem.optDisplayTp) this.placeGauge(actor, \"tp\", sx, sy + (gaugeLineHeight * 2));\nsx += 160;\n\n// Following Requires VisuStella MZ's Core Engine\n// Draw Additional Parameter Data if Enough Room\nconst sx3 = sx;\nconst sw = rect.width - sx3 - 2;\nif (Imported.VisuMZ_0_CoreEngine && sw >= 300) {\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\n    const pw = Math.floor(sw / 2) - 24;\n    sy = rect.y + ((rect.height - (gaugeLineHeight * Math.ceil(params.length / 2))) / 2) - 2;\n    let px = sx3;\n    let py = rect.y + Math.floor((rect.height - (Math.ceil(params.length / 2) * gaugeLineHeight)) / 2);\n    let counter = 0;\n    for (const param of params) {\n        this.resetFontSettings();\n        this.drawParamText(px, py, pw, param, true);\n        this.resetTextColor();\n        this.contents.fontSize -= 8;\n        const paramValue = actor.paramValueByName(param, true);\n        this.contents.drawText(paramValue, px, py, pw, gaugeLineHeight, 'right');\n        counter++;\n        if (counter % 2 === 0) {\n            px = sx3;\n            py += gaugeLineHeight;\n        } else {\n            px += pw + 24;\n        }\n    }\n}",
-          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters.",
+          "context": "arguments[0] is the Game_Actor and arguments[1] is its Rectangle in contents coordinates. Draw into this.contents using window drawing methods; the return value is ignored. Called when the matching status-list style refreshes. Portrait and solo styles wait for the current picture; portrait without an image uses the vertical callback. Runs inside the game; restart after editing plugin parameters. Rectangle coordinates and dimensions are pixels in the window contents. For the example, select the corresponding style first; it draws only the actor name. DefaultStyle and VerticalStyle can also be used by fallback paths.",
           "examples": [
-            "main-menu parameters set --project <game> --path /ListStyles/ThickerStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
+            "main-menu parameters set --project \"<game>\" --path /ListStyles/ThickerStyle --value '\"const actor = arguments[0], rect = arguments[1]; this.drawActorName(actor, rect.x, rect.y, rect.width);\"'"
           ]
         }
       ],
@@ -1589,7 +1592,7 @@
         "ThinStyle": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Draw Actor Graphic\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\nconst gy = rect.y + (this.graphicType() === 'face' ? 1 : 0);\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\n\n// Draw Status Stuff\nconst lineHeight = this.lineHeight();\nlet sx = rect.x + 160;\nlet sy = rect.y + ((rect.height - lineHeight) / 2) - 2;\n\n// Draw Actor Data\nthis.drawActorName(actor, sx, sy);\nthis.drawActorLevel(actor, gx+8, rect.y + rect.height - lineHeight +1);\n\n// Place Gauges\nsx += 180;\nsy += (lineHeight - this.gaugeLineHeight()) / 2;\nthis.placeGauge(actor, \"hp\", sx, sy);\nsx += 140;\nif ((sx + 128) > rect.x + rect.width) return;\nthis.placeGauge(actor, \"mp\", sx, sy);\nsx += 140;\nif ((sx + 128) > rect.x + rect.width) return;\nif ($dataSystem.optDisplayTp) this.placeGauge(actor, \"tp\", sx, sy);",
         "ThickerStyle": "// Declare Constants\nconst actor = arguments[0];\nconst rect = arguments[1];\n\n// Draw Actor Graphic\nconst gx = rect.x + (this.graphicType() === 'face' ? 1 : 0);\nconst gy = rect.y + (this.graphicType() === 'face' ? 1 : 0);\nconst gw = Math.min(rect.width, ImageManager.faceWidth);\nconst gh = Math.min(rect.height, ImageManager.faceHeight);\nthis.drawActorGraphic(actor, gx, gy, gw, gh);\n\n// Draw Status Stuff\nconst lineHeight = this.lineHeight();\nconst gaugeLineHeight = this.gaugeLineHeight();\nlet sx = rect.x + 160;\nlet sy = rect.y + ((rect.height - (lineHeight * 2)) / 2) - 2;\n\n// Draw Actor Data\nthis.drawActorLevel(actor, gx+8, rect.y + rect.height - lineHeight +1);\nthis.drawActorName(actor, sx, sy);\nthis.drawActorClass(actor, sx, sy + lineHeight);\n//this.drawActorLevel(actor, sx, sy + lineHeight);\n\n// Place Gauges\nsx += 180;\nsy = rect.y + ((rect.height - (gaugeLineHeight * ($dataSystem.optDisplayTp ? 3 : 2))) / 2) - 2;\nthis.placeGauge(actor, \"hp\", sx, sy);\nthis.placeGauge(actor, \"mp\", sx, sy + gaugeLineHeight);\nif ($dataSystem.optDisplayTp) this.placeGauge(actor, \"tp\", sx, sy + (gaugeLineHeight * 2));\nsx += 160;\n\n// Following Requires VisuStella MZ's Core Engine\n// Draw Additional Parameter Data if Enough Room\nconst sx3 = sx;\nconst sw = rect.width - sx3 - 2;\nif (Imported.VisuMZ_0_CoreEngine && sw >= 300) {\n    const params = VisuMZ.CoreEngine.Settings.Param.DisplayedParams;\n    const pw = Math.floor(sw / 2) - 24;\n    sy = rect.y + ((rect.height - (gaugeLineHeight * Math.ceil(params.length / 2))) / 2) - 2;\n    let px = sx3;\n    let py = rect.y + Math.floor((rect.height - (Math.ceil(params.length / 2) * gaugeLineHeight)) / 2);\n    let counter = 0;\n    for (const param of params) {\n        this.resetFontSettings();\n        this.drawParamText(px, py, pw, param, true);\n        this.resetTextColor();\n        this.contents.fontSize -= 8;\n        const paramValue = actor.paramValueByName(param, true);\n        this.contents.drawText(paramValue, px, py, pw, gaugeLineHeight, 'right');\n        counter++;\n        if (counter % 2 === 0) {\n            px = sx3;\n            py += gaugeLineHeight;\n        } else {\n            px += pw + 24;\n        }\n    }\n}"
       },
-      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels."
+      "context": "The default on this containing parameter is the native complete preset used when it is absent or reset as a whole. Each nested field retains its separate native editor default, used when that field is absent or reset individually; these defaults can differ. Read parameters get for the currently effective value. A set replaces the selected value and requires every field in a struct, including unchanged editorial labels. Configuration is read at game boot from the selected provider; CLI writes do not change an already running menu. Restart the game after editing. Whole-object reset restores the containing preset; leaf reset uses that field's published default. Read parameters get for the effective value."
     },
     {
       "id": "MM-P-59",
@@ -1624,7 +1627,7 @@
           "key": "Enable",
           "storageKey": "Enable:eval",
           "label": "Enable?",
-          "description": "Enable custom cursor? Requires a custom 'Idle' graphic.",
+          "description": "True permits the custom cursor at boot when the runtime is not mobile and an idle filename is configured; false leaves the native cursor. A successfully loaded idle image is required before the native cursor is hidden.",
           "type": "boolean",
           "editorType": "boolean",
           "nativeDefault": "true",
@@ -1662,7 +1665,8 @@
           "encoding": "plain",
           "availability": "supported",
           "parent": "Graphics",
-          "default": ""
+          "default": "",
+          "context": "Required for the desktop custom cursor; empty disables it. Choose an existing image under the game root icon/ directory, including extension. The idle image dimensions determine the cursor box and anchors for both idle and click states."
         },
         {
           "id": "MM-P-64",
@@ -1706,7 +1710,8 @@
           "encoding": "plain",
           "availability": "supported",
           "parent": "Anchor",
-          "default": 0
+          "default": 0,
+          "context": "Unitless fraction of the idle image width; position subtracts Math.round(anchorX * image.width) pixels from the pointer coordinate. Finite values outside 0–1 are accepted and place the hotspot outside the image. Applies only while the desktop custom cursor is active."
         },
         {
           "id": "MM-P-67",
@@ -1720,7 +1725,8 @@
           "encoding": "plain",
           "availability": "supported",
           "parent": "Anchor",
-          "default": 0
+          "default": 0,
+          "context": "Unitless fraction of the idle image height; position subtracts Math.round(anchorY * image.height) pixels from the pointer coordinate. Finite values outside 0–1 are accepted and place the hotspot outside the image. Applies only while the desktop custom cursor is active."
         }
       ],
       "default": {
@@ -1732,7 +1738,8 @@
         "Anchor": "",
         "anchorX": 0,
         "anchorY": 0
-      }
+      },
+      "context": "At boot, enabled desktop runtimes with a nonempty idleFilenameIcon install a DOM cursor for the whole game, not just Scene_Menu. Mobile detection disables it. It survives scene changes, is not saved in a slot, and has no runtime removal command; restart after parameter changes. Preserve all fields when replacing this struct."
     }
   ],
   "commands": [
@@ -1761,13 +1768,14 @@
           "editorType": "string[]",
           "nativeDefault": "[]",
           "default": [],
-          "availability": "supported"
+          "availability": "supported",
+          "context": "Select authored Symbol values from parameters get --path /CommandList. These strings are not database IDs or visible labels; overrides share the symbol across duplicate rows. See the containing command for persistence and precedence."
         }
       ],
-      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted.",
+      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted. Overrides live on $gameSystem, survive scene/map changes, and are serialized with game saves. A new game starts without them; Clear removes all four overrides only for the listed symbols. Changes are observed when the command list is rebuilt/refreshed, not by an automatic refresh of an already open menu. Forced Show still respects subcategory membership.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command MenuCommandClear --value '{\"Symbols\":[\"save\"]}' --expected-hash <fileHash>"
+        "main-menu commands list --project \"<game>\" --target common-event:1",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command MenuCommandClear --value '{\"Symbols\":[\"save\"]}' --expected-hash \"<fileHash>\""
       ]
     },
     {
@@ -1795,13 +1803,14 @@
           "editorType": "string[]",
           "nativeDefault": "[]",
           "default": [],
-          "availability": "supported"
+          "availability": "supported",
+          "context": "Select authored Symbol values from parameters get --path /CommandList. These strings are not database IDs or visible labels; overrides share the symbol across duplicate rows. See the containing command for persistence and precedence."
         }
       ],
-      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted.",
+      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted. Overrides live on $gameSystem, survive scene/map changes, and are serialized with game saves. A new game starts without them; Clear removes all four overrides only for the listed symbols. Changes are observed when the command list is rebuilt/refreshed, not by an automatic refresh of an already open menu. Forced Show still respects subcategory membership.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command MenuCommandForceDisable --value '{\"Symbols\":[\"save\"]}' --expected-hash <fileHash>"
+        "main-menu commands list --project \"<game>\" --target common-event:1",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command MenuCommandForceDisable --value '{\"Symbols\":[\"save\"]}' --expected-hash \"<fileHash>\""
       ]
     },
     {
@@ -1829,13 +1838,14 @@
           "editorType": "string[]",
           "nativeDefault": "[]",
           "default": [],
-          "availability": "supported"
+          "availability": "supported",
+          "context": "Select authored Symbol values from parameters get --path /CommandList. These strings are not database IDs or visible labels; overrides share the symbol across duplicate rows. See the containing command for persistence and precedence."
         }
       ],
-      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted.",
+      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted. Overrides live on $gameSystem, survive scene/map changes, and are serialized with game saves. A new game starts without them; Clear removes all four overrides only for the listed symbols. Changes are observed when the command list is rebuilt/refreshed, not by an automatic refresh of an already open menu. Forced Show still respects subcategory membership.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command MenuCommandForceEnable --value '{\"Symbols\":[\"save\"]}' --expected-hash <fileHash>"
+        "main-menu commands list --project \"<game>\" --target common-event:1",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command MenuCommandForceEnable --value '{\"Symbols\":[\"save\"]}' --expected-hash \"<fileHash>\""
       ]
     },
     {
@@ -1863,13 +1873,14 @@
           "editorType": "string[]",
           "nativeDefault": "[]",
           "default": [],
-          "availability": "supported"
+          "availability": "supported",
+          "context": "Select authored Symbol values from parameters get --path /CommandList. These strings are not database IDs or visible labels; overrides share the symbol across duplicate rows. See the containing command for persistence and precedence."
         }
       ],
-      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted.",
+      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted. Overrides live on $gameSystem, survive scene/map changes, and are serialized with game saves. A new game starts without them; Clear removes all four overrides only for the listed symbols. Changes are observed when the command list is rebuilt/refreshed, not by an automatic refresh of an already open menu. Forced Show still respects subcategory membership.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command MenuCommandForceHide --value '{\"Symbols\":[\"save\"]}' --expected-hash <fileHash>"
+        "main-menu commands list --project \"<game>\" --target common-event:1",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command MenuCommandForceHide --value '{\"Symbols\":[\"save\"]}' --expected-hash \"<fileHash>\""
       ]
     },
     {
@@ -1897,13 +1908,14 @@
           "editorType": "string[]",
           "nativeDefault": "[]",
           "default": [],
-          "availability": "supported"
+          "availability": "supported",
+          "context": "Select authored Symbol values from parameters get --path /CommandList. These strings are not database IDs or visible labels; overrides share the symbol across duplicate rows. See the containing command for persistence and precedence."
         }
       ],
-      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted.",
+      "context": "Runs when the native event interpreter reaches this command. Visibility and enabled state are independent. Repeating an operation is idempotent; the last opposing operation wins. Other symbols remain unchanged. Use Clear to restore authored conditions. Existing legacy event receivers remain accepted. Overrides live on $gameSystem, survive scene/map changes, and are serialized with game saves. A new game starts without them; Clear removes all four overrides only for the listed symbols. Changes are observed when the command list is rebuilt/refreshed, not by an automatic refresh of an already open menu. Forced Show still respects subcategory membership.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command MenuCommandForceShow --value '{\"Symbols\":[\"save\"]}' --expected-hash <fileHash>"
+        "main-menu commands list --project \"<game>\" --target common-event:1",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command MenuCommandForceShow --value '{\"Symbols\":[\"save\"]}' --expected-hash \"<fileHash>\""
       ]
     },
     {
@@ -1933,7 +1945,8 @@
           "availability": "supported",
           "items": {
             "type": "number"
-          }
+          },
+          "context": "JSON array of actor database IDs, not party positions. Use positive whole IDs, for example [1,2]; empty array changes no actors. Runtime parses each value as an integer and skips missing/nonpositive actors. See MM-C-ChangeActorMenuImageGroup for persistence and required filename."
         },
         {
           "id": "MM-A-ChangeActorMenuImageGroup-Step2:str",
@@ -1954,10 +1967,10 @@
           ]
         }
       ],
-      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image.",
+      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image. The changed portrait is stored on the Game_Actor and saved with it; it survives scene/map changes. New actor initialization reads the database note again. Already displayed pictures are not automatically reloaded by this command; reopen/refresh the consuming scene.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1 --json",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command ChangeActorMenuImageGroup --value '{\"Step1\":[1,2],\"Step2\":\"Actor1_1\"}' --expected-hash HASH_FROM_LIST"
+        "main-menu commands list --project \"<game>\" --target common-event:1 --json",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command ChangeActorMenuImageGroup --value '{\"Step1\":[1,2],\"Step2\":\"Actor1_1\"}' --expected-hash HASH_FROM_LIST"
       ]
     },
     {
@@ -1995,7 +2008,8 @@
           "nativeDefault": "1",
           "default": 1,
           "availability": "supported",
-          "parent": "Step1"
+          "parent": "Step1",
+          "context": "Inclusive actor database ID endpoint, not a party index. Endpoints are reordered if reversed. The CLI accepts finite numbers; use positive whole IDs. Missing/nonpositive actors are skipped. See the containing command for the paired endpoint and persistence."
         },
         {
           "id": "MM-A-ChangeActorMenuImageRange-Step1End:num",
@@ -2008,7 +2022,8 @@
           "nativeDefault": "4",
           "default": 4,
           "availability": "supported",
-          "parent": "Step1"
+          "parent": "Step1",
+          "context": "Inclusive actor database ID endpoint, not a party index. Endpoints are reordered if reversed. The CLI accepts finite numbers; use positive whole IDs. Missing/nonpositive actors are skipped. See the containing command for the paired endpoint and persistence."
         },
         {
           "id": "MM-A-ChangeActorMenuImageRange-Step2:str",
@@ -2029,10 +2044,10 @@
           ]
         }
       ],
-      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image.",
+      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image. The changed portrait is stored on the Game_Actor and saved with it; it survives scene/map changes. New actor initialization reads the database note again. Already displayed pictures are not automatically reloaded by this command; reopen/refresh the consuming scene.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1 --json",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command ChangeActorMenuImageRange --value '{\"Step1\":\"\",\"Step1Start\":1,\"Step1End\":2,\"Step2\":\"Actor1_1\"}' --expected-hash HASH_FROM_LIST"
+        "main-menu commands list --project \"<game>\" --target common-event:1 --json",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command ChangeActorMenuImageRange --value '{\"Step1\":\"\",\"Step1Start\":1,\"Step1End\":2,\"Step2\":\"Actor1_1\"}' --expected-hash HASH_FROM_LIST"
       ]
     },
     {
@@ -2090,10 +2105,10 @@
           ]
         }
       ],
-      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image.",
+      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image. The changed portrait is stored on the Game_Actor and saved with it; it survives scene/map changes. New actor initialization reads the database note again. Already displayed pictures are not automatically reloaded by this command; reopen/refresh the consuming scene.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1 --json",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command ChangeActorMenuImageJS --value '{\"Step1\":[\"[1, 2]\"],\"Step2\":\"Actor1_1\"}' --expected-hash HASH_FROM_LIST"
+        "main-menu commands list --project \"<game>\" --target common-event:1 --json",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command ChangeActorMenuImageJS --value '{\"Step1\":[\"[1, 2]\"],\"Step2\":\"Actor1_1\"}' --expected-hash HASH_FROM_LIST"
       ]
     },
     {
@@ -2149,10 +2164,10 @@
           "context": "No arguments. Return the picture filename without extension, or an empty string to clear the explicit image. Runs when the event interpreter executes the image command; use $gameActors, $gameParty and $gameVariables for current game state."
         }
       ],
-      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image.",
+      "context": "Runs at the native interpreter command. Group and range ignore missing/nonpositive IDs. Range includes both endpoints regardless of order. Legacy JS evaluates expressions and flattens one array level. Current JS evaluates ActorJS first; FilenameJS runs only for an existing actor. CLI stores JavaScript without executing it. The example requires actors 1 and 2 (only actor 1 for the current JS command), an existing common event 1, and img/pictures/Actor1_1.png. An empty filename clears the explicit portrait; native graphic fallback and compatible class/equipment portrait providers may then apply. It does not restore the original actor note image. The changed portrait is stored on the Game_Actor and saved with it; it survives scene/map changes. New actor initialization reads the database note again. Already displayed pictures are not automatically reloaded by this command; reopen/refresh the consuming scene.",
       "examples": [
-        "main-menu commands list --project <game> --target common-event:1 --json",
-        "main-menu commands insert --project <game> --target common-event:1 --before 0 --command ChangeActorMenuImageJS_v124 --value '{\"ActorJS\":\"return 1;\",\"FilenameJS\":\"return \\\"Actor1_1\\\";\"}' --expected-hash HASH_FROM_LIST"
+        "main-menu commands list --project \"<game>\" --target common-event:1 --json",
+        "main-menu commands insert --project \"<game>\" --target common-event:1 --before 0 --command ChangeActorMenuImageJS_v124 --value '{\"ActorJS\":\"return 1;\",\"FilenameJS\":\"return \\\"Actor1_1\\\";\"}' --expected-hash HASH_FROM_LIST"
       ]
     }
   ],
@@ -2173,9 +2188,9 @@
       "examples": [
         "<Menu Portrait: Actor1_1>"
       ],
-      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Put the resource in img/pictures; omit its extension in the tag. The example requires img/pictures/Actor1_1.png.",
+      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Put the resource in img/pictures; omit its extension in the tag. The example requires img/pictures/Actor1_1.png. CLI edits the Note field of actors:ID; read tags list for fileHash before set/remove. Filename changes in the database do not replace portraits already stored in a saved actor; use an image command for that actor. Removing an offset tag restores the remaining per-axis/paired fallback or zero on the next drawing.",
       "syntax": "Pass the complete tag as a JSON string.",
-      "occurrences": "First matching tag for each variant wins; individual axes take precedence over paired offsets.",
+      "occurrences": "The first matching filename tag wins across Image/Portrait spellings. For each offset axis, its first individual-axis tag wins over the first paired-offset tag; without either, the offset is zero.",
       "selection": "Use --occurrence for duplicate physical entries; unrelated note bytes are preserved."
     },
     {
@@ -2194,9 +2209,9 @@
       "examples": [
         "<Menu Portrait Offset: +8, -6>"
       ],
-      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Offsets are measured in source picture pixels, with X first and Y second in the paired tag. Positive X moves the image right and negative X left; positive Y moves it down and negative Y up within the portrait crop. Individual axis tags override that axis of the paired tag.",
+      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Offsets are measured in source picture pixels, with X first and Y second in the paired tag. Positive X moves the image right and negative X left; positive Y moves it down and negative Y up within the portrait crop. Individual axis tags override that axis of the paired tag. CLI edits the Note field of actors:ID; read tags list for fileHash before set/remove. Filename changes in the database do not replace portraits already stored in a saved actor; use an image command for that actor. Removing an offset tag restores the remaining per-axis/paired fallback or zero on the next drawing.",
       "syntax": "Pass the complete tag as a JSON string.",
-      "occurrences": "First matching tag for each variant wins; individual axes take precedence over paired offsets.",
+      "occurrences": "The first matching filename tag wins across Image/Portrait spellings. For each offset axis, its first individual-axis tag wins over the first paired-offset tag; without either, the offset is zero.",
       "selection": "Use --occurrence for duplicate physical entries; unrelated note bytes are preserved."
     },
     {
@@ -2215,9 +2230,9 @@
       "examples": [
         "<Menu Image Offset X: -3>"
       ],
-      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Offsets are measured in source picture pixels, with X first and Y second in the paired tag. Positive X moves the image right and negative X left; positive Y moves it down and negative Y up within the portrait crop. Individual axis tags override that axis of the paired tag.",
+      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Offsets are measured in source picture pixels, with X first and Y second in the paired tag. Positive X moves the image right and negative X left; positive Y moves it down and negative Y up within the portrait crop. Individual axis tags override that axis of the paired tag. CLI edits the Note field of actors:ID; read tags list for fileHash before set/remove. Filename changes in the database do not replace portraits already stored in a saved actor; use an image command for that actor. Removing an offset tag restores the remaining per-axis/paired fallback or zero on the next drawing.",
       "syntax": "Pass the complete tag as a JSON string.",
-      "occurrences": "First matching tag for each variant wins; individual axes take precedence over paired offsets.",
+      "occurrences": "The first matching filename tag wins across Image/Portrait spellings. For each offset axis, its first individual-axis tag wins over the first paired-offset tag; without either, the offset is zero.",
       "selection": "Use --occurrence for duplicate physical entries; unrelated note bytes are preserved."
     },
     {
@@ -2236,9 +2251,9 @@
       "examples": [
         "<Menu Image Offset Y: +5>"
       ],
-      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Offsets are measured in source picture pixels, with X first and Y second in the paired tag. Positive X moves the image right and negative X left; positive Y moves it down and negative Y up within the portrait crop. Individual axis tags override that axis of the paired tag.",
+      "context": "Read from the actor database Note. Filename is stored on actor initialization and can be replaced by image commands; offsets remain note-based. Offsets are measured in source picture pixels, with X first and Y second in the paired tag. Positive X moves the image right and negative X left; positive Y moves it down and negative Y up within the portrait crop. Individual axis tags override that axis of the paired tag. CLI edits the Note field of actors:ID; read tags list for fileHash before set/remove. Filename changes in the database do not replace portraits already stored in a saved actor; use an image command for that actor. Removing an offset tag restores the remaining per-axis/paired fallback or zero on the next drawing.",
       "syntax": "Pass the complete tag as a JSON string.",
-      "occurrences": "First matching tag for each variant wins; individual axes take precedence over paired offsets.",
+      "occurrences": "The first matching filename tag wins across Image/Portrait spellings. For each offset axis, its first individual-axis tag wins over the first paired-offset tag; without either, the offset is zero.",
       "selection": "Use --occurrence for duplicate physical entries; unrelated note bytes are preserved."
     }
   ],

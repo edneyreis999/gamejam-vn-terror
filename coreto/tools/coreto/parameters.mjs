@@ -14,7 +14,9 @@ function replaceEncoded(chain, segments, raw, replacement, depth = 0) {
 }
 
 function validateAvailableChanges(schema, before, after, path) {
-    if (schema.availability && !["supported", "requires-local-service"].includes(schema.availability) &&
+    const newEditorialDefault = schema.availability === "editorial" && before === undefined &&
+        JSON.stringify(after) === JSON.stringify(schema.default);
+    if (!newEditorialDefault && schema.availability && !["supported", "requires-local-service"].includes(schema.availability) &&
         JSON.stringify(before) !== JSON.stringify(after)) {
         throw new CoreError("CAPABILITY_UNAVAILABLE", `Parameter is not available in this environment: ${path}.`, { field: path }, 6);
     }

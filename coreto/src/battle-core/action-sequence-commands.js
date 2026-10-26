@@ -50,9 +50,12 @@ function installBattleSequenceCommands(runtime, settings) {
         if(args.WaitForEffect)wait(this,()=>sprites().isEffecting());
     });
     for(const operation of ['By','To'])register('Mechanics_StateTurnsChange'+operation,args=>{
+        if(!Imported.VisuMZ_1_SkillsStatesCore)return;
         for(const target of targets(args)){
-            if(args.AutoAddState&&!target.isStateAffected(args.StateID))target.addState(args.StateID);
-            if(target.isStateAffected(args.StateID))target._stateTurns[args.StateID]=Math.max(0,operation==='By'?target._stateTurns[args.StateID]+args.Turns:args.Turns);
+            const added=args.AutoAddState&&!target.isStateAffected(args.StateID);
+            if(added)target.addState(args.StateID);
+            if(operation==='To'||added)target.setStateTurns(args.StateID,Math.max(0,args.Turns));
+            else target.addStateTurns(args.StateID,args.Turns);
         }
     });
     register('Mechanics_DeathBreak',function(args){if(context().targets.every(target=>target.isDead()||!target.isBattleMember()))this.command119([args.JumpToLabel]);});

@@ -1,9 +1,9 @@
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
-import {skillRoot, preset} from './shared.mjs';
+import {skillRoot} from './shared.mjs';
 
 const drawing=await readFile(join(skillRoot,'assets/drawing.js.txt'),'utf8');
-export async function recipe(kind) {
+export async function recipe(kind,preset) {
   const keys=kind==='option'?['Surfaces','Icons','Menu','Action','Controls']:['Surfaces','Icons','Speaker','Label','Controls'];
   const config=Object.fromEntries(keys.map(k=>[k,preset.defaults[k]]));
   const body=await readFile(join(skillRoot,`assets/${kind}.js.txt`),'utf8');
@@ -11,7 +11,7 @@ export async function recipe(kind) {
   return `// Coreto DesignSystem ${preset.version}: ${kind}\nconst config=${JSON.stringify(config)};\nconst colors={...config.Surfaces,text:ColorManager.normalColor()};\n${context}\nconst owner=this;\n${drawing}${body}`;
 }
 
-export function backgroundRecipe() {
+export function backgroundRecipe(preset) {
   // Row state remains owned by the theme; CoreEngine owns callback dispatch.
   const shapes=preset.defaults.Shapes;
   const primitives=drawing.slice(0,drawing.indexOf('  function textStyle'));

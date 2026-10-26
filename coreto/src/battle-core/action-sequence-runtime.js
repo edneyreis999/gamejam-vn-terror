@@ -74,6 +74,8 @@ function installBattleSequenceRuntime(settings) {
         if(starting&&updateEvent.call(this))return true;
         if (!current && ['start','turn','turnEnd'].includes(this._phase) && this._forcedBattlers.length && !this.isAborting()) {
             const [battler,action]=this._forcedBattlers.shift();
+            const interrupted=this._subject;
+            if(interrupted?.numActions()>0&&!this._actionBattlers.includes(interrupted))this._actionBattlers.unshift(interrupted);
             battler._actions=[action];
             this._subject=battler;this.processTurn();return true;
         }

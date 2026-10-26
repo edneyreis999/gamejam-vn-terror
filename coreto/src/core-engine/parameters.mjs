@@ -97,6 +97,8 @@ export function encodeValue(schema, value, path, previous) {
         const encoded = previous === undefined ? [] : parseLayer(previous, path);
         return JSON.stringify(value.map((item, index) => encodeValue(schema.items, item, `${path}/${index}`, encoded[index])));
     }
+    // A whole-object edit must not reformat an untouched native numeric field.
+    if (schema.type === "number" && typeof previous === "string" && previous.trim() !== "" && Number(previous) === value) return previous;
     return schema.encoding === "json" ? JSON.stringify(value) : String(value);
 }
 

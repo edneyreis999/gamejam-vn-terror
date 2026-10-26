@@ -1,4 +1,10 @@
 function installBattleCommands(settings) {
+    DataManager.battleCommandName = function(item) {
+        const command = /<COMMAND TEXT: (.*)>/i.exec(item.note);
+        if (command) return command[1];
+        const list = /<LIST NAME: (.*)>/i.exec(item.note);
+        return list ? list[1] : item.name;
+    };
     const actorConfig = settings.ActorCmd;
     const partyConfig = settings.PartyCmd;
     const actorWindow = Window_ActorCommand.prototype;
@@ -45,7 +51,7 @@ function installBattleCommands(settings) {
             if (id > 0) this.addSkillTypeCommand(id);
         }
     };
-    const skillName = skill => label(Number(skill.note.match(/<Command Icon:\s*(\d+)>/i)?.[1] ?? skill.iconIndex), skill.note.match(/<Command Text:\s*([^>]+)>/i)?.[1] ?? skill.name);
+    const skillName = skill => label(Number(skill.note.match(/<Command Icon:\s*(\d+)>/i)?.[1] ?? skill.iconIndex), DataManager.battleCommandName(skill));
     actorWindow.addAttackCommand = function() {
         const skill = $dataSkills[this._actor.attackSkillId()];
         if (this.canAddSkillCommand(skill)) this.addCommand(skillName(skill), 'attack', this._actor.canAttack());
@@ -57,11 +63,17 @@ function installBattleCommands(settings) {
     actorWindow.addSkillCommands = function() { for (const id of this._actor.skillTypes()) this.addSkillTypeCommand(id); };
     actorWindow.addSkillTypeCommand = function(id) {
         if (!$dataSystem.skillTypes[id]) return;
-        const icon = $dataSystem.magicSkills.includes(id) ? actorConfig.IconStypeMagic : actorConfig.IconStypeNorm;
-        this.addCommand(label(icon, $dataSystem.skillTypes[id]), 'skill', !this._actor.isSkillTypeSealed(id), id);
+        const config = Imported.VisuMZ_1_SkillsStatesCore ? VisuMZ.SkillsStatesCore.Settings.Skills : actorConfig;
+        const icon = $dataSystem.magicSkills.includes(id) ? config.IconStypeMagic : config.IconStypeNorm;
+        const name = $dataSystem.skillTypes[id];
+        this.addCommand(/\\I\[\d+\]/i.test(name) ? name : label(icon, name), 'skill', !this._actor.isSkillTypeSealed(id), id);
     };
-    actorWindow.isHiddenSkill = function(skill) { return [this._actor.attackSkillId(),this._actor.guardSkillId()].includes(skill.id); };
-    actorWindow.addSingleSkillCommands = function() { for (const skill of this._actor.skills()) if (!this.isHiddenSkill(skill)) this.addSingleSkillCommand(skill.id); };
+    actorWindow.isHiddenSkill = function(skill) { return Imported.VisuMZ_1_SkillsStatesCore ? this._actor.isSkillHidden(skill) : false; };
+    actorWindow.noSimilarSTypes = function(skill) {
+        const types = Imported.VisuMZ_1_SkillsStatesCore ? DataManager.getSkillTypes(skill) : [skill.stypeId];
+        return !this._actor.skillTypes().some(id => types.includes(id));
+    };
+    actorWindow.addSingleSkillCommands = function() { for (const skill of this._actor.skills()) if (!this.noSimilarSTypes(skill) && !this.isHiddenSkill(skill)) this.addSingleSkillCommand(skill.id); };
     actorWindow.addSingleSkillCommand = function(id) {
         const skill = $dataSkills[id];
         if (this.canAddSkillCommand(skill)) this.addCommand(skillName(skill), 'singleSkill', this._actor.canUse(skill), id);

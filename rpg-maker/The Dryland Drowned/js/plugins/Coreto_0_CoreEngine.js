@@ -2063,7 +2063,7 @@
  * @param DamageColor:func
  * @text DamageColor
  * @type note
- * @desc Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.
+ * @desc Function body called by damage-number color lookup with this=ColorManager and arguments[0]=the damage color type.
  * @default "switch (arguments[0]) {\ncase 0: return \"#ffffff\";\ncase 1: return \"#b9ffb5\";\ncase 2: return \"#bb88bb\";\ncase 3: return \"#80b0ff\";\ndefault: return \"#808080\";\n}"
  *
  */
@@ -4175,7 +4175,8 @@ const catalog = {
                     "label": "SmartEventCollisionPriority",
                     "description": "Only normal-priority events obstruct other normal-priority events.",
                     "id": "CE-P-QoLSettings.SmartEventCollisionPriority:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "True makes only normal-priority events block other normal-priority events in the event-versus-event collision check. False delegates that check to the native engine. Player collision and tile passage remain separate checks."
                 },
                 {
                     "key": "AnimationMirrorOffset",
@@ -4513,7 +4514,8 @@ const catalog = {
                     "description": "Set the escape probability to 100%; the battle must still permit escaping.",
                     "type": "boolean",
                     "availability": "supported",
-                    "default": true
+                    "default": true,
+                    "context": "True makes BattleManager.processEscape succeed when invoked; normal battle UI still needs permission to offer Escape. False delegates to the native escape roll. This does not add an Escape command to battles that forbid it."
                 },
                 {
                     "id": "CE-P-QoLSettings.ImprovedAccuracySystem:eval",
@@ -4618,7 +4620,8 @@ const catalog = {
                     "availability": "supported",
                     "integer": true,
                     "min": 0,
-                    "editorType": "common_event"
+                    "editorType": "common_event",
+                    "context": "Supply an existing Common Event ID; 0 disables this reservation. Queued after /QoL/NewGameCommonEvent when that playtest-only event applies; the map interpreter later runs the queue. Loading a save does not run new-game setup."
                 }
             ],
             "availability": "supported",
@@ -4674,7 +4677,7 @@ const catalog = {
                         "description": "Global function name; ASCII spaces are removed. Existing globals are preserved.",
                         "id": "CE-P-jsQuickFunc.FunctionName:str",
                         "availability": "supported",
-                        "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception is logged and returns 0. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
+                        "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception returns 0 and is logged in playtest. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
                     },
                     {
                         "key": "CodeJS",
@@ -4694,12 +4697,12 @@ const catalog = {
                             "onError": "return 0; log in playtest"
                         },
                         "availability": "supported",
-                        "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception is logged and returns 0. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
+                        "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception returns 0 and is logged in playtest. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
                     }
                 ]
             },
             "availability": "supported",
-            "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception is logged and returns 0. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
+            "context": " Each configured function body is compiled at boot and installed on globalThis under FunctionName after removing ASCII spaces. Empty or already-existing global names are skipped. When called, this is the caller receiver and arguments are the supplied positional values; return your result explicitly. A runtime exception returns 0 and is logged in playtest. The CLI stores code but never executes it. Example: FunctionName=\"doubleValue\", CodeJS=\"return arguments[0] * 2;\", then call doubleValue(3) in runtime to obtain 6. Restart after configuration changes."
         },
         {
             "id": "CE-P-plugin.Param:struct",
@@ -4822,7 +4825,8 @@ const catalog = {
                     "type": "number",
                     "default": 0.25,
                     "availability": "supported",
-                    "editorType": "text"
+                    "editorType": "text",
+                    "context": "Ratio of maximum HP: 0.25 means strictly below 25% HP. At equality the battler is not in crisis, and a dead battler never qualifies. This feeds isDying and consumers such as the default HP text color; it does not change HP."
                 },
                 {
                     "id": "CE-P-Param.BasicParameterFormula:func",
@@ -5235,7 +5239,8 @@ const catalog = {
                     "description": "Display label for CRI (critical rate), xparam index 2. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Crit.Rate",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "When the whole /Param value is absent or reset, its complete default explicitly uses \"Critical Rate\" here. A stored struct missing this child, or reset of this leaf alone, uses the published shorter child default. An explicit stored value wins."
                 },
                 {
                     "id": "CE-P-Param.XParamVocab3:str",
@@ -5245,7 +5250,8 @@ const catalog = {
                     "description": "Display label for CEV (critical evasion rate), xparam index 3. Used by TextManager.paramName; changes only the displayed vocabulary, never the calculation or battler value.",
                     "type": "string",
                     "default": "Crit.Evade",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "When the whole /Param value is absent or reset, its complete default explicitly uses \"Critical Evade\" here. A stored struct missing this child, or reset of this leaf alone, uses the published shorter child default. An explicit stored value wins."
                 },
                 {
                     "id": "CE-P-Param.XParamVocab4:str",
@@ -5767,7 +5773,8 @@ const catalog = {
                     "description": "Show the actor level when displaying actors?",
                     "availability": "supported",
                     "type": "boolean",
-                    "default": true
+                    "default": true,
+                    "context": "True permits Window_StatusBase.drawActorLevel; false skips both its level text and the /UI/LvExpGauge drawn there. It does not change actor levels or suppress custom displays that bypass this method."
                 },
                 {
                     "id": "CE-P-Param.DrawIcons:eval",
@@ -5777,7 +5784,8 @@ const catalog = {
                     "description": "Draw icons next to parameter names?",
                     "availability": "supported",
                     "type": "boolean",
-                    "default": true
+                    "default": true,
+                    "context": "True draws the configured IconParam/IconXParam/IconSParam or /CustomParam icon before parameter labels in the status/equipment parameter drawing helper. False leaves that helper with text only. It does not hide state or inventory icons."
                 }
             ],
             "context": "Basic parameter IDs: 0=MAXHP (maximum HP); 1=MAXMP (maximum MP); 2=ATK (attack); 3=DEF (defense); 4=MAT (magic attack); 5=MDF (magic defense); 6=AGI (agility); 7=LUK (luck). Extra IDs: 0=HIT (hit rate); 1=EVA (evasion); 2=CRI (critical rate); 3=CEV (critical evasion); 4=MEV (magic evasion); 5=MRF (magic reflection); 6=CNT (counterattack); 7=HRG (HP regeneration); 8=MRG (MP regeneration); 9=TRG (TP regeneration). Special IDs: 0=TGR (target rate); 1=GRD (guard effect); 2=REC (recovery effect); 3=PHA (pharmacology); 4=MCR (MP cost rate); 5=TCR (TP charge rate); 6=PDR (physical damage rate); 7=MDR (magical damage rate); 8=FDR (floor damage rate); 9=EXR (experience rate). The complete Param default explicitly stores XParamVocab2=\"Critical Rate\" and XParamVocab3=\"Critical Evade\"; the individual field defaults \"Crit.Rate\" and \"Crit.Evade\" are used when those fields are absent, or when individually reset. Explicit configured values take precedence. Icons refer to img/system/IconSet.png indices. DisplayedParams controls the standard status/equipment lists; ExtDisplayedParams is exposed for external consumers and has no separate built-in panel."
@@ -5912,7 +5920,8 @@ const catalog = {
                     "default": "random",
                     "label": "Default Style",
                     "description": "Style retained by Game_Screen for subsequent native shake commands.",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "original uses the native horizontal shake displacement; random displaces X and Y; horizontal displaces X only; vertical displaces Y only. These mappings select the corresponding editable /ScreenShake/*JS body, so custom bodies may change their effect. Initializes Game_Screen for a new game, or supplies the fallback for a save missing the style. ScreenShake/Type overrides the current saved style."
                 },
                 {
                     "key": "originalJS",
@@ -6001,7 +6010,8 @@ const catalog = {
             ],
             "label": "Screen Shake",
             "description": "Shake style and authored displacement formulas.",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "original uses the native horizontal shake displacement; random displaces X and Y; horizontal displaces X only; vertical displaces Y only. These mappings select the corresponding editable /ScreenShake/*JS body, so custom bodies may change their effect. The initial style is copied into Game_Screen; the ScreenShake event command replaces it for later native shakes. This Game_Screen state survives save/load; new game starts from DefaultStyle."
         },
         {
             "id": "CE-P-plugin.Color:struct",
@@ -6146,7 +6156,8 @@ const catalog = {
                     "description": "Windowskin palette index as text, or hex color; resolved colors are cached until explicitly cleared.",
                     "type": "string",
                     "default": "23",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Color for MP cost text returned by ColorManager.mpCostColor. Use a windowskin palette index string such as \"23\" or a hex color such as \"#bb88bb\"."
                 },
                 {
                     "id": "CE-P-Color.ColorPowerUp:str",
@@ -6238,7 +6249,8 @@ const catalog = {
                     "description": "Color for first gradient endpoint of the Exp gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "30",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Core uses this endpoint when /UI/LvExpGauge and /Param/ShowActorLevel are true and a window draws actor level: current level progress. Changing color does not create a gauge."
                 },
                 {
                     "id": "CE-P-Color.ColorExpGauge2:str",
@@ -6248,7 +6260,8 @@ const catalog = {
                     "description": "Color for second gradient endpoint of the Exp gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "31",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Core uses this endpoint when /UI/LvExpGauge and /Param/ShowActorLevel are true and a window draws actor level: current level progress. Changing color does not create a gauge."
                 },
                 {
                     "id": "CE-P-Color.ColorMaxLvGauge1:str",
@@ -6258,7 +6271,8 @@ const catalog = {
                     "description": "Color for first gradient endpoint of the MaxLv gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "14",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Core uses this endpoint when /UI/LvExpGauge and /Param/ShowActorLevel are true and a window draws actor level: the actor at maximum level. Changing color does not create a gauge."
                 },
                 {
                     "id": "CE-P-Color.ColorMaxLvGauge2:str",
@@ -6268,7 +6282,8 @@ const catalog = {
                     "description": "Color for second gradient endpoint of the MaxLv gauge; Exp/MaxLv colors are exposed for consumers that draw those gauges. Use a windowskin palette index encoded as text (e.g. \"16\") or a hex color (e.g. \"#ff8800\"). Resolved colors are cached; restart the game after authoring, or clear ColorManager cached keys for runtime changes.",
                     "type": "string",
                     "default": "6",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Core uses this endpoint when /UI/LvExpGauge and /Param/ShowActorLevel are true and a window draws actor level: the actor at maximum level. Changing color does not create a gauge."
                 },
                 {
                     "id": "CE-P-Color.OutlineColor:str",
@@ -6417,7 +6432,7 @@ const catalog = {
                     "key": "DamageColor",
                     "storageKey": "DamageColor:func",
                     "label": "DamageColor",
-                    "description": "Function body, this=ColorManager, first argument is the actor, parameter delta, or damage type.",
+                    "description": "Function body called by damage-number color lookup with this=ColorManager and arguments[0]=the damage color type.",
                     "type": "string",
                     "default": "switch (arguments[0]) {\ncase 0: return \"#ffffff\";\ncase 1: return \"#b9ffb5\";\ncase 2: return \"#bb88bb\";\ncase 3: return \"#80b0ff\";\ndefault: return \"#808080\";\n}",
                     "availability": "supported",
@@ -6654,7 +6669,7 @@ const catalog = {
                     "type": "boolean",
                     "default": true,
                     "availability": "supported",
-                    "context": " Controls the individual row background drawn by Window_Selectable.drawBackgroundRect, not the whole window frame or scene background. True invokes DrawItemBackgroundJS for each row background; false skips that draw."
+                    "context": "Controls each row background drawn by Window_Selectable.drawBackgroundRect, not the whole window or scene background. True invokes DrawItemBackgroundJS for each row when that body is nonempty; an empty body uses the native row background. False skips both paths."
                 },
                 {
                     "id": "CE-P-Window.ItemHeight:num",
@@ -6687,7 +6702,7 @@ const catalog = {
                         ],
                         "failure": "AUTHORED_CODE_FAILED with field context"
                     },
-                    "context": " Called only when ShowItemBackground is true. this=Window_Selectable, arguments[0]=the row Rectangle in content pixels; return value is ignored. Draw into this.contentsBack using the rectangle, as in the default body. No argument named rect exists until the body declares it."
+                    "context": "Called only when ShowItemBackground is true. this=Window_Selectable, arguments[0]=the row Rectangle in content pixels; return value is ignored. Draw into this.contentsBack using the rectangle, as in the default body. No argument named rect exists until the body declares it. Accepts a function body; an empty string delegates to native drawBackgroundRect. The game invokes it while drawing row backgrounds; the CLI stores it without execution."
                 },
                 {
                     "id": "CE-P-Window.DurationPerChat:num",
@@ -6772,7 +6787,8 @@ const catalog = {
                         "directory": "img/animations/"
                     },
                     "id": "CE-P-ImgLoad.animations:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/animations/, without .png; for example [\"Example\"] requests img/animations/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "battlebacks1",
@@ -6788,7 +6804,8 @@ const catalog = {
                         "directory": "img/battlebacks1/"
                     },
                     "id": "CE-P-ImgLoad.battlebacks1:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/battlebacks1/, without .png; for example [\"Example\"] requests img/battlebacks1/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "battlebacks2",
@@ -6804,7 +6821,8 @@ const catalog = {
                         "directory": "img/battlebacks2/"
                     },
                     "id": "CE-P-ImgLoad.battlebacks2:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/battlebacks2/, without .png; for example [\"Example\"] requests img/battlebacks2/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "characters",
@@ -6820,7 +6838,8 @@ const catalog = {
                         "directory": "img/characters/"
                     },
                     "id": "CE-P-ImgLoad.characters:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/characters/, without .png; for example [\"Example\"] requests img/characters/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "enemies",
@@ -6836,7 +6855,8 @@ const catalog = {
                         "directory": "img/enemies/"
                     },
                     "id": "CE-P-ImgLoad.enemies:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/enemies/, without .png; for example [\"Example\"] requests img/enemies/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "faces",
@@ -6852,7 +6872,8 @@ const catalog = {
                         "directory": "img/faces/"
                     },
                     "id": "CE-P-ImgLoad.faces:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/faces/, without .png; for example [\"Example\"] requests img/faces/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "parallaxes",
@@ -6868,7 +6889,8 @@ const catalog = {
                         "directory": "img/parallaxes/"
                     },
                     "id": "CE-P-ImgLoad.parallaxes:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/parallaxes/, without .png; for example [\"Example\"] requests img/parallaxes/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "pictures",
@@ -6884,7 +6906,8 @@ const catalog = {
                         "directory": "img/pictures/"
                     },
                     "id": "CE-P-ImgLoad.pictures:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/pictures/, without .png; for example [\"Example\"] requests img/pictures/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "sv_actors",
@@ -6900,7 +6923,8 @@ const catalog = {
                         "directory": "img/sv_actors/"
                     },
                     "id": "CE-P-ImgLoad.sv_actors:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/sv_actors/, without .png; for example [\"Example\"] requests img/sv_actors/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "sv_enemies",
@@ -6916,7 +6940,8 @@ const catalog = {
                         "directory": "img/sv_enemies/"
                     },
                     "id": "CE-P-ImgLoad.sv_enemies:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/sv_enemies/, without .png; for example [\"Example\"] requests img/sv_enemies/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "system",
@@ -6935,7 +6960,8 @@ const catalog = {
                         "directory": "img/system/"
                     },
                     "id": "CE-P-ImgLoad.system:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/system/, without .png; for example [\"Example\"] requests img/system/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "tilesets",
@@ -6951,7 +6977,8 @@ const catalog = {
                         "directory": "img/tilesets/"
                     },
                     "id": "CE-P-ImgLoad.tilesets:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/tilesets/, without .png; for example [\"Example\"] requests img/tilesets/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "titles1",
@@ -6967,7 +6994,8 @@ const catalog = {
                         "directory": "img/titles1/"
                     },
                     "id": "CE-P-ImgLoad.titles1:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/titles1/, without .png; for example [\"Example\"] requests img/titles1/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 },
                 {
                     "key": "titles2",
@@ -6983,7 +7011,8 @@ const catalog = {
                         "directory": "img/titles2/"
                     },
                     "id": "CE-P-ImgLoad.titles2:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing image basenames in img/titles2/, without .png; for example [\"Example\"] requests img/titles2/Example.png only if that illustrative asset is installed. Requests start during boot after native system images; ImageManager caching is not permanent retention."
                 }
             ],
             "availability": "supported"
@@ -7031,7 +7060,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7089,7 +7118,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7147,7 +7176,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7205,7 +7234,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7263,7 +7292,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7321,7 +7350,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7379,7 +7408,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7437,7 +7466,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7495,7 +7524,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7553,7 +7582,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7611,7 +7640,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7669,7 +7698,7 @@ const catalog = {
                             "max": 255,
                             "integer": true,
                             "default": 192,
-                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback."
+                            "context": "Opacity of the previous-scene snapshot only: integer 0=transparent through 255=opaque. It remains underneath the optional background image layers; this does not change window opacity. An explicit value in the configured scene group overrides the individual fallback. In /MenuBg/Scene_GameEnd the complete group default stores 128; resetting that leaf alone uses 192. Other scene groups use their published complete defaults."
                         },
                         {
                             "id": "CE-P-BgSettings.BgFilename1:str",
@@ -7810,7 +7839,8 @@ const catalog = {
                             "description": "Configure Subtitle for the Title surface.",
                             "availability": "supported",
                             "type": "string",
-                            "default": "Subtitle"
+                            "default": "Subtitle",
+                            "context": "Title subtitle text. Empty string or exactly \"Subtitle\" suppresses its title drawing callback. Otherwise drawGameSubtitle draws it after the main title, when the database Draw Game Title option enables title drawing. DocumentTitleFmt additionally requires both Subtitle and Version to be non-placeholder. The default bitmap drawing treats this as plain text."
                         },
                         {
                             "id": "CE-P-Title.Version:str",
@@ -7820,7 +7850,8 @@ const catalog = {
                             "description": "Configure Version for the Title surface.",
                             "availability": "supported",
                             "type": "string",
-                            "default": "0.00"
+                            "default": "0.00",
+                            "context": "Title version text. Empty string or exactly \"0.00\" suppresses its title drawing callback. Otherwise drawGameVersion draws it after the main title, when the database Draw Game Title option enables title drawing. DocumentTitleFmt additionally requires both Subtitle and Version to be non-placeholder. The default bitmap drawing treats this as plain text."
                         },
                         {
                             "id": "CE-P-Title.drawGameTitle:func",
@@ -7836,7 +7867,8 @@ const catalog = {
                                 "receiver": "Scene_Title",
                                 "arguments": []
                             },
-                            "default": "const x = 20;\nconst y = Graphics.height / 4;\nconst maxWidth = Graphics.width - x * 2;\nconst text = $dataSystem.gameTitle;\nconst bitmap = this._gameTitleSprite.bitmap;\nbitmap.fontFace = $gameSystem.mainFontFace();\nbitmap.outlineColor = \"black\";\nbitmap.outlineWidth = 8;\nbitmap.fontSize = 72;\nbitmap.drawText(text, x, y, maxWidth, 48, \"center\");"
+                            "default": "const x = 20;\nconst y = Graphics.height / 4;\nconst maxWidth = Graphics.width - x * 2;\nconst text = $dataSystem.gameTitle;\nconst bitmap = this._gameTitleSprite.bitmap;\nbitmap.fontFace = $gameSystem.mainFontFace();\nbitmap.outlineColor = \"black\";\nbitmap.outlineWidth = 8;\nbitmap.fontSize = 72;\nbitmap.drawText(text, x, y, maxWidth, 48, \"center\");",
+                            "context": "JavaScript function body called when the native title scene draws the game title (Database Draw Game Title enabled). this=Scene_Title; no arguments are supplied. Draw into this._gameTitleSprite.bitmap using screen pixels (origin upper-left, X right, Y down); the return value is ignored. The published default is a full working body. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-Title.drawGameSubtitle:func",
@@ -7852,7 +7884,8 @@ const catalog = {
                                 "receiver": "Scene_Title",
                                 "arguments": []
                             },
-                            "default": "const x = 20;\nconst y = Graphics.height / 4 + 72;\nconst maxWidth = Graphics.width - x * 2;\nconst text = Scene_Title.subtitle;\nconst bitmap = this._gameTitleSprite.bitmap;\nbitmap.fontFace = $gameSystem.mainFontFace();\nbitmap.outlineColor = \"black\";\nbitmap.outlineWidth = 6;\nbitmap.fontSize = 48;\nbitmap.drawText(text, x, y, maxWidth, 48, \"center\");"
+                            "default": "const x = 20;\nconst y = Graphics.height / 4 + 72;\nconst maxWidth = Graphics.width - x * 2;\nconst text = Scene_Title.subtitle;\nconst bitmap = this._gameTitleSprite.bitmap;\nbitmap.fontFace = $gameSystem.mainFontFace();\nbitmap.outlineColor = \"black\";\nbitmap.outlineWidth = 6;\nbitmap.fontSize = 48;\nbitmap.drawText(text, x, y, maxWidth, 48, \"center\");",
+                            "context": "JavaScript function body called after drawGameTitle, only when Subtitle is nonempty and not \"Subtitle\". this=Scene_Title; no arguments are supplied. Draw into this._gameTitleSprite.bitmap using screen pixels (origin upper-left, X right, Y down); the return value is ignored. The published default is a full working body. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-Title.drawGameVersion:func",
@@ -7868,7 +7901,8 @@ const catalog = {
                                 "receiver": "Scene_Title",
                                 "arguments": []
                             },
-                            "default": "const bitmap = this._gameTitleSprite.bitmap;\nconst x = 0;\nconst y = Graphics.height - 20;\nconst width = Math.round(Graphics.width / 4);\nconst height = 20;\nconst c1 = ColorManager.dimColor1();\nconst c2 = ColorManager.dimColor2();\nconst text = 'Version ' + Scene_Title.version;\nbitmap.gradientFillRect(x, y, width, height, c1, c2);\nbitmap.fontFace = $gameSystem.mainFontFace();\nbitmap.outlineColor = \"black\";\nbitmap.outlineWidth = 3;\nbitmap.fontSize = 16;\nbitmap.drawText(text, x + 4, y, Graphics.width, height, \"left\");"
+                            "default": "const bitmap = this._gameTitleSprite.bitmap;\nconst x = 0;\nconst y = Graphics.height - 20;\nconst width = Math.round(Graphics.width / 4);\nconst height = 20;\nconst c1 = ColorManager.dimColor1();\nconst c2 = ColorManager.dimColor2();\nconst text = 'Version ' + Scene_Title.version;\nbitmap.gradientFillRect(x, y, width, height, c1, c2);\nbitmap.fontFace = $gameSystem.mainFontFace();\nbitmap.outlineColor = \"black\";\nbitmap.outlineWidth = 3;\nbitmap.fontSize = 16;\nbitmap.drawText(text, x + 4, y, Graphics.width, height, \"left\");",
+                            "context": "JavaScript function body called after the title/subtitle, only when Version is nonempty and not \"0.00\". this=Scene_Title; no arguments are supplied. Draw into this._gameTitleSprite.bitmap using screen pixels (origin upper-left, X right, Y down); the return value is ignored. The published default is a full working body. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-Title.CommandRect:func",
@@ -7884,7 +7918,8 @@ const catalog = {
                                 "receiver": "Scene_Title",
                                 "arguments": []
                             },
-                            "default": "const offsetX = $dataSystem.titleCommandWindow.offsetX;\nconst offsetY = $dataSystem.titleCommandWindow.offsetY;\nconst rows = this.commandWindowRows();\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = (Graphics.boxWidth - width) / 2 + offsetX;\nconst y = Graphics.boxHeight - height - 96 + offsetY;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const offsetX = $dataSystem.titleCommandWindow.offsetX;\nconst offsetY = $dataSystem.titleCommandWindow.offsetY;\nconst rows = this.commandWindowRows();\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = (Graphics.boxWidth - width) / 2 + offsetX;\nconst y = Graphics.boxHeight - height - 96 + offsetY;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Title to obtain its Command window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-Title.ButtonFadeSpeed:num",
@@ -7937,7 +7972,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Command window of Scene_Menu after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-MainMenu.CommandRect:func",
@@ -7953,7 +7989,8 @@ const catalog = {
                                 "receiver": "Scene_Menu",
                                 "arguments": []
                             },
-                            "default": "const width = this.mainCommandWidth();\nconst height = this.mainAreaHeight() - this.goldWindowRect().height;\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = this.mainCommandWidth();\nconst height = this.mainAreaHeight() - this.goldWindowRect().height;\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Menu to obtain its Command window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-MainMenu.GoldBgType:num",
@@ -7969,7 +8006,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Gold window of Scene_Menu after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-MainMenu.GoldRect:func",
@@ -7985,7 +8023,8 @@ const catalog = {
                                 "receiver": "Scene_Menu",
                                 "arguments": []
                             },
-                            "default": "const rows = 1;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaBottom() - height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const rows = 1;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaBottom() - height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Menu to obtain its Gold window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-MainMenu.StatusBgType:num",
@@ -8001,7 +8040,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Status window of Scene_Menu after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-MainMenu.StatusRect:func",
@@ -8017,7 +8057,8 @@ const catalog = {
                                 "receiver": "Scene_Menu",
                                 "arguments": []
                             },
-                            "default": "const width = Graphics.boxWidth - this.mainCommandWidth();\nconst height = this.mainAreaHeight();\nconst x = this.isRightInputMode() ? 0 : Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = Graphics.boxWidth - this.mainCommandWidth();\nconst height = this.mainAreaHeight();\nconst x = this.isRightInputMode() ? 0 : Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Menu to obtain its Status window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8027,7 +8068,8 @@ const catalog = {
                         "GoldRect": "const rows = 1;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaBottom() - height;\nreturn new Rectangle(x, y, width, height);",
                         "StatusBgType": 0,
                         "StatusRect": "const width = Graphics.boxWidth - this.mainCommandWidth();\nconst height = this.mainAreaHeight();\nconst x = this.isRightInputMode() ? 0 : Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Menu. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.ItemMenu:struct",
@@ -8053,7 +8095,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Help window of Scene_Item after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ItemMenu.HelpRect:func",
@@ -8069,7 +8112,8 @@ const catalog = {
                                 "receiver": "Scene_Item",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.helpAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.helpAreaHeight();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.helpAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.helpAreaHeight();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Item to obtain its Help window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ItemMenu.CategoryBgType:num",
@@ -8085,7 +8129,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Category window of Scene_Item after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ItemMenu.CategoryRect:func",
@@ -8101,7 +8146,8 @@ const catalog = {
                                 "receiver": "Scene_Item",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Item to obtain its Category window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ItemMenu.ItemBgType:num",
@@ -8117,7 +8163,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Item window of Scene_Item after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ItemMenu.ItemRect:func",
@@ -8133,7 +8180,8 @@ const catalog = {
                                 "receiver": "Scene_Item",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this._categoryWindow.y + this._categoryWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaBottom() - y;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this._categoryWindow.y + this._categoryWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaBottom() - y;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Item to obtain its Item window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ItemMenu.ActorBgType:num",
@@ -8149,7 +8197,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Actor window of Scene_Item after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ItemMenu.ActorRect:func",
@@ -8165,7 +8214,8 @@ const catalog = {
                                 "receiver": "Scene_Item",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Item to obtain its Actor window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8177,7 +8227,8 @@ const catalog = {
                         "ItemRect": "const x = 0;\nconst y = this._categoryWindow.y + this._categoryWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaBottom() - y;\nreturn new Rectangle(x, y, width, height);",
                         "ActorBgType": 0,
                         "ActorRect": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Item. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.SkillMenu:struct",
@@ -8203,7 +8254,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Help window of Scene_Skill after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SkillMenu.HelpRect:func",
@@ -8219,7 +8271,8 @@ const catalog = {
                                 "receiver": "Scene_Skill",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.helpAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.helpAreaHeight();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.helpAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.helpAreaHeight();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Skill to obtain its Help window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-SkillMenu.SkillTypeBgType:num",
@@ -8235,7 +8288,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the SkillType window of Scene_Skill after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SkillMenu.SkillTypeRect:func",
@@ -8251,7 +8305,8 @@ const catalog = {
                                 "receiver": "Scene_Skill",
                                 "arguments": []
                             },
-                            "default": "const rows = 3;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const rows = 3;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = this.isRightInputMode() ? Graphics.boxWidth - width : 0;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Skill to obtain its SkillType window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-SkillMenu.StatusBgType:num",
@@ -8267,7 +8322,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Status window of Scene_Skill after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SkillMenu.StatusRect:func",
@@ -8283,7 +8339,8 @@ const catalog = {
                                 "receiver": "Scene_Skill",
                                 "arguments": []
                             },
-                            "default": "const width = Graphics.boxWidth - this.mainCommandWidth();\nconst height = this._skillTypeWindow.height;\nconst x = this.isRightInputMode() ? 0 : Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = Graphics.boxWidth - this.mainCommandWidth();\nconst height = this._skillTypeWindow.height;\nconst x = this.isRightInputMode() ? 0 : Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Skill to obtain its Status window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-SkillMenu.ItemBgType:num",
@@ -8299,7 +8356,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Item window of Scene_Skill after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SkillMenu.ItemRect:func",
@@ -8315,7 +8373,8 @@ const catalog = {
                                 "receiver": "Scene_Skill",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this._statusWindow.y + this._statusWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._statusWindow.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this._statusWindow.y + this._statusWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._statusWindow.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Skill to obtain its Item window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-SkillMenu.ActorBgType:num",
@@ -8331,7 +8390,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Actor window of Scene_Skill after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SkillMenu.ActorRect:func",
@@ -8347,7 +8407,8 @@ const catalog = {
                                 "receiver": "Scene_Skill",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Skill to obtain its Actor window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8361,7 +8422,8 @@ const catalog = {
                         "ItemRect": "const x = 0;\nconst y = this._statusWindow.y + this._statusWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._statusWindow.height;\nreturn new Rectangle(x, y, width, height);",
                         "ActorBgType": 0,
                         "ActorRect": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Skill. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.EquipMenu:struct",
@@ -8387,7 +8449,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Help window of Scene_Equip after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-EquipMenu.HelpRect:func",
@@ -8403,7 +8466,8 @@ const catalog = {
                                 "receiver": "Scene_Equip",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.helpAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.helpAreaHeight();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.helpAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.helpAreaHeight();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Equip to obtain its Help window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-EquipMenu.StatusBgType:num",
@@ -8419,7 +8483,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Status window of Scene_Equip after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-EquipMenu.StatusRect:func",
@@ -8435,7 +8500,8 @@ const catalog = {
                                 "receiver": "Scene_Equip",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = this.statusWidth();\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = this.statusWidth();\nconst height = this.mainAreaHeight();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Equip to obtain its Status window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-EquipMenu.CommandBgType:num",
@@ -8451,7 +8517,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Command window of Scene_Equip after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-EquipMenu.CommandRect:func",
@@ -8467,7 +8534,8 @@ const catalog = {
                                 "receiver": "Scene_Equip",
                                 "arguments": []
                             },
-                            "default": "const x = this.statusWidth();\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = this.statusWidth();\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Equip to obtain its Command window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-EquipMenu.SlotBgType:num",
@@ -8483,7 +8551,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Slot window of Scene_Equip after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-EquipMenu.SlotRect:func",
@@ -8499,7 +8568,8 @@ const catalog = {
                                 "receiver": "Scene_Equip",
                                 "arguments": []
                             },
-                            "default": "const commandWindowRect = this.commandWindowRect();\nconst x = this.statusWidth();\nconst y = commandWindowRect.y + commandWindowRect.height;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this.mainAreaHeight() - commandWindowRect.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const commandWindowRect = this.commandWindowRect();\nconst x = this.statusWidth();\nconst y = commandWindowRect.y + commandWindowRect.height;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this.mainAreaHeight() - commandWindowRect.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Equip to obtain its Slot window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-EquipMenu.ItemBgType:num",
@@ -8515,7 +8585,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Item window of Scene_Equip after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-EquipMenu.ItemRect:func",
@@ -8531,7 +8602,8 @@ const catalog = {
                                 "receiver": "Scene_Equip",
                                 "arguments": []
                             },
-                            "default": "return this.slotWindowRect();"
+                            "default": "return this.slotWindowRect();",
+                            "context": "JavaScript function body used by Scene_Equip to obtain its Item window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8545,7 +8617,8 @@ const catalog = {
                         "SlotRect": "const commandWindowRect = this.commandWindowRect();\nconst x = this.statusWidth();\nconst y = commandWindowRect.y + commandWindowRect.height;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this.mainAreaHeight() - commandWindowRect.height;\nreturn new Rectangle(x, y, width, height);",
                         "ItemBgType": 0,
                         "ItemRect": "return this.slotWindowRect();"
-                    }
+                    },
+                    "context": "Window layout for Scene_Equip. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.StatusMenu:struct",
@@ -8571,7 +8644,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Profile window of Scene_Status after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-StatusMenu.ProfileRect:func",
@@ -8587,7 +8661,8 @@ const catalog = {
                                 "receiver": "Scene_Status",
                                 "arguments": []
                             },
-                            "default": "const width = Graphics.boxWidth;\nconst height = this.profileHeight();\nconst x = 0;\nconst y = this.mainAreaBottom() - height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = Graphics.boxWidth;\nconst height = this.profileHeight();\nconst x = 0;\nconst y = this.mainAreaBottom() - height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Status to obtain its Profile window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-StatusMenu.StatusBgType:num",
@@ -8603,7 +8678,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Status window of Scene_Status after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-StatusMenu.StatusRect:func",
@@ -8619,7 +8695,8 @@ const catalog = {
                                 "receiver": "Scene_Status",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.statusParamsWindowRect().y - y;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst width = Graphics.boxWidth;\nconst height = this.statusParamsWindowRect().y - y;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Status to obtain its Status window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-StatusMenu.StatusParamsBgType:num",
@@ -8635,7 +8712,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the StatusParams window of Scene_Status after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-StatusMenu.StatusParamsRect:func",
@@ -8651,7 +8729,8 @@ const catalog = {
                                 "receiver": "Scene_Status",
                                 "arguments": []
                             },
-                            "default": "const width = this.statusParamsWidth();\nconst height = this.statusParamsHeight();\nconst x = 0;\nconst y = this.mainAreaBottom() - this.profileHeight() - height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = this.statusParamsWidth();\nconst height = this.statusParamsHeight();\nconst x = 0;\nconst y = this.mainAreaBottom() - this.profileHeight() - height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Status to obtain its StatusParams window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-StatusMenu.StatusEquipBgType:num",
@@ -8667,7 +8746,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the StatusEquip window of Scene_Status after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-StatusMenu.StatusEquipRect:func",
@@ -8683,7 +8763,8 @@ const catalog = {
                                 "receiver": "Scene_Status",
                                 "arguments": []
                             },
-                            "default": "const width = Graphics.boxWidth - this.statusParamsWidth();\nconst height = this.statusParamsHeight();\nconst x = this.statusParamsWidth();\nconst y = this.mainAreaBottom() - this.profileHeight() - height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = Graphics.boxWidth - this.statusParamsWidth();\nconst height = this.statusParamsHeight();\nconst x = this.statusParamsWidth();\nconst y = this.mainAreaBottom() - this.profileHeight() - height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Status to obtain its StatusEquip window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8695,7 +8776,8 @@ const catalog = {
                         "StatusParamsRect": "const width = this.statusParamsWidth();\nconst height = this.statusParamsHeight();\nconst x = 0;\nconst y = this.mainAreaBottom() - this.profileHeight() - height;\nreturn new Rectangle(x, y, width, height);",
                         "StatusEquipBgType": 0,
                         "StatusEquipRect": "const width = Graphics.boxWidth - this.statusParamsWidth();\nconst height = this.statusParamsHeight();\nconst x = this.statusParamsWidth();\nconst y = this.mainAreaBottom() - this.profileHeight() - height;\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Status. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.OptionsMenu:struct",
@@ -8721,7 +8803,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Options window of Scene_Options after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-OptionsMenu.OptionsRect:func",
@@ -8737,13 +8820,15 @@ const catalog = {
                                 "receiver": "Scene_Options",
                                 "arguments": []
                             },
-                            "default": "const n = Math.min(this.maxCommands(), this.maxVisibleCommands());\nconst width = 400;\nconst height = this.calcWindowHeight(n, true);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (Graphics.boxHeight - height) / 2;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const n = Math.min(this.maxCommands(), this.maxVisibleCommands());\nconst width = 400;\nconst height = this.calcWindowHeight(n, true);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (Graphics.boxHeight - height) / 2;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Options to obtain its Options window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
                         "OptionsBgType": 0,
                         "OptionsRect": "const n = Math.min(this.maxCommands(), this.maxVisibleCommands());\nconst width = 400;\nconst height = this.calcWindowHeight(n, true);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (Graphics.boxHeight - height) / 2;\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Options. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.SaveMenu:struct",
@@ -8769,7 +8854,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Help window of Scene_Save after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SaveMenu.HelpRect:func",
@@ -8785,7 +8871,8 @@ const catalog = {
                                 "receiver": "Scene_Save",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, false);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, false);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Save to obtain its Help window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-SaveMenu.ListBgType:num",
@@ -8801,7 +8888,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the List window of Scene_Save after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-SaveMenu.ListRect:func",
@@ -8817,7 +8905,8 @@ const catalog = {
                                 "receiver": "Scene_Save",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop() + this._helpWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._helpWindow.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop() + this._helpWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._helpWindow.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Save to obtain its List window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8825,7 +8914,8 @@ const catalog = {
                         "HelpRect": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, false);\nreturn new Rectangle(x, y, width, height);",
                         "ListBgType": 0,
                         "ListRect": "const x = 0;\nconst y = this.mainAreaTop() + this._helpWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._helpWindow.height;\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Save. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.LoadMenu:struct",
@@ -8851,7 +8941,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Help window of Scene_Load after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-LoadMenu.HelpRect:func",
@@ -8867,7 +8958,8 @@ const catalog = {
                                 "receiver": "Scene_Load",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, false);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, false);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Load to obtain its Help window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-LoadMenu.ListBgType:num",
@@ -8883,7 +8975,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the List window of Scene_Load after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-LoadMenu.ListRect:func",
@@ -8899,7 +8992,8 @@ const catalog = {
                                 "receiver": "Scene_Load",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop() + this._helpWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._helpWindow.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop() + this._helpWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._helpWindow.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Load to obtain its List window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -8907,7 +9001,8 @@ const catalog = {
                         "HelpRect": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, false);\nreturn new Rectangle(x, y, width, height);",
                         "ListBgType": 0,
                         "ListRect": "const x = 0;\nconst y = this.mainAreaTop() + this._helpWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._helpWindow.height;\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Load. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.GameEnd:struct",
@@ -9092,7 +9187,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Command window of Scene_GameEnd after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-GameEnd.CommandRect:func",
@@ -9108,7 +9204,8 @@ const catalog = {
                                 "receiver": "Scene_GameEnd",
                                 "arguments": []
                             },
-                            "default": "const rows = 2;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (Graphics.boxHeight - height) / 2;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const rows = 2;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (Graphics.boxHeight - height) / 2;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_GameEnd to obtain its Command window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -9134,7 +9231,8 @@ const catalog = {
                         ],
                         "CommandBgType": 0,
                         "CommandRect": "const rows = 2;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (Graphics.boxHeight - height) / 2;\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_GameEnd. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.ShopMenu:struct",
@@ -9160,7 +9258,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Help window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.HelpRect:func",
@@ -9176,7 +9275,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const wx = 0;\nconst wy = this.helpAreaTop();\nconst ww = Graphics.boxWidth;\nconst wh = this.helpAreaHeight();\nreturn new Rectangle(wx, wy, ww, wh);"
+                            "default": "const wx = 0;\nconst wy = this.helpAreaTop();\nconst ww = Graphics.boxWidth;\nconst wh = this.helpAreaHeight();\nreturn new Rectangle(wx, wy, ww, wh);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Help window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.GoldBgType:num",
@@ -9192,7 +9292,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Gold window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.GoldRect:func",
@@ -9208,7 +9309,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const rows = 1;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const rows = 1;\nconst width = this.mainCommandWidth();\nconst height = this.calcWindowHeight(rows, true);\nconst x = Graphics.boxWidth - width;\nconst y = this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Gold window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.CommandBgType:num",
@@ -9224,7 +9326,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Command window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.CommandRect:func",
@@ -9240,7 +9343,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = this._goldWindow.x;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this.mainAreaTop();\nconst rows = 1;\nconst width = this._goldWindow.x;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Command window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.DummyBgType:num",
@@ -9257,7 +9361,7 @@ const catalog = {
                             ],
                             "editorType": "select",
                             "default": 0,
-                            "context": "The shop dummy window fills the initial area below the shop command window before the player enters buy/sell selection. DummyRect returns its rectangle in UI pixels with this=Scene_Shop; DummyBgType chooses 0=frame, 1=dim, 2=transparent. The default buy/number/status rectangles use the dummy window Y/height as their reference."
+                            "context": "The shop dummy window fills the initial area below the shop command window before the player enters buy/sell selection. DummyRect returns its rectangle in UI pixels with this=Scene_Shop; DummyBgType chooses 0=frame, 1=dim, 2=transparent. The default buy/number/status rectangles use the dummy window Y/height as their reference. Applied to the Dummy window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.DummyRect:func",
@@ -9274,7 +9378,7 @@ const catalog = {
                                 "arguments": []
                             },
                             "default": "const x = 0;\nconst y = this._commandWindow.y + this._commandWindow.height;\nconst width = Graphics.boxWidth;\nconst height = this.mainAreaHeight() - this._commandWindow.height;\nreturn new Rectangle(x, y, width, height);",
-                            "context": "The shop dummy window fills the initial area below the shop command window before the player enters buy/sell selection. DummyRect returns its rectangle in UI pixels with this=Scene_Shop; DummyBgType chooses 0=frame, 1=dim, 2=transparent. The default buy/number/status rectangles use the dummy window Y/height as their reference."
+                            "context": "The shop dummy window fills the initial area below the shop command window before the player enters buy/sell selection. DummyRect returns its rectangle in UI pixels with this=Scene_Shop; DummyBgType chooses 0=frame, 1=dim, 2=transparent. The default buy/number/status rectangles use the dummy window Y/height as their reference. JavaScript function body used by Scene_Shop to obtain its Dummy window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.NumberBgType:num",
@@ -9290,7 +9394,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Number window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.NumberRect:func",
@@ -9306,7 +9411,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this._dummyWindow.y;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this._dummyWindow.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this._dummyWindow.y;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this._dummyWindow.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Number window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.StatusBgType:num",
@@ -9322,7 +9428,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Status window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.StatusRect:func",
@@ -9338,7 +9445,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const width = this.statusWidth();\nconst height = this._dummyWindow.height;\nconst x = Graphics.boxWidth - width;\nconst y = this._dummyWindow.y;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const width = this.statusWidth();\nconst height = this._dummyWindow.height;\nconst x = Graphics.boxWidth - width;\nconst y = this._dummyWindow.y;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Status window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.BuyBgType:num",
@@ -9354,7 +9462,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Buy window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.BuyRect:func",
@@ -9370,7 +9479,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this._dummyWindow.y;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this._dummyWindow.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this._dummyWindow.y;\nconst width = Graphics.boxWidth - this.statusWidth();\nconst height = this._dummyWindow.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Buy window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.CategoryBgType:num",
@@ -9386,7 +9496,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Category window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.CategoryRect:func",
@@ -9402,7 +9513,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this._dummyWindow.y;\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this._dummyWindow.y;\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Category window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-ShopMenu.SellBgType:num",
@@ -9418,7 +9530,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Sell window of Scene_Shop after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-ShopMenu.SellRect:func",
@@ -9434,7 +9547,8 @@ const catalog = {
                                 "receiver": "Scene_Shop",
                                 "arguments": []
                             },
-                            "default": "const x = 0;\nconst y = this._categoryWindow.y + this._categoryWindow.height;\nconst width = Graphics.boxWidth;\nconst height =\n    this.mainAreaHeight() -\n    this._commandWindow.height -\n    this._categoryWindow.height;\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = 0;\nconst y = this._categoryWindow.y + this._categoryWindow.height;\nconst width = Graphics.boxWidth;\nconst height =\n    this.mainAreaHeight() -\n    this._commandWindow.height -\n    this._categoryWindow.height;\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Shop to obtain its Sell window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -9456,7 +9570,8 @@ const catalog = {
                         "CategoryRect": "const x = 0;\nconst y = this._dummyWindow.y;\nconst rows = 1;\nconst width = Graphics.boxWidth;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);",
                         "SellBgType": 0,
                         "SellRect": "const x = 0;\nconst y = this._categoryWindow.y + this._categoryWindow.height;\nconst width = Graphics.boxWidth;\nconst height =\n    this.mainAreaHeight() -\n    this._commandWindow.height -\n    this._categoryWindow.height;\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Shop. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 },
                 {
                     "id": "CE-P-MenuLayout.NameMenu:struct",
@@ -9482,7 +9597,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Edit window of Scene_Name after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-NameMenu.EditRect:func",
@@ -9498,7 +9614,8 @@ const catalog = {
                                 "receiver": "Scene_Name",
                                 "arguments": []
                             },
-                            "default": "const rows = 9;\nconst inputWindowHeight = this.calcWindowHeight(rows, true);\nconst padding = $gameSystem.windowPadding();\nconst width = 600;\nconst height = Math.min(ImageManager.faceHeight + padding * 2, this.mainAreaHeight() - inputWindowHeight);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (this.mainAreaHeight() - (height + inputWindowHeight)) / 2 + this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const rows = 9;\nconst inputWindowHeight = this.calcWindowHeight(rows, true);\nconst padding = $gameSystem.windowPadding();\nconst width = 600;\nconst height = Math.min(ImageManager.faceHeight + padding * 2, this.mainAreaHeight() - inputWindowHeight);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (this.mainAreaHeight() - (height + inputWindowHeight)) / 2 + this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Name to obtain its Edit window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         },
                         {
                             "id": "CE-P-NameMenu.InputBgType:num",
@@ -9514,7 +9631,8 @@ const catalog = {
                                 2
                             ],
                             "editorType": "select",
-                            "default": 0
+                            "default": 0,
+                            "context": "Applied to the Input window of Scene_Name after window creation: 0 draws the normal windowskin/frame, 1 uses the dim background, and 2 hides its background while keeping contents visible. It does not set the scene background in /MenuBg."
                         },
                         {
                             "id": "CE-P-NameMenu.InputRect:func",
@@ -9530,7 +9648,8 @@ const catalog = {
                                 "receiver": "Scene_Name",
                                 "arguments": []
                             },
-                            "default": "const x = this._editWindow.x;\nconst y = this._editWindow.y + this._editWindow.height;\nconst rows = 9;\nconst width = this._editWindow.width;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
+                            "default": "const x = this._editWindow.x;\nconst y = this._editWindow.y + this._editWindow.height;\nconst rows = 9;\nconst width = this._editWindow.width;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);",
+                            "context": "JavaScript function body used by Scene_Name to obtain its Input window rectangle during layout/creation. this is that scene; normal native calls pass no arguments. Return new Rectangle(x,y,width,height), with x/y measured in pixels from the UI area upper-left (positive right/down), and positive pixel dimensions. Graphics.boxWidth/boxHeight describe that area. The published default is a complete working body with its native creation-order dependencies. This computes geometry; it does not move an existing window by itself. The CLI does not execute it."
                         }
                     ],
                     "default": {
@@ -9538,7 +9657,8 @@ const catalog = {
                         "EditRect": "const rows = 9;\nconst inputWindowHeight = this.calcWindowHeight(rows, true);\nconst padding = $gameSystem.windowPadding();\nconst width = 600;\nconst height = Math.min(ImageManager.faceHeight + padding * 2, this.mainAreaHeight() - inputWindowHeight);\nconst x = (Graphics.boxWidth - width) / 2;\nconst y = (this.mainAreaHeight() - (height + inputWindowHeight)) / 2 + this.mainAreaTop();\nreturn new Rectangle(x, y, width, height);",
                         "InputBgType": 0,
                         "InputRect": "const x = this._editWindow.x;\nconst y = this._editWindow.y + this._editWindow.height;\nconst rows = 9;\nconst width = this._editWindow.width;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
-                    }
+                    },
+                    "context": "Window layout for Scene_Name. Rect function bodies define window positions and dimensions in UI pixels; BgType controls only the named window background. The scene applies these settings when creating its windows."
                 }
             ],
             "default": {
@@ -9671,7 +9791,7 @@ const catalog = {
                     "InputRect": "const x = this._editWindow.x;\nconst y = this._editWindow.y + this._editWindow.height;\nconst rows = 9;\nconst width = this._editWindow.width;\nconst height = this.calcWindowHeight(rows, true);\nreturn new Rectangle(x, y, width, height);"
                 }
             },
-            "context": "Window layouts are grouped by scene. Fields ending Rect are JavaScript function bodies called on that scene and must return new Rectangle(x,y,width,height), in pixels within the UI area. BgType fields choose 0=normal frame, 1=dim, 2=transparent for the corresponding window after scene creation. GameEnd.CommandList configures its choices; Title configures title drawing, document title and picture-button fade."
+            "context": "Window layouts are grouped by scene. Fields ending Rect are JavaScript function bodies called on that scene and must return new Rectangle(x,y,width,height), in pixels within the UI area. BgType fields choose 0=normal frame, 1=dim, 2=transparent for the corresponding window after scene creation. GameEnd.CommandList configures its choices; Title configures title drawing, document title and picture-button fade. Configures the title and named menu scenes. Each Rect callback returns a window Rectangle; each BgType is applied after that scene creates its windows. These startup settings affect subsequent scene creation, not an already-open window."
         },
         {
             "id": "CE-P-plugin.CustomParam:arraystruct",
@@ -9705,7 +9825,7 @@ const catalog = {
                         "availability": "supported",
                         "type": "string",
                         "default": "unt",
-                        "context": "Unique battler property name, for example \"energy\". Read it as actor.energy; parameter lists and paramValueByName use the abbreviation case-insensitively. Avoid built-in battler properties and duplicate abbreviations, including case-only variants: the runtime defines a non-configurable getter and duplicate property definitions fail at boot. Use a valid JavaScript identifier without spaces."
+                        "context": "Unique battler property name, for example \"energy\". Read it as actor.energy; parameter lists and paramValueByName use the abbreviation case-insensitively. Avoid built-in battler properties and duplicate abbreviations. Repeating the same property name fails at boot because the getter is non-configurable; case-only variants create distinct properties but overwrite the shared case-insensitive lookup, so avoid them too. Use a valid JavaScript identifier without spaces."
                     },
                     {
                         "id": "CE-P-CustomParam.Icon:num",
@@ -10347,7 +10467,8 @@ const catalog = {
                     "description": "Configure WASD for KeyboardInput.",
                     "availability": "supported",
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "context": "True maps A=left, D=right, W=up, S=down and E=pagedown in Input.keyMapper at boot, replacing any previous mappings for those key codes. False leaves those mappings unchanged. Arrow keys and existing Q/pageup remain available."
                 },
                 {
                     "id": "CE-P-KeyboardInput.DashToggleR:eval",
@@ -10357,7 +10478,8 @@ const catalog = {
                     "description": "Configure DashToggleR for KeyboardInput.",
                     "availability": "supported",
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "context": "True maps R to dashToggle at boot. Pressing it on Scene_Map toggles ConfigManager.alwaysDash and saves that preference; it is available outside playtest too. False leaves the R mapping unchanged. This does not bypass map restrictions on dashing."
                 },
                 {
                     "id": "CE-P-KeyboardInput.EnableNameInput:eval",
@@ -10406,7 +10528,8 @@ const catalog = {
                     "availability": "supported",
                     "type": "string",
                     "encoding": "json",
-                    "default": "Type in this character's name.\nPress \\c[5]ENTER\\c[0] when you're done.\n\n-or-\n\nPress \\c[5]arrow keys\\c[0]/\\c[5]TAB\\c[0] to switch\nto manual character entry.\n\nPress \\c[5]ESC\\c[0]/\\c[5]TAB\\c[0] to use to keyboard."
+                    "default": "Type in this character's name.\nPress \\c[5]ENTER\\c[0] when you're done.\n\n-or-\n\nPress \\c[5]arrow keys\\c[0]/\\c[5]TAB\\c[0] to switch\nto manual character entry.\n\nPress \\c[5]ESC\\c[0]/\\c[5]TAB\\c[0] to use to keyboard.",
+                    "context": "Multiline instructional text drawn in the name-entry keyboard mode when EnableNameInput=true. Lines are centered with drawTextEx and support native escapes such as \\C[5]; use newline characters to separate lines. It changes the instructions only, not the actual mode-switch keys."
                 },
                 {
                     "id": "CE-P-KeyboardInput.BannedWords:arraystr",
@@ -10441,7 +10564,8 @@ const catalog = {
                     "description": "Configure Finish for KeyboardInput.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Finish"
+                    "default": "Finish",
+                    "context": "ButtonAssist action label for confirmation while keyboard name input is enabled. Requires the assist window to be enabled and created; an empty string falls back to \"Finish\". Rendered through ButtonAssist.TextFmt/drawTextEx, with supported native text escapes. This label does not change the input action."
                 },
                 {
                     "id": "CE-P-KeyboardInput.PageChange:str",
@@ -10451,7 +10575,8 @@ const catalog = {
                     "description": "Configure PageChange for KeyboardInput.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Page"
+                    "default": "Page",
+                    "context": "ButtonAssist action label for page switching while the name-input grid is active. Requires the assist window to be enabled and created; an empty string falls back to \"Page\". Rendered through ButtonAssist.TextFmt/drawTextEx, with supported native text escapes. This label does not change the input action."
                 },
                 {
                     "id": "CE-P-KeyboardInput.Keyboard:str",
@@ -10461,7 +10586,8 @@ const catalog = {
                     "description": "Configure Keyboard for KeyboardInput.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Keyboard"
+                    "default": "Keyboard",
+                    "context": "ButtonAssist action label for slot 3 while typed keyboard name input is active. Requires the assist window to be enabled and created; an empty string falls back to \"Keyboard\". Rendered through ButtonAssist.TextFmt/drawTextEx, with supported native text escapes. This label does not change the input action."
                 },
                 {
                     "id": "CE-P-KeyboardInput.Manual:str",
@@ -10471,7 +10597,8 @@ const catalog = {
                     "description": "Configure Manual for KeyboardInput.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Manual"
+                    "default": "Manual",
+                    "context": "ButtonAssist action label for slot 3 while the manual name grid is active. Requires the assist window to be enabled and created; an empty string falls back to \"Manual\". Rendered through ButtonAssist.TextFmt/drawTextEx, with supported native text escapes. This label does not change the input action."
                 }
             ],
             "default": {
@@ -10585,7 +10712,8 @@ const catalog = {
                     "description": "Configure OkText for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Select"
+                    "default": "Select",
+                    "context": "Action label for confirmation in slot 4 in the default menu ButtonAssist. Empty text omits the slot. TextFmt combines it with the resolved key label and drawTextEx expands supported text escapes. Scene-specific assist methods may replace this label."
                 },
                 {
                     "id": "CE-P-ButtonAssist.CancelText:str",
@@ -10595,7 +10723,8 @@ const catalog = {
                     "description": "Configure CancelText for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Back"
+                    "default": "Back",
+                    "context": "Action label for cancel/back in slot 5 in the default menu ButtonAssist. Empty text omits the slot. TextFmt combines it with the resolved key label and drawTextEx expands supported text escapes. Scene-specific assist methods may replace this label."
                 },
                 {
                     "id": "CE-P-ButtonAssist.SwitchActorText:str",
@@ -10605,7 +10734,8 @@ const catalog = {
                     "description": "Configure SwitchActorText for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Switch Ally"
+                    "default": "Switch Ally",
+                    "context": "Action label for actor switching in slot 1 when the pageup button is visible in the default menu ButtonAssist. Empty text omits the slot. TextFmt combines it with the resolved key label and drawTextEx expands supported text escapes. Scene-specific assist methods may replace this label."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyUnlisted:str",
@@ -10626,7 +10756,8 @@ const catalog = {
                     "description": "Configure KeyUP for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "^"
+                    "default": "^",
+                    "context": "Display label for the UP keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyDOWN:str",
@@ -10636,7 +10767,8 @@ const catalog = {
                     "description": "Configure KeyDOWN for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "v"
+                    "default": "v",
+                    "context": "Display label for the DOWN keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyLEFT:str",
@@ -10646,7 +10778,8 @@ const catalog = {
                     "description": "Configure KeyLEFT for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "<<"
+                    "default": "<<",
+                    "context": "Display label for the LEFT keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyRIGHT:str",
@@ -10656,7 +10789,8 @@ const catalog = {
                     "description": "Configure KeyRIGHT for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": ">>"
+                    "default": ">>",
+                    "context": "Display label for the RIGHT keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeySHIFT:str",
@@ -10688,7 +10822,8 @@ const catalog = {
                     "description": "Configure KeyA for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "A"
+                    "default": "A",
+                    "context": "Display label for the A keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyB:str",
@@ -10698,7 +10833,8 @@ const catalog = {
                     "description": "Configure KeyB for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "B"
+                    "default": "B",
+                    "context": "Display label for the B keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyC:str",
@@ -10708,7 +10844,8 @@ const catalog = {
                     "description": "Configure KeyC for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "C"
+                    "default": "C",
+                    "context": "Display label for the C keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyD:str",
@@ -10718,7 +10855,8 @@ const catalog = {
                     "description": "Configure KeyD for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "D"
+                    "default": "D",
+                    "context": "Display label for the D keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyE:str",
@@ -10728,7 +10866,8 @@ const catalog = {
                     "description": "Configure KeyE for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "E"
+                    "default": "E",
+                    "context": "Display label for the E keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyF:str",
@@ -10738,7 +10877,8 @@ const catalog = {
                     "description": "Configure KeyF for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "F"
+                    "default": "F",
+                    "context": "Display label for the F keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyG:str",
@@ -10748,7 +10888,8 @@ const catalog = {
                     "description": "Configure KeyG for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "G"
+                    "default": "G",
+                    "context": "Display label for the G keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyH:str",
@@ -10758,7 +10899,8 @@ const catalog = {
                     "description": "Configure KeyH for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "H"
+                    "default": "H",
+                    "context": "Display label for the H keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyI:str",
@@ -10768,7 +10910,8 @@ const catalog = {
                     "description": "Configure KeyI for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "I"
+                    "default": "I",
+                    "context": "Display label for the I keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyJ:str",
@@ -10778,7 +10921,8 @@ const catalog = {
                     "description": "Configure KeyJ for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "J"
+                    "default": "J",
+                    "context": "Display label for the J keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyK:str",
@@ -10788,7 +10932,8 @@ const catalog = {
                     "description": "Configure KeyK for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "K"
+                    "default": "K",
+                    "context": "Display label for the K keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyL:str",
@@ -10798,7 +10943,8 @@ const catalog = {
                     "description": "Configure KeyL for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "L"
+                    "default": "L",
+                    "context": "Display label for the L keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyM:str",
@@ -10808,7 +10954,8 @@ const catalog = {
                     "description": "Configure KeyM for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "M"
+                    "default": "M",
+                    "context": "Display label for the M keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyN:str",
@@ -10818,7 +10965,8 @@ const catalog = {
                     "description": "Configure KeyN for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "N"
+                    "default": "N",
+                    "context": "Display label for the N keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyO:str",
@@ -10828,7 +10976,8 @@ const catalog = {
                     "description": "Configure KeyO for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "O"
+                    "default": "O",
+                    "context": "Display label for the O keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyP:str",
@@ -10838,7 +10987,8 @@ const catalog = {
                     "description": "Configure KeyP for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "P"
+                    "default": "P",
+                    "context": "Display label for the P keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyQ:str",
@@ -10848,7 +10998,8 @@ const catalog = {
                     "description": "Configure KeyQ for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Q"
+                    "default": "Q",
+                    "context": "Display label for the Q keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyR:str",
@@ -10858,7 +11009,8 @@ const catalog = {
                     "description": "Configure KeyR for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "R"
+                    "default": "R",
+                    "context": "Display label for the R keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyS:str",
@@ -10868,7 +11020,8 @@ const catalog = {
                     "description": "Configure KeyS for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "S"
+                    "default": "S",
+                    "context": "Display label for the S keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyT:str",
@@ -10878,7 +11031,8 @@ const catalog = {
                     "description": "Configure KeyT for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "T"
+                    "default": "T",
+                    "context": "Display label for the T keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyU:str",
@@ -10888,7 +11042,8 @@ const catalog = {
                     "description": "Configure KeyU for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "U"
+                    "default": "U",
+                    "context": "Display label for the U keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyV:str",
@@ -10898,7 +11053,8 @@ const catalog = {
                     "description": "Configure KeyV for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "V"
+                    "default": "V",
+                    "context": "Display label for the V keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyW:str",
@@ -10908,7 +11064,8 @@ const catalog = {
                     "description": "Configure KeyW for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "W"
+                    "default": "W",
+                    "context": "Display label for the W keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyX:str",
@@ -10918,7 +11075,8 @@ const catalog = {
                     "description": "Configure KeyX for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "X"
+                    "default": "X",
+                    "context": "Display label for the X keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyY:str",
@@ -10928,7 +11086,8 @@ const catalog = {
                     "description": "Configure KeyY for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Y"
+                    "default": "Y",
+                    "context": "Display label for the Y keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 },
                 {
                     "id": "CE-P-ButtonAssist.KeyZ:str",
@@ -10938,7 +11097,8 @@ const catalog = {
                     "description": "Configure KeyZ for ButtonAssist.",
                     "availability": "supported",
                     "type": "string",
-                    "default": "Z"
+                    "default": "Z",
+                    "context": "Display label for the Z keyboard key when the input-label resolver selects it for an action. Empty text uses /ButtonAssist/KeyUnlisted instead. Labels are rendered through drawTextEx in ButtonAssist and may contain supported native escapes; this does not map the key or enable its action."
                 }
             ],
             "default": {
@@ -11240,7 +11400,8 @@ const catalog = {
                     "min": 1,
                     "editorType": "common_event",
                     "id": "CE-A-plugin.MapOnceParallel.CommonEventID:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Existing Database Common Events record ID, not a map event ID. Runs once on Scene_Map in a new parallel interpreter; missing records or other scenes do nothing. Multiple invocations create independent runs; caller continues. Map change/scene termination ends pending parallel runs."
                 }
             ],
             "examples": [
@@ -11283,7 +11444,8 @@ const catalog = {
                     },
                     "editorType": "switch[]",
                     "id": "CE-A-plugin.SwitchRandomizeOne.IDs:arraynum",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing game switch IDs in execution order, for example [1,2]. An empty array changes nothing; duplicates are not deduplicated. No effect during battle."
                 },
                 {
                     "key": "Chance",
@@ -11297,9 +11459,11 @@ const catalog = {
                     "max": 100,
                     "editorMin": 1,
                     "id": "CE-A-plugin.SwitchRandomizeOne.Chance:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Probability percentage for ON; 100 makes ON certain, otherwise the switch becomes OFF when its independent draw is above Chance/100. The authored schema permits 1..100; the zero behavior in the description refers only to raw runtime data. No effect during battle."
                 }
-            ]
+            ],
+            "context": "Targets Database System switch IDs; values persist with game switches in saves. Battle execution returns before converting arguments. Repeated IDs in a list are processed repeatedly; ranges normalize endpoints and include both ends."
         },
         {
             "id": "CE-C-SwitchRandomizeRange",
@@ -11324,7 +11488,8 @@ const catalog = {
                     "min": 1,
                     "editorType": "switch",
                     "id": "CE-A-plugin.SwitchRandomizeRange.StartID:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "First endpoint of the inclusive game-switch ID range; endpoints are normalized with min/max. No effect during battle."
                 },
                 {
                     "key": "EndingID",
@@ -11337,7 +11502,8 @@ const catalog = {
                     "min": 1,
                     "editorType": "switch",
                     "id": "CE-A-plugin.SwitchRandomizeRange.EndingID:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Second endpoint of the inclusive game-switch ID range; endpoints are normalized with min/max. No effect during battle."
                 },
                 {
                     "key": "Chance",
@@ -11351,9 +11517,11 @@ const catalog = {
                     "max": 100,
                     "editorMin": 1,
                     "id": "CE-A-plugin.SwitchRandomizeRange.Chance:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Probability percentage for ON; 100 makes ON certain, otherwise the switch becomes OFF when its independent draw is above Chance/100. The authored schema permits 1..100; the zero behavior in the description refers only to raw runtime data. No effect during battle."
                 }
-            ]
+            ],
+            "context": "Targets Database System switch IDs; values persist with game switches in saves. Battle execution returns before converting arguments. Repeated IDs in a list are processed repeatedly; ranges normalize endpoints and include both ends."
         },
         {
             "id": "CE-C-SwitchToggleOne",
@@ -11389,9 +11557,11 @@ const catalog = {
                     },
                     "editorType": "switch[]",
                     "id": "CE-A-plugin.SwitchToggleOne.IDs:arraynum",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing game switch IDs in execution order, for example [1,2]. An empty array changes nothing; duplicates are not deduplicated. No effect during battle."
                 }
-            ]
+            ],
+            "context": "Targets Database System switch IDs; values persist with game switches in saves. Battle execution returns before converting arguments. Repeated IDs in a list are processed repeatedly; ranges normalize endpoints and include both ends."
         },
         {
             "id": "CE-C-SwitchToggleRange",
@@ -11416,7 +11586,8 @@ const catalog = {
                     "min": 1,
                     "editorType": "switch",
                     "id": "CE-A-plugin.SwitchToggleRange.StartID:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "First endpoint of the inclusive game-switch ID range; endpoints are normalized with min/max. No effect during battle."
                 },
                 {
                     "key": "EndingID",
@@ -11429,9 +11600,11 @@ const catalog = {
                     "min": 1,
                     "editorType": "switch",
                     "id": "CE-A-plugin.SwitchToggleRange.EndingID:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Second endpoint of the inclusive game-switch ID range; endpoints are normalized with min/max. No effect during battle."
                 }
-            ]
+            ],
+            "context": "Targets Database System switch IDs; values persist with game switches in saves. Battle execution returns before converting arguments. Repeated IDs in a list are processed repeatedly; ranges normalize endpoints and include both ends."
         },
         {
             "id": "CE-C-VariableEvalReference",
@@ -11463,7 +11636,8 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.VariableEvalReference.id:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. Return the target game-variable ID; a falsy result uses 1."
                 },
                 {
                     "key": "operation",
@@ -11482,7 +11656,8 @@ const catalog = {
                     ],
                     "editorType": "select",
                     "id": "CE-A-plugin.VariableEvalReference.operation:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "= replaces the previous value; + adds; - subtracts; * multiplies; / divides; % uses JavaScript remainder. Operands are not coerced to numbers before the operation, so + can concatenate strings. The final falsy result becomes 0; native numeric variable writes are floored."
                 },
                 {
                     "key": "operand",
@@ -11501,9 +11676,11 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.VariableEvalReference.operand:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. Return the value used by operation against the current game-variable value; a falsy result uses 0."
                 }
-            ]
+            ],
+            "context": "Updates a game variable by its numeric ID; saved variables preserve the result. = replaces, + adds (or concatenates under JavaScript coercion), - subtracts, * multiplies, / divides, and % takes the remainder. A falsy ID result selects variable 1; falsy operand/current/result values become 0. Native setValue floors numeric results. Use numeric results for arithmetic; division by zero is not specially prevented."
         },
         {
             "id": "CE-C-VariableJsBlock",
@@ -11536,7 +11713,8 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.VariableJsBlock.id:func",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Return the target game-variable ID; a falsy result uses 1. Function body called by this command with this=the converted argument object and no positional arguments. Return the value explicitly. The id body is called before operand; the CLI stores the body without running it."
                 },
                 {
                     "key": "operation",
@@ -11555,7 +11733,8 @@ const catalog = {
                     ],
                     "editorType": "select",
                     "id": "CE-A-plugin.VariableJsBlock.operation:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "= replaces the previous value; + adds; - subtracts; * multiplies; / divides; % uses JavaScript remainder. Operands are not coerced to numbers before the operation, so + can concatenate strings. The final falsy result becomes 0; native numeric variable writes are floored."
                 },
                 {
                     "key": "operand",
@@ -11575,9 +11754,11 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.VariableJsBlock.operand:func",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Return the value used by operation against the current game-variable value; a falsy result uses 0. Function body called by this command with this=the converted argument object and no positional arguments. Return the value explicitly. The id body is called before operand; the CLI stores the body without running it."
                 }
-            ]
+            ],
+            "context": "Updates a game variable by its numeric ID; saved variables preserve the result. = replaces, + adds (or concatenates under JavaScript coercion), - subtracts, * multiplies, / divides, and % takes the remainder. A falsy ID result selects variable 1; falsy operand/current/result values become 0. Native setValue floors numeric results. Use numeric results for arithmetic; division by zero is not specially prevented."
         },
         {
             "id": "CE-C-GoldChange",
@@ -11609,7 +11790,8 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.GoldChange.value:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 }
             ]
         },
@@ -11635,7 +11817,8 @@ const catalog = {
                     ],
                     "editorType": "select",
                     "id": "CE-A-plugin.ScreenShake.Type:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "original uses the native horizontal shake; random displaces both axes; horizontal displaces X only; vertical displaces Y only, using the corresponding editable /ScreenShake/*JS body."
                 },
                 {
                     "key": "Power",
@@ -11681,7 +11864,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.ScreenShake.Duration:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "Wait",
@@ -11691,7 +11875,8 @@ const catalog = {
                     "label": "Wait",
                     "description": "Wait on the calling interpreter.",
                     "id": "CE-A-plugin.ScreenShake.Wait:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "True pauses this interpreter for the chosen duration; false starts the shake and continues. The screen still updates while waiting."
                 }
             ],
             "example": {
@@ -11706,7 +11891,8 @@ const catalog = {
                 "common-event",
                 "troop"
             ],
-            "receiver": "Game_Interpreter"
+            "receiver": "Game_Interpreter",
+            "context": "original uses the native horizontal shake; random displaces both axes; horizontal displaces X only; vertical displaces Y only, using the corresponding editable /ScreenShake/*JS body. Type becomes Game_Screen state for later native shakes and survives save/load; new game uses /ScreenShake/DefaultStyle. Duration is update frames. Wait=true pauses this interpreter for that duration; false continues immediately."
         },
         {
             "id": "CE-C-PictureEasingType",
@@ -11776,9 +11962,11 @@ const catalog = {
                     ],
                     "default": "Linear",
                     "id": "CE-A-plugin.PictureEasingType.easingType:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "See core api describe applyEasing for the curve families and overshoot behavior. Linear has constant progress; named easing changes interpolation timing without changing the target."
                 }
-            ]
+            ],
+            "context": "Requires an existing picture in the current map/battle collection. Run immediately after a native Move Picture with Wait=false, while movement is still active; a later Move Picture may replace easing. No picture means no effect. Inspect Core method applyEasing for the named curves."
         },
         {
             "id": "CE-C-PictureEraseAll",
@@ -11864,7 +12052,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.PictureRotateBy.PictureID:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. Numeric completion value selecting a slot in the current map/battle picture collection; runtime rounds and clamps to 1..100. Use a shown picture for rotation; PictureShowIcon creates/replaces the slot."
                 },
                 {
                     "key": "AdjustAngle",
@@ -11883,7 +12072,7 @@ const catalog = {
                     },
                     "id": "CE-A-plugin.PictureRotateBy.AdjustAngle:eval",
                     "availability": "supported",
-                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait."
+                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait. Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "easingType",
@@ -11927,7 +12116,8 @@ const catalog = {
                     ],
                     "default": "Linear",
                     "id": "CE-A-plugin.PictureRotateBy.easingType:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "See core api describe applyEasing for the curve families and overshoot behavior. Linear has constant progress; named easing changes interpolation timing without changing the target."
                 },
                 {
                     "key": "Duration",
@@ -11946,7 +12136,7 @@ const catalog = {
                     },
                     "id": "CE-A-plugin.PictureRotateBy.Duration:eval",
                     "availability": "supported",
-                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait."
+                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait. Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "Wait",
@@ -11990,7 +12180,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.PictureRotate.PictureID:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. Numeric completion value selecting a slot in the current map/battle picture collection; runtime rounds and clamps to 1..100. Use a shown picture for rotation; PictureShowIcon creates/replaces the slot."
                 },
                 {
                     "key": "TargetAngle",
@@ -12009,7 +12200,7 @@ const catalog = {
                     },
                     "id": "CE-A-plugin.PictureRotate.TargetAngle:eval",
                     "availability": "supported",
-                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait."
+                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait. Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "easingType",
@@ -12053,7 +12244,8 @@ const catalog = {
                     ],
                     "default": "Linear",
                     "id": "CE-A-plugin.PictureRotate.easingType:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "See core api describe applyEasing for the curve families and overshoot behavior. Linear has constant progress; named easing changes interpolation timing without changing the target."
                 },
                 {
                     "key": "Duration",
@@ -12072,7 +12264,7 @@ const catalog = {
                     },
                     "id": "CE-A-plugin.PictureRotate.Duration:eval",
                     "availability": "supported",
-                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait."
+                    "context": "Rotation angle uses degrees, negated by this command before applying the Core extra-angle component: a positive authored angle rotates counterclockwise on screen. This component is added to native ongoing picture rotation. PictureRotate sets its absolute target; PictureRotateBy adds to its existing target, including unfinished motion. Duration is update frames, normalized to at least 0; 0/negative applies immediately. Use nonnegative integers for predictable frame timing. Wait pauses this interpreter for the normalized duration; a missing picture causes no operation or wait. Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "Wait",
@@ -12111,7 +12303,8 @@ const catalog = {
                     "min": 1,
                     "editorType": "animation",
                     "id": "CE-A-plugin.AnimationPoint.AnimationID:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Existing Database Animations ID; missing records create no animation. Applies to MV and MZ animations on the current scene spriteset."
                 },
                 {
                     "key": "pointX",
@@ -12130,7 +12323,7 @@ const catalog = {
                     },
                     "id": "CE-A-plugin.AnimationPoint.pointX:eval",
                     "availability": "supported",
-                    "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
+                    "context": "Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion. Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "pointY",
@@ -12149,7 +12342,7 @@ const catalog = {
                     },
                     "id": "CE-A-plugin.AnimationPoint.pointY:eval",
                     "availability": "supported",
-                    "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
+                    "context": "Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion. Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it."
                 },
                 {
                     "key": "Mirror",
@@ -12170,10 +12363,11 @@ const catalog = {
                     "type": "boolean",
                     "default": false,
                     "id": "CE-A-plugin.AnimationPoint.Mute:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "True suppresses this animation sound timings; false permits them. Visual effects still run."
                 }
             ],
-            "context": " Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion."
+            "context": "Screen-point animation coordinates are pixels measured from the upper-left corner: X rightward and Y downward. The coordinate expressions are evaluated and rounded when this command runs. Mirror horizontally reflects the animation; Mute suppresses its audio. This command starts the animation without waiting for completion. Requires an existing Database Animation ID and a scene spriteset; missing animation/scene does nothing. Queued point effects are cleared when the scene terminates and created sprites are released with the spriteset."
         },
         {
             "id": "CE-C-PictureShowIcon",
@@ -12204,7 +12398,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.PictureShowIcon.PictureID:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. Numeric completion value selecting a slot in the current map/battle picture collection; runtime rounds and clamps to 1..100. Use a shown picture for rotation; PictureShowIcon creates/replaces the slot."
                 },
                 {
                     "key": "IconIndex",
@@ -12222,7 +12417,8 @@ const catalog = {
                         "onError": "throw localized authored error"
                     },
                     "id": "CE-A-plugin.PictureShowIcon.IconIndex:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. Return a nonnegative integer cell index in img/system/IconSet.png: 16 columns per row, starting at 0. The CLI validates JavaScript syntax, not the result or asset bounds. Example 23 selects row 1, column 7."
                 },
                 {
                     "key": "Smooth",
@@ -12266,7 +12462,8 @@ const catalog = {
                                 1
                             ],
                             "runtimeBounds": "handler",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "0 places the top-left at PositionX/Y; 1 places the center there."
                         },
                         {
                             "key": "PositionX",
@@ -12285,7 +12482,8 @@ const catalog = {
                                 "onError": "throw localized authored error"
                             },
                             "id": "CE-P-ShowPicture.PositionX:eval",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "Script evaluated for its completion value in the game, without top-level return. this=VisuMZ; arguments[0] is the partially converted Settings struct and arguments[1] is its raw input struct. These are not the whole command arguments. Conversion follows stored field order; the CLI never executes the source. X coordinate in screen pixels from the upper-left, positive right; runtime rounds it."
                         },
                         {
                             "key": "PositionY",
@@ -12304,7 +12502,8 @@ const catalog = {
                                 "onError": "throw localized authored error"
                             },
                             "id": "CE-P-ShowPicture.PositionY:eval",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "Script evaluated for its completion value in the game, without top-level return. this=VisuMZ; arguments[0] is the partially converted Settings struct and arguments[1] is its raw input struct. These are not the whole command arguments. Conversion follows stored field order; the CLI never executes the source. Y coordinate in screen pixels from the upper-left, positive down; runtime rounds it."
                         },
                         {
                             "key": "ScaleX",
@@ -12323,7 +12522,8 @@ const catalog = {
                                 "onError": "throw localized authored error"
                             },
                             "id": "CE-P-ShowPicture.ScaleX:eval",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "Script evaluated for its completion value in the game, without top-level return. this=VisuMZ; arguments[0] is the partially converted Settings struct and arguments[1] is its raw input struct. These are not the whole command arguments. Conversion follows stored field order; the CLI never executes the source. Horizontal scale percentage: 100 is original width, 0 collapses width, negative mirrors horizontally. Runtime rounds it."
                         },
                         {
                             "key": "ScaleY",
@@ -12342,7 +12542,8 @@ const catalog = {
                                 "onError": "throw localized authored error"
                             },
                             "id": "CE-P-ShowPicture.ScaleY:eval",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "Script evaluated for its completion value in the game, without top-level return. this=VisuMZ; arguments[0] is the partially converted Settings struct and arguments[1] is its raw input struct. These are not the whole command arguments. Conversion follows stored field order; the CLI never executes the source. Vertical scale percentage: 100 is original height, 0 collapses height, negative mirrors vertically. Runtime rounds it."
                         },
                         {
                             "key": "Opacity",
@@ -12361,7 +12562,8 @@ const catalog = {
                                 "onError": "throw localized authored error"
                             },
                             "id": "CE-P-ShowPicture.Opacity:eval",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "Script evaluated for its completion value in the game, without top-level return. this=VisuMZ; arguments[0] is the partially converted Settings struct and arguments[1] is its raw input struct. These are not the whole command arguments. Conversion follows stored field order; the CLI never executes the source. Opacity from 0 transparent to 255 opaque; runtime rounds and clamps."
                         },
                         {
                             "key": "BlendMode",
@@ -12382,7 +12584,8 @@ const catalog = {
                                 3
                             ],
                             "runtimeBounds": "handler",
-                            "availability": "supported"
+                            "availability": "supported",
+                            "context": "0=normal, 1=additive, 2=multiply, 3=screen blend against content below the picture."
                         }
                     ],
                     "label": "Picture Settings",
@@ -12418,12 +12621,14 @@ const catalog = {
                     "default": 26,
                     "runtimeBounds": "handler",
                     "id": "CE-A-plugin.SystemSetFontSize.option:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Main font size in pixels. Stored on Game_System and preserved by save/load; new game uses the native database default. Existing windows adopt the value through their native refresh/update lifecycle. Authored values have minimum 1; the zero-to-1 fallback applies only to raw runtime input."
                 }
             ],
             "example": {
                 "option": 26
-            }
+            },
+            "context": "Main font size in pixels. Stored on Game_System and preserved by save/load; new game uses the native database default. Existing windows adopt the value through their native refresh/update lifecycle. Authored values have minimum 1; the zero-to-1 fallback applies only to raw runtime input."
         },
         {
             "id": "CE-C-SystemSetWindowPadding",
@@ -12449,12 +12654,14 @@ const catalog = {
                     "default": 12,
                     "runtimeBounds": "handler",
                     "id": "CE-A-plugin.SystemSetWindowPadding.option:num",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Window padding in pixels on each side. Stored on Game_System and preserved by save/load; new game uses the native database default. Existing windows adopt the value through their native refresh/update lifecycle. Authored values have minimum 1; the zero-to-1 fallback applies only to raw runtime input."
                 }
             ],
             "example": {
                 "option": 12
-            }
+            },
+            "context": "Window padding in pixels on each side. Stored on Game_System and preserved by save/load; new game uses the native database default. Existing windows adopt the value through their native refresh/update lifecycle. Authored values have minimum 1; the zero-to-1 fallback applies only to raw runtime input."
         },
         {
             "id": "CE-C-TextPopupShow",
@@ -12479,12 +12686,14 @@ const catalog = {
                     "default": "Insert message here.",
                     "encoding": "json",
                     "id": "CE-A-plugin.TextPopupShow.text:json",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Requires a scene with its Core text-popup window; otherwise no effect. Text is queued, centered when displayed, and uses drawTextEx/native text codes. Adjacent identical pending entries are deduplicated. Hold time is ceil(raw text length * /Window/DurationPerChat), clamped to /Window/MinDuration..MaxDuration, in update frames; opening/closing adds time. Queue/state belongs to the scene, is destroyed with it, and is cleared on new game/load; it is not saved. No interpreter wait is installed."
                 }
             ],
             "example": {
                 "text": "You obtained 12345 gold."
-            }
+            },
+            "context": "Requires a scene with its Core text-popup window; otherwise no effect. Text is queued, centered when displayed, and uses drawTextEx/native text codes. Adjacent identical pending entries are deduplicated. Hold time is ceil(raw text length * /Window/DurationPerChat), clamped to /Window/MinDuration..MaxDuration, in update frames; opening/closing adds time. Queue/state belongs to the scene, is destroyed with it, and is cleared on new game/load; it is not saved. No interpreter wait is installed."
         },
         {
             "id": "CE-C-AudioChangeBgmVolume",
@@ -12516,12 +12725,14 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.AudioChangeBgmVolume.volume:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. BGM channel. Volume percent: 0 silent, 100 full track volume; global channel configuration still applies. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
                 }
             ],
             "example": {
                 "volume": "100"
-            }
+            },
+            "context": "BGM channel. Volume percent: 0 silent, 100 full track volume; global channel configuration still applies. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
         },
         {
             "id": "CE-C-AudioChangeBgmPitch",
@@ -12553,12 +12764,14 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.AudioChangeBgmPitch.pitch:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. BGM channel. Playback pitch/speed percent: 100 normal, 50 half, 150 one-and-a-half. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
                 }
             ],
             "example": {
                 "pitch": "100"
-            }
+            },
+            "context": "BGM channel. Playback pitch/speed percent: 100 normal, 50 half, 150 one-and-a-half. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
         },
         {
             "id": "CE-C-AudioChangeBgmPan",
@@ -12590,12 +12803,14 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.AudioChangeBgmPan.pan:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. BGM channel. Stereo pan: -100 full left, 0 centered, 100 full right. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
                 }
             ],
             "example": {
                 "pan": "0"
-            }
+            },
+            "context": "BGM channel. Stereo pan: -100 full left, 0 centered, 100 full right. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
         },
         {
             "id": "CE-C-AudioChangeBgsVolume",
@@ -12627,12 +12842,14 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.AudioChangeBgsVolume.volume:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. BGS channel. Volume percent: 0 silent, 100 full track volume; global channel configuration still applies. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
                 }
             ],
             "example": {
                 "volume": "100"
-            }
+            },
+            "context": "BGS channel. Volume percent: 0 silent, 100 full track volume; global channel configuration still applies. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
         },
         {
             "id": "CE-C-AudioChangeBgsPitch",
@@ -12664,12 +12881,14 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.AudioChangeBgsPitch.pitch:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. BGS channel. Playback pitch/speed percent: 100 normal, 50 half, 150 one-and-a-half. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
                 }
             ],
             "example": {
                 "pitch": "100"
-            }
+            },
+            "context": "BGS channel. Playback pitch/speed percent: 100 normal, 50 half, 150 one-and-a-half. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
         },
         {
             "id": "CE-C-AudioChangeBgsPan",
@@ -12701,12 +12920,14 @@ const catalog = {
                         "onError": "throw localized error"
                     },
                     "id": "CE-A-plugin.AudioChangeBgsPan.pan:eval",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Script evaluated for its completion value in the game; use an expression or a final value-producing statement, without a top-level return. this=VisuMZ. arguments[0] is the partially converted argument object and arguments[1] is the same object at the top level; key conversion follows the stored argument order. No user/target variables are supplied by this command. The CLI validates/stores source without executing it. BGS channel. Stereo pan: -100 full left, 0 centered, 100 full right. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
                 }
             ],
             "example": {
                 "pan": "0"
-            }
+            },
+            "context": "BGS channel. Stereo pan: -100 full left, 0 centered, 100 full right. The expression is still evaluated before checking whether a track is active; without an active track no audio change follows. A later playback command may replace these current-track settings."
         },
         {
             "id": "CE-C-SystemLoadImages",
@@ -12734,7 +12955,8 @@ const catalog = {
                         "directory": "img/animations/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.animations:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/animations/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "battlebacks1",
@@ -12750,7 +12972,8 @@ const catalog = {
                         "directory": "img/battlebacks1/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.battlebacks1:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/battlebacks1/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "battlebacks2",
@@ -12766,7 +12989,8 @@ const catalog = {
                         "directory": "img/battlebacks2/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.battlebacks2:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/battlebacks2/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "characters",
@@ -12782,7 +13006,8 @@ const catalog = {
                         "directory": "img/characters/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.characters:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/characters/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "enemies",
@@ -12798,7 +13023,8 @@ const catalog = {
                         "directory": "img/enemies/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.enemies:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/enemies/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "faces",
@@ -12814,7 +13040,8 @@ const catalog = {
                         "directory": "img/faces/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.faces:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/faces/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "parallaxes",
@@ -12830,7 +13057,8 @@ const catalog = {
                         "directory": "img/parallaxes/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.parallaxes:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/parallaxes/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "pictures",
@@ -12846,7 +13074,8 @@ const catalog = {
                         "directory": "img/pictures/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.pictures:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/pictures/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "sv_actors",
@@ -12862,7 +13091,8 @@ const catalog = {
                         "directory": "img/sv_actors/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.sv_actors:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/sv_actors/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "sv_enemies",
@@ -12878,7 +13108,8 @@ const catalog = {
                         "directory": "img/sv_enemies/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.sv_enemies:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/sv_enemies/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "system",
@@ -12894,7 +13125,8 @@ const catalog = {
                         "directory": "img/system/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.system:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/system/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "tilesets",
@@ -12910,7 +13142,8 @@ const catalog = {
                         "directory": "img/tilesets/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.tilesets:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/tilesets/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "titles1",
@@ -12926,7 +13159,8 @@ const catalog = {
                         "directory": "img/titles1/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.titles1:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/titles1/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "titles2",
@@ -12942,7 +13176,8 @@ const catalog = {
                         "directory": "img/titles2/"
                     },
                     "id": "CE-A-plugin.SystemLoadImages.titles2:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under img/titles2/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 }
             ],
             "example": {
@@ -12989,7 +13224,8 @@ const catalog = {
                         "directory": "audio/bgm/"
                     },
                     "id": "CE-A-plugin.SystemLoadAudio.bgm:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under audio/bgm/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "bgs",
@@ -13005,7 +13241,8 @@ const catalog = {
                         "directory": "audio/bgs/"
                     },
                     "id": "CE-A-plugin.SystemLoadAudio.bgs:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under audio/bgs/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "me",
@@ -13021,7 +13258,8 @@ const catalog = {
                         "directory": "audio/me/"
                     },
                     "id": "CE-A-plugin.SystemLoadAudio.me:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under audio/me/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 },
                 {
                     "key": "se",
@@ -13037,7 +13275,8 @@ const catalog = {
                         "directory": "audio/se/"
                     },
                     "id": "CE-A-plugin.SystemLoadAudio.se:arraystr",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "JSON array of existing basenames under audio/se/, without file extension; subfolders are preserved. [\"Example\"] names an illustrative resource that must be installed before use; [] requests nothing. This command starts requests only outside battle and does not wait for completion."
                 }
             ],
             "example": {
@@ -13045,7 +13284,8 @@ const catalog = {
                 "bgs": [],
                 "me": [],
                 "se": []
-            }
+            },
+            "context": "Creates temporary AudioManager buffers for the listed resources, without playing them or waiting. Buffers are retained until loading succeeds and then destroyed. Load errors enter the native retry flow and retain the pending buffer; this is not a permanent audio cache. Supply installed browser audio assets under audio/bgm, audio/bgs, audio/me or audio/se, without extensions."
         },
         {
             "id": "CE-C-OpenURL",
@@ -13088,7 +13328,8 @@ const catalog = {
                 "troop"
             ],
             "receiver": "Game_Interpreter",
-            "example": {}
+            "example": {},
+            "context": "Playtest means Game_Temp.isPlaytest(): open the printed playtest URL or use ?test; /QoL/ForceNoPlayTest disables it. Also attempts clipboard.writeText when available; a denied clipboard request logs a warning. It does not remap the controller. Use the printed ID in /ControllerButtons/0/Name or a fragment in Match."
         },
         {
             "id": "CE-C-SystemSetBattleSystem",
@@ -13160,12 +13401,14 @@ const catalog = {
                         }
                     ],
                     "id": "CE-A-plugin.SystemSetBattleSystem.option:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "database copies the current System database mode; dtb uses turn-based rounds; tpb active advances charge time during input; tpb wait pauses the native clock during active player input. Stored in Game_System and preserved by save/load. Troop overrides map overrides this default for that battle; only the temporary override ends with its scene. New game initializes from /BattleSystem and the native database view."
                 }
             ],
             "example": {
                 "option": "database"
-            }
+            },
+            "context": "database copies the current System database mode; dtb uses turn-based rounds; tpb active advances charge time during input; tpb wait pauses the native clock during active player input. Stored in Game_System and preserved by save/load. Troop overrides map overrides this default for that battle; only the temporary override ends with its scene. New game initializes from /BattleSystem and the native database view."
         },
         {
             "id": "CE-C-SystemSetSideView",
@@ -13194,12 +13437,14 @@ const catalog = {
                     "default": "Toggle",
                     "runtimeBounds": "handler",
                     "id": "CE-A-plugin.SystemSetSideView.option:str",
-                    "availability": "supported"
+                    "availability": "supported",
+                    "context": "Front View selects the native front-view presentation; Side View selects side-view actor battler sprites; Toggle reverses the current view. Stored in Game_System and preserved by save/load. Troop overrides map overrides this default for that battle; only the temporary override ends with its scene. New game initializes from /BattleSystem and the native database view."
                 }
             ],
             "example": {
                 "option": "Toggle"
-            }
+            },
+            "context": "Front View selects the native front-view presentation; Side View selects side-view actor battler sprites; Toggle reverses the current view. Stored in Game_System and preserved by save/load. Troop overrides map overrides this default for that battle; only the temporary override ends with its scene. New game initializes from /BattleSystem and the native database view."
         },
         {
             "id": "CE-C-ExportAllMapText",
@@ -13217,7 +13462,7 @@ const catalog = {
             "args": [],
             "example": {},
             "reason": "Authored offline. Execution writes through the same-origin local development service in playtest.",
-            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server."
+            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. Reads authored event data from disk, including all pages, choices, comments and recursively referenced Common Events; it does not evaluate page conditions or text escapes. Existing output for the same filename is replaced after the service verifies source hashes. Interpreter/scene end detaches feedback and waiting; after a write was sent, cancellation does not promise to undo a completed file write."
         },
         {
             "id": "CE-C-ExportAllTroopText",
@@ -13235,7 +13480,7 @@ const catalog = {
             "args": [],
             "example": {},
             "reason": "Authored offline. Execution writes through the same-origin local development service in playtest.",
-            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server."
+            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. Reads authored event data from disk, including all pages, choices, comments and recursively referenced Common Events; it does not evaluate page conditions or text escapes. Existing output for the same filename is replaced after the service verifies source hashes. Interpreter/scene end detaches feedback and waiting; after a write was sent, cancellation does not promise to undo a completed file write."
         },
         {
             "id": "CE-C-ExportCurMapText",
@@ -13253,7 +13498,7 @@ const catalog = {
             "args": [],
             "example": {},
             "reason": "Authored offline. Execution writes through the same-origin local development service in playtest.",
-            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server."
+            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. Reads authored event data from disk, including all pages, choices, comments and recursively referenced Common Events; it does not evaluate page conditions or text escapes. Existing output for the same filename is replaced after the service verifies source hashes. Interpreter/scene end detaches feedback and waiting; after a write was sent, cancellation does not promise to undo a completed file write."
         },
         {
             "id": "CE-C-ExportCurTroopText",
@@ -13271,7 +13516,7 @@ const catalog = {
             "args": [],
             "example": {},
             "reason": "Authored offline. Execution writes through the same-origin local development service in playtest.",
-            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. Execute this command only during an active battle, when $gameParty.inBattle() is true and a current troop ID exists. A troop event or a Common Event invoked by that battle can run it. The targets list identifies where an event command may be stored, not a promise that map execution has a current troop. Outside battle the runtime supplies troop ID0, which fails context validation; no export is produced. To export troop text outside battle, use ExportAllTroopText instead."
+            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. Execute this command only during an active battle, when $gameParty.inBattle() is true and a current troop ID exists. A troop event or a Common Event invoked by that battle can run it. The targets list identifies where an event command may be stored, not a promise that map execution has a current troop. Outside battle the runtime supplies troop ID0, which fails context validation; no export is produced. To export troop text outside battle, use ExportAllTroopText instead. Reads authored event data from disk, including all pages, choices, comments and recursively referenced Common Events; it does not evaluate page conditions or text escapes. Existing output for the same filename is replaced after the service verifies source hashes. Interpreter/scene end detaches feedback and waiting; after a write was sent, cancellation does not promise to undo a completed file write."
         },
         {
             "id": "CE-C-PictureCoordinatesMode",
@@ -13301,7 +13546,7 @@ const catalog = {
                 }
             ],
             "reason": "Authored offline. Execution writes through the same-origin local development service in playtest.",
-            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. In playtest, select an existing picture in the current map/troop collection. Pointer motion moves it and updates the coordinate panel; cancel input/right-click saves the last displayed snapshot and exits. During tracking the interpreter waits and ordinary player/menu/window/click controls are suppressed. Scene/context/picture replacement aborts tracking without writing. Success writes PictureCoordinates_MapNNN_PictureNNN.json or PictureCoordinates_TroopNNN_PictureNNN.json (IDs padded to at least three digits) under the metadata directory. Failure is reported through the metadata receipt flow; no successful save is implied by leaving tracking."
+            "context": "From the installed destination run node coreto/tools/dev/server.mjs --project \"RPG Maker\" with the actual game-directory path substituted. Keep the process running and open the printed playtestUrl in the browser. The server supplies the metadata session and writes only under that game root .RPGMakerMZ-metadata/. Stop it with Ctrl+C after playtest. Authoring a command does not launch the server. In playtest, select an existing picture in the current map/troop collection. Pointer motion moves it and updates the coordinate panel; cancel input/right-click saves the last displayed snapshot and exits. During tracking the interpreter waits and ordinary player/menu/window/click controls are suppressed. Scene/context/picture replacement aborts tracking without writing. Success writes PictureCoordinates_MapNNN_PictureNNN.json or PictureCoordinates_TroopNNN_PictureNNN.json (IDs padded to at least three digits) under the metadata directory. Failure is reported through the metadata receipt flow; no successful save is implied by leaving tracking. Saved x/y are logical picture coordinates in pixels for that collection and origin (0=top-left, 1=center), not raw browser pointer coordinates. Container transforms are inverted; pictures whose basename starts with ! additionally compensate map scroll and zoom. Tracking mutates the live picture position; aborting does not restore its previous position."
         }
     ],
     "tags": [
@@ -13430,7 +13675,7 @@ const catalog = {
             "examples": [
                 1000000
             ],
-            "context": "Author in Database Enemies > Note (Enemies.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Database Enemies > Note (Enemies.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. Replaces the runtime enemy database exp reward amount when data loads; 0 supplies no base reward. Native battle reward aggregation/modifiers still apply. Removing the tag and restarting restores the authored database field rather than resetting a saved party balance.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass a nonnegative JSON integer. Removal restores the absence of this override.",
             "min": 0,
@@ -13455,7 +13700,7 @@ const catalog = {
             "examples": [
                 1000000
             ],
-            "context": "Author in Database Enemies > Note (Enemies.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Database Enemies > Note (Enemies.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. Replaces the runtime enemy database gold reward amount when data loads; 0 supplies no base reward. Native battle reward aggregation/modifiers still apply. Removing the tag and restarting restores the authored database field rather than resetting a saved party balance.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass a nonnegative JSON integer. Removal restores the absence of this override.",
             "min": 0,
@@ -13480,7 +13725,7 @@ const catalog = {
             "examples": [
                 10
             ],
-            "context": "Author in Map Properties > Note (MapNNN.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Map Properties > Note (MapNNN.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. Overrides /QoL/EncounterRateMinimum for this map: encounter count = randomInt(mapEncounterStep) + randomInt(mapEncounterStep) + this value. Units are encounter-counter steps, subject to native walking/encounter progress. 0 removes the added minimum; it does not disable encounters. Read on each new encounter count.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass a nonnegative JSON integer. Removal restores the absence of this override.",
             "min": 0,
@@ -13530,7 +13775,7 @@ const catalog = {
             "examples": [
                 "<ATK: 12000>"
             ],
-            "context": "Author in Database Enemies > Note (Enemies.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Database Enemies > Note (Enemies.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. Replaces the selected runtime Enemies.json params entry when the database loads, in stat points (not a percentage). MAXHP/MAXMP are maximum resources; ATK/DEF/MAT/MDF/AGI/LUK are basic stats. Native traits/formulas still affect final values. Removing the tag and restarting restores the database base field.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "selection": "set matches the parameter/stage/axis variant, including percent versus numeric trait formats. Distinct variants can coexist. --occurrence selects a physical family occurrence explicitly; remove needs it when multiple family occurrences exist."
@@ -13572,7 +13817,7 @@ const catalog = {
             "examples": [
                 "<Offset: +10, -20>"
             ],
-            "context": "Author in Database Animations > Name (Animations.json name). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Database Animations > Name (Animations.json name). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. For MZ particle animations, offsets add to the target anchor in local sprite pixels before its world transform: positive X right and Y down before mirroring/scaling. A mirrored target transform can reverse X. These name-tag offsets are distinct from the animation database offsetX controlled by CE-NT-animation-mirror.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "selection": "set matches the parameter/stage/axis variant, including percent versus numeric trait formats. Distinct variants can coexist. --occurrence selects a physical family occurrence explicitly; remove needs it when multiple family occurrences exist."
@@ -13614,7 +13859,7 @@ const catalog = {
             "examples": [
                 "<Hide Tile Shadows>"
             ],
-            "context": "Author in Map Properties > Note (MapNNN.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Map Properties > Note (MapNNN.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. Controls map tile-shadow geometry only: Show forces visible, Hide suppresses it, neither uses /QoL/NoTileShadows. Does not alter tiles, passage, or character shadows. Derived map rules refresh on map setup.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "selection": "set matches the parameter/stage/axis variant, including percent versus numeric trait formats. Distinct variants can coexist. --occurrence selects a physical family occurrence explicitly; remove needs it when multiple family occurrences exist."
@@ -13953,7 +14198,7 @@ const catalog = {
             "examples": [
                 "<JS HIT Plus: user.level>"
             ],
-            "context": "Author in Database Actors > Note (Actors.json note); or Database Classes > Note (Classes.json note); or Database Enemies > Note (Enemies.json note); or Database Weapons > Note (Weapons.json note); or Database Armors > Note (Armors.json note); or Database States > Note (States.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. With the shipped formulas, basic=(paramBase+paramPlus)*paramRate*paramBuffRate+paramFlatBonus, then clamped to paramMin/paramMax and rounded. Extra=(native xparam trait sum+xparamPlus)*xparamRate+xparamFlatBonus. Special=(native sparam trait product+sparamPlus)*sparamRate+sparamFlatBonus. Custom Param formula settings can change these relationships. Plus is added before rates; Flat after rates. Rate factors multiply (150%=1.5); extra/special Plus/Flat use rate units (10%=0.1). Basic Plus/Flat use stat points. Max selects the largest cap against the configured basic cap; numeric Max 0 means Number.MAX_SAFE_INTEGER. Traits are visited in battler.traitObjects() order; per object the first percent-format match, first decimal/numeric-format match, and first JS match for a stage are composed, so distinct formats can stack. Results cache until battler refresh/actor level-up. The script completion value supplies this stage contribution; this is the battler, and whitespace-prefixed user. references are rewritten to this. arguments[0] is the parameter ID (0=HIT (hit rate); 1=EVA (evasion); 2=CRI (critical rate); 3=CEV (critical evasion); 4=MEV (magic evasion); 5=MRF (magic reflection); 6=CNT (counterattack); 7=HRG (HP regeneration); 8=MRG (MP regeneration); 9=TRG (TP regeneration)); any additional arguments are those passed by a calling extension to the stage getter, with none from the shipped formulas. Return a numeric completion value in the stage units. Param.ConvertToBase may rewrite final basic parameter references to base getters; avoid recursion. A JS Max result of 0 is a numeric zero, unlike the special numeric-tag Max 0 sentinel.",
+            "context": "Author in Database Actors > Note (Actors.json note); or Database Classes > Note (Classes.json note); or Database Enemies > Note (Enemies.json note); or Database Weapons > Note (Weapons.json note); or Database Armors > Note (Armors.json note); or Database States > Note (States.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. With the shipped formulas, basic=(paramBase+paramPlus)*paramRate*paramBuffRate+paramFlatBonus, then clamped to paramMin/paramMax and rounded. Extra=(native xparam trait sum+xparamPlus)*xparamRate+xparamFlatBonus. Special=(native sparam trait product+sparamPlus)*sparamRate+sparamFlatBonus. Custom Param formula settings can change these relationships. Plus is added before rates; Flat after rates. Rate factors multiply (150%=1.5); extra/special Plus/Flat use rate units (10%=0.1). Basic Plus/Flat use stat points. Max selects the largest cap against the configured basic cap; numeric Max 0 means Number.MAX_SAFE_INTEGER. Traits are visited in battler.traitObjects() order; per object the first percent-format match, first decimal/numeric-format match, and first JS match for a stage are composed, so distinct formats can stack. Results cache until battler refresh/actor level-up. The script completion value supplies this stage contribution; this is the battler, and whitespace-prefixed user. references are rewritten to this. arguments[0] is the parameter ID (0=HIT (hit rate); 1=EVA (evasion); 2=CRI (critical rate); 3=CEV (critical evasion); 4=MEV (magic evasion); 5=MRF (magic reflection); 6=CNT (counterattack); 7=HRG (HP regeneration); 8=MRG (MP regeneration); 9=TRG (TP regeneration)); any additional arguments are those passed by a calling extension to the stage getter, with none from the shipped formulas. Return a numeric completion value in the stage units. Param.ConvertToBase may rewrite final basic parameter references to base getters; avoid recursion. This family accepts Plus, Rate and Flat; it has no Max stage.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "javascript": {
@@ -13985,7 +14230,7 @@ const catalog = {
             "examples": [
                 "<JS TGR Plus: user.level>"
             ],
-            "context": "Author in Database Actors > Note (Actors.json note); or Database Classes > Note (Classes.json note); or Database Enemies > Note (Enemies.json note); or Database Weapons > Note (Weapons.json note); or Database Armors > Note (Armors.json note); or Database States > Note (States.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. With the shipped formulas, basic=(paramBase+paramPlus)*paramRate*paramBuffRate+paramFlatBonus, then clamped to paramMin/paramMax and rounded. Extra=(native xparam trait sum+xparamPlus)*xparamRate+xparamFlatBonus. Special=(native sparam trait product+sparamPlus)*sparamRate+sparamFlatBonus. Custom Param formula settings can change these relationships. Plus is added before rates; Flat after rates. Rate factors multiply (150%=1.5); extra/special Plus/Flat use rate units (10%=0.1). Basic Plus/Flat use stat points. Max selects the largest cap against the configured basic cap; numeric Max 0 means Number.MAX_SAFE_INTEGER. Traits are visited in battler.traitObjects() order; per object the first percent-format match, first decimal/numeric-format match, and first JS match for a stage are composed, so distinct formats can stack. Results cache until battler refresh/actor level-up. The script completion value supplies this stage contribution; this is the battler, and whitespace-prefixed user. references are rewritten to this. arguments[0] is the parameter ID (0=TGR (target rate); 1=GRD (guard effect); 2=REC (recovery effect); 3=PHA (pharmacology); 4=MCR (MP cost rate); 5=TCR (TP charge rate); 6=PDR (physical damage rate); 7=MDR (magical damage rate); 8=FDR (floor damage rate); 9=EXR (experience rate)); any additional arguments are those passed by a calling extension to the stage getter, with none from the shipped formulas. Return a numeric completion value in the stage units. Param.ConvertToBase may rewrite final basic parameter references to base getters; avoid recursion. A JS Max result of 0 is a numeric zero, unlike the special numeric-tag Max 0 sentinel.",
+            "context": "Author in Database Actors > Note (Actors.json note); or Database Classes > Note (Classes.json note); or Database Enemies > Note (Enemies.json note); or Database Weapons > Note (Weapons.json note); or Database Armors > Note (Armors.json note); or Database States > Note (States.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. With the shipped formulas, basic=(paramBase+paramPlus)*paramRate*paramBuffRate+paramFlatBonus, then clamped to paramMin/paramMax and rounded. Extra=(native xparam trait sum+xparamPlus)*xparamRate+xparamFlatBonus. Special=(native sparam trait product+sparamPlus)*sparamRate+sparamFlatBonus. Custom Param formula settings can change these relationships. Plus is added before rates; Flat after rates. Rate factors multiply (150%=1.5); extra/special Plus/Flat use rate units (10%=0.1). Basic Plus/Flat use stat points. Max selects the largest cap against the configured basic cap; numeric Max 0 means Number.MAX_SAFE_INTEGER. Traits are visited in battler.traitObjects() order; per object the first percent-format match, first decimal/numeric-format match, and first JS match for a stage are composed, so distinct formats can stack. Results cache until battler refresh/actor level-up. The script completion value supplies this stage contribution; this is the battler, and whitespace-prefixed user. references are rewritten to this. arguments[0] is the parameter ID (0=TGR (target rate); 1=GRD (guard effect); 2=REC (recovery effect); 3=PHA (pharmacology); 4=MCR (MP cost rate); 5=TCR (TP charge rate); 6=PDR (physical damage rate); 7=MDR (magical damage rate); 8=FDR (floor damage rate); 9=EXR (experience rate)); any additional arguments are those passed by a calling extension to the stage getter, with none from the shipped formulas. Return a numeric completion value in the stage units. Param.ConvertToBase may rewrite final basic parameter references to base getters; avoid recursion. This family accepts Plus, Rate and Flat; it has no Max stage.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "javascript": {
@@ -14017,7 +14262,7 @@ const catalog = {
             "examples": [
                 "<ATK Plus1: +10>"
             ],
-            "context": "Author in Database Actors > Note (Actors.json note); or Database Classes > Note (Classes.json note); or Database Enemies > Note (Enemies.json note); or Database Weapons > Note (Weapons.json note); or Database Armors > Note (Armors.json note); or Database States > Note (States.json note). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. With the shipped formulas, basic=(paramBase+paramPlus)*paramRate*paramBuffRate+paramFlatBonus, then clamped to paramMin/paramMax and rounded. Extra=(native xparam trait sum+xparamPlus)*xparamRate+xparamFlatBonus. Special=(native sparam trait product+sparamPlus)*sparamRate+sparamFlatBonus. Custom Param formula settings can change these relationships. Plus is added before rates; Flat after rates. Rate factors multiply (150%=1.5); extra/special Plus/Flat use rate units (10%=0.1). Basic Plus/Flat use stat points. Max selects the largest cap against the configured basic cap; numeric Max 0 means Number.MAX_SAFE_INTEGER. Traits are visited in battler.traitObjects() order; per object the first percent-format match, first decimal/numeric-format match, and first JS match for a stage are composed, so distinct formats can stack. Results cache until battler refresh/actor level-up.",
+            "context": "Recognized for inspection/removal in actor, class, enemy, equipment and state Notes. Numbered stage names such as <ATK Plus1: +10> are not consumed by this runtime and tags set rejects this unavailable family. Use the supported CE-NT-param-plus, CE-NT-param-rate, CE-NT-param-flat, CE-NT-xparam-* or CE-NT-sparam-* families; for example <ATK Plus: +10>. Listing an occurrence does not establish an effect.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "reason": "Literal numbered-stage tag names are not consumed; use param/xparam/sparam Plus/Rate/Flat families.",
@@ -14062,7 +14307,7 @@ const catalog = {
             "examples": [
                 "<Battle View: Side View>"
             ],
-            "context": "Author in Map Properties > Note (MapNNN.json note); or Database Troops > Name (Troops.json name); or Comment event commands on troop battle-event pages (codes 108/408). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Author in Map Properties > Note (MapNNN.json note); or Database Troops > Name (Troops.json name); or Comment event commands on troop battle-event pages (codes 108/408). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript. Front/FV selects the native front-view presentation; Side/SV selects side-view actor sprites. Read at troop setup from map Note and all troop-page comments/name. Troop wins per property; without a tag the saved SystemSetSideView/database view applies. The temporary view is not a permanent game-system change.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "selection": "set matches the parameter/stage/axis variant, including percent versus numeric trait formats. Distinct variants can coexist. --occurrence selects a physical family occurrence explicitly; remove needs it when multiple family occurrences exist."
@@ -14108,7 +14353,7 @@ const catalog = {
             "examples": [
                 "<CTB>"
             ],
-            "context": "Author in Map Properties > Note (MapNNN.json note); or Database Troops > Name (Troops.json name); or Comment event commands on troop battle-event pages (codes 108/408). Runtime reads the tag from that field; CLI writes it without executing the game or authored JavaScript.",
+            "context": "Recognized for inspection/removal in Map Note, Troop Name and troop-page Comment commands. This delivered Core does not provide these external battle systems: tags set rejects this unavailable family and the runtime reports CAPABILITY_UNAVAILABLE if such a tag is read at troop setup. No supported activation recipe for an external mode is supplied here. Use CE-NT-battle-system for DTB, TPB Active or TPB Wait; those modes require no external battle-system extension.",
             "occurrences": "List reports physical order. Runtime precedence is described separately; an occurrence may be shadowed.",
             "syntax": "Pass one complete tag as a JSON string, including angle brackets.",
             "reason": "Only database/DTB/TPB Active/TPB Wait are supported by this Core.",
@@ -14122,11 +14367,12 @@ const catalog = {
             "arguments": [],
             "returns": "object",
             "example": "Coreto.CoreEngine.describe()",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Call after Core boot in the game. Returns a JSON-deep copy of metadata and entries; it does not read live saved values or change settings. CLI equivalent: core api list/describe."
         },
         {
             "id": "parameterIcon",
-            "description": "Return the configured icon text for a basic/X/S parameter name; unknown names return 0.",
+            "description": "Return the configured icon for a basic/X/S or custom parameter abbreviation; unknown names return 0.",
             "arguments": [
                 {
                     "name": "name",
@@ -14135,11 +14381,12 @@ const catalog = {
             ],
             "returns": "string|number",
             "example": "Coreto.CoreEngine.parameterIcon('ATK')",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime lookup of basic/X/S abbreviations and /CustomParam abbreviations, case-insensitive without trimming the input. Built-in configured icons are returned as numeric text; custom Icon is numeric. Unknown names return 0. These are indices into img/system/IconSet.png, not asset filenames. Consult /Param and /CustomParam for the vocabulary; no sprite is drawn by this call."
         },
         {
             "id": "TextManager.paramName",
-            "description": "Resolve a basic/X/S parameter vocabulary name, ignoring case; unknown names return an empty string.",
+            "description": "Resolve basic/X/S or custom parameter vocabulary, ignoring case; unknown names return an empty string.",
             "arguments": [
                 {
                     "name": "name",
@@ -14148,7 +14395,8 @@ const catalog = {
             ],
             "returns": "string",
             "example": "TextManager.paramName('HIT')",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime lookup of basic/X/S and /CustomParam abbreviations, case-insensitive without trimming input. Basic vocabulary comes from the database; X/S vocabulary comes from /Param and custom labels from /CustomParam/0/ParamName. Unknown names return an empty string. This returns text and does not modify the database."
         },
         {
             "id": "applyEasing",
@@ -14179,7 +14427,8 @@ const catalog = {
                 }
             ],
             "returns": "string",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime pure string formatter using /QoL/DigitGroupingLocale (empty uses en-US). Converts input with String, groups numeric runs with at most six fractional digits, and preserves leading-zero numbers. []/<> protect their digits; {{12345}} becomes ungrouped 12345. Example with en-US: Gold: 1234567 becomes Gold: 1,234,567. An invalid Intl locale can throw."
         },
         {
             "id": "ColorManager.getColor",
@@ -14192,7 +14441,8 @@ const catalog = {
             ],
             "returns": "string",
             "example": "ColorManager.getColor('#ff8800')",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Call after the windowskin is loaded for palette lookups. A value containing # returns the substring from its first # to the line end, without validating CSS. Otherwise Number(value) is passed to native ColorManager.textColor; use a valid windowskin palette index such as \"16\". Named CSS colors like \"red\" are not supported by this resolver. No game state or configured color cache is changed."
         },
         {
             "id": "ColorManager.clearCachedKeys",
@@ -14200,7 +14450,8 @@ const catalog = {
             "arguments": [],
             "returns": "void",
             "example": "ColorManager.clearCachedKeys()",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime call clearing the configured palette lookup cache. It does not reload the windowskin, redraw existing windows, or mutate configuration. A later color lookup resolves again; existing displayed pixels change only when their owner redraws."
         },
         {
             "id": "$textPopup",
@@ -14273,7 +14524,8 @@ const catalog = {
             ],
             "returns": "void",
             "example": "Coreto.CoreEngine.openURL('http://127.0.0.1:8080/')",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Call in runtime, preferably from a user interaction such as a button handler. Plays the OK sound then invokes window.open(url,\"_blank\"); use a complete URL. Browser rules may block it, producing POPUP_BLOCKED. It neither waits for the destination nor reports that its content loaded. The CLI only describes this helper."
         },
         {
             "id": "displayedParameters",
@@ -14287,7 +14539,8 @@ const catalog = {
             ],
             "returns": "string[]",
             "example": "Coreto.CoreEngine.displayedParameters(false)",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime read: false/omitted returns a copy of /Param/DisplayedParams for standard Status/Equip; true returns /Param/ExtDisplayedParams for extensions. Entries were uppercased and trimmed at boot. Mutating the returned array changes no configuration, and true does not create a menu panel."
         },
         {
             "id": "TextManager.getInputButtonString",
@@ -14300,7 +14553,8 @@ const catalog = {
             "returns": "string",
             "example": "TextManager.getInputButtonString('ok')",
             "description": "Resolve a button label using the last active keyboard or controller profile.",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime label lookup for an exact Input action name such as ok, cancel, menu, shift, up, down, left, right, pageup or pagedown. It follows the last-used device: keyboard mappings choose /ButtonAssist/Key* labels; controller profiles use /ControllerButtons Name exact match then first Match substring, with keyboard fallback for missing labels. /ButtonAssist/SplitEscape=false resolves keyboard cancel/menu through escape. The result may include text escapes for drawTextEx. It does not bind a button or guarantee a useful label for an unmapped action."
         },
         {
             "id": "TextManager.getInputMultiButtonStrings",
@@ -14317,7 +14571,8 @@ const catalog = {
             "returns": "string",
             "example": "TextManager.getInputMultiButtonStrings('pageup', 'pagedown')",
             "description": "Format two action labels with the configured MultiKeyFmt.",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime lookup of both action labels through TextManager.getInputButtonString, then /ButtonAssist/MultiKeyFmt substitutes %1=first and %2=second. A string such as Q/E describes alternatives; this call does not implement a two-button chord or remap controls."
         },
         {
             "id": "$commonEvent",
@@ -14330,7 +14585,8 @@ const catalog = {
             "returns": "void",
             "example": "$commonEvent(1)",
             "description": "Reserve an existing Common Event in the native queue. Requires /QoL/ShortcutScripts=true; the game interpreter executes it later.",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime helper registered at boot only when /QoL/ShortcutScripts=true. Supply an existing positive Database Common Event ID; the native queue executes it later under its normal interpreter conditions. This call does not run the event synchronously or wait for it. For one parallel run on a map, use $onceParallel."
         },
         {
             "id": "$onceParallel",
@@ -14343,7 +14599,8 @@ const catalog = {
             "returns": "void",
             "example": "$onceParallel(1)",
             "description": "Run an existing Common Event once on the current map scene. Requires /QoL/ShortcutScripts=true; its scene owns cleanup.",
-            "availability": "supported"
+            "availability": "supported",
+            "context": "Runtime helper registered only with /QoL/ShortcutScripts=true. Requires Scene_Map and an existing Common Event ID; otherwise no effect. Each call creates an independent interpreter and the caller does not wait. Map transfer, scene termination and replacement of game objects end its work; it is not saved. The runtime also accepts optional eventId as a second positional argument (default 0) to supply that interpreter map-event context; it is distinct from the Common Event ID."
         },
         {
             "id": "Sprite_Battler.setMoveEasingType",
@@ -14357,7 +14614,7 @@ const catalog = {
             "returns": "void",
             "example": "sprite.startMove(100, 0, 30); sprite.setMoveEasingType('InOutQuad')",
             "availability": "supported",
-            "context": "Call on a live Sprite_Battler after startMove. A new target resets the curve to Linear and records the full duration; an unchanged target preserves the current movement. Native sprite updates advance offsets and invoke onMoveEnd. Uses the same named curves as Coreto.CoreEngine.applyEasing."
+            "context": "Call on a live Sprite_Battler after startMove. A new target resets the curve to Linear and records the full duration; an unchanged target preserves the current movement. Native sprite updates advance offsets and invoke onMoveEnd. Uses the same named curves as Coreto.CoreEngine.applyEasing. In the example, obtain sprite from the active battle spriteset battlerSprites() list for an existing battler; startMove X/Y are pixel offsets from its home and duration is update frames. This controls only that live sprite movement, not a saved battler position."
         },
         {
             "id": "Sprite_Battler.applyEasing",
@@ -14420,6 +14677,20 @@ const catalog = {
             "example": "Em uma especialização do ciclo de remoção: spriteset.removeAnimationFromContainer(sprite), com sprite fornecido pelo ciclo e spriteset ainda válido. O chamador do ciclo continua com limpeza dos alvos e sprite.destroy(); não acrescente uma segunda destruição ao hook.",
             "availability": "supported",
             "context": "Hook automático de remoção das animações faux/point, destinado a plugins que especializam containers. O ciclo fornece this como spriteset dono da cena e sprite como a instância já registrada naquele ciclo, quando ela termina ou a cena libera seus efeitos. Pode acessar o spriteset ativo por SceneManager._scene._spriteset somente depois da criação da cena. Este método apenas remove sprite.parent; não destrói a instância, não remove registros de atualização e não encerra animações nos alvos. removeFauxAnimation/removePointAnimation fazem essas etapas e destroem o sprite após este hook. Uma extensão de camada deve preservar essa ordem e nunca destruir o sprite aqui pela segunda vez. Autoria comum usa comandos/requisições de animação, cujo término já aciona o ciclo; não chame este hook manualmente para cancelar um efeito."
+        },
+        {
+            "id": "Game_BattlerBase.checkCacheKey",
+            "description": "Report whether the native consumer cache has a defined value for this key, retaining false, zero and null.",
+            "arguments": [
+                {
+                    "name": "key",
+                    "type": "string"
+                }
+            ],
+            "returns": "boolean",
+            "example": "const actor = $gameParty.leader(); actor.checkCacheKey(\"weaponSwapTypes\");",
+            "availability": "supported",
+            "context": "For plugin extensions after a battler exists. Initialization and refresh clear its _cache. Assigning a new _cache object also invalidates Core parameter caches, as weapon swapping requires. This method does not calculate a missing value or persist a cache contract across saves."
         }
     ],
     "compatibility": {
@@ -14427,7 +14698,7 @@ const catalog = {
         "messageVersion": "1.57",
         "messageSha256": "9398079b9925b35d359e70ca4ae7d9be3b20d74fac531bc16d3706dcf335b0c5",
         "originalCoreId": "VisuMZ_0_CoreEngine",
-        "policy": "Coreto precedes Message, Victory and equipment consumers; disable the original Core. Qualified consumers receive the real Core settings, digit formatter and input/parameter/color interfaces. With Message or EquipSetBonuses active, the shared note dispatcher reaches unchanged actor and equipment parsers. EquipSetBonuses does not require Message to activate the implemented Core interface. Actor state icons retain native standard-cell alignment for SkillsStates overlays."
+        "policy": "Coreto precedes Message, Victory and equipment consumers; disable the original Core. Qualified consumers receive the real Core settings, digit formatter and input/parameter/color interfaces. With Message or EquipSetBonuses active, the shared note dispatcher reaches unchanged actor and equipment parsers. EquipSetBonuses does not require Message to activate the implemented Core interface. Actor state icons retain native standard-cell alignment for SkillsStates overlays. Options receives the implemented Core settings/input interface without requiring Message, so rebinding and original ButtonCmnEvts key reservations remain enabled. Either Items provider receives the actual extended parameter list, custom names/types and native numeric/percentage formatting without requiring Message, Options or another consumer."
     },
     "namespace": "core",
     "dependencies": {
@@ -14436,7 +14707,11 @@ const catalog = {
             "VisuMZ_2_ClassChangeSystem": "1.20",
             "VisuMZ_1_SkillsStatesCore": "1.58",
             "VisuMZ_1_ItemsEquipsCore": "1.61",
-            "VisuMZ_2_EquipSetBonuses": "1.05"
+            "VisuMZ_2_EquipSetBonuses": "1.05",
+            "VisuMZ_2_WeaponSwapSystem": "1.14",
+            "VisuMZ_1_OptionsCore": "1.28",
+            "Coreto_1_OptionsCore": "0.1.0",
+            "Coreto_1_ItemsEquipsCore": "0.1.0"
         }
     }
 };
@@ -14624,10 +14899,15 @@ function configurationPublicField(field, catalog) {
     if (field.key !== 'CoretoConfigSource') return field;
     const namespace = catalog.namespace;
     const original = catalog.reference?.pluginId ?? catalog.compatibility?.originalCoreId;
+    const missingSelector = ['Coreto_0_CoreEngine', 'Coreto_1_MessageCore'].includes(catalog.pluginId)
+        ? 'An old entry without CoretoConfigSource uses own.'
+        : catalog.pluginId === 'Coreto_2_VNPictureBusts'
+            ? 'Without CoretoConfigSource, the historical ConfigurationSource=own selects own; legacy-if-present or an absent historical selector selects inherit.'
+            : 'An old entry without CoretoConfigSource uses inherit.';
     return {...field, plugin:catalog.pluginId,
-        description:`Configuration source in the game's js/plugins.js: inherit reads parameters from ${original}, even if inactive; when that entry is absent, it reads ${catalog.pluginId}. own always reads ${catalog.pluginId}. Switching the selector does not copy values.`,
-        context:`Edit the CoretoConfigSource parameter of ${catalog.pluginId} in the MZ Plugin Manager or through the CLI. The plugin entry must exist in js/plugins.js.`,
-        writing:`Run the CLI with --project pointing to the MZ game folder. ${namespace} parameters set changes the selector only; install or the first edit of a functional parameter in inherit materializes own values. Reload the editor after a CLI write.`,
+        description:`Configuration source in the game's js/plugins.js: inherit reads parameters from ${original}, even if inactive; when that entry is absent, it reads ${catalog.pluginId}. own always reads ${catalog.pluginId}. Switching the selector does not copy values. The published default and parameters reset select inherit. ${missingSelector}`,
+        context:`Edit the CoretoConfigSource parameter of ${catalog.pluginId} in the MZ Plugin Manager or through the CLI. The plugin entry must exist in js/plugins.js. The selection persists in that file, independently of game saves. Enable the provider and its dependencies to use it in the game; restart after configuration changes.`,
+        writing:`Run the CLI with --project pointing to the MZ game folder. ${namespace} parameters set or reset changes the selector only; install or the first edit of a functional parameter in inherit materializes own values. parameters get reports configuredSource and effectiveSource. Reload the editor after a CLI write.`,
         examples:[`${namespace} parameters get --path /CoretoConfigSource --json`,`${namespace} parameters set --path /CoretoConfigSource --value '\"own\"' --json`]};
 }
 
@@ -14812,6 +15092,8 @@ function encodeValue(schema, value, path, previous) {
         const encoded = previous === undefined ? [] : parseLayer(previous, path);
         return JSON.stringify(value.map((item, index) => encodeValue(schema.items, item, `${path}/${index}`, encoded[index])));
     }
+    // A whole-object edit must not reformat an untouched native numeric field.
+    if (schema.type === "number" && typeof previous === "string" && previous.trim() !== "" && Number(previous) === value) return previous;
     return schema.encoding === "json" ? JSON.stringify(value) : String(value);
 }
 
@@ -14856,7 +15138,7 @@ function describeCoreApi(catalog, {commandExpectedHash = false} = {}) {
                 ? `${namespace} parameters get --path ${pathToken(path.replaceAll('{index}', '0'))} --json`
                 : `${namespace} api describe ${command} --json`;
             const operational = configurationPublicField(field, catalog);
-            const writing = surface === 'parameter' ? `${namespace} parameters set --path ${pathToken(path.replaceAll('{index}', '0'))} --value <JSON> [--dry-run] [--json]. Use the field type, default and limits to choose the JSON value. Run the CLI with --project pointing to the MZ game folder; the plugin entry must exist in js/plugins.js. Reload the editor after writing.` : undefined;
+            const writing = surface === 'parameter' ? `${namespace} parameters set --path ${pathToken(path.replaceAll('{index}', '0'))} --value <JSON> [--dry-run] [--json]. Use the field type, default and limits to choose the JSON value. Run the CLI with --project pointing to the MZ game folder; the plugin entry must exist in js/plugins.js. These registry settings persist independently of game saves and are read at boot. Reload the editor after writing and restart the game to use the new configuration.` : undefined;
             add({...operational, surface, context: operational.context ?? 'browser runtime; authoring is offline',
                 ...(writing ? {writing:operational.writing ?? writing} : {}), examples: operational.examples ?? [example]}, {surface, path, ...(command ? {command} : {})}, field);
             if (field.type === 'struct') fields(field.fields, path, surface, command);
@@ -14866,13 +15148,13 @@ function describeCoreApi(catalog, {commandExpectedHash = false} = {}) {
     fields(catalog.parameters, '', 'parameter');
     for (const command of catalog.commands) {
         add({...command, surface: 'command', context: command.context ?? command.environment ?? 'browser runtime',
-            writing: command.writing ?? `Use an existing target and insertion index from commands list${commandExpectedHash ? '; pass its result.fileHash as --expected-hash. ' : '. This command interface does not accept --expected-hash; each edit checks the file snapshot read by that operation. '}Run the CLI with --project pointing to the MZ game folder. The command executes later when the game interpreter reaches it; authoring does not run it.`,
+            writing: command.writing ?? `Use an existing target and insertion index from commands list${commandExpectedHash === 'optional' ? '; its result.fileHash can be passed as optional --expected-hash to reject a stale selection. ' : commandExpectedHash ? '; pass its result.fileHash as required --expected-hash. ' : '. This command interface does not accept --expected-hash; each edit checks the file snapshot read by that operation. '}Run the CLI with --project pointing to the MZ game folder. The command executes later when the game interpreter reaches it; authoring does not run it.`,
             examples: command.examples ?? [`${namespace} commands list --target common-event:1 --json`, `${namespace} commands insert --target common-event:1 --before 0 --command ${command.key} --value ${quote(JSON.stringify(Object.fromEntries(command.args.map(field => [field.key, field.default]))))}${commandExpectedHash ? ' --expected-hash HASH_FROM_LIST' : ''}`]},
         {surface: 'command', path: `/commands/${command.key}`}, command);
         fields(command.args, `/commands/${command.key}`, 'command-argument', command.key);
     }
     for (const tag of catalog.tags) add({...tag, surface: 'tag', context: tag.context ?? 'native authoring field; interpreted by browser runtime'}, {surface: 'tag', path: `/tags/${tag.key}`}, tag);
-    for (const method of catalog.methods) add({...method, surface: 'method', context: method.context ?? 'browser runtime only; CLI describes but never invokes this method', examples: [method.example]}, {surface: 'method', path: `/methods/${method.id}`}, method);
+    for (const method of catalog.methods) add({...method, surface: 'method', context: method.context ?? 'browser runtime only; CLI describes but never invokes this method', examples: method.examples ?? [method.example]}, {surface: 'method', path: `/methods/${method.id}`}, method);
     return validatePublicEntries(catalog.namespace ?? catalog.pluginId, [...entries.values()]);
 }
 
@@ -15186,8 +15468,12 @@ function installBattlerParameters(settings) {
     const options = settings.Param;
     const caches = new WeakMap();
     const cacheFor = battler => {
-        if (!caches.has(battler)) caches.set(battler, new Map());
-        return caches.get(battler);
+        let entry = caches.get(battler);
+        if (!entry || entry.owner !== battler._cache) {
+            entry = {owner: battler._cache, values: new Map()};
+            caches.set(battler, entry);
+        }
+        return entry.values;
     };
     const refresh = Game_BattlerBase.prototype.refresh;
     Game_BattlerBase.prototype.refresh = function(...args) {
@@ -15270,6 +15556,24 @@ function installBattlerParameters(settings) {
     };
     Game_BattlerBase.prototype.isDying = function() {
         return this.isAlive() && this.hp < this.mhp * options.CrisisRate;
+    };
+}
+
+
+function installBattlerConsumerCache() {
+    const initialize = Game_BattlerBase.prototype.initMembers;
+    Game_BattlerBase.prototype.initMembers = function() {
+        this._cache = {};
+        initialize.call(this);
+    };
+    const refresh = Game_BattlerBase.prototype.refresh;
+    Game_BattlerBase.prototype.refresh = function() {
+        this._cache = {};
+        refresh.call(this);
+    };
+    Game_BattlerBase.prototype.checkCacheKey = function(key) {
+        this._cache = this._cache || {};
+        return this._cache[key] !== undefined;
     };
 }
 
@@ -18815,7 +19119,18 @@ function installMessageCompatibility(active, settings, formatDigits, parameterIc
 
 function installLegacyCoreInterface(settings, formatDigits, parameterIcon) {
     const compatibility = globalThis.VisuMZ ??= {};
-    compatibility.CoreEngine = {version: 1.90, Settings: settings};
+    const entries = settings.CustomParam.map(data => [String(data.Abbreviation).toUpperCase().trim(), data]);
+    compatibility.CoreEngine = {version: 1.90, Settings: settings,
+        CustomParamNames: Object.fromEntries(entries.map(([name, data]) => [name, data.ParamName])),
+        CustomParamAbb: Object.fromEntries(entries.map(([name, data]) => [name, data.Abbreviation])),
+        CustomParamType: Object.fromEntries(entries.map(([name, data]) => [name, data.Type]))};
+    compatibility.ConvertNumberToString = function(value, decimals, parameter) {
+        if (parameter === undefined && value % 1 === 0) return value;
+        if (parameter !== undefined && basicParameterNames.includes(String(parameter).toUpperCase().trim())) return value;
+        const core = compatibility.CoreEngine;
+        if (core.CustomParamAbb[parameter] && core.CustomParamType[parameter] === "integer") return value;
+        return String((value * 100).toFixed(decimals || 0)) + "%";
+    };
     compatibility.ApplyEasing = applyEasing;
     compatibility.GroupDigits = formatDigits;
     compatibility.GetParamIcon = parameterIcon;
@@ -18854,6 +19169,18 @@ function installEquipCoreCompatibility(active, settings, formatDigits, parameter
     if (!active.some(plugin => plugin.name === "VisuMZ_2_EquipSetBonuses")) return;
     installLegacyCoreInterface(settings, formatDigits, parameterIcon);
     if (!VisuMZ.coretoMessageBridge) installLegacyCoreNotetags();
+}
+
+function installOptionsCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (active.some(plugin => ["VisuMZ_1_OptionsCore", "Coreto_1_OptionsCore"].includes(plugin.name))) {
+        installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    }
+}
+
+function installItemsCoreCompatibility(active, settings, formatDigits, parameterIcon) {
+    if (active.some(plugin => ["VisuMZ_1_ItemsEquipsCore", "Coreto_1_ItemsEquipsCore"].includes(plugin.name))) {
+        installLegacyCoreInterface(settings, formatDigits, parameterIcon);
+    }
 }
 
 function installSaveLifecycle({normalizeSystem, normalizeBattle, normalizePicture}) {
@@ -18969,6 +19296,7 @@ function installCore() {
     installAudioCommands();
     installResourceLoading(settings);
     const openURL = installOpenUrl();
+    installBattlerConsumerCache();
     installBattlerParameters(settings);
     installBattlerLevels();
     installCoreDatabaseNotes();
@@ -18996,6 +19324,8 @@ function installCore() {
     installMessageCompatibility(active, settings, formatDigits, parameterIcon);
     installVictoryCoreCompatibility(active, settings, formatDigits, parameterIcon);
     installEquipCoreCompatibility(active, settings, formatDigits, parameterIcon);
+    installOptionsCoreCompatibility(active, settings, formatDigits, parameterIcon);
+    installItemsCoreCompatibility(active, settings, formatDigits, parameterIcon);
     installSaveLifecycle({normalizeSystem, normalizeBattle, normalizePicture});
     installNewGameSettings(settings);
 

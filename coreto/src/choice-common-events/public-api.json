@@ -79,8 +79,14 @@
         "Enable Coreto_3_ChoiceCmnEvts after a Message provider (Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57); do not enable both Message providers."
       ],
       "examples": [
-        "<Choice Common Event: 1>"
-      ]
+        "<Choice Common Event: 1>",
+        "message commands list --target common-event:1 --json",
+        "message text get --target common-event:1 --index 0 --path choices --json",
+        "choice-common-events tags list --target common-event:1/text:0/choice:0 --json",
+        "choice-common-events tags set --target common-event:1/text:0/choice:0 --tag choice-common-event --value '1' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "context": "Enable Coreto_3_ChoiceCmnEvts 0.1.0 with choice-common-events install after its optional providers/consumers have been arranged; the bundle must already be delivered. install selects this provider instead of VisuMZ_3_ChoiceCmnEvts and preserves other provider selections. Restart the game after configuration changes. A Message provider is required: enable Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57 before this plugin; do not enable both. Coreto Message also requires Coreto_0_CoreEngine before it (see message --help and core install). If Picture Choices is active, put Choice Common Events after it. Put this plugin before active Attached Pictures, Event Title Scene and Message Visibility. This tag belongs to a single-line native Show Choices label, not Note, Comment or Show Text. Accepts CHOICE or SELECT with COMMON EVENT, COMMONEVENT or EVENT and a space after the colon. Tag editing does not execute the Common Event. Each changed highlight launches a separate interpreter without waiting; changing away does not cancel an earlier event, and overlapping events are possible. With Coreto Message, finished interpreters are removed; map initialization/setup clears the list, while loading a save preserves its serialized list. Choice-to-event bindings are rebuilt for each choice list. The Common Event uses the main map interpreter event ID as context. For an evented title, enable Coreto_4_EventTitleScene after this plugin and configure event-title-scene api describe ET-P-MapID:num, then place Show Choices on that map.",
+      "writing": "Find an existing Show Choices unit (code 102) and index I with message commands list --target common-event:1. Read message text get --target common-event:1 --index I --path choices and choose zero-based J. choice-common-events tags list --target common-event:1/text:I/choice:J supplies result.fileHash for --expected-hash and occurrence indices. Example IDs/indexes are illustrative; Common Event 1 must exist in data/CommonEvents.json. Use --occurrence when multiple matching tags exist. Removing a tag affects subsequent choice-list construction, not already launched interpreters."
     }
   ],
   "methods": []

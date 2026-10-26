@@ -17,6 +17,7 @@ function installBattleMultiWield(sequences) {
             const maximums=activeWeapon.get(this)?.maximums??[this.mhp,this.mmp];
             activeWeapon.set(this,{slot:slot-1,maximums});
         }
+        this._cache = {};
     };
     Game_Actor.prototype.clearActiveWeapon = function() { this.setActiveWeapon(0); };
     Game_Actor.prototype.nextActiveWeapon = function() {
@@ -52,6 +53,7 @@ function installBattleMultiWield(sequences) {
         if (!hit) throw new CoreError('BATTLE_WEAPON_CONTEXT', 'The weapon hit has no matching action target.');
         const parent = activeWeapon.get(subject);
         activeWeapon.set(subject, {slot:hit.slot,maximums:action.maximums});
+        subject._cache = {};
         try {
             return invokeAction.call(this, subject, target);
         }

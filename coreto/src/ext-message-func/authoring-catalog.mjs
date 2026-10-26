@@ -1,6 +1,6 @@
 // Extended :eval fields accept JavaScript completion values, including empty scripts.
 function authoredField(field) {
-    return {...field, ...(field.javascript ? {javascript: 'script'} : {}),
+    return {...field, ...(field.javascript ? {javascript: typeof field.javascript === 'object' ? {...field.javascript, kind: 'script'} : 'script'} : {}),
         ...(field.fields ? {fields: field.fields.map(authoredField)} : {}),
         ...(field.items ? {items: authoredField(field.items)} : {})};
 }

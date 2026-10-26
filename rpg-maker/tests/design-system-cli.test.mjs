@@ -7,10 +7,11 @@ import {join, resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {parsePluginsFile} from '../../coreto/tools/coreto/plugins-file.mjs';
-import {hash, preset, pluginId} from '../../.agents/skills/game-coreto-eng-design-system/scripts/shared.mjs';
+import {hash, loadPreset, pluginId} from '../../.agents/skills/game-coreto-eng-design-system/scripts/shared.mjs';
 
 const game=resolve(process.env.DRYLAND_GAME_ROOT || 'rpg-maker/The Dryland Drowned');
 const coreto=resolve('coreto');
+const preset=await loadPreset(coreto);
 const scripts=resolve('.agents/skills/game-coreto-eng-design-system/scripts');
 function run(project,script,args=[],success=true){
   const result=spawnSync(process.execPath,[join(scripts,script),'--coreto',coreto,'--project',project,...args,'--json'],{encoding:'utf8',maxBuffer:8*1024*1024});

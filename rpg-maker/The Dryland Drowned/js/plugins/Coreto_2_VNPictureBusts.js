@@ -262,13 +262,13 @@
  * @arg EndOffsetX:eval
  * @text End Offset X
  * @parent PictureID:arrayeval
- * @desc Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots.
+ * @desc Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots.
  * @default -200
  *
  * @arg EndOffsetY:eval
  * @text End Offset Y
  * @parent PictureID:arrayeval
- * @desc Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement.
+ * @desc Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement.
  * @default +0
  *
  * @arg EasingType:str
@@ -327,7 +327,7 @@
  * @text Auto-Erase?
  * @parent Duration:eval
  * @type boolean
- * @desc When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work.
+ * @desc When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work.
  * @default true
  * @on Auto-Erase
  * @off Don't Erase
@@ -485,8 +485,7 @@
  *
  * @command Breathing_Disable
  * @text BREATHING: Stop
- * @desc Stops breathing aspect for selected bust(s).
- * The bust graphic becomes static.
+ * @desc Disables only breathing on selected existing pictures; other effects and movement continue.
  *
  * @arg PictureID:arrayeval
  * @text Picture ID(s)
@@ -539,7 +538,7 @@
  * @text Auto-Erase?
  * @parent Duration:eval
  * @type boolean
- * @desc When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work.
+ * @desc When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work.
  * @default false
  * @on Auto-Erase
  * @off Don't Erase
@@ -636,13 +635,12 @@
  * @arg RateY:eval
  * @text Distance Y
  * @parent Rate
- * @desc Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not-5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied.
+ * @desc Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not -5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied.
  * @default 0.00
  *
  * @command Fidgeting_Disable
  * @text FIDGETING: Stop
- * @desc Stops fidgeting aspect for selected bust(s).
- * The bust graphic becomes stationary.
+ * @desc Disables only fidgeting on selected existing pictures; other effects and movement continue.
  *
  * @arg PictureID:arrayeval
  * @text Picture ID(s)
@@ -1136,8 +1134,7 @@
  *
  * @command Swaying_Disable
  * @text SWAYING: Stop
- * @desc Stops swaying aspect for selected bust(s).
- * The no longer sways back and forth.
+ * @desc Disables only swaying on selected existing pictures; native rotation and other effects continue.
  *
  * @arg PictureID:arrayeval
  * @text Picture ID(s)
@@ -1206,7 +1203,7 @@
  *
  * @command Tone_PresetBust
  * @text TONE: Preset Tone for Bust(s)
- * @desc Use RPG Maker MZ's present tones/tints for bust(s).
+ * @desc Applies a named RPG Maker MZ tone preset to existing pictures.
  *
  * @arg PictureID:arrayeval
  * @text Picture ID(s)
@@ -1327,10 +1324,10 @@ const catalog = {
           "0.5"
         ]
       },
-      "context": "plugin configuration",
+      "context": "JSON number: anchor fraction of the picture image, 0=left, 0.5=center, 1=right. Values outside 0..1 place the anchor outside the image; VN applies no clamp. Used by Basic_EnterBust with Origin=Bust and Basic_OriginChange with Origin=Bust, not by Center or Upper Left. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
-        "0.5"
+        "vn parameters set --path /AnchorX --value 0.5 --json"
       ]
     },
     {
@@ -1356,10 +1353,10 @@ const catalog = {
           "1.0"
         ]
       },
-      "context": "plugin configuration",
+      "context": "JSON number: anchor fraction of the picture image, 0=top, 0.5=middle, 1=bottom. Values outside 0..1 place the anchor outside the image; VN applies no clamp. Used by Basic_EnterBust with Origin=Bust and Basic_OriginChange with Origin=Bust, not by Center or Upper Left. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
-        "1.0"
+        "vn parameters set --path /AnchorY --value 1 --json"
       ]
     },
     {
@@ -1385,10 +1382,10 @@ const catalog = {
           "100"
         ]
       },
-      "context": "plugin configuration",
+      "context": "JSON number in scale percentage points: 100 is original size, 50 is half, 0 collapses this axis and a negative value reverses it. Used by new Basic_EnterBust pictures and Scale_ScaleReset; changing configuration does not rescale existing pictures. Enter multiplies ScaleX by its horizontal-mirror sign and uses ScaleY independently. ScaleReset multiplies each configured value by +1 when the current axis scale is positive, otherwise by -1, including zero. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
-        "100"
+        "vn parameters set --path /ScaleX --value 120 --json"
       ]
     },
     {
@@ -1414,10 +1411,10 @@ const catalog = {
           "100"
         ]
       },
-      "context": "plugin configuration",
+      "context": "JSON number in scale percentage points: 100 is original size, 50 is half, 0 collapses this axis and a negative value reverses it. Used by new Basic_EnterBust pictures and Scale_ScaleReset; changing configuration does not rescale existing pictures. Enter multiplies ScaleX by its horizontal-mirror sign and uses ScaleY independently. ScaleReset multiplies each configured value by +1 when the current axis scale is positive, otherwise by -1, including zero. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
-        "100"
+        "vn parameters set --path /ScaleY --value 120 --json"
       ]
     },
     {
@@ -1449,7 +1446,7 @@ const catalog = {
           "[\"0\",\"1\",\"2\",\"3\",\"4\"]"
         ]
       },
-      "context": "JSON array of integer logical positions 0..10 used by Auto mirroring. With the default ScreenX function and a viewport wider than 400 pixels, position 0 is X=200, position 5 is screen center, position 10 is X=Graphics.width-200. ScreenY defaults to Graphics.height+5. Custom ScreenX/ScreenY functions can redefine those coordinates. Auto mirrors positions included in this array; Auto-Reverse mirrors positions not included. Example [0,1,2,3,4] mirrors the default left-side slots.",
+      "context": "JSON array of integer logical positions 0..10 used by Auto mirroring. With the default ScreenX function and a viewport wider than 400 pixels, position 0 is X=200, position 5 is screen center, position 10 is X=Graphics.width-200. ScreenY defaults to Graphics.height+5. Custom ScreenX/ScreenY functions can redefine those coordinates. Auto mirrors positions included in this array; Auto-Reverse mirrors positions not included. Example [0,1,2,3,4] mirrors the default left-side slots. CLI accepts a JSON array of numbers from 0 to 10; choose integers because cached positions are integers. An empty array mirrors no slot in Auto and every slot in Auto-Reverse. Membership is exact, duplicates do not add an effect. Reset the whole /InvertedScale list: entries have no individual native default, so reset by index is unavailable. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
         "vn parameters set --path /InvertedScale --value '[0,1,2,3,4]' --json"
@@ -1481,7 +1478,7 @@ const catalog = {
           "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst bufferX = 200;\\nconst width = Graphics.width - (bufferX * 2);\\n\\n// Calculate X Position\\nlet x = Math.round(position * width / 10) + bufferX;\\nx = x.clamp(bufferX, Graphics.width - bufferX);\\n\\n// Return X Value\\nreturn x;\""
         ]
       },
-      "context": "JavaScript function body called as Coreto.VNPictureBusts.Settings.ScreenX(position), with this=Settings and arguments[0]=an integer 0..10. Return a finite pixel coordinate; browser/MZ globals such as Graphics are available, but no local x/y variable is supplied. Declare your own local variables. Enter the raw function body in the MZ note editor; for the CLI, provide one JSON string containing that body, without manually double-encoding the native note. All11 coordinates are evaluated, rounded and cached together on first lookup. Changing Settings later does not invalidate that cache; restart the game after parameter edits.",
+      "context": "JavaScript function body called as Coreto.VNPictureBusts.Settings.ScreenX(position), with this=Settings and arguments[0]=an integer 0..10. Return a finite pixel coordinate; browser/MZ globals such as Graphics are available, but no local x/y variable is supplied. Declare your own local variables. Enter the raw function body in the MZ note editor; for the CLI, provide one JSON string containing that body, without manually double-encoding the native note. All 11 coordinates are evaluated, rounded and cached together on first lookup. Changing Settings later does not invalidate that cache; restart the game after parameter edits. The return value is rounded, not clamped or checked for finiteness by VN. Exceptions propagate from the first coordinate lookup. Empty function source yields 0 in the fallback converter; use an explicit return body for portable authored configuration. The coordinate cache belongs to ImageManager and is not invalidated by new game, save load or resize. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
         "vn parameters set --path /ScreenX --value '\"const position = arguments[0]; return 200 + position * (Graphics.width - 400) / 10;\"' --json"
@@ -1513,7 +1510,7 @@ const catalog = {
           "\"// Declare Arguments\\nconst position = arguments[0].clamp(0, 10);\\n\\n// Declare Variables\\nconst stagger = 0;\\nconst difference = 5 - Math.abs(5 - position);\\nlet y = Graphics.height;\\n\\n// Calculate Y Position\\ny = Graphics.height + Math.round(difference * stagger) + 5;\\n\\n// Return Y Value\\nreturn y;\""
         ]
       },
-      "context": "JavaScript function body called as Coreto.VNPictureBusts.Settings.ScreenY(position), with this=Settings and arguments[0]=an integer 0..10. Return a finite pixel coordinate; browser/MZ globals such as Graphics are available, but no local x/y variable is supplied. Declare your own local variables. Enter the raw function body in the MZ note editor; for the CLI, provide one JSON string containing that body, without manually double-encoding the native note. All11 coordinates are evaluated, rounded and cached together on first lookup. Changing Settings later does not invalidate that cache; restart the game after parameter edits.",
+      "context": "JavaScript function body called as Coreto.VNPictureBusts.Settings.ScreenY(position), with this=Settings and arguments[0]=an integer 0..10. Return a finite pixel coordinate; browser/MZ globals such as Graphics are available, but no local x/y variable is supplied. Declare your own local variables. Enter the raw function body in the MZ note editor; for the CLI, provide one JSON string containing that body, without manually double-encoding the native note. All 11 coordinates are evaluated, rounded and cached together on first lookup. Changing Settings later does not invalidate that cache; restart the game after parameter edits. The return value is rounded, not clamped or checked for finiteness by VN. Exceptions propagate from the first coordinate lookup. Empty function source yields 0 in the fallback converter; use an explicit return body for portable authored configuration. The coordinate cache belongs to ImageManager and is not invalidated by new game, save load or resize. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
         "vn parameters set --path /ScreenY --value '\"return Graphics.height + 5;\"' --json"
@@ -1542,7 +1539,7 @@ const catalog = {
           "[34, 34, 34, 0]"
         ]
       },
-      "context": "Four finite numeric components [red, green, blue, gray]. Use RGB offsets -255..255: negative subtracts color, positive adds color, zero is neutral. Use gray 0..255: zero preserves saturation and 255 is grayscale. Example [34,34,34,0]. Supply a JavaScript source string to eval-encoded fields; this is not a hex color or RGBA alpha. This configured array is used by Tone_BrightBust or Tone_DimBust respectively; changing it does not automatically tint existing pictures.",
+      "context": "Four finite numeric components [red, green, blue, gray]. Use RGB offsets -255..255: negative subtracts color, positive adds color, zero is neutral. Use gray 0..255: zero preserves saturation and 255 is grayscale. Example [34,34,34,0]. Supply a JavaScript source string to eval-encoded fields; this is not a hex color or RGBA alpha. This configured array is used by Tone_BrightBust or Tone_DimBust respectively; changing it does not automatically tint existing pictures. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
         "vn parameters set --path /brightTone --value '\"[34, 34, 34, 0]\"' --json"
@@ -1571,7 +1568,7 @@ const catalog = {
           "[-34, -34, 0, 34]"
         ]
       },
-      "context": "Four finite numeric components [red, green, blue, gray]. Use RGB offsets -255..255: negative subtracts color, positive adds color, zero is neutral. Use gray 0..255: zero preserves saturation and 255 is grayscale. Example [34,34,34,0]. Supply a JavaScript source string to eval-encoded fields; this is not a hex color or RGBA alpha. This configured array is used by Tone_BrightBust or Tone_DimBust respectively; changing it does not automatically tint existing pictures.",
+      "context": "Four finite numeric components [red, green, blue, gray]. Use RGB offsets -255..255: negative subtracts color, positive adds color, zero is neutral. Use gray 0..255: zero preserves saturation and 255 is grayscale. Example [34,34,34,0]. Supply a JavaScript source string to eval-encoded fields; this is not a hex color or RGBA alpha. This configured array is used by Tone_BrightBust or Tone_DimBust respectively; changing it does not automatically tint existing pictures. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The effective value is read at plugin boot. Missing keys use nativeDefault; an explicit zero or empty value is not a missing key. parameters reset restores the full native default for this field. The first functional set/reset under inherit materializes effective parameters and selects own; reload the editor and restart the game after changing configuration. Parameter edits do not rewrite existing picture state saved in a slot.",
       "availability": "implemented",
       "examples": [
         "vn parameters set --path /dimTone --value '\"[-34, -34, 0, 34]\"' --json"
@@ -1595,7 +1592,7 @@ const catalog = {
           "Generic entrance for ONE picture bust.\nWalks in from a little behind and fades in."
         ]
       },
-      "context": "map/common-event/troop interpreter Picture image name relative to img/pictures, without .png; for example Bust loads img/pictures/Bust.png. Supply an existing image. >>>ATTENTION<<< is a native placeholder, not a supplied asset. The example assumes img/pictures/Bust.png exists; replace Bust with your own image name. Mirror always mirrors; None does not. Auto mirrors when the bust logical position is included in Settings.InvertedScale; Auto-Reverse mirrors when it is absent. Toggle, where offered, reverses the current horizontal scale. These choices do not change image files. Bust origin uses the configured AnchorX/AnchorY. Position must be an integer 0..10 selecting the cached ScreenX/ScreenY coordinates.",
+      "context": "map/common-event/troop interpreter Picture image name relative to img/pictures, without .png; for example Bust loads img/pictures/Bust.png. Supply an existing image. >>>ATTENTION<<< is a native placeholder, not a supplied asset. The example assumes img/pictures/Bust.png exists; replace Bust with your own image name. Mirror always mirrors; None does not. Auto mirrors when the bust logical position is included in Settings.InvertedScale; Auto-Reverse mirrors when it is absent. Toggle, where offered, reverses the current horizontal scale. These choices do not change image files. Bust origin uses the configured AnchorX/AnchorY. Position must be an integer 0..10 selecting the cached ScreenX/ScreenY coordinates. Creates or replaces one Game_Picture in the current map/battle bank, resetting the old picture and effects. Starts at opacity 0 and moves to opacity 255 with normal blend mode. Blank PictureName does nothing. Position selects the cached ScreenX/ScreenY coordinates (VN-P06/VN-P07); configured scales come from VN-P03/VN-P04. The command does not wait. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -1617,7 +1614,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Basic_EnterBust --value '{\"PictureID\":\"1\",\"PictureName\":\"Bust\",\"Origin\":\"Bust\",\"Position\":0,\"StartOffsetX\":\"-200\",\"StartOffsetY\":\"+0\",\"EasingType\":\"OutSine\",\"HorzMirror\":\"Auto\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -1640,7 +1639,7 @@ const catalog = {
               "1"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "1"
@@ -1675,10 +1674,10 @@ const catalog = {
               ">>>ATTENTION<<<"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
-            ">>>ATTENTION<<<"
+            "\"Bust\""
           ]
         },
         {
@@ -1712,7 +1711,7 @@ const catalog = {
               "Bust"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "Bust"
@@ -1744,7 +1743,7 @@ const catalog = {
               "0"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a finite JSON number, not a JavaScript string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use an integer 0..10. The CLI accepts finite numbers in that interval, but VN cache has only integer entries; fractional positions have no cached coordinates and can throw. Runtime clamps to the interval without rounding. Default ScreenX positions span from X=200 to Graphics.width-200; ScreenY is Graphics.height+5. VN-P06/VN-P07 can change that layout.",
           "availability": "implemented",
           "examples": [
             "0"
@@ -1773,7 +1772,7 @@ const catalog = {
               "-200"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "-200"
@@ -1802,7 +1801,7 @@ const catalog = {
               "+0"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "+0"
@@ -1867,7 +1866,7 @@ const catalog = {
               "OutSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "OutSine"
@@ -1902,7 +1901,7 @@ const catalog = {
               "Auto"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "Auto"
@@ -1928,7 +1927,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_EnterBust; query vn api describe VN-C01 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Enter/Exit pass this duration to native movePicture unchanged. Use a positive integer; 0 does not run interpolation and does not guarantee applying the target immediately. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -2145,7 +2144,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C02",
@@ -2163,7 +2163,7 @@ const catalog = {
           "Generic exit for picture bust(s).\nWalks back and fades out."
         ]
       },
-      "context": "map/common-event/troop interpreter AutoErase: When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work.",
+      "context": "map/common-event/troop interpreter AutoErase: When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work. Acts on existing pictures in the current bank, fades to opacity 0, sets normal blend mode and marks the logical position -1. Offsets start from base _x/_y, excluding breathing/fidget offsets and map-scroll rendering transforms. Retains anchors. Missing pictures are skipped. Does not wait. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -2183,7 +2183,9 @@ const catalog = {
               "AutoErase:eval": "true"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Basic_ExitBusts --value '{\"PictureID\":[\"1\"],\"EndOffsetX\":\"-200\",\"EndOffsetY\":\"+0\",\"EasingType\":\"InSine\",\"FlipDirection\":\"None\",\"Duration\":\"20\",\"AutoErase\":\"true\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -2209,7 +2211,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -2221,7 +2223,7 @@ const catalog = {
           "storageKey": "EndOffsetX:eval",
           "surface": "argument",
           "label": "End Offset X",
-          "description": "Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots.",
+          "description": "Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots.",
           "encoding": "eval",
           "nativeDefault": "-200",
           "metadata": {
@@ -2232,13 +2234,13 @@ const catalog = {
               "PictureID:arrayeval"
             ],
             "desc": [
-              "Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots."
+              "Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots."
             ],
             "default": [
               "-200"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "-200"
@@ -2250,7 +2252,7 @@ const catalog = {
           "storageKey": "EndOffsetY:eval",
           "surface": "argument",
           "label": "End Offset Y",
-          "description": "Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement.",
+          "description": "Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement.",
           "encoding": "eval",
           "nativeDefault": "+0",
           "metadata": {
@@ -2261,13 +2263,13 @@ const catalog = {
               "PictureID:arrayeval"
             ],
             "desc": [
-              "Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement."
+              "Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement."
             ],
             "default": [
               "+0"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "+0"
@@ -2332,7 +2334,7 @@ const catalog = {
               "InSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "InSine"
@@ -2368,7 +2370,7 @@ const catalog = {
               "None"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "None"
@@ -2394,7 +2396,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Enter/Exit pass this duration to native movePicture unchanged. Use a positive integer; 0 does not run interpolation and does not guarantee applying the target immediately. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -2406,7 +2408,7 @@ const catalog = {
           "storageKey": "AutoErase:eval",
           "surface": "argument",
           "label": "Auto-Erase?",
-          "description": "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work.",
+          "description": "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work.",
           "encoding": "eval",
           "nativeDefault": "true",
           "metadata": {
@@ -2420,7 +2422,7 @@ const catalog = {
               "boolean"
             ],
             "desc": [
-              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work."
+              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work."
             ],
             "default": [
               "true"
@@ -2432,7 +2434,7 @@ const catalog = {
               "Don't Erase"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_ExitBusts; query vn api describe VN-C02 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use a JavaScript boolean completion value. false does not cancel a previous pending AutoErase. A valid pending intent and remaining retry budget are saved; load rebinds it to the restored picture. Transparent pictures without an intent are not erased on load.",
           "availability": "implemented",
           "examples": [
             "true"
@@ -2467,7 +2469,7 @@ const catalog = {
               "PictureID:arrayeval"
             ],
             "desc": [
-              "Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots."
+              "Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Horizontal displacement is value * (mirrored ? 1 : -1), where mirrored means whether the current horizontal picture scale is negative, before this command applies FlipDirection. Thus +100 starts/ends 100 pixels right when mirrored and 100 pixels left otherwise; -100 reverses those directions. Zero adds no displacement. This does not use image width, percentages or logical position slots."
             ],
             "default": [
               "-200"
@@ -2484,7 +2486,7 @@ const catalog = {
               "PictureID:arrayeval"
             ],
             "desc": [
-              "Finite numeric JavaScript offset in pixels from the current displayed picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement."
+              "Finite numeric JavaScript offset in pixels from the current base picture X/Y when this command runs, even during an unfinished movement. Positive moves down and negative moves up regardless of horizontal mirroring; +100 means 100 pixels down, -100 means 100 pixels up, and zero adds no displacement."
             ],
             "default": [
               "+0"
@@ -2595,7 +2597,7 @@ const catalog = {
               "boolean"
             ],
             "desc": [
-              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work."
+              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work."
             ],
             "default": [
               "true"
@@ -2611,7 +2613,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C03",
@@ -2629,7 +2632,7 @@ const catalog = {
           "Changes ONE bust's graphic without changing any of its other\nproperties. Useful for quickly changing facial expressions."
         ]
       },
-      "context": "map/common-event/troop interpreter Picture image name relative to img/pictures, without .png; for example Bust loads img/pictures/Bust.png. Supply an existing image. >>>ATTENTION<<< is a native placeholder, not a supplied asset. The example assumes img/pictures/Bust.png exists; replace Bust with your own image name.",
+      "context": "map/common-event/troop interpreter Picture image name relative to img/pictures, without .png; for example Bust loads img/pictures/Bust.png. Supply an existing image. >>>ATTENTION<<< is a native placeholder, not a supplied asset. The example assumes img/pictures/Bust.png exists; replace Bust with your own image name. Uses the exact PictureID without the usual 1..100 clamp. Missing picture or blank PictureName does nothing. Loads the replacement asynchronously, then changes only the name; the newest request wins and a replaced/erased picture cannot receive the old request. Does not wait for loading. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -2644,7 +2647,9 @@ const catalog = {
               "PictureName:str": "Bust"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Basic_GraphicChange --value '{\"PictureID\":\"1\",\"PictureName\":\"Bust\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -2667,7 +2672,7 @@ const catalog = {
               "1"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_GraphicChange; query vn api describe VN-C03 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Uses exact numeric logical IDs in the current map/battle picture bank, without rounding or the usual 1..100 clamp. Missing pictures do nothing.",
           "availability": "implemented",
           "examples": [
             "1"
@@ -2699,10 +2704,10 @@ const catalog = {
               ">>>ATTENTION<<<"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_GraphicChange; query vn api describe VN-C03 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
-            ">>>ATTENTION<<<"
+            "\"Bust\""
           ]
         }
       ],
@@ -2744,7 +2749,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C04",
@@ -2762,7 +2768,7 @@ const catalog = {
           "Change the facing direction the bust(s).\nThis alters the horizontal scaling of the bust(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter Mirror always mirrors; None does not. Auto mirrors when the bust logical position is included in Settings.InvertedScale; Auto-Reverse mirrors when it is absent. Toggle, where offered, reverses the current horizontal scale. These choices do not change image files.",
+      "context": "map/common-event/troop interpreter Mirror always mirrors; None does not. Auto mirrors when the bust logical position is included in Settings.InvertedScale; Auto-Reverse mirrors when it is absent. Toggle, where offered, reverses the current horizontal scale. These choices do not change image files. Changes current horizontal scale immediately and replaces its target with that value, cancelling any pending scale-X destination. Other pending transform targets and duration remain. Auto uses the stored logical slot, not current pixel X. Missing pictures are skipped. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -2777,7 +2783,9 @@ const catalog = {
               "HorzMirror:str": "Toggle"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Basic_MirrorBust --value '{\"PictureID\":[\"1\"],\"HorzMirror\":\"Toggle\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -2803,7 +2811,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_MirrorBust; query vn api describe VN-C04 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -2839,7 +2847,7 @@ const catalog = {
               "Toggle"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_MirrorBust; query vn api describe VN-C04 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "Toggle"
@@ -2891,7 +2899,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C05",
@@ -2909,7 +2918,7 @@ const catalog = {
           "Change the origin/anchor for bust(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter Bust uses plugin parameters AnchorX (vn api describe VN-P01) and AnchorY (vn api describe VN-P02): fractional image anchors, X 0=left, 0.5=center, 1=right; Y 0=top, 0.5=middle, 1=bottom. Configure these in the Coreto VN Picture Busts Plugin Manager entry using CoretoConfigSource=own, then restart playtest. For example AnchorX=0.5 and AnchorY=1 anchors the bottom center. Center uses (0.5,0.5); Upper Left uses (0,0), independent of those parameters. This command changes the selected existing pictures over Duration frames; it does not edit global Anchor parameters.",
+      "context": "map/common-event/troop interpreter Bust uses plugin parameters AnchorX (vn api describe VN-P01) and AnchorY (vn api describe VN-P02): fractional image anchors, X 0=left, 0.5=center, 1=right; Y 0=top, 0.5=middle, 1=bottom. Configure these in the Coreto VN Picture Busts Plugin Manager entry using CoretoConfigSource=own, then restart playtest. For example AnchorX=0.5 and AnchorY=1 anchors the bottom center. Center uses (0.5,0.5); Upper Left uses (0,0), independent of those parameters. This command changes the selected existing pictures over Duration frames; it does not edit global Anchor parameters. Sets the target anchor, keeps current position and other transform targets, and restarts the shared transform duration with Linear easing. Does not wait; missing pictures are skipped. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -2925,7 +2934,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Basic_OriginChange --value '{\"PictureID\":[\"1\"],\"Origin\":\"Bust\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -2951,7 +2962,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_OriginChange; query vn api describe VN-C05 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -2988,7 +2999,7 @@ const catalog = {
               "Bust"
             ]
           },
-          "context": "map/common-event/troop interpreter Bust uses plugin parameters AnchorX (vn api describe VN-P01) and AnchorY (vn api describe VN-P02): fractional image anchors, X 0=left, 0.5=center, 1=right; Y 0=top, 0.5=middle, 1=bottom. Configure these in the Coreto VN Picture Busts Plugin Manager entry using CoretoConfigSource=own, then restart playtest. For example AnchorX=0.5 and AnchorY=1 anchors the bottom center. Center uses (0.5,0.5); Upper Left uses (0,0), independent of those parameters. This command changes the selected existing pictures over Duration frames; it does not edit global Anchor parameters.",
+          "context": "map/common-event/troop interpreter Bust uses plugin parameters AnchorX (vn api describe VN-P01) and AnchorY (vn api describe VN-P02): fractional image anchors, X 0=left, 0.5=center, 1=right; Y 0=top, 0.5=middle, 1=bottom. Configure these in the Coreto VN Picture Busts Plugin Manager entry using CoretoConfigSource=own, then restart playtest. For example AnchorX=0.5 and AnchorY=1 anchors the bottom center. Center uses (0.5,0.5); Upper Left uses (0,0), independent of those parameters. This command changes the selected existing pictures over Duration frames; it does not edit global Anchor parameters. Argument of Basic_OriginChange; query vn api describe VN-C05 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "Bust"
@@ -3014,7 +3025,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_OriginChange; query vn api describe VN-C05 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -3081,7 +3092,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C06",
@@ -3099,7 +3111,7 @@ const catalog = {
           "Plays a specific battle animation on bust(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Requires an existing $dataAnimations AnimationID and drawable pictures in the current spriteset; exact IDs are used without the usual clamp. MZ and MV animations use their native animation/effect/audio assets. Missing targets are omitted and an invalid animation does nothing. If VisuMZ_1_BattleCore is present, it must precede VN and have version >=1.47; otherwise the command is rejected by its runtime version gate. Requests are FIFO. WaitForAnimation=true first processes queued requests and waits for the spriteset to have no active VN picture animations, including other active VN requests; false continues immediately. Scene termination clears the queue and active VN effects. Save/load does not recreate these transient animations or an orphan wait. Mirror affects animation artwork, not bust scale. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -3116,7 +3128,9 @@ const catalog = {
               "WaitForAnimation:eval": "false"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Basic_PlayAniBust --value '{\"PictureID\":[\"1\"],\"AnimationID\":1,\"Mirror\":\"false\",\"WaitForAnimation\":\"false\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -3142,7 +3156,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_PlayAniBust; query vn api describe VN-C06 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Uses exact numeric logical IDs in the current map/battle picture bank, without rounding or the usual 1..100 clamp. Missing pictures do nothing.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -3174,7 +3188,7 @@ const catalog = {
               "1"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_PlayAniBust; query vn api describe VN-C06 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a finite JSON number, not a JavaScript string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A positive integer ID in data/Animations.json; it must refer to an existing MZ/MV animation. This is not a filename. Supply that animation effects/images/audio in the game; the CLI validates the static database reference but does not play its assets.",
           "availability": "implemented",
           "examples": [
             "1"
@@ -3212,7 +3226,7 @@ const catalog = {
               "Normal"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_PlayAniBust; query vn api describe VN-C06 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use a JavaScript boolean completion value: true mirrors the animation and false leaves its normal orientation. It does not change the bust image or horizontal scale.",
           "availability": "implemented",
           "examples": [
             "false"
@@ -3247,7 +3261,7 @@ const catalog = {
               "Don't Wait"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Basic_PlayAniBust; query vn api describe VN-C06 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use a JavaScript boolean completion value. true processes the queue then waits until no VN picture animations remain active in the spriteset, including other current VN animations; false continues without waiting. Missing targets/invalid animation do not leave an infinite wait.",
           "availability": "implemented",
           "examples": [
             "false"
@@ -3345,7 +3359,8 @@ const catalog = {
       "dependencies": [
         "Core Engine",
         "Battle Core >=1.47 when installed"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C07",
@@ -3363,7 +3378,7 @@ const catalog = {
           "Start breathing aspect for selected bust(s).\nMakes it look like the bust graphic is more alive."
         ]
       },
-      "context": "map/common-event/troop interpreter Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects add to the base transform and use the shared Graphics.frameCount, not elapsed time since enabling. Breathing uses scale percentage points, fidgeting uses pixels and swaying uses degrees; each argument describes its formula.",
+      "context": "map/common-event/troop interpreter Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects add to the base transform and use the shared Graphics.frameCount, not elapsed time since enabling. Breathing uses scale percentage points, fidgeting uses pixels and swaying uses degrees; each argument describes its formula. Enables only breathing and replaces its speed/rate values with this command payload. Existing fidgeting, swaying, movement and rotation remain active. Settings persist with the picture in a save until replaced/erased; the phase uses the current Graphics.frameCount after load. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -3381,7 +3396,9 @@ const catalog = {
               "RateY:eval": "0.80"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Breathing_Enable --value '{\"PictureID\":[\"1\"],\"SpeedX\":\"20\",\"SpeedY\":\"30\",\"RateX\":\"0.10\",\"RateY\":\"0.80\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -3407,7 +3424,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Breathing_Enable; query vn api describe VN-C07 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -3436,7 +3453,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Breathing_Enable; query vn api describe VN-C07 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "20"
@@ -3465,7 +3482,7 @@ const catalog = {
               "30"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Breathing_Enable; query vn api describe VN-C07 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "30"
@@ -3494,7 +3511,7 @@ const catalog = {
               "0.10"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Breathing_Enable; query vn api describe VN-C07 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "0.10"
@@ -3523,7 +3540,7 @@ const catalog = {
               "0.80"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Breathing_Enable; query vn api describe VN-C07 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "0.80"
@@ -3627,7 +3644,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C08",
@@ -3635,17 +3653,17 @@ const catalog = {
       "storageKey": "Breathing_Disable",
       "surface": "command",
       "label": "BREATHING: Stop",
-      "description": "Stops breathing aspect for selected bust(s).\nThe bust graphic becomes static.",
+      "description": "Disables only breathing on selected existing pictures; other effects and movement continue.",
       "nativeDefault": "",
       "metadata": {
         "text": [
           "BREATHING: Stop"
         ],
         "desc": [
-          "Stops breathing aspect for selected bust(s).\nThe bust graphic becomes static."
+          "Disables only breathing on selected existing pictures; other effects and movement continue."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Disables only the additive breathing offset; keeps its speed/rate settings and base scale. Fidgeting, swaying and pending transforms remain active. A later enable uses that enable command payload, not these retained values. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -3659,7 +3677,9 @@ const catalog = {
               "PictureID:arrayeval": "[\"1\"]"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Breathing_Disable --value '{\"PictureID\":[\"1\"]}' --dry-run --json"
       ],
       "args": [
         {
@@ -3685,7 +3705,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Breathing_Disable; query vn api describe VN-C08 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -3713,7 +3733,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C09",
@@ -3731,7 +3752,7 @@ const catalog = {
           "Brings selected picture bust(s) opacity levels to 255."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Sets target opacity 255 with Linear easing. Retains position/scale/anchor targets but restarts their shared duration. Does not cancel an existing AutoErase request; a picture still at opacity 0 may be erased by that request before the fade makes it visible. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -3746,7 +3767,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Fade_FadeIn --value '{\"PictureID\":[\"1\"],\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -3772,7 +3795,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_FadeIn; query vn api describe VN-C09 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -3798,7 +3821,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_FadeIn; query vn api describe VN-C09 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -3840,7 +3863,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C10",
@@ -3858,7 +3882,7 @@ const catalog = {
           "Brings selected picture bust(s) opacity levels to 0."
         ]
       },
-      "context": "map/common-event/troop interpreter AutoErase: When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work.",
+      "context": "map/common-event/troop interpreter AutoErase: When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work. Sets target opacity 0 with Linear easing. Retains position/scale/anchor targets but restarts their shared duration. AutoErase=false leaves this call without a new erase request; it does not cancel a previously scheduled request. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -3874,7 +3898,9 @@ const catalog = {
               "AutoErase:eval": "false"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Fade_FadeOut --value '{\"PictureID\":[\"1\"],\"Duration\":\"20\",\"AutoErase\":\"false\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -3900,7 +3926,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_FadeOut; query vn api describe VN-C10 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -3926,7 +3952,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_FadeOut; query vn api describe VN-C10 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -3938,7 +3964,7 @@ const catalog = {
           "storageKey": "AutoErase:eval",
           "surface": "argument",
           "label": "Auto-Erase?",
-          "description": "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work.",
+          "description": "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work.",
           "encoding": "eval",
           "nativeDefault": "false",
           "metadata": {
@@ -3952,7 +3978,7 @@ const catalog = {
               "boolean"
             ],
             "desc": [
-              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work."
+              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work."
             ],
             "default": [
               "false"
@@ -3964,7 +3990,7 @@ const catalog = {
               "Don't Erase"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_FadeOut; query vn api describe VN-C10 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use a JavaScript boolean completion value. false does not cancel a previous pending AutoErase. A valid pending intent and remaining retry budget are saved; load rebinds it to the restored picture. Transparent pictures without an intent are not erased on load.",
           "availability": "implemented",
           "examples": [
             "false"
@@ -4016,7 +4042,7 @@ const catalog = {
               "boolean"
             ],
             "desc": [
-              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False leaves the slot present. Replacing/erasing the picture or changing the game screen cancels stale work."
+              "When true, polls the selected picture base opacity immediately and up to 50 further times at 100 ms intervals, erasing once opacity is <=0. This is a finite retry window, nominally about 5 seconds; timer delays may be longer and a long/paused fade can outlast the retries, leaving a transparent picture slot unerased. False schedules no new erase request. Replacing/erasing the picture or changing the game screen cancels stale work."
             ],
             "default": [
               "false"
@@ -4032,7 +4058,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C11",
@@ -4050,7 +4077,7 @@ const catalog = {
           "Adjusts selected picture bust(s) opacity levels relatively."
         ]
       },
-      "context": "map/common-event/troop interpreter Adds the supplied amount to the existing target opacity, not the currently displayed opacity during an unfinished fade. The new target is rounded and clamped to 0..255 (0 transparent, 255 opaque). Negative lowers and positive raises the target. For example a pending target of 0 plus 40 becomes 40 even if the picture is still visibly at 200. Duration sets the new transition from the current displayed value.",
+      "context": "map/common-event/troop interpreter Adds the supplied amount to the existing target opacity, not the currently displayed opacity during an unfinished fade. The new target is rounded and clamped to 0..255 (0 transparent, 255 opaque). Negative lowers and positive raises the target. For example a pending target of 0 plus 40 becomes 40 even if the picture is still visibly at 200. Duration sets the new transition from the current displayed value. Uses Linear easing and the shared transform duration, retaining other transform targets. Does not schedule or cancel AutoErase. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -4066,7 +4093,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Fade_OpacityBy --value '{\"PictureID\":[\"1\"],\"AdjustOpacity\":\"+50\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -4092,7 +4121,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_OpacityBy; query vn api describe VN-C11 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -4118,7 +4147,7 @@ const catalog = {
               "+50"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_OpacityBy; query vn api describe VN-C11 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "+50"
@@ -4144,7 +4173,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_OpacityBy; query vn api describe VN-C11 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -4200,7 +4229,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C12",
@@ -4218,7 +4248,7 @@ const catalog = {
           "Brings selected picture bust(s) opacity levels to a custom value."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Sets target opacity to TargetOpacity, clamped to 0..255, without rounding. Uses Linear easing and the shared transform duration, retaining other transform targets. Does not schedule or cancel AutoErase. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -4234,7 +4264,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Fade_OpacityTo --value '{\"PictureID\":[\"1\"],\"TargetOpacity\":128,\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -4260,7 +4292,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_OpacityTo; query vn api describe VN-C12 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -4295,7 +4327,7 @@ const catalog = {
               "128"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_OpacityTo; query vn api describe VN-C12 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a finite JSON number, not a JavaScript string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  0 is fully transparent and 255 fully opaque; intermediate values are opacity levels, not percentages. CLI bounds are 0..255; runtime clamps without rounding.",
           "availability": "implemented",
           "examples": [
             "128"
@@ -4321,7 +4353,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fade_OpacityTo; query vn api describe VN-C12 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -4386,7 +4418,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C13",
@@ -4404,7 +4437,7 @@ const catalog = {
           "Starts fidgeting aspect for selected bust(s).\nBust graphic moves back and forth."
         ]
       },
-      "context": "map/common-event/troop interpreter Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects add to the base transform and use the shared Graphics.frameCount, not elapsed time since enabling. Breathing uses scale percentage points, fidgeting uses pixels and swaying uses degrees; each argument describes its formula.",
+      "context": "map/common-event/troop interpreter Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects add to the base transform and use the shared Graphics.frameCount, not elapsed time since enabling. Breathing uses scale percentage points, fidgeting uses pixels and swaying uses degrees; each argument describes its formula. Enables only fidgeting and replaces its speed/rate values with this payload. Breathing, swaying and pending transforms remain active. Settings persist with the picture; the global frame clock controls phase after load. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -4422,7 +4455,9 @@ const catalog = {
               "RateY:eval": "0.00"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Fidgeting_Enable --value '{\"PictureID\":[\"1\"],\"SpeedX\":\"30\",\"SpeedY\":\"30\",\"RateX\":\"5.00\",\"RateY\":\"0.00\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -4448,7 +4483,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fidgeting_Enable; query vn api describe VN-C13 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -4477,7 +4512,7 @@ const catalog = {
               "30"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fidgeting_Enable; query vn api describe VN-C13 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "30"
@@ -4506,7 +4541,7 @@ const catalog = {
               "30"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fidgeting_Enable; query vn api describe VN-C13 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "30"
@@ -4535,7 +4570,7 @@ const catalog = {
               "5.00"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fidgeting_Enable; query vn api describe VN-C13 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "5.00"
@@ -4547,7 +4582,7 @@ const catalog = {
           "storageKey": "RateY:eval",
           "surface": "argument",
           "label": "Distance Y",
-          "description": "Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not-5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied.",
+          "description": "Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not -5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied.",
           "encoding": "eval",
           "nativeDefault": "0.00",
           "metadata": {
@@ -4558,13 +4593,13 @@ const catalog = {
               "Rate"
             ],
             "desc": [
-              "Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not-5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied."
+              "Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not -5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied."
             ],
             "default": [
               "0.00"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fidgeting_Enable; query vn api describe VN-C13 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "0.00"
@@ -4662,7 +4697,7 @@ const catalog = {
               "Rate"
             ],
             "desc": [
-              "Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not-5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied."
+              "Vertical displacement range in pixels, computed as cos(phase)*rate/2+rate/2 and added to picture Y. Rate 5 ranges from 0 to 5 pixels, not -5 to +5; negative rates move upward. Use finite numeric JavaScript. Zero disables the component; no extra amplitude clamp is applied."
             ],
             "default": [
               "0.00"
@@ -4672,7 +4707,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C14",
@@ -4680,17 +4716,17 @@ const catalog = {
       "storageKey": "Fidgeting_Disable",
       "surface": "command",
       "label": "FIDGETING: Stop",
-      "description": "Stops fidgeting aspect for selected bust(s).\nThe bust graphic becomes stationary.",
+      "description": "Disables only fidgeting on selected existing pictures; other effects and movement continue.",
       "nativeDefault": "",
       "metadata": {
         "text": [
           "FIDGETING: Stop"
         ],
         "desc": [
-          "Stops fidgeting aspect for selected bust(s).\nThe bust graphic becomes stationary."
+          "Disables only fidgeting on selected existing pictures; other effects and movement continue."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Disables only the additive fidgeting offset; keeps its speed/rate settings and base coordinates. Other effects, movement and rotation continue. A later enable uses that enable command payload. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -4704,7 +4740,9 @@ const catalog = {
               "PictureID:arrayeval": "[\"1\"]"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Fidgeting_Disable --value '{\"PictureID\":[\"1\"]}' --dry-run --json"
       ],
       "args": [
         {
@@ -4730,7 +4768,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Fidgeting_Disable; query vn api describe VN-C14 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -4758,7 +4796,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C15",
@@ -4776,7 +4815,7 @@ const catalog = {
           "Move busts by pixel offsets from their pending target while moving, or from current coordinates while stationary."
         ]
       },
-      "context": "map/common-event/troop interpreter Pixel offset: while picture._duration>0 it adds to the pending target for that axis; otherwise it adds to the current coordinate. Thus consecutive commands can accumulate on an unfinished target. The string Unchanged skips that axis (case-insensitive after trimming). JavaScript source is evaluated per axis; use a finite numeric completion value. Duration starts a new transition and FlipDirection affects horizontal scale, not the offset sign.",
+      "context": "map/common-event/troop interpreter Pixel offset: while picture._duration>0 it adds to the pending target for that axis; otherwise it adds to the current coordinate. Thus consecutive commands can accumulate on an unfinished target. The string Unchanged skips that axis (case-insensitive after trimming). JavaScript source is evaluated per axis; use a finite numeric completion value. Duration starts a new transition and FlipDirection affects horizontal scale, not the offset sign. Leaves the stored logical slot unchanged. Pixel coordinates refer to picture base state; rendering can also apply Core map-scroll behavior and VN fidgeting. Other pending transform targets remain, with duration/easing restarted. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -4795,7 +4834,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Move_MoveByCoordinates --value '{\"PictureID\":[\"1\"],\"MoveX\":\"+100\",\"MoveY\":\"Unchanged\",\"EasingType\":\"InOutSine\",\"FlipDirection\":\"None\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -4821,7 +4862,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByCoordinates; query vn api describe VN-C15 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -4850,7 +4891,7 @@ const catalog = {
               "+100"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByCoordinates; query vn api describe VN-C15 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  This string is evaluated per axis and selected picture inside the VN handler, after the Unchanged sentinel check. Supply a JavaScript script with a finite numeric completion value, not a return body. No interpreter receiver is supplied (this is undefined in the strict helper); the selected Game_Picture is the local picture, and MZ globals are available. The CLI compiles syntax without running it. Errors are caught per axis and logged only in playtest; that axis keeps its previous target while the remaining axes, duration and flip are still processed.",
           "availability": "implemented",
           "examples": [
             "+100"
@@ -4879,7 +4920,7 @@ const catalog = {
               "Unchanged"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByCoordinates; query vn api describe VN-C15 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  This string is evaluated per axis and selected picture inside the VN handler, after the Unchanged sentinel check. Supply a JavaScript script with a finite numeric completion value, not a return body. No interpreter receiver is supplied (this is undefined in the strict helper); the selected Game_Picture is the local picture, and MZ globals are available. The CLI compiles syntax without running it. Errors are caught per axis and logged only in playtest; that axis keeps its previous target while the remaining axes, duration and flip are still processed.",
           "availability": "implemented",
           "examples": [
             "Unchanged"
@@ -4944,7 +4985,7 @@ const catalog = {
               "InOutSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByCoordinates; query vn api describe VN-C15 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "InOutSine"
@@ -4980,7 +5021,7 @@ const catalog = {
               "None"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByCoordinates; query vn api describe VN-C15 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "None"
@@ -5006,7 +5047,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByCoordinates; query vn api describe VN-C15 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -5159,7 +5200,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C16",
@@ -5177,7 +5219,7 @@ const catalog = {
           "Move bust(s) relative to current position(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter Numeric JavaScript displacement in logical position slots, added to getVnBustPosition(); the final sum is clamped to 0..10, not the displacement itself. Use whole-number changes such as -1, 0 or +1 so the target has cached coordinates. There is no Unchanged sentinel for this eval field: use 0 to retain the logical position. A raw Unchanged identifier can fail during argument evaluation.",
+      "context": "map/common-event/troop interpreter Numeric JavaScript displacement in logical position slots, added to getVnBustPosition(); the final sum is clamped to 0..10, not the displacement itself. Use whole-number changes such as -1, 0 or +1 so the target has cached coordinates. There is no Unchanged sentinel for this eval field: use 0 to retain the logical position. A raw Unchanged identifier can fail during argument evaluation. Adds to the stored logical slot and stores the clamped target slot immediately, before the visible transition completes. Cached ScreenX/ScreenY (VN-P06/VN-P07) supply both coordinate targets. This does not reapply Auto mirroring; FlipDirection controls an explicit sign change. Missing pictures are skipped. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -5195,7 +5237,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Move_MoveByPosition --value '{\"PictureID\":[\"1\"],\"MovePosition\":\"+1\",\"EasingType\":\"InOutSine\",\"FlipDirection\":\"None\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -5221,7 +5265,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByPosition; query vn api describe VN-C16 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -5250,7 +5294,7 @@ const catalog = {
               "+1"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByPosition; query vn api describe VN-C16 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  After initial argument conversion, the handler calls eval on the converted value again per picture; an ordinary numeric value remains numeric. Prefer an expression producing a number directly. The second evaluation/coordinate lookup catches failures, reports them in playtest and retains the old destination; duration and FlipDirection still apply.",
           "availability": "implemented",
           "examples": [
             "+1"
@@ -5315,7 +5359,7 @@ const catalog = {
               "InOutSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByPosition; query vn api describe VN-C16 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "InOutSine"
@@ -5351,7 +5395,7 @@ const catalog = {
               "None"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByPosition; query vn api describe VN-C16 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "None"
@@ -5377,7 +5421,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveByPosition; query vn api describe VN-C16 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -5513,7 +5557,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C17",
@@ -5531,7 +5576,7 @@ const catalog = {
           "Move bust(s) to exact coordinates(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Sets absolute base coordinate targets, leaving the stored logical slot unchanged. Rendering may additionally apply Core map-scroll behavior and VN fidgeting. Other pending transform targets remain, with duration/easing restarted. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -5550,7 +5595,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Move_MoveToCoordinates --value '{\"PictureID\":[\"1\"],\"TargetX\":\"Graphics.width / 2\",\"TargetY\":\"Unchanged\",\"EasingType\":\"InOutSine\",\"FlipDirection\":\"None\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -5576,7 +5623,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToCoordinates; query vn api describe VN-C17 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -5605,7 +5652,7 @@ const catalog = {
               "Graphics.width / 2"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToCoordinates; query vn api describe VN-C17 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  This string is evaluated per axis and selected picture inside the VN handler, after the Unchanged sentinel check. Supply a JavaScript script with a finite numeric completion value, not a return body. No interpreter receiver is supplied (this is undefined in the strict helper); the selected Game_Picture is the local picture, and MZ globals are available. The CLI compiles syntax without running it. Errors are caught per axis and logged only in playtest; that axis keeps its previous target while the remaining axes, duration and flip are still processed.",
           "availability": "implemented",
           "examples": [
             "Graphics.width / 2"
@@ -5634,7 +5681,7 @@ const catalog = {
               "Unchanged"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToCoordinates; query vn api describe VN-C17 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  This string is evaluated per axis and selected picture inside the VN handler, after the Unchanged sentinel check. Supply a JavaScript script with a finite numeric completion value, not a return body. No interpreter receiver is supplied (this is undefined in the strict helper); the selected Game_Picture is the local picture, and MZ globals are available. The CLI compiles syntax without running it. Errors are caught per axis and logged only in playtest; that axis keeps its previous target while the remaining axes, duration and flip are still processed.",
           "availability": "implemented",
           "examples": [
             "Unchanged"
@@ -5699,7 +5746,7 @@ const catalog = {
               "InOutSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToCoordinates; query vn api describe VN-C17 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "InOutSine"
@@ -5735,7 +5782,7 @@ const catalog = {
               "None"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToCoordinates; query vn api describe VN-C17 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "None"
@@ -5761,7 +5808,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToCoordinates; query vn api describe VN-C17 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -5914,7 +5961,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C18",
@@ -5932,7 +5980,7 @@ const catalog = {
           "Move bust(s) to the predetermined position."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Stores the clamped logical target slot immediately and gets both coordinate targets from cached ScreenX/ScreenY (VN-P06/VN-P07). It does not reapply Auto mirroring; FlipDirection controls an explicit sign change. Missing pictures are skipped. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -5950,7 +5998,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Move_MoveToPosition --value '{\"PictureID\":[\"1\"],\"TargetPosition\":\"5\",\"EasingType\":\"InOutSine\",\"FlipDirection\":\"None\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -5976,7 +6026,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToPosition; query vn api describe VN-C18 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -6005,7 +6055,7 @@ const catalog = {
               "5"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToPosition; query vn api describe VN-C18 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  After initial argument conversion, the handler calls eval on the converted value again per picture; an ordinary numeric value remains numeric. Prefer an expression producing a number directly. The second evaluation/coordinate lookup catches failures, reports them in playtest and retains the old destination; duration and FlipDirection still apply.",
           "availability": "implemented",
           "examples": [
             "5"
@@ -6070,7 +6120,7 @@ const catalog = {
               "InOutSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToPosition; query vn api describe VN-C18 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "InOutSine"
@@ -6106,7 +6156,7 @@ const catalog = {
               "None"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToPosition; query vn api describe VN-C18 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "None"
@@ -6132,7 +6182,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_MoveToPosition; query vn api describe VN-C18 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -6268,7 +6318,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C19",
@@ -6286,7 +6337,7 @@ const catalog = {
           "Reset bust(s) to the current position(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter Restores the pixel coordinates for the stored logical bust position from getVnBustPosition(), clamped to 0..10. It does not undo the last movement or restore a previous pixel snapshot. Coordinate moves leave that logical position unchanged; MoveTo/ByPosition changes it. An uninitialized logical position -1 resolves to slot 0. Duration and easing move toward those cached coordinates.",
+      "context": "map/common-event/troop interpreter Restores the pixel coordinates for the stored logical bust position from getVnBustPosition(), clamped to 0..10. It does not undo the last movement or restore a previous pixel snapshot. Coordinate moves leave that logical position unchanged; MoveTo/ByPosition changes it. An uninitialized logical position -1 resolves to slot 0. Duration and easing move toward those cached coordinates. Uses cached ScreenX/ScreenY (VN-P06/VN-P07), stores the clamped slot, and restarts the shared transform duration/easing. It does not reapply Auto mirroring. Missing pictures are skipped. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -6303,7 +6354,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Move_ResetToPosition --value '{\"PictureID\":[\"1\"],\"EasingType\":\"InOutSine\",\"FlipDirection\":\"None\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -6329,7 +6382,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_ResetToPosition; query vn api describe VN-C19 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -6394,7 +6447,7 @@ const catalog = {
               "InOutSine"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_ResetToPosition; query vn api describe VN-C19 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "InOutSine"
@@ -6430,7 +6483,7 @@ const catalog = {
               "None"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_ResetToPosition; query vn api describe VN-C19 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "None"
@@ -6456,7 +6509,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Move_ResetToPosition; query vn api describe VN-C19 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -6575,7 +6628,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C20",
@@ -6593,7 +6647,7 @@ const catalog = {
           "Scale bust(s) by specific amounts.\nValue scale: 100 = 100% = 1.0"
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "For each axis, adds the supplied scale percentage points to the pending target while moving, otherwise to current base scale. The delta is negated when current base scale is negative, so +20 grows a mirrored -100 to -120. Zero is unchanged; a sufficiently negative delta can cross zero and reverse orientation. Restarts the shared transform duration with Linear easing. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -6610,7 +6664,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Scale_ScaleBy --value '{\"PictureID\":[\"1\"],\"ScaleX\":\"+20\",\"ScaleY\":\"+20\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -6636,7 +6692,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleBy; query vn api describe VN-C20 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -6665,7 +6721,7 @@ const catalog = {
               "+20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleBy; query vn api describe VN-C20 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  For each axis, adds the supplied scale percentage points to the pending target while moving, otherwise to current base scale. The delta is negated when current base scale is negative, so +20 grows a mirrored -100 to -120. Zero is unchanged; a sufficiently negative delta can cross zero and reverse orientation. Restarts the shared transform duration with Linear easing.",
           "availability": "implemented",
           "examples": [
             "+20"
@@ -6694,7 +6750,7 @@ const catalog = {
               "+20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleBy; query vn api describe VN-C20 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  For each axis, adds the supplied scale percentage points to the pending target while moving, otherwise to current base scale. The delta is negated when current base scale is negative, so +20 grows a mirrored -100 to -120. Zero is unchanged; a sufficiently negative delta can cross zero and reverse orientation. Restarts the shared transform duration with Linear easing.",
           "availability": "implemented",
           "examples": [
             "+20"
@@ -6720,7 +6776,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleBy; query vn api describe VN-C20 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -6796,7 +6852,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C21",
@@ -6814,7 +6871,7 @@ const catalog = {
           "Scale bust(s) to specific values.\nValue scale: 100 = 100% = 1.0"
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Sets each scale target in percentage points, multiplying by -1 when that axis current base scale is negative. Thus 80 preserves current orientation at 80% size; -80 reverses it; 0 collapses it. Unchanged preserves that axis target. Restarts the shared transform duration with Linear easing. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -6831,7 +6888,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Scale_ScaleTo --value '{\"PictureID\":[\"1\"],\"TargetScaleX\":\"100\",\"TargetScaleY\":\"100\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -6857,7 +6916,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleTo; query vn api describe VN-C21 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -6886,7 +6945,7 @@ const catalog = {
               "100"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleTo; query vn api describe VN-C21 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  This string is evaluated per axis and selected picture inside the VN handler, after the Unchanged sentinel check. Supply a JavaScript script with a finite numeric completion value, not a return body. No interpreter receiver is supplied (this is undefined in the strict helper); the selected Game_Picture is the local picture, and MZ globals are available. The CLI compiles syntax without running it. Errors are caught per axis and logged only in playtest; that axis keeps its previous target while the remaining axes, duration and flip are still processed. Sets each scale target in percentage points, multiplying by -1 when that axis current base scale is negative. Thus 80 preserves current orientation at 80% size; -80 reverses it; 0 collapses it. Unchanged preserves that axis target. Restarts the shared transform duration with Linear easing.",
           "availability": "implemented",
           "examples": [
             "100"
@@ -6915,7 +6974,7 @@ const catalog = {
               "100"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleTo; query vn api describe VN-C21 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  This string is evaluated per axis and selected picture inside the VN handler, after the Unchanged sentinel check. Supply a JavaScript script with a finite numeric completion value, not a return body. No interpreter receiver is supplied (this is undefined in the strict helper); the selected Game_Picture is the local picture, and MZ globals are available. The CLI compiles syntax without running it. Errors are caught per axis and logged only in playtest; that axis keeps its previous target while the remaining axes, duration and flip are still processed. Sets each scale target in percentage points, multiplying by -1 when that axis current base scale is negative. Thus 80 preserves current orientation at 80% size; -80 reverses it; 0 collapses it. Unchanged preserves that axis target. Restarts the shared transform duration with Linear easing.",
           "availability": "implemented",
           "examples": [
             "100"
@@ -6941,7 +7000,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleTo; query vn api describe VN-C21 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -7017,7 +7076,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C22",
@@ -7035,7 +7095,7 @@ const catalog = {
           "Resets the scale for bust(s) to the default\nsettings in the Plugin Parameters."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Uses effective Settings.ScaleX/ScaleY (VN-P03/VN-P04), not a previous scale snapshot. Per axis, multiplies the configured value by +1 when current base scale is positive, otherwise -1, including zero. With positive configured defaults this preserves orientation except a zero axis resets negative. Restarts the shared transform duration with Linear easing. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7050,7 +7110,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Scale_ScaleReset --value '{\"PictureID\":[\"1\"],\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -7076,7 +7138,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleReset; query vn api describe VN-C22 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7102,7 +7164,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Scale_ScaleReset; query vn api describe VN-C22 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). VN clamps movement duration to at least 1 frame, including 0 or negative values. Position, scale, opacity and anchor share this timer; restarting one transition also changes the remaining time/easing for other pending transform targets. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -7144,7 +7206,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C23",
@@ -7162,7 +7225,7 @@ const catalog = {
           "Starts swaying aspect for selected bust(s).\nThe bust sways its angle back and forth."
         ]
       },
-      "context": "map/common-event/troop interpreter Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects add to the base transform and use the shared Graphics.frameCount, not elapsed time since enabling. Breathing uses scale percentage points, fidgeting uses pixels and swaying uses degrees; each argument describes its formula.",
+      "context": "map/common-event/troop interpreter Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects add to the base transform and use the shared Graphics.frameCount, not elapsed time since enabling. Breathing uses scale percentage points, fidgeting uses pixels and swaying uses degrees; each argument describes its formula. Enables only swaying and replaces its speed/rate values with this payload. Adds degrees to base angle; native rotation, breathing, fidgeting and movement continue. Settings persist with the picture; global frame clock controls phase after load. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7178,7 +7241,9 @@ const catalog = {
               "RateAngle:eval": "2"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Swaying_Enable --value '{\"PictureID\":[\"1\"],\"SpeedAngle\":\"30\",\"RateAngle\":\"2\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -7204,7 +7269,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Swaying_Enable; query vn api describe VN-C23 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7233,7 +7298,7 @@ const catalog = {
               "30"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Swaying_Enable; query vn api describe VN-C23 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "30"
@@ -7262,7 +7327,7 @@ const catalog = {
               "2"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Swaying_Enable; query vn api describe VN-C23 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "2"
@@ -7336,7 +7401,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C24",
@@ -7344,17 +7410,17 @@ const catalog = {
       "storageKey": "Swaying_Disable",
       "surface": "command",
       "label": "SWAYING: Stop",
-      "description": "Stops swaying aspect for selected bust(s).\nThe no longer sways back and forth.",
+      "description": "Disables only swaying on selected existing pictures; native rotation and other effects continue.",
       "nativeDefault": "",
       "metadata": {
         "text": [
           "SWAYING: Stop"
         ],
         "desc": [
-          "Stops swaying aspect for selected bust(s).\nThe no longer sways back and forth."
+          "Disables only swaying on selected existing pictures; native rotation and other effects continue."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Disables only the additive swaying angle; keeps its speed/rate settings and base angle. Native rotation and other effects continue. A later enable uses that enable command payload. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7368,7 +7434,9 @@ const catalog = {
               "PictureID:arrayeval": "[\"1\"]"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Swaying_Disable --value '{\"PictureID\":[\"1\"]}' --dry-run --json"
       ],
       "args": [
         {
@@ -7394,7 +7462,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Swaying_Disable; query vn api describe VN-C24 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7422,7 +7490,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C25",
@@ -7440,7 +7509,7 @@ const catalog = {
           "Brighten bust(s) to use the Tone settings\nfound in the Plugin Parameters."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Copies effective Settings.brightTone (VN-P08) to the selected picture tone targets. Does not change global configuration. Tone has its own duration, independent of coordinate/opacity/scale/anchor transitions. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7455,7 +7524,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Tone_BrightBust --value '{\"PictureID\":[\"1\"],\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -7481,7 +7552,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_BrightBust; query vn api describe VN-C25 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7507,7 +7578,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_BrightBust; query vn api describe VN-C25 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Tone uses its own duration; 0 applies the target tone immediately, positive integers interpolate. Use nonnegative integers. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -7549,7 +7620,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C26",
@@ -7567,7 +7639,7 @@ const catalog = {
           "Dims bust(s) to use the Tone settings\nfound in the Plugin Parameters."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Copies effective Settings.dimTone (VN-P09) to selected picture tone targets. Does not change global configuration. Tone has its own duration, independent of coordinate/opacity/scale/anchor transitions. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7582,7 +7654,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Tone_DimBust --value '{\"PictureID\":[\"1\"],\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -7608,7 +7682,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_DimBust; query vn api describe VN-C26 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7634,7 +7708,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_DimBust; query vn api describe VN-C26 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Tone uses its own duration; 0 applies the target tone immediately, positive integers interpolate. Use nonnegative integers. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -7676,7 +7750,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C27",
@@ -7694,7 +7769,7 @@ const catalog = {
           "Normalize bust(s) to no tone at all."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Sets the tone target to [0,0,0,0], leaving opacity and picture transforms unchanged. Tone has a separate duration; it does not erase the picture or disable continuous effects. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7709,7 +7784,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Tone_NormalBust --value '{\"PictureID\":[\"1\"],\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -7735,7 +7812,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_NormalBust; query vn api describe VN-C27 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7761,7 +7838,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_NormalBust; query vn api describe VN-C27 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Tone uses its own duration; 0 applies the target tone immediately, positive integers interpolate. Use nonnegative integers. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -7803,7 +7880,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C28",
@@ -7811,17 +7889,17 @@ const catalog = {
       "storageKey": "Tone_PresetBust",
       "surface": "command",
       "label": "TONE: Preset Tone for Bust(s)",
-      "description": "Use RPG Maker MZ's present tones/tints for bust(s).",
+      "description": "Applies a named RPG Maker MZ tone preset to existing pictures.",
       "nativeDefault": "",
       "metadata": {
         "text": [
           "TONE: Preset Tone for Bust(s)"
         ],
         "desc": [
-          "Use RPG Maker MZ's present tones/tints for bust(s)."
+          "Applies a named RPG Maker MZ tone preset to existing pictures."
         ]
       },
-      "context": "map/common-event/troop interpreter",
+      "context": "Sets the tone target from Preset and leaves global brightTone/dimTone unchanged. Tone has its own duration. Normal=[0,0,0,0], Dark=[-68,-68,-68,0], Sepia=[34,-34,-68,170], Sunset=[68,-34,-34,0], Night=[-68,-68,0,68]. Raw unknown names fall back to Normal; the CLI accepts the listed options. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -7837,7 +7915,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Tone_PresetBust --value '{\"PictureID\":[\"1\"],\"Preset\":\"Sepia\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -7863,7 +7943,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_PresetBust; query vn api describe VN-C28 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -7902,7 +7982,7 @@ const catalog = {
               "Sepia"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_PresetBust; query vn api describe VN-C28 for complete CLI and native examples, prerequisites and lifecycle. CLI input is a JSON string. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Sets the tone target from Preset and leaves global brightTone/dimTone unchanged. Tone has its own duration. Normal=[0,0,0,0], Dark=[-68,-68,-68,0], Sepia=[34,-34,-68,170], Sunset=[68,-34,-34,0], Night=[-68,-68,0,68]. Raw unknown names fall back to Normal; the CLI accepts the listed options.",
           "availability": "implemented",
           "examples": [
             "Sepia"
@@ -7928,7 +8008,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_PresetBust; query vn api describe VN-C28 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Tone uses its own duration; 0 applies the target tone immediately, positive integers interpolate. Use nonnegative integers. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -7997,7 +8077,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     },
     {
       "id": "VN-C29",
@@ -8015,7 +8096,7 @@ const catalog = {
           "Use a custom target tone for the bust(s)."
         ]
       },
-      "context": "map/common-event/troop interpreter Four finite numeric components [red, green, blue, gray]. Use RGB offsets -255..255: negative subtracts color, positive adds color, zero is neutral. Use gray 0..255: zero preserves saturation and 255 is grayscale. Example [34,34,34,0]. Supply a JavaScript source string to eval-encoded fields; this is not a hex color or RGBA alpha.",
+      "context": "map/common-event/troop interpreter Four finite numeric components [red, green, blue, gray]. Use RGB offsets -255..255: negative subtracts color, positive adds color, zero is neutral. Use gray 0..255: zero preserves saturation and 255 is grayscale. Example [34,34,34,0]. Supply a JavaScript source string to eval-encoded fields; this is not a hex color or RGBA alpha. Copies the supplied customTone array to the selected picture tone targets. Does not change configured brightTone/dimTone. Tone has its own duration, independent of coordinate/opacity/scale/anchor transitions. Requires an active Coreto_2_VNPictureBusts after Coreto_0_CoreEngine or VisuMZ_0_CoreEngine; disable VisuMZ_2_VNPictureBusts. Message Core is optional; when installed, load it before VN. Query vn api describe CORETO-CONFIG-SOURCE for effective parameter selection. The examples assume common-event:1 exists and commands list reports a unit at index 0; choose an index from your list. Except Enter, the runtime example assumes picture 1 already exists in the current bank. A dry-run validates and previews authorship only. Picture state normally persists in Game_Screen saves until replacement/erasure or native picture-bank cleanup; transient animation resources are the exception described by Basic_PlayAniBust.",
       "availability": "implemented",
       "examples": [
         {
@@ -8031,7 +8112,9 @@ const catalog = {
               "Duration:eval": "20"
             }
           ]
-        }
+        },
+        "vn commands list --target common-event:1 --json",
+        "vn commands insert --target common-event:1 --before 0 --command Tone_CustomToneBust --value '{\"PictureID\":[\"1\"],\"customTone\":\"[0, 0, 0, 0]\",\"Duration\":\"20\"}' --dry-run --json"
       ],
       "args": [
         {
@@ -8057,7 +8140,7 @@ const catalog = {
               "[\"1\"]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_CustomToneBust; query vn api describe VN-C29 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. CLI input is an array of JavaScript source strings, for example [\"1\",\"$gameVariables.value(2)\"], not an array of numbers. Each expression supplies one numeric picture ID; an empty list selects nothing. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  Use integer logical IDs in the current map/battle picture bank. Each value is processed as (value || 1).clamp(1,100), without rounding: 0 selects 1, negative numbers clamp to 1 and values above 100 clamp to 100. This does not enlarge the project native picture capacity. Missing pictures are skipped, except Enter creates/replaces its selected slot. Duplicate list entries apply the operation repeatedly, so relative moves and toggles can accumulate.",
           "availability": "implemented",
           "examples": [
             "[\"1\"]"
@@ -8086,7 +8169,7 @@ const catalog = {
               "[0, 0, 0, 0]"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_CustomToneBust; query vn api describe VN-C29 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission. ",
           "availability": "implemented",
           "examples": [
             "[0, 0, 0, 0]"
@@ -8112,7 +8195,7 @@ const catalog = {
               "20"
             ]
           },
-          "context": "map/common-event/troop interpreter",
+          "context": "Argument of Tone_CustomToneBust; query vn api describe VN-C29 for complete CLI and native examples, prerequisites and lifecycle. Provide a JSON string containing a JavaScript script with a completion value, not a function body with return. The CLI checks syntax without running it. At runtime eval-encoded fields are converted before the handler, once per command invocation (or once at boot for parameters), not once per selected picture. VN uses VisuMZ.ConvertParams when present, called with this=VisuMZ and (output, rawFields); otherwise its strict fallback evaluates with this=undefined. No Game_Interpreter or selected picture receiver is supplied. Use MZ globals such as $gameVariables for command-time expressions; game objects may not yet exist at parameter boot. Converter errors propagate before the command runs. On insert, omission uses the published nativeDefault (decoded to the CLI shape); update omission preserves the existing argument. Explicit empty input is not omission.  A finite numeric completion value in game frames (60 frames is about one second at normal 60 fps). Tone uses its own duration; 0 applies the target tone immediately, positive integers interpolate. Use nonnegative integers. No automatic interpreter wait is created. Use the native Wait event command to sequence a transition; separate PlayAni WaitForAnimation waits for animations only.",
           "availability": "implemented",
           "examples": [
             "20"
@@ -8171,7 +8254,8 @@ const catalog = {
       ],
       "dependencies": [
         "Core Engine"
-      ]
+      ],
+      "writing": "Author a plugin-command unit in an existing map:M/event:E/page:P, common-event:C or troop:T/page:P list. Run vn commands list --target <target> --json first and use its unit index with --before for insert or --index for update/remove; never address a 657 continuation. Use the exact command key with --command. --value is a logical JSON object keyed by argument names without native suffixes; --input accepts that object from a file. Insert fills omitted fields from native defaults; update preserves omitted fields and the existing plugin ID; remove deletes the whole 357/657 unit. These operations edit data without executing the game. Reopen the editor before saving it."
     }
   ],
   "apis": [
@@ -8181,7 +8265,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "Coreto.VNPictureBusts and VisuMZ.VNPictureBusts reference the same API object. Settings contains numeric AnchorX, AnchorY, ScaleX, ScaleY; numeric-array InvertedScale; functions ScreenX(position), ScreenY(position); and numeric-array brightTone/dimTone. Settings values are effective decoded configuration and can be changed in memory. HorzMirrorCheck(mode, position) uses this.Settings.InvertedScale: Mirror=true, Auto=includes(position), Auto-Reverse=!includes(position), other modes=false (case-insensitive after trimming). Use an integer position 0..10; keep the API receiver when calling. version identifies the compatibility API 1.03; provider identifies Coreto_2_VNPictureBusts and providerVersion its own 0.1.0. Mutating Settings does not rewrite plugin parameters or invalidate coordinate cache.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. Settings changes are in-memory only and are not part of save contents. They last until replaced or the plugin reloads; loading a save does not restore old Settings. For CLI parameter defaults/reset and inheritance see vn api describe CORETO-CONFIG-SOURCE and VN-P01 through VN-P09.",
       "examples": [
         "const vn = Coreto.VNPictureBusts; const mirrored = vn.HorzMirrorCheck(\"Auto\", 3);"
       ],
@@ -8201,7 +8285,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "ImageManager.vnPictureBustPosition(position) accepts an integer 0..10 and returns the cached {x,y} pixel coordinates. On first call it computes all 11 entries using Settings.ScreenX/ScreenY and rounds them. Other positions, including fractions, throw if absent. The returned object is shared cache data; copy it before modifying. Settings changes or resize do not invalidate the cache automatically. After changing coordinate functions, set ImageManager._vnPictureBustCoordinates=null to rebuild on the next lookup; existing pictures do not move automatically.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. This cache also survives new game and load within the same application session; those hooks do not clear ImageManager coordinates. Coordinate-function exceptions propagate.",
       "examples": [
         "const xy = {...ImageManager.vnPictureBustPosition(3)};",
         "Coreto.VNPictureBusts.Settings.ScreenX = position => 100 + position * 50; ImageManager._vnPictureBustCoordinates = null; const updated = ImageManager.vnPictureBustPosition(3);"
@@ -8215,7 +8299,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "On a Game_Picture instance, initVnPictureBusts() resets its logical slot to -1. Initialization runs automatically for new pictures; getVnBustPosition() lazily initializes missing state and returns the stored slot. setVnBustPosition(position) stores Number(position)||0 without clamping or moving the picture. For ordinary slots supply an integer 0..10. Setting a slot does not apply ScreenX/ScreenY; movement commands do that separately. Do not call init merely to query a picture because it discards its stored slot.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. These fields belong to the Game_Picture saved in Game_Screen, subject to native bank cleanup and replacement/erasure. Load fills only missing VN fields, preserving explicit saved values. Effect phase uses the current Graphics.frameCount rather than a saved clock.",
       "examples": [
         "const picture = $gameScreen.picture(1); const previousSlot = picture.getVnBustPosition(); picture.setVnBustPosition(3);"
       ],
@@ -8228,7 +8312,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "picture.setVnBustAnchor(start, target) uses current Settings.AnchorX/AnchorY. Truthy start applies the current anchor; truthy target applies the target anchor. The target also updates whenever picture._duration<=0. picture.vnSetDuration(duration) sets both remaining and whole movement duration to Math.max(duration,1) frames; use a finite nonnegative integer. It does not set target coordinates/scales/opacity or choose easing. For an anchor transition, establish duration first, then set the target anchor while retaining valid picture movement targets.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. These fields belong to the Game_Picture saved in Game_Screen, subject to native bank cleanup and replacement/erasure. Load fills only missing VN fields, preserving explicit saved values. Effect phase uses the current Graphics.frameCount rather than a saved clock.",
       "examples": [
         "const picture = $gameScreen.picture(1); picture.vnSetDuration(20); picture.setVnBustAnchor(false, true);"
       ],
@@ -8241,7 +8325,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "picture.vnChangeGraphic(name) asynchronously loads a picture name from img/pictures without .png, then calls vnPostChangeGraphic(name) to set the name. It returns immediately, with no promise or completion callback. Only the latest request for that picture may finish; replacement/erase or switching $gameScreen prevents a stale request from changing a different picture. A detached picture is not protected by a screen slot. vnPostChangeGraphic(name) is the lower-level synchronous assignment and bypasses loading/identity guards; normally call vnChangeGraphic instead. Other picture properties remain unchanged.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. These fields belong to the Game_Picture saved in Game_Screen, subject to native bank cleanup and replacement/erasure. Load fills only missing VN fields, preserving explicit saved values. Effect phase uses the current Graphics.frameCount rather than a saved clock.",
       "examples": [
         "// Assumes img/pictures/BustHappy.png exists.\n$gameScreen.picture(1).vnChangeGraphic(\"BustHappy\");"
       ],
@@ -8254,11 +8338,11 @@ const catalog = {
       "surface": "runtime-api",
       "description": "picture.getVnPictureBreathingSettings() returns the live settings object; setVnPictureBreathingSettings(settings) replaces it with a JSON deep copy. Supply the complete shape {\"enabled\": true, \"speed\": {\"x\": 30, \"y\": 30}, \"rate\": {\"x\": 0.5, \"y\": 0.5}}. Missing fields are not filled by the setter. applyVnBreathingScaleX() / applyVnBreathingScaleY() return the current additive offset in scale percentage points, or 0 when disabled; the picture transform getters apply it automatically, so do not add it again. Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects have separate settings but share the global frame clock; they do not reset phase when enabled. initVnPictureSlightMovements() creates only missing effect settings; it does not reset existing settings.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. These fields belong to the Game_Picture saved in Game_Screen, subject to native bank cleanup and replacement/erasure. Load fills only missing VN fields, preserving explicit saved values. Effect phase uses the current Graphics.frameCount rather than a saved clock.",
       "examples": [
         "$gameScreen.picture(1).setVnPictureBreathingSettings({\"enabled\": true, \"speed\": {\"x\": 30, \"y\": 30}, \"rate\": {\"x\": 0.5, \"y\": 0.5}});"
       ],
-      "receiver": "Game_Picture instance, except updatePositionVnFidgeting on Sprite_Picture.",
+      "receiver": "Game_Picture instance.",
       "returns": "Getters return settings; apply methods return number; setters/init return undefined."
     },
     {
@@ -8267,12 +8351,12 @@ const catalog = {
       "surface": "runtime-api",
       "description": "picture.getVnPictureFidgetingSettings() returns the live settings object; setVnPictureFidgetingSettings(settings) replaces it with a JSON deep copy. Supply the complete shape {\"enabled\": true, \"speed\": {\"x\": 30, \"y\": 30}, \"rate\": {\"x\": 5, \"y\": 5}}. Missing fields are not filled by the setter. applyVnFidgetingScaleX() / applyVnFidgetingScaleY() return the current additive offset in pixels, or 0 when disabled; the picture transform getters apply it automatically, so do not add it again. Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Y fidgeting uses cos(phase)*rate/2+rate/2, ranging 0..rate; other components use cos(phase)*rate. Effects have separate settings but share the global frame clock; they do not reset phase when enabled. isVnPictureFidgeting() returns the enabled flag. Sprite_Picture.updatePositionVnFidgeting() (a different receiver) assigns its sprite coordinates from the picture x()/y() getters, retaining fractional motion. The update hook invokes it automatically. Despite the Scale suffix, these two apply methods return position offsets.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. These fields belong to the Game_Picture saved in Game_Screen, subject to native bank cleanup and replacement/erasure. Load fills only missing VN fields, preserving explicit saved values. Effect phase uses the current Graphics.frameCount rather than a saved clock.",
       "examples": [
         "$gameScreen.picture(1).setVnPictureFidgetingSettings({\"enabled\": true, \"speed\": {\"x\": 30, \"y\": 30}, \"rate\": {\"x\": 5, \"y\": 5}});"
       ],
       "receiver": "Game_Picture instance, except updatePositionVnFidgeting on Sprite_Picture.",
-      "returns": "Getters return settings; apply methods return number; setters/init return undefined."
+      "returns": "Getters return settings; isVnPictureFidgeting returns the enabled flag; apply methods return number; setters and sprite update return undefined."
     },
     {
       "id": "VN-A08",
@@ -8280,11 +8364,11 @@ const catalog = {
       "surface": "runtime-api",
       "description": "picture.getVnPictureSwayingSettings() returns the live settings object; setVnPictureSwayingSettings(settings) replaces it with a JSON deep copy. Supply the complete shape {\"enabled\": true, \"speed\": {\"angle\": 30}, \"rate\": {\"angle\": 2}}. Missing fields are not filled by the setter. applyVnSwaying() return the current additive offset in degrees, or 0 when disabled; the picture transform getters apply it automatically, so do not add it again. Speed is the divisor in cos(Graphics.frameCount / (speed || 0.01)); one cycle is approximately 2*pi*abs(speed) game frames. Use a finite positive number such as 30 (about 188.5 frames per cycle); zero uses 0.01 rather than disabling the effect. A negative speed produces the same cosine. Rate 0 disables motion on that axis. Effects have separate settings but share the global frame clock; they do not reset phase when enabled.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. These fields belong to the Game_Picture saved in Game_Screen, subject to native bank cleanup and replacement/erasure. Load fills only missing VN fields, preserving explicit saved values. Effect phase uses the current Graphics.frameCount rather than a saved clock.",
       "examples": [
         "$gameScreen.picture(1).setVnPictureSwayingSettings({\"enabled\": true, \"speed\": {\"angle\": 30}, \"rate\": {\"angle\": 2}});"
       ],
-      "receiver": "Game_Picture instance, except updatePositionVnFidgeting on Sprite_Picture.",
+      "receiver": "Game_Picture instance.",
       "returns": "Getters return settings; apply methods return number; setters/init return undefined."
     },
     {
@@ -8306,7 +8390,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "$gameScreen.vnAutoErasePicture(id, retries) targets the current real picture-bank slot and polls base opacity _opacity. If it is already<=0, erasure is immediate. Otherwise it checks up to retries further times at 100ms intervals, then abandons the request if still visible. Use a finite nonnegative integer; 0 performs only the initial check, negative values schedule nothing. A new request replaces the old timer for that slot. Picture replacement/erase, changing game-screen identity or clearing pictures cancels stale work. This does not fade the picture: start a fade separately. Timer scheduling uses wall-clock milliseconds, not game frames.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. A valid pending erase intent and remaining retry budget are serialized with the picture. On load VN cancels old-session timers and reschedules the restored intent; it does not infer an erase request from opacity 0 alone. A negative retry count leaves an earlier request untouched because it returns before cancellation.",
       "examples": [
         "$gameScreen.vnAutoErasePicture(1, 20); // 20 retries spaced by 100 ms, nominally about 2 seconds; schedule a fade separately"
       ],
@@ -8347,7 +8431,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "Automatic hooks extend the listed native prototype methods. Game_Temp.initialize prepares the queue; Game_Picture.initialize prepares logical position/effect settings; updateMove finalizes targets; scaleX/scaleY/x/y/angle add effects; Sprite_Picture.updatePosition applies fidgeting; interpreter updateWaitMode handles pictureAnimation; spriteset createPictures/updateAnimations/removeAllAnimations own the animation lifecycle; Sprite_Animation.targetSpritePosition handles picture targets. Authors normally use VN plugin commands; they do not invoke these hooks as a setup sequence. Extension plugins loaded after VN may wrap a native method, preserving this, all arguments and its return, and calling the previous method exactly once. Alternatively use the public alias slots described by VN-A14. Never replace a hook without chaining or manually reinitialize a live object.",
       "availability": "implemented",
-      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise.",
+      "context": "Use from an MZ event Script or an extension plugin loaded after Coreto_2_VNPictureBusts, with Core Engine already active. These methods run in the game; the CLI only describes them. Examples use an existing picture in the current map/battle picture bank unless stated otherwise. For Sprite_Animation picture targets, the extra anchor/offset name tags are interpreted by this MZ Sprite_Animation hook; the hook is not installed on Sprite_AnimationMV. See vn api describe VN-C06 for command dependencies and vn api describe VN-A14 for alias members. On MZ animation names, <Head>/<Header>/<Top> sets Y=0; <Foot>/<Footer>/<Bottom> or alignBottom sets Y=1 and wins over Head; <Left> sets X=0 and <Right> wins with X=1. <Anchor X: 0.25> and <Anchor Y: 0.75> override those choices; combined <Anchor: 0.25, 0.75> overrides both. Anchors accept unsigned numbers (not clamped to 0..1). <Offset X: +10> and <Offset Y: -10> add pixels; combined <Offset: +10, -10> overrides separate offsets. Offset integers require an explicit sign. Matching ignores case but requires the illustrated spaces; the first match of each specific pattern wins. The point is transformed through the picture sprite world transform. These are animation database names, not picture names or note tags.",
       "examples": [
         "const previous = Game_Picture.prototype.updateMove; Game_Picture.prototype.updateMove = function(...args) { const result = previous.apply(this, args); /* extension work here */ return result; };"
       ],
@@ -8376,7 +8460,7 @@ const catalog = {
       "surface": "runtime-api",
       "description": "Slots públicos encadeáveis ao método anterior; conservar receptor, argumentos e retorno e chamar uma vez. Use os membros listados após carregar o plugin.",
       "availability": "implemented",
-      "context": "runtime MZ",
+      "context": "runtime MZ This is an extension-plugin surface, installed when VN loads after Core Engine; it has no CLI write operation. The receiver is the native instance for each member, with its native arguments and return contract. The stored alias points to the previous provider method; wrapping it affects the VN wrapper calls, while calling it alone bypasses VN postprocessing. Keep both provider identity aliases pointing to the same API object. See vn api describe VN-A13 for the native hook list.",
       "examples": [
         "const previous = Coreto.VNPictureBusts.Game_Picture_updateMove; Coreto.VNPictureBusts.Game_Picture_updateMove = function(...args) { return previous.apply(this, args); };"
       ],
@@ -8803,7 +8887,7 @@ const catalog = {
           "BREATHING: Stop"
         ],
         "desc": [
-          "Stops breathing aspect for selected bust(s).\nThe bust graphic becomes static."
+          "Disables only breathing on selected existing pictures; other effects and movement continue."
         ]
       }
     },
@@ -8913,7 +8997,7 @@ const catalog = {
           "FIDGETING: Stop"
         ],
         "desc": [
-          "Stops fidgeting aspect for selected bust(s).\nThe bust graphic becomes stationary."
+          "Disables only fidgeting on selected existing pictures; other effects and movement continue."
         ]
       }
     },
@@ -8946,7 +9030,7 @@ const catalog = {
           "MOVE: Move Bust(s) By Coordinates"
         ],
         "desc": [
-          "Move bust(s) relative to current coordinates(s)."
+          "Move busts by pixel offsets from their pending target while moving, or from current coordinates while stationary."
         ]
       }
     },
@@ -9089,7 +9173,7 @@ const catalog = {
           "SWAYING: Stop"
         ],
         "desc": [
-          "Stops swaying aspect for selected bust(s).\nThe no longer sways back and forth."
+          "Disables only swaying on selected existing pictures; native rotation and other effects continue."
         ]
       }
     },
@@ -9155,7 +9239,7 @@ const catalog = {
           "TONE: Preset Tone for Bust(s)"
         ],
         "desc": [
-          "Use RPG Maker MZ's present tones/tints for bust(s)."
+          "Applies a named RPG Maker MZ tone preset to existing pictures."
         ]
       }
     },

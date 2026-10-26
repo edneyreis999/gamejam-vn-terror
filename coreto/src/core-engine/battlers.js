@@ -57,8 +57,12 @@ function installBattlerParameters(settings) {
     const options = settings.Param;
     const caches = new WeakMap();
     const cacheFor = battler => {
-        if (!caches.has(battler)) caches.set(battler, new Map());
-        return caches.get(battler);
+        let entry = caches.get(battler);
+        if (!entry || entry.owner !== battler._cache) {
+            entry = {owner: battler._cache, values: new Map()};
+            caches.set(battler, entry);
+        }
+        return entry.values;
     };
     const refresh = Game_BattlerBase.prototype.refresh;
     Game_BattlerBase.prototype.refresh = function(...args) {
@@ -141,5 +145,23 @@ function installBattlerParameters(settings) {
     };
     Game_BattlerBase.prototype.isDying = function() {
         return this.isAlive() && this.hp < this.mhp * options.CrisisRate;
+    };
+}
+
+
+function installBattlerConsumerCache() {
+    const initialize = Game_BattlerBase.prototype.initMembers;
+    Game_BattlerBase.prototype.initMembers = function() {
+        this._cache = {};
+        initialize.call(this);
+    };
+    const refresh = Game_BattlerBase.prototype.refresh;
+    Game_BattlerBase.prototype.refresh = function() {
+        this._cache = {};
+        refresh.call(this);
+    };
+    Game_BattlerBase.prototype.checkCacheKey = function(key) {
+        this._cache = this._cache || {};
+        return this._cache[key] !== undefined;
     };
 }

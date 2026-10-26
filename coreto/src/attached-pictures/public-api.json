@@ -82,14 +82,14 @@
         70
       ],
       "min": 1,
-      "context": "The list is stored in the save after initialization; changing this default does not replace an existing saved list. Use Show Picture to display each selected ID. Attachments use the picture coordinates relative to the message window, are visible only while it is open, and cannot receive picture clicks. IDs must fit the game picture range. An empty array gives no default attachments. Use MessageAddPicture and MessageRemovePicture to change the current game list."
+      "context": "The list is stored in the save after initialization; changing this default does not replace an existing saved list. Use Show Picture to display each selected ID. Attachments use the picture coordinates relative to the message window, are visible only while it is open, and cannot receive picture clicks. IDs must fit the game picture range. An empty array gives no default attachments. Use MessageAddPicture and MessageRemovePicture to change the current game list. Enable Coreto_4_AttachedPictures 0.1.0 with attached-pictures install after its optional providers/consumers have been arranged; the bundle must already be delivered. install selects this provider instead of VisuMZ_4_AttachedPictures and preserves other provider selections. Restart the game after configuration changes. Core Engine and Message Core are optional: if active, use one of Coreto_0_CoreEngine 0.1.0 / VisuMZ_0_CoreEngine 1.90 and one of Coreto_1_MessageCore 0.1.0 / VisuMZ_1_MessageCore 1.57 before Attached Pictures. Place Attached Pictures after active Picture Choices, VN Picture Busts and Choice Common Events, and before Event Title Scene and Message Visibility. The CLI edits js/plugins.js for the next game boot; it does not change an already running game. parameters reset and missing native values use this entry's published default. parameters get reports the effective value; attached-pictures api describe CORETO-CONFIG-SOURCE explains inherit/own. The CLI accepts a JSON array of integers >= 1; it does not impose the runtime picture maximum. IDs outside that maximum have no attached sprite. See attached-pictures api describe AP-C-MessageAddPicture and AP-C-MessageRemovePicture for current-game changes. Attachment links belong to $gameSystem: map/scene changes and Erase Picture do not remove them, and save/load preserves them. Showing that picture ID again reuses its attachment. A new game starts with the message IDs in AP-P-PictureIDs:arraynum and no picture-parent links. Show Picture loads the image from img/pictures/; these numeric IDs are picture slots, not filenames. "
     },
     {
       "id": "AP-P-ContainerPosition:num",
       "key": "ContainerPosition",
       "storageKey": "ContainerPosition:num",
       "label": "Container Position",
-      "description": "Layer of the attached-picture container inside the message window: behind its skin, in front of its skin, or in front of its text.",
+      "description": "Layer used when the message window creates its attached-picture container: 0 inserts it before the window skin, 1 after the skin but before the client/text area, and 2 after the existing window children so pictures draw over the text. This does not change children attached to another picture.",
       "editorType": "select",
       "nativeDefault": "1",
       "availability": "supported",
@@ -104,7 +104,8 @@
         "0": "0 - Behind Window Skin",
         "1": "1 - In Front of Window Skin",
         "2": "2 - In Front of Window Text"
-      }
+      },
+      "context": "The CLI edits js/plugins.js for the next game boot; it does not change an already running game. parameters reset and missing native values use this entry's published default. parameters get reports the effective value; attached-pictures api describe CORETO-CONFIG-SOURCE explains inherit/own. See attached-pictures api describe AP-P-PictureIDs:arraynum for provider activation, picture IDs and saved attachment lifecycle. This is an enum index, not a pixel coordinate. Recreating the message window reads the loaded setting; no running window is reordered by a CLI write."
     }
   ],
   "commands": [
@@ -125,7 +126,7 @@
           "key": "PictureID",
           "storageKey": "PictureID:arraynum",
           "label": "Picture ID(s)",
-          "description": "Select which Picture ID's to attach to the Message Window.",
+          "description": "JSON array of child picture-slot IDs, for example [1,2]; the CLI accepts integers >= 1. [] changes no links. Runtime converts raw list items to numbers without rounding or clamping. The scene only creates attached sprites for IDs in 1..$gameScreen.maxPictures().",
           "editorType": "number[]",
           "nativeDefault": "[\"1\"]",
           "availability": "supported",
@@ -139,10 +140,11 @@
           "default": [
             1
           ],
-          "min": 1
+          "min": 1,
+          "context": "Argument of attached-pictures api describe AP-C-MessageAddPicture; that command states attachment/removal scope, current-state replacement, transforms, defaults, activation and lifecycle. The CLI authors an event command and does not attach pictures immediately."
         }
       ],
-      "context": "Show Picture creates the displayed image; it may run before or after attachment. While attached, its Show/Move Picture coordinates are local to the message window and its normal screen sprite is hidden. The attached image is visible only while the window is open, follows its transforms and cannot receive picture clicks. IDs outside 1..$gameScreen.maxPictures() have no attached sprite. Repeated IDs do not duplicate sprites. A picture that already has attached children is ignored; otherwise any previous picture-parent link is removed. The attachment list persists in the save until removed."
+      "context": "Show Picture creates the displayed image; it may run before or after attachment. While attached, its Show/Move Picture coordinates are local to the message window and its normal screen sprite is hidden. The attached image is visible only while the window is open, follows its transforms and cannot receive picture clicks. IDs outside 1..$gameScreen.maxPictures() have no attached sprite. Repeated IDs do not duplicate sprites. A picture that already has attached children is ignored; otherwise any previous picture-parent link is removed. The attachment list persists in the save until removed. Enable Coreto_4_AttachedPictures 0.1.0 with attached-pictures install after its optional providers/consumers have been arranged; the bundle must already be delivered. install selects this provider instead of VisuMZ_4_AttachedPictures and preserves other provider selections. Restart the game after configuration changes. Core Engine and Message Core are optional: if active, use one of Coreto_0_CoreEngine 0.1.0 / VisuMZ_0_CoreEngine 1.90 and one of Coreto_1_MessageCore 0.1.0 / VisuMZ_1_MessageCore 1.57 before Attached Pictures. Place Attached Pictures after active Picture Choices, VN Picture Busts and Choice Common Events, and before Event Title Scene and Message Visibility. Attachment links belong to $gameSystem: map/scene changes and Erase Picture do not remove them, and save/load preserves them. Showing that picture ID again reuses its attachment. A new game starts with the message IDs in AP-P-PictureIDs:arraynum and no picture-parent links. Show Picture loads the image from img/pictures/; these numeric IDs are picture slots, not filenames. The example is illustrative: choose an existing event target and insertion index from commands list, and pass result.fileHash as --expected-hash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values. [] changes no links."
     },
     {
       "id": "AP-C-MessageRemovePicture",
@@ -161,7 +163,7 @@
           "key": "PictureID",
           "storageKey": "PictureID:arraynum",
           "label": "Picture ID(s)",
-          "description": "Select which Picture ID's to remove from the Message Window.",
+          "description": "JSON array of child picture-slot IDs, for example [1,2]; the CLI accepts integers >= 1. [] changes no links. Runtime converts raw list items to numbers without rounding or clamping. The scene only creates attached sprites for IDs in 1..$gameScreen.maxPictures().",
           "editorType": "number[]",
           "nativeDefault": "[\"1\"]",
           "availability": "supported",
@@ -175,10 +177,11 @@
           "default": [
             1
           ],
-          "min": 1
+          "min": 1,
+          "context": "Argument of attached-pictures api describe AP-C-MessageRemovePicture; that command states attachment/removal scope, current-state replacement, transforms, defaults, activation and lifecycle. The CLI authors an event command and does not attach pictures immediately."
         }
       ],
-      "context": "On the next sprite update, a displayed picture returns to the normal screen picture layer using its existing Show/Move Picture coordinates as screen coordinates. No world-position conversion occurs, so it can jump visually. An erased or never-shown picture stays absent. Removing an ID that is not message-attached has no effect. The updated attachment list persists in the save."
+      "context": "On the next sprite update, a displayed picture returns to the normal screen picture layer using its existing Show/Move Picture coordinates as screen coordinates. No world-position conversion occurs, so it can jump visually. An erased or never-shown picture stays absent. Removing an ID that is not message-attached has no effect. The updated attachment list persists in the save. Enable Coreto_4_AttachedPictures 0.1.0 with attached-pictures install after its optional providers/consumers have been arranged; the bundle must already be delivered. install selects this provider instead of VisuMZ_4_AttachedPictures and preserves other provider selections. Restart the game after configuration changes. Core Engine and Message Core are optional: if active, use one of Coreto_0_CoreEngine 0.1.0 / VisuMZ_0_CoreEngine 1.90 and one of Coreto_1_MessageCore 0.1.0 / VisuMZ_1_MessageCore 1.57 before Attached Pictures. Place Attached Pictures after active Picture Choices, VN Picture Busts and Choice Common Events, and before Event Title Scene and Message Visibility. Attachment links belong to $gameSystem: map/scene changes and Erase Picture do not remove them, and save/load preserves them. Showing that picture ID again reuses its attachment. A new game starts with the message IDs in AP-P-PictureIDs:arraynum and no picture-parent links. Show Picture loads the image from img/pictures/; these numeric IDs are picture slots, not filenames. The example is illustrative: choose an existing event target and insertion index from commands list, and pass result.fileHash as --expected-hash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values. [] changes no links."
     },
     {
       "id": "AP-C-PictureAddPicture",
@@ -197,7 +200,7 @@
           "key": "PictureID",
           "storageKey": "PictureID:arraynum",
           "label": "Attach Picture ID(s)",
-          "description": "Select which Picture ID's to attach to another picture.",
+          "description": "JSON array of child picture-slot IDs, for example [1,2]; the CLI accepts integers >= 1. [] changes no links. Runtime converts raw list items to numbers without rounding or clamping. The scene only creates attached sprites for IDs in 1..$gameScreen.maxPictures().",
           "editorType": "number[]",
           "nativeDefault": "[\"1\"]",
           "availability": "supported",
@@ -211,23 +214,25 @@
           "default": [
             1
           ],
-          "min": 1
+          "min": 1,
+          "context": "Argument of attached-pictures api describe AP-C-PictureAddPicture; that command states attachment/removal scope, current-state replacement, transforms, defaults, activation and lifecycle. The CLI authors an event command and does not attach pictures immediately."
         },
         {
           "id": "AP-PictureAddPicture-TargetID:num",
           "key": "TargetID",
           "storageKey": "TargetID:num",
           "label": "Target Picture ID",
-          "description": "Select which Picture ID to attach the above picture(s) to.",
+          "description": "Picture-slot ID of the parent for the PictureID children. Use an existing shown whole ID in 1..$gameScreen.maxPictures(), distinct from the children. CLI schema accepts finite numbers >= 1, including fractions, but a fractional ID does not identify a normal picture slot. Runtime neither rounds nor clamps it.",
           "editorType": "number",
           "nativeDefault": "2",
           "availability": "supported",
           "type": "number",
           "default": 2,
-          "min": 1
+          "min": 1,
+          "context": "Argument of attached-pictures api describe AP-C-PictureAddPicture; that command states attachment/removal scope, current-state replacement, transforms, defaults, activation and lifecycle. The CLI authors an event command and does not attach pictures immediately."
         }
       ],
-      "context": "Use Show Picture for both child and target; attachment may be set before they are shown. Children use their own Show/Move Picture coordinates relative to the target and inherit its position, scale, rotation and opacity through the parent transform. A missing or erased target hides its children; their normal screen sprites are hidden while attached. Picture clicks are disabled for attached children. Use integer IDs in 1..$gameScreen.maxPictures(). Self-attachment, a target already attached elsewhere, and a child that already has children are ignored, preventing chains and cycles. Repeated IDs do not duplicate sprites. An accepted link replaces any previous parent or message-window attachment and persists in the save."
+      "context": "Use Show Picture for both child and target; attachment may be set before they are shown. Children use their own Show/Move Picture coordinates relative to the target and inherit its position, scale, rotation and opacity through the parent transform. A missing or erased target hides its children; their normal screen sprites are hidden while attached. Picture clicks are disabled for attached children. Use integer IDs in 1..$gameScreen.maxPictures(). Self-attachment, a target already attached elsewhere, and a child that already has children are ignored, preventing chains and cycles. Repeated IDs do not duplicate sprites. An accepted link replaces any previous parent or message-window attachment and persists in the save. Enable Coreto_4_AttachedPictures 0.1.0 with attached-pictures install after its optional providers/consumers have been arranged; the bundle must already be delivered. install selects this provider instead of VisuMZ_4_AttachedPictures and preserves other provider selections. Restart the game after configuration changes. Core Engine and Message Core are optional: if active, use one of Coreto_0_CoreEngine 0.1.0 / VisuMZ_0_CoreEngine 1.90 and one of Coreto_1_MessageCore 0.1.0 / VisuMZ_1_MessageCore 1.57 before Attached Pictures. Place Attached Pictures after active Picture Choices, VN Picture Busts and Choice Common Events, and before Event Title Scene and Message Visibility. Attachment links belong to $gameSystem: map/scene changes and Erase Picture do not remove them, and save/load preserves them. Showing that picture ID again reuses its attachment. A new game starts with the message IDs in AP-P-PictureIDs:arraynum and no picture-parent links. Show Picture loads the image from img/pictures/; these numeric IDs are picture slots, not filenames. The example is illustrative: choose an existing event target and insertion index from commands list, and pass result.fileHash as --expected-hash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values. [] changes no links."
     },
     {
       "id": "AP-C-PictureRemovePicture",
@@ -246,7 +251,7 @@
           "key": "PictureID",
           "storageKey": "PictureID:arraynum",
           "label": "Picture ID(s)",
-          "description": "Select which Picture ID's to remove from any other pictures.",
+          "description": "JSON array of child picture-slot IDs, for example [1,2]; the CLI accepts integers >= 1. [] changes no links. Runtime converts raw list items to numbers without rounding or clamping. The scene only creates attached sprites for IDs in 1..$gameScreen.maxPictures().",
           "editorType": "number[]",
           "nativeDefault": "[\"1\"]",
           "availability": "supported",
@@ -260,10 +265,11 @@
           "default": [
             1
           ],
-          "min": 1
+          "min": 1,
+          "context": "Argument of attached-pictures api describe AP-C-PictureRemovePicture; that command states attachment/removal scope, current-state replacement, transforms, defaults, activation and lifecycle. The CLI authors an event command and does not attach pictures immediately."
         }
       ],
-      "context": "On the next sprite update, a displayed picture returns to the normal screen picture layer with its existing Show/Move Picture coordinates, scale, rotation and opacity. Parent transforms are no longer applied and no world-position conversion occurs, so it can jump visually. An erased or never-shown picture stays absent. IDs without a picture-parent link are unchanged; message-window attachments are not removed by this command. The updated links persist in the save."
+      "context": "On the next sprite update, a displayed picture returns to the normal screen picture layer with its existing Show/Move Picture coordinates, scale, rotation and opacity. Parent transforms are no longer applied and no world-position conversion occurs, so it can jump visually. An erased or never-shown picture stays absent. IDs without a picture-parent link are unchanged; message-window attachments are not removed by this command. The updated links persist in the save. Enable Coreto_4_AttachedPictures 0.1.0 with attached-pictures install after its optional providers/consumers have been arranged; the bundle must already be delivered. install selects this provider instead of VisuMZ_4_AttachedPictures and preserves other provider selections. Restart the game after configuration changes. Core Engine and Message Core are optional: if active, use one of Coreto_0_CoreEngine 0.1.0 / VisuMZ_0_CoreEngine 1.90 and one of Coreto_1_MessageCore 0.1.0 / VisuMZ_1_MessageCore 1.57 before Attached Pictures. Place Attached Pictures after active Picture Choices, VN Picture Busts and Choice Common Events, and before Event Title Scene and Message Visibility. Attachment links belong to $gameSystem: map/scene changes and Erase Picture do not remove them, and save/load preserves them. Showing that picture ID again reuses its attachment. A new game starts with the message IDs in AP-P-PictureIDs:arraynum and no picture-parent links. Show Picture loads the image from img/pictures/; these numeric IDs are picture slots, not filenames. The example is illustrative: choose an existing event target and insertion index from commands list, and pass result.fileHash as --expected-hash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values. [] changes no links."
     }
   ],
   "commandAliases": [

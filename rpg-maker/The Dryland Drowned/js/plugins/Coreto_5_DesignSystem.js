@@ -1,7 +1,10 @@
 /*:
  * @target MZ
- * @plugindesc [Coreto] [Tier 5] Design System 1.3.0 — Fantasia com respiro
+ * @plugindesc [Coreto] [Tier 5] [Version 1.3.0] [DesignSystem]
  * @author Coreto
+ * @base Coreto_0_CoreEngine
+ * @base Coreto_1_MessageCore
+ * @base Coreto_2_ExtMessageFunc
  * @orderAfter Coreto_0_CoreEngine
  * @orderAfter Coreto_1_MessageCore
  * @orderAfter Coreto_1_OptionsCore
@@ -14,566 +17,1094 @@
  * @orderAfter Coreto_4_AttachedPictures
  * @orderAfter Coreto_4_EventTitleScene
  * @orderAfter Coreto_4_MessageVisibility
- * @base Coreto_0_CoreEngine
- * @base Coreto_1_MessageCore
- * @base Coreto_2_ExtMessageFunc
- * @param Enabled
- * @type boolean
- * @default true
- * @param Windows
- * @type boolean
- * @default true
- * @param Surfaces
- * @type struct<Surfaces>
- * @default {"canvas":"#f8e9cc","panel":"#f9eacf","disabled":"#d3c7b4","onAccent":"#fff8eb","border":"#704737","subtle":"#be9a6b","primary":"#552070","pressed":"#4d1d6b","purple":"#6d1b8b","menuSelectedHoverBorder":"#000000","focus":"#8224ad","gold":"#edaa2f","error":"#af2933","hover":"#eedff2","accentHover":"#6d3185","card":"#f0dfc0","cardScene":"#f0dfc0","cardMemorial":"#f0dfc0"}
- * @param Shapes
- * @type struct<Shapes>
- * @default {"ControlRadius":6,"PanelRadius":10,"MenuSelectedWidth":1,"BorderWidth":1,"FocusWidth":2,"FocusGap":3,"Inset":3}
- * @param Card
- * @type struct<Card>
- * @default {"StripeX":12,"StripeWidth":4,"PaddingY":12,"TextInset":12,"PaddingRight":12}
- * @param Button
- * @type struct<Button>
- * @default {"PaddingX":16,"MinHeight":44,"MarkerSize":24,"MarkerGap":12}
- * @param Choice
- * @type struct<Choice>
- * @default {"MarkerSize":16,"MarkerGap":8,"PaddingY":8,"MaxWidth":620}
- * @param Dialogue
- * @type struct<Dialogue>
- * @default {"ContinuePlacement":"corner","SpeakerInside":true,"SpeakerGap":4,"TextInset":16,"ContrastOutline":2}
- * @param Field
- * @type struct<Field>
- * @default {"Height":40,"PaddingX":18,"Gap":4}
- * @param Controls
- * @type struct<Controls>
- * @default {"OptionHeight":76,"ValueRatio":52,"TrackHeight":8,"ThumbWidth":10,"ThumbHeight":18,"SaveHeader":60,"SaveFooter":98}
- * @param Title
- * @type struct<Title>
- * @default {"Face":"CoretoCinzel","Size":52,"Line":56}
- * @param Section
- * @type struct<Section>
- * @default {"Face":"CoretoAveria","Size":32,"Line":40}
- * @param Speaker
- * @type struct<Speaker>
- * @default {"Face":"CoretoAveria","Size":24,"Line":28}
- * @param Menu
- * @type struct<Menu>
- * @default {"Face":"CoretoOutfitMedium","Size":22,"Line":28}
- * @param Action
- * @type struct<Action>
- * @default {"Face":"CoretoOutfitMedium","Size":20,"Line":24}
- * @param ChoiceText
- * @type struct<ChoiceText>
- * @default {"Face":"CoretoOutfitMedium","Size":18}
- * @param Input
- * @type struct<Input>
- * @default {"Face":"CoretoOutfit","Size":18,"Line":24}
- * @param Label
- * @type struct<Label>
- * @default {"Face":"CoretoOutfitMedium","Size":16,"Line":20}
- * @param Helper
- * @type struct<Helper>
- * @default {"Face":"CoretoOutfit","Size":14,"Line":20}
- * @param Icons
- * @type struct<Icons>
- * @default {"diamond":"CoretoTheme_diamond","error":"CoretoTheme_error","Settings":"CoretoTheme_Settings","Audio":"CoretoTheme_Audio","Language":"CoretoTheme_Language","TextEffects":"CoretoTheme_TextEffects","Music":"CoretoTheme_Music","Ambience":"CoretoTheme_Ambience","Jingle":"CoretoTheme_Jingle","SoundEffects":"CoretoTheme_SoundEffects","Back":"CoretoTheme_Back","Save":"CoretoTheme_Save","Clock":"CoretoTheme_Clock","Conversation":"CoretoTheme_Conversation","Menu":"CoretoTheme_Menu"}
- * @param OptionsLayout
- * @type struct<OptionsLayout>
- * @default {"Margin":28,"CategoryHeight":76,"CategoryOffsetY":16,"ListOffsetY":12,"RowGap":12,"Bottom":20}
- * @param PictureRoles
- * @type struct<PictureRole>[]
- * @default []
- * @param Body
- * @type struct<Body>
- * @default {"Face":"CoretoOutfit","Size":20}
  * @help
- * Requires CoreEngine, MessageCore and ExtMessageFunc. Load after the providers.
- * Configure with the game-coreto-eng-design-system skill and its parameter CLI.
- * Parameters are read at boot. Restart playtest after applying the preset.
- * Fonts belong to MessageCore. Options/save renderers belong to provider callbacks.
- * API: CoretoDesignSystem.drawButton/drawField/drawCard/drawIcon/measure/style.
- * registerAdapter customizes presentation; gameplay and persistence stay with consumers.
+ * Design System 1.3.0. Requires CoreEngine, MessageCore and ExtMessageFunc; load after providers.
+ * Use design-system install and parameters through the Coreto CLI. Restart after parameter changes.
+ * Use skills describe game-coreto-eng-design-system for the complete theme, images and fonts.
+ * Options and Save are additionally required by the complete preset.
+ * CoretoDesignSystem exposes drawing, typography and presentation adapters; gameplay stays with consumers.
+ *
+ * @param Enabled
+ * @text Enabled
+ * @type boolean
+ * @desc When true, install the DesignSystem presentation hooks and expose CoretoDesignSystem at boot. False returns before either is created; provider-owned preset callbacks already written to Options/Save are independent and remain configured.
+ * @default true
+ *
+ * @param Windows
+ * @text Windows
+ * @type boolean
+ * @desc When true, theme eligible MZ windows, choice rows, dialogue spacing and option rectangles. False skips these window hooks and corner-cursor placement; exported drawing helpers and configured picture-role decoration remain available. ScrollText, MapName, picture-text windows and non-menu ButtonAssist are excluded from the ordinary window-surface replacement.
+ * @default true
+ *
+ * @param Surfaces
+ * @text Surfaces
+ * @type struct<Surfaces>
+ * @desc Palette used by drawing helpers and window/picture feedback. Every value is a #RRGGBB string. The panel color is overridden at runtime by active Core Engine itemBackColor1; text, heading and muted colors come from Core Engine rather than this object.
+ * @default {"canvas":"#f8e9cc","panel":"#f9eacf","disabled":"#d3c7b4","onAccent":"#fff8eb","border":"#704737","subtle":"#be9a6b","primary":"#552070","pressed":"#4d1d6b","purple":"#6d1b8b","menuSelectedHoverBorder":"#000000","focus":"#8224ad","gold":"#edaa2f","error":"#af2933","hover":"#eedff2","accentHover":"#6d3185","card":"#f0dfc0","cardScene":"#f0dfc0","cardMemorial":"#f0dfc0"}
+ *
+ * @param Shapes
+ * @text Shapes
+ * @type struct<Shapes>
+ * @desc Pixel dimensions for rounded surfaces, borders and focus rings. Used by window/picture rendering and the public drawing helpers; a corner radius is capped at half the drawn width/height.
+ * @default {"ControlRadius":6,"PanelRadius":10,"MenuSelectedWidth":1,"BorderWidth":1,"FocusWidth":2,"FocusGap":3,"Inset":3}
+ *
+ * @param Card
+ * @text Card
+ * @type struct<Card>
+ * @desc Pixel spacing for static card surfaces and drawCard text. Window_Help uses the surface stripe, while its native text inset is separately fixed at 16 pixels.
+ * @default {"StripeX":12,"StripeWidth":4,"PaddingY":12,"TextInset":12,"PaddingRight":12}
+ *
+ * @param Button
+ * @text Button
+ * @type struct<Button>
+ * @desc Pixel spacing for menu-button markers and drawButton text. MinHeight also sets a floor for choice rows; it does not resize every native button.
+ * @default {"PaddingX":16,"MinHeight":44,"MarkerSize":24,"MarkerGap":12}
+ *
+ * @param Choice
+ * @text Choice
+ * @type struct<Choice>
+ * @desc Pixel spacing and maximum width of choice entries when Windows is true; drawButton with kind choice also uses its marker settings.
+ * @default {"MarkerSize":16,"MarkerGap":8,"PaddingY":8,"MaxWidth":620}
+ *
+ * @param Dialogue
+ * @text Dialogue
+ * @type struct<Dialogue>
+ * @desc Dialogue composition when Windows is true. MessageCore retains text parsing and ExtMessageFunc retains cursor artwork, animation and offsets.
+ * @default {"ContinuePlacement":"corner","SpeakerInside":true,"SpeakerGap":4,"TextInset":16,"ContrastOutline":2}
+ *
+ * @param Field
+ * @text Field
+ * @type struct<Field>
+ * @desc Pixel dimensions for drawField; Height also controls the background drawn behind native actor-name input when Windows is true.
+ * @default {"Height":40,"PaddingX":18,"Gap":4}
+ *
+ * @param Controls
+ * @text Controls
+ * @type struct<Controls>
+ * @desc Visual dimensions captured into the delivered Options/Save drawing recipes. Editing these DesignSystem parameters alone does not rewrite provider callbacks. See skills describe game-coreto-eng-design-system and its references/operations.md for preset ownership and reapplication.
+ * @default {"OptionHeight":76,"ValueRatio":52,"TrackHeight":8,"ThumbWidth":10,"ThumbHeight":18,"SaveHeader":60,"SaveFooter":98}
+ *
+ * @param Title
+ * @text Title
+ * @type struct<Title>
+ * @desc Typography exposed by style("Title") and fonts.title; it does not automatically replace native title text.
+ * @default {"Face":"CoretoCinzel","Size":52,"Line":56}
+ *
+ * @param Section
+ * @text Section
+ * @type struct<Section>
+ * @desc Typography exposed by style("Section") for explicit drawing/measurement; no built-in section renderer consumes it.
+ * @default {"Face":"CoretoAveria","Size":32,"Line":40}
+ *
+ * @param Speaker
+ * @text Speaker
+ * @type struct<Speaker>
+ * @desc Speaker typography exposed by style("Speaker") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.
+ * @default {"Face":"CoretoAveria","Size":24,"Line":28}
+ *
+ * @param Menu
+ * @text Menu
+ * @type struct<Menu>
+ * @desc Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.
+ * @default {"Face":"CoretoOutfitMedium","Size":22,"Line":28}
+ *
+ * @param Action
+ * @text Action
+ * @type struct<Action>
+ * @desc Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.
+ * @default {"Face":"CoretoOutfitMedium","Size":20,"Line":24}
+ *
+ * @param ChoiceText
+ * @text ChoiceText
+ * @type struct<ChoiceText>
+ * @desc Typography for drawButton kind choice. Its Line comes from active MessageCore ChoiceWindowLineHeight (fallback 24), not this object; native choice drawing retains provider font settings.
+ * @default {"Face":"CoretoOutfitMedium","Size":18}
+ *
+ * @param Input
+ * @text Input
+ * @type struct<Input>
+ * @desc Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.
+ * @default {"Face":"CoretoOutfit","Size":18,"Line":24}
+ *
+ * @param Label
+ * @text Label
+ * @type struct<Label>
+ * @desc Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.
+ * @default {"Face":"CoretoOutfitMedium","Size":16,"Line":20}
+ *
+ * @param Helper
+ * @text Helper
+ * @type struct<Helper>
+ * @desc Typography for drawField helper/error text, drawCard text and the default measure role.
+ * @default {"Face":"CoretoOutfit","Size":14,"Line":20}
+ *
+ * @param Icons
+ * @text Icons
+ * @type struct<Icons>
+ * @desc System-image basenames loaded at boot for named theme icons. Use existing img/system/<name>.png files without extension. CLI accepts ASCII letters, digits, underscores, spaces and hyphens; it does not copy assets. The complete preset supplies its assets through skills describe game-coreto-eng-design-system.
+ * @default {"diamond":"CoretoTheme_diamond","error":"CoretoTheme_error","Settings":"CoretoTheme_Settings","Audio":"CoretoTheme_Audio","Language":"CoretoTheme_Language","TextEffects":"CoretoTheme_TextEffects","Music":"CoretoTheme_Music","Ambience":"CoretoTheme_Ambience","Jingle":"CoretoTheme_Jingle","SoundEffects":"CoretoTheme_SoundEffects","Back":"CoretoTheme_Back","Save":"CoretoTheme_Save","Clock":"CoretoTheme_Clock","Conversation":"CoretoTheme_Conversation","Menu":"CoretoTheme_Menu"}
+ *
+ * @param OptionsLayout
+ * @text OptionsLayout
+ * @type struct<OptionsLayout>
+ * @desc Pixel geometry for OptionsCore category/list rectangles when Windows is true and those provider methods exist. Offsets add to the provider rectangle; margins replace its horizontal bounds.
+ * @default {"Margin":28,"CategoryHeight":76,"CategoryOffsetY":16,"ListOffsetY":12,"RowGap":12,"Bottom":20}
+ *
+ * @param PictureRoles
+ * @text PictureRoles
+ * @type struct<PictureRole>[]
+ * @desc Complete JSON array of {Image,Role} mappings for existing img/pictures/<Image>.png assets, without extension. Images must be unique nonempty ASCII letter/digit/underscore/space/hyphen basenames. [] removes all configured mappings on restart. secondary draws a light button, primary a filled action button, card a static striped surface, panel a rounded panel. The surface replaces the displayed bitmap at the original image dimensions; it does not create pictures, clicks or choices. PictureChoices or an adapter owns interaction. A registered pictures adapter can replace this lookup.
+ * @default []
+ *
+ * @param Body
+ * @text Body
+ * @type struct<Body>
+ * @desc Base font for message and scrolling-text windows when Windows is true. Native fallbackFonts are appended to Face; authored text escape codes can override the base.
+ * @default {"Face":"CoretoOutfit","Size":20}
+ *
  */
+
 /*~struct~Surfaces:
  * @param canvas
+ * @text canvas
  * @type string
+ * @desc Exported canvas palette color for game-owned drawing. Current built-in window and picture renderers do not paint a canvas from this value. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #f8e9cc
+ *
  * @param panel
+ * @text panel
  * @type string
+ * @desc Fallback light panel fill. With the required active Coreto Core Engine, CoretoDesignSystem.colors.panel instead reads ColorManager.itemBackColor1(); change that provider setting to change live panel fill. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #f9eacf
+ *
  * @param disabled
+ * @text disabled
  * @type string
+ * @desc Fill for disabled buttons/fields and the unfilled volume-track recipe. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #d3c7b4
+ *
  * @param onAccent
+ * @text onAccent
  * @type string
+ * @desc Text/icon ink on selected, pressed or primary surfaces; also dialogue ink on dark message backgrounds. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #fff8eb
+ *
  * @param border
+ * @text border
  * @type string
+ * @desc Ordinary control and window border color. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #704737
+ *
  * @param subtle
+ * @text subtle
  * @type string
+ * @desc Card stripe, inner message border and picture-panel outline color. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #be9a6b
+ *
  * @param primary
+ * @text primary
  * @type string
+ * @desc Fill for selected or primary controls and the captured volume-control recipe. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #552070
+ *
  * @param pressed
+ * @text pressed
  * @type string
+ * @desc Fill while a control is pressed; also used by the captured selected volume track. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #4d1d6b
+ *
  * @param purple
+ * @text purple
  * @type string
+ * @desc Exported palette color for game-owned drawing. Current built-in renderers use primary/focus/accentHover instead. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #6d1b8b
+ *
  * @param menuSelectedHoverBorder
+ * @text menuSelectedHoverBorder
  * @type string
+ * @desc Border color when a selected menu-kind button is hovered. Other selected controls keep the gold border. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #000000
+ *
  * @param focus
+ * @text focus
  * @type string
+ * @desc Hovered-control border and focused-field border color. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #8224ad
+ *
  * @param gold
+ * @text gold
  * @type string
+ * @desc Selected-control border and explicit focused-button outer ring; also captured volume feedback. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #edaa2f
+ *
  * @param error
+ * @text error
  * @type string
+ * @desc Error-state border in drawField. The error icon retains its source artwork colors. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #af2933
+ *
  * @param hover
+ * @text hover
  * @type string
+ * @desc Fill for an unselected light control under the pointer. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #eedff2
+ *
  * @param accentHover
+ * @text accentHover
  * @type string
+ * @desc Hover fill for selected or primary controls. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #6d3185
+ *
  * @param card
+ * @text card
  * @type string
+ * @desc Static card fill for paper/default contexts, including Window_Help and configured card pictures. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #f0dfc0
+ *
  * @param cardScene
+ * @text cardScene
  * @type string
+ * @desc Static card fill when drawCard receives context scene. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #f0dfc0
+ *
  * @param cardMemorial
+ * @text cardMemorial
  * @type string
+ * @desc Static card fill when drawCard receives context memorial. Supply a JSON string in #RRGGBB format, for example "#704737".
  * @default #f0dfc0
+ *
  */
+
 /*~struct~Shapes:
  * @param ControlRadius
+ * @text ControlRadius
  * @type number
+ * @desc Rounded-control corner radius in pixels, capped by half the rendered dimensions.
  * @default 6
  * @min 0
  * @max 4096
+ *
  * @param PanelRadius
+ * @text PanelRadius
  * @type number
+ * @desc Window and picture-panel corner radius in pixels, capped by half the rendered dimensions.
  * @default 10
  * @min 0
  * @max 4096
+ *
  * @param MenuSelectedWidth
+ * @text MenuSelectedWidth
  * @type number
+ * @desc Border width in pixels for a resting selected menu-kind button. Hover uses FocusWidth; pressed/disabled uses BorderWidth.
  * @default 1
  * @min 0
  * @max 4096
+ *
  * @param BorderWidth
+ * @text BorderWidth
  * @type number
+ * @desc Ordinary control/field border width in pixels. Zero is accepted as a drawing value, not an off switch for the surface or its border.
  * @default 1
  * @min 0
  * @max 4096
+ *
  * @param FocusWidth
+ * @text FocusWidth
  * @type number
+ * @desc Hovered/selected control and focused-field border width in pixels; also width of the explicit outer focus ring.
  * @default 2
  * @min 0
  * @max 4096
+ *
  * @param FocusGap
+ * @text FocusGap
  * @type number
+ * @desc Gap in pixels outside a drawButton rectangle before its explicit focused ring; the ring bounds expand by FocusGap + FocusWidth on every side.
  * @default 3
  * @min 0
  * @max 4096
+ *
  * @param Inset
+ * @text Inset
  * @type number
+ * @desc Inset in pixels from each edge of the message window for its inner decorative outline.
  * @default 3
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Card:
  * @param StripeX
+ * @text StripeX
  * @type number
+ * @desc Horizontal stripe offset in pixels from the card rectangle left edge; positive moves right.
  * @default 12
  * @min 0
  * @max 4096
+ *
  * @param StripeWidth
+ * @text StripeWidth
  * @type number
+ * @desc Width in pixels of the vertical card stripe.
  * @default 4
  * @min 0
  * @max 4096
+ *
  * @param PaddingY
+ * @text PaddingY
  * @type number
+ * @desc Top/bottom stripe inset and drawCard text top/bottom padding in pixels.
  * @default 12
  * @min 0
  * @max 4096
+ *
  * @param TextInset
+ * @text TextInset
  * @type number
+ * @desc drawCard text offset in pixels from the rectangle left edge; reduces available wrapping width.
  * @default 12
  * @min 0
  * @max 4096
+ *
  * @param PaddingRight
+ * @text PaddingRight
  * @type number
+ * @desc Right-side space in pixels excluded from drawCard wrapping width.
  * @default 12
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Button:
  * @param PaddingX
+ * @text PaddingX
  * @type number
+ * @desc Horizontal padding in pixels inside drawButton. Menu/choice text additionally reserves marker size and gap.
  * @default 16
  * @min 0
  * @max 4096
+ *
  * @param MinHeight
+ * @text MinHeight
  * @type number
+ * @desc Minimum choice-row height in pixels. The native row height and tallest wrapped label can raise the final height.
  * @default 44
  * @min 0
  * @max 4096
+ *
  * @param MarkerSize
+ * @text MarkerSize
  * @type number
+ * @desc Diamond marker side length in pixels for menu-kind buttons and title choices.
  * @default 24
  * @min 0
  * @max 4096
+ *
  * @param MarkerGap
+ * @text MarkerGap
  * @type number
+ * @desc Horizontal gap in pixels reserved after the menu/title-choice diamond.
  * @default 12
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Choice:
  * @param MarkerSize
+ * @text MarkerSize
  * @type number
+ * @desc Diamond marker side length in pixels for ordinary choices.
  * @default 16
  * @min 0
  * @max 4096
+ *
  * @param MarkerGap
+ * @text MarkerGap
  * @type number
+ * @desc Horizontal gap in pixels reserved after an ordinary choice diamond.
  * @default 8
  * @min 0
  * @max 4096
+ *
  * @param PaddingY
+ * @text PaddingY
  * @type number
+ * @desc Space in pixels added above and below the tallest measured choice label when computing row height.
  * @default 8
  * @min 0
  * @max 4096
+ *
  * @param MaxWidth
+ * @text MaxWidth
  * @type number
+ * @desc Maximum choice-content width in pixels, further limited by screen width, columns and spacing. CLI minimum is 80. Wrapping preserves whole words, so a single oversized word is not split.
  * @default 620
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Dialogue:
  * @param ContinuePlacement
+ * @text ContinuePlacement
  * @type select
+ * @desc corner places an enabled ExtMessageFunc custom continue cursor near the message bottom-right, retaining provider offsets. provider leaves its placement to ExtMessageFunc. Requires Windows=true and an active custom cursor; it does not enable the cursor.
  * @default corner
  * @option corner
  * @value corner
  * @option provider
  * @value provider
+ *
  * @param SpeakerInside
+ * @text SpeakerInside
  * @type boolean
+ * @desc True reserves speaker space at the start of message text and places the NameBox inside the message panel; false retains provider placement. Only messages with a speaker name reserve space. Forced-position/auto-sized messages skip the added window-height calculation.
  * @default true
+ *
  * @param SpeakerGap
+ * @text SpeakerGap
  * @type number
+ * @desc Extra vertical pixels between an embedded speaker line and message text; added to Speaker.Line.
  * @default 4
  * @min 0
  * @max 4096
+ *
  * @param TextInset
+ * @text TextInset
  * @type number
+ * @desc Horizontal pixels added to the provider message line start. Also offsets embedded NameBox placement from the left and the corner cursor from the right, with provider offsets added.
  * @default 16
  * @min 0
  * @max 4096
+ *
  * @param ContrastOutline
+ * @text ContrastOutline
  * @type number
+ * @desc Text-outline width in pixels on dim/transparent message backgrounds and unadapted scrolling text. Paper backgrounds use MessageCore DefaultOutlineWidth instead; outline color remains Core Engine/native.
  * @default 2
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Field:
  * @param Height
+ * @text Height
  * @type number
+ * @desc Field background height in pixels; drawField uses it for value text and native actor-name input uses it for its backdrop.
  * @default 40
  * @min 0
  * @max 4096
+ *
  * @param PaddingX
+ * @text PaddingX
  * @type number
+ * @desc Horizontal pixels inset on both sides of drawField value text.
  * @default 18
  * @min 0
  * @max 4096
+ *
  * @param Gap
+ * @text Gap
  * @type number
+ * @desc Vertical pixel gap between drawField label and value surface, and between that surface and helper text.
  * @default 4
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Controls:
  * @param OptionHeight
+ * @text OptionHeight
  * @type number
+ * @desc Exposed configuration value for custom recipes. The current runtime and shipped drawing recipes do not read OptionHeight; changing it alone does not resize Options rows.
  * @default 76
  * @min 0
  * @max 4096
+ *
  * @param ValueRatio
+ * @text ValueRatio
  * @type number
+ * @desc Captured option-recipe value-column start as a percentage of row width: x = row.x + row.width * ValueRatio / 100. CLI accepts values strictly between 0 and 100. Current provider callbacks retain the values captured when their recipe was authored.
  * @default 52
  * @min 0
  * @max 4096
+ *
  * @param TrackHeight
+ * @text TrackHeight
  * @type number
+ * @desc Volume-track height in pixels captured into the Options drawing recipe; no direct live runtime consumer.
  * @default 8
  * @min 0
  * @max 4096
+ *
  * @param ThumbWidth
+ * @text ThumbWidth
  * @type number
+ * @desc Volume-thumb width in pixels captured into the Options drawing recipe; no direct live runtime consumer.
  * @default 10
  * @min 0
  * @max 4096
+ *
  * @param ThumbHeight
+ * @text ThumbHeight
  * @type number
+ * @desc Volume-thumb height in pixels captured into the Options drawing recipe; no direct live runtime consumer.
  * @default 18
  * @min 0
  * @max 4096
+ *
  * @param SaveHeader
+ * @text SaveHeader
  * @type number
+ * @desc Top space in pixels reserved above save preview art/description by the captured Save contents recipe.
  * @default 60
  * @min 0
  * @max 4096
+ *
  * @param SaveFooter
+ * @text SaveFooter
  * @type number
+ * @desc Bottom space in pixels reserved below save preview art/description by the captured Save contents recipe. Preview height is max(0, row.height - SaveHeader - SaveFooter).
  * @default 98
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Title:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Title font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography exposed by style("Title") and fonts.title; it does not automatically replace native title text.
  * @default CoretoCinzel
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Title font size in pixels. Typography exposed by style("Title") and fonts.title; it does not automatically replace native title text.
  * @default 52
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Title line height in pixels. Typography exposed by style("Title") and fonts.title; it does not automatically replace native title text.
  * @default 56
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Section:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Section font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography exposed by style("Section") for explicit drawing/measurement; no built-in section renderer consumes it.
  * @default CoretoAveria
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Section font size in pixels. Typography exposed by style("Section") for explicit drawing/measurement; no built-in section renderer consumes it.
  * @default 32
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Section line height in pixels. Typography exposed by style("Section") for explicit drawing/measurement; no built-in section renderer consumes it.
  * @default 40
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Speaker:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Speaker font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Speaker typography exposed by style("Speaker") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.
  * @default CoretoAveria
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Speaker font size in pixels. Speaker typography exposed by style("Speaker") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.
  * @default 24
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Speaker line height in pixels. Speaker typography exposed by style("Speaker") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.
  * @default 28
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Menu:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Menu font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.
  * @default CoretoOutfitMedium
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Menu font size in pixels. Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.
  * @default 22
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Menu line height in pixels. Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.
  * @default 28
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Action:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Action font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.
  * @default CoretoOutfitMedium
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Action font size in pixels. Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.
  * @default 20
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Action line height in pixels. Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.
  * @default 24
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~ChoiceText:
  * @param Face
+ * @text Face
  * @type string
+ * @desc ChoiceText font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawButton kind choice. Its Line comes from active MessageCore ChoiceWindowLineHeight (fallback 24), not this object; native choice drawing retains provider font settings.
  * @default CoretoOutfitMedium
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc ChoiceText font size in pixels. Typography for drawButton kind choice. Its Line comes from active MessageCore ChoiceWindowLineHeight (fallback 24), not this object; native choice drawing retains provider font settings.
  * @default 18
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Input:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Input font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.
  * @default CoretoOutfit
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Input font size in pixels. Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.
  * @default 18
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Input line height in pixels. Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.
  * @default 24
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Label:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Label font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.
  * @default CoretoOutfitMedium
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Label font size in pixels. Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.
  * @default 16
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Label line height in pixels. Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.
  * @default 20
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Helper:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Helper font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawField helper/error text, drawCard text and the default measure role.
  * @default CoretoOutfit
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Helper font size in pixels. Typography for drawField helper/error text, drawCard text and the default measure role.
  * @default 14
  * @min 0
  * @max 4096
+ *
  * @param Line
+ * @text Line
  * @type number
+ * @desc Helper line height in pixels. Typography for drawField helper/error text, drawCard text and the default measure role.
  * @default 20
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~Icons:
  * @param diamond
+ * @text diamond
  * @type string
+ * @desc System-image basename for the diamond icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_diamond
+ *
  * @param error
+ * @text error
  * @type string
+ * @desc System-image basename for the error icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_error
+ *
  * @param Settings
+ * @text Settings
  * @type string
+ * @desc System-image basename for the Settings icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Settings
+ *
  * @param Audio
+ * @text Audio
  * @type string
+ * @desc System-image basename for the Audio icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Audio
+ *
  * @param Language
+ * @text Language
  * @type string
+ * @desc System-image basename for the Language icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Language
+ *
  * @param TextEffects
+ * @text TextEffects
  * @type string
+ * @desc System-image basename for the TextEffects icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_TextEffects
+ *
  * @param Music
+ * @text Music
  * @type string
+ * @desc System-image basename for the Music icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Music
+ *
  * @param Ambience
+ * @text Ambience
  * @type string
+ * @desc System-image basename for the Ambience icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Ambience
+ *
  * @param Jingle
+ * @text Jingle
  * @type string
+ * @desc System-image basename for the Jingle icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Jingle
+ *
  * @param SoundEffects
+ * @text SoundEffects
  * @type string
+ * @desc System-image basename for the SoundEffects icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_SoundEffects
+ *
  * @param Back
+ * @text Back
  * @type string
+ * @desc System-image basename for the Back icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Back
+ *
  * @param Save
+ * @text Save
  * @type string
+ * @desc System-image basename for the Save icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Save
+ *
  * @param Clock
+ * @text Clock
  * @type string
+ * @desc System-image basename for the Clock icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Clock
+ *
  * @param Conversation
+ * @text Conversation
  * @type string
+ * @desc System-image basename for the Conversation icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Conversation
+ *
  * @param Menu
+ * @text Menu
  * @type string
+ * @desc System-image basename for the Menu icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.
  * @default CoretoTheme_Menu
+ *
  */
+
 /*~struct~OptionsLayout:
  * @param Margin
+ * @text Margin
  * @type number
+ * @desc Left/right margin in pixels for both Options rectangles: x = Margin; width = Graphics.boxWidth - 2 * Margin.
  * @default 28
  * @min 0
  * @max 4096
+ *
  * @param CategoryHeight
+ * @text CategoryHeight
  * @type number
+ * @desc Replacement category-window height in pixels.
  * @default 76
  * @min 0
  * @max 4096
+ *
  * @param CategoryOffsetY
+ * @text CategoryOffsetY
  * @type number
+ * @desc Nonnegative vertical pixels added to the provider category-window y position; positive moves down.
  * @default 16
  * @min 0
  * @max 4096
+ *
  * @param ListOffsetY
+ * @text ListOffsetY
  * @type number
+ * @desc Nonnegative vertical pixels added to the provider options-list y position; positive moves down.
  * @default 12
  * @min 0
  * @max 4096
+ *
  * @param RowGap
+ * @text RowGap
  * @type number
+ * @desc Minimum options-row spacing in pixels: max(RowGap, provider rowSpacing).
  * @default 12
  * @min 0
  * @max 4096
+ *
  * @param Bottom
+ * @text Bottom
  * @type number
+ * @desc Bottom space in pixels removed from the available options-list height after its y offset; final height has a 160-pixel minimum.
  * @default 20
  * @min 0
  * @max 4096
+ *
  */
+
 /*~struct~PictureRole:
  * @param Image
+ * @text Image
  * @type file
+ * @desc Existing img/pictures image basename without extension; ASCII letters, digits, underscores, spaces and hyphens only. Must be nonempty and unique in /PictureRoles.
+ * @default 
  * @dir img/pictures/
- * @default
+ *
  * @param Role
+ * @text Role
  * @type select
- * @option secondary
- * @option primary
- * @option card
- * @option panel
+ * @desc secondary = light button; primary = filled action button; card = static striped surface; panel = rounded panel. These replace visual surfaces only; interaction is owned by PictureChoices or a registered adapter.
  * @default secondary
+ * @option secondary
+ * @value secondary
+ * @option primary
+ * @value primary
+ * @option card
+ * @value card
+ * @option panel
+ * @value panel
+ *
  */
+
 /*~struct~Body:
  * @param Face
+ * @text Face
  * @type string
+ * @desc Body font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Base font for message and scrolling-text windows when Windows is true. Native fallbackFonts are appended to Face; authored text escape codes can override the base.
  * @default CoretoOutfit
+ *
  * @param Size
+ * @text Size
  * @type number
+ * @desc Body font size in pixels. Base font for message and scrolling-text windows when Windows is true. Native fallbackFonts are appended to Face; authored text escape codes can override the base.
+ * @default 20
  * @min 1
  * @max 4096
- * @default 20
+ *
  */
+
 (() => {
-'use strict';
-const DEFAULTS={"Enabled":true,"Windows":true,"Surfaces":{"canvas":"#f8e9cc","panel":"#f9eacf","disabled":"#d3c7b4","onAccent":"#fff8eb","border":"#704737","subtle":"#be9a6b","primary":"#552070","pressed":"#4d1d6b","purple":"#6d1b8b","menuSelectedHoverBorder":"#000000","focus":"#8224ad","gold":"#edaa2f","error":"#af2933","hover":"#eedff2","accentHover":"#6d3185","card":"#f0dfc0","cardScene":"#f0dfc0","cardMemorial":"#f0dfc0"},"Shapes":{"ControlRadius":6,"PanelRadius":10,"MenuSelectedWidth":1,"BorderWidth":1,"FocusWidth":2,"FocusGap":3,"Inset":3},"Card":{"StripeX":12,"StripeWidth":4,"PaddingY":12,"TextInset":12,"PaddingRight":12},"Button":{"PaddingX":16,"MinHeight":44,"MarkerSize":24,"MarkerGap":12},"Choice":{"MarkerSize":16,"MarkerGap":8,"PaddingY":8,"MaxWidth":620},"Dialogue":{"ContinuePlacement":"corner","SpeakerInside":true,"SpeakerGap":4,"TextInset":16,"ContrastOutline":2},"Field":{"Height":40,"PaddingX":18,"Gap":4},"Controls":{"OptionHeight":76,"ValueRatio":52,"TrackHeight":8,"ThumbWidth":10,"ThumbHeight":18,"SaveHeader":60,"SaveFooter":98},"Title":{"Face":"CoretoCinzel","Size":52,"Line":56},"Section":{"Face":"CoretoAveria","Size":32,"Line":40},"Speaker":{"Face":"CoretoAveria","Size":24,"Line":28},"Menu":{"Face":"CoretoOutfitMedium","Size":22,"Line":28},"Action":{"Face":"CoretoOutfitMedium","Size":20,"Line":24},"ChoiceText":{"Face":"CoretoOutfitMedium","Size":18},"Input":{"Face":"CoretoOutfit","Size":18,"Line":24},"Label":{"Face":"CoretoOutfitMedium","Size":16,"Line":20},"Helper":{"Face":"CoretoOutfit","Size":14,"Line":20},"Icons":{"diamond":"CoretoTheme_diamond","error":"CoretoTheme_error","Settings":"CoretoTheme_Settings","Audio":"CoretoTheme_Audio","Language":"CoretoTheme_Language","TextEffects":"CoretoTheme_TextEffects","Music":"CoretoTheme_Music","Ambience":"CoretoTheme_Ambience","Jingle":"CoretoTheme_Jingle","SoundEffects":"CoretoTheme_SoundEffects","Back":"CoretoTheme_Back","Save":"CoretoTheme_Save","Clock":"CoretoTheme_Clock","Conversation":"CoretoTheme_Conversation","Menu":"CoretoTheme_Menu"},"OptionsLayout":{"Margin":28,"CategoryHeight":76,"CategoryOffsetY":16,"ListOffsetY":12,"RowGap":12,"Bottom":20},"PictureRoles":[],"Body":{"Face":"CoretoOutfit","Size":20}};
+"use strict";
+const catalog = {"schemaVersion":1,"pluginId":"Coreto_5_DesignSystem","namespace":"design-system","version":"1.3.0","description":"Shared presentation for MZ windows, choices and picture roles.","dependencies":{"required":["Coreto_0_CoreEngine","Coreto_1_MessageCore","Coreto_2_ExtMessageFunc"],"optional":["Coreto_1_OptionsCore","Coreto_1_SaveCore"]},"orderAfter":["Coreto_0_CoreEngine","Coreto_1_MessageCore","Coreto_1_OptionsCore","Coreto_1_SaveCore","Coreto_2_ExtMessageFunc","Coreto_2_PictureChoices","Coreto_2_VNPictureBusts","Coreto_2_AniMsgTextEffects","Coreto_3_ChoiceCmnEvts","Coreto_4_AttachedPictures","Coreto_4_EventTitleScene","Coreto_4_MessageVisibility"],"orderBefore":[],"parameters":[{"id":"DS-P-Enabled","key":"Enabled","storageKey":"Enabled","label":"Enabled","description":"When true, install the DesignSystem presentation hooks and expose CoretoDesignSystem at boot. False returns before either is created; provider-owned preset callbacks already written to Options/Save are independent and remain configured.","type":"boolean","editorType":"boolean","default":true,"nativeDefault":"true","availability":"supported"},{"id":"DS-P-Windows","key":"Windows","storageKey":"Windows","label":"Windows","description":"When true, theme eligible MZ windows, choice rows, dialogue spacing and option rectangles. False skips these window hooks and corner-cursor placement; exported drawing helpers and configured picture-role decoration remain available. ScrollText, MapName, picture-text windows and non-menu ButtonAssist are excluded from the ordinary window-surface replacement.","type":"boolean","editorType":"boolean","default":true,"nativeDefault":"true","availability":"supported"},{"id":"DS-P-Surfaces","key":"Surfaces","storageKey":"Surfaces","label":"Surfaces","description":"Palette used by drawing helpers and window/picture feedback. Every value is a #RRGGBB string. The panel color is overridden at runtime by active Core Engine itemBackColor1; text, heading and muted colors come from Core Engine rather than this object.","type":"struct","editorType":"struct<Surfaces>","default":{"canvas":"#f8e9cc","panel":"#f9eacf","disabled":"#d3c7b4","onAccent":"#fff8eb","border":"#704737","subtle":"#be9a6b","primary":"#552070","pressed":"#4d1d6b","purple":"#6d1b8b","menuSelectedHoverBorder":"#000000","focus":"#8224ad","gold":"#edaa2f","error":"#af2933","hover":"#eedff2","accentHover":"#6d3185","card":"#f0dfc0","cardScene":"#f0dfc0","cardMemorial":"#f0dfc0"},"nativeDefault":"{\"canvas\":\"#f8e9cc\",\"panel\":\"#f9eacf\",\"disabled\":\"#d3c7b4\",\"onAccent\":\"#fff8eb\",\"border\":\"#704737\",\"subtle\":\"#be9a6b\",\"primary\":\"#552070\",\"pressed\":\"#4d1d6b\",\"purple\":\"#6d1b8b\",\"menuSelectedHoverBorder\":\"#000000\",\"focus\":\"#8224ad\",\"gold\":\"#edaa2f\",\"error\":\"#af2933\",\"hover\":\"#eedff2\",\"accentHover\":\"#6d3185\",\"card\":\"#f0dfc0\",\"cardScene\":\"#f0dfc0\",\"cardMemorial\":\"#f0dfc0\"}","availability":"supported","structName":"Surfaces","fields":[{"id":"DS-P-Surfaces.canvas","key":"canvas","storageKey":"canvas","label":"canvas","description":"Exported canvas palette color for game-owned drawing. Current built-in window and picture renderers do not paint a canvas from this value. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#f8e9cc","nativeDefault":"#f8e9cc","availability":"supported"},{"id":"DS-P-Surfaces.panel","key":"panel","storageKey":"panel","label":"panel","description":"Fallback light panel fill. With the required active Coreto Core Engine, CoretoDesignSystem.colors.panel instead reads ColorManager.itemBackColor1(); change that provider setting to change live panel fill. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#f9eacf","nativeDefault":"#f9eacf","availability":"supported"},{"id":"DS-P-Surfaces.disabled","key":"disabled","storageKey":"disabled","label":"disabled","description":"Fill for disabled buttons/fields and the unfilled volume-track recipe. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#d3c7b4","nativeDefault":"#d3c7b4","availability":"supported"},{"id":"DS-P-Surfaces.onAccent","key":"onAccent","storageKey":"onAccent","label":"onAccent","description":"Text/icon ink on selected, pressed or primary surfaces; also dialogue ink on dark message backgrounds. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#fff8eb","nativeDefault":"#fff8eb","availability":"supported"},{"id":"DS-P-Surfaces.border","key":"border","storageKey":"border","label":"border","description":"Ordinary control and window border color. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#704737","nativeDefault":"#704737","availability":"supported"},{"id":"DS-P-Surfaces.subtle","key":"subtle","storageKey":"subtle","label":"subtle","description":"Card stripe, inner message border and picture-panel outline color. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#be9a6b","nativeDefault":"#be9a6b","availability":"supported"},{"id":"DS-P-Surfaces.primary","key":"primary","storageKey":"primary","label":"primary","description":"Fill for selected or primary controls and the captured volume-control recipe. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#552070","nativeDefault":"#552070","availability":"supported"},{"id":"DS-P-Surfaces.pressed","key":"pressed","storageKey":"pressed","label":"pressed","description":"Fill while a control is pressed; also used by the captured selected volume track. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#4d1d6b","nativeDefault":"#4d1d6b","availability":"supported"},{"id":"DS-P-Surfaces.purple","key":"purple","storageKey":"purple","label":"purple","description":"Exported palette color for game-owned drawing. Current built-in renderers use primary/focus/accentHover instead. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#6d1b8b","nativeDefault":"#6d1b8b","availability":"supported"},{"id":"DS-P-Surfaces.menuSelectedHoverBorder","key":"menuSelectedHoverBorder","storageKey":"menuSelectedHoverBorder","label":"menuSelectedHoverBorder","description":"Border color when a selected menu-kind button is hovered. Other selected controls keep the gold border. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#000000","nativeDefault":"#000000","availability":"supported"},{"id":"DS-P-Surfaces.focus","key":"focus","storageKey":"focus","label":"focus","description":"Hovered-control border and focused-field border color. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#8224ad","nativeDefault":"#8224ad","availability":"supported"},{"id":"DS-P-Surfaces.gold","key":"gold","storageKey":"gold","label":"gold","description":"Selected-control border and explicit focused-button outer ring; also captured volume feedback. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#edaa2f","nativeDefault":"#edaa2f","availability":"supported"},{"id":"DS-P-Surfaces.error","key":"error","storageKey":"error","label":"error","description":"Error-state border in drawField. The error icon retains its source artwork colors. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#af2933","nativeDefault":"#af2933","availability":"supported"},{"id":"DS-P-Surfaces.hover","key":"hover","storageKey":"hover","label":"hover","description":"Fill for an unselected light control under the pointer. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#eedff2","nativeDefault":"#eedff2","availability":"supported"},{"id":"DS-P-Surfaces.accentHover","key":"accentHover","storageKey":"accentHover","label":"accentHover","description":"Hover fill for selected or primary controls. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#6d3185","nativeDefault":"#6d3185","availability":"supported"},{"id":"DS-P-Surfaces.card","key":"card","storageKey":"card","label":"card","description":"Static card fill for paper/default contexts, including Window_Help and configured card pictures. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#f0dfc0","nativeDefault":"#f0dfc0","availability":"supported"},{"id":"DS-P-Surfaces.cardScene","key":"cardScene","storageKey":"cardScene","label":"cardScene","description":"Static card fill when drawCard receives context scene. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#f0dfc0","nativeDefault":"#f0dfc0","availability":"supported"},{"id":"DS-P-Surfaces.cardMemorial","key":"cardMemorial","storageKey":"cardMemorial","label":"cardMemorial","description":"Static card fill when drawCard receives context memorial. Supply a JSON string in #RRGGBB format, for example \"#704737\".","type":"string","editorType":"string","default":"#f0dfc0","nativeDefault":"#f0dfc0","availability":"supported"}]},{"id":"DS-P-Shapes","key":"Shapes","storageKey":"Shapes","label":"Shapes","description":"Pixel dimensions for rounded surfaces, borders and focus rings. Used by window/picture rendering and the public drawing helpers; a corner radius is capped at half the drawn width/height.","type":"struct","editorType":"struct<Shapes>","default":{"ControlRadius":6,"PanelRadius":10,"MenuSelectedWidth":1,"BorderWidth":1,"FocusWidth":2,"FocusGap":3,"Inset":3},"nativeDefault":"{\"ControlRadius\":6,\"PanelRadius\":10,\"MenuSelectedWidth\":1,\"BorderWidth\":1,\"FocusWidth\":2,\"FocusGap\":3,\"Inset\":3}","availability":"supported","structName":"Shapes","fields":[{"id":"DS-P-Shapes.ControlRadius","key":"ControlRadius","storageKey":"ControlRadius","label":"ControlRadius","description":"Rounded-control corner radius in pixels, capped by half the rendered dimensions.","type":"number","editorType":"number","default":6,"nativeDefault":"6","availability":"supported","min":0,"max":4096},{"id":"DS-P-Shapes.PanelRadius","key":"PanelRadius","storageKey":"PanelRadius","label":"PanelRadius","description":"Window and picture-panel corner radius in pixels, capped by half the rendered dimensions.","type":"number","editorType":"number","default":10,"nativeDefault":"10","availability":"supported","min":0,"max":4096},{"id":"DS-P-Shapes.MenuSelectedWidth","key":"MenuSelectedWidth","storageKey":"MenuSelectedWidth","label":"MenuSelectedWidth","description":"Border width in pixels for a resting selected menu-kind button. Hover uses FocusWidth; pressed/disabled uses BorderWidth.","type":"number","editorType":"number","default":1,"nativeDefault":"1","availability":"supported","min":0,"max":4096},{"id":"DS-P-Shapes.BorderWidth","key":"BorderWidth","storageKey":"BorderWidth","label":"BorderWidth","description":"Ordinary control/field border width in pixels. Zero is accepted as a drawing value, not an off switch for the surface or its border.","type":"number","editorType":"number","default":1,"nativeDefault":"1","availability":"supported","min":0,"max":4096},{"id":"DS-P-Shapes.FocusWidth","key":"FocusWidth","storageKey":"FocusWidth","label":"FocusWidth","description":"Hovered/selected control and focused-field border width in pixels; also width of the explicit outer focus ring.","type":"number","editorType":"number","default":2,"nativeDefault":"2","availability":"supported","min":0,"max":4096},{"id":"DS-P-Shapes.FocusGap","key":"FocusGap","storageKey":"FocusGap","label":"FocusGap","description":"Gap in pixels outside a drawButton rectangle before its explicit focused ring; the ring bounds expand by FocusGap + FocusWidth on every side.","type":"number","editorType":"number","default":3,"nativeDefault":"3","availability":"supported","min":0,"max":4096},{"id":"DS-P-Shapes.Inset","key":"Inset","storageKey":"Inset","label":"Inset","description":"Inset in pixels from each edge of the message window for its inner decorative outline.","type":"number","editorType":"number","default":3,"nativeDefault":"3","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Card","key":"Card","storageKey":"Card","label":"Card","description":"Pixel spacing for static card surfaces and drawCard text. Window_Help uses the surface stripe, while its native text inset is separately fixed at 16 pixels.","type":"struct","editorType":"struct<Card>","default":{"StripeX":12,"StripeWidth":4,"PaddingY":12,"TextInset":12,"PaddingRight":12},"nativeDefault":"{\"StripeX\":12,\"StripeWidth\":4,\"PaddingY\":12,\"TextInset\":12,\"PaddingRight\":12}","availability":"supported","structName":"Card","fields":[{"id":"DS-P-Card.StripeX","key":"StripeX","storageKey":"StripeX","label":"StripeX","description":"Horizontal stripe offset in pixels from the card rectangle left edge; positive moves right.","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096},{"id":"DS-P-Card.StripeWidth","key":"StripeWidth","storageKey":"StripeWidth","label":"StripeWidth","description":"Width in pixels of the vertical card stripe.","type":"number","editorType":"number","default":4,"nativeDefault":"4","availability":"supported","min":0,"max":4096},{"id":"DS-P-Card.PaddingY","key":"PaddingY","storageKey":"PaddingY","label":"PaddingY","description":"Top/bottom stripe inset and drawCard text top/bottom padding in pixels.","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096},{"id":"DS-P-Card.TextInset","key":"TextInset","storageKey":"TextInset","label":"TextInset","description":"drawCard text offset in pixels from the rectangle left edge; reduces available wrapping width.","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096},{"id":"DS-P-Card.PaddingRight","key":"PaddingRight","storageKey":"PaddingRight","label":"PaddingRight","description":"Right-side space in pixels excluded from drawCard wrapping width.","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Button","key":"Button","storageKey":"Button","label":"Button","description":"Pixel spacing for menu-button markers and drawButton text. MinHeight also sets a floor for choice rows; it does not resize every native button.","type":"struct","editorType":"struct<Button>","default":{"PaddingX":16,"MinHeight":44,"MarkerSize":24,"MarkerGap":12},"nativeDefault":"{\"PaddingX\":16,\"MinHeight\":44,\"MarkerSize\":24,\"MarkerGap\":12}","availability":"supported","structName":"Button","fields":[{"id":"DS-P-Button.PaddingX","key":"PaddingX","storageKey":"PaddingX","label":"PaddingX","description":"Horizontal padding in pixels inside drawButton. Menu/choice text additionally reserves marker size and gap.","type":"number","editorType":"number","default":16,"nativeDefault":"16","availability":"supported","min":0,"max":4096},{"id":"DS-P-Button.MinHeight","key":"MinHeight","storageKey":"MinHeight","label":"MinHeight","description":"Minimum choice-row height in pixels. The native row height and tallest wrapped label can raise the final height.","type":"number","editorType":"number","default":44,"nativeDefault":"44","availability":"supported","min":0,"max":4096},{"id":"DS-P-Button.MarkerSize","key":"MarkerSize","storageKey":"MarkerSize","label":"MarkerSize","description":"Diamond marker side length in pixels for menu-kind buttons and title choices.","type":"number","editorType":"number","default":24,"nativeDefault":"24","availability":"supported","min":0,"max":4096},{"id":"DS-P-Button.MarkerGap","key":"MarkerGap","storageKey":"MarkerGap","label":"MarkerGap","description":"Horizontal gap in pixels reserved after the menu/title-choice diamond.","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Choice","key":"Choice","storageKey":"Choice","label":"Choice","description":"Pixel spacing and maximum width of choice entries when Windows is true; drawButton with kind choice also uses its marker settings.","type":"struct","editorType":"struct<Choice>","default":{"MarkerSize":16,"MarkerGap":8,"PaddingY":8,"MaxWidth":620},"nativeDefault":"{\"MarkerSize\":16,\"MarkerGap\":8,\"PaddingY\":8,\"MaxWidth\":620}","availability":"supported","structName":"Choice","fields":[{"id":"DS-P-Choice.MarkerSize","key":"MarkerSize","storageKey":"MarkerSize","label":"MarkerSize","description":"Diamond marker side length in pixels for ordinary choices.","type":"number","editorType":"number","default":16,"nativeDefault":"16","availability":"supported","min":0,"max":4096},{"id":"DS-P-Choice.MarkerGap","key":"MarkerGap","storageKey":"MarkerGap","label":"MarkerGap","description":"Horizontal gap in pixels reserved after an ordinary choice diamond.","type":"number","editorType":"number","default":8,"nativeDefault":"8","availability":"supported","min":0,"max":4096},{"id":"DS-P-Choice.PaddingY","key":"PaddingY","storageKey":"PaddingY","label":"PaddingY","description":"Space in pixels added above and below the tallest measured choice label when computing row height.","type":"number","editorType":"number","default":8,"nativeDefault":"8","availability":"supported","min":0,"max":4096},{"id":"DS-P-Choice.MaxWidth","key":"MaxWidth","storageKey":"MaxWidth","label":"MaxWidth","description":"Maximum choice-content width in pixels, further limited by screen width, columns and spacing. CLI minimum is 80. Wrapping preserves whole words, so a single oversized word is not split.","type":"number","editorType":"number","default":620,"nativeDefault":"620","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Dialogue","key":"Dialogue","storageKey":"Dialogue","label":"Dialogue","description":"Dialogue composition when Windows is true. MessageCore retains text parsing and ExtMessageFunc retains cursor artwork, animation and offsets.","type":"struct","editorType":"struct<Dialogue>","default":{"ContinuePlacement":"corner","SpeakerInside":true,"SpeakerGap":4,"TextInset":16,"ContrastOutline":2},"nativeDefault":"{\"ContinuePlacement\":\"corner\",\"SpeakerInside\":true,\"SpeakerGap\":4,\"TextInset\":16,\"ContrastOutline\":2}","availability":"supported","structName":"Dialogue","fields":[{"id":"DS-P-Dialogue.ContinuePlacement","key":"ContinuePlacement","storageKey":"ContinuePlacement","label":"ContinuePlacement","description":"corner places an enabled ExtMessageFunc custom continue cursor near the message bottom-right, retaining provider offsets. provider leaves its placement to ExtMessageFunc. Requires Windows=true and an active custom cursor; it does not enable the cursor.","type":"string","editorType":"select","default":"corner","nativeDefault":"corner","availability":"supported","options":["corner","provider"]},{"id":"DS-P-Dialogue.SpeakerInside","key":"SpeakerInside","storageKey":"SpeakerInside","label":"SpeakerInside","description":"True reserves speaker space at the start of message text and places the NameBox inside the message panel; false retains provider placement. Only messages with a speaker name reserve space. Forced-position/auto-sized messages skip the added window-height calculation.","type":"boolean","editorType":"boolean","default":true,"nativeDefault":"true","availability":"supported"},{"id":"DS-P-Dialogue.SpeakerGap","key":"SpeakerGap","storageKey":"SpeakerGap","label":"SpeakerGap","description":"Extra vertical pixels between an embedded speaker line and message text; added to Speaker.Line.","type":"number","editorType":"number","default":4,"nativeDefault":"4","availability":"supported","min":0,"max":4096},{"id":"DS-P-Dialogue.TextInset","key":"TextInset","storageKey":"TextInset","label":"TextInset","description":"Horizontal pixels added to the provider message line start. Also offsets embedded NameBox placement from the left and the corner cursor from the right, with provider offsets added.","type":"number","editorType":"number","default":16,"nativeDefault":"16","availability":"supported","min":0,"max":4096},{"id":"DS-P-Dialogue.ContrastOutline","key":"ContrastOutline","storageKey":"ContrastOutline","label":"ContrastOutline","description":"Text-outline width in pixels on dim/transparent message backgrounds and unadapted scrolling text. Paper backgrounds use MessageCore DefaultOutlineWidth instead; outline color remains Core Engine/native.","type":"number","editorType":"number","default":2,"nativeDefault":"2","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Field","key":"Field","storageKey":"Field","label":"Field","description":"Pixel dimensions for drawField; Height also controls the background drawn behind native actor-name input when Windows is true.","type":"struct","editorType":"struct<Field>","default":{"Height":40,"PaddingX":18,"Gap":4},"nativeDefault":"{\"Height\":40,\"PaddingX\":18,\"Gap\":4}","availability":"supported","structName":"Field","fields":[{"id":"DS-P-Field.Height","key":"Height","storageKey":"Height","label":"Height","description":"Field background height in pixels; drawField uses it for value text and native actor-name input uses it for its backdrop.","type":"number","editorType":"number","default":40,"nativeDefault":"40","availability":"supported","min":0,"max":4096},{"id":"DS-P-Field.PaddingX","key":"PaddingX","storageKey":"PaddingX","label":"PaddingX","description":"Horizontal pixels inset on both sides of drawField value text.","type":"number","editorType":"number","default":18,"nativeDefault":"18","availability":"supported","min":0,"max":4096},{"id":"DS-P-Field.Gap","key":"Gap","storageKey":"Gap","label":"Gap","description":"Vertical pixel gap between drawField label and value surface, and between that surface and helper text.","type":"number","editorType":"number","default":4,"nativeDefault":"4","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Controls","key":"Controls","storageKey":"Controls","label":"Controls","description":"Visual dimensions captured into the delivered Options/Save drawing recipes. Editing these DesignSystem parameters alone does not rewrite provider callbacks. See skills describe game-coreto-eng-design-system and its references/operations.md for preset ownership and reapplication.","type":"struct","editorType":"struct<Controls>","default":{"OptionHeight":76,"ValueRatio":52,"TrackHeight":8,"ThumbWidth":10,"ThumbHeight":18,"SaveHeader":60,"SaveFooter":98},"nativeDefault":"{\"OptionHeight\":76,\"ValueRatio\":52,\"TrackHeight\":8,\"ThumbWidth\":10,\"ThumbHeight\":18,\"SaveHeader\":60,\"SaveFooter\":98}","availability":"supported","structName":"Controls","fields":[{"id":"DS-P-Controls.OptionHeight","key":"OptionHeight","storageKey":"OptionHeight","label":"OptionHeight","description":"Exposed configuration value for custom recipes. The current runtime and shipped drawing recipes do not read OptionHeight; changing it alone does not resize Options rows.","type":"number","editorType":"number","default":76,"nativeDefault":"76","availability":"supported","min":0,"max":4096},{"id":"DS-P-Controls.ValueRatio","key":"ValueRatio","storageKey":"ValueRatio","label":"ValueRatio","description":"Captured option-recipe value-column start as a percentage of row width: x = row.x + row.width * ValueRatio / 100. CLI accepts values strictly between 0 and 100. Current provider callbacks retain the values captured when their recipe was authored.","type":"number","editorType":"number","default":52,"nativeDefault":"52","availability":"supported","min":0,"max":4096},{"id":"DS-P-Controls.TrackHeight","key":"TrackHeight","storageKey":"TrackHeight","label":"TrackHeight","description":"Volume-track height in pixels captured into the Options drawing recipe; no direct live runtime consumer.","type":"number","editorType":"number","default":8,"nativeDefault":"8","availability":"supported","min":0,"max":4096},{"id":"DS-P-Controls.ThumbWidth","key":"ThumbWidth","storageKey":"ThumbWidth","label":"ThumbWidth","description":"Volume-thumb width in pixels captured into the Options drawing recipe; no direct live runtime consumer.","type":"number","editorType":"number","default":10,"nativeDefault":"10","availability":"supported","min":0,"max":4096},{"id":"DS-P-Controls.ThumbHeight","key":"ThumbHeight","storageKey":"ThumbHeight","label":"ThumbHeight","description":"Volume-thumb height in pixels captured into the Options drawing recipe; no direct live runtime consumer.","type":"number","editorType":"number","default":18,"nativeDefault":"18","availability":"supported","min":0,"max":4096},{"id":"DS-P-Controls.SaveHeader","key":"SaveHeader","storageKey":"SaveHeader","label":"SaveHeader","description":"Top space in pixels reserved above save preview art/description by the captured Save contents recipe.","type":"number","editorType":"number","default":60,"nativeDefault":"60","availability":"supported","min":0,"max":4096},{"id":"DS-P-Controls.SaveFooter","key":"SaveFooter","storageKey":"SaveFooter","label":"SaveFooter","description":"Bottom space in pixels reserved below save preview art/description by the captured Save contents recipe. Preview height is max(0, row.height - SaveHeader - SaveFooter).","type":"number","editorType":"number","default":98,"nativeDefault":"98","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Title","key":"Title","storageKey":"Title","label":"Title","description":"Typography exposed by style(\"Title\") and fonts.title; it does not automatically replace native title text.","type":"struct","editorType":"struct<Title>","default":{"Face":"CoretoCinzel","Size":52,"Line":56},"nativeDefault":"{\"Face\":\"CoretoCinzel\",\"Size\":52,\"Line\":56}","availability":"supported","structName":"Title","fields":[{"id":"DS-P-Title.Face","key":"Face","storageKey":"Face","label":"Face","description":"Title font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography exposed by style(\"Title\") and fonts.title; it does not automatically replace native title text.","type":"string","editorType":"string","default":"CoretoCinzel","nativeDefault":"CoretoCinzel","availability":"supported"},{"id":"DS-P-Title.Size","key":"Size","storageKey":"Size","label":"Size","description":"Title font size in pixels. Typography exposed by style(\"Title\") and fonts.title; it does not automatically replace native title text.","type":"number","editorType":"number","default":52,"nativeDefault":"52","availability":"supported","min":0,"max":4096},{"id":"DS-P-Title.Line","key":"Line","storageKey":"Line","label":"Line","description":"Title line height in pixels. Typography exposed by style(\"Title\") and fonts.title; it does not automatically replace native title text.","type":"number","editorType":"number","default":56,"nativeDefault":"56","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Section","key":"Section","storageKey":"Section","label":"Section","description":"Typography exposed by style(\"Section\") for explicit drawing/measurement; no built-in section renderer consumes it.","type":"struct","editorType":"struct<Section>","default":{"Face":"CoretoAveria","Size":32,"Line":40},"nativeDefault":"{\"Face\":\"CoretoAveria\",\"Size\":32,\"Line\":40}","availability":"supported","structName":"Section","fields":[{"id":"DS-P-Section.Face","key":"Face","storageKey":"Face","label":"Face","description":"Section font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography exposed by style(\"Section\") for explicit drawing/measurement; no built-in section renderer consumes it.","type":"string","editorType":"string","default":"CoretoAveria","nativeDefault":"CoretoAveria","availability":"supported"},{"id":"DS-P-Section.Size","key":"Size","storageKey":"Size","label":"Size","description":"Section font size in pixels. Typography exposed by style(\"Section\") for explicit drawing/measurement; no built-in section renderer consumes it.","type":"number","editorType":"number","default":32,"nativeDefault":"32","availability":"supported","min":0,"max":4096},{"id":"DS-P-Section.Line","key":"Line","storageKey":"Line","label":"Line","description":"Section line height in pixels. Typography exposed by style(\"Section\") for explicit drawing/measurement; no built-in section renderer consumes it.","type":"number","editorType":"number","default":40,"nativeDefault":"40","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Speaker","key":"Speaker","storageKey":"Speaker","label":"Speaker","description":"Speaker typography exposed by style(\"Speaker\") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.","type":"struct","editorType":"struct<Speaker>","default":{"Face":"CoretoAveria","Size":24,"Line":28},"nativeDefault":"{\"Face\":\"CoretoAveria\",\"Size\":24,\"Line\":28}","availability":"supported","structName":"Speaker","fields":[{"id":"DS-P-Speaker.Face","key":"Face","storageKey":"Face","label":"Face","description":"Speaker font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Speaker typography exposed by style(\"Speaker\") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.","type":"string","editorType":"string","default":"CoretoAveria","nativeDefault":"CoretoAveria","availability":"supported"},{"id":"DS-P-Speaker.Size","key":"Size","storageKey":"Size","label":"Size","description":"Speaker font size in pixels. Speaker typography exposed by style(\"Speaker\") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.","type":"number","editorType":"number","default":24,"nativeDefault":"24","availability":"supported","min":0,"max":4096},{"id":"DS-P-Speaker.Line","key":"Line","storageKey":"Line","label":"Line","description":"Speaker line height in pixels. Speaker typography exposed by style(\"Speaker\") and fonts.speaker. Line reserves embedded-speaker space. Save header recipes capture Face/Size; native NameBox font remains provider-owned.","type":"number","editorType":"number","default":28,"nativeDefault":"28","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Menu","key":"Menu","storageKey":"Menu","label":"Menu","description":"Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.","type":"struct","editorType":"struct<Menu>","default":{"Face":"CoretoOutfitMedium","Size":22,"Line":28},"nativeDefault":"{\"Face\":\"CoretoOutfitMedium\",\"Size\":22,\"Line\":28}","availability":"supported","structName":"Menu","fields":[{"id":"DS-P-Menu.Face","key":"Face","storageKey":"Face","label":"Face","description":"Menu font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.","type":"string","editorType":"string","default":"CoretoOutfitMedium","nativeDefault":"CoretoOutfitMedium","availability":"supported"},{"id":"DS-P-Menu.Size","key":"Size","storageKey":"Size","label":"Size","description":"Menu font size in pixels. Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.","type":"number","editorType":"number","default":22,"nativeDefault":"22","availability":"supported","min":0,"max":4096},{"id":"DS-P-Menu.Line","key":"Line","storageKey":"Line","label":"Line","description":"Menu line height in pixels. Typography for drawButton kind menu. Options row recipes capture Face/Size separately; editing this object does not rewrite those callbacks.","type":"number","editorType":"number","default":28,"nativeDefault":"28","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Action","key":"Action","storageKey":"Action","label":"Action","description":"Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.","type":"struct","editorType":"struct<Action>","default":{"Face":"CoretoOutfitMedium","Size":20,"Line":24},"nativeDefault":"{\"Face\":\"CoretoOutfitMedium\",\"Size\":20,\"Line\":24}","availability":"supported","structName":"Action","fields":[{"id":"DS-P-Action.Face","key":"Face","storageKey":"Face","label":"Face","description":"Action font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.","type":"string","editorType":"string","default":"CoretoOutfitMedium","nativeDefault":"CoretoOutfitMedium","availability":"supported"},{"id":"DS-P-Action.Size","key":"Size","storageKey":"Size","label":"Size","description":"Action font size in pixels. Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.","type":"number","editorType":"number","default":20,"nativeDefault":"20","availability":"supported","min":0,"max":4096},{"id":"DS-P-Action.Line","key":"Line","storageKey":"Line","label":"Line","description":"Action line height in pixels. Typography for drawButton kinds primary, text and ordinary action. Options value-chip recipes capture Face/Size separately.","type":"number","editorType":"number","default":24,"nativeDefault":"24","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-ChoiceText","key":"ChoiceText","storageKey":"ChoiceText","label":"ChoiceText","description":"Typography for drawButton kind choice. Its Line comes from active MessageCore ChoiceWindowLineHeight (fallback 24), not this object; native choice drawing retains provider font settings.","type":"struct","editorType":"struct<ChoiceText>","default":{"Face":"CoretoOutfitMedium","Size":18},"nativeDefault":"{\"Face\":\"CoretoOutfitMedium\",\"Size\":18}","availability":"supported","structName":"ChoiceText","fields":[{"id":"DS-P-ChoiceText.Face","key":"Face","storageKey":"Face","label":"Face","description":"ChoiceText font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawButton kind choice. Its Line comes from active MessageCore ChoiceWindowLineHeight (fallback 24), not this object; native choice drawing retains provider font settings.","type":"string","editorType":"string","default":"CoretoOutfitMedium","nativeDefault":"CoretoOutfitMedium","availability":"supported"},{"id":"DS-P-ChoiceText.Size","key":"Size","storageKey":"Size","label":"Size","description":"ChoiceText font size in pixels. Typography for drawButton kind choice. Its Line comes from active MessageCore ChoiceWindowLineHeight (fallback 24), not this object; native choice drawing retains provider font settings.","type":"number","editorType":"number","default":18,"nativeDefault":"18","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Input","key":"Input","storageKey":"Input","label":"Input","description":"Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.","type":"struct","editorType":"struct<Input>","default":{"Face":"CoretoOutfit","Size":18,"Line":24},"nativeDefault":"{\"Face\":\"CoretoOutfit\",\"Size\":18,\"Line\":24}","availability":"supported","structName":"Input","fields":[{"id":"DS-P-Input.Face","key":"Face","storageKey":"Face","label":"Face","description":"Input font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.","type":"string","editorType":"string","default":"CoretoOutfit","nativeDefault":"CoretoOutfit","availability":"supported"},{"id":"DS-P-Input.Size","key":"Size","storageKey":"Size","label":"Size","description":"Input font size in pixels. Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.","type":"number","editorType":"number","default":18,"nativeDefault":"18","availability":"supported","min":0,"max":4096},{"id":"DS-P-Input.Line","key":"Line","storageKey":"Line","label":"Line","description":"Input line height in pixels. Typography for drawField value text. Line is available to explicit style/measure calls; the field itself uses Field.Height.","type":"number","editorType":"number","default":24,"nativeDefault":"24","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Label","key":"Label","storageKey":"Label","label":"Label","description":"Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.","type":"struct","editorType":"struct<Label>","default":{"Face":"CoretoOutfitMedium","Size":16,"Line":20},"nativeDefault":"{\"Face\":\"CoretoOutfitMedium\",\"Size\":16,\"Line\":20}","availability":"supported","structName":"Label","fields":[{"id":"DS-P-Label.Face","key":"Face","storageKey":"Face","label":"Face","description":"Label font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.","type":"string","editorType":"string","default":"CoretoOutfitMedium","nativeDefault":"CoretoOutfitMedium","availability":"supported"},{"id":"DS-P-Label.Size","key":"Size","storageKey":"Size","label":"Size","description":"Label font size in pixels. Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.","type":"number","editorType":"number","default":16,"nativeDefault":"16","availability":"supported","min":0,"max":4096},{"id":"DS-P-Label.Line","key":"Line","storageKey":"Line","label":"Line","description":"Label line height in pixels. Typography for drawField labels. Line is the label height before Field.Gap. Save recipes separately capture Face/Size.","type":"number","editorType":"number","default":20,"nativeDefault":"20","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Helper","key":"Helper","storageKey":"Helper","label":"Helper","description":"Typography for drawField helper/error text, drawCard text and the default measure role.","type":"struct","editorType":"struct<Helper>","default":{"Face":"CoretoOutfit","Size":14,"Line":20},"nativeDefault":"{\"Face\":\"CoretoOutfit\",\"Size\":14,\"Line\":20}","availability":"supported","structName":"Helper","fields":[{"id":"DS-P-Helper.Face","key":"Face","storageKey":"Face","label":"Face","description":"Helper font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Typography for drawField helper/error text, drawCard text and the default measure role.","type":"string","editorType":"string","default":"CoretoOutfit","nativeDefault":"CoretoOutfit","availability":"supported"},{"id":"DS-P-Helper.Size","key":"Size","storageKey":"Size","label":"Size","description":"Helper font size in pixels. Typography for drawField helper/error text, drawCard text and the default measure role.","type":"number","editorType":"number","default":14,"nativeDefault":"14","availability":"supported","min":0,"max":4096},{"id":"DS-P-Helper.Line","key":"Line","storageKey":"Line","label":"Line","description":"Helper line height in pixels. Typography for drawField helper/error text, drawCard text and the default measure role.","type":"number","editorType":"number","default":20,"nativeDefault":"20","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-Icons","key":"Icons","storageKey":"Icons","label":"Icons","description":"System-image basenames loaded at boot for named theme icons. Use existing img/system/<name>.png files without extension. CLI accepts ASCII letters, digits, underscores, spaces and hyphens; it does not copy assets. The complete preset supplies its assets through skills describe game-coreto-eng-design-system.","type":"struct","editorType":"struct<Icons>","default":{"diamond":"CoretoTheme_diamond","error":"CoretoTheme_error","Settings":"CoretoTheme_Settings","Audio":"CoretoTheme_Audio","Language":"CoretoTheme_Language","TextEffects":"CoretoTheme_TextEffects","Music":"CoretoTheme_Music","Ambience":"CoretoTheme_Ambience","Jingle":"CoretoTheme_Jingle","SoundEffects":"CoretoTheme_SoundEffects","Back":"CoretoTheme_Back","Save":"CoretoTheme_Save","Clock":"CoretoTheme_Clock","Conversation":"CoretoTheme_Conversation","Menu":"CoretoTheme_Menu"},"nativeDefault":"{\"diamond\":\"CoretoTheme_diamond\",\"error\":\"CoretoTheme_error\",\"Settings\":\"CoretoTheme_Settings\",\"Audio\":\"CoretoTheme_Audio\",\"Language\":\"CoretoTheme_Language\",\"TextEffects\":\"CoretoTheme_TextEffects\",\"Music\":\"CoretoTheme_Music\",\"Ambience\":\"CoretoTheme_Ambience\",\"Jingle\":\"CoretoTheme_Jingle\",\"SoundEffects\":\"CoretoTheme_SoundEffects\",\"Back\":\"CoretoTheme_Back\",\"Save\":\"CoretoTheme_Save\",\"Clock\":\"CoretoTheme_Clock\",\"Conversation\":\"CoretoTheme_Conversation\",\"Menu\":\"CoretoTheme_Menu\"}","availability":"supported","structName":"Icons","fields":[{"id":"DS-P-Icons.diamond","key":"diamond","storageKey":"diamond","label":"diamond","description":"System-image basename for the diamond icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_diamond","nativeDefault":"CoretoTheme_diamond","availability":"supported"},{"id":"DS-P-Icons.error","key":"error","storageKey":"error","label":"error","description":"System-image basename for the error icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_error","nativeDefault":"CoretoTheme_error","availability":"supported"},{"id":"DS-P-Icons.Settings","key":"Settings","storageKey":"Settings","label":"Settings","description":"System-image basename for the Settings icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Settings","nativeDefault":"CoretoTheme_Settings","availability":"supported"},{"id":"DS-P-Icons.Audio","key":"Audio","storageKey":"Audio","label":"Audio","description":"System-image basename for the Audio icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Audio","nativeDefault":"CoretoTheme_Audio","availability":"supported"},{"id":"DS-P-Icons.Language","key":"Language","storageKey":"Language","label":"Language","description":"System-image basename for the Language icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Language","nativeDefault":"CoretoTheme_Language","availability":"supported"},{"id":"DS-P-Icons.TextEffects","key":"TextEffects","storageKey":"TextEffects","label":"TextEffects","description":"System-image basename for the TextEffects icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_TextEffects","nativeDefault":"CoretoTheme_TextEffects","availability":"supported"},{"id":"DS-P-Icons.Music","key":"Music","storageKey":"Music","label":"Music","description":"System-image basename for the Music icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Music","nativeDefault":"CoretoTheme_Music","availability":"supported"},{"id":"DS-P-Icons.Ambience","key":"Ambience","storageKey":"Ambience","label":"Ambience","description":"System-image basename for the Ambience icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Ambience","nativeDefault":"CoretoTheme_Ambience","availability":"supported"},{"id":"DS-P-Icons.Jingle","key":"Jingle","storageKey":"Jingle","label":"Jingle","description":"System-image basename for the Jingle icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Jingle","nativeDefault":"CoretoTheme_Jingle","availability":"supported"},{"id":"DS-P-Icons.SoundEffects","key":"SoundEffects","storageKey":"SoundEffects","label":"SoundEffects","description":"System-image basename for the SoundEffects icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_SoundEffects","nativeDefault":"CoretoTheme_SoundEffects","availability":"supported"},{"id":"DS-P-Icons.Back","key":"Back","storageKey":"Back","label":"Back","description":"System-image basename for the Back icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Back","nativeDefault":"CoretoTheme_Back","availability":"supported"},{"id":"DS-P-Icons.Save","key":"Save","storageKey":"Save","label":"Save","description":"System-image basename for the Save icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Save","nativeDefault":"CoretoTheme_Save","availability":"supported"},{"id":"DS-P-Icons.Clock","key":"Clock","storageKey":"Clock","label":"Clock","description":"System-image basename for the Clock icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Clock","nativeDefault":"CoretoTheme_Clock","availability":"supported"},{"id":"DS-P-Icons.Conversation","key":"Conversation","storageKey":"Conversation","label":"Conversation","description":"System-image basename for the Conversation icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Conversation","nativeDefault":"CoretoTheme_Conversation","availability":"supported"},{"id":"DS-P-Icons.Menu","key":"Menu","storageKey":"Menu","label":"Menu","description":"System-image basename for the Menu icon, without extension, under img/system/. Loaded at boot. It identifies artwork rather than an IconSet index.","type":"string","editorType":"string","default":"CoretoTheme_Menu","nativeDefault":"CoretoTheme_Menu","availability":"supported"}]},{"id":"DS-P-OptionsLayout","key":"OptionsLayout","storageKey":"OptionsLayout","label":"OptionsLayout","description":"Pixel geometry for OptionsCore category/list rectangles when Windows is true and those provider methods exist. Offsets add to the provider rectangle; margins replace its horizontal bounds.","type":"struct","editorType":"struct<OptionsLayout>","default":{"Margin":28,"CategoryHeight":76,"CategoryOffsetY":16,"ListOffsetY":12,"RowGap":12,"Bottom":20},"nativeDefault":"{\"Margin\":28,\"CategoryHeight\":76,\"CategoryOffsetY\":16,\"ListOffsetY\":12,\"RowGap\":12,\"Bottom\":20}","availability":"supported","structName":"OptionsLayout","fields":[{"id":"DS-P-OptionsLayout.Margin","key":"Margin","storageKey":"Margin","label":"Margin","description":"Left/right margin in pixels for both Options rectangles: x = Margin; width = Graphics.boxWidth - 2 * Margin.","type":"number","editorType":"number","default":28,"nativeDefault":"28","availability":"supported","min":0,"max":4096},{"id":"DS-P-OptionsLayout.CategoryHeight","key":"CategoryHeight","storageKey":"CategoryHeight","label":"CategoryHeight","description":"Replacement category-window height in pixels.","type":"number","editorType":"number","default":76,"nativeDefault":"76","availability":"supported","min":0,"max":4096},{"id":"DS-P-OptionsLayout.CategoryOffsetY","key":"CategoryOffsetY","storageKey":"CategoryOffsetY","label":"CategoryOffsetY","description":"Nonnegative vertical pixels added to the provider category-window y position; positive moves down.","type":"number","editorType":"number","default":16,"nativeDefault":"16","availability":"supported","min":0,"max":4096},{"id":"DS-P-OptionsLayout.ListOffsetY","key":"ListOffsetY","storageKey":"ListOffsetY","label":"ListOffsetY","description":"Nonnegative vertical pixels added to the provider options-list y position; positive moves down.","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096},{"id":"DS-P-OptionsLayout.RowGap","key":"RowGap","storageKey":"RowGap","label":"RowGap","description":"Minimum options-row spacing in pixels: max(RowGap, provider rowSpacing).","type":"number","editorType":"number","default":12,"nativeDefault":"12","availability":"supported","min":0,"max":4096},{"id":"DS-P-OptionsLayout.Bottom","key":"Bottom","storageKey":"Bottom","label":"Bottom","description":"Bottom space in pixels removed from the available options-list height after its y offset; final height has a 160-pixel minimum.","type":"number","editorType":"number","default":20,"nativeDefault":"20","availability":"supported","min":0,"max":4096}]},{"id":"DS-P-PictureRoles","key":"PictureRoles","storageKey":"PictureRoles","label":"PictureRoles","description":"Complete JSON array of {Image,Role} mappings for existing img/pictures/<Image>.png assets, without extension. Images must be unique nonempty ASCII letter/digit/underscore/space/hyphen basenames. [] removes all configured mappings on restart. secondary draws a light button, primary a filled action button, card a static striped surface, panel a rounded panel. The surface replaces the displayed bitmap at the original image dimensions; it does not create pictures, clicks or choices. PictureChoices or an adapter owns interaction. A registered pictures adapter can replace this lookup.","type":"array","editorType":"struct<PictureRole>[]","default":[],"nativeDefault":"[]","availability":"supported","items":{"id":"DS-P-PictureRoles.*","key":"PictureRole","storageKey":"PictureRole","label":"PictureRole","description":"One complete picture-role object. Author the entire array through /PictureRoles; item paths are not separate CLI selectors. The editor item default has an empty Image, which must be replaced by an existing valid basename before CLI insertion.","type":"struct","editorType":"struct","default":{"Image":"","Role":"secondary"},"nativeDefault":"{\"Image\":\"\",\"Role\":\"secondary\"}","availability":"supported","structName":"PictureRole","fields":[{"id":"DS-P-PictureRoles.*.Image","key":"Image","storageKey":"Image","label":"Image","description":"Existing img/pictures image basename without extension; ASCII letters, digits, underscores, spaces and hyphens only. Must be nonempty and unique in /PictureRoles.","type":"string","editorType":"file","default":"","nativeDefault":"","availability":"supported","directory":"img/pictures/"},{"id":"DS-P-PictureRoles.*.Role","key":"Role","storageKey":"Role","label":"Role","description":"secondary = light button; primary = filled action button; card = static striped surface; panel = rounded panel. These replace visual surfaces only; interaction is owned by PictureChoices or a registered adapter.","type":"string","editorType":"select","default":"secondary","nativeDefault":"secondary","availability":"supported","options":["secondary","primary","card","panel"]}]}},{"id":"DS-P-Body","key":"Body","storageKey":"Body","label":"Body","description":"Base font for message and scrolling-text windows when Windows is true. Native fallbackFonts are appended to Face; authored text escape codes can override the base.","type":"struct","editorType":"struct<Body>","default":{"Face":"CoretoOutfit","Size":20},"nativeDefault":"{\"Face\":\"CoretoOutfit\",\"Size\":20}","availability":"supported","structName":"Body","fields":[{"id":"DS-P-Body.Face","key":"Face","storageKey":"Face","label":"Face","description":"Body font-family name (not a filename). Register/load the family through MessageCore or the game before drawing. Base font for message and scrolling-text windows when Windows is true. Native fallbackFonts are appended to Face; authored text escape codes can override the base.","type":"string","editorType":"string","default":"CoretoOutfit","nativeDefault":"CoretoOutfit","availability":"supported"},{"id":"DS-P-Body.Size","key":"Size","storageKey":"Size","label":"Size","description":"Body font size in pixels. Base font for message and scrolling-text windows when Windows is true. Native fallbackFonts are appended to Face; authored text escape codes can override the base.","type":"number","editorType":"number","default":20,"nativeDefault":"20","availability":"supported","min":1,"max":4096}]}],"commands":[],"tags":[],"methods":[{"id":"DS-M-style","key":"style","label":"style","surface":"method","description":"Return typography for a named role. Dialogue uses the current game font; unknown roles throw.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call style(role) with Dialogue, ChoiceText, Title, Section, Speaker, Menu, Action, Input, Label, Helper or Body. It returns a new object with the configured Face/Size and, where defined, Line. Dialogue requires initialized $gameSystem and derives Line = mainFontSize() + 6. ChoiceText derives Line from active MessageCore (fallback 24). Body has no Line; use a role with Line for measure. No special this binding or mutation is required.","returns":"Typography object; unknown configuration names throw.","example":"const heading = CoretoDesignSystem.style(\"Section\");"},{"id":"DS-M-measure","key":"measure","label":"measure","surface":"method","description":"Measure wrapped text on an MZ Bitmap; restores its prior font and text properties.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call measure(bitmap, text, width, role = \"Helper\") with an MZ Bitmap, string-convertible text and available pixel width. Use a role with Face/Size/Line. It wraps at whitespace and explicit newlines, preserves empty lines, and does not split oversized words or interpret escape codes. It measures only: no pixels are drawn. Font/outline/text-color properties are restored after measurement. No special this binding.","returns":"{lines: string[], width: max(0, supplied width), height: lines.length * Line, lineHeight: Line}. Width is the supplied layout width, not the widest glyph extent.","example":"const bitmap = new Bitmap(320, 120);\nconst layout = CoretoDesignSystem.measure(bitmap, \"A short description\", 280, \"Helper\");\nbitmap.destroy();"},{"id":"DS-M-drawButton","key":"drawButton","label":"drawButton","surface":"method","description":"Draw a themed button from its rectangle, label and interaction state.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call drawButton(bitmap, rect, label, state = \"default\", kind = \"menu\", focused = false). rect supplies x/y/width/height in destination bitmap pixels. States are default, hover, selected, selectedHover, pressed, disabled. Kinds menu/choice draw a reserved diamond and left-aligned label; primary draws a filled action button; text omits its resting surface; other kinds use an ordinary action surface. primary/text normalize selected to default and selectedHover to hover; choice normalizes pressed to selected. focused adds an outer gold ring unless disabled. It draws only and creates no hit target/handler. Text is plain, not escape-code markup. Font/color properties are left at the drawn style; no special this binding. The caller owns the destination bitmap and must destroy it when no longer needed.","returns":"undefined; bitmap pixels and text properties are modified.","example":"const bitmap = new Bitmap(320, 80);\nCoretoDesignSystem.drawButton(bitmap, {x:8,y:8,width:280,height:56}, \"Continue\", \"selected\", \"menu\", true);"},{"id":"DS-M-drawField","key":"drawField","label":"drawField","surface":"method","description":"Draw a labeled field with helper or error feedback.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call drawField(bitmap, options) with an MZ Bitmap and object {x,y,width,label,value,helper,state}. Defaults are x=0, y=0, width=480, empty strings and state=\"default\". Coordinates and width are pixels. default draws ordinary border, focused draws focus border, error adds error border/icon when helper is nonempty, disabled changes the fill. Labels/value are plain text; helper wraps on whitespace. It draws a representation, not an editable input, and leaves bitmap font/color properties modified. No special this binding. The caller owns the destination bitmap and must destroy it when no longer needed.","returns":"Number: total drawn field/helper height in pixels; helper text can exceed one line.","example":"const bitmap = new Bitmap(480, 200);\nconst height = CoretoDesignSystem.drawField(bitmap, {x:8,y:8,width:440,label:\"Name\",value:\"Reid\",helper:\"Shown in dialogue\",state:\"focused\"});"},{"id":"DS-M-drawCard","key":"drawCard","label":"drawCard","surface":"method","description":"Draw a card and wrapped text; return the content height.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call drawCard(bitmap, rect, text = \"\", context = \"paper\"). Rectangle coordinates/dimensions are destination bitmap pixels. scene selects cardScene, memorial selects cardMemorial, all other contexts select card. It draws the rectangle/stripe, then plain Helper text with whitespace wrapping; oversized words remain intact. Returned text height may exceed rect.height; allocate enough bitmap space. Font/color properties remain modified; no special this binding. The caller owns the destination bitmap and must destroy it when no longer needed.","returns":"Number: wrapped text height + 2 * Card.PaddingY in pixels; this does not resize the rectangle or bitmap.","example":"const bitmap = new Bitmap(400, 180);\nconst height = CoretoDesignSystem.drawCard(bitmap, {x:0,y:0,width:400,height:180}, \"A memory of the journey\", \"memorial\");"},{"id":"DS-M-drawIcon","key":"drawIcon","label":"drawIcon","surface":"method","description":"Draw a loaded themed icon; pending images are not drawn.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call drawIcon(bitmap, name, x, y, size = 32, color = CoretoDesignSystem.colors.text). name is a key from /Icons, not a filename or IconSet index. x/y are top-left destination pixels; size is height and width preserves source aspect ratio. Unknown or not-yet-ready images draw nothing; call again after loading, no redraw is queued. error, Conversation and diamond retain source colors; others are tinted with the CSS color. Tinted bitmaps are cached (up to 64) until eviction or dispose. No special this binding. The caller owns the destination bitmap and must destroy it when no longer needed.","returns":"undefined; draws into the destination bitmap when the named image is ready.","example":"const bitmap = new Bitmap(80, 80);\nImageManager.loadSystem(CoretoDesignSystem.config.Icons.Save).addLoadListener(() => CoretoDesignSystem.drawIcon(bitmap, \"Save\", 8, 8, 32));"},{"id":"DS-M-drawItemBackground","key":"drawItemBackground","label":"drawItemBackground","surface":"method","description":"Draw the native selectable row background; call with the window as receiver.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call drawItemBackground.call(window, index) with an existing eligible Window_Selectable and valid zero-based item index. This is the only drawing helper that requires a window as this. It draws into contentsBack using itemRect(index), native eligibility, current selection and cached pointer/pressed state; selected title/choice rows also draw a diamond. Windows=false, NameEdit, NumberInput, console and other excluded windows return false. The preset Core Engine drawing callback calls this hook; direct calls draw immediately but do not change selection.","returns":"Boolean: true when this window was themed, false when excluded.","example":"const window = SceneManager._scene._commandWindow;\nif (window && window.index() >= 0) CoretoDesignSystem.drawItemBackground.call(window, window.index());"},{"id":"DS-M-registerAdapter","key":"registerAdapter","label":"registerAdapter","surface":"method","description":"Replace named presentation callbacks: scrollOnPaper, choiceBadgeWidth, pictures, pictureState. Gameplay and persistence remain owned by the caller.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call registerAdapter(object) from a game-owned extension after DesignSystem loads. Function-valued recognized keys replace existing hooks; omitted/non-function keys retain them. Hooks are called automatically as methods of the internal integrations object, so this is not a scene/window. scrollOnPaper(window) returns a boolean for scrolling-text contrast; choiceBadgeWidth(window) returns reserved pixels; pictures(gamePicture, sprite) returns null for no role or {surface,kind,width,height,context?,icon?,interactionPictureId?}; pictureState(sprite, role) returns {active?,disabled?,selected?}. A surface role uses pixel width/height and kind secondary/primary/card/panel. Picture callbacks may run repeatedly during loading and updates; they must not change gameplay state. New functions last across scene changes until replaced or the game restarts; they are not serialized in saves. dispose does not unregister them. Card picture surfaces always use the paper palette; the role context property does not select drawCard contexts. A surface bitmap keeps its created dimensions until the picture is reloaded; changing width/height in a later adapter response does not resize that existing bitmap.","returns":"undefined; replaces only the recognized callbacks supplied as functions.","example":"CoretoDesignSystem.registerAdapter({choiceBadgeWidth(window) { return Number(window.choiceAdornmentWidth?.()) || 0; }});"},{"id":"DS-M-dispose","key":"dispose","label":"dispose","surface":"method","description":"Destroy cached tinted icon bitmaps and clear the cache.","receiver":"CoretoDesignSystem","availability":"supported","context":"MZ runtime after enabled DesignSystem loads; see design-system api describe /Enabled for activation. The CLI only describes this API and never invokes it. Call dispose() to destroy and clear cached tinted icon bitmaps. Original loaded images, picture-owned surfaces, window hooks, configuration and registered adapters remain. Later drawIcon calls can recreate tint entries. Repeated calls on an empty cache do nothing. No arguments or special this binding.","returns":"undefined; clears only the tint cache, not the entire theme.","example":"CoretoDesignSystem.dispose();"}],"limits":"Fonts and theme images are installed by game-coreto-eng-design-system. The complete preset also requires OptionsCore and SaveCore. Parameters are read at boot; restart after authoring. No gameplay or persistence ownership.","apis":[{"id":"DS-A-version","key":"version","label":"version","surface":"property","type":"string","availability":"supported","description":"Installed runtime version.","receiver":"CoretoDesignSystem","context":"Read CoretoDesignSystem.version in the game after Enabled=true initializes the plugin; see design-system api describe /Enabled. CLI discovery does not read a running game. Persisted changes use parameters and restart. Scene changes/save loading do not reload this boot configuration.","example":"const value = CoretoDesignSystem.version;"},{"id":"DS-A-config","key":"config","label":"config","surface":"property","type":"object","availability":"supported","description":"Boot-time configuration merged from catalog defaults and the plugin registry. Missing fields use defaults; arrays replace their defaults. The exported outer API is frozen, but this object is not a persistence or live-update API: use CLI parameter authoring and restart.","receiver":"CoretoDesignSystem","context":"Read CoretoDesignSystem.config in the game after Enabled=true initializes the plugin; see design-system api describe /Enabled. CLI discovery does not read a running game. Persisted changes use parameters and restart. Scene changes/save loading do not reload this boot configuration.","example":"const value = CoretoDesignSystem.config;"},{"id":"DS-A-colors","key":"colors","label":"colors","surface":"property","type":"object","availability":"supported","description":"Surface palette with live getters: panel reads active CoreEngine itemBackColor1, text reads normalColor, heading reads systemColor, and muted follows text. Other surface values come from boot configuration; reading the object does not draw or persist anything.","receiver":"CoretoDesignSystem","context":"Read CoretoDesignSystem.colors in the game after Enabled=true initializes the plugin; see design-system api describe /Enabled. CLI discovery does not read a running game. Persisted changes use parameters and restart. Scene changes/save loading do not reload this boot configuration.","example":"const value = CoretoDesignSystem.colors;"},{"id":"DS-A-fonts","key":"fonts","label":"fonts","surface":"property","type":"object","availability":"supported","description":"Exposed family names: body=CoretoOutfit and medium=CoretoOutfitMedium are fixed, speaker reads Speaker.Face and title reads Title.Face at boot. This does not register/load fonts or mirror a later Body.Face edit.","receiver":"CoretoDesignSystem","context":"Read CoretoDesignSystem.fonts in the game after Enabled=true initializes the plugin; see design-system api describe /Enabled. CLI discovery does not read a running game. Persisted changes use parameters and restart. Scene changes/save loading do not reload this boot configuration.","example":"const value = CoretoDesignSystem.fonts;"}]};
+class CoreError extends Error {
+    constructor(code, message, details = {}, exitCode = 2) {
+        super(message);
+        this.code = code;
+        this.details = details;
+        this.exitCode = exitCode;
+    }
+}
+
+function valueError(schema, value, path, expected = schema.type) {
+    throw new CoreError("INVALID_VALUE", `Invalid value at ${path}; expected ${expected}.`, {
+        field: path, received: value, expected,
+        discovery: schema.id ? {id:schema.id} : {}
+    });
+}
+
+function validateValue(schema, value, path) {
+    if (schema.type === "struct") {
+        if (!value || typeof value !== "object" || Array.isArray(value)) valueError(schema, value, path);
+        for (const key of Object.keys(value)) {
+            const field = schema.fields.find(field => field.key === key);
+            if (!field) throw new CoreError("UNKNOWN_FIELD", `Unknown field ${path}/${key}.`, { field: `${path}/${key}` });
+            validateValue(field, value[key], `${path}/${key}`);
+        }
+        for (const field of schema.fields) {
+            if (!Object.prototype.hasOwnProperty.call(value, field.key)) valueError(field, undefined, `${path}/${field.key}`, "a value for this field");
+        }
+    } else if (schema.type === "array") {
+        if (!Array.isArray(value)) valueError(schema, value, path);
+        value.forEach((item, index) => validateValue(schema.items, item, `${path}/${index}`));
+    } else if (schema.type === "number") {
+        if (typeof value !== "number" || !Number.isFinite(value)) valueError(schema, value, path, "a finite number");
+        if (schema.integer && !Number.isInteger(value)) valueError(schema, value, path, "an integer");
+        if (schema.min !== undefined && value < schema.min) valueError(schema, value, path, `a number >= ${schema.min}`);
+        if (schema.max !== undefined && value > schema.max) valueError(schema, value, path, `a number <= ${schema.max}`);
+    } else if (schema.type === "boolean" || schema.type === "string") {
+        if (typeof value !== schema.type) valueError(schema, value, path);
+    } else {
+        throw new CoreError("UNSUPPORTED_TYPE", `Unsupported parameter type: ${schema.type}.`, { field: path }, 6);
+    }
+    const unavailable = schema.unavailableOptions?.find(option => option.value === String(value).trim().toLowerCase());
+    if (unavailable) {
+        throw new CoreError("CAPABILITY_UNAVAILABLE", `Value is unavailable at ${path}: ${value}.`, {
+            field: path, received: value, availability: unavailable.availability,
+            hint: unavailable.reason
+        }, 6);
+    }
+    if (schema.options && !schema.options.includes(value)) valueError(schema, value, path, JSON.stringify(schema.options));
+    return value;
+}
+
+function parseLayer(raw, path) {
+    if (typeof raw !== "string") throw new CoreError("INVALID_ENCODING", `Expected a native string at ${path}.`, { field: path, received: raw });
+    try {
+        return JSON.parse(raw);
+    } catch {
+        throw new CoreError("INVALID_ENCODING", `Invalid JSON encoding at ${path}.`, { field: path, received: raw });
+    }
+}
+
+function decodeValue(schema, raw, path) {
+    if (raw === undefined) return validateValue(schema, JSON.parse(JSON.stringify(schema.default)), path);
+    let value;
+    if (schema.type === "struct") {
+        const encoded = parseLayer(raw, path);
+        if (!encoded || typeof encoded !== "object" || Array.isArray(encoded)) valueError(schema, encoded, path);
+        value = Object.fromEntries(schema.fields.map(field => [field.key,
+            decodeValue(field, encoded[field.storageKey], `${path}/${field.key}`)]));
+    } else if (schema.type === "array") {
+        const encoded = parseLayer(raw, path);
+        if (!Array.isArray(encoded)) valueError(schema, encoded, path);
+        value = encoded.map((item, index) => decodeValue(schema.items, item, `${path}/${index}`));
+    } else if (schema.type === "number") {
+        // Hand-written arrays such as "[5]" hold JSON numbers where the editor writes "[\"5\"]"; the original plugins accept both.
+        if (typeof raw === "number") value = raw;
+        else if (typeof raw !== "string" || raw.trim() === "") valueError(schema, raw, path);
+        else value = Number(raw);
+    } else if (schema.type === "boolean") {
+        if (raw !== "true" && raw !== "false") valueError(schema, raw, path);
+        value = raw === "true";
+    } else {
+        value = schema.encoding === "json" ? parseLayer(raw, path) : raw;
+    }
+    return validateValue(schema, value, path);
+}
+
+function encodeValue(schema, value, path, previous) {
+    validateValue(schema, value, path);
+    if (schema.type === "struct") {
+        const encoded = previous === undefined ? {} : parseLayer(previous, path);
+        for (const field of schema.fields) {
+            encoded[field.storageKey] = encodeValue(field, value[field.key], `${path}/${field.key}`, encoded[field.storageKey]);
+        }
+        return JSON.stringify(encoded);
+    }
+    if (schema.type === "array") {
+        const encoded = previous === undefined ? [] : parseLayer(previous, path);
+        return JSON.stringify(value.map((item, index) => encodeValue(schema.items, item, `${path}/${index}`, encoded[index])));
+    }
+    // A whole-object edit must not reformat an untouched native numeric field.
+    if (schema.type === "number" && typeof previous === "string" && previous.trim() !== "" && Number(previous) === value) return previous;
+    return schema.encoding === "json" ? JSON.stringify(value) : String(value);
+}
+
+function parameterAt(parameters, path) {
+    if (!path?.startsWith("/") || path === "/") throw new CoreError("INVALID_PATH", "Use a parameter path such as /Gold/GoldMax.", { field: path });
+    const segments = path.slice(1).split("/");
+    let schema = parameters.find(field => field.key === segments[0]);
+    if (!schema) throw new CoreError("UNKNOWN_FIELD", `Unknown parameter ${path}.`, { field: path });
+    const chain = [schema];
+    for (const segment of segments.slice(1)) {
+        schema = schema.type === "struct" ? schema.fields.find(field => field.key === segment) :
+            schema.type === "array" && /^(0|[1-9]\d*)$/.test(segment) ? schema.items : undefined;
+        if (!schema) throw new CoreError("UNKNOWN_FIELD", `Unknown parameter ${path}.`, { field: path });
+        chain.push(schema);
+    }
+    return { chain, segments };
+}
+
+function decodeParameters(parameters, raw) {
+    return Object.fromEntries(parameters.map(field => [field.key, decodeValue(field, raw[field.storageKey], `/${field.key}`)]));
+}
+
+const DEFAULTS=Object.fromEntries(catalog.parameters.map(field=>[field.key,field.default]));
 // ---- configuration ----
 const plugin='Coreto_5_DesignSystem';
 const params=PluginManager.parameters(plugin);
@@ -1108,4 +1639,5 @@ globalThis.CoretoDesignSystem=Object.freeze({version:'1.3.0',colors,fonts,config
   drawItemBackground:typeof drawItemBackground==='function'?drawItemBackground:null,
   dispose(){for(const bitmap of tintedIcons.values())bitmap.destroy();tintedIcons.clear();}
 });
+
 })();

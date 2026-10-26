@@ -58,28 +58,30 @@
       "key": "AutoClear",
       "storageKey": "AutoClear:eval",
       "label": "Auto Clear",
-      "description": "Clear all picture-to-choice bindings and their selected/deselected settings after a choice is confirmed or cancelled. Does not erase displayed pictures. Set false to retain these settings until a Clear command, Erase Picture, or a new game clears them.",
+      "description": "When true, clear all picture-to-choice bindings and their selected/deselected settings after a choice is confirmed or cancelled. Does not erase displayed pictures or restore their previous appearance. When false, retain this state across map/scene changes and save/load until a Clear command, Erase Picture for that ID, or a new game clears it.",
       "editorType": "boolean",
       "nativeDefault": "true",
       "availability": "supported",
       "type": "boolean",
       "default": true,
       "on": "Automatic",
-      "off": "Manual"
+      "off": "Manual",
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. The CLI edits js/plugins.js; it does not change a running game. Missing values and parameters reset use the published default true. parameters get reports the effective value; see picture-choices api describe CORETO-CONFIG-SOURCE for inherit/own selection."
     },
     {
       "id": "PC-P-SameCheck:eval",
       "key": "SameCheck",
       "storageKey": "SameCheck:eval",
       "label": "Same Check",
-      "description": "During playtest, compare the On Select and On Deselect objects supplied to a Change Picture Choice Settings command. If equal, display an alert and exit the game. Disable to allow identical settings. This check does not run in a deployed game.",
+      "description": "During playtest, compare the On Select and On Deselect objects supplied to a Change Picture Choice Settings command. If equal, display an alert and exit the game. Disable to allow identical settings. This check does not run in a deployed game. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne or PC-C-ChangePictureChoiceSettingsRange. Their default select and deselect objects are identical, so change at least one effect value for a visible distinction or set SameCheck to false.",
       "editorType": "boolean",
       "nativeDefault": "true",
       "availability": "supported",
       "type": "boolean",
       "default": true,
       "on": "Check",
-      "off": "Don't Check"
+      "off": "Don't Check",
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. The CLI edits js/plugins.js; it does not change a running game. Missing values and parameters reset use the published default true. parameters get reports the effective value; see picture-choices api describe CORETO-CONFIG-SOURCE for inherit/own selection."
     }
   ],
   "commands": [
@@ -87,7 +89,7 @@
       "id": "PC-C-ClearAll",
       "key": "ClearAll",
       "label": "Clear: All Selection Settings",
-      "description": "Clear all picture-to-choice bindings and selection settings for every picture ID.",
+      "description": "When the event executes, clear picture-to-choice bindings and selected/deselected settings for every picture ID.",
       "availability": "supported",
       "targets": [
         "map",
@@ -95,13 +97,13 @@
         "troop"
       ],
       "args": [],
-      "context": "Clears both choice bindings and selected/deselected settings, without erasing displayed pictures. ClearAll affects all IDs. ID lists are rounded and clamped to the game picture range; range boundaries are clamped, sorted and included at both ends. Use whole picture IDs."
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. Bindings and settings belong to $gameScreen: map/scene changes do not clear them, and save/load preserves them. A new game starts empty. ClearAll clears every ID; ClearPictureID/ClearPictureRange and Erase Picture clear the affected IDs. With PC-P-AutoClear:eval true, confirmation/cancellation clears all bindings and settings. Clear commands and AutoClear do not erase pictures, restore their appearance, or stop a transition already applied. Recreate a binding with the choice-text tag described by picture-choices api describe PC-T-BIND. This command is safe when an ID has no stored settings. The generated common-event:1 example is illustrative: choose an existing target/index from commands list and substitute its fileHash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values."
     },
     {
       "id": "PC-C-ClearPictureID",
       "key": "ClearPictureID",
       "label": "Clear: Picture ID(s) Selection Settings",
-      "description": "Clears all selection settings for the ID'd pictures.",
+      "description": "When the event executes, clear picture-to-choice bindings and selected/deselected settings for the IDs in PictureIDs.",
       "availability": "supported",
       "targets": [
         "map",
@@ -114,7 +116,7 @@
           "key": "PictureIDs",
           "storageKey": "PictureIDs:arraynum",
           "label": "Picture ID(s)",
-          "description": "Select which Picture ID(s) to clear.",
+          "description": "JSON array of picture-slot IDs, for example [1,2]. The CLI accepts integers >= 1; [] selects no IDs. Runtime also accepts raw native fractional IDs, rounds each and clamps to 1..$gameScreen.maxPictures(). IDs are Show Picture slots, not image filenames or choice indices.",
           "editorType": "number[]",
           "nativeDefault": "[\"1\"]",
           "availability": "supported",
@@ -128,16 +130,17 @@
           "default": [
             1
           ],
-          "min": 1
+          "min": 1,
+          "context": "Argument of picture-choices api describe PC-C-ClearPictureID. That command describes activation, authoring, defaults, clearing/lifecycle and a complete example. The CLI stores this value for later event execution."
         }
       ],
-      "context": "Clears both choice bindings and selected/deselected settings, without erasing displayed pictures. ClearAll affects all IDs. ID lists are rounded and clamped to the game picture range; range boundaries are clamped, sorted and included at both ends. Use whole picture IDs."
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. Bindings and settings belong to $gameScreen: map/scene changes do not clear them, and save/load preserves them. A new game starts empty. ClearAll clears every ID; ClearPictureID/ClearPictureRange and Erase Picture clear the affected IDs. With PC-P-AutoClear:eval true, confirmation/cancellation clears all bindings and settings. Clear commands and AutoClear do not erase pictures, restore their appearance, or stop a transition already applied. Recreate a binding with the choice-text tag described by picture-choices api describe PC-T-BIND. This command is safe when an ID has no stored settings. The generated common-event:1 example is illustrative: choose an existing target/index from commands list and substitute its fileHash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values."
     },
     {
       "id": "PC-C-ClearPictureRange",
       "key": "ClearPictureRange",
       "label": "Clear: Picture Range Selection Settings",
-      "description": "Clears all selection settings for the picture ID's in range.",
+      "description": "When the event executes, clear picture-to-choice bindings and selected/deselected settings for the inclusive StartID..EndingID range (reversed boundaries are sorted).",
       "availability": "supported",
       "targets": [
         "map",
@@ -156,7 +159,8 @@
           "availability": "supported",
           "type": "number",
           "default": 1,
-          "min": 1
+          "min": 1,
+          "context": "Argument of picture-choices api describe PC-C-ClearPictureRange. That command describes activation, authoring, defaults, clearing/lifecycle and a complete example. The CLI stores this value for later event execution."
         },
         {
           "id": "PC-ClearPictureRange-EndingID:num",
@@ -169,10 +173,11 @@
           "availability": "supported",
           "type": "number",
           "default": 100,
-          "min": 1
+          "min": 1,
+          "context": "Argument of picture-choices api describe PC-C-ClearPictureRange. That command describes activation, authoring, defaults, clearing/lifecycle and a complete example. The CLI stores this value for later event execution."
         }
       ],
-      "context": "Clears both choice bindings and selected/deselected settings, without erasing displayed pictures. ClearAll affects all IDs. ID lists are rounded and clamped to the game picture range; range boundaries are clamped, sorted and included at both ends. Use whole picture IDs."
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. Bindings and settings belong to $gameScreen: map/scene changes do not clear them, and save/load preserves them. A new game starts empty. ClearAll clears every ID; ClearPictureID/ClearPictureRange and Erase Picture clear the affected IDs. With PC-P-AutoClear:eval true, confirmation/cancellation clears all bindings and settings. Clear commands and AutoClear do not erase pictures, restore their appearance, or stop a transition already applied. Recreate a binding with the choice-text tag described by picture-choices api describe PC-T-BIND. This command is safe when an ID has no stored settings. The generated common-event:1 example is illustrative: choose an existing target/index from commands list and substitute its fileHash. On insert, omitted arguments use their published defaults; on update, omitted arguments retain existing values."
     },
     {
       "id": "PC-C-ChangePictureChoiceSettingsOne",
@@ -191,7 +196,7 @@
           "key": "PictureIDs",
           "storageKey": "PictureIDs:arraynum",
           "label": "Picture ID(s)",
-          "description": "Select which Picture ID(s) to change settings for.",
+          "description": "JSON array of picture-slot IDs, for example [1,2]. The CLI accepts integers >= 1; [] selects no IDs. Runtime also accepts raw native fractional IDs, rounds each and clamps to 1..$gameScreen.maxPictures(). IDs are Show Picture slots, not image filenames or choice indices.",
           "editorType": "number[]",
           "nativeDefault": "[\"1\"]",
           "availability": "supported",
@@ -205,7 +210,8 @@
           "default": [
             1
           ],
-          "min": 1
+          "min": 1,
+          "context": "Argument of picture-choices api describe PC-C-ChangePictureChoiceSettingsOne. That command describes activation, authoring, defaults, clearing/lifecycle and a complete example. The CLI stores this value for later event execution."
         },
         {
           "id": "PC-ChangePictureChoiceSettingsOne-OnSelectSettings:struct",
@@ -229,14 +235,15 @@
               "nativeDefault": "10",
               "availability": "supported",
               "type": "number",
-              "default": 10
+              "default": 10,
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-easingType:str",
               "key": "easingType",
               "storageKey": "easingType:str",
               "label": "Easing Type",
-              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "description": "Interpolation for position, scale and opacity; tone remains linear and BlendMode changes immediately. Linear uses uniform speed. In starts slowly, Out ends slowly, InOut combines both. With Core Engine, Sine uses a sinusoidal curve; Quad/Cubic/Quart/Quint use powers 2/3/4/5 (increasingly strong acceleration), Expo is exponential, Circ follows a circular arc, Back overshoots, Elastic oscillates, and Bounce rebounds. Without Core Engine, only Linear, InSine, OutSine and InOutSine map to native easing modes; the Sine names use native power-based slow start/end rather than sinusoidal curves. Other names fall back to linear in that native mode. The CLI accepts strings without enforcing the suggestions; choose a listed name exactly.",
               "editorType": "combo",
               "nativeDefault": "Linear",
               "availability": "supported",
@@ -275,14 +282,14 @@
                 "OutBounce",
                 "InOutBounce"
               ],
-              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
+              "context": "To enable the listed mathematical curves, enable Coreto_0_CoreEngine 0.1.0 (or VisuMZ_0_CoreEngine 1.90) before Coreto_2_PictureChoices 0.1.0, then restart the game. Only one Core Engine provider may be active. Message Core is optional; if used, Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57 must also precede Picture Choices. No separate easing parameter is required. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne for application, complete examples and lifecycle."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
               "key": "TargetX",
               "storageKey": "TargetX:str",
               "label": "Target X",
-              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -290,15 +297,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetY:str",
               "key": "TargetY",
               "storageKey": "TargetY:str",
               "label": "Target Y",
-              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -306,8 +317,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleX:str",
@@ -322,8 +337,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleY:str",
@@ -338,8 +357,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetOpacity:str",
@@ -354,15 +377,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-BlendMode:num",
               "key": "BlendMode",
               "storageKey": "BlendMode:num",
               "label": "Blend Mode",
-              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "description": "How the picture blends with pixels behind it: -1 preserves its current blend mode; 0 Normal draws with ordinary transparency; 1 Additive adds color and brightens; 2 Multiply multiplies colors and darkens; 3 Screen combines inverse colors and lightens. The selected mode changes immediately when settings apply, independently of Duration.",
               "editorType": "select",
               "nativeDefault": "-1",
               "availability": "supported",
@@ -381,7 +408,8 @@
                 "2": "2 - Multiply",
                 "3": "3 - Screen",
                 "-1": "-1 - Unchanged"
-              }
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneRed:str",
@@ -396,8 +424,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGreen:str",
@@ -412,8 +444,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneBlue:str",
@@ -428,8 +464,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGray:str",
@@ -444,8 +484,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             }
           ],
           "default": {
@@ -462,7 +506,7 @@
             "TargetToneBlue": "Unchanged",
             "TargetToneGray": "Unchanged"
           },
-          "context": "Fill this object inside the command value using its field keys. These settings apply when the matching choice is highlighted. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+          "context": "Fill this object inside the command value using its field keys. These settings apply when the matching choice is highlighted. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1. Supply all fields in the object. Its published default matches the field defaults; omitted fields in raw native data fall back to those same defaults. OnSelectSettings and OnDeselectSettings default to identical objects, which triggers PC-P-SameCheck:eval in playtest. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne for a complete differing example, replacement rules, activation and lifecycle."
         },
         {
           "id": "PC-ChangePictureChoiceSettingsOne-OnDeselectSettings:struct",
@@ -486,14 +530,15 @@
               "nativeDefault": "10",
               "availability": "supported",
               "type": "number",
-              "default": 10
+              "default": 10,
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-easingType:str",
               "key": "easingType",
               "storageKey": "easingType:str",
               "label": "Easing Type",
-              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "description": "Interpolation for position, scale and opacity; tone remains linear and BlendMode changes immediately. Linear uses uniform speed. In starts slowly, Out ends slowly, InOut combines both. With Core Engine, Sine uses a sinusoidal curve; Quad/Cubic/Quart/Quint use powers 2/3/4/5 (increasingly strong acceleration), Expo is exponential, Circ follows a circular arc, Back overshoots, Elastic oscillates, and Bounce rebounds. Without Core Engine, only Linear, InSine, OutSine and InOutSine map to native easing modes; the Sine names use native power-based slow start/end rather than sinusoidal curves. Other names fall back to linear in that native mode. The CLI accepts strings without enforcing the suggestions; choose a listed name exactly.",
               "editorType": "combo",
               "nativeDefault": "Linear",
               "availability": "supported",
@@ -532,14 +577,14 @@
                 "OutBounce",
                 "InOutBounce"
               ],
-              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
+              "context": "To enable the listed mathematical curves, enable Coreto_0_CoreEngine 0.1.0 (or VisuMZ_0_CoreEngine 1.90) before Coreto_2_PictureChoices 0.1.0, then restart the game. Only one Core Engine provider may be active. Message Core is optional; if used, Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57 must also precede Picture Choices. No separate easing parameter is required. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne for application, complete examples and lifecycle."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
               "key": "TargetX",
               "storageKey": "TargetX:str",
               "label": "Target X",
-              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -547,15 +592,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetY:str",
               "key": "TargetY",
               "storageKey": "TargetY:str",
               "label": "Target Y",
-              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -563,8 +612,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleX:str",
@@ -579,8 +632,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleY:str",
@@ -595,8 +652,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetOpacity:str",
@@ -611,15 +672,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-BlendMode:num",
               "key": "BlendMode",
               "storageKey": "BlendMode:num",
               "label": "Blend Mode",
-              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "description": "How the picture blends with pixels behind it: -1 preserves its current blend mode; 0 Normal draws with ordinary transparency; 1 Additive adds color and brightens; 2 Multiply multiplies colors and darkens; 3 Screen combines inverse colors and lightens. The selected mode changes immediately when settings apply, independently of Duration.",
               "editorType": "select",
               "nativeDefault": "-1",
               "availability": "supported",
@@ -638,7 +703,8 @@
                 "2": "2 - Multiply",
                 "3": "3 - Screen",
                 "-1": "-1 - Unchanged"
-              }
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneRed:str",
@@ -653,8 +719,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGreen:str",
@@ -669,8 +739,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneBlue:str",
@@ -685,8 +759,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGray:str",
@@ -701,8 +779,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             }
           ],
           "default": {
@@ -719,10 +801,10 @@
             "TargetToneBlue": "Unchanged",
             "TargetToneGray": "Unchanged"
           },
-          "context": "Fill this object inside the command value using its field keys. These settings apply when another choice is highlighted, so this bound choice is not selected. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+          "context": "Fill this object inside the command value using its field keys. These settings apply when another choice is highlighted, so this bound choice is not selected. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1. Show Picture also applies these settings immediately when they are already stored for that ID. Supply all fields in the object. Its published default matches the field defaults; omitted fields in raw native data fall back to those same defaults. OnSelectSettings and OnDeselectSettings default to identical objects, which triggers PC-P-SameCheck:eval in playtest. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne for a complete differing example, replacement rules, activation and lifecycle."
         }
       ],
-      "context": "Configure settings before Show Choices. Show Picture creates each image; add <Bind Picture: 1> to its choice text for illustrative ID 1. Cursor highlighting, including initial selection, applies selected settings to matching bound pictures and deselected settings to the others; missing pictures are skipped. Pointer hover highlights and clicking confirms the bound choice. These commands only store settings; they neither show images nor bind choices. Initial highlighting applies instantly. Erase Picture clears that ID, and AutoClear can clear all bindings/settings after confirmation or cancellation. Use whole IDs; lists are rounded/clamped and ranges are clamped/sorted/inclusive within the game picture range. The example uses opacity 255 when selected and 160 when deselected, so the two settings differ with SameCheck enabled; use existing shown and bound pictures 1 (or 1 and 2 for the range).",
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. Configure settings before Show Choices. Show Picture creates each image from img/pictures/ (choose its filename in the native command); picture-choices api describe PC-T-BIND explains the choice-text binding. Cursor highlighting, including initial selection, applies selected settings to matching bound pictures and deselected settings to the others; missing pictures are skipped. Selection effects exclude the final ID equal to $gameScreen.maxPictures(). Pointer hover highlights and clicking confirms an ordinary bound picture while the choice window is active; Attached Pictures children are not pointer-clickable. These commands store replacement settings for each ID; they neither show images nor bind choices nor immediately apply settings to already shown pictures. Initial highlighting applies instantly; Show Picture also applies any stored deselected settings immediately. Bindings and settings belong to $gameScreen: map/scene changes do not clear them, and save/load preserves them. A new game starts empty. ClearAll clears every ID; ClearPictureID/ClearPictureRange and Erase Picture clear the affected IDs. With PC-P-AutoClear:eval true, confirmation/cancellation clears all bindings and settings. Clear commands and AutoClear do not erase pictures, restore their appearance, or stop a transition already applied. Use whole IDs; the PictureIDs and StartID/EndingID argument descriptions explain CLI restrictions and runtime normalization. The example is illustrative and uses opacity 255 when selected and 160 when deselected, so the objects differ with SameCheck enabled. Use existing shown and bound pictures 1 (or 1 and 2 for the range), an existing common event and insertion index, and fileHash from commands list. On insert, omitted arguments use their published defaults; on update, omitted arguments retain the existing values. A supplied settings object must include every field; it replaces that object, rather than merging individual fields. Defaults for both objects are identical: use the example or disable PC-P-SameCheck:eval to avoid its playtest alert/exit.",
       "examples": [
         "picture-choices commands list --target common-event:1 --json",
         "picture-choices commands insert --target common-event:1 --before 0 --command ChangePictureChoiceSettingsOne --value '{\"PictureIDs\":[1],\"OnSelectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"255\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"},\"OnDeselectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"160\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"}}' --expected-hash HASH_FROM_LIST"
@@ -751,7 +833,8 @@
           "availability": "supported",
           "type": "number",
           "default": 1,
-          "min": 1
+          "min": 1,
+          "context": "Argument of picture-choices api describe PC-C-ChangePictureChoiceSettingsRange. That command describes activation, authoring, defaults, clearing/lifecycle and a complete example. The CLI stores this value for later event execution."
         },
         {
           "id": "PC-ChangePictureChoiceSettingsRange-EndingID:num",
@@ -764,7 +847,8 @@
           "availability": "supported",
           "type": "number",
           "default": 100,
-          "min": 1
+          "min": 1,
+          "context": "Argument of picture-choices api describe PC-C-ChangePictureChoiceSettingsRange. That command describes activation, authoring, defaults, clearing/lifecycle and a complete example. The CLI stores this value for later event execution."
         },
         {
           "id": "PC-ChangePictureChoiceSettingsRange-OnSelectSettings:struct",
@@ -788,14 +872,15 @@
               "nativeDefault": "10",
               "availability": "supported",
               "type": "number",
-              "default": 10
+              "default": 10,
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-easingType:str",
               "key": "easingType",
               "storageKey": "easingType:str",
               "label": "Easing Type",
-              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "description": "Interpolation for position, scale and opacity; tone remains linear and BlendMode changes immediately. Linear uses uniform speed. In starts slowly, Out ends slowly, InOut combines both. With Core Engine, Sine uses a sinusoidal curve; Quad/Cubic/Quart/Quint use powers 2/3/4/5 (increasingly strong acceleration), Expo is exponential, Circ follows a circular arc, Back overshoots, Elastic oscillates, and Bounce rebounds. Without Core Engine, only Linear, InSine, OutSine and InOutSine map to native easing modes; the Sine names use native power-based slow start/end rather than sinusoidal curves. Other names fall back to linear in that native mode. The CLI accepts strings without enforcing the suggestions; choose a listed name exactly.",
               "editorType": "combo",
               "nativeDefault": "Linear",
               "availability": "supported",
@@ -834,14 +919,14 @@
                 "OutBounce",
                 "InOutBounce"
               ],
-              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
+              "context": "To enable the listed mathematical curves, enable Coreto_0_CoreEngine 0.1.0 (or VisuMZ_0_CoreEngine 1.90) before Coreto_2_PictureChoices 0.1.0, then restart the game. Only one Core Engine provider may be active. Message Core is optional; if used, Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57 must also precede Picture Choices. No separate easing parameter is required. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne for application, complete examples and lifecycle."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
               "key": "TargetX",
               "storageKey": "TargetX:str",
               "label": "Target X",
-              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -849,15 +934,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetY:str",
               "key": "TargetY",
               "storageKey": "TargetY:str",
               "label": "Target Y",
-              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -865,8 +954,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleX:str",
@@ -881,8 +974,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleY:str",
@@ -897,8 +994,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetOpacity:str",
@@ -913,15 +1014,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-BlendMode:num",
               "key": "BlendMode",
               "storageKey": "BlendMode:num",
               "label": "Blend Mode",
-              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "description": "How the picture blends with pixels behind it: -1 preserves its current blend mode; 0 Normal draws with ordinary transparency; 1 Additive adds color and brightens; 2 Multiply multiplies colors and darkens; 3 Screen combines inverse colors and lightens. The selected mode changes immediately when settings apply, independently of Duration.",
               "editorType": "select",
               "nativeDefault": "-1",
               "availability": "supported",
@@ -940,7 +1045,8 @@
                 "2": "2 - Multiply",
                 "3": "3 - Screen",
                 "-1": "-1 - Unchanged"
-              }
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneRed:str",
@@ -955,8 +1061,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGreen:str",
@@ -971,8 +1081,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneBlue:str",
@@ -987,8 +1101,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGray:str",
@@ -1003,8 +1121,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             }
           ],
           "default": {
@@ -1021,7 +1143,7 @@
             "TargetToneBlue": "Unchanged",
             "TargetToneGray": "Unchanged"
           },
-          "context": "Fill this object inside the command value using its field keys. These settings apply when the matching choice is highlighted. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+          "context": "Fill this object inside the command value using its field keys. These settings apply when the matching choice is highlighted. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1. Supply all fields in the object. Its published default matches the field defaults; omitted fields in raw native data fall back to those same defaults. OnSelectSettings and OnDeselectSettings default to identical objects, which triggers PC-P-SameCheck:eval in playtest. See picture-choices api describe PC-C-ChangePictureChoiceSettingsRange for a complete differing example, replacement rules, activation and lifecycle."
         },
         {
           "id": "PC-ChangePictureChoiceSettingsRange-OnDeselectSettings:struct",
@@ -1045,14 +1167,15 @@
               "nativeDefault": "10",
               "availability": "supported",
               "type": "number",
-              "default": 10
+              "default": 10,
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-easingType:str",
               "key": "easingType",
               "storageKey": "easingType:str",
               "label": "Easing Type",
-              "description": "Transition interpolation curve. Linear has uniform speed; In accelerates from rest, Out decelerates toward the target, and InOut combines both. Sine, Quad, Cubic, Quart, Quint, Expo and Circ choose the curve shape; Back overshoots, Elastic oscillates, Bounce rebounds. Without a Core Engine provider only Linear, InSine, OutSine and InOutSine are supported. Choose a listed name exactly.",
+              "description": "Interpolation for position, scale and opacity; tone remains linear and BlendMode changes immediately. Linear uses uniform speed. In starts slowly, Out ends slowly, InOut combines both. With Core Engine, Sine uses a sinusoidal curve; Quad/Cubic/Quart/Quint use powers 2/3/4/5 (increasingly strong acceleration), Expo is exponential, Circ follows a circular arc, Back overshoots, Elastic oscillates, and Bounce rebounds. Without Core Engine, only Linear, InSine, OutSine and InOutSine map to native easing modes; the Sine names use native power-based slow start/end rather than sinusoidal curves. Other names fall back to linear in that native mode. The CLI accepts strings without enforcing the suggestions; choose a listed name exactly.",
               "editorType": "combo",
               "nativeDefault": "Linear",
               "availability": "supported",
@@ -1091,14 +1214,14 @@
                 "OutBounce",
                 "InOutBounce"
               ],
-              "context": "Without an active Core Engine provider, the runtime accepts only Linear, InSine, OutSine and InOutSine. The other listed curves require the Core Engine provider. Choose one of the names exactly as listed. To enable all listed curves in the Coreto stack, install and enable Coreto_0_CoreEngine 0.1.0 before Coreto_1_MessageCore and Coreto_2_PictureChoices in MZ Plugin Manager, then restart playtest. No separate easing parameter is required."
+              "context": "To enable the listed mathematical curves, enable Coreto_0_CoreEngine 0.1.0 (or VisuMZ_0_CoreEngine 1.90) before Coreto_2_PictureChoices 0.1.0, then restart the game. Only one Core Engine provider may be active. Message Core is optional; if used, Coreto_1_MessageCore 0.1.0 or VisuMZ_1_MessageCore 1.57 must also precede Picture Choices. No separate easing parameter is required. See picture-choices api describe PC-C-ChangePictureChoiceSettingsOne for application, complete examples and lifecycle."
             },
             {
               "id": "PC-PICTURE-TargetX:str",
               "key": "TargetX",
               "storageKey": "TargetX:str",
               "label": "Target X",
-              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target X position of the picture origin in pixels, increasing rightward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"320\" or \"this.x() + 20\"; Unchanged preserves the existing target X. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -1106,15 +1229,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetY:str",
               "key": "TargetY",
               "storageKey": "TargetY:str",
               "label": "Target Y",
-              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture.",
+              "description": "Target Y position of the picture origin in pixels, increasing downward from the top-left of the screen. For an attached picture, coordinates are local to its parent. Enter a numeric JavaScript expression as a string, such as \"240\" or \"this.y() + 20\"; Unchanged preserves the existing target Y. The picture origin remains the one chosen in Show Picture. With Core Engine and a picture filename beginning !, this stored target is a map-pixel coordinate on the map; scrolling is subtracted and screen zoom applied when displayed. For that case, this.x()/this.y() return transformed display coordinates, so use an explicit map-pixel target instead of treating them as raw target coordinates.",
               "editorType": "text",
               "nativeDefault": "Unchanged",
               "availability": "supported",
@@ -1122,8 +1249,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleX:str",
@@ -1138,8 +1269,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetScaleY:str",
@@ -1154,8 +1289,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetOpacity:str",
@@ -1170,15 +1309,19 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-BlendMode:num",
               "key": "BlendMode",
               "storageKey": "BlendMode:num",
               "label": "Blend Mode",
-              "description": "What kind of blend mode do you wish to apply to the picture?",
+              "description": "How the picture blends with pixels behind it: -1 preserves its current blend mode; 0 Normal draws with ordinary transparency; 1 Additive adds color and brightens; 2 Multiply multiplies colors and darkens; 3 Screen combines inverse colors and lightens. The selected mode changes immediately when settings apply, independently of Duration.",
               "editorType": "select",
               "nativeDefault": "-1",
               "availability": "supported",
@@ -1197,7 +1340,8 @@
                 "2": "2 - Multiply",
                 "3": "3 - Screen",
                 "-1": "-1 - Unchanged"
-              }
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneRed:str",
@@ -1212,8 +1356,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGreen:str",
@@ -1228,8 +1376,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneBlue:str",
@@ -1244,8 +1396,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             },
             {
               "id": "PC-PICTURE-TargetToneGray:str",
@@ -1260,8 +1416,12 @@
               "default": "Unchanged",
               "javascript": {
                 "kind": "expression",
-                "context": "Game_Picture; Unchanged is a case-insensitive sentinel"
-              }
+                "context": "The CLI validates an expression string without executing it. At runtime, selection/deselection applies the expression with this bound to the Game_Picture; Show Picture also evaluates stored deselected settings. There are no callback arguments; use this picture or RPG Maker globals such as $gameVariables. The numeric expression result becomes the corresponding target; Unchanged is a case-insensitive sentinel and is not evaluated. Expressions are evaluated in X, Y, scale X, scale Y, opacity, then red/green/blue/gray order. Keep expressions free of side effects; evaluation errors propagate.",
+                "receiver": "Game_Picture (the bound picture)",
+                "arguments": [],
+                "returnType": "number"
+              },
+              "context": "Field of OnSelectSettings/OnDeselectSettings in picture-choices api describe PC-C-ChangePictureChoiceSettingsOne and PC-C-ChangePictureChoiceSettingsRange; those commands define activation, complete object examples, replacement and lifecycle. The default here matches both object defaults and the raw missing-field fallback."
             }
           ],
           "default": {
@@ -1278,10 +1438,10 @@
             "TargetToneBlue": "Unchanged",
             "TargetToneGray": "Unchanged"
           },
-          "context": "Fill this object inside the command value using its field keys. These settings apply when another choice is highlighted, so this bound choice is not selected. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1."
+          "context": "Fill this object inside the command value using its field keys. These settings apply when another choice is highlighted, so this bound choice is not selected. JavaScript expression fields are strings evaluated with this bound to the Game_Picture; Unchanged is a case-insensitive sentinel. This object does not create a choice binding. Use <Bind Picture: 1> in the corresponding Show Choices text for illustrative picture ID 1. Show Picture also applies these settings immediately when they are already stored for that ID. Supply all fields in the object. Its published default matches the field defaults; omitted fields in raw native data fall back to those same defaults. OnSelectSettings and OnDeselectSettings default to identical objects, which triggers PC-P-SameCheck:eval in playtest. See picture-choices api describe PC-C-ChangePictureChoiceSettingsRange for a complete differing example, replacement rules, activation and lifecycle."
         }
       ],
-      "context": "Configure settings before Show Choices. Show Picture creates each image; add <Bind Picture: 1> to its choice text for illustrative ID 1. Cursor highlighting, including initial selection, applies selected settings to matching bound pictures and deselected settings to the others; missing pictures are skipped. Pointer hover highlights and clicking confirms the bound choice. These commands only store settings; they neither show images nor bind choices. Initial highlighting applies instantly. Erase Picture clears that ID, and AutoClear can clear all bindings/settings after confirmation or cancellation. Use whole IDs; lists are rounded/clamped and ranges are clamped/sorted/inclusive within the game picture range. The example uses opacity 255 when selected and 160 when deselected, so the two settings differ with SameCheck enabled; use existing shown and bound pictures 1 (or 1 and 2 for the range).",
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. Configure settings before Show Choices. Show Picture creates each image from img/pictures/ (choose its filename in the native command); picture-choices api describe PC-T-BIND explains the choice-text binding. Cursor highlighting, including initial selection, applies selected settings to matching bound pictures and deselected settings to the others; missing pictures are skipped. Selection effects exclude the final ID equal to $gameScreen.maxPictures(). Pointer hover highlights and clicking confirms an ordinary bound picture while the choice window is active; Attached Pictures children are not pointer-clickable. These commands store replacement settings for each ID; they neither show images nor bind choices nor immediately apply settings to already shown pictures. Initial highlighting applies instantly; Show Picture also applies any stored deselected settings immediately. Bindings and settings belong to $gameScreen: map/scene changes do not clear them, and save/load preserves them. A new game starts empty. ClearAll clears every ID; ClearPictureID/ClearPictureRange and Erase Picture clear the affected IDs. With PC-P-AutoClear:eval true, confirmation/cancellation clears all bindings and settings. Clear commands and AutoClear do not erase pictures, restore their appearance, or stop a transition already applied. Use whole IDs; the PictureIDs and StartID/EndingID argument descriptions explain CLI restrictions and runtime normalization. The example is illustrative and uses opacity 255 when selected and 160 when deselected, so the objects differ with SameCheck enabled. Use existing shown and bound pictures 1 (or 1 and 2 for the range), an existing common event and insertion index, and fileHash from commands list. On insert, omitted arguments use their published defaults; on update, omitted arguments retain the existing values. A supplied settings object must include every field; it replaces that object, rather than merging individual fields. Defaults for both objects are identical: use the example or disable PC-P-SameCheck:eval to avoid its playtest alert/exit.",
       "examples": [
         "picture-choices commands list --target common-event:1 --json",
         "picture-choices commands insert --target common-event:1 --before 0 --command ChangePictureChoiceSettingsRange --value '{\"StartID\":1,\"EndingID\":2,\"OnSelectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"255\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"},\"OnDeselectSettings\":{\"Duration\":10,\"easingType\":\"Linear\",\"TargetX\":\"Unchanged\",\"TargetY\":\"Unchanged\",\"TargetScaleX\":\"Unchanged\",\"TargetScaleY\":\"Unchanged\",\"TargetOpacity\":\"160\",\"BlendMode\":-1,\"TargetToneRed\":\"Unchanged\",\"TargetToneGreen\":\"Unchanged\",\"TargetToneBlue\":\"Unchanged\",\"TargetToneGray\":\"Unchanged\"}}' --expected-hash HASH_FROM_LIST"
@@ -1296,7 +1456,7 @@
       "id": "PC-T-BIND",
       "key": "bind-picture",
       "label": "Bind Picture",
-      "description": "Place this tag in Show Choices choice text to bind the given picture ID to that choice; the tag is removed from displayed text. Use Show Picture to create the image before choices appear. Hovering the picture highlights its choice; clicking confirms it. A missing picture has no visible/clickable sprite and is skipped for selection effects. Bind IDs within the game picture range; selection effects currently iterate IDs below $gameScreen.maxPictures(), excluding that final ID. The last binding for the same picture wins. Erase Picture and the configured AutoClear behavior clear bindings. The published min/max describe accepted tag syntax, not the available picture slots: the parser stores the ID without clamping. ID 0 and IDs above the game picture maximum do not identify a normal displayed picture.",
+      "description": "Place this tag in Show Choices choice text to bind the given picture ID to that choice; the tag is removed from displayed text. Use Show Picture to create the image before choices appear. While the choice window is active, hovering an ordinary bound picture highlights its choice and clicking confirms it. Attached Pictures children are not pointer-clickable. A missing picture has no visible/clickable sprite and is skipped for selection effects. Bind IDs within the game picture range; selection effects currently iterate IDs below $gameScreen.maxPictures(), excluding that final ID. The last binding for the same picture wins. Erase Picture and the configured AutoClear behavior clear bindings. The published min/max describe accepted tag syntax, not the available picture slots: the parser stores the ID without clamping. ID 0 and IDs above the game picture maximum do not identify a normal displayed picture.",
       "type": "number",
       "min": 0,
       "max": 9007199254740991,
@@ -1308,14 +1468,20 @@
       "availability": "supported",
       "occurrences": "last binding for each picture",
       "examples": [
-        "<Bind Picture: 1>"
-      ]
+        "<Bind Picture: 1>",
+        "picture-choices commands list --target common-event:1 --json",
+        "message text get --target common-event:1 --index 0 --path choices --json",
+        "picture-choices tags list --target common-event:1/text:0/choice:0 --json",
+        "picture-choices tags set --target common-event:1/text:0/choice:0 --tag bind-picture --value '1' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. Bindings and settings belong to $gameScreen: map/scene changes do not clear them, and save/load preserves them. A new game starts empty. ClearAll clears every ID; ClearPictureID/ClearPictureRange and Erase Picture clear the affected IDs. With PC-P-AutoClear:eval true, confirmation/cancellation clears all bindings and settings. Clear commands and AutoClear do not erase pictures, restore their appearance, or stop a transition already applied. Multiple pictures may bind to one choice. Reusing a picture ID replaces its prior choice index; unmentioned IDs are retained until cleared. Removing an authored tag only affects later choice-list construction; it does not clear an existing runtime binding. This tag is read from a Show Choices choice string, not Note, Comment or Show Text. It is single-line and case-insensitive; both <Bind Picture: 1> and <Bind Pictures: 1> are accepted. Use ordinary Show Picture images from img/pictures/; the numeric value is the picture slot, not an asset ID.",
+      "writing": "Use picture-choices commands list --target common-event:1 to find an existing Show Choices unit (code 102) and its index I. message text get --target common-event:1 --index I --path choices lists its labels; choose a zero-based choice J. Then picture-choices tags list --target common-event:1/text:I/choice:J supplies result.fileHash for --expected-hash and any occurrence indices. Example target, index 0 and choice 0 are illustrative and must be replaced. tags set/remove edits native event data for future execution; it does not affect a running game. Use --occurrence from result.occurrences when the selected choice contains multiple matching tags."
     },
     {
       "id": "PC-T-HIDE",
       "key": "hide-choice-window",
       "label": "Hide Choice Window",
-      "description": "Hide the choice window while retaining keyboard and picture input.",
+      "description": "Put <Hide Choice Window> in any Show Choices choice string to hide the whole choice window for that choice list. The tag is stripped from visible choice labels. Keyboard selection/confirmation/cancellation remain available; ordinary shown pictures bound with PC-T-BIND can still provide pointer input. This tag does not create or bind pictures. A later choice list without the tag is visible again.",
       "type": "string",
       "pattern": "<HIDE CHOICE WINDOW>",
       "targets": [
@@ -1324,8 +1490,14 @@
       "availability": "supported",
       "occurrences": "any choice hides the window",
       "examples": [
-        "<Hide Choice Window>"
-      ]
+        "<Hide Choice Window>",
+        "picture-choices commands list --target common-event:1 --json",
+        "message text get --target common-event:1 --index 0 --path choices --json",
+        "picture-choices tags list --target common-event:1/text:0/choice:0 --json",
+        "picture-choices tags set --target common-event:1/text:0/choice:0 --tag hide-choice-window --value '\"<Hide Choice Window>\"' --expected-hash HASH_FROM_LIST --dry-run"
+      ],
+      "context": "Enable Coreto_2_PictureChoices 0.1.0 with picture-choices install (the bundle must already be delivered), then restart the game. This selects it instead of VisuMZ_2_PictureChoices. Core Engine and Message Core are optional; if active, use one supported provider of each before Picture Choices. See picture-choices api describe PC-PICTURE-easingType:str for supported Core Engine versions and extra curves. This is a single-line, case-insensitive tag in Show Choices text, not Note, Comment or Show Text. Hide state is recomputed when the choice list is built; it is not a saved global setting and is independent of AutoClear. Removing the authored tag affects the next list construction, not an already open choice window.",
+      "writing": "Use picture-choices commands list --target common-event:1 to find an existing Show Choices unit (code 102) and its index I. message text get --target common-event:1 --index I --path choices lists its labels; choose a zero-based choice J. Then picture-choices tags list --target common-event:1/text:I/choice:J supplies result.fileHash for --expected-hash and any occurrence indices. Example target, index 0 and choice 0 are illustrative and must be replaced. tags set/remove edits native event data for future execution; it does not affect a running game. Use --occurrence from result.occurrences when the selected choice contains multiple matching tags."
     }
   ],
   "methods": []

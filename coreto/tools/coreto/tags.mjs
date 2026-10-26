@@ -42,7 +42,7 @@ function javascriptSpan(tag, match) {
 function identity(tag, text) {
     if (tag.encoding === "block") return text.slice(1, text.indexOf(">")).toUpperCase();
     const heading = text.slice(1, text.indexOf(":") < 0 ? -1 : text.indexOf(":")).toUpperCase();
-    if (tag.javascript || tag.key === "enemy-base" || tag.key === "animation-offset") return heading;
+    if (tag.javascript || tag.key === "enemy-base" || tag.key === "animation-offset" || tag.key === "buff-turns") return heading;
     if (/^(?:param|xparam|sparam)-(?:plus|rate|flat|max)$/.test(tag.key)) return heading + (/[%％]>$/.test(text) ? "/percent" : "/number");
     if (tag.key === "scroll-lock") return /SCROLL LOCK ([XY])/i.exec(text)[1].toUpperCase();
     if (tag.key === "animation-anchor") return heading.replace(/^(?:HEADER|TOP)$/, "HEAD").replace(/^(?:FOOTER|BOTTOM)$/, "FOOT");

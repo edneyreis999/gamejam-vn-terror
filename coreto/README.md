@@ -26,6 +26,8 @@ O servidor imprime a URL do playtest. Encerre-o com Ctrl+C. A base suportada é 
 | Implementar comportamento exclusivo do jogo | [Plugins especialistas e tiers](docs/extensoes.md) |
 | Percorrer o jogo, reproduzir bugs e capturar evidências | [QA dirigido](docs/qa.md) |
 
+Descubra skills operacionais com `node coreto/tools/coreto/cli.mjs skills list`; `skills describe <nome>` informa o caminho de `SKILL.md` e as dependências. Os pacotes ficam em `.agents/skills/`.
+
 Leia somente o guia pertinente. Consulte a API por namespace e descritor; carregar todos os catálogos ou fontes no contexto da IA não é necessário.
 
 ## Ativar os plugins
@@ -37,3 +39,5 @@ A configuração do jogo é editável: parâmetros, ativação, ordem do registr
 ## Atualizar a Coreto
 
 Reinstalações pela distribuição oficial podem atualizar `coreto/` e os bundles. Conteúdo local de `AGENTS.md`, `CLAUDE.md` e `.gitignore` é preservado fora do bloco Coreto. `README.md`, testes, planos, ADRs e ferramentas próprias do projeto permanecem seus. Arquivos de distribuições antigas fora de `coreto/` não são removidos automaticamente.
+
+As skills selecionadas são atualizadas quando intactas. Edições e remoções locais preservam o pacote inteiro e geram aviso; os demais componentes continuam sendo atualizados. `.coreto-skills.json` registra os arquivos gerenciados. Para resolver um conflito, compare com o pacote oficial e mova sua variante para outro nome ou restaure os arquivos gerenciados antes de reinstalar.

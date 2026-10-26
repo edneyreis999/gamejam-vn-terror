@@ -10,7 +10,7 @@ export function validateMessageDependencies(active, own, dependencies, fail) {
     }
     const tooltip = active.findIndex(plugin => plugin.name === 'VisuMZ_3_StateTooltips');
     if (tooltip >= 0) {
-        for (const alternatives of [['VisuMZ_1_BattleCore', 'Coreto_1_BattleCore'], ['VisuMZ_1_SkillsStatesCore']]) {
+        for (const alternatives of [['VisuMZ_1_BattleCore', 'Coreto_1_BattleCore'], ['VisuMZ_1_SkillsStatesCore', 'Coreto_1_SkillsStatesCore']]) {
             const providers = active.filter(plugin => alternatives.includes(plugin.name));
             if (providers.length !== 1 || active.indexOf(providers[0]) > tooltip) {
                 fail('MESSAGE_TOOLTIP_DEPENDENCY', `Place exactly one ${alternatives.join(' or ')} before StateTooltips.`);

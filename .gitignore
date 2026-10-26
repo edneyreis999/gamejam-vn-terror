@@ -60,6 +60,8 @@ __pycache__/
 /docs/qa/runs/
 /coverage/
 dist/
+
+**/.coreto-design-system-backups/
 /rpg-maker/**/save/
 /rpg-maker/**/.RPGMakerMZ-metadata/
 # END CORETO
