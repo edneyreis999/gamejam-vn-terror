@@ -9415,7 +9415,41 @@
                     }
                 ]
             },
-            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"82\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"82\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_PictureChoices",
+                    "ChangePictureChoiceSettingsOne",
+                    "ChangePictureChoiceSettingsOne",
+                    {
+                        "PictureIDs:arraynum": "[\"82\"]",
+                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}",
+                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Picture ID(s) = [\"82\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -9650,7 +9684,41 @@
                     }
                 ]
             },
-            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"83\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"83\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_PictureChoices",
+                    "ChangePictureChoiceSettingsOne",
+                    "ChangePictureChoiceSettingsOne",
+                    {
+                        "PictureIDs:arraynum": "[\"83\"]",
+                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}",
+                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Picture ID(s) = [\"83\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -9786,8 +9854,76 @@
                 "indent": 0,
                 "parameters": []
             },
-            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"84\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"84\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
-            {"code":357,"indent":0,"parameters":["VisuMZ_2_PictureChoices","ChangePictureChoiceSettingsOne","ChangePictureChoiceSettingsOne",{"PictureIDs:arraynum":"[\"81\"]","OnSelectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}","OnDeselectSettings:struct":"{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"}]},{"code":657,"indent":0,"parameters":["Picture ID(s) = [\"81\"]"]},{"code":657,"indent":0,"parameters":["On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},{"code":657,"indent":0,"parameters":["On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"]},
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_PictureChoices",
+                    "ChangePictureChoiceSettingsOne",
+                    "ChangePictureChoiceSettingsOne",
+                    {
+                        "PictureIDs:arraynum": "[\"84\"]",
+                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}",
+                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Picture ID(s) = [\"84\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_PictureChoices",
+                    "ChangePictureChoiceSettingsOne",
+                    "ChangePictureChoiceSettingsOne",
+                    {
+                        "PictureIDs:arraynum": "[\"81\"]",
+                        "OnSelectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}",
+                        "OnDeselectSettings:struct": "{\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "Picture ID(s) = [\"81\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Select Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "On Deselect Settings = {\"Duration:num\":\"0\",\"easingType:str\":\"Linear\",\"TargetX:str\":\"Unchanged\",\"TargetY:str\":\"Unchanged\",\"TargetScaleX:str\":\"Unchanged\",\"TargetScaleY:str\":\"Unchanged\",\"TargetOpacity:str\":\"Unchanged\",\"BlendMode:num\":\"-1\",\"TargetToneRed:str\":\"0\",\"TargetToneGreen:str\":\"0\",\"TargetToneBlue:str\":\"0\",\"TargetToneGray:str\":\"0\"}"
+                ]
+            },
             {
                 "code": 108,
                 "indent": 0,
@@ -13462,7 +13598,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -13479,6 +13615,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -13513,13 +13671,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H1",
+                    "Dryland_Memorial_H1",
                     1,
                     0,
-                    5,
-                    90,
-                    30.09,
-                    30.09,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -13569,7 +13727,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -13586,6 +13744,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -13620,13 +13800,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H2",
+                    "Dryland_Memorial_H2",
                     1,
                     0,
-                    1,
-                    182,
-                    34.45,
-                    34.45,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -13676,7 +13856,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -13693,6 +13873,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -13727,13 +13929,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H3",
+                    "Dryland_Memorial_H3",
                     1,
                     0,
                     0,
-                    165,
-                    36,
-                    36,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -13783,7 +13985,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -13800,6 +14002,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -13834,13 +14058,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H4",
+                    "Dryland_Memorial_H4",
                     1,
                     0,
                     0,
-                    306,
-                    36,
-                    36,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -13890,7 +14114,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -13907,6 +14131,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -13941,13 +14187,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H5",
+                    "Dryland_Memorial_H5",
                     1,
                     0,
-                    1,
-                    171,
-                    33.72,
-                    33.72,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -13997,7 +14243,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14014,6 +14260,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14048,13 +14316,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H6",
+                    "Dryland_Memorial_H6",
                     1,
                     0,
-                    1,
-                    166,
-                    34.23,
-                    34.23,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14104,7 +14372,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14121,6 +14389,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14155,13 +14445,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H7",
+                    "Dryland_Memorial_H7",
                     1,
                     0,
-                    -1,
-                    182,
-                    34.27,
-                    34.27,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14211,7 +14501,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14228,6 +14518,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"50\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[189]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14262,13 +14574,13 @@
                 "indent": 1,
                 "parameters": [
                     10,
-                    "Dryland_H8",
+                    "Dryland_Memorial_H8",
                     1,
                     0,
-                    -7,
-                    164,
-                    36,
-                    36,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14318,7 +14630,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14335,6 +14647,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14369,13 +14703,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H1",
+                    "Dryland_Memorial_H1",
                     1,
                     0,
-                    5,
-                    90,
-                    30.09,
-                    30.09,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14425,7 +14759,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14442,6 +14776,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14476,13 +14832,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H2",
+                    "Dryland_Memorial_H2",
                     1,
                     0,
-                    1,
-                    182,
-                    34.45,
-                    34.45,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14532,7 +14888,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14549,6 +14905,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14583,13 +14961,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H3",
+                    "Dryland_Memorial_H3",
                     1,
                     0,
                     0,
-                    165,
-                    36,
-                    36,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14639,7 +15017,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14656,6 +15034,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14690,13 +15090,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H4",
+                    "Dryland_Memorial_H4",
                     1,
                     0,
                     0,
-                    306,
-                    36,
-                    36,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14746,7 +15146,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14763,6 +15163,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14797,13 +15219,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H5",
+                    "Dryland_Memorial_H5",
                     1,
                     0,
-                    1,
-                    171,
-                    33.72,
-                    33.72,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14853,7 +15275,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14870,6 +15292,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -14904,13 +15348,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H6",
+                    "Dryland_Memorial_H6",
                     1,
                     0,
-                    1,
-                    166,
-                    34.23,
-                    34.23,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -14960,7 +15404,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -14977,6 +15421,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15011,13 +15477,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H7",
+                    "Dryland_Memorial_H7",
                     1,
                     0,
-                    -1,
-                    182,
-                    34.27,
-                    34.27,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15067,7 +15533,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15084,6 +15550,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"51\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[190]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15118,13 +15606,13 @@
                 "indent": 1,
                 "parameters": [
                     11,
-                    "Dryland_H8",
+                    "Dryland_Memorial_H8",
                     1,
                     0,
-                    -7,
-                    164,
-                    36,
-                    36,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15174,7 +15662,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15191,6 +15679,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15225,13 +15735,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H1",
+                    "Dryland_Memorial_H1",
                     1,
                     0,
-                    5,
-                    90,
-                    30.09,
-                    30.09,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15281,7 +15791,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15298,6 +15808,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15332,13 +15864,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H2",
+                    "Dryland_Memorial_H2",
                     1,
                     0,
-                    1,
-                    182,
-                    34.45,
-                    34.45,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15388,7 +15920,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15405,6 +15937,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15439,13 +15993,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H3",
+                    "Dryland_Memorial_H3",
                     1,
                     0,
                     0,
-                    165,
-                    36,
-                    36,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15495,7 +16049,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15512,6 +16066,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15546,13 +16122,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H4",
+                    "Dryland_Memorial_H4",
                     1,
                     0,
                     0,
-                    306,
-                    36,
-                    36,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15602,7 +16178,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15619,6 +16195,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15653,13 +16251,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H5",
+                    "Dryland_Memorial_H5",
                     1,
                     0,
-                    1,
-                    171,
-                    33.72,
-                    33.72,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15709,7 +16307,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15726,6 +16324,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15760,13 +16380,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H6",
+                    "Dryland_Memorial_H6",
                     1,
                     0,
-                    1,
-                    166,
-                    34.23,
-                    34.23,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15816,7 +16436,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15833,6 +16453,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15867,13 +16509,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H7",
+                    "Dryland_Memorial_H7",
                     1,
                     0,
-                    -1,
-                    182,
-                    34.27,
-                    34.27,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]
@@ -15923,7 +16565,7 @@
                     45,
                     0,
                     0,
-                    500
+                    380
                 ]
             },
             {
@@ -15940,6 +16582,28 @@
                     100,
                     255,
                     0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
+                "parameters": [
+                    "Coreto_1_MessageCore",
+                    "PictureTextChange",
+                    "PictureTextChange",
+                    {
+                        "PictureIDs:arraynum": "[\"52\"]",
+                        "Padding:eval": "48",
+                        "upperleft:json": "\"\"",
+                        "up:json": "\"\"",
+                        "upperright:json": "\"\"",
+                        "left:json": "\"\"",
+                        "center:json": "\"\"",
+                        "right:json": "\"\"",
+                        "lowerleft:json": "\"\"",
+                        "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>\\\\V[191]\"",
+                        "lowerright:json": "\"\""
+                    }
                 ]
             },
             {
@@ -15974,13 +16638,13 @@
                 "indent": 1,
                 "parameters": [
                     12,
-                    "Dryland_H8",
+                    "Dryland_Memorial_H8",
                     1,
                     0,
-                    -7,
-                    164,
-                    36,
-                    36,
+                    0,
+                    -30,
+                    21.398002853067048,
+                    21.398002853067048,
                     255,
                     0
                 ]

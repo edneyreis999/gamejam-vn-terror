@@ -683,7 +683,20 @@ var $plugins =
             "Dialogue": "{\"ContinuePlacement\":\"corner\",\"SpeakerInside\":\"true\",\"SpeakerGap\":\"4\",\"TextInset\":\"16\"}",
             "Field": "{\"Height\":\"40\",\"PaddingX\":\"18\",\"Gap\":\"4\"}",
             "OptionsLayout": "{\"Margin\":\"28\",\"CategoryHeight\":\"76\",\"CategoryOffsetY\":\"16\",\"ListOffsetY\":\"12\",\"RowGap\":\"12\",\"Bottom\":\"20\"}",
-            "PictureRoles": "[\"{\\\"Image\\\":\\\"Coreto_PartyCard\\\",\\\"Role\\\":\\\"card\\\"}\",\"{\\\"Image\\\":\\\"Coreto_MemorialCard\\\",\\\"Role\\\":\\\"card\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Button\\\",\\\"Role\\\":\\\"secondary\\\"}\",\"{\\\"Image\\\":\\\"Dryland_DestinationCard\\\",\\\"Role\\\":\\\"secondary\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Panel\\\",\\\"Role\\\":\\\"panel\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Approach\\\",\\\"Role\\\":\\\"secondary\\\"}\",\"{\\\"Image\\\":\\\"Dryland_EncounterTitle\\\",\\\"Role\\\":\\\"card\\\"}\",\"{\\\"Image\\\":\\\"Dryland_DestinationLabel\\\",\\\"Role\\\":\\\"secondary\\\"}\",\"{\\\"Image\\\":\\\"Dryland_SacrificeCard\\\",\\\"Role\\\":\\\"secondary\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Tag\\\",\\\"Role\\\":\\\"secondary\\\"}\"]"
+            "PictureRoles": "[\"{\\\"Image\\\":\\\"Coreto_PartyCard\\\",\\\"Role\\\":\\\"card\\\"}\",\"{\\\"Image\\\":\\\"Coreto_MemorialCard\\\",\\\"Role\\\":\\\"card\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Panel\\\",\\\"Role\\\":\\\"panel\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Approach\\\",\\\"Role\\\":\\\"secondary\\\"}\",\"{\\\"Image\\\":\\\"Dryland_EncounterTitle\\\",\\\"Role\\\":\\\"card\\\"}\",\"{\\\"Image\\\":\\\"Dryland_Tag\\\",\\\"Role\\\":\\\"secondary\\\"}\"]"
+        }
+    },
+    {
+        "name": "Dryland_6_IllustratedChoices",
+        "status": true,
+        "description": "[Dryland] Editable paper artwork for native and picture choices.",
+        "parameters": {
+            "Paper": "Dryland_ChoicePaper",
+            "Approach": "Dryland_ApproachPaper",
+            "Destination": "Dryland_DestinationPaper",
+            "Sacrifice": "Dryland_SacrificePaper",
+            "Reunite": "Dryland_FinalReunite",
+            "Destroy": "Dryland_FinalDestroy"
         }
     }
 ];
