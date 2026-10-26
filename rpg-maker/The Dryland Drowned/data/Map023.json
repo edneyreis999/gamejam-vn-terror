@@ -3025,7 +3025,13 @@
                 "Rheed"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.rheed.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.rheed.1]"
+              ]
+            },
             {
               "code": 357,
               "indent": 2,
@@ -3396,7 +3402,13 @@
                 "Ivaí"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.ivai.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.ivai.1]"
+              ]
+            },
             {
               "code": 357,
               "indent": 2,
@@ -3777,7 +3789,13 @@
                 "Rheed"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.rheed.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.rheed.2]"
+              ]
+            },
             {
               "code": 357,
               "indent": 2,
@@ -4158,7 +4176,13 @@
                 "Rheed"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.rheed.3]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.rheed.3]"
+              ]
+            },
             {
               "code": 357,
               "indent": 2,
@@ -4539,7 +4563,13 @@
                 "Rheed"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.rheed.3]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.rheed.3]"
+              ]
+            },
             {
               "code": 357,
               "indent": 2,
@@ -4910,7 +4940,13 @@
                 "Ivaí"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.ivai.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.ivai.2]"
+              ]
+            },
             {
               "code": 357,
               "indent": 2,
@@ -5104,7 +5140,13 @@
                 "Andirá"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.andira]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.andira]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -5397,7 +5439,13 @@
                 "Gorvak"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.gorvak.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.gorvak.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -5409,7 +5457,13 @@
                 "Gorvak"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.gorvak.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.gorvak.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -5702,7 +5756,13 @@
                 "Elowen"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.elowen.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.elowen.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -5714,7 +5774,13 @@
                 "Elowen"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.elowen.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.elowen.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -6007,7 +6073,13 @@
                 "Griznik"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.griznik.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.griznik.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -6019,7 +6091,13 @@
                 "Griznik"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.griznik.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.griznik.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -6312,7 +6390,13 @@
                 "Seraphina"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.seraphina.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.seraphina.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -6324,7 +6408,13 @@
                 "Seraphina"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.seraphina.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.seraphina.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -6617,7 +6707,13 @@
                 "Bimbren"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.bimbren.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.bimbren.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -6629,7 +6725,13 @@
                 "Bimbren"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.bimbren.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.bimbren.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -6922,7 +7024,13 @@
                 "Liora"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.liora.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.liora.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -6934,7 +7042,13 @@
                 "Liora"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.liora.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.liora.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -7227,7 +7341,13 @@
                 "Vaelith"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.vaelith.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.vaelith.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -7239,7 +7359,13 @@
                 "Vaelith"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.vaelith.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.vaelith.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -7532,7 +7658,13 @@
                 "Draska"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.draska.1]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.draska.1]"
+              ]
+            },
             {
               "code": 101,
               "indent": 2,
@@ -7544,7 +7676,13 @@
                 "Draska"
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.draska.2]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.draska.2]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -7834,7 +7972,13 @@
                 ""
               ]
             },
-            {"code":401,"indent":2,"parameters":["$[council.irati.narrator]"]},
+            {
+              "code": 401,
+              "indent": 2,
+              "parameters": [
+                "$[council.irati.narrator]"
+              ]
+            },
             {
               "code": 108,
               "indent": 2,
@@ -7974,10 +8118,115 @@
               ]
             },
             {
+              "code": 231,
+              "indent": 0,
+              "parameters": [
+                50,
+                "Dryland_FinalReunite",
+                1,
+                0,
+                360,
+                360,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "50",
+                  "name": "Illustrated choice 50"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Coreto_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[\"50\"]",
+                  "Padding:eval": "26",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>$[council.choice.restore]\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 0,
+              "parameters": [
+                51,
+                "Dryland_FinalDestroy",
+                1,
+                0,
+                920,
+                360,
+                100,
+                100,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "BindInterfacePicture",
+                "BindInterfacePicture",
+                {
+                  "picture": "51",
+                  "name": "Illustrated choice 51"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Coreto_1_MessageCore",
+                "PictureTextChange",
+                "PictureTextChange",
+                {
+                  "PictureIDs:arraynum": "[\"51\"]",
+                  "Padding:eval": "26",
+                  "upperleft:json": "\"\"",
+                  "up:json": "\"\"",
+                  "upperright:json": "\"\"",
+                  "left:json": "\"\"",
+                  "center:json": "\"\"",
+                  "right:json": "\"\"",
+                  "lowerleft:json": "\"\"",
+                  "down:json": "\"\\\\HexColor<#30261f>\\\\FS[20]<WordWrap>$[council.choice.destroy]\"",
+                  "lowerright:json": "\"\""
+                }
+              ]
+            },
+            {
               "code": 102,
               "indent": 0,
               "parameters": [
-                ["$[council.choice.restore]","$[council.choice.destroy]"],
+                [
+                  "$[council.choice.restore]<Bind Picture: 50><Hide Choice Window>",
+                  "$[council.choice.destroy]<Bind Picture: 51><Hide Choice Window>"
+                ],
                 -1,
                 0,
                 2,
@@ -7989,7 +8238,21 @@
               "indent": 0,
               "parameters": [
                 0,
-                "$[council.choice.restore]"
+                "$[council.choice.restore]<Bind Picture: 50><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                51
               ]
             },
             {
@@ -8086,7 +8349,21 @@
               "indent": 0,
               "parameters": [
                 1,
-                "$[council.choice.destroy]"
+                "$[council.choice.destroy]<Bind Picture: 51><Hide Choice Window>"
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                50
+              ]
+            },
+            {
+              "code": 235,
+              "indent": 1,
+              "parameters": [
+                51
               ]
             },
             {

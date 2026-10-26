@@ -2645,11 +2645,11 @@
                             "indent": 1,
                             "parameters": [
                                 50,
-                                "Dryland_Approach",
+                                "Dryland_ApproachPaper",
                                 1,
                                 0,
-                                640,
-                                375,
+                                360,
+                                630,
                                 100,
                                 100,
                                 255,
@@ -2687,17 +2687,17 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
-                                "VisuMZ_1_MessageCore",
+                                "Coreto_1_MessageCore",
                                 "PictureTextChange",
                                 "PictureTextChange",
                                 {
                                     "PictureIDs:arraynum": "[\"50\"]",
-                                    "Padding:eval": "8",
+                                    "Padding:eval": "26",
                                     "upperleft:json": "\"\"",
                                     "up:json": "\"\"",
                                     "upperright:json": "\"\"",
                                     "left:json": "\"\"",
-                                    "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b4.approach_1]\"",
+                                    "center:json": "\"\"",
                                     "right:json": "\"\"",
                                     "lowerleft:json": "\"\"",
                                     "down:json": "\"\"",
@@ -2724,11 +2724,11 @@
                             "indent": 1,
                             "parameters": [
                                 51,
-                                "Dryland_Approach",
+                                "Dryland_ApproachPaper",
                                 1,
                                 0,
                                 640,
-                                490,
+                                630,
                                 100,
                                 100,
                                 255,
@@ -2766,17 +2766,17 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
-                                "VisuMZ_1_MessageCore",
+                                "Coreto_1_MessageCore",
                                 "PictureTextChange",
                                 "PictureTextChange",
                                 {
                                     "PictureIDs:arraynum": "[\"51\"]",
-                                    "Padding:eval": "8",
+                                    "Padding:eval": "26",
                                     "upperleft:json": "\"\"",
                                     "up:json": "\"\"",
                                     "upperright:json": "\"\"",
                                     "left:json": "\"\"",
-                                    "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b4.approach_2]\"",
+                                    "center:json": "\"\"",
                                     "right:json": "\"\"",
                                     "lowerleft:json": "\"\"",
                                     "down:json": "\"\"",
@@ -2803,11 +2803,11 @@
                             "indent": 1,
                             "parameters": [
                                 52,
-                                "Dryland_Approach",
+                                "Dryland_ApproachPaper",
                                 1,
                                 0,
-                                640,
-                                605,
+                                920,
+                                630,
                                 100,
                                 100,
                                 255,
@@ -2845,17 +2845,17 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
-                                "VisuMZ_1_MessageCore",
+                                "Coreto_1_MessageCore",
                                 "PictureTextChange",
                                 "PictureTextChange",
                                 {
                                     "PictureIDs:arraynum": "[\"52\"]",
-                                    "Padding:eval": "8",
+                                    "Padding:eval": "26",
                                     "upperleft:json": "\"\"",
                                     "up:json": "\"\"",
                                     "upperright:json": "\"\"",
                                     "left:json": "\"\"",
-                                    "center:json": "\"\\\\FS[22]<WordWrap>$[choice.b4.approach_3]\"",
+                                    "center:json": "\"\"",
                                     "right:json": "\"\"",
                                     "lowerleft:json": "\"\"",
                                     "down:json": "\"\"",
@@ -2913,13 +2913,100 @@
                             ]
                         },
                         {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                53,
+                                "Dryland_Vignette_B4_1",
+                                1,
+                                0,
+                                360,
+                                630,
+                                45.3125,
+                                45.3125,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "BindInterfacePicture",
+                                "BindInterfacePicture",
+                                {
+                                    "picture": "53",
+                                    "name": "Illustrated choice 53"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                54,
+                                "Dryland_Vignette_B4_2",
+                                1,
+                                0,
+                                640,
+                                630,
+                                45.3125,
+                                45.3125,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "BindInterfacePicture",
+                                "BindInterfacePicture",
+                                {
+                                    "picture": "54",
+                                    "name": "Illustrated choice 54"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                55,
+                                "Dryland_Vignette_B4_3",
+                                1,
+                                0,
+                                920,
+                                630,
+                                45.3125,
+                                45.3125,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "BindInterfacePicture",
+                                "BindInterfacePicture",
+                                {
+                                    "picture": "55",
+                                    "name": "Illustrated choice 55"
+                                }
+                            ]
+                        },
+                        {
                             "code": 102,
                             "indent": 1,
                             "parameters": [
                                 [
-                                    "$[choice.b4.approach_1]<Bind Picture: 50><Hide Choice Window>",
-                                    "$[choice.b4.approach_2]<Bind Picture: 51><Hide Choice Window>",
-                                    "$[choice.b4.approach_3]<Bind Picture: 52><Hide Choice Window>",
+                                    "$[choice.b4.approach_1]<Bind Picture: 50><Bind Picture: 53><Hide Choice Window>",
+                                    "$[choice.b4.approach_2]<Bind Picture: 51><Bind Picture: 54><Hide Choice Window>",
+                                    "$[choice.b4.approach_3]<Bind Picture: 52><Bind Picture: 55><Hide Choice Window>",
                                     "$[choice.encounter.reread]<Bind Picture: 41>"
                                 ],
                                 -1,
@@ -2933,7 +3020,28 @@
                             "indent": 1,
                             "parameters": [
                                 0,
-                                "$[choice.b4.approach_1]<Bind Picture: 50><Hide Choice Window>"
+                                "$[choice.b4.approach_1]<Bind Picture: 50><Bind Picture: 53><Hide Choice Window>"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                53
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                54
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                55
                             ]
                         },
                         {
@@ -2957,7 +3065,28 @@
                             "indent": 1,
                             "parameters": [
                                 1,
-                                "$[choice.b4.approach_2]<Bind Picture: 51><Hide Choice Window>"
+                                "$[choice.b4.approach_2]<Bind Picture: 51><Bind Picture: 54><Hide Choice Window>"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                53
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                54
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                55
                             ]
                         },
                         {
@@ -2981,7 +3110,28 @@
                             "indent": 1,
                             "parameters": [
                                 2,
-                                "$[choice.b4.approach_3]<Bind Picture: 52><Hide Choice Window>"
+                                "$[choice.b4.approach_3]<Bind Picture: 52><Bind Picture: 55><Hide Choice Window>"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                53
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                54
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                55
                             ]
                         },
                         {
@@ -3006,6 +3156,27 @@
                             "parameters": [
                                 3,
                                 "$[choice.encounter.reread]<Bind Picture: 41>"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                53
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                54
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                55
                             ]
                         },
                         {
