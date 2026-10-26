@@ -50,6 +50,7 @@
   const focusStyle = { glow: '#ffe2a3', padding: 24, blur: 12, growth: 0.08, frames: 10, dim: 0.24 };
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const bounds = new WeakMap();
+  const paperSamples = new WeakMap();
 
   function focusStep(value, focused) {
     const target = focused ? 1 : 0;
@@ -93,8 +94,28 @@
     return rect;
   }
 
-  function drawPaper(target, source, x, y, width, height) {
-    target.blt(source, ...paperBounds(source), x, y, width, height);
+  function drawPaper(target, source, x, y, width, height, sampleWidth = width, sampleHeight = height) {
+    const sampleW = Math.ceil(sampleWidth * 2), sampleH = Math.ceil(sampleHeight * 2);
+    let sample = paperSamples.get(target);
+    if (!sample || sample.source !== source || sample.canvas.width !== sampleW || sample.canvas.height !== sampleH) {
+      const canvas = document.createElement('canvas');
+      canvas.width = sampleW;
+      canvas.height = sampleH;
+      const context = canvas.getContext('2d');
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = 'high';
+      context.drawImage(source.canvas, ...paperBounds(source), 0, 0, sampleW, sampleH);
+      sample = { source, canvas };
+      paperSamples.set(target, sample);
+    }
+    const context = target.context;
+    context.save();
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = 'high';
+    context.globalCompositeOperation = 'source-over';
+    context.drawImage(sample.canvas, x, y, width, height);
+    context.restore();
+    target.baseTexture.update();
   }
 
   const loadSystemImages = Scene_Boot.prototype.loadSystemImages;
@@ -227,7 +248,7 @@
     ctx.filter = `brightness(${1 - focusStyle.dim * (1 - amount)})`;
     this.contentsBack.paintOpacity = this.isCommandEnabled(index) ? 255 : 150;
     drawPaper(this.contentsBack, source, rect.x + (rect.width - width) / 2,
-      rect.y + (rect.height - height) / 2, width, height);
+      rect.y + (rect.height - height) / 2, width, height, rect.width, rect.height);
     ctx.restore();
     this.contentsBack.paintOpacity = 255;
   };
