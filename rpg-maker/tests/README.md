@@ -7,7 +7,7 @@ node rpg-maker/tools/prepare-qa-runtime.mjs
 node rpg-maker/tools/run-verification.mjs --scope all --output .artifacts/verification-current
 ```
 
-Preparation copies the installed directed QA skill runtime into `.artifacts/qa-runtime` and installs only its locked dependencies there. The installed skill is unchanged. `DRYLAND_DIRECTED_RUNTIME` can name another isolated copy. The output directory must be new; create its parent first.
+Preparation copies the project-owned directed QA runtime from `rpg-maker/tools/qa-runtime/` into `.artifacts/qa-runtime` and installs only its locked dependencies there. The maintained runtime sources are unchanged. `DRYLAND_DIRECTED_RUNTIME` can name another isolated copy. The output directory must be new; create its parent first.
 
 `run-verification` executes fast tests, canonical slow tests, then directed recipes, and records the entire slow interval from preparation through cleanup. It continues independent work after a failure. A failed or blocked recipe is not a complete successful suite, and captured media may still require human review.
 

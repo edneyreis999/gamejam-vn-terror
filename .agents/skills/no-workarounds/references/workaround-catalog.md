@@ -1,6 +1,6 @@
 # Workaround Catalog
 
-A comprehensive catalog of specific workaround patterns, organized by category. Each entry includes the workaround, why it's harmful, and the proper fix.
+Use only the entry matching the suspected repair. These examples illustrate ways to hide a failure, not bans on syntax or libraries. Establish the violated contract and causal evidence before proposing a change. Preserve intentional error handling, optional data, bounded polling, supported extensions, and authorized adapters. Code snippets are illustrative; reuse the project's stack rather than adding their named libraries.
 
 ## Type System Evasion
 
@@ -54,7 +54,7 @@ if (!user) {
 }
 ```
 
-**Harm:** `!` tells the compiler "trust me" — the compiler should not need to trust.
+**Risk:** An assertion without an established non-null invariant can conceal a missing-value path. An independently proven invariant may justify it.
 
 ### W-04: Generic `object` or `Record<string, unknown>`
 
@@ -70,7 +70,7 @@ function save(data: CreateUserInput) {
 }
 ```
 
-**Harm:** Defers type errors to runtime. Impossible to refactor safely.
+**Risk:** A broad type can hide a known domain shape. `unknown` and `Record<string, unknown>` remain appropriate for genuinely unknown boundary data until validated.
 
 ### W-05: Double Assertion (`as unknown as T`)
 
@@ -100,7 +100,7 @@ const handler = (e: any) => {};
 const handler = (e: React.ChangeEvent<HTMLInputElement>) => {};
 ```
 
-**Harm:** Suppresses a specific, useful check. The rule exists because the pattern is harmful.
+**Risk:** An unexplained suppression can conceal a real defect. Confirm that the rule applies and preserve justified, narrowly scoped exceptions.
 
 ### W-07: @ts-ignore / @ts-expect-error Without Fix Plan
 
@@ -153,7 +153,7 @@ try {
 }
 ```
 
-**Harm:** The most dangerous anti-pattern. Makes failures invisible. Debugging becomes impossible.
+**Risk:** An empty catch can hide an unexpected failure and remove diagnostic evidence. Ignoring an expected outcome needs a contract that justifies it.
 
 ### W-10: Catch-and-Default
 
@@ -266,31 +266,18 @@ test("data loads", async () => {
 
 **Harm:** Flaky tests. Passes on fast machines, fails on CI. Or wastes time on slow fixed delays.
 
-### W-15: Retry Loops Hiding Race Conditions
+### W-15: Retries That Mask a Failed Operation
 
 ```typescript
-// WORKAROUND
-async function waitForReady() {
-  for (let i = 0; i < 10; i++) {
-    if (await checkReady()) return;
-    await sleep(200);
-  }
-  throw new Error("Timeout");
-}
-
-// PROPER FIX
-async function waitForReady() {
-  return new Promise<void>((resolve, reject) => {
-    const timeout = setTimeout(() => reject(new Error("Timeout")), 5000);
-    service.on("ready", () => {
-      clearTimeout(timeout);
-      resolve();
-    });
-  });
+// SUSPECT: reruns a failed operation without establishing that retry is safe
+try {
+  return await commitOrder(order);
+} catch {
+  return commitOrder(order);
 }
 ```
 
-**Harm:** Polling wastes resources and still has timing windows where the condition is missed.
+**Risk:** A retry can hide a lifecycle defect or repeat an operation that already produced side effects. Establish the failure mode and idempotency before retrying. Bounded polling of observable readiness is different: it is appropriate when the producer exposes state rather than a reliable event subscription. If using events, account for already-ready state, timeout, and listener cleanup.
 
 ## Monkey Patching and Runtime Mutation
 
@@ -307,7 +294,7 @@ import { last } from "es-toolkit";
 const lastItem = last(items);
 ```
 
-**Harm:** Pollutes global namespace. Conflicts with other libraries. Breaks `for...in` loops.
+**Risk:** Unowned global prototype changes can collide or alter enumeration. A project's supported extension mechanism may intentionally replace or extend methods; assess that contract rather than banning extensions.
 
 ### W-17: Global State Override
 
@@ -320,7 +307,7 @@ const config = createConfig({ debug: isDevelopment() });
 // Pass through dependency injection or context
 ```
 
-**Harm:** Global mutable state is the root of all evil in concurrent/async systems.
+**Risk:** An unexplained override can bypass the authoritative state owner and leak across sessions. Preserve state explicitly owned by the runtime or project contract.
 
 ### W-18: Replacing Library Internals
 
@@ -351,7 +338,7 @@ const user = Schema.decodeUnknownSync(UserSchema)(data);
 const { name, email, avatarUrl } = user;
 ```
 
-**Harm:** Every `?.` is an implicit admission that the data shape is unreliable. Fix the shape.
+**Risk:** Defaults can hide a required field's absence. Optional chaining is appropriate for genuinely optional data; validate only the guarantees the consumer requires.
 
 ### W-20: Fallback Chains
 
@@ -482,7 +469,7 @@ test("creates user in database", async () => {
 });
 ```
 
-**Harm:** Tests pass but verify nothing. False confidence. See `test-anti-patterns` skill.
+**Risk:** A test can pass without exercising its intended guarantee. Inspect the owning check and use a mock only where it preserves that observation; no additional skill is required by this catalog.
 
 ### W-27: Skipped Tests as "TODO"
 
@@ -493,11 +480,12 @@ test.skip("handles concurrent updates", () => {
 });
 
 // PROPER FIX
-// Either fix the test NOW or delete it and file an issue.
-// A skipped test is a lie — it implies coverage that doesn't exist.
+// Repair the failing behavior or an evidenced invalid expectation.
+// Report unexecuted coverage honestly; do not delete an accepted check
+// or defer the obligation without the user's decision.
 ```
 
-**Harm:** Skipped tests decay. The code they were meant to protect changes without verification.
+**Risk:** A skipped required check leaves a verification gap. Explicit platform selection or an authorized deferral is different and must remain visible.
 
 ## Architecture Workarounds
 
@@ -516,7 +504,7 @@ export function parseMarkdown() { ... }
 // date-formatting.ts, email-validation.ts, tax-calculator.ts, etc.
 ```
 
-**Harm:** Barrel file imports, circular dependencies, impossible to tree-shake.
+**Risk:** Unrelated responsibilities can accumulate accidental dependencies and make changes harder to isolate. Confirm actual coupling before splitting modules.
 
 ### W-29: Props Drilling Instead of Proper State
 
@@ -533,7 +521,7 @@ const UserContext = createContext<User | null>(null);
 // Or: Zustand store, or TanStack Query cache
 ```
 
-**Harm:** Every intermediate component re-renders on user change. Refactoring is painful.
+**Risk:** Unrelated intermediaries can become coupled to data they do not own. Prefer direct arguments when clear; introduce shared state only when the actual ownership and consumers justify it.
 
 ### W-30: Feature Flags That Never Expire
 
@@ -554,12 +542,12 @@ return <Checkout />;
 
 ## The Pattern
 
-Every workaround follows the same structure:
+A symptom-hiding repair can follow this pattern:
 
 1. **A signal appears** (compiler error, test failure, runtime crash)
 2. **The workaround silences the signal** (type assertion, try-catch, delay)
 3. **The underlying problem remains** and worsens over time
 4. **The workaround gets copied** by developers who see it as precedent
-5. **The compound cost exceeds** what the proper fix would have cost by 10-100x
+5. **Repeated reliance increases repair scope** as more consumers depend on the hidden failure
 
-**Break the pattern:** Fix the signal source. Never silence the signal.
+**Break the pattern:** Fix the established cause or document the bounded external limitation. Preserve intentional handling that keeps the contracted behavior and relevant failures observable.

@@ -1,1 +1,0 @@
-E:/Projetos/loki-framework/agents/framework-artifact-quality-auditor.md

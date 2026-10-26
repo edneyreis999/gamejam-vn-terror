@@ -1,10 +1,11 @@
 ---
 name: grill-me
-description: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
+description: Start an adaptive interview to sharpen a plan, idea, or decision when the user requests grilling. Delegates the interview to grilling; does not implement the outcome or create documents automatically.
+disable-model-invocation: true
 ---
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+# Grill Me
 
-Ask the questions one at a time.
+Load `grilling` using the host's skill-loading mechanism and give it the user's subject, scope, and already settled answers. If no skill-loading tool is available, read the installed [grilling entrypoint](../grilling/SKILL.md) directly. If it is missing, report that dependency instead of pretending to have loaded it.
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+Follow its interview procedure and return the shared understanding in the conversation. The request authorizes the interview, not implementation or automatic document creation.

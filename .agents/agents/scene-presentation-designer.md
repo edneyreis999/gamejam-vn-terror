@@ -1,1 +1,0 @@
-E:/Projetos/loki-framework/agents/scene-presentation-designer.md

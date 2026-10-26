@@ -1,886 +1,3865 @@
 {
-  "created_at": "2026-08-31T21:23:19Z",
-  "dest_root": "E:\\Projetos\\gamejam-vn-terror",
-  "install_profile": "consumer",
-  "install_scope": [
-    "both",
-    "consumer-only"
-  ],
-  "links": [
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\excalidraw-diagram-generator",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\excalidraw-diagram-generator",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\json-canvas",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\json-canvas",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-action-plan-authoring",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-action-plan-authoring",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-agent-creator",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-agent-creator",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-agent-execution-evidence",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-agent-execution-evidence",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-agentic-orchestration",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-agentic-orchestration",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-analytic-inference",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-analytic-inference",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-analytic-inference-preparation",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-analytic-inference-preparation",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-command-creator",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-command-creator",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-command-workflows",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-command-workflows",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-documentation-writing",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-documentation-writing",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-domain-context-preflight",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-domain-context-preflight",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-execution-knowledge-capture",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-execution-knowledge-capture",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-external-knowledge-extraction",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-external-knowledge-extraction",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-framework-impact-audit",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-framework-impact-audit",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-git-workflow",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-git-workflow",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-implement-feature-execution",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-implement-feature-execution",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-index-navigator",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-index-navigator",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-internal-command-workflows",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-internal-command-workflows",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-skill-creator",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-skill-creator",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-tech-analysis-authoring",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-tech-analysis-authoring",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-template-library",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-template-library",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\lf-web-deep-research",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\lf-web-deep-research",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-abrir-pr",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-abrir-pr",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-agentic-development",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-agentic-development",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-catalogar-docs",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-catalogar-docs",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-commit",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-commit",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-continuous-improvement",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-continuous-improvement",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-criar-branch",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-criar-branch",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-deep-analysis",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-deep-analysis",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-deep-research",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-deep-research",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-demand-text-improver",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-demand-text-improver",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-enrich-tasks",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-enrich-tasks",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-feedback",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-feedback",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-generate-inferences",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-generate-inferences",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-human-decision-preflight",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-human-decision-preflight",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-implement-feature",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-implement-feature",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-init",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-init",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-knowledge-extraction-analysis",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-knowledge-extraction-analysis",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-retrospectiva-tecnica",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-retrospectiva-tecnica",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-self-healing",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-self-healing",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\loki-tech-analysis",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\loki-tech-analysis",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\obsidian-bases",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\obsidian-bases",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\obsidian-cli",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\obsidian-cli",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\obsidian-markdown",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\obsidian-markdown",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-data-json",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-data-json",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-plugin-workflow",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-plugin-workflow",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-project-inventory",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-project-inventory",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-action-sequences",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-action-sequences",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-battle-mechanics",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-battle-mechanics",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-compat-diagnostics",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-compat-diagnostics",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-events-presentation",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-events-presentation",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-message-core-localization",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-message-core-localization",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-notetags",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-notetags",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-plugin-commands",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-plugin-commands",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-plugin-index",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-plugin-index",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-plugin-parameters",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-plugin-parameters",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\skills\\rpg-maker-mz-visustella-progression-economy",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\skills\\rpg-maker-mz-visustella-progression-economy",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "skill"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\audio-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\audio-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\balance-economy-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\balance-economy-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\bibliotecario.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\bibliotecario.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\catalogador.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\catalogador.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\execution-context-reader.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\execution-context-reader.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\execution-knowledge-cataloger.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\execution-knowledge-cataloger.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\framework-artifact-quality-auditor.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\framework-artifact-quality-auditor.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\framework-artifact-writer.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\framework-artifact-writer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\game-business-analyst.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\game-business-analyst.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\game-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\game-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\game-product-owner.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\game-product-owner.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\gameplay-engineer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\gameplay-engineer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\level-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\level-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\narrative-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\narrative-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\narrative-qa.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\narrative-qa.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\quest-content-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\quest-content-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\retrospective-digester.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\retrospective-digester.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\runtime-qa.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\runtime-qa.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\scene-presentation-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\scene-presentation-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\session-evidence-auditor.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\session-evidence-auditor.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\source-researcher.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\source-researcher.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\standards-curator.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\standards-curator.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\technical-artist.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\technical-artist.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\technical-implementer.md",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\technical-implementer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\agents\\ux-ui-designer.md",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\agents\\ux-ui-designer.md",
-      "source_kind": "file",
-      "status": "created",
-      "type": "agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.agents\\templates",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\templates",
-      "source_kind": "directory",
-      "status": "created",
-      "type": "templates"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\audio-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\audio-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\balance-economy-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\balance-economy-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\bibliotecario.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\bibliotecario.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\catalogador.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\catalogador.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\execution-context-reader.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\execution-context-reader.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\execution-knowledge-cataloger.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\execution-knowledge-cataloger.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\framework-artifact-quality-auditor.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\framework-artifact-quality-auditor.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\framework-artifact-writer.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\framework-artifact-writer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\game-business-analyst.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\game-business-analyst.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\game-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\game-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\game-product-owner.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\game-product-owner.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\gameplay-engineer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\gameplay-engineer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\level-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\level-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\narrative-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\narrative-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\narrative-qa.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\narrative-qa.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\quest-content-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\quest-content-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\retrospective-digester.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\retrospective-digester.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\runtime-qa.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\runtime-qa.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\scene-presentation-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\scene-presentation-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\session-evidence-auditor.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\session-evidence-auditor.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\source-researcher.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\source-researcher.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\standards-curator.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\standards-curator.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\technical-artist.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\technical-artist.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\technical-implementer.toml",
-      "install_scope": "both",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\technical-implementer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
-    },
-    {
-      "destination": "E:\\Projetos\\gamejam-vn-terror\\.codex\\agents\\ux-ui-designer.toml",
-      "install_scope": "consumer-only",
-      "origin": "E:\\Projetos\\loki-framework\\codex\\agents\\ux-ui-designer.toml",
-      "source_kind": "file",
-      "status": "created",
-      "type": "codex-agent"
+  "schema_version": 2,
+  "installed_at": "2026-10-26T18:18:27.427964+00:00",
+  "install_mode": "local-copies",
+  "source": {
+    "checkout": "/Users/edney/projects/coreto/loki-framework",
+    "revision": "eb602be6713e3ea25f820786ddb650e30456a5ff",
+    "git_status": ""
+  },
+  "backup": ".artifacts/loki-update/20261026T181800Z",
+  "installed": [
+    {
+      "destination": ".agents/skills/analyze-execution-metrics",
+      "source": "src/skills/analyze-execution-metrics",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "62fdbcfb4fd5ee4e86fbb54924bf7d6051db2e62197758c547cd7537146b6284"
+        },
+        "agents": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "agents/openai.yaml": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f370afb7a9fd9b31dc685332512681c1e2b8754b075c42df4eecb3045f9d946b"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/collection.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f733325df4c5e254d3086d5d76fa9f3914da41bb2fd1d2f79e51bc5fa2ccc9d5"
+        },
+        "references/inventory-format.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "23a7b8b3f38730bef8f0e3c17134691bd12cd0c0332772d46118a0330f61ce43"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/_common.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2e08316105505de94dd30864aec6d4ed124c5c377336ca16b02c7d7a91e2329a"
+        },
+        "scripts/collect_execution_metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "342d12b999ff6007e994bee90aba0f020e419b8fbdb7fa930ce5baca5493d3ee"
+        },
+        "scripts/collect_linked_evidence.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1e4660f25688039ee6f7a2e8971b7c881c9dc96c7cca8985ab667e54616255cd"
+        },
+        "scripts/collect_referenced_files.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "47d0b811cd43e6d60d17b84467db84739dc9d53e2f2e0554400bb5ff6f0d761c"
+        },
+        "scripts/collect_verification.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d56fafa2e9395e8b3879fba118d5cd7a74090168f0eac803f6dc2d09ca4989b0"
+        },
+        "scripts/inspect_collected.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "fc9c66dc2c20a8523752c73afcd8ef7a0755f5bebdfc72ab9af6e62c70a698ae"
+        },
+        "scripts/inventory_sources.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "952904101c2354fff45f9caa26142e399a8e150ce0c5f5c8a140217ee180f252"
+        },
+        "scripts/render_execution_inventory.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e51c3ed71862bbc02904303ceaad0c4a68b07c46df27f7b967ac782b8522dca2"
+        },
+        "scripts/render_source_manifest.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a3cbd9b3cd7508c1a52b3be3571517d7e51dc4723706fed4e9e79a9d2b7a905d"
+        },
+        "scripts/validate_inventory.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "65044b0ce182d568e4002a503ee1137ffe4bb18ec30961f7beab1dfaaed51d86"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/create-insight-dashboard",
+      "source": "src/skills/create-insight-dashboard",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8d98fb93cec2d24a887bf6388dd7ae5e0c6e80e197a462d3928de0a5c8a00896"
+        },
+        "agents": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "agents/openai.yaml": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3a6f2c7ba5d3e9a9f4db0bc1cf7070a6fa76fdcb73f6cd8f9e3f8f93e7de2d9d"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/dashboard_template.html": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a491388f9b7d72e1933c1eac7428865f0be6a365b1b8e26ebb01f87c1436f00d"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/charts.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2eeb141da89bc665f8262445f520005b64fbc89aa17043b510eebd0a484e34c0"
+        },
+        "references/insights-format.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "7239e18a0a1ed80eccea913ea5cf83a8a0325eff7c48fdcc139d6012a9430c7a"
+        },
+        "references/lenses.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "96faeac8b4f39788009a5132bb8a54552bb57a15ffc4340af1c6d791f3ec962b"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/_common.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "043117579a4f3e8df2072d55df0189be8b234ceb19084adb76384a7bc8082201"
+        },
+        "scripts/build_dashboard_data.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "894d2dc175db9c89676daf64a24a2120589c3987b87cf5506cad2953982c379c"
+        },
+        "scripts/collect_metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "dabfda1e1f0d9412eb8f3f5bf365bef9263edff0fc5f60721331e943510e7861"
+        },
+        "scripts/collect_project_facts.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "fd171aa052ddabc7416408c78092557145e238f98ea67c9f798aed5237bdda92"
+        },
+        "scripts/collect_sessions.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b1dd30dedebcb0d06064bd4351f1b913ac3a66f4c81209aee69614c6dc6a836d"
+        },
+        "scripts/prepare.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "299efd2397043f3573e6f4bc015fc3ce33777cd64b5c3900096319910aaed86b"
+        },
+        "scripts/render_dashboard.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c674b8916c5d78f227c5f440f61a74280d756b3ac809b78ba225306ee1422608"
+        },
+        "scripts/validate_insights.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3b372d75e4fd271e207dc8f05576198c10f683711c4a9723f4eb258da06af01b"
+        },
+        "tests": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "tests/test_create_insight_dashboard.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "22cd9e5aa7e41c025f0d2e5b4b3b65b61b5dc80747302efea0b2995da511ad21"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/deep-review",
+      "source": "src/skills/deep-review",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "5efed01b292153aa78d1503a12ecfe8df01aca4c1080a0d168fb6e61f369fcb3"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/PROMPT.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9c6d7fbe55cbe4a8364ab132c77d3b73a0b505ae2882cf95b8bf7d8c17dc4960"
+        },
+        "assets/REVIEW_UI.html": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0f66762e8278011990072c2d0d30972728974f10711f469a549e0ba01d7dfe28"
+        },
+        "assets/findings.schema.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0e656086bfcc25de1c59c706ea6555970b65060312d762d5cae290019f423a79"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/context-pack.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "facf47d182e4c4acc0af22c684df2c297a65191da177a601b62e93eb0f6e9e71"
+        },
+        "references/orchestration.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6dc84cf302a7359156d3877e86bc2fcd5aad74ef56f7fa1e597295ee62e575fc"
+        },
+        "references/output-contracts.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c82e2815a2a75b8a87a399df982fc5af83073850a21cb2a11cd3e7bbf068a2e2"
+        },
+        "references/publish-github.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "de983300e555ea447942c7e9c8c9430b0614a7c8b9d30537cab62d10cb9a56e5"
+        },
+        "references/state-and-learnings.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f3ecc720ab77161a492eccce8c14c97ad77622c2ca63a686b47f15e5808a1273"
+        },
+        "references/taxonomy.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3c5821a1c06a3654cd9f7597f929135c84636083129d36efd35ee8c7b9056662"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/_common.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "448835831c0f0ba17563896ce511d174b088870cb7e3a420835e3d263bfb7d9a"
+        },
+        "scripts/_job_output.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "767084a0d1823e14427518fba5901914d65cb2bef752be6d5160396357a38eb7"
+        },
+        "scripts/_knowledge_sources.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6ab92887b7e36a4b92478ea9d494935c408ceec3f8223d553761e110f4514a0e"
+        },
+        "scripts/_planning.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3d86f2fca24a718e1a04fb82e7581cb0eedaf27a93a42c5a0524435f3fc33a75"
+        },
+        "scripts/build_jobs.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "5e3521ce25f6e72dfb1e4180f30b218f6733b62f0fec33b4b0b863ec5520878d"
+        },
+        "scripts/build_knowledge.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "37f23cd03e8823d7875936860c2ecf4f39b94b28ab52d52492fc6823bc260252"
+        },
+        "scripts/build_manifest.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "abe144b9909694b896dd350cb7fd2deabe1f08b4f0220074eaf04f18be7610c4"
+        },
+        "scripts/merge_findings.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ce7a268c28b58247f23d42dc9b58ec48db9ce0ee2b8ea1cd68b643dd946b1886"
+        },
+        "scripts/prepare_review.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3ab988f6822c637ab0c9d2ff70b160de1baa5266d459730ae0f4186d779ddad5"
+        },
+        "scripts/render_html.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2017840dbb646dfee9e36efadac7124beb3eb785102d97307836e19788633282"
+        },
+        "scripts/render_review.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "12e2ec5806181323bc5968451d82f363c4f542f8b989a249cdd461a461d093cd"
+        },
+        "scripts/run_jobs.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "652b7ac8f4c85c724a5674eae43c00fade6115b8b62d7ddf1db12ab45f56edf6"
+        },
+        "scripts/test_helpers.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d870631f607316a8ebf633425ecdf2317ea986a128bbdebab9154491da032b52"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/frontend-design",
+      "source": "src/skills/frontend-design",
+      "files": {
+        "LICENSE.txt": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
+        },
+        "UPSTREAM.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "19f869f94da2c35c732696f5d4e23a5a0a18acc4f3a46222cecf467df90cffe6"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-adr",
+      "source": "src/skills/game-create-adr",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c6f7092c909baf8808ddf5c4bd5a679aaa9f873faa039ed39cbc93adf25e57bb"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/adr-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "357b048012c0573dda07a8e8ea5ab3a95566a92dd625d79077f02daa1bab156f"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-game-tasks",
+      "source": "src/skills/game-create-game-tasks",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6343594d62d4d412d8b6886b86bb497cac400c2ffce9783172bd87c33d0b472e"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/graph-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0dfa8275c8fa2bc9a1604d9b8eadbe7a7e0d203edee8e6c351d977ab08139369"
+        },
+        "references/task-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d4ee86ee03d2f77fb4266400925536128fab99234e68a9f09ab4250a086c2fb8"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-gddr",
+      "source": "src/skills/game-create-gddr",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2c7935a0bcbc9985b89d5e2bf65e3dcd25ca99dd64b90d80f73d85cee91425cb"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/gddr-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "912225da2ffe4b29f7d5505c1647340ae8e337e0b8822e193181cc0ccaf32580"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-known-issues",
+      "source": "src/skills/game-create-known-issues",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8c153f1c1ebd9c8fb7d08c1fd82220d987efebb52b1c09c0f4a6848fd75d0d47"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/known-issue-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "653f84efe5ca54a91465794fd2cf3c3de7bcd163da957b6c2425d989d49d5266"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-playtest-tasks",
+      "source": "src/skills/game-create-playtest-tasks",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1ccf51005cf4bed37d73b0d98a42d6a27b79ebef9c34e2af7be1d32de822ac83"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/tail-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "16e87a26eb61f7646e18a138cc7709b639b034d0c1a19672ae08b82b3f99d44f"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-postmortems",
+      "source": "src/skills/game-create-postmortems",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "7b2e8949ac15ba328896f65d28f99553a3aad3fd2e7693dfe6c48d6150d196fe"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/postmortem-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9dc1cc0dd1b6804bae2ec43f5903ea61fedbf0ea6461d34c279d25b57f230008"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-create-specs",
+      "source": "src/skills/game-create-specs",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "cab6c234347be30c49183cac156f0db531756923ef2e639e7c9846c988bb3355"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/content-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d19ffafe7c5d6268df29cce543ce33b7911f2152a12de9412059b0f5ea327e6d"
+        },
+        "references/dx-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c21e5f83bb0789189289d8bc5cdf67a934b6a8f7463be78927e0b6e135922602"
+        },
+        "references/execution-metrics-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e838db76a0edde9d65a4811feb248d2c1d85e3848551fb4e4f98d7ee665c31ac"
+        },
+        "references/interview-protocol.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "af6e646dd9aa4afe07125ef0547713696c80096046991808161430975213f664"
+        },
+        "references/playtest-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ce619f9a8170d04277ad26aca609b8296f05f30b6afdd567cbe39de054c816c8"
+        },
+        "references/spec-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c054750cedd48e9006dbc8b37d80db2dab2f3c332258f9020d7fa970f147776f"
+        },
+        "references/tests-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f23654c1b3a517a89b6cdf34d694afc14f003ae1f7291c19f1aef374555df0e9"
+        },
+        "references/uiux-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4bf034ae5dca164f11d33b7932860d395efdd7d873b3ae1717d128bb69ae62f9"
+        },
+        "references/user-stories-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "418f1b0c80b23a0847653a272724fb8523f16f59a730a0d3489c2edbe84933f2"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-execute-qa",
+      "source": "src/skills/game-execute-qa",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "242a45ff6851192a7c26f0cd01b6d21d50557fa750c67435d343063e6e82222d"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/personas-and-tours.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "405cbb9f9f8d371f81f88f21d354a041e2ff2545affbeb79da6b1c5ceac741cb"
+        },
+        "references/session-protocol.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "941ad67dad0c8a65acaa33b378a0e901b28ad6615d6d4e24fd07c7bf0f0b6152"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-execute-task",
+      "source": "src/skills/game-execute-task",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e27ae3e06ae5b2760a2eda882eb7fe740a272bcc502a50178c68ce86f9d5d995"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-final-verify",
+      "source": "src/skills/game-final-verify",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "048b726560b72680addfe7af55ecfb9ca0c3961523170f7af8bc519740ec06ad"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/candidate-audit.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "39df2e70accbdecfb7a66e983bf50c9bd790b890f29a65ea8c190584dfaba906"
+        },
+        "references/challenge.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "dc9b2e5bcc3e1b7933b4a5d40154a21aac187416bc4c6310ab222ee0bc144351"
+        },
+        "references/purge-tests.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b3f519e5a8fbb1dd552dee9a92ffbbb36db1514c2be57684c32ae8fe90611425"
+        },
+        "references/scan-cards.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "37a01a44d3618ea2f7611221d62a1cce6b21afc66873c0ff811fcee1b3265df5"
+        },
+        "references/slow-test-execution.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e5afeadbce647013778d961e71e0f0014e30ed211788219c5212e32281e3116a"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-loop-tasks",
+      "source": "src/skills/game-loop-tasks",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c89eed077ba28f691c47580827449b3fbb083d5229f9fb9a410bed077434a702"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/completion-report.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "342e4d59bf2360a5db727063b663d99cb51200ce35fe831d5c4a5893430b7beb"
+        },
+        "references/loop-procedure.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "88bf495126938e991a75ce3765c53ca5383b801e8bdd16b7d07dcf9343716bf2"
+        },
+        "references/regression-baseline.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "42c4b8232de04b09849e0c8b0f4a4f1dd32c39d618577d92de2ee1fda0561842"
+        },
+        "references/repair-and-blockers.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8fb01b49a4a388b394c6f2f6efb2a802bef233a676f7e0209d847659d308f76e"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-plan-qa",
+      "source": "src/skills/game-plan-qa",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3b48d4b8d075bb0f452c7215b3e3975ef4bce676c9e8fe458e7438039746e935"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-playwright-best-practices",
+      "source": "src/skills/game-playwright-best-practices",
+      "files": {
+        "LICENSE": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2b98cdd2800845a1230f2ad4b310901e3c9ae9364ddebb01e90a2ebe6d953d82"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "82bb01885f0385b1aa5b6882c0a5c8d5ce7d8d1d841df0b1a888cba96f1909e2"
+        },
+        "UPSTREAM.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b1bd7f9e75a600253c8483b5e2da1237a6bf0aa366788dd44c1e5264591c82a2"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/fixtures-and-execution.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "392fa03878a05bd91b6e4e9cc8fb7b4541a9a3d9d515cb9d5da1c5c01c6d758a"
+        },
+        "references/interaction-and-evidence.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f4182769c27da6713645859dc578e94ef52a88efa9629303fd563264ba3969ec"
+        },
+        "references/test-scenarios.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1b2dbf9f544655f598f70634efbb85b016c23e6eb6315c3e9763692e4b56747e"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-spec-review",
+      "source": "src/skills/game-spec-review",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d7271dc82eacd6e69ef92dc5a5637925f103ce240b7f886661bbf72a2b5d14aa"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-test-infrastructure",
+      "source": "src/skills/game-test-infrastructure",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8a5b4f3e5c5837280ea9a0d87c5cffbd0bf86f8714a5514bd41b3e7fbb459ed5"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/game-write-devlog",
+      "source": "src/skills/game-write-devlog",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "dc872eae91e994d065b6e35c1f778681e3401e2ae4b3e944d9fae08a3040fd71"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/grill-me",
+      "source": "src/skills/grill-me",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "51ba74ed6ea93dd10efab40b793143da12a9f46375711e196804a83269587c49"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/grilling",
+      "source": "src/skills/grilling",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "390c1820b9c4ff63ff163dd65e6bd280b718eb4547e6d7ec2bd5c53e1e8d2c6a"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/loki-companion-mode",
+      "source": "src/skills/loki-companion-mode",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f82027d170fd762f193b43720cb71a1e74dcade56cd1639746c821bfd4d822b5"
+        },
+        "agents": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "agents/openai.yaml": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "72265dfd219c1d88ffd111c2fab6d8b4e1e4adc9719f5be6f2eec345ae084886"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/no-workarounds",
+      "source": "src/skills/no-workarounds",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4a3d1967d7c29fc761682b8e660bbc5184d31b1716b4297aad4008eed8823064"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/philosophical-foundations.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c6e3b58af8ce44e2699474643fc698c78aa3ba298cd32785a22bf5b41bfcc236"
+        },
+        "references/workaround-catalog.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f14593e7f41ce863438cfa3221a5de5ae4868b4aa8f9db314f48780e765da520"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/playwright-cli",
+      "source": "src/skills/playwright-cli",
+      "files": {
+        "LICENSE": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9a7110fc2d2f964038e5dc49128f908f29f47a574c961cba16085914e879cbda"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1f569144c7970063078a51ca3a797182288117410050b5b92bcb9a6d962f403e"
+        },
+        "UPSTREAM.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f4501b1f57a1ea6f6b05e3ac92b3d5798c2842361967d13976c28e4417c5c0ea"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/element-attributes.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "054eb285668fea115b49fe47059c2576eca2655df8e38cd774ada47eed7c3b4f"
+        },
+        "references/playwright-tests.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2562e034f6c298ce45c643e22a4a98b8a8a462f9e649194a2e7a15dacf330ff5"
+        },
+        "references/request-mocking.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "376f085a04cb02769340e6fbf73eb9fb69dc22ba19bc24bdccf46627ecde23fc"
+        },
+        "references/running-code.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2f3a24a527a36a7dd4c6df62aea4fd0946a54aa7aa38da1bab6c408df231f64a"
+        },
+        "references/session-management.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1d15ce75ad968553355ee1fe33f283d50f542636008572800f32f5d9662588cf"
+        },
+        "references/storage-state.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c804673820fa788bfffd26b705822d027a6a4319bda59c855ad6e1526be7ae9c"
+        },
+        "references/tracing.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b0ce2ed6c40edfd39f3941ef8f03d9a7f3c6faa6ff728e356b7dae740dbf9660"
+        },
+        "references/video-recording.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6f9ec816f15649b7fea91db4860403cb780fb3e558defb7ca12a1fc0b0a95f20"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/remove-commit-slop",
+      "source": "src/skills/remove-commit-slop",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "15ab79d48af19a1f361ad1f84a62dda4051bf530383943a964778c831dc39f5b"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/rpg-maker-mz-best-practices",
+      "source": "src/skills/rpg-maker-mz-best-practices",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f52fb5e0eed7d9506e6a0bb189a56cd34e5106e41c3a16c45f602dcec6784605"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/cli-review.example.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3669e3c27c4675ea6bece3867d7e2c2c1abf01e3c39cf125b86a41032546c034"
+        },
+        "assets/cli-review.template.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6804fab590714f98ac40297ab381e5ec7432b56bd75846774842b516c8f3ab7a"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/cli-documentation-checklist.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c28c4de4c7e155d6f5ba1613af191d5b380fe7143149cb2f31cb3eae8bccfb1f"
+        },
+        "references/cli-review-integration.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "fb5309165a02d0c07f7ab6a01db941316b314ac5d466701b30bfa70d8f9a4eaa"
+        },
+        "references/data.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "5eb26c746cfa9fcf1bba1fd036268b12d47af5f64d8d890af3e1fbd80b7ac7a2"
+        },
+        "references/mutation.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f2e2f809f13806b5cee9ca451954fa1fcc15a8f7211a5a3a466503528b0fecc0"
+        },
+        "references/playwright-e2e.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "969e530dd37f44c88d8c73c338b05c47f3b8820d53315508c846b9829ee792fa"
+        },
+        "references/qa-sessions.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d7337d45600595f9960dbec875bb94e4a4a0325db62c417d56ed4cc9f335255d"
+        },
+        "references/runtime-test-execution.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3af93338e03160077e9beabf7d8621e142341aa6eba5c2b5c7a755747a64b5fa"
+        },
+        "references/runtime.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3a5debb1286a47b1e7870637c5b2e8a88abde96c9ec3e99d8b4f5866681a26e6"
+        },
+        "references/specs.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a50be94532f5e4e6d93eed8089ddf0688de4c87bde12dd94ebe717f51da699e5"
+        },
+        "references/tasks.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d920a7a6a582c53965ae5504dcf62b06e3251f30f5f8646b29e90e019d76fdaf"
+        },
+        "references/tests.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ab085ec968694efa0fb0d6a61fe492c52a722785080675c2c867615cd29671d6"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/check-cli-docs.py": {
+          "mode": 493,
+          "type": "file",
+          "sha256": "0c2a56cc7e4d9982aade9246be1bfb31e84dba75ac816fff28e49e6d143a85d4"
+        },
+        "scripts/check-event-lists.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c00e53bc6414bec0b3b1474bead8ddd65eecfae65463d1f902f281baaac6f678"
+        },
+        "scripts/check-native-data.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "bf30a9c9c70f9cbfc97a8484dcf033da297b7a64398d61d1aef9c59c0e7b2273"
+        },
+        "scripts/check-runtime-compat": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/check-runtime-compat/.gitignore": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97"
+        },
+        "scripts/check-runtime-compat/eslint.config.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "248f46bc34c12b526bf6a09fe27ae86cab0cce98489dc24c9672353b6860c6cf"
+        },
+        "scripts/check-runtime-compat/package-lock.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d935e45dc9f5fd6296c18fd6b856483b1d06673324532ad2a85dc26a043d682a"
+        },
+        "scripts/check-runtime-compat/package.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0ef33db4e67876c88d2cb9747d5d1e65f497530c9e170a2b6fef5325a2c7f1fe"
+        },
+        "scripts/check-runtime-compat/run.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "842192171d950ce6d2282747825b4475bb76d5a2e1d1302c7f1346efeb20a875"
+        },
+        "scripts/lib.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b0988cdac17143497d8071d254a65f4d4347b45b1937f7fe1d971e2c1e442737"
+        },
+        "scripts/probe-nwjs.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4045313b9228439ce958042fa8358662140620dbca536e2db7b1910d7c056317"
+        },
+        "scripts/test_check_cli_docs.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6e53242ac38f5a1ade201f5de7dfafce614e3cdbc859086652b23ffc404f7a28"
+        },
+        "scripts/validate_plugins_js_envelope.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a91bc2e1f50f1bc09ad55f0bb0d5a98b76b61eb92b3e6c1063a0cbde55d67613"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/setup-loki-framework",
+      "source": "src/skills/setup-loki-framework",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d3cb372d6ce134977e3ecd1cccaa2f52c659ca6655a28d5630606e11d0249858"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/loki-instructions.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "86bcec90d69b1233509f32bb8264705e0926aa80aa3c3df6dafa7c89624892b8"
+        },
+        "assets/loki.config.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "61bf72b2fdc625e43b3556796113b04ca9e746bb2ddf89c0185c77c35202266f"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/spec-execution-metrics",
+      "source": "src/skills/spec-execution-metrics",
+      "files": {
+        ".gitignore": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ce5775e5f6351832086b3b62ec2e476baaae827d6200a1d5c6567be51505c540"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/format.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c9e9fdb7350b5483cf03ffd95ebb59d1175004f4a072466115e70da5706091ac"
+        },
+        "references/operation.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e11627cf48a4dd842af78ea81c64c3ddeb3ce4d751254c9ee7eaafe5d3f76acf"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/analysis.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "26b26081a0789bdd27c72cad78f2201f2c67f807ec74035bf0d65bd24fde1d42"
+        },
+        "scripts/metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9fbf31b00d8c9a68764e088560b3d222bdb5ec2fa6031ce6d9034302a4954f7a"
+        },
+        "scripts/records.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f0edf36e78c0b53700d6aa4d640abdbd2dc73e8085dbe9fffaa673f2ec9da0cc"
+        },
+        "scripts/telemetry.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b0005647be63ef2788189ba28d74747781029dc2dc5bd580bfef7f318c754741"
+        },
+        "tests": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "tests/test_metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "607e2b3fbcba7b9a9757706c8798fbafda521a056a83d84e9c26f9dd60d53ad7"
+        }
+      }
+    },
+    {
+      "destination": ".agents/skills/systematic-debugging",
+      "source": "src/skills/systematic-debugging",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b6ffab1d9d224785dea6cd72cc6d385491262fbe47dd35858b536536b518e5ec"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/condition-based-waiting.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "721e7b4c31d5d0eebdcca8e4d05236fa76276ad3f45b22c222bb1e7296c1aa07"
+        },
+        "references/defense-in-depth.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "05599f9c41c975a47822b38b49b8f1f6fc751189589111ef0b25caa16e4f8afb"
+        },
+        "references/root-cause-tracing.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2ffd73de15afe9931bf114adda59a793ddcf8771906ac5207b95772a66d24b1a"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/find-polluter.sh": {
+          "mode": 493,
+          "type": "file",
+          "sha256": "d3bccaa0aa4b382d9d95c9ceed177853155c2755a4f3c24f8279b8c0fe2b0d58"
+        },
+        "scripts/test_find_polluter.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "76b28efe209790c4059386b918b56191ef1ae4f4d4b556bf46cfc91345d4a4ac"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/analyze-execution-metrics",
+      "source": "src/skills/analyze-execution-metrics",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "62fdbcfb4fd5ee4e86fbb54924bf7d6051db2e62197758c547cd7537146b6284"
+        },
+        "agents": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "agents/openai.yaml": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f370afb7a9fd9b31dc685332512681c1e2b8754b075c42df4eecb3045f9d946b"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/collection.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f733325df4c5e254d3086d5d76fa9f3914da41bb2fd1d2f79e51bc5fa2ccc9d5"
+        },
+        "references/inventory-format.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "23a7b8b3f38730bef8f0e3c17134691bd12cd0c0332772d46118a0330f61ce43"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/_common.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2e08316105505de94dd30864aec6d4ed124c5c377336ca16b02c7d7a91e2329a"
+        },
+        "scripts/collect_execution_metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "342d12b999ff6007e994bee90aba0f020e419b8fbdb7fa930ce5baca5493d3ee"
+        },
+        "scripts/collect_linked_evidence.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1e4660f25688039ee6f7a2e8971b7c881c9dc96c7cca8985ab667e54616255cd"
+        },
+        "scripts/collect_referenced_files.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "47d0b811cd43e6d60d17b84467db84739dc9d53e2f2e0554400bb5ff6f0d761c"
+        },
+        "scripts/collect_verification.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d56fafa2e9395e8b3879fba118d5cd7a74090168f0eac803f6dc2d09ca4989b0"
+        },
+        "scripts/inspect_collected.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "fc9c66dc2c20a8523752c73afcd8ef7a0755f5bebdfc72ab9af6e62c70a698ae"
+        },
+        "scripts/inventory_sources.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "952904101c2354fff45f9caa26142e399a8e150ce0c5f5c8a140217ee180f252"
+        },
+        "scripts/render_execution_inventory.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e51c3ed71862bbc02904303ceaad0c4a68b07c46df27f7b967ac782b8522dca2"
+        },
+        "scripts/render_source_manifest.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a3cbd9b3cd7508c1a52b3be3571517d7e51dc4723706fed4e9e79a9d2b7a905d"
+        },
+        "scripts/validate_inventory.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "65044b0ce182d568e4002a503ee1137ffe4bb18ec30961f7beab1dfaaed51d86"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/create-insight-dashboard",
+      "source": "src/skills/create-insight-dashboard",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8d98fb93cec2d24a887bf6388dd7ae5e0c6e80e197a462d3928de0a5c8a00896"
+        },
+        "agents": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "agents/openai.yaml": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3a6f2c7ba5d3e9a9f4db0bc1cf7070a6fa76fdcb73f6cd8f9e3f8f93e7de2d9d"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/dashboard_template.html": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a491388f9b7d72e1933c1eac7428865f0be6a365b1b8e26ebb01f87c1436f00d"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/charts.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2eeb141da89bc665f8262445f520005b64fbc89aa17043b510eebd0a484e34c0"
+        },
+        "references/insights-format.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "7239e18a0a1ed80eccea913ea5cf83a8a0325eff7c48fdcc139d6012a9430c7a"
+        },
+        "references/lenses.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "96faeac8b4f39788009a5132bb8a54552bb57a15ffc4340af1c6d791f3ec962b"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/_common.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "043117579a4f3e8df2072d55df0189be8b234ceb19084adb76384a7bc8082201"
+        },
+        "scripts/build_dashboard_data.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "894d2dc175db9c89676daf64a24a2120589c3987b87cf5506cad2953982c379c"
+        },
+        "scripts/collect_metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "dabfda1e1f0d9412eb8f3f5bf365bef9263edff0fc5f60721331e943510e7861"
+        },
+        "scripts/collect_project_facts.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "fd171aa052ddabc7416408c78092557145e238f98ea67c9f798aed5237bdda92"
+        },
+        "scripts/collect_sessions.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b1dd30dedebcb0d06064bd4351f1b913ac3a66f4c81209aee69614c6dc6a836d"
+        },
+        "scripts/prepare.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "299efd2397043f3573e6f4bc015fc3ce33777cd64b5c3900096319910aaed86b"
+        },
+        "scripts/render_dashboard.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c674b8916c5d78f227c5f440f61a74280d756b3ac809b78ba225306ee1422608"
+        },
+        "scripts/validate_insights.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3b372d75e4fd271e207dc8f05576198c10f683711c4a9723f4eb258da06af01b"
+        },
+        "tests": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "tests/test_create_insight_dashboard.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "22cd9e5aa7e41c025f0d2e5b4b3b65b61b5dc80747302efea0b2995da511ad21"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/deep-review",
+      "source": "src/skills/deep-review",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "5efed01b292153aa78d1503a12ecfe8df01aca4c1080a0d168fb6e61f369fcb3"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/PROMPT.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9c6d7fbe55cbe4a8364ab132c77d3b73a0b505ae2882cf95b8bf7d8c17dc4960"
+        },
+        "assets/REVIEW_UI.html": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0f66762e8278011990072c2d0d30972728974f10711f469a549e0ba01d7dfe28"
+        },
+        "assets/findings.schema.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0e656086bfcc25de1c59c706ea6555970b65060312d762d5cae290019f423a79"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/context-pack.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "facf47d182e4c4acc0af22c684df2c297a65191da177a601b62e93eb0f6e9e71"
+        },
+        "references/orchestration.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6dc84cf302a7359156d3877e86bc2fcd5aad74ef56f7fa1e597295ee62e575fc"
+        },
+        "references/output-contracts.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c82e2815a2a75b8a87a399df982fc5af83073850a21cb2a11cd3e7bbf068a2e2"
+        },
+        "references/publish-github.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "de983300e555ea447942c7e9c8c9430b0614a7c8b9d30537cab62d10cb9a56e5"
+        },
+        "references/state-and-learnings.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f3ecc720ab77161a492eccce8c14c97ad77622c2ca63a686b47f15e5808a1273"
+        },
+        "references/taxonomy.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3c5821a1c06a3654cd9f7597f929135c84636083129d36efd35ee8c7b9056662"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/_common.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "448835831c0f0ba17563896ce511d174b088870cb7e3a420835e3d263bfb7d9a"
+        },
+        "scripts/_job_output.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "767084a0d1823e14427518fba5901914d65cb2bef752be6d5160396357a38eb7"
+        },
+        "scripts/_knowledge_sources.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6ab92887b7e36a4b92478ea9d494935c408ceec3f8223d553761e110f4514a0e"
+        },
+        "scripts/_planning.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3d86f2fca24a718e1a04fb82e7581cb0eedaf27a93a42c5a0524435f3fc33a75"
+        },
+        "scripts/build_jobs.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "5e3521ce25f6e72dfb1e4180f30b218f6733b62f0fec33b4b0b863ec5520878d"
+        },
+        "scripts/build_knowledge.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "37f23cd03e8823d7875936860c2ecf4f39b94b28ab52d52492fc6823bc260252"
+        },
+        "scripts/build_manifest.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "abe144b9909694b896dd350cb7fd2deabe1f08b4f0220074eaf04f18be7610c4"
+        },
+        "scripts/merge_findings.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ce7a268c28b58247f23d42dc9b58ec48db9ce0ee2b8ea1cd68b643dd946b1886"
+        },
+        "scripts/prepare_review.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3ab988f6822c637ab0c9d2ff70b160de1baa5266d459730ae0f4186d779ddad5"
+        },
+        "scripts/render_html.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2017840dbb646dfee9e36efadac7124beb3eb785102d97307836e19788633282"
+        },
+        "scripts/render_review.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "12e2ec5806181323bc5968451d82f363c4f542f8b989a249cdd461a461d093cd"
+        },
+        "scripts/run_jobs.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "652b7ac8f4c85c724a5674eae43c00fade6115b8b62d7ddf1db12ab45f56edf6"
+        },
+        "scripts/test_helpers.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d870631f607316a8ebf633425ecdf2317ea986a128bbdebab9154491da032b52"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/frontend-design",
+      "source": "src/skills/frontend-design",
+      "files": {
+        "LICENSE.txt": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
+        },
+        "UPSTREAM.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "19f869f94da2c35c732696f5d4e23a5a0a18acc4f3a46222cecf467df90cffe6"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-adr",
+      "source": "src/skills/game-create-adr",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c6f7092c909baf8808ddf5c4bd5a679aaa9f873faa039ed39cbc93adf25e57bb"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/adr-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "357b048012c0573dda07a8e8ea5ab3a95566a92dd625d79077f02daa1bab156f"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-game-tasks",
+      "source": "src/skills/game-create-game-tasks",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6343594d62d4d412d8b6886b86bb497cac400c2ffce9783172bd87c33d0b472e"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/graph-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0dfa8275c8fa2bc9a1604d9b8eadbe7a7e0d203edee8e6c351d977ab08139369"
+        },
+        "references/task-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d4ee86ee03d2f77fb4266400925536128fab99234e68a9f09ab4250a086c2fb8"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-gddr",
+      "source": "src/skills/game-create-gddr",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2c7935a0bcbc9985b89d5e2bf65e3dcd25ca99dd64b90d80f73d85cee91425cb"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/gddr-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "912225da2ffe4b29f7d5505c1647340ae8e337e0b8822e193181cc0ccaf32580"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-known-issues",
+      "source": "src/skills/game-create-known-issues",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8c153f1c1ebd9c8fb7d08c1fd82220d987efebb52b1c09c0f4a6848fd75d0d47"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/known-issue-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "653f84efe5ca54a91465794fd2cf3c3de7bcd163da957b6c2425d989d49d5266"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-playtest-tasks",
+      "source": "src/skills/game-create-playtest-tasks",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1ccf51005cf4bed37d73b0d98a42d6a27b79ebef9c34e2af7be1d32de822ac83"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/tail-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "16e87a26eb61f7646e18a138cc7709b639b034d0c1a19672ae08b82b3f99d44f"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-postmortems",
+      "source": "src/skills/game-create-postmortems",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "7b2e8949ac15ba328896f65d28f99553a3aad3fd2e7693dfe6c48d6150d196fe"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/postmortem-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9dc1cc0dd1b6804bae2ec43f5903ea61fedbf0ea6461d34c279d25b57f230008"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-create-specs",
+      "source": "src/skills/game-create-specs",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "cab6c234347be30c49183cac156f0db531756923ef2e639e7c9846c988bb3355"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/content-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d19ffafe7c5d6268df29cce543ce33b7911f2152a12de9412059b0f5ea327e6d"
+        },
+        "references/dx-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c21e5f83bb0789189289d8bc5cdf67a934b6a8f7463be78927e0b6e135922602"
+        },
+        "references/execution-metrics-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e838db76a0edde9d65a4811feb248d2c1d85e3848551fb4e4f98d7ee665c31ac"
+        },
+        "references/interview-protocol.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "af6e646dd9aa4afe07125ef0547713696c80096046991808161430975213f664"
+        },
+        "references/playtest-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ce619f9a8170d04277ad26aca609b8296f05f30b6afdd567cbe39de054c816c8"
+        },
+        "references/spec-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c054750cedd48e9006dbc8b37d80db2dab2f3c332258f9020d7fa970f147776f"
+        },
+        "references/tests-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f23654c1b3a517a89b6cdf34d694afc14f003ae1f7291c19f1aef374555df0e9"
+        },
+        "references/uiux-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4bf034ae5dca164f11d33b7932860d395efdd7d873b3ae1717d128bb69ae62f9"
+        },
+        "references/user-stories-template.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "418f1b0c80b23a0847653a272724fb8523f16f59a730a0d3489c2edbe84933f2"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-execute-qa",
+      "source": "src/skills/game-execute-qa",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "242a45ff6851192a7c26f0cd01b6d21d50557fa750c67435d343063e6e82222d"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/personas-and-tours.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "405cbb9f9f8d371f81f88f21d354a041e2ff2545affbeb79da6b1c5ceac741cb"
+        },
+        "references/session-protocol.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "941ad67dad0c8a65acaa33b378a0e901b28ad6615d6d4e24fd07c7bf0f0b6152"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-execute-task",
+      "source": "src/skills/game-execute-task",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e27ae3e06ae5b2760a2eda882eb7fe740a272bcc502a50178c68ce86f9d5d995"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-final-verify",
+      "source": "src/skills/game-final-verify",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "048b726560b72680addfe7af55ecfb9ca0c3961523170f7af8bc519740ec06ad"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/candidate-audit.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "39df2e70accbdecfb7a66e983bf50c9bd790b890f29a65ea8c190584dfaba906"
+        },
+        "references/challenge.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "dc9b2e5bcc3e1b7933b4a5d40154a21aac187416bc4c6310ab222ee0bc144351"
+        },
+        "references/purge-tests.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b3f519e5a8fbb1dd552dee9a92ffbbb36db1514c2be57684c32ae8fe90611425"
+        },
+        "references/scan-cards.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "37a01a44d3618ea2f7611221d62a1cce6b21afc66873c0ff811fcee1b3265df5"
+        },
+        "references/slow-test-execution.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e5afeadbce647013778d961e71e0f0014e30ed211788219c5212e32281e3116a"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-loop-tasks",
+      "source": "src/skills/game-loop-tasks",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c89eed077ba28f691c47580827449b3fbb083d5229f9fb9a410bed077434a702"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/completion-report.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "342e4d59bf2360a5db727063b663d99cb51200ce35fe831d5c4a5893430b7beb"
+        },
+        "references/loop-procedure.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "88bf495126938e991a75ce3765c53ca5383b801e8bdd16b7d07dcf9343716bf2"
+        },
+        "references/regression-baseline.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "42c4b8232de04b09849e0c8b0f4a4f1dd32c39d618577d92de2ee1fda0561842"
+        },
+        "references/repair-and-blockers.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8fb01b49a4a388b394c6f2f6efb2a802bef233a676f7e0209d847659d308f76e"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-plan-qa",
+      "source": "src/skills/game-plan-qa",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3b48d4b8d075bb0f452c7215b3e3975ef4bce676c9e8fe458e7438039746e935"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-playwright-best-practices",
+      "source": "src/skills/game-playwright-best-practices",
+      "files": {
+        "LICENSE": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2b98cdd2800845a1230f2ad4b310901e3c9ae9364ddebb01e90a2ebe6d953d82"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "82bb01885f0385b1aa5b6882c0a5c8d5ce7d8d1d841df0b1a888cba96f1909e2"
+        },
+        "UPSTREAM.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b1bd7f9e75a600253c8483b5e2da1237a6bf0aa366788dd44c1e5264591c82a2"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/fixtures-and-execution.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "392fa03878a05bd91b6e4e9cc8fb7b4541a9a3d9d515cb9d5da1c5c01c6d758a"
+        },
+        "references/interaction-and-evidence.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f4182769c27da6713645859dc578e94ef52a88efa9629303fd563264ba3969ec"
+        },
+        "references/test-scenarios.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1b2dbf9f544655f598f70634efbb85b016c23e6eb6315c3e9763692e4b56747e"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-spec-review",
+      "source": "src/skills/game-spec-review",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d7271dc82eacd6e69ef92dc5a5637925f103ce240b7f886661bbf72a2b5d14aa"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-test-infrastructure",
+      "source": "src/skills/game-test-infrastructure",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "8a5b4f3e5c5837280ea9a0d87c5cffbd0bf86f8714a5514bd41b3e7fbb459ed5"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/game-write-devlog",
+      "source": "src/skills/game-write-devlog",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "dc872eae91e994d065b6e35c1f778681e3401e2ae4b3e944d9fae08a3040fd71"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/grill-me",
+      "source": "src/skills/grill-me",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "51ba74ed6ea93dd10efab40b793143da12a9f46375711e196804a83269587c49"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/grilling",
+      "source": "src/skills/grilling",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "390c1820b9c4ff63ff163dd65e6bd280b718eb4547e6d7ec2bd5c53e1e8d2c6a"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/loki-companion-mode",
+      "source": "src/skills/loki-companion-mode",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f82027d170fd762f193b43720cb71a1e74dcade56cd1639746c821bfd4d822b5"
+        },
+        "agents": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "agents/openai.yaml": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "72265dfd219c1d88ffd111c2fab6d8b4e1e4adc9719f5be6f2eec345ae084886"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/no-workarounds",
+      "source": "src/skills/no-workarounds",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4a3d1967d7c29fc761682b8e660bbc5184d31b1716b4297aad4008eed8823064"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/philosophical-foundations.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c6e3b58af8ce44e2699474643fc698c78aa3ba298cd32785a22bf5b41bfcc236"
+        },
+        "references/workaround-catalog.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f14593e7f41ce863438cfa3221a5de5ae4868b4aa8f9db314f48780e765da520"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/playwright-cli",
+      "source": "src/skills/playwright-cli",
+      "files": {
+        "LICENSE": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9a7110fc2d2f964038e5dc49128f908f29f47a574c961cba16085914e879cbda"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1f569144c7970063078a51ca3a797182288117410050b5b92bcb9a6d962f403e"
+        },
+        "UPSTREAM.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f4501b1f57a1ea6f6b05e3ac92b3d5798c2842361967d13976c28e4417c5c0ea"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/element-attributes.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "054eb285668fea115b49fe47059c2576eca2655df8e38cd774ada47eed7c3b4f"
+        },
+        "references/playwright-tests.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2562e034f6c298ce45c643e22a4a98b8a8a462f9e649194a2e7a15dacf330ff5"
+        },
+        "references/request-mocking.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "376f085a04cb02769340e6fbf73eb9fb69dc22ba19bc24bdccf46627ecde23fc"
+        },
+        "references/running-code.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2f3a24a527a36a7dd4c6df62aea4fd0946a54aa7aa38da1bab6c408df231f64a"
+        },
+        "references/session-management.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "1d15ce75ad968553355ee1fe33f283d50f542636008572800f32f5d9662588cf"
+        },
+        "references/storage-state.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c804673820fa788bfffd26b705822d027a6a4319bda59c855ad6e1526be7ae9c"
+        },
+        "references/tracing.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b0ce2ed6c40edfd39f3941ef8f03d9a7f3c6faa6ff728e356b7dae740dbf9660"
+        },
+        "references/video-recording.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6f9ec816f15649b7fea91db4860403cb780fb3e558defb7ca12a1fc0b0a95f20"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/remove-commit-slop",
+      "source": "src/skills/remove-commit-slop",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "15ab79d48af19a1f361ad1f84a62dda4051bf530383943a964778c831dc39f5b"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/rpg-maker-mz-best-practices",
+      "source": "src/skills/rpg-maker-mz-best-practices",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f52fb5e0eed7d9506e6a0bb189a56cd34e5106e41c3a16c45f602dcec6784605"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/cli-review.example.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3669e3c27c4675ea6bece3867d7e2c2c1abf01e3c39cf125b86a41032546c034"
+        },
+        "assets/cli-review.template.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6804fab590714f98ac40297ab381e5ec7432b56bd75846774842b516c8f3ab7a"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/cli-documentation-checklist.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c28c4de4c7e155d6f5ba1613af191d5b380fe7143149cb2f31cb3eae8bccfb1f"
+        },
+        "references/cli-review-integration.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "fb5309165a02d0c07f7ab6a01db941316b314ac5d466701b30bfa70d8f9a4eaa"
+        },
+        "references/data.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "5eb26c746cfa9fcf1bba1fd036268b12d47af5f64d8d890af3e1fbd80b7ac7a2"
+        },
+        "references/mutation.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f2e2f809f13806b5cee9ca451954fa1fcc15a8f7211a5a3a466503528b0fecc0"
+        },
+        "references/playwright-e2e.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "969e530dd37f44c88d8c73c338b05c47f3b8820d53315508c846b9829ee792fa"
+        },
+        "references/qa-sessions.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d7337d45600595f9960dbec875bb94e4a4a0325db62c417d56ed4cc9f335255d"
+        },
+        "references/runtime-test-execution.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3af93338e03160077e9beabf7d8621e142341aa6eba5c2b5c7a755747a64b5fa"
+        },
+        "references/runtime.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "3a5debb1286a47b1e7870637c5b2e8a88abde96c9ec3e99d8b4f5866681a26e6"
+        },
+        "references/specs.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a50be94532f5e4e6d93eed8089ddf0688de4c87bde12dd94ebe717f51da699e5"
+        },
+        "references/tasks.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d920a7a6a582c53965ae5504dcf62b06e3251f30f5f8646b29e90e019d76fdaf"
+        },
+        "references/tests.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ab085ec968694efa0fb0d6a61fe492c52a722785080675c2c867615cd29671d6"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/check-cli-docs.py": {
+          "mode": 493,
+          "type": "file",
+          "sha256": "0c2a56cc7e4d9982aade9246be1bfb31e84dba75ac816fff28e49e6d143a85d4"
+        },
+        "scripts/check-event-lists.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c00e53bc6414bec0b3b1474bead8ddd65eecfae65463d1f902f281baaac6f678"
+        },
+        "scripts/check-native-data.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "bf30a9c9c70f9cbfc97a8484dcf033da297b7a64398d61d1aef9c59c0e7b2273"
+        },
+        "scripts/check-runtime-compat": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/check-runtime-compat/.gitignore": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97"
+        },
+        "scripts/check-runtime-compat/eslint.config.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "248f46bc34c12b526bf6a09fe27ae86cab0cce98489dc24c9672353b6860c6cf"
+        },
+        "scripts/check-runtime-compat/package-lock.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d935e45dc9f5fd6296c18fd6b856483b1d06673324532ad2a85dc26a043d682a"
+        },
+        "scripts/check-runtime-compat/package.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "0ef33db4e67876c88d2cb9747d5d1e65f497530c9e170a2b6fef5325a2c7f1fe"
+        },
+        "scripts/check-runtime-compat/run.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "842192171d950ce6d2282747825b4475bb76d5a2e1d1302c7f1346efeb20a875"
+        },
+        "scripts/lib.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b0988cdac17143497d8071d254a65f4d4347b45b1937f7fe1d971e2c1e442737"
+        },
+        "scripts/probe-nwjs.mjs": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "4045313b9228439ce958042fa8358662140620dbca536e2db7b1910d7c056317"
+        },
+        "scripts/test_check_cli_docs.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "6e53242ac38f5a1ade201f5de7dfafce614e3cdbc859086652b23ffc404f7a28"
+        },
+        "scripts/validate_plugins_js_envelope.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "a91bc2e1f50f1bc09ad55f0bb0d5a98b76b61eb92b3e6c1063a0cbde55d67613"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/setup-loki-framework",
+      "source": "src/skills/setup-loki-framework",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "d3cb372d6ce134977e3ecd1cccaa2f52c659ca6655a28d5630606e11d0249858"
+        },
+        "assets": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "assets/loki-instructions.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "86bcec90d69b1233509f32bb8264705e0926aa80aa3c3df6dafa7c89624892b8"
+        },
+        "assets/loki.config.json": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "61bf72b2fdc625e43b3556796113b04ca9e746bb2ddf89c0185c77c35202266f"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/spec-execution-metrics",
+      "source": "src/skills/spec-execution-metrics",
+      "files": {
+        ".gitignore": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+        },
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "ce5775e5f6351832086b3b62ec2e476baaae827d6200a1d5c6567be51505c540"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/format.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "c9e9fdb7350b5483cf03ffd95ebb59d1175004f4a072466115e70da5706091ac"
+        },
+        "references/operation.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "e11627cf48a4dd842af78ea81c64c3ddeb3ce4d751254c9ee7eaafe5d3f76acf"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/analysis.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "26b26081a0789bdd27c72cad78f2201f2c67f807ec74035bf0d65bd24fde1d42"
+        },
+        "scripts/metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "9fbf31b00d8c9a68764e088560b3d222bdb5ec2fa6031ce6d9034302a4954f7a"
+        },
+        "scripts/records.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "f0edf36e78c0b53700d6aa4d640abdbd2dc73e8085dbe9fffaa673f2ec9da0cc"
+        },
+        "scripts/telemetry.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b0005647be63ef2788189ba28d74747781029dc2dc5bd580bfef7f318c754741"
+        },
+        "tests": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "tests/test_metrics.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "607e2b3fbcba7b9a9757706c8798fbafda521a056a83d84e9c26f9dd60d53ad7"
+        }
+      }
+    },
+    {
+      "destination": ".claude/skills/systematic-debugging",
+      "source": "src/skills/systematic-debugging",
+      "files": {
+        "SKILL.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "b6ffab1d9d224785dea6cd72cc6d385491262fbe47dd35858b536536b518e5ec"
+        },
+        "references": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "references/condition-based-waiting.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "721e7b4c31d5d0eebdcca8e4d05236fa76276ad3f45b22c222bb1e7296c1aa07"
+        },
+        "references/defense-in-depth.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "05599f9c41c975a47822b38b49b8f1f6fc751189589111ef0b25caa16e4f8afb"
+        },
+        "references/root-cause-tracing.md": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "2ffd73de15afe9931bf114adda59a793ddcf8771906ac5207b95772a66d24b1a"
+        },
+        "scripts": {
+          "mode": 493,
+          "type": "directory"
+        },
+        "scripts/find-polluter.sh": {
+          "mode": 493,
+          "type": "file",
+          "sha256": "d3bccaa0aa4b382d9d95c9ceed177853155c2755a4f3c24f8279b8c0fe2b0d58"
+        },
+        "scripts/test_find_polluter.py": {
+          "mode": 420,
+          "type": "file",
+          "sha256": "76b28efe209790c4059386b918b56191ef1ae4f4d4b556bf46cfc91345d4a4ac"
+        }
+      }
+    },
+    {
+      "destination": ".codex/agents/challenger.toml",
+      "source": "src/agents/codex/challenger.toml",
+      "files": {
+        ".": {
+          "type": "file",
+          "mode": 420,
+          "sha256": "bd29a9149b884667d9bd6ba9d6f39882edd00f02c1d253ab34e4fd15de3fdf55"
+        }
+      }
+    },
+    {
+      "destination": ".codex/agents/judge.toml",
+      "source": "src/agents/codex/judge.toml",
+      "files": {
+        ".": {
+          "type": "file",
+          "mode": 420,
+          "sha256": "18751043c0096d6ed47ff41b964c5bd345b523cb319b3923699bec0b6be1a99c"
+        }
+      }
+    },
+    {
+      "destination": ".codex/agents/scanner.toml",
+      "source": "src/agents/codex/scanner.toml",
+      "files": {
+        ".": {
+          "type": "file",
+          "mode": 420,
+          "sha256": "36bb1dac79c098dd91a7b467a282296cab652848e2ecb4aa8a75730656ddbe2b"
+        }
+      }
+    },
+    {
+      "destination": ".claude/agents/challenger.md",
+      "source": "src/agents/claude/challenger.md",
+      "files": {
+        ".": {
+          "type": "file",
+          "mode": 420,
+          "sha256": "42a4ab30a3480073a3ce9447cfda1c16e50850798e8449d285580717ff322ff0"
+        }
+      }
+    },
+    {
+      "destination": ".claude/agents/judge.md",
+      "source": "src/agents/claude/judge.md",
+      "files": {
+        ".": {
+          "type": "file",
+          "mode": 420,
+          "sha256": "366ea0210e7dafa843702ce75514843c55e0ff20652053c46eed26f75fb989c0"
+        }
+      }
+    },
+    {
+      "destination": ".claude/agents/scanner.md",
+      "source": "src/agents/claude/scanner.md",
+      "files": {
+        ".": {
+          "type": "file",
+          "mode": 420,
+          "sha256": "37e058de354455cf145a4a77c3809fe15996adedbc7cae3d194ca001b32fc5e8"
+        }
+      }
     }
   ],
-  "mode": "apply",
-  "package_root": "E:\\Projetos\\loki-framework",
-  "replace": false
+  "archived": [
+    ".agents/agents/audio-designer.md",
+    ".agents/agents/balance-economy-designer.md",
+    ".agents/agents/bibliotecario.md",
+    ".agents/agents/catalogador.md",
+    ".agents/agents/execution-context-reader.md",
+    ".agents/agents/execution-knowledge-cataloger.md",
+    ".agents/agents/framework-artifact-quality-auditor.md",
+    ".agents/agents/framework-artifact-writer.md",
+    ".agents/agents/game-business-analyst.md",
+    ".agents/agents/game-designer.md",
+    ".agents/agents/game-product-owner.md",
+    ".agents/agents/gameplay-engineer.md",
+    ".agents/agents/level-designer.md",
+    ".agents/agents/narrative-designer.md",
+    ".agents/agents/narrative-qa.md",
+    ".agents/agents/quest-content-designer.md",
+    ".agents/agents/retrospective-digester.md",
+    ".agents/agents/runtime-qa.md",
+    ".agents/agents/scene-presentation-designer.md",
+    ".agents/agents/session-evidence-auditor.md",
+    ".agents/agents/source-researcher.md",
+    ".agents/agents/standards-curator.md",
+    ".agents/agents/technical-artist.md",
+    ".agents/agents/technical-implementer.md",
+    ".agents/agents/ux-ui-designer.md",
+    ".agents/skills/lf-action-plan-authoring",
+    ".agents/skills/lf-agent-creator",
+    ".agents/skills/lf-agent-execution-evidence",
+    ".agents/skills/lf-agentic-orchestration",
+    ".agents/skills/lf-analytic-inference",
+    ".agents/skills/lf-analytic-inference-preparation",
+    ".agents/skills/lf-command-creator",
+    ".agents/skills/lf-command-input-interview",
+    ".agents/skills/lf-command-workflows",
+    ".agents/skills/lf-documentation-writing",
+    ".agents/skills/lf-domain-context-preflight",
+    ".agents/skills/lf-execution-knowledge-capture",
+    ".agents/skills/lf-external-knowledge-extraction",
+    ".agents/skills/lf-framework-impact-audit",
+    ".agents/skills/lf-git-workflow",
+    ".agents/skills/lf-implement-feature-execution",
+    ".agents/skills/lf-index-navigator",
+    ".agents/skills/lf-internal-command-workflows",
+    ".agents/skills/lf-skill-creator",
+    ".agents/skills/lf-tech-analysis-authoring",
+    ".agents/skills/lf-template-library",
+    ".agents/skills/lf-web-deep-research",
+    ".agents/skills/loki-abrir-pr",
+    ".agents/skills/loki-agentic-development",
+    ".agents/skills/loki-catalogar-docs",
+    ".agents/skills/loki-commit",
+    ".agents/skills/loki-continuous-improvement",
+    ".agents/skills/loki-criar-branch",
+    ".agents/skills/loki-deep-analysis",
+    ".agents/skills/loki-deep-research",
+    ".agents/skills/loki-demand-text-improver",
+    ".agents/skills/loki-enrich-tasks",
+    ".agents/skills/loki-feedback",
+    ".agents/skills/loki-generate-inferences",
+    ".agents/skills/loki-human-decision-preflight",
+    ".agents/skills/loki-implement-feature",
+    ".agents/skills/loki-init",
+    ".agents/skills/loki-knowledge-extraction-analysis",
+    ".agents/skills/loki-retrospectiva-tecnica",
+    ".agents/skills/loki-self-healing",
+    ".agents/skills/loki-tech-analysis",
+    ".agents/skills/rpg-maker-mz-black-box-playtest",
+    ".agents/skills/rpg-maker-mz-black-box-playtest-audit",
+    ".agents/skills/rpg-maker-mz-consolidate-test-suites",
+    ".agents/skills/rpg-maker-mz-create-spec",
+    ".agents/skills/rpg-maker-mz-create-tasks",
+    ".agents/skills/rpg-maker-mz-data-json",
+    ".agents/skills/rpg-maker-mz-deep-review",
+    ".agents/skills/rpg-maker-mz-execute-task",
+    ".agents/skills/rpg-maker-mz-final-verify",
+    ".agents/skills/rpg-maker-mz-game-docs-impact",
+    ".agents/skills/rpg-maker-mz-issue-to-spec",
+    ".agents/skills/rpg-maker-mz-jest",
+    ".agents/skills/rpg-maker-mz-loop-tasks",
+    ".agents/skills/rpg-maker-mz-output-audit",
+    ".agents/skills/rpg-maker-mz-plugin-workflow",
+    ".agents/skills/rpg-maker-mz-project-inventory",
+    ".agents/skills/rpg-maker-mz-qa-execution",
+    ".agents/skills/rpg-maker-mz-qa-report",
+    ".agents/skills/rpg-maker-mz-research-issues",
+    ".agents/skills/rpg-maker-mz-spec-peer-review",
+    ".agents/skills/rpg-maker-mz-spec-preflight",
+    ".agents/skills/rpg-maker-mz-state-management",
+    ".agents/skills/rpg-maker-mz-task-to-adr",
+    ".agents/skills/rpg-maker-mz-tasks-tail-qa-pair",
+    ".agents/skills/rpg-maker-mz-testing-boss",
+    ".agents/skills/rpg-maker-mz-visual-evidence",
+    ".agents/skills/rpg-maker-mz-visustella-action-sequences",
+    ".agents/skills/rpg-maker-mz-visustella-battle-mechanics",
+    ".agents/skills/rpg-maker-mz-visustella-compat-diagnostics",
+    ".agents/skills/rpg-maker-mz-visustella-events-presentation",
+    ".agents/skills/rpg-maker-mz-visustella-message-core-localization",
+    ".agents/skills/rpg-maker-mz-visustella-notetags",
+    ".agents/skills/rpg-maker-mz-visustella-plugin-commands",
+    ".agents/skills/rpg-maker-mz-visustella-plugin-index",
+    ".agents/skills/rpg-maker-mz-visustella-plugin-parameters",
+    ".agents/skills/rpg-maker-mz-visustella-progression-economy",
+    ".agents/skills/rpg-maker-mz-workflow-memory",
+    ".agents/templates",
+    ".claude/agents/audio-designer.md",
+    ".claude/agents/balance-economy-designer.md",
+    ".claude/agents/catalogador.md",
+    ".claude/agents/execution-context-reader.md",
+    ".claude/agents/execution-knowledge-cataloger.md",
+    ".claude/agents/framework-artifact-quality-auditor.md",
+    ".claude/agents/framework-artifact-writer.md",
+    ".claude/agents/game-business-analyst.md",
+    ".claude/agents/game-designer.md",
+    ".claude/agents/game-product-owner.md",
+    ".claude/agents/gameplay-engineer.md",
+    ".claude/agents/level-designer.md",
+    ".claude/agents/narrative-designer.md",
+    ".claude/agents/narrative-qa.md",
+    ".claude/agents/quest-content-designer.md",
+    ".claude/agents/retrospective-digester.md",
+    ".claude/agents/scene-presentation-designer.md",
+    ".claude/agents/session-evidence-auditor.md",
+    ".claude/agents/source-researcher.md",
+    ".claude/agents/standards-curator.md",
+    ".claude/agents/technical-artist.md",
+    ".claude/agents/ux-ui-designer.md",
+    ".claude/skills/lf-command-input-interview",
+    ".claude/skills/lf-web-deep-research",
+    ".claude/skills/loki-deep-research",
+    ".claude/skills/rpg-maker-mz-black-box-playtest",
+    ".claude/skills/rpg-maker-mz-black-box-playtest-audit",
+    ".claude/skills/rpg-maker-mz-consolidate-test-suites",
+    ".claude/skills/rpg-maker-mz-create-spec",
+    ".claude/skills/rpg-maker-mz-create-tasks",
+    ".claude/skills/rpg-maker-mz-data-json",
+    ".claude/skills/rpg-maker-mz-deep-review",
+    ".claude/skills/rpg-maker-mz-execute-task",
+    ".claude/skills/rpg-maker-mz-final-verify",
+    ".claude/skills/rpg-maker-mz-game-docs-impact",
+    ".claude/skills/rpg-maker-mz-issue-to-spec",
+    ".claude/skills/rpg-maker-mz-jest",
+    ".claude/skills/rpg-maker-mz-loop-tasks",
+    ".claude/skills/rpg-maker-mz-output-audit",
+    ".claude/skills/rpg-maker-mz-plugin-workflow",
+    ".claude/skills/rpg-maker-mz-project-inventory",
+    ".claude/skills/rpg-maker-mz-qa-execution",
+    ".claude/skills/rpg-maker-mz-qa-report",
+    ".claude/skills/rpg-maker-mz-research-issues",
+    ".claude/skills/rpg-maker-mz-spec-peer-review",
+    ".claude/skills/rpg-maker-mz-spec-preflight",
+    ".claude/skills/rpg-maker-mz-state-management",
+    ".claude/skills/rpg-maker-mz-task-to-adr",
+    ".claude/skills/rpg-maker-mz-tasks-tail-qa-pair",
+    ".claude/skills/rpg-maker-mz-testing-boss",
+    ".claude/skills/rpg-maker-mz-visual-evidence",
+    ".claude/skills/rpg-maker-mz-workflow-memory",
+    ".codex/agents/audio-designer.toml",
+    ".codex/agents/balance-economy-designer.toml",
+    ".codex/agents/bibliotecario.toml",
+    ".codex/agents/catalogador.toml",
+    ".codex/agents/execution-context-reader.toml",
+    ".codex/agents/execution-knowledge-cataloger.toml",
+    ".codex/agents/framework-artifact-quality-auditor.toml",
+    ".codex/agents/framework-artifact-writer.toml",
+    ".codex/agents/game-business-analyst.toml",
+    ".codex/agents/game-designer.toml",
+    ".codex/agents/game-product-owner.toml",
+    ".codex/agents/gameplay-engineer.toml",
+    ".codex/agents/level-designer.toml",
+    ".codex/agents/narrative-designer.toml",
+    ".codex/agents/narrative-qa.toml",
+    ".codex/agents/quest-content-designer.toml",
+    ".codex/agents/retrospective-digester.toml",
+    ".codex/agents/runtime-qa.toml",
+    ".codex/agents/scene-presentation-designer.toml",
+    ".codex/agents/session-evidence-auditor.toml",
+    ".codex/agents/source-researcher.toml",
+    ".codex/agents/standards-curator.toml",
+    ".codex/agents/technical-artist.toml",
+    ".codex/agents/technical-implementer.toml",
+    ".codex/agents/ux-ui-designer.toml"
+  ],
+  "operations": [
+    {
+      "path": ".agents/agents/audio-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/balance-economy-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/bibliotecario.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/catalogador.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/execution-context-reader.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/execution-knowledge-cataloger.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/framework-artifact-quality-auditor.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/framework-artifact-writer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/game-business-analyst.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/game-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/game-product-owner.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/gameplay-engineer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/level-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/narrative-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/narrative-qa.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/quest-content-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/retrospective-digester.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/runtime-qa.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/scene-presentation-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/session-evidence-auditor.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/source-researcher.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/standards-curator.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/technical-artist.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/technical-implementer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/agents/ux-ui-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/loki-installation-manifest.json",
+      "existed": true,
+      "action": "update"
+    },
+    {
+      "path": ".agents/skills/analyze-execution-metrics",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/create-insight-dashboard",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/deep-review",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/frontend-design",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-adr",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-game-tasks",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-gddr",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-known-issues",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-playtest-tasks",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-postmortems",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-create-specs",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-execute-qa",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-execute-task",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-final-verify",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-loop-tasks",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-plan-qa",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-playwright-best-practices",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-spec-review",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-test-infrastructure",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/game-write-devlog",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/grill-me",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/grilling",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/lf-action-plan-authoring",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-agent-creator",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-agent-execution-evidence",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-agentic-orchestration",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-analytic-inference",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-analytic-inference-preparation",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-command-creator",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-command-input-interview",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-command-workflows",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-documentation-writing",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-domain-context-preflight",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-execution-knowledge-capture",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-external-knowledge-extraction",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-framework-impact-audit",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-git-workflow",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-implement-feature-execution",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-index-navigator",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-internal-command-workflows",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-skill-creator",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-tech-analysis-authoring",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-template-library",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/lf-web-deep-research",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-abrir-pr",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-agentic-development",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-catalogar-docs",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-commit",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-companion-mode",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/loki-continuous-improvement",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-criar-branch",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-deep-analysis",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-deep-research",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-demand-text-improver",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-enrich-tasks",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-feedback",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-generate-inferences",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-human-decision-preflight",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-implement-feature",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-init",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-knowledge-extraction-analysis",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-retrospectiva-tecnica",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-self-healing",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/loki-tech-analysis",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/no-workarounds",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/playwright-cli",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/remove-commit-slop",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-best-practices",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-black-box-playtest",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-black-box-playtest-audit",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-consolidate-test-suites",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-create-spec",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-create-tasks",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-data-json",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-deep-review",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-execute-task",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-final-verify",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-game-docs-impact",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-issue-to-spec",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-jest",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-loop-tasks",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-output-audit",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-plugin-workflow",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-project-inventory",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-qa-execution",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-qa-report",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-research-issues",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-spec-peer-review",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-spec-preflight",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-state-management",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-task-to-adr",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-tasks-tail-qa-pair",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-testing-boss",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visual-evidence",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-action-sequences",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-battle-mechanics",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-compat-diagnostics",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-events-presentation",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-message-core-localization",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-notetags",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-plugin-commands",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-plugin-index",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-plugin-parameters",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-visustella-progression-economy",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/rpg-maker-mz-workflow-memory",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".agents/skills/setup-loki-framework",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/spec-execution-metrics",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".agents/skills/systematic-debugging",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".agents/templates",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/audio-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/balance-economy-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/catalogador.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/challenger.md",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/agents/execution-context-reader.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/execution-knowledge-cataloger.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/framework-artifact-quality-auditor.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/framework-artifact-writer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/game-business-analyst.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/game-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/game-product-owner.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/gameplay-engineer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/judge.md",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/agents/level-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/narrative-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/narrative-qa.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/quest-content-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/retrospective-digester.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/scanner.md",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/agents/scene-presentation-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/session-evidence-auditor.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/source-researcher.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/standards-curator.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/technical-artist.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/agents/ux-ui-designer.md",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/analyze-execution-metrics",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/create-insight-dashboard",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/deep-review",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/frontend-design",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-adr",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-game-tasks",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-gddr",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-known-issues",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-playtest-tasks",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-postmortems",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-create-specs",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-execute-qa",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-execute-task",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-final-verify",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-loop-tasks",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-plan-qa",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-playwright-best-practices",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-spec-review",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-test-infrastructure",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/game-write-devlog",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/grill-me",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/grilling",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/lf-command-input-interview",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/lf-web-deep-research",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/loki-companion-mode",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/loki-deep-research",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/no-workarounds",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/playwright-cli",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/remove-commit-slop",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-best-practices",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-black-box-playtest",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-black-box-playtest-audit",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-consolidate-test-suites",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-create-spec",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-create-tasks",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-data-json",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-deep-review",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-execute-task",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-final-verify",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-game-docs-impact",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-issue-to-spec",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-jest",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-loop-tasks",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-output-audit",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-plugin-workflow",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-project-inventory",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-qa-execution",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-qa-report",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-research-issues",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-spec-peer-review",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-spec-preflight",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-state-management",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-task-to-adr",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-tasks-tail-qa-pair",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-testing-boss",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-visual-evidence",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/rpg-maker-mz-workflow-memory",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".claude/skills/setup-loki-framework",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/spec-execution-metrics",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".claude/skills/systematic-debugging",
+      "existed": true,
+      "action": "install"
+    },
+    {
+      "path": ".codex/agents/audio-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/balance-economy-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/bibliotecario.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/catalogador.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/challenger.toml",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".codex/agents/execution-context-reader.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/execution-knowledge-cataloger.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/framework-artifact-quality-auditor.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/framework-artifact-writer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/game-business-analyst.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/game-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/game-product-owner.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/gameplay-engineer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/judge.toml",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".codex/agents/level-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/narrative-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/narrative-qa.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/quest-content-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/retrospective-digester.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/runtime-qa.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/scanner.toml",
+      "existed": false,
+      "action": "install"
+    },
+    {
+      "path": ".codex/agents/scene-presentation-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/session-evidence-auditor.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/source-researcher.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/standards-curator.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/technical-artist.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/technical-implementer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": ".codex/agents/ux-ui-designer.toml",
+      "existed": true,
+      "action": "archive"
+    },
+    {
+      "path": "AGENTS.md",
+      "existed": true,
+      "action": "update"
+    },
+    {
+      "path": "CLAUDE.md",
+      "existed": true,
+      "action": "update"
+    },
+    {
+      "path": "rpg-maker/tools/prepare-qa-runtime.mjs",
+      "existed": true,
+      "action": "preserve-qa-runtime-dependency"
+    },
+    {
+      "path": "rpg-maker/tests/README.md",
+      "existed": true,
+      "action": "preserve-qa-runtime-dependency"
+    },
+    {
+      "path": "rpg-maker/tools/qa-runtime",
+      "existed": false,
+      "action": "preserve-qa-runtime-dependency"
+    }
+  ],
+  "instruction_files": [
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "policy": "Preserve accepted project policies; ADR-G006 governs the local NW.js exception.",
+  "preserved_project_support": {
+    "destination": "rpg-maker/tools/qa-runtime",
+    "origin": "archived .agents/skills/rpg-maker-mz-qa-execution/scripts",
+    "reason": "Existing prepare-qa-runtime command depends on these scripts; retain its runtime without reactivating the retired skill.",
+    "files": {
+      "browser-storage.test.mjs": "89763603d6f1098c58918943a39d3e3f29f52f7f7c0833bc1a03a3d91e9e6bf2",
+      "browser-runtime.mjs": "c03604eb17a0b9e8fa5e1b69ec6771b944891a35642979eac00c979f59758fe8",
+      "inspect-evidence.mjs": "ff5f8aca082aa4ae4ffc2ff1905f826dd324fc4ab8f7e49598865fbe27b2060e",
+      "browser-audio.test.mjs": "4b0fe115bdc4b711fec06a0b8abaa4d12838207a3971b85a8710271736ce0547",
+      "browser-input.test.mjs": "cffc7901c27adbca1b2ce522dc1c814af3c9bed5882e80f817c02e3cc98cb14c",
+      "audio-capture.mjs": "a65a3389173516d670363703ad91fcb7f016dfaefb7f5cf7f3eecac342b9926a",
+      "directed-browser.mjs": "a88ac1d5f821e2289de09eb0ffa1e84d90804336929777e49cc02d272407a000",
+      "browser-audio.mjs": "6f5803e0f56ad9f25ebd89b50a34abf8b047262d55ee27eb37e2bb7ccc0a6a37",
+      "evidence-coordination.mjs": "e93cacfe4c13213c49b1571b57bc16786fd3a02facd2cd09f747b1841c02aec2",
+      "evidence-environment.mjs": "10e8a541dfa12868040e1077fba7d261deb61932e6769ba003e976a9e01f21f0",
+      "evidence-identity.mjs": "931f6be906dc3d888b78e8a7d7d42067bf30bcd124b2d7eac15c54d35d010bcf",
+      "evidence-store.mjs": "65adb5efa475e23ff870aa91c3f0752d50cb385e782d57d579e221e8bc2bd6f6",
+      "package-lock.json": "018c40073e860f86432926ae50923ac84e280f394a88b31aee9d4084682430b1",
+      "package.json": "48785e75b560700b019d737eade0a7337d677a8aed061b2f4c0e04fdf3a9d2f4",
+      "browser-storage.mjs": "cd5bf50cdcb2d17bec10d027eeef914f6951a62bdc3b2b159f8bbeaef09d9ebf",
+      "observation-deadline.mjs": "f1e2271264f3c0f0cc7df8811ea713f4ab25bfa79fa9c7be712308d9b8038570",
+      "request-evidence.mjs": "d22adb421e0a5302144fbe8779f34f4a1cc0afb8ef74be529b1610b931bab808",
+      "normal-evidence.mjs": "dc3200fe6a2807d48ef85ee3680b306e34dcca9001749bf97289d7a22a5d8264",
+      "evidence-worker.mjs": "f3e2a27d39c472a7822b649c0d90a63ca8f66f303458c9a10a88d835ecb13a5e",
+      "request-contract.mjs": "5ff804dcdd9cbca96d8b3146a216bb0b4674fd364b752d5b695f068393f75f81",
+      "tests/observation-deadline.test.mjs": "ec08c10689788a1801b16f1e9c1bd7cca470b4f6fc91229d201d291f7783c026",
+      "tests/audio-capture.test.mjs": "6204ec425c75036e7c01942aaf43608603b47472c191168f78b33136bcfeee94",
+      "tests/evidence-reuse.test.mjs": "355a6737d76410fe1741cf772f7329b6402171ff9e91a624bf236e77ee00c2d1",
+      "tests/browser-runtime.test.mjs": "96a3b047518276d96a47134980c1b1f3337ead927d29485e7ecbfbec3503dc47"
+    }
+  }
 }

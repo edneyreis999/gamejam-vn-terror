@@ -1,1 +1,0 @@
-E:/Projetos/loki-framework/agents/game-product-owner.md

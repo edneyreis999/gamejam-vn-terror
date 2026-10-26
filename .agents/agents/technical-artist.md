@@ -1,1 +1,0 @@
-E:/Projetos/loki-framework/agents/technical-artist.md

@@ -3,7 +3,7 @@ import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const source=resolve(root,'.agents/skills/rpg-maker-mz-qa-execution/scripts');
+const source=resolve(root,'rpg-maker/tools/qa-runtime');
 const output=resolve(root,process.env.DRYLAND_DIRECTED_RUNTIME||'.artifacts/qa-runtime');
 await access(join(source,'package-lock.json'));await mkdir(output,{recursive:true});
 await cp(source,output,{recursive:true,filter:p=>!p.split('/').includes('node_modules')});

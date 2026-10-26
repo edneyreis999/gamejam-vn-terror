@@ -1,1 +1,0 @@
-E:/Projetos/loki-framework/agents/execution-knowledge-cataloger.md
