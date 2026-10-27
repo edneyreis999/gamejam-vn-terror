@@ -655,6 +655,12 @@ var $plugins =
         }
     },
     {
+        "name": "Dryland_1_ReedTransition",
+        "status": true,
+        "description": "Reed mist transition into traps",
+        "parameters": {}
+    },
+    {
         "name": "Dryland_2_CreditsScroll",
         "status": true,
         "description": "Native Dim credits inside Reed’s parchment",

@@ -5269,6 +5269,22 @@
                             ]
                         },
                         {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                1,
+                                "Dryland_Coreto",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 0,
                             "parameters": [
@@ -5445,8 +5461,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "51",
-                                    "TargetScaleY:str": "51",
+                                    "TargetScaleX:str": "110",
+                                    "TargetScaleY:str": "110",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -5460,8 +5476,8 @@
                                 "Move_MoveToCoordinates",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetX:str": "320",
-                                    "TargetY:str": "700",
+                                    "TargetX:str": "640",
+                                    "TargetY:str": "1415",
                                     "EasingType:str": "Linear",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
@@ -5523,34 +5539,6 @@
                             ]
                         },
                         {
-                            "code": 108,
-                            "indent": 0,
-                            "parameters": [
-                                "Retira o busto do Rheed antes das abordagens."
-                            ]
-                        },
-                        {
-                            "code": 235,
-                            "indent": 0,
-                            "parameters": [
-                                60
-                            ]
-                        },
-                        {
-                            "code": 108,
-                            "indent": 0,
-                            "parameters": [
-                                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
-                            ]
-                        },
-                        {
-                            "code": 408,
-                            "indent": 0,
-                            "parameters": [
-                                "da passagem da campanha fica a cargo do EventBridge."
-                            ]
-                        },
-                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
@@ -5566,6 +5554,59 @@
                             "parameters": [
                                 12,
                                 "$gameVariables.value(21) !== 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_ReedTransition",
+                                "Start",
+                                "Start",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                60
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_ReedTransition",
+                                "Covered",
+                                "Covered",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_B1",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_ReedTransition",
+                                "Finish",
+                                "Finish",
+                                {}
                             ]
                         },
                         {
@@ -5590,6 +5631,34 @@
                                 "ReadingComplete",
                                 "ReadingComplete",
                                 {}
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                60
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_B1",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
                             ]
                         },
                         {

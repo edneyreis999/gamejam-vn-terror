@@ -2705,7 +2705,7 @@
                                 {
                                     "PictureID:eval": "60",
                                     "PictureName:str": "Reed final",
-                                    "Origin:str": "Upper Left",
+                                    "Origin:str": "Bust",
                                     "Position:num": "5",
                                     "StartOffsetX:eval": "0",
                                     "StartOffsetY:eval": "0",
@@ -2724,8 +2724,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "85.71428571428571",
-                                    "TargetScaleY:str": "85.71428571428571",
+                                    "TargetScaleX:str": "110",
+                                    "TargetScaleY:str": "110",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -2739,8 +2739,8 @@
                                 "Move_MoveToCoordinates",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                                    "TargetY:str": "32",
+                                    "TargetX:str": "640",
+                                    "TargetY:str": "1415",
                                     "EasingType:str": "Linear",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
