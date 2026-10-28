@@ -881,3 +881,139 @@ ui.social.about.h7	About Vaelith	Sobre Vaelith
 ui.social.about.h8	About Draska	Sobre Draska
 ui.camp.back	Back	Voltar
 dest.status.unknown	Unknown destination	Destino desconhecido
+hero.h1.name	Gorvak	Gorvak
+enc.a8.success_reaction.h1	Everyone in one piece? Then let's go. I don't want to find out if that thing can follow us.	Todo mundo inteiro? Então vamos. Não quero descobrir se aquilo consegue nos seguir.
+hero.h2.name	Elowen	Elowen
+enc.a8.success_reaction.h2	Ivaí, look at me. Did you get out without getting hurt?	Ivaí, olha para mim. Conseguiu sair sem se machucar?
+hero.h3.name	Griznik	Griznik
+enc.a8.success_reaction.h3	My mouth is full of dust. Give me a moment... All right. We can go.	Estou com a boca cheia de poeira. Me dá um instante... Pronto. Podemos ir.
+hero.h4.name	Seraphina	Seraphina
+enc.a8.success_reaction.h4	Breathe slowly. I'm trying to do the same.	Respirem devagar. Eu também estou tentando.
+hero.h5.name	Bimbren	Bimbren
+enc.a8.success_reaction.h5	When I tell this story, they'll say I made the feet bigger.	Quando eu contar isso, vão dizer que aumentei o tamanho dos pés.
+hero.h6.name	Liora	Liora
+enc.a8.success_reaction.h6	I can still hear the footsteps. Let's get a little farther away.	Ainda estou ouvindo os passos. Vamos nos afastar mais um pouco.
+hero.h7.name	Vaelith	Vaelith
+enc.a8.success_reaction.h7	I had so many questions about that thing. Now I just want to get away from it.	Eu tinha tanta coisa para perguntar sobre aquilo. Agora só quero distância.
+hero.h8.name	Draska	Draska
+enc.a8.success_reaction.h8	I need to let go of this strap. We're through. We're through.	Preciso parar de apertar essa correia. Já passamos. Já passamos.
+enc.a1.success_reaction.h1	Hold still a moment. I want to check for glass caught in your clothes.	Fiquem parados um instante. Quero ver se algum caco ficou preso na roupa.
+enc.a1.success_reaction.h2	I still feel like something's about to cut my face. Let's get away from those bottles.	Ainda estou esperando alguma coisa cortar meu rosto. Vamos sair de perto dessas garrafas.
+enc.a1.success_reaction.h3	There's glass in my boot. Give me a moment, or I'll be carrying it all the way.	Tem vidro dentro da minha bota. Um instante, senão vou levar isso pelo resto do caminho.
+enc.a1.success_reaction.h4	Don't rub your eyes. If there's dust in them, let me look.	Não esfreguem os olhos. Se entrou poeira, deixem que eu olhe.
+enc.a1.success_reaction.h5	I nearly apologized to the bottle. As if that would help.	Eu quase pedi desculpa à garrafa. Como se isso fosse adiantar.
+enc.a1.success_reaction.h6	Outside, the wind can make all the noise it likes. In here, I've heard enough.	Lá fora o vento pode fazer o barulho que quiser. Aqui dentro, já ouvi o bastante.
+enc.a1.success_reaction.h7	I was going to ask for a closer look at one of those bottles. I've changed my mind.	Eu ia pedir para examinar uma daquelas garrafas. Mudei de ideia.
+enc.a1.success_reaction.h8	Glass on the floor, I can deal with. Flying at my face? No.	Vidro no chão eu aguento. Voando na altura do rosto, não.
+enc.a2.success_reaction.h1	I nearly put my full weight on that vine. My knees are still weak.	Quase pus meu peso inteiro naquele cipó. Meus joelhos ainda estão fracos.
+enc.a2.success_reaction.h2	Now I'm checking every mark I leave. I know which way my own feet point.	Agora estou conferindo cada marca que deixo. A direção dos meus pés eu conheço.
+enc.a2.success_reaction.h3	Wait. That twig caught my pack, and I thought it was another vine.	Espera. Esse galho pegou na mochila e eu achei que fosse outro cipó.
+enc.a2.success_reaction.h4	You can let go of my sleeve now. We're past the stakes.	Pode soltar minha manga agora. Já passamos pelas estacas.
+enc.a2.success_reaction.h5	I'd like to walk a few steps without having to argue with the ground.	Eu queria andar alguns passos sem precisar discutir com o chão.
+enc.a2.success_reaction.h6	I keep looking back. I want to be sure the path we took is still there.	Não paro de olhar para trás. Quero ter certeza de que o caminho que fizemos continua lá.
+enc.a2.success_reaction.h7	Knowing stories about this feels very different from standing in it.	Conhecer histórias sobre isso é bem diferente de estar aqui dentro.
+enc.a2.success_reaction.h8	I'm keeping clear of the trees for a while. I've had enough surprises underfoot.	Vou ficar longe das árvores por um tempo. Já tive surpresa demais debaixo dos pés.
+enc.a3.success_reaction.h1	That pounding is still in my chest. Give me a moment to catch my breath.	Ainda sinto aquelas pancadas no peito. Me dá um instante para recuperar o fôlego.
+enc.a3.success_reaction.h2	That last blow was close. I'd rather hear you talking than another verse of that song.	A última pancada passou perto. Prefiro ouvir vocês falando a mais um verso daquela música.
+enc.a3.success_reaction.h3	My teeth are still rattling. I think I've had enough of this kitchen.	Meus dentes ainda estão batendo. Acho que já tive o bastante dessa cozinha.
+enc.a3.success_reaction.h4	Can you hear me clearly? My ears are still ringing.	Vocês estão me ouvindo direito? Meus ouvidos ainda estão zunindo.
+enc.a3.success_reaction.h5	If I start humming that tune, interrupt me. Please.	Se eu começar a cantarolar aquilo, me interrompam. Por favor.
+enc.a3.success_reaction.h6	I was counting the beats. I can't seem to stop.	Eu estava contando as batidas. Parece que ainda não consegui parar.
+enc.a3.success_reaction.h7	I wish I hadn't heard the words. Now I keep remembering them.	Eu queria não ter escutado a letra. Agora não paro de lembrar dela.
+enc.a3.success_reaction.h8	I'm going to stand somewhere I can see the ceiling. I need a moment.	Vou ficar num lugar onde consiga ver o teto. Preciso de um instante.
+enc.a4.success_reaction.h1	I wanted to call out to you, but my voice wouldn't come. Can you hear me now?	Quis chamar vocês, mas a voz não saiu. Estão me ouvindo agora?
+enc.a4.success_reaction.h2	I hated how still I was. I'm walking until my legs believe we're out.	Odiei ficar daquele jeito, sem me mexer. Vou andar até minhas pernas entenderem que saímos.
+enc.a4.success_reaction.h3	I can still feel those bars against my back. There's nothing there, is there?	Ainda sinto aquelas barras nas costas. Não tem nada aí, tem?
+enc.a4.success_reaction.h4	That roar frightened me too. There's no need to hide it from me.	Aquele rugido também me assustou. Não precisam esconder isso de mim.
+enc.a4.success_reaction.h5	I've had my fill of narrow spaces. Someone save me a spot in the open.	Já tive minha cota de lugar apertado. Guardem um espaço para mim ao ar livre.
+enc.a4.success_reaction.h6	Don't hurry me just yet. I'm trying to get my legs steady again.	Não me apressem agora. Estou tentando firmar as pernas outra vez.
+enc.a4.success_reaction.h7	I couldn't even think of a word for it. All I wanted was to get out.	Nem consegui pensar num nome para aquilo. Só queria sair.
+enc.a4.success_reaction.h8	Hold out your hand. Just until this shaking stops.	Me estende a mão. Só até essa tremedeira passar.
+enc.a5.success_reaction.h1	Check your sleeves. I don't want a stray ember coming along with us.	Confiram as mangas. Não quero nenhuma brasa vindo com a gente.
+enc.a5.success_reaction.h2	I felt that heat on the back of my neck. Let's keep putting distance behind us.	Senti aquele calor na nuca. Vamos nos afastar mais.
+enc.a5.success_reaction.h3	Something smells burned. Please tell me it's just the stable.	Tem alguma coisa cheirando a queimado. Espero que seja só a cavalariça.
+enc.a5.success_reaction.h4	If the heat hurt anywhere, tell me now. We can stop for a moment.	Se o calor machucou em algum lugar, me avisem agora. Podemos parar um instante.
+enc.a5.success_reaction.h5	I don't suppose anyone wants to go back for a closer look at the horseshoes.	Imagino que ninguém queira voltar para olhar melhor as ferraduras.
+enc.a5.success_reaction.h6	My eyes are still watering. Keep talking so I know where you are.	Meus olhos ainda estão lacrimejando. Continuem falando para eu saber onde estão.
+enc.a5.success_reaction.h7	I can describe it later. Right now, I'd rather have some air that doesn't burn.	Posso descrever aquilo depois. Agora prefiro um ar que não queime.
+enc.a5.success_reaction.h8	That heat went right through my clothes. I need a moment away from it.	Aquele calor atravessou a roupa. Preciso de um instante longe disso.
+enc.a6.success_reaction.h1	I keep looking at my ankles. It felt like those roots were reaching just for me.	Não paro de olhar para os tornozelos. Parecia que aquelas raízes vinham só atrás de mim.
+enc.a6.success_reaction.h2	A fruit fell, and I nearly jumped into your arms. Don't laugh yet.	Uma fruta caiu e eu quase pulei no colo de vocês. Não riam ainda.
+enc.a6.success_reaction.h3	Hold on. I want to shake the dirt out of my clothes before anything else falls out.	Espera. Quero sacudir a terra da roupa antes que caia mais alguma coisa.
+enc.a6.success_reaction.h4	You can breathe now. I caught myself holding my breath too.	Podem respirar agora. Eu também me peguei prendendo o ar.
+enc.a6.success_reaction.h5	If anyone offers me fruit tonight, I'm going to need a good look at it first.	Se alguém me oferecer fruta hoje, vou precisar olhar muito bem antes.
+enc.a6.success_reaction.h6	I'm choosing a place with no branches overhead when we stop.	Quando pararmos, vou escolher um lugar sem galhos por cima.
+enc.a6.success_reaction.h7	I can't stop thinking about that body. Let's walk a little before we talk about it.	Não consigo parar de pensar naquele corpo. Vamos andar um pouco antes de falar disso.
+enc.a6.success_reaction.h8	Those teeth... I nearly forgot there were roots at my feet as well.	Aqueles dentes... Quase esqueci que também tinha raízes junto aos meus pés.
+enc.a7.success_reaction.h1	I wanted to turn back when I heard that voice. Stay close to me a moment.	Quis voltar quando ouvi aquela voz. Fiquem perto de mim um instante.
+enc.a7.success_reaction.h2	I know it was a trick. I still hate that we had to walk away.	Eu sei que era um truque. Mesmo assim, detesto ter precisado ir embora.
+enc.a7.success_reaction.h3	Every time a chain moved, I thought a hook had caught my pack.	Cada vez que uma corrente se mexia, eu achava que um gancho tinha pegado minha mochila.
+enc.a7.success_reaction.h4	We got through, but hearing someone beg like that... I need a moment.	Conseguimos passar, mas ouvir alguém implorar daquele jeito... Preciso de um instante.
+enc.a7.success_reaction.h5	Say something, Ivaí. Anything. I want to hear a voice I can see coming from someone.	Fala alguma coisa, Ivaí. Qualquer coisa. Quero ouvir uma voz e ver de quem ela está saindo.
+enc.a7.success_reaction.h6	I kept checking that none of you had fallen behind. I think I'll keep doing that.	Eu conferia o tempo todo se ninguém tinha ficado para trás. Acho que vou continuar conferindo.
+enc.a7.success_reaction.h7	There's no comfort in knowing how a lie works when it sounds like that.	Entender que é uma mentira não consola quando ela tem aquela voz.
+enc.a7.success_reaction.h8	I don't want to hear that press again. Let's keep walking.	Não quero ouvir aquela prensa outra vez. Vamos continuar andando.
+enc.b1.success_reaction.h1	Gorvak. That's my name. I just needed to hear myself say it.	Gorvak. Esse é meu nome. Só precisava me ouvir dizendo isso.
+enc.b1.success_reaction.h2	I tried to call you and lost the word. I never want to feel that again.	Tentei chamar vocês e perdi a palavra. Não quero sentir isso de novo.
+enc.b1.success_reaction.h3	I'm trying to remember what I wanted to say in there. It seemed important.	Estou tentando lembrar o que queria dizer lá dentro. Parecia importante.
+enc.b1.success_reaction.h4	Let me hear your voices, one at a time. That helps more than the silence.	Deixem eu ouvir a voz de vocês, um de cada vez. Isso ajuda mais que o silêncio.
+enc.b1.success_reaction.h5	I earn my living carrying words. Losing them like that... I wasn't ready for it.	Eu vivo de levar palavras aos outros. Perder elas daquele jeito... Não estava preparado.
+enc.b1.success_reaction.h6	I nearly called that place home. I don't even know why.	Quase chamei aquele lugar de casa. Nem sei por quê.
+enc.b1.success_reaction.h7	I keep checking the words I know. I'd forgotten how much I rely on them.	Continuo conferindo as palavras que conheço. Tinha esquecido o quanto preciso delas.
+enc.b1.success_reaction.h8	My voice sounds strange to me now. Is it still the same to you?	Minha voz está estranha para mim agora. Para vocês continua igual?
+enc.b2.success_reaction.h1	Let me look at you for a moment. I want to be sure I remember this properly.	Deixem eu olhar para vocês um instante. Quero ter certeza de que vou lembrar disso direito.
+enc.b2.success_reaction.h2	Don't walk so far ahead. I need to see you right now.	Não andem tão longe na frente. Preciso ver vocês agora.
+enc.b2.success_reaction.h3	I remembered your faces again and nearly cried. I'm still trying not to.	Lembrei do rosto de vocês de novo e quase chorei. Ainda estou tentando não chorar.
+enc.b2.success_reaction.h4	If anything still feels missing, tell me. We can sit together until it comes back.	Se ainda parece faltar alguma coisa, me contem. Podemos sentar juntos até voltar.
+enc.b2.success_reaction.h5	Seeing my own name on that cloth... I suddenly had a lot of things left to do.	Ver meu nome naquele pano... De repente, lembrei de muita coisa que ainda preciso fazer.
+enc.b2.success_reaction.h6	For a moment, I couldn't remember who I was walking with. Please stay where I can see you.	Por um instante, não lembrava com quem estava andando. Por favor, fiquem onde eu possa ver.
+enc.b2.success_reaction.h7	I thought forgetting was something slow. I don't want to learn any more about it today.	Achei que esquecer fosse uma coisa lenta. Não quero aprender mais nada sobre isso hoje.
+enc.b2.success_reaction.h8	I was afraid you'd look straight at me and see a stranger.	Fiquei com medo de vocês olharem para mim e enxergarem uma estranha.
+enc.b3.success_reaction.h1	I'd rather not tell you what I saw. Just keep walking beside me.	Prefiro não contar o que vi. Só continuem andando do meu lado.
+enc.b3.success_reaction.h2	I knew something was wrong with those memories. It still hurt to look at them.	Eu sabia que tinha alguma coisa errada naquelas lembranças. Mesmo assim, doeu olhar.
+enc.b3.success_reaction.h3	The ground's solid. Your voices are here. I'm trying to keep my mind on that.	O chão está firme. A voz de vocês está aqui. Estou tentando pensar nisso.
+enc.b3.success_reaction.h4	You don't have to explain what you saw. Not now.	Não precisam explicar o que viram. Agora, não.
+enc.b3.success_reaction.h5	I had a joke ready before we went in. I don't think I can tell it anymore.	Eu tinha uma piada pronta antes de entrar. Acho que não consigo contar agora.
+enc.b3.success_reaction.h6	I knew where we were, and then I didn't. Give me a moment to get my bearings.	Eu sabia onde estávamos e, de repente, não sabia mais. Me dá um instante para me situar.
+enc.b3.success_reaction.h7	I'm still sorting out what was real. I don't want to do it alone.	Ainda estou tentando separar o que era verdade. Não quero fazer isso sozinho.
+enc.b3.success_reaction.h8	I don't like anyone watching me that closely. Even less when it gets inside my head.	Não gosto de ninguém me olhando daquele jeito. Menos ainda quando entra na minha cabeça.
+enc.b4.success_reaction.h1	I almost said yes just to make it stop. I'm glad we're out of there.	Quase disse sim só para aquilo parar. Ainda bem que saímos de lá.
+enc.b4.success_reaction.h2	Next time someone wants a promise, they can ask me somewhere with fewer roots.	Da próxima vez que quiserem uma promessa, que me peçam num lugar com menos raízes.
+enc.b4.success_reaction.h3	I kept feeling I owed something. I don't like how easily that got to me.	Fiquei sentindo que devia alguma coisa. Não gosto de como aquilo mexeu comigo.
+enc.b4.success_reaction.h4	You don't have to keep answering it in your head. I caught myself doing that too.	Não precisam continuar respondendo àquilo na cabeça. Eu também me peguei fazendo isso.
+enc.b4.success_reaction.h5	I've delivered some unreasonable demands. None of them tried to squeeze me between trees.	Já entreguei cobranças absurdas. Nenhuma tentou me espremer entre árvores.
+enc.b4.success_reaction.h6	I want to be well out of earshot before we stop.	Quero estar bem longe do alcance daquela voz antes de parar.
+enc.b4.success_reaction.h7	That voice sounded so certain. For a moment, I doubted my own memory.	Aquela voz tinha tanta certeza. Por um instante, duvidei da minha memória.
+enc.b4.success_reaction.h8	My hands are still clenched. I was getting ready to argue with a tree.	Minhas mãos ainda estão fechadas. Eu estava me preparando para discutir com uma árvore.
+enc.b5.success_reaction.h1	Tell me I look like myself. I need someone else to say it.	Digam que continuo com a minha cara. Preciso ouvir isso de outra pessoa.
+enc.b5.success_reaction.h2	I'm not looking at my reflection again for a while. You can tell me if there's dirt on my face.	Vou passar um tempo sem olhar meu reflexo. Vocês me avisam se meu rosto estiver sujo.
+enc.b5.success_reaction.h3	I keep moving my fingers to check. I know it's over. I keep doing it anyway.	Não paro de mexer os dedos para conferir. Sei que acabou. Continuo fazendo isso mesmo assim.
+enc.b5.success_reaction.h4	I'm right here. If you need to check, take my hand.	Estou bem aqui. Se precisarem conferir, peguem minha mão.
+enc.b5.success_reaction.h5	I used to worry about looking tired in a mirror. That seems very small now.	Eu me preocupava em parecer cansado no espelho. Isso parece bem pequeno agora.
+enc.b5.success_reaction.h6	I don't want any polished glass near where we sleep tonight.	Não quero nenhum vidro polido perto de onde formos dormir hoje.
+enc.b5.success_reaction.h7	I thought I'd want to study that mirror. Now I don't even want to remember my face in it.	Achei que fosse querer estudar aquele espelho. Agora nem quero lembrar do meu rosto nele.
+enc.b5.success_reaction.h8	If I start moving strangely, grab my arm. I'd do the same for you.	Se eu começar a me mexer de um jeito estranho, segurem meu braço. Eu faria o mesmo por vocês.
+enc.b6.success_reaction.h1	Air. I just want to stand here and breathe it for a moment.	Ar. Só quero ficar aqui respirando por um instante.
+enc.b6.success_reaction.h2	I can run again in a minute. Right now, I need to stop coughing.	Daqui a pouco consigo correr de novo. Agora preciso parar de tossir.
+enc.b6.success_reaction.h3	My clothes are dry. I keep touching them because I can't quite believe it.	Minha roupa está seca. Continuo tocando nela porque não consigo acreditar direito.
+enc.b6.success_reaction.h4	Don't force a deep breath. Take your time. I'll wait with you.	Não forcem uma respiração funda. Vão com calma. Eu espero com vocês.
+enc.b6.success_reaction.h5	I never thought I'd be this glad to have a dry mouth.	Nunca pensei que fosse ficar tão contente de estar com a boca seca.
+enc.b6.success_reaction.h6	That felt too real. Please don't ask me about it just yet.	Aquilo pareceu real demais. Por favor, não me perguntem sobre isso agora.
+enc.b6.success_reaction.h7	I've forgotten the melody already. I hope it stays that way.	Já esqueci a melodia. Espero que continue assim.
+enc.b6.success_reaction.h8	If I see another well, I'm giving it a very wide berth.	Se eu vir outro poço, vou passar bem longe dele.
+enc.b7.success_reaction.h1	There are people waiting for me. I kept thinking about them while that cloth came down.	Tem gente esperando por mim. Só conseguia pensar nisso enquanto aquele pano descia.
+enc.b7.success_reaction.h2	I'm still here. It feels good to be able to say that.	Ainda estou aqui. É bom poder dizer isso.
+enc.b7.success_reaction.h3	I didn't want to read the date. I couldn't stop looking at it.	Eu não queria ler a data. Não conseguia parar de olhar.
+enc.b7.success_reaction.h4	Come closer. I want to hear something besides that scream.	Cheguem mais perto. Quero ouvir alguma coisa além daquele grito.
+enc.b7.success_reaction.h5	I have messages left to deliver. That was all I could think about in there.	Ainda tenho mensagens para entregar. Só conseguia pensar nisso lá dentro.
+enc.b7.success_reaction.h6	I'd rather not mark this day on anything. I think I'll remember it.	Prefiro não marcar esse dia em lugar nenhum. Acho que vou lembrar dele.
+enc.b7.success_reaction.h7	Usually I want to read every word. This time, I wished I couldn't.	Normalmente quero ler cada palavra. Dessa vez, desejei não saber ler.
+enc.b7.success_reaction.h8	I thought my knees were going to give out when the dates started changing.	Achei que meus joelhos fossem ceder quando as datas começaram a mudar.
+enc.b8.success_reaction.h1	I nearly went toward that voice. It sounded so small.	Quase fui na direção daquela voz. Parecia tão pequena.
+enc.b8.success_reaction.h2	I kept wanting to turn around and check. Keep me walking if I do it again.	Fiquei querendo voltar para conferir. Me façam continuar andando se eu tentar de novo.
+enc.b8.success_reaction.h3	Those walls felt closer every time I blinked. I'm staying out here a moment.	As paredes pareciam mais perto cada vez que eu piscava. Vou ficar aqui fora um instante.
+enc.b8.success_reaction.h4	Hearing a child call for help... I don't think I'll sleep well after that.	Ouvir uma criança pedir ajuda... Acho que não vou dormir bem depois disso.
+enc.b8.success_reaction.h5	I was ready to promise anything to that voice. That's what frightens me now.	Eu estava pronto para prometer qualquer coisa àquela voz. É isso que me assusta agora.
+enc.b8.success_reaction.h6	I need to see open space for a while. Don't lead me straight into another house.	Preciso ver espaço aberto por um tempo. Não me levem direto para outra casa.
+enc.b8.success_reaction.h7	I knew it was imitating someone. Knowing didn't make it any easier to leave.	Eu sabia que estava imitando alguém. Saber disso não tornou mais fácil ir embora.
+enc.b8.success_reaction.h8	I kept waiting for the wall to touch my back. Let me stand here a moment.	Fiquei esperando a parede encostar nas minhas costas. Me deixem ficar aqui um instante.

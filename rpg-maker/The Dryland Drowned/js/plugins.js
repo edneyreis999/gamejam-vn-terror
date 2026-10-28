@@ -661,6 +661,12 @@ var $plugins =
         "parameters": {}
     },
     {
+        "name": "Dryland_1_SceneTransitions",
+        "status": true,
+        "description": "Scene dissolves and audio handoffs",
+        "parameters": {}
+    },
+    {
         "name": "Dryland_2_CreditsScroll",
         "status": true,
         "description": "Native Dim credits inside Reed’s parchment",

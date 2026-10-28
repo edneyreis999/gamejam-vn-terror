@@ -3914,6 +3914,18 @@
                             ]
                         },
                         {
+                            "code": 250,
+                            "indent": 2,
+                            "parameters": [
+                                {
+                                    "name": "Earth2",
+                                    "volume": 30,
+                                    "pitch": 90,
+                                    "pan": 0
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -3947,6 +3959,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[enc.b4.result_1.success.2]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                387
                             ]
                         },
                         {
@@ -4346,6 +4365,18 @@
                             ]
                         },
                         {
+                            "code": 250,
+                            "indent": 2,
+                            "parameters": [
+                                {
+                                    "name": "Darkness2",
+                                    "volume": 30,
+                                    "pitch": 90,
+                                    "pan": 0
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -4361,6 +4392,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[enc.b4.result_2.success]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                387
                             ]
                         },
                         {
@@ -4760,6 +4798,18 @@
                             ]
                         },
                         {
+                            "code": 250,
+                            "indent": 2,
+                            "parameters": [
+                                {
+                                    "name": "Move1",
+                                    "volume": 30,
+                                    "pitch": 90,
+                                    "pan": 0
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -4775,6 +4825,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[enc.b4.result_3.success]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                387
                             ]
                         },
                         {
@@ -5287,6 +5344,29 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) === 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 231,
                             "indent": 0,
                             "parameters": [
@@ -5503,6 +5583,18 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Reveal",
+                                "Reveal",
+                                {
+                                    "frames": "18"
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 0,
                             "parameters": [
@@ -5657,6 +5749,16 @@
                             "parameters": []
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 235,
                             "indent": 1,
                             "parameters": [
@@ -5677,6 +5779,18 @@
                                 80,
                                 255,
                                 0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Reveal",
+                                "Reveal",
+                                {
+                                    "frames": "18"
+                                }
                             ]
                         },
                         {

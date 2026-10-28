@@ -1796,24 +1796,51 @@
                             "parameters": []
                         },
                         {
-                            "code": 242,
+                            "code": 357,
                             "indent": 1,
                             "parameters": [
-                                1
+                                "Dryland_1_SceneTransitions",
+                                "PrepareAudio",
+                                "PrepareAudio",
+                                {
+                                    "channel": "Bgm",
+                                    "name": ""
+                                }
                             ]
                         },
                         {
-                            "code": 246,
+                            "code": 241,
                             "indent": 1,
                             "parameters": [
-                                1
+                                {
+                                    "name": "",
+                                    "volume": 0,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
                             ]
                         },
                         {
-                            "code": 230,
+                            "code": 357,
                             "indent": 1,
                             "parameters": [
-                                60
+                                "Dryland_1_SceneTransitions",
+                                "FinishAudio",
+                                "FinishAudio",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "PrepareAudio",
+                                "PrepareAudio",
+                                {
+                                    "channel": "Bgs",
+                                    "name": "Fire1"
+                                }
                             ]
                         },
                         {
@@ -1826,6 +1853,16 @@
                                     "pitch": 100,
                                     "pan": 0
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "FinishAudio",
+                                "FinishAudio",
+                                {}
                             ]
                         },
                         {
@@ -3058,6 +3095,383 @@
                             ]
                         },
                         {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H2",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                15,
+                                "Dryland_Camp_H2",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H3",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                16,
+                                "Dryland_Camp_H3",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H4",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                14,
+                                "Dryland_Camp_H4",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H5",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                11,
+                                "Dryland_Camp_H5",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H6",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                10,
+                                "Dryland_Camp_H6",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H7",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                12,
+                                "Dryland_Camp_H7",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H8",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 3,
+                            "parameters": [
+                                13,
+                                "Dryland_Camp_H8",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 2,
+                            "parameters": []
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Reveal",
+                                "Reveal",
+                                {
+                                    "frames": "30"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "!$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "heroDead",
+                                    "id": "H1",
+                                    "variable": "0",
+                                    "switch": "52",
+                                    "index": "0",
+                                    "identityVariable": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 2,
+                            "parameters": [
+                                12,
+                                "$gameSwitches.value(52)"
+                            ]
+                        },
+                        {
                             "code": 232,
                             "indent": 3,
                             "parameters": [
@@ -3104,22 +3518,6 @@
                             "parameters": [
                                 12,
                                 "$gameSwitches.value(52)"
-                            ]
-                        },
-                        {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                15,
-                                "Dryland_Camp_H2",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
                             ]
                         },
                         {
@@ -3172,22 +3570,6 @@
                             ]
                         },
                         {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                16,
-                                "Dryland_Camp_H3",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
-                        },
-                        {
                             "code": 232,
                             "indent": 3,
                             "parameters": [
@@ -3234,22 +3616,6 @@
                             "parameters": [
                                 12,
                                 "$gameSwitches.value(52)"
-                            ]
-                        },
-                        {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                14,
-                                "Dryland_Camp_H4",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
                             ]
                         },
                         {
@@ -3302,22 +3668,6 @@
                             ]
                         },
                         {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                11,
-                                "Dryland_Camp_H5",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
-                        },
-                        {
                             "code": 232,
                             "indent": 3,
                             "parameters": [
@@ -3364,22 +3714,6 @@
                             "parameters": [
                                 12,
                                 "$gameSwitches.value(52)"
-                            ]
-                        },
-                        {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                10,
-                                "Dryland_Camp_H6",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
                             ]
                         },
                         {
@@ -3432,22 +3766,6 @@
                             ]
                         },
                         {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                12,
-                                "Dryland_Camp_H7",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
-                        },
-                        {
                             "code": 232,
                             "indent": 3,
                             "parameters": [
@@ -3494,22 +3812,6 @@
                             "parameters": [
                                 12,
                                 "$gameSwitches.value(52)"
-                            ]
-                        },
-                        {
-                            "code": 231,
-                            "indent": 3,
-                            "parameters": [
-                                13,
-                                "Dryland_Camp_H8",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
                             ]
                         },
                         {
@@ -7531,6 +7833,18 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Reveal",
+                                "Reveal",
+                                {
+                                    "frames": "15"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
                                 "Dryland_Presentation",
                                 "ChoiceFocus",
                                 "ChoiceFocus",
@@ -7915,6 +8229,16 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 201,
                             "indent": 1,
                             "parameters": [
@@ -8122,6 +8446,16 @@
                                 {
                                     "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\"]"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
                             ]
                         },
                         {
@@ -8335,6 +8669,16 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 201,
                             "indent": 1,
                             "parameters": [
@@ -8542,6 +8886,16 @@
                                 {
                                     "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\"]"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
                             ]
                         },
                         {
@@ -8755,6 +9109,16 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 201,
                             "indent": 1,
                             "parameters": [
@@ -8962,6 +9326,16 @@
                                 {
                                     "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\"]"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
                             ]
                         },
                         {
@@ -9197,6 +9571,16 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 201,
                             "indent": 1,
                             "parameters": [
@@ -9404,6 +9788,16 @@
                                 {
                                     "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\"]"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
                             ]
                         },
                         {
@@ -9944,7 +10338,7 @@
                                 10,
                                 7,
                                 2,
-                                2
+                                0
                             ]
                         },
                         {

@@ -2751,6 +2751,18 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Reveal",
+                                "Reveal",
+                                {
+                                    "frames": "15"
+                                }
+                            ]
+                        },
+                        {
                             "code": 118,
                             "indent": 0,
                             "parameters": [
@@ -11205,6 +11217,16 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
+                        },
+                        {
                             "code": 201,
                             "indent": 1,
                             "parameters": [
@@ -11220,6 +11242,16 @@
                             "code": 411,
                             "indent": 0,
                             "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneTransitions",
+                                "Capture",
+                                "Capture",
+                                {}
+                            ]
                         },
                         {
                             "code": 201,

@@ -197,28 +197,28 @@
     ],
     "sounds": [
         {
-            "name": "Cursor3",
+            "name": "Dryland_UI_PaperFocus",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 50
         },
         {
-            "name": "Decision2",
+            "name": "Dryland_UI_LuteConfirm",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 60
         },
         {
-            "name": "Cancel2",
+            "name": "Dryland_UI_ParchmentClose",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 60
         },
         {
-            "name": "Buzzer1",
+            "name": "Dryland_UI_StringMuted",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 55
         },
         {
             "name": "Equip1",
@@ -227,16 +227,16 @@
             "volume": 90
         },
         {
-            "name": "Save2",
+            "name": "Dryland_UI_ParchmentClose",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 45
         },
         {
-            "name": "Load2",
+            "name": "Dryland_UI_ParchmentOpen",
             "pan": 0,
             "pitch": 100,
-            "volume": 90
+            "volume": 60
         },
         {
             "name": "Battle1",

@@ -2829,6 +2829,16 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Capture",
+                "Capture",
+                {}
+              ]
+            },
+            {
               "code": 235,
               "indent": 3,
               "parameters": [
@@ -3022,6 +3032,18 @@
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Reveal",
+                "Reveal",
+                {
+                  "frames": "18"
                 }
               ]
             },
@@ -3224,6 +3246,16 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Capture",
+                "Capture",
+                {}
+              ]
+            },
+            {
               "code": 235,
               "indent": 2,
               "parameters": [
@@ -3405,6 +3437,18 @@
               "indent": 2,
               "parameters": [
                 71
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 2,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Reveal",
+                "Reveal",
+                {
+                  "frames": "18"
+                }
               ]
             },
             {
@@ -3609,6 +3653,16 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Capture",
+                "Capture",
+                {}
+              ]
+            },
+            {
               "code": 235,
               "indent": 3,
               "parameters": [
@@ -3802,6 +3856,18 @@
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Reveal",
+                "Reveal",
+                {
+                  "frames": "18"
                 }
               ]
             },
@@ -4012,6 +4078,16 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Capture",
+                "Capture",
+                {}
+              ]
+            },
+            {
               "code": 235,
               "indent": 3,
               "parameters": [
@@ -4205,6 +4281,18 @@
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Reveal",
+                "Reveal",
+                {
+                  "frames": "18"
                 }
               ]
             },
@@ -4415,6 +4503,16 @@
               ]
             },
             {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Capture",
+                "Capture",
+                {}
+              ]
+            },
+            {
               "code": 235,
               "indent": 3,
               "parameters": [
@@ -4608,6 +4706,18 @@
                   "EasingType:str": "Linear",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
+                }
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 3,
+              "parameters": [
+                "Dryland_1_SceneTransitions",
+                "Reveal",
+                "Reveal",
+                {
+                  "frames": "18"
                 }
               ]
             },
