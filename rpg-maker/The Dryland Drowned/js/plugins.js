@@ -701,5 +701,11 @@ var $plugins =
             "Reunite": "Dryland_FinalReunite",
             "Destroy": "Dryland_FinalDestroy"
         }
+    },
+    {
+        "name": "Dryland_6_SacrificeStage",
+        "status": true,
+        "description": "Sacrifice focus and owned scene audio",
+        "parameters": {}
     }
 ];

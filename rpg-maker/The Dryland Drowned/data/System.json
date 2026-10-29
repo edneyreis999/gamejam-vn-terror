@@ -807,7 +807,13 @@
         "Social — active topic",
         "Social — displayed unit",
         "Camp — next grief",
-        "Camp — tone"
+        "Camp — tone",
+        "Sacrifício — nome da vítima",
+        "Sacrifício — tamanho do palco",
+        "Sacrifício — palco 1",
+        "Sacrifício — palco 2",
+        "Sacrifício — palco 3",
+        "Sacrifício — vítima persistida"
     ],
     "versionId": 85922657,
     "victoryMe": {

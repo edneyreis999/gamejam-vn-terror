@@ -26,7 +26,7 @@ canonicalCase('IT-057','native death locations are atomic immutable resumable an
  await browser.evaluate("PluginManager.callCommand(victimOwner,'Dryland_EventBridge','Action',{action:'SELECT_VICTIM',value:'H2'});");
  assert.equal((await browser.evaluate('$gameTemp._drylandLastRejection')).code,'stale_action');assert.deepEqual(await state(browser),committed);assert.equal(await browser.evaluate('deathWrites.length'),1);
  const deathBytes=await saveBytes(browser);await continueSave(browser);await deathReady(browser);assert.deepEqual(await state(browser),committed);assert.equal(await saveBytes(browser),deathBytes);
- for(let step=0;step<3&&(await state(browser)).phase==='death_result';step++){await pause(browser);await browser.press('Enter',13);}
+ for(let step=0;step<32&&(await state(browser)).phase==='death_result';step++){await pause(browser);await browser.press('Enter',13);}
  await browser.waitFor("$gameSystem._dryland.campaign.phase==='encounter_intro'&&$gameTemp._drylandPersistence.status==='saved'");await pause(browser);await readUntilChoices(browser,'approaches');
  await activate(browser,'approaches',4);await choices(browser,'formation');
  assert.deepEqual((await state(browser)).deathLocations.H1,context);const retreat=await state(browser);const retreatBytes=await saveBytes(browser);
@@ -37,7 +37,7 @@ canonicalCase('IT-057','native death locations are atomic immutable resumable an
  const finalFailure=replayUntil('final-sixth-total-loss',s=>s.phase==='sacrifice_choice'&&s.dungeonId==='final'&&s.position===6);
  assert.equal(finalFailure.deathLocations.H8,undefined);await victimChoices(browser,finalFailure);await activate(browser,'sacrifice',0);await deathReady(browser);
  const allDead=await state(browser);assert.deepEqual(allDead.deathLocations.H8,{routeId:'final',encounterId:'B3',encounterPosition:6,approachId:'B3-1'});assert.equal(allDead.deadHeroIds.length,8);
- for(let step=0;step<3&&(await state(browser)).phase==='death_result';step++){await pause(browser);await browser.press('Enter',13);}
+ for(let step=0;step<32&&(await state(browser)).phase==='death_result';step++){await pause(browser);await browser.press('Enter',13);}
  await browser.waitFor("$gameSystem._dryland.campaign.phase==='ending'&&$gameTemp._drylandPersistence.status==='saved'");await pause(browser);
  const terminal=await state(browser);await continueSave(browser);await pause(browser);assert.deepEqual(await state(browser),terminal);
  await finishPhase(browser,'ending');await memorialReady(browser);const rows=await pictureRows(browser);assert.deepEqual(rows.filter(r=>r.caption).map(r=>r.id),heroes);
