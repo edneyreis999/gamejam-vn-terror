@@ -12565,6 +12565,13 @@
                 ]
             },
             {
+                "code": 235,
+                "indent": 2,
+                "parameters": [
+                    2
+                ]
+            },
+            {
                 "code": 357,
                 "indent": 2,
                 "parameters": [
@@ -12677,6 +12684,13 @@
                 "indent": 2,
                 "parameters": [
                     "já salvo."
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 2,
+                "parameters": [
+                    2
                 ]
             },
             {
@@ -12795,6 +12809,13 @@
                 ]
             },
             {
+                "code": 235,
+                "indent": 2,
+                "parameters": [
+                    2
+                ]
+            },
+            {
                 "code": 357,
                 "indent": 2,
                 "parameters": [
@@ -12860,6 +12881,26 @@
                 "indent": 0,
                 "parameters": [
                     12,
+                    "$gameSystem._dryland.campaign.phase !== \"sacrifice_choice\""
+                ]
+            },
+            {
+                "code": 235,
+                "indent": 1,
+                "parameters": [
+                    2
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
                     "!$gameScreen.picture(50)?._drylandSacrifice"
                 ]
             },
@@ -12885,12 +12926,20 @@
                 "indent": 1,
                 "parameters": [
                     12,
+                    "$gameSystem._dryland.campaign.phase === \"sacrifice_choice\""
+                ]
+            },
+            {
+                "code": 111,
+                "indent": 2,
+                "parameters": [
+                    12,
                     "$gameVariables.value(32) === 'A1'"
                 ]
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A1_blur",
@@ -12906,12 +12955,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A2'"
@@ -12919,7 +12968,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A2_blur",
@@ -12935,12 +12984,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A3'"
@@ -12948,7 +12997,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A3_blur",
@@ -12964,12 +13013,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A4'"
@@ -12977,7 +13026,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A4_blur",
@@ -12993,12 +13042,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A5'"
@@ -13006,7 +13055,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A5_blur",
@@ -13022,12 +13071,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A6'"
@@ -13035,7 +13084,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A6_blur",
@@ -13051,12 +13100,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A7'"
@@ -13064,7 +13113,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A7_blur",
@@ -13080,12 +13129,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'A8'"
@@ -13093,7 +13142,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_A8_blur",
@@ -13109,12 +13158,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B1'"
@@ -13122,7 +13171,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B1_blur",
@@ -13138,12 +13187,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B2'"
@@ -13151,7 +13200,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B2_blur",
@@ -13167,12 +13216,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B3'"
@@ -13180,7 +13229,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B3_blur",
@@ -13196,12 +13245,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B4'"
@@ -13209,7 +13258,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B4_blur",
@@ -13225,12 +13274,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B5'"
@@ -13238,7 +13287,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B5_blur",
@@ -13254,12 +13303,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B6'"
@@ -13267,7 +13316,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B6_blur",
@@ -13283,12 +13332,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B7'"
@@ -13296,7 +13345,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B7_blur",
@@ -13312,12 +13361,12 @@
             },
             {
                 "code": 412,
-                "indent": 1,
+                "indent": 2,
                 "parameters": []
             },
             {
                 "code": 111,
-                "indent": 1,
+                "indent": 2,
                 "parameters": [
                     12,
                     "$gameVariables.value(32) === 'B8'"
@@ -13325,7 +13374,7 @@
             },
             {
                 "code": 231,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     2,
                     "Dryland_Encounter_B8_blur",
@@ -13338,6 +13387,11 @@
                     255,
                     0
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 2,
+                "parameters": []
             },
             {
                 "code": 412,

@@ -8,7 +8,7 @@ Aplicar boas práticas de romances de suspense e terror de grande alcance: show,
 
 `{NOME}` / `{NAME}` são marcadores editoriais, não escapes implementados. Obter o nome canônico da vítima mediante a consulta `heroName` do EventBridge; reservar uma variável livre após conferir o projeto, e usar `\V[ID]` no texto localizado. Não imprimir H1–H8 nem assumir que o ID da vítima é o nome ou um actor ID. O contexto `pendingOutcome.victimId` identifica a vítima; preservar sua disponibilidade durante a leitura. Textos finais em PT/EN em Languages.tsv; eventos apenas com `$[chave]`. As caixas abaixo são batidas editoriais: medir o encaixe na janela real; eventuais subdivisões mantêm cada cue somente na primeira parte pertinente.
 
-Entrada após a despedida canônica: busto escolhido em bravura, mesma posição, escala e enquadramento da seleção; outros bustos presentes ainda em medo. Não recriar o palco abruptamente. Sem placa de nome, câmera, flash ou troca automática para terror. Moldura permanece; áudio ambiente `05-opressivo` sem música. Não presumir três candidatos nem sobreviventes além de Ivaí.
+Entrada após a despedida canônica: busto escolhido em bravura, mesma posição, escala e enquadramento da seleção; outros bustos presentes ainda em medo. Não recriar o palco abruptamente. Sem placa de nome, câmera, flash ou troca automática para terror. Moldura permanece; áudio ambiente `05-opressivo` sem música. Não presumir três candidatos nem sobreviventes além de Rheed e Ivaí.
 
 Antes da caixa 3 de cada cena, retirar somente os demais bustos presentes: VN `Fade_OpacityTo` (`VN-C12`), PictureID = IDs efetivamente presentes exceto vítima, TargetOpacity = 0, Duration = 48; Wait nativo 48 frames. Pular se nenhum. Em A3 isso ocorre antes de sua caixa 3, como na referência aprovada. Não usar listas fixas que incluam ausentes ou a vítima.
 
@@ -50,27 +50,27 @@ Passagem existente: `death.a1.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** `sfx_a1_janela.ogg` na entrada.
 
-**PT:** A madeira range sob as mãos de {NOME}. Ivaí passa pela abertura. Do lado de fora, procura onde apoiar os pés; do lado de dentro, os calcanhares já não tocam o chão.
+**PT:** A madeira range sob as mãos de {NOME}. Rheed e Ivaí passam pela abertura. Do lado de fora, procuram onde apoiar os pés; do lado de dentro, os calcanhares já não tocam o chão.
 
-**EN:** Wood groans beneath {NAME}’s hands. Ivaí slips through the opening. Outside, he searches for a foothold; inside, the heels have already left the floor.
+**EN:** Wood groans beneath {NAME}’s hands. Rheed and Ivaí slip through the opening. Outside, they search for a foothold; inside, the heels have already left the floor.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} prende os dedos na moldura. Um deles se solta. Depois outro. A janela continua aberta o bastante para Ivaí alcançar o chão.
+**PT:** {NOME} prende os dedos na moldura. Um deles se solta. Depois outro. A janela continua aberta o bastante para Rheed e Ivaí alcançarem o chão.
 
-**EN:** {NAME} hooks their fingers around the frame. One slips free. Then another. The window stays open long enough for Ivaí to reach the ground.
+**EN:** {NAME} hooks their fingers around the frame. One slips free. Then another. The window stays open long enough for Rheed and Ivaí to reach the ground.
 
 
 ### Caixa 05
 
 **Áudio:** `sfx_a1_fecho.ogg` na entrada.
 
-**PT:** A janela bate. Ivaí olha para cima. Entre o vidro e a poeira, não há mais ninguém segurando a moldura. O vento levou {NOME}.
+**PT:** A janela bate. Rheed e Ivaí olham para cima. Entre o vidro e a poeira, não há mais ninguém segurando a moldura. O vento levou {NOME}.
 
-**EN:** The window slams. Ivaí looks up. Among the glass and dust, no one is holding the frame anymore. The wind has taken {NAME}.
+**EN:** The window slams. Rheed and Ivaí look up. Among the glass and dust, no one is holding the frame anymore. The wind has taken {NAME}.
 
 
 ## A2 — Tronco e estacas
@@ -109,9 +109,9 @@ Passagem existente: `death.a2.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} empurra mais uma vez. Ivaí arranca o tecido preso e cai do outro lado. Sob o tronco, os braços começam a ceder.
+**PT:** {NOME} empurra mais uma vez. Ivaí arranca o tecido preso. Rheed e Ivaí caem do outro lado. Sob o tronco, os braços começam a ceder.
 
-**EN:** {NAME} pushes once more. Ivaí tears the trapped cloth free and falls through. Beneath the trunk, the arms begin to give way.
+**EN:** {NAME} pushes once more. Ivaí tears the trapped cloth free. Rheed and Ivaí tumble through the opening. Beneath the trunk, the arms begin to give way.
 
 
 ### Caixa 05
@@ -213,9 +213,9 @@ Passagem existente: `death.a3.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** O pilão segura. Ivaí atravessa a passagem antes que o mecanismo consiga se desprender.
+**PT:** O pilão segura. Rheed e Ivaí atravessam a passagem antes que o mecanismo consiga se desprender.
 
-**EN:** The mortar holds. Ivaí crosses the passage before the mechanism can pull itself free.
+**EN:** The mortar holds. Rheed and Ivaí cross the passage before the mechanism can pull itself free.
 
 
 ### Caixa 11
@@ -236,9 +236,9 @@ Passagem existente: `death.a4.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** `sfx_a4_barras.ogg` na entrada.
 
-**PT:** As barras avançam. {NOME} vira o rosto; o ferro passa onde estava sua boca. A última abertura se estreita diante de Ivaí.
+**PT:** As barras avançam. {NOME} vira o rosto; o ferro passa onde estava sua boca. A última abertura se estreita diante de Rheed e Ivaí.
 
-**EN:** The bars close in. {NAME} turns away; iron passes where their mouth was. The last opening narrows before Ivaí.
+**EN:** The bars close in. {NAME} turns away; iron passes where their mouth was. The last opening narrows before Rheed and Ivaí.
 
 
 ### Caixa 02
@@ -254,27 +254,27 @@ Passagem existente: `death.a4.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí prende o ar para passar. {NOME} tenta firmar os pés. A sola desliza, deixa um risco no chão. A passagem perde mais um dedo de largura.
+**PT:** Rheed e Ivaí prendem o ar para passar. {NOME} tenta firmar os pés. A sola desliza, deixa um risco no chão. A passagem perde mais um dedo de largura.
 
-**EN:** Ivaí holds his breath to squeeze through. {NAME} tries to brace their feet. A sole slips, leaving a mark on the floor. The gap loses another finger’s width.
+**EN:** Rheed and Ivaí hold their breath to squeeze through. {NAME} tries to brace their feet. A sole slips, leaving a mark on the floor. The gap loses another finger’s width.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} recoloca o pé no mesmo risco. O ferro para por um instante. É o bastante para Ivaí puxar o último braço para fora.
+**PT:** {NOME} recoloca o pé no mesmo risco. O ferro para por um instante. É o bastante para Rheed e Ivaí terminarem de passar.
 
-**EN:** {NAME} plants their foot on the same mark. The iron stops for an instant. It is enough for Ivaí to pull his last arm free.
+**EN:** {NAME} plants their foot on the same mark. The iron stops for an instant. It is enough for Rheed and Ivaí to finish squeezing through.
 
 
 ### Caixa 05
 
 **Áudio:** `sfx_a4_fecho.ogg` na entrada.
 
-**PT:** As barras se encontram. O som atravessa a passagem vazia. Ivaí continua andando; atrás dele, {NOME} já não pode abrir espaço.
+**PT:** As barras se encontram. O som atravessa a passagem vazia. Rheed e Ivaí continuam andando; atrás deles, {NOME} já não pode abrir espaço.
 
-**EN:** The bars meet. The sound travels through the empty passage. Ivaí keeps walking; behind him, {NAME} can no longer make room.
+**EN:** The bars meet. The sound travels through the empty passage. Rheed and Ivaí keep walking; behind them, {NAME} can no longer make room.
 
 
 ## A5 — Registro e fogo
@@ -304,27 +304,27 @@ Passagem existente: `death.a5.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí entra na faixa molhada. A manga de {NOME} começa a escurecer junto ao registro. A mão não muda de lugar.
+**PT:** Rheed e Ivaí entram na faixa molhada. A manga de {NOME} começa a escurecer junto ao registro. A mão não muda de lugar.
 
-**EN:** Ivaí steps onto the wet strip. {NAME}’s sleeve begins to darken beside the tap. Their hand stays where it is.
+**EN:** Rheed and Ivaí step onto the wet strip. {NAME}’s sleeve begins to darken beside the tap. Their hand stays where it is.
 
 
 ### Caixa 04
 
 **Áudio:** `sfx_a5_cano.ogg` na entrada.
 
-**PT:** O cano engasga. {NOME} gira o registro até o fim. Sai um fio de água. Ivaí alcança a porta.
+**PT:** O cano engasga. {NOME} gira o registro até o fim. Sai um fio de água. Rheed e Ivaí alcançam a porta.
 
-**EN:** The pipe sputters. {NAME} turns the tap as far as it will go. A thread of water emerges. Ivaí reaches the door.
+**EN:** The pipe sputters. {NAME} turns the tap as far as it will go. A thread of water emerges. Rheed and Ivaí reach the door.
 
 
 ### Caixa 05
 
 **Áudio:** `sfx_a5_chamas.ogg` na entrada.
 
-**PT:** O fogo ocupa o caminho que a água deixava livre. Do outro lado, Ivaí ainda vê a mão de {NOME} no registro. Depois, só as chamas.
+**PT:** O fogo ocupa o caminho que a água deixava livre. Do outro lado, Rheed e Ivaí ainda veem a mão de {NOME} no registro. Depois, só as chamas.
 
-**EN:** Fire fills the path the water had kept clear. From the other side, Ivaí can still see {NAME}’s hand on the tap. Then only flames remain.
+**EN:** Fire fills the path the water had kept clear. From the other side, Rheed and Ivaí can still see {NAME}’s hand on the tap. Then only flames remain.
 
 
 ## A6 — Tronco e raízes
@@ -336,36 +336,36 @@ Passagem existente: `death.a6.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** `sfx_a6_raizes.ogg` na entrada.
 
-**PT:** As raízes apertam. Ivaí tenta levantar o pé e perde o equilíbrio. {NOME} acompanha com os olhos o nó que sobe pelas pernas até o tronco.
+**PT:** As raízes apertam. Rheed e Ivaí tentam erguer os pés e perdem o equilíbrio. {NOME} acompanha com os olhos o nó que sobe pelas pernas até o tronco.
 
-**EN:** The roots tighten. Ivaí tries to lift a foot and loses his balance. {NAME} follows the knot with their eyes, from the legs up to the trunk.
+**EN:** The roots tighten. Rheed and Ivaí try to lift their feet and lose their balance. {NAME} follows the knot with their eyes, from the legs up to the trunk.
 
 
 ### Caixa 02
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} encosta a palma na árvore. A casca se abre em torno dos dedos. A mão tenta recuar; a raiz ao redor do tornozelo de Ivaí aperta de novo.
+**PT:** {NOME} encosta a palma na árvore. A casca se abre em torno dos dedos. A mão tenta recuar; as raízes ao redor dos tornozelos de Rheed e Ivaí apertam de novo.
 
-**EN:** {NAME} places a palm against the tree. Bark opens around the fingers. The hand starts to pull back; the root around Ivaí’s ankle tightens again.
+**EN:** {NAME} places a palm against the tree. Bark opens around the fingers. The hand starts to pull back; the roots around Rheed and Ivaí’s ankles tighten again.
 
 
 ### Caixa 03
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} devolve a mão à abertura. Depois a outra. A madeira chega aos pulsos. Aos pés de Ivaí, o nó começa a se desfazer.
+**PT:** {NOME} devolve a mão à abertura. Depois a outra. A madeira chega aos pulsos. Aos pés de Rheed e Ivaí, o nó começa a se desfazer.
 
-**EN:** {NAME} returns the hand to the opening. Then the other. Wood reaches the wrists. At Ivaí’s feet, the knot begins to unravel.
+**EN:** {NAME} returns the hand to the opening. Then the other. Wood reaches the wrists. At Rheed and Ivaí’s feet, the knot begins to unravel.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** A casca sobe pelo peito de {NOME}. Ainda há espaço para virar o rosto na direção da saída. Ivaí se solta da última raiz.
+**PT:** A casca sobe pelo peito de {NOME}. Ainda há espaço para virar o rosto na direção da saída. Rheed e Ivaí se soltam das últimas raízes.
 
-**EN:** Bark climbs over {NAME}’s chest. There is still room to turn toward the exit. Ivaí pulls free of the last root.
+**EN:** Bark climbs over {NAME}’s chest. There is still room to turn toward the exit. Rheed and Ivaí pull free of the last roots.
 
 
 ### Caixa 05
@@ -395,27 +395,27 @@ Passagem existente: `death.a7.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} segura a boca do saco. O pé entra, sai, procura o chão outra vez. Atrás do tecido, Ivaí força uma passagem que não abre.
+**PT:** {NOME} segura a boca do saco. O pé entra, sai, procura o chão outra vez. Atrás do tecido, Rheed e Ivaí forçam uma passagem que não abre.
 
-**EN:** {NAME} grips the sack’s mouth. One foot goes in, comes out, searches for the floor again. Behind the fabric, Ivaí pushes at a passage that will not open.
+**EN:** {NAME} grips the sack’s mouth. One foot goes in, comes out, searches for the floor again. Behind the fabric, Rheed and Ivaí push at a passage that will not open.
 
 
 ### Caixa 03
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} coloca os dois pés dentro. O peso baixa a corrente; os sacos que bloqueiam a saída começam a subir. Ivaí se abaixa para passar.
+**PT:** {NOME} coloca os dois pés dentro. O peso baixa a corrente; os sacos que bloqueiam a saída começam a subir. Rheed e Ivaí se abaixam para passar.
 
-**EN:** {NAME} puts both feet inside. The weight lowers the chain; the sacks blocking the exit begin to rise. Ivaí ducks beneath them.
+**EN:** {NAME} puts both feet inside. The weight lowers the chain; the sacks blocking the exit begin to rise. Rheed and Ivaí duck beneath them.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** O saco deixa o chão. {NOME} segura a borda por dentro. A corrente segue para a prensa. Ivaí passa pelo último gancho.
+**PT:** O saco deixa o chão. {NOME} segura a borda por dentro. A corrente segue para a prensa. Rheed e Ivaí passam pelo último gancho.
 
-**EN:** The sack leaves the floor. {NAME} holds the edge from within. The chain moves toward the press. Ivaí passes the last hook.
+**EN:** The sack leaves the floor. {NAME} holds the edge from within. The chain moves toward the press. Rheed and Ivaí pass the last hook.
 
 
 ### Caixa 05
@@ -454,27 +454,27 @@ Passagem existente: `death.a8.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Pó escorre pelo rosto de {NOME}. A boca se abre para respirar e se fecha contra a poeira. Ivaí atravessa por baixo da madeira inclinada.
+**PT:** Pó escorre pelo rosto de {NOME}. A boca se abre para respirar e se fecha contra a poeira. Rheed e Ivaí atravessam por baixo da madeira inclinada.
 
-**EN:** Dust streams over {NAME}’s face. Their mouth opens to breathe, then closes against the dust. Ivaí crosses beneath the sloping wood.
+**EN:** Dust streams over {NAME}’s face. Their mouth opens to breathe, then closes against the dust. Rheed and Ivaí cross beneath the sloping wood.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} levanta o joelho. A viga sobe só o necessário. Ivaí alcança a borda da passagem; atrás dele, a madeira começa a partir.
+**PT:** {NOME} levanta o joelho. A viga sobe só o necessário. Rheed e Ivaí alcançam a borda da passagem; atrás deles, a madeira começa a partir.
 
-**EN:** {NAME} lifts their knee. The beam rises just enough. Ivaí reaches the edge of the passage; behind him, the wood begins to split.
+**EN:** {NAME} lifts their knee. The beam rises just enough. Rheed and Ivaí reach the edge of the passage; behind them, the wood begins to split.
 
 
 ### Caixa 05
 
 **Áudio:** `sfx_a8_desabamento.ogg` na entrada.
 
-**PT:** O teto desaba. A poeira atravessa a saída e cobre as mãos de Ivaí. Quando ele consegue olhar para trás, as telhas já esconderam {NOME}.
+**PT:** O teto desaba. A poeira atravessa a saída e cobre as mãos de Rheed e Ivaí. Quando eles conseguem olhar para trás, as telhas já esconderam {NOME}.
 
-**EN:** The roof collapses. Dust surges through the exit and coats Ivaí’s hands. When he can look back, the tiles have already hidden {NAME}.
+**EN:** The roof collapses. Dust surges through the exit and coats Rheed and Ivaí’s hands. When they can look back, the tiles have already hidden {NAME}.
 
 
 ## B1 — Voz do casarão
@@ -504,27 +504,27 @@ Passagem existente: `death.b1.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** “{NOME}.” O próprio nome atravessa o cômodo antes que a voz se apague. Ivaí inspira e consegue ouvir a própria respiração.
+**PT:** “{NOME}.” O próprio nome atravessa o cômodo antes que a voz se apague. Rheed e Ivaí inspiram e conseguem ouvir a própria respiração.
 
-**EN:** “{NAME}.” Their own name crosses the room before the voice dies. Ivaí breathes in and can hear himself breathing.
+**EN:** “{NAME}.” Their own name crosses the room before the voice dies. Rheed and Ivaí breathe in and can hear themselves breathing.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** A boca de {NOME} se move outra vez. O som vem da parede. Ivaí olha para a porta agora aberta.
+**PT:** A boca de {NOME} se move outra vez. O som vem da parede. Rheed e Ivaí olham para a porta agora aberta.
 
-**EN:** {NAME}’s mouth moves again. The sound comes from the wall. Ivaí looks toward the door, now open.
+**EN:** {NAME}’s mouth moves again. The sound comes from the wall. Rheed and Ivaí look toward the door, now open.
 
 
 ### Caixa 05
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí cruza a soleira. Atrás dele, a voz de {NOME} percorre os cômodos. Já não encontra uma boca de onde sair.
+**PT:** Rheed e Ivaí cruzam a soleira. Atrás deles, a voz de {NOME} percorre os cômodos. Já não encontra uma boca de onde sair.
 
-**EN:** Ivaí crosses the threshold. Behind him, {NAME}’s voice travels through the rooms. It can no longer find a mouth to emerge from.
+**EN:** Rheed and Ivaí cross the threshold. Behind them, {NAME}’s voice travels through the rooms. It can no longer find a mouth to emerge from.
 
 
 Restrição: nome pronunciado antes da perda da própria voz; urgência somente narrativa, sem cronômetro e sem limitar elegibilidade. Sem dublagem do nome variável.
@@ -548,9 +548,9 @@ Passagem existente: `death.b2.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} tenta dar um passo para o lado. A fila acompanha. Ivaí recua e encontra o mesmo cerco de rostos imóveis.
+**PT:** {NOME} tenta dar um passo para o lado. A fila acompanha. Rheed e Ivaí recuam e encontram o mesmo cerco de rostos imóveis.
 
-**EN:** {NAME} tries to step aside. The line follows. Ivaí retreats and meets the same ring of motionless faces.
+**EN:** {NAME} tries to step aside. The line follows. Rheed and Ivaí retreat and meet the same ring of motionless faces.
 
 
 ### Caixa 03
@@ -566,18 +566,18 @@ Passagem existente: `death.b2.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** `sfx_b2_passos.ogg` na entrada.
 
-**PT:** Os mortos retomam o passo. {NOME} vai com eles. Ivaí encontra chão livre onde a fila o cercava.
+**PT:** Os mortos retomam o passo. {NOME} vai com eles. Rheed e Ivaí encontram chão livre onde a fila os cercava.
 
-**EN:** The dead resume walking. {NAME} goes with them. Ivaí finds open ground where the line had surrounded him.
+**EN:** The dead resume walking. {NAME} goes with them. Rheed and Ivaí find open ground where the line had surrounded them.
 
 
 ### Caixa 05
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí fica à margem do caminho. A vela de {NOME} desaparece entre as outras. Nenhum passo volta.
+**PT:** Rheed e Ivaí ficam à margem do caminho. A vela de {NOME} desaparece entre as outras. Nenhum passo volta.
 
-**EN:** Ivaí stays beside the path. {NAME}’s candle disappears among the others. No footsteps return.
+**EN:** Rheed and Ivaí stay beside the path. {NAME}’s candle disappears among the others. No footsteps return.
 
 
 ## B3 — Lembrança
@@ -625,9 +625,9 @@ Passagem existente: `death.b3.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí se afasta e ainda lembra o caminho. Dentro da lembrança, {NOME} permanece no mesmo instante. Ele não consegue trazer esse instante consigo.
+**PT:** Rheed e Ivaí se afastam e ainda lembram o caminho. Dentro da lembrança, {NOME} permanece no mesmo instante. Eles não conseguem trazer esse instante consigo.
 
-**EN:** Ivaí steps away and still remembers the way. Within the memory, {NAME} remains in the same instant. He cannot bring that instant with him.
+**EN:** Rheed and Ivaí step away and still remember the way. Within the memory, {NAME} remains in the same instant. They cannot bring that instant with them.
 
 
 Restrição: não definir qual é a lembrança compartilhada nem inventar passado comum específico. A ausência de SE novo é intencional.
@@ -660,9 +660,9 @@ Passagem existente: `death.b4.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** “Eu assumo.” {NOME} precisa repetir, desta vez sem desviar os olhos. A voz chama do fundo da mata. As raízes soltam o caminho de Ivaí.
+**PT:** “Eu assumo.” {NOME} precisa repetir, desta vez sem desviar os olhos. A voz chama do fundo da mata. As raízes soltam o caminho de Rheed e Ivaí.
 
-**EN:** “I’ll take it on.” {NAME} has to repeat it, this time without looking away. The voice calls from deep in the forest. The roots release Ivaí’s path.
+**EN:** “I’ll take it on.” {NAME} has to repeat it, this time without looking away. The voice calls from deep in the forest. The roots release Rheed and Ivaí’s path.
 
 
 ### Caixa 04
@@ -678,9 +678,9 @@ Passagem existente: `death.b4.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** `sfx_b4_fecho.ogg` na entrada.
 
-**PT:** Os troncos se aproximam. Ivaí já está do lado de fora quando a última fresta some. {NOME} não retorna por ela.
+**PT:** Os troncos se aproximam. Rheed e Ivaí já estão do lado de fora quando a última fresta some. {NOME} não retorna por ela.
 
-**EN:** The trunks draw together. Ivaí is already outside when the last gap disappears. {NAME} does not return through it.
+**EN:** The trunks draw together. Rheed and Ivaí are already outside when the last gap disappears. {NAME} does not return through it.
 
 
 ## B5 — Espelho vazio
@@ -719,9 +719,9 @@ Passagem existente: `death.b5.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} atravessa. O último pé abandona o chão. Ivaí vê os outros reflexos voltarem a acompanhar cada movimento.
+**PT:** {NOME} atravessa. O último pé abandona o chão. Rheed e Ivaí veem os outros reflexos voltarem a acompanhar cada movimento.
 
-**EN:** {NAME} steps through. The last foot leaves the floor. Ivaí watches the other reflections begin matching every movement again.
+**EN:** {NAME} steps through. The last foot leaves the floor. Rheed and Ivaí watch the other reflections begin matching every movement again.
 
 
 ### Caixa 05
@@ -742,9 +742,9 @@ Passagem existente: `death.b6.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí tenta respirar e se dobra sobre a borda do poço. Não há água no chão. {NOME} abre a boca, mas o ar também não entra.
+**PT:** Rheed e Ivaí tentam respirar e se dobram sobre a borda do poço. Não há água no chão. {NOME} abre a boca, mas o ar também não entra.
 
-**EN:** Ivaí tries to breathe and doubles over the well’s edge. There is no water on the ground. {NAME} opens their mouth, but air will not enter either.
+**EN:** Rheed and Ivaí try to breathe and double over the well’s edge. There is no water on the ground. {NAME} opens their mouth, but air will not enter either.
 
 
 ### Caixa 02
@@ -769,18 +769,18 @@ Passagem existente: `death.b6.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Do fundo, {NOME} responde ao canto com o pouco ar que resta. Ivaí prende as mãos na borda. A resposta termina. A canção também.
+**PT:** Do fundo, {NOME} responde ao canto com o pouco ar que resta. Rheed e Ivaí prendem as mãos na borda. A resposta termina. A canção também.
 
-**EN:** From the bottom, {NAME} answers the song with what little air remains. Ivaí grips the rim. The answer ends. So does the song.
+**EN:** From the bottom, {NAME} answers the song with what little air remains. Rheed and Ivaí grip the rim. The answer ends. So does the song.
 
 
 ### Caixa 05
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí consegue respirar. Olha para o fundo e espera a mecha se mover. Ela continua estendida. {NOME} não sobe.
+**PT:** Rheed e Ivaí conseguem respirar. Olham para o fundo e esperam a mecha se mover. Ela continua estendida. {NOME} não sobe.
 
-**EN:** Ivaí can breathe. He looks down and waits for the lock of hair to move. It stays stretched out. {NAME} does not climb back up.
+**EN:** Rheed and Ivaí can breathe. They look down and wait for the lock of hair to move. It stays stretched out. {NAME} does not climb back up.
 
 
 Restrição: canto e resposta permanecem narrados. Não gerar canção contínua que teria de cessar no meio da caixa 4. A ausência de SE novo é intencional.
@@ -813,27 +813,27 @@ Passagem existente: `death.b7.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** {NOME} escreve o próprio nome no tecido. Uma letra. Depois outra. A mortalha afrouxa sobre Ivaí e aperta ao redor da mão que escreve.
+**PT:** {NOME} escreve o próprio nome no tecido. Uma letra. Depois outra. A mortalha afrouxa sobre Rheed e Ivaí e aperta ao redor da mão que escreve.
 
-**EN:** {NAME} writes their own name on the cloth. One letter. Then another. The shroud loosens over Ivaí and tightens around the writing hand.
+**EN:** {NAME} writes their own name on the cloth. One letter. Then another. The shroud loosens over Rheed and Ivaí and tightens around the writing hand.
 
 
 ### Caixa 04
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Falta o último traço. {NOME} o termina. Ivaí encontra uma abertura junto ao chão e se arrasta até ela.
+**PT:** Falta o último traço. {NOME} o termina. Rheed e Ivaí encontram uma abertura junto ao chão e se arrastam até ela.
 
-**EN:** One last stroke remains. {NAME} completes it. Ivaí finds an opening near the ground and crawls toward it.
+**EN:** One last stroke remains. {NAME} completes it. Rheed and Ivaí find an opening near the ground and crawl toward it.
 
 
 ### Caixa 05
 
 **Áudio:** `sfx_b7_rasgo.ogg` na entrada.
 
-**PT:** O tecido se rasga. Ivaí cai para fora. A abertura se fecha em torno de {NOME}; por um instante, os dedos ainda marcam o pano por dentro.
+**PT:** O tecido se rasga. Rheed e Ivaí caem para fora. A abertura se fecha em torno de {NOME}; por um instante, os dedos ainda marcam o pano por dentro.
 
-**EN:** The cloth tears. Ivaí falls free. The opening closes around {NAME}; for an instant, the fingers still press their shape into the cloth from within.
+**EN:** The cloth tears. Rheed and Ivaí fall free. The opening closes around {NAME}; for an instant, the fingers still press their shape into the cloth from within.
 
 
 ## B8 — Boca da casa
@@ -854,9 +854,9 @@ Passagem existente: `death.b8.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** O chamado vem da abertura. {NOME} procura outra saída. Sob o telhado há uma fresta, mas as paredes não deixam Ivaí alcançá-la.
+**PT:** O chamado vem da abertura. {NOME} procura outra saída. Sob o telhado há uma fresta, mas as paredes não deixam Rheed e Ivaí passar por ela.
 
-**EN:** The call comes from the opening. {NAME} searches for another way out. There is a gap beneath the roof, but the walls keep Ivaí from reaching it.
+**EN:** The call comes from the opening. {NAME} searches for another way out. There is a gap beneath the roof, but the walls keep Rheed and Ivaí from reaching it.
 
 
 ### Caixa 03
@@ -872,15 +872,15 @@ Passagem existente: `death.b8.context`. Entrada e saída conforme contrato acima
 
 **Áudio:** Sem novo efeito.
 
-**PT:** Ivaí alcança a fresta. Antes de passar, olha para baixo. {NOME} ainda está na abertura, com a mão apoiada onde deveria haver um batente.
+**PT:** Rheed e Ivaí alcançam a fresta. Antes de passar, olham para baixo. {NOME} ainda está na abertura, com a mão apoiada onde deveria haver um batente.
 
-**EN:** Ivaí reaches the gap. Before passing through, he looks down. {NAME} is still in the opening, one hand resting where a doorframe should be.
+**EN:** Rheed and Ivaí reach the gap. Before passing through, they look down. {NAME} is still in the opening, one hand resting where a doorframe should be.
 
 
 ### Caixa 05
 
 **Áudio:** `sfx_b8_boca.ogg` na entrada.
 
-**PT:** A boca se fecha. Quando Ivaí olha de novo, só há parede. Não existe mais uma porta pela qual {NOME} possa voltar.
+**PT:** A boca se fecha. Quando Rheed e Ivaí olham de novo, só há parede. Não existe mais uma porta pela qual {NOME} possa voltar.
 
-**EN:** The mouth closes. When Ivaí looks again, there is only wall. There is no longer a door through which {NAME} can return.
+**EN:** The mouth closes. When Rheed and Ivaí look again, there is only wall. There is no longer a door through which {NAME} can return.
