@@ -18,7 +18,7 @@ export class DirectedNativePlayer {
       const scene = window.SceneManager?._scene;
       const message = scene?._messageWindow, choices = scene?._choiceListWindow;
       return { text: window.TextManager?.parseLocalizedText(window.$gameMessage?.allText() || '') || '',
-        labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
+        labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/\x1bFONTCHANGE<[^>]*>/gi, '').replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
         kind: window.$gameMessage?._drylandChoiceFocus?.key || 'title',
         scrolling: !!scene?._scrollTextWindow?._text,
         active: !!choices?.isOpenAndActive(), index: choices?.index(),
@@ -42,7 +42,7 @@ export class DirectedNativePlayer {
         return { error, auto, fast, visible,
           autoForwardCount,
           value: { text: window.TextManager?.parseLocalizedText(window.$gameMessage?.allText() || '') || '',
-            labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
+            labels: (choices?._list || []).map(item => choices.convertEscapeCharacters(item.name).replace(/\x1bFONTCHANGE<[^>]*>/gi, '').replace(/<[^>]*>/g, '').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g, ' ').trim()),
             kind: window.$gameMessage?._drylandChoiceFocus?.key || 'title',
             scrolling: !!scene?._scrollTextWindow?._text,
             active: !!choices?.isOpenAndActive(), index: choices?.index(),
@@ -107,7 +107,7 @@ export class DirectedNativePlayer {
     assert.equal(await this.context.read('choice-eligibility',i=>SceneManager._scene._choiceListWindow._list[i].enabled,index),true,'Choice must be eligible: '+label);
     if (mouse) {
       const point = await this.context.read('visible-choice-geometry', target => {
-        const item = SceneManager._scene._choiceListWindow._list.find(item => SceneManager._scene._choiceListWindow.convertEscapeCharacters(item.name).replace(/<[^>]*>/g,'').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim() === target);
+        const item = SceneManager._scene._choiceListWindow._list.find(item => SceneManager._scene._choiceListWindow.convertEscapeCharacters(item.name).replace(/\x1bFONTCHANGE<[^>]*>/gi,'').replace(/<[^>]*>/g,'').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim() === target);
         const raw = item.name;
         const binding = /<Bind Picture: (\d+)>/.exec($gameMessage.choices()[item.ext]);
         const scene = SceneManager._scene;

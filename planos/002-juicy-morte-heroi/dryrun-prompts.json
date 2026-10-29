@@ -1,0 +1,97 @@
+{
+  "status": "dry-run visual; aguardando crítica; jogo não alterado",
+  "tool": "image_gen built-in",
+  "export": {
+    "mockups": "1280x720; exportados por sips a partir das composições geradas",
+    "busts": "PNG RGBA; dimensões iguais dentro de cada par"
+  },
+  "designTargets": {
+    "frameOpacity": 0.55,
+    "unfocusedBrightness": 0.55,
+    "focusScale": 1.05,
+    "note": "Valores de direção para geração dos mockups, não medições de parâmetros implementados."
+  },
+  "interaction": "Bravura ao focar por mouse/teclado; terror ao perder foco. Confirmação mantém sacrifício imediato.",
+  "audio": "05-opressivo fornecido: previsto como único áudio da cena. Não integrado nem avaliado pelos prints.",
+  "phrases": {
+    "Gorvak": "Ainda tenho medo. Ainda estou de pé. Passem.",
+    "Elowen": "Está olhando para mim? Ótimo. Vocês, corram.",
+    "Griznik": "Tem uma saída. Não é para mim, mas tem."
+  },
+  "prompts": {
+    "elowenMedoResultPrompt": "Create ONE transparent PNG waist-up character bust: ELOWEN, TERRIFIED. Reference is the exact character to preserve: lean adult elf huntress, long pointed ears, tied-back light hair with loose strands framing face, travel shirt with rolled sleeves, leather straps and bracers, bow and quiver. Keep her original face and outfit, and original hand-drawn black ink lines and crosshatching with flat parchment beige / muted sepia coloring. Not realistic painting, not redesigned armor. Her eyes are wide, searching for escape slightly to the side, inner brows raised, mouth parted with a held breath, shoulders tense. One hand defensively held near chest, other gripping bow near torso. Real palpable fear, not exaggerated comedy. Portrait composition waist-up, fully contained head, ears, arms and hands, transparent background actual alpha. No text, frame, background, blood or other characters. This will be a matched terror/bravery pair: stable three-quarter frontal camera and clear silhouette.",
+    "griznikMedoResultPrompt": "Create ONE transparent PNG waist-up character bust: GRIZNIK, TERRIFIED. Preserve exact identity of supplied reference: skinny adult goblin carpenter, long pointed nose and ears, large expressive eyes, tousled short hair, goggles on forehead, work vest with ruler and pencil in pocket, rolled sleeves and wrist wraps. Keep original scratchy hand-drawn black ink outlines and hatching, flat parchment beige sepia fill. No green skin, no realistic painting, no redesigned costume. Eyes wide darting for a solution, raised inner brows, worried half-open mouth, slightly hunched protective posture. Hands tense and held near torso, one grips a short carpenter tool, no suitcase. Believable terror, not comedy. Waist-up portrait with head, ears, shoulders and hands fully contained with margin. Actual transparent alpha background, no background, text, framing, blood or other characters. Matched-pair asset to later change fear to bravery with same framing.",
+    "gorvakBravuraResultPrompt": "Edit this exact transparent Gorvak dwarf bust to its BRAVERY state. Preserve the identical canvas size, head and torso position, silhouette, camera, scale, hairstyle, braided beard, hammer position and grip, clothing and scratchy black-ink parchment sepia art. Change primarily the facial expression: eyebrows lower into firm determination, eyes focused straight toward danger, mouth closed in resolute tight line, chin subtly firm. He is overcoming fear to protect others, not smiling or triumphant or angry. Keep both hands exactly where they are on the hammer. Avoid changing anatomy or framing. Keep actual transparent background. Remove any tiny stray colored pixels near the bottom edge. No text, watermark, backdrop or other characters.",
+    "elowenBravuraResultPrompt": "Edit this exact transparent Elowen elf huntress bust to its BRAVERY state. Preserve identical canvas size, character placement and scale, head position, long ears, hairstyle, bow and quiver, clothes and original scratchy black-ink parchment sepia art. Change her facial expression from fear into defiant courageous resolve: steady focused eyes directed toward danger, brows firm, mouth closed with no victory smile, head held confidently. The hand near chest becomes subtly purposeful rather than recoiling, while preserving its location and silhouette. Keep bow hand and bow stationary. She acts despite fear, not an invulnerable superhero. No large body pose change. Actual transparent background, no text, watermark, backdrop or new objects. Remove tiny stray colored pixels at bottom.",
+    "griznikBravuraResultPrompt": "Edit this exact transparent Griznik goblin carpenter bust to BRAVERY state. Preserve identical canvas size, head location and scale, long ears and nose, goggles, hair, vest with ruler and pencil, chisel in hand, original scratchy black ink and flat parchment sepia fills. Change fear into practical determined courage: focused steady eyes, firm brows, mouth closed or slightly parted as giving instructions, no smile. Free hand close to his torso now subtly extends index finger to indicate a route, without changing overall silhouette or framing. Keep tool hand and shoulders in the same positions. Adult goblin doing what must be done despite fear. Actual transparent background. Remove the small stray pale stamp at lower right and any colored edge specks. No letters, signature, watermark, frame, background or new objects.",
+    "griznikMedoCleanPrompt": "Precise cleanup edit only. Remove the small detached pale rectangular stamp at bottom right of this transparent PNG and any stray colored pixels outside the character silhouette. Preserve the terrified goblin drawing EXACTLY including facial expression, clothing, hands, tool, color, framing, canvas size and position. Keep genuine transparent alpha background. Do not draw any new elements or letters. Do not alter facial expression.",
+    "mockup01Prompt": "Create a polished full-screen 16:9 visual-novel GAME UI MOCKUP, EXACT canvas 1280 x 720 pixels. Composite the FIVE attached images with strict fidelity. Image 1 is Gorvak BRAVE (left), image 2 is Elowen TERRIFIED (middle), image 3 is Griznik TERRIFIED (right). Image 4 is the existing blurred sepia encounter background: fill canvas and darken by about 65%, retain recognizable faint ruined architectural shapes. Image 5 is the PROVIDED red blood-splatter BORDER with transparent center: apply same border around all four screen edges at 55% opacity, without turning its transparent center black. No additional blood or gore. Composition: three large waist-up busts side by side centered near x=250,640,1030, feet never visible, head tops around y=90 and torso bottoms near y=565, preserve proportions and authentic faces, no rectangular cards or frames around characters. Keep all faces and ears inside canvas and unobscured. Gorvak is focused: original bright warm sepia, subtle warm rim glow, 5% larger. Elowen and Griznik are dimmed to 55% brightness, but their terror remains clearly visible. Their expressions MUST match source images. Place only three elegant, legible pale parchment serif names underneath their respective busts at about y=585: 'GORVAK', 'ELOWEN', 'GRIZNIK'. Gorvak name is warmer and slightly brighter; small restrained warm underline below it as focus indicator. Lower area y=610..680 contains one understated dark translucent dialogue strip, no ornate border. Center this exact single-line Portuguese sentence in readable warm ivory serif type, with no quotation marks: 'Ainda tenho medo. Ainda estou de pé. Passem.' Ensure accents correct. No heading at top, no instruction label, no buttons, no HUD, no timers, no cursor, no watermark, no tiny labels. Serious oppressive dark fantasy atmosphere, ink-and-parchment characters must remain recognizable and not be repainted photorealistically. Fixed layout for subsequent versions: only focused character, its brightness/expression and quoted sentence will change.",
+    "mockup02Prompt": "Edit the FIRST image game scene into the ELOWEN FOCUS state. This is the same UI scene, not a redesign. Preserve camera, background, provided blood border, positions of all three busts, all three names, bottom dialogue strip and typography. Use image 2 as exact Gorvak terrified face reference; replace his brave expression with that terrified expression and dim Gorvak to the same brightness as unfocused Griznik. Use image 3 as exact Elowen bravery bust reference; change only Elowen's expression to it and make her the bright warm sepia focused character with subtle rim glow, slightly enlarged 5%. Griznik on right stays terrified and dimmed, exactly as in first scene. Move the small gold name underline from GORVAK to ELOWEN. Replace entire bottom sentence with EXACT Portuguese text: 'Está olhando para mim? Ótimo. Vocês, corram.' Preserve accents and punctuation, centered on a single line in same readable serif. No title, new words, button, timer or UI. Keep actual ink drawing identity and original clothing. Frame must stay the same around every edge and never cover faces. Landscape 16:9 output, preferred 1280x720.",
+    "mockup03Prompt": "Edit the FIRST image game scene into the GRIZNIK FOCUS state. Same UI scene, no redesign: preserve exact camera, background, provided blood border, positions of all three busts, all three names, bottom dialogue strip and typography. Use image 2 as exact Gorvak terrified face reference; replace his brave expression with terrified expression and dim Gorvak to the same brightness as unfocused Elowen. Elowen in middle stays terrified and dimmed exactly as first scene. Use image 3 as exact Griznik bravery reference; change his face and free hand to that image's focused determined expression and pointing gesture, make him bright warm sepia with subtle warm rim glow, 5% enlarged. Move small gold name underline from GORVAK to GRIZNIK. Replace entire bottom sentence with EXACT Portuguese text: 'Tem uma saída. Não é para mim, mas tem.' Center in a single line same readable serif font, correct accents. No other words, no title, button, timer or new UI. Keep ink-art identities and original clothing. Border identical, faces unobscured. Landscape 16:9 output, preferred 1280x720.",
+    "mockup03CorrectionPrompt": "Make ONE localized correction to the FIRST image, which is a complete visual novel screenshot mockup. ONLY fix the LEFT dwarf GORVAK facial expression: he must be TERRIFIED exactly as shown on Gorvak in the SECOND reference scene. Transfer that same wide terrified eyes, raised inner brows and OPEN mouth with clenched visible teeth, while retaining his dim unfocused lighting. The current closed-mouth stern expression is WRONG: the mouth MUST clearly show teeth like in image 2. Keep every other region of image 1 unchanged: Griznik on right stays bright, brave and pointing; Elowen stays dim and scared; their poses, all names, gold underline under Griznik, border, background, and bottom sentence 'Tem uma saída. Não é para mim, mas tem.' remain exactly as image 1. No extra text, no redesign, no change to relative sizes or layout. 16:9 scene.",
+    "gorvakMedoPrompt": "Create ONE transparent PNG character bust asset for a dark fantasy visual novel: GORVAK, TERRIFIED state. Edit the reference character preserving his exact recognizable identity, stocky dwarf anatomy, pale swept-back hair, large braided moustache and beard, leather apron and forge hammer. Match reference art exactly: hand drawn black ink contours and scratchy hatching, flat muted parchment-beige sepia fills, NOT photorealistic, NOT colorful digital painting. Crop to waist-up portrait; all head, shoulders and hands fully inside frame, torso ends at bottom. Hammer held close, eyes widened with credible adult fear, raised inner brows, clenched jaw, tense shoulders, protective stance even while terrified. No comic screaming. Transparent background with actual alpha, no white background, no checkerboard, no text, no frame, no additional characters, no blood or wounds. Canvas portrait, leave clear margin above hair and around arms. This is one of a matched pair; keep frontal three-quarter presentation suitable for replacing only the expression in a UI."
+  },
+  "additionalHeroes": [
+    {
+      "name": "seraphina",
+      "state": "medo",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-cb46df0f-5465-4d94-9760-6c4fc1246edd.png",
+      "prompt": "Create a single waist-up TERRIFIED bust of seraphina, the exact character in reference. Preserve identity, species, gender, hairstyle, costume and tools, black ink hatching and flat parchment sepia fill. Large readable fearful eyes, raised inner brows, tense mouth and hands, protective recoiling shoulders. Adult believable fear, not comedy. Keep head, ears, shoulders and hands fully within canvas, no legs. Transparent alpha background, no text, watermark or signature. Preserve reference design, not photorealistic."
+    },
+    {
+      "name": "seraphina",
+      "state": "bravura",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-a5cc960a-81a5-4d1c-8b0a-bbe7ce55d6b7.png",
+      "prompt": "Edit this exact seraphina bust into BRAVERY. Preserve canvas dimensions, head position, scale, silhouette, hands, equipment and sepia ink drawing exactly. Change fearful face into steady courageous determination: firm brows, focused eyes, controlled closed mouth, no smile. Courage despite fear, protective resolve. Do not redesign character. Transparent alpha, no background, text or signature. Remove stray colored edge pixels."
+    },
+    {
+      "name": "bimbren",
+      "state": "medo",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-64580c85-f31c-43a8-b082-6e53026e145b.png",
+      "prompt": "Create a single waist-up TERRIFIED bust of bimbren, the exact character in reference. Preserve identity, species, gender, hairstyle, costume and tools, black ink hatching and flat parchment sepia fill. Large readable fearful eyes, raised inner brows, tense mouth and hands, protective recoiling shoulders. Adult believable fear, not comedy. Keep head, ears, shoulders and hands fully within canvas, no legs. Transparent alpha background, no text, watermark or signature. Preserve reference design, not photorealistic."
+    },
+    {
+      "name": "bimbren",
+      "state": "bravura",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-5b9111ab-c947-4155-b046-4cd60d539e3b.png",
+      "prompt": "Edit this exact bimbren bust into BRAVERY. Preserve canvas dimensions, head position, scale, silhouette, hands, equipment and sepia ink drawing exactly. Change fearful face into steady courageous determination: firm brows, focused eyes, controlled closed mouth, no smile. Courage despite fear, protective resolve. Do not redesign character. Transparent alpha, no background, text or signature. Remove stray colored edge pixels."
+    },
+    {
+      "name": "liora",
+      "state": "medo",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-583d5472-de64-4dc8-9842-a9e05b3731fb.png",
+      "prompt": "Create a single waist-up TERRIFIED bust of liora, the exact character in reference. Preserve identity, species, gender, hairstyle, costume and tools, black ink hatching and flat parchment sepia fill. Large readable fearful eyes, raised inner brows, tense mouth and hands, protective recoiling shoulders. Adult believable fear, not comedy. Keep head, ears, shoulders and hands fully within canvas, no legs. Transparent alpha background, no text, watermark or signature. Preserve reference design, not photorealistic."
+    },
+    {
+      "name": "liora",
+      "state": "bravura",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-bb89f1cc-1b42-44d7-9478-eb65a56e2ef6.png",
+      "prompt": "Edit this exact liora bust into BRAVERY. Preserve canvas dimensions, head position, scale, silhouette, hands, equipment and sepia ink drawing exactly. Change fearful face into steady courageous determination: firm brows, focused eyes, controlled closed mouth, no smile. Courage despite fear, protective resolve. Do not redesign character. Transparent alpha, no background, text or signature. Remove stray colored edge pixels."
+    },
+    {
+      "name": "vaelith",
+      "state": "medo",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-450b8ab8-b118-40c7-95ea-126f00f9b2be.png",
+      "prompt": "Create a single waist-up TERRIFIED bust of vaelith, the exact character in reference. Preserve identity, species, gender, hairstyle, costume and tools, black ink hatching and flat parchment sepia fill. Large readable fearful eyes, raised inner brows, tense mouth and hands, protective recoiling shoulders. Adult believable fear, not comedy. Keep head, ears, shoulders and hands fully within canvas, no legs. Transparent alpha background, no text, watermark or signature. Preserve reference design, not photorealistic."
+    },
+    {
+      "name": "vaelith",
+      "state": "bravura",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-97c0c73c-2e5d-4b9f-8dfe-5bb748da2eb7.png",
+      "prompt": "Edit this exact vaelith bust into BRAVERY. Preserve canvas dimensions, head position, scale, silhouette, hands, equipment and sepia ink drawing exactly. Change fearful face into steady courageous determination: firm brows, focused eyes, controlled closed mouth, no smile. Courage despite fear, protective resolve. Do not redesign character. Transparent alpha, no background, text or signature. Remove stray colored edge pixels."
+    },
+    {
+      "name": "draska",
+      "state": "medo",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-73966080-7b13-4dc9-912a-2c8b1287207d.png",
+      "prompt": "Create a single waist-up TERRIFIED bust of draska, the exact character in reference. Preserve identity, species, gender, hairstyle, costume and tools, black ink hatching and flat parchment sepia fill. Large readable fearful eyes, raised inner brows, tense mouth and hands, protective recoiling shoulders. Adult believable fear, not comedy. Keep head, ears, shoulders and hands fully within canvas, no legs. Transparent alpha background, no text, watermark or signature. Preserve reference design, not photorealistic."
+    },
+    {
+      "name": "draska",
+      "state": "bravura",
+      "source": "/Users/edney/.codex/generated_images/01a18598-e5f3-7da0-9a1f-73e457f099a2/exec-684d3501-5176-4530-99a5-023ecc4b47c8.png",
+      "prompt": "Edit this exact draska bust into BRAVERY. Preserve canvas dimensions, head position, scale, silhouette, hands, equipment and sepia ink drawing exactly. Change fearful face into steady courageous determination: firm brows, focused eyes, controlled closed mouth, no smile. Courage despite fear, protective resolve. Do not redesign character. Transparent alpha, no background, text or signature. Remove stray colored edge pixels."
+    }
+  ],
+  "uiCorrection": "Usar caixa de texto existente, sem placas com nomes; mockups são conceitos, não contratos de layout."
+}

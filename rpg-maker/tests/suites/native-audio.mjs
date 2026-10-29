@@ -114,7 +114,8 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  assert.equal(await browser.evaluate('AudioManager._bgsBuffer.volume'),0);
  assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness'].map(k=>[k,true])));
  const effects=await browser.evaluate('[...new Set([...$dataCommonEvents.filter(Boolean).flatMap(e=>e.list.filter(c=>c.code===250).map(c=>c.parameters[0].name)),...[0,1,2,3,5,6].map(i=>$dataSystem.sounds[i].name)])].sort()');
- assert.deepEqual(effects,['Buzzer1','Cancel2','Collapse1','Cursor3','Decision2','Door1','Item3','Load2','Save2','Water1'].sort());
+ assert.deepEqual(effects,['Buzzer1','Cancel2','Cursor3','Decision2','Door1','Item3','Load2','Save2','Water1',
+  'sfx_a1_fecho','sfx_a1_garrafas','sfx_a1_janela','sfx_a2_impacto','sfx_a2_pressao','sfx_a2_queda','sfx_a3_chao','sfx_a3_golpe_pilao','sfx_a3_parafuso_trilho','sfx_a4_barras','sfx_a4_fecho','sfx_a5_cano','sfx_a5_chamas','sfx_a5_fogo','sfx_a6_madeira','sfx_a6_raizes','sfx_a7_ganchos','sfx_a7_prensa','sfx_a8_desabamento','sfx_a8_telhas','sfx_b1_assobio','sfx_b2_passos','sfx_b2_velas','sfx_b4_fecho','sfx_b4_raizes','sfx_b5_selo','sfx_b5_vidro','sfx_b7_rasgo','sfx_b7_tecido','sfx_b8_boca','sfx_b8_portas'].sort());
  const directory='docs/qa/evidence/init-rpg-maker-mz/task-11/IT-029';await mkdir(directory,{recursive:true});
  await writeFile(`${directory}/buffers.json`,JSON.stringify({browser:browser.version,kind:'isolated native buffer integration; no audible judgment',observations,buffers:await browser.evaluate('audioBuffers.map(x=>({folder:x.folder,name:x.name,ready:x.buffer.isReady(),playing:x.buffer.isPlaying(),duration:x.buffer._totalTime}))')},null,2)+'\n');
 });

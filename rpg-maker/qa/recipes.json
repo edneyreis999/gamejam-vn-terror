@@ -613,5 +613,30 @@
     "case": "planos/tasks/campfire-hero-bonds/directed-presentation-reduced.mjs",
     "spec": "planos/tasks/campfire-hero-bonds/spec.md",
     "request": "planos/tasks/campfire-hero-bonds/request-presentation-reduced.json"
+  },
+  {
+    "id": "juicy-sacrifice",
+    "spec": "planos/tasks/juicy-hero-death/spec.md",
+    "case": "rpg-maker/qa/juicy-sacrifice.mjs",
+    "env": {},
+    "evidenceRoot": ".artifacts/juicy-sacrifice"
+  },
+  {
+    "id": "juicy-sacrifice-reduced",
+    "spec": "planos/tasks/juicy-hero-death/spec.md",
+    "case": "rpg-maker/qa/juicy-sacrifice.mjs",
+    "env": {
+      "DRYLAND_QA_MOTION": "reduce"
+    },
+    "evidenceRoot": ".artifacts/juicy-sacrifice"
+  },
+  {
+    "id": "juicy-a3",
+    "spec": "planos/tasks/juicy-hero-death/spec.md",
+    "case": "rpg-maker/qa/juicy-sacrifice.mjs",
+    "env": {
+      "DRYLAND_QA_TARGET": "A3"
+    },
+    "evidenceRoot": ".artifacts/juicy-sacrifice"
   }
 ]
