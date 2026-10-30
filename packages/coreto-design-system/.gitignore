@@ -1,0 +1,5 @@
+/backups/
+/staging/
+/dist/
+*.log
+__pycache__/

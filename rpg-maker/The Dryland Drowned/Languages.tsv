@@ -975,3 +975,10 @@ death.b8.context.02	The call comes from the opening. \V[221] searches for anothe
 death.b8.context.03	\V[221] answers. The first step brings only the tip of a foot to the mouth. The second brings their whole body. The walls stop.	\V[221] responde. O primeiro passo leva só a ponta do pé até a boca. O segundo leva o corpo inteiro. As paredes param.
 death.b8.context.04	Rheed and Ivaí reach the gap. Before passing through, they look down. \V[221] is still in the opening, one hand resting where a doorframe should be.	Rheed e Ivaí alcançam a fresta. Antes de passar, olham para baixo. \V[221] ainda está na abertura, com a mão apoiada onde deveria haver um batente.
 death.b8.context.05	The mouth closes. When Rheed and Ivaí look again, there is only wall...	A boca se fecha. Quando Rheed e Ivaí olham de novo, só há parede...
+coreto.ui.restore_hint	Click or press Confirm to restore the interface.	Clique ou pressione Confirmar para restaurar a interface.
+ui.console.fast	Fast	Rápido
+ui.console.hide	Hide	Ocultar
+ui.menu.load	Load	Carregar
+ui.destination.choose	Choose path	Escolher caminho
+ui.approach.choose	Choose approach	Escolher abordagem
+ui.menu	Menu	Menu
