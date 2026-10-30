@@ -1,0 +1,25 @@
+{
+  "id": "coreto-approved-2026-10-17-r2",
+  "date": "2026-10-17",
+  "baseline": "backups/20261017-120425-268/js/plugins/Dryland_5_CoretoTheme.js",
+  "figma": {
+    "fileKey": "mST7JediMzHTA4IkE2skw8",
+    "page": "89:60",
+    "active": "104:182",
+    "review": "148:197",
+    "closedMap": "148:193",
+    "superseded": "146:193",
+    "cards": "116:197"
+  },
+  "decisions": {
+    "title": "original transparent asset",
+    "heroNames": "light action buttons",
+    "heroHover": "no halo",
+    "cards": "paper #F0DFC0 / dark ink / stripe vertical margin 12",
+    "options": "margin 28, category height 76, offsets 16/12, rows >=76, gap12",
+    "lockedDestination": "closed map; localized unknown/locked; existing switch33",
+    "mapUnion": "preserve restored CE46 without added black background",
+    "campWait": "preserve restored Map045"
+  },
+  "adoption": "Explicit approved revision; newer Figma edits are not automatically adopted."
+}

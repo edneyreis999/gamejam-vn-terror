@@ -1,0 +1,968 @@
+{
+  "revision": "coreto-approved-2026-10-17-r2",
+  "properties": [
+    {
+      "path": "/Enabled",
+      "defaultBefore": true,
+      "figma": "89:60",
+      "owner": "design-system",
+      "destination": "/Enabled",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Windows",
+      "defaultBefore": true,
+      "figma": "89:60",
+      "owner": "design-system",
+      "destination": "/Windows",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Surfaces/canvas",
+      "defaultBefore": "#f8e9cc",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/panel",
+      "defaultBefore": "#f9eacf",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Color/ItemBackColor1",
+      "evidence": "Fundo nativo e callback usam ColorManager.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/disabled",
+      "defaultBefore": "#d3c7b4",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/onAccent",
+      "defaultBefore": "#fff8eb",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/border",
+      "defaultBefore": "#704737",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/subtle",
+      "defaultBefore": "#be9a6b",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/primary",
+      "defaultBefore": "#552070",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/pressed",
+      "defaultBefore": "#4d1d6b",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/purple",
+      "defaultBefore": "#6d1b8b",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/menuSelectedHoverBorder",
+      "defaultBefore": "#000000",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/focus",
+      "defaultBefore": "#8224ad",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/gold",
+      "defaultBefore": "#edaa2f",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/error",
+      "defaultBefore": "#af2933",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/hover",
+      "defaultBefore": "#eedff2",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/accentHover",
+      "defaultBefore": "#6d3185",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/card",
+      "defaultBefore": "#f0dfc0",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/cardScene",
+      "defaultBefore": "#35263d",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Surfaces/cardMemorial",
+      "defaultBefore": "#ede5d8",
+      "figma": "89:60",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Shapes/ControlRadius",
+      "defaultBefore": 6,
+      "figma": "89:153",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Shapes/PanelRadius",
+      "defaultBefore": 10,
+      "figma": "89:153",
+      "owner": "design-system",
+      "destination": "/Shapes/PanelRadius",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Shapes/MenuSelectedWidth",
+      "defaultBefore": 1,
+      "figma": "89:153",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Shapes/BorderWidth",
+      "defaultBefore": 1,
+      "figma": "89:153",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Shapes/FocusWidth",
+      "defaultBefore": 2,
+      "figma": "89:153",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Shapes/FocusGap",
+      "defaultBefore": 3,
+      "figma": "89:153",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Shapes/Inset",
+      "defaultBefore": 3,
+      "figma": "89:153",
+      "owner": "design-system",
+      "destination": "/Shapes/Inset",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Card/StripeX",
+      "defaultBefore": 12,
+      "figma": "116:197",
+      "owner": "assets",
+      "destination": "img/pictures/Coreto_PartyCard.png; Coreto_MemorialCard.png; Dryland_EncounterTitle.png",
+      "evidence": "Faixas e margens pertencem à imagem; texto e alinhamento pertencem ao PictureTextChange do MessageCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Card/StripeWidth",
+      "defaultBefore": 4,
+      "figma": "116:197",
+      "owner": "assets",
+      "destination": "img/pictures/Coreto_PartyCard.png; Coreto_MemorialCard.png; Dryland_EncounterTitle.png",
+      "evidence": "Faixas e margens pertencem à imagem; texto e alinhamento pertencem ao PictureTextChange do MessageCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Card/PaddingY",
+      "defaultBefore": 8,
+      "figma": "116:197",
+      "owner": "assets",
+      "destination": "img/pictures/Coreto_PartyCard.png; Coreto_MemorialCard.png; Dryland_EncounterTitle.png",
+      "evidence": "Faixas e margens pertencem à imagem; texto e alinhamento pertencem ao PictureTextChange do MessageCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Card/TextInset",
+      "defaultBefore": 32,
+      "figma": "116:197",
+      "owner": "assets",
+      "destination": "img/pictures/Coreto_PartyCard.png; Coreto_MemorialCard.png; Dryland_EncounterTitle.png",
+      "evidence": "Faixas e margens pertencem à imagem; texto e alinhamento pertencem ao PictureTextChange do MessageCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Card/PaddingRight",
+      "defaultBefore": 16,
+      "figma": "116:197",
+      "owner": "assets",
+      "destination": "img/pictures/Coreto_PartyCard.png; Coreto_MemorialCard.png; Dryland_EncounterTitle.png",
+      "evidence": "Faixas e margens pertencem à imagem; texto e alinhamento pertencem ao PictureTextChange do MessageCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Button/PaddingX",
+      "defaultBefore": 16,
+      "figma": "89:101",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Button/MinHeight",
+      "defaultBefore": 44,
+      "figma": "89:101",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Button/MarkerSize",
+      "defaultBefore": 24,
+      "figma": "89:101",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Button/MarkerGap",
+      "defaultBefore": 12,
+      "figma": "89:101",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Choice/MarkerSize",
+      "defaultBefore": 16,
+      "figma": "89:133",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Choice/MarkerGap",
+      "defaultBefore": 8,
+      "figma": "89:133",
+      "owner": "core",
+      "destination": "/Window/DrawItemBackgroundJS",
+      "evidence": "Receita visual persistida no callback público; pictures usam assets e comandos nativos. A extensão consulta a receita, sem parâmetro duplicado.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Choice/PaddingY",
+      "defaultBefore": 8,
+      "figma": "89:133",
+      "owner": "design-system",
+      "destination": "/Choice/PaddingY",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Choice/MaxWidth",
+      "defaultBefore": 620,
+      "figma": "89:133",
+      "owner": "design-system",
+      "destination": "/Choice/MaxWidth",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Dialogue/ContinuePlacement",
+      "defaultBefore": "corner",
+      "figma": "89:153",
+      "owner": "design-system",
+      "destination": "/Dialogue/ContinuePlacement",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Dialogue/SpeakerInside",
+      "defaultBefore": true,
+      "figma": "89:153",
+      "owner": "design-system",
+      "destination": "/Dialogue/SpeakerInside",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Dialogue/SpeakerGap",
+      "defaultBefore": 4,
+      "figma": "89:153",
+      "owner": "design-system",
+      "destination": "/Dialogue/SpeakerGap",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Dialogue/TextInset",
+      "defaultBefore": 16,
+      "figma": "89:153",
+      "owner": "design-system",
+      "destination": "/Dialogue/TextInset",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Dialogue/ContrastOutline",
+      "defaultBefore": 2,
+      "figma": "89:153",
+      "owner": "message",
+      "destination": "/General/DefaultOutlineWidth",
+      "evidence": "Cor e espessura de contorno são do provedor.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Field/Height",
+      "defaultBefore": 40,
+      "figma": "89:188",
+      "owner": "design-system",
+      "destination": "/Field/Height",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Field/PaddingX",
+      "defaultBefore": 18,
+      "figma": "89:188",
+      "owner": "design-system",
+      "destination": "/Field/PaddingX",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/Field/Gap",
+      "defaultBefore": 4,
+      "figma": "89:188",
+      "owner": "design-system",
+      "destination": "/Field/Gap",
+      "evidence": "Composição sem parâmetro público equivalente; ver intervenções documentadas.",
+      "status": "gap"
+    },
+    {
+      "path": "/TitlePlate/RuleInset",
+      "defaultBefore": 32,
+      "figma": "104:182",
+      "owner": "retired",
+      "destination": null,
+      "evidence": "Decisão rejeitada; removida, sem equivalente editável.",
+      "status": "retired"
+    },
+    {
+      "path": "/TitlePlate/RuleWidth",
+      "defaultBefore": 2,
+      "figma": "104:182",
+      "owner": "retired",
+      "destination": null,
+      "evidence": "Decisão rejeitada; removida, sem equivalente editável.",
+      "status": "retired"
+    },
+    {
+      "path": "/TitlePlate/RuleBottom",
+      "defaultBefore": 16,
+      "figma": "104:182",
+      "owner": "retired",
+      "destination": null,
+      "evidence": "Decisão rejeitada; removida, sem equivalente editável.",
+      "status": "retired"
+    },
+    {
+      "path": "/Controls/OptionHeight",
+      "defaultBefore": 76,
+      "figma": "99:101",
+      "owner": "options",
+      "destination": "/Categories/{index}/List/{index}/DrawJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Controls/ValueRatio",
+      "defaultBefore": 52,
+      "figma": "99:101",
+      "owner": "options",
+      "destination": "/Categories/{index}/List/{index}/DrawJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Controls/TrackHeight",
+      "defaultBefore": 8,
+      "figma": "99:101",
+      "owner": "options",
+      "destination": "/Categories/{index}/List/{index}/DrawJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Controls/ThumbWidth",
+      "defaultBefore": 10,
+      "figma": "99:101",
+      "owner": "options",
+      "destination": "/Categories/{index}/List/{index}/DrawJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Controls/ThumbHeight",
+      "defaultBefore": 18,
+      "figma": "99:101",
+      "owner": "options",
+      "destination": "/Categories/{index}/List/{index}/DrawJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Controls/SaveHeader",
+      "defaultBefore": 60,
+      "figma": "99:101",
+      "owner": "save",
+      "destination": "/SaveMenu/BoxContentsJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Controls/SaveFooter",
+      "defaultBefore": 98,
+      "figma": "99:101",
+      "owner": "save",
+      "destination": "/SaveMenu/BoxContentsJS",
+      "evidence": "Receita completa persistida no callback público, executável sem Design System.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Effects/ConcealBlur",
+      "defaultBefore": 28,
+      "figma": "104:182",
+      "owner": "retired",
+      "destination": null,
+      "evidence": "Decisão rejeitada; removida, sem equivalente editável.",
+      "status": "retired"
+    },
+    {
+      "path": "/Effects/HaloWidth",
+      "defaultBefore": 4,
+      "figma": "104:182",
+      "owner": "retired",
+      "destination": null,
+      "evidence": "Decisão rejeitada; removida, sem equivalente editável.",
+      "status": "retired"
+    },
+    {
+      "path": "/Title/Face",
+      "defaultBefore": "CoretoCinzel",
+      "figma": "89:60",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Title/Size",
+      "defaultBefore": 52,
+      "figma": "89:60",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Title/Line",
+      "defaultBefore": 56,
+      "figma": "89:60",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Section/Face",
+      "defaultBefore": "CoretoAveria",
+      "figma": "89:60",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Section/Size",
+      "defaultBefore": 32,
+      "figma": "89:60",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Section/Line",
+      "defaultBefore": 40,
+      "figma": "89:60",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Speaker/Face",
+      "defaultBefore": "CoretoAveria",
+      "figma": "89:154",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Speaker/Size",
+      "defaultBefore": 24,
+      "figma": "89:154",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Speaker/Line",
+      "defaultBefore": 28,
+      "figma": "89:154",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Menu/Face",
+      "defaultBefore": "CoretoOutfitMedium",
+      "figma": "89:101",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Menu/Size",
+      "defaultBefore": 22,
+      "figma": "89:101",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Menu/Line",
+      "defaultBefore": 28,
+      "figma": "89:101",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Action/Face",
+      "defaultBefore": "CoretoOutfitMedium",
+      "figma": "89:111",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Action/Size",
+      "defaultBefore": 20,
+      "figma": "89:111",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Action/Line",
+      "defaultBefore": 24,
+      "figma": "89:111",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/ChoiceText/Face",
+      "defaultBefore": "CoretoOutfitMedium",
+      "figma": "89:133",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/ChoiceText/Size",
+      "defaultBefore": 18,
+      "figma": "89:133",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Input/Face",
+      "defaultBefore": "CoretoOutfit",
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Input/Size",
+      "defaultBefore": 18,
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Input/Line",
+      "defaultBefore": 24,
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Label/Face",
+      "defaultBefore": "CoretoOutfitMedium",
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Label/Size",
+      "defaultBefore": 16,
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Label/Line",
+      "defaultBefore": 20,
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Helper/Face",
+      "defaultBefore": "CoretoOutfit",
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Helper/Size",
+      "defaultBefore": 14,
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Helper/Line",
+      "defaultBefore": 20,
+      "figma": "89:188",
+      "owner": "message",
+      "destination": "/CustomFonts; eventos: FontChange/FS; callbacks OptionsCore/SaveCore",
+      "evidence": "Fonte, tamanho e entrelinha são autoria nativa/escapes ou desenho no callback responsável.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/diamond",
+      "defaultBefore": "CoretoTheme_diamond",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_diamond.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/error",
+      "defaultBefore": "CoretoTheme_error",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_error.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Settings",
+      "defaultBefore": "CoretoTheme_Settings",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Settings.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Audio",
+      "defaultBefore": "CoretoTheme_Audio",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Audio.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Language",
+      "defaultBefore": "CoretoTheme_Language",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Language.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/TextEffects",
+      "defaultBefore": "CoretoTheme_TextEffects",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_TextEffects.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Music",
+      "defaultBefore": "CoretoTheme_Music",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Music.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Ambience",
+      "defaultBefore": "CoretoTheme_Ambience",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Ambience.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Jingle",
+      "defaultBefore": "CoretoTheme_Jingle",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Jingle.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/SoundEffects",
+      "defaultBefore": "CoretoTheme_SoundEffects",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_SoundEffects.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Back",
+      "defaultBefore": "CoretoTheme_Back",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Back.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Save",
+      "defaultBefore": "CoretoTheme_Save",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Save.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Clock",
+      "defaultBefore": "CoretoTheme_Clock",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Clock.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Conversation",
+      "defaultBefore": "CoretoTheme_Conversation",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Conversation.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/Icons/Menu",
+      "defaultBefore": "CoretoTheme_Menu",
+      "figma": "99:100",
+      "owner": "assets",
+      "destination": "img/system/CoretoTheme_Menu.png",
+      "evidence": "Imagem usada por callbacks nativos; categorias usam IconSet e parâmetro Icon do OptionsCore.",
+      "status": "migrated"
+    },
+    {
+      "path": "/OptionsLayout/Margin",
+      "default": 28,
+      "figma": "148:197",
+      "owner": "design-system",
+      "destination": "/OptionsLayout/Margin",
+      "status": "gap",
+      "evidence": "OptionsCore fixa geometria da cena; CoreEngine continua responsável pela altura geral de item. Extensão apenas limita esta composição."
+    },
+    {
+      "path": "/OptionsLayout/CategoryHeight",
+      "default": 76,
+      "figma": "148:197",
+      "owner": "design-system",
+      "destination": "/OptionsLayout/CategoryHeight",
+      "status": "gap",
+      "evidence": "OptionsCore fixa geometria da cena; CoreEngine continua responsável pela altura geral de item. Extensão apenas limita esta composição."
+    },
+    {
+      "path": "/OptionsLayout/CategoryOffsetY",
+      "default": 16,
+      "figma": "148:197",
+      "owner": "design-system",
+      "destination": "/OptionsLayout/CategoryOffsetY",
+      "status": "gap",
+      "evidence": "OptionsCore fixa geometria da cena; CoreEngine continua responsável pela altura geral de item. Extensão apenas limita esta composição."
+    },
+    {
+      "path": "/OptionsLayout/ListOffsetY",
+      "default": 12,
+      "figma": "148:197",
+      "owner": "design-system",
+      "destination": "/OptionsLayout/ListOffsetY",
+      "status": "gap",
+      "evidence": "OptionsCore fixa geometria da cena; CoreEngine continua responsável pela altura geral de item. Extensão apenas limita esta composição."
+    },
+    {
+      "path": "/OptionsLayout/RowGap",
+      "default": 12,
+      "figma": "148:197",
+      "owner": "design-system",
+      "destination": "/OptionsLayout/RowGap",
+      "status": "gap",
+      "evidence": "OptionsCore fixa geometria da cena; CoreEngine continua responsável pela altura geral de item. Extensão apenas limita esta composição."
+    },
+    {
+      "path": "/OptionsLayout/Bottom",
+      "default": 20,
+      "figma": "148:197",
+      "owner": "design-system",
+      "destination": "/OptionsLayout/Bottom",
+      "status": "gap",
+      "evidence": "OptionsCore fixa geometria da cena; CoreEngine continua responsável pela altura geral de item. Extensão apenas limita esta composição."
+    }
+  ]
+}
