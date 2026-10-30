@@ -5436,13 +5436,6 @@
                             ]
                         },
                         {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                379
-                            ]
-                        },
-                        {
                             "code": 242,
                             "indent": 1,
                             "parameters": [
@@ -5458,18 +5451,6 @@
                         },
                         {
                             "code": 221,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                376
-                            ]
-                        },
-                        {
-                            "code": 222,
                             "indent": 1,
                             "parameters": []
                         },
@@ -5701,8 +5682,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "62.28070175438597",
-                                    "TargetScaleY:str": "62.23188405797101",
+                                    "TargetScaleX:str": "59.8853",
+                                    "TargetScaleY:str": "59.8384",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5717,7 +5698,7 @@
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetX:str": "320",
-                                    "TargetY:str": "725",
+                                    "TargetY:str": "809",
                                     "EasingType:str": "InOutSine",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
@@ -5838,8 +5819,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 64.77192982456141 : 65.64859002169197",
-                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 64.72115942028985 : 65.62485345838218",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 62.2807 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 62.2319 : 65.62485345838218",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5922,8 +5903,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 59.789473684210535 : 60.598698481561826",
-                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 59.742608695652166 : 60.57678780773739",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 57.4899 : 60.598698481561826",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 57.4448 : 60.57678780773739",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -6027,8 +6008,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 64.77192982456141 : 65.64859002169197",
-                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 64.72115942028985 : 65.62485345838218",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 62.2807 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 62.2319 : 65.62485345838218",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]

@@ -3511,8 +3511,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "44",
-                  "TargetScaleY:str": "44",
+                  "TargetScaleX:str": "50",
+                  "TargetScaleY:str": "50",
                   "Duration:eval": "0"
                 }
               ]
@@ -3526,8 +3526,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetX:str": "960",
-                  "TargetY:str": "454.664",
+                  "TargetX:str": "1000",
+                  "TargetY:str": "725",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"
@@ -5320,8 +5320,8 @@
                 "Scale_ScaleTo",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetScaleX:str": "44",
-                  "TargetScaleY:str": "44",
+                  "TargetScaleX:str": "50",
+                  "TargetScaleY:str": "50",
                   "Duration:eval": "0"
                 }
               ]
@@ -5335,8 +5335,8 @@
                 "Move_MoveToCoordinates",
                 {
                   "PictureID:arrayeval": "[\"63\"]",
-                  "TargetX:str": "960",
-                  "TargetY:str": "454.664",
+                  "TargetX:str": "1000",
+                  "TargetY:str": "725",
                   "EasingType:str": "InOutSine",
                   "FlipDirection:str": "None",
                   "Duration:eval": "0"

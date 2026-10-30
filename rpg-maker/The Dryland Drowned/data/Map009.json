@@ -5436,13 +5436,6 @@
                             ]
                         },
                         {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                379
-                            ]
-                        },
-                        {
                             "code": 242,
                             "indent": 1,
                             "parameters": [
@@ -5458,18 +5451,6 @@
                         },
                         {
                             "code": 221,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                376
-                            ]
-                        },
-                        {
-                            "code": 222,
                             "indent": 1,
                             "parameters": []
                         },
@@ -5701,8 +5682,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "57.35930735930735",
-                                    "TargetScaleY:str": "57.37801293356849",
+                                    "TargetScaleX:str": "50.1453",
+                                    "TargetScaleY:str": "50.1616",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5838,8 +5819,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 59.653679653679646 : 65.64859002169197",
-                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 59.67313345091123 : 65.62485345838218",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 52.1511 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 52.1681 : 65.62485345838218",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5922,8 +5903,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 55.06493506493506 : 60.598698481561826",
-                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 55.08289241622575 : 60.57678780773739",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 48.1395 : 60.598698481561826",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 48.1552 : 60.57678780773739",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -6027,8 +6008,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 59.653679653679646 : 65.64859002169197",
-                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 59.67313345091123 : 65.62485345838218",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 52.1511 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 52.1681 : 65.62485345838218",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]

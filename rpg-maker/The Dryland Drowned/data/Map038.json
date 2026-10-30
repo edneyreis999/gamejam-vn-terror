@@ -2714,8 +2714,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -2730,7 +2730,7 @@
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetX:str": "250",
-                                    "TargetY:str": "725",
+                                    "TargetY:str": "809",
                                     "EasingType:str": "InOutSine",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
@@ -2799,8 +2799,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -2815,7 +2815,7 @@
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
                                     "TargetX:str": "250",
-                                    "TargetY:str": "725",
+                                    "TargetY:str": "809",
                                     "EasingType:str": "InOutSine",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
@@ -3064,8 +3064,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3140,8 +3140,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3216,8 +3216,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3292,8 +3292,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3368,8 +3368,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3681,8 +3681,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3757,8 +3757,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3833,8 +3833,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3909,8 +3909,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -3985,8 +3985,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4298,8 +4298,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4374,8 +4374,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4450,8 +4450,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4526,8 +4526,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4602,8 +4602,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4915,8 +4915,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -4991,8 +4991,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5067,8 +5067,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5143,8 +5143,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5219,8 +5219,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5424,8 +5424,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5529,8 +5529,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5876,8 +5876,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -5952,8 +5952,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6028,8 +6028,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6104,8 +6104,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6180,8 +6180,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6493,8 +6493,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6569,8 +6569,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6645,8 +6645,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6721,8 +6721,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -6797,8 +6797,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -7048,8 +7048,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -7547,8 +7547,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -7638,8 +7638,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -7701,8 +7701,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -7797,8 +7797,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -7860,8 +7860,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -7956,8 +7956,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -8019,8 +8019,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -8115,8 +8115,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -8178,8 +8178,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -8335,6 +8335,26 @@
                                     "AutoErase:eval": "true"
                                 }
                             ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
                         },
                         {
                             "code": 111,
@@ -8539,8 +8559,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -8667,8 +8687,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -8812,8 +8832,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -8940,8 +8960,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9085,8 +9105,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9161,8 +9181,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9237,8 +9257,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9580,8 +9600,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9708,8 +9728,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9853,8 +9873,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -9981,8 +10001,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -10126,8 +10146,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -10202,8 +10222,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "36",
-                                    "TargetScaleY:str": "36",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -10278,8 +10298,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -10616,8 +10636,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -10650,8 +10670,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -10835,8 +10855,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
                                 }
                             ]
@@ -10869,8 +10889,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "40",
-                                    "TargetScaleY:str": "40",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
                             ]
@@ -10990,6 +11010,26 @@
                             "indent": 1,
                             "parameters": [
                                 12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
                                 "!$gameVariables.value(47)"
                             ]
                         },
@@ -11078,6 +11118,33 @@
                                     "AutoErase:eval": "true"
                                 }
                             ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                60
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 111,
