@@ -1,0 +1,147 @@
+{
+  "inventory": {
+    "schemaVersion": 1,
+    "checklistVersion": "CP-01-20/v1",
+    "entries": [
+      {
+        "namespace": "demo",
+        "id": "VALUE",
+        "descriptor": {
+          "id": "VALUE",
+          "description": "Read the current string value; no inputs and no writes. The response is a string.",
+          "examples": [
+            "demo value --json -> \"example\""
+          ]
+        }
+      }
+    ]
+  },
+  "review": {
+    "schemaVersion": 1,
+    "checklistVersion": "CP-01-20/v1",
+    "task": "illustrative-format-only",
+    "author": "Example author (not a real review)",
+    "reviewedAt": "2026-10-26",
+    "evidence": {
+      "query": {
+        "public": [
+          {
+            "namespace": "demo",
+            "id": "VALUE",
+            "pointer": "",
+            "value": {
+              "id": "VALUE",
+              "description": "Read the current string value; no inputs and no writes. The response is a string.",
+              "examples": [
+                "demo value --json -> \"example\""
+              ]
+            }
+          }
+        ],
+        "factual": "Synthetic example contract: this illustrative command reads a string and has no mutation. Not evidence for any installed product."
+      }
+    },
+    "entries": [
+      {
+        "namespace": "demo",
+        "id": "VALUE",
+        "descriptorHash": "sha256:82c2661e7d11b9a07657cf050c59481000b63ddb02a012ca2ba4790125310738",
+        "classification": "operational",
+        "criteria": {
+          "CP-01": {
+            "status": "conformant",
+            "evidence": [
+              "query"
+            ]
+          },
+          "CP-02": {
+            "status": "not_applicable",
+            "reason": "No activation condition in this synthetic read-only query."
+          },
+          "CP-03": {
+            "status": "conformant",
+            "evidence": [
+              "query"
+            ]
+          },
+          "CP-04": {
+            "status": "not_applicable",
+            "reason": "The value is a string without units."
+          },
+          "CP-05": {
+            "status": "not_applicable",
+            "reason": "No options."
+          },
+          "CP-06": {
+            "status": "not_applicable",
+            "reason": "No authored fields, defaults or reset operation."
+          },
+          "CP-07": {
+            "status": "not_applicable",
+            "reason": "This synthetic interface has no optional provider or resource."
+          },
+          "CP-08": {
+            "status": "not_applicable",
+            "reason": "No additional public references."
+          },
+          "CP-09": {
+            "status": "conformant",
+            "evidence": [
+              "query"
+            ]
+          },
+          "CP-10": {
+            "status": "not_applicable",
+            "reason": "No writes or state-dependent example."
+          },
+          "CP-11": {
+            "status": "not_applicable",
+            "reason": "No JavaScript accepted."
+          },
+          "CP-12": {
+            "status": "not_applicable",
+            "reason": "No JavaScript callback or hook."
+          },
+          "CP-13": {
+            "status": "not_applicable",
+            "reason": "Read-only query; no state is created or persisted."
+          },
+          "CP-14": {
+            "status": "not_applicable",
+            "reason": "No competing rules or removal operation."
+          },
+          "CP-15": {
+            "status": "not_applicable",
+            "reason": "No native editing target."
+          },
+          "CP-16": {
+            "status": "not_applicable",
+            "reason": "No asset or list input."
+          },
+          "CP-17": {
+            "status": "conformant",
+            "evidence": [
+              "query"
+            ]
+          },
+          "CP-18": {
+            "status": "conformant",
+            "evidence": [
+              "query"
+            ]
+          },
+          "CP-19": {
+            "status": "not_applicable",
+            "reason": "New synthetic description; no previous text to preserve."
+          },
+          "CP-20": {
+            "status": "conformant",
+            "evidence": [
+              "query"
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

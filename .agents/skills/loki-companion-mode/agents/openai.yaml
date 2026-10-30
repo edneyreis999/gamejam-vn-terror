@@ -1,0 +1,5 @@
+interface:
+  display_name: "Loki Companion Mode"
+  short_description: "Skeptical, read-only opinions until consensus"
+policy:
+  allow_implicit_invocation: true
