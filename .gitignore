@@ -66,12 +66,6 @@ dist/
 /rpg-maker/**/.RPGMakerMZ-metadata/
 # END CORETO
 
-# AgentOps session artifacts
-.agents/*
-!.agents/skills/
-.agents/skills/*
-!.agents/skills/game-coreto-eng-design-system/
-
 # Local restore points produced by the portable design preset.
 **/.coreto-design-system-backups/
 /packages/coreto-design-system/backups/
