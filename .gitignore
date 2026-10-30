@@ -74,3 +74,4 @@ dist/
 
 # Local restore points produced by the portable design preset.
 **/.coreto-design-system-backups/
+/packages/coreto-design-system/backups/
