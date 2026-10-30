@@ -2498,22 +2498,6 @@
                     },
                     "list": [
                         {
-                            "code": 231,
-                            "indent": 0,
-                            "parameters": [
-                                1,
-                                "Dryland_Encounter_A2",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
-                        },
-                        {
                             "code": 118,
                             "indent": 0,
                             "parameters": [
@@ -2543,6 +2527,35 @@
                             "indent": 0,
                             "parameters": [
                                 12,
+                                "$gameVariables.value(31) !== 'encounter_intro'"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_A2",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
                                 "!([\"encounter_intro\",\"encounter_choice\",\"approach_result\",\"retreat_confirmation\",\"sacrifice_choice\",\"death_result\",\"automatic_retreat\"].includes($gameVariables.value(31)) && $gameVariables.value(32) === 'A2')"
                             ]
                         },
@@ -2564,11 +2577,24 @@
                             "parameters": []
                         },
                         {
-                            "code": 117,
+                            "code": 111,
                             "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(31) !== 'encounter_intro' && $gameVariables.value(21) !== 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
                             "parameters": [
                                 67
                             ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 111,
@@ -5377,6 +5403,58 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 0,
+                            "parameters": [
+                                378
+                            ]
+                        },
+                        {
+                            "code": 242,
+                            "indent": 0,
+                            "parameters": [
+                                1
+                            ]
+                        },
+                        {
+                            "code": 246,
+                            "indent": 0,
+                            "parameters": [
+                                1
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "Play",
+                                "Play",
+                                {
+                                    "movie": "reedEntranceAlpha"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "WaitUntil",
+                                "WaitUntil",
+                                {
+                                    "seconds": "2.2"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 0,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
                             "code": 108,
                             "indent": 0,
                             "parameters": [
@@ -5417,22 +5495,37 @@
                             ]
                         },
                         {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                1,
+                                "Dryland_Coreto",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 0,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Basic_EnterBust",
-                                "Basic_EnterBust",
+                                "Dryland_1_SceneAudio",
+                                "FadeIn",
+                                "FadeIn",
                                 {
-                                    "PictureID:eval": "60",
-                                    "PictureName:str": "Reed final",
-                                    "Origin:str": "Bust",
-                                    "Position:num": "2",
-                                    "StartOffsetX:eval": "0",
-                                    "StartOffsetY:eval": "0",
-                                    "EasingType:str": "OutSine",
-                                    "HorzMirror:str": "None",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                    "seconds": "1"
                                 }
                             ]
                         },
@@ -5440,32 +5533,26 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "51",
-                                    "TargetScaleY:str": "51",
-                                    "Duration:eval": "0"
-                                }
+                                "Dryland_1_AlphaMovie",
+                                "WaitEnd",
+                                "WaitEnd",
+                                {}
                             ]
                         },
                         {
-                            "code": 357,
+                            "code": 231,
                             "indent": 0,
                             "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Move_MoveToCoordinates",
-                                "Move_MoveToCoordinates",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetX:str": "320",
-                                    "TargetY:str": "700",
-                                    "EasingType:str": "Linear",
-                                    "FlipDirection:str": "None",
-                                    "Duration:eval": "0"
-                                }
+                                60,
+                                "Reed final",
+                                0,
+                                0,
+                                0,
+                                0,
+                                66.66666666666667,
+                                66.66666666666667,
+                                255,
+                                0
                             ]
                         },
                         {
@@ -5530,11 +5617,205 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) !== 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                379
+                            ]
+                        },
+                        {
+                            "code": 242,
+                            "indent": 1,
+                            "parameters": [
+                                1
+                            ]
+                        },
+                        {
+                            "code": 246,
+                            "indent": 1,
+                            "parameters": [
+                                1
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "Play",
+                                "Play",
+                                {
+                                    "movie": "reedTransition"
+                                }
+                            ]
+                        },
+                        {
                             "code": 235,
                             "indent": 0,
                             "parameters": [
                                 60
                             ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "WaitUntil",
+                                "WaitUntil",
+                                {
+                                    "seconds": "2.9"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) !== 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                376
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_A2",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "WaitEnd",
+                                "WaitEnd",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) !== 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                377
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_A2",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 234,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                [
+                                    -255,
+                                    -255,
+                                    -255,
+                                    0
+                                ],
+                                0,
+                                false
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneAudio",
+                                "FadeIn",
+                                "FadeIn",
+                                {
+                                    "seconds": "1.5"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 234,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                90,
+                                true
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 108,

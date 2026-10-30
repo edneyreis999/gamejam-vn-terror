@@ -337,6 +337,7 @@
   Scene_Map.prototype.update = function() {
     if (this._scrollTextWindow?._text && !releaseRequired) {
       const skip = this._spriteset._pictureContainer.children.some(sprite => {
+        if (!(sprite instanceof Sprite_Picture)) return false;
         const key = sprite.picture()?._drylandScrollSkipKey;
         return key && sprite.worldVisible && (Input.isTriggered(key) ||
           (TouchInput.isTriggered() && sprite.getBounds().contains(TouchInput.x, TouchInput.y)));
