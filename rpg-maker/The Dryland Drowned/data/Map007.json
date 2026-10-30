@@ -5295,6 +5295,31 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Coreto_0_CoreEngine",
+                                "SystemLoadImages",
+                                "SystemLoadImages",
+                                {
+                                    "animations:arraystr": "[]",
+                                    "battlebacks1:arraystr": "[]",
+                                    "battlebacks2:arraystr": "[]",
+                                    "characters:arraystr": "[]",
+                                    "enemies:arraystr": "[]",
+                                    "faces:arraystr": "[]",
+                                    "parallaxes:arraystr": "[]",
+                                    "pictures:arraystr": "[\"Dryland_H1_Alerta\",\"Dryland_rheed_Assustado\",\"Dryland_ivai_Apreensivo\",\"Dryland_ivai_Alarmado\"]",
+                                    "sv_actors:arraystr": "[]",
+                                    "sv_enemies:arraystr": "[]",
+                                    "system:arraystr": "[]",
+                                    "tilesets:arraystr": "[]",
+                                    "titles1:arraystr": "[]",
+                                    "titles2:arraystr": "[]"
+                                }
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 0,
                             "parameters": [
@@ -5577,7 +5602,7 @@
                                 "Basic_EnterBust",
                                 {
                                     "PictureID:eval": "63",
-                                    "PictureName:str": "Dryland_ivai",
+                                    "PictureName:str": "Dryland_ivai_Apreensivo",
                                     "Origin:str": "Bust",
                                     "Position:num": "8",
                                     "StartOffsetX:eval": "0",
@@ -5597,8 +5622,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"63\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
+                                    "TargetScaleX:str": "47.023809523809526",
+                                    "TargetScaleY:str": "47.03464474456841",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5668,7 +5693,7 @@
                                 "Basic_EnterBust",
                                 {
                                     "PictureID:eval": "60",
-                                    "PictureName:str": "Dryland_H1",
+                                    "PictureName:str": "Dryland_H1_Alerta",
                                     "Origin:str": "Bust",
                                     "Position:num": "2",
                                     "StartOffsetX:eval": "0",
@@ -5688,8 +5713,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
+                                    "TargetScaleX:str": "70.71428571428572",
+                                    "TargetScaleY:str": "70.72649572649573",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5725,7 +5750,7 @@
                                 "Basic_EnterBust",
                                 {
                                     "PictureID:eval": "60",
-                                    "PictureName:str": "Reed-novo",
+                                    "PictureName:str": "Dryland_rheed_Assustado",
                                     "Origin:str": "Bust",
                                     "Position:num": "2",
                                     "StartOffsetX:eval": "0",
@@ -5745,8 +5770,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
+                                    "TargetScaleX:str": "63.1236442516269",
+                                    "TargetScaleY:str": "63.10082063305978",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5796,8 +5821,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"63\"]",
-                                    "TargetScaleX:str": "48",
-                                    "TargetScaleY:str": "48",
+                                    "TargetScaleX:str": "45.14285714285714",
+                                    "TargetScaleY:str": "45.15325895478567",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5825,8 +5850,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "52",
-                                    "TargetScaleY:str": "52",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 73.54285714285714 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 73.55555555555556 : 65.62485345838218",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5909,8 +5934,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "48",
-                                    "TargetScaleY:str": "48",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 67.88571428571429 : 60.598698481561826",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 67.8974358974359 : 60.57678780773739",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -5938,9 +5963,22 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"63\"]",
-                                    "TargetScaleX:str": "52",
-                                    "TargetScaleY:str": "52",
+                                    "TargetScaleX:str": "48.904761904761905",
+                                    "TargetScaleY:str": "48.916030534351144",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_GraphicChange",
+                                "Basic_GraphicChange",
+                                {
+                                    "PictureID:eval": "63",
+                                    "PictureName:str": "Dryland_ivai_Alarmado"
                                 }
                             ]
                         },
@@ -5985,8 +6023,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"63\"]",
-                                    "TargetScaleX:str": "48",
-                                    "TargetScaleY:str": "48",
+                                    "TargetScaleX:str": "45.14285714285714",
+                                    "TargetScaleY:str": "45.15325895478567",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
@@ -6014,8 +6052,8 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "52",
-                                    "TargetScaleY:str": "52",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 73.54285714285714 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 73.55555555555556 : 65.62485345838218",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
