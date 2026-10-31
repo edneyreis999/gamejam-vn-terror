@@ -2,6 +2,8 @@ Key	English	Portuguese
 ui.options.category.general	General	Geral
 ui.options.language	Language	Idioma
 ui.options.text_effects	Text Effects	Efeitos de texto
+ui.options.off	Off	Desligado
+ui.options.on	On	Ligado
 ui.options.category.audio	Audio	Áudio
 ui.options.audio.bgm	Music	Música
 ui.options.audio.bgs	Ambience	Ambiente
@@ -24,6 +26,8 @@ ui.assist.cancel	Back	Voltar
 choice.title.continue	Continue	Continuar
 choice.title.new_game	New Game	Novo jogo
 title.name	The Dryland Drowned	Afogados em Terra Seca
+title.heading	The Dryland	Afogados
+title.subheading	Drowned	em Terra Seca
 title.age_notice	This game is not recommended for players under 16.<br>It contains content related to psychological horror, death and coercion.	Este jogo não é recomendado para menores de 16 anos.<br>Contém conteúdos relacionados a horror psicológico, morte e coerção.
 choice.title.options	Options	Configurações
 choice.title.quit	Quit	Sair
@@ -463,6 +467,10 @@ conv.draska.selected	I'm in! I'll handle the backup rations. Just keep one thing
 conv.draska.full	Your squad's packed. You want me keeping you alive, someone else has to go. Figure out your lineup so I can double-check their gear.	Já são três pessoas no grupo, Ivaí. Precisa tirar alguém antes de me incluir. Confira quem vai antes de sairmos.
 council.choice.restore	Restore the medallion — free the lovers and die	Reunir o medalhão — libertar os amantes e morrer
 council.choice.destroy	Destroy the medallion — survive and hand them to Andirá	Destruir o medalhão — sobreviver e entregá-los a Andirá
+ui.medallion.restore	Restore the medallion	Reunir o medalhão
+ui.medallion.destroy	Destroy the medallion	Destruir o medalhão
+ui.medallion.restore.description	Free the lovers and sacrifice Ivaí	Libertar os amantes e sacrificar Ivaí
+ui.medallion.destroy.description	Save Ivaí and surrender the lovers to Andirá	Salvar Ivaí e entregar os amantes a Andirá
 camp.h1.church.a.01	Every time I think about the church, my mind wanders back to the shop. Day one of the rebuild. Ain't even got the coin yet, and I'm already figuring out where the anvil goes.	Quando penso em chegar à igreja, acabo pensando na minha oficina. No primeiro dia depois da reconstrução. Ainda nem tenho o dinheiro, e já estou escolhendo onde pôr a bancada.
 camp.h1.church.a.02	Same spot as before?	No mesmo lugar de antes?
 camp.h1.church.a.03	Closer to the door. Let the apprentices piss and moan about the draft.	Mais perto da porta. Meus aprendizes vão reclamar da corrente de ar.
@@ -975,6 +983,22 @@ death.b8.context.02	The call comes from the opening. \V[221] searches for anothe
 death.b8.context.03	\V[221] answers. The first step brings only the tip of a foot to the mouth. The second brings their whole body. The walls stop.	\V[221] responde. O primeiro passo leva só a ponta do pé até a boca. O segundo leva o corpo inteiro. As paredes param.
 death.b8.context.04	Rheed and Ivaí reach the gap. Before passing through, they look down. \V[221] is still in the opening, one hand resting where a doorframe should be.	Rheed e Ivaí alcançam a fresta. Antes de passar, olham para baixo. \V[221] ainda está na abertura, com a mão apoiada onde deveria haver um batente.
 death.b8.context.05	The mouth closes. When Rheed and Ivaí look again, there is only wall...	A boca se fecha. Quando Rheed e Ivaí olham de novo, só há parede...
+coreto.ui.restore_hint	Press Tab or left-click to show the interface again.	Pressione Tab ou clique com o botão esquerdo para mostrar a interface.
+ui.console.fast	Fast	Rápido
+ui.console.hide	Hide	Ocultar
+ui.menu.load	Load	Carregar
+ui.destination.choose	Choose path	Escolher caminho
+ui.approach.choose	Choose approach	Escolher abordagem
+ui.menu	Menu	Menu
+ui.menu.time	Time	Tempo
+speaker.hero.h1	Gorvak	Gorvak
+speaker.hero.h2	Elowen	Elowen
+speaker.hero.h3	Griznik	Griznik
+speaker.hero.h4	Seraphina	Seraphina
+speaker.hero.h5	Bimbren	Bimbren
+speaker.hero.h6	Liora	Liora
+speaker.hero.h7	Vaelith	Vaelith
+speaker.hero.h8	Draska	Draska
 enc.a1.intro.4	Glass is flying across the doorway! If those whirlwinds join up, we’ll be trapped in here!	Os cacos estão cruzando a porta! Se esses redemoinhos se juntarem, ficamos presos aqui!
 enc.a1.speaker.ivai	Ivaí	Ivaí
 enc.a1.speaker.gorvak	Gorvak	Gorvak

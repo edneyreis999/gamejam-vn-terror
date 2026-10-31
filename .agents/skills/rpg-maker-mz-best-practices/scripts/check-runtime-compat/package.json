@@ -1,0 +1,11 @@
+{
+  "name": "mz-runtime-compat",
+  "private": true,
+  "type": "module",
+  "description": "Read-only check that enabled MZ plugins use nothing newer than the editor's NW.js 0.51 (Chromium 88).",
+  "scripts": { "check": "node run.mjs" },
+  "dependencies": {
+    "eslint": "10.12.0",
+    "eslint-plugin-es-x": "10.0.1"
+  }
+}

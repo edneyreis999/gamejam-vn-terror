@@ -1,0 +1,6 @@
+{
+  "slowTests": {
+    "maxWorkers": 10,
+    "maxBrowsers": 10
+  }
+}

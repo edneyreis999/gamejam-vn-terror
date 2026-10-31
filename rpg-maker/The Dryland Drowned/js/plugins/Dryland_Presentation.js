@@ -214,14 +214,19 @@
     const options = $gameMessage._drylandChoiceFocus;
     const previous = options?.remember && $gameTemp._drylandFocus?.[options.key];
     startChoices.call(this);
-    if (previous) {
-      const index = this._list.findIndex(command => command.name === previous && command.enabled);
-      if (index >= 0) this.select(index);
-    }
+    const remembered = previous ? this._list.findIndex(command => command.name === previous) : this.index();
+    const available = this._list.map((command, index) => index).filter(index => this.isCommandEnabled(index));
+    this.select(available.find(index => index >= remembered) ?? available[0] ?? -1);
   };
   const selectChoice = Window_ChoiceList.prototype.select;
+  const hitChoice = Window_ChoiceList.prototype.hitTest;
+  Window_ChoiceList.prototype.hitTest = function(x, y) {
+    const index = hitChoice.call(this, x, y);
+    return index >= 0 && !this.isCommandEnabled(index) ? -1 : index;
+  };
   Window_ChoiceList.prototype.select = function(index) {
     if (interfaceHidden()) return;
+    if (index >= 0 && this._list[index] && !this.isCommandEnabled(index)) return;
     selectChoice.call(this, index);
     const options = $gameMessage._drylandChoiceFocus;
     if (options?.remember && this._list[index]) {
@@ -229,11 +234,39 @@
       $gameTemp._drylandFocus[options.key] = this._list[index].name;
     }
   };
-  for (const [name, direction] of [['cursorRight', 1], ['cursorLeft', -1]]) {
-    const original = Window_ChoiceList.prototype[name];
+  for (const [name, direction] of [['cursorRight', 1], ['cursorLeft', -1], ['cursorDown', 1], ['cursorUp', -1]]) {
     Window_ChoiceList.prototype[name] = function(wrap) {
-      if ($gameMessage._drylandChoiceFocus?.horizontal) this.select((this.index() + direction + this.maxItems()) % this.maxItems());
-      else original.call(this, wrap);
+      const available = this._list.map((command, index) => index).filter(index => this.isCommandEnabled(index));
+      if (!available.length) { this.select(-1); return; }
+      const sprites = [];
+      const collect = container => {
+        for (const child of container?.children || []) {
+          if (child._pictureId) sprites.push(child);
+          collect(child);
+        }
+      };
+      collect(SceneManager._scene._spriteset?._pictureContainer);
+      const positions = available.map(index => {
+        const sprite = sprites.find(sprite => $gameScreen.getPictureChoiceBinding(sprite._pictureId) === index);
+        const bounds = sprite?._coretoInkArtBounds || {x:0, y:0, width:sprite?.bitmap?.width || 0, height:sprite?.bitmap?.height || 0};
+        const point = sprite?.worldTransform.apply(new Point(
+          bounds.x + bounds.width / 2 - sprite.anchor.x * sprite.bitmap.width,
+          bounds.y + bounds.height / 2 - sprite.anchor.y * sprite.bitmap.height));
+        return { index, x: point?.x, y: point?.y };
+      });
+      if (positions.every(position => Number.isFinite(position.x) && Number.isFinite(position.y))) {
+        const current = positions.find(position => position.index === this.index());
+        if (!current) { this.select(positions[0].index); return; }
+        const horizontal = name === 'cursorRight' || name === 'cursorLeft';
+        const axis = horizontal ? 'x' : 'y', cross = horizontal ? 'y' : 'x';
+        const ahead = positions.filter(position => (position[axis] - current[axis]) * direction > 8);
+        ahead.sort((a, b) => Math.abs(a[cross] - current[cross]) - Math.abs(b[cross] - current[cross]) ||
+          Math.abs(a[axis] - current[axis]) - Math.abs(b[axis] - current[axis]));
+        if (ahead.length) this.select(ahead[0].index);
+        return;
+      }
+      const current = available.indexOf(this.index());
+      this.select(available[(current + direction + available.length) % available.length]);
     };
   }
   PluginManager.registerCommand('Dryland_Presentation', 'MotionPreference', function(args) {
@@ -281,7 +314,7 @@
   const processOk = Window_ChoiceList.prototype.processOk;
   Window_ChoiceList.prototype.processOk = function() {
     if (releaseRequired || interfaceHidden() || !this.isOpenAndActive() || SceneManager._scene.isBusy()) return;
-    if (!this.isCurrentItemEnabled()) { this.playBuzzerSound(); return; }
+    if (this.index() < 0 || !this.isCurrentItemEnabled()) return;
     processOk.call(this);
     consumeConfirmation();
   };
@@ -300,10 +333,18 @@
   }
   const cursorWithVisibility = Window_ChoiceList.prototype.processCursorMove;
   Window_ChoiceList.prototype.processCursorMove = function() {
+    if (interfaceHidden() && Input.isTriggered(Window_Message.VISIBILITY_TOGGLE_KEY)) {
+      $gameTemp.showMessageWindowVisibility();
+      return;
+    }
     if (!interfaceHidden()) cursorWithVisibility.call(this);
   };
   const touchWithVisibility = Window_ChoiceList.prototype.processTouch;
   Window_ChoiceList.prototype.processTouch = function() {
+    if (interfaceHidden() && TouchInput.isTriggered()) {
+      $gameTemp.showMessageWindowVisibility();
+      return;
+    }
     if (!interfaceHidden()) touchWithVisibility.call(this);
   };
   const cancelWithVisibility = Window_ChoiceList.prototype.processCancel;

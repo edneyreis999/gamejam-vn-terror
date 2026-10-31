@@ -1,0 +1,280 @@
+# Storage Management
+
+Commands assume the uniquely named session established in [session management](session-management.md); preserve task scope and resource ownership.
+
+Manage cookies, localStorage, sessionStorage, and browser storage state.
+
+## Storage State
+
+Save and restore the storage supported by the installed command. Inspect the saved schema and command capabilities: cookies/localStorage alone do not include IndexedDB, sessionStorage, caches, or all other browser persistence. A state file is not a complete profile backup. State restoration also does not prove persistence across a real process restart.
+
+### Save Storage State
+
+```bash
+# Save to auto-generated filename (storage-state-{timestamp}.json)
+playwright-cli state-save
+
+# Save to specific filename
+playwright-cli state-save my-auth-state.json
+```
+
+### Restore Storage State
+
+Open the owned session first if needed, load state into it, then navigate with `goto`. Do not replace the session with another `open` between import and use.
+
+```bash
+# Load storage state from file
+playwright-cli state-load my-auth-state.json
+
+# Navigate in the same owned session after loading state
+playwright-cli goto https://example.com
+```
+
+### Storage State File Format
+
+The saved file contains:
+
+```json
+{
+  "cookies": [
+    {
+      "name": "session_id",
+      "value": "abc123",
+      "domain": "example.com",
+      "path": "/",
+      "expires": 1893456000,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://example.com",
+      "localStorage": [
+        { "name": "theme", "value": "dark" },
+        { "name": "user_id", "value": "12345" }
+      ]
+    }
+  ]
+}
+```
+
+## Cookies
+
+### List All Cookies
+
+```bash
+playwright-cli cookie-list
+```
+
+### Filter Cookies by Domain
+
+```bash
+playwright-cli cookie-list --domain=example.com
+```
+
+### Filter Cookies by Path
+
+```bash
+playwright-cli cookie-list --path=/api
+```
+
+### Get Specific Cookie
+
+```bash
+playwright-cli cookie-get session_id
+```
+
+### Set a Cookie
+
+```bash
+# Basic cookie
+playwright-cli cookie-set session abc123
+
+# Cookie with options
+playwright-cli cookie-set session abc123 --domain=example.com --path=/ --httpOnly --secure --sameSite=Lax
+
+# Cookie with expiration (Unix timestamp)
+playwright-cli cookie-set remember_me token123 --expires=1893456000
+```
+
+### Delete a Cookie
+
+```bash
+playwright-cli cookie-delete session_id
+```
+
+### Clear All Cookies
+
+```bash
+playwright-cli cookie-clear
+```
+
+### Advanced: Multiple Cookies or Custom Options
+
+For complex scenarios like adding multiple cookies at once, use `run-code`:
+
+```bash
+playwright-cli run-code "async page => {
+  await page.context().addCookies([
+    { name: 'session_id', value: 'sess_abc123', domain: 'example.com', path: '/', httpOnly: true },
+    { name: 'preferences', value: JSON.stringify({ theme: 'dark' }), domain: 'example.com', path: '/' }
+  ]);
+}"
+```
+
+## Local Storage
+
+### List All localStorage Items
+
+```bash
+playwright-cli localstorage-list
+```
+
+### Get Single Value
+
+```bash
+playwright-cli localstorage-get token
+```
+
+### Set Value
+
+```bash
+playwright-cli localstorage-set theme dark
+```
+
+### Set JSON Value
+
+```bash
+playwright-cli localstorage-set user_settings '{"theme":"dark","language":"en"}'
+```
+
+### Delete Single Item
+
+```bash
+playwright-cli localstorage-delete token
+```
+
+### Clear All localStorage
+
+```bash
+playwright-cli localstorage-clear
+```
+
+### Advanced: Multiple Operations
+
+For complex scenarios like setting multiple values at once, use `run-code`:
+
+```bash
+playwright-cli run-code "async page => {
+  await page.evaluate(() => {
+    localStorage.setItem('token', 'jwt_abc123');
+    localStorage.setItem('user_id', '12345');
+    localStorage.setItem('expires_at', Date.now() + 3600000);
+  });
+}"
+```
+
+## Session Storage
+
+### List All sessionStorage Items
+
+```bash
+playwright-cli sessionstorage-list
+```
+
+### Get Single Value
+
+```bash
+playwright-cli sessionstorage-get form_data
+```
+
+### Set Value
+
+```bash
+playwright-cli sessionstorage-set step 3
+```
+
+### Delete Single Item
+
+```bash
+playwright-cli sessionstorage-delete step
+```
+
+### Clear sessionStorage
+
+```bash
+playwright-cli sessionstorage-clear
+```
+
+## IndexedDB
+
+For a save fixture that needs IndexedDB, verify support explicitly. Where the selected browser context supports the option, capture through the real context:
+
+```bash
+playwright-cli run-code "async page => {
+  await page.context().storageState({ path: 'save-state.json', indexedDB: true });
+}"
+```
+
+Wait for the game's writes before capture, keep the same origin, and verify that the restore path consumes the required data. This is declared fixture preparation, not evidence that the player's save action worked. Use an owned persistent profile when the test requires actual process-restart persistence.
+
+
+### List Databases
+
+```bash
+playwright-cli run-code "async page => {
+  return await page.evaluate(async () => {
+    const databases = await indexedDB.databases();
+    return databases;
+  });
+}"
+```
+
+## Common Patterns
+
+### Authentication State Reuse
+
+```bash
+# Step 1: Login and save state
+playwright-cli open https://app.example.com/login
+playwright-cli snapshot
+playwright-cli fill e1 "user@example.com"
+playwright-cli fill e2 "password123"
+playwright-cli click e3
+
+# Save the authenticated state
+playwright-cli state-save auth.json
+
+# Step 2: Later, restore state and skip login
+playwright-cli state-load auth.json
+playwright-cli goto https://app.example.com/dashboard
+# Already logged in!
+```
+
+### Save and Restore Roundtrip
+
+```bash
+# Set up authentication state
+playwright-cli goto https://example.com
+playwright-cli eval "() => { document.cookie = 'session=abc123'; localStorage.setItem('user', 'john'); }"
+
+# Save state to file
+playwright-cli state-save my-session.json
+
+# ... later, in a new session ...
+
+# Restore state
+playwright-cli state-load my-session.json
+playwright-cli goto https://example.com
+# Cookies and localStorage are restored!
+```
+
+## Security Notes
+
+- Never commit storage state files containing auth tokens
+- Ignore the actual state-file destinations used by the project, including examples such as `auth.json`
+- Remove only owned disposable state after its evidence and declared consumers no longer need it
+- Use environment variables for sensitive data
+- By default, sessions run in-memory mode which is safer for sensitive operations

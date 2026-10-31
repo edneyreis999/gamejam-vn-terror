@@ -1,0 +1,547 @@
+{
+  "version": "1.6.1",
+  "settings": [
+    {
+      "namespace": "core",
+      "path": "/Color/ColorNormal",
+      "value": "#360a0b"
+    },
+    {
+      "namespace": "core",
+      "path": "/Color/ColorSystem",
+      "value": "#360a0b"
+    },
+    {
+      "namespace": "core",
+      "path": "/Color/OutlineColor",
+      "value": "rgba(0,0,0,0)"
+    },
+    {
+      "namespace": "core",
+      "path": "/Color/ItemBackColor1",
+      "value": "#f9eacf"
+    },
+    {
+      "namespace": "core",
+      "path": "/Color/ItemBackColor2",
+      "value": "#f9eacf"
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/LineHeight",
+      "value": 28
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/ItemPadding",
+      "value": 8
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/BackOpacity",
+      "value": 255
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/TranslucentOpacity",
+      "value": 255
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/ColSpacing",
+      "value": 16
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/RowSpacing",
+      "value": 8
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/ShowItemBackground",
+      "value": true
+    },
+    {
+      "namespace": "core",
+      "path": "/Window/ItemHeight",
+      "value": 48
+    },
+    {
+      "namespace": "message",
+      "path": "/General/MessageWidth",
+      "value": 1224
+    },
+    {
+      "namespace": "message",
+      "path": "/General/MsgWindowOffsetX",
+      "value": 0
+    },
+    {
+      "namespace": "message",
+      "path": "/General/MsgWindowOffsetY",
+      "value": -20
+    },
+    {
+      "namespace": "message",
+      "path": "/General/DefaultOutlineWidth",
+      "value": 0
+    },
+    {
+      "namespace": "message",
+      "path": "/General/NameBoxWindowDefaultColor",
+      "value": 15
+    },
+    {
+      "namespace": "message",
+      "path": "/General/NameBoxWindowOffsetX",
+      "value": 0
+    },
+    {
+      "namespace": "message",
+      "path": "/General/NameBoxWindowOffsetY",
+      "value": 0
+    },
+    {
+      "namespace": "message",
+      "path": "/General/ChoiceWindowLineHeight",
+      "value": 24
+    },
+    {
+      "namespace": "message",
+      "path": "/General/ChoiceWindowMinWidth",
+      "value": 96
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/FontFace",
+      "legacy": "CoretoOutfit",
+      "value": "CoretoOutfitMedium"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/FontSize",
+      "legacy": 16,
+      "value": 18
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/NormalColor",
+      "value": "#360a0b"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ToggledColor",
+      "legacy": "#fff8eb",
+      "value": "#4a2220"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/DisabledColor",
+      "legacy": "#360a0b",
+      "value": "#79644f"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ButtonWidth",
+      "legacy": 152,
+      "value": 176
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ButtonHeight",
+      "legacy": 36,
+      "value": 44
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ButtonBuffer",
+      "legacy": 6,
+      "value": 12
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ImgDisabled",
+      "legacy": "CoretoConsole_Disabled",
+      "value": ""
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ImgEnabled",
+      "legacy": "CoretoConsole_Enabled",
+      "value": ""
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ImgToggled",
+      "legacy": "CoretoConsole_Toggled",
+      "value": ""
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/Enable",
+      "value": true
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/GraphicType",
+      "value": "image"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/Filename",
+      "value": "CoretoTheme_continue"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/Rows",
+      "value": 1
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/Cols",
+      "value": 1
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/FrameDelay",
+      "value": 4
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/AnchorX",
+      "value": 0.5
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/AnchorY",
+      "value": 1
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/OffsetX",
+      "value": "+0"
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgCursor/OffsetY",
+      "value": -4
+    },
+    {
+      "namespace": "save",
+      "path": "/SaveMenuStyle",
+      "value": "box"
+    },
+    {
+      "namespace": "save",
+      "path": "/SaveMenu/LatestColor",
+      "value": "#211c14"
+    },
+    {
+      "namespace": "save",
+      "path": "/SaveMenu/BoxRows",
+      "value": 5,
+      "legacy": 2
+    },
+    {
+      "namespace": "save",
+      "path": "/SaveMenu/BoxCols",
+      "value": 1,
+      "legacy": 3
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ImgToggledOffsetX",
+      "legacy": 0,
+      "value": 32
+    },
+    {
+      "namespace": "ext-message",
+      "path": "/MsgButtonConsole/ImgToggledOffsetY",
+      "legacy": 0,
+      "value": 6
+    }
+  ],
+  "fonts": [
+    {
+      "FontFamily": "CoretoOutfit",
+      "Filename": "Outfit.ttf"
+    },
+    {
+      "FontFamily": "CoretoAveria",
+      "Filename": "AveriaLibre-Regular.ttf"
+    },
+    {
+      "FontFamily": "CoretoCinzel",
+      "Filename": "CinzelDecorative-Regular.ttf"
+    },
+    {
+      "FontFamily": "CoretoOutfitMedium",
+      "Filename": "Outfit-Medium.ttf"
+    }
+  ],
+  "assets": [
+    {
+      "file": "CoretoConsole_Disabled.png",
+      "destination": "img/system/CoretoConsole_Disabled.png",
+      "sha256": "4f48361c75d7627793f147b812bc15fb2d0e3d9e14c646726167687d5513c3fa"
+    },
+    {
+      "file": "CoretoConsole_Enabled.png",
+      "destination": "img/system/CoretoConsole_Enabled.png",
+      "sha256": "4f48361c75d7627793f147b812bc15fb2d0e3d9e14c646726167687d5513c3fa"
+    },
+    {
+      "file": "CoretoConsole_Toggled.png",
+      "destination": "img/system/CoretoConsole_Toggled.png",
+      "sha256": "32fd4c847ead30b301e5b4ae3a727d4fa6c5df710ea778fcf0d17cb61a3b007e"
+    },
+    {
+      "file": "CoretoTheme_Ambience.png",
+      "destination": "img/system/CoretoTheme_Ambience.png",
+      "sha256": "98cf594a647a37ec977c5f0058e8547cefd1d215d5a804eff72fa7ff3b2333d9"
+    },
+    {
+      "file": "CoretoTheme_Audio.png",
+      "destination": "img/system/CoretoTheme_Audio.png",
+      "sha256": "b6b7cb9ec3124c1f8ab6725e69fa1354ff793f049859f078d671ed2206f1ec60"
+    },
+    {
+      "file": "CoretoTheme_Back.png",
+      "destination": "img/system/CoretoTheme_Back.png",
+      "sha256": "93d18ab56e47018d71a46adb4da8dbdf4b8e50a7ab850ce8eb8f951b5ae67a72"
+    },
+    {
+      "file": "CoretoTheme_Clock.png",
+      "destination": "img/system/CoretoTheme_Clock.png",
+      "sha256": "66b9c5d55c8ee02b8d6ac6d16da23ac4a928b52f2c9c85c89f58d33ed965d0e8"
+    },
+    {
+      "file": "CoretoTheme_continue.png",
+      "destination": "img/system/CoretoTheme_continue.png",
+      "sha256": "a683985629ba1e9c865378558bf4ef0c2cc031dd0d668866c415ea97fb132559"
+    },
+    {
+      "file": "CoretoTheme_Conversation.png",
+      "destination": "img/system/CoretoTheme_Conversation.png",
+      "sha256": "443152c7b464ef55778c8409808b0d16946c2d68e0cbf3dc49efa43f4fdf4fc0"
+    },
+    {
+      "file": "CoretoTheme_diamond.png",
+      "destination": "img/system/CoretoTheme_diamond.png",
+      "sha256": "112404205c02d29587956e9da701e15bf87a73030973161aa41133c5703de7f5"
+    },
+    {
+      "file": "CoretoTheme_error.png",
+      "destination": "img/system/CoretoTheme_error.png",
+      "sha256": "c4d18bcad9fb20b5cf3d6ea119488ae6f8d764440826ed7868e3ea27fd523793"
+    },
+    {
+      "file": "CoretoTheme_Jingle.png",
+      "destination": "img/system/CoretoTheme_Jingle.png",
+      "sha256": "9470d546e3d540880a42a3298de633dede018b3f3f3913437351ddd4e91c93ff"
+    },
+    {
+      "file": "CoretoTheme_Language.png",
+      "destination": "img/system/CoretoTheme_Language.png",
+      "sha256": "102a95af773c81ec1a466c5d063cd43e105ca72700e8c317baaed7c8f7b89c39"
+    },
+    {
+      "file": "CoretoTheme_Menu.png",
+      "destination": "img/system/CoretoTheme_Menu.png",
+      "sha256": "add7f468de7d9e447d9deaa0bcc1eb74e8895c65210d7265232132c4caf604f6"
+    },
+    {
+      "file": "CoretoTheme_Music.png",
+      "destination": "img/system/CoretoTheme_Music.png",
+      "sha256": "49276c3b8fdcee472f616572dec5dd64d660ac868d9a0a9c65cd395980d9517b"
+    },
+    {
+      "file": "CoretoTheme_Save.png",
+      "destination": "img/system/CoretoTheme_Save.png",
+      "sha256": "6bded419c935c6f4b15b4905b0c6a35f3d4d1f638e03d7b0085721ee5617afc1"
+    },
+    {
+      "file": "CoretoTheme_Settings.png",
+      "destination": "img/system/CoretoTheme_Settings.png",
+      "sha256": "7624f997da7a32a616d9677d4873466fde4d322d6197bfc279616cecc066a6b6"
+    },
+    {
+      "file": "CoretoTheme_SoundEffects.png",
+      "destination": "img/system/CoretoTheme_SoundEffects.png",
+      "sha256": "a0ec1c0c4d154c9b7269225db67bc49c069b588e62e40cc159dfbfde95e35e1d"
+    },
+    {
+      "file": "CoretoTheme_TextEffects.png",
+      "destination": "img/system/CoretoTheme_TextEffects.png",
+      "sha256": "ad4dbddb935546d199d8618ca782c933acb74d6a7b3db30f8aa89c12a6f2dcaf"
+    },
+    {
+      "file": "CoretoWindow.png",
+      "destination": "img/system/CoretoWindow.png",
+      "sha256": "5a602263b85764460408eb3bd8c60e617de896dec6eaff3ab59dc9ef64894461"
+    },
+    {
+      "file": "CoretoTheme_Load.png",
+      "destination": "img/system/CoretoTheme_Load.png",
+      "sha256": "990ee780fc44b7ddd07b90b45d8d283af4dce2a8115b2ccf9c2843d26234aa08"
+    },
+    {
+      "file": "CoretoTheme_Coin.png",
+      "destination": "img/system/CoretoTheme_Coin.png",
+      "sha256": "73ab6e363c7b707e076ad2329debf340498d2870b32a8f8828ef6abcc6891a10"
+    },
+    {
+      "file": "CoretoTheme_BookClosed.png",
+      "destination": "img/system/CoretoTheme_BookClosed.png",
+      "sha256": "03335930930e7ae1aa631be834447b7a11bcfb30304e3dc2f9342923eb140196"
+    }
+  ],
+  "designSystem": {
+    "Enabled": true,
+    "Windows": true,
+    "Surfaces": {
+      "canvas": "#f8e9cc",
+      "panel": "#f9eacf",
+      "disabled": "#d3c7b4",
+      "onAccent": "#fff8eb",
+      "border": "#704737",
+      "subtle": "#be9a6b",
+      "primary": "#552070",
+      "pressed": "#4d1d6b",
+      "purple": "#6d1b8b",
+      "menuSelectedHoverBorder": "#000000",
+      "focus": "#8224ad",
+      "gold": "#edaa2f",
+      "error": "#af2933",
+      "hover": "#eedff2",
+      "accentHover": "#6d3185",
+      "card": "#f0dfc0",
+      "cardScene": "#f0dfc0",
+      "cardMemorial": "#f0dfc0"
+    },
+    "Shapes": {
+      "ControlRadius": 6,
+      "PanelRadius": 10,
+      "MenuSelectedWidth": 1,
+      "BorderWidth": 1,
+      "FocusWidth": 2,
+      "FocusGap": 3,
+      "Inset": 3
+    },
+    "Card": {
+      "StripeX": 12,
+      "StripeWidth": 4,
+      "PaddingY": 12,
+      "TextInset": 12,
+      "PaddingRight": 12
+    },
+    "Button": {
+      "PaddingX": 16,
+      "MinHeight": 44,
+      "MarkerSize": 24,
+      "MarkerGap": 12
+    },
+    "Choice": {
+      "MarkerSize": 16,
+      "MarkerGap": 8,
+      "PaddingY": 8,
+      "MaxWidth": 620
+    },
+    "Dialogue": {
+      "ContinuePlacement": "corner",
+      "SpeakerInside": true,
+      "SpeakerGap": 4,
+      "TextInset": 16,
+      "ContrastOutline": 2
+    },
+    "Field": {
+      "Height": 40,
+      "PaddingX": 18,
+      "Gap": 4
+    },
+    "Controls": {
+      "OptionHeight": 76,
+      "ValueRatio": 52,
+      "TrackHeight": 8,
+      "ThumbWidth": 10,
+      "ThumbHeight": 18,
+      "SaveHeader": 60,
+      "SaveFooter": 98
+    },
+    "Title": {
+      "Face": "CoretoAveria",
+      "Size": 52,
+      "Line": 56
+    },
+    "Section": {
+      "Face": "CoretoAveria",
+      "Size": 32,
+      "Line": 40
+    },
+    "Speaker": {
+      "Face": "CoretoAveria",
+      "Size": 24,
+      "Line": 28
+    },
+    "Menu": {
+      "Face": "CoretoAveria",
+      "Size": 22,
+      "Line": 28
+    },
+    "Action": {
+      "Face": "CoretoAveria",
+      "Size": 20,
+      "Line": 24
+    },
+    "ChoiceText": {
+      "Face": "CoretoAveria",
+      "Size": 18
+    },
+    "Input": {
+      "Face": "CoretoOutfit",
+      "Size": 18,
+      "Line": 24
+    },
+    "Label": {
+      "Face": "CoretoAveria",
+      "Size": 16,
+      "Line": 20
+    },
+    "Helper": {
+      "Face": "CoretoOutfit",
+      "Size": 14,
+      "Line": 20
+    },
+    "Icons": {
+      "diamond": "CoretoTheme_diamond",
+      "error": "CoretoTheme_error",
+      "Settings": "CoretoTheme_Settings",
+      "Audio": "CoretoTheme_Audio",
+      "Language": "CoretoTheme_Language",
+      "TextEffects": "CoretoTheme_TextEffects",
+      "Music": "CoretoTheme_Music",
+      "Ambience": "CoretoTheme_Ambience",
+      "Jingle": "CoretoTheme_Jingle",
+      "SoundEffects": "CoretoTheme_SoundEffects",
+      "Back": "CoretoTheme_Back",
+      "Save": "CoretoTheme_Save",
+      "Clock": "CoretoTheme_Clock",
+      "Conversation": "CoretoTheme_Conversation",
+      "Menu": "CoretoTheme_Menu"
+    },
+    "OptionsLayout": {
+      "Margin": 28,
+      "CategoryHeight": 76,
+      "CategoryOffsetY": 16,
+      "ListOffsetY": 12,
+      "RowGap": 12,
+      "Bottom": 20
+    },
+    "PictureRoles": [],
+    "Body": {
+      "Face": "CoretoOutfit",
+      "Size": 20
+    },
+    "PaperImage": "CoretoWindow"
+  }
+}

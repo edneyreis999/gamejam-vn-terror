@@ -1,0 +1,132 @@
+{
+  "version": "1.6.1",
+  "required": [
+    "Dryland_Presentation",
+    "Coreto_2_ExtMessageFunc",
+    "Coreto_4_MessageVisibility",
+    "Coreto_1_MessageCore"
+  ],
+  "files": [
+    {
+      "source": "profiles/dryland/Dryland_Medallion.png",
+      "destination": "img/pictures/Dryland_Medallion.png",
+      "recognized": []
+    },
+    {
+      "source": "profiles/dryland/Dryland_6_ParchmentUI.js",
+      "destination": "js/plugins/Dryland_6_ParchmentUI.js",
+      "recognized": [
+        "c08f555c3f82610ca6b5d6876149705f7ca883dc69a9673902bce433f7a7d177",
+        "2deba93c9cd24ee7a056cb6a76bcfb27bdbd219fbbe234bd7d43124f016338bd"
+      ]
+    },
+    {
+      "source": "profiles/dryland/Dryland_6_IllustratedChoices.js",
+      "destination": "js/plugins/Dryland_6_IllustratedChoices.js",
+      "recognized": [
+        "b220ebc285ea9f2b189d9242708ae34cd7bd69bb005ef42e0a6eb184aa6ca618",
+        "6f929e601f698a858c251db948e6f336d696c2d354a5addc6ce3114ff4f5a317",
+        "af9b34c4ea8b02a03fc8ddf89a545254d38fcec089e225faca174d3592b5c54e",
+        "30eeca12e6b73b902840e0273cdbbca3d2f9a409de6e16faf76b603fd0689199"
+      ]
+    },
+    {
+      "source": "profiles/dryland/Window.png",
+      "destination": "img/system/Window.png",
+      "recognized": [
+        "5a602263b85764460408eb3bd8c60e617de896dec6eaff3ab59dc9ef64894461",
+        "c2ef9cb36e41c4fe32480f59cd1b1a013bcd7204b2117abae0fb9b06beafe201"
+      ]
+    },
+    {
+      "source": "profiles/dryland/Dryland_FinalReunite.png",
+      "destination": "img/pictures/Dryland_FinalReunite.png",
+      "recognized": [
+        "ee2a8ca8b7b6f685fde475c13f019daabdf11a6c8af3bef5544bc45ea7177175"
+      ]
+    },
+    {
+      "source": "profiles/dryland/Dryland_FinalDestroy.png",
+      "destination": "img/pictures/Dryland_FinalDestroy.png",
+      "recognized": [
+        "a4c1c294a2059beb5ae262763d2771b33aaa5f49739e6d57cf8b6dab94550a69"
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "namespace": "ext-message",
+      "path": "/Buttons/FastFwd",
+      "legacy": "Fast",
+      "value": "$[ui.console.fast]"
+    },
+    {
+      "namespace": "message-visibility",
+      "path": "/ButtonName",
+      "legacy": "HIDE",
+      "value": "$[ui.console.hide]"
+    }
+  ],
+  "languages": [
+    { "key": "title.heading", "English": "The Dryland", "Portuguese": "Afogados" },
+    { "key": "title.subheading", "English": "Drowned", "Portuguese": "em Terra Seca" },
+    { "key": "ui.options.off", "English": "Off", "Portuguese": "Desligado" },
+    { "key": "ui.options.on", "English": "On", "Portuguese": "Ligado" },
+    {
+      "key": "ui.menu.time",
+      "English": "Time",
+      "Portuguese": "Tempo"
+    },
+    {
+      "key": "ui.console.fast",
+      "English": "Fast",
+      "Portuguese": "Rápido"
+    },
+    {
+      "key": "ui.console.hide",
+      "English": "Hide",
+      "Portuguese": "Ocultar"
+    },
+    {
+      "key": "ui.menu.load",
+      "English": "Load",
+      "Portuguese": "Carregar"
+    },
+    {
+      "key": "ui.destination.choose",
+      "English": "Choose path",
+      "Portuguese": "Escolher caminho"
+    },
+    {
+      "key": "ui.approach.choose",
+      "English": "Choose approach",
+      "Portuguese": "Escolher abordagem"
+    },
+    {
+      "key": "ui.menu",
+      "English": "Menu",
+      "Portuguese": "Menu"
+    }
+  ],
+  "adapters": [
+    {
+      "name": "Dryland_6_ParchmentUI",
+      "status": true,
+      "description": "[Dryland] Packaged semantic integration for Coreto DesignSystem 1.6.0.",
+      "parameters": {}
+    },
+    {
+      "name": "Dryland_6_IllustratedChoices",
+      "status": true,
+      "description": "[Dryland] Packaged semantic integration for Coreto DesignSystem 1.6.0.",
+      "parameters": {
+        "Paper": "Dryland_ChoicePaper",
+        "Approach": "Dryland_ApproachPaper",
+        "Destination": "Dryland_DestinationPaper",
+        "Sacrifice": "Dryland_SacrificePaper",
+        "Reunite": "Dryland_FinalReunite",
+        "Destroy": "Dryland_FinalDestroy"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { cp, mkdir, mkdtemp, readdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { join, resolve, basename } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { startServer, origin } from '../tests/helpers/native-chrome.mjs';
@@ -13,7 +13,7 @@ export async function prepare({ project, output, archivePath = process.env.DRYLA
   if (output) await mkdir(directory);
   const fixture = output ? directory : join(directory, 'game');
   try {
-    await cp(resolve(project, 'rpg-maker/The Dryland Drowned'), fixture, { recursive: true,filter:p=>!['save','game.rmmzproject'].includes(p.split('/').at(-1)) });
+    await cp(resolve(project, 'rpg-maker/The Dryland Drowned'), fixture, { recursive: true,filter:p=>!['save','game.rmmzproject'].includes(basename(p)) });
     execFileSync(process.execPath,[resolve(project,'rpg-maker/tools/prune-build.mjs'),'--build',fixture,'--apply'],{stdio:'pipe'});
     if (archivePath) {
       const archive = JSON.parse(await readFile(resolve(archivePath), 'utf8'));
@@ -34,7 +34,7 @@ export async function describe({ project, fixture }) {
   const files = [];
   async function visit(relative = '') {
     for (const entry of (await readdir(join(fixture, relative), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-      const path = join(relative, entry.name);
+      const path = [relative, entry.name].filter(Boolean).join('/');
       if (entry.isDirectory()) await visit(path);
       else if (entry.isFile()) files.push({ path, sha256: createHash('sha256').update(await readFile(join(fixture, path))).digest('hex') });
       else throw new Error(`Unsupported fixture entry: ${path}`);

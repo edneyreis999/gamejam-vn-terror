@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "checklistVersion": "CP-01-20/v1",
+  "task": "replace-with-task",
+  "author": "replace-with-author",
+  "reviewedAt": "",
+  "evidence": {},
+  "entries": [
+    {
+      "namespace": "demo",
+      "id": "VALUE",
+      "descriptorHash": "sha256:82c2661e7d11b9a07657cf050c59481000b63ddb02a012ca2ba4790125310738",
+      "classification": "",
+      "criteria": {
+        "CP-01": {
+          "status": "pending"
+        },
+        "CP-02": {
+          "status": "pending"
+        },
+        "CP-03": {
+          "status": "pending"
+        },
+        "CP-04": {
+          "status": "pending"
+        },
+        "CP-05": {
+          "status": "pending"
+        },
+        "CP-06": {
+          "status": "pending"
+        },
+        "CP-07": {
+          "status": "pending"
+        },
+        "CP-08": {
+          "status": "pending"
+        },
+        "CP-09": {
+          "status": "pending"
+        },
+        "CP-10": {
+          "status": "pending"
+        },
+        "CP-11": {
+          "status": "pending"
+        },
+        "CP-12": {
+          "status": "pending"
+        },
+        "CP-13": {
+          "status": "pending"
+        },
+        "CP-14": {
+          "status": "pending"
+        },
+        "CP-15": {
+          "status": "pending"
+        },
+        "CP-16": {
+          "status": "pending"
+        },
+        "CP-17": {
+          "status": "pending"
+        },
+        "CP-18": {
+          "status": "pending"
+        },
+        "CP-19": {
+          "status": "pending"
+        },
+        "CP-20": {
+          "status": "pending"
+        }
+      }
+    }
+  ]
+}

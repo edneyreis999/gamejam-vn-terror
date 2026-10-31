@@ -1,0 +1,5 @@
+interface:
+  display_name: "Create Insight Dashboard"
+  short_description: "Dashboard of a spec execution's metrics and improvement insights"
+policy:
+  allow_implicit_invocation: false

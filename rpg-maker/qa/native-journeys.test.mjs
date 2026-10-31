@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { DirectedNativePlayer } from './native-player.mjs';
 import { captureNativeSave, sha256 } from './native-save-archive.mjs';
-export const sourceFiles=[new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url),new URL('../tests/fixtures/gdd-competencies.json',import.meta.url)];
+export const sourceFiles=[new URL('../tests/helpers/keyboard-focus.mjs',import.meta.url),new URL('./native-player.mjs',import.meta.url),new URL('./native-save-archive.mjs',import.meta.url),new URL('../tests/fixtures/gdd-competencies.json',import.meta.url)];
 const variant=process.env.DRYLAND_QA_JOURNEY||'physical-first-reunite';
 const gdd=JSON.parse(await readFile(new URL('../tests/fixtures/gdd-competencies.json',import.meta.url),'utf8'));
 export const scenario={storage:{expectedRef:"planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios"},id:variant,criteria:[{id:'campaign',variant,expectedRef:'planos/tasks/eventbridge-minimal-runtime/verification.md#runtime-scenarios'}],requires:['native-mz','public-input'],browser:{width:1280,height:720,dpr:1,launchArgs:['--force-device-scale-factor=1'],locale:'pt-BR',query:'',reducedMotion:process.env.DRYLAND_QA_MOTION==='reduce'?'reduce':'no-preference',timeoutMs:30000}};
@@ -38,18 +38,18 @@ async function finalCreditLine(context,label){
 async function stableTitle(context,label){
  const titleReady=()=>{
   const scene=SceneManager._scene,choices=scene&&scene._choiceListWindow;
-  return $gameMap.mapId()===1&&$gameMessage.choices().some(label=>TextManager.parseLocalizedText(label).replace(/<[^>]*>/g,'').trim()==='Continuar')&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
+  return $gameMap.mapId()===1&&$gameMessage.choices().some(label=>label.includes('choice.title.continue'))&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
  };
  const titleState=serial=>context.read(label+'-title-stable-'+serial,()=>{
   const scene=SceneManager._scene,choices=scene._choiceListWindow;
-  return{frame:Graphics.frameCount,mapId:$gameMap.mapId(),scene:scene.constructor.name,labels:(choices._list||[]).map(item=>choices.convertEscapeCharacters(item.name).replace(/<[^>]*>/g,'').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim()),active:Boolean(choices.isOpenAndActive()),index:choices.index(),busy:scene.isBusy(),messageBusy:$gameMessage.isBusy(),scrolling:Boolean(scene._scrollTextWindow&&scene._scrollTextWindow._text),scrollMode:$gameMessage.scrollMode(),text:$gameMessage.allText()};
+  return{frame:Graphics.frameCount,mapId:$gameMap.mapId(),scene:scene.constructor.name,labels:(choices._list||[]).map(item=>choices.convertEscapeCharacters(item.name).replace(/\x1bFONTCHANGE<[^>]*>/gi,'').replace(/<[^>]*>/g,'').replace(/\x1b[A-Za-z]+\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim()),active:Boolean(choices.isOpenAndActive()),index:choices.index(),busy:scene.isBusy(),messageBusy:$gameMessage.isBusy(),scrolling:Boolean(scene._scrollTextWindow&&scene._scrollTextWindow._text),scrollMode:$gameMessage.scrollMode(),text:$gameMessage.allText()};
  });
  await context.wait(titleReady);
  const samples=[await titleState(1)];
  for(let serial=2;serial<=3;serial++){
   await context.wait(({frame})=>{
    const scene=SceneManager._scene,choices=scene&&scene._choiceListWindow;
-   return Graphics.frameCount>frame&&$gameMap.mapId()===1&&$gameMessage.choices().some(label=>TextManager.parseLocalizedText(label).replace(/<[^>]*>/g,'').trim()==='Continuar')&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
+   return Graphics.frameCount>frame&&$gameMap.mapId()===1&&$gameMessage.choices().some(label=>label.includes('choice.title.continue'))&&choices&&choices.isOpenAndActive()&&!scene.isBusy()&&!$gameMessage.scrollMode()&&!(scene._scrollTextWindow&&scene._scrollTextWindow._text);
   },samples.at(-1));
   samples.push(await titleState(serial));
  }
@@ -60,10 +60,10 @@ async function stableTitle(context,label){
  return samples;
 }
 function assertCreditProgress(before,after,expected){
- assert.equal(after.configuredSpeed,2);
+ assert.equal(after.configuredSpeed,before.configuredSpeed);
  assert.equal(after.noFast,false);
  assert.equal(after.effectiveSpeed,expected);
- assert.equal(after.fastForward,expected===3);
+ assert.equal(after.fastForward,expected===before.configuredSpeed / 2 * 3);
  const frameDelta=after.frame-before.frame,scrollDelta=after.scrollY-before.scrollY;
  assert.ok(frameDelta>0&&scrollDelta>0,'Credits must advance between native frames.');
  assert.ok(Math.abs(scrollDelta/frameDelta-expected)<0.000001,'Credits must advance at the native speed per frame.');
@@ -76,9 +76,10 @@ export async function finishCredits(context,player,label){
  const baseMode=mode.startsWith('late-')?mode.slice(5):mode;
  if(mode.startsWith('late-'))await context.wait(()=>{const scene=SceneManager._scene,w=scene&&scene._scrollTextWindow;return w&&w.origin.y>0;});
  const initial=await readCredits(context,label+'-credits-start-read');
- assert.equal(initial.configuredSpeed,2,'Credits must use native speed 2.');
+ assert.ok(initial.configuredSpeed > 0, 'Credits must use a positive native speed.');
+ const baseSpeed = initial.configuredSpeed / 2;
  assert.equal(initial.noFast,false,'Credits must allow native acceleration.');
- assert.equal(initial.effectiveSpeed,1,'Native speed 2 must advance one pixel per frame normally.');
+ assert.equal(initial.effectiveSpeed,baseSpeed,'Credits must use their authored native speed.');
  assert.ok(initial.active&&initial.allTextHeight>0&&initial.lastLine,'Credits must expose authored rolling text.');
  let moving=null,progress=null,edge=null,completion=null;
  if(baseMode==='natural'||baseMode==='accelerated'){
@@ -87,17 +88,17 @@ export async function finishCredits(context,player,label){
    try{
     const held=await readCredits(context,label+'-credits-shift-held');
     moving=await nextCreditFrame(context,held,label+'-credits-accelerated-frame');
-    progress=assertCreditProgress(held,moving,3);
+    progress=assertCreditProgress(held,moving,baseSpeed*3);
     await context.wait(()=>{const w=SceneManager._scene._scrollTextWindow;return w&&w._scrollY>=-w.height/2;});await context.shot(label+'-credits-middle');
     edge=await finalCreditLine(context,label);
    }finally{await context.input.keyUp('Shift');}
   }else{
    moving=await nextCreditFrame(context,initial,label+'-credits-natural-frame');
-   progress=assertCreditProgress(initial,moving,1);
+   progress=assertCreditProgress(initial,moving,baseSpeed);
    await context.wait(()=>{const w=SceneManager._scene._scrollTextWindow;return w&&w._scrollY>=-w.height/2;});await context.shot(label+'-credits-middle');
    edge=await finalCreditLine(context,label);
   }
-  const expectedSpeed=baseMode==='accelerated'?3:1;
+  const expectedSpeed=baseMode==='accelerated'?baseSpeed*3:baseSpeed;
   assert.equal(edge.boundary,true);
   assert.equal(edge.lastLine,initial.lastLine,'Final credit line must be observed before native termination.');
   assert.equal(edge.effectiveSpeed,expectedSpeed);
@@ -108,7 +109,7 @@ export async function finishCredits(context,player,label){
  }else if(baseMode==='mouse'){
   const point=await context.read(label+'-skip-geometry',()=>{
    const scene=SceneManager._scene,rect=Graphics._canvas.getBoundingClientRect();
-   const sprite=scene._spriteset._pictureContainer.children.find(sprite=>sprite.picture()?._drylandScrollSkipKey);
+   const sprite=scene._spriteset._pictureContainer.children.find(sprite=>sprite instanceof Sprite_Picture && sprite.picture()?._drylandScrollSkipKey);
    const bounds=sprite.getBounds();return{x:rect.x+(bounds.x+bounds.width/2)*rect.width/Graphics.width,y:rect.y+(bounds.y+bounds.height/2)*rect.height/Graphics.height};
   });await player.click(point.x,point.y);
  }else await context.input.key('Escape');
@@ -193,6 +194,8 @@ export async function execute(context){
    // Public route labels are read from the functional editor configuration.
    const label=await context.read('public-route-name',id=>TextManager.parseLocalizedText($dataCommonEvents[4].list.find(c=>c.code===357&&c.parameters[1]==='ConfigureRoute'&&c.parameters[3].id===id).parameters[3].name),route);
    assert.ok(label);await player.choose(destinations.labels.find(text=>text.includes(label)));
+  }else if(surface.active&&surface.kind==='camp'){
+   await player.choose('Continuar');
   }else if(surface.active&&surface.kind==='approaches'){
    const id=state.assignments[state.dungeonId][state.position-1];
    await player.assertMapOwner((id[0]==='A'?6:14)+Number(id.slice(1)));

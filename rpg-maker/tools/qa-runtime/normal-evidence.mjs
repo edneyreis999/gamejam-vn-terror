@@ -12,7 +12,7 @@ while (true) {
   try {
     const actual = resolve(await realpath(ancestor), relative(ancestor, parent));
     const part = relative(project, actual);
-    if (part === '..' || part.startsWith('../') || isAbsolute(part)) throw new Error('Fixture destination outside project.');
+    if (part === '..' || part.replaceAll('\\','/').startsWith('../') || isAbsolute(part)) throw new Error('Fixture destination outside project.');
     break;
   } catch (error) { if (error.code !== 'ENOENT') throw error; ancestor = dirname(ancestor); }
 }

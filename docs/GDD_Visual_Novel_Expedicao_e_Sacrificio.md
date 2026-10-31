@@ -4,7 +4,7 @@
 **Título internacional para metadados:** The Dryland Drowned\
 **Versão-base:** 4.0, com atualizações incrementais\
 **Data da consolidação-base:** 4 de setembro de 2026\
-**Última atualização:** 16 de outubro de 2026\
+**Última atualização:** 30 de outubro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Idiomas jogáveis:** PT-BR e EN-US; inglês como padrão inicial (localização aprovada, implementação pendente)\
@@ -1321,6 +1321,26 @@ Irati e Palotina aparecem somente em texto, documentos, silhuetas ou detalhes de
 
 **Texto nas placas do acampamento — solicitado em 2026-10-23:** usar tinta escura sobre o pergaminho, inclusive ao focar ou passar o mouse, em lugar das letras brancas herdadas dos botões roxos. Direção **Confirmada**; preservar nomes, idiomas e ações. A correção abrange as mesmas placas de papel nos demais consumidores. Ver [incremento](../planos/tasks/camp-paper-ink/spec.md). Captura sugerida: nome de herói em foco no acampamento.
 
+<a id="uxdr-001-coreto"></a>
+
+**Escolha do medalhão — refinamento confirmado em 2026-10-31:** conforme o UXDR-001, usar um único desenho central nos estados de duas metades, reunido e fragmentado. Os textos “Reunir o medalhão” e “Destruir o medalhão” são os controles; hover/foco antecipa a transformação e mostra, respectivamente, “Libertar os amantes e sacrificar Ivaí” e “Salvar Ivaí e entregar os amantes a Andirá”. A prévia não confirma nem altera as consequências da seção 16. Sem foco, mostrar duas metades; movimento reduzido troca diretamente os estados. Acabamento da tela de escolha do medalhão aceito pelo usuário em 31/10/2026.
+
+**Linguagem visual e estados de interação do Coreto — Confirmado em 2026-10-30:** o [UXDR-001](uxdrs/uxdr-001-linguagem-visual-e-estados-de-interacao.md) registra as decisões de apresentação aprovadas pelo usuário e preserva as referências visuais. Este incremento especifica os recortes de foco, escurecimento e controles acima, sem reescrever suas baselines históricas. A [implementação sobre o pacote 1.6.1](uxdrs/uxdr-001-implementacao.md) reúne verificação técnica, jornadas completas, movimento reduzido, capturas e vídeo. O aceite visual humano dos derivados finais permanece pendente.
+
+- **Ações e estado ativo:** ações de texto leves, identificadas por traço fino, com pena após o texto no hover/foco e apoio claro onde necessário. Informações não recebem sinais de ação. O lacre identifica opção ativa ou submenu aberto, com proporção de referência de 16 px para texto de 22 px; não sinaliza apenas disponibilidade de destino.
+- **Imagens:** aumento de 10%, contorno e halo seguindo a silhueta não transparente; clarear a opção em foco e manter as demais disponíveis na aparência normal. Esta revisão solicitada em 30/10 no aceite da taverna substitui o escurecimento anterior; acabamento aguarda aceite visual. Preservar legibilidade e movimento reduzido. Compartilhar a linguagem com o sacrifício sem alterar expressões, falas ou consequências específicas.
+- **Halo compartilhado:** imagens, ações de texto e texto com ícone usam lilás dessaturado, fino e suave no hover/foco. Preservar traços, detalhes, pena e tinta legível. Calibração inicial `#BCA6C9` a 45%, difusão de 4 px e expansão de 0,75 px nas imagens; aceite do acabamento pendente. Informações e controles indisponíveis não recebem halo.
+- **Refinamento dos controles de texto:** ações de texto e texto com ícone também ampliam 10% no hover/foco, com halo perceptível nos traços e área de interação estável. Movimento reduzido preserva o halo sem ampliação. O usuário aceitou o destaque das imagens; o acabamento dos controles de texto aguarda aceite.
+- **Indisponibilidade e teclado:** controles indisponíveis não recebem foco, hover, confirmação nem som de erro; motivo visível. A navegação acompanha a disposição visual, ignora indisponíveis e restaura o foco ao retornar de submenus. Preservar a ação explicativa sobre grupo cheio confirmada na seção 1.1.
+- **Menus e HIDE:** pergaminho unificado e divisórias consistentes. Conforme revisão do UXDR-001 em 2026-10-30, o tempo aparece apenas com ampulheta e contador, sem rótulo; tempo e ouro usam Outfit padrão (20 px), com ícones de 1,3× a fonte. HIDE também oculta enunciado, pergaminho, escolhas e descrição auxiliar das armadilhas; os controles ocultos não permanecem acionáveis. Restaurar por Tab ou clique esquerdo sem avançar ou confirmar uma abordagem, retomando o foco anterior.
+- **Fontes e ícones:** preservar Averia Libre e Outfit nos papéis configurados. Usar iconografia em tinta: ampulheta para tempo, moeda para ouro onde aplicável, alaúde para música, sino para efeitos, seta curva para voltar e duas folhas em redemoinho para ambiente. A iconografia não cria economia ou novos controles.
+- **Efeitos de texto — revisão de 31/10/2026:** apresentar Desligado/Ligado como opções explícitas, com lacre no estado ativo, preservando a preferência existente. Acabamento aceito em 31/10/2026 na avaliação de Configurações gerais.
+- **Título e descrição dos destinos — revisão de 2026-10-30:** acompanhar o foco da opção com halo e ampliação leve de 5%, sem sublinhado ou pena, preservando tinta escura. Movimento reduzido mantém apenas o halo; indisponíveis não recebem destaque. Acabamento aceito pelo usuário em 30/10 na tela de seleção de destino.
+- **Composição do diálogo — revisão de 2026-10-30:** nome do falante em Averia Libre de 28 px, cor `#360A0B`, com espaço reservado antes da fala. Indicador de borda de página junto à base do pergaminho, no canto inferior direito, em todas as caixas. Direção e acabamento aceitos pelo usuário em 2026-10-30, com aplicação global pelo componente compartilhado.
+- **Continuidade do diálogo:** usar os três quadros do sprite sheet preservado no UXDR. Primeiro quadro estático em repouso; sequência 1 → 2 → 3 ao receber hover/foco; terceiro quadro mantido enquanto houver foco; sequência inversa ao sair. Manter a borda alinhada, com caixa e texto imóveis. O GIF aprovado simula essas transições; sua repetição não é comportamento automático de repouso. Preservar movimento reduzido. Esta aprovação não acrescenta animação específica de clique nem altera o contrato de avanço do diálogo.
+
+**Momento demonstrável e captura sugerida:** comparar ações e informações na taverna, foco e indisponibilidade nas escolhas ilustradas e HIDE nas armadilhas; capturar a sequência de abertura, permanência e fechamento da borda de continuidade com caixa e texto imóveis. Implementação e validação no runtime permanecem **Pendentes**.
+
 ### 19.3 Parque das Águas Assombradas
 
 O parque foi aberto pela Companhia das Duas Margens, formada por descendentes comerciais das duas casas, quarenta anos depois da tragédia. Comercializou versões higienizadas das lendas, culpou Andirá isoladamente e apagou a perseguição familiar. Foi construído ao redor da figueira de Floraí, operou por vinte anos, fechou após desaparecimentos e a companhia se dissolveu.
@@ -1506,6 +1526,8 @@ O GDD v4.0 define a visão completa. O recorte de cada incremento do protótipo 
 **Final por perda total MZ — Confirmado:** usar ilustração própria de tela inteira com narração nativa sobreposta, conforme ADR-032. A arte gerada é provisória e não altera o momento ou local lógico em que a derrota pode ocorrer.
 
 **Memorial MZ — Confirmado:** apresentar juntos em uma única tela os retratos e nomes de todos os heróis mortos na campanha, sem páginas individuais. Omitir quando não houver mortos; manter os epílogos elegíveis separados (ADR-033).
+
+**Composição do memorial — confirmada em 2026-10-31 (UXDR-001):** restaurar a distribuição original das lápides lado a lado, com as posições, escalas e inscrições nativas. Até quatro lápides por fileira; uma segunda fileira quando necessário. Manter um único pergaminho para as lápides, textos e frase/controles do rodapé. As propostas de inscrição lateral em duas colunas e de coluna única foram descartadas. Preservar dados da campanha e animação nativa. Aceite visual confirmado pelo usuário em 2026-10-31 para a composição lado a lado com pergaminho único.
 
 **Animação do memorial MZ — Confirmado:** um Common Event exclusivo executa a animação: mostrar apenas as lápides e bustos dos heróis mortos; reduzir e mover cada busto até o topo de sua lápide, transformando-o visualmente em retrato emoldurado. A composição final reúne todos na mesma tela. O mapa do memorial chama esse evento; usar comandos nativos de imagens e movimento. A versão padrão é animada (ADR-034).
 
