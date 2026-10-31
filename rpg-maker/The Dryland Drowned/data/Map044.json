@@ -8073,6 +8073,26 @@
                             "indent": 1,
                             "parameters": [
                                 12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
                                 "!$gameVariables.value(47)"
                             ]
                         },
@@ -10722,6 +10742,26 @@
                             "indent": 1,
                             "parameters": [
                                 12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 2,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
                                 "!$gameVariables.value(47)"
                             ]
                         },
@@ -10810,6 +10850,33 @@
                                     "AutoErase:eval": "true"
                                 }
                             ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                60
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                63
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 111,

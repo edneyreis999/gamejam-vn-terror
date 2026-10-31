@@ -2498,30 +2498,6 @@
                     },
                     "list": [
                         {
-                            "code": 241,
-                            "indent": 0,
-                            "parameters": [
-                                {
-                                    "name": "",
-                                    "volume": 90,
-                                    "pitch": 100,
-                                    "pan": 0
-                                }
-                            ]
-                        },
-                        {
-                            "code": 245,
-                            "indent": 0,
-                            "parameters": [
-                                {
-                                    "name": "",
-                                    "volume": 90,
-                                    "pitch": 100,
-                                    "pan": 0
-                                }
-                            ]
-                        },
-                        {
                             "code": 249,
                             "indent": 0,
                             "parameters": [
@@ -2539,10 +2515,19 @@
                             "parameters": []
                         },
                         {
-                            "code": 235,
+                            "code": 231,
                             "indent": 0,
                             "parameters": [
-                                1
+                                1,
+                                "Dryland_Coreto",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
                             ]
                         },
                         {
@@ -2630,22 +2615,50 @@
                             "parameters": []
                         },
                         {
-                            "code": 117,
+                            "code": 357,
                             "indent": 0,
                             "parameters": [
-                                67
+                                "Dryland_1_SceneAudio",
+                                "Prepare",
+                                "Prepare",
+                                {
+                                    "bgm": "Dryland_Opening_TheWell",
+                                    "bgs": "People2"
+                                }
                             ]
                         },
                         {
-                            "code": 250,
+                            "code": 357,
                             "indent": 0,
                             "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "Play",
+                                "Play",
                                 {
-                                    "name": "Applause1",
-                                    "volume": 35,
-                                    "pitch": 100,
-                                    "pan": 0
+                                    "movie": "reedEntranceAlpha"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "WaitUntil",
+                                "WaitUntil",
+                                {
+                                    "seconds": "2.2"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_2_NewGameTransition",
+                                "RevealPrologue",
+                                "Reveal prologue beneath smoke",
+                                {}
                             ]
                         },
                         {
@@ -2668,22 +2681,6 @@
                             ]
                         },
                         {
-                            "code": 231,
-                            "indent": 0,
-                            "parameters": [
-                                1,
-                                "Dryland_Coreto",
-                                0,
-                                0,
-                                0,
-                                0,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
-                        },
-                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
@@ -2696,22 +2693,37 @@
                             ]
                         },
                         {
-                            "code": 357,
+                            "code": 231,
                             "indent": 0,
                             "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Basic_EnterBust",
-                                "Basic_EnterBust",
+                                1,
+                                "Dryland_Coreto",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 0,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 250,
+                            "indent": 0,
+                            "parameters": [
                                 {
-                                    "PictureID:eval": "60",
-                                    "PictureName:str": "Reed final",
-                                    "Origin:str": "Upper Left",
-                                    "Position:num": "5",
-                                    "StartOffsetX:eval": "0",
-                                    "StartOffsetY:eval": "0",
-                                    "EasingType:str": "OutSine",
-                                    "HorzMirror:str": "None",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                    "name": "Applause1",
+                                    "volume": 35,
+                                    "pitch": 100,
+                                    "pan": 0
                                 }
                             ]
                         },
@@ -2719,14 +2731,11 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
+                                "Dryland_1_SceneAudio",
+                                "FadeIn",
+                                "FadeIn",
                                 {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "85.71428571428571",
-                                    "TargetScaleY:str": "85.71428571428571",
-                                    "Duration:eval": "0"
+                                    "seconds": "1"
                                 }
                             ]
                         },
@@ -2734,17 +2743,26 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Move_MoveToCoordinates",
-                                "Move_MoveToCoordinates",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetX:str": "(Graphics.boxWidth - 349.7142857142857) / 2",
-                                    "TargetY:str": "32",
-                                    "EasingType:str": "Linear",
-                                    "FlipDirection:str": "None",
-                                    "Duration:eval": "0"
-                                }
+                                "Dryland_1_AlphaMovie",
+                                "WaitEnd",
+                                "WaitEnd",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                60,
+                                "Reed final",
+                                0,
+                                0,
+                                0,
+                                0,
+                                66.66666666666667,
+                                66.66666666666667,
+                                255,
+                                0
                             ]
                         },
                         {
@@ -3264,10 +3282,106 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_SceneAudio",
+                                "Prepare",
+                                "Prepare",
+                                {
+                                    "bgm": "Dryland_PrologueTavern_ManMadeWings",
+                                    "bgs": "People1"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 242,
+                            "indent": 0,
+                            "parameters": [
+                                1
+                            ]
+                        },
+                        {
+                            "code": 246,
+                            "indent": 0,
+                            "parameters": [
+                                1
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "Play",
+                                "Play",
+                                {
+                                    "movie": "reedTransition"
+                                }
+                            ]
+                        },
+                        {
                             "code": 235,
                             "indent": 0,
                             "parameters": [
                                 60
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "WaitUntil",
+                                "WaitUntil",
+                                {
+                                    "seconds": "2.9"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 0,
+                            "parameters": [
+                                1,
+                                "Dryland_Taverna",
+                                1,
+                                0,
+                                640,
+                                360,
+                                100,
+                                100,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 0,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_SceneAudio",
+                                "FadeIn",
+                                "FadeIn",
+                                {
+                                    "seconds": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Dryland_1_AlphaMovie",
+                                "WaitEnd",
+                                "WaitEnd",
+                                {}
                             ]
                         },
                         {
@@ -3290,13 +3404,6 @@
                             ]
                         },
                         {
-                            "code": 117,
-                            "indent": 0,
-                            "parameters": [
-                                67
-                            ]
-                        },
-                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
@@ -3314,72 +3421,6 @@
                             "parameters": [
                                 "Cartão de transição: escurece a tela antes de voltar ao passado."
                             ]
-                        },
-                        {
-                            "code": 111,
-                            "indent": 0,
-                            "parameters": [
-                                1,
-                                47,
-                                0,
-                                0,
-                                0
-                            ]
-                        },
-                        {
-                            "code": 223,
-                            "indent": 1,
-                            "parameters": [
-                                [
-                                    -255,
-                                    -255,
-                                    -255,
-                                    0
-                                ],
-                                30,
-                                true
-                            ]
-                        },
-                        {
-                            "code": 411,
-                            "indent": 0,
-                            "parameters": []
-                        },
-                        {
-                            "code": 223,
-                            "indent": 1,
-                            "parameters": [
-                                [
-                                    -255,
-                                    -255,
-                                    -255,
-                                    0
-                                ],
-                                0,
-                                false
-                            ]
-                        },
-                        {
-                            "code": 412,
-                            "indent": 0,
-                            "parameters": []
-                        },
-                        {
-                            "code": 221,
-                            "indent": 0,
-                            "parameters": []
-                        },
-                        {
-                            "code": 235,
-                            "indent": 0,
-                            "parameters": [
-                                1
-                            ]
-                        },
-                        {
-                            "code": 222,
-                            "indent": 0,
-                            "parameters": []
                         },
                         {
                             "code": 101,
@@ -3404,98 +3445,6 @@
                             "indent": 0,
                             "parameters": [
                                 "Mostra a Taverna do passado surgindo do escuro."
-                            ]
-                        },
-                        {
-                            "code": 221,
-                            "indent": 0,
-                            "parameters": []
-                        },
-                        {
-                            "code": 231,
-                            "indent": 0,
-                            "parameters": [
-                                1,
-                                "Dryland_Taverna",
-                                1,
-                                0,
-                                640,
-                                360,
-                                100,
-                                100,
-                                0,
-                                0
-                            ]
-                        },
-                        {
-                            "code": 111,
-                            "indent": 0,
-                            "parameters": [
-                                1,
-                                47,
-                                0,
-                                0,
-                                0
-                            ]
-                        },
-                        {
-                            "code": 232,
-                            "indent": 1,
-                            "parameters": [
-                                1,
-                                0,
-                                1,
-                                0,
-                                640,
-                                360,
-                                100,
-                                100,
-                                255,
-                                0,
-                                30,
-                                true
-                            ]
-                        },
-                        {
-                            "code": 411,
-                            "indent": 0,
-                            "parameters": []
-                        },
-                        {
-                            "code": 232,
-                            "indent": 1,
-                            "parameters": [
-                                1,
-                                0,
-                                1,
-                                0,
-                                640,
-                                360,
-                                100,
-                                100,
-                                255,
-                                0,
-                                1,
-                                true
-                            ]
-                        },
-                        {
-                            "code": 412,
-                            "indent": 0,
-                            "parameters": []
-                        },
-                        {
-                            "code": 223,
-                            "indent": 0,
-                            "parameters": [
-                                [
-                                    0,
-                                    0,
-                                    0,
-                                    0
-                                ],
-                                0,
-                                false
                             ]
                         },
                         {
@@ -3599,11 +3548,6 @@
                             "parameters": [
                                 61
                             ]
-                        },
-                        {
-                            "code": 222,
-                            "indent": 0,
-                            "parameters": []
                         },
                         {
                             "code": 357,
@@ -4360,6 +4304,33 @@
                                     "AutoErase:eval": "true"
                                 }
                             ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                60
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 1,
+                            "parameters": [
+                                61
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 111,

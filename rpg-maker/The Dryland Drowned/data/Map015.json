@@ -2498,22 +2498,6 @@
                     },
                     "list": [
                         {
-                            "code": 231,
-                            "indent": 0,
-                            "parameters": [
-                                1,
-                                "Dryland_Encounter_B1",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
-                        },
-                        {
                             "code": 118,
                             "indent": 0,
                             "parameters": [
@@ -2543,6 +2527,35 @@
                             "indent": 0,
                             "parameters": [
                                 12,
+                                "$gameVariables.value(31) !== 'encounter_intro'"
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_B1",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
                                 "!([\"encounter_intro\",\"encounter_choice\",\"approach_result\",\"retreat_confirmation\",\"sacrifice_choice\",\"death_result\",\"automatic_retreat\"].includes($gameVariables.value(31)) && $gameVariables.value(32) === 'B1')"
                             ]
                         },
@@ -2564,11 +2577,24 @@
                             "parameters": []
                         },
                         {
-                            "code": 117,
+                            "code": 111,
                             "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(31) !== 'encounter_intro' && $gameVariables.value(21) !== 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
                             "parameters": [
                                 67
                             ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 111,
@@ -5269,6 +5295,31 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "Coreto_0_CoreEngine",
+                                "SystemLoadImages",
+                                "SystemLoadImages",
+                                {
+                                    "animations:arraystr": "[]",
+                                    "battlebacks1:arraystr": "[]",
+                                    "battlebacks2:arraystr": "[]",
+                                    "characters:arraystr": "[]",
+                                    "enemies:arraystr": "[]",
+                                    "faces:arraystr": "[]",
+                                    "parallaxes:arraystr": "[]",
+                                    "pictures:arraystr": "[\"Dryland_H1_Desorientado\",\"Dryland_rheed_Inquieto\",\"Dryland_ivai_Apreensivo\",\"Dryland_ivai_Alarmado\"]",
+                                    "sv_actors:arraystr": "[]",
+                                    "sv_enemies:arraystr": "[]",
+                                    "system:arraystr": "[]",
+                                    "tilesets:arraystr": "[]",
+                                    "titles1:arraystr": "[]",
+                                    "titles2:arraystr": "[]"
+                                }
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 0,
                             "parameters": [
@@ -5377,24 +5428,121 @@
                             ]
                         },
                         {
-                            "code": 108,
+                            "code": 111,
                             "indent": 0,
                             "parameters": [
-                                "Consulta a preferência do sistema/navegador por movimento reduzido. Grava"
+                                12,
+                                "$gameVariables.value(21) !== 'reread'"
                             ]
                         },
                         {
-                            "code": 408,
-                            "indent": 0,
+                            "code": 242,
+                            "indent": 1,
                             "parameters": [
-                                "verdadeiro ou falso na variável 47 para o evento escolher a duração dos"
+                                0.4
                             ]
                         },
                         {
-                            "code": 408,
+                            "code": 246,
+                            "indent": 1,
+                            "parameters": [
+                                0.4
+                            ]
+                        },
+                        {
+                            "code": 221,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                377
+                            ]
+                        },
+                        {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Encounter_B1",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 234,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                [
+                                    -255,
+                                    -255,
+                                    -255,
+                                    0
+                                ],
+                                0,
+                                false
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_1_SceneAudio",
+                                "FadeIn",
+                                "FadeIn",
+                                {
+                                    "seconds": "1.5"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 234,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                90,
+                                true
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 235,
                             "indent": 0,
                             "parameters": [
-                                "efeitos."
+                                60
+                            ]
+                        },
+                        {
+                            "code": 235,
+                            "indent": 0,
+                            "parameters": [
+                                63
                             ]
                         },
                         {
@@ -5410,10 +5558,20 @@
                             ]
                         },
                         {
-                            "code": 108,
+                            "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "Mostra o busto do Rheed, narrador da armadilha, durante a introdução."
+                                "Dryland_EventBridge",
+                                "Query",
+                                "Query",
+                                {
+                                    "kind": "campParticipant",
+                                    "id": "H1",
+                                    "index": "0",
+                                    "variable": "0",
+                                    "switch": "61",
+                                    "identityVariable": "0"
+                                }
                             ]
                         },
                         {
@@ -5424,10 +5582,10 @@
                                 "Basic_EnterBust",
                                 "Basic_EnterBust",
                                 {
-                                    "PictureID:eval": "60",
-                                    "PictureName:str": "Reed final",
+                                    "PictureID:eval": "63",
+                                    "PictureName:str": "Dryland_ivai_Apreensivo",
                                     "Origin:str": "Bust",
-                                    "Position:num": "2",
+                                    "Position:num": "8",
                                     "StartOffsetX:eval": "0",
                                     "StartOffsetY:eval": "0",
                                     "EasingType:str": "OutSine",
@@ -5444,10 +5602,10 @@
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
                                 {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "51",
-                                    "TargetScaleY:str": "51",
-                                    "Duration:eval": "0"
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "47.023809523809526",
+                                    "TargetScaleY:str": "47.03464474456841",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
                                 }
                             ]
                         },
@@ -5459,10 +5617,10 @@
                                 "Move_MoveToCoordinates",
                                 "Move_MoveToCoordinates",
                                 {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetX:str": "320",
-                                    "TargetY:str": "700",
-                                    "EasingType:str": "Linear",
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetX:str": "960",
+                                    "TargetY:str": "725",
+                                    "EasingType:str": "InOutSine",
                                     "FlipDirection:str": "None",
                                     "Duration:eval": "0"
                                 }
@@ -5476,7 +5634,7 @@
                                 0,
                                 0,
                                 2,
-                                ""
+                                "$[enc.speaker.ivai]"
                             ]
                         },
                         {
@@ -5487,24 +5645,313 @@
                             ]
                         },
                         {
-                            "code": 101,
+                            "code": 111,
                             "indent": 0,
+                            "parameters": [
+                                0,
+                                61,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_EnterBust",
+                                "Basic_EnterBust",
+                                {
+                                    "PictureID:eval": "60",
+                                    "PictureName:str": "Dryland_H1_Desorientado",
+                                    "Origin:str": "Bust",
+                                    "Position:num": "2",
+                                    "StartOffsetX:eval": "0",
+                                    "StartOffsetY:eval": "0",
+                                    "EasingType:str": "OutSine",
+                                    "HorzMirror:str": "None",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "67.9945",
+                                    "TargetScaleY:str": "68.0062",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "725",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_EnterBust",
+                                "Basic_EnterBust",
+                                {
+                                    "PictureID:eval": "60",
+                                    "PictureName:str": "Dryland_rheed_Inquieto",
+                                    "Origin:str": "Bust",
+                                    "Position:num": "2",
+                                    "StartOffsetX:eval": "0",
+                                    "StartOffsetY:eval": "0",
+                                    "EasingType:str": "OutSine",
+                                    "HorzMirror:str": "None",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "63.1236442516269",
+                                    "TargetScaleY:str": "63.10082063305978",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Move_MoveToCoordinates",
+                                "Move_MoveToCoordinates",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetX:str": "320",
+                                    "TargetY:str": "725",
+                                    "EasingType:str": "InOutSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-32,-32,-32,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45.14285714285714",
+                                    "TargetScaleY:str": "45.15325895478567",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 70.7143 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 70.7265 : 65.62485345838218",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                0,
+                                61,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
                             "parameters": [
                                 "",
                                 0,
                                 0,
                                 2,
-                                ""
+                                "$[enc.speaker.h1]"
                             ]
                         },
                         {
                             "code": 401,
-                            "indent": 0,
+                            "indent": 1,
                             "parameters": [
                                 "$[enc.b1.intro.2]"
                             ]
                         },
                         {
+                            "code": 411,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "$[enc.speaker.rheed]"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[enc.b1.intro.2]"
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-32,-32,-32,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 65.2747 : 60.598698481561826",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 65.286 : 60.57678780773739",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "48.904761904761905",
+                                    "TargetScaleY:str": "48.916030534351144",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_GraphicChange",
+                                "Basic_GraphicChange",
+                                {
+                                    "PictureID:eval": "63",
+                                    "PictureName:str": "Dryland_ivai_Alarmado"
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 0,
                             "parameters": [
@@ -5512,22 +5959,166 @@
                                 0,
                                 0,
                                 2,
-                                ""
+                                "$[enc.speaker.ivai]"
                             ]
                         },
                         {
                             "code": 401,
                             "indent": 0,
                             "parameters": [
-                                "$[enc.common.prompt_escape]"
+                                "$[enc.b1.intro.3]"
                             ]
                         },
                         {
-                            "code": 108,
+                            "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "Retira o busto do Rheed antes das abordagens."
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-32,-32,-32,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
                             ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45.14285714285714",
+                                    "TargetScaleY:str": "45.15325895478567",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "$gameSwitches.value(61) ? 70.7143 : 65.64859002169197",
+                                    "TargetScaleY:str": "$gameSwitches.value(61) ? 70.7265 : 65.62485345838218",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 16"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                0,
+                                61,
+                                0
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "$[enc.speaker.h1]"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[enc.b1.intro.4]"
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "$[enc.speaker.rheed]"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[enc.b1.intro.4]"
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "!$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Basic_ExitBusts",
+                                "Basic_ExitBusts",
+                                {
+                                    "PictureID:arrayeval": "[\"60\",\"63\"]",
+                                    "EndOffsetX:eval": "0",
+                                    "EndOffsetY:eval": "0",
+                                    "EasingType:str": "InSine",
+                                    "FlipDirection:str": "None",
+                                    "Duration:eval": "20",
+                                    "AutoErase:eval": "false"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 230,
+                            "indent": 1,
+                            "parameters": [
+                                20
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
                         },
                         {
                             "code": 235,
@@ -5537,17 +6128,10 @@
                             ]
                         },
                         {
-                            "code": 108,
+                            "code": 235,
                             "indent": 0,
                             "parameters": [
-                                "Encerra os controles desta leitura e desliga os modos de avanço. A conclusão"
-                            ]
-                        },
-                        {
-                            "code": 408,
-                            "indent": 0,
-                            "parameters": [
-                                "da passagem da campanha fica a cargo do EventBridge."
+                                63
                             ]
                         },
                         {

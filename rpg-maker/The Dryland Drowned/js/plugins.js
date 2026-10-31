@@ -804,5 +804,23 @@ var $plugins =
         "status": true,
         "description": "Sacrifice focus and owned scene audio",
         "parameters": {}
+    },
+    {
+        "name": "Dryland_1_AlphaMovie",
+        "status": true,
+        "description": "Alpha video scene transitions",
+        "parameters": {}
+    },
+    {
+        "name": "Dryland_2_NewGameTransition",
+        "status": true,
+        "description": "New-game screen continuity beneath prologue smoke",
+        "parameters": {}
+    },
+    {
+        "name": "Dryland_1_SceneAudio",
+        "status": true,
+        "description": "Prepare and fade scene audio alongside native transitions",
+        "parameters": {}
     }
 ];
