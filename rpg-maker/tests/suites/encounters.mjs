@@ -151,8 +151,14 @@ async function nativeEncounter(t, options = {}) {
   }
   await openDestinations(browser);
   await activate(browser, 'destinations', 0);
-  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'dungeon_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
-  await browser.press('Enter', 13);
+  // A caminhada de abertura tem várias falas de Ivaí antes da armadilha.
+  const opening = "$gameSystem._dryland.campaign.phase === 'dungeon_intro' && $gameMessage.hasText() && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0";
+  await browser.waitFor(opening);
+  while (await browser.evaluate(opening)) {
+    const text = await browser.evaluate('$gameMessage.allText()');
+    await browser.press('Enter', 13);
+    await browser.waitFor(`$gameSystem._dryland.campaign.phase !== 'dungeon_intro' || (${opening} && $gameMessage.allText() !== ${JSON.stringify(text)})`);
+  }
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMap.mapId() >= 7 && $gameMap.mapId() <= 14 && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
   return browser;
 }
@@ -176,12 +182,15 @@ async function frames(browser, count = 4) {
 canonicalCase('IT-005', 'real transfer and final-description held/double input never commit a newly opened approach', { timeout: 180000 }, async t => {
   for (const reduced of [false, true]) await t.test(reduced ? 'reduced' : 'normal', async t => {
     const browser = await nativeEncounter(t, { reduced });
-    assert.deepEqual(await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)'), ['Reed final'], 'The approved narrator alone owns the encounter introduction');
+    const introBusts = await browser.evaluate('Array.from({length:11},(_,i)=>$gameScreen.picture(60+i)?.name()).filter(Boolean)');
+    assert.ok(introBusts.some(name => /^Dryland_ivai_/.test(name)) && !introBusts.some(name => /^Reed/.test(name)), `The party conversation, opened by Ivaí without the older Rheed, owns the encounter introduction: ${introBusts}`);
     const before = await snapshot(browser), id = before.assignments.physical[0];
     assert.equal(await browser.evaluate('$gameMap.mapId()'), Number(id.slice(1)) + 6);
     assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'), `Dryland_Encounter_${id}`);
     await readDescription(browser, { leaveFinal: true });
     await browser.call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
+    // Os bustos saem antes das opções; o Enter segue pressionado sobre as escolhas recém-abertas.
+    await browser.waitFor("$gameSystem._dryland.campaign.phase !== 'encounter_intro'");
     await frames(browser, 20);
     const after = await snapshot(browser);
     assert.equal(after.phase, 'encounter_choice');

@@ -14,9 +14,16 @@ export async function assertAdvanceIndicatorFits(browser) {
 export function passageBoxes(list, passageId) {
   const start = list.findIndex(c => c.code === 357 && c.parameters[1] === 'Query' && c.parameters[3].id === passageId);
   assert.ok(start >= 0, passageId);
-  const boxes = [];
+  const boxes = [], branches = [];
   for (const c of list.slice(start + 1)) {
     if (c.code === 357 && c.parameters[1] === 'ReadingEnd') break;
+    // Falas alternativas (herói presente ou Rheed jovem) exibem a mesma prosa; só uma delas roda.
+    if (c.code === 111) branches.push({ indent: c.indent, from: boxes.length, taken: null });
+    if (c.code === 411 && branches.at(-1)?.indent === c.indent) branches.at(-1).taken = boxes.slice(branches.at(-1).from);
+    if (c.code === 412 && branches.at(-1)?.indent === c.indent) {
+      const branch = branches.pop();
+      if (branch.taken) assert.deepEqual(boxes.splice(branch.from + branch.taken.length), branch.taken, `${passageId} alternatives`);
+    }
     if (c.code === 101) boxes.push([]);
     if (c.code === 401) boxes.at(-1).push(resolve(c.parameters[0]));
   }
