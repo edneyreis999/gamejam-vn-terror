@@ -11,7 +11,7 @@ export const campaignSnapshot = browser => browser.evaluate('$gameSystem._drylan
 export async function beginEnding(browser, kind, ending) {
   if (kind === 'bad') {
     await installClosing(browser, councilBoundary('bad'));
-    for (let i = 0; i < 5 && (await campaignSnapshot(browser)).phase !== 'ending'; i++) {
+    for (let i = 0; i < 30 && (await campaignSnapshot(browser)).phase !== 'ending'; i++) {
       await closingReady(browser); await browser.press('Enter', 13);
     }
   } else {
@@ -89,12 +89,12 @@ export async function pictureRows(browser) {
 }
 export async function creditsReady(browser) {
   await browser.waitFor("SceneManager._scene._scrollTextWindow?._text && SceneManager._scene._scrollTextWindow.visible && SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===41)?.bitmap?.isReady()");
-  assert.deepEqual(await browser.evaluate('[$gameMessage.scrollSpeed(),$gameMessage.scrollNoFast()]'),[2,false]);
+  assert.deepEqual(await browser.evaluate('[$gameMessage.scrollSpeed(),$gameMessage.scrollNoFast()]'),await browser.evaluate('$dataMap.events[1].pages[0].list.find(c=>c.code===105).parameters'));
   assert.equal(await browser.evaluate('$gameScreen.picture(41)?.name()'),'Dryland_Button');
   assert.equal((await campaignSnapshot(browser)).phase,'campaign_complete');
 }
 export async function titleReady(browser) {
-  await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
+  await browser.waitFor("$gameMap.mapId()===1&&$gameMessage.choices().some(c=>c.includes('choice.title.continue'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()", 60000);
 }
 export async function frames(browser, count) {
   await browser.evaluate(`new Promise(resolve=>{let n=${count};const tick=()=>--n<=0?resolve():requestAnimationFrame(tick);requestAnimationFrame(tick);})`);

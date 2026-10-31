@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { setTimeout as delay } from 'node:timers/promises';
+import { focusChoice } from '../tests/helpers/keyboard-focus.mjs';
 
 export class DirectedNativePlayer {
   constructor(context, { onPassage, onAdvance } = {}) { this.context = context; this.serial = 0; this.bustSerial = 0; this.onPassage = onPassage; this.onAdvance = onAdvance; }
@@ -125,11 +126,8 @@ export class DirectedNativePlayer {
       await this.context.shot(`mouse-target-${++this.serial}`);
       await this.click(point.x, point.y);
     } else {
-      for (let step = 0; step < surface.labels.length; step++) {
-        const current = await this.surface();
-        if (current.index === index) break;
-        await this.context.input.key(current.index < index ? 'ArrowDown' : 'ArrowUp');
-      }
+      await focusChoice({target:index,count:surface.labels.length,
+        readIndex:async()=>(await this.surface()).index,press:key=>this.context.input.key(key)});
       assert.equal((await this.surface()).index, index);
       await this.context.shot(`focus-${++this.serial}`);
       await this.context.input.key('Enter');

@@ -1047,7 +1047,7 @@ const list=w=>themed(w)&&w instanceof Window_Selectable&&!(w instanceof Window_N
 wrap(Scene_Boot.prototype,'loadGameFonts',function(previous,args){
   const result=previous.apply(this,args);
   // MessageCore registers fonts; the theme owns only its images.
-  for(const [name,filename]of Object.entries(config.Icons)){
+  for(const [name,filename]of Object.entries({Load:'CoretoTheme_Load',Coin:'CoretoTheme_Coin',BookClosed:'CoretoTheme_BookClosed',...config.Icons})){
     const bitmap=ImageManager.loadSystem(filename);menuIcons[name]=bitmap;icons[name]=bitmap;
   }
   icons.continue=ImageManager.loadSystem('CoretoTheme_continue');
@@ -1134,13 +1134,16 @@ const menuIcons={},tintedIcons=new Map();
 function menuIcon(bitmap,name,x,y,size=32,color=colors.text){
   const source=menuIcons[name];if(!source?.isReady())return;
   if(['error','Conversation','diamond'].includes(name)){bitmap.blt(source,0,0,source.width,source.height,x,y,size*source.width/source.height,size);return;}
-  const key=name+color;let tinted=tintedIcons.get(key);
+  const height=Math.max(1,Math.round(size)),width=Math.max(1,Math.round(height*source.width/source.height));
+  const key=JSON.stringify([name,color,width,height]);let tinted=tintedIcons.get(key);
   if(!tinted){
     if(tintedIcons.size>=64){const first=tintedIcons.keys().next().value;tintedIcons.get(first).destroy();tintedIcons.delete(first);}
-    tinted=new Bitmap(source.width,source.height);tinted.blt(source,0,0,source.width,source.height,0,0);
+    tinted=new Bitmap(width,height);
+    tinted.context.imageSmoothingEnabled=true;tinted.context.imageSmoothingQuality='high';
+    tinted.blt(source,0,0,source.width,source.height,0,0,width,height);
     const ctx=tinted.context;ctx.save();ctx.globalCompositeOperation='source-in';ctx.fillStyle=color;ctx.fillRect(0,0,tinted.width,tinted.height);ctx.restore();tinted.baseTexture.update();tintedIcons.set(key,tinted);
   }
-  bitmap.blt(tinted,0,0,tinted.width,tinted.height,x,y,size*tinted.width/tinted.height,size);
+  bitmap.blt(tinted,0,0,tinted.width,tinted.height,Math.round(x),Math.round(y));
 }
 function drawItemBackground(index){
   if(!list(this))return false;
@@ -1385,7 +1388,7 @@ function drawItemBackground(index){
     const result=previous.apply(this,args);
     if(this._forcedPosition||this._messageAutoSize)return result;
     const width=this.width;
-    const height=Math.min(Graphics.boxHeight,this.height+(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()?config.Speaker.Line+config.Dialogue.SpeakerGap:0));
+    const height=Math.min(Graphics.boxHeight,this.height+(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()?Math.max(config.Speaker.Line,32)+config.Dialogue.SpeakerGap+8:0));
     if(width!==this.width||height!==this.height){this.width=width;this.height=height;if(this.contents)this.createContents();}
     if(this.alignButtonConsoleButtons)this.alignButtonConsoleButtons();
     return result;
@@ -1393,14 +1396,25 @@ function drawItemBackground(index){
   wrap(Window_Message.prototype,'newLineX',function(previous,args){return previous.apply(this,args)+config.Dialogue.TextInset;});
   wrap(Window_Message.prototype,'newPage',function(previous,args){
     const result=previous.apply(this,args);
-    if(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()&&args[0]){args[0].y+=config.Speaker.Line+config.Dialogue.SpeakerGap;args[0].startY=args[0].y;}
+    if(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()&&args[0]){args[0].y+=Math.max(config.Speaker.Line,32)+config.Dialogue.SpeakerGap+8;args[0].startY=args[0].y;}
     return result;
   });
   wrap(Window_NameBox.prototype,'resetFontSettings',function(previous,args){
-    const result=previous.apply(this,args);textContrast(this);return result;
+    const result=previous.apply(this,args);textContrast(this);this.contents.fontSize=28;this.contents.textColor='#360A0B';return result;
   });
   wrap(Window_NameBox.prototype,'resetTextColor',function(previous,args){
-    const result=previous.apply(this,args);this.contents.textColor=ink(this);textContrast(this);return result;
+    const result=previous.apply(this,args);this.contents.textColor='#360A0B';textContrast(this);return result;
+  });
+  wrap(Window_NameBox.prototype,'windowHeight',function(previous,args){
+    return Math.max(previous.apply(this,args),this.textSizeEx(this._name).height+this.padding*2+8);
+  });
+  wrap(Window_NameBox.prototype,'windowWidth',function(previous,args){
+    const width=previous.apply(this,args);return width?Math.min(Graphics.boxWidth,width+8):width;
+  });
+  wrap(Window_NameBox.prototype,'drawTextEx',function(previous,args){
+    args[1]=(args[1]||0)+4;args[2]=(args[2]||0)+4;
+    if(args[3]!==undefined)args[3]=Math.max(0,args[3]-8);
+    return previous.apply(this,args);
   });
   wrap(Window_NameBox.prototype,'updatePlacement',function(previous,args){
     const result=previous.apply(this,args),message=this._messageWindow;
@@ -1426,7 +1440,7 @@ if(providers.ext)wrap(Window_Message.prototype,'_updatePauseSign',function(previ
   if(config.Windows&&config.Dialogue.ContinuePlacement==='corner'&&sprite&&this.isCustomMessageCursorEnabled?.()){
     const settings=$gameSystem.getMessageCursorSettings();
     sprite.x=this.width-this.padding-config.Dialogue.TextInset+Number(settings.OffsetX||0);
-    sprite.y=this.height-this.padding-(this.addedHeight?.()||0)-10+Number(settings.OffsetY||0);
+    sprite.y=this.height-8+Number(settings.OffsetY||0);
     sprite.visible=this.isOpen()&&this.pause&&!this.isClosing()&&!this.isAnySubWindowActive();
   }
   return result;
@@ -1539,6 +1553,7 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   if (!theme) return;
   const adapters = {
     choiceFeedback: () => 'choice', choiceBadge: () => undefined,
+    menuText: (symbol, text) => text, playtimeLabel: () => null,
     interfaceHidden: () => false, consumeInput: () => {},
     picturePresentation: () => null, pictureContext: () => null,
     pictureIndicator: () => null, pictureAction: () => null, pictureState: () => null,
@@ -1566,6 +1581,18 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   const heldKeys = new Set();
   let primaryHeld = false;
   if (theme.config.Windows) {
+  if (globalThis.Window_Playtime) {
+    Window_Playtime.prototype.drawTimeLabel = function() {};
+    Window_Playtime.prototype.drawPlaytime = function(rect) {
+      style(this.contents, 'Body');
+      this.drawText($gameSystem.playtimeText(), rect.x, rect.y, rect.width, 'left');
+    };
+    Window_Playtime.prototype.drawTimeIcon = function(rect) {
+      const size = Math.round(theme.style('Body').Size * 1.3);
+      theme.drawIcon(this.contents, 'Clock', rect.x, rect.y + (rect.height - size) / 2, size, tokens.ink);
+      rect.x += size + 12; rect.width -= size + 12;
+    };
+  }
     for (const [method, down] of [['_onKeyDown', true], ['_onKeyUp', false]]) {
       const previous = Input[method];
       Input[method] = function(event) {
@@ -1591,12 +1618,18 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
 
   const tokens = Object.freeze({
     ink: theme.colors.text, focus: theme.colors.primary, muted: '#69543f',
-    indicator: 24, gap: 6, line: 30, minimumTarget: 44,
+    indicator: 24, seal: 16, gap: 6, line: 30, minimumTarget: 44,
     divider: '#360A0B', dividerOpacity: 0.3, novelty: '#F1B725',
+    halo: '#BCA6C9', haloOpacity: 0.45, haloBlur: 4, haloRadius: 0.75,
     imageFocusScale: 1.1, bubbleDuration: 150
   });
   const skin = () => ImageManager.loadSystem(theme.config.PaperImage);
   const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let pointerInput = false;
+  const keyInput = Input._onKeyDown;
+  Input._onKeyDown = function(event) { pointerInput = false; return keyInput.call(this, event); };
+  const mouseInput = TouchInput._onMouseMove;
+  TouchInput._onMouseMove = function(event) { pointerInput = true; return mouseInput.call(this, event); };
   const hidden = () => !!(adapters.interfaceHidden() || SceneManager._scene?._messageWindow?.scale.x === 0);
 
   function divider(bitmap, x1, y1, x2, y2) {
@@ -1645,7 +1678,7 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   }
 
   function check(bitmap, x, y, color = tokens.focus) {
-    const ctx = bitmap.context; ctx.save(); ctx.translate(x, y); ctx.fillStyle = color;
+    const ctx = bitmap.context; ctx.save(); ctx.translate(x, y); ctx.scale(tokens.seal / 24, tokens.seal / 24); ctx.fillStyle = color;
     // Broken wax disk with two unequal drips; the negative ring survives at 24px.
     ctx.beginPath(); ctx.moveTo(11, 1);
     ctx.bezierCurveTo(14, 0, 15, 2, 18, 2); ctx.lineTo(18, 4);
@@ -1706,30 +1739,69 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
 
   function underline(bitmap, run, color) {
     const ctx = bitmap.context;
-    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = 1;
     const baseline = run.y + run.height / 2 + run.size * 0.35;
     const y = Math.ceil(baseline + Math.max(3, run.descent + 2));
     ctx.beginPath(); ctx.moveTo(run.x, y); ctx.lineTo(run.x + run.width, y); ctx.stroke();
     ctx.restore(); bitmap.baseTexture.update();
   }
 
+  function withHalo(bitmap, focused, draw) {
+    const ctx = bitmap.context;
+    ctx.save();
+    if (focused) {
+      ctx.shadowColor = tokens.halo + Math.round(tokens.haloOpacity * 255).toString(16).padStart(2, '0');
+      ctx.shadowBlur = tokens.haloBlur;
+      ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
+    }
+    try { return draw(); } finally { ctx.restore(); }
+  }
+
+  function actionIcon(bitmap, icon, x, y, size, focused, color = tokens.ink) {
+    const scale = focused && !reducedMotion() ? tokens.imageFocusScale : 1;
+    const expanded = size * scale;
+    x -= (expanded - size) / 2; y -= (expanded - size) / 2;
+    if (focused) withHalo(bitmap, true, () => {
+      const opacity = bitmap.paintOpacity;
+      bitmap.paintOpacity = Math.round(opacity * tokens.haloOpacity);
+      try {
+        for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+          theme.drawIcon(bitmap, icon, x + dx, y + dy, expanded, tokens.halo);
+        }
+      } finally { bitmap.paintOpacity = opacity; }
+    });
+    return theme.drawIcon(bitmap, icon, x, y, expanded, color);
+  }
+
   function control(window, rect, state, draw) {
+    const ctx = window.contents.context;
+    ctx.save();
+    if (state.focused && state.enabled !== false && state.feedback && state.feedback !== 'none' && !reducedMotion()) {
+      const x = rect.x + rect.width / 2, y = rect.y + rect.height / 2;
+      const scale = state.focusScale ?? tokens.imageFocusScale;
+      ctx.translate(x, y); ctx.scale(scale, scale); ctx.translate(-x, -y);
+    }
+    try { return renderControl(window, rect, state, draw); } finally { ctx.restore(); }
+  }
+
+  function renderControl(window, rect, state, draw) {
     const bitmap = window.contents, previous = bitmap._coretoInkControl;
     const current = { runs: [], seals: [], feedback: 'none', ...state };
     bitmap._coretoInkControl = current;
-    try { draw(); } finally { bitmap._coretoInkControl = previous; }
+    const focused = state.focused && state.enabled !== false && current.feedback !== 'none';
+    try { withHalo(bitmap, focused, draw); } finally { bitmap._coretoInkControl = previous; }
     if (!current.runs.length) return;
     const color = state.enabled === false ? tokens.muted : state.focused ? tokens.focus : tokens.ink;
     const first = current.runs[0];
     if (state.checked) {
-      const x = Math.max(rect.x, first.x - tokens.indicator - tokens.gap);
-      check(bitmap, x, first.y + (first.height - 24) / 2);
-      current.seals.push({x, width:tokens.indicator});
+      const x = Math.max(rect.x, first.x - tokens.seal - tokens.gap);
+      check(bitmap, x, first.y + (first.height - tokens.seal) / 2);
+      current.seals.push({x, width:tokens.seal});
     }
-    if (state.focused && state.enabled !== false && ['choice', 'secondary'].includes(current.feedback)) {
+    if (state.enabled !== false && ['choice', 'secondary'].includes(current.feedback)) {
       current.runs.forEach(run => underline(bitmap, run, color));
       const last = current.runs[current.runs.length - 1];
-      if (current.feedback === 'choice') quill(bitmap, last.x + last.width + tokens.gap, last.y + (last.height - tokens.indicator) / 2, color);
+      if (state.focused) withHalo(bitmap, true, () => quill(bitmap, last.x + last.width + tokens.gap, last.y + (last.height - tokens.indicator) / 2, color));
     }
     if (state.support) {
       const marks = [...current.runs, ...current.seals];
@@ -1744,6 +1816,18 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   const measureTextWidth = Bitmap.prototype.measureTextWidth;
   const drawOutline = Bitmap.prototype._drawTextOutline;
   Bitmap.prototype._drawTextOutline = function() {
+    const state = this._coretoInkControl;
+    if (state?.focused && state.enabled !== false && state.feedback !== 'none') {
+      const ctx = this.context;
+      ctx.save();
+      ctx.strokeStyle = tokens.halo;
+      ctx.globalAlpha *= tokens.haloOpacity;
+      ctx.lineWidth = tokens.haloRadius * 2;
+      ctx.lineJoin = 'round';
+      ctx.strokeText(...arguments);
+      ctx.restore();
+      return;
+    }
     // Canvas ignores lineWidth=0; skipping the stroke is what removes the outline.
     if (this.outlineWidth <= 0) return;
     return drawOutline.apply(this, arguments);
@@ -1781,7 +1865,7 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
       this.drawCircle(left + width + 8, y + lineHeight / 2 - this.fontSize * 0.35, 3, tokens.novelty);
       Object.assign(this, saved); return;
     }
-    this.textColor = state.enabled === false ? tokens.muted : state.focused && state.feedback !== 'none' ? tokens.focus : tokens.ink;
+    this.textColor = state.enabled === false ? tokens.muted : state.focused && !['none', 'emphasis'].includes(state.feedback) ? tokens.focus : tokens.ink;
     this.outlineWidth = 0;
     const ctx = this.context; ctx.save(); ctx.font = this._makeFontNameText();
     const metrics = ctx.measureText(TextManager.parseLocalizedText(String(text))); ctx.restore();
@@ -1804,15 +1888,48 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   }
 
   if (theme.config.Windows) {
-  const createOptions = Scene_Options.prototype.create;
-  Scene_Options.prototype.create = function() {
+  const pauseSign = Window_Message.prototype._updatePauseSign;
+  Window_Message.prototype._updatePauseSign = function() {
+    pauseSign.apply(this, arguments);
+    const sprite = this._pauseSignSprite;
+    if (!sprite || theme.config.Dialogue.ContinuePlacement !== 'corner') return;
+    const atlas = ImageManager.loadSystem('CoretoTheme_PageCorner');
+    if (!atlas.isReady()) return;
+    const cell = atlas.width / 3;
+    sprite.bitmap = atlas; sprite.anchor.set(1, 1); sprite.scale.set(48 / cell);
+    sprite.visible = this.isOpen() && this.pause && !this._textState && !this.isClosing() && !this.isAnySubWindowActive() && !hidden();
+    const local = sprite.worldTransform.applyInverse(new Point(TouchInput.x, TouchInput.y));
+    const hovered = local.x >= -cell && local.x <= 0 && local.y >= -atlas.height && local.y <= 0;
+    const focused = sprite.visible && (pointerInput ? hovered : !this._coretoInkConsoleSelection);
+    const target = focused ? 2 : 0;
+    const now = performance.now();
+    this._coretoPageFrame ??= 0;
+    if (!sprite.visible) this._coretoPageFrame = 0;
+    else if (reducedMotion()) this._coretoPageFrame = target;
+    else if (this._coretoPageFrame !== target && now - (this._coretoPageTime || 0) >= 100) {
+      this._coretoPageFrame += Math.sign(target - this._coretoPageFrame);
+      this._coretoPageTime = now;
+    }
+    sprite.setFrame(this._coretoPageFrame * cell, 0, cell, atlas.height);
+    sprite.alpha = 1;
+  };
+  for (const MenuScene of [Scene_Options, Scene_Menu, Scene_Save, Scene_Load]) {
+  const createOptions = MenuScene.prototype.create;
+  MenuScene.prototype.create = function() {
     createOptions.apply(this, arguments);
     this._coretoOptionsPaper = new Sprite(new Bitmap(Graphics.boxWidth, Graphics.boxHeight));
     this.addChildAt(this._coretoOptionsPaper, this.getChildIndex(this._windowLayer));
     for (const control of this._windowLayer.children) if (control.y < 16) control.y = 18;
+    if (this instanceof Scene_Menu) {
+      for (const control of this._windowLayer.children) {
+        if (control instanceof Window_Gold || (globalThis.Window_Playtime && control instanceof Window_Playtime)) {
+          control.y = Math.min(control.y, Graphics.boxHeight - control.height - 24);
+        }
+      }
+    }
   };
-  const updateOptions = Scene_Options.prototype.update;
-  Scene_Options.prototype.update = function() {
+  const updateOptions = MenuScene.prototype.update;
+  MenuScene.prototype.update = function() {
     updateOptions.apply(this, arguments);
     const panel = this._coretoOptionsPaper;
     if (!panel) return;
@@ -1827,11 +1944,12 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
       divider(panel.bitmap, 40, category.y + category.height + 6, Graphics.boxWidth - 40, category.y + category.height + 6);
     }
   };
-  const terminateOptions = Scene_Options.prototype.terminate;
-  Scene_Options.prototype.terminate = function() {
+  const terminateOptions = MenuScene.prototype.terminate;
+  MenuScene.prototype.terminate = function() {
     this._coretoOptionsPaper?.bitmap.destroy();
     return terminateOptions.apply(this, arguments);
   };
+  }
   const windowSurface = w => w instanceof Window_Base && !(w instanceof Window_ScrollText) &&
     !(w instanceof Window_MapName) && !(w instanceof Window_NameBox) &&
     !(globalThis.Window_ButtonConsole && w instanceof Window_ButtonConsole) && !w._coretoPictureText &&
@@ -1844,7 +1962,7 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
       const key = method === '_refreshBack' ? '_coretoInkPaperBack' : '_coretoInkPaperFrame';
       this[key]?.destroy();
       const bitmap = this[key] = new Bitmap(Math.max(1, this.width), Math.max(1, this.height));
-      if (method === '_refreshBack' && !(SceneManager._scene instanceof Scene_Options)) {
+      if (method === '_refreshBack' && !this._coretoSharedPaper && !(SceneManager._scene instanceof Scene_Options) && !(SceneManager._scene instanceof Scene_Menu) && !(SceneManager._scene instanceof Scene_File)) {
         skin().addLoadListener(() => { if (this[key] === bitmap && !this._destroyed) paper(bitmap); });
       }
       sprite.bitmap = bitmap; sprite.setFrame(0, 0, this.width, this.height);
@@ -1863,6 +1981,16 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   Window_Selectable.prototype.drawItemBackground = function(index) {
     if (!windowSurface(this)) return background.apply(this, arguments);
     const r = this.itemRect(index); this.contentsBack.clearRect(r.x, r.y, r.width, r.height);
+    if (this instanceof Window_SavefileList) {
+      if (this.active && this.index() === index && this.isEnabled(this.indexToSavefileId(index))) {
+        const ctx = this.contentsBack.context; ctx.save();
+        ctx.fillStyle = tokens.focus; ctx.globalAlpha = 0.1;
+        ctx.fillRect(r.x, r.y, r.width, r.height);
+        ctx.globalAlpha = 1; ctx.fillRect(r.x, r.y + 8, 3, r.height - 16); ctx.restore();
+        this.contentsBack.baseTexture.update();
+      }
+      divider(this.contentsBack, r.x + 12, r.y + r.height - 0.5, r.x + r.width - 12, r.y + r.height - 0.5);
+    }
   };
   const drawChoice = Window_ChoiceList.prototype.drawItem;
   Window_ChoiceList.prototype.drawItem = function(index) {
@@ -1884,42 +2012,65 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   };
   const choiceWidth = Window_ChoiceList.prototype.maxChoiceWidth;
   Window_ChoiceList.prototype.maxChoiceWidth = function() { return Math.min(Graphics.boxWidth - 64, choiceWidth.call(this) + tokens.indicator + tokens.gap); };
-  for (const prototype of [Window_Command.prototype, globalThis.Window_OptionsCategory?.prototype].filter(Boolean)) {
+  for (const prototype of [Window_Command.prototype, Window_MenuCommand.prototype, globalThis.Window_OptionsCategory?.prototype].filter(Boolean)) {
     const draw = prototype.drawItem;
     prototype.drawItem = function(index) {
       if (this instanceof Window_ChoiceList || this instanceof Window_Options) return draw.apply(this, arguments);
       const rect = this.itemLineRect(index);
-      const name = this.convertEscapeCharacters(this.commandName(index)).replace(/\x1bI\[\d+\]/g, '');
+      if (this instanceof Window_MenuCommand) {
+        const icon = {options:'Settings', save:'Save', load:'Load', gameEnd:'Back'}[this.commandSymbol(index)];
+        if (icon) {
+          const size = Math.round(theme.style('Menu').Size * 1.3);
+          actionIcon(this.contents, icon, rect.x, rect.y + (rect.height - size) / 2, size, this.active && this.index() === index && this.isCommandEnabled(index));
+          rect.x += size + 12; rect.width -= size + 12;
+        }
+      }
+      const text = this instanceof Window_MenuCommand ? adapters.menuText(this.commandSymbol(index), this.commandName(index)) : this.commandName(index);
+      const name = this.convertEscapeCharacters(text).replace(/\x1bI\[\d+\]/g, '');
       const category = !!globalThis.Window_OptionsCategory && this instanceof Window_OptionsCategory;
       label(this, name, rect, { feedback: this instanceof Window_TitleCommand ? 'choice' : 'secondary', enabled: this.isCommandEnabled(index),
-        focused: this.active && this.index() === index && (!category || !SceneManager._scene._optionsWindow?.active) }, 'Menu', this.itemTextAlign());
+        checked: category && this.index() === index && !!SceneManager._scene._optionsWindow?.active,
+        focused: this.active && this.index() === index && (!category || !SceneManager._scene._optionsWindow?.active) }, 'Menu', this instanceof Window_MenuCommand ? 'left' : this.itemTextAlign());
       if (this.maxCols() > 1 && index % this.maxCols() > 0) {
         const item = this.itemRect(index);
-        divider(this.contents, item.x - this.colSpacing() / 2, item.y + 12, item.x - this.colSpacing() / 2, item.y + item.height - 12);
+        const x = item.x - this.colSpacing() / 2;
+        // The gutter lies outside the item rectangle cleared by redrawItem.
+        this.contents.clearRect(Math.floor(x - 1), item.y + 11, 3, item.height - 22);
+        divider(this.contents, x, item.y + 12, x, item.y + item.height - 12);
       }
     };
   }
+
+  Window_Gold.prototype.drawGoldItemStyle = function() {
+    this.contents.clear(); style(this.contents, 'Body');
+    const rect = this.itemLineRect(0), coin = ImageManager.loadSystem('CoretoTheme_Coin');
+    const size = Math.round(theme.style('Body').Size * 1.3);
+    if (coin.isReady()) theme.drawIcon(this.contents, 'Coin', rect.x, rect.y + (rect.height - size) / 2, size, tokens.ink);
+    else if (!this._coretoCoinPending) {
+      this._coretoCoinPending = true;
+      coin.addLoadListener(() => { this._coretoCoinPending = false; this.refresh(); });
+    }
+    this.drawText(this.value(), rect.x + size + 12, rect.y, rect.width - size - 12, 'right');
+  };
 
   const loadButton = Sprite_Button.prototype.loadButtonImage;
   Sprite_Button.prototype.loadButtonImage = function() {
     if (this._buttonType !== 'cancel') return loadButton.apply(this, arguments);
     const bitmap = this._coretoOwnedButtonBitmap = new Bitmap(528, 144);
     this._coretoMenuButton = true; this.bitmap = bitmap;
-    const ctx = bitmap.context;
-    const scale = reducedMotion() ? 1 : 1.05;
+    const scale = reducedMotion() ? 1 : 1.1;
     this._coretoInkIconScale = scale;
-    for (let i = 0; i < 3; i++) {
-      ctx.save(); ctx.translate(34, i * 48 + 12); ctx.strokeStyle = i ? tokens.focus : tokens.ink;
-      if (i) { ctx.translate(14, 10); ctx.scale(scale, scale); ctx.translate(-14, -10); }
-      ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      ctx.beginPath(); ctx.moveTo(10, 0); ctx.lineTo(0, 10); ctx.lineTo(10, 20);
-      ctx.moveTo(0, 10); ctx.lineTo(20, 10); ctx.quadraticCurveTo(28, 10, 28, 20); ctx.stroke(); ctx.restore();
-    }
-    bitmap.baseTexture.update();
+    ImageManager.loadSystem(theme.config.Icons.Back).addLoadListener(() => {
+      if (this._coretoOwnedButtonBitmap !== bitmap) return;
+      for (let i = 0; i < 3; i++) {
+        const size = 32;
+        actionIcon(bitmap, 'Back', 48 - size / 2, i * 48 + (48 - size) / 2, size, !!i, i ? tokens.focus : tokens.ink);
+      }
+    });
   };
   const updateButton = Sprite_Button.prototype.update;
   Sprite_Button.prototype.update = function() {
-    if (this._buttonType === 'cancel' && this._coretoInkIconScale !== (reducedMotion() ? 1 : 1.05)) {
+    if (this._buttonType === 'cancel' && this._coretoInkIconScale !== (reducedMotion() ? 1 : 1.1)) {
       this._coretoOwnedButtonBitmap?.destroy(); this.loadButtonImage();
     }
     updateButton.call(this);
@@ -1931,7 +2082,14 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     const r = this.itemRect(index), focused = this.active && this.index() === index;
     const name = this.convertEscapeCharacters(this.commandName(index)).replace(/\x1bI\[\d+\]/g, '');
     const row = { ...r, width: r.width * 0.48 };
-    label(this, name, row, { feedback: 'secondary', focused, checked: symbol === 'textEffects' && this.getConfigValue(symbol) }, 'Menu');
+    const icon = {bgmVolume:'Music', bgsVolume:'Ambience', meVolume:'Jingle', seVolume:'SoundEffects'}[symbol];
+    if (icon) {
+      const size = Math.round(theme.style('Menu').Size * 1.3);
+      const gap = 12;
+      actionIcon(this.contents, icon, row.x, row.y + (row.height - size) / 2, size, focused);
+      row.x += size + gap; row.width -= size + gap;
+    }
+    label(this, name, row, { feedback: 'secondary', focused }, 'Menu');
     const value = { x: r.x + r.width * 0.5, y: r.y, width: r.width * 0.5, height: r.height };
     if (symbol === 'textLocale') {
       const languages = VisuMZ.MessageCore.Settings.Localization.Languages;
@@ -1940,36 +2098,63 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
         { checked: language === ConfigManager.textLocale }, 'Action', 'center'));
       for (let i = 1; i < languages.length; i++) divider(this.contents, value.x + i * value.width / languages.length, value.y + 12,
         value.x + i * value.width / languages.length, value.y + value.height - 12);
-    } else if (symbol !== 'textEffects') {
+    } else if (symbol === 'textEffects') {
+      [false, true].forEach((enabled, i) => label(this, TextManager.parseLocalizedText(enabled ? '$[ui.options.on]' : '$[ui.options.off]'),
+        { ...value, x: value.x + i * value.width / 2, width: value.width / 2 },
+        { checked: enabled === this.getConfigValue(symbol) }, 'Action', 'center'));
+      divider(this.contents, value.x + value.width / 2, value.y + 12,
+        value.x + value.width / 2, value.y + value.height - 12);
+    } else {
       style(this.contents); this.contents.drawText(this.getConfigValue(symbol) + '%', value.x + 30, value.y, value.width - 60, value.height, 'right');
     }
   }
 
+  const touchOption = Window_Options.prototype.onTouchOk;
+  Window_Options.prototype.onTouchOk = function() {
+    if (this.currentSymbol() === 'textEffects' && this.isCurrentItemEnabled()) {
+      const point = this.worldTransform.applyInverse(new Point(TouchInput.x, TouchInput.y));
+      const rect = this.itemRect(this.index());
+      const x = point.x - this.padding + this.origin.x;
+      if (x >= rect.x + rect.width * 0.5) {
+        if (x < rect.x + rect.width * 0.75) this.cursorLeft();
+        else this.cursorRight();
+        return;
+      }
+    }
+    touchOption.apply(this, arguments);
+  };
+
   function drawSaveFile(id, rect) {
+    const focused = this.active && this.index() === this.savefileIdToIndex(id);
+    const iconSize = Math.round(theme.style('Speaker').Size * 1.3);
+    const iconSpace = iconSize + 12;
+    if (DataManager.savefileInfo(id)) {
+      actionIcon(this.contents, focused ? 'Save' : 'BookClosed', rect.x + 24, rect.y + 8 + (40 - iconSize) / 2, iconSize, focused && this.isEnabled(id));
+    }
     label(this, id === 0 ? TextManager.autosave : TextManager.file + ' ' + id,
-      { ...rect, height: 48 }, { feedback: 'choice', enabled: this.isEnabled(id), focused: this.active && this.index() === this.savefileIdToIndex(id) }, 'Speaker');
+      { x: rect.x + 24 + iconSpace, y: rect.y + 8, width: rect.width * 0.4 - iconSpace, height: 40 }, { feedback: 'choice', enabled: this.isEnabled(id), focused }, 'Speaker');
     if (id > 0 && id === DataManager.latestSavefileId()) {
       style(this.contents, 'Label');
-      this.contents.drawText(TextManager.parseLocalizedText(TextManager.latestSave), rect.x + rect.width - 110, rect.y + 48, 90, 28, 'right');
+      this.contents.drawText(TextManager.parseLocalizedText(TextManager.latestSave), rect.x + rect.width - 134, rect.y + 14, 110, 28, 'right');
     }
   }
 
   function drawSaveContents(info, rect) {
-    const x = rect.x + 24, width = rect.width - 48, previewHeight = Math.max(0, rect.height - 170);
+    const x = rect.x + rect.width * 0.42, width = rect.width * 0.58 - 160, previewHeight = Math.max(0, rect.height - 24);
     const actors = info.faces?.length || info.characters?.length || info.svbattlers?.length;
     const artWidth = info.description ? Math.min(96, width * 0.35) : width;
-    if (info.picture) this.drawCenteredPicture(info.picture, x, rect.y + 80, artWidth, previewHeight, true);
-    if (actors) this.drawActors(info, x, rect.y + 80, artWidth, previewHeight);
+    if (info.picture) this.drawCenteredPicture(info.picture, x, rect.y + 12, artWidth, previewHeight, true);
+    if (actors) this.drawActors(info, x, rect.y + 12, artWidth, previewHeight);
     style(this.contents, 'Helper');
     const time = info.timestamp ? new Date(info.timestamp).toLocaleString(ConfigManager.textLocale === 'Portuguese' ? 'pt-BR' : 'en-US',
       { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
-    this.contents.drawText(time, x, rect.y + rect.height - 82, width, 28);
-    this.contents.drawText(info.playtime || '', x, rect.y + rect.height - 48, width, 28);
+    this.contents.drawText(time, rect.x + 24, rect.y + 50, rect.width * 0.4 - 24, 26);
+    this.contents.drawText(info.playtime || '', rect.x + rect.width - 134, rect.y + 50, 110, 26, 'right');
     if (info.description) {
       const dx = info.picture || actors ? artWidth + 12 : 0, wrap = this._wordWrap;
-      const ctx = this.contents.context; ctx.save(); ctx.beginPath(); ctx.rect(x + dx, rect.y + 80, width - dx, previewHeight); ctx.clip();
+      const ctx = this.contents.context; ctx.save(); ctx.beginPath(); ctx.rect(x + dx, rect.y + 12, width - dx, previewHeight); ctx.clip();
       this.setWordWrap(true);
-      try { this.drawTextEx(info.description, x + dx, rect.y + 80, width - dx); }
+      try { this.drawTextEx(info.description, x + dx, rect.y + 12, width - dx); }
       finally { this.setWordWrap(wrap); ctx.restore(); }
     }
   }
@@ -2047,26 +2232,23 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     updateMessage.apply(this, arguments);
   };
 
-  let hintShown = false;
   const setVisibility = Window_Message.prototype.setVisibility;
   Window_Message.prototype.setVisibility = function() {
     const wasHidden = hidden(), result = setVisibility.apply(this, arguments);
-    if (!wasHidden && hidden() && !hintShown) {
-      hintShown = true;
+    if (!wasHidden && hidden()) {
       const scene = SceneManager._scene;
       const hint = new Sprite(new Bitmap(Graphics.boxWidth, 56));
       paper(hint.bitmap, 160, 0, Graphics.boxWidth - 320, 56);
       style(hint.bitmap, 'Helper');
       hint.bitmap.drawText(TextManager.getLocalizedText('coreto.ui.restore_hint'), 184, 0, Graphics.boxWidth - 368, 56, 'center');
       hint.y = 12; scene.addChild(hint); scene._coretoInkRestoreHint = hint;
-      scene._coretoInkRestoreHintFrames = 300;
     }
     return result;
   };
   const sceneUpdate = Scene_Map.prototype.update;
   Scene_Map.prototype.update = function() {
     sceneUpdate.apply(this, arguments);
-    if (this._coretoInkRestoreHint && (!hidden() || --this._coretoInkRestoreHintFrames <= 0)) {
+    if (this._coretoInkRestoreHint && !hidden()) {
       this._coretoInkRestoreHint.bitmap.destroy(); this._coretoInkRestoreHint.destroy(); this._coretoInkRestoreHint = null;
     }
   };
@@ -2119,6 +2301,10 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
       const width = role.width || source.width, height = role.height || source.height;
       const bitmap = new Bitmap(width, height);
       this._coretoInkSurfaceBitmap = bitmap; this.bitmap = bitmap;
+      if (role.sourceFrame) {
+        const frame = role.sourceFrame;
+        bitmap.blt(source,frame.x,frame.y,frame.width,frame.height,0,0,frame.width,frame.height);
+      }
       if (role.image) {
         const art = ImageManager.loadPicture(role.image);
         art.addLoadListener(() => {
@@ -2163,6 +2349,7 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   const hitTest = Sprite_Picture.prototype.hitTest;
   const isBeingTouched = Sprite_Picture.prototype.isBeingTouched;
   Sprite_Picture.prototype.isBeingTouched = function() {
+    if (binding(this) >= 0 && (ui.hidden() || !state(this).enabled)) return false;
     const scene = SceneManager._scene;
     if (!ui.hidden() && scene?._choiceListWindow?.isOpenAndActive() && binding(this) >= 0) {
       const point = new Point(TouchInput.x, TouchInput.y);
@@ -2177,6 +2364,7 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     return isBeingTouched.apply(this, arguments);
   };
   Sprite_Picture.prototype.hitTest = function(x, y) {
+    if (binding(this) >= 0 && (ui.hidden() || !state(this).enabled)) return false;
     // Game_Picture can already name the next asset before Sprite_Picture loads it.
     if (surface(this) && (!this.bitmap?.isReady() || this._pictureName !== this.picture()?.name())) return false;
     if (!surface(this) || binding(this) < 0) return hitTest.call(this, x, y);
@@ -2197,6 +2385,11 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     this._pictureTextWindow.createContents();
     const window = this._pictureTextWindow;
     const kind = feedback(this);
+    if (kindOf(this) === 'wordmark') {
+      zones.forEach(zone => this.drawPictureTextZone(zone));
+      $gameScreen.clearPictureTextRefresh(this._pictureId);
+      return;
+    }
     ui.control(window, new Rectangle(0, 0, window.innerWidth, window.innerHeight),
       { ...state(this), feedback: kind, support: !!presentation(this).support },
       () => zones.forEach(zone => this.drawPictureTextZone(zone)));
@@ -2209,6 +2402,17 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     const text = ui.adapters.pictureText(this.picture(), zone, raw);
     const window = this._pictureTextWindow;
     this._pictureTextCache[zone] = raw;
+    if (kindOf(this) === 'wordmark') {
+      if (zone !== 'center') return;
+      const bitmap = window.contents, lines = presentation(this).headingLines;
+      bitmap.fontFace = 'CoretoCinzel';
+      bitmap.textColor = '#F4E3BF'; bitmap.outlineColor = '#360A0B'; bitmap.outlineWidth = 3;
+      bitmap.fontSize = 84;
+      bitmap.drawText(lines[0], 12, 0, window.innerWidth - 24, 108, 'center');
+      bitmap.fontSize = 44;
+      bitmap.drawText(lines[1], 12, 108, window.innerWidth - 24, 64, 'center');
+      return;
+    }
     if (!text || kindOf(this) === 'approach') return;
     if (kindOf(this) === 'heading' && ui.adapters.pictureContext(SceneManager._scene) === 'approaches') return;
     const kind = feedback(this), inset = kind === 'choice' ? 30 : 12;
@@ -2216,14 +2420,19 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     const column = zones.indexOf(zone) % 3, row = Math.floor(zones.indexOf(zone) / 3);
     const x = column === 1 ? Math.max(inset, (window.innerWidth - size.width) / 2) : column === 2 ? window.innerWidth - size.width - inset : inset;
     const y = row === 1 ? (window.innerHeight - size.height) / 2 : row === 2 ? window.innerHeight - size.height - 8 : 8;
-    const ctx = window.contents.context;
-    ctx.save();
-    if (kind === 'icon' && state(this).focused && state(this).enabled && !ui.reducedMotion()) {
-      ctx.translate(x + size.width / 2, y + size.height / 2);
-      ctx.scale(1.05, 1.05); ctx.translate(-x - size.width / 2, -y - size.height / 2);
+    if (presentation(this).detailFocus && zone === 'upperleft' && text.includes('<br><br>')) {
+      const split = text.indexOf('<br><br>') + '<br><br>'.length;
+      const heading = text.slice(0, split), detail = '<WordWrap>' + text.slice(split);
+      const detailY = y + window.textSizeEx(heading).height;
+      ui.control(window, new Rectangle(x, y, width, detailY - y),
+        { ...state(this), feedback: 'emphasis', focusScale: 1.05 },
+        () => window.drawTextEx(heading, x, y, width));
+      ui.control(window, new Rectangle(x, detailY, width, window.innerHeight - detailY),
+        { ...state(this), feedback: 'emphasis', focusScale: 1.05 },
+        () => window.drawTextEx(detail, x, detailY, width));
+      return;
     }
     window.drawTextEx(text, x, y, width);
-    ctx.restore();
   };
   const update = Sprite_Picture.prototype.update;
   Sprite_Picture.prototype.update = function() {
@@ -2318,15 +2527,56 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     }
     this._transformID = -1;
   };
+  const silhouetteHalos = new WeakMap();
+  function silhouetteHalo(bitmap) {
+    if (silhouetteHalos.has(bitmap)) return silhouetteHalos.get(bitmap);
+    const pad = 16, halo = new Bitmap(bitmap.width + pad * 2, bitmap.height + pad * 2);
+    const ctx = halo.context;
+    ctx.shadowColor = ui.tokens.halo; ctx.shadowBlur = ui.tokens.haloBlur;
+    for (let i = 0; i < 8; i++) {
+      const angle = i * Math.PI / 4;
+      ctx.drawImage(bitmap.canvas, pad + Math.cos(angle) * ui.tokens.haloRadius, pad + Math.sin(angle) * ui.tokens.haloRadius);
+    }
+    ctx.shadowBlur = 0;
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.fillStyle = ui.tokens.halo; ctx.fillRect(0, 0, halo.width, halo.height);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.drawImage(bitmap.canvas, pad, pad);
+    ctx.globalCompositeOperation = 'source-over';
+    halo.baseTexture.update();
+    silhouetteHalos.set(bitmap, halo);
+    return halo;
+  }
   function updateArtwork(pictures, kind) {
+    const candidates = pictures.filter(sprite => binding(sprite) >= 0 &&
+      ((!surface(sprite) && presentation(sprite).group !== 'panel' && artworkBounds(sprite.bitmap)) || presentation(sprite).image) &&
+      (['roster', 'approaches', 'sacrifice', 'destinations', 'final'].includes(kind) || presentation(sprite).image));
     for (const sprite of pictures) {
-      const interactive = !surface(sprite) && binding(sprite) >= 0 && ['roster', 'approaches', 'sacrifice'].includes(kind);
+      const interactive = candidates.includes(sprite);
       const focused = interactive && state(sprite).enabled && state(sprite).focused;
-      sprite._coretoInkImageScale = focused ? ui.tokens.imageFocusScale : 1;
+      sprite._coretoInkImageScale = focused && !ui.reducedMotion() ? ui.tokens.imageFocusScale : 1;
       sprite._transformID = -1;
       if (interactive) {
         sprite._coretoInkArtBounds = kind === 'roster' ? artworkBounds(sprite.bitmap) : null;
-        sprite.setColorTone([0, 0, 0, 0]);
+        const light = focused ? 28 : 0;
+        sprite.setColorTone([light, light, light, 0]);
+        if (!sprite._coretoFocusOutline) {
+          sprite._coretoFocusOutline = new Sprite();
+          sprite.addChild(sprite._coretoFocusOutline);
+        }
+        const outline = sprite._coretoFocusOutline;
+        outline.alpha = ui.tokens.haloOpacity;
+        outline.visible = !!focused;
+        if (focused) {
+          const bounds = sprite._coretoInkArtBounds || new Rectangle(0, 0, sprite.bitmap.width, sprite.bitmap.height);
+          const scale = sprite._coretoInkImageScale;
+          outline.bitmap = silhouetteHalo(sprite.bitmap);
+          outline.scale.set(scale);
+          outline.x = -sprite.anchor.x * sprite.bitmap.width + (bounds.x + bounds.width / 2) * (1 - scale) - 16 * scale;
+          outline.y = -sprite.anchor.y * sprite.bitmap.height + (bounds.y + bounds.height / 2) * (1 - scale) - 16 * scale;
+        }
+      } else if (sprite._coretoFocusOutline) {
+        sprite._coretoFocusOutline.visible = false;
       }
     }
   }
@@ -2363,21 +2613,23 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     const descriptionHeight = Math.max(...cards.map(s => CoretoDesignSystem.measure(preview.bitmap, descriptions[binding(s)] || '', width - 96, 'Body').lines.length)) * 30 + 12;
     const headings = pictures.filter(s => kindOf(s) === 'heading');
     const title = headings.flatMap(s => zones.map(zone => $gameScreen.getPictureText(s._pictureId, zone)).filter(Boolean)).map(text => plain(choices, text)).join(' ');
-    const titleLines = CoretoDesignSystem.measure(preview.bitmap, title, width - 340, 'Speaker').lines.length;
+    const titleLines = CoretoDesignSystem.measure(preview.bitmap, title, width - 48, 'Speaker').lines.length;
     const headerHeight = Math.max(60, titleLines * Math.max(30, CoretoDesignSystem.style('Speaker').Size + 10) + 12);
-    const rowHeight = 150, height = 24 + headerHeight + rowHeight + descriptionHeight + 12;
+    const rowHeight = 150, footerHeight = 54, height = 24 + headerHeight + rowHeight + descriptionHeight + footerHeight;
     const top = bottom - height, rowTop = top + 12 + headerHeight;
+    const footerTop = rowTop + rowHeight + descriptionHeight;
     const actions = pictures.filter(s => kindOf(s) === 'button');
     for (const heading of headings) {
       movePicture(heading, left + (width - 256) / 2, top + 42, container);
     }
-    for (const action of actions) movePicture(action, left + width - 128, top + 12 + headerHeight / 2, container);
+    for (const action of actions) movePicture(action, left + width - 128, footerTop + footerHeight / 2, container);
     cards.forEach((card, index) => {
       const x = left + 24 + (index + 0.5) * (width - 48) / cards.length;
       movePicture(card, x, rowTop + rowHeight / 2, container);
       for (const art of pictures.filter(s => !surface(s) && binding(s) === binding(card))) movePicture(art, x, rowTop + rowHeight / 2, container);
     });
-    return {rect:new Rectangle(left, top, width, height), title, heading:new Rectangle(left + 12, top + 12, width - 268, headerHeight), descriptions,
+    return {rect:new Rectangle(left, top, width, height), title, heading:new Rectangle(left + 24, top + 12, width - 48, headerHeight), descriptions,
+      footer:new Rectangle(left + 20, footerTop, width - 40, footerHeight),
       description:new Rectangle(left + 18, rowTop + rowHeight, width - 36, descriptionHeight),
       row:new Rectangle(left + 24, rowTop, width - 48, rowHeight), cards};
   }
@@ -2395,6 +2647,52 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
         movePicture(sprite, Graphics.width / 2, top - 24 - sprite.height / 2, container);
       }
     }
+  }
+  // Optional adapter preview: native picture controls still own input and confirmation.
+  function arrangePreview(pictures, container) {
+    const actions = pictures.filter(s => presentation(s).preview).sort((a,b) => binding(a)-binding(b));
+    if (!actions.length) return null;
+    const width = Math.min(1040, Graphics.boxWidth-64), height = Math.min(570, Graphics.boxHeight-48);
+    const left = (Graphics.boxWidth-width)/2, top = (Graphics.boxHeight-height)/2;
+    actions.forEach((action,index) => movePicture(action, left+width*(index+0.5)/actions.length, top+height-64, container));
+    const focused = actions.find(s => state(s).focused && state(s).enabled);
+    return {rect:new Rectangle(left,top,width,height), actions,
+      description:new Rectangle(left+48,top+height-164,width-96,68),
+      center:new Point(left+width/2,top+height*0.37), size:Math.min(290,height*0.51),
+      model:presentation(focused || actions[0]).preview, focused:!!focused};
+  }
+  function updatePreview(sprite, layout, visible) {
+    sprite.visible = !!layout && visible;
+    if (!layout) { sprite._pieceAnimation = null; return; }
+    const model = layout.model, target = layout.focused ? model.state : 'idle';
+    const art = ImageManager.loadPicture(model.image);
+    if (!art.isReady()) return;
+    const now = performance.now(), reduced = ui.reducedMotion();
+    let animation = sprite._pieceAnimation;
+    if (!animation || animation.image !== model.image) {
+      animation = sprite._pieceAnimation = {image:model.image,target:'idle',current:model.states.idle,from:model.states.idle,start:now};
+    }
+    if (animation.target !== target) {
+      animation.from = animation.current; animation.target = target; animation.start = now;
+    }
+    const t = reduced ? 1 : Math.min(1,(now-animation.start)/model.duration);
+    const eased = t*t*(3-2*t);
+    animation.current = model.states[target].map((piece,i) => piece.map((value,j) => animation.from[i][j]+(value-animation.from[i][j])*eased));
+    const signature = JSON.stringify([model.image,animation.current,layout.center,layout.size]);
+    if (sprite._pieceSignature === signature) return;
+    sprite._pieceSignature = signature;
+    const bitmap = sprite.bitmap, ctx = bitmap.context, size = layout.size;
+    bitmap.clear();
+    const draw = () => ctx.drawImage(art.canvas,0,0,art.width,art.height,-size/2,-size/2,size,size);
+    ctx.save(); ctx.translate(layout.center.x,layout.center.y);
+    if (target==='whole' && t===1) draw();
+    else model.pieces.forEach((polygon,i) => {
+      const [x,y,angle] = animation.current[i];
+      ctx.save(); ctx.translate(x*size,y*size); ctx.rotate(angle); ctx.beginPath();
+      polygon.forEach(([px,py],index) => ctx[index ? 'lineTo':'moveTo']((px-0.5)*size,(py-0.5)*size));
+      ctx.closePath(); ctx.clip(); draw(); ctx.restore();
+    });
+    ctx.restore(); bitmap.baseTexture.update();
   }
   function union(rects) {
     const left = Math.min(...rects.map(r => r.x)), top = Math.min(...rects.map(r => r.y));
@@ -2415,6 +2713,17 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     this._spriteset._pictureContainer.addChildAt(this._coretoInkGroupPaper, 0);
     this._coretoInkApproachText = new Sprite(new Bitmap(Graphics.boxWidth, Graphics.boxHeight));
     this.addChild(this._coretoInkApproachText);
+    this._coretoInkChoicePreview = new Sprite(new Bitmap(Graphics.boxWidth, Graphics.boxHeight));
+    this.addChild(this._coretoInkChoicePreview);
+    const hide = this._coretoApproachHide = new Sprite_Clickable();
+    hide.bitmap = new Bitmap(208, 54);
+    hide.onClick = () => {
+      if (!hide.visible) return;
+      this._messageWindow.toggleVisibility();
+      Input.clear(); TouchInput.clear(); ui.adapters.consumeInput();
+    };
+    hide.visible = false;
+    this.addChild(hide);
   };
   const sceneUpdate = Scene_Map.prototype.update;
   Scene_Map.prototype.update = function() {
@@ -2428,8 +2737,28 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     arrangeSlots(pictures, container);
     associateArtwork(pictures, container, kind);
     updateArtwork(pictures, kind);
+    const previewLayout = choices?.isOpenAndActive() ? arrangePreview(pictures,container) : null;
+    updatePreview(this._coretoInkChoicePreview,previewLayout,visible);
     const approachLayout = kind === 'approaches' && choices?.isOpenAndActive() ? arrangeApproaches(pictures, preview, container, choices) : null;
+    const hide = this._coretoApproachHide;
+    hide.visible = !!approachLayout && visible;
+    if (hide.visible) {
+      hide.x = approachLayout.footer.x; hide.y = approachLayout.footer.y + (approachLayout.footer.height - hide.bitmap.height) / 2;
+      const hovered = hide.isBeingTouched();
+      const key = [hovered, ConfigManager.textLocale].join('|');
+      if (key !== hide._drawKey) {
+        hide._drawKey = key; hide.bitmap.clear();
+        CoretoDesignSystem.drawLabel({contents:hide.bitmap}, TextManager.msgButtonConsole('hide'),
+          new Rectangle(0, 0, hide.bitmap.width, hide.bitmap.height), {feedback:'secondary', focused:hovered}, 'Action', 'center');
+      }
+    }
     const sprites = pictures.filter(sprite => presentation(sprite).group !== 'none' && (surface(sprite) || presentation(sprite).group));
+    const sharedSheet = sprites.some(sprite => presentation(sprite).group==='sheet');
+    const message = this._messageWindow;
+    if (!!message._coretoSharedPaper !== sharedSheet) {
+      message._coretoSharedPaper = sharedSheet;
+      message._refreshBack();
+    }
     if (sprites.length) {
       const roots = sprites.map(sprite => { while (sprite.parent !== container) sprite = sprite.parent; return sprite; });
       const first = Math.min(...roots.map(sprite => container.getChildIndex(sprite)));
@@ -2446,7 +2775,8 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     const existingPanel = sprites.find(sprite => kindOf(sprite) === 'panel');
     const rects = bases.map(sprite => pictureRect(sprite, container));
     let regions = [];
-    if (existingPanel) regions = [union([pictureRect(existingPanel, container), ...rects])];
+    if (sharedSheet) regions = [new Rectangle(6,6,Graphics.boxWidth-12,Graphics.boxHeight-36)];
+    else if (existingPanel) regions = [union([pictureRect(existingPanel, container), ...rects])];
     else if (kind === 'roster') {
       const actions = bases.filter(sprite => pictureRect(sprite, container).y > Graphics.boxHeight / 2);
       if (actions.length) regions.push(union(actions.map(sprite => pictureRect(sprite, container))));
@@ -2471,10 +2801,14 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
         ui.label({ contents: preview.bitmap }, approachLayout.descriptions[index], approachLayout.description, {}, 'Body', 'center');
       }
     }
+    if (previewLayout) {
+      regions = [previewLayout.rect];
+      if (previewLayout.focused) ui.label({contents:preview.bitmap},plain(choices,previewLayout.model.description),previewLayout.description,{},'Body','center');
+    }
     const padding = kind === 'sacrifice' ? 12 : 6;
     for (const rect of regions) ui.paper(panel.bitmap, Math.max(0, rect.x - padding), Math.max(0, rect.y - padding), rect.width + padding * 2, rect.height + padding * 2);
     const rows = approachLayout ? [approachLayout.cards.map(s => pictureRect(s, container))] : [];
-    if (!approachLayout) for (const rect of rects) {
+    if (!approachLayout && !sprites.some(sprite => presentation(sprite).group==='sheet')) for (const rect of rects) {
       const row = rows.find(row => Math.abs(row[0].y - rect.y) < 24);
       if (row) row.push(rect); else rows.push([rect]);
     }
@@ -2496,6 +2830,8 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   const terminate = Scene_Map.prototype.terminate;
   Scene_Map.prototype.terminate = function() {
     this._coretoInkGroupPaper?.bitmap.destroy(); this._coretoInkApproachText?.bitmap.destroy();
+    this._coretoApproachHide?.bitmap.destroy();
+    this._coretoInkChoicePreview?.bitmap.destroy();
     return terminate.apply(this, arguments);
   };
 })();

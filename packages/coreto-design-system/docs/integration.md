@@ -33,9 +33,11 @@ Provider callbacks delegate through `drawOption.apply(this,arguments)`, `drawSav
 | --- | --- |
 | `choiceFeedback(window,index,name)` | Semantic role; default `choice`. Consumer classifies its own auxiliary choices. |
 | `choiceBadge(window,index)` | Informative text excluded from feedback, if any. |
+| `menuText(symbol,text)` | Display-only menu label; defaults to the provider text. Does not change command symbols or handlers. |
+| `playtimeLabel()` | Localized playtime label, or `null` to retain the provider label. The time value keeps its own reserved width. |
 | `interfaceHidden()` | Additional consumer hidden-state flag; native message visibility is also observed. |
 | `consumeInput()` | Optional integration hook after native input consumption; no domain mutation. |
-| `picturePresentation(gamePicture,sprite?)` | Null, or `{surface,width?,height?,kind,feedback,support?,group?,neutral?,image?,interactionPictureId?,slot?}`. |
+| `picturePresentation(gamePicture,sprite?)` | Null, or `{surface,width?,height?,kind,feedback,support?,group?,neutral?,image?,interactionPictureId?,slot?,preview?}`. |
 | `pictureText(gamePicture,zone,rawText)` | Display-only text; defaults to the original value. Never change the native choice or picture text. |
 | `pictureContext(scene)` | `roster`, `sacrifice`, `approaches`, or ordinary grouping. |
 | `pictureIndicator(sprite)` | The existing balloon sprite, whose visibility/novelty stays consumer-owned. |
@@ -45,6 +47,10 @@ Provider callbacks delegate through `drawOption.apply(this,arguments)`, `drawSav
 `kind` distinguishes `heading`, `panel`, `button`, `approach`, or other cards. `group:'none'` permanently excludes a label from shared parchment, including transitions with no choice context. Other nonempty group values opt a picture into composition. `surface:true` replaces only opted-in UI bitmap content; `image` draws a consumer-supplied illustration. `neutral:true` prevents provider tone/scale feedback on that mapped surface; unregistered art remains provider-owned. PictureChoices owns activation and navigation, AttachedPictures may associate child targets, and MessageCore owns picture text.
 
 Callbacks must be observational and may be called during asset loading. A control cannot be hit until its corresponding sprite asset is ready. New callbacks persist across scenes but never serialize into saves. No filename, translated text, map or hero identity is built into these generic callbacks.
+
+`group:'sheet'` unifies the participating pictures and the native message footer on one full-screen parchment, including multiple rows. The message keeps its native content and controls while its separate paper is suppressed for this group. Include foreground artwork in the group so that the sheet stays behind it. For a surface, optional `sourceFrame:{x,y,width,height}` copies that rectangle of its original bitmap at native size into the declared surface, leaving remaining space transparent; the source asset remains unchanged.
+
+An optional `preview` descriptor groups existing picture controls under one shared illustration. Supply `image` (picture asset name), `pieces` (polygons in normalized image coordinates), `states` (one `[x,y,rotationRadians]` transform per piece, with translation in image-size units), `state` (this action's target), `description` (localized text), and `duration` in milliseconds. Include an `idle` state for absent focus. The shared renderer arranges these controls below one parchment preview, interpolates from the current piece transforms, and switches directly with reduced motion. The preview has no hit target or confirmation handler. The consumer owns initial focus and mouse-leave policy; the native provider retains the original choice indexes and consequences.
 
 In 1.5.0, `approaches` rearranges opted-in headings, auxiliary buttons and approach images in one lower panel, reserving the largest description. Only sprite placement changes; native picture coordinates remain intact. `roster` and `sacrifice` activate drawing-only 10% image focus. Use `pictureAction` or `interactionPictureId` for explicit associations. For legacy rosters with transparent hit proxies, a unique opaque-artwork bounds match (intersection-over-union above 80%) associates the existing action without reading filenames. Full-frame backgrounds and ambiguous matches are excluded. Native eligibility, clipping and action handlers remain provider-owned.
 

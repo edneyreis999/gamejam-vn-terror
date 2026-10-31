@@ -239,12 +239,14 @@
     {
       "namespace": "save",
       "path": "/SaveMenu/BoxRows",
-      "value": 2
+      "value": 5,
+      "legacy": 2
     },
     {
       "namespace": "save",
       "path": "/SaveMenu/BoxCols",
-      "value": 3
+      "value": 1,
+      "legacy": 3
     },
     {
       "namespace": "ext-message",
@@ -296,7 +298,7 @@
     {
       "file": "CoretoTheme_Ambience.png",
       "destination": "img/system/CoretoTheme_Ambience.png",
-      "sha256": "6d00d6565aa23d301de2f452fa6c450d77964adbfc7a5ef825064c656e19ff2c"
+      "sha256": "98cf594a647a37ec977c5f0058e8547cefd1d215d5a804eff72fa7ff3b2333d9"
     },
     {
       "file": "CoretoTheme_Audio.png",
@@ -311,7 +313,7 @@
     {
       "file": "CoretoTheme_Clock.png",
       "destination": "img/system/CoretoTheme_Clock.png",
-      "sha256": "95b7795d75d678926656ce9fbe65383f848992b14999f7bd22b3c28f431419e8"
+      "sha256": "66b9c5d55c8ee02b8d6ac6d16da23ac4a928b52f2c9c85c89f58d33ed965d0e8"
     },
     {
       "file": "CoretoTheme_continue.png",
@@ -336,7 +338,7 @@
     {
       "file": "CoretoTheme_Jingle.png",
       "destination": "img/system/CoretoTheme_Jingle.png",
-      "sha256": "be26cc1e5823fa81f99a880e813137c5d83d3ac615bc3ccaf8a62168e2e64296"
+      "sha256": "9470d546e3d540880a42a3298de633dede018b3f3f3913437351ddd4e91c93ff"
     },
     {
       "file": "CoretoTheme_Language.png",
@@ -351,22 +353,22 @@
     {
       "file": "CoretoTheme_Music.png",
       "destination": "img/system/CoretoTheme_Music.png",
-      "sha256": "5395d02eb2ce76bd99674183aa15378877e51a0060d71d1aae2d607bcaadc27a"
+      "sha256": "49276c3b8fdcee472f616572dec5dd64d660ac868d9a0a9c65cd395980d9517b"
     },
     {
       "file": "CoretoTheme_Save.png",
       "destination": "img/system/CoretoTheme_Save.png",
-      "sha256": "42b6710f60986771c1f83ec612e39dd28f9f2722adf103c793a4ac6e9f523e66"
+      "sha256": "6bded419c935c6f4b15b4905b0c6a35f3d4d1f638e03d7b0085721ee5617afc1"
     },
     {
       "file": "CoretoTheme_Settings.png",
       "destination": "img/system/CoretoTheme_Settings.png",
-      "sha256": "63ad2a8986396523cb627a90bd1fce07c09c8fe380f219ffd2ec6d314c135db1"
+      "sha256": "7624f997da7a32a616d9677d4873466fde4d322d6197bfc279616cecc066a6b6"
     },
     {
       "file": "CoretoTheme_SoundEffects.png",
       "destination": "img/system/CoretoTheme_SoundEffects.png",
-      "sha256": "f6b83102819963b35d7e92a457d3ff13c0ff3f763a69518df306432f9d5d175e"
+      "sha256": "a0ec1c0c4d154c9b7269225db67bc49c069b588e62e40cc159dfbfde95e35e1d"
     },
     {
       "file": "CoretoTheme_TextEffects.png",
@@ -377,6 +379,21 @@
       "file": "CoretoWindow.png",
       "destination": "img/system/CoretoWindow.png",
       "sha256": "5a602263b85764460408eb3bd8c60e617de896dec6eaff3ab59dc9ef64894461"
+    },
+    {
+      "file": "CoretoTheme_Load.png",
+      "destination": "img/system/CoretoTheme_Load.png",
+      "sha256": "990ee780fc44b7ddd07b90b45d8d283af4dce2a8115b2ccf9c2843d26234aa08"
+    },
+    {
+      "file": "CoretoTheme_Coin.png",
+      "destination": "img/system/CoretoTheme_Coin.png",
+      "sha256": "73ab6e363c7b707e076ad2329debf340498d2870b32a8f8828ef6abcc6891a10"
+    },
+    {
+      "file": "CoretoTheme_BookClosed.png",
+      "destination": "img/system/CoretoTheme_BookClosed.png",
+      "sha256": "03335930930e7ae1aa631be834447b7a11bcfb30304e3dc2f9342923eb140196"
     }
   ],
   "designSystem": {

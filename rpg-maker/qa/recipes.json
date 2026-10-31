@@ -638,5 +638,21 @@
       "DRYLAND_QA_TARGET": "A3"
     },
     "evidenceRoot": ".artifacts/juicy-sacrifice"
+  },
+  {
+    "id": "UXDR-001-normal",
+    "case": "rpg-maker/qa/uxdr-001-demo.mjs",
+    "spec": "docs/uxdrs/uxdr-001-linguagem-visual-e-estados-de-interacao.md",
+    "env": {
+      "DRYLAND_QA_MOTION": "no-preference"
+    }
+  },
+  {
+    "id": "UXDR-001-reduced",
+    "case": "rpg-maker/qa/uxdr-001-demo.mjs",
+    "spec": "docs/uxdrs/uxdr-001-linguagem-visual-e-estados-de-interacao.md",
+    "env": {
+      "DRYLAND_QA_MOTION": "reduce"
+    }
   }
 ]

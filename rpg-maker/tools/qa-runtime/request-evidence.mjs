@@ -7,7 +7,7 @@ import { parseArgs } from 'node:util';
 import { validateRequest } from './request-contract.mjs';
 
 const directory = dirname(fileURLToPath(import.meta.url));
-const inside = (root, path) => { const part = relative(root, path); return part !== '..' && !part.startsWith('../') && !isAbsolute(part); };
+const inside = (root, path) => { const part = relative(root, path); return part !== '..' && !part.replaceAll('\\','/').startsWith('../') && !isAbsolute(part); };
 
 export function optionalOperation(input, { workerFile = join(directory, 'evidence-worker.mjs'), budget = 15000 } = {}) {
   return new Promise((resolveOperation, reject) => {

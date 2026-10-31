@@ -21,6 +21,12 @@ Confirmed direction; applied finish remains subject to artistic review. This inv
 
 ## Semantic matrix
 
+Destination titles and descriptions may follow their owning choice with `emphasis` feedback: shared halo, 1.05 drawing scale, unchanged ink, no underline or feather. The Dryland adapter opts in for the title and description. Reduced motion keeps the halo without scaling; disabled choices receive no emphasis.
+
+UXDR-001 dialogue refinement (2026-10-30): speaker names use Averia Libre at 28 px in #360A0B, with reserved vertical space. The page-corner indicator sits at the bottom right of the parchment, below the dialogue text. Its existing animation and advance handling remain unchanged. The user accepted this dialogue refinement on 2026-10-30 for all dialogue windows.
+
+UXDR-001 refinement (2026-10-30): all focused image, text and text-with-icon actions share a muted lilac halo (#BCA6C9, 45% opacity, 4px blur). Image silhouettes expand 0.75px for the contour and brighten slightly; available peers retain their normal appearance. Text retains its readable ink and feather. These values are visual calibration pending human acceptance; prior stronger purple glows are superseded.
+
 | Role | Feedback |
 | --- | --- |
 | Initial menu, dialogue decisions, save slots, final decision | `choice`: purple, underline, feather |

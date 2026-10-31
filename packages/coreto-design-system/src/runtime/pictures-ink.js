@@ -19,6 +19,10 @@
       const width = role.width || source.width, height = role.height || source.height;
       const bitmap = new Bitmap(width, height);
       this._coretoInkSurfaceBitmap = bitmap; this.bitmap = bitmap;
+      if (role.sourceFrame) {
+        const frame = role.sourceFrame;
+        bitmap.blt(source,frame.x,frame.y,frame.width,frame.height,0,0,frame.width,frame.height);
+      }
       if (role.image) {
         const art = ImageManager.loadPicture(role.image);
         art.addLoadListener(() => {
@@ -63,6 +67,7 @@
   const hitTest = Sprite_Picture.prototype.hitTest;
   const isBeingTouched = Sprite_Picture.prototype.isBeingTouched;
   Sprite_Picture.prototype.isBeingTouched = function() {
+    if (binding(this) >= 0 && (ui.hidden() || !state(this).enabled)) return false;
     const scene = SceneManager._scene;
     if (!ui.hidden() && scene?._choiceListWindow?.isOpenAndActive() && binding(this) >= 0) {
       const point = new Point(TouchInput.x, TouchInput.y);
@@ -77,6 +82,7 @@
     return isBeingTouched.apply(this, arguments);
   };
   Sprite_Picture.prototype.hitTest = function(x, y) {
+    if (binding(this) >= 0 && (ui.hidden() || !state(this).enabled)) return false;
     // Game_Picture can already name the next asset before Sprite_Picture loads it.
     if (surface(this) && (!this.bitmap?.isReady() || this._pictureName !== this.picture()?.name())) return false;
     if (!surface(this) || binding(this) < 0) return hitTest.call(this, x, y);
@@ -97,6 +103,11 @@
     this._pictureTextWindow.createContents();
     const window = this._pictureTextWindow;
     const kind = feedback(this);
+    if (kindOf(this) === 'wordmark') {
+      zones.forEach(zone => this.drawPictureTextZone(zone));
+      $gameScreen.clearPictureTextRefresh(this._pictureId);
+      return;
+    }
     ui.control(window, new Rectangle(0, 0, window.innerWidth, window.innerHeight),
       { ...state(this), feedback: kind, support: !!presentation(this).support },
       () => zones.forEach(zone => this.drawPictureTextZone(zone)));
@@ -109,6 +120,17 @@
     const text = ui.adapters.pictureText(this.picture(), zone, raw);
     const window = this._pictureTextWindow;
     this._pictureTextCache[zone] = raw;
+    if (kindOf(this) === 'wordmark') {
+      if (zone !== 'center') return;
+      const bitmap = window.contents, lines = presentation(this).headingLines;
+      bitmap.fontFace = 'CoretoCinzel';
+      bitmap.textColor = '#F4E3BF'; bitmap.outlineColor = '#360A0B'; bitmap.outlineWidth = 3;
+      bitmap.fontSize = 84;
+      bitmap.drawText(lines[0], 12, 0, window.innerWidth - 24, 108, 'center');
+      bitmap.fontSize = 44;
+      bitmap.drawText(lines[1], 12, 108, window.innerWidth - 24, 64, 'center');
+      return;
+    }
     if (!text || kindOf(this) === 'approach') return;
     if (kindOf(this) === 'heading' && ui.adapters.pictureContext(SceneManager._scene) === 'approaches') return;
     const kind = feedback(this), inset = kind === 'choice' ? 30 : 12;
@@ -116,14 +138,19 @@
     const column = zones.indexOf(zone) % 3, row = Math.floor(zones.indexOf(zone) / 3);
     const x = column === 1 ? Math.max(inset, (window.innerWidth - size.width) / 2) : column === 2 ? window.innerWidth - size.width - inset : inset;
     const y = row === 1 ? (window.innerHeight - size.height) / 2 : row === 2 ? window.innerHeight - size.height - 8 : 8;
-    const ctx = window.contents.context;
-    ctx.save();
-    if (kind === 'icon' && state(this).focused && state(this).enabled && !ui.reducedMotion()) {
-      ctx.translate(x + size.width / 2, y + size.height / 2);
-      ctx.scale(1.05, 1.05); ctx.translate(-x - size.width / 2, -y - size.height / 2);
+    if (presentation(this).detailFocus && zone === 'upperleft' && text.includes('<br><br>')) {
+      const split = text.indexOf('<br><br>') + '<br><br>'.length;
+      const heading = text.slice(0, split), detail = '<WordWrap>' + text.slice(split);
+      const detailY = y + window.textSizeEx(heading).height;
+      ui.control(window, new Rectangle(x, y, width, detailY - y),
+        { ...state(this), feedback: 'emphasis', focusScale: 1.05 },
+        () => window.drawTextEx(heading, x, y, width));
+      ui.control(window, new Rectangle(x, detailY, width, window.innerHeight - detailY),
+        { ...state(this), feedback: 'emphasis', focusScale: 1.05 },
+        () => window.drawTextEx(detail, x, detailY, width));
+      return;
     }
     window.drawTextEx(text, x, y, width);
-    ctx.restore();
   };
   const update = Sprite_Picture.prototype.update;
   Sprite_Picture.prototype.update = function() {
@@ -218,15 +245,56 @@
     }
     this._transformID = -1;
   };
+  const silhouetteHalos = new WeakMap();
+  function silhouetteHalo(bitmap) {
+    if (silhouetteHalos.has(bitmap)) return silhouetteHalos.get(bitmap);
+    const pad = 16, halo = new Bitmap(bitmap.width + pad * 2, bitmap.height + pad * 2);
+    const ctx = halo.context;
+    ctx.shadowColor = ui.tokens.halo; ctx.shadowBlur = ui.tokens.haloBlur;
+    for (let i = 0; i < 8; i++) {
+      const angle = i * Math.PI / 4;
+      ctx.drawImage(bitmap.canvas, pad + Math.cos(angle) * ui.tokens.haloRadius, pad + Math.sin(angle) * ui.tokens.haloRadius);
+    }
+    ctx.shadowBlur = 0;
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.fillStyle = ui.tokens.halo; ctx.fillRect(0, 0, halo.width, halo.height);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.drawImage(bitmap.canvas, pad, pad);
+    ctx.globalCompositeOperation = 'source-over';
+    halo.baseTexture.update();
+    silhouetteHalos.set(bitmap, halo);
+    return halo;
+  }
   function updateArtwork(pictures, kind) {
+    const candidates = pictures.filter(sprite => binding(sprite) >= 0 &&
+      ((!surface(sprite) && presentation(sprite).group !== 'panel' && artworkBounds(sprite.bitmap)) || presentation(sprite).image) &&
+      (['roster', 'approaches', 'sacrifice', 'destinations', 'final'].includes(kind) || presentation(sprite).image));
     for (const sprite of pictures) {
-      const interactive = !surface(sprite) && binding(sprite) >= 0 && ['roster', 'approaches', 'sacrifice'].includes(kind);
+      const interactive = candidates.includes(sprite);
       const focused = interactive && state(sprite).enabled && state(sprite).focused;
-      sprite._coretoInkImageScale = focused ? ui.tokens.imageFocusScale : 1;
+      sprite._coretoInkImageScale = focused && !ui.reducedMotion() ? ui.tokens.imageFocusScale : 1;
       sprite._transformID = -1;
       if (interactive) {
         sprite._coretoInkArtBounds = kind === 'roster' ? artworkBounds(sprite.bitmap) : null;
-        sprite.setColorTone([0, 0, 0, 0]);
+        const light = focused ? 28 : 0;
+        sprite.setColorTone([light, light, light, 0]);
+        if (!sprite._coretoFocusOutline) {
+          sprite._coretoFocusOutline = new Sprite();
+          sprite.addChild(sprite._coretoFocusOutline);
+        }
+        const outline = sprite._coretoFocusOutline;
+        outline.alpha = ui.tokens.haloOpacity;
+        outline.visible = !!focused;
+        if (focused) {
+          const bounds = sprite._coretoInkArtBounds || new Rectangle(0, 0, sprite.bitmap.width, sprite.bitmap.height);
+          const scale = sprite._coretoInkImageScale;
+          outline.bitmap = silhouetteHalo(sprite.bitmap);
+          outline.scale.set(scale);
+          outline.x = -sprite.anchor.x * sprite.bitmap.width + (bounds.x + bounds.width / 2) * (1 - scale) - 16 * scale;
+          outline.y = -sprite.anchor.y * sprite.bitmap.height + (bounds.y + bounds.height / 2) * (1 - scale) - 16 * scale;
+        }
+      } else if (sprite._coretoFocusOutline) {
+        sprite._coretoFocusOutline.visible = false;
       }
     }
   }
@@ -263,21 +331,23 @@
     const descriptionHeight = Math.max(...cards.map(s => CoretoDesignSystem.measure(preview.bitmap, descriptions[binding(s)] || '', width - 96, 'Body').lines.length)) * 30 + 12;
     const headings = pictures.filter(s => kindOf(s) === 'heading');
     const title = headings.flatMap(s => zones.map(zone => $gameScreen.getPictureText(s._pictureId, zone)).filter(Boolean)).map(text => plain(choices, text)).join(' ');
-    const titleLines = CoretoDesignSystem.measure(preview.bitmap, title, width - 340, 'Speaker').lines.length;
+    const titleLines = CoretoDesignSystem.measure(preview.bitmap, title, width - 48, 'Speaker').lines.length;
     const headerHeight = Math.max(60, titleLines * Math.max(30, CoretoDesignSystem.style('Speaker').Size + 10) + 12);
-    const rowHeight = 150, height = 24 + headerHeight + rowHeight + descriptionHeight + 12;
+    const rowHeight = 150, footerHeight = 54, height = 24 + headerHeight + rowHeight + descriptionHeight + footerHeight;
     const top = bottom - height, rowTop = top + 12 + headerHeight;
+    const footerTop = rowTop + rowHeight + descriptionHeight;
     const actions = pictures.filter(s => kindOf(s) === 'button');
     for (const heading of headings) {
       movePicture(heading, left + (width - 256) / 2, top + 42, container);
     }
-    for (const action of actions) movePicture(action, left + width - 128, top + 12 + headerHeight / 2, container);
+    for (const action of actions) movePicture(action, left + width - 128, footerTop + footerHeight / 2, container);
     cards.forEach((card, index) => {
       const x = left + 24 + (index + 0.5) * (width - 48) / cards.length;
       movePicture(card, x, rowTop + rowHeight / 2, container);
       for (const art of pictures.filter(s => !surface(s) && binding(s) === binding(card))) movePicture(art, x, rowTop + rowHeight / 2, container);
     });
-    return {rect:new Rectangle(left, top, width, height), title, heading:new Rectangle(left + 12, top + 12, width - 268, headerHeight), descriptions,
+    return {rect:new Rectangle(left, top, width, height), title, heading:new Rectangle(left + 24, top + 12, width - 48, headerHeight), descriptions,
+      footer:new Rectangle(left + 20, footerTop, width - 40, footerHeight),
       description:new Rectangle(left + 18, rowTop + rowHeight, width - 36, descriptionHeight),
       row:new Rectangle(left + 24, rowTop, width - 48, rowHeight), cards};
   }
@@ -295,6 +365,52 @@
         movePicture(sprite, Graphics.width / 2, top - 24 - sprite.height / 2, container);
       }
     }
+  }
+  // Optional adapter preview: native picture controls still own input and confirmation.
+  function arrangePreview(pictures, container) {
+    const actions = pictures.filter(s => presentation(s).preview).sort((a,b) => binding(a)-binding(b));
+    if (!actions.length) return null;
+    const width = Math.min(1040, Graphics.boxWidth-64), height = Math.min(570, Graphics.boxHeight-48);
+    const left = (Graphics.boxWidth-width)/2, top = (Graphics.boxHeight-height)/2;
+    actions.forEach((action,index) => movePicture(action, left+width*(index+0.5)/actions.length, top+height-64, container));
+    const focused = actions.find(s => state(s).focused && state(s).enabled);
+    return {rect:new Rectangle(left,top,width,height), actions,
+      description:new Rectangle(left+48,top+height-164,width-96,68),
+      center:new Point(left+width/2,top+height*0.37), size:Math.min(290,height*0.51),
+      model:presentation(focused || actions[0]).preview, focused:!!focused};
+  }
+  function updatePreview(sprite, layout, visible) {
+    sprite.visible = !!layout && visible;
+    if (!layout) { sprite._pieceAnimation = null; return; }
+    const model = layout.model, target = layout.focused ? model.state : 'idle';
+    const art = ImageManager.loadPicture(model.image);
+    if (!art.isReady()) return;
+    const now = performance.now(), reduced = ui.reducedMotion();
+    let animation = sprite._pieceAnimation;
+    if (!animation || animation.image !== model.image) {
+      animation = sprite._pieceAnimation = {image:model.image,target:'idle',current:model.states.idle,from:model.states.idle,start:now};
+    }
+    if (animation.target !== target) {
+      animation.from = animation.current; animation.target = target; animation.start = now;
+    }
+    const t = reduced ? 1 : Math.min(1,(now-animation.start)/model.duration);
+    const eased = t*t*(3-2*t);
+    animation.current = model.states[target].map((piece,i) => piece.map((value,j) => animation.from[i][j]+(value-animation.from[i][j])*eased));
+    const signature = JSON.stringify([model.image,animation.current,layout.center,layout.size]);
+    if (sprite._pieceSignature === signature) return;
+    sprite._pieceSignature = signature;
+    const bitmap = sprite.bitmap, ctx = bitmap.context, size = layout.size;
+    bitmap.clear();
+    const draw = () => ctx.drawImage(art.canvas,0,0,art.width,art.height,-size/2,-size/2,size,size);
+    ctx.save(); ctx.translate(layout.center.x,layout.center.y);
+    if (target==='whole' && t===1) draw();
+    else model.pieces.forEach((polygon,i) => {
+      const [x,y,angle] = animation.current[i];
+      ctx.save(); ctx.translate(x*size,y*size); ctx.rotate(angle); ctx.beginPath();
+      polygon.forEach(([px,py],index) => ctx[index ? 'lineTo':'moveTo']((px-0.5)*size,(py-0.5)*size));
+      ctx.closePath(); ctx.clip(); draw(); ctx.restore();
+    });
+    ctx.restore(); bitmap.baseTexture.update();
   }
   function union(rects) {
     const left = Math.min(...rects.map(r => r.x)), top = Math.min(...rects.map(r => r.y));
@@ -315,6 +431,17 @@
     this._spriteset._pictureContainer.addChildAt(this._coretoInkGroupPaper, 0);
     this._coretoInkApproachText = new Sprite(new Bitmap(Graphics.boxWidth, Graphics.boxHeight));
     this.addChild(this._coretoInkApproachText);
+    this._coretoInkChoicePreview = new Sprite(new Bitmap(Graphics.boxWidth, Graphics.boxHeight));
+    this.addChild(this._coretoInkChoicePreview);
+    const hide = this._coretoApproachHide = new Sprite_Clickable();
+    hide.bitmap = new Bitmap(208, 54);
+    hide.onClick = () => {
+      if (!hide.visible) return;
+      this._messageWindow.toggleVisibility();
+      Input.clear(); TouchInput.clear(); ui.adapters.consumeInput();
+    };
+    hide.visible = false;
+    this.addChild(hide);
   };
   const sceneUpdate = Scene_Map.prototype.update;
   Scene_Map.prototype.update = function() {
@@ -328,8 +455,28 @@
     arrangeSlots(pictures, container);
     associateArtwork(pictures, container, kind);
     updateArtwork(pictures, kind);
+    const previewLayout = choices?.isOpenAndActive() ? arrangePreview(pictures,container) : null;
+    updatePreview(this._coretoInkChoicePreview,previewLayout,visible);
     const approachLayout = kind === 'approaches' && choices?.isOpenAndActive() ? arrangeApproaches(pictures, preview, container, choices) : null;
+    const hide = this._coretoApproachHide;
+    hide.visible = !!approachLayout && visible;
+    if (hide.visible) {
+      hide.x = approachLayout.footer.x; hide.y = approachLayout.footer.y + (approachLayout.footer.height - hide.bitmap.height) / 2;
+      const hovered = hide.isBeingTouched();
+      const key = [hovered, ConfigManager.textLocale].join('|');
+      if (key !== hide._drawKey) {
+        hide._drawKey = key; hide.bitmap.clear();
+        CoretoDesignSystem.drawLabel({contents:hide.bitmap}, TextManager.msgButtonConsole('hide'),
+          new Rectangle(0, 0, hide.bitmap.width, hide.bitmap.height), {feedback:'secondary', focused:hovered}, 'Action', 'center');
+      }
+    }
     const sprites = pictures.filter(sprite => presentation(sprite).group !== 'none' && (surface(sprite) || presentation(sprite).group));
+    const sharedSheet = sprites.some(sprite => presentation(sprite).group==='sheet');
+    const message = this._messageWindow;
+    if (!!message._coretoSharedPaper !== sharedSheet) {
+      message._coretoSharedPaper = sharedSheet;
+      message._refreshBack();
+    }
     if (sprites.length) {
       const roots = sprites.map(sprite => { while (sprite.parent !== container) sprite = sprite.parent; return sprite; });
       const first = Math.min(...roots.map(sprite => container.getChildIndex(sprite)));
@@ -346,7 +493,8 @@
     const existingPanel = sprites.find(sprite => kindOf(sprite) === 'panel');
     const rects = bases.map(sprite => pictureRect(sprite, container));
     let regions = [];
-    if (existingPanel) regions = [union([pictureRect(existingPanel, container), ...rects])];
+    if (sharedSheet) regions = [new Rectangle(6,6,Graphics.boxWidth-12,Graphics.boxHeight-36)];
+    else if (existingPanel) regions = [union([pictureRect(existingPanel, container), ...rects])];
     else if (kind === 'roster') {
       const actions = bases.filter(sprite => pictureRect(sprite, container).y > Graphics.boxHeight / 2);
       if (actions.length) regions.push(union(actions.map(sprite => pictureRect(sprite, container))));
@@ -371,10 +519,14 @@
         ui.label({ contents: preview.bitmap }, approachLayout.descriptions[index], approachLayout.description, {}, 'Body', 'center');
       }
     }
+    if (previewLayout) {
+      regions = [previewLayout.rect];
+      if (previewLayout.focused) ui.label({contents:preview.bitmap},plain(choices,previewLayout.model.description),previewLayout.description,{},'Body','center');
+    }
     const padding = kind === 'sacrifice' ? 12 : 6;
     for (const rect of regions) ui.paper(panel.bitmap, Math.max(0, rect.x - padding), Math.max(0, rect.y - padding), rect.width + padding * 2, rect.height + padding * 2);
     const rows = approachLayout ? [approachLayout.cards.map(s => pictureRect(s, container))] : [];
-    if (!approachLayout) for (const rect of rects) {
+    if (!approachLayout && !sprites.some(sprite => presentation(sprite).group==='sheet')) for (const rect of rects) {
       const row = rows.find(row => Math.abs(row[0].y - rect.y) < 24);
       if (row) row.push(rect); else rows.push([rect]);
     }
@@ -396,6 +548,8 @@
   const terminate = Scene_Map.prototype.terminate;
   Scene_Map.prototype.terminate = function() {
     this._coretoInkGroupPaper?.bitmap.destroy(); this._coretoInkApproachText?.bitmap.destroy();
+    this._coretoApproachHide?.bitmap.destroy();
+    this._coretoInkChoicePreview?.bitmap.destroy();
     return terminate.apply(this, arguments);
   };
 })();

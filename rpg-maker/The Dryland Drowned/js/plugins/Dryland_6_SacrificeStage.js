@@ -45,7 +45,6 @@
     const binding = picture._drylandSacrifice;
     const name = brave ? binding.brave : binding.fear;
     if (picture.name() !== name) picture.vnChangeGraphic(name);
-    picture.tint(brave ? [0, 0, 0, 0] : [-30, -30, -30, 0], 0);
   }
   PluginManager.registerCommand(plugin, 'Prepare', function() {
     const state = $gameSystem._dryland.campaign;
@@ -94,6 +93,15 @@
     update.call(this);
     const choices = this._choiceListWindow, message = this._messageWindow;
     if ($gameMessage._drylandChoiceFocus?.key !== 'sacrifice' || !choices?.isOpenAndActive()) {
+      if (this._sacrificePreviewSpeaker !== undefined) {
+        if ($gameMessage.speakerName() === this._sacrificePreviewSpeaker) {
+          $gameMessage.setSpeakerName(this._sacrificePreviousSpeaker);
+          message.updateSpeakerName();
+          message._nameBoxWindow.start();
+        }
+        delete this._sacrificePreviewSpeaker;
+        delete this._sacrificePreviousSpeaker;
+      }
       delete this._sacrificePreviewKey;
       return;
     }
@@ -112,14 +120,22 @@
     for (const picture of candidates()) express(picture, picture === focused);
     const key = focused?._drylandSacrifice.phrase || '';
     const text = key ? TextManager.parseLocalizedText(key) : '';
-    if (text !== this._sacrificePreviewKey) {
+    const name = focused ? TextManager.parseLocalizedText(String($gameVariables.value(189 + slots.indexOf(id)))) : '';
+    if (text !== this._sacrificePreviewKey || name !== this._sacrificePreviewSpeaker) {
+      if (this._sacrificePreviewSpeaker === undefined) this._sacrificePreviousSpeaker = $gameMessage.speakerName();
+      this._sacrificePreviewSpeaker = name;
+      $gameMessage.setSpeakerName(name);
       this._sacrificePreviewKey = text;
       message.updateDimensions();
       message.updatePlacement();
       message.contents.clear();
       message.resetFontSettings();
       const x = message.newLineX({ rtl: false });
-      message.drawTextEx(text ? '<WordWrap>' + text : '', x, 0, message.innerWidth - x);
+      const config = CoretoDesignSystem.config;
+      const y = name && config.Dialogue.SpeakerInside ? Math.max(config.Speaker.Line, 32) + config.Dialogue.SpeakerGap : 0;
+      message.updateSpeakerName();
+      message._nameBoxWindow.start();
+      message.drawTextEx(text ? '<WordWrap>' + text : '', x, y, message.innerWidth - x);
     }
     message.open();
   };

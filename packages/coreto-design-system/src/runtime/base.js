@@ -60,7 +60,7 @@ const list=w=>themed(w)&&w instanceof Window_Selectable&&!(w instanceof Window_N
 wrap(Scene_Boot.prototype,'loadGameFonts',function(previous,args){
   const result=previous.apply(this,args);
   // MessageCore registers fonts; the theme owns only its images.
-  for(const [name,filename]of Object.entries(config.Icons)){
+  for(const [name,filename]of Object.entries({Load:'CoretoTheme_Load',Coin:'CoretoTheme_Coin',BookClosed:'CoretoTheme_BookClosed',...config.Icons})){
     const bitmap=ImageManager.loadSystem(filename);menuIcons[name]=bitmap;icons[name]=bitmap;
   }
   icons.continue=ImageManager.loadSystem('CoretoTheme_continue');
@@ -147,13 +147,16 @@ const menuIcons={},tintedIcons=new Map();
 function menuIcon(bitmap,name,x,y,size=32,color=colors.text){
   const source=menuIcons[name];if(!source?.isReady())return;
   if(['error','Conversation','diamond'].includes(name)){bitmap.blt(source,0,0,source.width,source.height,x,y,size*source.width/source.height,size);return;}
-  const key=name+color;let tinted=tintedIcons.get(key);
+  const height=Math.max(1,Math.round(size)),width=Math.max(1,Math.round(height*source.width/source.height));
+  const key=JSON.stringify([name,color,width,height]);let tinted=tintedIcons.get(key);
   if(!tinted){
     if(tintedIcons.size>=64){const first=tintedIcons.keys().next().value;tintedIcons.get(first).destroy();tintedIcons.delete(first);}
-    tinted=new Bitmap(source.width,source.height);tinted.blt(source,0,0,source.width,source.height,0,0);
+    tinted=new Bitmap(width,height);
+    tinted.context.imageSmoothingEnabled=true;tinted.context.imageSmoothingQuality='high';
+    tinted.blt(source,0,0,source.width,source.height,0,0,width,height);
     const ctx=tinted.context;ctx.save();ctx.globalCompositeOperation='source-in';ctx.fillStyle=color;ctx.fillRect(0,0,tinted.width,tinted.height);ctx.restore();tinted.baseTexture.update();tintedIcons.set(key,tinted);
   }
-  bitmap.blt(tinted,0,0,tinted.width,tinted.height,x,y,size*tinted.width/tinted.height,size);
+  bitmap.blt(tinted,0,0,tinted.width,tinted.height,Math.round(x),Math.round(y));
 }
 function drawItemBackground(index){
   if(!list(this))return false;
@@ -398,7 +401,7 @@ function drawItemBackground(index){
     const result=previous.apply(this,args);
     if(this._forcedPosition||this._messageAutoSize)return result;
     const width=this.width;
-    const height=Math.min(Graphics.boxHeight,this.height+(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()?config.Speaker.Line+config.Dialogue.SpeakerGap:0));
+    const height=Math.min(Graphics.boxHeight,this.height+(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()?Math.max(config.Speaker.Line,32)+config.Dialogue.SpeakerGap+8:0));
     if(width!==this.width||height!==this.height){this.width=width;this.height=height;if(this.contents)this.createContents();}
     if(this.alignButtonConsoleButtons)this.alignButtonConsoleButtons();
     return result;
@@ -406,14 +409,25 @@ function drawItemBackground(index){
   wrap(Window_Message.prototype,'newLineX',function(previous,args){return previous.apply(this,args)+config.Dialogue.TextInset;});
   wrap(Window_Message.prototype,'newPage',function(previous,args){
     const result=previous.apply(this,args);
-    if(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()&&args[0]){args[0].y+=config.Speaker.Line+config.Dialogue.SpeakerGap;args[0].startY=args[0].y;}
+    if(config.Dialogue.SpeakerInside&&$gameMessage.speakerName()&&args[0]){args[0].y+=Math.max(config.Speaker.Line,32)+config.Dialogue.SpeakerGap+8;args[0].startY=args[0].y;}
     return result;
   });
   wrap(Window_NameBox.prototype,'resetFontSettings',function(previous,args){
-    const result=previous.apply(this,args);textContrast(this);return result;
+    const result=previous.apply(this,args);textContrast(this);this.contents.fontSize=28;this.contents.textColor='#360A0B';return result;
   });
   wrap(Window_NameBox.prototype,'resetTextColor',function(previous,args){
-    const result=previous.apply(this,args);this.contents.textColor=ink(this);textContrast(this);return result;
+    const result=previous.apply(this,args);this.contents.textColor='#360A0B';textContrast(this);return result;
+  });
+  wrap(Window_NameBox.prototype,'windowHeight',function(previous,args){
+    return Math.max(previous.apply(this,args),this.textSizeEx(this._name).height+this.padding*2+8);
+  });
+  wrap(Window_NameBox.prototype,'windowWidth',function(previous,args){
+    const width=previous.apply(this,args);return width?Math.min(Graphics.boxWidth,width+8):width;
+  });
+  wrap(Window_NameBox.prototype,'drawTextEx',function(previous,args){
+    args[1]=(args[1]||0)+4;args[2]=(args[2]||0)+4;
+    if(args[3]!==undefined)args[3]=Math.max(0,args[3]-8);
+    return previous.apply(this,args);
   });
   wrap(Window_NameBox.prototype,'updatePlacement',function(previous,args){
     const result=previous.apply(this,args),message=this._messageWindow;
@@ -439,7 +453,7 @@ if(providers.ext)wrap(Window_Message.prototype,'_updatePauseSign',function(previ
   if(config.Windows&&config.Dialogue.ContinuePlacement==='corner'&&sprite&&this.isCustomMessageCursorEnabled?.()){
     const settings=$gameSystem.getMessageCursorSettings();
     sprite.x=this.width-this.padding-config.Dialogue.TextInset+Number(settings.OffsetX||0);
-    sprite.y=this.height-this.padding-(this.addedHeight?.()||0)-10+Number(settings.OffsetY||0);
+    sprite.y=this.height-8+Number(settings.OffsetY||0);
     sprite.visible=this.isOpen()&&this.pause&&!this.isClosing()&&!this.isAnySubWindowActive();
   }
   return result;

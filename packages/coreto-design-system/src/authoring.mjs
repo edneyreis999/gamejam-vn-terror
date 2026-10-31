@@ -277,7 +277,7 @@ export function prepareInstall(root,{preset='coreto-default',reapply=false,coret
     let text=fs.readFileSync(languageFile,'utf8');
     if(!/^coreto.ui.restore_hint\t/m.test(text)) {
       const header=text.split(/\r?\n/)[0].replace(/^\ufeff/,'').split('\t');
-      const values={English:'Click or press Confirm to restore the interface.',Portuguese:'Clique ou pressione Confirmar para restaurar a interface.'};
+      const values={English:'Press Tab or left-click to show the interface again.',Portuguese:'Pressione Tab ou clique com o botão esquerdo para mostrar a interface.'};
       const line=['coreto.ui.restore_hint',...header.slice(1).map(locale=>values[locale]||'')].join('\t');
       text+=(text.endsWith('\n')?'':'\n')+line+'\n';
     }

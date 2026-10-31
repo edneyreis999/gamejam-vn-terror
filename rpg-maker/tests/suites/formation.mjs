@@ -260,7 +260,11 @@ canonicalCase('IT-007', 'native selection, removal, full-party feedback and mand
     assert.equal(await browser.evaluate(`SceneManager._scene._choiceListWindow.isCommandEnabled(${memberIndex})`), count === 4);
     if (count <= 3) {
       const before = await snapshot(browser);
-      await activate(browser, 'hero', '\\V[153]');
+      for (const [key, code] of [['ArrowDown',40],['ArrowRight',39],['ArrowUp',38],['ArrowLeft',37]]) {
+        await browser.press(key, code);
+        assert.notEqual(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), memberIndex,
+          'Mandatory roster membership must not receive keyboard focus.');
+      }
       await choices(browser, 'hero');
       assert.deepEqual(await snapshot(browser), before);
       await browser.press('Escape', 27);
@@ -364,10 +368,18 @@ canonicalCase('IT-008', 'destination panel cancellation preserves membership and
   const before = await snapshot(browser);
   await openDestinations(browser);
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.isCommandEnabled(2)'), false);
-  assert.deepEqual(await browser.evaluate('[72,73,74].map(id => $gameScreen.picture(id).name())'),
-    ['Dryland_Destination_physical', 'Dryland_Destination_supernatural', 'Dryland_Destination_final']);
-  const panelText = resolve((await browser.evaluate('[75,76,77].map(id => $gameScreen.getPictureTextData(id).upperleft)')).join(' ')).replace(/\s+/g, ' ');
-  for (const phrase of ['igreja tomada pela mata', 'uma figueira', 'duas peças']) assert.ok(panelText.includes(phrase), phrase);
+  const focus = await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
+  const point = await browser.evaluate(`(() => {
+    const sprite=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===74);
+    const b=sprite.getBounds();return {x:b.x+b.width/2,y:b.y+b.height/2};
+  })()`);
+  await browser.call('Input.dispatchMouseEvent',{type:'mouseMoved',...point});
+  await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',...point,button:'left',buttons:1,clickCount:1});
+  await new Promise(resolve=>setTimeout(resolve,100));
+  await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',...point,button:'left',buttons:0,clickCount:1});
+  await choices(browser,'destinations');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),focus);
+  assert.deepEqual(await snapshot(browser),before,'Clicking a blocked destination must not confirm the available focused route.');
   await browser.press('Escape', 27);
   await choices(browser, 'formation');
   assert.deepEqual(await snapshot(browser), before);

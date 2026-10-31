@@ -60,7 +60,7 @@ async function main(){
  process.once('SIGINT',stop);process.once('SIGTERM',stop);
  async function run(id){
   const job={id,status:'running',startMs:performance.now()-start,browserDemand:groups.slow.includes(id)?1:0};jobs.push(job);active++;workerPeak=Math.max(workerPeak,active);record('job-start',{id,active});
-  const cwd=path.join(output,id);await mkdir(cwd);await mkdir(path.join(cwd,'tmp'));await symlink(path.join(root,'rpg-maker'),path.join(cwd,'rpg-maker'),'dir');
+  const cwd=path.join(output,id);await mkdir(cwd);await mkdir(path.join(cwd,'tmp'));await symlink(path.join(root,'rpg-maker'),path.join(cwd,'rpg-maker'),process.platform==='win32'?'junction':'dir');
   const args=['--test','--test-concurrency=1','--test-reporter=tap',`--test-name-pattern=^${id} —`,path.join(root,'rpg-maker/tests/campaign.test.mjs')];
   const child=spawn(process.execPath,args,{cwd,detached:true,env:{...process.env,TMPDIR:path.join(cwd,'tmp'),DRYLAND_QA_PORT:'0',DRYLAND_QA_PROJECT:testProject,DRYLAND_BROWSER_BROKER:brokerUrl,DRYLAND_JOB_ID:id},stdio:['ignore','pipe','pipe']});children.add(child);job.pid=child.pid;record('job-spawn',{id,pid:child.pid});
   let stdout='',stderr='';child.stdout.on('data',x=>{stdout+=x;appendFileSync(path.join(cwd,'stdout.tap'),x);});child.stderr.on('data',x=>{stderr+=x;appendFileSync(path.join(cwd,'stderr.log'),x);});
@@ -83,6 +83,6 @@ async function main(){
    const id=queue.shift(),promise=run(id).catch(error=>{const job=jobs.find(x=>x.id===id);Object.assign(job,{status:'fail',infrastructureError:error.stack});record('job-infrastructure-error',{id,error:error.stack});stop();});running.add(promise);promise.finally(()=>running.delete(promise));
   }if(stopping&&!running.size)break;if(running.size)await Promise.race(running);
  }}finally{stop();await Promise.allSettled([...running]);await new Promise(resolve=>broker.close(resolve));}
- const result={selection:selected,testProject,pruned:values.pruned,config,workerPeak,browserPeak:peak,liveBrowsersAfterCleanup:live,unrun:queue,jobs,events,wallMs:performance.now()-start,node:process.version,renderer:process.env.DRYLAND_QA_ANGLE||'metal',status:queue.length||jobs.some(j=>j.status!=='pass')?'fail':'pass'};
+ const result={selection:selected,testProject,pruned:values.pruned,config,workerPeak,browserPeak:peak,liveBrowsersAfterCleanup:live,unrun:queue,jobs,events,wallMs:performance.now()-start,node:process.version,renderer:process.env.DRYLAND_QA_ANGLE||(process.platform==='win32'?'d3d11':'metal'),status:queue.length||jobs.some(j=>j.status!=='pass')?'fail':'pass'};
  await writeFile(path.join(output,'run.json'),JSON.stringify(result,null,2));console.log(JSON.stringify({status:result.status,wallMs:result.wallMs,workerPeak,browserPeak:peak,output}));process.exitCode=result.status==='pass'?0:1;
 }

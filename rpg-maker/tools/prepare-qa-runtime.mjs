@@ -1,12 +1,12 @@
 import {access,cp,mkdir,readFile} from 'node:fs/promises';
-import {resolve,join} from 'node:path';
+import {resolve,join,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const source=resolve(root,'rpg-maker/tools/qa-runtime');
 const output=resolve(root,process.env.DRYLAND_DIRECTED_RUNTIME||'.artifacts/qa-runtime');
 await access(join(source,'package-lock.json'));await mkdir(output,{recursive:true});
-await cp(source,output,{recursive:true,filter:p=>!p.split('/').includes('node_modules')});
-const child=spawn('npm',['ci','--prefix',output,'--no-audit','--no-fund'],{cwd:root,stdio:'inherit'});
+await cp(source,output,{recursive:true,filter:p=>!p.split(sep).includes('node_modules')});
+const child=spawn('npm',['ci','--prefix',process.platform==='win32'?`"${output}"`:output,'--no-audit','--no-fund'],{cwd:root,stdio:'inherit',shell:process.platform==='win32',windowsHide:true});
 const code=await new Promise(resolve=>child.on('close',resolve));if(code!==0)throw Error('Declared directed runtime dependencies failed to install');
 console.log(JSON.stringify({runtime:output,source,package:JSON.parse(await readFile(join(output,'package.json'),'utf8'))}));

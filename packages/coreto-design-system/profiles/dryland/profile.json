@@ -8,10 +8,16 @@
   ],
   "files": [
     {
+      "source": "profiles/dryland/Dryland_Medallion.png",
+      "destination": "img/pictures/Dryland_Medallion.png",
+      "recognized": []
+    },
+    {
       "source": "profiles/dryland/Dryland_6_ParchmentUI.js",
       "destination": "js/plugins/Dryland_6_ParchmentUI.js",
       "recognized": [
-        "c08f555c3f82610ca6b5d6876149705f7ca883dc69a9673902bce433f7a7d177"
+        "c08f555c3f82610ca6b5d6876149705f7ca883dc69a9673902bce433f7a7d177",
+        "2deba93c9cd24ee7a056cb6a76bcfb27bdbd219fbbe234bd7d43124f016338bd"
       ]
     },
     {
@@ -20,7 +26,8 @@
       "recognized": [
         "b220ebc285ea9f2b189d9242708ae34cd7bd69bb005ef42e0a6eb184aa6ca618",
         "6f929e601f698a858c251db948e6f336d696c2d354a5addc6ce3114ff4f5a317",
-        "af9b34c4ea8b02a03fc8ddf89a545254d38fcec089e225faca174d3592b5c54e"
+        "af9b34c4ea8b02a03fc8ddf89a545254d38fcec089e225faca174d3592b5c54e",
+        "30eeca12e6b73b902840e0273cdbbca3d2f9a409de6e16faf76b603fd0689199"
       ]
     },
     {
@@ -61,6 +68,15 @@
     }
   ],
   "languages": [
+    { "key": "title.heading", "English": "The Dryland", "Portuguese": "Afogados" },
+    { "key": "title.subheading", "English": "Drowned", "Portuguese": "em Terra Seca" },
+    { "key": "ui.options.off", "English": "Off", "Portuguese": "Desligado" },
+    { "key": "ui.options.on", "English": "On", "Portuguese": "Ligado" },
+    {
+      "key": "ui.menu.time",
+      "English": "Time",
+      "Portuguese": "Tempo"
+    },
     {
       "key": "ui.console.fast",
       "English": "Fast",
