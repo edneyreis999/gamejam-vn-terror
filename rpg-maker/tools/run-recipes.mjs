@@ -1,12 +1,12 @@
 import {readFile,writeFile,mkdir,readdir,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {spawn,execFileSync} from 'node:child_process';
+import {spawn} from 'node:child_process';
 import {performance} from 'node:perf_hooks';
 import {parseArgs} from 'node:util';
 import {setTimeout as delay} from 'node:timers/promises';
 import {limits} from './run-tests.mjs';
-import {signalOwnedGroup,terminateOwnedGroup} from './owned-processes.mjs';
+import {processRows,signalOwnedGroup,terminateOwnedGroup} from './owned-processes.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const {values}=parseArgs({options:{output:{type:'string'},ids:{type:'string'},maxWorkers:{type:'string'},maxBrowsers:{type:'string'}}});
 const config=await limits(root,Object.fromEntries(['maxWorkers','maxBrowsers'].filter(k=>values[k]!==undefined).map(k=>[k,Number(values[k])])));
@@ -19,8 +19,8 @@ const stamp=(event,details={})=>events.push({event,ms:performance.now()-start,..
 const stop=()=>{stopping=true;for(const pid of observed)try{process.kill(pid,'SIGTERM');}catch(e){if(e.code!=='ESRCH')throw e;}for(const {child}of active.values())signalOwnedGroup(child.pid);};
 process.once('SIGINT',stop);process.once('SIGTERM',stop);
 const observed=new Set();
-function processes(){return execFileSync('ps',['-axo','pid=,ppid=,pgid=,command='],{encoding:'utf8'}).trim().split('\n').map(line=>/^\s*(\d+)\s+(\d+)\s+(\d+)\s+(.*)$/.exec(line)).filter(Boolean).map(m=>({pid:Number(m[1]),parent:Number(m[2]),group:Number(m[3]),command:m[4]}));}
-const monitor=setInterval(()=>{const rows=processes(),owned=new Set([...active.values()].map(x=>x.child.pid));let prior=-1;while(prior!==owned.size){prior=owned.size;for(const row of rows)if(owned.has(row.parent)||owned.has(row.group))owned.add(row.pid);}let live=0;for(const row of rows)if(owned.has(row.pid)&&row.command.includes('/Google Chrome.app/Contents/MacOS/Google Chrome ')){live++;if(!observed.has(row.pid)){observed.add(row.pid);stamp('browser-observed',{pid:row.pid,group:row.group});}}peak=Math.max(peak,live);if(live>config.maxBrowsers){stamp('browser-budget-exceeded',{live});stop();}},100);
+const processes=processRows;
+const monitor=setInterval(()=>{const rows=processes(),owned=new Set([...active.values()].map(x=>x.child.pid));let prior=-1;while(prior!==owned.size){prior=owned.size;for(const row of rows)if(owned.has(row.parent)||owned.has(row.group))owned.add(row.pid);}let live=0;for(const row of rows)if(owned.has(row.pid)&&(/chrome\.exe|Google Chrome\.app\/Contents\/MacOS\/Google Chrome/i.test(row.command)&&!row.command.includes('--type='))){live++;if(!observed.has(row.pid)){observed.add(row.pid);stamp('browser-observed',{pid:row.pid,group:row.group});}}peak=Math.max(peak,live);if(live>config.maxBrowsers){stamp('browser-budget-exceeded',{live});stop();}},process.platform==='win32'?1000:100);
 
 async function archives(directory,name){let found=[];try{for(const entry of await readdir(directory,{withFileTypes:true})){const p=join(directory,entry.name);if(entry.isDirectory())found.push(...await archives(p,name));else if(entry.name===name||name.startsWith('regex:')&&new RegExp(name.slice(6)).test(entry.name))found.push(p);}}catch(e){if(e.code!=='ENOENT')throw e;}return found;}
 async function execute(item){

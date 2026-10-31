@@ -1,11 +1,12 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { once } from 'node:events';
 import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 
-const port = process.env.DRYLAND_QA_PORT || '18726';
+const port = process.env.DRYLAND_QA_PORT || (process.platform === 'win32' ? '0' : '18726');
 if (!/^\d+$/.test(port) || (Number(port) !== 0 && Number(port) < 1024) || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
 // O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir, no idioma escolhido
 // pelo jogador (inglês por padrão). Os testes de conteúdo comparam a prosa em português, então o
@@ -27,7 +28,10 @@ export let origin = `http://127.0.0.1:${port}/`;
 export const project = path.resolve(process.env.DRYLAND_QA_PROJECT || 'rpg-maker/The Dryland Drowned');
 
 export async function startServer(t, directory = project) {
-  const server = spawn('python3', ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const python = process.env.DRYLAND_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
+  const probe = spawnSync(python, ['-c', 'import sys; assert sys.version_info >= (3, 8); print(sys.executable)'], {encoding:'utf8', windowsHide:true});
+  if (probe.status !== 0) throw new Error(`Python 3 indisponível (${python}). Configure DRYLAND_PYTHON com o executável instalado. ${probe.error?.message || probe.stderr}`);
+  const server = spawn(probe.stdout.trim(), ['-u', '-m', 'http.server', port, '--bind', '127.0.0.1', '--directory', directory], { windowsHide:true, stdio: ['ignore', 'pipe', 'pipe'] });
   let log = '';
   server.stdout.on('data', data => { log += data; });
   server.stderr.on('data', data => { log += data; });
@@ -66,12 +70,17 @@ export async function openChrome(t, options = {}) {
       partition: { default_zoom_level: { x: Math.log(options.zoom) / Math.log(1.2) } }
     }));
   }
-  const executable = process.env.DRYLAND_CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  const executable = process.env.DRYLAND_CHROME || (process.platform === 'win32'
+    ? [process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)'], process.env.LOCALAPPDATA].filter(Boolean)
+      .map(root => path.join(root, 'Google/Chrome/Application/chrome.exe')).find(existsSync)
+    : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
+  if (!executable) { await release(); await rm(profile,{recursive:true,force:true}); throw new Error('Configure DRYLAND_CHROME com o Chrome instalado.'); }
+  const angle = process.env.DRYLAND_QA_ANGLE || (process.platform === 'win32' ? 'd3d11' : 'metal');
   const chrome = spawn(executable, [
     '--headless=new', '--remote-debugging-pipe', '--no-first-run', '--no-default-browser-check',
-    '--disable-background-networking', `--use-angle=${process.env.DRYLAND_QA_ANGLE || 'metal'}`, ...(process.env.DRYLAND_QA_ANGLE === 'swiftshader' ? ['--enable-unsafe-swiftshader'] : []),
+    '--disable-background-networking', `--use-angle=${angle}`, ...(angle === 'swiftshader' ? ['--enable-unsafe-swiftshader'] : []),
     `--user-data-dir=${profile}`, 'about:blank'
-  ], { stdio: ['ignore', 'ignore', 'pipe', 'pipe', 'pipe'] });
+  ], { windowsHide:true, stdio: ['ignore', 'ignore', 'pipe', 'pipe', 'pipe'] });
   if (broker) await fetch(broker+'/started',{method:'POST',body:JSON.stringify({token:reserve,pid:chrome.pid})});
   chrome.once('exit', () => { release().catch(error => {console.error(error);process.exitCode=1;}); });
   let nextId = 0;
@@ -116,16 +125,18 @@ export async function openChrome(t, options = {}) {
   t.after(async () => {
     if (chrome.exitCode === null && chrome.signalCode === null) {
       const exited = once(chrome, 'exit');
-      chrome.kill('SIGTERM');
+      await send('Browser.close').catch(error => {
+        if (chrome.exitCode === null && chrome.signalCode === null) throw error;
+      });
       await exited;
     }
     // Chrome's detached crash reporter can retain stderr after the browser exits.
     // These pipes belong to this test session; no process should keep them open.
     for (const stream of [chrome.stderr, chrome.stdio[3], chrome.stdio[4]]) stream.destroy();
-    await rm(profile, { recursive: true, force: true });
+    await rm(profile, { recursive: true, force: true, maxRetries:5, retryDelay:200 });
   });
   const version = await send('Browser.getVersion');
-  if (process.env.DRYLAND_JOB_ID) await writeFile('browser-environment.json',JSON.stringify({version,gpu:await send('SystemInfo.getInfo'),origin,renderer:process.env.DRYLAND_QA_ANGLE||'metal'},null,2));
+  if (process.env.DRYLAND_JOB_ID) await writeFile('browser-environment.json',JSON.stringify({version,gpu:await send('SystemInfo.getInfo'),origin,renderer:angle,python:process.env.DRYLAND_PYTHON|| (process.platform==='win32'?'python':'python3')},null,2));
   let targetId;
   let sessionId;
   const call = (method, params) => send(method, params, sessionId);
@@ -146,8 +157,8 @@ export async function openChrome(t, options = {}) {
     if (response.exceptionDetails) throw new Error(response.exceptionDetails.exception?.description || response.exceptionDetails.text);
     return response.result.value;
   }
-  async function waitFor(expression) {
-    const deadline = Date.now() + waitMs;
+  async function waitFor(expression, timeoutMs = waitMs) {
+    const deadline = Date.now() + timeoutMs;
     while (Date.now() < deadline) {
       if (exceptions.length) throw new Error(JSON.stringify(exceptions));
       const nativeError = await evaluate('window.Graphics?._errorPrinter?.textContent || ""');
@@ -155,7 +166,7 @@ export async function openChrome(t, options = {}) {
       if (await evaluate(expression)) return;
       await delay(50);
     }
-    const state = await evaluate(`({scene:SceneManager._scene?.constructor.name,map:window.$gameMap?.mapId(),phase:window.$gameSystem?._dryland?.campaign.phase,text:window.$gameMessage?.allText(),choices:window.$gameMessage?.choices(),pause:SceneManager._scene?._messageWindow?.pause,wait:SceneManager._scene?._messageWindow?._waitCount})`);
+    const state = await evaluate(`({scene:SceneManager._scene?.constructor.name,map:window.$gameMap?.mapId(),phase:window.$gameSystem?._dryland?.campaign.phase,text:window.$gameMessage?.allText(),speaker:window.$gameMessage?.speakerName(),persistence:window.$gameTemp?._drylandPersistence,choices:window.$gameMessage?.choices(),pause:SceneManager._scene?._messageWindow?.pause,wait:SceneManager._scene?._messageWindow?._waitCount})`);
     throw new Error(`Native state not reached: ${expression}; observed ${JSON.stringify(state)}`);
   }
   async function press(key, keyCode) {

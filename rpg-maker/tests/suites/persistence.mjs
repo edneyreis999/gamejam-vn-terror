@@ -49,7 +49,7 @@ async function prepareSacrifice(browser, count = 3) {
 async function commitSacrifice(browser) {
   const before = await prepareSacrifice(browser);
   await activate(browser, 'sacrifice', 0);
-  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameTemp._drylandPersistence?.status === 'saved' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
+  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameTemp._drylandPersistence?.status === 'saved' && $gameMessage._texts.some(text => text.includes('$[farewell.h1.gorvak]')) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   return { before, after: await snapshot(browser) };
 }
 async function observeNativeText(browser) {
@@ -141,7 +141,7 @@ canonicalCase('IT-015', 'the saved checkpoint command replays without repeating 
   const bytes = await savedBytes(browser);
   await toTitle(browser);
   await titleChoice(browser, 'choice.title.continue');
-  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
+  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage._texts.some(text => text.includes('$[farewell.h1.gorvak]')) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   assert.deepEqual(await snapshot(browser), after);
   assert.equal(await savedBytes(browser), bytes, 'Exact replay performs no redundant storage write.');
   assert.equal((await diagnostic(browser)).lastSuccessfulSequence, after.sequence);
@@ -165,10 +165,13 @@ canonicalCase('IT-016', 'a map-owned encounter restores its shared sacrifice int
   assert.equal(savedOwner.command.parameters[3].reason,'sacrifice');
   assert.equal(savedOwner.wait,'dryland-save');
   await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
-  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.speakerName() === 'Gorvak' && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
+  await browser.waitFor("$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage._texts.some(text => text.includes('$[farewell.h1.gorvak]')) && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0");
   await browser.press('Enter', 13); await pause(browser);
   assert.equal((await snapshot(browser)).reading.index, 1);
-  await browser.press('Enter', 13);
+  for (let box = 0; box < 20 && (await snapshot(browser)).phase === 'death_result'; box++) {
+    await pause(browser);
+    await browser.press('Enter', 13);
+  }
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameSystem._dryland.campaign.position === 2 && $gameTemp._drylandPersistence.status === 'saved' && $gameMessage.hasText()");
   const state = await snapshot(browser);
   assert.deepEqual(state.deadHeroIds, after.deadHeroIds);
@@ -191,7 +194,7 @@ canonicalCase('IT-017', 'one pending native storage write prevents overlapping w
   assert.deepEqual(await snapshot(browser), before);
   assert.equal((await diagnostic(browser)).lastSuccessfulSequence, null);
   await browser.evaluate('finishNativeWrite()');
-  await browser.waitFor("$gameTemp._drylandPersistence.status === 'saved' && $gameMessage.speakerName() === 'Gorvak'");
+  await browser.waitFor("$gameTemp._drylandPersistence.status === 'saved' && $gameMessage._texts.some(text => text.includes('$[farewell.h1.gorvak]'))");
   assert.equal((await diagnostic(browser)).lastSuccessfulSequence, before.sequence);
 });
 canonicalCase('IT-018', 'a write failure releases native waiting and preserves the previous successful save', { timeout: 90000 }, async t => {

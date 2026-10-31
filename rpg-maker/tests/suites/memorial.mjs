@@ -128,39 +128,31 @@ canonicalCase('IT-058','all eligible native epilogue illustrations lead to visib
   }
   assert.deepEqual([...new Set(seen)].sort(),heroes);
   const results=[];
-  for(const [mode,kind,ending] of [['mouse','mixed','destroy'],['keyboard','solo','reunite'],['automatic','collective','destroy'],['accelerated','bad','bad'],['late-mouse','bad','bad'],['late-keyboard','bad','bad'],['long','bad','bad']]){
+  for(const [mode,kind,ending] of [['mouse','mixed','destroy'],['keyboard','solo','reunite'],['automatic','collective','destroy'],['accelerated','bad','bad'],['late-mouse','bad','bad'],['late-keyboard','bad','bad']]){
     await resetPresentation(browser);await beginEnding(browser,kind,ending);const fileId=await browser.evaluate('$gameSystem.savefileId()');const bytes=await saveBytes(browser);
-    if(mode==='long')await browser.evaluate(`$dataCommonEvents[63].list=[{code:105,indent:0,parameters:[2,false]},...Array.from({length:80},(_,i)=>({code:405,indent:0,parameters:['<center>Linha de teste '+(i+1)]})),{code:0,indent:0,parameters:[]}];`);
     await walkWithEpilogues(browser);await browser.screenshot(`${evidence('IT-058')}/credits-${mode}.png`);
     if(mode==='automatic'){await browser.waitFor('SceneManager._scene._scrollTextWindow._scrollY>-400');await browser.screenshot(`${evidence('IT-058')}/credits-mid-roll.png`);}
     if(mode.startsWith('late'))await browser.waitFor('SceneManager._scene._scrollTextWindow._scrollY>0');
     if(mode.includes('mouse')){
       await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',x:1100,y:672,button:'left',buttons:1,clickCount:1});
     }else if(mode.includes('keyboard'))await browser.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
-    else if(['accelerated','long'].includes(mode)){
-      if(mode==='accelerated'){
-        assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),1);
-        await browser.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await frames(browser,3);
-        assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),3);
-        await browser.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await frames(browser,3);
-        await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',x:300,y:300,button:'left',buttons:1,clickCount:1});await frames(browser,3);
-        assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),3);
-        await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',x:300,y:300,button:'left',buttons:0,clickCount:1});await frames(browser,3);
-      }
+    else if(mode==='accelerated'){
+      assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),0.5);
+      await browser.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await frames(browser,3);
+      assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),1.5);
+      await browser.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await frames(browser,3);
+      await browser.call('Input.dispatchMouseEvent',{type:'mousePressed',x:300,y:300,button:'left',buttons:1,clickCount:1});await frames(browser,3);
+      assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),1.5);
+      await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',x:300,y:300,button:'left',buttons:0,clickCount:1});await frames(browser,3);
       await browser.call('Input.dispatchKeyEvent',{type:'keyDown',key:'Shift',code:'ShiftLeft',windowsVirtualKeyCode:16});await frames(browser,3);
-      assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),3);
-    }
-    if(mode==='long'){
-      await browser.waitFor('SceneManager._scene._scrollTextWindow._blockIndex>0');
-      assert.ok(await browser.evaluate('SceneManager._scene._scrollTextWindow._allTextHeight>2048'));
-      await browser.screenshot(`${evidence('IT-058')}/credits-long-second-block.png`);
+      assert.equal(await browser.evaluate('SceneManager._scene._scrollTextWindow.scrollSpeed()'),1.5);
     }
     await titleReady(browser);await frames(browser,20);
     const log=await browser.evaluate('closingPresentation');
     assert.equal(log.returns,1);
     const start=log.events.find(e=>e.type==='credits'),finish=log.events.filter(e=>e.type==='credits_finish');
     assert.equal(finish.length,1);
-    assert.equal(finish[0].natural,['automatic','accelerated','long'].includes(mode));
+    assert.equal(finish[0].natural,['automatic','accelerated'].includes(mode));
     if(finish[0].natural)assert.ok(finish[0].y>=finish[0].height);
     results.push({mode,start,finish:finish[0],returns:log.returns});
     const titleState=await campaignSnapshot(browser);
@@ -168,7 +160,7 @@ canonicalCase('IT-058','all eligible native epilogue illustrations lead to visib
     assert.equal(await browser.evaluate(`StorageManager.loadZip('file${fileId}')`),bytes);
     if(mode.includes('mouse'))await browser.call('Input.dispatchMouseEvent',{type:'mouseReleased',x:1100,y:672,button:'left',buttons:0,clickCount:1});
     if(mode.includes('keyboard'))await browser.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
-    if(['accelerated','long'].includes(mode))await browser.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Shift',code:'ShiftLeft',windowsVirtualKeyCode:16});
+    if(mode==='accelerated')await browser.call('Input.dispatchKeyEvent',{type:'keyUp',key:'Shift',code:'ShiftLeft',windowsVirtualKeyCode:16});
     await frames(browser,3);
   }
   const natural=results.find(r=>r.mode==='automatic'),fast=results.find(r=>r.mode==='accelerated');

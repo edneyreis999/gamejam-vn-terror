@@ -10,6 +10,8 @@
   'use strict';
   if (!globalThis.CoretoDesignSystem) return;
   CoretoDesignSystem.registerAdapter({
+    menuText: (symbol, text) => symbol === 'load' ? '$[ui.menu.load]' : text,
+    playtimeLabel: () => TextManager.getLocalizedText('ui.menu.time'),
     choiceFeedback(window, index, name) {
       const auxiliary = !SceneManager.isSceneTitleMap?.() && /\$\[(?:[^\]]*\.)?(?:back|close|cancel|reread|retreat|continue|depart|options|hide)\]/.test(name);
       return auxiliary ? 'secondary' : 'choice';

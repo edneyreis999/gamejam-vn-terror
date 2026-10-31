@@ -53,11 +53,13 @@ export function registerProfile(profile, reg, fail) {
 export function addTranslations(text, entries, fail) {
   const lines = text.split(/\r?\n/), columns = lines[0].replace(/^\ufeff/, '').split('\t');
   for (const entry of entries) {
-    const existing = lines.find(line => line.split('\t')[0] === entry.key)?.split('\t');
-    if (existing) {
-      for (let i = 1; i < columns.length; i++) {
-        if (entry[columns[i]] !== undefined && existing[i] !== entry[columns[i]]) {
-          fail('Tradução personalizada conflitante: ' + entry.key + ' / ' + columns[i], 4);
+    const matches = lines.filter(line => line.split('\t')[0] === entry.key).map(line => line.split('\t'));
+    if (matches.length) {
+      for (const existing of matches) {
+        for (let i = 1; i < columns.length; i++) {
+          if (entry[columns[i]] !== undefined && existing[i] !== entry[columns[i]]) {
+            fail('Tradução personalizada conflitante: ' + entry.key + ' / ' + columns[i], 4);
+          }
         }
       }
       continue;

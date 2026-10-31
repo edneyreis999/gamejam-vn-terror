@@ -1,5 +1,5 @@
 import {resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {pathToFileURL,fileURLToPath} from 'node:url';
 import {parseArgs} from 'node:util';
 const {values}=parseArgs({options:Object.fromEntries(['project','fixture','case','adapter','output'].map(k=>[k,{type:'string'}]))});
 const runtime=resolve(values.project,process.env.DRYLAND_DIRECTED_RUNTIME||'.artifacts/qa-runtime');
@@ -15,7 +15,7 @@ async function portuguese(context){
  const index=await context.read('options-title-index',()=>SceneManager._scene._choiceListWindow._list.findIndex(row=>$gameMessage.choices()[row.ext]?.includes('choice.title.options')));
  if(index<0)throw Error('Current title options choice missing');
  for(let n=0;n<10;n++){const current=await context.read('title-cursor',()=>SceneManager._scene._choiceListWindow.index());if(current===index)break;await context.input.key(current<index?'ArrowDown':'ArrowUp');}
- await context.input.key('Enter');await context.wait(()=>SceneManager._scene instanceof Scene_Options&&!SceneManager._scene.isBusy());
+ await context.input.key('Enter');await context.wait(()=>SceneManager._scene instanceof Scene_Options&&!SceneManager._scene.isBusy()&&SceneManager._scene._optionsWindow?.isOpenAndActive());
  const option=await context.read('language-option-index',()=>SceneManager._scene._optionsWindow._list.findIndex(row=>row.symbol==='textLocale'));
  if(option<0)throw Error('Language option missing');
  for(let n=0;n<20;n++){const current=await context.read('options-cursor',()=>SceneManager._scene._optionsWindow.index());if(current===option)break;await context.input.key(current<option?'ArrowDown':'ArrowUp');}
@@ -41,6 +41,6 @@ function useFrameBoundKeys(context) {
   await Promise.all([context.wait(previous=>Graphics.frameCount!==previous,frame),delay(original.scenario.browser.keyReleaseMs??35)]);
  };
 }
-const caseModule={...original,scenario:{...original.scenario,browser:{...original.scenario.browser,launchArgs:[...(original.scenario.browser.launchArgs||[]),'--headless=new','--use-angle=metal']}},execute:async context=>{await context.wait(()=>window.Graphics?.app?.renderer?.gl&&window.$gameMap?.mapId()===1);useFrameBoundKeys(context);await context.read('renderer',()=>{const gl=Graphics.app.renderer.gl,ext=gl.getExtension('WEBGL_debug_renderer_info');return{vendor:gl.getParameter(ext?.UNMASKED_VENDOR_WEBGL||gl.VENDOR),renderer:gl.getParameter(ext?.UNMASKED_RENDERER_WEBGL||gl.RENDERER)};});if(original.scenario.browser.locale==='pt-BR')await portuguese(context);await original.execute(context);}};
-const report=await run({...values,adapter,caseModule,sources:[values.case,values.adapter,new URL(import.meta.url).pathname]});
+const caseModule={...original,scenario:{...original.scenario,browser:{...original.scenario.browser,launchArgs:[...(original.scenario.browser.launchArgs||[]),'--headless=new','--use-angle='+(process.env.DRYLAND_QA_ANGLE||(process.platform==='win32'?'d3d11':'metal'))]}},execute:async context=>{await context.wait(()=>window.Graphics?.app?.renderer?.gl&&window.$gameMap?.mapId()===1);useFrameBoundKeys(context);await context.read('renderer',()=>{const gl=Graphics.app.renderer.gl,ext=gl.getExtension('WEBGL_debug_renderer_info');return{vendor:gl.getParameter(ext?.UNMASKED_VENDOR_WEBGL||gl.VENDOR),renderer:gl.getParameter(ext?.UNMASKED_RENDERER_WEBGL||gl.RENDERER)};});if(original.scenario.browser.locale==='pt-BR')await portuguese(context);await original.execute(context);}};
+const report=await run({...values,adapter,caseModule,sources:[values.case,values.adapter,fileURLToPath(import.meta.url)]});
 console.log(JSON.stringify({status:report.status,output:values.output}));if(report.status==='fail')process.exitCode=1;

@@ -9,7 +9,12 @@ import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase,
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-11/${id}`;
 const fixtures=phaseFixtures();
 canonicalCase('IT-025','native HIDE and Tab preserve the same message and consume both supported restoring inputs',{timeout:90000},async t=>{
- const browser=await entry(t);await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
+ const browser=await entry(t);
+ await browser.press('ArrowDown',40);
+ assert.ok((await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.currentExt()]')).includes('choice.title.options'),'Keyboard skips unavailable Continue.');
+ await browser.press('ArrowUp',38);
+ assert.ok((await browser.evaluate('$gameMessage.choices()[SceneManager._scene._choiceListWindow.currentExt()]')).includes('choice.title.new_game'));
+ await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
  const before=await state(browser),text=await browser.evaluate('$gameMessage.allText()');
  await browser.press('Tab',9);await hidden(browser,true);await frames(browser,15);assert.deepEqual(await state(browser),before);
  await browser.screenshot(`${evidence('IT-025')}/hidden-prologue.png`);

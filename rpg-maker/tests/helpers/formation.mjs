@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { focusChoice } from './keyboard-focus.mjs';
 import { openChrome, project, selectFile, startServer } from './native-chrome.mjs';
 
 const require = createRequire(import.meta.url);
@@ -70,11 +71,9 @@ export async function activate(browser, kind, index) {
   await choices(browser, kind);
   if (typeof index === 'string') index = await browser.evaluate(`SceneManager._scene._choiceListWindow._list.findIndex(item => $gameMessage.choices()[item.ext].includes(${JSON.stringify(index)}))`);
   assert.ok(index >= 0, 'Requested choice must be available');
-  for (let count = 0; count < 16; count++) {
-    const current = await browser.evaluate('SceneManager._scene._choiceListWindow.index()');
-    if (current === index) break;
-    await browser.press(current < index ? 'ArrowDown' : 'ArrowUp', current < index ? 40 : 38);
-  }
+  await focusChoice({target:index, count:await browser.evaluate('SceneManager._scene._choiceListWindow.maxItems()'),
+    readIndex:()=>browser.evaluate('SceneManager._scene._choiceListWindow.index()'),
+    press:key=>browser.press(key,{ArrowDown:40,ArrowUp:38,ArrowRight:39,ArrowLeft:37}[key])});
   assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), index);
   await browser.press('Enter', 13);
 }
