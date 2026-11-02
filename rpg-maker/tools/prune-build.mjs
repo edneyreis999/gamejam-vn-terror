@@ -5,6 +5,9 @@
 //   npm run prune-build                      relatório, não apaga nada
 //   npm run prune-build -- --apply           apaga do build o que o jogo não usa
 //   --build <pasta>                          outro build (padrão: dist/The Dryland Drowned)
+//   --allow-debug                            mantém o plugin de Debug de QA ativo sem perguntar (ADR-G007)
+//   --prompt                                 pergunta sobre o Debug lendo a resposta da entrada padrão, mesmo sem terminal
+// Com o Debug ativo no build, --apply pergunta se ele deve seguir. "Não" e execução sem terminal o desligam só no build.
 // Depois de podar, rode `npm run verify-build`: ele testa o build podado e só então gera o zip.
 //
 // Regra: um asset fica se o nome dele (sem extensão, sem diferenciar maiúsculas) aparece em
@@ -12,16 +15,18 @@
 // HTML e CSS. Dados só de batalha (Enemies, Troops, Animations) contam apenas se o jogo tiver
 // batalha. Efeitos ficam se uma animação alcançável os usa. Plugins desligados saem.
 // Exceção: o que estiver em prune-build.keep.txt nunca sai.
-import { existsSync, readFileSync, readdirSync, rmSync, rmdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, rmSync, rmdirSync, writeFileSync } from 'node:fs';
+import { createInterface } from 'node:readline/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { DEBUG_PLUGIN, debugStatus, withDebugStatus } from './debug-gate.mjs';
 
 const ITCH_LIMIT = 1000;
 const repo = fileURLToPath(new URL('../../', import.meta.url));
 const source = path.join(repo, 'rpg-maker/The Dryland Drowned');
 const { values } = parseArgs({
-  options: { build: { type: 'string' }, apply: { type: 'boolean' } }
+  options: { build: { type: 'string' }, apply: { type: 'boolean' }, 'allow-debug': { type: 'boolean' }, prompt: { type: 'boolean' } }
 });
 const build = path.resolve(repo, values.build ?? 'dist/The Dryland Drowned');
 
@@ -35,6 +40,30 @@ if (path.relative(source, build) === '' || existsSync(path.join(build, 'game.rmm
 const read = file => readFileSync(path.join(build, file), 'utf8').replace(/^﻿/, '');
 const readJson = file => JSON.parse(read(file));
 const files = walk(build);
+
+// Plugin de Debug de QA: só vai no build com a confirmação do dono (ADR-G007).
+const debugBefore = debugStatus(read('js/plugins.js'));
+if (debugBefore === null) {
+  console.log('Debug: ausente');
+} else if (!debugBefore) {
+  console.log('Debug: inativo');
+} else if (!values.apply) {
+  console.log('Debug: ativo (rode com --apply para decidir se ele segue no build)');
+} else if (values['allow-debug']) {
+  console.log('Debug mantido no build (--allow-debug).');
+} else if (process.stdin.isTTY || values.prompt) {
+  const ask = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await ask.question(`Debug (${DEBUG_PLUGIN}) está ATIVO neste build.\nPublicar com o Debug ativo? [s/N] `);
+  ask.close();
+  if (/^\s*(s|sim|y|yes)\s*$/i.test(answer)) console.log('Debug mantido no build.');
+  else {
+    writeFileSync(path.join(build, 'js/plugins.js'), withDebugStatus(read('js/plugins.js'), false));
+    console.log('Debug desativado no build (o projeto-fonte não foi alterado).');
+  }
+} else {
+  writeFileSync(path.join(build, 'js/plugins.js'), withDebugStatus(read('js/plugins.js'), false));
+  console.log(`Debug (${DEBUG_PLUGIN}) estava ativo; desativado no build. Use --allow-debug para mantê-lo.`);
+}
 
 // Plugins ativos, na ordem do plugins.js.
 const pluginsJs = read('js/plugins.js');

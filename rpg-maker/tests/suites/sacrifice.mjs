@@ -144,7 +144,7 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
       const victim = state.partyIds[index], label = `${victim}-${reduced ? 'reduced' : 'normal'}`;
       const mapId = (encounter[0] === 'A' ? 6 : 14) + Number(encounter.slice(1));
       await browser.evaluate(`$gameSystem._dryland.campaign = ${JSON.stringify(state)}; $gameMap._interpreter.clear(); $gameMessage.clear(); $gamePlayer.reserveTransfer(${mapId},10,7,2,0); SceneManager.goto(Scene_Map);`);
-      await browser.waitFor(`$gameMap.mapId() === ${mapId} && $gameMessage.allText().includes('$[sacrifice.warning]') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()`);
+      await browser.waitFor(`$gameMap.mapId() === ${mapId} && $gameMessage._texts.join(' ').includes('$[sacrifice.warning]') && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()`);
       assert.equal(await browser.evaluate("$gameMessage._drylandChoiceFocus?.key === 'sacrifice'"), false);
       assert.deepEqual(await snapshot(browser), state);
       await browser.screenshot(`${evidence}/warning-${label}.png`);
@@ -156,7 +156,7 @@ canonicalCase('IT-012', 'native sacrifice warns before three, two or one candida
       assert.deepEqual(await snapshot(browser), state);
       await browser.screenshot(`${evidence}/candidates-${label}.png`);
       await activate(browser, 'sacrifice', index);
-      await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage.allText().startsWith('$[farewell.${victim.toLowerCase()}.') && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
+      await browser.waitFor(`$gameSystem._dryland.campaign.phase === 'death_result' && $gameMessage._texts.join(' ').startsWith('$[farewell.${victim.toLowerCase()}.') && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount === 0`);
       const after = await snapshot(browser);
       assert.deepEqual(after.deadHeroIds, [...state.deadHeroIds, victim]);
       assert.equal(after.sequence, state.sequence + 1);

@@ -544,7 +544,10 @@
     if (!checked.ok) return reportRejection(args?.action, checked);
     if (!ensureCampaign(args.action)) return;
     if (args.action === 'BEGIN' && campaign().phase === 'ready') {
-      const result = apply({ type: 'BEGIN', seed: Date.now() >>> 0, expectedSequence: 0 });
+      // A QA tool may leave a seed for the next BEGIN (ADR-G007). Without it the clock decides, as always.
+      const chosen = $gameTemp._drylandBeginSeed;
+      delete $gameTemp._drylandBeginSeed;
+      const result = apply({ type: 'BEGIN', seed: (Number.isInteger(chosen) ? chosen : Date.now()) >>> 0, expectedSequence: 0 });
       return result;
     }
     const context = validateCapturedContext(this._drylandContext);

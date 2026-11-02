@@ -316,7 +316,8 @@ canonicalCase('IT-039', 'a restored checkpoint wait with no live Promise resumes
 });
 canonicalCase('IT-044', 'Continue preserves a revealed assignment and RNG instead of drawing again', { timeout: 90000 }, async t => {
   const browser = await tavern(t); await commitSacrifice(browser);
-  await browser.press('Enter', 13); await pause(browser); await browser.press('Enter', 13);
+  // The farewell and the death account have several boxes; advance until the death result is over.
+  for (let step = 0; step < 32 && (await snapshot(browser)).phase === 'death_result'; step++) { await pause(browser); await browser.press('Enter', 13); }
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameSystem._dryland.campaign.position === 2 && $gameTemp._drylandPersistence.status === 'saved' && SceneManager._scene._messageWindow?.pause");
   const state = await snapshot(browser), bytes = await savedBytes(browser);
   await toTitle(browser); await titleChoice(browser, 'choice.title.continue');

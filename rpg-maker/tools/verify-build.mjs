@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import readline from 'node:readline';
 import { hash } from './native-files.mjs';
+import { debugReport, debugStatus, differsOnlyByDebug } from './debug-gate.mjs';
 import { createProgress } from './test-progress.mjs';
 
 const ITCH_LIMIT = 1000;
@@ -50,7 +51,11 @@ function checkFromThisCheckout() {
     if (file === 'package.json') continue;
     let original;
     try { original = readFileSync(path.join(source, file)); } catch { differing.push(`${file} (não existe no projeto)`); continue; }
-    if (hash(readFileSync(path.join(build, file))) !== hash(original)) differing.push(`${file} (conteúdo diferente)`);
+    const built = readFileSync(path.join(build, file));
+    if (hash(built) === hash(original)) continue;
+    // O prune-build pode desativar o Debug só no build: é a única diferença aceita em js/plugins.js.
+    if (file === 'js/plugins.js' && differsOnlyByDebug(built.toString('utf8'), original.toString('utf8'))) continue;
+    differing.push(`${file} (conteúdo diferente)`);
   }
   if (!differing.length) return;
   const shown = differing.slice(0, 20).map(file => `  ${file}`).join('\n');
@@ -75,6 +80,11 @@ function zipEntries() {
 
 console.log(`Build: ${build}`);
 checkFromThisCheckout();
+{
+  const inBuild = debugStatus(readFileSync(path.join(build, 'js/plugins.js'), 'utf8'));
+  const inSource = debugStatus(readFileSync(path.join(source, 'js/plugins.js'), 'utf8'));
+  console.log(debugReport(inBuild, inSource));
+}
 console.log('1/4 O build é deste checkout.');
 
 const entries = walk(build, true).length;

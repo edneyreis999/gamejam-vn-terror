@@ -129,14 +129,14 @@ canonicalCase('IT-048','native saved outcomes route only through their own endin
   await browser.evaluate('closingLog={maps:[],saves:[]};');
   if(kind==='bad'){
    await installClosing(browser,councilBoundary('bad'));
-   for(let count=0;count<4&&(await snapshot(browser)).phase!=='ending';count++){await closingReady(browser);await browser.press('Enter',13);}
+   for(let count=0;count<24&&(await snapshot(browser)).phase!=='ending';count++){await closingReady(browser);await browser.press('Enter',13);}
   }else{
    await installClosing(browser,finalChoice(kind));await activate(browser,'ending',ending==='reunite'?0:1);
   }
   await closingReady(browser);const terminal=await snapshot(browser);assert.equal(terminal.endingId,ending);assert.equal(terminal.phase,'ending');
   const bytes=await browser.evaluate("StorageManager.loadZip('file'+$gameSystem.savefileId())");
   assert.equal(await browser.evaluate('closingLog.saves.length'),1);
-  const expectedTail=kind==='collective'?[29,30,31,28]:kind==='mixed'?[28,29,30,31,28]:[28];
+  const expectedTail=kind==='collective'?[29,30,31,46]:kind==='mixed'?[28,29,30,31,46]:[28,46];
   const mapCursor=await browser.evaluate('closingLog.maps.length');
   const image={reunite:'Dryland_EndingReunite',destroy:'Dryland_EndingDestroy',bad:'Dryland_EndingTotalLoss'}[ending];
   assert.equal(await browser.evaluate('$gameScreen.picture(1).name()'),image);

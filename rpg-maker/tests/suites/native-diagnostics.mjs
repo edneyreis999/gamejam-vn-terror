@@ -31,7 +31,7 @@ canonicalCase('IT-003','native captured context permits one activation and rejec
 canonicalCase('IT-031','the loaded native game exposes no QA console, seed setter or editorial enforcement API',{timeout:60000},async t=>{
  const browser=await tavern(t);
  assert.equal(await browser.evaluate("typeof expeditionQA"),'undefined');
- assert.deepEqual(await browser.evaluate('Object.keys(DrylandEventBridge).sort()'),['query','readConfiguration','validateBridgeAction','validateCapturedContext','validateCheckpoint']);
+ assert.deepEqual(await browser.evaluate('Object.keys(DrylandEventBridge).sort()'),['heroUnread','query','readConfiguration','socialTopicUnread','validateBridgeAction','validateCapturedContext','validateCheckpoint']);
  assert.equal(await browser.evaluate("'snapshot' in DrylandCampaignRules.createRules(DrylandCampaignRules.createCatalog(DrylandEventBridge.readConfiguration($dataCommonEvents[4])))"),false);
 });
 canonicalCase('IT-040','invalid functional actions fail without executing values or changing the campaign',{timeout:90000},async t=>{

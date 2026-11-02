@@ -31,6 +31,7 @@
   8. Quem conserta quando quebrar, e em quanto tempo?
 - Testes não comparam texto traduzido: usam a chave (`$[chave]`) ou o valor lido de `Languages.tsv`. `$gameMessage.choices()` guarda a chave crua, não o texto exibido.
 - Teste vermelho: descubra a causa antes de agir. Se o jogo está certo e o teste está desatualizado, corrija o teste quando ele protege regra ou persistência. Exclua apenas o que reprova as perguntas acima (aparência, posição, texto de botão, layout em iteração) e diga no commit qual pergunta reprovou. Nunca exclua só porque está vermelho.
+- Execução de e2e: rode sempre em paralelo com `node rpg-maker/tools/run-tests.mjs` (limites de `loki.config.json`), nunca em série; a suíte inteira leva cerca de 22 minutos com os 3 workers e 3 navegadores atuais (reduzidos de 10 em 2026-10-31: com mais navegadores testes sadios falham por carga; com 10 falharam 10, com 4 ainda falharam 3). Se um teste falhar só sob carga, reexecute-o com menos workers e navegadores (`--maxWorkers 3 --maxBrowsers 3`) antes de concluir que ele está quebrado. Não use a porta 18726 do `npm start` do usuário.
 - Teste só lê o que o jogo carrega: nada de plugin desligado, asset sem uso ou arquivo de editor, porque o build publicado é podado (`npm run prune-build`) e a suíte roda contra ele (`npm run verify-build`). Teste que só prova a infraestrutura de teste (servidor, navegador) não protege o jogo: toda a suíte já falha se ela quebrar.
 
 
