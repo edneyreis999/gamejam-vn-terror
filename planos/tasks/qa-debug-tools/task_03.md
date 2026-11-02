@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Go to trap for all A and B traps
 ---
 
@@ -30,3 +30,6 @@ Go to trap lists all 16 traps with their localized names and IDs. Any of them la
 The 16 entries are present and named from the existing `enc.*.name` keys, with no new trap-name text.
 
 ## Execution Notes
+
+- 2026-10-31: The list already held the 16 traps from task 02 (generic code); this task verified them. Pure planner, run twice in the page: every trap returns the same seed both times (A1 7, A2 8, A3 0, A4 14, A5 6, A6 1, A7 20, A8 4; B1 to B8 repeat the same seeds because both pools draw from the same generator). End to end in Chrome through the Debug screen: A8 lands on map 14 and B3 on map 17 at position 1 of their own route, `validateState` ok, `file1` holds the same phase and seed (saved). A1 and B5 were exercised in task 02; no other trap was landed individually, which the task's inline case does not require.
+- Names come from the existing `enc.*.name` keys, no new trap text.

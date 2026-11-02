@@ -105,7 +105,7 @@ The first playable outcome is Debug in the menu with the state panel and "Go to 
   - **State it adds**: only the remembered hint setting, kept with the game's settings and not with the campaign save. Saves never depend on it.
   - **Coordination**: it applies actions only through the EventBridge's validated path.
   - **What disappears when disabled**: the menu entry (hidden), the Debug screen and the hint marks. The campaign, saves and every other plugin are unaffected (US-001.AC-2, US-001.EC-1).
-- **EventBridge seam (user decision, 2026-10-31)**: `Dryland_EventBridge.js` is project-owned. It gains two small public entries on its existing global API: (1) apply one validated action through the same path events use, including the checkpoint variable, the result variable and the save state; (2) begin a campaign with a supplied seed. Without the Debug plugin, BEGIN keeps using the current clock seed (`Dryland_EventBridge.js:546-548`).
+- **EventBridge seam (amended 2026-10-31)**: the Debug plugin applies actions through the EventBridge's existing command path (`CaptureContext`, `ReadingComplete`, `Action`), the one events use, so checkpoints, variables and save state stay in one place. `Dryland_EventBridge.js` gains no public API: its `BEGIN` reads an optional seed left in `$gameTemp` and otherwise keeps the clock seed (`Dryland_EventBridge.js:546-551`). Reason: IT-031 pins the shipped public API.
 - **Landing (verified pattern, unproven for jumps)**: the maps are phase-driven. Map007's autorun flow event reads the phase and builds the encounter from it, and outside the encounter phases it calls the router CE40 (`data/Map007.json` event 1; `data/CommonEvents.json` CE40, which transfers by phase). Pending save points are written by CE44 from variable 46, which `apply` sets (`Dryland_EventBridge.js:487-492`, `:467-479`). A jump ends the menu, applies the action sequence and hands control to the phase-driven map, whose existing checkpoint saves the landing point.
 - **Seed search**: the only draw happens in `ENTER_DUNGEON` (`Dryland_CampaignRules.js:728-734`, mulberry32 from the seed), so the result of a request depends only on the seed and the actions. The search walks seeds in a fixed order with the pure rules, without UI, and returns the first one that meets the request. That makes the same request always give the same seed (US-002.AC-4).
 - **Hint**: success is known before choosing (party competency against the approach, `Dryland_CampaignRules.js:744`). The mark reuses the choice-adornment space and style of the NEW label (`Dryland_2_ConversationIndicators.js`, `choiceAdornmentWidth`, `ui.social.new`) with a `debug.*` label.
@@ -132,7 +132,7 @@ The first playable outcome is Debug in the menu with the state panel and "Go to 
 
 ## Affected Game Surfaces
 
-- **Plugins**: new `Dryland_7_QADebug.js` (disabled by default); `Dryland_EventBridge.js` (two public entries); `js/plugins.js` (new entry; `Coreto_1_MainMenuCore` Command List gains the Debug command).
+- **Plugins**: new `Dryland_7_QADebug.js` (disabled by default); `Dryland_EventBridge.js` (optional seed read at `BEGIN`, no new public API); `js/plugins.js` (new entry; `Coreto_1_MainMenuCore` Command List gains the Debug command).
 - **Text**: `Languages.tsv` gains `debug.*` keys in PT and EN.
 - **Tooling**: `prune-build.mjs` (gate), `verify-build.mjs` (accepted difference and report); new automated build-gate tests in `rpg-maker/tests/`.
 - **Policy documents**: new general ADR-G007 (Delivery Obligations), plus the SD-015 and playbook baseline amendments.
@@ -141,14 +141,14 @@ The first playable outcome is Debug in the menu with the state panel and "Go to 
 ## Shared Pattern Changes
 
 - **First QA-only plugin, disabled by default** (first of its family). Every other project plugin is active and part of the game. Decision: start of a pattern. Debug and QA tools are separate disabled-by-default plugins, gated by the build. This is recorded in the ADR. No uniformity work exists, since no other component needs to change (agent proposal, accepted with the scope on 2026-10-31).
-- **Public action entry on the EventBridge**: today only events apply actions. The new entry is for the Debug plugin; other plugins keep using events and queries (user decision, 2026-10-31).
+- **Seed hook on the EventBridge**: an optional `$gameTemp` seed read at `BEGIN`; the public API does not change and other plugins keep using events and queries (amended 2026-10-31).
 
 ## Key Decisions
 
 - **D-1 Legal states only**: rejected direct state edits and forced success, because the campaign's validation rejects them (`Dryland_CampaignRules.js:451`, `:318-323`). Source: user, 2026-10-31.
 - **D-2 Policy exception for human QA and agents**: amends the playbook's "no shipped QA console or seed setter" and SD-015's "no save/state/seed editing" for this plugin. Its limits: legal actions only, disabled in the source, gated in the build, provenance in agent evidence. Rejected: human QA only. Source: user, 2026-10-31. Requires a general ADR (`game-create-adr`) before implementation closes; this is an architectural and process decision, not a GDDR, since gameplay is unchanged.
 - **D-3 Seed search over forced order**: keeps the normal draw and makes reports reproducible. Limited to the first position (user decision). A joint search over two full routes is impractical (about 1.6 × 10⁹ orders).
-- **D-4 Expose actions on the EventBridge**: rejected a second apply path inside Debug, because two copies would diverge on checkpoints, variables and save state. Source: user, 2026-10-31.
+- **D-4 Reuse the EventBridge command path, no new public API**: rejected a second apply path inside Debug (two copies would diverge on checkpoints, variables and save state) and public `apply`/`begin` entries (they would put an action and seed API in the shipped game and break IT-031). Source: user decision to expose actions on 2026-10-31, refined by the finding in task 07.
 - **D-5 Automated tests only for the build gate**: rejected disposable-copy tests of the plugin. Accepted residual risk: regressions in jumps are caught only in use. Source: user, 2026-10-31.
 - **D-6 Hint in the NEW style on the card; remembered until off; Debug text in Languages.tsv.** Source: user, 2026-10-31.
 - **D-8 Lighter scenario verification**: PT-007 checks only Final route unlocked and Total loss; Council, Reunite and Destroy are left unchecked (`_tests.md` Not Verified Here). Source: user, 2026-10-31.
@@ -181,6 +181,8 @@ The first playable outcome is Debug in the menu with the state panel and "Go to 
 - `docs/_memory/spec-authoring-playbook.md` (Project Baseline), `docs/_memory/standing_directives.md` (SD-015) — the policies D-2 amends.
 
 ## Amendments
+
+- **2026-10-31**: (1) Task 07 no longer gates task 02; it gates the QA plan (task 08). Regression for tasks 02 to 06 is measured against the baseline in task 07's notes. Source: the user, "Debug em paralelo". (2) Delivery Approach / Key Decision D-4 ("two public entries on the EventBridge") is withdrawn: the maintained test IT-031 pins the shipped EventBridge API, so the Debug plugin uses the existing command path and a non-API seed hook. Final form recorded in task 02. Rationale: keep the normal game free of any action or seed API.
 
 - **2026-10-31**: added the Green maintained suite obligation: fix every currently failing maintained test before the Debug changes. Source: the user, "adicione também na spec arrumar todos os testes. acho que tem testes falhando".
 

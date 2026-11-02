@@ -1035,3 +1035,29 @@ threshold.supernatural.ivai.2	Look at that ride. It’s moving, but I can’t fe
 threshold.supernatural.ivai.3	Wait. Someone’s calling... over by the old fig tree. Stay with me.	Esperem. Tem alguém chamando... perto da figueira velha. Venham comigo.
 threshold.final.ivai.2	Those houses look split right down the middle. Watch out for loose stones.	Parece que essas casas foram partidas ao meio. Cuidado com as pedras soltas.
 threshold.final.ivai.3	The Council House should be further ahead. I don’t like how quiet it is here. Let’s keep together.	A Casa do Conselho deve estar mais adiante. Não gosto desse silêncio. Vamos ficar juntos.
+debug.menu	Debug	Debug
+debug.go_trap	Go to trap	Ir para armadilha
+debug.back	Back	Voltar
+debug.confirm	Confirm	Confirmar
+debug.cancel	Cancel	Cancelar
+debug.confirm_text	This replaces the current campaign. Continue?	Isto substitui a campanha atual. Continuar?
+debug.error	Debug could not complete the jump.	O Debug não conseguiu concluir o salto.
+debug.panel.none	No campaign started.	Nenhuma campanha iniciada.
+debug.panel.seed	Seed	Seed
+debug.panel.phase	Phase	Fase
+debug.panel.route	Route and position	Rota e posição
+debug.panel.party	Party	Grupo
+debug.panel.dead	Dead heroes	Heróis mortos
+debug.panel.completed	Completed routes	Rotas concluídas
+debug.scenarios	Scenarios	Cenários
+debug.scn.final_route	Final route unlocked	Rota final liberada
+debug.scn.council	Council	Conselho
+debug.scn.reunite	Ending: Reunite	Final: Reunir
+debug.scn.destroy	Ending: Destroy	Final: Destruir
+debug.scn.total_loss	Ending: Total loss	Final: Perda total
+debug.hint	Winning-approach hint	Dica da abordagem vencedora
+debug.hint.on	On	Ligada
+debug.hint.off	Off	Desligada
+debug.hint.wins	WINS!	VENCE!
+debug.hint.none	No approach wins with this party	Nenhuma abordagem vence com este grupo
+debug.panel.hint	Hint	Dica
