@@ -808,7 +808,7 @@ var $plugins =
     {
         "name": "Dryland_6_PictureSprites",
         "status": true,
-        "description": "[Dryland] Redraws picture text only when a variable it shows has changed.",
+        "description": "[Dryland] Skips work for unused picture IDs and redraws picture text only when a shown variable changed.",
         "parameters": {}
     },
     {

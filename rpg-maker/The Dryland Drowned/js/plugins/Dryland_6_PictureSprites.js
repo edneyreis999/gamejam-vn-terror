@@ -1,6 +1,6 @@
 /*:
  * @target MZ
- * @plugindesc [Dryland] Redraws picture text only when a variable it shows has changed.
+ * @plugindesc [Dryland] Skips work for unused picture IDs and redraws picture text only when a shown variable changed.
  * @author Dryland
  * @base Coreto_1_MessageCore
  * @base Coreto_5_DesignSystem
@@ -13,6 +13,9 @@
  *
  * A text code this plugin does not recognize keeps the original behavior, so an
  * unknown code can cost time but never leave old text on the screen.
+ *
+ * Each of the 100 picture IDs also runs a full sprite update every frame, used or
+ * not. An unused ID now stops after clearing its state once.
  *
  * Turn the plugin off to compare with the original behavior.
  */
@@ -50,5 +53,13 @@
       const texts = this._pictureText[pictureId];
       if (picture && texts && needsRedraw(pictureId, texts)) this._pictureTextRefresh.push(pictureId);
     });
+  };
+
+  // Every picture ID has a sprite. One full update after a picture goes away clears the sprite's
+  // state; from then on an unused ID has nothing to do each frame.
+  const updateSprite = Sprite_Picture.prototype.update;
+  Sprite_Picture.prototype.update = function() {
+    if (!this.visible && !this._pictureName && !this.picture()) return;
+    updateSprite.apply(this, arguments);
   };
 })();

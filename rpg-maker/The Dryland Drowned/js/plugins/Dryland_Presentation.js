@@ -111,8 +111,8 @@
     this.setExtendedFastForwardDisallowed(true);
   };
   const resetModes = () => {
-    $gameTemp.setMessageAutoForwardMode(false);
-    $gameTemp.setExtendedFastForwardMode(false);
+    if ($gameTemp.isMessageAutoForwardMode() !== false) $gameTemp.setMessageAutoForwardMode(false);
+    if ($gameTemp.isExtendedFastForwardMode() !== false) $gameTemp.setExtendedFastForwardMode(false);
   };
   function readingPermission(interpreter, allowed) {
     PluginManager.callCommand(interpreter, 'VisuMZ_2_ExtMessageFunc', 'ExtFastFwdDisallow', { 'Allow:eval': String(allowed) });
