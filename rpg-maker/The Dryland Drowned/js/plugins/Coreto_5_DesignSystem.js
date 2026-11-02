@@ -1345,9 +1345,18 @@ function drawItemBackground(index){
     const rect=previous.apply(this,args);const gap=isTitle(this)?config.Button.MarkerSize+config.Button.MarkerGap:config.Choice.MarkerSize+config.Choice.MarkerGap;
     rect.x+=gap;rect.width=Math.max(1,rect.width-gap);return rect;
   });
+  // Scrolling and hit-testing read these sizes several times per frame, and each read would convert
+  // every choice's text. A rebuilt list is a new array, so the measures last as long as the list.
+  const choiceMeasures=w=>{
+    const m=w._coretoChoiceMeasures;
+    if(m&&m.list===w._list&&m.length===w._list?.length&&m.contents===w.contents&&m.locale===ConfigManager.textLocale&&m.hidden===w._pictureChoicesHidden)return m;
+    return w._coretoChoiceMeasures={list:w._list,length:w._list?.length,contents:w.contents,locale:ConfigManager.textLocale,hidden:w._pictureChoicesHidden};
+  };
   wrap(Window_ChoiceList.prototype,'maxChoiceWidth',function(previous,args){
     const available=(Graphics.boxWidth-this.padding*2)/Math.max(1,this.maxCols())-this.colSpacing();
-    return Math.min(previous.apply(this,args)+(isTitle(this)?config.Button.MarkerSize+config.Button.MarkerGap:config.Choice.MarkerSize+config.Choice.MarkerGap),Math.min(config.Choice.MaxWidth,available));
+    const measures=choiceMeasures(this);
+    measures.width??=previous.apply(this,args);
+    return Math.min(measures.width+(isTitle(this)?config.Button.MarkerSize+config.Button.MarkerGap:config.Choice.MarkerSize+config.Choice.MarkerGap),Math.min(config.Choice.MaxWidth,available));
   });
   wrap(Window_ChoiceList.prototype,'commandName',function(previous,args){
     const source=previous.apply(this,args);
@@ -1377,9 +1386,13 @@ function drawItemBackground(index){
     const native=previous.apply(this,args);
     // Explicit line breaks remain authored by Coreto; all rows use the tallest
     // measured label so native scrolling and pointer hit-testing stay aligned.
-    let height=config.Button.MinHeight+(isTitle(this)?this.rowSpacing():0);
-    if(this.contents&&this._list)for(let i=0;i<this._list.length;i++)height=Math.max(height,this.textSizeEx(this.commandName(i)).height+config.Choice.PaddingY*2);
-    return Math.max(native,height);
+    const measures=choiceMeasures(this);
+    if(measures.height===undefined){
+      let height=config.Button.MinHeight+(isTitle(this)?this.rowSpacing():0);
+      if(this.contents&&this._list)for(let i=0;i<this._list.length;i++)height=Math.max(height,this.textSizeEx(this.commandName(i)).height+config.Choice.PaddingY*2);
+      measures.height=height;
+    }
+    return Math.max(native,measures.height);
   });
   // Speaker uses the existing NameBox inside the paper panel. Coreto still
   // controls parsing, HIDE, page breaks, faces and reading completion.
@@ -2572,8 +2585,9 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     for (const sprite of pictures) {
       const interactive = candidates.includes(sprite);
       const focused = interactive && state(sprite).enabled && state(sprite).focused;
-      sprite._coretoInkImageScale = focused && !ui.reducedMotion() ? ui.tokens.imageFocusScale : 1;
-      sprite._transformID = -1;
+      const imageScale = focused && !ui.reducedMotion() ? ui.tokens.imageFocusScale : 1;
+      if (sprite._coretoInkImageScale !== imageScale) sprite._transformID = -1;
+      sprite._coretoInkImageScale = imageScale;
       if (interactive) {
         sprite._coretoInkArtBounds = kind === 'roster' ? artworkBounds(sprite.bitmap) : null;
         const light = focused ? 28 : 0;
