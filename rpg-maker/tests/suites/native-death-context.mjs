@@ -21,22 +21,26 @@ canonicalCase('IT-057','native death locations are atomic immutable resumable an
  await browser.evaluate(`window.deathWrites=[];const save=StorageManager.saveObject;StorageManager.saveObject=function(name,contents){if(name==='file'+$gameSystem.savefileId())deathWrites.push(structuredClone(contents.system._dryland.campaign));return save.call(this,name,contents);};window.victimOwner=$gameMap._interpreter;while(victimOwner._childInterpreter)victimOwner=victimOwner._childInterpreter;`);
  const before=await state(browser);assert.equal(before.deathLocations.H1,undefined);
  await activate(browser,'sacrifice',0);await deathReady(browser);const committed=await state(browser),context=committed.deathLocations.H1;
- assert.deepEqual(context,{routeId:'physical',encounterId:'A2',encounterPosition:1,approachId:'A2-3'});
+ assert.deepEqual(context,{routeId:'physical',encounterId:'A2',encounterPosition:1,approachId:'A2-3',witnessHeroIds:['H2','H3']});
  assert.deepEqual(await browser.evaluate('deathWrites[0].deathLocations.H1'),context);assert.equal(await browser.evaluate('deathWrites.length'),1);
  await browser.evaluate("PluginManager.callCommand(victimOwner,'Dryland_EventBridge','Action',{action:'SELECT_VICTIM',value:'H2'});");
  assert.equal((await browser.evaluate('$gameTemp._drylandLastRejection')).code,'stale_action');assert.deepEqual(await state(browser),committed);assert.equal(await browser.evaluate('deathWrites.length'),1);
  const deathBytes=await saveBytes(browser);await continueSave(browser);await deathReady(browser);assert.deepEqual(await state(browser),committed);assert.equal(await saveBytes(browser),deathBytes);
  for(let step=0;step<32&&(await state(browser)).phase==='death_result';step++){await pause(browser);await browser.press('Enter',13);}
  await browser.waitFor("$gameSystem._dryland.campaign.phase==='encounter_intro'&&$gameTemp._drylandPersistence.status==='saved'");await pause(browser);await readUntilChoices(browser,'approaches');
- await activate(browser,'approaches',4);await choices(browser,'formation');
+ // Retreat is a campfire option now (GDDR-001); the context must still survive the next approach and Continue.
+ await activate(browser,'approaches',0);await browser.waitFor("$gameSystem._dryland.campaign.phase==='approach_result'&&$gameTemp._drylandPersistence.status==='saved'");
  assert.deepEqual((await state(browser)).deathLocations.H1,context);const retreat=await state(browser);const retreatBytes=await saveBytes(browser);
- await continueSave(browser);await choices(browser,'formation');assert.deepEqual(await state(browser),retreat);assert.equal(await saveBytes(browser),retreatBytes);
+ await continueSave(browser);await browser.waitFor("$gameSystem._dryland.campaign.phase==='approach_result'");assert.deepEqual(await state(browser),retreat);assert.equal(await saveBytes(browser),retreatBytes);
+ for(let step=0;step<40&&(await state(browser)).phase==='approach_result';step++){await pause(browser);await browser.press('Enter',13);}
+ await browser.waitFor("$gameSystem._dryland.campaign.phase!=='approach_result'&&$gameTemp._drylandPersistence.status==='saved'");
+ assert.deepEqual((await state(browser)).deathLocations.H1,context);
  await browser.evaluate('$gameMap._interpreter.clear();$gameMessage.clear();SceneManager.goto(Scene_Title);');await titleReady(browser);
  // Malformed historical-envelope rejection was retired by the approved increment.
  await chooseTitle(browser,'choice.title.new_game');await selectFile(browser,2);await pause(browser);assert.deepEqual((await state(browser)).deathLocations,{});assert.deepEqual((await state(browser)).deadHeroIds,[]);
  const finalFailure=replayUntil('final-sixth-total-loss',s=>s.phase==='sacrifice_choice'&&s.dungeonId==='final'&&s.position===6);
  assert.equal(finalFailure.deathLocations.H8,undefined);await victimChoices(browser,finalFailure);await activate(browser,'sacrifice',0);await deathReady(browser);
- const allDead=await state(browser);assert.deepEqual(allDead.deathLocations.H8,{routeId:'final',encounterId:'B3',encounterPosition:6,approachId:'B3-1'});assert.equal(allDead.deadHeroIds.length,8);
+ const allDead=await state(browser);assert.deepEqual(allDead.deathLocations.H8,{routeId:'final',encounterId:'B3',encounterPosition:6,approachId:'B3-1',witnessHeroIds:[]});assert.equal(allDead.deadHeroIds.length,8);
  for(let step=0;step<32&&(await state(browser)).phase==='death_result';step++){await pause(browser);await browser.press('Enter',13);}
  await browser.waitFor("$gameSystem._dryland.campaign.phase==='ending'&&$gameTemp._drylandPersistence.status==='saved'");await pause(browser);
  const terminal=await state(browser);await continueSave(browser);await pause(browser);assert.deepEqual(await state(browser),terminal);

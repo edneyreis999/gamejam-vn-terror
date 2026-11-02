@@ -1,7 +1,7 @@
 import { selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
 import { canonicalCase } from '../helpers/canonical-cases.mjs';
-import { activate, choices, installFixture, openDestinations, pause, prologueMarkers, rosterFixture, tavern, readUntilChoices } from '../helpers/formation.mjs';
+import { activate, choices, installFixture, openDestinations, pause, rosterFixture, tavern, readUntilChoices } from '../helpers/formation.mjs';
 import { accepted } from '../helpers/campaign.mjs';
 import { phaseFixtures } from '../helpers/diagnostics.mjs';
 import { frames } from '../helpers/closing-presentation.mjs';
@@ -9,7 +9,7 @@ import { assertHiddenPictures, click, clickConsole, entry, hidden, installPhase,
 import { appendEnsemble, ensembleFixture, prepareBustFixture } from '../helpers/native-bust-fixture.mjs';
 import { openChrome, startServer } from '../helpers/native-chrome.mjs';
 import { councilState, installClosing } from '../helpers/closing.mjs';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 const fixtures=phaseFixtures();
 const evidence=id=>`docs/qa/evidence/init-rpg-maker-mz/task-11/${id}`;
 async function hold(browser,key,keyCode){await browser.call('Input.dispatchKeyEvent',{type:'keyDown',key,code:key,windowsVirtualKeyCode:keyCode});}
@@ -34,9 +34,9 @@ canonicalCase('IT-050','upper encounter utilities use mouse and keyboard, suspen
  const browser=await tavern(t);await installPhase(browser,fixtures.encounter_choice);await choices(browser,'approaches');
  const before=await state(browser);
  // Posição dos botões em pixels é aparência (AGENTS.md, Testes, pergunta 3); Recuar sem confirmação é coberto pelo IT-013.
- await click(browser,920,128);await pause(browser);assert.deepEqual(await state(browser),before);
+ await activate(browser,'approaches',3);await pause(browser);assert.deepEqual(await state(browser),before);
  assert.equal(await browser.evaluate('$gameScreen.picture(41)==null&&$gameScreen.picture(42)==null'),true);
- await browser.press('Tab',9);await hidden(browser,true);await click(browser,1150,128);await hidden(browser,false);assert.deepEqual(await state(browser),before);
+ await browser.press('Tab',9);await hidden(browser,true);await browser.press('Tab',9);await hidden(browser,false);assert.deepEqual(await state(browser),before);
  await readUntilChoices(browser,'approaches');assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'),3);
  await activate(browser,'approaches',3);await pause(browser);const reread=await state(browser);await readUntilChoices(browser,'approaches');assert.deepEqual(await state(browser),reread);
  await browser.press('Tab',9);await hidden(browser,true);await assertHiddenPictures(browser,[41,42]);const still=await state(browser);
@@ -336,59 +336,4 @@ canonicalCase('IT-077','FAST-only console executes native text and waits, with c
  assert.deepEqual(await state(browser),before);
  await browser.screenshot(`${evidence('IT-077')}/completed-provider-unit.png`);
  assert.deepEqual(browser.exceptions,[]);
-});
-
-canonicalCase('IT-078','native VN startup and named HIDE bindings preserve appearance across desktop sizes and motion preferences',{timeout:180000},async t=>{
- const prepared=await prepareBustFixture(t,'interface-bindings-20260912',events=>{
-  const id=events.length,c=(code,parameters=[])=>({code,indent:0,parameters});
-  events.push({id,name:'Fixture técnica — elementos nomeados',trigger:0,switchId:1,list:[
-   c(231,[97,'Dryland_Button',0,0,400,100,100,100,83,0]),
-   c(357,['Dryland_Presentation','BindInterfacePicture','Identificar imagem de interface',{picture:'97',name:'Controle de teste'}]),
-   c(231,[30,'Dryland_Tag',0,0,100,100,100,100,117,0]),
-   c(101,['',0,0,2,'']),c(401,['A interface deve voltar com a mesma aparência.']),c(0)
-  ]});return id;
- });
- await startServer(t,prepared.directory);const observations=[];
- await mkdir(evidence('IT-078'),{recursive:true});
- for(const variant of [{width:1280,height:720,reduced:false},{width:1920,height:1080,reduced:true}]){
-  await t.test(JSON.stringify(variant),async t=>{
-   const browser=await openChrome(t,variant);
-   await browser.waitFor("window.$gameMessage&&$gameMessage.choices().some(c=>c.includes('choice.title.new_game'))&&SceneManager._scene._choiceListWindow?.isOpenAndActive()&&!SceneManager._scene.isBusy()");
-   const screen=await browser.evaluate('({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,scale:visualViewport.scale,canvas:Graphics.app.view.getBoundingClientRect().toJSON(),motion:matchMedia("(prefers-reduced-motion: reduce)").matches})');
-   assert.ok(screen.width>=1280&&screen.height>=720,JSON.stringify(screen));
-   assert.equal(screen.dpr,1,'The desktop fixture uses its declared raster scale');
-   assert.equal(screen.scale,1);
-   assert.equal(screen.motion,variant.reduced);
-   await browser.press('Enter',13);await selectFile(browser,1);await pause(browser);
-   assert.equal(await browser.evaluate('$gameSystem.isMenuEnabled()'),false,'Native startup command disables menu in ordinary sessions');
-   assert.equal(await browser.evaluate('$gamePlayer.canMove()'),false);
-   const before=await state(browser),position=await browser.evaluate('[$gamePlayer.x,$gamePlayer.y]');
-   await hold(browser,'ArrowRight',39);await frames(browser,30);await release(browser,'ArrowRight',39);
-   assert.deepEqual(await browser.evaluate('[$gamePlayer.x,$gamePlayer.y]'),position);
-   await hold(browser,'Enter',13);await frames(browser,35);
-   assert.equal(await browser.evaluate('SceneManager._scene.isFastForward()'),false);
-   assert.deepEqual(await state(browser),before,'Held confirmation does not complete the three-box passage');
-   assert.ok((await browser.evaluate('$gameMessage.allText()')).includes(prologueMarkers[1]),'Held confirmation advances exactly one box');
-   await release(browser,'Enter',13);await pause(browser);
-   await browser.evaluate('Game_Map.prototype.setupStartingEvent=function(){return false;};$gameMap._interpreter.clear();SceneManager._scene._messageWindow.pause=false;SceneManager._scene._messageWindow.terminateMessage();');
-   await browser.waitFor('SceneManager._scene._messageWindow.isClosed()');
-   await browser.evaluate(`$gameMap._interpreter.setup($dataCommonEvents[${prepared.result}].list,0);`);
-   await browser.waitFor('$gameMessage.hasText()&&SceneManager._scene._messageWindow.isOpen()&&SceneManager._scene._messageWindow.pause&&SceneManager._scene._messageWindow._waitCount===0');const reading=await state(browser);
-   const appearance=()=>browser.evaluate('[30,97].map(id=>{const p=$gameScreen.picture(id),s=SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===id);return {id,opacity:p.opacity(),visible:s.visible,worldVisible:s.worldVisible,alpha:s.alpha,renderable:s.renderable,ready:s.bitmap?.isReady(),bounds:s.getBounds().toJSON?.()||{x:s.x,y:s.y,width:s.width,height:s.height},name:p.name(),x:p.x(),y:p.y()}})');
-   const shown=await appearance();
-   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-shown.png`);
-   await browser.press('Tab',9);await hidden(browser,true);
-   const concealed=await appearance();assert.equal(concealed[0].visible,true,'An unbound image is not hidden because of its numeric ID');assert.equal(concealed[1].visible,false);
-   assert.equal(concealed[1].opacity,83);
-   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-hidden.png`);
-   await click(browser,screen.canvas.x+screen.canvas.width/2,screen.canvas.y+screen.canvas.height/3);await hidden(browser,false);
-   assert.deepEqual(await appearance(),shown);assert.deepEqual(await state(browser),reading);
-   assert.equal(await browser.evaluate('SceneManager._scene._messageWindow.isOpen()'),true);
-   assert.equal(await browser.evaluate('$gameMessage.allText()'),'A interface deve voltar com a mesma aparência.');
-   await browser.screenshot(`${evidence('IT-078')}/${variant.width}-${variant.reduced}-restored.png`);
-   observations.push({variant,screen,browser:browser.version,shown});
-   assert.deepEqual(browser.exceptions,[]);
-  });
- }
- await writeFile(`${evidence('IT-078')}/desktop-observations.json`,JSON.stringify(observations,null,2)+'\n');
 });

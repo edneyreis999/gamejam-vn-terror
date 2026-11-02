@@ -312,11 +312,7 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
         await choices(browser,'approaches');
         assert.deepEqual(await browser.evaluate('$gameMessage.choices()'),labels);
         assert.deepEqual(await snapshot(browser),choice,'Reread is observational');
-        // Recuar não pede confirmação: volta direto à taverna.
-        await activate(browser,'approaches',4);
-        await choices(browser,'formation');
-        assert.deepEqual(await snapshot(browser),accepted(accepted(choice,'REQUEST_RETREAT'),'CONFIRM_RETREAT'));
-        await installPhase(browser,choice);await choices(browser,'approaches');
+        // Voluntary retreat left the encounter choices; it is offered only at campfires (GDDR-001), covered by the retreat suite.
       }
       const writesBefore=await browser.evaluate('encounterWrites.length');
       const result=accepted(choice,'CHOOSE_APPROACH',{approachId:`${id}-${index+1}`});

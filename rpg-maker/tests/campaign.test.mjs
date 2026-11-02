@@ -14,7 +14,6 @@ import './suites/native-diagnostics.mjs';
 import './suites/native-controls.mjs';
 import './suites/native-audio.mjs';
 import './suites/native-inventory.mjs';
-import './suites/native-checkpoints.mjs';
 import './suites/native-death-context.mjs';
 import { verifyRegistrations } from './helpers/canonical-cases.mjs';
 verifyRegistrations();

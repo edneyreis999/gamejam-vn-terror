@@ -215,10 +215,13 @@ export async function selectFile(browser, fileId) {
   await dismissAgeNotice(browser);
   await browser.waitFor(fileList);
   if (fileId !== undefined) {
+    // The list is one column today (arrows up/down) and was a grid before (arrows left/right).
+    const vertical = await browser.evaluate('SceneManager._scene._listWindow.maxCols() === 1');
+    const [forward, back] = vertical ? [['ArrowDown', 40], ['ArrowUp', 38]] : [['ArrowRight', 39], ['ArrowLeft', 37]];
     for (let step = 0; step < 25; step++) {
       const current = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');
       if (current === fileId) break;
-      await browser.press(current < fileId ? 'ArrowRight' : 'ArrowLeft', current < fileId ? 39 : 37);
+      await browser.press(...(current < fileId ? forward : back));
     }
     const actual = await browser.evaluate('SceneManager._scene._listWindow.indexToSavefileId(SceneManager._scene._listWindow.index())');
     if (actual !== fileId) throw new Error(`Native file selection: expected ${fileId}, got ${actual}`);
