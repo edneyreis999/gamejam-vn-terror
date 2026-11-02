@@ -806,6 +806,12 @@ var $plugins =
         "parameters": {}
     },
     {
+        "name": "Dryland_6_PictureSprites",
+        "status": true,
+        "description": "[Dryland] Redraws picture text only when a variable it shows has changed.",
+        "parameters": {}
+    },
+    {
         "name": "Dryland_1_AlphaMovie",
         "status": true,
         "description": "Alpha video scene transitions",
