@@ -30,3 +30,11 @@ node --test rpg-maker/tests/design-system-cli.test.mjs
 ```
 
 This entry point now runs the portable 1.6.1 package's authoring checks and the active consumer's installation checks. It creates disposable registries, rejects stale/invalid writes and restore conflicts, and checks recovery/idempotency. It no longer invokes the frozen 1.3.0 applicator. The required-provider case follows the current Dryland profile (`Coreto_4_MessageVisibility`); SaveCore is optional in this package. It owns no appearance assertions. The one-time migration's directed visual journey and before/after evidence remain in `planos/tasks/coreto-design-system-preset/verification.md`.
+
+The Debug build gate (ADR-G007) has its own browserless Node suite because its invariant is that a test build never ships by accident, not campaign behavior:
+
+```sh
+node --test rpg-maker/tests/build-gate.test.mjs
+```
+
+It runs the real `prune-build` against disposable exported-build fixtures: the question appears only when the Debug plugin is enabled, "no" and non-interactive runs disable it in the build only, `--allow-debug` keeps it, and the `verify-build` identity step accepts only the Debug status as a difference. It never touches the source game or `dist/`.
