@@ -8200,13 +8200,13 @@
         "name": "Mapa do Mundo",
         "note": "",
         "tilesetNames": [
-            "World_A1",
-            "World_A2",
             "",
             "",
             "",
-            "World_B",
-            "World_C",
+            "",
+            "",
+            "",
+            "",
             "",
             ""
         ]
@@ -16411,13 +16411,13 @@
         "name": "Exterior",
         "note": "",
         "tilesetNames": [
-            "Outside_A1",
-            "Outside_A2",
-            "Outside_A3",
-            "Outside_A4",
-            "Outside_A5",
-            "Outside_B",
-            "Outside_C",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "",
             ""
         ]
