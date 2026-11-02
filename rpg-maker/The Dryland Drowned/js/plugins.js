@@ -812,6 +812,12 @@ var $plugins =
         "parameters": {}
     },
     {
+        "name": "Dryland_6_NeutralFilters",
+        "status": true,
+        "description": "[Dryland] Removes color filters while they change nothing on screen.",
+        "parameters": {}
+    },
+    {
         "name": "Dryland_1_AlphaMovie",
         "status": true,
         "description": "Alpha video scene transitions",
