@@ -2510,16 +2510,29 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     return new Rectangle(point.x, point.y, corner.x - point.x, corner.y - point.y);
   }
 
-  const alphaBounds = new WeakMap();
-  function artworkBounds(bitmap) {
-    if (alphaBounds.has(bitmap)) return alphaBounds.get(bitmap);
-    const {width, height} = bitmap, data = bitmap.context.getImageData(0, 0, width, height).data;
-    let left = width, top = height, right = -1, bottom = -1;
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-      if (data[(y * width + x) * 4 + 3] < 16) continue;
+  const alphaBounds = new WeakMap(), alphaBoundsByUrl = new Map();
+  const boundsSample = document.createElement('canvas');
+  function readArtworkBounds(bitmap) {
+    // A reduced copy costs a fraction of a full read, and reading bitmap.context would keep a second copy of the art.
+    const {width, height} = bitmap, ratio = Math.min(1, 512 / Math.max(width, height));
+    const sampleWidth = boundsSample.width = Math.max(1, Math.round(width * ratio));
+    const sampleHeight = boundsSample.height = Math.max(1, Math.round(height * ratio));
+    const context = boundsSample.getContext('2d');
+    context.drawImage(bitmap._canvas || bitmap.image || bitmap.canvas, 0, 0, sampleWidth, sampleHeight);
+    const data = context.getImageData(0, 0, sampleWidth, sampleHeight).data;
+    let left = sampleWidth, top = sampleHeight, right = -1, bottom = -1;
+    for (let y = 0; y < sampleHeight; y++) for (let x = 0; x < sampleWidth; x++) {
+      if (data[(y * sampleWidth + x) * 4 + 3] < 8) continue; // Lower than a full read: reduction dilutes thin edges.
       left = Math.min(left, x); right = Math.max(right, x); top = Math.min(top, y); bottom = Math.max(bottom, y);
     }
-    const rect = right < 0 ? null : new Rectangle(left, top, right - left + 1, bottom - top + 1);
+    if (right < 0) return null;
+    const x = Math.floor(left * width / sampleWidth), y = Math.floor(top * height / sampleHeight);
+    return new Rectangle(x, y, Math.ceil((right + 1) * width / sampleWidth) - x, Math.ceil((bottom + 1) * height / sampleHeight) - y);
+  }
+  function artworkBounds(bitmap) {
+    if (alphaBounds.has(bitmap)) return alphaBounds.get(bitmap);
+    const url = bitmap.url, rect = url && alphaBoundsByUrl.has(url) ? alphaBoundsByUrl.get(url) : readArtworkBounds(bitmap);
+    if (url) alphaBoundsByUrl.set(url, rect);
     alphaBounds.set(bitmap, rect); return rect;
   }
   function artworkRect(sprite, container, bounds) {
