@@ -1416,10 +1416,16 @@ function drawItemBackground(index){
     if(args[3]!==undefined)args[3]=Math.max(0,args[3]-8);
     return previous.apply(this,args);
   });
+  // Decoding every MessageCore parameter is costly and placement runs several times per message.
+  let nameBoxOffset=null;
+  const messageNameBoxOffset=()=>{
+    if(!nameBoxOffset){const p=decode(PluginManager.parameters('Coreto_1_MessageCore')),g=p['General:struct']||{};nameBoxOffset={x:Number(g['NameBoxWindowOffsetX:num']||0),y:Number(g['NameBoxWindowOffsetY:num']||0)};}
+    return nameBoxOffset;
+  };
   wrap(Window_NameBox.prototype,'updatePlacement',function(previous,args){
     const result=previous.apply(this,args),message=this._messageWindow;
     if(message&&config.Dialogue.SpeakerInside){this.x=message.x+config.Dialogue.TextInset;this.y=message.y;this.opacity=0;
-      if(providers.message){const p=decode(PluginManager.parameters('Coreto_1_MessageCore')),g=p['General:struct']||{};this.x+=Number(g['NameBoxWindowOffsetX:num']||0);this.y+=Number(g['NameBoxWindowOffsetY:num']||0);}}
+      if(providers.message){const offset=messageNameBoxOffset();this.x+=offset.x;this.y+=offset.y;}}
     return result;
   });
   // Native character-name input: visual field treatment, original keyboard,
@@ -1960,12 +1966,16 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
       if (!windowSurface(this)) return previous.apply(this, arguments);
       const sprite = method === '_refreshBack' ? this._backSprite : this._frameSprite;
       const key = method === '_refreshBack' ? '_coretoInkPaperBack' : '_coretoInkPaperFrame';
-      this[key]?.destroy();
-      const bitmap = this[key] = new Bitmap(Math.max(1, this.width), Math.max(1, this.height));
-      if (method === '_refreshBack' && !this._coretoSharedPaper && !(SceneManager._scene instanceof Scene_Options) && !(SceneManager._scene instanceof Scene_Menu) && !(SceneManager._scene instanceof Scene_File)) {
-        skin().addLoadListener(() => { if (this[key] === bitmap && !this._destroyed) paper(bitmap); });
+      const painted = method === '_refreshBack' && !this._coretoSharedPaper && !(SceneManager._scene instanceof Scene_Options) && !(SceneManager._scene instanceof Scene_Menu) && !(SceneManager._scene instanceof Scene_File);
+      // Engine setters call this even without a real change; repainting only follows a new size or paper rule.
+      const surfaceKey = [Math.max(1, this.width), Math.max(1, this.height), painted].join('|');
+      if (!this[key] || this[key]._coretoInkSurfaceKey !== surfaceKey) {
+        this[key]?.destroy();
+        const bitmap = this[key] = new Bitmap(Math.max(1, this.width), Math.max(1, this.height));
+        bitmap._coretoInkSurfaceKey = surfaceKey;
+        if (painted) skin().addLoadListener(() => { if (this[key] === bitmap && !this._destroyed) paper(bitmap); });
       }
-      sprite.bitmap = bitmap; sprite.setFrame(0, 0, this.width, this.height);
+      sprite.bitmap = this[key]; sprite.setFrame(0, 0, this.width, this.height);
       sprite.move(0, 0); sprite.scale.set(1); sprite.setColorTone([0, 0, 0, 0]);
       for (const child of sprite.children) { child.bitmap = null; child.visible = false; }
     };
@@ -2179,12 +2189,20 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   const toggled = button => button._type === 'auto' ? $gameTemp.isMessageAutoForwardMode() :
     button._type === 'fastfwd' && SceneManager._scene?.isActivatedExtendedFastForwardMode?.();
   Window_ButtonConsole.prototype.refresh = function() {
-    this.createContents(); this.opacity = 0;
-    if (!this._type) return;
-    label(this, TextManager.msgButtonConsole(this._type), new Rectangle(0, 0, this.innerWidth, this.innerHeight),
-      { feedback: 'secondary', enabled: enabled(this), focused: !!this._coretoInkFocused, checked: !!toggled(this) }, 'Action', 'center');
     const buttons = SceneManager._scene?._messageWindow?._buttonConsoleButtons || [];
-    if (buttons.indexOf(this) > 0) divider(this.contents, 0.5, 6, 0.5, this.innerHeight - 6);
+    const text = this._type ? TextManager.msgButtonConsole(this._type) : '';
+    const state = { feedback: 'secondary', enabled: enabled(this), focused: !!this._coretoInkFocused, checked: !!toggled(this) };
+    const divided = buttons.indexOf(this) > 0;
+    const drawn = [this._type, text, state.enabled, state.focused, state.checked, this.innerWidth, this.innerHeight, divided].join('|');
+    this.opacity = 0;
+    // Every message and mode change asks all buttons to redraw; most of those requests change nothing.
+    if (this.contents && this._coretoInkDrawnContents === this.contents && this._coretoInkDrawn === drawn) return;
+    this.createContents();
+    this._coretoInkDrawn = drawn;
+    this._coretoInkDrawnContents = this.contents;
+    if (!this._type) return;
+    label(this, text, new Rectangle(0, 0, this.innerWidth, this.innerHeight), state, 'Action', 'center');
+    if (divided) divider(this.contents, 0.5, 6, 0.5, this.innerHeight - 6);
   };
   const touchEnabled = Window_ButtonConsole.prototype.isTouchScrollEnabled;
   Window_ButtonConsole.prototype.isTouchScrollEnabled = function() { return !hidden() && enabled(this) && touchEnabled.call(this); };
