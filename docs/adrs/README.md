@@ -11,6 +11,7 @@ Este acervo reúne decisões gerais aceitas para o jogo. As ADRs locais das spec
 | [ADR-G005](adr-g005-exclusao-de-testes-de-gamepad.md) | Exclusão de testes de gamepad das campanhas atuais e futuras | Aceita | 2026-09-18 |
 | [ADR-G006](adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md) | Seleção e agrupamento de testes pesados por risco; encerramento dos recursos de teste | Aceita | 2026-09-18 |
 | [ADR-G007](adr-g007-ferramentas-de-debug-para-qa.md) | Plugin de Debug para QA: desligado por padrão, só ações válidas, portão de build | Aceita; texto aguarda leitura do usuário | 2026-10-31 |
+| [ADR-G008](adr-g008-otimizacao-por-plugins-especialistas.md) | Otimização de desempenho comprovada por A/B, em plugins especialistas e no DesignSystem | Aceita; substitui parcialmente a ADR-002 local; texto aguarda leitura do usuário | 2026-11-02 |
 
 As ADRs G004–G006 adaptam, por determinação do usuário em 2026-09-18, as decisões 010–012 do projeto Pixi-Rework. Aplicam-se ao planejamento, execução, retomada e fechamento deste jogo, sem nova aprovação para cada reorganização ou omissão elegível. Cada ADR identifica a origem e seus limites locais; nenhuma importa outras decisões do projeto de origem por transitividade. Planos atuais devem ser reconciliados quando a política for aplicada, preservando baselines concluídas, evidências históricas e aceites humanos. A adoção não declara testes executados ou pendências encerradas.
 
