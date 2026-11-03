@@ -71,7 +71,7 @@ var $plugins =
     },
     {
         "name": "Coreto_1_BattleCore",
-        "status": true,
+        "status": false,
         "description": "[Coreto] [Tier 1] [Version 0.1.0] [BattleCore]",
         "parameters": {
             "CoretoConfigSource": "own",
@@ -804,6 +804,26 @@ var $plugins =
         "status": true,
         "description": "Sacrifice focus and owned scene audio",
         "parameters": {}
+    },
+    {
+        "name": "Dryland_6_PictureSprites",
+        "status": true,
+        "description": "[Dryland] Skips work for unused picture IDs and redraws picture text only when a shown variable changed.",
+        "parameters": {}
+    },
+    {
+        "name": "Dryland_6_NeutralFilters",
+        "status": true,
+        "description": "[Dryland] Removes color filters while they change nothing on screen.",
+        "parameters": {}
+    },
+    {
+        "name": "Dryland_6_ImageCache",
+        "status": true,
+        "description": "[Dryland] Keeps recently used pictures across map transfers, up to a size limit.",
+        "parameters": {
+            "RetainedMegapixels": "64"
+        }
     },
     {
         "name": "Dryland_1_AlphaMovie",

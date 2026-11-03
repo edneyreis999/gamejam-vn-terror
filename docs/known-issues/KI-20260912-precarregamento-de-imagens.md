@@ -4,6 +4,8 @@ Data: 2026-09-12. Estado: **proposta para investigação futura; sem implementa�
 
 **Atualização posterior no mesmo dia:** o usuário incluiu o pré-carregamento de **todas as imagens da taverna** na spec eventbridge-minimal-runtime, usando CoreEngine → System: Load Images. Esse recorte está aprovado para implementação no [ADR-003](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-003.md), ainda sem execução. Esta pendência passa a tratar o pré-carregamento do restante do jogo; a exclusão original abaixo é histórica no que se refere à taverna.
 
+**Atualização em 2026-11-02:** a [ADR-G008](../adrs/adr-g008-otimizacao-por-plugins-especialistas.md) mantém imagens já carregadas entre transferências, então a pré-carga da taverna agora também vale para o Novo Jogo. O pré-carregamento do restante do jogo continua pendente, e ainda há texto sobre fundo vazio em rede lenta.
+
 ## Solicitação
 
 Durante a entrevista sobre simplificação do EventBridge, o usuário sugeriu pré-carregar imagens antes de começar a partida para evitar esperas nas cenas. Pediu registrar a ideia como uma pendência em `docs/known-issues` e explicitou que ela **não deve integrar a spec atual de simplificação do Bridge**.

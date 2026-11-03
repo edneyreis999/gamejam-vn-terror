@@ -8,6 +8,8 @@ Para descobrir e operar recursos, leia [Coreto](coreto/README.md) e use a ajuda,
 Crie planos, testes, casos e evidências do jogo fora de `coreto/`. Ao testar, use o [guia de QA](coreto/docs/qa.md).
 <!-- END CORETO -->
 
+Exceção à regra de somente leitura acima: o plugin "Coreto_5_DesignSystem.js" pode ser editado, porque ainda está em desenvolvimento.
+
 
 <!-- loki:instructions:start -->
 # Loki Instructions

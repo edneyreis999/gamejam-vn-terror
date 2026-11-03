@@ -1345,9 +1345,18 @@ function drawItemBackground(index){
     const rect=previous.apply(this,args);const gap=isTitle(this)?config.Button.MarkerSize+config.Button.MarkerGap:config.Choice.MarkerSize+config.Choice.MarkerGap;
     rect.x+=gap;rect.width=Math.max(1,rect.width-gap);return rect;
   });
+  // Scrolling and hit-testing read these sizes several times per frame, and each read would convert
+  // every choice's text. A rebuilt list is a new array, so the measures last as long as the list.
+  const choiceMeasures=w=>{
+    const m=w._coretoChoiceMeasures;
+    if(m&&m.list===w._list&&m.length===w._list?.length&&m.contents===w.contents&&m.locale===ConfigManager.textLocale&&m.hidden===w._pictureChoicesHidden)return m;
+    return w._coretoChoiceMeasures={list:w._list,length:w._list?.length,contents:w.contents,locale:ConfigManager.textLocale,hidden:w._pictureChoicesHidden};
+  };
   wrap(Window_ChoiceList.prototype,'maxChoiceWidth',function(previous,args){
     const available=(Graphics.boxWidth-this.padding*2)/Math.max(1,this.maxCols())-this.colSpacing();
-    return Math.min(previous.apply(this,args)+(isTitle(this)?config.Button.MarkerSize+config.Button.MarkerGap:config.Choice.MarkerSize+config.Choice.MarkerGap),Math.min(config.Choice.MaxWidth,available));
+    const measures=choiceMeasures(this);
+    measures.width??=previous.apply(this,args);
+    return Math.min(measures.width+(isTitle(this)?config.Button.MarkerSize+config.Button.MarkerGap:config.Choice.MarkerSize+config.Choice.MarkerGap),Math.min(config.Choice.MaxWidth,available));
   });
   wrap(Window_ChoiceList.prototype,'commandName',function(previous,args){
     const source=previous.apply(this,args);
@@ -1377,9 +1386,13 @@ function drawItemBackground(index){
     const native=previous.apply(this,args);
     // Explicit line breaks remain authored by Coreto; all rows use the tallest
     // measured label so native scrolling and pointer hit-testing stay aligned.
-    let height=config.Button.MinHeight+(isTitle(this)?this.rowSpacing():0);
-    if(this.contents&&this._list)for(let i=0;i<this._list.length;i++)height=Math.max(height,this.textSizeEx(this.commandName(i)).height+config.Choice.PaddingY*2);
-    return Math.max(native,height);
+    const measures=choiceMeasures(this);
+    if(measures.height===undefined){
+      let height=config.Button.MinHeight+(isTitle(this)?this.rowSpacing():0);
+      if(this.contents&&this._list)for(let i=0;i<this._list.length;i++)height=Math.max(height,this.textSizeEx(this.commandName(i)).height+config.Choice.PaddingY*2);
+      measures.height=height;
+    }
+    return Math.max(native,measures.height);
   });
   // Speaker uses the existing NameBox inside the paper panel. Coreto still
   // controls parsing, HIDE, page breaks, faces and reading completion.
@@ -1416,10 +1429,16 @@ function drawItemBackground(index){
     if(args[3]!==undefined)args[3]=Math.max(0,args[3]-8);
     return previous.apply(this,args);
   });
+  // Decoding every MessageCore parameter is costly and placement runs several times per message.
+  let nameBoxOffset=null;
+  const messageNameBoxOffset=()=>{
+    if(!nameBoxOffset){const p=decode(PluginManager.parameters('Coreto_1_MessageCore')),g=p['General:struct']||{};nameBoxOffset={x:Number(g['NameBoxWindowOffsetX:num']||0),y:Number(g['NameBoxWindowOffsetY:num']||0)};}
+    return nameBoxOffset;
+  };
   wrap(Window_NameBox.prototype,'updatePlacement',function(previous,args){
     const result=previous.apply(this,args),message=this._messageWindow;
     if(message&&config.Dialogue.SpeakerInside){this.x=message.x+config.Dialogue.TextInset;this.y=message.y;this.opacity=0;
-      if(providers.message){const p=decode(PluginManager.parameters('Coreto_1_MessageCore')),g=p['General:struct']||{};this.x+=Number(g['NameBoxWindowOffsetX:num']||0);this.y+=Number(g['NameBoxWindowOffsetY:num']||0);}}
+      if(providers.message){const offset=messageNameBoxOffset();this.x+=offset.x;this.y+=offset.y;}}
     return result;
   });
   // Native character-name input: visual field treatment, original keyboard,
@@ -1960,12 +1979,16 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
       if (!windowSurface(this)) return previous.apply(this, arguments);
       const sprite = method === '_refreshBack' ? this._backSprite : this._frameSprite;
       const key = method === '_refreshBack' ? '_coretoInkPaperBack' : '_coretoInkPaperFrame';
-      this[key]?.destroy();
-      const bitmap = this[key] = new Bitmap(Math.max(1, this.width), Math.max(1, this.height));
-      if (method === '_refreshBack' && !this._coretoSharedPaper && !(SceneManager._scene instanceof Scene_Options) && !(SceneManager._scene instanceof Scene_Menu) && !(SceneManager._scene instanceof Scene_File)) {
-        skin().addLoadListener(() => { if (this[key] === bitmap && !this._destroyed) paper(bitmap); });
+      const painted = method === '_refreshBack' && !this._coretoSharedPaper && !(SceneManager._scene instanceof Scene_Options) && !(SceneManager._scene instanceof Scene_Menu) && !(SceneManager._scene instanceof Scene_File);
+      // Engine setters call this even without a real change; repainting only follows a new size or paper rule.
+      const surfaceKey = [Math.max(1, this.width), Math.max(1, this.height), painted].join('|');
+      if (!this[key] || this[key]._coretoInkSurfaceKey !== surfaceKey) {
+        this[key]?.destroy();
+        const bitmap = this[key] = new Bitmap(Math.max(1, this.width), Math.max(1, this.height));
+        bitmap._coretoInkSurfaceKey = surfaceKey;
+        if (painted) skin().addLoadListener(() => { if (this[key] === bitmap && !this._destroyed) paper(bitmap); });
       }
-      sprite.bitmap = bitmap; sprite.setFrame(0, 0, this.width, this.height);
+      sprite.bitmap = this[key]; sprite.setFrame(0, 0, this.width, this.height);
       sprite.move(0, 0); sprite.scale.set(1); sprite.setColorTone([0, 0, 0, 0]);
       for (const child of sprite.children) { child.bitmap = null; child.visible = false; }
     };
@@ -2179,12 +2202,20 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
   const toggled = button => button._type === 'auto' ? $gameTemp.isMessageAutoForwardMode() :
     button._type === 'fastfwd' && SceneManager._scene?.isActivatedExtendedFastForwardMode?.();
   Window_ButtonConsole.prototype.refresh = function() {
-    this.createContents(); this.opacity = 0;
-    if (!this._type) return;
-    label(this, TextManager.msgButtonConsole(this._type), new Rectangle(0, 0, this.innerWidth, this.innerHeight),
-      { feedback: 'secondary', enabled: enabled(this), focused: !!this._coretoInkFocused, checked: !!toggled(this) }, 'Action', 'center');
     const buttons = SceneManager._scene?._messageWindow?._buttonConsoleButtons || [];
-    if (buttons.indexOf(this) > 0) divider(this.contents, 0.5, 6, 0.5, this.innerHeight - 6);
+    const text = this._type ? TextManager.msgButtonConsole(this._type) : '';
+    const state = { feedback: 'secondary', enabled: enabled(this), focused: !!this._coretoInkFocused, checked: !!toggled(this) };
+    const divided = buttons.indexOf(this) > 0;
+    const drawn = [this._type, text, state.enabled, state.focused, state.checked, this.innerWidth, this.innerHeight, divided].join('|');
+    this.opacity = 0;
+    // Every message and mode change asks all buttons to redraw; most of those requests change nothing.
+    if (this.contents && this._coretoInkDrawnContents === this.contents && this._coretoInkDrawn === drawn) return;
+    this.createContents();
+    this._coretoInkDrawn = drawn;
+    this._coretoInkDrawnContents = this.contents;
+    if (!this._type) return;
+    label(this, text, new Rectangle(0, 0, this.innerWidth, this.innerHeight), state, 'Action', 'center');
+    if (divided) divider(this.contents, 0.5, 6, 0.5, this.innerHeight - 6);
   };
   const touchEnabled = Window_ButtonConsole.prototype.isTouchScrollEnabled;
   Window_ButtonConsole.prototype.isTouchScrollEnabled = function() { return !hidden() && enabled(this) && touchEnabled.call(this); };
@@ -2479,16 +2510,29 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     return new Rectangle(point.x, point.y, corner.x - point.x, corner.y - point.y);
   }
 
-  const alphaBounds = new WeakMap();
-  function artworkBounds(bitmap) {
-    if (alphaBounds.has(bitmap)) return alphaBounds.get(bitmap);
-    const {width, height} = bitmap, data = bitmap.context.getImageData(0, 0, width, height).data;
-    let left = width, top = height, right = -1, bottom = -1;
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-      if (data[(y * width + x) * 4 + 3] < 16) continue;
+  const alphaBounds = new WeakMap(), alphaBoundsByUrl = new Map();
+  const boundsSample = document.createElement('canvas');
+  function readArtworkBounds(bitmap) {
+    // A reduced copy costs a fraction of a full read, and reading bitmap.context would keep a second copy of the art.
+    const {width, height} = bitmap, ratio = Math.min(1, 512 / Math.max(width, height));
+    const sampleWidth = boundsSample.width = Math.max(1, Math.round(width * ratio));
+    const sampleHeight = boundsSample.height = Math.max(1, Math.round(height * ratio));
+    const context = boundsSample.getContext('2d');
+    context.drawImage(bitmap._canvas || bitmap.image || bitmap.canvas, 0, 0, sampleWidth, sampleHeight);
+    const data = context.getImageData(0, 0, sampleWidth, sampleHeight).data;
+    let left = sampleWidth, top = sampleHeight, right = -1, bottom = -1;
+    for (let y = 0; y < sampleHeight; y++) for (let x = 0; x < sampleWidth; x++) {
+      if (data[(y * sampleWidth + x) * 4 + 3] < 8) continue; // Lower than a full read: reduction dilutes thin edges.
       left = Math.min(left, x); right = Math.max(right, x); top = Math.min(top, y); bottom = Math.max(bottom, y);
     }
-    const rect = right < 0 ? null : new Rectangle(left, top, right - left + 1, bottom - top + 1);
+    if (right < 0) return null;
+    const x = Math.floor(left * width / sampleWidth), y = Math.floor(top * height / sampleHeight);
+    return new Rectangle(x, y, Math.ceil((right + 1) * width / sampleWidth) - x, Math.ceil((bottom + 1) * height / sampleHeight) - y);
+  }
+  function artworkBounds(bitmap) {
+    if (alphaBounds.has(bitmap)) return alphaBounds.get(bitmap);
+    const url = bitmap.url, rect = url && alphaBoundsByUrl.has(url) ? alphaBoundsByUrl.get(url) : readArtworkBounds(bitmap);
+    if (url) alphaBoundsByUrl.set(url, rect);
     alphaBounds.set(bitmap, rect); return rect;
   }
   function artworkRect(sprite, container, bounds) {
@@ -2554,8 +2598,9 @@ globalThis.CoretoDesignSystem=Object.freeze({version:catalog.version,colors,font
     for (const sprite of pictures) {
       const interactive = candidates.includes(sprite);
       const focused = interactive && state(sprite).enabled && state(sprite).focused;
-      sprite._coretoInkImageScale = focused && !ui.reducedMotion() ? ui.tokens.imageFocusScale : 1;
-      sprite._transformID = -1;
+      const imageScale = focused && !ui.reducedMotion() ? ui.tokens.imageFocusScale : 1;
+      if (sprite._coretoInkImageScale !== imageScale) sprite._transformID = -1;
+      sprite._coretoInkImageScale = imageScale;
       if (interactive) {
         sprite._coretoInkArtBounds = kind === 'roster' ? artworkBounds(sprite.bitmap) : null;
         const light = focused ? 28 : 0;

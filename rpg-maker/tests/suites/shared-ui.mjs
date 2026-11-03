@@ -67,3 +67,15 @@ canonicalCase('IT-027','HIDE removes consultation overlays and targets while ret
  assert.equal(await browser.evaluate('SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===60).worldVisible'),true);
  await browser.press('Tab',9);await hidden(browser,false);assert.deepEqual(await state(browser),before);
 });
+canonicalCase('IT-085','picture text showing a variable is redrawn when that variable changes',{timeout:120000},async t=>{
+ const browser=await tavern(t);
+ const card='SceneManager._scene._spriteset._pictureContainer.children.find(s=>s._pictureId===40)';
+ const drawn=()=>browser.evaluate(`${card}._pictureTextWindow.contents.canvas.toDataURL()`);
+ const text=()=>browser.evaluate(`$gameScreen.getPictureText(40,'center')+$gameScreen.getPictureText(40,'left')`);
+ const rawBefore=await text(),pixelsBefore=await drawn();
+ assert.match(rawBefore,/\\V\[150\]/i,'The party card shows the party-size variable');
+ await browser.evaluate('$gameVariables.setValue(150,$gameVariables.value(150)+7)');
+ await frames(browser,10);
+ assert.equal(await text(),rawBefore,'Only the variable changed, not the text');
+ assert.notEqual(await drawn(),pixelsBefore,'The card shows the new value');
+});
