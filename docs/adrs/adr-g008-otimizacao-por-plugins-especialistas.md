@@ -48,7 +48,7 @@ Os picos medidos estavam na Coreto, no DesignSystem e no engine, não nos plugin
 | Compressão de PNG sem perda no build | -8,2% na amostra (limiar 15%) |
 | Recorte das camadas da taverna | No melhor caso, -19,5% de VRAM (limiar 30%). Overdraw não medido |
 | Retirar o CE351 do título | Cobre o Continue exigido pela ADR-003 |
-| Espera por imagem com `setWaitMode("image")` | **Pendente de decisão do usuário.** Contradiz a ADR-002, e o texto sobre fundo vazio segue sem solução |
+| Espera por imagem com `setWaitMode("image")` | Permitida pela [ADR-G009](adr-g009-carregamento-de-imagens-alem-do-padrao-do-mz.md) em 2026-11-03, mas a implementação medida não comprovou ganho e dobrou o tempo até a primeira fala na armadilha B3. Não integrada |
 
 ## Alternativas consideradas
 
@@ -83,7 +83,7 @@ Riscos e custos:
 
 | Registro | Relação | Escopo substituído | Escopo que segue ativo |
 | --- | --- | --- | --- |
-| [ADR-002](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-002.md) | Substitui parcialmente | Em "use MZ and the installed providers as supplied": só o que `ImageManager.clear` descarta numa transferência de mapa | Sem espera por imagem, polling, interceptação de carga ou garantia de Retry imediato; `LoadError` e Retry nativos |
+| [ADR-002](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-002.md) | Substituída parcialmente pela [ADR-G009](adr-g009-carregamento-de-imagens-alem-do-padrao-do-mz.md) | Ver a ADR-G009 | Ver a ADR-G009 |
 | [ADR-003](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-003.md) | Complementa | Nenhum | Tudo, inclusive a chamada do CE351 no título para o Continue |
 | [ADR-G006](adr-g006-selecao-e-agrupamento-de-testes-pesados-por-risco.md) | Aplica | Nenhum | Seleção de testes por risco em cada grupo; suíte completa no fechamento |
 | [KI-20260912](../known-issues/KI-20260912-precarregamento-de-imagens.md) | Relacionado | Nenhum | Pré-carga do resto do jogo segue como pendência |
@@ -99,3 +99,4 @@ Riscos e custos:
 | Data | Mudança | Fonte |
 | --- | --- | --- |
 | 2026-11-02 | Registrada como aceita depois da execução do plano; a substituição parcial da ADR-002 aguarda leitura do usuário | Plano aprovado pelo usuário em 2026-11-02 |
+| 2026-11-03 | As cláusulas de imagem da ADR-002 passam a ser substituídas pela ADR-G009, que também cobre a espera por imagem | Pedido do usuário em 2026-11-03 |
