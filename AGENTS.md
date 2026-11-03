@@ -16,6 +16,7 @@
 - Use `rpg-maker/The Dryland Drowned/` como única implementação do jogo, sem build; consulte seus dados, plugins e assets.
 - Mantenha a estrutura das cenas nos eventos nativos, o texto do jogador em PT/EN em `<jogo>/Languages.tsv` (eventos só com `$[chave]`), regras nos plugins de domínio e testes em `rpg-maker/tests/`, conforme os contratos MZ aprovados.
 - Para abrir o jogo no Windows ou macOS com Node 22+ e Chrome, execute `npm start` na raiz; leia `docs/_memory/local-game-run.md` antes de iniciar ou reutilizar o servidor.
+- Para abrir o jogo no NW.js, no Windows ou macOS, execute `npm run start:nw` na raiz; não invoque o binário do NW diretamente.
 
 # Testes
 
@@ -32,6 +33,7 @@
 - Testes não comparam texto traduzido: usam a chave (`$[chave]`) ou o valor lido de `Languages.tsv`. `$gameMessage.choices()` guarda a chave crua, não o texto exibido.
 - Teste vermelho: descubra a causa antes de agir. Se o jogo está certo e o teste está desatualizado, corrija o teste quando ele protege regra ou persistência. Exclua apenas o que reprova as perguntas acima (aparência, posição, texto de botão, layout em iteração) e diga no commit qual pergunta reprovou. Nunca exclua só porque está vermelho.
 - Execução de e2e: rode sempre em paralelo com `node rpg-maker/tools/run-tests.mjs` (limites de `loki.config.json`), nunca em série; a suíte inteira leva cerca de 22 minutos com os 3 workers e 3 navegadores atuais (reduzidos de 10 em 2026-10-31: com mais navegadores testes sadios falham por carga; com 10 falharam 10, com 4 ainda falharam 3). Se um teste falhar só sob carga, reexecute-o com menos workers e navegadores (`--maxWorkers 3 --maxBrowsers 3`) antes de concluir que ele está quebrado. Não use a porta 18726 do `npm start` do usuário.
+- Para rodar os e2e no NW.js, use `node rpg-maker/tools/run-tests.mjs --runtime nw --scope slow`: o padrão é 6 instâncias, cada uma com cópia do jogo, perfil e porta próprios. Não use 10: IT-055 e IT-062 falharam com 10; com 6 uma rodada falhou IT-055, IT-062 e IT-065, que passaram na anterior, causa não investigada. Rodar no NW continua opcional (ADR-G006).
 - Teste só lê o que o jogo carrega: nada de plugin desligado, asset sem uso ou arquivo de editor, porque o build publicado é podado (`npm run prune-build`) e a suíte roda contra ele (`npm run verify-build`). Teste que só prova a infraestrutura de teste (servidor, navegador) não protege o jogo: toda a suíte já falha se ela quebrar.
 
 

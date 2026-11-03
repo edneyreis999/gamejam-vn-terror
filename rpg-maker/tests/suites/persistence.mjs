@@ -355,7 +355,7 @@ canonicalCase('IT-059', 'native saves retain serialized map text despite revisio
  const before=await snapshot(browser);
  // Isolated I/O fixture adds old labels to otherwise current native objects.
  await browser.evaluate("StorageManager.loadObject('file1').then(c=>{Object.assign(c.system._dryland,{schemaVersion:99,catalogVersion:99,nativeLayoutVersion:'historical-label'});return StorageManager.saveObject('file1',c);})");
- const bytes=await savedBytes(browser),eventFile=path.join(directory,'data/Map002.json'),edited=JSON.parse(await readFile(eventFile,'utf8'));
+ const bytes=await savedBytes(browser),eventFile=path.join(browser.gameDirectory,'data/Map002.json'),edited=JSON.parse(await readFile(eventFile,'utf8'));
  const revised='Texto revisado na mesma estrutura nativa.';
  const commands=edited.events[1].pages[0].list;
  const secondBox=commands.map((c,index)=>c.code===101?index:-1).filter(index=>index>=0)[1];
@@ -436,7 +436,7 @@ canonicalCase('IT-062','native Options and saved interpreters retain tavern Coun
   await browser.evaluate('continuityHold=false;');
   if(kind==='council'){
    const expected=complete(before);
-   await browser.waitFor(`continuityWrites.length===${writesBefore+1}&&continuityWrites.at(-1).done&&$gameSystem._dryland.campaign.sequence===${expected.sequence}`);
+   await browser.waitFor(`continuityWrites.length===${writesBefore+1}&&continuityWrites[continuityWrites.length-1].done&&$gameSystem._dryland.campaign.sequence===${expected.sequence}`);
    await pause(browser);
    assert.deepEqual(await snapshot(browser),expected,'Saved Council passage commits the medallion once');
    assert.deepEqual(await savedCampaign(browser),expected,'The Council semantic checkpoint saves that exact completion');

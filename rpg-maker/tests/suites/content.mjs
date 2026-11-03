@@ -104,7 +104,7 @@ canonicalCase('IT-035', 'saved native wording appears after reload without regen
   assert.match(await browser.evaluate('$gameMessage.allText()'), /Meu nome é Rheed/);
   const pluginFile = path.join(project, 'js/plugins/Dryland_EventBridge.js');
   const pluginHash = hash(await readFile(pluginFile));
-  const mapFile = path.join(directory, 'data/Map002.json');
+  const mapFile = path.join(browser.gameDirectory, 'data/Map002.json');
   const edited = JSON.parse(await readFile(mapFile, 'utf8'));
   edited.events[1].pages[0].list.find(c => c.code === 401).parameters[0] = 'Texto salvo no evento nativo para verificar a releitura.';
   await writeFile(mapFile, JSON.stringify(edited));

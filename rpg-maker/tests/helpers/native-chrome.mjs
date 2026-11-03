@@ -5,29 +5,22 @@ import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
+import { browserControls, portugueseMessageText } from './native-browser-api.mjs';
+import { openNw } from './native-nw.mjs';
 
 const port = process.env.DRYLAND_QA_PORT || (process.platform === 'win32' ? '0' : '18726');
 if (!/^\d+$/.test(port) || (Number(port) !== 0 && Number(port) < 1024) || Number(port) > 65535) throw new Error('Invalid DRYLAND_QA_PORT');
-// O jogo guarda a chave (`$[chave]`) em $gameMessage e só traduz ao exibir, no idioma escolhido
-// pelo jogador (inglês por padrão). Os testes de conteúdo comparam a prosa em português, então o
-// navegador de teste fixa o idioma em Portuguese e devolve o texto já resolvido por allText(),
-// com a mesma função de tradução do jogo.
-const portugueseMessageText = `(() => {
-  const timer = setInterval(() => {
-    if (!window.Game_Message || !window.TextManager || !TextManager.parseLocalizedText || !window.ConfigManager) return;
-    clearInterval(timer);
-    Object.defineProperty(ConfigManager, 'textLocale', { get: () => 'Portuguese', set: () => {}, configurable: true });
-    const raw = Game_Message.prototype.allText;
-    Game_Message.prototype.allText = function () { return TextManager.parseLocalizedText(raw.call(this)); };
-  }, 5);
-})();`;
-
-const waitMs = Number(process.env.DRYLAND_QA_WAIT_MS) || 20000;
 export let origin = `http://127.0.0.1:${port}/`;
 // DRYLAND_QA_PROJECT aponta a suíte para um build exportado (ex.: dist/ podado por prune-build).
 export const project = path.resolve(process.env.DRYLAND_QA_PROJECT || 'rpg-maker/The Dryland Drowned');
 
+// Com DRYLAND_QA_RUNTIME=nw não há servidor: o NW carrega os arquivos direto, como no jogo instalado.
+const runtime = process.env.DRYLAND_QA_RUNTIME || 'chrome';
+let gameDirectory = project;
+
 export async function startServer(t, directory = project) {
+  gameDirectory = directory;
+  if (runtime === 'nw') return { stop: async () => {}, log: () => '' };
   const python = process.env.DRYLAND_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
   const probe = spawnSync(python, ['-c', 'import sys; assert sys.version_info >= (3, 8); print(sys.executable)'], {encoding:'utf8', windowsHide:true});
   if (probe.status !== 0) throw new Error(`Python 3 indisponível (${python}). Configure DRYLAND_PYTHON com o executável instalado. ${probe.error?.message || probe.stderr}`);
@@ -58,6 +51,7 @@ export async function startServer(t, directory = project) {
 }
 
 export async function openChrome(t, options = {}) {
+  if (runtime === 'nw') return openNw(t, options, gameDirectory);
   const broker = process.env.DRYLAND_BROWSER_BROKER;
   const reserve = broker ? await fetch(broker + '/reserve', {method:'POST',body:process.env.DRYLAND_JOB_ID}).then(async r => {if(!r.ok)throw new Error(await r.text());return r.text();}) : null;
   let released = false;
@@ -152,34 +146,7 @@ export async function openChrome(t, options = {}) {
     if (typeof options.reduced === 'boolean') await call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: options.reduced ? 'reduce' : 'no-preference' }] });
   }
   await createTarget();
-  async function evaluate(expression) {
-    const response = await call('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
-    if (response.exceptionDetails) throw new Error(response.exceptionDetails.exception?.description || response.exceptionDetails.text);
-    return response.result.value;
-  }
-  async function waitFor(expression, timeoutMs = waitMs) {
-    const deadline = Date.now() + timeoutMs;
-    while (Date.now() < deadline) {
-      if (exceptions.length) throw new Error(JSON.stringify(exceptions));
-      const nativeError = await evaluate('window.Graphics?._errorPrinter?.textContent || ""');
-      if (nativeError) throw new Error(`Native engine error: ${nativeError}`);
-      if (await evaluate(expression)) return;
-      await delay(50);
-    }
-    const state = await evaluate(`({scene:SceneManager._scene?.constructor.name,map:window.$gameMap?.mapId(),phase:window.$gameSystem?._dryland?.campaign.phase,text:window.$gameMessage?.allText(),speaker:window.$gameMessage?.speakerName(),persistence:window.$gameTemp?._drylandPersistence,choices:window.$gameMessage?.choices(),pause:SceneManager._scene?._messageWindow?.pause,wait:SceneManager._scene?._messageWindow?._waitCount})`);
-    throw new Error(`Native state not reached: ${expression}; observed ${JSON.stringify(state)}`);
-  }
-  async function press(key, keyCode) {
-    await call('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode: keyCode });
-    await evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
-    await call('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key, windowsVirtualKeyCode: keyCode });
-    await evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
-  }
-  async function screenshot(file) {
-    const result = await call('Page.captureScreenshot', { format: 'png' });
-    await mkdir(path.dirname(file), { recursive: true });
-    await writeFile(file, Buffer.from(result.data, 'base64'));
-  }
+  const { evaluate, waitFor, press, screenshot } = browserControls(call, exceptions);
   async function reopen() {
     await send('Target.closeTarget', { targetId });
     exceptions.length = 0;
@@ -187,7 +154,7 @@ export async function openChrome(t, options = {}) {
     await call('Page.navigate', { url: origin });
   }
   await call('Page.navigate', { url: origin });
-  return { evaluate, waitFor, press, screenshot, version, exceptions, requests, responses, call, reopen };
+  return { evaluate, waitFor, press, screenshot, version, exceptions, requests, responses, call, reopen, gameDirectory };
 }
 
 const fileList = 'SceneManager._scene instanceof Scene_File && SceneManager._scene._listWindow?.isOpenAndActive() && !SceneManager._scene.isBusy()';
