@@ -71,7 +71,7 @@ var $plugins =
     },
     {
         "name": "Coreto_1_BattleCore",
-        "status": true,
+        "status": false,
         "description": "[Coreto] [Tier 1] [Version 0.1.0] [BattleCore]",
         "parameters": {
             "CoretoConfigSource": "own",
