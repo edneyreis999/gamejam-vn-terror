@@ -818,6 +818,14 @@ var $plugins =
         "parameters": {}
     },
     {
+        "name": "Dryland_6_ImageCache",
+        "status": true,
+        "description": "[Dryland] Keeps recently used pictures across map transfers, up to a size limit.",
+        "parameters": {
+            "RetainedMegapixels": "64"
+        }
+    },
+    {
         "name": "Dryland_1_AlphaMovie",
         "status": true,
         "description": "Alpha video scene transitions",
