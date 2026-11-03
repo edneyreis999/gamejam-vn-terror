@@ -261,7 +261,7 @@ canonicalCase('IT-077','FAST-only console executes native text and waits, with c
  const before=await state(browser),id=prepared.result;
  const explicitUnit=82;
  const explicitList=await browser.evaluate(`(()=>{
-  const list=structuredClone($dataCommonEvents[${id}].list);
+  const list=JSON.parse(JSON.stringify($dataCommonEvents[${id}].list));
   const begin=list.find(command=>command.code===357&&command.parameters[1]==='ObservationBegin');
   begin.parameters[3]={unit:${JSON.stringify(String(explicitUnit))}};
   return list;

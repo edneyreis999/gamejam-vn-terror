@@ -96,13 +96,13 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  // left untouched by MZ's setter.
  const beforeSe=await state(browser),seConfig=await browser.evaluate('ConfigManager.seVolume'),seName=await browser.evaluate('$dataSystem.sounds[0].name');
  await browser.evaluate("new Game_Interpreter().command250([{...$dataSystem.sounds[0]}]);");
- await browser.waitFor('audioBuffers.at(-1).buffer.isReady()&&audioBuffers.at(-1).buffer.isPlaying()');
- const firstSe=await browser.evaluate("(()=>{const x=audioBuffers.at(-1),d=$dataSystem.sounds[0];return{name:x.name,descriptorVolume:d.volume,volume:x.buffer.volume,playing:x.buffer.isPlaying()};})()");
+ await browser.waitFor('audioBuffers[audioBuffers.length-1].buffer.isReady()&&audioBuffers[audioBuffers.length-1].buffer.isPlaying()');
+ const firstSe=await browser.evaluate("(()=>{const x=audioBuffers[audioBuffers.length-1],d=$dataSystem.sounds[0];return{name:x.name,descriptorVolume:d.volume,volume:x.buffer.volume,playing:x.buffer.isPlaying()};})()");
  assert.equal(firstSe.name,seName);assert.equal(firstSe.volume,seConfig*firstSe.descriptorVolume/10000);assert.equal(firstSe.playing,true);
  await browser.evaluate('window.seFrame=Graphics.frameCount;');await browser.waitFor('Graphics.frameCount>window.seFrame');
  await browser.evaluate('ConfigManager.seVolume=0;new Game_Interpreter().command250([{...$dataSystem.sounds[0]}]);');
- await browser.waitFor('audioBuffers.at(-1).buffer.isReady()&&audioBuffers.at(-1).buffer.isPlaying()');
- const secondSe=await browser.evaluate("(()=>{const x=audioBuffers.at(-1),d=$dataSystem.sounds[0];return{name:x.name,descriptorVolume:d.volume,volume:x.buffer.volume,playing:x.buffer.isPlaying()};})()");
+ await browser.waitFor('audioBuffers[audioBuffers.length-1].buffer.isReady()&&audioBuffers[audioBuffers.length-1].buffer.isPlaying()');
+ const secondSe=await browser.evaluate("(()=>{const x=audioBuffers[audioBuffers.length-1],d=$dataSystem.sounds[0];return{name:x.name,descriptorVolume:d.volume,volume:x.buffer.volume,playing:x.buffer.isPlaying()};})()");
  assert.equal(secondSe.name,seName);assert.equal(secondSe.volume,0);assert.equal(secondSe.playing,true);assert.equal(firstSe.volume,seConfig*firstSe.descriptorVolume/10000);
  await browser.evaluate(`ConfigManager.seVolume=${seConfig};`);assert.deepEqual(await state(browser),beforeSe);
  observations.push({kind:'se-input-equivalence',status:'new-cue-volume',source:{name:seName,initial:firstSe.volume,reconfigured:secondSe.volume}});

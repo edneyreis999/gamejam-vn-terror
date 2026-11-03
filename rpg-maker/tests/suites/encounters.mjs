@@ -321,7 +321,7 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
       const passageId=`result.${id}-${index+1}.${success?'success':'failure'}.01`;
       const boxes=passageBoxes(list,passageId);
       await assertLocalPause(result,boxes[0]);
-      await browser.waitFor(`encounterWrites.length===${writesBefore+1}&&encounterWrites.at(-1).done`);
+      await browser.waitFor(`encounterWrites.length===${writesBefore+1}&&encounterWrites[encounterWrites.length-1].done`);
       assert.deepEqual(await browser.evaluate('encounterWrites.slice('+writesBefore+')'),[{sequence:result.sequence,done:true}]);
       if(index===0)await browser.screenshot(`${evidence(testId)}/${id}-${success?'success':'failure'}.png`);
       for(const text of boxes){
