@@ -24,14 +24,14 @@ canonicalCase('UT-040','malformed actions reject missing unsafe or unexpected fi
  }
 });
 canonicalCase('UT-041','every otherwise valid action rejects all prohibited campaign phases without effects',()=>{
- const phases=['camp','camp_arrival','ready','intro','formation','dungeon_intro','encounter_intro','encounter_choice','approach_result','sacrifice_choice','death_result','retreat_confirmation','automatic_retreat','dungeon_complete','council','final_choice','ending','memorial','epilogue','campaign_complete','invalid'];
+ const phases=['route_map','camp','camp_arrival','ready','intro','formation','dungeon_intro','encounter_intro','encounter_choice','approach_result','sacrifice_choice','death_result','retreat_confirmation','automatic_retreat','dungeon_complete','council','final_choice','ending','memorial','epilogue','campaign_complete','invalid'];
  assert.deepEqual(Object.keys(states).sort(),phases.sort());
- const actions={BEGIN:{seed:0},TOGGLE_HERO:{heroId:'H1'},SELECT_DESTINATION:{dungeonId:'physical'},DEPART:{},ENTER_DUNGEON:{},CHOOSE_APPROACH:{approachId:'A1-1'},SELECT_VICTIM:{heroId:'H1'},REQUEST_RETREAT:{},CANCEL_RETREAT:{},CONFIRM_RETREAT:{},CHOOSE_ENDING:{ending:'reunite'},NEW_CAMPAIGN:{},COMPLETE_PASSAGE:{passageId:'prologue.rheed.01'}};
+ const actions={ARRIVE_ROUTE_NODE:{},BEGIN:{seed:0},TOGGLE_HERO:{heroId:'H1'},SELECT_DESTINATION:{dungeonId:'physical'},DEPART:{},ENTER_DUNGEON:{},CHOOSE_APPROACH:{approachId:'A1-1'},SELECT_VICTIM:{heroId:'H1'},REQUEST_RETREAT:{},CANCEL_RETREAT:{},CONFIRM_RETREAT:{},CHOOSE_ENDING:{ending:'reunite'},NEW_CAMPAIGN:{},COMPLETE_PASSAGE:{passageId:'prologue.rheed.01'}};
  const allowed=(type,state)=>{
   if(type==='COMPLETE_PASSAGE')return Boolean(state.reading);
   if(type==='REQUEST_RETREAT')return rules.playerView(state).canRetreat;
   if(type==='ENTER_DUNGEON')return state.phase==='dungeon_intro'&&!state.reading;
-  const phase={BEGIN:'ready',TOGGLE_HERO:'formation',SELECT_DESTINATION:'formation',DEPART:'formation',CHOOSE_APPROACH:'encounter_choice',SELECT_VICTIM:'sacrifice_choice',CANCEL_RETREAT:'retreat_confirmation',CONFIRM_RETREAT:'retreat_confirmation',CHOOSE_ENDING:'final_choice',NEW_CAMPAIGN:'campaign_complete'}[type];
+  const phase={ARRIVE_ROUTE_NODE:'route_map',BEGIN:'ready',TOGGLE_HERO:'formation',SELECT_DESTINATION:'formation',DEPART:'formation',CHOOSE_APPROACH:'encounter_choice',SELECT_VICTIM:'sacrifice_choice',CANCEL_RETREAT:'retreat_confirmation',CONFIRM_RETREAT:'retreat_confirmation',CHOOSE_ENDING:'final_choice',NEW_CAMPAIGN:'campaign_complete'}[type];
   return state.phase===phase;
  };
  let checked=0;

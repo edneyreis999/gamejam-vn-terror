@@ -32,7 +32,7 @@ async function sourceHashes() {
     }
     await visit(directory);
   }
-  for (const file of ['js/plugins.js', 'js/plugins/Dryland_CampaignRules.js', 'js/plugins/Dryland_EventBridge.js', 'js/plugins/Dryland_Presentation.js']) {
+  for (const file of ['js/plugins.js', 'js/plugins/Dryland_CampaignRules.js', 'js/plugins/Dryland_EventBridge.js', 'js/plugins/Dryland_Presentation.js', 'js/plugins/Dryland_6_RouteMap.js']) {
     const full = `rpg-maker/The Dryland Drowned/${file}`;
     sha256[full] = hash(await readFile(full));
   }

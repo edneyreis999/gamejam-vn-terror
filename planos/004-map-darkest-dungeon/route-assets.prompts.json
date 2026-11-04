@@ -1,0 +1,106 @@
+{
+  "mode": "built-in image_gen",
+  "date": "2026-11-04",
+  "assets": [
+    {
+      "name": "Church",
+      "prompt": "Create a final game background only, landscape 16:9 1280x720 composition, aged warm sepia parchment with finely engraved dark brown ink forest branches around the outer corners and a distant small ruined colonial church at the upper right. Faint stone pathway along the bottom edge. VERY LIGHT sparse low contrast parchment throughout center and upper center, suitable for UI drawn separately. Match antique Brazilian folk horror woodcut illustration. No text, no UI, no icons, no squares, no pawn, no frames, no map paths, no symbols. This is the separate parallax for an expedition route screen. No large objects across center 60% of image."
+    },
+    {
+      "name": "Park",
+      "prompt": "Final separate game parallax, 16:9 landscape. Antique warm light sepia parchment, thin dark brown etched botanical linework. Haunted Brazilian park, huge twisted fig tree and barely visible still water in the UPPER RIGHT and corners only, marginal grasses along bottom. Keep CENTRAL 65% and upper title area extremely sparse pale parchment. Matching church-route antique engraving UI background. No UI, text, squares, paths across center, nodes, borders, icons or pawn. Elegant eerie low contrast, not orange."
+    },
+    {
+      "name": "Village",
+      "prompt": "Create standalone final parallax for a horror game UI. Wide 16:9 antique pale sepia parchment background. In finely etched brown ink, a tiny abandoned Brazilian village with crooked collapsed houses split by a dark ravine confined to upper right corner; dead branches in outer corners, sparse stones along bottom. CENTER 70% MUST BE EMPTY LIGHT PARCHMENT. No church, no cathedral, no fig tree, no UI, no text, no icons, no nodes, no squares, no frames, no characters. Restrained eerie engraving, low contrast background ready for UI layered separately."
+    },
+    {
+      "name": "Pawn",
+      "prompt": "One small ivory chess pawn game token, front view upright, round head, slim neck, stepped circular pedestal. Delicate brown engraved ink outlines and subtle ivory shading matching antique parchment folk horror UI. Single isolated token centered with tight bounds and modest padding, transparent background, no ground, no shadow outside token, no text, no frame, no other objects. Clear silhouette readable at 68 pixels tall, not photorealistic."
+    },
+    {
+      "name": "Tavern",
+      "prompt": "Final game map icon: a rustic Brazilian tavern with a small hanging blank sign. One isolated centered object, dark brown engraved ink woodcut linework with sparse pale ivory fills, transparent background. Simple strong silhouette readable at 64px. Antique Brazilian folk horror parchment aesthetic. Square canvas, object fills 85 percent. No text, letters, frame, border, square tile or background."
+    },
+    {
+      "name": "Camp",
+      "prompt": "Final game map icon: a small campfire above crossed logs. One isolated centered object, dark brown engraved ink woodcut linework with sparse pale ivory fills, transparent background. Simple strong silhouette readable at 64px. Antique Brazilian folk horror parchment aesthetic. Square canvas, object fills 85 percent. No text, letters, frame, border, square tile or background."
+    },
+    {
+      "name": "ChurchIcon",
+      "prompt": "Final game map icon: a small ruined colonial church facade. One isolated centered object, dark brown engraved ink woodcut linework with sparse pale ivory fills, transparent background. Simple strong silhouette readable at 64px. Antique Brazilian folk horror parchment aesthetic. Square canvas, object fills 85 percent. No text, letters, frame, border, square tile or background."
+    },
+    {
+      "name": "ParkIcon",
+      "prompt": "Final game map icon: a twisted fig tree with exposed roots above a small pool. One isolated centered object, dark brown engraved ink woodcut linework with sparse pale ivory fills, transparent background. Simple strong silhouette readable at 64px. Antique Brazilian folk horror parchment aesthetic. Square canvas, object fills 85 percent. No text, letters, frame, border, square tile or background."
+    },
+    {
+      "name": "VillageIcon",
+      "prompt": "Final separate game map icon representing two abandoned small Brazilian houses separated by a jagged fissure. Single compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear distinctive silhouette readable at 64px. Antique Brazilian folk horror. Square canvas with 8 percent margin. No text, letters, border, frame, tile or background. No unrelated objects."
+    },
+    {
+      "name": "A1",
+      "prompt": "Final separate game map icon representing a corked glass bottle containing a miniature whirlwind, with a tiny red cap inside. Single compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear distinctive silhouette readable at 64px. Antique Brazilian folk horror. Square canvas with 8 percent margin. No text, letters, border, frame, tile or background. No unrelated objects."
+    },
+    {
+      "name": "A2",
+      "prompt": "Final separate game map icon representing two backward bare footprints and a knotted tripwire vine. Single compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear distinctive silhouette readable at 64px. Antique Brazilian folk horror. Square canvas with 8 percent margin. No text, letters, border, frame, tile or background. No unrelated objects."
+    },
+    {
+      "name": "A3",
+      "prompt": "Final separate game map icon representing a large rustic mortar and wooden pestle wrapped in creeping vines. Single compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear distinctive silhouette readable at 64px. Antique Brazilian folk horror. Square canvas with 8 percent margin. No text, letters, border, frame, tile or background. No unrelated objects."
+    },
+    {
+      "name": "A4",
+      "prompt": "Final separate game map icon representing a rustic wooden cage with one large clawed paw gripping its bars, Mapinguari folklore. Single compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Strong silhouette readable at 64px. Antique Brazilian folk horror. Square canvas with 8 percent margin. No text, letters, border, frame, tile or background."
+    },
+    {
+      "name": "A5",
+      "prompt": "Final separate game map icon representing a headless mule silhouette with a small flame where its head would be, standing in a simple stable arch. Single compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Strong silhouette readable at 64px. Antique Brazilian folk horror. Square canvas with 8 percent margin. No text, letters, border, frame, tile or background."
+    },
+    {
+      "name": "A6",
+      "prompt": "Final separate game map icon representing a dead orchard tree with a small dried human-shaped silhouette merged with its trunk, no gore. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame, tile or background."
+    },
+    {
+      "name": "A7",
+      "prompt": "Final separate game map icon representing a rough burlap sack tied shut inside a simple wooden storehouse doorway. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame, tile or background."
+    },
+    {
+      "name": "A8",
+      "prompt": "Final separate game map icon representing a crouching shadow with long clawed hands atop a sloping tiled roof, Pisadeira folklore. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame, tile or background."
+    },
+    {
+      "name": "B1",
+      "prompt": "Final separate game map icon representing a small nocturnal bird perched on a twig, with three curved breath lines suggesting an eerie whistle, Matinta folklore. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame, tile or background."
+    },
+    {
+      "name": "B2",
+      "prompt": "Final separate game map icon representing three tiny hooded ghostly figures carrying candles in a procession. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame, tile or background."
+    },
+    {
+      "name": "B3",
+      "prompt": "Final separate game map icon: a coiled serpent made of flames, two bright staring eyes, Boitata Brazilian folklore. Dark brown engraved woodcut ink with pale ivory fills, transparent background. Compact centered emblem with strong readable silhouette at 64px. Antique folk horror. Square canvas, 8 percent padding. No text, frame, tile, border or background."
+    },
+    {
+      "name": "B4",
+      "prompt": "Final separate game map icon representing a small braided offering of leaves and flowers with a broken ribbon knot, Comadre Fulozinha forest promise. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame around image, tile or background."
+    },
+    {
+      "name": "B5",
+      "prompt": "Final separate game map icon representing a small cracked oval mirror reflecting the pale silhouette of a long-haired woman, no room or bathroom details. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame around image, tile or background."
+    },
+    {
+      "name": "B6",
+      "prompt": "Final separate game map icon representing an old circular stone well with a mermaid silhouette emerging from its dark opening, Iara folklore. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame around image, tile or background. No gore."
+    },
+    {
+      "name": "B7",
+      "prompt": "Final separate game map icon representing a torn burial shroud held by the talons of a small owl, Rasga-Mortalha folklore. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame around image, tile or background. No gore."
+    },
+    {
+      "name": "B8",
+      "prompt": "Final separate game map icon representing a sinister long-horned goat head with open mouth and staring eyes, Cabra-Cabriola folklore. Compact centered emblem, dark brown engraved woodcut ink with sparse ivory fills, transparent background. Clear silhouette readable at 64px. Antique Brazilian folk horror, square canvas with 8 percent margin. No text, lettering, border, frame around image, tile or background. No gore."
+    }
+  ]
+}

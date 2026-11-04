@@ -10625,6 +10625,43 @@
                 "indent": 0,
                 "parameters": [
                     12,
+                    "$gameVariables.value(31) === 'route_map'"
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 1,
+                "parameters": [
+                    67
+                ]
+            },
+            {
+                "code": 201,
+                "indent": 1,
+                "parameters": [
+                    0,
+                    47,
+                    13,
+                    7,
+                    2,
+                    2
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 1,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
+            },
+            {
+                "code": 111,
+                "indent": 0,
+                "parameters": [
+                    12,
                     "['camp_arrival','camp'].includes($gameVariables.value(31))"
                 ]
             },
@@ -26059,7 +26096,7 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "['dungeon_intro','encounter_intro','encounter_choice','approach_result','sacrifice_choice','death_result','retreat_confirmation','automatic_retreat','dungeon_complete','council','final_choice'].includes($gameVariables.value(31)) && !((['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03','closure.first.01','closure.second.01'].includes($gameVariables.value(56)) || ['council.01','council.03','council.challenge','council.solo'].includes($gameVariables.value(56)))) && !(['irati.02.01','map.reveal.01','map.reveal.02'].includes($gameVariables.value(56)))"
+                    "['route_map','dungeon_intro','encounter_intro','encounter_choice','approach_result','sacrifice_choice','death_result','retreat_confirmation','automatic_retreat','dungeon_complete','council','final_choice'].includes($gameVariables.value(31)) && !((['prologue.rheed.01','prologue.rheed.02','prologue.rheed.03','closure.first.01','closure.second.01'].includes($gameVariables.value(56)) || ['council.01','council.03','council.challenge','council.solo'].includes($gameVariables.value(56)))) && !(['irati.02.01','map.reveal.01','map.reveal.02'].includes($gameVariables.value(56)))"
                 ]
             },
             {
@@ -84682,461 +84719,10 @@
     },
     {
         "id": 377,
-        "name": "Expedição — Avanço no escuro",
+        "name": "",
         "trigger": 0,
         "switchId": 1,
         "list": [
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    378
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    2
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    3
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    4
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    10
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    11
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    12
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    13
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    14
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    15
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    16
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    17
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    20
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    21
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    22
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    23
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    24
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    25
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    26
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    27
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    28
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    29
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    30
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    31
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    32
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    33
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    34
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    35
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    36
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    37
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    38
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    39
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    40
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    41
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    42
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    50
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    51
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    52
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    60
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    61
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    62
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    63
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    64
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    65
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    66
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    67
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    68
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    69
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    70
-                ]
-            },
-            {
-                "code": 241,
-                "indent": 0,
-                "parameters": [
-                    {
-                        "name": "",
-                        "volume": 0,
-                        "pitch": 100,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 245,
-                "indent": 0,
-                "parameters": [
-                    {
-                        "name": "",
-                        "volume": 0,
-                        "pitch": 100,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 234,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    [
-                        -255,
-                        -255,
-                        -255,
-                        0
-                    ],
-                    0,
-                    false
-                ]
-            },
-            {
-                "code": 222,
-                "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 250,
-                "indent": 0,
-                "parameters": [
-                    {
-                        "name": "sfx_b2_passos",
-                        "volume": 80,
-                        "pitch": 120,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 230,
-                "indent": 0,
-                "parameters": [
-                    60
-                ]
-            },
-            {
-                "code": 250,
-                "indent": 0,
-                "parameters": [
-                    {
-                        "name": "sfx_b2_passos",
-                        "volume": 80,
-                        "pitch": 120,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 230,
-                "indent": 0,
-                "parameters": [
-                    60
-                ]
-            },
-            {
-                "code": 250,
-                "indent": 0,
-                "parameters": [
-                    {
-                        "name": "sfx_b2_passos",
-                        "volume": 80,
-                        "pitch": 120,
-                        "pan": 0
-                    }
-                ]
-            },
-            {
-                "code": 230,
-                "indent": 0,
-                "parameters": [
-                    60
-                ]
-            },
-            {
-                "code": 230,
-                "indent": 0,
-                "parameters": [
-                    24
-                ]
-            },
             {
                 "code": 0,
                 "indent": 0,
@@ -85146,88 +84732,10 @@
     },
     {
         "id": 378,
-        "name": "Audio - Prepare route",
+        "name": "",
         "trigger": 0,
         "switchId": 1,
         "list": [
-            {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(34) === 'physical'"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_1_SceneAudio",
-                    "Prepare",
-                    "Prepare",
-                    {
-                        "bgm": "Dryland_Church_Danger",
-                        "bgs": "Drips"
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(34) === 'supernatural'"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_1_SceneAudio",
-                    "Prepare",
-                    "Prepare",
-                    {
-                        "bgm": "Dryland_Park_ValleyOfGhosts",
-                        "bgs": "Wind1"
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
-            },
-            {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(34) === 'final'"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 1,
-                "parameters": [
-                    "Dryland_1_SceneAudio",
-                    "Prepare",
-                    "Prepare",
-                    {
-                        "bgm": "Dryland_Village_Combined",
-                        "bgs": "Darkness"
-                    }
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
-            },
             {
                 "code": 0,
                 "indent": 0,

@@ -58,6 +58,12 @@
  * @arg name
  * @text Nome público
  * @type string
+ * @command SyncRouteMap
+ * @desc Project the current campaign onto the active route map; no campaign mutation.
+ * @arg routes
+ * @type multiline_string
+ * @arg encounters
+ * @type multiline_string
  * @command Query
  * @text Consultar campanha
  * @arg kind
@@ -152,6 +158,7 @@
  * @option TOGGLE_HERO
  * @option SELECT_DESTINATION
  * @option DEPART
+ * @option ARRIVE_ROUTE_NODE
  * @option ENTER_DUNGEON
  * @option CHOOSE_APPROACH
  * @option SELECT_VICTIM
@@ -273,9 +280,9 @@
   }
   function validateCheckpoint(reason, state, context) {
     const phases = {
-      camp_entry: ['camp_arrival'], camp_arrival_complete: ['camp'], social_complete: ['formation','camp','camp_arrival'], camp_exit: ['formation','dungeon_intro'],
+      camp_entry: ['camp_arrival'], camp_arrival_complete: ['camp'], social_complete: ['formation','camp','camp_arrival'], camp_exit: ['formation','dungeon_intro','route_map'],
       new_campaign: ['intro'], departure: ['dungeon_intro'], reveal: ['encounter_intro'], approach: ['approach_result'],
-      sacrifice: ['death_result'], consequence: ['dungeon_intro', 'sacrifice_choice', 'automatic_retreat', 'dungeon_complete', 'formation'],
+      sacrifice: ['death_result'], consequence: ['route_map', 'dungeon_intro', 'sacrifice_choice', 'automatic_retreat', 'dungeon_complete', 'formation'],
       reward: ['dungeon_complete', 'council'], council: ['council'], ending: ['ending']
     };
     const safe = context?.scene === 'Scene_Map' && context.interpreterRunning === true &&
@@ -296,7 +303,7 @@
   });
   const commandError = code => ({ ok: false, error: { code, message: commandMessages[code] } });
   const actionFields = freeze({ BEGIN: null, TOGGLE_HERO: 'heroId', SELECT_DESTINATION: 'dungeonId',
-    DEPART: null, ENTER_DUNGEON: null, CHOOSE_APPROACH: 'approachId', SELECT_VICTIM: 'heroId',
+    DEPART: null, ARRIVE_ROUTE_NODE: null, ENTER_DUNGEON: null, CHOOSE_APPROACH: 'approachId', SELECT_VICTIM: 'heroId',
     REQUEST_RETREAT: null, CANCEL_RETREAT: null, CONFIRM_RETREAT: null, CHOOSE_ENDING: 'ending',
     NEW_CAMPAIGN: null, START_SOCIAL_TOPIC: 'topicId', COMPLETE_SOCIAL_TOPIC: 'topicId', FINISH_CAMP_ARRIVAL: null, CONTINUE_FROM_CAMP: null });
   function validateBridgeAction(args, readVariable, variableCount) {
@@ -471,6 +478,8 @@
     if (before.phase !== 'camp_arrival' && after.phase === 'camp_arrival') return 'camp_entry';
     const reasons = { BEGIN: 'new_campaign', DEPART: 'departure', ENTER_DUNGEON: 'reveal', CHOOSE_APPROACH: 'approach', SELECT_VICTIM: 'sacrifice', CHOOSE_ENDING: 'ending' };
     if (reasons[action.type]) return reasons[action.type];
+    if (action.type === 'ARRIVE_ROUTE_NODE' && after.phase === 'council') return 'council';
+    if (action.type === 'ARRIVE_ROUTE_NODE' && after.phase === 'dungeon_complete') return 'reward';
     if (action.type !== 'COMPLETE_PASSAGE') return '';
     if (before.endingId !== after.endingId && after.endingId) return 'ending';
     if (before.phase !== 'council' && after.phase === 'council') return 'council';
@@ -499,6 +508,35 @@
   for (const name of ['ConfigureHero', 'ConfigureRoute', 'ConfigureEncounter']) {
     PluginManager.registerCommand('Dryland_EventBridge', name, function() {});
   }
+  PluginManager.registerCommand('Dryland_EventBridge', 'SyncRouteMap', function(args) {
+    const map = global.DrylandRouteMap;
+    if (!map) return;
+    const current = campaign(), routes = JSON.parse(args.routes), encounters = JSON.parse(args.encounters);
+    const route = routes[current.dungeonId];
+    $gameMap.refresh();
+    const list = map.nodes(), nodeId = route.prefix + current.routeCursor;
+    let view = map.state();
+    if (!view || view.attempt !== current.routeAttempt) {
+      view = map.begin(list, route.prefix + '0'); view.attempt = current.routeAttempt;
+    }
+    view.current = nodeId;
+    view.visited = list.filter(n => Number(n.id.slice(route.prefix.length)) <= current.routeCursor).map(n => n.id);
+    view.title = route.title; view.instruction = '$[route.map.continue]';
+    for (const node of list) {
+      const index = Number(node.id.slice(route.prefix.length));
+      const position = index - (index > 3 ? 1 : 0) - (index > 6 ? 1 : 0);
+      const trap = index > 0 && ![3,6].includes(index) && index < route.total + 3;
+      const encounter = trap ? current.assignments[current.dungeonId][position - 1] : null;
+      const known = !trap || !!encounter;
+      view.nodes[node.id] = { enabled: index === current.routeCursor + 1, revealed:known,
+        label: trap ? (encounter ? encounters[encounter].label : '?') : node.label,
+        image: trap ? (encounter ? encounters[encounter].image : '') : node.image,
+        caption: trap ? String(position).padStart(2,'0') : node.label,
+        status: index === current.routeCursor ? '$[route.map.here]' : index === current.routeCursor + 1 ? '$[route.map.next]' : '',
+        detail: trap && known ? (index <= current.routeCursor ? '$[route.map.completed]' : '$[route.map.known]') : '' };
+    }
+    map.saveState(view);
+  });
   PluginManager.registerCommand('Dryland_EventBridge', 'Query', function(args) {
     ensureCampaign();
     const id = Number(args.identityVariable) > 0 ? $gameVariables.value(Number(args.identityVariable)) : args.id || '';

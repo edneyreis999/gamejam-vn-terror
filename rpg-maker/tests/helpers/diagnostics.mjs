@@ -11,6 +11,7 @@ export function phaseFixtures() {
       const action=raw.type==='ADVANCE_TEXT'?{type:'COMPLETE_PASSAGE',passageId:state.reading.passageIds[state.reading.index],expectedSequence:state.sequence}:{...raw,expectedSequence:state.sequence};
       const result=rules.dispatch(state,action);assert.equal(result.ok,true,JSON.stringify(result.error));state=result.state;
       states[state.phase]??=state;
+      if(state.phase==='route_map'){state=accepted(state,'ARRIVE_ROUTE_NODE');states[state.phase]??=state;}
     }
   }
   let closing=accepted(finalChoice(),'CHOOSE_ENDING',{ending:'reunite'});

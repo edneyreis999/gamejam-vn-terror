@@ -1,3 +1,4 @@
+import {advanceRoute} from './route-map.mjs';
 import assert from 'node:assert/strict';
 import { formation, rules } from './formation.mjs';
 import { accepted, complete, finishReading, replayUntil, finishCamp, passCamp } from './campaign.mjs';
@@ -63,8 +64,10 @@ export async function closingReady(browser) {
   await browser.waitFor(`(() => {
     const s=$gameSystem._dryland.campaign;
     const target=s.phase==='ending'?{reunite:25,destroy:26,bad:27}[s.endingId]:s.phase==='campaign_complete'?46:s.phase==='memorial'?28:s.phase==='epilogue'?28+Number(s.reading.sceneId.split('.')[1].slice(1)):s.phase==='council'||s.phase==='final_choice'?23:null;
+    if(s.phase==='route_map')return $gameMap.mapId()===47&&!$gameMap.isEventRunning()&&!SceneManager._scene.isBusy();
     return (!target || $gameMap.mapId()===target) && SceneManager._scene._messageWindow && !SceneManager._scene.isBusy() && (s.phase==='campaign_complete' || ($gameMessage.hasText() && SceneManager._scene._messageWindow.pause && SceneManager._scene._messageWindow._waitCount===0));
   })()`);
+  if(await browser.evaluate("$gameSystem._dryland.campaign.phase==='route_map'")){await advanceRoute(browser);await closingReady(browser);}
 }
 export async function observeClosing(browser) {
   await browser.evaluate(`(() => {

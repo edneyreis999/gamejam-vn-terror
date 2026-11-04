@@ -1061,3 +1061,13 @@ debug.hint.off	Off	Desligada
 debug.hint.wins	WINS!	VENCE!
 debug.hint.none	No approach wins with this party	Nenhuma abordagem vence com este grupo
 debug.panel.hint	Hint	Dica
+route.map.continue	Select the next space to continue	Selecione a próxima casa para continuar
+route.map.completed	Cleared this expedition	Superada nesta expedição
+route.map.known	Known from a previous expedition	Conhecida de uma expedição anterior
+route.map.tavern	Tavern	Taverna
+route.map.camp	Campfire	Fogueira
+route.map.physical	Church	Igreja
+route.map.supernatural	Park	Parque
+route.map.final	Village	Vilarejo
+route.map.here	You are here	Você está aqui
+route.map.next	Next stop	Próxima parada

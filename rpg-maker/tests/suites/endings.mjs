@@ -110,7 +110,7 @@ canonicalCase('IT-054','native Council retains eligible slots, stages reflected 
   assert.deepEqual(seen.filter(x=>x.id.startsWith('opinion.')).map(x=>x.id),(kind==='solo'?[]:['opinion.H1','opinion.H2','opinion.H3']));
   assert.equal(state.medallionComplete,true);assert.equal(state.phase,'final_choice');
   assert.equal(await browser.evaluate('Array.from({length:6},(_,i)=>$gameScreen.picture(60+i)).some(Boolean)'),false);
-  assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['council','council']);
+  assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['route_map','route_map','council','council']);
   assert.equal(await browser.evaluate('$gameMessage.choices().length'),2);
   await browser.screenshot(`${evidence('IT-054')}/${reduced?'reduced':'normal'}-${kind}-choice.png`);
   await activate(browser,'ending',ending==='reunite'?0:1);await closingReady(browser);
@@ -120,7 +120,7 @@ canonicalCase('IT-054','native Council retains eligible slots, stages reflected 
   assert.equal(await browser.evaluate('Array.from({length:12},(_,i)=>$gameScreen.picture(10+i)).some(Boolean)'),false);
   await browser.screenshot(`${evidence('IT-054')}/${reduced?'reduced':'normal'}-${kind}-${ending}.png`);
   assert.deepEqual(await browser.evaluate("StorageManager.loadObject('file'+$gameSystem.savefileId()).then(x=>x.system._dryland.campaign)"),after);
-  assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['council','council','ending']);
+  assert.deepEqual(await browser.evaluate('closingLog.saves.map(x=>x.phase)'),['route_map','route_map','council','council','ending']);
  }
 });
 canonicalCase('IT-048','native saved outcomes route only through their own ending, conditional memorial and eligible epilogue maps',{timeout:300000},async t=>{

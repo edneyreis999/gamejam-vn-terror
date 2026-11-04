@@ -76,6 +76,7 @@
     if (!rules.deriveFormation(play.state()).automatic) for (const heroId of party) play.send({ type: 'TOGGLE_HERO', heroId });
     play.send({ type: 'DEPART' });
     play.finishReading();
+    play.send({ type: 'ARRIVE_ROUTE_NODE' });
     return play;
   }
 
@@ -102,7 +103,7 @@
     for (let seed = 0; seed < SEED_LIMIT; seed++) {
       if (firstEncounter(toDoorstep(seed, route, HEROES.slice(0, 3)), route) !== trap) continue;
       const play = toDoorstep(seed, route, partyFor(trap));
-      return { seed, label: trap, actions: play.sent, landing: { map: trapMapId(trap), checkpoint: null }, expect: state => state.phase === 'dungeon_intro' && !state.reading };
+      return { seed, label: trap, actions: play.sent, landing: { map: trapMapId(trap), checkpoint: null }, expect: state => state.phase === 'dungeon_intro' && state.routeCursor === 1 && !state.reading };
     }
     throw new Error('No seed found for ' + trap);
   }
@@ -136,6 +137,7 @@
         const missing = wanted.find(id => !form.selectedHeroIds.includes(id));
         return missing && !form.automatic ? { type: 'TOGGLE_HERO', heroId: missing } : { type: 'DEPART' };
       }
+      case 'route_map': return { type: 'ARRIVE_ROUTE_NODE' };
       case 'dungeon_intro': return { type: 'ENTER_DUNGEON' };
       case 'encounter_choice': {
         const encounter = catalog.encounters[state.assignments[state.dungeonId][state.position - 1]];

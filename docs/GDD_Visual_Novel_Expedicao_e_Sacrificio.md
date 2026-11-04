@@ -1705,3 +1705,28 @@ Fonte: [GDDR-004](gddrs/gddr-004-descoberta-de-conversas-ineditas.md), entrevist
 O usuário relatou que seus playtests sustentam restringir o recuo às fogueiras. Esse relato não é evidência independente de execução ou balanceamento do novo fluxo. A eficácia emocional deve ser observada no playtest, incluindo se o jogador consegue explicar seu interesse por um herói além da utilidade nas armadilhas. Duração e repetição também exigem revisão.
 
 Momento demonstrável proposto para a futura entrega: entrada na fogueira após uma perda, ausência visual e reação de um sobrevivente; no retorno à taverna, descoberta de um assunto sobre o morto. Captura sugerida: menu do sobrevivente com a etiqueta separada de novidade. São alvos futuros de demonstração, não capturas ou validações já realizadas.
+
+---
+
+## 29. Mapa de percurso da expedição — 2026-11-04
+
+**Confirmado — plano aprovado e implementação solicitada.** A [spec incremental](../planos/tasks/expedition-route-map/_spec.md) registra o mapa inspirado na referência de Darkest Dungeon; a [verificação](../planos/tasks/expedition-route-map/verification.md) separa evidência técnica e aceite humano.
+
+Após Partir e a abertura da caminhada, mostrar o peão na taverna de um mapa de percurso. O jogador seleciona a próxima casa para avançar. Ao terminar cada armadilha ou continuar da fogueira, retornar ao mapa na casa correspondente. A entrada na fogueira, a recompensa do destino e o Conselho dependem de chegar à sua casa. Preservar a cadência da seção 28.1, incluindo as seis armadilhas do Vilarejo.
+
+As casas anteriores ficam visíveis como histórico, sem permitir voltar neste jogo. A próxima casa é a única selecionável. Armadilhas ainda desconhecidas mostram `?`; as conhecidas mostram a identidade sorteada e conservada. Hover, foco e abertura do mapa não sorteiam nada. O sorteio continua acontecendo imediatamente antes de entrar na armadilha, depois do movimento do peão. Esta precisão complementa a seção 5.4 e a saída da fogueira na seção 28.1.
+
+Recuar continua disponível apenas na fogueira, além dos retornos automáticos já definidos. Uma nova tentativa começa na taverna e reinicia as visitas, preservando as identidades conhecidas e os demais fatos da campanha. Continue restaura o último checkpoint estável, sem repetir chegada, sorteio ou consequência. Este incremento exige nova campanha, sem migração nem remoção dos arquivos pessoais.
+
+A autoria usa parallax, eventos com identidade e ligações explícitas, e listas nativas para ações de chegada. O plugin reutilizável não conhece regras de Afogados. Ele permite até quatro ligações por nó, retorno configurável (permitido por padrão) e chegada uma vez por tentativa ou a cada visita. Em Afogados, todos os nós proíbem retorno. As três rotas desta versão são lineares; a estrutura aceita ramificações ortogonais. Os quadrados e conectores são desenhados no runtime; fundos, ícones e peão são assets separados.
+
+Momento demonstrável para devlog: após a segunda armadilha da Igreja, mostrar seu hover conhecido, o peão sobre a posição atual e a primeira fogueira como próxima parada. Essa captura não declara aceite de arte ou de ritmo; os julgamentos permanecem no playtest.
+
+
+### 29.1. Passos durante o movimento do peão — 2026-11-04
+
+**Confirmado:** remover a caminhada no escuro antes das 16 armadilhas, incluindo passos repetidos, esperas e revelação de 1,5 segundo. Ao chegar à casa, iniciar o fluxo normal da cena, respeitando apenas o carregamento dos assets. Os passos acompanham o movimento do peão para armadilhas, fogueiras e destinos; param na chegada ou saída da cena. Movimento reduzido ou duração zero entram diretamente, sem passos. Continue não reproduz deslocamento. Preservar a conversa de abertura de cada expedição, os diálogos das armadilhas e o efeito usado dentro de B2.
+
+Esta decisão substitui somente o avanço no escuro e sua revelação nas decisões de caminhada, suspense e sincronia audiovisual de 29–30/10 acima. **Baseline de protótipo:** movimento de 650 ms, `sfx_b2_passos` com volume 80, pitch 120 e pan 0, respeitando o volume de efeitos do jogador. **Pendente:** aceite humano da sincronização e mix. Ver [incremento](../planos/tasks/pawn-movement-steps/spec.md).
+
+Momento demonstrável para devlog: gravar com áudio o peão indo da segunda armadilha à fogueira e depois chegando à próxima armadilha; os passos cessam na chegada e a cena começa sem caminhada no escuro.

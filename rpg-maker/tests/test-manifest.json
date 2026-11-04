@@ -160,6 +160,12 @@
     ],
     "rodada-otimizacao-003": [
       "IT-085"
+    ],
+    "expedition-route-map": [
+      "UT-079",
+      "UT-080",
+      "IT-086",
+      "IT-087"
     ]
   }
 }
