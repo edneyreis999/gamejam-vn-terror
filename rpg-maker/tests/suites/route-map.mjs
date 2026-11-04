@@ -68,7 +68,7 @@ import {nativeEncounter} from './encounters.mjs';
 import {advanceRoute, readRoutePassage} from '../helpers/route-map.mjs';
 import {chooseTitle, selectFile} from '../helpers/native-chrome.mjs';
 canonicalCase('IT-086','departure map survives Continue without revealing or repeating an arrival',{timeout:180000},async t=>{
- const browser=await nativeEncounter(t,{stopAtMap:true});
+ const browser=await nativeEncounter(t,{stopAtMap:true,reduced:true});
  const before=await browser.evaluate('$gameSystem._dryland.campaign');
  assert.equal(before.routeCursor,0);assert.equal(before.assignments.physical.every(x=>x===null),true);
  const start=await browser.evaluate('(()=>{const n=DrylandRouteMap.nodes().find(n=>n.id==="c0"),b=Graphics.app.view.getBoundingClientRect();return {x:b.x+(n.x+0.5)*48*b.width/Graphics.width,y:b.y+(n.y+0.5)*48*b.height/Graphics.height};})()');
@@ -101,7 +101,14 @@ canonicalCase('IT-086','departure map survives Continue without revealing or rep
   const id=state.assignments.physical[position-1];
   const index=catalog.encounters[id].approaches.findIndex(a=>state.partyIds.some(h=>catalog.heroes[h].competencyIds.includes(a.competencyId)));
   await activate(browser,'approaches',index);
+  await browser.evaluate(`{window.releaseRouteSave=null;const original=StorageManager.saveObject;StorageManager.saveObject=function(name,data){if($gameMap.mapId()!==47)return original.call(this,name,data);StorageManager.saveObject=original;return new Promise((resolve,reject)=>{window.releaseRouteSave=()=>original.call(this,name,data).then(resolve,reject);});};}`);
   await readRoutePassage(browser,'approach_result');
+  await browser.waitFor("$gameMap.mapId()===47 && typeof releaseRouteSave==='function'");
+  const waiting=await browser.evaluate('({campaign:$gameSystem._dryland.campaign,node:DrylandRouteMap.state().current})');
+  await browser.press('ArrowRight',39);await browser.press('Enter',13);
+  assert.deepEqual(await browser.evaluate('({campaign:$gameSystem._dryland.campaign,node:DrylandRouteMap.state().current})'),waiting);
+  assert.equal(await browser.evaluate('$gameMap.isEventRunning()'),true);
+  await browser.evaluate('releaseRouteSave()');
   await browser.waitFor("$gameMap.mapId()===47 && !$gameMap.isEventRunning() && $gameTemp._drylandPersistence.status==='saved'");
   const returned=await browser.evaluate('$gameSystem._dryland.campaign');
   assert.equal(returned.routeCursor,position);assert.equal(returned.progress.physical,position);
