@@ -5436,32 +5436,6 @@
                             ]
                         },
                         {
-                            "code": 242,
-                            "indent": 1,
-                            "parameters": [
-                                0.4
-                            ]
-                        },
-                        {
-                            "code": 246,
-                            "indent": 1,
-                            "parameters": [
-                                0.4
-                            ]
-                        },
-                        {
-                            "code": 221,
-                            "indent": 1,
-                            "parameters": []
-                        },
-                        {
-                            "code": 117,
-                            "indent": 1,
-                            "parameters": [
-                                377
-                            ]
-                        },
-                        {
                             "code": 231,
                             "indent": 1,
                             "parameters": [
@@ -5478,52 +5452,10 @@
                             ]
                         },
                         {
-                            "code": 234,
-                            "indent": 1,
-                            "parameters": [
-                                1,
-                                [
-                                    -255,
-                                    -255,
-                                    -255,
-                                    0
-                                ],
-                                0,
-                                false
-                            ]
-                        },
-                        {
                             "code": 117,
                             "indent": 1,
                             "parameters": [
                                 67
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
-                                "Dryland_1_SceneAudio",
-                                "FadeIn",
-                                "FadeIn",
-                                {
-                                    "seconds": "1.5"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 234,
-                            "indent": 1,
-                            "parameters": [
-                                1,
-                                [
-                                    0,
-                                    0,
-                                    0,
-                                    0
-                                ],
-                                90,
-                                true
                             ]
                         },
                         {

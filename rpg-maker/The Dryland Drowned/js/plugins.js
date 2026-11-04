@@ -848,5 +848,25 @@ var $plugins =
         "status": true,
         "description": "QA Debug tools: jump to a trap with validated actions only. Disabled by default (ADR-G007).",
         "parameters": {}
+    },
+    {
+        "name": "Dryland_6_RouteMap",
+        "status": true,
+        "description": "Event-authored expedition maps",
+        "parameters": {
+            "NodeSize": "78",
+            "StepSize": "9",
+            "StepGap": "5",
+            "Duration": "650",
+            "Ink": "#360a0b",
+            "Accent": "#62365f",
+            "Paper": "#ead3ae",
+            "Pawn": "Dryland_Route_Pawn",
+            "ReducedMotionVariable": "47",
+            "MoveSe": "sfx_b2_passos",
+            "MoveSeVolume": "80",
+            "MoveSePitch": "120",
+            "MoveSePan": "0"
+        }
     }
 ];

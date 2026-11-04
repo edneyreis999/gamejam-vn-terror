@@ -34,6 +34,7 @@ export function replayUntil(name, predicate) {
       if (predicate(state)) return state;
       state = accepted(state, 'CONTINUE_FROM_CAMP');
     }
+    if (state.phase === 'route_map') state = accepted(state, 'ARRIVE_ROUTE_NODE');
     const action = authored.type === 'ADVANCE_TEXT'
       ? { type: 'COMPLETE_PASSAGE', passageId: state.reading.passageIds[state.reading.index], expectedSequence: state.sequence }
       : { ...authored, expectedSequence: state.sequence };
@@ -41,6 +42,7 @@ export function replayUntil(name, predicate) {
     assert.equal(result.ok, true, `${name} ${JSON.stringify(action)}: ${JSON.stringify(result.error)}`);
     assert.deepEqual(rules.validateState(result.state), { ok: true, violations: [] });
     state = result.state;
+    if (state.phase === 'route_map') state = accepted(state, 'ARRIVE_ROUTE_NODE');
     if (predicate(state)) return state;
   }
   assert.fail(`The historic legal recipe did not reach the requested boundary: ${name}`);

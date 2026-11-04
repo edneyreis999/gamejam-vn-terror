@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 1,
+  "checklistVersion": "CP-01-20/v1",
+  "task": "pawn-movement-steps",
+  "author": "Codex",
+  "reviewedAt": "2026-11-04",
+  "evidence": {
+    "cp-01": {
+      "factual": "CLI branches distinguish JSON reads, authoring writes and later native execution; disposable public read/write examples in .artifacts/route-map-cli/mutations.json. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/commands",
+          "value": {
+            "list": "List public descriptor IDs. describe route-map returns this complete contract.",
+            "help": "Show commands and authoring conventions.",
+            "parameters": "Read parameters; --set JSON merges declared parameters. Values are strings.",
+            "map": "map MAP_ID: read graph and event-authored nodes; coordinates are tile centers.",
+            "node": "node MAP_ID EVENT_ID: read the event; --set JSON edits name, note, x or y. Positions use integer tiles.",
+            "commands": "commands MAP_ID EVENT_ID PAGE: read native page commands (PAGE starts at 1); --insert JSON appends one plugin command before the terminator.",
+            "validate": "Validate all marked route maps and declared orthogonal connections; reports map/event context."
+          }
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-02": {
+      "factual": "Dryland_6_RouteMap active() checks map note; nodes() respects pages and RouteHidden; Begin is required before reading current state. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/lifecycle",
+          "value": "CLI only edits native data; it never plays events. Close/reopen the editor around external writes. Runtime requires active Dryland_6_RouteMap, a map with <RouteMap>, and Begin. Per-map position/visits/overrides survive native saves and transfers; Begin resets them. Save/menu are blocked during travel. Arrival starts the destination native event page once travel ends. Native Common Event and Script commands use standard MZ interpreter semantics, with ignored script completion value; tags never execute JavaScript. RouteHidden pages do not participate. Crossings are not junctions; diagonal links and more than four neighbours are rejected. There is no automatic routing or camera."
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-03": {
+      "factual": "route-map.md documents integer IDs, integer tile coordinates, JSON string parameter writes, zero outputs and type restrictions; CLI positive(), node and parameters validation enforce these. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/guide",
+          "value": "rpg-maker/docs/route-map.md"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-04": {
+      "factual": "NodeSize/StepSize/StepGap use Bitmap screen pixels; point() uses native tile centers; travel.elapsed uses ticker.deltaMS; Duration is milliseconds. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-05": {
+      "factual": "graph(), canMove() and arrive() implement true/false return and first/always; RouteImage overrides active page graphic; UT-079 exercises visits/return. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/notes",
+          "value": {
+            "RouteMap": "Map opt-in marker.",
+            "RouteNode": "Stable ID unique within a map.",
+            "RouteLinks": "Comma-separated IDs; undirected edges, at most four per node. Orthogonal positions required.",
+            "RouteReturn": "true (default) permits visited nodes; false disallows returning to visited nodes.",
+            "RouteArrival": "first (default) fires once per Begin; always fires at every arrival.",
+            "RouteImage": "PNG picture basename without extension, loaded from img/pictures. Overrides the active native page graphic.",
+            "RouteLabel": "Display label or $[localization.key].",
+            "RouteHidden": "Native page comment excludes this event when that page is active."
+          }
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-06": {
+      "factual": "Guide documents Begin reset, SetNode replacement and plugin fallback defaults; registry has ReducedMotionVariable=47 while plugin header default is 0. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/guide",
+          "value": "rpg-maker/docs/route-map.md"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-07": {
+      "factual": "Plugin is active in js/plugins.js, standalone runtime references only MZ classes; guide explains enablement and image copies, with no Afogados dependency. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/provider",
+          "value": "Dryland_6_RouteMap"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-08": {
+      "factual": "Guide exists at rpg-maker/docs/route-map.md and explains Map047, editor inputs and CLI paths; describe publishes its exact location. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/guide",
+          "value": "rpg-maker/docs/route-map.md"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-09": {
+      "factual": "map 47, parameters Duration400 dry-run and commands47/1/1 queried successfully; mutations.json retains executed public examples. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/examples",
+          "value": [
+            "node rpg-maker/tools/route-map.mjs map 47",
+            "node rpg-maker/tools/route-map.mjs parameters --set '{\"Duration\":\"400\"}' --dry-run",
+            "node rpg-maker/tools/route-map.mjs commands 47 1 1"
+          ]
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-10": {
+      "factual": "Tutorial includes map marker, positions, links, setup Begin/Erase Event, images and Action Button arrival lists. CLI insertion supplies all Query args and is explicitly illustrative. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/guide",
+          "value": "rpg-maker/docs/route-map.md"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-11": {
+      "factual": "Tags are parsed as strings, never eval. Scene_Map invokes Game_Event.start; native Game_Interpreter.command355 executes Script with interpreter this and standard game globals; guide specifies this context. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/lifecycle",
+          "value": "CLI only edits native data; it never plays events. Close/reopen the editor around external writes. Runtime requires active Dryland_6_RouteMap, a map with <RouteMap>, and Begin. Per-map position/visits/overrides survive native saves and transfers; Begin resets them. Save/menu are blocked during travel. Arrival starts the destination native event page once travel ends. Native Common Event and Script commands use standard MZ interpreter semantics, with ignored script completion value; tags never execute JavaScript. RouteHidden pages do not participate. Crossings are not junctions; diagonal links and more than four neighbours are rejected. There is no automatic routing or camera."
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-12": {
+      "factual": "arrive commits visited/current before starting the event; first/always controls whether start occurs. Native Script completion value is ignored by command355. CLI authoring does not execute events. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/lifecycle",
+          "value": "CLI only edits native data; it never plays events. Close/reopen the editor around external writes. Runtime requires active Dryland_6_RouteMap, a map with <RouteMap>, and Begin. Per-map position/visits/overrides survive native saves and transfers; Begin resets them. Save/menu are blocked during travel. Arrival starts the destination native event page once travel ends. Native Common Event and Script commands use standard MZ interpreter semantics, with ignored script completion value; tags never execute JavaScript. RouteHidden pages do not participate. Crossings are not junctions; diagonal links and more than four neighbours are rejected. There is no automatic routing or camera."
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-13": {
+      "factual": "State is on Game_System and included by native serialization; scene-local travel is not. Begin resets visits and overrides. IT-086 exercises Continue and attempt reset. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/lifecycle",
+          "value": "CLI only edits native data; it never plays events. Close/reopen the editor around external writes. Runtime requires active Dryland_6_RouteMap, a map with <RouteMap>, and Begin. Per-map position/visits/overrides survive native saves and transfers; Begin resets them. Save/menu are blocked during travel. Arrival starts the destination native event page once travel ends. Native Common Event and Script commands use standard MZ interpreter semantics, with ignored script completion value; tags never execute JavaScript. RouteHidden pages do not participate. Crossings are not junctions; diagonal links and more than four neighbours are rejected. There is no automatic routing or camera."
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-14": {
+      "factual": "Guide and notes state explicit edges, no inferred routing/camera, active-page filtering and picture priority. SetNode replaces, not merges, overrides; reciprocal edge declarations are deduplicated. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/guide",
+          "value": "rpg-maker/docs/route-map.md"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-15": {
+      "factual": "Map note, event note, page Comment and graphic locations are distinct in guide. CLI writes native event name/note/x/y and inserts code357 before terminator; disposable roundtrip verified. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/notes",
+          "value": {
+            "RouteMap": "Map opt-in marker.",
+            "RouteNode": "Stable ID unique within a map.",
+            "RouteLinks": "Comma-separated IDs; undirected edges, at most four per node. Orthogonal positions required.",
+            "RouteReturn": "true (default) permits visited nodes; false disallows returning to visited nodes.",
+            "RouteArrival": "first (default) fires once per Begin; always fires at every arrival.",
+            "RouteImage": "PNG picture basename without extension, loaded from img/pictures. Overrides the active native page graphic.",
+            "RouteLabel": "Display label or $[localization.key].",
+            "RouteHidden": "Native page comment excludes this event when that page is active."
+          }
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-16": {
+      "factual": "Images use picture PNG basenames, native character/tile fallback is described in guide. CSS colors feed Bitmap context; comma-separated graph links are trimmed and deduplicated. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-17": {
+      "factual": "Current installed list/describe collected by check-cli-docs.mjs. Unknown descriptor rejected; public CLI reads and mutation examples succeeded on disposable data. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/usage",
+          "value": "node rpg-maker/tools/route-map.mjs [command] [IDs] [--project directory] [--json] [--dry-run]"
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-18": {
+      "factual": "Compared editor plugin header, runtime handlers, CLI help and guide: same four commands; Query truthiness and output0 semantics explicit. Runtime params and registered defaults reconcile in guide. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/runtimeCommands",
+          "value": {
+            "Begin": "Reset attempt, visits and overrides at node; does not fire arrival. Required before other commands.",
+            "Restore": "Set current node without resetting visits or firing arrival.",
+            "SetNode": "Replace node enabled/revealed (true unless false), label and picture image overrides; saves with the attempt. Empty image uses the native page graphic.",
+            "Query": "kind=current writes the current ID to variable; kind=visited writes whether node was visited. switch receives the truthiness of the same value. Output ID 0 disables that output."
+          }
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    },
+    "cp-20": {
+      "factual": "Final reread preserves scope: no automatic routing/camera, first per attempt, no actions on restore, saves owned by host, plugin disable removes route interaction rather than promising fallback gameplay. Movement audio rereview: scene-owned createBuffer/updateSeParameters/play/stop/destroy, stop cancels load callbacks, zero/reduced bypass, integer CLI ranges and generic/registered defaults checked against header and guide; dry-run audio example succeeded.",
+      "public": [
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/lifecycle",
+          "value": "CLI only edits native data; it never plays events. Close/reopen the editor around external writes. Runtime requires active Dryland_6_RouteMap, a map with <RouteMap>, and Begin. Per-map position/visits/overrides survive native saves and transfers; Begin resets them. Save/menu are blocked during travel. Arrival starts the destination native event page once travel ends. Native Common Event and Script commands use standard MZ interpreter semantics, with ignored script completion value; tags never execute JavaScript. RouteHidden pages do not participate. Crossings are not junctions; diagonal links and more than four neighbours are rejected. There is no automatic routing or camera."
+        },
+        {
+          "namespace": "Dryland_6_RouteMap",
+          "id": "route-map",
+          "pointer": "/parameters",
+          "value": {
+            "NodeSize": "78 pixels, minimum 24; square side and hit target.",
+            "StepSize": "9 pixels, minimum 2; connector square side.",
+            "StepGap": "5 pixels, minimum 1; spacing between connector squares.",
+            "Duration": "650 milliseconds, minimum 0; zero jumps directly without movement sound.",
+            "MoveSe": "Empty by default (silent). Audio basename without extension in audio/se, loaded by native MZ (OGG); loops only during animated pawn travel on a RouteMap. Preloaded on scene creation, stopped at arrival or scene exit independently of other SE; no playback on Restore or Continue. Reduced motion and Duration 0 are silent. Afogados uses sfx_b2_passos.",
+            "MoveSeVolume": "90 by default; integer percent 0..100 multiplied by player SE volume. Afogados uses 80.",
+            "MoveSePitch": "100 by default; integer speed percent 50..150. Afogados uses 120.",
+            "MoveSePan": "0 by default; integer stereo position -100 (left)..100 (right). Afogados uses 0.",
+            "Ink": "#360a0b; CSS color for lines and text.",
+            "Accent": "#62365f; CSS color for position/focus.",
+            "Paper": "#ead3ae; CSS color for known node backgrounds.",
+            "Pawn": "Dryland_Route_Pawn; PNG basename in img/pictures.",
+            "ReducedMotionVariable": "0 means system prefers-reduced-motion; positive native variable ID means nonzero value skips travel. Afogados configures 47."
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "namespace": "Dryland_6_RouteMap",
+      "id": "route-map",
+      "descriptorHash": "sha256:bcc73e7f00e2abf33c31998276b8aadd485d0d62208680353cc1258c03fd36b9",
+      "classification": "operational",
+      "criteria": {
+        "CP-01": {
+          "status": "conformant",
+          "evidence": [
+            "cp-01"
+          ]
+        },
+        "CP-02": {
+          "status": "conformant",
+          "evidence": [
+            "cp-02"
+          ]
+        },
+        "CP-03": {
+          "status": "conformant",
+          "evidence": [
+            "cp-03"
+          ]
+        },
+        "CP-04": {
+          "status": "conformant",
+          "evidence": [
+            "cp-04"
+          ]
+        },
+        "CP-05": {
+          "status": "conformant",
+          "evidence": [
+            "cp-05"
+          ]
+        },
+        "CP-06": {
+          "status": "conformant",
+          "evidence": [
+            "cp-06"
+          ]
+        },
+        "CP-07": {
+          "status": "conformant",
+          "evidence": [
+            "cp-07"
+          ]
+        },
+        "CP-08": {
+          "status": "conformant",
+          "evidence": [
+            "cp-08"
+          ]
+        },
+        "CP-09": {
+          "status": "conformant",
+          "evidence": [
+            "cp-09"
+          ]
+        },
+        "CP-10": {
+          "status": "conformant",
+          "evidence": [
+            "cp-10"
+          ]
+        },
+        "CP-11": {
+          "status": "conformant",
+          "evidence": [
+            "cp-11"
+          ]
+        },
+        "CP-12": {
+          "status": "conformant",
+          "evidence": [
+            "cp-12"
+          ]
+        },
+        "CP-13": {
+          "status": "conformant",
+          "evidence": [
+            "cp-13"
+          ]
+        },
+        "CP-14": {
+          "status": "conformant",
+          "evidence": [
+            "cp-14"
+          ]
+        },
+        "CP-15": {
+          "status": "conformant",
+          "evidence": [
+            "cp-15"
+          ]
+        },
+        "CP-16": {
+          "status": "conformant",
+          "evidence": [
+            "cp-16"
+          ]
+        },
+        "CP-17": {
+          "status": "conformant",
+          "evidence": [
+            "cp-17"
+          ]
+        },
+        "CP-18": {
+          "status": "conformant",
+          "evidence": [
+            "cp-18"
+          ]
+        },
+        "CP-19": {
+          "status": "not_applicable",
+          "reason": "This is the first delivered route-map CLI descriptor, not a rewrite of a previously shipped interface. Existing Coreto CLI descriptions were not changed."
+        },
+        "CP-20": {
+          "status": "conformant",
+          "evidence": [
+            "cp-20"
+          ]
+        }
+      }
+    }
+  ]
+}

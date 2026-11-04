@@ -98,7 +98,7 @@
   function readyObject() {
     return {
       version: 2, phase: 'ready', seed: null, rngState: null,
-      selectedDungeonId: null, dungeonId: null, position: null,
+      selectedDungeonId: null, dungeonId: null, position: null, routeCursor: 0, routeAttempt: 0,
       draftPartyIds: [], partyIds: [], deadHeroIds: [], deathLocations: {},
       completedSocialUnitIds: [], activeSocialTopicId: null, campDeathBaseline: 0,
       assignments: { physical: Array(5).fill(null), supernatural: Array(5).fill(null), final: Array(6).fill(null) },
@@ -148,14 +148,14 @@
     const HERO_IDS = heroIds, DUNGEON_IDS = routeIds;
     const Data = { heroes: catalog.heroes, encounters: catalog.encounters, encounterOrder: encounterIds, destinations: catalog.destinations };
     const Narrative = { scenes: catalog.scenes, passages: catalog.passages };
-    const ACTION_FIELDS = {"BEGIN":["seed"],"COMPLETE_PASSAGE":["passageId"],"SELECT_DESTINATION":["dungeonId"],"TOGGLE_HERO":["heroId"],"DEPART":[],"ENTER_DUNGEON":[],"CHOOSE_APPROACH":["approachId"],"SELECT_VICTIM":["heroId"],"REQUEST_RETREAT":[],"CANCEL_RETREAT":[],"CONFIRM_RETREAT":[],"CHOOSE_ENDING":["ending"],"NEW_CAMPAIGN":[],"START_SOCIAL_TOPIC":["topicId"],"COMPLETE_SOCIAL_TOPIC":["topicId"],"FINISH_CAMP_ARRIVAL":[],"CONTINUE_FROM_CAMP":[]};
+    const ACTION_FIELDS = {"BEGIN":["seed"],"COMPLETE_PASSAGE":["passageId"],"SELECT_DESTINATION":["dungeonId"],"TOGGLE_HERO":["heroId"],"DEPART":[],"ENTER_DUNGEON":[],"CHOOSE_APPROACH":["approachId"],"SELECT_VICTIM":["heroId"],"REQUEST_RETREAT":[],"CANCEL_RETREAT":[],"CONFIRM_RETREAT":[],"CHOOSE_ENDING":["ending"],"NEW_CAMPAIGN":[],"START_SOCIAL_TOPIC":["topicId"],"COMPLETE_SOCIAL_TOPIC":["topicId"],"FINISH_CAMP_ARRIVAL":[],"CONTINUE_FROM_CAMP":[],"ARRIVE_ROUTE_NODE":[]};
     const UINT32_RANGE = 4294967296, MULBERRY_INCREMENT = 0x6D2B79F5;
     const deepFreeze = freeze;
     const sameArray = (a, b) => Array.isArray(a) && Array.isArray(b) && same(a, b);
     const hasPassage = id => hasOwn(catalog.passages, id);
     const historyFields = {
       BEGIN: ['seed'], COMPLETE_PASSAGE: ['passageId'],
-      START_SOCIAL_TOPIC: ['topicId'], COMPLETE_SOCIAL_TOPIC: ['topicId'], FINISH_CAMP_ARRIVAL: [], CONTINUE_FROM_CAMP: [],
+      START_SOCIAL_TOPIC: ['topicId'], COMPLETE_SOCIAL_TOPIC: ['topicId'], FINISH_CAMP_ARRIVAL: [], CONTINUE_FROM_CAMP: [], ARRIVE_ROUTE_NODE: [],
       SELECT_DESTINATION: ['dungeonId'], TOGGLE_HERO: ['heroId'], DEPART: ['dungeonId'],
       ENTER_DUNGEON: ['encounterId'], CHOOSE_APPROACH: ['approachId', 'success'],
       SELECT_VICTIM: ['heroId'], REQUEST_RETREAT: [], CANCEL_RETREAT: [],
@@ -313,6 +313,11 @@
           ['assignments', 'progress'].some(key => !state[key] || Array.isArray(state[key]) || Object.keys(state[key]).sort().join(',') !== [...routeIds].sort().join(','))) {
         return resultValidation([v('invalid_state', 'A campanha contém um estado inválido.')]);
       }
+      if (!Number.isSafeInteger(state.routeAttempt) || state.routeAttempt < 0 ||
+          !Number.isInteger(state.routeCursor) || state.routeCursor < 0 || state.routeCursor > 9 ||
+          (state.phase === 'route_map' && (state.reading || !Data.destinations[state.dungeonId] || state.routeCursor >= Data.destinations[state.dungeonId].landmarkTotal + 3))) {
+        issues.push(v('invalid_route_cursor', 'A posição do percurso é inválida.'));
+      }
       if (state.phase === 'ready' && !same(state, readyObject())) return resultValidation([v('invalid_state', 'O estado inicial deve estar vazio.')]);
       if (state.history.some(event => !validHistoryEvent(event))) issues.push(v('invalid_action_history', 'O histórico contém uma ação inválida.'));
       if (!state.deathLocations || Array.isArray(state.deathLocations) || !same(Object.keys(state.deathLocations).sort(), [...state.deadHeroIds].sort())) issues.push(v('invalid_death_locations', 'As mortes não correspondem ao contexto registrado.'));
@@ -343,7 +348,7 @@
       } else if (state.retreatReturn !== null) issues.push(v('invalid_retreat_context', 'Não há recuo pendente.'));
 
       if (!state || state.version !== 2) return resultValidation([v('invalid_state_version', 'A versão do estado da campanha é inválida.', { version: state && state.version })]);
-      var phases = ['camp_arrival', 'camp', 'ready', 'intro', 'formation', 'dungeon_intro', 'encounter_intro', 'encounter_choice', 'approach_result', 'sacrifice_choice', 'death_result', 'retreat_confirmation', 'automatic_retreat', 'dungeon_complete', 'council', 'final_choice', 'ending', 'memorial', 'epilogue', 'campaign_complete', 'invalid'];
+      var phases = ['route_map', 'camp_arrival', 'camp', 'ready', 'intro', 'formation', 'dungeon_intro', 'encounter_intro', 'encounter_choice', 'approach_result', 'sacrifice_choice', 'death_result', 'retreat_confirmation', 'automatic_retreat', 'dungeon_complete', 'council', 'final_choice', 'ending', 'memorial', 'epilogue', 'campaign_complete', 'invalid'];
       if (phases.indexOf(state.phase) < 0) issues.push(v('invalid_phase', 'A fase da campanha é inválida.', { phase: state.phase }));
       if (!Number.isInteger(state.sequence) || state.sequence < 0 || !Array.isArray(state.history) || state.history.some(function (event, index) {
         return !event || !Number.isInteger(event.sequence) || event.sequence !== index + 1 || event.sequence > state.sequence;
@@ -378,7 +383,7 @@
         issues.push(v('invalid_rng_state', 'O estado do gerador aleatório é inválido.', { seed: state.seed, rngState: state.rngState }));
       }
       var preparationPhase = ['ready', 'intro', 'formation'].indexOf(state.phase) >= 0;
-      var routePhase = ['camp_arrival', 'camp', 'dungeon_intro', 'encounter_intro', 'encounter_choice', 'approach_result', 'sacrifice_choice', 'death_result', 'retreat_confirmation', 'automatic_retreat', 'dungeon_complete', 'council', 'final_choice'].indexOf(state.phase) >= 0;
+      var routePhase = ['route_map', 'camp_arrival', 'camp', 'dungeon_intro', 'encounter_intro', 'encounter_choice', 'approach_result', 'sacrifice_choice', 'death_result', 'retreat_confirmation', 'automatic_retreat', 'dungeon_complete', 'council', 'final_choice'].indexOf(state.phase) >= 0;
       var routeKnown = DUNGEON_IDS.indexOf(state.dungeonId) >= 0;
       if ((preparationPhase && (state.dungeonId !== null || state.position !== null)) ||
           (state.selectedDungeonId !== null && (state.phase !== 'formation' || DUNGEON_IDS.indexOf(state.selectedDungeonId) < 0)) ||
@@ -581,10 +586,10 @@
       next.progress[next.dungeonId] = Math.max(next.progress[next.dungeonId], next.position);
       next.pendingOutcome = null;
       if (livingHeroIds(next).length === 0) { next.phase = 'ending'; next.endingId = 'bad'; next.reading = reading('ending.bad'); return next; }
-      if (next.position === Data.destinations[next.dungeonId].landmarkTotal) return completeRoute(next);
-      if (!next.partyIds.length) { next.phase = 'automatic_retreat'; next.reading = reading('automatic_retreat'); return next; }
-      if ([2,4].includes(next.position)) { next.phase = 'camp_arrival'; next.reading = reading('arrival.' + campTone(next)); return next; }
-      next.position += 1; next.phase = 'dungeon_intro'; next.reading = null;
+      if (!next.partyIds.length && next.position !== Data.destinations[next.dungeonId].landmarkTotal) {
+        next.phase = 'automatic_retreat'; next.reading = reading('automatic_retreat'); return next;
+      }
+      next.phase = 'route_map'; next.reading = null;
       return next;
     }
 
@@ -592,7 +597,7 @@
       var next = clone(state), sceneId = state.reading.sceneId;
       next.reading = null;
       if (state.phase === 'intro') return formationTransition(next);
-      if (state.phase === 'dungeon_intro') return { changes: next, effects: [] };
+      if (state.phase === 'dungeon_intro') { next.phase = 'route_map'; return { changes: next, effects: [] }; }
       if (state.phase === 'encounter_intro') { next.phase = 'encounter_choice'; return { changes: next, effects: [] }; }
       if (state.phase === 'approach_result') {
         if (state.pendingOutcome.success) return { changes: afterEncounter(next), effects: [] };
@@ -680,7 +685,7 @@
       }
       if (action.type === 'CONTINUE_FROM_CAMP') {
         if (state.phase !== 'camp') return rejected(state, 'invalid_transition', 'A expedição não está na fogueira.', {});
-        return accepted(state, { phase: 'dungeon_intro', position: state.position + 1 }, {type: action.type});
+        return accepted(state, { phase: 'route_map' }, {type: action.type});
       }
       var next, form, seed, encounter, approach, status, random, available, heroId;
       if (action.type === 'BEGIN') {
@@ -722,7 +727,21 @@
         if (status !== 'available') return rejected(state, 'destination_unavailable', 'Este caminho não está disponível para expedição.', { dungeon: state.selectedDungeonId, status: status });
         form = deriveFormation(state);
         if (!form.livingHeroIds.length || form.selectedHeroIds.length !== form.required) return rejected(state, 'invalid_party_size', 'Escolha exatamente três heróis sobreviventes.', { count: form.selectedHeroIds.length, required: form.required });
-        return accepted(state, { phase: 'dungeon_intro', dungeonId: state.selectedDungeonId, selectedDungeonId: null, position: 1, campDeathBaseline: state.deadHeroIds.length, partyIds: form.selectedHeroIds, draftPartyIds: form.selectedHeroIds, reading: reading('threshold.' + state.selectedDungeonId) }, { type: 'DEPART', dungeonId: state.selectedDungeonId });
+        return accepted(state, { phase: 'dungeon_intro', routeCursor: 0, routeAttempt: state.routeAttempt + 1, dungeonId: state.selectedDungeonId, selectedDungeonId: null, position: 1, campDeathBaseline: state.deadHeroIds.length, partyIds: form.selectedHeroIds, draftPartyIds: form.selectedHeroIds, reading: reading('threshold.' + state.selectedDungeonId) }, { type: 'DEPART', dungeonId: state.selectedDungeonId });
+      }
+      if (action.type === 'ARRIVE_ROUTE_NODE') {
+        if (state.phase !== 'route_map' || state.reading) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', {});
+        next = clone(state);
+        next.routeCursor += 1;
+        if ([3,6].includes(next.routeCursor)) {
+          next.phase = 'camp_arrival'; next.reading = reading('arrival.' + campTone(next));
+        } else if (next.routeCursor === Data.destinations[next.dungeonId].landmarkTotal + 3) {
+          next = completeRoute(next);
+        } else {
+          next.position = next.routeCursor - (next.routeCursor > 3 ? 1 : 0) - (next.routeCursor > 6 ? 1 : 0);
+          next.phase = 'dungeon_intro';
+        }
+        return accepted(state, next, {type: action.type});
       }
       if (action.type === 'ENTER_DUNGEON') {
         if (state.phase !== 'dungeon_intro' || state.reading) return rejected(state, 'invalid_transition', 'Esta ação não está disponível no estado atual.', { phase: state.phase, action: action.type });

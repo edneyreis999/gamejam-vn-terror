@@ -20,7 +20,13 @@ export const prologueMarkers = [
   'Os papéis eram de Irati', 'Os mapas estavam incompletos.', 'Do tesouro, falou pouco.',
   'Minha família deixou as pistas.', 'Você não está esquecendo', 'Os detalhes serão adicionados'
 ];
-export function act(state, type, fields = {}) { return rules.dispatch(state, { type, ...fields, expectedSequence: state.sequence }); }
+// Existing rule fixtures traverse the map through its legal arrival action.
+// Route-map contract tests call dispatch directly to observe the waiting boundary.
+export function act(state, type, fields = {}) {
+  const result = rules.dispatch(state, { type, ...fields, expectedSequence: state.sequence });
+  if (!result.ok || result.state.phase !== 'route_map') return result;
+  return rules.dispatch(result.state, {type:'ARRIVE_ROUTE_NODE', expectedSequence:result.state.sequence});
+}
 export function formation(seed = 12345) {
   let state = act(rules.createReadyState(), 'BEGIN', { seed }).state;
   while (state.reading) state = act(state, 'COMPLETE_PASSAGE', { passageId: state.reading.passageIds[state.reading.index] }).state;

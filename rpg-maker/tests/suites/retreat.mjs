@@ -1,3 +1,4 @@
+import {advanceRoute} from '../helpers/route-map.mjs';
 import { installPhase } from '../helpers/native-shared.mjs';
 import { chooseTitle, selectFile } from '../helpers/native-chrome.mjs';
 import assert from 'node:assert/strict';
@@ -183,6 +184,7 @@ canonicalCase('IT-013', 'native camp retreat preserves progress and continuing r
   const continueIndex = await browser.evaluate("SceneManager._scene._choiceListWindow._list.findIndex(item => $gameMessage.choices()[item.ext].includes('ui.camp.continue'))");
   assert.ok(continueIndex >= 0);
   await activate(browser, 'camp', continueIndex);
+  await advanceRoute(browser);
   for (let n=0;n<30;n++) {
     await browser.waitFor("SceneManager._scene._choiceListWindow?.isOpenAndActive() || (SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount===0)");
     if (await browser.evaluate("SceneManager._scene._choiceListWindow?.isOpenAndActive() && $gameMessage._drylandChoiceFocus?.key==='approaches'")) break;

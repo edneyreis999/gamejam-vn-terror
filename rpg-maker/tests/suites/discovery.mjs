@@ -1,3 +1,4 @@
+import {advanceRoute} from '../helpers/route-map.mjs';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { normalizeProse, passageBoxes } from '../helpers/native-reading.mjs';
@@ -47,6 +48,7 @@ async function reachReceipt(browser, order, index) {
     assert.ok(box < 3);
     await pause(browser); await browser.press('Enter', 13);
   }
+  await advanceRoute(browser);
   for (const id of [`lover.${route}.01`, `lover.${route}.warning`, ...(index ? [`lover.${route}.second`] : [])]) {
     await passage(browser, id);
     assert.equal(await browser.evaluate('$gameMap.mapId()'), 4);

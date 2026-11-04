@@ -1,3 +1,4 @@
+import {advanceRoute} from '../helpers/route-map.mjs';
 // IN: independent matrix, real domain transitions and real MZ/Chrome inputs.
 // OUT: staged sacrifice, semantic saving and later discovery/ending surfaces.
 import assert from 'node:assert/strict';
@@ -27,7 +28,7 @@ function depart(state = formation(), dungeonId = 'physical', party = ['H1', 'H2'
 function encounterFixture(id, party = ['H1', 'H2', 'H3']) {
   const state = structuredClone(depart(formation(), id[0] === 'A' ? 'physical' : 'supernatural', party));
   state.assignments[state.dungeonId][0] = id;
-  state.phase = 'encounter_choice';
+  state.phase = 'encounter_choice'; state.routeCursor = 1;
   assert.equal(rules.validateState(state).ok, true);
   return state;
 }
@@ -139,7 +140,7 @@ canonicalCase('UT-055', 'only the current passage can record completion', () => 
   rejected(accepted(rules.createReadyState(), 'BEGIN', { seed: 0 }), 'COMPLETE_PASSAGE', { passageId: 'prologue.rheed.02' }, 'invalid_transition');
 });
 
-async function nativeEncounter(t, options = {}) {
+export async function nativeEncounter(t, options = {}) {
   const browser = await tavern(t, options);
   await browser.evaluate(`window.nativeSaveCalls = []; const nativeSave = DataManager.saveGame; DataManager.saveGame = function(id) { nativeSaveCalls.push(id); return nativeSave.call(this,id); }`);
   for (let index = 0; index < 3; index++) {
@@ -159,6 +160,11 @@ async function nativeEncounter(t, options = {}) {
     await browser.press('Enter', 13);
     await browser.waitFor(`$gameSystem._dryland.campaign.phase !== 'dungeon_intro' || (${opening} && $gameMessage.allText() !== ${JSON.stringify(text)})`);
   }
+  if (options.stopAtMap) {
+    await browser.waitFor("$gameSystem._dryland.campaign.phase === 'route_map' && $gameMap.mapId() === 47 && !$gameMap.isEventRunning() && $gameTemp._drylandPersistence.status === 'saved'");
+    return browser;
+  }
+  await advanceRoute(browser);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameMap.mapId() >= 7 && $gameMap.mapId() <= 14 && SceneManager._scene._messageWindow?.pause && SceneManager._scene._messageWindow._waitCount === 0 && !SceneManager._scene.isBusy()");
   return browser;
 }
@@ -215,7 +221,7 @@ canonicalCase('IT-005', 'real transfer and final-description held/double input n
     await choices(browser, 'approaches');
     assert.equal((await snapshot(browser)).phase, 'encounter_choice');
     assert.equal((await snapshot(browser)).pendingOutcome, null);
-    assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Only departure and reveal save; transfer and closing input add no write.');
+    assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1, 1], 'Departure, stable route map and reveal save; closing input adds no write.');
   });
 });
 canonicalCase('IT-049', 'repeated native rereading is observational and restores the same choices and focus', { timeout: 90000 }, async t => {
@@ -236,7 +242,7 @@ canonicalCase('IT-049', 'repeated native rereading is observational and restores
     assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 3);
     assert.deepEqual(await snapshot(browser), before);
   }
-  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1], 'Repeated rereading adds no write after departure/reveal.');
+  assert.deepEqual(await browser.evaluate('nativeSaveCalls'), [1, 1, 1], 'Repeated rereading adds no write after departure/map/reveal.');
   await browser.screenshot(`${evidence('IT-049')}/restored-choices.png`);
   await activate(browser, 'approaches', 0);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'approach_result' && $gameMessage.hasText()");
@@ -263,6 +269,7 @@ canonicalCase('IT-051', 'success uses native text on the same encounter artwork 
     assert.deepEqual(await snapshot(browser), result, 'A partial success cannot advance progress');
     await browser.press('Enter', 13);
   }
+  await advanceRoute(browser);
   await browser.waitFor("$gameSystem._dryland.campaign.position === 2 && $gameSystem._dryland.campaign.phase === 'encounter_intro'");
   const after = await snapshot(browser);
   assert.equal(after.progress.physical, 1);
@@ -330,6 +337,7 @@ async function verifyNativeEncounterMaps(t, ids, testId) {
         assert.ok(!result.seenPassageIds.includes(passageId),'Partial result stays unread');
         await browser.press('Enter',13);
       }
+      if (success) await advanceRoute(browser);
       const consequence=complete(result),after=success?accepted(consequence,'ENTER_DUNGEON'):consequence;
       await browser.waitFor(`$gameSystem._dryland.campaign.sequence===${after.sequence}&&$gameMessage.hasText()`);
       assert.deepEqual(await snapshot(browser),after,'One result completion reaches the next reveal or sacrifice');

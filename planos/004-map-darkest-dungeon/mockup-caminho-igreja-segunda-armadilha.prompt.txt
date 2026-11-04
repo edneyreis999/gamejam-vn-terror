@@ -1,0 +1,27 @@
+Generated with the built-in image_gen tool.
+Concept mockup, not an implemented game screenshot. The encounter in position 02 is illustrative.
+
+Use case: ui-mockup.
+Create a polished landscape 16:9 in-game expedition map concept for the Brazilian folk-horror visual novel "Afogados em Terra Seca". This is an actual proposed game screen, not a promotional poster or an infographic. High resolution, crisp readable Portuguese typography.
+Art direction: antique sepia parchment, black engraved pen-and-ink hatching, restrained desaturated purple for focus, ivory chess pawn. Dark forest branches framing an old winding road and a distant ruined church, very faint beneath a large clear parchment map area. The visual hierarchy must prioritize the route and readability. No photorealistic 3D world. Simple flat square nodes with engraved icons, suitable for lightweight Pixi rendering. Modest worn frame, not ornate fantasy gold.
+Top heading: "CAMINHO DA IGREJA". Smaller subtitle: "2 de 5 armadilhas superadas".
+The central route MUST be a SINGLE STRAIGHT HORIZONTAL ROW of EXACTLY NINE large square nodes, all on the same horizontal baseline, connected by groups of exactly three tiny separate square stepping stones between each pair. No branches, no extra nodes or detached squares. Large nodes roughly 70 pixels wide in a 1536-wide composition, small connectors roughly 11 pixels. Make comfortable spacing. Route fills width with generous margins.
+Exact ordered nodes from left to right:
+1. Tavern building icon, label below "Taverna", muted completed appearance.
+2. First trap: engraved sprung trap icon, tiny completed check, label below "01", muted completed appearance.
+3. Second trap: engraved backward footprints icon, tiny completed check, label below "02". This is CURRENT POSITION. An elegant small IVORY CHESS PAWN stands upright ON this square with its base centered inside it; the head extends above the square. Purple double border marks the current square. Small text below its number: "Você está aqui".
+4. First campfire: engraved flame icon, label below "Fogueira", highlighted warm light outline and small text "Próxima parada". This is the ONLY node available to click.
+5. Third trap: dark unknown square containing a clearly visible "?", label below "03".
+6. Fourth trap: dark unknown square containing "?", label below "04".
+7. Second campfire: subdued engraved flame icon, label below "Fogueira".
+8. Fifth trap: dark unknown square containing "?", label below "05".
+9. Final destination: subdued engraved church facade icon, label below "Igreja".
+Visited connectors between nodes 1 through 3 are dark filled ink, future connectors are muted outlined squares. All squares remain easy to see.
+Show ONE actual hover tooltip anchored above CURRENT node 3, with a little pointer toward the node and a small mouse cursor near the corner of node 3. Tooltip parchment/light cream against darker brown thin border, readable Portuguese text exactly:
+"A Trilha de Pés Virados"
+"Armadilha conhecida"
+"Superada nesta expedição"
+Use the first line larger and the next lines smaller. Position tooltip so it doesn't obscure pawn, other nodes, title, or route. The trap choice is an illustrative sample of a randomized encounter, not a fixed assignment.
+Lower left a small unobtrusive legend with icons and text: "Percorrido" / "Posição atual" / "Não revelado".
+Bottom center instruction: "Selecione a próxima casa para continuar".
+No back button, no minimap, no stats, no health bars, no hero portraits, no cards covering the map, no other tooltip, no extra navigation. Let the background have atmospheric negative space, but keep all UI visually coherent and usable. Accuracy of the 9-node sequence and pawn location are critical.

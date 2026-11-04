@@ -1,3 +1,4 @@
+import {advanceRoute} from '../helpers/route-map.mjs';
 import { prologueMarkers } from '../helpers/formation.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -172,6 +173,7 @@ canonicalCase('IT-016', 'a map-owned encounter restores its shared sacrifice int
     await pause(browser);
     await browser.press('Enter', 13);
   }
+  await advanceRoute(browser);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameSystem._dryland.campaign.position === 2 && $gameTemp._drylandPersistence.status === 'saved' && $gameMessage.hasText()");
   const state = await snapshot(browser);
   assert.deepEqual(state.deadHeroIds, after.deadHeroIds);
@@ -318,6 +320,7 @@ canonicalCase('IT-044', 'Continue preserves a revealed assignment and RNG instea
   const browser = await tavern(t); await commitSacrifice(browser);
   // The farewell and the death account have several boxes; advance until the death result is over.
   for (let step = 0; step < 32 && (await snapshot(browser)).phase === 'death_result'; step++) { await pause(browser); await browser.press('Enter', 13); }
+  await advanceRoute(browser);
   await browser.waitFor("$gameSystem._dryland.campaign.phase === 'encounter_intro' && $gameSystem._dryland.campaign.position === 2 && $gameTemp._drylandPersistence.status === 'saved' && SceneManager._scene._messageWindow?.pause");
   const state = await snapshot(browser), bytes = await savedBytes(browser);
   await toTitle(browser); await titleChoice(browser, 'choice.title.continue');
