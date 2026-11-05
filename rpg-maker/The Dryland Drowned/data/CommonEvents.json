@@ -26113,7 +26113,7 @@
                 "parameters": [
                     {
                         "name": "Dryland_Church_Danger",
-                        "volume": 35,
+                        "volume": 15,
                         "pitch": 100,
                         "pan": 0
                     }
@@ -26138,7 +26138,7 @@
                 "parameters": [
                     {
                         "name": "Dryland_Park_ValleyOfGhosts",
-                        "volume": 35,
+                        "volume": 17.5,
                         "pitch": 100,
                         "pan": 0
                     }
@@ -26155,7 +26155,7 @@
                 "parameters": [
                     {
                         "name": "Dryland_Village_Combined",
-                        "volume": 35,
+                        "volume": 17.5,
                         "pitch": 100,
                         "pan": 0
                     }
