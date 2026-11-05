@@ -5577,6 +5577,18 @@
                             ]
                         },
                         {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "Dryland_B6_Canto_Iara",
+                                    "volume": 85,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 0,
                             "parameters": [
@@ -6118,6 +6130,18 @@
                                 "ReadingEnd",
                                 "ReadingEnd",
                                 {}
+                            ]
+                        },
+                        {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "",
+                                    "volume": 90,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
                             ]
                         },
                         {

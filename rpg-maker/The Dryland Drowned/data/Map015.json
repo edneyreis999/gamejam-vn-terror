@@ -5559,6 +5559,18 @@
                             ]
                         },
                         {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "Dryland_B1_Melodia_Distante",
+                                    "volume": 70,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 0,
                             "parameters": [
@@ -6074,6 +6086,18 @@
                                 "ReadingEnd",
                                 "ReadingEnd",
                                 {}
+                            ]
+                        },
+                        {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "",
+                                    "volume": 90,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
                             ]
                         },
                         {

@@ -5758,6 +5758,18 @@
                             ]
                         },
                         {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "Dryland_A5_Correntes",
+                                    "volume": 90,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 0,
                             "parameters": [
@@ -6061,6 +6073,18 @@
                                 "ReadingEnd",
                                 "ReadingEnd",
                                 {}
+                            ]
+                        },
+                        {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "",
+                                    "volume": 90,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
                             ]
                         },
                         {
