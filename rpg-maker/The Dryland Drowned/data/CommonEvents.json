@@ -10160,6 +10160,32 @@
                 ]
             },
             {
+                "code": 117,
+                "indent": 3,
+                "parameters": [
+                    379
+                ]
+            },
+            {
+                "code": 242,
+                "indent": 3,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 246,
+                "indent": 3,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 221,
+                "indent": 3,
+                "parameters": []
+            },
+            {
                 "code": 201,
                 "indent": 3,
                 "parameters": [
@@ -10168,7 +10194,7 @@
                     10,
                     7,
                     2,
-                    0
+                    2
                 ]
             },
             {
@@ -10345,6 +10371,32 @@
                 ]
             },
             {
+                "code": 117,
+                "indent": 3,
+                "parameters": [
+                    379
+                ]
+            },
+            {
+                "code": 242,
+                "indent": 3,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 246,
+                "indent": 3,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 221,
+                "indent": 3,
+                "parameters": []
+            },
+            {
                 "code": 201,
                 "indent": 3,
                 "parameters": [
@@ -10353,7 +10405,7 @@
                     10,
                     7,
                     2,
-                    0
+                    2
                 ]
             },
             {
@@ -10523,6 +10575,32 @@
                 ]
             },
             {
+                "code": 117,
+                "indent": 3,
+                "parameters": [
+                    379
+                ]
+            },
+            {
+                "code": 242,
+                "indent": 3,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 246,
+                "indent": 3,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 221,
+                "indent": 3,
+                "parameters": []
+            },
+            {
                 "code": 201,
                 "indent": 3,
                 "parameters": [
@@ -10531,7 +10609,7 @@
                     10,
                     7,
                     2,
-                    0
+                    2
                 ]
             },
             {
@@ -10629,11 +10707,67 @@
                 ]
             },
             {
-                "code": 117,
+                "code": 111,
                 "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameMap.mapId() === 3 || $gameMap.mapId() === 45 || !AudioManager._currentBgm"
+                ]
+            },
+            {
+                "code": 242,
+                "indent": 2,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 246,
+                "indent": 2,
+                "parameters": [
+                    0.4
+                ]
+            },
+            {
+                "code": 201,
+                "indent": 2,
+                "parameters": [
+                    0,
+                    47,
+                    13,
+                    7,
+                    2,
+                    0
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 2,
                 "parameters": [
                     67
                 ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_1_SceneAudio",
+                    "FadeIn",
+                    "FadeIn",
+                    {
+                        "seconds": "0.4"
+                    }
+                ]
+            },
+            {
+                "code": 115,
+                "indent": 2,
+                "parameters": []
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 201,
@@ -10644,7 +10778,14 @@
                     13,
                     7,
                     2,
-                    2
+                    0
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 1,
+                "parameters": [
+                    67
                 ]
             },
             {
@@ -10664,6 +10805,86 @@
                     12,
                     "['camp_arrival','camp'].includes($gameVariables.value(31))"
                 ]
+            },
+            {
+                "code": 111,
+                "indent": 1,
+                "parameters": [
+                    12,
+                    "$gameVariables.value(31) === 'camp_arrival' && $gameMap.mapId() === 47"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_1_SceneAudio",
+                    "Prepare",
+                    "Prepare",
+                    {
+                        "bgm": "Dryland_Opening_TheWell",
+                        "bgs": "People2"
+                    }
+                ]
+            },
+            {
+                "code": 242,
+                "indent": 2,
+                "parameters": [
+                    1
+                ]
+            },
+            {
+                "code": 246,
+                "indent": 2,
+                "parameters": [
+                    1
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_1_AlphaMovie",
+                    "Play",
+                    "Play",
+                    {
+                        "movie": "reedEntranceAlpha"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 2,
+                "parameters": [
+                    "Dryland_1_AlphaMovie",
+                    "WaitUntil",
+                    "WaitUntil",
+                    {
+                        "seconds": "2.2"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 2,
+                "parameters": [
+                    1,
+                    "Dryland_Coreto",
+                    1,
+                    0,
+                    640,
+                    360,
+                    80,
+                    80,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 412,
+                "indent": 1,
+                "parameters": []
             },
             {
                 "code": 201,
@@ -11228,7 +11449,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11271,7 +11492,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11314,7 +11535,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11357,7 +11578,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11400,7 +11621,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11443,7 +11664,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11486,7 +11707,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11529,7 +11750,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11572,7 +11793,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11615,7 +11836,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11658,7 +11879,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11701,7 +11922,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11744,7 +11965,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11787,7 +12008,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11830,7 +12051,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11873,7 +12094,7 @@
                     10,
                     7,
                     2,
-                    2
+                    0
                 ]
             },
             {
@@ -11979,28 +12200,41 @@
                 ]
             },
             {
-                "code": 117,
+                "code": 111,
                 "indent": 2,
+                "parameters": [
+                    12,
+                    "$gameScreen.brightness() > 0"
+                ]
+            },
+            {
+                "code": 117,
+                "indent": 3,
                 "parameters": [
                     379
                 ]
             },
             {
                 "code": 242,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     0.4
                 ]
             },
             {
                 "code": 246,
-                "indent": 2,
+                "indent": 3,
                 "parameters": [
                     0.4
                 ]
             },
             {
                 "code": 221,
+                "indent": 3,
+                "parameters": []
+            },
+            {
+                "code": 412,
                 "indent": 2,
                 "parameters": []
             },
@@ -74750,8 +74984,16 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 111,
                 "indent": 0,
+                "parameters": [
+                    12,
+                    "!$gameScreen.picture(1) || $gameScreen.picture(1).name() !== 'Dryland_Coreto'"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_SceneAudio",
                     "Prepare",
@@ -74764,21 +75006,21 @@
             },
             {
                 "code": 242,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 246,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "Play",
@@ -74790,7 +75032,7 @@
             },
             {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "WaitUntil",
@@ -74799,6 +75041,11 @@
                         "seconds": "2.2"
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 235,
@@ -75493,8 +75740,16 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 111,
                 "indent": 0,
+                "parameters": [
+                    12,
+                    "!$gameScreen.picture(1) || $gameScreen.picture(1).name() !== 'Dryland_Coreto'"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_SceneAudio",
                     "Prepare",
@@ -75507,21 +75762,21 @@
             },
             {
                 "code": 242,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 246,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "Play",
@@ -75533,7 +75788,7 @@
             },
             {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "WaitUntil",
@@ -75542,6 +75797,11 @@
                         "seconds": "2.2"
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 235,
@@ -76236,8 +76496,16 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 111,
                 "indent": 0,
+                "parameters": [
+                    12,
+                    "!$gameScreen.picture(1) || $gameScreen.picture(1).name() !== 'Dryland_Coreto'"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_SceneAudio",
                     "Prepare",
@@ -76250,21 +76518,21 @@
             },
             {
                 "code": 242,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 246,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "Play",
@@ -76276,7 +76544,7 @@
             },
             {
                 "code": 357,
-                "indent": 0,
+                "indent": 1,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "WaitUntil",
@@ -76285,6 +76553,11 @@
                         "seconds": "2.2"
                     }
                 ]
+            },
+            {
+                "code": 412,
+                "indent": 0,
+                "parameters": []
             },
             {
                 "code": 235,
@@ -84749,6 +85022,31 @@
         "trigger": 0,
         "switchId": 1,
         "list": [
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Coreto_0_CoreEngine",
+                    "SystemLoadImages",
+                    "SystemLoadImages",
+                    {
+                        "animations:arraystr": "[]",
+                        "battlebacks1:arraystr": "[]",
+                        "battlebacks2:arraystr": "[]",
+                        "characters:arraystr": "[]",
+                        "enemies:arraystr": "[]",
+                        "faces:arraystr": "[]",
+                        "parallaxes:arraystr": "[]",
+                        "pictures:arraystr": "[\"Dryland_Path_Church\",\"Dryland_Path_Park\",\"Dryland_Path_Village\",\"Dryland_Coreto\",\"Dryland_Camp\"]",
+                        "sv_actors:arraystr": "[]",
+                        "sv_enemies:arraystr": "[]",
+                        "system:arraystr": "[]",
+                        "tilesets:arraystr": "[]",
+                        "titles1:arraystr": "[]",
+                        "titles2:arraystr": "[]"
+                    }
+                ]
+            },
             {
                 "code": 111,
                 "indent": 0,

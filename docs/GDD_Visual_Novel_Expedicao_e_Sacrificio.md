@@ -1725,8 +1725,20 @@ Momento demonstrável para devlog: após a segunda armadilha da Igreja, mostrar 
 
 ### 29.1. Passos durante o movimento do peão — 2026-11-04
 
+**Substituição parcial em 2026-11-06:** a chegada direta abaixo passa a usar a transição curta da seção 29.2 e do [GDDR-007](gddrs/gddr-007-transicoes-curtas-do-percurso.md). A remoção da caminhada longa e as demais regras desta seção permanecem vigentes.
+
 **Confirmado:** remover a caminhada no escuro antes das 16 armadilhas, incluindo passos repetidos, esperas e revelação de 1,5 segundo. Ao chegar à casa, iniciar o fluxo normal da cena, respeitando apenas o carregamento dos assets. Os passos acompanham o movimento do peão para armadilhas, fogueiras e destinos; param na chegada ou saída da cena. Movimento reduzido ou duração zero entram diretamente, sem passos. Continue não reproduz deslocamento. Preservar a conversa de abertura de cada expedição, os diálogos das armadilhas e o efeito usado dentro de B2.
 
 Esta decisão substitui somente o avanço no escuro e sua revelação nas decisões de caminhada, suspense e sincronia audiovisual de 29–30/10 acima. **Baseline de protótipo:** movimento de 650 ms, `sfx_b2_passos` com volume 80, pitch 120 e pan 0, respeitando o volume de efeitos do jogador. **Pendente:** aceite humano da sincronização e mix. Ver [incremento](../planos/tasks/pawn-movement-steps/spec.md).
 
 Momento demonstrável para devlog: gravar com áudio o peão indo da segunda armadilha à fogueira e depois chegando à próxima armadilha; os passos cessam na chegada e a cena começa sem caminhada no escuro.
+
+### 29.2. Transições curtas entre percurso e cenas — 2026-11-06
+
+**Confirmado — implementação autorizada:** suavizar as entradas nas armadilhas e os retornos ao mapa, incluindo a abertura da caminhada e a saída da fogueira, com uma transição curta para preto. Sincronizar as mudanças de áudio com a troca coberta e preservar a continuidade da música da rota quando ela não muda. Não restaurar a caminhada longa nem a revelação de 1,5 segundo. Preservar passos do peão, diálogos, vídeos do narrador, sorteio e checkpoints.
+
+**Baseline de protótipo:** 400 ms para sair e 400 ms para entrar, além do carregamento dos assets. **Pendente:** aceite humano de ritmo e áudio. Ver [GDDR-007](gddrs/gddr-007-transicoes-curtas-do-percurso.md) e [spec incremental](../planos/tasks/route-transition-polish/spec.md).
+
+**Refinamento de continuidade solicitado em 2026-11-06:** na partida da taverna, usar uma única saída e revelação do caminho, sem escurecimentos consecutivos. Ao chegar à fogueira, manter o mapa visível até a fumaça de entrada de Rheed cobrir a troca para o coreto; não interpor uma tela vazia antes do vídeo. Preservar a marca de troca e as falas existentes.
+
+Momento demonstrável para devlog: gravar com áudio caminhada inicial → mapa → armadilha → mapa e saída da fogueira → mapa, mostrando a troca coberta e a continuidade musical.
