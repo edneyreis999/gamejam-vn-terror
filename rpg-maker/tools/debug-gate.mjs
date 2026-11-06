@@ -1,13 +1,13 @@
 // Estado do plugin de Debug de QA (ADR-G007) dentro de um js/plugins.js.
 // Só o prune-build e o verify-build usam isto; o projeto-fonte nunca é reescrito por aqui.
 export const DEBUG_PLUGIN = 'Dryland_7_QADebug';
-const MARK = 'var $plugins =\n';
+const MARK = /^var \$plugins =\r?\n/m;
 
 export function parsePlugins(text) {
-  const at = text.indexOf(MARK);
-  if (at < 0) throw new Error('js/plugins.js não tem o formato "var $plugins =".');
-  const head = text.slice(0, at + MARK.length);
-  const body = text.slice(at + MARK.length);
+  const mark = MARK.exec(text);
+  if (!mark) throw new Error('js/plugins.js não tem o formato "var $plugins =".');
+  const head = text.slice(0, mark.index + mark[0].length);
+  const body = text.slice(mark.index + mark[0].length);
   return { head, plugins: JSON.parse(body.slice(0, body.lastIndexOf(']') + 1)), tail: body.slice(body.lastIndexOf(']') + 1) };
 }
 
