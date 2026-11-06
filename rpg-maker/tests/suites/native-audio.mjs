@@ -49,7 +49,7 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.folder==="bgm/"&&x.buffer.isPlaying()).length'),1);
  assert.equal(await browser.evaluate('audioBuffers.filter(x=>x.name==="Applause1").length'),1);
  observations.push({kind:'authored-temporal-opening',welcome,past:await browser.evaluate('({music:AudioManager._currentBgm,ambience:AudioManager._currentBgs})')});
- for(const [route,name,music]of [['physical','Drips','Dryland_Church_Danger'],['supernatural','Wind1','Dryland_Park_ValleyOfGhosts'],['final','Darkness','Dryland_Village_Combined']]){
+ for(const [route,name,music]of [['physical','Night','Dryland_Church_Danger'],['supernatural','Wind1','Dryland_Park_ValleyOfGhosts'],['final','Darkness','Dryland_Village_Combined']]){
   // Valid prepared route states exercise the installed native audio event.
   let prepared=fixtures.encounter_intro;
   if(route!=='physical'){
@@ -112,7 +112,7 @@ canonicalCase('IT-029','native ambience replacement and ending themes decode wit
  await installPhase(browser,fixtures.encounter_choice);await choices(browser,'approaches');const before=await state(browser);
  await activate(browser,'approaches',3);await pause(browser);await readUntilChoices(browser,'approaches');assert.deepEqual(await state(browser),before);
  assert.equal(await browser.evaluate('AudioManager._bgsBuffer.volume'),0);
- assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness'].map(k=>[k,true])));
+ assert.deepEqual(await browser.evaluate('Object.fromEntries([...new Set(audioBuffers.filter(x=>["bgs/","me/"].includes(x.folder)).map(x=>x.folder+x.name))].map(k=>[k,true]))'),Object.fromEntries(['bgs/People2','bgs/People1','bgs/Drips','bgs/Wind1','bgs/Darkness','bgs/05-opressivo','bgs/Night'].map(k=>[k,true])));
  const effects=await browser.evaluate('[...new Set([...$dataCommonEvents.filter(Boolean).flatMap(e=>e.list.filter(c=>c.code===250).map(c=>c.parameters[0].name)),...[0,1,2,3,5,6].map(i=>$dataSystem.sounds[i].name)])].sort()');
  assert.deepEqual(effects,['Buzzer1','Cancel2','Cursor3','Decision2','Door1','Item3','Load2','Save2','Water1',
   'sfx_a1_fecho','sfx_a1_garrafas','sfx_a1_janela','sfx_a2_impacto','sfx_a2_pressao','sfx_a2_queda','sfx_a3_chao','sfx_a3_golpe_pilao','sfx_a3_parafuso_trilho','sfx_a4_barras','sfx_a4_fecho','sfx_a5_cano','sfx_a5_chamas','sfx_a5_fogo','sfx_a6_madeira','sfx_a6_raizes','sfx_a7_ganchos','sfx_a7_prensa','sfx_a8_desabamento','sfx_a8_telhas','sfx_b1_assobio','sfx_b2_passos','sfx_b2_velas','sfx_b4_fecho','sfx_b4_raizes','sfx_b5_selo','sfx_b5_vidro','sfx_b7_rasgo','sfx_b7_tecido','sfx_b8_boca','sfx_b8_portas'].sort());

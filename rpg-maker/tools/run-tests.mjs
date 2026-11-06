@@ -69,7 +69,7 @@ async function main(){
   const job={id,status:'running',startMs:performance.now()-start,browserDemand:groups.slow.includes(id)?1:0};jobs.push(job);active++;workerPeak=Math.max(workerPeak,active);record('job-start',{id,active});
   const cwd=path.join(output,id);await mkdir(cwd);await mkdir(path.join(cwd,'tmp'));await symlink(path.join(root,'rpg-maker'),path.join(cwd,'rpg-maker'),process.platform==='win32'?'junction':'dir');
   const args=['--test','--test-concurrency=1','--test-reporter=tap',`--test-name-pattern=^${id} —`,path.join(root,'rpg-maker/tests/campaign.test.mjs')];
-  const child=spawn(process.execPath,args,{cwd,detached:true,env:{...process.env,TMPDIR:path.join(cwd,'tmp'),DRYLAND_QA_PORT:'0',DRYLAND_QA_PROJECT:testProject,DRYLAND_BROWSER_BROKER:brokerUrl,DRYLAND_JOB_ID:id,DRYLAND_QA_RUNTIME:values.runtime},stdio:['ignore','pipe','pipe']});children.add(child);job.pid=child.pid;record('job-spawn',{id,pid:child.pid});
+  const child=spawn(process.execPath,args,{cwd,detached:process.platform!=='win32',windowsHide:true,env:{...process.env,TMPDIR:path.join(cwd,'tmp'),DRYLAND_QA_PORT:'0',DRYLAND_QA_PROJECT:testProject,DRYLAND_BROWSER_BROKER:brokerUrl,DRYLAND_JOB_ID:id,DRYLAND_QA_RUNTIME:values.runtime},stdio:['ignore','pipe','pipe']});children.add(child);job.pid=child.pid;record('job-spawn',{id,pid:child.pid});
   let stdout='',stderr='';child.stdout.on('data',x=>{stdout+=x;appendFileSync(path.join(cwd,'stdout.tap'),x);});child.stderr.on('data',x=>{stderr+=x;appendFileSync(path.join(cwd,'stderr.log'),x);});
   const code=await new Promise(resolve=>{child.on('error',e=>{stderr+=e.stack;resolve(1);});child.on('close',(code,signal)=>{job.signal=signal;resolve(code);});});children.delete(child);
   job.exitCode=code;job.status=code===0?'pass':'fail';
