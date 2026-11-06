@@ -2520,6 +2520,21 @@
               ]
             },
             {
+              "code": 234,
+              "indent": 1,
+              "parameters": [
+                1,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                false
+              ]
+            },
+            {
               "code": 117,
               "indent": 1,
               "parameters": [
@@ -2644,7 +2659,7 @@
               "indent": 0,
               "parameters": [
                 1,
-                "Dryland_EndingTotalLoss",
+                "Dryland_Memorial",
                 1,
                 0,
                 640,
@@ -2654,6 +2669,66 @@
                 255,
                 0
               ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "Dryland_Presentation",
+                "MotionPreference",
+                "MotionPreference",
+                {
+                  "variable": "47"
+                }
+              ]
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
+                "$gameVariables.value(47)"
+              ]
+            },
+            {
+              "code": 234,
+              "indent": 1,
+              "parameters": [
+                1,
+                [
+                  -65,
+                  -65,
+                  -55,
+                  45
+                ],
+                0,
+                false
+              ]
+            },
+            {
+              "code": 411,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 234,
+              "indent": 1,
+              "parameters": [
+                1,
+                [
+                  -65,
+                  -65,
+                  -55,
+                  45
+                ],
+                60,
+                false
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
             },
             {
               "code": 111,

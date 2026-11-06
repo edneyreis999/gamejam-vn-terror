@@ -5313,6 +5313,26 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) === 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [

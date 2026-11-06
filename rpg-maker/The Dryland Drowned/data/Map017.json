@@ -2581,7 +2581,7 @@
                             "indent": 0,
                             "parameters": [
                                 12,
-                                "$gameVariables.value(31) !== 'encounter_intro' && $gameVariables.value(31) !== 'encounter_choice' && $gameVariables.value(21) !== 'reread'"
+                                "$gameVariables.value(31) !== 'encounter_intro' && $gameVariables.value(21) !== 'reread'"
                             ]
                         },
                         {
@@ -3732,18 +3732,6 @@
                             "parameters": [
                                 12,
                                 "$gameVariables.value(24) === 'ok'"
-                            ]
-                        },
-                        {
-                            "code": 245,
-                            "indent": 2,
-                            "parameters": [
-                                {
-                                    "name": "",
-                                    "volume": 90,
-                                    "pitch": 100,
-                                    "pan": 0
-                                }
                             ]
                         },
                         {
@@ -5307,6 +5295,26 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) === 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
@@ -5770,17 +5778,8 @@
                             ]
                         },
                         {
-                            "code": 111,
-                            "indent": 0,
-                            "parameters": [
-                                0,
-                                61,
-                                0
-                            ]
-                        },
-                        {
                             "code": 245,
-                            "indent": 1,
+                            "indent": 0,
                             "parameters": [
                                 {
                                     "name": "Dryland_B3_Fogo_Suave",
@@ -5788,6 +5787,15 @@
                                     "pitch": 100,
                                     "pan": 0
                                 }
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                0,
+                                61,
+                                0
                             ]
                         },
                         {
@@ -5812,18 +5820,6 @@
                             "code": 411,
                             "indent": 0,
                             "parameters": []
-                        },
-                        {
-                            "code": 245,
-                            "indent": 1,
-                            "parameters": [
-                                {
-                                    "name": "Dryland_B3_Fogo_Suave",
-                                    "volume": 75,
-                                    "pitch": 100,
-                                    "pan": 0
-                                }
-                            ]
                         },
                         {
                             "code": 101,
@@ -6110,6 +6106,18 @@
                                 "ReadingEnd",
                                 "ReadingEnd",
                                 {}
+                            ]
+                        },
+                        {
+                            "code": 245,
+                            "indent": 0,
+                            "parameters": [
+                                {
+                                    "name": "",
+                                    "volume": 90,
+                                    "pitch": 100,
+                                    "pan": 0
+                                }
                             ]
                         },
                         {

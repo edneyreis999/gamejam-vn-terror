@@ -4,6 +4,8 @@ Run from the repository root with Node, Python 3 and Google Chrome installed. `D
 
 On Windows, the server probes `python` and launches the returned executable, avoiding the Microsoft Store `python3` alias. Set `DRYLAND_PYTHON` to an installed Python 3 executable when needed. Canonical tests use an ephemeral port by default on Windows; `DRYLAND_QA_PORT` remains an explicit override. Chrome uses ANGLE D3D11 on Windows and Metal on macOS, with `DRYLAND_QA_ANGLE` available for a qualified override. Temporary Windows fixtures use junctions, and browser shutdown waits for normal Chrome exit before removing its profile.
 
+When the Python executable path contains accents, set `PYTHONIOENCODING=utf-8` so its probe returns a path Node can read. Canonical Windows jobs run hidden without detached consoles; cleanup still tracks their owned descendants. Detached consoles caused the test worker to exit with code `3221225786` after Chrome startup on the qualified Windows host.
+
 ```sh
 node rpg-maker/tools/prepare-qa-runtime.mjs
 node rpg-maker/tools/run-verification.mjs --scope all --output .artifacts/verification-current

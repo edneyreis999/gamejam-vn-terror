@@ -16704,8 +16704,8 @@
                     0,
                     640,
                     360,
-                    83.33333333333333,
-                    83.33333333333333,
+                    76.55502392344498,
+                    76.55502392344498,
                     255,
                     0
                 ]
@@ -16733,8 +16733,8 @@
                     0,
                     640,
                     360,
-                    83.33333333333333,
-                    83.33333333333333,
+                    76.55502392344498,
+                    76.55502392344498,
                     255,
                     0
                 ]
@@ -25728,19 +25728,14 @@
                 "indent": 0,
                 "parameters": [
                     12,
-                    "['sacrifice_choice','death_result'].includes($gameVariables.value(31))"
+                    "($gameVariables.value(31) === 'encounter_choice' && $gameVariables.value(21) !== 'reread') || ($gameVariables.value(31) === 'approach_result' && $gameVariables.value(56).includes('.failure.')) || $gameVariables.value(31) === 'sacrifice_choice'"
                 ]
             },
             {
-                "code": 241,
+                "code": 242,
                 "indent": 1,
                 "parameters": [
-                    {
-                        "name": "",
-                        "volume": 0,
-                        "pitch": 100,
-                        "pan": 0
-                    }
+                    2
                 ]
             },
             {
@@ -25749,7 +25744,7 @@
                 "parameters": [
                     {
                         "name": "05-opressivo",
-                        "volume": 50,
+                        "volume": 100,
                         "pitch": 100,
                         "pan": 0
                     }

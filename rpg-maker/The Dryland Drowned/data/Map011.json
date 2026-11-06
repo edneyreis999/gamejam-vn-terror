@@ -5295,6 +5295,26 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) === 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
@@ -5763,7 +5783,7 @@
                             "parameters": [
                                 {
                                     "name": "Dryland_A5_Correntes",
-                                    "volume": 90,
+                                    "volume": 70,
                                     "pitch": 100,
                                     "pan": 0
                                 }
@@ -6073,18 +6093,6 @@
                                 "ReadingEnd",
                                 "ReadingEnd",
                                 {}
-                            ]
-                        },
-                        {
-                            "code": 245,
-                            "indent": 0,
-                            "parameters": [
-                                {
-                                    "name": "",
-                                    "volume": 90,
-                                    "pitch": 100,
-                                    "pan": 0
-                                }
                             ]
                         },
                         {
