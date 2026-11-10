@@ -1,5 +1,7 @@
 # Registros de decisões de game design
 
+- [GDDR-007 — Transições curtas do percurso](gddr-007-transicoes-curtas-do-percurso.md) — Entradas nas armadilhas e retornos ao mapa. Estado: Accepted; decisão: 2026-11-06; substitui parcialmente a chegada direta do GDD §29.1.
+
 - [GDDR-001 — Fogueiras e ritmo da expedição](gddr-001-fogueiras-e-ritmo-da-expedicao.md) — Cadência, pausas e recuo. Estado: Partially superseded; decisão: 2026-10-16; elegibilidade substituída pelo [GDDR-005](gddr-005-recuo-na-fogueira-com-qualquer-grupo.md).
 - [GDDR-002 — Conversas autorais e vínculos dos heróis](gddr-002-conversas-e-vinculos-dos-herois.md) — Conteúdo, participantes e leitura opcional. Estado: Accepted; decisão: 2026-10-16; sem substituição.
 - [GDDR-003 — Reconhecimento das perdas na fogueira e na taverna](gddr-003-reconhecimento-das-perdas.md) — Narração, ausência e luto. Estado: Partially superseded; decisão: 2026-10-16; memória, efeito e reações substituídos pelo [GDDR-006](gddr-006-memoria-das-perdas-entre-expedicoes.md).
