@@ -5295,6 +5295,26 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(21) === 'reread'"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 357,
                             "indent": 0,
                             "parameters": [
@@ -5577,11 +5597,11 @@
                             ]
                         },
                         {
-                            "code": 250,
+                            "code": 245,
                             "indent": 0,
                             "parameters": [
                                 {
-                                    "name": "sfx_a1_garrafas",
+                                    "name": "Dryland_A1_Garrafas_Loop",
                                     "volume": 45,
                                     "pitch": 100,
                                     "pan": 0
