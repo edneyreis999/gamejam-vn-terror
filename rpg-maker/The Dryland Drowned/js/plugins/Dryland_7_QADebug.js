@@ -195,7 +195,7 @@
     play.send({ type: 'BEGIN', seed });
     play.finishReading();
     return {
-      seed, label: 'introduction', actions: play.sent,
+      seed, label: 'introduction', pilot: true, actions: play.sent,
       landing: { map: 37, checkpoint: null, pilot: 'introduction' },
       expect: state => state.phase === 'formation' && !state.reading
     };
@@ -211,13 +211,40 @@
       !state.deadHeroIds.length && !state.completedSocialUnitIds.length;
     for (let step = 0; step < 64; step++) {
       if (expect(play.state())) return {
-        seed, label: 'camp', actions: play.sent,
+        seed, label: 'camp', pilot: true, actions: play.sent,
         landing: { map: 37, checkpoint: null, pilot: 'camp' }, expect
       };
       if (play.state().phase === 'camp' || play.state().phase === 'sacrifice_choice') break;
       play.send(nextAction(rules, catalog, play.state(), { wins: true }));
     }
     throw new Error('No living-party preparation reached the first church camp');
+  }
+
+  function planGrief() {
+    const { rules, catalog } = getEngine();
+    const seed = 1;
+    const play = toDoorstep(seed, 'physical', ['H1', 'H5', 'H2']);
+    const expect = state => state.phase === 'camp_arrival' &&
+      state.dungeonId === 'physical' && state.routeCursor === 3 &&
+      state.reading && state.reading.index === 0 && !state.activeSocialTopicId &&
+      state.partyIds.includes('H1') && state.deadHeroIds.length === 1 &&
+      state.deadHeroIds.includes('H5') && !state.completedSocialUnitIds.length &&
+      rules.pendingGrief(state).includes('grief.h1.h5');
+    for (let step = 0; step < 64; step++) {
+      const state = play.state();
+      if (expect(state)) return {
+        seed, label: 'grief', pilot: true, actions: play.sent,
+        landing: { map: 45, checkpoint: 'camp_entry' }, expect
+      };
+      if (state.phase === 'camp_arrival') break;
+      if (state.phase === 'sacrifice_choice') {
+        if (state.deadHeroIds.length) break;
+        play.send({ type: 'SELECT_VICTIM', heroId: 'H5' });
+      } else {
+        play.send(nextAction(rules, catalog, state, { wins: state.deadHeroIds.includes('H5') }));
+      }
+    }
+    throw new Error('No legal loss preparation reached the first church camp');
   }
 
   // ---------------------------------------------------------------------------
@@ -253,8 +280,8 @@
     if (plan.landing.pilot) {
       // A one-shot presentation request; campaign facts still come only from replay.
       $gameTemp._drylandPilotEntry = plan.landing.pilot;
-      $gameTemp._drylandPilotScenario = plan.label;
     }
+    if (plan.pilot) $gameTemp._drylandPilotScenario = plan.label;
     $gamePlayer.reserveTransfer(plan.landing.map, 10, 7, 2, 0);
     // The game's own checkpoint router saves the point the last action reached.
     if (plan.landing.checkpoint) {
@@ -397,8 +424,9 @@
     this._pilotWindow = this.addList(rect, [
       { name: text('debug.pilot.introduction'), symbol: 'introduction' },
       { name: text('debug.pilot.camp'), symbol: 'camp' },
+      { name: text('debug.pilot.grief'), symbol: 'grief' },
       { name: text('debug.back'), symbol: 'cancel' }
-    ], { introduction: this.askIntroduction, camp: this.askCamp, cancel: this.closeLists });
+    ], { introduction: this.askIntroduction, camp: this.askCamp, grief: this.askGrief, cancel: this.closeLists });
     this._confirmWindow = this.addList(new Rectangle(0, helpHeight, Graphics.boxWidth, this.calcWindowHeight(2, true)), [
       { name: text('debug.confirm'), symbol: 'yes' }, { name: text('debug.cancel'), symbol: 'no' }
     ], { yes: this.runJump, no: this.cancelConfirm });
@@ -447,6 +475,9 @@
   };
   Scene_DrylandDebug.prototype.askCamp = function() {
     this.ask(planCamp);
+  };
+  Scene_DrylandDebug.prototype.askGrief = function() {
+    this.ask(planGrief);
   };
   Scene_DrylandDebug.prototype.toggleHint = function() {
     setHint(!hintOn());
