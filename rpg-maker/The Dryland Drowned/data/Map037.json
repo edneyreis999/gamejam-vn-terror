@@ -2753,6 +2753,61 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameTemp._drylandPilotEntry === \"introduction\" && $gameVariables.value(31) === \"formation\""
+                            ]
+                        },
+                        {
+                            "code": 355,
+                            "indent": 1,
+                            "parameters": [
+                                "delete $gameTemp._drylandPilotEntry;"
+                            ]
+                        },
+                        {
+                            "code": 122,
+                            "indent": 1,
+                            "parameters": [
+                                216,
+                                216,
+                                0,
+                                4,
+                                "\"tavern\""
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "ConsumeInput",
+                                "ConsumeInput",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 119,
+                            "indent": 1,
+                            "parameters": [
+                                "pilot.introduction"
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 118,
                             "indent": 0,
                             "parameters": [
@@ -7701,6 +7756,13 @@
                             ]
                         },
                         {
+                            "code": 118,
+                            "indent": 1,
+                            "parameters": [
+                                "pilot.introduction"
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 1,
                             "parameters": [
@@ -7869,7 +7931,7 @@
                                 }
                             ]
                         },
-                        {
+                        {"code":357,"indent":1,"parameters":["Coreto_2_VNPictureBusts","Fidgeting_Enable","FIDGETING: Start",{"PictureID:arrayeval":"[\"60\"]","SpeedX:eval":"30","SpeedY:eval":"30","RateX:eval":"$gameVariables.value(47) ? 0 : 5.00","RateY:eval":"0.00"}]},{"code":657,"indent":1,"parameters":["Picture ID(s) = [\"60\"]"]},{"code":657,"indent":1,"parameters":["Speed X = 30"]},{"code":657,"indent":1,"parameters":["Speed Y = 30"]},{"code":657,"indent":1,"parameters":["Distance X = $gameVariables.value(47) ? 0 : 5.00"]},{"code":657,"indent":1,"parameters":["Distance Y = 0.00"]},{
                             "code": 117,
                             "indent": 1,
                             "parameters": [
@@ -8054,6 +8116,24 @@
                             ]
                         },
                         {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Gorvak"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.sora]"
+                            ]
+                        },
+                        {"code":357,"indent":1,"parameters":["Coreto_2_VNPictureBusts","Fidgeting_Disable","FIDGETING: Stop",{"PictureID:arrayeval":"[\"60\"]"}]},{"code":657,"indent":1,"parameters":["Picture ID(s) = [\"60\"]"]},{
                             "code": 111,
                             "indent": 1,
                             "parameters": [
@@ -8209,7 +8289,325 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "$[conv.ivai.help]"
+                                "$[conv.gorvak.ivai_return]"
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                351
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Gorvak"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.note]"
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                351
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Ivaí"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.ivai_help]"
                             ]
                         },
                         {
@@ -8388,6 +8786,165 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                351
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Ivaí"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.ivai_limit]"
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "50",
                                     "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
@@ -8528,24 +9085,6 @@
                             "indent": 1,
                             "parameters": [
                                 "$[conv.gorvak.help2]"
-                            ]
-                        },
-                        {
-                            "code": 101,
-                            "indent": 1,
-                            "parameters": [
-                                "",
-                                0,
-                                0,
-                                2,
-                                "Gorvak"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "$[conv.gorvak.note]"
                             ]
                         },
                         {
