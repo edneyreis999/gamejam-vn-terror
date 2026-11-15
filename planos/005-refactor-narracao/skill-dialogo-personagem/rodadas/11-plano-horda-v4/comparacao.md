@@ -1,0 +1,19 @@
+# Comparação — v4, Lala apresenta o plano a Dam, segunda tentativa
+
+Autor novo `/root/autor11`, com `fork_turns=none`. Recebeu somente `skill.md`, `../fichas-lala-dam-v2.md` e `respostas.md`; não recebeu o original, a tentativa 10 ou sua avaliação. As respostas incluem as perguntas já respondidas e o complemento sobre estado e táticas. O autor não fez novas perguntas. Comparação posterior a `DIÁLOGO PRONTO`, contra o capítulo 04 completo.
+
+| Critério | Comparação |
+| --- | --- |
+| Voz | **Equivalente.** Lala trata a participação de Dam como resolvida, interrompe objeções, se ofende quando sua competência é questionada e devolve provocações. “Não achei necessário entrar no refeitório embrulhada pra você entender” liga sua impaciência ao problema concreto. Dam combina reservas reais, exagero e ironia; “Tecnicamente, isso me dá um lugar pra dormir” rebate a presunção de que morar no orfanato basta para conhecer o trabalho de identificação. As vozes não dependem de copiar os bordões do alvo. |
+| Naturalidade e clareza | **Equivalente ou melhor.** A explicação se desenvolve por objeções compreensíveis, com réplicas que aproveitam o vocabulário e a ação anterior. “Eu consigo falar com firmeza. Não vou” converte uma instrução de Lala em recusa de Dam. As retomadas de confiança e dúvida acompanham problemas diferentes: entrada, bagagem, escolta, magia e preparativos. A versão é mais longa, mas a maior parte da expansão produz interação, não apenas informação repetida. |
+| Progressão e continuidade | **Equivalente.** Estão presentes os motivos para ajudar os amigos, o tenente e sua sala ainda desconhecida, disfarce de inspetor de Cetra, trouxa, escolta, pretexto do cajado, saída de Dam, runa, catalisadores, identificação e tecido pendentes. A reunião fica para o amanhecer diante do coreto. Lala sai confiante sem obter um sim inequívoco. O que fará para garantir a aprovação dos amigos continua sem solução estabelecida; nem a narração garante o funcionamento do plano. |
+| Subtexto e relação | **Equivalente.** O humor nasce do descompasso entre os dois e da intimidade antiga, enquanto as reservas de Dam conservam o cuidado com os amigos. A runa provoca uma pausa de dor familiar: Lala baixa a voz, ele deixa de marcar o livro e escuta. Ela então retoma a iniciativa. Dam permanece resistente; Lala transforma até o protesto final numa confirmação que lhe convém. A relação não se resolve numa negociação equilibrada nem num rompimento. |
+| Detalhes relevantes | **Equivalente ou maior.** Mármore verde luminoso, árvore gravada, marcas no braço e tecido ausente preservam a materialidade do plano. O livro estrutura a ação: a leitura é interrompida, o dedo marca a página, sai dela ao ouvir sobre a mãe, e no final Dam perdeu seu lugar. Esse pequeno custo do envolvimento fecha a cena sem executar os preparativos. |
+
+**Veredito: APROVADA.** No conjunto dos cinco critérios, a recriação ficou em nível equivalente ao recorte de referência, com ganhos locais de interação e encenação. Isso é um julgamento editorial desta cena, não uma comprovação objetiva de superioridade em qualquer diálogo.
+
+## Liberdade preservada e limite da avaliação
+
+A piada numérica do original, seu insulto específico e os gestos exatos não eram acontecimentos obrigatórios. O final com a página perdida oferece outro fechamento para o mesmo contraste. O espanto de Dam diante da runa é menos exuberante que no original, mas a surpresa com o objeto que restou e a revelação familiar continuam legíveis; não há perda material da função do trecho.
+
+A skill não mudou entre as tentativas 10 e 11. O ajuste foi de entrada: estado atual, táticas e duas amostras de voz de outra cena. Não foi necessário acrescentar perguntas, diretrizes ou template, nem repetir os casos anteriores para uma versão nova inexistente. O pacote continua com oito perguntas, dois passos e 310 palavras, incluindo metadados.

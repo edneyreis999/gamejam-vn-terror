@@ -1,0 +1,50 @@
+# Entrevista — Lala e Dam, v4
+
+Autor novo: `/root/autor10`, `fork_turns=none`. Entradas: `skill.md` e `../fichas-lala-dam.md`. Pedido inicial: escrever diálogo entre os dois, usando a skill para obter as informações faltantes. Nenhum acesso autorizado a livro, comparações ou tentativas anteriores. As respostas abaixo foram enviadas antes da escrita.
+
+## Perguntas recebidas
+
+1. Onde Lala e Dam estão, e o que acabou de acontecer?
+2. O que cada um quer do outro nessa conversa? Qual é o principal obstáculo?
+3. Que acontecimentos anteriores precisam pesar nas reações? Há algo que um deles esconde ou que só o leitor sabe?
+4. Como a cena deve terminar? Quais fatos são obrigatórios e o que posso inventar?
+
+## Respostas enviadas
+
+1. Estão junto da mesa do refeitório da Liberdade Áurea, logo depois de Ghork e Drull saírem para a última aula de campo antes da Prova de Fogo. Dam continua sentado, lendo um livro; Lala quer sua atenção. O assunto e o título desse livro não estão estabelecidos. A conversa é entre os dois; o ambiente pode continuar presente sem terceiros com falas próprias. Lala vem animada com uma ideia que considera segura; Dam chega preocupado com os amigos e pouco disposto a interromper a leitura para outra proposta dela. Não há guardas ameaçando os dois nesse momento.
+
+2. Lala quer que Dam participe de uma entrada clandestina no Complexo da Horda no dia seguinte, para ajudar Ghork e Drull a passar na Prova de Fogo. Drull não sabe escrever e deve ter dificuldade no exame escrito; Ghork corre risco na parte prática. Eraste acaba de ameaçar Ghork, e Drull talvez não esteja por perto para defendê-lo durante a prova. Lala conhece o tenente elfo que elaborou o exame escrito, mas ainda precisa descobrir onde fica a sala dele. Dam quer impedir uma enrascada e manter os amigos seguros. A entrada é restrita aos participantes da prova; ele não tem autorização legítima para entrar. Conhece Lala desde criança, lembra que suas certezas não impedem os planos de falhar e contesta a proposta. Lala conduz, explica e distribui tarefas, tratando a participação dele como certa apesar das objeções. Dam questiona a viabilidade e a falta de preparo, sem passar a admirador entusiasmado do plano.
+
+3. O leitor e os dois conhecem a recente ameaça a Ghork e as dificuldades dos amigos com a prova. Ghork e Drull não participam desta conversa; Lala havia alegado que iria à primeira aula de manipulação de mana com uma professora nova. O problema familiar de Lala aparece por causa de um objeto que ela mostra: uma runa de mármore verde luminoso, com um símbolo semelhante ao tronco e aos galhos secos de uma árvore. Ela conta com essa runa para ficar invisível e circular sem ser vista. Dam se surpreende ao vê-la, pois achava que o pai de Lala havia vendido tudo. Ela lhe revela em voz baixa que escondeu alguns objetos debaixo da cama depois de o pai vender o colar de casamento da mãe. É uma revelação breve e dolorosa no meio da confiança dela. Lala possui três catalisadores, visíveis como marcas no braço esquerdo, e acredita que isso, junto da runa, a habilita a canalizar a magia. Dam considera que ela ainda é iniciante e põe em dúvida o preparo. A confiança de Lala não é confirmação do narrador de que ela domina a técnica. Não há demonstração de magia nesta cena nem outro segredo que precise ser inventado.
+
+4. A logística que Lala precisa comunicar é esta: Dam se passaria por um inspetor enviado de Cetra, com roupa e comportamento compatíveis, levando Lala escondida numa trouxa de tecido. Drull seria o carregador preferido, mas já estará dentro do Complexo como participante. Depois de passar pela entrada, Dam pediria a soldados que o conduzissem até perto do local da prova. Lá, alegaria ter esquecido o cajado necessário a seu papel de mago e voltaria para buscá-lo. Antes de sair, deixaria a bagagem num canto, com cuidado para não jogar Lala no chão. Os mesmos soldados o acompanhariam à saída; depois ele iria embora e ela seguiria por conta própria usando a runa. Esse é o plano proposto, ainda sujeito às falhas apontadas por Dam, não uma execução bem-sucedida narrada antecipadamente.
+
+Também ficam pendentes uma identificação falsa de inspetor de Cetra e a própria trouxa. Lala encarrega Dam de ambas: o Um Só Coração confecciona identificações da Áurea, da Horda e do Conselho, e ela presume que ele conhece o processo. Ele questiona essa presunção e nota a ausência até do tecido. Não detalhar técnicas de confecção nem estabelecer que os preparativos já estão prontos. O combinado imposto por Lala é encontrarem-se ao nascer do sol do dia seguinte, em frente ao coreto, para acertar os demais detalhes. Ela vai embora convencida; Dam fica com as tarefas atribuídas e suas reservas, sem ter dado um sim inequívoco. O contraste entre a confiança dela e a experiência dele com seus planos encerra a cena.
+
+São livres as palavras, os gestos, o ritmo, a ordem de apresentação dos detalhes e pequenos elementos do ambiente. Preserve os fatos acima e a relação; não precisa reproduzir uma sequência de réplicas. A cena inclui a narração que você considerar necessária e termina antes dos preparativos do dia seguinte, sem resolver o paradeiro da sala, o domínio da magia ou o sucesso da entrada. Se houver outra lacuna que altere esses fatos, pergunte.
+
+## Pergunta complementar recebida
+
+> Falta definir o que Lala pretende fazer depois de entrar: qual é a ajuda concreta a Drull no exame escrito e a Ghork na prova prática? Ela já tem essas ações em mente ou essa parte do plano deve continuar sem resposta, inclusive diante das perguntas de Dam?
+
+## Resposta complementar enviada
+
+Essa parte permanece sem um procedimento definido na cena. O que Lala efetivamente apresenta é chegar ao tenente elfo que preparou a prova escrita, encontrando antes a sala dele, e estar por perto para ajudar Ghork diante do risco de Eraste. Não há uma ação concreta estabelecida para obter respostas da prova, ensiná-las a Drull ou superar por ele o teste escrito; tampouco um método para garantir a aprovação prática de Ghork. Ela acredita que sua presença e o acesso ao tenente ajudarão, mas não explica o passo seguinte. Não dá para afirmar se tem em mente algo que ainda não contou.
+
+Pode manter a lacuna, inclusive se Dam a perceber. Lala pode adiar detalhes ou insistir no acesso que pretende conseguir, sem que o narrador confirme uma solução. Não acrescente roubo de gabarito, acordo com o tenente, suborno, troca de provas ou magia para garantir a aprovação. A proposta de entrada e saída continua concreta como informada; o que ela fará depois de chegar ao destino não ganha uma solução nova nesta conversa.
+
+## Sanitização e consolidação
+
+| Pergunta sanitizada | Cobertura na skill v4 |
+| --- | --- |
+| Onde estão e o que acaba de acontecer? | Lugar e momento anterior. |
+| O que cada um quer e o que dificulta? | Objetivos e obstáculos. |
+| Que passado pesa nas reações e quem sabe o quê? | Estado de chegada, continuidade e conhecimento. |
+| Como termina, o que é fixo e o que pode ser criado? | Saída e margem de invenção. |
+| Que ações concretas sustentam o objetivo e o que continua indefinido? | Como cada um tenta obter o que quer; fatos fixos e margem de invenção; confirmar fatos dependentes do solicitante. |
+
+A pergunta complementar distingue informação faltante de plano incompleto na própria história. Foi respondida como limite factual deste caso. A v4 já levou o autor a buscar essa confirmação; não acrescentamos uma pergunta redundante ou uma instrução específica sobre planos de invasão. Todas as perguntas foram respondidas. A decisão sobre eventual ajuste editorial fica para depois da entrega.
+
+## Proveniência — somente coordenador
+
+Capítulo 03: refeitório, ameaça de Eraste, receio dos amigos, partida de Ghork e Drull para a aula. Capítulo 04: proposta completa, logística, runa, revelação familiar e encerramento. Capítulo 10 consultado após a pergunta complementar: a procura pela sala continua sem estabelecer, no recorte de planejamento, um procedimento de aprovação. Eventos e resultados posteriores não foram enviados ao autor. O encontro no coreto é futuro; não foi adotada a localização atribuída incorretamente pelas fichas de origem.
