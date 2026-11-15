@@ -201,6 +201,25 @@
     };
   }
 
+  function planCamp() {
+    const { rules, catalog } = getEngine();
+    const seed = 1;
+    const play = toDoorstep(seed, 'physical', ['H1', 'H5', 'H2']);
+    const expect = state => state.phase === 'camp' && !state.reading && !state.activeSocialTopicId &&
+      rules.campTopic(state, 'H1') === 'camp.h1.church.a' &&
+      ['H1', 'H5'].every(id => state.partyIds.includes(id)) &&
+      !state.deadHeroIds.length && !state.completedSocialUnitIds.length;
+    for (let step = 0; step < 64; step++) {
+      if (expect(play.state())) return {
+        seed, label: 'camp', actions: play.sent,
+        landing: { map: 37, checkpoint: null, pilot: 'camp' }, expect
+      };
+      if (play.state().phase === 'camp' || play.state().phase === 'sacrifice_choice') break;
+      play.send(nextAction(rules, catalog, play.state(), { wins: true }));
+    }
+    throw new Error('No living-party preparation reached the first church camp');
+  }
+
   // ---------------------------------------------------------------------------
   // Applying a plan through the EventBridge command path (what events use).
   // ---------------------------------------------------------------------------
@@ -377,8 +396,9 @@
     this._scenarioWindow.setHandler('cancel', this.closeLists.bind(this));
     this._pilotWindow = this.addList(rect, [
       { name: text('debug.pilot.introduction'), symbol: 'introduction' },
+      { name: text('debug.pilot.camp'), symbol: 'camp' },
       { name: text('debug.back'), symbol: 'cancel' }
-    ], { introduction: this.askIntroduction, cancel: this.closeLists });
+    ], { introduction: this.askIntroduction, camp: this.askCamp, cancel: this.closeLists });
     this._confirmWindow = this.addList(new Rectangle(0, helpHeight, Graphics.boxWidth, this.calcWindowHeight(2, true)), [
       { name: text('debug.confirm'), symbol: 'yes' }, { name: text('debug.cancel'), symbol: 'no' }
     ], { yes: this.runJump, no: this.cancelConfirm });
@@ -424,6 +444,9 @@
   };
   Scene_DrylandDebug.prototype.askIntroduction = function() {
     this.ask(planIntroduction);
+  };
+  Scene_DrylandDebug.prototype.askCamp = function() {
+    this.ask(planCamp);
   };
   Scene_DrylandDebug.prototype.toggleHint = function() {
     setHint(!hintOn());

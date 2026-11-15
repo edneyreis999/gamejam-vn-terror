@@ -475,11 +475,12 @@ ui.medallion.restore	Restore the medallion	Reunir o medalhão
 ui.medallion.destroy	Destroy the medallion	Destruir o medalhão
 ui.medallion.restore.description	Free the lovers and sacrifice Ivaí	Libertar os amantes e sacrificar Ivaí
 ui.medallion.destroy.description	Save Ivaí and surrender the lovers to Andirá	Salvar Ivaí e entregar os amantes a Andirá
-camp.h1.church.a.01	Every time I think about the church, my mind wanders back to the shop. Day one of the rebuild. Ain't even got the coin yet, and I'm already figuring out where the anvil goes.	Quando penso em chegar à igreja, acabo pensando na minha oficina. No primeiro dia depois da reconstrução. Ainda nem tenho o dinheiro, e já estou escolhendo onde pôr a bancada.
-camp.h1.church.a.02	Same spot as before?	No mesmo lugar de antes?
-camp.h1.church.a.03	Closer to the door. Let the apprentices piss and moan about the draft.	Mais perto da porta. Meus aprendizes vão reclamar da corrente de ar.
-camp.h1.church.a.04	Gonna budge on that?	E o senhor vai mudar de ideia?
-camp.h1.church.a.05	Not a chance. They can argue over the door's color all they want.	Sobre isso, não. Sobre a cor da porta, podem discutir à vontade.
+camp.h1.church.a.01	The bigger piece is yours. The crust's hard. Eat.	A grande é sua. As beiradas tão duras. Come.
+camp.h1.church.a.02	Hey, Gorvak. Thanks. I will.	Ô, Gorvak. Valeu. Eu como.
+camp.h1.church.a.03	What about you, with that little piece? You're hungry too, right? I mean, if you are.	E você, com essa pequena? Você tá com fome, né? Quer dizer, se tiver.
+camp.h1.church.a.04	There's firewood to get. Eat the bigger piece.	Tem lenha pra buscar. Come a grande.
+camp.h1.church.a.05	Wait, wait. I didn't ask for the big piece. I'll take the small one. I'll leave the other one here, next to you.	Espera, espera. A grande eu não pedi. Eu fico com a pequena. A outra eu deixo aqui, do seu lado.
+camp.h1.church.a.06	Leave it. Eat the one you took.	Deixa. Come a que você pegou.
 camp.h1.church.b.01	Ivaí, when we hit the church, you're on point with me. I want to hear what we're walking into before I lay a finger on anything.	Ivaí, quando chegarmos à igreja, você vai à frente comigo. Quero ouvir o que espera encontrar antes de pôr a mão em qualquer coisa.
 camp.h1.church.b.02	The records only go so far. I need eyes on the ground.	Os registros não explicam tudo. Preciso reconhecer o lugar.
 camp.h1.church.b.03	Then just say you don't know. I can work with that.	Então diga que não sabe. Posso trabalhar com isso.
@@ -716,8 +717,10 @@ camp.h8.village.b.02	What are you asking me?	O que você está me pedindo?
 camp.h8.village.b.03	To stop and listen when someone says they're afraid. Including yourself.	Que pare para ouvir quando alguém disser que tem medo. Inclusive você.
 camp.h8.village.b.04	It's not easy to say that now.	Não é fácil dizer isso agora.
 camp.h8.village.b.05	I didn't ask for easy. I asked you not to leave it until someone pays for the hurry.	Não pedi facilidade. Pedi que não deixasse para depois de alguém pagar pela pressa.
-interject.h1.h5.01	When the workshop opens, I can carry the first orders. If I have to travel through the night, I will.	Quando a oficina abrir, posso levar as primeiras encomendas. Se for preciso atravessar a noite, atravesso.
-interject.h1.h5.02	You can sleep there and leave in the morning. I'm not rebuilding the forge just to start demanding that of a friend.	Você pode dormir lá e partir de manhã. Não vou reconstruir a forja para começar exigindo isso de um amigo.
+interject.h1.h5.01	I waited until the bread was shared out before I asked. I didn't want to look like I needed any. I do.\. Pass me a piece.	Eu esperei o pão ser partido pra pedir. Não queria parecer que eu tava precisando. Preciso.\. Me passa um pedaço.
+interject.h1.h5.02	Took you a while. Take the heel. Sit down and eat.	Demorou. Toma o calcanhar. Senta e come.
+interject.h1.h5.03	I'll take the heel. I'll decide whether to sit or stand. If you eat now, I'll stay until the bread's gone.	O calcanhar eu aceito. Sentar ou ficar em pé eu decido. Se você comer agora, eu fico até acabar o pão.
+interject.h1.h5.04	The heel's yours. I'll eat here. Up to you whether you sit.	O calcanhar é seu. Eu como aqui. Você é que sabe se senta.
 interject.h1.h8.01	I can look after your things while you rest. You don't need to keep checking whether I can manage.	Posso guardar suas coisas enquanto descansa. Não precisa ficar vigiando se dou conta.
 interject.h1.h8.02	I was going to say I wasn't checking. But you already know when I'm lying.	Eu ia dizer que não estava vigiando. Mas você já sabe quando estou mentindo.
 interject.h2.h6.01	I can give you an estimate when we've finished resting. No guarantees, and no rushing me halfway through the calculation.	Posso lhe dar uma estimativa quando terminarmos de descansar. Sem garantia e sem você me apressar no meio da conta.
@@ -1077,3 +1080,4 @@ route.map.here	You are here	Você está aqui
 route.map.next	Next stop	Próxima parada
 debug.pilot.title	Narrative pilot	Piloto narrativo
 debug.pilot.introduction	Gorvak's introduction	Apresentação de Gorvak
+debug.pilot.camp	Gorvak and Bimbren at camp	Gorvak e Bimbren na fogueira
