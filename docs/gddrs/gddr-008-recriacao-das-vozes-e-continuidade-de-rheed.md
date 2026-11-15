@@ -18,7 +18,7 @@ As competências e os vínculos têm consequências mecânicas que a recriação
 
 ### Uma autoridade de caracterização
 
-Adotar [docs/narrativa/personagens/](../narrativa/personagens/README.md) para as 17 fichas, a comparação e a pesquisa. Retirar as 17 fichas e os dois documentos de apoio de `planos/005-refactor-narracao/ficha-personagens/`, além das oito `docs/narrativa/herois/Ficha_H*.md`. O histórico permanece no Git; não manter uma segunda coleção ativa.
+Adotar [docs/narrativa/personagens/](../narrativa/personagens/README.md) para as 17 fichas, a comparação e a pesquisa. Retirar as 17 fichas e os dois documentos de apoio de `planos/005-refactor-narracao/ficha-personagens/`, além das oito `docs/narrativa/herois/Ficha_H*.md`. O histórico das oito fichas H1–H8 permanece no Git público; os 19 documentos da coleção anterior permanecem apenas no arquivo local privado, fora da publicação. Não manter uma segunda coleção ativa.
 
 Dos heróis antigos, preservar nomes e pares exatos de competências. Retirar biografias, idades, ofícios, motivações, arquétipos, personalidades e interpretações interpessoais antigos como restrições. Preservar a identidade visual dos retratos existentes e uma conexão plausível entre competências e ações. Personalidade pode contrastar com aparência. As sete figuras da história preservam suas funções e acontecimentos essenciais no GDD.
 

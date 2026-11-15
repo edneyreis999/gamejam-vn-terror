@@ -58,8 +58,10 @@ Terror psicológico 16+, mundo sem humanos e arte existente são limites preserv
 
 ## Migração das fontes antigas
 
-Foram retirados os 19 documentos de `planos/005-refactor-narracao/ficha-personagens/` (17 fichas, índice e comparação) e as oito fichas `docs/narrativa/herois/Ficha_H*.md`. As fichas do primeiro conjunto correspondem aos mesmos nomes de arquivo neste diretório; as antigas H1–H8 correspondem à tabela de heróis acima. Não manter cópias de compatibilidade como autoridades paralelas.
+A consolidação local retirou 27 documentos: os 19 de `planos/005-refactor-narracao/ficha-personagens/` (17 fichas, índice e comparação) e as oito fichas `docs/narrativa/herois/Ficha_H*.md`. Na publicação, somente as oito fichas H1–H8 são retiradas; os outros 19 documentos não fazem parte do histórico público. As fichas do primeiro conjunto correspondem aos mesmos nomes de arquivo neste diretório; as antigas H1–H8 correspondem à tabela de heróis acima. Não manter cópias de compatibilidade como autoridades paralelas.
 
-O conteúdo anterior continua consultável com `git show d8806e7aa8d7b9b01ac30a7482ea278bce508462:<caminho-antigo>`. Specs concluídas, QA e referências visuais históricas conservam suas citações daquela época; uma referência histórica não manda restaurar a ficha retirada. A antiga antologia `# Falas de cada herói.md`, já removida antes deste incremento, tampouco deve ser recriada como fonte atual.
+As oito fichas H1–H8 podem ser consultadas no histórico público. Por exemplo: `git show a49bb999f8c2905112ab536169b0f60c0adf4510:docs/narrativa/herois/Ficha_H1_Gorvak.md`. Para outra ficha, substitua o nome do arquivo pelo correspondente H1–H8. Os 19 documentos da coleção anterior permanecem apenas no arquivo local privado; sua consulta exige acesso a esse arquivo, não disponível no histórico publicado.
+
+Specs concluídas, QA e referências visuais históricas conservam suas citações daquela época; uma referência histórica não manda restaurar a ficha retirada. A antiga antologia `# Falas de cada herói.md`, já removida antes deste incremento, tampouco deve ser recriada como fonte atual.
 
 O modelo modificado e o livro fornecidos pelo dono permanecem insumos pessoais preservados, identificados na pesquisa. Sua preservação não mantém a antiga pasta de fichas como destino de autoria. Esta migração documental não altera os diálogos implementados nem encerra os aceites pendentes.
