@@ -4,7 +4,7 @@
 **Título internacional para metadados:** The Dryland Drowned\
 **Versão-base:** 4.0, com atualizações incrementais\
 **Data da consolidação-base:** 4 de setembro de 2026\
-**Última atualização:** 30 de outubro de 2026\
+**Última atualização:** 14 de novembro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Idiomas jogáveis:** PT-BR e EN-US; inglês como padrão inicial (localização aprovada, implementação pendente)\
@@ -22,6 +22,8 @@ Este GDD consolida as regras mecânicas do antigo documento canônico v0.7, reap
 **Atualização confirmada em 2026-09-17/18:** a integração dos PRs #15–19 tem escopo de produto aprovado na [spec incremental](../planos/tasks/approved-narrative-dialogue-staging/spec.md). As seções 12.1, 15, 18.2, 19 e 27 registram os recortes substituídos. O conjunto completo da spec e seu projeto técnico foram aprovados em 18/09/2026 após validação; essa aprovação não declara a integração implementada ou verificada. A seção 27 incorpora o enquadramento do prólogo aprovado no PR #19, distinguindo sua entrega de origem das mudanças desta integração.
 
 **Atualização confirmada em 2026-10-16:** a seção 28 e os [GDDRs de fogueiras e vínculos](gddrs/AGENTS.md) registram as pausas nas três rotas, a restrição do recuo voluntário às fogueiras, o novo conteúdo de personagem, o reconhecimento das perdas e os indicadores de conversa inédita. Design aceito, incluindo os esclarecimentos da entrevista da spec. A [spec incremental](../planos/tasks/campfire-hero-bonds/spec.md) e o projeto técnico foram aprovados; o incremento está implementado, com as verificações técnicas e correções registradas na [verificação](../planos/tasks/campfire-hero-bonds/verification.md). Os aceites humanos de texto PT/EN, apresentação e áudio permanecem pendentes.
+
+**Atualização confirmada em 2026-11-14:** a [autoridade de caracterização](narrativa/personagens/README.md) reúne 17 fichas para 16 personagens, incluindo as duas idades de Rheed, conforme o [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md). Substitui as antigas biografias, personalidades, arquétipos e interpretações das relações dos heróis. Preserva nomes, competências, arte existente, trama, pares e regras. Rheed narra suas próprias memórias na praça de Daratrine. A direção está aceita; a [revisão independente do conteúdo](narrativa/personagens/README.md#estado-da-entrega) recebeu **Reviewed** em 14/11/2026. O aceite editorial humano permanece **Pendente**. As novas vozes ainda não estão integradas ao jogo.
 
 Histórico de origem, preservado no Git:
 
@@ -49,6 +51,8 @@ Cada definição deste documento possui um dos estados abaixo. A ausência de um
 O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`. As decisões posteriores de conteúdo provisório são identificadas explicitamente neste documento e na spec incremental correspondente. Uma futura mudança de comportamento deve ser deliberada e, para implementação, descrita em spec incremental. Specs concluídas e o protótipo atual são baselines históricas, não autoridades contra este GDD.
 
 ### 1.1 Relação com o protótipo v2.0
+
+**Fronteira editorial vigente — 2026-11-14:** os textos e perfis mencionados nos incrementos abaixo conservam seu histórico de implementação e aceite, mas não fixam a caracterização recriada. A seção 18 distingue a fonte atual de autoria da redação ainda presente no runtime; trocar as fichas não reescreve eventos ou `Languages.tsv`.
 
 **Sucesso de abordagem em `init-rpg-maker-mz` — Confirmado:** apresentar a consequência por texto nativo do RPG Maker, sem herói nem busto na cena. Reutilizar a mesma imagem de fundo da armadilha, sem ilustração adicional de sucesso. Manter autoria em eventos, leitura no ritmo do jogador e regras de progresso e autosave (ADR-027).
 
@@ -88,7 +92,7 @@ O GDD v4.0 é a fonte de verdade da visão completa. O protótipo v2.0 deve busc
 
 **Execução e verificação — Confirmado em 2026-09-18:** as [ADRs G004–G006](adrs/README.md) adotam neste projeto as decisões 010–012 do Pixi-Rework. O harness pode reorganizar tarefas preservando produto, provas e aceite; testes manuais e automatizados de gamepad ficam **Fora do escopo de testes**, sem retirar funcionalidades; testes pesados podem ser agrupados e repetições redundantes omitidas por evidência e risco, mantendo jornadas E2E, riscos distintos e aceites humanos. Essas escolhas operacionais não exigem nova autorização por caso dentro dos limites das ADRs. Ao terminar testes, fechar os aplicativos e processos abertos pelo agente, preservando as sessões do usuário. A adoção não amplia ambientes suportados, não converte omissões/dispensas em testes aprovados nem encerra pendências históricas.
 
-**Textos faltantes — Baseline de protótipo para `prototype-v2-gdd-layouts`:** os trechos narrativos ainda não escritos recebem redação provisória em PT-BR, fiel ao GDD, para revisão da equipe, conforme o ADR-007. Esse conteúdo deve permitir jogar as cenas e compreender suas escolhas e consequências. Textos canônicos já existentes, incluindo despedidas e epílogos das fichas, permanecem como referência obrigatória; a redação provisória não altera acontecimentos, regras ou fatos confirmados nem equivale a aprovação editorial final.
+**Textos faltantes — Baseline de protótipo para `prototype-v2-gdd-layouts`:** os trechos narrativos ainda não escritos recebem redação provisória em PT-BR, fiel ao GDD, para revisão da equipe, conforme o ADR-007. Esse conteúdo deve permitir jogar as cenas e compreender suas escolhas e consequências. Naquele incremento, os textos então canônicos, incluindo despedidas e epílogos das fichas antigas, eram referência obrigatória; a redação provisória não altera acontecimentos, regras ou fatos confirmados nem equivale a aprovação editorial final.
 
 **Arte — Baseline de protótipo para `prototype-v2-gdd-layouts`:** a versão jogável de avaliação pode usar imagens provisórias, incluindo geração dos retratos faltantes de Ivaí, Floraí, Pérola e Andirá e dos cenários narrativos da Igreja, da figueira no Parque e do Conselho, conforme o ADR-009. As gerações seguem o traço de referência do Gorvak e respeitam os fatos visuais do GDD. Detalhes não definidos no GDD permanecem propostas provisórias; as artes finais substituem os placeholders antes da entrega do jogo, preservando a direção da seção 19.2.
 
@@ -237,7 +241,7 @@ As raças possuem conflitos históricos, políticos e culturais. Esses conflitos
 
 A tecnologia corresponde aproximadamente ao fim do século XIX: transporte animal e fluvial, oficinas, mineração, imprensa e atrações mecânicas. Não existem rádio, automóveis, armas de fogo modernas ou comunicação instantânea.
 
-**Enquadramento da narração — Confirmado em 2026-09-17:** no presente, Rheed mais velho se tornou o melhor contador de histórias de Daratrine. Durante um evento chamado **Noite da História**, numa cidade, ele conta esta história para centenas de criaturas; o jogador também faz parte dessa plateia. A cidade não foi nomeada e esta decisão não define a natureza geográfica de Daratrine. O contexto não acrescenta avatar, falas ou escolhas da plateia. Os acontecimentos da expedição, com Rheed jovem, pertencem ao passado. A apresentação visual e sonora segue as seções 19.2 e 19.4.
+**Enquadramento da narração — Confirmado em 2026-09-17, esclarecido pelo dono em 2026-11-14:** no presente, Rheed mais velho se tornou o melhor contador de histórias de Daratrine. Durante a **Noite da História**, na praça de Daratrine, ele conta suas próprias memórias da expedição para centenas de criaturas; o jogador também faz parte dessa plateia. É o mesmo Theodor Rheed do livro do dono, em outra história. O contexto não acrescenta avatar, falas ou escolhas da plateia, nem nomeia a cidade da expedição. Os acontecimentos com Rheed jovem pertencem ao passado. A apresentação visual e sonora segue as seções 19.2, 19.4 e 27.2, preservando `Dryland_Coreto`; não se cria mecânica de memória. Fonte: [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md).
 
 ### 4.2 As famílias dos amantes
 
@@ -481,7 +485,7 @@ Cada encontro do Pool A usa duas competências corpóreas e uma liminar. Cada en
 
 ## 9. Matriz mecânica dos heróis
 
-Os códigos H1–H8 são identificadores internos estáveis ligados aos heróis confirmados na seção 18. Nome, pronomes, raça, aparência, personalidade e profissão são definidos nas respectivas fichas subordinadas.
+Os códigos H1–H8 são identificadores internos estáveis ligados aos nomes e competências confirmados na seção 18. A [caracterização corrente](narrativa/personagens/README.md) define voz, personalidade e detalhes de vida com seus estados editoriais, subordinada à trama, às regras e à identidade visual preservada. As biografias antigas não são restrições adicionais.
 
 | Herói | Competência 1 | Competência 2 |
 |---|---|---|
@@ -938,7 +942,7 @@ O efeito bola de neve é intencional como tensão, mas precisa de validação pa
 
 Os oito nomes de competência existem somente no GDD, nos dados internos, nos testes e na documentação de QA. Eles nunca aparecem na interface destinada ao jogador, nem como etiquetas, estatísticas, filtros, cores legendadas ou explicações de resultado.
 
-As bios públicas sugerem capacidades por profissão, experiências, equipamento, comportamento e voz. As fichas de autoria mantêm os nomes internos numa seção explicitamente privada; esse conteúdo não deve ser copiado integralmente para os cards.
+As bios públicas sugerem capacidades por experiências, equipamento, comportamento e voz; uma profissão criada deve ser plausível, sem herdar obrigatoriamente a antiga. Competências nas fichas e no índice são informação explicitamente interna de autoria e não devem ser copiadas para os cards ou para as falas do jogador. A recriação documental não altera os textos já implementados.
 
 As abordagens usam verbos e ações concretas, omitem competências e não identificam um executor. Depois da escolha, o texto explica causalmente o sucesso ou a falha dentro da cena, sem frases como “competência necessária”, “o grupo possui” ou “o grupo não possui”. Há um único texto por resultado de abordagem; nenhum herói aparece agindo como variante do sucesso.
 
@@ -989,16 +993,18 @@ Cada herói possui um epílogo predefinido, independente do final escolhido. **S
 
 ### 15.2 Opiniões fixas
 
-| Herói | Reação à mentira | Posição aconselhada |
-|---|---|---|
-| Gorvak | Exige que Ivaí nomeie os mortos e assuma o custo | Reunir e libertar os amantes |
-| Elowen | Reage com explosão e recusa tratar sobrevivência como absolvição | Destruir e salvar Ivaí para que responda pelo dano |
-| Griznik | Reconstrói os fatos e transforma sobrevivência em obrigação de reparo | Destruir e encerrar as mortes da linhagem |
-| Seraphina | Condena a ausência de consentimento, apesar do impulso de curar Ivaí | Reunir e restaurar o juramento livre |
-| Bimbren | Declara a missão fraudulenta e prioriza o compromisso original | Reunir e libertar os amantes |
-| Liora | Compara omissões e reconhece que também ocultou suspeitas | Destruir; uma pessoa viva pode responder e registrar a verdade |
-| Vaelith | Revolta-se com os registros censurados e quer preservar proteção e prova | Reunir e preservar o juramento |
-| Draska | Separa fatos de promessas e escolhe o menor dano imediato | Destruir; a sobrevivência de Ivaí é dívida, não prêmio |
+As posições abaixo permanecem confirmadas. Reação à mentira e justificativa verbal seguem as [novas fichas](narrativa/personagens/README.md), sem obrigação de conservar as razões biográficas antigas. A redação já implementada permanece até uma integração narrativa posterior.
+
+| Herói | Posição aconselhada |
+|---|---|
+| Gorvak | Reunir e libertar os amantes |
+| Elowen | Destruir e salvar Ivaí |
+| Griznik | Destruir e salvar Ivaí |
+| Seraphina | Reunir e libertar os amantes |
+| Bimbren | Reunir e libertar os amantes |
+| Liora | Destruir e salvar Ivaí |
+| Vaelith | Reunir e libertar os amantes |
+| Draska | Destruir e salvar Ivaí |
 
 As opiniões ficam equilibradas em quatro para cada opção, mas não formam votação. Nenhuma posição muda, desbloqueia, bloqueia ou altera o resultado.
 
@@ -1158,51 +1164,51 @@ Esses percentuais são referências de QA e balanceamento global, não metas apl
 
 ## 18. Heróis e conteúdo de personagem
 
-As oito fichas em [docs/narrativa/herois](./narrativa/herois/) são documentos subordinados a este GDD. Elas são canônicas para voz, aparência, motivação, despedida, epílogo e opinião individual enquanto não contradisserem este documento. Em conflito, o GDD prevalece. O template canônico é [Template_Criacao_de_Herois.md](./narrativa/herois/Template_Criacao_de_Herois.md).
+**Autoridade de caracterização — Confirmado em 2026-11-14:** [Personagens](narrativa/personagens/README.md) é a fonte corrente para escrever e revisar as 17 fichas dos 16 personagens, incluindo Rheed jovem e velho. O [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md) registra a substituição das fichas paralelas. O GDD continua dono de mundo, trama e mecânicas; o livro do dono ancora a identidade de Rheed velho. A [pesquisa](narrativa/personagens/pesquisa.md) distingue evidência, inferência e criação. A revisão independente do conteúdo recebeu **Reviewed** em 14/11/2026, na versão identificada no [estado da entrega](narrativa/personagens/README.md#estado-da-entrega). O aceite editorial humano permanece **Pendente**; uma afirmação marcada **Criação** não se torna fato extraído de uma fonte.
 
-**Fonte das falas — Confirmado em 2026-09-25:** para apresentação, seleção, grupo cheio, despedida e opinião dos oito heróis, usar especificamente [# Falas de cada herói.md](narrativa/herois/%23%20Falas%20de%20cada%20her%C3%B3i.md), na revisão identificada pela [spec `updated-narrative-copy`](../planos/tasks/updated-narrative-copy/spec.md). Essa redação substitui as versões anteriores desses momentos nas fichas e no arquivo de nome semelhante `Falas-de-cada-herói.md`; não combinar textos das duas fontes. Cada apresentação tem seis falas e cada opinião, dois parágrafos. Preservar elegibilidade, ordem e posição aconselhada no Conselho. Epílogos, competências, identidades dos personagens e demais informações das fichas não mudam. O aceite da fonte para integração não declara aceite da apresentação integrada nem aprovação criativa final de todo o jogo.
+**Texto atual do jogo e integração futura:** as fichas orientam a nova caracterização, sem substituir por si só apresentações, seleção, grupo cheio, despedidas, opiniões, fogueiras ou epílogos já implementados. A redação atual em `rpg-maker/The Dryland Drowned/Languages.tsv` e a estrutura dos eventos permanecem intactas, como baseline de runtime a confrontar numa futura integração autorizada; não impõem biografia, personalidade ou voz às novas fichas. Preservar os aceites e pendências próprios de cada incremento.
 
-Os nomes das competências na tabela são internos e não compõem as bios públicas.
+**Proveniência das falas — integração confirmada em 2026-09-25:** a [spec `updated-narrative-copy`](../planos/tasks/updated-narrative-copy/spec.md) registra a revisão de `# Falas de cada herói.md` usada para apresentação, seleção, grupo cheio, despedida e opinião. Essa antologia e o arquivo distinto `Falas-de-cada-herói.md` não são autoridades atuais a restaurar ou combinar; sua história permanece no Git. Cada apresentação mantém seis falas e cada opinião, dois parágrafos. Elegibilidade, ordem, posição aconselhada, competências e epílogos permanecem sob as regras deste GDD. O aceite daquela fonte para integração não declara aceite da apresentação integrada nem aprovação criativa final de todo o jogo.
 
-| Código | Herói | Idade | Raça | Ocupação | Arquétipo | Competências internas | Ficha |
-|---|---|---:|---|---|---|---|---|
-| H1 | Gorvak | 42 | Anão | Ferreiro | Protetor relutante | Força + Vontade | [Ficha](./narrativa/herois/Ficha_H1_Gorvak.md) |
-| H2 | Elowen | 28 | Elfa | Caçadora | Batedora inquieta | Destreza + Atletismo | [Ficha](./narrativa/herois/Ficha_H2_Elowen.md) |
-| H3 | Griznik | 36 | Goblin | Carpinteiro | Construtor improvisador | Percepção + Sobrevivência | [Ficha](./narrativa/herois/Ficha_H3_Griznik.md) |
-| H4 | Seraphina | 54 | Troll | Curandeira | Sábia contestada | Conhecimento + Ocultismo | [Ficha](./narrativa/herois/Ficha_H4_Seraphina.md) |
-| H5 | Bimbren | 39 | Gnomo | Mensageiro | Portador do dever | Força + Conhecimento | [Ficha](./narrativa/herois/Ficha_H5_Bimbren.md) |
-| H6 | Liora | 34 | Gnoma | Navegadora | Cartógrafa meticulosa | Destreza + Percepção | [Ficha](./narrativa/herois/Ficha_H6_Liora.md) |
-| H7 | Vaelith | 32 | Elfo | Escriba | Pesquisador de campo | Ocultismo + Atletismo | [Ficha](./narrativa/herois/Ficha_H7_Vaelith.md) |
-| H8 | Draska | 31 | Goblin | Mineradora | Sobrevivente pragmática | Vontade + Sobrevivência | [Ficha](./narrativa/herois/Ficha_H8_Draska.md) |
+Os nomes das competências na tabela são internos e não compõem as bios públicas. Idade, ofício, personalidade e arquétipo antigos foram retirados como restrições; as novas fichas preservam a identidade visual dos retratos existentes e o mundo sem humanos, distinguindo dados de fonte de criação compatível.
 
-A raça declarada na tabela inicial de cada ficha é autoridade sobre descrições internas da própria ficha. Por isso, Gorvak é anão, não orc, e Liora deve ser visualmente descrita como gnoma.
+| Código | Herói | Competências internas | Ficha corrente |
+|---|---|---|---|
+| H1 | Gorvak | Força + Vontade | [Ficha](narrativa/personagens/gorvak.md) |
+| H2 | Elowen | Destreza + Atletismo | [Ficha](narrativa/personagens/elowen.md) |
+| H3 | Griznik | Percepção + Sobrevivência | [Ficha](narrativa/personagens/griznik.md) |
+| H4 | Seraphina | Conhecimento + Ocultismo | [Ficha](narrativa/personagens/seraphina.md) |
+| H5 | Bimbren | Força + Conhecimento | [Ficha](narrativa/personagens/bimbren.md) |
+| H6 | Liora | Destreza + Percepção | [Ficha](narrativa/personagens/liora.md) |
+| H7 | Vaelith | Ocultismo + Atletismo | [Ficha](narrativa/personagens/vaelith.md) |
+| H8 | Draska | Vontade + Sobrevivência | [Ficha](narrativa/personagens/draska.md) |
 
 ### 18.1 Relações com escopo confirmado
 
-Somente os oito pares que compartilham uma competência recebem relação bilateral específica:
+Somente os oito pares que compartilham uma competência recebem relação bilateral específica. Os pares e sua participação mecânica permanecem; o significado interpessoal é recriado nas fichas, sem conservar como obrigação as antigas amizades, rivalidades ou interpretações profissionais.
 
-| Par | Relação |
+| IDs | Par |
 |---|---|
-| Gorvak — Bimbren | amizade prática; conflito entre dever e autossacrifício |
-| Gorvak — Draska | respeito silencioso; atrito entre suportar e prevenir |
-| Elowen — Liora | competição amistosa entre instinto e método |
-| Elowen — Vaelith | competição provocativa; divergência sobre risco sobrenatural |
-| Griznik — Draska | parceria profissional competitiva; prioridades de segurança |
-| Griznik — Liora | parceria investigativa e curiosidade competitiva |
-| Seraphina — Bimbren | respeito intelectual; debate sobre dever e cuidado |
-| Seraphina — Vaelith | respeito cauteloso e desconfiança sobre limites da investigação |
+| H1–H5 | Gorvak — Bimbren |
+| H1–H8 | Gorvak — Draska |
+| H2–H6 | Elowen — Liora |
+| H2–H7 | Elowen — Vaelith |
+| H3–H8 | Griznik — Draska |
+| H3–H6 | Griznik — Liora |
+| H4–H5 | Seraphina — Bimbren |
+| H4–H7 | Seraphina — Vaelith |
 
 Os outros vinte pares podem participar de diálogo coletivo, mas não recebem arco bilateral. Desenvolvê-los exigiria escrita e testes combinatórios e está fora do escopo.
 
-Campos das fichas sobre “querer desistir” são gatilhos dramáticos para confronto e voz, não uma regra de deserção. Heróis vivos só deixam o elenco por sacrifício; não abandonam a campanha por afinidade ou reação narrativa.
+Desejos de desistir nas fichas são gatilhos dramáticos para confronto e voz, não uma regra de deserção. Heróis vivos só deixam o elenco por sacrifício; não abandonam a campanha por afinidade ou reação narrativa.
 
-**Expansão confirmada em 2026-10-16:** as relações acima orientam intervenções opcionais na fogueira e novos assuntos sobre companheiros mortos na taverna. As 48 conversas-base, sua progressão por pausa e as fronteiras editoriais constam na [seção 28.2](#fogueiras-conversas) e no [GDDR-002](gddrs/gddr-002-conversas-e-vinculos-dos-herois.md); a escrita final permanece pendente.
+**Expansão confirmada em 2026-10-16:** os pares acima orientam intervenções opcionais na fogueira e novos assuntos sobre companheiros mortos na taverna. As 48 conversas-base, sua progressão por pausa e as fronteiras editoriais constam na [seção 28.2](#fogueiras-conversas) e no [GDDR-002](gddrs/gddr-002-conversas-e-vinculos-dos-herois.md). O aceite editorial dos textos permanece pendente; as regras de participação não são substituídas pela nova caracterização.
 
 ### 18.2 Regra dos epílogos
 
-Cada ficha define um único epílogo de sobrevivência, independente da escolha final. Esse texto é conteúdo autoral fixo, não recompensa calculada. Ele só é mostrado se o herói estiver vivo e presente na formação do clímax. A ficha também define uma única despedida, usada em qualquer sacrifício.
+Cada herói mantém um único epílogo de sobrevivência, independente da escolha final. Esse texto é conteúdo autoral fixo, não recompensa calculada. Ele só é mostrado se o herói estiver vivo e presente na formação do clímax. Cada herói também mantém uma única despedida, usada em qualquer sacrifício.
 
-**Atualização confirmada:** os textos aprovados do PR #15 passam a ser a fonte dos epílogos durante sua sincronização com as fichas, conforme a seção 15.1. As demais informações das fichas, inclusive despedidas e opiniões, permanecem como estão.
+**Atualização confirmada na integração dos PRs #15–19:** os textos aprovados do PR #15 são a fonte dos epílogos implementados, conforme a seção 15.1. A recriação das fichas não reescreve esses textos, despedidas ou opiniões no runtime. Sua adaptação às novas vozes requer integração posterior; a retirada das fichas antigas não retira conteúdo jogável.
 
 ---
 
@@ -1276,7 +1282,7 @@ A direção é pintura digital 2D semirrealista, escura e de baixa saturação. 
 
 **Distinção temporal — Confirmado em 2026-09-17 para `approved-narrative-dialogue-staging`:** Rheed mais velho conta a história no presente e aparece em cores. Rheed jovem e todos os acontecimentos narrados pertencem ao passado, representado em tons pastel. Ivaí permanece como protagonista da expedição; Rheed é o narrador. A [ADR-001 deste incremento](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-001-rheed-temporal-presentation.md) registra a decisão e substitui a proposta anterior de manter o cenário do passado escurecido atrás do narrador.
 
-**Fundo do narrador — Confirmado para este incremento:** sempre que Rheed mais velho aparecer, mostrar somente seu retrato sobre fundo preto, no prólogo e nas demais intervenções. Nas falas diretas, retornar à composição da cena do passado. O contexto é a Noite da História, numa cidade, diante de centenas de ouvintes. **Pendente:** o cenário ainda não foi desenhado; o nome da cidade, o desenho do local e sua produção artística ficam **Fora do escopo deste incremento**. O preto é a apresentação aprovada enquanto esse cenário não existe; não inventar uma imagem substituta. A regra não acrescenta bustos aos epílogos ilustrados aprovados.
+**Fundo do narrador — histórico e apresentação vigente:** o retrato sobre preto foi a apresentação confirmada em `approved-narrative-dialogue-staging`, quando o desenho do local estava **Pendente** e sua produção artística ficava **Fora do escopo daquele incremento**. A decisão de 2026-10-29 o substituiu pelo cenário existente `Dryland_Coreto` e seus vídeos, conforme a seção 27.2. **Confirmado em 2026-11-14:** a cena presente é a Noite da História na praça de Daratrine, diante de centenas de ouvintes; Rheed conta suas próprias memórias. Isso não exige redesenhar o cenário ou acrescentar imagens. Nas falas diretas, retornar à composição da cena do passado. A regra não acrescenta bustos aos epílogos ilustrados aprovados.
 
 **Conversa direta do prólogo — Confirmado:** Rheed jovem e Ivaí seguem o padrão de entrada, destaque do falante, escurecimento do ouvinte e saída da conversa de Gorvak do PR #17, com enquadramento adaptado aos retratos. Preservar os textos aprovados do PR #19, Rheed jovem à esquerda, Ivaí à direita e fundo da taverna. A atualização sonora da seção 19.4 substitui o silêncio da abertura. Estas decisões substituem, na integração, o destaque instantâneo de 10% e o silêncio da entrega original, sem reescrever sua spec histórica.
 
@@ -1599,9 +1605,9 @@ O último diálogo permanece: Rheed jovem pergunta “Você não está esquecend
 
 ### 27.2 Apresentação vigente nesta integração
 
-As seções 19.2/19.4 e a [ADR-001 incremental](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-001-rheed-temporal-presentation.md) prevalecem sobre a apresentação original do PR #19: Rheed mais velho em cores sobre preto; passado em tons pastel; conversa jovem/Ivaí no padrão de Gorvak; música e sons distintos por época. O silêncio e o destaque instantâneo de 10% da origem ficam históricos. Preservar os arquivos fornecidos `Reed final.png` e `Reed-novo.png`, com Rheed jovem à esquerda e Ivaí à direita na taverna do PR #17.
+As seções 19.2/19.4 e a [ADR-001 incremental](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-001-rheed-temporal-presentation.md) substituíram a apresentação original do PR #19: Rheed mais velho em cores sobre preto, posteriormente substituído por `Dryland_Coreto` conforme a atualização de 2026-10-29 abaixo; passado em tons pastel; conversa jovem/Ivaí no padrão de Gorvak; música e sons distintos por época. O silêncio e o destaque instantâneo de 10% da origem ficam históricos. Preservar os arquivos fornecidos `Reed final.png` e `Reed-novo.png`, com Rheed jovem à esquerda e Ivaí à direita na taverna do PR #17.
 
-A cena presente é a Noite da História numa cidade, diante de centenas de criaturas incluindo o jogador. Rheed tornou-se o melhor contador de histórias de Daratrine. Nome da cidade, desenho do local e nova arte continuam fora do incremento. Não acrescentar personagem controlável, plateia desenhada, falas extras ou mecânica de participação do público.
+**Enquadramento esclarecido pelo dono em 2026-11-14:** a cena presente é a Noite da História na praça de Daratrine, diante de centenas de criaturas incluindo o jogador. Rheed tornou-se o melhor contador de histórias de Daratrine e conta suas próprias memórias da expedição. O [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md) substitui a indeterminação anterior da cidade somente nesse enquadramento; não nomeia os locais da expedição. Preservar o cenário e as transições existentes. Não acrescentar personagem controlável, plateia desenhada, falas extras ou mecânica de participação do público.
 
 **Apresentação do narrador — Confirmado em 2026-10-29:** por esclarecimento do usuário, Rheed mais velho em cores aparece sempre no cenário existente `Dryland_Coreto`, substituindo a apresentação sobre preto descrita acima e nas seções 19.2/19.4. O vídeo de entrada antecede sua aparição e encobre a troca da cena anterior para o coreto; após suas falas, o vídeo de saída encobre a troca para a próxima cena. Os vídeos fornecidos na branch `feat/transitions` são parte obrigatória dessas transições, inclusive com movimento reduzido; as demais animações preservam sua preferência. Aplica-se às aparições já autoradas do prólogo, armadilhas, fechamentos de rota, aberturas de fogueira e Conselho, sem acrescentar falas. Ver [spec incremental](../planos/tasks/reed-scene-videos/spec.md).
 
@@ -1641,6 +1647,8 @@ Fontes: [GDDR-001](gddrs/gddr-001-fogueiras-e-ritmo-da-expedicao.md), parcialmen
 <a id="fogueiras-conversas"></a>
 
 ### 28.2 Conteúdo e fronteira editorial
+
+**Caracterização corrente — 2026-11-14:** a [nova autoridade de personagens](narrativa/personagens/README.md) orienta a escrita futura. A proposta e os diálogos implementados deste incremento conservam seu histórico e seus aceites pendentes, mas não obrigam as fichas a repetir a antiga caracterização. O [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md) complementa o GDDR-002; os quantitativos, participantes e regras abaixo ficam intactos.
 
 O conjunto da spec contém 48 conversas-base (8 heróis × 3 destinos × 2 pausas), oito intervenções condicionais dos pares, 16 reações direcionais às perdas, 16 novos assuntos na taverna com aberturas contextuais e as três narrações de chegada, todos em PT-BR/EN-US. A [proposta narrativa completa](../planos/tasks/campfire-hero-bonds/campfire-hero-bonds.narrativa.md) aguarda revisão editorial; sua existência não aprova cada fala nem converte novos detalhes biográficos em fatos canônicos.
 
