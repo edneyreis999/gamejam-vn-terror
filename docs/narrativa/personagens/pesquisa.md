@@ -59,7 +59,10 @@ Cada competência continua binária, em exatamente dois heróis; cada par é ún
 
 ### Trama que a caracterização deve respeitar
 
-- Mundo sem humanos, de inspiração ribeirinha brasileira; terror psicológico 16+. Profundidade humana significa complexidade, não espécie humana. Preservar a exclusão de gore explícito, violência sexual e temas de drogas. O conteúdo adulto das obras pesquisadas não amplia esse escopo.
+- **Observação histórica de 14/11/2026:** Mundo sem humanos, de inspiração ribeirinha brasileira; terror psicológico 16+. Profundidade humana significa complexidade, não espécie humana. Preservar a exclusão de gore explícito, violência sexual e temas de drogas. O conteúdo adulto das obras pesquisadas não amplia esse escopo.
+
+  **Superação parcial em 15/11/2026:** o dono definiu público e classificação pretendida de 18 anos, com liberdade para cenas pesadas e palavrões, e retirou as três exclusões acima, conforme o [GDD canônico, §3.5](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#35-público-idioma-e-duração). A observação original permanece como evidência da pesquisa de 14/11; mundo sem humanos, horror psicológico e limites de aproveitamento das referências externas permanecem válidos.
+
 - O medalhão protege um compromisso consentido: não produz amor ou obediência. As sete regras e os dois resultados do registro de Palotina ficam intactos. Reunir liberta os amantes e custa a vida de Ivaí; destruir salva Ivaí e entrega os amantes e suas memórias a Andirá (§§4.3–4.4).
 - Andirá pode omitir e manipular, mas fala literalmente a verdade; não toma/destrói o medalhão, não força magicamente a escolha e não comanda todas as criaturas. Mortais e casas não recebem culpa coletiva por espécie (§§4.2/4.5).
 - Ivaí conhece a oferta de Andirá, mas sua investigação é incompleta; os registros de Irati não provam o resultado final. Sua confissão não pode ser antecipada por uma ficha que transforme segredo em conhecimento público (§§4.7–4.8/5.3).
