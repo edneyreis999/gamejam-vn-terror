@@ -408,16 +408,19 @@ memorial.intro	We didn't bring everyone back. That's the part they always leave 
 closure.first.rheed	<I>First piece secured. The relief was real—we actually cracked a smile after all that. But looking at the incomplete map brought us right back to reality. Half was still missing. We stowed it away and headed for the tavern to figure out what we were up against next.</I>	<I>Finalmente, uma parte do mapa estava em nossas mãos. Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir. Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a outra metade. Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como enfrentar o que vinha pela frente.</I>
 closure.second.rheed	<I>There it was. The missing half. For a split second, I actually thought the worst was over. I just wanted to drag ourselves back to the tavern, slap both pieces on a table, and see where they led. But then reality set in. We had the map... but now we actually had to walk the path.</I>	<I>Ali estava a parte que faltava. Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna, abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam. Foi quando me dei conta: tínhamos encontrado o mapa. Mas ainda precisaríamos seguir o caminho.</I>
 conv.party_count	Party: \V[150]/\V[151]	Grupo: \V[150]/\V[151]
-conv.gorvak.ivai_why	Gorvak. If your share of the treasure comes through, what will you do with it?	Gorvak. Se a sua parte do tesouro chegar, o que você faz com ela?
-conv.gorvak.why	The quarry stops paying in winter. I'll cover those months. I've already told the crew.	No inverno a pedreira corta o pagamento. Eu cubro esses meses. Já falei para a turma.
-conv.gorvak.sora	Sora's house stays standing. Without my share, she has to sell.	A casa da Sora fica de pé. Sem a parte, ela vende.
-conv.gorvak.ivai_return	Winter covered, the house still standing, and you back with the crew. A good day to tell people about.	Inverno pago, casa no lugar, e você de volta no meio da turma. Dá um dia bom para contar.
-conv.gorvak.ivai_help	The crew's winter pay, and Sora's house. I heard you. And on the road, what can you do for us?	Os meses da turma, e a casa da Sora. Eu ouvi. E no caminho, o que você faz por nós?
-conv.gorvak.ivai_limit	I'll follow behind you and move past when you say. And you'll hold it until we get through?	Eu vou atrás e passo quando você disser. E você segura até a gente passar?
+conv.gorvak.ivai_greeting	Hello, big guy. How are you?	Olá, grandão. Tudo bem com você?
+conv.gorvak.greeting	Hi.	Oi.
+conv.gorvak.ivai_name	According to the form you gave Rheed, your name is Gorvak, right?	Pelo que consta no formulário que você entregou ao Rheed, seu nome é Gorvak, certo?
+conv.gorvak.name	Right.	Certo.
+conv.gorvak.ivai_done	Excellent.	Excelente.
+conv.gorvak.ivai_why	What makes you want to join us on this expedition?	O que te faz querer ir nessa expedição com a gente?
+conv.gorvak.why	The quarry where I work with the crew closes in winter. We don't get paid during those months. I promised to bring back gold to get the crew through the winter.	A pedreira em que eu trabalho com a turma fecha no inverno. Nesses meses a gente fica sem pagamento. Eu prometi trazer ouro para a turma passar esses meses.
+conv.gorvak.sora	Sora said she's willing to sell her house. I don't think that's fair.	Sora disse que está disposta a vender a casa. Eu não acho justo.
+conv.gorvak.ivai_return	If we come back with the treasure, the crew gets through the winter, she keeps her house, and you'll be their hero.	Se a gente voltar com o tesouro, a turma passa o inverno, a casa fica, e você vai ser o herói deles.
+conv.gorvak.ivai_help	All right, then. What can you do on the expedition?	Como quiser. Na expedição, o que você pode fazer?
 conv.ivai.help	And out there? What exactly are you good for?	E durante a viagem? Como pode nos ajudar?
-conv.gorvak.help1	If a load slips on a slope, I'll put my shoulder to it. You follow behind me. Move past when I say.	Se a carga escorregar na ladeira, eu ponho o ombro nela. Você vem atrás de mim. Passa quando eu disser.
-conv.gorvak.help2	I'll hold it until you've gone past and you're out from under it. Then I let go.	Eu seguro até você passar e sair de baixo. Aí eu largo.
-conv.gorvak.note	Don't call it a good day. I said winter pay and the house. That's all.	Não chama de dia bom. Eu falei os meses e a casa. É isso.
+conv.gorvak.help1	The same thing I do at the quarry. If a heavy rock blocks the way, I'll put my shoulder to it. If you need someone who won't give up, I won't.	O mesmo que eu faço na pedreira. Se uma pedra pesada travar o caminho, eu ponho o ombro nela. Se você precisar de quem não desiste, eu não desisto.
+conv.gorvak.note	I'm doing my job. That doesn't make me a hero.	Eu estou fazendo o meu trabalho. Isso não faz de mim um herói.
 conv.gorvak.selected	You made the right call. I'll make sure everyone's armor is holding together before we move out.	Pode contar comigo, Ivaí. Vou conferir nosso equipamento antes de sairmos.
 conv.gorvak.full	Three's a crowd. You'll need to leave someone behind if you want me in the vanguard.	Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir.
 conv.elowen.ivai_why	Why did you decide to join the expedition, Elowen?	Por que decidiu participar da expedição, Elowen?

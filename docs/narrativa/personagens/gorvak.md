@@ -10,7 +10,11 @@ Origem de cada afirmação:
 
 Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação plausível. Não é o desejo, o medo nem a metáfora de toda frase. Exercícios hipotéticos não criam cena, voto nem arco jogável.
 
+**Continuidade autorizada pelo dono em 2026-11-16:** os refinamentos sobre o inverno sem pagamento nesta pedreira, a promessa de ouro à turma e a disposição de Sora de vender a casa foram adotados para a revisão do piloto, mantendo a origem **[Criação]**. A direção contextual sobre contribuição prática e conversa com desconhecidos foi ajustada no mesmo recorte. Isso não encerra o aceite editorial humano da ficha ou das falas finais, que permanece **Pendente**.
+
 **Competências internas, só para autoria:** Força + Vontade. No Conselho, o conselho fixo deste herói é reunir **[GDD §15, §18]**. A razão verbal abaixo é criação; o lado do conselho não é.
+
+A experiência com cargas na pedreira sustenta a oferta de mover obstáculos pesados e persistir diante da dificuldade **[Criação]**. Essa plausibilidade não acrescenta habilidade nem garante sucesso; os nomes das competências continuam restritos à autoria.
 
 ## 1. Identificação
 
@@ -20,7 +24,7 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 ## 2. Personalidade em ação
 
-- **O que deseja:** cobrir os meses em que a pedreira corta o pagamento, e que Sora não precise vender a casa. Ele já disse à turma que traria esse dinheiro, e aceitou por isso. No fim do dia ele olha quem ainda está de pé, e gosta demais de ser quem decide isso **[Criação]**.
+- **O que deseja:** cumprir a promessa de levar ouro para sustentar a turma durante o inverno sem pagamento; aceitou a expedição por isso. Sora disse estar disposta a vender a casa. Gorvak acha injusto que ela precise fazer isso e quer evitar a venda. A promessa é seu motivo, não garantia de encontrar tesouro ou voltar. No fim do dia ele olha quem ainda está de pé, e gosta demais de ser quem decide isso **[Criação]**.
 - **O que teme:** o forno de cal, e o alívio que sentiu quando a turma ficou mais quieta **[Criação]**. Anos segurando carroça em ladeira tornam plausível conter pressão; continuar quando os outros travam é teimosia, não um segundo ofício **[GDD §8.2, só a plausibilidade]**.
 - **Qualidade e como a demonstra:** fica no lugar quando a carga escorrega, e come pouco para sobrar pão. Na fala, oferece o corpo antes do plano: "Eu fico neste lado. Passa por trás de mim."
 - **Defeito e como prejudica suas relações:** decide o risco alheio e chama de cuidado. Tirou a ponta de baixo das mãos de Nilo, e cose a bota de Sora sem perguntar se ela quer esse tipo de desculpa. A pessoa fica sem a escolha e com o conserto.
@@ -64,7 +68,7 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Contexto | O que muda na escrita |
 | --- | --- |
 | Com alguém íntimo | Ainda manda, e o descanso entra como comida, sem discurso. "Bimbren. Come o calcanhar. Eu não vou perguntar da carta." O nome depende de quem estiver na cena. |
-| Com desconhecidos | Sem a turma e sem Nilo. Oferece o braço e o limite. "Eu seguro até ali. Depois é com você." |
+| Com desconhecidos | Quando perguntam por que veio ou pelo trabalho, pode explicar a situação da turma e do pagamento em frases conectadas. Nilo e o forno continuam privados. Oferece o braço e o limite. "Eu seguro até ali. Depois é com você." |
 | Com adversários | Mais baixo, sem "porra", sem explicação. "Tira a mão da corda." |
 | Sob medo | Não abre. Ocupa a mão do outro com a carga. "Eu não abro. Fica com a carga. Se for gente, a gente ouve a voz antes." |
 | Sob raiva | Some a explicação. O nome da pessoa vem no fim. "Larga isso. Agora. Você." |
@@ -98,7 +102,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 ## 6. Passado
 
 - **[GDD]** Aceitou a expedição. Não conhece, no início, a maldição nem o plano de destruir o medalhão. Pode morrer numa falha ou chegar ao Conselho e aconselhar reunir, se estiver vivo e na formação.
-- **[Criação]** É chefe de turma no pátio de carroças de uma pedreira da margem sul. Prende carga, troca correia e decide quem fica na ponta de baixo quando a ladeira aperta. Não é ferreiro. No inverno a pedreira corta o pagamento, e ele entrou na expedição pelo dinheiro que disse à turma que ia trazer.
+- **[Criação]** É chefe de turma no pátio de carroças de uma pedreira da margem sul. Prende carga, troca correia e decide quem fica na ponta de baixo quando a ladeira aperta. Não é ferreiro. Essa pedreira fecha no inverno, deixando a turma sem pagamento durante esses meses.
 - **[Criação]** Nilo, mais novo, pediu a ponta de baixo. Gorvak olhou o pulso e recusou. Nilo saiu no mesmo dia e foi para um forno de cal. Queimou a mão direita semanas depois. Gorvak conta a si mesmo que na carroça teria sido pior. Não escreveu. A mãe de Nilo, Sora, manda bota rasgada pelo pátio, e ele cose sem recado e sem preço. À noite divide o calcanhar do pão com quem está de guarda. O orgulho é que, em seis temporadas, nenhuma carroça da turma caiu em cima de gente. O orgulho não apaga o forno, e ele gostou do silêncio da turma depois que Nilo saiu.
 - **Evita mencionar:** o forno e o nome de Nilo. Se perguntam por que cose bota alheia, diz que a agulha já estava na bolsa.
 - **Não estabelecido:** idade numérica, nome da vila, os pais dele. Sem encontro com Irati, Palotina ou Tibagi.
