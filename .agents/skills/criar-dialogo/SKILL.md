@@ -14,15 +14,19 @@ Before briefing, writing, or revising dialogue, read [references/dialogue-direct
 Read the character sheets and the request. Answer the questions below internally; ask the requester only for information still needed to decide the scene. Use concrete events and actions. Accept “none” where appropriate.
 
 - Where are they, and what just happened to start the conversation?
-- What does each want from the other right now? What makes that difficult?
+- What does each want from the other right now? What makes that difficult? How do familiarity, obligations, and authority affect what each can ask or expect?
 - What does each know, hide, or avoid saying? What does the player know at this entry point, including anything the speakers do not?
-- What state is each in as the conversation begins? Which earlier events need to show in their reactions?
+- What state is each in as the conversation begins? Which established experiences or aspirations matter here, and which of them has the player necessarily seen?
 - How does each try to get what they want? What do they do if that fails?
 - Who leads the conversation? Does that change?
 - How does the scene end? What, if anything, changes between them?
 - Which events are fixed, and what may be invented?
 
 Use decisions already supplied and invent within the agreed latitude. Finish preparation when all eight questions have usable answers and any unresolved conflict affecting the scene is identified. A requested brief exposes these answers and the relevant source context to its writer.
+
+In a brief, distinguish source facts and binding constraints from creative suggestions. State the intended player experience and leave the writer room to realize it through interaction. Tie each restriction to an established contract or an explicit user decision; present your own proposed staging, phrasing, and sequence as suggestions.
+
+Make a delegated brief self-contained: include the relevant character and relationship context, guaranteed prior knowledge, and any available scene connections. The writer should be able to use it without access to the director's conversation.
 
 ## 3. Produce the assigned work
 

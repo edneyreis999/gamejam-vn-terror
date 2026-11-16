@@ -1,0 +1,45 @@
+# Shared MZ runtime test execution
+
+Read when preparing MZ runtime fixtures or creating, executing, or repairing their shared executor, including parallel slow tests. [Game Test Infrastructure](../../game-test-infrastructure/SKILL.md) owns the general creation and repair procedure; this reference supplies MZ harness constraints and execution guidance. Task and verification procedures retain their checks and verdicts. Use the root `loki.config.json` policy for effective worker and browser ceilings. Record overrides and any smaller effective concurrency. Do not assume that native WebGL tests open browsers.
+
+## Discover runnable work
+
+Inspect actual entrypoints, registration, manifests, helpers, maintained QA guides and their contracts. Follow dynamic imports and parameterized variants. Separate fast file/logic checks, native rendering/runtime checks, browser cases, and editor or human sensors. Select by the contracted capability and its consumers, not filename or UT/IT prefix. A recipe that captures material awaiting human judgment is executable work but cannot issue that judgment itself.
+
+Keep case/variant identities, execution boundaries and dependencies in the existing registration or a small project-owned selection manifest. Derive groups from that classification; a prefix plus a list of exceptions silently misclassifies future cases. Reconcile new registrations before running, including cases outside the selected group. Distinguish missing prerequisites, retired historical recipes and maintained executable obligations with evidence. Do not assume ignored artifacts or a past worktree exist: reproduce fixtures, builds and save producers from maintained inputs. A missing prerequisite remains visible; independent runnable cases continue.
+
+## Reuse or implement one executor
+
+Prefer the runner's native concurrency if it schedules the actual work and provides isolation. For Playwright E2E, read [Game Playwright Best Practices](../../game-playwright-best-practices/SKILL.md) for registration, context ownership, tracing, and stability comparisons, and [Playwright E2E for MZ](playwright-e2e.md) for engine observations. Correct registration before introducing another scheduler. Where native scheduling cannot support the actual execution boundary, independently selectable registrations can run in bounded child processes, preserving full discovery/registration checks and all required child variants. Escape exact selectors; test that selection neither matches neighboring IDs nor drops nested variants.
+
+Expose a project command accepting a scope/group or complete selection and optional execution limits/output destination. Resolve defaults from the project root rather than the current working directory or a spec folder. A final verifier consumes this same command; it does not reconstruct a research controller. Retain test infrastructure and disposable-fixture builders across specs, while keeping writes away from authored game files.
+
+Each queued job has its selection, prerequisites, owned resources and maximum simultaneous browser demand; native jobs reserve zero browsers. Run only ready jobs, reserving both worker capacity and browser demand before launch. Release capacity after cleanup. Bound nested runners too; ten outer jobs must not each launch another ten workers. If a job exceeds the browser ceiling or has unknown demand, inspect/split only independent work or report it as unschedulable; never silently exceed the limit. Enforce admission at the existing launch/runner boundary so an unexpected additional browser cannot bypass its reservation. Observe actual starts and exits; a measured ceiling breach invalidates the run even if assertions pass. Instrument reservations and outcomes, not a permanent monitoring platform.
+
+Jobs that cannot safely share a resource use an exclusive lane. Preserve an ordered save producer/import/Continue sequence and its origin contract rather than dispersing it across independent workers. Finish shared plugin builds and catalogue generation before dispatch, or isolate their outputs. A test reading a file while another process rebuilds it is not an independent test.
+
+## Own mutable resources
+
+Give each invocation and job distinct temporary paths, fixtures, browser profiles/storage and evidence destinations. Preserve nested-variant output identities. Prefer configurable output roots and ephemeral loopback ports; read the actual bound URL. An explicit occupied port fails clearly without stopping its listener. If probing a reused port, match the server's reuse behavior: a closed socket in TIME_WAIT is not a live listener. Binding the real server is stronger than a check-then-bind promise.
+
+Read-only engine/assets may be shared. Fixed-path mutation can require a disposable project copy per worker; copy-on-write is an optional filesystem optimization, not an APFS requirement. Inspect helpers before copying: saves or generated evidence can be inputs to another recipe. Make those dependencies explicit rather than clearing them as outputs.
+
+Browser saves live in origin-bound IndexedDB; distinct profiles alone do not redirect filesystem artifacts. Playtest saves live under the game and do not cross runtimes. Import only declared starting-state saves through the existing supported preparation path, preserving native payloads and provenance. Fixture setup does not authorize invoking the behavior under test in place of player actions.
+
+Every launched server, browser and child job needs an owner and a close operation. Use try/finally, signal forwarding and owned process handles/groups; clean partial startup as well as success, failure, timeout and interruption. Wait for cleanup before reusing a port or releasing a browser reservation. A failed cleanup is reported and cannot yield a clean pass. Never kill by generic browser/server name or sweep unrelated listeners.
+
+## Graphics, focus and scene readiness
+
+Inspect launch flags before increasing concurrency. Forced software rendering can saturate CPU. Select a backend supported by the actual host and validate it with existing real-game cases; Metal is macOS-specific, and a GPU-less host needs another supported configuration. Keep renderer/runtime changes visible in the result. A temporary launch qualification does not justify a permanent browser-starts-only test.
+
+Headed browser drivers may bring every window to front and assert document focus. Concurrent windows on one desktop can invalidate that sensor. Trace whether the contract requires actual desktop focus or only input/focus inside the target document; a launcher's `headless: false` or `bringToFront` call alone does not establish that requirement. When headed focus is the only barrier for otherwise independent cases without a required headed sensor, qualify headless execution with existing representative cases before serializing the whole group. Adopt it only if the same required input/rendering observations pass, retaining focus/visibility assertions. Otherwise serialize those cases and report the exclusive lane and its evidence. Browser success does not substitute for assigned NW.js/editor/exported-runtime evidence.
+
+A changed map ID or campaign variable is not native scene readiness. Before replacing a map fixture, wait for a started, non-busy `Scene_Map` with no pending transition; check and mutate within the same browser JavaScript turn when a frame between them could race. Adapt the predicate to the actual operation and pinned engine lifecycle. The existing bounded wait remains in force. Do not use sleeps, exception suppression, retries or inflated timeouts to hide a fixture race.
+
+## Qualify and execute
+
+Before a large run, use existing representative cases to exercise the changed selection, browser launch and overlapping resource ownership. Check the new configuration resolver with absent/partial config, explicit overrides and invalid input. Exercise collision, child failure, interruption and cleanup at the executor boundary when that behavior changes; these are infrastructure integrity checks, not duplicated game coverage. A fresh project should not inherit a requirement to repeat a historical serial benchmark.
+
+Freeze selected IDs/variants and relevant inputs for the measured run. Capture expected versus observed outcomes, missing/duplicate cases, exclusions, failures, cancellations and cleanup defects. Inspect recipe result records as well as process exit codes: successful capture can still need visual review. Record actual overlap and browser peaks; configured concurrency alone proves nothing.
+
+Measure monotonic wall time from run-specific preparation through final cleanup. Separate initial dependency installation/executor construction and fast checks from the complete slow interval. Record native, browser and exclusive-lane timing without adding overlapping durations into a false total. Preserve failed attempts and label corrected runs separately. If coverage changes during review, name the retained owners and report the changed inventory; elapsed time alone does not attribute savings to parallelism.
