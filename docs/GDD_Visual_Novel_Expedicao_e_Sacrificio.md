@@ -1218,7 +1218,7 @@ Cada herói mantém um único epílogo de sobrevivência, independente da escolh
 
 ## 19. Apresentação
 
-**Movimento sutil dos bustos — Confirmado em 2026-11-15:** estender a todos os bustos de personagens em uso o movimento aprovado nas primeiras falas de Gorvak: oscilação horizontal aditiva de ±5 pixels, sem deslocamento vertical, pelo Fidgeting nativo (velocidades X/Y 30). Falantes e ouvintes mantêm o movimento enquanto seus bustos estiverem presentes, preservando entradas, saídas, foco e elegibilidade. Com movimento reduzido, a amplitude é zero. A aplicação inclui Rheed nas duas idades e os candidatos ao sacrifício; exclui fundos, objetos, cards e figuras do palco da taverna/fogueira. O aceite estético humano do conjunto permanece **Pendente**.
+**Respiração dos bustos — Confirmado em 2026-11-16:** somente o busto do falante recebe Breathing nativo; ouvintes e composições sem falante permanecem parados. A respiração usa os padrões do comando: velocidades X/Y 20/30 e amplitudes X/Y 0,10/0,80 pontos percentuais de escala. Com movimento reduzido, ambas as amplitudes são zero. Preservar foco, tamanho, escurecimento, expressões, entradas, saídas e elegibilidade. Esta decisão substitui a oscilação horizontal aplicada pela PR #79: retirar Fidgeting dos bustos de toda a campanha, incluindo os candidatos ao sacrifício, que não recebem respiração apenas por estarem presentes. Fundos, objetos, cards, retratos memoriais e figuras do palco continuam fora do efeito. A decisão de comportamento está confirmada; a avaliação estética da aplicação global permanece **Pendente**.
 
 ### 19.1 Interface e acessibilidade
 

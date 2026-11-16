@@ -3115,60 +3115,16 @@
               ]
             },
             {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Coreto_2_VNPictureBusts",
-                "Fidgeting_Enable",
-                "FIDGETING: Start",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "SpeedX:eval": "30",
-                  "SpeedY:eval": "30",
-                  "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                  "RateY:eval": "0.00"
-                }
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Picture ID(s) = [\"60\"]"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed X = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed Y = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance Y = 0.00"
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                381
+              ]
             },
             {
               "code": 101,
@@ -3186,6 +3142,13 @@
               "indent": 2,
               "parameters": [
                 "$[council.rheed.1]"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -3581,57 +3544,6 @@
               "code": 357,
               "indent": 2,
               "parameters": [
-                "Coreto_2_VNPictureBusts",
-                "Fidgeting_Enable",
-                "FIDGETING: Start",
-                {
-                  "PictureID:arrayeval": "[\"63\"]",
-                  "SpeedX:eval": "30",
-                  "SpeedY:eval": "30",
-                  "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                  "RateY:eval": "0.00"
-                }
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Picture ID(s) = [\"63\"]"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Speed X = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Speed Y = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Distance Y = 0.00"
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 2,
-              "parameters": [
                 "VisuMZ_2_VNPictureBusts",
                 "Scale_ScaleTo",
                 "Scale_ScaleTo",
@@ -3681,6 +3593,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                384
+              ]
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -3696,6 +3615,13 @@
               "indent": 2,
               "parameters": [
                 "$[council.ivai.1]"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -4142,60 +4068,16 @@
               ]
             },
             {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Coreto_2_VNPictureBusts",
-                "Fidgeting_Enable",
-                "FIDGETING: Start",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "SpeedX:eval": "30",
-                  "SpeedY:eval": "30",
-                  "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                  "RateY:eval": "0.00"
-                }
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Picture ID(s) = [\"60\"]"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed X = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed Y = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance Y = 0.00"
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                381
+              ]
             },
             {
               "code": 101,
@@ -4213,6 +4095,13 @@
               "indent": 2,
               "parameters": [
                 "$[council.rheed.2]"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -4659,60 +4548,16 @@
               ]
             },
             {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Coreto_2_VNPictureBusts",
-                "Fidgeting_Enable",
-                "FIDGETING: Start",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "SpeedX:eval": "30",
-                  "SpeedY:eval": "30",
-                  "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                  "RateY:eval": "0.00"
-                }
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Picture ID(s) = [\"60\"]"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed X = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed Y = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance Y = 0.00"
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                381
+              ]
             },
             {
               "code": 101,
@@ -4730,6 +4575,13 @@
               "indent": 2,
               "parameters": [
                 "$[council.rheed.3]"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -5176,60 +5028,16 @@
               ]
             },
             {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Coreto_2_VNPictureBusts",
-                "Fidgeting_Enable",
-                "FIDGETING: Start",
-                {
-                  "PictureID:arrayeval": "[\"60\"]",
-                  "SpeedX:eval": "30",
-                  "SpeedY:eval": "30",
-                  "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                  "RateY:eval": "0.00"
-                }
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Picture ID(s) = [\"60\"]"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed X = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Speed Y = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 3,
-              "parameters": [
-                "Distance Y = 0.00"
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                381
+              ]
             },
             {
               "code": 101,
@@ -5247,6 +5055,13 @@
               "indent": 2,
               "parameters": [
                 "$[council.rheed.3]"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -5642,57 +5457,6 @@
               "code": 357,
               "indent": 2,
               "parameters": [
-                "Coreto_2_VNPictureBusts",
-                "Fidgeting_Enable",
-                "FIDGETING: Start",
-                {
-                  "PictureID:arrayeval": "[\"63\"]",
-                  "SpeedX:eval": "30",
-                  "SpeedY:eval": "30",
-                  "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                  "RateY:eval": "0.00"
-                }
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Picture ID(s) = [\"63\"]"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Speed X = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Speed Y = 30"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-              ]
-            },
-            {
-              "code": 657,
-              "indent": 2,
-              "parameters": [
-                "Distance Y = 0.00"
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 2,
-              "parameters": [
                 "VisuMZ_2_VNPictureBusts",
                 "Scale_ScaleTo",
                 "Scale_ScaleTo",
@@ -5742,6 +5506,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                384
+              ]
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -5757,6 +5528,13 @@
               "indent": 2,
               "parameters": [
                 "$[council.ivai.2]"
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -5942,6 +5720,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                385
+              ]
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -5971,6 +5756,13 @@
               "indent": 2,
               "parameters": [
                 "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -6291,6 +6083,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
+              ]
+            },
+            {
               "code": 357,
               "indent": 2,
               "parameters": [
@@ -6605,6 +6404,13 @@
               "indent": 2,
               "parameters": [
                 "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -6925,6 +6731,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
+              ]
+            },
+            {
               "code": 357,
               "indent": 2,
               "parameters": [
@@ -7239,6 +7052,13 @@
               "indent": 2,
               "parameters": [
                 "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -7559,6 +7379,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
+              ]
+            },
+            {
               "code": 357,
               "indent": 2,
               "parameters": [
@@ -7873,6 +7700,13 @@
               "indent": 2,
               "parameters": [
                 "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -8193,6 +8027,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
+              ]
+            },
+            {
               "code": 357,
               "indent": 2,
               "parameters": [
@@ -8507,6 +8348,13 @@
               "indent": 2,
               "parameters": [
                 "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
@@ -8844,6 +8692,13 @@
               ]
             },
             {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
+              ]
+            },
+            {
               "code": 101,
               "indent": 2,
               "parameters": [
@@ -8873,6 +8728,13 @@
               "indent": 2,
               "parameters": [
                 "da passagem da campanha fica a cargo do EventBridge."
+              ]
+            },
+            {
+              "code": 117,
+              "indent": 2,
+              "parameters": [
+                380
               ]
             },
             {
