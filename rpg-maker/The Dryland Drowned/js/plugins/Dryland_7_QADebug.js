@@ -188,6 +188,65 @@
     throw new Error('No seed settles ' + id + ': ' + (lastError && lastError.message));
   }
 
+  function planIntroduction() {
+    const { rules } = getEngine();
+    const play = session(rules);
+    const seed = 1;
+    play.send({ type: 'BEGIN', seed });
+    play.finishReading();
+    return {
+      seed, label: 'introduction', pilot: true, actions: play.sent,
+      landing: { map: 37, checkpoint: null, pilot: 'introduction' },
+      expect: state => state.phase === 'formation' && !state.reading
+    };
+  }
+
+  function planCamp() {
+    const { rules, catalog } = getEngine();
+    const seed = 1;
+    const play = toDoorstep(seed, 'physical', ['H1', 'H5', 'H2']);
+    const expect = state => state.phase === 'camp' && !state.reading && !state.activeSocialTopicId &&
+      rules.campTopic(state, 'H1') === 'camp.h1.church.a' &&
+      ['H1', 'H5'].every(id => state.partyIds.includes(id)) &&
+      !state.deadHeroIds.length && !state.completedSocialUnitIds.length;
+    for (let step = 0; step < 64; step++) {
+      if (expect(play.state())) return {
+        seed, label: 'camp', pilot: true, actions: play.sent,
+        landing: { map: 37, checkpoint: null, pilot: 'camp' }, expect
+      };
+      if (play.state().phase === 'camp' || play.state().phase === 'sacrifice_choice') break;
+      play.send(nextAction(rules, catalog, play.state(), { wins: true }));
+    }
+    throw new Error('No living-party preparation reached the first church camp');
+  }
+
+  function planGrief() {
+    const { rules, catalog } = getEngine();
+    const seed = 1;
+    const play = toDoorstep(seed, 'physical', ['H1', 'H5', 'H2']);
+    const expect = state => state.phase === 'camp_arrival' &&
+      state.dungeonId === 'physical' && state.routeCursor === 3 &&
+      state.reading && state.reading.index === 0 && !state.activeSocialTopicId &&
+      state.partyIds.includes('H1') && state.deadHeroIds.length === 1 &&
+      state.deadHeroIds.includes('H5') && !state.completedSocialUnitIds.length &&
+      rules.pendingGrief(state).includes('grief.h1.h5');
+    for (let step = 0; step < 64; step++) {
+      const state = play.state();
+      if (expect(state)) return {
+        seed, label: 'grief', pilot: true, actions: play.sent,
+        landing: { map: 45, checkpoint: 'camp_entry' }, expect
+      };
+      if (state.phase === 'camp_arrival') break;
+      if (state.phase === 'sacrifice_choice') {
+        if (state.deadHeroIds.length) break;
+        play.send({ type: 'SELECT_VICTIM', heroId: 'H5' });
+      } else {
+        play.send(nextAction(rules, catalog, state, { wins: state.deadHeroIds.includes('H5') }));
+      }
+    }
+    throw new Error('No legal loss preparation reached the first church camp');
+  }
+
   // ---------------------------------------------------------------------------
   // Applying a plan through the EventBridge command path (what events use).
   // ---------------------------------------------------------------------------
@@ -218,6 +277,11 @@
     const interpreter = new Game_Interpreter();
     for (const action of plan.actions) sendLive(interpreter, action);
     if (!plan.expect(campaign())) throw new Error('Landing phase was ' + campaign().phase);
+    if (plan.landing.pilot) {
+      // A one-shot presentation request; campaign facts still come only from replay.
+      $gameTemp._drylandPilotEntry = plan.landing.pilot;
+    }
+    if (plan.pilot) $gameTemp._drylandPilotScenario = plan.label;
     $gamePlayer.reserveTransfer(plan.landing.map, 10, 7, 2, 0);
     // The game's own checkpoint router saves the point the last action reached.
     if (plan.landing.checkpoint) {
@@ -308,6 +372,7 @@
     const route = state.dungeonId ? state.dungeonId + ' ' + state.position : '-';
     return [
       text('debug.panel.seed') + ': ' + state.seed,
+      ...($gameTemp._drylandPilotScenario ? [text('debug.pilot.title') + ': ' + text('debug.pilot.' + $gameTemp._drylandPilotScenario)] : []),
       text('debug.panel.phase') + ': ' + state.phase,
       text('debug.panel.route') + ': ' + route,
       text('debug.panel.party') + ': ' + (state.partyIds.join(', ') || '-'),
@@ -344,9 +409,10 @@
     this._rootWindow = this.addList(rect, [
       { name: text('debug.go_trap'), symbol: 'goTrap' },
       { name: text('debug.scenarios'), symbol: 'scenarios' },
+      { name: text('debug.pilot.title'), symbol: 'pilot' },
       { name: () => text('debug.hint') + ': ' + text(hintOn() ? 'debug.hint.on' : 'debug.hint.off'), symbol: 'hint' },
       { name: text('debug.back'), symbol: 'cancel' }
-    ], { goTrap: this.openTraps, scenarios: this.openScenarios, hint: this.toggleHint, cancel: this.popScene });
+    ], { goTrap: this.openTraps, scenarios: this.openScenarios, pilot: this.openPilot, hint: this.toggleHint, cancel: this.popScene });
     this._trapWindow = this.addList(rect, TRAPS.map(trap => ({
       name: trap + ' — ' + text('enc.' + trap.toLowerCase() + '.name'), symbol: 'trap', ext: trap
     })), { trap: this.askTrap });
@@ -355,12 +421,19 @@
       name: text('debug.scn.' + id), symbol: 'scenario', ext: id
     })), { scenario: this.askScenario });
     this._scenarioWindow.setHandler('cancel', this.closeLists.bind(this));
+    this._pilotWindow = this.addList(rect, [
+      { name: text('debug.pilot.introduction'), symbol: 'introduction' },
+      { name: text('debug.pilot.camp'), symbol: 'camp' },
+      { name: text('debug.pilot.grief'), symbol: 'grief' },
+      { name: text('debug.back'), symbol: 'cancel' }
+    ], { introduction: this.askIntroduction, camp: this.askCamp, grief: this.askGrief, cancel: this.closeLists });
     this._confirmWindow = this.addList(new Rectangle(0, helpHeight, Graphics.boxWidth, this.calcWindowHeight(2, true)), [
       { name: text('debug.confirm'), symbol: 'yes' }, { name: text('debug.cancel'), symbol: 'no' }
     ], { yes: this.runJump, no: this.cancelConfirm });
     this._confirmWindow.setHandler('cancel', this.cancelConfirm.bind(this));
     this.dismiss(this._trapWindow);
     this.dismiss(this._scenarioWindow);
+    this.dismiss(this._pilotWindow);
     this.dismiss(this._confirmWindow);
     this.showPanel();
   };
@@ -391,6 +464,20 @@
     this._list = this._scenarioWindow;
     this.dismiss(this._rootWindow);
     this.present(this._list, 0);
+  };
+  Scene_DrylandDebug.prototype.openPilot = function() {
+    this._list = this._pilotWindow;
+    this.dismiss(this._rootWindow);
+    this.present(this._list, 0);
+  };
+  Scene_DrylandDebug.prototype.askIntroduction = function() {
+    this.ask(planIntroduction);
+  };
+  Scene_DrylandDebug.prototype.askCamp = function() {
+    this.ask(planCamp);
+  };
+  Scene_DrylandDebug.prototype.askGrief = function() {
+    this.ask(planGrief);
   };
   Scene_DrylandDebug.prototype.toggleHint = function() {
     setHint(!hintOn());

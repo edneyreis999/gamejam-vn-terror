@@ -28,7 +28,7 @@ choice.title.new_game	New Game	Novo jogo
 title.name	The Dryland Drowned	Afogados em Terra Seca
 title.heading	The Dryland	Afogados
 title.subheading	Drowned	em Terra Seca
-title.age_notice	This game is not recommended for players under 16.<br>It contains content related to psychological horror, death and coercion.	Este jogo não é recomendado para menores de 16 anos.<br>Contém conteúdos relacionados a horror psicológico, morte e coerção.
+title.age_notice	This game is not recommended for players under 18.<br>It contains content related to psychological horror, death and coercion.	Este jogo não é recomendado para menores de 18 anos.<br>Contém conteúdos relacionados a horror psicológico, morte e coerção.
 choice.title.options	Options	Configurações
 choice.title.quit	Quit	Sair
 tavern.prep.ivai	We've got the whole party together, so let's get rolling!	Bem, agora que nossa equipe está completa, vamos traçar nossa rota!
@@ -408,12 +408,16 @@ memorial.intro	We didn't bring everyone back. That's the part they always leave 
 closure.first.rheed	<I>First piece secured. The relief was real—we actually cracked a smile after all that. But looking at the incomplete map brought us right back to reality. Half was still missing. We stowed it away and headed for the tavern to figure out what we were up against next.</I>	<I>Finalmente, uma parte do mapa estava em nossas mãos. Lembro do alívio. Depois de tanta tensão, até conseguimos sorrir. Mas bastou olhar para aquela peça incompleta para lembrar que ainda faltava a outra metade. Guardamos o mapa e começamos o caminho de volta. Na taverna, decidiríamos como enfrentar o que vinha pela frente.</I>
 closure.second.rheed	<I>There it was. The missing half. For a split second, I actually thought the worst was over. I just wanted to drag ourselves back to the tavern, slap both pieces on a table, and see where they led. But then reality set in. We had the map... but now we actually had to walk the path.</I>	<I>Ali estava a parte que faltava. Por um instante, achei que o pior tinha passado. Queríamos voltar à taverna, abrir as duas peças sobre a mesa e descobrir aonde elas nos levariam. Foi quando me dei conta: tínhamos encontrado o mapa. Mas ainda precisaríamos seguir o caminho.</I>
 conv.party_count	Party: \V[150]/\V[151]	Grupo: \V[150]/\V[151]
-conv.gorvak.ivai_why	I gotta ask, Gorvak... what's your real reason for tagging along with us?	Por que decidiu participar da expedição, Gorvak?
-conv.gorvak.why	My forge went up in flames. My share of the gold is going straight into those ashes to rebuild. My apprentices have families to feed, you know?	Minha oficina pegou fogo. Quero usar minha parte do tesouro para reconstruí-la e trazer meus aprendizes de volta ao trabalho.
+conv.gorvak.ivai_why	Gorvak. If your share of the treasure comes through, what will you do with it?	Gorvak. Se a sua parte do tesouro chegar, o que você faz com ela?
+conv.gorvak.why	The quarry stops paying in winter. I'll cover those months. I've already told the crew.	No inverno a pedreira corta o pagamento. Eu cubro esses meses. Já falei para a turma.
+conv.gorvak.sora	Sora's house stays standing. Without my share, she has to sell.	A casa da Sora fica de pé. Sem a parte, ela vende.
+conv.gorvak.ivai_return	Winter covered, the house still standing, and you back with the crew. A good day to tell people about.	Inverno pago, casa no lugar, e você de volta no meio da turma. Dá um dia bom para contar.
+conv.gorvak.ivai_help	The crew's winter pay, and Sora's house. I heard you. And on the road, what can you do for us?	Os meses da turma, e a casa da Sora. Eu ouvi. E no caminho, o que você faz por nós?
+conv.gorvak.ivai_limit	I'll follow behind you and move past when you say. And you'll hold it until we get through?	Eu vou atrás e passo quando você disser. E você segura até a gente passar?
 conv.ivai.help	And out there? What exactly are you good for?	E durante a viagem? Como pode nos ajudar?
-conv.gorvak.help1	Door's stuck? I'll force it. A beam gives out? I'll hold the damn ceiling up while you cross. It's how I got my boys out of the fire.	Se uma porta pesada bloquear o caminho, posso abri-la. Se uma viga ceder, posso sustentá-la enquanto vocês passam. Foi assim que ajudei meus aprendizes a escapar do incêndio.
-conv.gorvak.help2	And if you freeze up down there... I've got your back. The roof was practically coming down on my head, and I still went back for the youngest.	E, se o medo apertar, fico por perto. Mesmo com o teto desabando, consegui voltar para buscar meu último aprendiz.
-conv.gorvak.note	Listen for the groans, though. When old wood starts talking, you move--or it comes down on you.	Mas prestem atenção aos estalos. Madeira velha pode estar avisando que vai ceder.
+conv.gorvak.help1	If a load slips on a slope, I'll put my shoulder to it. You follow behind me. Move past when I say.	Se a carga escorregar na ladeira, eu ponho o ombro nela. Você vem atrás de mim. Passa quando eu disser.
+conv.gorvak.help2	I'll hold it until you've gone past and you're out from under it. Then I let go.	Eu seguro até você passar e sair de baixo. Aí eu largo.
+conv.gorvak.note	Don't call it a good day. I said winter pay and the house. That's all.	Não chama de dia bom. Eu falei os meses e a casa. É isso.
 conv.gorvak.selected	You made the right call. I'll make sure everyone's armor is holding together before we move out.	Pode contar comigo, Ivaí. Vou conferir nosso equipamento antes de sairmos.
 conv.gorvak.full	Three's a crowd. You'll need to leave someone behind if you want me in the vanguard.	Você já escolheu três pessoas, Ivaí. Precisa tirar alguém do grupo antes de me incluir.
 conv.elowen.ivai_why	Why did you decide to join the expedition, Elowen?	Por que decidiu participar da expedição, Elowen?
@@ -471,11 +475,12 @@ ui.medallion.restore	Restore the medallion	Reunir o medalhão
 ui.medallion.destroy	Destroy the medallion	Destruir o medalhão
 ui.medallion.restore.description	Free the lovers and sacrifice Ivaí	Libertar os amantes e sacrificar Ivaí
 ui.medallion.destroy.description	Save Ivaí and surrender the lovers to Andirá	Salvar Ivaí e entregar os amantes a Andirá
-camp.h1.church.a.01	Every time I think about the church, my mind wanders back to the shop. Day one of the rebuild. Ain't even got the coin yet, and I'm already figuring out where the anvil goes.	Quando penso em chegar à igreja, acabo pensando na minha oficina. No primeiro dia depois da reconstrução. Ainda nem tenho o dinheiro, e já estou escolhendo onde pôr a bancada.
-camp.h1.church.a.02	Same spot as before?	No mesmo lugar de antes?
-camp.h1.church.a.03	Closer to the door. Let the apprentices piss and moan about the draft.	Mais perto da porta. Meus aprendizes vão reclamar da corrente de ar.
-camp.h1.church.a.04	Gonna budge on that?	E o senhor vai mudar de ideia?
-camp.h1.church.a.05	Not a chance. They can argue over the door's color all they want.	Sobre isso, não. Sobre a cor da porta, podem discutir à vontade.
+camp.h1.church.a.01	The bigger piece is yours. The crust's hard. Eat.	A grande é sua. As beiradas tão duras. Come.
+camp.h1.church.a.02	Hey, Gorvak. Thanks. I will.	Ô, Gorvak. Valeu. Eu como.
+camp.h1.church.a.03	What about you, with that little piece? You're hungry too, right? I mean, if you are.	E você, com essa pequena? Você tá com fome, né? Quer dizer, se tiver.
+camp.h1.church.a.04	There's firewood to get. Eat the bigger piece.	Tem lenha pra buscar. Come a grande.
+camp.h1.church.a.05	Wait, wait. I didn't ask for the big piece. I'll take the small one. I'll leave the other one here, next to you.	Espera, espera. A grande eu não pedi. Eu fico com a pequena. A outra eu deixo aqui, do seu lado.
+camp.h1.church.a.06	Leave it. Eat the one you took.	Deixa. Come a que você pegou.
 camp.h1.church.b.01	Ivaí, when we hit the church, you're on point with me. I want to hear what we're walking into before I lay a finger on anything.	Ivaí, quando chegarmos à igreja, você vai à frente comigo. Quero ouvir o que espera encontrar antes de pôr a mão em qualquer coisa.
 camp.h1.church.b.02	The records only go so far. I need eyes on the ground.	Os registros não explicam tudo. Preciso reconhecer o lugar.
 camp.h1.church.b.03	Then just say you don't know. I can work with that.	Então diga que não sabe. Posso trabalhar com isso.
@@ -712,8 +717,10 @@ camp.h8.village.b.02	What are you asking me?	O que você está me pedindo?
 camp.h8.village.b.03	To stop and listen when someone says they're afraid. Including yourself.	Que pare para ouvir quando alguém disser que tem medo. Inclusive você.
 camp.h8.village.b.04	It's not easy to say that now.	Não é fácil dizer isso agora.
 camp.h8.village.b.05	I didn't ask for easy. I asked you not to leave it until someone pays for the hurry.	Não pedi facilidade. Pedi que não deixasse para depois de alguém pagar pela pressa.
-interject.h1.h5.01	When the workshop opens, I can carry the first orders. If I have to travel through the night, I will.	Quando a oficina abrir, posso levar as primeiras encomendas. Se for preciso atravessar a noite, atravesso.
-interject.h1.h5.02	You can sleep there and leave in the morning. I'm not rebuilding the forge just to start demanding that of a friend.	Você pode dormir lá e partir de manhã. Não vou reconstruir a forja para começar exigindo isso de um amigo.
+interject.h1.h5.01	I waited until the bread was shared out before I asked. I didn't want to look like I needed any. I do.\. Pass me a piece.	Eu esperei o pão ser partido pra pedir. Não queria parecer que eu tava precisando. Preciso.\. Me passa um pedaço.
+interject.h1.h5.02	Took you a while. Take the heel. Sit down and eat.	Demorou. Toma o calcanhar. Senta e come.
+interject.h1.h5.03	I'll take the heel. I'll decide whether to sit or stand. If you eat now, I'll stay until the bread's gone.	O calcanhar eu aceito. Sentar ou ficar em pé eu decido. Se você comer agora, eu fico até acabar o pão.
+interject.h1.h5.04	The heel's yours. I'll eat here. Up to you whether you sit.	O calcanhar é seu. Eu como aqui. Você é que sabe se senta.
 interject.h1.h8.01	I can look after your things while you rest. You don't need to keep checking whether I can manage.	Posso guardar suas coisas enquanto descansa. Não precisa ficar vigiando se dou conta.
 interject.h1.h8.02	I was going to say I wasn't checking. But you already know when I'm lying.	Eu ia dizer que não estava vigiando. Mas você já sabe quando estou mentindo.
 interject.h2.h6.01	I can give you an estimate when we've finished resting. No guarantees, and no rushing me halfway through the calculation.	Posso lhe dar uma estimativa quando terminarmos de descansar. Sem garantia e sem você me apressar no meio da conta.
@@ -731,8 +738,12 @@ interject.h4.h7.02	It may. I just don't want the desire to record something deci
 arrival.none.01	During those stops, I still made small plans. Finish my food. Rest my feet. Reach our destination and have something good to tell. Ivaí watched the path; I tried to get the others talking. We hadn't lost anyone yet. For a few minutes, it was possible to think about coming home without having to stop myself.	Naquelas pausas, eu ainda fazia planos pequenos. Terminar a comida. Descansar os pés. Chegar ao destino e ter alguma coisa boa para contar. Ivaí olhava para o caminho; eu tentava fazer os outros conversarem. Ainda não tínhamos perdido ninguém. Por alguns minutos, era possível pensar na volta sem precisar interromper o pensamento.
 arrival.recent.01	At that stop, people were missing. I kept busy with the food so I wouldn't have to start the conversation. Ivaí seemed to be waiting for someone else to speak too. We wanted to reach our destination, but we could no longer talk about the journey without thinking of those who were gone. We stayed close to the fire. It took a while for someone to find words.	Naquela pausa, faltava gente. Eu me ocupava com a comida para não precisar começar a conversa. Ivaí também parecia esperar que outra pessoa dissesse alguma coisa. Queríamos chegar, mas já não conseguíamos falar da viagem sem pensar em quem não estava mais ali. Ficamos perto do fogo. Demorou até alguém encontrar o que dizer.
 arrival.prior.01	We lost no one else on that stretch of the journey. I felt relieved, but the earlier losses were still with us. There were names that made me hesitate before speaking. Ivaí sat down, the others tended to their things, and conversation slowly returned. We still wanted to arrive. We just knew coming home wouldn't be the way we'd imagined.	Naquele trecho, não perdemos mais ninguém. Eu sentia alívio, mas as perdas anteriores continuavam conosco. Já havia nomes que me faziam hesitar antes de falar. Ivaí se sentava, os outros cuidavam das próprias coisas, e aos poucos a conversa voltava. Ainda queríamos chegar. Só já sabíamos que voltar não seria como tínhamos imaginado.
-grief.h1.h5.01	I went to set a bundle aside for Bimbren. He always asked which was heaviest before I was finished. Today I was going to offer him the lightest.	Fui separar um volume para o Bimbren. Ele sempre perguntava qual era o mais pesado antes de eu terminar. Hoje eu ia oferecer o mais leve.
-grief.h1.h5.02	I'll help carry things. You don't have to take all of it.	Eu ajudo a carregar. Não precisa ficar tudo com o senhor.
+grief.h1.h5.01	I broke this piece off for Bimbren.\.	Parti esse pedaço para o Bimbren.\.
+grief.h1.h5.02	My hand got ahead of me. He's not here to take it. Put it with my bread. It's bread.	A mão foi na frente. Ele não está para pegar. Junta no meu pão. É pão.
+grief.h1.h5.03	Hey, Gorvak. I'll put it with your bread. Do you want to eat now, or leave the piece? I'll stay either way.	Ô, Gorvak. No seu pão, eu junto. Você come agora ou deixa o pedaço? Eu fico aqui dos dois jeitos.
+grief.h1.h5.04	Don't. I'm still picking out his piece. Bimbren took what he wanted and argued over what I picked.	Não junta. Eu ainda escolho o pedaço. O Bimbren pegava o que queria e discutia o que eu escolhia.
+grief.h1.h5.05	Then I won't put it with your bread. I'll sit here.	Então eu não junto no seu pão. Sento aqui.
+grief.h1.h5.06	I'll eat this piece. Sit close.	Eu como esse pedaço. Senta perto.
 grief.h1.h8.01	Draska made me sit down before I'd admit I was tired. I just looked for her. I still do that.	A Draska me fazia sentar antes de eu admitir que estava cansado. Acabei de procurar o olhar dela. Ainda faço isso.
 grief.h1.h8.02	Then sit for a while. I'll stay here.	Então senta um pouco. Eu fico aqui.
 grief.h2.h6.01	I was about to say Liora was taking too long. I hadn't even looked beside me. I didn't know I could miss someone telling me to wait.	Eu ia dizer que a Liora estava demorando. Nem tinha olhado para o lado. Não sabia que podia sentir falta de ouvir alguém me mandar esperar.
@@ -1071,3 +1082,7 @@ route.map.supernatural	Park	Parque
 route.map.final	Village	Vilarejo
 route.map.here	You are here	Você está aqui
 route.map.next	Next stop	Próxima parada
+debug.pilot.title	Narrative pilot	Piloto narrativo
+debug.pilot.introduction	Gorvak's introduction	Apresentação de Gorvak
+debug.pilot.camp	Gorvak and Bimbren at camp	Gorvak e Bimbren na fogueira
+debug.pilot.grief	Gorvak without Bimbren	Gorvak sem Bimbren

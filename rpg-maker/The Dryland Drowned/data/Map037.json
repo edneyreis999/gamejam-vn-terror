@@ -2630,6 +2630,49 @@
                             "indent": 0,
                             "parameters": [
                                 12,
+                                "$gameTemp._drylandPilotEntry === \"camp\" && $gameVariables.value(31) === \"camp\""
+                            ]
+                        },
+                        {
+                            "code": 122,
+                            "indent": 1,
+                            "parameters": [
+                                216,
+                                216,
+                                0,
+                                4,
+                                "\"camp\""
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_EventBridge",
+                                "Checkpoint",
+                                "Checkpoint",
+                                {
+                                    "reason": "camp_arrival_complete"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
                                 "$gameVariables.value(216) === \"camp\""
                             ]
                         },
@@ -2711,6 +2754,57 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Picture ID(s) = [\"60\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -2753,6 +2847,61 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 0,
+                            "parameters": [
+                                12,
+                                "$gameTemp._drylandPilotEntry === \"introduction\" && $gameVariables.value(31) === \"formation\""
+                            ]
+                        },
+                        {
+                            "code": 355,
+                            "indent": 1,
+                            "parameters": [
+                                "delete $gameTemp._drylandPilotEntry;"
+                            ]
+                        },
+                        {
+                            "code": 122,
+                            "indent": 1,
+                            "parameters": [
+                                216,
+                                216,
+                                0,
+                                4,
+                                "\"tavern\""
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                67
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "ConsumeInput",
+                                "ConsumeInput",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 119,
+                            "indent": 1,
+                            "parameters": [
+                                "pilot.introduction"
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 0,
+                            "parameters": []
+                        },
+                        {
                             "code": 118,
                             "indent": 0,
                             "parameters": [
@@ -2765,6 +2914,18 @@
                             "parameters": [
                                 12,
                                 "!$gameScreen.picture(60)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
                             ]
                         },
                         {
@@ -2785,6 +2946,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"60\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -2863,6 +3075,43 @@
                             ]
                         },
                         {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameTemp._drylandPilotEntry === \"camp\" && $gameVariables.value(217) === \"camp.h1.church.a\""
+                            ]
+                        },
+                        {
+                            "code": 355,
+                            "indent": 2,
+                            "parameters": [
+                                "delete $gameTemp._drylandPilotEntry;"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "Dryland_Presentation",
+                                "ConsumeInput",
+                                "ConsumeInput",
+                                {}
+                            ]
+                        },
+                        {
+                            "code": 119,
+                            "indent": 2,
+                            "parameters": [
+                                "pilot.camp"
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
                             "code": 357,
                             "indent": 1,
                             "parameters": [
@@ -2929,6 +3178,13 @@
                             ]
                         },
                         {
+                            "code": 118,
+                            "indent": 3,
+                            "parameters": [
+                                "pilot.camp"
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 3,
                             "parameters": [
@@ -2981,6 +3237,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -3210,6 +3517,24 @@
                             ]
                         },
                         {
+                            "code": 101,
+                            "indent": 3,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Rheed"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "$[camp.h1.church.a.03]"
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 3,
                             "parameters": [
@@ -3282,7 +3607,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "$[camp.h1.church.a.03]"
+                                "$[camp.h1.church.a.04]"
                             ]
                         },
                         {
@@ -3358,7 +3683,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "$[camp.h1.church.a.04]"
+                                "$[camp.h1.church.a.05]"
                             ]
                         },
                         {
@@ -3434,7 +3759,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "$[camp.h1.church.a.05]"
+                                "$[camp.h1.church.a.06]"
                             ]
                         },
                         {
@@ -3505,6 +3830,18 @@
                             "code": 357,
                             "indent": 4,
                             "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Basic_EnterBust",
                                 "Basic_EnterBust",
@@ -3519,6 +3856,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Picture ID(s) = [\"62\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -3780,6 +4168,216 @@
                             "code": 357,
                             "indent": 4,
                             "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "TargetScaleX:str": "54",
+                                    "TargetScaleY:str": "54",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 4,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Bimbren"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "$[interject.h1.h5.03]"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "TargetScaleX:str": "48.6",
+                                    "TargetScaleY:str": "48.6",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 4,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Gorvak"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "$[interject.h1.h5.04]"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
                                 "Dryland_Presentation",
                                 "ReadingEnd",
                                 "ReadingEnd",
@@ -3942,6 +4540,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -4565,6 +5214,57 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -5007,6 +5707,18 @@
                             "code": 357,
                             "indent": 4,
                             "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Basic_EnterBust",
                                 "Basic_EnterBust",
@@ -5021,6 +5733,57 @@
                                     "HorzMirror:str": "Mirror",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Picture ID(s) = [\"62\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -5444,6 +6207,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -6067,6 +6881,57 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -6678,6 +7543,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -7701,6 +8617,13 @@
                             ]
                         },
                         {
+                            "code": 118,
+                            "indent": 1,
+                            "parameters": [
+                                "pilot.introduction"
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 1,
                             "parameters": [
@@ -7764,6 +8687,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -8054,6 +9028,24 @@
                             ]
                         },
                         {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Gorvak"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.sora]"
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 1,
                             "parameters": [
@@ -8209,7 +9201,325 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "$[conv.ivai.help]"
+                                "$[conv.gorvak.ivai_return]"
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                351
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Gorvak"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.note]"
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                351
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Ivaí"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.ivai_help]"
                             ]
                         },
                         {
@@ -8388,6 +9698,165 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 411,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 412,
+                            "indent": 1,
+                            "parameters": []
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                351
+                            ]
+                        },
+                        {
+                            "code": 101,
+                            "indent": 1,
+                            "parameters": [
+                                "",
+                                0,
+                                0,
+                                2,
+                                "Ivaí"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "$[conv.gorvak.ivai_limit]"
+                            ]
+                        },
+                        {
+                            "code": 111,
+                            "indent": 1,
+                            "parameters": [
+                                12,
+                                "$gameVariables.value(47)"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 2,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "50",
                                     "TargetScaleY:str": "50",
                                     "Duration:eval": "0"
@@ -8528,24 +9997,6 @@
                             "indent": 1,
                             "parameters": [
                                 "$[conv.gorvak.help2]"
-                            ]
-                        },
-                        {
-                            "code": 101,
-                            "indent": 1,
-                            "parameters": [
-                                "",
-                                0,
-                                0,
-                                2,
-                                "Gorvak"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "$[conv.gorvak.note]"
                             ]
                         },
                         {
@@ -8722,6 +10173,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -9763,6 +11265,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {

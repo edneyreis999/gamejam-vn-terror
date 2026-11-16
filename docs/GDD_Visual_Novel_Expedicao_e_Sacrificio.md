@@ -4,7 +4,7 @@
 **Título internacional para metadados:** The Dryland Drowned\
 **Versão-base:** 4.0, com atualizações incrementais\
 **Data da consolidação-base:** 4 de setembro de 2026\
-**Última atualização:** 14 de novembro de 2026\
+**Última atualização:** 15 de novembro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Idiomas jogáveis:** PT-BR e EN-US; inglês como padrão inicial (localização aprovada, implementação pendente)\
@@ -193,14 +193,16 @@ Cada encontro possui um único texto de sucesso por abordagem e um único texto 
 
 ### 3.5 Público, idioma e duração
 
-- Público principal: pessoas a partir de 16 anos que apreciem visual novels curtas, horror psicológico, escolhas morais e elencos sujeitos a perdas.
-- Classificação pretendida no Brasil: 16 anos, sujeita à autoclassificação e à classificação oficial aplicável.
+- Público principal: pessoas a partir de 18 anos que apreciem visual novels curtas, horror psicológico, escolhas morais e elencos sujeitos a perdas.
+- Classificação pretendida no Brasil: 18 anos, sujeita à autoclassificação e à classificação oficial aplicável.
 - Avisos de conteúdo: morte permanente, sacrifício, afogamento, perseguição, manipulação, preconceito entre raças fantásticas e horror psicológico.
-- Conteúdo excluído: gore explícito, violência sexual, drogas, apostas, compras e interação entre usuários.
+- Conteúdo excluído: apostas, compras e interação entre usuários.
 - **Idiomas — Confirmado em 2026-09-28:** PT-BR e EN-US em toda a experiência jogável, com inglês como padrão inicial e seleção/comportamento nativos do plugin. Preservar a preferência escolhida pelo jogador. A localização inclui narrativa, escolhas, interface, avisos, créditos e textos em imagens. O agente produz a tradução em inglês americano natural e acessível, preservando informações, nomes de personagens e criaturas do folclore, voz e clima de horror. Outro agente, sem participação no desenvolvimento, avalia a clareza como jogador; Edney é responsável pela revisão editorial. Produto aprovado; projeto técnico e implementação seguem os estados da [spec incremental](../planos/tasks/coreto-english-localization/spec.md) e da [verificação](../planos/tasks/coreto-english-localization/verification.md). A [ADR-001](../planos/tasks/coreto-english-localization/adrs/adr-001-bilingual-product.md) registra a substituição do limite anterior de PT-BR.
 - Primeira campanha: 60 a 75 minutos; repetição: 35 a 50 minutos.
 - Distribuição de tempo: introdução e preparação até 8 minutos; cada rota inicial entre 15 e 20; Vilarejo e clímax entre 20 e 25; memorial e epílogos até 5.
 - Avanço rápido: somente texto já visto na campanha atual. Pular texto inédito fica fora do escopo porque exigiria novas regras de segurança narrativa e QA.
+
+**Direção confirmada pelo dono em 2026-11-15:** público e classificação pretendida passam a 18 anos, com liberdade para cenas pesadas e palavrões. Ficam retiradas as exclusões gerais de gore explícito, violência sexual e drogas. Esta decisão não declara classificação oficial obtida nem conteúdo novo implementado; preserva o horror psicológico, o mundo sem humanos, a trama, as regras e a arte existente.
 
 ### 3.6 Plataforma, publicação e entrada
 
@@ -1170,6 +1172,8 @@ Esses percentuais são referências de QA e balanceamento global, não metas apl
 
 **Proveniência das falas — integração confirmada em 2026-09-25:** a [spec `updated-narrative-copy`](../planos/tasks/updated-narrative-copy/spec.md) registra a revisão de `# Falas de cada herói.md` usada para apresentação, seleção, grupo cheio, despedida e opinião. Essa antologia e o arquivo distinto `Falas-de-cada-herói.md` não são autoridades atuais a restaurar ou combinar; sua história permanece no Git. Cada apresentação mantém seis falas e cada opinião, dois parágrafos. Elegibilidade, ordem, posição aconselhada, competências e epílogos permanecem sob as regras deste GDD. O aceite daquela fonte para integração não declara aceite da apresentação integrada nem aprovação criativa final de todo o jogo.
 
+**Piloto Gorvak–Bimbren — Confirmado em 2026-11-15:** a quantidade de falas, linhas e caixas é flexível somente na apresentação de Gorvak na taverna, na conversa A da primeira fogueira do Caminho da Igreja (com intervenção condicional de Bimbren) e na reação automática Gorvak → Bimbren morto. A regra histórica de seis falas acima deixa de limitar a apresentação de Gorvak nesse piloto; os quantitativos das cenas não abrangidas continuam vigentes. Preservar trama, revelações, participantes, condições, consequências e identidades/fronteiras de conclusão de leitura. O [GDDR-009](gddrs/gddr-009-piloto-narrativo-gorvak-bimbren.md) registra o recorte e sua relação com o GDDR-008 e a integração histórica. A execução foi autorizada; prosa, staging, localização e eficácia emocional ainda dependem de entrega e avaliação próprias.
+
 Os nomes das competências na tabela são internos e não compõem as bios públicas. Idade, ofício, personalidade e arquétipo antigos foram retirados como restrições; as novas fichas preservam a identidade visual dos retratos existentes e o mundo sem humanos, distinguindo dados de fonte de criação compatível.
 
 | Código | Herói | Competências internas | Ficha corrente |
@@ -1213,6 +1217,8 @@ Cada herói mantém um único epílogo de sobrevivência, independente da escolh
 ---
 
 ## 19. Apresentação
+
+**Movimento sutil dos bustos — Confirmado em 2026-11-15:** estender a todos os bustos de personagens em uso o movimento aprovado nas primeiras falas de Gorvak: oscilação horizontal aditiva de ±5 pixels, sem deslocamento vertical, pelo Fidgeting nativo (velocidades X/Y 30). Falantes e ouvintes mantêm o movimento enquanto seus bustos estiverem presentes, preservando entradas, saídas, foco e elegibilidade. Com movimento reduzido, a amplitude é zero. A aplicação inclui Rheed nas duas idades e os candidatos ao sacrifício; exclui fundos, objetos, cards e figuras do palco da taverna/fogueira. O aceite estético humano do conjunto permanece **Pendente**.
 
 ### 19.1 Interface e acessibilidade
 
@@ -1278,7 +1284,7 @@ Cada herói mantém um único epílogo de sobrevivência, independente da escolh
 
 **Revisão de bustos e passos — autorizada em 2026-10-30:** revisar enquadramento, escala, nitidez e saída dos retratos em todo o jogo, preservando as artes e identidades. A calibração das expressões passa a acompanhar o tamanho dos retratos normais, evitando cortes de cabeça; Elowen recebe enquadramento mais próximo nas visitas e conversas correspondentes. Garantir a remoção dos bustos também com movimento reduzido. **Baseline de protótipo:** passos do avanço no escuro em volume 80, antes 50, respeitando o volume de efeitos escolhido pelo jogador. Ajustes visuais e mix permanecem sujeitos ao aceite humano. Ver [incremento](../planos/tasks/bust-polish/spec.md).
 
-A direção é pintura digital 2D semirrealista, escura e de baixa saturação. A paleta combina musgo, madeira, lama, pedra, água azul-esverdeada, latão e vermelho escuro. Ambientes e interiores remetem a um Paraná fantástico ribeirinho. O horror é atmosférico; não há gore explícito.
+A direção é pintura digital 2D semirrealista, escura e de baixa saturação. A paleta combina musgo, madeira, lama, pedra, água azul-esverdeada, latão e vermelho escuro. Ambientes e interiores remetem a um Paraná fantástico ribeirinho. O horror é atmosférico.
 
 **Distinção temporal — Confirmado em 2026-09-17 para `approved-narrative-dialogue-staging`:** Rheed mais velho conta a história no presente e aparece em cores. Rheed jovem e todos os acontecimentos narrados pertencem ao passado, representado em tons pastel. Ivaí permanece como protagonista da expedição; Rheed é o narrador. A [ADR-001 deste incremento](../planos/tasks/approved-narrative-dialogue-staging/adrs/adr-001-rheed-temporal-presentation.md) registra a decisão e substitui a proposta anterior de manter o cenário do passado escurecido atrás do narrador.
 

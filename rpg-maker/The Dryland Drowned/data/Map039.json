@@ -2709,6 +2709,57 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Picture ID(s) = [\"60\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 0,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 0,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -2769,6 +2820,18 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Basic_EnterBust",
                                 "Basic_EnterBust",
@@ -2783,6 +2846,57 @@
                                     "HorzMirror:str": "Mirror",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"60\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -2979,6 +3093,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -3503,6 +3668,18 @@
                             "code": 357,
                             "indent": 4,
                             "parameters": [
+                                "Dryland_Presentation",
+                                "MotionPreference",
+                                "MotionPreference",
+                                {
+                                    "variable": "47"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Basic_EnterBust",
                                 "Basic_EnterBust",
@@ -3517,6 +3694,57 @@
                                     "HorzMirror:str": "Mirror",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 4,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"62\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Picture ID(s) = [\"62\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 4,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -3940,6 +4168,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -4563,6 +4842,57 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -5098,6 +5428,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -5721,6 +6102,57 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -6332,6 +6764,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 3,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -7421,6 +7904,57 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -8373,6 +8907,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -9414,6 +9999,57 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 1,
+                            "parameters": [
+                                "Coreto_2_VNPictureBusts",
+                                "Fidgeting_Enable",
+                                "FIDGETING: Start",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "SpeedX:eval": "30",
+                                    "SpeedY:eval": "30",
+                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
+                                    "RateY:eval": "0.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Picture ID(s) = [\"63\"]"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed X = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Speed Y = 30"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
+                            ]
+                        },
+                        {
+                            "code": 657,
+                            "indent": 1,
+                            "parameters": [
+                                "Distance Y = 0.00"
                             ]
                         },
                         {

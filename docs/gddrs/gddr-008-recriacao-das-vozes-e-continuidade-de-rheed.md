@@ -1,12 +1,14 @@
 # GDDR-008: Recriação das vozes e continuidade de Rheed
 
-- **Status:** Accepted
+- **Status:** Partially superseded
 - **Recorded on:** 2026-11-14
 - **Decision date:** 2026-11-14
-- **Last updated:** 2026-11-14
+- **Last updated:** 2026-11-15
 - **Scope:** Caracterização do elenco, autoridade das fichas e enquadramento narrativo de Rheed; sem alteração do runtime.
 - **Decision source:** direção acordada e execução autorizada pelo dono em 14/11/2026, na conversa “Recriação das fichas de personagens com Grok”; esclarecimento direto do dono no mesmo dia sobre a praça de Daratrine e as memórias próprias de Rheed. Conversas sem link público durável.
 - **GDD:** [Personagens](../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem), [mundo e narração](../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#41-mundo-sem-humanos) e [apresentação de Rheed](../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#272-apresentação-vigente-nesta-integração).
+
+> **Substituição parcial em 2026-11-15:** o [GDDR-009](gddr-009-piloto-narrativo-gorvak-bimbren.md) substitui a preservação de quantitativos somente para falas/caixas das três cenas do piloto Gorvak–Bimbren. Permanecem autoridade das fichas, continuidade de Rheed, competências, pares, condições e demais quantitativos. A decisão e a evidência originais abaixo permanecem históricas.
 
 ## Context
 
@@ -78,3 +80,4 @@ O contexto histórico do GDDR-002 descreve as fichas disponíveis à época; sua
 | --- | --- | --- |
 | 2026-11-14 | Registro como Accepted da recriação, autoridade única e continuidade de Rheed; revisão das fichas, aceite humano e integração de falas não declarados concluídos | Direção e esclarecimento do dono em 14/11/2026 |
 | 2026-11-14 | Estado da revisão documental remetido ao índice após o parecer sobre `9c8fe7a4ba774e376f5e6930d350ce0d056a0775`; decisão Accepted preservada, sem aceite humano ou integração no jogo | Parecer independente sobre o conteúdo em 14/11/2026 |
+| 2026-11-15 | Partially superseded: quantidade de falas/caixas livre somente nas três cenas do piloto; demais disposições preservadas | [GDDR-009](gddr-009-piloto-narrativo-gorvak-bimbren.md), decisão de Edney em 15/11/2026 |

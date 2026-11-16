@@ -54,7 +54,7 @@ As falas atualmente jogáveis conservam os estados de implementação e aceite d
 3. Consulte a [pesquisa](pesquisa.md) para rastrear livro, arte e cenas externas, com fontes, hashes e limitações. Referências externas permanecem fora das fichas.
 4. Volte às [regras de personagens e participação](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem) antes de escrever uma cena. Os oito pares, os lados aconselhados no Conselho, a ordem dos vivos presentes e as regras de perda permanecem fixos; as interpretações interpessoais podem ser recriadas.
 
-Terror psicológico 16+, mundo sem humanos e arte existente são limites preservados. Personalidade pode contrastar com aparência. Nem todos precisam xingar, falar de trauma ou soar cínicos; o uso ou a ausência de palavrões depende de personagem, interlocutor e situação.
+O público pretendido é 18+, conforme a direção vigente no [GDD canônico, §3.5](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#35-público-idioma-e-duração). Terror psicológico, mundo sem humanos e arte existente são limites preservados. Personalidade pode contrastar com aparência. Nem todos precisam xingar, falar de trauma ou soar cínicos; o uso ou a ausência de palavrões depende de personagem, interlocutor e situação.
 
 ## Migração das fontes antigas
 
