@@ -3352,6 +3352,64 @@
                             ]
                         },
                         {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "TargetScaleX:str": "50",
+                                    "TargetScaleY:str": "50",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"60\"]",
+                                    "customTone:eval": "[0,0,0,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Scale_ScaleTo",
+                                "Scale_ScaleTo",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "TargetScaleX:str": "45",
+                                    "TargetScaleY:str": "45",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
+                            "code": 357,
+                            "indent": 3,
+                            "parameters": [
+                                "VisuMZ_2_VNPictureBusts",
+                                "Tone_CustomToneBust",
+                                "Tone_CustomToneBust",
+                                {
+                                    "PictureID:arrayeval": "[\"63\"]",
+                                    "customTone:eval": "[-24,-24,-24,0]",
+                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                                }
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -3359,7 +3417,7 @@
                                 0,
                                 0,
                                 2,
-                                "Rheed"
+                                "Gorvak"
                             ]
                         },
                         {
@@ -3378,82 +3436,6 @@
                                 "Scale_ScaleTo",
                                 {
                                     "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "customTone:eval": "[0,0,0,0]",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "TargetScaleX:str": "45",
-                                    "TargetScaleY:str": "45",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "customTone:eval": "[-24,-24,-24,0]",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 101,
-                            "indent": 3,
-                            "parameters": [
-                                "",
-                                0,
-                                0,
-                                2,
-                                "Gorvak"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "$[camp.h1.church.a.04]"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
                                     "TargetScaleX:str": "45",
                                     "TargetScaleY:str": "45",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
@@ -3518,83 +3500,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "$[camp.h1.church.a.05]"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "TargetScaleX:str": "50",
-                                    "TargetScaleY:str": "50",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "customTone:eval": "[0,0,0,0]",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Scale_ScaleTo",
-                                "Scale_ScaleTo",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "TargetScaleX:str": "45",
-                                    "TargetScaleY:str": "45",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
-                                "VisuMZ_2_VNPictureBusts",
-                                "Tone_CustomToneBust",
-                                "Tone_CustomToneBust",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "customTone:eval": "[-24,-24,-24,0]",
-                                    "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 101,
-                            "indent": 3,
-                            "parameters": [
-                                "",
-                                0,
-                                0,
-                                2,
-                                "Gorvak"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "$[camp.h1.church.a.06]"
+                                "$[camp.h1.church.a.04]"
                             ]
                         },
                         {
