@@ -16,6 +16,14 @@ Estado em 14/11/2026:
 
 A revisão documental independente avaliou fidelidade, aplicabilidade, variação/identidade, naturalidade e economia no conteúdo do commit `9c8fe7a4ba774e376f5e6930d350ce0d056a0775`. Esse parecer não abrange os metadados de status acrescentados depois daquela revisão, não comprova reconhecimento cego ou efeito emocional em playtest e não qualifica o runtime. A conferência desses metadados e a verificação final da entrega permanecem separadas.
 
+### Revisão de naturalidade — 16/11/2026
+
+Correção delimitada das 17 fichas, sem recriar biografias: os exemplos e as direções de fala passam a explicitar referentes, situação e relação com o interlocutor. A [comparação](comparacao-vozes.md) acompanha os exercícios atuais. A revisão preserva citações, competências, vínculos, conselhos fixos e distinções entre as fases de Rheed. Gorvak incorpora os refinamentos autorais já autorizados no piloto `241680ac71ba2061ac7b477586cad29f5579d570`, com origem **Criação** e sem encerrar seu aceite humano.
+
+- **Pesquisa independente:** concluída, sessão `sess-012f11e2341cb943`.
+- **Revisão independente desta correção:** **Reviewed** em 16/11/2026, sessão `sess-f33050a5a9442ab0`, após resolução dos três achados. O parecer cobre as 17 fichas e a comparação correntes; seu objeto completo tem agregado SHA-256 `f25b24099b84aeca68d269ffc07355d8ed885804ffca189d4de0b40a09a27129`. Esta anotação de fechamento é posterior ao parecer e não integra o objeto revisado. O estado histórico de 14/11 conserva seu próprio escopo.
+- **Aceite editorial humano:** **Pendente**. Não houve experimento de cena, playtest ou integração no runtime nesta revisão.
+
 As falas atualmente jogáveis conservam os estados de implementação e aceite de seus incrementos. São a baseline de runtime a adaptar em trabalho posterior, não restrições criativas sobre a nova caracterização. Exemplos das fichas são exercícios: não criam cenas, encontros entre épocas, ressurreições, poderes ou consequências mecânicas.
 
 ## Heróis recrutáveis
@@ -49,7 +57,7 @@ As falas atualmente jogáveis conservam os estados de implementação e aceite d
 
 ## Escrever e comparar
 
-1. Leia a ficha e diferencie fatos do GDD/livro, observações da arte e **Criação**. A criação compatível é proposta autoral, não citação da fonte.
+1. Leia a ficha e diferencie fatos do GDD/livro, observações da arte e **Criação**. A criação compatível é proposta autoral, não citação da fonte. Use a reserva, o humor e os hábitos de fala conforme a pergunta recebida; não transforme uma tendência em molde obrigatório de cada frase.
 2. Consulte a [comparação de vozes](comparacao-vozes.md): seis situações comuns e uma mensagem neutra permitem comparar construção, ritmo e modo de responder. A comparação do autor não equivale a reconhecimento cego nem revisão independente.
 3. Consulte a [pesquisa](pesquisa.md) para rastrear livro, arte e cenas externas, com fontes, hashes e limitações. Referências externas permanecem fora das fichas.
 4. Volte às [regras de personagens e participação](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem) antes de escrever uma cena. Os oito pares, os lados aconselhados no Conselho, a ordem dos vivos presentes e as regras de perda permanecem fixos; as interpretações interpessoais podem ser recriadas.

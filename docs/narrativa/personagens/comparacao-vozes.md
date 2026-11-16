@@ -1,75 +1,50 @@
 # Comparação de vozes
 
-Serve para escrever e distinguir falas novas. Nenhuma fala daqui está integrada ao jogo. Revisão e aceite: [Estado da entrega](README.md#estado-da-entrega). Isto não é um teste cego e não declara que um leitor familiar reconheceria as vozes de ouvido.
+Serve para escrever e distinguir falas novas. Nenhuma fala daqui está integrada ao jogo. Revisão e aceite: [Estado da entrega](README.md#estado-da-entrega). Esta é uma leitura editorial com conhecimento das fichas, não um teste cego nem prova de reconhecimento das vozes pelo público.
 
-As seis situações e a mensagem neutra são as do modelo. O rótulo de quem fala fica fora da citação. As citações de Rheed jovem e de Rheed velho foram copiadas das fichas deles, sem reescrita. As outras quinze foram copiadas das fichas. Se uma ficha mudar, esta cópia deixa de valer. Exercício hipotético não cria cena, encontro entre gerações, corpo livre, fraqueza nova, ressurreição nem voto. A regra vale para o elenco inteiro e não se repete dentro de cada biografia.
+**Revisão de naturalidade — 16/11/2026:** as seis situações e a mensagem neutra abaixo reproduzem as fichas correntes. Os exemplos continuam **Criação** e hipotéticos. Não acrescentam cena, encontro entre gerações, corpo livre, fraqueza nova, ressurreição ou voto. Uma fala só deve ser transportada para uma cena quando seu interlocutor, seu assunto e a ação que a provoca estiverem presentes.
 
-A ficha de cada um já nomeia a voz mais próxima. Aqui o elenco fica no mesmo prompt. A proximidade não é simétrica: uma pessoa pode estar mais perto de outra sem que a volta seja verdadeira. Nas quinze fichas, a leitura é de quem as escreveu. O par dos dois Rheeds é a leitura do autor deles sobre as dezessete fichas.
+**Histórico preservado:** a comparação de 14/11 e seu parecer pertencem ao conteúdo identificado no [estado da entrega](README.md#estado-da-entrega). A base desta correção é `b1175e6c929a7078d17522707bdbae83c0760ada`; as leituras anteriores permanecem no Git. A tabela atual conserva as proximidades propostas, confrontando-as com os exemplos revistos. A proximidade não precisa ser simétrica. Os dois Rheeds continuam próximos entre si; essa leitura não lhes dá o mesmo registro em todas as situações.
 
 ## Voz mais próxima
 
-| Personagem | Mais próxima | Por que a confusão é possível, nesta leitura | O que não pode colapsar |
-| --- | --- | --- | --- |
-| Gorvak | Draska | Os dois mandam e falam curto. | No pedido, ele marca a ponta livre, diz que já pôs o ombro duas vezes e não pergunta se o outro aguenta. Ela põe o agora e a alternativa de não sair do lugar. No medo, ele não abre e deixa a carga com o outro. Ela trava todo mundo até ter a conta do barulho. No erro, ele diz que o que vem agora não sai dele. Ela pergunta se o outro ainda anda com ela. |
-| Elowen | Vaelith | Os dois puxam o estranho para perto e riem com quem estimam. | Ela oferece a rua e aceita que a pessoa siga. No pedido, chama o outro lado e para de puxar se disserem que não. No medo, não olha e oferece a rua ou ir embora. Ele pede o palpite e trata a demora como vontade de ouvir. A ficha dele aponta Ivaí. |
-| Griznik | Liora | Os dois separam a ida da volta e olham antes de forçar. | No pedido, ele diz o que trava e o que acontece se o outro não entrar. Ela não começa sem o tempo do outro, porque sozinha a mesa gira. No medo, ele deixa a porta como está até saber qual palpite errou. Ela tira a pessoa da frente e deixa a porta fechada no escuro. |
-| Seraphina | Irati | As duas falam completo, sem graça e sem xingamento, e seguram o começo até o outro falar. | Ela oferece o tempo e dispensa a história de vida. No pedido, só começa quando disserem que segurou. Irati pede o nome antes de continuar e, no pedido, pede até onde o outro aguenta. Andirá também aponta Seraphina. A ficha dela continua com Irati. |
-| Bimbren | Rheed jovem | Os dois oferecem ajuda prática a um estranho e falam da volta. | Bimbren afirma de onde vem, pede desculpa por chegar tarde ao peso e não hesita na sintaxe. O jovem explica a tentativa e limita o trajeto até a parede. No agradecimento, fica devendo uma e confirma com "tá?". No medo, Bimbren vai só até a porta e não põe a mão nela. O jovem abre e pede a lamparina. Na leitura do autor de Rheed, o jovem continua mais perto do velho, e Bimbren é o outro vizinho forte. |
-| Liora | Griznik | O par acima, do lado dela. | No erro ela diz que o que faltou foi ouvir e não pede para refazer na frente do outro. Ele recusa ficar ao lado fingindo que agora sabe. Ela não xinga. |
-| Vaelith | Ivaí | Os dois puxam o estranho para uma relação na primeira frase. | Vaelith pergunta de onde a pessoa é. No medo, pede o palpite e trata a demora como vontade de ouvir. Ivaí chama o encontro de sorte e, no medo, corta a história da porta velha e pede para ser chamado pelo conto se calar. Elowen é a outra vizinha. A ficha dele continua com Ivaí. |
-| Draska | Gorvak | O par do topo, do lado dela. | Ela manda agora e pergunta se o outro ainda anda com ela. Ele chama para sair junto e diz que a ajuda é do outro. Tibagi também ordena, e explica. A ficha dela continua com Gorvak. |
-| Ivaí | Rheed velho | Os dois aquecem a sala. | Ivaí põe a pessoa no relato do dia. No erro, para o conto e manda o outro falar primeiro. O velho pede o nome e o ofício, e no erro pergunta por onde começa a consertar. Vaelith é o outro vizinho de Ivaí. Na leitura do autor de Rheed, Ivaí é o outro vizinho forte do velho, e a hospitalidade de Palotina aproxima algumas falas sem tomar o lugar do jovem. |
-| Andirá | Seraphina | Orações completas, sem graça e sem xingamento. | Ele pergunta o que a pessoa veio buscar. No pedido, constata que o outro lado está parado e não atravessa essa distância no lugar do outro. No medo, abre porque o som está aí e não marca o lugar do outro. No erro, reserva se faz o reparo. Ela só começa quando disserem que segurou e tira a mão da porta. A ficha dela aponta Irati. |
-| Floraí | Rheed jovem | Os dois repetem e não mandam como quem já decidiu. Floraí não é herói recrutável. | A repetição dele é um vão de memória: a frase perde o fio e a escolha pode morrer no meio. No medo, ele não sabe abrir. O jovem repete para buscar confirmação ou para recuar do que teme dizer. Uma oferta pode soar macia, e isso não resume a marca. No medo, ele abre e pede a lamparina. Pérola é o vínculo de Floraí. Na leitura do autor de Rheed, o jovem continua mais perto do velho. |
-| Pérola | Palotina | As duas sustentam o aceite e recusam desfazê-lo para agradar. | Pérola corta o método, manda segurar e diz que já parou de tentar. No medo, não nomeia e deixa a porta fechada mais um pouco. Palotina reparte empurra e puxa, combina até a parede, e no medo pede que sentem antes de abrir. |
-| Irati | Seraphina | O par clínico, do lado dela. | No medo, Irati exige que os dois olhem ou que ninguém olhe, e não entra para contar depois. Seraphina pede a repetição do que foi ouvido e tira a mão da porta. No pedido, Irati pede o limite de quem aguenta. Seraphina só começa quando disserem que segurou. As duas não se encontram. |
-| Palotina | Pérola | O par do aceite, do lado de quem ainda recebia gente. | Palotina manda enxugar o pé e sentar se for visita. No erro, diz que o acordo quebrou e não escreve outro por cima. Pérola recusa desculpa comprida e encerra com "chega". |
-| Tibagi | Draska | Os dois ordenam e recusam travessia sem volta. | Ele senta a pessoa para explicar, pede o peso e avisa que param se a mão dele falhar. No medo, pede que o outro abra. Ela não explica e trava todo mundo até ter a conta. A ficha dela continua com Gorvak. Os dois não se encontram. |
-| Rheed jovem | Rheed velho | Leitura do autor de Rheed sobre as dezessete fichas: os dois oferecem companhia com respeito, se interessam pelo interlocutor e tentam conduzi-lo no perigo. | A diferença não é regra de toda frase. Os dois perguntam ao se apresentar e os dois afirmam em outros exercícios. No pedido, o jovem explica a tentativa e limita o trajeto; o velho convoca um voluntário e faz graça com a mesa. No erro, o jovem pede desculpa e licença para refazer; o velho assume e pergunta por onde começar. Na ponte, "Espera, espera" distingue o jovem de "Calma" e "vejamos". Bimbren é o outro vizinho forte. Floraí repete por outro motivo. |
-| Rheed velho | Rheed jovem | A mesma leitura autoral. O par continua, e a volta é verdadeira. | Ivaí é o outro vizinho forte, pela acolhida e pelo relato. Palotina aproxima algumas falas: ela oferece chá e assento; ele pede nome e ofício. No agradecimento, ele comenta o que guarda no caderno; o jovem fica devendo uma e confirma com "tá?". O velho não xinga nas falas registradas. |
+| Personagem | Mais próxima | Diferença a preservar no contexto |
+| --- | --- | --- |
+| [Gorvak](gorvak.md) | [Draska](draska.md) | Distribui o peso e retribui com conserto; Draska apressa a saída e retoma a marcha. |
+| [Elowen](elowen.md) | [Vaelith](vaelith.md) | Convida para agir e agradece a rapidez; Vaelith convida a contar e agradece a privacidade. |
+| [Griznik](griznik.md) | [Liora](liora.md) | Aponta a falha local; Liora combina o movimento e confere o conjunto. |
+| [Seraphina](seraphina.md) | [Irati](irati.md) | Confere o que ouviu; Irati pede identificação para consultar os registros. |
+| [Bimbren](bimbren.md) | [Rheed jovem](rheed-jovem.md) | Admite o atraso sem hesitar na sintaxe; Rheed busca confirmação e licença para refazer. |
+| [Liora](liora.md) | [Griznik](griznik.md) | Coordena o ajuste e a contagem; Griznik começa pelo defeito do material. |
+| [Vaelith](vaelith.md) | [Ivaí](ivai.md) | Comenta a tentativa e aceita esperar; Ivaí seduz com a oportunidade e promete rapidez. |
+| [Draska](draska.md) | [Gorvak](gorvak.md) | Pressiona para agir; Gorvak assume o peso antes de distribuir o resto. |
+| [Ivaí](ivai.md) | [Rheed velho](rheed-velho.md) | Oferece ao outro lugar no relato; Rheed se interessa pelo nome e pelo ofício e conduz como apresentador. |
+| [Andirá](andira.md) | [Seraphina](seraphina.md) | Declara e reserva o reparo; Seraphina escuta e confere antes de decidir. |
+| [Floraí](florai.md) | [Rheed jovem](rheed-jovem.md) | Perde o fio de uma lembrança; Rheed hesita para confirmar ou recuar. Pedidos inteiros cabem nos dois. |
+| [Pérola](perola.md) | [Palotina](palotina.md) | Oferece atenção sem arrependimento imposto; Palotina recebe e negocia o combinado. |
+| [Irati](irati.md) | [Seraphina](seraphina.md) | Exige identificação para o que guarda; Seraphina oferece tempo para ouvir. |
+| [Palotina](palotina.md) | [Pérola](perola.md) | Acrescenta hospitalidade ao gesto; Pérola pode encerrar depois de agradecer, sem repreensão. |
+| [Tibagi](tibagi.md) | [Draska](draska.md) | Explica e cobra reconhecimento; Draska cobra ação. A semelhança não cria encontro entre épocas. |
+| [Rheed jovem](rheed-jovem.md) | [Rheed velho](rheed-velho.md) | Explica a tentativa, pede confirmação e licença; o velho convoca, brinca e conduz. Bimbren é o outro vizinho forte. |
+| [Rheed velho](rheed-velho.md) | [Rheed jovem](rheed-jovem.md) | Afirma, usa cerimônia e comenta o conteúdo do caderno; o jovem se espanta e fica devendo um favor. Ivaí e Palotina também se aproximam em situações específicas. |
 
-Na leitura do autor de Rheed, feita sobre as dezessete fichas, Rheed jovem continua mais perto de Rheed velho do que de Bimbren, e Rheed velho continua mais perto do jovem do que de Ivaí. Bimbren é o outro vizinho forte do jovem, pela ajuda prática e pelo tratamento de "senhor". Ivaí é o outro vizinho forte do velho, pela acolhida e pelo relato. A hospitalidade de Palotina aproxima algumas falas do velho sem tomar o lugar do jovem. Floraí também repete, por um vão de memória, e não é herói recrutável. O jovem repete para buscar confirmação ou para recuar do que teme dizer. Tibagi pode ser trocado com Draska na ordem curta; a ficha dela continua com Gorvak. Andirá pode ser trocado com Seraphina na frase completa; a ficha dela continua com Irati. Elowen pode ser trocada com Vaelith no convite; a ficha dele continua com Ivaí. Das quinze fichas deste autor, Andirá é o único que abre a porta no medo, e não marca o lugar do outro. Rheed jovem e Rheed velho continuam abrindo, nas falas que esta comparação não reescreve: um porque decide que é o vento e pede a lamparina, o outro porque a casa velha gosta de plateia.
+## Como ler as diferenças
 
-As fichas de Rheed não foram reescritas por este autor. O autor delas registrou oito vínculos individuais em cada ficha, como criação hipotética e sem cena obrigatória. As oito falas com que os heróis se dirigem a Rheed jovem são as que esses vínculos respondem. Esta comparação relata o juízo dele como juízo de autor.
+Não é necessário tornar cada frase exclusiva de um personagem. O pedido pode ser direto em várias vozes; o que muda é a maneira de solicitar, assumir controle, reagir à recusa e retomar o assunto. Gorvak e Draska podem dar ordens sem possuírem autoridade sobre quem ouve. Bimbren pode ser cortês sem estar subordinado. Seraphina pode reconhecer um erro sem entregar ao prejudicado comando sobre sua vida.
 
-## O que o agradecimento, o pedido, o medo e o erro separam
+Os exemplos íntimos também dependem da relação: Gorvak oferece pão para chamar Bimbren ao descanso; Bimbren oferece uma pausa ao notar cansaço. A sopa de Sila continua na biografia, mas não precisa aparecer num convite sem relação com comida. A fala de Liora para Elowen vem depois da disputa sobre uma marca; a água não substitui o que faltava esclarecer. Os campos de variação nas fichas dão esses contextos sem transformar os exercícios em cenas ocorridas.
 
-O agradecimento separa os pares.
+Rheed jovem conserva seus seis exercícios: a tentativa, o favor e a reação ao outro já eram compreensíveis. O velho mantém as citações do livro e a condução de apresentador; uma convocação privada não presume que o ouvinte aceitou ser voluntário. Floraí pode perder uma lembrança e ainda fazer um pedido inteiro. Andirá pode ser estranho e frio sem explicar ao interlocutor o método de verdade literal usado pelo autor.
 
-Gorvak agradece fechando a fivela da bolsa. Draska agradece e manda guardar e seguir. No pedido, ele marca a ponta que está livre, lembra que já pôs o ombro duas vezes e não pergunta se o outro aguenta. Ela começa no "agora" e deixa a alternativa de não sair do lugar. No medo, ele recusa abrir e ocupa a mão do outro com a carga, à espera da voz. Ela trava a abertura até ter a conta do barulho. No erro, ele assume que o que vem agora não sai dele. Ela pergunta se o outro ainda anda com ela. "Porra", nele, é a coisa quebrada. Nela, é quem parou. Tibagi explica o peso, avisa que param se a mão dele falhar e, no medo, pede que o outro abra.
-
-Elowen agradece com "valeu" e nota a velocidade. Vaelith agradece o caderno fechado e a noite de procura que não vai ter. No pedido, ela chama o outro lado e para de puxar se disserem que não. Ele admite que quer ver a mesa na parede, que não andou um palmo, e deixa o outro recusar. No medo, ela não olha e oferece a rua ou ir embora. Ele pede o palpite e trata a demora como vontade de ouvir. No erro, ela guarda o fato e só anda de volta se quiserem, calada. Ele pede para não escreverem a tarde por ele e, se quiserem, ouve o que a tarde era. Ivaí, a voz que a ficha de Vaelith escolhe, agradece pondo a pessoa no relato do dia e dispensando pagamento. No medo, corta a frase da porta velha e pede para ser chamado pelo que estava contando se calar. No erro, para o conto e manda o outro falar primeiro.
-
-Griznik agradece o caderno pego antes de molhar e para. Liora agradece, confere se as folhas estão todas e nota que não houve troca. No pedido, ele diz que o pé trava e que, se o outro não entrar, a tarde acaba ali. Ela não começa sem o tempo do outro, porque sozinha a mesa gira. No medo, ele deixa a porta como está até saber qual dos dois palpites errou. Ela tira a pessoa da frente e deixa a porta fechada no escuro. No erro, ele recusa ficar ao lado fingindo que agora sabe. Ela diz que o que faltou foi ouvir e não pede para refazer na frente do outro. Ela diz "absurdo" e "desperdício". Ele diz "porra" do material ruim.
-
-Seraphina agradece e diz que não vai enfeitar o gesto. Irati agradece a tarde de procura que foi poupada. No pedido, Seraphina só começa quando disserem que segurou. Irati pede até onde o outro aguenta e não começa sem esse limite. No medo, Seraphina pede a repetição do que foi ouvido e tira a mão da porta. Irati exige que os dois olhem ou que ninguém olhe, e não entra para contar depois. No erro, Seraphina pede a ordem que pulou e não escolhe o ponto. Irati pede o que sobrou e põe na ordem com a pessoa presente. Andirá, que aponta Seraphina sem que ela o aponte de volta, no pedido constata que o lado do outro está parado e recusa atravessar essa distância no lugar dele. No medo, abre porque o som está aí e deixa o lugar do outro por conta de quem ouve. No erro, reserva se faz o reparo.
-
-Bimbren agradece e oferece descer buscar o caderno do outro se cair na estrada. Rheed jovem agradece, diz que fica devendo uma e confirma com "tá?". No pedido, Bimbren pede desculpa por chegar tarde e empurra se o outro pegar o que está solto. O jovem diz que já tentou e limita o trajeto até a parede. No medo, Bimbren acompanha só até a porta e não põe a mão nela. O jovem decide que é o vento, abre e pede a lamparina. No erro, Bimbren entrega a frase inteira e diz que não tem segunda entrega. O jovem pede desculpa e só refaz se deixarem. Floraí também repete. A frase dele pode morrer no meio. No medo, ele não sabe abrir e não escolhe se o outro fica ou vai. O agradecimento dele é "isso é bom".
-
-Vaelith e Ivaí se separam no destino da pessoa. Vaelith ainda pergunta de onde ela é. Ivaí já guarda um lugar para ela no relato do dia. Rheed velho, a voz que a ficha de Ivaí escolhe, pede o nome e o que a pessoa faz da vida, agradece de coração e diz que há coisa no caderno que não se conta duas vezes do mesmo jeito. No erro, pergunta por onde começa a consertar. No medo, diz que a casa velha gosta de plateia e abre. Ivaí, no medo, corta a causa que ia inventar.
-
-Pérola agradece assim: "Obrigada. Devolveu. Não cobrou. Chega." Palotina agradece com chá para dois e diz que não cobra favor de quem não cobrou. No pedido, Pérola corta o método e diz que já parou de tentar. Palotina reparte empurra e puxa, combina até a parede e encerra. No medo, Pérola não nomeia e deixa a porta fechada mais um pouco. Palotina pede que sentem um instante e digam o que querem fazer. No erro, Pérola recusa desculpa comprida. Palotina diz que o acordo quebrou e não escreve outro por cima. "Que inferno" fica entre pares de Palotina, quando um registro some. Pérola não xinga.
-
-Na mensagem neutra, o sentido continua o mesmo: sair juntos, haver perigo, precisar da ajuda. A sintaxe mudou na maior parte do elenco. Gorvak chama "sai comigo" e entrega a ajuda ao outro. Elowen avisa "perigo, de verdade" e pede "vem". Griznik manda não esperar e pede "me ajuda". Seraphina avisa que vai repetir. Draska fecha com "anda". Ivaí recusa cantar por cima. Pérola fecha com "chega". Floraí quebra a frase no meio. Tibagi pede escuta antes do passo. Bimbren, Vaelith e Palotina conservam a frase anterior, já distinta. Nessa mensagem, Rheed jovem nomeia o perigo e só depois tenta acalmar; Rheed velho acalma primeiro. Isso não vale como regra de toda frase dos dois.
-
-Fora do exercício, o descanso tem quadro próprio. Gorvak, com Bimbren: "Bimbren. Come o calcanhar. Eu não vou perguntar da carta." Bimbren, com Gorvak: "Gorvak. A sopa de casa é ruim e eu comi. Senta se o joelho pedir, não porque eu mandei." Elowen, com Vaelith: "Vaelith, vem até a esquina comigo. Se cansar, a gente para, e eu não conto." Vaelith, com Elowen: "Elowen. Me conta uma coisa que você viu hoje e eu não. Eu fico quieto até você acabar." Draska continua no cantil: "Gorvak. Bebe. Depois a gente discute o peso." Liora continua na água dividida: "Elowen, a marca continua comigo. A água é das duas. Bebe." Os passados em que Elowen e Vaelith tornam pública uma humilhação alheia, e os em que Gorvak e Draska escondem um dano e gostam do silêncio, são contradições próprias. A fala íntima não repete o convite.
-
-Rheed jovem e Rheed velho continuam o par mais próximo entre si na leitura do autor deles, depois das dezessete fichas. As falas copiadas abaixo conservam a pergunta e o "tá?" de um, e o voluntário, o "de coração" e o "vejamos" do outro. Os dois perguntam ao se apresentar.
-
-## O que esta comparação não faz
-
-Não escolhe o fim. Reunir liberta Floraí e Pérola e entrega a vida do descendente amaldiçoado. Destruir encerra a maldição da linhagem e permite que Andirá absorva os amantes com as memórias do relacionamento. As sete regras continuam as do GDD. O Conselho segue H1, H4, H5 e H7 para reunir, e H2, H3, H6 e H8 para destruir, vivos na ordem H1 a H8, sem voto. Ivaí não ganha competência nem vaga de sacrifício. Andirá não ganha corpo doméstico nem fraqueza nova por ter uma fala hipotética de mesa. Floraí e Pérola não ganham locomoção livre nestes exercícios, não lembram o conjunto e não vão ao Conselho. Irati, Palotina e Tibagi não ganham rosto, não sentam na taverna e não encontram os oito. As falas de exercício não antecipam a confissão de Ivaí.
-
-Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga, xinga na situação marcada na própria ficha, e as seis falas do exercício em geral não são essa situação. Gorvak diz "porra" da coisa quebrada. Elowen diz "porra" na alegria da curva, com quem estima. Griznik diz "porra" do material ruim. Bimbren diz "puta que pariu" da estrada. Vaelith diz "que porra linda" no espanto, com quem estima. Draska diz "porra" de quem parou. Ivaí guarda "merda" para quando a máscara escorrega. Palotina diz "que inferno" entre pares, quando um registro some. Tibagi diz "porra" quando lhe recusam. Seraphina, Liora, Andirá, Floraí, Pérola e Irati não xingam. Rheed jovem quase não xinga. Rheed velho não xinga nas falas registradas.
+As diferenças aqui não reabrem competências, os oito pares, revelações, participação no Conselho ou finais. Os conselhos fixos seguem reunir para H1/H4/H5/H7 e destruir para H2/H3/H6/H8, quando vivos e presentes, na ordem H1–H8, sem votação. Reunir custa a vida do descendente; destruir entrega os amantes e suas memórias a Andirá. Os registros continuam donos das regras, e a revisão de voz não comprova efeito emocional em cena nem encerra o aceite humano.
 
 ## Falas no mesmo prompt
-
 
 ### Apresentar-se a alguém que acaba de conhecer
 
 **Gorvak**
 
-> Pode sentar, se a cadeira servir. Ela está torta, mas aguenta. Se precisar de braço, chama. Conversa comprida eu não puxo.
+> Pode sentar, se a cadeira servir. Ela está torta, mas aguenta. Se precisar de braço, chama.
 
 **Elowen**
 
@@ -81,11 +56,11 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Seraphina**
 
-> Boa tarde. Se quiser falar, fale no seu tempo. Eu escuto. Não precisa me contar a vida.
+> Boa tarde. Queria falar comigo? Pode falar no seu tempo, eu escuto.
 
 **Bimbren**
 
-> Boa tarde, senhor. Eu venho pela estrada. Se o senhor estiver esperando alguém, eu faço companhia um pedaço. Se não estiver, eu sigo.
+> Boa tarde, senhor. Também está esperando? Se quiser companhia, eu fico um pouco.
 
 **Liora**
 
@@ -97,7 +72,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Draska**
 
-> Pode entrar ou ficar na porta. Se ficar, fica onde eu te vejo.
+> Vai entrar? Então entra, que você está tapando a passagem. Eu também estou de saída.
 
 **Ivaí**
 
@@ -113,11 +88,11 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Pérola**
 
-> Pode falar. Eu escuto. Se vier consolo, eu corto.
+> Pode falar, eu escuto.
 
 **Irati**
 
-> Boa tarde. Se for ficar, diga como se chama. Eu não sigo sem saber com quem estou falando.
+> Boa tarde. Como se chama? Veio consultar alguma coisa?
 
 **Palotina**
 
@@ -125,7 +100,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Tibagi**
 
-> Senta, se tiver um minuto. Eu estava pensando em como isto devia funcionar, e apareceu alguém de fora desta briga. Se não quiser ouvir, a porta é aquela.
+> Senta, se tiver um minuto. Você é de fora desta briga; talvez me escute. Eu estava pensando em como isto devia funcionar, se me deixassem.
 
 **Rheed jovem**
 
@@ -135,68 +110,67 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 > Muito prazer! Vim fazer companhia, se o senhor permitir. E como se chama? Diga também o que faz da vida, que disso eu gosto de saber.
 
-
 ### Pedir ajuda para uma tarefa que não consegue concluir sozinho
 
 **Gorvak**
 
-> Sozinho ela não sai. Eu já pus o ombro duas vezes. Você fica na ponta que está livre, e eu não vou perguntar se você aguenta.
+> Já pus o ombro nesta mesa duas vezes e ela não sai do lugar. Pega a ponta que está livre, que eu seguro deste lado.
 
 **Elowen**
 
-> Ei. Sozinha eu não chego com isto na parede. Vem do outro lado, ou me diz que não, que eu paro de puxar.
+> Ei, me ajuda a levar esta mesa até a parede? Eu puxo deste lado. Se não puder agora, deixo pra depois.
 
 **Griznik**
 
-> O pé da direita trava no chão. Sozinho eu não levanto. Se você entrar comigo, ela sai. Se não entrar, a tarde acaba aqui.
+> O pé direito da mesa está prendendo no chão. Me ajuda a levantar desse lado? Sozinho eu não consigo tirar do lugar.
 
 **Seraphina**
 
-> A parede é o fim. Eu não chego com um corpo só. Diga que segurou, e eu começo. Sem isso eu não mexo.
+> Preciso levar a mesa até a parede e não consigo sozinha. Pode segurar do outro lado? Me avise quando estiver pronto; eu espero para começar.
 
 **Bimbren**
 
-> O senhor me desculpa chegar nisso tarde. Sozinho eu não cubro os dois lados. Se o senhor pegar o que está solto, eu empurro até a parede.
+> Devia ter pedido antes, senhor. Tentei mover a mesa sozinho e não deu. Pode segurar do outro lado enquanto eu empurro?
 
 **Liora**
 
-> Se eu empurro sozinha, ela gira e não anda. O senhor segura no mesmo tempo que eu. Sem esse tempo eu não começo.
+> Sozinha eu só consigo girar a mesa. O senhor pode segurar do outro lado? Quando eu contar, a gente empurra junto.
 
 **Vaelith**
 
-> Eu quero ver ela na parede, confesso. Sozinho não andou nem um palmo. Fica comigo até lá, ou me diz que não.
+> Que mesa pesada. Eu achei que conseguia levar até a parede, mas não andou nem um palmo. Você me ajuda? Se estiver ocupado, eu espero.
 
 **Draska**
 
-> Agora. Eu não arrasto isto sozinha. Você entra no peso, ou a gente não sai do lugar.
+> Pega o outro lado da mesa. Preciso tirar isso daqui agora e sozinha ela não anda.
 
 **Ivaí**
 
-> Fica comigo nisto. Sozinho eu parei no meio da sala, e a parede ainda está longe. Se você não quiser, eu não transformo isso em história.
+> Você chegou na hora certa. Tentei levar esta mesa até a parede e fiquei no meio da sala. Pega a outra ponta comigo? A gente acaba isso num instante.
 
 **Andirá**
 
-> Um lado só não leva a mesa até a parede. O seu lado ainda está parado. Eu não atravesso essa distância por você.
+> Segure a outra ponta da mesa. Preciso da sua ajuda para levá-la até a parede.
 
 **Floraí**
 
-> Eu... eu empurro e ela não anda. Sozinho eu não chego. Você segura, ou... ou me diz que não dá.
+> Pode segurar a outra ponta da mesa? Eu empurro daqui, mas sozinho não consigo.
 
 **Pérola**
 
-> Não me conta como. Segura. Sozinha isto não chega na parede, e eu já parei de tentar.
+> Segura a outra ponta da mesa. Sozinha eu não consigo levar até a parede.
 
 **Irati**
 
-> Diga até onde você aguenta. Eu não chego na parede sozinha, e não começo sem esse limite.
+> Preciso levar esta mesa até a parede. Você consegue segurar o outro lado? Diga até onde aguenta antes de começarmos.
 
 **Palotina**
 
-> Eu empurro. Você puxa. Sozinha eu já vi que ela não sai. Combinado até a parede, e acabou.
+> Pode puxar a mesa enquanto eu empurro? Sozinha ela não sai do lugar. A gente leva só até a parede, combinado?
 
 **Tibagi**
 
-> Escuta. Sozinho ela não sai, eu já tentei. Eu preciso de você no peso. Se a minha mão falhar, a gente para, e eu não vou enfeitar isso.
+> Escuta. Já tentei mover a mesa sozinho e não deu. Pega deste lado. Se a minha mão falhar, a gente para.
 
 **Rheed jovem**
 
@@ -205,7 +179,6 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 **Rheed velho**
 
 > Preciso de um voluntário! Esta mesa é mais teimosa do que eu, e sozinho não a levo até a parede. Segure a outra ponta e vamos juntos.
-
 
 ### Discordar de um plano que considera arriscado
 
@@ -239,7 +212,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Draska**
 
-> Ninguém atravessa ainda. Primeiro olha a volta. Sem volta, eu não chamo isso de caminho.
+> Ninguém atravessa ainda. Se a ponte cair, por onde a gente volta? Vai olhar antes.
 
 **Ivaí**
 
@@ -247,11 +220,11 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Andirá**
 
-> A ponte cede. Do outro lado não há volta conferida. Eu não atravesso, e não mando você atravessar por mim.
+> A ponte está cedendo. Se ela cair, não há retorno conhecido. Eu não atravesso e não mando você atravessar por mim.
 
 **Floraí**
 
-> Esse meio... está ruim. E a volta? Eu não vejo a volta. Não vai.
+> O meio da ponte... está ruim. Se ela cair depois, por onde a gente volta? Eu não quero atravessar.
 
 **Pérola**
 
@@ -259,7 +232,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Irati**
 
-> Sem olhar a volta, quem atravessa entrega o caminho. Eu não atravesso. Olhe o retorno primeiro.
+> Se essa ponte cair depois, ficamos sem caminho de volta. Eu não atravesso. Olhe o retorno primeiro.
 
 **Palotina**
 
@@ -267,7 +240,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Tibagi**
 
-> E se a ponte cai, quem fica com o prejuízo dos dois lados? Não eu sozinho, e não você. Olha a volta antes de me pedir para liderar isso.
+> E se a ponte cai? O prejuízo vai para os dois lados, você também perde. Olha a volta antes de me pedir para liderar isso.
 
 **Rheed jovem**
 
@@ -276,7 +249,6 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 **Rheed velho**
 
 > Calma, galera. Que a ponte está cansada, qualquer um vê. E a volta, alguém pensou na volta? Antes de atravessarmos, vejamos por onde se regressa.
-
 
 ### Agradecer por uma ajuda recebida
 
@@ -294,7 +266,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Seraphina**
 
-> Obrigada. O caderno voltou inteiro, e você não pediu nada. Eu não vou enfeitar o que você fez.
+> Obrigada por buscar o caderno. Voltou inteiro; eu precisava dessas páginas.
 
 **Bimbren**
 
@@ -310,15 +282,15 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Draska**
 
-> Achou. Obrigada. Pode guardar e seguir. Não precisa ficar nisso.
+> Achou meu caderno? Obrigada. Me dá aqui, que eu guardo e a gente segue.
 
 **Ivaí**
 
-> Meu caderno. Obrigado. Você catou sem pedir nada. Quando eu contar o dia de hoje, você entra, e não vai precisar pagar nada por isso.
+> Ah, meu caderno! Obrigado por buscar. Quando eu contar o dia de hoje, vão saber quem me salvou de perder essas histórias.
 
 **Andirá**
 
-> Você devolveu o caderno. Não pediu preço. Eu não devo nada por isso.
+> Você trouxe meu caderno de volta. Reconheço sua ajuda.
 
 **Floraí**
 
@@ -326,7 +298,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Pérola**
 
-> Obrigada. Devolveu. Não cobrou. Chega.
+> Obrigada por devolver. Eu precisava do caderno.
 
 **Irati**
 
@@ -334,7 +306,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Palotina**
 
-> Ah, meu caderno. Obrigada, de verdade. Senta, se quiser. O chá ainda dá para dois. Favor eu não cobro de quem não cobrou.
+> Ah, meu caderno. Obrigada, de verdade. Senta, se quiser. O chá ainda dá para dois.
 
 **Tibagi**
 
@@ -348,7 +320,6 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 > Ora, o meu caderno! Muito obrigado, de coração. Há coisa aqui dentro que não se conta duas vezes do mesmo jeito.
 
-
 ### Esconder o medo antes de enfrentar um perigo
 
 **Gorvak**
@@ -361,15 +332,15 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Griznik**
 
-> Isso não é vento. Também não é gente falando. A porta fica como está até eu saber qual dos dois eu errei.
+> Não parece vento, nem voz de gente. Deixa a porta fechada enquanto eu escuto melhor.
 
 **Seraphina**
 
-> Repita o que você ouviu. A minha mão fica fora da porta. Sem isso eu não sei o que estou enfrentando.
+> Repita o que você ouviu. Antes de abrir a porta, preciso saber o que estamos enfrentando.
 
 **Bimbren**
 
-> O senhor e eu vamos só até a porta. Eu não ponho a mão nela. O que tem depois, eu digo quando souber, não agora.
+> Eu vou com o senhor até a porta, mas vamos ouvir mais um pouco antes de abrir.
 
 **Liora**
 
@@ -381,23 +352,23 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Draska**
 
-> Para. Eu não tenho a conta desse barulho. Ninguém abre até eu ter.
+> Espera. Ninguém abre essa porta enquanto eu não souber o que fez esse barulho.
 
 **Ivaí**
 
-> Eu ia dizer que é porta velha e que eu abro sorrindo. Não vou dizer. Se eu calar no meio, me chama pelo que eu estava contando.
+> Deve ser só a porta velha. Você ouviu de novo? Fica aqui comigo enquanto eu abro.
 
 **Andirá**
 
-> Há um som. A causa não está dita. Eu não invento a causa e não mando você esperar. Eu abro porque o som está aí. O seu lugar você escolhe.
+> Ouvi o som atrás da porta. Vou abrir para ver o que há ali.
 
 **Floraí**
 
-> Eu ouvi. Pode ser... não. Eu não sei abrir. Fica comigo, ou vai, eu... eu não sei qual.
+> Eu ouvi também. Deve ser... melhor esperar mais um pouco. Você pode ficar aqui?
 
 **Pérola**
 
-> Não nomeia. Eu também não nomeio. A porta fica fechada mais um pouco.
+> Não precisa dizer o que acha que é. Deixa a porta fechada mais um pouco.
 
 **Irati**
 
@@ -409,7 +380,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Tibagi**
 
-> Abre você. Se a minha mão tremer, eu não quero que seja eu na frente. Eu fico aqui e eu não vou enfeitar o que a gente achar.
+> Abre você. Eu fico aqui para ver o que sai. Vai, estou esperando.
 
 **Rheed jovem**
 
@@ -419,68 +390,67 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 > Não é nada. Barulho de casa velha, e casa velha gosta de plateia. Abramos de uma vez, e fique atrás de mim.
 
-
 ### Admitir um erro que prejudicou outra pessoa
 
 **Gorvak**
 
-> Você avisou. Eu gastei a sua tarde achando que aguentava mais uma hora. O que vem agora não sai de mim.
+> Você avisou. Eu achei que aguentava mais uma hora e fiz você perder a tarde. Se ainda quiser ajuda, você diz o que eu faço.
 
 **Elowen**
 
-> Você pediu para eu parar. Eu quis ver se ainda dava, e a sua tarde foi embora. Eu não vou contar isso. Se você quiser andar de volta, eu ando calada. Se não quiser, eu fico onde estou.
+> Você pediu para eu parar, mas eu quis tentar mais uma vez e fiz você perder a tarde. Não vou sair contando isso por aí. Quer companhia na volta ou prefere ir sem mim?
 
 **Griznik**
 
-> O aviso era bom. Eu deixei passar porque queria ver se ainda aguentava. Não aguentou. A tarde é sua. Eu não vou ficar do seu lado fingindo que agora eu sei.
+> Você avisou que não ia aguentar. Eu quis tentar mesmo assim e fiz você perder a tarde. Devia ter parado quando você falou.
 
 **Seraphina**
 
-> Você avisou. Eu tratei como exagero e continuei. A tarde se perdeu porque eu não parei no ponto. Diga a ordem que eu pulei. Desta vez eu não escolho o ponto.
+> Você pediu para eu parar, e eu tratei como exagero. Continuei e fiz você perder a tarde. Antes de tentar consertar, quero ouvir o que você tem a dizer.
 
 **Bimbren**
 
-> O senhor me avisou de manhã. Eu deixei para o fim, e o fim comeu a sua tarde. Eu falo agora, inteiro: eu errei. Não tem segunda entrega.
+> O senhor me avisou de manhã, e eu deixei para resolver no fim do dia. Fiz o senhor perder a tarde. Me desculpe; devia ter ouvido quando ainda dava tempo.
 
 **Liora**
 
-> Você avisou. A conta que eu tinha era antiga, e eu ignorei você. A tarde saiu dessa conta. Eu não peço para refazer na sua frente. O que faltou foi eu te ouvir.
+> Você avisou que a conta estava errada. Eu insisti na que tinha e fiz você perder a tarde. Não adianta só refazer: eu devia ter ouvido você.
 
 **Vaelith**
 
-> Eu li o aviso e deixei para depois. Queria terminar o que eu tinha na mão. A sua tarde foi nessa escolha. Não escreve isso por mim. Se você quiser, me diz o que a tarde era. Eu ouço.
+> Eu li o aviso e deixei para depois porque queria terminar o que estava fazendo. Você perdeu a tarde por causa disso. O que ficou sem fazer? Pode me contar, eu quero ouvir.
 
 **Draska**
 
-> Eu mandei seguir por cima do seu aviso. A tarde era sua. Diz se você ainda anda comigo.
+> Você mandou parar e eu insisti em seguir. Perdeu a tarde por minha causa. Ainda quer ir comigo?
 
 **Ivaí**
 
-> Eu ouvi o aviso e segui, porque parar estragava o que eu estava contando. A sua tarde entrou nessa história sem licença. Eu não termino o conto. Fala você primeiro.
+> Você me avisou, mas eu queria terminar o que estava contando. Fiz você perder a tarde por isso. Pode falar; eu paro de tentar explicar.
 
 **Andirá**
 
-> Você avisou. Eu continuei, porque me servia. A sua tarde se gastou por isso. O fato é meu. Diga o reparo. Eu digo se faço.
+> Você avisou e eu continuei porque me servia. Fiz você perder a tarde. Diga o que quer como reparo; eu decido se faço.
 
 **Floraí**
 
-> Você falou. Eu... eu não fiz o que você pediu. A tarde foi embora. Eu não sei devolver. Eu fico, se você ficar. Se você for, eu... eu não seguro.
+> Você pediu, e eu... não fiz. Deixei para depois e você perdeu a tarde. Me desculpa. Eu não lembro por que achei que podia esperar.
 
 **Pérola**
 
-> Você avisou. Eu continuei. A tarde foi embora. Eu não vou pedir desculpa comprida.
+> Você avisou, e eu continuei. Fiz você perder a tarde. Foi erro meu.
 
 **Irati**
 
-> O aviso estava certo. Eu guardei em vez de agir. A sua tarde é o preço disso. Eu errei. Traga o que sobrou. Eu ponho na ordem, com você aqui.
+> O aviso estava certo. Eu o guardei em vez de agir e fiz você perder a tarde. Mostre o que ainda falta fazer; eu quero conferir com você.
 
 **Palotina**
 
-> O aviso estava dito. Eu tratei como prazo meu. A tarde é sua, o acordo quebrou, e eu não escrevo outro por cima.
+> Você avisou que não podia esperar, e eu estiquei o prazo mesmo assim. Perdeu a tarde por minha causa. Me desculpa. Não vou mudar o combinado agora para fingir que cumpri.
 
 **Tibagi**
 
-> Tá. Você avisou e eu fui no meu plano. A tarde é sua. Se quiser sair desta conversa, a porta é aquela. Se ficar, eu digo o que eu ignorei, sem enfeite.
+> Tá, você avisou e eu insisti no meu plano. Você perdeu a tarde por minha causa. Eu errei. Se ainda quiser ouvir, eu explico o que ignorei.
 
 **Rheed jovem**
 
@@ -490,12 +460,13 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 > Você me avisou e eu segui adiante. Sua tarde inteira de trabalho se foi por minha causa. O erro foi meu. Diga por onde eu começo a consertar.
 
+### A mesma mensagem, diferentes personagens
 
-### A mesma mensagem
+Mensagem neutra: “Precisamos sair daqui. Há perigo, e eu preciso da sua ajuda.”
 
 **Gorvak**
 
-> Sai comigo. Tem perigo aqui, eu não dou conta sozinho, e a ajuda é a sua.
+> Sai comigo. Aqui está perigoso e eu preciso que me ajude a sair.
 
 **Elowen**
 
@@ -507,15 +478,15 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Seraphina**
 
-> Eu vou repetir. Há perigo. Nós saímos daqui. Eu não faço isso sozinha, e eu preciso da sua ajuda.
+> Há perigo aqui. Nós precisamos sair, e eu não consigo fazer isso sem a sua ajuda.
 
 **Bimbren**
 
-> A gente precisa sair daqui enquanto ainda dá. Há perigo, e sozinho eu não cubro os dois. Preciso do senhor.
+> A gente precisa sair daqui enquanto ainda dá. Está perigoso, senhor, e eu preciso que me ajude a sair.
 
 **Liora**
 
-> Primeiro a saída. Há perigo, sozinha eu não consigo, a gente sai agora, e eu preciso da sua ajuda.
+> Precisamos sair agora. Está perigoso aqui e sozinha eu não consigo. Ajude-me a chegar à saída.
 
 **Vaelith**
 
@@ -523,11 +494,11 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Draska**
 
-> A gente sai. Há perigo. Eu não faço isso sozinha. Preciso da sua ajuda. Anda.
+> Vamos sair daqui agora. Está perigoso e eu não consigo sozinha. Me ajuda.
 
 **Ivaí**
 
-> Vem. Eu não canto por cima disto. A gente sai daqui agora, há perigo, e eu preciso de você.
+> Vem comigo. Está perigoso aqui, precisamos sair agora. Eu preciso da sua ajuda.
 
 **Andirá**
 
@@ -539,7 +510,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Pérola**
 
-> Há perigo. A gente sai. Eu preciso da sua ajuda. Chega.
+> Há perigo aqui. Precisamos sair, e eu preciso da sua ajuda.
 
 **Irati**
 
@@ -547,7 +518,7 @@ Não há terceira competência nem ofício herdado das fichas velhas. Quem xinga
 
 **Palotina**
 
-> A gente sai agora. Há perigo, está dito às claras. Eu preciso da sua ajuda.
+> A gente precisa sair agora, está perigoso aqui. Você me ajuda? Sozinha eu não consigo.
 
 **Tibagi**
 

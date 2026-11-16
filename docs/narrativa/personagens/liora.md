@@ -44,7 +44,7 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Formalidade | "Senhor" com desconhecido adulto. Com o grupo, "você", sem gíria e sem tu. "Me chama se a conta não bater. Fora isso, eu não interrompo." |
 | Tratamento dos outros | "Senhor" na primeira correção; "você" quando já trabalham juntos. De si, "eu". "A gente" quando os dois passos têm de ser o mesmo. |
 | Comprimento das frases | Curtas na correção. Médias quando explica uma ida sem volta. Não faz discurso. "Sem a volta olhada, eu não vou." |
-| Construção das frases | O que está errado, o que acontece se ficar assim, o conserto. "A porta abre para fora. Se o senhor fica aí, ela pega o ombro. Um passo." Pouca pergunta. Quando pergunta, pede o que falta. |
+| Construção das frases | Identifica o problema, a consequência e o ajuste. "A porta abre para fora. Dê um passo para o lado, senão ela pega no seu ombro." Pouca pergunta; quando pergunta, pede o dado que falta. |
 | Ritmo de leitura | Regular. Se erra uma medida, não gagueja: risca e refaz. "Não. De novo. A anterior ficou no papel." |
 | Humor | Quase nenhum. O que parece ironia é correção seca. "A porta agradece o seu ombro." Não ri de pessoa. Não devolve graça no meio de uma medição. |
 | Comparações e referências | Poucas. Uma folha fora do maço, quando o assunto é mesmo um maço. "Esta folha não estava no maço. Eu não misturo." Não em toda frase. |
@@ -54,8 +54,8 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** diz o que a força sozinha faz e não começa sem o tempo do outro. "Se eu empurro sozinha, ela gira e não anda. Sem o mesmo tempo eu não começo."
-- **Recusar um pedido:** nomeia a volta que o pedido não tem. "Não. Sem a volta olhada eu não chamo isso de caminho."
+- **Pedir algo:** diz o que a força sozinha faz e não começa sem o tempo do outro. "Sozinha eu só consigo girar a mesa. Segura do outro lado; a gente empurra junto quando eu contar."
+- **Recusar um pedido:** nomeia a volta que o pedido não tem. "Não. Primeiro precisamos ver por onde voltar."
 - **Discordar de alguém:** separa o que dá para fazer do que não tem retorno. "A ida até parece possível. A volta ninguém olhou."
 - **Evitar um assunto ou uma resposta:** volta para um ajuste miúdo. "Depois. Essa correia está folgada." O cartaz não entra.
 
@@ -63,13 +63,13 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 | Contexto | O que muda na escrita |
 | --- | --- |
-| Com alguém íntimo | A correção fica, e entra o nome sem plateia. "Elowen, a marca continua comigo. A água é das duas. Bebe." O chapéu, se alguém notar, ela diz que foi presente, e para. |
+| Com alguém íntimo | Com Elowen, pode encerrar a disputa de quem viu primeiro e oferecer água, sem deixar de corrigir: "Elowen, a marca estava no lugar errado. Toma um pouco de água, a gente continua depois." Usar depois da disputa descrita na relação, não como cumprimento. Se alguém notar o chapéu, diz que foi presente, e para. |
 | Com desconhecidos | "Licença", "senhor", o dano real se houver, nenhum currículo. "Eu estou de passagem." |
 | Com adversários | Some o "licença". "Fora do caminho." |
 | Sob medo | Tira o outro do giro da porta e deixa ela fechada no escuro. "O senhor sai da frente da porta. O que tem atrás, eu não sei. No escuro eu deixo ela fechada." |
 | Sob raiva | Some o "senhor". "Absurdo. Para." |
-| Sob vergonha | Admite que riscou alguém para a linha fechar, e refaz com a pessoa do lado. "Eu risquei você. De novo, com você olhando." |
-| Ao se mostrar vulnerável | Uma frase sobre a medida que não serve mais. Rara. "A conta que eu trouxe não fecha neste chão." |
+| Sob vergonha | Admite que riscou alguém para a linha fechar, e refaz com a pessoa do lado. "Eu tirei o seu nome para a linha caber. Vou refazer; desta vez, confere comigo." |
+| Ao se mostrar vulnerável | Uma frase sobre a medida que não serve mais. Rara. "Eu fiz a conta duas vezes e ainda não sei onde errei." |
 
 - **Marcas que permanecem reconhecíveis nessas situações:** correção quando há dano; ida separada da volta nas travessias; "a conta não bate"; "desperdício" e "absurdo" no lugar do xingamento; "senhor" com estranho; sem nomear competência.
 - **Mudança ao longo da história:** quando falam de pagamento, a lenha de Rute entra na frase **[Criação]**. Depois da confissão de Ivaí, no tempo já previsto **[GDD §4.8]**: "A sua conta tinha uma linha que eu não vi." No Conselho, o conselho continua destruir **[GDD]**: a saída que preserva o guia deixa a marcha utilizável, e ela se envergonha de ter posto essa marca acima dos dois amantes. A fala exata do Conselho não é exercício desta ficha.
@@ -81,19 +81,19 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 | Situação comum | Fala do personagem |
 | --- | --- |
 | Apresentar-se a alguém que acaba de conhecer | Licença. A porta abre para fora e o senhor está no caminho. Um passo para o lado. Eu estou de passagem. Se o senhor também estiver, a gente desce a rua sem pressa. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Se eu empurro sozinha, ela gira e não anda. O senhor segura no mesmo tempo que eu. Sem esse tempo eu não começo. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Sozinha eu só consigo girar a mesa. O senhor pode segurar do outro lado? Quando eu contar, a gente empurra junto. |
 | Discordar de um plano que considera arriscado | A ida até parece possível. A volta ninguém olhou. Se a ponte ceder no meio, a gente fica do outro lado. Eu não vou. |
 | Agradecer por uma ajuda recebida | Obrigada. As folhas estão todas, eu conferi. Você não pediu nada em troca. |
 | Esconder o medo antes de enfrentar um perigo | O senhor sai da frente da porta. O que tem atrás, eu não sei. No escuro eu deixo ela fechada. |
-| Admitir um erro que prejudicou outra pessoa | Você avisou. A conta que eu tinha era antiga, e eu ignorei você. A tarde saiu dessa conta. Eu não peço para refazer na sua frente. O que faltou foi eu te ouvir. |
+| Admitir um erro que prejudicou outra pessoa | Você avisou que a conta estava errada. Eu insisti na que tinha e fiz você perder a tarde. Não adianta só refazer: eu devia ter ouvido você. |
 
 ### A mesma mensagem, diferentes personagens
 
 Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu preciso da sua ajuda.”
 
-- **A mensagem no jeito deste personagem, preservando seu sentido:** Primeiro a saída. Há perigo, sozinha eu não consigo, a gente sai agora, e eu preciso da sua ajuda.
+- **A mensagem no jeito deste personagem, preservando seu sentido:** Precisamos sair agora. Está perigoso aqui e sozinha eu não consigo. Ajude-me a chegar à saída.
 - **Personagem do elenco com a fala mais parecida:** Griznik.
-- **Diferenças concretas a preservar entre os dois:** os dois olham antes de forçar. Na leitura deste rascunho, ela tira a pessoa da frente da porta e oferece a rua; ele pergunta se a pessoa é dali e onde se come. No pedido, ela não começa sem o tempo do outro, porque sozinha a mesa gira; ele diz o que trava e o que acontece se o outro não entrar. No medo, ela tira a pessoa do giro e deixa a porta fechada no escuro; ele deixa a porta como está até saber qual palpite errou. No erro, ela diz que o que faltou foi ouvir e não pede para refazer na frente do outro; ele recusa ficar ao lado fingindo que agora sabe. No agradecimento, ela confere as folhas e nota que não houve troca; ele agradece o caderno antes da umidade e para. Ela diz "absurdo" e "desperdício". Ele diz "porra" do material. Nenhum dos dois insulta a espécie do outro.
+- **Diferenças concretas a preservar entre os dois:** Liora coordena o ajuste; Griznik aponta a falha local. Ela explica por que a mesa gira e combina a contagem; ele pede que levantem o pé preso. No perigo, ela controla a posição de quem está diante da porta; ele procura reconhecer o som. No agradecimento, ela confere as folhas; ele valoriza ter evitado que molhassem. Ao admitir o erro, ela reconhece que refazer a conta não substitui ter ouvido; ele reconhece que devia ter parado. Ela não xinga; ele pode xingar o material, sem insultar o interlocutor.
 
 ## 6. Passado
 
@@ -107,8 +107,8 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 | Pessoa | Relação |
 | --- | --- |
-| Elowen | **[GDD]** Par mecânico, Destreza compartilhada; não são substitutas. **[Criação]** Disputam quem viu o detalhe primeiro. Elowen provoca; Liora corrige a marca. Quando acaba, dividem a água. "Chegou. A marca continua comigo." "Eu cheguei nisso antes de você." Nenhuma chama a outra de lenta em público. |
-| Griznik | **[GDD]** Par mecânico, Percepção compartilhada. **[Criação]** Ela vê onde a rachadura senta no conjunto; ele vê a rachadura. "Está. O problema é onde ela senta no resto." "A rachadura está nesta peça." Sem insulto de povo. |
+| Elowen | **[GDD]** Par mecânico, Destreza compartilhada; não são substitutas. **[Criação]** Disputam quem viu o detalhe primeiro. Elowen provoca; Liora corrige a marca. Quando acaba, dividem a água. "Viu primeiro, mas marcou no lugar errado." "Mas quem viu primeiro fui eu." Nenhuma chama a outra de lenta em público. |
+| Griznik | **[GDD]** Par mecânico, Percepção compartilhada. **[Criação]** Ela vê onde a rachadura senta no conjunto; ele vê a rachadura. "A rachadura está aí, mas olha onde essa peça se apoia." "A rachadura está nesta peça." Sem insulto de povo. |
 | Ivaí | **[GDD §4.8]** O bardo que a trouxe com tesouro e esconde o plano. **[Criação]** No começo ele é o guia cuja carta precisa permanecer utilizável. Ela não sabe da linha escondida. Depois da confissão: "A sua conta tinha uma linha que eu não vi." Destruir a envergonha porque a marca do guia pesou mais do que os amantes. |
 | Rheed jovem | **[GDD §27.1]** Ajudante, sem vaga e sem sacrifício. **[Criação]** Ela aceita a mão e tira a pergunta do ajuste. "Segura reto. A pergunta fica para depois." Não há cena nova obrigatória. |
 | Os outros heróis | Sem arco bilateral novo **[GDD §18.1]**. Fala de marca quando há marca, e de caminho quando há caminho. Não os abandona por afinidade: saída do elenco é só a morte prevista. |

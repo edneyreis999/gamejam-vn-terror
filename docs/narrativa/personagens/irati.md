@@ -31,15 +31,15 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios são hipótese d
 | Frustração | Não xinga. Pede o que falta para o registro fechar. "Sem o nome da mãe o verbete não entra. Traga os dois ou volte depois." |
 | Receber afeto | Agradece o fato que poupou a procura, não o sentimento. "Obrigada. Voltou inteiro. Você me poupou uma tarde procurando." |
 | Lidar com autoridade | Não obedece ordem de buscar a segunda metade. A recusa cabe numa frase. "Isso é coerção. Eu não busco." **[GDD §4.7]** |
-| Ser confrontado | Admite que guardou em vez de agir, quando o erro foi esse. "O aviso estava certo. Eu guardei. A sua tarde é o preço disso." |
+| Ser confrontado | Admite que guardou em vez de agir, quando o erro foi esse. "Você tinha razão no aviso. Eu guardei o papel em vez de agir, e você perdeu a tarde." |
 
 ## 3. Assinatura de fala escrita
 
 | Aspecto | Direção de escrita |
 | --- | --- |
-| Tom predominante | Fechado, de quem guarda papel. Pede o dado antes da conversa de família. Com um estranho sem esse assunto, pede o nome e segue. "Se for ficar, diga como se chama." |
+| Tom predominante | Reservado. Quando alguém lhe pede um registro, exige identificação antes de abri-lo. Fora desse assunto, pode perguntar o nome sem transformar a conversa em interrogatório. "Boa tarde. Como se chama?" |
 | Vocabulário | Nome, pai, mãe, registro, ordem, aviso, tarde, mesa. Sem gíria e sem verso. O pai e a mãe entram quando o assunto é família, não em todo cumprimento. |
-| Formalidade | Sem "senhor" e sem tu. O tratamento seco é balcão de arquivo, não grosseria de rua. "Eu não sigo sem saber com quem estou falando." |
+| Formalidade | Sem "senhor" e sem tu. O registro é seco, de balcão de arquivo. A exigência diz respeito ao que ela guarda: "Antes de buscar esse registro, preciso saber com quem estou falando." |
 | Tratamento dos outros | "Você". Ivaí pelo nome, nos registros em que já cabe nomeá-lo. De si, "eu". Não diz "a gente" para dividir uma guarda que ela tomou sozinha. "Nós" cabe no exercício da saída, porque o sentido é sair juntos. |
 | Comprimento das frases | Médias, uma condição por oração. Não conta a tragédia inteira: os relatos que ela deixou são contraditórios, e a ficha não os harmoniza **[GDD §4.7]**. |
 | Construção das frases | Condição, fato, o que falta. Pouca pergunta retórica. "Se veio pedir nome de família, traga os dois nomes." |
@@ -52,9 +52,9 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios são hipótese d
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** pede o limite do outro antes de começar. "Diga até onde você aguenta. Eu não chego na parede sozinha, e não começo sem esse limite."
+- **Pedir algo:** Pergunta o limite de quem vai ajudá-la antes de começar. "Você consegue segurar o outro lado da mesa? Me avise até onde aguenta."
 - **Recusar um pedido:** recusa a travessia sem volta. "Eu não atravesso. Olhem o retorno primeiro."
-- **Discordar de alguém:** diz quem fica com o caminho se a volta não foi olhada. "Sem olhar a volta, quem atravessa entrega o caminho."
+- **Discordar de alguém:** explica a consequência de atravessar sem ter um caminho de volta. "Se essa ponte cair depois, ficamos sem caminho de volta."
 - **Evitar um assunto ou uma resposta:** exige o dado que falta e não preenche. "Sem o nome da mãe eu não respondo." Isso vale para verbete de família, não para a mesa do exercício.
 
 ## 4. Variações sem perder a identidade
@@ -62,11 +62,11 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios são hipótese d
 | Contexto | O que muda na escrita |
 | --- | --- |
 | Com alguém íntimo | Com Ivaí, o nome entra e a exigência não vira colo. "Ivaí. O aviso fica nesta casa. Não leva gente junto." Esta frase é criação de tom, não substituição do texto já implementado. O maço costurado para a estrada é **[Criação]** e contradiz o "fica nesta casa". A metade, a genealogia, os relatos e o aviso que estavam nele são **[GDD §4.7]**. |
-| Com desconhecidos | O nome da pessoa, ou a conversa não segue. "Diga como se chama." |
+| Com desconhecidos | Pergunta quem são; ao tratar dos registros, não prossegue sem identificação. "Como se chama? Veio consultar alguma coisa?" Isso não dá ao estranho obrigação geral de responder. |
 | Com adversários | Diante da oferta de Andirá, a palavra é coerção e a ação é não buscar **[GDD §4.7]**. Sem xingamento e sem negociação. "Isso é coerção. Eu não busco." |
 | Sob medo | Testemunha conjunta, ou ninguém olha. "Nós dois olhamos, ou ninguém olha. Eu não entro para depois te contar." |
 | Sob raiva | Rara. A frase perde a explicação. "Fora. O registro não é seu." |
-| Sob vergonha | Admite que guardou o aviso em vez de agir com ele. "Eu errei. Traga o que sobrou." |
+| Sob vergonha | Admite que guardou o aviso em vez de agir com ele. "Eu errei. Mostre o que ainda falta fazer." |
 | Ao se mostrar vulnerável | Admite que o perigo não espera o registro ficar bonito. Não pede para ser salva numa cena nova. A frase do exercício é comparação. "Há perigo, e ele não vai esperar. Eu preciso da sua ajuda." |
 
 - **Marcas que permanecem reconhecíveis nessas situações:** nome antes da conversa de família; arquivo; sem xingamento; sem verso; sem prova do efeito verdadeiro; sem corpo descrito.
@@ -78,12 +78,12 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 
 | Situação comum | Fala do personagem |
 | --- | --- |
-| Apresentar-se a alguém que acaba de conhecer | Boa tarde. Se for ficar, diga como se chama. Eu não sigo sem saber com quem estou falando. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Diga até onde você aguenta. Eu não chego na parede sozinha, e não começo sem esse limite. |
-| Discordar de um plano que considera arriscado | Sem olhar a volta, quem atravessa entrega o caminho. Eu não atravesso. Olhe o retorno primeiro. |
+| Apresentar-se a alguém que acaba de conhecer | Boa tarde. Como se chama? Veio consultar alguma coisa? |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Preciso levar esta mesa até a parede. Você consegue segurar o outro lado? Diga até onde aguenta antes de começarmos. |
+| Discordar de um plano que considera arriscado | Se essa ponte cair depois, ficamos sem caminho de volta. Eu não atravesso. Olhe o retorno primeiro. |
 | Agradecer por uma ajuda recebida | Obrigada. Voltou inteiro. Você me poupou uma tarde procurando. |
 | Esconder o medo antes de enfrentar um perigo | Nós dois olhamos, ou ninguém olha. Eu não entro para depois te contar. |
-| Admitir um erro que prejudicou outra pessoa | O aviso estava certo. Eu guardei em vez de agir. A sua tarde é o preço disso. Eu errei. Traga o que sobrou. Eu ponho na ordem, com você aqui. |
+| Admitir um erro que prejudicou outra pessoa | O aviso estava certo. Eu o guardei em vez de agir e fiz você perder a tarde. Mostre o que ainda falta fazer; eu quero conferir com você. |
 
 ### A mesma mensagem, diferentes personagens
 
@@ -91,7 +91,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 - **A mensagem no jeito deste personagem, preservando seu sentido:** O perigo não espera. Nós saímos agora. Eu preciso da sua ajuda para isso.
 - **Personagem do elenco com a fala mais parecida:** Seraphina.
-- **Diferenças concretas a preservar entre os dois:** as duas falam completo, sem xingamento e sem graça, e as duas seguram o começo até o outro falar. Na leitura deste rascunho, Irati pede o nome antes de continuar; Seraphina oferece o tempo e dispensa a história de vida. No pedido, Irati pede até onde o outro aguenta e não começa sem esse limite; Seraphina só começa quando disserem que segurou. No medo, Irati exige que os dois olhem ou que ninguém olhe, e não entra para contar depois; Seraphina pede a repetição do que foi ouvido e tira a mão da porta. No erro, Irati pede o que sobrou e põe na ordem com a pessoa presente; Seraphina pede a ordem que pulou e não escolhe o ponto. No agradecimento, Irati fala da tarde de procura que foi poupada; Seraphina diz que não vai enfeitar o gesto. Nenhuma das duas se encontra com a outra. A proximidade é de voz.
+- **Diferenças concretas a preservar entre os dois:** Irati condiciona a consulta aos registros à identificação; Seraphina oferece tempo para ouvir. No pedido de ajuda, Irati pergunta até onde o outro aguenta; Seraphina espera a confirmação de que está pronto. No perigo, Irati exige uma observação conjunta; Seraphina pede a repetição do som antes de abrir. No erro, Irati quer conferir o trabalho restante com a pessoa; Seraphina escuta o prejudicado antes de propor reparo. A gratidão de Irati destaca a procura poupada, a de Seraphina destaca as páginas de que precisava. Nenhuma dessas semelhanças cria um encontro entre elas.
 
 ## 6. Passado
 
@@ -99,7 +99,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 - **[GDD §4.6]** A metade que estava com Pérola chegou à Casa Basalto e, gerações depois, a Irati. A metade de Tibagi continuou soterrada. Irati não viveu a tragédia dos oitenta anos.
 - **[GDD §4.4]** Os documentos dela não provam se reunir ou destruir é o efeito que o leitor deve preferir. A ficha também não prova.
 - **[Criação]** Disse a um primo que o assunto não saía da mesa. O maço de Ivaí estava costurado para ser levado. As duas coisas são verdade nesta proposta de voz. O primo não é figura de campanha. A metade, a genealogia, os relatos contraditórios e o aviso são o legado **[GDD §4.7]**. O maço costurado, e a intenção de levá-lo na estrada contra a frase da mesa, continuam **[Criação]**.
-- **Evita mencionar:** o conteúdo literal dos excertos já escritos no jogo. Também evita transformar o aviso em acusação do filho antes da confissão prevista.
+- **Limites de autoria:** preservar o conteúdo literal dos excertos já escritos no jogo. Não antecipar a confissão de Ivaí transformando o aviso de Irati em acusação. São limites para escrever, não assuntos que ela evita numa conversa.
 - **Não estabelecido:** rosto, causa mecânica da água no cômodo seco além do fato sobrenatural, texto dos anúncios que Ivaí mandou distribuir, o nome do primo. Não inventar encontro com os oito.
 
 ## 7. Relações

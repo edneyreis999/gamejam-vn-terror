@@ -31,9 +31,9 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Situação | Como reage e como isso aparece na conversa |
 | --- | --- |
 | Frustração | Não eleva a voz. Pede o que faltou, em ordem. "Faltou o terceiro. Sem ele eu não fecho. Diga de novo, devagar." |
-| Receber afeto | Não devolve carinho com carinho. Reconhece o gesto e segue. "Eu ouvi. Obrigada. Não vou enfeitar." |
-| Lidar com autoridade | Aceita o encargo e pede a condição antes do passo. "Eu faço. Depois de ouvir a condição inteira. Sem ela, eu não começo." |
-| Ser confrontado | Admite que não parou e não chama isso de acidente. "Não parei. O pai pediu, e eu terminei mesmo assim. Se o ponto estava errado, eu escolhi esse ponto." |
+| Receber afeto | Não devolve carinho com carinho. Reconhece o gesto e segue. "Obrigada por ficar até eu terminar." |
+| Lidar com autoridade | Aceita o encargo e pede a condição antes do passo. "Eu faço, mas primeiro preciso ouvir a condição inteira." |
+| Ser confrontado | Admite que não parou e não chama isso de acidente. "O pai pediu para parar, e eu terminei mesmo assim. Achei que era o certo. Ele não voltou." |
 
 ## 3. Assinatura de fala escrita
 
@@ -42,19 +42,19 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Tom predominante | Calmo, de quem corrige texto. Separa o que foi dito do que ela conclui. Fora do trabalho, fala da ceia e de quem atrasou. "Nessa chega tarde. A crosta está no pano." |
 | Vocabulário | Página, condição, ordem, ceia, pão, quinta, parede, tarde. Concreto, sem gíria. "Sozinha, a mesa não chega à parede." |
 | Formalidade | "Você" com todo mundo, sem "senhor" e sem tu. Não sobe para impressionar. "Fale no seu tempo. Eu escuto." |
-| Tratamento dos outros | "Você", e o nome só quando precisa distinguir duas pessoas. De si, "eu". "Nós" quando a saída é mesmo dos dois. "Repita. A minha mão fica fora da porta." |
-| Comprimento das frases | Médias, uma informação por oração. Alonga para repetir o que ouviu. "Ouvi isto. Ouvi aquilo. Não ouvi a volta." |
-| Construção das frases | Escuta, repete, conclui. A pergunta pede o que falta, não a opinião. "Repita o que você ouviu. Sem isso eu não fecho." |
+| Tratamento dos outros | "Você", e o nome só quando precisa distinguir duas pessoas. De si, "eu". "Nós" quando a saída é mesmo dos dois. Ao conferir um relato: "Você disse que a porta estava fechada quando ouviu o som?" |
+| Comprimento das frases | Médias, com informações em sequência. Pode repetir uma explicação inteira para conferir o que entendeu. "Você explicou como atravessar, mas ainda não disse como voltamos se a ponte cair." Não separar cada informação por ponto quando a ligação importa. |
+| Construção das frases | Escuta, confere o que entendeu e pede a informação ausente antes de concluir. "Repita a última parte. Você disse que a porta estava fechada quando ouviu o som?" |
 | Ritmo de leitura | Sem pressa e sem reticência. Se erra um dado, recomeça a lista. "De novo. O primeiro estava trocado." |
-| Humor | Não faz graça. Se Vaelith conta o tropeço para rir, ela espera e responde ao conteúdo. "Você tropeçou. A condição de seguir ainda não foi dita." O silêncio dela avisa que a graça passou do ponto. Ela não explica o aviso. |
+| Humor | Não costuma devolver a graça. Se Vaelith ri do próprio tropeço, ela pergunta pelo que aconteceu: "Você se machucou?" Se a piada a incomoda, deixa de responder; ele pode perceber e parar. |
 | Comparações e referências | Quase nenhuma. Se compara, uma vez, com a página que não tem a última linha. "Ficou como página sem a última linha. Eu não fecho no meio." Raro, e não em toda frase. |
-| Trejeitos verbais | Com desconhecido, oferece o tempo de fala. Não promete consolo. "Não precisa me contar a vida." |
+| Trejeitos verbais | Com desconhecido que veio conversar, oferece tempo para falar. "Não precisa correr. Eu escuto." Não promete consolo nem exige uma história de vida. |
 | Expressões características | "Fale no seu tempo." Quando o outro acelera. Não é bordão num silêncio que já é devagar. "Eu ouvi", ao começar a repetição. Ela não diz "porra", nem "droga", nem "inferno". |
 | O que evitar | Xingamento, diminutivo, piada, consolo que antecipa o fim, palavra de ofício de cura, nome de competência. Não prometer que a dor passa antes do ponto. Não transformar toda frase em cômodo ou corpo. |
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** diz o fim e não começa até o outro confirmar que segurou. "A parede é o fim. Eu não chego com um corpo só. Diga que segurou, e eu começo."
+- **Pedir algo:** Explica o destino da tarefa e espera a confirmação do outro antes de começar. "Pode me ajudar a levar a mesa até a parede? Me avise quando estiver segurando; só então eu empurro."
 - **Recusar um pedido:** nomeia a condição que o pedido salta. "Não. A condição ainda não foi dita até o fim. Eu não começo no meio."
 - **Discordar de alguém:** separa o que se vê do que a pressa aceita. "A ponte mostra a falha. Ficar do outro lado sem volta, eu não aceito."
 - **Evitar um assunto ou uma resposta:** diz que ainda não ouviu o bastante. "Isso eu não ouvi até o fim. Não respondo pela metade." O dia da prensa, se vier, ela descreve a sequência e não o choro.
@@ -66,12 +66,12 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Com alguém íntimo | A escuta fica, e entra uma frase de permanência sem carinho nomeado. "Pode sentar. Eu ainda não terminei, e você não precisa preencher o silêncio." |
 | Com desconhecidos | Oferece o modo de falar e não oferece a vida. "Boa tarde. Se quiser falar, fale no seu tempo." |
 | Com adversários | A frase fica no limite. "Não atravesse este ponto." |
-| Sob medo | Pede o que foi ouvido e tira a mão da porta. "Repita o que você ouviu. A minha mão fica fora da porta. Sem isso eu não sei o que estou enfrentando." |
+| Sob medo | Adia a abertura pedindo que o outro confirme o som. "Repita o que você ouviu. Antes de abrir a porta, preciso saber o que estamos enfrentando." O receio aparece na exigência de informação, sem ser nomeado. |
 | Sob raiva | A lista fica mais curta. "Pare. Você está falando por cima." |
-| Sob vergonha | Admite que o ponto de parar chegou tarde e pede a ordem do reparo. "Passei do ponto. Diga a ordem. Eu sigo a sua, desta vez." |
+| Sob vergonha | Admite ter passado do limite e escuta o prejudicado antes de propor reparo. "Você pediu para parar e eu continuei. O que ainda posso fazer?" A pergunta não transfere autoridade geral sobre ela. |
 | Ao se mostrar vulnerável | Uma frase sobre ainda não saber. Rara. "Eu ainda não sei o que tem atrás. Por isso eu preciso de você aqui." |
 
-- **Marcas que permanecem reconhecíveis nessas situações:** escuta antes da conclusão; uma informação por oração; sem xingamento; sem graça; sem nomear competência; sem consolo no lugar do que foi dito.
+- **Marcas que permanecem reconhecíveis nessas situações:** escuta antes da conclusão; informações em sequência compreensível; sem xingamento; sem graça; sem nomear competência; sem consolo no lugar do que foi dito.
 - **Mudança ao longo da história:** a ceia de quinta ainda cabe no que ela espera da volta **[Criação]**. Depois da confissão de Ivaí, no tempo já previsto **[GDD §4.8]**: "Eu ouvi tesouro. Não ouvi maldição." No Conselho, o conselho continua reunir **[GDD]**: o juramento foi aceito, e entregar os amantes a Andirá é cortar antes da hora. Ela não absolve Ivaí. A fala exata do Conselho não é exercício desta ficha. As sete regras e os dois resultados do registro de Palotina não são reescritos por esta voz **[GDD §§4.3, 4.4]**.
 
 ## 5. Falas para comparação
@@ -80,20 +80,20 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 
 | Situação comum | Fala do personagem |
 | --- | --- |
-| Apresentar-se a alguém que acaba de conhecer | Boa tarde. Se quiser falar, fale no seu tempo. Eu escuto. Não precisa me contar a vida. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | A parede é o fim. Eu não chego com um corpo só. Diga que segurou, e eu começo. Sem isso eu não mexo. |
+| Apresentar-se a alguém que acaba de conhecer | Boa tarde. Queria falar comigo? Pode falar no seu tempo, eu escuto. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Preciso levar a mesa até a parede e não consigo sozinha. Pode segurar do outro lado? Me avise quando estiver pronto; eu espero para começar. |
 | Discordar de um plano que considera arriscado | A ponte está frágil. Dá para ver. Atravessar sem saber a volta é aceitar ficar do outro lado se ela cair. Eu não aceito esse plano. |
-| Agradecer por uma ajuda recebida | Obrigada. O caderno voltou inteiro, e você não pediu nada. Eu não vou enfeitar o que você fez. |
-| Esconder o medo antes de enfrentar um perigo | Repita o que você ouviu. A minha mão fica fora da porta. Sem isso eu não sei o que estou enfrentando. |
-| Admitir um erro que prejudicou outra pessoa | Você avisou. Eu tratei como exagero e continuei. A tarde se perdeu porque eu não parei no ponto. Diga a ordem que eu pulei. Desta vez eu não escolho o ponto. |
+| Agradecer por uma ajuda recebida | Obrigada por buscar o caderno. Voltou inteiro; eu precisava dessas páginas. |
+| Esconder o medo antes de enfrentar um perigo | Repita o que você ouviu. Antes de abrir a porta, preciso saber o que estamos enfrentando. |
+| Admitir um erro que prejudicou outra pessoa | Você pediu para eu parar, e eu tratei como exagero. Continuei e fiz você perder a tarde. Antes de tentar consertar, quero ouvir o que você tem a dizer. |
 
 ### A mesma mensagem, diferentes personagens
 
 Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu preciso da sua ajuda.”
 
-- **A mensagem no jeito deste personagem, preservando seu sentido:** Eu vou repetir. Há perigo. Nós saímos daqui. Eu não faço isso sozinha, e eu preciso da sua ajuda.
+- **A mensagem no jeito deste personagem, preservando seu sentido:** Há perigo aqui. Nós precisamos sair, e eu não consigo fazer isso sem a sua ajuda.
 - **Personagem do elenco com a fala mais parecida:** Irati.
-- **Diferenças concretas a preservar entre os dois:** as duas falam completo, sem xingamento e sem graça, e as duas seguram o começo até o outro falar. Na leitura deste rascunho, Seraphina oferece o tempo e dispensa a vida do outro; Irati pede o nome antes de continuar. No pedido, Seraphina só começa quando o outro disser que segurou; Irati pede até onde o outro aguenta e não começa sem esse limite. No medo, Seraphina pede que repitam o que ouviram e tira a mão da porta; Irati exige que os dois olhem ou que ninguém olhe, e não entra para contar depois. No erro, Seraphina pede a ordem que pulou e desta vez não escolhe o ponto; Irati pede o que sobrou e põe na ordem com a pessoa presente. No agradecimento, Seraphina diz que não vai enfeitar o gesto; Irati agradece a tarde de procura que foi poupada. Nenhuma das duas se encontra com a outra. A proximidade é de voz.
+- **Diferenças concretas a preservar entre os dois:** Seraphina oferece tempo de fala e confere o que ouviu; Irati identifica quem consulta o que ela guarda. Ao pedir ajuda, Seraphina espera a confirmação de que a pessoa está pronta; Irati pede que ela declare o próprio limite. No perigo, Seraphina quer ouvir novamente o som; Irati exige que olhem juntos. No erro, Seraphina deixa o prejudicado falar antes de propor reparo; Irati pede para conferir com ele o que falta fazer. Seraphina agradece pelas páginas recuperadas; Irati, pelo tempo de procura poupado. A proximidade de voz não cria encontro entre elas.
 
 ## 6. Passado
 

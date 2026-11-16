@@ -30,10 +30,10 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 | Situação | Como reage e como isso aparece na conversa |
 | --- | --- |
-| Frustração | Encurta a graça e diz o que não voltou. "A frase ficou do outro lado. Sem ela eu não sigo rindo. A gente busca ou a gente risca." |
+| Frustração | A graça diminui quando perde o que estava tentando registrar. "Não consigo lembrar o que ele disse. Queria anotar antes de esquecer." A dificuldade precisa ser concreta, não uma página metafórica que explica qualquer problema. |
 | Receber afeto | Fica sem graça de um jeito falante e agradece o fato. "Você devolveu sem abrir? Obrigado. Eu ia procurar até de noite." |
 | Lidar com autoridade | Obedece o destino e ainda pede para ver o meio, se ver não custar a volta. "Eu vou. Me deixa olhar, e eu atravesso no seu ritmo." |
-| Ser confrontado | Admite a página e não chama o roubo de homenagem. "Escrevi o seu susto, sim. Não era minha frase. Diz por onde a gente desfaz." |
+| Ser confrontado | Admite ter usado o susto alheio quando lhe cobram isso. "Escrevi sobre o seu susto, sim. Achei que ia render uma boa história, mesmo depois de você pedir para eu não contar." Não chamar essa escolha de homenagem. |
 
 ## 3. Assinatura de fala escrita
 
@@ -45,19 +45,19 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Tratamento dos outros | "Você", e "a gente" quando a saída é dos dois. De si, "eu". Sem apelido. "Sozinho eu não tiro ela do lugar." |
 | Comprimento das frases | Médias, com um comentário e um pedido. Encurta quando Seraphina emudece ou quando alguém se machucou. "Para. Isso espera." |
 | Construção das frases | O que ele notou, o que ele queria, o limite. Admite o impulso e mesmo assim recusa. "Eu teria curiosidade, confesso. Mesmo assim, não." |
-| Ritmo de leitura | Anda. Repete quando o espanto é verdadeiro, não de medo. "Queria. Queria, e mesmo assim não." |
-| Humor | Frequente com quem ele estima, e o alvo é o próprio apetite de olhar. "Eu ia abrir para ver. Confesso. Não abri." Se Seraphina fica em silêncio: "Então eu paro. A graça era minha, não sua." Não faz graça com o susto de quem pediu para não ser escrito. |
+| Ritmo de leitura | Flui enquanto comenta o que viu. Pode retomar a vontade ao recusá-la: "Eu queria ver, queria mesmo. Mas não vou arriscar a volta por isso." A repetição acompanha o impulso, não é obrigação. |
+| Humor | Com quem estima, brinca com a própria curiosidade. Diante de algo que teve vontade de abrir: "Deixar fechado exige mais de mim do que parece." Quando Seraphina emudece, interrompe: "Tá, eu paro." Esse recuo pontual não apaga o que fez com Lena. |
 | Comparações e referências | Poucas. A página e o lado errado aparecem quando o assunto é mesmo o que ele anotou. "Eu pus isso no lado errado da página. O seu susto não era meu." Não em todo perigo. |
 | Trejeitos verbais | "Confesso" antes de recusar o próprio impulso, não em toda frase. Pergunta de onde a pessoa é quando o encontro é novo. |
 | Expressões características | "Que porra linda." No espanto bonito, com quem ele estima, raro. Nunca na cara de quem caiu. "Então eu espero", quando aceita o silêncio de Seraphina. |
-| O que evitar | Roubar o susto alheio sem licença, xingamento como insulto, discurso de honra, nome de competência. Não prometer que a página vale mais do que a tarde. Não transformar toda resposta em página, lado ou desperdício. |
+| O que evitar | Tratar a apropriação do susto alheio como homenagem inofensiva ou como defeito já superado; xingamento como insulto, discurso de honra, nome de competência. Não prometer que a página vale mais do que a tarde. Não transformar toda resposta em página, lado ou desperdício. |
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** admite o querer e o palmo que não andou, e deixa o outro recusar. "Eu quero ver ela na parede, confesso. Sozinho não andou nem um palmo. Fica comigo até lá, ou me diz que não."
+- **Pedir algo:** Comenta a tentativa frustrada e convida o outro a participar, deixando espaço para recusa. "Achei que conseguia mover esta mesa, mas ela não saiu do lugar. Você me ajuda? Se estiver ocupado, eu espero."
 - **Recusar um pedido:** admite a vontade e recusa o lado sem volta. "Eu teria curiosidade. Mesmo assim, não. Sem a volta eu fico deste lado."
 - **Discordar de alguém:** põe as pessoas e a volta no mesmo lado. "Se a ponte cair, a gente fica sem volta. Eu não vou."
-- **Evitar um assunto ou uma resposta:** oferece anotar depois, e quando está consciente corta o oferecimento. "Não anota agora. Depois, se você quiser." Lena não entra.
+- **Evitar um assunto ou uma resposta:** Adia o relato sob pretexto de registrá-lo melhor. "Deixa eu anotar primeiro. Depois eu te conto." Lena continua fora da resposta.
 
 ## 4. Variações sem perder a identidade
 
@@ -65,10 +65,10 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | --- | --- |
 | Com alguém íntimo | A curiosidade fica, e ele pede o que não viu. "Elowen. Me conta uma coisa que você viu hoje e eu não. Eu fico quieto até você acabar." A graça não cobre a pausa. |
 | Com desconhecidos | Uma observação e uma pergunta de onde a pessoa é. Sem o número e sem Lena. "Se tiver um minuto, me conta de onde você é." |
-| Com adversários | Some o adjetivo bonito. "Não chega no papel. Nem no passo." |
+| Com adversários | Some o adjetivo bonito. "Não mexe no meu caderno." |
 | Sob medo | Pede o palpite do outro e trata a demora como vontade de ouvir. O medo fica fora da frase. "Você ouviu isso. Me diz o que você acha que é. Eu quero ouvir antes de mexer." |
 | Sob raiva | A graça some. "Você escreveu a minha parte sem me dizer. Para." |
-| Sob vergonha | Devolve a autoria numa frase e pede o caminho de desfazer. "O que eu escrevi não vale o seu dia. Diz por onde a gente desfaz." |
+| Sob vergonha | Reconhece que usou a experiência alheia apesar da recusa. "Você pediu para eu não contar e eu contei. Não devia ter usado o seu susto daquele jeito." |
 | Ao se mostrar vulnerável | Admite que queria ver e que esse querer não manda. Rara. "Eu queria ver. Não vou." |
 
 - **Marcas que permanecem reconhecíveis nessas situações:** detalhe e pergunta; confissão do impulso seguida de recusa; graça que corta quando o outro não ri; "porra" só no espanto bonito, com quem estima; sem nomear competência.
@@ -81,11 +81,11 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 | Situação comum | Fala do personagem |
 | --- | --- |
 | Apresentar-se a alguém que acaba de conhecer | Oi. Você entrou e eu parei no meio do que ia dizer. Se tiver um minuto, me conta de onde você é. Eu gosto de saber quem aparece. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Eu quero ver ela na parede, confesso. Sozinho não andou nem um palmo. Fica comigo até lá, ou me diz que não. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Que mesa pesada. Eu achei que conseguia levar até a parede, mas não andou nem um palmo. Você me ajuda? Se estiver ocupado, eu espero. |
 | Discordar de um plano que considera arriscado | Eu teria curiosidade de ver o meio ceder, confesso. Mesmo assim, não. Se a ponte cair, a gente fica sem volta. Eu fico deste lado. |
 | Agradecer por uma ajuda recebida | Você achou e devolveu sem abrir. Obrigado. Eu ia procurar até de noite. |
 | Esconder o medo antes de enfrentar um perigo | Você ouviu isso. Me diz o que você acha que é. Eu quero ouvir antes de mexer. |
-| Admitir um erro que prejudicou outra pessoa | Eu li o aviso e deixei para depois. Queria terminar o que eu tinha na mão. A sua tarde foi nessa escolha. Não escreve isso por mim. Se você quiser, me diz o que a tarde era. Eu ouço. |
+| Admitir um erro que prejudicou outra pessoa | Eu li o aviso e deixei para depois porque queria terminar o que estava fazendo. Você perdeu a tarde por causa disso. O que ficou sem fazer? Pode me contar, eu quero ouvir. |
 
 ### A mesma mensagem, diferentes personagens
 
@@ -93,7 +93,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 - **A mensagem no jeito deste personagem, preservando seu sentido:** A gente precisa sair daqui, agora. Tem perigo, e sozinho eu não saio nem te tiro. Preciso de você.
 - **Personagem do elenco com a fala mais parecida:** Ivaí.
-- **Diferenças concretas a preservar entre os dois:** os dois puxam o estranho para uma relação na primeira frase. Na leitura deste rascunho, Vaelith pergunta de onde a pessoa é; Ivaí chama o encontro de sorte e pergunta o que a pessoa ainda quer ver antes de envelhecer. No pedido, Vaelith admite o querer, o palmo que não andou, e deixa o outro recusar; Ivaí puxa a pessoa para o meio da sala e segura o impulso de transformar a recusa em história. No medo, Vaelith pede o palpite e trata a demora como vontade de ouvir; Ivaí começa a dizer que é porta velha, corta, e pede para ser chamado pelo que estava contando se calar. No erro, Vaelith pede para não escreverem a tarde por ele e oferece ouvir; Ivaí para o conto e manda o outro falar primeiro. No agradecimento, Vaelith agradece o caderno fechado; Ivaí põe a pessoa no relato do dia. Vaelith diz "que porra linda" no espanto, com quem estima. Ivaí guarda "merda" para quando a máscara escorrega. Elowen é a outra vizinha. Ivaí fica mais perto, nesta leitura, porque os dois tratam o outro como matéria do que vai ser dito.
+- **Diferenças concretas a preservar entre os dois:** Vaelith pergunta de onde o estranho vem; Ivaí põe o desejo dele no centro do convite. Ao pedir ajuda, Vaelith comenta a tentativa frustrada e aceita esperar; Ivaí trata a chegada como sorte e promete rapidez. Vaelith agradece a privacidade do caderno; Ivaí promete incluir o gesto na história do dia. No medo, Vaelith pede o palpite alheio; Ivaí tenta minimizar o som e manter o outro perto. No erro, Vaelith pergunta pelo trabalho que ficou por fazer; Ivaí interrompe a própria explicação para ouvir. Elowen também se aproxima no convite, mas busca companhia para agir, não principalmente para ouvir um relato.
 
 ## 6. Passado
 

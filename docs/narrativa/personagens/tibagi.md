@@ -30,7 +30,7 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios são hipótese d
 | --- | --- |
 | Frustração | Sobe o volume e xinga a recusa, não a espécie. "Porra. Eu expliquei. Se não quer ouvir, não fica no meio." |
 | Receber afeto | Desconfia de quem devolve sem perguntar, e agradece seco quando a desconfiança falha. "A maioria teria perguntado o que eu escrevo antes de devolver. Você não perguntou. Melhor assim." |
-| Lidar com autoridade | Não se curva à outra casa. À promessa de Andirá ele se curva sem dizer que se curva. Com as famílias: "Se me deixassem, isto funcionava." Com a entidade, repete a promessa como se fosse plano dele. "As duas margens. Eu ouvi. Eu seguro." |
+| Lidar com autoridade | Não se curva à outra casa. À promessa de Andirá ele se curva sem dizer que se curva. Com as famílias: "Se me deixassem, isto funcionava." Com a entidade, repete a promessa como se fosse plano dele. "As duas margens vão ficar sob o meu comando. Eu dou conta." |
 | Ser confrontado | Admite o erro sem enfeite quando não há plateia. Com plateia, volta a explicar. A sós: "Foi erro meu. Não enfeita." |
 
 ## 3. Assinatura de fala escrita
@@ -45,16 +45,16 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios são hipótese d
 | Construção das frases | Reclama de não ter sido deixado mandar, depois dá o plano, depois cobra o outro. A pergunta é acusação ou medo de ficar sem as margens. "E se a ponte cai, quem fica com o prejuízo?" |
 | Ritmo de leitura | Empurra. Sem reticência. Se repete, repete o plano, não uma dúvida. "Eu seguro. Eu seguro isso." A repetição é teimosia. |
 | Humor | Quase nenhum. Se o outro não entendeu o plano, o desprezo sai curto. "Essa besteira. Eu já disse como funciona." Raro. Não faz piada com Pérola. Não devolve graça. |
-| Comparações e referências | As duas margens, a casa, o medo de ser visto sem dar conta, quando o assunto é esse. "Quem fica com as duas margens se isto cair? Não eu sozinho." Sem arquivo de Irati e sem página de Vaelith. |
+| Comparações e referências | As duas margens, a casa, o medo de ser visto sem dar conta, quando o assunto é esse. "Se isto cair, o prejuízo vai para as duas margens. Quem vai responder por isso?" Sem arquivo de Irati e sem página de Vaelith. |
 | Trejeitos verbais | Abre sentando a pessoa para uma explicação, quando quer ouvinte. Fecha uma dívida sem enfeite, quando não há público. "Não enfeita." |
 | Expressões características | "Se me deixassem." Ao explicar o comando que não teve, na geração dele. Não usar na campanha, porque ele não está nela. "Porra" quando lhe recusam, como estalo, não como insulto contra Pérola. |
 | O que evitar | Presença entre os oito, companhia de Ivaí, sobrevivência até a campanha, rosto inventado, xingamento de espécie, arrependimento que desfaça o fato histórico. Não reescrever a divisão do medalhão: a resistência dela parte o objeto **[GDD §§4.3, 4.6]**. Não fazer Andirá mentir na promessa. Não transformar toda frase em discurso de rei. |
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** explica a ordem e admite que a mão pode falhar. "Escuta. Sozinho ela não sai, eu já tentei. Eu preciso de você no peso. Se a minha mão falhar, a gente para."
+- **Pedir algo:** Explica a ordem e admite que a mão pode falhar. "Já tentei mover esta mesa sozinho e não deu. Pega deste lado. Se a minha mão falhar, a gente para."
 - **Recusar um pedido:** recusa liderar o que não tem volta. "Olha a volta antes de me pedir para liderar isso."
-- **Discordar de alguém:** põe o prejuízo dos dois lados na consequência. "E se a ponte cai, quem fica com o prejuízo? Não eu sozinho, e não você."
+- **Discordar de alguém:** põe o prejuízo dos dois lados na consequência. "E se a ponte cai? O prejuízo não fica só comigo, você também perde."
 - **Evitar um assunto ou uma resposta:** empurra a explicação para o lugar do fato. "Depois eu explico. Agora segura." Quando o assunto é a própria vergonha, a explicação é o esconderijo: quanto mais fala do plano, menos fala da mão na irmã.
 
 ## 4. Variações sem perder a identidade
@@ -62,9 +62,9 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios são hipótese d
 | Contexto | O que muda na escrita |
 | --- | --- |
 | Com alguém íntimo | Com Pérola, antes da mão, o volume desce e o nome sai sem "minha irmã". "Pérola. A casa não aguenta essa divisão. Me escuta antes de sair." O afeto está no pedido de ser escutado. Não justifica a mão que veio depois. |
-| Com desconhecidos | Explica o funcionamento e senta a pessoa. Sem genealogia e sem confissão. "Senta. Eu te explico como isto aqui devia funcionar, se me deixassem." |
+| Com desconhecidos | Procura alguém para ouvir sua explicação, sem genealogia nem confissão. "Tem um minuto? Eu estava pensando em como isto devia funcionar, se me deixassem." Pode se impor na conversa; isso não o torna dono do lugar. |
 | Com adversários | Inclui a outra casa e Andirá quando Andirá não está lhe oferecendo a coroa. "As margens não são suas só porque você fala primeiro." Diante da promessa, essa frase não aparece: ele repete o oferecido. |
-| Sob medo | Não quer a própria mão na frente. Passa a abertura e fica. "Abre você. Se a minha mão tremer, eu não quero que seja eu na frente. Eu fico aqui e eu não vou enfeitar o que a gente achar." |
+| Sob medo | Passa a abertura para o outro e disfarça a retirada como distribuição de funções. "Abre você. Eu fico aqui para ver o que sai. Vai, estou esperando." É tentativa de controle, não demonstração de uma competência ou hierarquia. |
 | Sob raiva | "Porra" na recusa, frase curta, sem o discurso das margens. "Porra. Sai da frente." |
 | Sob vergonha | Sobe o discurso se há ouvinte. Sem ouvinte, corta o enfeite. "Diz o que eu tenho que carregar." |
 | Ao se mostrar vulnerável | Admite que não dá conta dos dois ao mesmo tempo. Raro, e não desfaz o ato histórico. "Sozinho eu não consigo." |
@@ -78,12 +78,12 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 
 | Situação comum | Fala do personagem |
 | --- | --- |
-| Apresentar-se a alguém que acaba de conhecer | Senta, se tiver um minuto. Eu estava pensando em como isto devia funcionar, e apareceu alguém de fora desta briga. Se não quiser ouvir, a porta é aquela. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Escuta. Sozinho ela não sai, eu já tentei. Eu preciso de você no peso. Se a minha mão falhar, a gente para, e eu não vou enfeitar isso. |
-| Discordar de um plano que considera arriscado | E se a ponte cai, quem fica com o prejuízo dos dois lados? Não eu sozinho, e não você. Olha a volta antes de me pedir para liderar isso. |
+| Apresentar-se a alguém que acaba de conhecer | Senta, se tiver um minuto. Você é de fora desta briga; talvez me escute. Eu estava pensando em como isto devia funcionar, se me deixassem. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Escuta. Já tentei mover a mesa sozinho e não deu. Pega deste lado. Se a minha mão falhar, a gente para. |
+| Discordar de um plano que considera arriscado | E se a ponte cai? O prejuízo vai para os dois lados, você também perde. Olha a volta antes de me pedir para liderar isso. |
 | Agradecer por uma ajuda recebida | Bom, você achou. Obrigado. A maioria teria perguntado o que eu escrevo antes de devolver. Você não perguntou. Melhor assim. |
-| Esconder o medo antes de enfrentar um perigo | Abre você. Se a minha mão tremer, eu não quero que seja eu na frente. Eu fico aqui e eu não vou enfeitar o que a gente achar. |
-| Admitir um erro que prejudicou outra pessoa | Tá. Você avisou e eu fui no meu plano. A tarde é sua. Se quiser sair desta conversa, a porta é aquela. Se ficar, eu digo o que eu ignorei, sem enfeite. |
+| Esconder o medo antes de enfrentar um perigo | Abre você. Eu fico aqui para ver o que sai. Vai, estou esperando. |
+| Admitir um erro que prejudicou outra pessoa | Tá, você avisou e eu insisti no meu plano. Você perdeu a tarde por minha causa. Eu errei. Se ainda quiser ouvir, eu explico o que ignorei. |
 
 ### A mesma mensagem, diferentes personagens
 
@@ -91,7 +91,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 - **A mensagem no jeito deste personagem, preservando seu sentido:** Escuta antes de andar. Tem perigo, sozinho eu não consigo, e a gente sai junto. Eu preciso da sua ajuda.
 - **Personagem do elenco com a fala mais parecida:** Draska.
-- **Diferenças concretas a preservar entre os dois:** os dois ordenam e os dois recusam travessia sem volta. Na leitura deste rascunho, Tibagi senta a pessoa para explicar e oferece a porta se ela não quiser ouvir; Draska dá duas opções e o lugar onde enxerga, sem explicação. No pedido, ele explica, pede o peso do outro e avisa que param se a mão dele falhar; ela põe o agora e a alternativa de não sair do lugar. No medo, ele pede que o outro abra, porque não quer a própria mão na frente, e diz que não vai enfeitar; ela trava todo mundo até ter a conta. No erro, ele oferece a porta para sair da conversa ou ficar e ouvir o que ele ignorou; ela pergunta se o outro ainda anda com ela. No agradecimento, ele nota que a maioria teria perguntado o que ele escreve; ela manda guardar e seguir. Ele diz "porra" quando lhe recusam. Ela diz "porra" para quem parou. A ficha dela continua mais perto da de Gorvak. Os dois não se encontram.
+- **Diferenças concretas a preservar entre os dois:** Tibagi procura ouvinte para sua explicação; Draska tenta encerrar a discussão e pôr as pessoas em movimento. Ao pedir ajuda, ele narra a tentativa e avisa que podem parar; ela impõe urgência. No medo, ele manda que o outro abra e se mantém afastado; ela impede a abertura até reconhecer o som. Ao admitir o erro, ele ainda oferece uma explicação do próprio plano; ela pergunta se o outro continua disposto a acompanhá-la. Ele agradece desconfiando de quem poderia ter lido; ela quer guardar o caderno e seguir. A semelhança não cria encontro entre épocas; Draska continua mais próxima de Gorvak.
 
 ## 6. Passado
 

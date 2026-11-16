@@ -54,8 +54,8 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** chama para o outro lado e deixa a recusa aberta. "Sozinha eu não chego com isto na parede. Vem do outro lado, ou me diz que não."
-- **Recusar um pedido:** diz o que a parada estraga, e deixa o pedido com quem está parado. "Não. Se eu paro para explicar agora, a hora fecha. Pede a quem está sentado."
+- **Pedir algo:** Convida a dividir o esforço e aceita a recusa. "Me ajuda a levar esta mesa até a parede? Se não der agora, eu espero."
+- **Recusar um pedido:** diz o que a parada estraga, e deixa o pedido com quem está parado. "Agora não dá. Se eu parar, chego atrasada. Pede a quem está sentado."
 - **Discordar de alguém:** separa a ida, que ela topa, da volta que ninguém olhou. "Ir eu vou. A volta ninguém viu ainda."
 - **Evitar um assunto ou uma resposta:** oferece outro trecho de rua. "Depois. Tem uma esquina melhor ali." O casamento não entra.
 
@@ -65,11 +65,11 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | --- | --- |
 | Com alguém íntimo | O riso fica, e o nome entra quando ela para de andar. "Vaelith, vem até a esquina comigo. Se cansar, a gente para, e eu não conto." |
 | Com desconhecidos | Sem Mael e sem carta. Oferece a rua ou a despedida. "Oi. Eu estava de passagem." |
-| Com adversários | Some o riso. "Não chega perto do meu passo." |
+| Com adversários | Some o riso. "Sai da minha frente." |
 | Sob medo | Não olha. Oferece a rua ou ir embora. "Eu não vou olhar. Se você quiser olhar, eu fico na rua. Se não quiser, a gente vai." |
-| Sob raiva | Some o "se quiser". Sem piada. "Não conta isso. Agora. Você." |
-| Sob vergonha | Admite a plateia numa frase e oferece o próximo trecho sem ouvinte. "Eu te pus na história cedo demais. O próximo trecho é só nosso." |
-| Ao se mostrar vulnerável | Uma frase sobre não querer fazer o trecho sem o outro. Rara. "Desse eu não volto sozinha." |
+| Sob raiva | Some o "se quiser". Sem piada. "Não conta isso pra mais ninguém!" |
+| Sob vergonha | Reconhece que expôs a pessoa sem perguntar. "Eu não devia ter contado aquilo na frente de todo mundo. Devia ter perguntado antes." Não presume que a admissão dê direito a outra conversa íntima. |
+| Ao se mostrar vulnerável | Uma frase sobre não querer fazer o trecho sem o outro. Rara. "Vem comigo na volta? Não queria ir sozinha." |
 
 - **Marcas que permanecem reconhecíveis nessas situações:** convite com saída; corpo antes do discurso; "valeu" no lugar de "obrigada"; riso que some quando alguém ainda está no chão; "porra" só na alegria com quem ela estima; sem nomear competência.
 - **Mudança ao longo da história:** a carta para Mael, nesse tempo, ainda é de comida e de estrada **[Criação]**. Depois da confissão de Ivaí, no tempo já previsto **[GDD §4.8]**: "Você contou a viagem antes da gente fazer." No Conselho, o conselho continua destruir **[GDD]**: ela fica com quem ainda pode andar, e se envergonha de ter pesado isso mais do que o juramento dos dois que estão parados há oitenta anos. A fala exata do Conselho não é exercício desta ficha.
@@ -81,11 +81,11 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 | Situação comum | Fala do personagem |
 | --- | --- |
 | Apresentar-se a alguém que acaba de conhecer | Oi. Eu estava de passagem. Se quiser companhia até o fim da rua, eu topo. Se não quiser, eu sigo, sem problema. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Ei. Sozinha eu não chego com isto na parede. Vem do outro lado, ou me diz que não, que eu paro de puxar. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Ei, me ajuda a levar esta mesa até a parede? Eu puxo deste lado. Se não puder agora, deixo pra depois. |
 | Discordar de um plano que considera arriscado | Eu até ia na frente. Sem olhar a volta, não. Se a ponte cair no meio, a gente fica do outro lado sem caminho. Vamos ver isso antes. |
 | Agradecer por uma ajuda recebida | Meu caderno! Achei que tinha ido. Valeu mesmo, você foi rápido. |
 | Esconder o medo antes de enfrentar um perigo | Eu não vou olhar. Se você quiser olhar, eu fico na rua. Se não quiser, a gente vai. |
-| Admitir um erro que prejudicou outra pessoa | Você pediu para eu parar. Eu quis ver se ainda dava, e a sua tarde foi embora. Eu não vou contar isso. Se você quiser andar de volta, eu ando calada. Se não quiser, eu fico onde estou. |
+| Admitir um erro que prejudicou outra pessoa | Você pediu para eu parar, mas eu quis tentar mais uma vez e fiz você perder a tarde. Não vou sair contando isso por aí. Quer companhia na volta ou prefere ir sem mim? |
 
 ### A mesma mensagem, diferentes personagens
 
@@ -93,7 +93,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 - **A mensagem no jeito deste personagem, preservando seu sentido:** Ei. Perigo, de verdade. Sozinha eu não tiro a gente daqui. Vem, eu preciso de você.
 - **Personagem do elenco com a fala mais parecida:** Vaelith.
-- **Diferenças concretas a preservar entre os dois:** os dois puxam o estranho para perto e os dois riem com quem estimam. Na leitura deste rascunho, ela oferece a rua e aceita que a pessoa siga sem ela; ele para no meio da própria frase e pergunta de onde a pessoa é. No pedido, ela chama para o outro lado e para de puxar se disserem que não; ele admite que quer ver a mesa na parede, que não andou um palmo, e deixa o outro recusar. No medo, ela não olha e oferece a rua ou ir embora; ele pede o palpite e trata a demora como vontade de ouvir. No erro, ela não conta o fato e só anda de volta se quiserem, calada; ele pede para não escreverem por ele e, se quiserem, pede a tarde e ouve. No agradecimento, ela diz "valeu" e nota a velocidade; ele agradece o caderno fechado. Ela diz "porra" na alegria da curva, com quem estima; ele diz "porra" no espanto, com quem estima. A voz mais próxima dele, nesta leitura, não é a dela.
+- **Diferenças concretas a preservar entre os dois:** Elowen oferece companhia e movimento; Vaelith procura o que a pessoa viu e tem para contar. Ela agradece a rapidez de quem recuperou o caderno; ele nota que o devolveram fechado. No perigo, ela pode esperar na rua ou ir embora; ele adia a ação pedindo um palpite. Ao admitir um dano, ela promete não expor o episódio e oferece companhia sem obrigá-la; ele pergunta o que ficou por fazer e oferece escuta. O humor dela acompanha a ação; o dele, a curiosidade. A ficha dele aponta Ivaí como voz mais próxima.
 
 ## 6. Passado
 
@@ -107,7 +107,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 | Pessoa | Relação |
 | --- | --- |
-| Liora | **[GDD]** Par mecânico, Destreza compartilhada; não são substitutas. **[Criação]** Disputam quem viu o detalhe primeiro. Elowen provoca; Liora corrige a marca. Quando a disputa acaba, Liora oferece a água: "A água é das duas. Bebe." Elowen diz "Eu cheguei nisso antes de você." Liora responde "Chegou. A marca continua comigo." Nenhuma chama a outra de lenta em público. |
+| Liora | **[GDD]** Par mecânico, Destreza compartilhada; não são substitutas. **[Criação]** Disputam quem viu o detalhe primeiro. Elowen provoca; Liora corrige a marca. Quando a disputa acaba, Liora oferece a água: "Toma um pouco de água. A gente continua depois." Elowen diz "Mas quem viu primeiro fui eu." Liora responde "Viu primeiro, mas marcou no lugar errado." Nenhuma chama a outra de lenta em público. |
 | Vaelith | **[GDD]** Par mecânico, Atletismo compartilhado. **[Criação]** Ela desafia o corpo; ele quer a volta e a história no mesmo lado. Riem. Nenhum chama o outro de covarde sem estar rindo. "Vem ver se essa tábua aguenta a gente." "Vou, se a gente voltar do mesmo lado." A voz mais parecida dele não é a dela. |
 | Ivaí | **[GDD §4.8]** O bardo que a trouxe com tesouro e esconde o plano. **[Criação]** No começo ela gosta da história e entra no ritmo. Não sabe da omissão. Depois da confissão: "Você contou a viagem antes da gente fazer." O conselho de destruir não vira amizade com o plano dele. |
 | Rheed jovem | **[GDD §27.1]** Ajudante, sem vaga e sem sacrifício. **[Criação]** Ela o chama para andar e se irrita se a pergunta vier no meio do passo. "Vem. A pergunta fica para quando a gente parar." Não há cena nova obrigatória. |

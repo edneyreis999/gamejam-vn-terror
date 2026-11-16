@@ -21,7 +21,7 @@ Origem de cada afirmação:
 
 - **O que deseja:** ver Ivaí livre da maldição; ele "se preocupa com Ivaí" **[GDD §27.1]**. Quer também ser útil e ser querido pelo grupo **[Criação]**.
 - **O que teme:** que os anúncios que entregou tenham trazido os oito para morrer por uma promessa de tesouro que ele sabia incompleta **[Criação, sobre GDD §4.8, §27.1]**.
-- **Qualidade e como a demonstra:** não finge que não viu. Pergunta, na frente de todos: "Você não está esquecendo de nenhuma informação, mestre?" **[GDD §27.1]**. Em fala nova, a pergunta vem sempre com saída educada para o outro: "Era só isso mesmo, mestre? Posso ter entendido errado." **[Criação]**
+- **Qualidade e como a demonstra:** não finge que não viu. Pergunta, na frente de todos: "Você não está esquecendo de nenhuma informação, mestre?" **[GDD §27.1]**. Em fala nova diante do grupo, costuma deixar uma saída educada para Ivaí: "Era só isso mesmo, mestre? Posso ter entendido errado." **[Criação]**
 - **Defeito e como prejudica suas relações:** para na pergunta. Sabe do objetivo e não conta aos heróis; ouve a resposta "Os detalhes serão adicionados ao longo do caminho" **[GDD §27.1]**. Carregar as mochilas e oferecer gentileza no lugar do aviso são escolhas desta ficha **[Criação]**.
 - **Contradição entre o que diz e o que faz:** cobra do mestre que não omita nada e omite a mesma coisa. Diz "a gente" ao falar com os oito e não corre o risco deles: não resolve a armadilha nem pode ser sacrificado **[GDD §27.1; contradição interpretada em Criação]**.
 - **O que tenta demonstrar aos outros:** que é prestativo e leve. Oferece a caneca, a lamparina, a outra ponta da corda **[Criação, sobre Arte]**.
@@ -40,7 +40,7 @@ Sem falas próprias no livro. A única citação é a do GDD §27.1; o restante 
 
 | Aspecto | Direção de escrita |
 | --- | --- |
-| Tom predominante | Solícito e inquieto. Aparece em oferta de ajuda seguida de pergunta, em qualquer conversa de fogueira ou caminho. "Senta, que eu arrumo isso. Você viu a cara do mestre quando falaram do rio?" |
+| Tom predominante | Solícito e inquieto. Aparece em oferta de ajuda seguida de pergunta, nas conversas de fogueira ou caminho quando procura ser útil ou puxar assunto. "Senta, que eu arrumo isso. Você viu a cara do mestre quando falaram do rio?" |
 | Vocabulário | Coisas que ele carrega e conta: cartazes, corda, lamparina, mochila, lenha, caneca, quantos faltam, quantas horas. Nada de palco ainda; "história" ele usa pouco. "Colei cartaz em três vilas. Em nenhuma estava escrito isso." |
 | Formalidade | Fala de rua: "a gente", "tá", "né", "pra". Sobe de registro só com Ivaí, a quem chama "mestre", e é aí que a mistura do velho já aparece: gíria e cerimônia juntas. "Ô, mestre, com todo o respeito: isso aí vai dar ruim." |
 | Tratamento dos outros | "Mestre" aparece na pergunta do prólogo **[GDD §27.1]**; mantê-lo como tratamento habitual é **[Criação]**. "Galera" e "pessoal" para o grupo; "você" ou o nome para cada herói; "senhor" e "senhora" para estranhos. De si, "eu", sem sobrenome. Diz "a gente" para se incluir no grupo. "Galera, a gente descansa aqui ou segue?" |
@@ -49,7 +49,7 @@ Sem falas próprias no livro. A única citação é a do GDD §27.1; o restante 
 | Ritmo de leitura | Repete a primeira palavra ao discordar ("Espera, espera"), usa reticência antes de dizer o que sabe e deixa frase no meio quando Ivaí olha. É o oposto do velho, que não hesita em voz alta **[Livro, velho `01:15–85`]**. "O mestre disse que... não, deixa. Passa a lamparina." |
 | Humor | Ri de si e do aperto, para aliviar os outros; nunca do morto nem do medo de alguém. Reage ao humor alheio rindo cedo demais. "Se cair, eu aviso lá de baixo." |
 | Comparações e referências | Estrada, taverna e serviço: o peso da mochila, cartaz que descola, caneca que esfria. Ainda não tira moral de nada. "Isso aqui tá igual cartaz em dia de chuva: não segura." |
-| Trejeitos verbais | Começa com vocativo ou interjeição, com frequência: "Ô,", "Olha,", "Mestre,". Termina com "né?" quando quer que concordem com ele, com frequência; o velho guarda disso o "não é mesmo?!" **[Livro, velho `06:51`]**. Anuncia o que vai fazer antes de fazer: "Eu abro, pode deixar." |
+| Trejeitos verbais | Começa com vocativo ou interjeição, com frequência: "Ô,", "Olha,", "Mestre,". Termina com "né?" quando quer que concordem com ele, com frequência; o velho guarda disso o "não é mesmo?!" **[Livro, velho `06:51`]**. Ao assumir uma tarefa, costuma anunciar o que vai fazer: "Eu abro, pode deixar." |
 | Expressões características | "Pode deixar", ao assumir uma tarefa, com frequência. "Com todo o respeito", só antes de contrariar Ivaí, raramente. "Mestre", em quase toda fala dirigida a ele. Não tem bordão. |
 | O que evitar | Tom de contador: moral, "E foi assim", exclamação de palco. Segurança demais. Acusação direta a Ivaí. Palavrão forte: sob susto, no máximo "droga" ou "ferrou", expressões de outros personagens do livro **[Livro `livro-ghork/02-pena-lilas.md:87`; `18-a-caverna-escura.md:99`]**. Emprestar esse registro ao jovem e evitá-lo diante do mestre são **[Criação]**. Explicar a armadilha ou indicar a abordagem certa **[GDD §19.1.2, §27.1]**. Falar como quem já sabe o final. |
 
@@ -67,7 +67,7 @@ Todas as linhas são **[Criação]**, salvo a citação do GDD.
 | Contexto | O que muda na escrita |
 | --- | --- |
 | Com alguém íntimo | Com Ivaí, a sós: some o "galera", fica o "mestre" e a pergunta perde a saída educada. "O senhor vai contar pra eles quando, mestre?" |
-| Com desconhecidos | Mais formal e mais curto; diz de quem é ajudante antes de dizer quem é. "Boa tarde. Eu sou o ajudante do mestre Ivaí, o da rabeca. Rheed." |
+| Com desconhecidos | Mais formal e mais curto; apresenta-se pela função de ajudante, sem escolher o nome técnico do instrumento de Ivaí. "Boa tarde. Sou Rheed, ajudante do mestre Ivaí." |
 | Com adversários | Não enfrenta: fica educado, fala menos e põe o corpo na tarefa. O "senhor" aparece e o "né" some. "Não é comigo, senhor. Eu só carrego as coisas." |
 | Sob medo | Fala mais, e de coisas práticas; nomeia o perigo antes de acalmar alguém, ao contrário do velho **[Livro, velho `01:79`]**. Pode escapar um "droga". "Tem alguma coisa ali. Droga. Fica perto de mim e segura a lamparina, tá?" |
 | Sob raiva | As perguntas viram afirmações curtas e o "mestre" continua no lugar, o que torna a frase mais dura. "O senhor prometeu tesouro. Prometeu, e mandou eu colar o cartaz, mestre." |

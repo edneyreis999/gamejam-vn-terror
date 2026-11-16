@@ -32,7 +32,7 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | --- | --- |
 | Frustração | Nomeia o que falhou e o que fazer agora, sem subir a voz. "Empurrou antes da hora. Agora levanta comigo este canto." |
 | Receber afeto | Não responde ao sentimento com sentimento. Oferece uma coisa pequena. "Se quiser, eu olho essa alça. O resto você guarda." |
-| Lidar com autoridade | Aceita o destino e recusa o método que ignora o que ele viu. "Eu vou. Pelo que eu vi nesta madeira, ou eu não respondo por ela." |
+| Lidar com autoridade | Aceita o destino, mas discute um método que ignore o defeito visível. "Eu vou, mas olha esta madeira antes. Não vou dizer que está boa só porque você tem pressa." |
 | Ser confrontado | Admite a peça escondida e não aceita o nome de traidor. "Guardei, sim. Queria mostrar que a outra não servia. Não serviu. Toma." |
 
 ## 3. Assinatura de fala escrita
@@ -43,7 +43,7 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 | Vocabulário | Banca, balsa, panela, preço, sucata, canto, volta, domingo. Concreto de feira e de margem. "Sozinho eu não levanto isto." |
 | Formalidade | Rua, sem "senhor". Não sobe de registro para impressionar. "Olha este canto." |
 | Tratamento dos outros | "Você", ou "a gente" quando a saída é dos dois. De si, "eu". Sem apelido. "Se eu disser fecha, você fecha." |
-| Comprimento das frases | Curtas no que ele viu. Alonga uma vez quando explica por que segurou uma peça, e essa frase longa é a confissão. "Porque eu queria que ele voltasse e dissesse que eu tinha razão." |
+| Comprimento das frases | Curtas quando aponta um defeito. Desenvolve a explicação se o outro precisa entender o risco; ao confessar, aparece o motivo que evitava. "Porque eu queria que ele voltasse e dissesse que eu tinha razão." |
 | Construção das frases | O que viu, o que acontece se forçarem, o pedido. Pergunta para se situar, não para entregar a decisão. "Você é daqui?" |
 | Ritmo de leitura | Sem pressa no começo. Acelera na ordem de fechar. "Fecha. Sem discutir agora." |
 | Humor | Raro, e o alvo é o material morto, não a pessoa. "Esse elástico já fez o que tinha que fazer. Que foi nada." Não devolve piada enquanto aponta madeira podre. |
@@ -54,7 +54,7 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** diz o que trava e o que acontece se o outro não entrar. "O pé da direita trava no chão. Sozinho eu não levanto. Se você não vier, a tarde acaba aqui."
+- **Pedir algo:** Aponta o impedimento e pede uma ação que o outro possa entender. "O pé direito da mesa está prendendo no chão. Me ajuda a levantar desse lado?"
 - **Recusar um pedido:** nomeia a saída que o pedido não tem. "Não. Sem a volta eu não entro."
 - **Discordar de alguém:** separa o que dá para ver do que ninguém conferiu. "Dá para ir. A volta eu não vi."
 - **Evitar um assunto ou uma resposta:** volta para uma tarefa miúda, ou chama a gaveta de sucata. "Depois. Isso é sucata."
@@ -63,11 +63,11 @@ Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação
 
 | Contexto | O que muda na escrita |
 | --- | --- |
-| Com alguém íntimo | O olhar fica, e a oferta sai sem plateia. "Liora, essa alça eu troco. Sem o 'eu te disse'." O nome depende de quem for o íntimo. |
+| Com alguém íntimo | O olhar fica, e a oferta sai sem plateia. "Liora, deixa que eu troco essa alça." O nome depende de quem for o íntimo. |
 | Com desconhecidos | Pergunta se a pessoa é dali e onde se come. Não conta a banca. "Boa tarde. Você é daqui?" |
 | Com adversários | Some a oferta. "Mão fora." |
-| Sob medo | Diz o que o som não é e deixa a porta como está até saber qual palpite errou. "Isso não é vento. Também não é gente falando. A porta fica como está até eu saber qual dos dois eu errei." |
-| Sob raiva | Some o "serve". "Você gastou a boa. Para." |
+| Sob medo | Tenta identificar o som para justificar que não quer abrir. "Não parece vento, nem voz de gente. Deixa a porta fechada enquanto eu escuto melhor." |
+| Sob raiva | Some o "serve". "Você usou a peça boa? Eu pedi para guardar!" |
 | Sob vergonha | Entrega o que escondeu na primeira frase, sem o prazer. "Estava comigo. Eu devia ter dado antes. Toma." |
 | Ao se mostrar vulnerável | Uma frase sobre não ter outra. Rara. "Dessa vez eu não tenho reserva." |
 
@@ -81,11 +81,11 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 | Situação comum | Fala do personagem |
 | --- | --- |
 | Apresentar-se a alguém que acaba de conhecer | Boa tarde. Você é daqui? Eu estou de passagem e não sei onde se come barato. Se souber, me diz. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | O pé da direita trava no chão. Sozinho eu não levanto. Se você entrar comigo, ela sai. Se não entrar, a tarde acaba aqui. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | O pé direito da mesa está prendendo no chão. Me ajuda a levantar desse lado? Sozinho eu não consigo tirar do lugar. |
 | Discordar de um plano que considera arriscado | Espera. O meio dessa ponte está podre, eu estou vendo daqui. E se a gente passa e ela não aguenta, volta por onde? Sem isso eu não vou. |
 | Agradecer por uma ajuda recebida | Obrigado. Você pegou antes de molhar. Era o que importava. |
-| Esconder o medo antes de enfrentar um perigo | Isso não é vento. Também não é gente falando. A porta fica como está até eu saber qual dos dois eu errei. |
-| Admitir um erro que prejudicou outra pessoa | O aviso era bom. Eu deixei passar porque queria ver se ainda aguentava. Não aguentou. A tarde é sua. Eu não vou ficar do seu lado fingindo que agora eu sei. |
+| Esconder o medo antes de enfrentar um perigo | Não parece vento, nem voz de gente. Deixa a porta fechada enquanto eu escuto melhor. |
+| Admitir um erro que prejudicou outra pessoa | Você avisou que não ia aguentar. Eu quis tentar mesmo assim e fiz você perder a tarde. Devia ter parado quando você falou. |
 
 ### A mesma mensagem, diferentes personagens
 
@@ -93,7 +93,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 - **A mensagem no jeito deste personagem, preservando seu sentido:** Não espera. Tem perigo, sozinho eu não acho a saída a tempo. Me ajuda, que a gente sai agora.
 - **Personagem do elenco com a fala mais parecida:** Liora.
-- **Diferenças concretas a preservar entre os dois:** os dois olham antes de forçar e os dois recusam travessia sem volta. Na leitura deste rascunho, ele pergunta se a pessoa é dali e onde se come; ela tira o estranho da frente de uma porta que abre para fora e oferece descer a rua. No pedido, ele diz o que trava e o que acontece se o outro não entrar; ela diz que sozinha a mesa gira e não começa sem o tempo do outro. No medo, ele deixa a porta como está até saber qual palpite errou; ela tira a pessoa do giro e deixa a porta fechada no escuro. No erro, ele recusa ficar ao lado fingindo que agora sabe; ela diz que o que faltou foi ouvir, e não pede para refazer na frente do outro. No agradecimento, ele diz que era o que importava e para; ela confere se as folhas estão todas. Ele diz "porra" do material ruim; ela não xinga, diz "absurdo" ou "desperdício".
+- **Diferenças concretas a preservar entre os dois:** Griznik começa pelo defeito da peça; Liora organiza o movimento em conjunto. Ele pede que levantem o pé preso da mesa; ela combina o momento de empurrar. No perigo, ele tenta reconhecer o som; ela tira a pessoa do giro da porta e conserva a porta fechada no escuro. Ao agradecer, ele valoriza o caderno ter sido pego antes de molhar; ela confere as folhas. No erro, ele admite ter insistido para ver se aguentava; ela admite ter preferido a própria conta ao aviso. Ele xinga o material ruim; ela usa "absurdo" e "desperdício".
 
 ## 6. Passado
 
@@ -108,7 +108,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 | Pessoa | Relação |
 | --- | --- |
 | Draska | **[GDD]** Par mecânico, Sobrevivência compartilhada; não são substitutos. **[Criação]** Ele quer guardar a peça; ela quer usar agora e sair. A discussão para quando alguém se machuca. "Deixa guardado." "Usa agora. Tem gente esperando." Sem grito e sem insulto de povo. |
-| Liora | **[GDD]** Par mecânico, Percepção compartilhada. **[Criação]** Ele vê a rachadura; ela vê em que ponto do conjunto a rachadura senta. "A rachadura está nesta peça." "Está. O problema é onde ela senta no resto." Nenhum corrige a espécie do outro. |
+| Liora | **[GDD]** Par mecânico, Percepção compartilhada. **[Criação]** Ele vê a rachadura; ela vê em que ponto do conjunto a rachadura senta. "A rachadura está nesta peça." "A rachadura está aí, mas olha onde essa peça se apoia." Nenhum corrige a espécie do outro. |
 | Ivaí | **[GDD §4.8]** O bardo que o trouxe com tesouro e esconde o plano. **[Criação]** Griznik ouve o anúncio procurando o que não foi dito. Não acusa antes da confissão. Depois: "No seu convite faltou uma coisa." O conselho de destruir o envergonha porque a primeira conta foi fria. |
 | Rheed jovem | **[GDD §27.1]** Ajudante, sem vaga e sem sacrifício. **[Criação]** Griznik aceita a mão dele e recusa a pergunta no meio do que está vendo. "Segura isso. A pergunta espera." Não há cena nova obrigatória. |
 | Os outros heróis | Sem arco bilateral novo **[GDD §18.1]**. Fala de caminho e de peça quando a peça está na cena. Não os abandona por afinidade: saída do elenco é só a morte prevista. |

@@ -31,18 +31,18 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 | Frustração | A frase parte no meio e ele não finge o fim. "Esse meio... está ruim. Não vai." |
 | Receber afeto | Repete o que foi devolvido, como quem confere se ainda existe. "Você trouxe de volta. Isso é bom." Não transforma o afeto em promessa de saída. |
 | Lidar com autoridade | Não discute casa nem margem. Se mandam nele, a resposta é o limite do que a memória e o corpo sustentam, sem transformar o exercício numa cena de tronco. "Se a ordem precisa de um passo que eu não dou, pede a quem dá." |
-| Ser confrontado | Admite o vão sem inventar o que havia do outro lado. "Eu deixei o aviso. Eu não sei mais o resto. Desculpa não devolve a tarde." |
+| Ser confrontado | Admite o vão sem inventar o que havia do outro lado. "Eu vi o aviso, mas não fiz o que você pediu. Não lembro por que deixei para depois." |
 
 ## 3. Assinatura de fala escrita
 
 | Aspecto | Direção de escrita |
 | --- | --- |
-| Tom predominante | Baixo, com buraco no meio da frase. O calor aparece quando o nome de Pérola volta, não quando explica a tragédia. "Fica um pouco." |
+| Tom predominante | Baixo; pode perder o fio quando tenta lembrar. O pedido presente ainda pode sair inteiro. O calor aparece quando o nome de Pérola volta, sem precisar resumir a tragédia. "Fica um pouco." |
 | Vocabulário | Na figueira: folha, vento, casca, fora. Na comparação e em hipótese de sala: nome, ponta, volta, tarde, pouco. Pouca palavra de casa e de política. |
 | Formalidade | Sem "senhor". A frase simples não é estratégia. É o que a memória sustenta. "Você chegou agora?" |
 | Tratamento dos outros | "Você". Pérola pelo nome, quando o nome volta. De si, "eu", e às vezes o "eu" repete porque o primeiro não segurou. "Eu... eu não fiz." |
-| Comprimento das frases | Curtas, muitas vezes cortadas. Não faz o discurso das sete regras: a memória não entrega o conjunto, e o registro completo é de Palotina **[GDD §§4.3, 4.4]**. |
-| Construção das frases | Começa, para, repete uma palavra, termina em outra ou não termina. Não conduz o ouvinte a um final. "Pode ser a madeira. Pode ser... não." |
+| Comprimento das frases | Em geral curtas. Ao buscar uma lembrança, pode interromper a frase ou retomá-la; não precisa quebrar um pedido que sabe fazer. Não recita as sete regras: não lembra o conjunto, e o registro completo é de Palotina **[GDD §§4.3, 4.4]**. |
+| Construção das frases | Ao perder o fio, retoma uma palavra ou abandona a lembrança sem preenchê-la. "Eu lembro que ela disse... não, essa parte não vem." Isso não impede uma pergunta direta sobre quem está à sua frente. |
 | Ritmo de leitura | A reticência é buraco, não charme. A peça do mapa sai, mesmo com a frase torta **[GDD §5.3]**. "A peça... esta. Leva. O resto eu não seguro." |
 | Humor | Quase nenhum. Uma alegria pequena, só se a cena for a figueira: "Tem folha nova. Isso é bom." Não é piada, e não entra na mesa, na ponte nem no caderno do exercício. Não ri de Pérola, de Andirá nem do visitante. |
 | Comparações e referências | Na figueira, galho e vento, quando a cena é a figueira. "O vento... na folha. Só isso." Não usar essa imagem para explicar a mesa, a ponte ou o caderno do exercício. |
@@ -52,9 +52,9 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** a frase quebra no meio da tentativa. "Eu... eu empurro e ela não anda. Sozinho eu não chego. Você segura, ou... ou me diz que não dá."
-- **Recusar um pedido:** recusa sem discurso, com a frase partida. "Esse meio está ruim. Não vai."
-- **Discordar de alguém:** aponta a volta que ele não vê. "E a volta? Eu não vejo a volta. Não vai."
+- **Pedir algo:** Pode fazer um pedido direto sobre a tarefa presente, mesmo sem sustentar uma lembrança inteira. "Pode segurar a outra ponta da mesa? Sozinho eu não consigo."
+- **Recusar um pedido:** Recusa com poucas palavras quando sabe o que não quer. "Não quero atravessar essa ponte."
+- **Discordar de alguém:** Pergunta pela consequência que o plano não esclareceu. "Se a ponte cair, por onde a gente volta?"
 - **Evitar um assunto ou uma resposta:** deixa a frase morrer no vão, em vez de inventar. "Pode ser... não. Eu não tenho o resto."
 
 ## 4. Variações sem perder a identidade
@@ -64,12 +64,12 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 | Com alguém íntimo | Com Pérola, o nome sai inteiro e a frase tenta não quebrar. "Pérola. Eu ainda digo o seu nome." Sem plateia e sem resumo da tragédia. |
 | Com desconhecidos | Pergunta se chegaram agora e pede que fiquem um pouco. Não oferece currículo. "Você... você chegou agora? Fica um pouco." |
 | Com adversários | Não enfrenta Andirá com discurso. Se a voz chegar por água ou sonho, a resposta é curta. "Não. O nome dela não é seu." Isso não cria vulnerabilidade nova nem fura o medalhão **[GDD §4.3]**. |
-| Sob medo | Admite que ouviu e não escolhe se o outro fica. "Eu ouvi. Pode ser... não. Eu não sei abrir. Fica comigo, ou vai, eu... eu não sei qual." |
-| Sob raiva | Rara. A frase fica na negativa. "Não vai." |
+| Sob medo | Disfarça o receio adiando a abertura e buscando companhia; a tentativa de nomear o som se interrompe. "Eu ouvi também. Deve ser... melhor esperar mais um pouco. Você pode ficar aqui?" Não é incapacidade nova de abrir portas. |
+| Sob raiva | Rara. Recusa a ação que o outro tenta impor, sem discurso: "Eu disse que não quero. Não insiste." |
 | Sob vergonha | Nomeia o vão e não pede que o outro o preencha. "Eu não lembro essa parte. Não inventa por mim." |
-| Ao se mostrar vulnerável | Admite que precisa do outro, e que às vezes não quer a saída. A segunda admissão é rara e não entra no exercício como fraqueza nova de campanha. "Sozinho eu não consigo. Tem dia que eu agradeço isso. Esse dia eu não gosto de mim." |
+| Ao se mostrar vulnerável | Admite que precisa do outro, mas nem sempre deseja a saída. Quando o assunto é sair: "Tem dia que eu prefiro ficar aqui. Depois eu penso nela e não entendo como pude querer isso." A contradição já proposta não vira desistência ou regra nova de campanha. |
 
-- **Marcas que permanecem reconhecíveis nessas situações:** frase quebrada; repetição do pronome; nome de Pérola inteiro; sem xingamento; sem memória completa; sem saída da árvore na campanha.
+- **Marcas que permanecem reconhecíveis nessas situações:** perda do fio ao buscar uma lembrança; retomada de palavras; nome de Pérola inteiro; sem xingamento; sem memória completa; sem saída da árvore na campanha.
 - **Mudança ao longo da história:** a memória continua fragmentada em qualquer ordem de rota **[GDD §5.3]**. Ele entrega a peça élfica e não comparece ao Conselho. Se o jogador reunir, a libertação e o custo na vida do descendente vêm do registro de Palotina, não de um discurso de Floraí **[GDD §4.4]**. Se destruir, Andirá o absorve com Pérola e com as memórias do vínculo. Esta ficha não escreve esses dois fins como falas dele.
 
 ## 5. Falas para comparação
@@ -79,11 +79,11 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 | Situação comum | Fala do personagem |
 | --- | --- |
 | Apresentar-se a alguém que acaba de conhecer | Você... você chegou agora? Fica um pouco. Eu não sei o seu nome ainda. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Eu... eu empurro e ela não anda. Sozinho eu não chego. Você segura, ou... ou me diz que não dá. |
-| Discordar de um plano que considera arriscado | Esse meio... está ruim. E a volta? Eu não vejo a volta. Não vai. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Pode segurar a outra ponta da mesa? Eu empurro daqui, mas sozinho não consigo. |
+| Discordar de um plano que considera arriscado | O meio da ponte... está ruim. Se ela cair depois, por onde a gente volta? Eu não quero atravessar. |
 | Agradecer por uma ajuda recebida | O caderno... você trouxe de volta. Obrigado. Isso é bom. |
-| Esconder o medo antes de enfrentar um perigo | Eu ouvi. Pode ser... não. Eu não sei abrir. Fica comigo, ou vai, eu... eu não sei qual. |
-| Admitir um erro que prejudicou outra pessoa | Você falou. Eu... eu não fiz o que você pediu. A tarde foi embora. Eu não sei devolver. Eu fico, se você ficar. Se você for, eu... eu não seguro. |
+| Esconder o medo antes de enfrentar um perigo | Eu ouvi também. Deve ser... melhor esperar mais um pouco. Você pode ficar aqui? |
+| Admitir um erro que prejudicou outra pessoa | Você pediu, e eu... não fiz. Deixei para depois e você perdeu a tarde. Me desculpa. Eu não lembro por que achei que podia esperar. |
 
 ### A mesma mensagem, diferentes personagens
 
@@ -91,7 +91,7 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 
 - **A mensagem no jeito deste personagem, preservando seu sentido:** A gente... precisa sair daqui. Tem perigo. Eu não consigo sozinho, eu... preciso de você.
 - **Personagem do elenco com a fala mais parecida:** Rheed jovem.
-- **Diferenças concretas a preservar entre os dois:** os dois repetem e os dois não mandam como quem já decidiu. Na leitura deste rascunho, a repetição de Floraí é um vão: "Você... você", "Eu... eu", e a escolha pode morrer no meio. A de Rheed jovem serve para buscar confirmação ou para recuar do que ele teme dizer. Uma oferta pode soar macia, e isso não resume a marca. No cumprimento, Floraí pede que a pessoa fique um pouco e admite que não sabe o nome; Rheed jovem se diz de visita, oferece a mão e pergunta se o senhor é dali. No pedido, Floraí empurra, a mesa não anda, e pede que segurem ou digam que não dá; Rheed jovem diz que já tentou e limita o trajeto até a parede. No medo, Floraí não sabe abrir e não escolhe se o outro fica ou vai; Rheed jovem decide que é o vento, abre e pede a lamparina. No erro, Floraí não sabe devolver a tarde e só fica se o outro ficar; Rheed jovem só refaz se deixarem. No agradecimento, Floraí diz que isso é bom; Rheed jovem confirma com "tá?". Floraí não é herói recrutável. Pérola é o vínculo: ela fecha a frase, e ele a deixa aberta. Na leitura do autor de Rheed, o jovem continua mais perto do velho.
+- **Diferenças concretas a preservar entre os dois:** Floraí interrompe ao perder uma lembrança; Rheed jovem hesita para buscar confirmação ou recuar do que teme dizer. No cumprimento, Floraí quer que o visitante fique e diga o nome; Rheed oferece serviço e pergunta se o estranho é dali. Um pedido atual de Floraí pode ser inteiro: a memória fragmentada não obriga toda fala a se partir. No medo, ele adia a abertura e pede companhia; Rheed tenta chamar o som de vento e se oferece para abrir. Ao admitir o erro, Floraí não recupera o motivo do adiamento; Rheed sabe que calculou mal o tempo e oferece refazer. Pérola mantém o vínculo e sustenta frases completas; isso não torna a memória de nenhum dos dois íntegra.
 
 ## 6. Passado
 

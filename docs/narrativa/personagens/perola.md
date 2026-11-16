@@ -20,7 +20,7 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 
 - **O que deseja:** sustentar o que aceitou e entregar a peça anã do mapa **[GDD §§4.3, 5.3]**. Na fala, o desejo é curto: "Pode falar. Eu escuto."
 - **O que teme:** que chamem a prisão de destino e apaguem a escolha. Também teme, sem ter o texto completo na memória, um fim em que Floraí e ela sejam tomados com a memória do vínculo **[GDD §4.4; o alcance do medo, dentro da memória fragmentada, é Criação]**. Ela não explica os dois fins no lugar de Palotina.
-- **Qualidade e como a demonstra:** separa devolver de cobrar, e diz as duas coisas sem enfeite. "Devolveu. Não cobrou. Chega."
+- **Qualidade e como a demonstra:** reconhece a ajuda de quem devolve algo sem cobrar por isso. "Obrigada por devolver. Eu precisava do caderno."
 - **Defeito e como prejudica suas relações:** recusa o consolo que soa como pedido de arrependimento. Tibagi, na memória, e Ivaí, se vier com pressa de desfazer, não recebem colo. A pessoa sai com uma frase fechada.
 - **Contradição entre o que diz e o que faz:** "Eu não peço que fiquem." Quando a pessoa se levanta, ela pergunta uma coisa pequena: se o sino ainda toca, se a rua ainda tem o mesmo nome. A pessoa senta de novo **[Criação]**. A peça do mapa ela entrega mesmo assim **[GDD §5.3]**. O pedido não está na primeira frase. Está na pergunta que segura.
 - **O que tenta demonstrar aos outros:** que não se arrependeu e que não ficou ingrata. Fala do que aceitou, do que não cobra, e corta o consolo.
@@ -29,7 +29,7 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 | Situação | Como reage e como isso aparece na conversa |
 | --- | --- |
 | Frustração | Não alonga. Recusa e para. "Não. Sem a volta, eu não aceito." |
-| Receber afeto | Agradece o fato e não abre uma segunda cláusula de conforto. "Obrigada. Devolveu. Não cobrou. Chega." |
+| Receber afeto | Reconhece a ajuda sem abrir uma confissão. "Obrigada por devolver. Eu precisava do caderno." Ser reservada não exige encerrar o agradecimento com uma reprimenda. |
 | Lidar com autoridade | Não obedece ordem de desfazer o aceite. Casa, irmão e visitante recebem a mesma negativa curta. "Eu aceitei. Não vou chamar isso de erro para te obedecer." |
 | Ser confrontado | Admite o erro de não ter agido, e recusa a palavra destino. "Eu não mexi. A sua tarde se foi por isso. Não foi destino. Foi erro meu." |
 
@@ -37,22 +37,22 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 
 | Aspecto | Direção de escrita |
 | --- | --- |
-| Tom predominante | Seco, sem frio gratuito. Deixa o outro falar e corta quando o consolo pede arrependimento. "Pode falar. Eu escuto. Se vier consolo, eu corto." |
+| Tom predominante | Seco, sem frio gratuito. Deixa o outro falar e corta quando o consolo pede arrependimento. "Pode falar, eu escuto." |
 | Vocabulário | Aceite, nome, volta, tarde, cobrar, erro. Na pedra, a prisão pode ser dita com essa palavra. Na comparação, a frase não usa a pedra para explicar a mesa, a porta ou o caderno. |
-| Formalidade | Sem "senhor" e sem tu. Não rebusca e não se apequena. "Não me conta como." |
+| Formalidade | Sem "senhor" e sem tu. Não rebusca e não se apequena. Quando dão explicações em vez de ajudar: "Eu entendi. Preciso que segure, não que explique de novo." |
 | Tratamento dos outros | "Você". Floraí pelo nome, inteiro, quando a memória entrega. Tibagi pelo nome, sem diminutivo. De si, "eu". Não diz "a gente" para dividir uma escolha que foi dela. Diz "a gente" quando a saída do exercício é mesmo dos dois. |
 | Comprimento das frases | Curtas, completas. Não quebram no meio como as de Floraí. Não fazem a lista das sete regras. |
 | Construção das frases | Escuta, fato, limite. Pouca pergunta, exceto a pergunta pequena que segura quem ia embora. "O sino ainda toca?" |
 | Ritmo de leitura | Sem reticência e sem repetição de acalanto. Se a memória falha, ela diz que falha, em frase inteira. "Esse pedaço eu não tenho. Não invento." |
 | Humor | Nenhum. Se o outro tenta graça, ela corta. "Não. Fala o que você veio falar." Não devolve graça. |
 | Comparações e referências | Quase nenhuma. Se lhe pedem uma imagem para a travessia, ela recusa. "Sem a volta, eu não aceito. Eu não vou chamar isso de outra coisa." Se a cena for a pedra, a prisão pode ser nomeada uma vez, com a palavra certa. |
-| Trejeitos verbais | Abre dando licença para falar. Corta o consolo. "Chega" quando o agradecimento já teve os fatos. |
-| Expressões características | "Eu escuto." Na chegada. "Se vier consolo, eu corto." Ela não diz "porra". |
+| Trejeitos verbais | Dá espaço para o visitante falar. Corta quando o consolo exige arrependimento: "Não precisa me consolar por ter escolhido Floraí." "Chega" cabe se a pessoa insiste, não como encerramento obrigatório de gratidão. |
+| Expressões características | "Eu escuto", quando oferece atenção. "Não me peça para me arrepender", diante de consolo que desfaça o aceite. Ela não diz "porra". |
 | O que evitar | Xingamento, arrependimento do aceite, presença no Conselho, locomoção livre, texto completo dos dois fins no lugar do registro de Palotina, insulto de casa ou de espécie. Não consolar Tibagi nem Ivaí até desfazerem uma escolha. Não tratar o PNG livre como corpo visto no jogo. Não responder ao exercício com "eu não saio da pedra". |
 
 ### Maneiras de conduzir uma conversa
 
-- **Pedir algo:** corta o método e diz que já parou de tentar. "Não me conta como. Segura. Sozinha isto não chega na parede, e eu já parei de tentar."
+- **Pedir algo:** Diz do que precisa. Se o outro já explicou sem ajudar, pode cortar a repetição: "Eu entendi como faz. Pode segurar a outra ponta? Sozinha eu não consigo." Esse contexto é hipótese de exercício, não impaciência obrigatória diante de qualquer favor.
 - **Recusar um pedido:** recusa sem discutir. "Não. Se a ponte cair, a gente não volta. Eu não aceito."
 - **Discordar de alguém:** diz a consequência e para. "Sem a volta, eu não aceito."
 - **Evitar um assunto ou uma resposta:** diz que o pedaço não está na memória. "Esse pedaço eu não tenho." O arrependimento do sim não entra.
@@ -62,11 +62,11 @@ Todo exemplo sem outra marca é **[Criação]**. Os exercícios respondem à mes
 | Contexto | O que muda na escrita |
 | --- | --- |
 | Com alguém íntimo | Com Floraí, entra o nome e uma frase que não pede desculpa pelo aceite. "Floraí. Eu ainda digo sim." |
-| Com desconhecidos | Licença para falar, e o corte do consolo. Sem genealogia. "Pode falar. Eu escuto." |
+| Com desconhecidos | Deixa o outro dizer por que veio, sem genealogia. "Pode falar, eu escuto." Não presume que todo visitante queira convencê-la a se arrepender. |
 | Com adversários | Com Andirá, se a voz chegar por água ou reflexo, a resposta é o aceite e o limite. "Eu escolhi. Você não toma isso." Sem negociação e sem furar a regra **[GDD §4.3]**. |
-| Sob medo | Não nomeia e não abre. "Não nomeia. Eu também não nomeio. A porta fica fechada mais um pouco." |
+| Sob medo | Não nomeia e não abre. "Não precisa dizer o que acha que é. Deixa a porta fechada mais um pouco." |
 | Sob raiva | A frase fica ainda mais curta e perde o "pode falar". "Não. Chega de consolo." |
-| Sob vergonha | Admite que quis ouvir o nome dele. "Eu queria o nome. Eu não vou fingir que não queria." |
+| Sob vergonha | Admite que quis ouvir o nome dele. "Eu queria ouvir o nome dele. Não vou fingir que não queria." |
 | Ao se mostrar vulnerável | Admite que precisa de ajuda para uma saída. Rara no jogo, e não antes do fim escrito. A frase do exercício existe para a comparação. "Eu preciso da sua ajuda." |
 
 - **Marcas que permanecem reconhecíveis nessas situações:** frase curta e completa; aceite sem arrependimento; "eu escuto"; corte do consolo; sem xingamento; sem Conselho.
@@ -78,20 +78,20 @@ Situações hipotéticas, iguais para todo o elenco. Sem nome de quem fala e sem
 
 | Situação comum | Fala do personagem |
 | --- | --- |
-| Apresentar-se a alguém que acaba de conhecer | Pode falar. Eu escuto. Se vier consolo, eu corto. |
-| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Não me conta como. Segura. Sozinha isto não chega na parede, e eu já parei de tentar. |
+| Apresentar-se a alguém que acaba de conhecer | Pode falar, eu escuto. |
+| Pedir ajuda para uma tarefa que não consegue concluir sozinho | Segura a outra ponta da mesa. Sozinha eu não consigo levar até a parede. |
 | Discordar de um plano que considera arriscado | Não. Se a ponte cair, a gente não volta. Eu não aceito. |
-| Agradecer por uma ajuda recebida | Obrigada. Devolveu. Não cobrou. Chega. |
-| Esconder o medo antes de enfrentar um perigo | Não nomeia. Eu também não nomeio. A porta fica fechada mais um pouco. |
-| Admitir um erro que prejudicou outra pessoa | Você avisou. Eu continuei. A tarde foi embora. Eu não vou pedir desculpa comprida. |
+| Agradecer por uma ajuda recebida | Obrigada por devolver. Eu precisava do caderno. |
+| Esconder o medo antes de enfrentar um perigo | Não precisa dizer o que acha que é. Deixa a porta fechada mais um pouco. |
+| Admitir um erro que prejudicou outra pessoa | Você avisou, e eu continuei. Fiz você perder a tarde. Foi erro meu. |
 
 ### A mesma mensagem, diferentes personagens
 
 Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu preciso da sua ajuda.”
 
-- **A mensagem no jeito deste personagem, preservando seu sentido:** Há perigo. A gente sai. Eu preciso da sua ajuda. Chega.
+- **A mensagem no jeito deste personagem, preservando seu sentido:** Há perigo aqui. Precisamos sair, e eu preciso da sua ajuda.
 - **Personagem do elenco com a fala mais parecida:** Palotina.
-- **Diferenças concretas a preservar entre os dois:** as duas sustentam o aceite e recusam desfazê-lo para agradar. Na leitura deste rascunho, Pérola autoriza falar e avisa que corta o consolo; Palotina manda entrar, enxugar o pé e sentar se for visita. No pedido, Pérola corta o método, manda segurar e diz que já parou de tentar; Palotina reparte empurra e puxa, combina até a parede e encerra. No medo, Pérola não nomeia e deixa a porta fechada mais um pouco; Palotina não abre no susto, pede que sentem e perguntem o que querem fazer. No erro, Pérola constata que continuou e recusa desculpa comprida; Palotina diz que o acordo quebrou e que não escreve outro por cima. No agradecimento, Pérola encerra com "chega"; Palotina oferece chá para dois. Palotina diz "que inferno" entre pares quando um registro some. Pérola não xinga. Floraí é o vínculo: ele deixa a frase aberta, e ela a fecha.
+- **Diferenças concretas a preservar entre os dois:** Pérola oferece atenção e sustenta o próprio limite; Palotina acolhe como anfitriã e negocia o combinado. Pérola pede ajuda diretamente para mover a mesa; Palotina propõe dividir o gesto e pergunta se concordam. No medo, Pérola evita nomear o som e adia a abertura; Palotina oferece assento e consulta o que o outro quer fazer. Pérola admite o erro sem explicação longa; Palotina reconhece que esticou o prazo e não muda o acordo para se absolver. Pérola agradece pelo caderno; Palotina acrescenta chá. A firmeza das duas não exige repreender quem acabou de ajudar. Floraí é o vínculo amoroso, com lembranças que podem se interromper.
 
 ## 6. Passado
 
