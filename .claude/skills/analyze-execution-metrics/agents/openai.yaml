@@ -1,0 +1,5 @@
+interface:
+  display_name: "Analyze Execution Metrics"
+  short_description: "Inventory documented errors of a spec execution"
+policy:
+  allow_implicit_invocation: false

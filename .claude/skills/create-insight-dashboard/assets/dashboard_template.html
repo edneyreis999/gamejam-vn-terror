@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spec execution dashboard</title>
+<link rel="icon" href="data:,">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10); --wash: #f0efec;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
+  --other: #b5b3ac; --wait: #c3c2b7;
+  --critical: #d03b3b; --warning: #fab219; --good: #0ca30c;
+  --add-bg: #e5f3e8; --add-ink: #0b5e26; --del-bg: #fbe8e7; --del-ink: #9b2222;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --wash: #383835;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --other: #6b6a65; --wait: #4a4a46;
+    --add-bg: #11301c; --add-ink: #93dba9; --del-bg: #3a1716; --del-ink: #f2a7a5;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --wash: #383835;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  --other: #6b6a65; --wait: #4a4a46;
+  --add-bg: #11301c; --add-ink: #93dba9; --del-bg: #3a1716; --del-ink: #f2a7a5;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.layout { max-width: 1480px; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: 1fr; }
+main { min-width: 0; padding: 24px 0 64px; }
+section[id], header[id] { scroll-margin-top: 72px; }
+nav.side { position: sticky; top: 0; z-index: 5; background: var(--page); border-bottom: 1px solid var(--ring); margin: 0 -16px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; }
+nav.side .title { font-weight: 600; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+nav.side ol { display: none; list-style: none; margin: 0; padding: 0; }
+nav.side select { flex: 1; min-width: 0; background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: 8px; padding: 6px 8px; font: inherit; }
+nav.side a { display: flex; gap: 8px; align-items: baseline; color: var(--ink-2); text-decoration: none; padding: 6px 10px; border-radius: 8px; font-size: 13px; line-height: 1.3; }
+nav.side a .n { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 14px; }
+nav.side a:hover { background: var(--wash); color: var(--ink); }
+nav.side a:focus-visible { outline: 2px solid var(--s1); outline-offset: 1px; }
+nav.side a[aria-current="true"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: inset 3px 0 0 var(--s1); }
+@media (min-width: 1100px) {
+  .layout { grid-template-columns: 210px minmax(0, 1fr); gap: 28px; }
+  nav.side { top: 0; height: 100vh; overflow-y: auto; margin: 0; padding: 24px 0; border: 0; display: block; background: transparent; }
+  nav.side .title { display: block; padding: 0 10px 10px; }
+  nav.side ol { display: block; }
+  nav.side select { display: none; }
+  section[id], header[id] { scroll-margin-top: 16px; }
+}
+.ins-filter { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 14px; }
+.ins-filter button { background: var(--surface); color: var(--ink-2); border: 1px solid var(--ring); border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 12.5px; cursor: pointer; }
+.ins-filter button[aria-pressed="true"] { color: var(--ink); border-color: var(--s1); box-shadow: inset 0 0 0 1px var(--s1); }
+.topics { display: grid; gap: 12px; }
+.topic { border: 1px solid var(--ring); border-radius: 12px; padding: 14px 16px; background: var(--page); min-width: 0; scroll-margin-top: 72px; }
+.badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.badge.prio { border-color: var(--s4); color: var(--ink); }
+.badge.prio::before { content: "★"; color: var(--s4); margin-right: 5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 8px; }
+.tag { font-size: 11.5px; border-radius: 6px; padding: 1px 7px; background: var(--wash); color: var(--ink-2); }
+.tag b { font-weight: 600; color: var(--ink); }
+.blk { margin-top: 8px; border-top: 1px dashed var(--grid); padding-top: 6px; }
+.blk > summary { font-size: 12.5px; color: var(--ink-2); font-weight: 600; }
+.blk p { margin: 6px 0 0; font-size: 13px; color: var(--ink-2); }
+.alts { display: grid; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; font-size: 13px; }
+.alts li { border: 1px solid var(--grid); border-radius: 8px; padding: 6px 10px; min-width: 0; }
+.alts li.rec { border-color: var(--s1); box-shadow: inset 3px 0 0 var(--s1); }
+.alts .opt { font-weight: 600; }
+.alts .opt em { font-style: normal; font-weight: 400; color: var(--s1); margin-left: 6px; font-size: 12px; }
+.alts dl { margin-top: 4px; }
+pre.diff { margin: 6px 0 0; padding: 8px 0; background: var(--page); border: 1px solid var(--grid); border-radius: 8px; font-size: 12px; line-height: 1.5; white-space: normal; }
+pre.diff span { display: block; padding: 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre.diff .add { background: var(--add-bg); color: var(--add-ink); }
+pre.diff .del { background: var(--del-bg); color: var(--del-ink); }
+pre.diff .hunk { color: var(--muted); }
+.unapplied { font-size: 12px; color: var(--ink-2); margin: 6px 0 0; }
+.unapplied::before { content: "⚠"; color: var(--warning); margin-right: 6px; }
+.rrows { display: grid; gap: 10px; margin-top: 10px; }
+.rrow { border: 1px solid var(--grid); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.rrow h4 { margin: 0; font-size: 13px; font-weight: 600; display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.rrow p { margin: 4px 0 0; font-size: 13px; color: var(--ink-2); }
+.see { font-size: 12.5px; color: var(--ink-2); margin: 6px 0 0; }
+.see a, .topic .why a { color: var(--s1); text-decoration: none; }
+.see a:hover { text-decoration: underline; }
+.topic header { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.topic h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.badge { font-size: 11.5px; border-radius: 999px; padding: 2px 8px; border: 1px solid var(--ring); color: var(--ink-2); white-space: nowrap; }
+.badge.yes::before { content: "●"; color: var(--s1); margin-right: 5px; }
+.badge.no::before { content: "○"; color: var(--muted); margin-right: 5px; }
+.topic .empty { color: var(--muted); margin: 8px 0 0; font-style: italic; }
+.topic .why { color: var(--muted); font-size: 12.5px; margin: 4px 0 0; }
+.item { border-top: 1px solid var(--grid); margin-top: 12px; padding-top: 12px; }
+.item:first-of-type { border-top: 0; margin-top: 8px; padding-top: 0; }
+.item p { margin: 0 0 6px; }
+.item dl { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 12px; margin: 6px 0 0; font-size: 13px; }
+.item dt { color: var(--muted); }
+.item dd { margin: 0; color: var(--ink-2); }
+.conf { font-size: 11.5px; color: var(--ink-2); }
+.evidence { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: 12.5px; }
+.evidence li { color: var(--ink-2); display: flex; gap: 8px; align-items: baseline; min-width: 0; }
+.evidence .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); min-width: 52px; }
+.evidence a { color: var(--s1); text-decoration: none; overflow-wrap: anywhere; }
+.evidence a:hover { text-decoration: underline; }
+.evidence code { font-size: 12px; overflow-wrap: anywhere; }
+@media (max-width: 640px) { .item dl { grid-template-columns: 1fr; } .item dt { margin-top: 4px; } }
+header.top { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+h1 { font-size: 22px; margin: 0 0 4px; font-weight: 600; }
+.meta { color: var(--ink-2); font-size: 12.5px; margin: 0; }
+.meta code { font-size: 12px; }
+button.theme { background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: 8px; padding: 6px 12px; font: inherit; cursor: pointer; }
+.kpis { display: grid; grid-template-columns: minmax(220px, 1.3fr) repeat(4, minmax(0, 1fr)); gap: 12px; margin: 20px 0 12px; }
+.kpis .tile.hero { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 960px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kpis .tile.hero { grid-column: 1 / -1; grid-row: auto; } }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 14px 16px; }
+.tile .label { color: var(--ink-2); font-size: 12.5px; }
+.tile .value { font-size: 24px; font-weight: 600; margin-top: 2px; }
+.tile .hint { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.tile.hero .value { font-size: 48px; line-height: 1.1; }
+.warn { background: var(--surface); border: 1px solid var(--ring); border-left: 4px solid var(--warning); border-radius: 10px; padding: 10px 14px; margin: 0 0 20px; color: var(--ink-2); font-size: 13px; }
+.warn ul { margin: 4px 0 0; padding-left: 18px; }
+.grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 14px; padding: 18px 18px 14px; min-width: 0; }
+.card h2 { font-size: 16px; margin: 0; font-weight: 600; }
+.card .sub { color: var(--ink-2); margin: 2px 0 12px; font-size: 13px; }
+.card .note { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
+.panels { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.panel h3 { font-size: 13px; font-weight: 600; margin: 0 0 4px; color: var(--ink-2); }
+.chart { width: 100%; min-width: 0; }
+.chart svg { display: block; width: 100%; overflow: visible; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 8px 0 0; font-size: 12.5px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.legend i.hatch { background: repeating-linear-gradient(45deg, var(--wait) 0 2px, transparent 2px 5px); border: 1px solid var(--wait); }
+.legend i.dot { border-radius: 50%; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.tiles .tile { padding: 10px 12px; }
+.tiles .tile .value { font-size: 20px; }
+details { margin-top: 10px; }
+summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; }
+.table-wrap { overflow-x: auto; margin-top: 8px; }
+table { border-collapse: collapse; font-size: 12.5px; width: 100%; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+td.wrap { white-space: normal; min-width: 280px; }
+svg text { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+svg text.ink { fill: var(--ink-2); }
+svg text.strong { fill: var(--ink); font-weight: 600; }
+.mark { cursor: default; }
+.mark:hover, .mark:focus { opacity: .82; outline: none; }
+.tip { position: fixed; pointer-events: none; z-index: 10; background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; box-shadow: 0 4px 18px rgba(0,0,0,.14); max-width: 320px; display: none; }
+.tip b { font-weight: 600; }
+.tip .row { display: flex; justify-content: space-between; gap: 14px; }
+.tip .row span:last-child { font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .tile.hero .value { font-size: 40px; } }
+.na { margin: 4px 0 0; padding: 12px 14px; border: 1px dashed var(--axis); border-radius: 10px; color: var(--ink-2); font-size: 13px; }
+.na::before { content: "∅"; color: var(--muted); margin-right: 8px; }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="side" data-aria="navAria">
+  <span class="title" data-s="navTitle"></span>
+  <ol id="nav-list"></ol>
+  <select id="nav-select" data-aria="navSelect"></select>
+</nav>
+<main>
+  <header class="top" id="summary">
+    <div>
+      <h1 id="title"></h1>
+      <p class="meta" id="meta"></p>
+    </div>
+    <button class="theme" id="theme" type="button"></button>
+  </header>
+  <section class="kpis" id="kpis"></section>
+  <div class="warn" id="warn"></div>
+  <div class="grid">
+    <section class="card" id="g1"><h2 data-s="g1"></h2><p class="sub" data-s="g1sub"></p><div class="body"><div class="panels"><div class="panel"><h3 data-s="hours"></h3><div class="chart" data-c="tasksHours"></div></div><div class="panel"><h3 data-s="tokensTotalCache"></h3><div class="chart" data-c="tasksTokens"></div></div><div class="panel"><h3 data-s="tokensUncachedLong"></h3><div class="chart" data-c="tasksUncached"></div></div></div><div class="legend" data-l="g1"></div><p class="note" data-n="g1"></p><details><summary data-s="table"></summary><div class="table-wrap" data-t="g1"></div></details></div></section>
+    <section class="card" id="g2"><h2 data-s="g2"></h2><p class="sub" id="g2sub"></p><div class="body"><div class="chart" data-c="timeline"></div><div class="legend" data-l="g2"></div><h3 style="font-size:13px;margin:14px 0 4px;color:var(--ink-2);font-weight:600" data-s="concurrency"></h3><div class="chart" data-c="concurrency"></div><p class="note" data-n="g2"></p></div></section>
+    <section class="card" id="g3"><h2 data-s="g3"></h2><p class="sub" data-s="g3sub"></p><div class="body"><div class="panels"><div class="panel"><h3 data-s="cumTotal"></h3><div class="chart" data-c="cumTotal"></div></div><div class="panel"><h3 data-s="cumUncached"></h3><div class="chart" data-c="cumUncached"></div></div></div><div class="legend" data-l="g3"></div><p class="note" data-n="g3"></p></div></section>
+    <section class="card" id="g4"><h2 data-s="g4"></h2><p class="sub" data-s="g4sub"></p><div class="body"><div class="panels"><div class="panel"><h3 data-s="occupiedHours"></h3><div class="chart" data-c="catHours"></div></div><div class="panel"><h3 data-s="tokensTotal"></h3><div class="chart" data-c="catTokens"></div></div><div class="panel"><h3 data-s="tokensUncached"></h3><div class="chart" data-c="catUncached"></div></div></div><div class="legend" data-l="g4"></div><p class="note" data-n="g4"></p><details><summary data-s="table"></summary><div class="table-wrap" data-t="g4"></div></details></div></section>
+    <section class="card" id="g5"><h2 data-s="g5"></h2><p class="sub" data-s="g5sub"></p><div class="body"><div class="tiles" data-k="g5"></div><div class="chart" data-c="cmdStrip"></div><div class="legend" data-l="g5"></div><div class="panels" style="margin-top:14px"><div class="panel"><h3 data-s="topChecks"></h3><div class="chart" data-c="cmdChecks"></div></div><div class="panel"><h3 data-s="timeByType"></h3><div class="chart" data-c="cmdTypeTime"></div></div></div><p class="note" data-n="g5"></p><details><summary data-s="tableByType"></summary><div class="table-wrap" data-t="g5"></div></details></div></section>
+    <section class="card" id="g6"><h2 data-s="g6"></h2><p class="sub" data-s="g6sub"></p><div class="body"><div class="tiles" data-k="g6"></div><div class="panels"><div class="panel"><h3 data-s="classOrigin"></h3><div class="chart" data-c="findMatrix"></div><div class="legend" data-l="g6"></div></div><div class="panel"><h3 data-s="channel"></h3><div class="chart" data-c="findChannel"></div></div><div class="panel"><h3 data-s="stages"></h3><div class="chart" data-c="findStages"></div></div></div><p class="note" data-n="g6"></p><details><summary data-s="tableFindings"></summary><div class="table-wrap" data-t="g6"></div></details></div></section>
+    <section class="card" id="g7"><h2 data-s="g7"></h2><p class="sub" data-s="g7sub"></p><div class="body"><div class="panels"><div class="panel"><div class="chart" data-c="rework"></div></div><div class="panel"><h3 data-s="acceptancePerTask"></h3><div class="chart" data-c="acceptance"></div></div></div><p class="note" data-n="g7"></p><details><summary data-s="table"></summary><div class="table-wrap" data-t="g7"></div></details></div></section>
+    <section class="card" id="g8"><h2 data-s="g8"></h2><p class="sub" data-s="g8sub"></p><div class="body"><div class="tiles" data-k="g8"></div><div class="panels"><div class="panel"><h3 data-s="tokenAttribution"></h3><div class="chart" data-c="partition"></div><div class="legend" data-l="g8"></div></div><div class="panel"><h3 data-s="gapsByCode"></h3><div class="chart" data-c="gaps"></div></div></div><p class="note" data-n="g8"></p><details><summary data-s="qualityRecords"></summary><div class="table-wrap" data-t="g8"></div></details></div></section>
+    <section class="card" id="insights"><h2 data-s="insights"></h2><p class="sub" id="ins-sub"></p><div class="ins-filter" role="group" data-aria="filterAria"></div><div class="topics" id="topics"></div></section>
+    <section class="card" id="ins-no-change"><h2 data-s="noChange"></h2><p class="sub" data-s="noChangeSub"></p><div class="topics" id="no-change"></div></section>
+    <section class="card" id="ins-pending"><h2 data-s="pending"></h2><p class="sub" data-s="pendingSub"></p><div class="topics" id="pending"></div></section>
+  </div>
+</main>
+</div>
+<div class="tip" id="tip" role="status"></div>
+<script id="data" type="application/json">/*__DATA__*/</script>
+<script id="insights-data" type="application/json">/*__INSIGHTS__*/</script>
+<script id="meta-data" type="application/json">/*__META__*/</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById("data").textContent);
+const I = JSON.parse(document.getElementById("insights-data").textContent);
+const META = JSON.parse(document.getElementById("meta-data").textContent);
+
+// ---------- strings ----------
+const STRINGS = {
+  en: {
+    docTitle: t => `Execution · ${t}`, heading: t => `Spec execution · ${t}`,
+    navAria: "Dashboard sections", navTitle: "Navigation", navSelect: "Go to section",
+    theme: "Theme", themes: { auto: "auto", light: "light", dark: "dark" },
+    meta: (s, start) => `Run <code>${s.run}</code> · ${s.working_tree ? "working tree at" : "commit"} <code>${s.commit}</code>${s.subject ? ` (${s.subject})` : ""} · spec-execution-metrics reader ${s.reader} · ${s.records} records · start ${start}`,
+    metaNoMetrics: (s, reason) => `${s.commit ? `${s.working_tree ? "Working tree at" : "Commit"} <code>${s.commit}</code> · ` : ""}metrics unavailable: ${reason}`,
+    unavailable: r => `Data unavailable: ${r}.`,
+    unknownDuration: "unknown", h: "h", s: "s", min: "min",
+    g1: "1 · Time and tokens per task", g1sub: "Where the cost concentrated. Occupied time = union of the task's active intervals (parallelism is not counted twice); the declared sum of spans shows as a light bar.",
+    g2: "2 · Execution timeline", g2sub: span => `Where the ${span} went. Lane 1 = coordinator session; following lanes = packed subagents (each lane groups sessions that do not overlap). Colour = activity group; hatched = wait.`,
+    g3: "3 · Cumulative token use over time", g3sub: "When the tokens were spent. Aggregated in 5-minute windows by each snapshot's timestamp; ticks at the top = start of each task.",
+    g4: "4 · Cost per activity category", g4sub: "Which kind of work consumed time and tokens. Metrics instrumentation is highlighted as overhead of the measurement itself.",
+    g5: "5 · Verification commands", g5sub: "Each dot is a command (duration on a log scale), by verification type. Below, the most repeated checks and how many runs failed.",
+    g6: "6 · Findings", g6sub: "Where the errors came from: classification × origin, discovery channel and handling stages.",
+    g7: "7 · Rework per task", g7sub: "Were the most expensive tasks the ones with most findings? x = occupied hours (log), y = findings, dot area = tokens. Right: acceptance markers (each = a new E2E acceptance round).",
+    g8: "8 · Measurement quality", g8sub: "How much of the charts above is exact. Reader gaps, quality records and the token-attribution partition.",
+    hours: "Hours", tokensTotalCache: "Total tokens (cache included)", tokensUncachedLong: "Uncached tokens (uncached input + output)",
+    table: "Table", tableByType: "Table by type", tableFindings: "Findings table", qualityRecords: "Quality records",
+    concurrency: "Subagents active at the same time", cumTotal: "Cumulative total tokens (stacked)", cumUncached: "Cumulative uncached tokens",
+    occupiedHours: "Occupied hours", tokensTotal: "Total tokens", tokensUncached: "Uncached tokens",
+    topChecks: "Most executed checks (runs)", timeByType: "Total time per verification type (h)",
+    classOrigin: "Classification × origin", channel: "Discovery channel", stages: "Recorded stages",
+    acceptancePerTask: "Acceptance markers per task", tokenAttribution: "Token attribution", gapsByCode: "Gaps per code",
+    kElapsed: "Total duration (entry → last freeze)", kOccupied: "Occupied time", kOccupiedHint: "≥ 1 agent active",
+    kAgent: "Agent-hours sum", kAgentHint: x => `${x} in parallel`, kWait: "Declared wait/pause", kWaitHint: "agent-hours",
+    kTokens: "Observed tokens", kTokensHint: x => `${x} cached input`, kUncached: "Uncached tokens", kUncachedHint: (i, o) => `${i} input · ${o} output`,
+    kCommands: "Measured commands", kCommandsHint: n => `${n} with exit code ≠ 0`, kFindings: "Findings", kFindingsHint: n => `${n} acceptance markers`,
+    kDefects: "Delivery defects", defectsHint: (i, p) => `${i} introduced · ${p} pre-existing`,
+    howTo: "How to read.",
+    warn: (cached, unknown, records, incomplete) => [
+      `Tokens are not subscription quota: no quota is recorded, and cached input (${cached}) usually weighs much less than new input and output.`,
+      `Hierarchical inclusion is unknown in ${unknown} of ${records} token records: the total adds sessions and does not prove the absence of double counting.`,
+      `${incomplete} token records without a component or baseline were left out of the sums.`,
+      "Per-group durations can overlap (parallel subagents): do not add groups to get the total."],
+    occupied: "Occupied", declaredSum: "Declared sum", wait: "Wait", activities: "Activities", totalTokens: "Total tokens", uncached: "Uncached", output: "Output",
+    legOccupied: "Occupied hours (union)", legDeclared: "Declared sum of spans (with parallelism)",
+    g1note: (m, u) => `Outside the token bars: ${m} in snapshots covering activities of more than one task (mixed) and ${u} without an activity (unattributed). Tokens are never split by time.`,
+    thTask: "Task", thOccH: "Occupied (h)", thDeclH: "Declared (h)", thWaitMin: "Wait (min)", thTokens: "Tokens", thCached: "Cached", thUncachedIn: "Uncached input", thOutput: "Output", thReasoning: "Reasoning",
+    coordShort: "Coord.", coord: "Coordinator", subShort: n => `Sub ${n}`, sub: n => `Subagents ${n}`, aggShort: "Sub +", agg: n => `Other subagents (${n} lanes)`,
+    waitTag: " (wait)", session: "Session", coordinatorSession: "coordinator", subagentSession: "subagent", start: "Start", end: "End", duration: "Duration",
+    declaredWait: "Declared wait", activeSubagents: "Active subagents",
+    g2note: (bars, untimed) => `${bars} activities with start and end; ${untimed} without a matching end were left out. Declared activities do not prove continuous work inside the interval.`,
+    coordinatorSeries: "Coordinator", subagentSeries: "Subagents", legCoordinator: "Coordinator session", legSubagents: "Subagents (all child sessions)",
+    until: (c, hrs) => `until ${c} (${hrs} h)`, total: "Total",
+    g3note: (c, t) => `Coordinator: ${c} of ${t} tokens. Each session rereads its whole context on every call, so cached input grows with the coordinator session's length.`,
+    group: "Group", legCategory: "Work category", legInstrumentation: "Metrics instrumentation (measurement overhead)",
+    g4note: (h, t, m, u) => `Instrumentation: ${h} and ${t} attributed tokens. Outside the bars: ${m} tokens in snapshots covering more than one category and ${u} without an activity.`,
+    g4noteNoInst: (m, u) => `Outside the bars: ${m} tokens in snapshots covering more than one category and ${u} without an activity.`,
+    thCategory: "Category", thGroup: "Group", thActivities: "Activities", thUncached: "Uncached",
+    otherRow: "other", type: "Type", environment: "Environment", externalDuration: "External duration", runnerDuration: "Runner duration", exitCode: "Exit code", activityStart: "Activity start",
+    exit0: "Exit 0", failedLeg: "✕ Failed (exit ≠ 0)", failed: "Failed", noCheck: "(no check)",
+    tCommands: "Commands", tFailed: "Failed", tCmdTime: "Time in commands", tCmdTimeHint: "sum of external durations", tE2E: "E2E", tE2EHint: (r, f) => `${r} runs · ${f} failures`,
+    runs: "Runs", totalTime: "Total time",
+    attemptAllOne: n => `The <i>attempt</i> field is 1 in all ${n} commands, so repetition shows as several runs of the same check, not as a numbered attempt.`,
+    attemptMixed: v => `Recorded <i>attempt</i> values: ${v}.`,
+    envNote: n => `Environments normalized from ${n} free-text labels.`,
+    thType: "Type", thRuns: "Runs", thFailed: "Failed", thTimeH: "Time (h)",
+    origin: { introduced: "Introduced in the execution", pre_existing: "Pre-existing", unknown: "Unknown origin" },
+    funnel: { registered: "Registered", fixed: "With fix", retested: "With retest", passing_retest: "Passing retest" },
+    findingsN: "Findings", pctRegistered: "% of registered", tRegistered: "Recorded findings", tPersona: "Persona defects", tTest: "Classified as test",
+    g6note: rel => `Stages are not a nested funnel: a retest without a fix is common for test or infrastructure findings. A delivery defect requires a matching acceptance marker (reader rule). Normalized relation labels: ${rel}.`,
+    thFinding: "Finding", thChannel: "Channel", thClass: "Classification", thOrigin: "Origin", thStages: "Stages",
+    occupiedLog: "occupied hours (log)", occupiedHoursT: "Occupied hours", acceptanceMarkers: "Acceptance markers", commandsFailures: "Commands (failures)", failedCommands: "Failed commands",
+    g7note: "Each acceptance marker is recorded before a round of E2E checks for a task/candidate; more than one means acceptance repeated after fixes.",
+    thAcceptance: "Acceptances", thCommands: "Commands", thFailures: "Failures",
+    tGaps: "Reader gaps", tQuality: "Quality records", tRecon: "Reconciliations", tReconClosed: n => `${n} closed`, tReconIncomplete: n => `${n} incomplete`,
+    tInclusion: "Hierarchical inclusion", exact: "exact", notExact: "not exact", unknownRecords: n => `${n} unknown records`, tEffective: "Effective records", ofPublished: n => `of ${n} published`,
+    partTotal: "Total tokens", partUncached: "Uncached", partInterval: "Interval (1 activity)", partMixed: "Mixed (several activities)", partNone: "No activity",
+    legInterval: "Interval: the snapshot fits one activity", legMixed: "Mixed: covers several activities", legNone: "No associated activity",
+    occurrences: "Occurrences", otherCodes: n => `others (${n} codes)`, otherCodesT: "Other codes",
+    g8note: (inc, untimed) => `“Interval” means the cumulative snapshot fits a single declared activity, which does not prove a model-call boundary. ${inc} token records without a component or baseline and ${untimed} activities without a matching end were left out of the sums.`,
+    thCode: "Code", thAffected: "Affected", thDetail: "Detail",
+    nav: { summary: "Summary", g1: "Time and tokens per task", g2: "Timeline", g3: "Cumulative tokens", g4: "Activity categories", g5: "Commands", g6: "Findings", g7: "Rework per task", g8: "Measurement quality", insights: "Insights", "ins-no-change": "No change recommended", "ins-pending": "Pending investigations" },
+    insights: "Insights to improve spec execution", noChange: "Cases with no change recommended", noChangeSub: "Situations where the evidence does not justify changing an instruction or tool. Keeping things as they are is a valid outcome.",
+    pending: "Pending investigations", pendingSub: "Cases without enough basis to recommend. Each says which evidence would allow deciding.",
+    notGenerated: "Insights were not generated for this dashboard.", none: "None.", filterAria: "Filter topics",
+    insSub: (n, w, p, nc, pd) => `${n} topics: ${w} with insight and ${n - w} without. ${p} priority proposals, ${nc} cases with no change recommended and ${pd} pending investigations. Every claim cites evidence validated before rendering: file and line, Git revision, aggregated data or finding.`,
+    fAll: n => `All (${n})`, fInsight: n => `With insight (${n})`, fNone: n => `Without insight (${n})`, fPriority: n => `Priority proposals (${n})`,
+    badgePrio: n => `${n} priority`, badgeIns: n => `${n} insight${n > 1 ? "s" : ""}`, noInsight: "no insight for this topic", badgeNone: "no insight",
+    see: "See", refPending: "pending investigation", refNoChange: "no change", badgeNoChange: "no change", badgePending: "pending",
+    gap: "Gap", decideWith: "What would allow deciding",
+    yes: "yes", no: "no", unknown: "unknown",
+    kFile: "file", kGit: "git", kData: "data", kFinding: "finding", readingProof: "reading proof", sameCopy: "= copy used in the execution",
+    change: { instruction: "instruction change", tool: "tool", process: "process", user_decision: "user decision", local: "local fix", observation: "observation" },
+    dest: { general_skill: "general skill", engine_specialization: "engine specialization", project_guide_or_helper: "project guide or helper", local_fix: "local fix" },
+    state: { absent: "absent", defective: "wrong, ambiguous, incomplete or conflicting", not_loaded: "existing, but not found or loaded", misapplied: "found, but misapplied", insufficient: "applied correctly, without resolving" },
+    option: { keep: "Keep the text", remove: "Remove the passage", minimal: "Replace with the minimum" },
+    evalLabels: { signal: "How to tell it works", costs: "Costs", lost_protections: "Lost protections", side_effects: "Side effects", textual_review: "Textual review", behavioral_benefit: "Behavioral benefit" },
+    conf: { high: "high", medium: "medium", low: "low" },
+    rec: { recurrence: "recurrence", successive_attempts: "successive attempts", single_execution: "single execution" },
+    destTag: "destination", guidanceTag: "guidance", guidanceBlock: "Guidance in effect during the execution", version: "Version", unrecoverable: "Not recoverable",
+    alternatives: "Alternatives", recommended: "recommended", loses: "What is lost", judgment: "Left to judgment", evaluation: "Evaluation",
+    proposed: f => `Proposed text (${f === "diff" ? "diff" : "before/after"})`, unapplied: (t, b) => `Proposal not applied. Target: ${t}, base ${b}.`,
+    recurrenceBlock: "Recurrence across executions", patterns: "patterns", priority: "Priority", priorityTag: "priority",
+    impact: "Impact", recommendation: "Recommendation", confidence: "Confidence",
+  },
+  "pt-BR": {
+    docTitle: t => `Execução · ${t}`, heading: t => `Execução da spec · ${t}`,
+    navAria: "Seções do dashboard", navTitle: "Navegação", navSelect: "Ir para a seção",
+    theme: "Tema", themes: { auto: "automático", light: "claro", dark: "escuro" },
+    meta: (s, start) => `Run <code>${s.run}</code> · ${s.working_tree ? "working tree em" : "commit"} <code>${s.commit}</code>${s.subject ? ` (${s.subject})` : ""} · leitor spec-execution-metrics ${s.reader} · ${s.records} registros · início ${start}`,
+    metaNoMetrics: (s, reason) => `${s.commit ? `${s.working_tree ? "Working tree em" : "Commit"} <code>${s.commit}</code> · ` : ""}métricas indisponíveis: ${reason}`,
+    unavailable: r => `Dados indisponíveis: ${r}.`,
+    reasons: {
+      "the spec has no execution-metrics directory": "a spec não tem a pasta execution-metrics",
+      "execution-metrics has no published records": "execution-metrics não tem registros publicados",
+      "spec-execution-metrics reader not found (pass --metrics)": "leitor do spec-execution-metrics não encontrado",
+      "no task activity": "nenhuma atividade de task", "no activity with both start and end": "nenhuma atividade com início e fim",
+      "no complete token record within timed activity": "nenhum registro de token completo em atividade com horário",
+      "no categorized activity": "nenhuma atividade categorizada", "no measured command": "nenhum comando medido",
+      "no finding recorded": "nenhum finding registrado", "no task-scoped activity": "nenhuma atividade ligada a task",
+    },
+    unknownDuration: "desconhecida", h: "h", s: "s", min: "min",
+    g1: "1 · Tempo e tokens por task", g1sub: "Onde o custo se concentrou. Tempo ocupado = união dos intervalos ativos da task (paralelismo não duplica); a soma declarada dos spans aparece como faixa clara.",
+    g2: "2 · Linha do tempo da execução", g2sub: span => `Onde foram as ${span}. Faixa 1 = sessão coordenadora; faixas seguintes = subagentes empacotados (cada faixa agrupa sessões que não se sobrepõem). Cor = grupo de atividade; hachurado = espera.`,
+    g3: "3 · Consumo de tokens acumulado no tempo", g3sub: "Quando os tokens foram gastos. Agregado em janelas de 5 min pelo timestamp de cada snapshot; marcas no topo = início de cada task.",
+    g4: "4 · Custo por categoria de atividade", g4sub: "Qual tipo de trabalho consumiu tempo e tokens. Instrumentação de métricas destacada como overhead da própria medição.",
+    g5: "5 · Comandos de verificação", g5sub: "Cada ponto é um comando (duração em escala log), por tipo de verificação. Abaixo, os checks mais repetidos e quantas execuções falharam.",
+    g6: "6 · Findings", g6sub: "De onde vieram os erros: classificação × origem, canal de descoberta e etapas de tratamento.",
+    g7: "7 · Retrabalho por task", g7sub: "As tasks mais caras foram as com mais achados? Eixo x = horas ocupadas (log), y = findings, área do ponto = tokens. À direita, marcadores de aceite (cada um = nova rodada de aceite E2E).",
+    g8: "8 · Qualidade da medição", g8sub: "Quanto dos gráficos acima é exato. Lacunas do leitor, registros de qualidade e partição da atribuição de tokens.",
+    hours: "Horas", tokensTotalCache: "Tokens totais (inclui cache)", tokensUncachedLong: "Tokens não cacheados (input sem cache + output)",
+    table: "Tabela", tableByType: "Tabela por tipo", tableFindings: "Tabela de findings", qualityRecords: "Registros de qualidade (quality)",
+    concurrency: "Subagentes ativos simultaneamente", cumTotal: "Tokens totais acumulados (empilhado)", cumUncached: "Tokens não cacheados acumulados",
+    occupiedHours: "Horas ocupadas", tokensTotal: "Tokens totais", tokensUncached: "Tokens não cacheados",
+    topChecks: "Checks mais executados (execuções)", timeByType: "Tempo total por tipo de verificação (h)",
+    classOrigin: "Classificação × origem", channel: "Canal de descoberta", stages: "Etapas registradas",
+    acceptancePerTask: "Marcadores de aceite por task", tokenAttribution: "Atribuição dos tokens", gapsByCode: "Lacunas por código",
+    kElapsed: "Duração total (entrada → último freeze)", kOccupied: "Tempo ocupado", kOccupiedHint: "≥ 1 agente ativo",
+    kAgent: "Soma agente-horas", kAgentHint: x => `${x} em paralelo`, kWait: "Espera/pausa declarada", kWaitHint: "agente-horas",
+    kTokens: "Tokens observados", kTokensHint: x => `${x} input cacheado`, kUncached: "Tokens não cacheados", kUncachedHint: (i, o) => `${i} input · ${o} output`,
+    kCommands: "Comandos medidos", kCommandsHint: n => `${n} com código ≠ 0`, kFindings: "Findings", kFindingsHint: n => `${n} marcadores de aceite`,
+    kDefects: "Defeitos de entrega", defectsHint: (i, p) => `${i} introduzidos · ${p} pré-existentes`,
+    howTo: "Como ler.",
+    warn: (cached, unknown, records, incomplete) => [
+      `Tokens não equivalem a cota da assinatura: não há registro de cota, e input cacheado (${cached}) costuma pesar bem menos que input novo e output.`,
+      `Inclusão hierárquica desconhecida em ${unknown} de ${records} registros de token: o total soma sessões e não prova ausência de dupla contagem.`,
+      `${incomplete} registros de token sem componente ou baseline ficaram fora das somas.`,
+      "Durações por grupo podem se sobrepor (subagentes em paralelo): não some grupos para obter o total."],
+    occupied: "Ocupado", declaredSum: "Soma declarada", wait: "Espera", activities: "Atividades", totalTokens: "Tokens totais", uncached: "Não cacheados", output: "Output",
+    legOccupied: "Horas ocupadas (união)", legDeclared: "Soma declarada dos spans (com paralelismo)",
+    g1note: (m, u) => `Fora das barras de tokens: ${m} em snapshots que cobrem atividades de mais de uma task (mixed) e ${u} sem atividade (unattributed). Tokens nunca são divididos por tempo.`,
+    thTask: "Task", thOccH: "Ocupado (h)", thDeclH: "Declarado (h)", thWaitMin: "Espera (min)", thTokens: "Tokens", thCached: "Cacheados", thUncachedIn: "Input sem cache", thOutput: "Output", thReasoning: "Reasoning",
+    coordShort: "Coord.", coord: "Coordenador", subShort: n => `Sub ${n}`, sub: n => `Subagentes ${n}`, aggShort: "Sub +", agg: n => `Demais subagentes (${n} faixas)`,
+    waitTag: " (espera)", session: "Sessão", coordinatorSession: "coordenadora", subagentSession: "subagente", start: "Início", end: "Fim", duration: "Duração",
+    declaredWait: "Espera declarada", activeSubagents: "Subagentes ativos",
+    g2note: (bars, untimed) => `${bars} atividades com início e fim; ${untimed} sem fim compatível ficaram fora. Atividades declaradas não provam trabalho contínuo dentro do intervalo.`,
+    coordinatorSeries: "Coordenador", subagentSeries: "Subagentes", legCoordinator: "Sessão coordenadora", legSubagents: "Subagentes (todas as sessões filhas)",
+    until: (c, hrs) => `até ${c} (${hrs} h)`, total: "Total",
+    g3note: (c, t) => `Coordenador: ${c} de ${t} tokens. Cada sessão relê o contexto inteiro a cada chamada; por isso o input cacheado cresce com a duração da sessão coordenadora.`,
+    group: "Grupo", legCategory: "Categoria de trabalho", legInstrumentation: "Instrumentação de métricas (overhead da medição)",
+    g4note: (h, t, m, u) => `Instrumentação: ${h} e ${t} tokens atribuídos. Fora das barras: ${m} tokens em snapshots que cobrem mais de uma categoria e ${u} sem atividade.`,
+    g4noteNoInst: (m, u) => `Fora das barras: ${m} tokens em snapshots que cobrem mais de uma categoria e ${u} sem atividade.`,
+    thCategory: "Categoria", thGroup: "Grupo", thActivities: "Atividades", thUncached: "Não cacheados",
+    otherRow: "outros", type: "Tipo", environment: "Ambiente", externalDuration: "Duração externa", runnerDuration: "Duração do runner", exitCode: "Código de saída", activityStart: "Início da atividade",
+    exit0: "Saída 0", failedLeg: "✕ Falhou (código ≠ 0)", failed: "Falhou", noCheck: "(sem check)",
+    tCommands: "Comandos", tFailed: "Falharam", tCmdTime: "Tempo em comandos", tCmdTimeHint: "soma das durações externas", tE2E: "E2E", tE2EHint: (r, f) => `${r} execuções · ${f} falhas`,
+    runs: "Execuções", totalTime: "Tempo total",
+    attemptAllOne: n => `O campo <i>attempt</i> vale 1 em todos os ${n} comandos, então repetição aparece como várias execuções do mesmo check, não como tentativa numerada.`,
+    attemptMixed: v => `Valores de <i>attempt</i> registrados: ${v}.`,
+    envNote: n => `Ambientes normalizados a partir de ${n} rótulos livres.`,
+    thType: "Tipo", thRuns: "Execuções", thFailed: "Falharam", thTimeH: "Tempo (h)",
+    origin: { introduced: "Introduzido na execução", pre_existing: "Pré-existente", unknown: "Origem desconhecida" },
+    funnel: { registered: "Registrados", fixed: "Com correção (fix)", retested: "Com reteste", passing_retest: "Reteste aprovado" },
+    findingsN: "Findings", pctRegistered: "% dos registrados", tRegistered: "Findings registrados", tPersona: "Defeitos por persona", tTest: "Classificados como teste",
+    g6note: rel => `Etapas não são um funil aninhado: reteste sem correção é comum em findings de teste ou infraestrutura. Defeito de entrega exige marcador de aceite correspondente (regra do leitor). Rótulos de relação normalizados: ${rel}.`,
+    thFinding: "Finding", thChannel: "Canal", thClass: "Classificação", thOrigin: "Origem", thStages: "Etapas",
+    occupiedLog: "horas ocupadas (log)", occupiedHoursT: "Horas ocupadas", acceptanceMarkers: "Marcadores de aceite", commandsFailures: "Comandos (falhas)", failedCommands: "Comandos com falha",
+    g7note: "Cada marcador de aceite é registrado antes de uma rodada de checks E2E de uma task/candidato; mais de um indica aceite repetido após correções.",
+    thAcceptance: "Aceites", thCommands: "Comandos", thFailures: "Falhas",
+    tGaps: "Lacunas do leitor", tQuality: "Registros quality", tRecon: "Reconciliações", tReconClosed: n => `${n} fechadas`, tReconIncomplete: n => `${n} incompletas`,
+    tInclusion: "Inclusão hierárquica", exact: "exata", notExact: "não exata", unknownRecords: n => `${n} registros unknown`, tEffective: "Registros efetivos", ofPublished: n => `de ${n} publicados`,
+    partTotal: "Tokens totais", partUncached: "Não cacheados", partInterval: "Interval (1 atividade)", partMixed: "Mixed (várias atividades)", partNone: "Sem atividade",
+    legInterval: "Interval: o snapshot cabe em 1 atividade", legMixed: "Mixed: cobre várias atividades", legNone: "Sem atividade associada",
+    occurrences: "Ocorrências", otherCodes: n => `outros (${n} códigos)`, otherCodesT: "Outros códigos",
+    g8note: (inc, untimed) => `“Interval” significa que o snapshot cumulativo cabe numa única atividade declarada, o que não prova a fronteira de uma chamada de modelo. ${inc} registros de token sem componente/baseline e ${untimed} atividades sem fim compatível ficaram fora das somas.`,
+    thCode: "Código", thAffected: "Afetados", thDetail: "Detalhe",
+    nav: { summary: "Resumo", g1: "Tempo e tokens por task", g2: "Linha do tempo", g3: "Tokens acumulados", g4: "Categorias de atividade", g5: "Comandos", g6: "Findings", g7: "Retrabalho por task", g8: "Qualidade da medição", insights: "Insights", "ins-no-change": "Sem mudança recomendada", "ins-pending": "Investigações pendentes" },
+    insights: "Insights para melhorar a execução de specs", noChange: "Casos sem mudança recomendada", noChangeSub: "Situações em que a evidência não justifica mudar instrução ou ferramenta. Manter como está é um resultado válido.",
+    pending: "Investigações pendentes", pendingSub: "Casos sem base suficiente para recomendar. Cada um diz qual evidência permitiria decidir.",
+    notGenerated: "Os insights não foram gerados para este dashboard.", none: "Nenhum.", filterAria: "Filtrar tópicos",
+    insSub: (n, w, p, nc, pd) => `${n} tópicos: ${w} com insight e ${n - w} sem. ${p} propostas prioritárias, ${nc} casos sem mudança recomendada e ${pd} investigações pendentes. Cada afirmação cita evidência validada antes da renderização: arquivo e linha, revisão Git, dado agregado ou finding.`,
+    fAll: n => `Todos (${n})`, fInsight: n => `Com insight (${n})`, fNone: n => `Sem insight (${n})`, fPriority: n => `Propostas prioritárias (${n})`,
+    badgePrio: n => `${n} prioritária${n > 1 ? "s" : ""}`, badgeIns: n => `${n} insight${n > 1 ? "s" : ""}`, noInsight: "sem insight para esse tópico", badgeNone: "sem insight",
+    see: "Ver", refPending: "investigação pendente", refNoChange: "sem mudança", badgeNoChange: "sem mudança", badgePending: "pendente",
+    gap: "Lacuna", decideWith: "O que permitiria decidir",
+    yes: "sim", no: "não", unknown: "desconhecido",
+    kFile: "arquivo", kGit: "git", kData: "dado", kFinding: "finding", readingProof: "prova de leitura", sameCopy: "= cópia usada na execução",
+    change: { instruction: "mudança de instrução", tool: "ferramenta", process: "processo", user_decision: "decisão do usuário", local: "correção local", observation: "observação" },
+    dest: { general_skill: "skill geral", engine_specialization: "especialização de engine", project_guide_or_helper: "guia ou helper do projeto", local_fix: "correção local" },
+    state: { absent: "ausente", defective: "errada, ambígua, incompleta ou conflitante", not_loaded: "existente, mas não encontrada ou carregada", misapplied: "encontrada, mas mal aplicada", insufficient: "aplicada corretamente, sem resolver" },
+    option: { keep: "Manter o texto", remove: "Remover o trecho", minimal: "Substituir pelo mínimo" },
+    evalLabels: { signal: "Como saber se funciona", costs: "Custos", lost_protections: "Proteções perdidas", side_effects: "Efeitos colaterais", textual_review: "Revisão textual", behavioral_benefit: "Benefício comportamental" },
+    conf: { high: "alta", medium: "média", low: "baixa" },
+    rec: { recurrence: "recorrência", successive_attempts: "tentativas sucessivas", single_execution: "execução única" },
+    destTag: "destino", guidanceTag: "orientação", guidanceBlock: "Orientação vigente na execução", version: "Versão", unrecoverable: "Não recuperável",
+    alternatives: "Alternativas", recommended: "recomendada", loses: "O que se perde", judgment: "Fica a julgar", evaluation: "Avaliação",
+    proposed: f => `Texto proposto (${f === "diff" ? "diff" : "antes/depois"})`, unapplied: (t, b) => `Proposta não aplicada. Alvo: ${t}, base ${b}.`,
+    recurrenceBlock: "Recorrência entre execuções", patterns: "padrões", priority: "Prioridade", priorityTag: "prioritária",
+    impact: "Impacto", recommendation: "Recomendação", confidence: "Confiança",
+  },
+};
+const LABELS = {
+  en: {
+    group: { implementation: "Implementation and correction", verification: "Verification", test_infrastructure: "Test infrastructure", retest: "Retest", test_authoring: "Test authoring/maintenance", investigation: "Investigation", instrumentation: "Metrics instrumentation", persona_qa: "Persona QA", other: "Other (preparation, coordination, closure)" },
+    category: { implementation: "Implementation", product_correction: "Product correction", verification: "Verification", test_infrastructure: "Test infrastructure", retest: "Retest", test_creation: "Test creation", test_maintenance: "Test maintenance", investigation: "Investigation", instrumentation: "Metrics instrumentation", persona_qa: "Persona QA", preparation: "Preparation", coordination: "Coordination", closure: "Closure" },
+    env: { node: "Node", chromium: "Chromium", nwjs: "NW.js", python: "Python", installed_cli: "Installed CLI", unknown: "unknown", mixed: "mixed", other: "other" },
+  },
+  "pt-BR": {
+    group: { implementation: "Implementação e correção", verification: "Verificação", test_infrastructure: "Infra de testes", retest: "Reteste", test_authoring: "Criação/manutenção de testes", investigation: "Investigação", instrumentation: "Instrumentação de métricas", persona_qa: "QA por persona", other: "Outros (preparo, coordenação, fechamento)" },
+    category: { implementation: "Implementação", product_correction: "Correção de produto", verification: "Verificação", test_infrastructure: "Infra de testes", retest: "Reteste", test_creation: "Criação de testes", test_maintenance: "Manutenção de testes", investigation: "Investigação", instrumentation: "Instrumentação de métricas", persona_qa: "QA por persona", preparation: "Preparação", coordination: "Coordenação", closure: "Fechamento" },
+    env: { node: "Node", chromium: "Chromium", nwjs: "NW.js", python: "Python", installed_cli: "CLI instalada", unknown: "desconhecido", mixed: "misto", other: "outro" },
+  },
+};
+const LANG = STRINGS[META.lang] ? META.lang : "en";
+const S = STRINGS[LANG], L = LABELS[LANG];
+document.documentElement.lang = LANG;
+
+const NS = "http://www.w3.org/2000/svg";
+const nf = new Intl.NumberFormat(LANG, { maximumFractionDigits: 1 });
+const nf0 = new Intl.NumberFormat(LANG, { maximumFractionDigits: 0 });
+const cf = new Intl.NumberFormat(LANG, { notation: "compact", maximumFractionDigits: 1 });
+const pf = new Intl.NumberFormat(LANG, { style: "percent", maximumFractionDigits: 1 });
+const hours = s => s / 3600;
+const fh = s => nf.format(hours(s)) + " " + S.h;
+const fdur = s => s == null ? S.unknownDuration : s < 60 ? nf.format(s) + " " + S.s : s < 3600 ? nf.format(s / 60) + " " + S.min : fh(s);
+const t0 = () => (D.timeline && D.timeline.t0_epoch) || 0;
+const clock = off => new Date((t0() + off) * 1000).toLocaleString(LANG, { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const uncached = t => t.uncached_input + t.output;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const groupLabel = g => L.group[g] || g;
+const catLabel = c => L.category[c] || c;
+const envLabel = e => e.split("+").map(k => L.env[k] || k).join(" + ");
+const reasonText = r => (S.reasons && S.reasons[r]) || r;
+const ratio = (a, b) => b ? pf.format(a / b) : "—";
+
+const GROUP_COLOR = { implementation: "--s1", verification: "--s2", test_infrastructure: "--s3", retest: "--s4", test_authoring: "--s5", investigation: "--s6", instrumentation: "--s7", persona_qa: "--s8", other: "--other" };
+const v = name => `var(${name})`;
+
+// ---------- primitives ----------
+function el(tag, attrs = {}, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, val] of Object.entries(attrs)) {
+    if (val == null) continue;
+    if (k === "text") n.textContent = val; else n.setAttribute(k, val);
+  }
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function svgIn(container, height) {
+  container.innerHTML = "";
+  const w = Math.max(280, container.clientWidth);
+  const s = el("svg", { viewBox: `0 0 ${w} ${height}`, height, role: "img" }, container);
+  return [s, w];
+}
+function lin(d0, d1, r0, r1) { const f = x => r0 + (x - d0) / ((d1 - d0) || 1) * (r1 - r0); return f; }
+function logS(d0, d1, r0, r1) { const a = Math.log10(d0), b = Math.log10(Math.max(d1, d0 * 10)); return x => r0 + (Math.log10(Math.max(x, d0)) - a) / (b - a) * (r1 - r0); }
+function niceMax(m) { if (!(m > 0)) return 1; const p = Math.pow(10, Math.floor(Math.log10(m))); for (const k of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (k * p >= m) return k * p; return 10 * p; }
+function isNice(step) { const m = step / Math.pow(10, Math.floor(Math.log10(step))); return [1, 2, 2.5, 5, 10].some(k => Math.abs(m - k) < 1e-9); }
+function ticks(max) { const n = [4, 5, 3, 6, 2].find(c => isNice(max / c)) || 4; return Array.from({ length: n + 1 }, (_, i) => i * max / n); }
+// horizontal bar: square at baseline (x0), 4px rounded data end
+function hbarPath(x0, y, w, h, r = 4) {
+  if (w <= 0) return "";
+  r = Math.min(r, w, h / 2);
+  return `M${x0},${y}H${x0 + w - r}Q${x0 + w},${y} ${x0 + w},${y + r}V${y + h - r}Q${x0 + w},${y + h} ${x0 + w - r},${y + h}H${x0}Z`;
+}
+const tip = document.getElementById("tip");
+function showTip(e, html) {
+  tip.innerHTML = html; tip.style.display = "block";
+  const r = tip.getBoundingClientRect();
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+  tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
+}
+function hideTip() { tip.style.display = "none"; }
+function bindTip(node, html) {
+  node.classList.add("mark"); node.setAttribute("tabindex", "0");
+  node.addEventListener("pointermove", e => showTip(e, html));
+  node.addEventListener("pointerleave", hideTip);
+  node.addEventListener("focus", () => { const b = node.getBoundingClientRect(); showTip({ clientX: b.right, clientY: b.top }, html); });
+  node.addEventListener("blur", hideTip);
+}
+const rows = pairs => pairs.map(([k, val]) => `<div class="row"><span>${esc(k)}</span><span>${esc(val)}</span></div>`).join("");
+function legend(key, items) {
+  const box = document.querySelector(`[data-l="${key}"]`);
+  box.innerHTML = items.map(([label, color, cls = ""]) => `<span><i class="${cls}" style="${cls === "hatch" ? "" : `background:${color}`}"></i>${esc(label)}</span>`).join("");
+}
+function note(key, html) { document.querySelector(`[data-n="${key}"]`).innerHTML = html; }
+function table(key, head, body) {
+  const box = document.querySelector(`[data-t="${key}"]`);
+  const th = head.map(h => `<th class="${h.n ? "n" : ""}">${esc(h.label)}</th>`).join("");
+  const tr = body.map(r => "<tr>" + r.map((c, i) => `<td class="${head[i].n ? "n" : head[i].wrap ? "wrap" : ""}">${esc(c)}</td>`).join("") + "</tr>").join("");
+  box.innerHTML = `<table><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table>`;
+}
+function tiles(key, items) {
+  document.querySelector(`[data-k="${key}"]`).innerHTML = items.map(([label, value, hint]) =>
+    `<div class="tile"><div class="label">${esc(label)}</div><div class="value">${esc(value)}</div>${hint ? `<div class="hint">${esc(hint)}</div>` : ""}</div>`).join("");
+}
+
+// Truncate a label to its column (≈6.2px per glyph at 11px); the full text stays in tooltip/table.
+const fit = (label, width) => { const n = Math.floor(width / 6.2); return label.length > n ? label.slice(0, n - 1) + "…" : label; };
+// Generic horizontal bars. rows: {label, value, ghost?, color?, tip}
+function hbars(container, data, { fmt, labelW = 40, color = "--s1", labelTop = 2, rowH = 20, barH = 12 }) {
+  const top = 4, bottom = 22, h = top + data.length * rowH + bottom;
+  const [s, w] = svgIn(container, h);
+  const x0 = labelW + 6, x1 = w - 46;
+  const max = niceMax(Math.max(0, ...data.map(d => Math.max(d.value, d.ghost || 0))));
+  const x = lin(0, max, x0, x1);
+  for (const t of ticks(max)) {
+    el("line", { x1: x(t), x2: x(t), y1: top, y2: h - bottom, stroke: v("--grid") }, s);
+    el("text", { x: x(t), y: h - 6, "text-anchor": "middle", text: fmt(t, true) }, s);
+  }
+  el("line", { x1: x0, x2: x0, y1: top, y2: h - bottom, stroke: v("--axis") }, s);
+  const ranked = [...data].map(d => d.value).sort((a, b) => b - a);
+  data.forEach((d, i) => {
+    const y = top + i * rowH + (rowH - barH) / 2;
+    el("text", { x: labelW, y: y + barH - 2, "text-anchor": "end", class: "ink", text: fit(d.label, labelW) }, s);
+    const g = el("g", {}, s);
+    el("rect", { x: x0, y: y - 3, width: x1 - x0, height: barH + 6, fill: "transparent" }, g);
+    if (d.ghost) el("path", { d: hbarPath(x0, y, x(d.ghost) - x0, barH), style: `fill:${v(d.color || color)};opacity:.22` }, g);
+    el("path", { d: hbarPath(x0, y, x(d.value) - x0, barH), style: `fill:${v(d.color || color)}` }, g);
+    if (d.value > 0 && ranked.indexOf(d.value) < labelTop) el("text", { x: x(Math.max(d.value, d.ghost || 0)) + 4, y: y + barH - 2, class: "ink", text: fmt(d.value) }, s);
+    if (d.tip) bindTip(g, d.tip);
+  });
+}
+
+// Stacked horizontal bars. data: {label, parts:{key:value}}
+function stackBars(container, data, keys, { fmt, labelW = 120, rowH = 24, barH = 14, percent = false }) {
+  const top = 4, bottom = 22, h = top + data.length * rowH + bottom;
+  const [s, w] = svgIn(container, h);
+  const x0 = labelW + 6, x1 = w - 40;
+  const totals = data.map(d => keys.reduce((a, k) => a + (d.parts[k.key] || 0), 0));
+  const max = percent ? 1 : niceMax(Math.max(0, ...totals));
+  const x = lin(0, max, x0, x1);
+  for (const t of ticks(max)) {
+    el("line", { x1: x(t), x2: x(t), y1: top, y2: h - bottom, stroke: v("--grid") }, s);
+    el("text", { x: x(t), y: h - 6, "text-anchor": "middle", text: percent ? pf.format(t) : fmt(t, true) }, s);
+  }
+  data.forEach((d, i) => {
+    const y = top + i * rowH + (rowH - barH) / 2;
+    el("text", { x: labelW, y: y + barH - 2, "text-anchor": "end", class: "ink", text: fit(d.label, labelW) }, s);
+    let cx = x0;
+    const visible = keys.filter(k => (d.parts[k.key] || 0) > 0);
+    visible.forEach((k, j) => {
+      const val = d.parts[k.key] / (percent ? totals[i] : 1);
+      let wseg = x(val) - x0;
+      const last = j === visible.length - 1;
+      if (!last) wseg = Math.max(0, wseg - 2);
+      const g = el("g", {}, s);
+      const path = last ? hbarPath(cx, y, wseg, barH) : `M${cx},${y}h${wseg}v${barH}h${-wseg}Z`;
+      el("path", { d: path, style: `fill:${v(k.color)}` }, g);
+      bindTip(g, `<b>${esc(d.label)}</b>` + rows([[k.label, percent ? pf.format(val) + " · " + fmt(d.parts[k.key]) : fmt(d.parts[k.key])]]));
+      cx += wseg + (last ? 0 : 2);
+    });
+    if (!percent) el("text", { x: x(totals[i]) + 4, y: y + barH - 2, class: "ink", text: fmt(totals[i]) }, s);
+  });
+}
+
+// ---------- availability ----------
+const metricsOn = !!(D.metrics && D.metrics.available);
+function available(id) {
+  const b = (D.blocks || {})[id];
+  if (b && b.available) return true;
+  document.querySelector(`#${id} .body`).innerHTML = `<p class="na">${esc(S.unavailable(reasonText((b && b.reason) || (D.metrics && D.metrics.reason) || "—")))}</p>`;
+  return false;
+}
+
+// ---------- header & KPIs ----------
+function renderStatic() {
+  const title = (D.source && (D.source.title || D.source.spec)) || "spec";
+  document.title = S.docTitle(title);
+  document.getElementById("title").textContent = S.heading(title);
+  document.querySelectorAll("[data-s]").forEach(n => { n.textContent = S[n.dataset.s]; });
+  document.querySelectorAll("[data-aria]").forEach(n => n.setAttribute("aria-label", S[n.dataset.aria]));
+}
+function renderHeader() {
+  const s = D.source || {};
+  const info = { run: esc(s.run), commit: esc((s.commit || "").slice(0, 8)), subject: s.commit_subject ? esc(s.commit_subject) : "",
+    working_tree: !!s.working_tree, reader: esc((s.reader && s.reader.version) || "?"), records: nf0.format(s.published_file_count || 0) };
+  if (!metricsOn) {
+    document.getElementById("meta").innerHTML = S.metaNoMetrics(info, esc(reasonText(D.metrics.reason)));
+    document.getElementById("kpis").remove();
+    document.getElementById("warn").remove();
+    return;
+  }
+  document.getElementById("meta").innerHTML = S.meta(info, clock(0));
+  const k = D.kpis, t = k.tokens, dd = k.defect_counts.delivery;
+  const items = [
+    [S.kElapsed, fh(k.elapsed_seconds), `${clock(0)} → ${clock(k.elapsed_seconds)}`, true],
+    [S.kOccupied, fh(k.occupied_seconds_by_clock_domain), S.kOccupiedHint],
+    [S.kAgent, fh(k.accumulated_agent_seconds), S.kAgentHint(fh(k.concurrent_overlap_seconds))],
+    [S.kWait, fh(k.wait_pause_agent_seconds), S.kWaitHint],
+    [S.kTokens, cf.format(t.total), S.kTokensHint(ratio(t.cached_input, t.total))],
+    [S.kUncached, cf.format(uncached(t)), S.kUncachedHint(cf.format(t.uncached_input), cf.format(t.output))],
+    [S.kCommands, nf0.format(k.commands), S.kCommandsHint(k.commands_failed)],
+    [S.kFindings, nf0.format(k.findings), S.kFindingsHint(k.acceptance_markers)],
+    [S.kDefects, nf0.format(dd.introduced + dd.pre_existing + dd.unknown), S.defectsHint(dd.introduced, dd.pre_existing)],
+  ];
+  document.getElementById("kpis").innerHTML = items.map(([l, val, hint, hero]) =>
+    `<div class="tile${hero ? " hero" : ""}"><div class="label">${esc(l)}</div><div class="value">${esc(val)}</div><div class="hint">${esc(hint)}</div></div>`).join("");
+  const bullets = S.warn(ratio(t.cached_input, t.total), nf0.format(k.inclusion.unknown || 0), nf0.format(k.token_records), D.quality.token_records_incomplete);
+  document.getElementById("warn").innerHTML = `<b>${esc(S.howTo)}</b><ul>${bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>`;
+}
+
+// ---------- G1 ----------
+function renderTasks() {
+  if (!available("g1")) return;
+  const T = D.tasks;
+  const tipFor = t => `<b>${esc(t.task)}</b>` + rows([[S.occupied, fh(t.occupied_seconds)], [S.declaredSum, fh(t.declared_seconds)], [S.wait, fdur(t.wait_seconds)], [S.activities, t.activities], [S.totalTokens, cf.format(t.tokens.total)], [S.uncached, cf.format(uncached(t.tokens))], [S.output, cf.format(t.tokens.output)]]);
+  hbars(document.querySelector('[data-c="tasksHours"]'), T.map(t => ({ label: t.task, value: hours(t.occupied_seconds), ghost: hours(t.declared_seconds), tip: tipFor(t) })), { fmt: (x, ax) => ax ? nf.format(x) : nf.format(x) + " " + S.h });
+  hbars(document.querySelector('[data-c="tasksTokens"]'), T.map(t => ({ label: t.task, value: t.tokens.total, tip: tipFor(t) })), { fmt: x => cf.format(x) });
+  hbars(document.querySelector('[data-c="tasksUncached"]'), T.map(t => ({ label: t.task, value: uncached(t.tokens), tip: tipFor(t) })), { fmt: x => cf.format(x) });
+  legend("g1", [[S.legOccupied, v("--s1")], [S.legDeclared, "color-mix(in srgb, var(--s1) 22%, transparent)"]]);
+  const ta = D.quality.task_attribution;
+  note("g1", esc(S.g1note(cf.format(ta.mixed.total), cf.format(ta.unattributed.total))));
+  table("g1", [{ label: S.thTask }, { label: S.thOccH, n: 1 }, { label: S.thDeclH, n: 1 }, { label: S.thWaitMin, n: 1 }, { label: S.activities, n: 1 }, { label: S.thTokens, n: 1 }, { label: S.thCached, n: 1 }, { label: S.thUncachedIn, n: 1 }, { label: S.thOutput, n: 1 }, { label: S.thReasoning, n: 1 }],
+    T.map(t => [t.task, nf.format(hours(t.occupied_seconds)), nf.format(hours(t.declared_seconds)), nf0.format(t.wait_seconds / 60), t.activities, nf0.format(t.tokens.total), nf0.format(t.tokens.cached_input), nf0.format(t.tokens.uncached_input), nf0.format(t.tokens.output), nf0.format(t.tokens.reasoning)]));
+}
+
+// ---------- G2 ----------
+function taskTicks(s, x, y, minGap = 26) {
+  // Long tasks (> 1 h occupied) are labelled first; others only where they do not collide.
+  const long = new Set((D.tasks || []).filter(t => t.occupied_seconds > 3600).map(t => t.task));
+  const starts = D.timeline.task_starts, placed = [];
+  const free = px => placed.every(p => Math.abs(p - px) >= minGap);
+  for (const [, at] of starts) el("line", { x1: x(at), x2: x(at), y1: y, y2: y + 6, stroke: v("--axis") }, s);
+  for (const pass of [true, false]) {
+    for (const [task, at] of starts) {
+      if (long.has(task) !== pass || !free(x(at))) continue;
+      el("text", { x: x(at), y: y - 2, "text-anchor": "middle", class: pass ? "ink" : null, text: task }, s);
+      placed.push(x(at));
+    }
+  }
+}
+function timeAxis(s, x, span, y0, y1, w) {
+  // Pick a step that yields at most 5 (narrow) or 10 ticks; label minutes below one hour.
+  const maxTicks = w < 600 ? 5 : 10;
+  const step = [300, 900, 1800, 3600, 7200, 14400, 21600, 43200, 86400].find(st => span / st <= maxTicks) || 86400;
+  for (let at = 0; at <= span; at += step) {
+    el("line", { x1: x(at), x2: x(at), y1: y0, y2: y1, stroke: v("--grid") }, s);
+    el("text", { x: x(at), y: y1 + 14, "text-anchor": "middle", text: step < 3600 ? `${Math.round(at / 60)}m` : `${Math.round(at / 3600)}h` }, s);
+  }
+}
+function renderTimeline() {
+  const TL = D.timeline;
+  document.getElementById("g2sub").textContent = S.g2sub(metricsOn && TL ? fdur(TL.span_seconds) : "—");
+  if (!available("g2")) return;
+  const lanes = TL.coordinator_lanes + TL.subagent_lanes;
+  const box = document.querySelector('[data-c="timeline"]');
+  const laneH = 26, top = 22, h = top + lanes * laneH + 22;
+  const [s, w] = svgIn(box, h);
+  const labelW = w < 600 ? 54 : 150, x0 = labelW + 6, x1 = w - 8;
+  const x = lin(0, TL.span_seconds, x0, x1);
+  const defs = el("defs", {}, s);
+  const pat = el("pattern", { id: "hatch", width: 5, height: 5, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
+  el("rect", { width: 5, height: 5, style: "fill:var(--surface)" }, pat);
+  el("rect", { width: 2, height: 5, style: "fill:var(--wait)" }, pat);
+  timeAxis(s, x, TL.span_seconds, top, h - 22, w);
+  taskTicks(s, x, top - 8);
+  const folded = TL.subagent_lanes_total - TL.subagent_lanes + 1;
+  for (let l = 0; l < lanes; l++) {
+    const n = l - TL.coordinator_lanes + 1;
+    const label = l < TL.coordinator_lanes ? (w < 600 ? S.coordShort : S.coord)
+      : l === TL.aggregated_lane ? (w < 600 ? S.aggShort : S.agg(folded)) : (w < 600 ? S.subShort(n) : S.sub(n));
+    el("text", { x: labelW, y: top + l * laneH + 17, "text-anchor": "end", class: "ink", text: label }, s);
+  }
+  for (const b of TL.bars) {
+    const y = top + b.lane * laneH + 4, bw = Math.max(1, x(b.end) - x(b.start) - (x(b.end) - x(b.start) > 3 ? 1 : 0));
+    const g = el("g", {}, s);
+    el("rect", { x: x(b.start), y: y - 3, width: Math.max(bw, 4), height: 24, fill: "transparent" }, g);
+    el("rect", { x: x(b.start), y, width: bw, height: 18, rx: bw > 6 ? 2 : 0, style: b.state === "wait" ? "fill:url(#hatch)" : `fill:${v(GROUP_COLOR[b.group])}${b.lane === TL.aggregated_lane ? ";opacity:.6" : ""}` }, g);
+    bindTip(g, `<b>${esc(catLabel(b.category))}${b.state === "wait" ? S.waitTag : ""}</b>` + rows([[S.thTask, b.task], [S.session, b.role === "coordinator" ? S.coordinatorSession : S.subagentSession], [S.start, clock(b.start)], [S.end, clock(b.end)], [S.duration, fdur(b.end - b.start)]]));
+  }
+  legend("g2", [...D.groups.map(g => [groupLabel(g), v(GROUP_COLOR[g])]), [S.declaredWait, "", "hatch"]]);
+  // concurrency step chart, same x scale
+  const cbox = document.querySelector('[data-c="concurrency"]');
+  const ch = 90, [cs] = svgIn(cbox, ch);
+  const maxC = Math.max(1, ...TL.subagent_concurrency.map(c => c[1]));
+  const y = lin(0, maxC, ch - 22, 6);
+  timeAxis(cs, x, TL.span_seconds, 6, ch - 22, w);
+  for (const t of [0, maxC]) el("text", { x: labelW, y: y(t) + 4, "text-anchor": "end", text: t }, cs);
+  let d = `M${x0},${y(0)}`;
+  for (const [at, lvl] of TL.subagent_concurrency) d += `H${x(at)}V${y(lvl)}`;
+  d += `H${x1}`;
+  el("path", { d: d + `V${y(0)}Z`, style: "fill:var(--s1);opacity:.1" }, cs);
+  el("path", { d, fill: "none", style: "stroke:var(--s1)", "stroke-width": 2, "stroke-linejoin": "round" }, cs);
+  const ov = el("rect", { x: x0, y: 0, width: x1 - x0, height: ch - 22, fill: "transparent" }, cs);
+  const cross = el("line", { y1: 6, y2: ch - 22, style: "stroke:var(--axis);display:none" }, cs);
+  ov.addEventListener("pointermove", e => {
+    const r = cs.getBoundingClientRect(), px = (e.clientX - r.left) * (w / r.width);
+    const at = (px - x0) / (x1 - x0) * TL.span_seconds;
+    let lvl = 0; for (const [t, l] of TL.subagent_concurrency) { if (t > at) break; lvl = l; }
+    cross.setAttribute("x1", px); cross.setAttribute("x2", px); cross.style.display = "";
+    showTip(e, `<b>${clock(at)}</b>` + rows([[S.activeSubagents, lvl]]));
+  });
+  ov.addEventListener("pointerleave", () => { cross.style.display = "none"; hideTip(); });
+  note("g2", esc(S.g2note(TL.bars.length, TL.untimed_activities)));
+}
+
+// ---------- G3 ----------
+function cumChart(box, keys, stacked) {
+  const Sr = D.cumulative.series, span = Math.max(D.timeline.span_seconds, Sr[Sr.length - 1].t);
+  const h = 230, top = 22, bottom = 22;
+  const [s, w] = svgIn(box, h);
+  const x0 = 44, x1 = w - 10;
+  const tot = p => keys.reduce((a, k) => a + p[k.field], 0);
+  const max = niceMax(Math.max(...Sr.map(p => stacked ? tot(p) : Math.max(...keys.map(k => p[k.field])))));
+  const x = lin(0, span, x0, x1), y = lin(0, max, h - bottom, top);
+  timeAxis(s, x, span, top, h - bottom, w);
+  for (const t of ticks(max)) { el("line", { x1: x0, x2: x1, y1: y(t), y2: y(t), stroke: v("--grid") }, s); el("text", { x: x0 - 6, y: y(t) + 4, "text-anchor": "end", text: cf.format(t) }, s); }
+  taskTicks(s, x, top - 8, 30);
+  let base = Sr.map(() => 0);
+  keys.forEach(k => {
+    const vals = Sr.map((p, i) => (stacked ? base[i] : 0) + p[k.field]);
+    const line = vals.map((val, i) => `${i ? "L" : "M"}${x(Sr[i].t)},${y(val)}`).join("");
+    const lower = stacked ? base.map((b, i) => `L${x(Sr[i].t)},${y(b)}`).reverse().join("") : `L${x(Sr[Sr.length - 1].t)},${y(0)}L${x(Sr[0].t)},${y(0)}`;
+    el("path", { d: line + lower + "Z", style: `fill:${v(k.color)};opacity:${stacked ? .22 : .1}` }, s);
+    el("path", { d: line, fill: "none", style: `stroke:${v(k.color)}`, "stroke-width": 2, "stroke-linejoin": "round" }, s);
+    el("circle", { cx: x(Sr[Sr.length - 1].t), cy: y(vals[vals.length - 1]), r: 4, style: `fill:${v(k.color)};stroke:var(--surface)`, "stroke-width": 2 }, s);
+    if (stacked) base = vals;
+  });
+  const cross = el("line", { y1: top, y2: h - bottom, style: "stroke:var(--axis);display:none" }, s);
+  const ov = el("rect", { x: x0, y: top, width: x1 - x0, height: h - top - bottom, fill: "transparent" }, s);
+  ov.addEventListener("pointermove", e => {
+    const r = s.getBoundingClientRect(), px = (e.clientX - r.left) * (w / r.width);
+    const at = (px - x0) / (x1 - x0) * span;
+    const p = Sr.reduce((best, q) => Math.abs(q.t - at) < Math.abs(best.t - at) ? q : best, Sr[0]);
+    cross.setAttribute("x1", x(p.t)); cross.setAttribute("x2", x(p.t)); cross.style.display = "";
+    showTip(e, `<b>${esc(S.until(clock(p.t), nf.format(hours(p.t))))}</b>` + rows(keys.map(k => [k.label, cf.format(p[k.field])])) + (stacked ? rows([[S.total, cf.format(tot(p))]]) : ""));
+  });
+  ov.addEventListener("pointerleave", () => { cross.style.display = "none"; hideTip(); });
+}
+function renderCumulative() {
+  if (!available("g3")) return;
+  cumChart(document.querySelector('[data-c="cumTotal"]'), [{ field: "coordinator_total", label: S.coordinatorSeries, color: "--s1" }, { field: "subagent_total", label: S.subagentSeries, color: "--s2" }], true);
+  cumChart(document.querySelector('[data-c="cumUncached"]'), [{ field: "coordinator_uncached", label: S.coordinatorSeries, color: "--s1" }, { field: "subagent_uncached", label: S.subagentSeries, color: "--s2" }], false);
+  legend("g3", [[S.legCoordinator, v("--s1")], [S.legSubagents, v("--s2")]]);
+  note("g3", esc(S.g3note(cf.format(D.kpis.coordinator_tokens), cf.format(D.kpis.tokens.total))));
+}
+
+// ---------- G4 ----------
+function renderCategories() {
+  if (!available("g4")) return;
+  const C = D.categories;
+  const col = c => c.category === "instrumentation" ? "--s2" : "--s1";
+  const tipFor = c => `<b>${esc(catLabel(c.category))}</b>` + rows([[S.group, groupLabel(c.group)], [S.occupied, fh(c.occupied_seconds)], [S.declaredSum, fh(c.declared_seconds)], [S.activities, c.activities], [S.thTokens, cf.format(c.tokens.total)], [S.uncached, cf.format(uncached(c.tokens))]]);
+  const lw = document.querySelector('[data-c="catHours"]').clientWidth < 360 ? 112 : 150;
+  hbars(document.querySelector('[data-c="catHours"]'), C.map(c => ({ label: catLabel(c.category), value: hours(c.occupied_seconds), color: col(c), tip: tipFor(c) })), { fmt: (x, ax) => ax ? nf.format(x) : nf.format(x) + " " + S.h, labelW: lw });
+  hbars(document.querySelector('[data-c="catTokens"]'), C.map(c => ({ label: catLabel(c.category), value: c.tokens.total, color: col(c), tip: tipFor(c) })), { fmt: x => cf.format(x), labelW: lw });
+  hbars(document.querySelector('[data-c="catUncached"]'), C.map(c => ({ label: catLabel(c.category), value: uncached(c.tokens), color: col(c), tip: tipFor(c) })), { fmt: x => cf.format(x), labelW: lw });
+  legend("g4", [[S.legCategory, v("--s1")], [S.legInstrumentation, v("--s2")]]);
+  const ca = D.quality.category_attribution, inst = C.find(c => c.category === "instrumentation");
+  note("g4", esc(inst ? S.g4note(fh(inst.occupied_seconds), cf.format(inst.tokens.total), cf.format(ca.mixed.total), cf.format(ca.unattributed.total)) : S.g4noteNoInst(cf.format(ca.mixed.total), cf.format(ca.unattributed.total))));
+  table("g4", [{ label: S.thCategory }, { label: S.thGroup }, { label: S.thOccH, n: 1 }, { label: S.thDeclH, n: 1 }, { label: S.thActivities, n: 1 }, { label: S.thTokens, n: 1 }, { label: S.thUncached, n: 1 }],
+    C.map(c => [catLabel(c.category), groupLabel(c.group), nf.format(hours(c.occupied_seconds)), nf.format(hours(c.declared_seconds)), c.activities, nf0.format(c.tokens.total), nf0.format(uncached(c.tokens))]));
+}
+
+// ---------- G5 ----------
+function renderCommands() {
+  if (!available("g5")) return;
+  const all = D.commands.points, P = all.filter(p => p.duration != null);
+  const byRuns = [...D.commands.by_type].sort((a, b) => b.runs - a.runs);
+  const shown = byRuns.slice(0, 7).map(t => t.type);
+  const OTHER = "\u0000other";
+  const rowOf = t => shown.includes(t) ? t : OTHER;
+  const rowsY = [...shown, ...(byRuns.length > 7 ? [OTHER] : [])];
+  const box = document.querySelector('[data-c="cmdStrip"]');
+  const rowH = 30, top = 6, bottom = 24, h = top + rowsY.length * rowH + bottom;
+  const [s, w] = svgIn(box, h);
+  const x0 = 110, x1 = w - 12;
+  const minD = 0.1, maxD = Math.max(1, ...P.map(p => p.duration)) * 1.3;
+  const x = logS(minD, maxD, x0, x1);
+  let lastTick = -Infinity;
+  for (let e = -1; Math.pow(10, e) <= maxD; e++) {
+    const val = Math.pow(10, e);
+    el("line", { x1: x(val), x2: x(val), y1: top, y2: h - bottom, stroke: v("--grid") }, s);
+    if (x(val) - lastTick >= 52) { el("text", { x: x(val), y: h - 8, "text-anchor": "middle", text: fdur(val) }, s); lastTick = x(val); }
+  }
+  rowsY.forEach((r, i) => el("text", { x: x0 - 8, y: top + i * rowH + rowH / 2 + 4, "text-anchor": "end", class: "ink", text: fit(r === OTHER ? S.otherRow : r, x0 - 10) }, s));
+  P.forEach((p, i) => {
+    const r = rowsY.indexOf(rowOf(p.type));
+    const jitter = ((i * 37) % 17) / 16 - 0.5;
+    const c = el("circle", { cx: x(Math.max(p.duration, minD)), cy: top + r * rowH + rowH / 2 + jitter * (rowH - 12), r: 4, "stroke-width": 1.5, style: `fill:${p.failed ? "var(--critical)" : "var(--s1)"};stroke:var(--surface)` }, s);
+    bindTip(c, `<b>${esc(p.check || S.noCheck)}</b>` + rows([[S.type, p.type], [S.thTask, p.task], [S.environment, envLabel(p.environment)], [S.externalDuration, fdur(p.duration)], [S.runnerDuration, fdur(p.runner)], [S.exitCode, p.returncode == null ? "—" : p.returncode], [S.activityStart, p.activity_start != null ? clock(p.activity_start) : "—"]]));
+  });
+  legend("g5", [[S.exit0, v("--s1"), "dot"], [S.failedLeg, "var(--critical)", "dot"]]);
+  const checks = D.commands.by_check.slice(0, 12);
+  stackBars(document.querySelector('[data-c="cmdChecks"]'), checks.map(c => { const l = c.check || S.noCheck; return { label: l.length > 22 ? l.slice(0, 21) + "…" : l, parts: { ok: c.runs - c.failed, failed: c.failed } }; }),
+    [{ key: "ok", label: S.exit0, color: "--s1" }, { key: "failed", label: S.failed, color: "--critical" }], { fmt: x => nf0.format(x), labelW: 140, rowH: 22, barH: 12 });
+  hbars(document.querySelector('[data-c="cmdTypeTime"]'), D.commands.by_type.slice(0, 10).map(t => ({ label: t.type, value: hours(t.seconds), tip: `<b>${esc(t.type)}</b>` + rows([[S.runs, t.runs], [S.tFailed, t.failed], [S.totalTime, fh(t.seconds)]]) })), { fmt: (x, ax) => ax ? nf.format(x) : nf.format(x) + " " + S.h, labelW: 110 });
+  const fail = all.filter(p => p.failed);
+  const e2e = D.commands.by_type.find(t => t.type === "e2e");
+  const totalSec = D.commands.by_type.reduce((a, t) => a + t.seconds, 0);
+  tiles("g5", [[S.tCommands, nf0.format(all.length)], [S.tFailed, nf0.format(fail.length), ratio(fail.length, all.length)], [S.tCmdTime, fh(totalSec), S.tCmdTimeHint], ...(e2e ? [[S.tE2E, fh(e2e.seconds), S.tE2EHint(e2e.runs, e2e.failed)]] : [])]);
+  const attempts = D.commands.attempt_values, keys = Object.keys(attempts);
+  const attemptNote = keys.length === 1 && keys[0] === "1" ? S.attemptAllOne(all.length) : S.attemptMixed(esc(Object.entries(attempts).map(([k, n]) => `${k} (${n})`).join(", ")));
+  note("g5", `${attemptNote} ${esc(S.envNote(Object.keys(D.commands.by_environment).length))}`);
+  table("g5", [{ label: S.thType }, { label: S.thRuns, n: 1 }, { label: S.thFailed, n: 1 }, { label: S.thTimeH, n: 1 }], D.commands.by_type.map(t => [t.type, t.runs, t.failed, nf.format(hours(t.seconds))]));
+}
+
+// ---------- G6 ----------
+function renderFindings() {
+  if (!available("g6")) return;
+  const F = D.findings;
+  const sum = parts => Object.values(parts).reduce((x, y) => x + y, 0);
+  const classes = [...new Set(F.matrix.map(m => m.classification))];
+  const byClass = classes.map(c => ({ label: c, parts: Object.fromEntries(F.matrix.filter(m => m.classification === c).map(m => [m.origin, m.count])) }))
+    .sort((a, b) => sum(b.parts) - sum(a.parts));
+  const origins = [["introduced", "--s1"], ["pre_existing", "--s2"], ["unknown", "--other"]].filter(([o]) => F.matrix.some(m => m.origin === o));
+  stackBars(document.querySelector('[data-c="findMatrix"]'), byClass, origins.map(([key, color]) => ({ key, label: S.origin[key], color })), { fmt: x => nf0.format(x), labelW: 130 });
+  legend("g6", origins.map(([key, color]) => [S.origin[key], v(color)]));
+  hbars(document.querySelector('[data-c="findChannel"]'), Object.entries(F.by_channel).map(([c, n]) => ({ label: c, value: n, tip: `<b>${esc(c)}</b>` + rows([[S.findingsN, n]]) })), { fmt: x => nf0.format(x), labelW: 90, labelTop: 5 });
+  hbars(document.querySelector('[data-c="findStages"]'), F.funnel.map(([k, n]) => ({ label: S.funnel[k], value: n, tip: `<b>${esc(S.funnel[k])}</b>` + rows([[S.findingsN, n], [S.pctRegistered, ratio(n, F.unique_labels)]]) })), { fmt: x => nf0.format(x), labelW: 130, labelTop: 4 });
+  const dc = F.defect_counts, test = byClass.find(b => b.label === "test");
+  tiles("g6", [[S.tRegistered, nf0.format(F.count)], [S.kDefects, nf0.format(dc.delivery.introduced + dc.delivery.pre_existing + dc.delivery.unknown), S.defectsHint(dc.delivery.introduced, dc.delivery.pre_existing)], [S.tPersona, nf0.format(dc.persona.introduced + dc.persona.pre_existing + dc.persona.unknown)], [S.tTest, nf0.format(test ? sum(test.parts) : 0)]]);
+  note("g6", esc(S.g6note(Object.entries(F.relation_raw).map(([k, n]) => `${k} (${n})`).join(", "))));
+  table("g6", [{ label: S.thFinding }, { label: S.thTask }, { label: S.thChannel }, { label: S.thClass }, { label: S.thOrigin }, { label: S.thStages }], F.list.map(f => [f.finding, f.task, f.channel, f.classification, f.origin, f.relations.join(", ")]));
+}
+
+// ---------- G7 ----------
+function renderRework() {
+  if (!available("g7")) return;
+  const R = D.rework;
+  const box = document.querySelector('[data-c="rework"]');
+  const h = 300, top = 14, bottom = 34, [s, w] = svgIn(box, h);
+  const x0 = 40, x1 = w - 44;
+  const minH = 0.02, maxH = niceMax(Math.max(0.1, ...R.map(r => hours(r.occupied_seconds))) * 1.3);
+  const x = logS(minH, maxH, x0, x1);
+  const maxF = niceMax(Math.max(1, ...R.map(r => r.findings)) * 1.15);
+  const y = lin(0, maxF, h - bottom, top);
+  const maxT = Math.max(1, ...R.map(r => r.tokens));
+  const rad = t => 4 + 20 * Math.sqrt(t / maxT);
+  for (const val of [0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100].filter(v2 => v2 <= maxH)) {
+    el("line", { x1: x(val), x2: x(val), y1: top, y2: h - bottom, stroke: v("--grid") }, s);
+    el("text", { x: x(val), y: h - bottom + 14, "text-anchor": "middle", text: val.toLocaleString(LANG, { maximumFractionDigits: 2 }) }, s);
+  }
+  el("text", { x: (x0 + x1) / 2, y: h - 4, "text-anchor": "middle", text: S.occupiedLog }, s);
+  for (const t of ticks(maxF)) { el("line", { x1: x0, x2: x1, y1: y(t), y2: y(t), stroke: v("--grid") }, s); el("text", { x: x0 - 6, y: y(t) + 4, "text-anchor": "end", text: nf0.format(t) }, s); }
+  const labelled = [];
+  const busy = Math.max(...R.map(r => r.findings)) * 0.6;
+  [...R].sort((a, b) => b.tokens - a.tokens).forEach(r => {
+    const cx = x(Math.max(hours(r.occupied_seconds), minH)), cy = y(r.findings);
+    const c = el("circle", { cx, cy, r: rad(r.tokens), "stroke-width": 2, style: "fill:var(--s1);fill-opacity:.55;stroke:var(--surface)" }, s);
+    bindTip(c, `<b>${esc(r.task)}</b>` + rows([[S.occupiedHoursT, nf.format(hours(r.occupied_seconds))], [S.findingsN, r.findings], [S.acceptanceMarkers, r.acceptance_markers], [S.commandsFailures, `${r.commands} (${r.commands_failed})`], [S.thTokens, cf.format(r.tokens)]]));
+    const lx = cx + rad(r.tokens) + 4;
+    if ((r.findings >= busy || hours(r.occupied_seconds) > 1) && labelled.every(([px, py]) => Math.abs(px - lx) > 30 || Math.abs(py - cy) > 12)) {
+      el("text", { x: lx, y: cy + 4, class: "ink", text: r.task }, s);
+      labelled.push([lx, cy]);
+    }
+  });
+  hbars(document.querySelector('[data-c="acceptance"]'), R.map(r => ({ label: r.task, value: r.acceptance_markers, tip: `<b>${esc(r.task)}</b>` + rows([[S.acceptanceMarkers, r.acceptance_markers], [S.findingsN, r.findings], [S.failedCommands, r.commands_failed]]) })), { fmt: x => nf0.format(x), labelTop: 3 });
+  note("g7", esc(S.g7note));
+  table("g7", [{ label: S.thTask }, { label: S.thOccH, n: 1 }, { label: S.findingsN, n: 1 }, { label: S.thAcceptance, n: 1 }, { label: S.thCommands, n: 1 }, { label: S.thFailures, n: 1 }, { label: S.thTokens, n: 1 }],
+    R.map(r => [r.task, nf.format(hours(r.occupied_seconds)), r.findings, r.acceptance_markers, r.commands, r.commands_failed, nf0.format(r.tokens)]));
+}
+
+// ---------- G8 ----------
+function renderQuality() {
+  if (!available("g8")) return;
+  const Q = D.quality, k = D.kpis, tp = Q.token_partition, rec = Q.reconciliation_states;
+  tiles("g8", [[S.tGaps, nf0.format(Q.gap_count)], [S.tQuality, nf0.format(Q.quality_records.length)], [S.tRecon, S.tReconClosed(rec.closed || 0), S.tReconIncomplete(rec.incomplete || 0)], [S.tInclusion, k.hierarchy_total_exact ? S.exact : S.notExact, S.unknownRecords(nf0.format(k.inclusion.unknown || 0))], [S.tEffective, nf0.format(Q.effective_record_count), S.ofPublished(nf0.format(Q.published_file_count))]]);
+  stackBars(document.querySelector('[data-c="partition"]'), [
+    { label: S.partTotal, parts: { interval: tp.interval.total, mixed: tp.mixed.total, unattributed: tp.unattributed.total } },
+    { label: S.partUncached, parts: { interval: uncached(tp.interval), mixed: uncached(tp.mixed), unattributed: uncached(tp.unattributed) } },
+  ], [{ key: "interval", label: S.partInterval, color: "--s1" }, { key: "mixed", label: S.partMixed, color: "--s2" }, { key: "unattributed", label: S.partNone, color: "--s3" }], { fmt: x => cf.format(x), labelW: 100, percent: true });
+  legend("g8", [[S.legInterval, v("--s1")], [S.legMixed, v("--s2")], [S.legNone, v("--s3")]]);
+  const codes = Object.entries(Q.gap_codes);
+  const gapBox = document.querySelector('[data-c="gaps"]');
+  if (codes.length) {
+    const head = codes.slice(0, 11), rest = codes.slice(11).reduce((a, [, n]) => a + n, 0);
+    const data = head.map(([c, n]) => ({ label: c.length > 30 ? c.slice(0, 29) + "…" : c, value: n, tip: `<b>${esc(c)}</b>` + rows([[S.occurrences, n]]) }));
+    if (rest) data.push({ label: S.otherCodes(codes.length - 11), value: rest, tip: `<b>${esc(S.otherCodesT)}</b>` + rows(codes.slice(11).map(([c, n]) => [c, n])) });
+    hbars(gapBox, data, { fmt: x => nf0.format(x), labelW: gapBox.clientWidth < 400 ? 150 : 210, labelTop: 2 });
+  } else gapBox.innerHTML = `<p class="na">${esc(S.none)}</p>`;
+  note("g8", esc(S.g8note(Q.token_records_incomplete, Q.untimed_activities)));
+  table("g8", [{ label: S.thCode }, { label: S.thAffected, n: 1 }, { label: S.thDetail, wrap: 1 }], Q.quality_records.map(r => [r.code, r.affected, r.detail]));
+}
+
+// ---------- navigation ----------
+const NAV = [["summary", ""], ["g1", "1"], ["g2", "2"], ["g3", "3"], ["g4", "4"], ["g5", "5"], ["g6", "6"], ["g7", "7"], ["g8", "8"], ["insights", ""], ["ins-no-change", ""], ["ins-pending", ""]];
+function renderNav() {
+  const list = document.getElementById("nav-list"), select = document.getElementById("nav-select");
+  list.innerHTML = NAV.map(([id, n]) => `<li><a href="#${id}" data-id="${id}"><span class="n">${n}</span><span>${esc(S.nav[id])}</span></a></li>`).join("");
+  select.innerHTML = NAV.map(([id, n]) => `<option value="${id}">${n ? n + " · " : ""}${esc(S.nav[id])}</option>`).join("");
+  select.addEventListener("change", () => document.getElementById(select.value).scrollIntoView({ behavior: "smooth", block: "start" }));
+  const links = Object.fromEntries([...list.querySelectorAll("a")].map(a => [a.dataset.id, a]));
+  const visible = new Map();
+  const setActive = id => {
+    for (const [key, a] of Object.entries(links)) a.setAttribute("aria-current", key === id ? "true" : "false");
+    if (select.value !== id) select.value = id;
+  };
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) visible.set(e.target.id, e.isIntersecting ? e.boundingClientRect.top : null);
+    const shown = NAV.map(([id]) => id).filter(id => visible.get(id) != null);
+    if (shown.length) setActive(shown[0]);
+  }, { rootMargin: "-10% 0px -55% 0px" });
+  for (const [id] of NAV) io.observe(document.getElementById(id));
+  setActive("summary");
+}
+
+// ---------- insights ----------
+function fmtValue(path, val) {
+  if (val == null) return S.unknown;
+  if (typeof val === "boolean") return val ? S.yes : S.no;
+  if (typeof val === "number") {
+    if (/seconds$/.test(path)) return `${fh(val)} (${nf0.format(val)} ${S.s})`;
+    if (/tokens|\.total$/.test(path) && val >= 1e5) return `${cf.format(val)} (${nf0.format(val)})`;
+    return nf.format(val);
+  }
+  if (typeof val === "string") return /^\d{4}-\d{2}-\d{2}T/.test(val) ? new Date(val).toLocaleString(LANG) : val;
+  if (Array.isArray(val)) return val.map(o => typeof o === "object" && o ? Object.values(o).slice(0, 3).join(" · ") : o).join("; ");
+  return Object.entries(val).map(([k, x]) => `${k}: ${typeof x === "object" ? JSON.stringify(x) : (typeof x === "number" ? nf.format(x) : x)}`).join(", ");
+}
+const where = (root, path, line) => `${root && root !== "project" ? root + ":" : ""}${path}${line ? ":" + line : ""}`;
+function evidenceHtml(e) {
+  const read = e.reading ? ` · <i>${esc(S.readingProof)}</i>` : "";
+  if (e.kind === "file") {
+    const root = e.root || "project", text = esc(where(root, e.path, e.line));
+    const ref = root === "project" && META.link_base ? `<a href="${esc(META.link_base + e.path.split("/").map(encodeURIComponent).join("/"))}" title="${esc(e.excerpt)}">${text}</a>` : `<code title="${esc(e.excerpt)}">${text}</code>`;
+    return `<span class="k">${esc(S.kFile)}</span><span>${esc(e.label)}: ${ref}${read}</span>`;
+  }
+  if (e.kind === "git") {
+    const same = e.same_as ? ` · <span title="${esc(where(e.same_as.root || "project", e.same_as.path))}">${esc(S.sameCopy)}</span>` : "";
+    return `<span class="k">${esc(S.kGit)}</span><span>${esc(e.label)}: <code title="${esc(e.excerpt)}">${esc(where(e.repo, `${e.rev}:${e.path}`, e.line))}</code>${same}</span>`;
+  }
+  if (e.kind === "data") return `<span class="k">${esc(S.kData)}</span><span>${esc(e.label)}: <b>${esc(fmtValue(e.path, e.value))}</b>${read}</span>`;
+  const f = e.finding || {};
+  return `<span class="k">${esc(S.kFinding)}</span><span><code>${esc(e.label)}</code> · ${esc(f.task)} · ${esc(f.classification)} · ${esc(f.origin)}</span>`;
+}
+const evList = list => list && list.length ? `<ul class="evidence">${list.map(e => `<li>${evidenceHtml(e)}</li>`).join("")}</ul>` : "";
+const isPrio = it => !!(it.priority && it.priority.selected);
+const recKind = k => S.rec[k] || k;
+const refTitle = ref => {
+  const [section, id] = ref.split(":");
+  const entry = (I[section] || []).find(x => x.id === id);
+  return `<a href="#${section === "pending" ? "pd" : "nc"}-${esc(id)}">${esc(entry ? entry.title : id)}</a> (${esc(section === "pending" ? S.refPending : S.refNoChange)})`;
+};
+function diffHtml(text) {
+  return text.split("\n").map(line => {
+    const cls = line.startsWith("@@") ? "hunk" : line.startsWith("+") ? "add" : line.startsWith("-") ? "del" : "";
+    return `<span${cls ? ` class="${cls}"` : ""}>${esc(line) || " "}</span>`;
+  }).join("");
+}
+function itemHtml(it) {
+  const tags = [`<span class="tag">${esc(S.change[it.change_kind] || it.change_kind)}</span>`];
+  if (it.destination) tags.push(`<span class="tag">${esc(S.destTag)}: <b>${esc(S.dest[it.destination] || it.destination)}</b></span>`);
+  if (it.guidance) tags.push(`<span class="tag">${esc(S.guidanceTag)}: <b>${esc(S.state[it.guidance.state] || it.guidance.state)}</b></span>`);
+  const patterns = it.recurrence && it.recurrence.patterns && it.recurrence.patterns.length ? it.recurrence.patterns.join(", ") : "";
+  if (it.recurrence) tags.push(`<span class="tag">${esc(recKind(it.recurrence.kind))}${patterns ? " · " + esc(patterns) : ""}</span>`);
+  const blocks = [];
+  if (it.guidance) {
+    const g = it.guidance;
+    blocks.push(`<details class="blk"><summary>${esc(S.guidanceBlock)}</summary><p><b>${esc(S.state[g.state] || g.state)}.</b> ${esc(g.summary)}</p><p>${esc(S.version)}: ${esc(g.version)}</p>${g.unrecoverable ? `<p>${esc(S.unrecoverable)}: ${esc(g.unrecoverable)}</p>` : ""}${evList(g.evidence)}</details>`);
+  }
+  if (it.alternatives) {
+    blocks.push(`<details class="blk"><summary>${esc(S.alternatives)}</summary><ul class="alts">${it.alternatives.map(a => `<li class="${a.recommended ? "rec" : ""}"><div class="opt">${esc(S.option[a.option] || a.option)}${a.recommended ? `<em>${esc(S.recommended)}</em>` : ""}</div><dl><dt>${esc(S.loses)}</dt><dd>${esc(a.loses)}</dd><dt>${esc(S.judgment)}</dt><dd>${esc(a.judgment)}</dd></dl></li>`).join("")}</ul></details>`);
+  }
+  if (it.evaluation) {
+    blocks.push(`<details class="blk"><summary>${esc(S.evaluation)}</summary><dl>${Object.entries(S.evalLabels).map(([k, l]) => `<dt>${esc(l)}</dt><dd>${esc(it.evaluation[k])}</dd>`).join("")}</dl></details>`);
+  }
+  if (it.proposed_text) {
+    const p = it.proposed_text, base = p.base || {};
+    blocks.push(`<details class="blk"><summary>${esc(S.proposed(p.format))}</summary><p class="unapplied">${esc(S.unapplied(p.target, where(base.repo, `${base.rev}:${base.path}`)))}</p><pre class="diff">${diffHtml(p.text)}</pre></details>`);
+  }
+  if (it.recurrence) {
+    blocks.push(`<details class="blk"><summary>${esc(S.recurrenceBlock)}</summary><p>${esc(recKind(it.recurrence.kind))}${patterns ? ` · ${esc(S.patterns)} ${esc(patterns)}` : ""}</p>${evList(it.recurrence.evidence)}</details>`);
+  }
+  if (it.recurrence_table) {
+    blocks.push(`<div class="rrows">${it.recurrence_table.map(r => `<div class="rrow"><h4>${esc(r.pattern)} · ${esc(r.title)} <span class="tag">${esc(recKind(r.kind))}</span></h4><p>${esc(r.note)}</p>${evList(r.evidence)}</div>`).join("")}</div>`);
+  }
+  const prio = it.priority ? `<dt>${esc(S.priority)}</dt><dd>${isPrio(it) ? `<b>${esc(S.priorityTag)}</b> — ` : ""}${esc(it.priority.rationale)}</dd>` : "";
+  return `<div class="item"><div class="tags">${tags.join("")}</div><p>${esc(it.insight)}</p><dl><dt>${esc(S.impact)}</dt><dd>${esc(it.impact)}</dd><dt>${esc(S.recommendation)}</dt><dd>${esc(it.recommendation)}</dd><dt>${esc(S.confidence)}</dt><dd class="conf">${esc(S.conf[it.confidence] || it.confidence)}</dd>${prio}</dl>${evList(it.evidence)}${blocks.join("")}</div>`;
+}
+function renderInsights(filter = "all") {
+  if (!I) {
+    document.getElementById("ins-sub").textContent = S.notGenerated;
+    for (const id of ["no-change", "pending"]) document.getElementById(id).innerHTML = `<p class="na">${esc(S.none)}</p>`;
+    return;
+  }
+  const T = I.topics, withIns = T.filter(t => t.status === "insight").length;
+  const prioCount = T.reduce((n, t) => n + (t.items || []).filter(isPrio).length, 0);
+  const NC = I.no_change || [], PD = I.pending || [];
+  document.getElementById("ins-sub").textContent = `${S.insSub(T.length, withIns, prioCount, NC.length, PD.length)} ${I.scope || ""}`;
+  const box = document.querySelector(".ins-filter");
+  box.innerHTML = [["all", S.fAll(T.length)], ["insight", S.fInsight(withIns)], ["none", S.fNone(T.length - withIns)], ["priority", S.fPriority(prioCount)]]
+    .map(([k, l]) => `<button type="button" data-f="${k}" aria-pressed="${k === filter}">${esc(l)}</button>`).join("");
+  box.querySelectorAll("button").forEach(b => b.addEventListener("click", () => renderInsights(b.dataset.f)));
+  const shown = T.filter(t => filter === "all" || (filter === "priority" ? (t.items || []).some(isPrio) : t.status === filter));
+  document.getElementById("topics").innerHTML = shown.map(t => {
+    const items = (t.items || []).filter(it => filter !== "priority" || isPrio(it));
+    const n = (t.items || []).length, p = (t.items || []).filter(isPrio).length;
+    const badges = `<span class="badges">${p ? `<span class="badge prio">${esc(S.badgePrio(p))}</span>` : ""}<span class="badge ${t.status === "insight" ? "yes" : "no"}">${esc(t.status === "insight" ? S.badgeIns(n) : S.badgeNone)}</span></span>`;
+    const head = `<header><h3>${T.indexOf(t) + 1}. ${esc(t.title)}</h3>${badges}</header>`;
+    const see = t.see && t.see.length ? `<p class="see">${esc(S.see)}: ${t.see.map(refTitle).join("; ")}</p>` : "";
+    if (t.status !== "insight") return `<article class="topic">${head}<p class="empty">${esc(S.noInsight)}</p>${t.note ? `<p class="why">${esc(t.note)}</p>` : ""}${see}</article>`;
+    return `<article class="topic">${head}${items.map(itemHtml).join("")}${filter === "priority" ? "" : see}</article>`;
+  }).join("");
+  document.getElementById("no-change").innerHTML = NC.length ? NC.map(x => `<article class="topic" id="nc-${esc(x.id)}"><header><h3>${esc(x.title)}</h3><span class="badge no">${esc(S.badgeNoChange)}</span></header><div class="item"><p>${esc(x.reason)}</p>${evList(x.evidence)}</div></article>`).join("") : `<p class="na">${esc(S.none)}</p>`;
+  document.getElementById("pending").innerHTML = PD.length ? PD.map(x => `<article class="topic" id="pd-${esc(x.id)}"><header><h3>${esc(x.title)}</h3><span class="badge no">${esc(S.badgePending)}</span></header><div class="item"><dl><dt>${esc(S.gap)}</dt><dd>${esc(x.gap)}</dd><dt>${esc(S.decideWith)}</dt><dd>${esc(x.decide_with)}</dd></dl>${evList(x.evidence)}</div></article>`).join("") : `<p class="na">${esc(S.none)}</p>`;
+}
+
+// ---------- theme & render ----------
+const themes = ["auto", "light", "dark"];
+let theme = "auto";
+try { theme = localStorage.getItem("insight-dashboard-theme") || "auto"; } catch (e) {}
+function applyTheme() {
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", theme);
+  document.getElementById("theme").textContent = `${S.theme}: ${S.themes[theme]}`;
+}
+document.getElementById("theme").addEventListener("click", () => {
+  theme = themes[(themes.indexOf(theme) + 1) % themes.length];
+  try { localStorage.setItem("insight-dashboard-theme", theme); } catch (e) {}
+  applyTheme();
+});
+renderStatic();
+applyTheme();
+function renderAll() { renderTasks(); renderTimeline(); renderCumulative(); renderCategories(); renderCommands(); renderFindings(); renderRework(); renderQuality(); }
+renderHeader();
+renderAll();
+renderNav();
+renderInsights();
+let lastW = innerWidth, pendingResize;
+addEventListener("resize", () => { if (innerWidth === lastW || !metricsOn) return; lastW = innerWidth; clearTimeout(pendingResize); pendingResize = setTimeout(renderAll, 120); });
+</script>
+</body>
+</html>

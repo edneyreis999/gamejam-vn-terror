@@ -29,7 +29,6 @@ __pycache__/
 !.env.sample
 
 # Estado local das ferramentas de agentes
-.claude/
 .deep-review/
 .compozy/tasks/
 .compozy/memory/
@@ -70,5 +69,4 @@ dist/
 **/.coreto-design-system-backups/
 /packages/coreto-design-system/backups/
 
-# AgentOps session artifacts
-.agents/
+# Agent-local files are filtered by .agents/.gitignore and .claude/.gitignore.
