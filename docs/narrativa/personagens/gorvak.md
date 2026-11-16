@@ -10,7 +10,7 @@ Origem de cada afirmação:
 
 Todo exemplo sem outra marca é **[Criação]**. A competência torna uma ação plausível. Não é o desejo, o medo nem a metáfora de toda frase. Exercícios hipotéticos não criam cena, voto nem arco jogável.
 
-**Continuidade autorizada pelo dono em 2026-11-16:** os refinamentos sobre o inverno sem pagamento nesta pedreira, a promessa de ouro à turma e a disposição de Sora de vender a casa foram adotados para a revisão do piloto, mantendo a origem **[Criação]**. A direção contextual sobre contribuição prática e conversa com desconhecidos foi ajustada no mesmo recorte. Origem preservada nesta revisão: ficha do piloto em `241680ac71ba2061ac7b477586cad29f5579d570`. Isso não encerra o aceite editorial humano da ficha ou das falas finais, que permanece **Pendente**.
+**Continuidade autorizada pelo dono em 2026-11-16:** os refinamentos sobre o inverno sem pagamento nesta pedreira, a promessa de ouro à turma e a disposição de Sora de vender a casa foram adotados para a revisão do piloto, mantendo a origem **[Criação]**. A direção contextual sobre contribuição prática e conversa com desconhecidos foi ajustada no mesmo recorte. Origem preservada nesta revisão: ficha do piloto em `241680ac71ba2061ac7b477586cad29f5579d570`. O aceite editorial humano corrente da ficha está registrado no [estado da entrega](README.md#estado-da-entrega); as falas finais mantêm seus próprios aceites.
 
 **Competências internas, só para autoria:** Força + Vontade. No Conselho, o conselho fixo deste herói é reunir **[GDD §15, §18]**. A razão verbal abaixo é criação; o lado do conselho não é.
 

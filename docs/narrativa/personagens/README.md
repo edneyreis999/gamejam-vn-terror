@@ -18,11 +18,11 @@ A revisão documental independente avaliou fidelidade, aplicabilidade, variaçã
 
 ### Revisão de naturalidade — 16/11/2026
 
-Correção delimitada das 17 fichas, sem recriar biografias: os exemplos e as direções de fala passam a explicitar referentes, situação e relação com o interlocutor. A [comparação](comparacao-vozes.md) acompanha os exercícios atuais. A revisão preserva citações, competências, vínculos, conselhos fixos e distinções entre as fases de Rheed. Gorvak incorpora os refinamentos autorais já autorizados no piloto `241680ac71ba2061ac7b477586cad29f5579d570`, com origem **Criação** e sem encerrar seu aceite humano.
+Correção delimitada das 17 fichas, sem recriar biografias: os exemplos e as direções de fala passam a explicitar referentes, situação e relação com o interlocutor. A [comparação](comparacao-vozes.md) acompanha os exercícios atuais. A revisão preserva citações, competências, vínculos, conselhos fixos e distinções entre as fases de Rheed. Gorvak incorpora os refinamentos autorais já autorizados no piloto `241680ac71ba2061ac7b477586cad29f5579d570`, com origem **Criação**.
 
 - **Pesquisa independente:** concluída, sessão `sess-012f11e2341cb943`.
 - **Revisão independente desta correção:** **Reviewed** em 16/11/2026, sessão `sess-f33050a5a9442ab0`, após resolução dos três achados. O parecer cobre as 17 fichas e a comparação correntes; seu objeto completo tem agregado SHA-256 `f25b24099b84aeca68d269ffc07355d8ed885804ffca189d4de0b40a09a27129`. Esta anotação de fechamento é posterior ao parecer e não integra o objeto revisado. O estado histórico de 14/11 conserva seu próprio escopo.
-- **Aceite editorial humano:** **Pendente**. Não houve experimento de cena, playtest ou integração no runtime nesta revisão.
+- **Aceite editorial humano:** **Aceito** por Edney em 16/11/2026, por confirmação explícita na sessão `sess-f33050a5a9442ab0`, para as 17 fichas desta revisão. O aceite foi registrado depois do parecer independente. Não houve experimento de cena, playtest ou integração no runtime nesta revisão; esses resultados mantêm validação própria.
 
 As falas atualmente jogáveis conservam os estados de implementação e aceite de seus incrementos. São a baseline de runtime a adaptar em trabalho posterior, não restrições criativas sobre a nova caracterização. Exemplos das fichas são exercícios: não criam cenas, encontros entre épocas, ressurreições, poderes ou consequências mecânicas.
 
