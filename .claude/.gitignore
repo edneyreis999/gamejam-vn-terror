@@ -1,0 +1,5 @@
+# Share agent definitions and skills; keep local settings and sessions private.
+/*
+!/.gitignore
+!/agents/
+!/skills/
