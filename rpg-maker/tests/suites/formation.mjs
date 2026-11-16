@@ -143,6 +143,27 @@ canonicalCase('IT-006', 'rapid focus is observational; activation and the full n
   assert.notEqual(focused, 'H1');
   assert.deepEqual(await snapshot(browser), before);
   assert.equal(await browser.evaluate('$gameMessage.hasText()'), false);
+  // The name plate can overlap a different hero's portrait. Its click must
+  // open the same hero that hover selected, without changing the party.
+  const target = await browser.evaluate(`(() => {
+    const sprite = SceneManager._scene._spriteset._pictureContainer.children.find(sprite =>
+      sprite.picture?.()?.name() === 'Dryland_Tag' && $gameScreen.getPictureChoiceBinding(sprite._pictureId) === 2);
+    return sprite.worldTransform.apply(new Point((0.5 - sprite.anchor.x) * sprite.bitmap.width,
+      (0.5 - sprite.anchor.y) * sprite.bitmap.height));
+  })()`);
+  await browser.call('Input.dispatchMouseEvent', { type: 'mouseMoved', ...target });
+  await browser.waitFor('SceneManager._scene._choiceListWindow.index() === 2');
+  assert.deepEqual(await snapshot(browser), before);
+  await browser.call('Input.dispatchMouseEvent', { type: 'mousePressed', ...target, button: 'left', buttons: 1, clickCount: 1 });
+  await browser.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+  await browser.call('Input.dispatchMouseEvent', { type: 'mouseReleased', ...target, button: 'left', buttons: 0, clickCount: 1 });
+  await choices(browser, 'hero');
+  assert.equal(await browser.evaluate('$gameMap.mapId()'), 39, 'Clicking Griznik opens Griznik, even over another portrait');
+  assert.deepEqual(await snapshot(browser), before);
+  await browser.press('Escape', 27);
+  await choices(browser, 'formation');
+  assert.equal(await browser.evaluate('SceneManager._scene._choiceListWindow.index()'), 2, 'Return remembers the clicked hero');
+  assert.deepEqual(await snapshot(browser), before);
   await activate(browser, 'formation', 0);
   await choices(browser, 'hero');
   assert.equal(await browser.evaluate('$gameMap.mapId()'), 37, 'Gorvak interaction is authored by its child map');

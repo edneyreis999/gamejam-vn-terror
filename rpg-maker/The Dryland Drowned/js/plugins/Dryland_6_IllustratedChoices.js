@@ -49,6 +49,22 @@
   const roster = () => [3,45].includes($gameMap.mapId());
   const idOf = picture => $gameScreen._pictures.indexOf(picture);
   const destination = id => id >= 75 && id <= 80;
+  // Overlapping roster controls share one pointer target in drawing order.
+  // Otherwise hover ends on the front picture, but the back picture clicks first.
+  const isBeingTouched = Sprite_Picture.prototype.isBeingTouched;
+  Sprite_Picture.prototype.isBeingTouched = function(...args) {
+    const touched = isBeingTouched.apply(this, args);
+    if (!touched || !roster() || !this.hasPictureChoiceBinding()) return touched;
+    if (this.opacity === 0) return false;
+    const siblings = this.parent.children;
+    const index = siblings.indexOf(this);
+    for (let i = siblings.length - 1; i > index; i--) {
+      const sprite = siblings[i];
+      if (sprite instanceof Sprite_Picture && sprite.isClickEnabled() && sprite.opacity > 0 &&
+          sprite.hasPictureChoiceBinding() && isBeingTouched.apply(sprite, args)) return false;
+    }
+    return true;
+  };
   // SacrificeStage observes this legacy pointer contract without owning listeners.
   const createWindows = Scene_Map.prototype.createAllWindows;
   Scene_Map.prototype.createAllWindows = function() {
