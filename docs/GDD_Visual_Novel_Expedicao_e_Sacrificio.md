@@ -1218,6 +1218,8 @@ Cada herói mantém um único epílogo de sobrevivência, independente da escolh
 
 ## 19. Apresentação
 
+**Movimento sutil dos bustos — Confirmado em 2026-11-15:** estender a todos os bustos de personagens em uso o movimento aprovado nas primeiras falas de Gorvak: oscilação horizontal aditiva de ±5 pixels, sem deslocamento vertical, pelo Fidgeting nativo (velocidades X/Y 30). Falantes e ouvintes mantêm o movimento enquanto seus bustos estiverem presentes, preservando entradas, saídas, foco e elegibilidade. Com movimento reduzido, a amplitude é zero. A aplicação inclui Rheed nas duas idades e os candidatos ao sacrifício; exclui fundos, objetos, cards e figuras do palco da taverna/fogueira. O aceite estético humano do conjunto permanece **Pendente**.
+
 ### 19.1 Interface e acessibilidade
 
 - A tela inicial apresenta classificação pretendida, avisos de conteúdo e o botão Jogar antes de qualquer cena.
