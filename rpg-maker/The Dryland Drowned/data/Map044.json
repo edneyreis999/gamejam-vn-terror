@@ -2709,57 +2709,6 @@
                             "code": 357,
                             "indent": 0,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 0,
-                            "parameters": [
-                                "Picture ID(s) = [\"60\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 0,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 0,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 0,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 0,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 0,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -2846,57 +2795,6 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"60\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Picture ID(s) = [\"60\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -3099,57 +2997,6 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -3279,6 +3126,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -3352,6 +3206,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -3431,6 +3292,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -3504,6 +3372,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -3583,6 +3458,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -3598,6 +3480,13 @@
                             "indent": 3,
                             "parameters": [
                                 "$[camp.h8.church.a.05]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -3767,57 +3656,6 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -3947,6 +3785,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -4020,6 +3865,13 @@
                                     "customTone:eval": "[-24,-24,-24,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
                             ]
                         },
                         {
@@ -4099,6 +3951,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -4172,6 +4031,13 @@
                                     "customTone:eval": "[-24,-24,-24,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
                             ]
                         },
                         {
@@ -4251,6 +4117,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -4266,6 +4139,13 @@
                             "indent": 3,
                             "parameters": [
                                 "$[camp.h8.church.b.05]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -4435,57 +4315,6 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -4615,6 +4444,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -4688,6 +4524,13 @@
                                     "customTone:eval": "[-24,-24,-24,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
                             ]
                         },
                         {
@@ -4767,6 +4610,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -4840,6 +4690,13 @@
                                     "customTone:eval": "[-24,-24,-24,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
                             ]
                         },
                         {
@@ -4919,6 +4776,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -4995,6 +4859,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -5010,6 +4881,13 @@
                             "indent": 3,
                             "parameters": [
                                 "$[camp.h8.park.a.06]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -5179,57 +5057,6 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -5359,6 +5186,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -5432,6 +5266,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -5511,6 +5352,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -5584,6 +5432,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -5663,6 +5518,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -5678,6 +5540,13 @@
                             "indent": 3,
                             "parameters": [
                                 "$[camp.h8.park.b.05]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -5847,57 +5716,6 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -6027,6 +5845,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -6100,6 +5925,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -6179,6 +6011,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -6252,6 +6091,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -6331,6 +6177,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -6346,6 +6199,13 @@
                             "indent": 3,
                             "parameters": [
                                 "$[camp.h8.village.a.05]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -6515,57 +6375,6 @@
                             "code": 357,
                             "indent": 3,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 3,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 3,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -6695,6 +6504,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -6768,6 +6584,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -6847,6 +6670,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -6920,6 +6750,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -6999,6 +6836,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 3,
                             "parameters": [
@@ -7014,6 +6858,13 @@
                             "indent": 3,
                             "parameters": [
                                 "$[camp.h8.village.b.05]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 3,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -7470,6 +7321,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 0,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 0,
                             "parameters": [
@@ -7649,57 +7507,6 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -7804,6 +7611,13 @@
                             "indent": 1,
                             "parameters": [
                                 351
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -7966,6 +7780,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 1,
                             "parameters": [
@@ -8122,6 +7943,13 @@
                             "indent": 1,
                             "parameters": [
                                 351
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -8284,6 +8112,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 1,
                             "parameters": [
@@ -8443,6 +8278,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 1,
                             "parameters": [
@@ -8458,6 +8300,13 @@
                             "indent": 1,
                             "parameters": [
                                 "$[conv.draska.help2]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                381
                             ]
                         },
                         {
@@ -8493,6 +8342,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                380
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 1,
                             "parameters": [
@@ -8519,6 +8375,13 @@
                                 {
                                     "variable": "47"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -8652,57 +8515,6 @@
                                     "HorzMirror:str": "None",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance Y = 0.00"
                             ]
                         },
                         {
@@ -8863,6 +8675,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -8878,6 +8697,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h1.witness]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -8991,6 +8817,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -9006,6 +8839,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h1.away]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -9136,6 +8976,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -9151,6 +8998,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h1.after]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -9264,6 +9118,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -9279,6 +9140,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h1.first]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -9409,6 +9277,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -9482,6 +9357,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -9561,6 +9443,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -9576,6 +9465,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h1.body.03]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -9750,57 +9646,6 @@
                             "code": 357,
                             "indent": 1,
                             "parameters": [
-                                "Coreto_2_VNPictureBusts",
-                                "Fidgeting_Enable",
-                                "FIDGETING: Start",
-                                {
-                                    "PictureID:arrayeval": "[\"63\"]",
-                                    "SpeedX:eval": "30",
-                                    "SpeedY:eval": "30",
-                                    "RateX:eval": "$gameVariables.value(47) ? 0 : 5.00",
-                                    "RateY:eval": "0.00"
-                                }
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Picture ID(s) = [\"63\"]"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed X = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Speed Y = 30"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance X = $gameVariables.value(47) ? 0 : 5.00"
-                            ]
-                        },
-                        {
-                            "code": 657,
-                            "indent": 1,
-                            "parameters": [
-                                "Distance Y = 0.00"
-                            ]
-                        },
-                        {
-                            "code": 357,
-                            "indent": 1,
-                            "parameters": [
                                 "VisuMZ_2_VNPictureBusts",
                                 "Scale_ScaleTo",
                                 "Scale_ScaleTo",
@@ -9955,6 +9800,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -9970,6 +9822,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h3.witness]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -10083,6 +9942,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -10098,6 +9964,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h3.away]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -10228,6 +10101,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -10243,6 +10123,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h3.after]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -10356,6 +10243,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -10371,6 +10265,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h3.first]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -10501,6 +10402,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -10574,6 +10482,13 @@
                                     "customTone:eval": "[0,0,0,0]",
                                     "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                384
                             ]
                         },
                         {
@@ -10653,6 +10568,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -10668,6 +10590,13 @@
                             "indent": 2,
                             "parameters": [
                                 "$[tavern.h8.h3.body.03]"
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -11008,6 +10937,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -11037,6 +10973,13 @@
                             "indent": 2,
                             "parameters": [
                                 "A releitura poderá usar FAST; o comando não salva o arquivo por conta própria."
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -11227,6 +11170,13 @@
                             ]
                         },
                         {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                381
+                            ]
+                        },
+                        {
                             "code": 101,
                             "indent": 2,
                             "parameters": [
@@ -11256,6 +11206,13 @@
                             "indent": 2,
                             "parameters": [
                                 "A releitura poderá usar FAST; o comando não salva o arquivo por conta própria."
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 2,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -11290,6 +11247,13 @@
                                 {
                                     "variable": "47"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 1,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
@@ -11404,6 +11368,13 @@
                                 {
                                     "variable": "47"
                                 }
+                            ]
+                        },
+                        {
+                            "code": 117,
+                            "indent": 0,
+                            "parameters": [
+                                380
                             ]
                         },
                         {
