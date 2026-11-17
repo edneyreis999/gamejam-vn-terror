@@ -1,37 +1,42 @@
 ---
 name: criar-dialogo
-description: "Dialogue: use to brief, write, or revise scenes from character sheets, including conditional exchanges. Do not use to create character sheets."
+description: "Dialogue: use to brief, write, revise, or review scenes from character sheets, including conditional exchanges. Do not use to create character sheets."
 ---
 
 # Create dialogue
 
 ## 1. Load the directions
 
-Before briefing, writing, or revising dialogue, read [references/dialogue-directions.md](references/dialogue-directions.md) in full. It owns the writing and continuity directions; the questions below do not replace that reading. When delegating these roles, require each delegate to load this skill and the full reference before producing their work; a supplied summary is not a substitute.
+Before briefing, writing, revising, or reviewing dialogue, read [references/dialogue-directions.md](references/dialogue-directions.md) in full. It owns the writing, continuity, and review criteria. Require delegates assigned these roles to load this skill and the full reference before producing their work; a summary does not replace that reading.
 
-## 2. Understand the scene
+For editorial review, go directly to “Reread and revise” in the reference, then deliver the assessment. Follow steps 2–3 for briefing, writing, or text revision.
 
-Read the character sheets and the request. Answer the questions below internally; ask the requester only for information still needed to decide the scene. Use concrete events and actions. Accept “none” where appropriate.
+## 2. Establish the brief
+
+Read the request and relevant character sheets. Organize the brief around four elements:
+
+- **Player purpose:** what the encounter should give the player.
+- **Immediate intentions:** what each participant wants from the other now.
+- **Relationship and context:** familiarity, obligations, authority, and the situation at entry.
+- **Relevant facts and limits:** knowledge available to speakers and player, fixed events, and authorized latitude.
+
+Use supplied decisions and research existing sources to resolve material gaps. The following questions are investigative prompts: use whichever helps resolve a gap, without turning their order into a sequence of lines or requiring an answer to each.
 
 - Where are they, and what just happened to start the conversation?
-- What does each want from the other right now? What makes that difficult? How do familiarity, obligations, and authority affect what each can ask or expect?
-- What does each know, hide, or avoid saying? What does the player know at this entry point, including anything the speakers do not?
-- What state is each in as the conversation begins? Which established experiences or aspirations matter here, and which of them has the player necessarily seen?
-- How does each try to get what they want? What do they do if that fails?
-- Who leads the conversation? Does that change?
-- How does the scene end? What, if anything, changes between them?
+- What does each want from the other? What makes that difficult, if anything?
+- What does each know, hide, or avoid saying? What does the player know at this entry point?
+- What state is each in? Which experiences or aspirations matter here, and which has the player necessarily seen?
+- How might each try to get what they want, and respond if that fails?
+- Who leads the conversation? Might that change?
+- How might the encounter end, with or without a change between them?
 - Which events are fixed, and what may be invented?
 
-Use decisions already supplied and invent within the agreed latitude. Finish preparation when all eight questions have usable answers and any unresolved conflict affecting the scene is identified. A requested brief exposes these answers and the relevant source context to its writer.
+Ask the requester only for a missing decision that materially affects the scene and cannot be resolved within the agreed latitude. Finish preparation when the four elements are usable and any remaining material conflict is explicit. A requested brief presents those elements with enough source context for its writer to work without the director's conversation, rather than reporting the investigation question by question.
 
-In a brief, distinguish source facts and binding constraints from creative suggestions. State the intended player experience and leave the writer room to realize it through interaction. Tie each restriction to an established contract or an explicit user decision; present your own proposed staging, phrasing, and sequence as suggestions.
+Distinguish source facts and binding constraints from creative suggestions. Tie restrictions to an established contract or explicit user decision. Leave phrasing, tactics, and sequence open to the writer unless already fixed; preparation supplies the situation, not a conversation to recite.
 
-Make a delegated brief self-contained: include the relevant character and relationship context, guaranteed prior knowledge, and any available scene connections. The writer should be able to use it without access to the director's conversation.
+## 3. Produce and review the assigned work
 
-## 3. Produce the assigned work
+Compose, revise, or review using the loaded directions. Complete the reread and source checks they require, including a full reread after repairs.
 
-Compose or revise using the loaded directions, with freedom of rhythm, silence, interruption, and sentence construction. For an editorial review, identify the actual passage, its effect on the scene's purpose or voice, and the smallest repair needed; preserve what works.
-
-Finish after the player-perspective reread in the reference: the intended purpose is legible, responses and references are understandable, and continuity conflicts are resolved or explicitly reported. Persist adopted facts through the appropriate document owner before handing them on as established continuity.
-
-Deliver the requested brief, dialogue, or review. For dialogue, include only the speakers and directions or narration the medium calls for; keep internal planning out of the scene.
+Deliver the requested brief, dialogue, or editorial review, with material unresolved conflicts identified. For dialogue, include the speakers and only the directions or narration the medium calls for; keep planning and justification outside the scene.
