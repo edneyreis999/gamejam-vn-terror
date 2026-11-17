@@ -4,7 +4,15 @@ Este diretório reúne **17 fichas para 16 personagens**, com Rheed jovem e velh
 
 ## Estado da entrega
 
-### Síntese descritiva — 17/11/2026
+### Contrato P1 e referências regionais — 17/11/2026
+
+**Reviewed — revisão documental independente concluída; aceite humano das propostas regionais pendente.** O contrato de P1 está confirmado pelo dono no [GDD §14.1](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#141-comunicação-das-competências-e-contrato-de-p1). A referência de linguagem brasileira regional passa a integrar cada retrato, combinada com personalidade, relação e contexto. Não estabelece origem brasileira, estereótipo, vocabulário obrigatório ou roteiro de fala. Regiões podem se repetir; Rheed permanece a mesma pessoa nas duas idades.
+
+Bimbren tem referência nordestina confirmada, sem estado ou cidade fixados, cortesia no primeiro contato e confiança ao falar do ofício. As outras 16 fichas contêm **Propostas editoriais**, até aceite humano: são 15 escolhas para pessoas distintas, pois Rheed tem duas fichas. O [racional regional e seus limites](pesquisa.md#referências-regionais--propostas-de-17112026) registra a pesquisa independente e a aplicação editorial. Esta rodada tem parecer próprio, sem herdar o Reviewed da síntese anterior. Redação de P1, P2/P3 e integração no jogo não fazem parte desta atualização de fontes.
+
+A revisão de 17/11/2026, sessão `sess-ba83f0413b6fefd4`, concluiu **Reviewed**, sem achados materiais, para os 33 arquivos do snapshot SHA-256 `a6d4a98fcdb235e66e78e6bc508a6b93ac10fce4ce9ae94a63f1715d9f3d034f`. O parecer local está em `.artifacts/wl-20261117-02/revisor.md`, SHA-256 `2aa9cc85f261fd7abb76a652e3bba8e1c96c29d549b329d9140a9ab8d18b7e9d`. Esta anotação e o fechamento na comparação são posteriores ao snapshot e não integram o parecer. A revisão não aceita as regiões propostas em nome do dono, não comprova eficácia em cena e não ativa a skill candidata.
+
+### Histórico — síntese descritiva de 17/11/2026
 
 **Reviewed — revisão documental independente concluída; aceite editorial humano pendente.** A direção humana aprovada pede fichas enxutas, predominantemente em prosa, sobre quem é cada pessoa e o que a distingue. As 17 fichas preservam identidade, competências, acontecimentos relevantes e relações; retiram exemplos de fala, exercícios, vocabulário obrigatório e fórmulas de reação ou sintaxe. Aprovar essa direção e a síntese de referência de Bimbren não aprova antecipadamente estas 17 novas redações.
 
@@ -40,7 +48,7 @@ As falas atualmente jogáveis conservam os estados de implementação e aceite d
 
 ## Heróis recrutáveis
 
-**Competências internas, somente para autoria:** não mostrar seus nomes nos diálogos ou na interface do jogador. Preservar a relação plausível entre competência e ação, sem transformar competência em personalidade ou bordão.
+**Matriz de competências para autoria:** cada P1 deve mostrar motivação e contribuição, nomear e destacar exatamente as duas competências canônicas do herói e demonstrá-las segundo o GDD §8.2. A exceção de exposição dos nomes vale somente para P1 (§14.1); opções das armadilhas e demais superfícies continuam sem nomes. Competência não se torna personalidade ou bordão.
 
 | ID | Ficha | Competências preservadas |
 | --- | --- | --- |
@@ -72,7 +80,7 @@ As falas atualmente jogáveis conservam os estados de implementação e aceite d
 1. Leia o retrato e suas notas de origem. A caracterização ajuda a compreender a pessoa; a situação, o interlocutor e a intenção imediata orientam uma nova cena. Um detalhe da ficha não precisa aparecer em toda conversa.
 2. Use a [comparação](comparacao-vozes.md) para perceber diferenças de motivação e relação, sem procurar réplicas prontas.
 3. Consulte a [pesquisa](pesquisa.md) para rastrear livro, arte e cenas externas. Seus exemplos e prescrições antigos são histórico, não material obrigatório para os escritores.
-4. Volte às [regras de personagens e participação](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem) antes de escrever uma cena. Os oito pares, as posições no Conselho, a ordem dos vivos presentes e as regras de perda permanecem fixos. Competências são internas; não se tornam rótulos de personalidade ou texto do jogador.
+4. Volte às [regras de personagens e participação](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem) antes de escrever uma cena. Os oito pares, as posições no Conselho, a ordem dos vivos presentes e as regras de perda permanecem fixos. Nos P1, aplicar a exceção de nomeação e destaque da seção 14.1, sem transformar competências em rótulos de personalidade; nas armadilhas, manter as ações sem nomes de competências.
 
 Os heróis entram sob promessa de tesouro, desconhecem inicialmente a maldição e o plano de Ivaí e só deixam o elenco pela morte prevista. Motivações, equipamento e relações não acrescentam habilidades nem alteram essas regras. No Conselho, os vivos presentes aconselham em ordem H1–H8, sem votação; a decisão é do jogador. Rheed continua ajudante/testemunha, sem vaga nem sacrifício. As fichas não criam arcos para pares adicionais ou conhecimento de acontecimentos não presenciados.
 

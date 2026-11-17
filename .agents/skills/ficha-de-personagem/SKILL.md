@@ -21,7 +21,7 @@ Read [the research questions](references/questions.md) and [the portrait scaffol
 
 Use questions to investigate meaningful gaps, not as a form to complete. Consult existing answers before asking the user; leave irrelevant or unsupported details out rather than inventing peculiarities to fill a format. Respect any scenes reserved for later experiments.
 
-*Done when:* each requested character has a source basis, a preservation inventory, and any material gaps or conflicting decisions identified.
+*Done when:* each requested character has a source basis, a preservation inventory, and any material gaps or conflicting decisions identified, including the status of their regional reference.
 
 ## 2. Research — Author and Researcher
 
@@ -29,15 +29,17 @@ Before assigning research, require the Researcher to read [their procedure](refe
 
 Consume the research before closing the sheets. Resolve unsupported conclusions with source checks or focused follow-up; keep evidence and its limitations in the conversation or assigned record, outside the portrait. Historical research remains provenance, not a collection of lines for future writers to reuse.
 
-*Done when:* each referred question has evidence or an explicit limitation, and the preservation inventory has been reconciled against the sources.
+*Done when:* each referred question has evidence or an explicit limitation, every regional choice has a confirmed source or researched rationale, and the preservation inventory has been reconciled against the sources.
 
 ## 3. Synthesize the portrait — Author
 
 Use the scaffold flexibly. Connect the facts that explain this person's motives, strengths, faults, and relationships; select details for their significance rather than giving every research answer a paragraph. Preserve existing attributes when the game establishes them, without requiring any particular attribute system. Show distinctions through meaningful description, allowing the person to vary with circumstances rather than prescribing a reaction for every situation.
 
+Every character sheet, in any game, must include a Brazilian regional language reference. Describe it briefly alongside personality, relationships, and context as a basis for voice, not a script of expressions or reactions. Treat the region as a language reference, not a Brazilian birthplace or a cause of personality; avoid regional stereotypes. Preserve a confirmed choice at its agreed level of specificity. Mark a researched but unaccepted choice as an editorial proposal. Characters may share a reference; different ages of one person preserve continuity without invented migration.
+
 Keep the portrait readable on its own. Include light provenance that distinguishes established facts, interpretations, authorized invention, and unresolved matters according to the project's terminology. Condensation may remove redundancy and exercises, but must retain consequential facts and the substance of essential relationships. Propose new biography only within the agreed creative latitude, with its status explicit.
 
-*Done when:* every requested portrait is understandable without the research dossier, its preservation inventory is accounted for, and the output meets the descriptive contract above without a fixed field, word, or paragraph quota.
+*Done when:* every requested portrait is understandable without the research dossier, its preservation inventory and regional reference are accounted for, and the output meets the descriptive contract above without a fixed field, word, or paragraph quota.
 
 ## 4. Review independently — Reviewer
 

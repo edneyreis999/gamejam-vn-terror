@@ -12,4 +12,6 @@ Floraí e Pérola são pessoas a quem se afeiçoou, não apenas um acordo a defe
 
 Seu registro final é encontrado no Conselho e confirma os únicos resultados: reunir restaura o juramento, liberta os amantes e entrega a Andirá a vida do descendente amaldiçoado; destruir encerra a maldição da linhagem e permite que a entidade absorva os amantes e suas memórias. Palotina não está presente para escolher, aconselhar ou votar. **[GDD §§4.4, 15]**
 
+A referência de linguagem proposta é Recife, PE, também sugerida para Seraphina. A hospitalidade e o cuidado com os termos do compromisso dão à voz de Palotina seu contexto próprio, sem atribuir esses traços à região. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Fontes e limites:** hospitalidade e audiência são **Criação** da ficha-base. O chá dos exercícios antigos não comprova um objeto de sua oficina. Idade e aparência permanecem não estabelecidas, sem retrato individual associado. [Pesquisa](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).

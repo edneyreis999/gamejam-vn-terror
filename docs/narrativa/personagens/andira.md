@@ -12,4 +12,6 @@ Irati recusou buscar a segunda metade por considerar a oferta uma coerção; mor
 
 Antes do clímax, manifesta-se por água, sonhos, vozes e reflexos, sem corpo completo. Estalos, ecos alterados, sombras semelhantes a asas e reflexos invertidos anunciam sua presença. No clímax, o GDD descreve uma silhueta alta, olhos refletivos sem pupilas e asas membranosas de água escura, lama e raízes. **[GDD §4.5]** O busto `Dryland_andira.png` tem contorno fluido e rosto pouco definido, sem asas abertas; essa **Arte** não revoga a descrição narrativa.
 
+A referência de linguagem proposta é São Paulo capital, SP. Seu controle sobre o que revela e a precisão de suas afirmações pertencem à caracterização da entidade; a referência não lhe atribui origem mortal ou transforma uma região em sinal de ameaça. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Fontes e limites:** elaboração marcada como **Criação** preservada da ficha-base. Origem mortal, corpo cotidiano e vulnerabilidade doméstica não estão estabelecidos; os antigos exercícios não os criam. [Pesquisa](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).

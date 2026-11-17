@@ -10,4 +10,6 @@ Sua memória é fragmentada; **[GDD §5.3]** a firmeza com que defende o consent
 
 Na rota da igreja, reconhece a metade escondida por Ivaí e entrega a peça anã do mapa. O alcance do aviso depende da ordem em que os amantes são encontrados, sem confirmar os dois resultados antes do Conselho. Pérola não participa dessa reunião. Se o medalhão for reunido, o juramento se restaura e ela e Floraí são libertados, ao custo da vida de Ivaí. Se for destruído, Andirá toma os dois e suas memórias. **[GDD §§4.4, 5.3]**
 
+A referência de linguagem proposta é Curitiba, PR, também sugerida para Floraí e Tibagi. Sua reserva e a firmeza com que sustenta a própria escolha pertencem a Pérola, sem fazer da região uma explicação para elas. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Aparência e fontes:** a massa de pedra facetada de `Dryland_perola_confined.png` é **Arte**; detalhes finos do corpo não foram comprovados. O retrato livre é referência secundária, sem carregamento localizado na pesquisa. Idade anterior à prisão e estado atual do sino permanecem não estabelecidos. A elaboração pessoal marcada como **Criação** vem da ficha-base. [Pesquisa](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).

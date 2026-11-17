@@ -12,4 +12,6 @@ Gorvak, Griznik e Liora confiam tarefas a Rheed. Ele gosta de ser necessário, m
 
 É o mesmo Theodor Rheed que mais tarde contará suas memórias em Daratrine. **[GDD §§4.1, 27.2]** O interesse pelos interlocutores aproxima as duas fases: o jovem procura confirmação e ajuda; o velho tem segurança para conduzir a atenção da praça. A passagem psicológica entre eles permanece uma elaboração, sem redenção ou ruptura com Ivaí estabelecida. **[Criação]**
 
+A referência de linguagem proposta é o Rio de Janeiro, RJ, a mesma de Rheed velho. Seu interesse pelas pessoas já está presente, mas a insegurança e a busca de aprovação distinguem esta fase; não se presume mudança de origem ou migração entre as idades. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Fontes e limites:** o livro do dono retrata o velho, não esta juventude. A caracterização pessoal e os vínculos são **Criação** da ficha-base. Em `Reed-novo.png`, barba curta, caneca e ambos os olhos visíveis são **Arte**. Origem, família, início da relação com Ivaí e eventual convivência com Irati permanecem não estabelecidos. A cicatriz e o tapa-olho pertencem ao velho, com causa desconhecida. [Pesquisa do livro](pesquisa.md#rheed-evidência-própria-e-limites-da-amostra) e [estado editorial](README.md#estado-da-entrega).

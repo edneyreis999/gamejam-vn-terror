@@ -10,4 +10,6 @@ Pérola continua sendo seu vínculo central, sem arrependimento pelo compromisso
 
 Entrega ao grupo a peça élfica do mapa e recorda que Andirá depende de uma escolha voluntária. Não sabe com segurança os efeitos finais. Em qualquer ordem de rotas, o primeiro amante encontrado faz um aviso vago; o segundo desperta suspeita sobre o que Ivaí sabe. Floraí permanece preso, não aparece no Conselho e não substitui a confirmação do registro de Palotina. Reunir liberta o casal ao custo da vida de Ivaí; destruir entrega os amantes e suas memórias a Andirá. **[GDD §§4.4, 5.3]**
 
+A referência de linguagem proposta é Curitiba, PR, compartilhada editorialmente com Pérola e Tibagi. Sua relação com as lembranças e o desejo de companhia distinguem sua voz; a referência não localiza a Casa Araucária no Brasil. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Aparência e fontes:** rosto integrado ao tronco, orelhas pontudas, galhos, folhas e raízes são **Arte**, em `Dryland_florai_confined.png`. O retrato livre é referência secundária, sem carregamento localizado na pesquisa; não comprova locomoção durante a rota. Idade anterior à prisão permanece não estabelecida. A elaboração pessoal é **Criação** da ficha-base. [Pesquisa](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).

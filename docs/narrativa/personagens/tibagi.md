@@ -10,4 +10,6 @@ Na véspera da fuga do casal, tentou arrancar o medalhão de Pérola. A resistê
 
 Vê Floraí sobretudo como ameaça ao poder da Casa Basalto, e trata a promessa de Andirá como se fosse seu próprio plano. Não está caracterizado como servo consciente de um culto. A recusa de Palotina em desfazer o juramento pertence ao mesmo conflito das famílias, sem amizade ou ofício compartilhado entre ela e Tibagi. Não há reconciliação estabelecida com Pérola. **[Criação apoiada no GDD §§4.4–4.6]**
 
+A referência de linguagem proposta é Curitiba, PR, também sugerida para Pérola e Floraí. O contraste entre eles está no desejo de decidir, no consentimento e nas relações, sem converter o conflito das casas numa oposição entre regiões brasileiras. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Fontes e limites:** a metade escondida é recuperada na campanha sem sua presença. Não participa da taverna ou do Conselho de Ivaí. Idade, aparência, data e causa da morte permanecem não estabelecidas; não há retrato individual associado. A caracterização pessoal marcada como **Criação** vem da ficha-base, sem inventar convivência com gerações posteriores. [Pesquisa](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).

@@ -10,7 +10,9 @@ Use the questions to understand gaps, not to require an answer or an illustrativ
 
 *Done when:* each assigned question and preservation item has evidence or an explicit gap, and any need for external research is identified by the gap it would address.
 
-## 2. Consult external work when needed
+## 2. Ground regional references and consult external work
+
+For each regional reference required by SKILL.md, record the author’s confirmed choice or propose a Brazilian variety with a rationale grounded in consulted language sources. Distinguish evidence about that variety from the editorial choice to use it for this character. Prefer contextual speech or linguistic research over lists of slang; identify register, speaker variation, and limits. Shared traits do not make a personality regional, and diversity alone does not justify a choice.
 
 When a meaningful characterization gap benefits from comparison, consult human-written scenes in supplied works or verifiable sources. Select scenes for the relationships and motives they illuminate, including everyday company when relevant. Shared profession or appearance alone does not justify a comparison.
 
@@ -18,7 +20,7 @@ Consult the work, script, or transcript before attributing words. Record authors
 
 If a source is inaccessible, seek an authorized alternative or identify the unsupported claim. Existing adequate research may be reused with its date and limitations; broad research is not a requirement to enlarge the final sheet.
 
-*Done when:* the selected gaps have contextual evidence or a stated access limitation, without substituting invented quotations for missing sources.
+*Done when:* each regional choice has its source, status, rationale, and limits, and the selected gaps have contextual evidence or a stated access limitation, without substituting invented quotations for missing sources.
 
 ## 3. Return evidence and preservation findings
 

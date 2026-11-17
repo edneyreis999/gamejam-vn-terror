@@ -8,7 +8,7 @@ Read the portraits in full, then verify consequential claims in the cited source
 
 | Dimension | Check |
 | --- | --- |
-| Fidelity and preservation | Established identity, attributes, consequential events, relationships, knowledge, and chronology survive condensation. Origins and unresolved matters retain their status; external inspiration has not become biography. |
+| Fidelity and preservation | Established identity, attributes, consequential events, relationships, knowledge, and chronology survive condensation. Origins and unresolved matters retain their status; external inspiration has not become biography. Verify each regional reference against the synthesis contract in SKILL.md and its evidence, including proposal status and continuity across life phases. |
 | Comprehensibility | The portrait makes sense without the investigation or the author's defense. Connections between motives, experiences, and relationships are clear. |
 | Distinction and range | The person differs meaningfully from available peers, with room for responses suited to circumstances. Description does not reduce them to a single trait or dictate a behavioral routine. |
 | Descriptive form | The result follows the user's concise prose direction. Flag dialogue examples, reaction tables, mandatory vocabulary, sentence formulas, and field-by-field expansion disguised as paragraphs. |

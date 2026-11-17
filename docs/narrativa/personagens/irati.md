@@ -10,4 +10,6 @@ Pérola, Palotina e Tibagi pertenciam à história conservada nos registros, nã
 
 Na campanha, Irati está presente pelos registros, não como interlocutora viva. Eles aparecem no prólogo, depois da primeira peça do mapa e na revelação final. Na abertura, Rheed apresenta lembranças e tradição familiar sem ler um excerto literal; a confirmação dos resultados pertence ao registro de Palotina. **[GDD §§4.7, 5.3, 27.1]**
 
+A referência de linguagem proposta é a região metropolitana de Belo Horizonte, MG, também sugerida para Ivaí. A continuidade de repertório entre mãe e filho preserva a diferença entre a reserva dela e o calor público dele; não estabelece origem brasileira para a família. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Fontes e limites:** reserva, exigência e maço de viagem são **Criação** da ficha-base. Não há retrato individual associado; rosto e roupa permanecem não estabelecidos. Também não está estabelecido se Rheed a conheceu em vida: as fichas anteriores divergem nesse ponto, sem resolução pelo GDD. [Pesquisa histórica](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).

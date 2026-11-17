@@ -1,6 +1,6 @@
 # Diferenças entre os personagens
 
-Leitura descritiva da síntese de 17/11/2026, com revisão documental independente **Reviewed** na sessão `sess-f2e1a72ec9f21305`. O [estado editorial](README.md#estado-da-entrega) identifica o snapshot e o parecer; esta anotação de fechamento é posterior ao objeto revisado. Ajuda a comparar os retratos, sem prescrever falas ou provar reconhecimento de voz em cena. Aceite humano das novas redações e eficácia em diálogo continuam separados da revisão documental.
+Leitura descritiva da síntese e das referências regionais de 17/11/2026, com revisão documental independente **Reviewed** na sessão `sess-ba83f0413b6fefd4`, snapshot SHA-256 `a6d4a98fcdb235e66e78e6bc508a6b93ac10fce4ce9ae94a63f1715d9f3d034f`. O [estado editorial](README.md#estado-da-entrega) identifica o snapshot e o parecer; esta anotação de fechamento é posterior ao objeto revisado. Ajuda a comparar os retratos, sem prescrever falas ou provar reconhecimento de voz em cena. Aceite humano das novas redações e eficácia em diálogo continuam separados da revisão documental.
 
 Gorvak e Draska querem proteger quem trabalha com eles e podem impor sua vontade. Ele permanece para estabilizar o peso e acredita saber quanto risco cada um suporta; ela prioriza a retirada e pode ignorar o limite de quem não acompanha. Bimbren também ajuda com trabalho físico, mas depende mais de ser bem considerado e adia a informação que o prejudicaria. A confiança e a cobrança entre eles têm motivos diferentes.
 
@@ -15,6 +15,8 @@ Ivaí e Rheed velho sabem acolher e conduzir ouvintes. Ivaí usa isso para uma e
 Floraí e Pérola preservam o vínculo apesar de memórias fragmentadas. Ele teme preencher lacunas com falsidade e às vezes se acomoda ao silêncio; ela sustenta o consentimento e resiste ao consolo que implique arrependimento. Ambos querem companhia, mas isso não elimina a prisão nem lhes dá certeza sobre o desfecho.
 
 Irati protege os registros e restringe o acesso a assuntos familiares. Palotina acolhe as pessoas e esclarece o que aceitam, embora já tenha respondido no lugar de Pérola. Tibagi chama a própria tutela de responsabilidade pela casa; seu afeto pela irmã não impediu a tentativa de tomar o medalhão. Andirá vai além da tutela mortal: reivindica pessoas e memórias como posses, manipula por verdades e omissões e permanece limitado pelas regras do artefato.
+
+As [referências regionais propostas](pesquisa.md#referências-regionais--propostas-de-17112026) se repetem entre pessoas distintas: não são códigos de personalidade. As duas idades de Rheed compartilham a mesma referência. Esse acréscimo recebeu revisão documental própria nesta rodada; o aceite humano das propostas regionais e a eficácia em cena continuam pendentes.
 
 ## Histórico dos exercícios
 

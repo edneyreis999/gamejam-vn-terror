@@ -34,6 +34,10 @@ Use these as investigative prompts, selecting what helps understand the person o
 22. What does humor or everyday company reveal beyond the predominant trait?
 23. Which similarities to other characters conceal meaningful differences?
 
+## Regional language reference
+
+Investigate the reference required by the synthesis contract in SKILL.md: which Brazilian regional variety is confirmed or proposed, what evidence supports its use, and what limits or variation must remain visible? Reuse the author’s choice without inventing a more specific locality.
+
 ## Continuity and evidence
 
 24. What do they know at this point, and how did they learn it?

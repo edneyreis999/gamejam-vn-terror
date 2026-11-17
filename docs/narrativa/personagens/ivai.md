@@ -10,4 +10,6 @@ Irati lhe deixou a metade do medalhão, a genealogia, relatos contraditórios e 
 
 No Conselho, o registro de Palotina confirma os dois resultados e Ivaí confessa. Depois das opiniões dos sobreviventes presentes, a decisão cabe ao jogador: reunir liberta os amantes e custa a vida de Ivaí; destruir encerra a maldição da linhagem e entrega os amantes e suas memórias a Andirá. Sua história não oferece um terceiro fim. Menções à mãe e a seus registros já pertencem ao prólogo; a revelação tardia diz respeito à maldição, ao medalhão e ao plano oculto. **[GDD §§4.4, 5.3, 15, 27]**
 
+A referência de linguagem proposta é a região metropolitana de Belo Horizonte, MG, também sugerida para Irati. A proximidade pública de Ivaí e sua intenção de conduzir os outros vêm de sua história e do que deseja em cada encontro, não da região. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
+
 **Aparência e fontes:** barba já grisalha e roupas remendadas constam do GDD §4.8, que nomeia uma rabeca. A **Arte** de `Dryland_ivai.png` mostra instrumento arredondado de cordas dedilhadas, sem arco visível; a divergência permanece sem conciliação inventada. A elaboração pessoal marcada como **Criação** vem da ficha-base. [Pesquisa](pesquisa.md) e [estado editorial](README.md#estado-da-entrega).
