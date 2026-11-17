@@ -247,6 +247,14 @@ A tecnologia corresponde aproximadamente ao fim do século XIX: transporte anima
 
 **Enquadramento da narração — Confirmado em 2026-09-17, esclarecido pelo dono em 2026-11-14:** no presente, Rheed mais velho se tornou o melhor contador de histórias de Daratrine. Durante a **Noite da História**, na praça de Daratrine, ele conta suas próprias memórias da expedição para centenas de criaturas; o jogador também faz parte dessa plateia. É o mesmo Theodor Rheed do livro do dono, em outra história. O contexto não acrescenta avatar, falas ou escolhas da plateia, nem nomeia a cidade da expedição. Os acontecimentos com Rheed jovem pertencem ao passado. A apresentação visual e sonora segue as seções 19.2, 19.4 e 27.2, preservando `Dryland_Coreto`; não se cria mecânica de memória. Fonte: [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md).
 
+<a id="perspectiva-memorias"></a>
+
+**Perspectiva das memórias — Confirmado pelo dono em 2026-11-17:** Rheed velho conta suas próprias memórias à plateia no presente, mas a narração dos acontecimentos lembrados deve ser escrita no passado. Ao narrar sua participação jovem, refere-se a si como “eu”. Pode recordar os sentimentos que teve naquela época e comentar o que compreendeu depois. Ao interpretar outras pessoas, limita-se ao que observou, soube ou inferiu, sem acesso onisciente a pensamentos ou segredos.
+
+Os diálogos diretos permanecem situados no momento vivido e podem mencionar naturalmente acontecimentos anteriores; isso não os converte em discurso indireto nem restringe os tempos verbais legítimos dentro de uma fala. Orientações internas de encenação devem estar identificadas separadamente do texto narrado destinado ao jogador.
+
+Este esclarecimento rege a escrita, preservando a ordem das revelações e os contratos de apresentação e alcance das intervenções (§§19.2, 19.4, 27.1, 27.2 e 28.3). Não cria caixas, cenas ou intervenções de Rheed velho nas descrições de armadilhas, nem altera UI, mapas ou `Languages.tsv`. A direção humana está confirmada; esta atualização documental não comprova integração ou eficácia em cena.
+
 ### 4.2 As famílias dos amantes
 
 - **Casa Araucária:** família élfica de Floraí. Administrava florestas, madeira naval e o porto da margem norte.
@@ -1627,7 +1635,7 @@ As seções 19.2/19.4 e a [ADR-001 incremental](../planos/tasks/approved-narrati
 
 **Apresentação do narrador — Confirmado em 2026-10-29:** por esclarecimento do usuário, Rheed mais velho em cores aparece sempre no cenário existente `Dryland_Coreto`, substituindo a apresentação sobre preto descrita acima e nas seções 19.2/19.4. O vídeo de entrada antecede sua aparição e encobre a troca da cena anterior para o coreto; após suas falas, o vídeo de saída encobre a troca para a próxima cena. Os vídeos fornecidos na branch `feat/transitions` são parte obrigatória dessas transições, inclusive com movimento reduzido; as demais animações preservam sua preferência. Aplica-se às aparições já autoradas do prólogo, armadilhas, fechamentos de rota, aberturas de fogueira e Conselho, sem acrescentar falas. Ver [spec incremental](../planos/tasks/reed-scene-videos/spec.md).
 
-A exclusão original de narração fora do prólogo foi ampliada, no incremento dos PRs #15–19, somente para os novos trechos narrados das rotas e do Conselho no PR #16. A decisão posterior de 2026-10-16 acrescenta as três aberturas compartilhadas das fogueiras, conforme a [seção 28.3](#fogueiras-perdas) e o [GDDR-003](gddrs/gddr-003-reconhecimento-das-perdas.md). Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação.
+A exclusão original de narração fora do prólogo foi ampliada, no incremento dos PRs #15–19, somente para os novos trechos narrados das rotas e do Conselho no PR #16. A decisão posterior de 2026-10-16 acrescenta as três aberturas compartilhadas das fogueiras, conforme a [seção 28.3](#fogueiras-perdas) e o [GDDR-003](gddrs/gddr-003-reconhecimento-das-perdas.md). Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação. Para a escrita do relato, ver a [perspectiva das memórias, §4.1](#perspectiva-memorias).
 
 ### 27.3 Leitura, entrega e limites
 

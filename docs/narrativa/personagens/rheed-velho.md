@@ -10,6 +10,8 @@ Guarda de Gorvak o respeito pela ajuda e o incômodo de ter sido tratado apenas 
 
 Essas lembranças pertencem ao antigo ajudante, sem lhe dar acesso automático aos passados privados dos heróis ou determinar quem morreu. O mestre Ivaí continua sendo alguém com quem se preocupou e cujas omissões não absolve. A passagem de jovem inseguro a narrador experiente conserva o interesse pelas pessoas, sem estabelecer o que viveu entre a expedição e a praça. **[Criação; GDD §27.1 para o vínculo com Ivaí]**
 
+O prazer de conversar do jovem amadurece no contador de histórias experiente. **[Direção humana confirmada — Edney, 17/11/2026]**
+
 No livro, usa poções para mostrar lembranças de Ghork; no jogo, as memórias são suas. **[Livro, cap. 01; GDD §§4.1, 27.2]** Isso não transfere os feitos de Ghork à sua biografia nem cria poderes jogáveis. As três aberturas compartilhadas de fogueira conservam seus tons de alívio, perda recente e continuidade, sem nomes de vítimas ou variantes pessoais. **[GDD §28.3]**
 
 A referência de linguagem proposta é o Rio de Janeiro, RJ, a mesma de Rheed jovem. A segurança diante da plateia permite outra relação com os ouvintes, preservando a continuidade da pessoa; a proposta não atribui uma origem brasileira ao Theodor do livro. **[Proposta editorial — 17/11/2026; aceite humano pendente]**
