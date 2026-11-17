@@ -24,7 +24,7 @@ Write thoughts this character could plausibly say to this listener. Preserve the
 
 Select information for its use in the exchange or the player's understanding. A detail in the sheet need not become spoken exposition.
 
-Give enough context for the current stakes. Names and specific terms can be useful without a full explanation; add a relationship label only when supported or within the creative latitude. Judge a short or direct reply by how it answers the preceding turn. Preserve concise lines that work, and reconnect thoughts when a sequence sounds like a recited brief or disconnected action reports.
+Give enough context for the current stakes. Names and specific terms can be useful without a full explanation; add a relationship label only when supported or within the creative latitude. A concise character chooses to say little while remaining understandable. A longer turn may develop a justification across several sentences. Organize turn-taking around opportunities to respond: a question, offer, or request may need the listener's reaction before the subject moves on. Use punctuation to guide the thought and rhythm within the turn.
 
 ## Dialogue boxes and performance
 
