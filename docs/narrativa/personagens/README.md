@@ -1,10 +1,22 @@
-# Personagens — fichas de voz
+# Personagens — fichas descritivas
 
 Este diretório reúne **17 fichas para 16 personagens**, com Rheed jovem e velho como duas fases da mesma pessoa. É a fonte corrente de caracterização para escrever e revisar novas falas. O [GDD](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md) continua sendo a autoridade sobre mundo, trama e mecânicas; o livro do dono ancora a identidade de Rheed velho. A decisão de recriar as vozes está registrada no [GDDR-008](../../gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md).
 
 ## Estado da entrega
 
-Estado em 14/11/2026:
+### Síntese descritiva — 17/11/2026
+
+**Reviewed — revisão documental independente concluída; aceite editorial humano pendente.** A direção humana aprovada pede fichas enxutas, predominantemente em prosa, sobre quem é cada pessoa e o que a distingue. As 17 fichas preservam identidade, competências, acontecimentos relevantes e relações; retiram exemplos de fala, exercícios, vocabulário obrigatório e fórmulas de reação ou sintaxe. Aprovar essa direção e a síntese de referência de Bimbren não aprova antecipadamente estas 17 novas redações.
+
+A revisão de 17/11/2026, sessão `sess-f2e1a72ec9f21305`, abrange os cinco arquivos da skill candidata, as 17 fichas e os três auxiliares, sem problema demonstrado em aberto. O snapshot revisado tem agregado SHA-256 `99aa58e795e3c54cf9c2ed2ed0451f1c7dd026181a930dcd45de83402210764b`; o parecer local está em `.artifacts/wl-20261117-01/revisor.md`, SHA-256 `fcd1fe0c4bc135a41df24af255169227883b602897e3310062c5833e3428b8a9`. Esta anotação e a atualização de estado na comparação foram acrescentadas depois do snapshot e não integram o parecer. A revisão não estabelece aceite humano das novas redações, eficácia em diálogo ou ativação da skill candidata pelo catálogo.
+
+A base editorial desta síntese é `70028a1ed46ccb9502815de49d6bdf8fe00f2f91`, que inclui a revisão de 16/11 e os refinamentos atuais de Bimbren. **Criação** identifica caracterização autoral preservada dessa base; não a promove a fato do GDD, da arte ou do livro. As notas de origem de cada ficha distinguem essas fontes. Idades, encontros, aparência e outros dados não estabelecidos continuam abertos; não é necessário completá-los para usar o retrato.
+
+A [comparação](comparacao-vozes.md) descreve diferenças entre pessoas. A [pesquisa](pesquisa.md) conserva fontes e proveniência histórica, inclusive o formato antigo que foi substituído. O GDDR-008 registra a decisão e o formato de sua época; suas exigências de campos e exercícios cedem à direção humana de 17/11 nesta revisão. O GDD continua governando mundo, trama e regras. Nenhuma fala, evento, asset ou regra do runtime foi alterada. Esta entrega não comprova eficácia em cena, playtest ou qualificação técnica do jogo.
+
+### Histórico — 14/11/2026
+
+Estado daquela entrega, sem extensão à síntese de 17/11:
 
 | Dimensão | Estado e limite |
 | --- | --- |
@@ -16,15 +28,15 @@ Estado em 14/11/2026:
 
 A revisão documental independente avaliou fidelidade, aplicabilidade, variação/identidade, naturalidade e economia no conteúdo do commit `9c8fe7a4ba774e376f5e6930d350ce0d056a0775`. Esse parecer não abrange os metadados de status acrescentados depois daquela revisão, não comprova reconhecimento cego ou efeito emocional em playtest e não qualifica o runtime. A conferência desses metadados e a verificação final da entrega permanecem separadas.
 
-### Revisão de naturalidade — 16/11/2026
+### Histórico — revisão de naturalidade de 16/11/2026
 
-Correção delimitada das 17 fichas, sem recriar biografias: os exemplos e as direções de fala passam a explicitar referentes, situação e relação com o interlocutor. A [comparação](comparacao-vozes.md) acompanha os exercícios atuais. A revisão preserva citações, competências, vínculos, conselhos fixos e distinções entre as fases de Rheed. Gorvak incorpora os refinamentos autorais já autorizados no piloto `241680ac71ba2061ac7b477586cad29f5579d570`, com origem **Criação**.
+Correção delimitada das 17 fichas, sem recriar biografias: os exemplos e as direções de fala passam a explicitar referentes, situação e relação com o interlocutor. A comparação daquela revisão acompanhava os exercícios então correntes; esse conjunto permanece no Git, conforme o histórico em [comparação](comparacao-vozes.md). A revisão preserva citações, competências, vínculos, conselhos fixos e distinções entre as fases de Rheed. Gorvak incorpora os refinamentos autorais já autorizados no piloto `241680ac71ba2061ac7b477586cad29f5579d570`, com origem **Criação**.
 
 - **Pesquisa independente:** concluída, sessão `sess-012f11e2341cb943`.
-- **Revisão independente desta correção:** **Reviewed** em 16/11/2026, sessão `sess-f33050a5a9442ab0`, após resolução dos três achados. O parecer cobre as 17 fichas e a comparação correntes; seu objeto completo tem agregado SHA-256 `f25b24099b84aeca68d269ffc07355d8ed885804ffca189d4de0b40a09a27129`. Esta anotação de fechamento é posterior ao parecer e não integra o objeto revisado. O estado histórico de 14/11 conserva seu próprio escopo.
+- **Revisão independente desta correção:** **Reviewed** em 16/11/2026, sessão `sess-f33050a5a9442ab0`, após resolução dos três achados. O parecer cobre as 17 fichas e a comparação daquela revisão; seu objeto completo tem agregado SHA-256 `f25b24099b84aeca68d269ffc07355d8ed885804ffca189d4de0b40a09a27129`. Esta anotação de fechamento é posterior ao parecer e não integra o objeto revisado. O estado histórico de 14/11 conserva seu próprio escopo.
 - **Aceite editorial humano:** **Aceito** por Edney em 16/11/2026, por confirmação explícita na sessão `sess-f33050a5a9442ab0`, para as 17 fichas desta revisão. O aceite foi registrado depois do parecer independente. Não houve experimento de cena, playtest ou integração no runtime nesta revisão; esses resultados mantêm validação própria.
 
-As falas atualmente jogáveis conservam os estados de implementação e aceite de seus incrementos. São a baseline de runtime a adaptar em trabalho posterior, não restrições criativas sobre a nova caracterização. Exemplos das fichas são exercícios: não criam cenas, encontros entre épocas, ressurreições, poderes ou consequências mecânicas.
+As falas atualmente jogáveis conservam os estados de implementação e aceite de seus incrementos. São a baseline de runtime a adaptar em trabalho posterior, não restrições criativas sobre a nova caracterização. Os antigos exemplos eram exercícios e não estabeleceram cenas, encontros entre épocas, ressurreições, poderes ou consequências mecânicas.
 
 ## Heróis recrutáveis
 
@@ -57,10 +69,12 @@ As falas atualmente jogáveis conservam os estados de implementação e aceite d
 
 ## Escrever e comparar
 
-1. Leia a ficha e diferencie fatos do GDD/livro, observações da arte e **Criação**. A criação compatível é proposta autoral, não citação da fonte. Use a reserva, o humor e os hábitos de fala conforme a pergunta recebida; não transforme uma tendência em molde obrigatório de cada frase.
-2. Consulte a [comparação de vozes](comparacao-vozes.md): seis situações comuns e uma mensagem neutra permitem comparar construção, ritmo e modo de responder. A comparação do autor não equivale a reconhecimento cego nem revisão independente.
-3. Consulte a [pesquisa](pesquisa.md) para rastrear livro, arte e cenas externas, com fontes, hashes e limitações. Referências externas permanecem fora das fichas.
-4. Volte às [regras de personagens e participação](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem) antes de escrever uma cena. Os oito pares, os lados aconselhados no Conselho, a ordem dos vivos presentes e as regras de perda permanecem fixos; as interpretações interpessoais podem ser recriadas.
+1. Leia o retrato e suas notas de origem. A caracterização ajuda a compreender a pessoa; a situação, o interlocutor e a intenção imediata orientam uma nova cena. Um detalhe da ficha não precisa aparecer em toda conversa.
+2. Use a [comparação](comparacao-vozes.md) para perceber diferenças de motivação e relação, sem procurar réplicas prontas.
+3. Consulte a [pesquisa](pesquisa.md) para rastrear livro, arte e cenas externas. Seus exemplos e prescrições antigos são histórico, não material obrigatório para os escritores.
+4. Volte às [regras de personagens e participação](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#18-heróis-e-conteúdo-de-personagem) antes de escrever uma cena. Os oito pares, as posições no Conselho, a ordem dos vivos presentes e as regras de perda permanecem fixos. Competências são internas; não se tornam rótulos de personalidade ou texto do jogador.
+
+Os heróis entram sob promessa de tesouro, desconhecem inicialmente a maldição e o plano de Ivaí e só deixam o elenco pela morte prevista. Motivações, equipamento e relações não acrescentam habilidades nem alteram essas regras. No Conselho, os vivos presentes aconselham em ordem H1–H8, sem votação; a decisão é do jogador. Rheed continua ajudante/testemunha, sem vaga nem sacrifício. As fichas não criam arcos para pares adicionais ou conhecimento de acontecimentos não presenciados.
 
 O público pretendido é 18+, conforme a direção vigente no [GDD canônico, §3.5](../../GDD_Visual_Novel_Expedicao_e_Sacrificio.md#35-público-idioma-e-duração). Terror psicológico, mundo sem humanos e arte existente são limites preservados. Personalidade pode contrastar com aparência. Nem todos precisam xingar, falar de trauma ou soar cínicos; o uso ou a ausência de palavrões depende de personagem, interlocutor e situação.
 

@@ -1,5 +1,8 @@
 # Pesquisa de personagens — fontes, arte e repertório de voz
 
+> **Registro histórico, preservado em 17/11/2026.** A pesquisa abaixo documenta fontes e o processo de 14/11; não é um contrato de preenchimento nem uma antologia para reutilizar falas. A direção humana de 17/11 substituiu as exigências de sete seções, 48 campos, exemplos e exercícios por retratos descritivos enxutos. Essas exigências permanecem abaixo apenas como história do trabalho. Biografias adotadas nas fichas-base são preservadas seletivamente na síntese; citações externas e exercícios não se tornam acontecimentos do jogo. Consultar o [estado corrente](README.md#estado-da-entrega) para distinguir esta pesquisa, os aceites antigos e a nova redação.
+
+
 Pacote S1 / V-01 de `character-voice-recreation`, consultado em **14/11/2026**. Pesquisa independente da autoria das fichas; não constitui revisão das fichas nem aceite editorial. Base consultada: `d8806e7aa8d7b9b01ac30a7482ea278bce508462`. Os caminhos abaixo partem da raiz do repositório, salvo links Markdown relativos a este documento. Os hashes ao final permitem reconhecer as fontes mesmo depois da retirada das fichas antigas.
 
 ## Como usar este registro
@@ -166,7 +169,7 @@ S2 também reuniu referências de *Auto da Compadecida*, *The Grand Budapest Hot
 
 Leads sem conteúdo adotado: o repositório UFMA (`https://tede2.ufma.br/jspui/handle/tede/3400`) não respondeu na tentativa inicial; o lead PUC-SP (`https://tede2.pucsp.br/handle/handle/4730`) retornou erro de acesso; a entrevista Gazeta (`https://www.gaz.com.br/entrevista-roberio-diogenes-fala-sobre-o-filme-o-agente-secreto/`) retornou 403. A cópia inglesa de 164 páginas de *O Agente Secreto*, localizada por Filmdraft/Carole Kirschner e hospedada em ThinkMovies, teve falhas de leitura/download; não foi usada para atribuir fala brasileira. A página FYC da NEON não forneceu texto de cena na leitura efetuada. Entrevistas, press notes e resumos não substituem as cenas acima.
 
-## Cobertura das 29 perguntas da ficha
+## Cobertura histórica das 29 perguntas da ficha
 
 **H** = cada um dos oito heróis; **P** = cada uma das sete figuras P1–P7; **R** = Rheed nas duas idades. “Criação” abaixo é uma lacuna deliberadamente entregue ao autor, não pedido de nova entrevista. Não existem falas antigas obrigatórias para H. Para P, os fatos do GDD limitam a nova caracterização; uma regra narrativa não demonstra por si só vocabulário ou sintaxe. O modelo do dono em `planos/005-refactor-narracao/modelo-ficha-personagem.md` e o contrato `ficha-de-personagem` exigem sete seções, 48 campos, passado e relações. O insumo é a edição modificada no workspace original, identificada pelo hash abaixo; a cópia do commit-base tem outro hash e não substitui essa edição.
 

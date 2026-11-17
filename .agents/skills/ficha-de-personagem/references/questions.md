@@ -1,44 +1,44 @@
-# Questions to get to know the character
+# Questions for understanding a character
 
-**Identification**
-1. What is the character's role in the story, and how do others describe them? What line from someone else sums them up?
-2. What is known about their race, age, and appearance from their own lines or what others say about them?
+Use these as investigative prompts, selecting what helps understand the person or resolve a material gap. Existing scenes may answer several at once. An unanswered question neither requires invention nor reserves space in the portrait. Evidence about speech belongs in research; synthesize what it reveals about the person.
 
-**Personality in action**
-3. What do they most desire and most fear? What line or scene shows each?
-4. What is their best quality and greatest flaw? What line or action shows each, and how does the flaw harm their relationships?
-5. When do their words and actions contradict each other?
-6. What do they try to show others, and what do they try to hide? What line or scene shows this?
-7. How do they react to frustration, receiving affection, authority, and confrontation? What line shows each case?
+## Identity and experience
 
-**Speech signature**
-8. What attitude do their lines convey? Quote two lines from different situations.
-9. What words and kinds of vocabulary do they prefer (concrete, technical, colloquial, trade-specific)?
-10. When do they speak formally, and when casually? Give a line for each.
-11. How do they address others and refer to themselves?
-12. Are their sentences short or long? When does that change?
-13. How do they construct a response: get to the point, justify first, ask a question, correct what they said?
-14. How do pauses, interruptions, repetitions, hesitations, or stutters appear? In what situation does each occur?
-15. How do they use humor and react to other people's humor?
-16. What do they draw on to explain the world (comparisons, stories, trades, animals, places)?
-17. What habits do they have when starting or ending a line, and what expressions do they repeat? For each: how often (rarely or frequently) and in what situation?
-18. What would sound strange coming from them?
-19. How do they ask for something, refuse a request, disagree, and avoid a subject? Give a line for each.
+1. What role does this person have in the story?
+2. Which aspects of their identity and appearance are established, and by which source?
+3. What attributes, competencies, or limitations does the game establish?
+4. Which experiences make those abilities plausible?
+5. What do they want now, and what matters to them beyond the immediate plot?
+6. What do they fear losing?
+7. Which past events still affect their choices?
 
-**Variations**
-20. How do they speak to someone close, a stranger, and an adversary? Give a line for each.
-21. How does their speech change when afraid, angry, or ashamed, and when showing vulnerability? Give a line for each.
-22. What stays the same in their speech across all these situations?
-23. Does their speech change over the story, before and after an event? Give a line from each phase.
+## Personality and motives
 
-**Lines for comparison**
-24. Which of their lines, or the closest available, illustrates each situation: introducing themselves, asking for help, disagreeing with a risky plan, thanking someone, hiding fear before danger, admitting a mistake?
-25. How would they say: “We need to get out of here. There is danger, and I need your help.”? If there is no similar line, which is closest?
+8. What do they do well for others?
+9. What fault has consequences for them or someone else?
+10. Where do their intentions, self-image, and actions differ?
+11. What do they want others to think of them?
+12. What do they hide or find difficult to acknowledge?
+13. What gives them ordinary pleasure, interest, or comfort?
+14. What can they be generous about, and what are they reluctant to give?
+15. Which apparent contradiction becomes understandable in context?
 
-**Past and relationships**
-26. What past events do they know about, mention, or avoid mentioning? What line shows this?
-27. Who are the most important people to them? For each: the bond, the tension, and one line addressed to that person.
+## Relationships and circumstances
 
-**Sources**
-28. Are the quoted lines verbatim or recalled from memory? Mark those recalled from memory.
-29. Is there anything important about their way of speaking that these questions did not cover?
+16. Who matters to them, and why?
+17. What history, affection, obligation, or conflict connects each essential relationship?
+18. How do familiarity and authority affect their dealings with others?
+19. What do existing scenes reveal about their response to care or frustration?
+20. How do they understand another person's needs, and where do they misjudge them?
+21. What changes under pressure, and what remains recognizable?
+22. What does humor or everyday company reveal beyond the predominant trait?
+23. Which similarities to other characters conceal meaningful differences?
+
+## Continuity and evidence
+
+24. What do they know at this point, and how did they learn it?
+25. What changes between established phases of their life?
+26. What remains unresolved about their past or future?
+27. Which claims are source facts, interpretation, or authorized invention?
+28. Are cited words verified, remembered, or attributed to someone else?
+29. Which important distinction has this investigation missed?

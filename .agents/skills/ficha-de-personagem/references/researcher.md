@@ -1,44 +1,29 @@
 # Researcher procedure
 
-Receive the character, creative intent, project sources, and questions linked to sheet fields from the Author. Work read-only and respond to the Author. Consult sources to resolve questions of evidence; return decisions about creative intent to the user through the Author.
+Receive the characters, creative intent, project authority order, preservation inventory, and research questions. Work within the assigned source and report scope. Return creative decisions to the Author instead of resolving them through unsupported biography.
 
-## 1. Consult the project's own material
+## 1. Investigate project evidence
 
-Read the indicated sources, respecting their authority, confirmation status, and authorized portions. For every question received, look for concrete lines and events. Preserve the distinction between what the character says, thinks, and does, and what other people or the narrator say about them.
+Read the indicated sources and existing portraits in full within their authorized portions. Track established identity, attributes, consequential history, essential relationships, and differences between life phases. Separate what someone says, thinks, or does from what a narrator or another person claims about them. Preserve confirmation status and source conflicts.
 
-Assess whether this material shows language choices across different situations and relationships. If it can guide the voice, use it; a specific gap may receive an identified proposal. If trait descriptions and few lines predominate, proceed to external research. Page or quotation counts alone do not determine sufficiency.
+Use the questions to understand gaps, not to require an answer or an illustrative line for every topic. For revision, distinguish substantive facts from redundant directions and hypothetical exercises; an exercise alone does not establish an event. Report facts at risk of being lost through condensation.
 
-*Done when:* each question has project evidence or an identified gap, and the need for external research is justified by situations still lacking a dialogue basis.
+*Done when:* each assigned question and preservation item has evidence or an explicit gap, and any need for external research is identified by the gap it would address.
 
-## 2. Research human-written scenes when the basis is insufficient
+## 2. Consult external work when needed
 
-Define research directions from the gaps received, such as a response to care or a confrontation with authority. Research scenes involving different characters in works written by humans, using the internet or supplied works. Choose references for behavior in the scene; profession, appearance, or membership in the same archetype is insufficient to select a voice.
+When a meaningful characterization gap benefits from comparison, consult human-written scenes in supplied works or verifiable sources. Select scenes for the relationships and motives they illuminate, including everyday company when relevant. Shared profession or appearance alone does not justify a comparison.
 
-- Actually consult the work, a script, or a transcript with a verifiable origin. Use summaries and quotation lists to locate scenes, returning to the text or scene before attributing a line.
-- Identify the work, authorship, and location. Record the language and version or translation consulted when these affect the words analyzed. Use memories as search leads without presenting them as verified quotations.
-- Include everyday conversations, humor, or intimacy that address the gaps, alongside dramatic moments. Observe how the character changes with the other speaker, what they want to obtain, and what they avoid saying.
-- Bring short excerpts sufficient to show the response's construction, preserving exact wording and marking omissions. The synthesis should explain the interaction, not collect memorable lines without context.
-- Compare what each reference offers and where it would cease to fit the project's character. The reference's biography, relationships, catchphrases, and events do not become facts about the new character.
+Consult the work, script, or transcript before attributing words. Record authorship, location, and version or translation when relevant. Use short contextual excerpts only where needed to support the analysis; mark recollections as search leads. Explain both the insight and where the analogy stops. Another character's biography and language remain their own.
 
-If a source is inaccessible, seek another verifiable source or another scene. If the gap persists, report what could not be checked and which part of the research lacks support; do not fill the record with invented lines.
+If a source is inaccessible, seek an authorized alternative or identify the unsupported claim. Existing adequate research may be reused with its date and limitations; broad research is not a requirement to enlarge the final sheet.
 
-*Done when:* investigated gaps have verified scenes from distinct references and a contextual reading of their possible contribution, or insufficient sources have been identified.
+*Done when:* the selected gaps have contextual evidence or a stated access limitation, without substituting invented quotations for missing sources.
 
-## 3. Respond to the Author
+## 3. Return evidence and preservation findings
 
-Organize the response by the requested questions and fields. For each answer, provide:
+Organize findings by character and material question. For each, give the source location, relevant fact or short contextual evidence, status, interpretation, and limits of possible application. Keep suggestions separate from facts, and identify any essential information missing from the Author's inventory.
 
-| Information | Content |
-| --- | --- |
-| Question or field | Which gap the answer clarifies. |
-| Nature | Project evidence, external reference, or suggested invention. |
-| Source | Path and location, or consulted link with work, authorship, and scene location. |
-| Situation and evidence | Who is speaking to whom, what is happening, and relevant verbatim excerpts or facts. |
-| Reading for writing | The observed behavior, its usage context, and the verbal construction that makes it perceptible. |
-| Possible application | What can guide the new voice and what would be incompatible with the character or their world. |
+Retain research as provenance outside the portrait, in the conversation or explicitly assigned report. Conclude with unresolved questions and access limitations. Leave synthesis and wording to the Author.
 
-Separate evidence from interpretation. Label invented examples as **Invention** and leave the final wording to the Author. In answers about the project itself, preserve quotations and confirmation status; for external references, retain attribution so the Reviewer can check the adaptation.
-
-Finish by identifying unanswered questions and access limitations. Return the material through the agent conversation, without creating files on personal initiative.
-
-*Done when:* the Author can locate the evidence, distinguish facts from proposals, and know what the research has not yet resolved.
+*Done when:* the Author and Reviewer can locate evidence, distinguish it from interpretation, and account for established facts without importing the whole investigation into the portrait.
