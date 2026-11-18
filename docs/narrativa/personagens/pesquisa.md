@@ -1,5 +1,37 @@
 # Pesquisa de personagens — fontes, arte e repertório de voz
 
+> **Acervo histórico e atualização regional — 17/11/2026.** A seção «Registro histórico de 14/11/2026» documenta fontes e o processo daquela data; não é um contrato de preenchimento nem uma antologia para reutilizar falas. A direção humana de 17/11 substituiu as exigências de sete seções, 48 campos, exemplos e exercícios por retratos descritivos enxutos. Essas exigências permanecem abaixo apenas como história do trabalho. Biografias adotadas nas fichas-base são preservadas seletivamente na síntese; citações externas e exercícios não se tornam acontecimentos do jogo. Consultar o [estado corrente](README.md#estado-da-entrega) para distinguir esta pesquisa, os aceites antigos e a nova redação.
+
+
+## Referências regionais — propostas de 17/11/2026
+
+Esta seção acrescenta a pesquisa regional à proveniência; o registro de 14/11 abaixo continua histórico. Base dos retratos: `7229e885b7e5ab72743201b0d0aa09f59ced3be2`. Pesquisa independente: sessão `sess-7e4e6c4419be38a8`, em 17/11/2026; relatório local `.artifacts/wl-20261117-02/pesquisa-regional-e-competencias.md`, SHA-256 `150a82dc5aaa2540d0b7811938a923dffdd6f5547b3aece94971e42c7a7c22a9`. A autoria consumiu o relatório e selecionou as aplicações abaixo. Não se trata de revisão independente das fichas alteradas.
+
+**Decisão humana confirmada:** Bimbren usa referência nordestina, sem estado/cidade definidos, com cortesia de primeiro contato e confiança no ofício. **Propostas editoriais, sem aceite humano:** todas as outras 16 entradas, correspondentes a 15 pessoas. As regiões são referências de linguagem brasileira, não lugares de nascimento, viagens ou explicações de caráter no mundo fantástico. Não há quotas nem exclusividade; compartilhar uma referência permite comparar diferenças pessoais dentro de um repertório comum.
+
+| Referência | Personagens e razão editorial | Fonte e alcance |
+| --- | --- | --- |
+| Nordeste, sem recorte adicional | Bimbren: preservar a escolha humana e a combinação de cortesia e confiança, sem transformá-la em bordão. | Decisão de Edney de 17/11; F1 oferece contexto metodológico, não autenticação de palavras específicas. |
+| Porto Alegre, RS | Gorvak e Draska: comparar cuidado que estabiliza e cuidado que retira do perigo, sem atribuir a oposição a sotaques diferentes. | F4: recorte urbano e variação de interlocução; não fundamenta firmeza, gritos ou bravata como traços regionais. |
+| Rio de Janeiro, RJ | Elowen, Vaelith e Rheed nas duas idades: repertório comum para companhia e relato, distinguindo prazer da ação, interesse pelo registro e relação com ouvintes. Rheed preserva continuidade sem migração inventada. | F5: transcrições com turnos de extensões diferentes; não comprova expansividade natural ou gíria obrigatória. |
+| Região metropolitana de Belo Horizonte, MG | Griznik, Ivaí e Irati: atividades e interlocutores diferentes dentro de uma mesma referência; mãe e filho conservam continuidade editorial, sem obrigação de voz idêntica. | F2: diversidade de situações e atividades, sem associação entre região, reserva ou dissimulação. |
+| Recife, PE | Seraphina e Palotina: precisão e convivência cotidiana no mesmo repertório regional, com motivos pessoais distintos. | F6: existência de registros orais e explicativos; acesso limitado, sem análise das transcrições ou atribuição de cadência exclusiva. |
+| São Paulo capital, SP | Liora e Andirá: a mesma referência admite precisão cotidiana e controle de informação sem equivalência moral entre ambos. | F3: corpus socialmente heterogêneo; entrevistas não acessadas. Não fundamenta pressa ou poder como marcas regionais. |
+| Curitiba, PR | Floraí, Pérola e Tibagi: o contraste entre memória, consentimento e tutela permanece nas pessoas e relações, não em regiões opostas. | F4: recorte distinto de Porto Alegre; não autoriza frieza regional ou tratamento obrigatório. |
+
+Fontes primárias consultadas pelo pesquisador, com acesso em 17/11/2026:
+
+- **F1:** Paim e Ribeiro, [Contribuições do projeto Atlas Linguístico do Brasil para a metodologia de pesquisa geolingüística](https://ojs.uel.br/revistas/uel/index.php/signum/article/view/29789), *Signum* 21(1), 2018, resumo. Considera situação e interação além de dimensões linguísticas. A página inicial ALiB/UFBA não respondeu; não houve leitura integral do atlas.
+- **F2:** Raso, [O corpus C-ORAL-BRASIL](https://c-oral-brasil.org/files/book_chapters/4_C_ORAL_BRASIL_BOOK_CAPITULO_2.pdf), 2012, pp. 55–57, 61–64, 70–71. Predominância mineira e ênfase na região metropolitana de Belo Horizonte; metadados de situações e participantes.
+- **F3:** USP, [Corpus SP2010](https://projetosp2010.fflch.usp.br/corpus) e [histórico/objetivos](https://projetosp2010.fflch.usp.br/historico). Perfis sociais e distribuição na capital; arquivos de entrevista dependem de solicitação, não realizada.
+- **F4:** [Banco de Dados VARSUL](https://www.varsul.org.br/banco-de-dados-varsul.php?_lng=br), apresentação; Görski e Coelho, [Aspectos de comportamento sociolinguístico entre as três capitais da Região Sul](https://periodicos.ufrn.br/gelne/article/download/9368/6722/0), 2012, pp. 136–138 e 147–149. Recortes urbanos e diferenças no tratamento em amostras de Porto Alegre/Curitiba; sem escuta de áudio.
+- **F5:** UFRJ, [NURC-RJ](https://nurcrj.letras.ufrj.br/main.htm), índice dos corpora e transcrições [DID/0039](https://nurcrj.letras.ufrj.br/corpora/did/did_39.htm) e [DID/0045](https://nurcrj.letras.ufrj.br/corpora/did/did_45.htm). Consultadas as aberturas, respectivamente até setor terciário e filmagem; recorte de falantes com nível superior nas décadas de 1970/1990. Não representa toda a fala carioca.
+- **F6:** UFPE, [Departamento de Letras — Pesquisa](https://www.ufpe.br/dep-letras/pesquisa), item NURC. Descrição institucional recuperada pela busca; página oscilou e o volume 1 teve loop de redirecionamento. Não houve leitura das entrevistas.
+
+Essas fontes sustentam a existência e a diversidade dos repertórios, não a escolha de uma região para determinada personalidade. Os motivos da tabela são editoriais e revisáveis. Não foram analisados áudios, frequências ou prosódia; não há autenticação por falante local, reconhecimento cego ou demonstração de eficácia em cena. As fichas recebem apenas uma descrição breve; exemplos, listas lexicais e fórmulas de resposta não são produtos desta pesquisa. As referências não fecham lacunas biográficas, alteram competências ou importam geografia brasileira literal.
+
+## Registro histórico de 14/11/2026
+
 Pacote S1 / V-01 de `character-voice-recreation`, consultado em **14/11/2026**. Pesquisa independente da autoria das fichas; não constitui revisão das fichas nem aceite editorial. Base consultada: `d8806e7aa8d7b9b01ac30a7482ea278bce508462`. Os caminhos abaixo partem da raiz do repositório, salvo links Markdown relativos a este documento. Os hashes ao final permitem reconhecer as fontes mesmo depois da retirada das fichas antigas.
 
 ## Como usar este registro
@@ -166,7 +198,7 @@ S2 também reuniu referências de *Auto da Compadecida*, *The Grand Budapest Hot
 
 Leads sem conteúdo adotado: o repositório UFMA (`https://tede2.ufma.br/jspui/handle/tede/3400`) não respondeu na tentativa inicial; o lead PUC-SP (`https://tede2.pucsp.br/handle/handle/4730`) retornou erro de acesso; a entrevista Gazeta (`https://www.gaz.com.br/entrevista-roberio-diogenes-fala-sobre-o-filme-o-agente-secreto/`) retornou 403. A cópia inglesa de 164 páginas de *O Agente Secreto*, localizada por Filmdraft/Carole Kirschner e hospedada em ThinkMovies, teve falhas de leitura/download; não foi usada para atribuir fala brasileira. A página FYC da NEON não forneceu texto de cena na leitura efetuada. Entrevistas, press notes e resumos não substituem as cenas acima.
 
-## Cobertura das 29 perguntas da ficha
+## Cobertura histórica das 29 perguntas da ficha
 
 **H** = cada um dos oito heróis; **P** = cada uma das sete figuras P1–P7; **R** = Rheed nas duas idades. “Criação” abaixo é uma lacuna deliberadamente entregue ao autor, não pedido de nova entrevista. Não existem falas antigas obrigatórias para H. Para P, os fatos do GDD limitam a nova caracterização; uma regra narrativa não demonstra por si só vocabulário ou sintaxe. O modelo do dono em `planos/005-refactor-narracao/modelo-ficha-personagem.md` e o contrato `ficha-de-personagem` exigem sete seções, 48 campos, passado e relações. O insumo é a edição modificada no workspace original, identificada pelo hash abaixo; a cópia do commit-base tem outro hash e não substitui essa edição.
 

@@ -1,79 +1,56 @@
 ---
 name: ficha-de-personagem
-description: Character sheet — use when the user requests a sheet for writing dialogue from existing scenes or an initial idea, or a review of the voice in an existing sheet. Do not use to write complete scenes, plots, or mechanics.
+description: Character sheet — use when creating or revising a character portrait from existing scenes or an initial idea, or reviewing characterization in a sheet. Do not use to write complete scenes, plots, or mechanics.
 ---
 
 # Character sheet
 
-The sheet captures what helps write new lines of dialogue. Coordinate three roles to gather the author's intent, research human-written dialogue, and check the resulting characterization.
+Write a concise, predominantly descriptive portrait that makes the person and their distinctions understandable. Select meaningful personality, motivations, history, and relationships while preserving the game's established facts and attributes. Essential identification can be brief. Keep dialogue examples and formulas for behavior or sentence construction out of the sheet; describe the person in ordinary prose instead.
+
+For a review-only request, read [the reviewer procedure](references/reviewer.md) in full and assess the supplied version without editing it. For creation or revision, follow the Author workflow below.
 
 ## Roles and authority
 
-| Role | Responsibility | Deliverable |
-| --- | --- | --- |
-| Sheet Author | Lead the conversation with the user, formulate research questions, synthesize the voice, and write the sheet. | Complete sheet and responses to review findings. |
-| Researcher | Consult project sources and, when the character lacks dialogue, scenes from other works. | Answers with contextualized evidence, sources, and suggestions separated from facts. |
-| Reviewer | Examine the finished sheet against the sources, the fictional world, and other available voices. | Demonstrable problems, editorial suggestions, and a review result. |
+The Author synthesizes and edits; the Researcher investigates sources; the Reviewer assesses the finished portrait with fresh context, having taken no part in research or drafting. Use distinct agents through the available native delegation mechanism, or reuse separately assigned sessions fulfilling these roles. Researchers and reviewers work read-only except for explicitly assigned reports, and create no further agents.
 
-Take the Author role and enlist the other two through the native subagent mechanism. Use distinct agents for research and review; the Reviewer starts with fresh context, without participating in drafting. They work read-only and return results to the Author, without creating further agents. Only the Author edits the sheet at the requested destination.
+Preserve project authority and confirmation status. External works can inform understanding but establish no facts about the character. Reuse settled user decisions; refer only unresolved creative decisions that materially affect the portrait. If delegation or a necessary source is unavailable, continue independent work and identify the remaining limitation. Self-review cannot stand in for independent review.
 
-The user decides creative intent. Preserve the authority and confirmation status of project sources; external references offer a repertoire of behavior without establishing facts about the fictional world. Resolve conflicts with the user when they depend on an open creative decision.
+## 1. Establish the source basis — Author
 
-If delegation is unavailable, proceed with the research and drafting that are possible and deliver a draft with independent review pending. Do not present a self-review as another agent's assessment. Lack of access to a necessary source also remains explicit in the result.
+Read [the research questions](references/questions.md) and [the portrait scaffold](assets/character-sheet.md) in full before drafting. Identify the requested characters, governing sources, authorized scope of invention, and other sheets available for comparison. For revision, read the current sheets in full and inventory established identity, attributes or competencies, consequential history, and essential relationships before condensing.
 
-## 1. Get to know the character — Author
+Use questions to investigate meaningful gaps, not as a form to complete. Consult existing answers before asking the user; leave irrelevant or unsupported details out rather than inventing peculiarities to fill a format. Respect any scenes reserved for later experiments.
 
-Read [the questions](references/questions.md) and [the template](assets/character-sheet.md) in full before preparing the interview. Use the 29 questions for coverage; reuse answers already present in the material and conversation. Gather the remaining questions about creative intent into one round with the user. For characters without scenes, accept descriptions, intended relationships, and situations imagined by the author.
+*Done when:* each requested character has a source basis, a preservation inventory, and any material gaps or conflicting decisions identified, including the status of their regional reference.
 
-Identify the character, the fictional world, the sources governing their characterization, and the sheets available for comparison. Separate researchable questions from decisions that belong to the user. Preserve any scenes the user has reserved for an experiment, respecting the specified boundaries.
+## 2. Research — Author and Researcher
 
-*Done when:* every question has an available answer, a question referred to research, or a gap to develop as Invention; the facts and creative decisions that constrain elaboration are identified.
+Before assigning research, require the Researcher to read [their procedure](references/researcher.md) in full. Supply the characters, intent, authority order, accessible source locations, preservation inventory, and unresolved questions. Research can be broader than the eventual portrait.
 
-## 2. Get answers from sources — Author and Researcher
+Consume the research before closing the sheets. Resolve unsupported conclusions with source checks or focused follow-up; keep evidence and its limitations in the conversation or assigned record, outside the portrait. Historical research remains provenance, not a collection of lines for future writers to reuse.
 
-Enlist the Researcher and instruct them to read [their procedure](references/researcher.md) in full. Provide:
+*Done when:* each referred question has evidence or an explicit limitation, every regional choice has a confirmed source or researched rationale, and the preservation inventory has been reconciled against the sources.
 
-- the character and characterization intent;
-- project sources, their authority order, and the authorized portions;
-- known answers and remaining researchable questions, linked to sheet fields;
-- situations lacking voice examples.
+## 3. Synthesize the portrait — Author
 
-The Researcher answers from the project's own material first. If the material consists mainly of trait descriptions and few lines of dialogue, they research human-written dialogue in other works before elaboration. Wait for the answers and send follow-up questions when the response contains only adjectives or lines without context. Use research findings to clarify questions with the user when the choice depends on their intent.
+Use the scaffold flexibly. Connect the facts that explain this person's motives, strengths, faults, and relationships; select details for their significance rather than giving every research answer a paragraph. Preserve existing attributes when the game establishes them, without requiring any particular attribute system. Show distinctions through meaningful description, allowing the person to vary with circumstances rather than prescribing a reaction for every situation.
 
-Keep the answers and their sources available for review, outside the sheet. Use the conversation or an existing work record; create a separate report only when requested.
+Every character sheet, in any game, must include a Brazilian regional language reference. Describe it briefly alongside personality, relationships, and context as a basis for voice, not a script of expressions or reactions. Treat the region as a language reference, not a Brazilian birthplace or a cause of personality; avoid regional stereotypes. Preserve a confirmed choice at its agreed level of specificity. Mark a researched but unaccepted choice as an editorial proposal. Characters may share a reference; different ages of one person preserve continuity without invented migration.
 
-*Done when:* every referred question has a supported answer or an identified access limitation; investigated situations have usable examples, and remaining gaps are explicit.
+Keep the portrait readable on its own. Include light provenance that distinguishes established facts, interpretations, authorized invention, and unresolved matters according to the project's terminology. Condensation may remove redundancy and exercises, but must retain consequential facts and the substance of essential relationships. Propose new biography only within the agreed creative latitude, with its status explicit.
 
-## 3. Elaborate and fill in — Author
-
-Fill in the template, retaining its seven sections and 48 fields, plus the past and relationship table. Connect desire, fear, and contradiction in the one-sentence personality summary; use it to guide dialogue choices.
-
-- Preserve quotations from the character with context and origin. Identify lines recalled from memory as such.
-- Fill gaps with plausible information and examples. Label invented additions as **Invention**, including proposed motivations and memories, distinguishing them from established facts.
-- Transform what the references teach into this character's own behavior and dialogue, motivated by their relationships and circumstances. Swapping names or objects in someone else's line is not this elaboration. Keep the works and characters used for inspiration identified in the research; the sheet must work without mentioning them.
-- Give every voice and variation guideline an observable behavior, a usage context, and an example. The text will be read: the manner of speaking must appear in the words and construction of the response.
-- Show differences by conversation partner and emotion without making the predominant trait the only possible reaction. Preserve the established arc; an example of vulnerability does not by itself create redemption or lasting change.
-- Complete the six exercises and the neutral message while preserving the requested situation. When no suitable line from the character exists, write an example labeled **Invention**, without identifying the speaker or adding performance directions.
-- Use qualitative frequencies. Include numbers only when there is a checked sample.
-
-When no other character is available for comparison, record that absence in the corresponding fields. Keep the status of an undefined past or development explicit; treat additions as proposals without turning pending project decisions into facts.
-
-*Done when:* all fields are filled, guidelines include context and examples, exercises fulfill their situations, and invented additions are identified.
+*Done when:* every requested portrait is understandable without the research dossier, its preservation inventory and regional reference are accounted for, and the output meets the descriptive contract above without a fixed field, word, or paragraph quota.
 
 ## 4. Review independently — Reviewer
 
-Enlist a Reviewer who has neither researched nor drafted the sheet, and instruct them to read [their procedure](references/reviewer.md) in full. Provide the complete version, the template, the user's definitions, the fictional world's sources with their confirmation status, the Researcher's answers, and other relevant sheets. Let the submitted text speak for its writing choices without defending them in advance.
+Require the fresh Reviewer to read [their procedure](references/reviewer.md) in full. Provide the complete candidate, user decisions, sources and their status, preservation inventory, research, and relevant comparison sheets. Identify the submitted version; let the text speak without a defense of its choices.
 
-Request the assessment in the format defined by the procedure. The Reviewer checks fidelity, applicability, variation and identity, naturalness, and economy. They judge inventions by compatibility with the character and distinguish demonstrable problems from editorial preferences.
-
-*Done when:* all five checks have results, problems have an excerpt and rationale, and any inability to check a source or comparison has been recorded.
+*Done when:* each review dimension has a result, findings have evidence and locations, and unavailable sources or comparisons are explicit.
 
 ## 5. Correct and deliver — Author
 
-Correct demonstrated problems. When disagreeing with a finding, return the evidence that resolves it to the Reviewer; suggestions based on taste do not require rewriting. Refer only necessary creative decisions that remain open to the user.
+Correct demonstrated problems; return evidence for disputed findings to the same Reviewer. Have the Reviewer check corrections and their effects on the portrait. When a missing source or creative decision prevents resolution, name that dependency instead of repeating unchanged review rounds.
 
-Send corrections to the same Reviewer to check the affected points and their effects on the sheet. Avoid rounds without changes to evidence or text: if a disagreement persists because information or a decision is missing, make it explicit in the delivery without declaring the review complete.
+Deliver the portraits, a short account of preservation and condensation, and the review status tied to the checked version. Distinguish an independently reviewed portrait from a draft awaiting review, human acceptance, and effectiveness in a scene. Run dialogue experiments only when requested.
 
-Deliver the sheet and a short summary of what was developed and checked, with any remaining issues. Reviewing the sheet does not demonstrate its effectiveness in a dialogue scene or replace the project author's judgment; run dialogue experiments only when requested.
-
-*Done when:* all demonstrated problems have been corrected or refuted with evidence checked by the Reviewer, and the delivery distinguishes a reviewed sheet from a draft with unresolved issues.
+*Done when:* every demonstrated problem is corrected or refuted with evidence checked by the Reviewer, or the delivery explicitly identifies the unresolved dependency and draft status.
