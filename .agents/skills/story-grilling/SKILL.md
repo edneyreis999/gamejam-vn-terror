@@ -1,5 +1,5 @@
 ---
-name: grilling-historia
+name: story-grilling
 description: Interview to build the story of an RPG. Human-invoked only; does not write documents or implement anything.
 disable-model-invocation: true
 ---
