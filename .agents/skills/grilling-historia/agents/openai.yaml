@@ -1,0 +1,5 @@
+interface:
+  display_name: "Story Grilling"
+  short_description: "Interview to build the story of an RPG"
+policy:
+  allow_implicit_invocation: false
