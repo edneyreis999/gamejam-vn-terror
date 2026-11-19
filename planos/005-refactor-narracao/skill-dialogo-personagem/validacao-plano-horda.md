@@ -4,7 +4,7 @@ Pedido do usuário: testar Lala contando a Dam o plano de invadir a Horda. **Con
 
 ## Referência e critérios anteriores à geração
 
-Referência: capítulo completo [Plano Infalível](../livro-ghork/04-plano-infalivel.md). O final do capítulo 03 situa a conversa após Ghork e Drull deixarem a mesa do refeitório. O coreto é o encontro marcado para o dia seguinte, não o lugar atual estabelecido pela fonte; as fichas de origem confundem essas localizações.
+Referência: capítulo completo [Plano Infalível](../../../docs/livro-ghork/04-plano-infalivel.md). O final do capítulo 03 situa a conversa após Ghork e Drull deixarem a mesa do refeitório. O coreto é o encontro marcado para o dia seguinte, não o lugar atual estabelecido pela fonte; as fichas de origem confundem essas localizações.
 
 Mantidos os cinco critérios: voz reconhecível, naturalidade e clareza, progressão e continuidade, subtexto e relação, detalhes concretos relevantes. Perda material em qualquer um reprova a tentativa. A comparação será feita depois da entrega do autor; extensão maior, sozinha, não equivale a qualidade maior.
 

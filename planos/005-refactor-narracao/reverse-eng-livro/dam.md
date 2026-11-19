@@ -1,6 +1,6 @@
 # Dam
 
-Ficha de voz a partir dos capítulos de [livro-ghork](../livro-ghork/). As citações foram conferidas no texto; `[...]` indica cortes. As orientações são leituras das cenas, não falas do narrador. **Criação** identifica exemplos e complementos novos, sem torná-los acontecimentos do livro. Não há citações de memória.
+Ficha de voz a partir dos capítulos de [livro-ghork](../../../docs/livro-ghork). As citações foram conferidas no texto; `[...]` indica cortes. As orientações são leituras das cenas, não falas do narrador. **Criação** identifica exemplos e complementos novos, sem torná-los acontecimentos do livro. Não há citações de memória.
 
 ## 1. Identificação
 
@@ -109,14 +109,14 @@ Mensagem neutra do exercício: “Precisamos sair daqui. Há perigo, e eu precis
 | Eraste | Colega que ameaça Ghork. Dam teme que a agressão atinja o grupo: “Cuidado, hein! Vai que ele volta pra terminar o serviço e pega a gente também...” ([cap. 3][c03]). A fala é aos amigos, não a Eraste; não há confronto direto dos dois no recorte. **Criação**, para uma fala dirigida a ele: “Ele já foi embora, Eraste. O que você ainda quer aqui?” A tentativa é encerrar o encontro, sem inventar valentia física. |
 | Sentinelas e comando da Horda | Autoridade perigosa durante a invasão. Diante dos guardas, o disfarce permite trocar hesitação por uma ordem; depois ele é capturado ([cap. 9][c09]). Sobre Cyrus, conta aos amigos: “Eu vi ele de perto. Só de ver a cara dele, já tremi todo de medo” ([cap. 14][c14]). Os relatos de batalhões que não voltaram são apresentados por Dam como o que ouviu dizer; não escrever suas suspeitas como conhecimento privilegiado. |
 
-[c02]: ../livro-ghork/02-pena-lilas.md
-[c03]: ../livro-ghork/03-ultimo-dia.md
-[c04]: ../livro-ghork/04-plano-infalivel.md
-[c08]: ../livro-ghork/08-inspetor-dam.md
-[c09]: ../livro-ghork/09-plano-da-lala.md
-[c11]: ../livro-ghork/11-dia-de-prova.md
-[c14]: ../livro-ghork/14-resenha.md
-[c22]: ../livro-ghork/22-caminhos-e-anseios.md
-[c25]: ../livro-ghork/25-oferta-de-abrigo.md
-[c26]: ../livro-ghork/26-promessa.md
-[c27]: ../livro-ghork/27-vinculos-eternos.md
+[c02]: ../../../docs/livro-ghork/02-pena-lilas.md
+[c03]: ../../../docs/livro-ghork/03-ultimo-dia.md
+[c04]: ../../../docs/livro-ghork/04-plano-infalivel.md
+[c08]: ../../../docs/livro-ghork/08-inspetor-dam.md
+[c09]: ../../../docs/livro-ghork/09-plano-da-lala.md
+[c11]: ../../../docs/livro-ghork/11-dia-de-prova.md
+[c14]: ../../../docs/livro-ghork/14-resenha.md
+[c22]: ../../../docs/livro-ghork/22-caminhos-e-anseios.md
+[c25]: ../../../docs/livro-ghork/25-oferta-de-abrigo.md
+[c26]: ../../../docs/livro-ghork/26-promessa.md
+[c27]: ../../../docs/livro-ghork/27-vinculos-eternos.md
