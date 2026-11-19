@@ -78901,10 +78901,68 @@
                 ]
             },
             {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Scale_ScaleTo",
+                    "Scale_ScaleTo",
+                    {
+                        "PictureID:arrayeval": "[\"60\"]",
+                        "TargetScaleX:str": "45",
+                        "TargetScaleY:str": "45",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Tone_CustomToneBust",
+                    "Tone_CustomToneBust",
+                    {
+                        "PictureID:arrayeval": "[\"60\"]",
+                        "customTone:eval": "[-24,-24,-24,0]",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Scale_ScaleTo",
+                    "Scale_ScaleTo",
+                    {
+                        "PictureID:arrayeval": "[\"63\"]",
+                        "TargetScaleX:str": "50",
+                        "TargetScaleY:str": "50",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Tone_CustomToneBust",
+                    "Tone_CustomToneBust",
+                    {
+                        "PictureID:arrayeval": "[\"63\"]",
+                        "customTone:eval": "[0,0,0,0]",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
                 "code": 117,
                 "indent": 0,
                 "parameters": [
-                    381
+                    384
                 ]
             },
             {
@@ -78915,7 +78973,7 @@
                     0,
                     0,
                     2,
-                    "Gorvak"
+                    "Rheed"
                 ]
             },
             {
@@ -78934,35 +78992,6 @@
                     "Scale_ScaleTo",
                     {
                         "PictureID:arrayeval": "[\"60\"]",
-                        "TargetScaleX:str": "45",
-                        "TargetScaleY:str": "45",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "customTone:eval": "[-24,-24,-24,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
                         "TargetScaleX:str": "50",
                         "TargetScaleY:str": "50",
                         "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
@@ -78977,8 +79006,37 @@
                     "Tone_CustomToneBust",
                     "Tone_CustomToneBust",
                     {
-                        "PictureID:arrayeval": "[\"63\"]",
+                        "PictureID:arrayeval": "[\"60\"]",
                         "customTone:eval": "[0,0,0,0]",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Scale_ScaleTo",
+                    "Scale_ScaleTo",
+                    {
+                        "PictureID:arrayeval": "[\"63\"]",
+                        "TargetScaleX:str": "45",
+                        "TargetScaleY:str": "45",
+                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
+                    }
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "VisuMZ_2_VNPictureBusts",
+                    "Tone_CustomToneBust",
+                    "Tone_CustomToneBust",
+                    {
+                        "PictureID:arrayeval": "[\"63\"]",
+                        "customTone:eval": "[-24,-24,-24,0]",
                         "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
                     }
                 ]
@@ -78987,7 +79045,7 @@
                 "code": 117,
                 "indent": 0,
                 "parameters": [
-                    384
+                    381
                 ]
             },
             {
@@ -78998,7 +79056,7 @@
                     0,
                     0,
                     2,
-                    "Rheed"
+                    "Gorvak"
                 ]
             },
             {
@@ -79006,255 +79064,6 @@
                 "indent": 0,
                 "parameters": [
                     "$[grief.h1.h5.03]"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "TargetScaleX:str": "50",
-                        "TargetScaleY:str": "50",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "customTone:eval": "[0,0,0,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
-                        "TargetScaleX:str": "45",
-                        "TargetScaleY:str": "45",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
-                        "customTone:eval": "[-24,-24,-24,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Gorvak"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "$[grief.h1.h5.04]"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "TargetScaleX:str": "45",
-                        "TargetScaleY:str": "45",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "customTone:eval": "[-24,-24,-24,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
-                        "TargetScaleX:str": "50",
-                        "TargetScaleY:str": "50",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
-                        "customTone:eval": "[0,0,0,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    384
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Rheed"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "$[grief.h1.h5.05]"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "TargetScaleX:str": "50",
-                        "TargetScaleY:str": "50",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"60\"]",
-                        "customTone:eval": "[0,0,0,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Scale_ScaleTo",
-                    "Scale_ScaleTo",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
-                        "TargetScaleX:str": "45",
-                        "TargetScaleY:str": "45",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 0,
-                "parameters": [
-                    "VisuMZ_2_VNPictureBusts",
-                    "Tone_CustomToneBust",
-                    "Tone_CustomToneBust",
-                    {
-                        "PictureID:arrayeval": "[\"63\"]",
-                        "customTone:eval": "[-24,-24,-24,0]",
-                        "Duration:eval": "$gameVariables.value(47) ? 0 : 20"
-                    }
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
-                ]
-            },
-            {
-                "code": 101,
-                "indent": 0,
-                "parameters": [
-                    "",
-                    0,
-                    0,
-                    2,
-                    "Gorvak"
-                ]
-            },
-            {
-                "code": 401,
-                "indent": 0,
-                "parameters": [
-                    "$[grief.h1.h5.06]"
                 ]
             },
             {

@@ -1,10 +1,13 @@
 # ADR-G001 — Autoria das interações dos heróis em mapas próprios
 
-- **Estado:** Aceita em 2026-09-14.
+- **Estado:** Parcialmente substituída; adoção original em 2026-09-14.
+- **Última atualização:** 2026-11-17.
 - **Autoridade:** após avaliar a implementação, o usuário afirmou “Ficou muito mais organizado” e solicitou promover as duas decisões a ADRs gerais.
 - **Aplicação atual:** os oito heróis, em Maps037–044 na branch `experiment/gorvak-interaction-map`. As [task19](../../planos/tasks/eventbridge-minimal-runtime/task-19.md) e [task20](../../planos/tasks/eventbridge-minimal-runtime/task-20.md) registram a expansão e sua evidência técnica sob a [ADR-006 incremental](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-006.md).
 - **Origem:** experimento de mapa da [ADR-005 local](../../planos/tasks/eventbridge-minimal-runtime/adrs/adr-005.md), implementado pela [task17](../../planos/tasks/eventbridge-minimal-runtime/task-17.md).
 - **Decisão complementar:** [ADR-G002 — remoção de atalhos editoriais](adr-g002-remocao-de-atalhos-editoriais.md).
+
+> **Substituição parcial em 2026-11-17:** o [GDDR-010](../gddrs/gddr-010-competencias-nas-apresentacoes-p1.md) substitui somente a proibição de expor competências em P1 H1–H8, na Decisão 4 e na preservação do sigilo da linha ADR-024 abaixo. Cada P1 comunica motivação e contribuição, nomeia e destaca as duas competências canônicas e as demonstra conforme GDD §8.2. Armadilhas e demais superfícies continuam sem nomes. Autoria em mapas próprios, menus, transferências, composição, formação e persistência permanecem; a remoção da identificação recitada em setembro também é preservada. O corpo abaixo conserva as decisões e evidências anteriores. A nova comunicação não foi integrada nem validada no jogo.
 
 ## Contexto
 
@@ -71,3 +74,9 @@ A análise posterior dos outros sete heróis foi incorporada ao [plano increment
 ### Aplicação da task20
 
 Maps041–044/event001 acrescentam Bimbren, Liora, Vaelith e Draska ao mesmo ciclo. Os oito mapas são filhos da Taverna, com autoria local, retorno explícito e enquadramento individual. CE009–012/098–113 foram removidos preservando os slots e as identidades de leitura. A [task20](../../planos/tasks/eventbridge-minimal-runtime/task-20.md) e a [verificação](../../planos/tasks/eventbridge-minimal-runtime/verification.md) registram a validação e os limites de aceite; a promoção original desta ADR não aprova automaticamente o enquadramento dos novos heróis.
+
+## Histórico de manutenção
+
+| Data | Alteração | Fonte |
+| --- | --- | --- |
+| 2026-11-17 | Estado parcialmente substituído somente quanto ao sigilo de competências em P1; corpo, aceite arquitetural e demais substituições preservados | [GDDR-010](../gddrs/gddr-010-competencias-nas-apresentacoes-p1.md), decisão de Edney em 17/11/2026 |

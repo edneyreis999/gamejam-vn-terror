@@ -4,7 +4,7 @@
 **Título internacional para metadados:** The Dryland Drowned\
 **Versão-base:** 4.0, com atualizações incrementais\
 **Data da consolidação-base:** 4 de setembro de 2026\
-**Última atualização:** 15 de novembro de 2026\
+**Última atualização:** 17 de novembro de 2026\
 **Estado:** visão de design consolidada e aprovada\
 **Gênero:** visual novel de horror psicológico e sobrenatural, sem combate\
 **Idiomas jogáveis:** PT-BR e EN-US; inglês como padrão inicial (localização aprovada, implementação pendente)\
@@ -24,6 +24,8 @@ Este GDD consolida as regras mecânicas do antigo documento canônico v0.7, reap
 **Atualização confirmada em 2026-10-16:** a seção 28 e os [GDDRs de fogueiras e vínculos](gddrs/AGENTS.md) registram as pausas nas três rotas, a restrição do recuo voluntário às fogueiras, o novo conteúdo de personagem, o reconhecimento das perdas e os indicadores de conversa inédita. Design aceito, incluindo os esclarecimentos da entrevista da spec. A [spec incremental](../planos/tasks/campfire-hero-bonds/spec.md) e o projeto técnico foram aprovados; o incremento está implementado, com as verificações técnicas e correções registradas na [verificação](../planos/tasks/campfire-hero-bonds/verification.md). Os aceites humanos de texto PT/EN, apresentação e áudio permanecem pendentes.
 
 **Atualização confirmada em 2026-11-14:** a [autoridade de caracterização](narrativa/personagens/README.md) reúne 17 fichas para 16 personagens, incluindo as duas idades de Rheed, conforme o [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md). Substitui as antigas biografias, personalidades, arquétipos e interpretações das relações dos heróis. Preserva nomes, competências, arte existente, trama, pares e regras. Rheed narra suas próprias memórias na praça de Daratrine. A direção está aceita; a [revisão independente do conteúdo](narrativa/personagens/README.md#estado-da-entrega) recebeu **Reviewed** em 14/11/2026. O aceite editorial humano permanece **Pendente**. As novas vozes ainda não estão integradas ao jogo.
+
+**Atualização confirmada em 2026-11-17:** os P1 de H1–H8, apresentações na taverna, passam a mostrar motivação e contribuição para a escolha do grupo, nomeando e destacando exatamente as duas competências canônicas de cada herói. O contrato compartilhado está na seção 14.1; as opções das armadilhas permanecem sem nomes de competências. A decisão está **Confirmada**; redação, integração e avaliação das cenas permanecem **Pendentes**, sem alteração do runtime por esta atualização documental.
 
 Histórico de origem, preservado no Git:
 
@@ -60,7 +62,7 @@ O snapshot v4.0 não continha decisões `Pendentes` nem `Baseline de protótipo`
 
 **Releitura de armadilha em `init-rpg-maker-mz` — Confirmado:** antes de escolher uma abordagem, oferecer **Rever descrição** junto das três opções, como ação auxiliar. Reapresentar somente a descrição do encontro atual na janela inferior e retornar às mesmas escolhas, sem alterar sorteio, progresso ou decisões. Não constitui histórico geral nem desfaz uma abordagem já escolhida (ADR-025).
 
-**Consulta de heróis em `init-rpg-maker-mz` — Atualização confirmada:** remover a ficha acima da cabeça. Hover ou foco pelas setas apenas destaca o herói. A opção Conversar apresenta todas as informações públicas anteriores (nome, pronomes, raça, profissão, resumo e estado) em uma sequência de diálogo com texto inferior e busto, junto da apresentação existente. Não revelar competências internas. Esta decisão substitui a ficha por foco descrita anteriormente para este incremento; as oito conversas foram aceitas pelo usuário para este incremento; revisão criativa final de entrega permanece separada (ADR-024).
+**Consulta de heróis em `init-rpg-maker-mz` — Atualização confirmada:** remover a ficha acima da cabeça. Hover ou foco pelas setas apenas destaca o herói. A opção Conversar apresenta todas as informações públicas anteriores (nome, pronomes, raça, profissão, resumo e estado) em uma sequência de diálogo com texto inferior e busto, junto da apresentação existente. Na decisão original, não revelar competências internas; essa proibição foi substituída somente para P1 em 2026-11-17, conforme a seção 14.1. Esta decisão substitui a ficha por foco descrita anteriormente para este incremento; as oito conversas foram aceitas pelo usuário para este incremento; revisão criativa final de entrega permanece separada (ADR-024).
 
 **Revisão inicial da taverna — Atualização confirmada em `pr3-taverna`:** as falas iniciais dos oito heróis (perfis, conversas, seleção e grupo cheio) são placeholders e ficam **Provisórias**, com revisão narrativa **Pendente**. Esta decisão reabre o aceite editorial anterior dos perfis e conversas; as informações públicas e regras da interação permanecem confirmadas. A integração do PR #3 preserva os textos, sem reescrita. **Apresentação confirmada para esta integração:** preservar as imagens e posições autoradas por Lucas no PR, usando o foco e a continuidade de conversas da implementação atual. As artes do palco e os retratos de diálogo são arquivos separados; este aceite de preservação não declara os assets como arte final. Decisão em `planos/tasks/pr3-taverna/adrs/adr-001.md`.
 
@@ -139,7 +141,7 @@ Este documento define produto e comportamento. Tarefas, responsáveis por cards,
 | Catálogo | 8 encontros por pool; 16 confirmados | Catálogo parcial da v0.4 |
 | Sorteio | Uniforme, sem repetição e persistente por posição revelada | Embaralhamento integral provisório |
 | Final | 3 encontros restantes de cada pool e escolha do medalhão no Conselho | Encontro final exclusivo e outras variantes anteriores |
-| Competências na interface | Nunca nomeadas para o jogador | Etiquetas explícitas do protótipo atual |
+| Competências na interface | P1 nomeia e destaca as duas competências do herói; demais superfícies, incluindo opções das armadilhas, continuam sem nomes (§14.1) | Proibição absoluta de nomeá-las ao jogador, substituída somente para P1 em 2026-11-17 |
 | Trama | Medalhão das Duas Margens conforme este documento | Tesouro indefinido da v0.7 |
 
 ### 1.3 Regra das três abordagens
@@ -154,7 +156,7 @@ Em um mundo fantástico sem humanos, inspirado no interior e nas regiões ribeir
 
 O jogador explora, em qualquer ordem, o Caminho da Igreja e o Parque das Águas Assombradas. Pérola, anã presa em pedra sob o altar da igreja, entrega a metade anã de um mapa. Floraí, elfo aprisionado numa figueira do parque, entrega a metade élfica. Sobrepostas, as duas peças revelam o Vilarejo Partido, onde a segunda metade do medalhão e o registro final de Palotina expõem a verdade.
 
-Cada expedição leva Ivaí e até três heróis. Os encontros apresentam três abordagens plausíveis, associadas internamente a competências ocultas. Uma abordagem funciona quando ao menos um herói presente possui a competência correspondente. Caso contrário, o jogador manda um dos presentes executar uma ação fatal; a morte é permanente.
+Cada expedição leva Ivaí e até três heróis. Os encontros apresentam três abordagens plausíveis, associadas internamente a competências, sem nomeá-las nas opções. As apresentações P1 informam e demonstram as duas competências de cada herói para apoiar a escolha do grupo. Uma abordagem funciona quando ao menos um herói presente possui a competência correspondente. Caso contrário, o jogador manda um dos presentes executar uma ação fatal; a morte é permanente.
 
 Depois do sexto encontro final, os heróis ainda vivos na formação do clímax opinam, mas não votam nem bloqueiam opções. O jogador decide como Ivaí: reunir o medalhão, libertar os amantes e morrer; ou destruí-lo, sobreviver e entregar Floraí, Pérola e suas memórias a Andirá. Não há combate, rolagens, níveis, experiência ou progressão numérica.
 
@@ -169,7 +171,7 @@ Ser responsável por conduzir pessoas competentes por uma expedição cuja prepa
 ### 3.2 Pilares
 
 1. **Preparação com consequências:** escolher quem entra também define quais respostas ficam de fora.
-2. **Leitura sem etiquetas:** profissões, histórias, equipamentos e comportamento sugerem capacidades, mas a interface não nomeia competências.
+2. **Preparação informada e leitura das ações:** P1 apresenta motivação e contribuição, nomeando e destacando as duas competências do herói; nas armadilhas, o jogador interpreta ações sem etiquetas de competência ou indicação de viabilidade (§14.1).
 3. **Perda emocional e estratégica:** cada morte elimina uma pessoa e duas capacidades internas.
 4. **Horror por responsabilidade:** o jogador escolhe a abordagem, a vítima e, ao final, quem pagará pela ruptura do medalhão.
 5. **Omissão interessada:** Ivaí conduz a expedição, mas sua versão é parcial e interessada. Rheed mais velho narra no presente os acontecimentos desse passado.
@@ -244,6 +246,14 @@ As raças possuem conflitos históricos, políticos e culturais. Esses conflitos
 A tecnologia corresponde aproximadamente ao fim do século XIX: transporte animal e fluvial, oficinas, mineração, imprensa e atrações mecânicas. Não existem rádio, automóveis, armas de fogo modernas ou comunicação instantânea.
 
 **Enquadramento da narração — Confirmado em 2026-09-17, esclarecido pelo dono em 2026-11-14:** no presente, Rheed mais velho se tornou o melhor contador de histórias de Daratrine. Durante a **Noite da História**, na praça de Daratrine, ele conta suas próprias memórias da expedição para centenas de criaturas; o jogador também faz parte dessa plateia. É o mesmo Theodor Rheed do livro do dono, em outra história. O contexto não acrescenta avatar, falas ou escolhas da plateia, nem nomeia a cidade da expedição. Os acontecimentos com Rheed jovem pertencem ao passado. A apresentação visual e sonora segue as seções 19.2, 19.4 e 27.2, preservando `Dryland_Coreto`; não se cria mecânica de memória. Fonte: [GDDR-008](gddrs/gddr-008-recriacao-das-vozes-e-continuidade-de-rheed.md).
+
+<a id="perspectiva-memorias"></a>
+
+**Perspectiva das memórias — Confirmado pelo dono em 2026-11-17:** Rheed velho conta suas próprias memórias à plateia no presente, mas a narração dos acontecimentos lembrados deve ser escrita no passado. Ao narrar sua participação jovem, refere-se a si como “eu”. Pode recordar os sentimentos que teve naquela época e comentar o que compreendeu depois. Ao interpretar outras pessoas, limita-se ao que observou, soube ou inferiu, sem acesso onisciente a pensamentos ou segredos.
+
+Os diálogos diretos permanecem situados no momento vivido e podem mencionar naturalmente acontecimentos anteriores; isso não os converte em discurso indireto nem restringe os tempos verbais legítimos dentro de uma fala. Orientações internas de encenação devem estar identificadas separadamente do texto narrado destinado ao jogador.
+
+Este esclarecimento rege a escrita, preservando a ordem das revelações e os contratos de apresentação e alcance das intervenções (§§19.2, 19.4, 27.1, 27.2 e 28.3). Não cria caixas, cenas ou intervenções de Rheed velho nas descrições de armadilhas, nem altera UI, mapas ou `Languages.tsv`. A direção humana está confirmada; esta atualização documental não comprova integração ou eficácia em cena.
 
 ### 4.2 As famílias dos amantes
 
@@ -940,11 +950,19 @@ O efeito bola de neve é intencional como tensão, mas precisa de validação pa
 
 ## 14. Comunicação ao jogador
 
-### 14.1 Regra de invisibilidade das competências
+<a id="141-regra-de-invisibilidade-das-competências"></a>
 
-Os oito nomes de competência existem somente no GDD, nos dados internos, nos testes e na documentação de QA. Eles nunca aparecem na interface destinada ao jogador, nem como etiquetas, estatísticas, filtros, cores legendadas ou explicações de resultado.
+### 14.1 Comunicação das competências e contrato de P1
 
-As bios públicas sugerem capacidades por experiências, equipamento, comportamento e voz; uma profissão criada deve ser plausível, sem herdar obrigatoriamente a antiga. Competências nas fichas e no índice são informação explicitamente interna de autoria e não devem ser copiadas para os cards ou para as falas do jogador. A recriação documental não altera os textos já implementados.
+**Confirmado em 2026-11-17 — [GDDR-010](gddrs/gddr-010-competencias-nas-apresentacoes-p1.md):** a decisão substitui os enunciados anteriores de sigilo somente em P1, incluindo ADR-G001, a cópia mantida da ADR-024 e a preservação desse sigilo em `updated-narrative-copy`. P1 é a apresentação de cada herói H1–H8 na taverna, pela opção Conversar. Cada P1 deve mostrar por que o herói quer participar e o que pode oferecer, dando ao jogador uma base para escolher o grupo. A conversa nomeia **exatamente as duas competências canônicas daquele herói**, com os nomes exatos da matriz das seções 9 e 18 destacados no texto. Não basta inserir os rótulos: a situação descrita ou discutida deve tornar compreensível a aplicação de cada competência segundo a definição operacional da seção 8.2.
+
+A demonstração deve distinguir competências vizinhas. Para Bimbren (H5), **Força** é potência contra peso, resistência ou bloqueio; **Conhecimento** é aplicação de estudo técnico, acadêmico, histórico ou arquitetônico. Escolher terreno firme ou orientar-se pela estrada, por si só, demonstra Sobrevivência, não Conhecimento. Essas fronteiras orientam a redação; não estabelecem um novo incidente na biografia de Bimbren nem uma cena a recitar.
+
+A exceção é restrita aos P1. Cards, bios públicas fora dessas apresentações, demais falas e superfícies continuam sem nomes de competências; não criar estatísticas, filtros ou cores legendadas. Nas bios, experiências, equipamento, comportamento e voz sugerem capacidades; uma profissão criada deve ser plausível, sem herdar obrigatoriamente a antiga. A matriz das fichas e do índice continua sendo referência de autoria, com uso explícito dos nomes autorizado apenas em P1.
+
+Pares, distribuição, competências binárias e regras de sucesso permanecem intactos. A decisão não altera P2/P3, contagem de falas ou contratos de participação, leitura e revelação existentes. **Integração e aceite:** este é um contrato de design confirmado, não a aprovação de uma redação ou de sua eficácia em cena. A escrita e a integração futura em PT/EN, eventos e apresentação exigem seus próprios escopos; esta atualização documental não modifica o jogo. Specs concluídas e seus aceites conservam valor histórico.
+
+**Momento demonstrável para a futura integração:** ler o P1 de um herói e reconhecer sua motivação, contribuição e as duas competências; depois, abrir uma armadilha e observar que suas opções continuam sem nomes. Captura sugerida: trecho do P1 com um nome de competência destacado e a situação que o demonstra. Ainda não há captura nem validação de runtime dessa mudança.
 
 As abordagens usam verbos e ações concretas, omitem competências e não identificam um executor. Depois da escolha, o texto explica causalmente o sucesso ou a falha dentro da cena, sem frases como “competência necessária”, “o grupo possui” ou “o grupo não possui”. Há um único texto por resultado de abordagem; nenhum herói aparece agindo como variante do sucesso.
 
@@ -1174,7 +1192,9 @@ Esses percentuais são referências de QA e balanceamento global, não metas apl
 
 **Piloto Gorvak–Bimbren — Confirmado em 2026-11-15:** a quantidade de falas, linhas e caixas é flexível somente na apresentação de Gorvak na taverna, na conversa A da primeira fogueira do Caminho da Igreja (com intervenção condicional de Bimbren) e na reação automática Gorvak → Bimbren morto. A regra histórica de seis falas acima deixa de limitar a apresentação de Gorvak nesse piloto; os quantitativos das cenas não abrangidas continuam vigentes. Preservar trama, revelações, participantes, condições, consequências e identidades/fronteiras de conclusão de leitura. O [GDDR-009](gddrs/gddr-009-piloto-narrativo-gorvak-bimbren.md) registra o recorte e sua relação com o GDDR-008 e a integração histórica. A execução foi autorizada; prosa, staging, localização e eficácia emocional ainda dependem de entrega e avaliação próprias.
 
-Os nomes das competências na tabela são internos e não compõem as bios públicas. Idade, ofício, personalidade e arquétipo antigos foram retirados como restrições; as novas fichas preservam a identidade visual dos retratos existentes e o mundo sem humanos, distinguindo dados de fonte de criação compatível.
+**Preparação da apresentação de Gorvak — Confirmado em 2026-11-16:** por autorização do dono para a revisão do piloto, Gorvak entregou a Rheed jovem um formulário com sua identificação; Ivaí pode consultá-lo para confirmar o nome de Gorvak. É **Criação adotada para continuidade**, não informação extraída das fontes anteriores. Esse contexto de preparação não cria formulário jogável, item de inventário, sistema de dossiês ou cena obrigatória de entrega. Consultar o formulário não dá a Ivaí conhecimento da história privada de Gorvak nem acrescenta fala de Rheed à apresentação na taverna. O aceite editorial humano das fichas e das cenas permanece **Pendente**.
+
+A tabela é a matriz de autoria: os P1 nomeiam e destacam o par exato de cada herói conforme a seção 14.1; bios fora dessas apresentações continuam sem nomes de competências. Idade, ofício, personalidade e arquétipo antigos foram retirados como restrições; as novas fichas preservam a identidade visual dos retratos existentes e o mundo sem humanos, distinguindo dados de fonte de criação compatível.
 
 | Código | Herói | Competências internas | Ficha corrente |
 |---|---|---|---|
@@ -1427,7 +1447,7 @@ As hipóteses abaixo exigem simulação, playtest ou revisão. Um resultado não
 
 | Hipótese | Evidência necessária |
 |---|---|
-| As pistas implícitas permitem compreender resultados sem etiquetas | Jogadores explicam causalmente sucessos e falhas |
+| As pistas das abordagens permitem compreender seus resultados sem etiquetas de competência, após a informação explícita dos P1 | Jogadores explicam causalmente sucessos e falhas; validação permanece pendente |
 | A arbitrariedade aceita não inviabiliza a experiência | Relatos distinguem tensão intencional de falta de informação |
 | O efeito bola de neve ainda permite decisões significativas | Simulações e campanhas com dois e um herói |
 | Trios de seis competências não dominam todas as escolhas | Comparação dos 56 trios e padrões de seleção |
@@ -1517,7 +1537,7 @@ Afogados em Terra Seca é uma visual novel de horror em PT-BR, para Chrome deskt
 
 Com quatro ou mais sobreviventes, o jogador escolhe três; com até três, todos partem automaticamente. Ivaí não ocupa vaga nem possui competência. Cada herói possui duas das oito competências internas, cada par é único e cada competência aparece duas vezes no elenco.
 
-Cada encontro apresenta três abordagens. Uma competência presente garante sucesso; uma ausente produz falha letal. Competências nunca são nomeadas ao jogador. Na falha, um único clique escolhe a vítima presente, sem confirmação ou desfazer; a morte e o estado são salvos imediatamente.
+Cada encontro apresenta três abordagens. Uma competência presente garante sucesso; uma ausente produz falha letal. Nos P1, cada herói tem suas duas competências canônicas nomeadas, destacadas e demonstradas junto de motivação e contribuição; as armadilhas continuam sem nomes de competências (§14.1). Na falha, um único clique escolhe a vítima presente, sem confirmação ou desfazer; a morte e o estado são salvos imediatamente.
 
 Caminho da Igreja e Parque das Águas Assombradas usam cinco encontros sorteados de pools distintos. O Vilarejo usa os seis restantes. Cada rota tem fogueiras após o segundo e o quarto encontro; somente nelas é oferecido recuo voluntário durante a expedição, mesmo com um ou dois sobreviventes, conforme a seção 28.1. Posições reveladas e mortes persistem; recuar reinicia a rota. As peças anã e élfica do mapa liberam o Vilarejo, onde a outra metade do medalhão e o registro de Palotina revelam os dois resultados.
 
@@ -1617,7 +1637,7 @@ As seções 19.2/19.4 e a [ADR-001 incremental](../planos/tasks/approved-narrati
 
 **Apresentação do narrador — Confirmado em 2026-10-29:** por esclarecimento do usuário, Rheed mais velho em cores aparece sempre no cenário existente `Dryland_Coreto`, substituindo a apresentação sobre preto descrita acima e nas seções 19.2/19.4. O vídeo de entrada antecede sua aparição e encobre a troca da cena anterior para o coreto; após suas falas, o vídeo de saída encobre a troca para a próxima cena. Os vídeos fornecidos na branch `feat/transitions` são parte obrigatória dessas transições, inclusive com movimento reduzido; as demais animações preservam sua preferência. Aplica-se às aparições já autoradas do prólogo, armadilhas, fechamentos de rota, aberturas de fogueira e Conselho, sem acrescentar falas. Ver [spec incremental](../planos/tasks/reed-scene-videos/spec.md).
 
-A exclusão original de narração fora do prólogo foi ampliada, no incremento dos PRs #15–19, somente para os novos trechos narrados das rotas e do Conselho no PR #16. A decisão posterior de 2026-10-16 acrescenta as três aberturas compartilhadas das fogueiras, conforme a [seção 28.3](#fogueiras-perdas) e o [GDDR-003](gddrs/gddr-003-reconhecimento-das-perdas.md). Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação.
+A exclusão original de narração fora do prólogo foi ampliada, no incremento dos PRs #15–19, somente para os novos trechos narrados das rotas e do Conselho no PR #16. A decisão posterior de 2026-10-16 acrescenta as três aberturas compartilhadas das fogueiras, conforme a [seção 28.3](#fogueiras-perdas) e o [GDDR-003](gddrs/gddr-003-reconhecimento-das-perdas.md). Isso não converte automaticamente todas as descrições do jogo em intervenções de Rheed. Armadilhas, finais e epílogos mantêm suas regras próprias de apresentação. Para a escrita do relato, ver a [perspectiva das memórias, §4.1](#perspectiva-memorias).
 
 ### 27.3 Leitura, entrega e limites
 

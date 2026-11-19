@@ -4,7 +4,7 @@ Este acervo reúne decisões gerais aceitas para o jogo. As ADRs locais das spec
 
 | ADR | Decisão | Estado | Data |
 | --- | --- | --- | --- |
-| [ADR-G001](adr-g001-mapas-de-interacao-dos-herois.md) | Autoria das interações dos heróis em mapas próprios | Aceita; implementada nos oito heróis | 2026-09-14 |
+| [ADR-G001](adr-g001-mapas-de-interacao-dos-herois.md) | Autoria das interações dos heróis em mapas próprios | Parcialmente substituída pelo [GDDR-010](../gddrs/gddr-010-competencias-nas-apresentacoes-p1.md) apenas no sigilo em P1; arquitetura implementada nos oito heróis preservada | 2026-09-14 |
 | [ADR-G003](adr-g003-excluir-testes-de-zoom-nativo.md) | Exclusão de testes de zoom nativo da matriz de QA | Aceita | 2026-09-14 |
 | [ADR-G002](adr-g002-remocao-de-atalhos-editoriais.md) | Remoção de eventos de mapa que servem apenas como atalhos editoriais | Aceita; aplicada aos 42 eventos inventariados | 2026-09-14 |
 | [ADR-G004](adr-g004-autonomia-do-harness-na-execucao-de-tarefas.md) | Autonomia para reorganizar a execução preservando produto, provas e aceite | Aceita | 2026-09-18 |

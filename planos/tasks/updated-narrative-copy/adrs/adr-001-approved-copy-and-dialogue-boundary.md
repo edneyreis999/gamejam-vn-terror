@@ -1,5 +1,11 @@
 # ADR-001 — Adopt updated copy and remove the recited hero profile
 
+## Current partial supersession — 2026-11-17
+
+**Partially superseded by [GDDR-010](../../../../docs/gddrs/gddr-010-competencias-nas-apresentacoes-p1.md).** The replacement applies only to the hidden-competency requirement in Decision 2 and its preservation in the first item of Scoped supersession, for P1 introductions of H1–H8. Each P1 communicates motivation and contribution, names and highlights the hero's exact two canonical competencies, and demonstrates their application under GDD §8.2. Trap options, descriptions and results, and other surfaces, retain their naming limits.
+
+The removal of recited identification and third-person profiles, ordinary speaker names, party menus, portraits, formation rules, trap copy and sequence, six causal replacements, and two memorial inscriptions remain under their existing contracts. The original body, adoption, technical approval and evidence below are preserved verbatim; this notice does not reopen the completed increment or declare new dialogue integrated or validated.
+
 Status: accepted **product** decision on 2026-09-25, D-001–004. The complete technical design and verification were subsequently approved on 2026-09-25 under D-006 (“aprovo”), recorded in [spec.md](../spec.md). No implementation claim.
 
 ## Context and evidence
@@ -29,3 +35,9 @@ Maintained older ADRs receive dated backlinks only; their historical bodies and 
 ## Consequences
 
 The integration includes native message-list restructuring for the longer hero presentations and removal of obsolete profile envelopes. Therefore technical approval and candidate lifecycle/fit evidence remain separate from product approval. There is no new save migration, revised competency mapping, narrator assignment, victim rule or asset requirement. The [verification contract](../verification.md) preserves representative real-player journeys and the current project evidence policy.
+
+## Maintenance history
+
+| Date | Change | Source |
+| --- | --- | --- |
+| 2026-11-17 | Added reciprocal partial-supersession notice for competency naming only in P1 H1–H8; original body, approvals, evidence and other scopes preserved | [GDDR-010](../../../../docs/gddrs/gddr-010-competencias-nas-apresentacoes-p1.md), Edney's decision in session sess-7d2e638ca0d5d7a4, message VovuCLsMlkAZhYjZ, 2026-11-17T14:12:50.431575Z |

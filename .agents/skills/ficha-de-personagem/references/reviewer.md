@@ -1,45 +1,39 @@
 # Reviewer procedure
 
-Receive the complete sheet, the template, the user's definitions, the fictional world's sources with their confirmation status, the Researcher's response, and other available sheets. Work read-only, with context separate from drafting. Return the assessment to the Author, who is responsible for edits.
+Receive the complete candidate, user decisions, source authority and status, preservation inventory, research, and relevant comparison sheets. Work with fresh context, independently of research and drafting. Only the Author edits the product.
 
-## 1. Check the sheet
+## 1. Read and check
 
-Read the sheet and template in full. Consult the cited sources to verify claims, without treating the Researcher's response as a substitute for the source. Respect the project's indicated authority order. Assess the five dimensions:
+Read the portraits in full, then verify consequential claims in the cited sources. The research report is a source locator, not a replacement for available primary evidence. Apply the following dimensions to the descriptive contract in SKILL.md:
 
-| Dimension | What to check |
+| Dimension | Check |
 | --- | --- |
-| Fidelity | Are quotations and attributions correct, with lines recalled from memory distinguished from verified ones? Do counts have a sample? Do events, relationships, and the character's arc respect the fictional world and its confirmation status? Are inventions compatible and identified? Look for contradictions between fields and for biography or motivations improperly imported from references. |
-| Applicability | Is the template complete? Do guidelines offer observable behavior, context, and an example that enable writing a new line? Does each exercise fulfill the requested situation, and does the neutral message retain its meaning? A collection of quotations without writing guidance is insufficient. |
-| Variation and identity | Does the voice change with the other speaker and emotion without always relying on the same reaction? Compare exercises with those in other sheets for equivalent situations, hiding names and performance directions. Does the difference appear in how characters ask, challenge, or end an exchange, beyond catchphrases and trade vocabulary? Preserve legitimate differences between characters. |
-| Naturalness | Do examples respond to the other speaker and to what is happening? Identify lines that explain the character's own personality or lesson without a conversational reason, recurring aphorisms, and mechanically repeated constructions. Check whether adaptations make sense in the new context, including when the reference was consulted in another language. |
-| Economy | Does each explanation and example add a useful choice? Flag repetition that can be removed without losing coverage. Do not use sheet length or quotation count as a quality score. |
+| Fidelity and preservation | Established identity, attributes, consequential events, relationships, knowledge, and chronology survive condensation. Origins and unresolved matters retain their status; external inspiration has not become biography. Verify each regional reference against the synthesis contract in SKILL.md and its evidence, including proposal status and continuity across life phases. |
+| Comprehensibility | The portrait makes sense without the investigation or the author's defense. Connections between motives, experiences, and relationships are clear. |
+| Distinction and range | The person differs meaningfully from available peers, with room for responses suited to circumstances. Description does not reduce them to a single trait or dictate a behavioral routine. |
+| Descriptive form | The result follows the user's concise prose direction. Flag dialogue examples, reaction tables, mandatory vocabulary, sentence formulas, and field-by-field expansion disguised as paragraphs. |
+| Economy | Each detail adds understanding or preserves a consequential fact. Repetition and dispensable prescriptions are removed without losing essentials. Length alone is not a quality score. |
 
-Judge additions labeled **Invention** by coherence and usefulness. An invented event's absence from the sources does not automatically make it an error; the problem is contradicting established material or presenting invention as confirmed fact. Distinguish an intentional character contradiction explained by the situation from an accidental contradiction in the sheet.
+Judge authorized invention by compatibility and its stated status; absence from an older source is not by itself an error. Distinguish intentional personal contradictions from accidental contradictions between claims. If a source or peer comparison is unavailable, identify exactly what remains unchecked.
 
-When no other sheets exist, record that distinction among cast voices could not be assessed; check internal variation. If a necessary source is inaccessible, identify the claim that remains unchecked. A comparison with names hidden is editorial inspection; do not present it as an independent blind test if the same reader knows the examples.
+*Done when:* all dimensions and preservation items have been checked, and findings or limitations have locations and reasons.
 
-*Done when:* the five dimensions and template structure have been examined, and any problems or limitations found have a location and reason.
+## 2. Report the assessment
 
-## 2. Issue the assessment
+Give a result for every dimension and list findings with their location, type, evidence, and resolution condition. A **problem** demonstrably violates the user direction, source contract, or review criteria; a **suggestion** is an editorial preference. Identify a missing creative decision without deciding it for the user.
 
-Report the result for each dimension and use this table for findings:
+Close with the version checked and one result:
 
-| Field or excerpt | Type | Evidence and reason | Resolution condition |
-| --- | --- | --- | --- |
-| Location in the sheet | Problem or suggestion | Source contradicting the claim, examples demonstrating the problem, or an identified editorial preference | What needs to become coherent, verifiable, or usable, without imposing a replacement line |
+- **Pending:** a necessary source or decision prevents completion; identify the affected claim.
+- **Revise:** available evidence demonstrates problems the Author can repair.
+- **Reviewed:** necessary sources were checked and no demonstrated problem remains open. Record optional suggestions and inapplicable comparisons separately.
 
-Classify as a **problem** a violation of the user's definitions, sources, or criteria above that can be demonstrated in the text. Classify an alternative based on taste as a **suggestion**. When a correction depends on the user's creative decision, identify the missing decision without making it for them.
+This assessment does not establish human acceptance or effectiveness in dialogue.
 
-Close with a result:
-
-- **Pending:** a necessary source or creative decision prevents completing part of the review; identify that part.
-- **Revise:** the necessary information is available, and there are demonstrated problems the Author can correct.
-- **Reviewed:** necessary sources have been checked, and no demonstrated problem remains open. Record inapplicable comparisons and optional suggestions separately.
-
-*Done when:* the Author has received the result, the problems requiring a response, and the suggestions they may accept or decline.
+*Done when:* the Author has the result, actionable findings, and limitations tied to the submitted version.
 
 ## 3. Check corrections
 
-When receiving a new version or a challenge to a finding, check affected points and their effects on other fields. Accept a rebuttal when the evidence resolves the finding. Reopen another point only if the change or new evidence demonstrates a problem; do not prolong the review over stylistic preference.
+Check affected passages and consequences for the rest of the portrait. Resolve a rebuttal when evidence answers the finding; reopen another point only when changed text or new evidence demonstrates a problem. Reassess the complete corrected portrait for coherence before closing.
 
-*Done when:* each previous finding is resolved or explicitly open, and the result has been updated based on the checked version.
+*Done when:* each prior finding is resolved or explicitly open, and the result identifies the version actually checked.
