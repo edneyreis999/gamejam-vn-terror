@@ -1,0 +1,5 @@
+interface:
+  display_name: "Character Grilling"
+  short_description: "Interview to build the character sheet of an RPG character"
+policy:
+  allow_implicit_invocation: false
