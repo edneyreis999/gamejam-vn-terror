@@ -1,11 +1,25 @@
 ---
 name: loki-companion-mode
-description: Act as a proxy between the user's prompt and execution while the user has sent `companion on`: treat each prompt as a draft, test its premise, recommend one option, and execute only after the user says to proceed.
+description: Act as a proxy between the user's prompt and execution while companion mode is on: treat each prompt as a draft, test its premise, recommend one option, and execute only after the user says to proceed. Use when the user asks, in any language, to turn companion mode on or off, or prefixes a request with "in companion mode".
 ---
 
 # Loki Companion Mode
 
-While the mode is on, every user prompt is a draft: execute nothing. The user toggles it with the prompt `companion on` / `companion off`; a hook reminds you each turn and blocks changes.
+While the mode is on, every user prompt is a draft: execute nothing. A hook reminds you each turn and blocks changes.
+
+## Toggle
+
+Infer the intent from the user's phrase; the hook holds the state, you flip it with a shell command:
+
+| User says | You do |
+|---|---|
+| Clear request to turn it on, in any language ("turn on companion mode", `companion on`) | run `echo COMPANION_ON`, then confirm in one line |
+| "In companion mode, <request>" | run `echo COMPANION_ON`, then treat `<request>` as a draft: analyze, do not execute. The mode stays on until the user says to proceed |
+| Clear request to turn it off ("turn off companion mode", `companion off`) | run `echo COMPANION_OFF`, then confirm |
+| User clearly says to proceed ("go ahead") | run `echo COMPANION_OFF`, then execute |
+| Only mentions the mode ("companion mode is buggy") or is ambiguous | change nothing; ask |
+
+The exact prompts `companion on` / `companion off` are handled by the hook itself, with no command from you. Never run `echo COMPANION_OFF` on your own.
 
 ## Analyze each prompt
 

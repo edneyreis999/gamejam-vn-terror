@@ -70,3 +70,6 @@ dist/
 /packages/coreto-design-system/backups/
 
 # Agent-local files are filtered by .agents/.gitignore and .claude/.gitignore.
+
+# AgentOps session artifacts
+.agents/

@@ -67,7 +67,7 @@ Keep the setup-owned instruction and profile blocks synchronized in root `AGENTS
 
 ## Companion mode
 
-Use `loki-companion-mode` only after the user sends the whole prompt `companion on`; `companion off` ends it. While it is on, every prompt is a draft: test its premise, recommend one option and execute nothing until the user says to proceed. A project hook (`.claude/skills/loki-companion-mode/scripts/hook.mjs`, registered in `.claude/settings.json` and `.codex/hooks.json`) injects the reminder and blocks changes. During an authorized execution, answer a passing question without pausing that execution.
+Use `loki-companion-mode` when the user asks to turn it on or off in any wording or language (e.g. `companion on`, "turn on companion mode", "in companion mode, do X"); the skill defines the inference and the toggle commands (local adjustment to the Loki block, 2026-11-20). While it is on, every prompt is a draft: test its premise, recommend one option and execute nothing until the user says to proceed. A project hook (`.claude/skills/loki-companion-mode/scripts/hook.mjs`, registered in `.claude/settings.json` and `.codex/hooks.json`) injects the reminder and blocks changes. During an authorized execution, answer a passing question without pausing that execution.
 
 ## Optional execution metrics
 
