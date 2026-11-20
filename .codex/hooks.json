@@ -24,6 +24,31 @@
                     }
                 ]
             }
+        ],
+        "UserPromptSubmit": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node \".claude/skills/loki-companion-mode/scripts/hook.mjs\"",
+                        "timeout": 5,
+                        "statusMessage": "Companion mode"
+                    }
+                ]
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "Bash|apply_patch|Edit|Write",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node \".claude/skills/loki-companion-mode/scripts/hook.mjs\"",
+                        "timeout": 5,
+                        "statusMessage": "Companion gate"
+                    }
+                ]
+            }
         ]
     }
 }

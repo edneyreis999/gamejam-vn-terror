@@ -1,5 +1,5 @@
 interface:
   display_name: "Loki Companion Mode"
-  short_description: "Skeptical, read-only opinions until consensus"
+  short_description: "Proxy that reviews each prompt and executes only after you say to proceed"
 policy:
   allow_implicit_invocation: true
