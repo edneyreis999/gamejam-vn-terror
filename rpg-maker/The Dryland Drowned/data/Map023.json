@@ -2541,6 +2541,35 @@
               "indent": 0,
               "parameters": [
                 12,
+                "$gameScreen.picture(1)?.name() !== 'Dryland_Council'"
+              ]
+            },
+            {
+              "code": 231,
+              "indent": 1,
+              "parameters": [
+                1,
+                "Dryland_Council",
+                1,
+                0,
+                640,
+                360,
+                76.55502392344498,
+                76.55502392344498,
+                255,
+                0
+              ]
+            },
+            {
+              "code": 412,
+              "indent": 0,
+              "parameters": []
+            },
+            {
+              "code": 111,
+              "indent": 0,
+              "parameters": [
+                12,
                 "!['council.01','council.03','council.challenge','council.solo'].includes($gameVariables.value(56))"
               ]
             },
@@ -2851,7 +2880,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -2882,15 +2911,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "Play",
-                "Play",
-                {
-                  "movie": "reedEntranceAlpha"
-                }
+                386
               ]
             },
             {
@@ -2910,13 +2934,6 @@
               "indent": 3,
               "parameters": [
                 337
-              ]
-            },
-            {
-              "code": 235,
-              "indent": 3,
-              "parameters": [
-                1
               ]
             },
             {
@@ -3042,22 +3059,6 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Coreto",
-                1,
-                0,
-                640,
-                360,
-                80,
-                80,
-                255,
-                0
-              ]
-            },
-            {
               "code": 117,
               "indent": 3,
               "parameters": [
@@ -3077,13 +3078,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitEnd",
-                "WaitEnd",
-                {}
+                387
               ]
             },
             {
@@ -3099,32 +3097,9 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                60,
-                "Reed final",
-                0,
-                0,
-                0,
-                0,
-                66.66666666666667,
-                66.66666666666667,
-                255,
-                0
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
-            },
-            {
-              "code": 117,
-              "indent": 2,
-              "parameters": [
-                381
-              ]
             },
             {
               "code": 101,
@@ -3331,7 +3306,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "$gameScreen.picture(60)?.name() === 'Reed final'"
+                "$gameScreen.picture(60)?.name() === 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -3342,7 +3317,7 @@
                 "Play",
                 "Play",
                 {
-                  "movie": "reedTransition"
+                  "movie": "rheedExitOverlay"
                 }
               ]
             },
@@ -3351,34 +3326,6 @@
               "indent": 3,
               "parameters": [
                 60
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitUntil",
-                "WaitUntil",
-                {
-                  "seconds": "2.9"
-                }
-              ]
-            },
-            {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Council",
-                1,
-                0,
-                640,
-                360,
-                76.55502392344498,
-                76.55502392344498,
-                255,
-                0
               ]
             },
             {
@@ -3483,22 +3430,6 @@
                 {
                   "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
                 }
-              ]
-            },
-            {
-              "code": 231,
-              "indent": 2,
-              "parameters": [
-                1,
-                "Dryland_Council",
-                1,
-                0,
-                640,
-                360,
-                76.55502392344498,
-                76.55502392344498,
-                255,
-                0
               ]
             },
             {
@@ -3804,7 +3735,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -3835,15 +3766,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "Play",
-                "Play",
-                {
-                  "movie": "reedEntranceAlpha"
-                }
+                386
               ]
             },
             {
@@ -3863,13 +3789,6 @@
               "indent": 3,
               "parameters": [
                 337
-              ]
-            },
-            {
-              "code": 235,
-              "indent": 3,
-              "parameters": [
-                1
               ]
             },
             {
@@ -3995,22 +3914,6 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Coreto",
-                1,
-                0,
-                640,
-                360,
-                80,
-                80,
-                255,
-                0
-              ]
-            },
-            {
               "code": 117,
               "indent": 3,
               "parameters": [
@@ -4030,13 +3933,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitEnd",
-                "WaitEnd",
-                {}
+                387
               ]
             },
             {
@@ -4052,32 +3952,9 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                60,
-                "Reed final",
-                0,
-                0,
-                0,
-                0,
-                66.66666666666667,
-                66.66666666666667,
-                255,
-                0
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
-            },
-            {
-              "code": 117,
-              "indent": 2,
-              "parameters": [
-                381
-              ]
             },
             {
               "code": 101,
@@ -4284,7 +4161,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -4315,15 +4192,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "Play",
-                "Play",
-                {
-                  "movie": "reedEntranceAlpha"
-                }
+                386
               ]
             },
             {
@@ -4343,13 +4215,6 @@
               "indent": 3,
               "parameters": [
                 337
-              ]
-            },
-            {
-              "code": 235,
-              "indent": 3,
-              "parameters": [
-                1
               ]
             },
             {
@@ -4475,22 +4340,6 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Coreto",
-                1,
-                0,
-                640,
-                360,
-                80,
-                80,
-                255,
-                0
-              ]
-            },
-            {
               "code": 117,
               "indent": 3,
               "parameters": [
@@ -4510,13 +4359,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitEnd",
-                "WaitEnd",
-                {}
+                387
               ]
             },
             {
@@ -4532,32 +4378,9 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                60,
-                "Reed final",
-                0,
-                0,
-                0,
-                0,
-                66.66666666666667,
-                66.66666666666667,
-                255,
-                0
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
-            },
-            {
-              "code": 117,
-              "indent": 2,
-              "parameters": [
-                381
-              ]
             },
             {
               "code": 101,
@@ -4764,7 +4587,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Reed final'"
+                "!$gameScreen.picture(60) || $gameScreen.picture(60).name() !== 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -4795,15 +4618,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "Play",
-                "Play",
-                {
-                  "movie": "reedEntranceAlpha"
-                }
+                386
               ]
             },
             {
@@ -4823,13 +4641,6 @@
               "indent": 3,
               "parameters": [
                 337
-              ]
-            },
-            {
-              "code": 235,
-              "indent": 3,
-              "parameters": [
-                1
               ]
             },
             {
@@ -4955,22 +4766,6 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Coreto",
-                1,
-                0,
-                640,
-                360,
-                80,
-                80,
-                255,
-                0
-              ]
-            },
-            {
               "code": 117,
               "indent": 3,
               "parameters": [
@@ -4990,13 +4785,10 @@
               ]
             },
             {
-              "code": 357,
+              "code": 117,
               "indent": 3,
               "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitEnd",
-                "WaitEnd",
-                {}
+                387
               ]
             },
             {
@@ -5012,32 +4804,9 @@
               ]
             },
             {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                60,
-                "Reed final",
-                0,
-                0,
-                0,
-                0,
-                66.66666666666667,
-                66.66666666666667,
-                255,
-                0
-              ]
-            },
-            {
               "code": 412,
               "indent": 2,
               "parameters": []
-            },
-            {
-              "code": 117,
-              "indent": 2,
-              "parameters": [
-                381
-              ]
             },
             {
               "code": 101,
@@ -5244,7 +5013,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "$gameScreen.picture(60)?.name() === 'Reed final'"
+                "$gameScreen.picture(60)?.name() === 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -5255,7 +5024,7 @@
                 "Play",
                 "Play",
                 {
-                  "movie": "reedTransition"
+                  "movie": "rheedExitOverlay"
                 }
               ]
             },
@@ -5264,34 +5033,6 @@
               "indent": 3,
               "parameters": [
                 60
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitUntil",
-                "WaitUntil",
-                {
-                  "seconds": "2.9"
-                }
-              ]
-            },
-            {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Council",
-                1,
-                0,
-                640,
-                360,
-                76.55502392344498,
-                76.55502392344498,
-                255,
-                0
               ]
             },
             {
@@ -5396,22 +5137,6 @@
                 {
                   "PictureID:arraynum": "[\"60\", \"61\", \"62\", \"63\", \"64\", \"65\", \"66\", \"67\", \"68\", \"69\", \"70\"]"
                 }
-              ]
-            },
-            {
-              "code": 231,
-              "indent": 2,
-              "parameters": [
-                1,
-                "Dryland_Council",
-                1,
-                0,
-                640,
-                360,
-                76.55502392344498,
-                76.55502392344498,
-                255,
-                0
               ]
             },
             {
@@ -8409,7 +8134,7 @@
               "indent": 2,
               "parameters": [
                 12,
-                "$gameScreen.picture(60)?.name() === 'Reed final'"
+                "$gameScreen.picture(60)?.name() === 'Dryland_RheedRasgo'"
               ]
             },
             {
@@ -8420,7 +8145,7 @@
                 "Play",
                 "Play",
                 {
-                  "movie": "reedTransition"
+                  "movie": "rheedExitOverlay"
                 }
               ]
             },
@@ -8429,34 +8154,6 @@
               "indent": 3,
               "parameters": [
                 60
-              ]
-            },
-            {
-              "code": 357,
-              "indent": 3,
-              "parameters": [
-                "Dryland_1_AlphaMovie",
-                "WaitUntil",
-                "WaitUntil",
-                {
-                  "seconds": "2.9"
-                }
-              ]
-            },
-            {
-              "code": 231,
-              "indent": 3,
-              "parameters": [
-                1,
-                "Dryland_Council",
-                1,
-                0,
-                640,
-                360,
-                76.55502392344498,
-                76.55502392344498,
-                255,
-                0
               ]
             },
             {

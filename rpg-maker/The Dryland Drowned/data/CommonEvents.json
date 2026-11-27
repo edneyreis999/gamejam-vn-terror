@@ -10807,86 +10807,6 @@
                 ]
             },
             {
-                "code": 111,
-                "indent": 1,
-                "parameters": [
-                    12,
-                    "$gameVariables.value(31) === 'camp_arrival' && $gameMap.mapId() === 47"
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "Dryland_1_SceneAudio",
-                    "Prepare",
-                    "Prepare",
-                    {
-                        "bgm": "Dryland_Opening_TheWell",
-                        "bgs": "People2"
-                    }
-                ]
-            },
-            {
-                "code": 242,
-                "indent": 2,
-                "parameters": [
-                    1
-                ]
-            },
-            {
-                "code": 246,
-                "indent": 2,
-                "parameters": [
-                    1
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "Play",
-                    "Play",
-                    {
-                        "movie": "reedEntranceAlpha"
-                    }
-                ]
-            },
-            {
-                "code": 357,
-                "indent": 2,
-                "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "WaitUntil",
-                    "WaitUntil",
-                    {
-                        "seconds": "2.2"
-                    }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 2,
-                "parameters": [
-                    1,
-                    "Dryland_Coreto",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 412,
-                "indent": 1,
-                "parameters": []
-            },
-            {
                 "code": 201,
                 "indent": 1,
                 "parameters": [
@@ -74910,15 +74830,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "Play",
-                    "Play",
-                    {
-                        "movie": "reedEntranceAlpha"
-                    }
+                    386
                 ]
             },
             {
@@ -74931,13 +74846,6 @@
                     {
                         "seconds": "2.2"
                     }
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    1
                 ]
             },
             {
@@ -75063,22 +74971,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Coreto",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 117,
                 "indent": 0,
                 "parameters": [
@@ -75098,13 +74990,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "WaitEnd",
-                    "WaitEnd",
-                    {}
+                    387
                 ]
             },
             {
@@ -75117,29 +75006,6 @@
                     {
                         "variable": "47"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    60,
-                    "Reed final",
-                    0,
-                    0,
-                    0,
-                    0,
-                    66.66666666666667,
-                    66.66666666666667,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
                 ]
             },
             {
@@ -75195,7 +75061,7 @@
                     "Play",
                     "Play",
                     {
-                        "movie": "reedTransition"
+                        "movie": "rheedExitOverlay"
                     }
                 ]
             },
@@ -75216,22 +75082,6 @@
                     {
                         "seconds": "2.9"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Taverna",
-                    1,
-                    0,
-                    640,
-                    360,
-                    100,
-                    100,
-                    255,
-                    0
                 ]
             },
             {
@@ -75278,6 +75128,22 @@
                     "WaitEnd",
                     "WaitEnd",
                     {}
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    1,
+                    "Dryland_Taverna",
+                    1,
+                    0,
+                    640,
+                    360,
+                    100,
+                    100,
+                    255,
+                    0
                 ]
             },
             {
@@ -75399,15 +75265,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "Play",
-                    "Play",
-                    {
-                        "movie": "reedEntranceAlpha"
-                    }
+                    386
                 ]
             },
             {
@@ -75420,13 +75281,6 @@
                     {
                         "seconds": "2.2"
                     }
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
-                    1
                 ]
             },
             {
@@ -75552,22 +75406,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Coreto",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 117,
                 "indent": 0,
                 "parameters": [
@@ -75587,13 +75425,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "WaitEnd",
-                    "WaitEnd",
-                    {}
+                    387
                 ]
             },
             {
@@ -75606,29 +75441,6 @@
                     {
                         "variable": "47"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    60,
-                    "Reed final",
-                    0,
-                    0,
-                    0,
-                    0,
-                    66.66666666666667,
-                    66.66666666666667,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
                 ]
             },
             {
@@ -75684,7 +75496,7 @@
                     "Play",
                     "Play",
                     {
-                        "movie": "reedTransition"
+                        "movie": "rheedExitOverlay"
                     }
                 ]
             },
@@ -75705,22 +75517,6 @@
                     {
                         "seconds": "2.9"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Taverna",
-                    1,
-                    0,
-                    640,
-                    360,
-                    100,
-                    100,
-                    255,
-                    0
                 ]
             },
             {
@@ -75767,6 +75563,22 @@
                     "WaitEnd",
                     "WaitEnd",
                     {}
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    1,
+                    "Dryland_Taverna",
+                    1,
+                    0,
+                    640,
+                    360,
+                    100,
+                    100,
+                    255,
+                    0
                 ]
             },
             {
@@ -76305,16 +76117,8 @@
                 ]
             },
             {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "!$gameScreen.picture(1) || $gameScreen.picture(1).name() !== 'Dryland_Coreto'"
-                ]
-            },
-            {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "Dryland_1_SceneAudio",
                     "Prepare",
@@ -76327,33 +76131,28 @@
             },
             {
                 "code": 242,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 246,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     1
                 ]
             },
             {
-                "code": 357,
-                "indent": 1,
+                "code": 117,
+                "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "Play",
-                    "Play",
-                    {
-                        "movie": "reedEntranceAlpha"
-                    }
+                    386
                 ]
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "WaitUntil",
@@ -76362,11 +76161,6 @@
                         "seconds": "2.2"
                     }
                 ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
             },
             {
                 "code": 235,
@@ -76652,13 +76446,6 @@
                 "code": 235,
                 "indent": 0,
                 "parameters": [
-                    1
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
                     2
                 ]
             },
@@ -76778,22 +76565,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Coreto",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 117,
                 "indent": 0,
                 "parameters": [
@@ -76813,13 +76584,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "WaitEnd",
-                    "WaitEnd",
-                    {}
+                    387
                 ]
             },
             {
@@ -76832,29 +76600,6 @@
                     {
                         "variable": "47"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    60,
-                    "Reed final",
-                    0,
-                    0,
-                    0,
-                    0,
-                    66.66666666666667,
-                    66.66666666666667,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
                 ]
             },
             {
@@ -76910,7 +76655,7 @@
                     "Play",
                     "Play",
                     {
-                        "movie": "reedTransition"
+                        "movie": "rheedExitOverlay"
                     }
                 ]
             },
@@ -76931,22 +76676,6 @@
                     {
                         "seconds": "2.9"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Camp",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
                 ]
             },
             {
@@ -77087,16 +76816,8 @@
                 ]
             },
             {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "!$gameScreen.picture(1) || $gameScreen.picture(1).name() !== 'Dryland_Coreto'"
-                ]
-            },
-            {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "Dryland_1_SceneAudio",
                     "Prepare",
@@ -77109,33 +76830,28 @@
             },
             {
                 "code": 242,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 246,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     1
                 ]
             },
             {
-                "code": 357,
-                "indent": 1,
+                "code": 117,
+                "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "Play",
-                    "Play",
-                    {
-                        "movie": "reedEntranceAlpha"
-                    }
+                    386
                 ]
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "WaitUntil",
@@ -77144,11 +76860,6 @@
                         "seconds": "2.2"
                     }
                 ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
             },
             {
                 "code": 235,
@@ -77434,13 +77145,6 @@
                 "code": 235,
                 "indent": 0,
                 "parameters": [
-                    1
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
                     2
                 ]
             },
@@ -77560,22 +77264,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Coreto",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 117,
                 "indent": 0,
                 "parameters": [
@@ -77595,13 +77283,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "WaitEnd",
-                    "WaitEnd",
-                    {}
+                    387
                 ]
             },
             {
@@ -77614,29 +77299,6 @@
                     {
                         "variable": "47"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    60,
-                    "Reed final",
-                    0,
-                    0,
-                    0,
-                    0,
-                    66.66666666666667,
-                    66.66666666666667,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
                 ]
             },
             {
@@ -77692,7 +77354,7 @@
                     "Play",
                     "Play",
                     {
-                        "movie": "reedTransition"
+                        "movie": "rheedExitOverlay"
                     }
                 ]
             },
@@ -77713,22 +77375,6 @@
                     {
                         "seconds": "2.9"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Camp",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
                 ]
             },
             {
@@ -77869,16 +77515,8 @@
                 ]
             },
             {
-                "code": 111,
-                "indent": 0,
-                "parameters": [
-                    12,
-                    "!$gameScreen.picture(1) || $gameScreen.picture(1).name() !== 'Dryland_Coreto'"
-                ]
-            },
-            {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "Dryland_1_SceneAudio",
                     "Prepare",
@@ -77891,33 +77529,28 @@
             },
             {
                 "code": 242,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     1
                 ]
             },
             {
                 "code": 246,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     1
                 ]
             },
             {
-                "code": 357,
-                "indent": 1,
+                "code": 117,
+                "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "Play",
-                    "Play",
-                    {
-                        "movie": "reedEntranceAlpha"
-                    }
+                    386
                 ]
             },
             {
                 "code": 357,
-                "indent": 1,
+                "indent": 0,
                 "parameters": [
                     "Dryland_1_AlphaMovie",
                     "WaitUntil",
@@ -77926,11 +77559,6 @@
                         "seconds": "2.2"
                     }
                 ]
-            },
-            {
-                "code": 412,
-                "indent": 0,
-                "parameters": []
             },
             {
                 "code": 235,
@@ -78216,13 +77844,6 @@
                 "code": 235,
                 "indent": 0,
                 "parameters": [
-                    1
-                ]
-            },
-            {
-                "code": 235,
-                "indent": 0,
-                "parameters": [
                     2
                 ]
             },
@@ -78342,22 +77963,6 @@
                 ]
             },
             {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Coreto",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
-                ]
-            },
-            {
                 "code": 117,
                 "indent": 0,
                 "parameters": [
@@ -78377,13 +77982,10 @@
                 ]
             },
             {
-                "code": 357,
+                "code": 117,
                 "indent": 0,
                 "parameters": [
-                    "Dryland_1_AlphaMovie",
-                    "WaitEnd",
-                    "WaitEnd",
-                    {}
+                    387
                 ]
             },
             {
@@ -78396,29 +77998,6 @@
                     {
                         "variable": "47"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    60,
-                    "Reed final",
-                    0,
-                    0,
-                    0,
-                    0,
-                    66.66666666666667,
-                    66.66666666666667,
-                    255,
-                    0
-                ]
-            },
-            {
-                "code": 117,
-                "indent": 0,
-                "parameters": [
-                    381
                 ]
             },
             {
@@ -78474,7 +78053,7 @@
                     "Play",
                     "Play",
                     {
-                        "movie": "reedTransition"
+                        "movie": "rheedExitOverlay"
                     }
                 ]
             },
@@ -78495,22 +78074,6 @@
                     {
                         "seconds": "2.9"
                     }
-                ]
-            },
-            {
-                "code": 231,
-                "indent": 0,
-                "parameters": [
-                    1,
-                    "Dryland_Camp",
-                    1,
-                    0,
-                    640,
-                    360,
-                    80,
-                    80,
-                    255,
-                    0
                 ]
             },
             {
@@ -87238,7 +86801,7 @@
                         "enemies:arraystr": "[]",
                         "faces:arraystr": "[]",
                         "parallaxes:arraystr": "[]",
-                        "pictures:arraystr": "[\"Dryland_Path_Church\",\"Dryland_Path_Park\",\"Dryland_Path_Village\",\"Dryland_Coreto\",\"Dryland_Camp\"]",
+                        "pictures:arraystr": "[\"Dryland_Path_Church\",\"Dryland_Path_Park\",\"Dryland_Path_Village\",\"Dryland_Camp\"]",
                         "sv_actors:arraystr": "[]",
                         "sv_enemies:arraystr": "[]",
                         "system:arraystr": "[]",
@@ -87686,6 +87249,205 @@
                         "RateX:eval": "$gameVariables.value(47) ? 0 : 0.10",
                         "RateY:eval": "$gameVariables.value(47) ? 0 : 0.80"
                     }
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 0,
+                "parameters": []
+            }
+        ]
+    },
+    {
+        "id": 386,
+        "name": "Rheed — iniciar entrada sobre a cena",
+        "trigger": 0,
+        "switchId": 1,
+        "list": [
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Coreto_0_CoreEngine",
+                    "SystemLoadImages",
+                    "SystemLoadImages",
+                    {
+                        "animations:arraystr": "[]",
+                        "battlebacks1:arraystr": "[]",
+                        "battlebacks2:arraystr": "[]",
+                        "characters:arraystr": "[]",
+                        "enemies:arraystr": "[]",
+                        "faces:arraystr": "[]",
+                        "parallaxes:arraystr": "[]",
+                        "pictures:arraystr": "[\"Dryland_RheedRasgo\"]",
+                        "sv_actors:arraystr": "[]",
+                        "sv_enemies:arraystr": "[]",
+                        "system:arraystr": "[]",
+                        "tilesets:arraystr": "[]",
+                        "titles1:arraystr": "[]",
+                        "titles2:arraystr": "[]"
+                    }
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/animations/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/battlebacks2/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/characters/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/faces/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/parallaxes/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/pictures/ = [\"Dryland_RheedRasgo\"]"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_actors/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/sv_enemies/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/system/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/tilesets/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles1/ = []"
+                ]
+            },
+            {
+                "code": 657,
+                "indent": 0,
+                "parameters": [
+                    "img/titles2/ = []"
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_1_AlphaMovie",
+                    "Play",
+                    "Play",
+                    {
+                        "movie": "rheedEntranceOverlay"
+                    }
+                ]
+            },
+            {
+                "code": 0,
+                "indent": 0,
+                "parameters": []
+            }
+        ]
+    },
+    {
+        "id": 387,
+        "name": "Rheed — manter a pose do rasgo",
+        "trigger": 0,
+        "switchId": 1,
+        "list": [
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_1_AlphaMovie",
+                    "WaitUntil",
+                    "WaitUntil",
+                    {
+                        "seconds": "4.58"
+                    }
+                ]
+            },
+            {
+                "code": 231,
+                "indent": 0,
+                "parameters": [
+                    60,
+                    "Dryland_RheedRasgo",
+                    0,
+                    0,
+                    0,
+                    0,
+                    66.66666666666667,
+                    66.66666666666667,
+                    255,
+                    0
+                ]
+            },
+            {
+                "code": 357,
+                "indent": 0,
+                "parameters": [
+                    "Dryland_1_AlphaMovie",
+                    "WaitEnd",
+                    "WaitEnd",
+                    {}
                 ]
             },
             {

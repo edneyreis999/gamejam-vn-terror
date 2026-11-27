@@ -1432,6 +1432,22 @@
                             ]
                         },
                         {
+                            "code": 231,
+                            "indent": 1,
+                            "parameters": [
+                                1,
+                                "Dryland_Camp",
+                                1,
+                                0,
+                                640,
+                                360,
+                                80,
+                                80,
+                                255,
+                                0
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 1,
                             "parameters": [
@@ -1507,22 +1523,6 @@
                             "code": 412,
                             "indent": 1,
                             "parameters": []
-                        },
-                        {
-                            "code": 231,
-                            "indent": 1,
-                            "parameters": [
-                                1,
-                                "Dryland_Camp",
-                                1,
-                                0,
-                                640,
-                                360,
-                                80,
-                                80,
-                                255,
-                                0
-                            ]
                         },
                         {
                             "code": 357,
